@@ -32,7 +32,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Added ClaimList.
 * Added Fingerprint.
 * Added Group.
-* Added OrderedList.
+* Added List.
 * Added ReferenceList.
 * Added SiteLinkList.
 * Added StatementGroup.
@@ -42,7 +42,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Added TermGroup.
 * Added TermGroupList.
 * Added TermList.
-* Added UnorderedList.
+* Added Set.
 * Added individual constructors for Item and Property.
 * Added Entity.getFingerprint(), Entity.setFingerprint().
 * Added SiteLink and Statement specific functionality to Item.

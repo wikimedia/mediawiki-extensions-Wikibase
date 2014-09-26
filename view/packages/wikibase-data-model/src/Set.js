@@ -14,8 +14,8 @@
  * @param {string} itemKeyFunctionName
  * @param {*[]} [items]
  */
-var SELF = wb.datamodel.UnorderedList
-	= function WbDataModelUnorderedList( ItemConstructor, itemKeyFunctionName, items ) {
+var SELF = wb.datamodel.Set
+	= function WbDataModelSet( ItemConstructor, itemKeyFunctionName, items ) {
 
 	if( !$.isFunction( ItemConstructor ) ) {
 		throw new Error( 'Item constructor needs to be a Function' );
@@ -170,18 +170,18 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {*} unorderedList
+	 * @param {*} set
 	 * @return {boolean}
 	 */
-	equals: function( unorderedList ) {
-		if( unorderedList === this ) {
+	equals: function( set ) {
+		if( set === this ) {
 			return true;
-		} else if ( !( unorderedList instanceof SELF ) || this.length !== unorderedList.length ) {
+		} else if ( !( set instanceof SELF ) || this.length !== set.length ) {
 			return false;
 		}
 
 		for( var key in this._items ) {
-			if( !unorderedList.hasItem( this._items[key] ) ) {
+			if( !set.hasItem( this._items[key] ) ) {
 				return false;
 			}
 		}

@@ -5,7 +5,7 @@
 ( function( wb, QUnit, $ ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.UnorderedList' );
+QUnit.module( 'wikibase.datamodel.Set' );
 
 /**
  * @constructor
@@ -38,20 +38,20 @@ function getTestItems( n ) {
 }
 
 function createList( items ) {
-	return new wb.datamodel.UnorderedList( TestConstructor, 'getKey', items );
+	return new wb.datamodel.Set( TestConstructor, 'getKey', items );
 }
 
 QUnit.test( 'Constructor', function( assert ) {
 	assert.ok(
-		createList() instanceof wb.datamodel.UnorderedList,
-		'Instantiated empty UnorderedList.'
+		createList() instanceof wb.datamodel.Set,
+		'Instantiated empty Set.'
 	);
 
 	var list = createList( getTestItems( 2 ) );
 
 	assert.ok(
-		list instanceof wb.datamodel.UnorderedList,
-		'Instantiated filled UnorderedList.'
+		list instanceof wb.datamodel.Set,
+		'Instantiated filled Set.'
 	);
 
 	assert.equal(
@@ -62,31 +62,31 @@ QUnit.test( 'Constructor', function( assert ) {
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.UnorderedList( null, 'getKey' );
+			return new wb.datamodel.Set( null, 'getKey' );
 		},
-		'Throwing error when trying to instantiate an UnorderedList without an item constructor.'
+		'Throwing error when trying to instantiate an Set without an item constructor.'
 	);
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.UnorderedList( TestConstructor );
+			return new wb.datamodel.Set( TestConstructor );
 		},
-		'Throwing error when trying to instantiate an UnorderedList without "getKey" function.'
+		'Throwing error when trying to instantiate an Set without "getKey" function.'
 	);
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.UnorderedList( 'string', 'getKey' );
+			return new wb.datamodel.Set( 'string', 'getKey' );
 		},
-		'Throwing error when trying to instantiate an UnorderedList wit an improper item '
+		'Throwing error when trying to instantiate an Set wit an improper item '
 			+ 'constructor.'
 	);
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.UnorderedList( TestConstructor, 'doesNotExist' );
+			return new wb.datamodel.Set( TestConstructor, 'doesNotExist' );
 		},
-		'Throwing error when trying to instantiate an UnorderedList wit an improper "getKey" '
+		'Throwing error when trying to instantiate an Set wit an improper "getKey" '
 			+ 'function name.'
 	);
 } );

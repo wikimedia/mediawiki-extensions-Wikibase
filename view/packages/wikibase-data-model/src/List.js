@@ -13,7 +13,7 @@
  * @param {Function} ItemConstructor
  * @param {*[]} [items]
  */
-var SELF = wb.datamodel.OrderedList = function WbDataModelOrderedList( ItemConstructor, items ) {
+var SELF = wb.datamodel.List = function WbDataModelList( ItemConstructor, items ) {
 	if( !$.isFunction( ItemConstructor ) ) {
 		throw new Error( 'Item constructor needs to be a Function' );
 	} else if( !$.isFunction( ItemConstructor.prototype.equals ) ) {
@@ -110,18 +110,18 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {*} orderedList
+	 * @param {*} list
 	 * @return {boolean}
 	 */
-	equals: function( orderedList ) {
-		if( orderedList === this ) {
+	equals: function( list ) {
+		if( list === this ) {
 			return true;
-		} else if( !( orderedList instanceof SELF ) || this.length !== orderedList.length ) {
+		} else if( !( list instanceof SELF ) || this.length !== list.length ) {
 			return false;
 		}
 
 		for( var i = 0; i < this._items.length; i++ ) {
-			if( orderedList.indexOf( this._items[i] ) !== i ) {
+			if( list.indexOf( this._items[i] ) !== i ) {
 				return false;
 			}
 		}

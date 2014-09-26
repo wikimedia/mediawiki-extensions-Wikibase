@@ -26,7 +26,7 @@ var SELF = wb.datamodel.Group = function WbDataModelGroup(
 	} else if( !$.isFunction( ItemListConstructor ) ) {
 		throw new Error( 'Item list constructor needs to be a Function' );
 	} else if(
-		// TODO: Implement abstract base class for UnorderedList and OrderedList
+		// TODO: Implement abstract base class for Set and List
 		!$.isFunction( ItemListConstructor.prototype.toArray )
 		|| !$.isFunction( ItemListConstructor.prototype.hasItem )
 		|| !$.isFunction( ItemListConstructor.prototype.addItem )

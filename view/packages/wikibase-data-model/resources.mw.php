@@ -94,7 +94,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.ClaimGroup',
-				'wikibase.datamodel.UnorderedList',
+				'wikibase.datamodel.Set',
 			),
 		),
 
@@ -106,7 +106,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Claim',
-				'wikibase.datamodel.OrderedList',
+				'wikibase.datamodel.List',
 			),
 		),
 
@@ -164,9 +164,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.datamodel.OrderedList' => $moduleTemplate + array(
+		'wikibase.datamodel.List' => $moduleTemplate + array(
 			'scripts' => array(
-				'OrderedList.js',
+				'List.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',
@@ -237,7 +237,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.OrderedList',
+				'wikibase.datamodel.List',
 				'wikibase.datamodel.Reference',
 			),
 		),
@@ -259,7 +259,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.SiteLink',
-				'wikibase.datamodel.UnorderedList',
+				'wikibase.datamodel.Set',
 			),
 		),
 
@@ -279,7 +279,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.OrderedList',
+				'wikibase.datamodel.List',
 				'wikibase.datamodel.Snak',
 			),
 		),
@@ -315,7 +315,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.StatementGroup',
-				'wikibase.datamodel.UnorderedList',
+				'wikibase.datamodel.Set',
 			),
 		),
 
@@ -326,7 +326,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.OrderedList',
+				'wikibase.datamodel.List',
 				'wikibase.datamodel.Statement',
 			),
 		),
@@ -357,7 +357,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.TermGroup',
-				'wikibase.datamodel.UnorderedList',
+				'wikibase.datamodel.Set',
 			),
 		),
 
@@ -369,13 +369,13 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.UnorderedList',
+				'wikibase.datamodel.Set',
 			),
 		),
 
-		'wikibase.datamodel.UnorderedList' => $moduleTemplate + array(
+		'wikibase.datamodel.Set' => $moduleTemplate + array(
 			'scripts' => array(
-				'UnorderedList.js',
+				'Set.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',

@@ -5,7 +5,7 @@
 ( function( wb ) {
 'use strict';
 
-var PARENT = wb.datamodel.UnorderedList;
+var PARENT = wb.datamodel.Set;
 
 /**
  * Unordered set of Term objects.

@@ -5,7 +5,7 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.OrderedList' );
+QUnit.module( 'wikibase.datamodel.List' );
 
 /**
  * @constructor
@@ -31,15 +31,15 @@ function getTestItems( n ) {
 
 QUnit.test( 'Constructor', function( assert ) {
 	assert.ok(
-		( new wb.datamodel.OrderedList( TestConstructor ) ) instanceof wb.datamodel.OrderedList,
-		'Instantiated empty OrderedList.'
+		( new wb.datamodel.List( TestConstructor ) ) instanceof wb.datamodel.List,
+		'Instantiated empty List.'
 	);
 
-	var list = new wb.datamodel.OrderedList( TestConstructor, getTestItems( 2 ) );
+	var list = new wb.datamodel.List( TestConstructor, getTestItems( 2 ) );
 
 	assert.ok(
-		list instanceof wb.datamodel.OrderedList,
-		'Instantiated filled OrderedList.'
+		list instanceof wb.datamodel.List,
+		'Instantiated filled List.'
 	);
 
 	assert.equal(
@@ -50,22 +50,22 @@ QUnit.test( 'Constructor', function( assert ) {
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.OrderedList();
+			return new wb.datamodel.List();
 		},
-		'Throwing error when trying to instantiate an OrderedList without an item constructor.'
+		'Throwing error when trying to instantiate an List without an item constructor.'
 	);
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.OrderedList( 'string' );
+			return new wb.datamodel.List( 'string' );
 		},
-		'Throwing error when trying to instantiate an OrderedList wit an improper item constructor.'
+		'Throwing error when trying to instantiate an List wit an improper item constructor.'
 	);
 } );
 
 QUnit.test( 'each()', function( assert ) {
 	var items = getTestItems( 2 ),
-		list = new wb.datamodel.OrderedList( TestConstructor, items );
+		list = new wb.datamodel.List( TestConstructor, items );
 
 	list.each( function( i, item ) {
 		assert.ok(
@@ -77,7 +77,7 @@ QUnit.test( 'each()', function( assert ) {
 
 QUnit.test( 'hasItem()', function( assert ) {
 	var items = getTestItems( 3 ),
-		list = new wb.datamodel.OrderedList( TestConstructor, items );
+		list = new wb.datamodel.List( TestConstructor, items );
 
 	assert.ok(
 		list.hasItem( items[2] ),
@@ -93,7 +93,7 @@ QUnit.test( 'hasItem()', function( assert ) {
 QUnit.test( 'addItem() & length attribute', function( assert ) {
 	var items = getTestItems( 3 ),
 		newItems = getTestItems( 1 ),
-		list = new wb.datamodel.OrderedList( TestConstructor, items );
+		list = new wb.datamodel.List( TestConstructor, items );
 
 	assert.equal(
 		list.length,
@@ -118,7 +118,7 @@ QUnit.test( 'addItem() & length attribute', function( assert ) {
 QUnit.test( 'removeItem()', function( assert ) {
 	var items = getTestItems( 3 ),
 		unsetItems = getTestItems( 1 ),
-		list = new wb.datamodel.OrderedList( TestConstructor, items );
+		list = new wb.datamodel.List( TestConstructor, items );
 
 	assert.equal(
 		list.length,
@@ -149,7 +149,7 @@ QUnit.test( 'removeItem()', function( assert ) {
 
 QUnit.test( 'isEmpty()', function( assert ) {
 	var items = getTestItems( 1 ),
-		list = new wb.datamodel.OrderedList( TestConstructor );
+		list = new wb.datamodel.List( TestConstructor );
 
 	assert.ok(
 		list.isEmpty(),
@@ -173,24 +173,24 @@ QUnit.test( 'isEmpty()', function( assert ) {
 
 QUnit.test( 'equals()', function( assert ) {
 	var items = getTestItems( 3 ),
-		list = new wb.datamodel.OrderedList( TestConstructor, items );
+		list = new wb.datamodel.List( TestConstructor, items );
 
 	assert.ok(
-		list.equals( new wb.datamodel.OrderedList( TestConstructor, items ) ),
+		list.equals( new wb.datamodel.List( TestConstructor, items ) ),
 		'Verified equals() retuning TRUE.'
 	);
 
 	list.addItem( getTestItems( 1 )[0] );
 
 	assert.ok(
-		!list.equals( new wb.datamodel.OrderedList( TestConstructor, items ) ),
+		!list.equals( new wb.datamodel.List( TestConstructor, items ) ),
 		'FALSE after adding another item object.'
 	);
 } );
 
 QUnit.test( 'indexOf()', function( assert ) {
 	var items = getTestItems( 3 ),
-		list = new wb.datamodel.OrderedList( TestConstructor, items );
+		list = new wb.datamodel.List( TestConstructor, items );
 
 	assert.strictEqual(
 		list.indexOf( items [1] ),

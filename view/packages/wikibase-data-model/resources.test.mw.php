@@ -104,12 +104,12 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 		),
 
-		'wikibase.datamodel.OrderedList.tests' => $moduleTemplate + array(
+		'wikibase.datamodel.List.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'OrderedList.tests.js',
+				'List.tests.js',
 			),
 			'dependencies' => array(
-				'wikibase.datamodel.OrderedList',
+				'wikibase.datamodel.List',
 			),
 		),
 
@@ -297,12 +297,12 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 		),
 
-		'wikibase.datamodel.UnorderedList.tests' => $moduleTemplate + array(
+		'wikibase.datamodel.Set.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'UnorderedList.tests.js',
+				'Set.tests.js',
 			),
 			'dependencies' => array(
-				'wikibase.datamodel.UnorderedList',
+				'wikibase.datamodel.Set',
 			),
 		),
 

@@ -5,7 +5,7 @@
 ( function( wb, $ ) {
 'use strict';
 
-var PARENT = wb.datamodel.OrderedList;
+var PARENT = wb.datamodel.List;
 
 /**
  * Ordered set Snak objects.
