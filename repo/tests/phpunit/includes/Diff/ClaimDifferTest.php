@@ -8,16 +8,16 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Diff\Differ\OrderedListDiffer;
-use Wikibase\ClaimDiffer;
-use Wikibase\ClaimDifference;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\Repo\Diff\ClaimDiffer;
+use Wikibase\Repo\Diff\ClaimDifference;
 
 /**
- * @covers Wikibase\ClaimDiffer
+ * @covers Wikibase\Repo\Diff\ClaimDiffer
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -119,7 +119,7 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 		$differ = new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) );
 		$actual = $differ->diffClaims( $oldClaim, $newClaim );
 
-		$this->assertInstanceOf( 'Wikibase\ClaimDifference', $actual );
+		$this->assertInstanceOf( 'Wikibase\Repo\Diff\ClaimDifference', $actual );
 
 		if ( !$expected->equals( $actual ) ) {
 			$this->assertEquals($expected, $actual);

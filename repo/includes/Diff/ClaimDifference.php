@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Diff;
 
 use Comparable;
 use Diff\DiffOp\Diff\Diff;

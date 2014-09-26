@@ -18,6 +18,9 @@ use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EscapingValueFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;
+use Wikibase\Repo\Diff\ClaimDiffer;
+use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
+use Wikibase\Repo\Diff\EntityDiffVisualizer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

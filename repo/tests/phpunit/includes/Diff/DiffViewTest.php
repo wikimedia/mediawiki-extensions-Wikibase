@@ -6,12 +6,12 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DiffView;
+use Wikibase\Repo\Diff\DiffView;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\DiffView
+ * @covers Wikibase\Repo\Diff\DiffView
  *
  * @group WikibaseRepo
  * @group Wikibase
