@@ -11,7 +11,7 @@ var testSets = [
 	[
 		new wb.datamodel.TermList(),
 		new wb.datamodel.TermList(),
-		new wb.datamodel.TermGroupList()
+		new wb.datamodel.MultiTermList()
 	], [
 		new wb.datamodel.TermList( [
 			new wb.datamodel.Term( 'de', 'de-label' ),
@@ -21,9 +21,9 @@ var testSets = [
 			new wb.datamodel.Term( 'de', 'de-description' ),
 			new wb.datamodel.Term( 'en', 'en-description' )
 		] ),
-		new wb.datamodel.TermGroupList( [
-			new wb.datamodel.TermGroup( 'de', ['de-alias1', 'de-alias2'] ),
-			new wb.datamodel.TermGroup( 'en', ['en-alias1'] )
+		new wb.datamodel.MultiTermList( [
+			new wb.datamodel.MultiTerm( 'de', ['de-alias1', 'de-alias2'] ),
+			new wb.datamodel.MultiTerm( 'en', ['en-alias1'] )
 		] )
 	]
 ];
@@ -43,15 +43,15 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 
 QUnit.test( 'Constructor (negative)', function( assert ) {
 	var negativeTestSets = [
-		['string', new wb.datamodel.TermList(), new wb.datamodel.TermGroupList()],
-		[new wb.datamodel.TermList(), 'string', new wb.datamodel.TermGroupList()],
+		['string', new wb.datamodel.TermList(), new wb.datamodel.MultiTermList()],
+		[new wb.datamodel.TermList(), 'string', new wb.datamodel.MultiTermList()],
 		[new wb.datamodel.TermList(), new wb.datamodel.TermList(), 'string']
 	];
 
 	/**
 	 * @param {wikibase.datamodel.TermList} labels
 	 * @param {wikibase.datamodel.TermList} descriptions
-	 * @param {wikibase.datamodel.TermGroupList} aliasGroups
+	 * @param {wikibase.datamodel.MultiTermList} aliasGroups
 	 * @return {Function}
 	 */
 	function instantiateObject( labels, descriptions, aliasGroups ) {
@@ -75,7 +75,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		( new wb.datamodel.Fingerprint(
 			new wb.datamodel.TermList(),
 			new wb.datamodel.TermList(),
-			new wb.datamodel.TermGroupList()
+			new wb.datamodel.MultiTermList()
 		) ).isEmpty(),
 		'Verified isEmpty() returning TRUE.'
 	);
@@ -84,7 +84,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		!( new wb.datamodel.Fingerprint(
 			new wb.datamodel.TermList( [new wb.datamodel.Term( 'en', 'en-string' )] ),
 			new wb.datamodel.TermList(),
-			new wb.datamodel.TermGroupList()
+			new wb.datamodel.MultiTermList()
 		) ).isEmpty(),
 		'FALSE when there is a label.'
 	);
@@ -93,7 +93,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		!( new wb.datamodel.Fingerprint(
 			new wb.datamodel.TermList(),
 			new wb.datamodel.TermList( [new wb.datamodel.Term( 'en', 'en-string' )] ),
-			new wb.datamodel.TermGroupList()
+			new wb.datamodel.MultiTermList()
 		) ).isEmpty(),
 		'FALSE when there is a description.'
 	);
@@ -102,7 +102,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		!( new wb.datamodel.Fingerprint(
 			new wb.datamodel.TermList(),
 			new wb.datamodel.TermList(),
-			new wb.datamodel.TermGroupList( [new wb.datamodel.TermGroup( 'en', ['en-string'] )] )
+			new wb.datamodel.MultiTermList( [new wb.datamodel.MultiTerm( 'en', ['en-string'] )] )
 		) ).isEmpty(),
 		'FALSE when there is an alias.'
 	);

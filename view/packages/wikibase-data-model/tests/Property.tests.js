@@ -14,7 +14,7 @@ var testSets = [
 		new wb.datamodel.Fingerprint(
 			new wb.datamodel.TermList(),
 			new wb.datamodel.TermList(),
-			new wb.datamodel.TermGroupList()
+			new wb.datamodel.MultiTermList()
 		),
 		new wb.datamodel.StatementGroupList()
 	], [
@@ -23,7 +23,7 @@ var testSets = [
 		new wb.datamodel.Fingerprint(
 			new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-label' )] ),
 			new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-description' )] ),
-			new wb.datamodel.TermGroupList( [new wb.datamodel.TermGroup( 'de', ['de-alias'] )] )
+			new wb.datamodel.MultiTermList( [new wb.datamodel.MultiTerm( 'de', ['de-alias'] )] )
 		),
 		new wb.datamodel.StatementGroupList( [
 			new wb.datamodel.StatementGroup( 'P1',
@@ -57,7 +57,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 			new wb.datamodel.Fingerprint(
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermList(),
-				new wb.datamodel.TermGroupList()
+				new wb.datamodel.MultiTermList()
 			),
 			new wb.datamodel.StatementGroupList()
 		) ).isEmpty(),
@@ -71,7 +71,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 			new wb.datamodel.Fingerprint(
 				new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-term' )] ),
 				new wb.datamodel.TermList(),
-				new wb.datamodel.TermGroupList()
+				new wb.datamodel.MultiTermList()
 			),
 			new wb.datamodel.StatementGroupList()
 		) ).isEmpty(),
@@ -85,7 +85,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 			new wb.datamodel.Fingerprint(
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermList(),
-				new wb.datamodel.TermGroupList()
+				new wb.datamodel.MultiTermList()
 			),
 			new wb.datamodel.StatementGroupList( [
 				new wb.datamodel.StatementGroup( 'P1',

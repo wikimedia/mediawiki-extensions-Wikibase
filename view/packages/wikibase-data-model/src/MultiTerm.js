@@ -13,7 +13,7 @@
  * @param {string} languageCode
  * @param {string[]} texts
  */
-var SELF = wb.datamodel.TermGroup = function WbDataModelTermGroup( languageCode, texts ) {
+var SELF = wb.datamodel.MultiTerm = function WbDataModelMultiTerm( languageCode, texts ) {
 	this.setLanguageCode( languageCode );
 	this.setTexts( texts );
 };
@@ -64,20 +64,20 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {*} termGroup
+	 * @param {*} MultiTerm
 	 * @return {boolean}
 	 */
-	equals: function( termGroup ) {
-		if( termGroup === this ) {
+	equals: function( multiTerm ) {
+		if( multiTerm === this ) {
 			return true;
 		} else if(
-			!( termGroup instanceof SELF )
-			|| this._languageCode !== termGroup.getLanguageCode()
+			!( multiTerm instanceof SELF )
+			|| this._languageCode !== multiTerm.getLanguageCode()
 		) {
 			return false;
 		}
 
-		var otherTexts = termGroup.getTexts();
+		var otherTexts = multiTerm.getTexts();
 
 		if( this._texts.length !== otherTexts.length ) {
 			return false;

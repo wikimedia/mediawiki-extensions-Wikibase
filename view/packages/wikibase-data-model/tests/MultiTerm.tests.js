@@ -5,7 +5,7 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.TermGroup' );
+QUnit.module( 'wikibase.datamodel.MultiTerm' );
 
 var testSets = [
 	['en', []],
@@ -15,10 +15,10 @@ var testSets = [
 
 QUnit.test( 'Constructor (positive)', function( assert ) {
 	for( var i = 0; i < testSets.length; i++ ) {
-		var termGroup = new wb.datamodel.TermGroup( testSets[i][0], testSets[i][1] );
+		var multiTerm = new wb.datamodel.MultiTerm( testSets[i][0], testSets[i][1] );
 		assert.ok(
-			termGroup instanceof wb.datamodel.TermGroup,
-			'Test set #' + i +': Instantiated TermGroup.'
+			multiTerm instanceof wb.datamodel.MultiTerm,
+			'Test set #' + i +': Instantiated MultiTerm.'
 		);
 	}
 } );
@@ -28,7 +28,7 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 		[undefined, []],
 		['', undefined],
 		['de', 1],
-		[1, ['']]
+		[1, '']
 	];
 
 	/**
@@ -38,7 +38,7 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 	 */
 	function instantiateObject( languageCode, strings ) {
 		return function() {
-			return new wb.datamodel.TermGroup( languageCode, strings );
+			return new wb.datamodel.MultiTerm( languageCode, strings );
 		};
 	}
 
@@ -52,21 +52,21 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 
 QUnit.test( 'equals()', function( assert ) {
 	for( var i = 0; i < testSets.length; i++ ) {
-		var termGroup1 = new wb.datamodel.TermGroup( testSets[i][0], testSets[i][1] );
+		var multiTerm1 = new wb.datamodel.MultiTerm( testSets[i][0], testSets[i][1] );
 
 		for( var j = 0; j < testSets.length; j++ ) {
-			var termGroup2 = new wb.datamodel.TermGroup( testSets[j][0], testSets[j][1] );
+			var multiTerm2 = new wb.datamodel.MultiTerm( testSets[j][0], testSets[j][1] );
 
 			if( j === i ) {
 				assert.ok(
-					termGroup1.equals( termGroup2 ),
+					multiTerm1.equals( multiTerm2 ),
 					'Test set #' + i + ' equals test set #' + j + '.'
 				);
 				continue;
 			}
 
 			assert.ok(
-				!termGroup1.equals( termGroup2 ),
+				!multiTerm1.equals( multiTerm2 ),
 				'Test set #' + i + ' does not equal test set #' + j + '.'
 			);
 		}

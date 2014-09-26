@@ -34,14 +34,14 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Added Group.
 * Added Groupable.
 * Added List.
+* Added MultTerm.
+* Added MultTermList.
 * Added ReferenceList.
 * Added SiteLinkList.
 * Added StatementGroup.
 * Added StatementGroupList.
 * Added StatementList.
 * Added Term.
-* Added TermGroup.
-* Added TermGroupList.
 * Added TermList.
 * Added Set.
 * Added individual constructors for Item and Property.

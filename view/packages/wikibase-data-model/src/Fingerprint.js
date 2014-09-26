@@ -12,19 +12,19 @@
  *
  * @param {wikibase.datamodel.TermList|null} [labels]
  * @param {wikibase.datamodel.TermList|null} [descriptions]
- * @param {wikibase.datamodel.TermGroupList|null} [aliasGroups]
+ * @param {wikibase.datamodel.MultiTermList|null} [aliasGroups]
  */
 var SELF
 	= wb.datamodel.Fingerprint
 	= function WbDataModelFingerprint( labels, descriptions, aliasGroups ) {
 		labels = labels || new wb.datamodel.TermList();
 		descriptions = descriptions || new wb.datamodel.TermList();
-		aliasGroups = aliasGroups || new wb.datamodel.TermGroupList();
+		aliasGroups = aliasGroups || new wb.datamodel.MultiTermList();
 
 		if(
 			!( labels instanceof wb.datamodel.TermList )
 			|| !( descriptions instanceof wb.datamodel.TermList )
-			|| !( aliasGroups instanceof wb.datamodel.TermGroupList )
+			|| !( aliasGroups instanceof wb.datamodel.MultiTermList )
 		) {
 			throw new Error( 'Required parameter(s) not specified or not defined properly' );
 		}
@@ -46,7 +46,7 @@ $.extend( SELF.prototype, {
 	_descriptions: null,
 
 	/**
-	 * @type {wikibase.datamodel.TermGroupList}
+	 * @type {wikibase.datamodel.MultiTermList}
 	 */
 	_aliasGroups: null,
 
@@ -133,7 +133,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {wikibase.datamodel.TermGroupList}
+	 * @return {wikibase.datamodel.MultiTermList}
 	 */
 	getAliasGroups: function() {
 		return this._aliasGroups;
@@ -141,14 +141,14 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @return {wikibase.datamodel.TermGroup}
+	 * @return {wikibase.datamodel.MultiTerm}
 	 */
 	getAliasGroup: function( languageCode ) {
 		return this._aliasGroups.getByLanguage( languageCode );
 	},
 
 	/**
-	 * @param {wikibase.datamodel.TermGroup} aliasGroup
+	 * @param {wikibase.datamodel.MultiTerm} aliasGroup
 	 */
 	setAliasGroup: function( aliasGroup ) {
 		this._aliasGroups.setGroup( aliasGroup );

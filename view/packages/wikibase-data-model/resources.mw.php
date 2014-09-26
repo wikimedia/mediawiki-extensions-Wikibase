@@ -33,6 +33,8 @@ return call_user_func( function() {
 				'wikibase.datamodel.EntityId',
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.Item',
+				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.MultiTermList',
 				'wikibase.datamodel.Property',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.PropertySomeValueSnak',
@@ -48,8 +50,6 @@ return call_user_func( function() {
 				'wikibase.datamodel.StatementGroupList',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermGroup',
-				'wikibase.datamodel.TermGroupList',
 				'wikibase.datamodel.TermList',
 			),
 		),
@@ -136,7 +136,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.TermGroupList',
+				'wikibase.datamodel.MultiTermList',
 				'wikibase.datamodel.TermList',
 			),
 		),
@@ -182,6 +182,27 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Groupable',
+			),
+		),
+
+		'wikibase.datamodel.MultiTerm' => $moduleTemplate + array(
+			'scripts' => array(
+				'MultiTerm.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+			),
+		),
+
+		'wikibase.datamodel.MultiTermList' => $moduleTemplate + array(
+			'scripts' => array(
+				'MultiTermList.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.Set',
 			),
 		),
 
@@ -349,27 +370,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',
-			),
-		),
-
-		'wikibase.datamodel.TermGroup' => $moduleTemplate + array(
-			'scripts' => array(
-				'TermGroup.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel.__namespace',
-			),
-		),
-
-		'wikibase.datamodel.TermGroupList' => $moduleTemplate + array(
-			'scripts' => array(
-				'TermGroupList.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.TermGroup',
-				'wikibase.datamodel.Set',
 			),
 		),
 

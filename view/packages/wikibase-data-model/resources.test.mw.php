@@ -75,9 +75,9 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Fingerprint',
+				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.MultiTermList',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermGroup',
-				'wikibase.datamodel.TermGroupList',
 				'wikibase.datamodel.TermList',
 			),
 		),
@@ -101,6 +101,8 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.Item',
+				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.MultiTermList',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.SiteLink',
 				'wikibase.datamodel.SiteLinkList',
@@ -109,8 +111,6 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 				'wikibase.datamodel.StatementGroupList',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermGroup',
-				'wikibase.datamodel.TermGroupList',
 				'wikibase.datamodel.TermList',
 			),
 		),
@@ -124,6 +124,25 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 		),
 
+		'wikibase.datamodel.MultiTerm.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'MultiTerm.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.MultiTerm',
+			),
+		),
+
+		'wikibase.datamodel.MultiTermList.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'MultiTermList.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.MultiTermList',
+			),
+		),
+
 		'wikibase.datamodel.Property.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'Property.tests.js',
@@ -131,6 +150,8 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.Fingerprint',
+				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.MultiTermList',
 				'wikibase.datamodel.Property',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.Statement',
@@ -138,8 +159,6 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 				'wikibase.datamodel.StatementGroupList',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermGroup',
-				'wikibase.datamodel.TermGroupList',
 				'wikibase.datamodel.TermList',
 			),
 		),
@@ -276,25 +295,6 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Term',
-			),
-		),
-
-		'wikibase.datamodel.TermGroup.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'TermGroup.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel.TermGroup',
-			),
-		),
-
-		'wikibase.datamodel.TermGroupList.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'TermGroupList.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel.TermGroup',
-				'wikibase.datamodel.TermGroupList',
 			),
 		),
 
