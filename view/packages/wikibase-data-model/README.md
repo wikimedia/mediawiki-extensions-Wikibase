@@ -31,6 +31,8 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Added Fingerprint.
 * Added ReferenceList.
 * Added SiteLinkList.
+* Added StatementGroup.
+* Added StatementGroupList.
 * Added StatementList.
 * Added Term.
 * Added TermGroup.

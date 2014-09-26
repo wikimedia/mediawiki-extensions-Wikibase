@@ -43,6 +43,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.SnakList',
 				'wikibase.datamodel.Statement',
 				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.StatementGroupList',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
 				'wikibase.datamodel.TermGroup',
@@ -249,6 +250,16 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.StatementList',
+			),
+		),
+
+		'wikibase.datamodel.StatementGroupList' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementGroupList.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.StatementGroup',
 			),
 		),
 
