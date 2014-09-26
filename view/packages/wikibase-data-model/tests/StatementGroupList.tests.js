@@ -32,14 +32,6 @@ QUnit.test( 'Constructor', function( assert ) {
 			'Test set #' + i + ': Instantiated StatementGroupList.'
 		);
 	}
-
-	assert.throws(
-		function() {
-			return new wb.datamodel.StatementGroupList( ['string1', 'string2'] );
-		},
-		'Throwing error when trying to instantiate a StatementGroupList without StatementGroup '
-			+ 'objects.'
-	);
 } );
 
 }( wikibase, QUnit ) );

@@ -23,13 +23,6 @@ QUnit.test( 'Constructor', function( assert ) {
 			'Test set #' + i + ': Instantiated ClaimList.'
 		);
 	}
-
-	assert.throws(
-		function() {
-			return new wb.datamodel.ClaimList( ['string1', 'string2'] );
-		},
-		'Throwing error when trying to instantiate a ClaimList with other than Claim objects.'
-	);
 } );
 
 QUnit.test( 'getPropertyIds()', function( assert ) {

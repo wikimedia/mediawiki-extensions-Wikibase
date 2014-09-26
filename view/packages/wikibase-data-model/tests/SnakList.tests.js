@@ -48,7 +48,7 @@ QUnit.test( 'Constructor', function( assert ) {
 
 		assert.ok(
 			snakList instanceof wb.datamodel.SnakList,
-			'Test set #' + i + ': Create instance.'
+			'Test set #' + i + ': Created instance.'
 		);
 
 		assert.equal(
@@ -57,13 +57,6 @@ QUnit.test( 'Constructor', function( assert ) {
 			'Test set #' + i + ': Verified length.'
 		);
 	}
-
-	assert.throws(
-		function() {
-			return new wb.datamodel.SnakList( 'foo' );
-		},
-		'Can not create SnakList with other than a list of Snak objects.'
-	);
 } );
 
 QUnit.test( 'getFilteredSnakList()', function( assert ) {

@@ -28,13 +28,6 @@ QUnit.test( 'Constructor', function( assert ) {
 			'Test set #' + i + ': Instantiated ClaimGroupList.'
 		);
 	}
-
-	assert.throws(
-		function() {
-			return new wb.datamodel.ClaimGroupList( ['string1', 'string2'] );
-		},
-		'Throwing error when trying to instantiate a ClaimGroupList with other than Claim objects.'
-	);
 } );
 
 }( wikibase, QUnit ) );

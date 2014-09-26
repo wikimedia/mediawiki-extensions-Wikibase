@@ -22,13 +22,6 @@ QUnit.test( 'Constructor', function( assert ) {
 			'Test set #' + i + ': Instantiated TermList.'
 		);
 	}
-
-	assert.throws(
-		function() {
-			return new wb.datamodel.TermList( ['string1', 'string2'] );
-		},
-		'Throwing error when trying to instantiate a TermList without Term objects.'
-	);
 } );
 
 }( wikibase, QUnit ) );

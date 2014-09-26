@@ -23,14 +23,6 @@ QUnit.test( 'Constructor', function( assert ) {
 			'Test set #' + i + ': Instantiated ReferenceList.'
 		);
 	}
-
-	assert.throws(
-		function() {
-			return new wb.datamodel.ClaimList( ['string1', 'string2'] );
-		},
-		'Throwing error when trying to instantiate a ReferenceList with other than Reference '
-			+ 'objects.'
-	);
 } );
 
 }( wikibase, QUnit ) );

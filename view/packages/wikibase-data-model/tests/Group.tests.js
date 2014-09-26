@@ -153,6 +153,14 @@ QUnit.test( 'Constructor', function( assert ) {
 
 	assert.throws(
 		function() {
+			createGroup( 'key', new TestContainer( ['string'] ) );
+		},
+		'Throwing an error when trying to instantiate a Group with a container featuring improper '
+			+ 'items.'
+	);
+
+	assert.throws(
+		function() {
 			createGroup( 'key', getTestContainer( 'otherKey', 1 ) );
 		},
 		'Throwing error when trying to instantiate a Group with mismatching key.'

@@ -19,16 +19,9 @@ QUnit.test( 'Constructor', function( assert ) {
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(
 			( new wb.datamodel.SiteLinkList( testSets[i] ) ) instanceof wb.datamodel.SiteLinkList,
-			'Instantiated SiteLinkList.'
+			'Test set #' + i + ': Instantiated SiteLinkList.'
 		);
 	}
-
-	assert.throws(
-		function() {
-			return new wb.datamodel.SiteLinkList( ['string1', 'string2'] );
-		},
-		'Throwing error when trying to instantiate a SiteLinkList with other than SiteLink objects.'
-	);
 } );
 
 }( wikibase, QUnit ) );

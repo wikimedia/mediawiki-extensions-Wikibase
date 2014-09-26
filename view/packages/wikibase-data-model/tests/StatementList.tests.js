@@ -29,14 +29,6 @@ QUnit.test( 'Constructor', function( assert ) {
 			'Test set #' + i + ': Instantiated StatementList.'
 		);
 	}
-
-	assert.throws(
-		function() {
-			return new wb.datamodel.StatementList( ['string1', 'string2'] );
-		},
-		'Throwing error when trying to instantiate a StatementList with other than Statement '
-			+ 'objects.'
-	);
 } );
 
 QUnit.test( 'getPropertyIds()', function( assert ) {
