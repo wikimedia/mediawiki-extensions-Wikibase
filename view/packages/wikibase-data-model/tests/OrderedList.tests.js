@@ -63,6 +63,18 @@ QUnit.test( 'Constructor', function( assert ) {
 	);
 } );
 
+QUnit.test( 'each()', function( assert ) {
+	var items = getTestItems( 2 ),
+		list = new wb.datamodel.OrderedList( TestConstructor, items );
+
+	list.each( function( i, item ) {
+		assert.ok(
+			item.equals( items[i] ),
+			'Verified received item and index.'
+		);
+	} );
+} );
+
 QUnit.test( 'hasItem()', function( assert ) {
 	var items = getTestItems( 3 ),
 		list = new wb.datamodel.OrderedList( TestConstructor, items );
@@ -73,7 +85,7 @@ QUnit.test( 'hasItem()', function( assert ) {
 	);
 
 	assert.ok(
-		!list.hasItem( getTestItems( 0 )[0] ),
+		!list.hasItem( getTestItems( 1 )[0] ),
 		'Verified hasClaim() returning FALSE.'
 	);
 } );

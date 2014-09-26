@@ -48,14 +48,6 @@ $.extend( SELF.prototype, {
 	length: 0,
 
 	/**
-	 * @return {*[]}
-	 */
-	toArray: function() {
-		return this._items.slice();
-	},
-
-	/**
-	 * Iterates over all Snaks in the list.
 	 * @see jQuery.fn.each
 	 */
 	each: function( fn ) {
@@ -63,10 +55,19 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
+	 * @return {*[]}
+	 */
+	toArray: function() {
+		return this._items.slice();
+	},
+
+	/**
 	 * @param {*} item
 	 * @return {boolean}
 	 */
 	hasItem: function( item ) {
+		this._assertIsItem( item );
+
 		for( var i = 0; i < this._items.length; i++ ) {
 			if( this._items[i].equals( item ) ) {
 				return true;
@@ -79,9 +80,8 @@ $.extend( SELF.prototype, {
 	 * @param {*} item
 	 */
 	addItem: function( item ) {
-		if( !( item instanceof this._ItemConstructor ) ) {
-			throw new Error( 'Item is not an instance accepted by the list' );
-		}
+		this._assertIsItem( item );
+
 		this._items.push( item );
 		this.length++;
 	},
@@ -90,6 +90,8 @@ $.extend( SELF.prototype, {
 	 * @param {*} item
 	 */
 	removeItem: function( item ) {
+		this._assertIsItem( item );
+
 		for( var i = 0; i < this._items.length; i++ ) {
 			if( this._items[i].equals( item ) ) {
 				this._items.splice( i, 1 );
@@ -132,12 +134,23 @@ $.extend( SELF.prototype, {
 	 * @return {number}
 	 */
 	indexOf: function( item ) {
+		this._assertIsItem( item );
+
 		for( var i = 0; i < this._items.length; i++ ) {
 			if( this._items[i].equals( item ) ) {
 				return i;
 			}
 		}
 		return -1;
+	},
+
+	/**
+	 * @param {*} item
+	 */
+	_assertIsItem: function( item ) {
+		if( !( item instanceof this._ItemConstructor ) ) {
+			throw new Error( 'Item is not an instance of the constructor set on the list' );
+		}
 	}
 
 } );

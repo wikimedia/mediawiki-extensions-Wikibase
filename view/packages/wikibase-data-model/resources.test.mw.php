@@ -297,6 +297,15 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 		),
 
+		'wikibase.datamodel.UnorderedList.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'UnorderedList.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.UnorderedList',
+			),
+		),
+
 	);
 
 	$testModules['qunit'] = array_merge(

@@ -89,8 +89,10 @@ return call_user_func( function() {
 				'ClaimGroupList.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.ClaimGroup',
+				'wikibase.datamodel.UnorderedList',
 			),
 		),
 
@@ -99,6 +101,7 @@ return call_user_func( function() {
 				'ClaimList.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.OrderedList',
@@ -222,6 +225,7 @@ return call_user_func( function() {
 				'ReferenceList.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.OrderedList',
 				'wikibase.datamodel.Reference',
@@ -242,8 +246,10 @@ return call_user_func( function() {
 				'SiteLinkList.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.SiteLink',
+				'wikibase.datamodel.UnorderedList',
 			),
 		),
 
@@ -261,6 +267,7 @@ return call_user_func( function() {
 				'SnakList.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.OrderedList',
 				'wikibase.datamodel.Snak',
@@ -293,8 +300,10 @@ return call_user_func( function() {
 				'StatementGroupList.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.UnorderedList',
 			),
 		),
 
@@ -303,6 +312,7 @@ return call_user_func( function() {
 				'StatementList.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.OrderedList',
 				'wikibase.datamodel.Statement',
@@ -332,8 +342,10 @@ return call_user_func( function() {
 				'TermGroupList.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.TermGroup',
+				'wikibase.datamodel.UnorderedList',
 			),
 		),
 
@@ -342,10 +354,23 @@ return call_user_func( function() {
 				'TermList.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Term',
+				'wikibase.datamodel.UnorderedList',
 			),
 		),
+
+		'wikibase.datamodel.UnorderedList' => $moduleTemplate + array(
+			'scripts' => array(
+				'UnorderedList.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.__namespace',
+			),
+		),
+
 	);
 
 	$wgResourceModules = array_merge( $wgResourceModules, $modules );
