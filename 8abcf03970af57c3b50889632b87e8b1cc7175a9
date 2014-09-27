@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_2ff755f4",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 915
+      },
+      "writtenOn": "2014-09-27T17:05:13Z",
+      "side": 1,
+      "message": "Can see this eventually requiring optimization to both group and batch deletes. Would be handy to do it up front rather than wait for a surprise in production :)",
+      "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_8ff22102",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 915
+      },
+      "writtenOn": "2014-09-27T17:05:13Z",
+      "side": 1,
+      "message": "Even with transaction consider a bulk insert. Database*::insert() can automatically batch multiple rows if the backend supports it, and fall back on loop of single inserts if not.\n\nJust noticed you asked about this in https://gerrit.wikimedia.org/r/#/c/158078/ follow up comment which I missed, sorry. Bulk insert with transaction is as good as it gets for sqlite, but DatabaseSqlite::insert can handle multiple rows.",
+      "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_4ffc19d6",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 915
+      },
+      "writtenOn": "2014-09-27T17:05:13Z",
+      "side": 1,
+      "message": "If this could hit many rows, it should batch.",
+      "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_6f331dc1",
+        "filename": "client/includes/Usage/Sql/entity_usage.sql",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 915
+      },
+      "writtenOn": "2014-09-27T17:05:13Z",
+      "side": 1,
+      "message": "This was once an ENUM, right? BINARY(1) is fine too, of course, if you\u0027re ok with single character codes and want a cross-platform schema.\n\nFor the record though, ENUM is not painful in MySQL / MariaDB 5.5+ where adding new enumerated values is non-blocking.",
+      "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
