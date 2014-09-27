@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use Exception;
 use Html;
 use OutOfBoundsException;
 use Status;
@@ -316,6 +317,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$name = 'badge-' . $badgeId;
 			$title = $this->getTitleForBadge( new ItemId( $badgeId ) );
 
+			if ( $title === null ) {
+				continue;
+			}
+
 			$options .= Html::rawElement(
 				'div',
 				array(
@@ -346,17 +351,22 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @todo use TermLookup when we have one
 	 *
 	 * @param EntityId $badgeId
-	 * @return string
+	 * @return string|null
 	 */
 	private function getTitleForBadge( EntityId $badgeId ) {
-		$entity = $this->loadEntity( $badgeId )->getEntity();
-		$languageCode = $this->getLanguage()->getCode();
+		try {
+			$entity = $this->loadEntity( $badgeId )->getEntity();
+			$languageCode = $this->getLanguage()->getCode();
 
-		$labels = $entity->getFingerprint()->getLabels();
-		if ( $labels->hasTermForLanguage( $languageCode ) ) {
-			return $labels->getByLanguage( $languageCode )->getText();
-		} else {
-			return $badgeId->getSerialization();
+			$labels = $entity->getFingerprint()->getLabels();
+			if ( $labels->hasTermForLanguage( $languageCode ) ) {
+				return $labels->getByLanguage( $languageCode )->getText();
+			} else {
+				return $badgeId->getSerialization();
+			}
+		} catch ( Exception $ex ) {
+			wfWarn( 'Error fetching title for badge: ' . $ex->getMessage() );
+			return null;
 		}
 	}
 
