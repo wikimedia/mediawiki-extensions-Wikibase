@@ -10,21 +10,21 @@
  * @constructor
  * @since 0.4
  *
- * @param {wikibase.datamodel.TermList|null} [labels]
- * @param {wikibase.datamodel.TermList|null} [descriptions]
- * @param {wikibase.datamodel.MultiTermList|null} [aliasGroups]
+ * @param {wikibase.datamodel.TermSet|null} [labels]
+ * @param {wikibase.datamodel.TermSet|null} [descriptions]
+ * @param {wikibase.datamodel.MultiTermSet|null} [aliasGroups]
  */
 var SELF
 	= wb.datamodel.Fingerprint
 	= function WbDataModelFingerprint( labels, descriptions, aliasGroups ) {
-		labels = labels || new wb.datamodel.TermList();
-		descriptions = descriptions || new wb.datamodel.TermList();
-		aliasGroups = aliasGroups || new wb.datamodel.MultiTermList();
+		labels = labels || new wb.datamodel.TermSet();
+		descriptions = descriptions || new wb.datamodel.TermSet();
+		aliasGroups = aliasGroups || new wb.datamodel.MultiTermSet();
 
 		if(
-			!( labels instanceof wb.datamodel.TermList )
-			|| !( descriptions instanceof wb.datamodel.TermList )
-			|| !( aliasGroups instanceof wb.datamodel.MultiTermList )
+			!( labels instanceof wb.datamodel.TermSet )
+			|| !( descriptions instanceof wb.datamodel.TermSet )
+			|| !( aliasGroups instanceof wb.datamodel.MultiTermSet )
 		) {
 			throw new Error( 'Required parameter(s) not specified or not defined properly' );
 		}
@@ -36,17 +36,17 @@ var SELF
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {wikibase.datamodel.TermList}
+	 * @type {wikibase.datamodel.TermSet}
 	 */
 	_labels: null,
 
 	/**
-	 * @type {wikibase.datamodel.TermList}
+	 * @type {wikibase.datamodel.TermSet}
 	 */
 	_descriptions: null,
 
 	/**
-	 * @type {wikibase.datamodel.MultiTermList}
+	 * @type {wikibase.datamodel.MultiTermSet}
 	 */
 	_aliasGroups: null,
 
@@ -59,7 +59,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {wikibase.datamodel.TermList}
+	 * @return {wikibase.datamodel.TermSet}
 	 */
 	getLabels: function() {
 		return this._labels;
@@ -96,7 +96,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {wikibase.datamodel.TermList}
+	 * @return {wikibase.datamodel.TermSet}
 	 */
 	getDescriptions: function() {
 		return this._descriptions;
@@ -133,7 +133,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {wikibase.datamodel.MultiTermList}
+	 * @return {wikibase.datamodel.MultiTermSet}
 	 */
 	getAliasGroups: function() {
 		return this._aliasGroups;

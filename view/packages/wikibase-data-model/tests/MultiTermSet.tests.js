@@ -5,7 +5,7 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.MultiTermList' );
+QUnit.module( 'wikibase.datamodel.MultiTermSet' );
 
 var testSets = [
 	[],
@@ -18,8 +18,8 @@ var testSets = [
 QUnit.test( 'Constructor', function( assert ) {
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(
-			( new wb.datamodel.MultiTermList( testSets[i] ) ) instanceof wb.datamodel.MultiTermList,
-			'Test set #' + i + ': Instantiated MultiTermList.'
+			( new wb.datamodel.MultiTermSet( testSets[i] ) ) instanceof wb.datamodel.MultiTermSet,
+			'Test set #' + i + ': Instantiated MultiTermSet.'
 		);
 	}
 } );

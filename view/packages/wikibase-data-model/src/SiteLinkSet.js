@@ -8,13 +8,12 @@
 var PARENT = wb.datamodel.Set;
 
 /**
- * Unordered set of SiteLink objects.
  * @constructor
  * @since 0.4
  *
  * @param {wikibase.datamodel.SiteLink[]} [siteLinks]
  */
-wb.datamodel.SiteLinkList = util.inherit( 'wbSiteLinkList', PARENT, function( siteLinks ) {
+wb.datamodel.SiteLinkSet = util.inherit( 'wbSiteLinkSet', PARENT, function( siteLinks ) {
 	PARENT.call( this, wb.datamodel.SiteLink, 'getSiteId', siteLinks );
 } );
 

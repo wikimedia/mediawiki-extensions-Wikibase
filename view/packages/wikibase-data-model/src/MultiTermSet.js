@@ -8,13 +8,12 @@
 var PARENT = wb.datamodel.Set;
 
 /**
- * Unordered set of MultiTerm objects.
  * @constructor
  * @since 0.4
  *
  * @param {wikibase.datamodel.MultiTerm[]} [multiTerms]
  */
-wb.datamodel.MultiTermList = util.inherit( 'wbMultiTermList', PARENT, function( multiTerms ) {
+wb.datamodel.MultiTermSet = util.inherit( 'wbMultiTermSet', PARENT, function( multiTerms ) {
 	PARENT.call( this, wb.datamodel.MultiTerm, 'getLanguageCode', multiTerms );
 } );
 

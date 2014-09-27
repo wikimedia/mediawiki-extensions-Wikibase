@@ -5,21 +5,21 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.TermList' );
+QUnit.module( 'wikibase.datamodel.SiteLinkSet' );
 
 var testSets = [
 	[],
 	[
-		new wb.datamodel.Term( 'de', 'de-string' ),
-		new wb.datamodel.Term( 'en', 'en-string' )
+		new wb.datamodel.SiteLink( 'de', 'de-page' ),
+		new wb.datamodel.SiteLink( 'en', 'en-page' )
 	]
 ];
 
 QUnit.test( 'Constructor', function( assert ) {
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(
-			( new wb.datamodel.TermList( testSets[i] ) ) instanceof wb.datamodel.TermList,
-			'Test set #' + i + ': Instantiated TermList.'
+			( new wb.datamodel.SiteLinkSet( testSets[i] ) ) instanceof wb.datamodel.SiteLinkSet,
+			'Test set #' + i + ': Instantiated SiteLinkSet.'
 		);
 	}
 } );

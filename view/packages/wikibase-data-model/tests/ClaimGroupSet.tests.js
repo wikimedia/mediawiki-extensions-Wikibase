@@ -5,7 +5,7 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.ClaimGroupList' );
+QUnit.module( 'wikibase.datamodel.ClaimGroupSet' );
 
 var testSets = [
 	[],
@@ -21,11 +21,11 @@ var testSets = [
 
 QUnit.test( 'Constructor', function( assert ) {
 	for( var i = 0; i < testSets.length; i++ ) {
-		var claimGroupList = new wb.datamodel.ClaimGroupList( testSets[i] );
+		var claimGroupSet = new wb.datamodel.ClaimGroupSet( testSets[i] );
 
 		assert.ok(
-			claimGroupList instanceof wb.datamodel.ClaimGroupList,
-			'Test set #' + i + ': Instantiated ClaimGroupList.'
+			claimGroupSet instanceof wb.datamodel.ClaimGroupSet,
+			'Test set #' + i + ': Instantiated ClaimGroupSet.'
 		);
 	}
 } );

@@ -17,7 +17,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Removed useless Entity.isNew(), Entity.newEmpty().
 * Removed Entity.getLabel(), Entity.getLabels(), Entity.getDescription(), Entity.getDescription(), Entity.getAliases(), Entity.getAllAliases(); Acquire data via Entity.getFingerprint() instead.
 * Removed Entity.getClaims(); Acquire claims/statements via Entity specific implementation.
-* Item.getSiteLinks() returns a SiteLinkList object instead of an array of SiteLink objects.
+* Item.getSiteLinks() returns a SiteLinkSet object instead of an array of SiteLink objects.
 * Renamed Property.getDataType() to Property.getDataTypeId().
 * Removed all toJSON(), newFromJSON(), toMap() and newFromMap() functions; Use serializers and unserializers of wikibase.serialization instead.
 * Statement does not accept a plain array of references anymore; Supply a ReferenceList instead.
@@ -28,21 +28,21 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 #### Enhancements
 * Added ClaimGroup.
-* Added ClaimGroupList.
+* Added ClaimGroupSet.
 * Added ClaimList.
 * Added Fingerprint.
 * Added Group.
 * Added Groupable.
 * Added List.
 * Added MultTerm.
-* Added MultTermList.
+* Added MultTermSet.
 * Added ReferenceList.
-* Added SiteLinkList.
+* Added SiteLinkSet.
 * Added StatementGroup.
-* Added StatementGroupList.
+* Added StatementGroupSet.
 * Added StatementList.
 * Added Term.
-* Added TermList.
+* Added TermSet.
 * Added Set.
 * Added individual constructors for Item and Property.
 * Added Entity.getFingerprint(), Entity.setFingerprint().

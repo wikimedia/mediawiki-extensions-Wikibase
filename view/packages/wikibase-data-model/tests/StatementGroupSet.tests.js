@@ -5,7 +5,7 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.StatementGroupList' );
+QUnit.module( 'wikibase.datamodel.StatementGroupSet' );
 
 var testSets = [
 	[],
@@ -25,11 +25,11 @@ var testSets = [
 
 QUnit.test( 'Constructor', function( assert ) {
 	for( var i = 0; i < testSets.length; i++ ) {
-		var statementGroupList = new wb.datamodel.StatementGroupList( testSets[i] );
+		var statementGroupSet = new wb.datamodel.StatementGroupSet( testSets[i] );
 
 		assert.ok(
-			statementGroupList instanceof wb.datamodel.StatementGroupList,
-			'Test set #' + i + ': Instantiated StatementGroupList.'
+			statementGroupSet instanceof wb.datamodel.StatementGroupSet,
+			'Test set #' + i + ': Instantiated StatementGroupSet.'
 		);
 	}
 } );

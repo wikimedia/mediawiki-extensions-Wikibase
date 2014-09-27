@@ -27,14 +27,14 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.ClaimGroup',
-				'wikibase.datamodel.ClaimGroupList',
+				'wikibase.datamodel.ClaimGroupSet',
 				'wikibase.datamodel.ClaimList',
 				'wikibase.datamodel.Entity',
 				'wikibase.datamodel.EntityId',
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.Item',
 				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.MultiTermList',
+				'wikibase.datamodel.MultiTermSet',
 				'wikibase.datamodel.Property',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.PropertySomeValueSnak',
@@ -42,15 +42,15 @@ return call_user_func( function() {
 				'wikibase.datamodel.Reference',
 				'wikibase.datamodel.ReferenceList',
 				'wikibase.datamodel.SiteLink',
-				'wikibase.datamodel.SiteLinkList',
+				'wikibase.datamodel.SiteLinkSet',
 				'wikibase.datamodel.Snak',
 				'wikibase.datamodel.SnakList',
 				'wikibase.datamodel.Statement',
 				'wikibase.datamodel.StatementGroup',
-				'wikibase.datamodel.StatementGroupList',
+				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermList',
+				'wikibase.datamodel.TermSet',
 			),
 		),
 
@@ -86,9 +86,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.datamodel.ClaimGroupList' => $moduleTemplate + array(
+		'wikibase.datamodel.ClaimGroupSet' => $moduleTemplate + array(
 			'scripts' => array(
-				'ClaimGroupList.js',
+				'ClaimGroupSet.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
@@ -136,8 +136,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.MultiTermList',
-				'wikibase.datamodel.TermList',
+				'wikibase.datamodel.MultiTermSet',
+				'wikibase.datamodel.TermSet',
 			),
 		),
 
@@ -169,8 +169,8 @@ return call_user_func( function() {
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Entity',
 				'wikibase.datamodel.Fingerprint',
-				'wikibase.datamodel.SiteLinkList',
-				'wikibase.datamodel.StatementGroupList',
+				'wikibase.datamodel.SiteLinkSet',
+				'wikibase.datamodel.StatementGroupSet',
 			),
 		),
 
@@ -194,9 +194,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.datamodel.MultiTermList' => $moduleTemplate + array(
+		'wikibase.datamodel.MultiTermSet' => $moduleTemplate + array(
 			'scripts' => array(
-				'MultiTermList.js',
+				'MultiTermSet.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
@@ -215,7 +215,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Entity',
 				'wikibase.datamodel.Fingerprint',
-				'wikibase.datamodel.StatementGroupList',
+				'wikibase.datamodel.StatementGroupSet',
 			),
 		),
 
@@ -284,9 +284,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.datamodel.SiteLinkList' => $moduleTemplate + array(
+		'wikibase.datamodel.SiteLinkSet' => $moduleTemplate + array(
 			'scripts' => array(
-				'SiteLinkList.js',
+				'SiteLinkSet.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
@@ -340,9 +340,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.datamodel.StatementGroupList' => $moduleTemplate + array(
+		'wikibase.datamodel.StatementGroupSet' => $moduleTemplate + array(
 			'scripts' => array(
-				'StatementGroupList.js',
+				'StatementGroupSet.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
@@ -373,9 +373,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.datamodel.TermList' => $moduleTemplate + array(
+		'wikibase.datamodel.TermSet' => $moduleTemplate + array(
 			'scripts' => array(
-				'TermList.js',
+				'TermSet.js',
 			),
 			'dependencies' => array(
 				'util.inherit',

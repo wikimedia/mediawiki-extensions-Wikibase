@@ -8,14 +8,13 @@
 var PARENT = wb.datamodel.Set;
 
 /**
- * Unordered set of StatementGroup objects.
  * @constructor
  * @since 0.4
  *
  * @param {wikibase.datamodel.StatementGroup[]} [statementGroups]
  */
-wb.datamodel.StatementGroupList = util.inherit(
-	'wbStatementGroupList',
+wb.datamodel.StatementGroupSet = util.inherit(
+	'wbStatementGroupSet',
 	PARENT,
 	function( statementGroups ) {
 		PARENT.call( this, wb.datamodel.StatementGroup, 'getKey', statementGroups );

@@ -15,82 +15,82 @@ var PARENT = wb.datamodel.Entity;
  *
  * @param {string} entityId
  * @param {wikibase.datamodel.Fingerprint|null} [fingerprint]
- * @param {wikibase.datamodel.StatementGroupList|null} [statementGroupList]
- * @param {wikibase.datamodel.SiteLinkList|null} [siteLinkList]
+ * @param {wikibase.datamodel.StatementGroupSet|null} [statementGroupSet]
+ * @param {wikibase.datamodel.SiteLinkSet|null} [siteLinkSet]
  */
 var SELF = wb.datamodel.Item = util.inherit(
 	'WbItem',
 	PARENT,
-	function( entityId, fingerprint, statementGroupList, siteLinkList ) {
+	function( entityId, fingerprint, statementGroupSet, siteLinkSet ) {
 		fingerprint = fingerprint || new wb.datamodel.Fingerprint();
-		statementGroupList = statementGroupList || new wb.datamodel.StatementGroupList();
-		siteLinkList = siteLinkList || new wb.datamodel.SiteLinkList();
+		statementGroupSet = statementGroupSet || new wb.datamodel.StatementGroupSet();
+		siteLinkSet = siteLinkSet || new wb.datamodel.SiteLinkSet();
 
 		if(
 			typeof entityId !== 'string'
 			|| !( fingerprint instanceof wb.datamodel.Fingerprint )
-			|| !( siteLinkList instanceof wb.datamodel.SiteLinkList )
-			|| !( statementGroupList instanceof wb.datamodel.StatementGroupList )
+			|| !( siteLinkSet instanceof wb.datamodel.SiteLinkSet )
+			|| !( statementGroupSet instanceof wb.datamodel.StatementGroupSet )
 		) {
 			throw new Error( 'Required parameter(s) missing or not defined properly' );
 		}
 
 		this._id = entityId;
 		this._fingerprint = fingerprint;
-		this._siteLinkList = siteLinkList;
-		this._statementGroupList = statementGroupList;
+		this._siteLinkSet = siteLinkSet;
+		this._statementGroupSet = statementGroupSet;
 	},
 {
 	/**
-	 * @type {wikibase.datamodel.SiteLinkList}
+	 * @type {wikibase.datamodel.SiteLinkSet}
 	 */
-	_siteLinkList: null,
+	_siteLinkSet: null,
 
 	/**
-	 * @type {wikibase.datamodel.StatementGroupList}
+	 * @type {wikibase.datamodel.StatementGroupSet}
 	 */
-	_statementGroupList: null,
+	_statementGroupSet: null,
 
 	/**
-	 * @return {wikibase.datamodel.SiteLinkList}
+	 * @return {wikibase.datamodel.SiteLinkSet}
 	 */
 	getSiteLinks: function() {
-		return this._siteLinkList;
+		return this._siteLinkSet;
 	},
 
 	/**
 	 * @param {wikibase.datamodel.SiteLink} siteLink
 	 */
 	addSiteLink: function( siteLink ) {
-		this._siteLinkList.setSiteLink( siteLink );
+		this._siteLinkSet.setSiteLink( siteLink );
 	},
 
 	/**
 	 * @param {wikibase.datamodel.SiteLink} siteLink
 	 */
 	removeSiteLink: function( siteLink ) {
-		this._siteLinkList.removeSiteLink( siteLink );
+		this._siteLinkSet.removeSiteLink( siteLink );
 	},
 
 	/**
-	 * @return {wikibase.datamodel.StatementGroupList}
+	 * @return {wikibase.datamodel.StatementGroupSet}
 	 */
 	getStatements: function() {
-		return this._statementGroupList;
+		return this._statementGroupSet;
 	},
 
 	/**
 	 * @param {wikibase.datamodel.Statement} statement
 	 */
 	addStatement: function( statement ) {
-		this._statementGroupList.addStatement( statement );
+		this._statementGroupSet.addStatement( statement );
 	},
 
 	/**
 	 * @param {wikibase.datamodel.Statement} statement
 	 */
 	removeStatement: function( statement ) {
-		this._statementGroupList.removeStatement( statement );
+		this._statementGroupSet.removeStatement( statement );
 	},
 
 	/**
@@ -98,8 +98,8 @@ var SELF = wb.datamodel.Item = util.inherit(
 	 */
 	isEmpty: function() {
 		return this._fingerprint.isEmpty()
-			&& this._siteLinkList.isEmpty()
-			&& this._statementGroupList.isEmpty();
+			&& this._siteLinkSet.isEmpty()
+			&& this._statementGroupSet.isEmpty();
 	},
 
 	/**
@@ -111,8 +111,8 @@ var SELF = wb.datamodel.Item = util.inherit(
 			|| item instanceof SELF
 				&& this._id === item.getId()
 				&& this._fingerprint.equals( item.getFingerprint() )
-				&& this._siteLinkList.equals( item.getSiteLinks() )
-				&& this._statementGroupList.equals( item.getStatements() );
+				&& this._siteLinkSet.equals( item.getSiteLinks() )
+				&& this._statementGroupSet.equals( item.getStatements() );
 	}
 } );
 

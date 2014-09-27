@@ -8,7 +8,6 @@
 var PARENT = wb.datamodel.List;
 
 /**
- * Ordered set of Reference objects.
  * @constructor
  * @since 0.4
  *

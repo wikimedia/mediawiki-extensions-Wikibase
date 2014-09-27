@@ -8,13 +8,12 @@
 var PARENT = wb.datamodel.Set;
 
 /**
- * Unordered set of Term objects.
  * @constructor
  * @since 0.4
  *
  * @param {wikibase.datamodel.Term[]} [terms]
  */
-wb.datamodel.TermList = util.inherit( 'wbTermList', PARENT, function( terms ) {
+wb.datamodel.TermSet = util.inherit( 'wbTermSet', PARENT, function( terms ) {
 	PARENT.call( this, wb.datamodel.Term, 'getLanguageCode', terms );
 } );
 

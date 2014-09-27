@@ -12,20 +12,20 @@ var testSets = [
 		'P1',
 		'i am a data type id',
 		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermList(),
-			new wb.datamodel.TermList(),
-			new wb.datamodel.MultiTermList()
+			new wb.datamodel.TermSet(),
+			new wb.datamodel.TermSet(),
+			new wb.datamodel.MultiTermSet()
 		),
-		new wb.datamodel.StatementGroupList()
+		new wb.datamodel.StatementGroupSet()
 	], [
 		'P2',
 		'i am a data type id',
 		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-label' )] ),
-			new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-description' )] ),
-			new wb.datamodel.MultiTermList( [new wb.datamodel.MultiTerm( 'de', ['de-alias'] )] )
+			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-label' )] ),
+			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-description' )] ),
+			new wb.datamodel.MultiTermSet( [new wb.datamodel.MultiTerm( 'de', ['de-alias'] )] )
 		),
-		new wb.datamodel.StatementGroupList( [
+		new wb.datamodel.StatementGroupSet( [
 			new wb.datamodel.StatementGroup( 'P1',
 				new wb.datamodel.StatementList( [
 					new wb.datamodel.Statement(
@@ -55,11 +55,11 @@ QUnit.test( 'isEmpty()', function( assert ) {
 			'P1',
 			'i am a data type id',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermList(),
-				new wb.datamodel.TermList(),
-				new wb.datamodel.MultiTermList()
+				new wb.datamodel.TermSet(),
+				new wb.datamodel.TermSet(),
+				new wb.datamodel.MultiTermSet()
 			),
-			new wb.datamodel.StatementGroupList()
+			new wb.datamodel.StatementGroupSet()
 		) ).isEmpty(),
 		'Verified isEmpty() returning TRUE.'
 	);
@@ -69,11 +69,11 @@ QUnit.test( 'isEmpty()', function( assert ) {
 			'P1',
 			'i am a data type id',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-term' )] ),
-				new wb.datamodel.TermList(),
-				new wb.datamodel.MultiTermList()
+				new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-term' )] ),
+				new wb.datamodel.TermSet(),
+				new wb.datamodel.MultiTermSet()
 			),
-			new wb.datamodel.StatementGroupList()
+			new wb.datamodel.StatementGroupSet()
 		) ).isEmpty(),
 		'Returning FALSE when Fingerprint is not empty.'
 	);
@@ -83,11 +83,11 @@ QUnit.test( 'isEmpty()', function( assert ) {
 			'P1',
 			'i am a data type id',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermList(),
-				new wb.datamodel.TermList(),
-				new wb.datamodel.MultiTermList()
+				new wb.datamodel.TermSet(),
+				new wb.datamodel.TermSet(),
+				new wb.datamodel.MultiTermSet()
 			),
-			new wb.datamodel.StatementGroupList( [
+			new wb.datamodel.StatementGroupSet( [
 				new wb.datamodel.StatementGroup( 'P1',
 					new wb.datamodel.StatementList( [new wb.datamodel.Statement(
 						new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
@@ -95,7 +95,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 				)
 			] )
 		) ).isEmpty(),
-		'Returning FALSE when StatementGroupList is not empty.'
+		'Returning FALSE when StatementGroupSet is not empty.'
 	);
 } );
 

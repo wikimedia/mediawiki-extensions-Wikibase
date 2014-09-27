@@ -8,13 +8,12 @@
 var PARENT = wb.datamodel.Set;
 
 /**
- * Unordered set of ClaimGroup objects.
  * @constructor
  * @since 0.4
  *
  * @param {wikibase.datamodel.ClaimGroup[]} [claimGroups]
  */
-wb.datamodel.ClaimGroupList = util.inherit( 'wbClaimGroupList', PARENT, function( claimGroups ) {
+wb.datamodel.ClaimGroupSet = util.inherit( 'wbClaimGroupSet', PARENT, function( claimGroups ) {
 	PARENT.call( this, wb.datamodel.ClaimGroup, 'getKey', claimGroups );
 } );
 

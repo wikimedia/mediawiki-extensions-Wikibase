@@ -11,20 +11,20 @@ var testSets = [
 	[
 		'Q1',
 		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermList(),
-			new wb.datamodel.TermList(),
-			new wb.datamodel.MultiTermList()
+			new wb.datamodel.TermSet(),
+			new wb.datamodel.TermSet(),
+			new wb.datamodel.MultiTermSet()
 		),
-		new wb.datamodel.StatementGroupList(),
-		new wb.datamodel.SiteLinkList()
+		new wb.datamodel.StatementGroupSet(),
+		new wb.datamodel.SiteLinkSet()
 	], [
 		'Q2',
 		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-label' )] ),
-			new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-description' )] ),
-			new wb.datamodel.MultiTermList( [new wb.datamodel.MultiTerm( 'de', ['de-alias'] )] )
+			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-label' )] ),
+			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-description' )] ),
+			new wb.datamodel.MultiTermSet( [new wb.datamodel.MultiTerm( 'de', ['de-alias'] )] )
 		),
-		new wb.datamodel.StatementGroupList( [
+		new wb.datamodel.StatementGroupSet( [
 			new wb.datamodel.StatementGroup( 'P1',
 				new wb.datamodel.StatementList( [
 					new wb.datamodel.Statement(
@@ -33,7 +33,7 @@ var testSets = [
 				] )
 			)
 		] ),
-		new wb.datamodel.SiteLinkList( [
+		new wb.datamodel.SiteLinkSet( [
 			new wb.datamodel.SiteLink( 'de', 'de-page' )
 		] )
 	]
@@ -56,12 +56,12 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		( new wb.datamodel.Item(
 			'Q1',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermList(),
-				new wb.datamodel.TermList(),
-				new wb.datamodel.MultiTermList()
+				new wb.datamodel.TermSet(),
+				new wb.datamodel.TermSet(),
+				new wb.datamodel.MultiTermSet()
 			),
-			new wb.datamodel.StatementGroupList(),
-			new wb.datamodel.SiteLinkList()
+			new wb.datamodel.StatementGroupSet(),
+			new wb.datamodel.SiteLinkSet()
 		) ).isEmpty(),
 		'Verified isEmpty() returning TRUE.'
 	);
@@ -70,12 +70,12 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		!( new wb.datamodel.Item(
 			'Q1',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-term' )] ),
-				new wb.datamodel.TermList(),
-				new wb.datamodel.MultiTermList()
+				new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-term' )] ),
+				new wb.datamodel.TermSet(),
+				new wb.datamodel.MultiTermSet()
 			),
-			new wb.datamodel.StatementGroupList(),
-			new wb.datamodel.SiteLinkList()
+			new wb.datamodel.StatementGroupSet(),
+			new wb.datamodel.SiteLinkSet()
 		) ).isEmpty(),
 		'Returning FALSE when Fingerprint is not empty.'
 	);
@@ -84,34 +84,34 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		!( new wb.datamodel.Item(
 			'Q1',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermList(),
-				new wb.datamodel.TermList(),
-				new wb.datamodel.MultiTermList()
+				new wb.datamodel.TermSet(),
+				new wb.datamodel.TermSet(),
+				new wb.datamodel.MultiTermSet()
 			),
-			new wb.datamodel.StatementGroupList(),
-			new wb.datamodel.SiteLinkList( [new wb.datamodel.SiteLink( 'de', 'de-page' )] )
+			new wb.datamodel.StatementGroupSet(),
+			new wb.datamodel.SiteLinkSet( [new wb.datamodel.SiteLink( 'de', 'de-page' )] )
 		) ).isEmpty(),
-		'Returning FALSE when SiteLinkList is not empty.'
+		'Returning FALSE when SiteLinkSet is not empty.'
 	);
 
 	assert.ok(
 		!( new wb.datamodel.Item(
 			'Q1',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermList(),
-				new wb.datamodel.TermList(),
-				new wb.datamodel.MultiTermList()
+				new wb.datamodel.TermSet(),
+				new wb.datamodel.TermSet(),
+				new wb.datamodel.MultiTermSet()
 			),
-			new wb.datamodel.StatementGroupList( [
+			new wb.datamodel.StatementGroupSet( [
 				new wb.datamodel.StatementGroup( 'P1',
 					new wb.datamodel.StatementList( [new wb.datamodel.Statement(
 						new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 					)] )
 				)
 			] ),
-			new wb.datamodel.SiteLinkList()
+			new wb.datamodel.SiteLinkSet()
 		) ).isEmpty(),
-		'Returning FALSE when StatementGroupList is not empty.'
+		'Returning FALSE when StatementGroupSet is not empty.'
 	);
 } );
 

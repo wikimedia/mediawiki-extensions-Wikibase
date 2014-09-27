@@ -9,19 +9,19 @@ QUnit.module( 'wikibase.datamodel.Fingerprint' );
 
 var testSets = [
 	[
-		new wb.datamodel.TermList(),
-		new wb.datamodel.TermList(),
-		new wb.datamodel.MultiTermList()
+		new wb.datamodel.TermSet(),
+		new wb.datamodel.TermSet(),
+		new wb.datamodel.MultiTermSet()
 	], [
-		new wb.datamodel.TermList( [
+		new wb.datamodel.TermSet( [
 			new wb.datamodel.Term( 'de', 'de-label' ),
 			new wb.datamodel.Term( 'en', 'en-label' )
 		] ),
-		new wb.datamodel.TermList( [
+		new wb.datamodel.TermSet( [
 			new wb.datamodel.Term( 'de', 'de-description' ),
 			new wb.datamodel.Term( 'en', 'en-description' )
 		] ),
-		new wb.datamodel.MultiTermList( [
+		new wb.datamodel.MultiTermSet( [
 			new wb.datamodel.MultiTerm( 'de', ['de-alias1', 'de-alias2'] ),
 			new wb.datamodel.MultiTerm( 'en', ['en-alias1'] )
 		] )
@@ -43,15 +43,15 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 
 QUnit.test( 'Constructor (negative)', function( assert ) {
 	var negativeTestSets = [
-		['string', new wb.datamodel.TermList(), new wb.datamodel.MultiTermList()],
-		[new wb.datamodel.TermList(), 'string', new wb.datamodel.MultiTermList()],
-		[new wb.datamodel.TermList(), new wb.datamodel.TermList(), 'string']
+		['string', new wb.datamodel.TermSet(), new wb.datamodel.MultiTermSet()],
+		[new wb.datamodel.TermSet(), 'string', new wb.datamodel.MultiTermSet()],
+		[new wb.datamodel.TermSet(), new wb.datamodel.TermSet(), 'string']
 	];
 
 	/**
-	 * @param {wikibase.datamodel.TermList} labels
-	 * @param {wikibase.datamodel.TermList} descriptions
-	 * @param {wikibase.datamodel.MultiTermList} aliasGroups
+	 * @param {wikibase.datamodel.TermSet} labels
+	 * @param {wikibase.datamodel.TermSet} descriptions
+	 * @param {wikibase.datamodel.MultiTermSet} aliasGroups
 	 * @return {Function}
 	 */
 	function instantiateObject( labels, descriptions, aliasGroups ) {
@@ -73,36 +73,36 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 QUnit.test( 'isEmpty()', function( assert ) {
 	assert.ok(
 		( new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermList(),
-			new wb.datamodel.TermList(),
-			new wb.datamodel.MultiTermList()
+			new wb.datamodel.TermSet(),
+			new wb.datamodel.TermSet(),
+			new wb.datamodel.MultiTermSet()
 		) ).isEmpty(),
 		'Verified isEmpty() returning TRUE.'
 	);
 
 	assert.ok(
 		!( new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermList( [new wb.datamodel.Term( 'en', 'en-string' )] ),
-			new wb.datamodel.TermList(),
-			new wb.datamodel.MultiTermList()
+			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'en', 'en-string' )] ),
+			new wb.datamodel.TermSet(),
+			new wb.datamodel.MultiTermSet()
 		) ).isEmpty(),
 		'FALSE when there is a label.'
 	);
 
 	assert.ok(
 		!( new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermList(),
-			new wb.datamodel.TermList( [new wb.datamodel.Term( 'en', 'en-string' )] ),
-			new wb.datamodel.MultiTermList()
+			new wb.datamodel.TermSet(),
+			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'en', 'en-string' )] ),
+			new wb.datamodel.MultiTermSet()
 		) ).isEmpty(),
 		'FALSE when there is a description.'
 	);
 
 	assert.ok(
 		!( new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermList(),
-			new wb.datamodel.TermList(),
-			new wb.datamodel.MultiTermList( [new wb.datamodel.MultiTerm( 'en', ['en-string'] )] )
+			new wb.datamodel.TermSet(),
+			new wb.datamodel.TermSet(),
+			new wb.datamodel.MultiTermSet( [new wb.datamodel.MultiTerm( 'en', ['en-string'] )] )
 		) ).isEmpty(),
 		'FALSE when there is an alias.'
 	);
