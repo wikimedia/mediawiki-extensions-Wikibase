@@ -2,25 +2,16 @@
 
 namespace Wikibase\Test;
 
-use DataValues\StringValue;
-use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOpAdd;
-use Diff\DiffOp\DiffOpChange;
-use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
 use ReflectionClass;
-use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\ClaimList;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\DataModel\Claim\Claims
@@ -66,10 +57,10 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$claim1 = $this->makeClaim( new PropertyNoValueSnak( 1 ) );
 		$claim2 = $this->makeClaim( new PropertyNoValueSnak( 2 ) );
 
-		$byPropertyIdArray = new ByPropertyIdArray();
-		$byPropertyIdArray->append( $claim1 );
+		$claimList = new ClaimList();
+		$claimList->addClaim( $claim1 );
 
-		$claims = new Claims( $byPropertyIdArray );
+		$claims = new Claims( $claimList );
 		// According to the documentation append() "cannot be called when the ArrayObject was
 		// constructed from an object." This test makes sure it was not constructed from an object.
 		$claims->append( $claim2 );

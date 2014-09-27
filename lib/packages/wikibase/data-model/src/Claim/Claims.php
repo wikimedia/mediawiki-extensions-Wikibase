@@ -2,12 +2,13 @@
 
 namespace Wikibase\DataModel\Claim;
 
+use ArrayAccess;
 use ArrayObject;
 use Comparable;
 use Hashable;
 use InvalidArgumentException;
 use Traversable;
-use Wikibase\DataModel\ByPropertyIdArray;
+use Wikibase\DataModel\ByPropertyIdGrouper;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
 
@@ -317,14 +318,13 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 * @return Claims
 	 */
 	public function getClaimsForProperty( PropertyId $propertyId ) {
-		$claimsByProp = new ByPropertyIdArray( $this );
-		$claimsByProp->buildIndex();
+		$byPropertyIdGrouper = new ByPropertyIdGrouper( $this );
 
-		if ( !( in_array( $propertyId, $claimsByProp->getPropertyIds() ) ) ) {
+		if ( !$byPropertyIdGrouper->hasPropertyId( $propertyId ) ) {
 			return new self();
 		}
 
-		return new self( $claimsByProp->getByPropertyId( $propertyId ) );
+		return new self( $byPropertyIdGrouper->getByPropertyId( $propertyId ) );
 	}
 
 	/**
