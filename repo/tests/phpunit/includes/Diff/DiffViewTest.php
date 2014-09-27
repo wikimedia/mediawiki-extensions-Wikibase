@@ -6,9 +6,10 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Diff\DiffView;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers Wikibase\Repo\Diff\DiffView
@@ -19,7 +20,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
-class DiffViewTest extends \PHPUnit_Framework_TestCase {
+class DiffViewTest extends \MediaWikiLangTestCase {
 
 	public function diffOpProvider() {
 		$linkPath = wfMessage( 'wikibase-diffview-link' )->text();
@@ -69,6 +70,12 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 				'Q123',
 				$linkPath . '/enwiki/badges'
 			),
+			'Badge has label' => array(
+				'@<a\b[^>]*>nyan article</a>@',
+				null,
+				'Q123',
+				$linkPath . '/enwiki/badges'
+			),
 		);
 	}
 
@@ -82,6 +89,13 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 			$diffOps['add'] = new DiffOpAdd( $newValue );
 		}
 		return $diffOps;
+	}
+
+	private function getBadgeItem() {
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q123' ) );
+		$item->getFingerprint()->setLabel( 'en', 'nyan article' );
+		return $item;
 	}
 
 	/**
@@ -99,7 +113,9 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 		$diff = new Diff( $this->getDiffOps( $oldValue, $newValue ) );
 		$siteStore = MockSiteStore::newFromTestSites();
 		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		$diffView = new DiffView( $path, $diff, $siteStore, $entityTitleLookup );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $this->getBadgeItem() );
+		$diffView = new DiffView( $path, $diff, $siteStore, $entityTitleLookup, $mockRepository );
 
 		$html = $diffView->getHtml();
 
