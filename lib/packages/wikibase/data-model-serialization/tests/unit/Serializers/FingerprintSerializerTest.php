@@ -10,6 +10,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\SiteLink;
+use stdClass;
 
 /**
  * @covers Wikibase\DataModel\Serializers\FingerprintSerializer
@@ -31,9 +32,9 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 		$siteLinkSerializerMock->expects( $this->any() )
 			->method( 'serialize' );
 
-		$entitySerializer = new FingerprintSerializer();
+		$entitySerializer = new FingerprintSerializer( false );
 
-		return new ItemSerializer( $entitySerializer, $claimsSerializerMock, $siteLinkSerializerMock );
+		return new ItemSerializer( $entitySerializer, $claimsSerializerMock, $siteLinkSerializerMock, false );
 	}
 
 	public function serializableProvider() {
@@ -173,6 +174,44 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 		);
 
 		return $argumentLists;
+	}
+
+	public function testDescriptionWithOptionObjectsForMaps() {
+		$entitySerializer = new FingerprintSerializer( true );
+
+		$entity = Item::newEmpty();
+		$entity->setDescriptions( array(
+			'en' => 'A Nyan Cat',
+		) );
+
+		$result = array();
+
+		$descriptions = new stdClass();
+		$descriptions->en = array(
+			'language' => 'en',
+			'value' => 'A Nyan Cat'
+		);
+		$serial = array( 'descriptions' => $descriptions );
+		$entitySerializer->addDescriptionsToSerialization( $entity, $result );
+		$this->assertEquals( $serial, $result );
+	}
+
+	public function testAliasesWithOptionObjectsForMaps() {
+		$entitySerializer = new FingerprintSerializer( true );
+
+		$entity = Item::newEmpty();
+		$entity->setAliases( 'fr', array( 'Cat' ) );
+
+		$result = array();
+
+		$aliases = new stdClass();
+		$aliases->fr = array( array(
+			'language' => 'fr',
+			'value' => 'Cat'
+		) );
+		$serial = array( 'aliases' => $aliases );
+		$entitySerializer->addAliasesToSerialization( $entity, $result );
+		$this->assertEquals( $serial, $result );
 	}
 
 }

@@ -35,13 +35,21 @@ class ItemSerializer implements DispatchableSerializer {
 	private $siteLinkSerializer;
 
 	/**
+	 * @var bool
+	 */
+	protected $useObjectsForMaps;
+
+	/**
+	 * @param FingerprintSerializer $fingerprintSerializer
 	 * @param Serializer $claimsSerializer
 	 * @param Serializer $siteLinkSerializer
+	 * @param bool $useObjectsForMaps
 	 */
-	public function __construct( FingerprintSerializer $fingerprintSerializer, Serializer $claimsSerializer, Serializer $siteLinkSerializer ) {
+	public function __construct( FingerprintSerializer $fingerprintSerializer, Serializer $claimsSerializer, Serializer $siteLinkSerializer, $useObjectsForMaps ) {
 		$this->fingerprintSerializer = $fingerprintSerializer;
 		$this->claimsSerializer = $claimsSerializer;
 		$this->siteLinkSerializer = $siteLinkSerializer;
+		$this->useObjectsForMaps = $useObjectsForMaps;
 	}
 
 	/**
@@ -99,6 +107,9 @@ class ItemSerializer implements DispatchableSerializer {
 
 		foreach( $siteLinks as $siteLink ) {
 			$serialization['sitelinks'][$siteLink->getSiteId()] = $this->siteLinkSerializer->serialize( $siteLink );
+		}
+		if ( $this->useObjectsForMaps ) {
+			$serialization['sitelinks'] = (object)$serialization['sitelinks'];
 		}
 	}
 

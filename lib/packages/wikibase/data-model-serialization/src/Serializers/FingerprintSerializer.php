@@ -17,6 +17,18 @@ use Wikibase\DataModel\Entity\Entity;
  */
 class FingerprintSerializer {
 
+	/**
+	 * @var bool
+	 */
+	protected $useObjectsForMaps;
+
+	/**
+	 * @param bool $useObjectsForMaps
+	 */
+	public function __construct( $useObjectsForMaps ) {
+		$this->useObjectsForMaps = $useObjectsForMaps;
+	}
+
 	public function addBasicsToSerialization( Entity $entity, array &$serialization ) {
 		$this->addIdToSerialization( $entity, $serialization );
 		$this->addLabelsToSerialization( $entity, $serialization );
@@ -56,6 +68,9 @@ class FingerprintSerializer {
 			);
 		}
 
+		if ( $this->useObjectsForMaps ) {
+			$serialization = (object)$serialization;
+		}
 		return $serialization;
 	}
 
@@ -77,6 +92,9 @@ class FingerprintSerializer {
 			}
 		}
 
+		if ( $this->useObjectsForMaps ) {
+			$serialization = (object)$serialization;
+		}
 		return $serialization;
 	}
 

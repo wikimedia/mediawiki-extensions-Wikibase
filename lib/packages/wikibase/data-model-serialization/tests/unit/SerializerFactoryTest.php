@@ -91,4 +91,15 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testFactoryCreateWithUnexpectedValue() {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new SerializerFactory( new DataValueSerializer(), 2 );
+	}
+
+	public function testNewSnaksSerializerWithUseObjectsForMaps() {
+		$factory = new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_OBJECTS_FOR_MAPS );
+		$serializer = $factory->newSnaksSerializer();
+		$this->assertAttributeSame( true, 'useObjectsForMaps' , $serializer );
+	}
+
 }

@@ -23,10 +23,17 @@ class ClaimsSerializer implements DispatchableSerializer {
 	protected $claimSerializer;
 
 	/**
-	 * @param Serializer $claimSerializer
+	 * @var bool
 	 */
-	public function __construct( Serializer $claimSerializer ) {
+	protected $useObjectsForMaps;
+
+	/**
+	 * @param Serializer $claimSerializer
+	 * @param bool $useObjectsForMaps
+	 */
+	public function __construct( Serializer $claimSerializer, $useObjectsForMaps ) {
 		$this->claimSerializer = $claimSerializer;
+		$this->useObjectsForMaps = $useObjectsForMaps;
 	}
 
 	/**
@@ -69,6 +76,9 @@ class ClaimsSerializer implements DispatchableSerializer {
 			$serialization[$claim->getMainSnak()->getPropertyId()->getPrefixedId()][] = $this->claimSerializer->serialize( $claim );
 		}
 
+		if ( $this->useObjectsForMaps ) {
+			$serialization = (object)$serialization;
+		}
 		return $serialization;
 	}
 
