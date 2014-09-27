@@ -72,7 +72,7 @@ $.extend( SELF.prototype, {
 	 * @return {*}
 	 */
 	getItemContainer: function() {
-		// Do not allow altering the encapsulated ClaimContainer.
+		// Do not allow altering the encapsulated container.
 		return new this._ItemContainerConstructor( this._itemContainer.toArray() );
 	},
 
@@ -89,7 +89,8 @@ $.extend( SELF.prototype, {
 			}
 		}
 
-		this._itemContainer = itemContainer;
+		// Clone the container to prevent manipulation of the items using the original container.
+		this._itemContainer = new this._ItemContainerConstructor( itemContainer.toArray() );
 	},
 
 	/**

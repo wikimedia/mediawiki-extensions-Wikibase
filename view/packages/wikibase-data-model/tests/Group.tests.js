@@ -40,7 +40,7 @@ var TestContainer = util.inherit(
 	},
 {
 	toArray: function() {
-		return this._items;
+		return $.merge( [], this._items );
 	},
 	hasItem: function( item ) {
 		return $.inArray( item, this._items ) !== -1;
@@ -170,7 +170,7 @@ QUnit.test( 'Constructor', function( assert ) {
 QUnit.test( 'setItemContainer() & getItemContainer()', function( assert ) {
 	var container = getTestContainer( 'key', 1 ),
 		group = createGroup( 'key', container ),
-		newContainer = getTestContainer( 'key', 2 );
+		newContainer = getTestContainer( 'key', 3 );
 
 	assert.ok(
 		group.getItemContainer() !== container,
@@ -180,6 +180,13 @@ QUnit.test( 'setItemContainer() & getItemContainer()', function( assert ) {
 	assert.ok(
 		group.getItemContainer().equals( container ),
 		'Verified returned container matching returned container.'
+	);
+
+	container.addItem( getTestItems( 'key', 2 )[1] );
+
+	assert.ok(
+		!group.getItemContainer().equals( container ),
+		'Group container does not match original container manipulated after Group instantiation.'
 	);
 
 	assert.ok(
