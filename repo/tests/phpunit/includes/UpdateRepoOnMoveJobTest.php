@@ -2,14 +2,15 @@
 
 namespace Wikibase\Test;
 
+use TestSites;
 use Title;
 use User;
-use TestSites;
-use Wikibase\UpdateRepoOnMoveJob;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Store\SQL\EntityPerPageTable;
 use Wikibase\Repo\Store\WikiPageEntityStore;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\UpdateRepoOnMoveJob;
 
 /**
  * @covers Wikibase\UpdateRepoOnMoveJob
@@ -50,7 +51,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$user->addToDatabase();
 
 		$item = Item::newEmpty();
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Old page name' );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Old page name', array( new ItemId( 'Q42' ) ) );
 
 		$store = new WikiPageEntityStore(
 			$wikibaseRepo->getEntityContentFactory(),
@@ -77,6 +78,11 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$this->assertSame(
 			$item->getSiteLinkList()->getBySiteId( 'enwiki' )->getPageName(),
 			'New page name'
+		);
+
+		$this->assertEquals(
+			$item->getSiteLinkList()->getBySiteId( 'enwiki' )->getBadges(),
+			array( new ItemId( 'Q42' ) )
 		);
 	}
 }
