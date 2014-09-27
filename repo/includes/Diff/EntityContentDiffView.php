@@ -86,7 +86,8 @@ class EntityContentDiffView extends DifferenceEngine {
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->detailedSnakFormatter, $this->terseSnakFormatter, $langCode ),
 			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->getEntityTitleLookup()
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getEntityRevisionLookup()
 		);
 	}
 

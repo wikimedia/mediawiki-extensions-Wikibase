@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Diff;
 
-use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp;
+use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
@@ -11,6 +11,8 @@ use IContextSource;
 use MWException;
 use SiteStore;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
+use Wikibase\DataModel\Entity\Diff\ItemDiff;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentDiff;
 
@@ -58,6 +60,11 @@ class EntityDiffVisualizer {
 	private $entityTitleLookup;
 
 	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $entityRevisionLookup;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -71,13 +78,15 @@ class EntityDiffVisualizer {
 		ClaimDiffer $claimDiffer,
 		ClaimDifferenceVisualizer $claimDiffView,
 		SiteStore $siteStore,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleLookup $entityTitleLookup,
+		EntityRevisionLookup $entityRevisionLookup
 	) {
 		$this->context = $contextSource;
 		$this->claimDiffer = $claimDiffer;
 		$this->claimDiffVisualizer = $claimDiffView;
 		$this->siteStore = $siteStore;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 	}
 
 	/**
@@ -85,7 +94,7 @@ class EntityDiffVisualizer {
 	 *
 	 * @since 0.5
 	 *
-	 * @param \Wikibase\Repo\Content\EntityContentDiff $diff
+	 * @param EntityContentDiff $diff
 	 *
 	 * @return string
 	 */
@@ -124,6 +133,7 @@ class EntityDiffVisualizer {
 			),
 			$this->siteStore,
 			$this->entityTitleLookup,
+			$this->entityRevisionLookup,
 			$this->context
 		);
 
@@ -145,6 +155,7 @@ class EntityDiffVisualizer {
 				),
 				$this->siteStore,
 				$this->entityTitleLookup,
+				$this->entityRevisionLookup,
 				$this->context
 			);
 
@@ -176,6 +187,7 @@ class EntityDiffVisualizer {
 			$diff,
 			$this->siteStore,
 			$this->entityTitleLookup,
+			$this->entityRevisionLookup,
 			$this->context
 		);
 
