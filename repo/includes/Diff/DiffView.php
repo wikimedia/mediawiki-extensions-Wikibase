@@ -12,7 +12,9 @@ use Html;
 use IContextSource;
 use MWException;
 use SiteStore;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
@@ -54,6 +56,11 @@ class DiffView extends ContextSource {
 	private $entityTitleLookup;
 
 	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $entityRevisionLookup;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
@@ -62,6 +69,7 @@ class DiffView extends ContextSource {
 	 * @param Diff $diff
 	 * @param SiteStore $siteStore
 	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param IContextSource|null $contextSource
 	 */
 	public function __construct(
@@ -69,12 +77,14 @@ class DiffView extends ContextSource {
 		Diff $diff,
 		SiteStore $siteStore,
 		EntityTitleLookup $entityTitleLookup,
+		EntityRevisionLookup $entityRevisionLookup,
 		IContextSource $contextSource = null
 	) {
 		$this->path = $path;
 		$this->diff = $diff;
 		$this->siteStore = $siteStore;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 
 		if ( !is_null( $contextSource ) ) {
 			$this->setContext( $contextSource );
@@ -237,7 +247,32 @@ class DiffView extends ContextSource {
 		return Html::element( 'a', array(
 			'href' => $title->getLinkURL(),
 			'dir' => 'auto',
-		), $badgeId );
+		), $this->getLabelForBadge( new ItemId( $badgeId ) ) );
+	}
+
+	/**
+	 * Returns the title for the given badge id.
+	 * @todo use TermLookup when we have one
+	 * @todo this is copied from SpecialSetSiteLink
+	 *
+	 * @param EntityId $badgeId
+	 * @return string
+	 */
+	private function getLabelForBadge( EntityId $badgeId ) {
+		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $badgeId );
+
+		if ( $entityRevision === null ) {
+			return $badgeId->getSerialization();
+		}
+
+		$languageCode = $this->getLanguage()->getCode();
+		$labels = $entityRevision->getEntity()->getFingerprint()->getLabels();
+
+		if ( $labels->hasTermForLanguage( $languageCode ) ) {
+			return $labels->getByLanguage( $languageCode )->getText();
+		} else {
+			return $badgeId->getSerialization();
+		}
 	}
 
 	/**

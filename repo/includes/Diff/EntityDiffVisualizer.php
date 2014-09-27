@@ -58,6 +58,11 @@ class EntityDiffVisualizer {
 	private $entityTitleLookup;
 
 	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $entityRevisionLookup;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -71,13 +76,15 @@ class EntityDiffVisualizer {
 		ClaimDiffer $claimDiffer,
 		ClaimDifferenceVisualizer $claimDiffView,
 		SiteStore $siteStore,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleLookup $entityTitleLookup,
+		EntityRevisionLookup $entityRevisionLookup
 	) {
 		$this->context = $contextSource;
 		$this->claimDiffer = $claimDiffer;
 		$this->claimDiffVisualizer = $claimDiffView;
 		$this->siteStore = $siteStore;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 	}
 
 	/**
@@ -124,6 +131,7 @@ class EntityDiffVisualizer {
 			),
 			$this->siteStore,
 			$this->entityTitleLookup,
+			$this->entityRevisionLookup,
 			$this->context
 		);
 
@@ -145,6 +153,7 @@ class EntityDiffVisualizer {
 				),
 				$this->siteStore,
 				$this->entityTitleLookup,
+				$this->entityRevisionLookup,
 				$this->context
 			);
 
@@ -176,6 +185,7 @@ class EntityDiffVisualizer {
 			$diff,
 			$this->siteStore,
 			$this->entityTitleLookup,
+			$this->entityRevisionLookup,
 			$this->context
 		);
 
