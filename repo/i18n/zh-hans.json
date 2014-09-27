@@ -57,6 +57,7 @@
 	"wikibase-sitelinks-empty": "尚无页面连接至该项。",
 	"wikibase-sitelinks-input-help-message": "请设置至该项相关页面的链接。",
 	"wikibase-sitelinks-special": "链接至该项的其他网站页面",
+	"wikibase-badgeselector-badge-placeholder-title": "点此指定一个徽章。",
 	"wikibase-remove": "删除",
 	"wikibase-move-up": "上移",
 	"wikibase-move-down": "下移",

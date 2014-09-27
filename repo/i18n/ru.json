@@ -46,6 +46,7 @@
 	"wikibase-sitelinks-empty": "Ни одна страница ещё не ссылается сюда.",
 	"wikibase-sitelinks-input-help-message": "Поставьте ссылку на страницу, относящуюся к этому элементу.",
 	"wikibase-sitelinks-special": "Страницы других сайтов, ссылающиеся на этот элемент",
+	"wikibase-badgeselector-badge-placeholder-title": "Щелкните, чтобы назначить значок.",
 	"wikibase-remove": "удалить",
 	"wikibase-move-up": "передвинуть выше",
 	"wikibase-move-down": "передвинуть ниже",

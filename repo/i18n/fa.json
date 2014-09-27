@@ -55,6 +55,7 @@
 	"wikibase-sitelinks-empty": "این آیتم هنوز هیچ صفحه‌ای پیوند ندارد.",
 	"wikibase-sitelinks-input-help-message": "پیوندی به صفحه‌ای مرتبط با این آیتم ایجاد کنید.",
 	"wikibase-sitelinks-special": "صفحه‌های دیگر وبگاه‌ها که به این آیتم پیوند دارند",
+	"wikibase-badgeselector-badge-placeholder-title": "برای اختصاص‌دادن نشان کلیک کنید.",
 	"wikibase-remove": "حذف",
 	"wikibase-move-up": "انتقال به بالا",
 	"wikibase-move-down": "انتقال به پایین",

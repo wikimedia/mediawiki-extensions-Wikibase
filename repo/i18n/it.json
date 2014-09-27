@@ -45,6 +45,7 @@
 	"wikibase-sitelinks-empty": "Nessuna pagina è collegata a questo elemento ancora.",
 	"wikibase-sitelinks-input-help-message": "Imposta un collegamento ad una pagina relativa a questo elemento.",
 	"wikibase-sitelinks-special": "Pagine di altri siti collegate a questo elemento",
+	"wikibase-badgeselector-badge-placeholder-title": "Clicca per assegnare un distintivo.",
 	"wikibase-remove": "rimuovi",
 	"wikibase-move-up": "sposta su",
 	"wikibase-move-down": "sposta giù",
