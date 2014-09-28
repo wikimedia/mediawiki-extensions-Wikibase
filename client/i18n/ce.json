@@ -47,7 +47,7 @@
 	"wikibase-error-serialize-error": "Хаамаш кхочушъ бан тар цаделира.",
 	"wikibase-error-invalid-entity-id": "Язйина идентификатор системин йоьвзуш яц. Лела йе хӀинца лелаш йолу черахь цхьаъ.",
 	"special-unconnectedpages": "Викихаамаш чохь вовшахтесна йоцу агӀонаш",
-	"wikibase-unconnectedpages-legend": "Вовшахтесна йоцу агӀонашан параметраш",
+	"wikibase-unconnectedpages-legend": "Вовшахтесна йоцу агӀонийн параметраш",
 	"wikibase-unconnectedpages-page": "Дуьххьара хилийта агӀо:",
 	"wikibase-unconnectedpages-submit": "Кхочушдé",
 	"wikibase-unconnectedpages-invalid-language": "«$1» — меттан код нийса яц.",

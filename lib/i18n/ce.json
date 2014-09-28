@@ -15,7 +15,7 @@
 	"wikibase-diffview-alias": "синоним",
 	"wikibase-diffview-description": "цуьнах лаьцна",
 	"wikibase-diffview-link": "хьажоргаш",
-	"wikibase-error-unexpected": "Дагахь доцу гӀалат хилла: $1",
+	"wikibase-error-unexpected": "ГӀалат: $1",
 	"wikibase-error-save-generic": "Ӏалаш ечу хенахь гӀалат даьлла, цундела хьан хийцам чекхбаккха цало.",
 	"wikibase-error-remove-generic": "ДӀайоккхучу хенахь гӀалат даьлла, цундела хьан хийцам чекхбаккха цало.",
 	"wikibase-error-save-connection": "Ӏалаш ечу хенахь интернетах дӀатасаран гӀалат даьлла, цундела хьан хийцам чекхбаккха цало. Дехар до хьажа хьай интернет дӀатасаре.",

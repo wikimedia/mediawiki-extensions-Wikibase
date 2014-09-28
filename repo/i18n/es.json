@@ -24,7 +24,8 @@
 			"아라",
 			"Mcervera",
 			"Macofe",
-			"Mor"
+			"Mor",
+			"Jonathan rrr"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -51,9 +52,11 @@
 	"wikibase-statements": "Declaraciones",
 	"wikibase-attributes": "Atributos",
 	"wikibase-terms": "En otros idiomas",
+	"wikibase-sitelinkgroupview-input-help-message": "Añadir vínculo a un sitio mediante la especificación de un sitio web y una página de ese sitio, editar o eliminar los vínculos a sitios existentes.",
 	"wikibase-sitelinks-empty": "Aún no hay ninguna página enlazada con este elemento.",
 	"wikibase-sitelinks-input-help-message": "Definir un enlace hacia una página relacionada con este elemento.",
 	"wikibase-sitelinks-special": "Páginas en otros sitios enlazadas con este elemento",
+	"wikibase-badgeselector-badge-placeholder-title": "Haga clic para asignar una etiqueta.",
 	"wikibase-remove": "eliminar",
 	"wikibase-move-up": "subir",
 	"wikibase-move-down": "bajar",

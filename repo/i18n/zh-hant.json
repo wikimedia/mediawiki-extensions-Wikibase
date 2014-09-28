@@ -177,6 +177,7 @@
 	"wikibase-mergeitems-toid": "合併至項目 ID",
 	"wikibase-mergeitems-submit": "合併項目",
 	"wikibase-mergeitems-success": "已成功合併 $1 至 $3。",
+	"wikibase-itemmerge-missing-parameter": "輸入不完整。",
 	"wikibase-itemmerge-not-item": "指定的實體不是一個項目。",
 	"wikibase-itemmerge-failed-save": "儲存項目失敗。",
 	"wikibase-itemmerge-permissiondenied": "權限錯誤",

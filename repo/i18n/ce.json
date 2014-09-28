@@ -98,6 +98,7 @@
 	"wikibase-modifyterm-language": "Мотт:",
 	"special-mergeitems": "Цхьаьнатоха шиъ элемент",
 	"wikibase-mergeitems-submit": "Цхьаьнатоха элементаш",
+	"wikibase-itemmerge-cant-load-entity-content": "Элемент чуяккха цаелира.",
 	"wikibase-dispatchstats-change-id": "ID",
 	"wikibase-dispatchstats-change-timestamp": "Терахь/хан",
 	"wikibase-dispatchstats-oldest-change": "Уггар ширанийш",
