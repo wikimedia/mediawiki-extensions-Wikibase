@@ -188,7 +188,8 @@ class UpdateRepoOnMoveJob extends Job {
 
 		$siteLink = new SiteLink(
 			$siteId,
-			$newPageNormalized
+			$newPageNormalized,
+			$oldSiteLink->getBadges()
 		);
 
 		$summary = $this->getSummary( $siteId, $oldPage, $newPageNormalized );
