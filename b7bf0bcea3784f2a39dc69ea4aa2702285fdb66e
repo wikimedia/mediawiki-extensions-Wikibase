@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_9569ce1f",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-09-28T19:13:46Z",
+      "side": 1,
+      "message": "unwanted tab here!",
+      "revId": "b7bf0bcea3784f2a39dc69ea4aa2702285fdb66e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_355ec27c",
+        "filename": "repo/includes/api/ParseValue.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-09-28T19:13:46Z",
+      "side": 1,
+      "message": "examples should not use the full url, take a look in some of the other api classes at the url used in their examples!",
+      "revId": "b7bf0bcea3784f2a39dc69ea4aa2702285fdb66e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
