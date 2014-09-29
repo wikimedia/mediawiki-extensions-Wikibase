@@ -90,8 +90,6 @@ return call_user_func( function() {
 		'wikibase.serialization.EntitySerializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'EntitySerializer.js',
-				'EntitySerializer.itemExpert.js',
-				'EntitySerializer.propertyExpert.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
@@ -99,9 +97,8 @@ return call_user_func( function() {
 				'wikibase.datamodel.Item',
 				'wikibase.datamodel.Property',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.FingerprintSerializer',
-				'wikibase.serialization.SiteLinkSetSerializer',
-				'wikibase.serialization.StatementGroupSetSerializer',
+				'wikibase.serialization.ItemSerializer',
+				'wikibase.serialization.PropertySerializer',
 				'wikibase.serialization.Serializer',
 			),
 		),
@@ -161,7 +158,7 @@ return call_user_func( function() {
 
 		'wikibase.serialization.PropertySerializer' => $moduleTemplate + array(
 			'scripts' => array(
-				'ItemSerializer.js',
+				'PropertySerializer.js',
 			),
 			'dependencies' => array(
 				'util.inherit',

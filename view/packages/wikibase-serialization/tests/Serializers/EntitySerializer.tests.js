@@ -7,6 +7,34 @@
 
 QUnit.module( 'wikibase.serialization.EntitySerializer' );
 
+/**
+ * @constructor
+ * @extends {wikibase.serialization.Serializer}
+ */
+var MockEntitySerializer = util.inherit(
+	'WbMockEntitySerializer',
+	wb.serialization.Serializer,
+{
+	/**
+	 * @see wikibase.serialization.Serializer.serialize
+	 *
+	 * @param {MockEntity} mockEntity
+	 * @return {Object}
+	 */
+	serialize: function( mockEntity ) {
+		if( !( mockEntity instanceof wb.serialization.tests.MockEntity ) ) {
+			throw new Error( 'Not an instance of wikibase.datamodel.MockEntity' );
+		}
+
+		var fingerprintSerializer = new wb.serialization.FingerprintSerializer();
+
+		return $.extend( true, {
+			id: mockEntity.getId(),
+			type: 'mock'
+		}, fingerprintSerializer.serialize( mockEntity.getFingerprint() ) );
+	}
+} );
+
 var defaults = [
 	{
 		fingerprint: new wb.datamodel.Fingerprint(
@@ -89,6 +117,29 @@ QUnit.test( 'serialize()', function( assert ) {
 			'Test set #' + i + ': Serializing successful.'
 		);
 	}
+} );
+
+QUnit.test( 'registerStrategy()', function( assert ) {
+	var entitySerializer = new wb.serialization.EntitySerializer(),
+		mockEntity = new wb.serialization.tests.MockEntity( 'i am an id', defaults[0].fingerprint );
+
+	assert.throws(
+		function() {
+			entitySerializer.serialize( mockEntity );
+		},
+		'Throwing an error when trying to serialize an Entity no Serializer is registered for.'
+	);
+
+	entitySerializer.registerStrategy(
+		new MockEntitySerializer(),
+		wb.serialization.tests.MockEntity.TYPE
+	);
+
+	assert.deepEqual(
+		entitySerializer.serialize( mockEntity ),
+		( new MockEntitySerializer() ).serialize( mockEntity ),
+		'Serialized Entity after registering a proper Serializer.'
+	);
 } );
 
 }( jQuery, wikibase, QUnit ) );

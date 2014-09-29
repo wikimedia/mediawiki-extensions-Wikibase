@@ -1,88 +1,83 @@
 /**
  * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, util, $ ) {
+( function( wb, util ) {
 	'use strict';
 
-	var MODULE = wb.serialization,
-		PARENT = MODULE.Deserializer;
+var MODULE = wb.serialization,
+	PARENT = MODULE.Deserializer;
 
+/**
+ * @constructor
+ * @extends {wikibase.serialization.Deserializer}
+ * @since 1.0
+ */
+MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, function() {
+	this._strategies = [];
+	this.registerStrategy( new MODULE.ItemDeserializer(), wb.datamodel.Item.TYPE );
+	this.registerStrategy( new MODULE.PropertyDeserializer(), wb.datamodel.Property.TYPE );
+}, {
 	/**
-	 * Deserializers for specific entity types.
-	 * @type {Object}
+	 * @type {Object[]}
 	 */
-	var typeSpecificDeserializers = {};
+	_strategies: null,
 
 	/**
-	 * Deserializer for Entity objects.
-	 * @constructor
-	 * @extends {wikibase.serialization.Deserializer}
-	 * @since 1.0
-	 */
-	var SELF = MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, {
-		/**
-		 * @see wb.serialization.Deserializer.deserialize
-		 *
-		 * @return {wikibase.datamodel.Entity}
-		 */
-		deserialize: function( serialization ) {
-			var entityType = serialization.type;
-
-			if( !entityType || typeof entityType !== 'string' ) {
-				throw new Error( 'Can not determine type of Entity from serialized object' );
-			}
-
-			var typeSpecificDeserializer = typeSpecificDeserializers[entityType],
-				typeSpecificData = {},
-				fingerprintDeserializer = new MODULE.FingerprintDeserializer(),
-				fingerprint = fingerprintDeserializer.deserialize( serialization ),
-				statementGroupSetDeserializer = new MODULE.StatementGroupSetDeserializer(),
-				statementGroupSet = statementGroupSetDeserializer.deserialize(
-					serialization.claims
-				);
-
-			// extend map with data which is specific to the entity type if there is handling for
-			// the entity type we are dealing with:
-			if( typeSpecificDeserializer ) {
-				typeSpecificData = typeSpecificDeserializer.deserialize( serialization );
-			}
-
-			// TODO: Implement dedicated Deserializers and proper strategy
-			if( entityType === 'property' ) {
-				return new wb.datamodel.Property(
-					serialization.id,
-					typeSpecificData.datatype,
-					fingerprint,
-					statementGroupSet
-				);
-			} else if( entityType === 'item' ) {
-				return new wb.datamodel.Item(
-					serialization.id,
-					fingerprint,
-					statementGroupSet,
-					typeSpecificData
-				);
-			}
-
-			throw new Error( 'Deserializing entity type "' + entityType + '" is not supported' );
-		}
-	} );
-
-	/**
-	 * Allows registering individual deserialization logic for entities per entity type.
-	 * The returned object is supposed to contain the data which is specific for the handled type
-	 * of entity compared to the generic entity. The keys of the returned object should be what
-	 * wikibase.datamodel.Entity.newFromMap requires to create a new Entity of the specific type.
-	 *
-	 * @since 1.0
-	 *
+	 * @param {wikibase.serialization.Deserializer} deserializer
 	 * @param {string} entityType
-	 * @param {Function} TypeSpecificDeserializer
 	 */
-	SELF.registerTypeSpecificExpert = function( entityType, TypeSpecificDeserializer ) {
-		// For performance, just one instance is created.
-		typeSpecificDeserializers[ entityType ] = new TypeSpecificDeserializer();
-	};
+	registerStrategy: function( deserializer, entityType ) {
+		if( this._hasStrategyFor( entityType ) ) {
+			throw new Error( 'Deserializer for entity type "' + entityType
+				+ '" is registered already' );
+		}
 
-}( wikibase, util, jQuery ) );
+		this._strategies.push( {
+			entityType: entityType,
+			deserializer: deserializer
+		} );
+	},
+
+	/**
+	 * @param {string} entityType
+	 * @return {boolean}
+	 */
+	_hasStrategyFor: function( entityType ) {
+		for( var i = 0; i < this._strategies.length; i++ ) {
+			if( entityType === this._strategies[i].entityType ) {
+				return true;
+			}
+		}
+		return false;
+	},
+
+	/**
+	 * @param {string} entityType
+	 * @return {wikibase.serialization.Deserializer}
+	 */
+	_getStrategyFor: function( entityType ) {
+		for( var i = 0; i < this._strategies.length; i++ ) {
+			if( entityType === this._strategies[i].entityType ) {
+				return this._strategies[i].deserializer;
+			}
+		}
+
+		throw new Error( 'Deserializing entity type "' + entityType + '" is not supported' );
+	},
+
+	/**
+	 * @see wikibase.serialization.Deserializer.deserialize
+	 *
+	 * @return {wikibase.datamodel.Entity}
+	 */
+	deserialize: function( serialization ) {
+		if( !serialization.type || typeof serialization.type !== 'string' ) {
+			throw new Error( 'Can not determine type of Entity from serialized object' );
+		}
+
+		return this._getStrategyFor( serialization.type ).deserialize( serialization );
+	}
+} );
+
+}( wikibase, util ) );

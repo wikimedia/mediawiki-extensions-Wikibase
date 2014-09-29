@@ -7,6 +7,33 @@
 
 QUnit.module( 'wikibase.serialization.EntityDeserializer' );
 
+/**
+ * @constructor
+ * @extends {wikibase.serialization.Deserializer}
+ */
+var MockEntityDeserializer = util.inherit(
+	'WbMockEntityDeserializer',
+	wb.serialization.Deserializer,
+{
+	/**
+	 * @see wikibase.serialization.Deserializer.deserialize
+	 *
+	 * @return {MockEntity}
+	 */
+	deserialize: function( serialization ) {
+		if( serialization.type !== wb.serialization.tests.MockEntity.TYPE ) {
+			throw new Error( 'Serialization does not resolve to a MockEntity' );
+		}
+
+		var fingerprintDeserializer = new wb.serialization.FingerprintDeserializer();
+
+		return new wb.serialization.tests.MockEntity(
+			serialization.id,
+			fingerprintDeserializer.deserialize( serialization )
+		);
+	}
+} );
+
 var defaults = [
 	{
 		fingerprint: {
@@ -88,6 +115,34 @@ QUnit.test( 'deserialize()', function( assert ) {
 			'Test set #' + i + ': Deserializing successful.'
 		);
 	}
+} );
+
+QUnit.test( 'registerStrategy()', function( assert ) {
+	var entityDeserializer = new wb.serialization.EntityDeserializer();
+
+	var mockEntitySerialization = $.extend( true, {
+		id: 'i am an id',
+		type: 'mock'
+	}, defaults[0].fingerprint );
+
+	assert.throws(
+		function() {
+			entityDeserializer.deserialize( mockEntitySerialization );
+		},
+		'Throwing an error when trying to deserialize an Entity no Deserializer is registered for.'
+	);
+
+	entityDeserializer.registerStrategy(
+		new MockEntityDeserializer(),
+		wb.serialization.tests.MockEntity.TYPE
+	);
+
+	var mockEntity = entityDeserializer.deserialize( mockEntitySerialization );
+
+	assert.ok(
+		mockEntity instanceof wb.serialization.tests.MockEntity,
+		'Deserialized Entity after registering a proper Deserializer.'
+	);
 } );
 
 }( jQuery, wikibase, QUnit ) );

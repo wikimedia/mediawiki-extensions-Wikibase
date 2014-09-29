@@ -33,6 +33,17 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.MockEntity' => $moduleTemplate + array(
+			'scripts' => array(
+				'MockEntity.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.Entity',
+				'wikibase.serialization',
+			),
+		),
+
 		'wikibase.serialization.SerializerFactory.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'SerializerFactory.tests.js',

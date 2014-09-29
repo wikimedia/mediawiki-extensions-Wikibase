@@ -90,18 +90,15 @@ return call_user_func( function() {
 		'wikibase.serialization.EntityDeserializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'EntityDeserializer.js',
-				'EntityDeserializer.itemExpert.js',
-				'EntityDeserializer.propertyExpert.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
 				'wikibase.datamodel.Item',
 				'wikibase.datamodel.Property',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.FingerprintDeserializer',
-				'wikibase.serialization.SiteLinkSetDeserializer',
-				'wikibase.serialization.StatementGroupSetDeserializer',
 				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.ItemDeserializer',
+				'wikibase.serialization.PropertyDeserializer',
 			),
 		),
 

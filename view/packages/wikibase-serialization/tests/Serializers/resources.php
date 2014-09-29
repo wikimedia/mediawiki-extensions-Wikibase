@@ -104,6 +104,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Term',
 				'wikibase.datamodel.TermSet',
 				'wikibase.serialization.EntitySerializer',
+				'wikibase.serialization.MockEntity',
 			),
 		),
 
@@ -168,7 +169,7 @@ return call_user_func( function() {
 
 		'wikibase.serialization.PropertySerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'EntitySerializer.tests.js',
+				'PropertySerializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
