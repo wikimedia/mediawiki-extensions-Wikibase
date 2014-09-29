@@ -44,6 +44,21 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.MockEntity.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'MockEntity.tests.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.Fingerprint',
+				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.MultiTermSet',
+				'wikibase.datamodel.Term',
+				'wikibase.datamodel.TermSet',
+				'wikibase.serialization.MockEntity',
+			),
+		),
+
 		'wikibase.serialization.SerializerFactory.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'SerializerFactory.tests.js',
