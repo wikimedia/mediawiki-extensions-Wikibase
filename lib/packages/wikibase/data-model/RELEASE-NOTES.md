@@ -1,17 +1,18 @@
 # Wikibase DataModel release notes
 
-## Version 1.1 (dev)
+## Version 1.1 (2014-09-29)
 
 #### Additions
 
 * The `Property` constructor now accepts an optional `StatementList` parameter
 * Added `Property::getStatements` and `Property::setStatements`
-* Added `StatementList::getAllSnaks` to use instead of `Entity::getAllSnaks`
-* The `Statement` constructor now also accepts a `Claim` parameter
-* Added `Statement::setClaim`
 * Added `PropertyIdProvider` interface
 * Added `ByPropertyIdGrouper`
 * Added `BestStatementsFinder`
+* Added `EntityPatcher` and `EntityPatcherStrategy`
+* Added `StatementList::getAllSnaks` to use instead of `Entity::getAllSnaks`
+* The `Statement` constructor now also accepts a `Claim` parameter
+* Added `Statement::setClaim`
 * The `Reference` constructor now accepts a `Snak` array
 * Added `ReferenceList::addNewReference`
 
