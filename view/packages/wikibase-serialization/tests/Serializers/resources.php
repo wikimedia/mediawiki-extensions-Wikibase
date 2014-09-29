@@ -209,6 +209,21 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.StatementGroupSetSerializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementGroupSetSerializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.StatementGroupSet',
+				'wikibase.datamodel.StatementList',
+				'wikibase.serialization.StatementGroupSetSerializer',
+			),
+		),
+
 		'wikibase.serialization.StatementListSerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'StatementListSerializer.tests.js',

@@ -185,6 +185,21 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.StatementGroupSetUnserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementGroupSetUnserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.StatementGroupSet',
+				'wikibase.datamodel.StatementList',
+				'wikibase.serialization.StatementGroupSetUnserializer',
+			),
+		),
+
 		'wikibase.serialization.StatementGroupUnserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'StatementGroupUnserializer.tests.js',

@@ -43,7 +43,7 @@ QUnit.test( 'unserialize()', function( assert ) {
 		},
 		'Unable to unserialize an empty array since there is no way to determine the property id '
 			+ 'statements shall be grouped with.'
-	)
+	);
 } );
 
 }( wikibase, QUnit ) );
