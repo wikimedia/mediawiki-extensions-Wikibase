@@ -61,9 +61,7 @@ class ItemDifferTest extends \PHPUnit_Framework_TestCase {
 		$firstItem = Item::newEmpty();
 
 		$secondItem = Item::newEmpty();
-		$statement = new Statement( new PropertySomeValueSnak( 42 ) );
-		$statement->setGuid( 'kittens' );
-		$secondItem->addClaim( $statement );
+		$secondItem->getStatements()->addNewStatement( new PropertySomeValueSnak( 42 ), null, null, 'guid' );
 
 		$differ = new ItemDiffer();
 		$diff = $differ->diffItems( $firstItem, $secondItem );
