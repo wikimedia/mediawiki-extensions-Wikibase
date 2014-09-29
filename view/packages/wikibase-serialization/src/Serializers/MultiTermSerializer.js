@@ -9,8 +9,6 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Serializer;
 
 /**
- * Serializer for MultiTerm objects.
- *
  * @constructor
  * @extends wikibase.serialization.Serializer
  * @since 2.0

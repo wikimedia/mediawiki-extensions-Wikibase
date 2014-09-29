@@ -10,8 +10,6 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
- * Deserializer for single Claims.
- *
  * @constructor
  * @extends wikibase.serialization.Deserializer
  * @since 2.0

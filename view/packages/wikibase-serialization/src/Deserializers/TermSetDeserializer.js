@@ -8,8 +8,7 @@
 var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
-/* Deserializer for TermSet objects.
- *
+/**
  * @constructor
  * @extends wikibase.serialization.Deserializer
  * @since 2.0

@@ -9,8 +9,6 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
- * Deserializer for SiteLink objects.
- *
  * @constructor
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
