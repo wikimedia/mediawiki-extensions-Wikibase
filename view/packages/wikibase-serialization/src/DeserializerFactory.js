@@ -1,7 +1,6 @@
 /**
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
- * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 ( function( wb, $ ) {
 	'use strict';
@@ -13,20 +12,39 @@ var MODULE = wb.serialization;
  * @constructor
  * @since 2.0
  */
-var SELF = MODULE.DeserializerFactory = function wbDeserializerFactory() {};
+var SELF = MODULE.DeserializerFactory = function wbDeserializerFactory() {
+	this._strategyProvider = new MODULE.StrategyProvider();
 
-/**
- * Array of arrays where the inner arrays holds two constructors. The first one the constructor a
- * deserializer's output should be the instance of and the second one the actual deserializer.
- * @type {Array[]}
- */
-var store = [];
+	this.registerDeserializer( MODULE.ClaimDeserializer, wb.datamodel.Claim );
+	this.registerDeserializer( MODULE.ClaimGroupDeserializer, wb.datamodel.ClaimGroup );
+	this.registerDeserializer( MODULE.ClaimGroupSetDeserializer, wb.datamodel.ClaimGroupSet );
+	this.registerDeserializer( MODULE.ClaimListDeserializer, wb.datamodel.ClaimList );
+	this.registerDeserializer( MODULE.EntityDeserializer, wb.datamodel.Entity );
+	this.registerDeserializer( MODULE.EntityIdDeserializer, wb.datamodel.EntityId );
+	this.registerDeserializer( MODULE.FingerprintDeserializer, wb.datamodel.Fingerprint );
+	this.registerDeserializer( MODULE.MultiTermDeserializer, wb.datamodel.MultiTerm );
+	this.registerDeserializer( MODULE.MultiTermSetDeserializer, wb.datamodel.MultiTermSet );
+	this.registerDeserializer( MODULE.ReferenceDeserializer, wb.datamodel.Reference );
+	this.registerDeserializer( MODULE.ReferenceListDeserializer, wb.datamodel.ReferenceList );
+	this.registerDeserializer( MODULE.SiteLinkDeserializer, wb.datamodel.SiteLink );
+	this.registerDeserializer( MODULE.SiteLinkSetDeserializer, wb.datamodel.SiteLinkSet );
+	this.registerDeserializer( MODULE.SnakDeserializer, wb.datamodel.Snak );
+	this.registerDeserializer( MODULE.SnakListDeserializer, wb.datamodel.SnakList );
+	this.registerDeserializer( MODULE.StatementDeserializer, wb.datamodel.Statement );
+	this.registerDeserializer( MODULE.StatementGroupDeserializer, wb.datamodel.StatementGroup );
+	this.registerDeserializer( MODULE.StatementGroupSetDeserializer, wb.datamodel.StatementGroupSet );
+	this.registerDeserializer( MODULE.StatementListDeserializer, wb.datamodel.StatementList );
+	this.registerDeserializer( MODULE.TermDeserializer, wb.datamodel.Term );
+	this.registerDeserializer( MODULE.TermSetDeserializer, wb.datamodel.TermSet );
+};
 
 $.extend( SELF.prototype, {
 	/**
-	 * Returns a new deserializer object suitable for deserializing some data into an instance of
-	 * a specific constructor.
-	 *
+	 * @type {wikibase.serialization.StrategyProvider}
+	 */
+	_strategyProvider: null,
+
+	/**
 	 * @param {Function} Constructor
 	 * @return {wikibase.serialization.Deserializer}
 	 */
@@ -35,31 +53,22 @@ $.extend( SELF.prototype, {
 			throw new Error( 'No proper constructor provided for choosing a Deserializer' );
 		}
 
-		for( var i = 0; i < store.length; i++ ) {
-			if( store[i][0] === Constructor ) {
-				return new store[i][1]();
-			}
-		}
+		return new ( this._strategyProvider.getStrategyFor( Constructor ) )();
+	},
 
-		throw new Error( 'No suitable Deserializer registered' );
+	/**
+	 * @param {Function} Deserializer
+	 * @param {Function} Constructor
+	 */
+	registerDeserializer: function( Deserializer, Constructor ) {
+		if( !$.isFunction( Constructor ) ) {
+			throw new Error( 'No constructor (function) provided' );
+		} else if( !( ( new Deserializer() ) instanceof MODULE.Deserializer ) ) {
+			throw new Error( 'Given Deserializer is not an implementation of '
+				+ 'wb.serialization.Deserializer' );
+		}
+		this._strategyProvider.registerStrategy( Deserializer, Constructor );
 	}
 } );
-
-/**
- * Registers a deserializer for objects of a specific constructor.
- *
- * @param {Function} Deserializer
- * @param {Function} Constructor
- */
-SELF.registerDeserializer = function( Deserializer, Constructor ) {
-	if( !$.isFunction( Constructor ) ) {
-		throw new Error( 'No constructor (function) provided' );
-	} else if( !( ( new Deserializer() ) instanceof MODULE.Deserializer ) ) {
-		throw new Error( 'Given Deserializer is not an implementation of '
-			+ 'wb.serialization.Deserializer' );
-	}
-
-	store.push( [Constructor, Deserializer] );
-};
 
 }( wikibase, jQuery ) );

@@ -23,7 +23,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {*} strategy
-	 * @param {string} key
+	 * @param {*} key
 	 */
 	registerStrategy: function( strategy, key ) {
 		if( this._hasStrategyFor( key ) ) {
@@ -37,7 +37,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {string} key
+	 * @param {*} key
 	 * @return {boolean}
 	 */
 	_hasStrategyFor: function( key ) {
@@ -50,7 +50,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {string} key
+	 * @param {*} key
 	 * @return {*}
 	 */
 	getStrategyFor: function( key ) {

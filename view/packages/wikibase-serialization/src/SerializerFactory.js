@@ -1,6 +1,5 @@
 /**
  * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
 ( function( wb, $ ) {
@@ -10,63 +9,74 @@ var MODULE = wb.serialization;
 
 /**
  * Factory for creating serializers specific to certain objects, e.g. of the Wikibase data model.
- *
  * @constructor
  * @since 1.0
  */
-var SELF = MODULE.SerializerFactory = function wbSerializerFactory() {};
+var SELF = MODULE.SerializerFactory = function WbSerializerProvider() {
+	this._strategyProvider = new MODULE.StrategyProvider();
 
-/**
- * Array of arrays where the inner arrays holds two constructors. The first one the constructor
- * a serializer's output should be the instance of and the second one the actual serializer.
- * @type {Array[]}
- */
-var store = [];
+	this.registerSerializer( MODULE.ClaimGroupSerializer, wb.datamodel.ClaimGroup );
+	this.registerSerializer( MODULE.ClaimGroupSetSerializer, wb.datamodel.ClaimGroupSet );
+	this.registerSerializer( MODULE.ClaimListSerializer, wb.datamodel.ClaimList );
+	this.registerSerializer( MODULE.ClaimSerializer, wb.datamodel.Claim );
+	this.registerSerializer( MODULE.EntityIdSerializer, wb.datamodel.EntityId );
+	this.registerSerializer( MODULE.EntitySerializer, wb.datamodel.Entity );
+	this.registerSerializer( MODULE.FingerprintSerializer, wb.datamodel.Fingerprint );
+	this.registerSerializer( MODULE.MultiTermSerializer, wb.datamodel.MultiTerm );
+	this.registerSerializer( MODULE.MultiTermSetSerializer, wb.datamodel.MultiTermSet );
+	this.registerSerializer( MODULE.ReferenceListSerializer, wb.datamodel.ReferenceList );
+	this.registerSerializer( MODULE.ReferenceSerializer, wb.datamodel.Reference );
+	this.registerSerializer( MODULE.SiteLinkSerializer, wb.datamodel.SiteLink );
+	this.registerSerializer( MODULE.SiteLinkSetSerializer, wb.datamodel.SiteLinkSet );
+	this.registerSerializer( MODULE.SnakListSerializer, wb.datamodel.SnakList );
+	this.registerSerializer( MODULE.SnakSerializer, wb.datamodel.Snak );
+	this.registerSerializer( MODULE.StatementGroupSerializer, wb.datamodel.StatementGroup );
+	this.registerSerializer( MODULE.StatementGroupSetSerializer, wb.datamodel.StatementGroupSet );
+	this.registerSerializer( MODULE.StatementListSerializer, wb.datamodel.StatementList );
+	this.registerSerializer( MODULE.StatementSerializer, wb.datamodel.Statement );
+	this.registerSerializer( MODULE.TermSerializer, wb.datamodel.Term );
+	this.registerSerializer( MODULE.TermSetSerializer, wb.datamodel.TermSet );
+};
 
 $.extend( SELF.prototype, {
 	/**
-	 * Returns a new serializer object suitable for serializing a specific object or a specific
-	 * constructor's instances.
-	 *
-	 * @param {Object|Function} object
+	 * @type {wikibase.serialization.StrategyProvider}
+	 */
+	_strategyProvider: null,
+
+	/**
+	 * @param {Object|Function} objectOrConstructor
 	 * @return {wikibase.serialization.Serializer}
 	 */
-	newSerializerFor: function( object ) {
-		if( !object ) {
+	newSerializerFor: function( objectOrConstructor ) {
+		if( !objectOrConstructor ) {
 			throw new Error( 'Constructor or object expected' );
 		}
 
-		var Constructor = $.isFunction( object ) ? object : object.constructor;
+		var Constructor = $.isFunction( objectOrConstructor )
+			? objectOrConstructor
+			: objectOrConstructor.constructor;
 
 		if( !$.isFunction( Constructor ) ) {
 			throw new Error( 'No proper constructor provided for choosing a Serializer' );
 		}
 
-		for( var i = 0; i < store.length; i++ ) {
-			if( store[i][0] === Constructor ) {
-				return new store[i][1]();
-			}
-		}
+		return new ( this._strategyProvider.getStrategyFor( Constructor ) )();
+	},
 
-		throw new Error( 'No suitable Serializer registered' );
+	/**
+	 * @param {Function} Serializer
+	 * @param {Function} Constructor
+	 */
+	registerSerializer: function( Serializer, Constructor ) {
+		if( !$.isFunction( Constructor ) ) {
+			throw new Error( 'No constructor (function) provided' );
+		} else if( !( ( new Serializer() ) instanceof MODULE.Serializer ) ) {
+			throw new Error( 'Given Serializer is not an implementation of '
+				+ 'wb.serialization.Serializer' );
+		}
+		this._strategyProvider.registerStrategy( Serializer, Constructor );
 	}
 } );
-
-/**
- * Registers a serializer for objects of a specific constructor.
- *
- * @param {Function} Serializer
- * @param {Function} Constructor
- */
-SELF.registerSerializer = function( Serializer, Constructor ) {
-	if( !$.isFunction( Constructor ) ) {
-		throw new Error( 'No constructor (function) provided' );
-	} else if( !( ( new Serializer() ) instanceof MODULE.Serializer ) ) {
-		throw new Error( 'Given Serializer is not an implementation of '
-			+ 'wb.serialization.Serializer' );
-	}
-
-	store.push( [Constructor, Serializer] );
-};
 
 }( wikibase, jQuery ) );

@@ -7,10 +7,9 @@
 
 QUnit.module( 'wikibase.serialization.DeserializerFactory' );
 
-var DeserializerFactory = wb.serialization.DeserializerFactory,
-	deserializerFactory = new wb.serialization.DeserializerFactory();
-
 QUnit.test( 'registerDeserializer(), newDeserializerFor()', function( assert ) {
+	var deserializerFactory = new wb.serialization.DeserializerFactory();
+
 	var testSets = [
 		{
 			Constructor: function Constructor1() {},
@@ -23,20 +22,20 @@ QUnit.test( 'registerDeserializer(), newDeserializerFor()', function( assert ) {
 
 	assert.throws(
 		function() {
-			DeserializerFactory.registerDeserializer( testSets[0].Deserializer );
+			deserializerFactory.registerDeserializer( testSets[0].Deserializer );
 		},
 		'Throwing error when omitting constructor a Deserializer should be registered for.'
 	);
 
 	assert.throws(
 		function() {
-			DeserializerFactory.registerDeserializer( function() {}, testSets[0].Constructor );
+			deserializerFactory.registerDeserializer( function() {}, testSets[0].Constructor );
 		},
 		'Throwing error when Deserializer is not deriving from Deserializer base constructor.'
 	);
 
-	DeserializerFactory.registerDeserializer( testSets[0].Deserializer, testSets[0].Constructor );
-	DeserializerFactory.registerDeserializer( testSets[1].Deserializer, testSets[1].Constructor );
+	deserializerFactory.registerDeserializer( testSets[0].Deserializer, testSets[0].Constructor );
+	deserializerFactory.registerDeserializer( testSets[1].Deserializer, testSets[1].Constructor );
 
 	assert.ok(
 		deserializerFactory.newDeserializerFor( testSets[0].Constructor ).constructor

@@ -8,10 +8,9 @@
 
 QUnit.module( 'wikibase.serialization.SerializerFactory' );
 
-var SerializerFactory = wb.serialization.SerializerFactory,
-	serializerFactory = new SerializerFactory();
-
 QUnit.test( 'registerSerializer(), newSerializerFor()', function( assert ) {
+	var serializerFactory = new wb.serialization.SerializerFactory();
+
 	var testSets = [
 		{
 			Constructor: function Constructor1() {},
@@ -24,20 +23,20 @@ QUnit.test( 'registerSerializer(), newSerializerFor()', function( assert ) {
 
 	assert.throws(
 		function() {
-			SerializerFactory.registerSerializer( testSets[0].Serializer );
+			serializerFactory.registerSerializer( testSets[0].Serializer );
 		},
 		'Throwing error when omitting constructor a Serializer should be registered for.'
 	);
 
 	assert.throws(
 		function() {
-			SerializerFactory.registerSerializer( function() {}, testSets[0].Constructor );
+			serializerFactory.registerSerializer( function() {}, testSets[0].Constructor );
 		},
 		'Throwing error when Serializer is not deriving from Serializer base constructor.'
 	);
 
-	SerializerFactory.registerSerializer( testSets[0].Serializer, testSets[0].Constructor );
-	SerializerFactory.registerSerializer( testSets[1].Serializer, testSets[1].Constructor );
+	serializerFactory.registerSerializer( testSets[0].Serializer, testSets[0].Constructor );
+	serializerFactory.registerSerializer( testSets[1].Serializer, testSets[1].Constructor );
 
 	assert.ok(
 		serializerFactory.newSerializerFor( testSets[0].Constructor ).constructor
