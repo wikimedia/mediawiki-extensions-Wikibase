@@ -22,6 +22,20 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'wikibase.serialization.ClaimGroupSetUnserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'ClaimGroupSetUnserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.ClaimGroup',
+				'wikibase.datamodel.ClaimGroupSet',
+				'wikibase.datamodel.ClaimList',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.serialization.ClaimGroupSetUnserializer',
+			),
+		),
+
 		'wikibase.serialization.ClaimGroupUnserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'ClaimGroupUnserializer.tests.js',

@@ -35,6 +35,20 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.ClaimGroupSetSerializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'ClaimGroupSetSerializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.ClaimGroup',
+				'wikibase.datamodel.ClaimGroupSet',
+				'wikibase.datamodel.ClaimList',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.serialization.ClaimGroupSetSerializer',
+			),
+		),
+
 		'wikibase.serialization.ClaimListSerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'ClaimListSerializer.tests.js',
