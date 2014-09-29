@@ -34,16 +34,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.serialization.ClaimsSerializer.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'ClaimsSerializer.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel',
-				'wikibase.serialization.ClaimsSerializer',
-			),
-		),
-
 		'wikibase.serialization.ClaimSerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'ClaimSerializer.tests.js',
