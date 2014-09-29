@@ -126,6 +126,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.StrategyProvider' => $moduleTemplate + array(
+			'scripts' => array(
+				'StrategyProvider.js',
+			),
+			'dependencies' => array(
+				'wikibase.serialization.__namespace',
+			),
+		),
+
 	);
 
 	return array_merge(

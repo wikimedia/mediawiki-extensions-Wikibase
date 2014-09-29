@@ -59,6 +59,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.StrategyProvider.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'StrategyProvider.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.serialization.StrategyProvider',
+			),
+		),
+
 		'wikibase.serialization.tests.__namespace' => $moduleTemplate + array(
 			'scripts' => array(
 				'__namespace.js',

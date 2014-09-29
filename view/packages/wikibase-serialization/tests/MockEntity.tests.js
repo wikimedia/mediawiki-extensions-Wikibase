@@ -5,7 +5,7 @@
 ( function( wb, QUnit ) {
 	'use strict';
 
-QUnit.module( 'wikibase.serialization.tests.MockEntity' );
+QUnit.module( 'wikibase.serialization.MockEntity' );
 
 var testSets = [
 	[

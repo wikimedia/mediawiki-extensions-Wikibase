@@ -14,56 +14,25 @@ var MODULE = wb.serialization,
  * @since 1.0
  */
 MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, function() {
-	this._strategies = [];
-	this.registerStrategy( new MODULE.ItemDeserializer(), wb.datamodel.Item.TYPE );
-	this.registerStrategy( new MODULE.PropertyDeserializer(), wb.datamodel.Property.TYPE );
+	this._strategyProvider = new MODULE.StrategyProvider();
+	this._strategyProvider.registerStrategy(
+		new MODULE.ItemDeserializer(), wb.datamodel.Item.TYPE
+	);
+	this._strategyProvider.registerStrategy(
+		new MODULE.PropertyDeserializer(), wb.datamodel.Property.TYPE
+	);
 }, {
 	/**
-	 * @type {Object[]}
+	 * @type {wikibase.serialization.StrategyProvider}
 	 */
-	_strategies: null,
+	_strategyProvider: null,
 
-	/**
+		/**
 	 * @param {wikibase.serialization.Deserializer} deserializer
 	 * @param {string} entityType
 	 */
 	registerStrategy: function( deserializer, entityType ) {
-		if( this._hasStrategyFor( entityType ) ) {
-			throw new Error( 'Deserializer for entity type "' + entityType
-				+ '" is registered already' );
-		}
-
-		this._strategies.push( {
-			entityType: entityType,
-			deserializer: deserializer
-		} );
-	},
-
-	/**
-	 * @param {string} entityType
-	 * @return {boolean}
-	 */
-	_hasStrategyFor: function( entityType ) {
-		for( var i = 0; i < this._strategies.length; i++ ) {
-			if( entityType === this._strategies[i].entityType ) {
-				return true;
-			}
-		}
-		return false;
-	},
-
-	/**
-	 * @param {string} entityType
-	 * @return {wikibase.serialization.Deserializer}
-	 */
-	_getStrategyFor: function( entityType ) {
-		for( var i = 0; i < this._strategies.length; i++ ) {
-			if( entityType === this._strategies[i].entityType ) {
-				return this._strategies[i].deserializer;
-			}
-		}
-
-		throw new Error( 'Deserializing entity type "' + entityType + '" is not supported' );
+		this._strategyProvider.registerStrategy( deserializer, entityType );
 	},
 
 	/**
@@ -76,7 +45,9 @@ MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, functi
 			throw new Error( 'Can not determine type of Entity from serialized object' );
 		}
 
-		return this._getStrategyFor( serialization.type ).deserialize( serialization );
+		return this._strategyProvider
+			.getStrategyFor( serialization.type )
+			.deserialize( serialization );
 	}
 } );
 

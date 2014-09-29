@@ -100,6 +100,7 @@ return call_user_func( function() {
 				'wikibase.serialization.ItemSerializer',
 				'wikibase.serialization.PropertySerializer',
 				'wikibase.serialization.Serializer',
+				'wikibase.serialization.StrategyProvider',
 			),
 		),
 

@@ -14,56 +14,25 @@ var MODULE = wb.serialization,
  * @since 2.0
  */
 MODULE.EntitySerializer = util.inherit( 'WbEntitySerializer', PARENT, function() {
-	this._strategies = [];
-	this.registerStrategy( new MODULE.ItemSerializer(), wb.datamodel.Item.TYPE );
-	this.registerStrategy( new MODULE.PropertySerializer(), wb.datamodel.Property.TYPE );
+	this._strategyProvider = new MODULE.StrategyProvider();
+	this._strategyProvider.registerStrategy(
+		new MODULE.ItemSerializer(), wb.datamodel.Item.TYPE
+	);
+	this._strategyProvider.registerStrategy(
+		new MODULE.PropertySerializer(), wb.datamodel.Property.TYPE
+	);
 }, {
 	/**
-	 * @type {Object[]}
+	 * @type {wikibase.serialization.StrategyProvider}
 	 */
-	_strategies: null,
+	_strategyProvider: null,
 
 	/**
 	 * @param {wikibase.serialization.Serializer} serializer
 	 * @param {string} entityType
 	 */
 	registerStrategy: function( serializer, entityType ) {
-		if( this._hasStrategyFor( entityType ) ) {
-			throw new Error( 'Serializer for entity type "' + entityType
-				+ '" is registered already' );
-		}
-
-		this._strategies.push( {
-			entityType: entityType,
-			serializer: serializer
-		} );
-	},
-
-	/**
-	 * @param {string} entityType
-	 * @return {boolean}
-	 */
-	_hasStrategyFor: function( entityType ) {
-		for( var i = 0; i < this._strategies.length; i++ ) {
-			if( entityType === this._strategies[i].entityType ) {
-				return true;
-			}
-		}
-		return false;
-	},
-
-	/**
-	 * @param {string} entityType
-	 * @return {wikibase.serialization.Serializer}
-	 */
-	_getStrategy: function( entityType ) {
-		for( var i = 0; i < this._strategies.length; i++ ) {
-			if( entityType === this._strategies[i].entityType ) {
-				return this._strategies[i].serializer;
-			}
-		}
-
-		throw new Error( 'Serializing entity type "' + entityType + '" is not supported' );
+		this._strategyProvider.registerStrategy( serializer, entityType );
 	},
 
 	/**
@@ -77,7 +46,7 @@ MODULE.EntitySerializer = util.inherit( 'WbEntitySerializer', PARENT, function()
 			throw new Error( 'Not an instance of wikibase.datamodel.Entity' );
 		}
 
-		return this._getStrategy( entity.getType() ).serialize( entity );
+		return this._strategyProvider.getStrategyFor( entity.getType() ).serialize( entity );
 	}
 } );
 

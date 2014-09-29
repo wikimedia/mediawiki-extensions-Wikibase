@@ -99,6 +99,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.ItemDeserializer',
 				'wikibase.serialization.PropertyDeserializer',
+				'wikibase.serialization.StrategyProvider',
 			),
 		),
 
