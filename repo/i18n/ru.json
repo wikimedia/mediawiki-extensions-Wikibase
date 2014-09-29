@@ -102,6 +102,7 @@
 	"wikibase-wikibaserepopage-invalid-langcode": "Неизвестный код языка «$1». Пожалуйста, используйте один из известных системе языковых кодов, например «ru».",
 	"wikibase-wikibaserepopage-invalid-id": "Системе неизвестен идентификатор «$1». Пожалуйста, используйте один из существующих идентификаторов.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 является перенаправлением.",
+	"wikibase-wikibaserepopage-storage-exception": "Произошла ошибка при попытке загрузить $1: $2.",
 	"special-itembytitle": "Элементы по заголовку",
 	"wikibase-itembytitle-lookup-fieldset": "Искать элементы по сайту и заголовку",
 	"wikibase-itembytitle-lookup-site": "Сайт:",
@@ -334,6 +335,7 @@
 	"content-model-wikibase-query": "Запрос Wikibase",
 	"right-item-term": "Изменять термины элементов (метки, описания, псевдонимы)",
 	"right-item-merge": "Объединить элементы",
+	"right-item-redirect": "Создание перенаправлений для элементов",
 	"right-property-term": "Изменять термины свойств (метки, описания, псевдонимы)",
 	"right-property-create": "создание свойств"
 }

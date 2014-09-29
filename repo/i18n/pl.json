@@ -12,7 +12,8 @@
 			"Vivaelcelta",
 			"WTM",
 			"Wizardist",
-			"Alan ffm"
+			"Alan ffm",
+			"Darellur"
 		]
 	},
 	"wikibase-desc": "Repozytorium danych strukturalnych",
@@ -41,9 +42,11 @@
 	"wikibase-statements": "Deklaracje",
 	"wikibase-attributes": "Atrybuty",
 	"wikibase-terms": "W innych językach",
+	"wikibase-sitelinkgroupview-input-help-message": "Dodaj link do strony, określając stronę i podstronę, edytując lub usuwając istniejące linki.",
 	"wikibase-sitelinks-empty": "Brak strony powiązanej z tym elementem.",
 	"wikibase-sitelinks-input-help-message": "Podaj link do strony związanej z tym elementem.",
 	"wikibase-sitelinks-special": "Strony innych projektów powiązane z tym elementem",
+	"wikibase-badgeselector-badge-placeholder-title": "Kliknij, aby przypisać ikonę.",
 	"wikibase-remove": "usuń",
 	"wikibase-move-up": "przenieś w górę",
 	"wikibase-move-down": "przenieś w dół",

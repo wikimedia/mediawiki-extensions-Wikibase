@@ -55,5 +55,6 @@
 	"wikibase-pageinfo-entity-id": "{{grammar:genitive|{{WBREPONAME}}}} ელემენტის ID",
 	"wikibase-pageinfo-entity-id-none": "არაფერი",
 	"wikibase-otherprojects": "სხვა პროექტები",
-	"wikibase-otherprojects-beta-message": "სხვა პროექტების გვერდითი პანელი"
+	"wikibase-otherprojects-beta-message": "სხვა პროექტების გვერდითი პანელი",
+	"wikibase-otherprojects-beta-description": "გვერდით პანელზე ამატებს განყოფილებას „{{int:wikibase-otherprojects}}“, რომელიც შეიცავს ფონდ ვიკიმედიის სხვა პროექტების ბმულებს Wikidata-ის მონაცემების საფუძველზე."
 }
