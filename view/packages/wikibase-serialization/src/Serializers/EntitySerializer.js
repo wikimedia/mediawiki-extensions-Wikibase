@@ -47,7 +47,6 @@
 			);
 
 			if( typeSpecificSerializer ) {
-				typeSpecificSerializer.setOptions( this._options );
 				var typeSpecificSerialization = typeSpecificSerializer.serialize( entity );
 
 				$.extend( serialization, typeSpecificSerialization );
@@ -64,7 +63,7 @@
 	 * @param {Function} TypeSpecificSerializer
 	 */
 	SELF.registerTypeSpecificExpert = function( entityType, TypeSpecificSerializer ) {
-		// Just create one instance and change options whenever used:
+		// Just create one instance:
 		typeSpecificSerializers[entityType] = new TypeSpecificSerializer();
 	};
 

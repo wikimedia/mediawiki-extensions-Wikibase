@@ -45,7 +45,6 @@
 			// extend map with data which is specific to the entity type if there is handling for
 			// the entity type we are dealing with:
 			if( typeSpecificDeserializer ) {
-				typeSpecificDeserializer.setOptions( this._options );
 				typeSpecificData = typeSpecificDeserializer.deserialize( serialization );
 			}
 
@@ -82,8 +81,7 @@
 	 * @param {Function} TypeSpecificDeserializer
 	 */
 	SELF.registerTypeSpecificExpert = function( entityType, TypeSpecificDeserializer ) {
-		// for performance, we just create one instance of that deserializer and change its
-		// options whenever we will use it
+		// For performance, just one instance is created.
 		typeSpecificDeserializers[ entityType ] = new TypeSpecificDeserializer();
 	};
 

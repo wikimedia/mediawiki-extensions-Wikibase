@@ -24,6 +24,7 @@ version 1.0 of this package:
 ### 2.0 (dev)
 
 * Removed <code>wikibase.serialization.entities</code> ResourceLoader module; use <code>wikibase.serialization.EntityDeserializer</code> instead.
+* Removed options from Serializer/Deserializer as it was never used and there is no intention to use options.
 * Renamed <code>*Unserializer</code> to <code>*Deserializer</code>.
 * Added <code>wikibase.serialization.ClaimGroupSetSerializer</code>.
 * Added <code>wikibase.serialization.ClaimGroupSetDeserializer</code>.
