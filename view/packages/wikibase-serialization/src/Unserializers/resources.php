@@ -221,6 +221,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.StatementGroupUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementGroupUnserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.StatementGroup',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.StatementListUnserializer',
+				'wikibase.serialization.Unserializer',
+			),
+		),
+
 		'wikibase.serialization.StatementListUnserializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'StatementListUnserializer.js',

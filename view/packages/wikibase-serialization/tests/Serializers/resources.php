@@ -195,6 +195,20 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.StatementGroupSerializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementGroupSerializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.StatementList',
+				'wikibase.serialization.StatementGroupSerializer',
+			),
+		),
+
 		'wikibase.serialization.StatementListSerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'StatementListSerializer.tests.js',

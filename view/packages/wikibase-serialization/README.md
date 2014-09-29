@@ -53,6 +53,8 @@ version 1.0 of this package:
 * Added <code>wikibase.serialization.SnakListUnserializer</code>.
 * Added <code>wikibase.serialization.SnakSerializer</code>.
 * Added <code>wikibase.serialization.SnakUnserializer</code>.
+* Added <code>wikibase.serialization.StatementGroupSerializer</code>.
+* Added <code>wikibase.serialization.StatementGroupUnserializer</code>.
 * Added <code>wikibase.serialization.StatementListSerializer</code>.
 * Added <code>wikibase.serialization.StatementListUnserializer</code>.
 * Added <code>wikibase.serialization.StatementSerializer</code>.
