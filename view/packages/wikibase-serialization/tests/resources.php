@@ -33,17 +33,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.serialization.MockEntity' => $moduleTemplate + array(
-			'scripts' => array(
-				'MockEntity.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.Entity',
-				'wikibase.serialization',
-			),
-		),
-
 		'wikibase.serialization.MockEntity.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'MockEntity.tests.js',
@@ -55,7 +44,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.MultiTermSet',
 				'wikibase.datamodel.Term',
 				'wikibase.datamodel.TermSet',
-				'wikibase.serialization.MockEntity',
+				'wikibase.serialization.tests.MockEntity',
 			),
 		),
 
@@ -67,6 +56,26 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.SerializerFactory',
+			),
+		),
+
+		'wikibase.serialization.tests.__namespace' => $moduleTemplate + array(
+			'scripts' => array(
+				'__namespace.js',
+			),
+			'dependencies' => array(
+				'wikibase.serialization.__namespace',
+			),
+		),
+
+		'wikibase.serialization.tests.MockEntity' => $moduleTemplate + array(
+			'scripts' => array(
+				'MockEntity.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.Entity',
+				'wikibase.serialization.tests.__namespace',
 			),
 		),
 

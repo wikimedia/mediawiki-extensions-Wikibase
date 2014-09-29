@@ -104,7 +104,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Term',
 				'wikibase.datamodel.TermSet',
 				'wikibase.serialization.EntitySerializer',
-				'wikibase.serialization.MockEntity',
+				'wikibase.serialization.tests.MockEntity',
 			),
 		),
 
