@@ -13,7 +13,8 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 		'[http://www.snater.com H. Snater]',
 	),
 	'url' => 'https://github.com/wmde/WikibaseSerializationJavaScript',
-	'description' => 'JavaScript library containing serializers and deserializers for the Wikibase DataModel.'
+	'description' => 'JavaScript library containing serializers and deserializers for the Wikibase DataModel.',
+	'license-name' => 'GPL-2.0+'
 );
 
 include 'resources.mw.php';
