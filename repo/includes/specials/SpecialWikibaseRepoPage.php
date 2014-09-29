@@ -46,7 +46,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * @var EntityTitleLookup
 	 */
-	private $titleLookup;
+	private $entityTitleLookup;
 
 	/**
 	 * @var EntityStore
@@ -73,13 +73,30 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		parent::__construct( $title, $restriction );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		//TODO: allow overriding services for testing
-		$this->summaryFormatter = $wikibaseRepo->getSummaryFormatter();
-		$this->entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
-		$this->titleLookup = $wikibaseRepo->getEntityTitleLookup();
-		$this->entityStore = $wikibaseRepo->getEntityStore();
-		$this->permissionChecker = $wikibaseRepo->getEntityPermissionChecker();
-		$this->siteStore = $wikibaseRepo->getSiteStore();
+		$this->setServices(
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getEntityStore(),
+			$wikibaseRepo->getEntityPermissionChecker(),
+			$wikibaseRepo->getSiteStore()
+		);
+	}
+
+	public function setServices(
+		SummaryFormatter $summaryFormatter,
+		EntityRevisionLookup $entityRevisionLookup,
+		EntityTitleLookup $entityTitleLookup,
+		EntityStore $entityStore,
+		EntityPermissionChecker $permissionChecker,
+		SiteStore $siteStore
+	) {
+		$this->summaryFormatter = $summaryFormatter;
+		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityStore = $entityStore;
+		$this->permissionChecker = $permissionChecker;
+		$this->siteStore = $siteStore;
 	}
 
 	/**
@@ -177,7 +194,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @return null|Title
 	 */
 	protected function getEntityTitle( EntityId $id ) {
-		return $this->titleLookup->getTitleForId( $id );
+		return $this->entityTitleLookup->getTitleForId( $id );
 	}
 
 	/**
@@ -193,7 +210,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 */
 	protected function saveEntity( Entity $entity, Summary $summary, $token, $flags = EDIT_UPDATE, $baseRev = false ) {
 		$editEntity = new EditEntity(
-			$this->titleLookup,
+			$this->entityTitleLookup,
 			$this->entityRevisionLookup,
 			$this->entityStore,
 			$this->permissionChecker,
