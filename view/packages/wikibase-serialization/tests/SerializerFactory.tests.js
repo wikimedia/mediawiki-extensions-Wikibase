@@ -75,61 +75,61 @@ QUnit.test( 'registerSerializer(), newSerializerFor()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'registerUnserializer(), newUnserializerFor()', function( assert ) {
+QUnit.test( 'registerDeserializer(), newDeserializerFor()', function( assert ) {
 	var testSets = [
 		{
 			Constructor: function Constructor1() {},
-			Unserializer: util.inherit( 'WbTestUnserializer1', wb.serialization.Unserializer, {} )
+			Deserializer: util.inherit( 'WbTestDeserializer1', wb.serialization.Deserializer, {} )
 		}, {
 			Constructor: function Constructor2() {},
-			Unserializer: util.inherit( 'WbTestUnserializer2', wb.serialization.Unserializer, {} )
+			Deserializer: util.inherit( 'WbTestDeserializer2', wb.serialization.Deserializer, {} )
 		}
 	];
 
 	assert.throws(
 		function() {
-			SerializerFactory.registerUnserializer( testSets[0].Unserializer );
+			SerializerFactory.registerDeserializer( testSets[0].Deserializer );
 		},
-		'Throwing error when omitting constructor an unserializer should be registered for.'
+		'Throwing error when omitting constructor a Deserializer should be registered for.'
 	);
 
 	assert.throws(
 		function() {
-			SerializerFactory.registerUnserializer( function() {}, testSets[0].Constructor );
+			SerializerFactory.registerDeserializer( function() {}, testSets[0].Constructor );
 		},
-		'Throwing error when unserializer is not deriving from Unserializer base constructor.'
+		'Throwing error when Deserializer is not deriving from Deserializer base constructor.'
 	);
 
-	SerializerFactory.registerUnserializer( testSets[0].Unserializer, testSets[0].Constructor );
-	SerializerFactory.registerUnserializer( testSets[1].Unserializer, testSets[1].Constructor );
+	SerializerFactory.registerDeserializer( testSets[0].Deserializer, testSets[0].Constructor );
+	SerializerFactory.registerDeserializer( testSets[1].Deserializer, testSets[1].Constructor );
 
 	assert.ok(
-		serializerFactory.newUnserializerFor( testSets[0].Constructor ).constructor
-			=== testSets[0].Unserializer,
-		'Retrieved unserializer.'
+		serializerFactory.newDeserializerFor( testSets[0].Constructor ).constructor
+			=== testSets[0].Deserializer,
+		'Retrieved Deserializer.'
 	);
 
 	var options = { someOption: 'someOption' },
-		unserializer = serializerFactory.newUnserializerFor( testSets[1].Constructor, options );
+		deserializer = serializerFactory.newDeserializerFor( testSets[1].Constructor, options );
 
 	assert.deepEqual(
-		unserializer.getOptions(),
+		deserializer.getOptions(),
 		options,
-		'Passed options on to unserializer.'
+		'Passed options on to Deserializer.'
 	);
 
 	assert.throws(
 		function() {
-			serializerFactory.newUnserializerFor( 'string' );
+			serializerFactory.newDeserializerFor( 'string' );
 		},
 		'Throwing error when not passing a valid parameter to newSerializerFor().'
 	);
 
 	assert.throws(
 		function() {
-			serializerFactory.newUnserializerFor( function() {} );
+			serializerFactory.newDeserializerFor( function() {} );
 		},
-		'Throwing error when no unserializer is registered for a constructor.'
+		'Throwing error when no Deserializer is registered for a constructor.'
 	);
 } );
 

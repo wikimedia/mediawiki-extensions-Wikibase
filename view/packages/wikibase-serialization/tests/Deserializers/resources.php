@@ -22,22 +22,9 @@ return call_user_func( function() {
 
 	$modules = array(
 
-		'wikibase.serialization.ClaimGroupSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.ClaimGroupSetDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'ClaimGroupSerializer.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel.Claim',
-				'wikibase.datamodel.ClaimGroup',
-				'wikibase.datamodel.ClaimList',
-				'wikibase.datamodel.PropertyNoValueSnak',
-				'wikibase.serialization.ClaimGroupSerializer',
-			),
-		),
-
-		'wikibase.serialization.ClaimGroupSetSerializer.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'ClaimGroupSetSerializer.tests.js',
+				'ClaimGroupSetDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
@@ -45,47 +32,70 @@ return call_user_func( function() {
 				'wikibase.datamodel.ClaimGroupSet',
 				'wikibase.datamodel.ClaimList',
 				'wikibase.datamodel.PropertyNoValueSnak',
-				'wikibase.serialization.ClaimGroupSetSerializer',
+				'wikibase.serialization.ClaimGroupSetDeserializer',
 			),
 		),
 
-		'wikibase.serialization.ClaimListSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.ClaimGroupDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'ClaimListSerializer.tests.js',
+				'ClaimGroupDeserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.ClaimGroup',
+				'wikibase.datamodel.ClaimList',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.serialization.ClaimGroupDeserializer',
+			),
+		),
+
+		'wikibase.serialization.ClaimListDeserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'ClaimListDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.ClaimList',
 				'wikibase.datamodel.PropertyNoValueSnak',
-				'wikibase.serialization.ClaimListSerializer',
+				'wikibase.serialization.ClaimListDeserializer',
 			),
 		),
 
-		'wikibase.serialization.ClaimSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.ClaimDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'ClaimSerializer.tests.js',
+				'ClaimDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.SnakList',
-				'wikibase.serialization.ClaimSerializer',
+				'wikibase.serialization.ClaimDeserializer',
 			),
 		),
 
-		'wikibase.serialization.EntityIdSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.Deserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'EntityIdSerializer.tests.js',
+				'Deserializer.tests.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.serialization.Deserializer',
+			),
+		),
+
+		'wikibase.serialization.EntityIdDeserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'EntityIdDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel',
-				'wikibase.serialization.EntityIdSerializer',
+				'wikibase.serialization.EntityIdDeserializer',
 			),
 		),
 
-		'wikibase.serialization.EntitySerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.EntityDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'EntitySerializer.tests.js',
+				'EntityDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
@@ -103,13 +113,13 @@ return call_user_func( function() {
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
 				'wikibase.datamodel.TermSet',
-				'wikibase.serialization.EntitySerializer',
+				'wikibase.serialization.EntityDeserializer',
 			),
 		),
 
-		'wikibase.serialization.FingerprintSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.FingerprintDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'FingerprintSerializer.tests.js',
+				'FingerprintDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Fingerprint',
@@ -117,123 +127,99 @@ return call_user_func( function() {
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.datamodel.MultiTermSet',
 				'wikibase.datamodel.TermSet',
-				'wikibase.serialization.FingerprintSerializer',
+				'wikibase.serialization.FingerprintDeserializer',
 			),
 		),
 
-		'wikibase.serialization.MultiTermSetSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.MultiTermSetDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'MultiTermSetSerializer.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel.Term',
-				'wikibase.datamodel.MultiTermSet',
-				'wikibase.serialization.MultiTermSetSerializer',
-			),
-		),
-
-		'wikibase.serialization.MultiTermSerializer.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'MultiTermSerializer.tests.js',
+				'MultiTermSetDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.MultiTerm',
-				'wikibase.serialization.MultiTermSerializer',
+				'wikibase.datamodel.MultiTermSet',
+				'wikibase.serialization.MultiTermSetDeserializer',
 			),
 		),
 
-		'wikibase.serialization.ReferenceListSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.MultiTermDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'ReferenceListSerializer.tests.js',
+				'MultiTermDeserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.MultiTerm',
+				'wikibase.serialization.MultiTermDeserializer',
+			),
+		),
+
+		'wikibase.serialization.ReferenceListDeserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'ReferenceListDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Reference',
 				'wikibase.datamodel.ReferenceList',
-				'wikibase.serialization.ReferenceListSerializer',
+				'wikibase.serialization.ReferenceListDeserializer',
 			),
 		),
 
-		'wikibase.serialization.ReferenceSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.ReferenceDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'ReferenceSerializer.tests.js',
+				'ReferenceDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel',
-				'wikibase.serialization.ReferenceSerializer',
+				'wikibase.serialization.ReferenceDeserializer',
 			),
 		),
 
-		'wikibase.serialization.SiteLinkSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.SiteLinkSetDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'SiteLinkSerializer.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel',
-				'wikibase.serialization.SiteLinkSerializer',
-			),
-		),
-
-		'wikibase.serialization.SiteLinkSetSerializer.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'SiteLinkSetSerializer.tests.js',
+				'SiteLinkSetDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.SiteLink',
 				'wikibase.datamodel.SiteLinkSet',
-				'wikibase.serialization.SiteLinkSetSerializer',
+				'wikibase.serialization.SiteLinkSetDeserializer',
 			),
 		),
 
-		'wikibase.serialization.Serializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.SiteLinkDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'Serializer.tests.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.serialization.Serializer',
-			),
-		),
-
-		'wikibase.serialization.SnakListSerializer.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'SnakListSerializer.tests.js',
+				'SiteLinkDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel',
-				'wikibase.serialization.SnakListSerializer',
+				'wikibase.serialization.SiteLinkDeserializer',
 			),
 		),
 
-		'wikibase.serialization.SnakSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.SnakListDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'SnakSerializer.tests.js',
+				'SnakListDeserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel',
+				'wikibase.serialization.SnakListDeserializer',
+			),
+		),
+
+		'wikibase.serialization.SnakDeserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'SnakDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'dataValues.values',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.PropertySomeValueSnak',
 				'wikibase.datamodel.PropertyValueSnak',
-				'wikibase.serialization.SnakSerializer',
+				'wikibase.serialization.SnakDeserializer',
 			),
 		),
 
-		'wikibase.serialization.StatementGroupSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.StatementGroupSetDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'StatementGroupSerializer.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel.Claim',
-				'wikibase.datamodel.PropertyNoValueSnak',
-				'wikibase.datamodel.Statement',
-				'wikibase.datamodel.StatementGroup',
-				'wikibase.datamodel.StatementList',
-				'wikibase.serialization.StatementGroupSerializer',
-			),
-		),
-
-		'wikibase.serialization.StatementGroupSetSerializer.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'StatementGroupSetSerializer.tests.js',
+				'StatementGroupSetDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
@@ -242,55 +228,70 @@ return call_user_func( function() {
 				'wikibase.datamodel.StatementGroup',
 				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.datamodel.StatementList',
-				'wikibase.serialization.StatementGroupSetSerializer',
+				'wikibase.serialization.StatementGroupSetDeserializer',
 			),
 		),
 
-		'wikibase.serialization.StatementListSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.StatementGroupDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'StatementListSerializer.tests.js',
+				'StatementGroupDeserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.StatementList',
+				'wikibase.serialization.StatementGroupDeserializer',
+			),
+		),
+
+		'wikibase.serialization.StatementListDeserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementListDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.Statement',
 				'wikibase.datamodel.StatementList',
-				'wikibase.serialization.StatementListSerializer',
+				'wikibase.serialization.StatementListDeserializer',
 			),
 		),
 
-		'wikibase.serialization.StatementSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.StatementDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'StatementSerializer.tests.js',
+				'StatementDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.Reference',
 				'wikibase.datamodel.ReferenceList',
+				'wikibase.datamodel.SnakList',
 				'wikibase.datamodel.Statement',
-				'wikibase.serialization.StatementSerializer',
+				'wikibase.serialization.StatementDeserializer',
 			),
 		),
 
-		'wikibase.serialization.TermSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.TermSetDeserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'TermSerializer.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel.Term',
-				'wikibase.serialization.TermSerializer',
-			),
-		),
-
-		'wikibase.serialization.TermSetSerializer.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'TermSetSerializer.tests.js',
+				'TermSetDeserializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Term',
 				'wikibase.datamodel.TermSet',
-				'wikibase.serialization.TermSetSerializer',
+				'wikibase.serialization.TermSetDeserializer',
+			),
+		),
+
+		'wikibase.serialization.TermDeserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'TermDeserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Term',
+				'wikibase.serialization.TermDeserializer',
 			),
 		),
 

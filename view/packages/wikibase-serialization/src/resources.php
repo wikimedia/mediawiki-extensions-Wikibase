@@ -29,11 +29,11 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.datamodel',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.ClaimUnserializer',
-				'wikibase.serialization.EntityUnserializer',
-				'wikibase.serialization.ReferenceUnserializer',
+				'wikibase.serialization.ClaimDeserializer',
+				'wikibase.serialization.EntityDeserializer',
+				'wikibase.serialization.ReferenceDeserializer',
 				'wikibase.serialization.SerializerFactory',
-				'wikibase.serialization.SnakListUnserializer',
+				'wikibase.serialization.SnakListDeserializer',
 			),
 		),
 
@@ -53,7 +53,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
-				'wikibase.serialization.Unserializer',
+				'wikibase.serialization.Deserializer',
 			),
 		),
 
@@ -62,6 +62,6 @@ return call_user_func( function() {
 	return array_merge(
 		$modules,
 		include( __DIR__ . '/Serializers/resources.php' ),
-		include( __DIR__ . '/Unserializers/resources.php' )
+		include( __DIR__ . '/Deserializers/resources.php' )
 	);
 } );

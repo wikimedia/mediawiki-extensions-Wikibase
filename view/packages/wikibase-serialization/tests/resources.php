@@ -30,7 +30,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.SerializerFactory',
-				'wikibase.serialization.Unserializer',
+				'wikibase.serialization.Deserializer',
 			),
 		),
 
@@ -39,6 +39,6 @@ return call_user_func( function() {
 	return array_merge(
 		$modules,
 		include( __DIR__ . '/Serializers/resources.php' ),
-		include( __DIR__ . '/Unserializers/resources.php' )
+		include( __DIR__ . '/Deserializers/resources.php' )
 	);
 } );

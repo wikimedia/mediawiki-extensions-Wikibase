@@ -6,8 +6,7 @@
 	'use strict';
 
 	/**
-	 * Module space holding serialization/unserialization related constructors.
-	 * @type Object
+	 * @type {Object}
 	 */
 	wb.serialization = {};
 

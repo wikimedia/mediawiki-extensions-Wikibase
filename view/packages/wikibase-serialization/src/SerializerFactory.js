@@ -8,7 +8,7 @@
 	var MODULE = wb.serialization;
 
 	/**
-	 * Factory for creating serializers and unserializers suitable for certain objects, e.g. of the
+	 * Factory for creating serializers and deserializers suitable for certain objects, e.g. of the
 	 * Wikibase data model.
 	 *
 	 * @constructor
@@ -25,10 +25,10 @@
 
 	/**
 	 * Array of arrays where the inner arrays holds two constructors. The first one the constructor
-	 * a unserializer's output should be the instance of and the second one the actual unserializer.
+	 * a deserializer's output should be the instance of and the second one the actual deserializer.
 	 * @type {Array[]}
 	 */
-	var unserializers = [];
+	var deserializers = [];
 
 	/**
 	 * Helper for building a new function for registering a factory member.
@@ -104,14 +104,14 @@
 		}() ),
 
 		/**
-		 * Returns a new unserializer object suitable for unserializing some data into an instance
+		 * Returns a new deserializer object suitable for deserializing some data into an instance
 		 * of the given constructor.
 		 *
 		 * @param {Function} constructor
 		 * @param {Object} [options]
-		 * @return {wikibase.serialization.Unserializer}
+		 * @return {wikibase.serialization.Deserializer}
 		 */
-		newUnserializerFor: buildLookupFn( unserializers, 'Unserializer' )
+		newDeserializerFor: buildLookupFn( deserializers, 'Deserializer' )
 	} );
 
 	/**
@@ -123,11 +123,11 @@
 	SELF.registerSerializer = buildRegisterFn( serializers, MODULE.Serializer );
 
 	/**
-	 * Registers a unserializer for objects of a certain given constructor.
+	 * Registers a deserializer for objects of a certain given constructor.
 	 *
-	 * @param {wikibase.serialization.Unserializer} unserializer
+	 * @param {wikibase.serialization.Deserializer} deserializer
 	 * @param {Function} constructor
 	 */
-	SELF.registerUnserializer = buildRegisterFn( unserializers, MODULE.Unserializer );
+	SELF.registerDeserializer = buildRegisterFn( deserializers, MODULE.Deserializer );
 
 }( wikibase, jQuery ) );

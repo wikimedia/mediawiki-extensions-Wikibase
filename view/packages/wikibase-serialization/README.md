@@ -23,48 +23,49 @@ version 1.0 of this package:
 
 ### 2.0 (dev)
 
-* Removed <code>wikibase.serialization.entities</code> ResourceLoader module; use <code>wikibase.serialization.EntityUnserializer</code> instead.
+* Removed <code>wikibase.serialization.entities</code> ResourceLoader module; use <code>wikibase.serialization.EntityDeserializer</code> instead.
+* Renamed <code>*Unserializer</code> to <code>*Deserializer</code>.
 * Added <code>wikibase.serialization.ClaimGroupSetSerializer</code>.
-* Added <code>wikibase.serialization.ClaimGroupSetUnserializer</code>.
+* Added <code>wikibase.serialization.ClaimGroupSetDeserializer</code>.
 * Added <code>wikibase.serialization.ClaimGroupSerializer</code>.
-* Added <code>wikibase.serialization.ClaimGroupUnserializer</code>.
+* Added <code>wikibase.serialization.ClaimGroupDeserializer</code>.
 * Added <code>wikibase.serialization.ClaimListSerializer</code>.
-* Added <code>wikibase.serialization.ClaimListUnserializer</code>.
+* Added <code>wikibase.serialization.ClaimListDeserializer</code>.
 * Added <code>wikibase.serialization.ClaimSerializer</code>.
-* Added <code>wikibase.serialization.ClaimUnserializer</code>.
+* Added <code>wikibase.serialization.ClaimDeserializer</code>.
 * Added <code>wikibase.serialization.EntityIdSerializer</code>.
-* Added <code>wikibase.serialization.EntityIdUnserializer</code>.
+* Added <code>wikibase.serialization.EntityIdDeserializer</code>.
 * Added <code>wikibase.serialization.EntitySerializer</code>.
 * Added <code>wikibase.serialization.FingerprintSerializer</code>.
-* Added <code>wikibase.serialization.FingerprintUnserializer</code>.
+* Added <code>wikibase.serialization.FingerprintDeserializer</code>.
 * Added <code>wikibase.serialization.MultiTermSerializer</code>.
-* Added <code>wikibase.serialization.MultiTermUnserializer</code>.
+* Added <code>wikibase.serialization.MultiTermDeserializer</code>.
 * Added <code>wikibase.serialization.MultiTermSetSerializer</code>.
-* Added <code>wikibase.serialization.MultiTermSetUnserializer</code>.
+* Added <code>wikibase.serialization.MultiTermSetDeserializer</code>.
 * Added <code>wikibase.serialization.ReferenceListSerializer</code>.
-* Added <code>wikibase.serialization.ReferenceListUnserializer</code>.
+* Added <code>wikibase.serialization.ReferenceListDeserializer</code>.
 * Added <code>wikibase.serialization.ReferenceSerializer</code>.
-* Added <code>wikibase.serialization.ReferenceUnserializer</code>.
+* Added <code>wikibase.serialization.ReferenceDeserializer</code>.
 * Added <code>wikibase.serialization.SiteLinkSerializer</code>.
-* Added <code>wikibase.serialization.SiteLinkUnserializer</code>.
+* Added <code>wikibase.serialization.SiteLinkDeserializer</code>.
 * Added <code>wikibase.serialization.SiteLinkSetSerializer</code>.
-* Added <code>wikibase.serialization.SiteLinkSetUnserializer</code>.
+* Added <code>wikibase.serialization.SiteLinkSetDeserializer</code>.
 * Added <code>wikibase.serialization.SnakListSerializer</code>.
-* Added <code>wikibase.serialization.SnakListUnserializer</code>.
+* Added <code>wikibase.serialization.SnakListDeserializer</code>.
 * Added <code>wikibase.serialization.SnakSerializer</code>.
-* Added <code>wikibase.serialization.SnakUnserializer</code>.
+* Added <code>wikibase.serialization.SnakDeserializer</code>.
 * Added <code>wikibase.serialization.StatementGroupSerializer</code>.
-* Added <code>wikibase.serialization.StatementGroupUnserializer</code>.
+* Added <code>wikibase.serialization.StatementGroupDeserializer</code>.
 * Added <code>wikibase.serialization.StatementGroupSetSerializer</code>.
-* Added <code>wikibase.serialization.StatementGroupSetUnserializer</code>.
+* Added <code>wikibase.serialization.StatementGroupSetDeserializer</code>.
 * Added <code>wikibase.serialization.StatementListSerializer</code>.
-* Added <code>wikibase.serialization.StatementListUnserializer</code>.
+* Added <code>wikibase.serialization.StatementListDeserializer</code>.
 * Added <code>wikibase.serialization.StatementSerializer</code>.
-* Added <code>wikibase.serialization.StatementUnserializer</code>.
+* Added <code>wikibase.serialization.StatementDeserializer</code>.
 * Added <code>wikibase.serialization.TermSetSerializer</code>.
-* Added <code>wikibase.serialization.TermSetUnserializer</code>.
+* Added <code>wikibase.serialization.TermSetDeserializer</code>.
 * Added <code>wikibase.serialization.TermSerializer</code>.
-* Added <code>wikibase.serialization.TermUnserializer</code>.
+* Added <code>wikibase.serialization.TermDeserializer</code>.
 
 ### 1.1.3 (2014-09-10)
 
