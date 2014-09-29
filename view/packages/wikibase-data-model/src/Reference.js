@@ -62,7 +62,8 @@
 		 * @return {boolean}
 		 */
 		equals: function( reference ) {
-			return reference === this || this._snaks.equals( reference.getSnaks() );
+			return reference === this
+				|| this._snaks.equals( reference.getSnaks() ) && this._hash === reference.getHash();
 		}
 	} );
 
