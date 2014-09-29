@@ -92,17 +92,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.serialization.MultilingualSerializer' => $moduleTemplate + array(
-			'scripts' => array(
-				'MultilingualSerializer.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-			),
-		),
-
 		'wikibase.serialization.MultiTermSerializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'MultiTermSerializer.js',
