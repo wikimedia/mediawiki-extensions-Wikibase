@@ -30,6 +30,7 @@ return call_user_func( function() {
 				'wikibase.datamodel',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.ClaimDeserializer',
+				'wikibase.serialization.DeserializerFactory',
 				'wikibase.serialization.EntityDeserializer',
 				'wikibase.serialization.ReferenceDeserializer',
 				'wikibase.serialization.SerializerFactory',
@@ -46,6 +47,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.DeserializerFactory' => $moduleTemplate + array(
+			'scripts' => array(
+				'DeserializerFactory.js',
+			),
+			'dependencies' => array(
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Deserializer',
+			),
+		),
+
 		'wikibase.serialization.SerializerFactory' => $moduleTemplate + array(
 			'scripts' => array(
 				'SerializerFactory.js',
@@ -53,7 +64,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
-				'wikibase.serialization.Deserializer',
 			),
 		),
 

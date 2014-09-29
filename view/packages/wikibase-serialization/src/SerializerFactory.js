@@ -1,133 +1,72 @@
 /**
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
 ( function( wb, $ ) {
 	'use strict';
 
-	var MODULE = wb.serialization;
+var MODULE = wb.serialization;
 
+/**
+ * Factory for creating serializers specific to certain objects, e.g. of the Wikibase data model.
+ *
+ * @constructor
+ * @since 1.0
+ */
+var SELF = MODULE.SerializerFactory = function wbSerializerFactory() {};
+
+/**
+ * Array of arrays where the inner arrays holds two constructors. The first one the constructor
+ * a serializer's output should be the instance of and the second one the actual serializer.
+ * @type {Array[]}
+ */
+var store = [];
+
+$.extend( SELF.prototype, {
 	/**
-	 * Factory for creating serializers and deserializers suitable for certain objects, e.g. of the
-	 * Wikibase data model.
+	 * Returns a new serializer object suitable for serializing a specific object or a specific
+	 * constructor's instances.
 	 *
-	 * @constructor
-	 * @since 1.0
+	 * @param {Object|Function} object
+	 * @return {wikibase.serialization.Serializer}
 	 */
-	var SELF = MODULE.SerializerFactory = function SerializerFactory() {};
+	newSerializerFor: function( object ) {
+		if( !object ) {
+			throw new Error( 'Constructor or object expected' );
+		}
 
-	/**
-	 * Array of arrays where the inner arrays holds two constructors. The first one the constructor
-	 * a serializer's output should be the instance of and the second one the actual serializer.
-	 * @type {Array[]}
-	 */
-	var serializers = [];
+		var Constructor = $.isFunction( object ) ? object : object.constructor;
 
-	/**
-	 * Array of arrays where the inner arrays holds two constructors. The first one the constructor
-	 * a deserializer's output should be the instance of and the second one the actual deserializer.
-	 * @type {Array[]}
-	 */
-	var deserializers = [];
+		if( !$.isFunction( Constructor ) ) {
+			throw new Error( 'No proper constructor provided for choosing a Serializer' );
+		}
 
-	/**
-	 * Helper for building a new function for registering a factory member.
-	 *
-	 * @param {Array[]} store The factory's store.
-	 * @param {Function} type Constructor newly registered factory members have to be instances of.
-	 * @return {Function}
-	 */
-	function buildRegisterFn( store, type ) {
-		return function( FactoryMember, constructor ) {
-			if( !$.isFunction( constructor ) ) {
-				throw new Error( 'No constructor (function) given' );
+		for( var i = 0; i < store.length; i++ ) {
+			if( store[i][0] === Constructor ) {
+				return new store[i][1]();
 			}
-			if( !( ( new FactoryMember() ) instanceof type ) ) {
-				throw new Error( 'Given (un)serializer is not an implementation of '
-					+ 'wb.serialization.(Un/S)erializer' );
-			}
+		}
 
-			store.push( [
-				constructor,
-				FactoryMember
-			] );
-		};
+		throw new Error( 'No suitable Serializer registered' );
+	}
+} );
+
+/**
+ * Registers a serializer for objects of a specific constructor.
+ *
+ * @param {Function} Serializer
+ * @param {Function} Constructor
+ */
+SELF.registerSerializer = function( Serializer, Constructor ) {
+	if( !$.isFunction( Constructor ) ) {
+		throw new Error( 'No constructor (function) provided' );
+	} else if( !( ( new Serializer() ) instanceof MODULE.Serializer ) ) {
+		throw new Error( 'Given Serializer is not an implementation of '
+			+ 'wb.serialization.Serializer' );
 	}
 
-	/**
-	 * Helper for building a new function for finding the right factory member and creating a new
-	 * instance of it.
-	 *
-	 * @param {Array[]} store The factory's store.
-	 * @param {string} storeSubject The subject of the store, used in error message descriptions.
-	 * @return {Function}
-	 */
-	function buildLookupFn( store, storeSubject ) {
-		return function( constructor, options ) {
-			if( !$.isFunction( constructor ) ) {
-				throw new Error( 'No proper constructor has been provided for choosing a '
-					+ storeSubject );
-			}
-
-			// find constructor matching the given one and create new instance of factory member
-			// responsible for handling instances of that given constructor:
-			for( var i in store ) {
-				if( store[i][0] === constructor ) {
-					return new store[i][1]( options );
-				}
-			}
-			throw new Error( 'No suitable ' + storeSubject + ' has been registered' );
-		};
-	}
-
-	$.extend( SELF.prototype, {
-		/**
-		 * Returns a new serializer object suitable for a given object or for a given constructor's
-		 * instances.
-		 *
-		 * @param {Object|Function} object
-		 * @param {Object} [options]
-		 * @return {wikibase.serialization.Serializer}
-		 */
-		newSerializerFor: ( function() {
-			var lookupFn = buildLookupFn( serializers, 'Serializer' );
-
-			// Build a function which will do the normal lookup but also allows passing and object
-			// as first parameter. In that case we have to get the object's constructor.
-			return function( object, options ) {
-				if( !object ) {
-					throw new Error( 'Constructor or object expected' );
-				}
-				var constructorOfSerialized = $.isFunction( object ) ? object : object.constructor;
-				return lookupFn( constructorOfSerialized, options );
-			};
-		}() ),
-
-		/**
-		 * Returns a new deserializer object suitable for deserializing some data into an instance
-		 * of the given constructor.
-		 *
-		 * @param {Function} constructor
-		 * @param {Object} [options]
-		 * @return {wikibase.serialization.Deserializer}
-		 */
-		newDeserializerFor: buildLookupFn( deserializers, 'Deserializer' )
-	} );
-
-	/**
-	 * Registers a serializer for objects of a certain given constructor.
-	 *
-	 * @param {wikibase.serialization.Serializer} serializer
-	 * @param {Function} constructor
-	 */
-	SELF.registerSerializer = buildRegisterFn( serializers, MODULE.Serializer );
-
-	/**
-	 * Registers a deserializer for objects of a certain given constructor.
-	 *
-	 * @param {wikibase.serialization.Deserializer} deserializer
-	 * @param {Function} constructor
-	 */
-	SELF.registerDeserializer = buildRegisterFn( deserializers, MODULE.Deserializer );
+	store.push( [Constructor, Serializer] );
+};
 
 }( wikibase, jQuery ) );

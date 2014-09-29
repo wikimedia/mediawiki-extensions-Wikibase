@@ -22,6 +22,17 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'wikibase.serialization.DeserializerFactory.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'DeserializerFactory.tests.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.DeserializerFactory',
+			),
+		),
+
 		'wikibase.serialization.SerializerFactory.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'SerializerFactory.tests.js',
@@ -30,7 +41,6 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.SerializerFactory',
-				'wikibase.serialization.Deserializer',
 			),
 		),
 

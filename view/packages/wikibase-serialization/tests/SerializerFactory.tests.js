@@ -26,14 +26,14 @@ QUnit.test( 'registerSerializer(), newSerializerFor()', function( assert ) {
 		function() {
 			SerializerFactory.registerSerializer( testSets[0].Serializer );
 		},
-		'Throwing error when omitting constructor a serializer should be registered for.'
+		'Throwing error when omitting constructor a Serializer should be registered for.'
 	);
 
 	assert.throws(
 		function() {
 			SerializerFactory.registerSerializer( function() {}, testSets[0].Constructor );
 		},
-		'Throwing error when serializer is not deriving from Serializer base constructor.'
+		'Throwing error when Serializer is not deriving from Serializer base constructor.'
 	);
 
 	SerializerFactory.registerSerializer( testSets[0].Serializer, testSets[0].Constructor );
@@ -51,15 +51,6 @@ QUnit.test( 'registerSerializer(), newSerializerFor()', function( assert ) {
 		'Retrieved serializer by object.'
 	);
 
-	var options = { someOption: 'someOption' },
-		serializer = serializerFactory.newSerializerFor( testSets[1].Constructor, options );
-
-	assert.deepEqual(
-		serializer.getOptions(),
-		options,
-		'Passed options on to serializer.'
-	);
-
 	assert.throws(
 		function() {
 			serializerFactory.newSerializerFor( 'string' );
@@ -71,65 +62,7 @@ QUnit.test( 'registerSerializer(), newSerializerFor()', function( assert ) {
 		function() {
 			serializerFactory.newSerializerFor( function() {} );
 		},
-		'Throwing error when no serializer is registered for a constructor.'
-	);
-} );
-
-QUnit.test( 'registerDeserializer(), newDeserializerFor()', function( assert ) {
-	var testSets = [
-		{
-			Constructor: function Constructor1() {},
-			Deserializer: util.inherit( 'WbTestDeserializer1', wb.serialization.Deserializer, {} )
-		}, {
-			Constructor: function Constructor2() {},
-			Deserializer: util.inherit( 'WbTestDeserializer2', wb.serialization.Deserializer, {} )
-		}
-	];
-
-	assert.throws(
-		function() {
-			SerializerFactory.registerDeserializer( testSets[0].Deserializer );
-		},
-		'Throwing error when omitting constructor a Deserializer should be registered for.'
-	);
-
-	assert.throws(
-		function() {
-			SerializerFactory.registerDeserializer( function() {}, testSets[0].Constructor );
-		},
-		'Throwing error when Deserializer is not deriving from Deserializer base constructor.'
-	);
-
-	SerializerFactory.registerDeserializer( testSets[0].Deserializer, testSets[0].Constructor );
-	SerializerFactory.registerDeserializer( testSets[1].Deserializer, testSets[1].Constructor );
-
-	assert.ok(
-		serializerFactory.newDeserializerFor( testSets[0].Constructor ).constructor
-			=== testSets[0].Deserializer,
-		'Retrieved Deserializer.'
-	);
-
-	var options = { someOption: 'someOption' },
-		deserializer = serializerFactory.newDeserializerFor( testSets[1].Constructor, options );
-
-	assert.deepEqual(
-		deserializer.getOptions(),
-		options,
-		'Passed options on to Deserializer.'
-	);
-
-	assert.throws(
-		function() {
-			serializerFactory.newDeserializerFor( 'string' );
-		},
-		'Throwing error when not passing a valid parameter to newSerializerFor().'
-	);
-
-	assert.throws(
-		function() {
-			serializerFactory.newDeserializerFor( function() {} );
-		},
-		'Throwing error when no Deserializer is registered for a constructor.'
+		'Throwing error when no Serializer is registered for a constructor.'
 	);
 } );
 

@@ -91,87 +91,87 @@
 
 	// Register deserializers:
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.ClaimListDeserializer,
 		wb.datamodel.ClaimList
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.ClaimDeserializer,
 		wb.datamodel.Claim
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.EntityIdDeserializer,
 		wb.datamodel.EntityId
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.EntityDeserializer,
 		wb.datamodel.Entity
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.FingerprintDeserializer,
 		wb.datamodel.Fingerprint
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.ReferenceListDeserializer,
 		wb.datamodel.ReferenceList
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.ReferenceDeserializer,
 		wb.datamodel.Reference
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.SiteLinkSetDeserializer,
 		wb.datamodel.SiteLinkSet
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.SiteLinkDeserializer,
 		wb.datamodel.SiteLink
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.SnakListDeserializer,
 		wb.datamodel.SnakList
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.SnakDeserializer,
 		wb.datamodel.Snak
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.StatementDeserializer,
 		wb.datamodel.Statement
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.StatementListDeserializer,
 		wb.datamodel.StatementList
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.MultiTermSetDeserializer,
 		wb.datamodel.MultiTermSet
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.MultiTermDeserializer,
 		wb.datamodel.MultiTerm
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.TermDeserializer,
 		wb.datamodel.Term
 	);
 
-	MODULE.SerializerFactory.registerDeserializer(
+	MODULE.DeserializerFactory.registerDeserializer(
 		MODULE.TermSetDeserializer,
 		wb.datamodel.TermSet
 	);
