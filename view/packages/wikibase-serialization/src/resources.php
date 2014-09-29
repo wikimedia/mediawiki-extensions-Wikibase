@@ -29,12 +29,71 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.datamodel',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.ClaimDeserializer',
 				'wikibase.serialization.DeserializerFactory',
-				'wikibase.serialization.EntityDeserializer',
-				'wikibase.serialization.ReferenceDeserializer',
 				'wikibase.serialization.SerializerFactory',
+
+				'wikibase.serialization.ClaimSerializer',
+				'wikibase.serialization.ClaimDeserializer',
+
+				'wikibase.serialization.ClaimGroupSerializer',
+				'wikibase.serialization.ClaimGroupDeserializer',
+
+				'wikibase.serialization.ClaimGroupSetSerializer',
+				'wikibase.serialization.ClaimGroupSetDeserializer',
+
+				'wikibase.serialization.ClaimListSerializer',
+				'wikibase.serialization.ClaimListDeserializer',
+
+				'wikibase.serialization.EntitySerializer',
+				'wikibase.serialization.EntityDeserializer',
+
+				'wikibase.serialization.EntityIdSerializer',
+				'wikibase.serialization.EntityIdDeserializer',
+
+				'wikibase.serialization.FingerprintSerializer',
+				'wikibase.serialization.FingerprintDeserializer',
+
+				'wikibase.serialization.MultiTermSerializer',
+				'wikibase.serialization.MultiTermDeserializer',
+
+				'wikibase.serialization.MultiTermSetSerializer',
+				'wikibase.serialization.MultiTermSetDeserializer',
+
+				'wikibase.serialization.ReferenceSerializer',
+				'wikibase.serialization.ReferenceDeserializer',
+
+				'wikibase.serialization.ReferenceListSerializer',
+				'wikibase.serialization.ReferenceListDeserializer',
+
+				'wikibase.serialization.SiteLinkSerializer',
+				'wikibase.serialization.SiteLinkDeserializer',
+
+				'wikibase.serialization.SiteLinkSetSerializer',
+				'wikibase.serialization.SiteLinkSetDeserializer',
+
+				'wikibase.serialization.SnakSerializer',
+				'wikibase.serialization.SnakDeserializer',
+
+				'wikibase.serialization.SnakListSerializer',
 				'wikibase.serialization.SnakListDeserializer',
+
+				'wikibase.serialization.StatementSerializer',
+				'wikibase.serialization.StatementDeserializer',
+
+				'wikibase.serialization.StatementGroupSerializer',
+				'wikibase.serialization.StatementGroupDeserializer',
+
+				'wikibase.serialization.StatementGroupSetSerializer',
+				'wikibase.serialization.StatementGroupSetDeserializer',
+
+				'wikibase.serialization.StatementListSerializer',
+				'wikibase.serialization.StatementListDeserializer',
+
+				'wikibase.serialization.TermSerializer',
+				'wikibase.serialization.TermDeserializer',
+
+				'wikibase.serialization.TermSetSerializer',
+				'wikibase.serialization.TermSetDeserializer',
 			),
 		),
 
