@@ -81,7 +81,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel',
+				'wikibase.datamodel.EntityId',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
 			),
@@ -95,7 +95,9 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel',
+				'wikibase.datamodel.Entity',
+				'wikibase.datamodel.Item',
+				'wikibase.datamodel.Property',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.FingerprintSerializer',
 				'wikibase.serialization.SiteLinkSetSerializer',
@@ -162,7 +164,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel',
+				'wikibase.datamodel.Reference',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.SnakListSerializer',
 				'wikibase.serialization.Serializer',
@@ -185,7 +187,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel',
+				'wikibase.datamodel.SiteLink',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
 			),
@@ -210,7 +212,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel',
+				'wikibase.datamodel.SnakList',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.SnakSerializer',
 				'wikibase.serialization.Serializer',

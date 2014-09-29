@@ -81,7 +81,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel',
+				'wikibase.datamodel.EntityId',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Deserializer',
 			),
@@ -163,7 +163,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel',
+				'wikibase.datamodel.Reference',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.SnakListDeserializer',
 				'wikibase.serialization.Deserializer',
@@ -189,7 +189,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel',
+				'wikibase.datamodel.SiteLink',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Deserializer',
 			),
@@ -201,7 +201,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel',
+				'wikibase.datamodel.SnakList',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.Deserializer',
