@@ -22,13 +22,13 @@ MODULE.FingerprintUnserializer = util.inherit( 'WbFingerprintUnserializer', PARE
 	 * @return {wikibase.datamodel.Fingerprint}
 	 */
 	unserialize: function( serialization ) {
-		var termListUnserializer = new MODULE.TermListUnserializer(),
-			termGroupListUnserializer = new MODULE.TermGroupListUnserializer();
+		var termSetUnserializer = new MODULE.TermSetUnserializer(),
+			multiTermSetUnserializer = new MODULE.MultiTermSetUnserializer();
 
 		return new wb.datamodel.Fingerprint(
-			termListUnserializer.unserialize( serialization.labels ),
-			termListUnserializer.unserialize( serialization.descriptions ),
-			termGroupListUnserializer.unserialize( serialization.aliases )
+			termSetUnserializer.unserialize( serialization.labels ),
+			termSetUnserializer.unserialize( serialization.descriptions ),
+			multiTermSetUnserializer.unserialize( serialization.aliases )
 		);
 	}
 } );

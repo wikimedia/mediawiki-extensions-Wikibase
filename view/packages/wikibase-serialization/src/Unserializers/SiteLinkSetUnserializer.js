@@ -9,17 +9,17 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Unserializer;
 
 /**
- * Unserializer for SiteLinkList objects.
+ * Unserializer for SiteLinkSet objects.
  *
  * @constructor
  * @extends wikibase.serialization.Unserializer
  * @since 2.0
  */
-MODULE.SiteLinkListUnserializer = util.inherit( 'WbSiteLinkListUnserializer', PARENT, {
+MODULE.SiteLinkSetUnserializer = util.inherit( 'WbSiteLinkSetUnserializer', PARENT, {
 	/**
 	 * @see wikibase.serialization.Unserializer.unserialize
 	 *
-	 * @return {wikibase.datamodel.SiteLinkList}
+	 * @return {wikibase.datamodel.SiteLinkSet}
 	 */
 	unserialize: function( serialization ) {
 		var siteLinks = [],
@@ -29,7 +29,7 @@ MODULE.SiteLinkListUnserializer = util.inherit( 'WbSiteLinkListUnserializer', PA
 			siteLinks.push( siteLinkUnserializer.unserialize( serialization[siteId] ) );
 		}
 
-		return new wikibase.datamodel.SiteLinkList( siteLinks );
+		return new wikibase.datamodel.SiteLinkSet( siteLinks );
 	}
 } );
 

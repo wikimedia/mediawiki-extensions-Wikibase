@@ -5,13 +5,13 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.TermGroupListSerializer' );
+QUnit.module( 'wikibase.serialization.MultiTermSetSerializer' );
 
 var testSets = [
 	[
-		new wb.datamodel.TermGroupList( [
-			new wb.datamodel.TermGroup( 'en', ['en-test'] ),
-			new wb.datamodel.TermGroup( 'de', ['de-test'] )
+		new wb.datamodel.MultiTermSet( [
+			new wb.datamodel.MultiTerm( 'en', ['en-test'] ),
+			new wb.datamodel.MultiTerm( 'de', ['de-test'] )
 		] ),
 		{
 			en: [{ language: 'en', value: 'en-test' }],
@@ -21,11 +21,11 @@ var testSets = [
 ];
 
 QUnit.test( 'serialize()', function( assert ) {
-	var termGroupListSerializer = new wb.serialization.TermGroupListSerializer();
+	var multiTermSetSerializer = new wb.serialization.MultiTermSetSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(
-			termGroupListSerializer.serialize( testSets[i][0] ),
+			multiTermSetSerializer.serialize( testSets[i][0] ),
 			testSets[i][1],
 			'Test set #' + i + ': Serializing successful.'
 		);

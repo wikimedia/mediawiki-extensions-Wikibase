@@ -5,21 +5,21 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.TermGroupSerializer' );
+QUnit.module( 'wikibase.serialization.MultiTermSerializer' );
 
 var testSets = [
 	[
-		new wb.datamodel.TermGroup( 'en', ['test1', 'test2'] ),
+		new wb.datamodel.MultiTerm( 'en', ['test1', 'test2'] ),
 		[{ language: 'en', value: 'test1' }, { language: 'en', value: 'test2' }]
 	]
 ];
 
 QUnit.test( 'serialize()', function( assert ) {
-	var termGroupSerializer = new wb.serialization.TermGroupSerializer();
+	var multiTermSerializer = new wb.serialization.MultiTermSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(
-			termGroupSerializer.serialize( testSets[i][0] ),
+			multiTermSerializer.serialize( testSets[i][0] ),
 			testSets[i][1],
 			'Test set #' + i + ': Serialization successful.'
 		);

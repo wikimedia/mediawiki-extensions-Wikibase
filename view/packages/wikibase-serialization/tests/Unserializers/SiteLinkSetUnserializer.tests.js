@@ -5,12 +5,12 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.SiteLinkListUnserializer' );
+QUnit.module( 'wikibase.serialization.SiteLinkSetUnserializer' );
 
 var testSets = [
 	[
 		{},
-		new wb.datamodel.SiteLinkList()
+		new wb.datamodel.SiteLinkSet()
 	], [
 		{
 			site: {
@@ -19,16 +19,16 @@ var testSets = [
 				badges: []
 			}
 		},
-		new wb.datamodel.SiteLinkList( [new wb.datamodel.SiteLink( 'site', 'page' )] )
+		new wb.datamodel.SiteLinkSet( [new wb.datamodel.SiteLink( 'site', 'page' )] )
 	]
 ];
 
 QUnit.test( 'unserialize()', function( assert ) {
-	var siteLinkListUnserializer = new wb.serialization.SiteLinkListUnserializer();
+	var siteLinkSetUnserializer = new wb.serialization.SiteLinkSetUnserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(
-			siteLinkListUnserializer.unserialize( testSets[i][0] ).equals( testSets[i][1] ),
+			siteLinkSetUnserializer.unserialize( testSets[i][0] ).equals( testSets[i][1] ),
 			'Test set #' + i + ': Unserializing successful.'
 		);
 	}

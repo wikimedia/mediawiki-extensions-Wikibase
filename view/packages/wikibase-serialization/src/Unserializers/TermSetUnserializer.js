@@ -8,27 +8,27 @@
 var MODULE = wb.serialization,
 	PARENT = MODULE.Unserializer;
 
-/* Unserializer for TermGroupList objects.
+/* Unserializer for TermSet objects.
  *
  * @constructor
  * @extends wikibase.serialization.Unserializer
  * @since 2.0
  */
-MODULE.TermGroupListUnserializer = util.inherit( 'WbTermGroupListUnserializer', PARENT, {
+MODULE.TermSetUnserializer = util.inherit( 'WbTermSetUnserializer', PARENT, {
 	/**
 	 * @see wikibase.serialization.Unserializer.unserialize
 	 *
-	 * @return {wikibase.datamodel.TermGroupList}
+	 * @return {wikibase.datamodel.TermSet}
 	 */
 	unserialize: function( serialization ) {
-		var termGroups = [],
-			termGroupUnserializer = new MODULE.TermGroupUnserializer();
+		var terms = [],
+			termUnserializer = new MODULE.TermUnserializer();
 
 		for( var languageCode in serialization ) {
-			termGroups.push( termGroupUnserializer.unserialize( serialization[languageCode] ) );
+			terms.push( termUnserializer.unserialize( serialization[languageCode] ) );
 		}
 
-		return new wb.datamodel.TermGroupList( termGroups );
+		return new wb.datamodel.TermSet( terms );
 	}
 } );
 

@@ -9,27 +9,27 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Serializer;
 
 /**
- * Serializer for TermGroup objects.
+ * Serializer for MultiTerm objects.
  *
  * @constructor
  * @extends wikibase.serialization.Serializer
  * @since 2.0
  */
-MODULE.TermGroupSerializer = util.inherit( 'WbTermGroupSerializer', PARENT, {
+MODULE.MultiTermSerializer = util.inherit( 'WbMultiTermSerializer', PARENT, {
 	/**
 	 * @see wikibase.serialization.Serializer.serialize
 	 *
-	 * @param {wikibase.datamodel.TermGroup} termGroup
+	 * @param {wikibase.datamodel.MultiTerm} multiTerm
 	 * @return {Object[]}
 	 */
-	serialize: function( termGroup ) {
-		if( !( termGroup instanceof wb.datamodel.TermGroup ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.TermGroup' );
+	serialize: function( multiTerm ) {
+		if( !( multiTerm instanceof wb.datamodel.MultiTerm ) ) {
+			throw new Error( 'Not an instance of wikibase.datamodel.MultiTerm' );
 		}
 
 		var serialization = [],
-			languageCode = termGroup.getLanguageCode(),
-			texts = termGroup.getTexts();
+			languageCode = multiTerm.getLanguageCode(),
+			texts = multiTerm.getTexts();
 
 		for( var i = 0; i < texts.length; i++ ) {
 			serialization.push( {

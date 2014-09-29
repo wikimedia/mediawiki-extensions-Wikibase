@@ -5,14 +5,14 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.SiteLinkListSerializer' );
+QUnit.module( 'wikibase.serialization.SiteLinkSetSerializer' );
 
 var testSets = [
 	[
-		new wb.datamodel.SiteLinkList(),
+		new wb.datamodel.SiteLinkSet(),
 		{}
 	], [
-		new wb.datamodel.SiteLinkList( [new wb.datamodel.SiteLink( 'site', 'page' )] ),
+		new wb.datamodel.SiteLinkSet( [new wb.datamodel.SiteLink( 'site', 'page' )] ),
 		{
 			site: {
 				site: 'site',
@@ -24,11 +24,11 @@ var testSets = [
 ];
 
 QUnit.test( 'serialize()', function( assert ) {
-	var siteLinkListSerializer = new wb.serialization.SiteLinkListSerializer();
+	var siteLinkSetSerializer = new wb.serialization.SiteLinkSetSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(
-			siteLinkListSerializer.serialize( testSets[i][0] ),
+			siteLinkSetSerializer.serialize( testSets[i][0] ),
 			testSets[i][1],
 			'Test set #' + i + ': Serializing successful.'
 		);

@@ -99,8 +99,8 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.TermListUnserializer',
-				'wikibase.serialization.TermGroupListUnserializer',
+				'wikibase.serialization.TermSetUnserializer',
+				'wikibase.serialization.MultiTermSetUnserializer',
 				'wikibase.serialization.Unserializer',
 			),
 		),
@@ -111,6 +111,31 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Unserializer',
+			),
+		),
+
+		'wikibase.serialization.MultiTermSetUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'MultiTermSetUnserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.MultiTermSet',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Serializer',
+				'wikibase.serialization.MultiTermUnserializer',
+			),
+		),
+
+		'wikibase.serialization.MultiTermUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'MultiTermUnserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.MultiTerm',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Unserializer',
 			),
@@ -142,13 +167,13 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.serialization.SiteLinkListUnserializer' => $moduleTemplate + array(
+		'wikibase.serialization.SiteLinkSetUnserializer' => $moduleTemplate + array(
 			'scripts' => array(
-				'SiteLinkListUnserializer.js',
+				'SiteLinkSetUnserializer.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel.SiteLinkList',
+				'wikibase.datamodel.SiteLinkSet',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.SiteLinkUnserializer',
 				'wikibase.serialization.Unserializer',
@@ -223,38 +248,13 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.serialization.TermGroupListUnserializer' => $moduleTemplate + array(
+		'wikibase.serialization.TermSetUnserializer' => $moduleTemplate + array(
 			'scripts' => array(
-				'TermGroupListUnserializer.js',
+				'TermSetUnserializer.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel.TermGroupList',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-				'wikibase.serialization.TermGroupUnserializer',
-			),
-		),
-
-		'wikibase.serialization.TermGroupUnserializer' => $moduleTemplate + array(
-			'scripts' => array(
-				'TermGroupUnserializer.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.TermGroup',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Unserializer',
-			),
-		),
-
-		'wikibase.serialization.TermListUnserializer' => $moduleTemplate + array(
-			'scripts' => array(
-				'TermListUnserializer.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.TermList',
+				'wikibase.datamodel.TermSet',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.TermUnserializer',

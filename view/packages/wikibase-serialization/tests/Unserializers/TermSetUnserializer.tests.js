@@ -5,7 +5,7 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.TermListUnserializer' );
+QUnit.module( 'wikibase.serialization.TermSetUnserializer' );
 
 var testCases = [
 	[
@@ -13,7 +13,7 @@ var testCases = [
 			en: { language: 'en', value: 'en-test' },
 			de: { language: 'de', value: 'de-test' }
 		},
-		new wb.datamodel.TermList( [
+		new wb.datamodel.TermSet( [
 			new wb.datamodel.Term( 'en', 'en-test' ),
 			new wb.datamodel.Term( 'de', 'de-test' )
 		] )
@@ -21,11 +21,11 @@ var testCases = [
 ];
 
 QUnit.test( 'unserialize()', function( assert ) {
-	var termListUnserializer = new wb.serialization.TermListUnserializer();
+	var termSetUnserializer = new wb.serialization.TermSetUnserializer();
 
 	for( var i = 0; i < testCases.length; i++ ) {
 		assert.deepEqual(
-			termListUnserializer.unserialize( testCases[i][0] ),
+			termSetUnserializer.unserialize( testCases[i][0] ),
 			testCases[i][1],
 			'Test set #' + i + ': Unserializing successful.'
 		);

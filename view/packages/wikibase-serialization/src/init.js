@@ -40,8 +40,8 @@
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
-		MODULE.SiteLinkListSerializer,
-		wb.datamodel.SiteLinkList
+		MODULE.SiteLinkSetSerializer,
+		wb.datamodel.SiteLinkSet
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
@@ -70,13 +70,13 @@
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
-		MODULE.TermGroupListSerializer,
-		wb.datamodel.TermGroupList
+		MODULE.MultiTermSetSerializer,
+		wb.datamodel.MultiTermSet
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
-		MODULE.TermGroupSerializer,
-		wb.datamodel.TermGroup
+		MODULE.MultiTermSerializer,
+		wb.datamodel.MultiTerm
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
@@ -85,8 +85,8 @@
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
-		MODULE.TermListSerializer,
-		wb.datamodel.TermList
+		MODULE.TermSetSerializer,
+		wb.datamodel.TermSet
 	);
 
 	// Register unserializers:
@@ -127,8 +127,8 @@
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
-		MODULE.SiteLinkListUnserializer,
-		wb.datamodel.SiteLinkList
+		MODULE.SiteLinkSetUnserializer,
+		wb.datamodel.SiteLinkSet
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
@@ -157,13 +157,13 @@
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
-		MODULE.TermGroupListUnserializer,
-		wb.datamodel.TermGroup
+		MODULE.MultiTermSetUnserializer,
+		wb.datamodel.MultiTermSet
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
-		MODULE.TermGroupUnserializer,
-		wb.datamodel.TermGroup
+		MODULE.MultiTermUnserializer,
+		wb.datamodel.MultiTerm
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
@@ -172,8 +172,8 @@
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
-		MODULE.TermListUnserializer,
-		wb.datamodel.TermList
+		MODULE.TermSetUnserializer,
+		wb.datamodel.TermSet
 	);
 
 }( wikibase ) );

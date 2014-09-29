@@ -100,8 +100,8 @@ return call_user_func( function() {
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
-				'wikibase.serialization.TermListSerializer',
-				'wikibase.serialization.TermGroupListSerializer',
+				'wikibase.serialization.TermSetSerializer',
+				'wikibase.serialization.MultiTermSetSerializer',
 			),
 		),
 
@@ -113,6 +113,31 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
+			),
+		),
+
+		'wikibase.serialization.MultiTermSerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'MultiTermSerializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.MultiTerm',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Serializer',
+			),
+		),
+
+		'wikibase.serialization.MultiTermSetSerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'MultiTermSetSerializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.MultiTermSet',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Serializer',
+				'wikibase.serialization.MultiTermSerializer',
 			),
 		),
 
@@ -152,19 +177,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.serialization.SiteLinkListSerializer' => $moduleTemplate + array(
-			'scripts' => array(
-				'SiteLinkListSerializer.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.SiteLinkList',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.SiteLinkSerializer',
-				'wikibase.serialization.Serializer',
-			),
-		),
-
 		'wikibase.serialization.SiteLinkSerializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'SiteLinkSerializer.js',
@@ -173,6 +185,19 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel',
 				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Serializer',
+			),
+		),
+
+		'wikibase.serialization.SiteLinkSetSerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'SiteLinkSetSerializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.SiteLinkSet',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.SiteLinkSerializer',
 				'wikibase.serialization.Serializer',
 			),
 		),
@@ -230,38 +255,13 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.serialization.TermGroupListSerializer' => $moduleTemplate + array(
+		'wikibase.serialization.TermSetSerializer' => $moduleTemplate + array(
 			'scripts' => array(
-				'TermGroupListSerializer.js',
+				'TermSetSerializer.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel.TermGroupList',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-				'wikibase.serialization.TermGroupSerializer',
-			),
-		),
-
-		'wikibase.serialization.TermGroupSerializer' => $moduleTemplate + array(
-			'scripts' => array(
-				'TermGroupSerializer.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.TermGroup',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-			),
-		),
-
-		'wikibase.serialization.TermListSerializer' => $moduleTemplate + array(
-			'scripts' => array(
-				'TermListSerializer.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.TermList',
+				'wikibase.datamodel.TermSet',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.TermSerializer',

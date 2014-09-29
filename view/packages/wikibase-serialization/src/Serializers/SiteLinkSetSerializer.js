@@ -9,31 +9,31 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Serializer;
 
 /**
- * Serializer for SiteLinkList objects.
+ * Serializer for SiteLinkSet objects.
  *
  * @constructor
  * @extends wikibase.serialization.Serializer
  * @since 2.0
  */
-MODULE.SiteLinkListSerializer = util.inherit( 'WbSiteLinkListSerializer', PARENT, {
+MODULE.SiteLinkSetSerializer = util.inherit( 'WbSiteLinkSetSerializer', PARENT, {
 	/**
 	 * @see wikibase.serialization.Serializer.serialize
 	 *
-	 * @param {wikibase.datamodel.SiteLinkList} siteLinkList
+	 * @param {wikibase.datamodel.SiteLinkSet} siteLinkSet
 	 * @return {Object}
 	 */
-	serialize: function( siteLinkList ) {
-		if( !( siteLinkList instanceof wb.datamodel.SiteLinkList ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.SiteLinkList' );
+	serialize: function( siteLinkSet ) {
+		if( !( siteLinkSet instanceof wb.datamodel.SiteLinkSet ) ) {
+			throw new Error( 'Not an instance of wikibase.datamodel.SiteLinkSet' );
 		}
 
 		var serialization = {},
-			siteIds = siteLinkList.getSiteIds(),
+			siteIds = siteLinkSet.getKeys(),
 			siteLinkSerializer = new MODULE.SiteLinkSerializer();
 
 		for( var i = 0; i < siteIds.length; i++ ) {
 			serialization[siteIds[i]] = siteLinkSerializer.serialize(
-				siteLinkList.getBySiteId( siteIds[i] )
+				siteLinkSet.getByKey( siteIds[i] )
 			);
 		}
 

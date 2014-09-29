@@ -8,27 +8,27 @@
 var MODULE = wb.serialization,
 	PARENT = MODULE.Unserializer;
 
-/* Unserializer for TermList objects.
+/* Unserializer for MultiTermSet objects.
  *
  * @constructor
  * @extends wikibase.serialization.Unserializer
  * @since 2.0
  */
-MODULE.TermListUnserializer = util.inherit( 'WbTermListUnserializer', PARENT, {
+MODULE.MultiTermSetUnserializer = util.inherit( 'WbMultiTermSetUnserializer', PARENT, {
 	/**
 	 * @see wikibase.serialization.Unserializer.unserialize
 	 *
-	 * @return {wikibase.datamodel.TermList}
+	 * @return {wikibase.datamodel.MultiTermSet}
 	 */
 	unserialize: function( serialization ) {
-		var terms = [],
-			termUnserializer = new MODULE.TermUnserializer();
+		var multiTerms = [],
+			multiTermUnserializer = new MODULE.MultiTermUnserializer();
 
 		for( var languageCode in serialization ) {
-			terms.push( termUnserializer.unserialize( serialization[languageCode] ) );
+			multiTerms.push( multiTermUnserializer.unserialize( serialization[languageCode] ) );
 		}
 
-		return new wb.datamodel.TermList( terms );
+		return new wb.datamodel.MultiTermSet( multiTerms );
 	}
 } );
 

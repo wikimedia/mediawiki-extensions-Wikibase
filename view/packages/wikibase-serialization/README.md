@@ -37,14 +37,18 @@ version 1.0 of this package:
 * Added <code>wikibase.serialization.FingerprintUnserializer</code>.
 * Added <code>wikibase.serialization.MultilingualSerializer</code>.
 * Added <code>wikibase.serialization.MultilingualUnserializer</code>.
+* Added <code>wikibase.serialization.MultiTermSerializer</code>.
+* Added <code>wikibase.serialization.MultiTermUnserializer</code>.
+* Added <code>wikibase.serialization.MultiTermSetSerializer</code>.
+* Added <code>wikibase.serialization.MultiTermSetUnserializer</code>.
 * Added <code>wikibase.serialization.ReferenceListSerializer</code>.
 * Added <code>wikibase.serialization.ReferenceListUnserializer</code>.
 * Added <code>wikibase.serialization.ReferenceSerializer</code>.
 * Added <code>wikibase.serialization.ReferenceUnserializer</code>.
-* Added <code>wikibase.serialization.SiteLinkListSerializer</code>.
-* Added <code>wikibase.serialization.SiteLinkListUnserializer</code>.
 * Added <code>wikibase.serialization.SiteLinkSerializer</code>.
 * Added <code>wikibase.serialization.SiteLinkUnserializer</code>.
+* Added <code>wikibase.serialization.SiteLinkSetSerializer</code>.
+* Added <code>wikibase.serialization.SiteLinkSetUnserializer</code>.
 * Added <code>wikibase.serialization.SnakListSerializer</code>.
 * Added <code>wikibase.serialization.SnakListUnserializer</code>.
 * Added <code>wikibase.serialization.SnakSerializer</code>.
@@ -53,12 +57,8 @@ version 1.0 of this package:
 * Added <code>wikibase.serialization.StatementListUnserializer</code>.
 * Added <code>wikibase.serialization.StatementSerializer</code>.
 * Added <code>wikibase.serialization.StatementUnserializer</code>.
-* Added <code>wikibase.serialization.TermGroupListSerializer</code>.
-* Added <code>wikibase.serialization.TermGroupListUnserializer</code>.
-* Added <code>wikibase.serialization.TermGroupSerializer</code>.
-* Added <code>wikibase.serialization.TermGroupUnserializer</code>.
-* Added <code>wikibase.serialization.TermListSerializer</code>.
-* Added <code>wikibase.serialization.TermListUnserializer</code>.
+* Added <code>wikibase.serialization.TermSetSerializer</code>.
+* Added <code>wikibase.serialization.TermSetUnserializer</code>.
 * Added <code>wikibase.serialization.TermSerializer</code>.
 * Added <code>wikibase.serialization.TermUnserializer</code>.
 

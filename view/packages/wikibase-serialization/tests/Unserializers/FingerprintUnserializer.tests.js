@@ -22,9 +22,9 @@ var testSets = [
 			aliases: { en: [{ language: 'en', value: 'alias' }] }
 		},
 		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermList( [new wb.datamodel.Term( 'en', 'label' )] ),
-			new wb.datamodel.TermList( [new wb.datamodel.Term( 'en', 'description' )] ),
-			new wb.datamodel.TermGroupList( [new wb.datamodel.TermGroup( 'en', ['alias'] )] )
+			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'en', 'label' )] ),
+			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'en', 'description' )] ),
+			new wb.datamodel.MultiTermSet( [new wb.datamodel.MultiTerm( 'en', ['alias'] )] )
 		)
 	]
 ];

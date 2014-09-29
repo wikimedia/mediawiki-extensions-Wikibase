@@ -69,7 +69,7 @@ function addSerializedSnaksToSnakList( serializedSnaks, snakList ) {
 	var snakUnserializer = new MODULE.SnakUnserializer();
 
 	for( var i = 0; i < serializedSnaks.length; i++ ) {
-		snakList.addSnak( snakUnserializer.unserialize( serializedSnaks[i] ) );
+		snakList.addItem( snakUnserializer.unserialize( serializedSnaks[i] ) );
 	}
 
 	return snakList;
