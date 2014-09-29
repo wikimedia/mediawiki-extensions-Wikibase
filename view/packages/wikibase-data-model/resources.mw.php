@@ -115,6 +115,7 @@ return call_user_func( function() {
 				'Entity.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
 			),
 		),

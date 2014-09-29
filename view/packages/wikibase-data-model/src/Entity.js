@@ -60,7 +60,18 @@ $.extend( SELF.prototype, {
 	 */
 	getType: function() {
 		return this.constructor.TYPE;
-	}
+	},
+
+	/**
+	 * @return {boolean}
+	 */
+	isEmpty: util.abstractMember,
+
+	/**
+	 * @param {*}
+	 * @return {boolean}
+	 */
+	equals: util.abstractMember
 } );
 
 }( wikibase, jQuery ) );
