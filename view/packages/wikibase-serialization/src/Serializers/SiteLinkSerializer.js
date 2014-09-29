@@ -21,6 +21,10 @@ MODULE.SiteLinkSerializer = util.inherit( 'WbSiteLinkSerializer', PARENT, {
 	 * @return {Object}
 	 */
 	serialize: function( siteLink ) {
+		if( !( siteLink instanceof wb.datamodel.SiteLink ) ) {
+			throw new Error( 'Not an instance of wikibase.datamodel.SiteLink' );
+		}
+
 		return {
 			site: siteLink.getSiteId(),
 			title: siteLink.getPageName(),
