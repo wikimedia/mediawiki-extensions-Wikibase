@@ -24,14 +24,7 @@ var ItemUnserializationExpert =
 	 * @return {Object}
 	 */
 	unserialize: function( serialization ) {
-		var siteLinkUnserializer = new MODULE.SiteLinkUnserializer(),
-			siteLinks = [];
-
-		for( var siteId in serialization.sitelinks ) {
-			siteLinks.push( siteLinkUnserializer.unserialize( serialization.sitelinks[siteId] ) );
-		}
-
-		return siteLinks;
+		return ( new MODULE.SiteLinkSetUnserializer() ).unserialize( serialization.sitelinks );
 	}
 } );
 

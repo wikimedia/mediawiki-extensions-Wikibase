@@ -15,9 +15,7 @@ var MODULE = wb.serialization,
  * @extends {wikibase.serialization.Serializer}
  * @since 2.0
  */
-var ItemSerializationExpert =
-	util.inherit( 'WbEntitySerializerItemExpert', PARENT,
-{
+var ItemSerializationExpert = util.inherit( 'WbEntitySerializerItemExpert', PARENT, {
 	/**
 	 * @see wikibase.serialization.Serializer.serialize
 	 *
@@ -29,18 +27,11 @@ var ItemSerializationExpert =
 			throw new Error( 'Not an instance of wikibase.datamodel.Item' );
 		}
 
-		var siteLinks = item.getSiteLinks(),
-			siteLinkSerializer = new MODULE.SiteLinkSerializer(),
-			serialization = {
-				sitelinks: {}
-			};
+		var siteLinkSetSerializer = new MODULE.SiteLinkSetSerializer();
 
-		for( var i = 0; i < siteLinks.length; i++ ) {
-			serialization.sitelinks[siteLinks[i].getSiteId()]
-				= siteLinkSerializer.serialize( siteLinks[i] );
-		}
-
-		return serialization;
+		return {
+			sitelinks: siteLinkSetSerializer.serialize( item.getSiteLinks() )
+		};
 	}
 } );
 

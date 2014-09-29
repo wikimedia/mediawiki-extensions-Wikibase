@@ -27,40 +27,46 @@
 		 * @return {wikibase.datamodel.Entity}
 		 */
 		unserialize: function( serialization ) {
-			var entityType = serialization.type,
-				typeSpecificUnserializer = typeSpecificUnserializers[ entityType ],
-				multilingualUnserializer = new MODULE.MultilingualUnserializer(),
-				claimsUnserializer = new MODULE.ClaimsUnserializer();
+			var entityType = serialization.type;
 
 			if( !entityType || typeof entityType !== 'string' ) {
 				throw new Error( 'Can not determine type of Entity from serialized object' );
 			}
 
-			// create map with data which is the same for all types of entities:
-			var entityMapData = {
-				type: entityType,
-				id: serialization.id,
-				// TODO: Remove title since it is not part of native serialization format
-				title: serialization.title,
-				label: multilingualUnserializer.unserialize( serialization.labels ),
-				description: multilingualUnserializer.unserialize( serialization.descriptions ),
-				aliases: multilingualUnserializer.unserialize( serialization.aliases ),
-				claims: claimsUnserializer.unserialize( serialization.claims )
-			};
+			var typeSpecificUnserializer = typeSpecificUnserializers[entityType],
+				typeSpecificData = {},
+				fingerprintUnserializer = new MODULE.FingerprintUnserializer(),
+				fingerprint = fingerprintUnserializer.unserialize( serialization ),
+				statementGroupSetUnserializer = new MODULE.StatementGroupSetUnserializer(),
+				statementGroupSet = statementGroupSetUnserializer.unserialize(
+					serialization.claims
+				);
 
 			// extend map with data which is specific to the entity type if there is handling for
 			// the entity type we are dealing with:
 			if( typeSpecificUnserializer ) {
 				typeSpecificUnserializer.setOptions( this._options );
-				var typeSpecificData = typeSpecificUnserializer.unserialize( serialization );
-
-				// merge type specific data with ordinary data
-				$.extend( entityMapData, typeSpecificData );
+				typeSpecificData = typeSpecificUnserializer.unserialize( serialization );
 			}
 
-			return wb.datamodel.Entity.newFromMap(
-				entityMapData
-			);
+			// TODO: Implement dedicated Unserializers and proper strategy
+			if( entityType === 'property' ) {
+				return new wb.datamodel.Property(
+					serialization.id,
+					typeSpecificData.datatype,
+					fingerprint,
+					statementGroupSet
+				);
+			} else if( entityType === 'item' ) {
+				return new wb.datamodel.Item(
+					serialization.id,
+					fingerprint,
+					statementGroupSet,
+					typeSpecificData
+				);
+			}
+
+			throw new Error( 'Unserializing entity type "' + entityType + '" is not supported' );
 		}
 	} );
 

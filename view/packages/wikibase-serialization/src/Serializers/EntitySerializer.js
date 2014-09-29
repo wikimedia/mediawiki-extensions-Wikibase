@@ -34,17 +34,17 @@
 
 			var entityType = entity.getType(),
 				typeSpecificSerializer = typeSpecificSerializers[entityType],
-				multilingualSerializer = new MODULE.MultilingualSerializer(),
-				claimsSerializer = new MODULE.ClaimsSerializer();
+				fingerprintSerializer = new MODULE.FingerprintSerializer(),
+				statementGroupSetSerializer = new MODULE.StatementGroupSetSerializer();
 
-			var serialization = {
-				type: entityType,
-				id: entity.getId(),
-				labels: multilingualSerializer.serialize( entity.getLabels() ),
-				descriptions: multilingualSerializer.serialize( entity.getDescriptions() ),
-				aliases: multilingualSerializer.serialize( entity.getAllAliases() ),
-				claims: claimsSerializer.serialize( entity.getClaims() )
-			};
+			var serialization = $.extend( true,
+				{
+					type: entityType,
+					id: entity.getId(),
+					claims: statementGroupSetSerializer.serialize( entity.getStatements() )
+				},
+				fingerprintSerializer.serialize( entity.getFingerprint() )
+			);
 
 			if( typeSpecificSerializer ) {
 				typeSpecificSerializer.setOptions( this._options );

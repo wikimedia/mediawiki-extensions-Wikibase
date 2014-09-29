@@ -30,7 +30,7 @@ var PropertySerializationExpert =
 		}
 
 		return {
-			datatype: property.getDataType()
+			datatype: property.getDataTypeId()
 		};
 	}
 } );

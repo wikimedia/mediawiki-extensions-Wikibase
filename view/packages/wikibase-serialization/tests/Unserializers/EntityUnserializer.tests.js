@@ -2,98 +2,79 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-
 ( function( $, wb, QUnit ) {
 'use strict';
 
 QUnit.module( 'wikibase.serialization.EntityUnserializer' );
 
-/**
- * Object containing basic values that are supposed to just exist for testing unserializing an
- * entity. No individualization is necessary since their specific unserialization is supposed to be
- * tested by the tests of the corresponding unserializers.
- * @type {Object[]}
- */
-var testBase = [
+var defaults = [
 	{
-		labels: {
-			en: {
-				language: 'en',
-				value: 'en label'
-			}
+		fingerprint: {
+			labels: { en: { language: 'en', value: 'label' } },
+			descriptions: { en: { language: 'en', value: 'description' } },
+			aliases: { en: [{ language: 'en', value: 'alias' }] }
 		},
-		descriptions: {
-			en: {
-				language: 'en',
-				value: 'en description'
-			}
-		},
-		aliases: {
-			en: [{ language: 'en', value: 'en alias' }]
-		},
-		claims: {
+		statementGroupSet: {
 			P1: [ {
 				id: 'Q1$1',
 				mainsnak: {
 					snaktype: 'novalue',
 					property: 'P1'
 				},
-				type: 'claim',
+				type: 'statement',
 				rank: 'normal'
 			} ]
 		}
 	}, {
-		label: {
-			en: 'en label'
-		},
-		description: {
-			en: 'en description'
-		},
-		aliases: {
-			en: ['en alias']
-		},
-		claims: [
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1' )
-		]
+		fingerprint: new wb.datamodel.Fingerprint(
+			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'en', 'label' )] ),
+			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'en', 'description' )] ),
+			new wb.datamodel.MultiTermSet( [new wb.datamodel.MultiTerm( 'en', ['alias'] )] )
+		),
+		statementGroupSet: new wb.datamodel.StatementGroupSet( [
+			new wb.datamodel.StatementGroup( 'P1', new wb.datamodel.StatementList( [
+				new wb.datamodel.Statement(
+					new wb.datamodel.Claim(
+						new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1'
+					)
+				)
+			] ) )
+		] )
 	}
 ];
 
 var testCases = [
 	[
-		$.extend( true, {}, testBase[0], {
+		$.extend( true, {}, defaults[0].fingerprint, {
 			id: 'P1',
 			type: 'property',
-			datatype: 'string'
+			datatype: 'string',
+			claims: defaults[0].statementGroupSet
 		} ),
-		wb.datamodel.Entity.newFromMap(
-			$.extend( true, {}, testBase[1],  {
-				id: 'P1',
-				type: 'property',
-				datatype: 'string'
-			} )
+		new wb.datamodel.Property(
+			'P1',
+			'string',
+			defaults[1].fingerprint,
+			defaults[1].statementGroupSet
 		)
 	], [
-		$.extend( true, {}, testBase[0], {
+		$.extend( true, {}, defaults[0].fingerprint, {
 			id: 'Q1',
 			type: 'item',
+			claims: defaults[0].statementGroupSet,
 			sitelinks: {
 				someSite: {
 					site: 'someSite',
-					title: 'someSite title',
+					title: 'page',
 					badges: []
 				}
 			}
 		} ),
-		wb.datamodel.Entity.newFromMap(
-			$.extend( true, {}, testBase[1],  {
-				id: 'Q1',
-				type: 'item',
-				sitelinks: [ {
-					site: 'someSite',
-					title: 'someSite title',
-					badges: []
-				} ]
-			} )
+		new wb.datamodel.Item(
+			'Q1',
+			defaults[1].fingerprint,
+			defaults[1].statementGroupSet,
+			new wb.datamodel.SiteLinkSet( [new wb.datamodel.SiteLink( 'someSite', 'page' )] )
 		)
 	]
 ];
@@ -102,15 +83,8 @@ QUnit.test( 'unserialize()', function( assert ) {
 	var entityUnserializer = new wb.serialization.EntityUnserializer();
 
 	for( var i = 0; i < testCases.length; i++ ) {
-		var entity = entityUnserializer.unserialize( testCases[i][0] ),
-			expectedEntity = testCases[i][1];
-
-		// TODO: Use equals() as soon as it is implemented in wb.datamodel.Entity
 		assert.ok(
-			entity.getId() === expectedEntity.getId()
-			&& entity.getType() === expectedEntity.getType()
-			&& entity.getLabel() === expectedEntity.getLabel()
-			&& entity.getDescription() === expectedEntity.getDescription(),
+			entityUnserializer.unserialize( testCases[i][0] ).equals( testCases[i][1] ),
 			'Test set #' + i + ': Unserializing successful.'
 		);
 	}
