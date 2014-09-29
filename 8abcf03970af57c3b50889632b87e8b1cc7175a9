@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_6a76a8d7",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-29T10:37:47Z",
+      "side": 1,
+      "message": "Removals of multiple enbtities for a single aspect are batched. Removing all entity/aspect combinations with a single query seemed like a bad idea to me, because it would lead to a WHERE expression of the form\n\n  WHERE ( aspect \u003d \u0027X\u0027 AND id \u003d \u0027Q7\u0027 ) \n    OR ( aspect \u003d \u0027X\u0027 AND id \u003d \u0027Q9\u0027 ) \n    OR ( aspect \u003d \u0027Z\u0027 AND id \u003d \u0027Q7\u0027 )... \n\nThat seems a lot worse than four queries of the form \n\n  WHERE aspect \u003d \u0027X\u0027 AND id IN (\u0027Q7\u0027, \u0027Q9\u0027, ...)\n\nI expect this to be much more efficient. Consider that the number of possible aspects is very limited (max 4), while the list if IDs may be large (up to a thousand).",
+      "parentUuid": "ce8c5bf9_2ff755f4",
+      "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_8ff22102",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2014-09-27T17:05:13Z",
       "side": 1,
       "message": "Even with transaction consider a bulk insert. Database*::insert() can automatically batch multiple rows if the backend supports it, and fall back on loop of single inserts if not.\n\nJust noticed you asked about this in https://gerrit.wikimedia.org/r/#/c/158078/ follow up comment which I missed, sorry. Bulk insert with transaction is as good as it gets for sqlite, but DatabaseSqlite::insert can handle multiple rows.",
+      "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_0a7b5cbe",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-29T10:37:47Z",
+      "side": 1,
+      "message": "Oh, I didn\u0027t know Database*::insert supported this! Cool. I was looking for a multiInsert method.",
+      "parentUuid": "ce8c5bf9_8ff22102",
       "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_2a78a0be",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-29T10:37:47Z",
+      "side": 1,
+      "message": "Batch how? It already uses an IN ( .... ) clause to list all the entities to remove, and does so in a single query.\n\nOh wait, you mean *split* large batches, not pack more into a single request, I guess? Ok, so how many rows would be a good max?",
+      "parentUuid": "ce8c5bf9_4ffc19d6",
+      "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_6f331dc1",
         "filename": "client/includes/Usage/Sql/entity_usage.sql",
         "patchSetId": 9
@@ -64,6 +118,24 @@
       "writtenOn": "2014-09-27T17:05:13Z",
       "side": 1,
       "message": "This was once an ENUM, right? BINARY(1) is fine too, of course, if you\u0027re ok with single character codes and want a cross-platform schema.\n\nFor the record though, ENUM is not painful in MySQL / MariaDB 5.5+ where adding new enumerated values is non-blocking.",
+      "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_ca8494a6",
+        "filename": "client/includes/Usage/Sql/entity_usage.sql",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-29T10:37:47Z",
+      "side": 1,
+      "message": "Yea, I changed this since SQLite doesn\u0027t have support for ENUM at all, so we can\u0027t use it.\n\nI suppose DatabaserSqlite::replaceVars could turn ENUM (...) into a simple TEXT or BLOB field. That should work, right?",
+      "parentUuid": "ce8c5bf9_6f331dc1",
       "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
