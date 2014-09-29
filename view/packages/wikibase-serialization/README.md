@@ -39,10 +39,12 @@ version 1.0 of this package:
 * Added <code>wikibase.serialization.EntitySerializer</code>.
 * Added <code>wikibase.serialization.FingerprintSerializer</code>.
 * Added <code>wikibase.serialization.FingerprintDeserializer</code>.
+* Added <code>wikibase.serialization.ItemSerializer</code>.
 * Added <code>wikibase.serialization.MultiTermSerializer</code>.
 * Added <code>wikibase.serialization.MultiTermDeserializer</code>.
 * Added <code>wikibase.serialization.MultiTermSetSerializer</code>.
 * Added <code>wikibase.serialization.MultiTermSetDeserializer</code>.
+* Added <code>wikibase.serialization.PropertySerializer</code>.
 * Added <code>wikibase.serialization.ReferenceListSerializer</code>.
 * Added <code>wikibase.serialization.ReferenceListDeserializer</code>.
 * Added <code>wikibase.serialization.ReferenceSerializer</code>.

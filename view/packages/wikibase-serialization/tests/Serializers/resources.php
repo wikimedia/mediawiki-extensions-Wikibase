@@ -121,6 +121,30 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.ItemSerializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'ItemSerializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.Fingerprint',
+				'wikibase.datamodel.Item',
+				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.MultiTermSet',
+				'wikibase.datamodel.Property',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.SiteLink',
+				'wikibase.datamodel.SiteLinkSet',
+				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.StatementGroupSet',
+				'wikibase.datamodel.StatementList',
+				'wikibase.datamodel.Term',
+				'wikibase.datamodel.TermSet',
+				'wikibase.serialization.ItemSerializer',
+			),
+		),
+
 		'wikibase.serialization.MultiTermSetSerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'MultiTermSetSerializer.tests.js',
@@ -139,6 +163,28 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.serialization.MultiTermSerializer',
+			),
+		),
+
+		'wikibase.serialization.PropertySerializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'EntitySerializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.Fingerprint',
+				'wikibase.datamodel.Item',
+				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.MultiTermSet',
+				'wikibase.datamodel.Property',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.StatementGroupSet',
+				'wikibase.datamodel.StatementList',
+				'wikibase.datamodel.Term',
+				'wikibase.datamodel.TermSet',
+				'wikibase.serialization.PropertySerializer',
 			),
 		),
 

@@ -120,6 +120,20 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.ItemSerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'ItemSerializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.Item',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.FingerprintSerializer',
+				'wikibase.serialization.SiteLinkSetSerializer',
+				'wikibase.serialization.StatementGroupSetSerializer',
+			),
+		),
+
 		'wikibase.serialization.MultiTermSerializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'MultiTermSerializer.js',
@@ -142,6 +156,19 @@ return call_user_func( function() {
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.MultiTermSerializer',
+			),
+		),
+
+		'wikibase.serialization.PropertySerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'ItemSerializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.Item',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.FingerprintSerializer',
+				'wikibase.serialization.StatementGroupSetSerializer',
 			),
 		),
 
