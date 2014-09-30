@@ -8,6 +8,15 @@ return call_user_func( function() {
 	);
 
 	return array(
+		'wikibase.client.getMwRepoForApi' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.client.getMwRepoForApi.js'
+			),
+			'dependencies' => array(
+				'mw.config.values.wbRepo',
+				'wikibase.api.getLocationAgnosticMwApi',
+			)
+		),
 		'wikibase.client.init' => $moduleTemplate + array(
 			'position' => 'top',
 			'skinStyles' => array(
