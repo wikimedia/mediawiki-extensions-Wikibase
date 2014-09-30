@@ -20,6 +20,8 @@ matrix:
       php: hhvm-nightly
   exclude:
     - env: THENEEDFORTHIS=FAIL
+  allow_failures:
+    - php: hhvm-nightly
 
 before_script:
   - composer require "wikibase/data-model=$DM" --prefer-source
