@@ -8,7 +8,7 @@
 /**
  * A Group referencing a container of which all items feature the key specified with the Group.
  * @constructor
- * @since 0.4
+ * @since 1.0
  *
  * @param {*} key
  * @param {Function} ItemContainerConstructor

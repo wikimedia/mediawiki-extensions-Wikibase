@@ -8,7 +8,7 @@
 /**
  * Ordered set of texts for one language.
  * @constructor
- * @since 0.4
+ * @since 1.0
  *
  * @param {string} languageCode
  * @param {string[]} texts

@@ -8,7 +8,7 @@
 /**
  * Represents a term (combination of a language code and a text string).
  * @constructor
- * @since 0.4
+ * @since 1.0
  *
  * @param {string} languageCode
  * @param {string} text

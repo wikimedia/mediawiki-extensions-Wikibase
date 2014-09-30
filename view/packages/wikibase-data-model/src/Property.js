@@ -11,7 +11,7 @@ var PARENT = wb.datamodel.Entity;
  * Represents a Wikibase Property.
  * @constructor
  * @extends wikibase.datamodel.Entity
- * @since 0.4
+ * @since 1.0
  *
  * @param {string} entityId
  * @param {string} dataTypeId

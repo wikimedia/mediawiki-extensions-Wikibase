@@ -10,7 +10,7 @@ var PARENT = wb.datamodel.Group;
 /**
  * Ordered list of Statement objects, each featuring the same property id.
  * @constructor
- * @since 0.4
+ * @since 1.0
  *
  * @param {wikibase.datamodel.StatementList} [statementList]
  */

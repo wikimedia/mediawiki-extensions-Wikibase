@@ -9,7 +9,7 @@ var PARENT = wb.datamodel.Set;
 
 /**
  * @constructor
- * @since 0.4
+ * @since 1.0
  *
  * @param {wikibase.datamodel.ClaimGroup[]} [claimGroups]
  */

@@ -7,7 +7,7 @@
 
 /**
  * @constructor
- * @since 0.4
+ * @since 1.0
  */
 var SELF = wb.datamodel.Groupable = function WbDataModelGroupable() {};
 

@@ -9,7 +9,7 @@ var PARENT = wb.datamodel.List;
 
 /**
  * @constructor
- * @since 0.4
+ * @since 1.0
  *
  * @param {wikibase.datamodel.Claim[]} [claims]
  */

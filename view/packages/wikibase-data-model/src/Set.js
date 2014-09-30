@@ -10,7 +10,7 @@ var PARENT = wb.datamodel.Groupable;
 /**
  * Unordered set.
  * @constructor
- * @since 0.4
+ * @since 1.0
  *
  * @param {Function} ItemConstructor
  * @param {string} itemKeyFunctionName
