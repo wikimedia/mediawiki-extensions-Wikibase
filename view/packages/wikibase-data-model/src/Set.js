@@ -20,33 +20,33 @@ var SELF = wb.datamodel.Set = util.inherit(
 	'WbDataModelSet',
 	PARENT,
 	function( ItemConstructor, itemKeyFunctionName, items ) {
-
-	if( !$.isFunction( ItemConstructor ) ) {
-		throw new Error( 'Item constructor needs to be a Function' );
-	} else if( !$.isFunction( ItemConstructor.prototype.equals ) ) {
-		throw new Error( 'List item prototype needs equals() method' );
-	} else if( !$.isFunction( ItemConstructor.prototype[itemKeyFunctionName] ) ) {
-		throw new Error( 'Missing ' + itemKeyFunctionName + '() in list item prototype to receive '
-			+ 'the item key from' );
-	}
-
-	items = items || [];
-
-	this._ItemConstructor = ItemConstructor;
-	this._itemKeyFunctionName = itemKeyFunctionName;
-	this._items = {};
-	this.length = 0;
-
-	for( var i = 0; i < items.length; i++ ) {
-		this._assertIsItem( items[i] );
-
-		if( this._items[this.getItemKey( items[i] )] ) {
-			throw new Error( 'There may only be one item per item key' );
+		if( !$.isFunction( ItemConstructor ) ) {
+			throw new Error( 'Item constructor needs to be a Function' );
+		} else if( !$.isFunction( ItemConstructor.prototype.equals ) ) {
+			throw new Error( 'List item prototype needs equals() method' );
+		} else if( !$.isFunction( ItemConstructor.prototype[itemKeyFunctionName] ) ) {
+			throw new Error( 'Missing ' + itemKeyFunctionName + '() in list item prototype to '
+				+ ' receive the item key from' );
 		}
 
-		this.setItem( items[i] );
-	}
-}, {
+		items = items || [];
+
+		this._ItemConstructor = ItemConstructor;
+		this._itemKeyFunctionName = itemKeyFunctionName;
+		this._items = {};
+		this.length = 0;
+
+		for( var i = 0; i < items.length; i++ ) {
+			this._assertIsItem( items[i] );
+
+			if( this._items[this.getItemKey( items[i] )] ) {
+				throw new Error( 'There may only be one item per item key' );
+			}
+
+			this.setItem( items[i] );
+		}
+	},
+{
 	/**
 	 * @type {Function}
 	 */

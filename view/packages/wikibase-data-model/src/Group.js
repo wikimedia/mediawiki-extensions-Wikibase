@@ -46,7 +46,7 @@ $.extend( SELF.prototype, {
 	 */
 	_key: null,
 
-		/**
+	/**
 	 * @type {Function}
 	 */
 	_ItemContainerConstructor: null,
@@ -143,8 +143,8 @@ $.extend( SELF.prototype, {
 	equals: function( group ) {
 		return group === this
 			|| group instanceof SELF
-			&& this._key === group.getKey()
-			&& this._itemContainer.equals( group.getItemContainer() );
+				&& this._key === group.getKey()
+				&& this._itemContainer.equals( group.getItemContainer() );
 	}
 
 } );
