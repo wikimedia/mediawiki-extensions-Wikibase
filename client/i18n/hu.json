@@ -41,5 +41,6 @@
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} szerkesztések mutatása a friss változtatásokban",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-szerkesztés",
-	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-változások mutatása a figyelőlistádon"
+	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-változások mutatása a figyelőlistádon",
+	"wikibase-otherprojects": "Társlapok"
 }
