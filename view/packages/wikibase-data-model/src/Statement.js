@@ -7,7 +7,6 @@
 'use strict';
 
 /**
- * Represents a Wikibase Statement.
  * @constructor
  * @since 0.3
  *
@@ -15,7 +14,7 @@
  * @param {wikibase.datamodel.ReferenceList|null} [references]
  * @param {number} [rank]
  */
-var SELF = wb.datamodel.Statement = function( claim, references, rank ) {
+var SELF = wb.datamodel.Statement = function WbDataModelStatement( claim, references, rank ) {
 	this.setClaim( claim );
 	this.setReferences( references || new wb.datamodel.ReferenceList() );
 	this.setRank( rank === undefined ? wb.datamodel.Statement.RANK.NORMAL : rank );

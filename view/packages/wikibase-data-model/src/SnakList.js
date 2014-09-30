@@ -8,14 +8,13 @@
 var PARENT = wb.datamodel.List;
 
 /**
- * Ordered set Snak objects.
  * @constructor
  * @abstract
  * @since 0.3
  *
  * @param {wikibase.datamodel.Snak[]} [snaks]
  */
-wb.datamodel.SnakList = util.inherit( 'wbSnakList', PARENT, function( snaks ) {
+wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( snaks ) {
 	PARENT.call( this, wikibase.datamodel.Snak, snaks );
 }, {
 	/**

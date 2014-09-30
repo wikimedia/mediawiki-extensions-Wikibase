@@ -8,7 +8,6 @@
 var PARENT = wb.datamodel.Snak;
 
 /**
- * Represents a Wikibase PropertyValueSnak.
  * @constructor
  * @extends wikibase.datamodel.Snak
  * @since 0.3
@@ -17,7 +16,7 @@ var PARENT = wb.datamodel.Snak;
  * @param {dataValues.DataValue} value
  */
 var SELF = wb.datamodel.PropertyValueSnak = util.inherit(
-	'WbPropertyValueSnak',
+	'WbDataModelPropertyValueSnak',
 	PARENT,
 	function( propertyId, value ) {
 		if( !( value instanceof dv.DataValue ) ) {

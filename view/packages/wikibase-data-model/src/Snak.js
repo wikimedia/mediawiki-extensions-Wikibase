@@ -6,14 +6,13 @@
 'use strict';
 
 /**
- * Represents a Wikibase Snak.
  * @constructor
  * @abstract
  * @since 0.3
  *
  * @param {string} propertyId
  */
-var SELF = wb.datamodel.Snak = function WbSnak( propertyId ) {
+var SELF = wb.datamodel.Snak = function WbDataModelSnak( propertyId ) {
 	if( !this.constructor.TYPE ) {
 		throw new Error( 'Can not create abstract Snak of no specific type' );
 	} else if( !propertyId ) {

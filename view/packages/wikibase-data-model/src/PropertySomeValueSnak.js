@@ -8,14 +8,15 @@
 var PARENT = wb.datamodel.Snak;
 
 /**
- * Represents a Wikibase PropertySomeValueSnak.
  * @constructor
  * @extends wikibase.datamodel.Snak
  * @since 0.3
  *
  * @param {string} propertyId
  */
-var SELF = wb.datamodel.PropertySomeValueSnak = util.inherit( 'WbPropertySomeValueSnak', PARENT, {} );
+var SELF
+	= wb.datamodel.PropertySomeValueSnak
+	= util.inherit( 'WbDataModelPropertySomeValueSnak', PARENT, {} );
 
 /**
  * @see wikibase.datamodel.Snak.TYPE

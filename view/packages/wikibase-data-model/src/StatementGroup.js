@@ -15,7 +15,7 @@ var PARENT = wb.datamodel.Group;
  * @param {wikibase.datamodel.StatementList} [statementList]
  */
 wb.datamodel.StatementGroup = util.inherit(
-	'wbStatementGroup',
+	'WbDataModelStatementGroup',
 	PARENT,
 	function( propertyId, statementList ) {
 		PARENT.call( this, propertyId, wb.datamodel.StatementList, 'getPropertyIds', statementList );

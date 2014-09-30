@@ -8,7 +8,6 @@
 var PARENT = wb.datamodel.Entity;
 
 /**
- * Represents a Wikibase Item.
  * @constructor
  * @extends wikibase.datamodel.Entity
  * @since 1.0
@@ -19,7 +18,7 @@ var PARENT = wb.datamodel.Entity;
  * @param {wikibase.datamodel.SiteLinkSet|null} [siteLinkSet]
  */
 var SELF = wb.datamodel.Item = util.inherit(
-	'WbItem',
+	'WbDataModelItem',
 	PARENT,
 	function( entityId, fingerprint, statementGroupSet, siteLinkSet ) {
 		fingerprint = fingerprint || new wb.datamodel.Fingerprint();

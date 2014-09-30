@@ -14,7 +14,7 @@ var PARENT = wb.datamodel.List;
  * @param {wikibase.datamodel.Reference[]} [references]
  */
 wb.datamodel.ReferenceList = util.inherit(
-	'wbReferenceList',
+	'wbDataModelReferenceList',
 	PARENT,
 	function( references ) {
 		PARENT.call( this, wikibase.datamodel.Reference, references );

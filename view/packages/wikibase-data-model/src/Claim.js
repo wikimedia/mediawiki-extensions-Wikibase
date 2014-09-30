@@ -6,7 +6,6 @@
 'use strict';
 
 /**
- * Represents a Wikibase Claim.
  * @constructor
  * @since 0.3
  *
@@ -15,7 +14,7 @@
  * @param {string|null} [guid] The Global Unique Identifier of this Claim. Can be omitted or null
  *        if this is a new Claim, not yet stored in the database and associated with some entity.
  */
-var SELF = wb.datamodel.Claim = function WbClaim( mainSnak, qualifiers, guid ) {
+var SELF = wb.datamodel.Claim = function WbDataModelClaim( mainSnak, qualifiers, guid ) {
 	this.setMainSnak( mainSnak );
 	this.setQualifiers( qualifiers || new wb.datamodel.SnakList() );
 	this._guid = guid || null;

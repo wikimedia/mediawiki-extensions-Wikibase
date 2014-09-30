@@ -13,8 +13,12 @@ var PARENT = wb.datamodel.Set;
  *
  * @param {wikibase.datamodel.MultiTerm[]} [multiTerms]
  */
-wb.datamodel.MultiTermSet = util.inherit( 'wbMultiTermSet', PARENT, function( multiTerms ) {
-	PARENT.call( this, wb.datamodel.MultiTerm, 'getLanguageCode', multiTerms );
-} );
+wb.datamodel.MultiTermSet = util.inherit(
+	'WbDataModelMultiTermSet',
+	PARENT,
+	function( multiTerms ) {
+		PARENT.call( this, wb.datamodel.MultiTerm, 'getLanguageCode', multiTerms );
+	}
+);
 
 }( wikibase ) );

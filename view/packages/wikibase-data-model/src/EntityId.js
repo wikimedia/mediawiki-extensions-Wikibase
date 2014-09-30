@@ -8,7 +8,6 @@
 	var PARENT = dv.DataValue;
 
 	/**
-	 * Represents the ID of an Entity.
 	 * @constructor
 	 * @since 0.3
 	 *
@@ -28,7 +27,7 @@
 		this._numericId = numericId;
 	};
 
-	wb.datamodel.EntityId = util.inherit( 'WbEntityId', PARENT, constructor, {
+	wb.datamodel.EntityId = util.inherit( 'WbDataModelEntityId', PARENT, constructor, {
 
 		/**
 		 * @type String

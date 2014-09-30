@@ -15,23 +15,27 @@ var PARENT = wb.datamodel.Groupable;
  * @param {Function} ItemConstructor
  * @param {*[]} [items]
  */
-var SELF = wb.datamodel.List = util.inherit( 'WbDataModelList', PARENT, function( ItemConstructor, items ) {
-	if( !$.isFunction( ItemConstructor ) ) {
-		throw new Error( 'Item constructor needs to be a Function' );
-	} else if( !$.isFunction( ItemConstructor.prototype.equals ) ) {
-		throw new Error( 'List item prototype needs equals() method' );
-	}
+var SELF = wb.datamodel.List = util.inherit(
+	'WbDataModelList',
+	PARENT,
+	function( ItemConstructor, items ) {
+		if( !$.isFunction( ItemConstructor ) ) {
+			throw new Error( 'Item constructor needs to be a Function' );
+		} else if( !$.isFunction( ItemConstructor.prototype.equals ) ) {
+			throw new Error( 'List item prototype needs equals() method' );
+		}
 
-	items = items || [];
+		items = items || [];
 
-	this._ItemConstructor = ItemConstructor;
-	this._items = [];
-	this.length = 0;
+		this._ItemConstructor = ItemConstructor;
+		this._items = [];
+		this.length = 0;
 
-	for( var i = 0; i < items.length; i++ ) {
-		this.addItem( items[i] );
-	}
-}, {
+		for( var i = 0; i < items.length; i++ ) {
+			this.addItem( items[i] );
+		}
+	},
+{
 	/**
 	 * @type {Function}
 	 */

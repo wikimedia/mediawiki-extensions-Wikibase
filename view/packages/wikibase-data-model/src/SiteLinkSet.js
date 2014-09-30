@@ -13,7 +13,7 @@ var PARENT = wb.datamodel.Set;
  *
  * @param {wikibase.datamodel.SiteLink[]} [siteLinks]
  */
-wb.datamodel.SiteLinkSet = util.inherit( 'wbSiteLinkSet', PARENT, function( siteLinks ) {
+wb.datamodel.SiteLinkSet = util.inherit( 'WbDataModelSiteLinkSet', PARENT, function( siteLinks ) {
 	PARENT.call( this, wb.datamodel.SiteLink, 'getSiteId', siteLinks );
 } );
 

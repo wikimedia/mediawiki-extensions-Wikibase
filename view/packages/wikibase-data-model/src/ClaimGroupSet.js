@@ -13,8 +13,11 @@ var PARENT = wb.datamodel.Set;
  *
  * @param {wikibase.datamodel.ClaimGroup[]} [claimGroups]
  */
-wb.datamodel.ClaimGroupSet = util.inherit( 'wbClaimGroupSet', PARENT, function( claimGroups ) {
-	PARENT.call( this, wb.datamodel.ClaimGroup, 'getKey', claimGroups );
-} );
+wb.datamodel.ClaimGroupSet = util.inherit( 'WbDataModelClaimGroupSet',
+	PARENT,
+	function( claimGroups ) {
+		PARENT.call( this, wb.datamodel.ClaimGroup, 'getKey', claimGroups );
+	}
+);
 
 }( wikibase ) );

@@ -13,7 +13,7 @@ var PARENT = wb.datamodel.Set;
  *
  * @param {wikibase.datamodel.Term[]} [terms]
  */
-wb.datamodel.TermSet = util.inherit( 'wbTermSet', PARENT, function( terms ) {
+wb.datamodel.TermSet = util.inherit( 'WbDataModelTermSet', PARENT, function( terms ) {
 	PARENT.call( this, wb.datamodel.Term, 'getLanguageCode', terms );
 } );
 

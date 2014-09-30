@@ -13,9 +13,13 @@ var PARENT = wb.datamodel.List;
  *
  * @param {wikibase.datamodel.Statement[]} [statements]
  */
-wb.datamodel.StatementList = util.inherit( 'wbStatementList', PARENT, function( statements ) {
-	PARENT.call( this, wikibase.datamodel.Statement, statements );
-}, {
+wb.datamodel.StatementList = util.inherit(
+	'WbDataModelStatementList',
+	PARENT,
+	function( statements ) {
+		PARENT.call( this, wikibase.datamodel.Statement, statements );
+	},
+{
 	/**
 	 * @return {string[]}
 	 */

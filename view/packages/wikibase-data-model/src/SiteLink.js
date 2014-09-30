@@ -6,7 +6,6 @@
 'use strict';
 
 /**
- * Represents a site link.
  * @constructor
  * @since 0.3
  *

@@ -6,12 +6,11 @@
 	'use strict';
 
 /**
- * Represents a Wikibase Entity.
  * @constructor
  * @abstract
  * @since 0.3
  */
-var SELF = wb.datamodel.Entity = function WbEntity() {
+var SELF = wb.datamodel.Entity = function WbDataModelEntity() {
 	throw new Error( 'Cannot construct abstract Entity object' );
 };
 

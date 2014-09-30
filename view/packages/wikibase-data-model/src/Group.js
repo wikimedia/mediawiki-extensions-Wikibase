@@ -6,7 +6,7 @@
 'use strict';
 
 /**
- * A Group referencing a container of which all items feature the key specified with the Group.
+ * References a container of which all items feature the key specified with the Group.
  * @constructor
  * @since 1.0
  *
