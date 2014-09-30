@@ -64,7 +64,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {*} MultiTerm
+	 * @param {*} multiTerm
 	 * @return {boolean}
 	 */
 	equals: function( multiTerm ) {

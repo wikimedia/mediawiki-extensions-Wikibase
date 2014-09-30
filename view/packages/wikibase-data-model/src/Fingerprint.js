@@ -12,26 +12,26 @@
  *
  * @param {wikibase.datamodel.TermSet|null} [labels]
  * @param {wikibase.datamodel.TermSet|null} [descriptions]
- * @param {wikibase.datamodel.MultiTermSet|null} [aliasGroups]
+ * @param {wikibase.datamodel.MultiTermSet|null} [aliases]
  */
 var SELF
 	= wb.datamodel.Fingerprint
-	= function WbDataModelFingerprint( labels, descriptions, aliasGroups ) {
+	= function WbDataModelFingerprint( labels, descriptions, aliases ) {
 		labels = labels || new wb.datamodel.TermSet();
 		descriptions = descriptions || new wb.datamodel.TermSet();
-		aliasGroups = aliasGroups || new wb.datamodel.MultiTermSet();
+		aliases = aliases || new wb.datamodel.MultiTermSet();
 
 		if(
 			!( labels instanceof wb.datamodel.TermSet )
 			|| !( descriptions instanceof wb.datamodel.TermSet )
-			|| !( aliasGroups instanceof wb.datamodel.MultiTermSet )
+			|| !( aliases instanceof wb.datamodel.MultiTermSet )
 		) {
 			throw new Error( 'Required parameter(s) not specified or not defined properly' );
 		}
 
 		this._labels = labels;
 		this._descriptions = descriptions;
-		this._aliasGroups = aliasGroups;
+		this._aliases = aliases;
 	};
 
 $.extend( SELF.prototype, {
@@ -48,15 +48,7 @@ $.extend( SELF.prototype, {
 	/**
 	 * @type {wikibase.datamodel.MultiTermSet}
 	 */
-	_aliasGroups: null,
-
-	/**
-	 * @param {string} languageCode
-	 * @return {boolean}
-	 */
-	hasLabel: function( languageCode ) {
-		return this._labels.hasTermForLanguage( languageCode );
-	},
+	_aliases: null,
 
 	/**
 	 * @return {wikibase.datamodel.TermSet}
@@ -69,30 +61,45 @@ $.extend( SELF.prototype, {
 	 * @param {string} languageCode
 	 * @return {string}
 	 */
-	getLabel: function( languageCode ) {
-		return this._labels.getByLanguage( languageCode );
+	getLabelFor: function( languageCode ) {
+		return this._labels.getItemByKey( languageCode );
 	},
 
 	/**
-	 * @param {wikibase.datamodel.Term} term
+	 * @param {wikibase.datamodel.Term} label
+	 * @return {boolean}
 	 */
-	setLabel: function( term ) {
-		this._labels.setTerm( term );
-	},
-
-	/**
-	 * @param {string} languageCode
-	 */
-	removeLabel: function( languageCode ) {
-		this._labels.removeByLanguage( languageCode );
+	hasLabel: function( label ) {
+		return this._labels.hasItem( label );
 	},
 
 	/**
 	 * @param {string} languageCode
 	 * @return {boolean}
 	 */
-	hasDescription: function( languageCode ) {
-		return this._descriptions.hasTermForLanguage( languageCode );
+	hasLabelFor: function( languageCode ) {
+		return this._labels.hasItemForKey( languageCode );
+	},
+
+	/**
+	 * @param {wikibase.datamodel.Term} term
+	 */
+	setLabel: function( term ) {
+		this._labels.setItem( term );
+	},
+
+	/**
+	 * @param {wikibase.datamodel.Term} label
+	 */
+	removeLabel: function( label ) {
+		this._labels.removeItem( label );
+	},
+
+	/**
+	 * @param {string} languageCode
+	 */
+	removeLabelFor: function( languageCode ) {
+		this._labels.removeByKey( languageCode );
 	},
 
 	/**
@@ -106,59 +113,104 @@ $.extend( SELF.prototype, {
 	 * @param {string} languageCode
 	 * @return {string}
 	 */
-	getDescription: function( languageCode ) {
-		return this._descriptions.getByLanguage( languageCode );
+	getDescriptionFor: function( languageCode ) {
+		return this._descriptions.getItemByKey( languageCode );
 	},
 
 	/**
-	 * @param {wikibase.datamodel.Term} term
+	 * @param {wikibase.datamodel.Term} description
+	 * @return {boolean}
 	 */
-	setDescription: function( term ) {
-		this._descriptions.setTerm( term );
-	},
-
-	/**
-	 * @param {string} languageCode
-	 */
-	removeDescription: function( languageCode ) {
-		this._descriptions.removeByLanguage( languageCode );
+	hasDescription: function( description ) {
+		return this._descriptions.hasItem( description );
 	},
 
 	/**
 	 * @param {string} languageCode
 	 * @return {boolean}
 	 */
-	hasAliasGroup: function( languageCode ) {
-		return this._aliasGroups.hasGroupForLanguage( languageCode );
+	hasDescriptionFor: function( languageCode ) {
+		return this._descriptions.hasItemForKey( languageCode );
+	},
+
+	/**
+	 * @param {wikibase.datamodel.Term} term
+	 */
+	setDescription: function( term ) {
+		this._descriptions.setItem( term );
+	},
+
+	/**
+	 * @param {wikibase.datamodel.Term} description
+	 */
+	removeDescription: function( description ) {
+		this._descriptions.removeItem( description );
+	},
+
+	/**
+	 * @param {string} languageCode
+	 */
+	removeDescriptionFor: function( languageCode ) {
+		this._descriptions.removeByKey( languageCode );
 	},
 
 	/**
 	 * @return {wikibase.datamodel.MultiTermSet}
 	 */
-	getAliasGroups: function() {
-		return this._aliasGroups;
+	getAliases: function() {
+		return this._aliases;
 	},
 
 	/**
-	 * @param {string} languageCode
+	 * @param {string} [languageCode]
 	 * @return {wikibase.datamodel.MultiTerm}
 	 */
-	getAliasGroup: function( languageCode ) {
-		return this._aliasGroups.getByLanguage( languageCode );
+	getAliasesFor: function( languageCode ) {
+		return this._aliases.getItemByKey( languageCode );
 	},
 
 	/**
-	 * @param {wikibase.datamodel.MultiTerm} aliasGroup
+	 * @param {wikibase.datamodel.MultiTerm} aliases
+	 * @return {boolean}
 	 */
-	setAliasGroup: function( aliasGroup ) {
-		this._aliasGroups.setGroup( aliasGroup );
+	hasAliases: function( aliases ) {
+		return this._aliases.hasItem( aliases );
+	},
+
+	/**
+	 * @param {string} languageCode
+	 * @return {boolean}
+	 */
+	hasAliasesFor: function( languageCode ) {
+		return this._aliases.hasItemForKey( languageCode );
+	},
+
+	/**
+	 * @param wikibase.datamodel.MultiTerm|wikibase.datamodel.MultiTermSet} aliases
+	 */
+	setAliases: function( aliases ) {
+		if( aliases instanceof wb.datamodel.MultiTerm ) {
+			this._aliases.setItem( aliases );
+		} else if( aliases instanceof wb.datamodel.MultiTermSet ) {
+			this._aliases = aliases;
+		} else {
+			throw new Error( 'Aliases need to be specified as wb.datamodel.MultiTerm or '
+				+ 'wb.datamodel.MultiTermSet instance' );
+		}
+	},
+
+	/**
+	 * @param {wikibase.datamodel.MultiTerm} aliases
+	 */
+	removeAliases: function( aliases ) {
+		this._aliases.removeItem( aliases );
 	},
 
 	/**
 	 * @param {string} languageCode
 	 */
-	removeAliasGroup: function( languageCode ) {
-		this._aliasGroups.removeByLanguage( languageCode );
+	removeAliasesFor: function( languageCode ) {
+		this._aliases.removeByKey( languageCode );
 	},
 
 	/**
@@ -167,7 +219,7 @@ $.extend( SELF.prototype, {
 	isEmpty: function() {
 		return this._labels.isEmpty()
 			&& this._descriptions.isEmpty()
-			&& this._aliasGroups.isEmpty();
+			&& this._aliases.isEmpty();
 	},
 
 	/**
@@ -179,7 +231,7 @@ $.extend( SELF.prototype, {
 			|| fingerprint instanceof SELF
 				&& this._labels.equals( fingerprint.getLabels() )
 				&& this._descriptions.equals( fingerprint.getDescriptions() )
-				&& this._aliasGroups.equals( fingerprint.getAliasGroups() );
+				&& this._aliases.equals( fingerprint.getAliases() );
 	}
 
 } );
