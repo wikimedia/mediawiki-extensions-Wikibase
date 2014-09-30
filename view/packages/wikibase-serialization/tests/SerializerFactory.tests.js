@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( $, wb, util, QUnit ) {
+( function( wb, util, QUnit ) {
 'use strict';
 
 QUnit.module( 'wikibase.serialization.SerializerFactory' );
@@ -65,4 +65,4 @@ QUnit.test( 'registerSerializer(), newSerializerFor()', function( assert ) {
 	);
 } );
 
-}( jQuery, wikibase, util, QUnit ) );
+}( wikibase, util, QUnit ) );

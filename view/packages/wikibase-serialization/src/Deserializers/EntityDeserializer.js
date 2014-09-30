@@ -27,7 +27,7 @@ MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, functi
 	 */
 	_strategyProvider: null,
 
-		/**
+	/**
 	 * @param {wikibase.serialization.Deserializer} deserializer
 	 * @param {string} entityType
 	 */

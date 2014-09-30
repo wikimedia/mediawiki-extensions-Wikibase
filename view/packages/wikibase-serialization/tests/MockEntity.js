@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, util ) {
+( function( wb, util ) {
 'use strict';
 
 wb.serialization.tests = wb.serialization.tests || {};
@@ -38,4 +38,4 @@ var SELF = wb.serialization.tests.MockEntity = util.inherit(
 
 SELF.TYPE = 'mock';
 
-}( jQuery, wikibase, util ) );
+}( wikibase, util ) );
