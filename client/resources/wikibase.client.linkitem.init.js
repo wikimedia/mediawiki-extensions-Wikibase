@@ -21,19 +21,17 @@
 				'jquery.wikibase.linkitem',
 				'mediawiki.Title',
 				'mw.config.values.wbRepo',
-				'wikibase.api.getLocationAgnosticMwApi'
+				'wikibase.client.getMwRepoForApi',
 			],
 			function() {
 				$spinner.remove();
 
-				var repoConfig = mw.config.get( 'wbRepo' ),
-					repoApiEndpoint = repoConfig.url + repoConfig.scriptPath + '/api.php',
-					mwApiForRepo = wikibase.api.getLocationAgnosticMwApi( repoApiEndpoint );
+				var repoConfig = mw.config.get( 'wbRepo' );
 
 				$linkItemLink
 				.show()
 				.linkitem( {
-					mwApiForRepo: mwApiForRepo,
+					mwApiForRepo: wikibase.getMwApiForRepo(),
 					pageTitle: ( new mw.Title(
 						mw.config.get( 'wgTitle' ),
 						mw.config.get( 'wgNamespaceNumber' )
