@@ -34,7 +34,7 @@ $.extend( TestItem.prototype, {
  */
 var TestContainer = util.inherit(
 	'TestContainer',
-	wb.datamodel.Groupable,
+	wb.datamodel.GroupableCollection,
 	function( items ) {
 		this._items = items || [];
 	},

@@ -11,33 +11,37 @@
  * @since 1.0
  *
  * @param {*} key
- * @param {Function} ItemContainerConstructor
- * @param {string} itemContainerKeysFunctionName
- * @param {wikibase.datamodel.Groupable} itemContainer
+ * @param {Function} GroupableCollectionConstructor
+ * @param {string} groupableCollectionGetKeysFunctionName
+ * @param {wikibase.datamodel.GroupableCollection} groupableCollection
  */
 var SELF = wb.datamodel.Group = function WbDataModelGroup(
 	key,
-	ItemContainerConstructor,
-	itemContainerKeysFunctionName,
-	itemContainer
+	GroupableCollectionConstructor,
+	groupableCollectionGetKeysFunctionName,
+	groupableCollection
 ) {
 	if( key === undefined ) {
 		throw new Error( 'Key may not be undefined' );
-	} else if( !$.isFunction( ItemContainerConstructor ) ) {
+	} else if( !$.isFunction( GroupableCollectionConstructor ) ) {
 		throw new Error( 'Item container constructor needs to be a Function' );
-	} else if( !( new ItemContainerConstructor() ) instanceof wb.datamodel.Groupable ) {
-		throw new Error( 'Item container constructor needs to implement Groupable' );
 	} else if(
-		!$.isFunction( ItemContainerConstructor.prototype[itemContainerKeysFunctionName] )
+		!( new GroupableCollectionConstructor() ) instanceof wb.datamodel.GroupableCollection
 	) {
-		throw new Error( 'Missing ' + ItemContainerConstructor + '() in container item prototype '
-			+ 'to receive the item key from' );
+		throw new Error( 'Item container constructor needs to implement GroupableCollection' );
+	} else if(
+		!$.isFunction(
+			GroupableCollectionConstructor.prototype[groupableCollectionGetKeysFunctionName]
+		)
+	) {
+		throw new Error( 'Missing ' + GroupableCollectionConstructor + '() in container item '
+			+ 'prototype to receive the item key from' );
 	}
 
 	this._key = key;
-	this._ItemContainerConstructor = ItemContainerConstructor;
-	this._itemContainerKeysFunctionName = itemContainerKeysFunctionName;
-	this.setItemContainer( itemContainer || new ItemContainerConstructor() );
+	this._GroupableCollectionConstructor = GroupableCollectionConstructor;
+	this._groupableCollectionGetKeysFunctionName = groupableCollectionGetKeysFunctionName;
+	this.setItemContainer( groupableCollection || new GroupableCollectionConstructor() );
 };
 
 $.extend( SELF.prototype, {
@@ -49,17 +53,17 @@ $.extend( SELF.prototype, {
 	/**
 	 * @type {Function}
 	 */
-	_ItemContainerConstructor: null,
+	_GroupableCollectionConstructor: null,
 
 	/**
 	 * @type {string}
 	 */
-	_itemContainerKeysFunctionName: null,
+	_groupableCollectionGetKeysFunctionName: null,
 
 	/**
-	 * @type {wikibase.datamodel.Groupable}
+	 * @type {wikibase.datamodel.GroupableCollection}
 	 */
-	_itemContainer: null,
+	_groupableCollection: null,
 
 	/**
 	 * @return {*}
@@ -73,14 +77,14 @@ $.extend( SELF.prototype, {
 	 */
 	getItemContainer: function() {
 		// Do not allow altering the encapsulated container.
-		return new this._ItemContainerConstructor( this._itemContainer.toArray() );
+		return new this._GroupableCollectionConstructor( this._groupableCollection.toArray() );
 	},
 
 	/**
-	 * @param {*} itemContainer
+	 * @param {*} groupableCollection
 	 */
-	setItemContainer: function( itemContainer ) {
-		var keys = this._getItemContainerKeys( itemContainer );
+	setItemContainer: function( groupableCollection ) {
+		var keys = this._getItemContainerKeys( groupableCollection );
 
 		for( var i = 0; i < keys.length; i++ ) {
 			if( keys[i] !== this._key ) {
@@ -90,15 +94,17 @@ $.extend( SELF.prototype, {
 		}
 
 		// Clone the container to prevent manipulation of the items using the original container.
-		this._itemContainer = new this._ItemContainerConstructor( itemContainer.toArray() );
+		this._groupableCollection = new this._GroupableCollectionConstructor(
+			groupableCollection.toArray()
+		);
 	},
 
 	/**
-	 * @param {*} itemContainer
+	 * @param {*} groupableCollection
 	 * @return {string}
 	 */
-	_getItemContainerKeys: function( itemContainer ) {
-		return itemContainer[this._itemContainerKeysFunctionName]();
+	_getItemContainerKeys: function( groupableCollection ) {
+		return groupableCollection[this._groupableCollectionGetKeysFunctionName]();
 	},
 
 	/**
@@ -106,34 +112,34 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	hasItem: function( item ) {
-		return this._itemContainer.hasItem( item );
+		return this._groupableCollection.hasItem( item );
 	},
 
 	/**
 	 * @param {*} item
 	 */
 	addItem: function( item ) {
-		if( this._itemContainer.getItemKey( item ) !== this._key ) {
+		if( this._groupableCollection.getItemKey( item ) !== this._key ) {
 			throw new Error(
 				'Mismatching key: Expected ' + this._key + ', received '
-					+ this._itemContainer.getItemKey( item )
+					+ this._groupableCollection.getItemKey( item )
 			);
 		}
-		this._itemContainer.addItem( item );
+		this._groupableCollection.addItem( item );
 	},
 
 	/**
 	 * @param {*} item
 	 */
 	removeItem: function( item ) {
-		this._itemContainer.removeItem( item );
+		this._groupableCollection.removeItem( item );
 	},
 
 	/**
 	 * @return {boolean}
 	 */
 	isEmpty: function() {
-		return this._itemContainer.isEmpty();
+		return this._groupableCollection.isEmpty();
 	},
 
 	/**
@@ -144,7 +150,7 @@ $.extend( SELF.prototype, {
 		return group === this
 			|| group instanceof SELF
 				&& this._key === group.getKey()
-				&& this._itemContainer.equals( group.getItemContainer() );
+				&& this._groupableCollection.equals( group.getItemContainer() );
 	}
 
 } );

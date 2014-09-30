@@ -98,7 +98,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			'dependencies' => array(
 				'util.inherit',
 				'wikibase.datamodel.Group',
-				'wikibase.datamodel.Groupable',
+				'wikibase.datamodel.GroupableCollection',
 			),
 		),
 

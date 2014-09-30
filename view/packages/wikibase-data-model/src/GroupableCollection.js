@@ -10,7 +10,7 @@
  * @since 1.0
  * @abstract
  */
-var SELF = wb.datamodel.Groupable = function WbDataModelGroupable() {};
+var SELF = wb.datamodel.GroupableCollection = function WbDataModelGroupableCollection() {};
 
 $.extend( SELF.prototype, {
 	/**

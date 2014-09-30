@@ -5,7 +5,7 @@
 ( function( wb, $ ) {
 'use strict';
 
-var PARENT = wb.datamodel.Groupable;
+var PARENT = wb.datamodel.GroupableCollection;
 
 /**
  * Ordered list.
@@ -59,14 +59,14 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.Groupable.toArray
+	 * @see wikibase.datamodel.GroupableCollection.toArray
 	 */
 	toArray: function() {
 		return this._items.slice();
 	},
 
 	/**
-	 * @see wikibase.datamodel.Groupable.hasItem
+	 * @see wikibase.datamodel.GroupableCollection.hasItem
 	 */
 	hasItem: function( item ) {
 		this._assertIsItem( item );
@@ -80,7 +80,7 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.Groupable.additem
+	 * @see wikibase.datamodel.GroupableCollection.additem
 	 */
 	addItem: function( item ) {
 		this._assertIsItem( item );
@@ -90,7 +90,7 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.Groupable.removeItem
+	 * @see wikibase.datamodel.GroupableCollection.removeItem
 	 */
 	removeItem: function( item ) {
 		this._assertIsItem( item );
@@ -106,14 +106,14 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.Groupable.isEmpty
+	 * @see wikibase.datamodel.GroupableCollection.isEmpty
 	 */
 	isEmpty: function() {
 		return this.length === 0;
 	},
 
 	/**
-	 * @see wikibase.datamodel.Groupable.equals
+	 * @see wikibase.datamodel.GroupableCollection.equals
 	 */
 	equals: function( list ) {
 		if( list === this ) {
@@ -132,7 +132,7 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.Groupable.getItemKey
+	 * @see wikibase.datamodel.GroupableCollection.getItemKey
 	 */
 	getItemKey: function( item ) {
 		throw new Error( 'List does not feature any unique keys' );

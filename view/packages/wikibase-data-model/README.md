@@ -34,7 +34,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Added ClaimList.
 * Added Fingerprint.
 * Added Group.
-* Added Groupable.
+* Added GroupableCollection.
 * Added List.
 * Added MultiTerm.
 * Added MultiTermSet.
