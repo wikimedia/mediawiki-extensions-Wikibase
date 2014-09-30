@@ -14,14 +14,6 @@
 	z-index: 2; /* Monobook #content has 2 */
 }
 
-.wikibase-badgeselector-menu.ui-widget-content > li {
-	border: none;
-}
-
-.wikibase-badgeselector-menu > li.ui-state-active a:hover {
-	text-decoration: underline;
-}
-
 .wikibase-badgeselector-menu > li > a {
 	display: inline-block;
 }
