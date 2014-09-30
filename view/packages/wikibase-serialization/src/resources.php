@@ -23,11 +23,7 @@ return call_user_func( function() {
 	$modules = array(
 
 		'wikibase.serialization' => $moduleTemplate + array(
-			'scripts' => array(
-				'init.js',
-			),
 			'dependencies' => array(
-				'wikibase.datamodel',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.DeserializerFactory',
 				'wikibase.serialization.SerializerFactory',
