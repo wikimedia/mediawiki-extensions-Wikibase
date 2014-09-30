@@ -69,6 +69,15 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 		),
 
+		'wikibase.datamodel.EntityId.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'EntityId.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.EntityId',
+			),
+		),
+
 		'wikibase.datamodel.Fingerprint.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'Fingerprint.tests.js',
