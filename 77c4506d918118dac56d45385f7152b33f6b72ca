@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_2671b00b",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-09-30T12:49:40Z",
+      "side": 1,
+      "message": "That is part of PHPunit and you didn\u0027t really mean to use it ;)",
+      "revId": "77c4506d918118dac56d45385f7152b33f6b72ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_6687b8dd",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-09-30T12:49:40Z",
+      "side": 1,
+      "message": "This is not in a loop",
+      "revId": "77c4506d918118dac56d45385f7152b33f6b72ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_e67ae8e6",
+        "filename": "client/includes/store/TitleFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-09-30T12:49:40Z",
+      "side": 1,
+      "message": "That is part of PHPunit and you didn\u0027t really mean to use it ;)",
+      "revId": "77c4506d918118dac56d45385f7152b33f6b72ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_269f7057",
+        "filename": "client/includes/store/TitleFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-09-30T12:49:40Z",
+      "side": 1,
+      "message": "trailing WS",
+      "revId": "77c4506d918118dac56d45385f7152b33f6b72ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_46c3943d",
+        "filename": "client/includes/store/UsageUpdater.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-09-30T12:49:40Z",
+      "side": 1,
+      "message": "trailing WS",
+      "revId": "77c4506d918118dac56d45385f7152b33f6b72ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
