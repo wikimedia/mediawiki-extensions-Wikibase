@@ -15,6 +15,7 @@ use Site;
 use SiteStore;
 use StripState;
 use Title;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
@@ -255,8 +256,15 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	public function testNewFromGlobalState() {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+		$oldSiteGroupValue = $settings->getSetting( 'siteGroup' );
+		$settings->setSetting( 'siteGroup', 'NYAN' );
+
 		$handler = SidebarHookHandlers::newFromGlobalState();
 		$this->assertInstanceOf( 'Wikibase\Client\Hooks\SidebarHookHandlers', $handler );
+
+		$settings->setSetting( 'siteGroup', $oldSiteGroupValue );
 	}
 
 	public function parserAfterParseProvider() {
