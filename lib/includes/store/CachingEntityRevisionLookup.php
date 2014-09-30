@@ -104,7 +104,12 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 		wfProfileIn( __METHOD__ );
 		$key = $this->getCacheKey( $entityId );
 
-		$entityRevision = $this->cache->get( $key );
+		try {
+			$entityRevision = $this->cache->get( $key );
+		} catch ( \UnexpectedValueException $ex ) {
+			// @fixme ugly hack to work around hhvm issue, see bug 71461
+			$entityRevision = false;
+		}
 
 		if ( $entityRevision !== false ) {
 			if ( $revisionId === 0  && $this->shouldVerifyRevision ) {
