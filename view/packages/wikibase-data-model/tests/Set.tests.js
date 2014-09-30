@@ -137,19 +137,19 @@ QUnit.test( 'getKeys()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'getByKey()', function( assert ) {
+QUnit.test( 'getItemByKey()', function( assert ) {
 	var items = getTestItems( 3 ),
 		list = createList( items );
 
 	for( var i = 0; i < items.length; i++ ) {
 		assert.ok(
-			list.getByKey( items[i].getKey() ).equals( items[i] ),
+			list.getItemByKey( items[i].getKey() ).equals( items[i] ),
 			'Retrieved item by key ' + items[i].getKey() + '.'
 		);
 	}
 
 	assert.strictEqual(
-		list.getByKey( 'does-not-exist' ),
+		list.getItemByKey( 'does-not-exist' ),
 		null,
 		'Returning NULL when no item is set for a particular key.'
 	);
@@ -168,7 +168,7 @@ QUnit.test( 'removeByKey() & length attribute', function( assert ) {
 	list.removeByKey( '0' );
 
 	assert.strictEqual(
-		list.getByKey( '0' ),
+		list.getItemByKey( '0' ),
 		null,
 		'Removed item.'
 	);
@@ -190,7 +190,7 @@ QUnit.test( 'removeByKey() & length attribute', function( assert ) {
 	list.removeByKey( '1' );
 
 	assert.strictEqual(
-		list.getByKey( '1' ),
+		list.getItemByKey( '1' ),
 		null,
 		'Removed item.'
 	);
@@ -234,7 +234,7 @@ QUnit.test( 'setItem() & length attribute', function( assert ) {
 	list.setItem( newItem0 );
 
 	assert.ok(
-		list.getByKey( '0' ).equals( newItem0 ),
+		list.getItemByKey( '0' ).equals( newItem0 ),
 		'Overwrote item.'
 	);
 
@@ -247,7 +247,7 @@ QUnit.test( 'setItem() & length attribute', function( assert ) {
 	list.setItem( newItem2 );
 
 	assert.ok(
-		list.getByKey( '2' ).equals( newItem2 ),
+		list.getItemByKey( '2' ).equals( newItem2 ),
 		'Added new item.'
 	);
 

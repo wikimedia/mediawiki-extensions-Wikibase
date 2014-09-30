@@ -59,15 +59,14 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @return {*[]}
+	 * @see wikibase.datamodel.Groupable.toArray
 	 */
 	toArray: function() {
 		return this._items.slice();
 	},
 
 	/**
-	 * @param {*} item
-	 * @return {boolean}
+	 * @see wikibase.datamodel.Groupable.hasItem
 	 */
 	hasItem: function( item ) {
 		this._assertIsItem( item );
@@ -81,7 +80,7 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @param {*} item
+	 * @see wikibase.datamodel.Groupable.additem
 	 */
 	addItem: function( item ) {
 		this._assertIsItem( item );
@@ -91,7 +90,7 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @param {*} item
+	 * @see wikibase.datamodel.Groupable.removeItem
 	 */
 	removeItem: function( item ) {
 		this._assertIsItem( item );
@@ -107,15 +106,14 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @return {boolean}
+	 * @see wikibase.datamodel.Groupable.isEmpty
 	 */
 	isEmpty: function() {
 		return this.length === 0;
 	},
 
 	/**
-	 * @param {*} list
-	 * @return {boolean}
+	 * @see wikibase.datamodel.Groupable.equals
 	 */
 	equals: function( list ) {
 		if( list === this ) {
@@ -131,6 +129,13 @@ var SELF = wb.datamodel.List = util.inherit(
 		}
 
 		return true;
+	},
+
+	/**
+	 * @see wikibase.datamodel.Groupable.getItemKey
+	 */
+	getItemKey: function( item ) {
+		throw new Error( 'List does not feature any unique keys' );
 	},
 
 	/**

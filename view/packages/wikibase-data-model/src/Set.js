@@ -75,8 +75,77 @@ var SELF = wb.datamodel.Set = util.inherit(
 	},
 
 	/**
-	 * @param {*} item
-	 * @return {string}
+	 * @see wikibase.datamodel.Groupable.toArray
+	 */
+	toArray: function() {
+		throw new Error( 'Set cannot be exported to an array' );
+	},
+
+	/**
+	 * @see wikibase.datamodel.Groupable.hasItem
+	 */
+	hasItem: function( item ) {
+		this._assertIsItem( item );
+		var key = this.getItemKey( item );
+		return this._items[key] && this._items[key].equals( item );
+	},
+
+	/**
+	 * @see wikibase.datamodel.Groupable.addItem
+	 */
+	addItem: function( item ) {
+		this._assertIsItem( item );
+
+		if( this.hasItem( item ) ) {
+			throw new Error( 'Item with key ' + this.getItemKey( item ) + ' exists already' );
+		}
+
+		this.setItem( item );
+	},
+
+	/**
+	 * @see wikibase.datamodel.Groupable.removeItem
+	 */
+	removeItem: function( item ) {
+		this._assertIsItem( item );
+
+		var key = this.getItemKey( item );
+
+		if( item.equals( this._items[key] ) ) {
+			this.removeByKey( key );
+		} else {
+			throw new Error( 'Trying to remove non-existent item' );
+		}
+	},
+
+	/**
+	 * @see wikibase.datamodel.Groupable.isEmpty
+	 */
+	isEmpty: function() {
+		return this.length === 0;
+	},
+
+	/**
+	 * @see wikibase.datamodel.Groupable.equals
+	 */
+	equals: function( set ) {
+		if( set === this ) {
+			return true;
+		} else if ( !( set instanceof SELF ) || this.length !== set.length ) {
+			return false;
+		}
+
+		for( var key in this._items ) {
+			if( !set.hasItem( this._items[key] ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	},
+
+	/**
+	 * @see wikibase.datamodel.Groupable.getItemKey
 	 */
 	getItemKey: function( item ) {
 		return item[this._itemKeyFunctionName]();
@@ -99,7 +168,7 @@ var SELF = wb.datamodel.Set = util.inherit(
 	 * @param {string} key
 	 * @return {*|null}
 	 */
-	getByKey: function( key ) {
+	getItemByKey: function( key ) {
 		return this._items[key] || null;
 	},
 
@@ -134,71 +203,6 @@ var SELF = wb.datamodel.Set = util.inherit(
 		}
 
 		this._items[key] = item;
-	},
-
-	/**
-	 * @param {*} item
-	 */
-	addItem: function( item ) {
-		this._assertIsItem( item );
-
-		if( this.hasItem( item ) ) {
-			throw new Error( 'Item with key ' + this.getItemKey( item ) + ' exists already' );
-		}
-
-		this.setItem( item );
-	},
-
-	/**
-	 * @param {*} item
-	 */
-	removeItem: function( item ) {
-		this._assertIsItem( item );
-
-		var key = this.getItemKey( item );
-
-		if( item.equals( this._items[key] ) ) {
-			this.removeByKey( key );
-		} else {
-			throw new Error( 'Trying to remove non-existent item' );
-		}
-	},
-
-	/**
-	 * @return {boolean}
-	 */
-	isEmpty: function() {
-		return this.length === 0;
-	},
-
-	/**
-	 * @param {*} set
-	 * @return {boolean}
-	 */
-	equals: function( set ) {
-		if( set === this ) {
-			return true;
-		} else if ( !( set instanceof SELF ) || this.length !== set.length ) {
-			return false;
-		}
-
-		for( var key in this._items ) {
-			if( !set.hasItem( this._items[key] ) ) {
-				return false;
-			}
-		}
-
-		return true;
-	},
-
-	/**
-	 * @param {*} item
-	 * @return {boolean}
-	 */
-	hasItem: function( item ) {
-		this._assertIsItem( item );
-		var key = this.getItemKey( item );
-		return this._items[key] && this._items[key].equals( item );
 	},
 
 	/**
