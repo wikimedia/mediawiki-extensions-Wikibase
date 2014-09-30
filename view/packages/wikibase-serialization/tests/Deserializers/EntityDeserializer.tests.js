@@ -70,7 +70,7 @@ var defaults = [
 	}
 ];
 
-var testCases = [
+var testSets = [
 	[
 		$.extend( true, {}, defaults[0].fingerprint, {
 			id: 'P1',
@@ -109,9 +109,9 @@ var testCases = [
 QUnit.test( 'deserialize()', function( assert ) {
 	var entityDeserializer = new wb.serialization.EntityDeserializer();
 
-	for( var i = 0; i < testCases.length; i++ ) {
+	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(
-			entityDeserializer.deserialize( testCases[i][0] ).equals( testCases[i][1] ),
+			entityDeserializer.deserialize( testSets[i][0] ).equals( testSets[i][1] ),
 			'Test set #' + i + ': Deserializing successful.'
 		);
 	}

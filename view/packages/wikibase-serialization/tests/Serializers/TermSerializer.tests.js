@@ -21,7 +21,7 @@ QUnit.test( 'serialize()', function( assert ) {
 		assert.deepEqual(
 			termSerializer.serialize( testSets[i][0] ),
 			testSets[i][1],
-			'Test set #' + i + ': Serialization successful.'
+			'Test set #' + i + ': Serializing successful.'
 		);
 	}
 } );

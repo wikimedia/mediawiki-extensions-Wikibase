@@ -7,7 +7,7 @@
 
 QUnit.module( 'wikibase.serialization.TermDeserializer' );
 
-var testCases = [
+var testSets = [
 	[
 		{ language: 'en', value: 'test' },
 		new wb.datamodel.Term( 'en', 'test' )
@@ -17,11 +17,11 @@ var testCases = [
 QUnit.test( 'deserialize()', function( assert ) {
 	var termDeserializer = new wb.serialization.TermDeserializer();
 
-	for( var i = 0; i < testCases.length; i++ ) {
+	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(
-			termDeserializer.deserialize( testCases[i][0] ),
-			testCases[i][1],
-			'Test set #' + i + ' deserialized successfully.'
+			termDeserializer.deserialize( testSets[i][0] ),
+			testSets[i][1],
+			'Test set #' + i + ': Deserializing successful.'
 		);
 	}
 } );

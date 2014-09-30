@@ -43,7 +43,7 @@ var defaults = [
 	}
 ];
 
-var testCases = [
+var testSets = [
 	[
 		new wb.datamodel.Property(
 			'P1',
@@ -63,10 +63,10 @@ var testCases = [
 QUnit.test( 'serialize()', function( assert ) {
 	var propertySerializer = new wb.serialization.PropertySerializer();
 
-	for( var i = 0; i < testCases.length; i++ ) {
+	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(
-			propertySerializer.serialize( testCases[i][0] ),
-			testCases[i][1],
+			propertySerializer.serialize( testSets[i][0] ),
+			testSets[i][1],
 			'Test set #' + i + ': Serializing successful.'
 		);
 	}

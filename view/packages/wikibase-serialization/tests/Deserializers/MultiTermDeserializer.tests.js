@@ -21,7 +21,7 @@ QUnit.test( 'deserialize()', function( assert ) {
 		assert.deepEqual(
 			multiTermDeserializer.deserialize( testSets[i][0] ),
 			testSets[i][1],
-			'Test set #' + i + ': Deserialization successful.'
+			'Test set #' + i + ': Deserializing successful.'
 		);
 	}
 } );
