@@ -64,10 +64,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	abstract public function getObjectType();
 
 	/**
-	 * Constructor.
 	 * @see ArrayObject::__construct
-	 *
-	 * @since 1.20
 	 *
 	 * @param null|array $input
 	 * @param int $flags
@@ -87,8 +84,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 * Finds a new offset for when appending an element.
 	 * The base class does this, so it would be better to integrate,
 	 * but there does not appear to be any way to do this...
-	 *
-	 * @since 1.20
 	 *
 	 * @return integer
 	 */
@@ -373,8 +368,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	/**
 	 * @see ArrayObject::append
 	 *
-	 * @since 1.20
-	 *
 	 * @param mixed $value
 	 */
 	public function append( $value ) {
@@ -383,8 +376,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 
 	/**
 	 * @see ArrayObject::offsetSet()
-	 *
-	 * @since 1.20
 	 *
 	 * @param mixed $index
 	 * @param mixed $value
@@ -396,8 +387,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	/**
 	 * Returns if the provided value has the same type as the elements
 	 * that can be added to this ArrayObject.
-	 *
-	 * @since 1.20
 	 *
 	 * @param mixed $value
 	 *
@@ -416,8 +405,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 * If you want to do additional indexing or have code that
 	 * otherwise needs to be executed whenever an element is added,
 	 * you can overload @see preSetElement.
-	 *
-	 * @since 1.20
 	 *
 	 * @param mixed $index
 	 * @param mixed $value
@@ -443,8 +430,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	/**
 	 * @see Serializable::serialize
 	 *
-	 * @since 1.20
-	 *
 	 * @return string
 	 */
 	public function serialize() {
@@ -456,8 +441,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 
 	/**
 	 * @see Serializable::unserialize
-	 *
-	 * @since 1.20
 	 *
 	 * @param string $serialization
 	 *
@@ -479,8 +462,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 
 	/**
 	 * Returns if the ArrayObject has no elements.
-	 *
-	 * @since 1.20
 	 *
 	 * @return bool
 	 */
