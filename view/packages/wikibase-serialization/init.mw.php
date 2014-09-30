@@ -7,7 +7,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 	'path' => __FILE__,
 	'name' => 'Wikibase Serialization JavaScript',
-	'version' => '2.0-alpha',
+	'version' => WIKIBASE_SERIALIZATION_JAVASCRIPT_VERSION,
 	'author' => array(
 		'[http://www.snater.com H. Snater]',
 	),
