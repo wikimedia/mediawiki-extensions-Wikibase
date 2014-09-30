@@ -34,8 +34,8 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Added Group.
 * Added Groupable.
 * Added List.
-* Added MultTerm.
-* Added MultTermSet.
+* Added MultiTerm.
+* Added MultiTermSet.
 * Added ReferenceList.
 * Added SiteLinkSet.
 * Added StatementGroup.
