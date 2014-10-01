@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_0df5a4b5",
+        "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T08:41:50Z",
+      "side": 1,
+      "message": "So 121 is ok but 122 is not? I agree with Jeroen, this is not helpful. Checking for very low limits (as above) is perfectly fine. But how do you explain this to other coders that hit this arbitarry limit?",
+      "revId": "0dd9d7ac03d50daeaa8b0c6d6a851de0f2a69337",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
