@@ -9,11 +9,11 @@ QUnit.module( 'wikibase.serialization.EntityIdDeserializer' );
 
 var testSets = [
 	[
-		{
-			'entity-type': 'entity type',
-			'numeric-id': 1
-		},
-		new wb.datamodel.EntityId( 'entity type', 1 )
+		[
+			'entity type',
+			'P1'
+		],
+		new wb.datamodel.EntityId( 'entity type', 'P1' )
 	]
 ];
 

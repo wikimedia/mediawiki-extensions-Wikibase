@@ -25,10 +25,7 @@ MODULE.EntityIdSerializer = util.inherit( 'WbEntityIdSerializer', PARENT, {
 			throw new Error( 'Not an instance of wikibase.datamodel.EntityId' );
 		}
 
-		return {
-			'entity-type': entityId.getEntityType(),
-			'numeric-id': entityId.getNumericId()
-		};
+		return [entityId.getEntityType(), entityId.getSerialization()];
 	}
 } );
 

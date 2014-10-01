@@ -20,10 +20,7 @@ MODULE.EntityIdDeserializer = util.inherit( 'WbEntityIdDeserializer', PARENT, {
 	 * @return {wikibase.datamodel.EntityId}
 	 */
 	deserialize: function( serialization ) {
-		return new wb.datamodel.EntityId(
-			serialization['entity-type'],
-			serialization['numeric-id']
-		);
+		return new wb.datamodel.EntityId( serialization[0], serialization[1] );
 	}
 } );
 
