@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_0d1604f7",
+        "filename": "client/tests/phpunit/includes/hooks/SidebarHookHandlersTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T08:30:39Z",
+      "side": 1,
+      "message": "I find the gag a bit misplaced. I would prefer something like \u0027dummy\u0027.",
+      "revId": "8b84fd02d1974007f6e0ae69209878efa5171e16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
