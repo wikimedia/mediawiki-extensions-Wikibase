@@ -31,7 +31,7 @@ MODULE.TermSetSerializer = util.inherit( 'WbTermSetSerializer', PARENT, {
 
 		for( var i = 0; i < languageCodes.length; i++ ) {
 			serialization[languageCodes[i]] = termSerializer.serialize(
-				termSet.getByKey( languageCodes[i] )
+				termSet.getItemByKey( languageCodes[i] )
 			);
 		}
 

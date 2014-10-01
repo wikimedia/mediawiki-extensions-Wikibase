@@ -31,7 +31,7 @@ MODULE.MultiTermSetSerializer = util.inherit( 'WbMultiTermSetSerializer', PARENT
 
 		for( var i = 0; i < languageCodes.length; i++ ) {
 			serialization[languageCodes[i]] = multiTermSerializer.serialize(
-				multiTermSet.getByKey( languageCodes[i] )
+				multiTermSet.getItemByKey( languageCodes[i] )
 			);
 		}
 

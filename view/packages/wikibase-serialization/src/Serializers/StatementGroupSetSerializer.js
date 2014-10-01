@@ -31,7 +31,7 @@ MODULE.StatementGroupSetSerializer = util.inherit( 'WbStatementGroupSetSerialize
 
 		for( var i = 0; i < propertyIds.length; i++ ) {
 			serialization[propertyIds[i]] = statementGroupSerializer.serialize(
-				statementGroupSet.getByKey( propertyIds[i] )
+				statementGroupSet.getItemByKey( propertyIds[i] )
 			);
 		}
 

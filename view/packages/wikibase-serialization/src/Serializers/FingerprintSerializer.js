@@ -31,7 +31,7 @@ MODULE.FingerprintSerializer = util.inherit( 'WbFingerprintSerializer', PARENT, 
 		return {
 			labels: termSetSerializer.serialize( fingerprint.getLabels() ),
 			descriptions: termSetSerializer.serialize( fingerprint.getDescriptions() ),
-			aliases: multiTermSetSerializer.serialize( fingerprint.getAliasGroups() )
+			aliases: multiTermSetSerializer.serialize( fingerprint.getAliases() )
 		};
 	}
 } );

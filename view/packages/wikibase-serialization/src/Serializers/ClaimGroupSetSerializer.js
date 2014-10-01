@@ -31,7 +31,7 @@ MODULE.ClaimGroupSetSerializer = util.inherit( 'WbClaimGroupSetSerializer', PARE
 
 		for( var i = 0; i < propertyIds.length; i++ ) {
 			serialization[propertyIds[i]] = claimGroupSerializer.serialize(
-				claimGroupSet.getByKey( propertyIds[i] )
+				claimGroupSet.getItemByKey( propertyIds[i] )
 			);
 		}
 

@@ -31,7 +31,7 @@ MODULE.SiteLinkSetSerializer = util.inherit( 'WbSiteLinkSetSerializer', PARENT, 
 
 		for( var i = 0; i < siteIds.length; i++ ) {
 			serialization[siteIds[i]] = siteLinkSerializer.serialize(
-				siteLinkSet.getByKey( siteIds[i] )
+				siteLinkSet.getItemByKey( siteIds[i] )
 			);
 		}
 
