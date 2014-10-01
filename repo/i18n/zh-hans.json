@@ -271,7 +271,7 @@
 	"wikibase-item-summary-wbcreateredirect": "重定向至$4",
 	"wikibase-item-summary-wbeditentity": "创建新项",
 	"wikibase-item-summary-wbeditentity-create": "创建新项",
-	"wikibase-item-summary-wbeditentity-update": "已更新一项",
+	"wikibase-item-summary-wbeditentity-update": "更改项",
 	"wikibase-item-summary-wbeditentity-override": "清除项",
 	"wikibase-item-summary-wbsetreference": "设置参考",
 	"wikibase-item-summary-wbsetreference-add": "添加参考至声称",

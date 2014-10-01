@@ -124,7 +124,7 @@
 	"wikibase-itemdisambiguation-invalid-langcode": "De taalidentificatie die u hebt opgegeven is niet bekend in het systeem. Gebruik een geldige taalidentificatie zoals \"en\".",
 	"wikibase-itemdisambiguation-description": "Waarden gebruikt voor zoeken moeten de volledige tekst bevatten. Taal is een identificatie, bijvoorbeeld \"en\".",
 	"special-newproperty": "Nieuwe eigenschap aanmaken",
-	"wikibase-newproperty-summary": "Zorg ervoor dat u [[Special:PropertyDisambiguation|controleert of de eigenschap al bestaat]]!<br />U moet een [[Help:Label|label]] en een [[Help:Description|beschrijving]] opgeven voor alle nieuwe eigenschappen, als ook een geldig eigenschapstype.",
+	"wikibase-newproperty-summary": "Zorg ervoor dat u controleert of de eigenschap al bestaat!<br />U moet een [[Help:Label|label]] en een [[Help:Description|beschrijving]] opgeven voor alle nieuwe eigenschappen, als ook een geldig gegevenstype.",
 	"wikibase-newproperty-fieldset": "Nieuwe eigenschap aanmaken",
 	"wikibase-newproperty-datatype": "Gegevenstype:",
 	"wikibase-newproperty-invalid-datatype": "Er is een ongeldig gegevenstype opgegeven.",

@@ -120,7 +120,7 @@
 	"wikibase-itemdisambiguation-search": "您可以 [{{fullurl:Special:Search|search=$1}} 搜尋項目]。",
 	"wikibase-itemdisambiguation-create": "您可以 [{{fullurl:Special:NewItem|label=$1}} 建立項目]。",
 	"wikibase-itemdisambiguation-invalid-langcode": "抱歉，您提供的語言代碼系統無法辨識。請使用有效的語言代碼，如 \"en\"。",
-	"wikibase-itemdisambiguation-description": "用於搜尋的數值必需是完整的文字條目。語言使用識別碼，如 \"en\"。",
+	"wikibase-itemdisambiguation-description": "用於搜尋的數值必需是完整的文字條目。語言使用識別碼，如 \"zh\"。",
 	"special-newproperty": "建立一個新屬性。",
 	"wikibase-newproperty-summary": "請確認己檢查屬性是否已經存在！<br />您應為所有新屬性建立 [[Help:Label|標籤]] 及 [[Help:Description|描述]]，並加上一個有效的屬性型態。",
 	"wikibase-newproperty-fieldset": "建立新屬性",
