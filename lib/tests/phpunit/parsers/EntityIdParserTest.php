@@ -6,6 +6,7 @@ use ValueParsers\ParserOptions;
 use ValueParsers\Test\StringValueParserTest;
 use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdValueParser;
@@ -52,8 +53,8 @@ class EntityIdValueParserTest extends StringValueParserTest {
 		$parser = new EntityIdValueParser( new BasicEntityIdParser(), $this->newParserOptions() );
 
 		$valid = array(
-			'q1' => new ItemId( 'q1' ),
-			'p1' => new PropertyId( 'p1' ),
+			'q1' => new EntityIdValue( new ItemId( 'q1' ) ),
+			'p1' => new EntityIdValue( new PropertyId( 'p1' ) ),
 		);
 
 		foreach ( $valid as $value => $expected ) {
