@@ -4,10 +4,10 @@ namespace Wikibase\Client\Scribunto\Test;
 
 use Language;
 use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\SnakFactory;
