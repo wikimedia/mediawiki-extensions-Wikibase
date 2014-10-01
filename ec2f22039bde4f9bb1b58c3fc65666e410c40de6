@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_ed916053",
+        "filename": "repo/config/Wikibase.searchindex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-01T09:24:55Z",
+      "side": 1,
+      "message": "where?",
+      "parentUuid": "ce8c5bf9_cdbedcd1",
+      "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_edc3a05f",
         "filename": "repo/config/Wikibase.searchindex.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-01T08:54:44Z",
       "side": 1,
       "message": "\"any\" \u003d\u003e \"all\" (2 times). I also mix these words all the time.",
+      "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_4d996c7f",
+        "filename": "repo/config/Wikibase.searchindex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-01T09:24:55Z",
+      "side": 1,
+      "message": "Webster sais: 1b) every —used to indicate one selected without restriction \u003cany child would know that\u003e\n\nUsing \"all\" in the first place would probably be an improvement, but not in the second place - saying \"...values present in [...] all statements\" would mean that only values that are present in *all* statements would be included. We want to include values that are present in *any* of the statements.",
+      "parentUuid": "ce8c5bf9_edc3a05f",
       "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_0da364a9",
+        "filename": "repo/config/Wikibase.searchindex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-01T09:24:55Z",
+      "side": 1,
+      "message": "indeed.",
+      "parentUuid": "ce8c5bf9_8db8d4e3",
+      "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_adbd98d3",
         "filename": "repo/config/Wikibase.searchindex.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-10-01T08:54:44Z",
       "side": 1,
       "message": "I think this is pointless. This file just does not do anything if it is included in a non-MediaWiki context.",
+      "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_6d96b051",
+        "filename": "repo/config/Wikibase.searchindex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-01T09:24:55Z",
+      "side": 1,
+      "message": "It\u0027s standard operation procedure for top level files. Direct inclusion may result in error modes that expose internals, etc. I don\u0027t think it\u0027s really necessary in our case, but I see no harm.",
+      "parentUuid": "ce8c5bf9_adbd98d3",
       "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_2da0a899",
+        "filename": "repo/config/Wikibase.searchindex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-01T09:24:55Z",
+      "side": 1,
+      "message": "Just best practice. Yes, it\u0027s pointless here, and complicates things. Not sure if we want to be as si9mple as possible, or as clean as possible...",
+      "parentUuid": "ce8c5bf9_4dd2cc2d",
+      "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_6dcf9083",
         "filename": "repo/config/Wikibase.searchindex.php",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2014-10-01T08:54:44Z",
       "side": 1,
       "message": "Space missing.",
+      "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_cd8c9c3d",
+        "filename": "repo/config/Wikibase.searchindex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-01T09:24:55Z",
+      "side": 1,
+      "message": "oh noes :)",
+      "parentUuid": "ce8c5bf9_6dcf9083",
       "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
