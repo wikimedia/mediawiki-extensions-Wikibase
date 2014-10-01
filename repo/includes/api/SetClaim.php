@@ -79,7 +79,18 @@ class SetClaim extends ModifyClaim {
 
 		$this->claimModificationHelper->applyChangeOp( $changeop, $entity, $summary );
 
-		$this->saveChanges( $entity, $summary );
+		try {
+			$this->saveChanges( $entity, $summary );
+		} catch ( \Exception $ex ) {
+			$entityId = $entity->getId();
+			$prefixedId = $entityId ? $entityId->getSerialization() : '';
+
+			wfLogWarning( "Failed to set claim on entity $prefixedId: "
+				. var_export( $params, true ) );
+
+			$this->dieError( 'Failed to save claim.' );
+		}
+
 		$this->getResultBuilder()->markSuccess();
 		$this->getResultBuilder()->addClaim( $claim );
 	}
