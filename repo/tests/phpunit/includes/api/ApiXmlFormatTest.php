@@ -6,10 +6,10 @@ use ApiBase;
 use ApiMain;
 use Exception;
 use FauxRequest;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 

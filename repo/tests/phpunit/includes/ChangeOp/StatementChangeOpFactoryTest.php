@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\StatementChangeOpFactory;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\ChangeOp\StatementChangeOpFactory

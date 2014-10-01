@@ -6,11 +6,11 @@ use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\UniquenessViolation;
 

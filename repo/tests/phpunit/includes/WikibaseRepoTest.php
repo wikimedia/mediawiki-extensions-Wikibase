@@ -2,9 +2,9 @@
 
 namespace Wikibase\Tests\Repo;
 
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 

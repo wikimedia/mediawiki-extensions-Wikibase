@@ -8,7 +8,6 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use Title;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\EntityDiff;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -17,6 +16,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityRedirect;
@@ -132,7 +132,7 @@ class ItemContentTest extends EntityContentTest {
 		$claim = new Statement( new PropertyNoValueSnak( 83 ) );
 		$claim->setGuid( '$testing$' );
 		$contentWithClaim->getEntity()->addClaim( $claim );
-		
+
 		$cases['claims'] = array(
 			$contentWithClaim,
 			EntityContent::STATUS_NONE
