@@ -7,9 +7,9 @@ use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\Snaks;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @since 0.1
