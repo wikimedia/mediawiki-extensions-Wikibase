@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_639c7f60",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T16:23:42Z",
+      "side": 1,
+      "message": "Most JS code we have tends to simplify that to !api, which is fine in my opinion. More a matter of taste, sure.",
+      "revId": "a4d83359f12e74bb21fafd79b724da4e2475cc1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
