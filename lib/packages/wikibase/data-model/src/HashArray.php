@@ -413,8 +413,11 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 */
 	protected function setElement( $index, $value ) {
 		if ( !$this->hasValidType( $value ) ) {
+			$type = is_object( $value ) ? get_class( $value ) : gettype( $value );
+
 			throw new InvalidArgumentException(
-				'Can only add ' . $this->getObjectType() . ' implementing objects to ' . get_called_class() . '.'
+				'Can only add ' . $this->getObjectType() . ' implementing objects to ' . get_called_class() . ', ' .
+				'but found a ' . $type . ' instead'
 			);
 		}
 
