@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_a3d287d3",
+        "filename": "lib/resources/wikibase.store/store.ApiEntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T16:47:02Z",
+      "side": 1,
+      "message": "To Idx? Who is Idx? ;-) Come on, saving literally two characters is not worth it, don\u0027t you think? Again, clearly a matter of taste and not at all a reason to block anything. Just a note.",
+      "revId": "2a5f12de01b859212069cdb600be7529880ddcc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_43d7fbc4",
+        "filename": "lib/resources/wikibase.store/store.CombiningEntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T16:47:02Z",
+      "side": 1,
+      "message": "You could save the \"- 1\" above by turning this into \"--returnsExpected\". Also I like to write \"\u003c\u003d 0\" just in case to avoid any potential endless loop. But, again, mostly a matter of taste.",
+      "revId": "2a5f12de01b859212069cdb600be7529880ddcc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_63d47fbf",
+        "filename": "lib/resources/wikibase.store/store.CombiningEntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T16:47:02Z",
+      "side": 1,
+      "message": "What seed? Doc would be nice.\n\nf? Hm, ok, that\u0027s math language for \"function\". But according to the code below it can\u0027t be any function. Again, doc? I know, all this is private, but still.",
+      "revId": "2a5f12de01b859212069cdb600be7529880ddcc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_03e1f396",
+        "filename": "lib/resources/wikibase.store/store.CombiningEntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T16:47:02Z",
+      "side": 1,
+      "message": "Pirate speek? ;-) Arr!",
+      "revId": "2a5f12de01b859212069cdb600be7529880ddcc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_e3c88f27",
+        "filename": "lib/resources/wikibase.store/store.EntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T16:47:02Z",
+      "side": 1,
+      "message": "Wait, \"getMultipleRaw\" maps to \"get\" and not to \"getMultiple\"? Is this a mistake?",
+      "revId": "2a5f12de01b859212069cdb600be7529880ddcc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
