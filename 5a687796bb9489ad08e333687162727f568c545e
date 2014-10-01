@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_685f7e45",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-10-01T14:58:56Z",
+      "side": 1,
+      "message": "Yes, also think this parameter does not belong here as the type of entity you want to create is specified by the \"new\" parameter.",
+      "parentUuid": "ce8c5bf9_ad103805",
+      "revId": "5a687796bb9489ad08e333687162727f568c545e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_8d22144f",
         "filename": "repo/includes/api/SetReference.php",
         "patchSetId": 16
