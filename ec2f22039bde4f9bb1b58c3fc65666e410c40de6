@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_cdbedcd1",
+        "filename": "repo/config/Wikibase.searchindex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T08:54:44Z",
+      "side": 1,
+      "message": "Newline missing.",
+      "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_edc3a05f",
+        "filename": "repo/config/Wikibase.searchindex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T08:54:44Z",
+      "side": 1,
+      "message": "\"any\" \u003d\u003e \"all\" (2 times). I also mix these words all the time.",
+      "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_8db8d4e3",
+        "filename": "repo/config/Wikibase.searchindex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T08:54:44Z",
+      "side": 1,
+      "message": "\"to\"?",
+      "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_adbd98d3",
+        "filename": "repo/config/Wikibase.searchindex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T08:54:44Z",
+      "side": 1,
+      "message": "I think this is pointless. This file just does not do anything if it is included in a non-MediaWiki context.",
+      "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_4dd2cc2d",
+        "filename": "repo/config/Wikibase.searchindex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T08:54:44Z",
+      "side": 1,
+      "message": "There is no way the current code can pollute any scope. Everything is in a closure anyway. Do you think this is useful just in case a user edits the example in a way that does something outside of the closure?",
+      "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_6dcf9083",
+        "filename": "repo/config/Wikibase.searchindex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T08:54:44Z",
+      "side": 1,
+      "message": "Space missing.",
+      "revId": "ec2f22039bde4f9bb1b58c3fc65666e410c40de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
