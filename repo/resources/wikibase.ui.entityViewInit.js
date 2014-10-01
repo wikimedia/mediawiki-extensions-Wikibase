@@ -114,10 +114,12 @@
 	 */
 	function createEntityDom( entity, $entityview ) {
 		var abstractedRepoApi = new wb.AbstractedRepoApi(),
-			entityStore = buildEntityStore( abstractedRepoApi );
+			entityStore = buildEntityStore( abstractedRepoApi ),
+			entityType = $( '.wb-item' ).length > 0 ? 'item' : 'property';
 
 		$entityview
 		.entityview( {
+			entityType: entityType,
 			value: entity,
 			entityStore: entityStore,
 			valueViewBuilder: new wb.ValueViewBuilder(
