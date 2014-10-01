@@ -8,7 +8,7 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use Title;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

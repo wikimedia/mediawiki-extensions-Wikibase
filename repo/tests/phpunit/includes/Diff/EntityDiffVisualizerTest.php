@@ -8,7 +8,7 @@ use Diff\DiffOp\DiffOpRemove;
 use IContextSource;
 use Language;
 use Site;
-use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
