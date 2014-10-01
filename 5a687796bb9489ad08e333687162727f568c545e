@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_ad103805",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T08:19:29Z",
+      "side": 1,
+      "message": "I checked the EditEntity API module and I\u0027m pretty sure (let\u0027s say 90%) there is no \u0027type\u0027 parameter. There is a type in the JSON of the \u0027data\u0027 parameter. That\u0027s unrelated.",
+      "revId": "5a687796bb9489ad08e333687162727f568c545e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_8d22144f",
+        "filename": "repo/includes/api/SetReference.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T08:19:29Z",
+      "side": 1,
+      "message": "Please add something like \"comma-separated list of property ids\".",
+      "revId": "5a687796bb9489ad08e333687162727f568c545e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
