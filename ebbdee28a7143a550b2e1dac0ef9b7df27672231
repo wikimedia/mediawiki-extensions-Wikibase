@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_4862ba07",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T14:59:44Z",
+      "side": 1,
+      "message": "Is the ... a Unicode character? Hm. Not a problem, just odd.",
+      "revId": "ebbdee28a7143a550b2e1dac0ef9b7df27672231",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_e8538e41",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T14:59:44Z",
+      "side": 1,
+      "message": "The prefix ++ is a bit odd. ;-)",
+      "revId": "ebbdee28a7143a550b2e1dac0ef9b7df27672231",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_883f62d3",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-01T14:59:44Z",
+      "side": 1,
+      "message": "Declaring var item here is fine. Well, a matter of taste I guess.",
+      "revId": "ebbdee28a7143a550b2e1dac0ef9b7df27672231",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
