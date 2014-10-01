@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_cd333cbf",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 915
+      },
+      "writtenOn": "2014-10-01T09:42:43Z",
+      "side": 1,
+      "message": "Ok, we should test this on some complex pages.\n\nThe query planner will convert both query forms above to an indexed range access on wbc_entity_usage. That means the overall number of rows accessed for each approach is theoretically similar, making the question one of overhead (network round-trips, parsing, transaction wall-time, etc). Reducing overhead means faster transactions on the DB master.\n\nThat said, if we hit many rows we\u0027ll eventually want to split it into batches anyway, because DB slaves replication lag is tied to binlog events (ie, individual queries for statement based logging) and not directly to transaction size.\n\nBasically, try to:\n\n- execute as few queries as possible\n- cap the number of rows touched per query to some limit\n\nThe fact we\u0027re discussing batch sizes may be an indication that this should happen in an asynchronous job :-) I suppose we don\u0027t know enough to tell, yet. I\u0027d like watch this traffic on beta cluster or something...",
+      "parentUuid": "ce8c5bf9_6a76a8d7",
+      "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_8ff22102",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 9
@@ -107,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_2d4e683d",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 915
+      },
+      "writtenOn": "2014-10-01T09:42:43Z",
+      "side": 1,
+      "message": "Say 1000.",
+      "parentUuid": "ce8c5bf9_2a78a0be",
+      "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_6f331dc1",
         "filename": "client/includes/Usage/Sql/entity_usage.sql",
         "patchSetId": 9
@@ -136,6 +172,24 @@
       "side": 1,
       "message": "Yea, I changed this since SQLite doesn\u0027t have support for ENUM at all, so we can\u0027t use it.\n\nI suppose DatabaserSqlite::replaceVars could turn ENUM (...) into a simple TEXT or BLOB field. That should work, right?",
       "parentUuid": "ce8c5bf9_6f331dc1",
+      "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_ad9a7864",
+        "filename": "client/includes/Usage/Sql/entity_usage.sql",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 915
+      },
+      "writtenOn": "2014-10-01T09:42:43Z",
+      "side": 1,
+      "message": "Right, could do that. Was jfyi.\n\nIf it stays BINARY(1) I don\u0027t care :-) since ENUM is a 1 byte field anyway. If it switches to longer strings for aspects, then ENUM or convert to [TINY]INT...",
+      "parentUuid": "ce8c5bf9_ca8494a6",
       "revId": "8abcf03970af57c3b50889632b87e8b1cc7175a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
