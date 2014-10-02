@@ -18,7 +18,7 @@
 	"wikibase-diffview-alias": "soprannome",
 	"wikibase-diffview-description": "descrizione",
 	"wikibase-diffview-link": "collegaminde",
-	"wikibase-error-unexpected": "S'ha verificate 'n'errore inaspettate.",
+	"wikibase-error-unexpected": "Errore: $1.",
 	"wikibase-error-save-generic": "Ha assute 'n'errore mendre ca pruvave a reggistrà e pe stu fatte, le cangiaminde tune non g'onne state combletate.",
 	"wikibase-error-remove-generic": "Ha assute 'n'errore mendre ca pruvave a scangellà e pe stu fatte, le cangiaminde tune non g'onne state combletate.",
 	"wikibase-error-save-connection": "Ha assute 'n'errore de connessione mendre ca pruvave a reggistrà e pe stu fatte le cangiaminde tune non ge sò comblete. Pe piacere condrolle 'a connessione Indernette toje.",

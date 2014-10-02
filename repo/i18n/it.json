@@ -42,6 +42,7 @@
 	"wikibase-statements": "Dichiarazioni",
 	"wikibase-attributes": "Attributi",
 	"wikibase-terms": "In altre lingue",
+	"wikibase-sitelinkgroupview-input-help-message": "Aggiungi un collegamento al sito specificando un sito ed una pagina, modifica o rimuovi collegamenti ai siti esistenti.",
 	"wikibase-sitelinks-empty": "Nessuna pagina è collegata a questo elemento ancora.",
 	"wikibase-sitelinks-input-help-message": "Imposta un collegamento ad una pagina relativa a questo elemento.",
 	"wikibase-sitelinks-special": "Pagine di altri siti collegate a questo elemento",

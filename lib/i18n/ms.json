@@ -19,7 +19,7 @@
 	"wikibase-diffview-alias": "alias",
 	"wikibase-diffview-description": "keterangan",
 	"wikibase-diffview-link": "pautan",
-	"wikibase-error-unexpected": "Berlakunya ralat luar jangkaan.",
+	"wikibase-error-unexpected": "Ralat: $1.",
 	"wikibase-error-save-generic": "Suatu ralat telah berlaku apabila cuba melakukan penyimpanan; oleh itu, pengubahan anda tidak dapat disiapkan.",
 	"wikibase-error-remove-generic": "Suatu ralat telah berlaku apabila cuba melakukan pembuangan; oleh itu, pengubahan anda tidak dapat disiapkan.",
 	"wikibase-error-save-connection": "Ralat penyambungan telah berlaku apabila cuba melakukan penyimpanan; oleh itu, pengubahan anda tidak dapat disiapkan. Sila semak sambungan Internet anda.",

@@ -143,6 +143,8 @@
 	"wikibase-mergeitems-fromid": "ID dari mana hendak digabungkan",
 	"wikibase-mergeitems-toid": "ID ke mana hendak digabungkan",
 	"wikibase-mergeitems-submit": "Gabungkan perkara",
+	"wikibase-itemmerge-no-such-entity": "Item tidak dijumpai.",
+	"wikibase-tokencheck-missingtoken": "Token sunting diperlukan.",
 	"special-dispatchstats": "Ubah statistik hantaran",
 	"wikibase-dispatchstats-intro": "Halaman ini menyediakan statistik tentang penghantaran perubahan kepada klien.\nWiki klien diberitahu akan perubahan pada {{SITENAME}} sebaik sahaja perubahan telah dihantar ke wiki itu, dan baris gilir kerja di wiki itu telah memproses pemberitahuan tersebut.\n* {{int:wikibase-dispatchstats-changes}} menunjukkan bilangan dan tarikh untuk perkara-perkara paling lama dan paling baru yang kini berada dalam baris gilir.\n* {{int:wikibase-dispatchstats-stats}} menyediakan maklumat tentang wiki-wiki klien yang paling lama dan yang paling kurang senjangnya serta satu wiki median di antaranya. Untuk setiap wiki disediakannya maklumat yang berikut:\n** \"{{int:wikibase-dispatchstats-site-id}}\" merupakan ID dalaman wiki klien.\n** \"{{int:wikibase-dispatchstats-pos}}\" merupakan ID perubahan terakhir yang dihantar ke wiki itu.\n** \"{{int:wikibase-dispatchstats-lag-num}}\" merupakan bilangan perubahan yang belum dihantar ke wiki itu.\n** \"{{int:wikibase-dispatchstats-lag-time}}\" merupakan selang masa antara perubahan terkini yang dihantar ke wiki itu, dan perubahan terkini yang dilakukan pada {{SITENAME}}.\n** \"{{int:wikibase-dispatchstats-touched}}\" merupakan waktu penghantaran kelompok perubahan yang terakhir ke wiki itu.",
 	"wikibase-dispatchstats-no-stats": "Tidak terdapat statistik buat masa ini.",
