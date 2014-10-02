@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_f06fecbe",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-02T07:49:36Z",
+      "side": 1,
+      "message": "It is, but I don\u0027t feel strongly about it. Note that this code moves to EntityStore in the next patch in this chain.",
+      "parentUuid": "ce8c5bf9_4862ba07",
+      "revId": "ebbdee28a7143a550b2e1dac0ef9b7df27672231",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_e8538e41",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.badgeselector.js",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_10a050f0",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-02T07:49:36Z",
+      "side": 1,
+      "message": "I consider prefix increment to be the default. Postfix increment is conceptually more complex than prefix, and on very bad compilers or interpreters it might actually be more expensive.",
+      "parentUuid": "ce8c5bf9_e8538e41",
+      "revId": "ebbdee28a7143a550b2e1dac0ef9b7df27672231",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_883f62d3",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.badgeselector.js",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2014-10-01T14:59:44Z",
       "side": 1,
       "message": "Declaring var item here is fine. Well, a matter of taste I guess.",
+      "revId": "ebbdee28a7143a550b2e1dac0ef9b7df27672231",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_70bafc1f",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-02T07:49:36Z",
+      "side": 1,
+      "message": "I prefer declarations at the top of the scope, but apparently our coding conventions don\u0027t enforce this. So, matter of taste :)",
+      "parentUuid": "ce8c5bf9_883f62d3",
       "revId": "ebbdee28a7143a550b2e1dac0ef9b7df27672231",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
