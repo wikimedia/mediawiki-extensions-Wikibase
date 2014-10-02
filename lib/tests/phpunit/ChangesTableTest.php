@@ -7,7 +7,7 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Wikibase\ChangesTable;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\ItemDiff;
+use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
