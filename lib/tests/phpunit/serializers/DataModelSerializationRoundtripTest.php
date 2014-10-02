@@ -9,7 +9,6 @@ use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
@@ -25,6 +24,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory as LegacySerializerFactory;
 

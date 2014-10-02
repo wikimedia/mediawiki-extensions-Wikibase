@@ -5,9 +5,9 @@ namespace Wikibase\ChangeOp;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Summary;
 

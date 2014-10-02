@@ -8,7 +8,6 @@ use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpClaim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -21,6 +20,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 

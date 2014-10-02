@@ -9,10 +9,10 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Diff\Differ\OrderedListDiffer;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifference;
 

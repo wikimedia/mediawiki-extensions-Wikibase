@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Language;
 use Title;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -14,6 +13,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;

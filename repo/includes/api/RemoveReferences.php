@@ -8,7 +8,7 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
-use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -120,14 +120,14 @@ class RemoveReferences extends ModifyClaim {
 	protected function getReferenceHashesFromParams( array $params, Statement $statement ) {
 		$references = $statement->getReferences();
 		$hashes = array();
-	
+
 		foreach ( array_unique( $params['references'] ) as $referenceHash ) {
 			if ( !$references->hasReferenceHash( $referenceHash ) ) {
 				$this->dieError( 'Invalid reference hash', 'no-such-reference' );
 			}
 			$hashes[] = $referenceHash;
 		}
-	
+
 		return $hashes;
 	}
 
