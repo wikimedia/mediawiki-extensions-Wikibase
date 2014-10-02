@@ -23,7 +23,6 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class MergeItems extends ApiBase {
 
-
 	/**
 	 * @var EntityIdParser
 	 */
@@ -208,22 +207,19 @@ class MergeItems extends ApiBase {
 	 * @see ApiBase::getParamDescription
 	 */
 	public function getParamDescription() {
-		return array_merge(
-			parent::getParamDescription(),
-			array(
-				'fromid' => array( 'The id to merge from' ),
-				'toid' => array( 'The id to merge to' ),
-				'ignoreconflicts' => array( 'Array of elements of the item to ignore conflicts for, can only contain values of "label" and or "description" and or "sitelink"' ),
-				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-				'summary' => array( 'Summary for the edit.',
-					"Will be prepended by an automatically generated comment. The length limit of the
-					autocomment together with the summary is 260 characters. Be aware that everything above that
-					limit will be cut off."
-				),
-				'bot' => array( 'Mark this edit as bot',
-					'This URL flag will only be respected if the user belongs to the group "bot".'
-				),
-			)
+		return array(
+			'fromid' => array( 'The id to merge from' ),
+			'toid' => array( 'The id to merge to' ),
+			'ignoreconflicts' => array( 'Array of elements of the item to ignore conflicts for, can only contain values of "label" and or "description" and or "sitelink"' ),
+			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
+			'summary' => array( 'Summary for the edit.',
+				"Will be prepended by an automatically generated comment. The length limit of the
+				autocomment together with the summary is 260 characters. Be aware that everything above that
+				limit will be cut off."
+			),
+			'bot' => array( 'Mark this edit as bot',
+				'This URL flag will only be respected if the user belongs to the group "bot".'
+			),
 		);
 	}
 
