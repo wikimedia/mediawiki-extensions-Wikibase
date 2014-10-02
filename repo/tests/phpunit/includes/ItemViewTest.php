@@ -2,10 +2,10 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\ItemView

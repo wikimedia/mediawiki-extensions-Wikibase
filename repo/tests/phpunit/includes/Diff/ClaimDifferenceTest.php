@@ -5,9 +5,9 @@ namespace Wikibase\Test;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Diff\ClaimDifference;
 
 /**

@@ -3,11 +3,11 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SnakSerializer;

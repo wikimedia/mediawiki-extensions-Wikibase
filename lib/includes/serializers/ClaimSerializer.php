@@ -5,10 +5,10 @@ namespace Wikibase\Lib\Serializers;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * Serializer for Claim objects.

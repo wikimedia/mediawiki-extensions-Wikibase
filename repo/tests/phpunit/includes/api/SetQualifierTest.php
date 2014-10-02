@@ -6,13 +6,13 @@ use DataValues\StringValue;
 use FormatJson;
 use UsageException;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 

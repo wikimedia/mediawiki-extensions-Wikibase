@@ -4,10 +4,10 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use SiteSQLStore;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\EntitySerializer;
