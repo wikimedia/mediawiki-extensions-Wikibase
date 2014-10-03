@@ -75,7 +75,7 @@ class FingerprintView {
 
 		if ( $entityId !== null ) {
 			$id = $entityId->getSerialization();
-			$idInParentheses = wfMessage( 'parentheses', $id );
+			$idInParentheses = wfMessage( 'parentheses', $id )->text();
 		}
 
 		if ( $hasLabel ) {
