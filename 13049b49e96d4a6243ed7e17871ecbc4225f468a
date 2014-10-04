@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_14f836e1",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-04T12:28:20Z",
+      "side": 1,
+      "message": "thinking about this again... wouldn\u0027t dir: auto work? Also you could chain this call with the one before.",
+      "revId": "13049b49e96d4a6243ed7e17871ecbc4225f468a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
