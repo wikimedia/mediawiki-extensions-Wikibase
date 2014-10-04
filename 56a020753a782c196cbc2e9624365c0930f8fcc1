@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_9719a880",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.labelview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 54
+      },
+      "writtenOn": "2014-10-04T20:36:13Z",
+      "side": 1,
+      "message": "This will work, but it will break if some day it will be possible to edit it in arbitrary languages and just the site language. You can get the direction for a language using $.uls.data.getDir( this.options.value.language )\n\nIt\u0027s not entirely certain that ULS is loaded. wikidata.org loads it, but some sites don\u0027t, and it\u0027s not defined as a dependency for this module (I\u0027m not sure how dependencies are handles in jquery.wikibase.* module).\n\nAnd easy solution would be something like this:\ndir \u003d ( $.uls \u0026\u0026 $.uls.data ) ?\n    $.uls.data.getDir( this.options.value.language ) :\n    $( \u0027html\u0027 ).prop( \u0027dir\u0027 );\n\nFinally, I would separate both placeholder and dir to separate variables for readability.",
+      "revId": "56a020753a782c196cbc2e9624365c0930f8fcc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
