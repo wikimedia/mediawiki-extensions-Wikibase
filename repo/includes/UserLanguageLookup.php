@@ -14,6 +14,7 @@ use User;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Thiemo Mättig
+ * @author Marius Hoch
  */
 class UserLanguageLookup {
 
@@ -55,8 +56,19 @@ class UserLanguageLookup {
 	 */
 	public function getUserSpecifiedLanguages( User $user ) {
 		// TODO: If Universal Language Selector (ULS) supports setting additional/alternative
-		// languages, these should be used in addition or instead of Babel.
-		return $this->getBabelLanguages( $user );
+		// languages, these should be used in addition or instead of Babel (also needs API support).
+
+		$languages = $this->getBabelLanguages( $user );
+
+		// All languages in MediaWiki are lower-cased, while Babel doesn't enforce
+		// that for regions.
+		$languages = array_map( 'strtolower', $languages );
+
+		$supportedLanguages = Utils::getLanguageCodes();
+		$languages = array_intersect( $languages, $supportedLanguages );
+		$languages = array_values( $languages ); // Reindex
+
+		return $languages;
 	}
 
 	/**
