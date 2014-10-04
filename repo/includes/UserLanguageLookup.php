@@ -99,6 +99,14 @@ class UserLanguageLookup {
 			$languages = array_unique( $languages );
 		}
 
+		// All languages in MediaWiki are lower-cased, while Babel doesn't enforce
+		// that for regions.
+		$languages = array_map( 'strtolower', $languages );
+
+		$supportedLanguages = Utils::getLanguageCodes();
+		$languages = array_intersect( $supportedLanguages, $languages );
+		$languages = array_values( $languages ); // Reindex
+
 		wfProfileOut( __METHOD__ );
 		return $languages;
 	}
