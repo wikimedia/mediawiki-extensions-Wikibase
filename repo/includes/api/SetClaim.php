@@ -88,7 +88,7 @@ class SetClaim extends ModifyClaim {
 			wfDebugLog( 'wikibase-debug', "Failed to set claim on entity $prefixedId: "
 				. var_export( $params, true ) );
 
-			$this->dieError( 'Failed to save claim.' );
+			$this->dieException( $ex, 'invalid-claim' );
 		}
 
 		$this->getResultBuilder()->markSuccess();
