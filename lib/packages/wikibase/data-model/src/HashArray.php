@@ -417,7 +417,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 
 			throw new InvalidArgumentException(
 				'Can only add ' . $this->getObjectType() . ' implementing objects to ' . get_called_class() . ', ' .
-				'but found a ' . $type . ' instead'
+				'but got a ' . $type . ' instead'
 			);
 		}
 
