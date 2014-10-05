@@ -33,7 +33,7 @@
 	"wikibase-terms": "În alte limbi",
 	"wikibase-sitelinks-empty": "Nicio pagină nu este asociată acestui element încă.",
 	"wikibase-sitelinks-input-help-message": "Specificați o legătură către o pagină referitoare la acest element.",
-	"wikibase-sitelinks-special": "Pagini de pe alte site-uri asociate acestui element",
+	"wikibase-sitelinks-special": "Pagini de pe alte site-uri care trimit către acest element",
 	"wikibase-remove": "elimină",
 	"wikibase-move-up": "mută mai sus",
 	"wikibase-move-down": "mută mai jos",

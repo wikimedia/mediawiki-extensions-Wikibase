@@ -64,7 +64,7 @@
 	"wikibase-parse-error-quantity": "Množství nemá správný formát.",
 	"wikibase-parse-error-time": "Časový údaj nemá správný formát.",
 	"wikibase-replicationnote": "Vezměte prosím na vědomí, že než se změny projeví na všech wiki, může to trvat pár minut.",
-	"wikibase-sitelinks-wikipedia": "Stránky Wikipedie provázané s touto položkou",
+	"wikibase-sitelinks-wikipedia": "Stránky Wikipedie propojené s touto položkou",
 	"wikibase-sitelinks-sitename-columnheading": "Jazyk",
 	"wikibase-sitelinks-sitename-columnheading-special": "Projekt",
 	"wikibase-sitelinks-siteid-columnheading": "Kód",

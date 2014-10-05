@@ -6,7 +6,8 @@
 			"Rapsar",
 			"Marmase",
 			"Sayginer",
-			"Sucsuzz"
+			"Sucsuzz",
+			"Violetanka"
 		]
 	},
 	"wikibase-edit": "değiştir",
@@ -19,7 +20,9 @@
 	"wikibase-sitelink-page-edit-placeholder": "madde",
 	"wikibase-description-input-help-message": "$1 dilinde kısa bir açıklama girin",
 	"wikibase-statements": "İfadeler",
+	"wikibase-sitelinkgroupview-input-help-message": "Bir siteyi veya o sitedeki bir sayfayı belirterek bağlantı ekleyin, var olan site bağlantılarını düzenleyin veya  kaldırın.",
 	"wikibase-sitelinks-input-help-message": "Bu ögeyle ilgili olan bir sayfanın bağlantsını ekle.",
+	"wikibase-badgeselector-badge-placeholder-title": "Bir kimlik kartı atamak için tıklayın.",
 	"wikibase-remove": "kaldır",
 	"wikibase-aliases-label": "Şu şekilde de bilinir:",
 	"wikibase-shortcopyrightwarning": "\"$1\" düğmesine tıkladığınızda, [[$2|kullanım şartlarını]] kabul ederek katkınızı, $3 kapsamında geri döndürülemez bir biçimde sağlamış olacaksınız.",
@@ -30,6 +33,7 @@
 	"special-newitem": "Yeni bir öge oluştur",
 	"wikibase-newitem-summary": "Ögenin [[Special:ItemByTitle|halihazırda var olup olmadığından]] emin olun!<br />Oluşturulan her bir öge için birer [[Help:Label|etiket]] ve [[Help:Description|tanımlama]] da oluşturmanız gerekmektedir.",
 	"wikibase-newitem-fieldset": "Yeni bir öge oluştur",
+	"wikibase-itemmerge-permissiondenied": "İzin verilmedi.",
 	"special-listdatatypes": "Kullanılabilen tüm veri türleri listesi",
 	"wikibase-api-target-is-redirect": "Yönlendirmenin hedefi başka bir yönlendirme olmamalıdır."
 }

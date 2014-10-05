@@ -159,7 +159,7 @@
 	"wikibase-setaliases-submit": "Imposta alias",
 	"wikibase-setaliases-warning-remove": "Vuoi davvero rimuovere gli alias da [[$1]]?",
 	"special-setsitelink": "Imposta un collegamento al sito",
-	"wikibase-setsitelink-introfull": "Stai impostando il collegamento al sito in $2 per [[$1]].",
+	"wikibase-setsitelink-introfull": "Stai impostando il collegamento al sito $2 per [[$1]].",
 	"wikibase-setsitelink-intro": "Questo modulo ti consente di impostare il collegamento al sito per un elemento. È necessario fornire l'ID dell'elemento (per esempio \"Q23\"), l'ID del sito (per esempio \"itwiki\") e il collegamento da impostare.",
 	"wikibase-setsitelink-intro-badges": "Inoltre puoi impostare vari distintivi per questo collegamento che sono elencati di seguito.",
 	"wikibase-setsitelink-site": "ID del sito:",

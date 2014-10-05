@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Incelemeelemani",
-			"Rapsar"
+			"Rapsar",
+			"Violetanka"
 		]
 	},
+	"wikibase-error-unexpected": "Hata: $1.",
 	"wikibase-sitelinks-wikipedia": "Bu ögeye bağlı Vikipedi sayfaları",
 	"wikibase-sitelinks-sitename-columnheading": "Dil",
 	"wikibase-sitelinks-siteid-columnheading": "Kod",
