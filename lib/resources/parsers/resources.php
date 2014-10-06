@@ -28,18 +28,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.EntityIdParser' => $moduleTemplate + array(
-			'scripts' => array(
-				'EntityIdParser.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'valueParsers.ValueParser',
-				'wikibase',
-				'wikibase.datamodel',
-			),
-		),
-
 		'wikibase.parsers.getStore' => $moduleTemplate + array(
 			'scripts' => array(
 				'getStore.js',
@@ -51,7 +39,6 @@ return call_user_func( function() {
 				'wikibase.api.ParseValueCaller',
 				'wikibase.parsers.getApiBasedValueParserConstructor',
 				'wikibase.datamodel',
-				'wikibase.EntityIdParser'
 			),
 		),
 
