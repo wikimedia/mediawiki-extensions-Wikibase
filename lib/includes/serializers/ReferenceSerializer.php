@@ -63,11 +63,12 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 			$listSerializer = new ListSerializer( 'snak', $this->snakSerializer, $this->options );
 		}
 
-		$serialization['snaks'] = $listSerializer->getSerialized( $reference->getSnaks() );
+		$snaks = $reference->getSnaks();
+		$serialization['snaks'] = $listSerializer->getSerialized( $snaks );
 
 		$serialization['snaks-order'] = array();
 		/** @var Snak $snak */
-		foreach( $reference->getSnaks() as $snak ) {
+		foreach( $snaks as $snak ) {
 			$id = $snak->getPropertyId()->getPrefixedId();
 			if( !in_array( $id, $serialization['snaks-order'] ) ) {
 				$serialization['snaks-order'][] = $id;
