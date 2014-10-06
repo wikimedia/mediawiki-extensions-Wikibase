@@ -68,6 +68,7 @@ class ByPropertyListSerializer extends SerializerObject {
 
 		$serialization = array();
 
+		$objects = clone $objects; // Don't mangle the original
 		// FIXME: "iterator => array => iterator" is stupid
 		$objects = new ByPropertyIdArray( iterator_to_array( $objects ) );
 		$objects->buildIndex();
