@@ -317,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_3529b136",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-06T12:39:43Z",
+      "side": 1,
+      "message": "Why would it not be a service?",
+      "parentUuid": "ee62ffec_9533f5f2",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_add473bf",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 7
@@ -679,6 +697,24 @@
       "side": 1,
       "message": "This is not a test case, and does not derive from the TestCase base class.",
       "parentUuid": "ee62ffec_c8f555c9",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_55ab1586",
+        "filename": "client/tests/phpunit/includes/Usage/UsageLookupContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-06T12:39:43Z",
+      "side": 1,
+      "message": "Right, I missed that this was a general tester for the interface. Several things here I don\u0027t like a lot. No concrete objection for now, but will investigate if this approach is any good.",
+      "parentUuid": "ee62ffec_956bf581",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
