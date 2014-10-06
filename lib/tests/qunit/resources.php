@@ -53,20 +53,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.parsers.EntityIdParser.tests' => $moduleBase + array(
-			'scripts' => array(
-				'parsers/EntityIdParser.tests.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'valueParsers.tests',
-				'wikibase.tests',
-				'wikibase.datamodel',
-				'wikibase.EntityIdParser',
-				'wikibase.tests.qunit.testrunner',
-			),
-		),
-
 		'wikibase.dataTypes.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.dataTypes/wikibase.dataTypes.tests.js',
