@@ -12,7 +12,6 @@ use User;
  * @group EntityView
  *
  * @licence GNU GPL v2+
- * @author Daniel Kinzler
  * @author Thiemo Mättig
  */
 class UserLanguageLookupTest extends \PHPUnit_Framework_TestCase {
@@ -40,18 +39,21 @@ class UserLanguageLookupTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $expectedWithoutEn
 	 */
 	public function testGetUserLanguages(
-		$usersLanguage, $babelLanguages, $userSpecifiedLanguages,
-		$allExpected, $expectedWithoutDe, $expectedWithoutEn
+		$usersLanguage,
+		$babelLanguages,
+		$userSpecifiedLanguages,
+		$allExpected,
+		$expectedWithoutDe,
+		$expectedWithoutEn
 	) {
+		$message = $usersLanguage . ' with {{#babel:' . $babelLanguages . '}} in assert #';
+
 		$babelLanguages            = $this->split( $babelLanguages );
 		$userSpecifiedLanguages    = $this->split( $userSpecifiedLanguages );
 		$allExpected               = $this->split( $allExpected );
 		$expectedWithoutDe         = $this->split( $expectedWithoutDe );
 		$expectedWithoutEn         = $this->split( $expectedWithoutEn );
 		$hasSpecified              = !empty( $userSpecifiedLanguages );
-
-		$message = $usersLanguage . ' width {{#babel:' . implode( '|', $babelLanguages ) .
-			'}} in assert #';
 
 		$user = new User();
 		// Required to not be anonymous
