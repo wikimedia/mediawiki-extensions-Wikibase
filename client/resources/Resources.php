@@ -8,9 +8,9 @@ return call_user_func( function() {
 	);
 
 	return array(
-		'wikibase.client.getMwRepoForApi' => $moduleTemplate + array(
+		'wikibase.client.getMwApiForRepo' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.client.getMwRepoForApi.js'
+				'wikibase.client.getMwApiForRepo.js'
 			),
 			'dependencies' => array(
 				'mw.config.values.wbRepo',
