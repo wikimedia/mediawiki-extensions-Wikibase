@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_4debacdb",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-06T16:27:55Z",
+      "side": 1,
+      "message": "good catch, thanks!",
+      "parentUuid": "ce8c5bf9_2671b00b",
+      "revId": "77c4506d918118dac56d45385f7152b33f6b72ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_6687b8dd",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2014-09-30T12:49:40Z",
       "side": 1,
       "message": "This is not in a loop",
+      "revId": "77c4506d918118dac56d45385f7152b33f6b72ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_ade6f811",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-06T16:27:55Z",
+      "side": 1,
+      "message": "Ugh! How did that happen? Look at the indentation! compare to PS8! Merge artifact? But how? when? where? Bah. Thanks :)",
+      "parentUuid": "ce8c5bf9_6687b8dd",
       "revId": "77c4506d918118dac56d45385f7152b33f6b72ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_6de8f0dd",
+        "filename": "client/includes/store/TitleFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-06T16:27:55Z",
+      "side": 1,
+      "message": "orrr!",
+      "parentUuid": "ce8c5bf9_e67ae8e6",
+      "revId": "77c4506d918118dac56d45385f7152b33f6b72ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_269f7057",
         "filename": "client/includes/store/TitleFactory.php",
         "patchSetId": 11
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_0d7a841f",
+        "filename": "client/includes/store/TitleFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-06T16:27:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8c5bf9_269f7057",
+      "revId": "77c4506d918118dac56d45385f7152b33f6b72ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_46c3943d",
         "filename": "client/includes/store/UsageUpdater.php",
         "patchSetId": 11
@@ -81,6 +153,24 @@
       "writtenOn": "2014-09-30T12:49:40Z",
       "side": 1,
       "message": "trailing WS",
+      "revId": "77c4506d918118dac56d45385f7152b33f6b72ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_2d774837",
+        "filename": "client/includes/store/UsageUpdater.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-06T16:27:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8c5bf9_46c3943d",
       "revId": "77c4506d918118dac56d45385f7152b33f6b72ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
