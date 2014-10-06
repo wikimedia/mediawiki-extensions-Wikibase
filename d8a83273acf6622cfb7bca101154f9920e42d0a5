@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_95e8bd0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-06T12:17:12Z",
+      "side": 1,
+      "message": "bindings",
+      "revId": "d8a83273acf6622cfb7bca101154f9920e42d0a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_b56e2192",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-06T12:17:12Z",
+      "side": 1,
+      "message": "ugh.",
+      "revId": "d8a83273acf6622cfb7bca101154f9920e42d0a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
