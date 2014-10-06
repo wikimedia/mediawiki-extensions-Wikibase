@@ -54,16 +54,12 @@ class ByPropertyListSerializer extends SerializerObject {
 	 *
 	 * @since 0.2
 	 *
-	 * @param mixed $objects
+	 * @param Traversable $objects
 	 *
 	 * @return array
 	 * @throws InvalidArgumentException
 	 */
-	public function getSerialized( $objects ) {
-		if ( !( $objects instanceof Traversable ) ) {
-			throw new InvalidArgumentException( 'ByPropertyListSerializer can only serialize Traversable objects' );
-		}
-
+	public function getSerialized( Traversable $objects ) {
 		//NOTE: when changing the serialization structure, update docs/json.wiki too!
 
 		$serialization = array();
