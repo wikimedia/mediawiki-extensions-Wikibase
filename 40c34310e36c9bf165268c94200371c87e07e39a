@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_751659f8",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-06T12:26:47Z",
+      "side": 0,
+      "message": "Pull up into parent change?",
+      "revId": "40c34310e36c9bf165268c94200371c87e07e39a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_9513dd04",
+        "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-06T12:26:47Z",
+      "side": 0,
+      "message": "Pull up into parent change?",
+      "revId": "40c34310e36c9bf165268c94200371c87e07e39a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_35d8d157",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-06T12:26:47Z",
+      "side": 0,
+      "message": "Pull up into parent change?",
+      "revId": "40c34310e36c9bf165268c94200371c87e07e39a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

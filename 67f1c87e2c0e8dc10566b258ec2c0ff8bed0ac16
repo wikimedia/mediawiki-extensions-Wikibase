@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_d5196528",
+        "filename": "client/includes/Usage/NullUsageTracker.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-06T12:26:47Z",
+      "side": 1,
+      "message": "ugh.",
+      "revId": "67f1c87e2c0e8dc10566b258ec2c0ff8bed0ac16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_b51ce119",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-06T12:26:47Z",
+      "side": 1,
+      "message": "Shouldn\u0027t all these changes be in the root change?",
+      "revId": "67f1c87e2c0e8dc10566b258ec2c0ff8bed0ac16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
