@@ -335,6 +335,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_f59b4919",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-06T13:51:48Z",
+      "side": 1,
+      "message": "Because it would be stateful (db transaction state) - unless we still pass the DB object into each method.",
+      "parentUuid": "ce8c5bf9_3529b136",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_add473bf",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 7
