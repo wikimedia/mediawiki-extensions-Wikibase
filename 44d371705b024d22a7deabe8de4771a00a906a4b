@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_35653142",
+        "filename": "lib/resources/wikibase.store/store.EntityStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-06T15:28:40Z",
+      "side": 1,
+      "message": "Just to make this clear: This class is implementing an endless loop now. Subclasses must override one of the methods (as stated in the doc).",
+      "revId": "44d371705b024d22a7deabe8de4771a00a906a4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
