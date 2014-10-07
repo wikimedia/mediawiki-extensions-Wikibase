@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_3e3f4922",
+        "filename": "lib/resources/jquery.wikibase/toolbar/jquery.wikibase.toolbaritem.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-07T13:34:08Z",
+      "side": 1,
+      "message": "Why another class? There\u0027s already wikibase-toolbaritem. Also, why another data item? There\u0027s already wikibaseToolbaritem.",
+      "revId": "1481dbed54d0938fa95e07088fe719347736b9f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
