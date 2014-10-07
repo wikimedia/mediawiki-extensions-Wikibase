@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\Client\Store\Sql\ConnectionManager;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
@@ -174,7 +175,8 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getUsageTracker() {
 		if ( !$this->usageTracker ) {
-			$this->usageTracker = new SqlUsageTracker( $this->idParser, $this->getLocalLoadBalancer() );
+			$connectionManager = new ConnectionManager( $this->getLocalLoadBalancer() );
+			$this->usageTracker = new SqlUsageTracker( $this->idParser, $connectionManager );
 		}
 
 		return $this->usageTracker;
