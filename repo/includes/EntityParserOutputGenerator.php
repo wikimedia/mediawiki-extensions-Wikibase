@@ -3,8 +3,9 @@
 namespace Wikibase;
 
 use ParserOutput;
-use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
@@ -119,14 +120,20 @@ class EntityParserOutputGenerator {
 		$usedUrls = $valuesFinder->findFromSnaks( $snaks, 'url' );
 
 		foreach ( $usedUrls as $url ) {
-			$pout->addExternalLink( $url->getValue() );
+			$value = $url->getValue();
+			if ( is_string( $value ) ) {
+				$pout->addExternalLink( $value );
+			}
 		}
 
 		// treat CommonsMedia values as file transclusions ------
 		$usedImages = $valuesFinder->findFromSnaks( $snaks, 'commonsMedia' );
 
-		foreach( $usedImages as $image ) {
-			$pout->addImage( str_replace( ' ', '_', $image->getValue() ) );
+		foreach ( $usedImages as $image ) {
+			$value = $image->getValue();
+			if ( is_string( $value ) ) {
+				$pout->addImage( str_replace( ' ', '_', $value ) );
+			}
 		}
 	}
 
