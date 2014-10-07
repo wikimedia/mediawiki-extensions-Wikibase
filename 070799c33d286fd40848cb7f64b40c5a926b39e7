@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_d8f8b548",
+        "filename": "repo/includes/UserLanguageLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2014-10-07T06:56:34Z",
+      "side": 1,
+      "message": "Is this related to this commit? Please make the subject of the sentence explicit.",
+      "revId": "070799c33d286fd40848cb7f64b40c5a926b39e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_18fffd32",
+        "filename": "repo/includes/UserLanguageLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2014-10-07T06:56:34Z",
+      "side": 1,
+      "message": "Core has Language::isKnownLanguageTag() just for this.",
+      "revId": "070799c33d286fd40848cb7f64b40c5a926b39e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_38fa0141",
+        "filename": "repo/includes/UserLanguageLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2014-10-07T06:56:34Z",
+      "side": 1,
+      "message": "Unrelated, but empty() should not be used to check whether an array is empty.",
+      "revId": "070799c33d286fd40848cb7f64b40c5a926b39e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
