@@ -48,9 +48,9 @@ class UsageLookupContractTester {
 
 		$this->tracker->trackUsedEntities( 23, $usages );
 
-		Assert::assertEmpty( $this->lookup->getUsageForPage( 24 ) );
+		Assert::assertEmpty( $this->lookup->getUsagesForPage( 24 ) );
 
-		$actualUsage = $this->lookup->getUsageForPage( 23 );
+		$actualUsage = $this->lookup->getUsagesForPage( 23 );
 		Assert::assertCount( 3, $actualUsage );
 
 		$actualUsageStrings = $this->getUsageStrings( $actualUsage );

@@ -24,16 +24,16 @@ use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
 class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 
 	/**
-	 * @param EntityId[] $entities
+	 * @param EntityId[] $entityIds
 	 * @param string|null $type
 	 *
 	 * @return EntityPerPageIdPager
 	 */
-	protected function newPager( array $entities, $type = null ) {
+	protected function newPager( array $entityIds, $type = null ) {
 		$keydIds = array();
-		foreach ( $entities as $id ) {
-			$key = $id->getSerialization();
-			$keydIds[$key] = $id;
+		foreach ( $entityIds as $entityId ) {
+			$key = $entityId->getSerialization();
+			$keydIds[$key] = $entityId;
 		}
 
 		$listEntities = function( $entityType, $limit, EntityId $after = null ) use ( $keydIds ) {
@@ -126,4 +126,5 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 			)
 		);
 	}
+
 }
