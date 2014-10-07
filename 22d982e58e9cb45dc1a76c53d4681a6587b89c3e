@@ -16,6 +16,24 @@
       "revId": "22d982e58e9cb45dc1a76c53d4681a6587b89c3e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_32ad382f",
+        "filename": "lib/includes/serializers/ReferenceSerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-07T19:25:08Z",
+      "side": 1,
+      "message": "Done and verified it works okay when switched around like that.",
+      "parentUuid": "ce8c5bf9_ecee1bb1",
+      "revId": "22d982e58e9cb45dc1a76c53d4681a6587b89c3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
