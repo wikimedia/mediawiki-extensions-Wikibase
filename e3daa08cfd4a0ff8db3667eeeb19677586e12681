@@ -16,6 +16,24 @@
       "revId": "e3daa08cfd4a0ff8db3667eeeb19677586e12681",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_9b0227bd",
+        "filename": "lib/resources/wikibase.store/store.CombiningEntityStore.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-07T08:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8c5bf9_9b3467a9",
+      "revId": "e3daa08cfd4a0ff8db3667eeeb19677586e12681",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
