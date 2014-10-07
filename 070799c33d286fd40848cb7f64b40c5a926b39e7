@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_5b0c9ff0",
+        "filename": "repo/includes/UserLanguageLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2014-10-07T08:55:32Z",
+      "side": 1,
+      "message": "The one you added, \"also needs API support\". The fact that I need to guess what it means is an indication that it is not a clear comment.",
+      "parentUuid": "ce8c5bf9_db198f7f",
+      "revId": "070799c33d286fd40848cb7f64b40c5a926b39e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_18fffd32",
         "filename": "repo/includes/UserLanguageLookup.php",
         "patchSetId": 3
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_7b0f23e5",
+        "filename": "repo/includes/UserLanguageLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2014-10-07T08:55:32Z",
+      "side": 1,
+      "message": "Make another wrapper then? I do not see a compelling reason to re-implement code in a subtly different way.",
+      "parentUuid": "ce8c5bf9_3b0bdb27",
+      "revId": "070799c33d286fd40848cb7f64b40c5a926b39e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_38fa0141",
         "filename": "repo/includes/UserLanguageLookup.php",
         "patchSetId": 3
@@ -101,6 +137,24 @@
       "side": 1,
       "message": "You are aware that this sentence doesn\u0027t make much sense? I\u0027m aware of the edge cases when used on strings. But on arrays?",
       "parentUuid": "ce8c5bf9_38fa0141",
+      "revId": "070799c33d286fd40848cb7f64b40c5a926b39e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_bb2ccb46",
+        "filename": "repo/includes/UserLanguageLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2014-10-07T08:55:32Z",
+      "side": 1,
+      "message": "It makes perfect sense to me. Perhaps you should explain why you think it doesn\u0027t make sense?\n\nempty() does not warn if the variable name is misspelled, which increases the chance of bugs. The check can be written as x !\u003d\u003d array() or !count(x), I prefer the former.",
+      "parentUuid": "ce8c5bf9_7b09632e",
       "revId": "070799c33d286fd40848cb7f64b40c5a926b39e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
