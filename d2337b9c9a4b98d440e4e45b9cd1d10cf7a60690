@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_c120c0aa",
+        "filename": "lib/includes/serializers/ReferenceSerializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-07T16:12:47Z",
+      "side": 1,
+      "message": "At least put a comment here explaining why we clone. Reference the bug.",
+      "revId": "d2337b9c9a4b98d440e4e45b9cd1d10cf7a60690",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
