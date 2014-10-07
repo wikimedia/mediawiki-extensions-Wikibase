@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_6c544b02",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-07T17:14:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8c5bf9_bbbccb68",
+      "revId": "3182b21b52a59b433a0daa5ccbd1fb969534d5cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_1bfff732",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-07T13:07:57Z",
       "side": 1,
       "message": "Why cast to string if it is a string according to interface?",
+      "revId": "3182b21b52a59b433a0daa5ccbd1fb969534d5cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_cc4d5777",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-07T17:14:22Z",
+      "side": 1,
+      "message": "The documentation requires it to be a string, but that\u0027s not enforced anywhere. If it\u0027s e.g. an array, the DB code would actually turn it into a set and continue. We don\u0027t want that.",
+      "parentUuid": "ce8c5bf9_1bfff732",
       "revId": "3182b21b52a59b433a0daa5ccbd1fb969534d5cf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_4c3947ca",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-07T17:14:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8c5bf9_dec2dd87",
+      "revId": "3182b21b52a59b433a0daa5ccbd1fb969534d5cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_3b251bbd",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 15
@@ -64,6 +118,24 @@
       "writtenOn": "2014-10-07T13:07:57Z",
       "side": 1,
       "message": "Move to getUsageForPage",
+      "revId": "3182b21b52a59b433a0daa5ccbd1fb969534d5cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_2c65e3dd",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-07T17:14:22Z",
+      "side": 1,
+      "message": "why?",
+      "parentUuid": "ce8c5bf9_3b251bbd",
       "revId": "3182b21b52a59b433a0daa5ccbd1fb969534d5cf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_acd57349",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-07T17:14:22Z",
+      "side": 1,
+      "message": "This is poor man\u0027s type check. Checking the type of variables before passing them to the DB backend is best practice. If I remove the cast, I need to add an explicit type check for the parameter. Want me to do that?",
+      "parentUuid": "ce8c5bf9_9efc550a",
+      "revId": "3182b21b52a59b433a0daa5ccbd1fb969534d5cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_3ee7490f",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 15
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_ac3493a8",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-07T17:14:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8c5bf9_3ee7490f",
+      "revId": "3182b21b52a59b433a0daa5ccbd1fb969534d5cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_bb336b5e",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 15
@@ -115,6 +223,24 @@
       "writtenOn": "2014-10-07T13:07:57Z",
       "side": 1,
       "message": "Could release first, then strip entities.",
+      "revId": "3182b21b52a59b433a0daa5ccbd1fb969534d5cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_6c3e8b89",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-07T17:14:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8c5bf9_bb336b5e",
       "revId": "3182b21b52a59b433a0daa5ccbd1fb969534d5cf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
