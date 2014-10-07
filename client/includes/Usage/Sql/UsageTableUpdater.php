@@ -99,7 +99,7 @@ class UsageTableUpdater {
 
 	/**
 	 * @param int $pageId
-	 * @param EntityUsage[] $usages Must be keyed by string id
+	 * @param EntityUsage[] $usages
 	 *
 	 * @return int The number of entries removed
 	 */
@@ -205,7 +205,7 @@ class UsageTableUpdater {
 
 	/**
 	 * @param int $pageId
-	 * @param EntityUsage[] $usages Must be keyed by string id
+	 * @param EntityUsage[] $usages
 	 *
 	 * @return int The number of entries added
 	 */

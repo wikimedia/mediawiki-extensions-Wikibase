@@ -316,28 +316,13 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			__METHOD__
 		);
 
-		$pages = $this->convertRowsToPageIds( $res );
+		$pages = $this->extractProperty( 'eu_page_id', $res );
 
 		$this->releaseConnection( $db );
 
 		//TODO: use paging for large page sets!
 		return new ArrayIterator( $pages );
 	}
-
-	/**
-	 * @param array|Iterator $rows
-	 *
-	 * @return array
-	 */
-	private function convertRowsToPageIds( $rows ) {
-		$pages = array();
-		foreach ( $rows as $row ) {
-			$pages[] = (int)$row->eu_page_id;
-		}
-
-		return $pages;
-	}
-
 
 	/**
 	 * @see UsageTracker::getUnusedEntities
@@ -367,26 +352,40 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		$this->releaseConnection( $db );
 
-		$unused = $this->stripEntitiesFromList( $res, $entities );
+		$entityIds = $this->extractProperty( 'eu_entity_id', $res );
+		$unused = $this->stripKeysFromList( $entityIds, $entities );
+
 		return $unused;
 	}
 
 	/**
-	 * Unsets all keys in $entities that where found as values of eu_entity_id
-	 * in $rows.
+	 * Returns a copy of $arr without all keys that are in $keys.
 	 *
-	 * @param array|Iterator $rows
-	 * @param EntityId[] $entities
+	 * @param string[] $keys
+	 * @param array $arr
 	 *
 	 * @return array
 	 */
-	private function stripEntitiesFromList( $rows, array $entities ) {
-		foreach ( $rows as $row ) {
-			$key = $row->eu_entity_id;
-			unset( $entities[$key] );
+	private function stripKeysFromList( array $keys, array $arr ) {
+		return array_diff_key( $arr, array_flip( $keys ) );
+	}
+
+	/**
+	 * Returns an array of values for $key property from the array $arr.
+	 *
+	 * @param string $key
+	 * @param array|Iterator $arr
+	 *
+	 * @return array
+	 */
+	private function extractProperty( $key, $arr ) {
+		$newArr = array();
+
+		foreach( $arr as $arrItem ) {
+			$newArr[] = $arrItem->$key;
 		}
 
-		return $entities;
+		return $newArr;
 	}
 
 }
