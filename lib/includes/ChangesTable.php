@@ -29,6 +29,8 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 		}
 
 		$this->setTargetWiki( $changesDatabase );
+
+		$this->fieldPrefix = 'change_';
 	}
 
 	/**
@@ -38,15 +40,6 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 	 */
 	public function getName() {
 		return 'wb_changes';
-	}
-
-	/**
-	 * @see ORMTable::getFieldPrefix()
-	 * @since 0.1
-	 * @return string
-	 */
-	protected function getFieldPrefix() {
-		return 'change_';
 	}
 
 	/**
