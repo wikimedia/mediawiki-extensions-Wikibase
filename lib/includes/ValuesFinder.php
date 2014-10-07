@@ -2,7 +2,9 @@
 
 namespace Wikibase;
 
+use DataValues\DataValue;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\PropertyNotFoundException;
 
 /**
@@ -36,7 +38,9 @@ class ValuesFinder {
 		$found = array();
 
 		foreach ( $snaks as $snak ) {
-			if ( $this->isMatchingSnak( $snak, $dataType ) ) {
+			if ( $snak instanceof PropertyValueSnak &&
+				$this->isMatchingDataType( $snak->getPropertyId(), $dataType )
+			) {
 				$dataValue = $snak->getDataValue();
 				$found[$dataValue->getHash()] = $dataValue;
 			}
@@ -45,22 +49,18 @@ class ValuesFinder {
 		return $found;
 	}
 
-	private function isMatchingSnak( Snak $snak, $dataType ) {
-		if ( !$snak instanceof PropertyValueSnak ) {
-			return false;
-		}
-
+	/**
+	 * @param PropertyId $propertyId
+	 * @param string $dataType
+	 *
+	 * @return bool
+	 */
+	private function isMatchingDataType( PropertyId $propertyId, $dataType ) {
 		try {
-			$type = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+			return $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId ) === $dataType;
 		} catch ( PropertyNotFoundException $ex ) {
 			return false;
 		}
-
-		if ( $type !== $dataType ) {
-			return false;
-		}
-
-		return true;
 	}
 
 }
