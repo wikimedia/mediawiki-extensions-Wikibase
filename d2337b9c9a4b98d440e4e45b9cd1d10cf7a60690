@@ -16,6 +16,24 @@
       "revId": "d2337b9c9a4b98d440e4e45b9cd1d10cf7a60690",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_ec305be7",
+        "filename": "lib/includes/serializers/ReferenceSerializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-07T16:17:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8c5bf9_c120c0aa",
+      "revId": "d2337b9c9a4b98d440e4e45b9cd1d10cf7a60690",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
