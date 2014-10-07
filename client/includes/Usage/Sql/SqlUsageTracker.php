@@ -128,27 +128,13 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * Re-indexes the given list of EntityIds so that each EntityId can be found by using its
-	 * string representation as a key.
+	 * Returns the string serialization of an EntityId.
 	 *
-	 * @param EntityId[] $entityIds
-	 *
-	 * @throws InvalidArgumentException
-	 * @return EntityId[]
+	 * @param EntityId $entityId
+	 * @return string
 	 */
-	private function reindexEntityIds( array $entityIds ) {
-		$reindexed = array();
-
-		foreach ( $entityIds as $id ) {
-			if ( !( $id instanceof EntityId ) ) {
-				throw new InvalidArgumentException( '$entityIds must contain EntityId objects.' );
-			}
-
-			$key = $id->getSerialization();
-			$reindexed[$key] = $id;
-		}
-
-		return $reindexed;
+	private function getEntityIdSerialization( EntityId $entityId ) {
+		return $entityId->getSerialization();
 	}
 
 	/**
@@ -353,12 +339,12 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			return;
 		}
 
-		$entities = $this->reindexEntityIds( $entities );
+		$entityIds = array_map( array( $this, 'getEntityIdSerialization' ), $entities );
 
 		$db = $this->beginAtomicSection( __METHOD__ );
 
 		try {
-			$batches = array_chunk( array_keys( $entities ), $this->batchSize );
+			$batches = array_chunk( $entityIds, $this->batchSize );
 
 			foreach ( $batches as $batch ) {
 				$db->delete(
@@ -450,9 +436,9 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			return array();
 		}
 
-		$entities = $this->reindexEntityIds( $entities );
+		$entityIds = array_map( array( $this, 'getEntityIdSerialization' ), $entities );
 
-		$where = array( 'eu_entity_id' => array_keys( $entities ) );
+		$where = array( 'eu_entity_id' => $entityIds );
 
 		if ( !empty( $aspects ) ) {
 			$where['eu_aspect'] = $aspects;
@@ -478,19 +464,45 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	/**
 	 * @see UsageTracker::getUnusedEntities
 	 *
-	 * @param EntityId[] $entities
+	 * @param EntityId[] $entityIds
 	 *
 	 * @return EntityId[]
 	 * @throws UsageTrackerException
 	 */
-	public function getUnusedEntities( array $entities ) {
-		if ( empty( $entities ) ) {
+	public function getUnusedEntities( array $entityIds ) {
+		if ( empty( $entityIds ) ) {
 			return array();
 		}
 
-		$entities = $this->reindexEntityIds( $entities );
+		$entityIdsBySerialization = array();
+		$entityIdStrings = array();
 
-		$where = array( 'eu_entity_id' => array_keys( $entities ) );
+		foreach ( $entityIds as $id ) {
+			$serialization = $this->getEntityIdSerialization( $id );
+			$entityIdStrings[] = $serialization;
+			$entityIdsBySerialization[ $serialization ] = $id;
+		}
+
+		$usedEntityIdStrings = $this->getUsedEntities( $entityIdStrings );
+
+		$unusedEntityIdStrings = array_diff( $entityIdStrings, $usedEntityIdStrings );
+
+		$unusedEntityIds = array_intersect_key(
+			$entityIdsBySerialization,
+			array_flip( $unusedEntityIdStrings )
+		);
+
+		return $unusedEntityIds;
+	}
+
+	/**
+	 * Returns those entity ids which are used from a given set of entity ids.
+	 *
+	 * @param string[] $entityIds
+	 * @return string[]
+	 */
+	private function getUsedEntities( array $entityIds ) {
+		$where = array( 'eu_entity_id' => $entityIds );
 
 		if ( !empty( $aspects ) ) {
 			$where['eu_aspect'] = $aspects;
@@ -505,23 +517,9 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			__METHOD__
 		);
 
-		$entityIds = $this->extractProperties( 'eu_entity_id', $res );
-		$unused = $this->stripKeysFromList( $entityIds, $entities );
-
 		$this->releaseConnection( $db );
-		return $unused;
-	}
 
-	/**
-	 * Returns a copy of $arr without all keys that are in $keys.
-	 *
-	 * @param string[] $keys
-	 * @param array $arr
-	 *
-	 * @return array
-	 */
-	private function stripKeysFromList( array $keys, array $arr ) {
-		return array_diff_key( $arr, array_flip( $keys ) );
+		return $this->extractProperties( 'eu_entity_id', $res );
 	}
 
 	/**
