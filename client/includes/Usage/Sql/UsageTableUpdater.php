@@ -235,48 +235,23 @@ class UsageTableUpdater {
 	}
 
 	/**
-	 * Re-indexes the given list of EntityIds so that each EntityId can be found by using its
-	 * string representation as a key.
-	 *
-	 * @param EntityId[] $entityIds
-	 *
-	 * @throws InvalidArgumentException
-	 * @return EntityId[]
-	 */
-	private function reindexEntityIds( array $entityIds ) {
-		$reindexed = array();
-
-		foreach ( $entityIds as $id ) {
-			if ( !( $id instanceof EntityId ) ) {
-				throw new InvalidArgumentException( '$entityIds must contain EntityId objects.' );
-			}
-
-			$key = $id->getSerialization();
-			$reindexed[$key] = $id;
-		}
-
-		return $reindexed;
-	}
-
-	/**
 	 * Removes usage tracking for the given set of entities.
 	 * This is used typically when entities were deleted.
 	 *
-	 * @param EntityId[] $entities
+	 * @param string[] $entityIdStrings
 	 */
-	public function removeEntities( array $entities ) {
-		if ( empty( $entities ) ) {
+	public function removeEntities( array $entityIdStrings ) {
+		if ( empty( $entityIdStrings ) ) {
 			return;
 		}
 
-		$entities = $this->reindexEntityIds( $entities );
-		$batches = array_chunk( $entities, $this->batchSize, true );
+		$batches = array_chunk( $entityIdStrings, $this->batchSize );
 
 		foreach ( $batches as $batch ) {
 			$this->connection->delete(
 				$this->tableName,
 				array(
-					'eu_entity_id' => array_keys( $batch ),
+					'eu_entity_id' => $batch,
 				),
 				__METHOD__
 			);
