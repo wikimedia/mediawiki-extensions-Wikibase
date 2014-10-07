@@ -142,6 +142,7 @@ class EntityContentDataCodec {
 			return $this->encodeEntityContentData( $data, $format );
 		}
 		catch ( SerializationException $ex ) {
+			\MWExceptionHandler::logException( $ex );
 			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
 		}
 	}
