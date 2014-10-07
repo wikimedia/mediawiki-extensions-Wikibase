@@ -3,6 +3,7 @@ namespace Wikibase\Client\Tests\Usage\Sql;
 
 use PHPUnit_Framework_TestCase;
 use PHPUnit_Framework_Assert as Assert;
+use Wikibase\Client\Store\Sql\ConnectionManager;
 use Wikibase\Client\Tests\Usage\UsageLookupContractTester;
 use Wikibase\Client\Tests\Usage\UsageTrackerContractTester;
 use Wikibase\Client\Usage\EntityUsage;
@@ -47,7 +48,10 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->sqlUsageTracker = new SqlUsageTracker( new BasicEntityIdParser(), wfGetLB() );
+		$this->sqlUsageTracker = new SqlUsageTracker(
+			new BasicEntityIdParser(),
+			new ConnectionManager( wfGetLB() )
+		);
 
 		$this->trackerTester = new UsageTrackerContractTester( $this->sqlUsageTracker );
 		$this->lookupTester = new UsageLookupContractTester( $this->sqlUsageTracker, $this->sqlUsageTracker );
