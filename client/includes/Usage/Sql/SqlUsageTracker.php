@@ -8,6 +8,7 @@ use Exception;
 use InvalidArgumentException;
 use Iterator;
 use LoadBalancer;
+use Wikibase\Client\Store\Sql\ConnectionManager;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
@@ -34,9 +35,9 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	private $idParser;
 
 	/**
-	 * @var LoadBalancer
+	 * @var ConnectionManager
 	 */
-	private $loadBalancer;
+	private $connectionManager;
 
 	/**
 	 * @var int
@@ -47,10 +48,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param EntityIdParser $idParser
 	 * @param LoadBalancer $loadBalancer
 	 */
-	public function __construct( EntityIdParser $idParser, LoadBalancer $loadBalancer ) {
+	public function __construct( EntityIdParser $idParser, ConnectionManager $connectionManager ) {
 		$this->tableName = 'wbc_entity_usage';
 		$this->idParser = $idParser;
-		$this->loadBalancer = $loadBalancer;
+		$this->connectionManager = $connectionManager;
 	}
 
 	/**
@@ -69,61 +70,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 */
 	public function getBatchSize() {
 		return $this->batchSize;
-	}
-
-	/**
-	 * @return DatabaseBase
-	 */
-	private function getReadConnection() {
-		return $this->loadBalancer->getConnection( DB_READ );
-	}
-
-	/**
-	 * @return DatabaseBase
-	 */
-	private function getWriteConnection() {
-		return $this->loadBalancer->getConnection( DB_WRITE );
-	}
-
-	/**
-	 * @param DatabaseBase $db
-	 */
-	private function releaseConnection( DatabaseBase $db ) {
-		$this->loadBalancer->reuseConnection( $db );
-	}
-
-	/**
-	 * @param string $fname
-	 *
-	 * @return DatabaseBase
-	 */
-	private function beginAtomicSection( $fname = __METHOD__ ) {
-		$db = $this->getWriteConnection();
-		$db->startAtomic( $fname );
-		return $db;
-	}
-
-	/**
-	 * @param DatabaseBase $db
-	 * @param string $fname
-	 *
-	 * @return DatabaseBase
-	 */
-	private function commitAtomicSection( DatabaseBase $db, $fname = __METHOD__ ) {
-		$db->endAtomic( $fname );
-		$this->releaseConnection( $db );
-	}
-
-	/**
-	 * @param DatabaseBase $db
-	 * @param string $fname
-	 *
-	 * @return DatabaseBase
-	 */
-	private function rollbackAtomicSection( DatabaseBase $db, $fname = __METHOD__ ) {
-		//FIXME: there does not seem to be a clean way to roll back an atomic section?!
-		$db->rollback( $fname, 'flush' );
-		$this->releaseConnection( $db );
 	}
 
 	/**
@@ -188,17 +134,17 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			throw new InvalidArgumentException( '$pageId must be an int.' );
 		}
 
-		$db = $this->beginAtomicSection( __METHOD__ );
+		$db = $this->connectionManager->beginAtomicSection( __METHOD__ );
 
 		try {
 			$oldUsage = $this->queryUsageForPage( $db, $pageId );
 
 			$this->modifyUsage( $db, $pageId, $oldUsage, $usages );
 
-			$this->commitAtomicSection( $db, __METHOD__ );
+			$this->connectionManager->commitAtomicSection( $db, __METHOD__ );
 			return $oldUsage;
 		} catch ( Exception $ex ) {
-			$this->rollbackAtomicSection( $db, __METHOD__ );
+			$this->connectionManager->rollbackAtomicSection( $db, __METHOD__ );
 			throw $ex;
 		}
 	}
@@ -381,7 +327,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		$entities = $this->reindexEntityIds( $entities );
 		$batches = array_chunk( $entities, $this->batchSize, true );
 
-		$db = $this->beginAtomicSection( __METHOD__ );
+		$db = $this->connectionManager->beginAtomicSection( __METHOD__ );
 
 		try {
 			foreach ( $batches as $batch ) {
@@ -394,9 +340,9 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 				);
 			}
 
-			$this->commitAtomicSection( $db, __METHOD__ );
+			$this->connectionManager->commitAtomicSection( $db, __METHOD__ );
 		} catch ( Exception $ex ) {
-			$this->rollbackAtomicSection( $db, __METHOD__ );
+			$this->connectionManager->rollbackAtomicSection( $db, __METHOD__ );
 			throw $ex;
 		}
 	}
@@ -410,11 +356,11 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @throws UsageTrackerException
 	 */
 	public function getUsageForPage( $pageId ) {
-		$db = $this->getReadConnection();
+		$db = $this->connectionManager->getReadConnection();
 
 		$usages = $this->queryUsageForPage( $db, $pageId );
 
-		$this->releaseConnection( $db );
+		$this->connectionManager->releaseConnection( $db );
 		return $usages;
 	}
 
@@ -482,7 +428,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			$where['eu_aspect'] = $aspects;
 		}
 
-		$db = $this->getReadConnection();
+		$db = $this->connectionManager->getReadConnection();
 
 		$res = $db->select(
 			$this->tableName,
@@ -493,7 +439,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		$pages = $this->convertRowsToPageIds( $res );
 
-		$this->releaseConnection( $db );
+		$this->connectionManager->releaseConnection( $db );
 
 		//TODO: use paging for large page sets!
 		return new ArrayIterator( $pages );
@@ -531,7 +477,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		$where = array( 'eu_entity_id' => array_keys( $entities ) );
 
-		$db = $this->getReadConnection();
+		$db = $this->connectionManager->getReadConnection();
 
 		$res = $db->select(
 			$this->tableName,
@@ -540,7 +486,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			__METHOD__
 		);
 
-		$this->releaseConnection( $db );
+		$this->connectionManager->releaseConnection( $db );
 
 		$unused = $this->stripEntitiesFromList( $res, $entities );
 		return $unused;
