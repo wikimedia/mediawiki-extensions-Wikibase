@@ -23,12 +23,12 @@ interface UsageLookup {
 	 * @return EntityUsage[]
 	 * @throws UsageTrackerException
 	 */
-	public function getUsageForPage( $pageId );
+	public function getUsagesForPage( $pageId );
 
 	/**
 	 * Returns the pages that use any of the given entities.
 	 *
-	 * @param EntityId[] $entities
+	 * @param EntityId[] $entityIds
 	 * @param string[] $aspects Which aspects to consider (if omitted, all aspects are considered).
 	 * Use the EntityUsage::XXX_USAGE constants to represent aspects.
 	 *
@@ -36,7 +36,7 @@ interface UsageLookup {
 	 *         If $aspects is given, only usages of these aspects are included in the result.
 	 * @throws UsageTrackerException
 	 */
-	public function getPagesUsing( array $entities, array $aspects = array() );
+	public function getPagesUsing( array $entityIds, array $aspects = array() );
 
 	/**
 	 * Returns the elements of $entities that are currently not used as
@@ -44,11 +44,11 @@ interface UsageLookup {
 	 * question which of a given list of entities are currently being used on
 	 * wiki pages.
 	 *
-	 * @param EntityId[] $entities
+	 * @param EntityId[] $entityIds
 	 *
 	 * @return EntityId[] A list of elements of $entities that are unused.
 	 * @throws UsageTrackerException
 	 */
-	public function getUnusedEntities( array $entities );
+	public function getUnusedEntities( array $entityIds );
 
 }

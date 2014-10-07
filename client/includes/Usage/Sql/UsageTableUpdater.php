@@ -174,16 +174,16 @@ class UsageTableUpdater {
 	/**
 	 * @param int $pageId
 	 * @param string $aspect
-	 * @param string[] $entityIdStrings String IDs of the entities to be removed.
+	 * @param string[] $idStrings Id strings of the entities to be removed.
 	 *
 	 * @return int The number of entries removed
 	 */
-	private function removeAspectForPage( $pageId, $aspect, array $entityIdStrings ) {
-		if ( empty( $entityIdStrings ) ) {
+	private function removeAspectForPage( $pageId, $aspect, array $idStrings ) {
+		if ( empty( $idStrings ) ) {
 			return 0;
 		}
 
-		$batches = array_chunk( $entityIdStrings, $this->batchSize, true );
+		$batches = array_chunk( $idStrings, $this->batchSize, true );
 		$c = 0;
 
 		foreach ( $batches as $batch ) {
@@ -238,14 +238,14 @@ class UsageTableUpdater {
 	 * Removes usage tracking for the given set of entities.
 	 * This is used typically when entities were deleted.
 	 *
-	 * @param string[] $entityIdStrings
+	 * @param string[] $idStrings
 	 */
-	public function removeEntities( array $entityIdStrings ) {
-		if ( empty( $entityIdStrings ) ) {
+	public function removeEntities( array $idStrings ) {
+		if ( empty( $idStrings ) ) {
 			return;
 		}
 
-		$batches = array_chunk( $entityIdStrings, $this->batchSize );
+		$batches = array_chunk( $idStrings, $this->batchSize );
 
 		foreach ( $batches as $batch ) {
 			$this->connection->delete(
