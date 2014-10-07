@@ -55,6 +55,9 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 
 		$serialization = array();
 
+		// needs to be cloned as workaround for bug 71519, where in some cases
+		// calling $reference->getHash() corrupts the $snaks value of the $reference.
+		$clonedReference = clone $reference;
 		$serialization['hash'] = $reference->getHash();
 
 		if( in_array( 'references', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
@@ -63,7 +66,7 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 			$listSerializer = new ListSerializer( 'snak', $this->snakSerializer, $this->options );
 		}
 
-		$snaks = $reference->getSnaks();
+		$snaks = $clonedReference->getSnaks();
 		$serialization['snaks'] = $listSerializer->getSerialized( $snaks );
 
 		$serialization['snaks-order'] = array();
