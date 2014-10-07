@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_ecee1bb1",
+        "filename": "lib/includes/serializers/ReferenceSerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-07T17:00:27Z",
+      "side": 1,
+      "message": "Better use $clonedReference for getHash then.",
+      "revId": "22d982e58e9cb45dc1a76c53d4681a6587b89c3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
