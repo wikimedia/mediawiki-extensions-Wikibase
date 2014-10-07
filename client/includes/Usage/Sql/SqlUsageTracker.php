@@ -228,7 +228,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	/**
 	 * @param DatabaseBase $db
 	 * @param int $pageId
-	 * @param EntityUsage[] $usages Must be keyed by string id
+	 * @param EntityUsage[] $usages
 	 *
 	 * @return int The number of entries removed
 	 */
@@ -240,8 +240,8 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		$bins = $this->binUsages( $usages );
 		$c = 0;
 
-		foreach ( $bins as $aspect => $entities ) {
-			$c += $this->removeAspectForPage( $db, $pageId, $aspect, $entities );
+		foreach ( $bins as $aspect => $entityIds ) {
+			$c += $this->removeAspectForPage( $db, $pageId, $aspect, array_keys( $entityIds ) );
 		}
 
 		return $c;
@@ -304,25 +304,25 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param DatabaseBase $db
 	 * @param int $pageId
 	 * @param string $aspect
-	 * @param EntityId[] $entities Must be keyed by string id
+	 * @param string[] $entityIds
 	 *
 	 * @return int The number of entries removed
 	 */
-	private function removeAspectForPage( DatabaseBase $db, $pageId, $aspect, array $entities ) {
-		if ( empty( $entities ) ) {
+	private function removeAspectForPage( DatabaseBase $db, $pageId, $aspect, array $entityIds ) {
+		if ( empty( $entityIds ) ) {
 			return 0;
 		}
 
-		$batches = array_chunk( $entities, $this->batchSize, true );
+		$batches = array_chunk( $entityIds, $this->batchSize );
 		$c = 0;
 
 		foreach ( $batches as $batch ) {
 			$db->delete(
 				$this->tableName,
 				array(
-					'eu_page_id' => (int)$pageId,
-					'eu_aspect' => (string)$aspect,
-					'eu_entity_id' => array_keys( $batch ),
+					'eu_page_id' => $pageId,
+					'eu_aspect' => $aspect,
+					'eu_entity_id' => $batch,
 				),
 				__METHOD__
 			);
@@ -336,7 +336,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	/**
 	 * @param DatabaseBase $db
 	 * @param int $pageId
-	 * @param EntityUsage[] $usages Must be keyed by string id
+	 * @param EntityUsage[] $usages
 	 *
 	 * @return int The number of entries added
 	 */
@@ -379,7 +379,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		}
 
 		$entities = $this->reindexEntityIds( $entities );
-		$batches = array_chunk( $entities, $this->batchSize, true );
+		$batches = array_chunk( array_keys( $entities ), $this->batchSize );
 
 		$db = $this->beginAtomicSection( __METHOD__ );
 
@@ -388,7 +388,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 				$db->delete(
 					$this->tableName,
 					array(
-						'eu_entity_id' => array_keys( $batch ),
+						'eu_entity_id' => $batch,
 					),
 					__METHOD__
 				);
@@ -491,28 +491,13 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			__METHOD__
 		);
 
-		$pages = $this->convertRowsToPageIds( $res );
+		$pages = $this->extractProperties( 'eu_page_id', $res );
 
 		$this->releaseConnection( $db );
 
 		//TODO: use paging for large page sets!
 		return new ArrayIterator( $pages );
 	}
-
-	/**
-	 * @param array|Iterator $rows
-	 *
-	 * @return array
-	 */
-	private function convertRowsToPageIds( $rows ) {
-		$pages = array();
-		foreach ( $rows as $row ) {
-			$pages[] = (int)$row->eu_page_id;
-		}
-
-		return $pages;
-	}
-
 
 	/**
 	 * @see UsageTracker::getUnusedEntities
@@ -542,26 +527,40 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		$this->releaseConnection( $db );
 
-		$unused = $this->stripEntitiesFromList( $res, $entities );
+		$entityIds = $this->extractProperties( 'eu_entity_id', $res );
+		$unused = $this->stripKeysFromList( $entityIds, $entities );
+
 		return $unused;
 	}
 
 	/**
-	 * Unsets all keys in $entities that where found as values of eu_entity_id
-	 * in $rows.
+	 * Returns a copy of $arr without all keys that are in $keys.
 	 *
-	 * @param array|Iterator $rows
-	 * @param EntityId[] $entities
+	 * @param string[] $keys
+	 * @param array $arr
 	 *
 	 * @return array
 	 */
-	private function stripEntitiesFromList( $rows, array $entities ) {
-		foreach ( $rows as $row ) {
-			$key = $row->eu_entity_id;
-			unset( $entities[$key] );
+	private function stripKeysFromList( array $keys, array $arr ) {
+		return array_diff_key( $arr, array_flip( $keys ) );
+	}
+
+	/**
+	 * Returns an array of values for $key property from the array $arr.
+	 *
+	 * @param string $key
+	 * @param array|Iterator $arr
+	 *
+	 * @return array
+	 */
+	private function extractProperties( $key, $arr ) {
+		$newArr = array();
+
+		foreach( $arr as $item ) {
+			$newArr[] = $item->$key;
 		}
 
-		return $entities;
+		return $newArr;
 	}
 
 }
