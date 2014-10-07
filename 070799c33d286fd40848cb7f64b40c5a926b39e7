@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_db198f7f",
+        "filename": "repo/includes/UserLanguageLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-07T07:58:44Z",
+      "side": 1,
+      "message": "Which subject? Which sentence? Explicit in which way?",
+      "parentUuid": "ce8c5bf9_d8f8b548",
+      "revId": "070799c33d286fd40848cb7f64b40c5a926b39e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_18fffd32",
         "filename": "repo/includes/UserLanguageLookup.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_3b0bdb27",
+        "filename": "repo/includes/UserLanguageLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-07T07:58:44Z",
+      "side": 1,
+      "message": "Wikibase heavily tries to avoid using core stuff directly. This Util method is just a wrapper.",
+      "parentUuid": "ce8c5bf9_18fffd32",
+      "revId": "070799c33d286fd40848cb7f64b40c5a926b39e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_38fa0141",
         "filename": "repo/includes/UserLanguageLookup.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2014-10-07T06:56:34Z",
       "side": 1,
       "message": "Unrelated, but empty() should not be used to check whether an array is empty.",
+      "revId": "070799c33d286fd40848cb7f64b40c5a926b39e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_7b09632e",
+        "filename": "repo/includes/UserLanguageLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-07T07:58:44Z",
+      "side": 1,
+      "message": "You are aware that this sentence doesn\u0027t make much sense? I\u0027m aware of the edge cases when used on strings. But on arrays?",
+      "parentUuid": "ce8c5bf9_38fa0141",
       "revId": "070799c33d286fd40848cb7f64b40c5a926b39e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
