@@ -108,6 +108,15 @@ class EntityContentDiffView extends DifferenceEngine {
 	}
 
 	/**
+	 * Override parent DifferenceEngine
+	 *
+	 * @return Language
+	 */
+	public function getDiffLang() {
+		return $this->getLanguage();
+	}
+
+	/**
 	 * Get a header for a specified revision.
 	 *
 	 * @param $rev Revision
