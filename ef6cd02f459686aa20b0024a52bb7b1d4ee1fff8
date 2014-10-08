@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_d3296b37",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-08T12:26:37Z",
+      "side": 1,
+      "message": "maybe do:\n\nif ( defined( \u0027MW_PHPUNIT_TEST\u0027 ) || !( $parser instanceof Parser ) {\n  return true;\n}\n\nmaybe also note the bug # in a comment, so maybe we can track when the real fix is done and then maybe remove this in the future?",
+      "revId": "ef6cd02f459686aa20b0024a52bb7b1d4ee1fff8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
