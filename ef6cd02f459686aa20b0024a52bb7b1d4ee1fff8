@@ -106,6 +106,24 @@
       "revId": "ef6cd02f459686aa20b0024a52bb7b1d4ee1fff8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_135d934a",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-08T14:07:14Z",
+      "side": 1,
+      "message": "But $parser \u003d\u003d\u003d null is what I already do. Not sure how to proceed here. Two of the parameters are completely unused anyway.",
+      "parentUuid": "ce8c5bf9_9349a392",
+      "revId": "ef6cd02f459686aa20b0024a52bb7b1d4ee1fff8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
