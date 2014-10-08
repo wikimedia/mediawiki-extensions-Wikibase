@@ -88,6 +88,24 @@
       "revId": "ef6cd02f459686aa20b0024a52bb7b1d4ee1fff8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_9349a392",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-08T14:01:39Z",
+      "side": 1,
+      "message": "doParserAfterParse can be more strict. I don\u0027t think we need to allow null in both places.\n\n$parser \u003d\u003d\u003d null would also be okay, if preferred over instanceof",
+      "parentUuid": "ce8c5bf9_b375c7ca",
+      "revId": "ef6cd02f459686aa20b0024a52bb7b1d4ee1fff8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
