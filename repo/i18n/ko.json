@@ -5,7 +5,8 @@
 			"Hym411",
 			"Kwj2772",
 			"Priviet",
-			"아라"
+			"아라",
+			"Revi"
 		]
 	},
 	"wikibase-desc": "구조화한 데이터 저장소",
@@ -75,7 +76,7 @@
 	"wikibase-snakview-snaktypeselector-value": "사용자 정의 값",
 	"wikibase-snakformat-invalid-value": "잘못된 값입니다.",
 	"wikibase-snakformat-propertynotfound": "속성을 찾을 수 없습니다.",
-	"wikibase-shortcopyrightwarning": "\"$1\"을 클릭하면 [[$2|이용 약관]]에 동의하고 영구히 $3에 따라 기여를 공개하는 데 동의합니다.",
+	"wikibase-shortcopyrightwarning": "\"$1\"을 클릭하면 [[$2|이용 약관]]에 동의하고 영구히 $3에 따라 기여를 배포하는 데 동의합니다.",
 	"wikibase-copyrighttooltip-acknowledge": "이후 편집에 이 약관에 동의합니다. 이 메시지를 다시 보이지 마세요.",
 	"wikibase-entityselector-more": "더 보기",
 	"wikibase-anonymouseditwarning": "경고: 로그인하고 있지 않습니다.\nIP 주소가 이 개체의 편집 역사에 남게 됩니다.",

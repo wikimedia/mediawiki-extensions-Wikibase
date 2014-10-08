@@ -8,7 +8,8 @@
 			"Yona b",
 			"חיים",
 			"ערן",
-			"פוילישער"
+			"פוילישער",
+			"Guycn2"
 		]
 	},
 	"wikibase-desc": "מאגר נתונים מובנה",
@@ -167,7 +168,7 @@
 	"wikibase-setsitelink-not-item": "המזהה $1 אינו שייך לפריט.",
 	"wikibase-setsitelink-not-badge": "הפריט $1 אינו סמל.",
 	"wikibase-setsitelink-add-failed": "לא התאפשרה שמירת קישור האתר.",
-	"wikibase-setsitelink-remove-failed": "אל התאפשרה הסרת קישור האתר.",
+	"wikibase-setsitelink-remove-failed": "לא התאפשרה הסרת קישור האתר.",
 	"wikibase-modifyentity-id": "מזהה:",
 	"wikibase-modifyterm-language": "שפה:",
 	"special-mergeitems": "מיזוג שני פריטים",
