@@ -175,7 +175,7 @@ HTML;
 <<<HTML
 <div class="wikibase-labelview $1">
 	<div class="wikibase-labelview-container">
-		<span class="wikibase-labelview-text">$2</span>
+		<span class="wikibase-labelview-text" dir="auto">$2</span>
 		<span class="wikibase-labelview-entityid">$3</span>
 		<!-- wikibase-toolbar -->$4
 	</div>
@@ -213,7 +213,7 @@ HTML;
 
 	$templates['wikibase-aliasesview-list-item'] =
 <<<HTML
-<li class="wikibase-aliasesview-list-item">$1</li>
+<li class="wikibase-aliasesview-list-item" dir="auto">$1</li>
 HTML;
 
 	$templates['wb-editsection'] =
