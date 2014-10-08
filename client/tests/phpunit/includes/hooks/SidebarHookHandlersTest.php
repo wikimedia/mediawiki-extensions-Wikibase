@@ -13,12 +13,11 @@ use ParserOutput;
 use RequestContext;
 use Site;
 use SiteStore;
-use StripState;
 use Title;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -342,10 +341,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$parser = $this->newParser( $title, $pagePropsBefore, array() );
 		$handler = $this->newSidebarHookHandlers();
 
-		$text = '';
-		$stripState = new StripState( 'x' );
-
-		$handler->doParserAfterParse( $parser, $text, $stripState );
+		$handler->doParserAfterParse( $parser );
 
 		$parserOutput = $parser->getOutput();
 		$this->assertEquals( $expectedItem, $parserOutput->getProperty( 'wikibase_item' ) );
@@ -360,6 +356,13 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			// $actualBadges contains info arrays, these are checked by LanguageLinkBadgeDisplayTest and LangLinkHandlerTest
 			$this->assertEquals( array_keys( $expectedBadges ) , array_keys( $actualBadges ) );
 		}
+	}
+
+	/**
+	 * @see https://bugzilla.wikimedia.org/show_bug.cgi?id=71772
+	 */
+	public function testOnParserAfterParse_withoutParameters() {
+		$this->assertTrue( SidebarHookHandlers::onParserAfterParse() );
 	}
 
 	public function testDoOutputPageParserOutput() {
