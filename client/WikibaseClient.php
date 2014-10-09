@@ -68,7 +68,6 @@ call_user_func( function() {
 	global $wgAPIMetaModules, $wgSpecialPages, $wgSpecialPageGroups, $wgResourceModules;
 	global $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
 
-
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
 		'name' => 'Wikibase Client',
@@ -143,5 +142,3 @@ call_user_func( function() {
 		'title' => 'wikibase-rc-wikibase-edit-title'
 	);
 } );
-
-$wgWBSettings =& $wgWBClientSettings; // B/C alias

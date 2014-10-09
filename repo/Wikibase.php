@@ -230,5 +230,3 @@ call_user_func( function() {
 		include_once( __DIR__ . '/config/Wikibase.experimental.php' );
 	}
 } );
-
-$wgWBSettings =& $wgWBRepoSettings; // B/C alias
