@@ -48,20 +48,16 @@ class EntityId implements Comparable, Serializable {
 	}
 
 	private function setIdSerialization( $idSerialization ) {
-		if ( is_int( $idSerialization ) ) {
-			$idSerialization = $this->replaceNumericIdArgument( $idSerialization );
-		}
-
-		if ( !is_string( $idSerialization ) ) {
+		if ( is_string( $idSerialization ) ) {
+			$this->serialization = strtoupper( $idSerialization );
+		} elseif ( is_int( $idSerialization ) ) {
+			$this->serialization = LegacyIdInterpreter::newIdFromTypeAndNumber(
+				$this->entityType,
+				$idSerialization
+			)->getSerialization();
+		} else {
 			throw new InvalidArgumentException( '$idSerialization needs to be a string' );
 		}
-
-		$this->serialization = strtoupper( $idSerialization );
-	}
-
-	private function replaceNumericIdArgument( $numericId ) {
-		return LegacyIdInterpreter::newIdFromTypeAndNumber( $this->entityType, $numericId )
-			->getSerialization();
 	}
 
 	/**

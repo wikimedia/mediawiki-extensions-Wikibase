@@ -15,7 +15,7 @@ class BasicEntityIdParser implements EntityIdParser {
 	/**
 	 * @param string $idSerialization
 	 *
-	 * @return mixed
+	 * @return ItemId|PropertyId
 	 * @throws EntityIdParsingException
 	 */
 	public function parse( $idSerialization ) {
