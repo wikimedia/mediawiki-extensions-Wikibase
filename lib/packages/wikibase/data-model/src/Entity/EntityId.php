@@ -123,8 +123,6 @@ class EntityId implements Comparable, Serializable {
 	 * @see Serializable::unserialize
 	 *
 	 * @param string $value
-	 *
-	 * @return EntityId
 	 */
 	public function unserialize( $value ) {
 		list( $entityType, $serialization ) = json_decode( $value );
