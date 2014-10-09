@@ -14,17 +14,17 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Validators\CompositeFingerprintValidator;
 use Wikibase\Validators\CompositeValidator;
@@ -511,4 +511,5 @@ class ChangeOpTestMockProvider {
 
 		return $mock;
 	}
+
 }

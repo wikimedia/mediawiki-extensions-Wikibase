@@ -4,7 +4,6 @@ namespace Wikibase\Test\Api;
 
 use DataValues\StringValue;
 use UsageException;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -12,6 +11,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
