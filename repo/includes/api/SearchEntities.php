@@ -346,7 +346,10 @@ class SearchEntities extends ApiBase {
 				ApiBase::PARAM_MIN => 0,
 				ApiBase::PARAM_RANGE_ENFORCE => true,
 			),
-			'continue' => null,
+			'continue' => array(
+				ApiBase::PARAM_TYPE => 'integer',
+				ApiBase::PARAM_REQUIRED => false,
+			),
 		);
 	}
 
