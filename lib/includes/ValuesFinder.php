@@ -6,6 +6,7 @@ use DataValues\DataValue;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\PropertyNotFoundException;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
  * Find all data values for a specified data type in an array of snaks.

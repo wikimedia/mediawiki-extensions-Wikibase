@@ -4,7 +4,7 @@ namespace Wikibase\Test\Api;
 
 use DataValues\StringValue;
 use UsageException;
-use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;

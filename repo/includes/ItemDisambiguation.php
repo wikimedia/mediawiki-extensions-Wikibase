@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Language;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\EntityIdFormatter;
 
 /**

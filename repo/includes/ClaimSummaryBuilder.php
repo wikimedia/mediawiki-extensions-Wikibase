@@ -3,6 +3,8 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\Repo\Diff\ClaimDiffer;
 
 /**
