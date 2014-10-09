@@ -114,21 +114,21 @@ class SidebarHookHandlers {
 	/**
 	 * Static handler for the ParserAfterParse hook.
 	 *
-	 * @param Parser &$parser
-	 * @param string &$text
-	 * @param StripState $stripState
+	 * @param Parser|null &$parser
+	 * @param string|null &$text Unused.
+	 * @param StripState|null $stripState Unused.
 	 *
 	 * @return bool
 	 */
-	public static function onParserAfterParse( Parser &$parser, &$text, StripState $stripState ) {
+	public static function onParserAfterParse( Parser &$parser = null, &$text = null, StripState $stripState = null ) {
 		// this hook tries to access repo SiteLinkTable
 		// it interferes with any test that parses something, like a page or a message
-		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+		if ( $parser === null || defined( 'MW_PHPUNIT_TEST' ) ) {
 			return true;
 		}
 
 		$handler = self::newFromGlobalState();
-		return $handler->doParserAfterParse( $parser, $text, $stripState );
+		return $handler->doParserAfterParse( $parser );
 	}
 
 	/**
@@ -198,12 +198,10 @@ class SidebarHookHandlers {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserAfterParse
 	 *
 	 * @param Parser &$parser
-	 * @param string &$text
-	 * @param StripState $stripState
 	 *
 	 * @return bool
 	 */
-	public function doParserAfterParse( Parser &$parser, &$text, StripState $stripState ) {
+	public function doParserAfterParse( Parser &$parser ) {
 		$title = $parser->getTitle();
 
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
