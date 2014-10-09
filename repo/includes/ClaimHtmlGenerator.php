@@ -2,6 +2,11 @@
 
 namespace Wikibase;
 
+use Wikibase\DataModel\ByPropertyIdArray;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Snak\Snaks;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\SnakHtmlGenerator;

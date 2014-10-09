@@ -7,6 +7,8 @@ use Site;
 use SiteList;
 use Title;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\Diff\EntityDiff;
+use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 

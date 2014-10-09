@@ -5,6 +5,9 @@ namespace Wikibase;
 use DataValues\DataValue;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
  * Factory for creating new snaks.

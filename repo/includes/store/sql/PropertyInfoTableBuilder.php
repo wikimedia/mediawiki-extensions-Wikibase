@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Wikibase\Lib\Reporting\MessageReporter;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityLookup;
 
