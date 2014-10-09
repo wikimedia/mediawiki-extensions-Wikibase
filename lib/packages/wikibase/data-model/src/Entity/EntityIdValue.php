@@ -54,7 +54,6 @@ class EntityIdValue extends DataValueObject {
 	 *
 	 * @param string $value
 	 *
-	 * @return EntityId
 	 * @throws IllegalValueException
 	 */
 	public function unserialize( $value ) {
@@ -155,6 +154,5 @@ class EntityIdValue extends DataValueObject {
 
 		return new static( $id );
 	}
-
 
 }

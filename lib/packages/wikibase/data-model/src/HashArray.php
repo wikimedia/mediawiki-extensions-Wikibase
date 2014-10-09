@@ -446,8 +446,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 * @see Serializable::unserialize
 	 *
 	 * @param string $serialization
-	 *
-	 * @return array
 	 */
 	public function unserialize( $serialization ) {
 		$serializationData = unserialize( $serialization );
@@ -459,8 +457,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 		}
 
 		$this->indexOffset = $serializationData['index'];
-
-		return $serializationData;
 	}
 
 	/**

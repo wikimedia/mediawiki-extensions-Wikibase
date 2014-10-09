@@ -62,8 +62,6 @@ class PropertyValueSnak extends SnakObject {
 	 * @since 0.1
 	 *
 	 * @param string $serialized
-	 *
-	 * @return PropertyValueSnak
 	 */
 	public function unserialize( $serialized ) {
 		list( $propertyId, $dataValue ) = unserialize( $serialized );
