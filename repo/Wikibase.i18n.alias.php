@@ -227,6 +227,7 @@ $specialPageAliases['ko'] = array(
 	'NewItem' => array( '새항목', '항목만들기' ),
 	'NewProperty' => array( '새속성', '속성만들기' ),
 	'ItemByTitle' => array( '제목별항목' ),
+	'GoToLinkedPage' => array( '링크된문서로가기', '링크된문서로이동' ),
 	'ItemDisambiguation' => array( '레이블별항목', '라벨별항목' ),
 	'ListDatatypes' => array( '데이터유형목록' ),
 	'SetLabel' => array( '레이블설정' ),

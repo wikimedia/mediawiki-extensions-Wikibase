@@ -6,7 +6,8 @@
 			"Priviet",
 			"관인생략",
 			"아라",
-			"Namoroka"
+			"Namoroka",
+			"Revi"
 		]
 	},
 	"wikibase-lib-desc": "위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 기능을 얻습니다",
@@ -57,10 +58,11 @@
 	"wikibase-globedetails-latitude": "위도",
 	"wikibase-globedetails-precision": "정밀도",
 	"wikibase-globedetails-globe": "글로브",
-	"wikibase-parse-error": "잘못된 값입니다.",
-	"wikibase-parse-error-coordinate": "좌표 값 형식이 잘못되었습니다.",
-	"wikibase-parse-error-quantity": "양 값이 잘못 설정되었습니다.",
-	"wikibase-parse-error-time": "시간 값이 잘못 설정되었습니다.",
+	"wikibase-parse-error": "잘못된 형식의 값입니다.",
+	"wikibase-parse-error-coordinate": "좌표 값이 잘못된 형식입니다.",
+	"wikibase-parse-error-entity-id": "개체 id가 잘못된 형식입니다.",
+	"wikibase-parse-error-quantity": "양 값이 잘못된 형식입니다.",
+	"wikibase-parse-error-time": "시간 값이 잘못된 형식입니다.",
 	"wikibase-replicationnote": "바뀐 내용이 모든 위키에 보이는데 시간이 걸릴 수 있음을 주의하세요.",
 	"wikibase-sitelinks-wikipedia": "이 항목을 가리키는 위키백과 문서",
 	"wikibase-sitelinks-sitename-columnheading": "언어",
