@@ -12,7 +12,7 @@ use InvalidArgumentException;
  */
 class PropertyId extends EntityId {
 
-	const PATTERN = '/^p[1-9][0-9]*$/i';
+	const PATTERN = '/^P[1-9]\d*$/i';
 
 	/**
 	 * @param string $idSerialization
@@ -22,13 +22,11 @@ class PropertyId extends EntityId {
 	public function __construct( $idSerialization ) {
 		$this->assertValidIdFormat( $idSerialization );
 
-		parent::__construct(
-			Property::ENTITY_TYPE,
-			$idSerialization
-		);
+		$this->entityType = Property::ENTITY_TYPE;
+		$this->serialization = strtoupper( $idSerialization );
 	}
 
-	protected function assertValidIdFormat( $idSerialization ) {
+	private function assertValidIdFormat( $idSerialization ) {
 		if ( !is_string( $idSerialization ) ) {
 			throw new InvalidArgumentException( 'The id serialization needs to be a string.' );
 		}
@@ -62,7 +60,7 @@ class PropertyId extends EntityId {
 			throw new InvalidArgumentException( '$number needs to be an integer or whole number float.' );
 		}
 
-		return new self( 'p' . $number );
+		return new self( 'P' . $number );
 	}
 
 }
