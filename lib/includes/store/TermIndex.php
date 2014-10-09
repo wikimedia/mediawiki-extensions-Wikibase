@@ -2,6 +2,9 @@
 
 namespace Wikibase;
 
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+
 /**
  * Interface to a cache for terms with both write and lookup methods.
  *

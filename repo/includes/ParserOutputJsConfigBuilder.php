@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use FormatJson;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
