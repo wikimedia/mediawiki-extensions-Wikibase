@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\Entity;
 
 /**
  * Represents a revision of a Wikibase entity.

@@ -8,7 +8,12 @@ use EasyRdf_Literal;
 use EasyRdf_Namespace;
 use EasyRdf_Resource;
 use SiteList;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\EntityLookup;
 
 /**

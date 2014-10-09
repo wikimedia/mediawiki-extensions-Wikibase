@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use DataTypes\DataType;
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
