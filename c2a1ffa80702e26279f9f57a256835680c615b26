@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_befa67b4",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-09T09:14:34Z",
+      "side": 1,
+      "message": "You\u0027re right, according to my measurements, it\u0027s a hundred times slower. Ugh.",
+      "parentUuid": "ce8c5bf9_4c54e756",
+      "revId": "c2a1ffa80702e26279f9f57a256835680c615b26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_0c4edfc4",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ce8c5bf9_be1107fe",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-09T09:14:34Z",
+      "side": 1,
+      "message": "trackUsedEntities has a type check.",
+      "parentUuid": "ce8c5bf9_0c4edfc4",
+      "revId": "c2a1ffa80702e26279f9f57a256835680c615b26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_aceb3376",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2014-10-07T17:24:04Z",
       "side": 1,
       "message": "Do we ever checkt the type of $batch, or the type of the elements of $batch?",
+      "revId": "c2a1ffa80702e26279f9f57a256835680c615b26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_9e1683f5",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-09T09:14:34Z",
+      "side": 1,
+      "message": "reindexEntityUsages did that and will probably stay.",
+      "parentUuid": "ce8c5bf9_aceb3376",
       "revId": "c2a1ffa80702e26279f9f57a256835680c615b26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
