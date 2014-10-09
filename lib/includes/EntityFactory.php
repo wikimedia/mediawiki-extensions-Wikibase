@@ -4,6 +4,8 @@ namespace Wikibase;
 
 use MWException;
 use OutOfBoundsException;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * Factory for Entity objects.

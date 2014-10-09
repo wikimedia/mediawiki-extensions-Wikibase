@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Site;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 

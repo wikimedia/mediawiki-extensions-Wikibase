@@ -7,6 +7,9 @@ use RecentChange;
 use Revision;
 use User;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\WikibaseRepo;
 

@@ -7,6 +7,7 @@ use Language;
 use LogicException;
 use MWException;
 use Title;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\ItemSearchTextGenerator;
 use Wikibase\Repo\View\ClaimsView;

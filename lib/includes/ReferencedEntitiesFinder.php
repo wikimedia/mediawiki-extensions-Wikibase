@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
  * Finds linked entities given a list of entities or a list of claims.

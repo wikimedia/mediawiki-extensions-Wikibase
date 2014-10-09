@@ -360,12 +360,21 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$type = $entity->getType();
 		$id = $entity->getId()->getSerialization();
 		// replace "type":"item","id":"q7" with "entity":["item",7]
-		$veryOldBlob = preg_replace( '/"type":"\w+","id":"\w\d+"/', '"entity":["' . strtolower( $type ) . '",' . substr( $id, 1 ) . ']', $oldBlob );
+		$veryOldBlob = preg_replace(
+			'/"type":"\w+"(,"datatype":"\w+")?,"id":"\w\d+"/',
+			'"entity":["' . strtolower( $type ) . '",' . substr( $id, 1 ) . ']$1',
+			$oldBlob
+		);
 		// replace "entity":["item",7] with "entity":"q7"
-		$veryVeryOldBlob = preg_replace( '/"entity":\["\w+",\d+\]/', '"entity":"' . strtolower( $id ) . '"', $veryOldBlob );
+		$veryVeryOldBlob = preg_replace(
+			'/"entity":\["\w+",\d+\]/',
+			'"entity":"' . strtolower( $id ) . '"',
+			$veryOldBlob
+		);
 
 		// sanity (cannot compare $veryOldBlob and $oldBlob until we have the new serialization in place)
-		if ( $veryVeryOldBlob == $veryOldBlob /* || $veryOldBlob == $oldBlob */ ) {
+		if ( $veryVeryOldBlob === $veryOldBlob /* || $veryOldBlob === $oldBlob */ ) {
+			var_dump($veryVeryOldBlob,$veryOldBlob);
 			throw new RuntimeException( 'Failed to fake very old serialization format based on oldish serialization format.' );
 		}
 
