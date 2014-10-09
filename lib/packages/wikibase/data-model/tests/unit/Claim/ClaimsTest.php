@@ -74,7 +74,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	public function testConstructorError() {
 		$this->setExpectedException( 'InvalidArgumentException' );
 
-		$class = new ReflectionClass( 'Wikibase\Claims' );
+		$class = new ReflectionClass( 'Wikibase\DataModel\Claim\Claims' );
 		$class->newInstanceArgs( func_get_args() );
 	}
 
@@ -397,7 +397,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSameSize( $claims, $snaks );
 
 		foreach ( $snaks as $guid => $snak ) {
-			$this->assertInstanceOf( 'Wikibase\Snak', $snak );
+			$this->assertInstanceOf( 'Wikibase\DataModel\Snak\Snak', $snak );
 			$this->assertTrue( $claims->hasClaimWithGuid( $guid ) );
 		}
 	}
@@ -452,15 +452,15 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		) );
 
 		$matches = $claims->getClaimsForProperty( new PropertyId( 'P42' ) );
-		$this->assertInstanceOf( 'Wikibase\Claims', $claims );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $claims );
 		$this->assertCount( 2, $matches );
 
 		$matches = $claims->getClaimsForProperty( new PropertyId( 'P23' ) );
-		$this->assertInstanceOf( 'Wikibase\Claims', $claims );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $claims );
 		$this->assertCount( 1, $matches );
 
 		$matches = $claims->getClaimsForProperty( new PropertyId( 'P9000' ) );
-		$this->assertInstanceOf( 'Wikibase\Claims', $claims );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $claims );
 		$this->assertCount( 0, $matches );
 	}
 

@@ -43,7 +43,7 @@ class PropertyTest extends EntityTest {
 
 	public function testNewFromType() {
 		$property = Property::newFromType( 'string' );
-		$this->assertInstanceOf( 'Wikibase\Property', $property );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $property );
 		$this->assertEquals( 'string', $property->getDataTypeId() );
 	}
 
