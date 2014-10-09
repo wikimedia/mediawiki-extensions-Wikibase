@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Wikibase\DataModel\Entity\EntityId;
+
 /**
  * Dating service for Terms.
  *

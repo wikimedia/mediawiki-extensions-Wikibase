@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use InvalidArgumentException;
 use ValueValidators\Result;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Validators\UniquenessViolation;
 
 /**

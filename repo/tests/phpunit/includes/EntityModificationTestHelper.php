@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Entity;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\WikibaseRepo;
 use PHPUnit_Framework_Assert as Assert;
@@ -219,4 +219,3 @@ class EntityModificationTestHelper {
 	}
 
 }
- 

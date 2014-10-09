@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Diff\DiffOp\Diff\Diff;
+use Wikibase\DataModel\Entity\Diff\ItemDiff;
 
 /**
  * @since 0.3
