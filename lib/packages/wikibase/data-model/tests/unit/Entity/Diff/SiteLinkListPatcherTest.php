@@ -67,5 +67,16 @@ class SiteLinkListPatcherTest extends \PHPUnit_Framework_TestCase {
 		$this->assertLinksResultsFromPatch( $expectedLinks, $links, $patch );
 	}
 
-}
+	public function testGivenNoBadges_doesNotWarn() {
+		$patcher = new SiteLinkListPatcher();
+		$patch = new Diff( array(
+			'dewiki' => new Diff( array(
+				'name' => new DiffOpAdd( 'Berlin' )
+			), true )
+		) );
+		$siteLinks = $patcher->getPatchedSiteLinkList( new SiteLinkList(), $patch );
 
+		$this->assertCount( 1, $siteLinks );
+	}
+
+}
