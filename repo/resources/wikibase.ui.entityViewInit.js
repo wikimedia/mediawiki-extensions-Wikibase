@@ -111,16 +111,18 @@
 	 */
 	function createEntityDom( entity, $entityview ) {
 		var repoApi = new wb.RepoApi(),
-			entityStore = buildEntityStore( repoApi );
+			entityStore = buildEntityStore( repoApi ),
+			revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
+			entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
+				repoApi,
+				revisionStore,
+				entity
+			);
 
 		$entityview
 		.entityview( {
 			value: entity,
-			entityChangersFactory: new wb.entityChangers.EntityChangersFactory(
-				repoApi,
-				wb.getRevisionStore(),
-				entity
-			),
+			entityChangersFactory: entityChangersFactory,
 			entityStore: entityStore,
 			valueViewBuilder: new wb.ValueViewBuilder(
 				experts,
