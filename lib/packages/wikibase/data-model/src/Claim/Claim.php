@@ -190,7 +190,8 @@ class Claim implements Hashable, Comparable, PropertyIdProvider {
 		$snaks = array();
 
 		$snaks[] = $this->getMainSnak();
-		$snaks = array_merge( $snaks, iterator_to_array( $this->getQualifiers() ) );
+		$qualifiers = $this->getQualifiers();
+		$snaks = array_merge( $snaks, iterator_to_array( $qualifiers ) );
 
 		return $snaks;
 	}
