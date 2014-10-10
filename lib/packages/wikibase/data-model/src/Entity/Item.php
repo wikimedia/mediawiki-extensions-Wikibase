@@ -10,8 +10,6 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Diff\EntityDiff;
-use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\Snak;
@@ -322,17 +320,14 @@ class Item extends Entity {
 	 * @return boolean
 	 */
 	public function equals( $that ) {
+		if ( $this === $that ) {
+			return true;
+		}
+
 		if ( !( $that instanceof self ) ) {
 			return false;
 		}
 
-		if ( $that === $this ) {
-			return true;
-		}
-
-		/**
-		 * @var $that Item
-		 */
 		return $this->fingerprint->equals( $that->fingerprint )
 			&& $this->siteLinks->equals( $that->siteLinks )
 			&& $this->statements->equals( $that->statements );
