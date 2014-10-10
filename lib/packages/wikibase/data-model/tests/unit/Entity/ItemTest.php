@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemIdSet;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -52,7 +51,7 @@ class ItemTest extends EntityTest {
 	/**
 	 * Returns several more or less complex claims
 	 *
-	 * @return array
+	 * @return Claim[]
 	 */
 	public function makeClaims() {
 		$id9001 = new EntityIdValue( new ItemId( 'q9001' ) );
@@ -702,9 +701,9 @@ class ItemTest extends EntityTest {
 
 	public function equalsProvider() {
 		$firstItem = Item::newEmpty();
-		$firstItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
-
 		$secondItem = Item::newEmpty();
+
+		$firstItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 		$secondItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
 		return array(
@@ -718,6 +717,7 @@ class ItemTest extends EntityTest {
 	 */
 	public function testEquals( Item $firstItem, Item $secondItem ) {
 		$this->assertTrue( $firstItem->equals( $secondItem ) );
+		$this->assertTrue( $secondItem->equals( $firstItem ) );
 	}
 
 	private function getBaseItem() {
@@ -754,12 +754,12 @@ class ItemTest extends EntityTest {
 		$item = $this->getBaseItem();
 
 		return array(
-			array( $item, Item::newEmpty() ),
-			array( $item, $differentLabel ),
-			array( $item, $differentDescription ),
-			array( $item, $differentAlias ),
-			array( $item, $differentSiteLink ),
-			array( $item, $differentStatement ),
+			'empty' => array( $item, Item::newEmpty() ),
+			'label' => array( $item, $differentLabel ),
+			'description' => array( $item, $differentDescription ),
+			'alias' => array( $item, $differentAlias ),
+			'siteLink' => array( $item, $differentSiteLink ),
+			'statement' => array( $item, $differentStatement ),
 		);
 	}
 
@@ -768,6 +768,7 @@ class ItemTest extends EntityTest {
 	 */
 	public function testNotEquals( Item $firstItem, Item $secondItem ) {
 		$this->assertFalse( $firstItem->equals( $secondItem ) );
+		$this->assertFalse( $secondItem->equals( $firstItem ) );
 	}
 
 }
