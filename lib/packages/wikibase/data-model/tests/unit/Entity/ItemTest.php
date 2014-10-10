@@ -701,14 +701,22 @@ class ItemTest extends EntityTest {
 
 	public function equalsProvider() {
 		$firstItem = Item::newEmpty();
-		$secondItem = Item::newEmpty();
-
 		$firstItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
+
+		$secondItem = Item::newEmpty();
 		$secondItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
+
+		$secondItemWithId = unserialize( serialize( $secondItem ) );
+		$secondItemWithId->setId( 42 );
+
+		$differentId = unserialize( serialize( $secondItemWithId ) );
+		$differentId->setId( 43 );
 
 		return array(
 			array( Item::newEmpty(), Item::newEmpty() ),
 			array( $firstItem, $secondItem ),
+			array( $secondItem, $secondItemWithId ),
+			array( $secondItemWithId, $differentId ),
 		);
 	}
 

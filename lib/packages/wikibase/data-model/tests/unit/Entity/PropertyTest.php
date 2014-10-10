@@ -136,10 +136,14 @@ class PropertyTest extends EntityTest {
 		$secondPropertyWithId = unserialize( serialize( $secondProperty ) );
 		$secondPropertyWithId->setId( 42 );
 
+		$differentId = unserialize( serialize( $secondPropertyWithId ) );
+		$differentId->setId( 43 );
+
 		return array(
 			array( Property::newFromType( 'string' ), Property::newFromType( 'string' ) ),
 			array( $firstProperty, $secondProperty ),
 			array( $secondProperty, $secondPropertyWithId ),
+			array( $secondPropertyWithId, $differentId ),
 		);
 	}
 
