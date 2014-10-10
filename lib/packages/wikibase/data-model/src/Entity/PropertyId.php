@@ -21,8 +21,6 @@ class PropertyId extends EntityId {
 	 */
 	public function __construct( $idSerialization ) {
 		$this->assertValidIdFormat( $idSerialization );
-
-		$this->entityType = Property::ENTITY_TYPE;
 		$this->serialization = strtoupper( $idSerialization );
 	}
 
@@ -41,6 +39,31 @@ class PropertyId extends EntityId {
 	 */
 	public function getNumericId() {
 		return (int)substr( $this->serialization, 1 );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getEntityType() {
+		return 'property';
+	}
+
+	/**
+	 * @see Serializable::serialize
+	 *
+	 * @return string
+	 */
+	public function serialize() {
+		return json_encode( array( 'property', $this->serialization ) );
+	}
+
+	/**
+	 * @see Serializable::unserialize
+	 *
+	 * @param string $value
+	 */
+	public function unserialize( $value ) {
+		list( , $this->serialization ) = json_decode( $value );
 	}
 
 	/**
