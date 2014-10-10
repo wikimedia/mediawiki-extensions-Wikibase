@@ -35,6 +35,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.entityChangers.DescriptionsChanger.tests' => $moduleBase + array(
+			'scripts' => array(
+				'DescriptionsChanger.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel',
+				'wikibase.entityChangers.DescriptionsChanger'
+			),
+		),
+
 		'wikibase.entityChangers.ReferencesChanger.tests' => $moduleBase + array(
 			'scripts' => array(
 				'ReferencesChanger.tests.js',
