@@ -36,7 +36,7 @@ class SiteLink implements Comparable {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $siteId, $pageName, $badges = array() ) {
+	public function __construct( $siteId, $pageName, $badges = null ) {
 		if ( !is_string( $siteId ) ) {
 			throw new InvalidArgumentException( '$siteId needs to be a string' );
 		}

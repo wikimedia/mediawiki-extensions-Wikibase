@@ -62,11 +62,11 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	 *
 	 * @param string $siteId
 	 * @param string $pageName
-	 * @param ItemIdSet|ItemId[] $badges
+	 * @param ItemIdSet|ItemId[]|null $badges
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addNewSiteLink( $siteId, $pageName, $badges = array() ) {
+	public function addNewSiteLink( $siteId, $pageName, $badges = null ) {
 		$this->addSiteLink( new SiteLink( $siteId, $pageName, $badges ) );
 	}
 
