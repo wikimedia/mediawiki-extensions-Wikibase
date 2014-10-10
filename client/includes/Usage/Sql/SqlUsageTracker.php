@@ -127,13 +127,14 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * Returns the string serialization of an EntityId.
+	 * @param EntityId[] $entityIds
 	 *
-	 * @param EntityId $entityId
-	 * @return string
+	 * @return string[]
 	 */
-	private function getEntityIdSerialization( EntityId $entityId ) {
-		return $entityId->getSerialization();
+	private function getEntityIdStrings( array $entityIds ) {
+		return array_map( function( EntityId $entityId ) {
+			return $entityId->getSerialization();
+		}, $entityIds );
 	}
 
 	/**
@@ -167,6 +168,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param EntityUsage[] $usages
 	 *
 	 * @throws InvalidArgumentException
+	 * @throws Exception
 	 * @return EntityUsage[] Usages before the update, in the same form as $usages
 	 */
 	public function trackUsedEntities( $pageId, array $usages ) {
@@ -290,16 +292,16 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param DatabaseBase $db
 	 * @param int $pageId
 	 * @param string $aspect
-	 * @param string[] $entityIds
+	 * @param string[] $entityIdStrings
 	 *
 	 * @return int The number of entries removed
 	 */
-	private function removeAspectForPage( DatabaseBase $db, $pageId, $aspect, array $entityIds ) {
-		if ( empty( $entityIds ) ) {
+	private function removeAspectForPage( DatabaseBase $db, $pageId, $aspect, array $entityIdStrings ) {
+		if ( empty( $entityIdStrings ) ) {
 			return 0;
 		}
 
-		$batches = array_chunk( $entityIds, $this->batchSize );
+		$batches = array_chunk( $entityIdStrings, $this->batchSize );
 		$c = 0;
 
 		foreach ( $batches as $batch ) {
@@ -355,17 +357,17 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * Removes usage tracking for the given set of entities.
 	 * This is used typically when entities were deleted.
 	 *
-	 * @param EntityId[] $entities
+	 * @param EntityId[] $entityIds
 	 *
-	 * @throws UsageTrackerException
+	 * @throws Exception
 	 */
-	public function removeEntities( array $entities ) {
-		if ( empty( $entities ) ) {
+	public function removeEntities( array $entityIds ) {
+		if ( empty( $entityIds ) ) {
 			return;
 		}
 
-		$entityIds = array_map( array( $this, 'getEntityIdSerialization' ), $entities );
-		$batches = array_chunk( $entityIds, $this->batchSize );
+		$entityIdStrings = $this->getEntityIdStrings( $entityIds );
+		$batches = array_chunk( $entityIdStrings, $this->batchSize );
 
 		$db = $this->beginAtomicSection( __METHOD__ );
 
@@ -449,20 +451,19 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	/**
 	 * @see UsageTracker::getPagesUsing
 	 *
-	 * @param EntityId[] $entities
+	 * @param EntityId[] $entityIds
 	 * @param array $aspects
 	 *
 	 * @return Iterator An iterator over page IDs.
 	 * @throws UsageTrackerException
 	 */
-	public function getPagesUsing( array $entities, array $aspects = array() ) {
-		if ( empty( $entities ) ) {
+	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
+		if ( empty( $entityIds ) ) {
 			return array();
 		}
 
-		$entityIds = array_map( array( $this, 'getEntityIdSerialization' ), $entities );
-
-		$where = array( 'eu_entity_id' => $entityIds );
+		$entityIdStrings = $this->getEntityIdStrings( $entityIds );
+		$where = array( 'eu_entity_id' => $entityIdStrings );
 
 		if ( !empty( $aspects ) ) {
 			$where['eu_aspect'] = $aspects;
@@ -501,10 +502,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		$entityIdsBySerialization = array();
 		$entityIdStrings = array();
 
-		foreach ( $entityIds as $id ) {
-			$serialization = $this->getEntityIdSerialization( $id );
+		foreach ( $entityIds as $entityId ) {
+			$serialization = $entityId->getSerialization();
 			$entityIdStrings[] = $serialization;
-			$entityIdsBySerialization[ $serialization ] = $id;
+			$entityIdsBySerialization[ $serialization ] = $entityId;
 		}
 
 		$usedEntityIdStrings = $this->getUsedEntities( $entityIdStrings );
@@ -522,11 +523,11 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	/**
 	 * Returns those entity ids which are used from a given set of entity ids.
 	 *
-	 * @param string[] $entityIds
+	 * @param string[] $entityIdStrings
 	 * @return string[]
 	 */
-	private function getUsedEntities( array $entityIds ) {
-		$where = array( 'eu_entity_id' => $entityIds );
+	private function getUsedEntities( array $entityIdStrings ) {
+		$where = array( 'eu_entity_id' => $entityIdStrings );
 
 		$db = $this->getReadConnection();
 
