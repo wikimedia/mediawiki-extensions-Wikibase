@@ -16,6 +16,24 @@
       "revId": "3b5591b3b8974029177b847c5e5d4192386baf3c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_b3bc2a1c",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-10T21:47:31Z",
+      "side": 1,
+      "message": "Oh yes, I had the same idea. But this is the public interface and I did not saw a good reason to change it.",
+      "parentUuid": "8e96e304_33057a14",
+      "revId": "3b5591b3b8974029177b847c5e5d4192386baf3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
