@@ -70,7 +70,6 @@ return call_user_func( function() {
 		'wikibase' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.js',
-				'wikibase.RevisionStore.js',
 			),
 			'dependencies' => array(
 				'wikibase.common',
@@ -79,6 +78,15 @@ return call_user_func( function() {
 				'special-createitem',
 				'wb-special-newitem-new-item-notification',
 			),
+		),
+
+		'wikibase.RevisionStore' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.RevisionStore.js',
+			),
+			'dependencies' => array(
+				'wikibase'
+			)
 		),
 
 		'wikibase.Site' => $moduleTemplate + array(
