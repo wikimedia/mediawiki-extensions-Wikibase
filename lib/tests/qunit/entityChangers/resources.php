@@ -64,6 +64,17 @@ return call_user_func( function() {
 				'wikibase.entityChangers.ReferencesChanger',
 			),
 		),
+
+		'wikibase.entityChangers.SiteLinksChanger.tests' => $moduleBase + array(
+			'scripts' => array(
+				'SiteLinksChanger.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel',
+				'wikibase.entityChangers.SiteLinksChanger'
+			),
+		),
+
 	);
 
 	return $modules;
