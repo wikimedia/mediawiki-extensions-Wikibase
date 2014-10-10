@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_8421aaae",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-10T11:43:16Z",
+      "side": 1,
+      "message": "Just wanted to ask why this trivial ... then I found the array_map below. ;-)",
+      "revId": "ebbffd69155d8e7aad4552ef64929fcca2b2faa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_441ba282",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-10T11:43:16Z",
+      "side": 1,
+      "message": "Second time the same complex line shows up. Should be a method. I will do a follow up if you don\u0027t mind.",
+      "revId": "ebbffd69155d8e7aad4552ef64929fcca2b2faa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
