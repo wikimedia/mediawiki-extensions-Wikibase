@@ -128,7 +128,6 @@
 				getParserStore( repoApi ),
 				mw
 			),
-			api: repoApi,
 			languages: getUserLanguages()
 		} )
 		.on( 'labelviewchange labelviewafterstopediting', function( event ) {
