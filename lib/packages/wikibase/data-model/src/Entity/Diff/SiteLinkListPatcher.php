@@ -15,6 +15,7 @@ use Wikibase\DataModel\SiteLinkList;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class SiteLinkListPatcher {
 
@@ -28,48 +29,50 @@ class SiteLinkListPatcher {
 	}
 
 	/**
-	 * @param SiteLinkList $links
+	 * @param SiteLinkList $siteLinks
 	 * @param Diff $patch
 	 *
 	 * @return SiteLinkList
 	 * @throws InvalidArgumentException
 	 */
-	public function getPatchedSiteLinkList( SiteLinkList $links, Diff $patch ) {
-		$links = $this->getLinksInDiffFormat( $links );
-		$links = $this->patcher->patch( $links, $patch );
+	public function getPatchedSiteLinkList( SiteLinkList $siteLinks, Diff $patch ) {
+		$baseData = $this->getSiteLinksInDiffFormat( $siteLinks );
+		$patchedData = $this->patcher->patch( $baseData, $patch );
 
-		$siteLinks = new SiteLinkList();
+		$patchedSiteLinks = new SiteLinkList();
 
-		foreach ( $links as $siteId => $linkData ) {
-			if ( array_key_exists( 'name', $linkData ) ) {
-				$siteLinks->addNewSiteLink(
-					$siteId,
-					$linkData['name'],
-					array_map(
+		foreach ( $patchedData as $siteId => $siteLinkData ) {
+			if ( array_key_exists( 'name', $siteLinkData ) ) {
+				$badges = null;
+
+				if ( array_key_exists( 'badges', $siteLinkData ) ) {
+					$badges = array_map(
 						function( $idSerialization ) {
 							return new ItemId( $idSerialization );
 						},
-						$linkData['badges']
-					)
-				);
+						$siteLinkData['badges']
+					);
+				}
+
+				$patchedSiteLinks->addNewSiteLink( $siteId, $siteLinkData['name'], $badges );
 			}
 		}
 
-		return $siteLinks;
+		return $patchedSiteLinks;
 	}
 
-	private function getLinksInDiffFormat( SiteLinkList $links ) {
+	private function getSiteLinksInDiffFormat( SiteLinkList $siteLinks ) {
 		$linksInDiffFormat = array();
 
 		/**
 		 * @var SiteLink $siteLink
 		 */
-		foreach ( $links as $siteLink ) {
+		foreach ( $siteLinks as $siteLink ) {
 			$linksInDiffFormat[$siteLink->getSiteId()] = array(
 				'name' => $siteLink->getPageName(),
 				'badges' => array_map(
-					function( ItemId $id ) {
-						return $id->getSerialization();
+					function( ItemId $itemId ) {
+						return $itemId->getSerialization();
 					},
 					$siteLink->getBadges()
 				)
