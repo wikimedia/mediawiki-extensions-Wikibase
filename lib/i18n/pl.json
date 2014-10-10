@@ -85,6 +85,7 @@
 	"wikibase-validator-bad-entity-type": "Nieoczekiwany typ obiektu $1",
 	"wikibase-validator-no-such-entity": "$1 nie znaleziono",
 	"wikibase-validator-no-such-property": "Właściwości $1 nie została znaleziona",
+	"wikibase-validator-bad-value": "Zawartość danych jest uszkodzona: $1",
 	"wikibase-validator-bad-value-type": "Błędny typ wartości $1, oczekiwano $2",
 	"wikibase-validator-bad-url": "Nieprawidłowy URL: $1",
 	"wikibase-validator-bad-url-scheme": "Nieobsługiwany schemat adresu URL: $1",
