@@ -1,5 +1,10 @@
 # Wikibase DataModel release notes
 
+## Version 2.0 (dev)
+
+* Removed all class aliases directly in the `Wikibase` namespace (deprecated since 0.6 or before)
+* Removed the class aliases for `ItemDiff` and `EntityDiff` (deprecated since 1.0)
+
 ## Version 1.1 (2014-09-29)
 
 #### Additions
