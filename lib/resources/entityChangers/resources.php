@@ -44,6 +44,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.entityChangers.DescriptionsChanger' => $moduleTemplate + array(
+			'scripts' => array(
+				'DescriptionsChanger.js',
+			),
+			'dependencies' => array(
+				'wikibase.entityChangers.__namespace',
+				'wikibase.RepoApiError',
+			)
+		),
+
 		'wikibase.entityChangers.EntityChangersFactory' => $moduleTemplate + array(
 			'scripts' => array(
 				'EntityChangersFactory.js',
@@ -52,6 +62,7 @@ return call_user_func( function() {
 				'wikibase.entityChangers.__namespace',
 				'wikibase.entityChangers.AliasesChanger',
 				'wikibase.entityChangers.ClaimsChanger',
+				'wikibase.entityChangers.DescriptionsChanger',
 				'wikibase.entityChangers.ReferencesChanger',
 			),
 		),
