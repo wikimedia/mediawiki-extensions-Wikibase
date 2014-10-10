@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_243d368b",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-10-10T08:51:10Z",
+      "side": 1,
+      "message": "You might also use the short form like done in another patch.\n\nhttps://gerrit.wikimedia.org/r/#/c/164743/3/lib/resources/jquery.wikibase/jquery.wikibase.labelview.js",
+      "revId": "05318b523f8bda6e669c9271956200c187b4c9b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_c4bed2fa",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-10-10T08:51:10Z",
+      "side": 1,
+      "message": "Missing space",
+      "revId": "05318b523f8bda6e669c9271956200c187b4c9b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
