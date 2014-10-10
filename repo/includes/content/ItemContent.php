@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use Content;
 use InvalidArgumentException;
 use Language;
 use LogicException;
@@ -199,6 +198,10 @@ class ItemContent extends EntityContent {
 
 	/**
 	 * @see getEntityView()
+	 *
+	 * @param FingerprintView $fingerprintView
+	 * @param ClaimsView $claimsView
+	 * @param Language $language
 	 *
 	 * @return ItemView
 	 */
