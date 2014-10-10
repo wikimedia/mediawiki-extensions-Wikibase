@@ -6,12 +6,13 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -34,7 +35,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Returns several more or less complex claims
 	 *
-	 * @return array
+	 * @return Claim[]
 	 */
 	public abstract function makeClaims();
 
@@ -251,7 +252,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider aliasesProvider
 	 */
 	public function testSetAllAliases( array $aliasGroups ) {
-
 		$entity = $this->getNewEmpty();
 		$entity->addAliases( 'zh' , array( 'qwertyuiop123' , '321poiuytrewq' ) );
 
@@ -524,7 +524,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	 * @param EntityDiff $expected
 	 */
 	public function testDiffEntities( Entity $entity0, Entity $entity1, EntityDiff $expected ) {
-
 		$actual = $entity0->getDiff( $entity1 );
 
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Diff\EntityDiff', $actual );
@@ -638,7 +637,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenEmptyFingerprint_noTermsAreSet() {
 		$entity = $this->getNewEmpty();
-
 		$entity->setFingerprint( Fingerprint::newEmpty() );
 
 		$this->assertHasNoTerms( $entity );
@@ -676,9 +674,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$entity = $this->getNewEmpty();
-
 		$entity->setFingerprint( $fingerprint );
-
 		$newFingerprint = $entity->getFingerprint();
 
 		$this->assertEquals( $fingerprint, $newFingerprint );
