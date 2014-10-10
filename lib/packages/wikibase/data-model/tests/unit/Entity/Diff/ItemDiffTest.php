@@ -258,32 +258,28 @@ class ItemDiffTest extends EntityDiffOldTest {
 	 * diffs for substructures even in recursive mode (bug 51363).
 	 */
 	public function testAtomicSubstructureWorkaround() {
-		$oldErrorLevel = error_reporting( E_ERROR );
+		$oldErrorLevel = error_reporting( E_USER_ERROR );
+		
+		$atomicListDiff = new DiffOpChange(
+			array( 'a' => 'A', 'b' => 'B' ),
+			array( 'b' => 'B', 'a' => 'A' )
+		);
 
-		try {
-			$atomicListDiff = new DiffOpChange(
-				array( 'a' => 'A', 'b' => 'B' ),
-				array( 'b' => 'B', 'a' => 'A' )
-			);
+		$diff = new ItemDiff( array(
+			'aliases' => $atomicListDiff,
+			'label' => $atomicListDiff,
+			'description' => $atomicListDiff,
+			'claim' => $atomicListDiff,
+			'links' => $atomicListDiff,
+		) );
 
-			$diff = new ItemDiff( array(
-				'aliases' => $atomicListDiff,
-				'label' => $atomicListDiff,
-				'description' => $atomicListDiff,
-				'claim' => $atomicListDiff,
-				'links' => $atomicListDiff,
-			) );
-
-			$this->assertInstanceOf( '\Diff\Diff', $diff->getAliasesDiff() );
-			$this->assertInstanceOf( '\Diff\Diff', $diff->getLabelsDiff() );
-			$this->assertInstanceOf( '\Diff\Diff', $diff->getDescriptionsDiff() );
-			$this->assertInstanceOf( '\Diff\Diff', $diff->getClaimsDiff() );
-			$this->assertInstanceOf( '\Diff\Diff', $diff->getSiteLinkDiff() );
-		} catch ( \Exception $ex ) { // PHP 5.3 doesn't have `finally`
-			// make sure we always restore the warning level
-			error_reporting( $oldErrorLevel );
-			throw $ex;
-		}
+		$this->assertInstanceOf( 'Diff\Diff', $diff->getAliasesDiff() );
+		$this->assertInstanceOf( 'Diff\Diff', $diff->getLabelsDiff() );
+		$this->assertInstanceOf( 'Diff\Diff', $diff->getDescriptionsDiff() );
+		$this->assertInstanceOf( 'Diff\Diff', $diff->getClaimsDiff() );
+		$this->assertInstanceOf( 'Diff\Diff', $diff->getSiteLinkDiff() );
+		
+		error_reporting( $oldErrorLevel );
 	}
 
 }
