@@ -2,30 +2,22 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use Comparable;
-use Serializable;
-use Wikibase\DataModel\LegacyIdInterpreter;
-
 /**
  * @since 0.5
+ * Constructor non-public since 1.0
+ * Abstract since 2.0
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com
  */
-class EntityId implements Comparable, Serializable {
+abstract class EntityId implements \Comparable, \Serializable {
 
-	protected $entityType;
 	protected $serialization;
-
-	private function __construct() {
-	}
 
 	/**
 	 * @return string
 	 */
-	public function getEntityType() {
-		return $this->entityType;
-	}
+	public abstract function getEntityType();
 
 	/**
 	 * @return string
@@ -37,7 +29,7 @@ class EntityId implements Comparable, Serializable {
 	/**
 	 * Returns the id serialization.
 	 * @deprecated Use getSerialization instead.
-	 * (soft depreaction, this alias will stay untill it is no longer used)
+	 * (soft deprecation, this alias will stay until it is no longer used)
 	 *
 	 * @return string
 	 */
@@ -68,34 +60,6 @@ class EntityId implements Comparable, Serializable {
 	public function equals( $target ) {
 		return $target instanceof self
 			&& $target->serialization === $this->serialization;
-	}
-
-	/**
-	 * @see Serializable::serialize
-	 *
-	 * @return string
-	 */
-	public function serialize() {
-		return json_encode( array( $this->entityType, $this->serialization ) );
-	}
-
-	/**
-	 * @see Serializable::unserialize
-	 *
-	 * @param string $value
-	 */
-	public function unserialize( $value ) {
-		list( $this->entityType, $this->serialization ) = json_decode( $value );
-
-		// Compatibility with < 0.5. Numeric ids where stored in the serialization.
-		if ( is_int( $this->serialization ) || ctype_digit( $this->serialization ) ) {
-			$this->serialization = LegacyIdInterpreter::newIdFromTypeAndNumber(
-				$this->entityType,
-				$this->serialization
-			)->serialization;
-		} else {
-			$this->serialization = strtoupper( $this->serialization );
-		}
 	}
 
 }
