@@ -258,7 +258,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 	 * diffs for substructures even in recursive mode (bug 51363).
 	 */
 	public function testAtomicSubstructureWorkaround() {
-		$oldErrorLevel = error_reporting( E_ERROR );
+		$oldErrorLevel = error_reporting( E_USER_ERROR );
 		
 		$atomicListDiff = new DiffOpChange(
 			array( 'a' => 'A', 'b' => 'B' ),
