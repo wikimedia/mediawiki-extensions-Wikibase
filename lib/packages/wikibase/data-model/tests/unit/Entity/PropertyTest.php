@@ -128,14 +128,18 @@ class PropertyTest extends EntityTest {
 
 	public function equalsProvider() {
 		$firstProperty = Property::newFromType( 'string' );
-		$secondProperty = Property::newFromType( 'string' );
-
 		$firstProperty->setStatements( $this->newNonEmptyStatementList() );
+
+		$secondProperty = Property::newFromType( 'string' );
 		$secondProperty->setStatements( $this->newNonEmptyStatementList() );
+
+		$secondPropertyWithId = unserialize( serialize( $secondProperty ) );
+		$secondPropertyWithId->setId( 42 );
 
 		return array(
 			array( Property::newFromType( 'string' ), Property::newFromType( 'string' ) ),
 			array( $firstProperty, $secondProperty ),
+			array( $secondProperty, $secondPropertyWithId ),
 		);
 	}
 
