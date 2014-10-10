@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_0796fc4f",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-10T13:23:47Z",
+      "side": 1,
+      "message": "best practice: escape/validate right before usage. always. no exceptions.",
+      "parentUuid": "ce8c5bf9_be1107fe",
+      "revId": "c2a1ffa80702e26279f9f57a256835680c615b26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_aceb3376",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 2
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "reindexEntityUsages did that and will probably stay.",
       "parentUuid": "ce8c5bf9_aceb3376",
+      "revId": "c2a1ffa80702e26279f9f57a256835680c615b26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_8791ac54",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-10T13:23:47Z",
+      "side": 1,
+      "message": "I tend to be paranoid in cases like this. I would not rely on class level knowledge here. Other people will mess with the class, and break the assumption.",
+      "parentUuid": "ce8c5bf9_9e1683f5",
       "revId": "c2a1ffa80702e26279f9f57a256835680c615b26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
