@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_33057a14",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-10-10T20:59:33Z",
+      "side": 1,
+      "message": "Perhaps a more appropriate name would be `findEntityIds`",
+      "revId": "3b5591b3b8974029177b847c5e5d4192386baf3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
