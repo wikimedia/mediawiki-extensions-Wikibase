@@ -130,7 +130,6 @@ return call_user_func( function() {
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase',
-				'wikibase.RepoApiError',
 			),
 			'messages' => array(
 				'wikibase-description-edit-placeholder',
