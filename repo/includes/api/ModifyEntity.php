@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use InvalidArgumentException;
 use LogicException;
 use Status;
 use UsageException;
@@ -20,6 +21,7 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
+use WikiPage;
 
 /**
  * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.
@@ -194,16 +196,11 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		foreach ( $badgesParams as $badgeSerialization ) {
 			try {
-				$badgeId = $this->getIdParser()->parse( $badgeSerialization );
-			} catch( EntityIdParsingException $e ) {
+				$badgeId = new ItemId( $badgeSerialization );
+			} catch( InvalidArgumentException $e ) {
 				$this->dieError( 'Badges: could not parse "' . $badgeSerialization
 					. '", the id is invalid', 'no-such-entity-id' );
-				$badgeId = null;
-			}
-
-			if ( !( $badgeId instanceof ItemId ) ) {
-				$this->dieError( 'Badges: entity with id "' . $badgeSerialization
-					. '" is not an item', 'not-item' );
+				continue;
 			}
 
 			if ( !array_key_exists( $badgeId->getPrefixedId(), $this->badgeItems ) ) {
