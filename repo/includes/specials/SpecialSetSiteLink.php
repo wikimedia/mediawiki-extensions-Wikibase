@@ -413,34 +413,18 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return ItemId[]|boolean
 	 */
 	protected function parseBadges( array $badges, Status $status ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-
-		$entityIdParser = $repo->getEntityIdParser();
-
 		$badgesObjects = array();
 
 		foreach ( $badges as $badge ) {
 			try {
-				$badgeId = $entityIdParser->parse( $badge );
-			} catch ( EntityIdParsingException $ex ) {
-				$status->fatal( 'wikibase-setsitelink-not-badge', $badge );
-				return false;
-			}
-
-			if ( !( $badgeId instanceof ItemId ) ) {
-				$status->fatal( 'wikibase-setsitelink-not-item', $badgeId->getPrefixedId() );
+				$badgeId = new ItemId( $badge );
+			} catch ( InvalidArgumentException $ex ) {
+				$status->fatal( 'wikibase-setsitelink-not-item', $badge );
 				return false;
 			}
 
 			if ( !array_key_exists( $badgeId->getPrefixedId(), $this->badgeItems ) ) {
 				$status->fatal( 'wikibase-setsitelink-not-badge', $badgeId->getPrefixedId() );
-				return false;
-			}
-
-			$itemTitle = $this->getEntityTitle( $badgeId );
-
-			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
-				$status->fatal( 'wikibase-setsitelink-not-badge', $badgeId );
 				return false;
 			}
 
