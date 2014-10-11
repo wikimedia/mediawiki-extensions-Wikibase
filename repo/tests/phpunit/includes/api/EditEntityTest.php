@@ -459,10 +459,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized', 'message' => 'Unknown key in json: remove' ) ) ),
 			'bad badge id' => array( // bad badge id
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["abc","%Q149%"]}}}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
 			'badge id is not an item id' => array( // badge id is not an item id
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["P2","%Q149%"]}}}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
 			'badge id is not specified' => array( // badge id is not specified
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["%Q149%","%Q32%"]}}}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-badge' ) ) ),
