@@ -46,7 +46,7 @@ class Statement extends Claim {
 	 * @param Claim $claim
 	 * @param ReferenceList|null $references
 	 */
-	public function __construct( Claim $claim, References $references = null ) {
+	public function __construct( Claim $claim, ReferenceList $references = null ) {
 		$this->setClaim( $claim );
 		$this->references = $references === null ? new ReferenceList() : $references;
 	}
