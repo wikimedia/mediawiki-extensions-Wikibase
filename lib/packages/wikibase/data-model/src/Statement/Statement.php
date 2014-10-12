@@ -4,8 +4,10 @@ namespace Wikibase\DataModel\Statement;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\Snaks;
 
 /**
