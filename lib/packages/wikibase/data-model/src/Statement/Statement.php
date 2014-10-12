@@ -37,7 +37,7 @@ class Statement extends Claim {
 	/**
 	 * @var integer, element of the Statement::RANK_ enum
 	 */
-	private $rank;
+	private $rank = self::RANK_NORMAL;
 
 	/**
 	 * @since 0.1
