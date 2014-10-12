@@ -7,10 +7,10 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use Title;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
@@ -95,7 +95,7 @@ class ItemContentTest extends EntityContentTest {
 		// @todo this is needed in PropertyContentTest as well
 		//       once we have statements in properties
 		$contentWithClaim = $this->newEmpty();
-		$claim = new Statement( new PropertyNoValueSnak( 83 ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( 83 ) ) );
 		$claim->setGuid( '$testing$' );
 		$contentWithClaim->getEntity()->addClaim( $claim );
 
@@ -129,7 +129,7 @@ class ItemContentTest extends EntityContentTest {
 		// @todo this is needed in PropertyContentTest as well
 		//       once we have statements in properties
 		$contentWithClaim = $this->newEmpty();
-		$claim = new Statement( new PropertyNoValueSnak( 83 ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( 83 ) ) );
 		$claim->setGuid( '$testing$' );
 		$contentWithClaim->getEntity()->addClaim( $claim );
 
@@ -157,7 +157,7 @@ class ItemContentTest extends EntityContentTest {
 		$itemContentWithClaims = $this->newEmpty();
 		$itemWithClaims = $itemContentWithClaims->getItem();
 
-		$claim = new Statement( new PropertyNoValueSnak( new PropertyId( 'P11' ) ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( new PropertyId( 'P11' ) ) ) );
 		$claim->setGuid( 'Whatever' );
 
 		$itemWithClaims->setClaims( new Claims( array(

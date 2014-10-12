@@ -6,6 +6,7 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpReference;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -263,7 +264,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old reference" ) );
 		$oldReference = new Reference( new SnakList( array( $oldSnak ) ) );
 
-		$claim = new Statement( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) ) );
 		$claim->setGuid( $claimGuid );
 		$item->addClaim( $claim );
 
@@ -313,7 +314,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old reference" ) );
 		$oldReference = new Reference( new SnakList( array( $oldSnak ) ) );
 
-		$claim = new Statement( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) ) );
 		$claim->setGuid( $claimGuid );
 		$item->addClaim( $claim );
 

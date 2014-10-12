@@ -6,6 +6,7 @@ use ApiBase;
 use ApiMain;
 use Exception;
 use FauxRequest;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -172,7 +173,7 @@ class ApiXmlFormatTest extends \PHPUnit_Framework_TestCase {
 		$item = $entityRevision->getEntity();
 
 		$snak = new PropertyNoValueSnak( $propertyId->getNumericId() );
-		$statement = new Statement( $snak );
+		$statement = new Statement( new Claim( $snak ) );
 
 		$statement->setGuid( $item->getId()->getSerialization() . '$kittens' );
 		$item->addClaim( $statement );

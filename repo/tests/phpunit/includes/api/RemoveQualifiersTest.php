@@ -4,6 +4,7 @@ namespace Wikibase\Test\Api;
 
 use DataValues\StringValue;
 use UsageException;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -52,7 +53,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 		$statements = array();
 
 		$mainSnak = new PropertyNoValueSnak( 42 );
-		$statement = new Statement( $mainSnak );
+		$statement = new Statement( new Claim( $mainSnak ) );
 		$statements[] = $statement;
 
 		foreach ( $this->snakProvider() as $snak ) {

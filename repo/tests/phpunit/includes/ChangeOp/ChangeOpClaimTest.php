@@ -6,6 +6,7 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpClaim;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -91,7 +92,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$statement666 = reset( $item666Statements );
 
 		//claims that exist on the given entities
-		$statements[0] = new Statement( new PropertyNoValueSnak( 43 ) );
+		$statements[0] = new Statement( new Claim( new PropertyNoValueSnak( 43 ) ) );
 		$statements[777] = clone $statement777;
 		$statements[666] = clone $statement666;
 		//claims with a null guid
@@ -105,9 +106,9 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$statements[6666] = clone $statement666;
 		$statements[6666]->setGuid( 'Q666$D8404CDA-25E4-4334-AF13-A3290BC66666' );
 
-		$statements[11] = new Statement( new PropertyNoValueSnak( 1 ) );
+		$statements[11] = new Statement( new Claim( new PropertyNoValueSnak( 1 ) ) );
 		$statements[11]->setGuid( null );
-		$statements[12] = new Statement( new PropertySomeValueSnak( 1 ) );
+		$statements[12] = new Statement( new Claim( new PropertySomeValueSnak( 1 ) ) );
 		$statements[12]->setGuid( null );
 		$statements[13] = clone $statements[12];
 		$statements[13]->setGuid( 'Q666$D8404CDA-25E4-4334-AF13-A3290BC66613' );
@@ -277,33 +278,33 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 		$cases = array();
 
-		$statement = new Statement( $badSnak );
+		$statement = new Statement( new Claim( $badSnak ) );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$cases['invalid value in main snak'] = array( $q17, $statement );
 
-		$statement = new Statement( $brokenSnak );
+		$statement = new Statement( new Claim( $brokenSnak ) );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$cases['mismatching value in main snak'] = array( $q17, $statement );
 
 
-		$statement = new Statement( $goodSnak );
+		$statement = new Statement( new Claim( $goodSnak ) );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$statement->setQualifiers( new SnakList( array( $badSnak ) ) );
 		$cases['bad snak in qualifiers'] = array( $q17, $statement );
 
-		$statement = new Statement( $goodSnak );
+		$statement = new Statement( new Claim( $goodSnak ) );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$statement->setQualifiers( new SnakList( array( $brokenSnak ) ) );
 		$cases['mismatching value in qualifier'] = array( $q17, $statement );
 
 
-		$statement = new Statement( $goodSnak );
+		$statement = new Statement( new Claim( $goodSnak ) );
 		$reference = new Reference( new SnakList( array( $badSnak ) ) );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$statement->setReferences( new ReferenceList( array( $reference ) ) );
 		$cases['bad snak in reference'] = array( $q17, $statement );
 
-		$statement = new Statement( $goodSnak );
+		$statement = new Statement( new Claim( $goodSnak ) );
 		$reference = new Reference( new SnakList( array( $badSnak ) ) );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$statement->setReferences( new ReferenceList( array( $reference ) ) );

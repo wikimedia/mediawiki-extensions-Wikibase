@@ -235,7 +235,7 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 	private function addStatementsWithoutQualifiers( Item $item ) {
 		foreach ( $this->getSnaks( 'P40' ) as $mainSnak ) {
-			$statement = new Statement( $mainSnak );
+			$statement = new Statement( new Claim( $mainSnak ) );
 			$this->setGuid( $statement );
 			$item->addClaim( $statement );
 		}
@@ -246,7 +246,7 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 			new PropertyId( 'P501' )
 		);
 		$qualifiers = new SnakList( $this->getSnaks( 'P51' ) );
-		$statement = new Statement( $mainSnak, $qualifiers );
+		$statement = new Statement( new Claim( $mainSnak, $qualifiers ) );
 		$this->setGuid( $statement );
 		$item->addClaim( $statement );
 	}
@@ -261,7 +261,7 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 			$mainSnak = new PropertyNoValueSnak(
 				new PropertyId( 'P70' . $id )
 			);
-			$statement = new Statement( $mainSnak );
+			$statement = new Statement( new Claim( $mainSnak ) );
 			$this->setGuid( $statement );
 			$statement->setRank( $rank );
 			$item->addClaim( $statement );
@@ -275,7 +275,7 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$qualifiers = new SnakList( $this->getSnaks( 'P61' ) );
 		$reference = new Reference( new SnakList( $this->getSnaks( 'P62' ) ) );
 		$references = new ReferenceList( array( $reference ) );
-		$statement = new Statement( $mainSnak, $qualifiers, $references );
+		$statement = new Statement( new Claim( $mainSnak, $qualifiers ), $references );
 		$this->setGuid( $statement );
 		$item->addClaim( $statement );
 	}

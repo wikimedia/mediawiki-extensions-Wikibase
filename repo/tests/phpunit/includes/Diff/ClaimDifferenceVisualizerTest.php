@@ -152,7 +152,7 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 					null,
 					new DiffOpChange( Statement::RANK_NORMAL, Statement::RANK_PREFERRED )
 				),
-				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
+				new Statement( new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ) ),
 				'<tr><td colspan="2" class="diff-lineno">property / <a>PID</a>: <i>SNAK</i> / rank</td><td colspan="2" class="diff-lineno">property / <a>PID</a>: <i>SNAK</i> / rank</td></tr>'.
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
 				'<div><del class="diffchange diffchange-inline"><span>Normal rank</span></del></div></td>'.
@@ -199,8 +199,10 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 
 		$visualizer = $this->newClaimDifferenceVisualizer();
 		$claim = new Statement(
-			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'foo' ) ),
-			new SnakList( array( new PropertyNoValueSnak( 50 ) ) ),
+			new Claim(
+				new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'foo' ) ),
+				new SnakList( array( new PropertyNoValueSnak( 50 ) ) )
+			),
 			new ReferenceList( array(
 				new Reference(
 					new SnakList( array(
@@ -243,8 +245,10 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 
 		$visualizer = $this->newClaimDifferenceVisualizer();
 		$claim = new Statement(
-			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'foo' ) ),
-			new SnakList( array( new PropertyNoValueSnak( 50 ) ) ),
+			new Claim(
+				new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'foo' ) ),
+				new SnakList( array( new PropertyNoValueSnak( 50 ) ) )
+			),
 			new ReferenceList( array(
 				new Reference(
 					new SnakList( array(

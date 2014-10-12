@@ -222,7 +222,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		$mainSnak = $snakUnserializer->newFromSerialization( $serialization['mainsnak'] );
 
 		if ( $isStatement ) {
-			$claim = new Statement( $mainSnak );
+			$claim = new Statement( new Claim( $mainSnak ) );
 		} else {
 			$claim = new Claim( $mainSnak );
 		}

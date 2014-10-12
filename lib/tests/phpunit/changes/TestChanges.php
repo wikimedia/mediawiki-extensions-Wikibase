@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\Change;
 use Wikibase\ChangeRow;
 use Wikibase\ChangesTable;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -174,7 +175,7 @@ final class TestChanges {
 			// -----
 			$propertyId = new PropertyId( 'p23' );
 			$snak = new PropertyNoValueSnak( $propertyId );
-			$statement = new Statement( $snak );
+			$statement = new Statement( new Claim( $snak ) );
 			$statement->setGuid( 'TEST$test-guid' );
 
 			$claims = new Claims( array( $statement ) );

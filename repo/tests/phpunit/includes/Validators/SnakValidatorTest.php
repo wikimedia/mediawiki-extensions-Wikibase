@@ -70,11 +70,11 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 
 		$cases = array();
 
-		$claim = new Statement( new PropertyNoValueSnak( $p1 ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( $p1 ) ) );
 		$cases[] = array( $claim, 'empty claim', true );
 
 		$claim = new Statement(
-			new PropertyValueSnak( $p1, new StringValue( '12' ) )
+			new Claim( new PropertyValueSnak( $p1, new StringValue( '12' ) ) )
 		);
 		$claim->setQualifiers( new SnakList( array(
 			new PropertyValueSnak( $p2, new StringValue( 'abc' ) )

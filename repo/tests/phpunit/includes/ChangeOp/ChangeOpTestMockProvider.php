@@ -13,6 +13,7 @@ use PHPUnit_Framework_TestCase;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -26,6 +27,7 @@ use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Store\SiteLinkCache;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Validators\CompositeFingerprintValidator;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataValueValidator;
@@ -105,7 +107,7 @@ class ChangeOpTestMockProvider {
 			$snak = new PropertyValueSnak( $propertyId, $value );
 		}
 
-		return new Statement( $snak );
+		return new Statement( new Claim( $snak ) );
 	}
 
 	/**

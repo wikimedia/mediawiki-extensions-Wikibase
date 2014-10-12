@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Language;
 use Title;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -144,7 +145,7 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 			new EntityIdValue( $redirect->getEntityId() )
 		);
 
-		$statement = new Statement( $snak );
+		$statement = new Statement( new Claim( $snak ) );
 		$statement->setGuid( 'P794$muahahaha' );
 
 		$item->addClaim( $statement );
