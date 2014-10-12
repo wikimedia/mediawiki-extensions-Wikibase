@@ -51,10 +51,10 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 
 		/** @var $statements Statement[] */
 		$statements = array(
-			new Statement( new PropertyNoValueSnak( self::$propertyId ) ),
-			new Statement( new PropertyNoValueSnak( self::$propertyId ) ),
-			new Statement( new PropertySomeValueSnak( self::$propertyId ) ),
-			new Statement( new PropertyValueSnak( self::$propertyId, new StringValue( 'o_O' ) ) ),
+			new Statement( new Claim( new PropertyNoValueSnak( self::$propertyId ) ) ),
+			new Statement( new Claim( new PropertyNoValueSnak( self::$propertyId ) ) ),
+			new Statement( new Claim( new PropertySomeValueSnak( self::$propertyId ) ) ),
+			new Statement( new Claim( new PropertyValueSnak( self::$propertyId, new StringValue( 'o_O' ) ) ) ),
 		);
 
 		foreach( $statements as $statement ){

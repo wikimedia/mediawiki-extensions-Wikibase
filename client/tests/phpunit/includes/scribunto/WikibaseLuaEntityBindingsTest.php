@@ -4,6 +4,7 @@ namespace Wikibase\Client\Scribunto\Test;
 
 use Language;
 use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -53,7 +54,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 			new PropertyId( 'P123456' ),
 			'somevalue'
 		);
-		$statement = new Statement( $snak );
+		$statement = new Statement( new Claim( $snak ) );
 		$statement->setGuid( 'gsdfgsadg' );
 
 		$item = Item::newEmpty();

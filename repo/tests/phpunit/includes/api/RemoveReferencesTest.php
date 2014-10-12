@@ -4,6 +4,7 @@ namespace Wikibase\Test\Api;
 
 use DataValues\StringValue;
 use UsageException;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -53,7 +54,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 		$statements = array();
 
 		$mainSnak = new PropertyNoValueSnak( 42 );
-		$statement = new Statement( $mainSnak );
+		$statement = new Statement( new Claim( $mainSnak ) );
 		$statements[] = $statement;
 
 		foreach ( $this->snakProvider() as $snak ) {
@@ -164,7 +165,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	}
 
 	public function invalidGuidProvider() {
-		$snak = new PropertyValueSnak( 722, new \DataValues\StringValue( 'abc') );
+		$snak = new PropertyValueSnak( 722, new StringValue( 'abc') );
 		$hash = $snak->getHash();
 
 		return array(

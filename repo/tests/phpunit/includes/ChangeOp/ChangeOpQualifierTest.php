@@ -168,7 +168,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old qualifier" ) );
 
-		$claim = new Statement( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) ) );
 		$claim->setGuid( $claimGuid );
 		$item->addClaim( $claim );
 
@@ -212,7 +212,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old qualifier" ) );
 
-		$claim = new Statement( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) ) );
 		$claim->setGuid( $claimGuid );
 		$item->addClaim( $claim );
 

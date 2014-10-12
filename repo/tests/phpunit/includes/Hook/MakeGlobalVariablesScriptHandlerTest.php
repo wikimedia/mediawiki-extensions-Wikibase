@@ -6,6 +6,7 @@ use ContentHandler;
 use DataValues\StringValue;
 use RequestContext;
 use Title;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -172,7 +173,7 @@ class MakeGlobalVariablesScriptHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$snak = new PropertyValueSnak( new PropertyId( 'P794' ), new StringValue( 'a' ) );
 
-		$statement = new Statement( $snak );
+		$statement = new Statement( new Claim( $snak ) );
 		$statement->setGuid( 'P794$muahahaha' );
 
 		$item->addClaim( $statement );

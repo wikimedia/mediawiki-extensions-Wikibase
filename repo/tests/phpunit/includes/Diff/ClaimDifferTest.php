@@ -31,8 +31,8 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 	public function diffClaimsProvider() {
 		$argLists = array();
 
-		$noValueForP42 = new Statement( new PropertyNoValueSnak( 42 ) );
-		$noValueForP43 = new Statement( new PropertyNoValueSnak( 43 ) );
+		$noValueForP42 = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$noValueForP43 = new Statement( new Claim( new PropertyNoValueSnak( 43 ) ) );
 
 		$argLists[] = array(
 			$noValueForP42,
