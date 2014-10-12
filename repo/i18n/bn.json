@@ -33,6 +33,7 @@
 	"wikibase-sitelinks-empty": "এই আইটেমে কোন পাতা এখনও সংযোগ করা নেই।",
 	"wikibase-sitelinks-input-help-message": "এই আইটেম সম্পর্কিত একটি পাতার লিঙ্ক ধার্য করুন।",
 	"wikibase-sitelinks-special": "এই আইটেমে সংযুক্ত অন্যান্য সাইটের পাতা",
+	"wikibase-badgeselector-badge-placeholder-title": "একটি ব্যাজ ধার্য করতে ক্লিক করুন।",
 	"wikibase-remove": "অপসারণ",
 	"wikibase-move-up": "উপরে তুলুন",
 	"wikibase-move-down": "নিচে নামান",
@@ -43,7 +44,6 @@
 	"wikibase-undo-revision-error": "পূর্বাবস্থায় ফেরা ব্যর্থ হয়েছে",
 	"wikibase-undo-firstrev": "পাতা সৃষ্টি পূর্বাবস্থায় ফেরাতে পারবেন না",
 	"wikibase-undo-nocontent": "$1 পাতার $2 নং সংস্করণের বিষয়বস্তু লোড করা যাচ্ছে না",
-	"wikibase-propertyedittool-full": "মানের তালিকা সম্পূর্ণ হয়েছে।",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|একটি মান|$1 টি মান}} এখনও সংরক্ষিত হয়নি",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|টি ভুক্তি}}",
 	"wikibase-disambiguation-title": "\"$1\" এর দ্ব্যর্থতা নিরসন",
@@ -68,6 +68,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" কোন বৈধ আইটেম আইডি নয়।",
 	"wikibase-wikibaserepopage-invalid-langcode": "ভাষা কোড \"$1\" অজানা। সিস্টেমের জন্য পরিচিত এমন একটি ভাষা কোড ব্যবহার করুন, যেমন \"bn\"।",
 	"wikibase-wikibaserepopage-invalid-id": "আইডি \"$1\" সিস্টেমে অজানা। দয়া করে একটি বৈধ ভুক্তি আইডি ব্যবহার করুন।",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 একটি পুনর্নির্দেশ।",
+	"wikibase-wikibaserepopage-storage-exception": "$1 লোড করার চেষ্টা করার সময় একটি ত্রুটি ঘটেছে: $2",
 	"special-itembytitle": "শিরোনাম অনুযায়ী আইটেম",
 	"wikibase-itembytitle-lookup-fieldset": "সাইট এবং শিরোনাম অনুযায়ী আইটেমের জন্য অনুসন্ধান",
 	"wikibase-itembytitle-lookup-site": "সাইট:",
@@ -200,5 +202,6 @@
 	"content-model-wikibase-property": "উইকিবেজ বৈশিষ্ট্য",
 	"content-model-wikibase-query": "উইকিবেজ কোয়েরি",
 	"right-item-merge": "আইটেম একত্রীকারক",
+	"right-item-redirect": "আইটেম পুননির্দেশনা তৈরি",
 	"right-property-create": "বৈশিষ্ট্য তৈরি"
 }
