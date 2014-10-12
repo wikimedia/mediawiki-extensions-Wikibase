@@ -15,6 +15,7 @@
 * Added `Statement::addNewReference`
 
 #### Deprecations
+
 * Deprecated `Claim::RANK_` enum in favour of `Statement::RANK_` enum
 * Deprecated `Claim::getRank`
 
