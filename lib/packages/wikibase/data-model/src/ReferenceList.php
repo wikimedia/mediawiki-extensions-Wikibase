@@ -8,8 +8,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * Implementation of the References interface.
- * @see References
+ * List of Reference objects.
  *
  * Note that this implementation is based on SplObjectStorage and
  * is not enforcing the type of objects set via it's native methods.
@@ -17,15 +16,16 @@ use Wikibase\DataModel\Snak\SnakList;
  * not sticking to the methods of the References interface.
  *
  * @since 0.1
+ * Does not implement References anymore since 2.0
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  */
-class ReferenceList extends HashableObjectStorage implements References {
+class ReferenceList extends HashableObjectStorage {
 
 	/**
-	 * @see References::addReference
+	 * Adds the provided reference to the list.
 	 *
 	 * @since 0.1
 	 *
@@ -75,7 +75,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 	}
 
 	/**
-	 * @see References::hasReference
+	 * Returns if the list contains a reference with the same hash as the provided reference.
 	 *
 	 * @since 0.1
 	 *
@@ -89,7 +89,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 	}
 
 	/**
-	 * @see References::indexOf
+	 * Returns the index of a reference or false if the reference could not be found.
 	 *
 	 * @since 0.5
 	 *
@@ -111,7 +111,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 	}
 
 	/**
-	 * @see References::removeReference
+	 * Removes the reference with the same hash as the provided reference if such a reference exists in the list.
 	 *
 	 * @since 0.1
 	 *
@@ -122,7 +122,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 	}
 
 	/**
-	 * @see References::hasReferenceHash
+	 * Returns if the list contains a reference with the provided hash.
 	 *
 	 * @since 0.3
 	 *
@@ -135,7 +135,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 	}
 
 	/**
-	 * @see References::removeReferenceHash
+	 * Removes the reference with the provided hash if it exists in the list.
 	 *
 	 * @since 0.3
 	 *
@@ -150,7 +150,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 	}
 
 	/**
-	 * @see References::getReference
+	 * Returns the reference with the provided hash, or null if there is no such reference in the list.
 	 *
 	 * @since 0.3
 	 *

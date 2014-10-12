@@ -11,7 +11,6 @@ use Traversable;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\References;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\Snaks;
@@ -96,7 +95,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	/**
 	 * @param Snak $mainSnak
 	 * @param Snak[]|Snaks|null $qualifiers
-	 * @param Reference[]|References|null $references
+	 * @param Reference[]|ReferenceList|null $references
 	 * @param string|null $guid
 	 */
 	public function addNewStatement( Snak $mainSnak, $qualifiers = null, $references = null, $guid = null ) {
