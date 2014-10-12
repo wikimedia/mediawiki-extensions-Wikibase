@@ -89,15 +89,14 @@ class Statement extends Claim {
 	}
 
 	/**
-	 * Creates a new reference and attaches it to this statement.
+	 * @since 2.0
 	 *
-	 * @since 1.1
+	 * @param Snak $snak
 	 *
-	 * @param Snaks
-	 * @param int|null $index
+	 * @throws InvalidArgumentException
 	 */
-	public function addReference( Snaks $snaks, $index = null ) {
-		$this->references->addNewReference( $snaks, $index );
+	public function addNewReference( Snak $snak /* Snak, ... */ ) {
+		$this->references->addReference( new Reference( new SnakList( func_get_args() ) ) );
 	}
 
 	/**
