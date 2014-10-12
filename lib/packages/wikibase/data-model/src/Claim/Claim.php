@@ -29,13 +29,13 @@ class Claim implements Hashable, Comparable, PropertyIdProvider {
 	 * @since 0.1
 	 */
 
-	/** @deprecated since 1.1 */
+	/** @deprecated since 2.0 */
 	const RANK_TRUTH = 3;
-	/** @deprecated since 1.1 - use Statement::RANK_PREFERRED instead */
+	/** @deprecated since 2.0 - use Statement::RANK_PREFERRED instead */
 	const RANK_PREFERRED = 2;
-	/** @deprecated since 1.1 - use Statement::RANK_NORMAL instead */
+	/** @deprecated since 2.0 - use Statement::RANK_NORMAL instead */
 	const RANK_NORMAL = 1;
-	/** @deprecated since 1.1 - use Statement::RANK_DEPRECATED instead */
+	/** @deprecated since 2.0 - use Statement::RANK_DEPRECATED instead */
 	const RANK_DEPRECATED = 0;
 
 	/**
@@ -175,7 +175,7 @@ class Claim implements Hashable, Comparable, PropertyIdProvider {
 	 * The rank is an element of the Claim::RANK_ enum.
 	 *
 	 * @since 0.1
-	 * @deprecated since 1.1
+	 * @deprecated since 2.0
 	 *
 	 * @return integer
 	 */

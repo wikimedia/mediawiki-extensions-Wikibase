@@ -56,6 +56,7 @@ class Statement extends Claim {
 			call_user_func_array( array( $this, 'initFromSnaks' ), func_get_args() );
 		}
 	}
+
 	private function initFromClaim( Claim $claim, ReferenceList $references = null ) {
 		$this->setClaim( $claim );
 		$this->references = $references === null ? new ReferenceList() : $references;
