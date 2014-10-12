@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -12,6 +11,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\DataModel\Statement\Statement
@@ -78,6 +78,24 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$copy = unserialize( serialize( $statement ) );
 
 		$this->assertEquals( $statement->getHash(), $copy->getHash(), 'Serialization roundtrip should not affect hash' );
+	}
+
+	public function testDeserializationCompatibility() {
+		$v1_1Serialization = 'O:38:"Wikibase\DataModel\Statement\Statement":5:{s:50:" Wikibase\DataModel\Statement\Statement references";C:32:"Wikibase\DataModel\ReferenceList":80:{x:i:1;C:43:"Wikibase\DataModel\Snak\PropertyNoValueSnak":7:{i:1337;},N;;m:a:0:{}}s:44:" Wikibase\DataModel\Statement\Statement rank";i:1;s:11:" * mainSnak";C:43:"Wikibase\DataModel\Snak\PropertyNoValueSnak":5:{i:42;}s:13:" * qualifiers";C:32:"Wikibase\DataModel\Snak\SnakList":107:{a:2:{s:4:"data";a:1:{i:0;C:45:"Wikibase\DataModel\Snak\PropertySomeValueSnak":7:{i:1337;}}s:5:"index";i:0;}}s:7:" * guid";N;}';
+
+		$statement = new Statement(
+			new Claim(
+				new PropertyNoValueSnak( 42 ),
+				new SnakList( array(
+					new PropertySomeValueSnak( 1337 )
+				) )
+			),
+			new ReferenceList( array(
+				new PropertyNoValueSnak( 1337 )
+			) )
+		);
+
+		$this->assertEquals( $statement, unserialize( $v1_1Serialization ) );
 	}
 
 	public function testGuidDoesNotAffectHash() {
