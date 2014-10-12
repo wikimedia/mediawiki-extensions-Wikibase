@@ -150,43 +150,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param ReferenceLisit $array
-	 */
-	public function testAddNewReference( ReferenceList $array ) {
-		// Append object to the end:
-		$elementCount = count( $array );
-
-		$elements = $this->getElementInstances();
-		$element = array_shift( $elements );
-		$array->addNewReference( $element->getSnaks() );
-
-		$this->assertEquals( ++$elementCount, count( $array ) );
-
-		// Insert object at the beginning:
-		$elements = $this->getElementInstances();
-		$element = array_shift( $elements );
-		$array->addNewReference( $element->getSnaks(), 0 );
-
-		$array->rewind();
-
-		$this->assertEquals( ++$elementCount, count( $array ) );
-		$this->assertEquals( $array->current(), $element, 'Inserted object at the beginning' );
-
-		// Insert object at another index:
-		$elements = $this->getElementInstances();
-		$element = array_shift( $elements );
-		$array->addNewReference( $element->getSnaks(), 1 );
-
-		$array->rewind();
-		$array->next();
-
-		$this->assertEquals( ++$elementCount, count( $array ) );
-		$this->assertEquals( $array->current(), $element, 'Inserted object at index 1' );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 *
 	 * @param ReferenceList $array
 	 */
 	public function testIndexOf( ReferenceList $array ) {
