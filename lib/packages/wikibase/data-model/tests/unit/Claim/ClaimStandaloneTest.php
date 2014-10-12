@@ -81,7 +81,7 @@ class ClaimStandaloneTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenSimilarStatement_equalsReturnsFalse() {
 		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$this->assertFalse( $claim->equals( new Statement( new PropertyNoValueSnak( 42 ) ) ) );
+		$this->assertFalse( $claim->equals( new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) ) ) );
 	}
 
 }

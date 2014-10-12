@@ -8,6 +8,7 @@ use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
 use Traversable;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -103,7 +104,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 		$qualifiers = is_array( $qualifiers ) ? new SnakList( $qualifiers ) : $qualifiers;
 		$references = is_array( $references ) ? new ReferenceList( $references ) : $references;
 
-		$statement = new Statement( $mainSnak, $qualifiers, $references );
+		$statement = new Statement( new Claim( $mainSnak, $qualifiers ), $references );
 		$statement->setGuid( $guid );
 
 		$this->addStatement( $statement );

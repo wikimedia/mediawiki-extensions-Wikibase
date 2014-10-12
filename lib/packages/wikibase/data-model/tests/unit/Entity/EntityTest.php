@@ -441,7 +441,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$snak = new PropertyNoValueSnak( 42 );
-		$claim = new Statement( $snak );
+		$claim = new Statement( new Claim( $snak ) );
 		$claim->setGuid( 'q42$foobarbaz' );
 
 		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claim', $claim );

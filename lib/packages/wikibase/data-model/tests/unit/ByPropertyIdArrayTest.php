@@ -80,7 +80,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 		$lists[] = array_map(
 			function( Snak $snak ) {
-				return new Statement( $snak );
+				return new Statement( new Claim( $snak ) );
 			},
 			$snaks
 		);

@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\PropertyPatcher;
 use Wikibase\DataModel\Entity\Item;
@@ -56,13 +57,13 @@ class PropertyPatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testStatementsArePatched() {
-		$s1337 = new Statement( new PropertyNoValueSnak( 1337 ) );
+		$s1337 = new Statement( new Claim( new PropertyNoValueSnak( 1337 ) ) );
 		$s1337->setGuid( 's1337' );
 
-		$s23 = new Statement( new PropertyNoValueSnak( 23 ) );
+		$s23 = new Statement( new Claim( new PropertyNoValueSnak( 23 ) ) );
 		$s23->setGuid( 's23' );
 
-		$s42 = new Statement( new PropertyNoValueSnak( 42 ) );
+		$s42 = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$s42->setGuid( 's42' );
 
 		$patch = new EntityDiff( array(

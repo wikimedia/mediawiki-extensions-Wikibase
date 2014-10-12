@@ -214,7 +214,7 @@ class Item extends Entity {
 	 * @return Statement
 	 */
 	public function newClaim( Snak $mainSnak ) {
-		return new Statement( $mainSnak );
+		return new Statement( new Claim( $mainSnak ) );
 	}
 
 	/**
