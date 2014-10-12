@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_7958c035",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-10-12T06:50:47Z",
+      "side": 1,
+      "message": "Because in case the entity doesn\u0027t exist we don\u0027t allow it to be added anyways.",
+      "parentUuid": "ce8c5bf9_a034cf47",
+      "revId": "f47f077543d664db8ec86e35da7b170b4d387483",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_60e807b0",
         "filename": "repo/includes/specials/SpecialSetSiteLink.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_193dfcb8",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-10-12T06:50:47Z",
+      "side": 1,
+      "message": "Yes, might be better.",
+      "parentUuid": "ce8c5bf9_60e807b0",
+      "revId": "f47f077543d664db8ec86e35da7b170b4d387483",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8c5bf9_802f4bf3",
         "filename": "repo/includes/specials/SpecialSetSiteLink.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2014-09-29T15:19:48Z",
       "side": 1,
       "message": "Why the warning?",
+      "revId": "f47f077543d664db8ec86e35da7b170b4d387483",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_393a38c1",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-10-12T06:50:47Z",
+      "side": 1,
+      "message": "Because there is a configuration issue which should or must be fixed.",
+      "parentUuid": "ce8c5bf9_802f4bf3",
       "revId": "f47f077543d664db8ec86e35da7b170b4d387483",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
