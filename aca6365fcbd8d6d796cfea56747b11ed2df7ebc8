@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_d951d466",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-12T16:21:10Z",
+      "side": 1,
+      "message": "Oh, forgot to change that.",
+      "revId": "aca6365fcbd8d6d796cfea56747b11ed2df7ebc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
