@@ -13,7 +13,7 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyNotFoundException;
 use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\References;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
@@ -87,11 +87,11 @@ class SnakValidator implements ValueValidator {
 	 * Validate a list of references.
 	 * This is done by validating all snaks in all of the references.
 	 *
-	 * @param References $references
+	 * @param ReferenceList $references
 	 *
 	 * @return Result
 	 */
-	public function validateReferences( References $references ) {
+	public function validateReferences( ReferenceList $references ) {
 		foreach ( $references as $reference ) {
 			$result = $this->validateReference( $reference );
 
