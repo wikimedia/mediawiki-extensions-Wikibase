@@ -61,7 +61,7 @@ class ClaimListTest extends \PHPUnit_Framework_TestCase {
 		return $properties;
 	}
 
-	private function getStubClaim( $propertyId, $guid, $rank = Claim::RANK_NORMAL ) {
+	private function getStubClaim( $propertyId, $guid ) {
 		$claim = $this->getMockBuilder( 'Wikibase\DataModel\Claim\Claim' )
 			->disableOriginalConstructor()->getMock();
 
@@ -75,7 +75,7 @@ class ClaimListTest extends \PHPUnit_Framework_TestCase {
 
 		$claim->expects( $this->any() )
 			->method( 'getRank' )
-			->will( $this->returnValue( $rank ) );
+			->will( $this->returnValue( Claim::RANK_TRUTH ) );
 
 		return $claim;
 	}
