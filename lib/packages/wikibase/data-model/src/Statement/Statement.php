@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Statement;
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\References;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\Snaks;
 
@@ -22,7 +21,7 @@ use Wikibase\DataModel\Snak\Snaks;
 class Statement extends Claim {
 
 	/**
-	 * @var References
+	 * @var ReferenceList
 	 */
 	private $references;
 
@@ -36,10 +35,10 @@ class Statement extends Claim {
 	 *
 	 * @param Snak $mainSnak
 	 * @param Snaks|null $qualifiers
-	 * @param References|null $references
+	 * @param ReferenceList|null $references
 	 * or
 	 * @param Claim $claim
-	 * @param References|null $references
+	 * @param ReferenceList|null $references
 	 */
 	public function __construct( $claim /* , $args */ ) {
 		if ( $claim instanceof Claim ) {
@@ -49,12 +48,12 @@ class Statement extends Claim {
 		}
 	}
 
-	private function initFromClaim( Claim $claim, References $references = null ) {
+	private function initFromClaim( Claim $claim, ReferenceList $references = null ) {
 		$this->setClaim( $claim );
 		$this->references = $references === null ? new ReferenceList() : $references;
 	}
 
-	private function initFromSnaks( Snak $mainSnak, Snaks $qualifiers = null, References $references = null ) {
+	private function initFromSnaks( Snak $mainSnak, Snaks $qualifiers = null, ReferenceList $references = null ) {
 		$this->initFromClaim( new Claim( $mainSnak, $qualifiers ), $references );
 	}
 
@@ -63,7 +62,7 @@ class Statement extends Claim {
 	 *
 	 * @since 0.1
 	 *
-	 * @return References
+	 * @return ReferenceList
 	 */
 	public function getReferences() {
 		return $this->references;
@@ -74,9 +73,9 @@ class Statement extends Claim {
 	 *
 	 * @since 0.1
 	 *
-	 * @param References $references
+	 * @param ReferenceList $references
 	 */
-	public function setReferences( References $references ) {
+	public function setReferences( ReferenceList $references ) {
 		$this->references = $references;
 	}
 
