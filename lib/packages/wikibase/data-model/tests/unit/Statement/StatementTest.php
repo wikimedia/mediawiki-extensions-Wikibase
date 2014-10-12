@@ -138,7 +138,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetReferences( Statement $statement ) {
-		$this->assertInstanceOf( 'Wikibase\DataModel\References', $statement->getReferences() );
+		$this->assertInstanceOf( 'Wikibase\DataModel\ReferenceList', $statement->getReferences() );
 	}
 
 	/**
