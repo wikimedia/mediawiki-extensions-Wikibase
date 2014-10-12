@@ -4,7 +4,7 @@ namespace Wikibase\Test\Api;
 
 use DataValues\StringValue;
 use FormatJson;
-use UsageException;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -95,7 +95,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 
 			$prop = Property::newFromType( 'string' );
 			$propId = $this->makeProperty( $prop )->getId();
-			$claim = new Statement( new PropertyValueSnak( $propId, new StringValue( '^_^' ) ) );
+			$claim = new Statement( new Claim( new PropertyValueSnak( $propId, new StringValue( '^_^' ) ) ) );
 
 			$guidGenerator = new ClaimGuidGenerator();
 			$claim->setGuid( $guidGenerator->newGuid( $newItem->getId() ) );

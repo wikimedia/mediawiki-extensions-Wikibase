@@ -39,23 +39,23 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 
 		$entityLookup = new MockRepository();
 
-		$statement1 = new Statement( new PropertyValueSnak(
+		$statement1 = new Statement( new Claim( new PropertyValueSnak(
 			$propertyId,
 			new StringValue( 'a kitten!' )
-		) );
+		) ) );
 		$statement1->setGuid( 'Q42$1' );
 
-		$statement2 = new Statement( new PropertyValueSnak(
+		$statement2 = new Statement( new Claim( new PropertyValueSnak(
 			$propertyId,
 			new StringValue( 'two kittens!!' )
-		) );
+		) ) );
 		$statement2->setGuid( 'Q42$2' );
 
 		// A Statement with a lower rank which should not affect the output
-		$statement3 = new Statement( new PropertyValueSnak(
+		$statement3 = new Statement( new Claim( new PropertyValueSnak(
 			$propertyId,
 			new StringValue( 'three kittens!!!' )
-		) );
+		) ) );
 		$statement3->setGuid( 'Q42$3' );
 		$statement3->setRank( Claim::RANK_DEPRECATED );
 

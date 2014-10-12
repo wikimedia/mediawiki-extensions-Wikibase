@@ -54,7 +54,7 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 
 		$claims = array(
 			new Claim( new PropertyNoValueSnak( $propertyId ) ),
-			new Statement( new PropertyNoValueSnak( $propertyId ) ),
+			new Statement( new Claim( new PropertyNoValueSnak( $propertyId ) ) ),
 			new Claim( new PropertySomeValueSnak( new PropertyId( 'P1' ) ) ),
 		);
 

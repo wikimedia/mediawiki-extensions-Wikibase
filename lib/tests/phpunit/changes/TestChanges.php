@@ -174,7 +174,7 @@ final class TestChanges {
 			// -----
 			$propertyId = new PropertyId( 'p23' );
 			$snak = new PropertyNoValueSnak( $propertyId );
-			$statement = new Statement( $snak );
+			$statement = new Statement( new Claim( $snak ) );
 			$statement->setGuid( 'TEST$test-guid' );
 
 			$claims = new Claims( array( $statement ) );

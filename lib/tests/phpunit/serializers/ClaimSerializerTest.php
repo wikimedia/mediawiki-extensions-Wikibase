@@ -72,7 +72,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			),
 		);
 
-		$statement = new Statement( new PropertyNoValueSnak( $id ) );
+		$statement = new Statement( new Claim( new PropertyNoValueSnak( $id ) ) );
 
 		$validArgs['statement'] = array(
 			$statement,
@@ -159,7 +159,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 	 */
 	public function testRankSerialization( $rank ) {
 		$id = new PropertyId( 'P42' );
-		$statement = new Statement( new PropertyNoValueSnak( $id ) );
+		$statement = new Statement( new Claim( new PropertyNoValueSnak( $id ) ) );
 
 		$statement->setRank( $rank );
 

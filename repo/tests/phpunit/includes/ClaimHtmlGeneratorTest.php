@@ -136,8 +136,10 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$snakFormatter,
 			$entityTitleLookupMock,
 			new Statement(
-				new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
-				new SnakList(),
+				new Claim(
+					new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
+					new SnakList()
+				),
 				new ReferenceList( array( new Reference( new SnakList( array (
 					new PropertyValueSnak( 50, new StringValue( 'second snak' ) )
 				) ) ) ) )

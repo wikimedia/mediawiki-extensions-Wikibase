@@ -148,7 +148,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	 * @return Statement
 	 */
 	protected function getTestStatement( Snak $mainSnak ) {
-		$statement = new Statement( $mainSnak );
+		$statement = new Statement( new Claim( $mainSnak ) );
 		$statement->setGuid( uniqid( 'kittens', true ) );
 
 		return $statement;
