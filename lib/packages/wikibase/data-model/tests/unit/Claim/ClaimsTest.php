@@ -47,7 +47,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 			$guid = 'TEST$statement-' . $this->guidCounter;
 		}
 
-		$claim = new Statement( $mainSnak );
+		$claim = new Statement( new Claim( $mainSnak ) );
 		$claim->setGuid( $guid );
 
 		return $claim;

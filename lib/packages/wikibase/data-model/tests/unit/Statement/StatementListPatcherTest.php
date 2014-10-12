@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -33,16 +34,16 @@ class StatementListPatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFoo() {
-		$statement0 = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement0 = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$statement0->setGuid( 's0' );
 
-		$statement1 = new Statement( new PropertySomeValueSnak( 42 ) );
+		$statement1 = new Statement( new Claim( new PropertySomeValueSnak( 42 ) ) );
 		$statement1->setGuid( 's1' );
 
-		$statement2 = new Statement( new PropertyValueSnak( 42, new StringValue( 'ohi' ) ) );
+		$statement2 = new Statement( new Claim( new PropertyValueSnak( 42, new StringValue( 'ohi' ) ) ) );
 		$statement2->setGuid( 's2' );
 
-		$statement3 = new Statement( new PropertyNoValueSnak( 1 ) );
+		$statement3 = new Statement( new Claim( new PropertyNoValueSnak( 1 ) ) );
 		$statement3->setGuid( 's3' );
 
 		$patch = new Diff( array(
