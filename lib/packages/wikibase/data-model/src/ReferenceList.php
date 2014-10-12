@@ -46,6 +46,17 @@ class ReferenceList extends HashableObjectStorage {
 	}
 
 	/**
+	 * @since 1.1
+	 *
+	 * @param Snak $snak
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function addNewReference( Snak $snak /* Snak, ... */ ) {
+		$this->addReference( new Reference( new SnakList( func_get_args() ) ) );
+	}
+
+	/**
 	 * @since 0.5
 	 *
 	 * @param Reference $reference
@@ -169,17 +180,6 @@ class ReferenceList extends HashableObjectStorage {
 		}
 
 		return null;
-	}
-
-	/**
-	 * @since 1.1
-	 *
-	 * @param Snak $snak
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function addNewReference( Snak $snak /* Snak, ... */ ) {
-		$this->addReference( new Reference( new SnakList( func_get_args() ) ) );
 	}
 
 }

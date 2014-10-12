@@ -4,8 +4,10 @@ namespace Wikibase\DataModel\Statement;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\Snaks;
 
 /**
@@ -86,6 +88,17 @@ class Statement extends Claim {
 	 */
 	public function setReferences( ReferenceList $references ) {
 		$this->references = $references;
+	}
+
+	/**
+	 * @since 2.0
+	 *
+	 * @param Snak $snak
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function addNewReference( Snak $snak /* Snak, ... */ ) {
+		$this->references->addReference( new Reference( new SnakList( func_get_args() ) ) );
 	}
 
 	/**

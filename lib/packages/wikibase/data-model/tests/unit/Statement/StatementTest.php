@@ -163,6 +163,16 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
+	public function testAddNewReference( Statement $statement ) {
+		$snak1 = new PropertyNoValueSnak( 256 );
+		$snak2 = new PropertySomeValueSnak( 42 );
+		$statement->addNewReference( $snak1, $snak2 );
+		$this->assertTrue( $statement->getReferences()->hasReference( new Reference( array( $snak1, $snak2 ) ) ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
 	public function testGetRank( Statement $statement ) {
 		$rank = $statement->getRank();
 		$this->assertInternalType( 'integer', $rank );
