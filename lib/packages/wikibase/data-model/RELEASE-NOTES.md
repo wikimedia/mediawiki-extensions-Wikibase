@@ -4,7 +4,7 @@
 
 #### Breaking changes
 
-* Removed all class aliases directly in the `Wikibase` namespace (deprecated since 0.6 or before)
+* Removed all class aliases introduced in version 0.6 or before
 * Removed the class aliases for `ItemDiff` and `EntityDiff` (deprecated since 1.0)
 * Removed support for deserializing `EntityId` instances from version 0.4 or earlier
 * Removed `References` interface in favour of `ReferenceList`

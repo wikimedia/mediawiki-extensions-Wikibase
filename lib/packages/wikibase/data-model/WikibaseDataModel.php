@@ -23,9 +23,6 @@ if ( defined( 'MEDIAWIKI' ) ) {
 // Aliasing of classes that got renamed.
 // For more details, see Aliases.php.
 
-// Aliases introduced in 0.6
-class_alias( 'Wikibase\DataModel\SiteLink', 'Wikibase\DataModel\SimpleSiteLink' );
-
 // Aliases introduced in 0.8.2
 class_alias( 'Wikibase\DataModel\LegacyIdInterpreter', 'Wikibase\DataModel\Internal\LegacyIdInterpreter' );
 

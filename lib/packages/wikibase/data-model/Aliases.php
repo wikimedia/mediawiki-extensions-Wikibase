@@ -6,15 +6,6 @@
 
 namespace { throw new Exception( 'This code is not meant to be executed' ); }
 
-namespace Wikibase\DataModel {
-
-	/**
-	 * @deprecated since 0.6, use the base class instead.
-	 */
-	class SimpleSiteLink extends SiteLink {}
-
-}
-
 namespace Wikibase\DataModel\Claim {
 
 	/**
