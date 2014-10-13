@@ -64,5 +64,5 @@
 	"wikibase-property-render-error": "Failed to render property $1: $2",
 	"wikibase-otherprojects": "Other projects",
 	"wikibase-otherprojects-beta-message": "Other projects sidebar",
-	"wikibase-otherprojects-beta-description": "Adds a \"{{int:wikibase-otherprojects}}\" section to the sidebar that provides links to the other Wikimedia projects based on {{WBREPONAME}} data."
+	"wikibase-otherprojects-beta-description": "Adds an \"{{int:wikibase-otherprojects}}\" section to the sidebar that provides links to the other Wikimedia projects based on {{WBREPONAME}} data."
 }
