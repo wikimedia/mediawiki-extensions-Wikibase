@@ -55,7 +55,7 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 	}
 
 	public function getTitleForId( EntityId $id ) {
-		$name = $id->getEntityType() . ':' . $id->getPrefixedId();
+		$name = $id->getEntityType() . ':' . $id->getSerialization();
 		return Title::makeTitle( NS_MAIN, $name );
 	}
 

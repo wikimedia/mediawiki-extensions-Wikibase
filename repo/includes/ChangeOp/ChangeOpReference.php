@@ -168,8 +168,8 @@ class ChangeOpReference extends ChangeOpBase {
 		}
 
 		if ( $references->hasReference( $this->reference ) && $this->index === $currentIndex ) {
-			throw new ChangeOpException( "Claim has already a reference with hash "
-			. "{$this->reference->getHash()} and index ($currentIndex) is not changed" );
+			throw new ChangeOpException( 'Claim has already a reference with hash '
+			. $this->reference->getHash() . ' and index (' . $currentIndex . ') is not changed' );
 		}
 		$references->removeReferenceHash( $this->referenceHash );
 		$references->addReference( $this->reference, $this->index );
@@ -185,7 +185,7 @@ class ChangeOpReference extends ChangeOpBase {
 	protected function getSnakSummaryArgs( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
 
-		return array( array( $propertyId->getPrefixedId() => $snak ) );
+		return array( array( $propertyId->getSerialization() => $snak ) );
 	}
 
 	/**
@@ -202,4 +202,5 @@ class ChangeOpReference extends ChangeOpBase {
 	public function validate( Entity $entity ) {
 		return $this->snakValidator->validateReference( $this->reference );
 	}
+
 }

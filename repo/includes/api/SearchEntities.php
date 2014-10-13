@@ -214,7 +214,7 @@ class SearchEntities extends ApiBase {
 			$key = $id->getSerialization();
 			$title = $this->titleLookup->getTitleForId( $id );
 			$entries[ $key ] = array(
-				'id' => $id->getPrefixedId(),
+				'id' => $id->getSerialization(),
 				'url' => $title->getFullUrl()
 			);
 		}

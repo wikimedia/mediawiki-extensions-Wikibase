@@ -39,7 +39,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 			$id = $id->getEntityId();
 		}
 
-		return '[[' . $id->getEntityType() . ':' . $id->getPrefixedId() . ']]';
+		return '[[' . $id->getEntityType() . ':' . $id->getSerialization() . ']]';
 	}
 
 	/**

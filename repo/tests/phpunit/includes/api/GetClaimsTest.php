@@ -70,7 +70,7 @@ class GetClaimsTest extends \ApiTestCase {
 		$statements[3] = $item->newClaim( new PropertyValueSnak( $property, new StringValue( 'o_O' ) ) );
 
 		foreach ( $statements as $key => $statement ) {
-			$statement->setGuid( $item->getId()->getPrefixedId() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );
+			$statement->setGuid( $item->getId()->getSerialization() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );
 			$item->addClaim( $statement );
 		}
 	}

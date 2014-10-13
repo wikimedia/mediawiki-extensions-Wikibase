@@ -17,8 +17,8 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
-use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\Store\SQL\EntityPerPageTable;
+use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
 
@@ -412,7 +412,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue(
 			$status->isOK(),
 			'create with EDIT_NEW flag for ' .
-			$entity->getId()->getPrefixedId()
+			$entity->getId()->getSerialization()
 		);
 
 		// ok, the item exists now in the database.

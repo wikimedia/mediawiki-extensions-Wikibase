@@ -161,7 +161,7 @@ class UpdateRepoOnMoveJob extends Job {
 
 		if ( $entityRevision === null ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": EntityRevision not found for "
-				. $itemId->getPrefixedId() );
+				. $itemId->getSerialization() );
 
 			wfProfileOut( __METHOD__ );
 			return false;

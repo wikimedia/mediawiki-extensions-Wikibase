@@ -111,7 +111,7 @@ class ChangeOpQualifier extends ChangeOpBase {
 	 */
 	protected function addQualifier( Snaks $qualifiers, Summary $summary = null ) {
 		if ( $qualifiers->hasSnak( $this->snak ) ) {
-			throw new ChangeOpException( "Claim has already a qualifier with hash {$this->snak->getHash()}" );
+			throw new ChangeOpException( 'Claim has already a qualifier with hash ' . $this->snak->getHash() );
 		}
 		$qualifiers->addSnak( $this->snak );
 		//TODO: add the mainsnak as autocomment-arg & change messages
@@ -131,7 +131,7 @@ class ChangeOpQualifier extends ChangeOpBase {
 			throw new ChangeOpException( "Qualifier with hash $this->snakHash does not exist" );
 		}
 		if ( $qualifiers->hasSnak( $this->snak ) ) {
-			throw new ChangeOpException( "Claim has already a qualifier with hash {$this->snak->getHash()}" );
+			throw new ChangeOpException( 'Claim has already a qualifier with hash ' . $this->snak->getHash() );
 		}
 		$qualifiers->removeSnakHash( $this->snakHash );
 		$qualifiers->addSnak( $this->snak );
@@ -147,7 +147,7 @@ class ChangeOpQualifier extends ChangeOpBase {
 	 */
 	protected function getSnakSummaryArgs( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
-		return array( array( $propertyId->getPrefixedId() => $snak ) );
+		return array( array( $propertyId->getSerialization() => $snak ) );
 	}
 
 	/**
@@ -164,4 +164,5 @@ class ChangeOpQualifier extends ChangeOpBase {
 	public function validate( Entity $entity ) {
 		return $this->snakValidator->validate( $this->snak );
 	}
+
 }
