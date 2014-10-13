@@ -159,25 +159,10 @@ class ChangeRowTest extends \ORMRowTest {
 		);
 	}
 
-	public function provideSaveAndLoad() {
-		$instanceCases = $this->instanceProvider();
-		$cases = array();
-
-		foreach ( $instanceCases as $case ) {
-			$cases[] = array( $case[0], true );
-			$cases[] = array( $case[0], false );
-		}
-
-		return $cases;
-	}
-
 	/**
-	 * @dataProvider provideSaveAndLoad
+	 * @dataProvider instanceProvider
 	 */
-	public function testSaveAndLoad( ChangeRow $changeRow, $json = false ) {
-		Settings::singleton()->offsetSet( "changesAsJson", $json );
-		$this->assertEquals( $json, Settings::get( "changesAsJson" ) ); // sanity
-
+	public function testSaveAndLoad( ChangeRow $changeRow ) {
 		$changeRow->save();
 		$id = $changeRow->getId();
 
