@@ -21,7 +21,6 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
-use WikiPage;
 
 /**
  * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.
@@ -197,7 +196,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		foreach ( $badgesParams as $badgeSerialization ) {
 			try {
 				$badgeId = new ItemId( $badgeSerialization );
-			} catch( InvalidArgumentException $e ) {
+			} catch ( InvalidArgumentException $ex ) {
 				$this->dieError( 'Badges: could not parse "' . $badgeSerialization
 					. '", the id is invalid', 'invalid-entity-id' );
 				continue;
