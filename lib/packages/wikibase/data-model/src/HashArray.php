@@ -253,7 +253,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 			if ( array_key_exists( $hash, $this->offsetHashes )
 				&& is_array( $this->offsetHashes[$hash] )
 				&& count( $this->offsetHashes[$hash] ) > 1 ) {
-
 				$this->offsetHashes[$hash] = array_filter(
 					$this->offsetHashes[$hash],
 					function( $value ) use ( $index ) {

@@ -430,8 +430,7 @@ class ByPropertyIdArray extends \ArrayObject {
 		if( count( $this ) === 0 ) {
 			// Array is empty, just append object.
 			$this->append( $object );
-
-		} elseif( count( $validIndices ) === 0 ) {
+		} elseif( empty( $validIndices ) ) {
 			// No objects featuring that property exist. The object may be inserted at a place
 			// between existing "property groups".
 			$this->append( $object );
@@ -439,7 +438,6 @@ class ByPropertyIdArray extends \ArrayObject {
 				$this->buildIndex();
 				$this->moveObjectToIndex( $object, $index );
 			}
-
 		} else {
 			// Objects featuring the same property as the object which is about to be added already
 			// exist in the array.
@@ -463,7 +461,7 @@ class ByPropertyIdArray extends \ArrayObject {
 		$propertyId = $object->getPropertyId();
 		$validIndices = $this->getFlatArrayIndices( $propertyId );
 
-		if( count( $validIndices ) === 0 ) {
+		if( empty( $validIndices ) ) {
 			throw new OutOfBoundsException( 'No objects featuring the object\'s property exist' );
 		}
 
