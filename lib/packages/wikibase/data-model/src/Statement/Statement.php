@@ -8,7 +8,6 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Snak\Snaks;
 
 /**
  * Class representing a Wikibase statement.
@@ -44,28 +43,12 @@ class Statement extends Claim {
 	/**
 	 * @since 0.1
 	 *
-	 * @param Snak $mainSnak
-	 * @param Snaks|null $qualifiers
-	 * @param ReferenceList|null $references
-	 * or
 	 * @param Claim $claim
 	 * @param ReferenceList|null $references
 	 */
-	public function __construct( $claim /* , $args */ ) {
-		if ( $claim instanceof Claim ) {
-			call_user_func_array( array( $this, 'initFromClaim' ), func_get_args() );
-		} else {
-			call_user_func_array( array( $this, 'initFromSnaks' ), func_get_args() );
-		}
-	}
-
-	private function initFromClaim( Claim $claim, ReferenceList $references = null ) {
+	public function __construct( Claim $claim, ReferenceList $references = null ) {
 		$this->setClaim( $claim );
 		$this->references = $references === null ? new ReferenceList() : $references;
-	}
-
-	private function initFromSnaks( Snak $mainSnak, Snaks $qualifiers = null, ReferenceList $references = null ) {
-		$this->initFromClaim( new Claim( $mainSnak, $qualifiers ), $references );
 	}
 
 	/**

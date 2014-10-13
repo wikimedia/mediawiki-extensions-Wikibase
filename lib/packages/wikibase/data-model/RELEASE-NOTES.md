@@ -7,6 +7,7 @@
 * Removed all class aliases
 * Removed support for deserializing `EntityId` instances from version 0.4 or earlier
 * Removed `References` interface in favour of `ReferenceList`
+* The `Statement` constructor no longer supports a `Snak` parameter
 
 #### Additions
 
