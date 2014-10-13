@@ -5,12 +5,3 @@
 // Actual aliasing happens in the entry point using class_alias.
 
 namespace { throw new Exception( 'This code is not meant to be executed' ); }
-
-namespace Wikibase\DataModel\Claim {
-
-	/**
-	 * @deprecated since 1.0, use the base class instead.
-	 */
-	class Statement extends \Wikibase\DataModel\Statement\Statement {}
-
-}
