@@ -24,10 +24,11 @@ class AutoloadingAliasesTest extends \PHPUnit_Framework_TestCase {
 				return array( $className );
 			},
 			array(
-				'Wikibase\DataModel\Claim\Statement',
+				// Full qualified aliases go here.
+				// Remove the dummy get_class call if new aliases are introduced.
+				get_class()
 			)
 		);
-
 	}
 
 }

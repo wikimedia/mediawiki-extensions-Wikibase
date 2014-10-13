@@ -22,9 +22,3 @@ if ( defined( 'MEDIAWIKI' ) ) {
 
 // Aliasing of classes that got renamed.
 // For more details, see Aliases.php.
-
-// Aliases introduced in 0.8.2
-class_alias( 'Wikibase\DataModel\LegacyIdInterpreter', 'Wikibase\DataModel\Internal\LegacyIdInterpreter' );
-
-// Aliases introduced in 1.0
-class_alias( 'Wikibase\DataModel\Statement\Statement', 'Wikibase\DataModel\Claim\Statement' );
