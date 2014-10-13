@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use InvalidArgumentException;
 use OutOfBoundsException;
 use Status;
 use UserInputException;
@@ -11,7 +12,6 @@ use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
