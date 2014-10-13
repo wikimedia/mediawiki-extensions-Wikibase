@@ -111,11 +111,9 @@ class DiffChange extends ChangeRow {
 	 */
 	public function serializeInfo( array $info ) {
 		if ( isset( $info['diff'] ) && $info['diff'] instanceof DiffOp ) {
-			if ( Settings::get( "changesAsJson" ) === true  ) {
-				/* @var \Diff\DiffOp $op */
-				$op = $info['diff'];
-				$info['diff'] = $op->toArray( array( $this, 'arrayalizeObjects' ) );
-			}
+			/* @var \Diff\DiffOp $op */
+			$op = $info['diff'];
+			$info['diff'] = $op->toArray( array( $this, 'arrayalizeObjects' ) );
 		}
 
 		return parent::serializeInfo( $info );

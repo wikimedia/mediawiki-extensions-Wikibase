@@ -39,10 +39,6 @@ return call_user_func( function() {
 		// local by default. Set to something LBFactory understands.
 		'changesDatabase' => false,
 
-		// JSON is more robust against version differences between repo and client,
-		// but only once the client can cope with the JSON form of the change.
-		'changesAsJson' => true,
-
 		// list of logical database names of local client wikis.
 		// may contain mappings from site-id to db-name.
 		'localClientDatabases' => array(),

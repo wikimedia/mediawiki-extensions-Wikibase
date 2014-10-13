@@ -40,7 +40,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
               'commonsMedia',
           )
 </poem>
-;changesAsJson: Use JSON to represent changes in the database. This is true per default, and there is no reason to set it to false, except for compatibility with very old client side code.
 
 == Repository Settings ==
 
