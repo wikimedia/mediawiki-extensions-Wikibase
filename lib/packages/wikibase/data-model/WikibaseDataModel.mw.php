@@ -1,10 +1,8 @@
 <?php
 
 /**
- * MediaWiki setup for the DataValues component of Wikibase.
- * The component should be included via the main entry point, DataValues.php.
- *
- * @since 0.4
+ * MediaWiki setup for the Wikibase DataModel component.
+ * The component should be included via the main entry point, WikibaseDataModel.php.
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
