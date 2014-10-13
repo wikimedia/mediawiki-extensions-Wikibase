@@ -21,7 +21,6 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
-use WikiPage;
 
 /**
  * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.
@@ -203,7 +202,7 @@ abstract class ModifyEntity extends ApiWikibase {
 				continue;
 			}
 
-			if ( !array_key_exists( $badgeId->getPrefixedId(), $this->badgeItems ) ) {
+			if ( !array_key_exists( $badgeId->getSerialization(), $this->badgeItems ) ) {
 				$this->dieError( 'Badges: item "' . $badgeSerialization . '" is not a badge',
 					'not-badge' );
 			}

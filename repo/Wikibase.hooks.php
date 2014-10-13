@@ -652,9 +652,9 @@ final class RepoHooks {
 				$entityType = preg_replace( '/^wikibase-/i', '', $entityContent->getEntity()->getType() );
 
 				// add class to body so it's clear this is a wb item:
-				$bodyAttrs['class'] .= " wb-entitypage wb-{$entityType}page";
+				$bodyAttrs['class'] .= ' wb-entitypage wb-' . $entityType . 'page';
 				// add another class with the ID of the item:
-				$bodyAttrs['class'] .= " wb-{$entityType}page-{$entityContent->getEntityId()->getPrefixedId()}";
+				$bodyAttrs['class'] .= ' wb-' . $entityType . 'page-' . $entityContent->getEntityId()->getSerialization();
 
 				if ( $sk->getRequest()->getCheck( 'diff' ) ) {
 					$bodyAttrs['class'] .= ' wb-diffpage';

@@ -113,7 +113,7 @@ class ClaimSummaryBuilder {
 		foreach( $guids as $guid ) {
 			if ( $claims->hasClaimWithGuid( $guid ) ) {
 				$snak = $claims->getClaimWithGuid( $guid )->getMainSnak();
-				$key = $snak->getPropertyId()->getPrefixedId();
+				$key = $snak->getPropertyId()->getSerialization();
 
 				if ( !array_key_exists( $key, $pairs ) ) {
 					$pairs[$key] = array();

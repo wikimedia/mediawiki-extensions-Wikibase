@@ -112,7 +112,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @return Title
 	 */
 	public function getTitleForId( EntityId $id ) {
-		$name = $id->getEntityType() . ':' . $id->getPrefixedId();
+		$name = $id->getEntityType() . ':' . $id->getSerialization();
 		return Title::makeTitle( NS_MAIN, $name );
 	}
 

@@ -79,7 +79,7 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	 * @return Title
 	 */
 	public function getTitleForId( EntityId $entityId ) {
-		$name = $entityId->getEntityType() . ':' . $entityId->getPrefixedId();
+		$name = $entityId->getEntityType() . ':' . $entityId->getSerialization();
 		return Title::makeTitle( NS_MAIN, $name );
 	}
 
