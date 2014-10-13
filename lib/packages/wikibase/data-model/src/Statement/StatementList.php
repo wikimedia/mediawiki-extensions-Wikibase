@@ -174,11 +174,13 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * @return bool
 	 */
 	public function equals( $statementList ) {
-		if ( !( $statementList instanceof self ) ) {
-			return false;
+		if ( $this === $statementList ) {
+			return true;
 		}
 
-		if ( $this->count() !== $statementList->count() ) {
+		if ( !( $statementList instanceof self )
+			|| $this->count() !== $statementList->count()
+		) {
 			return false;
 		}
 
