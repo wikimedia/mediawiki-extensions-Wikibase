@@ -16,6 +16,23 @@
       "revId": "b1b2cc4cf33fae1a77bbaf2b1c02da3e512d5a8d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_6ad3fc61",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-13T10:20:21Z",
+      "side": 0,
+      "message": "This (the method requiring an EntityId but getting an int) is the reason why I touched this method. It\u0027s broken. It\u0027s impossible to run this code without running into a severe runtime error. In other words: This was never executed for sure.",
+      "revId": "b1b2cc4cf33fae1a77bbaf2b1c02da3e512d5a8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
