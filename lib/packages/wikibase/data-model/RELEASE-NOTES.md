@@ -1,11 +1,11 @@
 # Wikibase DataModel release notes
 
-## Version 2.0 (dev)
+## Version 2.0 (2014-10-14)
 
 #### Breaking changes
 
 * Removed all class aliases
-* Removed support for deserializing `EntityId` instances from version 0.4 or earlier
+* Removed support for deserializing `EntityId` instances serialized with version 0.4 or earlier
 * Removed `References` interface in favour of `ReferenceList`
 * The `Statement` constructor no longer supports a `Snak` parameter
 
