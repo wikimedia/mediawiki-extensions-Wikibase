@@ -79,7 +79,7 @@ class ChangeOpClaimRemoveTest extends \PHPUnit_Framework_TestCase {
 		$item->setId( new ItemId( $itemIdString ) );
 
 		$claim = $item->newClaim( $snak );
-		$claim->setGuid( $item->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P' );
+		$claim->setGuid( $item->getId()->getSerialization() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
 		$item->setClaims( $claims );

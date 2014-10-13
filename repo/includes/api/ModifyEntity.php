@@ -202,7 +202,7 @@ abstract class ModifyEntity extends ApiWikibase {
 				continue;
 			}
 
-			if ( !array_key_exists( $badgeId->getPrefixedId(), $this->badgeItems ) ) {
+			if ( !array_key_exists( $badgeId->getSerialization(), $this->badgeItems ) ) {
 				$this->dieError( 'Badges: item "' . $badgeSerialization . '" is not a badge',
 					'not-badge' );
 			}

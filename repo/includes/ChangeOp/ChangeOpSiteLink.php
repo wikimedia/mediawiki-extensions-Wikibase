@@ -89,7 +89,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 				throw new InvalidArgumentException( '$badge needs to be an ItemId' );
 			}
 
-			if ( !array_key_exists( $badge->getPrefixedId(), $badgeItems ) ) {
+			if ( !array_key_exists( $badge->getSerialization(), $badgeItems ) ) {
 				throw new InvalidArgumentException( 'Only items specified in the config can be badges' );
 			}
 		}

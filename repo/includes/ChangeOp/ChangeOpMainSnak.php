@@ -146,7 +146,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 */
 	protected function getClaimSummaryArgs( Snak $mainSnak ) {
 		$propertyId = $mainSnak->getPropertyId();
-		return array( array( $propertyId->getPrefixedId() => $mainSnak ) );
+		return array( array( $propertyId->getSerialization() => $mainSnak ) );
 	}
 
 	/**

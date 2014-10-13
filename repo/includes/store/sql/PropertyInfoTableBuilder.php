@@ -2,8 +2,9 @@
 
 namespace Wikibase;
 
-use Wikibase\Lib\Reporting\MessageReporter;
+use RuntimeException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\EntityLookup;
 
 /**
@@ -250,8 +251,7 @@ class PropertyInfoTableBuilder {
 	 * The property is loaded in full using the EntityLookup
 	 * provide to the constructor.
 	 *
-	 * @see Wikibase\PropertyInfoUpdate
-	 * @throws \RuntimeException
+	 * @throws RuntimeException
 	 *
 	 * @since 0.4
 	 *
@@ -261,8 +261,8 @@ class PropertyInfoTableBuilder {
 		$property = $this->entityLookup->getEntity( $id );
 
 		if( !$property instanceof Property ) {
-			throw new \RuntimeException(
-				"EntityLookup didn't return a Property for id " . $id->getPrefixedId()
+			throw new RuntimeException(
+				'EntityLookup did not return a Property for id ' . $id->getSerialization()
 			);
 		}
 

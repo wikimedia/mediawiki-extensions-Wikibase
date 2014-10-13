@@ -58,7 +58,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		foreach ( $ids as $id ) {
 			$entity = $this->makeEntity( $id );
 
-			$key = $id->getPrefixedId();
+			$key = $id->getSerialization();
 			$entities[$key] = $entity;
 		}
 
@@ -107,7 +107,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 						return null;
 					}
 
-					$key = $id->getPrefixedId();
+					$key = $id->getSerialization();
 					return $entities[$key];
 				}
 			) );
@@ -321,7 +321,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$expectedIds = array_map( function( EntityId $id ) {
-			return $id->getPrefixedId();
+			return $id->getSerialization();
 		}, $ids );
 
 		sort( $actualIds );

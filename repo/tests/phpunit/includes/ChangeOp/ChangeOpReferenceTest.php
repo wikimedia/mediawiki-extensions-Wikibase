@@ -244,7 +244,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$item->setId( 123 );
 
 		$claim = $item->newClaim( $snak );
-		$claim->setGuid( $item->getId()->getPrefixedId() . '$D8494TYA-25E4-4334-AG03-A3290BCT9CQP' );
+		$claim->setGuid( $item->getId()->getSerialization() . '$D8494TYA-25E4-4334-AG03-A3290BCT9CQP' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
 		$item->setClaims( $claims );

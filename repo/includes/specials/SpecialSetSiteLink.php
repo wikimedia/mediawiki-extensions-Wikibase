@@ -106,7 +106,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		// check if id belongs to an item
 		if ( $this->entityRevision !== null && !( $this->entityRevision->getEntity() instanceof Item ) ) {
-			$this->showErrorHTML( $this->msg( 'wikibase-setsitelink-not-item', $this->entityRevision->getEntity()->getId()->getPrefixedId() )->parse() );
+			$this->showErrorHTML( $this->msg( 'wikibase-setsitelink-not-item', $this->entityRevision->getEntity()->getId()->getSerialization() )->parse() );
 			$this->entityRevision = null;
 		}
 
@@ -376,7 +376,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Item|null $entity
+	 * @param Item|null $item
 	 * @param string $siteId
 	 *
 	 * @throws OutOfBoundsException
@@ -395,7 +395,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Item|null $entity
+	 * @param Item|null $item
 	 * @param string $siteId
 	 *
 	 * @throws OutOfBoundsException
@@ -408,7 +408,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$badges = array();
 		foreach ( $item->getSitelink( $siteId )->getBadges() as $badge ) {
-			$badges[] = $badge->getPrefixedId();
+			$badges[] = $badge->getSerialization();
 		}
 		return $badges;
 	}
@@ -434,8 +434,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				return false;
 			}
 
-			if ( !array_key_exists( $badgeId->getPrefixedId(), $this->badgeItems ) ) {
-				$status->fatal( 'wikibase-setsitelink-not-badge', $badgeId->getPrefixedId() );
+			if ( !array_key_exists( $badgeId->getSerialization(), $this->badgeItems ) ) {
+				$status->fatal( 'wikibase-setsitelink-not-badge', $badgeId->getSerialization() );
 				return false;
 			}
 

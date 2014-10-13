@@ -213,7 +213,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		//TODO: once we stop allowing user-generated GUIDs for new claims, test this below.
 		// apply change to an unknown claim
 		/*
-		$wrongClaimId = $item->getId()->getPrefixedId() . '$DEADBEEF-DEAD-BEEF-DEAD-BEEFDEADBEEF';
+		$wrongClaimId = $item->getId()->getSerialization() . '$DEADBEEF-DEAD-BEEF-DEAD-BEEFDEADBEEF';
 		$badClaim = clone $newClaim;
 		$badClaim->setGuid( $wrongClaimId );
 		$args['unknown claim'] = array ( $item, new ChangeOpClaim( $badClaim, $guidGenerator ) );

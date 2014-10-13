@@ -146,7 +146,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$args['wrong entity'] = array ( $wrongItem, $this->newChangeOpMainSnak( $claimGuid, $newSnak ) );
 
 		// apply change to an unknown claim
-		$wrongClaimId = $item->getId()->getPrefixedId() . '$DEADBEEF-DEAD-BEEF-DEAD-BEEFDEADBEEF';
+		$wrongClaimId = $item->getId()->getSerialization() . '$DEADBEEF-DEAD-BEEF-DEAD-BEEFDEADBEEF';
 		$args['unknown claim'] = array ( $item, $this->newChangeOpMainSnak( $wrongClaimId, $newSnak ) );
 
 		// update an existing claim with wrong main snak property
