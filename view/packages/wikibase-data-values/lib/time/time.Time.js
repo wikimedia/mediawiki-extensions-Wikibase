@@ -48,8 +48,8 @@ time.Time = ( function( time, $ ) {
 		}
 
 		var year = (result.year !== undefined) ? result.year : null,
-			month = (result.month !== undefined) ? result.month : 1,
-			day = (result.day !== undefined) ? result.day : 1,
+			month = (result.month !== undefined) ? result.month : 0,
+			day = (result.day !== undefined) ? result.day : 0,
 			hour = (result.hour !== undefined) ? result.hour : 0,
 			minute = (result.minute !== undefined) ? result.minute : 0,
 			second = (result.second !== undefined) ? result.second : 0,
