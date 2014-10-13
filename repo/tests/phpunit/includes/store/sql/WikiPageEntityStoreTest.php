@@ -10,7 +10,9 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -64,7 +66,34 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		return array( $store, $lookup );
 	}
 
-	public function testSaveEntity() {
+	private function getSimpleEntities() {
+		$item = Item::newEmpty();
+		$item->setLabel( 'en', 'Item' );
+		$item->setDescription( 'en', 'Item description' );
+
+		$property = Property::newFromType( 'string' );
+		$property->setLabel( 'en', 'Property' );
+		$property->setDescription( 'en', 'Property description' );
+
+		return array(
+			$item,
+			$property
+		);
+	}
+
+	public function simpleEntityParameterProvider() {
+		return array_map(
+			function ( $entity ) {
+				return array( $entity );
+			},
+			$this->getSimpleEntities()
+		);
+	}
+
+	/**
+	 * @dataProvider simpleEntityParameterProvider()
+	 */
+	public function testSaveEntity( Entity $entity ) {
 		/* @var WikiPageEntityStore $store */
 		/* @var EntityRevisionLookup $lookup */
 		list( $store, $lookup ) = $this->createStoreAndLookup();
@@ -79,38 +108,34 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$store->registerWatcher( $watcher );
 
-		// create one
-		$one = Item::newEmpty();
-		$one->setLabel( 'en', 'one' );
+		// save entity
+		$r1 = $store->saveEntity( $entity, 'create one', $user, EDIT_NEW );
+		$entityId = $r1->getEntity()->getId();
 
-		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
-		$oneId = $r1->getEntity()->getId();
-
-		$r1actual = $lookup->getEntityRevision( $oneId );
+		$r1actual = $lookup->getEntityRevision( $entityId );
 		$this->assertEquals( $r1->getRevision(), $r1actual->getRevision(), 'revid' );
 		$this->assertEquals( $r1->getTimestamp(), $r1actual->getTimestamp(), 'timestamp' );
 		$this->assertEquals( $r1->getEntity()->getId(), $r1actual->getEntity()->getId(), 'entity id' );
 
 		// TODO: check notifications in wb_changes table!
 
-		// update one
-		$one = Item::newEmpty();
-		$one->setId( $oneId );
-		$one->setLabel( 'en', 'ONE' );
+		// update entity
+		$entity->clear();
+		$entity->setLabel( 'en', 'UPDATED' );
 
-		$r2 = $store->saveEntity( $one, 'update one', $user, EDIT_UPDATE );
+		$r2 = $store->saveEntity( $entity, 'update one', $user, EDIT_UPDATE );
 		$this->assertNotEquals( $r1->getRevision(), $r2->getRevision(), 'expected new revision id' );
 
-		$r2actual = $lookup->getEntityRevision( $oneId );
+		$r2actual = $lookup->getEntityRevision( $entityId );
 		$this->assertEquals( $r2->getRevision(), $r2actual->getRevision(), 'revid' );
 		$this->assertEquals( $r2->getTimestamp(), $r2actual->getTimestamp(), 'timestamp' );
 		$this->assertEquals( $r2->getEntity()->getId(), $r2actual->getEntity()->getId(), 'entity id' );
 
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
-		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity()' );
+		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity()' );
 
-		$this->assertEntityPerPage( true, $oneId );
+		$this->assertEntityPerPage( true, $entityId );
 	}
 
 	public function provideSaveEntityError() {
@@ -482,7 +507,10 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $prev_id, $rev_id, "revision ID should stay the same if no change was made" );
 	}
 
-	public function testDeleteEntity() {
+	/**
+	 * @dataProvider simpleEntityParameterProvider
+	 */
+	public function testDeleteEntity( Entity $entity  ) {
 		/* @var WikiPageEntityStore $store */
 		/* @var EntityRevisionLookup $lookup */
 		list( $store, $lookup ) = $this->createStoreAndLookup();
@@ -495,30 +523,27 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$store->registerWatcher( $watcher );
 
-		// create one
-		$one = Item::newEmpty();
-		$one->setLabel( 'en', 'one' );
-
-		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
-		$oneId = $r1->getEntity()->getId();
+		// save entity
+		$r1 = $store->saveEntity( $entity, 'create one', $user, EDIT_NEW );
+		$entityId = $r1->getEntity()->getId();
 
 		// sanity check
-		$this->assertNotNull( $lookup->getEntityRevision( $oneId ) );
+		$this->assertNotNull( $lookup->getEntityRevision( $entityId ) );
 
-		// delete one
-		$store->deleteEntity( $oneId, 'testing', $user );
+		// delete entity
+		$store->deleteEntity( $entityId, 'testing', $user );
 
 		// check that it's gone
-		$this->assertFalse( $lookup->getLatestRevisionId( $oneId ), 'getLatestRevisionId()' );
-		$this->assertNull( $lookup->getEntityRevision( $oneId ), 'getEntityRevision()' );
+		$this->assertFalse( $lookup->getLatestRevisionId( $entityId ), 'getLatestRevisionId()' );
+		$this->assertNull( $lookup->getEntityRevision( $entityId ), 'getEntityRevision()' );
 
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
-		$this->assertEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
+		$this->assertEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity' );
 
 		// TODO: check notifications in wb_changes table!
 
-		$this->assertEntityPerPage( false, $oneId );
+		$this->assertEntityPerPage( false, $entityId );
 	}
 
 	private function assertEntityPerPage( $expected, EntityId $entityId ) {
