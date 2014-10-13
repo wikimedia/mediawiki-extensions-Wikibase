@@ -36,6 +36,8 @@
 	"wikibase-alias-edit-placeholder": "輸入別名",
 	"wikibase-label-input-help-message": "使用 $1 輸入此實體的標籤。",
 	"wikibase-description-input-help-message": "使用 $1 輸入此實體的簡短描述。",
+	"wikibase-fingerprintgroupview-input-help-message": "輸入此實體的標籤，各種語言的簡短描述與別名。",
+	"wikibase-fingerprintview-input-help-message": "使用 $1 輸入此實體的標籤，簡短描述與別名。",
 	"wikibase-claims": "主張",
 	"wikibase-statements": "陳述",
 	"wikibase-attributes": "屬性",

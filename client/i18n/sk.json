@@ -51,5 +51,7 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|medzijazykový odkaz|medzijazykové odkazy|medzijazykových odkazov}})",
 	"wikibase-pageinfo-entity-id": "ID položky Wikiúdajov",
 	"wikibase-pageinfo-entity-id-none": "Žiadne",
-	"wikibase-otherprojects": "Iné projekty"
+	"wikibase-otherprojects": "Iné projekty",
+	"wikibase-otherprojects-beta-message": "Panel Iné projekty",
+	"wikibase-otherprojects-beta-description": "Pridáva na postranný panel sekciu „{{int:wikibase-otherprojects}}“ obsahujúcu odkazy na ostatné projekty Wikimedia podľa údajov na {{grammar:6sg|{{WBREPONAME}}}}."
 }
