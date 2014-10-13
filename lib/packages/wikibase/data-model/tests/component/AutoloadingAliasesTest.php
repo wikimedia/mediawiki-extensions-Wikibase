@@ -24,7 +24,7 @@ class AutoloadingAliasesTest extends \PHPUnit_Framework_TestCase {
 				return array( $className );
 			},
 			array(
-				'Wikibase\DataModel\SimpleSiteLink',
+				'Wikibase\DataModel\Claim\Statement',
 			)
 		);
 
