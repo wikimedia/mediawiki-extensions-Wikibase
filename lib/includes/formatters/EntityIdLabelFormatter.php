@@ -100,7 +100,7 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 		if ( !is_string( $label ) ) {
 			switch ( $this->getOption( self::OPT_LABEL_FALLBACK ) ) {
 				case self::FALLBACK_PREFIXED_ID:
-					$label = $entityId->getPrefixedId();
+					$label = $entityId->getSerialization();
 					break;
 				case self::FALLBACK_EMPTY_STRING:
 					$label = '';

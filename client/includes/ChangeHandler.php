@@ -211,7 +211,7 @@ class ChangeHandler {
 		$groups = array();
 
 		foreach ( $changes as $change ) {
-			$id = $change->getEntityId()->getPrefixedId();
+			$id = $change->getEntityId()->getSerialization();
 
 			if ( !isset( $groups[$id] ) ) {
 				$groups[$id] = array();
@@ -466,8 +466,6 @@ class ChangeHandler {
 
 		return 0;
 	}
-
-	// ==========================================================================================
 
 	/**
 	 * Handle the provided changes.

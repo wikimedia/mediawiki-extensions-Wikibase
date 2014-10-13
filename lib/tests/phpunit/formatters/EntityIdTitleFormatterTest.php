@@ -60,9 +60,9 @@ class EntityIdTitleFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	public function getTitleForId( EntityId $id ) {
 		if ( $id->getEntityType() === Item::ENTITY_TYPE ) {
-			$name = 'ITEM-TEST--' . $id->getPrefixedId();
+			$name = 'ITEM-TEST--' . $id->getSerialization();
 		} elseif ( $id->getEntityType() === Property::ENTITY_TYPE ) {
-			$name = 'PROPERTY-TEST--' . $id->getPrefixedId();
+			$name = 'PROPERTY-TEST--' . $id->getSerialization();
 		} else {
 			throw new LogicException( "oops!" );
 		}

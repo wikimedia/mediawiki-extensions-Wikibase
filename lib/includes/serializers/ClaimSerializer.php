@@ -117,9 +117,9 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			$serialization['qualifiers-order'] = array();
 			/** @var Snak $snak */
 			foreach( $claim->getQualifiers() as $snak ) {
-				$id = $snak->getPropertyId()->getPrefixedId();
+				$id = $snak->getPropertyId()->getSerialization();
 				if ( !in_array( $id, $serialization['qualifiers-order'] ) ) {
-					$serialization['qualifiers-order'][] = $snak->getPropertyId()->getPrefixedId();
+					$serialization['qualifiers-order'][] = $snak->getPropertyId()->getSerialization();
 				}
 			}
 			$this->setIndexedTagName( $serialization['qualifiers-order'], 'property' );

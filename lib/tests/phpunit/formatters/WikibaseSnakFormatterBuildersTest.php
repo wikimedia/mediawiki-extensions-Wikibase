@@ -59,7 +59,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 
 		$entity = EntityFactory::singleton()->newEmpty( $entityId->getEntityType() );
 		$entity->setId( $entityId );
-		$entity->setLabel( 'en', 'Label for ' . $entityId->getPrefixedId() );
+		$entity->setLabel( 'en', 'Label for ' . $entityId->getSerialization() );
 
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityLookup->expects( $this->any() )

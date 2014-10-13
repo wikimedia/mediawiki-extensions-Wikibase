@@ -145,7 +145,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	public function insertLinksInternal( Item $item, $links, DatabaseBase $dbw ) {
 		wfProfileIn( __METHOD__ );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": inserting links for " . $item->getId()->getPrefixedId() );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting links for ' . $item->getId()->getSerialization() );
 
 		$success = true;
 		foreach ( $links as $link ) {
@@ -186,7 +186,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	public function deleteLinksInternal( Item $item, $links, DatabaseBase $dbw ) {
 		wfProfileIn( __METHOD__ );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": deleting links for " . $item->getId()->getPrefixedId() );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ': deleting links for ' . $item->getId()->getSerialization() );
 
 		//TODO: We can do this in a single query by collecting all the site IDs into a set.
 

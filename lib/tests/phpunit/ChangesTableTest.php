@@ -80,7 +80,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 					'time' => '20120101000000',
 					'user_id' => $wgUser->getId(),
 					'revision_id' => 9001,
-					'object_id' => $id->getPrefixedId(),
+					'object_id' => $id->getSerialization(),
 					'info' => array(
 						'diff' => $diff1,
 					)
@@ -93,7 +93,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 					'time' => '20120101000005',
 					'user_id' => $wgUser->getId(),
 					'revision_id' => 9002,
-					'object_id' => $id->getPrefixedId(),
+					'object_id' => $id->getSerialization(),
 					'info' => array(
 						'diff' => $diff2,
 					)

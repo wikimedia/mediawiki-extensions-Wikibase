@@ -83,11 +83,11 @@ class ByPropertyListSerializer extends SerializerObject {
 			$this->setIndexedTagName( $serializedObjects, $this->elementName );
 
 			if ( $this->options->shouldIndexTags() ) {
-				$serializedObjects['id'] = $propertyId->getPrefixedId();
+				$serializedObjects['id'] = $propertyId->getSerialization();
 				$serialization[] = $serializedObjects;
 			}
 			else {
-				$key = $propertyId->getPrefixedId();
+				$key = $propertyId->getSerialization();
 
 				if ( $this->getOptions()->shouldUseUpperCaseIdsAsKeys() ) {
 					$key = strtoupper( $key );

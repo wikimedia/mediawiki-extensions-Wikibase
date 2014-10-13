@@ -141,7 +141,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			'term_entity_type' => $entity->getId()->getEntityType()
 		);
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": inserting terms for " . $entity->getId()->getPrefixedId() );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting terms for ' . $entity->getId()->getSerialization() );
 
 		$weightField = array();
 		if ( $this->supportsWeight() ) {
@@ -245,7 +245,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		$uniqueKeyFields = array( 'term_entity_type', 'term_entity_id', 'term_language', 'term_type', 'term_text' );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": deleting terms for " . $entity->getId()->getPrefixedId() );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ': deleting terms for ' . $entity->getId()->getSerialization() );
 
 		$success = true;
 		foreach ( $terms as $term ) {
@@ -417,7 +417,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		$numericIds = array();
 		foreach ( $ids as $id ) {
 			if ( $id->getEntityType() !== $entityType ) {
-				throw new MWException( "ID " . $id->getPrefixedId()
+				throw new MWException( 'ID ' . $id->getSerialization()
 					. " does not refer to an entity of type $entityType." );
 			}
 

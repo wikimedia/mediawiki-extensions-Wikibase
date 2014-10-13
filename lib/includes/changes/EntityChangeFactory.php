@@ -49,7 +49,6 @@ class EntityChangeFactory {
 		$this->entityFactory = $entityFactory;
 	}
 
-
 	/**
 	 * @since 0.5
 	 *
@@ -76,7 +75,7 @@ class EntityChangeFactory {
 		);
 
 		if ( !$instance->hasField( 'object_id' ) ) {
-			$instance->setField( 'object_id', $entityId->getPrefixedId() );
+			$instance->setField( 'object_id', $entityId->getSerialization() );
 		}
 
 		if ( !$instance->hasField( 'info' ) ) {

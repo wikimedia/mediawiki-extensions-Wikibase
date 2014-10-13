@@ -47,7 +47,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	private function newWikibaseValueFormatterBuilders( EntityId $entityId ) {
 		$entity = EntityFactory::singleton()->newEmpty( $entityId->getEntityType() );
 		$entity->setId( $entityId );
-		$entity->setLabel( 'en', 'Label for ' . $entityId->getPrefixedId() );
+		$entity->setLabel( 'en', 'Label for ' . $entityId->getSerialization() );
 
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityLookup->expects( $this->any() )
@@ -492,4 +492,5 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 			),
 		);
 	}
+
 }

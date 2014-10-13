@@ -47,14 +47,14 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		if ( isset( $this->entityTitleLookup ) ) {
 			$title = $this->entityTitleLookup->getTitleForId( $entityId );
 		} else {
-			$title = Title::newFromText( $entityId->getPrefixedId() );
+			$title = Title::newFromText( $entityId->getSerialization() );
 		}
 		$attributes = array(
 			'title' => $title->getPrefixedText(),
 			'href' => $title->getLocalURL()
 		);
 
-		$label = $entityId->getPrefixedId();
+		$label = $entityId->getSerialization();
 
 		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
 			try {

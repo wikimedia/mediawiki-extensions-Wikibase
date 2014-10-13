@@ -436,7 +436,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$actual = array();
 		foreach ( $entities as $key => $e ) {
 			if ( is_object( $e ) ) {
-				$actual[ $e->getId()->getPrefixedId() ] = $e->getLabels();
+				$actual[ $e->getId()->getSerialization() ] = $e->getLabels();
 			} else {
 				$actual[ $key ] = $e;
 			}

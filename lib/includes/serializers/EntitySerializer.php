@@ -120,7 +120,7 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 		}
 
 		//NOTE: when changing the serialization structure, update docs/json.wiki too!
-		$serialization['id'] = $entity->getId() ? $entity->getId()->getPrefixedId() : '';
+		$serialization['id'] = $entity->getId() ? $entity->getId()->getSerialization() : '';
 
 		$serialization['type'] = $entity->getType();
 

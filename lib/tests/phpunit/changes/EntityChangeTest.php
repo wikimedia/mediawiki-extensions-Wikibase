@@ -179,7 +179,7 @@ class EntityChangeTest extends DiffChangeTest {
 	public function testToString( EntityChange $entityChange ) {
 		$s = "$entityChange"; // magically calls __toString()
 
-		$id = $entityChange->getEntityId()->getPrefixedId();
+		$id = $entityChange->getEntityId()->getSerialization();
 		$type = $entityChange->getType();
 
 		$this->assertTrue( stripos( $s, $id ) !== false, "missing entity ID $id" );

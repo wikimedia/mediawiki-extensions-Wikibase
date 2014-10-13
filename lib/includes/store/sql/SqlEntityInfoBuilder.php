@@ -493,7 +493,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private function injectDataTypes( ResultWrapper $dbResult ) {
 		foreach ( $dbResult as $row ) {
 			$id = PropertyId::newFromNumber( (int)$row->pi_property_id );
-			$key = $id->getPrefixedId();
+			$key = $id->getSerialization();
 
 			if ( !isset( $this->entityInfo[$key] ) ) {
 				continue;

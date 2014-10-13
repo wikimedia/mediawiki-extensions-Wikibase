@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use DatabaseBase;
 use Status;
 use User;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -14,9 +13,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\PropertyNotFoundException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityRevision;
-use Wikibase\DataModel\Entity\PropertyNotFoundException;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
@@ -116,7 +115,7 @@ class MockRepository implements
 	 * @throw StorageException
 	 */
 	public function getEntityRevision( EntityId $entityId, $revision = 0 ) {
-		$key = $entityId->getPrefixedId();
+		$key = $entityId->getSerialization();
 
 		if ( isset( $this->redirects[$key] ) ) {
 			throw new UnresolvedRedirectException( $this->redirects[$key]->getTargetId() );
@@ -326,7 +325,7 @@ class MockRepository implements
 			$this->registerSiteLinks( $entity );
 		}
 
-		$key = $entity->getId()->getPrefixedId();
+		$key = $entity->getId()->getSerialization();
 
 		if ( !array_key_exists( $key, $this->entities ) ) {
 			$this->entities[$key] = array();
@@ -397,7 +396,7 @@ class MockRepository implements
 			$oldEntity = null; // ignore
 		}
 
-		$key = $id->getPrefixedId();
+		$key = $id->getSerialization();
 		unset( $this->entities[$key] );
 		unset( $this->redirects[$key] );
 
@@ -528,12 +527,11 @@ class MockRepository implements
 		$entities = array();
 
 		foreach ( $entityIds as $entityId ) {
-
 			if ( is_string( $entityId ) ) {
 				$entityId = $this->parseId( $entityId );
 			}
 
-			$entities[$entityId->getPrefixedId()] = $this->getEntity( $entityId );
+			$entities[$entityId->getSerialization()] = $this->getEntity( $entityId );
 		}
 
 		return $entities;
@@ -561,31 +559,6 @@ class MockRepository implements
 
 		// FIXME: throw InvalidArgumentException rather then failing silently
 		return array();
-	}
-
-	/**
-	 * Returns these claims from the given entity that have a main Snak for the property
-	 * identified by $propertyLabel in the language given by $langCode.
-	 *
-	 * @since    0.4
-	 *
-	 * @param Entity $entity
-	 * @param string $propertyLabel
-	 * @param string $langCode
-	 *
-	 * @return Claims
-	 */
-	public function getClaimsByPropertyLabel( Entity $entity, $propertyLabel, $langCode ) {
-		$prop = $this->getPropertyByLabel( $propertyLabel, $langCode );
-
-		if ( !$prop ) {
-			return new Claims();
-		}
-
-		$allClaims = new Claims( $entity->getClaims() );
-		$theClaims = $allClaims->getClaimsForProperty( $prop->getId()->getNumericId() );
-
-		return $theClaims;
 	}
 
 	public function getPropertyByLabel( $propertyLabel, $langCode ) {
@@ -756,7 +729,7 @@ class MockRepository implements
 	 * @return bool
 	 */
 	public function userWasLastToEdit( User $user, EntityId $id, $lastRevId ) {
-		$key = $id->getPrefixedId();
+		$key = $id->getSerialization();
 		if ( !isset( $this->entities[$key] ) ) {
 			return false;
 		}
@@ -879,4 +852,5 @@ class MockRepository implements
 
 		return null;
 	}
+
 }

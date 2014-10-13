@@ -120,8 +120,8 @@ class LangLinkHandler {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId !== null ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Item ID for " . $title->getFullText()
-				. " is " . $itemId->getPrefixedId() );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': Item ID for ' . $title->getFullText()
+				. ' is ' . $itemId->getSerialization() );
 
 			//NOTE: SiteLinks we could get from $this->siteLinkLookup do not contain badges,
 			//      so we have to fetch the links from the Item.

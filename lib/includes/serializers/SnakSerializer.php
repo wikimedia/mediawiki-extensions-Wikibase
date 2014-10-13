@@ -4,11 +4,11 @@ namespace Wikibase\Lib\Serializers;
 
 use DataValues\DataValueFactory;
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\PropertyNotFoundException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
-use Wikibase\DataModel\Entity\PropertyNotFoundException;
 
 /**
  * Serializer for Snak objects.
@@ -63,6 +63,7 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 		//NOTE: when changing the serialization structure, update docs/json.wiki too!
 
 		$serialization = array();
+		$propertyId = $snak->getPropertyId();
 
 		if( $this->options->hasOption( SerializationOptions::OPT_SERIALIZE_SNAKS_WITH_HASH )
 			&& $this->options->getOption( SerializationOptions::OPT_SERIALIZE_SNAKS_WITH_HASH )
@@ -72,12 +73,10 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 		}
 
 		$serialization['snaktype'] = $snak->getType();
-
-		$serialization['property'] = $snak->getPropertyId()->getPrefixedId();
+		$serialization['property'] = $propertyId->getSerialization();
 
 		if ( $snak instanceof PropertyValueSnak ) {
 			if ( $this->dataTypeLookup !== null ) {
-				$propertyId = $snak->getPropertyId();
 				try {
 					$serialization['datatype'] = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
 				} catch ( PropertyNotFoundException $ex ) {
