@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Diff;
 
-use Diff\DiffOp;
 use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
