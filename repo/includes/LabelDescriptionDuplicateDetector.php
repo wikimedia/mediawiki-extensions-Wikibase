@@ -5,12 +5,13 @@ namespace Wikibase;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Validators\UniquenessViolation;
 
 /**
  * Detector of label/description uniqueness constraint violations.
  *
- * @todo: Fold this into TermCombinationMatchFinder resp. TermIndex
+ * @todo: Fold this into LabelConflictFinder resp. TermIndex
  *
  * @since 0.5
  *
@@ -20,15 +21,15 @@ use Wikibase\Validators\UniquenessViolation;
 class LabelDescriptionDuplicateDetector {
 
 	/**
-	 * @var TermCombinationMatchFinder
+	 * @var LabelConflictFinder
 	 */
-	private $termFinder;
+	private $conflictFinder;
 
 	/**
-	 * @param TermCombinationMatchFinder $termFinder
+	 * @param LabelConflictFinder $conflictFinder
 	 */
-	public function __construct( TermCombinationMatchFinder $termFinder ) {
-		$this->termFinder = $termFinder;
+	public function __construct( LabelConflictFinder $conflictFinder ) {
+		$this->conflictFinder = $conflictFinder;
 	}
 
 	/**
@@ -67,115 +68,20 @@ class LabelDescriptionDuplicateDetector {
 			return Result::newSuccess();
 		}
 
-		if ( $descriptions === null ) {
-			$termSpecs = $this->buildLabelConflictSpecs( $labels );
-			$errorCode = 'label-conflict';
-		} else {
-			$termSpecs = $this->buildLabelDescriptionConflictSpecs( $labels, $descriptions );
-			$errorCode = 'label-with-description-conflict';
-		}
-
-		$conflictingTerms = $this->findConflictingTerms( $termSpecs, $entityId );
+		$conflictingTerms = $this->conflictFinder->getLabelConflicts(
+			$entityId === null ? null : $entityId->getEntityType(),
+			$labels,
+			$descriptions,
+			$entityId
+		);
 
 		if ( $conflictingTerms ) {
+			$errorCode = $descriptions === null ? 'label-conflict' : 'label-with-description-conflict';
 			$errors = $this->termsToErrors( 'found conflicting terms', $errorCode, $conflictingTerms );
 			return Result::newError( $errors );
 		} else {
 			return Result::newSuccess();
 		}
-	}
-
-	/**
-	 * Builds a term spec array suitable for finding items with any of the given combinations
-	 * of label and description for a given language. This applies only for languages for
-	 * which both label and description are given in $terms.
-	 *
-	 * @param string[] $labels An associative array of labels,
-	 *        with language codes as the keys.
-	 * @param string[] $descriptions An associative array of descriptions,
-	 *        with language codes as the keys.
-	 *
-	 * @return array[] An array suitable for use with TermIndex::getMatchingTermCombination().
-	 */
-	private function buildLabelDescriptionConflictSpecs( array $labels, array $descriptions ) {
-		$termSpecs = array();
-
-		foreach ( $labels as $languageCode => $label ) {
-			if ( !isset( $descriptions[$languageCode] ) ) {
-				// If there's no description, there will be no conflict
-				continue;
-			}
-
-			$label = new Term( array(
-				'termLanguage' => $languageCode,
-				'termText' => $label,
-				'termType' => Term::TYPE_LABEL,
-			) );
-
-			$description = new Term( array(
-				'termLanguage' => $languageCode,
-				'termText' => $descriptions[$languageCode],
-				'termType' => Term::TYPE_DESCRIPTION,
-			) );
-
-			$termSpecs[] = array( $label, $description );
-		}
-
-		return $termSpecs;
-	}
-
-	/**
-	 * Builds a term spec array suitable for finding entities with any of the given labels
-	 * for a given language.
-	 *
-	 * @param string[] $labels An associative array of labels,
-	 *        with language codes as the keys.
-	 *
-	 * @return array[] An array suitable for use with TermIndex::getMatchingTermCombination().
-	 */
-	private function buildLabelConflictSpecs( array $labels ) {
-		$termSpecs = array();
-
-		foreach ( $labels as $languageCode => $label ) {
-			$label = new Term( array(
-				'termLanguage' => $languageCode,
-				'termText' => $label,
-				'termType' => Term::TYPE_LABEL,
-			) );
-
-			$termSpecs[] = array( $label );
-		}
-
-		return $termSpecs;
-	}
-
-	/**
-	 * @param array[] $termSpecs as returned by $this->build...ConflictSpecs()
-	 * @param EntityId $entityId
-	 *
-	 * @return Term[]
-	 */
-	private function findConflictingTerms( array $termSpecs, EntityId $entityId = null ) {
-		if ( empty( $termSpecs ) ) {
-			return array();
-		}
-
-		// FIXME: Do not run this when running test using MySQL as self joins fail on temporary tables.
-		if ( !defined( 'MW_PHPUNIT_TEST' )
-			|| !( $this->termFinder instanceof TermSqlIndex )
-			|| wfGetDB( DB_MASTER )->getType() !== 'mysql'
-		) {
-			$foundTerms = $this->termFinder->getMatchingTermCombination(
-				$termSpecs,
-				Term::TYPE_LABEL,
-				$entityId === null ? null : $entityId->getEntityType(),
-				$entityId
-			);
-		} else {
-			$foundTerms = array();
-		}
-
-		return $foundTerms;
 	}
 
 	/**
