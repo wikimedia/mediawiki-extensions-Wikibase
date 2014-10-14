@@ -5,6 +5,7 @@ namespace Tests\Wikibase\DataModel\Serializers;
 use Serializers\Serializer;
 use Wikibase\DataModel\Serializers\TypedSnakSerializer;
 use Wikibase\DataModel\Snak\TypedSnak;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\DataModel\Serializers\TypedSnakSerializer
@@ -65,6 +66,11 @@ class TypedSnakSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return $argLists;
+	}
+
+	public function testWithUnsupportedObject() {
+		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
+		$this->serializer->serialize( new PropertyNoValueSnak( 42 ) );
 	}
 
 }
