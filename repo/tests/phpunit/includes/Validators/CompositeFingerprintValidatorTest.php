@@ -4,6 +4,7 @@ namespace Wikibase\Validators\Test;
 
 use ValueValidators\Error;
 use ValueValidators\Result;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
@@ -53,7 +54,7 @@ class CompositeFingerprintValidatorTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$validator = new CompositeFingerprintValidator( $validators );
-		$result = $validator->validateFingerprint( $fingerprint );
+		$result = $validator->validateFingerprint( $fingerprint, new ItemId( 'Q99' ) );
 
 		$this->assertEquals( $expected, $result->isValid(), 'isValid' );
 	}

@@ -40,24 +40,33 @@ class LabelDescriptionUniquenessValidator implements EntityValidator, Fingerprin
 	 * @return Result
 	 */
 	public function validateEntity( Entity $entity ) {
+		if ( !$entity->getId() ) {
+			throw new \InvalidArgumentException( '$entity must have an ID set' );
+		}
+
 		$labels = $entity->getLabels();
 		$descriptions = $entity->getDescriptions();
 
-		return $this->duplicateDetector->detectTermConflicts( $labels, $descriptions, $entity->getId() );
+		return $this->duplicateDetector->detectTermConflicts(
+			$entity->getType(),
+			$labels,
+			$descriptions,
+			$entity->getId()
+		);
 	}
 
 	/**
 	 * @see FingerprintValidator::validateFingerprint()
 	 *
 	 * @param Fingerprint $fingerprint
-	 * @param EntityId|null $entityId
+	 * @param EntityId $entityId
 	 * @param string[]|null $languageCodes
 	 *
 	 * @return Result
 	 */
 	public function validateFingerprint(
 		Fingerprint $fingerprint,
-		EntityId $entityId = null,
+		EntityId $entityId,
 		array $languageCodes = null
 	) {
 		$labels = array_map(
@@ -85,7 +94,12 @@ class LabelDescriptionUniquenessValidator implements EntityValidator, Fingerprin
 			return Result::newSuccess();
 		}
 
-		return $this->duplicateDetector->detectTermConflicts( $labels, $descriptions, $entityId );
+		return $this->duplicateDetector->detectTermConflicts(
+			$entityId->getEntityType(),
+			$labels,
+			$descriptions,
+			$entityId
+		);
 	}
 
 }
