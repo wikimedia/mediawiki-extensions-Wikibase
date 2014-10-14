@@ -38,71 +38,78 @@ class MockTermIndex implements TermIndex {
 	}
 
 	/**
-	 * @see TermCombinationMatchFinder::getMatchingTermCombination
+	 * @see LabelConflictFinder::getLabelConflicts
+	 *
+	 * @param string $entityType The relevant entity type
+	 * @param string $labels The label to look for
+	 * @param string|null $descriptions The description to consider, if descriptions are relevant.
+	 * @param EntityId|null $excludeId Ignore conflicts with this entity ID (for ignoring self-conflicts)
+	 *
+	 * @return EntityId[]
 	 */
-	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, EntityId $excludeId = null ) {
-		/**
-		 * @var Term[] $termPair
-		 * @var Term[] $matchingTerms
-		 */
-		foreach ( $terms as $termCombo ) {
-			$matchesPerEntity = null;
+	public function getLabelConflicts( $entityType, $labels, $descriptions = null, \Wikibase\DataModel\Entity\EntityId $excludeId = null ) {
+		if ( $descriptions !== null ) {
+			$labels = array_intersect_key( $labels, $descriptions );
+			$descriptions = array_intersect_key( $descriptions, $labels );
 
-			/** @var Term $term */
-			foreach ( $termCombo as $term ) {
-				$matchesPerEntityForTerm = $this->findMatchesPerEntity(
-					$term->getText(),
-					$term->getLanguage(),
-					$term->getType(),
-					$entityType,
-					$excludeId
-				);
-
-				if ( $matchesPerEntity === null ) {
-					$matchesPerEntity = $matchesPerEntityForTerm;
-				} else {
-					$matchesPerEntity = array_intersect_key( $matchesPerEntity, $matchesPerEntityForTerm );
-				}
-			}
-
-			if ( !empty( $matchesPerEntity ) ) {
-				return reset( $matchesPerEntity );
+			if ( empty( $descriptions ) ) {
+				return array();
 			}
 		}
 
-		return array();
+		if ( empty( $labels ) ) {
+			return array();
+		}
+
+		$templates = $this->makeTemplateTerms( $labels, Term::TYPE_LABEL );
+
+		$conflicts = $this->getMatchingTerms(
+			$templates,
+			Term::TYPE_LABEL,
+			$entityType
+		);
+
+		if ( !empty( $labelConflictsEntities ) && $descriptions !== null ) {
+			$templates = $this->makeTemplateTerms( $descriptions, Term::TYPE_DESCRIPTION );
+
+			$descriptionConflicts = $this->getMatchingTerms(
+				$templates,
+				Term::TYPE_DESCRIPTION,
+				$entityType
+			);
+
+			$conflicts = $this->intersectConflicts( $conflicts, $descriptionConflicts );
+		}
+
+		if ( $excludeId ) {
+			$conflicts = $this->filterConflictsByEntity( $conflicts, $excludeId );
+		}
+
+		return $conflicts;
 	}
 
-	private function findMatchesPerEntity( $text, $language, $termType = null, $entityType = null, EntityId $excludeId = null ) {
-		$matchingTerms = array();
+	/**
+	 * @param string[] $textsByLanguage A list of texts, or a list of lists of texts (keyed by language on the top level)
+	 * @param string $type
+	 *
+	 * @return Term[]
+	 */
+	private function makeTemplateTerms( $textsByLanguage, $type ) {
+		$terms = array();
 
-		foreach ( $this->terms as $storedTerm ) {
+		foreach ( $textsByLanguage as $lang => $texts ) {
+			$texts = (array)$texts;
 
-			if ( $text !== $storedTerm->getText() ) {
-				continue;
+			foreach ( $texts as $text ) {
+				$terms[] = new Term( array(
+					'termText' => $text,
+					'termLanguage' => $lang,
+					'termType' => $type,
+				) );
 			}
-
-			if ( $language !== $storedTerm->getLanguage() ) {
-				continue;
-			}
-
-			if ( $entityType && $entityType !== $storedTerm->getEntityType() ) {
-				continue;
-			}
-
-			if ( $termType && $termType !== $storedTerm->getType() ) {
-				continue;
-			}
-
-			if ( $excludeId !== null && $storedTerm->getEntityId()->equals( $excludeId ) ) {
-				continue;
-			}
-
-			$id = $storedTerm->getEntityId()->getSerialization();
-			$matchingTerms[$id][] = $storedTerm;
 		}
 
-		return $matchingTerms;
+		return $terms;
 	}
 
 	/**
@@ -167,9 +174,10 @@ class MockTermIndex implements TermIndex {
 		$language = $terms[0]->getLanguage();
 
 		foreach ( $this->terms as $term ) {
-			if ( $term->getLanguage() === $language
-				&& $term->getEntityType() === $entityType
-				&& $term->getType() === $termType
+			if ( ( $language === null || $term->getLanguage() === $language )
+				&& ( $entityType === null || $term->getEntityType() === $entityType )
+				&& ( $termType === null || $term->getType() === $termType )
+				&& $this->termMatchesTemplates( $term, $terms )
 			) {
 
 				$matchingTerms[] = $term;
@@ -190,7 +198,95 @@ class MockTermIndex implements TermIndex {
 	 * @throws Exception always
 	 */
 	public function clear() {
-		throw new Exception( 'not implemented by mock class ' );
+		$this->terms = array();
 	}
 
+	/**
+	 * Rekeys a list of Terms based on EntityId and language.
+	 *
+	 * @param Term[] $conflicts
+	 *
+	 * @return Term[]
+	 */
+	private function rekeyConflicts( array $conflicts ) {
+		$rekeyed = array();
+
+		foreach ( $conflicts as $term ) {
+			$key = $term->getEntityId()->getSerialization();
+			$key .= '/' . $term->getLanguage();
+
+			$rekeyed[$key] = $term;
+		}
+
+		return $rekeyed;
+	}
+
+	/**
+	 * Intersects two lists of Terms based on EntityId and language.
+	 *
+	 * @param Term[] $base
+	 * @param Term[] $filter
+	 *
+	 * @return Term[]
+	 */
+	private function intersectConflicts( array $base, array $filter ) {
+		$base = $this->rekeyConflicts( $base );
+		$filter = $this->rekeyConflicts( $filter );
+
+		return array_intersect( $base, $filter );
+	}
+
+	/**
+	 * @param Term[] $conflicts
+	 * @param EntityId $excludeId
+	 *
+	 * @return Term[]
+	 */
+	private function filterConflictsByEntity( array $conflicts, EntityId $excludeId ) {
+		$filtered = array();
+
+		foreach ( $conflicts as $key => $term ) {
+			$entityId = $term->getEntityId();
+
+			if ( $entityId === null || !$excludeId->equals( $entityId ) ) {
+				$filtered[$key] = $term;
+			}
+		}
+
+		return $filtered;
+	}
+
+	/**
+	 * @param Term $term
+	 * @param Term[] $templates
+	 *
+	 * @return bool
+	 */
+	private function termMatchesTemplates( Term $term, array $templates ) {
+		foreach ( $templates as $template ) {
+			if ( $template->getType() !== null && $template->getType() != $term->getType() ) {
+				continue;
+			}
+
+			if ( $template->getEntityType() !== null && $template->getEntityType() != $term->getEntityType() ) {
+				continue;
+			}
+
+			if ( $template->getLanguage() !== null && $template->getLanguage() != $term->getLanguage() ) {
+				continue;
+			}
+
+			if ( $template->getText() !== null && $template->getText() != $term->getText() ) {
+				continue;
+			}
+
+			if ( $template->getEntityId() !== null && !$template->getEntityId()->equals( $term->getEntityType() ) ) {
+				continue;
+			}
+
+			return true;
+		}
+
+		return false;
+	}
 }

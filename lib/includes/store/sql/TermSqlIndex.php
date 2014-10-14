@@ -4,9 +4,9 @@ namespace Wikibase;
 
 use DatabaseBase;
 use DBAccessBase;
+use InvalidArgumentException;
 use Iterator;
 use MWException;
-use ResultWrapper;
 use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
@@ -33,6 +33,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 * @var StringNormalizer
 	 */
 	protected $stringNormalizer;
+
+	/**
+	 * @var int
+	 */
+	protected $maxConflicts = 10;
 
 	/**
 	 * Maps table fields to TermIndex interface field names.
@@ -182,37 +187,20 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	public function getEntityTerms( Entity $entity ) {
 		$terms = array();
 
-		foreach ( $entity->getDescriptions() as $languageCode => $description ) {
-			$term = new Term();
+		$terms = array_merge(
+			$terms,
+			$this->makeTemplateTerms( $entity->getLabels(), Term::TYPE_LABEL )
+		);
 
-			$term->setLanguage( $languageCode );
-			$term->setType( Term::TYPE_DESCRIPTION );
-			$term->setText( $description );
+		$terms = array_merge(
+			$terms,
+			$this->makeTemplateTerms( $entity->getDescriptions(), Term::TYPE_DESCRIPTION )
+		);
 
-			$terms[] = $term;
-		}
-
-		foreach ( $entity->getLabels() as $languageCode => $label ) {
-			$term = new Term();
-
-			$term->setLanguage( $languageCode );
-			$term->setType( Term::TYPE_LABEL );
-			$term->setText( $label );
-
-			$terms[] = $term;
-		}
-
-		foreach ( $entity->getAllAliases() as $languageCode => $aliases ) {
-			foreach ( $aliases as $alias ) {
-				$term = new Term();
-
-				$term->setLanguage( $languageCode );
-				$term->setType( Term::TYPE_ALIAS );
-				$term->setText( $alias );
-
-				$terms[] = $term;
-			}
-		}
+		$terms = array_merge(
+			$terms,
+			$this->makeTemplateTerms( $entity->getAllAliases(), Term::TYPE_ALIAS )
+		);
 
 		return $terms;
 	}
@@ -604,7 +592,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			return array();
 		}
 
-		$conditions = $this->termsToConditions( $terms, $termType, $entityType, false, $options );
+		$termConditions = $this->termsToConditions( $terms, $termType, $entityType, false, $options );
+		$where = array( implode( ' OR ', $termConditions ) );
 
 		$selectionFields = array_keys( $this->termFieldMap );
 
@@ -616,10 +605,18 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			$queryOptions['LIMIT'] = intval( $options['LIMIT'] );
 		}
 
+		if ( isset( $options['WHERE'] ) ) {
+			if ( is_array( $options['WHERE'] ) ) {
+				$where = array_merge( $where, $options['WHERE'] );
+			} elseif ( is_string( $options['WHERE'] ) )  {
+				$where[] = $where['WHERE'];
+			}
+		}
+
 		$obtainedTerms = $dbr->select(
 			$this->tableName,
 			$selectionFields,
-			implode( ' OR ', $conditions ),
+			$where,
 			__METHOD__,
 			$queryOptions
 		);
@@ -880,137 +877,228 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * @see TermIndex::getMatchingTermCombination
+	 * @see LabelConflictFinder::getLabelConflicts
 	 *
-	 * Note: the interface specifies capability for only a single join, which in this implementation
-	 * is enforced by the $joinCount var. The code itself however could handle multiple joins.
+	 * @note: This implementation does not guarantee that all matches are returned.
+	 * The maximum number of conflicts returned is controlled by $this->maxConflicts.
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
-	 * @param array $terms
-	 * @param string|null $termType
-	 * @param string|null $entityType
-	 * @param EntityId|null $excludeId
+	 * @param string|null $entityType The relevant entity type
+	 * @param string $labels The label to look for
+	 * @param string|null $descriptions The description to consider, if descriptions are relevant.
+	 * @param \Wikibase\DataModel\Entity\EntityId|null $excludeId Ignore conflicts with this entity ID (for ignoring self-conflicts)
 	 *
-	 * @return array
+	 * @throws InvalidArgumentException
+	 * @return Term[]
 	 */
-	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, EntityId $excludeId = null ) {
-		wfProfileIn( __METHOD__ );
+	public function getLabelConflicts( $entityType, $labels, $descriptions = null, \Wikibase\DataModel\Entity\EntityId $excludeId = null ) {
+		if ( $entityType !== null && !is_string( $entityType ) ) {
+			throw new InvalidArgumentException( '$entityType must be a string (or null)' );
+		}
 
-		if ( empty( $terms ) ) {
-			wfProfileOut( __METHOD__ );
+		if ( !is_array( $labels ) ) {
+			throw new InvalidArgumentException( '$labels must be an array' );
+		}
+
+		if ( $descriptions !== null && !is_array( $descriptions ) ) {
+			throw new InvalidArgumentException( '$description must be an array (or null)' );
+		}
+
+		if ( $descriptions !== null ) {
+			$labels = array_intersect_key( $labels, $descriptions );
+			$descriptions = array_intersect_key( $descriptions, $labels );
+
+			if ( empty( $descriptions ) ) {
+				return array();
+			}
+		}
+
+		if ( empty( $labels ) ) {
 			return array();
 		}
 
-		$conditions = array();
-		$joinCount = 1;
+		wfProfileIn( __METHOD__ );
 
-		$dbr = $this->getReadDb();
+		$templates = $this->makeTemplateTerms( $labels, Term::TYPE_LABEL );
 
-		foreach ( $terms as $termList ) {
-			// Limit the operation to a single join.
-			$termList = array_slice( $termList, 0, $joinCount + 1 );
-
-			$combinationConds = $this->termsToConditions( $termList, $termType, $entityType, true );
-
-			$exclusionConds = array();
-
-			if ( $excludeId !== null ) {
-				$exclusionConds[] = 'terms0.term_entity_id <> ' . $dbr->addQuotes( $excludeId->getNumericId() );
-				$exclusionConds[] = 'terms0.term_entity_type <> ' . $dbr->addQuotes( $excludeId->getEntityType() );
-			}
-
-			if ( !empty( $exclusionConds ) ) {
-				$combinationConds[] = '(' . implode( ' OR ', $exclusionConds ) . ')';
-			}
-
-			$conditions[] = '(' . implode( ' AND ', $combinationConds ) . ')';
-		}
-
-		$tables = array();
-		$fieldsToSelect = array();
-		$joinConds = array();
-
-		for ( $tableIndex = 0; $tableIndex <= $joinCount; $tableIndex++ ) {
-			$tableName = 'terms' . $tableIndex;
-			$tables[$tableName] = $this->tableName;
-
-			foreach ( array_keys( $this->termFieldMap ) as $fieldName ) {
-				$fieldsToSelect[] = $tableName . '.' . $fieldName . ' AS ' . $tableName . $fieldName;
-			}
-
-			if ( $tableIndex !== 0 ) {
-				$joinConds[$tableName] = array(
-					'INNER JOIN',
-					array(
-						'terms0.term_entity_id=' . $tableName . '.term_entity_id',
-						'terms0.term_entity_type=' . $tableName . '.term_entity_type',
-					)
-				);
-			}
-		}
-
-		$obtainedTerms = $dbr->select(
-			$tables,
-			$fieldsToSelect,
-			implode( ' OR ', $conditions ),
-			__METHOD__,
-			array( 'LIMIT' => 1 ),
-			$joinConds
+		$labelConflicts = $this->getMatchingTerms(
+			$templates,
+			Term::TYPE_LABEL,
+			$entityType,
+			array(
+				'LIMIT' => $this->maxConflicts,
+			)
 		);
 
-		$terms = $this->buildTermResult( $this->getNormalizedJoinResult( $obtainedTerms, $joinCount ) );
+		$labelConflictsEntities = $this->extractEntityIds( $labelConflicts );
+		$labelConflictsByEntity = $this->groupByEntity( $labelConflicts );
 
-		$this->releaseConnection( $dbr );
+		if ( $excludeId ) {
+			unset( $labelConflictsEntities[ $excludeId->getSerialization() ] );
+			unset( $labelConflictsByEntity[ $excludeId->getSerialization() ] );
+		}
+
+		if ( !empty( $labelConflictsEntities ) && $descriptions !== null ) {
+			$descriptionConflicts = $this->getDescriptionConflicts( $entityType, $descriptions, $labelConflictsEntities );
+			$descriptionConflictsByEntity = $this->groupByEntity( $descriptionConflicts );
+
+			$labelConflictsByEntity = $this->retainGroupsWithMatchingLanguages(
+				$labelConflictsByEntity,
+				$descriptionConflictsByEntity
+			);
+		}
+
+		$conflicts = $this->ungroupTerms( $labelConflictsByEntity );
 
 		wfProfileOut( __METHOD__ );
+		return $conflicts;
+	}
+
+	private function getDescriptionConflicts( $entityType, $descriptions, array $entitiesToCheck = null ) {
+		$options = array(
+			'LIMIT' => $this->maxConflicts
+		);
+
+		if ( $entitiesToCheck ) {
+			$options['WHERE'] = array(
+				'term_entity_id' => $this->extractNumericIds( $entitiesToCheck )
+			);
+		}
+
+		$templates = $this->makeTemplateTerms( $descriptions, Term::TYPE_DESCRIPTION );
+
+		$descriptionConflicts = $this->getMatchingTerms(
+			$templates,
+			Term::TYPE_DESCRIPTION,
+			$entityType,
+			$options
+		);
+
+		return $descriptionConflicts;
+	}
+
+	/**
+	 * @param string[] $textsByLanguage A list of texts, or a list of lists of texts (keyed by language on the top level)
+	 * @param string $type
+	 *
+	 * @return Term[]
+	 */
+	private function makeTemplateTerms( $textsByLanguage, $type ) {
+		$terms = array();
+
+		foreach ( $textsByLanguage as $lang => $texts ) {
+			$texts = (array)$texts;
+
+			foreach ( $texts as $text ) {
+				$terms[] = new Term( array(
+					'termText' => $text,
+					'termLanguage' => $lang,
+					'termType' => $type,
+				) );
+			}
+		}
 
 		return $terms;
 	}
 
 	/**
-	 * Takes the result of a query with joins and turns it into a row per term.
+	 * Extracts all EntityIds from a list of Terms.
 	 *
-	 * Also ditches any successive results PDO manages to add to the first one,
-	 * so the behavior appears to be the same as when running the query against
-	 * the database directly without PDO messing the the result up.
+	 * @param Term[] $terms
 	 *
-	 * @since 0.2
-	 *
-	 * @param ResultWrapper $obtainedTerms
-	 * @param integer $joinCount
-	 *
-	 * @return array
+	 * @return EntityId[] List of entity ids, using the serialized form of the ids as keys.
 	 */
-	protected function getNormalizedJoinResult( \ResultWrapper $obtainedTerms, $joinCount ) {
-		wfProfileIn( __METHOD__ );
+	private function extractEntityIds( array $terms ) {
+		$ids = array();
 
-		$resultTerms = array();
+		foreach ( $terms as $term ) {
+			$key = $term->getEntityId()->getSerialization();
+			$ids[$key] = $term->getEntityId();
+		}
 
-		foreach ( $obtainedTerms as $obtainedTerm ) {
-			$obtainedTerm = (array)$obtainedTerm;
+		return $ids;
+	}
 
-			for ( $tableIndex = 0; $tableIndex <= $joinCount; $tableIndex++ ) {
-				$tableName = 'terms' . $tableIndex;
-				$resultTerm = array();
+	/**
+	 * Converts a list of EntityIds into a list of numeric (int) ids.
+	 *
+	 * @param EntityId[] $entityIds
+	 *
+	 * @return int[]
+	 */
+	private function extractNumericIds( array $entityIds ) {
+		return array_map( function ( EntityId $id ) {
+			return $id->getNumericId();
+		}, $entityIds );
+	}
 
-				foreach ( array_keys( $this->termFieldMap ) as $fieldName ) {
-					$fullFieldName = $tableName . $fieldName;
+	/**
+	 * Takes a list of Terms and groups it by entity ID.
+	 *
+	 * @param Term[] $terms
+	 *
+	 * @throws InvalidArgumentException
+	 * @return array An associative array mapping entity IDs to lists of Terms.
+	 * The term lists are keys by language code.
+	 */
+	private function groupByEntity( array $terms ) {
+		$groups = array();
 
-					if ( array_key_exists( $fullFieldName, $obtainedTerm ) ) {
-						$resultTerm[$fieldName] = $obtainedTerm[$fullFieldName];
-					}
-				}
+		foreach ( $terms as $term ) {
+			$key = $term->getEntityId()->getSerialization();
+			$lang = $term->getLanguage();
+			$groups[$key][$lang] = $term;
+		}
 
-				if ( !empty( $resultTerm ) ) {
-					$resultTerms[] = $resultTerm;
-				}
+		return $groups;
+	}
+
+	/**
+	 * Produces a list of terms based on a list of groups of terms.
+	 *
+	 * @param array[] $groups
+	 *
+	 * @return Term[]
+	 */
+	private function ungroupTerms( array $groups ) {
+		$terms = array();
+
+		foreach ( $groups as $group ) {
+			$terms = array_merge( $terms, array_values( $group ) );
+		}
+
+		return $terms;
+	}
+
+	/**
+	 * Keeps the groups in $base that have matching entries in $filter with overlapping language
+	 * codes. That is, if array_intersect( array_keys( $base[$e] ), array_keys( $filter[$e] ) )
+	 * is not empty, the group will be included in the result.
+	 *
+	 * @param array $base A set of Term groups, as returned by groupByEntity.
+	 * @param array $filter A set of Term groups, as returned by groupByEntity.
+	 *
+	 * @throws InvalidArgumentException
+	 * @return array Entries from $base that have a counterpart in $filter which shares language
+	 * codes.
+	 */
+	private function retainGroupsWithMatchingLanguages( array $base, array $filter ) {
+		$groups = array();
+
+		foreach ( $base as $key => $baseGroup ) {
+			if ( !isset( $filter[$key] ) ) {
+				continue;
+			}
+
+			$group = array_intersect_key( $baseGroup, $filter[$key] );
+
+			if ( !empty( $group ) ) {
+				$groups[$key] = $group;
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
-
-		return $resultTerms;
+		return $groups;
 	}
 
 	/**

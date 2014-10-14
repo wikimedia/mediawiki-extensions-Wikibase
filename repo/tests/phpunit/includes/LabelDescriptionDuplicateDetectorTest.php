@@ -147,7 +147,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		$this->assertEquals( empty( $expectedErrors ), $result->isValid(), 'isValid()' );
 		$errors = $result->getErrors();
 
-		$this->assertEquals( count( $expectedErrors ), count( $errors ), 'Number of errors:' );
+		$this->assertSameSize( $expectedErrors, $errors, 'Number of errors:' );
 
 		foreach ( $expectedErrors as $i => $expectedError ) {
 			$error = $errors[$i];
