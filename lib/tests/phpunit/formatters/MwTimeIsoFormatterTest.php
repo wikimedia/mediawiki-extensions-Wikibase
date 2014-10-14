@@ -398,37 +398,87 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				'9999999999999999',
 			),
 
-			// Stuff we do not want to format so must return it :<
+			// Precision to low, falling back to year
+			array(
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_Ga,
+				'1 BCE',
+			),
+			array(
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_100Ma,
+				'1 BCE',
+			),
+			array(
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_10Ma,
+				'1 BCE',
+			),
+			array(
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_Ma,
+				'1 BCE',
+			),
+			array(
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_100ka,
+				'1 BCE',
+			),
+			array(
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_10ka,
+				'1 BCE',
+			),
+			array(
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_ka,
+				'1. millennium BCE',
+			),
+			array(
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_100a,
+				'1. century BCE',
+			),
+			array(
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_10a,
+				'1 BCE',
+			),
+
+			// Better than the raw ISO string
 			array(
 				'-00000000000-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
+				'0 BCE',
 			),
 			array(
 				'-0-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
+				'0 BCE',
 			),
 			array(
 				'+100000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga,
+				'100000000',
 			),
 			array(
 				'+10000000-00-00T00:00:01Z', TimeValue::PRECISION_100Ma,
+				'10000000',
 			),
 			array(
 				'+1000000-00-00T00:00:02Z', TimeValue::PRECISION_10Ma,
+				'1000000',
 			),
 			array(
 				'+100000-00-00T00:00:03Z', TimeValue::PRECISION_Ma,
+				'100000',
 			),
 			array(
 				'+10000-00-00T00:00:04Z', TimeValue::PRECISION_100ka,
+				'10000',
 			),
 			array(
 				'+1000-00-00T00:00:05Z', TimeValue::PRECISION_10ka,
+				'1000',
 			),
 			array(
 				'+1-00-00T00:00:08Z', TimeValue::PRECISION_10a,
+				'1',
 			),
 			array(
 				'-0-00-00T00:00:42Z', TimeValue::PRECISION_YEAR,
+				'0 BCE',
 			),
+
+			// Stuff we do not want to format so must return it :<
 			array(
 				'+00000002013-07-00T00:00:00Z', TimeValue::PRECISION_DAY,
 			),
