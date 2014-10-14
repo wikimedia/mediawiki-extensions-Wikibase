@@ -16,6 +16,24 @@
       "revId": "1481dbed54d0938fa95e07088fe719347736b9f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d505107e",
+        "filename": "lib/resources/jquery.wikibase/toolbar/jquery.wikibase.toolbaritem.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-10-14T08:13:05Z",
+      "side": 1,
+      "message": "These are base attribute assigned to all derivatives. Derivatives like $.wikibase.toolbarbutton will not add \"wikibase-toolbaritem\" but \"wikibase-toolbarbutton\" only.",
+      "parentUuid": "ce8c5bf9_3e3f4922",
+      "revId": "1481dbed54d0938fa95e07088fe719347736b9f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
