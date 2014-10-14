@@ -12,13 +12,10 @@ if ( defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
 	return 1;
 }
 
-define( 'WIKIBASE_DATAMODEL_VERSION', '2.0 alpha' );
+define( 'WIKIBASE_DATAMODEL_VERSION', '2.0' );
 
 if ( defined( 'MEDIAWIKI' ) ) {
 	call_user_func( function() {
 		require_once __DIR__ . '/WikibaseDataModel.mw.php';
 	} );
 }
-
-// Aliasing of classes that got renamed.
-// For more details, see Aliases.php.
