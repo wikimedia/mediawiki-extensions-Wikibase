@@ -22,7 +22,7 @@ class ReferencesSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider referencesProvider
 	 */
-	public function testReferenceSerializationRoundtrips( References $references ) {
+	public function testReferenceSerializationRoundtrips( ReferenceList $references ) {
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$deserializerFactory = new DeserializerFactory(
 			new DataValueDeserializer(),
@@ -31,7 +31,7 @@ class ReferencesSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 		$serialization = $serializerFactory->newReferencesSerializer()->serialize( $references );
 		$newReferences = $deserializerFactory->newReferencesDeserializer()->deserialize( $serialization );
-		$this->assertReferencesEquals( $references, $newReferences );
+		$this->assertReferenceListEquals( $references, $newReferences );
 	}
 
 	public function referencesProvider() {
@@ -58,10 +58,10 @@ class ReferencesSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param References $expected
-	 * @param References $actual
+	 * @param ReferenceList $expected
+	 * @param ReferenceList $actual
 	 */
-	public function assertReferencesEquals( References $expected, References $actual ) {
-		$this->assertTrue( $actual->equals( $expected ), 'The two References are different' );
+	public function assertReferenceListEquals( ReferenceList $expected, ReferenceList $actual ) {
+		$this->assertTrue( $actual->equals( $expected ), 'The two ReferenceList are different' );
 	}
 }

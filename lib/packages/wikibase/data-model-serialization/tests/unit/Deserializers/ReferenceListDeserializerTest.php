@@ -5,7 +5,6 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 use Wikibase\DataModel\Deserializers\ReferenceListDeserializer;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\References;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\ReferenceListDeserializer
@@ -69,7 +68,7 @@ class ReferenceListDeserializerTest extends DeserializerBaseTest {
 	 * @dataProvider deserializationProvider
 	 */
 	public function testDeserialization( $object, $serialization ) {
-		$this->assertReferencesEquals(
+		$this->assertReferenceListEquals(
 			$object,
 			$this->buildDeserializer()->deserialize( $serialization )
 		);
@@ -96,10 +95,10 @@ class ReferenceListDeserializerTest extends DeserializerBaseTest {
 	}
 
 	/**
-	 * @param References $expected
-	 * @param References $actual
+	 * @param ReferenceList $expected
+	 * @param ReferenceList $actual
 	 */
-	public function assertReferencesEquals( References $expected, References $actual ) {
-		$this->assertTrue( $actual->equals( $expected ), 'The two References are different' );
+	public function assertReferenceListEquals( ReferenceList $expected, ReferenceList $actual ) {
+		$this->assertTrue( $actual->equals( $expected ), 'The two ReferenceList are different' );
 	}
 }

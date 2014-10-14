@@ -4,15 +4,15 @@ namespace Tests\Wikibase\DataModel\Serializers;
 
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\Serializers\ReferencesSerializer;
+use Wikibase\DataModel\Serializers\ReferenceListSerializer;
 
 /**
- * @covers Wikibase\DataModel\Serializers\ReferencesSerializer
+ * @covers Wikibase\DataModel\Serializers\ReferenceListSerializer
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ReferencesSerializerTest extends SerializerBaseTest {
+class ReferenceListSerializerTest extends SerializerBaseTest {
 
 	protected function buildSerializer() {
 		$referenceSerializerMock = $this->getMock( '\Serializers\Serializer' );
@@ -24,7 +24,7 @@ class ReferencesSerializerTest extends SerializerBaseTest {
 				'snaks' => array()
 			) ) );
 
-		return new ReferencesSerializer( $referenceSerializerMock );
+		return new ReferenceListSerializer( $referenceSerializerMock );
 	}
 
 	public function serializableProvider() {
