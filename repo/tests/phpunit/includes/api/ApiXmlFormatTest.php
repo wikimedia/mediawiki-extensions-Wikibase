@@ -134,22 +134,12 @@ class ApiXmlFormatTest extends \PHPUnit_Framework_TestCase {
 		$module->getResult()->setRawMode( $printer->getNeedsRawData() );
 		$module->execute();
 
-		$printer->setUnescapeAmps( false );
-		$printer->initPrinter( false );
+		$printer->initPrinter();
+		$printer->disable();
 
-		ob_start();
+		$printer->execute();
 
-		try {
-			$printer->execute();
-			$output = ob_get_clean();
-		} catch ( Exception $ex ) {
-			ob_end_clean();
-			throw $ex;
-		}
-
-		$printer->closePrinter();
-
-		return $output;
+		return $printer->getBuffer();
 	}
 
 	private function getEntityRevision() {
