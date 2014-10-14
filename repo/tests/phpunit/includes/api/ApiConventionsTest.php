@@ -62,7 +62,7 @@ class ApiConventionsTest extends PHPUnit_Framework_TestCase {
 		$this->assertNotEmpty( $module->$method(), 'the Module ' . $moduleClass . ' does not have the method ' . $method );
 		$this->assertNotEmpty( $descArray, 'the array returned by the method ' . $method . ' of module ' . $moduleClass . ' is empty' );
 		foreach ( $descArray as $desc ) {
-			$this->assertInternalType( 'string', $desc, 'the ' . $desc . '. value returned by the method ' . $method . ' of the module ' . $moduleClass . ' is not a string' );
+			$this->assertInstanceOf( 'Message', $desc, 'the value returned by the method ' . $method . ' of the module ' . $moduleClass . ' is not a Message object' );
 		}
 	}
 
