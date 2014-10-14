@@ -4,6 +4,9 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Term;
@@ -92,6 +95,86 @@ class TermSqlIndexTest extends TermIndexTest {
 			$obtainedTerm = array_shift( $obtainedTerms );
 
 			$this->assertEquals( $termText, $obtainedTerm->getText() );
+		}
+	}
+
+	/**
+	 * @dataProvider labelWithDescriptionConflictProvider
+	 */
+	public function testGetLabellWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $expected ) {
+
+		if ( wfGetDB( DB_MASTER )->getType() === 'mysql' ) {
+			// Mysql fails (http://bugs.mysql.com/bug.php?id=10327), so we cannot test this properly when using MySQL.
+			$this->markTestSkipped( 'Can\'t test self-joins on MySQL' );
+
+			return;
+		}
+
+		parent::testGetLabellWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $expected );
+	}
+
+	public function getMatchingTermsOptionsProvider() {
+		$labels = array(
+			'en' => new \Wikibase\DataModel\Term\Term( 'en', 'Foo' ),
+			'de' => new \Wikibase\DataModel\Term\Term( 'de', 'Fuh' ),
+		);
+
+		$descriptions = array(
+			'en' => new \Wikibase\DataModel\Term\Term( 'en', 'Bar' ),
+			'de' => new \Wikibase\DataModel\Term\Term( 'de', 'Bär' ),
+		);
+
+		$fingerprint = new Fingerprint(
+			new TermList( $labels ),
+			new TermList( $descriptions ),
+			new AliasGroupList( array() )
+		);
+
+		$label = new Term( array( 'termType' => Term::TYPE_LABEL ) );
+		$labelFooEn = new Term( array( 'termLanguage' => 'en', 'termType' => Term::TYPE_LABEL, 'termText' => 'Foo' ) );
+		$labelFuhDe = new Term( array( 'termLanguage' => 'de', 'termType' => Term::TYPE_LABEL, 'termText' => 'Fuh' ) );
+		$descriptionBarEn = new Term( array( 'termLanguage' => 'en', 'termType' => Term::TYPE_DESCRIPTION, 'termText' => 'Bar' ) );
+
+		return array(
+			'no options' => array(
+				$fingerprint,
+				array( $labelFooEn ),
+				array(),
+				array( $labelFooEn ),
+			),
+			'LIMIT options' => array(
+				$fingerprint,
+				array( $labelFooEn, $descriptionBarEn ),
+				array( 'LIMIT' => 1 ),
+				array( $descriptionBarEn ), // FIXME: This is not really well defined. Could be either of the two.
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider getMatchingTermsOptionsProvider
+	 */
+	public function testGetMatchingTerms_options( Fingerprint $fingerprint, array $queryTerms, array $options, array $expected ) {
+		$termIndex = $this->getTermIndex();
+		$termIndex->clear();
+
+		$item = Item::newEmpty();
+		$item->setId( 42 );
+		$item->setFingerprint( $fingerprint );
+
+		$termIndex->saveTermsOfEntity( $item );
+
+		$actual = $termIndex->getMatchingTerms( $queryTerms, null, null, $options );
+
+		$this->assertSameSize( $expected, $actual );
+
+		foreach ( $expected as $key => $expectedTerm ) {
+			$this->assertArrayHasKey( $key, $actual );
+
+			$actualTerm = $actual[$key];
+			$this->assertEquals( $expectedTerm->getType(), $actualTerm->getType(), 'termType' );
+			$this->assertEquals( $expectedTerm->getLanguage(), $actualTerm->getLanguage(), 'termLanguage' );
+			$this->assertEquals( $expectedTerm->getText(), $actualTerm->getText(), 'termText' );
 		}
 	}
 

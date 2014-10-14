@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 
@@ -13,7 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface TermIndex extends TermCombinationMatchFinder {
+interface TermIndex extends LabelConflictFinder {
 
 	/**
 	 * Returns the type, id tuples for the entities with the provided label in the specified language.

@@ -80,6 +80,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		return array(
 			'no label conflict' => array(
 				$world,
+				Item::ENTITY_TYPE,
 				array( 'en' => 'foo' ),
 				null,
 				null,
@@ -88,14 +89,25 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 			'label conflict' => array(
 				$world,
+				Item::ENTITY_TYPE,
 				array( 'en' => 'item label' ),
 				null,
 				null,
 				array( $labelError )
 			),
 
+			'other entity type' => array(
+				$world,
+				Property::ENTITY_TYPE,
+				array( 'en' => 'item label' ),
+				null,
+				null,
+				array()
+			),
+
 			'ignored label conflict' => array(
 				$world,
+				Item::ENTITY_TYPE,
 				array( 'en' => 'item label' ),
 				null,
 				new ItemId( 'Q42' ),
@@ -104,6 +116,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 			'no label/description conflict' => array(
 				$world,
+				Item::ENTITY_TYPE,
 				array( 'en' => 'item label' ),
 				array(),
 				null,
@@ -112,6 +125,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 			'label/description conflict' => array(
 				$world,
+				Item::ENTITY_TYPE,
 				array( 'en' => 'item label' ),
 				array( 'en' => 'item description' ),
 				null,
@@ -120,6 +134,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 			'ignored label/description conflict' => array(
 				$world,
+				Item::ENTITY_TYPE,
 				array( 'en' => 'item label' ),
 				array( 'en' => 'item description' ),
 				new ItemId( 'Q42' ),
@@ -131,10 +146,10 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 	/**
 	 * @dataProvider provideDetectTermConflicts
 	 */
-	public function testDetectTermConflicts( $world, $labels, $descriptions, $ignore, $expectedErrors ) {
+	public function testDetectTermConflicts( $world, $entityType, $labels, $descriptions, $ignore, $expectedErrors ) {
 		$detector = new LabelDescriptionDuplicateDetector( new MockTermIndex( $world ) );
 
-		$result = $detector->detectTermConflicts( $labels, $descriptions, $ignore );
+		$result = $detector->detectTermConflicts( $entityType, $labels, $descriptions, $ignore );
 
 		$this->assertResult( $result, $expectedErrors );
 	}
@@ -147,7 +162,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		$this->assertEquals( empty( $expectedErrors ), $result->isValid(), 'isValid()' );
 		$errors = $result->getErrors();
 
-		$this->assertEquals( count( $expectedErrors ), count( $errors ), 'Number of errors:' );
+		$this->assertSameSize( $expectedErrors, $errors, 'Number of errors:' );
 
 		foreach ( $expectedErrors as $i => $expectedError ) {
 			$error = $errors[$i];
