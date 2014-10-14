@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Wikibase\Lib\Store\LabelConflictFinder;
+
 /**
  * Interface to a cache for terms with both write and lookup methods.
  *
@@ -10,7 +12,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface TermIndex extends TermCombinationMatchFinder {
+interface TermIndex extends LabelConflictFinder {
 
 	/**
 	 * Returns the type, id tuples for the entities with the provided label in the specified language.

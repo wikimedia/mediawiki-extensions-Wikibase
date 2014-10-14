@@ -4,12 +4,13 @@ namespace Wikibase;
 
 use InvalidArgumentException;
 use ValueValidators\Result;
+use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Validators\UniquenessViolation;
 
 /**
  * Detector of label/description uniqueness constraint violations.
  *
- * @todo: Fold this into TermCombinationMatchFinder resp. TermIndex
+ * @todo: Fold this into LabelConflictFinder resp. TermIndex
  *
  * @since 0.5
  *
@@ -19,15 +20,15 @@ use Wikibase\Validators\UniquenessViolation;
 class LabelDescriptionDuplicateDetector {
 
 	/**
-	 * @var TermCombinationMatchFinder
+	 * @var LabelConflictFinder
 	 */
-	private $termFinder;
+	private $conflictFinder;
 
 	/**
-	 * @param TermCombinationMatchFinder $termFinder
+	 * @param LabelConflictFinder $conflictFinder
 	 */
-	public function __construct( TermCombinationMatchFinder $termFinder ) {
-		$this->termFinder = $termFinder;
+	public function __construct( LabelConflictFinder $conflictFinder ) {
+		$this->conflictFinder = $conflictFinder;
 	}
 
 	/**
@@ -74,7 +75,11 @@ class LabelDescriptionDuplicateDetector {
 			$errorCode = 'label-with-description-conflict';
 		}
 
-		$conflictingTerms = $this->findConflictingTerms( $termSpecs, $entityId );
+		$conflictingTerms = $this->conflictFinder->getLabelConflicts(
+			$entityId->getEntityType(),
+
+			$termSpecs, $entityId
+		);
 
 		if ( $conflictingTerms ) {
 			$errors = $this->termsToErrors( 'found conflicting terms', $errorCode, $conflictingTerms );
@@ -146,35 +151,6 @@ class LabelDescriptionDuplicateDetector {
 		}
 
 		return $termSpecs;
-	}
-
-	/**
-	 * @param array[] $termSpecs as returned by $this->build...ConflictSpecs()
-	 * @param EntityId $entityId
-	 *
-	 * @return Term[]
-	 */
-	private function findConflictingTerms( array $termSpecs, EntityId $entityId = null ) {
-		if ( empty( $termSpecs ) ) {
-			return array();
-		}
-
-		// FIXME: Do not run this when running test using MySQL as self joins fail on temporary tables.
-		if ( !defined( 'MW_PHPUNIT_TEST' )
-			|| !( $this->termFinder instanceof TermSqlIndex )
-			|| wfGetDB( DB_MASTER )->getType() !== 'mysql'
-		) {
-			$foundTerms = $this->termFinder->getMatchingTermCombination(
-				$termSpecs,
-				Term::TYPE_LABEL,
-				$entityId === null ? null : $entityId->getEntityType(),
-				$entityId
-			);
-		} else {
-			$foundTerms = array();
-		}
-
-		return $foundTerms;
 	}
 
 	/**

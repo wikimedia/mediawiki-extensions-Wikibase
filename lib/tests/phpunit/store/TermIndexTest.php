@@ -2,9 +2,11 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Settings;
 use Wikibase\Term;
 use Wikibase\TermIndex;
@@ -391,61 +393,128 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$this->assertEmpty( $extraTerms, 'Extra terms' );
 	}
 
-	public function testGetMatchingTermCombination() {
-		$lookup = $this->getTermIndex();
 
-		if ( defined( 'MW_PHPUNIT_TEST' )
-			&& wfGetDB( DB_MASTER )->getType() === 'mysql'
-			&& get_class( $lookup ) === 'Wikibase\TermSqlIndex' ) {
-			// Mysql fails (http://bugs.mysql.com/bug.php?id=10327), so we cannot test this properly when using MySQL.
-			$this->markTestSkipped( 'Can\'t test self-joins on MySQL' );
-			return;
-		}
+	public function termConflictProvider() {
+		$deFooBar1 = Item::newEmpty();
+		$deFooBar1->setId( new ItemId( 'Q1' ) );
+		$deFooBar1->setLabel( 'de', 'Foo' );
+		$deFooBar1->setDescription( 'de', 'Bar' );
 
-		$item0 = Item::newEmpty();
-		$item0->setLabel( 'en', 'joinedterms-0' );
-		$item0->setDescription( 'de', 'joinedterms-d0' );
+		$deBarFoo2 = Item::newEmpty();
+		$deBarFoo2->setId( new ItemId( 'Q2' ) );
+		$deBarFoo2->setLabel( 'de', 'Bar' );
+		$deBarFoo2->setDescription( 'de', 'Foo' );
 
-		$item0->setId( new ItemId( 'Q10' ) );
-		$id0 = $item0->getId()->getSerialization();
-		$lookup->saveTermsOfEntity( $item0 );
+		$enFooBar3 = Item::newEmpty();
+		$enFooBar3->setId( new ItemId( 'Q3' ) );
+		$enFooBar3->setLabel( 'en', 'Foo' );
+		$enFooBar3->setDescription( 'en', 'Bar' );
 
-		$terms = array(
-			$id0 => array(
-				new Term( array(
-					'termLanguage' => 'en',
-					'termText' => 'joinedterms-0',
-				) ),
-				new Term( array(
-					'termLanguage' => 'de',
-					'termText' => 'joinedterms-d0',
-					'termType' => Term::TYPE_DESCRIPTION,
-				) )
-			),
+		$enBarFoo4 = Item::newEmpty();
+		$enBarFoo4->setId( new ItemId( 'Q4' ) );
+		$enBarFoo4->setLabel( 'en', 'Bar' );
+		$enBarFoo4->setDescription( 'en', 'Foo' );
+
+		$deFooQuux5 = Item::newEmpty();
+		$deFooQuux5->setId( new ItemId( 'Q5' ) );
+		$deFooQuux5->setLabel( 'de', 'Foo' );
+		$deFooQuux5->setDescription( 'de', 'Quux' );
+
+		$deFooBarP6 = Property::newFromType( 'string' );
+		$deFooBarP6->setId( new PropertyId( 'P5' ) );
+		$deFooBarP6->setLabel( 'de', 'Foo' );
+		$deFooBarP6->setDescription( 'de', 'Bar' );
+
+		$entities = array(
+			$deFooBar1,
+			$deBarFoo2,
+			$enFooBar3,
+			$enBarFoo4,
+			$deFooQuux5,
+			$deFooBarP6,
 		);
 
-		$actual = $lookup->getMatchingTermCombination( $terms );
+		return array(
+			'by label' => array(
+				$entities,
+				null,
+				array( 'de' => 'Foo' ),
+				null,
+				null,
+				array( 'Q1', 'Q5', 'P6' ),
+			),
+			'by label, empty descriptions' => array(
+				$entities,
+				null,
+				array( 'de' => 'Foo' ),
+				array(),
+				null,
+				array(),
+			),
+			'by label, mismatching description' => array(
+				$entities,
+				null,
+				array( 'de' => 'Foo' ),
+				array( 'de' => 'XYZ' ),
+				null,
+				array(),
+			),
+			'by label and description' => array(
+				$entities,
+				null,
+				array( 'de' => 'Foo' ),
+				array( 'de' => 'Bar' ),
+				null,
+				array( 'Q1', 'P6' ),
+			),
+			'entity type' => array(
+				$entities,
+				Item::ENTITY_TYPE,
+				array( 'de' => 'Foo' ),
+				null,
+				null,
+				array( 'Q1', 'Q5' ),
+			),
+			'exclude entity id' => array(
+				$entities,
+				null,
+				array( 'de' => 'Foo' ),
+				null,
+				new ItemId( 'Q5' ),
+				array( 'Q1' ),
+			),
+			'two languages for label and description (with type)' => array(
+				$entities,
+				Item::ENTITY_TYPE,
+				array( 'de' => 'Foo', 'en' => 'Foo' ),
+				array( 'de' => 'Bar', 'en' => 'Bar' ),
+				null,
+				array( 'Q1', 'Q3' ),
+			),
+		);
+	}
 
-		$this->assertInternalType( 'array', $actual );
+	/**
+	 * @dataProvider termConflictProvider
+	 */
+	public function testGetLabelConflicts( $entities, $entityType, $labels, $descriptions, $exclude, $expected ) {
+		$termIndex = $this->getTermIndex();
+		$termIndex->clear();
 
-		/**
-		 * @var Term $term
-		 * @var Term $expected
-		 */
-		foreach ( $actual as $term ) {
-			$id = $term->getEntityId()->getSerialization();
-
-			$this->assertEquals( $id0, $id );
-
-			$isFirstElement = $term->getText() === 'joinedterms-0';
-			$expected = $terms[$id][$isFirstElement ? 0 : 1];
-
-			$this->assertEquals( $expected->getText(), $term->getText() );
-			$this->assertEquals( $expected->getLanguage(), $term->getLanguage() );
+		foreach ( $entities as $entity ) {
+			$termIndex->saveTermsOfEntity( $entity );
 		}
 
-		$actual = $lookup->getMatchingTermCombination( $terms, null, null, $item0->getId(), Item::ENTITY_TYPE );
-		$this->assertTrue( $actual === array() );
+		$matches = $termIndex->getLabelConflicts( $entityType, $labels, $descriptions, $exclude );
+		$actual = $this->getEntityIdStrings( $matches );
+
+		$this->assertArrayEquals( $expected, $actual, false, false );
+	}
+
+	private function getEntityIdStrings( array $terms ) {
+		return array_map( function( EntityId $id ) {
+			return $id->getSerialization();
+		}, $terms );
 	}
 
 	public function testGetTermsOfEntity() {

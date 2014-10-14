@@ -38,9 +38,16 @@ class MockTermIndex implements TermIndex {
 	}
 
 	/**
-	 * @see TermCombinationMatchFinder::getMatchingTermCombination
+	 * @see LabelConflictFinder::getLabelConflicts
+	 *
+	 * @param string $entityType The relevant entity type
+	 * @param string $labels The label to look for
+	 * @param string|null $descriptions The description to consider, if descriptions are relevant.
+	 * @param EntityId|null $excludeId Ignore conflicts with this entity ID (for ignoring self-conflicts)
+	 *
+	 * @return EntityId[]
 	 */
-	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, EntityId $excludeId = null ) {
+	public function getLabelConflicts( $entityType, $labels, $descriptions = null, \Wikibase\DataModel\Entity\EntityId $excludeId = null ) {
 		/**
 		 * @var Term[] $termPair
 		 * @var Term[] $matchingTerms
@@ -98,8 +105,7 @@ class MockTermIndex implements TermIndex {
 				continue;
 			}
 
-			$id = $storedTerm->getEntityId()->getSerialization();
-			$matchingTerms[$id][] = $storedTerm;
+			$matchingTerms[] = $storedTerm;
 		}
 
 		return $matchingTerms;
@@ -190,7 +196,7 @@ class MockTermIndex implements TermIndex {
 	 * @throws Exception always
 	 */
 	public function clear() {
-		throw new Exception( 'not implemented by mock class ' );
+		$this->terms = array();
 	}
 
 }
