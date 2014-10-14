@@ -10,7 +10,7 @@ use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Serializers\PropertySerializer;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;
-use Wikibase\DataModel\Serializers\ReferencesSerializer;
+use Wikibase\DataModel\Serializers\ReferenceListSerializer;
 use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Serializers\SnaksSerializer;
@@ -100,12 +100,12 @@ class SerializerFactory {
 	}
 
 	/**
-	 * Returns a Serializer that can serialize References objects.
+	 * Returns a Serializer that can serialize ReferenceList objects.
 	 *
 	 * @return Serializer
 	 */
 	public function newReferencesSerializer() {
-		return new ReferencesSerializer( $this->newReferenceSerializer() );
+		return new ReferenceListSerializer( $this->newReferenceSerializer() );
 	}
 
 	/**

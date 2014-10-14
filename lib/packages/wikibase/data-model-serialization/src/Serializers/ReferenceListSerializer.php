@@ -6,7 +6,7 @@ use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
-use Wikibase\DataModel\References;
+use Wikibase\DataModel\ReferenceList;
 
 /**
  * @since 0.1
@@ -14,7 +14,7 @@ use Wikibase\DataModel\References;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ReferencesSerializer implements DispatchableSerializer {
+class ReferenceListSerializer implements DispatchableSerializer {
 
 	/**
 	 * @var Serializer
@@ -36,7 +36,7 @@ class ReferencesSerializer implements DispatchableSerializer {
 	 * @return bool
 	 */
 	public function isSerializerFor( $object ) {
-		return $object instanceof References;
+		return $object instanceof ReferenceList;
 	}
 
 	/**
@@ -51,14 +51,14 @@ class ReferencesSerializer implements DispatchableSerializer {
 		if ( !$this->isSerializerFor( $object ) ) {
 			throw new UnsupportedObjectException(
 				$object,
-				'ReferencesSerializer can only serialize References objects'
+				'ReferenceListSerializer can only serialize ReferenceList objects'
 			);
 		}
 
 		return $this->getSerialized( $object );
 	}
 
-	private function getSerialized( References $references ) {
+	private function getSerialized( ReferenceList $references ) {
 		$serialization = array();
 
 		foreach( $references as $reference ) {

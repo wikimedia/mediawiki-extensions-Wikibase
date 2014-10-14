@@ -90,7 +90,7 @@ class DeserializerFactory {
 	}
 
 	/**
-	 * Returns a Deserializer that can deserialize References objects.
+	 * Returns a Deserializer that can deserialize ReferenceList objects.
 	 *
 	 * @return Deserializer
 	 */
