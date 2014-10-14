@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -67,8 +68,10 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 			new AliasGroupList( array() )
 		);
 
-		$this->assertTrue( $validator->validateFingerprint( $goodFingerprint )->isValid(), 'isValid(good)' );
-		$this->assertFalse( $validator->validateFingerprint( $labelDupeFingerprint )->isValid(), 'isValid(bad): label/description' );
+		$q99 = new ItemId( 'Q99' );
+
+		$this->assertTrue( $validator->validateFingerprint( $goodFingerprint, $q99 )->isValid(), 'isValid(good)' );
+		$this->assertFalse( $validator->validateFingerprint( $labelDupeFingerprint, $q99 )->isValid(), 'isValid(bad): label/description' );
 	}
 
 	public function testGetLanguageValidator() {

@@ -308,7 +308,7 @@ class ChangeOpTestMockProvider {
 		return Result::newSuccess();
 	}
 
-	public function detectTermConflicts( $labels, $descriptions, EntityId $entityId = null ) {
+	public function detectTermConflicts( $entityType, $labels, $descriptions, EntityId $entityId = null ) {
 		$code = ( ( $descriptions === null ) ? 'label-conflict' : 'label-with-description-conflict' );
 
 		if ( $entityId && $entityId->getSerialization() === 'P666' ) {
