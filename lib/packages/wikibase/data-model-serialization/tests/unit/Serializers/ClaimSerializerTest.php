@@ -60,7 +60,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				new Claim( new PropertyNoValueSnak( 42 ) )
 			),
 			array(
-				new Statement( new PropertyNoValueSnak( 42 ) )
+				new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) )
 			),
 		);
 	}
@@ -102,7 +102,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				'type' => 'statement',
 				'rank' => 'normal'
 			),
-			new Statement( new PropertyNoValueSnak( 42 ) )
+			new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) )
 		);
 
 		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
@@ -119,7 +119,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			$claim
 		);
 
-		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$claim->setRank( Claim::RANK_PREFERRED );
 		$serializations[] = array(
 			array(
@@ -133,7 +133,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			$claim
 		);
 
-		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$claim->setRank( Claim::RANK_DEPRECATED );
 		$serializations[] = array(
 			array(
@@ -147,7 +147,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			$claim
 		);
 
-		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$claim->setQualifiers( new SnakList( array() ) );
 		$serializations[] = array(
 			array(
@@ -161,7 +161,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			$claim
 		);
 
-		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$claim->setQualifiers( new SnakList( array(
 			new PropertyNoValueSnak( 42 )
 		) ) );
@@ -188,7 +188,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			$claim
 		);
 
-		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$claim->setReferences( new ReferenceList( array(
 			new Reference()
 		) ) );

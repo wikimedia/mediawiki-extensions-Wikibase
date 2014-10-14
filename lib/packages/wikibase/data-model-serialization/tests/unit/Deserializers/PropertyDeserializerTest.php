@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Claim\Claim;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\PropertyDeserializer
@@ -19,7 +20,7 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 	public function buildDeserializer() {
 		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 
-		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$claim->setGuid( 'test' );
 
 		$claimsDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
