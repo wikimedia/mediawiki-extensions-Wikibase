@@ -12,8 +12,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  * @group WikibaseDataModel
  * @group WikibaseSnak
  *
- * @group Database
- *
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
