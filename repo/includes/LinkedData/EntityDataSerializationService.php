@@ -569,15 +569,14 @@ class EntityDataSerializationService {
 		$this->generateApiResult( $entityRevision, $printer );
 
 		$printer->profileIn();
-		$printer->initPrinter( false );
-		$printer->setBufferResult( true );
+		$printer->initPrinter();
 
 		// Outputs the ApiResult held by the ApiMain module, which is hopefully the one we added the entity data to.
 		//NOTE: this can and will mess with the HTTP response!
 		$printer->execute();
 		$data = $printer->getBuffer();
 
-		$printer->closePrinter();
+		$printer->disable();
 		$printer->profileOut();
 
 		return $data;
