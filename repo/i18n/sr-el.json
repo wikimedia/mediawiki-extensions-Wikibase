@@ -177,6 +177,7 @@
 	"wikibase-item-summary-wbsetaliases-remove": "Uklonjeno [$2] {{PLURAL:$1|pseudonim|pseudonima}}",
 	"wikibase-item-summary-wbsetsitelink-add": "Dodata veza ka [$2]",
 	"wikibase-item-summary-wbsetsitelink-set": "Izmenjena veza ka [$2]",
+	"wikibase-item-summary-wbsetsitelink-set-both": "Promenjena veza i značka za [$2]",
 	"wikibase-item-summary-wbsetsitelink-remove": "Uklonjena veza ka [$2]",
 	"wikibase-item-summary-wblinktitles-create": "Napravljena stavka kako bi povezala stranice",
 	"wikibase-item-summary-wblinktitles-connect": "Dodata jezička veza za povezivanje stranica",

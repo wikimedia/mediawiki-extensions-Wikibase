@@ -69,7 +69,7 @@
 	"wikibase-pageinfo-entity-id": "A link to the corresponding Wikibase Item",
 	"wikibase-pageinfo-entity-id-none": "The page is not linked with a wikibase item.\n{{Identical|None}}",
 	"wikibase-property-render-error": "Error message shown when the #property parser function fails to render a property value.\n\nParameters:\n* $1 - the property ID or name\n* $2 - the original error message (this is typically in English and may be rather technical)",
-	"wikibase-otherprojects": "Label of the sidebar section containing links to other projects.\n{{Identical|Other project}}",
+	"wikibase-otherprojects": "Label of the sidebar section containing links to other projects.\n\nAlso used in {{msg-mw|Wikibase-otherprojects-beta-description}}\n{{Identical|Other project}}",
 	"wikibase-otherprojects-beta-message": "Used as checkbox label for the \"other projects\" beta feature.\n\nThe description for this label is {{msg-mw|wikibase-otherprojects-beta-description}}",
-	"wikibase-otherprojects-beta-description": "Description for the \"other projects\" beta feature.\n\nThis description is for the checkbox label {{msg-mw|wikibase-otherprojects-beta-label}}."
+	"wikibase-otherprojects-beta-description": "Description for the \"other projects\" beta feature.\n\nThis description is for the checkbox label {{msg-mw|wikibase-otherprojects-beta-label}}.\n\nRefers to {{msg-mw|Wikibase-otherprojects}}."
 }
