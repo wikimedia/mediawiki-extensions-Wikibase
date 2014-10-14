@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_db9301a5",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimview.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-10-14T14:10:06Z",
+      "side": 1,
+      "message": "entityChangersFactory does not seem to be used.",
+      "revId": "cafe8c177317dd2f51370439f2379b5bf8db4c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
