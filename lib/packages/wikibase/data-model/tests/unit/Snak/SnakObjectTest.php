@@ -32,7 +32,7 @@ abstract class SnakObjectTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	public abstract function constructorProvider();
 
@@ -114,7 +114,6 @@ abstract class SnakObjectTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * This test is a safeguard to make sure hashes are not changed unintentionally.
-	 * @see EntityIdTest::testSerializationStability
 	 */
 	public abstract function testHashStability();
 

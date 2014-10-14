@@ -39,7 +39,6 @@ class PropertyValueSnakTest extends SnakObjectTest {
 
 	/**
 	 * This test is a safeguard to make sure hashes are not changed unintentionally.
-	 * @see EntityIdTest::testSerializationStability
 	 */
 	public function testHashStability() {
 		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
