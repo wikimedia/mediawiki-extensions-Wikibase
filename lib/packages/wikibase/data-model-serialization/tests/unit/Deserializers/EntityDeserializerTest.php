@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -27,7 +28,7 @@ class EntityDeserializerTest extends DeserializerBaseTest {
 			->with( $this->equalTo( 'Q42' ) )
 			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
 
-		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$claim->setGuid( 'test' );
 
 		$claimsDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );

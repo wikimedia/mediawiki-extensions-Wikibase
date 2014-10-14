@@ -40,7 +40,7 @@ class ClaimsSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$claim2 = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim2->setGuid( 'test2' );
 
-		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$statement->setGuid( 'teststatement' );
 
 		return array(

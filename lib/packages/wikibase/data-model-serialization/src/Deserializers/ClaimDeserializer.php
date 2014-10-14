@@ -84,7 +84,7 @@ class ClaimDeserializer implements DispatchableDeserializer {
 	private function getDeserialized( array $serialization ) {
 		$mainSnak = $this->snakDeserializer->deserialize( $serialization['mainsnak'] );
 
-		$claim = $serialization['type'] === 'statement' ? new Statement( $mainSnak ) : new Claim( $mainSnak );
+		$claim = $serialization['type'] === 'statement' ? new Statement( new Claim( $mainSnak ) ) : new Claim( $mainSnak );
 
 		$this->setGuidFromSerialization( $serialization, $claim );
 		$this->setQualifiersFromSerialization( $serialization, $claim );
