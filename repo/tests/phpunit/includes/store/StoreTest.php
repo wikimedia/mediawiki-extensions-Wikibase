@@ -67,4 +67,20 @@ class StoreTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Wikibase\IdGenerator', $store->newIdGenerator() );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Store $store
+	 */
+	public function testGetTermLookup( Store $store ) {
+		$this->assertInstanceOf( 'Wikibase\Lib\Store\TermLookup', $store->getTermLookup() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Store $store
+	 */
+	public function testGetTermsLookup( Store $store ) {
+		$this->assertInstanceOf( 'Wikibase\Lib\Store\TermsLookup', $store->getTermsLookup() );
+	}
+
 }

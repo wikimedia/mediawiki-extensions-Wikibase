@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\TermLookupService;
 
 /**
  * @covers Wikibase\Lib\EntityIdLabelFormatter
@@ -158,7 +159,9 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @param FormatterOptions $formatterOptions
 	 */
 	public function testParseWithValidArguments( $entityId, $expectedString, FormatterOptions $formatterOptions ) {
-		$formatter = new EntityIdLabelFormatter( $formatterOptions, $this->newEntityLoader() );
+		$mockRepo = $this->newEntityLoader();
+		$termLookup = new TermLookupService( $mockRepo );
+		$formatter = new EntityIdLabelFormatter( $formatterOptions, $mockRepo, $termLookup );
 
 		$formattedValue = $formatter->format( $entityId );
 

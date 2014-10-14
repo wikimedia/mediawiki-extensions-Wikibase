@@ -12,6 +12,7 @@ use Revision;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\CachingTermsLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityLookup;
@@ -22,6 +23,10 @@ use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\Lib\Store\TermLookup;
+use Wikibase\Lib\Store\TermLookupService;
+use Wikibase\Lib\Store\TermsLookup;
+use Wikibase\Lib\Store\SQL\TermsSQLLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
@@ -671,6 +676,33 @@ class SqlStore implements Store {
 		}
 
 		return $this->changesTable;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return TermLookup
+	 */
+	public function getTermLookup() {
+		$termsLookup = $this->getTermsLookup();
+
+		return new TermLookupService( $termsLookup );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return TermsLookup
+	 */
+	public function getTermsLookup() {
+		$termsSQLLookup = new TermsSQLLookup( $this->getTermIndex() );
+
+		return new CachingTermsLookup(
+			$termsSQLLookup,
+			wfGetCache( $this->cacheType ),
+			$this->cacheDuration,
+			$this->cachePrefix . ':TermsLookup'
+		);
 	}
 
 }

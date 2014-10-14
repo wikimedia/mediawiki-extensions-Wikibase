@@ -7,6 +7,7 @@ use ObjectCache;
 use Site;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\CachingTermsLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -14,7 +15,11 @@ use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\Lib\Store\TermLookup;
+use Wikibase\Lib\Store\TermLookupService;
+use Wikibase\Lib\Store\TermsLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\Lib\Store\SQL\TermsSQLLookup;
 
 /**
  * Implementation of the client store interface using direct access to the repository's
@@ -269,7 +274,7 @@ class DirectSqlStore implements ClientStore {
 	 */
 	protected function newTermIndex() {
 		//TODO: Get $stringNormalizer from WikibaseClient?
-		//      Can't really pass this via the constructor...
+		//  Can't really pass this via the constructor...
 		$stringNormalizer = new StringNormalizer();
 		return new TermSqlIndex( $stringNormalizer , $this->repoWiki );
 	}
@@ -372,4 +377,31 @@ class DirectSqlStore implements ClientStore {
 			return new DummyPropertyInfoStore();
 		}
 	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return TermLookup
+	 */
+	public function getTermLookup() {
+		$termsLookup = $this->getTermsLookup();
+		return new TermLookupService( $termsLookup );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return TermsLookup
+	 */
+	public function getTermsLookup() {
+		$termsSQLLookup = new TermsSQLLookup( $this->getTermIndex() );
+
+		return new CachingTermsLookup(
+			$termsSQLLookup,
+			wfGetCache( $this->cacheType ),
+			$this->cacheDuration,
+			$this->cachePrefix . ':TermsLookup'
+		);
+	}
+
 }

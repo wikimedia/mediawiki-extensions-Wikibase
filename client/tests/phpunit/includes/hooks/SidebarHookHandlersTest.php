@@ -23,6 +23,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
+use Wikibase\Lib\Store\TermLookupService;
 use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -197,7 +198,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		);
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$mockRepo,
+			new TermLookupService( $mockRepo ),
 			array( 'Q17' => 'featured' ),
 			$en
 		);

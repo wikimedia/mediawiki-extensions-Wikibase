@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityContent;
+use Wikibase\Lib\Store\CachingTermsLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoStore;
@@ -50,6 +51,7 @@ class PropertyHandler extends EntityHandler {
 	/**
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
+	 * @param CachingTermsLookup $termsLookup
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
 	 * @param ValidatorErrorLocalizer $errorLocalizer
@@ -60,6 +62,7 @@ class PropertyHandler extends EntityHandler {
 	public function __construct(
 		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
+		CachingTermsLookup $termsLookup,
 		EntityContentDataCodec $contentCodec,
 		$preSaveValidators,
 		ValidatorErrorLocalizer $errorLocalizer,
@@ -71,6 +74,7 @@ class PropertyHandler extends EntityHandler {
 			CONTENT_MODEL_WIKIBASE_PROPERTY,
 			$entityPerPage,
 			$termIndex,
+			$termsLookup,
 			$contentCodec,
 			$preSaveValidators,
 			$errorLocalizer,

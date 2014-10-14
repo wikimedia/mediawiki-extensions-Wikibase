@@ -480,6 +480,7 @@ class WikibaseRepo {
 
 		return new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
+			$this->getStore()->getTermLookup(),
 			$wgContLang,
 			$this->getEntityTitleLookup()
 		);
@@ -853,12 +854,14 @@ class WikibaseRepo {
 		$codec = $this->getEntityContentDataCodec();
 		$entityPerPage = $this->getStore()->newEntityPerPage();
 		$termIndex = $this->getStore()->getTermIndex();
+		$termsLookup = $this->getStore()->getTermsLookup();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
 		$siteLinkStore = $this->getStore()->newSiteLinkCache();
 
 		$handler = new ItemHandler(
 			$entityPerPage,
 			$termIndex,
+			$termsLookup,
 			$codec,
 			array( $validator ),
 			$errorLocalizer,
@@ -878,12 +881,14 @@ class WikibaseRepo {
 		$codec = $this->getEntityContentDataCodec();
 		$entityPerPage = $this->getStore()->newEntityPerPage();
 		$termIndex = $this->getStore()->getTermIndex();
+		$termsLookup = $this->getStore()->getTermsLookup();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
 		$propertyInfoStore = $this->getStore()->getPropertyInfoStore();
 
 		$handler = new PropertyHandler(
 			$entityPerPage,
 			$termIndex,
+			$termsLookup,
 			$codec,
 			array( $validator ),
 			$errorLocalizer,

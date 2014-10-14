@@ -15,6 +15,7 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\TermLookup;
 
 /**
  * Defines the formatters for DataValues supported by Wikibase.
@@ -110,10 +111,12 @@ class WikibaseValueFormatterBuilders {
 
 	public function __construct(
 		EntityLookup $entityLookup,
+		TermLookup $termLookup,
 		Language $defaultLanguage,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		$this->entityLookup = $entityLookup;
+		$this->termLookup = $termLookup;
 		$this->defaultLanguage = $defaultLanguage;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
@@ -509,7 +512,11 @@ class WikibaseValueFormatterBuilders {
 		FormatterOptions $options,
 		WikibaseValueFormatterBuilders $builders
 	) {
-		return new EntityIdLabelFormatter( $options, $builders->entityLookup );
+		return new EntityIdLabelFormatter(
+			$options,
+			$builders->entityLookup,
+			$builders->termLookup
+		);
 	}
 
 	/**
@@ -528,6 +535,7 @@ class WikibaseValueFormatterBuilders {
 		return new EntityIdHtmlLinkFormatter(
 			$options,
 			$builders->entityLookup,
+			$builders->termLookup,
 			$builders->entityTitleLookup
 		);
 	}

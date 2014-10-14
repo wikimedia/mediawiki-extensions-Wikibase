@@ -7,6 +7,7 @@ use DataValues\StringValue;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -38,11 +39,33 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseSnakFormatterBuilders
 	 */
 	public function newBuilders( $propertyType, EntityId $entityId ) {
-		$typeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
-		$typeLookup->expects( $this->any() )
+		$entity = EntityFactory::singleton()->newEmpty( $entityId->getEntityType() );
+		$entity->setId( $entityId );
+		$entity->setLabel( 'en', 'Label for ' . $entityId->getSerialization() );
+
+		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
+			$this->getEntityLookup( $entity ),
+			$this->getTermLookup(),
+			Language::factory( 'en' )
+		);
+
+		return new WikibaseSnakFormatterBuilders(
+			$valueFormatterBuilders,
+			$this->getPropertyDataTypeLookup( $propertyType ),
+			$this->getPropertyDataTypeFactory()
+		);
+	}
+
+	private function getPropertyDataTypeLookup( $propertyType ) {
+		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
+		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( $propertyType ) );
 
+		return $dataTypeLookup;
+	}
+
+	private function getPropertyDataTypeFactory() {
 		$typeMap = array(
 			'url' => 'string',
 			'string' => 'string',
@@ -50,26 +73,41 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			'globecoordinate' => 'globecoordinate',
 		);
 
-		$typeFactory = $this->getMock( 'DataTypes\DataTypeFactory' );
-		$typeFactory->expects( $this->any() )
+		$dataTypeFactory = $this->getMock( 'DataTypes\DataTypeFactory' );
+		$dataTypeFactory->expects( $this->any() )
 			->method( 'getType' )
 			->will( $this->returnCallback( function ( $id ) use ( $typeMap ) {
 				return new DataType( $id, $typeMap[$id], array() );
 			} ) );
 
-		$entity = EntityFactory::singleton()->newEmpty( $entityId->getEntityType() );
-		$entity->setId( $entityId );
-		$entity->setLabel( 'en', 'Label for ' . $entityId->getSerialization() );
+		return $dataTypeFactory;
+	}
 
+	private function getEntityLookup( Entity $entity ) {
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
-		$lang = Language::factory( 'en' );
+		return $entityLookup;
+	}
 
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders( $entityLookup, $lang );
-		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup, $typeFactory );
+	private function getTermLookup() {
+		$termLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\TermLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$termLookup->expects( $this->any() )
+			->method( 'getLabels' )
+			->will( $this->returnCallback( function( EntityId $entityId ) {
+				if ( $entityId->getSerialization() === 'Q5' ) {
+					return array( 'en' => 'Label for Q5' );
+				} else {
+					return array();
+				}
+			} ) );
+
+		return $termLookup;
 	}
 
 	public function testGetSnakFormatterBuildersForFormats() {

@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
+use Wikibase\Lib\Store\CachingTermsLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Repo\Store\EntityPerPage;
@@ -35,6 +36,7 @@ class ItemHandler extends EntityHandler {
 	/**
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
+	 * @param CachingTermsLookup $termsLookup
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
 	 * @param ValidatorErrorLocalizer $errorLocalizer
@@ -44,6 +46,7 @@ class ItemHandler extends EntityHandler {
 	public function __construct(
 		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
+		CachingTermsLookup $termsLookup,
 		EntityContentDataCodec $contentCodec,
 		array $preSaveValidators,
 		ValidatorErrorLocalizer $errorLocalizer,
@@ -55,6 +58,7 @@ class ItemHandler extends EntityHandler {
 			CONTENT_MODEL_WIKIBASE_ITEM,
 			$entityPerPage,
 			$termIndex,
+			$termsLookup,
 			$contentCodec,
 			$preSaveValidators,
 			$errorLocalizer,

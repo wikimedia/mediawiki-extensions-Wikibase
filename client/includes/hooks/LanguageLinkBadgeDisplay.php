@@ -9,7 +9,7 @@ use Sanitizer;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\TermLookup;
 
 /**
  * Provides access to the badges of the current page's sitelinks
@@ -24,9 +24,9 @@ use Wikibase\Lib\Store\EntityLookup;
 class LanguageLinkBadgeDisplay {
 
 	/**
-	 * @var EntityLookup
+	 * @var TermLookup
 	 */
-	protected $entityLookup;
+	protected $termLookup;
 
 	/**
 	 * @var array
@@ -39,12 +39,12 @@ class LanguageLinkBadgeDisplay {
 	protected $language;
 
 	/**
-	 * @param EntityLookup $entityLookup
+	 * @param TermLookup $termLookup
 	 * @param array $badgeClassNames
 	 * @param Language $language
 	 */
-	public function __construct( EntityLookup $entityLookup, array $badgeClassNames, Language $language ) {
-		$this->entityLookup = $entityLookup;
+	public function __construct( TermLookup $termLookup, array $badgeClassNames, Language $language ) {
+		$this->termLookup = $termLookup;
 		$this->badgeClassNames = $badgeClassNames;
 		$this->language = $language;
 	}
@@ -166,16 +166,7 @@ class LanguageLinkBadgeDisplay {
 	 * @return string|null
 	 */
 	private function getLabel( ItemId $badge ) {
-		$entity = $this->entityLookup->getEntity( $badge );
-		if ( !$entity ) {
-			return null;
-		}
-
-		$title = $entity->getLabel( $this->language->getCode() );
-		if ( !$title ) {
-			return null;
-		}
-		return $title;
+		return $this->termLookup->getLabel( $badge, $this->language->getCode() );
 	}
 
 }

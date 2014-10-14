@@ -22,6 +22,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityContent;
+use Wikibase\Lib\Store\CachingTermsLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\NamespaceUtils;
@@ -50,6 +51,11 @@ abstract class EntityHandler extends ContentHandler {
 	 * @var TermIndex
 	 */
 	private $termIndex;
+
+	/**
+	 * @var CachingTermsLookup
+	 */
+	private $termsLookup;
 
 	/**
 	 * @var EntityContentDataCodec
@@ -91,6 +97,7 @@ abstract class EntityHandler extends ContentHandler {
 		$modelId,
 		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
+		CachingTermsLookup $termsLookup,
 		EntityContentDataCodec $contentCodec,
 		array $preSaveValidators,
 		ValidatorErrorLocalizer $errorLocalizer,
@@ -107,6 +114,7 @@ abstract class EntityHandler extends ContentHandler {
 
 		$this->entityPerPage = $entityPerPage;
 		$this->termIndex = $termIndex;
+		$this->termsLookup = $termsLookup;
 		$this->contentCodec = $contentCodec;
 		$this->preSaveValidators = $preSaveValidators;
 		$this->errorLocalizer = $errorLocalizer;
@@ -621,6 +629,11 @@ abstract class EntityHandler extends ContentHandler {
 			$title->getArticleID()
 		);
 
+		$updates[] = new DataUpdateAdapter(
+			array( $this->termsLookup, 'invalidateCacheForEntityId' ),
+			$entityId
+		);
+
 		return $updates;
 	}
 
@@ -674,6 +687,11 @@ abstract class EntityHandler extends ContentHandler {
 				$content->getEntity()
 			);
 		}
+
+		$updates[] = new DataUpdateAdapter(
+			array( $this->termsLookup, 'invalidateCacheForEntityId' ),
+			$entityId
+		);
 
 		// Call the WikibaseEntityModificationUpdate hook.
 		// Do this after doing all well-known updates.

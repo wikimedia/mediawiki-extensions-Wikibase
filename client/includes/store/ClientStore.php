@@ -4,6 +4,8 @@ namespace Wikibase;
 
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\TermLookup;
+use Wikibase\Lib\Store\TermsLookup;
 
 /**
  * Client store interface.
@@ -87,4 +89,15 @@ interface ClientStore {
 	 * @since 0.2
 	 */
 	public function rebuild();
+
+	/**
+	 * @returns TermsLookup
+	 */
+	public function getTermsLookup();
+
+	/**
+	 * @return TermLookup
+	 */
+	public function getTermLookup();
+
 }

@@ -87,11 +87,7 @@ class SidebarHookHandlers {
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		$badgeClassNames = $settings->getSetting( 'badgeClassNames' );
 
-		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$entityLookup,
-			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
-			$wgLang
-		);
+		$badgeDisplay = $wikibaseClient->getLanguageLinkBadgeDisplay( $wgLang );
 
 		$interwikiSorter = new InterwikiSorter(
 			$settings->getSetting( 'sort' ),

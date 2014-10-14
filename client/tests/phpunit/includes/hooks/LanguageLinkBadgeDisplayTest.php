@@ -12,6 +12,7 @@ use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\TermLookupService;
 
 /**
  * @covers Wikibase\Client\Hooks\LanguageLinkBadgeDisplay
@@ -70,7 +71,7 @@ class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 		$badgeClassNames = array( 'Q4' => 'foo', 'Q3' => 'bar' );
 
 		return new LanguageLinkBadgeDisplay(
-			$mockRepo,
+			new TermLookupService( $mockRepo ),
 			$badgeClassNames,
 			Language::factory( 'de' )
 		);

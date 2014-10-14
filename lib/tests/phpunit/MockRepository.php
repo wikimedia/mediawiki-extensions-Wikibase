@@ -24,6 +24,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Store\TermsLookup;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 
 /**
@@ -39,7 +40,8 @@ class MockRepository implements
 	EntityRevisionLookup,
 	EntityStore,
 	PropertyDataTypeLookup,
-	SiteLinkLookup
+	SiteLinkLookup,
+	TermsLookup
 {
 
 	/**
@@ -851,6 +853,27 @@ class MockRepository implements
 		}
 
 		return null;
+	}
+
+	/**
+	 * @see TermsLookup::getTermsByTermType
+	 */
+	public function getTermsByTermType( EntityId $entityId, $termType ) {
+		try {
+			$entity = $this->getEntity( $entityId );
+		} catch ( UnresolvedRedirectException $ex ) {
+			return array();
+		}
+
+		if ( !$entity ) {
+			return array();
+		}
+
+		if ( $termType === 'label' ) {
+			return $entity->getLabels();
+		} elseif ( $termType === 'description' ) {
+			return $entity->getDescriptions();
+		}
 	}
 
 }

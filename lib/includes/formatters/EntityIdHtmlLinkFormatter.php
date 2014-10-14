@@ -9,6 +9,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\TermLookup;
 
 /**
  * Formats entity IDs by generating an HTML link to the corresponding page title.
@@ -29,9 +30,10 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	public function __construct(
 		FormatterOptions $options,
 		EntityLookup $entityLookup,
+		TermLookup $termLookup,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
-		parent::__construct( $options, $entityLookup );
+		parent::__construct( $options, $entityLookup, $termLookup );
 
 		$this->entityTitleLookup = $entityTitleLookup;
 	}

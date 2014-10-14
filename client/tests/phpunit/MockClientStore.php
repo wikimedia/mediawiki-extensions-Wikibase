@@ -4,6 +4,9 @@ namespace Wikibase\Test;
 
 use Wikibase\ClientStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\TermLookup;
+use Wikibase\Lib\Store\TermLookupService;
+use Wikibase\Lib\Store\TermsLookup;
 use Wikibase\PropertyInfoStore;
 
 /**
@@ -62,4 +65,19 @@ class MockClientStore implements ClientStore {
 		}
 		return $mockPropertyInfoStore;
 	}
+
+	/**
+	 * @return TermLookup
+	 */
+	public function getTermLookup() {
+		return new TermLookupService( $this->getMock() );
+	}
+
+	/**
+	 * @return TermsLookup
+	 */
+	public function getTermsLookup() {
+		return $this->getMock();
+	}
+
 }

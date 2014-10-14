@@ -11,6 +11,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -49,12 +50,34 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		$entity->setId( $entityId );
 		$entity->setLabel( 'en', 'Label for ' . $entityId->getSerialization() );
 
+		return new WikibaseValueFormatterBuilders(
+			$this->getEntityLookup( $entity ),
+			$this->getTermLookup(),
+			Language::factory( 'en' )
+		);
+	}
+
+	private function getEntityLookup( Entity $entity ) {
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
-		return new WikibaseValueFormatterBuilders( $entityLookup, Language::factory( 'en' ) );
+		return $entityLookup;
+	}
+
+	private function getTermLookup() {
+		$termLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\TermLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$termLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnCallback( function( EntityId $entityId ) {
+				return $entityId->getSerialization() === 'Q5' ? 'Label for Q5' : null;
+			} ) );
+
+		return $termLookup;
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {

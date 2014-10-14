@@ -8,6 +8,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\SiteLinkCache;
+use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Repo\Store\EntityPerPage;
 
 /**
@@ -143,5 +144,12 @@ interface Store {
 	 * @return ChangesTable
 	 */
 	public function getChangesTable();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return TermLookup
+	 */
+	public function getTermLookup();
 
 }
