@@ -30,12 +30,12 @@ the git repository and take care of loading yourself.
 To add this package as a local, per-project dependency to your project, simply add a
 dependency on `wikibase/data-model` to your project's `composer.json` file.
 Here is a minimal example of a `composer.json` file that just defines a dependency on
-Wikibase DataModel 1.0:
+Wikibase DataModel 2.0:
 
 ```js
 {
     "require": {
-        "wikibase/data-model": "1.0.*"
+        "wikibase/data-model": "2.0.*"
     }
 }
 ```
