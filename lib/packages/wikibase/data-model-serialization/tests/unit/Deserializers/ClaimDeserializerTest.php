@@ -350,4 +350,29 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 
 		$this->assertEquals( $claim->getHash(), $claimDeserializer->deserialize( $serialization )->getHash() );
 	}
+
+	public function testQualifiersOrderDeserializationWithTypeError() {
+		$serialization = array(
+			'mainsnak' => array(
+				'snaktype' => 'novalue',
+				'property' => 'P42'
+			),
+			'qualifiers' => array(
+				'P42' => array(
+					array(
+						'snaktype' => 'novalue',
+						'property' => 'P42'
+					)
+				)
+			),
+			'qualifiers-order' => 'stringInsteadOfArray',
+			'type' => 'claim'
+		);
+
+		$deserializer = $this->buildDeserializer();
+
+		$this->setExpectedException( 'Deserializers\Exceptions\InvalidAttributeException' );
+		$deserializer->deserialize( $serialization );
+	}
+
 }
