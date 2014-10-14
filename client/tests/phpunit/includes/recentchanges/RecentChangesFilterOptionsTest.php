@@ -2,6 +2,7 @@
 namespace Wikibase\Test;
 
 use FormOptions;
+use User;
 use Wikibase\Client\RecentChanges\RecentChangesFilterOptions;
 use Wikibase\Client\WikibaseClient;
 
@@ -16,20 +17,32 @@ use Wikibase\Client\WikibaseClient;
  * @author Marius Hoch < hoo@online.de >
  */
 class RecentChangesFilterOptionsTest extends \MediaWikiTestCase {
+	public function setUp() {
+		parent::setUp();
+
+		$user = User::newFromName( 'RecentChangesFilterOptionsTest' );
+		$this->setMwGlobals( 'wgUser', $user );
+	}
+
 	/**
 	 * @dataProvider provideShowWikibaseEdits
 	 *
 	 * @param bool $expected
 	 * @param bool $showExternalRecentChanges
 	 * @param bool $hideWikibase
+	 * @param bool $useNewRc
 	 */
 	public function testShowWikibaseEdits(
 		$expected,
 		$showExternalRecentChanges,
-		$hideWikibase
+		$hideWikibase,
+		$useNewRc
 	) {
+		global $wgUser; // Set by setUp
+
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$oldShowExternal = $settings->getSetting( 'showExternalRecentChanges' );
+		$wgUser->setOption( 'usenewrc', $useNewRc );
 
 		$settings->setSetting( 'showExternalRecentChanges', $showExternalRecentChanges );
 		$opts = new FormOptions();
@@ -43,13 +56,36 @@ class RecentChangesFilterOptionsTest extends \MediaWikiTestCase {
 
 	public function provideShowWikibaseEdits() {
 		return array(
-			array( true, true, false ),
-			// hidewikidata set
-			array( false, true, true ),
-			// showExternalRecentChanges is false
-			array( false, false, false ),
-			// hidewikidata set and showExternalRecentChanges is false
-			array( false, false, true ),
+			'Wikibase shown' => array(
+				'expected' => true,
+				'showExternalRecentChanges' => true,
+				'hideWikibase' => false,
+				'useNewRc' => false
+			),
+			'hidewikidata set' => array(
+				'expected' => false,
+				'showExternalRecentChanges' => true,
+				'hideWikibase' => true,
+				'useNewRc' => false
+			),
+			'showExternalRecentChanges is false' => array(
+				'expected' => false,
+				'showExternalRecentChanges' => false,
+				'hideWikibase' => false,
+				'useNewRc' => false
+			),
+			'hidewikidata set and showExternalRecentChanges are false' => array(
+				'expected' => false,
+				'showExternalRecentChanges' => false,
+				'hideWikibase' => true,
+				'useNewRc' => false
+			),
+			'usenewrc user option true' => array(
+				'expected' => false,
+				'showExternalRecentChanges' => true,
+				'hideWikibase' => false,
+				'useNewRc' => true
+			),
 		);
 	}
 }
