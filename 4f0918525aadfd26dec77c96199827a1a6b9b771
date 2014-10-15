@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_42ccd68c",
+        "filename": "lib/includes/store/LabelConflictFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-15T21:44:15Z",
+      "side": 1,
+      "message": "wioth? :D",
+      "revId": "4f0918525aadfd26dec77c96199827a1a6b9b771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_628c72dc",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-15T21:44:15Z",
+      "side": 1,
+      "message": "array $labels The labels to look for (this is correct in the interface definition)",
+      "revId": "4f0918525aadfd26dec77c96199827a1a6b9b771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_02680ef1",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-15T21:44:15Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "4f0918525aadfd26dec77c96199827a1a6b9b771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_02924e00",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-15T21:44:15Z",
+      "side": 1,
+      "message": "you probably want to use a use statement rather than using the qualified class name.",
+      "revId": "4f0918525aadfd26dec77c96199827a1a6b9b771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_82fe5e34",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-15T21:44:15Z",
+      "side": 1,
+      "message": "Why not use a type hint?",
+      "revId": "4f0918525aadfd26dec77c96199827a1a6b9b771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_e2a08240",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-15T21:44:15Z",
+      "side": 1,
+      "message": "could also be done using an array type hint (these work with default null too)",
+      "revId": "4f0918525aadfd26dec77c96199827a1a6b9b771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_6259d25c",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-15T21:44:15Z",
+      "side": 1,
+      "message": "double plural here sounds weird... dunno whether it\u0027s correct, though... aude?",
+      "revId": "4f0918525aadfd26dec77c96199827a1a6b9b771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_655b1c27",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-15T21:44:15Z",
+      "side": 1,
+      "message": "I\u0027m surprised this doesn\u0027t put a php notice",
+      "revId": "4f0918525aadfd26dec77c96199827a1a6b9b771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_a5b0443f",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-15T21:44:15Z",
+      "side": 1,
+      "message": "doesn\u0027t",
+      "revId": "4f0918525aadfd26dec77c96199827a1a6b9b771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
