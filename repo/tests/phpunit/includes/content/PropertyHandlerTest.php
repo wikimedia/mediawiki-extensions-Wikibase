@@ -37,7 +37,7 @@ class PropertyHandlerTest extends EntityHandlerTest {
 	 * @return string
 	 */
 	public function getClassName() {
-		return '\Wikibase\Repo\Content\PropertyHandler';
+		return 'Wikibase\Repo\Content\PropertyHandler';
 	}
 
 	/**

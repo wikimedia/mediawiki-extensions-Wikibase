@@ -41,7 +41,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 	 * @return string
 	 */
 	public function getClassName() {
-		return '\Wikibase\Repo\Content\ItemHandler';
+		return 'Wikibase\Repo\Content\ItemHandler';
 	}
 
 	/**

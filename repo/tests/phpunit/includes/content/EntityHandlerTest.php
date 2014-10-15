@@ -47,7 +47,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param SettingsArray $settings
+	 * @param SettingsArray|null $settings
 	 *
 	 * @return WikibaseRepo
 	 */
@@ -62,14 +62,14 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param SettingsArray $settings
+	 * @param SettingsArray|null $settings
 	 *
 	 * @return EntityHandler
 	 */
 	protected abstract function getHandler( SettingsArray $settings = null );
 
 	/**
-	 * @param Entity $entity
+	 * @param Entity|null $entity
 	 *
 	 * @return EntityContent
 	 */
@@ -94,7 +94,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId|null $id
 	 *
 	 * @return Entity
 	 */
@@ -102,12 +102,10 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	/**
 	 * Returns EntityContents that can be handled by the EntityHandler deriving class.
-	 * @return array
+	 *
+	 * @return array[]
 	 */
 	public function contentProvider() {
-		/**
-		 * @var EntityContent $content
-		 */
 		$content = $this->newEntityContent();
 		$content->getEntity()->addAliases( 'en', array( 'foo' ) );
 		$content->getEntity()->setDescription( 'de', 'foobar' );
@@ -126,10 +124,9 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 */
 	public function testGetModelName( EntityHandler $entityHandler ) {
 		$this->assertEquals( $this->getModelId(), $entityHandler->getModelID() );
-		$this->assertInstanceOf( '\ContentHandler', $entityHandler );
+		$this->assertInstanceOf( 'ContentHandler', $entityHandler );
 		$this->assertInstanceOf( $this->getClassName(), $entityHandler );
 	}
-
 
 	/**
 	 * @dataProvider instanceProvider
@@ -406,7 +403,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testExportTransform_neverRecodeNonLegacyFormat() {
-		$codec = $this->getMockBuilder( '\Wikibase\Lib\Store\EntityContentDataCodec' )
+		$codec = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityContentDataCodec' )
 			->disableOriginalConstructor()
 			->getMock();
 		$codec->expects( $this->never() )
