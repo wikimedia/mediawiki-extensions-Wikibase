@@ -58,6 +58,9 @@ class EntityConstraintProvider {
 				break;
 
 			case Item::ENTITY_TYPE:
+				//FIXME: only apply expensive label/description uniqueness check when creating, not on every save!
+				//SEE bug 43734
+				$validators[] = new LabelDescriptionUniquenessValidator( $this->duplicateDetector );
 				$validators[] = new SiteLinkUniquenessValidator( $this->siteLinkLookup );
 				break;
 		}
