@@ -229,9 +229,14 @@ abstract class EntityContent extends AbstractContent {
 
 		// Make sure to include the redirect link in pagelinks
 		$output->addLink( $target );
+
+		// Since the output depends on the user language, we must make sure
+		// ParserCache::getKey() includes it in the cache key.
+		$output->recordOption( 'userlang' );
 		if ( $generateHtml ) {
 			$chain = $this->getRedirectChain();
-			$html = Article::getRedirectHeaderHtml( $target->getPageLanguage(), $chain, false );
+			$context = RequestContext::getMain();
+			$html = Article::getRedirectHeaderHtml( $context->getLanguage(), $chain, false );
 			$output->setText( $html );
 		}
 
