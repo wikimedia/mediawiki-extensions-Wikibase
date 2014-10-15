@@ -35,10 +35,10 @@
 		"data-values/javascript": "~0.6.0",
 		"data-values/value-view": "~0.7.0",
 
-		"wikibase/data-model": "~1.0",
+		"wikibase/data-model": "~2.0",
 		"wikibase/data-model-javascript": "~0.3.0",
-		"wikibase/data-model-serialization": "~1.1",
-		"wikibase/internal-serialization": "~1.2",
+		"wikibase/data-model-serialization": "~1.2",
+		"wikibase/internal-serialization": "~1.3",
 		"wikibase/serialization-javascript": "~1.1.1",
 
 		"diff/diff": "~1.0",
