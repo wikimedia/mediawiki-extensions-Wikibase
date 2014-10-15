@@ -102,6 +102,13 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 
 ## Release notes
 
+### 1.2.0 (2014-10-15)
+
+* Compatibility with DataModel 2.x added
+* Support statements on properties
+* Add option to serialize maps as objects instead of arrays so as to be able to
+  differentiate empty maps from empty lists
+
 ### 1.1.1 (2014-09-09)
 
 * Use UnDeserializable error from serialization in SnakDeserializer
