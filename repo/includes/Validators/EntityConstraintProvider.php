@@ -58,6 +58,7 @@ class EntityConstraintProvider {
 				break;
 
 			case Item::ENTITY_TYPE:
+				$validators[] = new LabelDescriptionUniquenessValidator( $this->duplicateDetector );
 				$validators[] = new SiteLinkUniquenessValidator( $this->siteLinkLookup );
 				break;
 		}
