@@ -86,8 +86,7 @@ class LegacyClaimDeserializer implements Deserializer {
 
 	private function getStatement() {
 		$statement = new Statement(
-			$this->getMainSnak(),
-			$this->getQualifiers(),
+			new Claim( $this->getMainSnak(), $this->getQualifiers() ),
 			$this->getReferences()
 		);
 

@@ -74,8 +74,7 @@ class LegacyStatementDeserializer implements Deserializer {
 
 	private function newStatementFromClaim( Claim $claim ) {
 		$statement = new Statement(
-			$claim->getMainSnak(),
-			$claim->getQualifiers()
+			new Claim( $claim->getMainSnak(), $claim->getQualifiers() )
 		);
 
 		$statement->setGuid( $claim->getGuid() );
