@@ -17,6 +17,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\Client\Scribunto\WikibaseLuaBindings;
 use Wikibase\ClientStore;
 use Wikibase\DataAccess\PropertyParserFunction\RendererFactory;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
@@ -49,6 +50,7 @@ use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
+use Wikibase\Utils;
 
 /**
  * Top level factory for the WikibaseClient extension.
@@ -737,6 +739,34 @@ final class WikibaseClient {
 			$this->getSiteStore(),
 			$this->getSite(),
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' )
+		);
+	}
+
+	/**
+	 * @return WikibaseLuaBindings
+	 */
+	public function getWikibaseLuaBindings( Language $language ) {
+		return new WikibaseLuaBindings(
+			$this->getEntityIdParser(),
+			$this->getStore()->getEntityLookup(),
+			$this->getStore()->getSiteLinkTable(),
+			$this->getLanguageFallbackChainFactory(),
+			$language,
+			$this->getSettings(),
+			Utils::getLanguageCodes(),
+			$this->getSettings()->getSetting( 'siteGlobalID' )
+		);
+	}
+
+	/**
+	 * @return CachingLuaEntityLookup
+	 */
+	public function getCachingLuaEntityLookup( WikibaseLuaBindings $wikibaseLuaBindings ) {
+		return new CachingLuaEntityLookup(
+			$wikibaseLuaBindings,
+			$cache,
+			$cacheKeyPrefix,
+			$cacheDuration
 		);
 	}
 

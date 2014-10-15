@@ -3,7 +3,7 @@
 use Wikibase\Client\Scribunto\WikibaseLuaBindings;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Utils;
+use Wikibase\Lib\Store\CachingLuaEntityLookup;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
@@ -21,6 +21,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private $wbLibrary;
 
 	/**
+	 * @var CachingLuaEntityLookup
+	 */
+	private $cachingLuaEntityLookup;
+
+	/**
 	 * Constructor for wrapper class, initialize member object holding implementation
 	 *
 	 * @param Scribunto_LuaEngine $engine
@@ -34,15 +39,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$this->wbLibrary = new WikibaseLuaBindings(
-			$wikibaseClient->getEntityIdParser(),
-			$wikibaseClient->getStore()->getEntityLookup(),
-			$wikibaseClient->getStore()->getSiteLinkTable(),
-			$wikibaseClient->getLanguageFallbackChainFactory(),
-			$language,
-			$wikibaseClient->getSettings(),
-			Utils::getLanguageCodes(),
-			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
+		$this->wbLibrary = $wikibaseClient->getWikibaseLuaBindings( $language );
+		$this->cachingLuaEntityLookup = $wikibaseClient->getStore()->getCachingLuaEntityLookup(
+			$this->wbLibrary
 		);
 
 		parent::__construct( $engine );
@@ -82,16 +81,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getEntity( $prefixedEntityId, $legacyStyle ) {
 		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
 		$this->checkType( 'getEntity', 2, $legacyStyle, 'boolean' );
-		try {
-			$entityArr = $this->wbLibrary->getEntity( $prefixedEntityId, $legacyStyle );
-			return array( $entityArr );
-		}
-		catch ( EntityIdParsingException $e ) {
-			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
-		}
-		catch ( \Exception $e ) {
-			throw new ScribuntoException( 'wikibase-error-serialize-error' );
-		}
+
+		return $this->cachingLuaEntityLookup->getEntity( $prefixedEntityId, $legacyStyle );
 	}
 
 	/**

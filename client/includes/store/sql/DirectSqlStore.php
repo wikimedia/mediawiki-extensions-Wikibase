@@ -5,8 +5,10 @@ namespace Wikibase;
 use Language;
 use ObjectCache;
 use Site;
+use Wikibase\Client\Scribunto\WikibaseLuaBindings;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\CachingLuaEntityLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -371,5 +373,17 @@ class DirectSqlStore implements ClientStore {
 			// dummy info store
 			return new DummyPropertyInfoStore();
 		}
+	}
+
+	/**
+	 * @return CachingLuaEntityLookup
+	 */
+	public function getCachingLuaEntityLookup( WikibaseLuaBindings $wikibaseLuaBindings ) {
+		return new CachingLuaEntityLookup(
+			$wikibaseLuaBindings,
+			ObjectCache::getInstance( $this->cacheType ),
+			$this->cachePrefix,
+			$this->cacheDuration
+		);
 	}
 }
