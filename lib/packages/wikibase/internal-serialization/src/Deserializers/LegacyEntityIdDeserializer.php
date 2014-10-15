@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Internal\LegacyIdInterpreter;
+use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
  * @licence GNU GPL v2+

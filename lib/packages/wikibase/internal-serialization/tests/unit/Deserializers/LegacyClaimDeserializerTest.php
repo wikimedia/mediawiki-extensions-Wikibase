@@ -105,11 +105,13 @@ class LegacyClaimDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenValidSerialization_deserializeReturnsStatement() {
 		$statement = new Statement(
-			new PropertyNoValueSnak( 42 ),
-			new SnakList( array(
-				new PropertyNoValueSnak( 23 ),
-				new PropertyNoValueSnak( 1337 ),
-			) ),
+			new Claim(
+				new PropertyNoValueSnak( 42 ),
+				new SnakList( array(
+					new PropertyNoValueSnak( 23 ),
+					new PropertyNoValueSnak( 1337 ),
+				) )
+			),
 			new ReferenceList( array(
 				new Reference(
 					new SnakList( array(

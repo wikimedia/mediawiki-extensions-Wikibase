@@ -141,7 +141,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newStatement() {
-		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$statement->setGuid( 'foo' );
 		return $statement;
 	}
