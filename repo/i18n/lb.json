@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Robby",
-			"Soued031"
+			"Soued031",
+			"Les Meloures"
 		]
 	},
 	"wikibase-edit": "änneren",
@@ -53,7 +54,7 @@
 	"wikibase-snakview-property-input-placeholder": "Eegeschaft",
 	"wikibase-snakview-choosesnaktype": "Sicht en Typ vu Wäert eraus.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "De Wäert entsprécht net der Definitioun vun der Eegeschaft.",
-	"wikibase-snakview-variation-nonewvaluefordeletedproperty": "Et ass net méiglech en neie Wäert fir eng geläschten Eegeschaft ze definéieren.",
+	"wikibase-snakview-variation-nonewvaluefordeletedproperty": "Et ass net méiglech en neie Wäert fir eng geläscht Eegeschaft ze definéieren.",
 	"wikibase-snakview-variations-somevalue-label": "onbekannte Wäert",
 	"wikibase-snakview-variations-novalue-label": "kee Wäert",
 	"wikibase-snakview-snaktypeselector-value": "personaliséierte Wäert",

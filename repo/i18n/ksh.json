@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Purodha"
+			"Purodha",
+			"TMg"
 		]
 	},
 	"wikibase-desc": "Brängk en Sammlong vun Daate met en Schtroktuur en et Wiki.",
@@ -31,8 +32,6 @@
 	"wikibase-snakview-variations-somevalue-label": "ene onbekannte Wäät",
 	"wikibase-snakview-variations-novalue-label": "keine Wäät",
 	"wikibase-snakview-snaktypeselector-value": "Wäät",
-	"wikibase-snakview-snaktypeselector-somevalue": "ene onbikannte Wäät",
-	"wikibase-snakview-snaktypeselector-novalue": "keine Wäät",
 	"wikibase-entityselector-more": "mieh",
 	"wikibase-itembytitle-lookup-site": "ẞaijt:",
 	"wikibase-itembytitle-lookup-page": "Sigg:",
@@ -89,7 +88,7 @@
 	"wikibase-property-summary-wbeditentity-override": "En Eijeschaff ußjetuusch",
 	"wikibase-listdatatypes-quantity-head": "En Aanzahl",
 	"wikibase-listdatatypes-string-head": "En ZeischeKätt",
-	"wikibase-listdatatypes-string-body": "Daatefäld för en wöötlesche Ennjaabe vun enem Täx. Et weet fö jewöhnlesch jebruch för Name, Bezeischnonge udder Kännzeische, di nit en en beschtemmpte Schprooch sin. Se künne mänschmohl en ander Schreffte ömjesaz wääde.\n* <code langg=\"en\">language</code> – jitt de Schprooch (un domet de Schreff) för dä Täx-Deil aan\n* <code langg=\"en\">text</code> – dä Täx-Deil en dä aanjejovve Schprooch",
+	"wikibase-listdatatypes-string-body": "Daatefäld för en wöötlesche Ennjaabe vun enem Täx. Et weet fö jewöhnlesch jebruch för Name, Bezeischnonge udder Kännzeische, di nit en en beschtemmpte Schprooch sin. Se künne mänschmohl en ander Schreffte ömjesaz wääde.\n* <code lang=\"en\">language</code> – jitt de Schprooch (un domet de Schreff) för dä Täx-Deil aan\n* <code lang=\"en\">text</code> – dä Täx-Deil en dä aanjejovve Schprooch",
 	"wikibase-listdatatypes-time-head": "En Uhrzick",
 	"wikibase-listdatatypes-url-head": "en <i lang=\"en\">URL</i>",
 	"datatypes-type-url": "<i lang=\"en\">URL</i>"

@@ -2,15 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Robby",
-			"Soued031"
+			"Soued031",
+			"Les Meloures"
 		]
 	},
 	"wikibase-entity-item": "Element",
 	"wikibase-entity-property": "Eegeschaft",
 	"wikibase-entity-query": "Ufro",
-	"wikibase-deletedentity-item": "Geläschten Element",
-	"wikibase-deletedentity-property": "Geläschten Eegeschaft",
-	"wikibase-deletedentity-query": "Geläschten Offro",
+	"wikibase-deletedentity-item": "Geläscht Element",
+	"wikibase-deletedentity-property": "Geläscht Eegeschaft",
+	"wikibase-deletedentity-query": "Geläscht Offro",
 	"wikibase-diffview-reference": "Referenz",
 	"wikibase-diffview-rank": "Classement",
 	"wikibase-diffview-label": "Etikett",
