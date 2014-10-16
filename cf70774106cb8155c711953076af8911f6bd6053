@@ -466,6 +466,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_d1e3d2d2",
+        "filename": "lib/resources/wikibase.store/store.EntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-16T12:04:00Z",
+      "side": 1,
+      "message": "Done in If8cfe64020d056fda028c9dc8f275ee6eb4a65c7.",
+      "parentUuid": "aef5673e_bf4ef870",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_bf003805",
         "filename": "lib/resources/wikibase.store/store.EntityStore.js",
         "patchSetId": 2
