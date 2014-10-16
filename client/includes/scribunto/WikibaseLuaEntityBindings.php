@@ -88,8 +88,8 @@ class WikibaseLuaEntityBindings {
 	 * Returns such Claims from $entity that have a main Snak for the property that
 	 * is specified by $propertyLabel.
 	 *
-	 * @param Entity $entity The Entity from which to get the clams
-	 * @param PropertyId $propertyId A prefixed property ID.
+	 * @param Entity $entity
+	 * @param PropertyId $propertyId
 	 *
 	 * @return Claims
 	 */
