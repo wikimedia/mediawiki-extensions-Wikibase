@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_b182c6a7",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-16T13:17:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_71651eaa",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_f1592e02",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2014-10-16T10:43:45Z",
       "side": 1,
       "message": "Seems wrong. Maybe a bug in RepoApi?",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_11685af1",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-16T13:17:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_f1592e02",
       "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_d17192de",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-16T13:17:09Z",
+      "side": 1,
+      "message": "Looks like there never was a 4th parameter.",
+      "parentUuid": "8e96e304_51682284",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_11029abe",
         "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.wbtooltip.css",
         "patchSetId": 1
@@ -81,6 +135,24 @@
       "writtenOn": "2014-10-16T10:43:45Z",
       "side": 1,
       "message": "Please read the comment above.",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_7182fe98",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.wbtooltip.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-16T13:17:09Z",
+      "side": 1,
+      "message": "I did. This is identical. The \"background\" shortcut resets the image to \"none\".",
+      "parentUuid": "8e96e304_11029abe",
       "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_d148b28e",
+        "filename": "lib/resources/jquery.wikibase/toolbar/toolbar.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-16T13:17:09Z",
+      "side": 1,
+      "message": "Sorry but no, it doesn\u0027t. There is no variable scope for loops in JavaScript. However, if you prefer the declaration can stay outside of the loop.",
+      "parentUuid": "8e96e304_310796cf",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_b1196629",
         "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
         "patchSetId": 1
@@ -115,6 +205,24 @@
       "writtenOn": "2014-10-16T10:55:42Z",
       "side": 1,
       "message": "{string[]|string} [value]?",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_91622a05",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-16T13:17:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_b1196629",
       "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_11361a01",
+        "filename": "lib/resources/wikibase.sites.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-16T13:17:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_5116e2f7",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_7113de05",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 1
@@ -149,6 +275,24 @@
       "writtenOn": "2014-10-16T10:55:42Z",
       "side": 1,
       "message": "http://www.mediawiki.org/wiki/Wikibase/Coding_conventions#jQuery_DOM_element_creation",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d13f52d2",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-16T13:17:09Z",
+      "side": 1,
+      "message": "\"Consistency\" to what? Sorry, but the slash is not only pointless (all jQuery does is stripping and ignoring it anyway). It\u0027s also confusing. These tags aren\u0027t allowed to be empty. That\u0027s why this shows up in every code analysis.",
+      "parentUuid": "8e96e304_7113de05",
       "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

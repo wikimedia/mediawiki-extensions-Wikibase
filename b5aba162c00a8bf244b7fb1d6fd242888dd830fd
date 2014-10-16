@@ -16,6 +16,24 @@
       "revId": "b5aba162c00a8bf244b7fb1d6fd242888dd830fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_518fc2d1",
+        "filename": "client/resources/wikibase.client.getMwApiForRepo.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-16T13:17:09Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "8e96e304_3160f69f",
+      "revId": "b5aba162c00a8bf244b7fb1d6fd242888dd830fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
