@@ -124,7 +124,7 @@ class WikibaseLuaBindings {
 	 *
 	 * @return array
 	 */
-	public function getEntity( $prefixedEntityId = null, $legacyStyle = false ) {
+	public function getEntity( $prefixedEntityId, $legacyStyle = false ) {
 		$prefixedEntityId = trim( $prefixedEntityId );
 
 		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
@@ -194,7 +194,7 @@ class WikibaseLuaBindings {
 	 *
 	 * @return string|null $id
 	 */
-	public function getEntityId( $pageTitle = null ) {
+	public function getEntityId( $pageTitle ) {
 		$id = $this->siteLinkTable->getItemIdForLink( $this->siteId, $pageTitle );
 
 		if ( !$id ) {
