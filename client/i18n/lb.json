@@ -31,7 +31,7 @@
 	"wikibase-linkitem-selectlink": "Sicht w.e.g. e Site an eng Säit eraus déi Dir mat dëser Säit verlinke wëllt.",
 	"wikibase-linkitem-input-site": "Sprooch:",
 	"wikibase-linkitem-input-page": "Säit:",
-	"wikibase-linkitem-confirmitem-text": "Déi erausgesicht Säit ass scho mat engem [$1 Element an eiser zentraler Datebank] verbonn. Confirméiert w.e.g. datt d'{{PLURAL:$2|Säit|Säiten}} déi hei drënner gewise {{PLURAL:$2|gewisen ass|gewise sinn}} déi {{PLURAL:$2|ass|si}} déi Dir mat dëser Säit verlinke wëllt.",
+	"wikibase-linkitem-confirmitem-text": "Déi erausgesicht Säit ass scho mat engem [$1 Element an eiser zentraler Datebank] verbonnen. Confirméiert w.e.g. datt d'{{PLURAL:$2|Säit|Säiten}} déi hei drënner {{PLURAL:$2|gewise gëtt|gewise ginn}} déi {{PLURAL:$2|ass|sinn}} déi Dir mat dëser Säit verlinke wëllt.",
 	"wikibase-linkitem-confirmitem-button": "Confirméieren",
 	"wikibase-linkitem-not-loggedin-title": "Dir musst ageloggt sinn",
 	"wikibase-linkitem-not-loggedin": "Dir musst op dëser Wiki an am [$1 zentralen Daterepertoire] ageloggt si fir dës Funktioun ze benotzen.",
