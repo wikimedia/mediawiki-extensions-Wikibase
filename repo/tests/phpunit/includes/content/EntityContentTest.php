@@ -4,18 +4,13 @@ namespace Wikibase\Test;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
-use IContextSource;
-use ParserOptions;
 use PHPUnit_Framework_Assert;
-use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\EntityContent;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Content\EntityContentDiff;

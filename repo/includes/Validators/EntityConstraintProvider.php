@@ -38,19 +38,20 @@ class EntityConstraintProvider {
 	) {
 		$this->duplicateDetector = $duplicateDetector;
 		$this->siteLinkLookup = $siteLinkLookup;
+
+		//TODO: Make validators configurable. Allow more types to register.
 	}
 
 	/**
-	 * Returns a validator for enforcing the appropriate constraints on the given type of entity.
+	 * Returns validators for hard global constraints that should be enforced on every update
+	 * of an entity of the given type (including creation).
 	 *
 	 * @param string $entityType
 	 *
-	 * @return EntityValidator
+	 * @return EntityValidator[]
 	 */
-	public function getConstraints( $entityType ) {
+	public function getUpdateValidators( $entityType ) {
 		$validators = array();
-
-		//TODO: Make this configurable. Use a builder. Allow more types to register.
 
 		switch ( $entityType ) {
 			case Property::ENTITY_TYPE:
@@ -62,9 +63,35 @@ class EntityConstraintProvider {
 				break;
 		}
 
-		return count( $validators ) === 1
-			? $validators[0]
-			: new CompositeEntityValidator( $validators );
+		return $validators;
+	}
+
+	/**
+	 * Returns validators for soft global constraints that should be enforced only
+	 * upon creation of an entity of the given type. This will include at least the
+	 * validators returned by getUpdateValidators() for that type.
+	 *
+	 * @note: During updates, such soft constraints should be checked selectively by the
+	 * respective ChangeOps, so not all such (potentially expensive) validators are applied
+	 * for all updates.
+	 *
+	 * @param string $entityType
+	 *
+	 * @return EntityValidator[]
+	 */
+	public function getCreationValidators( $entityType ) {
+		$validators = $this->getUpdateValidators( $entityType );
+
+		switch ( $entityType ) {
+			case Property::ENTITY_TYPE:
+				break;
+
+			case Item::ENTITY_TYPE:
+				$validators[] = new LabelDescriptionUniquenessValidator( $this->duplicateDetector );
+				break;
+		}
+
+		return $validators;
 	}
 
 }
