@@ -9,6 +9,7 @@ use HashBagOStuff;
 use MWException;
 use ObjectCache;
 use Revision;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -106,6 +107,11 @@ class SqlStore implements Store {
 	private $contentCodec;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
 	 * @var bool
 	 */
 	private $useRedirectTargetColumn;
@@ -114,7 +120,8 @@ class SqlStore implements Store {
 	 * @param EntityContentDataCodec $contentCodec
 	 */
 	public function __construct(
-		EntityContentDataCodec $contentCodec
+		EntityContentDataCodec $contentCodec,
+		EntityIdParser $entityIdParser
 	) {
 		$this->contentCodec = $contentCodec;
 
@@ -124,6 +131,7 @@ class SqlStore implements Store {
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$cacheType = $settings->getSetting( 'sharedCacheType' );
 
+		$this->entityIdParser = $entityIdParser;
 		$this->useRedirectTargetColumn = $settings->getSetting( 'useRedirectTargetColumn' );
 
 		$this->cachePrefix = $cachePrefix;
@@ -461,7 +469,10 @@ class SqlStore implements Store {
 	 * @return EntityPerPage
 	 */
 	public function newEntityPerPage() {
-		return new EntityPerPageTable( $this->useRedirectTargetColumn );
+		return new EntityPerPageTable(
+			$this->entityIdParser,
+			$this->useRedirectTargetColumn
+		);
 	}
 
 	/**

@@ -18,9 +18,9 @@ use Status;
 use Title;
 use User;
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRedirect;
@@ -79,6 +79,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
 	 * @param ValidatorErrorLocalizer $errorLocalizer
+	 * @param EntityIdParser $entityIdParser
 	 * @param callable|null $legacyExportFormatDetector Callback to determine whether a serialized
 	 *        blob needs to be re-serialized on export. The callback must take two parameters,
 	 *        the blob an the serialization format. It must return true if re-serialization is needed.
@@ -93,6 +94,7 @@ abstract class EntityHandler extends ContentHandler {
 		EntityContentDataCodec $contentCodec,
 		array $preSaveValidators,
 		ValidatorErrorLocalizer $errorLocalizer,
+		EntityIdParser $entityIdParser,
 		$legacyExportFormatDetector = null
 	) {
 		$formats = $contentCodec->getSupportedFormats();
@@ -108,6 +110,7 @@ abstract class EntityHandler extends ContentHandler {
 		$this->contentCodec = $contentCodec;
 		$this->preSaveValidators = $preSaveValidators;
 		$this->errorLocalizer = $errorLocalizer;
+		$this->entityIdParser = $entityIdParser;
 		$this->legacyExportFormatDetector = $legacyExportFormatDetector;
 	}
 
@@ -399,9 +402,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return EntityId
 	 */
 	public function getIdForTitle( Title $target ) {
-		$parser = new BasicEntityIdParser();
-		$id = $parser->parse( $target->getText() );
-		return $id;
+		return $this->entityIdParser->parse( $target->getText() );
 	}
 
 	/**

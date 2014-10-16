@@ -63,7 +63,7 @@ class RebuildItemsPerSite extends Maintenance {
 
 		$useRedirectTargetColumn = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
 
-		$entityPerPage = new EntityPerPageTable( $useRedirectTargetColumn );
+		$entityPerPage = WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage();
 		$stream = new EntityPerPageIdPager( $entityPerPage, 'item' );
 
 		// Now <s>kill</s> fix the table

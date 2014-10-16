@@ -450,7 +450,8 @@ class WikibaseRepo {
 	public function getStore() {
 		if ( !$this->store ) {
 			$this->store = new SqlStore(
-				$this->getEntityContentDataCodec()
+				$this->getEntityContentDataCodec(),
+				$this->getEntityIdParser()
 			);
 		}
 
@@ -861,6 +862,7 @@ class WikibaseRepo {
 			$codec,
 			array( $validator ),
 			$errorLocalizer,
+			$this->getEntityIdParser(),
 			$siteLinkStore,
 			$this->getLegacyFormatDetectorCallback()
 		);
@@ -885,6 +887,7 @@ class WikibaseRepo {
 			$codec,
 			array( $validator ),
 			$errorLocalizer,
+			$this->getEntityIdParser(),
 			$propertyInfoStore,
 			$this->getLegacyFormatDetectorCallback()
 		);

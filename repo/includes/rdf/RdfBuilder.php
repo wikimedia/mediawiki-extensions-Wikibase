@@ -471,6 +471,7 @@ class RdfBuilder {
 	 * @param EntityLookup $entityLookup
 	 */
 	public function resolvedMentionedEntities( EntityLookup $entityLookup ) {
+		// @todo inject a DispatchingEntityIdParser
 		$idParser = new BasicEntityIdParser();
 
 		foreach ( $this->entitiesResolved as $id => $resolved ) {

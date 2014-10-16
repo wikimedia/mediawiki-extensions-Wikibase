@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -72,7 +73,9 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	 */
 	protected function newEntityPerPageTable( array $entities = array() ) {
 		$useRedirectTargetColumn = $this->isRedirectTargetColumnSupported();
-		$table = new EntityPerPageTable( $useRedirectTargetColumn );
+		$idParser = new BasicEntityIdParser();
+
+		$table = new EntityPerPageTable( $idParser, $useRedirectTargetColumn );
 		$table->clear();
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
