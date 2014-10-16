@@ -371,7 +371,6 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 		// sanity (cannot compare $veryOldBlob and $oldBlob until we have the new serialization in place)
 		if ( $veryVeryOldBlob === $veryOldBlob /* || $veryOldBlob === $oldBlob */ ) {
-			var_dump($veryVeryOldBlob,$veryOldBlob);
 			throw new RuntimeException( 'Failed to fake very old serialization format based on oldish serialization format.' );
 		}
 
