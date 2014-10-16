@@ -202,7 +202,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testSetRankToTruth( Statement $statement ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$statement->setRank( Statement::RANK_TRUTH );
+		$statement->setRank( Claim::RANK_TRUTH );
 	}
 
 	public function testStatementRankCompatibility() {

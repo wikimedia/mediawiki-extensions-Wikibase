@@ -555,25 +555,25 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideGetByRank() {
 		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
-		$s1->setRank( Claim::RANK_DEPRECATED );
+		$s1->setRank( Statement::RANK_DEPRECATED );
 
 		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
-		$s2->setRank( Claim::RANK_PREFERRED );
+		$s2->setRank( Statement::RANK_PREFERRED );
 
 		$s3 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P3" ) ) );
-		$s3->setRank( Claim::RANK_PREFERRED );
+		$s3->setRank( Statement::RANK_PREFERRED );
 
 		return array(
 			// Empty yields empty
 			array(
 				new Claims(),
-				Claim::RANK_NORMAL,
+				Statement::RANK_NORMAL,
 				new Claims()
 			),
 			// One statement with RANK_PREFERRED, so return it
 			array(
 				new Claims( array( $s2 ) ),
-				Claim::RANK_PREFERRED,
+				Statement::RANK_PREFERRED,
 				new Claims( array( $s2 ) ),
 			),
 			// s2 has RANK_PREFERRED, so doesn't match RANK_TRUTH
@@ -585,7 +585,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 			// s2 and s3 have RANK_PREFERRED, so return them
 			array(
 				new Claims( array( $s2, $s1, $s3 ) ),
-				Claim::RANK_PREFERRED,
+				Statement::RANK_PREFERRED,
 				new Claims( array( $s2, $s3 ) ),
 			),
 		);
@@ -600,22 +600,22 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideGetByRanks() {
 		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
-		$s1->setRank( Claim::RANK_NORMAL );
+		$s1->setRank( Statement::RANK_NORMAL );
 
 		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
-		$s2->setRank( Claim::RANK_PREFERRED );
+		$s2->setRank( Statement::RANK_PREFERRED );
 
 		$ret = array(
 			// s1 has RANK_NORMAL, thus doesn't match
 			array(
 				new Claims( array( $s2, $s1 ) ),
-				array( Claim::RANK_PREFERRED, Claim::RANK_DEPRECATED ),
+				array( Statement::RANK_PREFERRED, Statement::RANK_DEPRECATED ),
 				new Claims( array( $s2 ) ),
 			),
 			// s2 has RANK_PREFERRED and s1 has RANK_NORMAL, so return them
 			array(
 				new Claims( array( $s2, $s1 ) ),
-				array( Claim::RANK_PREFERRED, Claim::RANK_NORMAL ),
+				array( Statement::RANK_PREFERRED, Statement::RANK_NORMAL ),
 				new Claims( array( $s2, $s1 ) ),
 			)
 		);
@@ -645,7 +645,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetBestClaimsOnlyOne() {
 		$statement = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
-		$statement->setRank( Claim::RANK_NORMAL );
+		$statement->setRank( Statement::RANK_NORMAL );
 
 		$claims = new Claims( array( $statement ) );
 		$this->assertEquals( $claims->getBestClaims(), $claims );
@@ -653,7 +653,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetBestClaimsNoDeprecated() {
 		$statement = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
-		$statement->setRank( Claim::RANK_DEPRECATED );
+		$statement->setRank( Statement::RANK_DEPRECATED );
 
 		$claims = new Claims( array( $statement ) );
 		$this->assertEquals( $claims->getBestClaims(), new Claims() );
@@ -661,10 +661,10 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetBestClaimsReturnOne() {
 		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
-		$s1->setRank( Claim::RANK_DEPRECATED );
+		$s1->setRank( Statement::RANK_DEPRECATED );
 
 		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
-		$s2->setRank( Claim::RANK_NORMAL );
+		$s2->setRank( Statement::RANK_NORMAL );
 
 		$claims = new Claims( array( $s1, $s2 ) );
 		$expected = new Claims( array( $s2 ) );
@@ -673,13 +673,13 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetBestClaimsReturnTwo() {
 		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
-		$s1->setRank( Claim::RANK_NORMAL );
+		$s1->setRank( Statement::RANK_NORMAL );
 
 		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
-		$s2->setRank( Claim::RANK_PREFERRED );
+		$s2->setRank( Statement::RANK_PREFERRED );
 
 		$s3 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P3" ) ) );
-		$s3->setRank( Claim::RANK_PREFERRED );
+		$s3->setRank( Statement::RANK_PREFERRED );
 
 		$claims = new Claims( array( $s3, $s1, $s2 ) );
 		$expected = new Claims( array( $s2, $s3 ) );
@@ -691,7 +691,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$s1->setGuid( 'kittens' );
 
 		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
-		$s2->setRank( Claim::RANK_NORMAL );
+		$s2->setRank( Statement::RANK_NORMAL );
 
 		$claims = new Claims( array( $s1, $s2 ) );
 		$expected = new Claims( array( $s1 ) );
