@@ -34,6 +34,24 @@
       "revId": "1481dbed54d0938fa95e07088fe719347736b9f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_1617f0a9",
+        "filename": "lib/resources/jquery.wikibase/toolbar/jquery.wikibase.toolbaritem.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-16T07:24:09Z",
+      "side": 1,
+      "message": "Why use inheritance here anyway?",
+      "parentUuid": "8e96e304_d505107e",
+      "revId": "1481dbed54d0938fa95e07088fe719347736b9f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
