@@ -26,12 +26,11 @@ tipsy styles in shared.css are removed and we want to remove the blue color from
 }
 
 .wikibase-wbtooltip-tip.wb-error .tipsy-inner {
-	background-color: #FFDFC9;
 	/* on some host-client combinations the background image is propagated to the inner tooltip
 	container creating a background pattern; this broken behavior is suppressed by explicitly
 	setting the background image to none; this, however, has to be done in a separate definition
 	after setting the background colour */
-	background-image: none;
+	background: #FFDFC9;
 	border-color: #B27631;
 }
 

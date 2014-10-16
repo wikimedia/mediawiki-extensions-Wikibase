@@ -21,7 +21,7 @@
 				'jquery.wikibase.linkitem',
 				'mediawiki.Title',
 				'mw.config.values.wbRepo',
-				'wikibase.client.getMwApiForRepo',
+				'wikibase.client.getMwApiForRepo'
 			],
 			function() {
 				$spinner.remove();
