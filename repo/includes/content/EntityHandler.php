@@ -29,6 +29,7 @@ use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
+use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
@@ -58,9 +59,9 @@ abstract class EntityHandler extends ContentHandler {
 	protected $contentCodec;
 
 	/**
-	 * @var EntityValidator[]
+	 * @var EntityConstraintProvider
 	 */
-	protected $preSaveValidators;
+	protected $constraintProvider;
 
 	/**
 	 * @var ValidatorErrorLocalizer
@@ -78,7 +79,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param EntityValidator[] $preSaveValidators
+	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param EntityIdParser $entityIdParser
 	 * @param callable|null $legacyExportFormatDetector Callback to determine whether a serialized
@@ -86,14 +87,14 @@ abstract class EntityHandler extends ContentHandler {
 	 *        the blob an the serialization format. It must return true if re-serialization is needed.
 	 *        False positives are acceptable, false negatives are not.
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws \InvalidArgumentException
 	 */
 	public function __construct(
 		$modelId,
 		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
-		array $preSaveValidators,
+		EntityConstraintProvider $constraintProvider,
 		ValidatorErrorLocalizer $errorLocalizer,
 		EntityIdParser $entityIdParser,
 		$legacyExportFormatDetector = null
@@ -109,7 +110,7 @@ abstract class EntityHandler extends ContentHandler {
 		$this->entityPerPage = $entityPerPage;
 		$this->termIndex = $termIndex;
 		$this->contentCodec = $contentCodec;
-		$this->preSaveValidators = $preSaveValidators;
+		$this->constraintProvider = $constraintProvider;
 		$this->errorLocalizer = $errorLocalizer;
 		$this->entityIdParser = $entityIdParser;
 		$this->legacyExportFormatDetector = $legacyExportFormatDetector;
@@ -144,26 +145,33 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * Apply all EntityValidators registered for on-save validation
+	 * Get EntityValidators for on-save validation.
 	 *
-	 * @param EntityContent $content
+	 * @see getValidationErrorLocalizer()
 	 *
-	 * @return Status
+	 * @param bool $forCreation Whether the entity is created (true) or updated (false).
+	 *
+	 * @return EntityValidator[]
 	 */
-	public function applyOnSaveValidators( EntityContent $content ) {
-		$entity = $content->getEntity();
-		$result = Result::newSuccess();
-
-		/* @var EntityValidator $validator */
-		foreach ( $this->preSaveValidators as $validator ) {
-			$result = $validator->validateEntity( $entity );
-
-			if ( !$result->isValid() ) {
-				break;
-			}
+	public function getOnSaveValidators( $forCreation ) {
+		if ( $forCreation ) {
+			$validators = $this->constraintProvider->getCreationValidators( $this->getEntityType() );
+		} else {
+			$validators = $this->constraintProvider->getUpdateValidators( $this->getEntityType() );
 		}
 
-		return $this->errorLocalizer->getResultStatus( $result );
+		return $validators;
+	}
+
+	/**
+	 * Error localizer for use together with getOnSaveValidators().
+	 *
+	 * @see getOnSaveValidators()
+	 *
+	 * @return ValidatorErrorLocalizer
+	 */
+	public function getValidationErrorLocalizer() {
+		return $this->errorLocalizer;
 	}
 
 	/**

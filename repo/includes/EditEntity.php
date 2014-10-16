@@ -636,7 +636,8 @@ class EditEntity {
 	 * Attempts to save the new entity content, chile first checking for permissions, edit conflicts, etc.
 	 *
 	 * @param String      $summary    The edit summary
-	 * @param int         $flags      The edit flags (see WikiPage::doEditContent)
+	 * @param int         $flags      The EDIT_XXX flags as used by WikiPage::doEditContent().
+	 *        Additionally, the EntityContent::EDIT_XXX constants can be used.
 	 * @param String|bool $token      Edit token to check, or false to disable the token check.
 	 *                                Null will fail the token text, as will the empty string.
 	 * @param bool|null $watch        Whether the user wants to watch the entity.

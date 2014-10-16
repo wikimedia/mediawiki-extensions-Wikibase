@@ -23,6 +23,7 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -38,6 +39,7 @@ use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Validators\EntityValidator;
 use WikiPage;
 
 /**
@@ -73,6 +75,15 @@ abstract class EntityContent extends AbstractContent {
 	 * @see getEntityStatus()
 	 */
 	const STATUS_EMPTY = 200;
+
+	/**
+	 * Flag for use with prepareSave(), indicating that no pre-save validation should be applied.
+	 * Can be passed in via EditEntity::attemptSave, EntityStore::saveEntity,
+	 * as well as WikiPage::doEditContent()
+	 *
+	 * @note: must not collide with the EDIT_XXX flags defined by MediaWiki core in Defines.php.
+	 */
+	const EDIT_IGNORE_CONSTRAINTS = 1024;
 
 	/**
 	 * Checks if this EntityContent is valid for saving.
@@ -801,15 +812,42 @@ abstract class EntityContent extends AbstractContent {
 
 		// Chain to parent
 		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
+
 		if ( $status->isOK() ) {
-			if ( !$this->isRedirect() ) {
+			if ( !$this->isRedirect() && ( $flags & self::EDIT_IGNORE_CONSTRAINTS ) === 0 ) {
 				/* @var EntityHandler $handler */
 				$handler = $this->getContentHandler();
-				$status = $handler->applyOnSaveValidators( $this );
+				$validators = $handler->getOnSaveValidators( ( $flags & EDIT_NEW ) > 0 );
+				$status = $this->applyValidators( $validators );
 			}
 		}
 
 		wfProfileOut( __METHOD__ );
+		return $status;
+	}
+
+	/**
+	 * Apply the given validators.
+	 *
+	 * @param EntityValidator[] $validators
+	 *
+	 * @return Result
+	 */
+	private function applyValidators( array $validators ) {
+		$result = Result::newSuccess();
+
+		/* @var EntityValidator $validator */
+		foreach ( $validators as $validator ) {
+			$result = $validator->validateEntity( $this->getEntity() );
+
+			if ( !$result->isValid() ) {
+				break;
+			}
+		}
+
+		/* @var EntityHandler $handler */
+		$handler = $this->getContentHandler();
+		$status = $handler->getValidationErrorLocalizer()->getResultStatus( $result );
 		return $status;
 	}
 
