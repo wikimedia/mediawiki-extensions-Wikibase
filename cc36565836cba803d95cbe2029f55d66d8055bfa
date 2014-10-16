@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_d15432cc",
+        "filename": "client/resources/wikibase.client.linkitem.init.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-16T10:43:45Z",
+      "side": 1,
+      "message": "That\u0027s actually important for IE support.",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_f1592e02",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-16T10:43:45Z",
+      "side": 1,
+      "message": "Seems wrong. Maybe a bug in RepoApi?",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_51682284",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-16T10:43:45Z",
+      "side": 1,
+      "message": "Also strange, but seems to be correct. How and when did this vanish in the API?",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_11029abe",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.wbtooltip.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-16T10:43:45Z",
+      "side": 1,
+      "message": "Please read the comment above.",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_310796cf",
+        "filename": "lib/resources/jquery.wikibase/toolbar/toolbar.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-16T10:43:45Z",
+      "side": 1,
+      "message": "Breaks line 107.",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
