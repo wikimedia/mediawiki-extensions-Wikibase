@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+2: Daniel Kinzler <daniel.kinzler@wikimedia.de>
+Code-Review+1: Thiemo Mättig (WMDE) <thiemo.maettig@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Thu, 16 Oct 2014 18:04:37 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/166869
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
