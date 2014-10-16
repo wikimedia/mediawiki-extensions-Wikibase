@@ -31,7 +31,7 @@
 				$linkItemLink
 				.show()
 				.linkitem( {
-					mwApiForRepo: wikibase.getMwApiForRepo(),
+					mwApiForRepo: wikibase.client.getMwApiForRepo(),
 					pageTitle: ( new mw.Title(
 						mw.config.get( 'wgTitle' ),
 						mw.config.get( 'wgNamespaceNumber' )
