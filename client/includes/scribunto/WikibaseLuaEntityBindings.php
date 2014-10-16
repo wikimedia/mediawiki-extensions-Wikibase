@@ -6,6 +6,7 @@ use Language;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
@@ -88,15 +89,15 @@ class WikibaseLuaEntityBindings {
 	 * Returns such Claims from $entity that have a main Snak for the property that
 	 * is specified by $propertyLabel.
 	 *
-	 * @param Entity $entity The Entity from which to get the clams
-	 * @param PropertyId $propertyId A prefixed property ID.
+	 * @param Item $item The Entity from which to get the clams
+	 * @param string $propertyId A prefixed property ID.
 	 *
 	 * @return Claims
 	 */
-	private function getClaimsForProperty( Entity $entity, PropertyId $propertyId ) {
-		$allClaims = new Claims( $entity->getClaims() );
+	private function getClaimsForProperty( Item $item, $propertyId ) {
+		$allClaims = new Claims( $item->getClaims() );
 
-		return $allClaims->getClaimsForProperty( $propertyId );
+		return $allClaims->getClaimsForProperty( new PropertyId( $propertyId ) );
 	}
 
 	/**
@@ -129,23 +130,20 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @since 0.5
 	 *
-	 * @param string $entityId
+	 * @param string $itemId
 	 * @param string $propertyId
 	 * @param int[] $acceptableRanks
 	 *
 	 * @return string
 	 */
-	public function formatPropertyValues( $entityId, $propertyId, array $acceptableRanks = null ) {
-		$entityId = new ItemId( $entityId );
-		$propertyId = new PropertyId( $propertyId );
+	public function formatPropertyValues( $itemId, $propertyId, array $acceptableRanks = null ) {
+		$item = $this->getEntity( new ItemId( $itemId ) );
 
-		$entity = $this->getEntity( $entityId );
-
-		if ( !$entity ) {
+		if ( !( $item instanceof Item ) ) {
 			return '';
 		}
 
-		$claims = $this->getClaimsForProperty( $entity, $propertyId );
+		$claims = $this->getClaimsForProperty( $item, $propertyId );
 
 		if ( !$acceptableRanks ) {
 			// We only want the best claims over here, so that we only show the most

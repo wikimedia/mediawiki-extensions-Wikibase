@@ -70,6 +70,7 @@ class WikibaseLuaBindings {
 	 * @param SiteLinkLookup $siteLinkTable
 	 * @param LanguageFallbackChainFactory $fallbackChainFactory
 	 * @param Language $language
+	 * @param SettingsArray $settings
 	 * @param string[] $languageCodes
 	 * @param string $siteId
 	 */
@@ -224,4 +225,5 @@ class WikibaseLuaBindings {
 	public function getSetting( $setting ) {
 		return $this->settings->getSetting( $setting );
 	}
+
 }
