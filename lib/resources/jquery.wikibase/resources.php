@@ -60,6 +60,7 @@ return call_user_func( function() {
 				'jquery.wikibase.claimgrouplabelscroll.js',
 			),
 			'dependencies' => array(
+				'jquery.ui.position',
 				'jquery.ui.widget',
 			),
 		),
