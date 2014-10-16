@@ -131,27 +131,17 @@ abstract class ViewEntityAction extends ViewAction {
 	 * Returns true if this view action is performing a plain view (not a diff, etc)
 	 * of the page's current revision.
 	 */
-	public function isPlainView() {
-		if ( !$this->getArticle()->getPage()->exists() ) {
+	private function isPlainView( EntityContent $content ) {
+		$article = $this->getArticle();
+
+		if ( !$article->getPage()->exists() ) {
 			// showing non-existing entity
 			return false;
 		}
 
-		if ( $this->getArticle()->getOldID() > 0
-			&&  ( $this->getArticle()->getOldID() !== $this->getArticle()->getPage()->getLatest() ) ) {
+		if ( $article->getOldID() > 0
+			&&  ( $article->getOldID() !== $article->getPage()->getLatest() ) ) {
 			// showing old content
-			return false;
-		}
-
-		$contentRetriever = new ContentRetriever();
-		$content = $contentRetriever->getContentForRequest(
-			$this->getRequest(),
-			$this->getArticle()
-		);
-
-		if ( !( $content instanceof EntityContent ) ) {
-			//XXX: HACK against evil tricks in Article::getContentObject
-			// showing strange content
 			return false;
 		}
 
@@ -174,7 +164,7 @@ abstract class ViewEntityAction extends ViewAction {
 		$out = $this->getOutput();
 
 		// can edit?
-		$editable = $this->isPlainView();
+		$editable = $this->isPlainView( $content );
 
 		// NOTE: page-wide property, independent of user permissions
 		$out->addJsConfigVars( 'wbIsEditView', $editable );
