@@ -16,6 +16,24 @@
       "revId": "5eceebafb9bbe2d0539d5b1fd02d7e4170fe5fbb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_5ceef9b2",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.wbtooltip.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-16T15:22:43Z",
+      "side": 1,
+      "message": "I think it\u0027s still important to set the background-image to none, which the shortcut below does.",
+      "parentUuid": "8e96e304_dc952937",
+      "revId": "5eceebafb9bbe2d0539d5b1fd02d7e4170fe5fbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
