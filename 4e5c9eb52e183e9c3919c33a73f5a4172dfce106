@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e96e304_778c2edc",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-16T17:49:37Z",
+      "side": 1,
+      "message": "can also be null",
+      "revId": "4e5c9eb52e183e9c3919c33a73f5a4172dfce106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_57eed2b2",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 5
@@ -67,6 +84,23 @@
       "side": 1,
       "message": "how could it be made clearer? what name would you use for this function?",
       "parentUuid": "8e96e304_b727160d",
+      "revId": "4e5c9eb52e183e9c3919c33a73f5a4172dfce106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_b7fb9643",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-16T17:49:37Z",
+      "side": 1,
+      "message": "still doesn\u0027t do that",
       "revId": "4e5c9eb52e183e9c3919c33a73f5a4172dfce106",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
