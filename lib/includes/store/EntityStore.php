@@ -54,6 +54,7 @@ interface EntityStore {
 	 * @param string $summary the edit summary for the new revision.
 	 * @param User $user the user to whom to attribute the edit
 	 * @param int $flags EDIT_XXX flags, as defined for WikiPage::doEditContent.
+	 *        Additionally, the EntityContent::EDIT_XXX constants can be used.
 	 * @param int|bool $baseRevId the revision ID $entity is based on. Saving should fail if
 	 * $baseRevId is no longer the current revision.
 	 *

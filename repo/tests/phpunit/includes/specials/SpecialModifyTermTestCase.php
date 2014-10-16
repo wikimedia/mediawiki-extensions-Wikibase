@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\EntityContent;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -29,7 +30,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		// save the item
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW | EntityContent::EDIT_IGNORE_CONSTRAINTS );
 
 		// return the id
 		return $item->getId()->getSerialization();

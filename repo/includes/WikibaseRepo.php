@@ -850,22 +850,23 @@ class WikibaseRepo {
 	 * @return ItemHandler
 	 */
 	public function newItemHandler() {
-		$validator = $this->getEntityConstraintProvider()->getConstraints( Item::ENTITY_TYPE );
-		$codec = $this->getEntityContentDataCodec();
 		$entityPerPage = $this->getStore()->newEntityPerPage();
 		$termIndex = $this->getStore()->getTermIndex();
+		$codec = $this->getEntityContentDataCodec();
+		$constraintProvider = $this->getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
 		$siteLinkStore = $this->getStore()->newSiteLinkCache();
+		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		$handler = new ItemHandler(
 			$entityPerPage,
 			$termIndex,
 			$codec,
-			array( $validator ),
+			$constraintProvider,
 			$errorLocalizer,
 			$this->getEntityIdParser(),
 			$siteLinkStore,
-			$this->getLegacyFormatDetectorCallback()
+			$legacyFormatDetector
 		);
 
 		return $handler;
@@ -875,22 +876,23 @@ class WikibaseRepo {
 	 * @return PropertyHandler
 	 */
 	public function newPropertyHandler() {
-		$validator = $this->getEntityConstraintProvider()->getConstraints( Property::ENTITY_TYPE );
-		$codec = $this->getEntityContentDataCodec();
 		$entityPerPage = $this->getStore()->newEntityPerPage();
 		$termIndex = $this->getStore()->getTermIndex();
+		$codec = $this->getEntityContentDataCodec();
+		$constraintProvider = $this->getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
 		$propertyInfoStore = $this->getStore()->getPropertyInfoStore();
+		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		$handler = new PropertyHandler(
 			$entityPerPage,
 			$termIndex,
 			$codec,
-			array( $validator ),
+			$constraintProvider,
 			$errorLocalizer,
 			$this->getEntityIdParser(),
 			$propertyInfoStore,
-			$this->getLegacyFormatDetectorCallback()
+			$legacyFormatDetector
 		);
 
 		return $handler;

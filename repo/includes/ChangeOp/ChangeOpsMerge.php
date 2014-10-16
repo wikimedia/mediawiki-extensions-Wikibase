@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Validators\CompositeEntityValidator;
 use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\UniquenessViolation;
 
@@ -286,7 +287,9 @@ class ChangeOpsMerge {
 	 * @throws ChangeOpException
 	 */
 	private function applyConstraintChecks( Entity $entity, EntityId $fromId ) {
-		$constraintValidator = $this->constraintProvider->getConstraints( $entity->getType() );
+		$constraintValidator = new CompositeEntityValidator(
+			$this->constraintProvider->getUpdateValidators( $entity->getType() )
+		);
 
 		$result = $constraintValidator->validateEntity( $entity );
 		$errors = $result->getErrors();
