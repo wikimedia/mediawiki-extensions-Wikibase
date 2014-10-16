@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_dc952937",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.wbtooltip.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-16T15:08:46Z",
+      "side": 1,
+      "message": "Is this comment obsolete? If so, remove it",
+      "revId": "5eceebafb9bbe2d0539d5b1fd02d7e4170fe5fbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
