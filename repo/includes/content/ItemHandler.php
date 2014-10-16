@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
-use Wikibase\Validators\EntityValidator;
+use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
@@ -35,7 +35,7 @@ class ItemHandler extends EntityHandler {
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param EntityValidator[] $preSaveValidators
+	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param SiteLinkCache $siteLinkStore
 	 * @param callable|null $legacyExportFormatDetector
@@ -44,7 +44,7 @@ class ItemHandler extends EntityHandler {
 		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
-		array $preSaveValidators,
+		EntityConstraintProvider $constraintProvider,
 		ValidatorErrorLocalizer $errorLocalizer,
 		SiteLinkCache $siteLinkStore,
 		$legacyExportFormatDetector = null
@@ -54,7 +54,7 @@ class ItemHandler extends EntityHandler {
 			$entityPerPage,
 			$termIndex,
 			$contentCodec,
-			$preSaveValidators,
+			$constraintProvider,
 			$errorLocalizer,
 			$legacyExportFormatDetector
 		);

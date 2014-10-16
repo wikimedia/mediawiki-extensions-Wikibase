@@ -16,7 +16,7 @@ use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
-use Wikibase\Validators\EntityValidator;
+use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
@@ -50,7 +50,7 @@ class PropertyHandler extends EntityHandler {
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param EntityValidator[] $preSaveValidators
+	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param PropertyInfoStore $infoStore
 	 * @param callable|null $legacyExportFormatDetector
@@ -59,7 +59,7 @@ class PropertyHandler extends EntityHandler {
 		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
-		$preSaveValidators,
+		EntityConstraintProvider $constraintProvider,
 		ValidatorErrorLocalizer $errorLocalizer,
 		PropertyInfoStore $infoStore,
 		$legacyExportFormatDetector = null
@@ -69,7 +69,7 @@ class PropertyHandler extends EntityHandler {
 			$entityPerPage,
 			$termIndex,
 			$contentCodec,
-			$preSaveValidators,
+			$constraintProvider,
 			$errorLocalizer,
 			$legacyExportFormatDetector
 		);

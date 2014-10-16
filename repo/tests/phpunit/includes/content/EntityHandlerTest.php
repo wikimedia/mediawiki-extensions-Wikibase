@@ -425,4 +425,26 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
+	public function forCreationParamProvider() {
+		return array(
+			array( true ),
+			array( false ),
+		);
+	}
+
+	/**
+	 * @dataProvider forCreationParamProvider
+	 */
+	public function testGetOnSaveValidators( $forCreation ) {
+		$handler = $this->getHandler();
+
+		$validators = $handler->getOnSaveValidators( $forCreation );
+
+		$this->assertInternalType( 'array', $validators );
+
+		foreach ( $validators as $validator ) {
+			$this->assertInstanceOf( 'Wikibase\Validators\EntityValidator', $validator );
+		}
+	}
+
 }
