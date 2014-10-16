@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Claim;
 
-use ArrayAccess;
 use ArrayObject;
 use Comparable;
 use Hashable;
@@ -11,6 +10,7 @@ use Traversable;
 use Wikibase\DataModel\ByPropertyIdGrouper;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * A claim (identified using it's GUID) can only be added once.
@@ -457,7 +457,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 		do {
 			$claims = $this->getByRank( $rank );
 			$rank--;
-		} while ( $claims->isEmpty() && $rank > Claim::RANK_DEPRECATED );
+		} while ( $claims->isEmpty() && $rank > Statement::RANK_DEPRECATED );
 
 		return $claims;
 	}
