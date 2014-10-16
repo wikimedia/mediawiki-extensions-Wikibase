@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_71651eaa",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-10-16T10:55:42Z",
+      "side": 1,
+      "message": "For consistency, please use \"boolean\". You might want to correct the appearance of \"bool\" in $.wikibase.badgselector.",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_f1592e02",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
         "patchSetId": 1
@@ -81,6 +98,57 @@
       "writtenOn": "2014-10-16T10:43:45Z",
       "side": 1,
       "message": "Breaks line 107.",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_b1196629",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-10-16T10:55:42Z",
+      "side": 1,
+      "message": "{string[]|string} [value]?",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_5116e2f7",
+        "filename": "lib/resources/wikibase.sites.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-10-16T10:55:42Z",
+      "side": 1,
+      "message": "Now, I would expect the function to return an array of wikibase.Site objects...",
+      "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_7113de05",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-10-16T10:55:42Z",
+      "side": 1,
+      "message": "http://www.mediawiki.org/wiki/Wikibase/Coding_conventions#jQuery_DOM_element_creation",
       "revId": "cc36565836cba803d95cbe2029f55d66d8055bfa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
