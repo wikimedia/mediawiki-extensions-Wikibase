@@ -17,8 +17,17 @@ use Wikibase\LanguageWithConversion;
  */
 class LanguageWithConversionTest extends \MediaWikiTestCase {
 
-	private function assertLanguageWithConversion( $obj,
-		$expectedLangCode, $expectedSourceLangCode, $expectedFetchLangCode
+	/**
+	 * @param LanguageWithConversion $obj
+	 * @param string $expectedLangCode
+	 * @param string|null $expectedSourceLangCode
+	 * @param string $expectedFetchLangCode
+	 */
+	private function assertLanguageWithConversion(
+		LanguageWithConversion $obj,
+		$expectedLangCode,
+		$expectedSourceLangCode,
+		$expectedFetchLangCode
 	) {
 		$this->assertEquals( $expectedLangCode, $obj->getLanguage()->getCode() );
 		$this->assertEquals( $expectedLangCode, $obj->getLanguageCode() );
@@ -175,4 +184,5 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 			) ),
 		);
 	}
+
 }

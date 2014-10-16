@@ -203,7 +203,7 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 		$statement->setGuid( $guidGenerator->newGuid( $item2->getId() ) );
 
 		$item2->setLabel( 'en', 'foo' );
-		$item2->addClaim( $statement );
+		$item2->getStatements()->addStatement( $statement );
 
 		$validArgs[] = array(
 			$item2,

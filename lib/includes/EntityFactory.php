@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use MWException;
 use OutOfBoundsException;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 
@@ -114,6 +115,5 @@ class EntityFactory {
 		$class = $this->getEntityClass( $entityType );
 		return $class::newEmpty();
 	}
-
 
 }

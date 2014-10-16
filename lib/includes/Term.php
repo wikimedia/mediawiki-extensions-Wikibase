@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use MWException;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**

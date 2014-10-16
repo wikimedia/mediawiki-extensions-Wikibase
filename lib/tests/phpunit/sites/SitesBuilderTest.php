@@ -118,6 +118,11 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 		return $sitesData;
 	}
 
+	/**
+	 * @param array[] $sitesData
+	 *
+	 * @return MediaWikiSite[]
+	 */
 	protected function getSites( array $sitesData ) {
 		$sites = array();
 
@@ -148,4 +153,5 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 
 		return $sites;
 	}
+
 }

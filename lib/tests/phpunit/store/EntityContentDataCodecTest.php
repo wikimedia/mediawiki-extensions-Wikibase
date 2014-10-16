@@ -13,7 +13,6 @@ use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Test\EntityTestCase;
 
 /**
  * @covers Wikibase\Lib\Store\EntityContentDataCodec

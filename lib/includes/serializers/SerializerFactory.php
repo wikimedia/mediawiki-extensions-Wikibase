@@ -9,10 +9,10 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityFactory;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 
 /**
  * Factory for constructing Serializer and Unserializer objects.
@@ -67,7 +67,7 @@ class SerializerFactory {
 	}
 
 	/**
-	 * @param \Wikibase\Lib\PropertyDataTypeLookup $dataTypeLookup
+	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 */
 	public function setDataTypeLookup( PropertyDataTypeLookup $dataTypeLookup ) {
 		$this->dataTypeLookup = $dataTypeLookup;
