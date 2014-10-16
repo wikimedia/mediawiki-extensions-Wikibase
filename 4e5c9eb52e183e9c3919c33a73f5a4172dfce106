@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_57eed2b2",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-16T17:34:12Z",
+      "side": 1,
+      "message": "what template?\n\nalso type hint :)",
+      "revId": "4e5c9eb52e183e9c3919c33a73f5a4172dfce106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
