@@ -87,7 +87,7 @@
 					.addClass( 'special-query' )
 			);
 
-		var $searchMenu = $( '<ul/>' ).ooMenu( {
+		var $searchMenu = $( '<ul>' ).ooMenu( {
 			customItems: [
 				new $.ui.ooMenu.CustomItem( $searchContaining, null, function() {
 					$form.submit();

@@ -5,15 +5,13 @@
 ( function( mw, wb ) {
 	'use strict';
 
-	var MODULE = wb;
-
 	/**
 	 * @return {mediaWiki.Api}
 	 */
-	MODULE.getMwApiForRepo = function() {
+	wb.getMwApiForRepo = function() {
 		var repoConfig = mw.config.get( 'wbRepo' ),
-			repoApiEndpoint = repoConfig.url + repoConfig.scriptPath + '/api.php',
-			mwApiForRepo = wikibase.api.getLocationAgnosticMwApi( repoApiEndpoint );
-		return mwApiForRepo;
+			repoApiEndpoint = repoConfig.url + repoConfig.scriptPath + '/api.php';
+
+		return wikibase.api.getLocationAgnosticMwApi( repoApiEndpoint );
 	};
 }( mediaWiki, wikibase ) );
