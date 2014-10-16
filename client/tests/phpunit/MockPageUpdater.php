@@ -2,6 +2,9 @@
 
 namespace Wikibase\Test;
 
+use Title;
+use Wikibase\PageUpdater;
+
 /**
  * Mock version of the service object for triggering different kinds of page updates
  * and generally notifying the local wiki of external changes.
@@ -12,9 +15,8 @@ namespace Wikibase\Test;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
  */
-class MockPageUpdater implements \Wikibase\PageUpdater {
+class MockPageUpdater implements PageUpdater {
 
 	protected $updates = array(
 		'purgeParserCache' => array(),
@@ -23,31 +25,37 @@ class MockPageUpdater implements \Wikibase\PageUpdater {
 		'injectRCRecord' => array(),
 	);
 
+	/**
+	 * @param Title[] $titles
+	 */
 	public function purgeParserCache( array $titles ) {
-		/* @var \Title $title */
 		foreach ( $titles as $title ) {
 			$key = $title->getPrefixedDBkey();
 			$this->updates['purgeParserCache'][ $key ] = $title;
 		}
 	}
 
+	/**
+	 * @param Title[] $titles
+	 */
 	public function purgeWebCache( array $titles ) {
-		/* @var \Title $title */
 		foreach ( $titles as $title ) {
 			$key = $title->getPrefixedDBkey();
 			$this->updates['purgeWebCache'][ $key ] = $title;
 		}
 	}
 
+	/**
+	 * @param Title[] $titles
+	 */
 	public function scheduleRefreshLinks( array $titles ) {
-		/* @var \Title $title */
 		foreach ( $titles as $title ) {
 			$key = $title->getPrefixedDBkey();
 			$this->updates['scheduleRefreshLinks'][ $key ] = $title;
 		}
 	}
 
-	public function injectRCRecord( \Title $title, array $attribs ) {
+	public function injectRCRecord( Title $title, array $attribs ) {
 		$key = $title->getPrefixedDBkey();
 		$this->updates['injectRCRecord'][ $key ] = $attribs;
 

@@ -7,6 +7,7 @@ use Site;
 use Title;
 use Wikibase\Change;
 use Wikibase\ChangeHandler;
+use Wikibase\ChangesTable;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Entity;
@@ -162,7 +163,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$values['info'] = serialize( $values['info'] );
 
 		/* @var EntityChange $change */
-		$table = \Wikibase\ChangesTable::singleton();
+		$table = ChangesTable::singleton();
 		$change = $table->newRow( $values, true );
 
 		if ( $diff ) {
