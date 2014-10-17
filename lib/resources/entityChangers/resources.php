@@ -66,6 +66,12 @@ return call_user_func( function() {
 				'wikibase.entityChangers.LabelsChanger',
 				'wikibase.entityChangers.ReferencesChanger',
 				'wikibase.entityChangers.SiteLinksChanger',
+				'wikibase.serialization.ClaimDeserializer',
+				'wikibase.serialization.ClaimSerializer',
+				'wikibase.serialization.ReferenceDeserializer',
+				'wikibase.serialization.ReferenceSerializer',
+				'wikibase.serialization.StatementDeserializer',
+				'wikibase.serialization.StatementSerializer',
 			)
 		),
 
