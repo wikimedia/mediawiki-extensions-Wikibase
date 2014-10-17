@@ -18,6 +18,8 @@ use Status;
 use Title;
 use User;
 use ValueValidators\Result;
+use Wikibase\Content\DeferredDecodingEntityHolder;
+use Wikibase\Content\EntityHolder;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -297,18 +299,17 @@ abstract class EntityHandler extends ContentHandler {
 	/**
 	 * Creates a Content object for the given Entity object.
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityHolder $entityHolder
 	 *
-	 * @throws InvalidArgumentException
 	 * @return EntityContent
 	 */
-	public function makeEntityContent( Entity $entity ) {
+	public function makeEntityContent( EntityHolder $entityHolder ) {
 		$contentClass = $this->getContentClass();
 
 		/* EntityContent $content */
-		$content = new $contentClass( $entity );
+		$content = new $contentClass( $entityHolder );
 
 		//TODO: make sure the entity is valid/complete!
 
@@ -352,31 +353,25 @@ abstract class EntityHandler extends ContentHandler {
 			$redirect = $content->getEntityRedirect();
 			return $this->contentCodec->encodeRedirect( $redirect, $format );
 		} else {
+			//TODO: if we have an un-decoded Entity in a DeferredDecodingEntityHolder, just re-use the encoded form.
 			$entity = $content->getEntity();
 			return $this->contentCodec->encodeEntity( $entity, $format );
 		}
 	}
 
-
 	/**
 	 * @see ContentHandler::unserializeContent
 	 *
 	 * @param string $blob
-	 * @param null|string $format
+	 * @param string $format
 	 *
 	 * @throws MWContentSerializationException
 	 * @return EntityContent
 	 */
-	public function unserializeContent( $blob, $format = null ) {
-		$entity = $this->contentCodec->decodeEntity( $blob, $format );
+	public function unserializeContent( $blob, $format = CONTENT_FORMAT_JSON ) {
+		$redirect = $this->contentCodec->decodeRedirect( $blob, $format );
 
-		if ( $entity ) {
-			$entityContent = $this->makeEntityContent( $entity );
-			return $entityContent;
-		} else {
-			// Must be a redirect then
-			$redirect = $this->contentCodec->decodeRedirect( $blob, $format );
-
+		if ( $redirect ) {
 			if ( $redirect === null ) {
 				throw new MWContentSerializationException(
 					'The serialized data contains neither an Entity nor an EntityRedirect!'
@@ -384,6 +379,11 @@ abstract class EntityHandler extends ContentHandler {
 			}
 
 			return $this->makeEntityRedirectContent( $redirect );
+		} else {
+			$holder = new DeferredDecodingEntityHolder( $this->contentCodec, $blob, $format, $this->getEntityType() );
+			$entityContent = $this->makeEntityContent( $holder );
+
+			return $entityContent;
 		}
 	}
 
