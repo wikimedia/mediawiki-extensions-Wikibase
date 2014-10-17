@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\EntityIdFormatter;
+use MediaWikiTestCase;
 
 /**
  * @covers Wikibase\ItemDisambiguation
@@ -120,7 +121,7 @@ class ItemDisambiguationTest extends \PHPUnit_Framework_TestCase {
 		$html = $disambig->getHTML( $items );
 
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $html, "Failed to match HTML output with tag '{$key}'" );
+			MediaWikiTestCase::assertTag( $matcher, $html, "Failed to match HTML output with tag '{$key}'" );
 		}
 	}
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use MediaWikiTestCase;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 
 /**
@@ -35,7 +36,7 @@ class BaseTemplateAfterPortletHandlerTest extends \PHPUnit_Framework_TestCase {
 		if ( $expected === null ) {
 			$this->assertNull( $formattedLink );
 		} else {
-			$this->assertTag( $expected, $formattedLink );
+			MediaWikiTestCase::assertTag( $expected, $formattedLink );
 		}
 	}
 
