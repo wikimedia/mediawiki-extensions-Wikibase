@@ -1060,9 +1060,6 @@ final class RepoHooks {
 			$out->setProperty( 'wikibase-view-chunks', $placeholders );
 		}
 
-		$configVars = $parserOutput->getExtensionData( 'wikibase-configvars' );
-		$out->setProperty( 'wikibase-configvars', $configVars );
-
 		return true;
 	}
 
