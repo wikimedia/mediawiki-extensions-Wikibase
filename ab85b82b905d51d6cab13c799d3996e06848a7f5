@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_1640425a",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-17T21:53:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_90ee9ab0",
+      "revId": "ab85b82b905d51d6cab13c799d3996e06848a7f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_103a8a33",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-17T18:27:54Z",
       "side": 1,
       "message": "not explicit, and the control flow of this method is not as fantastic as it could be",
+      "revId": "ab85b82b905d51d6cab13c799d3996e06848a7f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_392211a0",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-17T21:53:17Z",
+      "side": 1,
+      "message": "Can\u0027t really think of a way to make this much nicer",
+      "parentUuid": "8e96e304_103a8a33",
       "revId": "ab85b82b905d51d6cab13c799d3996e06848a7f5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
