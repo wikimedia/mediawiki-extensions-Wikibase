@@ -282,15 +282,17 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 				$number = round( round( $year / $shift ) * $unshift );
 		}
 
-		$formattedNumber = $this->language->formatNum( $number, true );
-
+		// Year to small for precision, fall back to year
 		if ( empty( $number )
 			&& ( $precision < TimeValue::PRECISION_YEAR
 				|| ( $isBCE && $precision === TimeValue::PRECISION_YEAR )
 			)
 		) {
-			throw new InvalidArgumentException( 'Year to small for precision.' );
+			$number = $year;
+			$msg = null;
 		}
+
+		$formattedNumber = $this->language->formatNum( $number, true );
 
 		if ( empty( $msg ) ) {
 			// TODO: This needs a message.
