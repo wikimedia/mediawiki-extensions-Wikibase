@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_9dc3183d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-17T02:55:59Z",
+      "side": 1,
+      "message": "So we have some code containing an if. This if contains some code, and if and a try catch. The try catch contains some code and two ifs.\n\nAt least one extraction is needed to make that somewhat sane.",
+      "revId": "40d1db6d7c16b2073a753d724dd7189c0c03c34a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
