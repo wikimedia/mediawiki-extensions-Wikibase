@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_f3860b6a",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-17T11:52:14Z",
+      "side": 1,
+      "message": "To me it seems clearer this way, and it also makes it easier to add things or change order: initialize an empty structure, apply the same operation for everything you want to add to it. It has become \"best practice\" to me.\n\nDoesn\u0027t matter much here, and I can change it. I just like it better the way it is :)",
+      "parentUuid": "8e96e304_b7a95623",
+      "revId": "4e5c9eb52e183e9c3919c33a73f5a4172dfce106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_778c2edc",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-16T17:49:37Z",
       "side": 1,
       "message": "can also be null",
+      "revId": "4e5c9eb52e183e9c3919c33a73f5a4172dfce106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_138cd788",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-17T11:52:14Z",
+      "side": 1,
+      "message": "probably shouldn\u0027t.",
+      "parentUuid": "8e96e304_778c2edc",
       "revId": "4e5c9eb52e183e9c3919c33a73f5a4172dfce106",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -124,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_d3850f5c",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-17T11:52:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_b77876c0",
+      "revId": "4e5c9eb52e183e9c3919c33a73f5a4172dfce106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_b7fb9643",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 5
@@ -135,6 +189,24 @@
       "writtenOn": "2014-10-16T17:49:37Z",
       "side": 1,
       "message": "still doesn\u0027t do that",
+      "revId": "4e5c9eb52e183e9c3919c33a73f5a4172dfce106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_b380834c",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-17T11:52:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_b7fb9643",
       "revId": "4e5c9eb52e183e9c3919c33a73f5a4172dfce106",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
