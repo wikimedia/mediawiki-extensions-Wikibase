@@ -243,7 +243,7 @@
 	"wikibase-entitydata-title": "Objektdaten",
 	"wikibase-entitydata-text": "Diese Seite liefert eine verlinkte Datenschnittstelle zu Objektwerten. Bitte gib die Objektkennung in der URL an, indem du Unterseitensyntax verwendest.",
 	"special-mylanguagefallbackchain": "Meine Sprach-Fallback-Kette",
-	"wikibase-mylanguagefallbackchain-text": "Sprach-Fallbackkette zur Anzeige der Objektbezeichnungen wird unten stehend angezeigt.",
+	"wikibase-mylanguagefallbackchain-text": "Die Fallbackkette für die anzuzeigenden Sprachen der Objektbezeichnungen wird nachstehend angezeigt.",
 	"wikibase-mylanguagefallbackchain-babel": "Du kannst sie bearbeiten, indem du <nowiki>{{#babel:}}</nowiki> in {{GENDER:$1|deine}} [[Special:MyPage|Benutzerseite]] einfügst.",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, konvertiert von $3 – $4",
 	"wikibase-api-unresolved-redirect": "Die angegebene Objektkennung bezieht sich auf eine Weiterleitung, die in diesem Kontext nicht unterstützt wird.",
