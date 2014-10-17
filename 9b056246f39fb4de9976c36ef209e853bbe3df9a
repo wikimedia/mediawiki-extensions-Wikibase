@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_f96b4980",
+        "filename": "repo/tests/phpunit/includes/View/SectionEditLinkGeneratorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-17T22:24:02Z",
+      "side": 0,
+      "message": "Yay for removing usages of these :)",
+      "revId": "9b056246f39fb4de9976c36ef209e853bbe3df9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
