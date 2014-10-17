@@ -27,7 +27,7 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 		$key = $action === 'add' ? 'wikibase-add' : 'wikibase-edit';
 		$msg = wfMessage( $key )->inLanguage( $langCode );
 
-		$html = $generator->getHtmlForEditSection( $pageName, array(), '', $msg, $enabled );
+		$html = $generator->getHtmlForEditSection( $pageName, array( 'Q1' ), '', $msg, $enabled );
 		$matcher = array(
 			'tag' => 'span',
 			'class' => 'wikibase-toolbar'
@@ -107,14 +107,8 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 			$enabled
 		);
 
-		$this->assertNotTag( array(
-			'tag' => 'a',
-			'attributes' => array( 'href' => 'regexp:+\bSpecial:SetLabel\b+' )
-		), $html );
-		$this->assertTag( array(
-			'tag' => 'span',
-			'attributes' => array( 'class' => 'ui-state-disabled' )
-		), $html );
+		$this->assertNotContains( '<a ', $html );
+		$this->assertNotContains( 'wikibase-toolbar-button', $html );
 	}
 
 	public function getHtmlForEditSection_disabledProvider() {
