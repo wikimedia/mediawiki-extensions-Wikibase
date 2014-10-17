@@ -16,6 +16,24 @@
       "revId": "f22714c5f338837d430ad0ecd834b9c674bdde7c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_b6eb8e9f",
+        "filename": "lib/tests/phpunit/formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-17T20:56:29Z",
+      "side": 1,
+      "message": "Oh. This should be at least \"0\" without the \"BCE\". Not that it matters.\n\nTo the question: If thats in the database we should show it. Not magically turn into \"1\".",
+      "parentUuid": "8e96e304_f744be70",
+      "revId": "f22714c5f338837d430ad0ecd834b9c674bdde7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
