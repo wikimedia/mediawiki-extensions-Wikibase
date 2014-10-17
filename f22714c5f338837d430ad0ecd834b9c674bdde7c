@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_f744be70",
+        "filename": "lib/tests/phpunit/formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-17T09:45:03Z",
+      "side": 1,
+      "message": "Yea, what should we do with invalid dates like this? Treat it as the year 1 BCE? Or CE? or just keep it as is?...",
+      "revId": "f22714c5f338837d430ad0ecd834b9c674bdde7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
