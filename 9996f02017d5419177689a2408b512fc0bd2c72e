@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_98b00640",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-17T07:51:05Z",
+      "side": 1,
+      "message": "before in https://gerrit.wikimedia.org/r/#/c/17806/4/repo/includes/actions/ViewEntityAction.php we called $this-\u003egetArticle()-\u003egetPage()-\u003egetContent(); instead,\n\nbut still called this twice, in the same way as here and checked the type of content when passing to displayEntityContent and then called isPlainView.  I really don\u0027t see why is is needed to check again here.",
+      "parentUuid": "8e96e304_d86f6ebf",
+      "revId": "9996f02017d5419177689a2408b512fc0bd2c72e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_1ddf0812",
         "filename": "repo/includes/actions/ViewEntityAction.php",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2014-10-17T03:01:09Z",
       "side": 1,
       "message": "yay for private!",
+      "revId": "9996f02017d5419177689a2408b512fc0bd2c72e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_58911e9b",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-17T07:51:05Z",
+      "side": 1,
+      "message": "i see this method used to be called in ViewItemAction but no more, and in that case it could have at least been protected.",
+      "parentUuid": "8e96e304_1ddf0812",
       "revId": "9996f02017d5419177689a2408b512fc0bd2c72e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
