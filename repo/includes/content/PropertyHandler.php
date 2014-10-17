@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Title;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityContent;
@@ -52,6 +53,7 @@ class PropertyHandler extends EntityHandler {
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
 	 * @param ValidatorErrorLocalizer $errorLocalizer
+	 * @param EntityIdParser $entityIdParser
 	 * @param PropertyInfoStore $infoStore
 	 * @param callable|null $legacyExportFormatDetector
 	 */
@@ -61,6 +63,7 @@ class PropertyHandler extends EntityHandler {
 		EntityContentDataCodec $contentCodec,
 		$preSaveValidators,
 		ValidatorErrorLocalizer $errorLocalizer,
+		EntityIdParser $entityIdParser,
 		PropertyInfoStore $infoStore,
 		$legacyExportFormatDetector = null
 	) {
@@ -71,6 +74,7 @@ class PropertyHandler extends EntityHandler {
 			$contentCodec,
 			$preSaveValidators,
 			$errorLocalizer,
+			$entityIdParser,
 			$legacyExportFormatDetector
 		);
 

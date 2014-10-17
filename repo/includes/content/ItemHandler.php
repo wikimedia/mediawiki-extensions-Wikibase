@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Content;
 use DataUpdate;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
@@ -46,6 +47,7 @@ class ItemHandler extends EntityHandler {
 		EntityContentDataCodec $contentCodec,
 		array $preSaveValidators,
 		ValidatorErrorLocalizer $errorLocalizer,
+		EntityIdParser $entityIdParser,
 		SiteLinkCache $siteLinkStore,
 		$legacyExportFormatDetector = null
 	) {
@@ -56,6 +58,7 @@ class ItemHandler extends EntityHandler {
 			$contentCodec,
 			$preSaveValidators,
 			$errorLocalizer,
+			$entityIdParser,
 			$legacyExportFormatDetector
 		);
 

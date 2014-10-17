@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Store\SQL;
 use DatabaseBase;
 use DBError;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\LegacyIdInterpreter;
@@ -26,9 +26,9 @@ use Wikibase\Repo\Store\EntityPerPage;
 class EntityPerPageTable implements EntityPerPage {
 
 	/**
-	 * @var BasicEntityIdParser
+	 * @var EntityIdParser
 	 */
-	private $idParser;
+	private $entityIdParser;
 
 	/**
 	 * @var bool
@@ -40,14 +40,12 @@ class EntityPerPageTable implements EntityPerPage {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $useRedirectTargetColumn = true ) {
+	public function __construct( EntityIdParser $entityIdParser, $useRedirectTargetColumn = true ) {
 		if ( !is_bool( $useRedirectTargetColumn ) ) {
 			throw new InvalidArgumentException( '$useRedirectTargetColumn must be true or false' );
 		}
 
-		// FIXME: this needs to be injected if the table is to work with entities other than items and properties
-		$this->idParser = new BasicEntityIdParser();
-
+		$this->entityIdParser = $entityIdParser;
 		$this->useRedirectTargetColumn = $useRedirectTargetColumn;
 	}
 
@@ -464,7 +462,7 @@ class EntityPerPageTable implements EntityPerPage {
 			return null;
 		}
 
-		return $this->idParser->parse( $row->epp_redirect_target );
+		return $this->entityIdParser->parse( $row->epp_redirect_target );
 	}
 
 }

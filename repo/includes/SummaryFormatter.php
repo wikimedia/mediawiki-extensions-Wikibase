@@ -8,7 +8,6 @@ use InvalidArgumentException;
 use Language;
 use MWException;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;

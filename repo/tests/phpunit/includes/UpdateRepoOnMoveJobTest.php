@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use TestSites;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Store\SQL\EntityPerPageTable;
@@ -56,7 +57,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$store = new WikiPageEntityStore(
 			$wikibaseRepo->getEntityContentFactory(),
 			$wikibaseRepo->getStore()->newIdGenerator(),
-			new EntityPerPageTable()
+			new EntityPerPageTable( new BasicEntityIdParser() )
 		);
 
 		$store->saveEntity( $item, 'UpdateRepoOnMoveJobTest', $user, EDIT_NEW );

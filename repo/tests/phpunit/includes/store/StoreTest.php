@@ -22,10 +22,13 @@ use Wikibase\Store;
 class StoreTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
-		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$instances = array(
-			new SqlStore( $contentCodec )
+			new SqlStore(
+				$wikibaseRepo->getEntityContentDataCodec(),
+				$wikibaseRepo->getEntityIdParser()
+			)
 		);
 
 		return array( $instances );
