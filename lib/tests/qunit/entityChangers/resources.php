@@ -32,6 +32,10 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.datamodel',
 				'wikibase.entityChangers.ClaimsChanger',
+				'wikibase.serialization.ClaimDeserializer',
+				'wikibase.serialization.ClaimSerializer',
+				'wikibase.serialization.StatementDeserializer',
+				'wikibase.serialization.StatementSerializer',
 			),
 		),
 
@@ -62,6 +66,8 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.datamodel',
 				'wikibase.entityChangers.ReferencesChanger',
+				'wikibase.serialization.ReferenceDeserializer',
+				'wikibase.serialization.ReferenceSerializer',
 			),
 		),
 

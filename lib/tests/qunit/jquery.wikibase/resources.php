@@ -48,6 +48,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.wikibase.claimgrouplistview.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.wikibase.claimgrouplistview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.claimgrouplistview',
+				'wikibase.datamodel'
+			),
+		),
+
 		'jquery.wikibase.claimview.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.wikibase.claimview.tests.js',

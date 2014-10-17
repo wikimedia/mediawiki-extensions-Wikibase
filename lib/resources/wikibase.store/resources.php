@@ -64,7 +64,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'mediawiki.Title',
 				'util.inherit',
-				'wikibase.serialization', // For registering in the SerializerFactory
+				'wikibase.serialization.Deserializer',
 				'wikibase.store',
 				'wikibase.store.FetchedContent',
 			),
