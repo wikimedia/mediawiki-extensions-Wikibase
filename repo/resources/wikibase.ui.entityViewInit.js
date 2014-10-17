@@ -296,14 +296,6 @@
 		} else if( !mw.config.get( 'wbUserCanEdit' ) ) {
 			restrict( 'restrictionedit' );
 		}
-
-		if( !mw.config.get( 'wbIsEditView' ) ) {
-			// no need to implement a 'disableEntityPageActions' since hiding all the toolbars
-			// directly like this is not really worse than hacking the Toolbar prototype to achieve
-			// this:
-			$( ':wikibase-toolbar' ).hide();
-			$( 'body' ).addClass( 'wb-editing-disabled' );
-		}
 	}
 
 	/**
