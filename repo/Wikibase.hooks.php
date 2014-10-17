@@ -30,6 +30,7 @@ use SpecialSearch;
 use SplFileInfo;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
@@ -637,44 +638,57 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $sk, array &$bodyAttrs ) {
-		wfProfileIn( __METHOD__ );
+		$entityId = self::getEntityIdFromContext( $out );
 
+		if ( $entityId === null ) {
+			return true;
+		}
+
+		// TODO: preg_replace kind of ridiculous here, should probably change the ENTITY_TYPE constants instead
+		$entityType = preg_replace( '/^wikibase-/i', '', $entityId->getEntityType() );
+
+		// add class to body so it's clear this is a wb item:
+		$bodyAttrs['class'] .= ' wb-entitypage wb-' . $entityType . 'page';
+		// add another class with the ID of the item:
+		$bodyAttrs['class'] .= ' wb-' . $entityType . 'page-' . $entityId->getSerialization();
+
+		if ( $sk->getRequest()->getCheck( 'diff' ) ) {
+			$bodyAttrs['class'] .= ' wb-diffpage';
+		}
+
+		if ( $out->getRevisionId() !== $out->getTitle()->getLatestRevID() ) {
+			$bodyAttrs['class'] .= ' wb-oldrevpage';
+		}
+
+		return true;
+	}
+
+	/**
+	 * @param OutputPage $out
+	 *
+	 * @return EntityId|null
+	 */
+	private static function getEntityIdFromContext( OutputPage $out ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
 
-		if ( $entityContentFactory->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
-			$configVars = $out->getJsConfigVars();
-			$entityIdParser = $wikibaseRepo->getEntityIdParser();
+		if ( !$entityContentFactory->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
+			return null;
+		}
 
-			if ( !isset( $configVars['wbEntityId'] ) ) {
-				return true;
-			}
+		$jsConfigVars = $out->getJsConfigVars();
+
+		if ( array_key_exists( 'wbEntityId', $jsConfigVars ) ) {
+			$idString = $jsConfigVars['wbEntityId'];
 
 			try {
-				$entityId = $entityIdParser->parse( $configVars['wbEntityId'] );
-
-				// TODO: preg_replace kind of ridiculous here, should probably change the ENTITY_TYPE constants instead
-				$entityType = preg_replace( '/^wikibase-/i', '', $entityId->getEntityType() );
-
-				// add class to body so it's clear this is a wb item:
-				$bodyAttrs['class'] .= ' wb-entitypage wb-' . $entityType . 'page';
-				// add another class with the ID of the item:
-				$bodyAttrs['class'] .= ' wb-' . $entityType . 'page-' . $entityId->getSerialization();
-
-				if ( $sk->getRequest()->getCheck( 'diff' ) ) {
-					$bodyAttrs['class'] .= ' wb-diffpage';
-				}
-
-				if ( $out->getRevisionId() !== $out->getTitle()->getLatestRevID() ) {
-					$bodyAttrs['class'] .= ' wb-oldrevpage';
-				}
+				return $wikibaseRepo->getEntityIdParser()->parse( $idString );
 			} catch ( EntityIdParsingException $ex ) {
-				wfLogWarning( 'Failed to parse EntityId config var: ' . $configVars['wbEntityId'] );
+				wfLogWarning( 'Failed to parse EntityId config var: ' . $idString );
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
-		return true;
+		return null;
 	}
 
 	/**
