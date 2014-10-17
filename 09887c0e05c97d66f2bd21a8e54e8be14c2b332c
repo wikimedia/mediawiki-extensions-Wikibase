@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_f3704ba5",
+        "filename": "client/includes/store/sql/ConnectionManager.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-17T11:37:40Z",
+      "side": 1,
+      "message": "Won\u0027t this default to \u0027beginAtomicSection\u0027 all the time? This thing is used as a token in Database, which is a bug in database. Wow.",
+      "revId": "09887c0e05c97d66f2bd21a8e54e8be14c2b332c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
