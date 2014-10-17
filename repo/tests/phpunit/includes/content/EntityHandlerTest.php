@@ -8,6 +8,7 @@ use Language;
 use Revision;
 use RuntimeException;
 use Title;
+use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
@@ -79,7 +80,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		}
 
 		$handler = $this->getHandler();
-		return $handler->makeEntityContent( $entity );
+		return $handler->makeEntityContent( new EntityInstanceHolder( $entity ) );
 	}
 
 	/**
@@ -305,7 +306,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$entity = $this->newEntity();
 
 		$handler = $this->getHandler();
-		$content = $handler->makeEntityContent( $entity );
+		$content = $handler->makeEntityContent( new EntityInstanceHolder( $entity ) );
 
 		$this->assertEquals( $this->getModelId(), $content->getModel() );
 		$this->assertSame( $entity, $content->getEntity() );
