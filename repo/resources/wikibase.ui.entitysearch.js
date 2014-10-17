@@ -56,7 +56,7 @@
 	$( function() {
 		var $form = $( '#searchform ' ),
 			$input = $( '#searchInput' ),
-			$hiddenInput = $( '<input type="hidden" name="search"/>' );
+			$hiddenInput = $( '<input type="hidden" name="search" />' );
 
 		/**
 		 * Updates the suggestion list special item that triggers a full-text search.
@@ -87,7 +87,7 @@
 					.addClass( 'special-query' )
 			);
 
-		var $searchMenu = $( '<ul/>' ).ooMenu( {
+		var $searchMenu = $( '<ul>' ).ooMenu( {
 			customItems: [
 				new $.ui.ooMenu.CustomItem( $searchContaining, null, function() {
 					$form.submit();
