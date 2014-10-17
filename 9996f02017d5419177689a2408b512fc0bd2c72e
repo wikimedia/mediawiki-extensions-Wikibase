@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_5dd4b0ec",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-17T03:01:09Z",
+      "side": 1,
+      "message": "Am I blind or is $content now not used?",
+      "revId": "9996f02017d5419177689a2408b512fc0bd2c72e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_1ddf0812",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-17T03:01:09Z",
+      "side": 1,
+      "message": "yay for private!",
+      "revId": "9996f02017d5419177689a2408b512fc0bd2c72e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_9dca3849",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-17T03:01:09Z",
+      "side": 1,
+      "message": "$this-\u003eisEditable() would be much better. And what the smag is this passed to the function call in the if block, where the value is always the same?!\n\nThis class *ahhhhhhhhhh*",
+      "revId": "9996f02017d5419177689a2408b512fc0bd2c72e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
