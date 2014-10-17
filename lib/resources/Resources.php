@@ -120,6 +120,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.sticknode' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.sticknode.js',
+			),
+			'dependencies' => array(
+				'jquery.throttle-debounce',
+			),
+		),
+
 		'jquery.ui.tagadata' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.tagadata.js',
