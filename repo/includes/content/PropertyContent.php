@@ -2,6 +2,9 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
+use Wikibase\Content\EntityHolder;
+use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Property;
 
 /**
@@ -15,9 +18,9 @@ use Wikibase\DataModel\Entity\Property;
 class PropertyContent extends EntityContent {
 
 	/**
-	 * @var Property
+	 * @var EntityHolder
 	 */
-	private $property;
+	private $propertyHolder;
 
 	/**
 	 * Do not use to construct new stuff from outside of this class,
@@ -28,11 +31,17 @@ class PropertyContent extends EntityContent {
 	 *
 	 * @protected
 	 *
-	 * @param Property $property
+	 * @param EntityHolder $propertyHolder
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( Property $property ) {
+	public function __construct( EntityHolder $propertyHolder ) {
 		parent::__construct( CONTENT_MODEL_WIKIBASE_PROPERTY );
-		$this->property = $property;
+
+		if ( $propertyHolder->getEntityType() !== Property::ENTITY_TYPE ) {
+			throw new InvalidArgumentException( '$propertyHolder must contain a Property entity!' );
+		}
+
+		$this->propertyHolder = $propertyHolder;
 	}
 
 	/**
@@ -43,7 +52,7 @@ class PropertyContent extends EntityContent {
 	 * @return PropertyContent
 	 */
 	public static function newFromProperty( Property $property ) {
-		return new static( $property );
+		return new static( new EntityInstanceHolder( $property ) );
 	}
 
 	/**
@@ -52,16 +61,7 @@ class PropertyContent extends EntityContent {
 	 * @return Property
 	 */
 	public function getProperty() {
-		return $this->property;
-	}
-
-	/**
-	 * Sets the property that makes up this property content.
-	 *
-	 * @param Property $property
-	 */
-	public function setProperty( Property $property ) {
-		$this->property = $property;
+		return $this->propertyHolder->getEntity( 'Wikibase\DataModel\Entity\Property' );
 	}
 
 	/**
@@ -70,7 +70,7 @@ class PropertyContent extends EntityContent {
 	 * @return PropertyContent
 	 */
 	public static function newEmpty() {
-		return new static( Property::newFromType( 'string' ) );
+		return new static( new EntityInstanceHolder( Property::newFromType( 'string' ) ) );
 	}
 
 	/**
@@ -79,7 +79,16 @@ class PropertyContent extends EntityContent {
 	 * @return Property
 	 */
 	public function getEntity() {
-		return $this->property;
+		return $this->getProperty();
+	}
+
+	/**
+	 * @see EntityContent::getEntityHolder
+	 *
+	 * @return EntityHolder
+	 */
+	public function getEntityHolder() {
+		return $this->propertyHolder;
 	}
 
 	/**
@@ -94,6 +103,7 @@ class PropertyContent extends EntityContent {
 			return false;
 		}
 
+		//TODO: provide a way to get the data type from the holder directly!
 		if ( is_null( $this->getEntity()->getDataTypeId() ) ) {
 			return false;
 		}
