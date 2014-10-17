@@ -3,9 +3,9 @@
 namespace Wikibase\DataModel;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Turns legacy entity id serializations consisting of entity type + numeric id
@@ -29,42 +29,13 @@ class LegacyIdInterpreter {
 	 * @throws InvalidArgumentException
 	 */
 	public static function newIdFromTypeAndNumber( $entityType, $numericId ) {
-		$idParser = new BasicEntityIdParser();
-
-		try {
-			$id = $idParser->parse( self::constructSerialization( $entityType, $numericId ) );
-		}
-		catch ( EntityIdParsingException $ex ) {
-			throw new InvalidArgumentException( $ex->getMessage(), 0, $ex );
+		if ( $entityType === 'item' ) {
+			return ItemId::newFromNumber( $numericId );
+		} elseif ( $entityType === 'property' ) {
+			return PropertyId::newFromNumber( $numericId );
 		}
 
-		return $id;
-	}
-
-	/**
-	 * Constructs the entity id serialization from entity type and numeric id.
-	 *
-	 * @param string $entityType
-	 * @param int|string $numericId
-	 *
-	 * @return string
-	 * @throws InvalidArgumentException
-	 */
-	private static function constructSerialization( $entityType, $numericId ) {
-		if ( !is_string( $entityType ) ) {
-			throw new InvalidArgumentException( '$entityType needs to be a string' );
-		}
-
-		$entityTypes = array(
-			'item' => 'Q',
-			'property' => 'P',
-		);
-
-		if ( !array_key_exists( $entityType, $entityTypes ) ) {
-			throw new InvalidArgumentException( 'Provided a numeric id (deprecated) for an entity type that never supported this' );
-		}
-
-		return $entityTypes[$entityType] . (string)$numericId;
+		throw new InvalidArgumentException( 'Invalid entityType ' . $entityType );
 	}
 
 }
