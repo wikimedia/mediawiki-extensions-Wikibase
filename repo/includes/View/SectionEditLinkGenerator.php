@@ -47,9 +47,7 @@ class SectionEditLinkGenerator {
 		$html = wfTemplate( 'wikibase-toolbar-container',
 			wfTemplate( 'wikibase-toolbar',
 				'',
-				wfTemplate( 'wikibase-toolbar-bracketed',
-					$toolbarButton
-				)
+				$toolbarButton
 			)
 		);
 
@@ -87,18 +85,16 @@ class SectionEditLinkGenerator {
 	 */
 	private function getToolbarButton( $cssClassSuffix, $buttonLabel, $editUrl = null ) {
 		if ( $editUrl !== null ) {
-			return wfTemplate( 'wikibase-toolbar-button',
-				'wikibase-toolbar-button-' . $cssClassSuffix,
-				$editUrl,
-				$buttonLabel
-			);
-		} else {
-			return wfTemplate( 'wikibase-toolbar-button',
-				'wikibase-toolbar-button-' . $cssClassSuffix . ' ui-state-disabled',
-				'#',
-				$buttonLabel
+			return wfTemplate( 'wikibase-toolbar-bracketed',
+				wfTemplate( 'wikibase-toolbar-button',
+					'wikibase-toolbar-button-' . $cssClassSuffix,
+					$editUrl,
+					$buttonLabel
+				)
 			);
 		}
+
+		return '';
 	}
 
 }
