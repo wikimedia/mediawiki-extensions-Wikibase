@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Entity;
 use DataValues\DataValue;
 use DataValues\DataValueObject;
 use DataValues\IllegalValueException;
+use InvalidArgumentException;
 use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
@@ -58,7 +59,14 @@ class EntityIdValue extends DataValueObject {
 	 */
 	public function unserialize( $value ) {
 		list( $entityType, $numericId ) = json_decode( $value );
-		$this->__construct( LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId ) );
+
+		try {
+			$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
+		} catch ( InvalidArgumentException $ex ) {
+			throw new IllegalValueException( 'Invalid EntityIdValue serialization.' );
+		}
+
+		return $this->__construct( $entityId );
 	}
 
 	/**
