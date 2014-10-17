@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_10404a5a",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-17T18:58:18Z",
+      "side": 1,
+      "message": "This is construction code which itself should be in a factory. If you put it in some newEntityParserOutputGeneratorFactory method in WikibaseRepo, then you also don\u0027t need to do all these different calls to $wikibaseRepo, you can just do calls on $this (which shows the approach is more cohesive)",
+      "revId": "26d1a432930ac5667cc8732451344d1fd0f105ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
