@@ -5,7 +5,11 @@ namespace Wikibase;
 use InvalidArgumentException;
 use LogicException;
 use MWException;
+use RuntimeException;
 use Title;
+use Wikibase\Content\EntityHolder;
+use Wikibase\Content\EntityInstanceHolder;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\ItemSearchTextGenerator;
@@ -50,22 +54,26 @@ class ItemContent extends EntityContent {
 	 * In other words: treat as protected (which it was, but now cannot
 	 * be since we derive from Content).
 	 *
-	 * @param Item|null $item
+	 * @param EntityHolder|null $itemHolder
 	 * @param EntityRedirect|null $entityRedirect
 	 * @param Title|null $redirectTitle
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		Item $item = null,
+		EntityHolder $itemHolder = null,
 		EntityRedirect $entityRedirect = null,
 		Title $redirectTitle = null
 	) {
 		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
 
-		if ( is_null( $item ) === is_null( $entityRedirect ) ) {
+		if ( is_null( $itemHolder ) === is_null( $entityRedirect ) ) {
 			throw new InvalidArgumentException(
 				'Either $item or $entityRedirect and $redirectTitle must be provided.' );
+		}
+
+		if ( $itemHolder !== null && $itemHolder->getEntityType() !== Item::ENTITY_TYPE ) {
+			throw new InvalidArgumentException( '$itemHolder must contain a Item entity!' );
 		}
 
 		if ( is_null( $entityRedirect ) !== is_null( $redirectTitle ) ) {
@@ -83,7 +91,7 @@ class ItemContent extends EntityContent {
 			}
 		}
 
-		$this->item = $item;
+		$this->itemHolder = $itemHolder;
 		$this->redirect = $entityRedirect;
 		$this->redirectTitle = $redirectTitle;
 	}
@@ -96,7 +104,7 @@ class ItemContent extends EntityContent {
 	 * @return ItemContent
 	 */
 	public static function newFromItem( Item $item ) {
-		return new static( $item );
+		return new static( new EntityInstanceHolder( $item ) );
 	}
 
 	/**
@@ -145,11 +153,16 @@ class ItemContent extends EntityContent {
 			throw new MWException( 'Unresolved redirect to [[' . $redirect->getFullText() . ']]' );
 		}
 
-		if ( !$this->item ) {
+		if ( !$this->itemHolder ) {
 			throw new LogicException( 'Neither redirect nor item found in ItemContent!' );
 		}
 
-		return $this->item;
+		wfProfileIn( __METHOD__ );
+
+		$item = $this->itemHolder->getEntity( 'Wikibase\DataModel\Entity\Item' );
+
+		wfProfileOut( __METHOD__ );
+		return $item;
 	}
 
 	/**
@@ -158,7 +171,7 @@ class ItemContent extends EntityContent {
 	 * @return ItemContent
 	 */
 	public static function newEmpty() {
-		return new static( Item::newEmpty() );
+		return new static( new EntityInstanceHolder( Item::newEmpty() ) );
 	}
 
 	/**
@@ -169,6 +182,15 @@ class ItemContent extends EntityContent {
 	 */
 	public function getEntity() {
 		return $this->getItem();
+	}
+
+	/**
+	 * @see EntityContent::getEntityHolder
+	 *
+	 * @return EntityHolder
+	 */
+	protected function getEntityHolder() {
+		return $this->itemHolder;
 	}
 
 	/**
