@@ -35,6 +35,7 @@ use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFilterOptions;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\SiteLink;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -338,21 +339,42 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onBaseTemplateToolbox( QuickTemplate &$sk, &$toolbox ) {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$title = $sk->getSkin()->getTitle();
 		$prefixedId = $sk->getSkin()->getOutput()->getProperty( 'wikibase_item' );
 
+		// Try to load the item ID from Database, but only do so on non-article views,
+		// (where the article's OutputPage isn't available to us).
+		$doExpensiveLookup =
+			$title &&
+			Action::getActionName( $sk->getSkin()->getContext() ) !== 'view' &&
+			self::isWikibaseEnabled( $title->getNamespace() );
+
+		$entityId = null;
 		if ( $prefixedId !== null ) {
-			$entityIdParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
+			$entityIdParser = $wikibaseClient->getEntityIdParser();
 			$entityId = $entityIdParser->parse( $prefixedId );
-
-			$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
-			$itemLink = $repoLinker->getEntityUrl( $entityId );
-
-			$toolbox['wikibase'] = array(
-				'text' => $sk->getMsg( 'wikibase-dataitem' )->text(),
-				'href' => $itemLink,
-				'id' => 't-wikibase'
+		} else if ( $doExpensiveLookup ) {
+			$entityId = $wikibaseClient->getStore()->getSiteLinkTable()->getEntityIdForSiteLink(
+				new SiteLink(
+					$wikibaseClient->getSite()->getGlobalId(),
+					$title->getFullText()
+				)
 			);
 		}
+
+		if ( !$entityId ) {
+			return true;
+		}
+
+		$repoLinker = $wikibaseClient->newRepoLinker();
+		$itemLink = $repoLinker->getEntityUrl( $entityId );
+
+		$toolbox['wikibase'] = array(
+			'text' => $sk->getMsg( 'wikibase-dataitem' )->text(),
+			'href' => $itemLink,
+			'id' => 't-wikibase'
+		);
 
 		return true;
 	}
