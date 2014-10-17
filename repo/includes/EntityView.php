@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\TextInjector;
-use Wikibase\Repo\View\EntityViewPlaceholderExpander;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.
@@ -118,13 +117,21 @@ abstract class EntityView {
 			$this->getInnerHtml( $entityRevision, $editable )
 		);
 
+		if ( $editable ) {
+			$html .= $this->getLoadingSpinnerInlineScript();
+		}
+
+		return $html;
+	}
+
+	private function getLoadingSpinnerInlineScript() {
 		// Show loading spinner as long as JavaScript is initialising.
 		// The fastest way to show it is placing the script right after the corresponding HTML.
 		// Remove it after a while in any case (e.g. some resources might not have been loaded
 		// silently, so JavaScript is not initialising).
 		// Additionally attaching to window.error would only make sense before any other
 		// JavaScript is parsed.
-		$html .= Html::inlineScript( '
+		return Html::inlineScript( '
 if ( $ ) {
 	$( ".wikibase-entityview" ).addClass( "loading" ).after( function() {
 		var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
@@ -141,7 +148,6 @@ if ( $ ) {
 	}, 7000 );
 }
 ' );
-		return $html;
 	}
 
 	/**
