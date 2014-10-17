@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_d86f6ebf",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-17T07:41:25Z",
+      "side": 1,
+      "message": "oh wow, you are right... $content is not even needed.\n\nwe already obtain it above and then pass it to displayEntityContent (if not null), where we have a type hint for EntityContent.\n\nI really don\u0027t see where/how this might ever be something else here... maybe in some ancient version of the code, perhaps, but not now.",
+      "parentUuid": "8e96e304_5dd4b0ec",
+      "revId": "9996f02017d5419177689a2408b512fc0bd2c72e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_1ddf0812",
         "filename": "repo/includes/actions/ViewEntityAction.php",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2014-10-17T03:01:09Z",
       "side": 1,
       "message": "$this-\u003eisEditable() would be much better. And what the smag is this passed to the function call in the if block, where the value is always the same?!\n\nThis class *ahhhhhhhhhh*",
+      "revId": "9996f02017d5419177689a2408b512fc0bd2c72e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_585b5e26",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-17T07:41:25Z",
+      "side": 1,
+      "message": "sounds good :) and aaaaaaaaahhhhhhhh!",
+      "parentUuid": "8e96e304_9dca3849",
       "revId": "9996f02017d5419177689a2408b512fc0bd2c72e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
