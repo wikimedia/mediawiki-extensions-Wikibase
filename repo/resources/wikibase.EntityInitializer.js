@@ -9,7 +9,7 @@
 
 	/**
 	 * Entity initializer.
-	 * Unserializes the entity passed to JavaScript via mw.config variable.
+	 * Deserializes the entity passed to JavaScript via mw.config variable.
 	 * @constructor
 	 * @since 0.5
 	 *
@@ -81,12 +81,12 @@
 				}
 
 				var entityJSON = JSON.parse( serializedEntity ),
-					unserializerFactory = new wb.serialization.SerializerFactory(),
-					entityUnserializer = unserializerFactory.newUnserializerFor(
+					deserializerFactory = new wb.serialization.DeserializerFactory(),
+					entityDeserializer = deserializerFactory.newDeserializerFor(
 						wb.datamodel.Entity
 					);
 
-				deferred.resolve( entityUnserializer.unserialize( entityJSON ) );
+				deferred.resolve( entityDeserializer.deserialize( entityJSON ) );
 				entityJSON = null;
 			} );
 
