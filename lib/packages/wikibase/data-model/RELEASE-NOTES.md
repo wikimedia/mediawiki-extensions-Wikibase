@@ -1,5 +1,7 @@
 # Wikibase DataModel release notes
 
+## Version 2.1 (dev)
+
 ## Version 2.0 (2014-10-14)
 
 #### Breaking changes
