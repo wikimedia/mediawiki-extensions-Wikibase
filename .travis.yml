@@ -1,8 +1,5 @@
 language: php
 
-env:
-  - THENEEDFORTHIS=FAIL
-
 matrix:
   fast_finish: true
   include:
@@ -20,8 +17,6 @@ matrix:
       php: hhvm-nightly
   allow_failures:
     - php: hhvm-nightly
-  exclude:
-    - env: THENEEDFORTHIS=FAIL
 
 before_script:
     - bash ./build/travis/install.sh
