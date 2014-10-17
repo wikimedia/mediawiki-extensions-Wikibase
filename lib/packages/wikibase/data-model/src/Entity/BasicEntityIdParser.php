@@ -12,6 +12,12 @@ namespace Wikibase\DataModel\Entity;
  */
 class BasicEntityIdParser implements EntityIdParser {
 
+	private $idParser;
+
+	public function __construct() {
+		$this->idParser = new DispatchingEntityIdParser( self::getBuilders() );
+	}
+
 	/**
 	 * @param string $idSerialization
 	 *
@@ -19,8 +25,7 @@ class BasicEntityIdParser implements EntityIdParser {
 	 * @throws EntityIdParsingException
 	 */
 	public function parse( $idSerialization ) {
-		$idParser = new DispatchingEntityIdParser( self::getBuilders() );
-		return $idParser->parse( $idSerialization );
+		return $this->idParser->parse( $idSerialization );
 	}
 
 	/**
