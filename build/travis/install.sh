@@ -11,6 +11,9 @@ tar -zxf $MW.tar.gz
 mv mediawiki-$MW phase3
 
 cd phase3
+wget https://phar.phpunit.de/phpunit.phar
+chmod +x phpunit.phar
+mv phpunit.phar tests/phpunit/
 
 git checkout $MW
 
@@ -26,5 +29,4 @@ cp -r $originalDirectory Wikibase
 cd Wikibase
 
 composer self-update
-composer --no-update require 'phpunit/phpunit=3.7.*'
 composer install --prefer-source
