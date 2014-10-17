@@ -24,6 +24,9 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
+use Wikibase\Content\DeferredCopyEntityHolder;
+use Wikibase\Content\EntityHolder;
+use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -101,7 +104,7 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getContentHandler()->supportsRedirects();
 		}
 
-		return $this->getEntity()->getId() !== null;
+		return $this->getEntityId() !== null;
 	}
 
 	/**
@@ -133,6 +136,14 @@ abstract class EntityContent extends AbstractContent {
 	abstract public function getEntity();
 
 	/**
+	 * Returns a holder for the entity contained in this EntityContent object.
+	 *
+	 * @throws MWException when it's a redirect (targets will never be resolved)
+	 * @return EntityHolder
+	 */
+	abstract protected function getEntityHolder();
+
+	/**
 	 * Returns the ID of the entity represented by this EntityContent;
 	 *
 	 * @throws RuntimeException if no entity ID is set
@@ -142,13 +153,14 @@ abstract class EntityContent extends AbstractContent {
 		if ( $this->isRedirect() ) {
 			return $this->getEntityRedirect()->getEntityId();
 		} else {
-			if ( !$this->getEntity()->getId() ) {
+			$id = $this->getEntityHolder()->getEntityId();
+			if ( !$id ) {
 				// @todo: Force an ID to be present; Entity objects without an ID make sense,
 				// EntityContent objects with no entity ID don't.
 				throw new RuntimeException( 'EntityContent was constructed without an EntityId!' );
 			}
 
-			return $this->getEntity()->getId();
+			return $id;
 		}
 	}
 
@@ -638,17 +650,17 @@ abstract class EntityContent extends AbstractContent {
 			return false;
 		}
 
-		$thisEntity = $this->getEntity();
-		$thatEntity = $that->getEntity();
-
-		$thisId = $thisEntity->getId();
-		$thatId = $thatEntity->getId();
+		$thisId = $this->getEntityHolder()->getEntityId();
+		$thatId = $that->getEntityHolder()->getEntityId();
 
 		if ( $thisId !== null && $thatId !== null
 			&& !$thisId->equals( $thatId )
 		) {
 			return false;
 		}
+
+		$thisEntity = $this->getEntity();
+		$thatEntity = $that->getEntity();
 
 		return $thisEntity->equals( $thatEntity );
 	}
@@ -721,7 +733,7 @@ abstract class EntityContent extends AbstractContent {
 					. $this->getModel() . '!' );
 			}
 		} else {
-			$patched = $handler->makeEntityContent( $entityAfterPatch );
+			$patched = $handler->makeEntityContent( new EntityInstanceHolder( $entityAfterPatch ) );
 		}
 
 		return $patched;
@@ -793,7 +805,7 @@ abstract class EntityContent extends AbstractContent {
 		if ( $this->isRedirect() ) {
 			return $handler->makeEntityRedirectContent( $this->getEntityRedirect() );
 		} else {
-			return $handler->makeEntityContent( $this->getEntity()->copy() );
+			return $handler->makeEntityContent( new DeferredCopyEntityHolder( $this->getEntityHolder() ) );
 		}
 	}
 
