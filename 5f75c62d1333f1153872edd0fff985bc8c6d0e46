@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_d81bee80",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.aliasesview.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-17T11:04:47Z",
+      "side": 0,
+      "message": "LOL. ;-)",
+      "revId": "5f75c62d1333f1153872edd0fff985bc8c6d0e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
