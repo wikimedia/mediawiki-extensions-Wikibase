@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_b8ace285",
+        "filename": "lib/resources/jquery.ui/jquery.ui.tagadata.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-17T09:43:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_f8226aa1",
+      "revId": "3195e23e8d2d8555ec98b79b085969b9239d97fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_5816fe4e",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.fingerprintlistview.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-17T07:12:04Z",
       "side": 1,
       "message": "Why not press it into one line? (There are similar occurrences in other the files.)",
+      "revId": "3195e23e8d2d8555ec98b79b085969b9239d97fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_18df1612",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.fingerprintlistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-17T09:43:45Z",
+      "side": 1,
+      "message": "isValid is from the outer scope, so it would have to be \nreturn isValid \u003d …\nwhich is not that obvious imho.",
+      "parentUuid": "8e96e304_5816fe4e",
       "revId": "3195e23e8d2d8555ec98b79b085969b9239d97fc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
