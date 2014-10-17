@@ -16,6 +16,24 @@
       "revId": "c1154434b4694ac7d65d51e7b88f9f2f01726c5a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_8e0d1c44",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-17T17:17:42Z",
+      "side": 1,
+      "message": "I actually tried three method names here:\ngetEntityIdFromJsConfigVars? Bah. Thats an implementation detail. Shouldnt be in the name.\ngetEntityIdFromOutputPage? This just repeats whats already in the method signature.\n\"Context\" is the general concept. What exactly the method does should be an implementation detail. Hence the name.",
+      "parentUuid": "8e96e304_58591e5c",
+      "revId": "c1154434b4694ac7d65d51e7b88f9f2f01726c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
