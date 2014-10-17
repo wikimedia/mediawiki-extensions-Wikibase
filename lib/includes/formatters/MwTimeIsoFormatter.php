@@ -288,8 +288,9 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 				|| ( $isBCE && $precision === TimeValue::PRECISION_YEAR )
 			)
 		) {
-			$number = $year;
 			$msg = null;
+			$number = $year;
+			$isBCE = $isBCE && !empty( $number );
 		}
 
 		$formattedNumber = $this->language->formatNum( $number, true );
