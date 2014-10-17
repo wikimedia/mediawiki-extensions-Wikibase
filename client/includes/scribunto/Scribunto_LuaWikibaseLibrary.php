@@ -52,6 +52,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * Register mw.wikibase.lua library
 	 *
 	 * @since 0.4
+	 *
+	 * @return array
 	 */
 	public function register() {
 		$lib = array(
@@ -99,7 +101,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @param string $pageTitle
 	 *
-	 * @return string $id
+	 * @return array
 	 */
 	public function getEntityId( $pageTitle = null ) {
 		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );

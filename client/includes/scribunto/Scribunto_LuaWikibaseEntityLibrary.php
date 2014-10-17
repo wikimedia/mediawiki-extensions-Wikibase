@@ -54,6 +54,8 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * Register mw.wikibase.lua library
 	 *
 	 * @since 0.5
+	 *
+	 * @return array
 	 */
 	public function register() {
 		$lib = array(
