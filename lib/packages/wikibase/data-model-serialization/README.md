@@ -91,8 +91,13 @@ an instance of Serializers\Serializer.
 ## Tests
 
 This library comes with a set up PHPUnit tests that cover all non-trivial code. You can run these
-tests using the PHPUnit configuration file found in the root directory. The tests can also be run
-via TravisCI, as a TravisCI configuration file is also provided in the root directory.
+tests using the PHPUnit configuration file found in the root directory.
+
+    phpunit
+    
+By default the slow tests are not run. You can run them with
+
+    phpunit --group slow
 
 ## Authors
 

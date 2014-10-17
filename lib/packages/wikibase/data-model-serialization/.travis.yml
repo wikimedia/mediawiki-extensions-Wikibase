@@ -28,6 +28,7 @@ before_script:
 
 script:
   - phpunit
+  - phpunit --group slow
 
 notifications:
   irc:
