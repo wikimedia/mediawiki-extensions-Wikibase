@@ -38,6 +38,8 @@ return call_user_func( function() {
 				'mediawiki.legacy.shared',
 				'mw.config.values.wbRepo',
 				'wikibase.datamodel',
+				'wikibase.serialization.SnakDeserializer',
+				'wikibase.serialization.SnakSerializer',
 				'wikibase.utilities',
 			),
 			'messages' => array(
@@ -101,6 +103,7 @@ return call_user_func( function() {
 				'snakview.variations.Value.js',
 			),
 			'dependencies' => array(
+				'dataValues',
 				'jquery.wikibase.snakview.variations',
 				'jquery.wikibase.snakview.variations.Variation',
 				'wikibase.datamodel',

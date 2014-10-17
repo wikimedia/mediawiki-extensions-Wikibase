@@ -89,16 +89,16 @@
 	 * @return {wikibase.store.CombiningEntityStore}
 	 */
 	function buildEntityStore( repoApi ) {
-		// Unserializer for fetched content whose content is a wb.datamodel.Entity:
-		var fetchedEntityUnserializer = new wb.store.FetchedContentUnserializer( {
-				contentUnserializer: new wb.serialization.EntityUnserializer()
-			} );
+		// Deserializer for fetched content whose content is a wb.datamodel.Entity:
+		var fetchedEntityDeserializer = new wb.store.FetchedContentUnserializer(
+				new wb.serialization.EntityDeserializer()
+			);
 
 		return new wb.store.CombiningEntityStore( [
-			new wb.store.MwConfigEntityStore( fetchedEntityUnserializer ),
+			new wb.store.MwConfigEntityStore( fetchedEntityDeserializer ),
 			new wb.store.ApiEntityStore(
 				repoApi,
-				fetchedEntityUnserializer,
+				fetchedEntityDeserializer,
 				[ mw.config.get( 'wgUserLanguage' ) ]
 			)
 		] );
