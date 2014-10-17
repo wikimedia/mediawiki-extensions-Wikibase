@@ -9,8 +9,10 @@ use Revision;
 use Status;
 use Title;
 use User;
+use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -168,7 +170,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 */
 	public function newFromEntity( Entity $entity ) {
 		$handler = $this->getContentHandlerForType( $entity->getType() );
-		return $handler->makeEntityContent( $entity );
+		return $handler->makeEntityContent( new EntityInstanceHolder( $entity ) );
 	}
 
 	/**

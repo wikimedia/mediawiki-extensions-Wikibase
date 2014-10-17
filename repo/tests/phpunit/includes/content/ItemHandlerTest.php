@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -102,7 +103,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 			$entity->setId( new ItemId( 'Q42' ) );
 		}
 
-		return $this->getHandler()->makeEntityContent( $entity );
+		return $this->getHandler()->makeEntityContent( new EntityInstanceHolder( $entity ) );
 	}
 
 	public function testMakeEntityRedirectContent() {
