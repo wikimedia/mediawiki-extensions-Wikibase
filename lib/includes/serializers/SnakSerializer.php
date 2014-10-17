@@ -101,6 +101,10 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 	 * @return Snak
 	 */
 	public function newFromSerialization( array $serialization ) {
+		if ( !isset( $serialization['property'] ) ) {
+			throw new InvalidArgumentException( "No property id given" );
+		}
+
 		$propertyId = new PropertyId( $serialization['property'] );
 
 		if ( !$propertyId ) {
