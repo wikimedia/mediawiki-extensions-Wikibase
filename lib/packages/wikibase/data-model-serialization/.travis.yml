@@ -6,15 +6,15 @@ env:
 matrix:
   fast_finish: true
   include:
-    - env: DM=~1.0@dev
+    - env: DM=~1.1
       php: 5.3
-    - env: DM=~1.0@dev
+    - env: DM=~2.0
       php: 5.4
-    - env: DM=~1.0@dev
+    - env: DM=~2.0@dev
       php: 5.5
-    - env: DM=~1.0@dev
+    - env: DM=~2.0
       php: 5.6
-    - env: DM=~1.0@dev
+    - env: DM=~2.0
       php: hhvm
     - env: DM=~1.0@dev
       php: hhvm-nightly
