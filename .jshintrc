@@ -6,7 +6,7 @@
 	"latedef": true,
 	"newcap": true,
 	"supernew": true,
-	"shadow": true,
+	"shadow": false,
 	"noarg": true,
 	"noempty": true,
 	"nonew": true,
@@ -17,9 +17,9 @@
 	"laxbreak": true,
 	"laxcomma": false,
 	"onevar": false,
-	"bitwise": false,
+	"bitwise": true,
 	"forin": false,
-	"regexp": false,
+	"regexp": true,
 	"strict": true,
 	"scripturl": true,
 
@@ -37,8 +37,6 @@
 		"sinon",
 		"util",
 		"valueFormatters",
-		"valueParsers",
-		"globeCoordinate",
-		"time"
+		"valueParsers"
 	]
 }
