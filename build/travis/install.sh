@@ -6,13 +6,14 @@ originalDirectory=$(pwd)
 
 cd ..
 
-wget https://github.com/wikimedia/mediawiki-core/archive/$MW.tar.gz
+wget https://github.com/wikimedia/mediawiki/archive/$MW.tar.gz
 tar -zxf $MW.tar.gz
 mv mediawiki-$MW phase3
 
 cd phase3
-
-git checkout $MW
+wget https://phar.phpunit.de/phpunit.phar
+chmod +x phpunit.phar
+mv phpunit.phar tests/phpunit/
 
 mysql -e 'create database its_a_mw;'
 php maintenance/install.php --dbtype $DBTYPE --dbuser root --dbname its_a_mw --dbpath $(pwd) --pass nyan TravisWiki admin
@@ -26,5 +27,4 @@ cp -r $originalDirectory Wikibase
 cd Wikibase
 
 composer self-update
-composer --no-update require 'phpunit/phpunit=3.7.*'
 composer install --prefer-source
