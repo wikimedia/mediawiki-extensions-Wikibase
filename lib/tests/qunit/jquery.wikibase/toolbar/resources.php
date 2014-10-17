@@ -54,6 +54,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.wikibase.singlebuttontoolbar.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase.singlebuttontoolbar.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.singlebuttontoolbar',
+			),
+		),
+
 		'jquery.wikibase.toolbar.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase.toolbar.tests.js',

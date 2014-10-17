@@ -21,8 +21,7 @@ return call_user_func( function() {
 				'jquery.wikibase.addtoolbar.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.toolbar',
-				'jquery.wikibase.toolbarbutton',
+				'jquery.wikibase.singlebuttontoolbar',
 			),
 			'messages' => array(
 				'wikibase-add',
@@ -73,11 +72,20 @@ return call_user_func( function() {
 				'jquery.wikibase.removetoolbar.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.toolbar',
-				'jquery.wikibase.toolbarbutton',
+				'jquery.wikibase.singlebuttontoolbar',
 			),
 			'messages' => array(
 				'wikibase-remove',
+			),
+		),
+
+		'jquery.wikibase.singlebuttontoolbar' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase.singlebuttontoolbar.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.toolbar',
+				'jquery.wikibase.toolbarbutton',
 			),
 		),
 
