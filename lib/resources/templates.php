@@ -321,7 +321,7 @@ HTML;
 
 	$templates['wikibase-sitelinkview-pagename'] =
 <<<HTML
-$3<span class="wikibase-sitelinkview-page"><a href="$1" hreflang="$4" dir="$5">$2</a></span>
+$3<span class="wikibase-sitelinkview-page"><a href="$1" hreflang="$4">$2</a></span>
 HTML;
 
 	$templates['wikibase-sitelinkview-unknown'] =
