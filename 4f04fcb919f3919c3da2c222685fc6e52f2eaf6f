@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_44305053",
+        "filename": "lib/resources/api/getLocationAgnosticMwApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-18T01:57:06Z",
+      "side": 1,
+      "message": "This should probably also eliminate protocols before comparing",
+      "revId": "4f04fcb919f3919c3da2c222685fc6e52f2eaf6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
