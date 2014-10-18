@@ -3,20 +3,18 @@ language: php
 matrix:
   fast_finish: true
   include:
-    - env: DBTYPE=mysql LANG=de; MW=master WB=client
+    - env: DBTYPE=mysql LANG=de MW=master WB=client
       php: 5.3
-    - env: DBTYPE=sqlite LANG=ar; MW=master WB=both
+    - env: DBTYPE=sqlite LANG=ar MW=master WB=both
       php: 5.3
-    - env: DBTYPE=sqlite LANG=ru; MW=master WB=both
+    - env: DBTYPE=sqlite LANG=ru MW=master WB=both
       php: 5.4
-    - env: DBTYPE=sqlite LANG=en; MW=master WB=client
+    - env: DBTYPE=sqlite LANG=en MW=master WB=client
       php: 5.5
-    - env: DBTYPE=mysql LANG=en; MW=master WB=repo
+    - env: DBTYPE=mysql LANG=en MW=master WB=repo
       php: 5.6
-    - env: DBTYPE=sqlite LANG=en; MW=master WB=both
+    - env: DBTYPE=sqlite LANG=en MW=master WB=both
       php: hhvm-nightly
-  allow_failures:
-    - php: hhvm-nightly
 
 before_script:
     - bash ./build/travis/install.sh
