@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e96e304_1f0b7529",
+        "filename": "lib/resources/api/getLocationAgnosticMwApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-10-18T13:09:42Z",
+      "side": 1,
+      "message": "Either you\u0027re confident that your localEndPoint is accurate and you can just use it conditionally, or you want to trust mw.Api to know what the local is and this will fail. I\u0027d recommend removing this outer if condition now that the real logic is inside.",
+      "revId": "4f04fcb919f3919c3da2c222685fc6e52f2eaf6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_44305053",
         "filename": "lib/resources/api/getLocationAgnosticMwApi.js",
         "patchSetId": 2
