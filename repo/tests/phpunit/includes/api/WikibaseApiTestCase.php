@@ -23,20 +23,14 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	protected static $loginSession = null;
 	protected static $loginUser = null;
 	protected static $token = null;
+	protected static $wbTestUser = null;
 
 	protected function setUp() {
 		parent::setUp();
 
 		static $isSetup = false;
 
-		ApiTestCase::$users['wbeditor'] = new TestUser(
-			'Apitesteditor',
-			'Api Test Editor',
-			'api_test_editor@example.com',
-			array( 'wbeditor' )
-		);
-
-		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->user );
+		$this->setupUser();
 
 		if ( !$isSetup ) {
 			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
@@ -51,6 +45,21 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		//TODO: preserve session and token between calls?!
 		self::$loginSession = false;
 		self::$token = false;
+	}
+
+	private function setupUser() {
+		if ( !self::$wbTestUser ) {
+			self::$wbTestUser = new TestUser(
+				'Apitesteditor',
+				'Api Test Editor',
+				'api_test_editor@example.com',
+				array( 'wbeditor' )
+			);
+		}
+
+		ApiTestCase::$users['wbeditor'] = self::$wbTestUser;
+
+		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->user );
 	}
 
 	/**
