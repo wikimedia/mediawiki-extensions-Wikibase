@@ -101,8 +101,15 @@ class WikibaseLuaBindings {
 	 * @since 0.5
 	 *
 	 * @param array &$entityArr
+	 * @param int $levels
 	 */
-	public function renumber( array &$entityArr ) {
+	public function renumber( array &$entityArr, $levels = 0 ) {
+		if ( $levels > 9000 ) {
+			// The nesting is over 9000!
+			// We almost certainly hit a circular referenced array
+			return;
+		}
+
 		foreach( $entityArr as &$value ) {
 			if ( !is_array( $value ) ) {
 				continue;
@@ -110,7 +117,7 @@ class WikibaseLuaBindings {
 			if ( array_key_exists( 0, $value ) ) {
 				$value = array_combine( range( 1, count( $value ) ), array_values( $value ) );
 			}
-			$this->renumber( $value );
+			$this->renumber( $value, ++$levels );
 		}
 	}
 
