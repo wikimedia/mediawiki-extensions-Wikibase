@@ -52,22 +52,6 @@ if ( ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) || !defined( 'Diff_VERSION' ) ||
 	include_once( __DIR__ . '/../vendor/autoload.php' );
 }
 
-// TODO: Needed for deserializing Snaks in DataModel 0.x. Remove with DataModel 1.x!
-if( !array_key_exists( 'evilDataValueMap', $GLOBALS ) ) {
-	$GLOBALS['evilDataValueMap'] = array();
-}
-$GLOBALS['evilDataValueMap'] = array_merge(
-	$GLOBALS['evilDataValueMap'],
-	 array(
-		'globecoordinate' => 'DataValues\Geo\Values\GlobeCoordinateValue',
-		'monolingualtext' => 'DataValues\MonolingualTextValue',
-		'multilingualtext' => 'DataValues\MultilingualTextValue',
-		'quantity' => 'DataValues\QuantityValue',
-		'time' => 'DataValues\TimeValue',
-		'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
-	 )
-);
-
 call_user_func( function() {
 	global $wgExtensionCredits, $wgJobClasses, $wgHooks, $wgResourceModules, $wgMessagesDirs;
 
