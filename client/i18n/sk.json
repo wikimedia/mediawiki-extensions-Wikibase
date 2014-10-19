@@ -38,6 +38,8 @@
 	"wikibase-linkitem-not-loggedin-title": "Musíte byť prihlásený",
 	"wikibase-linkitem-success-link": "Stránky boli úspešne prepojené. Položku s odkazmi nájdete v [$1 centrálnom dátovom úložisku].",
 	"wikibase-rc-hide-wikidata": "$1 Wikiúdaje",
+	"wikibase-rc-hide-wikidata-hide": "Skryť",
+	"wikibase-rc-hide-wikidata-show": "Zobraziť",
 	"wikibase-rc-show-wikidata-pref": "Zobraziť úpravy Wikiúdajov v posledných úpravách",
 	"wikibase-rc-wikibase-edit-title": "Úprava Wikiúdajov",
 	"wikibase-watchlist-show-changes-pref": "Zobraziť úpravy Wikiúdajov v sledovaných stránkach",
