@@ -5,14 +5,13 @@ namespace Wikibase;
 use HashBagOStuff;
 use LoadBalancer;
 use ObjectCache;
-use Wikibase\Client\Usage\NullSubscriptionManager;
-use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
-use Wikibase\Store\EntityIdLookup;
 use Wikibase\Client\Store\Sql\ConnectionManager;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\Store\TitleFactory;
+use Wikibase\Client\Usage\NullSubscriptionManager;
 use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\Client\Usage\SiteLinkUsageLookup;
+use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
@@ -28,6 +27,7 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * Implementation of the client store interface using direct access to the repository's
@@ -52,7 +52,7 @@ class DirectSqlStore implements ClientStore {
 	private $entityIdParser;
 
 	/**
-	 * @var string|bool The database name of the repo wiki or false for the local wiki
+	 * @var string|bool The symbolic database name of the repo wiki or false for the local wiki.
 	 */
 	private $repoWiki;
 
@@ -102,7 +102,7 @@ class DirectSqlStore implements ClientStore {
 	private $termIndex = null;
 
 	/**
-	 * @var \Wikibase\Store\EntityIdLookup|null
+	 * @var EntityIdLookup|null
 	 */
 	private $entityIdLookup = null;
 
@@ -139,7 +139,8 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
-	 * @param string|bool $repoWiki the symbolic database name of the repo wiki
+	 * @param string|bool $repoWiki The symbolic database name of the repo wiki or false for the
+	 * local wiki.
 	 * @param string $languageCode
 	 */
 	public function __construct(
@@ -322,7 +323,7 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getTermIndex() {
 		if ( $this->termIndex === null ) {
-			// TODO: Get $stringNormalizer from WikibaseClient?
+			// TODO: Get StringNormalizer from WikibaseClient?
 			// Can't really pass this via the constructor...
 			$this->termIndex = new TermSqlIndex( new StringNormalizer(), $this->repoWiki );
 		}
