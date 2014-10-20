@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use Wikibase\Client\Store\Sql\ConnectionManager;
