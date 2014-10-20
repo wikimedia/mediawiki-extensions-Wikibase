@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_108cbf36",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_cd0d6043",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_90444f4c",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 19
@@ -48,6 +66,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "$entityIds please.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d0f17793",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_90444f4c",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -124,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_b02aabd5",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_905bef25",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_10703f9f",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 19
@@ -135,6 +189,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "$entityIds please.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d027370c",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_10703f9f",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -169,6 +241,24 @@
       "writtenOn": "2014-10-20T15:21:43Z",
       "side": 1,
       "message": "Because in some cases, $entities is used as a parameter to a function that expects correctly keys entities. See for instance the call to stripEntitiesFromList in getUnusedEntities",
+      "parentUuid": "8e96e304_50a567ff",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_f07113de",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "8e96e304_50a567ff",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -211,6 +301,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_70242308",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_f0a913dd",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_d0973792",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 19
@@ -222,6 +330,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "$entityIds please.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_1077dfd2",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_d0973792",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -256,6 +382,24 @@
       "writtenOn": "2014-10-20T15:21:43Z",
       "side": 1,
       "message": "Done never minding.",
+      "parentUuid": "8e96e304_70bd0316",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_b07b8bbc",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "8e96e304_70bd0316",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -298,6 +442,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_d07897c1",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_d03ad7bf",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_cd3a40c0",
         "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
         "patchSetId": 19
@@ -326,6 +488,24 @@
       "writtenOn": "2014-10-20T15:21:43Z",
       "side": 1,
       "message": "right",
+      "parentUuid": "8e96e304_cd3a40c0",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_f048338e",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "8e96e304_cd3a40c0",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -368,6 +548,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_705c234f",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_8d13d804",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_ede13cfc",
         "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
         "patchSetId": 19
@@ -396,6 +594,24 @@
       "writtenOn": "2014-10-20T15:21:43Z",
       "side": 1,
       "message": "$numberOfModifications, because it\u0027s not actually modifications, right?....",
+      "parentUuid": "8e96e304_ede13cfc",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_30369b01",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "8e96e304_ede13cfc",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -438,6 +654,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_9059af5f",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_4dddd046",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_f0059314",
         "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
         "patchSetId": 19
@@ -466,6 +700,24 @@
       "writtenOn": "2014-10-20T15:21:43Z",
       "side": 1,
       "message": "will do",
+      "parentUuid": "8e96e304_f0059314",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_700ae32a",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "8e96e304_f0059314",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -817,6 +1069,24 @@
       "side": 1,
       "message": "Hmhm. We never document that explicitly, I fear. Shall we really start now?",
       "parentUuid": "8e96e304_7a5c044f",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_ab3d5cba",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T15:51:56Z",
+      "side": 1,
+      "message": "I think so, yes. Otherwise one could think it\u0027s ok to use the variable (and not the getter).",
+      "parentUuid": "8e96e304_70ee63b3",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
