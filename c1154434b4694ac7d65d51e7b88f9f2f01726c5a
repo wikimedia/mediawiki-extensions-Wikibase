@@ -70,6 +70,24 @@
       "revId": "c1154434b4694ac7d65d51e7b88f9f2f01726c5a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_f022734f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_2dc40411",
+      "revId": "c1154434b4694ac7d65d51e7b88f9f2f01726c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
