@@ -12,18 +12,20 @@ var testSets = [
 		'P1',
 		'i am a data type id',
 		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermSet(),
-			new wb.datamodel.TermSet(),
-			new wb.datamodel.MultiTermSet()
+			new wb.datamodel.TermMap(),
+			new wb.datamodel.TermMap(),
+			new wb.datamodel.MultiTermMap()
 		),
 		new wb.datamodel.StatementGroupSet()
 	], [
 		'P2',
 		'i am a data type id',
 		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-label' )] ),
-			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-description' )] ),
-			new wb.datamodel.MultiTermSet( [new wb.datamodel.MultiTerm( 'de', ['de-alias'] )] )
+			new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-label' ) } ),
+			new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-description' ) } ),
+			new wb.datamodel.MultiTermMap( {
+				de: new wb.datamodel.MultiTerm( 'de', ['de-alias'] )
+			} )
 		),
 		new wb.datamodel.StatementGroupSet( [
 			new wb.datamodel.StatementGroup( 'P1',
@@ -55,9 +57,9 @@ QUnit.test( 'isEmpty()', function( assert ) {
 			'P1',
 			'i am a data type id',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.MultiTermSet()
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.MultiTermMap()
 			),
 			new wb.datamodel.StatementGroupSet()
 		) ).isEmpty(),
@@ -69,9 +71,9 @@ QUnit.test( 'isEmpty()', function( assert ) {
 			'P1',
 			'i am a data type id',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-term' )] ),
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.MultiTermSet()
+				new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-term' ) } ),
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.MultiTermMap()
 			),
 			new wb.datamodel.StatementGroupSet()
 		) ).isEmpty(),
@@ -83,9 +85,9 @@ QUnit.test( 'isEmpty()', function( assert ) {
 			'P1',
 			'i am a data type id',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.MultiTermSet()
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.MultiTermMap()
 			),
 			new wb.datamodel.StatementGroupSet( [
 				new wb.datamodel.StatementGroup( 'P1',

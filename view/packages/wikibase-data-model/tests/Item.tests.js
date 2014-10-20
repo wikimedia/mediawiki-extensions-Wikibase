@@ -11,18 +11,20 @@ var testSets = [
 	[
 		'Q1',
 		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermSet(),
-			new wb.datamodel.TermSet(),
-			new wb.datamodel.MultiTermSet()
+			new wb.datamodel.TermMap(),
+			new wb.datamodel.TermMap(),
+			new wb.datamodel.MultiTermMap()
 		),
 		new wb.datamodel.StatementGroupSet(),
 		new wb.datamodel.SiteLinkSet()
 	], [
 		'Q2',
 		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-label' )] ),
-			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-description' )] ),
-			new wb.datamodel.MultiTermSet( [new wb.datamodel.MultiTerm( 'de', ['de-alias'] )] )
+			new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-label' ) } ),
+			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'de', 'de-description' ) } ),
+			new wb.datamodel.MultiTermMap( {
+				de: new wb.datamodel.MultiTerm( 'de', ['de-alias'] )
+			} )
 		),
 		new wb.datamodel.StatementGroupSet( [
 			new wb.datamodel.StatementGroup( 'P1',
@@ -56,9 +58,9 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		( new wb.datamodel.Item(
 			'Q1',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.MultiTermSet()
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.MultiTermMap()
 			),
 			new wb.datamodel.StatementGroupSet(),
 			new wb.datamodel.SiteLinkSet()
@@ -70,9 +72,9 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		!( new wb.datamodel.Item(
 			'Q1',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-term' )] ),
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.MultiTermSet()
+				new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-term' ) } ),
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.MultiTermMap()
 			),
 			new wb.datamodel.StatementGroupSet(),
 			new wb.datamodel.SiteLinkSet()
@@ -84,9 +86,9 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		!( new wb.datamodel.Item(
 			'Q1',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.MultiTermSet()
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.MultiTermMap()
 			),
 			new wb.datamodel.StatementGroupSet(),
 			new wb.datamodel.SiteLinkSet( [new wb.datamodel.SiteLink( 'de', 'de-page' )] )
@@ -98,9 +100,9 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		!( new wb.datamodel.Item(
 			'Q1',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.MultiTermSet()
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.MultiTermMap()
 			),
 			new wb.datamodel.StatementGroupSet( [
 				new wb.datamodel.StatementGroup( 'P1',

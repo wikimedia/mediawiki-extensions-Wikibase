@@ -85,9 +85,9 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			'dependencies' => array(
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.MultiTermSet',
+				'wikibase.datamodel.MultiTermMap',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermSet',
+				'wikibase.datamodel.TermMap',
 			),
 		),
 
@@ -111,7 +111,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.Item',
 				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.MultiTermSet',
+				'wikibase.datamodel.MultiTermMap',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.SiteLink',
 				'wikibase.datamodel.SiteLinkSet',
@@ -120,7 +120,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermSet',
+				'wikibase.datamodel.TermMap',
 			),
 		),
 
@@ -151,13 +151,13 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 		),
 
-		'wikibase.datamodel.MultiTermSet.tests' => $moduleTemplate + array(
+		'wikibase.datamodel.MultiTermMap.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'MultiTermSet.tests.js',
+				'MultiTermMap.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.MultiTermSet',
+				'wikibase.datamodel.MultiTermMap',
 			),
 		),
 
@@ -169,7 +169,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.MultiTermSet',
+				'wikibase.datamodel.MultiTermMap',
 				'wikibase.datamodel.Property',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.Statement',
@@ -177,7 +177,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermSet',
+				'wikibase.datamodel.TermMap',
 			),
 		),
 
@@ -316,13 +316,13 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 		),
 
-		'wikibase.datamodel.TermSet.tests' => $moduleTemplate + array(
+		'wikibase.datamodel.TermMap.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'TermSet.tests.js',
+				'TermMap.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermSet',
+				'wikibase.datamodel.TermMap',
 			),
 		),
 

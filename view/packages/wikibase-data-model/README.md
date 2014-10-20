@@ -41,14 +41,14 @@ https://commons.wikimedia.org/wiki/File:Wikibase_JavaScript_Data_Model_1.0.svg
 * Added List.
 * Added Map.
 * Added MultiTerm.
-* Added MultiTermSet.
+* Added MultiTermMap.
 * Added ReferenceList.
 * Added SiteLinkSet.
 * Added StatementGroup.
 * Added StatementGroupSet.
 * Added StatementList.
 * Added Term.
-* Added TermSet.
+* Added TermMap.
 * Added Set.
 * Added individual constructors for Item and Property.
 * Added Entity.getFingerprint(), Entity.setFingerprint().

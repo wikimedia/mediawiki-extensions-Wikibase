@@ -34,7 +34,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.Item',
 				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.MultiTermSet',
+				'wikibase.datamodel.MultiTermMap',
 				'wikibase.datamodel.Property',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.PropertySomeValueSnak',
@@ -50,7 +50,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermSet',
+				'wikibase.datamodel.TermMap',
 			),
 		),
 
@@ -137,8 +137,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.MultiTermSet',
-				'wikibase.datamodel.TermSet',
+				'wikibase.datamodel.MultiTermMap',
+				'wikibase.datamodel.TermMap',
 			),
 		),
 
@@ -204,15 +204,15 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.datamodel.MultiTermSet' => $moduleTemplate + array(
+		'wikibase.datamodel.MultiTermMap' => $moduleTemplate + array(
 			'scripts' => array(
-				'MultiTermSet.js',
+				'MultiTermMap.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Map',
 				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.Set',
 			),
 		),
 
@@ -383,15 +383,15 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.datamodel.TermSet' => $moduleTemplate + array(
+		'wikibase.datamodel.TermMap' => $moduleTemplate + array(
 			'scripts' => array(
-				'TermSet.js',
+				'TermMap.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Map',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.Set',
 			),
 		),
 
