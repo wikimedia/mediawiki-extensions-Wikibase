@@ -3,7 +3,7 @@
 	"description": "Wikibase datamodel serialization implementation in JavaScript",
 	"require": {
 		"data-values/javascript": "~0.6.0",
-		"wikibase/data-model-javascript": "~0.3.0"
+		"wikibase/data-model-javascript": "1.0.0"
 	},
 	"license": "GPL-2.0+",
 	"authors": [
