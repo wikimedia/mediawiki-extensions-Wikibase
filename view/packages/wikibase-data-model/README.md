@@ -39,6 +39,7 @@ https://commons.wikimedia.org/wiki/File:Wikibase_JavaScript_Data_Model_1.0.svg
 * Added Group.
 * Added GroupableCollection.
 * Added List.
+* Added Map.
 * Added MultiTerm.
 * Added MultiTermSet.
 * Added ReferenceList.

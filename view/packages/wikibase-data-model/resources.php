@@ -186,6 +186,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.datamodel.Map' => $moduleTemplate + array(
+			'scripts' => array(
+				'Map.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+			),
+		),
+
 		'wikibase.datamodel.MultiTerm' => $moduleTemplate + array(
 			'scripts' => array(
 				'MultiTerm.js',

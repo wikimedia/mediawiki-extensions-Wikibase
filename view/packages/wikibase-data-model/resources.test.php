@@ -133,6 +133,15 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 		),
 
+		'wikibase.datamodel.Map.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'Map.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Map',
+			),
+		),
+
 		'wikibase.datamodel.MultiTerm.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'MultiTerm.tests.js',
