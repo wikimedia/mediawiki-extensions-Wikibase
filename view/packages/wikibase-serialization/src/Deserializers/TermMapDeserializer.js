@@ -13,21 +13,21 @@ var MODULE = wb.serialization,
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
  */
-MODULE.MultiTermSetDeserializer = util.inherit( 'WbMultiTermSetDeserializer', PARENT, {
+MODULE.TermMapDeserializer = util.inherit( 'WbTermMapDeserializer', PARENT, {
 	/**
 	 * @see wikibase.serialization.Deserializer.deserialize
 	 *
-	 * @return {wikibase.datamodel.MultiTermSet}
+	 * @return {wikibase.datamodel.TermMap}
 	 */
 	deserialize: function( serialization ) {
-		var multiTerms = [],
-			multiTermDeserializer = new MODULE.MultiTermDeserializer();
+		var terms = {},
+			termDeserializer = new MODULE.TermDeserializer();
 
 		for( var languageCode in serialization ) {
-			multiTerms.push( multiTermDeserializer.deserialize( serialization[languageCode] ) );
+			terms[languageCode] = termDeserializer.deserialize( serialization[languageCode] );
 		}
 
-		return new wb.datamodel.MultiTermSet( multiTerms );
+		return new wb.datamodel.TermMap( terms );
 	}
 } );
 

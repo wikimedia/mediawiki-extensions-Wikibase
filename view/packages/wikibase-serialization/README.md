@@ -43,8 +43,8 @@ version 1.0 of this package:
 * Added <code>wikibase.serialization.ItemDeserializer</code>.
 * Added <code>wikibase.serialization.MultiTermSerializer</code>.
 * Added <code>wikibase.serialization.MultiTermDeserializer</code>.
-* Added <code>wikibase.serialization.MultiTermSetSerializer</code>.
-* Added <code>wikibase.serialization.MultiTermSetDeserializer</code>.
+* Added <code>wikibase.serialization.MultiTermMapSerializer</code>.
+* Added <code>wikibase.serialization.MultiTermMapDeserializer</code>.
 * Added <code>wikibase.serialization.PropertySerializer</code>.
 * Added <code>wikibase.serialization.PropertyDeserializer</code>.
 * Added <code>wikibase.serialization.ReferenceListSerializer</code>.
@@ -67,10 +67,10 @@ version 1.0 of this package:
 * Added <code>wikibase.serialization.StatementListDeserializer</code>.
 * Added <code>wikibase.serialization.StatementSerializer</code>.
 * Added <code>wikibase.serialization.StatementDeserializer</code>.
-* Added <code>wikibase.serialization.TermSetSerializer</code>.
-* Added <code>wikibase.serialization.TermSetDeserializer</code>.
 * Added <code>wikibase.serialization.TermSerializer</code>.
 * Added <code>wikibase.serialization.TermDeserializer</code>.
+* Added <code>wikibase.serialization.TermMapSerializer</code>.
+* Added <code>wikibase.serialization.TermMapDeserializer</code>.
 
 ### 1.1.3 (2014-09-10)
 

@@ -11,16 +11,18 @@ var testSets = [
 	[
 		'i am an id',
 		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermSet(),
-			new wb.datamodel.TermSet(),
-			new wb.datamodel.MultiTermSet()
+			new wb.datamodel.TermMap(),
+			new wb.datamodel.TermMap(),
+			new wb.datamodel.MultiTermMap()
 		)
 	], [
 		'i am an id',
 		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-label' )] ),
-			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-description' )] ),
-			new wb.datamodel.MultiTermSet( [new wb.datamodel.MultiTerm( 'de', ['de-alias'] )] )
+			new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-label' ) } ),
+			new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-description' ) } ),
+			new wb.datamodel.MultiTermMap( {
+				de: new wb.datamodel.MultiTerm( 'de', ['de-alias'] )
+			} )
 		)
 	]
 ];
@@ -40,9 +42,9 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		( new wb.serialization.tests.MockEntity(
 			'i am an id',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.MultiTermSet()
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.MultiTermMap()
 			)
 		) ).isEmpty(),
 		'Verified isEmpty() returning TRUE.'
@@ -52,9 +54,9 @@ QUnit.test( 'isEmpty()', function( assert ) {
 		!( new wb.serialization.tests.MockEntity(
 			'i am an id',
 			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermSet( [new wb.datamodel.Term( 'de', 'de-term' )] ),
-				new wb.datamodel.TermSet(),
-				new wb.datamodel.MultiTermSet()
+				new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-term' ) } ),
+				new wb.datamodel.TermMap(),
+				new wb.datamodel.MultiTermMap()
 			)
 		) ).isEmpty(),
 		'Returning FALSE when Fingerprint is not empty.'

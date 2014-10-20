@@ -92,7 +92,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.Item',
 				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.MultiTermSet',
+				'wikibase.datamodel.MultiTermMap',
 				'wikibase.datamodel.Property',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.SiteLink',
@@ -102,7 +102,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermSet',
+				'wikibase.datamodel.TermMap',
 				'wikibase.serialization.EntitySerializer',
 				'wikibase.serialization.tests.MockEntity',
 			),
@@ -116,8 +116,8 @@ return call_user_func( function() {
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.Term',
 				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.MultiTermSet',
-				'wikibase.datamodel.TermSet',
+				'wikibase.datamodel.MultiTermMap',
+				'wikibase.datamodel.TermMap',
 				'wikibase.serialization.FingerprintSerializer',
 			),
 		),
@@ -131,7 +131,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.Item',
 				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.MultiTermSet',
+				'wikibase.datamodel.MultiTermMap',
 				'wikibase.datamodel.Property',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.SiteLink',
@@ -141,19 +141,19 @@ return call_user_func( function() {
 				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermSet',
+				'wikibase.datamodel.TermMap',
 				'wikibase.serialization.ItemSerializer',
 			),
 		),
 
-		'wikibase.serialization.MultiTermSetSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.MultiTermMapSerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'MultiTermSetSerializer.tests.js',
+				'MultiTermMapSerializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.MultiTermSet',
-				'wikibase.serialization.MultiTermSetSerializer',
+				'wikibase.datamodel.MultiTermMap',
+				'wikibase.serialization.MultiTermMapSerializer',
 			),
 		),
 
@@ -176,7 +176,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.Item',
 				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.MultiTermSet',
+				'wikibase.datamodel.MultiTermMap',
 				'wikibase.datamodel.Property',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.Statement',
@@ -184,7 +184,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermSet',
+				'wikibase.datamodel.TermMap',
 				'wikibase.serialization.PropertySerializer',
 			),
 		),
@@ -330,14 +330,14 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.serialization.TermSetSerializer.tests' => $moduleTemplate + array(
+		'wikibase.serialization.TermMapSerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'TermSetSerializer.tests.js',
+				'TermMapSerializer.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermSet',
-				'wikibase.serialization.TermSetSerializer',
+				'wikibase.datamodel.TermMap',
+				'wikibase.serialization.TermMapSerializer',
 			),
 		),
 

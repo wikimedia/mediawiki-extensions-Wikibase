@@ -113,8 +113,8 @@ return call_user_func( function() {
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
-				'wikibase.serialization.TermSetSerializer',
-				'wikibase.serialization.MultiTermSetSerializer',
+				'wikibase.serialization.MultiTermMapSerializer',
+				'wikibase.serialization.TermMapSerializer',
 			),
 		),
 
@@ -132,6 +132,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.MultiTermMapSerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'MultiTermMapSerializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.MultiTermMap',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Serializer',
+				'wikibase.serialization.MultiTermSerializer',
+			),
+		),
+
 		'wikibase.serialization.MultiTermSerializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'MultiTermSerializer.js',
@@ -141,19 +154,6 @@ return call_user_func( function() {
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
-			),
-		),
-
-		'wikibase.serialization.MultiTermSetSerializer' => $moduleTemplate + array(
-			'scripts' => array(
-				'MultiTermSetSerializer.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.MultiTermSet',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-				'wikibase.serialization.MultiTermSerializer',
 			),
 		),
 
@@ -310,13 +310,13 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.serialization.TermSetSerializer' => $moduleTemplate + array(
+		'wikibase.serialization.TermMapSerializer' => $moduleTemplate + array(
 			'scripts' => array(
-				'TermSetSerializer.js',
+				'TermMapSerializer.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel.TermSet',
+				'wikibase.datamodel.TermMap',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.TermSerializer',

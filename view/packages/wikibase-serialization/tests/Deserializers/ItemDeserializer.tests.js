@@ -27,9 +27,9 @@ var defaults = [
 		}
 	}, {
 		fingerprint: new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'en', 'label' )] ),
-			new wb.datamodel.TermSet( [new wb.datamodel.Term( 'en', 'description' )] ),
-			new wb.datamodel.MultiTermSet( [new wb.datamodel.MultiTerm( 'en', ['alias'] )] )
+			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'label' ) } ),
+			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'description' ) } ),
+			new wb.datamodel.MultiTermMap( { en: new wb.datamodel.MultiTerm( 'en', ['alias'] ) } )
 		),
 		statementGroupSet: new wb.datamodel.StatementGroupSet( [
 			new wb.datamodel.StatementGroup( 'P1', new wb.datamodel.StatementList( [

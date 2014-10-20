@@ -111,9 +111,9 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.TermSetDeserializer',
-				'wikibase.serialization.MultiTermSetDeserializer',
 				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.MultiTermMapDeserializer',
+				'wikibase.serialization.TermMapDeserializer',
 			),
 		),
 
@@ -132,19 +132,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.serialization.MultiTermSetDeserializer' => $moduleTemplate + array(
-			'scripts' => array(
-				'MultiTermSetDeserializer.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.MultiTermSet',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-				'wikibase.serialization.MultiTermDeserializer',
-			),
-		),
-
 		'wikibase.serialization.MultiTermDeserializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'MultiTermDeserializer.js',
@@ -154,6 +141,19 @@ return call_user_func( function() {
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Deserializer',
+			),
+		),
+
+		'wikibase.serialization.MultiTermMapDeserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'MultiTermMapDeserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.MultiTermMap',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.MultiTermDeserializer',
 			),
 		),
 
@@ -304,19 +304,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.serialization.TermSetDeserializer' => $moduleTemplate + array(
-			'scripts' => array(
-				'TermSetDeserializer.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.TermSet',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-				'wikibase.serialization.TermDeserializer',
-			),
-		),
-
 		'wikibase.serialization.TermDeserializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'TermDeserializer.js',
@@ -326,6 +313,19 @@ return call_user_func( function() {
 				'wikibase.datamodel.Term',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Deserializer',
+			),
+		),
+
+		'wikibase.serialization.TermMapDeserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'TermMapDeserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.TermMap',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Serializer',
+				'wikibase.serialization.TermDeserializer',
 			),
 		),
 

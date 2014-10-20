@@ -13,25 +13,25 @@ var MODULE = wb.serialization,
  * @extends wikibase.serialization.Serializer
  * @since 2.0
  */
-MODULE.MultiTermSetSerializer = util.inherit( 'WbMultiTermSetSerializer', PARENT, {
+MODULE.MultiTermMapSerializer = util.inherit( 'WbMultiTermMapSerializer', PARENT, {
 	/**
 	 * @see wikibase.serialization.Serializer.serialize
 	 *
-	 * @param {wikibase.datamodel.MultiTermSet} multiTermSet
+	 * @param {wikibase.datamodel.MultiTermMap} multiTermMap
 	 * @return {Object}
 	 */
-	serialize: function( multiTermSet ) {
-		if( !( multiTermSet instanceof wb.datamodel.MultiTermSet ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.MultiTermSet' );
+	serialize: function( multiTermMap ) {
+		if( !( multiTermMap instanceof wb.datamodel.MultiTermMap ) ) {
+			throw new Error( 'Not an instance of wikibase.datamodel.MultiTermMap' );
 		}
 
 		var serialization = {},
 			multiTermSerializer = new MODULE.MultiTermSerializer(),
-			languageCodes = multiTermSet.getKeys();
+			languageCodes = multiTermMap.getKeys();
 
 		for( var i = 0; i < languageCodes.length; i++ ) {
 			serialization[languageCodes[i]] = multiTermSerializer.serialize(
-				multiTermSet.getItemByKey( languageCodes[i] )
+				multiTermMap.getItemByKey( languageCodes[i] )
 			);
 		}
 

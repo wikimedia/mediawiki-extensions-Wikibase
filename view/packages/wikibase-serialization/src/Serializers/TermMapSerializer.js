@@ -13,25 +13,25 @@ var MODULE = wb.serialization,
  * @extends wikibase.serialization.Serializer
  * @since 2.0
  */
-MODULE.TermSetSerializer = util.inherit( 'WbTermSetSerializer', PARENT, {
+MODULE.TermMapSerializer = util.inherit( 'WbTermMapSerializer', PARENT, {
 	/**
 	 * @see wikibase.serialization.Serializer.serialize
 	 *
-	 * @param {wikibase.datamodel.TermSet} termSet
+	 * @param {wikibase.datamodel.TermMap} termMap
 	 * @return {Object}
 	 */
-	serialize: function( termSet ) {
-		if( !( termSet instanceof wb.datamodel.TermSet ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.TermSet' );
+	serialize: function( termMap ) {
+		if( !( termMap instanceof wb.datamodel.TermMap ) ) {
+			throw new Error( 'Not an instance of wikibase.datamodel.TermMap' );
 		}
 
 		var serialization = {},
 			termSerializer = new MODULE.TermSerializer(),
-			languageCodes = termSet.getKeys();
+			languageCodes = termMap.getKeys();
 
 		for( var i = 0; i < languageCodes.length; i++ ) {
 			serialization[languageCodes[i]] = termSerializer.serialize(
-				termSet.getItemByKey( languageCodes[i] )
+				termMap.getItemByKey( languageCodes[i] )
 			);
 		}
 

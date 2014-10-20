@@ -23,7 +23,7 @@ var SELF = MODULE.DeserializerFactory = function wbDeserializerFactory() {
 	this.registerDeserializer( MODULE.EntityIdDeserializer, wb.datamodel.EntityId );
 	this.registerDeserializer( MODULE.FingerprintDeserializer, wb.datamodel.Fingerprint );
 	this.registerDeserializer( MODULE.MultiTermDeserializer, wb.datamodel.MultiTerm );
-	this.registerDeserializer( MODULE.MultiTermSetDeserializer, wb.datamodel.MultiTermSet );
+	this.registerDeserializer( MODULE.MultiTermMapDeserializer, wb.datamodel.MultiTermMap );
 	this.registerDeserializer( MODULE.ReferenceDeserializer, wb.datamodel.Reference );
 	this.registerDeserializer( MODULE.ReferenceListDeserializer, wb.datamodel.ReferenceList );
 	this.registerDeserializer( MODULE.SiteLinkDeserializer, wb.datamodel.SiteLink );
@@ -35,7 +35,7 @@ var SELF = MODULE.DeserializerFactory = function wbDeserializerFactory() {
 	this.registerDeserializer( MODULE.StatementGroupSetDeserializer, wb.datamodel.StatementGroupSet );
 	this.registerDeserializer( MODULE.StatementListDeserializer, wb.datamodel.StatementList );
 	this.registerDeserializer( MODULE.TermDeserializer, wb.datamodel.Term );
-	this.registerDeserializer( MODULE.TermSetDeserializer, wb.datamodel.TermSet );
+	this.registerDeserializer( MODULE.TermMapDeserializer, wb.datamodel.TermMap );
 };
 
 $.extend( SELF.prototype, {

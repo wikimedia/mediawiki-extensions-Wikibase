@@ -25,13 +25,13 @@ MODULE.FingerprintSerializer = util.inherit( 'WbFingerprintSerializer', PARENT, 
 			throw new Error( 'Not an instance of wikibase.datamodel.Fingerprint' );
 		}
 
-		var termSetSerializer = new MODULE.TermSetSerializer(),
-			multiTermSetSerializer = new MODULE.MultiTermSetSerializer();
+		var termMapSerializer = new MODULE.TermMapSerializer(),
+			multiTermMapSerializer = new MODULE.MultiTermMapSerializer();
 
 		return {
-			labels: termSetSerializer.serialize( fingerprint.getLabels() ),
-			descriptions: termSetSerializer.serialize( fingerprint.getDescriptions() ),
-			aliases: multiTermSetSerializer.serialize( fingerprint.getAliases() )
+			labels: termMapSerializer.serialize( fingerprint.getLabels() ),
+			descriptions: termMapSerializer.serialize( fingerprint.getDescriptions() ),
+			aliases: multiTermMapSerializer.serialize( fingerprint.getAliases() )
 		};
 	}
 } );

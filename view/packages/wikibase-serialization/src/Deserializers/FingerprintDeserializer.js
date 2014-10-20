@@ -20,13 +20,13 @@ MODULE.FingerprintDeserializer = util.inherit( 'WbFingerprintDeserializer', PARE
 	 * @return {wikibase.datamodel.Fingerprint}
 	 */
 	deserialize: function( serialization ) {
-		var termSetDeserializer = new MODULE.TermSetDeserializer(),
-			multiTermSetDeserializer = new MODULE.MultiTermSetDeserializer();
+		var termMapDeserializer = new MODULE.TermMapDeserializer(),
+			multiTermMapDeserializer = new MODULE.MultiTermMapDeserializer();
 
 		return new wb.datamodel.Fingerprint(
-			termSetDeserializer.deserialize( serialization.labels ),
-			termSetDeserializer.deserialize( serialization.descriptions ),
-			multiTermSetDeserializer.deserialize( serialization.aliases )
+			termMapDeserializer.deserialize( serialization.labels ),
+			termMapDeserializer.deserialize( serialization.descriptions ),
+			multiTermMapDeserializer.deserialize( serialization.aliases )
 		);
 	}
 } );

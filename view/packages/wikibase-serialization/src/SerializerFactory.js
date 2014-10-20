@@ -22,8 +22,8 @@ var SELF = MODULE.SerializerFactory = function WbSerializerProvider() {
 	this.registerSerializer( MODULE.EntityIdSerializer, wb.datamodel.EntityId );
 	this.registerSerializer( MODULE.EntitySerializer, wb.datamodel.Entity );
 	this.registerSerializer( MODULE.FingerprintSerializer, wb.datamodel.Fingerprint );
+	this.registerSerializer( MODULE.MultiTermMapSerializer, wb.datamodel.MultiTermMap );
 	this.registerSerializer( MODULE.MultiTermSerializer, wb.datamodel.MultiTerm );
-	this.registerSerializer( MODULE.MultiTermSetSerializer, wb.datamodel.MultiTermSet );
 	this.registerSerializer( MODULE.ReferenceListSerializer, wb.datamodel.ReferenceList );
 	this.registerSerializer( MODULE.ReferenceSerializer, wb.datamodel.Reference );
 	this.registerSerializer( MODULE.SiteLinkSerializer, wb.datamodel.SiteLink );
@@ -35,7 +35,7 @@ var SELF = MODULE.SerializerFactory = function WbSerializerProvider() {
 	this.registerSerializer( MODULE.StatementListSerializer, wb.datamodel.StatementList );
 	this.registerSerializer( MODULE.StatementSerializer, wb.datamodel.Statement );
 	this.registerSerializer( MODULE.TermSerializer, wb.datamodel.Term );
-	this.registerSerializer( MODULE.TermSetSerializer, wb.datamodel.TermSet );
+	this.registerSerializer( MODULE.TermMapSerializer, wb.datamodel.TermMap );
 };
 
 $.extend( SELF.prototype, {
