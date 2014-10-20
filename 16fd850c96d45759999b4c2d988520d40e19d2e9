@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_e154e3cb",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T18:39:00Z",
+      "side": 1,
+      "message": "It\u0027s odd to do tracking in an \"language aware\" renderer without tracking the language. :-(",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_2102cbbe",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T18:39:00Z",
+      "side": 1,
+      "message": "A new object every time? How often is this called?",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_41dd9746",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T18:39:00Z",
+      "side": 1,
+      "message": "That\u0027s pointless. Just move the \"\u003d array()\" up and remove the constructor.",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_81f2bfcb",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T18:39:00Z",
+      "side": 1,
+      "message": "Why does this need to be public if all types have methods?",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_61f533b5",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T18:39:00Z",
+      "side": 1,
+      "message": "SiteLinks with upper case L please. I know we do this wrong in most places. Ask Aude.",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_21bf2bcf",
+        "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T18:39:00Z",
+      "side": 1,
+      "message": "private? See interface.",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_c1cf6781",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T18:39:00Z",
+      "side": 1,
+      "message": "What \"given page\"? There is nothing about this in the interface.",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
