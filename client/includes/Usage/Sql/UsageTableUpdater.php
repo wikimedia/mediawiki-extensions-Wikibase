@@ -35,7 +35,7 @@ class UsageTableUpdater {
 	 * @param string $tableName
 	 * @param int $batchSize
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( DatabaseBase $connection, $tableName, $batchSize ) {
 		if ( !is_string( $tableName ) ) {
@@ -110,21 +110,21 @@ class UsageTableUpdater {
 		$bins = $this->binUsages( $usages );
 		$c = 0;
 
-		foreach ( $bins as $aspect => $entities ) {
-			$c += $this->removeAspectForPage( $pageId, $aspect, array_keys( $entities ) );
+		foreach ( $bins as $aspect => $bin ) {
+			$c += $this->removeAspectForPage( $pageId, $aspect, array_keys( $bin ) );
 		}
 
 		return $c;
 	}
 
 	/**
-	 * Collects the EntityIds contained in the given list of EntityUsages into
+	 * Collects the entity id strings contained in the given list of EntityUsages into
 	 * bins based on the usage's aspect.
 	 *
 	 * @param EntityUsage[] $usages
 	 *
 	 * @throws InvalidArgumentException
-	 * @return array[] an associative array mapping aspect ids to lists of EntityIds.
+	 * @return array[] an associative array mapping aspect ids to lists of entity id strings.
 	 */
 	private function binUsages( array $usages ) {
 		$bins = array();
@@ -135,10 +135,8 @@ class UsageTableUpdater {
 			}
 
 			$aspect = $usage->getAspect();
-			$id = $usage->getEntityId();
-			$key = $id->getSerialization();
-
-			$bins[$aspect][$key] = $id;
+			$idString = $usage->getEntityId()->getSerialization();
+			$bins[$aspect][$idString] = null;
 		}
 
 		return $bins;
@@ -161,9 +159,9 @@ class UsageTableUpdater {
 
 			$rows[] = array(
 				'eu_page_id' => (int)$pageId,
-				'eu_aspect' => (string)$usage->getAspect(),
-				'eu_entity_id' => (string)$usage->getEntityId()->getSerialization(),
-				'eu_entity_type' => (string)$usage->getEntityId()->getEntityType(),
+				'eu_aspect' => $usage->getAspect(),
+				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
+				'eu_entity_type' => $usage->getEntityId()->getEntityType(),
 			);
 		}
 
@@ -182,7 +180,7 @@ class UsageTableUpdater {
 			return 0;
 		}
 
-		$batches = array_chunk( $idStrings, $this->batchSize, true );
+		$batches = array_chunk( $idStrings, $this->batchSize );
 		$c = 0;
 
 		foreach ( $batches as $batch ) {
@@ -190,12 +188,11 @@ class UsageTableUpdater {
 				$this->tableName,
 				array(
 					'eu_page_id' => (int)$pageId,
-					'eu_aspect' => (string)$aspect,
+					'eu_aspect' => $aspect,
 					'eu_entity_id' => $batch,
 				),
 				__METHOD__
 			);
-
 			$c += $this->connection->affectedRows();
 		}
 
@@ -221,12 +218,7 @@ class UsageTableUpdater {
 		$c = 0;
 
 		foreach ( $batches as $rows ) {
-			$this->connection->insert(
-				$this->tableName,
-				$rows,
-				__METHOD__
-			);
-
+			$this->connection->insert( $this->tableName, $rows, __METHOD__ );
 			$c += $this->connection->affectedRows();
 		}
 
