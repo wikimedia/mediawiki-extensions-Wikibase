@@ -34,6 +34,24 @@
       "revId": "cafe8c177317dd2f51370439f2379b5bf8db4c55",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_0dea6870",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimview.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-10-20T13:42:42Z",
+      "side": 1,
+      "message": "Option should be specified in statementview then.",
+      "parentUuid": "8e96e304_d610a8af",
+      "revId": "cafe8c177317dd2f51370439f2379b5bf8db4c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
