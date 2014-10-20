@@ -34,6 +34,24 @@
       "revId": "c1154434b4694ac7d65d51e7b88f9f2f01726c5a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_2d7e44e2",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-20T13:31:36Z",
+      "side": 1,
+      "message": "If it is just being extracted from the function input, then why not\n\nself::extractEntityIdFrom( $output )\n\n?",
+      "parentUuid": "8e96e304_8e0d1c44",
+      "revId": "c1154434b4694ac7d65d51e7b88f9f2f01726c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
