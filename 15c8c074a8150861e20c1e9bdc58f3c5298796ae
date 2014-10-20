@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_b0eb8bda",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "good idea",
+      "parentUuid": "8e96e304_cd0d6043",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_90444f4c",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 19
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_10e7df10",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "I don\u0027t think we do.",
+      "parentUuid": "8e96e304_ed05bc14",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_905bef25",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 19
@@ -64,6 +100,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "string[] please. Could also accept a single string (by removing the array type hint below).",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d0e897df",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "accepting a single string would be convenient, but i\u0027m wary about magic convenience like that.",
+      "parentUuid": "8e96e304_905bef25",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_f0b833e4",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "Because in some cases, $entities is used as a parameter to a function that expects correctly keys entities. See for instance the call to stripEntitiesFromList in getUnusedEntities",
+      "parentUuid": "8e96e304_50a567ff",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_f0a913dd",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 19
@@ -115,6 +187,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "$pagesIds, not page objects or something. Same for the method name. Please rename to getPageIds...",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_10b59fe0",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "getPageIdsUsing would be wrong. The page IDs don\u0027t use anything. getIdsOfPagesUsing seems silly to me.\n\nWe are *always* working with representations in programs. We could rename the User class to UserRecord, and WikiPage to WikiPageMetadata - but would that really help?",
+      "parentUuid": "8e96e304_f0a913dd",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +245,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_d096574f",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "Done never minding.",
+      "parentUuid": "8e96e304_70bd0316",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_d03ad7bf",
         "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
         "patchSetId": 19
@@ -166,6 +274,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "Can I please have a second variable name for the thing that\u0027s not a DatabaseUpdater?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_70a3c3a8",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "will do. not sure how this happened.",
+      "parentUuid": "8e96e304_d03ad7bf",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +315,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_308c5b32",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "right",
+      "parentUuid": "8e96e304_cd3a40c0",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_8d13d804",
         "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
         "patchSetId": 19
@@ -200,6 +344,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "Arg. toString? Sorry, but no. That\u0027s a debugging and convenience function, it should not be misused as it is a getKey/getHash or whatever you expect from toString at this point. I can\u0027t tell.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_f086f317",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "will rename to getIdentityString",
+      "parentUuid": "8e96e304_8d13d804",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +385,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_b0806bfa",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "$numberOfModifications, because it\u0027s not actually modifications, right?....",
+      "parentUuid": "8e96e304_ede13cfc",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_4dddd046",
         "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
         "patchSetId": 19
@@ -234,6 +414,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "$count please? Same multiple times below.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_5091e748",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "Bah. You insist on $index in for loops, too?",
+      "parentUuid": "8e96e304_4dddd046",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +455,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_109b5f6b",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "will do",
+      "parentUuid": "8e96e304_f0059314",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_10227f9f",
         "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
         "patchSetId": 19
@@ -268,6 +484,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "Again, all you need is an array of id strings.\n\nHm... not sure. At least rename the variable to $entityIds, please.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_30b3fbe9",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "This is a public interface method, so it can\u0027t rely on implementation details. Asking for string IDs here would be inconvenient for the caller, and unsafe.",
+      "parentUuid": "8e96e304_10227f9f",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -291,6 +525,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_f0acb386",
+        "filename": "client/includes/Usage/Sql/entity_usage.sql",
+        "patchSetId": 19
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "changed this because SQLite doesn\u0027t support ENUM. Will fix the readme.",
+      "parentUuid": "8e96e304_ed537c18",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_2d4ac45f",
         "filename": "client/includes/Usage/SubscriptionManager.php",
         "patchSetId": 19
@@ -302,6 +554,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "At least the types should be know at this point, shouldn\u0027t they?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_b0c62b4d",
+        "filename": "client/includes/Usage/SubscriptionManager.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "Yes, will add documentation.",
+      "parentUuid": "8e96e304_2d4ac45f",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -325,6 +595,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_70c0a32f",
+        "filename": "client/includes/Usage/SubscriptionManager.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "No throw, this is a null implementation. It\u0027s actually being called.\nIt\u0027s going, but not immediately. I want to get client side tracking done first, before implementing repo side tracking.",
+      "parentUuid": "8e96e304_4d4f106f",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_cd3320f2",
         "filename": "client/includes/Usage/UsageLookup.php",
         "patchSetId": 19
@@ -336,6 +624,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "The part in brackets doesn\u0027t make sense.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_90bd2fb0",
+        "filename": "client/includes/Usage/UsageLookup.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "uh... right.",
+      "parentUuid": "8e96e304_cd3320f2",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -359,6 +665,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_50dfa710",
+        "filename": "client/includes/Usage/UsageLookup.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "bah.",
+      "parentUuid": "8e96e304_0d22689f",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_2d23a4a7",
         "filename": "client/includes/Usage/UsageTracker.php",
         "patchSetId": 19
@@ -370,6 +694,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "So the type is EntityUsage[]? Can it be null in case there was no usage before?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_f0fa7372",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "Oh, right! Will fix.",
+      "parentUuid": "8e96e304_2d23a4a7",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -393,6 +735,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_70d743f3",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "This *may* throw a UsageTrackingException \"if something goes wrong\".\nYes, this is supposed to be idempotent: deleting something a second time should have no effect. I\u0027ll add the documentation.",
+      "parentUuid": "8e96e304_ed1cdc6c",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_4d287081",
         "filename": "client/includes/Usage/UsageTracker.php",
         "patchSetId": 19
@@ -404,6 +764,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "Whitespace.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_f0e353d2",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "hmpf.",
+      "parentUuid": "8e96e304_4d287081",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -427,6 +805,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_70ee63b3",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "Hmhm. We never document that explicitly, I fear. Shall we really start now?",
+      "parentUuid": "8e96e304_7a5c044f",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_5a3b48e8",
         "filename": "client/includes/store/sql/DirectSqlStore.php",
         "patchSetId": 19
@@ -438,6 +834,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "This can be more specific instead of just repeating the type from the base class.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d04097aa",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "Then it would make guarantees which we would have to support in the future. Not a good idea.",
+      "parentUuid": "8e96e304_5a3b48e8",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -461,6 +875,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_704d03e0",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "BUt it shouldn\u0027t, see above.",
+      "parentUuid": "8e96e304_3a367c01",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_da5f5843",
         "filename": "client/tests/phpunit/includes/store/sql/DirectSqlStoreTest.php",
         "patchSetId": 19
@@ -472,6 +904,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "Does this interfere with Aude\u0027s patch that just removed lots of these?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_501c87cb",
+        "filename": "client/tests/phpunit/includes/store/sql/DirectSqlStoreTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "Thes should be fine in test classes. We control the types of entity IDs used here.",
+      "parentUuid": "8e96e304_da5f5843",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -495,6 +945,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_307e9be2",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "The article about an item will often use multiple labels - but then, it will likely also use Statements, etc. And of course sitelinks. So, the \"all\" category is appropriate.\n\nHowever, entities *referenced* by the item described by the article will usually be shown using their label (in the local content language) and linked to the local target page. That corresponds to a \"label\" and \"page\" usage for the referenced item.",
+      "parentUuid": "8e96e304_1a5aa0f6",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_da6bd880",
         "filename": "docs/usagetracking.wiki",
         "patchSetId": 19
@@ -506,6 +974,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "Why not track the property ids used?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_707bc3eb",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "Because 1) it\u0027s a lot of overhead in the database b) is hard to implement (would need to track which properties are used via Lua) c) it doesn\u0027t help much (assuming that there are few pages that use Statements of an item, but potentially a lot of pages that use the local label and title of an item)",
+      "parentUuid": "8e96e304_da6bd880",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -529,6 +1015,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_9078cfee",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "The client can\u0027t perform changes to items. Items are always changed on the repo.",
+      "parentUuid": "8e96e304_9a6550ad",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_3a02fcbe",
         "filename": "docs/usagetracking.wiki",
         "patchSetId": 19
@@ -540,6 +1044,41 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "How is this (title of the client wiki\u0027s page?) relevant to the rest of whats described in this document?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_b0586b8d",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "Because that\u0027s what to need in order to generate a link to the corresponding local page.",
+      "parentUuid": "8e96e304_3a02fcbe",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d055f753",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "Fixme: this is \"S\" now.",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -563,6 +1102,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_10d35fda",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "\"sitelinks\" means usage of and/all sitelinks, while P is just about the sitelink to the local wiki. Since that\u0027S what we need to make links, this is going to be used a lot. Using the \"sitelinks\" aspect for this would mean purging a lot of pages on *any* change to *any* sitelink, while we are only interested in one specific sitelink.",
+      "parentUuid": "8e96e304_fa0b34d7",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_1a114008",
         "filename": "docs/usagetracking.wiki",
         "patchSetId": 19
@@ -574,6 +1131,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "What happened to \"page\"?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_b0d70bc4",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "forgot to add it. also, not an enum any more.",
+      "parentUuid": "8e96e304_1a114008",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -597,6 +1172,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_b0fe2b34",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "The first three are covered. I don\u0027t understand the last one.",
+      "parentUuid": "8e96e304_9a78f0ee",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_ba712c0d",
         "filename": "docs/usagetracking.wiki",
         "patchSetId": 19
@@ -608,6 +1201,24 @@
       "writtenOn": "2014-10-20T14:28:01Z",
       "side": 1,
       "message": "Whats the use case? We are currently talking about Items only, right?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_70f8a346",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-20T15:21:43Z",
+      "side": 1,
+      "message": "No, this also (potentially) tracks the usage of properties (used to access statements). I think it makes sense to have a way to look up all usages of a particular entity type in a particular namespace (e.g. in the future, MediaInfo entities in the File namespace).",
+      "parentUuid": "8e96e304_ba712c0d",
       "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
