@@ -439,11 +439,11 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			// Better than the raw ISO string
 			array(
 				'-00000000000-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
-				'0 BCE',
+				'0',
 			),
 			array(
 				'-0-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
-				'0 BCE',
+				'0',
 			),
 			array(
 				'+100000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga,
@@ -475,7 +475,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			),
 			array(
 				'-0-00-00T00:00:42Z', TimeValue::PRECISION_YEAR,
-				'0 BCE',
+				'0',
 			),
 
 			// Stuff we do not want to format so must return it :<
