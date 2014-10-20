@@ -99,7 +99,7 @@ $.extend( SELF.prototype, {
 	 * @param {string} languageCode
 	 */
 	removeLabelFor: function( languageCode ) {
-		this._labels.removeByKey( languageCode );
+		this._labels.removeItemByKey( languageCode );
 	},
 
 	/**
@@ -151,7 +151,7 @@ $.extend( SELF.prototype, {
 	 * @param {string} languageCode
 	 */
 	removeDescriptionFor: function( languageCode ) {
-		this._descriptions.removeByKey( languageCode );
+		this._descriptions.removeItemByKey( languageCode );
 	},
 
 	/**
@@ -210,7 +210,7 @@ $.extend( SELF.prototype, {
 	 * @param {string} languageCode
 	 */
 	removeAliasesFor: function( languageCode ) {
-		this._aliases.removeByKey( languageCode );
+		this._aliases.removeItemByKey( languageCode );
 	},
 
 	/**

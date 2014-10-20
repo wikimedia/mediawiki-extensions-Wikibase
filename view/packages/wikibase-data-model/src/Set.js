@@ -112,7 +112,7 @@ var SELF = wb.datamodel.Set = util.inherit(
 		var key = this.getItemKey( item );
 
 		if( item.equals( this._items[key] ) ) {
-			this.removeByKey( key );
+			this.removeItemByKey( key );
 		} else {
 			throw new Error( 'Trying to remove non-existent item' );
 		}
@@ -175,7 +175,7 @@ var SELF = wb.datamodel.Set = util.inherit(
 	/**
 	 * @param {string} key
 	 */
-	removeByKey: function( key ) {
+	removeItemByKey: function( key ) {
 		if( this._items[key] ) {
 			this.length--;
 		}

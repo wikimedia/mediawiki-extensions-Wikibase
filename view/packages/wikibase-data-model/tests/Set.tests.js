@@ -160,7 +160,7 @@ QUnit.test( 'getItemByKey()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'removeByKey() & length attribute', function( assert ) {
+QUnit.test( 'removeItemByKey() & length attribute', function( assert ) {
 	var items = getTestItems( 2 ),
 		set = createSet( items );
 
@@ -170,7 +170,7 @@ QUnit.test( 'removeByKey() & length attribute', function( assert ) {
 		'Set contains 2 items.'
 	);
 
-	set.removeByKey( '0' );
+	set.removeItemByKey( '0' );
 
 	assert.strictEqual(
 		set.getItemByKey( '0' ),
@@ -184,7 +184,7 @@ QUnit.test( 'removeByKey() & length attribute', function( assert ) {
 		'Set contains 1 item.'
 	);
 
-	set.removeByKey( 'does-not-exist' );
+	set.removeItemByKey( 'does-not-exist' );
 
 	assert.strictEqual(
 		set.length,
@@ -192,7 +192,7 @@ QUnit.test( 'removeByKey() & length attribute', function( assert ) {
 		'Set contains 1 item after trying to remove an item that is not set.'
 	);
 
-	set.removeByKey( '1' );
+	set.removeItemByKey( '1' );
 
 	assert.strictEqual(
 		set.getItemByKey( '1' ),
