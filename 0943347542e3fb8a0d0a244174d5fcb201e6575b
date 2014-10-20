@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_461ccdcb",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T18:11:54Z",
+      "side": 1,
+      "message": "!\u003d\u003d 0 is better because of PHP being UINT and not INT. Sure, doesn\u0027t really matter.",
+      "revId": "0943347542e3fb8a0d0a244174d5fcb201e6575b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_e65e397b",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T18:11:54Z",
+      "side": 1,
+      "message": "A special reason for moving this out of the handler?",
+      "revId": "0943347542e3fb8a0d0a244174d5fcb201e6575b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_867895ee",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T18:11:54Z",
+      "side": 1,
+      "message": "Which tool adds slashes? There is a use clause on top.",
+      "revId": "0943347542e3fb8a0d0a244174d5fcb201e6575b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_c6553d54",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T18:11:54Z",
+      "side": 1,
+      "message": "This is odd. Why inject a service and expose it the same time? Personally I don\u0027t have a big problem with that. Just wondering if it\u0027s an okish pattern.",
+      "revId": "0943347542e3fb8a0d0a244174d5fcb201e6575b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
