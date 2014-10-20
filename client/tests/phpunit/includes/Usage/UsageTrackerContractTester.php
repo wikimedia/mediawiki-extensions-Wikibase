@@ -1,11 +1,12 @@
 <?php
+
 namespace Wikibase\Client\Tests\Usage;
 
+use PHPUnit_Framework_Assert as Assert;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Client\Usage\UsageTracker;
-use PHPUnit_Framework_Assert as Assert;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * Base class for unit tests for UsageTracker implementations, providing
@@ -98,7 +99,7 @@ class UsageTrackerContractTester {
 	public function getUsageStrings( array $usages ) {
 		return array_values(
 			array_map( function( EntityUsage $usage ) {
-				return $usage->toString();
+				return $usage->getIdentifier();
 			}, $usages )
 		);
 	}

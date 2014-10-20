@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
+use MWException;
 
 /**
  * Schema updater for SqlUsageTracker
@@ -30,8 +31,8 @@ class SqlUsageTrackerSchemaUpdater {
 	 * @param DatabaseUpdater $dbUpdater
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $dbUpdater ) {
-		$dbUpdater = new self( $dbUpdater );
-		$dbUpdater->doSchemaUpdate();
+		$schemaUpdater = new self( $dbUpdater );
+		$schemaUpdater->doSchemaUpdate();
 	}
 
 	/**
@@ -59,7 +60,7 @@ class SqlUsageTrackerSchemaUpdater {
 			}
 		}
 
-		throw new \MWException( "Could not find schema update script '$name'." );
+		throw new MWException( "Could not find schema update script '$name'." );
 	}
 
 }

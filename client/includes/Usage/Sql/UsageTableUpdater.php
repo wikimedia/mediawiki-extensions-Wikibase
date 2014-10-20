@@ -36,11 +36,15 @@ class UsageTableUpdater {
 	 * @param string $tableName
 	 * @param int $batchSize
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( DatabaseBase $connection, $tableName, $batchSize ) {
 		if ( !is_string( $tableName ) ) {
 			throw new InvalidArgumentException( '$tableName must be a string' );
+		}
+
+		if ( !is_int( $batchSize ) || $batchSize <= 0 ) {
+			throw new InvalidArgumentException( '$batchSize must be a positive integer' );
 		}
 
 		$this->connection = $connection;
@@ -65,7 +69,7 @@ class UsageTableUpdater {
 				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
 			}
 
-			$key = $usage->toString();
+			$key = $usage->getIdentifier();
 			$reindexed[$key] = $usage;
 		}
 
@@ -86,16 +90,16 @@ class UsageTableUpdater {
 		$removed = array_diff_key( $oldUsages, $newUsages );
 		$added = array_diff_key( $newUsages, $oldUsages );
 
-		$mod = 0;
-		$mod += $this->removeUsageForPage( $pageId, $removed );
-		$mod += $this->addUsageForPage( $pageId, $added );
+		$changes = 0;
+		$changes += $this->removeUsageForPage( $pageId, $removed );
+		$changes += $this->addUsageForPage( $pageId, $added );
 
-		return $mod;
+		return $changes;
 	}
 
 	/**
 	 * @param int $pageId
-	 * @param EntityUsage[] $usages Must be keyed by string id
+	 * @param EntityUsage[] $usages
 	 *
 	 * @return int The number of entries removed
 	 */
@@ -105,23 +109,23 @@ class UsageTableUpdater {
 		}
 
 		$bins = $this->binUsages( $usages );
-		$c = 0;
+		$count = 0;
 
-		foreach ( $bins as $aspect => $entities ) {
-			$c += $this->removeAspectForPage( $pageId, $aspect, $entities );
+		foreach ( $bins as $aspect => $bin ) {
+			$count += $this->removeAspectForPage( $pageId, $aspect, array_keys( $bin ) );
 		}
 
-		return $c;
+		return $count;
 	}
 
 	/**
-	 * Collects the EntityIds contained in the given list of EntityUsages into
+	 * Collects the entity id strings contained in the given list of EntityUsages into
 	 * bins based on the usage's aspect.
 	 *
 	 * @param EntityUsage[] $usages
 	 *
 	 * @throws InvalidArgumentException
-	 * @return array[] an associative array mapping aspect ids to lists of EntityIds.
+	 * @return array[] two dimensional associative array mapping aspect ids and entity id strings.
 	 */
 	private function binUsages( array $usages ) {
 		$bins = array();
@@ -132,10 +136,9 @@ class UsageTableUpdater {
 			}
 
 			$aspect = $usage->getAspect();
-			$id = $usage->getEntityId();
-			$key = $id->getSerialization();
+			$idString = $usage->getEntityId()->getSerialization();
 
-			$bins[$aspect][$key] = $id;
+			$bins[$aspect][$idString] = null;
 		}
 
 		return $bins;
@@ -170,17 +173,17 @@ class UsageTableUpdater {
 	/**
 	 * @param int $pageId
 	 * @param string $aspect
-	 * @param EntityId[] $entities Must be keyed by string id
+	 * @param string[] $idStrings
 	 *
 	 * @return int The number of entries removed
 	 */
-	private function removeAspectForPage( $pageId, $aspect, array $entities ) {
-		if ( empty( $entities ) ) {
+	private function removeAspectForPage( $pageId, $aspect, array $idStrings ) {
+		if ( empty( $idStrings ) ) {
 			return 0;
 		}
 
-		$batches = array_chunk( $entities, $this->batchSize, true );
-		$c = 0;
+		$batches = array_chunk( $idStrings, $this->batchSize, true );
+		$count = 0;
 
 		foreach ( $batches as $batch ) {
 			$this->connection->delete(
@@ -188,15 +191,15 @@ class UsageTableUpdater {
 				array(
 					'eu_page_id' => (int)$pageId,
 					'eu_aspect' => (string)$aspect,
-					'eu_entity_id' => array_keys( $batch ),
+					'eu_entity_id' => $batch,
 				),
 				__METHOD__
 			);
 
-			$c += $this->connection->affectedRows();
+			$count += $this->connection->affectedRows();
 		}
 
-		return $c;
+		return $count;
 	}
 
 	/**
@@ -215,7 +218,7 @@ class UsageTableUpdater {
 			$this->batchSize
 		);
 
-		$c = 0;
+		$count = 0;
 
 		foreach ( $batches as $rows ) {
 			$this->connection->insert(
@@ -224,10 +227,10 @@ class UsageTableUpdater {
 				__METHOD__
 			);
 
-			$c += $this->connection->affectedRows();
+			$count += $this->connection->affectedRows();
 		}
 
-		return $c;
+		return $count;
 	}
 
 	/**
@@ -242,13 +245,13 @@ class UsageTableUpdater {
 	private function reindexEntityIds( array $entityIds ) {
 		$reindexed = array();
 
-		foreach ( $entityIds as $id ) {
-			if ( !( $id instanceof EntityId ) ) {
+		foreach ( $entityIds as $entityId ) {
+			if ( !( $entityId instanceof EntityId ) ) {
 				throw new InvalidArgumentException( '$entityIds must contain EntityId objects.' );
 			}
 
-			$key = $id->getSerialization();
-			$reindexed[$key] = $id;
+			$key = $entityId->getSerialization();
+			$reindexed[$key] = $entityId;
 		}
 
 		return $reindexed;
@@ -258,21 +261,21 @@ class UsageTableUpdater {
 	 * Removes usage tracking for the given set of entities.
 	 * This is used typically when entities were deleted.
 	 *
-	 * @param EntityId[] $entities
+	 * @param EntityId[] $entityIds
 	 */
-	public function removeEntities( array $entities ) {
-		if ( empty( $entities ) ) {
+	public function removeEntities( array $entityIds ) {
+		if ( empty( $entityIds ) ) {
 			return;
 		}
 
-		$entities = $this->reindexEntityIds( $entities );
-		$batches = array_chunk( $entities, $this->batchSize, true );
+		$entityIds = $this->reindexEntityIds( $entityIds );
+		$batches = array_chunk( array_keys( $entityIds ), $this->batchSize, true );
 
 		foreach ( $batches as $batch ) {
 			$this->connection->delete(
 				$this->tableName,
 				array(
-					'eu_entity_id' => array_keys( $batch ),
+					'eu_entity_id' => $batch,
 				),
 				__METHOD__
 			);

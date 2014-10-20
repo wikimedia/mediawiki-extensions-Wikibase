@@ -45,13 +45,13 @@ class EntityUsage {
 	/**
 	 * A list of all valid aspects
 	 *
-	 * @var array
+	 * @var bool[]
 	 */
 	private static $aspects = array(
-		self::SITELINK_USAGE,
-		self::LABEL_USAGE,
-		self::PAGE_USAGE,
-		self::ALL_USAGE
+		self::SITELINK_USAGE => null,
+		self::LABEL_USAGE => null,
+		self::PAGE_USAGE => null,
+		self::ALL_USAGE => null
 	);
 
 	/**
@@ -71,7 +71,7 @@ class EntityUsage {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( EntityId $entityId, $aspect ) {
-		if ( !in_array( $aspect, self::$aspects ) ) {
+		if ( !array_key_exists( $aspect, self::$aspects ) ) {
 			throw new InvalidArgumentException( '$aspect must use one of the XXX_USAGE constants!' );
 		}
 
@@ -96,7 +96,7 @@ class EntityUsage {
 	/**
 	 * @return string
 	 */
-	public function toString() {
+	public function getIdentifier() {
 		return $this->getEntityId()->getSerialization() . '#' . $this->getAspect();
 	}
 
@@ -104,7 +104,7 @@ class EntityUsage {
 	 * @return string
 	 */
 	public function __toString() {
-		return $this->toString();
+		return $this->getIdentifier();
 	}
 
 }

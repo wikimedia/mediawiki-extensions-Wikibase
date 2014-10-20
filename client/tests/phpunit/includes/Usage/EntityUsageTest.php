@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Client\Tests\Usage;
 
 use PHPUnit_Framework_TestCase;
@@ -26,7 +27,7 @@ class EntityUsageTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $id, $usage->getEntityId() );
 		$this->assertEquals( $aspect, $usage->getAspect() );
 
-		$this->assertInternalType( 'string', $usage->toString() );
+		$this->assertInternalType( 'string', $usage->getIdentifier() );
 	}
 
 }

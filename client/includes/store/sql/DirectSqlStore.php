@@ -6,7 +6,10 @@ use Language;
 use LoadBalancer;
 use ObjectCache;
 use Site;
+use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\Usage\SubscriptionManager;
+use Wikibase\Client\Usage\UsageLookup;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
@@ -18,9 +21,6 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
-use Wikibase\Client\Usage\Sql\SqlUsageTracker;
-use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\Client\Usage\UsageTracker;
 
 /**
  * Implementation of the client store interface using direct access to the repository's
@@ -35,22 +35,22 @@ use Wikibase\Client\Usage\UsageTracker;
 class DirectSqlStore implements ClientStore {
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityLookup|null
 	 */
 	private $entityRevisionLookup = null;
 
 	/**
-	 * @var PropertyLabelResolver
+	 * @var PropertyLabelResolver|null
 	 */
 	private $propertyLabelResolver = null;
 
 	/**
-	 * @var TermIndex
+	 * @var TermIndex|null
 	 */
 	private $termIndex = null;
 
 	/**
-	 * @var PropertyInfoTable
+	 * @var PropertyInfoTable|null
 	 */
 	private $propertyInfoTable = null;
 
@@ -70,12 +70,12 @@ class DirectSqlStore implements ClientStore {
 	protected $language;
 
 	/**
-	 * @var SiteLinkTable
+	 * @var SiteLinkTable|null
 	 */
 	private $siteLinkTable = null;
 
 	/**
-	 * @var SqlUsageTracker
+	 * @var SqlUsageTracker|null
 	 */
 	private $usageTracker = null;
 
@@ -409,4 +409,5 @@ class DirectSqlStore implements ClientStore {
 			return new DummyPropertyInfoStore();
 		}
 	}
+
 }

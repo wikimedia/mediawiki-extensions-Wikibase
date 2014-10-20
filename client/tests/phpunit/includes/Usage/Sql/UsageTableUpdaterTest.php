@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use DatabaseBase;
@@ -22,12 +23,12 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class UsageTableUpdaterTest extends \MediaWikiTestCase {
 
-	private $tableName = 'wbc_entity_usage';
+	const TABLE_NAME = 'wbc_entity_usage';
 
 	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
-		$this->tablesUsed[] = $this->tableName;
+		$this->tablesUsed[] = self::TABLE_NAME;
 	}
 
 	private function makeUsages( $n ) {
@@ -112,7 +113,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	private function getUsageTableUpdater( $batchSize = 1000 ) {
-		return new UsageTableUpdater( wfGetDB( DB_WRITE ), $this->tableName, $batchSize );
+		return new UsageTableUpdater( wfGetDB( DB_WRITE ), self::TABLE_NAME, $batchSize );
 	}
 
 	public function testUpdateUsage() {
@@ -228,7 +229,8 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	 * @return bool
 	 */
 	private function rowExists( DatabaseBase $db, $conditions ) {
-		$count = $db->selectRowCount( $this->tableName, '*', $conditions );
+		$count = $db->selectRowCount( self::TABLE_NAME, '*', $conditions );
 		return $count > 0;
 	}
+
 }

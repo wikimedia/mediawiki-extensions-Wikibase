@@ -24,10 +24,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
  */
 class SqlUsageTracker implements UsageTracker, UsageLookup {
 
-	/**
-	 * @var string
-	 */
-	private $tableName;
+	const TABLE_NAME = 'wbc_entity_usage';
 
 	/**
 	 * @var EntityIdParser
@@ -49,7 +46,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param LoadBalancer $loadBalancer
 	 */
 	public function __construct( EntityIdParser $idParser, LoadBalancer $loadBalancer ) {
-		$this->tableName = 'wbc_entity_usage';
 		$this->idParser = $idParser;
 		$this->loadBalancer = $loadBalancer;
 	}
@@ -60,7 +56,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return UsageTableUpdater
 	 */
 	private function newTableUpdater( DatabaseBase $db ) {
-		return new UsageTableUpdater( $db, $this->tableName, $this->batchSize );
+		return new UsageTableUpdater( $db, self::TABLE_NAME, $this->batchSize );
 	}
 
 	/**
@@ -148,13 +144,13 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	private function reindexEntityIds( array $entityIds ) {
 		$reindexed = array();
 
-		foreach ( $entityIds as $id ) {
-			if ( !( $id instanceof EntityId ) ) {
+		foreach ( $entityIds as $entityId ) {
+			if ( !( $entityId instanceof EntityId ) ) {
 				throw new InvalidArgumentException( '$entityIds must contain EntityId objects.' );
 			}
 
-			$key = $id->getSerialization();
-			$reindexed[$key] = $id;
+			$key = $entityId->getSerialization();
+			$reindexed[$key] = $entityId;
 		}
 
 		return $reindexed;
@@ -168,6 +164,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws UsageTrackerException
+	 * @throws Exception
 	 * @return EntityUsage[] Usages before the update, in the same form as $usages
 	 */
 	public function trackUsedEntities( $pageId, array $usages ) {
@@ -199,12 +196,13 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	/**
 	 * @see UsageTracker::removeEntities
 	 *
-	 * @param EntityId[] $entities
+	 * @param EntityId[] $entityIds
 	 *
 	 * @throws UsageTrackerException
+	 * @throws Exception
 	 */
-	public function removeEntities( array $entities ) {
-		if ( empty( $entities ) ) {
+	public function removeEntities( array $entityIds ) {
+		if ( empty( $entityIds ) ) {
 			return;
 		}
 
@@ -212,7 +210,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		try {
 			$tableUpdater = $this->newTableUpdater( $db );
-			$tableUpdater->removeEntities( $entities );
+			$tableUpdater->removeEntities( $entityIds );
 
 			$this->commitAtomicSection( $db, __METHOD__ );
 		} catch ( Exception $ex ) {
@@ -227,7 +225,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * @see UsageTracker::getUsageForPage
+	 * @see UsageLookup::getUsageForPage
 	 *
 	 * @param int $pageId
 	 *
@@ -255,14 +253,14 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			throw new InvalidArgumentException( '$pageId must be an int.' );
 		}
 
-		$res = $db->select(
-			$this->tableName,
+		$result = $db->select(
+			self::TABLE_NAME,
 			array( 'eu_aspect', 'eu_entity_id' ),
 			array( 'eu_page_id' => (int)$pageId ),
 			__METHOD__
 		);
 
-		$usages = $this->convertRowsToUsages( $res );
+		$usages = $this->convertRowsToUsages( $result );
 		return $usages;
 	}
 
@@ -274,10 +272,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	private function convertRowsToUsages( $rows ) {
 		$usages = array();
 		foreach ( $rows as $row ) {
-			$id = $this->idParser->parse( $row->eu_entity_id );
+			$entityId = $this->idParser->parse( $row->eu_entity_id );
 
-			$usage = new EntityUsage( $id, $row->eu_aspect );
-			$key = $usage->toString();
+			$usage = new EntityUsage( $entityId, $row->eu_aspect );
+			$key = $usage->getIdentifier();
 
 			$usages[$key] = $usage;
 		}
@@ -286,22 +284,22 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * @see UsageTracker::getPagesUsing
+	 * @see UsageLookup::getPagesUsing
 	 *
-	 * @param EntityId[] $entities
-	 * @param array $aspects
+	 * @param EntityId[] $entityIds
+	 * @param string[] $aspects
 	 *
 	 * @return Iterator An iterator over page IDs.
 	 * @throws UsageTrackerException
 	 */
-	public function getPagesUsing( array $entities, array $aspects = array() ) {
-		if ( empty( $entities ) ) {
+	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
+		if ( empty( $entityIds ) ) {
 			return array();
 		}
 
-		$entities = $this->reindexEntityIds( $entities );
+		$entityIds = $this->reindexEntityIds( $entityIds );
 
-		$where = array( 'eu_entity_id' => array_keys( $entities ) );
+		$where = array( 'eu_entity_id' => array_keys( $entityIds ) );
 
 		if ( !empty( $aspects ) ) {
 			$where['eu_aspect'] = $aspects;
@@ -309,57 +307,57 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		$db = $this->getReadConnection();
 
-		$res = $db->select(
-			$this->tableName,
+		$result = $db->select(
+			self::TABLE_NAME,
 			array( 'DISTINCT eu_page_id' ),
 			$where,
 			__METHOD__
 		);
 
-		$pages = $this->convertRowsToPageIds( $res );
+		$pageIds = $this->convertRowsToPageIds( $result );
 
 		$this->releaseConnection( $db );
 
 		//TODO: use paging for large page sets!
-		return new ArrayIterator( $pages );
+		return new ArrayIterator( $pageIds );
 	}
 
 	/**
 	 * @param array|Iterator $rows
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	private function convertRowsToPageIds( $rows ) {
-		$pages = array();
+		$pageIds = array();
 		foreach ( $rows as $row ) {
-			$pages[] = (int)$row->eu_page_id;
+			$pageIds[] = (int)$row->eu_page_id;
 		}
 
-		return $pages;
+		return $pageIds;
 	}
 
 
 	/**
-	 * @see UsageTracker::getUnusedEntities
+	 * @see UsageLookup::getUnusedEntities
 	 *
-	 * @param EntityId[] $entities
+	 * @param EntityId[] $entityIds
 	 *
 	 * @return EntityId[]
 	 * @throws UsageTrackerException
 	 */
-	public function getUnusedEntities( array $entities ) {
-		if ( empty( $entities ) ) {
+	public function getUnusedEntities( array $entityIds ) {
+		if ( empty( $entityIds ) ) {
 			return array();
 		}
 
-		$entities = $this->reindexEntityIds( $entities );
+		$entityIds = $this->reindexEntityIds( $entityIds );
 
-		$where = array( 'eu_entity_id' => array_keys( $entities ) );
+		$where = array( 'eu_entity_id' => array_keys( $entityIds ) );
 
 		$db = $this->getReadConnection();
 
-		$res = $db->select(
-			$this->tableName,
+		$result = $db->select(
+			self::TABLE_NAME,
 			array( 'eu_entity_id' ),
 			$where,
 			__METHOD__
@@ -367,26 +365,26 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		$this->releaseConnection( $db );
 
-		$unused = $this->stripEntitiesFromList( $res, $entities );
+		$unused = $this->stripEntitiesFromList( $entityIds, $result );
 		return $unused;
 	}
 
 	/**
-	 * Unsets all keys in $entities that where found as values of eu_entity_id
+	 * Unsets all keys in the $entityIds array that where found as values of eu_entity_id
 	 * in $rows.
 	 *
+	 * @param EntityId[] $entityIds
 	 * @param array|Iterator $rows
-	 * @param EntityId[] $entities
 	 *
-	 * @return array
+	 * @return EntityId[]
 	 */
-	private function stripEntitiesFromList( $rows, array $entities ) {
+	private function stripEntitiesFromList( array $entityIds, $rows ) {
 		foreach ( $rows as $row ) {
 			$key = $row->eu_entity_id;
-			unset( $entities[$key] );
+			unset( $entityIds[$key] );
 		}
 
-		return $entities;
+		return $entityIds;
 	}
 
 }

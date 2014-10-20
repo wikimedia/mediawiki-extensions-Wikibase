@@ -16,11 +16,23 @@ namespace Wikibase\Client\Usage;
  */
 class SubscriptionManager {
 
-	public function subscribe( $client, $entities ) {
+	/**
+	 * @param string $client
+	 * @param array $entityIds
+	 *
+	 * @throws UsageTrackerException
+	 */
+	public function subscribe( $client, array $entityIds ) {
 		// DUMMY
 	}
 
-	public function unsubscribe( $client, $entities ) {
+	/**
+	 * @param string $client
+	 * @param array $entityIds
+	 *
+	 * @throws UsageTrackerException
+	 */
+	public function unsubscribe( $client, array $entityIds ) {
 		// DUMMY
 	}
 

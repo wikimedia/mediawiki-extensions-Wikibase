@@ -22,7 +22,7 @@ interface UsageTracker {
 	 *
 	 * See docs/usagetracking.wiki for details.
 	 *
-	 * @return array Usages before the update, in the same form as $usages
+	 * @return EntityUsage[] Usages before the update, in the same form as $usages
 	 * @throws UsageTrackerException
 	 */
 	public function trackUsedEntities( $pageId, array $usages );
@@ -31,11 +31,10 @@ interface UsageTracker {
 	 * Removes usage tracking for the given set of entities.
 	 * This is used typically when entities were deleted.
 	 *
-	 * @param EntityId[] $entities
+	 * @param EntityId[] $entityIds
 	 *
 	 * @throws UsageTrackerException
 	 */
-	public function removeEntities( array $entities );
+	public function removeEntities( array $entityIds );
 
 }
- 

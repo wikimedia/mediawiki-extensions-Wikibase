@@ -1,12 +1,13 @@
 <?php
+
 namespace Wikibase\Client\Tests\Usage;
 
+use PHPUnit_Framework_Assert as Assert;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Client\Usage\UsageLookup;
-use PHPUnit_Framework_Assert as Assert;
 use Wikibase\Client\Usage\UsageTracker;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * Base class for unit tests for UsageLookup implementations, providing
@@ -134,7 +135,7 @@ class UsageLookupContractTester {
 	 */
 	public function getUsageStrings( array $usages ) {
 		$strings = array_map( function( EntityUsage $usage ) {
-			return $usage->toString();
+			return $usage->getIdentifier();
 		}, $usages );
 
 		sort( $strings );
