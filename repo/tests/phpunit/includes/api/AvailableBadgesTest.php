@@ -9,9 +9,10 @@ use Wikibase\Repo\WikibaseRepo;
  * Tests for the AvailableBadges class.
  *
  * @group API
+ * @group Database
  * @group Wikibase
  * @group WikibaseAPI
- * @gorup WikibaseRepo
+ * @group WikibaseRepo
  * @group medium
  *
  * @licence GNU GPL v2+
