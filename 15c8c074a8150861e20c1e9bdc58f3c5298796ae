@@ -1,0 +1,616 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_cd0d6043",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Depending on how often this is called an associative array_contains_key check would be more efficient.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_90444f4c",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "$entityIds please.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_ed05bc14",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "That\u0027s really strange. Why to we need the full power of an id string parser instead of simply reusing the type information from the database? Don\u0027t we have a parser that accepts the type as a parameter?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_905bef25",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "string[] please. Could also accept a single string (by removing the array type hint below).",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_10703f9f",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "$entityIds please.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_50a567ff",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "If all you need are the id strings, why does the reindex function work with objects?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_f0a913dd",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "$pagesIds, not page objects or something. Same for the method name. Please rename to getPageIds...",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d0973792",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "$entityIds please.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_70bd0316",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Doing this in place instead on a copy could save a lot of memory. Not sure if this is relevant but I have the feeling it could be.\n\n... oh, wait. It doesn\u0027t matter. The original array needs to be copied anyway. Either here or in the method above. Inlining this will not safe anything. Ok, never mind.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d03ad7bf",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Can I please have a second variable name for the thing that\u0027s not a DatabaseUpdater?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_cd3a40c0",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "$batchSize should be checked for type and range.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_8d13d804",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Arg. toString? Sorry, but no. That\u0027s a debugging and convenience function, it should not be misused as it is a getKey/getHash or whatever you expect from toString at this point. I can\u0027t tell.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_ede13cfc",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Mod as in modulo? $modifications please?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_4dddd046",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "$count please? Same multiple times below.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_f0059314",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Why don\u0027t you require an array of id strings here if that\u0027s all you need anyway?\n\nAs below I\u0027m not sure if this helps. At least fix the variable name and make it $entityIds.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_10227f9f",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Again, all you need is an array of id strings.\n\nHm... not sure. At least rename the variable to $entityIds, please.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_ed537c18",
+        "filename": "client/includes/Usage/Sql/entity_usage.sql",
+        "patchSetId": 19
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "The readme talks about an ENUM with \"all\" and so on, not a BINARY (that\u0027s an ascii char, right?) \"X\". Please fix either this or the readme.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_2d4ac45f",
+        "filename": "client/includes/Usage/SubscriptionManager.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "At least the types should be know at this point, shouldn\u0027t they?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_4d4f106f",
+        "filename": "client/includes/Usage/SubscriptionManager.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "TODO or throw would be better. Doesn\u0027t really matter if it\u0027s changed in the next patch anyway.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_cd3320f2",
+        "filename": "client/includes/Usage/UsageLookup.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "The part in brackets doesn\u0027t make sense.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_0d22689f",
+        "filename": "client/includes/Usage/UsageLookup.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Whitespace.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_2d23a4a7",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "So the type is EntityUsage[]? Can it be null in case there was no usage before?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_ed1cdc6c",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "When? What happens if there was nothing to delete? Just nothing?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_4d287081",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Whitespace.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_7a5c044f",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Can be null. Same for almost all other class variables above and below.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_5a3b48e8",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "This can be more specific instead of just repeating the type from the base class.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_3a367c01",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "This can be more specific instead of just repeating the type from the base class.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_da5f5843",
+        "filename": "client/tests/phpunit/includes/store/sql/DirectSqlStoreTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Does this interfere with Aude\u0027s patch that just removed lots of these?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_1a5aa0f6",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "This is to restricted, in my opinion. Mostly because of the asumtion that only one label (in the client wiki\u0027s language) is used. I can think of very simple use cases where more than one language is shown in the article. All these will fall into your \"all\" category.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_da6bd880",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Why not track the property ids used?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_9a6550ad",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Incoming from where to where? From the client to the repor or from the repo to the client?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_3a02fcbe",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "How is this (title of the client wiki\u0027s page?) relevant to the rest of whats described in this document?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_fa0b34d7",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "I don\u0027t get the difference between I and P.",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_1a114008",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "What happened to \"page\"?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_9a78f0ee",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Whats relevant in my opinion:\n* Lookup by entity id and aspect in case the entity was edited.\n* Lookup by entity id (nothing else) in case of a deletion, for example.\n* Lookup by page and entity and aspect.\n* Lookup by page (w/o NS) in case the page got deleted, for example.\n\nIs this all covered?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_ba712c0d",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-20T14:28:01Z",
+      "side": 1,
+      "message": "Whats the use case? We are currently talking about Items only, right?",
+      "revId": "15c8c074a8150861e20c1e9bdc58f3c5298796ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
