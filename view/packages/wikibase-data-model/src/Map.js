@@ -22,7 +22,7 @@ var SELF = wb.datamodel.Map = function( ItemConstructor, map ) {
 	}
 
 	this._ItemConstructor = ItemConstructor;
-	this._map = {};
+	this._items = {};
 
 	for( var key in map ) {
 		this.setItem( key, map[key] );
@@ -38,7 +38,7 @@ $.extend( SELF.prototype, {
 	/**
 	 * @type {Object}
 	 */
-	_map: null,
+	_items: null,
 
 	/**
 	 * @type {number}
@@ -49,7 +49,7 @@ $.extend( SELF.prototype, {
 	 * @see jQuery.fn.each
 	 */
 	each: function( fn ) {
-		$.each.call( null, this._map, fn );
+		$.each.call( null, this._items, fn );
 	},
 
 	/**
@@ -59,7 +59,7 @@ $.extend( SELF.prototype, {
 	 */
 	hasItem: function( key, item ) {
 		this._assertIsItem( item );
-		return this._map[key] && this._map[key].equals( item );
+		return this._items[key] && this._items[key].equals( item );
 	},
 
 	/**
@@ -93,7 +93,7 @@ $.extend( SELF.prototype, {
 	getKeys: function() {
 		var keys = [];
 
-		for( var key in this._map ) {
+		for( var key in this._items ) {
 			keys.push( key );
 		}
 
@@ -105,17 +105,17 @@ $.extend( SELF.prototype, {
 	 * @return {*|null}
 	 */
 	getItemByKey: function( key ) {
-		return this._map[key] || null;
+		return this._items[key] || null;
 	},
 
 	/**
 	 * @param {string} key
 	 */
 	removeItemByKey: function( key ) {
-		if( this._map[key] ) {
+		if( this._items[key] ) {
 			this.length--;
 		}
-		delete this._map[key];
+		delete this._items[key];
 	},
 
 	/**
@@ -123,7 +123,7 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	hasItemForKey: function( key ) {
-		return !!this._map[key];
+		return !!this._items[key];
 	},
 
 	/**
@@ -137,7 +137,7 @@ $.extend( SELF.prototype, {
 			this.length++;
 		}
 
-		this._map[key] = item;
+		this._items[key] = item;
 	},
 
 	/**
@@ -156,8 +156,8 @@ $.extend( SELF.prototype, {
 			return false;
 		}
 
-		for( var key in this._map ) {
-			if( !map.hasItem( key, this._map[key] ) ) {
+		for( var key in this._items ) {
+			if( !map.hasItem( key, this._items[key] ) ) {
 				return false;
 			}
 		}
