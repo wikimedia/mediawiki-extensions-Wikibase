@@ -33,22 +33,30 @@ class BotEditTest extends WikibaseApiTestCase {
 
 	private static $hasSetup;
 
+	/**
+	 * @var TestUser
+	 */
+	private static $wbBotUser;
+
 	public function setUp() {
 		parent::setUp();
+
+		if ( !isset( self::$wbBotUser ) ) {
+			self::$wbBotUser = new TestUser(
+				'Apitestbot',
+				'Api Test Bot',
+				'api_test_bot@example.com',
+				array( 'bot' )
+			);
+		}
+
+		ApiTestCase::$users['wbbot'] = self::$wbBotUser;
 
 		if( !isset( self::$hasSetup ) ){
 			$this->initTestEntities( array( 'Empty' ) );
 		}
+
 		self::$hasSetup = true;
-
-		ApiTestCase::$users['wbbot'] = new TestUser(
-			'Apitestbot',
-			'Api Test Bot',
-			'api_test_bot@example.com',
-			array( 'bot' )
-		);
-
-		$this->login( 'wbbot' );
 	}
 
 	public static function provideData() {
@@ -97,6 +105,8 @@ class BotEditTest extends WikibaseApiTestCase {
 	 * @dataProvider provideData
 	 */
 	public function testBotEdits( $params, $expected ) {
+		$this->login( 'wbbot' );
+
 		// -- do the request --------------------------------------------------
 		if( array_key_exists( 'handle', $params ) ){
 			$params['id'] = EntityTestHelper::getId( $params['handle'] );
