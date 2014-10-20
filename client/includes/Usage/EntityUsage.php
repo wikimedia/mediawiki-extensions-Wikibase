@@ -45,13 +45,13 @@ class EntityUsage {
 	/**
 	 * A list of all valid aspects
 	 *
-	 * @var array
+	 * @var null[]
 	 */
 	private static $aspects = array(
-		self::SITELINK_USAGE,
-		self::LABEL_USAGE,
-		self::TITLE_USAGE,
-		self::ALL_USAGE
+		self::SITELINK_USAGE => null,
+		self::LABEL_USAGE => null,
+		self::TITLE_USAGE => null,
+		self::ALL_USAGE => null,
 	);
 
 	/**
@@ -66,12 +66,12 @@ class EntityUsage {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $aspect use the XXX_USAGE constants
+	 * @param string $aspect use the EntityUsage::XXX_USAGE constants
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( EntityId $entityId, $aspect ) {
-		if ( !in_array( $aspect, self::$aspects ) ) {
+		if ( !array_key_exists( $aspect, self::$aspects ) ) {
 			throw new InvalidArgumentException( '$aspect must use one of the XXX_USAGE constants!' );
 		}
 

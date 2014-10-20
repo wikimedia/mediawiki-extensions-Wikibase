@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use DatabaseBase;
@@ -23,16 +24,14 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class UsageTableUpdaterTest extends \MediaWikiTestCase {
 
-	private $tableName = 'wbc_entity_usage';
-
 	protected function setUp() {
+		parent::setUp();
+
 		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
 			$this->markTestSkipped( 'Skipping test for SqlUsageTracker, because the useLegacyUsageIndex option is set.' );
 		}
 
-		$this->tablesUsed[] = $this->tableName;
-
-		parent::setUp();
+		$this->tablesUsed[] = 'wbc_entity_usage';
 	}
 
 	private function makeUsages( $n ) {
@@ -117,7 +116,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	private function getUsageTableUpdater( $batchSize = 1000 ) {
-		return new UsageTableUpdater( wfGetDB( DB_WRITE ), $this->tableName, $batchSize );
+		return new UsageTableUpdater( wfGetDB( DB_WRITE ), 'wbc_entity_usage', $batchSize );
 	}
 
 	public function testUpdateUsage() {
@@ -233,7 +232,8 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	 * @return bool
 	 */
 	private function rowExists( DatabaseBase $db, $conditions ) {
-		$count = $db->selectRowCount( $this->tableName, '*', $conditions );
+		$count = $db->selectRowCount( 'wbc_entity_usage', '*', $conditions );
 		return $count > 0;
 	}
+
 }

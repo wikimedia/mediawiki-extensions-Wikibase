@@ -39,14 +39,14 @@ interface UsageLookup {
 	public function getPagesUsing( array $entityIds, array $aspects = array() );
 
 	/**
-	 * Returns the elements of $entities that are currently not used as
+	 * Returns the elements of $entityIds that are currently not used as
 	 * far as this UsageTracker knows. In other words, this method answers the
 	 * question which of a given list of entities are currently being used on
 	 * wiki pages.
 	 *
 	 * @param EntityId[] $entityIds
 	 *
-	 * @return EntityId[] A list of elements of $entities that are unused.
+	 * @return EntityId[] A list of elements of $entityIds that are unused.
 	 * @throws UsageTrackerException
 	 */
 	public function getUnusedEntities( array $entityIds );

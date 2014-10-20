@@ -284,7 +284,7 @@ final class WikibaseClient {
 		if ( $this->store === null ) {
 			$this->store = new DirectSqlStore(
 				$this->getEntityContentDataCodec(),
-				$this->contentLanguage,
+				$this->contentLanguage->getCode(),
 				$this->getEntityIdParser(),
 				$repoDatabase
 			);

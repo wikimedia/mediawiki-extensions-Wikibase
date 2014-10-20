@@ -26,8 +26,8 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\EntityPerPage;
-use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\Store\SQL\EntityPerPageTable;
+use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -40,6 +40,16 @@ use WikiPage;
  * @author Daniel Kinzler
  */
 class SqlStore implements Store {
+
+	/**
+	 * @var EntityContentDataCodec
+	 */
+	private $entityContentDataCodec;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
 
 	/**
 	 * @var EntityRevisionLookup
@@ -102,43 +112,28 @@ class SqlStore implements Store {
 	private $cacheDuration;
 
 	/**
-	 * @var EntityContentDataCodec
-	 */
-	private $contentCodec;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser;
-
-	/**
 	 * @var bool
 	 */
 	private $useRedirectTargetColumn;
 
 	/**
-	 * @param EntityContentDataCodec $contentCodec
+	 * @param EntityContentDataCodec $entityContentDataCodec
+	 * @param EntityIdParser $entityIdParser
 	 */
 	public function __construct(
-		EntityContentDataCodec $contentCodec,
+		EntityContentDataCodec $entityContentDataCodec,
 		EntityIdParser $entityIdParser
 	) {
-		$this->contentCodec = $contentCodec;
+		$this->entityContentDataCodec = $entityContentDataCodec;
+		$this->entityIdParser = $entityIdParser;
 
 		//TODO: inject settings
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
-		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
-		$cacheType = $settings->getSetting( 'sharedCacheType' );
-
-		$this->entityIdParser = $entityIdParser;
-		$this->useRedirectTargetColumn = $settings->getSetting( 'useRedirectTargetColumn' );
-
-		$this->cachePrefix = $cachePrefix;
-		$this->cacheDuration = $cacheDuration;
-		$this->cacheType = $cacheType;
-
 		$this->changesDatabase = $settings->getSetting( 'changesDatabase' );
+		$this->cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
+		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
+		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
+		$this->useRedirectTargetColumn = $settings->getSetting( 'useRedirectTargetColumn' );
 	}
 
 	/**
@@ -496,9 +491,9 @@ class SqlStore implements Store {
 	 */
 	public function getEntityLookup( $uncached = '' ) {
 		$revisionLookup = $this->getEntityRevisionLookup( $uncached );
-		$lookup = new RevisionBasedEntityLookup( $revisionLookup );
-		$lookup = new RedirectResolvingEntityLookup( $lookup );
-		return $lookup;
+		$revisionBasedLookup = new RevisionBasedEntityLookup( $revisionLookup );
+		$resolvingLookup = new RedirectResolvingEntityLookup( $revisionBasedLookup );
+		return $resolvingLookup;
 	}
 
 	/**
@@ -572,12 +567,12 @@ class SqlStore implements Store {
 	 *
 	 * @return array( WikiPageEntityRevisionLookup, CachingEntityRevisionLookup )
 	 */
-	protected function newEntityRevisionLookup() {
-		//NOTE: Keep in sync with DirectSqlStore::newEntityLookup on the client
-		$key = $this->cachePrefix . ':WikiPageEntityRevisionLookup';
+	private function newEntityRevisionLookup() {
+		// NOTE: Keep cache key in sync with DirectSqlStore::newEntityLookup on the Client
+		$cacheKeyPrefix = $this->cachePrefix . ':WikiPageEntityRevisionLookup';
 
 		$rawLookup = new WikiPageEntityRevisionLookup(
-			$this->contentCodec,
+			$this->entityContentDataCodec,
 			$this->entityIdParser,
 			false
 		);
@@ -592,7 +587,7 @@ class SqlStore implements Store {
 			$rawLookup,
 			wfGetCache( $this->cacheType ),
 			$this->cacheDuration,
-			$key
+			$cacheKeyPrefix
 		);
 		// We need to verify the revision ID against the database to avoid stale data.
 		$persistentCachingLookup->setVerifyRevision( true );
@@ -660,9 +655,14 @@ class SqlStore implements Store {
 
 		if ( $usePropertyInfoTable ) {
 			$table = new PropertyInfoTable( false );
-			$key = $this->cachePrefix . ':CachingPropertyInfoStore';
-			return new CachingPropertyInfoStore( $table, ObjectCache::getInstance( $this->cacheType ),
-				$this->cacheDuration, $key );
+			$cacheKey = $this->cachePrefix . ':CachingPropertyInfoStore';
+
+			return new CachingPropertyInfoStore(
+				$table,
+				ObjectCache::getInstance( $this->cacheType ),
+				$this->cacheDuration,
+				$cacheKey
+			);
 		} else {
 			// dummy info store
 			return new DummyPropertyInfoStore();

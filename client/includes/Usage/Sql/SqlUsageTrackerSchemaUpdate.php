@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
+use MWException;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -16,27 +17,29 @@ class SqlUsageTrackerSchemaUpdater {
 	/**
 	 * @var DatabaseUpdater
 	 */
-	private $dbUpdater;
+	private $databaseUpdater;
 
 	/**
-	 * @param DatabaseUpdater $dbUpdater
+	 * @param DatabaseUpdater $databaseUpdater
 	 */
-	public function __construct( DatabaseUpdater $dbUpdater ) {
-		$this->dbUpdater = $dbUpdater;
+	public function __construct( DatabaseUpdater $databaseUpdater ) {
+		$this->databaseUpdater = $databaseUpdater;
 	}
 
 	/**
 	 * Static entry point for MediaWiki's LoadExtensionSchemaUpdates hook.
 	 *
-	 * @param DatabaseUpdater $dbUpdater
+	 * @param DatabaseUpdater $databaseUpdater
+	 *
+	 * @return bool
 	 */
-	public static function onSchemaUpdate( DatabaseUpdater $dbUpdater ) {
+	public static function onSchemaUpdate( DatabaseUpdater $databaseUpdater ) {
 		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
 			return true;
 		}
 
-		$usageTrackerSchemaUpdater = new self( $dbUpdater );
-		$usageTrackerSchemaUpdater->doSchemaUpdate();
+		$sqlUsageTrackerSchemaUpdater = new self( $databaseUpdater );
+		$sqlUsageTrackerSchemaUpdater->doSchemaUpdate();
 
 		return true;
 	}
@@ -45,11 +48,11 @@ class SqlUsageTrackerSchemaUpdater {
 	 * Applies any schema updates
 	 */
 	public function doSchemaUpdate() {
-		$db = $this->dbUpdater->getDB();
+		$db = $this->databaseUpdater->getDB();
 		$type = $db->getType();
 
 		$script = $this->getUpdateScriptPath( 'entity_usage', $type );
-		$this->dbUpdater->addExtensionTable( 'wbc_entity_usage', $script );
+		$this->databaseUpdater->addExtensionTable( 'wbc_entity_usage', $script );
 	}
 
 	private function getUpdateScriptPath( $name, $type ) {
@@ -66,7 +69,7 @@ class SqlUsageTrackerSchemaUpdater {
 			}
 		}
 
-		throw new \MWException( "Could not find schema update script '$name'." );
+		throw new MWException( "Could not find schema update script '$name'." );
 	}
 
 }
