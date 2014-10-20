@@ -516,28 +516,16 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testIterator() {
-		$claims = new Claims( array(
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P42" ) ) ),
-			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( "P42" ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P23" ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P9000" ) ) ),
-		) );
+		$array = array(
+			'TESTCLAIM1' => $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P42" ) ), 'testclaim1' ),
+			'TESTCLAIM2' => $this->makeClaim( new PropertySomeValueSnak( new PropertyId( "P42" ) ), 'testclaim2' ),
+			'TESTCLAIM3' => $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P23" ) ), 'testclaim3' ),
+			'TESTCLAIM4' => $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P9000" ) ), 'testclaim4' ),
+		);
+		$claims = new Claims( $array );
 
-		$array = iterator_to_array( $claims->getIterator() );
-
-		$this->assertSameSize( $claims, $array );
-
-		reset( $array );
-		reset( $claims );
-
-		while ( $actual = current( $array ) ) {
-			$expected = current( $claims );
-
-			$this->assertEquals( $actual, $expected );
-
-			next( $claims );
-			next( $array );
-		}
+		$iterator = iterator_to_array( $claims->getIterator() );
+		$this->assertSame( $array, $iterator );
 	}
 
 	public function testIsEmpty() {
