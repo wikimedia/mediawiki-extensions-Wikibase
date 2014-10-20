@@ -56,8 +56,8 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.ClaimList',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.StatementDeserializer',
 				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.StatementDeserializer',
 			),
 		),
 
@@ -69,9 +69,19 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.Claim',
 				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.SnakListDeserializer',
 				'wikibase.serialization.SnakDeserializer',
-				'wikibase.serialization.Deserializer',
+			),
+		),
+
+		'wikibase.serialization.Deserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'Deserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.serialization.__namespace',
 			),
 		),
 
@@ -125,10 +135,10 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.Item',
 				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.FingerprintDeserializer',
 				'wikibase.serialization.SiteLinkSetDeserializer',
 				'wikibase.serialization.StatementGroupSetDeserializer',
-				'wikibase.serialization.Deserializer',
 			),
 		),
 
@@ -165,9 +175,9 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.Property',
 				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.FingerprintDeserializer',
 				'wikibase.serialization.StatementGroupSetDeserializer',
-				'wikibase.serialization.Deserializer',
 			),
 		),
 
@@ -179,8 +189,8 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.ReferenceList',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.ReferenceDeserializer',
 				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.ReferenceDeserializer',
 			),
 		),
 
@@ -192,8 +202,8 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.Reference',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.SnakListDeserializer',
 				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.SnakListDeserializer',
 			),
 		),
 
@@ -205,8 +215,8 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.SiteLinkSet',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.SiteLinkDeserializer',
 				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.SiteLinkDeserializer',
 			),
 		),
 
@@ -230,8 +240,8 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.SnakList',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.SnakDeserializer',
 			),
 		),
 
@@ -259,8 +269,8 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.StatementGroupDeserializer',
 				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.StatementGroupDeserializer',
 			),
 		),
 
@@ -272,8 +282,8 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.StatementGroup',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.StatementListDeserializer',
 				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.StatementListDeserializer',
 			),
 		),
 
@@ -285,8 +295,8 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.StatementList',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.StatementDeserializer',
 				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.StatementDeserializer',
 			),
 		),
 
@@ -299,8 +309,8 @@ return call_user_func( function() {
 				'wikibase.datamodel.Statement',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.ClaimDeserializer',
-				'wikibase.serialization.ReferenceListDeserializer',
 				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.ReferenceListDeserializer',
 			),
 		),
 
@@ -324,18 +334,8 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.TermMap',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
+				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.TermDeserializer',
-			),
-		),
-
-		'wikibase.serialization.Deserializer' => $moduleTemplate + array(
-			'scripts' => array(
-				'Deserializer.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.serialization.__namespace',
 			),
 		),
 
