@@ -34,7 +34,7 @@ class SubscriptionManager {
 	 * @param string $client Global site ID of the client
 	 * @param EntityId[] $entityIds The entities to subscribe to.
 	 */
-	public function unsubscribe( $client, array $entities ) {
+	public function unsubscribe( $client, array $entityIds ) {
 		// NO-OP
 	}
 

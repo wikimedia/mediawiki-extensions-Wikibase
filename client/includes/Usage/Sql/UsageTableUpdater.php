@@ -18,7 +18,7 @@ class UsageTableUpdater {
 	/**
 	 * @var DatabaseBase
 	 */
-	private $connection;
+	private $databaseBase;
 
 	/**
 	 * @var string
@@ -31,22 +31,22 @@ class UsageTableUpdater {
 	private $batchSize;
 
 	/**
-	 * @param DatabaseBase $connection
+	 * @param DatabaseBase $databaseBase
 	 * @param string $tableName
 	 * @param int $batchSize
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( DatabaseBase $connection, $tableName, $batchSize ) {
+	public function __construct( DatabaseBase $databaseBase, $tableName, $batchSize ) {
 		if ( !is_string( $tableName ) ) {
 			throw new InvalidArgumentException( '$tableName must be a string' );
 		}
 
-		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
-			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
+		if ( !is_int( $batchSize ) || $batchSize <= 0 ) {
+			throw new InvalidArgumentException( '$batchSize must be a positive integer' );
 		}
 
-		$this->connection = $connection;
+		$this->databaseBase = $databaseBase;
 		$this->tableName = $tableName;
 		$this->batchSize = $batchSize;
 	}
@@ -89,11 +89,11 @@ class UsageTableUpdater {
 		$removed = array_diff_key( $oldUsages, $newUsages );
 		$added = array_diff_key( $newUsages, $oldUsages );
 
-		$mod = 0;
-		$mod += $this->removeUsageForPage( $pageId, $removed );
-		$mod += $this->addUsageForPage( $pageId, $added );
+		$changes = 0;
+		$changes += $this->removeUsageForPage( $pageId, $removed );
+		$changes += $this->addUsageForPage( $pageId, $added );
 
-		return $mod;
+		return $changes;
 	}
 
 	/**
@@ -108,23 +108,23 @@ class UsageTableUpdater {
 		}
 
 		$bins = $this->binUsages( $usages );
-		$c = 0;
+		$count = 0;
 
-		foreach ( $bins as $aspect => $entities ) {
-			$c += $this->removeAspectForPage( $pageId, $aspect, array_keys( $entities ) );
+		foreach ( $bins as $aspect => $bin ) {
+			$count += $this->removeAspectForPage( $pageId, $aspect, array_keys( $bin ) );
 		}
 
-		return $c;
+		return $count;
 	}
 
 	/**
-	 * Collects the EntityIds contained in the given list of EntityUsages into
+	 * Collects the entity id strings contained in the given list of EntityUsages into
 	 * bins based on the usage's aspect.
 	 *
 	 * @param EntityUsage[] $usages
 	 *
 	 * @throws InvalidArgumentException
-	 * @return array[] an associative array mapping aspect ids to lists of EntityIds.
+	 * @return array[] two dimensional associative array mapping aspect ids and entity id strings.
 	 */
 	private function binUsages( array $usages ) {
 		$bins = array();
@@ -135,10 +135,8 @@ class UsageTableUpdater {
 			}
 
 			$aspect = $usage->getAspect();
-			$id = $usage->getEntityId();
-			$key = $id->getSerialization();
-
-			$bins[$aspect][$key] = $id;
+			$idString = $usage->getEntityId()->getSerialization();
+			$bins[$aspect][$idString] = null;
 		}
 
 		return $bins;
@@ -161,9 +159,9 @@ class UsageTableUpdater {
 
 			$rows[] = array(
 				'eu_page_id' => (int)$pageId,
-				'eu_aspect' => (string)$usage->getAspect(),
-				'eu_entity_id' => (string)$usage->getEntityId()->getSerialization(),
-				'eu_entity_type' => (string)$usage->getEntityId()->getEntityType(),
+				'eu_aspect' => $usage->getAspect(),
+				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
+				'eu_entity_type' => $usage->getEntityId()->getEntityType(),
 			);
 		}
 
@@ -182,24 +180,23 @@ class UsageTableUpdater {
 			return 0;
 		}
 
-		$batches = array_chunk( $idStrings, $this->batchSize, true );
-		$c = 0;
+		$batches = array_chunk( $idStrings, $this->batchSize );
+		$count = 0;
 
 		foreach ( $batches as $batch ) {
-			$this->connection->delete(
+			$this->databaseBase->delete(
 				$this->tableName,
 				array(
 					'eu_page_id' => (int)$pageId,
-					'eu_aspect' => (string)$aspect,
+					'eu_aspect' => $aspect,
 					'eu_entity_id' => $batch,
 				),
 				__METHOD__
 			);
-
-			$c += $this->connection->affectedRows();
+			$count += $this->databaseBase->affectedRows();
 		}
 
-		return $c;
+		return $count;
 	}
 
 	/**
@@ -218,19 +215,14 @@ class UsageTableUpdater {
 			$this->batchSize
 		);
 
-		$c = 0;
+		$count = 0;
 
 		foreach ( $batches as $rows ) {
-			$this->connection->insert(
-				$this->tableName,
-				$rows,
-				__METHOD__
-			);
-
-			$c += $this->connection->affectedRows();
+			$this->databaseBase->insert( $this->tableName, $rows, __METHOD__ );
+			$count += $this->databaseBase->affectedRows();
 		}
 
-		return $c;
+		return $count;
 	}
 
 	/**
@@ -247,7 +239,7 @@ class UsageTableUpdater {
 		$batches = array_chunk( $idStrings, $this->batchSize );
 
 		foreach ( $batches as $batch ) {
-			$this->connection->delete(
+			$this->databaseBase->delete(
 				$this->tableName,
 				array(
 					'eu_entity_id' => $batch,

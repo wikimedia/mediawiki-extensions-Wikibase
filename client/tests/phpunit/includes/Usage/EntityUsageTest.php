@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Client\Tests\Usage;
 
 use PHPUnit_Framework_TestCase;

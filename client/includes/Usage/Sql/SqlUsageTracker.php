@@ -27,7 +27,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	/**
 	 * @var EntityIdParser
 	 */
-	private $idParser;
+	private $entityIdParser;
 
 	/**
 	 * @var ConnectionManager
@@ -40,11 +40,11 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	private $batchSize = 1000;
 
 	/**
-	 * @param EntityIdParser $idParser
+	 * @param EntityIdParser $entityIdParser
 	 * @param ConnectionManager $connectionManager
 	 */
-	public function __construct( EntityIdParser $idParser, ConnectionManager $connectionManager ) {
-		$this->idParser = $idParser;
+	public function __construct( EntityIdParser $entityIdParser, ConnectionManager $connectionManager ) {
+		$this->entityIdParser = $entityIdParser;
 		$this->connectionManager = $connectionManager;
 	}
 
@@ -61,8 +61,14 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * Sets the query batch size.
 	 *
 	 * @param int $batchSize
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setBatchSize( $batchSize ) {
+		if ( !is_int( $batchSize ) || $batchSize <= 0 ) {
+			throw new InvalidArgumentException( '$batchSize must be a positive integer' );
+		}
+
 		$this->batchSize = $batchSize;
 	}
 
@@ -157,12 +163,12 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * @see UsageTracker::getUsagesForPage
+	 * @see UsageLookup::getUsagesForPage
 	 *
 	 * @param int $pageId
 	 *
-	 * @return EntityUsage[]
 	 * @throws UsageTrackerException
+	 * @return EntityUsage[]
 	 */
 	public function getUsagesForPage( $pageId ) {
 		$db = $this->connectionManager->getReadConnection();
@@ -189,7 +195,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		$res = $db->select(
 			'wbc_entity_usage',
 			array( 'eu_aspect', 'eu_entity_id' ),
-			array( 'eu_page_id' => (int)$pageId ),
+			array( 'eu_page_id' => $pageId ),
 			__METHOD__
 		);
 
@@ -206,7 +212,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		$usages = array();
 
 		foreach ( $rows as $object ) {
-			$entityId = $this->idParser->parse( $object->eu_entity_id );
+			$entityId = $this->entityIdParser->parse( $object->eu_entity_id );
 			$usage = new EntityUsage( $entityId, $object->eu_aspect );
 			$key = $usage->getIdentityString();
 			$usages[$key] = $usage;
@@ -216,13 +222,13 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * @see UsageTracker::getPagesUsing
+	 * @see UsageLookup::getPagesUsing
 	 *
 	 * @param EntityId[] $entityIds
 	 * @param string[] $aspects
 	 *
-	 * @return Iterator An iterator over page IDs.
 	 * @throws UsageTrackerException
+	 * @return Iterator An iterator over page IDs.
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
 		if ( empty( $entityIds ) ) {
@@ -245,21 +251,21 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			__METHOD__
 		);
 
-		$pages = $this->extractProperty( $res, 'eu_page_id' );
+		$pageIds = $this->extractProperty( $res, 'eu_page_id' );
 
 		$this->connectionManager->releaseConnection( $db );
 
 		//TODO: use paging for large page sets!
-		return new ArrayIterator( $pages );
+		return new ArrayIterator( $pageIds );
 	}
 
 	/**
-	 * @see UsageTracker::getUnusedEntities
+	 * @see UsageLookup::getUnusedEntities
 	 *
 	 * @param EntityId[] $entityIds
 	 *
-	 * @return EntityId[]
 	 * @throws UsageTrackerException
+	 * @return EntityId[]
 	 */
 	public function getUnusedEntities( array $entityIds ) {
 		if ( empty( $entityIds ) ) {
