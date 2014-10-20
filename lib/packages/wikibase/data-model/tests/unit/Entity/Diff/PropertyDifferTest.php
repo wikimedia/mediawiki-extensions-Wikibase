@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Test\Entity\Diff;
 
 use Wikibase\DataModel\Entity\Diff\PropertyDiffer;
 use Wikibase\DataModel\Entity\Property;
