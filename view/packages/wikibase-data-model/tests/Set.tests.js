@@ -37,70 +37,73 @@ function getTestItems( n ) {
 	return items;
 }
 
-function createList( items ) {
+/**
+ * @param {TestItem[]} [items]
+ * @return {wikibase.datamodel.Set}
+ */
+function createSet( items ) {
 	return new wb.datamodel.Set( TestItem, 'getKey', items );
 }
 
 QUnit.test( 'Constructor', function( assert ) {
 	assert.ok(
-		createList() instanceof wb.datamodel.Set,
+		createSet() instanceof wb.datamodel.Set,
 		'Instantiated empty Set.'
 	);
 
-	var list = createList( getTestItems( 2 ) );
+	var set = createSet( getTestItems( 2 ) );
 
 	assert.ok(
-		list instanceof wb.datamodel.Set,
+		set instanceof wb.datamodel.Set,
 		'Instantiated filled Set.'
 	);
 
 	assert.equal(
-		list.length,
+		set.length,
 		2,
-		'Verified list length.'
+		'Verified Set length.'
 	);
 
 	assert.throws(
 		function() {
 			return new wb.datamodel.Set( null, 'getKey' );
 		},
-		'Throwing error when trying to instantiate an Set without an item constructor.'
+		'Throwing error when trying to instantiate a Set without an item constructor.'
 	);
 
 	assert.throws(
 		function() {
 			return new wb.datamodel.Set( TestItem );
 		},
-		'Throwing error when trying to instantiate an Set without "getKey" function.'
+		'Throwing error when trying to instantiate a Set without "getKey" function.'
 	);
 
 	assert.throws(
 		function() {
 			return new wb.datamodel.Set( 'string', 'getKey' );
 		},
-		'Throwing error when trying to instantiate an Set wit an improper item '
-			+ 'constructor.'
+		'Throwing error when trying to instantiate a Set wit an improper item constructor.'
 	);
 
 	assert.throws(
 		function() {
 			return new wb.datamodel.Set( TestItem, 'doesNotExist' );
 		},
-		'Throwing error when trying to instantiate an Set wit an improper "getKey" '
+		'Throwing error when trying to instantiate a Set with an improper "getKey" '
 			+ 'function name.'
 	);
 } );
 
 QUnit.test( 'each()', function( assert ) {
 	var items = getTestItems( 2 ),
-		list = createList( items ),
+		set = createSet( items ),
 		expectedKeys = [];
 
 	for( var i = 0; i < items.length; i++ ) {
 		expectedKeys.push( items[i].getKey() );
 	}
 
-	list.each( function( key, item ) {
+	set.each( function( key, item ) {
 		assert.equal(
 			item.getKey(),
 			key,
@@ -118,148 +121,150 @@ QUnit.test( 'each()', function( assert ) {
 
 QUnit.test( 'getKeys()', function( assert ) {
 	var items = getTestItems( 3 ),
-		list = createList( items ),
-		keys = list.getKeys(),
+		set = createSet( items ),
+		keys = set.getKeys(),
 		expectedKeys = [];
 
 	for( var i = 0; i < items.length; i++ ) {
-		assert.ok(
-			$.inArray( items[i].getKey(), keys ) !== -1,
-			'Found key ' + items[i].getKey() + '.'
-		);
-		expectedKeys.push( items[i].getKey() );
+		if( $.inArray( items[i].getKey(), keys ) !== -1 ) {
+			assert.ok(
+				true,
+				'Found key ' + items[i].getKey() + '.'
+			);
+			expectedKeys.push( items[i].getKey() );
+		}
 	}
 
 	assert.strictEqual(
 		keys.length,
 		expectedKeys.length,
-		'Verified count of keys.'
+		'Verified number of keys.'
 	);
 } );
 
 QUnit.test( 'getItemByKey()', function( assert ) {
 	var items = getTestItems( 3 ),
-		list = createList( items );
+		set = createSet( items );
 
 	for( var i = 0; i < items.length; i++ ) {
 		assert.ok(
-			list.getItemByKey( items[i].getKey() ).equals( items[i] ),
+			set.getItemByKey( items[i].getKey() ).equals( items[i] ),
 			'Retrieved item by key ' + items[i].getKey() + '.'
 		);
 	}
 
 	assert.strictEqual(
-		list.getItemByKey( 'does-not-exist' ),
+		set.getItemByKey( 'does-not-exist' ),
 		null,
-		'Returning NULL when no item is set for a particular key.'
+		'Returning NULL when no item is Set for a particular key.'
 	);
 } );
 
 QUnit.test( 'removeByKey() & length attribute', function( assert ) {
 	var items = getTestItems( 2 ),
-		list = createList( items );
+		set = createSet( items );
 
 	assert.equal(
-		list.length,
+		set.length,
 		2,
-		'List contains 2 items.'
+		'Set contains 2 items.'
 	);
 
-	list.removeByKey( '0' );
+	set.removeByKey( '0' );
 
 	assert.strictEqual(
-		list.getItemByKey( '0' ),
+		set.getItemByKey( '0' ),
 		null,
 		'Removed item.'
 	);
 
 	assert.strictEqual(
-		list.length,
+		set.length,
 		1,
-		'List contains 1 item.'
+		'Set contains 1 item.'
 	);
 
-	list.removeByKey( 'does-not-exist' );
+	set.removeByKey( 'does-not-exist' );
 
 	assert.strictEqual(
-		list.length,
+		set.length,
 		1,
-		'List contains 1 item after trying to remove an item that is not set.'
+		'Set contains 1 item after trying to remove an item that is not set.'
 	);
 
-	list.removeByKey( '1' );
+	set.removeByKey( '1' );
 
 	assert.strictEqual(
-		list.getItemByKey( '1' ),
+		set.getItemByKey( '1' ),
 		null,
 		'Removed item.'
 	);
 
 	assert.strictEqual(
-		list.length,
+		set.length,
 		0,
-		'List is empty.'
+		'Set is empty.'
 	);
 } );
 
 QUnit.test( 'hasItemForKey()', function( assert ) {
 	var items = getTestItems( 3 ),
-		list = createList( items );
+		set = createSet( items );
 
 	for( var i = 0; i < items.length; i++ ) {
 		assert.ok(
-			list.hasItemForKey( items[i].getKey() ),
+			set.hasItemForKey( items[i].getKey() ),
 			'Verified returning TRUE for key ' + items[i].getKey() + '.'
 		);
 	}
 
 	assert.ok(
-		!list.hasItemForKey( 'does-not-exist' ),
+		!set.hasItemForKey( 'does-not-exist' ),
 		'Verified returning FALSE.'
 	);
 } );
 
 QUnit.test( 'setItem() & length attribute', function( assert ) {
 	var items = getTestItems( 2 ),
-		list = createList( items ),
+		set = createSet( items ),
 		newItem0 = getTestItems( 1 )[0],
 		newItem2 = getTestItems( 3 )[2];
 
 	assert.equal(
-		list.length,
+		set.length,
 		2,
-		'List contains 2 items.'
+		'Set contains 2 items.'
 	);
 
-	list.setItem( newItem0 );
+	set.setItem( newItem0 );
 
 	assert.ok(
-		list.getItemByKey( '0' ).equals( newItem0 ),
+		set.getItemByKey( '0' ).equals( newItem0 ),
 		'Overwrote item.'
 	);
 
 	assert.equal(
-		list.length,
+		set.length,
 		2,
 		'Length remains unchanged when overwriting an item.'
 	);
 
-	list.setItem( newItem2 );
+	set.setItem( newItem2 );
 
 	assert.ok(
-		list.getItemByKey( '2' ).equals( newItem2 ),
+		set.getItemByKey( '2' ).equals( newItem2 ),
 		'Added new item.'
 	);
 
 	assert.equal(
-		list.length,
+		set.length,
 		3,
 		'Increased length when adding new item.'
 	);
 
 	assert.throws(
 		function() {
-			list.setItem( ['string'] );
+			set.setItem( ['string'] );
 		},
 		'Throwing error when trying to set a plain string array.'
 	);
@@ -267,19 +272,19 @@ QUnit.test( 'setItem() & length attribute', function( assert ) {
 
 QUnit.test( 'addItem()', function( assert ) {
 	var items = getTestItems( 2 ),
-		list = createList( items ),
+		set = createSet( items ),
 		item = getTestItems( 3 )[2];
 
-	list.addItem( item );
+	set.addItem( item );
 
 	assert.ok(
-		list.hasItem( item ),
+		set.hasItem( item ),
 		'Added item.'
 	);
 
 	assert.throws(
 		function() {
-			list.addItem( item );
+			set.addItem( item );
 		},
 		'Throwing an error when trying to add an item featuring a key represented already.'
 	);
@@ -287,101 +292,101 @@ QUnit.test( 'addItem()', function( assert ) {
 
 QUnit.test( 'removeItem()', function( assert ) {
 	var items = getTestItems( 2 ),
-		list = createList( items );
+		set = createSet( items );
 
 	assert.equal(
-		list.length,
+		set.length,
 		2,
-		'List contains 2 items.'
+		'Set contains 2 items.'
 	);
 
-	list.removeItem( items[1] );
+	set.removeItem( items[1] );
 
 	assert.equal(
-		list.length,
+		set.length,
 		1,
-		'List contains 1 item.'
+		'Set contains 1 item.'
 	);
 
 	assert.ok(
-		!list.hasItem( items[1] ),
+		!set.hasItem( items[1] ),
 		'Verified item being removed.'
 	);
 
 	assert.throws(
 		function() {
-			list.removeItem( items[1] );
+			set.removeItem( items[1] );
 		},
 		'Throwing an error when trying to remove an item not set.'
 	);
 } );
 
 QUnit.test( 'isEmpty()', function( assert ) {
-	var list = createList(),
+	var set = createSet(),
 		item = getTestItems( 1 )[0];
 
 	assert.ok(
-		list.isEmpty(),
+		set.isEmpty(),
 		'Verified isEmpty() returning TRUE.'
 	);
 
-	list.setItem( item );
+	set.setItem( item );
 
 	assert.ok(
-		!list.isEmpty(),
+		!set.isEmpty(),
 		'Verified isEmpty() returning FALSE.'
 	);
 
-	list.removeItem( item );
+	set.removeItem( item );
 
 	assert.ok(
-		list.isEmpty(),
+		set.isEmpty(),
 		'TRUE after removing last item.'
 	);
 } );
 
 QUnit.test( 'equals()', function( assert ) {
 	var items = getTestItems( 2 ),
-		list = createList( items );
+		set = createSet( items );
 
 	assert.ok(
-		list.equals( createList( items ) ),
+		set.equals( createSet( items ) ),
 		'Verified equals() retuning TRUE.'
 	);
 
-	list.setItem( getTestItems( 1 )[0] );
+	set.setItem( getTestItems( 1 )[0] );
 
 	assert.ok(
-		!list.equals( createList( items ) ),
+		!set.equals( createSet( items ) ),
 		'FALSE when an item has been overwritten.'
 	);
 
-	list = createList( items );
-	list.removeItem( items[1] );
+	set = createSet( items );
+	set.removeItem( items[1] );
 
 	assert.ok(
-		!list.equals( createList( items ) ),
+		!set.equals( createSet( items ) ),
 		'FALSE when an item has been removed.'
 	);
 } );
 
 QUnit.test( 'hasItem()', function( assert ) {
 	var items = getTestItems( 2 ),
-		list = createList( items );
+		set = createSet( items );
 
 	assert.ok(
-		list.hasItem( items[1] ),
+		set.hasItem( items[1] ),
 		'Verified returning TRUE.'
 	);
 
 	assert.ok(
-		!list.hasItem( getTestItems( 1 )[0] ),
+		!set.hasItem( getTestItems( 1 )[0] ),
 		'Verified returning FALSE.'
 	);
 
 	assert.throws(
 		function() {
-			list().hasItem( '1' );
+			set().hasItem( '1' );
 		},
 		'Throwing error when submitting a string array.'
 	);

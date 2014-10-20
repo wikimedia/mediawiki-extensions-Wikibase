@@ -52,14 +52,14 @@ QUnit.test( 'Constructor', function( assert ) {
 		function() {
 			return new wb.datamodel.List();
 		},
-		'Throwing error when trying to instantiate an List without an item constructor.'
+		'Throwing error when trying to instantiate a List without an item constructor.'
 	);
 
 	assert.throws(
 		function() {
 			return new wb.datamodel.List( 'string' );
 		},
-		'Throwing error when trying to instantiate an List wit an improper item constructor.'
+		'Throwing error when trying to instantiate a List with an improper item constructor.'
 	);
 } );
 
