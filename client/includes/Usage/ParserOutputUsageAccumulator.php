@@ -51,7 +51,7 @@ class ParserOutputUsageAccumulator implements UsageAccumulator {
 	}
 
 	/**
-	 * Registers the usage an entity's label (in the local content language).
+	 * @see UsageAccumulator::addLabelUsage
 	 *
 	 * @param EntityId $id
 	 */
@@ -60,17 +60,16 @@ class ParserOutputUsageAccumulator implements UsageAccumulator {
 	}
 
 	/**
-	 * Registers the usage of an entity's local page title, e.g. to refer to
-	 * the corresponding page on the local wiki.
+	 * @see UsageAccumulator::addTitleUsage
 	 *
 	 * @param EntityId $id
 	 */
-	public function addPageUsage( EntityId $id ) {
+	public function addTitleUsage( EntityId $id ) {
 		$this->addUsage( $id, EntityUsage::TITLE_USAGE );
 	}
 
 	/**
-	 * Registers the usage of an entity's sitelinks, e.g. to generate language links.
+	 * @see UsageAccumulator::addSitelinksUsage
 	 *
 	 * @param EntityId $id
 	 */
@@ -79,8 +78,16 @@ class ParserOutputUsageAccumulator implements UsageAccumulator {
 	}
 
 	/**
-	 * Registers the usage of other or all data of an entity (e.g. when accessed
-	 * programmatically using Lua).
+	 * @see UsageAccumulator::addOtherUsage
+	 *
+	 * @param EntityId $id
+	 */
+	public function addOtherUsage( EntityId $id ) {
+		$this->addUsage( $id, EntityUsage::OTHER_USAGE );
+	}
+
+	/**
+	 * @see UsageAccumulator::addAllUsage
 	 *
 	 * @param EntityId $id
 	 */

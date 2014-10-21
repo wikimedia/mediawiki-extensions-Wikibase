@@ -43,15 +43,24 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertEquals( $expected, $result );
-		$this->assertUsageTracking( $itemId, EntityUsage::ALL_USAGE, $parser->getOutput() );
+		$this->assertUsageTracking( $itemId, EntityUsage::OTHER_USAGE, $parser->getOutput() );
 	}
 
 	private function assertUsageTracking( ItemId $id, $aspect, ParserOutput $parserOutput ) {
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
-		$usage = $usageAcc->getUsages();
+		$usages = $usageAcc->getUsages();
 		$expected = new EntityUsage( $id, $aspect );
 
-		$this->assertContains( $expected, $usage, '', false, false );
+		$usageIdentities = array_map(
+			function ( EntityUsage $usage ) {
+				return $usage->getIdentityString();
+			},
+			$usages
+		);
+
+		$expectedIdentities = array( $expected->getIdentityString() );
+
+		$this->assertEquals( $expectedIdentities, array_values( $usageIdentities ) );
 	}
 
 	private function getSiteLinkLookup( ItemId $itemId ) {
