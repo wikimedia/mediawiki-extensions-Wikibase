@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_d0a3acfb",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-21T15:07:36Z",
+      "side": 1,
+      "message": "Only a single property no?",
+      "revId": "e8305c5dc68b77045ad95f4fa0ed4881a2a84222",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_90ad24ea",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-21T15:07:36Z",
+      "side": 1,
+      "message": "Naming this $item is a bit deceptive in our codebase.\n\nIs this kind of dynamic property access not something HHVM does get mad about?",
+      "revId": "e8305c5dc68b77045ad95f4fa0ed4881a2a84222",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
