@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_b0d5c049",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-21T15:31:42Z",
+      "side": 1,
+      "message": "indent is wrong",
+      "revId": "835b57feb8470ff1d51d4e8740cb35471c9c2b89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
