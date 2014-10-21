@@ -104,9 +104,12 @@ class ClaimHtmlGenerator {
 
 			$claimHtml = wfTemplate( 'wb-statement',
 				$rankHtml,
-				$claim->getGuid(),
-				$mainSnakHtml,
-				$this->getHtmlForQualifiers( $claim->getQualifiers(), $entityInfo ),
+				wfTemplate( 'wb-claim',
+					$claim->getGuid(),
+					$mainSnakHtml,
+					$this->getHtmlForQualifiers( $claim->getQualifiers(), $entityInfo ),
+					''
+				),
 				$editSectionHtml,
 				$referencesHeading,
 				$referencesHtml

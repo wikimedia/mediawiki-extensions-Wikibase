@@ -111,22 +111,16 @@ HTML;
 </div>
 HTML;
 
-	// TODO: This template should be split up and make use of the wb-claim template. $4 is used for
-	// the non-JS toolbar to attach to. This parameter should be removed.
+	// TODO: $4 is used for the non-JS toolbar to attach to. This parameter should be removed.
 	$templates['wb-statement'] =
 <<<HTML
 <div class="wb-statement wb-statementview wb-claimview">
 	<div class="wb-statement-rank">$1</div>
-	<div class="wb-claim wb-claim-$2">
-		<div class="wb-claim-mainsnak" dir="auto">
-			$3 <!-- wb-snak (Main Snak) -->
-		</div>
-		<div class="wb-claim-qualifiers wb-statement-qualifiers">$4</div>
-	</div>
-	$5 <!-- wikibase-toolbar -->
-	<div class="wb-statement-references-heading">$6</div>
+	<!-- wb-claimview --> $2
+	<!-- wikibase-toolbar --> $3
+	<div class="wb-statement-references-heading">$4</div>
 	<div class="wb-statement-references">
-		$7 <!-- [0,*] wb-referenceview -->
+		<!-- [0,*] wb-referenceview --> $5
 	</div>
 </div>
 HTML;
