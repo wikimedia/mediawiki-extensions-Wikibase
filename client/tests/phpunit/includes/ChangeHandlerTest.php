@@ -11,6 +11,8 @@ use Wikibase\Change;
 use Wikibase\ChangeHandler;
 use Wikibase\ChangesTable;
 use Wikibase\Client\Store\TitleFactory;
+use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
@@ -65,6 +67,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			$namespaceChecker,
 			$titleFactory,
 			'enwiki',
+			'en',
 			false
 		);
 
@@ -77,6 +80,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$handler = new ChangeHandler(
 			$changeFactory,
 			$affectedPagesFinder,
+			$titleFactory,
 			$updater,
 			$repo,
 			$this->site,
@@ -1018,6 +1022,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	 */
 	private function getTitleFactory( array $entities ) {
 		$titlesById = $this->getFakePageIdMap( $entities );
+		$pageIdsByTitle = array_flip( $titlesById );
 
 		$titleFactory = $this->getMock( 'Wikibase\Client\Store\TitleFactory' );
 
@@ -1033,11 +1038,17 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromText' )
-			->will( $this->returnCallback( function( $text, $defaultNs = NS_MAIN ) {
+			->will( $this->returnCallback( function( $text, $defaultNs = NS_MAIN ) use ( $pageIdsByTitle ) {
 				$title = Title::newFromText( $text, $defaultNs );
 
 				if ( !$title ) {
 					throw new StorageException( 'Bad title text: ' . $text );
+				}
+
+				if ( isset( $pageIdsByTitle[$text] ) ) {
+					$title->resetArticleID( $pageIdsByTitle[$text] );
+				} else {
+					throw new StorageException( 'Unknown title text: ' . $text );
 				}
 
 				return $title;
@@ -1069,7 +1080,11 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 						foreach ( $links as $link ) {
 							if ( $link->getSiteId() == $site->getGlobalId() ) {
 								// we use the numeric item id as the fake page id of the local page!
-								$pages[] = $id->getNumericId();
+								$usages = array(
+									new EntityUsage( $id, EntityUsage::SITELINK_USAGE ),
+									new EntityUsage( $id, EntityUsage::LABEL_USAGE )
+								);
+								$pages[] = new PageEntityUsages( $id->getNumericId(), $usages );
 							}
 						}
 					}
@@ -1133,34 +1148,33 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			array( // #6
 				$changes['set-de-label'],
 				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array( 'Emmy2' )
+				array(), // For the dummy page, only label and sitelink usage is defined.
 			),
 			array( // #7
-				$changes['set-de-label'],
-				array( 'q100' => array( 'enwiki' => 'User:Emmy2' ) ), // bad namespace
-				array( )
-			),
-			array( // #8
 				$changes['set-en-label'],
 				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
 				array( 'Emmy2' )
 			),
+			array( // #8
+				$changes['set-en-label'],
+				array( 'q100' => array( 'enwiki' => 'User:Emmy2' ) ), // bad namespace
+				array( )
+			),
 			array( // #9
 				$changes['set-en-aliases'],
 				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array( 'Emmy2' ), // or nothing, may change
-				array(), // because no actions are to be taken, the effective list is empty.
+				array(), // For the dummy page, only label and sitelink usage is defined.
 			),
 
 			array( // #10
 				$changes['add-claim'],
 				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array( 'Emmy2' )
+				array( ) // statements are ignored
 			),
 			array( // #11
 				$changes['remove-claim'],
 				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array( 'Emmy2' )
+				array( ) // statements are ignored
 			),
 
 			array( // #12
@@ -1181,8 +1195,9 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			),
 			array( // #15
 				$changes['change-enwiki-sitelink'],
-				array( 'q100' => array( 'enwiki' => 'Emmy' ) ),
-				array( 'Emmy', 'Emmy2' )
+				array( 'q100' => array( 'enwiki' => 'Emmy' ), 'q200' => array( 'enwiki' => 'Emmy2' ) ),
+				array( 'Emmy', 'Emmy2' ),
+				true
 			),
 			array( // #16
 				$changes['change-enwiki-sitelink-badges'],
@@ -1238,7 +1253,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetPagesToUpdate
 	 */
-	public function testGetPagesToUpdate( Change $change, $entities, array $expected ) {
+	public function testGetPagesToUpdate( Change $change, $entities, array $expected, $dummy = false ) {
 		$handler = $this->newChangeHandler( null, $entities );
 
 		$toUpdate = $handler->getPagesToUpdate( $change );
@@ -1256,9 +1271,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$cases = array();
 
 		foreach ( $pto as $case ) {
-			// $case[2] is the list of pages to update,
-			// $case[3] may be a list filtered according to the actions that apply.
-			$updated = isset( $case[3] ) ? $case[3] : $case[2];
+			$updated = $case[2];
 
 			$cases[] = array(
 				$case[0], // $change

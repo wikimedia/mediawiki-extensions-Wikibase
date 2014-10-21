@@ -25,7 +25,7 @@ interface UsageAccumulator {
 	 *
 	 * @param EntityId $id
 	 */
-	public function addPageUsage( EntityId $id );
+	public function addTitleUsage( EntityId $id );
 
 	/**
 	 * Registers the usage of an entity's sitelinks, e.g. to generate language links.
@@ -35,7 +35,15 @@ interface UsageAccumulator {
 	public function addSitelinksUsage( EntityId $id );
 
 	/**
-	 * Registers the usage of other or all data of an entity (e.g. when accessed
+	 * Registers the usage of other (i.e. not label, sitelink, or page) of an
+	 * entity (e.g. when accessed programmatically using Lua).
+	 *
+	 * @param EntityId $id
+	 */
+	public function addOtherUsage( EntityId $id );
+
+	/**
+	 * Registers the usage of any/all data of an entity (e.g. when accessed
 	 * programmatically using Lua).
 	 *
 	 * @param EntityId $id

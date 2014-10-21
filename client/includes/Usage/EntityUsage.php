@@ -43,6 +43,14 @@ class EntityUsage {
 	const ALL_USAGE = 'X';
 
 	/**
+	 * Usage flag indicating that some aspect of the entity was changed
+	 * which is not covered by any other usage flag (except "all"). That is,
+	 * the specific usage flag together with the "other" flag are equivalent
+	 * to the "all" flag.
+	 */
+	const OTHER_USAGE = 'O';
+
+	/**
 	 * A list of all valid aspects
 	 *
 	 * @var array
@@ -51,6 +59,7 @@ class EntityUsage {
 		self::SITELINK_USAGE,
 		self::LABEL_USAGE,
 		self::TITLE_USAGE,
+		self::OTHER_USAGE,
 		self::ALL_USAGE
 	);
 
