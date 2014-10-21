@@ -6,7 +6,6 @@ use Maintenance;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
-use Wikibase\Repo\Store\SQL\EntityPerPageTable;
 use Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -60,8 +59,6 @@ class RebuildItemsPerSite extends Maintenance {
 
 		$builder->setReporter( $reporter );
 		$builder->setBatchSize( $batchSize );
-
-		$useRedirectTargetColumn = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
 
 		$entityPerPage = WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage();
 		$stream = new EntityPerPageIdPager( $entityPerPage, 'item' );
