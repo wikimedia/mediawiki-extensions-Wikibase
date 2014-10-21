@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_1de7ec3c",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-10-21T18:30:46Z",
+      "side": 1,
+      "message": "Should be:\n$where[] \u003d $options[\u0027WHERE\u0027];\nBecause tests didn\u0027t fail: Missing or broken test.",
+      "revId": "086db20a7cb475865c988ef6f8be738b5513df95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
