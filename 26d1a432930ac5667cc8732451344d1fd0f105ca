@@ -2,6 +2,108 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e96e304_1f9a8775",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-21T08:13:10Z",
+      "side": 1,
+      "message": "Ouch, this is painful. Did you benchmarked this? Why is this needed?",
+      "revId": "26d1a432930ac5667cc8732451344d1fd0f105ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_dfa3bfa6",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-21T08:13:10Z",
+      "side": 1,
+      "message": "Please pass the language instead of a cloned and modified context object. Cloning is scary.",
+      "revId": "26d1a432930ac5667cc8732451344d1fd0f105ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_5fb9efe4",
+        "filename": "repo/includes/View/TocGenerator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-21T08:13:10Z",
+      "side": 1,
+      "message": "Please don\u0027t explain \"toc\" with \"toc\".",
+      "revId": "26d1a432930ac5667cc8732451344d1fd0f105ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_5f87af14",
+        "filename": "repo/includes/View/TocGenerator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-21T08:13:10Z",
+      "side": 1,
+      "message": "What\u0027s wrong with TableOfContentsGenerator? Not that I insist, \"TOC\" is a common term. But please update the documentation, at least.",
+      "revId": "26d1a432930ac5667cc8732451344d1fd0f105ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_7fbcebd5",
+        "filename": "repo/includes/View/TocGenerator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-21T08:13:10Z",
+      "side": 1,
+      "message": "Again. :-(",
+      "revId": "26d1a432930ac5667cc8732451344d1fd0f105ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_ffc79b65",
+        "filename": "repo/includes/View/TocGenerator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-21T08:13:10Z",
+      "side": 1,
+      "message": "Why is this not described in the documentation above? A hidden feature?",
+      "revId": "26d1a432930ac5667cc8732451344d1fd0f105ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_10404a5a",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 14
@@ -13,6 +115,40 @@
       "writtenOn": "2014-10-17T18:58:18Z",
       "side": 1,
       "message": "This is construction code which itself should be in a factory. If you put it in some newEntityParserOutputGeneratorFactory method in WikibaseRepo, then you also don\u0027t need to do all these different calls to $wikibaseRepo, you can just do calls on $this (which shows the approach is more cohesive)",
+      "revId": "26d1a432930ac5667cc8732451344d1fd0f105ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_9f8d3739",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-21T08:13:10Z",
+      "side": 1,
+      "message": "Ugly, see next comment.",
+      "revId": "26d1a432930ac5667cc8732451344d1fd0f105ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_ff9ebb65",
+        "filename": "repo/includes/content/PropertyContent.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-21T08:13:10Z",
+      "side": 1,
+      "message": "Passing class names around as strings is ugly. We had so many problems whenever we did this. Can\u0027t you come up with a better approach?",
       "revId": "26d1a432930ac5667cc8732451344d1fd0f105ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
