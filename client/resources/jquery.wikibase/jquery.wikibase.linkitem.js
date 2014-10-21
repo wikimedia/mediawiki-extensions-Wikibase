@@ -581,7 +581,7 @@ $.widget( 'wikibase.linkitem', {
 	 * @param {Object} [errorInfo]
 	 */
 	_onError: function( errorCode, errorInfo ) {
-		var error = ( errorInfo )
+		var error = errorInfo
 			? wb.RepoApiError.newFromApiResponse( errorCode, errorInfo )
 			: errorCode;
 

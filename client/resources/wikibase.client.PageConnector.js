@@ -83,7 +83,7 @@ $.extend( wb.PageConnector.prototype, {
 			// Count site links
 			siteLinkCount = self._countSiteLinks( entity );
 
-			deferred.resolve( ( siteLinkCount ? entity : {} ) );
+			deferred.resolve( siteLinkCount ? entity : {} );
 		} );
 
 		return deferred.promise();

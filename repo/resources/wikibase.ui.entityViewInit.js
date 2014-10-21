@@ -145,9 +145,7 @@
 
 	function getUserLanguages() {
 		var userLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
-			isUlsDefined = mw.uls !== undefined
-				&& $.uls !== undefined
-				&& $.uls.data !== undefined,
+			isUlsDefined = mw.uls && $.uls && $.uls.data,
 			languages = [];
 
 		if( !userLanguages.length && isUlsDefined ) {
