@@ -43,7 +43,7 @@
 			],
 			edittoolbar: [
 				'aliasesview',
-				'claimview',
+				'statementview',
 				'descriptionview',
 				'labelview',
 				'fingerprintgroupview',
