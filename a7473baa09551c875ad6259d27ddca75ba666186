@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_7081784e",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-21T15:13:31Z",
+      "side": 1,
+      "message": "why should this be protected?",
+      "revId": "a7473baa09551c875ad6259d27ddca75ba666186",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
