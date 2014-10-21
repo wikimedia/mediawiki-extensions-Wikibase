@@ -758,7 +758,7 @@ final class WikibaseClient {
 			$this->getNamespaceChecker(),
 			new TitleFactory(),
 			$this->settings->getSetting( 'siteGlobalID' ),
-			true
+			$this->getContentLanguage()->getCode()
 		);
 	}
 
@@ -769,6 +769,7 @@ final class WikibaseClient {
 		return new ChangeHandler(
 			$this->getEntityChangeFactory(),
 			$this->getAffectedPagesFinder(),
+			new TitleFactory(),
 			new WikiPageUpdater(),
 			$this->getStore()->getEntityRevisionLookup(),
 			$this->getSite()->getGlobalId(),
