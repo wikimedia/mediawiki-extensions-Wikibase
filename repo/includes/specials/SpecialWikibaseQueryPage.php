@@ -142,7 +142,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 			// No results to show, so don't bother with "showing X of Y" etc.
 			// -- just let the user know and give up now
 			$out->addWikiMsg( 'specialpage-empty' );
-			$out->addHTML( Html::closeElement( 'div' ) );
 		}
 
 		$this->outputResults(

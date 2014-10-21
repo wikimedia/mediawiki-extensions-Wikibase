@@ -26,7 +26,6 @@ class SpecialEntitiesWithoutDescriptionTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute() {
-
 		$matchers['language'] = array(
 			'tag' => 'input',
 			'attributes' => array(
@@ -49,7 +48,7 @@ class SpecialEntitiesWithoutDescriptionTest extends SpecialPageTestBase {
 		}
 
 		list( $output, ) = $this->executeSpecialPage( 'en' );
-		$this->assertTrue( true, 'Calling execute with a subpage value' ); //TODO: assert output
+		$this->assertContains( 'value="en"', $output );
 	}
 
 }
