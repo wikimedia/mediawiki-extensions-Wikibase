@@ -515,7 +515,7 @@ div .wb-snak-value span.error.wb-format-error {
 /********** STATEMENTS **********/
 
 /* Container for a single statement */
-.wb-claimview {
+.wb-statementview {
 	border-bottom: 1px dashed #AAA;
 	float: left;
 	width: 100%;
