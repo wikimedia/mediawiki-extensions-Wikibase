@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_0aea439c",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:36:49Z",
+      "side": 1,
+      "message": "why is this important? what does it do in this change?",
+      "revId": "28665147c3c41836940ac92b75397cf34366c3b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_ca33fb5d",
+        "filename": "lib/tests/phpunit/serializers/DataModelSerializationRoundtripTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:36:49Z",
+      "side": 1,
+      "message": "Don\u0027t mix unrelated cleanup into this change please!",
+      "revId": "28665147c3c41836940ac92b75397cf34366c3b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
