@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Specials;
 
+use Wikibase\Term;
+
 /**
  * Page for listing entities without description.
  *
@@ -23,7 +25,7 @@ class SpecialEntitiesWithoutDescription extends SpecialEntitiesWithoutPage {
 	 * @return string
 	 */
 	protected function getTermType() {
-		return \Wikibase\Term::TYPE_DESCRIPTION;
+		return Term::TYPE_DESCRIPTION;
 	}
 
 	/**
@@ -36,4 +38,5 @@ class SpecialEntitiesWithoutDescription extends SpecialEntitiesWithoutPage {
 	protected function getLegend() {
 		return $this->msg( 'wikibase-entitieswithoutdescription-legend' )->text();
 	}
+
 }

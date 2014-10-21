@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Specials;
 
+use Wikibase\Term;
+
 /**
  * Page for listing entities without label.
  *
@@ -23,7 +25,7 @@ class SpecialEntitiesWithoutLabel extends SpecialEntitiesWithoutPage {
 	 * @return string
 	 */
 	protected function getTermType() {
-		return \Wikibase\Term::TYPE_LABEL;
+		return Term::TYPE_LABEL;
 	}
 
 	/**
@@ -36,4 +38,5 @@ class SpecialEntitiesWithoutLabel extends SpecialEntitiesWithoutPage {
 	protected function getLegend() {
 		return $this->msg( 'wikibase-entitieswithoutlabel-legend' )->text();
 	}
+
 }
