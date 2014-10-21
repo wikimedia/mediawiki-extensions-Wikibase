@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -226,8 +225,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		/* @var WikiPageEntityStore $store */
-		/* @var EntityRevisionLookup $lookup */
-		list( $store, $lookup ) = $this->createStoreAndLookup();
+		list( $store, ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
 
 		// register mock watcher
@@ -292,8 +290,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testSaveRedirectFailure( EntityRedirect $redirect ) {
 		/* @var WikiPageEntityStore $store */
-		/* @var EntityRevisionLookup $lookup */
-		list( $store, $lookup ) = $this->createStoreAndLookup();
+		list( $store, ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
 
 		$this->setExpectedException( 'Wikibase\Lib\Store\StorageException' );
