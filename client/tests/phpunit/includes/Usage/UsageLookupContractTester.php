@@ -3,6 +3,7 @@ namespace Wikibase\Client\Tests\Usage;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Client\Usage\UsageLookup;
 use PHPUnit_Framework_Assert as Assert;
@@ -65,28 +66,31 @@ class UsageLookupContractTester {
 		$q4 = new ItemId( 'Q4' );
 		$q6 = new ItemId( 'Q6' );
 
-		$u3i = new EntityUsage( $q3, EntityUsage::SITELINK_USAGE );
+		$u3s = new EntityUsage( $q3, EntityUsage::SITELINK_USAGE );
 		$u3l = new EntityUsage( $q3, EntityUsage::LABEL_USAGE );
 		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE );
+		$u4t = new EntityUsage( $q4, EntityUsage::TITLE_USAGE );
 
-		$usages = array( $u3i, $u3l, $u4l );
-
-		$this->tracker->trackUsedEntities( 23, $usages );
+		$this->tracker->trackUsedEntities( 23, array( $u3s, $u3l, $u4l ) );
+		$this->tracker->trackUsedEntities( 42, array( $u4l, $u4t ) );
 
 		Assert::assertEmpty(
 			iterator_to_array( $this->lookup->getPagesUsing( array( $q6 ) ) )
 		);
 
-		Assert::assertEquals(
-			array( 23 ),
+		$this->assertSamePageEntityUsages(
+			array( 23 => new PageEntityUsages( 23, array( $u3s, $u3l ) ) ),
 			iterator_to_array( $this->lookup->getPagesUsing( array( $q3 ) ) ),
 			'Pages using Q3'
 		);
 
-		Assert::assertEquals(
-			array( 23 ),
-			iterator_to_array( $this->lookup->getPagesUsing( array( $q4 ) ) ),
-			'Pages using Q4'
+		$this->assertSamePageEntityUsages(
+			array(
+				23 => new PageEntityUsages( 23, array( $u3l, $u4l ) ),
+				42 => new PageEntityUsages( 42, array( $u4l ) ),
+			),
+			iterator_to_array( $this->lookup->getPagesUsing( array( $q4, $q3 ), array( EntityUsage::LABEL_USAGE ) ) ),
+			'Pages using "label" on Q4 or Q3'
 		);
 
 		Assert::assertEmpty(
@@ -99,12 +103,33 @@ class UsageLookupContractTester {
 			'Pages using "sitelinks" on Q4'
 		);
 
-		Assert::assertCount( 1,
-			iterator_to_array( $this->lookup->getPagesUsing( array( $q3, $q4 ), array( EntityUsage::LABEL_USAGE, EntityUsage::SITELINK_USAGE ) ) ),
-			'Pages using "label" or "sitelinks" on Q3 or Q4'
+		Assert::assertCount( 2,
+			iterator_to_array( $this->lookup->getPagesUsing( array( $q3, $q4 ), array( EntityUsage::TITLE_USAGE, EntityUsage::SITELINK_USAGE ) ) ),
+			'Pages using "title" or "sitelinks" on Q3 or Q4'
 		);
 
 		$this->tracker->trackUsedEntities( 23, array() );
+	}
+
+	/**
+	 *
+	 * @param PageEntityUsages[] $expected
+	 * @param PageEntityUsages[] $actual
+	 * @param string $message
+	 */
+	private function assertSamePageEntityUsages( array $expected, array $actual, $message = '' ) {
+		if ( $message !== '' ) {
+			$message .= "\n";
+		}
+
+		foreach ( $expected as $key => $expectedUsages ) {
+			$actualUsages = $actual[$key];
+
+			Assert::assertEquals( $expectedUsages->getPageId(), $actualUsages->getPageId(), $message . "[Page $key] " . 'Page ID mismatches!' );
+			Assert::assertEquals( $expectedUsages->getUsages(), $actualUsages->getUsages(), $message . "[Page $key] " . 'Usages:' );
+		}
+
+		Assert::assertEmpty( array_slice( $actual, count( $expected ) ), $message . 'Extra entries found!' );
 	}
 
 	public function testGetUnusedEntities() {

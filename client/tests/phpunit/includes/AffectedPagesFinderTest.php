@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use ArrayIterator;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
+use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -60,9 +61,9 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider getPagesProvider
+	 * @dataProvider getPagesToUpdateProvider
 	 */
-	public function testGetPages( array $expected, array $usage, ItemChange $change, $message ) {
+	public function testGetPagesToUpdate( array $expected, array $usage, ItemChange $change, $message ) {
 		$usageLookup = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
 
 		$usageLookup->expects( $this->any() )
@@ -86,14 +87,14 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			false
 		);
 
-		$referencedPages = $referencedPagesFinder->getPages( $change );
+		$referencedPages = $referencedPagesFinder->getPagesToUpdate( $change );
 		$referencedPageNames = $this->getPrefixedTitles( $referencedPages );
 		$expectedPageNames = $this->getPrefixedTitles( $expected );
 
 		$this->assertEquals( $expectedPageNames, $referencedPageNames, $message );
 	}
 
-	public function getPagesProvider() {
+	public function getPagesToUpdateProvider() {
 		$berlin = Title::makeTitle( NS_MAIN, 'Berlin' );
 		$rome = Title::makeTitle( NS_MAIN, 'Rome' );
 
@@ -158,7 +159,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$cases[] = array(
 			array( $rome ),
-			array( 2 ),
+			array( new PageEntityUsages( 2 ) ),
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
 				$this->getItemWithSiteLinks( array( 'enwiki' => 'Rome' ) ),
@@ -187,7 +188,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$cases[] = array(
 			array( $berlin ),
-			array( 1 ),
+			array( new PageEntityUsages( 1 ) ),
 			$changeFactory->newFromUpdate( ItemChange::UPDATE, $connectedItem, $connectedItemWithLabel ),
 			'connected item label change'
 		);
