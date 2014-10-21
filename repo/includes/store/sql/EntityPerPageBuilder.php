@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Store\SQL;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Reporting\MessageReporter;
-use Wikibase\NamespaceUtils;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntityPerPage;
 
 /**
@@ -62,6 +62,11 @@ class EntityPerPageBuilder {
 	protected $rebuildAll = false;
 
 	/**
+	 * @var EntityNamespaceLookup
+	 */
+	private $entityNamespaceLookup;
+
+	/**
 	 * @since 0.5
 	 *
 	 * @var array
@@ -71,15 +76,19 @@ class EntityPerPageBuilder {
 	/**
 	 * @param EntityPerPage $entityPerPageTable
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param array $contentModels
 	 */
 	public function __construct(
 		EntityPerPage $entityPerPageTable,
 		EntityIdParser $entityIdParser,
+		EntityNamespaceLookup $entityNamespaceLookup,
 		array $contentModels
 	) {
 		$this->entityPerPageTable = $entityPerPageTable;
 		$this->entityIdParser = $entityIdParser;
+		$this->contentModels = $contentModels;
+		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->contentModels = $contentModels;
 	}
 
@@ -161,7 +170,7 @@ class EntityPerPageBuilder {
 		global $wgContentHandlerUseDB;
 
 		$conds = array(
-			'page_namespace' => NamespaceUtils::getEntityNamespaces(),
+			'page_namespace' => $this->entityNamespaceLookup->getEntityNamespaces(),
 			'page_id > ' . (int) $lastPageSeen,
 		);
 

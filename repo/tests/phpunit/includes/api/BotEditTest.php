@@ -5,7 +5,7 @@ namespace Wikibase\Test\Api;
 use ApiTestCase;
 use TestUser;
 use Title;
-use Wikibase\NamespaceUtils;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Tests for the ApiWikibase class.
@@ -141,7 +141,10 @@ class BotEditTest extends WikibaseApiTestCase {
 		//NOTE: the order of the entries in recentchanges is undefined if multiple
 		//      edits were done in the same second.
 		$change = null;
-		$itemNs = NamespaceUtils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
+
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$itemNs = $entityNamespaceLookup->getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
+
 		foreach ( $rcResult[0]['query']['recentchanges'] as $rc ) {
 			$title = Title::newFromText( $rc['title'] );
 			// XXX: strtoupper is a bit arcane, would ne nice to have a utility function for prefixed id -> title.
