@@ -229,28 +229,56 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			return array();
 		}
 
-		$idStrings = $this->getEntityIdStrings( $entityIds );
-		$where = array( 'eu_entity_id' => $idStrings );
+		$entityIds = $this->reindexEntityIds( $entityIds );
+
+		$where = array( 'eu_entity_id' => array_keys( $entityIds ) );
 
 		if ( !empty( $aspects ) ) {
 			$where['eu_aspect'] = $aspects;
 		}
 
-		$db = $this->connectionManager->getReadConnection();
+		$db = $this->getReadConnection();
 
 		$res = $db->select(
-			'wbc_entity_usage',
-			array( 'DISTINCT eu_page_id' ),
+			$this->tableName,
+			array( 'eu_page_id', 'eu_entity_id', 'eu_aspect' ),
 			$where,
 			__METHOD__
 		);
 
-		$pages = $this->extractProperty( $res, 'eu_page_id' );
+		$pages = $this->foldRowsIntoPageEntityUsages( $res );
 
-		$this->connectionManager->releaseConnection( $db );
+		$this->releaseConnection( $db );
 
 		//TODO: use paging for large page sets!
 		return new ArrayIterator( $pages );
+	}
+	
+	/**
+	 * @param array|Iterator $rows
+	 *
+	 * @return PageEntityUsages[]
+	 */
+	private function foldRowsIntoPageEntityUsages( $rows ) {
+		$usagesPerPage = array();
+
+		foreach ( $rows as $row ) {
+			$pageId = (int)$row->eu_page_id;
+
+			if ( isset( $usagesPerPage[$pageId] ) ) {
+				$pageEntityUsages = $usagesPerPage[$pageId];
+			} else {
+				$pageEntityUsages = new PageEntityUsages( $pageId );
+			}
+
+			$entityId = $this->idParser->parse( $row->eu_entity_id );
+			$usage = new EntityUsage( $entityId, $row->eu_aspect );
+			$pageEntityUsages->addUsages( array( $usage ) );
+
+			$usagesPerPage[$pageId] = $pageEntityUsages;
+		}
+
+		return $usagesPerPage;
 	}
 
 	/**

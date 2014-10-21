@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * Interface for change handling. Whenever a change is detected,
@@ -95,6 +96,11 @@ class ChangeHandler {
 	private $siteId;
 
 	/**
+	 * @var EntityChangeFactory
+	 */
+	private $changeFactory;
+
+	/**
 	 * @var NamespaceChecker $namespaceChecker
 	 */
 	private $namespaceChecker;
@@ -103,11 +109,6 @@ class ChangeHandler {
 	 * @var bool
 	 */
 	private $checkPageExistence = true;
-
-	/**
-	 * @var EntityChangeFactory
-	 */
-	private $changeFactory;
 
 	public function __construct(
 		EntityChangeFactory $changeFactory = null,
@@ -162,6 +163,7 @@ class ChangeHandler {
 
 		$this->changeFactory = $changeFactory;
 
+		$this->titleFactory = $titleFactory;
 		$this->updater = $updater;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->usageLookup = $entityUsage;
@@ -571,19 +573,41 @@ class ChangeHandler {
 		wfProfileIn( __METHOD__ );
 
 		// todo inject!
-		$referencedPagesFinder = new AffectedPagesFinder(
+		$affectedPagesFinder = new AffectedPagesFinder(
 			$this->usageLookup,
 			$this->namespaceChecker,
 			$this->titleFactory,
 			$this->siteId,
+			$this->contentLanguage, //FIXME
 			$this->checkPageExistence
 		);
 
-		$pagesToUpdate = $referencedPagesFinder->getPages( $change );
+		$usages = $affectedPagesFinder->getPagesToUpdate( $change );
+		$pagesToUpdate = $this->getTitlesFromPageEntityUsages( $usages );
 
 		wfProfileOut( __METHOD__ );
 
 		return $pagesToUpdate;
+	}
+
+	/**
+	 * @param PageEntityUsages[]|Iterator<PageEntityUsages> $pageIds
+	 *
+	 * @return Title[]
+	 */
+	private function getTitlesFromPageEntityUsages( $usages ) {
+		$titles = array();
+
+		foreach ( $usages as $pageEntityUsages ) {
+			try {
+				$pid = $pageEntityUsages->getPageId();
+				$titles[] = $this->titleFactory->newFromID( $pid );
+			} catch ( StorageException $ex ) {
+				// Page probably got deleted just now. Skip it.
+			}
+		}
+
+		return $titles;
 	}
 
 	/**
