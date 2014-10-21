@@ -65,7 +65,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		// constructed from an object." This test makes sure it was not constructed from an object.
 		$claims->append( $claim2 );
 
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 	}
 
 	/**
@@ -81,14 +81,14 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	public function constructorErrorProvider() {
 		return array(
 			array( 17 ),
-			array( array( "foo" ) ),
+			array( array( 'foo' ) ),
 		);
 	}
 
 	public function testHasClaim() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$this->assertFalse( $claims->hasClaim( $claim1 ) );
 		$this->assertFalse( $claims->hasClaim( $claim2 ) );
@@ -102,14 +102,14 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $claims->hasClaim( $claim2 ) );
 
 		// no guid
-		$claim0 = new Claim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
+		$claim0 = new Claim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
 		$this->assertFalse( $claims->hasClaim( $claim0 ) );
 	}
 
 	public function testHasClaimWithGuid() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$this->assertFalse( $claims->hasClaimWithGuid( $claim1->getGuid() ) );
 		$this->assertFalse( $claims->hasClaimWithGuid( $claim2->getGuid() ) );
@@ -125,72 +125,72 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testRemoveClaim() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$claims->addClaim( $claim1 );
 		$claims->addClaim( $claim2 );
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 
 		$claims->removeClaim( $claim1 );
 		$this->assertFalse( $claims->hasClaim( $claim1 ) );
 		$this->assertNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertCount( 1, $claims );
+		$this->assertSame( 1, $claims->count() );
 
 		$claims->removeClaim( $claim2 );
 		$this->assertFalse( $claims->hasClaim( $claim2 ) );
 		$this->assertNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
-		$this->assertCount( 0, $claims );
+		$this->assertSame( 0, $claims->count() );
 
 		// no guid
-		$claim0 = new Claim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
+		$claim0 = new Claim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
 		$claims->removeClaim( $claim0 );
 	}
 
 	public function testRemoveClaimWithGuid() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$claims->addClaim( $claim1 );
 		$claims->addClaim( $claim2 );
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 
 		$claims->removeClaimWithGuid( $claim1->getGuid() );
 		$this->assertFalse( $claims->hasClaim( $claim1 ) );
 		$this->assertNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertCount( 1, $claims );
+		$this->assertSame( 1, $claims->count() );
 
 		$claims->removeClaimWithGuid( $claim2->getGuid() );
 		$this->assertFalse( $claims->hasClaim( $claim2 ) );
 		$this->assertNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
-		$this->assertCount( 0, $claims );
+		$this->assertSame( 0, $claims->count() );
 	}
 
 	public function testOffsetUnset() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$claims->addClaim( $claim1 );
 		$claims->addClaim( $claim2 );
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 
 		$claims->offsetUnset( $claim1->getGuid() );
 		$this->assertFalse( $claims->hasClaim( $claim1 ) );
 		$this->assertNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertCount( 1, $claims );
+		$this->assertSame( 1, $claims->count() );
 
 		$claims->offsetUnset( $claim2->getGuid() );
 		$this->assertFalse( $claims->hasClaim( $claim2 ) );
 		$this->assertNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
-		$this->assertCount( 0, $claims );
+		$this->assertSame( 0, $claims->count() );
 	}
 
 	public function testGetClaimWithGuid() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$claims->addClaim( $claim1 );
 		$this->assertSame( $claim1, $claims->getClaimWithGuid( $claim1->getGuid() ) );
@@ -203,8 +203,8 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testOffsetGet() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$claims->addClaim( $claim1 );
 		$this->assertSame( $claim1, $claims->offsetGet( $claim1->getGuid() ) );
@@ -216,20 +216,20 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddClaim() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$claims->addClaim( $claim1 );
 		$claims->addClaim( $claim2 );
 
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 		$this->assertEquals( $claim1, $claims[$claim1->getGuid()] );
 		$this->assertEquals( $claim2, $claims[$claim2->getGuid()] );
 
 		$claims->addClaim( $claim1 );
 		$claims->addClaim( $claim2 );
 
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 
 		$this->assertNotNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
 		$this->assertNotNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
@@ -273,38 +273,38 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAppend() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$claims->append( $claim1 );
 		$claims->append( $claim2 );
 
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 		$this->assertEquals( $claim1, $claims[$claim1->getGuid()] );
 		$this->assertEquals( $claim2, $claims[$claim2->getGuid()] );
 
 		$claims->append( $claim1 );
 		$claims->append( $claim2 );
 
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 	}
 
 	public function testAppendOperator() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$claims[] = $claim1;
 		$claims[] = $claim2;
 
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 		$this->assertEquals( $claim1, $claims[$claim1->getGuid()] );
 		$this->assertEquals( $claim2, $claims[$claim2->getGuid()] );
 
 		$claims[] = $claim1;
 		$claims[] = $claim2;
 
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 	}
 
 	/**
@@ -317,20 +317,20 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testOffsetSet() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$claims->offsetSet( $claim1->getGuid(), $claim1 );
 		$claims->offsetSet( $claim2->getGuid(), $claim2 );
 
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 		$this->assertEquals( $claim1, $claims[$claim1->getGuid()] );
 		$this->assertEquals( $claim2, $claims[$claim2->getGuid()] );
 
 		$claims->offsetSet( $claim1->getGuid(), $claim1 );
 		$claims->offsetSet( $claim2->getGuid(), $claim2 );
 
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$claims->offsetSet( 'spam', $claim1 );
@@ -338,33 +338,33 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testOffsetSetOperator() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$claims[$claim1->getGuid()] = $claim1;
 		$claims[$claim2->getGuid()] = $claim2;
 
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 		$this->assertEquals( $claim1, $claims[$claim1->getGuid()] );
 		$this->assertEquals( $claim2, $claims[$claim2->getGuid()] );
 
 		$claims[$claim1->getGuid()] = $claim1;
 		$claims[$claim2->getGuid()] = $claim2;
 
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 	}
 
 	public function testGuidNormalization() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$claim1LowerGuid = strtolower( $claim1->getGuid() );
 		$claim2UpperGuid = strtoupper( $claim2->getGuid() );
 
 		$claims->addClaim( $claim1 );
 		$claims->addClaim( $claim2 );
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 
 		$this->assertEquals( $claim1, $claims->getClaimWithGuid( $claim1LowerGuid ) );
 		$this->assertEquals( $claim2, $claims->getClaimWithGuid( $claim2UpperGuid ) );
@@ -378,7 +378,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$claims = new Claims();
 		$claims->offsetSet( strtoupper( $claim1LowerGuid ), $claim1 );
 		$claims->offsetSet( strtolower( $claim2UpperGuid ), $claim2 );
-		$this->assertCount( 2, $claims );
+		$this->assertSame( 2, $claims->count() );
 
 		$this->assertEquals( $claim1, $claims->getClaimWithGuid( $claim1LowerGuid ) );
 		$this->assertEquals( $claim2, $claims->getClaimWithGuid( $claim2UpperGuid ) );
@@ -386,10 +386,10 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetMainSnaks() {
 		$claims = new Claims( array(
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P42" ) ) ),
-			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( "P42" ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P23" ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P9000" ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
+			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ) ),
 		) );
 
 		$snaks = $claims->getMainSnaks();
@@ -404,10 +404,10 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetGuids() {
 		$claims = new Claims( array(
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P42" ) ) ),
-			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( "P42" ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P23" ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P9000" ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
+			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ) ),
 		) );
 
 		$guids = $claims->getGuids();
@@ -422,10 +422,10 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetHashes() {
 		$claims = new Claims( array(
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P42" ) ) ),
-			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( "P42" ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P23" ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P9000" ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
+			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ) ),
 		) );
 
 		$hashes = $claims->getHashes();
@@ -446,22 +446,22 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetClaimsForProperty() {
 		$claims = new Claims( array(
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P42" ) ) ),
-			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( "P42" ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P23" ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
+			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ) ),
 		) );
 
 		$matches = $claims->getClaimsForProperty( new PropertyId( 'P42' ) );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $claims );
-		$this->assertCount( 2, $matches );
+		$this->assertSame( 2, $matches->count() );
 
 		$matches = $claims->getClaimsForProperty( new PropertyId( 'P23' ) );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $claims );
-		$this->assertCount( 1, $matches );
+		$this->assertSame( 1, $matches->count() );
 
 		$matches = $claims->getClaimsForProperty( new PropertyId( 'P9000' ) );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $claims );
-		$this->assertCount( 0, $matches );
+		$this->assertSame( 0, $matches->count() );
 	}
 
 	/**
@@ -483,7 +483,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$list->addClaim( $firstClaim );
 		$list->addClaim( $secondClaim );
 
-		$this->assertEquals( 2, count( $list ), 'Adding two duplicates to an empty list should result in a count of two' );
+		$this->assertEquals( 2, $list->count(), 'Adding two duplicates to an empty list should result in a count of two' );
 
 		$this->assertEquals( $firstClaim, $list->getClaimWithGuid( $firstClaim->getGuid() ) );
 		$this->assertEquals( $secondClaim, $list->getClaimWithGuid( $secondClaim->getGuid() ) );
@@ -497,8 +497,8 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	public function testGetHash() {
 		$claimsA = new Claims();
 		$claimsB = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P16" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
 		$this->assertEquals( $claimsA->getHash(), $claimsB->getHash(), 'empty list' );
 
@@ -516,21 +516,22 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testIterator() {
-		$array = array(
-			'TESTCLAIM1' => $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P42" ) ), 'testclaim1' ),
-			'TESTCLAIM2' => $this->makeClaim( new PropertySomeValueSnak( new PropertyId( "P42" ) ), 'testclaim2' ),
-			'TESTCLAIM3' => $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P23" ) ), 'testclaim3' ),
-			'TESTCLAIM4' => $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P9000" ) ), 'testclaim4' ),
+		$expected = array(
+			'TESTCLAIM1' => $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ), 'testclaim1' ),
+			'TESTCLAIM2' => $this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ), 'testclaim2' ),
+			'TESTCLAIM3' => $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ), 'testclaim3' ),
+			'TESTCLAIM4' => $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ), 'testclaim4' ),
 		);
-		$claims = new Claims( $array );
 
-		$iterator = iterator_to_array( $claims->getIterator() );
-		$this->assertSame( $array, $iterator );
+		$claims = new Claims( $expected );
+		$actual = iterator_to_array( $claims->getIterator() );
+
+		$this->assertSame( $expected, $actual );
 	}
 
 	public function testIsEmpty() {
 		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) );
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
 
 		$this->assertTrue( $claims->isEmpty() );
 
@@ -542,13 +543,13 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideGetByRank() {
-		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
 		$s1->setRank( Statement::RANK_DEPRECATED );
 
-		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
+		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) );
 		$s2->setRank( Statement::RANK_PREFERRED );
 
-		$s3 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P3" ) ) );
+		$s3 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P3' ) ) );
 		$s3->setRank( Statement::RANK_PREFERRED );
 
 		return array(
@@ -587,10 +588,10 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideGetByRanks() {
-		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
 		$s1->setRank( Statement::RANK_NORMAL );
 
-		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
+		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) );
 		$s2->setRank( Statement::RANK_PREFERRED );
 
 		$ret = array(
@@ -632,7 +633,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetBestClaimsOnlyOne() {
-		$statement = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$statement = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
 		$statement->setRank( Statement::RANK_NORMAL );
 
 		$claims = new Claims( array( $statement ) );
@@ -640,7 +641,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetBestClaimsNoDeprecated() {
-		$statement = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$statement = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
 		$statement->setRank( Statement::RANK_DEPRECATED );
 
 		$claims = new Claims( array( $statement ) );
@@ -648,10 +649,10 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetBestClaimsReturnOne() {
-		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
 		$s1->setRank( Statement::RANK_DEPRECATED );
 
-		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
+		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) );
 		$s2->setRank( Statement::RANK_NORMAL );
 
 		$claims = new Claims( array( $s1, $s2 ) );
@@ -660,13 +661,13 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetBestClaimsReturnTwo() {
-		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
 		$s1->setRank( Statement::RANK_NORMAL );
 
-		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
+		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) );
 		$s2->setRank( Statement::RANK_PREFERRED );
 
-		$s3 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P3" ) ) );
+		$s3 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P3' ) ) );
 		$s3->setRank( Statement::RANK_PREFERRED );
 
 		$claims = new Claims( array( $s3, $s1, $s2 ) );
@@ -675,10 +676,10 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetBestClaimsReturnsTruthRanks() {
-		$s1 = new Claim( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$s1 = new Claim( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
 		$s1->setGuid( 'kittens' );
 
-		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
+		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) );
 		$s2->setRank( Statement::RANK_NORMAL );
 
 		$claims = new Claims( array( $s1, $s2 ) );
