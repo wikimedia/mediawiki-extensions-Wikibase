@@ -3,8 +3,11 @@
 namespace Wikibase\Test\Api;
 
 use DataValues\DataValue;
+use DataValues\DataValueFactory;
 use DataValues\StringValue;
+use FormatJson;
 use Revision;
+use UsageException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Claim\Claim;
@@ -129,7 +132,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$params = array(
 			'action' => 'wbsetclaimvalue',
 			'claim' => $claimGuid,
-			'value' => \FormatJson::encode( $value ),
+			'value' => FormatJson::encode( $value ),
 			'snaktype' => 'value',
 		);
 
@@ -155,7 +158,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$this->assertTrue( $claims->hasClaimWithGuid( $claimGuid ) );
 
-		$dataValue = \DataValues\DataValueFactory::singleton()->newFromArray( $claim['mainsnak']['datavalue'] );
+		$dataValue = DataValueFactory::singleton()->newFromArray( $claim['mainsnak']['datavalue'] );
 
 		$this->assertTrue( $claims->getClaimWithGuid( $claimGuid )->getMainSnak()->getDataValue()->equals( $dataValue ) );
 	}
@@ -189,7 +192,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request did not raise an error' );
-		} catch ( \UsageException $e ) {
+		} catch ( UsageException $e ) {
 			$this->assertEquals( $error, $e->getCodeString(),  'Invalid claim guid raised correct error' );
 		}
 	}
