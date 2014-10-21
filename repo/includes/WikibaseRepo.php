@@ -54,6 +54,7 @@ use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
+use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Notifications\ChangeNotifier;
@@ -926,6 +927,19 @@ class WikibaseRepo {
 			$this->getPropertyDataTypeLookup(),
 			$this->getEntityFactory()
 		);
+	}
+
+	/**
+	 * @return EntityNamespaceLookup
+	 */
+	public function getEntityNamespaceLookup() {
+		if ( !isset( $this->entityNamespaceLookup ) ) {
+			$this->entityNamespaceLookup = new EntityNamespaceLookup(
+			$this->getSettings()->getSetting( 'entityNamespaces' )
+		);
+		}
+
+		return $this->entityNamespaceLookup;
 	}
 
 }

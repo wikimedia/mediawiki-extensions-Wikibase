@@ -6,7 +6,7 @@ use MWException;
 use TestSites;
 use Title;
 use User;
-use Wikibase\NamespaceUtils;
+use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -91,7 +91,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$params[ $key ] = $rev->getId();
 	}
 
-	public static function provideUndoForm() {
+	public function provideUndoForm() {
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
 
 		$cases = array(
@@ -254,7 +254,7 @@ class EditEntityActionTest extends ActionTestCase {
 			// -- bad page -----------------------------------
 			array( //14: // non-existing page
 				'edit',   // action
-				Title::newFromText( "XXX", NamespaceUtils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM ) ), // non-existing page
+				Title::newFromText( "XXX", $this->getItemNamespace() ),
 				array(    // params
 					'restore' => array( "London", 0 ), // ok revision
 				),
@@ -322,11 +322,9 @@ class EditEntityActionTest extends ActionTestCase {
 		$this->tryUndoAction( $action, $page, $params, $post, $user, $htmlPattern, $expectedProps );
 	}
 
-	public static function provideUndoSubmit() {
+	public function provideUndoSubmit() {
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
-
 		return array(
-
 			array( //0: submit with legal undo, but don't post
 				'submit', // action
 				'Berlin', // handle
@@ -535,7 +533,7 @@ class EditEntityActionTest extends ActionTestCase {
 			// -- bad page -----------------------------------
 			array( //14: // non-existing page
 				'submit', // action
-				Title::newFromText( "XXX", NamespaceUtils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM ) ), // non-existing page
+				Title::newFromText( "XXX", $this->getItemNamespace() ),
 				array(    // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
@@ -864,5 +862,10 @@ class EditEntityActionTest extends ActionTestCase {
 		}
 
 		self::resetTestItem( $handle );
+	}
+
+	private function getItemNamespace() {
+		 $entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		 return $entityNamespaceLookup->getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
 	}
 }

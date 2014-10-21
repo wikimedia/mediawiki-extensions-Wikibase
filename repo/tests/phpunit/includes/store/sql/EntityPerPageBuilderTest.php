@@ -4,12 +4,12 @@ namespace Wikibase\Test;
 
 use ContentHandler;
 use RuntimeException;
+use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\SQL\EntityPerPageBuilder;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\Repo\Store\SQL\EntityPerPageBuilder
@@ -45,8 +45,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->wikibaseRepo = new WikibaseRepo( $this->getTestSettings() );
-
+		$this->wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$this->entityPerPageTable = $this->wikibaseRepo->getStore()->newEntityPerPage();
 
 		$this->clearTables();
@@ -60,32 +59,16 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return \User
+	 * @return User
 	 */
 	protected function getUser() {
-		$user = \User::newFromName( 'zombie1' );
+		$user = User::newFromName( 'zombie1' );
 
 		if ( $user->getId() === 0 ) {
-			$user = \User::createNew( $user->getName() );
+			$user = User::createNew( $user->getName() );
 		}
 
 		return $user;
-	}
-
-	protected function getTestSettings() {
-		$globalSettings = WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy();
-
-		$settings = array_merge(
-			$globalSettings,
-			array(
-				'entityNamespaces' => array(
-					'wikibase-item' => 0,
-					'wikibase-property' => 102
-				)
-			)
-		);
-
-		return new SettingsArray( $settings );
 	}
 
 	protected function clearTables() {
@@ -159,7 +142,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 			array(),
 			__METHOD__,
 			array(
-				'LIMIT' =>  1,
+				'LIMIT' => 1,
 				'OFFSET' => 5,
 				'ORDER BY' => ' page_id ASC'
 			)
@@ -220,6 +203,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$builder = new EntityPerPageBuilder(
 			$this->entityPerPageTable,
 			$this->wikibaseRepo->getEntityIdParser(),
+			$this->wikibaseRepo->getEntityNamespaceLookup(),
 			$this->wikibaseRepo->getContentModelMappings()
 		);
 
@@ -240,6 +224,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$builder = new EntityPerPageBuilder(
 			$this->entityPerPageTable,
 			$this->wikibaseRepo->getEntityIdParser(),
+			$this->wikibaseRepo->getEntityNamespaceLookup(),
 			$this->wikibaseRepo->getContentModelMappings()
 		);
 

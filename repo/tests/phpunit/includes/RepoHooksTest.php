@@ -6,8 +6,8 @@ use DerivativeContext;
 use OutputPage;
 use RequestContext;
 use Title;
-use Wikibase\NamespaceUtils;
 use Wikibase\RepoHooks;
+use Wikibase\Repo\WikibaseRepo;
 use WikiImporter;
 
 /**
@@ -24,11 +24,13 @@ use WikiImporter;
 class RepoHooksTest extends \MediaWikiTestCase {
 
 	public function testOnMakeGlobalVariablesScript() {
-		$ns = NamespaceUtils::getEntityNamespace( 'wikibase-property' );
-		$this->assertInternalType( 'int', $ns );
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		$propertyNamespace = $entityNamespaceLookup->getEntityNamespace( 'wikibase-property' );
+		$this->assertInternalType( 'int', $propertyNamespace );
 
 		$context = new DerivativeContext( RequestContext::getMain() );
-		$context->setTitle( Title::makeTitle( $ns, 'P1' ) );
+		$context->setTitle( Title::makeTitle( $propertyNamespace, 'P1' ) );
 		$outputPage = new OutputPage( $context );
 
 		$success = RepoHooks::onMakeGlobalVariablesScript( array(), $outputPage );
