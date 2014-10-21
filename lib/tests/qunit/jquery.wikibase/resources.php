@@ -233,6 +233,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.wikibase.statementview.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.wikibase.statementview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.statementview',
+				'wikibase.datamodel'
+			),
+		),
+
 		'jquery.wikibase.statementview.RankSelector.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.wikibase.statementview.RankSelector.tests.js',
