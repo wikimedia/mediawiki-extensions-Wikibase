@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
 
-use Language;
 use Parser;
 use Title;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;

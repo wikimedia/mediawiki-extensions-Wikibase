@@ -26,6 +26,7 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DirectSqlStore;
 use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory;
@@ -36,7 +37,6 @@ use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Serializers\ForbiddenSerializer;
 use Wikibase\Lib\SnakFormatter;
@@ -130,11 +130,6 @@ final class WikibaseClient {
 	 * @var NamespaceChecker
 	 */
 	private $namespaceChecker = null;
-
-	/**
-	 * @var ClientSiteLinkLookup
-	 */
-	private $clientSiteLinkLookup = null;
 
 	/**
 	 * @since 0.4

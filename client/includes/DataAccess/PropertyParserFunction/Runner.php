@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess\PropertyParserFunction;
 
 use Parser;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 

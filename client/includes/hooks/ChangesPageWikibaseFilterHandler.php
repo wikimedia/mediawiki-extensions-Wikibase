@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Hooks;
 
-use ChangesListSpecialPage;
 use IContextSource;
 use User;
 
@@ -116,6 +115,8 @@ class ChangesPageWikibaseFilterHandler {
 	}
 
 	/**
+	 * @param User $user
+	 *
 	 * @return boolean
 	 */
 	private function isEnhancedChangesEnabled( User $user ) {

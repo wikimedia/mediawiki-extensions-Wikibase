@@ -3,7 +3,6 @@
 namespace Wikibase\Client;
 
 use Title;
-use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\NamespaceChecker;
@@ -123,7 +122,7 @@ class RepoItemLinkGenerator {
 	}
 
 	/**
-	 * @param EntityId
+	 * @param EntityId $entityId
 	 *
 	 * @return string[]
 	 */
@@ -156,4 +155,5 @@ class RepoItemLinkGenerator {
 
 		return $link;
 	}
+
 }

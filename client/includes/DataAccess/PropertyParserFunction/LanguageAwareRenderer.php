@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Language;
 use Status;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 

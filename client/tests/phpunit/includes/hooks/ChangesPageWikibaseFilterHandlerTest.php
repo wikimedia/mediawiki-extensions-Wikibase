@@ -4,8 +4,6 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use DerivativeContext;
 use FauxRequest;
-use FormOptions;
-use IContextSource;
 use RequestContext;
 use Wikibase\Client\Hooks\ChangesPageWikibaseFilterHandler;
 

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Language;
 use Wikibase\DataAccess\PropertyParserFunction\VariantsAwareRenderer;
 use Wikibase\DataModel\Entity\ItemId;
 

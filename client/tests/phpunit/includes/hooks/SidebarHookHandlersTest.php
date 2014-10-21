@@ -13,6 +13,7 @@ use ParserOutput;
 use RequestContext;
 use Site;
 use SiteStore;
+use Skin;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
@@ -440,7 +441,9 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return \Skin
+	 * @param IContextSource $context
+	 *
+	 * @return Skin
 	 */
 	private function newSkin( IContextSource $context ) {
 		$skin = $this->getMockBuilder( 'Skin' )

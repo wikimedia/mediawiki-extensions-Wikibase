@@ -9,6 +9,7 @@ use JobSpecification;
 use RuntimeException;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -173,4 +174,5 @@ abstract class UpdateRepo {
 	 * @return string
 	 */
 	abstract protected function getJobName();
+
 }
