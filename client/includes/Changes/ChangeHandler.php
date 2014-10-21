@@ -6,11 +6,13 @@ use InvalidArgumentException;
 use MWException;
 use Title;
 use Wikibase\Change;
+use Wikibase\Client\Store\TitleFactory;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\SiteLinkCommentCreator;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * Interface for change handling. Whenever a change is detected,
@@ -51,6 +53,21 @@ class ChangeHandler {
 	const HISTORY_ENTRY_ACTION = 16;
 
 	/**
+	 * @var EntityChangeFactory
+	 */
+	private $changeFactory;
+
+	/**
+	 * @var AffectedPagesFinder
+	 */
+	private $affectedPagesFinder;
+
+	/**
+	 * @var Client\Store\TitleFactory
+	 */
+	private $titleFactory;
+
+	/**
 	 * @var PageUpdater $updater
 	 */
 	private $updater;
@@ -61,17 +78,13 @@ class ChangeHandler {
 	private $changeListTransformer;
 
 	/**
-	 * @var AffectedPagesFinder
-	 */
-	private $affectedPagesFinder;
-
-	/**
 	 * @var string
 	 */
 	private $localSiteId;
 
 	public function __construct(
 		AffectedPagesFinder $affectedPagesFinder,
+		TitleFactory $titleFactory,
 		PageUpdater $updater,
 		ChangeListTransformer $changeListTransformer,
 		$localSiteId,
@@ -80,6 +93,7 @@ class ChangeHandler {
 	) {
 		$this->changeListTransformer = $changeListTransformer;
 		$this->affectedPagesFinder = $affectedPagesFinder;
+		$this->titleFactory = $titleFactory;
 		$this->updater = $updater;
 
 		if ( !is_string( $localSiteId ) ) {
@@ -185,11 +199,32 @@ class ChangeHandler {
 	public function getPagesToUpdate( Change $change ) {
 		wfProfileIn( __METHOD__ );
 
-		$pagesToUpdate = $this->affectedPagesFinder->getPages( $change );
+		$usages = $this->affectedPagesFinder->getPagesToUpdate( $change );
+		$pagesToUpdate = $this->getTitlesFromPageEntityUsages( $usages );
 
 		wfProfileOut( __METHOD__ );
 
 		return $pagesToUpdate;
+	}
+
+	/**
+	 * @param PageEntityUsages[]|Iterator<PageEntityUsages> $pageIds
+	 *
+	 * @return Title[]
+	 */
+	private function getTitlesFromPageEntityUsages( $usages ) {
+		$titles = array();
+
+		foreach ( $usages as $pageEntityUsages ) {
+			try {
+				$pid = $pageEntityUsages->getPageId();
+				$titles[] = $this->titleFactory->newFromID( $pid );
+			} catch ( StorageException $ex ) {
+				// Page probably got deleted just now. Skip it.
+			}
+		}
+
+		return $titles;
 	}
 
 	/**

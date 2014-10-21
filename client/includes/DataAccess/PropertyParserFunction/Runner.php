@@ -77,7 +77,7 @@ class Runner {
 
 		// Track usage of "all" (that is, arbitrary) data from the item.
 		$usageAcc = new ParserOutputUsageAccumulator( $parser->getOutput() );
-		$usageAcc->addAllUsage( $entityId );
+		$usageAcc->addOtherUsage( $entityId );
 
 		wfProfileOut( __METHOD__ );
 		return $result;
