@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\LegacyIdInterpreter;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPerPage;
 
 /**

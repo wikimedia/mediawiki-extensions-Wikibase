@@ -270,7 +270,6 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
 		$goodSnak = new PropertyValueSnak( $p11, new StringValue( 'good' ) );
-		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );
 
 		$goodReference = new Reference( new SnakList( array( $goodSnak ) ) );
 
