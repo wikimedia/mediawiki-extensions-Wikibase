@@ -19,7 +19,6 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\GenericEventDispatcher;
-use Wikibase\Repo\Store\EntityPerPage;
 use WikiPage;
 
 /**

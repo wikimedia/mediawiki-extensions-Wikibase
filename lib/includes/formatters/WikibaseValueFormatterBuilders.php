@@ -2,13 +2,13 @@
 
 namespace Wikibase\Lib;
 
+use DataValues\Geo\Formatters\GeoCoordinateFormatter;
+use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
 use InvalidArgumentException;
 use Language;
 use RuntimeException;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
-use DataValues\Geo\Formatters\GeoCoordinateFormatter;
-use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
@@ -541,7 +541,7 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @return HtmlTimeFormatter
 	 */
-	private static function newHtmlTimeFormatter(
+	protected static function newHtmlTimeFormatter(
 		FormatterOptions $options,
 		WikibaseValueFormatterBuilders $builders
 	) {

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Interactors;
 
-use InvalidArgumentException;
 use User;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
@@ -233,4 +232,5 @@ class ItemMergeInteractor {
 			throw new ItemMergeException( $ex->getMessage(), 'failed-save', $ex );
 		}
 	}
+
 }

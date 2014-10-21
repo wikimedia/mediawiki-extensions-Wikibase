@@ -30,7 +30,6 @@ class ItemView extends EntityView {
 			throw new InvalidArgumentException( '$entityRevision must contain an Item.' );
 		}
 
-		$html = '';
 		$html = parent::getInnerHtml( $entityRevision, $editable );
 		$html .= $this->claimsView->getHtml( $item->getClaims(), 'wikibase-statements' );
 		$html .= $this->getHtmlForSiteLinks( $item, $editable );
