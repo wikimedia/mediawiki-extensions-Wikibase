@@ -6,7 +6,7 @@ use DatabaseBase;
 use Html;
 use Linker;
 use MWException;
-use SpecialPage;
+use QueryPage;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
@@ -19,15 +19,19 @@ use Wikibase\NamespaceChecker;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class SpecialUnconnectedPages extends SpecialPage {
+class SpecialUnconnectedPages extends QueryPage {
 
-	/**
-	 * The page name as a string to start search at
-	 *
-	 * @var string
-	 */
-	private $startPageName = '';
+	public function __construct() {
+		parent::__construct( 'UnconnectedPages' );
+	}
 
+	function isExpensive() {
+		return false;
+	}
+
+	function isSyndicated() {
+		return false;
+	}
 	/**
 	 * Title object build from the $startPageName parameter
 	 *
@@ -49,201 +53,6 @@ class SpecialUnconnectedPages extends SpecialPage {
 	 */
 	private $iwData = '';
 
-	public function __construct() {
-		parent::__construct( 'UnconnectedPages' );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getDescription() {
-		return $this->msg( 'special-' . strtolower( $this->getName() ) )->text();
-	}
-
-	public function setHeaders() {
-		$out = $this->getOutput();
-		$out->setArticleRelated( false );
-		$out->setPageTitle( $this->getDescription() );
-	}
-
-	/**
-	 * @see SpecialPage::execute
-	 *
-	 * @param null|string $subPage
-	 */
-	public function execute( $subPage ) {
-		$this->setHeaders();
-
-		$contLang = $this->getContext()->getLanguage();
-		$this->outputHeader( $contLang->lc( 'wikibase-' . $this->getName() ) . '-summary' );
-
-		// If the user is authorized, display the page, if not, show an error.
-		if ( !$this->userCanExecute( $this->getUser() ) ) {
-			$this->displayRestrictionError();
-		}
-
-		$this->setFieldsFromRequestData( $subPage );
-		$this->addFormToOutput();
-		$this->showQuery();
-	}
-
-	private function setFieldsFromRequestData( $subPage ) {
-		$request = $this->getRequest();
-
-		$this->startPageName = $request->getText( 'page', $subPage );
-		if ( $this->startPageName !== '' ) {
-			$this->startTitle = Title::newFromText( $this->startPageName );
-		}
-
-		$this->iwData = $request->getText( 'iwdata', '' );
-	}
-
-	private function addFormToOutput() {
-		$out = '';
-
-		// FIXME: How is it possible this can ever happen? How is this relevant here?
-		if ( $this->startPageName !== '' && $this->startTitle === null ) {
-			$out .= Html::element( 'div', array(), $this->msg( 'wikibase-unconnectedpages-page-warning' )->text() );
-		}
-
-		$out .= Html::openElement(
-				'form',
-				array(
-					'action' => $this->getPageTitle()->getLocalURL(),
-					'name' => 'unconnectedpages',
-					'id' => 'wbc-unconnectedpages-form'
-				)
-			)
-			. Html::openElement( 'fieldset' )
-			. Html::element( 'legend', array(), $this->msg( 'wikibase-unconnectedpages-legend' )->text() )
-			. Html::openElement( 'p' )
-			. Html::element( 'label', array( 'for' => 'language' ), $this->msg( 'wikibase-unconnectedpages-page' )->text() )
-			. ' '
-			. Html::input(
-				'page',
-				$this->startPageName,
-				'text',
-				array(
-					'id' => 'page'
-				)
-			)
-			. Html::input(
-				'submit',
-				$this->msg( 'wikibase-unconnectedpages-submit' )->text(),
-				'submit',
-				array(
-					'id' => 'wbc-unconnectedpages-submit',
-					'class' => 'wbc-input-button'
-				)
-			)
-			. ' '
-			. Html::input(
-				'iwdata',
-				'only',
-				'checkbox',
-				array(
-					'id' => 'wbc-unconnectedpages-iwdata',
-					'class' => 'wbc-input-button',
-					$this->iwData === 'only' ? 'checked' : 'unchecked' => ''
-				)
-			)
-			. ' '
-			. Html::element( 'label', array( 'for' => 'wbc-unconnectedpages-iwdata' ), $this->msg( 'wikibase-unconnectedpages-iwdata-label' )->text() )
-			. Html::closeElement( 'p' )
-			. Html::closeElement( 'fieldset' )
-			. Html::closeElement( 'form' );
-
-		$this->getOutput()->addHTML( $out );
-	}
-
-	private function showQuery() {
-		$query = array();
-		if ( $this->iwData === 'only' ) {
-			$query['iwdata'] = $this->iwData;
-		}
-
-		$paging = false;
-		$out = $this->getOutput();
-
-		list( $limit, $offset ) = $this->getRequest()->getLimitOffset();
-
-		$result = $this->getResult( $offset, $limit + 1 );
-
-		$numRows = count( $result );
-
-		$out->addHTML( Html::openElement( 'div', array( 'class' => 'mw-spcontent' ) ) );
-
-		if ( $numRows > 0 ) {
-			$out->addHTML( $this->msg( 'showingresults' )->numParams(
-				// do not format the one extra row, if exist
-				min( $numRows, $limit ),
-				$offset + 1
-			)->parseAsBlock() );
-			// Disable the "next" link when we reach the end
-			$paging = $this->getLanguage()->viewPrevNext(
-				$this->getPageTitle( $this->startPageName ),
-				$offset,
-				$limit,
-				$query,
-				$numRows <= $limit
-			);
-			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
-		} else {
-			// No results to show, so don't bother with "showing X of Y" etc.
-			// -- just let the user know and give up now
-			$out->addWikiMsg( 'specialpage-empty' );
-			$out->addHTML( Html::closeElement( 'div' ) );
-		}
-
-		$this->outputResults(
-			$result,
-			// do not format the one extra row, if it exist
-			min( $numRows, $limit ),
-			$offset
-		);
-
-		if ( $paging ) {
-			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
-		}
-
-		$out->addHTML( Html::closeElement( 'div' ) );
-	}
-
-	/**
-	 * Format and output report results using the given information plus OutputPage
-	 *
-	 * @param EntityId[] $results
-	 * @param int $num number of available result rows
-	 * @param int $offset paging offset
-	 */
-	private function outputResults( array $results, $num, $offset ) {
-		if ( $num <= 0 ) {
-			return;
-		}
-
-		$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
-		for ( $i = 0; $i < $num; $i++ ) {
-			$line = $this->formatRow( $results[$i] );
-			if ( $line !== false ) {
-				$html .= Html::rawElement( 'li', array(), $line );
-			}
-		}
-		$html .= Html::closeElement( 'ol' );
-
-		$this->getOutput()->addHTML( $html );
-	}
-
-	/**
-	 * Set the NamespaceChecker
-	 *
-	 * @since 0.4
-	 *
-	 * @param NamespaceChecker $namespaceChecker
-	 */
-	public function setNamespaceChecker( NamespaceChecker $namespaceChecker ) {
-		$this->namespaceChecker = $namespaceChecker;
-	}
-
 	/**
 	 * Get the NamespaceChecker
 	 *
@@ -263,7 +72,6 @@ class SpecialUnconnectedPages extends SpecialPage {
 
 		return $this->namespaceChecker;
 	}
-
 	/**
 	 * Build conditionals for namespace
 	 *
@@ -293,28 +101,22 @@ class SpecialUnconnectedPages extends SpecialPage {
 		return $conds;
 	}
 
-	/**
-	 * @see SpecialWikibaseQueryPage::getResult
-	 *
-	 * @since 0.4
-	 */
-	public function getResult( $offset = 0, $limit = 0 ) {
+	function getQueryInfo() {
 		$dbr = wfGetDB( DB_SLAVE );
-
 		$conds = $this->buildConditionals( $dbr );
-		$conds['page_is_redirect'] = '0';
+		$conds[] = 'page_is_redirect = 0';
 		$conds[] = 'pp_propname IS NULL';
 		if ( $this->iwData === 'only' ) {
 			$conds[] = 'll_from IS NOT NULL';
 		}
-
-		$rows = $dbr->select(
-			array(
+		$dbrg = array (
+			'tables' => array(
 				'page',
 				'page_props',
 				'langlinks'
 			),
-			array(
+			'fields' => array(
+                                'value' => 'page_id',
 				'page_namespace',
 				'page_title',
 				'page_id',
@@ -322,48 +124,37 @@ class SpecialUnconnectedPages extends SpecialPage {
 				'page_is_redirect',
 				'page_num_iwlinks' => 'count(ll_from)'
 			),
-			$conds,
-			__METHOD__,
-			array(
-				'OFFSET' => $offset,
-				'LIMIT' => $limit,
+			'conds' => $conds,
+			'options' => array(
 				'GROUP BY' => 'page_namespace, page_title',
 				'ORDER BY' => 'page_namespace, page_title',
 				'USE INDEX' => array( 'page' => 'name_title' )
 			),
-			array(
+			'join_conds' => array(
 				// FIXME: Should 'wikibase_item' really be hardcoded here?
 				'page_props' => array( 'LEFT JOIN', array( 'page_id = pp_page', "pp_propname = 'wikibase_item'" ) ),
 				'langlinks' => array( 'LEFT JOIN', 'll_from = page_id' )
 			)
 		);
-
-		$entries = array();
-		foreach ( $rows as $row ) {
-			$title = Title::newFromRow( $row );
-			$numInterWikiLinks = $row->page_num_iwlinks;
-			$entries[] = array( 'title' => $title, 'num' => $numInterWikiLinks );
-		}
-		return $entries;
+		print_r($dbrg);
+		return $dbrg;
 	}
 
-	/**
-	 * @param array $entry
-	 *
-	 * @return string|false
-	 */
-	private function formatRow( array $entry ) {
-		try {
-			$out = Linker::linkKnown( $entry['title'] );
-			if ( $entry['num'] > 0 ) {
-				$out .= ' ' . $this->msg( 'wikibase-unconnectedpages-format-row' )
-					->numParams( $entry['num'] )->text();
-			}
-			return $out;
-		} catch ( MWException $ex ) {
-			wfWarn( 'Error formatting result row: ' . $ex->getMessage() );
-			return false;
-		}
+	function getOrderFields() {
+		return array( 'value' );
 	}
 
+	function sortDescending() {
+		return false;
+	}
+
+	function formatResult( $skin, $result ) {
+		$title = Title::newFromID( $result->value );
+		$link = Linker::linkKnown( $title );
+		return $link;
+	}
+
+	protected function getGroupName() {
+		return 'pages';
+	}
 }
