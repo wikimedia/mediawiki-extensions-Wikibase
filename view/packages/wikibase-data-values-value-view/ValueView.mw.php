@@ -13,7 +13,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 
 global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks, $wgResourceModules, $wgMessagesDirs;
 
-$wgExtensionCredits['datavalues'][] = array(
+$wgExtensionCredits['other'][] = array(
 	'path' => __DIR__,
 	'name' => 'ValueView',
 	'version' => VALUEVIEW_VERSION,
