@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_0a6483ad",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 0,
+      "message": "What happened to the badge class names?",
+      "revId": "9656e85aa6473795218a86aa860f36aa6ce2a3bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

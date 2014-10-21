@@ -1,0 +1,344 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_ca5e9bec",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "Why do we still need that? The main point of this change seems to be to make LabelFormatter not use an EntityLookup, right?",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_8a0f33e4",
+        "filename": "client/includes/store/ClientStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "TermsLookup vs TemLookup is very confusing. We need better names.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_2af61fd5",
+        "filename": "client/tests/phpunit/MockClientStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "?!!",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_eaffd7a5",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "We really should get rid of this. If we still need it, something is still wrong (or at least, slow).",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_ca2c5b48",
+        "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "This should be hidden in the TermLookup",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_2a1dbf14",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "Would be good to check where we still need this. In the end, we should have a EntityTitleLookup and a TermsLookup, but no EntityLookup.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_0a124301",
+        "filename": "lib/includes/store/CachingTermsLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "I\u0027m worried about a naive caching approach. We are using lots of labels of lots of different entities - this may flood memcached, and have very low hit rate. We at least need a mechanism for detecting such a situation. Ideally, we\u0027d have a list of high profile entities, for which we would cache terms, and skip caching for other entities.\n\nOverall, I think batched queries are a better approach for improving performance than caching at this level.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_aad8ef58",
+        "filename": "lib/includes/store/CachingTermsLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "We\u0027ll have to make sure we are sharing the term cache between client wikis.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_cac21b5d",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "Right now this is a trivial layer on top of TermsLookup. It\u0027s pretty meaningless, it doesn\u0027t add knowledge or state. It would be nice to encapsulate language resolution here: the TermLookup would *know* which language to look for, and if and how to apply fallback.\n\nAs far as I can see, we have access to FormatterOptions when constructing TermLookup instances, so we can provide the language there.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_2ad37f31",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "As per the above, the $langageCode parameter should go into the constructor of an implementation.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_eaccb78e",
+        "filename": "lib/includes/store/TermLookupService.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "If TermLookup co0ntains knowledge about the desired language, I\u0027d probably not call it a service. I\u0027d probably go for SingleLanguageTermLookup and LanguageFallbackTermLookup or some such.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_aaa6afbc",
+        "filename": "lib/includes/store/TermsLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "This should probably just be a subset of the TermIndex interface (that is, TermIndex should extend TermsLookup). I suspect that in many places, TermIndex type hints could be replaced by either a TermsLookup or a TermLookup.\n\nTermLookup vs. TermsLookup is still very confusing.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_eaa357a6",
+        "filename": "lib/includes/store/sql/TermsSQLLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "Misleading name, ther is no sql here. This is completely generic and will work with any implementation of TermIndex.\n\nIn fact, I think we don\u0027t need this class. TermLookup should just be implemented by TermSqlIndex etc.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_4a7ccb1b",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "If TermIndex would extend TermLookup as proposed, we wouldn\u0027t need this extra param.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_2a813ffd",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "If TermIndex would extend TermLookup as proposed, we wouldn\u0027t need this extra param.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_0a76c339",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "If TermLookup encapsulates knowledge about the desired language, it would just take $options-\u003egetOption( ValueFormatter::OPT_LANG ) as a parameter.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_ca8f7b25",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "nice",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_6a966744",
+        "filename": "repo/includes/content/ItemHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "There should be an interface that exposes the invalidate method. Type hinting against the implementation here is bad.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_4a9b6b68",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "If TermLookup encapsulates knowledge about language handling, we could/need to decide here if and how fallaback is applied.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_2aa05f8c",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:14:33Z",
+      "side": 1,
+      "message": "If TermIndex etends TermsLookup, we wouldn\u0027t need this.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
