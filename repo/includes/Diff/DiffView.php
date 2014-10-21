@@ -89,7 +89,6 @@ class DiffView extends ContextSource {
 		if ( !is_null( $contextSource ) ) {
 			$this->setContext( $contextSource );
 		}
-		$this->siteStore = $siteStore;
 	}
 
 	/**
@@ -181,15 +180,17 @@ class DiffView extends ContextSource {
 	/**
 	 * @param string $value
 	 * @param string[] $path
+	 *
 	 * @return string
 	 */
 	private function getDeletedLine( $value, array $path ) {
-		return $this->getChangedLine( 'del', $value, $path );;
+		return $this->getChangedLine( 'del', $value, $path );
 	}
 
 	/**
 	 * @param string $value
 	 * @param string[] $path
+	 *
 	 * @return string
 	 */
 	private function getAddedLine( $value, array $path ) {
@@ -200,6 +201,7 @@ class DiffView extends ContextSource {
 	 * @param string $tag
 	 * @param string $value
 	 * @param string[] $path
+	 *
 	 * @return string
 	 */
 	private function getChangedLine( $tag, $value, array $path ) {
@@ -256,6 +258,7 @@ class DiffView extends ContextSource {
 	 * @todo this is copied from SpecialSetSiteLink
 	 *
 	 * @param EntityId $badgeId
+	 *
 	 * @return string
 	 */
 	private function getLabelForBadge( EntityId $badgeId ) {
