@@ -437,7 +437,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$claim->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 
 		$item->addClaim( $claim );
-		$item = $store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE )->getEntity();
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE )->getEntity();
 
 		// try to change the main snak's property
 		$badProperty = Property::newFromType( 'string' );

@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\PropertyContent;
 
 /**
  * @covers Wikibase\PropertyContent

@@ -28,7 +28,7 @@ class SpecialListDataTypesTest extends SpecialPageTestBase {
 		//      block. That is, the default should let the user execute
 		//      the page.
 
-		list( $output, ) = $this->executeSpecialPage( '' );
+		$this->executeSpecialPage( '' );
 		$this->assertTrue( true, 'Calling execute without any subpage value' );
 	}
 

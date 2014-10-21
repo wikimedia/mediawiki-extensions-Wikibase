@@ -48,7 +48,7 @@ class SpecialEntitiesWithoutDescriptionTest extends SpecialPageTestBase {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 
-		list( $output, ) = $this->executeSpecialPage( 'en' );
+		$this->executeSpecialPage( 'en' );
 		$this->assertTrue( true, 'Calling execute with a subpage value' ); //TODO: assert output
 	}
 
