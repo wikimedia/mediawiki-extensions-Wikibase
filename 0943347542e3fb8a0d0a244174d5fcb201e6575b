@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_6a1187b0",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:46:54Z",
+      "side": 1,
+      "message": "It\u0027s easier to unit test getValidators than it was to test applyValidators.",
+      "parentUuid": "8e96e304_e65e397b",
+      "revId": "0943347542e3fb8a0d0a244174d5fcb201e6575b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_867895ee",
         "filename": "repo/includes/content/EntityHandler.php",
         "patchSetId": 4
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_8a1413a2",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:46:54Z",
+      "side": 1,
+      "message": "PHPStorm does. I usually remember to remove them, but sometimes I forget.",
+      "parentUuid": "8e96e304_867895ee",
+      "revId": "0943347542e3fb8a0d0a244174d5fcb201e6575b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_c6553d54",
         "filename": "repo/includes/content/EntityHandler.php",
         "patchSetId": 4
@@ -64,6 +100,24 @@
       "writtenOn": "2014-10-20T18:11:54Z",
       "side": 1,
       "message": "This is odd. Why inject a service and expose it the same time? Personally I don\u0027t have a big problem with that. Just wondering if it\u0027s an okish pattern.",
+      "revId": "0943347542e3fb8a0d0a244174d5fcb201e6575b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_2a593f90",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:46:54Z",
+      "side": 1,
+      "message": "Exposing something that was injected is not an issue by itself. But I agree that it\u0027s kind of odd to have this in the EntityHandler. The alternative would be to inject it into the EntityCountent (which really shouldn\u0027t know any services); or we could expose a specialized localizeValidationErrors method.",
+      "parentUuid": "8e96e304_c6553d54",
       "revId": "0943347542e3fb8a0d0a244174d5fcb201e6575b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
