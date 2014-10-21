@@ -11,6 +11,8 @@ use Wikibase\Change;
 use Wikibase\ChangeHandler;
 use Wikibase\ChangesTable;
 use Wikibase\Client\Store\TitleFactory;
+use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
@@ -77,6 +79,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$handler = new ChangeHandler(
 			$changeFactory,
 			$affectedPagesFinder,
+			$titleFactory,
 			$updater,
 			$repo,
 			$this->site,
@@ -1069,7 +1072,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 						foreach ( $links as $link ) {
 							if ( $link->getSiteId() == $site->getGlobalId() ) {
 								// we use the numeric item id as the fake page id of the local page!
-								$pages[] = $id->getNumericId();
+								$usages = array( new EntityUsage( $id, EntityUsage::SITELINK_USAGE ) );
+								$pages[] = new PageEntityUsages( $id->getNumericId(), $usages );
 							}
 						}
 					}

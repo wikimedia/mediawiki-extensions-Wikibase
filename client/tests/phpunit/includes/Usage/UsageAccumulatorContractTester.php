@@ -33,7 +33,7 @@ class UsageAccumulatorContractTester  {
 
 		$this->usageAccumulator->addSitelinksUsage( $q2 );
 		$this->usageAccumulator->addLabelUsage( $q2 );
-		$this->usageAccumulator->addPageUsage( $q2 );
+		$this->usageAccumulator->addTitleUsage( $q2 );
 		$this->usageAccumulator->addAllUsage( $q3 );
 
 		$usage = $this->usageAccumulator->getUsages();

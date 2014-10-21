@@ -10,6 +10,7 @@ use InvalidArgumentException;
 use Iterator;
 use LoadBalancer;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\Usage\UsageTrackerException;
@@ -311,12 +312,12 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		$res = $db->select(
 			$this->tableName,
-			array( 'DISTINCT eu_page_id' ),
+			array( 'eu_page_id', 'eu_entity_id', 'eu_aspect' ),
 			$where,
 			__METHOD__
 		);
 
-		$pages = $this->convertRowsToPageIds( $res );
+		$pages = $this->foldRowsIntoPageEntityUsages( $res );
 
 		$this->releaseConnection( $db );
 
@@ -327,15 +328,28 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	/**
 	 * @param array|Iterator $rows
 	 *
-	 * @return array
+	 * @return PageEntityUsages[]
 	 */
-	private function convertRowsToPageIds( $rows ) {
-		$pages = array();
+	private function foldRowsIntoPageEntityUsages( $rows ) {
+		$usagesPerPage = array();
+
 		foreach ( $rows as $row ) {
-			$pages[] = (int)$row->eu_page_id;
+			$pageId = (int)$row->eu_page_id;
+
+			if ( isset( $usagesPerPage[$pageId] ) ) {
+				$pageEntityUsages = $usagesPerPage[$pageId];
+			} else {
+				$pageEntityUsages = new PageEntityUsages( $pageId );
+			}
+
+			$entityId = $this->idParser->parse( $row->eu_entity_id );
+			$usage = new EntityUsage( $entityId, $row->eu_aspect );
+			$pageEntityUsages->addUsages( array( $usage ) );
+
+			$usagesPerPage[$pageId] = $pageEntityUsages;
 		}
 
-		return $pages;
+		return $usagesPerPage;
 	}
 
 
