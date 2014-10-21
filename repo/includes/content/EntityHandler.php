@@ -24,8 +24,9 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\NamespaceUtils;
+use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
 use Wikibase\Validators\EntityValidator;
@@ -435,7 +436,9 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return int
 	 */
 	final public function getEntityNamespace() {
-		return NamespaceUtils::getEntityNamespace( $this->getModelID() );
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		return $entityNamespaceLookup->getEntityNamespace( $this->getModelID() );
 	}
 
 	/**

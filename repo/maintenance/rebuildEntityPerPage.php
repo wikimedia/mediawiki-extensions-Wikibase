@@ -50,15 +50,13 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 			array( $this, 'report' )
 		);
 
-		$entityPerPageTable = WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage();
 		$wikibaseRepo =  WikibaseRepo::getDefaultInstance();
-		$entityIdParser = $wikibaseRepo->getEntityIdParser();
-		$contentModels = $wikibaseRepo->getContentModelMappings();
 
 		$builder = new EntityPerPageBuilder(
-			$entityPerPageTable,
-			$entityIdParser,
-			$contentModels
+			$wikibaseRepo->getStore()->newEntityPerPage(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$wikibaseRepo->getContentModelMappings()
 		);
 
 		$builder->setReporter( $reporter );

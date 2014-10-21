@@ -198,7 +198,9 @@ final class RepoHooks {
 	public static function onNamespaceIsMovable( $ns, &$movable ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( NamespaceUtils::isEntityNamespace( $ns ) ) {
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		if ( $entityNamespaceLookup->isEntityNamespace( $ns ) ) {
 			$movable = false;
 		}
 
@@ -584,6 +586,8 @@ final class RepoHooks {
 	public static function onWikibaseDeleteData( $reportMessage ) {
 		wfProfileIn( __METHOD__ );
 
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
 		$reportMessage( 'Deleting data from changes table...' );
 
 		$dbw = wfGetDB( DB_MASTER );
@@ -594,7 +598,7 @@ final class RepoHooks {
 
 		$reportMessage( 'Deleting revisions from Data NS...' );
 
-		$namespaceList = $dbw->makeList( NamespaceUtils::getEntityNamespaces(), LIST_COMMA );
+		$namespaceList = $dbw->makeList( $entityNamespaceLookup->getEntityNamespaces(), LIST_COMMA );
 
 		$dbw->deleteJoin(
 			'revision', 'page',
@@ -947,8 +951,9 @@ final class RepoHooks {
 	 */
 	public static function onShowSearchHitTitle( &$link_t, &$titleSnippet, SearchResult $result ) {
 		$title = $result->getTitle();
+		$entityNamespaceLookup = WikibsseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		if ( NamespaceUtils::isEntityNamespace( $title->getNamespace() ) ) {
+		if ( $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			$titleSnippet = $title->getPrefixedText();
 		}
 
@@ -971,7 +976,9 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onTitleGetRestrictionTypes( Title $title, array &$types ) {
-		if ( NamespaceUtils::isEntityNamespace( $title->getNamespace() ) ) {
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		if ( $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			// Remove create and move protection for Wikibase namespaces
 			$types = array_diff( $types, array( 'create', 'move' ) );
 		}
@@ -1121,7 +1128,9 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
-		if ( !NamespaceUtils::isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		if ( $entityNamespaceLookup->isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
 			return true;
 		}
 
@@ -1148,7 +1157,9 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onMakeGlobalVariablesScript( $vars, $out ) {
-		if ( !NamespaceUtils::isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		if ( $entityNamespaceLookup->isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
 			return true;
 		}
 
@@ -1182,7 +1193,12 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onContentModelCanBeUsedOn( $contentModel, Title $title, &$ok ) {
-		$expectedModel = array_search( $title->getNamespace(), NamespaceUtils::getEntityNamespaces() );
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		$expectedModel = array_search(
+			$title->getNamespace(),
+			$entityNamespaceLookup->getEntityNamespaces()
+		);
 
 		// If the namespace is an entity namespace, the content model
 		// must be the model assigned to that namespace.
@@ -1308,8 +1324,9 @@ final class RepoHooks {
 		array &$navigationUrls
 	) {
 		$title = $skinTemplate->getTitle();
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		if ( !NamespaceUtils::isEntityNamespace( $title->getNamespace() ) ) {
+		if ( $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			return true;
 		}
 
