@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Localizer;
 
 use Exception;
 use InvalidArgumentException;
+use Message;
 
 /**
  * ExceptionLocalizer implementing localization of some well known types of exceptions
@@ -73,4 +74,5 @@ class DispatchingExceptionLocalizer implements ExceptionLocalizer {
 
 		return null;
 	}
+
 }

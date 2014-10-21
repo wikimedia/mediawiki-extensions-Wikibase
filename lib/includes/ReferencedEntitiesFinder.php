@@ -2,8 +2,10 @@
 
 namespace Wikibase;
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * Finds linked entities given a list of entities or a list of claims.

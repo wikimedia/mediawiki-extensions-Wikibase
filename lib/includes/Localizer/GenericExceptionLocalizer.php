@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Localizer;
 
 use Exception;
+use Message;
 
 /**
  * @license GPL 2+

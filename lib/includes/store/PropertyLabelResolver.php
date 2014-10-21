@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Wikibase\DataModel\Entity\EntityId;
+
 /**
  * Resolves property labels (which are unique per language) into entity IDs.
  *

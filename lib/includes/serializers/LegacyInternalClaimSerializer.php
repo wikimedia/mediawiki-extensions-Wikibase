@@ -3,10 +3,11 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
+use Serializers\Serializer;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\Repo\WikibaseRepo;
 
-class LegacyInternalClaimSerializer implements \Serializers\Serializer {
+class LegacyInternalClaimSerializer implements Serializer {
 
 	/**
 	 * @see Serializer::getSerialized

@@ -98,6 +98,7 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 	 *
 	 * @param array $serialization
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Snak
 	 */
 	public function newFromSerialization( array $serialization ) {
