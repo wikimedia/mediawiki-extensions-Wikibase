@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_8ad173d2",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:55:21Z",
+      "side": 1,
+      "message": "I don\u0027t see how this is odd. Tracking the language would allow for more fine grained optimization of purges, but would on the other hand waste a lot of space in the database, and would make the code more complex. It\u0027s a simple trade-off.",
+      "parentUuid": "8e96e304_e154e3cb",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_2102cbbe",
         "filename": "client/includes/LangLinkHandler.php",
         "patchSetId": 17
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-20T18:39:00Z",
       "side": 1,
       "message": "A new object every time? How often is this called?",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_2ad85ff3",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:55:21Z",
+      "side": 1,
+      "message": "This is called once when a page is edited.\nAn accumulator is stateful by nature, so we will always need a fresh one.",
+      "parentUuid": "8e96e304_2102cbbe",
       "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_4ad36bd7",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:55:21Z",
+      "side": 1,
+      "message": "That would do the same, but I like it better this way: it may it easier to add constructor parameters, or allow usages to be passed in later. Don\u0027t care much though.",
+      "parentUuid": "8e96e304_41dd9746",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_81f2bfcb",
         "filename": "client/includes/Usage/HashUsageAccumulator.php",
         "patchSetId": 17
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_aaeb0f76",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:55:21Z",
+      "side": 1,
+      "message": "The idea was to make it easy to transfer usages from one accumulator to another. Not using that right now though.",
+      "parentUuid": "8e96e304_81f2bfcb",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_61f533b5",
         "filename": "client/includes/Usage/HashUsageAccumulator.php",
         "patchSetId": 17
@@ -81,6 +153,24 @@
       "writtenOn": "2014-10-20T18:39:00Z",
       "side": 1,
       "message": "SiteLinks with upper case L please. I know we do this wrong in most places. Ask Aude.",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_6ae5079f",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:55:21Z",
+      "side": 1,
+      "message": "Whatevers ;)",
+      "parentUuid": "8e96e304_61f533b5",
       "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -115,6 +205,24 @@
       "writtenOn": "2014-10-20T18:39:00Z",
       "side": 1,
       "message": "What \"given page\"? There is nothing about this in the interface.",
+      "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_4afa8b41",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-21T11:55:21Z",
+      "side": 1,
+      "message": "Indeed. This is supposed to mean that the object should *know* which page the usage is being tracked for. That is, a UsageAccumulator object is always bound to a specific page.",
+      "parentUuid": "8e96e304_c1cf6781",
       "revId": "16fd850c96d45759999b4c2d988520d40e19d2e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
