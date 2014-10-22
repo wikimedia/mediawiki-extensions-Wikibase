@@ -57,6 +57,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			array( 'getPropertyLabelResolver', 'Wikibase\PropertyLabelResolver' ),
 			array( 'newChangesTable', 'Wikibase\ChangesTable' ),
 			array( 'getPropertyInfoStore', 'Wikibase\PropertyInfoStore' ),
+			array( 'getItemUsageIndex', 'Wikibase\ItemUsageIndex' ),
 			array( 'getUsageTracker', 'Wikibase\Client\Usage\UsageTracker' ),
 			array( 'getUsageLookup', 'Wikibase\Client\Usage\UsageLookup' ),
 			array( 'getSubscriptionManager', 'Wikibase\Client\Usage\SubscriptionManager' ),

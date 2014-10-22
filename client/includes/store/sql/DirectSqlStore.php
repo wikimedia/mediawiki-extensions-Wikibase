@@ -56,6 +56,11 @@ class DirectSqlStore implements ClientStore {
 	private $propertyInfoTable = null;
 
 	/**
+	 * @var ItemUsageIndex
+	 */
+	private $itemUsageIndex = null;
+
+	/**
 	 * @var EntityIdParser
 	 */
 	private $idParser;
@@ -180,6 +185,30 @@ class DirectSqlStore implements ClientStore {
 		}
 
 		return $this->usageTracker;
+	}
+
+	/**
+	 * @see Store::getItemUsageIndex
+	 *
+	 * @since 0.4
+	 *
+	 * @return ItemUsageIndex
+	 */
+	public function getItemUsageIndex() {
+		if ( !$this->itemUsageIndex ) {
+			$this->itemUsageIndex = $this->newItemUsageIndex();
+		}
+
+		return $this->itemUsageIndex;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return ItemUsageIndex
+	 */
+	protected function newItemUsageIndex() {
+		return new ItemUsageIndex( $this->getSite(), $this->getSiteLinkTable() );
 	}
 
 	/**
