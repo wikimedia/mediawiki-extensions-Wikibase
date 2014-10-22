@@ -278,10 +278,17 @@ class SqlStore implements Store {
 		);
 
 		$table = new PropertyInfoTable( false );
-		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
-		$useRedirectTargetColumn = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup( $contentCodec, false );
+		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
+		$useRedirectTargetColumn = $wikibaseRepo->getSettings()->getSetting( 'useRedirectTargetColumn' );
+
+		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
+			$contentCodec,
+			$wikibaseRepo->getEntityIdParser(),
+			false
+		);
+
 		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
 		$entityLookup = new RevisionBasedEntityLookup( $cachingEntityLookup );
 
@@ -569,7 +576,11 @@ class SqlStore implements Store {
 		//NOTE: Keep in sync with DirectSqlStore::newEntityLookup on the client
 		$key = $this->cachePrefix . ':WikiPageEntityRevisionLookup';
 
-		$rawLookup = new WikiPageEntityRevisionLookup( $this->contentCodec, false );
+		$rawLookup = new WikiPageEntityRevisionLookup(
+			$this->contentCodec,
+			$this->entityIdParser,
+			false
+		);
 
 		// Maintain a list of watchers to be notified of changes to any entities,
 		// in order to update caches.
