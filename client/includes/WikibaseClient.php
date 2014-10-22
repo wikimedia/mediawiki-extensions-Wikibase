@@ -82,6 +82,11 @@ final class WikibaseClient {
 	private $dataTypeFactory = null;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser = null;
+
+	/**
 	 * @var LanguageFallbackChainFactory
 	 */
 	private $languageFallbackChainFactory = null;
@@ -179,8 +184,12 @@ final class WikibaseClient {
 	 * @return EntityIdParser
 	 */
 	public function getEntityIdParser() {
-		//TODO: make the ID builders configurable
-		return new DispatchingEntityIdParser( BasicEntityIdParser::getBuilders() );
+		if ( $this->entityIdParser === null ) {
+			//TODO: make the ID builders configurable
+			$this->entityIdParser = new DispatchingEntityIdParser( BasicEntityIdParser::getBuilders() );
+		}
+
+		return $this->entityIdParser;
 	}
 
 	/**
