@@ -204,10 +204,10 @@ class CreateRedirectModuleTest extends \PHPUnit_Framework_TestCase {
 	public function testModuleFlags() {
 		$module = $this->newApiModule( array() );
 
-		$this->isTrue( $module->mustBePosted(), 'mustBePosted' );
-		$this->isTrue( $module->isWriteMode(), 'isWriteMode' );
-		$this->isTrue( $module->needsToken(), 'needsToken' );
-		$this->isTrue( $module->getTokenSalt(), 'getTokenSalt' );
+		$this->assertTrue( $module->mustBePosted(), 'mustBePosted' );
+		$this->assertTrue( $module->isWriteMode(), 'isWriteMode' );
+		$this->assertEquals( $module->needsToken(), 'csrf', 'needsToken' );
+		$this->assertEquals( $module->getTokenSalt(), '', 'getTokenSalt' );
 
 		//NOTE: Would be nice to test the token check directly, but that is done via
 		//      ApiMain::execute, which is bypassed by callApiModule().
