@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_b2ed06b7",
+        "filename": "lib/resources/jquery.wikibase/toolbar/jquery.wikibase.toolbarcontroller.definitions.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-22T10:20:25Z",
+      "side": 1,
+      "message": "Fixed the type.\n\nI see what you mean. The problem is that parameters with \"or\" are always a bit odd. Not sure what the best practice should be in such cases. I touched this because the additional variable below was reported as useless.",
+      "parentUuid": "8e96e304_90576405",
+      "revId": "4f4537e41c8a55ca0d47f9ae9a9bd2e13a901f0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_f047c84e",
         "filename": "lib/resources/templates.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-21T15:05:42Z",
       "side": 1,
       "message": "Now, there is an empty block JSHint error.",
+      "revId": "4f4537e41c8a55ca0d47f9ae9a9bd2e13a901f0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d2ea129c",
+        "filename": "lib/resources/templates.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-22T10:20:25Z",
+      "side": 1,
+      "message": "Really? Lol. ;-) Better not touch this then.",
+      "parentUuid": "8e96e304_f047c84e",
       "revId": "4f4537e41c8a55ca0d47f9ae9a9bd2e13a901f0e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
