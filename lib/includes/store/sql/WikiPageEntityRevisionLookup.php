@@ -6,7 +6,6 @@ use DBAccessBase;
 use DBQueryError;
 use MWContentSerializationException;
 use Revision;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityRevision;
@@ -26,7 +25,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	/**
 	 * @var EntityIdParser
 	 */
-	protected $idParser;
+	protected $entityIdParser;
 
 	/**
 	 * @var EntityContentDataCodec
@@ -39,6 +38,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
+		EntityIdParser $entityIdParser,
 		$wiki = false
 	) {
 		parent::__construct( $wiki );
@@ -46,7 +46,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		$this->contentCodec = $contentCodec;
 
 		// TODO: migrate table away from using a numeric field so we no longer need this!
-		$this->idParser = new BasicEntityIdParser();
+		$this->entityIdParser = $entityIdParser;
 	}
 
 	/**
@@ -312,7 +312,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return mixed
 	 */
 	protected function getProperEntityId( EntityId $id ) {
-		return $this->idParser->parse( $id->getSerialization() );
+		return $this->entityIdParser->parse( $id->getSerialization() );
 	}
 
 	/**
