@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_92dc8a4d",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-22T13:07:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_d0a3acfb",
+      "revId": "e8305c5dc68b77045ad95f4fa0ed4881a2a84222",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_90ad24ea",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-21T15:07:36Z",
       "side": 1,
       "message": "Naming this $item is a bit deceptive in our codebase.\n\nIs this kind of dynamic property access not something HHVM does get mad about?",
+      "revId": "e8305c5dc68b77045ad95f4fa0ed4881a2a84222",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d2f1b2c9",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-22T13:07:53Z",
+      "side": 1,
+      "message": "Will change the name. As for HHVM, this might kill an optimization, yes.",
+      "parentUuid": "8e96e304_90ad24ea",
       "revId": "e8305c5dc68b77045ad95f4fa0ed4881a2a84222",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
