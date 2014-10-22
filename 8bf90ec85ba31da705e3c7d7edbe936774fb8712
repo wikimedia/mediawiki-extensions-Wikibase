@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_9549cf6c",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-22T20:55:26Z",
+      "side": 1,
+      "message": "What would be the alternative? \nAlso, entities without ID should not exist for long anyway...\nIt\u0027S a bit ugly, I agree. We only *really* need to know the entity type. The ID itself could be optional. But I didn\u0027t want to pass that around separately everywhere.",
+      "parentUuid": "6e936f18_9f3a4ee3",
+      "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_7fd4224c",
         "filename": "repo/tests/phpunit/includes/store/sql/TermSqlIndexTest.php",
         "patchSetId": 8
@@ -64,6 +82,24 @@
       "writtenOn": "2014-10-22T19:25:42Z",
       "side": 1,
       "message": "Labell -\u003e Label",
+      "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_5553471a",
+        "filename": "repo/tests/phpunit/includes/store/sql/TermSqlIndexTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-22T20:55:26Z",
+      "side": 1,
+      "message": "ugh ;)",
+      "parentUuid": "6e936f18_7fd4224c",
       "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
