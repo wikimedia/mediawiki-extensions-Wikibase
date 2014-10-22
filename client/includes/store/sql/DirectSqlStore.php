@@ -63,7 +63,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @var EntityIdParser
 	 */
-	private $idParser;
+	private $entityIdParser;
 
 	/**
 	 * @var String|bool $repoWiki
@@ -113,13 +113,13 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param Language $wikiLanguage
-	 * @param EntityIdParser $idParser
+	 * @param EntityIdParser $entityIdParser
 	 * @param string $repoWiki the symbolic database name of the repo wiki
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
 		Language $wikiLanguage,
-		EntityIdParser $idParser,
+		EntityIdParser $entityIdParser,
 		$repoWiki
 	) {
 		$this->repoWiki = $repoWiki;
@@ -136,7 +136,7 @@ class DirectSqlStore implements ClientStore {
 		$this->cachePrefix = $cachePrefix;
 		$this->cacheDuration = $cacheDuration;
 		$this->cacheType = $cacheType;
-		$this->idParser = $idParser;
+		$this->entityIdParser = $entityIdParser;
 	}
 
 	/**
@@ -181,7 +181,7 @@ class DirectSqlStore implements ClientStore {
 	public function getUsageTracker() {
 		if ( !$this->usageTracker ) {
 			$connectionManager = new ConnectionManager( $this->getLocalLoadBalancer() );
-			$this->usageTracker = new SqlUsageTracker( $this->idParser, $connectionManager );
+			$this->usageTracker = new SqlUsageTracker( $this->entityIdParser, $connectionManager );
 		}
 
 		return $this->usageTracker;
@@ -302,7 +302,11 @@ class DirectSqlStore implements ClientStore {
 		//NOTE: Keep in sync with SqlStore::newEntityLookup on the repo
 		$key = $this->cachePrefix . ':WikiPageEntityRevisionLookup';
 
-		$lookup = new WikiPageEntityRevisionLookup( $this->contentCodec, $this->repoWiki );
+		$lookup = new WikiPageEntityRevisionLookup(
+			$this->contentCodec,
+			$this->entityIdParser,
+			$this->repoWiki
+		);
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		// We need to verify the revision ID against the database to avoid stale data.
