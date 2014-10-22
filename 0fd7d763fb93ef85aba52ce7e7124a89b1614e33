@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_2619b727",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-22T12:59:23Z",
+      "side": 1,
+      "message": "will do",
+      "parentUuid": "6e936f18_a6f2a701",
+      "revId": "0fd7d763fb93ef85aba52ce7e7124a89b1614e33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_46f723f3",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 7
@@ -30,6 +48,41 @@
       "writtenOn": "2014-10-22T12:34:05Z",
       "side": 1,
       "message": "This will not catch a conflict (false negative) over both label and description if it does not occur in the first 10 label only conflicts, because the getLabelConflicts() above is limited to that.",
+      "revId": "0fd7d763fb93ef85aba52ce7e7124a89b1614e33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_c61573eb",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-22T12:59:23Z",
+      "side": 1,
+      "message": "You are right: if the entities that have at least one label conflict have a lot of description conflicts in languages that do not have label conflicts, then we might miss them...  Will look into fixing that.",
+      "parentUuid": "6e936f18_46f723f3",
+      "revId": "0fd7d763fb93ef85aba52ce7e7124a89b1614e33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_a6dce74c",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-22T12:59:23Z",
+      "side": 1,
+      "message": "Since we have a (presumingly short) list of entity IDs, we probably don\u0027t need this limit, which may hide conflicts in some cases (see above).",
       "revId": "0fd7d763fb93ef85aba52ce7e7124a89b1614e33",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
