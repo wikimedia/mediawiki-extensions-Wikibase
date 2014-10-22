@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_a6f2a701",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-10-22T12:34:05Z",
+      "side": 1,
+      "message": "This is not tested.",
+      "revId": "0fd7d763fb93ef85aba52ce7e7124a89b1614e33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_46f723f3",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-10-22T12:34:05Z",
+      "side": 1,
+      "message": "This will not catch a conflict (false negative) over both label and description if it does not occur in the first 10 label only conflicts, because the getLabelConflicts() above is limited to that.",
+      "revId": "0fd7d763fb93ef85aba52ce7e7124a89b1614e33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
