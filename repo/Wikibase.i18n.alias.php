@@ -160,15 +160,17 @@ $specialPageAliases['es'] = array(
 
 /** Finnish (suomi) */
 $specialPageAliases['fi'] = array(
-	'NewItem' => array( 'Luo_kohde' ),
+	'NewItem' => array( 'Uusi_kohde' ),
 	'NewProperty' => array( 'Uusi_ominaisuus' ),
 	'ItemByTitle' => array( 'Hae_kohdetta_otsikolla' ),
 	'ItemDisambiguation' => array( 'Kohteet_samalla_nimellä' ),
 	'SetLabel' => array( 'Aseta_nimi' ),
 	'SetDescription' => array( 'Aseta_kuvaus' ),
 	'SetAliases' => array( 'Aseta_aliakset' ),
+	'SetSiteLink' => array( 'Aseta_sivustolinkki' ),
 	'MergeItems' => array( 'Yhdistä_kohteita' ),
 	'EntitiesWithoutLabel' => array( 'Aiheet_ilman_nimeä' ),
+	'EntitiesWithoutDescription' => array( 'Aiheet_ilman_kuvausta' ),
 	'ItemsWithoutSitelinks' => array( 'Kohteet_ilman_sivustolinkkejä' ),
 );
 
