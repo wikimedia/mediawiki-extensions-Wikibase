@@ -1130,7 +1130,7 @@ final class RepoHooks {
 	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		if ( $entityNamespaceLookup->isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
+		if ( !$entityNamespaceLookup->isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
 			return true;
 		}
 
@@ -1159,7 +1159,7 @@ final class RepoHooks {
 	public static function onMakeGlobalVariablesScript( $vars, $out ) {
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		if ( $entityNamespaceLookup->isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
+		if ( !$entityNamespaceLookup->isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
 			return true;
 		}
 
@@ -1326,7 +1326,7 @@ final class RepoHooks {
 		$title = $skinTemplate->getTitle();
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		if ( $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+		if ( !$entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			return true;
 		}
 
