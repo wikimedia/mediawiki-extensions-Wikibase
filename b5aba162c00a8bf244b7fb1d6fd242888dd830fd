@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e936f18_bf462a53",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-10-22T19:25:42Z",
+      "side": 0,
+      "message": "Its test says that the test is broken, it should probably be fixed.",
+      "revId": "b5aba162c00a8bf244b7fb1d6fd242888dd830fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_05bfb8ce",
         "filename": "lib/tests/phpunit/store/TermIndexTest.php",
         "patchSetId": 3

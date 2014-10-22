@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_ff98327e",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-10-22T19:25:42Z",
+      "side": 1,
+      "message": "Labell -\u003e Label",
+      "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1f82bea9",
+        "filename": "repo/includes/Validators/FingerprintValidator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-10-22T19:25:42Z",
+      "side": 1,
+      "message": "not Optional anymore",
+      "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_9f3a4ee3",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-10-22T19:25:42Z",
+      "side": 1,
+      "message": "This is not yet tested. Also seems fishy. Is this usually done? Can the caller deal with it?",
+      "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_7fd4224c",
+        "filename": "repo/tests/phpunit/includes/store/sql/TermSqlIndexTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-10-22T19:25:42Z",
+      "side": 1,
+      "message": "Labell -\u003e Label",
+      "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
