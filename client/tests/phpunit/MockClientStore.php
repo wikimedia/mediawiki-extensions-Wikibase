@@ -18,7 +18,7 @@ class MockClientStore implements ClientStore {
 	public function getUsageLookup() {}
 	public function getUsageTracker() {}
 	public function getSubscriptionManager() {}
-
+	public function getItemUsage() {}
 	public function getPropertyLabelResolver() {}
 	public function getTermIndex() {}
 	public function newChangesTable() {}

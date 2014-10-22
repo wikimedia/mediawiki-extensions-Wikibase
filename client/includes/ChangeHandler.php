@@ -110,7 +110,7 @@ class ChangeHandler {
 		EntityChangeFactory $changeFactory = null,
 		PageUpdater $updater = null,
 		EntityRevisionLookup $entityRevisionLookup = null,
-		ItemUsageIndex $entityUsageIndex = null,
+		ItemUsageIndex $itemUsageIndex = null,
 		Site $localSite = null,
 		SiteList $sites = null
 	) {
@@ -132,8 +132,8 @@ class ChangeHandler {
 			$entityRevisionLookup = $wikibaseClient->getStore()->getEntityRevisionLookup();
 		}
 
-		if ( !$entityUsageIndex ) {
-			$entityUsageIndex = $wikibaseClient->getStore()->getItemUsageIndex();
+		if ( !$itemUsageIndex ) {
+			$itemUsageIndex = $wikibaseClient->getStore()->getItemUsageIndex();
 		}
 
 		if ( $sites === null ) {
@@ -156,7 +156,7 @@ class ChangeHandler {
 
 		$this->updater = $updater;
 		$this->entityRevisionLookup = $entityRevisionLookup;
-		$this->entityUsageIndex = $entityUsageIndex;
+		$this->itemUsageIndex = $itemUsageIndex;
 
 		$this->site = $localSite;
 		$this->siteId = $localSite->getGlobalId();
@@ -563,7 +563,7 @@ class ChangeHandler {
 
 		// todo inject!
 		$referencedPagesFinder = new ReferencedPagesFinder(
-			$this->entityUsageIndex,
+			$this->itemUsageIndex,
 			$this->namespaceChecker,
 			$this->siteId,
 			$this->checkPageExistence
