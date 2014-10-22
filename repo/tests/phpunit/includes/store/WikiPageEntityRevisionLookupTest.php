@@ -80,6 +80,7 @@ class WikipageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 		return new WikiPageEntityRevisionLookup(
 			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			new BasicEntityIdParser(),
 			false
 		);
 	}

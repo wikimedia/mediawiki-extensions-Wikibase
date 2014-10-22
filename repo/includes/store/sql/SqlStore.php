@@ -281,7 +281,12 @@ class SqlStore implements Store {
 		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
 		$useRedirectTargetColumn = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
 
-		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup( $contentCodec, false );
+		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
+			$contentCodec,
+			$this->entityIdParser,
+			false
+		);
+
 		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
 		$entityLookup = new RevisionBasedEntityLookup( $cachingEntityLookup );
 
