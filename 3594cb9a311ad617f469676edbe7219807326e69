@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_126b9a83",
+        "filename": "repo/maintenance/rebuildItemsPerSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-22T08:24:35Z",
+      "side": 0,
+      "message": "Removal is correct, the SqlStore manages this config itself.",
+      "range": {
+        "startLine": 64,
+        "startChar": 93,
+        "endLine": 64,
+        "endChar": 116
+      },
+      "revId": "3594cb9a311ad617f469676edbe7219807326e69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d26452b1",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpReferenceTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-22T08:24:35Z",
+      "side": 0,
+      "message": "Removal is correct, has been moved to testValidate.",
+      "revId": "3594cb9a311ad617f469676edbe7219807326e69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_52104204",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialEntitiesWithoutDescriptionTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-22T08:24:35Z",
+      "side": 0,
+      "message": "ok.",
+      "revId": "3594cb9a311ad617f469676edbe7219807326e69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_f2f4eecd",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialItemsWithoutSitelinksTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-22T08:24:35Z",
+      "side": 0,
+      "message": "Rather fix the todo above than remove this.",
+      "revId": "3594cb9a311ad617f469676edbe7219807326e69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b2fe66aa",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialListDatatypesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-22T08:24:35Z",
+      "side": 0,
+      "message": "Rather fix the todo than remove this.",
+      "revId": "3594cb9a311ad617f469676edbe7219807326e69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
