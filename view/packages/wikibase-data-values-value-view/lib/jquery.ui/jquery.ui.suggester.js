@@ -279,6 +279,15 @@
 						break;
 
 					default:
+						if( self.element.val() === ''
+							&& (
+								event.keyCode === keyCode.BACKSPACE
+								|| event.keyCode === keyCode.DELETE
+							)
+						) {
+							break;
+						}
+
 						clearTimeout( self.__searching );
 						self.__searching = setTimeout( function() {
 							// Only search if the value has changed:
@@ -286,7 +295,10 @@
 								self._selectedItem = null;
 								self.search( event )
 								.done( function() {
-									self._trigger( 'change' );
+									// Widget might have been destroyed in the meantime.
+									if( self.element.data( this.widgetName ) ) {
+										self._trigger( 'change' );
+									}
 								} );
 							}
 						}, self.options.delay );

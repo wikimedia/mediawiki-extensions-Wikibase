@@ -105,9 +105,14 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.7.1 (dev)
+
+#### Enhancements
+* $.ui.suggester: Hitting the backspace or delete key if the input is empty already does not trigger search anymore.
+
 ### 0.7.0 (2014-09-10)
 
-### Enhancements
+#### Enhancements
 * Implemented jQuery.ui.languagesuggester.
 * Input extender extension will not be hidden on mousedown event.
 
