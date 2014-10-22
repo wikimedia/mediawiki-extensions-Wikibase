@@ -349,6 +349,7 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.datamodel',
 				'wikibase.RepoApiError',
+				'wikibase.sites',
 				'wikibase.templates',
 				'wikibase.utilities', // wikibase.utilities.ui
 			),
