@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use MWException;
-use TestSites;
 use Title;
 use User;
 use Wikibase\Repo\EntityNamespaceLookup;
@@ -35,14 +34,6 @@ class EditEntityActionTest extends ActionTestCase {
 		if ( !$user ) {
 			$user = User::newFromId( 0 );
 			$user->setName( '127.0.0.1' );
-		}
-
-		static $hasTitles = false;
-		if ( !$hasTitles ) {
-			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
-			$sitesTable->clear();
-			$sitesTable->saveSites( TestSites::getSites() );
-			$hasTitles = true;
 		}
 
 		$this->setMwGlobals( 'wgUser', $user );

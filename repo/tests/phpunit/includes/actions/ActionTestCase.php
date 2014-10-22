@@ -40,27 +40,18 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 *
 	 * @var string
 	 */
-	protected $language = 'qqx';
+	protected $languageCode = 'qqx';
 
 	public function setUp() {
 		parent::setUp();
 
-		static $setUp = false;
-		if ( !$setUp ) {
-			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
-			$sitesTable->clear();
-			$sitesTable->saveSites( \TestSites::getSites() );
-			$setUp = true;
-		}
-
-		$lang = Language::factory( $this->language );
-		$user = new User();
-		$user->setName( "ActionTestUser" );
+		$testUser = new \TestUser( 'ActionTestUser' );
+		$user = $testUser->getUser();
 		$user->setId( 123456789 );
 
 		$this->setMwGlobals( array(
 			'wgUser' => $user,
-			'wgLang' => $lang,
+			'wgLang' => Language::factory( $this->languageCode ),
 			'wgRequest' => new FauxRequest(),
 			'wgGroupPermissions' => $GLOBALS['wgGroupPermissions'], // todo: use standard permissions
 		) );

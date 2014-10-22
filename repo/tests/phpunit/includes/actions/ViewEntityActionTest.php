@@ -24,7 +24,7 @@ class ViewEntityActionTest extends ActionTestCase {
 
 	public function setUp() {
 		// NOTE: use a language here for which we actually have labels etc
-		$this->language = 'de';
+		$this->languageCode = 'de';
 
 		// Remove handlers for the "OutputPageParserOutput" hook
 		$this->mergeMwGlobalArrayValue( 'wgHooks', array( 'OutputPageParserOutput' => array() ) );
