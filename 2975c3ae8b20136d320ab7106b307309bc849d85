@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_ce910154",
+        "filename": "lib/resources/entityChangers/SiteLinksChanger.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-23T15:09:33Z",
+      "side": 1,
+      "message": "Order is a bit messed up, api should be first (see above).",
+      "revId": "2975c3ae8b20136d320ab7106b307309bc849d85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_ae8b551a",
+        "filename": "lib/resources/entityChangers/SiteLinksChanger.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-23T15:09:33Z",
+      "side": 1,
+      "message": "No space between } and (, I think.",
+      "revId": "2975c3ae8b20136d320ab7106b307309bc849d85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
