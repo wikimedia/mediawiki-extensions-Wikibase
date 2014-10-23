@@ -44,6 +44,7 @@
 	"wikibase-aliases-input-help-message": "ХӀара элемент атта кара яйта язъе кхуза йогӀуш йолу цӀе.",
 	"wikibase-aliases-empty": "ЦӀе билгалйина яц",
 	"wikibase-propertypage-datatype": "Хаамашан тайп",
+	"wikibase-claimview-snak-new-tooltip": "Билгало язйича цуна маьӀна яздан мегар ду. Билгалонан маьӀна дацахь я карара маьӀна хууш дацахь, яздечу меттиган уллера хьаьркан тӀетаӀӀина альтернативан маьӀна харжа йиш ю.",
 	"wikibase-statementview-rank-preferred": "Бакъхьа хета ранг",
 	"wikibase-statementview-rank-normal": "ЛартӀахь йолу ранг",
 	"wikibase-statementview-rank-deprecated": "Мегаш йоцу ранг",

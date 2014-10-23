@@ -10,7 +10,7 @@
 			"Sebastian Wallroth"
 		]
 	},
-	"wikibase-lib-desc": "Stellt dem Repositorium strukturierter Daten Funktionen bereit",
+	"wikibase-lib-desc": "Stellt dem Repositorium strukturierter Daten gemeinsam nutzbare Funktionen bereit",
 	"wikibase-entity-item": "Datenobjekt",
 	"wikibase-entity-property": "Eigenschaft",
 	"wikibase-entity-query": "Abfrage",

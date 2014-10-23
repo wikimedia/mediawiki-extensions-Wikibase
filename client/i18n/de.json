@@ -6,7 +6,7 @@
 			"Purodha"
 		]
 	},
-	"wikibase-client-desc": "Client für die Wikibase-Erweiterung",
+	"wikibase-client-desc": "Stellt einen Client für die Erweiterung Wikibase bereit",
 	"specialpages-group-wikibaseclient": "{{WBREPONAME}}-Client",
 	"tooltip-t-wikibase": "Link zum verbundenen Datenrepositoriumsobjekt",
 	"wikibase-after-page-move": "Du kannst auch das zugeordnete {{WBREPONAME}}-Element [$1 aktualisieren], um Sprachlinks von verschobenen Seiten zu verwalten.",
