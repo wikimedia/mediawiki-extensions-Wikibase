@@ -37,20 +37,24 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 	}
 
 	public function validFingerprintProvider() {
+		$q99 = new ItemId( 'Q99' );
+
 		return array(
 			'no description' => array(
 				new Fingerprint(
 					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
 					new TermList( array() ),
 					new AliasGroupList( array() )
-				)
+				),
+				$q99
 			),
 			'non-dupe description' => array(
 				new Fingerprint(
 					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
 					new TermList( array( new Term( 'de', 'Foo' ) ) ),
 					new AliasGroupList( array() )
-				)
+				),
+				$q99
 			),
 
 			'self conflict' => array(
@@ -69,7 +73,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
 					new AliasGroupList( array() )
 				),
-				null,
+				$q99,
 				array( 'en' ) // only consider conflicts in english
 			),
 		);
@@ -91,16 +95,20 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 	public function validEntityProvider() {
 		$cases = array();
 
-		$i = 1;
 		foreach ( $this->validFingerprintProvider() as $name => $fingerprintCase ) {
-			// if the case has a non-null entityId or languageCodes param, skip it
-			if ( isset( $fingerprintCase[1] ) || isset( $fingerprintCase[2] ) ) {
+			// if the case has a non-null languageCodes or a strange entityId param, skip it
+			if ( isset( $fingerprintCase[2] ) || !( $fingerprintCase[1] instanceof ItemId ) ) {
 				continue;
 			}
 
-			$id = new ItemId( 'Q' . $i++ );
+			$id = $fingerprintCase[1];
 			$cases[$name] = $this->fingerprintCaseToEntityCase( $fingerprintCase, $id );
 		}
+
+		// check validation without entity id
+		$cases["no id"] = array(
+			Item::newEmpty(),
+		);
 
 		return $cases;
 	}
@@ -128,7 +136,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 	 */
 	public function testValidateFingerprint(
 		Fingerprint $fingerprint,
-		EntityId $entityId = null,
+		EntityId $entityId,
 		array $languageCodes = null
 	) {
 		$dupeDetector = $this->getMockDupeDetector();
@@ -191,7 +199,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 		$dupeDetector = $this->getMockDupeDetector();
 		$validator = new LabelDescriptionUniquenessValidator( $dupeDetector );
 
-		$result = $validator->validateFingerprint( $fingerprint );
+		$result = $validator->validateFingerprint( $fingerprint, new ItemId( 'Q99' ) );
 
 		$this->assertFalse( $result->isValid(), 'isValid' );
 

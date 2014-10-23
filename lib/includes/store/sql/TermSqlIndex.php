@@ -4,9 +4,9 @@ namespace Wikibase;
 
 use DatabaseBase;
 use DBAccessBase;
+use InvalidArgumentException;
 use Iterator;
 use MWException;
-use ResultWrapper;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -36,6 +36,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 * @var StringNormalizer
 	 */
 	protected $stringNormalizer;
+
+	/**
+	 * @var int
+	 */
+	protected $maxConflicts = 10;
 
 	/**
 	 * Maps table fields to TermIndex interface field names.
@@ -601,18 +606,18 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 * @return array
 	 */
 	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() ) {
-		wfProfileIn( __METHOD__ );
-
 		if ( empty( $terms ) ) {
-			wfProfileOut( __METHOD__ );
 			return array();
 		}
 
-		$conditions = $this->termsToConditions( $terms, $termType, $entityType, false, $options );
-
-		$selectionFields = array_keys( $this->termFieldMap );
+		wfProfileIn( __METHOD__ );
 
 		$dbr = $this->getReadDb();
+
+		$termConditions = $this->termsToConditions( $dbr, $terms, $termType, $entityType, $options );
+		$where = array( implode( ' OR ', $termConditions ) );
+
+		$selectionFields = array_keys( $this->termFieldMap );
 
 		$queryOptions = array();
 
@@ -623,7 +628,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		$obtainedTerms = $dbr->select(
 			$this->tableName,
 			$selectionFields,
-			implode( ' OR ', $conditions ),
+			$where,
 			__METHOD__,
 			$queryOptions
 		);
@@ -649,20 +654,19 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 * @return EntityId[]
 	 */
 	public function getMatchingIDs( array $terms, $entityType, array $options = array() ) {
-		wfProfileIn( __METHOD__ );
-
 		if ( empty( $terms ) ) {
-			wfProfileOut( __METHOD__ );
 			return array();
 		}
+
+		wfProfileIn( __METHOD__ );
 
 		// this is the maximum limit of search results
 		// TODO this should not be hardcoded
 		$internalLimit = 5000;
 
-		$conditions = $this->termsToConditions( $terms, null, $entityType, false, $options );
-
 		$dbr = $this->getReadDb();
+
+		$conditions = $this->termsToConditions( $dbr, $terms, null, $entityType, $options );
 
 		$selectionFields = array( 'term_entity_id' );
 
@@ -735,17 +739,44 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	/**
 	 * @since 0.2
 	 *
+	 * @param DatabaseBase $db
 	 * @param Term[] $terms
-	 * @param string $termType
-	 * @param string $entityType
-	 * @param boolean $forJoin
-	 *            If the provided terms are used for a join.
-	 *            If so, the fields of each term get prefixed with a table name starting with terms0 and counting up.
+	 * @param string|null $termType
+	 * @param string|null $entityType
 	 * @param array $options
 	 *
 	 * @return array
 	 */
-	protected function termsToConditions( array $terms, $termType, $entityType, $forJoin = false, array $options = array() ) {
+	private function termsToConditions( DatabaseBase $db, array $terms, $termType, $entityType, array $options = array() ) {
+		wfProfileIn( __METHOD__ );
+
+		$conditions = array();
+
+		/**
+		 * @var Term $term
+		 */
+		foreach ( $terms as $index => $term ) {
+			$termConditions = $this->termMatchConditions( $db, $term, $termType, $entityType, $options );
+			$conditions[] = '(' . implode( ' AND ', $termConditions ) . ')';
+		}
+
+		wfProfileOut( __METHOD__ );
+
+		return $conditions;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param DatabaseBase $db
+	 * @param Term $term
+	 * @param string|null $termType
+	 * @param string|null $entityType
+	 * @param array $options
+	 *
+	 * @return array
+	 */
+	protected function termMatchConditions( DatabaseBase $db, Term $term, $termType, $entityType, array $options = array() ) {
 		wfProfileIn( __METHOD__ );
 
 		$options = array_merge(
@@ -757,73 +788,53 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		);
 
 		$conditions = array();
-		$tableIndex = 0;
 
-		$dbr = $this->getReadDb();
+		$language = $term->getLanguage();
 
-		/**
-		 * @var Term $term
-		 */
-		foreach ( $terms as $term ) {
-			$fullTerm = array();
-
-			$language = $term->getLanguage();
-
-			if ( $language !== null ) {
-				$fullTerm['term_language'] = $language;
-			}
-
-			$text = $term->getText();
-
-			if ( $text !== null ) {
-				if ( $options['caseSensitive']
-					|| Settings::get( 'withoutTermSearchKey' ) ) {
-					//NOTE: whether this match is *actually* case sensitive depends on the collation used in the database.
-					$textField = 'term_text';
-				}
-				else {
-					$textField = 'term_search_key';
-					$text = $this->getSearchKey( $term->getText(), $term->getLanguage() );
-				}
-
-				if ( $options['prefixSearch'] ) {
-					$fullTerm[] = $textField . $dbr->buildLike( $text, $dbr->anyString() );
-				}
-				else {
-					$fullTerm[$textField] = $text;
-				}
-			}
-
-			if ( $term->getType() !== null ) {
-				$fullTerm['term_type'] = $term->getType();
-			}
-			elseif ( $termType !== null ) {
-				$fullTerm['term_type'] = $termType;
-			}
-
-			if ( $term->getEntityType() !== null ) {
-				$fullTerm['term_entity_type'] = $term->getEntityType();
-			}
-			elseif ( $entityType !== null ) {
-				$fullTerm['term_entity_type'] = $entityType;
-			}
-
-			$tableName = 'terms' . $tableIndex++;
-
-			foreach ( $fullTerm as $field => &$value ) {
-				if ( !is_int( $field ) ) {
-					$value = $field . '=' . $dbr->addQuotes( $value );
-				}
-
-				if ( $forJoin ) {
-					$value = $tableName . '.' . $value;
-				}
-			}
-
-			$conditions[] = '(' . implode( ' AND ', $fullTerm ) . ')';
+		if ( $language !== null ) {
+			$conditions['term_language'] = $language;
 		}
 
-		$this->releaseConnection( $dbr );
+		$text = $term->getText();
+
+		if ( $text !== null ) {
+			if ( $options['caseSensitive']
+				|| Settings::get( 'withoutTermSearchKey' ) ) {
+				//NOTE: whether this match is *actually* case sensitive depends on the collation used in the database.
+				$textField = 'term_text';
+			}
+			else {
+				$textField = 'term_search_key';
+				$text = $this->getSearchKey( $term->getText(), $term->getLanguage() );
+			}
+
+			if ( $options['prefixSearch'] ) {
+				$conditions[] = $textField . $db->buildLike( $text, $db->anyString() );
+			}
+			else {
+				$conditions[$textField] = $text;
+			}
+		}
+
+		if ( $term->getType() !== null ) {
+			$conditions['term_type'] = $term->getType();
+		}
+		elseif ( $termType !== null ) {
+			$conditions['term_type'] = $termType;
+		}
+
+		if ( $term->getEntityType() !== null ) {
+			$conditions['term_entity_type'] = $term->getEntityType();
+		}
+		elseif ( $entityType !== null ) {
+			$conditions['term_entity_type'] = $entityType;
+		}
+
+		foreach ( $conditions as $field => &$value ) {
+			if ( !is_int( $field ) ) {
+				$value = $field . '=' . $db->addQuotes( $value );
+			}
+		}
 
 		wfProfileOut( __METHOD__ );
 
@@ -884,137 +895,144 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * @see TermIndex::getMatchingTermCombination
+	 * @see LabelConflictFinder::getLabelConflicts
 	 *
-	 * Note: the interface specifies capability for only a single join, which in this implementation
-	 * is enforced by the $joinCount var. The code itself however could handle multiple joins.
+	 * @note: This implementation does not guarantee that all matches are returned.
+	 * The maximum number of conflicts returned is controlled by $this->maxConflicts.
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
-	 * @param array $terms
-	 * @param string|null $termType
-	 * @param string|null $entityType
-	 * @param EntityId|null $excludeId
+	 * @param string $entityType
+	 * @param string[] $labels
 	 *
-	 * @return array
+	 * @throws InvalidArgumentException
+	 * @return Term[]
 	 */
-	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, EntityId $excludeId = null ) {
-		wfProfileIn( __METHOD__ );
+	public function getLabelConflicts( $entityType, array $labels ) {
+		if ( !is_string( $entityType ) ) {
+			throw new InvalidArgumentException( '$entityType must be a string' );
+		}
 
-		if ( empty( $terms ) ) {
-			wfProfileOut( __METHOD__ );
+		if ( empty( $labels ) ) {
 			return array();
 		}
 
-		$conditions = array();
-		$joinCount = 1;
+		wfProfileIn( __METHOD__ );
+		$templates = $this->makeQueryTerms( $labels, Term::TYPE_LABEL );
+
+		$labelConflicts = $this->getMatchingTerms(
+			$templates,
+			Term::TYPE_LABEL,
+			$entityType,
+			array(
+				'LIMIT' => $this->maxConflicts,
+			)
+		);
+
+		wfProfileOut( __METHOD__ );
+		return $labelConflicts;
+	}
+
+	/**
+	 * @see LabelConflictFinder::getLabelWithDescriptionConflicts
+	 *
+	 * @note: This implementation does not guarantee that all matches are returned.
+	 * The maximum number of conflicts returned is controlled by $this->maxConflicts.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $entityType
+	 * @param string[] $labels
+	 * @param string[] $descriptions
+	 *
+	 * @throws InvalidArgumentException
+	 * @return Term[]
+	 */
+	public function getLabelWithDescriptionConflicts( $entityType, array $labels, array $descriptions ) {
+		$labels = array_intersect_key( $labels, $descriptions );
+		$descriptions = array_intersect_key( $descriptions, $labels );
+
+		if ( empty( $descriptions ) || empty( $labels ) ) {
+			return array();
+		}
+
+		wfProfileIn( __METHOD__ );
 
 		$dbr = $this->getReadDb();
 
-		foreach ( $terms as $termList ) {
-			// Limit the operation to a single join.
-			$termList = array_slice( $termList, 0, $joinCount + 1 );
 
-			$combinationConds = $this->termsToConditions( $termList, $termType, $entityType, true );
+		$where = array();
+		$where['L.term_entity_type'] = $entityType;
+		$where['L.term_type'] = Term::TYPE_LABEL;
+		$where['D.term_type'] = Term::TYPE_DESCRIPTION;
 
-			$exclusionConds = array();
+		$where[] = 'D.term_entity_id=' . 'L.term_entity_id';
+		$where[] = 'D.term_entity_type=' . 'L.term_entity_type';
 
-			if ( $excludeId !== null ) {
-				$exclusionConds[] = 'terms0.term_entity_id <> ' . $dbr->addQuotes( $excludeId->getNumericId() );
-				$exclusionConds[] = 'terms0.term_entity_type <> ' . $dbr->addQuotes( $excludeId->getEntityType() );
-			}
+		$termConditions = array();
 
-			if ( !empty( $exclusionConds ) ) {
-				$combinationConds[] = '(' . implode( ' OR ', $exclusionConds ) . ')';
-			}
+		foreach ( $labels as $lang => $label ) {
+			// Due to the array_intersect_key call earlier, we know a corresponding description exists.
+			$description = $descriptions[$lang];
 
-			$conditions[] = '(' . implode( ' AND ', $combinationConds ) . ')';
+			$matchConditions = array(
+				'L.term_language' => $lang,
+				'L.term_text' => $label,
+				'D.term_text' => $description,
+			);
+
+			$termConditions[] = $dbr->makeList( $matchConditions, LIST_AND );
 		}
 
-		$tables = array();
-		$fieldsToSelect = array();
-		$joinConds = array();
+		$where[] = $dbr->makeList( $termConditions, LIST_OR );
 
-		for ( $tableIndex = 0; $tableIndex <= $joinCount; $tableIndex++ ) {
-			$tableName = 'terms' . $tableIndex;
-			$tables[$tableName] = $this->tableName;
-
-			foreach ( array_keys( $this->termFieldMap ) as $fieldName ) {
-				$fieldsToSelect[] = $tableName . '.' . $fieldName . ' AS ' . $tableName . $fieldName;
-			}
-
-			if ( $tableIndex !== 0 ) {
-				$joinConds[$tableName] = array(
-					'INNER JOIN',
-					array(
-						'terms0.term_entity_id=' . $tableName . '.term_entity_id',
-						'terms0.term_entity_type=' . $tableName . '.term_entity_type',
-					)
-				);
-			}
-		}
-
-		$obtainedTerms = $dbr->select(
-			$tables,
-			$fieldsToSelect,
-			implode( ' OR ', $conditions ),
-			__METHOD__,
-			array( 'LIMIT' => 1 ),
-			$joinConds
+		$queryOptions = array(
+			'LIMIT' => $this->maxConflicts
 		);
 
-		$terms = $this->buildTermResult( $this->getNormalizedJoinResult( $obtainedTerms, $joinCount ) );
+		$obtainedTerms = $dbr->select(
+			array( 'L' => $this->tableName, 'D' => $this->tableName,  ),
+			'L.*',
+			$where,
+			__METHOD__,
+			$queryOptions
+		);
+
+		$conflicts = $this->buildTermResult( $obtainedTerms );
 
 		$this->releaseConnection( $dbr );
 
 		wfProfileOut( __METHOD__ );
-
-		return $terms;
+		return $conflicts;
 	}
 
 	/**
-	 * Takes the result of a query with joins and turns it into a row per term.
+	 * @param string[] $textsByLanguage A list of texts, or a list of lists of texts (keyed by language on the top level)
+	 * @param string $type
 	 *
-	 * Also ditches any successive results PDO manages to add to the first one,
-	 * so the behavior appears to be the same as when running the query against
-	 * the database directly without PDO messing the the result up.
-	 *
-	 * @since 0.2
-	 *
-	 * @param ResultWrapper $obtainedTerms
-	 * @param integer $joinCount
-	 *
-	 * @return array
+	 * @throws \InvalidArgumentException
+	 * @return Term[]
 	 */
-	protected function getNormalizedJoinResult( \ResultWrapper $obtainedTerms, $joinCount ) {
-		wfProfileIn( __METHOD__ );
+	private function makeQueryTerms( $textsByLanguage, $type ) {
+		$terms = array();
 
-		$resultTerms = array();
+		foreach ( $textsByLanguage as $lang => $texts ) {
+			$texts = (array)$texts;
 
-		foreach ( $obtainedTerms as $obtainedTerm ) {
-			$obtainedTerm = (array)$obtainedTerm;
-
-			for ( $tableIndex = 0; $tableIndex <= $joinCount; $tableIndex++ ) {
-				$tableName = 'terms' . $tableIndex;
-				$resultTerm = array();
-
-				foreach ( array_keys( $this->termFieldMap ) as $fieldName ) {
-					$fullFieldName = $tableName . $fieldName;
-
-					if ( array_key_exists( $fullFieldName, $obtainedTerm ) ) {
-						$resultTerm[$fieldName] = $obtainedTerm[$fullFieldName];
-					}
+			foreach ( $texts as $text ) {
+				if ( !is_string( $text ) ) {
+					throw new InvalidArgumentException( '$textsByLanguage must contain string values only' );
 				}
 
-				if ( !empty( $resultTerm ) ) {
-					$resultTerms[] = $resultTerm;
-				}
+				$terms[] = new Term( array(
+					'termText' => $text,
+					'termLanguage' => $lang,
+					'termType' => $type,
+				) );
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
-
-		return $resultTerms;
+		return $terms;
 	}
 
 	/**

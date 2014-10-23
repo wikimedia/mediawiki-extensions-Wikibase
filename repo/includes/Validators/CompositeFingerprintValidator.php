@@ -34,14 +34,14 @@ class CompositeFingerprintValidator implements FingerprintValidator {
 	 * @see FingerprintValidator::validateFingerprint
 	 *
 	 * @param Fingerprint $fingerprint
-	 * @param EntityId|null $entityId
+	 * @param EntityId $entityId
 	 * @param string[]|null $languageCodes
 	 *
 	 * @return Result
 	 */
 	public function validateFingerprint(
 		Fingerprint $fingerprint,
-		EntityId $entityId = null,
+		EntityId $entityId,
 		array $languageCodes = null
 	) {
 		foreach ( $this->validators as $validator ) {
