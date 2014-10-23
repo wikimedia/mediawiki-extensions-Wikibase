@@ -2,12 +2,12 @@
 
 ## Version 2.0.2 (2014-10-23)
 
-* Fixed issue in `LegacyIdInterpreter`, which needs to also accept numeric ids as string.
+* Fixed handling of numeric ids as string in `LegacyIdInterpreter` which was broken in 2.0.1.
 
 ## Version 2.0.1 (2014-10-23)
 
 * Fixed last remaining HHVM issue (caused by calling `reset` on an `ArrayObject` subclass)
-* Fixed the exception `EntityIdValue::unserialize` throws
+* `EntityIdValue::unserialize` now throws the correct type of exception
 * Improved performance of `BasicEntityIdParser` and `LegacyIdInterpreter`
 
 ## Version 2.0 (2014-10-14)
