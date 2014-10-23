@@ -258,7 +258,7 @@ class SqlStore implements Store {
 
 			// populate the table after creating it
 			$updater->addExtensionUpdate( array(
-				array( __CLASS__, 'rebuildPropertyInfo' )
+				array( $this, 'rebuildPropertyInfo' )
 			) );
 		}
 	}
@@ -269,7 +269,7 @@ class SqlStore implements Store {
 	 *
 	 * @param DatabaseUpdater $updater
 	 */
-	public static function rebuildPropertyInfo( DatabaseUpdater $updater ) {
+	public function rebuildPropertyInfo( DatabaseUpdater $updater ) {
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
 			function ( $msg ) use ( $updater ) {
@@ -278,21 +278,12 @@ class SqlStore implements Store {
 		);
 
 		$table = new PropertyInfoTable( false );
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
-		$useRedirectTargetColumn = $wikibaseRepo->getSettings()->getSetting( 'useRedirectTargetColumn' );
-
-		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
-			$contentCodec,
-			$wikibaseRepo->getEntityIdParser(),
-			false
-		);
-
-		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
+		$wikiPageEntityLookup = $this->getEntityRevisionLookup( 'uncached' );
+		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new HashBagOStuff() );
 		$entityLookup = new RevisionBasedEntityLookup( $cachingEntityLookup );
 
-		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $useRedirectTargetColumn );
+		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $this->useRedirectTargetColumn );
 		$builder->setReporter( $reporter );
 		$builder->setUseTransactions( false );
 
