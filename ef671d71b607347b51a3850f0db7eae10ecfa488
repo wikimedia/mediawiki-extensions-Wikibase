@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_ab3a68e2",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-23T08:36:55Z",
+      "side": 1,
+      "message": "Inverting this condition would save a level of indentation.",
+      "revId": "ef671d71b607347b51a3850f0db7eae10ecfa488",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_6b053f13",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-23T08:36:55Z",
+      "side": 1,
+      "message": "Can just `return;`",
+      "revId": "ef671d71b607347b51a3850f0db7eae10ecfa488",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8b0a0b23",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-23T08:36:55Z",
+      "side": 1,
+      "message": "These values are style-dependent, right? Maybe calculate them?",
+      "revId": "ef671d71b607347b51a3850f0db7eae10ecfa488",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_cb27b3b0",
+        "filename": "lib/resources/jquery/jquery.sticknode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-10-23T08:36:55Z",
+      "side": 1,
+      "message": "If you swap the operands you can leave out the multiplication",
+      "revId": "ef671d71b607347b51a3850f0db7eae10ecfa488",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
