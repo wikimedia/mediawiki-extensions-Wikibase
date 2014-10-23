@@ -107,9 +107,6 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$this->assertTrue( $lookup->termExists( 'b42', null, 'nl' ) );
 	}
 
-	/**
-	 * @fixme: this test is broken (and has been for a long time); will be fixed in a follow up.
-	 */
 	public function testGetMatchingTerms() {
 		$lookup = $this->getTermIndex();
 
