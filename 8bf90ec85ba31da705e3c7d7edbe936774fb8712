@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_8b8beb1f",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-23T12:17:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_ff98327e",
+      "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_1f82bea9",
         "filename": "repo/includes/Validators/FingerprintValidator.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-22T19:25:42Z",
       "side": 1,
       "message": "not Optional anymore",
+      "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_2bc6574f",
+        "filename": "repo/includes/Validators/FingerprintValidator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-23T12:17:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_1f82bea9",
       "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_6bac5f85",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-23T12:17:07Z",
+      "side": 1,
+      "message": "nvm, got rid of this.",
+      "parentUuid": "6e936f18_9549cf6c",
+      "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_7fd4224c",
         "filename": "repo/tests/phpunit/includes/store/sql/TermSqlIndexTest.php",
         "patchSetId": 8
@@ -99,6 +153,24 @@
       "writtenOn": "2014-10-22T20:55:26Z",
       "side": 1,
       "message": "ugh ;)",
+      "parentUuid": "6e936f18_7fd4224c",
+      "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_4bc3a33d",
+        "filename": "repo/tests/phpunit/includes/store/sql/TermSqlIndexTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-23T12:17:07Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "6e936f18_7fd4224c",
       "revId": "8bf90ec85ba31da705e3c7d7edbe936774fb8712",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
