@@ -396,7 +396,7 @@ class ChangeHandler {
 				$currentRun[] = $change;
 			// skip any change that failed to process in some way (bug 49417)
 			} catch ( \Exception $e ) {
-				wfLogWarning( __CLASS__, __METHOD__ . ':' . $e->getMessage() );
+				wfLogWarning( __METHOD__ . ':' . $e->getMessage() );
 			}
 		}
 
