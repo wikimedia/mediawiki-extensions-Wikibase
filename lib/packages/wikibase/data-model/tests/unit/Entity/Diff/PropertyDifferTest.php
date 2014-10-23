@@ -5,7 +5,6 @@ namespace Wikibase\Test\Entity\Diff;
 use Wikibase\DataModel\Entity\Diff\PropertyDiffer;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\DataModel\Entity\Diff\PropertyDiffer
