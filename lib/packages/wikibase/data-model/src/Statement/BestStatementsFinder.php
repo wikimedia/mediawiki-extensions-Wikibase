@@ -7,8 +7,6 @@ use OutOfBoundsException;
 use Traversable;
 use Wikibase\DataModel\ByPropertyIdGrouper;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * Service class to find the best statements in a list of them.

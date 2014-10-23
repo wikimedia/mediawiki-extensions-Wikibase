@@ -9,7 +9,6 @@ use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Entity\Diff\ItemDiffer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\DataModel\Entity\Diff\ItemDiffer

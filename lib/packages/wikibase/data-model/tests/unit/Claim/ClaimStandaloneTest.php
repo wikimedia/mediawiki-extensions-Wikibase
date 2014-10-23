@@ -3,10 +3,10 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\DataModel\Claim\Claim

@@ -6,7 +6,6 @@ use Diff\Comparer\CallbackComparer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
-use Wikibase\DataModel\Claim\Claim;
 
 /**
  * @since 1.1
