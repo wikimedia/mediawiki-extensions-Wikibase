@@ -40,6 +40,7 @@ return call_user_func( function() {
 				'wikibase.EntityInitializer',
 				'wikibase.parsers.getStore',
 				'wikibase.RepoApi',
+				'wikibase.RevisionStore',
 				'wikibase.serialization.entities',
 				'wikibase.sites',
 				'wikibase.store.ApiEntityStore',
