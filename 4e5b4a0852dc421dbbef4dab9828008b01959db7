@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_48d2bc2d",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-24T16:45:46Z",
+      "side": 1,
+      "message": "Really, upper case L please. See I341c31f.",
+      "revId": "4e5b4a0852dc421dbbef4dab9828008b01959db7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
