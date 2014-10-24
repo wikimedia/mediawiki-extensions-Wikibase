@@ -319,4 +319,5 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 		$changeOp->apply( $entity, $summary );
 	}
+
 }

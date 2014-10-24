@@ -15,8 +15,6 @@ use Wikibase\DispatchStats;
 class SpecialDispatchStats extends SpecialWikibasePage {
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.2
 	 */
 	public function __construct() {

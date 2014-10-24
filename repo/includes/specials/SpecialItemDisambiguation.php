@@ -47,8 +47,6 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	private $limit;
 
 	/**
-	 * Constructor.
-	 *
 	 * @see SpecialItemResolver::__construct
 	 *
 	 * @since 0.1

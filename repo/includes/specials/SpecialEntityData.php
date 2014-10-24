@@ -33,8 +33,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 	protected $requestHandler = null;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 */
 	public function __construct() {
@@ -166,4 +164,5 @@ class SpecialEntityData extends SpecialWikibasePage {
 		//      point to meta-info like schema and license, and generally be a helpful data endpoint.
 		$this->getOutput()->showErrorPage( 'wikibase-entitydata-title', 'wikibase-entitydata-text' );
 	}
+
 }

@@ -27,8 +27,6 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	protected $stringNormalizer;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param string $name
@@ -118,4 +116,5 @@ abstract class SpecialWikibasePage extends SpecialPage {
 			)
 		);
 	}
+
 }

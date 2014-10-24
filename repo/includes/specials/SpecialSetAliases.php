@@ -15,8 +15,6 @@ use Wikibase\Summary;
 class SpecialSetAliases extends SpecialModifyTerm {
 
 	/**
-	 * Constructor
-	 *
 	 * @since 0.4
 	 */
 	public function __construct() {
@@ -71,4 +69,5 @@ class SpecialSetAliases extends SpecialModifyTerm {
 
 		return $summary;
 	}
+
 }
