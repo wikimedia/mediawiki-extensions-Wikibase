@@ -22,6 +22,13 @@ use Wikibase\DirectSqlStore;
  */
 class DirectSqlStoreTest extends \MediaWikiTestCase {
 
+	protected function setUp() {
+		parent::setUp();
+
+		error_reporting( E_ALL );
+		ini_set( 'display_errors', 1 );
+	}
+
 	protected function newStore() {
 		$site = new Site( MediaWikiSite::TYPE_MEDIAWIKI );
 		$site->setGlobalId( 'dummy' );
@@ -57,7 +64,6 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			array( 'getPropertyLabelResolver', 'Wikibase\PropertyLabelResolver' ),
 			array( 'newChangesTable', 'Wikibase\ChangesTable' ),
 			array( 'getPropertyInfoStore', 'Wikibase\PropertyInfoStore' ),
-			array( 'getItemUsageIndex', 'Wikibase\ItemUsageIndex' ),
 			array( 'getUsageTracker', 'Wikibase\Client\Usage\UsageTracker' ),
 			array( 'getUsageLookup', 'Wikibase\Client\Usage\UsageLookup' ),
 			array( 'getSubscriptionManager', 'Wikibase\Client\Usage\SubscriptionManager' ),

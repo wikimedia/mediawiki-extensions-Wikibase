@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Client\Usage\NullUsageTracker;
+use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\ClientStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\PropertyInfoStore;
@@ -15,10 +17,18 @@ use Wikibase\PropertyInfoStore;
  * @author Marius Hoch < hoo@online.de >
  */
 class MockClientStore implements ClientStore {
-	public function getUsageLookup() {}
-	public function getUsageTracker() {}
-	public function getSubscriptionManager() {}
-	public function getItemUsageIndex() {}
+
+	public function getUsageLookup() {
+		return new NullUsageTracker();
+	}
+
+	public function getUsageTracker() {
+		return new NullUsageTracker();
+	}
+
+	public function getSubscriptionManager() {
+		return new SubscriptionManager();
+	}
 	public function getPropertyLabelResolver() {}
 	public function getTermIndex() {}
 	public function newChangesTable() {}
