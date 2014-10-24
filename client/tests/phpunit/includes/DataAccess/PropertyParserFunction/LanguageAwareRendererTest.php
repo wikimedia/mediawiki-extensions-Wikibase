@@ -53,7 +53,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			->method( 'addAllUsage' );
 
 		$mock->expects( $this->never() )
-			->method( 'addSitelinksUsage' );
+			->method( 'addSiteLinksUsage' );
 
 		return $mock;
 	}

@@ -484,7 +484,7 @@ class LangLinkHandler {
 			$out->setProperty( 'wikibase_item', $itemId->getSerialization() );
 
 			$usageAccumulator = new ParserOutputUsageAccumulator( $out );
-			$usageAccumulator->addSitelinksUsage( $itemId );
+			$usageAccumulator->addSiteLinksUsage( $itemId );
 		} else {
 			$out->unsetProperty( 'wikibase_item' );
 		}
