@@ -19,36 +19,13 @@ class BaseTemplateAfterPortletHandler {
 	 *
 	 * @return string|null
 	 */
-	public function makeEditLink( BaseTemplate $baseTemplate, $name ) {
+	public function getEditLink( BaseTemplate $baseTemplate, $name ) {
 		if ( $name === 'lang' ) {
 			$link = $baseTemplate->get( 'wbeditlanglinks' );
-
-			if ( $link ) {
-				return $this->formatLink( $link );
-			}
+			return $link;
 		}
 
 		return null;
-	}
-
-	/**
-	 * @param array $link
-	 *
-	 * @return string
-	 */
-	private function formatLink( array $link ) {
-		$action = $link['action'];
-		$link = Html::element( 'a', $link, $link['text'] );
-
-		$html = Html::rawElement(
-			'span',
-			array(
-				'class' => "wb-langlinks-$action wb-langlinks-link"
-			),
-			$link
-		);
-
-		return $html;
 	}
 
 }

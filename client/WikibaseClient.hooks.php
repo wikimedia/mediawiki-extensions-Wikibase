@@ -417,7 +417,7 @@ final class ClientHooks {
 		$beforePageDisplayHandler = new BeforePageDisplayHandler( $namespaceChecker );
 
 		$actionName = Action::getActionName( $skin->getContext() );
-		$beforePageDisplayHandler->addModules( $out, $skin, $actionName );
+		$beforePageDisplayHandler->addModules( $out, $actionName );
 
 		wfProfileOut( __METHOD__ );
 
@@ -450,11 +450,15 @@ final class ClientHooks {
 
 		$siteGroup = $wikibaseClient->getLangLinkSiteGroup();
 
+		$languageUrls = $template->get( 'language_urls' );
+		$hasLangLinks = $languageUrls !== false && !empty( $languageUrls );
+
 		$langLinkGenerator = new RepoItemLinkGenerator(
 			WikibaseClient::getDefaultInstance()->getNamespaceChecker(),
 			$repoLinker,
 			$entityIdParser,
-			$siteGroup
+			$siteGroup,
+			$hasLangLinks
 		);
 
 		$action = Action::getActionName( $skin->getContext() );
@@ -472,7 +476,7 @@ final class ClientHooks {
 
 		// needed to have "Other languages" section display, so we can add "add links"
 		// by default, the css then hides it if the widget is not enabled for a page or user
-		if ( $template->get( 'language_urls' ) === false && $title->exists() ) {
+		if ( $languageUrls === false && $title->exists() ) {
 			$template->set( 'language_urls', array() );
 		}
 
@@ -754,7 +758,7 @@ final class ClientHooks {
 	 */
 	public static function onBaseTemplateAfterPortlet( BaseTemplate $skinTemplate, $name, &$html ) {
 		$handler = new BaseTemplateAfterPortletHandler();
-		$link = $handler->makeEditLink( $skinTemplate, $name );
+		$link = $handler->getEditLink( $skinTemplate, $name );
 
 		if ( $link ) {
 			$html .= $link;

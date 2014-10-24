@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use MediaWikiTestCase;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 
 /**
@@ -14,13 +13,14 @@ use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
 class BaseTemplateAfterPortletHandlerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider makeEditLinkProvider
+	 * @dataProvider getEditLinkProvider
 	 */
-	public function testMakeEditLink( $expected, $link, $name ) {
+	public function testGetEditLink( $expect, $link, $name ) {
 		$template = $this->getMockBuilder( 'BaseTemplate' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -31,46 +31,15 @@ class BaseTemplateAfterPortletHandlerTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $link ) );
 
 		$handler = new BaseTemplateAfterPortletHandler();
-		$formattedLink = $handler->makeEditLink( $template, $name );
+		$return = $handler->getEditLink( $template, $name );
 
-		if ( $expected === null ) {
-			$this->assertNull( $formattedLink );
-		} else {
-			MediaWikiTestCase::assertTag( $expected, $formattedLink );
-		}
+		$this->assertSame( $expect, $return );
 	}
 
-	public function makeEditLinkProvider() {
-		$link = $this->getLink();
-
-		$matcher = array(
-			'tag' => 'span',
-			'attributes' => array(
-				'class' => 'wb-langlinks-edit wb-langlinks-link'
-			),
-			'child' => array(
-				'tag' => 'a',
-				'attributes' => array(
-					'title' => $link['title'],
-					'class' => $link['class']
-				),
-				'content' => $link['text']
-			)
-		);
-
+	public function getEditLinkProvider() {
 		return array(
-			array( null, $link, 'search' ),
-			array( $matcher, $link, 'lang' )
-		);
-	}
-
-	private function getLink() {
-		return array(
-			'action' => 'edit',
-			'href' => 'https://www.wikidata.org/wiki/Q2#sitelinks-wikipedia',
-			'text' => 'Edit links',
-			'title' => 'edit the links!',
-			'class' => 'wbc-editpage'
+			array( null, 'foo', 'bar' ),
+			array( 'foo', 'foo', 'lang' ),
 		);
 	}
 
