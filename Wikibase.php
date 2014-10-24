@@ -37,5 +37,14 @@ if( isset( $wgWikimediaJenkinsCI ) && !$wgWikimediaJenkinsCI ) {
 		. "Use repo/Wikibase.php resp. client/WikibaseClient.php instead.\n" );
 }
 
+if ( $jenkins_job_name === 'mwext-Wikibase-client-tests' ) {
+    $_SERVER['argv'] = array_merge(
+		$_SERVER['argv'],
+		array(
+			'--debug'
+		)
+	);
+}
+
 // Avoid polluting the global namespace
 unset( $jenkins_job_name );
