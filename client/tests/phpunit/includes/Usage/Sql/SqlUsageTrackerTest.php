@@ -6,6 +6,7 @@ use Wikibase\Client\Store\Sql\ConnectionManager;
 use Wikibase\Client\Tests\Usage\UsageLookupContractTester;
 use Wikibase\Client\Tests\Usage\UsageTrackerContractTester;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
@@ -36,13 +37,13 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 	 */
 	private $lookupTester;
 
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
-		parent::__construct( $name, $data, $dataName );
+	public function setUp() {
+		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
+			$this->markTestSkipped( 'Skipping test for SqlUsageTracker, because the useLegacyUsageIndex option is set.' );
+		}
 
 		$this->tablesUsed[] = 'wbc_entity_usage';
-	}
 
-	public function setUp() {
 		parent::setUp();
 
 		$this->sqlUsageTracker = new SqlUsageTracker(
