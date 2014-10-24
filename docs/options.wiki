@@ -110,3 +110,4 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :;<code>'CachingSqlStore'</code>: No direct access to the repo's database. Use cache information received from change notifications. '''Warning:''' dies is currently dysfunctional.
 :;<code>null</code>: Automatic, use <code>'DirectSqlStore'</code> if <code>repoDatabase</code> is set, <code>'CachingSqlStore'</code> if not.
 : '''Caveat:''' should always be <code>null</code> at the moment, because some code relies on the <code>repoDatabase</code> setting to determine whether the local cache tables should be used.
+;useLegacyUsageIndex: whether the sitelinks table should be used to emulate usage tracking. May be set to true if the approproate database schema change has not been deployed yet.

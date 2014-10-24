@@ -6,6 +6,7 @@ use PHPUnit_Framework_Assert as Assert;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\Sql\UsageTableUpdater;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -24,10 +25,14 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 
 	private $tableName = 'wbc_entity_usage';
 
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
-		parent::__construct( $name, $data, $dataName );
+	public function setUp() {
+		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
+			$this->markTestSkipped( 'Skipping test for SqlUsageTracker, because the useLegacyUsageIndex option is set.' );
+		}
 
 		$this->tablesUsed[] = $this->tableName;
+
+		parent::setUp();
 	}
 
 	private function makeUsages( $n ) {
