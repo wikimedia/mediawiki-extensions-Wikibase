@@ -111,7 +111,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				array( 'wikibase.client.linkitem.init' ),
-				array( 'wikibase.client.init', 'wikibase.client.nolanglinks' ),
+				array( 'wikibase.client.init' ),
 				true, // wikibase enabled for namespace
 				array(), // no lang links
 				null, // no prefixed id
@@ -142,7 +142,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				array(),
-				array( 'wikibase.client.init', 'wikibase.client.nolanglinks' ),
+				array( 'wikibase.client.init' ),
 				true, // wikibase enabled for namespace
 				array(), // no lang links
 				null, // no prefixed id
@@ -173,7 +173,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				array(),
-				array( 'wikibase.client.nolanglinks' ),
+				array(),
 				true, // wikibase enabled for namespace
 				array(), // no lang links
 				null, // no prefixed id
@@ -204,7 +204,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				array(),
-				array( 'wikibase.client.nolanglinks' ),
+				array(),
 				true, // wikibase enabled for namespace
 				array(), // no lang links
 				null, // no prefixed id
