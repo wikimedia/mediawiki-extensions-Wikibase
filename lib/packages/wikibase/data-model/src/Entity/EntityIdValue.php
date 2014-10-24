@@ -56,6 +56,7 @@ class EntityIdValue extends DataValueObject {
 	 * @param string $value
 	 *
 	 * @throws IllegalValueException
+	 * @return EntityIdValue
 	 */
 	public function unserialize( $value ) {
 		list( $entityType, $numericId ) = json_decode( $value );

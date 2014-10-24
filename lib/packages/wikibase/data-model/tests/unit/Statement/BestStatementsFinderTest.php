@@ -69,7 +69,7 @@ class BestStatementsFinderTest extends \PHPUnit_Framework_TestCase {
 	public function testGetBestStatementsPerProperty( $statements, $expectedGuids ) {
 		$bestStatementFinder = new BestStatementsFinder( $statements );
 		$bestStatements = $bestStatementFinder->getBestStatementsPerProperty();
-		$guids = array_map( function( $statement ) {
+		$guids = array_map( function( Statement $statement ) {
 			return $statement->getGuid();
 		}, $bestStatements );
 		sort( $guids );
@@ -136,7 +136,7 @@ class BestStatementsFinderTest extends \PHPUnit_Framework_TestCase {
 	public function testGetBestStatementsForProperty( $statements, $propertyId, $expectedGuids ) {
 		$bestStatementFinder = new BestStatementsFinder( $statements );
 		$bestStatements = $bestStatementFinder->getBestStatementsForProperty( new PropertyId( $propertyId ) );
-		$guids = array_map( function( $statement ) {
+		$guids = array_map( function( Statement $statement ) {
 			return $statement->getGuid();
 		}, $bestStatements );
 		sort( $guids );

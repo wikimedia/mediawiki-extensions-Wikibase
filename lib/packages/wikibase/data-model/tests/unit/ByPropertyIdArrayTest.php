@@ -174,7 +174,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider listProvider
 	 * @param array $objects
 	 */
-	public function testRemoveObject( $objects ) {
+	public function testRemoveObject( array $objects ) {
 		$lastIndex = count( $objects ) - 1;
 		$indexedArray = new ByPropertyIdArray( $objects );
 		$indexedArray->buildIndex();
