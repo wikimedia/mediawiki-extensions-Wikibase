@@ -6,6 +6,7 @@ use OutOfBoundsException;
 use Wikibase\DataModel\ByPropertyIdGrouper;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\PropertyIdProvider;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * @covers Wikibase\DataModel\ByPropertyIdGrouper
@@ -89,7 +90,7 @@ class ByPropertyIdGrouperTest extends \PHPUnit_Framework_TestCase {
 	public function testGetByPropertyId( array $propertyIdProviders, $propertyId, array $expectedValues ) {
 		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProviders );
 		$values = $byPropertyIdGrouper->getByPropertyId( new PropertyId( $propertyId ) );
-		array_walk( $values, function( &$value ) {
+		array_walk( $values, function( Snak &$value ) {
 			$value = $value->getType();
 		} );
 		$this->assertEquals( $expectedValues, $values );
