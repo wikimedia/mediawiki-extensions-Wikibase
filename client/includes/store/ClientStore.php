@@ -49,11 +49,6 @@ interface ClientStore {
 	public function getSubscriptionManager();
 
 	/**
-	 * @return ItemUsageIndex
-	 */
-	public function getItemUsageIndex();
-
-	/**
 	 * @since 0.4
 	 *
 	 * @return EntityLookup

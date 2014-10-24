@@ -6,26 +6,25 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use Iterator;
 use Title;
 use UnexpectedValueException;
+use Wikibase\Client\Store\TitleFactory;
+use Wikibase\Client\Usage\UsageLookup;
+use Wikibase\Lib\Store\StorageException;
 
 /**
- * Interface for change handling. Whenever a change is detected,
- * it should be fed to this service which then takes care handling
- * it.
- *
- * @since 0.1
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
-class ReferencedPagesFinder {
+class AffectedPagesFinder {
 
 	/**
-	 * @var ItemUsageIndex
+	 * @var UsageLookup
 	 */
-	private $itemUsageIndex;
+	private $usageLookup;
 
 	/**
 	 * @var NamespaceChecker
@@ -43,17 +42,29 @@ class ReferencedPagesFinder {
 	private $checkPageExistence;
 
 	/**
-	 * @param ItemUsageIndex $itemUsageIndex
+	 * @var TitleFactory
+	 */
+	private $titleFactory;
+
+	/**
+	 * @param UsageLookup $usageLookup
 	 * @param NamespaceChecker $namespaceChecker
+	 * @param TitleFactory $titleFactory
 	 * @param string $siteId
 	 * @param boolean $checkPageExistence
 	 */
-	public function __construct( ItemUsageIndex $itemUsageIndex, NamespaceChecker $namespaceChecker,
-		$siteId, $checkPageExistence = true ) {
-		$this->itemUsageIndex = $itemUsageIndex;
+	public function __construct(
+		UsageLookup $usageLookup,
+		NamespaceChecker $namespaceChecker,
+		TitleFactory $titleFactory,
+		$siteId,
+		$checkPageExistence = true
+	) {
+		$this->usageLookup = $usageLookup;
 		$this->namespaceChecker = $namespaceChecker;
 		$this->siteId = $siteId;
 		$this->checkPageExistence = $checkPageExistence;
+		$this->titleFactory = $titleFactory;
 	}
 
 	/**
@@ -68,9 +79,9 @@ class ReferencedPagesFinder {
 			return array();
 		}
 
-		$pages = $this->getReferencedPages( $change );
+		$titles = $this->getReferencedPages( $change );
 
-		return $this->getTitlesToUpdate( $pages );
+		return $this->filterTitlesToUpdate( $titles );
 	}
 
 	/**
@@ -78,20 +89,24 @@ class ReferencedPagesFinder {
 	 *
 	 * @param ItemChange $change
 	 *
-	 * @return Title[] the titles of the pages to update
+	 * @return Title[] the titles of the pages to update. May contain duplicates.
 	 */
 	private function getReferencedPages( ItemChange $change ) {
 		$itemId = $change->getEntityId();
 
-		$pages = $this->itemUsageIndex->getEntityUsage( array( $itemId ) );
+		$pageIds = $this->usageLookup->getPagesUsing( array( $itemId ) );
+		$titles = $this->getTitlesFromIDs( $pageIds );
 
 		$siteLinkDiff = $change->getSiteLinkDiff();
 
 		if ( $this->isRelevantSiteLinkChange( $siteLinkDiff ) ) {
-			$pages = $this->addSiteLinkDiffPages( $siteLinkDiff, $pages );
+			$namesFromDiff = $this->getPagesReferencedInDiff( $siteLinkDiff );
+			$titlesFromDiff = $this->getTitlesFromTexts( $namesFromDiff );
+
+			$titles = array_merge( $titles, $titlesFromDiff );
 		}
 
-		return array_unique( $pages );
+		return $titles;
 	}
 
 	/**
@@ -101,19 +116,6 @@ class ReferencedPagesFinder {
 	 */
 	private function isRelevantSiteLinkChange( Diff $siteLinkDiff ) {
 		return isset( $siteLinkDiff[$this->siteId] ) && !$this->isBadgesOnlyChange( $siteLinkDiff );
-	}
-
-	/**
-	 * @param Diff $siteLinkDiff
-	 * @param string[] $pages
-	 *
-	 * @return string[]
-	 */
-	private function addSiteLinkDiffPages( Diff $siteLinkDiff, array $pages ) {
-		return array_merge(
-			$pages,
-			$this->getPagesReferencedInDiff( $siteLinkDiff )
-		);
 	}
 
 	/**
@@ -161,16 +163,17 @@ class ReferencedPagesFinder {
 	}
 
 	/**
-	 * @param array $pagesToUpdate
+	 * Filters titles to update. This removes duplicates, non-existing pages, and pages from
+	 * namespaces that are not considered "enabled" by the namespace checker.
+	 *
+	 * @param Title[] $titles
 	 *
 	 * @return Title[]
 	 */
-	private function getTitlesToUpdate( array $pagesToUpdate ) {
+	private function filterTitlesToUpdate( array $titles ) {
 		$titlesToUpdate = array();
 
-		foreach ( $pagesToUpdate as $page ) {
-			$title = Title::newFromText( $page );
-
+		foreach ( $titles as $title ) {
 			if ( $this->checkPageExistence && !$title->exists() ) {
 				continue;
 			}
@@ -181,10 +184,50 @@ class ReferencedPagesFinder {
 				continue;
 			}
 
-			$titlesToUpdate[] = $title;
+			// Use the string representation as a key to get rid of any duplicates.
+			$key = $title->getPrefixedDBkey();
+			$titlesToUpdate[$key] = $title;
 		}
 
 		return $titlesToUpdate;
+	}
+
+	/**
+	 * @param int[]|Iterator $pageIds
+	 *
+	 * @return Title[]
+	 */
+	private function getTitlesFromIDs( $pageIds ) {
+		$titles = array();
+
+		foreach ( $pageIds as $id ) {
+			try {
+				$titles[] = $this->titleFactory->newFromID( $id );
+			} catch ( StorageException $ex ) {
+				// Page probably got deleted just now. Skip it.
+			}
+		}
+
+		return $titles;
+	}
+
+	/**
+	 * @param string[] $names
+	 *
+	 * @return Title[]
+	 */
+	private function getTitlesFromTexts( $names ) {
+		$titles = array();
+
+		foreach ( $names as $name ) {
+			try {
+				$titles[] = $this->titleFactory->newFromText( $name );
+			} catch ( StorageException $ex ) {
+				// Invalid title in the diff? Skip.
+			}
+		}
+
+		return $titles;
 	}
 
 }

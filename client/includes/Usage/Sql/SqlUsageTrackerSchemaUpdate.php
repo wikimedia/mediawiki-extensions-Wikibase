@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Schema updater for SqlUsageTracker
@@ -30,8 +31,14 @@ class SqlUsageTrackerSchemaUpdater {
 	 * @param DatabaseUpdater $dbUpdater
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $dbUpdater ) {
+		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
+			return true;
+		}
+
 		$usageTrackerSchemaUpdater = new self( $dbUpdater );
 		$usageTrackerSchemaUpdater->doSchemaUpdate();
+
+		return true;
 	}
 
 	/**
