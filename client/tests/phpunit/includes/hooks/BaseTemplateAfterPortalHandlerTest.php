@@ -31,7 +31,7 @@ class BaseTemplateAfterPortletHandlerTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $link ) );
 
 		$handler = new BaseTemplateAfterPortletHandler();
-		$formattedLink = $handler->makeEditLink( $template, $name );
+		$formattedLink = $handler->getEditLink( $template, $name );
 
 		if ( $expected === null ) {
 			$this->assertNull( $formattedLink );
