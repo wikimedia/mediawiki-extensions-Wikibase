@@ -31,7 +31,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
 		$handler = new BeforePageDisplayHandler( $namespaceChecker );
-		$handler->addModules( $output, $skin, 'view' );
+		$handler->addModules( $output, 'view' );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );

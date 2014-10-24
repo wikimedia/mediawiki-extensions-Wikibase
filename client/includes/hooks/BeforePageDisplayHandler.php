@@ -32,12 +32,11 @@ class BeforePageDisplayHandler {
 	 * @note in php5, $out is by passed by reference (by default, so &$out is not needed)
 	 *
 	 * @param OutputPage $out
-	 * @param Skin $skin
 	 * @param string $actionName
 	 *
 	 * @return bool
 	 */
-	public function addModules( OutputPage $out, Skin $skin, $actionName ) {
+	public function addModules( OutputPage $out, $actionName ) {
 		$title = $out->getTitle();
 
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
@@ -45,7 +44,7 @@ class BeforePageDisplayHandler {
 		}
 
 		$this->addStyleModules( $out, $title, $actionName );
-		$this->addJsModules( $out, $skin, $title, $actionName );
+		$this->addJsModules( $out, $title, $actionName );
 
 		return true;
 	}
@@ -56,16 +55,21 @@ class BeforePageDisplayHandler {
 			$out->addModuleStyles( 'wikibase.client.init' );
 		}
 
+		$user = $out->getUser();
 		if ( $out->getLanguageLinks() === array() ) {
-			// Module with the sole purpose to hide #p-lang
-			// Needed as we can't do that in the regular CSS nor in JavaScript
-			// (as that only runs after the element initially appeared).
-			$out->addModuleStyles( 'wikibase.client.nolanglinks' );
+			if ( !$this->hasLinkItemWidget( $user, $out, $title, $actionName ) ) {
+				// Module with the sole purpose to hide #p-lang
+				// Needed as we can't do that in the regular CSS nor in JavaScript
+				// (as that only runs after the element initially appeared).
+				$out->addModuleStyles( 'wikibase.client.nolanglinks' );
+			} else {
+				$out->addModuleStyles( 'wikibase.client.linkitem.init' );
+			}
 		}
 	}
 
-	private function addJsModules( OutputPage $out, Skin $skin, Title $title, $actionName ) {
-		$user = $skin->getContext()->getUser();
+	private function addJsModules( OutputPage $out, Title $title, $actionName ) {
+		$user = $out->getUser();
 
 		if ( $this->hasLinkItemWidget( $user, $out, $title, $actionName ) ) {
 			// Add the JavaScript which lazy-loads the link item widget
