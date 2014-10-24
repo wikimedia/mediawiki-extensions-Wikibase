@@ -8,6 +8,7 @@ use ParserOptions;
 use Title;
 use User;
 use Wikibase\DataAccess\PropertyParserFunction\RendererFactory;
+use Wikibase\Client\Usage\HashUsageAccumulator;
 
 /**
  * @covers Wikibase\DataAccess\PropertyParserFunction\RendererFactory
@@ -71,7 +72,8 @@ class RendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$language = Language::factory( 'he' );
-		$renderer = $rendererFactory->newLanguageAwareRenderer( $language );
+		$usageAcc = new HashUsageAccumulator();
+		$renderer = $rendererFactory->newLanguageAwareRenderer( $language, $usageAcc );
 
 		$languageRendererClass = 'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer';
 		$this->assertInstanceOf( $languageRendererClass, $renderer );
