@@ -74,23 +74,14 @@
 	$( document ).ready( function() {
 		if ( !$.support.cors ) {
 			// This will fail horribly w/o CORS support on WMF-like setups (different domains for repo and client)
+			$( '.wb-langlinks-add' ).remove();
 			return;
 		}
 
-		$( '.wb-langlinks-edit, .wb-langlinks-add' ).eq( 0 )
-		.empty()
-		.append(
-			$( '<a>' )
-			.attr( {
-				href: '#',
-				id: 'wbc-linkToItem-link'
-			} )
-			.text( mw.msg( 'wikibase-linkitem-addlinks' ) )
-			.click( function( event ) {
-				event.preventDefault();
-				initLinkItem( this );
-			} )
-		);
-		$( '#p-lang' ).show();
+		$( '.wb-langlinks-add > a' ).eq( 0 )
+		.click( function( event ) {
+			event.preventDefault();
+			initLinkItem( this );
+		} );
 	} );
 } )( mediaWiki, jQuery );

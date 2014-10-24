@@ -3,6 +3,7 @@
 namespace Wikibase\Client;
 
 use Title;
+use Html;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\NamespaceChecker;
@@ -12,6 +13,7 @@ use Wikibase\NamespaceChecker;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
 class RepoItemLinkGenerator {
 
@@ -36,23 +38,31 @@ class RepoItemLinkGenerator {
 	private $langLinkSiteGroup;
 
 	/**
+	 * @var bool
+	 */
+	private $hasLangLinks;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param NamespaceChecker $namespaceChecker
 	 * @param RepoLinker       $repoLinker
 	 * @param EntityIdParser   $entityIdParser
 	 * @param string           $langLinkSiteGroup
+	 * @param bool             $hasLangLinks
 	 */
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		RepoLinker $repoLinker,
 		EntityIdParser $entityIdParser,
-		$langLinkSiteGroup
+		$langLinkSiteGroup,
+		$hasLangLinks
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->repoLinker = $repoLinker;
 		$this->entityIdParser = $entityIdParser;
 		$this->langLinkSiteGroup = $langLinkSiteGroup;
+		$this->hasLangLinks = $hasLangLinks;
 	}
 
 	/**
@@ -64,25 +74,21 @@ class RepoItemLinkGenerator {
 	 * @param array|null $noExternalLangLinks
 	 * @param string|null $prefixedId
 	 *
-	 * @return string[]|null
+	 * @return string|null
 	 */
 	public function getLink( Title $title, $action, $isAnon, $noExternalLangLinks, $prefixedId ) {
-		$editLink = null;
+		if ( is_string( $prefixedId ) && $this->hasLangLinks ) {
+			$entityId = $this->entityIdParser->parse( $prefixedId );
 
-		if ( $this->canHaveLink( $title, $action, $noExternalLangLinks ) ) {
-			if ( is_string( $prefixedId ) ) {
-				$entityId = $this->entityIdParser->parse( $prefixedId );
-
-				// link to the associated item on the repo
-				$editLink = $this->getEditLinksLink( $entityId );
-			} else {
-				if ( !$isAnon ) {
-					$editLink = $this->getAddLinksLink();
-				}
-			}
+			// link to the associated item on the repo
+			return $this->getEditLinksLink( $entityId );
 		}
 
-		return $editLink;
+		if ( $this->canHaveLink( $title, $action, $noExternalLangLinks ) && !$isAnon ) {
+			return $this->getAddLinksLink();
+		}
+
+		return null;
 	}
 
 	/**
@@ -99,10 +105,9 @@ class RepoItemLinkGenerator {
 
 		if ( $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() )
 			&& $title->exists()
+			&& !$this->isSuppressed( $noExternalLangLinks )
 		) {
-			if ( ! $this->isSuppressed( $noExternalLangLinks ) ) {
-				return true;
-			}
+			return true;
 		}
 
 		return false;
@@ -124,36 +129,55 @@ class RepoItemLinkGenerator {
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @return string[]
+	 * @return string
 	 */
 	private function getEditLinksLink( EntityId $entityId ) {
 		$fragment = '#sitelinks-' . htmlspecialchars( $this->langLinkSiteGroup, ENT_QUOTES );
 
 		$link = array(
-			'action' => 'edit',
 			'href' => $this->repoLinker->getEntityUrl( $entityId ) . $fragment,
-			'text' => wfMessage( 'wikibase-editlinks' )->text(),
 			'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
 			'class' => 'wbc-editpage',
 		);
 
-		return $link;
+		$text = wfMessage( 'wikibase-editlinks' )->text();
+		return $this->formatLink( $link, 'edit', $text );
 	}
 
 	/**
 	 * Used by the LinkItem js widget
 	 *
-	 * @return string[]
+	 * @return string
 	 */
 	private function getAddLinksLink() {
 		$link = array(
-			'action' => 'add',
-			'text' => '',
-			'id' => 'wbc-linkToItem',
+			'id' => 'wbc-linkToItem-link',
+			'href' => '#',
 			'class' => 'wbc-editpage wbc-nolanglinks',
 		);
 
-		return $link;
+		$text = wfMessage( 'wikibase-linkitem-addlinks' )->text();
+		return $this->formatLink( $link, 'add', $text );
+	}
+
+	/**
+	 * @param array $link
+	 * @param string $text
+	 * @param string $action
+	 * @return string
+	 */
+	private function formatLink( array $link, $action, $text ) {
+		$link = Html::element( 'a', $link, $text );
+
+		$html = Html::rawElement(
+			'span',
+			array(
+				'class' => "wb-langlinks-$action wb-langlinks-link"
+			),
+			$link
+		);
+
+		return $html;
 	}
 
 }
