@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_2a2168f6",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-24T09:57:13Z",
+      "side": 1,
+      "message": "This comment is inaccurate - if we have id strings in the database, we still need an ID parser. Looks like one of mine... what was I thinking?",
+      "revId": "6f04e82edc698757c56878aea9434e1ccb2f024e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
