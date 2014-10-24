@@ -46,8 +46,10 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wikibase.client.linkitem.init.js'
 			),
+			'styles' => array(
+				'wikibase.client.linkitem.init.css'
+			),
 			'messages' => array(
-				'wikibase-linkitem-addlinks',
 				'unknown-error'
 			),
 			'dependencies' => array(
