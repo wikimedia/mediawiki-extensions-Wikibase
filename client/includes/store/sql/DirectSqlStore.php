@@ -5,7 +5,11 @@ namespace Wikibase;
 use Language;
 use LoadBalancer;
 use ObjectCache;
+use RuntimeException;
 use Site;
+use Wikibase\Client\Store\TitleFactory;
+use Wikibase\Client\Usage\NullUsageTracker;
+use Wikibase\Client\Usage\SiteLinkUsageLookup;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -56,11 +60,6 @@ class DirectSqlStore implements ClientStore {
 	private $propertyInfoTable = null;
 
 	/**
-	 * @var ItemUsageIndex
-	 */
-	private $itemUsageIndex = null;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	private $entityIdParser;
@@ -81,9 +80,14 @@ class DirectSqlStore implements ClientStore {
 	private $siteLinkTable = null;
 
 	/**
-	 * @var SqlUsageTracker|null
+	 * @var UsageTracker|null
 	 */
 	private $usageTracker = null;
+
+	/**
+	 * @var UsageLookup|null
+	 */
+	private $usageLookup = null;
 
 	/**
 	 * @var Site|null
@@ -132,6 +136,7 @@ class DirectSqlStore implements ClientStore {
 		$cacheType = $settings->getSetting( 'sharedCacheType' );
 
 		$this->changesDatabase = $settings->getSetting( 'changesDatabase' );
+		$this->useLegacyUsageIndex = $settings->getSetting( 'useLegacyUsageIndex' );
 
 		$this->cachePrefix = $cachePrefix;
 		$this->cacheDuration = $cacheDuration;
@@ -151,17 +156,6 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * @see Store::getUsageLookup
-	 *
-	 * @since 0.5
-	 *
-	 * @return UsageLookup
-	 */
-	public function getUsageLookup() {
-		return $this->getUsageTracker();
-	}
-
-	/**
 	 * Returns a LoadBalancer that acts as a factory for connections to the local (client) wiki's
 	 * database.
 	 *
@@ -172,7 +166,36 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
+	 * @see Store::getUsageLookup
+	 *
+	 * @note: If the useLegacyUsageIndex option is set, this returns a SiteLinkUsageLookup.
+	 *
+	 * @since 0.5
+	 *
+	 * @return UsageLookup
+	 */
+	public function getUsageLookup() {
+		if ( !$this->usageLookup ) {
+			if ( $this->useLegacyUsageIndex ) {
+				$this->usageLookup = new SiteLinkUsageLookup(
+					$this->getSite()->getGlobalId(),
+					$this->getSiteLinkTable(),
+					new TitleFactory()
+				);
+			} else {
+				throw new RuntimeException( 'useLegacyUsageIndex must be set to true, until client side tracking is fully implemented.' );
+
+				$this->usageLookup = $this->getUsageTracker();
+			}
+		}
+
+		return $this->usageLookup;
+	}
+
+	/**
 	 * @see Store::getUsageTracker
+	 *
+	 * @note: If the useLegacyUsageIndex option is set, this returns a NullUsageTracker!
 	 *
 	 * @since 0.5
 	 *
@@ -180,35 +203,15 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getUsageTracker() {
 		if ( !$this->usageTracker ) {
-			$connectionManager = new ConnectionManager( $this->getLocalLoadBalancer() );
-			$this->usageTracker = new SqlUsageTracker( $this->entityIdParser, $connectionManager );
+			if ( $this->useLegacyUsageIndex ) {
+				$this->usageTracker = new NullUsageTracker();
+			} else {
+				$connectionManager = new ConnectionManager( $this->getLocalLoadBalancer() );
+				$this->usageTracker = new SqlUsageTracker( $this->entityIdParser, $connectionManager );
+			}
 		}
 
 		return $this->usageTracker;
-	}
-
-	/**
-	 * @see Store::getItemUsageIndex
-	 *
-	 * @since 0.4
-	 *
-	 * @return ItemUsageIndex
-	 */
-	public function getItemUsageIndex() {
-		if ( !$this->itemUsageIndex ) {
-			$this->itemUsageIndex = $this->newItemUsageIndex();
-		}
-
-		return $this->itemUsageIndex;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @return ItemUsageIndex
-	 */
-	protected function newItemUsageIndex() {
-		return new ItemUsageIndex( $this->getSite(), $this->getSiteLinkTable() );
 	}
 
 	/**
