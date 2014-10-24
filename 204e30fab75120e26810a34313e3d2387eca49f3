@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_8de1b6fd",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpReferenceTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-10-24T12:32:20Z",
+      "side": 0,
+      "message": "Then this also needs to be removed.",
+      "revId": "204e30fab75120e26810a34313e3d2387eca49f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
