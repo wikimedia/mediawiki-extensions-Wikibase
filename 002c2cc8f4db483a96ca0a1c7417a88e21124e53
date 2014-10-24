@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_0d94c68c",
+        "filename": "lib/resources/jquery.wikibase/toolbar/jquery.wikibase.toolbarbutton.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-24T12:18:09Z",
+      "side": 1,
+      "message": "Indention.",
+      "revId": "002c2cc8f4db483a96ca0a1c7417a88e21124e53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_6d978a94",
+        "filename": "repo/includes/View/SectionEditLinkGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-24T12:18:09Z",
+      "side": 1,
+      "message": "I suggest to rename this to getSingleButtonToolbarHtml.",
+      "revId": "002c2cc8f4db483a96ca0a1c7417a88e21124e53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_4d9acebe",
+        "filename": "repo/includes/View/SectionEditLinkGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-24T12:18:09Z",
+      "side": 1,
+      "message": "This adds double brackets. Please remove.",
+      "revId": "002c2cc8f4db483a96ca0a1c7417a88e21124e53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
