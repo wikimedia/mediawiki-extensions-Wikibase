@@ -73,17 +73,17 @@ class PropertyId extends EntityId {
 	 * should avoid dealing with just the numeric part, and use the whole
 	 * serialization. Not doing so in new code requires special justification.
 	 *
-	 * @param int|float $number
+	 * @param int|float|string $numericId
 	 *
 	 * @return PropertyId
 	 * @throws InvalidArgumentException
 	 */
-	public static function newFromNumber( $number ) {
-		if ( !is_int( $number ) && !is_float( $number ) ) {
-			throw new InvalidArgumentException( '$number needs to be an integer or whole number float.' );
+	public static function newFromNumber( $numericId ) {
+		if ( !is_numeric( $numericId ) ) {
+			throw new InvalidArgumentException( '$number needs to be numeric.' );
 		}
 
-		return new self( 'P' . $number );
+		return new self( 'P' . $numericId );
 	}
 
 }

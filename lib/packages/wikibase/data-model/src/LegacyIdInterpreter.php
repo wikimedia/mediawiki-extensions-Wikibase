@@ -23,16 +23,12 @@ class LegacyIdInterpreter {
 
 	/**
 	 * @param string $entityType
-	 * @param int|string $numericId
+	 * @param int|float|string $numericId
 	 *
 	 * @return EntityId
 	 * @throws InvalidArgumentException
 	 */
 	public static function newIdFromTypeAndNumber( $entityType, $numericId ) {
-		if ( !is_int( $numericId ) && is_numeric( $numericId ) ) {
-			$numericId = (int)$numericId;
-		}
-
 		if ( $entityType === 'item' ) {
 			return ItemId::newFromNumber( $numericId );
 		} elseif ( $entityType === 'property' ) {

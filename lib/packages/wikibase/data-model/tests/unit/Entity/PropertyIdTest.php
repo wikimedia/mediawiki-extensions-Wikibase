@@ -79,8 +79,11 @@ class PropertyIdTest extends \PHPUnit_Framework_TestCase {
 	public function numericIdProvider() {
 		return array(
 			array( 42 ),
+			array( '42' ),
 			array( 42.0 ),
+			// Check for 32-bit integer overflow on 32-bit PHP systems.
 			array( 2147483648 ),
+			array( '2147483648' ),
 		);
 	}
 
@@ -94,7 +97,8 @@ class PropertyIdTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidNumericIdProvider() {
 		return array(
-			array( '42' ),
+			array( '42.1' ),
+			array( 42.1 ),
 			array( 2147483648.1 ),
 		);
 	}
