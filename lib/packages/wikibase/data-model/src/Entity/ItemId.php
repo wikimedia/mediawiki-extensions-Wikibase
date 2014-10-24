@@ -73,17 +73,17 @@ class ItemId extends EntityId {
 	 * should avoid dealing with just the numeric part, and use the whole
 	 * serialization. Not doing so in new code requires special justification.
 	 *
-	 * @param int|float $number
+	 * @param int|float|string $numericId
 	 *
 	 * @return ItemId
 	 * @throws InvalidArgumentException
 	 */
-	public static function newFromNumber( $number ) {
-		if ( !is_int( $number ) && !is_float( $number ) ) {
-			throw new InvalidArgumentException( '$number needs to be an integer or whole number float.' );
+	public static function newFromNumber( $numericId ) {
+		if ( !is_numeric( $numericId ) ) {
+			throw new InvalidArgumentException( '$number needs to be numeric.' );
 		}
 
-		return new self( 'Q' . $number );
+		return new self( 'Q' . $numericId );
 	}
 
 }
