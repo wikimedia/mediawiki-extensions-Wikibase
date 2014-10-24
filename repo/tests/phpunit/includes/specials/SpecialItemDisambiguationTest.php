@@ -6,6 +6,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
 use Wikibase\TermIndex;
@@ -29,7 +30,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	/**
 	 * @return EntityTitleLookup
 	 */
-	private function getMockTitleLookup() {
+	private function getEntityTitleLookup() {
 		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$mock->expects( $this->any() )
 			->method( 'getTitleForId' )
@@ -45,7 +46,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	/**
 	 * @return TermIndex
 	 */
-	private function getMockTermIndex() {
+	private function getTermIndex() {
 		// Matches TermIndex::getEntityIdsForLabel shall return.
 		// Array keys are derived from the function parameters
 		$matches = array(
@@ -75,9 +76,9 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return MockRepository
+	 * @return EntityLookup
 	 */
-	private function getMockEntityLookup() {
+	private function getEntityLookup() {
 		$repo = new MockRepository();
 
 		$one = Item::newEmpty();
@@ -103,9 +104,9 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		$page = new SpecialItemDisambiguation();
 
 		$page->initServices(
-			$this->getMockTermIndex(),
-			$this->getMockEntityLookup(),
-			$this->getMockTitleLookup()
+			$this->getTermIndex(),
+			$this->getEntityLookup(),
+			$this->getEntityTitleLookup()
 		);
 
 		return $page;

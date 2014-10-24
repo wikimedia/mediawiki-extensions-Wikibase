@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Specials;
 
-use InvalidArgumentException;
 use Html;
+use InvalidArgumentException;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Enables accessing a linked page on a site by providing the item id and site
@@ -191,4 +191,5 @@ class SpecialGoToLinkedPage extends SpecialItemResolver {
 			. Html::closeElement( 'form' )
 		);
 	}
+
 }

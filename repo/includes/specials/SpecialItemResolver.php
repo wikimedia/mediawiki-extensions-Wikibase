@@ -14,8 +14,6 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	// TODO: would we benefit from using cached page here?
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param string $name
