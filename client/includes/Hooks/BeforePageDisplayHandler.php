@@ -54,11 +54,16 @@ class BeforePageDisplayHandler {
 			$out->addModuleStyles( 'wikibase.client.init' );
 		}
 
+		$user = $out->getUser();
 		if ( $out->getLanguageLinks() === array() ) {
-			// Module with the sole purpose to hide #p-lang
-			// Needed as we can't do that in the regular CSS nor in JavaScript
-			// (as that only runs after the element initially appeared).
-			$out->addModuleStyles( 'wikibase.client.nolanglinks' );
+			if ( !$this->hasLinkItemWidget( $user, $out, $title, $actionName ) ) {
+				// Module with the sole purpose to hide #p-lang
+				// Needed as we can't do that in the regular CSS nor in JavaScript
+				// (as that only runs after the element initially appeared).
+				$out->addModuleStyles( 'wikibase.client.nolanglinks' );
+			} else {
+				$out->addModuleStyles( 'wikibase.client.linkitem.init' );
+			}
 		}
 	}
 

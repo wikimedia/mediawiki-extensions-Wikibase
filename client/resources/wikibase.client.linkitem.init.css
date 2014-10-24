@@ -1,0 +1,4 @@
+/* Hide the langlinks section for users without JavaScript support */
+.client-nojs #p-lang {
+	display: none;
+}
