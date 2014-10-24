@@ -16,6 +16,24 @@
       "revId": "fb2588e92321d5757c8d28aedf0f0238f0d6d178",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_eaf2a002",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-24T08:19:24Z",
+      "side": 1,
+      "message": "Just explained that to Jeroen in PS1. ;-)\n\n\"This method constantly gets reported as unused. But it is not. It\u0027s used in the $valueFormatterSpecs map at the top of this class. All other methods in the map are protected. Either all should be private (and somehow marked as used, so nobody removes them accidentally) or all should be protected.\"",
+      "parentUuid": "6e936f18_54b0243e",
+      "revId": "fb2588e92321d5757c8d28aedf0f0238f0d6d178",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
