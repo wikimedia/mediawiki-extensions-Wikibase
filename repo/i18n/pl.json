@@ -107,6 +107,8 @@
 	"wikibase-itembytitle-lookup-page": "Strona:",
 	"wikibase-itembytitle-submit": "Szukaj",
 	"wikibase-itembytitle-create": "Możesz także [{{fullurl:Special:NewItem|site=$1&page=$2}} utworzyć element].",
+	"special-gotolinkedpage": "Przejście do linkującej strony",
+	"wikibase-gotolinkedpage-lookup-fieldset": "Przejdź do linkującej strony zgodnie z podaną witryną i elementem",
 	"wikibase-gotolinkedpage-lookup-site": "Witryna:",
 	"wikibase-gotolinkedpage-lookup-item": "Identyfikator elementu:",
 	"wikibase-gotolinkedpage-submit": "Dalej",
