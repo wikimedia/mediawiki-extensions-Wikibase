@@ -67,6 +67,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
+
 	public function testGivenCloneOfReferenceInList_hasReferenceReturnsTrue() {
 		$list = new ReferenceList();
 
@@ -274,6 +275,24 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$references->addNewReference( new PropertyNoValueSnak( 1 ), null );
+	}
+
+	public function testSerializeRoundtrip() {
+		$references = new ReferenceList();
+
+		$references->addReference( new Reference() );
+
+		$references->addReference( new Reference(
+			new SnakList(
+				array(
+					new PropertyNoValueSnak( 2 ),
+					new PropertyNoValueSnak( 3 )
+				)
+			)
+		) );
+
+		$serialized = serialize( $references );
+		$this->assertTrue( $references->equals( unserialize( $serialized ) ) );
 	}
 
 }
