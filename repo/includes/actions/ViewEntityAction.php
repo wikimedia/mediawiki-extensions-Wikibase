@@ -163,13 +163,12 @@ abstract class ViewEntityAction extends ViewAction {
 
 		if ( $editable && !$content->isRedirect() ) {
 			$permissionChecker = $this->getPermissionChecker();
-			$permissionStatus = $permissionChecker->getPermissionStatusForEntity(
+			$editable = $permissionChecker->getPermissionForTitle(
+				$this->getArticle()->getTitle(),
+				$content,
 				$this->getUser(),
-				'edit',
-				$content->getEntity(),
-				'quick' );
-
-			$editable = $permissionStatus->isOK();
+				'edit'
+			);
 		}
 
 		$parserOptions = $this->getArticle()->getPage()->makeParserOptions( $this->getContext()->getUser() );
