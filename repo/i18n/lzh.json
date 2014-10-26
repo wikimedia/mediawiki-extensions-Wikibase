@@ -4,5 +4,8 @@
 			"Jason924tw"
 		]
 	},
-	"wikibase-edit": "纂"
+	"wikibase-edit": "纂",
+	"wikibase-itemdisambiguation-lookup-language": "語：",
+	"wikibase-modifyterm-language": "語：",
+	"wikibase-entitieswithoutlabel-label-language": "語："
 }

@@ -39,7 +39,6 @@
 	"wikibase-linkitem-not-loggedin": "हा तोंडवळा वापरण्यास आपण, या विकिवर व  [$1 केंद्रिय माहिती भांडारात] सनोंद प्रवेशित असावयास हवे.",
 	"wikibase-linkitem-success-link": "हे पान यशस्वीरित्या जोडल्या गेलेले आहे.या कलमास आपण या दुव्यांसह आमच्या [$1 केंद्रिय माहिती भांडारात] बघू शकता.",
 	"wikibase-property-notfound": "$1 गुणघर्म सापडला नाही.",
-	"wikibase-property-notsupportedyet": "विकिबेसवर अद्याप $1 गुणधर्मासाठी गुणधर्म प्रकार सहाय्यीभूत नाही.",
 	"wikibase-rc-hide-wikidata": "विकिडाटा $1",
 	"wikibase-rc-hide-wikidata-hide": "लपवा",
 	"wikibase-rc-hide-wikidata-show": "दाखवा",
