@@ -182,4 +182,32 @@ class ReferenceList extends HashableObjectStorage {
 		return null;
 	}
 
+	/**
+	 * @see Serializable::serialize
+	 *
+	 * @since 2.1
+	 *
+	 * @return string
+	 */
+	public function serialize() {
+		$references = array();
+
+		foreach( $this as $reference ) {
+			$references[] = $reference;
+		}
+
+		return serialize( $references );
+	}
+
+	/**
+	 * @see Serializable::unserialize
+	 *
+	 * @since 2.1
+	 *
+	 * @param string $data
+	 */
+	public function unserialize( $data ) {
+		$this->__construct( unserialize( $data ) );
+	}
+
 }
