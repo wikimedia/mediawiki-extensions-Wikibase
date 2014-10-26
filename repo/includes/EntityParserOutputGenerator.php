@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use ParserOutput;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\SiteLinkList;
@@ -82,6 +83,7 @@ class EntityParserOutputGenerator {
 		$pout->addJsConfigVars( $configVars );
 
 		$this->addSnaksToParserOutput( $pout, $entity->getAllSnaks() );
+		$this->addLabelsToParserOutput( $pout, $entity );
 
 		if ( $entity instanceof Item ) {
 			$this->addBadgesToParserOutput( $pout, $entity->getSiteLinkList() );
@@ -135,6 +137,11 @@ class EntityParserOutputGenerator {
 				$pout->addImage( str_replace( ' ', '_', $value ) );
 			}
 		}
+	}
+
+	private function addLabelsToParserOutput( ParserOutput $pout, Entity $entity ) {
+		$labels = $entity->getFingerprint()->getLabels()->toTextArray();
+		$pout->setExtensionData( 'wikibase-entity-labels', $labels );
 	}
 
 	private function addBadgesToParserOutput( ParserOutput $pout, SiteLinkList $siteLinkList ) {
