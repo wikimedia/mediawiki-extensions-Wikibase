@@ -291,7 +291,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->setPageTitle(
 			$this->msg(
 				$restore ? 'wikibase-restore-title' : 'wikibase-undo-title',
-				$this->getLabelText( $latestContent ),
+				$this->getLabelTextForContent( $latestContent ),
 				$olderRevision->getId(),
 				$newerRevision->getId()
 			)
@@ -348,7 +348,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @return String
 	 */
-	public function getLabelText( EntityContent $content ) {
+	private function getLabelTextForContent( EntityContent $content ) {
 		$labelData = null;
 
 		// TODO: use a message like <autoredircomment> to represent the redirect.
