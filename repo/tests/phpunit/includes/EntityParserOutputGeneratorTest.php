@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
 
@@ -40,6 +41,7 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( self::$html, $parserOutput->getText() );
 		$this->assertEquals( self::$placeholders, $parserOutput->getExtensionData( 'wikibase-view-chunks' ) );
 		$this->assertEquals( self::$configVars, $parserOutput->getJsConfigVars() );
+		$this->assertEquals( array( 'en' => 'kittens' ), $parserOutput->getExtensionData( 'wikibase-entity-labels' ) );
 
 		$this->assertEquals( array( 'http://an.url.com', 'https://another.url.org' ), array_keys( $parserOutput->getExternalLinks() ) );
 		$this->assertEquals( array( 'File:This_is_a_file.pdf', 'File:Selfie.jpg' ), array_keys( $parserOutput->getImages() ) );
@@ -57,6 +59,11 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	private function newItem() {
 		$item = Item::newEmpty();
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'kittens' );
+		$item->setFingerprint( $fingerprint );
+
 		$statements = new StatementList();
 
 		$statements->addNewStatement( new PropertyValueSnak( 42, new StringValue( 'http://an.url.com' ) ) );
@@ -100,7 +107,7 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	private function getEntityTitleLookupMock() {
 		$entityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
-		
+
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {

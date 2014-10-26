@@ -89,13 +89,7 @@ abstract class ViewEntityAction extends ViewAction {
 		if ( !$this->getArticle()->getPage()->exists() ) {
 			$this->displayMissingEntity();
 		} else {
-			$contentRetriever = new ContentRetriever();
-			$content = $contentRetriever->getContentForRequest(
-				$this->getRequest(),
-				$this->getArticle()
-			);
-
-			$this->displayEntityContent( $content );
+			$this->displayEntityPage();
 		}
 	}
 
@@ -119,38 +113,50 @@ abstract class ViewEntityAction extends ViewAction {
 	}
 
 	/**
-	 * Displays the entity content.
+	 * Displays the entity page.
 	 *
 	 * @since 0.1
-	 *
-	 * @param EntityContent $content
 	 */
-	protected function displayEntityContent( EntityContent $content ) {
-		$outputPage = $this->getOutput();
+	protected function displayEntityPage() {
+		$this->setIsEditViewJsConfigVariable();
+
+		$this->setParserOptions();
+		$this->getArticle()->view();
+
+		$this->applyLabelTextToTitle();
+	}
+
+	private function setIsEditViewJsConfigVariable() {
 		$editable = $this->isEditable();
 
 		// NOTE: page-wide property, independent of user permissions
-		$outputPage->addJsConfigVars( 'wbIsEditView', $editable );
-
-		$parserOptions = $this->getArticle()->getPage()->makeParserOptions( $this->getContext()->getUser() );
-
-		$this->getArticle()->setParserOptions( $parserOptions );
-		$this->getArticle()->view();
-
-		$this->applyLabelToTitleText( $outputPage, $content );
+		$this->getOutput()->addJsConfigVars( 'wbIsEditView', $editable );
 	}
 
-	/**
-	 * @param OutputPage $outputPage
-	 */
-	private function applyLabelToTitleText( OutputPage $outputPage, EntityContent $content ) {
-		// Figure out which label to use for title.
-		$labelText = $this->getLabelText( $content );
+	private function setParserOptions() {
+		$user = $this->getContext()->getUser();
+		$parserOptions = $this->getArticle()->getPage()->makeParserOptions( $user );
+
+		$this->getArticle()->setParserOptions( $parserOptions );
+	}
+
+	private function applyLabelTextToTitle() {
+		$outputPage = $this->getOutput();
+
+		// @todo store EntityId in a nice way in ParserOutput
+		$configVars = $outputPage->getJsConfigVars();
+		$titleText = isset( $configVars['wbEntityId'] ) ?: '';
+
+		$labels = $outputPage->getProperty( 'wikibase-entity-labels' );
+
+		if ( $labels ) {
+			$titleText = $this->getLabelText( $labels ) ?: $titleText;
+		}
 
 		if ( $this->isDiff() ) {
-			$this->setPageTitle( $outputPage, $labelText );
+			$this->setPageTitle( $outputPage, $titleText );
 		} else {
-			$this->setHTMLTitle( $outputPage, $labelText );
+			$this->setHTMLTitle( $outputPage, $titleText );
 		}
 	}
 
@@ -184,25 +190,20 @@ abstract class ViewEntityAction extends ViewAction {
 	}
 
 	/**
-	 * @param EntityContent $content
+	 * @param string[] $labels
 	 *
-	 * @return string
+	 * @return string|null
 	 */
-	private function getLabelText( EntityContent $content ) {
+	private function getLabelText( array $labels ) {
 		// Figure out which label to use for title.
 		$languageFallbackChain = $this->getLanguageFallbackChain();
-		$labelData = null;
-
-		if ( !$content->isRedirect() ) {
-			$labels = $content->getEntity()->getLabels();
-			$labelData = $languageFallbackChain->extractPreferredValueOrAny( $labels );
-		}
+		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $labels );
 
 		if ( $labelData ) {
 			return $labelData['value'];
-		} else {
-			return $content->getEntityId()->getSerialization();
 		}
+
+		return null;
 	}
 
 	/**
