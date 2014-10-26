@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_b04082a9",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-26T22:17:06Z",
+      "side": 1,
+      "message": "I think we need an EntityViewFactory, in addition (probably) to EntityParserOutputGeneratorFactory or such.\n\nIn EntityParserOutputGenerator, once we collect all the \"used\" entity ids, then we want to use that info to do a batch lookup of labels to make an in-memory label lookup that the snak / value formatters use. (instead of loading entire entities as we do now)",
+      "revId": "26d1a432930ac5667cc8732451344d1fd0f105ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_5fb9efe4",
         "filename": "repo/includes/View/TocGenerator.php",
         "patchSetId": 14
