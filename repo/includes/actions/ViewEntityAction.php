@@ -5,6 +5,7 @@ namespace Wikibase;
 use Article;
 use ContentHandler;
 use LogEventsList;
+use OutputPage;
 use SpecialPage;
 use ViewAction;
 use Wikibase\Repo\Content\EntityHandler;
@@ -154,11 +155,11 @@ abstract class ViewEntityAction extends ViewAction {
 	 * @param EntityContent $content
 	 */
 	protected function displayEntityContent( EntityContent $content ) {
-		$out = $this->getOutput();
+		$outputPage = $this->getOutput();
 		$editable = $this->isEditable();
 
 		// NOTE: page-wide property, independent of user permissions
-		$out->addJsConfigVars( 'wbIsEditView', $editable );
+		$outputPage->addJsConfigVars( 'wbIsEditView', $editable );
 
 		if ( $editable && !$content->isRedirect() ) {
 			$permissionChecker = $this->getPermissionChecker();
@@ -181,38 +182,71 @@ abstract class ViewEntityAction extends ViewAction {
 		$this->getArticle()->setParserOptions( $parserOptions );
 		$this->getArticle()->view();
 
+		$this->applyLabelToTitleText( $outputPage, $content );
+	}
+
+	/**
+	 * @param OutputPage $outputPage
+	 */
+	private function applyLabelToTitleText( OutputPage $outputPage, EntityContent $content ) {
+		// Figure out which label to use for title.
+		$labelText = $this->getLabelText( $content );
+
+		if ( $this->isDiff() ) {
+			$this->setPageTitle( $outputPage, $labelText );
+		} else {
+			$this->setHTMLTitle( $outputPage, $labelText );
+		}
+	}
+
+	/**
+	 * @param OutputPage $outputPage
+	 * @param string $labelText
+	 */
+	private function setPageTitle( OutputPage $outputPage, $labelText ) {
+		// Escaping HTML characters in order to retain original label that may contain HTML
+		// characters. This prevents having characters evaluated or stripped via
+		// OutputPage::setPageTitle:
+		$outputPage->setPageTitle(
+			$this->msg(
+				'difference-title'
+				// This should be something like the following,
+				// $labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
+				// or should set the attribute of the h1 to correct direction.
+				// Still note that the direction is "auto" so guessing should
+				// give the right direction in most cases.
+			)->rawParams( htmlspecialchars( $labelText ) )
+		);
+	}
+
+	/**
+	 * @param OutputPage $outputPage
+	 * @param string $labelText
+	 */
+	private function setHTMLTitle( OutputPage $outputPage, $labelText ) {
+		// Prevent replacing {{...}} by using rawParams() instead of params():
+		$outputPage->setHTMLTitle( $this->msg( 'pagetitle' )->rawParams( $labelText ) );
+	}
+
+	/**
+	 * @param EntityContent $content
+	 *
+	 * @return string
+	 */
+	private function getLabelText( EntityContent $content ) {
 		// Figure out which label to use for title.
 		$languageFallbackChain = $this->getLanguageFallbackChain();
 		$labelData = null;
 
 		if ( !$content->isRedirect() ) {
-			$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
+			$labels = $content->getEntity()->getLabels();
+			$labelData = $languageFallbackChain->extractPreferredValueOrAny( $labels );
 		}
 
 		if ( $labelData ) {
-			$labelText = $labelData['value'];
+			return $labelData['value'];
 		} else {
-			$labelText = $content->getEntityId()->getSerialization();
-		}
-
-		// Create and set the title.
-		if ( $this->isDiff() ) {
-			// Escaping HTML characters in order to retain original label that may contain HTML
-			// characters. This prevents having characters evaluated or stripped via
-			// OutputPage::setPageTitle:
-			$out->setPageTitle(
-				$this->msg(
-					'difference-title'
-					// This should be something like the following,
-					// $labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
-					// or should set the attribute of the h1 to correct direction.
-					// Still note that the direction is "auto" so guessing should
-					// give the right direction in most cases.
-				)->rawParams( htmlspecialchars( $labelText ) )
-			);
-		} else {
-			// Prevent replacing {{...}} by using rawParams() instead of params():
-			$this->getOutput()->setHTMLTitle( $this->msg( 'pagetitle' )->rawParams( $labelText ) );
+			return $content->getEntityId()->getSerialization();
 		}
 	}
 
