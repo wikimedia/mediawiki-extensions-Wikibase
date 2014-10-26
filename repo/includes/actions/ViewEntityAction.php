@@ -132,17 +132,7 @@ abstract class ViewEntityAction extends ViewAction {
 		// NOTE: page-wide property, independent of user permissions
 		$outputPage->addJsConfigVars( 'wbIsEditView', $editable );
 
-		if ( $editable ) {
-			$title = $this->getArticle()->getTitle();
-			$editable = $title->quickUserCan( 'edit', $user );
-		}
-
 		$parserOptions = $this->getArticle()->getPage()->makeParserOptions( $this->getContext()->getUser() );
-
-		if ( !$editable ) {
-			// disable editing features ("sections" is a misnomer, it applies to the wikitext equivalent)
-			$parserOptions->setEditSection( $editable );
-		}
 
 		$this->getArticle()->setParserOptions( $parserOptions );
 		$this->getArticle()->view();
