@@ -62,29 +62,6 @@ abstract class ViewEntityAction extends ViewAction {
 	}
 
 	/**
-	 * Get permission checker.
-	 * Uses the default WikibaseRepo instance to get the service if it was not previously set.
-	 *
-	 * @return EntityPermissionChecker
-	 */
-	public function getPermissionChecker() {
-		if ( $this->permissionChecker === null ) {
-			$this->permissionChecker = WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
-		}
-
-		return $this->permissionChecker;
-	}
-
-	/**
-	 * Set permission checker.
-	 *
-	 * @param EntityPermissionChecker $permissionChecker
-	 */
-	public function setPermissionChecker( EntityPermissionChecker $permissionChecker ) {
-		$this->permissionChecker = $permissionChecker;
-	}
-
-	/**
 	 * @see Action::getName()
 	 *
 	 * @since 0.1
@@ -162,15 +139,8 @@ abstract class ViewEntityAction extends ViewAction {
 		$outputPage->addJsConfigVars( 'wbIsEditView', $editable );
 
 		if ( $editable && !$content->isRedirect() ) {
-			$permissionChecker = $this->getPermissionChecker();
-			$permissionStatus = $permissionChecker->getPermissionForTitle(
-				$this->getArticle()->getTitle(),
-				$content,
-				$this->getUser(),
-				'edit'
-			);
-
-			$editable = $permissionStatus->isOK();
+			$title = $this->getArticle()->getTitle();
+			$editable = $title->quickUserCan( 'edit', $user );
 		}
 
 		$parserOptions = $this->getArticle()->getPage()->makeParserOptions( $this->getContext()->getUser() );
