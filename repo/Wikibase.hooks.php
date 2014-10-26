@@ -1081,6 +1081,12 @@ final class RepoHooks {
 			$out->setProperty( 'wikibase-view-chunks', $placeholders );
 		}
 
+		$labels = $parserOutput->getExtensionData( 'wikibase-entity-labels' );
+
+		if ( $labels ) {
+			$out->setProperty( 'wikibase-entity-labels', $labels );
+		}
+
 		return true;
 	}
 
