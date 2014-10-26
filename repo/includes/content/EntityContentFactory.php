@@ -11,6 +11,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -189,8 +190,20 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	}
 
 	/**
-	 * @see EntityPermissionChecker::getPermissionStatusForEntityId
+	 * @param User $user
+	 * @param string $permission
+	 * @param Title $entityPage
+	 * @param string $quick
 	 *
+	 * @return string[]
+	 */
+	protected function getPermissionErrors( User $user, $permission, Title $entityPage, $quick = '' ) {
+		//XXX: would be nice to be able to pass the $short flag too,
+		//     as used by getUserPermissionsErrorsInternal. But Title doesn't expose that.
+		return $entityPage->getUserPermissionsErrors( $permission, $user, $quick !== 'quick' );
+	}
+
+	/**
 	 * @param User $user
 	 * @param string $permission
 	 * @param Title $entityPage
@@ -202,10 +215,19 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 */
 	protected function getPermissionStatus( User $user, $permission, Title $entityPage, $quick = '' ) {
 		wfProfileIn( __METHOD__ );
+		$errors = $this->getPermissionErrors( $user, $permission, $entityPage, $quick );
+		$status = $this->getStatusForPermissionErrors( $errors );
 
-		//XXX: would be nice to be able to pass the $short flag too,
-		//     as used by getUserPermissionsErrorsInternal. But Title doesn't expose that.
-		$errors = $entityPage->getUserPermissionsErrors( $permission, $user, $quick !== 'quick' );
+		wfProfileOut( __METHOD__ );
+		return $status;
+	}
+
+	/**
+	 * @param string[] $errors
+	 *
+	 * @return Status
+	 */
+	protected function getStatusForPermissionErrors( array $errors ) {
 		$status = Status::newGood();
 
 		foreach ( $errors as $error ) {
@@ -276,7 +298,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @param string $quick
 	 *
 	 * @return Status a status object representing the check's result.
-	 *
+	 c*
 	 * @todo Move to a separate service (merge into WikiPageEntityStore?)
 	 */
 	public function getPermissionStatusForEntity( User $user, $permission, Entity $entity, $quick = '' ) {
@@ -299,6 +321,24 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 		}
 
 		return $status;
+	}
+
+	/**
+	 * @param Title $title
+	 * @param User $user
+	 * @param string $permission
+	 *
+	 * @return Status
+	 */
+	public function getPermissionForTitle( Title $title, EntityContent $content, User $user, $permission ) {
+		$entityContentTitle = $this->getTitleForId( $content->getEntity()->getId() );
+
+		if ( $entityContentTitle->getFullText() !== $title->getFullText() ) {
+			throw new MWException( '$title does not match content' );
+		}
+
+		$errors = $title->getUserPermissionsErrors( $permission, $user, 'quick' );
+		return $this->getStatusForPermissionErrors( $errors );
 	}
 
 }

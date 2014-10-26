@@ -151,6 +151,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 					'getPermissionStatusForEntity' => true,
 					'getPermissionStatusForEntityType' => true,
 					'getPermissionStatusForEntityId' => true,
+					'getPermissionForTitle' => true,
 				),
 			),
 			'edit not allowed' => array(
@@ -161,6 +162,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 					'getPermissionStatusForEntity' => false,
 					'getPermissionStatusForEntityType' => false,
 					'getPermissionStatusForEntityId' => false,
+					'getPermissionForTitle' => false,
 				),
 			),
 			'delete not allowed' => array(
@@ -215,6 +217,13 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		if ( isset( $expectations['getPermissionStatusForEntityId'] ) ) {
 			$status = $factory->getPermissionStatusForEntityId( $wgUser, $action, $entity->getId() );
 			$this->assertEquals( $expectations['getPermissionStatusForEntityId'], $status->isOK() );
+		}
+
+		if ( isset( $expectations['getPermissionForTitle'] ) ) {
+			$title = $factory->getTitleForId( $entity->getId() );
+			$content = new \Wikibase\ItemContent( $entity );
+			$status = $factory->getPermissionForTitle( $title, $content, $wgUser, $action );
+			$this->assertEquals( $expectations['getPermissionForTitle'], $status->isOK() );
 		}
 	}
 
