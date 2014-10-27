@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_e035d3f4",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-27T18:47:16Z",
+      "side": 1,
+      "message": "Article::view does:\n\nif ( !$this-\u003emPage-\u003eexists() ) {\n  $this-\u003eshowMissingArticle();\n}\n\nbefore trying to load stuff from parser output.\n\nso think this is consistent and correct, and per the tests and I have double checked this manually, per below...\n\non master, if I try to view a deleted oldid revision (as admin or logged out) or non/never existing item, I get \"The database did not find the text of a page that it should have found, named \"Q594\" (revision#: 4476).\" ((missing-article: Q594, (missingarticle-rev: 4476)))\n\nwith this patch https://gerrit.wikimedia.org/r/#/c/168831, i get the same results.\n\nfor a non-entity page, I get slightly different wording (suppose because we duplicate / , but essentially the same and just differences in our implementation of showMissingArticle()\n\n\"The revision #4476 of the page named \"Help:Kitttttttens\" does not exist\" (missing-revision)\n\nviewing something without the oldid param, i get:\n\n(wikibase-noentity) (wikibase-noentity-createone: Special:NewItem)\n\nwith this patch https://gerrit.wikimedia.org/r/#/c/168831, same thing.\n\ni also manually tested with the last patch in this chain and behavior looks the same, in regards to oldid and missing articles / revisions.",
+      "revId": "154e4cb978f4dc2bdf01d61f6d56245711a9addb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
