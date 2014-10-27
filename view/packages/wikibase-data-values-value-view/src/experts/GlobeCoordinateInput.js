@@ -24,7 +24,6 @@
 			return self.viewState().getFormattedValue();
 		} );
 
-
 		var precisionMsgKey = 'valueview-expert-globecoordinateinput-precision';
 		var $precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )

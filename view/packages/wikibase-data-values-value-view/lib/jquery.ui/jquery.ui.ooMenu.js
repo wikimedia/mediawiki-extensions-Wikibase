@@ -375,7 +375,6 @@ $.widget( 'ui.ooMenu', {
 	}
 } );
 
-
 /**
  * Default menu item.
  * @constructor
@@ -435,7 +434,6 @@ $.extend( Item.prototype, {
 		return this._link;
 	}
 } );
-
 
 /**
  * Customizable menu item.

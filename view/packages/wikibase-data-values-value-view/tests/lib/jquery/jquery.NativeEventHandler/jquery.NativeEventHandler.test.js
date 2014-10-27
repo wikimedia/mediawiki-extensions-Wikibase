@@ -104,7 +104,6 @@ return function( testDefinition ) {
 		);
 	} );
 
-
 	QUnit.test( 'Simple native event with initial handler, also allowing custom results', function( assert ) {
 		var TEST_EVENT = 'run';
 		var testBody = newTestBody();
@@ -215,7 +214,6 @@ return function( testDefinition ) {
 		);
 	} );
 
-
 	QUnit.test(
 		'Additional jQuery.Event members used for communicating between initial handler and outer function',
 		12, // make sure all tests are executed since we execute some tests from within event handlers!
@@ -274,7 +272,6 @@ return function( testDefinition ) {
 			'initial, custom and native handlers were called'
 		);
 	} );
-
 
 	QUnit.test( 'Excepted errors', function( assert ) {
 		assert.throws(

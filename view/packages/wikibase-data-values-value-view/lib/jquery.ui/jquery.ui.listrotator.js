@@ -79,7 +79,7 @@
 	 *
 	 * @param {jQuery} $container
 	 * @param {string[]} strings
-	 * @returns {number} The container's maximum width in pixel
+	 * @returns {number[]} The container's maximum width in pixel
 	 */
 	function measureMaximumStringWidths( $container, strings ) {
 		var widths = [];

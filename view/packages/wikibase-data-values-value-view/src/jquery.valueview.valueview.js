@@ -191,7 +191,6 @@ $.widget( 'valueview.valueview', PARENT, {
 		return PARENT.prototype.destroy.call( this );
 	},
 
-
 	/**
 	 * @see jQuery.widget._setOption
 	 * @triggers {Error} when trying to set an option that cannot be set after initialization.
@@ -895,6 +894,8 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		return new util.Notifier( {
 			change: function() {
+				var i;
+
 				if( !self._expert ) {
 					// someone notified about change while there couldn't have been one since there
 					// is no expert which allows for any change currently...
@@ -908,11 +909,11 @@ $.widget( 'valueview.valueview', PARENT, {
 					newValueCharacteristics = self._expert.valueCharacteristics(),
 					lastValueCharacteristics = self.__lastValueCharacteristics || {};
 
-				for( var i in newValueCharacteristics ) {
+				for( i in newValueCharacteristics ) {
 					differentValueCharacteristics = differentValueCharacteristics
 					|| newValueCharacteristics[i] !== lastValueCharacteristics[i];
 				}
-				for( var i in lastValueCharacteristics ) {
+				for( i in lastValueCharacteristics ) {
 					differentValueCharacteristics = differentValueCharacteristics
 					|| newValueCharacteristics[i] !== lastValueCharacteristics[i];
 				}

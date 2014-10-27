@@ -36,7 +36,7 @@ jQuery.valueview = jQuery.valueview || {};
 		}
 
 		// do actual inheritance from base and apply custom definition:
-		var Expert = util.inherit(
+		return util.inherit(
 			'ValueviewExpert_' + name,
 			base,
 			constructor,
@@ -44,7 +44,6 @@ jQuery.valueview = jQuery.valueview || {};
 				uiBaseClass: 'valueview-expert-' + name
 			} )
 		);
-		return Expert;
 	};
 
 	/**
