@@ -6,8 +6,6 @@ use Html;
 use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\TextInjector;
@@ -49,22 +47,6 @@ abstract class EntityView {
 	 */
 	protected $textInjector;
 
-	/**
-	 * Maps entity types to the corresponding entity view.
-	 * FIXME: remove this stuff, big OCP violation
-	 *
-	 * @since 0.2
-	 *
-	 * @var string[]
-	 */
-	public static $typeMap = array(
-		Item::ENTITY_TYPE => '\Wikibase\ItemView',
-		Property::ENTITY_TYPE => '\Wikibase\PropertyView',
-
-		// TODO: Query::ENTITY_TYPE
-		'query' => '\Wikibase\QueryView',
-	);
-
 	public function __construct(
 		FingerprintView $fingerprintView,
 		ClaimsView $claimsView,
@@ -74,6 +56,7 @@ abstract class EntityView {
 		$this->fingerprintView = $fingerprintView;
 		$this->claimsView = $claimsView;
 		$this->language = $language;
+
 		$this->textInjector = new TextInjector();
 	}
 
@@ -99,6 +82,7 @@ abstract class EntityView {
 	 *
 	 * @param EntityRevision $entityRevision the entity to render
 	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 *
 	 * @return string HTML
 	 */
 	public function getHtml( EntityRevision $entityRevision, $editable = true ) {
@@ -107,9 +91,8 @@ abstract class EntityView {
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 
 		$entityId = $entity->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
-		$html = '';
 
-		$html .= wfTemplate( 'wikibase-entityview',
+		$html = wfTemplate( 'wikibase-entityview',
 			$entity->getType(),
 			$entityId,
 			$this->language->getCode(),
@@ -159,8 +142,7 @@ if ( $ ) {
 
 		$entity = $entityRevision->getEntity();
 
-		$html = '';
-		$html .= $this->getHtmlForFingerprint( $entity, $editable );
+		$html = $this->getHtmlForFingerprint( $entity, $editable );
 		$html .= $this->getHtmlForToc();
 		$html .= $this->getHtmlForTermBox( $entityRevision, $editable );
 
@@ -173,6 +155,7 @@ if ( $ ) {
 	 *
 	 * @param Entity $entity
 	 * @param bool $editable
+	 *
 	 * @return string
 	 */
 	protected function getHtmlForFingerprint( Entity $entity, $editable = true ) {
@@ -185,7 +168,6 @@ if ( $ ) {
 	 * @return string
 	 */
 	protected function getHtmlForToc() {
-		$tocContent = '';
 		$tocSections = $this->getTocSections();
 
 		if ( count( $tocSections ) < 2 ) {
@@ -197,7 +179,7 @@ if ( $ ) {
 
 		// Placeholder for the TOC entry for the term box (which may or may not be used for a given user).
 		// EntityViewPlaceholderExpander must know about the 'termbox-toc' name.
-		$tocContent .= $this->textInjector->newMarker( 'termbox-toc' );
+		$tocContent = $this->textInjector->newMarker( 'termbox-toc' );
 
 		$i = 1;
 
@@ -209,12 +191,10 @@ if ( $ ) {
 			);
 		}
 
-		$toc = wfTemplate( 'wb-entity-toc',
+		return wfTemplate( 'wb-entity-toc',
 			wfMessage( 'toc' )->text(),
 			$tocContent
 		);
-
-		return $toc;
 	}
 
 	/**
@@ -228,17 +208,18 @@ if ( $ ) {
 
 	/**
 	 * @param EntityRevision $entityRevision
-	 * @param bool $editable
 	 *
 	 * @return string
 	 */
 	protected function getHtmlForTermBox( EntityRevision $entityRevision ) {
-		if ( $entityRevision->getEntity()->getId() ) {
+		$entityId = $entityRevision->getEntity()->getId();
+
+		if ( $entityId !== null ) {
 			// Placeholder for a termbox for the present item.
 			// EntityViewPlaceholderExpander must know about the parameters used here.
 			return $this->textInjector->newMarker(
 				'termbox',
-				$entityRevision->getEntity()->getId()->getSerialization(),
+				$entityId->getSerialization(),
 				$entityRevision->getRevision()
 			);
 		}
