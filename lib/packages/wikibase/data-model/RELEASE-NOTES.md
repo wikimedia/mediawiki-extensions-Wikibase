@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 2.1.0 (2014-10-27)
+
+* `ReferenceList` now implements `Serializable`
+
 ## Version 2.0.2 (2014-10-23)
 
 * Fixed handling of numeric ids as string in `LegacyIdInterpreter` which was broken in 2.0.1.
@@ -10,7 +14,7 @@
 * `EntityIdValue::unserialize` now throws the correct type of exception
 * Improved performance of `BasicEntityIdParser` and `LegacyIdInterpreter`
 
-## Version 2.0 (2014-10-14)
+## Version 2.0.0 (2014-10-14)
 
 #### Breaking changes
 
