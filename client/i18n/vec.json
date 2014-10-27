@@ -34,7 +34,6 @@
 	"wikibase-linkitem-not-loggedin": "Te ghè da ver fato el login su sta wiki e su l'[$1 archivio dati sentralizà] par doparar sta funsionalità.",
 	"wikibase-linkitem-success-link": "Le pagine le xe stà colegà coretamente. Te pol catar l'elemento contegnente i link nel nostro [$1 archivio dati sentralizà].",
 	"wikibase-property-notfound": "Proprietà $1 mia catà.",
-	"wikibase-property-notsupportedyet": "Wikibase no'l suporta gnancora el tipo de proprietà par la proprietà $1.",
 	"wikibase-rc-hide-wikidata": "$1 Wikidata",
 	"wikibase-rc-show-wikidata-pref": "Mostra le modifiche de Wikidata tra i ultimi canbiamenti",
 	"wikibase-rc-wikibase-edit-title": "Modifica su Wikidata",

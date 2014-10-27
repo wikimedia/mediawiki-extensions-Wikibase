@@ -34,7 +34,6 @@
 	"wikibase-linkitem-not-loggedin": "Sanak musti masuak log pado wiki ko dan pado [$1 pusek panyimpanan data] untuak manggunoan fitur iko.",
 	"wikibase-linkitem-success-link": "Laman alah barasil ditauikkan. Sanak dapek manamukan item barisi tautan tarsabuik pado [$1 pusek panyimpanan data] kami.",
 	"wikibase-property-notfound": "Properti $1 indak basobok.",
-	"wikibase-property-notsupportedyet": "Wikibase alun mandukuang tipe properti untuak properti $1.",
 	"wikibase-rc-hide-wikidata": "$1 Wikidata",
 	"wikibase-rc-show-wikidata-pref": "Tunjuakan suntiangan Wikidata di parubahan baru",
 	"wikibase-watchlist-show-changes-pref": "Tambahan suntiangan Wikidata pado daftar pantau",

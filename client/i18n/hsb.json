@@ -36,7 +36,6 @@
 	"wikibase-linkitem-not-loggedin": "Dyrbiš w tutym wikiju a w [$1 centralnym datowym repozitoriju] přizjewjeny być, zo by tutu funkciju wužiwał.",
 	"wikibase-linkitem-success-link": "Strony su so wuspěšnje zwjazali. Móžeš element, kotryž wotkazy wobsahuje, w našim [$1 centralnym datowym repozitoriju] namakać.",
 	"wikibase-property-notfound": "Kajkosć $1 njeje so namakała.",
-	"wikibase-property-notsupportedyet": "Wikibase hišće njepoděruje kajkostny typ za kajkosć $1.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "Schować",
 	"wikibase-rc-hide-wikidata-show": "Pokazać",

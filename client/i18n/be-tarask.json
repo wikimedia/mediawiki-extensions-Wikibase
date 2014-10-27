@@ -38,7 +38,6 @@
 	"wikibase-linkitem-not-loggedin": "Для карыстаньня гэтай функцыяй вы мусіце ўвайсьці ў гэтую вікі і [$1 цэнтральны рэпазыторый].",
 	"wikibase-linkitem-success-link": "Старонкі былі пасьпяхова злучаныя. Новы аб’ект са спасылкамі вы можаце пабачыць у нашым [$1 цэнтральным рэпазыторыі].",
 	"wikibase-property-notfound": "Уласьцівасьць «$1» ня знойдзеная.",
-	"wikibase-property-notsupportedyet": "Вікізьвесткі пакуль не падтрымліваюць тып уласьцівасьці «$1».",
 	"wikibase-rc-hide-wikidata": "$1 Вікізьвесткі",
 	"wikibase-rc-show-wikidata-pref": "Паказваць праўкі Вікізьвестак у сьпісе апошніх зьменаў",
 	"wikibase-rc-wikibase-edit-letter": "З",

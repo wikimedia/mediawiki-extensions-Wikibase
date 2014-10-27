@@ -41,7 +41,6 @@
 	"wikibase-undo-badpage": "Благая вэрсія: вэрсія $2 не належыць да [[$1]].",
 	"wikibase-undo-firstrev": "Скасаваньне стварэньня старонкі немагчымае",
 	"wikibase-undo-nocontent": "Немагчыма загрузіць зьмест вэрсіі $2 старонкі $1",
-	"wikibase-propertyedittool-full": "Сьпіс значэньняў выкананы.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Адно значэньне яшчэ не захаванае|$1 значэньні яшчэ не захаваныя|$1 значэньняў яшчэ не захавана}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|запіс|запісы|запісаў}}",
 	"wikibase-sitelinksedittool-full": "Спасылкі на старонкі ёсьць ужо для ўсіх вядомых сайтаў.",

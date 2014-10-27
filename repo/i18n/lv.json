@@ -33,7 +33,6 @@
 	"wikibase-undo-revision-error": "Atcelšana neizdevās",
 	"wikibase-undo-firstrev": "Nevar atcelt lapas izveidi",
 	"wikibase-undo-nocontent": "Nevar ielādēt $2 pārskatīšana no $1 lapas.",
-	"wikibase-propertyedittool-full": "Vērtību saraksts ir pilnīgs.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Viena vērtība vēl nav saglabāta|$1 vērtības vēl nav saglabātas}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|ieraksts|ieraksti}}",
 	"wikibase-sitelinksedittool-full": "Saites uz lapām jau ir norādītas visām zināmajām vietnēm.",

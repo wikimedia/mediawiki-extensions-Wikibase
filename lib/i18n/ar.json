@@ -5,7 +5,8 @@
 			"Gagnabil",
 			"Meno25",
 			"زكريا",
-			"مشعل الحربي"
+			"مشعل الحربي",
+			"Tarawneh"
 		]
 	},
 	"wikibase-entity-item": "عنصر",
@@ -48,6 +49,7 @@
 	"wikibase-sitelinks-sitename-columnheading": "اللغة",
 	"wikibase-sitelinks-sitename-columnheading-special": "الموقع",
 	"wikibase-sitelinks-link-columnheading": "صفحة مرتبطة",
+	"wikibase-snakview-snaktypeselector-novalue": "لا قيمة",
 	"wikibase-tooltip-error-details": "التفاصيل",
 	"wikibase-validator-bad-type": "$2 عوضا عن $1",
 	"wikibase-validator-no-such-entity": "لم يتم العثور على $1",

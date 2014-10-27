@@ -31,6 +31,8 @@
 	"wikibase-sitelinks-sitename-columnheading": "Rěč",
 	"wikibase-sitelinks-siteid-columnheading": "Kod",
 	"wikibase-sitelinks-link-columnheading": "Wotkazana strona",
+	"wikibase-snakview-snaktypeselector-somevalue": "njeznata hódnota",
+	"wikibase-snakview-snaktypeselector-novalue": "žana hódnota",
 	"wikibase-tooltip-error-details": "Podrobnosće",
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-commonsMedia": "Medijowa dataja na Wikimedia Commons"

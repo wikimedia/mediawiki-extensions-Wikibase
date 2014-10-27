@@ -27,7 +27,6 @@
 	"wikibase-partial-undo": "ફેરફાર આંશિક રીતે પાછા વાળી શકાશે",
 	"wikibase-empty-undo": "અહિં એવું કશું નથી જે પાછું વાળી શકાય",
 	"wikibase-undo-revision-error": "પુન:સ્થાપન નિષ્ફળ",
-	"wikibase-propertyedittool-full": "કિંમતોની યાદી પૂર્ણ છે.",
 	"wikibase-aliases-label": "આ નામે પણ જાણીતા:",
 	"wikibase-propertypage-datatype": "ડેટા પ્રકાર",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|સ્રોત|સ્રોતો}}",

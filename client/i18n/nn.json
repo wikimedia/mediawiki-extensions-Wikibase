@@ -39,7 +39,6 @@
 	"wikibase-linkitem-not-loggedin": "Du lyt vera innlogga på denne wikien og på det [$1 sentrale datalageret] for å nytta denne funksjonen.",
 	"wikibase-linkitem-success-link": "Sidene vart lenkja til kvarandre. Du kan finna elementet som inneheld lenkjene i det [$1 sentrale datalageret] vårt.",
 	"wikibase-property-notfound": "Eigenskapen $1 vart ikkje funnen.",
-	"wikibase-property-notsupportedyet": "Wikibase stør enno ikkje eigenskapstypen for eigenskapen $1.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Gøym",
 	"wikibase-rc-hide-wikidata-show": "Vis",

@@ -36,6 +36,8 @@
 	"wikibase-sitelinks-sitename-columnheading": "Idioma",
 	"wikibase-sitelinks-siteid-columnheading": "Código",
 	"wikibase-sitelinks-link-columnheading": "Página ligada",
+	"wikibase-snakview-snaktypeselector-somevalue": "valor desconhecido",
+	"wikibase-snakview-snaktypeselector-novalue": "nenhum valor",
 	"wikibase-tooltip-error-details": "Detalhes",
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-commonsMedia": "Arquivo de mídia do Commons"

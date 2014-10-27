@@ -31,6 +31,8 @@
 	"wikibase-sitelinks-sitename-columnheading": "Rěc",
 	"wikibase-sitelinks-siteid-columnheading": "Kod",
 	"wikibase-sitelinks-link-columnheading": "Wótkazany bok",
+	"wikibase-snakview-snaktypeselector-somevalue": "njeznata gódnota",
+	"wikibase-snakview-snaktypeselector-novalue": "žedna gódnota",
 	"wikibase-tooltip-error-details": "Drobnostki",
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-commonsMedia": "Medijowa dataja na Wikimedia Commons"

@@ -40,7 +40,6 @@
 	"wikibase-undo-samerev": "გაუქმება შეუძლებელია, რადგან საწყის და სამიზნო ვერსიად მითითებულია იდენტური შინაარსის მქონე ვერსიები.",
 	"wikibase-undo-badpage": "ცუდი ვერსია: ვერსია $2 არ ეხება გვერდს [[$1]].",
 	"wikibase-undo-firstrev": "გვერდის შექმნის გაუქმება შეუძლებელია",
-	"wikibase-propertyedittool-full": "მნიშვნელობების სია სავსეა.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|ერთი მნიშვნელობა|$1 მნიშვნელობა}} ჯერ არ შენახულა",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|ჩანაწერი|ჩანაწერი}}",
 	"wikibase-sitelinksedittool-full": "გვერდის ბმულები უკვე დაყენებულია ყველა ცნობილი საიტისათვის.",

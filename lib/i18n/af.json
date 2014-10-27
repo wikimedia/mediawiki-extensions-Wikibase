@@ -26,6 +26,8 @@
 	"wikibase-sitelinks-sitename-columnheading": "Taal",
 	"wikibase-sitelinks-siteid-columnheading": "Kode",
 	"wikibase-sitelinks-link-columnheading": "Geskakelde artikel",
+	"wikibase-snakview-snaktypeselector-somevalue": "onbekende waarde",
+	"wikibase-snakview-snaktypeselector-novalue": "geen waarde",
 	"wikibase-tooltip-error-details": "Details",
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-commonsMedia": "Medialêer van Commons",

@@ -43,7 +43,6 @@
 	"wikibase-undo-samerev": "Kan ikkje angra, den same versjonen var oppgjeven for byrjing og ende",
 	"wikibase-undo-badpage": "Ubrukeleg versjon: versjon $2 høyrer ikkje til [[$1]].",
 	"wikibase-undo-firstrev": "Kan ikkje angra opprettinga av sida",
-	"wikibase-propertyedittool-full": "Lista over verdiar er komplett",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Éin verdi|$1 verdiar}} er ikkje lagra enno.",
 	"wikibase-propertyedittool-counter-entrieslabel": "({{PLURAL:$1|éi oppføring|$1 oppføringar}})",
 	"wikibase-sitelinksedittool-full": "Det er ikkje fleire nettstader tilgjengelege",

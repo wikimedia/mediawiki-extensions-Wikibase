@@ -38,7 +38,6 @@
 	"wikibase-undo-badpage": "Version sbalià: la version $2 no la apartien mia a [[$1]].",
 	"wikibase-undo-firstrev": "No se pol anular la creasion de la pagina",
 	"wikibase-undo-nocontent": "No se pol cargar el contegnùo de la version $2 de la pagina $1",
-	"wikibase-propertyedittool-full": "L'elenco dei valori el xe conpleto.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Un valore gnancora salvà|$1 valori gnancora salvà}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|sito|siti}}",
 	"wikibase-sitelinksedittool-full": "Xe zà stà inpostà colegamenti a le pagine par tuti i siti conossùi.",

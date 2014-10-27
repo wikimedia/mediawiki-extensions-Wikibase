@@ -44,7 +44,6 @@
 	"wikibase-undo-badpage": "Slaba redakcija: redakcija $2 ne pripada strani [[$1]].",
 	"wikibase-undo-firstrev": "Ustvaritve strani ni mogoče razveljaviti",
 	"wikibase-undo-nocontent": "Ne morem naložiti vsebine redakcije $2 strani $1",
-	"wikibase-propertyedittool-full": "Seznam vrednosti je popoln.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Ena vrednost|$1 vrednosti}} še {{PLURAL:$1|ni shranjena|nista shranjeni|niso shranjene|ni shranjenih}}.",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|vnos|vnosa|vnosi|vnosov}}",
 	"wikibase-sitelinksedittool-full": "Povezave na strani so za vsa znana spletišča že podane.",

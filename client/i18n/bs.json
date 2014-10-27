@@ -34,7 +34,6 @@
 	"wikibase-linkitem-not-loggedin": "Morate biti prijavljeni na ovom wiki projektu i na [$1 centralnom skladištu podataka] da bi mogli koristiti ovu funkciju.",
 	"wikibase-linkitem-success-link": "Stranice su uspješno povezane. Možete pronaći ovu stavku koja sadrži ove poveznice u našom [$1 centralnom skladištu podataka].",
 	"wikibase-property-notfound": "Osobina $1 nije pronađena.",
-	"wikibase-property-notsupportedyet": "Wikibase trenutno ne podržaje tip za osobinu $1.",
 	"wikibase-rc-hide-wikidata": "$1 Wikipodaci",
 	"wikibase-rc-show-wikidata-pref": "Pokaži izmjene Wikipodataka u nedavnim izmjenama",
 	"wikibase-rc-wikibase-edit-title": "Uređivanje Wikipodataka",

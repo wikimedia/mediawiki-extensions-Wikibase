@@ -30,6 +30,8 @@
 	"wikibase-sitelinks-sitename-columnheading": "Мова",
 	"wikibase-sitelinks-siteid-columnheading": "Код",
 	"wikibase-sitelinks-link-columnheading": "Злучаны артыкул",
+	"wikibase-snakview-snaktypeselector-somevalue": "невядомае значэнне",
+	"wikibase-snakview-snaktypeselector-novalue": "значэнне не зададзена",
 	"wikibase-tooltip-error-details": "Падрабязнасці",
 	"datatypes-type-wikibase-item": "Элемент",
 	"datatypes-type-commonsMedia": "Медыяфайл з Вікісховішча"

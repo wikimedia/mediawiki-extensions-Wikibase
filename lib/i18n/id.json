@@ -37,6 +37,8 @@
 	"wikibase-sitelinks-sitename-columnheading": "Bahasa",
 	"wikibase-sitelinks-siteid-columnheading": "Kode",
 	"wikibase-sitelinks-link-columnheading": "Artikel tertaut",
+	"wikibase-snakview-snaktypeselector-somevalue": "nilai tidak diketahui",
+	"wikibase-snakview-snaktypeselector-novalue": "tidak ada nilai",
 	"wikibase-tooltip-error-details": "Rincian",
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-commonsMedia": "Berkas media Commons",

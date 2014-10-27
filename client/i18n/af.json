@@ -33,7 +33,6 @@
 	"wikibase-linkitem-not-loggedin": "U moet by hierdie wiki en die [$1 sentrale data-resevoir] aangemeld wees om hierdie funksie te kan gebruik.",
 	"wikibase-linkitem-success-link": "Die bladsye is suksesvol geskakel. U kan die item met die skakels in die [$1 sentrale data-resevoir] vind.",
 	"wikibase-property-notfound": "Eienskap $1 nie gevind nie.",
-	"wikibase-property-notsupportedyet": "Wikibase ondersteun nog nie die eienskapstipe vir die eienskap $1 nie.",
 	"wikibase-rc-hide-wikidata": "$1 wikidata",
 	"wikibase-rc-show-wikidata-pref": "Wys Wikidata-wysigings in onlangse wysigings",
 	"wikibase-rc-wikibase-edit-letter": "D",

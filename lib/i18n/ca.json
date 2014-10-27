@@ -22,6 +22,8 @@
 	"wikibase-sitelinks-sitename-columnheading": "Llengua",
 	"wikibase-sitelinks-siteid-columnheading": "Codi",
 	"wikibase-sitelinks-link-columnheading": "Pàgina enllaçada",
+	"wikibase-snakview-snaktypeselector-somevalue": "valor desconegut",
+	"wikibase-snakview-snaktypeselector-novalue": "sense valor",
 	"wikibase-tooltip-error-details": "Detalls",
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-commonsMedia": "Fitxer multimèdia de Commons"

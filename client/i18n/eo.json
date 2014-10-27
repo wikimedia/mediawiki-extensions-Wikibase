@@ -38,7 +38,6 @@
 	"wikibase-linkitem-not-loggedin": "Vi bezonas esti ensalutinta en tiu ĉi vikio kaj en  [$1 centra datuma deponejo] por uzi tiun ĉi funkcion.",
 	"wikibase-linkitem-success-link": "La paĝoj estas sukcese interligitaj. Eron, kiu enhavas la ligilojn, vi povas trovi en nia [$1 centra datuma deponejo].",
 	"wikibase-property-notfound": "Atributo $1 ne estas trovita.",
-	"wikibase-property-notsupportedyet": "Wikibase ankoraŭ ne subtenas atributan specon por atribuo $1.",
 	"wikibase-rc-hide-wikidata": "$1 Vikidatumoj",
 	"wikibase-rc-hide-wikidata-hide": "Kaŝi",
 	"wikibase-rc-hide-wikidata-show": "Montri",

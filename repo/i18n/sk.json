@@ -25,7 +25,6 @@
 	"wikibase-statements": "Výroky",
 	"wikibase-terms": "V iných jazykoch",
 	"wikibase-remove": "odstrániť",
-	"wikibase-propertyedittool-full": "Zoznam hodnôt je kompletný.",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|položka|položky|položiek}}",
 	"wikibase-aliases-label": "Tiež známy ako:",
 	"wikibase-propertypage-datatype": "Typ údaju",

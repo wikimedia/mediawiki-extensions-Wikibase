@@ -10,5 +10,7 @@
 	"wikibase-timedetails-after": "પછી",
 	"wikibase-globedetails-longitude": "રેખાંશ",
 	"wikibase-globedetails-latitude": "અક્ષાંસ",
-	"wikibase-globedetails-globe": "ગોળો"
+	"wikibase-globedetails-globe": "ગોળો",
+	"wikibase-snakview-snaktypeselector-somevalue": "અજાણી કિંમત",
+	"wikibase-snakview-snaktypeselector-novalue": "કોઇ કિંમત નથી"
 }

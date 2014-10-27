@@ -32,7 +32,6 @@
 	"wikibase-linkitem-not-loggedin": "Musyš w toś tom wikiju a w [$1 centralnem datowem repozitoriumje] pśizjawjony byś, aby toś tu funkciju wužywał.",
 	"wikibase-linkitem-success-link": "Boki su se wuspěšnje zwězali. Móžoš element, kótaryž wopśimujo wótkaze, w našom [$1 centralnem datowem repozitoriumje] namakaś.",
 	"wikibase-property-notfound": "Kakosć $1 njejo se namakała.",
-	"wikibase-property-notsupportedyet": "Wikibase hyšći njepóděra kakosćowy typ za kakosć $1.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-show-wikidata-pref": "Změny {{WBREPONAME}} w aktualnych změnach pokazaś",
 	"wikibase-watchlist-show-changes-pref": "Změny {{WBREPONAME}} w twójich wobglědowańkach pokazaś",

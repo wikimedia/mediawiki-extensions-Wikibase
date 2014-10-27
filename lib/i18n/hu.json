@@ -29,6 +29,8 @@
 	"wikibase-sitelinks-sitename-columnheading": "Nyelv",
 	"wikibase-sitelinks-siteid-columnheading": "Kód",
 	"wikibase-sitelinks-link-columnheading": "Kapcsolt oldal",
+	"wikibase-snakview-snaktypeselector-somevalue": "ismeretlen érték",
+	"wikibase-snakview-snaktypeselector-novalue": "nincs érték",
 	"wikibase-tooltip-error-details": "Részletek",
 	"datatypes-type-wikibase-item": "Tétel",
 	"datatypes-type-commonsMedia": "Commons médiafájl"

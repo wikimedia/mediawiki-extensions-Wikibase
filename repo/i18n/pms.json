@@ -44,7 +44,6 @@
 	"wikibase-undo-badpage": "Revision pa bon-a: la revision $2 a aparten pa a [[$1]].",
 	"wikibase-undo-firstrev": "As peul pa anulesse la creassion dla pàgina",
 	"wikibase-undo-nocontent": "Impossìbil carié ël contnù ëd la revision $2 dla pàgina $1",
-	"wikibase-propertyedittool-full": "La lista dij valor a l'é completa.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Un valor|$1 valor}} ancor nen salvà",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|vos}}",
 	"wikibase-sitelinksedittool-full": "Le liure a le pàgine a son già stàite ampostà për tùit ij sit conossù.",

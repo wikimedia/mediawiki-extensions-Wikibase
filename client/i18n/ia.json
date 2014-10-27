@@ -37,7 +37,6 @@
 	"wikibase-linkitem-not-loggedin": "Tu debe aperir session in iste wiki e in le [$1 repositorio central de datos] pro usar iste function.",
 	"wikibase-linkitem-success-link": "Le paginas ha essite ligate con successo. Le elemento continente le ligamines se trova in nostre [$1 repositorio central de datos].",
 	"wikibase-property-notfound": "Proprietate $1 non trovate.",
-	"wikibase-property-notsupportedyet": "Wikibase non supporta ancora le typo de proprietate pro le proprietate $1.",
 	"wikibase-rc-hide-wikidata": "$1 Wikidata",
 	"wikibase-rc-hide-wikidata-hide": "Celar",
 	"wikibase-rc-hide-wikidata-show": "Monstrar",
