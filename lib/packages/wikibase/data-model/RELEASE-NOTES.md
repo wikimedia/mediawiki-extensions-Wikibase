@@ -3,6 +3,7 @@
 ## Version 2.1.0 (2014-10-27)
 
 * `ReferenceList` now implements `Serializable`
+* Enhanced 32 bit compatibility for numeric ids 
 
 ## Version 2.0.2 (2014-10-23)
 
