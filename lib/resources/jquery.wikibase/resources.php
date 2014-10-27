@@ -344,6 +344,7 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase',
 				'wikibase.datamodel',
+				'wikibase.sites',
 				'wikibase.templates',
 				'wikibase.utilities', // wikibase.utilities.ui
 			),
