@@ -9,15 +9,6 @@
 	'use strict';
 
 	$.widget( 'wikibase.entitysearch', $.wikibase.entityselector, {
-
-		/**
-		 * @see jQuery.wikibase.entityselector._create
-		 */
-		_create: function() {
-			$.wikibase.entityselector.prototype._create.call( this );
-			this.element.off( 'blur' );
-		},
-
 		/**
 		 *@see jQuery.wikibase.entityselector._createMenuItemFromSuggestion
 		 */
