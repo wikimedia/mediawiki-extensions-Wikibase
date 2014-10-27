@@ -307,8 +307,19 @@ $.widget( 'ui.ooMenu', {
 	 * Deactivates the menu (resets activated item).
 	 */
 	deactivate: function() {
-		this.element.children( '.ui-state-hover' ).removeClass( 'ui-state-hover' );
-		$( this ).trigger( 'blur' );
+		if( this._isActive() ) {
+			this.element.children( '.ui-state-hover' ).removeClass( 'ui-state-hover' );
+			$( this ).trigger( 'blur' );
+		}
+	},
+
+	/**
+	 * Returns whether there is an active menu item.
+	 *
+	 * @return {boolean}
+	 */
+	_isActive: function() {
+		return !!this.element.children( '.ui-state-hover' ).length;
 	},
 
 	/**

@@ -216,6 +216,10 @@
 					self.element.val( item.getValue() );
 					self._close();
 					self._trigger( 'change' );
+
+					setTimeout( function() {
+						self.element.focus();
+					}, 0 );
 				}
 			} );
 
