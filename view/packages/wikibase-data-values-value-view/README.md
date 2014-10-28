@@ -110,6 +110,7 @@ Other methods an Expert needs to provide:
 #### Enhancements
 * $.ui.suggester: Hitting the backspace or delete key if the input is empty already does not trigger search anymore.
 * $.ui.suggester: Refocus input element after selecting a suggestion via mouse click.
+* $.ui.suggester: Added "confineMinWidthTo" option for specifying an element, the suggestion list's minimum width shall be confined to.
 
 ### 0.7.0 (2014-09-10)
 

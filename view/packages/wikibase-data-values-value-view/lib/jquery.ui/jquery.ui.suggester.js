@@ -52,7 +52,7 @@
  *         Delay in milliseconds of the request querying for suggestions.
  *         Default: 300
  *
- * @option {jQuery.ui.ooMenu} [menu]
+ * @option {jQuery.ui.ooMenu|null} [menu]
  *         A pre-initialized menu instance featuring one or more custom list item may be provided.
  *         This should be the preferred way to define custom items.
  *         Default: null (no default menu)
@@ -61,6 +61,12 @@
  *         Object to be evaluated by jQuery.ui.position to set the suggestion list's position. In
  *         RTL context, the specified value is flipped automatically.
  *         Default: (position suggestion list's top left corner at input box's bottom left corner)
+ *
+ * @option {jQuery|null} [confineMinWidthTo]
+ *         The suggestion list's width shall not be smaller than the width of the referenced
+ *         element. If "undefined", the minimum width will be the width of the element the suggester
+ *         is initialized on. Specifying "null" will prevent applying a minimum width.
+ *         Default: undefined
  *
  * @event open
  *        Triggered when the list of suggestions is opened.
@@ -100,7 +106,8 @@
 				my: 'left top',
 				at: 'left bottom',
 				collision: 'none'
-			}
+			},
+			confineMinWidthTo: undefined
 		},
 
 		/**
@@ -594,23 +601,34 @@
 				|| $( document.documentElement ).css( 'direction' )
 				|| 'auto';
 
-			var position = $.extend( {}, this.options.position );
+			var position = $.extend( {}, this.options.position ),
+				$menu = this.options.menu.element;
 
 			if( dir === 'rtl' ) {
 				position = flipPosition( position );
 			}
 
-			this.options.menu.element.position( $.extend( {
+			$menu.position( $.extend( {
 				of: this.element
 			}, position ) );
-			this.options.menu.element.zIndex( this.element.zIndex() + 1 );
+
+			$menu.zIndex( this.element.zIndex() + 1 );
 
 			if( this.element.attr( 'lang' ) ) {
-				this.options.menu.element.attr( 'lang', this.element.attr( 'lang' ) );
+				$menu.attr( 'lang', this.element.attr( 'lang' ) );
 			}
-			this.options.menu.element.attr( 'dir', dir );
+			$menu.attr( 'dir', dir );
 
 			this.options.menu.scale();
+
+			if( this.options.confineMinWidthTo !== null ) {
+				var $minWidthConfinement = this.options.confineMinWidthTo || this.element;
+
+				$menu.css(
+					'min-width',
+					$minWidthConfinement.outerWidth() - ( $menu.outerWidth() - $menu.width() )
+				);
+			}
 		}
 
 	} );
