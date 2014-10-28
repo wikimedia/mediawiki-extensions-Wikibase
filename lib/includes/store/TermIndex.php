@@ -57,11 +57,11 @@ interface TermIndex extends LabelConflictFinder {
 	/**
 	 * Returns the terms stored for the given entity.
 	 *
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntity( EntityId $id );
+	public function getTermsOfEntity( EntityId $entityId );
 
 	/**
 	 * Returns the terms stored for the given entities. Can be filtered by language.
