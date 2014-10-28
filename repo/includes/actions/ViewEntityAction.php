@@ -131,17 +131,15 @@ abstract class ViewEntityAction extends ViewAction {
 	/**
 	 * Returns true if this view action is performing a plain view (not a diff, etc)
 	 * of the page's current revision.
+	 *
+	 * @return bool
 	 */
 	private function isEditable() {
-		if ( !$this->getArticle()->isCurrent() || $this->isDiff() ) {
-			return false;
-		}
-
-		return true;
+		return !$this->isDiff() && $this->getArticle()->isCurrent();
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isDiff() {
 		return $this->getRequest()->getCheck( 'diff' );
@@ -187,6 +185,7 @@ abstract class ViewEntityAction extends ViewAction {
 
 	/**
 	 * @param OutputPage $outputPage
+	 * @param EntityContent $content
 	 */
 	private function applyLabelToTitleText( OutputPage $outputPage, EntityContent $content ) {
 		// Figure out which label to use for title.
@@ -256,8 +255,6 @@ abstract class ViewEntityAction extends ViewAction {
 	 * @since 0.1
 	 */
 	protected function displayMissingEntity() {
-		global $wgSend404Code;
-
 		$title = $this->getArticle()->getTitle();
 		$oldid = $this->getArticle()->getOldID();
 
@@ -278,11 +275,7 @@ abstract class ViewEntityAction extends ViewAction {
 			        'msgKey' => array( 'moveddeleted-notice' ) )
 		);
 
-		if ( $wgSend404Code ) {
-			// If there's no backing content, send a 404 Not Found
-			// for better machine handling of broken links.
-			$this->getRequest()->response()->header( "HTTP/1.1 404 Not Found" );
-		}
+		$this->send404Code();
 
 		$hookResult = wfRunHooks( 'BeforeDisplayNoArticleText', array( $this ) );
 
@@ -320,6 +313,16 @@ abstract class ViewEntityAction extends ViewAction {
 			$text = "<div class='noarticletext'>\n$text\n</div>";
 
 			$out->addWikiText( $text );
+		}
+	}
+
+	private function send404Code() {
+		global $wgSend404Code;
+
+		if ( $wgSend404Code ) {
+			// If there's no backing content, send a 404 Not Found
+			// for better machine handling of broken links.
+			$this->getRequest()->response()->header( 'HTTP/1.1 404 Not Found' );
 		}
 	}
 
