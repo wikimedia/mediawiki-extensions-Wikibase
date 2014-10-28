@@ -7,6 +7,7 @@ use OutOfBoundsException;
 use Title;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
@@ -17,9 +18,15 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  *
  * @licence GNU GPL v2+
  * @author Adrian Lang
- * @author Thiemo Mättig
+ * @author Thiemo Mätti
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
+
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
 
 	/**
 	 * @var EntityTitleLookup|null
@@ -28,11 +35,13 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	public function __construct(
 		FormatterOptions $options,
+		LabelLookup $labelLookup,
 		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
-		parent::__construct( $options, $entityLookup );
+		parent::__construct( $options, $labelLookup );
 
+		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
@@ -44,32 +53,56 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 * @return string
 	 */
 	protected function formatEntityId( EntityId $entityId ) {
-		if ( isset( $this->entityTitleLookup ) ) {
-			$title = $this->entityTitleLookup->getTitleForId( $entityId );
-		} else {
-			$title = Title::newFromText( $entityId->getSerialization() );
-		}
-		$attributes = array(
-			'title' => $title->getPrefixedText(),
-			'href' => $title->getLocalURL()
-		);
-
-		$label = $entityId->getSerialization();
-
-		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
-			try {
-				$itemLabel = $this->lookupEntityLabel( $entityId );
-				if ( is_string( $itemLabel ) ) {
-					$label = $itemLabel;
-				}
-			} catch ( OutOfBoundsException $ex ) {
+		try {
+			$labelText = $this->getLabel( $entityId );
+		} catch ( OutOfBoundsException $ex ) {
+			if ( !$this->entityLookup->hasEntity( $entityId ) ) {
 				return $this->getHtmlForNonExistent( $entityId );
+			} else {
+				$labelText = $entityId->getSerialization();
 			}
 		}
 
-		$html = Html::element( 'a', $attributes, $label );
+		$attributes = $this->buildAttributes( $entityId );
 
-		return $html;
+		return Html::element( 'a', $attributes, $labelText );
+	}
+
+	private function buildAttributes( EntityId $entityId ) {
+		$title = $this->getTitle( $entityId );
+
+		return array(
+			'title' => $title->getPrefixedText(),
+			'href' => $title->getLocalURL()
+		);
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return Title
+	 */
+	private function getTitle( EntityId $entityId ) {
+		if ( isset( $this->entityTitleLookup ) ) {
+			return $this->entityTitleLookup->getTitleForId( $entityId );
+		} else {
+			return Title::newFromText( $entityId->getSerialization() );
+		}
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return string|false
+	 */
+	private function getLabel( EntityId $entityId ) {
+		$label = null;
+
+		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
+			$label = $this->labelLookup->getLabel( $entityId );
+		}
+
+		return $label;
 	}
 
 	/**
