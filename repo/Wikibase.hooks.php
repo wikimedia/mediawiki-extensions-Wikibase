@@ -951,7 +951,7 @@ final class RepoHooks {
 	 */
 	public static function onShowSearchHitTitle( &$link_t, &$titleSnippet, SearchResult $result ) {
 		$title = $result->getTitle();
-		$entityNamespaceLookup = WikibsseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		if ( $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			$titleSnippet = $title->getPrefixedText();
