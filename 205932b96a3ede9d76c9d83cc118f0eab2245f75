@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_d86e8793",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-28T09:45:30Z",
+      "side": 1,
+      "message": "The way this method is constructed now is actually way more complicated than before. Two arrays, diffs and intersections. I love clever implementations but this feels overcomplicated. See my follow up I360124c.",
+      "revId": "205932b96a3ede9d76c9d83cc118f0eab2245f75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
