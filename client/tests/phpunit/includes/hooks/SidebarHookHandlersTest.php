@@ -21,11 +21,13 @@ use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -200,7 +202,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		);
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$mockRepo,
+			$this->getLabelLookup(),
 			array( 'Q17' => 'featured' ),
 			$en
 		);
@@ -233,6 +235,24 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			$settings
 		);
 
+	}
+
+	private function getLabelLookup() {
+		$labelLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\LabelLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnCallback( function( EntityId $entityId ) {
+				if ( $entityId->getSerialization() === 'Q17' ) {
+					return 'featured';
+				}
+
+				return false;
+			 } ) );
+
+		return $labelLookup;
 	}
 
 	private function newParser( Title $title, array $pageProps, array $extensionData ) {

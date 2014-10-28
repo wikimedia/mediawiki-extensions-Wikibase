@@ -3,13 +3,14 @@
 namespace Wikibase\Client\Hooks;
 
 use Language;
+use OutOfBoundsException;
 use OutputPage;
 use ParserOutput;
 use Sanitizer;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\LabelLookup;
 
 /**
  * Provides access to the badges of the current page's sitelinks
@@ -24,9 +25,9 @@ use Wikibase\Lib\Store\EntityLookup;
 class LanguageLinkBadgeDisplay {
 
 	/**
-	 * @var EntityLookup
+	 * @var LabelLookup
 	 */
-	protected $entityLookup;
+	protected $labelLookup;
 
 	/**
 	 * @var array
@@ -39,12 +40,12 @@ class LanguageLinkBadgeDisplay {
 	protected $language;
 
 	/**
-	 * @param EntityLookup $entityLookup
+	 * @param LabelLookup $labelLookup
 	 * @param array $badgeClassNames
 	 * @param Language $language
 	 */
-	public function __construct( EntityLookup $entityLookup, array $badgeClassNames, Language $language ) {
-		$this->entityLookup = $entityLookup;
+	public function __construct( LabelLookup $labelLookup, array $badgeClassNames, Language $language ) {
+		$this->labelLookup = $labelLookup;
 		$this->badgeClassNames = $badgeClassNames;
 		$this->language = $language;
 	}
@@ -140,10 +141,10 @@ class LanguageLinkBadgeDisplay {
 				$classes[] = Sanitizer::escapeClass( $this->badgeClassNames[$badgeSerialization] );
 
 				// add label (but only if this badge is well known on this wiki)
-				$label = $this->getLabel( $badge );
-
-				if ( $label !== null ) {
-					$labels[] = $label;
+				try {
+					$labels[] = $this->getLabel( $badge );
+				} catch ( OutOfBoundsException $ex ) {
+					// skip
 				}
 			}
 		}
@@ -166,16 +167,7 @@ class LanguageLinkBadgeDisplay {
 	 * @return string|null
 	 */
 	private function getLabel( ItemId $badge ) {
-		$entity = $this->entityLookup->getEntity( $badge );
-		if ( !$entity ) {
-			return null;
-		}
-
-		$title = $entity->getLabel( $this->language->getCode() );
-		if ( !$title ) {
-			return null;
-		}
-		return $title;
+		return $this->labelLookup->getLabel( $badge );
 	}
 
 }

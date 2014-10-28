@@ -9,6 +9,7 @@ use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 
@@ -39,23 +40,23 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	const FALLBACK_NONE = 2;
 
 	/**
-	 * @var EntityLookup
+	 * @var LabelLookup
 	 */
-	protected $entityLookup;
+	protected $labelLookup;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param FormatterOptions $options Supported options: OPT_LOOKUP_LABEL (boolean),
 	 *        OPT_LABEL_FALLBACK (FALLBACK_XXX)
-	 * @param EntityLookup $entityLookup
+	 * @param LabelLookup $labelLookup
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( FormatterOptions $options, EntityLookup $entityLookup ) {
+	public function __construct( FormatterOptions $options, LabelLookup $labelLookup ) {
 		parent::__construct( $options );
 
-		$this->entityLookup = $entityLookup;
+		$this->labelLookup = $labelLookup;
 
 		$this->defaultOption( self::OPT_LOOKUP_LABEL, true );
 		$this->defaultOption( self::OPT_LABEL_FALLBACK, self::FALLBACK_PREFIXED_ID );
@@ -120,40 +121,15 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException If an entity with that ID could not be loaded.
-	 * @return string|bool False if no label was found in the language or language fallback chain.
+	 * @throws OutOfBoundsException If a label is not found.
+	 * @return string
 	 */
 	protected function lookupEntityLabel( EntityId $entityId ) {
-		try {
-			$entity = $this->entityLookup->getEntity( $entityId );
-		} catch ( UnresolvedRedirectException $ex )  {
-			$entity = null;
-		} catch ( StorageException $ex )  {
-			$entity = null;
-			wfLogWarning( 'Failed to load entity: '
-				. $entityId->getSerialization() . ': '
-				. $ex->getMessage() );
-		}
-
-		if ( $entity === null ) {
-			// double redirect, deleted entity, etc
-			throw new OutOfBoundsException( "An Entity with the id $entityId could not be loaded" );
-		}
-
-		/* @var LanguageFallbackChain $languageFallbackChain */
 		if ( $this->options->hasOption( 'languages' ) ) {
 			$languageFallbackChain = $this->getOption( 'languages' );
-
-			$extractedData = $languageFallbackChain->extractPreferredValue( $entity->getLabels() );
-
-			if ( $extractedData === null ) {
-				return false;
-			} else {
-				return $extractedData['value'];
-			}
+			return $this->labelLookup->getLabelForFallbackChain( $entityId, $languageFallbackChain );
 		} else {
-			$lang = $this->getOption( self::OPT_LANG );
-			return $entity->getLabel( $lang );
+			return $this->labelLookup->getLabel( $entityId );
 		}
 	}
 

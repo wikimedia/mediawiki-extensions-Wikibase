@@ -9,9 +9,12 @@ use ParserOutput;
 use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Term;
 
 /**
  * @covers Wikibase\Client\Hooks\LanguageLinkBadgeDisplay
@@ -61,16 +64,10 @@ class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 	}
 
 	private function getLanguageLinkBadgeDisplay() {
-		$mockRepo = new MockRepository();
-
-		foreach ( $this->getItems() as $item ) {
-			$mockRepo->putEntity( $item );
-		}
-
 		$badgeClassNames = array( 'Q4' => 'foo', 'Q3' => 'bar' );
 
 		return new LanguageLinkBadgeDisplay(
-			$mockRepo,
+			new LabelLookup( $this->getTermLookup(), 'de' ),
 			$badgeClassNames,
 			Language::factory( 'de' )
 		);
@@ -145,6 +142,24 @@ class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 		$languageLinkBadgeDisplay->applyBadges( $link, $languageLinkTitle, $output );
 
 		$this->assertEquals( $expected, $link );
+	}
+
+	private function getTermLookup() {
+		$terms = array();
+
+		foreach( $this->getItems() as $item ) {
+			foreach( $item->getLabels() as $languageCode => $text ) {
+				$terms[] = new Term( array(
+					'termType' => 'label',
+					'termLanguage' => $languageCode,
+					'termText' => $text,
+					'entityId' => $item->getId()->getNumericId(),
+					'entityType' => $item->getType()
+				) );
+			}
+		}
+
+		return new MockTermIndex( $terms );
 	}
 
 }

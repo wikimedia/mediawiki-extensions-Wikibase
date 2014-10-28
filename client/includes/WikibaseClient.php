@@ -42,6 +42,7 @@ use Wikibase\Lib\Serializers\ForbiddenSerializer;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -137,6 +138,11 @@ final class WikibaseClient {
 	private $namespaceChecker = null;
 
 	/**
+	 * @var WikibaseValueFormatterBuilders
+	 */
+	private $wikibaseValueFormatterBuilders;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param SettingsArray $settings
@@ -204,7 +210,15 @@ final class WikibaseClient {
 			EntityIdLabelFormatter::OPT_LANG => $languageCode
 		) );
 
-		$labelFormatter = new EntityIdLabelFormatter( $options, $this->getEntityLookup() );
+		$labelLookup = new LabelLookup(
+			$this->getStore()->getTermIndex(),
+			$languageCode
+		);
+
+		$labelFormatter = new EntityIdLabelFormatter(
+			$options,
+			$labelLookup
+		);
 
 		return $labelFormatter;
 	}
@@ -490,18 +504,15 @@ final class WikibaseClient {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	private function newSnakFormatterFactory() {
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
-			$this->getEntityLookup(),
-			$this->contentLanguage
-		);
-
 		$builders = new WikibaseSnakFormatterBuilders(
-			$valueFormatterBuilders,
+			$this->getWikibaseValueFormatterBuilders(),
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
 
-		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+		$factory = new OutputFormatSnakFormatterFactory(
+			$builders->getSnakFormatterBuildersForFormats()
+		);
 
 		return $factory;
 	}
@@ -524,14 +535,40 @@ final class WikibaseClient {
 	 * @return OutputFormatValueFormatterFactory
 	 */
 	private function newValueFormatterFactory() {
-		$builders = new WikibaseValueFormatterBuilders(
-			$this->getEntityLookup(),
+		$builders = $this->getWikibaseValueFormatterBuilders();
+
+		$factory = new OutputFormatValueFormatterFactory(
+			$builders->getValueFormatterBuildersForFormats()
+		);
+
+		return $factory;
+	}
+
+	/**
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	private function getWikibaseValueFormatterBuilders() {
+		if ( !isset( $this->wikibaseValueFormatterBuilders ) ) {
+			$this->wikibaseValueFormatterBuilders = $this->newWikibaseValueFormatterBuilders();
+		}
+
+		return $this->wikibaseValueFormatterBuilders;
+	}
+
+	/**
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	private function newWikibaseValueFormatterBuilders() {
+		$labelLookup = new LabelLookup(
+			$this->getStore()->getTermIndex(),
 			$this->contentLanguage
 		);
 
-		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
-
-		return $factory;
+		return new WikibaseValueFormatterBuilders(
+			$labelLookup,
+			$this->getEntityLookup(),
+			$this->contentLanguage
+		);
 	}
 
 	/**
@@ -575,15 +612,23 @@ final class WikibaseClient {
 	/**
 	 * @return LanguageLinkBadgeDisplay
 	 */
-	public function getLanguageLinkBadgeDisplay() {
-		global $wgLang;
+	public function getLanguageLinkBadgeDisplay( Language $language = null ) {
+		if ( $language === null ) {
+			global $wgLang;
+			$language = $wgLang;
+		}
 
 		$badgeClassNames = $this->getSettings()->getSetting( 'badgeClassNames' );
 
+		$labelLookup = new LabelLookup(
+			$this->getStore()->getTermIndex(),
+			$language->getCode()
+		);
+
 		return new LanguageLinkBadgeDisplay(
-			$this->getEntityLookup(),
+			$labelLookup,
 			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
-			$wgLang
+			$language
 		);
 	}
 
