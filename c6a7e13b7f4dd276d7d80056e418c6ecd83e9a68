@@ -51,6 +51,24 @@
       "revId": "c6a7e13b7f4dd276d7d80056e418c6ecd83e9a68",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d871a70c",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T10:42:40Z",
+      "side": 1,
+      "message": "this way is more clear imho, to see what changed etc.\n\nanyway, the method is removed in later patch :)",
+      "parentUuid": "6e936f18_80f2cfdd",
+      "revId": "c6a7e13b7f4dd276d7d80056e418c6ecd83e9a68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
