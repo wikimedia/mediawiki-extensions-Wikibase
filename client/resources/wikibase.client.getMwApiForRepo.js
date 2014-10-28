@@ -5,7 +5,7 @@
 ( function( mw, wb ) {
 	'use strict';
 
-	var MODULE = wb;
+	var MODULE = wb.client = wb.client || {};
 
 	/**
 	 * @return {mediaWiki.Api}
