@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_64da2a7a",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "we don\u0027t, except in the EntityId html formatter which checks for deleted entities.",
+      "parentUuid": "8e96e304_ca5e9bec",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_8a0f33e4",
         "filename": "client/includes/store/ClientStore.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-21T11:14:33Z",
       "side": 1,
       "message": "TermsLookup vs TemLookup is very confusing. We need better names.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e4c5da91",
+        "filename": "client/includes/store/ClientStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "agree, although i want to avoid stuff like TermListLookup since I think having those objects is unhelpful intermediate step, performance and complexity-wise.",
+      "parentUuid": "8e96e304_8a0f33e4",
       "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_e5ee28b1",
+        "filename": "client/tests/phpunit/MockClientStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "this is not needed now.  we can use the MockTermIndex were needed.",
+      "parentUuid": "8e96e304_2af61fd5",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_eaffd7a5",
         "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-10-21T11:14:33Z",
       "side": 1,
       "message": "We really should get rid of this. If we still need it, something is still wrong (or at least, slow).",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_05ea349c",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "tried removing it but actually think we still need it, since if a label is not found, then we fallback to the entity id but also check if the entity is deleted or not.\n\nwe can do this in a particular order that avoids lookup whenever possible (e.g. a label is found, and also batches this)",
+      "parentUuid": "8e96e304_eaffd7a5",
       "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_6439ca9e",
+        "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "done.  now have a LabelLookup implementation that accepts a LanguageFallbackChain.  depending on formatter options one wants, that implementation can be used or the one that take a language code.",
+      "parentUuid": "8e96e304_ca2c5b48",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_2a1dbf14",
         "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 1
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_043ec687",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "sadly we do.",
+      "parentUuid": "8e96e304_2a1dbf14",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_0a124301",
         "filename": "lib/includes/store/CachingTermsLookup.php",
         "patchSetId": 1
@@ -115,6 +223,24 @@
       "writtenOn": "2014-10-21T11:14:33Z",
       "side": 1,
       "message": "I\u0027m worried about a naive caching approach. We are using lots of labels of lots of different entities - this may flood memcached, and have very low hit rate. We at least need a mechanism for detecting such a situation. Ideally, we\u0027d have a list of high profile entities, for which we would cache terms, and skip caching for other entities.\n\nOverall, I think batched queries are a better approach for improving performance than caching at this level.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_2443c218",
+        "filename": "lib/includes/store/CachingTermsLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "after trying this, i agree and we will go with batch queries.\n\nat that point, we can see if further caching is needed and if so, what exactly would work best.",
+      "parentUuid": "8e96e304_0a124301",
       "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_c4f53ec9",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "I think we need a layer and a nice interface that avoids the need to deal with Wikibase\\Term objects (or internally handles that logic).\n\nWe also need an interface that takes entity id and language code, as sometimes we might not know the language code when constructing the object. (i think i saw use case like this in WikiGrok)",
+      "parentUuid": "8e96e304_cac21b5d",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_2ad37f31",
         "filename": "lib/includes/store/TermLookup.php",
         "patchSetId": 1
@@ -166,6 +310,24 @@
       "writtenOn": "2014-10-21T11:14:33Z",
       "side": 1,
       "message": "As per the above, the $langageCode parameter should go into the constructor of an implementation.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_84ff36a7",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "done, with such implementation in LanguageLabelLookup, though think we also need this.",
+      "parentUuid": "8e96e304_2ad37f31",
       "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +351,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_a4fcb2b2",
+        "filename": "lib/includes/store/TermLookupService.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "no longer this name.",
+      "parentUuid": "8e96e304_eaccb78e",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_aaa6afbc",
         "filename": "lib/includes/store/TermsLookup.php",
         "patchSetId": 1
@@ -200,6 +380,24 @@
       "writtenOn": "2014-10-21T11:14:33Z",
       "side": 1,
       "message": "This should probably just be a subset of the TermIndex interface (that is, TermIndex should extend TermsLookup). I suspect that in many places, TermIndex type hints could be replaced by either a TermsLookup or a TermLookup.\n\nTermLookup vs. TermsLookup is still very confusing.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e4195a28",
+        "filename": "lib/includes/store/TermsLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "I tried your suggestion and think it made the code worse.\n\ni think we should avoid further use / coupling of TermIndex and Wikibase\\Term objects with new code, so instead have a separate interface and implementation.  that implementation can use TermIndex, although be done in a way that we can change that in the future.",
+      "parentUuid": "8e96e304_aaa6afbc",
       "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +421,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_64dd4a47",
+        "filename": "lib/includes/store/sql/TermsSQLLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "don\u0027t have the name now.\n\ntried implementing more stuff / using TermSqlIndex directly and think it is not a good approach.",
+      "parentUuid": "8e96e304_eaa357a6",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_4a7ccb1b",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 1
@@ -240,6 +456,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_04e24600",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "nooooooo!",
+      "parentUuid": "8e96e304_4a7ccb1b",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_2a813ffd",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 1
@@ -251,6 +485,24 @@
       "writtenOn": "2014-10-21T11:14:33Z",
       "side": 1,
       "message": "If TermIndex would extend TermLookup as proposed, we wouldn\u0027t need this extra param.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e4e87adf",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "please, no!",
+      "parentUuid": "8e96e304_2a813ffd",
       "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -336,6 +588,24 @@
       "writtenOn": "2014-10-21T11:14:33Z",
       "side": 1,
       "message": "If TermIndex etends TermsLookup, we wouldn\u0027t need this.",
+      "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_84f5f6b7",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 1,
+      "message": "nooooooooooo! please no!",
+      "parentUuid": "8e96e304_2aa05f8c",
       "revId": "5cb6ffe3999cc6f406a388c3f0be42ac2cae36ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

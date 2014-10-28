@@ -16,6 +16,24 @@
       "revId": "9656e85aa6473795218a86aa860f36aa6ce2a3bd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_45c27c3a",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-28T16:35:08Z",
+      "side": 0,
+      "message": "they come from the setting above, which the factory already has access to / uses.  obviously the $badgeClassNames line above can be removed.",
+      "parentUuid": "8e96e304_0a6483ad",
+      "revId": "9656e85aa6473795218a86aa860f36aa6ce2a3bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
