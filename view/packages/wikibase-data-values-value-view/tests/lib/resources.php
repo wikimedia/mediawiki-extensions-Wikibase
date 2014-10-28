@@ -168,15 +168,15 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.util.highlightMatchingCharacters.tests' => $moduleTemplate + array(
+
+		'util.highlightSubstring.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.util/jquery.util.highlightMatchingCharacters.tests.js',
+				'util/util.highlightSubstring.tests.js',
 			),
 			'dependencies' => array(
-				'jquery.util.highlightMatchingCharacters',
+				'util.highlightSubstring',
 			),
 		),
-
 
 		'util.MessageProvider.tests' => $moduleTemplate + array(
 			'scripts' => array(

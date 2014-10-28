@@ -163,7 +163,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.suggester',
 				'jquery.ui.widget',
-				'jquery.util.highlightMatchingCharacters',
+				'util.highlightSubstring',
 			),
 		),
 
@@ -198,18 +198,24 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.util.highlightMatchingCharacters' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.util/jquery.util.highlightMatchingCharacters.js',
-			),
-		),
-
 		'jquery.util.getscrollbarwidth' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.util/jquery.util.getscrollbarwidth.js',
 			),
 		),
 
+
+		'util.Extendable' => $moduleTemplate + array(
+			'scripts' => array(
+				'util/util.Extendable.js',
+			),
+		),
+
+		'util.highlightSubstring' => $moduleTemplate + array(
+			'scripts' => array(
+				'util/util.highlightSubstring.js',
+			),
+		),
 
 		'util.MessageProvider' => $moduleTemplate + array(
 			'scripts' => array(
@@ -223,11 +229,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'util.Extendable' => $moduleTemplate + array(
-			'scripts' => array(
-				'util/util.Extendable.js',
-			),
-		),
 	);
 
 } );

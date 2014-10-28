@@ -7,9 +7,9 @@
  * @example $( 'input' ).commonssuggester();
  *
  * @dependency jQuery.ui.suggester
- * @dependency jQuery.util.highlightMatchingCharacters
+ * @dependency util.highlightSubstring
  */
-( function( $ ) {
+( function( $, util ) {
 	'use strict';
 
 	$.widget( 'ui.commonssuggester', $.ui.suggester, {
@@ -64,7 +64,7 @@
 			var label = suggestion;
 
 			if( requestTerm ) {
-				label = $.util.highlightMatchingCharacters( requestTerm, suggestion );
+				label = util.highlightSubstring( requestTerm, suggestion );
 			}
 
 			return new $.ui.ooMenu.Item( label, suggestion );
@@ -72,4 +72,4 @@
 
 	} );
 
-}( jQuery ) );
+}( jQuery, util ) );
