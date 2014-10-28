@@ -6,6 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Term;
 use Wikibase\TermIndex;
 
@@ -24,7 +25,7 @@ use Wikibase\TermIndex;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MockTermIndex implements TermIndex {
+class MockTermIndex implements TermIndex, TermLookup {
 
 	/**
 	 * @var Term[]
@@ -34,7 +35,7 @@ class MockTermIndex implements TermIndex {
 	/**
 	 * @param Term[] $terms
 	 */
-	public function __construct( $terms ) {
+	public function __construct( array $terms ) {
 		$this->terms = $terms;
 	}
 
@@ -131,10 +132,38 @@ class MockTermIndex implements TermIndex {
 	}
 
 	/**
-	 * @throws Exception always
+	 * @return EntityId[]
 	 */
-	public function getEntityIdsForLabel( $label, $languageCode = null, $entityType = null, $fuzzySearch = false ) {
-		throw new Exception( 'not implemented by mock class ' );
+	public function getEntityIdsForLabel( $label, $languageCode = null, $entityType = null,
+		$fuzzySearch = false
+	) {
+		$entityIds = array();
+
+		foreach( $this->terms as $term ) {
+			if ( $languageCode !== null && $term->getLanguage() !== $languageCode ) {
+				continue;
+			}
+
+			if ( $entityType !== null && $term->getEntityType() !== $entityType ) {
+				continue;
+			}
+
+			if ( $term->getType() !== 'label' ) {
+				continue;
+			}
+
+			if ( !$fuzzySearch ) {
+				if ( $term->getText() === $label ) {
+					$entityIds[] = $term->getEntityId();
+				}
+			} else {
+				if ( strpos( $term->getText(), $label ) !== false ) {
+					$entityIds[] = $term->getEntityId();
+				}
+			}
+		}
+
+		return $entityIds;
 	}
 
 	/**
@@ -152,10 +181,18 @@ class MockTermIndex implements TermIndex {
 	}
 
 	/**
-	 * @throws Exception always
+	 * @return Term[]
 	 */
 	public function getTermsOfEntity( EntityId $id ) {
-		throw new Exception( 'not implemented by mock class ' );
+		$matchingTerms = array();
+
+		foreach( $this->terms as $term ) {
+			if ( $term->getEntityId()->equals( $id ) ) {
+				$matchingTerms[] = $term;
+			}
+		}
+
+		return $matchingTerms;
 	}
 
 	/**
