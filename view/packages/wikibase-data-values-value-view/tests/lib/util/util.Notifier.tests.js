@@ -94,7 +94,6 @@
 			'Notifier.current() returns null'
 		);
 
-
 		notifier.notify( 'test', [ 'test' ] );
 		notifier.notify( 'test2', [ 'test2' ] );
 		notifier.notify( 'test3' ); // should not do anything

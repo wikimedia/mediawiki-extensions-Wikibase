@@ -44,7 +44,6 @@
 
 	runTest( testDefinition );
 
-
 	/**
 	 * Test definition for running NativeEventHandler tests within jQuery Widget environment,
 	 * meaning, the jQuery.Widget's _trigger() function will be used to trigger events.
@@ -83,7 +82,7 @@
 
 				constructor = constructor || function( options, element ) {
 					PARENT.call( this, options, element );
-				}
+				};
 
 				constructor.prototype = $.extend( new PARENT(), {
 					constructor: constructor,

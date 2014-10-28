@@ -128,7 +128,7 @@
 		sinon.spy( vvArgs.parserStore, 'getParser' );
 		initVv( {
 			generateDom: function() {
-				return jQuery( '<div/>' ).append( 'FORMATTED VALUE' );
+				return $( '<div/>' ).append( 'FORMATTED VALUE' );
 			},
 			vvArgs: vvArgs
 		} );

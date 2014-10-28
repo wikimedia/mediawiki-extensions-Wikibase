@@ -416,7 +416,7 @@
 		}
 
 		if( !$rulerY ) {
-			$rulerY = $( '<textarea style="minHeight: 0!important; height: 0!important;"/>' )
+			$rulerY = $( '<textarea style="min-height: 0!important; height: 0!important;"/>' )
 				.attr( 'tabindex', '-1' )
 				.css( {
 					position: 'absolute',
