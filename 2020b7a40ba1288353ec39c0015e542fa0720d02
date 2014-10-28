@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_43a048f1",
+        "filename": "lib/resources/jquery.wikibase/toolbar/jquery.wikibase.edittoolbar.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-10-28T13:44:06Z",
+      "side": 1,
+      "message": "This is confusing. 2 methods with the same name, one private and one public? I\u0027m sure it\u0027s possible to find better names that describe what they do.\n\nHowever, not introduced in this patch so no reason to block it.",
+      "revId": "2020b7a40ba1288353ec39c0015e542fa0720d02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
