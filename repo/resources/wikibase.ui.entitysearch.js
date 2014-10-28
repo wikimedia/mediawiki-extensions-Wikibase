@@ -122,7 +122,8 @@
 				{},
 				$.wikibase.entityselector.prototype.options.position,
 				{ offset: '-1 2' }
-			)
+			),
+			confineMinWidthTo: $form
 		} )
 		.on( 'entityselectoropen', function( event ) {
 			updateSuggestionSpecial();
