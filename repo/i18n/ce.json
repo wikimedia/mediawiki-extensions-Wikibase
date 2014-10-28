@@ -49,7 +49,7 @@
 	"wikibase-statementview-rank-normal": "ЛартӀахь йолу ранг",
 	"wikibase-statementview-rank-deprecated": "Мегаш йоцу ранг",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|1=хьост|хьосташ}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Цхьаъ хьост Ӏалашйина яц|$1 хьосташ Ӏалашйина яц|$1 хьост Ӏалашйина яц}}",
+	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Цхьаъ хьост Ӏалашйина яц|$1 хьост Ӏалашйина яц|$1 хьосташ Ӏалашйина яц}}",
 	"wikibase-snakview-property-input-placeholder": "билгало",
 	"wikibase-snakview-choosesnaktype": "Харжа маьӀан тайп.",
 	"wikibase-snakview-variations-somevalue-label": "маьӀна хууш дац",

@@ -196,6 +196,8 @@
 	"wikibase-item-summary-wbsetclaim-update-references": "{{PLURAL:$4|Измењена референца|Измењено $4 референци}} на {{PLURAL:$3|тврдњу|тврдњи}}",
 	"wikibase-item-summary-wbsetclaim-update-rank": "Промењен ранг {{PLURAL:$3|тврдњи|тврдњама}}",
 	"wikibase-item-summary-clientsitelink-update": "Страница премештена са [$3] на [$4]",
+	"wikibase-item-summary-wbmergeitems-from": "Спојена ставка из „$3“",
+	"wikibase-item-summary-wbmergeitems-to": "Спојена ставка у „$3“",
 	"wikibase-property-summary-wbcreate-new": "Направљено ново својство",
 	"wikibase-property-summary-wbeditentity-create": "Направљено ново својство",
 	"wikibase-property-summary-wbeditentity-update": "Измењено својство",
