@@ -190,13 +190,7 @@ class ReferenceList extends HashableObjectStorage {
 	 * @return string
 	 */
 	public function serialize() {
-		$references = array();
-
-		foreach( $this as $reference ) {
-			$references[] = $reference;
-		}
-
-		return serialize( $references );
+		return serialize( iterator_to_array( $this ) );
 	}
 
 	/**
