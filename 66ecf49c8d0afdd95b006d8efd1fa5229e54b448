@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_58927258",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-10-28T17:45:04Z",
+      "side": 1,
+      "message": "send404CodeIfYouReallyWantTo()",
+      "revId": "66ecf49c8d0afdd95b006d8efd1fa5229e54b448",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
