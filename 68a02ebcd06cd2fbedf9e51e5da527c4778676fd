@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e936f18_b8c6164d",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-28T17:48:19Z",
+      "side": 1,
+      "message": "FQNs need to have a leading backslash, else the thing is relative",
+      "revId": "68a02ebcd06cd2fbedf9e51e5da527c4778676fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_98a0fa9b",
         "filename": "lib/includes/store/LanguageFallbackLabelLookup.php",
         "patchSetId": 5
