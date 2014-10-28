@@ -5,10 +5,10 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use Site;
 use SiteStore;
-use Wikibase\Repo\Content\ItemHandler;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Repo\Content\ItemHandler;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Enables accessing items by providing the identifier of a site and the title
@@ -49,9 +49,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	private $groups;
 
 	/**
-	 * Constructor.
-	 *
-	 * @ see SpecialItemResolver::__construct
+	 * @see SpecialItemResolver::__construct
 	 *
 	 * @since 0.1
 	 */
@@ -173,7 +171,6 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 * @param string $page
 	 */
 	protected function switchForm( $siteId, $page ) {
-
 		if ( $this->sites->getSites()->hasSite( $siteId ) ) {
 			$site = $this->sites->getSite( $siteId );
 			$siteExists = in_array( $site->getGroup(), $this->groups );
@@ -256,6 +253,6 @@ class SpecialItemByTitle extends SpecialItemResolver {
 				. Html::closeElement( 'div' )
 			);
 		}
-
 	}
+
 }

@@ -31,8 +31,6 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	private $factory;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 */
 	public function __construct() {
@@ -126,4 +124,5 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 
 		$this->getOutput()->addHTML( Html::closeElement( 'ul' ) );
 	}
+
 }

@@ -45,8 +45,6 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	private $tokenCheck;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.5
 	 */
 	public function __construct() {

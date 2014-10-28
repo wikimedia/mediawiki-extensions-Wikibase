@@ -15,14 +15,12 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialListDatatypes extends SpecialWikibasePage {
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.2
 	 */
 	public function __construct() {
 		parent::__construct( 'ListDatatypes' );
-
 	}
+
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 

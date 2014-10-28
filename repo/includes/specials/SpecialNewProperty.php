@@ -26,8 +26,6 @@ class SpecialNewProperty extends SpecialNewEntity {
 	protected $dataType = null;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.2
 	 */
 	public function __construct() {
