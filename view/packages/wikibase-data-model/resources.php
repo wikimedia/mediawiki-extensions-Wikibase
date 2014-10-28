@@ -175,6 +175,17 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.datamodel.LegacyEntityId' => $moduleTemplate + array(
+			'scripts' => array(
+				'LegacyEntityId.js',
+			),
+			'dependencies' => array(
+				'mw.ext.dataValues',
+				'util.inherit',
+				'wikibase.datamodel.__namespace',
+			),
+		),
+
 		'wikibase.datamodel.List' => $moduleTemplate + array(
 			'scripts' => array(
 				'List.js',

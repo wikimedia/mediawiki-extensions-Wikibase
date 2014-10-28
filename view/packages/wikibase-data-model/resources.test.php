@@ -124,6 +124,15 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 		),
 
+		'wikibase.datamodel.LegacyEntityId.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'LegacyEntityId.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.LegacyEntityId',
+			),
+		),
+
 		'wikibase.datamodel.List.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'List.tests.js',
