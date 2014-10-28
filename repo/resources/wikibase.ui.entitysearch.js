@@ -2,7 +2,6 @@
  * Replacing the native MediaWiki search suggestions with Wikibase's entity selector widget.
  *
  * @license GNU GPL v2+
- * @author Jens Ohlig
  * @author H. Snater < mediawiki@snater.com >
  */
 ( function( $, mw ) {
@@ -50,11 +49,34 @@
 			$hiddenInput = $( '<input type="hidden" name="search"/>' );
 
 		/**
-		 * Updates the suggestion list special item that triggers a full-text search.
+		 * @param {jQuery} $form
+		 * @return {string}
 		 */
-		function updateSuggestionSpecial() {
+		function getHref( $form ) {
+			var href = $form.attr( 'action' ),
+				params = {};
+
+			href += href.indexOf( '?' ) === -1 ? '?' : '&';
+
+			$.each( $form.serializeArray(), function( i, param ) {
+				params[param.name] = param.value;
+			} );
+
+			params.search = $input.val();
+
+			return href + $.param( params );
+		}
+
+		/**
+		 * Updates the suggestion list special item that triggers a full-text search.
+		 *
+		 * @param {jQuery.ui.ooMenu.CustomItem} searchContaining
+		 */
+		function updateSuggestionSpecial( searchContaining ) {
 			var $suggestionsSpecial = $( '.wb-entitysearch-suggestions .suggestions-special' );
 			$suggestionsSpecial.find( '.special-query' ).text( $input.val() );
+
+			searchContaining.setLink( getHref( $form ) + '&fulltext=1' );
 		}
 
 		/**
@@ -78,12 +100,12 @@
 					.addClass( 'special-query' )
 			);
 
+		var searchContaining = new $.ui.ooMenu.CustomItem( $searchContaining, null, function() {
+			$form.submit();
+		}, 'wb-entitysearch-suggestions' );
+
 		var $searchMenu = $( '<ul/>' ).ooMenu( {
-			customItems: [
-				new $.ui.ooMenu.CustomItem( $searchContaining, null, function() {
-					$form.submit();
-				}, 'wb-entitysearch-suggestions' )
-			]
+			customItems: [searchContaining]
 		} );
 
 		$input
@@ -116,11 +138,11 @@
 			)
 		} )
 		.on( 'entityselectoropen', function( event ) {
-			updateSuggestionSpecial();
+			updateSuggestionSpecial( searchContaining );
 		} )
 		.on( 'eachchange', function( event, oldVal ) {
 			$hiddenInput.val( '' );
-			updateSuggestionSpecial();
+			updateSuggestionSpecial( searchContaining );
 		} )
 		.on( 'entityselectorselected', function( event, entityId ) {
 			$hiddenInput.val( entityId );
