@@ -20,7 +20,6 @@ class MockClientStore implements ClientStore {
 	public function getSubscriptionManager() {}
 	public function getItemUsageIndex() {}
 	public function getPropertyLabelResolver() {}
-	public function getTermIndex() {}
 	public function newChangesTable() {}
 	public function clear() {}
 	public function rebuild() {}
@@ -53,6 +52,13 @@ class MockClientStore implements ClientStore {
 	 */
 	public function getSiteLinkTable() {
 		return $this->getMock();
+	}
+
+	/**
+	 * @return TermIndex
+	 */
+	public function getTermIndex() {
+		return new MockTermIndex( array() );
 	}
 
 	/**

@@ -13,6 +13,7 @@ use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
@@ -25,6 +26,11 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @author Daniel Kinzler
  */
 class WikibaseValueFormatterBuilders {
+
+	/**
+	 * @var LabelLookup
+	 */
+	private $labelLookup;
 
 	/**
 	 * @var EntityLookup
@@ -109,10 +115,12 @@ class WikibaseValueFormatterBuilders {
 	);
 
 	public function __construct(
+		LabelLookup $labelLookup,
 		EntityLookup $entityLookup,
 		Language $defaultLanguage,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
+		$this->labelLookup = $labelLookup;
 		$this->entityLookup = $entityLookup;
 		$this->defaultLanguage = $defaultLanguage;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -509,7 +517,10 @@ class WikibaseValueFormatterBuilders {
 		FormatterOptions $options,
 		WikibaseValueFormatterBuilders $builders
 	) {
-		return new EntityIdLabelFormatter( $options, $builders->entityLookup );
+		return new EntityIdLabelFormatter(
+			$options,
+			$builders->labelLookup
+		);
 	}
 
 	/**
@@ -527,6 +538,7 @@ class WikibaseValueFormatterBuilders {
 	) {
 		return new EntityIdHtmlLinkFormatter(
 			$options,
+			$builders->labelLookup,
 			$builders->entityLookup,
 			$builders->entityTitleLookup
 		);

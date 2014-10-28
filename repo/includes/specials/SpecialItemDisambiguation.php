@@ -11,6 +11,8 @@ use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndex;
 
@@ -30,6 +32,11 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 * @var TermIndex
 	 */
 	private $termIndex;
+
+	/**
+	 * @var LabelLookup
+	 */
+	private $labelLookup;
 
 	/**
 	 * @var EntityLookup
@@ -55,10 +62,12 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		// args $name, $restriction, $listed
 		parent::__construct( 'ItemDisambiguation', '', true );
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
 		$this->initServices(
-			WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex(),
-			WikibaseRepo::getDefaultInstance()->getEntityLookup(),
-			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
+			$wikibaseRepo->getStore()->getTermIndex(),
+			$wikibaseRepo->getEntityLookup(),
+			$wikibaseRepo->getEntityTitleLookup()
 		);
 
 		//@todo: make this configurable
@@ -75,6 +84,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		EntityTitleLookup $entityTitleLookup
 	) {
 		$this->termIndex = $termIndex;
+		$this->labelLookup = new LabelLookup( $termIndex, $this->getLanguage()->getCode() );
 		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
@@ -168,6 +178,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 
 		$linkFormatter = new EntityIdHtmlLinkFormatter(
 			$formatterOptions,
+			$this->labelLookup,
 			$this->entityLookup,
 			$this->entityTitleLookup
 		);

@@ -79,19 +79,13 @@ class SidebarHookHandlers {
 		StubUserLang::unstub( $wgLang );
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
 
 		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
 		$langLinkHandler = $wikibaseClient->getLangLinkHandler();
-
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-		$badgeClassNames = $settings->getSetting( 'badgeClassNames' );
+		$badgeDisplay = $wikibaseClient->getLanguageLinkBadgeDisplay( $wgLang );
 
-		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$entityLookup,
-			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
-			$wgLang
-		);
+		$settings = $wikibaseClient->getSettings();
 
 		$interwikiSorter = new InterwikiSorter(
 			$settings->getSetting( 'sort' ),

@@ -20,6 +20,7 @@ use Wikibase\EntityContent;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EscapingValueFormatter;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -75,10 +76,15 @@ class EntityContentDiffView extends DifferenceEngine {
 			ValueFormatter::OPT_LANG => $langCode
 		) );
 
-		$labelFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$labelFormatter = new EntityIdLabelFormatter(
+			$options,
+			new LabelLookup( $wikibaseRepo->getStore()->getTermIndex(), $langCode )
+		);
+
 		$this->propertyNameFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$formatterFactory = $wikibaseRepo->getSnakFormatterFactory();
 		$this->detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
 		$this->terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );

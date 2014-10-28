@@ -11,6 +11,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -49,12 +50,41 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		$entity->setId( $entityId );
 		$entity->setLabel( 'en', 'Label for ' . $entityId->getSerialization() );
 
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
-		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
-			->will( $this->returnValue( $entity ) );
+		return new WikibaseValueFormatterBuilders(
+			$this->getLabelLookup(),
+			$this->getEntityLookup(),
+			Language::factory( 'en' )
+		);
+	}
 
-		return new WikibaseValueFormatterBuilders( $entityLookup, Language::factory( 'en' ) );
+	private function getLabelLookup() {
+		$labelLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\LabelLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnCallback( function( EntityId $entityId ) {
+				return $entityId->getSerialization() === 'Q5' ? 'Label for Q5' : null;
+			} ) );
+
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabelForFallbackChain' )
+			->will( $this->returnValue( 'fallback label' ) );
+
+		return $labelLookup;
+	}
+
+	private function getEntityLookup() {
+		$entityLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$entityLookup->expects( $this->any() )
+			->method( 'hasEntity' )
+			->will( $this->returnValue( true ) );
+
+		return $entityLookup;
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {

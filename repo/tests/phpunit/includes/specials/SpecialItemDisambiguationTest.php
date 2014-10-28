@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
 use Wikibase\TermIndex;
 
@@ -20,7 +21,7 @@ use Wikibase\TermIndex;
  * @group WikibaseSpecialPage
  *
  * @group Database
- *        ^---- needed because we rely on Title objects internally
+ *		^---- needed because we rely on Title objects internally
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -47,38 +48,60 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	 * @return TermIndex
 	 */
 	private function getTermIndex() {
-		// Matches TermIndex::getEntityIdsForLabel shall return.
-		// Array keys are derived from the function parameters
-		$matches = array(
-			'one,en,item,1' => array(
-				new ItemId( 'Q1' ),
-				new ItemId( 'Q11' ),
-			),
-			'eins,de,item,1' => array(
-				new ItemId( 'Q1' ),
-				new ItemId( 'Q11' ),
-			),
-		);
+		$terms = array();
 
-		$mock = $this->getMock( 'Wikibase\TermIndex' );
-		$mock->expects( $this->any() )
-			->method( 'getEntityIdsForLabel' )
-			->will( $this->returnCallback(
-				function ( $label, $languageCode = null, $entityType = null, $fuzzySearch = false )
-					use ( $matches )
-				{
-					$key = "$label,$languageCode,$entityType,$fuzzySearch";
-					return isset( $matches[$key] ) ? $matches[$key] : array();
-				}
-			) );
+		$terms[] = new \Wikibase\Term( array(
+			'entityId' => 1,
+			'entityType' => 'item',
+			'termText' => 'one',
+			'termLanguage' => 'en',
+			'termType' => 'label'
+		) );
 
-		return $mock;
+		$terms[] = new \Wikibase\Term( array(
+			'entityId' => 1,
+			'entityType' => 'item',
+			'termText' => 'eins',
+			'termLanguage' => 'de',
+			'termType' => 'label'
+		) );
+
+		$terms[] = new \Wikibase\Term( array(
+			'entityId' => 1,
+			'entityType' => 'item',
+			'termText' => 'number',
+			'termLanguage' => 'en',
+			'termType' => 'description'
+		) );
+
+		$terms[] = new \Wikibase\Term( array(
+			'entityId' => 1,
+			'entityType' => 'item',
+			'termText' => 'Zahl',
+			'termLanguage' => 'de',
+			'termType' => 'description'
+		) );
+
+		$terms[] = new \Wikibase\Term( array(
+			'entityId' => 11,
+			'entityType' => 'item',
+			'termText' => 'oneone',
+			'termLanguage' => 'en',
+			'termType' => 'label'
+		) );
+
+		$terms[] = new \Wikibase\Term( array(
+			'entityId' => 11,
+			'entityType' => 'item',
+			'termText' => 'einseins',
+			'termLanguage' => 'de',
+			'termType' => 'label'
+		) );
+
+		return new MockTermIndex( $terms );
 	}
 
-	/**
-	 * @return EntityLookup
-	 */
-	private function getEntityLookup() {
+	private function getMockEntityLookup() {
 		$repo = new MockRepository();
 
 		$one = Item::newEmpty();

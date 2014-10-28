@@ -46,6 +46,7 @@ use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -479,7 +480,13 @@ class WikibaseRepo {
 	public function getValueFormatterBuilders() {
 		global $wgContLang;
 
+		$labelLookup = new LabelLookup(
+			$this->getStore()->getTermIndex(),
+			$wgContLang->getCode()
+		);
+
 		return new WikibaseValueFormatterBuilders(
+			$labelLookup,
 			$this->getEntityLookup(),
 			$wgContLang,
 			$this->getEntityTitleLookup()
