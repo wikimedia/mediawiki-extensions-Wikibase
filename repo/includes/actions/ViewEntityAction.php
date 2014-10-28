@@ -132,25 +132,18 @@ abstract class ViewEntityAction extends ViewAction {
 	 * of the page's current revision.
 	 */
 	private function isEditable() {
-		$article = $this->getArticle();
-
-		if ( !$article->getPage()->exists() ) {
-			// showing non-existing entity
-			return false;
-		}
-
-		if ( $article->getOldID() > 0
-			&&  ( $article->getOldID() !== $article->getPage()->getLatest() ) ) {
-			// showing old content
-			return false;
-		}
-
-		if ( $this->getRequest()->getCheck( 'diff' ) ) {
-			// showing a diff
+		if ( !$this->getArticle()->isCurrent() || $this->isDiff() ) {
 			return false;
 		}
 
 		return true;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	private function isDiff() {
+		return $this->getRequest()->getCheck( 'diff' );
 	}
 
 	/**
@@ -178,7 +171,6 @@ abstract class ViewEntityAction extends ViewAction {
 			$editable = $permissionStatus->isOK();
 		}
 
-			// View it!
 		$parserOptions = $this->getArticle()->getPage()->makeParserOptions( $this->getContext()->getUser() );
 
 		if ( !$editable ) {
@@ -204,7 +196,7 @@ abstract class ViewEntityAction extends ViewAction {
 		}
 
 		// Create and set the title.
-		if ( $this->getRequest()->getCheck( 'diff' ) ) {
+		if ( $this->isDiff() ) {
 			// Escaping HTML characters in order to retain original label that may contain HTML
 			// characters. This prevents having characters evaluated or stripped via
 			// OutputPage::setPageTitle:
