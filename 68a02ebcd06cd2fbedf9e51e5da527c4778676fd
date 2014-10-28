@@ -50,6 +50,23 @@
       "revId": "68a02ebcd06cd2fbedf9e51e5da527c4778676fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b84376b5",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-28T17:51:27Z",
+      "side": 1,
+      "message": "This abstraction is rather leaky - the interface exposes the identifier uses in the db. Any reason to not have methods as follows?\n\n* getLabels( EntityId $entityId )\n* getDescriptions( EntityId $entityId )\n* getAliasLists( EntityId $entityId )\n\nThose methods are also simpler to use.",
+      "revId": "68a02ebcd06cd2fbedf9e51e5da527c4778676fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
