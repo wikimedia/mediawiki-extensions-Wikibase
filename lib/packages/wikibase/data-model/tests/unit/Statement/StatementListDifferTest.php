@@ -2,10 +2,14 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListDiffer;
 
@@ -35,42 +39,33 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenTwoIdenticalLists_diffIsEmpty() {
 		$claims = new StatementList( array(
-			$this->getStubStatement( 'zero', 'first' ),
-			$this->getStubStatement( 'one', 'second' ),
+			$this->getNewStatement( 'zero', 'first' ),
+			$this->getNewStatement( 'one', 'second' ),
 		) );
 
 		$this->assertResultsInDiff( $claims, $claims, new Diff() );
 	}
 
-	private function getStubStatement( $guid, $hash ) {
-		$claim = $this->getMockBuilder( 'Wikibase\DataModel\Statement\Statement' )
-			->disableOriginalConstructor()->getMock();
-
-		$claim->expects( $this->any() )
-			->method( 'getGuid' )
-			->will( $this->returnValue( $guid ) );
-
-		$claim->expects( $this->any() )
-			->method( 'getHash' )
-			->will( $this->returnValue( $hash ) );
-
-		return $claim;
+	private function getNewStatement( $guid, $hash ) {
+		$statement = new Statement( new Claim( new PropertyValueSnak( 1, new StringValue( $hash ) ) ) );
+		$statement->setGuid( $guid );
+		return $statement;
 	}
 
 	public function testGivenToListWithExtraClaim_additionOperationInDiff() {
 		$fromClaims = new StatementList( array(
-			$this->getStubStatement( 'zero', 'first' ),
-			$this->getStubStatement( 'one', 'second' ),
+			$this->getNewStatement( 'zero', 'first' ),
+			$this->getNewStatement( 'one', 'second' ),
 		) );
 
 		$toClaims = new StatementList( array(
-			$this->getStubStatement( 'zero', 'first' ),
-			$this->getStubStatement( 'two', 'third' ),
-			$this->getStubStatement( 'one', 'second' ),
+			$this->getNewStatement( 'zero', 'first' ),
+			$this->getNewStatement( 'two', 'third' ),
+			$this->getNewStatement( 'one', 'second' ),
 		) );
 
 		$diff = new Diff( array(
-			'two' => new DiffOpAdd( $this->getStubStatement( 'two', 'third' ) ),
+			'two' => new DiffOpAdd( $this->getNewStatement( 'two', 'third' ) ),
 		) );
 
 		$this->assertResultsInDiff( $fromClaims, $toClaims, $diff );
@@ -78,18 +73,18 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenToListWithLessClaims_removalOperationsInDiff() {
 		$fromClaims = new StatementList( array(
-			$this->getStubStatement( 'zero', 'first' ),
-			$this->getStubStatement( 'one', 'second' ),
-			$this->getStubStatement( 'two', 'third' ),
+			$this->getNewStatement( 'zero', 'first' ),
+			$this->getNewStatement( 'one', 'second' ),
+			$this->getNewStatement( 'two', 'third' ),
 		) );
 
 		$toClaims = new StatementList( array(
-			$this->getStubStatement( 'one', 'second' ),
+			$this->getNewStatement( 'one', 'second' ),
 		) );
 
 		$diff = new Diff( array(
-			'zero' => new DiffOpRemove( $this->getStubStatement( 'zero', 'first' ) ),
-			'two' => new DiffOpRemove( $this->getStubStatement( 'zero', 'third' ) ),
+			'zero' => new DiffOpRemove( $this->getNewStatement( 'zero', 'first' ) ),
+			'two' => new DiffOpRemove( $this->getNewStatement( 'two', 'third' ) ),
 		) );
 
 		$this->assertResultsInDiff( $fromClaims, $toClaims, $diff );
@@ -97,25 +92,25 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenListWithChangedClaims_changeOperationsInDiff() {
 		$fromClaims = new StatementList( array(
-			$this->getStubStatement( 'zero', 'first' ),
-			$this->getStubStatement( 'one', 'second' ),
-			$this->getStubStatement( 'two', 'third' ),
+			$this->getNewStatement( 'zero', 'first' ),
+			$this->getNewStatement( 'one', 'second' ),
+			$this->getNewStatement( 'two', 'third' ),
 		) );
 
 		$toClaims = new StatementList( array(
-			$this->getStubStatement( 'zero', 'FIRST' ),
-			$this->getStubStatement( 'one', 'second' ),
-			$this->getStubStatement( 'two', 'THIRD' ),
+			$this->getNewStatement( 'zero', 'FIRST' ),
+			$this->getNewStatement( 'one', 'second' ),
+			$this->getNewStatement( 'two', 'THIRD' ),
 		) );
 
 		$diff = new Diff( array(
 			'zero' => new DiffOpChange(
-					$this->getStubStatement( 'zero', 'first' ),
-					$this->getStubStatement( 'zero', 'FIRST' )
+					$this->getNewStatement( 'zero', 'first' ),
+					$this->getNewStatement( 'zero', 'FIRST' )
 				),
 			'two' => new DiffOpChange(
-					$this->getStubStatement( 'zero', 'third' ),
-					$this->getStubStatement( 'zero', 'THIRD' )
+					$this->getNewStatement( 'two', 'third' ),
+					$this->getNewStatement( 'two', 'THIRD' )
 				),
 		) );
 

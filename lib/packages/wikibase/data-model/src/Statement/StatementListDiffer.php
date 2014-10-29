@@ -4,13 +4,7 @@ namespace Wikibase\DataModel\Statement;
 
 use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOp;
-use Diff\DiffOp\DiffOpAdd;
-use Diff\DiffOp\DiffOpChange;
-use Diff\DiffOp\DiffOpRemove;
 use UnexpectedValueException;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 
 /**
  * @since 1.0
@@ -30,48 +24,36 @@ class StatementListDiffer {
 	 * @throws UnexpectedValueException
 	 */
 	public function getDiff( StatementList $fromStatements, StatementList $toStatements ) {
-		$differ = new MapDiffer();
-		$fromStatements = new Claims( $fromStatements->toArray() );
-		$toStatements = new Claims( $toStatements->toArray() );
-
-		$hashDifferences = $differ->doDiff(
-			$fromStatements->getHashes(),
-			$toStatements->getHashes()
+		return new Diff(
+			$this->newDiffer()->doDiff(
+				$this->toDiffArray( $fromStatements ),
+				$this->toDiffArray( $toStatements )
+			),
+			true
 		);
-
-		$diff = new Diff( array(), true );
-
-		foreach ( $hashDifferences as $guid => $diffOp ) {
-			$diff[$guid] = $this->getDiffOp( $diffOp, $guid, $toStatements, $fromStatements );
-		}
-
-		return $diff;
 	}
 
-	private function getDiffOp( DiffOp $diffOp, $guid, Claims $toClaims, Claims $fromClaims ) {
-		if ( $diffOp instanceof DiffOpChange ) {
-			$oldClaim = $fromClaims->getClaimWithGuid( $guid );
-			$newClaim = $toClaims->getClaimWithGuid( $guid );
+	private function newDiffer() {
+		$differ = new MapDiffer();
 
-			if ( !( $oldClaim instanceof Claim
-					&& $newClaim instanceof Claim
-					&& $oldClaim->getGuid() === $newClaim->getGuid() ) ) {
-				throw new UnexpectedValueException( 'Invalid operands' );
-			}
+		$differ->setComparisonCallback( function( Statement $fromStatement, Statement $toStatement ) {
+			return $fromStatement->equals( $toStatement );
+		} );
 
-			return new DiffOpChange( $oldClaim, $newClaim );
+		return $differ;
+	}
+
+	private function toDiffArray( StatementList $statementList ) {
+		$statementArray = array();
+
+		/**
+		 * @var Statement $statement
+		 */
+		foreach ( $statementList as $statement ) {
+			$statementArray[$statement->getGuid()] = $statement;
 		}
-		elseif ( $diffOp instanceof DiffOpAdd ) {
-			$claim = $toClaims->getClaimWithGuid( $guid );
-			return new DiffOpAdd( $claim );
-		}
-		elseif ( $diffOp instanceof DiffOpRemove ) {
-			$claim = $fromClaims->getClaimWithGuid( $guid );
-			return new DiffOpRemove( $claim );
-		}
-		else {
-			throw new UnexpectedValueException( 'Invalid DiffOp type cannot be handled' );
-		}
+
+		return $statementArray;
 	}
 
 }
