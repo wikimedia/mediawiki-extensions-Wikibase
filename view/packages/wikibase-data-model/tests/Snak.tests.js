@@ -1,94 +1,88 @@
 /**
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
-
-( function( wb, dv, $, QUnit, undefined ) {
+( function( wb, dv, QUnit ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.datamodel.snak.js', QUnit.newMwEnvironment() );
+QUnit.module( 'wikibase.datamodel.Snak' );
 
-	QUnit.test( 'wb.datamodel.Snak.prototype, its constructor and wb.datamodel.Snak static functions', function( assert ) {
-		var snakInfo = [
-			[ wb.datamodel.PropertyNoValueSnak ],
-			[ wb.datamodel.PropertySomeValueSnak ],
-			[ wb.datamodel.PropertyValueSnak, [ '21', new dv.StringValue( 'test' ) ] ]
-		];
-		var unequalSnak = new wb.datamodel.PropertyValueSnak( '21', new dv.StringValue( 'not equal!' ) );
+var testSets = [
+	[wb.datamodel.PropertyNoValueSnak, ['P1']],
+	[wb.datamodel.PropertyNoValueSnak, ['P2']],
+	[wb.datamodel.PropertySomeValueSnak, ['P1']],
+	[wb.datamodel.PropertyValueSnak, ['P1', new dv.StringValue( 'test' )]],
+	[wb.datamodel.PropertyValueSnak, ['P2', new dv.StringValue( 'test' )]]
+];
 
-		/**
-		 * Does test functions of the Snak prototype which turn the Snak into an Object representing
-		 * the Snak.
-		 *
-		 * @param {wb.datamodel.Snak} snak
-		 * @param {String} methodLabel Objectification method name used in test messages
-		 * @param {String} toObjectFnName name of a function in wb.datamodel.Snak.prototype
-		 * @param {String} fromObjectFnName name of a function in wb.datamodel.Snak
-		 */
-		var snakToObjectTest = function( snak, methodLabel, toObjectFnName, fromObjectFnName ) {
-			var objectifiedSnak = snak[ toObjectFnName ]();
+/**
+ * @param {Function} SnakConstructor
+ * @param {*[]} params
+ * @return {wikibase.datamodel.Snak}
+ */
+function constructSnak( SnakConstructor, params ) {
+	return new SnakConstructor( params[0], params[1] );
+}
+
+QUnit.test( 'Constructor', function( assert ) {
+
+	for( var i = 0; i < testSets.length; i++ ) {
+		var SnakConstructor = testSets[i][0],
+			snakParams = testSets[i][1],
+			snak = constructSnak( SnakConstructor, snakParams );
+
+		assert.ok(
+			snak instanceof wb.datamodel.Snak,
+			'Test set #' + i + ': Instantiated Snak object.'
+		);
+
+		assert.equal(
+			snak.getPropertyId(),
+			snakParams[0],
+			'Test set #' + i + ': Property id was set correctly.'
+		);
+
+		assert.strictEqual(
+			snak.getType(),
+			SnakConstructor.TYPE,
+			'Test set #' + i + ': Snak type "' + snak.getType() + '" was set correctly.'
+		);
+	}
+} );
+
+QUnit.test( 'equals()', function( assert ) {
+
+	for( var i = 0; i < testSets.length; i++ ) {
+		var snak1 = constructSnak( testSets[i][0], testSets[i][1] );
+
+		assert.ok(
+			snak1.equals( snak1 ),
+			'Test set #' + i + ': Snak is equal to itself.'
+		);
+
+		assert.ok(
+			!snak1.equals( 'some string' ),
+			'Test set #' + i + ': Snak is not equal to a plain string.'
+		);
+
+		for( var j = 0; j < testSets.length; j++ ) {
+			var snak2 = constructSnak( testSets[j][0], testSets[j][1] );
+
+			if( j === i ) {
+				assert.ok(
+					snak1.equals( snak2 ),
+					'Test set #' + i + ' equals its clone.'
+				);
+				continue;
+			}
 
 			assert.ok(
-				$.isPlainObject( objectifiedSnak ),
-				toObjectFnName + '() will return a plain object'
+				!snak1.equals( snak2 ),
+				'Test set #' + i + ' is not equal not test set #' + j + '.'
 			);
+		}
+	}
 
-			assert.ok(
-				objectifiedSnak.snaktype === snak.getType(),
-				"In the " + methodLabel + ", the 'snaktype' field is set correctly"
-			);
+} );
 
-			var deobjectifiedSnak = wb.datamodel.Snak[ fromObjectFnName ]( objectifiedSnak );
-
-			assert.ok(
-				deobjectifiedSnak instanceof wb.datamodel.Snak,
-				'Constructing new Snak from ' + methodLabel + ' via wb.datamodel.Snak.' + fromObjectFnName
-					+ '() successful'
-			);
-
-			assert.ok(
-				deobjectifiedSnak.equals( snak ) && snak.equals( deobjectifiedSnak ),
-				'Newly constructed Snak from json is equal to original Snak'
-			);
-		};
-
-		$.each( snakInfo, function( i, info ) {
-			var snakConstructor = info[0],
-				snakParams = info[1] || [ '42' ],
-				snak = new snakConstructor( snakParams[0], snakParams[1] );
-
-			assert.ok(
-				snak instanceof wb.datamodel.Snak,
-				'New snak is an instance of wikibase.Snak'
-			);
-
-			assert.ok(
-				snak.equals( snak ),
-				'Snak is equal to itself'
-			);
-
-			assert.ok(
-				!snak.equals( unequalSnak ) && !unequalSnak.equals( snak ),
-				'Snak is not equal to some other random Snak'
-			);
-
-			assert.strictEqual(
-				snak.getPropertyId(),
-				snakParams[ 0 ],
-				'Property id was set correctly'
-			);
-
-			assert.strictEqual(
-				snak.getType(),
-				snakConstructor.TYPE,
-				'Snak type "' + snak.getType() + '" was set correctly'
-			);
-
-			snakToObjectTest( snak, 'JSON', 'toJSON', 'newFromJSON' );
-			snakToObjectTest( snak, 'Map', 'toMap', 'newFromMap' );
-		} );
-
-	} );
-
-}( wikibase, dataValues, jQuery, QUnit ) );
+}( wikibase, dataValues, QUnit ) );

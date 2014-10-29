@@ -1,112 +1,39 @@
 /**
  * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
 ( function( wb, $ ) {
 'use strict';
 
+var PARENT = wb.datamodel.List;
+
 /**
- * Container for a list of Snaks. Each snak within the list in unique, Snaks considered as equal
- * will not be added to the list a second time.
- *
  * @constructor
  * @abstract
  * @since 0.3
  *
- * @param {wb.datamodel.Snak[]|wb.datamodel.Snak|wb.datamodel.SnakList} [snaks] One or more Snaks in the list initially.
+ * @param {wikibase.datamodel.Snak[]} [snaks]
  */
-var SELF = wb.datamodel.SnakList = function WbSnakList( snaks ) {
-	this._snaks = [];
-	this.length = 0;
-
-	if( $.isArray( snaks ) ) {
-		for( var i in snaks ) {
-			this.addSnak( snaks[i] );
-		}
-	}
-	else if( snaks instanceof wb.datamodel.SnakList ) {
-		this._snaks = snaks.toArray();
-		this.length = this._snaks.length;
-	}
-	else if( snaks instanceof wb.datamodel.Snak ) {
-		this.addSnak( snaks );
-	}
-	else if( snaks !== undefined ) {
-		throw new Error( 'Unknown first argument in SnakList constructor' );
-	}
-};
-
-$.extend( SELF.prototype, {
+wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( snaks ) {
+	PARENT.call( this, wikibase.datamodel.Snak, snaks );
+}, {
 	/**
-	 * Number of snaks in the list currently.
-	 * @type number
-	 */
-	length: 0,
-
-	/**
-	 * List of snaks for keeping track over Snaks internally.
-	 * @type wb.datamodel.Snak[]
-	 */
-	_snaks: null,
-
-	/**
-	 * Will add a given Snak to the list of Snaks. If an equal Snak is in the list already, the
-	 * Snak will not be added.
-	 *
-	 * @param {wb.datamodel.Snak} snak
-	 * @return boolean Whether Snak was not yet in the list and therefore added.
-	 */
-	addSnak: function( snak ) {
-		if( !( snak instanceof wb.datamodel.Snak ) ) {
-			throw new Error( 'No Snak given which could be added to the Snak list' );
-		}
-		// if an equal Snak is in the list already, don't add it again!
-		if( !this.hasSnak( snak ) ) {
-			this._snaks.push( snak );
-			this.length++;
-			return true;
-		}
-		return false;
-	},
-
-	/**
-	 * Removes a given Snak from the list.
-	 *
-	 * @param {wb.datamodel.Snak} snak
-	 * @return boolean Whether Snak was in the list and therefore removed.
-	 */
-	removeSnak: function( snak ) {
-		// if an equal Snak is in the list already, don't add it again
-		for( var i in this._snaks ) {
-			if( this._snaks[i].equals( snak ) ) {
-				// JS will not leave 'gaps' in the array, so no worries about the each()'s
-				// callback's index.
-				this._snaks.splice( i, 1 );
-				this.length--;
-				return true;
-			}
-		}
-		return false;
-	},
-
-	/**
-	 * Returns a snak list with the snaks that feature the specified property id. If the property id
+	 * Returns a SnakList with the snaks featuring a specific property id. If the property id
 	 * parameter is omitted, a copy of the whole SnakList object is returned.
 	 *
 	 * @param {string} [propertyId]
-	 * @return {wikibase.SnakList}
+	 * @return {wikibase.datamodel.SnakList}
 	 */
 	getFilteredSnakList: function( propertyId ) {
 		if( !propertyId ) {
-			return this.constructor.newFromJSON( this.toJSON() );
+			return new wb.datamodel.SnakList( $.merge( [], this._items ) );
 		}
 
 		var filteredQualifiers = new wb.datamodel.SnakList();
 
 		this.each( function( i, snak ) {
 			if( snak.getPropertyId() === propertyId ) {
-				filteredQualifiers.addSnak( snak );
+				filteredQualifiers.addItem( snak );
 			}
 		} );
 
@@ -114,10 +41,9 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Returns a list of wb.datamodel.SnakList objects, each of them grouped by the property used by the
-	 * snaks.
+	 * Returns a list of SnakList objects, each of them grouped by the property used by the snaks.
 	 *
-	 * @return {wikibase.SnakList[]}
+	 * @return {wikibase.datamodel.SnakList[]}
 	 */
 	getGroupedSnakLists: function() {
 		var groupedSnakLists = [],
@@ -131,77 +57,23 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Returns whether the list contains a Snak equal to a given one.
+	 * Adds the Snaks of another SnakList to this SnakList.
 	 *
-	 * @param {wb.datamodel.Snak} snak
-	 * @return boolean
+	 * @param {wikibase.datamodel.SnakList} snakList
 	 */
-	hasSnak: function( snak ) {
-		for( var i in this._snaks ) {
-			if( this._snaks[i].equals( snak ) ) {
-				return true;
-			}
-		}
-		return false;
-	},
-
-	/**
-	 * Will return whether a given Snak list equals this one.
-	 *
-	 * @param {wb.datamodel.SnakList} snakList
-	 * @return boolean
-	 */
-	equals: function( snakList ) {
-		if( snakList.constructor !== this.constructor
-			|| snakList.length !== this.length
-		) {
-			return false;
-		}
-
-		var otherSnaks = snakList.toArray();
-
-		// Compare to other snak lists snaks considering order:
-		for( var i = 0; i < otherSnaks.length; i++ ) {
-			if( !this._snaks[i].equals( otherSnaks[i] ) ) {
-				return false;
-			}
-		}
-
-		return true;
-	},
-
-	/**
-	 * Iterates over all Snaks in the list, similar to jQuery.each.
-	 *
-	 * @param {Function} fn A callback, called for each Snak in the list. The callback can have
-	 *        two parameters:
-	 *        (1) {Number} index A continuous number, increased with each callback.
-	 *        (2) {wb.datamodel.Snak} snak A Snak from the list.
-	 *        If false is returned by one of the callbacks, the iteration will stop. The context of
-	 *        the callbacks will be the Snak object.
-	 */
-	each: function( fn ) {
-		$.each.call( null, this._snaks, fn );
-	},
-
-	/**
-	 * Adds the snaks of another snak list to this snak list.
-	 *
-	 * @param {wikibase.SnakList} snakList
-	 */
-	add: function( snakList ) {
+	merge: function( snakList ) {
 		var self = this;
 
 		snakList.each( function( i, snak ) {
-			if( !self.hasSnak( snak ) ) {
-				self._snaks.push( snak );
+			if( !self.hasItem( snak ) ) {
+				self._items.push( snak );
 				self.length++;
 			}
 		} );
 	},
 
 	/**
-	 * Returns a list of property ids representing the order of the snaks grouped by property.
+	 * Returns a list of property ids representing the order of the Snaks grouped by property.
 	 *
 	 * @return {string[]}
 	 */
@@ -220,26 +92,11 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Returns a snak's index within the snak list. Returns -1 when the snak could not be found.
-	 *
-	 * @param {wikibase.Snak} snak
-	 * @return {number}
-	 */
-	indexOf: function( snak ) {
-		for( var i = 0; i < this._snaks.length; i++ ) {
-			if( this._snaks[i].equals( snak ) ) {
-				return i;
-			}
-		}
-		return -1;
-	},
-
-	/**
 	 * Returns the indices of the snak list where a certain snak may be moved to. A snak may be
 	 * moved within its property group. It may also be moved to the slots between property groups
 	 * which involves moving the whole property group the snak belongs to.
 	 *
-	 * @param {wikibase.Snak} snak
+	 * @param {wikibase.datamodel.Snak} snak
 	 * @return {number[]}
 	 */
 	getValidMoveIndices: function( snak ) {
@@ -253,7 +110,7 @@ $.extend( SELF.prototype, {
 				if( snakListSnak !== snak ) {
 					indices.push( i );
 				} else {
-					var nextSnak = self._snaks[i + 1];
+					var nextSnak = self._items[i + 1];
 					if( nextSnak && nextSnak.getPropertyId() !== snak.getPropertyId() ) {
 						// Snak is the last of its group.
 						isGroupLast = true;
@@ -261,7 +118,7 @@ $.extend( SELF.prototype, {
 				}
 			} else {
 				// Detect slots between property groups.
-				var previousSnak = self._snaks[i - 1],
+				var previousSnak = self._items[i - 1],
 					isNewPropertyGroup = (
 						i !== 0
 						&& snakListSnak.getPropertyId() !== previousSnak.getPropertyId()
@@ -282,19 +139,19 @@ $.extend( SELF.prototype, {
 		} );
 
 		// Allow moving to last position if snak is not at the end already:
-		if( snak !== this._snaks[this._snaks.length - 1] ) {
-			indices.push( this._snaks.length );
+		if( snak !== this._items[this._items.length - 1] ) {
+			indices.push( this._items.length );
 		}
 
 		return indices;
 	},
 
 	/**
-	 * Moves a snaklist's snak to a new index.
+	 * Moves a SnakList's Snak to a new index.
 	 *
-	 * @param {wikibase.Snak} snak Snak to move within the list.
+	 * @param {wikibase.datamodel.Snak} snak Snak to move within the list.
 	 * @param {number} toIndex
-	 * @return {wikibase.SnakList} This SnakList object.
+	 * @return {wikibase.datamodel.SnakList} This SnakList object.
 	 *
 	 * @throws {Error} if snak is not allowed to be moved to toIndex.
 	 */
@@ -310,38 +167,38 @@ $.extend( SELF.prototype, {
 				+ 'indices are allowed: ' + validIndices.join( ', ' ) );
 		}
 
-		var previousSnak = this._snaks[toIndex -1],
-			nextSnak = this._snaks[toIndex + 1],
-			insertBefore = this._snaks[toIndex];
+		var previousSnak = this._items[toIndex -1],
+			nextSnak = this._items[toIndex + 1],
+			insertBefore = this._items[toIndex];
 
 		if(
 			previousSnak && previousSnak.getPropertyId() === snak.getPropertyId()
 			|| nextSnak && nextSnak.getPropertyId() === snak.getPropertyId()
 		) {
 			// Moving snak within its property group.
-			this._snaks.splice( this.indexOf( snak ), 1 );
+			this._items.splice( this.indexOf( snak ), 1 );
 
 			if( insertBefore ) {
-				this._snaks.splice( toIndex, 0, snak );
+				this._items.splice( toIndex, 0, snak );
 			} else {
-				this._snaks.push( snak );
+				this._items.push( snak );
 			}
 		} else {
 			// Moving the whole snak group.
 			var groupedSnaks = [];
 
-			for( var i = 0; i < this._snaks.length; i++ ) {
-				if( this._snaks[i].getPropertyId() === snak.getPropertyId() ) {
-					groupedSnaks.push( this._snaks[i] );
+			for( var i = 0; i < this._items.length; i++ ) {
+				if( this._items[i].getPropertyId() === snak.getPropertyId() ) {
+					groupedSnaks.push( this._items[i] );
 				}
 			}
 
 			for( i = 0; i < groupedSnaks.length; i++ ) {
-				this._snaks.splice( this.indexOf( groupedSnaks[i] ), 1 );
+				this._items.splice( this.indexOf( groupedSnaks[i] ), 1 );
 				if( insertBefore ) {
-					this._snaks.splice( this.indexOf( insertBefore ), 0, groupedSnaks[i] );
+					this._items.splice( this.indexOf( insertBefore ), 0, groupedSnaks[i] );
 				} else {
-					this._snaks.push( groupedSnaks[i] );
+					this._items.push( groupedSnaks[i] );
 				}
 			}
 		}
@@ -352,8 +209,8 @@ $.extend( SELF.prototype, {
 	/**
 	 * Moves a snak towards the top of the snak list by one step.
 	 *
-	 * @param {wikibase.Snak} snak
-	 * @return {wikibase.SnakList} This SnakList object.
+	 * @param {wikibase.datamodel.Snak} snak
+	 * @return {wikibase.datamodel.SnakList} This SnakList object.
 	 */
 	moveUp: function( snak ) {
 		var index = this.indexOf( snak ),
@@ -372,8 +229,8 @@ $.extend( SELF.prototype, {
 	/**
 	 * Moves a snak towards the bottom of the snak list by one step.
 	 *
-	 * @param {wikibase.Snak} snak
-	 * @return {wikibase.SnakList} This SnakList object.
+	 * @param {wikibase.datamodel.Snak} snak
+	 * @return {wikibase.datamodel.SnakList} This SnakList object.
 	 */
 	moveDown: function( snak ) {
 		var index = this.indexOf( snak ),
@@ -387,94 +244,7 @@ $.extend( SELF.prototype, {
 		}
 
 		return this;
-	},
-
-	/**
-	 * Returns a simple JSON structure representing this Snak. The structure will be a map, having
-	 * property IDs as keys and an array of the Snak's JSON as values.
-	 *
-	 * TODO: implement this as a wb.datamodel.serialization.Serializer
-	 *
-	 * @return Object
-	 */
-	toJSON: function() {
-		var json = {};
-
-		this.each( function( i, snak ) {
-			var propertyId = snak.getPropertyId(),
-				snakPlace = json[ propertyId ] || ( json[ propertyId ] = [] );
-
-			snakPlace.push( snak.toJSON() );
-		} );
-
-		return json;
-	},
-
-	/**
-	 * Returns all Snaks in this list as an Array of Snaks. Changes to the array will not modify
-	 * the original list Object.
-	 *
-	 * @return wb.datamodel.Snak[]
-	 */
-	toArray: function() {
-		return this._snaks.slice(); // don't reveal internal array!
 	}
 } );
-
-/**
- * Creates a new Snak Object from a given JSON structure.
- *
- * @param {string} json
- * @param {string[]} [order] List of property ids defining the order of the snaks grouped by
- *        property.
- * @return {wikibase.SnakList|null}
- */
-SELF.newFromJSON = function( json, order ) {
-	var snakList = new SELF();
-
-	/**
-	 * @param {object[]} serializedSnaks
-	 * @param {wikibase.SnakList} snakList
-	 * @return {wikibase.SnakList}
-	 */
-	function addSerializedSnaksToSnakList( serializedSnaks, snakList ) {
-		for( var i = 0; i < serializedSnaks.length; i++ ) {
-			snakList.addSnak( wb.datamodel.Snak.newFromJSON( serializedSnaks[i] ) );
-		}
-		return snakList;
-	}
-
-	if( !order ) {
-		// No order specified: Just loop through the json object:
-		$.each( json, function( propertyId, snaksPerProperty ) {
-			addSerializedSnaksToSnakList( snaksPerProperty, snakList );
-		} );
-
-	} else {
-		// Check whether all property ids that are featured by snaks are specified in the order
-		// list:
-		$.each( json, function( propertyId, snakListJson ) {
-			if( $.inArray( propertyId, order ) === -1 ) {
-				throw new Error( 'Snak featuring the property id ' + propertyId + ' is not present '
-					+ 'within list of property ids defined for ordering' );
-			}
-		} );
-
-		// Add all snaks grouped by property according to the order specified via the "order"
-		// parameter:
-		for( var i = 0; i < order.length; i++ ) {
-			var propertyId = order[i];
-
-			if( !json[propertyId] ) {
-				throw new Error( 'Trying to oder by property ' + propertyId + ' without any snak '
-					+ ' featuring this property being present' );
-			}
-
-			addSerializedSnaksToSnakList( json[propertyId], snakList );
-		}
-	}
-
-	return snakList;
-};
 
 }( wikibase, jQuery ) );

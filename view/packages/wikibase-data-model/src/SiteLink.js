@@ -6,7 +6,6 @@
 'use strict';
 
 /**
- * Represents a site link.
  * @constructor
  * @since 0.3
  *
@@ -75,17 +74,18 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	equals: function( siteLink ) {
-		if( !( siteLink instanceof SELF ) ) {
+		if( siteLink === this ) {
+			return true;
+		} else if( !( siteLink instanceof SELF )
+			|| this._siteId !== siteLink.getSiteId()
+			|| this._pageName !== siteLink.getPageName()
+		) {
 			return false;
 		}
 
 		var otherBadges = siteLink.getBadges();
 
-		if(
-			this._siteId !== siteLink.getSiteId()
-			|| this._pageName !== siteLink.getPageName()
-			|| this._badges.length !== otherBadges.length
-		) {
+		if( this._badges.length !== otherBadges.length ) {
 			return false;
 		}
 

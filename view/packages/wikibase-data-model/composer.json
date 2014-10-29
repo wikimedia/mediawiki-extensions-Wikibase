@@ -7,17 +7,8 @@
 	"license": "GPL-2.0+",
 	"authors": [
 		{
-			"name": "Daniel Werner",
-			"homepage": "https://www.mediawiki.org/wiki/User:Danwe"
-		},
-		{
 			"name": "H. Snater",
 			"homepage": "http://www.snater.com"
-		},
-		{
-			"name": "Jeroen De Dauw",
-			"email": "jeroendedauw@gmail.com",
-			"homepage": "http://jeroendedauw.com"
 		},
 		{
 			"name": "Adrian Lang",

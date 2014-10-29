@@ -5,131 +5,115 @@
 ( function( wb, dv, util ) {
 	'use strict';
 
-	var PARENT = dv.DataValue;
+var PARENT = dv.DataValue;
 
-	/**
-	 * Represents the ID of an Entity.
-	 * @constructor
-	 * @since 0.3
-	 *
-	 * @param {String} entityType
-	 * @param {Number} numericId
-	 */
-	var constructor = function( entityType, numericId ) {
+/**
+ * @constructor
+ * @since 0.3
+ *
+ * @param {string} entityType
+ * @param {number} numericId
+ */
+wb.datamodel.EntityId = util.inherit(
+	'WbDataModelEntityId',
+	PARENT,
+	function( entityType, numericId ) {
 		if( typeof entityType !== 'string' ) {
-			throw new Error( 'entityType is required for constructing new EntityId and must be a string' );
+			throw new Error( 'entityType is required for constructing a EntityId and must be a '
+				+ 'string' );
 		}
-
 		if( typeof numericId !== 'number' ) {
-			throw new Error( 'numericId is required for constructing new EntityId and must be a number' );
+			throw new Error( 'numericId is required for constructing a EntityId and must be a '
+				+ 'number' );
 		}
 
 		this._entityType = entityType;
 		this._numericId = numericId;
-	};
+	},
+{
+	/**
+	 * @type {string}
+	 */
+	_entityType: null,
 
-	wb.datamodel.EntityId = util.inherit( 'WbEntityId', PARENT, constructor, {
+	/**
+	 * @type {number}
+	 */
+	_numericId: null,
 
-		/**
-		 * @type String
-		 */
-		_entityType: null,
+	/**
+	 * @return {string}
+	 */
+	getEntityType: function() {
+		return this._entityType;
+	},
 
-		/**
-		 * @type Number
-		 */
-		_numericId: null,
+	/**
+	 * @return {number}
+	 */
+	getNumericId: function() {
+		return this._numericId;
+	},
 
-		/**
-		 * Returns the type of the entity.
-		 *
-		 * @return String
-		 */
-		getEntityType: function() {
-			return this._entityType;
-		},
+	/**
+	 * @param {Object} prefixMap Like { prefix: entityType }, e.g. { 'P': 'property' }
+	 *        If the same entity type appears multiple times with different prefixes, the prefix
+	 *        found first will be applied.
+	 * @return {string}
+	 */
+	getPrefixedId: function( prefixMap ) {
+		var entityType = this._entityType;
 
-		/**
-		 * Returns the numeric ID of the entity.
-		 *
-		 * @return Number
-		 */
-		getNumericId: function() {
-			return this._numericId;
-		},
-
-		/**
-		 * Returns the prefixed ID of the entity. Requires a map for formatting the prefix.
-		 *
-		 * @param {Object} prefixMap Like { prefix: entityType }, e.g. { 'P': 'property' }
-		 *        The same entity type can appear multiple times with different prefixes. If this is
-		 *        the case, the first one will be taken.
-		 * @return String
-		 */
-		getPrefixedId: function( prefixMap ) {
-			var entityType = this._entityType;
-
-			// find prefix of this entity ID's entity type
-			for( var key in prefixMap ) {
-				if( prefixMap[ key ] === entityType ) {
-					return key + this.getNumericId();
-				}
+		// Find prefix of this entity ID's entity type:
+		for( var key in prefixMap ) {
+			if( prefixMap[key] === entityType ) {
+				return key + this.getNumericId();
 			}
-
-			// can't output prefixed ID without knowing the prefix!
-			throw new Error( 'The given prefix map does not contain a prefix for the entitytype "' +
-				entityType + '"' );
-		},
-
-		/**
-		 * @see dv.DataValue.equals
-		 */
-		equals: function( entityId ) {
-			if ( entityId === this ) {
-				return true;
-			}
-			if( !( entityId instanceof this.constructor ) ) {
-				return false;
-			}
-
-			return this.getEntityType() === entityId.getEntityType()
-				&& this.getNumericId() === entityId.getNumericId();
-		},
-
-		/**
-		 * @see dv.DataValue.getValue
-		 *
-		 * @return wb.datamodel.EntityId
-		 */
-		getValue: function() {
-			return this;
-		},
-
-		/**
-		 * @see dv.DataValue.getSortKey
-		 *
-		 * @return String|Number
-		 */
-		getSortKey: function() {
-			return this._entityType + this._numericId;
-		},
-
-		/**
-		 * @see dv.DataValue.toJSON
-		 *
-		 * @return Object
-		 */
-		toJSON: function() {
-			return {
-				'entity-type': this._entityType,
-				'numeric-id': this._numericId
-			};
 		}
 
-	} );
+		throw new Error( 'Supplied prefix map does not contain a prefix for the entity type "' +
+			entityType + '"' );
+	},
+
+	/**
+	 * @see dataValues.DataValue.equals
+	 */
+	equals: function( entityId ) {
+		return entityId === this
+			|| entityId instanceof this.constructor
+				&& this.getEntityType() === entityId.getEntityType()
+				&& this.getNumericId() === entityId.getNumericId();
+	},
+
+	/**
+	 * @see dataValues.DataValue.getValue
+	 *
+	 * @return {wikibase.datamodel.EntityId}
+	 */
+	getValue: function() {
+		return this;
+	},
+
+	/**
+	 * @see dataValues.DataValue.getSortKey
+	 */
+	getSortKey: function() {
+		return this._entityType + this._numericId;
+	},
+
+	/**
+	 * @see dataValues.DataValue.toJSON
+	 */
+	toJSON: function() {
+		return {
+			'entity-type': this._entityType,
+			'numeric-id': this._numericId
+		};
+	}
+} );
 
 /**
- * @see dv.DataValue.newFromJSON
+ * @see dataValues.DataValue.newFromJSON
  */
 wb.datamodel.EntityId.newFromJSON = function( json ) {
 	return new wb.datamodel.EntityId( json['entity-type'], json['numeric-id'] );
