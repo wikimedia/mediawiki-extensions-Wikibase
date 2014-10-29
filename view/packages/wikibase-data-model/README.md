@@ -28,9 +28,6 @@ https://commons.wikimedia.org/wiki/File:Wikibase_JavaScript_Data_Model_1.0.svg
 * Instead of inheriting from Claim, Statement now features a Claim instance that needs to be passed to the Statement constructor.
 * Reference constructor does not accept a plain list of Snak objects anymore; Supply a proper SnakList object instead.
 * SnakList constructor only accepts arrays of Snak objects.
-* Removed EntityId.getNumericId() and EntityId.getPrefixedId(); Instead of an numeric id, EntityId features the id serialization which has to be passed to the constructor instead of the numeric id.
-* EntityId.toJSON() returns a plain array of the entity type and serialized id while EntityId.newFromJson() accepts only that structure.
-* Moved deprecated wikibase.datamodel.EntityId to wikibase.datamodel.LegacyEntityId.
 
 #### Enhancements
 * Added ClaimGroup.

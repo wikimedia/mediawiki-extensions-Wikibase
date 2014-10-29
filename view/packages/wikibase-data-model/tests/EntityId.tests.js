@@ -7,9 +7,14 @@
 
 QUnit.module( 'wikibase.datamodel.EntityId' );
 
+var prefixMap = {
+	'P': 'property',
+	'Q': 'item'
+};
+
 var testSets = [
-	['item', 'Q1'],
-	['property', 'P1']
+	['item', 1, 'Q1'],
+	['property', 1, 'P1']
 ];
 
 QUnit.test( 'Constructor and getters', function( assert ) {
@@ -27,10 +32,16 @@ QUnit.test( 'Constructor and getters', function( assert ) {
 			'Test set #' + i + ': Verified entity type being set.'
 		);
 
-		assert.equal(
-			entityId.getSerialization(),
+		assert.strictEqual(
+			entityId.getNumericId(),
 			testSets[i][1],
-			'Test set #' + i + ': Verified serialization being set.'
+			'Test set #' + i + ': Verified numeric id being set.'
+		);
+
+		assert.equal(
+			entityId.getPrefixedId( prefixMap ),
+			testSets[i][2],
+			'Test set #' + i + ': Verified retrieved prefixed id.'
 		);
 
 		assert.equal(

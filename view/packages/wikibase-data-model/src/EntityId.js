@@ -1,7 +1,6 @@
 /**
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author H. Snater < mediawiki@snater.com >
  */
 ( function( wb, dv, util ) {
 	'use strict';
@@ -13,20 +12,23 @@ var PARENT = dv.DataValue;
  * @since 0.3
  *
  * @param {string} entityType
- * @param {string} serialization
+ * @param {number} numericId
  */
 wb.datamodel.EntityId = util.inherit(
 	'WbDataModelEntityId',
 	PARENT,
-	function( entityType, serialization ) {
+	function( entityType, numericId ) {
 		if( typeof entityType !== 'string' ) {
-			throw new Error( 'entityType needs to be specified as a string' );
-		} else if( typeof serialization !== 'string' ) {
-			throw new Error( 'serialization needs to be specified as a string' );
+			throw new Error( 'entityType is required for constructing a EntityId and must be a '
+				+ 'string' );
+		}
+		if( typeof numericId !== 'number' ) {
+			throw new Error( 'numericId is required for constructing a EntityId and must be a '
+				+ 'number' );
 		}
 
 		this._entityType = entityType;
-		this._serialization = serialization;
+		this._numericId = numericId;
 	},
 {
 	/**
@@ -35,9 +37,9 @@ wb.datamodel.EntityId = util.inherit(
 	_entityType: null,
 
 	/**
-	 * @type {string}
+	 * @type {number}
 	 */
-	_serialization: null,
+	_numericId: null,
 
 	/**
 	 * @return {string}
@@ -47,10 +49,30 @@ wb.datamodel.EntityId = util.inherit(
 	},
 
 	/**
+	 * @return {number}
+	 */
+	getNumericId: function() {
+		return this._numericId;
+	},
+
+	/**
+	 * @param {Object} prefixMap Like { prefix: entityType }, e.g. { 'P': 'property' }
+	 *        If the same entity type appears multiple times with different prefixes, the prefix
+	 *        found first will be applied.
 	 * @return {string}
 	 */
-	getSerialization: function() {
-		return this._serialization;
+	getPrefixedId: function( prefixMap ) {
+		var entityType = this._entityType;
+
+		// Find prefix of this entity ID's entity type:
+		for( var key in prefixMap ) {
+			if( prefixMap[key] === entityType ) {
+				return key + this.getNumericId();
+			}
+		}
+
+		throw new Error( 'Supplied prefix map does not contain a prefix for the entity type "' +
+			entityType + '"' );
 	},
 
 	/**
@@ -59,8 +81,8 @@ wb.datamodel.EntityId = util.inherit(
 	equals: function( entityId ) {
 		return entityId === this
 			|| entityId instanceof this.constructor
-				&& this._entityType === entityId.getEntityType()
-				&& this._serialization === entityId.getSerialization();
+				&& this.getEntityType() === entityId.getEntityType()
+				&& this.getNumericId() === entityId.getNumericId();
 	},
 
 	/**
@@ -74,20 +96,19 @@ wb.datamodel.EntityId = util.inherit(
 
 	/**
 	 * @see dataValues.DataValue.getSortKey
-	 *
-	 * @return {string}
 	 */
 	getSortKey: function() {
-		return this._serialization;
+		return this._entityType + this._numericId;
 	},
 
 	/**
 	 * @see dataValues.DataValue.toJSON
-	 *
-	 * @return {Object}
 	 */
 	toJSON: function() {
-		return [this._entityType, this._serialization];
+		return {
+			'entity-type': this._entityType,
+			'numeric-id': this._numericId
+		};
 	}
 } );
 
@@ -95,7 +116,7 @@ wb.datamodel.EntityId = util.inherit(
  * @see dataValues.DataValue.newFromJSON
  */
 wb.datamodel.EntityId.newFromJSON = function( json ) {
-	return new wb.datamodel.EntityId( json[0], json[1] );
+	return new wb.datamodel.EntityId( json['entity-type'], json['numeric-id'] );
 };
 
 wb.datamodel.EntityId.TYPE = 'wikibase-entityid';
