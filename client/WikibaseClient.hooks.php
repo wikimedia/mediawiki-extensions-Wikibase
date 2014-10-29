@@ -35,6 +35,7 @@ use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFilterOptions;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -333,50 +334,56 @@ final class ClientHooks {
 	 *
 	 * @since 0.4
 	 *
-	 * @param QuickTemplate &$sk
-	 * @param array &$toolbox
+	 * @param BaseTemplate $baseTemplate
+	 * @param array $toolbox
 	 *
 	 * @return bool
 	 */
-	public static function onBaseTemplateToolbox( QuickTemplate &$sk, &$toolbox ) {
+	public static function onBaseTemplateToolbox( BaseTemplate $baseTemplate, array &$toolbox ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$title = $sk->getSkin()->getTitle();
-		$prefixedId = $sk->getSkin()->getOutput()->getProperty( 'wikibase_item' );
-
-		// Try to load the item ID from Database, but only do so on non-article views,
-		// (where the article's OutputPage isn't available to us).
-		$doExpensiveLookup =
-			$title &&
-			Action::getActionName( $sk->getSkin()->getContext() ) !== 'view' &&
-			self::isWikibaseEnabled( $title->getNamespace() );
-
+		$skin = $baseTemplate->getSkin();
+		$idString = $skin->getOutput()->getProperty( 'wikibase_item' );
 		$entityId = null;
-		if ( $prefixedId !== null ) {
+
+		if ( $idString !== null ) {
 			$entityIdParser = $wikibaseClient->getEntityIdParser();
-			$entityId = $entityIdParser->parse( $prefixedId );
-		} else if ( $doExpensiveLookup ) {
-			$entityId = $wikibaseClient->getStore()->getSiteLinkTable()->getEntityIdForSiteLink(
-				new SiteLink(
-					$wikibaseClient->getSite()->getGlobalId(),
-					$title->getFullText()
-				)
+			$entityId = $entityIdParser->parse( $idString );
+		} elseif ( Action::getActionName( $skin ) !== 'view' ) {
+			// Try to load the item ID from Database, but only do so on non-article views,
+			// (where the article's OutputPage isn't available to us).
+			$entityId = self::getEntityIdForTitle( $skin->getTitle() );
+		}
+
+		if ( $entityId !== null ) {
+			$repoLinker = $wikibaseClient->newRepoLinker();
+			$toolbox['wikibase'] = array(
+				'text' => $baseTemplate->getMsg( 'wikibase-dataitem' )->text(),
+				'href' => $repoLinker->getEntityUrl( $entityId ),
+				'id' => 't-wikibase'
 			);
 		}
 
-		if ( !$entityId ) {
-			return true;
+		return true;
+	}
+
+	/**
+	 * @param Title|null $title
+	 *
+	 * @return EntityId|null
+	 */
+	private static function getEntityIdForTitle( Title $title = null ) {
+		if ( $title === null || !self::isWikibaseEnabled( $title->getNamespace() ) ) {
+			return null;
 		}
 
-		$repoLinker = $wikibaseClient->newRepoLinker();
-		$itemLink = $repoLinker->getEntityUrl( $entityId );
-
-		$toolbox['wikibase'] = array(
-			'text' => $sk->getMsg( 'wikibase-dataitem' )->text(),
-			'href' => $itemLink,
-			'id' => 't-wikibase'
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
+		return $siteLinkLookup->getEntityIdForSiteLink(
+			new SiteLink(
+				$wikibaseClient->getSite()->getGlobalId(),
+				$title->getFullText()
+			)
 		);
-
-		return true;
 	}
 
 	/**
@@ -389,7 +396,7 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	 public static function onBeforePageDisplayAddJsConfig( OutputPage &$out, Skin &$skin ) {
+	public static function onBeforePageDisplayAddJsConfig( OutputPage &$out, Skin &$skin ) {
 		$prefixedId = $out->getProperty( 'wikibase_item' );
 
 		if ( $prefixedId !== null ) {
@@ -619,10 +626,10 @@ final class ClientHooks {
 	/**
 	 * Apply the magic word.
 	 */
-	public static function onParserGetVariableValueSwitch( &$parser, &$cache, &$magicWordId, &$ret ) {
-		if ( $magicWordId == 'noexternallanglinks' ) {
+	public static function onParserGetVariableValueSwitch( Parser &$parser, &$cache, &$magicWordId, &$ret ) {
+		if ( $magicWordId === 'noexternallanglinks' ) {
 			NoLangLinkHandler::handle( $parser, '*' );
-		} elseif ( $magicWordId == 'wbreponame' ) {
+		} elseif ( $magicWordId === 'wbreponame' ) {
 			// @todo factor out, with tests
 			$wikibaseClient = WikibaseClient::getDefaultInstance();
 			$settings = $wikibaseClient->getSettings();
