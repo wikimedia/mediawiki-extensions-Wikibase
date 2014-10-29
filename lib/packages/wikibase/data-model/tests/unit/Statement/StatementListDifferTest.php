@@ -16,10 +16,6 @@ use Wikibase\DataModel\Statement\StatementListDiffer;
 /**
  * @covers Wikibase\DataModel\Statement\StatementListDiffer
  *
- * @group Wikibase
- * @group WikibaseDataModel
- * @group WikibaseClaim
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -29,21 +25,21 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 		$this->assertResultsInDiff( new StatementList(), new StatementList(), new Diff() );
 	}
 
-	private function assertResultsInDiff( StatementList $fromClaims, StatementList $toClaims, Diff $diff ) {
+	private function assertResultsInDiff( StatementList $fromStatements, StatementList $toStatements, Diff $diff ) {
 		$differ = new StatementListDiffer();
 
-		$actual = $differ->getDiff( $fromClaims, $toClaims );
+		$actual = $differ->getDiff( $fromStatements, $toStatements );
 
 		$this->assertEquals( $diff, $actual );
 	}
 
 	public function testGivenTwoIdenticalLists_diffIsEmpty() {
-		$claims = new StatementList( array(
+		$statements = new StatementList( array(
 			$this->getNewStatement( 'zero', 'first' ),
 			$this->getNewStatement( 'one', 'second' ),
 		) );
 
-		$this->assertResultsInDiff( $claims, $claims, new Diff() );
+		$this->assertResultsInDiff( $statements, $statements, new Diff() );
 	}
 
 	private function getNewStatement( $guid, $hash ) {
@@ -52,13 +48,13 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 		return $statement;
 	}
 
-	public function testGivenToListWithExtraClaim_additionOperationInDiff() {
-		$fromClaims = new StatementList( array(
+	public function testGivenToListWithExtraStatement_additionOperationInDiff() {
+		$fromStatements = new StatementList( array(
 			$this->getNewStatement( 'zero', 'first' ),
 			$this->getNewStatement( 'one', 'second' ),
 		) );
 
-		$toClaims = new StatementList( array(
+		$toStatements = new StatementList( array(
 			$this->getNewStatement( 'zero', 'first' ),
 			$this->getNewStatement( 'two', 'third' ),
 			$this->getNewStatement( 'one', 'second' ),
@@ -68,17 +64,17 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 			'two' => new DiffOpAdd( $this->getNewStatement( 'two', 'third' ) ),
 		) );
 
-		$this->assertResultsInDiff( $fromClaims, $toClaims, $diff );
+		$this->assertResultsInDiff( $fromStatements, $toStatements, $diff );
 	}
 
-	public function testGivenToListWithLessClaims_removalOperationsInDiff() {
-		$fromClaims = new StatementList( array(
+	public function testGivenToListWithLessStatements_removalOperationsInDiff() {
+		$fromStatements = new StatementList( array(
 			$this->getNewStatement( 'zero', 'first' ),
 			$this->getNewStatement( 'one', 'second' ),
 			$this->getNewStatement( 'two', 'third' ),
 		) );
 
-		$toClaims = new StatementList( array(
+		$toStatements = new StatementList( array(
 			$this->getNewStatement( 'one', 'second' ),
 		) );
 
@@ -87,17 +83,17 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 			'two' => new DiffOpRemove( $this->getNewStatement( 'two', 'third' ) ),
 		) );
 
-		$this->assertResultsInDiff( $fromClaims, $toClaims, $diff );
+		$this->assertResultsInDiff( $fromStatements, $toStatements, $diff );
 	}
 
-	public function testGivenListWithChangedClaims_changeOperationsInDiff() {
-		$fromClaims = new StatementList( array(
+	public function testGivenListWithChangedStatements_changeOperationsInDiff() {
+		$fromStatements = new StatementList( array(
 			$this->getNewStatement( 'zero', 'first' ),
 			$this->getNewStatement( 'one', 'second' ),
 			$this->getNewStatement( 'two', 'third' ),
 		) );
 
-		$toClaims = new StatementList( array(
+		$toStatements = new StatementList( array(
 			$this->getNewStatement( 'zero', 'FIRST' ),
 			$this->getNewStatement( 'one', 'second' ),
 			$this->getNewStatement( 'two', 'THIRD' ),
@@ -114,7 +110,7 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 				),
 		) );
 
-		$this->assertResultsInDiff( $fromClaims, $toClaims, $diff );
+		$this->assertResultsInDiff( $fromStatements, $toStatements, $diff );
 	}
 
 }
