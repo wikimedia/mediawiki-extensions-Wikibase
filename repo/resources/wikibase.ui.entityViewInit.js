@@ -130,6 +130,7 @@
 				experts,
 				getFormatterStore( repoApi, dataTypes ),
 				getParserStore( repoApi ),
+				mw.config.get( 'wgUserLanguage' ),
 				mw
 			),
 			languages: getUserLanguages()
