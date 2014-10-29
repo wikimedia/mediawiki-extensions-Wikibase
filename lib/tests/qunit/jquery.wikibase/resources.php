@@ -164,6 +164,7 @@ return call_user_func( function() {
 				'jquery.valueview.ExpertStore',
 				'jquery.wikibase.referenceview',
 				'mediawiki.Title',
+				'test.sinonjs',
 				'wikibase.datamodel',
 				'wikibase.store.FetchedContent',
 				'wikibase.ValueViewBuilder',
