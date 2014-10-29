@@ -141,7 +141,7 @@
 	"wikibase-newentity-submit": "建立",
 	"special-setlabel": "設定標籤",
 	"wikibase-setlabel-introfull": "您正在設定 [[$1]] 的 $2 標籤。",
-	"wikibase-setlabel-intro": "此表格容許您設定一個實體的標籤。您需要提供實體的 ID (例如 Q23) ，語言代碼 (如 en) 及標籤來設定。",
+	"wikibase-setlabel-intro": "此表格容許您設定一個實體的標籤。您需要提供實體的 ID (例如 Q23) ，語言代碼 (如 zh) 及標籤來設定。",
 	"wikibase-setlabel-label": "標籤：",
 	"wikibase-setlabel-submit": "設定標籤",
 	"wikibase-setlabel-warning-remove": "您真的要移除 [[$1]] 的標籤嗎？",
