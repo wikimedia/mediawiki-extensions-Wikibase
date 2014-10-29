@@ -3,22 +3,13 @@
 	"description": "Wikibase datamodel serialization implementation in JavaScript",
 	"require": {
 		"data-values/javascript": "~0.6.0",
-		"wikibase/data-model-javascript": "~0.3.0"
+		"wikibase/data-model-javascript": "1.0.0"
 	},
 	"license": "GPL-2.0+",
 	"authors": [
 		{
-			"name": "Daniel Werner",
-			"homepage": "https://www.mediawiki.org/wiki/User:Danwe"
-		},
-		{
 			"name": "H. Snater",
 			"homepage": "http://www.snater.com"
-		},
-		{
-			"name": "Jeroen De Dauw",
-			"email": "jeroendedauw@gmail.com",
-			"homepage": "http://jeroendedauw.com"
 		},
 		{
 			"name": "Adrian Lang",
@@ -31,7 +22,7 @@
 	},
 	"autoload": {
 		"files" : [
-			"init.mw.php"
+			"init.php"
 		]
 	}
 }
