@@ -34,8 +34,6 @@ version 1.0 of this package:
 * Added <code>wikibase.serialization.ClaimListDeserializer</code>.
 * Added <code>wikibase.serialization.ClaimSerializer</code>.
 * Added <code>wikibase.serialization.ClaimDeserializer</code>.
-* Added <code>wikibase.serialization.EntityIdSerializer</code>.
-* Added <code>wikibase.serialization.EntityIdDeserializer</code>.
 * Added <code>wikibase.serialization.EntitySerializer</code>.
 * Added <code>wikibase.serialization.FingerprintSerializer</code>.
 * Added <code>wikibase.serialization.FingerprintDeserializer</code>.

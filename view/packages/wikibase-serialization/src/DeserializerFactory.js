@@ -20,7 +20,6 @@ var SELF = MODULE.DeserializerFactory = function wbDeserializerFactory() {
 	this.registerDeserializer( MODULE.ClaimGroupSetDeserializer, wb.datamodel.ClaimGroupSet );
 	this.registerDeserializer( MODULE.ClaimListDeserializer, wb.datamodel.ClaimList );
 	this.registerDeserializer( MODULE.EntityDeserializer, wb.datamodel.Entity );
-	this.registerDeserializer( MODULE.EntityIdDeserializer, wb.datamodel.EntityId );
 	this.registerDeserializer( MODULE.FingerprintDeserializer, wb.datamodel.Fingerprint );
 	this.registerDeserializer( MODULE.MultiTermDeserializer, wb.datamodel.MultiTerm );
 	this.registerDeserializer( MODULE.MultiTermMapDeserializer, wb.datamodel.MultiTermMap );

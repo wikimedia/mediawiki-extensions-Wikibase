@@ -73,16 +73,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.serialization.EntityIdSerializer.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'EntityIdSerializer.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel',
-				'wikibase.serialization.EntityIdSerializer',
-			),
-		),
-
 		'wikibase.serialization.EntitySerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'EntitySerializer.tests.js',

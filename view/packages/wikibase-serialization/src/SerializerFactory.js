@@ -19,7 +19,6 @@ var SELF = MODULE.SerializerFactory = function WbSerializerProvider() {
 	this.registerSerializer( MODULE.ClaimGroupSetSerializer, wb.datamodel.ClaimGroupSet );
 	this.registerSerializer( MODULE.ClaimListSerializer, wb.datamodel.ClaimList );
 	this.registerSerializer( MODULE.ClaimSerializer, wb.datamodel.Claim );
-	this.registerSerializer( MODULE.EntityIdSerializer, wb.datamodel.EntityId );
 	this.registerSerializer( MODULE.EntitySerializer, wb.datamodel.Entity );
 	this.registerSerializer( MODULE.FingerprintSerializer, wb.datamodel.Fingerprint );
 	this.registerSerializer( MODULE.MultiTermMapSerializer, wb.datamodel.MultiTermMap );
