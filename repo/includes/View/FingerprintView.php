@@ -138,8 +138,7 @@ class FingerprintView {
 	 */
 	private function getHtmlForAliases( AliasGroupList $aliasGroups, EntityId $entityId = null, $editable ) {
 		$hasAliases = $aliasGroups->hasGroupForLanguage( $this->languageCode );
-		$action = $hasAliases ? 'edit' : 'add';
-		$editSection = $this->getHtmlForEditSection( 'SetAliases', $entityId, $editable, $action );
+		$editSection = $this->getHtmlForEditSection( 'SetAliases', $entityId, $editable, 'edit' );
 
 		if ( $hasAliases ) {
 			$aliasesHtml = '';
