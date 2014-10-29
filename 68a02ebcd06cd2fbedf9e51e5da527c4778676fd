@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_29106d52",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-29T21:46:01Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "6e936f18_b8c6164d",
+      "revId": "68a02ebcd06cd2fbedf9e51e5da527c4778676fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_98a0fa9b",
         "filename": "lib/includes/store/LanguageFallbackLabelLookup.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-28T17:45:08Z",
       "side": 1,
       "message": "Interface, not an implementation",
+      "revId": "68a02ebcd06cd2fbedf9e51e5da527c4778676fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8920a197",
+        "filename": "lib/includes/store/LanguageFallbackLabelLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-29T21:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_98a0fa9b",
       "revId": "68a02ebcd06cd2fbedf9e51e5da527c4778676fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_493299f0",
+        "filename": "lib/includes/store/LanguageLabelLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-29T21:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_18b5cae0",
+      "revId": "68a02ebcd06cd2fbedf9e51e5da527c4778676fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_b84376b5",
         "filename": "lib/includes/store/TermLookup.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2014-10-28T17:51:27Z",
       "side": 1,
       "message": "This abstraction is rather leaky - the interface exposes the identifier uses in the db. Any reason to not have methods as follows?\n\n* getLabels( EntityId $entityId )\n* getDescriptions( EntityId $entityId )\n* getAliasLists( EntityId $entityId )\n\nThose methods are also simpler to use.",
+      "revId": "68a02ebcd06cd2fbedf9e51e5da527c4778676fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_5b602ca0",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-29T21:46:01Z",
+      "side": 1,
+      "message": "probably just getLabels and getDescriptions (at least for now), since AliasLists and groups are sort of something else. (if we need them, then maybe a FingerprintLookup would be better for that)\n\nalso, we just want plain (multilingual text) arrays to avoid complexity / cost of dealing with those objects. e.g. TermList::toTextArray (?) is a bit much for here",
+      "parentUuid": "6e936f18_b84376b5",
       "revId": "68a02ebcd06cd2fbedf9e51e5da527c4778676fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
