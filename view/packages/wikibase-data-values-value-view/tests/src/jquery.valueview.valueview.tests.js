@@ -35,7 +35,8 @@
 		vvArgs: {
 			expertStore: new vv.ExpertStore(),
 			formatterStore: new vf.ValueFormatterStore( vf.NullFormatter ),
-			parserStore: new vp.ValueParserStore( vp.NullParser )
+			parserStore: new vp.ValueParserStore( vp.NullParser ),
+			language: 'en'
 		}
 	};
 
