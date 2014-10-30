@@ -35,11 +35,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\EntityIdParser', $returnValue );
 	}
 
-	public function testEntityIdLabelFormatterReturnType() {
-		$returnValue = $this->getDefaultInstance()->newEntityIdLabelFormatter( 'en' );
-		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdLabelFormatter', $returnValue );
-	}
-
 	public function testGetPropertyDataTypeLookupReturnType() {
 		$returnValue = $this->getDefaultInstance()->getPropertyDataTypeLookup();
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup', $returnValue );
