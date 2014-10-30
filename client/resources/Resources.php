@@ -86,6 +86,7 @@ return call_user_func( function() {
 				'wikibase.client.PageConnector'
 			),
 			'messages' => array(
+				'wikibase-error-unexpected',
 				'wikibase-linkitem-alreadylinked',
 				'wikibase-linkitem-title',
 				'wikibase-linkitem-linkpage',
