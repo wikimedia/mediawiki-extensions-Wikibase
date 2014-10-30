@@ -48,7 +48,6 @@ return call_user_func( function() {
 				'ParseValueCaller.js',
 			),
 			'dependencies' => array(
-				'dataValues',
 				'wikibase.api.__namespace',
 				'wikibase.RepoApiError',
 			)
