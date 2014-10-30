@@ -11,6 +11,7 @@ use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\SettingsArray;
 
 /**
@@ -65,12 +66,18 @@ class WikibaseLuaBindings {
 	private $siteId;
 
 	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $dataTypeLookup;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityLookup $entityLookup
 	 * @param SiteLinkLookup $siteLinkTable
 	 * @param LanguageFallbackChainFactory $fallbackChainFactory
 	 * @param Language $language
 	 * @param SettingsArray $settings
+	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param string[] $languageCodes
 	 * @param string $siteId
 	 */
@@ -81,6 +88,7 @@ class WikibaseLuaBindings {
 		LanguageFallbackChainFactory $fallbackChainFactory,
 		Language $language,
 		SettingsArray $settings,
+		PropertyDataTypeLookup $dataTypeLookup,
 		$languageCodes,
 		$siteId
 	) {
@@ -92,6 +100,7 @@ class WikibaseLuaBindings {
 		$this->settings = $settings;
 		$this->languageCodes = $languageCodes;
 		$this->siteId = $siteId;
+		$this->dataTypeLookup = $dataTypeLookup;
 	}
 
 	/**
@@ -161,7 +170,7 @@ class WikibaseLuaBindings {
 	 */
 	private function getEntitySerializer( Entity $entityObject, $lowerCaseIds ) {
 		$opt = new SerializationOptions();
-		$serializerFactory = new SerializerFactory( $opt );
+		$serializerFactory = new SerializerFactory( $opt, $this->dataTypeLookup );
 
 		// Using "ID_KEYS_BOTH" here means that all lists of Snaks or Claims will be listed
 		// twice, once with a lower case key and once with an upper case key.
