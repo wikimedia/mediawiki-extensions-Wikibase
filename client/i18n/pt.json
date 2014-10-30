@@ -12,7 +12,8 @@
 			"SandroHc",
 			"Vitorvicentevalente",
 			"Waldir",
-			555
+			555,
+			"He7d3r"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
@@ -34,7 +35,7 @@
 	"wikibase-editlinks": "Editar ligações",
 	"wikibase-editlinkstitle": "Editar ligações interlínguas",
 	"wikibase-linkitem-addlinks": "Adicionar ligações",
-	"wikibase-linkitem-alreadylinked": "A página que pretende ligar já está vinculado a um  [$1 item] no repositório central de dados, cujo liga $2 neste sítio. Os itens só podem possuir uma página por cada sítio anexado. Por favor, escolha uma página diferente para vincular.",
+	"wikibase-linkitem-alreadylinked": "A página que pretende ligar já está vinculado a um  [$1 item] no repositório central de dados, o qual está ligado a $2 neste sítio. Os itens só podem possuir uma página por cada sítio anexado. Por favor, escolha uma página diferente para vincular.",
 	"wikibase-linkitem-close": "Fechar caixa de diálogo e recarregar a página",
 	"wikibase-linkitem-failure": "Ocorreu um erro desconhecido enquanto tentava ligar a determinada página.",
 	"wikibase-linkitem-title": "Ligação com página",
