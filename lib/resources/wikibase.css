@@ -41,6 +41,10 @@ are also triggered down the document */
 	color: inherit;
 }
 
+.wb-entitypage .wikibase-wbtooltip-tip .tipsy-arrow {
+	display: none;
+}
+
 /* Messages displayed while some action is performed (e.g. an API call) */
 .wb-actionmsg {
 	font-style: italic;
