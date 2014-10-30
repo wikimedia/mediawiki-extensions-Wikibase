@@ -22,6 +22,7 @@ return call_user_func( function() {
 				'getApiBasedValueParserConstructor.js',
 			),
 			'dependencies' => array(
+				'dataValues',
 				'util.inherit',
 				'valueParsers.ValueParser',
 				'wikibase',
