@@ -33,9 +33,9 @@ class TemplateModule extends ResourceLoaderFileModule {
 ( function( mw ) {
 	'use strict';
 
-	mw.templates = mw.templates || {};
-	mw.templates.store = new mw.Map();
-	mw.templates.store.set( $templatesJson );
+	mw.wbTemplates = mw.wbTemplates || {};
+	mw.wbTemplates.store = new mw.Map();
+	mw.wbTemplates.store.set( $templatesJson );
 
 }( mediaWiki ) );
 EOT;
