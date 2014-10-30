@@ -49,6 +49,11 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 				} )
 			);
 
+		$propertyDataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
+		$propertyDataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'structured-cat' ) );
+
 		return new WikibaseLuaBindings(
 			new BasicEntityIdParser(),
 			$entityLookup ? $entityLookup : new MockRepository(),
@@ -56,6 +61,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			new LanguageFallbackChainFactory(),
 			$language, // language
 			new SettingsArray(),
+			$propertyDataTypeLookup,
 			array( 'de', 'en', 'es', 'ja' ),
 			"enwiki" // siteId
 		);

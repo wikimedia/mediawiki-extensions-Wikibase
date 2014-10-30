@@ -41,6 +41,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getLanguageFallbackChainFactory(),
 			$language,
 			$wikibaseClient->getSettings(),
+			$wikibaseClient->getPropertyDataTypeLookup(),
 			Utils::getLanguageCodes(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
