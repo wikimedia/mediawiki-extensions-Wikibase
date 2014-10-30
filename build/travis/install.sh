@@ -11,6 +11,7 @@ tar -zxf $MW.tar.gz
 mv mediawiki-$MW phase3
 
 cd phase3
+composer install --no-dev
 wget https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
 mv phpunit.phar tests/phpunit/
