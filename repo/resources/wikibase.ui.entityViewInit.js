@@ -73,6 +73,7 @@
 				$target.data( 'labelview' )
 				|| $target.data( 'descriptionview' )
 				|| $target.data( 'aliasesview' )
+				|| $target.data( 'sitelinkgroupview' )
 			) {
 				gravity = 'nw';
 			}
@@ -151,6 +152,9 @@
 		} );
 	}
 
+	/**
+	 * @return {string[]}
+	 */
 	function getUserLanguages() {
 		var userLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
 			isUlsDefined = mw.uls !== undefined
@@ -269,12 +273,13 @@
 				content: $message,
 				permanent: true,
 				gravity: gravity,
-				$anchor: edittoolbar.getButton( 'save' ).element
+				$anchor: edittoolbar.getContainer()
 			} );
 
 		$hideMessage.on( 'click', function( event ) {
 			event.preventDefault();
 			$messageAnchor.data( 'wbtooltip' ).degrade( true );
+			$( window ).off( '.wbCopyrightTooltip' );
 			if( mw.user.isAnon() ) {
 				$.cookie( cookieKey, copyRightVersion, { 'expires': 365 * 3, 'path': '/' } );
 			} else {
@@ -291,11 +296,24 @@
 
 		// destroy tooltip after edit mode gets closed again:
 		$entityview
-		.one( 'entityviewafterstopediting', function( event, origin ) {
-			if( $messageAnchor.data( 'wbtooltip' ) !== undefined ) {
-				$messageAnchor.data( 'wbtooltip' ).degrade( true );
+		.one( 'entityviewafterstopediting.wbCopyRightTooltip', function( event, origin ) {
+			var tooltip = $messageAnchor.data( 'wbtooltip' );
+			if( tooltip ) {
+				tooltip.degrade( true );
 			}
+			$( window ).off( '.wbCopyrightTooltip' );
 		} );
+
+		$( window ).one(
+			'scroll.wbCopyrightTooltip touchmove.wbCopyrightTooltip resize.wbCopyrightTooltip',
+			function() {
+				var tooltip = $messageAnchor.data( 'wbtooltip' );
+				if( tooltip ) {
+					$messageAnchor.data( 'wbtooltip' ).hide();
+				}
+				$entityview.off( '.wbCopyRightTooltip' );
+			}
+		);
 	}
 
 	function evaluateRestrictions() {
