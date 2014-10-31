@@ -16,6 +16,24 @@
       "revId": "c5113f78c6317055966cdd2b36a3001133cda295",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1d6b5db6",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-10-31T18:27:08Z",
+      "side": 1,
+      "message": "Yeah, checking mw.config.get( \u0027wbExperimentalFeatur\nes\u0027 ) \u0026\u0026 this.options.value.getType() \u003d\u003d\u003d \u0027property\u0027 would be better",
+      "parentUuid": "6e936f18_5271d4a5",
+      "revId": "c5113f78c6317055966cdd2b36a3001133cda295",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
