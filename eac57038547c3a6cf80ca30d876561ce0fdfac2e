@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_8c52e13d",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-10-31T13:17:30Z",
+      "side": 0,
+      "message": "It\u0027s somewhat silly to just have it set to a fixed value in the constructor here, rather than allowing the user to specify which table to use. If you really want to hard code the table name, and now allow using a different table, then at least put the thing in a \"private\" constant.",
+      "revId": "eac57038547c3a6cf80ca30d876561ce0fdfac2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
