@@ -16,13 +16,12 @@ use Wikibase\Client\Store\Sql\ConnectionManager;
  */
 class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 
-	private function getConnectionMock() {
-		$connection = $this->getMockBuilder( 'IDatabase' )
-			->setMethods( array( 'startAtomic', 'endAtomic', 'rollback' ) )
+	private function getDatabaseBaseMock() {
+		$db = $this->getMockBuilder( 'DatabaseBase' )
 			->disableOriginalConstructor()
-			->getMock();
+			->getMockForAbstractClass();
 
-		return $connection;
+		return $db;
 	}
 
 	private function getLoadBalancerMock() {
@@ -34,85 +33,85 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetReadConnection() {
-		$connection = $this->getConnectionMock();
+		$db = $this->getDatabaseBaseMock();
 		$lb = $this->getLoadBalancerMock();
 
 		$lb->expects( $this->once() )
 			->method( 'getConnection' )
 			->with( DB_READ )
-			->will( $this->returnValue( $connection ) );
+			->willReturn( $db );
 
 		$manager = new ConnectionManager( $lb );
 		$actual = $manager->getReadConnection();
 
-		$this->assertSame( $connection, $actual );
+		$this->assertSame( $db, $actual );
 	}
 
 	public function testReleaseConnection() {
-		$connection = $this->getConnectionMock();
+		$db = $this->getDatabaseBaseMock();
 		$lb = $this->getLoadBalancerMock();
 
 		$lb->expects( $this->once() )
 			->method( 'reuseConnection' )
-			->with( $connection )
-			->will( $this->returnValue( null ) );
+			->with( $db )
+			->willReturn( null );
 
 		$manager = new ConnectionManager( $lb );
-		$manager->releaseConnection( $connection );
+		$manager->releaseConnection( $db );
 	}
 
 	public function testBeginAtomicSection() {
-		$connection = $this->getConnectionMock();
+		$db = $this->getDatabaseBaseMock();
 		$lb = $this->getLoadBalancerMock( );
 
 		$lb->expects( $this->once() )
 			->method( 'getConnection' )
 			->with( DB_WRITE )
-			->will( $this->returnValue( $connection ) );
+			->willReturn( $db );
 
-		$connection->expects( $this->once() )
+		$db->expects( $this->once() )
 			->method( 'startAtomic' )
 			->withAnyParameters()
-			->will( $this->returnValue( null ) );
+			->willReturn( null );
 
 		$manager = new ConnectionManager( $lb );
 		$manager->beginAtomicSection( 'TEST' );
 	}
 
 	public function testCommitAtomicSection() {
-		$connection = $this->getConnectionMock();
+		$db = $this->getDatabaseBaseMock();
 		$lb = $this->getLoadBalancerMock( );
 
 		$lb->expects( $this->once() )
 			->method( 'reuseConnection' )
-			->with( $connection )
-			->will( $this->returnValue( null ) );
+			->with( $db )
+			->willReturn( null );
 
-		$connection->expects( $this->once() )
+		$db->expects( $this->once() )
 			->method( 'endAtomic' )
 			->withAnyParameters()
-			->will( $this->returnValue( null ) );
+			->willReturn( null );
 
 		$manager = new ConnectionManager( $lb );
-		$manager->commitAtomicSection( $connection, 'TEST' );
+		$manager->commitAtomicSection( $db, 'TEST' );
 	}
 
 	public function testRollbackAtomicSection() {
-		$connection = $this->getConnectionMock();
+		$db = $this->getDatabaseBaseMock();
 		$lb = $this->getLoadBalancerMock( );
 
 		$lb->expects( $this->once() )
 			->method( 'reuseConnection' )
-			->with( $connection )
-			->will( $this->returnValue( null ) );
+			->with( $db )
+			->willReturn( null );
 
-		$connection->expects( $this->once() )
+		$db->expects( $this->once() )
 			->method( 'rollback' )
 			->withAnyParameters()
-			->will( $this->returnValue( null ) );
+			->willReturn( null );
 
 		$manager = new ConnectionManager( $lb );
-		$manager->rollbackAtomicSection( $connection, 'TEST' );
+		$manager->rollbackAtomicSection( $db, 'TEST' );
 	}
 
 }

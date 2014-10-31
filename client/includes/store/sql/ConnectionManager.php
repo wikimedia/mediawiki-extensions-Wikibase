@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Store\Sql;
 
-use IDatabase;
+use DatabaseBase;
 use LoadBalancer;
 
 /**
@@ -21,30 +21,30 @@ class ConnectionManager {
 	}
 
 	/**
-	 * @return IDatabase
+	 * @return DatabaseBase
 	 */
 	public function getReadConnection() {
 		return $this->loadBalancer->getConnection( DB_READ );
 	}
 
 	/**
-	 * @return IDatabase
+	 * @return DatabaseBase
 	 */
 	private function getWriteConnection() {
 		return $this->loadBalancer->getConnection( DB_WRITE );
 	}
 
 	/**
-	 * @param IDatabase $db
+	 * @param DatabaseBase $db
 	 */
-	public function releaseConnection( IDatabase $db ) {
+	public function releaseConnection( DatabaseBase $db ) {
 		$this->loadBalancer->reuseConnection( $db );
 	}
 
 	/**
 	 * @param string $fname
 	 *
-	 * @return IDatabase
+	 * @return DatabaseBase
 	 */
 	public function beginAtomicSection( $fname ) {
 		$db = $this->getWriteConnection();
@@ -53,23 +53,19 @@ class ConnectionManager {
 	}
 
 	/**
-	 * @param IDatabase $db
+	 * @param DatabaseBase $db
 	 * @param string $fname
-	 *
-	 * @return IDatabase
 	 */
-	public function commitAtomicSection( IDatabase $db, $fname ) {
+	public function commitAtomicSection( DatabaseBase $db, $fname ) {
 		$db->endAtomic( $fname );
 		$this->releaseConnection( $db );
 	}
 
 	/**
-	 * @param IDatabase $db
+	 * @param DatabaseBase $db
 	 * @param string $fname
-	 *
-	 * @return IDatabase
 	 */
-	public function rollbackAtomicSection( IDatabase $db, $fname ) {
+	public function rollbackAtomicSection( DatabaseBase $db, $fname ) {
 		//FIXME: there does not seem to be a clean way to roll back an atomic section?!
 		$db->rollback( $fname, 'flush' );
 		$this->releaseConnection( $db );
