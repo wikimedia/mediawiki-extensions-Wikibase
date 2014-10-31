@@ -115,15 +115,15 @@ abstract class ViewEntityAction extends ViewAction {
 	 * Parent is doing $this->checkCanExecute( $this->getUser() )
 	 */
 	public function show() {
-		$contentRetriever = new ContentRetriever();
-		$content = $contentRetriever->getContentForRequest(
-			$this->getRequest(),
-			$this->getArticle()
-		);
-
-		if ( is_null( $content ) ) {
+		if ( !$this->getArticle()->getPage()->exists() ) {
 			$this->displayMissingEntity();
 		} else {
+			$contentRetriever = new ContentRetriever();
+			$content = $contentRetriever->getContentForRequest(
+				$this->getRequest(),
+				$this->getArticle()
+			);
+
 			$this->displayEntityContent( $content );
 		}
 	}
