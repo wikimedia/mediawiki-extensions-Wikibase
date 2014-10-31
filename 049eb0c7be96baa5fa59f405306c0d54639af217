@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_ec9fe553",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-31T11:39:31Z",
+      "side": 1,
+      "message": "please call this something like $siteLinkLookup\n\nwithout the hint in the comment, i thought $siteLinks was an array of SiteLink objects or maybe a SiteLinkList (do we have such thing?).",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_0c9b3169",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-31T11:39:31Z",
+      "side": 1,
+      "message": "$siteLinkLookup",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_aca9dd79",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-31T11:39:31Z",
+      "side": 1,
+      "message": "$itemId instead of $id would be slightly better",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_cca469a1",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-31T11:39:31Z",
+      "side": 1,
+      "message": "oh noes! ;)",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8cb661d6",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-31T11:39:31Z",
+      "side": 1,
+      "message": "how about $numericId instead of $id ?",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_4cb059d8",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-31T11:39:31Z",
+      "side": 1,
+      "message": "$itemIds?",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8cdd011a",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-31T11:39:31Z",
+      "side": 1,
+      "message": "aaaaah! i realized this is not introduced here, but it\u0027s SQL not Sql.  It would be nice if we got that right and were consistent about that.\n\nhttps://en.wikipedia.org/wiki/SQL",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_acc0fd2f",
+        "filename": "client/includes/store/TitleFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-31T11:39:31Z",
+      "side": 1,
+      "message": "would be great :)",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_ccbb09b9",
+        "filename": "client/includes/store/TitleFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-31T11:39:31Z",
+      "side": 1,
+      "message": "this class really isn\u0027t Wikibase specific and ought to be in core.\n\nas such, maybe it would be better to use a non-Wikibase specific Exception here.",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
