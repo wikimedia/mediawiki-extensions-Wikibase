@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_ccd22901",
+        "filename": "lib/resources/api/ParseValueCaller.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-10-31T11:52:25Z",
+      "side": 1,
+      "message": "Should this really be a RepoApiError or is it more like an application error?\nIf it should, in fact, be a RepoApiError, you should probably construct one using the constructor; Else, the reject() parameters are ok at the moment--no need for the inline comment.",
+      "revId": "64e62fa7c2cd1b7fbd0cdfb0e34113a840668807",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
