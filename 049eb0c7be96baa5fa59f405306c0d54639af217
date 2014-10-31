@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e936f18_0cf0118d",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-31T11:51:24Z",
+      "side": 1,
+      "message": "maybe this should be false by default?\n\ni think people *should* use the new usage index and it\u0027s really only wmf setup where we might want it false. (which we can do)",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_6c019570",
         "filename": "client/includes/AffectedPagesFinder.php",
         "patchSetId": 2
