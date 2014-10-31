@@ -41,7 +41,7 @@ class Statement extends Claim {
 	private $rank = self::RANK_NORMAL;
 
 	/**
-	 * @since 0.1
+	 * @since 2.0
 	 *
 	 * @param Claim $claim
 	 * @param ReferenceList|null $references
