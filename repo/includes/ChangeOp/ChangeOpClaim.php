@@ -10,6 +10,7 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Summary;
@@ -96,7 +97,7 @@ class ChangeOpClaim extends ChangeOpBase {
 
 		if ( $this->guidValidator->validate( $guid->getSerialization() ) === false ) {
 			throw new ChangeOpException( "Claim does not have a valid GUID" );
-		} else if ( !$entity->getId()->equals( $guid->getEntityId() ) ){
+		} elseif ( !$entity->getId()->equals( $guid->getEntityId() ) ){
 			throw new ChangeOpException( "Claim GUID invalid for given entity" );
 		}
 
@@ -110,7 +111,7 @@ class ChangeOpClaim extends ChangeOpBase {
 		}
 
 		$claims = new Claims( $newClaimList );
-		$entity->setClaims( $claims );
+		$entity->setStatements( new StatementList( iterator_to_array( $claims ) ) );
 
 		return true;
 	}
