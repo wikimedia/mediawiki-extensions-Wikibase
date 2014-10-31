@@ -14,14 +14,17 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 
@@ -55,6 +58,18 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
 	}
 
+	/**
+	 * @dataProvider invalidIndexProvider
+	 */
+	public function testConstructionWithInvalidIndex( $invalidIndex ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+
+		$this->newChangeOpClaim(
+			$this->mockProvider->makeStatement( 'P7' ),
+			$invalidIndex
+		);
+	}
+
 	public function invalidIndexProvider() {
 		return array(
 			array( 'foo' ),
@@ -64,26 +79,29 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidIndexProvider
-	 * @expectedException InvalidArgumentException
+	 * @dataProvider provideTestApply
+	 *
+	 * @param Entity $entity
+	 * @param Statement $statement
+	 * @param Statement[] $expected
+	 * @param int|null $index
 	 */
-	public function testConstructionWithInvalidIndex( $invalidIndex ) {
-		$itemId = new ItemId( 'q42' );
-		new ChangeOpClaim(
-			$this->mockProvider->makeStatement( 'P7' ),
-			$this->mockProvider->getGuidGenerator(),
-			$this->mockProvider->getMockGuidValidator(),
-			$this->mockProvider->getMockGuidParser( $itemId ),
-			$this->mockProvider->getMockSnakValidator(),
-			$invalidIndex
-		);
+	public function testApply( Entity $entity, Statement $statement, array $expected,
+		$index = null
+	) {
+		$changeOpClaim = $this->newChangeOpClaim( $statement, $index );
+		$changeOpClaim->apply( $entity );
+
+		$expectedStatementList = new StatementList( $expected );
+		$this->assertTrue( $entity->getStatements()->equals( $expectedStatementList ) );
 	}
 
 	public function provideTestApply() {
 		$itemEmpty = Item::newEmpty();
-		$itemEmpty->setId( new ItemId( 'q888' ) );
-		$item777 = self::makeNewItemWithStatement( 'Q777', new PropertyNoValueSnak( 45 ) );
-		$item666 = self::makeNewItemWithStatement( 'Q666', new PropertySomeValueSnak( 44 ) );
+		$itemEmpty->setId( new ItemId( 'Q888' ) );
+
+		$item777 = $this->makeNewItemWithStatement( 'Q777', new PropertyNoValueSnak( 45 ) );
+		$item666 = $this->makeNewItemWithStatement( 'Q666', new PropertySomeValueSnak( 44 ) );
 
 		$item777Statements = $item777->getClaims();
 		$item666Statements = $item666->getClaims();
@@ -91,16 +109,18 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$statement777 = reset( $item777Statements );
 		$statement666 = reset( $item666Statements );
 
-		//claims that exist on the given entities
+		// claims that exist on the given entities
 		$statements[0] = new Statement( new Claim( new PropertyNoValueSnak( 43 ) ) );
 		$statements[777] = clone $statement777;
 		$statements[666] = clone $statement666;
-		//claims with a null guid
+
+		// claims with a null guid
 		$statements[7770] = clone $statement777;
 		$statements[7770]->setGuid( null );
 		$statements[6660] = clone $statement666;
 		$statements[6660]->setGuid( null );
-		//new claims not yet on the entity
+
+		// new claims not yet on the entity
 		$statements[7777] = clone $statement777;
 		$statements[7777]->setGuid( 'Q777$D8404CDA-25E4-4334-AF13-A3290BC77777' );
 		$statements[6666] = clone $statement666;
@@ -114,48 +134,153 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$statements[13]->setGuid( 'Q666$D8404CDA-25E4-4334-AF13-A3290BC66613' );
 
 		$args = array();
-		//test adding claims with guids from other items(these shouldn't be added)
-		$args[] = array( $itemEmpty, $statements[666], false );
-		$args[] = array( $itemEmpty, $statements[777], false );
-		$args[] = array( $item666, $statements[777], false );
-		$args[] = array( $item777, $statements[666], false );
-		//test adding the same claims with a null guid (a guid should be created)
-		$args[] = array( $item777, $statements[7770], array( $statements[777], $statements[7770] ) );
-		$args[] = array( $item666, $statements[6660], array( $statements[666], $statements[6660] ) );
-		//test adding the same claims with a correct but different guid (these should be added)
-		$args[] = array( $item777, $statements[7777], array( $statements[777], $statements[7770], $statements[7777] ) );
-		$args[] = array( $item666, $statements[6666], array( $statements[666], $statements[6660], $statements[6666] ) );
-		//test adding the same claims with and id that already exists (these shouldn't be added)
-		$args[] = array( $item777, $statements[7777], array( $statements[777], $statements[7770], $statements[7777] ) );
-		$args[] = array( $item666, $statements[6666], array( $statements[666], $statements[6660], $statements[6666] ) );
+
+		// test adding the same claims with a null guid (a guid should be created)
+		$args[] = array(
+			$item777,
+			$statements[7770],
+			array( $statements[777], $statements[7770] )
+		);
+
+		$args[] = array(
+			$item666,
+			$statements[6660],
+			array( $statements[666], $statements[6660] )
+		);
+
+		// test adding the same claims with a correct but different guid (these should be added)
+		$args[] = array(
+			$item777,
+			$statements[7777],
+			array( $statements[777], $statements[7770], $statements[7777] )
+		);
+
+		$args[] = array(
+			$item666,
+			$statements[6666],
+			array( $statements[666], $statements[6660], $statements[6666] )
+		);
+
+		// test adding the same claims with and id that already exists (these shouldn't be added)
+		$args[] = array(
+			$item777,
+			$statements[7777],
+			array( $statements[777], $statements[7770], $statements[7777] )
+		);
+
+		$args[] = array(
+			$item666,
+			$statements[6666],
+			array( $statements[666], $statements[6660], $statements[6666] )
+		);
+
 		// test adding a claim at a specific index
-		$args[] = array( $item777, $statements[0], array( $statements[0], $statements[777], $statements[7770], $statements[7777] ), 0 );
+		$args[] = array(
+			$item777,
+			$statements[0],
+			array( $statements[0], $statements[777], $statements[7770], $statements[7777] ),
+			0
+		);
+
 		// test moving a claim
-		$args[] = array( $item666, $statements[6666], array( $statements[666], $statements[6666], $statements[6660] ), 1 );
+		$args[] = array(
+			$item666,
+			$statements[6666],
+			array( $statements[666], $statements[6666], $statements[6660] ),
+			1
+		);
+
 		// test adding a claim featuring another property id within the boundaries of claims the
 		// same property
-		$args[] = array( $item666, $statements[11], array( $statements[666], $statements[6666], $statements[6660], $statements[11] ), 1 );
+		$args[] = array(
+			$item666,
+			$statements[11],
+			array( $statements[666], $statements[6666], $statements[6660], $statements[11] ),
+			1
+		);
+
 		// test moving a subset of claims featuring the same property
-		$args[] = array( $item666, $statements[12], array( $statements[12], $statements[11], $statements[666], $statements[6666], $statements[6660] ), 0 );
+		$args[] = array(
+			$item666,
+			$statements[12],
+			array(
+				$statements[12],
+				$statements[11],
+				$statements[666],
+				$statements[6666],
+				$statements[6660]
+			),
+			0
+		);
 
 		return $args;
 	}
 
+	public function testApplyWithProperty() {
+		$this->markTestSkipped( 'pending fix for bug 72671' );
+
+		$property = Property::newEmpty();
+		$property->setId( new PropertyId( 'P73923' ) );
+
+		$claim = $this->makeClaim( $property, new PropertyNoValueSnak( 45 ) );
+		$statement = new Statement( $claim );
+		$expected = new StatementList( array( $statement ) );
+
+		$changeOpClaim = $this->newChangeOpClaim( $statement );
+		$changeOpClaim->apply( $property );
+
+		$this->assertTrue( $property->getStatements()->equals( $expected ) );
+	}
+
 	/**
-	 * @dataProvider provideTestApply
+	 * @dataProvider applyInvalidThrowsExceptionProvider
 	 *
 	 * @param Entity $entity
 	 * @param Statement $statement
-	 * @param Statement[]|bool $expected
-	 * @param int|null $index
 	 */
-	public function testApply( Entity $entity, Statement $statement, $expected, $index = null ) {
-		if ( $expected === false ) {
-			$this->setExpectedException( '\Wikibase\ChangeOp\ChangeOpException' );
-		}
+	public function testApplyInvalidThrowsException( Entity $entity, Statement $statement ) {
+		$this->setExpectedException( '\Wikibase\ChangeOp\ChangeOpException' );
 
+		$changeOpClaim = $this->newChangeOpClaim( $statement );
+		$changeOpClaim->apply( $entity );
+	}
+
+	public function applyInvalidThrowsExceptionProvider() {
+		$itemEmpty = Item::newEmpty();
+		$itemEmpty->setId( new ItemId( 'Q888' ) );
+
+		$item777 = $this->makeNewItemWithStatement( 'Q777', new PropertyNoValueSnak( 45 ) );
+		$item666 = $this->makeNewItemWithStatement( 'Q666', new PropertySomeValueSnak( 44 ) );
+
+		$item777Statements = $item777->getClaims();
+		$item666Statements = $item666->getClaims();
+
+		$statement777 = reset( $item777Statements );
+		$statement666 = reset( $item666Statements );
+
+		// claims that exist on the given entities
+		$statements[777] = clone $statement777;
+		$statements[666] = clone $statement666;
+
+		// test adding claims with guids from other items (these shouldn't be added)
+		return array(
+			array( $itemEmpty, $statements[666] ),
+			array( $itemEmpty, $statements[777] ),
+			array( $item666, $statements[777] ),
+			array( $item777, $statements[666] ),
+		);
+	}
+
+	/**
+	 * @param Statement $statement
+	 * @param index|null $index
+	 *
+	 * @return ChangeOpClaim
+	 */
+	private function newChangeOpClaim( Statement $statement, $index = null ) {
 		$idParser = new BasicEntityIdParser();
-		$changeOpClaim = new ChangeOpClaim(
+
+		return new ChangeOpClaim(
 			$statement,
 			new ClaimGuidGenerator(),
 			new ClaimGuidValidator( $idParser ),
@@ -163,29 +288,6 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 			$this->mockProvider->getMockSnakValidator(),
 			$index
 		);
-
-		$changeOpClaim->apply( $entity );
-
-		if ( $expected === false ) {
-			$this->fail( 'Failed to throw a ChangeOpException' );
-		}
-
-		$entityClaims = new Claims( $entity->getClaims() );
-		$entityClaimHashSet = array_flip( $entityClaims->getHashes() );
-		$i = 0;
-
-		foreach ( $expected as $expectedStatement ) {
-			$guid = $expectedStatement->getGuid();
-			$hash = $expectedStatement->getHash();
-
-			if ( $guid !== null ) {
-				$this->assertEquals( $i++, $entityClaims->indexOf( $expectedStatement ) );
-			}
-
-			$this->assertArrayHasKey( $hash, $entityClaimHashSet );
-		}
-
-		$this->assertEquals( count( $expected ), $entityClaims->count() );
 	}
 
 	public function provideInvalidApply() {
@@ -202,34 +304,13 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		// apply change to the wrong item
 		$wrongItem = Item::newEmpty();
 		$wrongItem->setId( new ItemId( "Q888" ) );
-		$args['wrong entity'] = array ( $wrongItem, new ChangeOpClaim(
-			$newStatement,
-			$this->mockProvider->getGuidGenerator(),
-			$this->mockProvider->getMockGuidValidator(),
-			$this->mockProvider->getMockGuidParser( $item->getId() ),
-			$this->mockProvider->getMockSnakValidator()
-		) );
-
-		//TODO: once we stop allowing user-generated GUIDs for new claims, test this below.
-		// apply change to an unknown claim
-		/*
-		$wrongClaimId = $item->getId()->getSerialization() . '$DEADBEEF-DEAD-BEEF-DEAD-BEEFDEADBEEF';
-		$badClaim = clone $newClaim;
-		$badClaim->setGuid( $wrongClaimId );
-		$args['unknown claim'] = array ( $item, new ChangeOpClaim( $badClaim, $guidGenerator ) );
-		*/
+		$args['wrong entity'] = array ( $wrongItem, $this->newChangeOpClaim( $newStatement ) );
 
 		// update an existing claim with wrong main snak property
 		$newSnak = new PropertyNoValueSnak( 23452345 );
 		$newStatement->setMainSnak( $newSnak );
 
-		$changeOp =  new ChangeOpClaim(
-			$newStatement,
-			$this->mockProvider->getGuidGenerator(),
-			$this->mockProvider->getMockGuidValidator(),
-			$this->mockProvider->getMockGuidParser( $item->getId() ),
-			$this->mockProvider->getMockSnakValidator()
-		);
+		$changeOp = $this->newChangeOpClaim( $newStatement );
 
 		$args['wrong main snak property'] = array ( $item, $changeOp );
 
@@ -247,22 +328,37 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param integer $itemId
-	 * @param $snak
+	 * @param Snak $snak
 	 * @return Item
 	 */
-	protected function makeNewItemWithStatement( $itemId, $snak ) {
+	private function makeNewItemWithStatement( $itemId, Snak $snak ) {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( $itemId ) );
 
-		$statement = $item->newClaim( $snak );
-		$guidGenerator = new ClaimGuidGenerator();
-		$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
-
-		$claims = new Claims();
-		$claims->addClaim( $statement );
-		$item->setClaims( $claims );
+		$this->addClaimsToEntity( $item, $snak );
 
 		return $item;
+	}
+
+	/**
+	 * @param Entity $entity
+	 */
+	private function makeClaim( Entity $entity, Snak $snak ) {
+		$claim = $entity->newClaim( $snak );
+		$guidGenerator = new ClaimGuidGenerator();
+		$claim->setGuid( $guidGenerator->newGuid( $entity->getId() ) );
+
+		return $claim;
+	}
+
+	/**
+	 * @param Entity $entity
+	 * @param Snak $snak
+	 */
+	private function addClaimsToEntity( Entity $entity, Snak $snak ) {
+		$claim = $this->makeClaim( $entity, $snak );
+
+		$entity->getStatements()->addStatement( new Statement( $claim ) );
 	}
 
 	public function validateProvider() {
@@ -286,7 +382,6 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$cases['mismatching value in main snak'] = array( $q17, $statement );
 
-
 		$statement = new Statement( new Claim( $goodSnak ) );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$statement->setQualifiers( new SnakList( array( $badSnak ) ) );
@@ -296,7 +391,6 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$statement->setQualifiers( new SnakList( array( $brokenSnak ) ) );
 		$cases['mismatching value in qualifier'] = array( $q17, $statement );
-
 
 		$statement = new Statement( new Claim( $goodSnak ) );
 		$reference = new Reference( new SnakList( array( $badSnak ) ) );
@@ -317,14 +411,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validateProvider
 	 */
 	public function testValidate( EntityId $entityId, Statement $statement ) {
-		$changeOpClaim = new ChangeOpClaim(
-			$statement,
-			new ClaimGuidGenerator(),
-			$this->mockProvider->getMockGuidValidator(),
-			$this->mockProvider->getMockGuidParser( $entityId ),
-			$this->mockProvider->getMockSnakValidator(),
-			0
-		);
+		$changeOpClaim = $this->newChangeOpClaim( $statement, 0 );
 
 		$entity = Item::newEmpty();
 		$entity->setId( $entityId );
