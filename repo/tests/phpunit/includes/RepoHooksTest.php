@@ -2,6 +2,7 @@
 
 namespace Wikibase\Tests;
 
+use ConfigFactory;
 use DerivativeContext;
 use OutputPage;
 use RequestContext;
@@ -145,7 +146,7 @@ XML
 		wfRestoreWarnings();
 
 		$source = $this->getMockImportStream( $xml );
-		$importer = new WikiImporter( $source );
+		$importer = new WikiImporter( $source, ConfigFactory::getDefaultInstance()->makeConfig( 'main' ) );
 
 		$importer->setNoticeCallback( function() {
 			// Do nothing for now. Could collect and compare notices.
