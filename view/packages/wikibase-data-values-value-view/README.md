@@ -114,6 +114,7 @@ Other methods an Expert needs to provide:
 
 #### Breaking changes
 * Replaced $.util.highlightMatchingCharacters with util.highlightSubstring.
+* $.valueview(.valueview) requires new "language" option to be set.
 
 ### 0.7.0 (2014-09-10)
 
