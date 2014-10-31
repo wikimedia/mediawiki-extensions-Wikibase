@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e936f18_6c019570",
+        "filename": "client/includes/AffectedPagesFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-10-31T11:43:08Z",
+      "side": 1,
+      "message": "is this class to be in the Client component?  if so, namespace Wikibase\\Client would be better.",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_ec9fe553",
         "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
         "patchSetId": 2
