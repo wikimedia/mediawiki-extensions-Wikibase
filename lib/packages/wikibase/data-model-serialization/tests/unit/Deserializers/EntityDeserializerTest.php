@@ -212,12 +212,158 @@ class EntityDeserializerTest extends DeserializerBaseTest {
 
 	public function invalidDeserializationProvider() {
 		return array(
-			array(
+			'label with integer language code' => array(
+				array(
+					'type' => 'item',
+					'labels' => array(
+						8 => array(
+							'language' => 8,
+							'value' => 'Cat',
+						),
+					),
+				),
+			),
+			'label without array key for language code' => array(
+				array(
+					'type' => 'item',
+					'labels' => array(
+						array(
+							'language' => 'en',
+							'value' => 'Cat',
+						),
+					),
+				),
+			),
+			'label with integer value' => array(
+				array(
+					'type' => 'item',
+					'labels' => array(
+						'en' => array(
+							'language' => 'en',
+							'value' => 8,
+						),
+					),
+				),
+			),
+			'alias with interger language code' => array(
+				array(
+					'type' => 'item',
+					'aliases' => array(
+						8 =>
+							array(
+								array(
+									'language' =>  8,
+									'value' => 'Cat',
+								),
+							),
+					),
+				)
+			),
+			'alias without array key for language code' => array(
+				array(
+					'type' => 'item',
+					'aliases' => array(
+						array(
+							array(
+								'language' =>  'en',
+								'value' => 'Cat',
+							),
+						),
+					),
+				)
+			),
+			'alias as a string only' => array(
 				array(
 					'type' => 'item',
 					'aliases' => array(
 						'en' => 'Cat'
 					)
+				)
+			),
+			'label fallback language term' => array(
+				array(
+					'type' => 'item',
+					'labels' => array(
+						'en' => array(
+							'language' => 'en-cat',
+							'value' => 'mew',
+						),
+					),
+				),
+			),
+			'label with integer fallback language code' => array(
+				array(
+					'type' => 'item',
+					'labels' => array(
+						'en' => array(
+							'language' => 8,
+							'value' => 'Cat',
+						),
+					),
+				),
+			),
+			'label language term with source' => array(
+				array(
+					'type' => 'item',
+					'labels' => array(
+						'en-cat' => array(
+							'language' => 'en-cat',
+							'value' => 'mew',
+							'source' => 'en',
+						),
+					),
+				),
+			),
+			'description fallback language term' => array(
+				array(
+					'type' => 'item',
+					'descriptions' => array(
+						'en' => array(
+							'language' => 'en-cat',
+							'value' => 'mew',
+						),
+					),
+				),
+			),
+			'description language term with source' => array(
+				array(
+					'type' => 'item',
+					'descriptions' => array(
+						'en-cat' => array(
+							'language' => 'en-cat',
+							'value' => 'mew',
+							'source' => 'en',
+						),
+					),
+				),
+			),
+			'alias fallback language term' => array(
+				array(
+					'type' => 'item',
+					'aliases' => array(
+						'en' =>
+							array(
+								array(
+									'language' =>  'en-cat',
+									'value' => 'mew',
+								),
+							),
+					),
+				)
+			),
+			'alias language term with source' => array(
+				array(
+					'type' => 'item',
+					'aliases' => array(
+						'en-cat' =>
+							array(
+								array(
+									'language' =>  'en-cat',
+									'value' => 'mew',
+									'source' => 'en',
+								),
+							),
+					),
 				)
 			),
 		);
