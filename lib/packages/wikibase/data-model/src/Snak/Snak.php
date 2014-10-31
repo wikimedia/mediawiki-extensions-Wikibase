@@ -10,7 +10,7 @@ use Wikibase\DataModel\PropertyIdProvider;
 
 /**
  * Interface for objects that represent a single Wikibase snak.
- * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#Snaks
+ * See https://www.mediawiki.org/wiki/Wikibase/DataModel#Snaks
  *
  * @since 0.1
  *

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Class representing a property value snak.
- * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#PropertyValueSnak
+ * See https://www.mediawiki.org/wiki/Wikibase/DataModel#PropertyValueSnak
  *
  * @since 0.1
  *

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * Represents a single Wikibase property.
- * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#Properties
+ * See https://www.mediawiki.org/wiki/Wikibase/DataModel#Properties
  *
  * @since 0.1
  *

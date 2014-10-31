@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\Statement;
 
 /**
  * Class that represents a single Wikibase claim.
- * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#Statements
+ * See https://www.mediawiki.org/wiki/Wikibase/DataModel#Statements
  *
  * @since 0.4 (as 'ClaimObject' and interface 'Claim' since 0.1)
  *

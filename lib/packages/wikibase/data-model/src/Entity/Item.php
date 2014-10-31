@@ -19,7 +19,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * Represents a single Wikibase item.
- * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#Items
+ * See https://www.mediawiki.org/wiki/Wikibase/DataModel#Items
  *
  * @since 0.1
  *

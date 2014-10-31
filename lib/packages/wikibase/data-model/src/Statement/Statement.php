@@ -11,7 +11,7 @@ use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * Class representing a Wikibase statement.
- * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#Statements
+ * See https://www.mediawiki.org/wiki/Wikibase/DataModel#Statements
  *
  * @since 0.1
  *

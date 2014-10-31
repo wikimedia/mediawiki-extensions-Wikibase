@@ -9,7 +9,7 @@ use Wikibase\DataModel\Snak\Snaks;
 
 /**
  * Object that represents a single Wikibase reference.
- * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#ReferenceRecords
+ * See https://www.mediawiki.org/wiki/Wikibase/DataModel#ReferenceRecords
  *
  * @since 0.1, instantiable since 0.4
  *
