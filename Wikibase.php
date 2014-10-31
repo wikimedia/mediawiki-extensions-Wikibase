@@ -36,6 +36,3 @@ if( isset( $wgWikimediaJenkinsCI ) && !$wgWikimediaJenkinsCI ) {
 	die( "This entry point is for use by the Jenkins testing framework only.\n"
 		. "Use repo/Wikibase.php resp. client/WikibaseClient.php instead.\n" );
 }
-
-// Avoid polluting the global namespace
-unset( $jenkins_job_name );
