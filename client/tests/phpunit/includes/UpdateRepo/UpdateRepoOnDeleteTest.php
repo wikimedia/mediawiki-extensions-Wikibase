@@ -2,11 +2,13 @@
 
 namespace Wikibase\Client\Tests\UpdateRepo;
 
-use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
+use Title;
+use User;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
 
 /**
- * @covers Wikibase\Client\UpdateRepo\UpdateRepoOnMove
+ * @covers Wikibase\Client\UpdateRepo\UpdateRepoOnDelete
  *
  * @group WikibaseClient
  * @group Test
@@ -15,14 +17,14 @@ use Wikibase\DataModel\Entity\ItemId;
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
+class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * Return some fake data for testing
 	 *
 	 * @return array
 	 */
-	private function getFakeMoveData() {
+	protected function getFakeData() {
 		$entityId = new ItemId( 'Q123' );
 
 		$siteLinkLookupMock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
@@ -34,33 +36,29 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'repoDB' => 'wikidata',
 			'siteLinkLookup' => $siteLinkLookupMock,
-			'user' => \User::newFromName( 'RandomUserWhichDoesntExist' ),
+			'user' => User::newFromName( 'RandomUserWhichDoesntExist' ),
 			'siteId' => 'whatever',
-			'oldTitle' => \Title::newFromText( 'ThisOneDoesntExist' ),
-			'newTitle' => \Title::newFromText( 'Bar' )
+			'title' => Title::newFromText( 'Delete me' ),
 		);
 	}
 
 	/**
-	 * Get a new object which thinks we're both the repo and client
-	 *
-	 * @return UpdateRepoOnMove
+	 * @return UpdateRepoOnDelete
 	 */
-	private function getNewLocal() {
+	private function getNewUpdateRepoOnDelete() {
 		static $updateRepo = null;
 
 		if ( !$updateRepo ) {
-			$moveData = $this->getFakeMoveData();
+			$data = $this->getFakeData();
 
-			$updateRepo = new UpdateRepoOnMove(
-				$moveData['repoDB'],
+			$updateRepo = new UpdateRepoOnDelete(
+				$data['repoDB'],
 				// Nobody knows why we need to clone over here, but it's not working
 				// without... PHP is fun!
-				clone $moveData['siteLinkLookup'],
-				$moveData['user'],
-				$moveData['siteId'],
-				$moveData['oldTitle'],
-				$moveData['newTitle']
+				clone $data['siteLinkLookup'],
+				$data['user'],
+				$data['siteId'],
+				$data['title']
 			);
 		}
 
@@ -75,7 +73,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return object
 	 */
-	private function getJobQueueGroupMock( $expectedJob, $success ) {
+	protected function getJobQueueGroupMock( $expectedJob, $success ) {
 		$jobQueueGroupMock = $this->getMockBuilder( '\JobQueueGroup' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -89,7 +87,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testUserIsValidOnRepo() {
-		$updateRepo = $this->getNewLocal();
+		$updateRepo = $this->getNewUpdateRepoOnDelete();
 
 		$this->assertFalse( $updateRepo->userIsValidOnRepo() );
 	}
@@ -98,24 +96,23 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 	 * Create a new job and verify the set params
 	 */
 	public function testCreateJob() {
-		$updateRepo = $this->getNewLocal();
+		$updateRepo = $this->getNewUpdateRepoOnDelete();
 		$job = $updateRepo->createJob();
 		$itemId = new ItemId( 'Q123' );
 
-		$moveData = $this->getFakeMoveData();
+		$data = $this->getFakeData();
 		$this->assertInstanceOf( 'IJobSpecification', $job );
-		$this->assertEquals( 'UpdateRepoOnMove', $job->getType() );
+		$this->assertEquals( 'UpdateRepoOnDelete', $job->getType() );
 
 		$params = $job->getParams();
-		$this->assertEquals( $moveData['siteId'], $params['siteId'] );
-		$this->assertEquals( $moveData['oldTitle'], $params['oldTitle'] );
-		$this->assertEquals( $moveData['newTitle'], $params['newTitle'] );
-		$this->assertEquals( $moveData['user'], $params['user'] );
+		$this->assertEquals( $data['siteId'], $params['siteId'] );
+		$this->assertEquals( $data['title'], $params['title'] );
+		$this->assertEquals( $data['user'], $params['user'] );
 		$this->assertEquals( $itemId->getSerialization(), $params['entityId'] );
 	}
 
 	public function testInjectJob() {
-		$updateRepo = $this->getNewLocal();
+		$updateRepo = $this->getNewUpdateRepoOnDelete();
 		$job = $updateRepo->createJob();
 
 		$jobQueueGroupMock = $this->getJobQueueGroupMock( $job, true );
