@@ -60,7 +60,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		$isoTimestamp = $timeValue->getTime();
 
 		try {
-			return $this->getUnocalizedDate( $isoTimestamp, $timeValue->getPrecision() );
+			return $this->getUnlocalizedDate( $isoTimestamp, $timeValue->getPrecision() );
 		} catch ( InvalidArgumentException $ex ) {
 			return $isoTimestamp;
 		}
@@ -73,7 +73,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @throws InvalidArgumentException
 	 * @return string Formatted date
 	 */
-	private function getUnocalizedDate( $isoTimestamp, $precision ) {
+	private function getUnlocalizedDate( $isoTimestamp, $precision ) {
 		// We do not handle parsing arabic, farsi, etc. digits (bug 63732)
 		return $this->language->parseFormattedNumber(
 			$this->getLocalizedDate( $isoTimestamp, $precision )
