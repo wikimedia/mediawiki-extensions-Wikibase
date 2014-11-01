@@ -1,12 +1,14 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\UpdateRepo;
 
 use Job;
 use OutOfBoundsException;
 use SiteStore;
 use Title;
 use User;
+use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityRevisionLookup;
