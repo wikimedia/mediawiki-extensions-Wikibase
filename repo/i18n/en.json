@@ -339,6 +339,7 @@
 	"wikibase-item-summary-wbsetclaim-update-references": "Changed {{PLURAL:$4|one reference|$4 references}} of {{PLURAL:$3|claim|claims}}",
 	"wikibase-item-summary-wbsetclaim-update-rank": "Changed rank of {{PLURAL:$3|claim|claims}}",
 	"wikibase-item-summary-clientsitelink-update": "Page moved from [$3] to [$4]",
+	"wikibase-item-summary-clientsitelink-remove": "Page on [$3] deleted",
 	"wikibase-item-summary-wbsetqualifier-add": "Added {{PLURAL:$1|qualifier|qualifiers}}",
 	"wikibase-item-summary-wbsetqualifier-update": "Changed {{PLURAL:$1|qualifier|qualifiers}}",
 	"wikibase-item-summary-wbremovequalifiers-remove": "Removed {{PLURAL:$1|qualifier|qualifiers}}",
