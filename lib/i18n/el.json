@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Nikosguard",
-			"Indoril"
+			"Indoril",
+			"Xaris333"
 		]
 	},
 	"wikibase-entity-item": "αντικείμενο",
@@ -48,7 +49,7 @@
 	"wikibase-globedetails-precision": "Ακρίβεια",
 	"wikibase-parse-error": "Ακατάλληλη τιμή.",
 	"wikibase-replicationnote": "Παρακαλώ να λάβετε υπόψη ότι έως ότου οι αλλαγές γίνουν ορατές σε όλα τα wiki μπορεί να περάσουν μερικά λεπτά.",
-	"wikibase-sitelinks-wikipedia": "Σελίδες της Βικιπαίδειας που συνδέονται με αυτό το αντικείμενο",
+	"wikibase-sitelinks-wikipedia": "Σελίδες από Βικιπαίδεια συνδεδεμένες με το στοιχείο",
 	"wikibase-sitelinks-sitename-columnheading": "Γλώσσα",
 	"wikibase-sitelinks-siteid-columnheading": "Κωδικός",
 	"wikibase-sitelinks-link-columnheading": "Σελίδες που συνδέονται",

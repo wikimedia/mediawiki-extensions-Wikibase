@@ -5,6 +5,16 @@
 		]
 	},
 	"wikibase-editlinks": "Едітовати одказы",
+	"wikibase-linkitem-addlinks": "Придати одказы",
+	"wikibase-linkitem-close": "Заперти діалоґ і обновити сторінку",
+	"wikibase-linkitem-title": "Звязати зо сторінков",
+	"wikibase-linkitem-linkpage": "Звязати зо сторінков",
+	"wikibase-linkitem-selectlink": "Просиме, выберьте сайт і сторінку, котру хочете звязати з актівнов сторінков.",
+	"wikibase-linkitem-input-site": "Язык:",
+	"wikibase-linkitem-input-page": "Сторінка:",
+	"wikibase-linkitem-confirmitem-text": "Выбрана сторінка вже звязана з [$1 елементом централного усховища даных]. Просиме, потвердьте, же ниже {{PLURAL:$2|1=зображена сторінка|зображены сторінкы}} суть тоты, котры хочете звязати з тов сторінков.",
+	"wikibase-linkitem-confirmitem-button": "Підтвердити",
+	"wikibase-linkitem-success-link": "Сторінкы ся успішно звязали. Елемент з тыми одказами найдете в [$1 централнім усховищі даных].",
 	"wikibase-rc-hide-wikidata-hide": "Сховати",
 	"wikibase-rc-hide-wikidata-show": "Вказати"
 }

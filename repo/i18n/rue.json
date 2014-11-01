@@ -5,5 +5,10 @@
 		]
 	},
 	"wikibase-edit": "едітовати",
-	"wikibase-terms": "Іншыма языками"
+	"wikibase-sitelink-page-edit-placeholder": "сторінка",
+	"wikibase-terms": "Іншыма языками",
+	"wikibase-itembytitle-lookup-page": "Сторінка:",
+	"wikibase-itemdisambiguation-lookup-language": "Язык:",
+	"wikibase-modifyterm-language": "Язык:",
+	"wikibase-entitieswithoutlabel-label-language": "Язык:"
 }
