@@ -7,11 +7,11 @@ use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
+use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;
 use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob
+ * @covers Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -21,33 +21,37 @@ use Wikibase\Test\MockRepository;
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
+class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 
 	public function testGetSummary() {
-		$job = new UpdateRepoOnMoveJob(
+		$job = new UpdateRepoOnDeleteJob(
 			Title::newMainPage(),
 			array(
 				'siteId' => 'SiteID',
-				'oldTitle' => 'Test',
-				'newTitle' => 'MoarTest',
+				'title' => 'Test'
 			)
 		);
 
 		$summary = $job->getSummary();
 
-		$this->assertEquals( 'clientsitelink-update', $summary->getMessageKey() );
-		$this->assertEquals( 'SiteID', $summary->getLanguageCode() );
+		$this->assertEquals( 'clientsitelink-remove', $summary->getMessageKey() );
 		$this->assertEquals(
-			array( 'SiteID:Test', 'SiteID:MoarTest' ),
+			array( 'SiteID' ),
 			$summary->getCommentArgs()
+		);
+
+		$this->assertEquals(
+			array( 'Test' ),
+			$summary->getAutoSummaryArgs()
 		);
 	}
 
-	private function getSiteStore( $normalizedPageName ) {
+	private function getSiteStore( $titleExists ) {
 		$enwiki = $this->getMock( 'Site' );
 		$enwiki->expects( $this->any() )
 			->method( 'normalizePageName' )
-			->will( $this->returnValue( $normalizedPageName ) );
+			->with( 'Delete me' )
+			->will( $this->returnValue( $titleExists ) );
 
 		$siteStore = $this->getMock( 'SiteStore' );
 		$siteStore->expects( $this->any() )
@@ -70,11 +74,11 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 
 	public function runProvider() {
 		return array(
-			array( 'New page name', 'New page name', 'Old page name' ),
-			// Client normalization gets applied
-			array( 'Even newer page name', 'Even newer page name', 'Old page name' ),
-			// The title in the repo item is not the same as the one we expect, so don't change it
-			array( 'Old page name', 'New page name', 'Something else' ),
+			array( true, false, 'Delete me' ),
+			// The title on client still exists, so don't unlink
+			array( false, true, 'Delete me' ),
+			// The title in the repo item is not the same as the one we want to unlink, don't unlink
+			array( false, false, 'Something changed' )
 		);
 	}
 
@@ -85,14 +89,14 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	 * @param bool $titleExists
 	 * @param string $oldTitle
 	 */
-	public function testRun( $expected, $normalizedPageName, $oldTitle ) {
+	public function testRun( $expected, $titleExists, $oldTitle ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$user = User::newFromName( 'UpdateRepoOnDeleteJobTest' );
 		$user->addToDatabase();
 
 		$item = Item::newEmpty();
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Old page name', array( new ItemId( 'Q42' ) ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Delete me', array( new ItemId( 'Q42' ) ) );
 
 		$store = new MockRepository();
 
@@ -101,19 +105,18 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$params = array(
 			'siteId' => 'enwiki',
 			'entityId' => $item->getId()->getSerialization(),
-			'oldTitle' => $oldTitle,
-			'newTitle' => 'New page name',
+			'title' => $oldTitle,
 			'user' => $user->getName()
 		);
 
-		$job = new UpdateRepoOnMoveJob( Title::newMainPage(), $params );
+		$job = new UpdateRepoOnDeleteJob( Title::newMainPage(), $params );
 		$job->initServices(
 			$this->getEntityTitleLookup( $item->getId() ),
 			$store,
 			$store,
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityPermissionChecker(),
-			$this->getSiteStore( $normalizedPageName )
+			$this->getSiteStore( $titleExists )
 		);
 
 		$job->run();
@@ -121,14 +124,9 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$item = $store->getEntity( $item->getId() );
 
 		$this->assertSame(
-			$expected,
-			$item->getSiteLinkList()->getBySiteId( 'enwiki' )->getPageName(),
-			'Title linked on enwiki after the job ran'
-		);
-
-		$this->assertEquals(
-			$item->getSiteLinkList()->getBySiteId( 'enwiki' )->getBadges(),
-			array( new ItemId( 'Q42' ) )
+			!$expected,
+			$item->getSiteLinkList()->hasLinkWithSiteId( 'enwiki' ),
+			'Sitelink has been removed.'
 		);
 	}
 }
