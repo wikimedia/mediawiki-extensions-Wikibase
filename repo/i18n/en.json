@@ -418,5 +418,7 @@
 	"right-item-merge": "Merge items",
 	"right-item-redirect": "Create item redirects",
 	"right-property-term": "Change property terms (labels, descriptions, aliases)",
-	"right-property-create": "Create properties"
+	"right-property-create": "Create properties",
+	"wikibase-entity-not-viewable-title": "Content type mismatch: Can not display content",
+	"wikibase-entity-not-viewable": "The given content of type \"$1\" is not an Entity and can not be displayed by Wikibase."
 }
