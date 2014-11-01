@@ -446,11 +446,12 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @return Snak[]
 	 */
 	public function getAllSnaks() {
-		$claims = $this->getClaims();
 		$snaks = array();
 
-		foreach ( $claims as $claim ) {
-			$snaks = array_merge( $snaks, $claim->getAllSnaks() );
+		foreach ( $this->getClaims() as $claim ) {
+			foreach( $claim->getAllSnaks() as $snak ) {
+				$snaks[] = $snak;
+			}
 		}
 
 		return $snaks;

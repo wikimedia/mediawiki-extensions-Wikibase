@@ -138,9 +138,13 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 */
 	public function getAllSnaks() {
 		$snaks = array();
+
 		foreach ( $this->statements as $statement ) {
-			$snaks = array_merge( $snaks, $statement->getAllSnaks() );
+			foreach( $statement->getAllSnaks() as $snak ) {
+				$snaks[] = $snak;
+			}
 		}
+
 		return $snaks;
 	}
 

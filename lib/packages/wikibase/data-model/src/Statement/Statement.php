@@ -145,8 +145,9 @@ class Statement extends Claim {
 
 		/* @var Reference $reference */
 		foreach( $this->getReferences() as $reference ) {
-			$referenceSnaks = $reference->getSnaks();
-			$snaks = array_merge( $snaks, iterator_to_array( $referenceSnaks ) );
+			foreach( $reference->getSnaks() as $referenceSnak ) {
+				$snaks[] = $referenceSnak;
+			}
 		}
 
 		return $snaks;
