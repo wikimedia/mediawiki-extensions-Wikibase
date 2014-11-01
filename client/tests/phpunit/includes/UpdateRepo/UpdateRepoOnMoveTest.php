@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\UpdateRepo;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\UpdateRepoOnMove;
+use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
 
 /**
- * @covers Wikibase\UpdateRepoOnMove
+ * @covers Wikibase\Client\UpdateRepo\UpdateRepoOnMove
  *
  * @group WikibaseClient
  * @group Test

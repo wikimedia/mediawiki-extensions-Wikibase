@@ -1,6 +1,7 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\UpdateRepo;
+
 use Title;
 use User;
 use Wikibase\Lib\Store\SiteLinkLookup;
