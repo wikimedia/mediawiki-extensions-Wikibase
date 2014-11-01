@@ -34,6 +34,7 @@ use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFilterOptions;
 use Wikibase\Client\RepoItemLinkGenerator;
+use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
