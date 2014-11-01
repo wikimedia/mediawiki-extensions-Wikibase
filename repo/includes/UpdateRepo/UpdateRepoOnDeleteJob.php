@@ -17,14 +17,14 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * Job for updating the repo after a page on the client has been moved.
+ * Job for updating the repo after a page on the client has been deleted.
  *
- * @since 0.4
+ * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoOnMoveJob extends UpdateRepoJob {
+class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 
 	/**
 	 * @var SiteStore
@@ -46,7 +46,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	 * @param array|bool $params
 	 */
 	public function __construct( Title $title, $params = false ) {
-		parent::__construct( 'UpdateRepoOnMove', $title, $params );
+		parent::__construct( 'UpdateRepoOnDelete', $title, $params );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$this->initServices(
@@ -87,7 +87,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	 */
 	private function getSiteLink( $item, $globalId ) {
 		try {
-			return $item->getSiteLinkList()->getBySiteId( $globalId );
+			return $item->getSiteLink( $globalId );
 		} catch( OutOfBoundsException $e ) {
 			return null;
 		}
@@ -101,17 +101,14 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	public function getSummary() {
 		$params = $this->getParams();
 		$siteId = $params['siteId'];
-		$oldPage = $params['oldTitle'];
-		$newPage = $params['newTitle'];
+		$page = $params['title'];
 
 		return new Summary(
 			'clientsitelink',
-			'update',
-			$siteId,
-			array(
-				$siteId . ":$oldPage",
-				$siteId . ":$newPage",
-			)
+			'remove',
+			null,
+			array( $siteId ),
+			array( $page )
 		);
 	}
 
@@ -126,21 +123,24 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		wfProfileIn( __METHOD__ );
 		$params = $this->getParams();
 		$siteId = $params['siteId'];
-		$oldPage = $params['oldTitle'];
-		$newPage = $params['newTitle'];
+		$page = $params['title'];
 
-		$oldSiteLink = $this->getSiteLink( $item, $siteId );
-		if ( !$oldSiteLink || $oldSiteLink->getPageName() !== $oldPage ) {
+		$item = $this->getItem();
+
+		$siteLink = $this->getSiteLink( $item, $siteId );
+		if ( !$siteLink || $siteLink->getPageName() !== $page ) {
 			// Probably something changed since the job has been inserted
-			wfDebugLog( 'UpdateRepo', "OnMove: The site link to " . $siteId . " is no longer $oldPage" );
+			wfDebugLog( 'UpdateRepo', "OnDelete: The site link to " . $siteId . " is no longer $page" );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
 		$site = $this->siteStore->getSite( $siteId );
-		// Normalize the name again, just in case the page has been updated in the mean time
-		if ( !$site || !$site->normalizePageName( $newPage ) ) {
-			wfDebugLog( 'UpdateRepo', "OnMove: Normalizing the page name $newPage on $siteId failed" );
+
+		// Maybe the page has been undeleted/ recreated?
+		$exists = $site->normalizePageName( $page );
+		if ( $exists !== false ) {
+			wfDebugLog( 'UpdateRepo', "OnDelete: $page on $siteId exists" );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
@@ -158,19 +158,8 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	protected function applyChanges( Item $item ) {
 		$params = $this->getParams();
 		$siteId = $params['siteId'];
-		$newPage = $params['newTitle'];
-
-		$oldSiteLink = $this->getSiteLink( $item, $siteId );
-
-		$site = $this->siteStore->getSite( $siteId );
-		$siteLink = new SiteLink(
-			$siteId,
-			$site->normalizePageName( $newPage ),
-			$oldSiteLink->getBadges() // Keep badges
-		);
 
 		$item->getSiteLinkList()->removeLinkWithSiteId( $siteId );
-		$item->getSiteLinkList()->addSiteLink( $siteLink );
 	}
 
 }
