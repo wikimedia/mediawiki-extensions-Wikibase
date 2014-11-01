@@ -8,7 +8,7 @@ use LogEventsList;
 use OutputPage;
 use SpecialPage;
 use ViewAction;
-use Wikibase\Repo\Content\EntityHandler;
+use Content;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -150,10 +150,16 @@ abstract class ViewEntityAction extends ViewAction {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent $content
+	 * @param Content $content
 	 */
-	protected function displayEntityContent( EntityContent $content ) {
+	protected function displayEntityContent( Content $content ) {
 		$outputPage = $this->getOutput();
+
+		if ( !( $content instanceof EntityContent ) ) {
+			$outputPage->showErrorPage( 'wikibase-entity-not-viewable-title', 'wikibase-entity-not-viewable', $content->getModel() );
+			return;
+		}
+
 		$editable = $this->isEditable();
 
 		// NOTE: page-wide property, independent of user permissions
