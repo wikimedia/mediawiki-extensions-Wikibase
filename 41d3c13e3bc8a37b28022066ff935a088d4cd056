@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_82a065f2",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinkview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-01T17:26:35Z",
+      "side": 1,
+      "message": "looking above: It\u0027s probably not guaranteed that this this.options.value is set",
+      "revId": "41d3c13e3bc8a37b28022066ff935a088d4cd056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_a2a321fc",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinkview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-01T17:26:35Z",
+      "side": 1,
+      "message": "put this into a variable, please... get\u0027s a little unreadable here IMO",
+      "revId": "41d3c13e3bc8a37b28022066ff935a088d4cd056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
