@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_226ab17e",
+        "filename": "client/tests/phpunit/includes/UpdateRepo/UpdateRepoOnMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-01T19:28:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_825b85fc",
+      "revId": "393e47d3aebbeb910babf6b68aae6502a8e3c52a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_a25ec1ea",
         "filename": "repo/tests/phpunit/includes/UpdateRepoOnMoveJobTest.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-01T19:14:45Z",
       "side": 1,
       "message": "please update this",
+      "revId": "393e47d3aebbeb910babf6b68aae6502a8e3c52a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_c268ad86",
+        "filename": "repo/tests/phpunit/includes/UpdateRepoOnMoveJobTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-01T19:28:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_a25ec1ea",
       "revId": "393e47d3aebbeb910babf6b68aae6502a8e3c52a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
