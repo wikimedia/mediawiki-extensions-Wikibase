@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\UpdateRepo;
 
 use TestSites;
 use Title;
@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Store\SQL\EntityPerPageTable;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\UpdateRepoOnMoveJob;
+use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
 
 /**
  * @covers Wikibase\UpdateRepoOnMoveJob
