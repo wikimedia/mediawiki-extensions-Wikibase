@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\UpdateRepo;
 
 use CentralAuthUser;
 use IJobSpecification;
