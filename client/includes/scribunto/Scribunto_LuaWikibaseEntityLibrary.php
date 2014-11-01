@@ -48,7 +48,8 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getStore()->getEntityLookup(),
 			new ParserOutputUsageAccumulator( $this->getParser()->getOutput() ),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' ),
-			$wgContLang
+			$wgContLang,
+			$wikibaseClient->getEntityIdParser()
 		);
 	}
 

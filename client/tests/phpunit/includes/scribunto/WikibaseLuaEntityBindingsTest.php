@@ -17,7 +17,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\SnakFactory;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Test\MockRepository;
 
 /**
@@ -51,7 +51,8 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 			$entityLookup ? $entityLookup : new MockRepository(),
 			$usageAccumulator ? $usageAccumulator : new HashUsageAccumulator(),
 			'enwiki',
-			$language // language
+			$language,
+			new BasicEntityIdParser()
 		);
 	}
 
