@@ -179,7 +179,7 @@ call_user_func( function() {
 	$wgSpecialPageGroups['MergeItems'] 					= 'wikibaserepo';
 
 	// Jobs
-	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\UpdateRepoOnMoveJob';
+	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob';
 
 	// Hooks
 	$wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';
