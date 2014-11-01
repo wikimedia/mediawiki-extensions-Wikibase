@@ -68,8 +68,6 @@ final class MovePageNotice {
 	}
 
 	/**
-	 * Append the appropriate content to the page
-	 *
 	 * @param Title $oldTitle Title of the page before the move
 	 * @param Title $newTitle Title of the page after the move
 	 *
