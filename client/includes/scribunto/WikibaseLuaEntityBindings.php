@@ -8,12 +8,13 @@ use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\StatementListProvider;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension
@@ -62,19 +63,22 @@ class WikibaseLuaEntityBindings {
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param string $siteId
 	 * @param Language $language
+	 * @param EntityIdParser $entityIdParser
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
 		EntityLookup $entityLookup,
 		UsageAccumulator $usageAccumulator,
 		$siteId,
-		Language $language
+		Language $language,
+		EntityIdParser $entityIdParser
 	) {
 		$this->snakFormatter = $snakFormatter;
 		$this->entityLookup = $entityLookup;
 		$this->usageAccumulator = $usageAccumulator;
 		$this->siteId = $siteId;
 		$this->language = $language;
+		$this->entityIdParser = $entityIdParser;
 	}
 
 	/**
@@ -97,15 +101,15 @@ class WikibaseLuaEntityBindings {
 
 	/**
 	 * Returns such Claims from $entity that have a main Snak for the property that
-	 * is specified by $propertyLabel.
+	 * is specified by $propertyId.
 	 *
-	 * @param Entity $entity
+	 * @param StatementListProvider $statementListProvider
 	 * @param PropertyId $propertyId
 	 *
 	 * @return Claims
 	 */
-	private function getClaimsForProperty( Entity $entity, PropertyId $propertyId ) {
-		$allClaims = new Claims( $entity->getClaims() );
+	private function getClaimsForProperty( StatementListProvider $statementListProvider, PropertyId $propertyId ) {
+		$allClaims = new Claims( $statementListProvider->getStatements() );
 
 		return $allClaims->getClaimsForProperty( $propertyId );
 	}
@@ -170,12 +174,12 @@ class WikibaseLuaEntityBindings {
 	 * @return string
 	 */
 	public function formatPropertyValues( $entityId, $propertyId, array $acceptableRanks = null ) {
-		$entityId = new ItemId( $entityId );
+		$entityId = $this->entityIdParser->parse( $entityId );
 		$propertyId = new PropertyId( $propertyId );
 
 		$entity = $this->getEntity( $entityId );
 
-		if ( !$entity ) {
+		if ( !( $entity instanceof StatementListProvider ) ) {
 			return '';
 		}
 
