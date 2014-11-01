@@ -413,5 +413,7 @@
 	"right-item-merge": "{{doc-right|item-merge}}\nRight to alter the contents of [[d:Special:MyLanguage/Wikidata:Glossary#Item|items]].\n{{Identical|Merge item}}",
 	"right-item-redirect": "{{doc-right|item-redirect}}\nRight to create [[d:Special:MyLanguage/Wikidata:Glossary#Item|item]] redirects after merging items.",
 	"right-property-term": "{{doc-right|property-term}}\nRight to alter the [[d:Wikidata:Glossary#Term|terms]] of [[d:Wikidata:Glossary#Item|items]].",
-	"right-property-create": "{{doc-right|property-create}}\nRight to create new [[d:Wikidata:Glossary#Property|properties]]."
+	"right-property-create": "{{doc-right|property-create}}\nRight to create new [[d:Wikidata:Glossary#Property|properties]].",
+        "wikibase-entity-not-viewable-title": "Page title on the error page saying that content can't be displayed.",
+        "wikibase-entity-not-viewable": "Error message saying that some content can't be rendered. $1 is the content model of the content that can't be displayed."
 }
