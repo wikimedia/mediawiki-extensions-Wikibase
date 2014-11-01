@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Wikibase\EntityFactory;
-use Wikibase\EntityPerPage;
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Term;
 
