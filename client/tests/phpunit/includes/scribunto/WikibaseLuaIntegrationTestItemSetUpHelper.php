@@ -49,7 +49,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 			return;
 		}
 
-		$stringProperty = $this->createTestProperty( 'string', 'LuaTestStringProperty' );
+		$stringProperty = $this->createTestProperty( new PropertyId( 'P342' ), 'string', 'LuaTestStringProperty' );
 
 		$stringSnak = $this->getTestSnak(
 			$stringProperty->getId(),
@@ -85,13 +85,15 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	}
 
 	/**
+	 * @param PropertyId $id
 	 * @param string $dataTypeId
 	 * @param string $label
 	 *
 	 * @return Property
 	 */
-	protected function createTestProperty( $dataTypeId, $label ) {
+	private function createTestProperty( PropertyId $id, $dataTypeId, $label ) {
 		$property = Property::newFromType( $dataTypeId );
+		$property->setId( $id );
 		$property->setLabel( 'de', $label );
 
 		$this->mockRepository->putEntity( $property );
@@ -107,7 +109,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	 *
 	 * @return Item
 	 */
-	protected function createTestItem( ItemId $id, array $labels, array $claims = null, array $siteLinks = null ) {
+	private function createTestItem( ItemId $id, array $labels, array $claims = null, array $siteLinks = null ) {
 		$item = Item::newEmpty();
 		$item->setId( $id );
 		$item->setLabels( $labels );
@@ -135,7 +137,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	 *
 	 * @return Snak
 	 */
-	protected function getTestSnak( PropertyId $propertyId, DataValue $value ) {
+	private function getTestSnak( PropertyId $propertyId, DataValue $value ) {
 		$snakFactory = new SnakFactory();
 		$snak = $snakFactory->newSnak( $propertyId, 'value', $value );
 
@@ -147,7 +149,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	 *
 	 * @return Statement
 	 */
-	protected function getTestStatement( Snak $mainSnak ) {
+	private function getTestStatement( Snak $mainSnak ) {
 		$statement = new Statement( new Claim( $mainSnak ) );
 		$statement->setGuid( uniqid( 'kittens', true ) );
 

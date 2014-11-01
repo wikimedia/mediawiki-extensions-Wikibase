@@ -6,11 +6,11 @@ use Language;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension
@@ -136,7 +136,8 @@ class WikibaseLuaEntityBindings {
 	 * @return string
 	 */
 	public function formatPropertyValues( $entityId, $propertyId, array $acceptableRanks = null ) {
-		$entityId = new ItemId( $entityId );
+		$entityIdParser = new BasicEntityIdParser();
+		$entityId = $entityIdParser->parse( $entityId );
 		$propertyId = new PropertyId( $propertyId );
 
 		$entity = $this->getEntity( $entityId );
