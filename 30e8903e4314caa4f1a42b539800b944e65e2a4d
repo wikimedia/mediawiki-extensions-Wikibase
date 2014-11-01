@@ -16,6 +16,24 @@
       "revId": "30e8903e4314caa4f1a42b539800b944e65e2a4d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_62d2f95e",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-01T18:46:08Z",
+      "side": 1,
+      "message": "No, the client only uses the job name (UpdateRepoOnMove) to insert things into the job queue. Repo then resolves them on it\u0027s own (using the array).",
+      "parentUuid": "6e936f18_a2d80180",
+      "revId": "30e8903e4314caa4f1a42b539800b944e65e2a4d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
