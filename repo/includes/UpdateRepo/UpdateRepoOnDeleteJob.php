@@ -21,14 +21,14 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\EditEntity;
 
 /**
- * Job for updating the repo after a page on the client has been moved.
+ * Job for updating the repo after a page on the client has been deleted.
  *
- * @since 0.4
+ * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoOnMoveJob extends Job {
+class UpdateRepoOnDeleteJob extends Job {
 
 	/**
 	 * @var EntityTitleLookup
@@ -75,7 +75,7 @@ class UpdateRepoOnMoveJob extends Job {
 	 * @param array|bool $params
 	 */
 	public function __construct( Title $title, $params = false ) {
-		parent::__construct( 'UpdateRepoOnMove', $title, $params );
+		parent::__construct( 'UpdateRepoOnDelete', $title, $params );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$this->initServices(
@@ -112,7 +112,7 @@ class UpdateRepoOnMoveJob extends Job {
 	 *
 	 * @return SiteLink|null
 	 */
-	protected function getSiteLink( $item, $globalId ) {
+	private function getSiteLink( $item, $globalId ) {
 		try {
 			return $item->getSiteLink( $globalId );
 		} catch( OutOfBoundsException $e ) {
@@ -124,35 +124,31 @@ class UpdateRepoOnMoveJob extends Job {
 	 * Get a Summary object for the edit
 	 *
 	 * @param string $globalId Global id of the target site
-	 * @param string $oldPage
-	 * @param string $newPage
+	 * @param string $page
 	 *
 	 * @return Summary
 	 */
-	public function getSummary( $globalId, $oldPage, $newPage ) {
+	public function getSummary( $globalId, $page ) {
 		return new Summary(
 			'clientsitelink',
-			'update',
-			$globalId,
-			array(
-				$globalId . ":$oldPage",
-				$globalId . ":$newPage",
-			)
+			'remove',
+			null,
+			array( $globalId ),
+			array( $page )
 		);
 	}
 
 	/**
-	 * Update the siteLink on the repo to reflect the change in the client
+	 * Remove the siteLink on the repo to reflect the change in the client
 	 *
 	 * @param string $siteId Id of the client the change comes from
 	 * @param string $itemId
-	 * @param string $oldPage
-	 * @param string $newPage
-	 * @param User $user User who we'll attribute the update to
+	 * @param string $page
+	 * @param User $user User who we'll attribute the remove to
 	 *
 	 * @return bool Whether something changed
 	 */
-	public function updateSiteLink( $siteId, $itemId, $oldPage, $newPage, $user ) {
+	public function removeSiteLink( $siteId, $itemId, $page, $user ) {
 		wfProfileIn( __METHOD__ );
 
 		$itemId = new ItemId( $itemId );
@@ -174,31 +170,25 @@ class UpdateRepoOnMoveJob extends Job {
 		$item = $entityRevision->getEntity();
 		$site = $this->siteStore->getSite( $siteId );
 
-		$oldSiteLink = $this->getSiteLink( $item, $siteId );
-		if ( !$oldSiteLink || $oldSiteLink->getPageName() !== $oldPage ) {
+		$siteLink = $this->getSiteLink( $item, $siteId );
+		if ( !$siteLink || $siteLink->getPageName() !== $page ) {
 			// Probably something changed since the job has been inserted
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": The site link to " . $siteId . " is no longer $oldPage" );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": The site link to $siteId is no longer $page" );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
-		// Normalize the name again, just in case the page has been updated in the mean time
-		$newPageNormalized = $site->normalizePageName( $newPage );
-		if ( !$newPageNormalized ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Normalizing the page name $newPage on $siteId failed" );
+		// Maybe the page has been undeleted/ recreated?
+		$exists = $site->normalizePageName( $page );
+		if ( $exists !== false ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": $page on $siteId exists" );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
-		$siteLink = new SiteLink(
-			$siteId,
-			$newPageNormalized,
-			$oldSiteLink->getBadges()
-		);
+		$summary = $this->getSummary( $siteId, $page );
 
-		$summary = $this->getSummary( $siteId, $oldPage, $newPageNormalized );
-
-		return $this->doUpdateSiteLink( $item, $siteLink, $summary, $user );
+		return $this->doRemoveSiteLink( $item, $siteLink, $summary, $user );
 	}
 
 	/**
@@ -211,8 +201,8 @@ class UpdateRepoOnMoveJob extends Job {
 	 *
 	 * @return bool Whether something changed
 	 */
-	private function doUpdateSiteLink( Item $item, SiteLink $siteLink, Summary $summary, User $user ) {
-		$item->addSiteLink( $siteLink );
+	private function doRemoveSiteLink( Item $item, SiteLink $siteLink, Summary $summary, User $user ) {
+		$item->getSiteLinkList()->removeLinkWithSiteId( $siteLink->getSiteId() );
 
 		$editEntity = new EditEntity(
 			$this->entityTitleLookup,
@@ -262,11 +252,10 @@ class UpdateRepoOnMoveJob extends Job {
 			return true;
 		}
 
-		$this->updateSiteLink(
+		$this->removeSiteLink(
 			$params['siteId'],
 			$params['entityId'],
-			$params['oldTitle'],
-			$params['newTitle'],
+			$params['title'],
 			$user
 		);
 
