@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_a2748197",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinkview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-01T17:00:07Z",
+      "side": 1,
+      "message": "I don\u0027t think this is the language you want, but you rather want to get the language direction of the language of the site the input belongs to.",
+      "revId": "521f1df9befdcaee295e3a932167f224db489811",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
