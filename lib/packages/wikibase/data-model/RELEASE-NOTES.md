@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 2.2.0 (dev)
+
+*
+
 ## Version 2.1.0 (2014-10-27)
 
 * `ReferenceList` now implements `Serializable`
