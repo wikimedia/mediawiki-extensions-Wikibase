@@ -60,9 +60,6 @@ class Property extends Entity {
 		else if ( is_integer( $id ) ) {
 			$this->id = PropertyId::newFromNumber( $id );
 		}
-		else if ( $id instanceof EntityId ) {
-			$this->id = new PropertyId( $id->getSerialization() );
-		}
 		else {
 			throw new InvalidArgumentException( __METHOD__ . ' only accepts PropertyId, integer and null' );
 		}
