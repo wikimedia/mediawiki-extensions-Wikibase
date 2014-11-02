@@ -71,9 +71,6 @@ class Item extends Entity {
 		else if ( is_integer( $id ) ) {
 			$this->id = ItemId::newFromNumber( $id );
 		}
-		else if ( $id instanceof EntityId ) {
-			$this->id = new ItemId( $id->getSerialization() );
-		}
 		else {
 			throw new InvalidArgumentException( __METHOD__ . ' only accepts ItemId, integer and null' );
 		}
