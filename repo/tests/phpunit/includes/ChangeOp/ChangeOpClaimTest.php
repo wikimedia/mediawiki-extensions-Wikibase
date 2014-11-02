@@ -226,8 +226,6 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testApplyWithProperty() {
-		$this->markTestSkipped( 'pending fix for bug 72671' );
-
 		$property = Property::newEmpty();
 		$property->setId( new PropertyId( 'P73923' ) );
 
