@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_25a87b1c",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-02T20:10:00Z",
+      "side": 1,
+      "message": "unused",
+      "revId": "6949bc3e1648338a28e0efaabf22bee8a96766d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_05ad3f2e",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-02T20:10:00Z",
+      "side": 1,
+      "message": "unused, which i think is a good thing.\n\nI think the SqlUsageTrackerTest should be reworked to not use it, and as i think data providers etc. would be better in that case so we can more easily check stuff like instanceof for all expected results.",
+      "revId": "6949bc3e1648338a28e0efaabf22bee8a96766d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_45b34796",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-02T20:10:00Z",
+      "side": 1,
+      "message": "issue not introduced in this patch, but note that an instanceof check is also needed in UsageLookupContractTester to cover and avoid issues such as fixed in https://gerrit.wikimedia.org/r/#/c/170586/",
+      "revId": "6949bc3e1648338a28e0efaabf22bee8a96766d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
