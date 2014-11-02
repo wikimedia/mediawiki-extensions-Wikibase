@@ -226,7 +226,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
 		if ( empty( $entityIds ) ) {
-			return array();
+			return new ArrayIterator();
 		}
 
 		$idStrings = $this->getEntityIdStrings( $entityIds );
