@@ -10,6 +10,7 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Summary;
@@ -89,9 +90,10 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		if( $this->claim->getGuid() === null ){
+		if ( $this->claim->getGuid() === null ){
 			$this->claim->setGuid( $this->guidGenerator->newGuid( $entity->getId() ) );
 		}
+
 		$guid = $this->guidParser->parse( $this->claim->getGuid() );
 
 		if ( $this->guidValidator->validate( $guid->getSerialization() ) === false ) {
@@ -100,19 +102,26 @@ class ChangeOpClaim extends ChangeOpBase {
 			throw new ChangeOpException( "Claim GUID invalid for given entity" );
 		}
 
-		$entityClaims = $entity->getClaims();
-		$claims = new Claims( $entityClaims );
-
-		if( !$claims->hasClaimWithGuid( $this->claim->getGuid() ) ) {
-			$newClaimList = $this->addClaim( $claims, $summary );
-		} else {
-			$newClaimList = $this->setClaim( $claims, $summary );
-		}
-
-		$claims = new Claims( $newClaimList );
-		$entity->setClaims( $claims );
+		$this->applyClaimToEntity( $entity, $summary );
 
 		return true;
+	}
+
+	/**
+	 * @param Entity $entity
+	 * @param Summary|null $summary
+	 */
+	private function applyClaimToEntity( Entity $entity, Summary $summary = null ) {
+		$statements = $entity->getStatements();
+		$claims = new Claims( iterator_to_array( $statements ) );
+
+		if( !$claims->hasClaimWithGuid( $this->claim->getGuid() ) ) {
+			$newClaims = $this->addClaim( $claims, $summary );
+		} else {
+			$newClaims = $this->setClaim( $claims, $summary );
+		}
+
+		$entity->setStatements( new StatementList( $newClaims ) );
 	}
 
 	/**
@@ -120,7 +129,6 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @param Summary $summary
 	 *
 	 * @throws ChangeOpException
-	 *
 	 * @return Claim[]
 	 */
 	protected function addClaim( Claims $claims, Summary $summary = null ) {
