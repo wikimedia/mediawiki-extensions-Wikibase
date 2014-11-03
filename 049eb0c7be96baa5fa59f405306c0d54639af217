@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_1bc28039",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-03T10:23:30Z",
+      "side": 1,
+      "message": "The next patch, which introduces the new filtering logic in ChangeHandler, will set this to \"false\".",
+      "parentUuid": "6e936f18_0cf0118d",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_6c019570",
         "filename": "client/includes/AffectedPagesFinder.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-31T11:43:08Z",
       "side": 1,
       "message": "is this class to be in the Client component?  if so, namespace Wikibase\\Client would be better.",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_bbc02c30",
+        "filename": "client/includes/AffectedPagesFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-03T10:23:30Z",
+      "side": 1,
+      "message": "This class was just renamed, not introduced. Could fix the namespace while I\u0027m at it, sure.",
+      "parentUuid": "6e936f18_6c019570",
       "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_fbcd5463",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-03T10:23:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_ec9fe553",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_0c9b3169",
         "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_dbd2d800",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-03T10:23:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_0c9b3169",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_aca9dd79",
         "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2014-10-31T11:39:31Z",
       "side": 1,
       "message": "$itemId instead of $id would be slightly better",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_7b014470",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-03T10:23:30Z",
+      "side": 1,
+      "message": "slightly.",
+      "parentUuid": "6e936f18_aca9dd79",
       "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_7b306453",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-03T10:23:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_4cb059d8",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_8cdd011a",
         "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
         "patchSetId": 2
@@ -149,6 +257,24 @@
       "writtenOn": "2014-10-31T11:39:31Z",
       "side": 1,
       "message": "aaaaah! i realized this is not introduced here, but it\u0027s SQL not Sql.  It would be nice if we got that right and were consistent about that.\n\nhttps://en.wikipedia.org/wiki/SQL",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_9b33f05e",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-03T10:23:30Z",
+      "side": 1,
+      "message": "We routinely capitalize only the first letter of SQL, HTML, JSON, etc for class- and function names (in core it\u0027s a mixed bag). While technically incorrect, I find that a lot easier to read when using camel case. \n\nYou don\u0027t think we should do the same for package names?",
+      "parentUuid": "6e936f18_8cdd011a",
       "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -183,6 +309,24 @@
       "writtenOn": "2014-10-31T11:39:31Z",
       "side": 1,
       "message": "this class really isn\u0027t Wikibase specific and ought to be in core.\n\nas such, maybe it would be better to use a non-Wikibase specific Exception here.",
+      "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_5b3d6828",
+        "filename": "client/includes/store/TitleFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-03T10:23:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_ccbb09b9",
       "revId": "049eb0c7be96baa5fa59f405306c0d54639af217",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
