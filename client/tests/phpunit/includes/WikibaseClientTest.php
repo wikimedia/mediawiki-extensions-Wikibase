@@ -212,6 +212,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\Changes\EntityChangeFactory', $factory );
 	}
 
+	public function testGetChangeHandler() {
+		$handler = $this->getDefaultInstance()->getChangeHandler();
+		$this->assertInstanceOf( 'Wikibase\ChangeHandler', $handler );
+	}
+
 	public function testGetParserFunctionRegistrant() {
 		$registrant = $this->getDefaultInstance()->getParserFunctionRegistrant();
 		$this->assertInstanceOf( 'Wikibase\Client\Hooks\ParserFunctionRegistrant', $registrant );

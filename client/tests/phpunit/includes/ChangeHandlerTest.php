@@ -10,6 +10,7 @@ use Title;
 use Wikibase\Change;
 use Wikibase\ChangeHandler;
 use Wikibase\ChangesTable;
+use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
@@ -21,6 +22,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\NamespaceChecker;
 use Wikibase\PageUpdater;
 
 /**
@@ -57,26 +59,32 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$usageLookup = $this->getUsageLookup( $repo );
 		$titleFactory = $this->getTitleFactory( $entities );
 
-		$siteList = $this->getSiteList();
-
 		$changeFactory = TestChanges::getEntityChangeFactory();
 
 		if ( !$updater ) {
 			$updater = new MockPageUpdater();
 		}
 
-		$handler = new ChangeHandler(
-			$changeFactory,
-			$updater,
-			$repo,
+		$namespaceChecker = new NamespaceChecker( array(), array( NS_MAIN ) );
+
+		// @todo: mock the finder directly
+		$affectedPagesFinder = new AffectedPagesFinder(
 			$usageLookup,
+			$namespaceChecker,
 			$titleFactory,
-			$this->site,
-			$siteList
+			'enwiki',
+			false
 		);
 
-		$handler->setNamespaces( array( NS_MAIN ) );
-		$handler->setCheckPageExistence( false );
+		$handler = new ChangeHandler(
+			$changeFactory,
+			$affectedPagesFinder,
+			$updater,
+			$repo,
+			'enwiki',
+			true,
+			true
+		);
 
 		return $handler;
 	}
