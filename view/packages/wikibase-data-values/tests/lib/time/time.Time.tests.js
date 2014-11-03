@@ -24,16 +24,14 @@ define( [
 	} );
 
 	function testConstructByObject( assert, definitionName, definition ) {
-		var time,
-			valid = true;
+		var time;
 		try {
 			time = new Time( definition ); // throws an error if failure
-		} catch( e ) {
-			valid = false;
+		} catch ( e ) {
 		}
 
 		assert.ok(
-			valid,
+			time,
 			'New time.Time object built from "' + definitionName + '" example definition'
 		);
 	}
@@ -46,27 +44,30 @@ define( [
 		var t;
 
 		assert.throws(
+			function() { t = new Time( {} ); },
+			'Trying to instantiate with an empty object throws an error.'
+		);
+
+		assert.throws(
 			function() { t = new Time( '' ); },
-			'Trying to instantiate with an empty value throws an error.'
+			'Trying to instantiate with an empty string throws an error.'
 		);
 
 		assert.throws(
 			function() { t = new Time( 'foooo - invalid time' ); },
-			'Trying to instantiate with an invalid value throws an error.'
+			'Trying to instantiate with an invalid string throws an error.'
 		);
 	} );
 
 	function testConstructByString( assert, definitionName, definition ) {
-		var time,
-			valid = true;
+		var time;
 		try {
 			time = new Time( definitionName ); // throws an error if failure
 		} catch( e ) {
-			valid = false;
 		}
 
 		assert.ok(
-			valid,
+			time,
 			'New valid time.Time object built from "' + definitionName + '" example definition'
 		);
 	}
