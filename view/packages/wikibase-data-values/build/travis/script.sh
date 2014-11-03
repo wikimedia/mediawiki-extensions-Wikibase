@@ -2,6 +2,14 @@
 
 set -x
 
-cd lib/TestRunner
+if [[ $RUNJOB == jshint ]]; then
+	npm install jshint
+	jshint src/ lib/ tests/
+	exit $?
+fi
 
-phantomjs runTests.phantom.js ../../tests/runTests.html
+if [[ $RUNJOB == qunit ]]; then
+	cd lib/TestRunner
+	phantomjs runTests.phantom.js ../../tests/runTests.html
+	exit $?
+fi
