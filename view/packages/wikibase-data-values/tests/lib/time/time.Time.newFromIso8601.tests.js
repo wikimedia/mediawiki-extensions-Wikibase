@@ -19,7 +19,7 @@ define( [
 	 *
 	 * @param {QUnit.assert} assert
 	 * @param {string} iso8601String
-	 * @param {number} precision
+	 * @param {number} [precision]
 	 * @return {time.Time|null}
 	 */
 	function testNewFromIso8601( assert, iso8601String, precision ) {
