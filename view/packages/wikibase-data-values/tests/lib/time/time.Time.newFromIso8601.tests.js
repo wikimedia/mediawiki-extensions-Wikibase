@@ -19,12 +19,13 @@ define( [
 	 *
 	 * @param {QUnit.assert} assert
 	 * @param {string} iso8601String
+	 * @param {number} [precision]
 	 * @return {time.Time|null}
 	 */
-	function testNewFromIso8601( assert, iso8601String ) {
+	function testNewFromIso8601( assert, iso8601String, precision ) {
 		var time;
 		try {
-			time = Time.newFromIso8601( iso8601String ); // throws an error if failure
+			time = Time.newFromIso8601( iso8601String, precision ); // throws an error if failure
 		} catch( e ) {
 			time = null;
 		}
@@ -37,15 +38,9 @@ define( [
 	}
 
 	QUnit.test( 'newFromIso8601 by random valid iso8601 strings', function( assert ) {
-		var isoStrings = [];
-
 		$.each( time.validTimeDefinitions, function( name, definition ) {
-			var time = new Time( definition );
-			isoStrings.push( time.iso8601() );
-		} );
-
-		$.each( isoStrings, function( i, iso8601String ) {
-			testNewFromIso8601( assert, iso8601String );
+			var iso8601String = new Time( definition ).iso8601();
+			testNewFromIso8601( assert, iso8601String, definition.precision );
 		} );
 	} );
 
@@ -87,7 +82,8 @@ define( [
 			'1000-10-10': UNSUPPORTED_VARIATION,
 			'1000-10': UNSUPPORTED_VARIATION,
 			'1000': UNSUPPORTED_VARIATION,
-			'1200-13-23': 'month out of range'
+			'1200-13-23T': 'month out of range',
+			'1200-12-32T': 'day out of range'
 		};
 
 		$.each( invalidIsoStrings, function( iso8601String, title ) {

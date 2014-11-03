@@ -28,14 +28,12 @@ time.Time.validate = ( function( Time ) {
 
 		checkPrecisionRequirements( definition );
 
-		var month = definition.month;
-		if( month > 12 || month < 1 ) {
-			throw new Error( '"month" must not be lower than 1 (January) or higher than 12 ' +
-				'(December). "' + month + '" is not a valid month number.'  );
+		if( definition.month < 0 || definition.month > 12 ) {
+			throw new Error( 'Month out of [0,12] range.' );
 		}
 
-		if( definition.day < 1 ) {
-			throw new Error( '"day" must not be lower than 1' );
+		if( definition.day < 0 || definition.day > 31 ) {
+			throw new Error( 'Day out of [0,31] range.' );
 		}
 		// TODO: Add check for last day of the month once we have one validator per calendar model.
 

@@ -43,22 +43,19 @@ time.Time = ( function( time, $ ) {
 			result = $.extend( {}, timeDefinition, options ); // copy object
 			Time.validate( result );
 		}
+
 		if( result === null ) {
-			result = {};
-		}
-
-		var year = (result.year !== undefined) ? result.year : null,
-			month = (result.month !== undefined) ? result.month : 1,
-			day = (result.day !== undefined) ? result.day : 1,
-			hour = (result.hour !== undefined) ? result.hour : 0,
-			minute = (result.minute !== undefined) ? result.minute : 0,
-			second = (result.second !== undefined) ? result.second : 0,
-			utcoffset = '+00:00',
-			calendarname = Time.CALENDAR.GREGORIAN;
-
-		if( year === null ) {
 			throw new Error( 'time.Time object is invalid' );
 		}
+
+		var year = result.year || 0,
+			month = result.month || 0,
+			day = result.day || 0,
+			hour = result.hour || 0,
+			minute = result.minute || 0,
+			second = result.second || 0,
+			utcoffset = '+00:00',
+			calendarname = Time.CALENDAR.GREGORIAN;
 
 		if( options.calendarname ) {
 			calendarname = options.calendarname;
@@ -258,19 +255,11 @@ time.Time = ( function( time, $ ) {
 	Time.newFromIso8601 = function( iso8601String, precision ) {
 		var year, month, day, timeObj;
 
-		try{
-			year = parseInt(
-				iso8601String.match( /^[\-\+]?[\d]+/ )[0] || 0,
-				10
-			);
-			month = parseInt(
-				iso8601String.match( /(?:0?\d|1[012])(?=\-\d+T)/ )[0],
-				10
-			);
-			day = parseInt(
-				iso8601String.match( /[1-9]?\d(?=T)/ )[0],
-				10
-			);
+		try {
+			var matches = /^([+-]?\d+)-(\d+)-(\d+)(?=T)/.exec( iso8601String );
+			year = parseInt( matches[1], 10 );
+			month = parseInt( matches[2], 10 );
+			day = parseInt( matches[3], 10 );
 		} catch( e ) {
 			throw new Error( 'Unprocessable iso8601 string given' );
 		}

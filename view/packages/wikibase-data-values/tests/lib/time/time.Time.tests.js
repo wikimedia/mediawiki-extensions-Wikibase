@@ -21,19 +21,57 @@ define( [
 		$.each( validTimeDefinitions, function( name, definition ) {
 			testConstructByObject( assert, name, definition );
 		} );
+
+		var t;
+
+		assert.throws(
+			function() { t = new Time( {} ); },
+			'Trying to instantiate with an empty object throws an error.'
+		);
+
+		assert.throws(
+			function() { t = new Time( {
+				calendarname: Time.CALENDAR.GREGORIAN,
+				year: 2014
+			} ); },
+			'Trying to instantiate with precision undefined throws an error.'
+		);
+
+		assert.throws(
+			function() { t = new Time( {
+				year: 2014,
+				precision: Time.PRECISION.YEAR
+			} ); },
+			'Trying to instantiate with calendarname undefined throws an error.'
+		);
+
+		assert.throws(
+			function() { t = new Time( {
+				calendarname: Time.CALENDAR.GREGORIAN,
+				precision: Time.PRECISION.YEAR
+			} ); },
+			'Trying to instantiate with year undefined throws an error.'
+		);
+
+		assert.throws(
+			function() { t = new Time( {
+				calendarname: Time.CALENDAR.GREGORIAN,
+				year: null,
+				precision: Time.PRECISION.YEAR
+			} ); },
+			'Trying to instantiate with year null throws an error.'
+		);
 	} );
 
 	function testConstructByObject( assert, definitionName, definition ) {
-		var time,
-			valid = true;
+		var time;
 		try {
 			time = new Time( definition ); // throws an error if failure
-		} catch( e ) {
-			valid = false;
+		} catch ( e ) {
 		}
 
 		assert.ok(
-			valid,
+			time,
 			'New time.Time object built from "' + definitionName + '" example definition'
 		);
 	}
@@ -47,26 +85,24 @@ define( [
 
 		assert.throws(
 			function() { t = new Time( '' ); },
-			'Trying to instantiate with an empty value throws an error.'
+			'Trying to instantiate with an empty string throws an error.'
 		);
 
 		assert.throws(
 			function() { t = new Time( 'foooo - invalid time' ); },
-			'Trying to instantiate with an invalid value throws an error.'
+			'Trying to instantiate with an invalid string throws an error.'
 		);
 	} );
 
 	function testConstructByString( assert, definitionName, definition ) {
-		var time,
-			valid = true;
+		var time;
 		try {
 			time = new Time( definitionName ); // throws an error if failure
 		} catch( e ) {
-			valid = false;
 		}
 
 		assert.ok(
-			valid,
+			time,
 			'New valid time.Time object built from "' + definitionName + '" example definition'
 		);
 	}
@@ -86,7 +122,8 @@ define( [
 
 	QUnit.test( 'Equality of Time objects constructed by object/string', function( assert ) {
 		// TODO: get rid of this once we can use a parser instance with injected options
-		var dbmStateBefore = time.settings.daybeforemonth = true;
+		var dbmStateBefore = time.settings.daybeforemonth;
+		time.settings.daybeforemonth = true;
 
 		var equalTimeObjects = {};
 		$.each( validTimeDefinitions, function( name, definition ) {
