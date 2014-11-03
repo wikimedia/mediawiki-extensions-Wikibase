@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_76b39be8",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-03T14:27:15Z",
+      "side": 1,
+      "message": "I like the @annotation more. :-(",
+      "revId": "df1e14582f02481e2406f0684070542f6cb1e71b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d6bb8fb8",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-03T14:27:15Z",
+      "side": 1,
+      "message": "Variable is not needed.",
+      "revId": "df1e14582f02481e2406f0684070542f6cb1e71b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_56e77fdf",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-03T14:27:15Z",
+      "side": 1,
+      "message": "You could do the \"new StatementList( $statements )\" in the test method instead.",
+      "revId": "df1e14582f02481e2406f0684070542f6cb1e71b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_f6cd6b63",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-03T14:27:15Z",
+      "side": 1,
+      "message": "We usually put the provider above the test, don\u0027t we?",
+      "revId": "df1e14582f02481e2406f0684070542f6cb1e71b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_76015b70",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-03T14:27:15Z",
+      "side": 1,
+      "message": "Please be aware that this is not a \"real\" deep clone.",
+      "revId": "df1e14582f02481e2406f0684070542f6cb1e71b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
