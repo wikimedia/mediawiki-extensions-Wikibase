@@ -128,6 +128,7 @@
 		destroy: function() {
 			var label = this.element.children( this.widgetBaseClass + '-label' ).text();
 			this.element.empty().text( label );
+			this.options.$subject.stop();
 			$.Widget.prototype.destroy.call( this );
 		},
 
