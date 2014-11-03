@@ -133,17 +133,7 @@ abstract class ViewEntityAction extends ViewAction {
 		$outputPage->addJsConfigVars( 'wbIsEditView', $editable );
 
 		$user = $this->getContext()->getUser();
-
-		if ( $editable && !$content->isRedirect() ) {
-			$editable = $this->getArticle()->getTitle()->quickUserCan( 'edit', $user );
-		}
-
 		$parserOptions = $this->getArticle()->getPage()->makeParserOptions( $user );
-
-		if ( !$editable ) {
-			// disable editing features ("sections" is a misnomer, it applies to the wikitext equivalent)
-			$parserOptions->setEditSection( $editable );
-		}
 
 		$this->getArticle()->setParserOptions( $parserOptions );
 		$this->getArticle()->view();
