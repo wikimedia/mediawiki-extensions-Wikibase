@@ -105,7 +105,7 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.8.0 (dev)
+### 0.8.0 (2014-11-03)
 
 #### Enhancements
 * $.ui.suggester: Hitting the backspace or delete key if the input is empty already does not trigger search anymore.
