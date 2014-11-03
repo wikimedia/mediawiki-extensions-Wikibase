@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_fb29d49a",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-03T11:57:19Z",
+      "side": 1,
+      "message": "Would be nicer if the caller checked this, and the signature of this method was changed to require an EntityContent object. Or is that problematic somehow?",
+      "revId": "bfa832c4942a2f6836d757c7c488ff07cc97ad5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
