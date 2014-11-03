@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_363e7388",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-03T13:50:32Z",
+      "side": 1,
+      "message": "This line should be below, above $updateRepo \u003d ...",
+      "revId": "05b1cc5b1f186b7238c8c53969b994c588cbdb22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_5641bf0c",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-03T13:50:32Z",
+      "side": 1,
+      "message": "This looks odd to me. Why does this need to be called here? Couldn\u0027t this be checked in the constructor of the UpdateRepoOnDelete object, for example? Or in injectJob?",
+      "revId": "05b1cc5b1f186b7238c8c53969b994c588cbdb22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
