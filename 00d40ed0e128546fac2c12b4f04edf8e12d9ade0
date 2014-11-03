@@ -70,6 +70,23 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_d1f079c6",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-03T16:46:27Z",
+      "side": 1,
+      "message": "Please see https://github.com/wmde/WikibaseDataModel/pull/268",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_dbdc18e8",
         "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
         "patchSetId": 8
@@ -138,6 +155,23 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_b6336309",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.claimview.tests.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-03T16:46:27Z",
+      "side": 1,
+      "message": "instanceof?",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_bbf82c47",
         "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.entityview.tests.js",
         "patchSetId": 8
@@ -149,6 +183,23 @@
       "writtenOn": "2014-11-03T11:18:35Z",
       "side": 1,
       "message": "entityview instanceof $.wikibase.entityview,",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_764f1b98",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-03T16:46:27Z",
+      "side": 1,
+      "message": "Why is wikibase.store.FetchedContentUnserializer not renamed?",
       "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
