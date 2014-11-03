@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_7bb384e8",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-03T10:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_25a87b1c",
+      "revId": "6949bc3e1648338a28e0efaabf22bee8a96766d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_05ad3f2e",
         "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
         "patchSetId": 12
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_1b7cc01a",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-03T10:07:05Z",
+      "side": 1,
+      "message": "UsageLookupContractTester allows us to use the same tests to check that a given implementation conformed to the interface\u0027s contract. I think it\u0027s a good idea to have such \"testers\", at least if there is more than one implementation.\n\nI\u0027m a bit annoyed by the fact that we can\u0027t use it here - the reason is that this implementation technically breaks the assumption that usages other than sitelinks are tracked. I\u0027ll think about it.",
+      "parentUuid": "6e936f18_05ad3f2e",
+      "revId": "6949bc3e1648338a28e0efaabf22bee8a96766d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_45b34796",
         "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
         "patchSetId": 12
@@ -47,6 +83,24 @@
       "writtenOn": "2014-11-02T20:10:00Z",
       "side": 1,
       "message": "issue not introduced in this patch, but note that an instanceof check is also needed in UsageLookupContractTester to cover and avoid issues such as fixed in https://gerrit.wikimedia.org/r/#/c/170586/",
+      "revId": "6949bc3e1648338a28e0efaabf22bee8a96766d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_9bb690d6",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-03T10:07:05Z",
+      "side": 1,
+      "message": "UsageLookupContractTester uses iterator_to_array - that should fail when presented with something that isn\u0027t an array. The actual problem seems to be that the case of \"empty list of entities\" isn\u0027t tested. Not an issue for this patch, though. Should have been part of the patch that fixed the issue.",
+      "parentUuid": "6e936f18_45b34796",
       "revId": "6949bc3e1648338a28e0efaabf22bee8a96766d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
