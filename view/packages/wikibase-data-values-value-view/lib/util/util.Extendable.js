@@ -47,6 +47,6 @@ this.util = this.util || {};
 					ext[callName].apply( ext, args );
 				}
 			} );
-		},
+		}
 	};
 }( util, jQuery ) );

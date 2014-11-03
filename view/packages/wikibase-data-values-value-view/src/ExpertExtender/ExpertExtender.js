@@ -1,17 +1,23 @@
+/**
+ * @licence GNU GPL v2+
+ * @author Adrian Lang < adrian.lang@wikimedia.de >
+ */
 ( function( $, Extendable, vv ) {
 	'use strict';
 
 	/**
-	 * @param jQuery $input
-	 * @param object[] extensions An array of extensions for this ExpertExtender.
-	 *                            An extension may have any of the following methods:
-	 *                            - init( $container )
-	 *                            - onInitialShow()
-	 *                            - draw()
-	 *                            - destroy()
+	 * @param {jQuery} $input
+	 * @param {Object[]} [extensions] An array of extensions for this ExpertExtender.
+	 *        An extension may have any of the following methods:
+	 *        - init( $container )
+	 *        - onInitialShow()
+	 *        - draw()
+	 *        - destroy()
 	 */
 	vv.ExpertExtender = function( $input, extensions ) {
 		this.$input = $input;
+		extensions = extensions || [];
+
 		var extendable = this._extendable = new Extendable();
 
 		$.each( extensions, function( k, extension ) {
@@ -19,8 +25,19 @@
 		} );
 	};
 	$.extend( vv.ExpertExtender.prototype, {
+		/**
+		 * @type {jQuery}
+		 */
 		$input: null,
+
+		/**
+		 * @type {jQuery.ui.inputextender}
+		 */
 		_inputextender: null,
+
+		/**
+		 * @type {util.Extendable}
+		 */
 		_extendable: null,
 
 		/**
@@ -59,6 +76,9 @@
 			this._extendable = null;
 		},
 
+		/**
+		 * @param {jQuery} $extender
+		 */
 		_initExtensions: function( $extender ) {
 			var self = this;
 			this._extendable.callExtensions( 'init', [ $extender ] );
