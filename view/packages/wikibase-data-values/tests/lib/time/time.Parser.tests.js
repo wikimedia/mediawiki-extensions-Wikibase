@@ -20,8 +20,9 @@ define( [
 
 	QUnit.test( 'random parsing', function( assert ) {
 		// TODO: injecdt this setting into test parser instance rather than changing global settings
-		var dbmStateBefore = time.settings.daybeforemonth = true,
+		var dbmStateBefore = time.settings.daybeforemonth,
 			parser = new time.Parser();
+		time.settings.daybeforemonth = true;
 
 		$.each( times, function( timeInput, expectedTimeDefinition ) {
 			var parsedTime,

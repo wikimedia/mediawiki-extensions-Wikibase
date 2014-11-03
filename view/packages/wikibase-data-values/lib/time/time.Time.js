@@ -258,19 +258,11 @@ time.Time = ( function( time, $ ) {
 	Time.newFromIso8601 = function( iso8601String, precision ) {
 		var year, month, day, timeObj;
 
-		try{
-			year = parseInt(
-				iso8601String.match( /^[\-\+]?[\d]+/ )[0] || 0,
-				10
-			);
-			month = parseInt(
-				iso8601String.match( /(?:0?\d|1[012])(?=\-\d+T)/ )[0],
-				10
-			);
-			day = parseInt(
-				iso8601String.match( /[1-9]?\d(?=T)/ )[0],
-				10
-			);
+		try {
+			var matches = /^([+-]?\d+)-(\d+)-(\d+)(?=T)/.exec( iso8601String );
+			year = parseInt( matches[1] );
+			month = parseInt( matches[2] );
+			day = parseInt( matches[3] );
 		} catch( e ) {
 			throw new Error( 'Unprocessable iso8601 string given' );
 		}
