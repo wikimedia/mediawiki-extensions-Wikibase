@@ -112,13 +112,14 @@ define( [
 	QUnit.test( 'Equality of Time objects with different calendar model', function( assert ) {
 		$.each( validTimeDefinitions, function( name, definition ) {
 			var time1 = new Time( definition );
-			definition.calendarname = definition.calendarname === 'Gregorian' ? 'Julian' : 'Gregorian';
+			definition.calendarname = definition.calendarname === Time.CALENDAR.GREGORIAN
+				? Time.CALENDAR.JULIAN
+				: Time.CALENDAR.GREGORIAN;
 			var time2 = new Time( definition );
 
 			assert.ok(
 				!time1.equals( time2 ) && !time2.equals( time1 ),
-				'Time objects "' + name + '" (' + time1.calendar() + ') and "' + name + '" (' + time2.calendar() +
-					') have different calendar models and are not equal'
+				'Time created from string "' + name + '" but different calendar model is not equal'
 			);
 		} );
 	} );
