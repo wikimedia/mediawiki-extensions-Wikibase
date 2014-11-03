@@ -44,10 +44,6 @@ time.Time = ( function( time, $ ) {
 			Time.validate( result );
 		}
 
-		if( !result || result.year === undefined ) {
-			throw new Error( 'time.Time object is invalid' );
-		}
-
 		var year = result.year || 0,
 			month = result.month || 0,
 			day = result.day || 0,

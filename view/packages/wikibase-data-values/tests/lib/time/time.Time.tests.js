@@ -21,6 +21,46 @@ define( [
 		$.each( validTimeDefinitions, function( name, definition ) {
 			testConstructByObject( assert, name, definition );
 		} );
+
+		var t;
+
+		assert.throws(
+			function() { t = new Time( {} ); },
+			'Trying to instantiate with an empty object throws an error.'
+		);
+
+		assert.throws(
+			function() { t = new Time( {
+				calendarname: Time.CALENDAR.GREGORIAN,
+				year: 2014
+			} ); },
+			'Trying to instantiate with precision undefined throws an error.'
+		);
+
+		assert.throws(
+			function() { t = new Time( {
+				year: 2014,
+				precision: Time.PRECISION.YEAR
+			} ); },
+			'Trying to instantiate with calendarname undefined throws an error.'
+		);
+
+		assert.throws(
+			function() { t = new Time( {
+				calendarname: Time.CALENDAR.GREGORIAN,
+				precision: Time.PRECISION.YEAR
+			} ); },
+			'Trying to instantiate with year undefined throws an error.'
+		);
+
+		assert.throws(
+			function() { t = new Time( {
+				calendarname: Time.CALENDAR.GREGORIAN,
+				year: null,
+				precision: Time.PRECISION.YEAR
+			} ); },
+			'Trying to instantiate with year null throws an error.'
+		);
 	} );
 
 	function testConstructByObject( assert, definitionName, definition ) {
@@ -42,11 +82,6 @@ define( [
 		} );
 
 		var t;
-
-		assert.throws(
-			function() { t = new Time( {} ); },
-			'Trying to instantiate with an empty object throws an error.'
-		);
 
 		assert.throws(
 			function() { t = new Time( '' ); },
