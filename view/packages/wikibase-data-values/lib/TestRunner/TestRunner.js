@@ -28,6 +28,28 @@ this.TestRunner = ( function( console ) {
 	'use strict';
 
 	/**
+	 * @param {HTMLElement} tests
+	 * @return {string[]}
+	 */
+	function getFailedTestResults( tests ) {
+		var assertList = tests.getElementsByClassName( 'qunit-assert-list' ),
+			testResults = [],
+			i;
+
+		for( i = 0; i < assertList.length; i++ ) {
+			var fail = assertList[i].getElementsByClassName( 'fail' );
+			for( var j = 0; j < fail.length; j++ ) {
+				testResults.push( {
+					message: fail[j].getElementsByClassName( 'test-message' )[0].innerText,
+					html: fail[j].innerHTML
+				} );
+			}
+		}
+
+		return testResults;
+	}
+
+	/**
 	 * Test runner for QUnit tests powered by requrieJS.
 	 *
 	 * @param {Object} options
@@ -72,7 +94,8 @@ this.TestRunner = ( function( console ) {
 				return;
 			}
 
-			var testResult = frameWindow.document.getElementById( 'qunit-testresult' );
+			var testResult = frameWindow.document.getElementById( 'qunit-testresult' ),
+				tests = frameWindow.document.getElementById( 'qunit-tests' );
 
 			if( !testResult ) {
 				return;
@@ -88,6 +111,12 @@ this.TestRunner = ( function( console ) {
 					console.log( currentModule + ': passed' );
 				} else {
 					console.error( currentModule + ': FAILED (' + localFailures + ' failures)' );
+
+					var failedResults = getFailedTestResults( tests );
+					for( var i = 0; i < failedResults.length; i++ ) {
+						console.error( currentModule + ': ' + failedResults[i].message );
+					}
+
 					globalFailures += localFailures;
 				}
 
