@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_1626d711",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-03T14:36:37Z",
+      "side": 1,
+      "message": "hmmm, i think it\u0027s more clear this way but don\u0027t care too much.",
+      "parentUuid": "6e936f18_76b39be8",
+      "revId": "df1e14582f02481e2406f0684070542f6cb1e71b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_d6bb8fb8",
         "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-03T14:27:15Z",
       "side": 1,
       "message": "Variable is not needed.",
+      "revId": "df1e14582f02481e2406f0684070542f6cb1e71b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d61f0fb9",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-03T14:36:37Z",
+      "side": 1,
+      "message": "i know and scrutinizer doesn\u0027t like this. imho more clear to have it but can remove.",
+      "parentUuid": "6e936f18_d6bb8fb8",
       "revId": "df1e14582f02481e2406f0684070542f6cb1e71b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_767e3be3",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-03T14:36:37Z",
+      "side": 1,
+      "message": "sounds good, will do.",
+      "parentUuid": "6e936f18_56e77fdf",
+      "revId": "df1e14582f02481e2406f0684070542f6cb1e71b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_f6cd6b63",
         "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
         "patchSetId": 4
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_76171ba9",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-03T14:36:37Z",
+      "side": 1,
+      "message": "i always put it after. (i think daniel puts them before)  it\u0027s more clear to be put after, imho, and the test is the most important thing and should be at the top / above.",
+      "parentUuid": "6e936f18_f6cd6b63",
+      "revId": "df1e14582f02481e2406f0684070542f6cb1e71b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_76015b70",
         "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
         "patchSetId": 4
@@ -81,6 +153,24 @@
       "writtenOn": "2014-11-03T14:27:15Z",
       "side": 1,
       "message": "Please be aware that this is not a \"real\" deep clone.",
+      "revId": "df1e14582f02481e2406f0684070542f6cb1e71b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_163fb721",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-03T14:36:37Z",
+      "side": 1,
+      "message": "not introduced here, but would be good to change to another approach in a followup.  i don\u0027t like using clone here.",
+      "parentUuid": "6e936f18_76015b70",
       "revId": "df1e14582f02481e2406f0684070542f6cb1e71b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
