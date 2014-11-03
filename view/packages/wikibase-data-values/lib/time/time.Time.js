@@ -44,6 +44,10 @@ time.Time = ( function( time, $ ) {
 			Time.validate( result );
 		}
 
+		if( result === null ) {
+			throw new Error( 'time.Time object is invalid' );
+		}
+
 		var year = result.year || 0,
 			month = result.month || 0,
 			day = result.day || 0,
@@ -253,9 +257,9 @@ time.Time = ( function( time, $ ) {
 
 		try {
 			var matches = /^([+-]?\d+)-(\d+)-(\d+)(?=T)/.exec( iso8601String );
-			year = parseInt( matches[1] );
-			month = parseInt( matches[2] );
-			day = parseInt( matches[3] );
+			year = parseInt( matches[1], 10 );
+			month = parseInt( matches[2], 10 );
+			day = parseInt( matches[3], 10 );
 		} catch( e ) {
 			throw new Error( 'Unprocessable iso8601 string given' );
 		}
