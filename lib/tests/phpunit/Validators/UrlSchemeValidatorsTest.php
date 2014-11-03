@@ -107,21 +107,21 @@ class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetValidator() {
-		$fatory = new UrlSchemeValidators();
+		$factory = new UrlSchemeValidators();
 
-		$this->assertNotNull( $fatory->getValidator( 'http' ), 'http' );
-		$this->assertNotNull( $fatory->getValidator( 'https' ), 'https' );
-		$this->assertNotNull( $fatory->getValidator( 'ftp' ), 'ftp' );
-		$this->assertNotNull( $fatory->getValidator( 'mailto' ), 'mailto' );
+		$this->assertNotNull( $factory->getValidator( 'http' ), 'http' );
+		$this->assertNotNull( $factory->getValidator( 'https' ), 'https' );
+		$this->assertNotNull( $factory->getValidator( 'ftp' ), 'ftp' );
+		$this->assertNotNull( $factory->getValidator( 'mailto' ), 'mailto' );
 
-		$this->assertNull( $fatory->getValidator( 'notaprotocol' ), 'notaprotocol' );
+		$this->assertNull( $factory->getValidator( 'notaprotocol' ), 'notaprotocol' );
 	}
 
 	public function testGetValidators() {
-		$fatory = new UrlSchemeValidators();
+		$factory = new UrlSchemeValidators();
 
 		$schemes = array( 'http', 'https', 'ftp', 'dummy' );
-		$validators = $fatory->getValidators( $schemes );
+		$validators = $factory->getValidators( $schemes );
 
 		$this->assertEquals( array( 'http', 'https', 'ftp' ), array_keys( $validators ) );
 		$this->assertContainsOnlyInstancesOf( 'ValueValidators\ValueValidator', $validators );
