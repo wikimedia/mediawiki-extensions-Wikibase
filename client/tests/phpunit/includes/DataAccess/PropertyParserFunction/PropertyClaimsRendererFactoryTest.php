@@ -26,66 +26,87 @@ use Wikibase\Lib\SnakFormatter;
  */
 class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @dataProvider newRendererFromParserProvider
-	 */
-	public function testNewRendererFromParser( $expected, $languageCode, $interfaceMessage,
-		$disableContentConversion, $disableTitleConversion, $outputType
-	) {
-		$parser = $this->getParser(
-			$languageCode,
-			$interfaceMessage,
-			$disableContentConversion,
-			$disableTitleConversion,
-			$outputType
-		);
+	public function testNewRendererForInterfaceMessage() {
+		$parser = $this->getParser( 'zh', true, false, false, Parser::OT_HTML );
 
-		$rendererFactory = new PropertyClaimsRendererFactory(
-			$this->getPropertyIdResolver(),
-			$this->getSnaksFinder(),
-			$this->getLanguageFallbackChainFactory(),
-			$this->getSnakFormatterFactory()
-		);
-
+		$rendererFactory = $this->getPropertyClaimsRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
-		$this->assertInstanceOf( $expected, $renderer );
-	}
-
-	public function newRendererFromParserProvider() {
-		$languageRendererClass = 'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer';
-		$variantsRendererClass = 'Wikibase\DataAccess\PropertyParserFunction\VariantsAwareRenderer';
-
-		return array(
-			array( $languageRendererClass, 'en', false, false, false, Parser::OT_HTML ),
-			array( $languageRendererClass, 'ku', false, false, false, Parser::OT_PLAIN ),
-			array( $languageRendererClass, 'zh', false, false, false, Parser::OT_WIKI ),
-			array( $languageRendererClass, 'zh', false, true, false, Parser::OT_HTML ),
-			array( $languageRendererClass, 'zh', true, false, false, Parser::OT_HTML ),
-			array( $languageRendererClass, 'zh', false, false, false, Parser::OT_PREPROCESS ),
-			array( $variantsRendererClass, 'zh', false, false, true, Parser::OT_HTML ),
-			array( $variantsRendererClass, 'ku', false, false, false, Parser::OT_HTML ),
+		$this->assertInstanceOf(
+			'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
+			$renderer
 		);
 	}
 
-	public function testNewLanguageAwareRenderer() {
+	public function testNewRenderer_contentConversionDisabled() {
+		$parser = $this->getParser( 'zh', false, true, false, Parser::OT_HTML );
+
 		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
-		$language = Language::factory( 'he' );
-		$usageAcc = new HashUsageAccumulator();
-		$renderer = $rendererFactory->newLanguageAwareRenderer( $language, $usageAcc );
-
-		$languageRendererClass = 'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer';
-		$this->assertInstanceOf( $languageRendererClass, $renderer );
+		$this->assertInstanceOf(
+			'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
+			$renderer
+		);
 	}
 
-	public function testGetLanguageAwareRendererFromCode() {
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
-		$usageAcc = new HashUsageAccumulator();
-		$renderer = $rendererFactory->getLanguageAwareRendererFromCode( 'ar', $usageAcc );
+	public function testNewRenderer_titleConversionDisabled() {
+		$parser = $this->getParser( 'zh', false, false, true, Parser::OT_HTML );
 
-		$languageRendererClass = 'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer';
-		$this->assertInstanceOf( $languageRendererClass, $renderer );
+		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$renderer = $rendererFactory->newRendererFromParser( $parser );
+
+		$this->assertInstanceOf(
+			'Wikibase\DataAccess\PropertyParserFunction\VariantsAwareRenderer',
+			$renderer
+		);
+	}
+
+	/**
+	 * @dataProvider newRenderer_forParserFormatProvider
+	 */
+	public function testNewRenderer_forParserFormat( $languageCode, $format ) {
+		$parser = $this->getParser( $languageCode, false, false, false, $format );
+
+		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$renderer = $rendererFactory->newRendererFromParser( $parser );
+
+		$this->assertInstanceOf(
+			'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
+			$renderer
+		);
+	}
+
+	public function newRenderer_forParserFormatProvider() {
+		return array(
+			array( 'ku', Parser::OT_PLAIN ),
+			array( 'zh', Parser::OT_WIKI ),
+			array( 'zh', Parser::OT_PREPROCESS )
+		);
+	}
+
+	public function testNewRenderer_forNonVariantLanguage() {
+		$parser = $this->getParser( 'en', true, false, false, Parser::OT_HTML );
+
+		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$renderer = $rendererFactory->newRendererFromParser( $parser );
+
+		$this->assertInstanceOf(
+			'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
+			$renderer
+		);
+	}
+
+	public function testNewRender_forVariantLanguage() {
+		$parser = $this->getParser( 'zh', false, false, false, Parser::OT_HTML );
+
+		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$renderer = $rendererFactory->newRendererFromParser( $parser );
+
+		$this->assertInstanceOf(
+			'Wikibase\DataAccess\PropertyParserFunction\VariantsAwareRenderer',
+			$renderer
+		);
 	}
 
 	private function getPropertyClaimsRendererFactory() {

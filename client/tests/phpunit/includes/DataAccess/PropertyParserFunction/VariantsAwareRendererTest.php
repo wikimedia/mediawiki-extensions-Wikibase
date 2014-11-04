@@ -60,10 +60,15 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 		$usageAccumulator = $this->getUsageAccumulator();
 
+		$languageRenderers = array();
+
+		foreach( $variants as $variant ) {
+			$languageRenderers[$variant] = $languageRenderer;
+		}
+
 		$variantsRenderer = new VariantsAwareRenderer(
-			$rendererFactory,
-			$variants,
-			$usageAccumulator
+			$languageRenderers,
+			$variants
 		);
 
 		$result = $variantsRenderer->render( $itemId, $propertyLabel );

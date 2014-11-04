@@ -4,7 +4,6 @@ namespace Wikibase\DataAccess\PropertyParserFunction;
 
 use Language;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Client\Usage\UsageAccumulator;
 
 /**
  * Handler of the {{#property}} parser function.
@@ -20,29 +19,22 @@ use Wikibase\Client\Usage\UsageAccumulator;
 class VariantsAwareRenderer implements PropertyClaimsRenderer {
 
 	/**
-	 * @var PropertyClaimsRendererFactory
-	 */
-	private $rendererFactory;
-
-	/**
 	 * @param string[]
 	 */
 	private $variants;
 
 	/**
-	 * @var UsageAccumulator
+	 * @var LanguageAwareRenderer[]
 	 */
-	private $usageAccumulator;
+	private $languageAwareRenderers;
 
 	/**
-	 * @param PropertyClaimsRendererFactory $rendererFactory
+	 * @param LanguageAwareRenderer[] $languageAwareRenderers
 	 * @param string[] $variants
-	 * @param UsageAccumulator $usageAccumulator
 	 */
-	public function __construct( PropertyClaimsRendererFactory $rendererFactory, array $variants, UsageAccumulator $usageAccumulator ) {
-		$this->rendererFactory = $rendererFactory;
+	public function __construct( array $languageAwareRenderers, array $variants ) {
+		$this->languageAwareRenderers = $languageAwareRenderers;
 		$this->variants = $variants;
-		$this->usageAccumulator = $usageAccumulator;
 	}
 
 	/**
@@ -108,9 +100,23 @@ class VariantsAwareRenderer implements PropertyClaimsRenderer {
 	 * @return string
 	 */
 	private function getVariantText( $variantCode, EntityId $entityId, $propertyLabelOrId ) {
-		$renderer = $this->rendererFactory->getLanguageAwareRendererFromCode( $variantCode, $this->usageAccumulator );
+		$renderer = $this->getLanguageAwareRendererFromCode( $variantCode );
 
 		return $renderer->render( $entityId, $propertyLabelOrId );
+	}
+
+	/**
+	 * @param string $variantCode
+	 *
+	 * @throws OutOfBoundsException
+	 * @return LanguageAwareRenderer
+	 */
+	private function getLanguageAwareRendererFromCode( $variantCode ) {
+		if ( !isset( $this->languageAwareRenderers[$variantCode] ) ) {
+			throw new OutOfBoundsException( 'No LanguageAwareRenderer set for ' . $variantCode );
+		}
+
+		return $this->languageAwareRenderers[$variantCode];
 	}
 
 }
