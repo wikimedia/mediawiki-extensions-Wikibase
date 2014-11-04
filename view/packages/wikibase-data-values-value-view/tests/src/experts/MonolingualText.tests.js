@@ -2,6 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  */
+/* jshint nonew: false */
 ( function( QUnit, valueview ) {
 	'use strict';
 

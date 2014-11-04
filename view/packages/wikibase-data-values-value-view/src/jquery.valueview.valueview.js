@@ -544,10 +544,11 @@ $.widget( 'valueview.valueview', PARENT, {
 				}
 
 				self._updateExpert();
-				if( !self._expert ) {
-					// TODO: Display message that data value type is unsupported or no expert indicator and
-					//  no value at the same time.
-				}
+
+				// TODO: Display message that data value type is unsupported or no expert indicator
+				//  and no value at the same time:
+				// if( !self._expert ) { ... }
+
 				self._expert.draw();
 			} );
 		} else {

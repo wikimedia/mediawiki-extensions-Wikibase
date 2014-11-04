@@ -2,8 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  */
-
-( function( valueview, QUnit ) {
+( function( $, valueview, QUnit ) {
 	'use strict';
 
 	valueview.tests = valueview.tests || {};
@@ -38,4 +37,4 @@
 		}
 	};
 
-} )( jQuery.valueview, QUnit );
+} )( jQuery, jQuery.valueview, QUnit );

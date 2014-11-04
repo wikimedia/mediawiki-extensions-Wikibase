@@ -80,7 +80,9 @@
 		 * Public method for replacing the preview with a spinner
 		 */
 		showSpinner: function() {
-			this._preview && this._preview.showSpinner();
+			if( this._preview ) {
+				this._preview.showSpinner();
+			}
 		}
 	} );
 } ( jQuery, jQuery.valueview.ExpertExtender, mediaWiki, util.MessageProvider ) );

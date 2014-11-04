@@ -2,16 +2,19 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  */
-
+/* jshint nonew: false */
 ( function( $, ExpertExtender, testExpertExtenderExtension, sinon, QUnit, CompletenessTest ) {
 	'use strict';
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.LanguageSelector' );
 
 	if( QUnit.urlParams.completenesstest ) {
-		new CompletenessTest( ExpertExtender.LanguageSelector.prototype, function( cur, tester, path ) {
-			return false;
-		} );
+		new CompletenessTest(
+			ExpertExtender.LanguageSelector.prototype,
+			function( cur, tester, path ) {
+				return false;
+			}
+		);
 	}
 
 	testExpertExtenderExtension.constructor(
@@ -30,7 +33,9 @@
 		var upstreamValue = 'en';
 		var languageSelector = new ExpertExtender.LanguageSelector( new util.MessageProvider( {
 			messageGetter: function( key ) {
-				return arguments.length > 1 ? Array.prototype.slice.call( arguments, 1 ).join( ' ' ) : key;
+				return arguments.length > 1
+					? Array.prototype.slice.call( arguments, 1 ).join( ' ' )
+					: key;
 			}
 		} ), function() {
 			return upstreamValue;
@@ -38,13 +43,23 @@
 		var $extender = $( '<div />' );
 
 		languageSelector.init( $extender );
-		languageSelector.onInitialShow && languageSelector.onInitialShow();
-		languageSelector.draw && languageSelector.draw();
+
+		if( languageSelector.onInitialShow ) {
+			languageSelector.onInitialShow();
+		}
+
+		if( languageSelector.draw ) {
+			languageSelector.draw();
+		}
 
 		assert.equal( languageSelector.getValue(), 'en' );
 
 		upstreamValue = 'de';
-		languageSelector.draw && languageSelector.draw();
+
+		if( languageSelector.draw ) {
+			languageSelector.draw();
+		}
+
 		assert.equal( languageSelector.getValue(), 'en' );
 	} );
 
