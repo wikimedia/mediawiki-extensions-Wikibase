@@ -773,8 +773,7 @@ final class WikibaseClient {
 			new WikiPageUpdater(),
 			$this->getStore()->getEntityRevisionLookup(),
 			$this->getSite()->getGlobalId(),
-			$this->getSettings()->getSetting( 'injectRecentChanges' ),
-			$this->getSettings()->getSetting( 'allowDataTransclusion' )
+			$this->getSettings()->getSetting( 'injectRecentChanges' )
 		);
 	}
 
