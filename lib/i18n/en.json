@@ -84,8 +84,6 @@
 	"wikibase-validator-bad-value-type": "Bad value type $1, expected $2",
 	"wikibase-validator-bad-url": "Malformed URL: $1",
 	"wikibase-validator-bad-url-scheme": "Unsupported URL scheme: $1",
-	"wikibase-validator-bad-http-url": "Malformed HTTP URL: $1",
-	"wikibase-validator-bad-mailto-url": "Malformed mailto URL: $1",
 	"wikibase-validator-unknown-unit": "Unknown unit: $1",
 	"wikibase-validator-not-allowed": "Illegal value: $1",
 	"datatypes-type-wikibase-item": "Item",

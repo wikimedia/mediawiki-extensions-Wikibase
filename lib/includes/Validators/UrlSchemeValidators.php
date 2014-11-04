@@ -27,8 +27,6 @@ class UrlSchemeValidators {
 	 * @return ValueValidator|null
 	 */
 	public function getValidator( $scheme ) {
-		$errorCode = 'bad-url';
-
 		switch ( $scheme ) {
 			case 'ftp':
 			case 'ftps':
@@ -47,14 +45,10 @@ class UrlSchemeValidators {
 			case 'telnet':
 			case 'worldwind':
 				$regex = '!^' . preg_quote( $scheme, '!' ) . '://(' . Parser::EXT_LINK_URL_CLASS . ')+$!i';
-				if ( $scheme === 'http' ) {
-					$errorCode = 'bad-http-url';
-				}
 				break;
 
 			case 'mailto':
 				$regex = '!^mailto:(' . Parser::EXT_LINK_URL_CLASS . ')+@(' . Parser::EXT_LINK_URL_CLASS . ')+$!i';
-				$errorCode = 'bad-mailto-url';
 				break;
 
 			case '*':
@@ -66,7 +60,7 @@ class UrlSchemeValidators {
 				return null;
 		}
 
-		return new RegexValidator( $regex, false, $errorCode );
+		return new RegexValidator( $regex, false, 'bad-url' );
 	}
 
 	/**

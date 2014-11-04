@@ -21,12 +21,12 @@ class UrlValidatorTest extends \PHPUnit_Framework_TestCase {
 
 	public static function provideValidate() {
 		$yes = new RegexValidator( '/.*/', false, 'oops' );
-		$no  = new RegexValidator( '/.*/', true, 'bad-http-url' );
+		$no  = new RegexValidator( '/.*/', true, 'bad-url' );
 
 		return array(
 			'empty' => array( array(), 'http://acme.com', 'bad-url-scheme' ),
 			'valid' => array( array( 'http' => $yes ), 'http://acme.com', null ),
-			'invalid' => array( array( 'http' => $no ), 'http://acme.com', 'bad-http-url' ),
+			'invalid' => array( array( 'http' => $no ), 'http://acme.com', 'bad-url' ),
 			'wildcard' => array( array( '*' => $yes ), 'http://acme.com', null ),
 		);
 	}

@@ -66,8 +66,7 @@ class ValidatorErrorLocalizer {
 		// wikibase-validator-bad-entity-type, wikibase-validator-no-such-entity,
 		// wikibase-validator-no-such-property, wikibase-validator-bad-value,
 		// wikibase-validator-bad-value-type, wikibase-validator-bad-url,
-		// wikibase-validator-bad-url-scheme, wikibase-validator-bad-http-url,
-		// wikibase-validator-bad-mailto-url, wikibase-validator-unknown-unit
+		// wikibase-validator-bad-url-scheme, wikibase-validator-unknown-unit
 		$key = 'wikibase-validator-' . $error->getCode();
 		$params = $error->getParameters();
 
