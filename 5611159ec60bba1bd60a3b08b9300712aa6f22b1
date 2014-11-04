@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_05bd31d1",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-04T15:18:56Z",
+      "side": 1,
+      "message": "changed this to return an array, but with any experimental settings merged in, if experimental mode.",
+      "parentUuid": "6e936f18_85e7013b",
+      "revId": "5611159ec60bba1bd60a3b08b9300712aa6f22b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_a5c9ddaf",
         "filename": "lib/config/WikibaseLib.default.php",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "I disagree. It\u0027s sensible to have placeholders for registering specific kinds of things in the right place. That way, you know where to look. I really don\u0027t want to see experimental types defined all over the place.",
       "parentUuid": "6e936f18_a5c9ddaf",
+      "revId": "5611159ec60bba1bd60a3b08b9300712aa6f22b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_a5d31d2f",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-04T15:18:56Z",
+      "side": 1,
+      "message": "kept this for now.  I think a placeholder is useful, imho.",
+      "parentUuid": "6e936f18_e53e0587",
       "revId": "5611159ec60bba1bd60a3b08b9300712aa6f22b1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
