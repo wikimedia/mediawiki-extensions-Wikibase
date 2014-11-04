@@ -11,78 +11,59 @@ use ValueValidators\ValueValidator;
  *
  * @license GPL 2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class UrlSchemeValidators {
-
-	/**
-	 * Returns a ValueValidator that will match any URL with a valid schema name.
-	 *
-	 * @return RegexValidator
-	 */
-	public function any() {
-		return new RegexValidator( '!^([-+.a-zA-Z0-9]+):(' . Parser::EXT_LINK_URL_CLASS . ')+$!i', false, 'bad-url' );
-	}
-
-	/**
-	 * @param string $scheme the scheme ('http' or 'https').
-	 *
-	 * @return RegexValidator
-	 */
-	private function httpish( $scheme = 'http' ) {
-		return new RegexValidator( '!^' . $scheme . '://(' . Parser::EXT_LINK_URL_CLASS . ')+$!i', false, 'bad-http-url' );
-	}
-
-	/**
-	 * Returns a ValueValidator that will match URLs using the HTTP scheme.
-	 *
-	 * @return RegexValidator
-	 */
-	public function http() {
-		return $this->httpish( 'http' );
-	}
-
-	/**
-	 * Returns a ValueValidator that will match URLs using the HTTPS scheme.
-	 *
-	 * @return RegexValidator
-	 */
-	public function https() {
-		return $this->httpish( 'https' );
-	}
-
-	/**
-	 * Returns a ValueValidator that will match URLs using the FTP scheme.
-	 *
-	 * @return RegexValidator
-	 */
-	public function ftp() {
-		return $this->httpish( 'ftp' );
-	}
-
-	/**
-	 * Returns a ValueValidator that will match URLS using the mailto scheme.
-	 *
-	 * @return RegexValidator
-	 */
-	public function mailto() {
-		return new RegexValidator( '!^mailto:(' . Parser::EXT_LINK_URL_CLASS . ')+@(' . Parser::EXT_LINK_URL_CLASS . ')+$!i', false, 'bad-mailto-url' );
-	}
 
 	/**
 	 * Returns a validator for the given URL scheme, or null if
 	 * no validator is defined for that scheme.
 	 *
-	 * @param string $scheme
+	 * @todo 'bitcoin', 'geo', 'magnet', 'news', 'sip', 'sips', 'sms', 'tel', 'urn', 'xmpp'.
+	 * @todo protocol relative '//'.
+	 *
+	 * @param string $scheme e.g. 'http'.
 	 *
 	 * @return ValueValidator|null
 	 */
 	public function getValidator( $scheme ) {
-		if ( method_exists( $this, $scheme ) ) {
-			$validator = $this->$scheme();
-			return $validator;
+		switch ( $scheme ) {
+			case 'ftp':
+			case 'ftps':
+			case 'git':
+			case 'gopher':
+			case 'http':
+			case 'https':
+			case 'irc':
+			case 'ircs':
+			case 'mms':
+			case 'nntp':
+			case 'redis':
+			case 'sftp':
+			case 'ssh':
+			case 'svn':
+			case 'telnet':
+			case 'worldwind':
+				$regex = '!^' . preg_quote( $scheme, '!' ) . '://(' . Parser::EXT_LINK_URL_CLASS . ')+$!i';
+				$errorCode = 'bad-http-url';
+				break;
+
+			case 'mailto':
+				$regex = '!^mailto:(' . Parser::EXT_LINK_URL_CLASS . ')+@(' . Parser::EXT_LINK_URL_CLASS . ')+$!i';
+				$errorCode = 'bad-mailto-url';
+				break;
+
+			case '*':
+			case 'any':
+				$regex = '!^([a-z][a-z\d+.-]*):(' . Parser::EXT_LINK_URL_CLASS . ')+$!i';
+				$errorCode = 'bad-url';
+				break;
+
+			default:
+				return null;
 		}
 
-		return null;
+		return new RegexValidator( $regex, false, $errorCode );
 	}
 
 	/**
@@ -90,7 +71,7 @@ class UrlSchemeValidators {
 	 * scheme to a corresponding ValueValidator. If the schema isn't supported,
 	 * no mapping is created for it.
 	 *
-	 * @param array $schemes a list of scheme names.
+	 * @param string[] $schemes a list of scheme names, e.g. 'http'.
 	 *
 	 * @return ValueValidator[] a map of scheme names to ValueValidator objects.
 	 */
@@ -107,4 +88,5 @@ class UrlSchemeValidators {
 
 		return $validators;
 	}
+
 }
