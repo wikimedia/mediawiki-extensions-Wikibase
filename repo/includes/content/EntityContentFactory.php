@@ -315,18 +315,17 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @param Title $title
 	 * @param EntityContent $content
 	 * @param User $user
-	 * @param string $permission
 	 *
 	 * @return boolean
 	 */
-	public function getPermissionForTitle( Title $title, EntityContent $content, User $user, $permission ) {
+	public function getEditPermissionForTitle( Title $title, EntityContent $content, User $user ) {
 		$entityContentTitle = $this->getTitleForId( $content->getEntity()->getId() );
 
 		if ( $entityContentTitle->getFullText() !== $title->getFullText() ) {
 			throw new MWException( '$title does not match content' );
 		}
 
-		$errors = $title->getUserPermissionsErrors( $permission, $user, 'quick' );
+		$errors = $title->getUserPermissionsErrors( 'edit', $user, 'quick' );
 		$permissionStatus = $this->getStatusForPermissionErrors( $errors );
 
 		return $permissionStatus->isOK();

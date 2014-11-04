@@ -151,7 +151,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 					'getPermissionStatusForEntity' => true,
 					'getPermissionStatusForEntityType' => true,
 					'getPermissionStatusForEntityId' => true,
-					'getPermissionForTitle' => true,
+					'getEditPermissionForTitle' => true,
 				),
 			),
 			'edit not allowed' => array(
@@ -162,7 +162,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 					'getPermissionStatusForEntity' => false,
 					'getPermissionStatusForEntityType' => false,
 					'getPermissionStatusForEntityId' => false,
-					'getPermissionForTitle' => false,
+					'getEditPermissionForTitle' => false,
 				),
 			),
 			'delete not allowed' => array(
