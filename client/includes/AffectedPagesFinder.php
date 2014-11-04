@@ -103,7 +103,7 @@ class AffectedPagesFinder {
 	/**
 	 * @since 0.5
 	 *
-	 * @param Change $change
+	 * @param EntityChange $change
 	 *
 	 * @return Iterator<PageEntityUsages>
 	 */

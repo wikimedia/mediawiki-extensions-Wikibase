@@ -81,30 +81,24 @@ class WikiPageUpdater implements PageUpdater {
 	/**
 	 * Injects an RC entry into the recentchanges, using the the given title and attribs
 	 *
-	 * @param Title $title
+	 * @param Title[] $titles
 	 * @param array $attribs
-	 *
-	 * @return bool
 	 */
-	public function injectRCRecord( Title $title, array $attribs ) {
+	public function injectRCRecords( array $titles, array $attribs ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( !$title->exists() ) {
-			wfProfileOut( __METHOD__ );
-			return false;
+		foreach ( $titles as $title ) {
+			if ( !$title->exists() ) {
+				continue;
+			}
+
+			$rc = ExternalRecentChange::newFromAttribs( $attribs, $title );
+
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
+			$rc->save();
 		}
 
-		//FIXME: The same change may be reported to several target pages;
-		//       The comment we generate should be adapted to the role that page
-		//       plays in the change, e.g. when a sitelink changes from one page to another,
-		//       the link was effectively removed from one and added to the other page.
-		$rc = ExternalRecentChange::newFromAttribs( $attribs, $title );
-
-		// @todo batch these
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
-		$rc->save();
-
 		wfProfileOut( __METHOD__ );
-		return true;
 	}
+
 }
