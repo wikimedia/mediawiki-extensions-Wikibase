@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_a248f332",
+        "filename": "lib/includes/Validators/UrlSchemeValidators.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-04T12:06:15Z",
+      "side": 1,
+      "message": "these are not all http.  bad-url would be sufficient imho.",
+      "revId": "1d7c64e7b9d277401007bc1a9107dca713eabcd9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
