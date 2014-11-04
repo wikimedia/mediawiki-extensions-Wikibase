@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_b6111561",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-04T19:52:01Z",
+      "side": 1,
+      "message": "Determine :)",
+      "revId": "7bf87f5e9bfd4dee925bbb91f6f80ae3860100c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
