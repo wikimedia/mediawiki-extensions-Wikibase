@@ -742,8 +742,7 @@ final class WikibaseClient {
 				$siteId
 			),
 			$siteId,
-			$this->settings->getSetting( 'injectRecentChanges' ),
-			$this->settings->getSetting( 'allowDataTransclusion' )
+			$this->settings->getSetting( 'injectRecentChanges' )
 		);
 	}
 
