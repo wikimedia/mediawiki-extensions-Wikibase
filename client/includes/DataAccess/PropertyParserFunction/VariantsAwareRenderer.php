@@ -6,8 +6,6 @@ use Language;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * Handler of the {{#property}} parser function.
- *
  * @since 0.5
  *
  * @licence GNU GPL v2+
@@ -16,7 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
  */
-class VariantsAwareRenderer implements PropertyClaimsRenderer {
+class VariantsAwareRenderer implements PropertyParserFunctionRenderer {
 
 	/**
 	 * @param string[]

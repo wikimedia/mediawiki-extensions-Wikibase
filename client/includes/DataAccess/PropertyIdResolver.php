@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\PropertyLabelResolver;
 
 /**
@@ -18,21 +19,22 @@ use Wikibase\PropertyLabelResolver;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
- * @author Liangent < liangent@gmail.com >
  */
 class PropertyIdResolver {
 
 	private $propertyLabelResolver;
 
-	public function __construct( PropertyLabelResolver $propertyLabelResolver ) {
+	public function __construct(
+		PropertyLabelResolver $propertyLabelResolver
+	) {
 		$this->propertyLabelResolver = $propertyLabelResolver;
 	}
 
 	/**
 	 * @param string $propertyLabelOrId
 	 * @param string $languageCode
+	 *
+	 * @fixme throw PropertyIdNotFoundException, but needs localizing.
 	 *
 	 * @throws PropertyLabelNotResolvedException
 	 * @return PropertyId

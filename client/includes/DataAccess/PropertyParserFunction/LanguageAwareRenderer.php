@@ -19,8 +19,6 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Client\Usage\UsageAccumulator;
 
 /**
- * PropertyClaimsRenderer of the {{#property}} parser function.
- *
  * @fixme see what code can be shared with Lua handling code.
  *
  * @since 0.5
@@ -31,13 +29,16 @@ use Wikibase\Client\Usage\UsageAccumulator;
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
  */
-class LanguageAwareRenderer implements PropertyClaimsRenderer {
+class LanguageAwareRenderer implements PropertyParserFunctionRenderer {
 
 	/**
 	 * @var Language
 	 */
 	private $language;
 
+	/**
+	 * @var PropertyIdResolver
+	 */
 	private $propertyIdResolver;
 
 	/**

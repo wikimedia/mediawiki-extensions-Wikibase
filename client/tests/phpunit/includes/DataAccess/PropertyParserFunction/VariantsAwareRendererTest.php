@@ -45,7 +45,7 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		$languageRenderer = $this->getLanguageAwareRenderer();
 
 		$rendererFactory = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
+				'Wikibase\DataAccess\PropertyParserFunction\PropertyParserFunctionRendererFactory'
 			)
 			->disableOriginalConstructor()
 			->getMock();

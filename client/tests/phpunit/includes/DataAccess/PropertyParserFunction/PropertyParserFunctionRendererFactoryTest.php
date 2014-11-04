@@ -8,13 +8,13 @@ use ParserOptions;
 use Title;
 use User;
 use Wikibase\Client\Usage\HashUsageAccumulator;
-use Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory;
+use Wikibase\DataAccess\PropertyParserFunction\PropertyParserFunctionRendererFactory;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory
+ * @covers Wikibase\DataAccess\PropertyParserFunction\PropertyParserFunctionRendererFactory
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -24,12 +24,12 @@ use Wikibase\Lib\SnakFormatter;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
+class PropertyParserFunctionRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNewRendererForInterfaceMessage() {
 		$parser = $this->getParser( 'zh', true, false, false, Parser::OT_HTML );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getPropertyParserFunctionRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
@@ -41,7 +41,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewRenderer_contentConversionDisabled() {
 		$parser = $this->getParser( 'zh', false, true, false, Parser::OT_HTML );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getPropertyParserFunctionRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
@@ -53,7 +53,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewRenderer_titleConversionDisabled() {
 		$parser = $this->getParser( 'zh', false, false, true, Parser::OT_HTML );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getPropertyParserFunctionRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
@@ -68,7 +68,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewRenderer_forParserFormat( $languageCode, $format ) {
 		$parser = $this->getParser( $languageCode, false, false, false, $format );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getPropertyParserFunctionRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
@@ -88,7 +88,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewRenderer_forNonVariantLanguage() {
 		$parser = $this->getParser( 'en', true, false, false, Parser::OT_HTML );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getPropertyParserFunctionRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
@@ -100,7 +100,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewRender_forVariantLanguage() {
 		$parser = $this->getParser( 'zh', false, false, false, Parser::OT_HTML );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getPropertyParserFunctionRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
@@ -109,8 +109,8 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	private function getPropertyClaimsRendererFactory() {
-		return new PropertyClaimsRendererFactory(
+	private function getPropertyParserFunctionRendererFactory() {
+		return new PropertyParserFunctionRendererFactory(
 			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder(),
 			$this->getLanguageFallbackChainFactory(),

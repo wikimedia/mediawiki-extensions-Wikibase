@@ -20,10 +20,10 @@ use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
  */
-class Runner {
+class PropertyParserFunctionRunner {
 
 	/**
-	 * @var PropertyClaimsRendererFactory
+	 * @var PropertyParserFunctionRendererFactory
 	 */
 	private $rendererFactory;
 
@@ -38,12 +38,12 @@ class Runner {
 	private $siteId;
 
 	/**
-	 * @param PropertyCLaimsRendererFactory $rendererFactory
+	 * @param PropertyParserFunctionRendererFactory $rendererFactory
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param string $siteId
 	 */
 	public function __construct(
-		PropertyClaimsRendererFactory $rendererFactory,
+		PropertyParserFunctionRendererFactory $rendererFactory,
 		SiteLinkLookup $siteLinkLookup,
 		$siteId
 	) {

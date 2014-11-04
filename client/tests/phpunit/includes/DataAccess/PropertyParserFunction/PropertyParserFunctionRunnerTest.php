@@ -7,13 +7,13 @@ use ParserOptions;
 use ParserOutput;
 use Title;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRenderer;
-use Wikibase\DataAccess\PropertyParserFunction\Runner;
+use Wikibase\DataAccess\PropertyParserFunction\PropertyParserFunctionRenderer;
+use Wikibase\DataAccess\PropertyParserFunction\PropertyParserFunctionRunner;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**
- * @covers Wikibase\DataAccess\PropertyParserFunction\Runner
+ * @covers Wikibase\DataAccess\PropertyParserFunction\PropertyParserFunctionRunner
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -23,13 +23,13 @@ use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RunnerTest extends \PHPUnit_Framework_TestCase {
+class PropertyParserFunctionRunnerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testRunPropertyParserFunction() {
 		$itemId = new ItemId( 'Q3' );
 
-		$runner = new Runner(
-			$this->getPropertyClaimsRendererFactory(),
+		$runner = new PropertyParserFunctionRunner(
+			$this->getPropertyParserFunctionRendererFactory(),
 			$this->getSiteLinkLookup( $itemId ),
 			'enwiki'
 		);
@@ -66,11 +66,11 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		return $siteLinkLookup;
 	}
 
-	private function getPropertyClaimsRendererFactory() {
+	private function getPropertyParserFunctionRendererFactory() {
 		$renderer = $this->getRenderer();
 
 		$rendererFactory = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
+				'Wikibase\DataAccess\PropertyParserFunction\PropertyParserFunctionRendererFactory'
 			)
 			->disableOriginalConstructor()
 			->getMock();
@@ -84,7 +84,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 	private function getRenderer() {
 		$renderer = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRenderer'
+				'Wikibase\DataAccess\PropertyParserFunction\PropertyParserFunctionRenderer'
 			)
 			->disableOriginalConstructor()
 			->getMock();

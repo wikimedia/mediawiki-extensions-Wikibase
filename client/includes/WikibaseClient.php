@@ -19,8 +19,8 @@ use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 use Wikibase\ClientStore;
 use Wikibase\DataAccess\PropertyIdResolver;
-use Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory;
-use Wikibase\DataAccess\PropertyParserFunction\Runner;
+use Wikibase\DataAccess\PropertyParserFunction\PropertyParserFunctionRunner;
+use Wikibase\DataAccess\PropertyParserFunction\PropertyParserFunctionRendererFactory;
 use Wikibase\DataAccess\PropertyParserFunction\SnaksFinder;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -709,9 +709,9 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return RendererFactory
+	 * @return PropertyParserFunctionRendererFactory
 	 */
-	private function getPropertyClaimsRendererFactory() {
+	private function getPropertyParserFunctionRendererFactory() {
 		$snaksFinder = new SnaksFinder(
 			$this->getEntityLookup()
 		);
@@ -720,7 +720,7 @@ final class WikibaseClient {
 			$this->getStore()->getPropertyLabelResolver()
 		);
 
-		return new PropertyClaimsRendererFactory(
+		return new PropertyParserFunctionRendererFactory(
 			$propertyIdResolver,
 			$snaksFinder,
 			$this->getLanguageFallbackChainFactory(),
@@ -732,8 +732,8 @@ final class WikibaseClient {
 	 * @return Runner
 	 */
 	public function getPropertyParserFunctionRunner() {
-		return new Runner(
-			$this->getPropertyClaimsRendererFactory(),
+		return new PropertyParserFunctionRunner(
+			$this->getPropertyParserFunctionRendererFactory(),
 			$this->getStore()->getSiteLinkTable(),
 			$this->getSettings()->getSetting( 'siteGlobalID' )
 		);
