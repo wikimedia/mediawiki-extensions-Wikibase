@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_3bd96e83",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-04T19:36:42Z",
+      "side": 1,
+      "message": "the Status contains the rendering or an error, which we render.  agree it is a bit odd how that works and likely can be improved.",
+      "parentUuid": "6e936f18_22506336",
+      "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_0244476d",
         "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-04T14:35:28Z",
       "side": 1,
       "message": "Not sure why you call this a \"render\" function. It does not render anything as far as I can tell. Not important, however.",
+      "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_dbcf2ab4",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-04T19:36:42Z",
+      "side": 1,
+      "message": "it formats the snaks and returns that with the Status.  agree this is doing a lot and should be changed, split up, etc. however I don\u0027t want to do that in this or these patches.\n\nmaybe can be considered for a follow up task?",
+      "parentUuid": "6e936f18_0244476d",
       "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_b686f5bc",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/PropertyIdResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-04T19:36:42Z",
+      "side": 1,
+      "message": "fixed this in one of the follow up patches",
+      "parentUuid": "6e936f18_a2631309",
+      "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_822ff79b",
         "filename": "client/includes/DataAccess/PropertyParserFunction/PropertyIdResolver.php",
         "patchSetId": 6
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_7bb93628",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/PropertyIdResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-04T19:36:42Z",
+      "side": 1,
+      "message": "added check for if the property exists in https://gerrit.wikimedia.org/r/#/c/171009/\n\nas for name, what do you suggest? i\u0027m always open to better naming ideas :) maybe this is more of a PropertyId parser of some kind?",
+      "parentUuid": "6e936f18_822ff79b",
+      "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_8258575a",
         "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/PropertyIdResolverTest.php",
         "patchSetId": 6
@@ -81,6 +153,24 @@
       "writtenOn": "2014-11-04T14:35:28Z",
       "side": 1,
       "message": "This means this will succeed for property id strings that do not exist? I don\u0027t think this is a good idea.",
+      "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_76e2ad9d",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/PropertyIdResolverTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-04T19:36:42Z",
+      "side": 1,
+      "message": "agree that we should check if the property exists here.\n\ndone in https://gerrit.wikimedia.org/r/#/c/171009/",
+      "parentUuid": "6e936f18_8258575a",
       "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
