@@ -367,4 +367,56 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( $qualifiers, $claim->getQualifiers() );
 	}
 
+	public function testEquals() {
+		$statement = $this->newStatement();
+		$target = $this->newStatement();
+
+		$this->assertTrue( $statement->equals( $target ) );
+	}
+
+	/**
+	 * @dataProvider notEqualsProvider
+	 */
+	public function testNotEquals( Statement $statement, Statement $target, $message ) {
+		$this->assertFalse( $statement->equals( $target ), $message );
+	}
+
+	public function notEqualsProvider() {
+		$statement = $this->newStatement();
+
+		$statementWithoutQualifiers = $this->newStatement();
+		$statementWithoutQualifiers->getClaim()->setQualifiers( new SnakList() );
+
+		$statementWithoutReferences = $this->newStatement();
+		$statementWithoutReferences->setReferences( new ReferenceList() );
+
+		$statementWithPreferredRank = $this->newStatement();
+		$statementWithPreferredRank->setRank( Statement::RANK_PREFERRED );
+
+		$statementMainSnakNotEqual = $this->newStatement();
+		$statementMainSnakNotEqual->setClaim(
+			new Claim( new PropertyNoValueSnak( 9000 ), $qualifiers )
+		);
+
+		return array(
+			array( $statement, $statementWithoutQualifiers, 'qualifiers not equal' ),
+			array( $statement, $statementWithoutReferences, 'references not equal' ),
+			array( $statement, $statementWithPreferredRank, 'rank not equal' ),
+			array( $statement, $statementMainSnakNotEqual, 'main snak not equal' )
+		);
+	}
+
+	private function newStatement() {
+		$qualifiers = new SnakList( array( new PropertyNoValueSnak( 23 ) ) );
+
+		$statement = new Statement(
+			new Claim( new PropertyNoValueSnak( 42 ), $qualifiers ),
+			new ReferenceList( array( new PropertyNoValueSnak( 1337 ) ) )
+		);
+
+		$statement->setRank( Statement::RANK_NORMAL );
+
+		return $statement;
+	}
+
 }
