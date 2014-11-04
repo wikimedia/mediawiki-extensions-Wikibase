@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
 use Diff\Differ\MapDiffer;
@@ -8,7 +8,7 @@ use Site;
 use SiteList;
 use Title;
 use Wikibase\Change;
-use Wikibase\ChangeHandler;
+use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\ChangesTable;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Store\TitleFactory;
@@ -23,10 +23,13 @@ use Wikibase\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\NamespaceChecker;
-use Wikibase\PageUpdater;
+use Wikibase\Client\Changes\PageUpdater;
+use Wikibase\Client\Tests\Changes\MockPageUpdater;
+use Wikibase\Test\MockRepository;
+use Wikibase\Test\TestChanges;
 
 /**
- * @covers Wikibase\ChangeHandler
+ * @covers Wikibase\Client\Changes\ChangeHandler
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -776,7 +779,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$handleChangeCallCount = 0;
 		$handleChangesCallCount = 0;
 
-		$changeHandler = $this->getMockBuilder( 'Wikibase\ChangeHandler' )
+		$changeHandler = $this->getMockBuilder( 'Wikibase\Client\Changes\ChangeHandler' )
 			->disableOriginalConstructor()->setMethods( array( 'coalesceChanges', 'handleChange' ) )->getMock();
 
 		$changeHandler->expects( $this->once() )

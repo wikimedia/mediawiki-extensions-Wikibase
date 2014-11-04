@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
 use Title;
@@ -11,6 +11,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Client\Changes\AffectedPagesFinder;
+use Wikibase\Test\TestChanges;
 
 /**
  * @covers Wikibase\Client\Changes\AffectedPagesFinder

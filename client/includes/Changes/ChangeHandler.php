@@ -1,15 +1,20 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\Changes;
 
 use InvalidArgumentException;
 use MWException;
 use Title;
+use Wikibase\Change;
 use Wikibase\Client\Changes\AffectedPagesFinder;
+use Wikibase\Client\Changes\PageUpdater;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
+use Wikibase\EntityChange;
+use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\SiteLinkCommentCreator;
 
 /**
  * Interface for change handling. Whenever a change is detected,
@@ -344,7 +349,7 @@ class ChangeHandler {
 			$coalesced = array_merge( $coalesced, $entityChanges );
 		}
 
-		usort( $coalesced, 'Wikibase\ChangeHandler::compareChangesByTimestamp' );
+		usort( $coalesced, 'Wikibase\Client\Changes\ChangeHandler::compareChangesByTimestamp' );
 
 		wfDebugLog( __CLASS__, __METHOD__ . ": coalesced "
 			. count( $changes ) . " into " . count( $coalesced ) . " changes"  );

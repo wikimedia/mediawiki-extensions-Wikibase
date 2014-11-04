@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\Changes;
 
 use Job;
 use JobQueueGroup;
