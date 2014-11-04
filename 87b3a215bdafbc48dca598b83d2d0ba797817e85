@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_22506336",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-04T14:35:28Z",
+      "side": 1,
+      "message": "Won\u0027t this fail if the resolving above returns null? Ok, doesn\u0027t return null but throws an exception instead. Ok. Maybe add the @throws?",
+      "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_0244476d",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-04T14:35:28Z",
+      "side": 1,
+      "message": "Not sure why you call this a \"render\" function. It does not render anything as far as I can tell. Not important, however.",
+      "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_a2631309",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/PropertyIdResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-04T14:35:28Z",
+      "side": 1,
+      "message": "Uh? How? I think this should be just you.",
+      "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_822ff79b",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/PropertyIdResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-04T14:35:28Z",
+      "side": 1,
+      "message": "The problem with this approach is that it will \"succeed\" for all property id strings, no matter if they exist or not. But it will fail if you are asking for a label that does not exist.\n\nShort: Labels may exist or not. Property ids always exist. This is an odd combination of two very different things in a single service.\n\nI\u0027m not sure if this should be called a \"resolver\". Can we find a better name?",
+      "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8258575a",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/PropertyIdResolverTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-04T14:35:28Z",
+      "side": 1,
+      "message": "This means this will succeed for property id strings that do not exist? I don\u0027t think this is a good idea.",
+      "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
