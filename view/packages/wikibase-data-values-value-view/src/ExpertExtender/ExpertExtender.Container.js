@@ -66,11 +66,12 @@
 		 * A helper function for calling the child just like util.Extendable does
 		 *
 		 * @param {string} method
-		 * @param [Array] args
+		 * @param {*[]} [args]
 		 */
 		_callChild: function( method, args ) {
-			var m = this._child[ method ];
-			m && m.apply( this._child, args || [] );
+			if( this._child[method] ) {
+				this._child[method].apply( this._child, args || [] );
+			}
 		}
 	} );
 } ( jQuery, jQuery.valueview.ExpertExtender ) );

@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  */
-
+/* jshint nonew: false */
 ( function( $, ExpertExtender, testExpertExtenderExtension, util, sinon, QUnit, CompletenessTest ) {
 	'use strict';
 

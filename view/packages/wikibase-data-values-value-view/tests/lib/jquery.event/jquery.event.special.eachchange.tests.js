@@ -16,7 +16,7 @@
 		};
 
 	/**
-	 * @param {Object} attributes
+	 * @param {Object} [attributes]
 	 * @return {jQuery}
 	 */
 	function generateInputElement( attributes ) {
@@ -25,7 +25,7 @@
 			'type': 'text',
 			'name': 'test',
 			'value': ''
-		}, attributes ) );
+		}, attributes || {} ) );
 	}
 
 	QUnit.module( 'jquery.event.special.eachchange', {
@@ -213,9 +213,7 @@
 		}
 	);
 
-	QUnit.test( 'Setting prevVal', function( assert ) {
-		expect( 4 );
-
+	QUnit.test( 'Setting prevVal', 4, function( assert ) {
 		var $subject = generateInputElement();
 		var expectedPrevVal = 'a';
 

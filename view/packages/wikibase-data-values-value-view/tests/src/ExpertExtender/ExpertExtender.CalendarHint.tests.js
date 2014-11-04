@@ -2,8 +2,17 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  */
-
-( function( $, ExpertExtender, testExpertExtenderExtension, Time, MessageProvider, sinon, QUnit, CompletenessTest ) {
+/* jshint nonew: false */
+( function(
+	$,
+	ExpertExtender,
+	testExpertExtenderExtension,
+	Time,
+	MessageProvider,
+	sinon,
+	QUnit,
+	CompletenessTest
+) {
 	'use strict';
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.CalendarHint' );
