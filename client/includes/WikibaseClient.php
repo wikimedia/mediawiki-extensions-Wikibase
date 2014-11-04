@@ -758,7 +758,7 @@ final class WikibaseClient {
 			$this->getNamespaceChecker(),
 			new TitleFactory(),
 			$this->settings->getSetting( 'siteGlobalID' ),
-			true
+			$this->getContentLanguage()->getCode()
 		);
 	}
 
@@ -773,8 +773,7 @@ final class WikibaseClient {
 			new WikiPageUpdater(),
 			$this->getStore()->getEntityRevisionLookup(),
 			$this->getSite()->getGlobalId(),
-			$this->getSettings()->getSetting( 'injectRecentChanges' ),
-			$this->getSettings()->getSetting( 'allowDataTransclusion' )
+			$this->getSettings()->getSetting( 'injectRecentChanges' )
 		);
 	}
 
