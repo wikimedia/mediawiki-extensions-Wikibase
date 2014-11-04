@@ -2,7 +2,7 @@
 
 ## Version 2.2.0 (dev)
 
-*
+* Added rank comparison to `Statement::equals`
 
 ## Version 2.1.0 (2014-10-27)
 
