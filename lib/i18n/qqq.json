@@ -93,8 +93,6 @@
 	"wikibase-validator-bad-value-type": "Input validation error shown when the value has the wrong type for the property it is applied to.\n\nThis kind of error is unlikely to occur during normal operation, since the user interface should prevent illegal values from being entered.\n\nParameters:\n* $1 - the actual value type\n* $2 - the expected value type\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-bad-url": "Input validation error shown when the value is an invalid URL.\n\nParameters:\n* $1 - the malformed URL\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-bad-url-scheme": "Input validation error shown when the value is a URL using an unsupported protocol (scheme).\n\nParameters:\n* $1 - the scheme name\n{{Related|Wikibase-validator}}",
-	"wikibase-validator-bad-http-url": "Input validation error shown when the value is an HTTP or HTTPS URL.\n\nParameters:\n* $1 - the malformed URL\n{{Related|Wikibase-validator}}",
-	"wikibase-validator-bad-mailto-url": "Input validation error shown when the value is an invalid \"mailto\" URL.\n\nParameters:\n* $1 - the malformed URL\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-unknown-unit": "Input validation error when the value has an unknown unit.\n\nParameters:\n* $1 - the unknown unit\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-not-allowed": "Input validation error when the given value is not found in the known list of allowed values.\n\nParameters:\n* $1 - the illegal value\n{{Related|Wikibase-validator}}",
 	"datatypes-type-wikibase-item": "The name of a data type for items in Wikibase.\n{{Identical|Item}}",
