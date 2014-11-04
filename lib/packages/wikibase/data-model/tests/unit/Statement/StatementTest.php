@@ -378,7 +378,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider notEqualsProvider
 	 */
 	public function testNotEquals( Statement $statement, Statement $target, $message ) {
-		$this->assertFalse( $statement->equals( $target ) );
+		$this->assertFalse( $statement->equals( $target ), $message );
 	}
 
 	public function notEqualsProvider() {
