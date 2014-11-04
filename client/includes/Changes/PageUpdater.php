@@ -48,11 +48,11 @@ interface PageUpdater {
 	/**
 	 * Injects an RC entry into the recentchanges, using the the given title and attribs
 	 *
-	 * @param Title $title
-	 * @param array $attribs
+	 * @since 0.5
 	 *
-	 * @return bool
+	 * @param Title[] $titles
+	 * @param array $attribs
 	 */
-	public function injectRCRecord( Title $title, array $attribs );
+	public function injectRCRecords( array $titles, array $attribs );
 
 }

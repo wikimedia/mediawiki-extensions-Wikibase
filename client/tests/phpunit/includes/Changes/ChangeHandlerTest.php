@@ -13,7 +13,6 @@ use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -83,7 +82,6 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			$updater ? : new MockPageUpdater(),
 			$transformer,
 			'enwiki',
-			true,
 			true
 		);
 
@@ -191,87 +189,61 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 	// ==========================================================================================
 
-	public static function provideGetActions() {
-		$changes = TestChanges::getChanges();
-
-		$none = 0;
-		$any = 0xFFFF;
-		$all = ChangeHandler::HISTORY_ENTRY_ACTION
-			| ChangeHandler::LINKS_UPDATE_ACTION
-			| ChangeHandler::PARSER_PURGE_ACTION
-			| ChangeHandler::RC_ENTRY_ACTION
-			| ChangeHandler::WEB_PURGE_ACTION;
-
+	public static function provideGetUpdateActions() {
 		return array(
-			array( // #0
-				$changes['property-creation'], $none, $any
+			'empty' => array(
+				array(),
+				array(),
 			),
-			array( // #1
-				$changes['property-deletion'], $none, $any
+			'sitelink usage' => array( // #1
+				array( EntityUsage::SITELINK_USAGE ),
+				array( ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::PARSER_PURGE_ACTION )
 			),
-			array( // #2
-				$changes['property-set-label'], $none, $any
+			'label usage' => array(
+				array( EntityUsage::LABEL_USAGE ),
+				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::LINKS_UPDATE_ACTION )
 			),
-
-			array( // #3
-				$changes['item-creation'], $none, $any
+			'title usage' => array(
+				array( EntityUsage::TITLE_USAGE ),
+				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::LINKS_UPDATE_ACTION )
 			),
-			array( // #4
-				$changes['item-deletion'], $none, $any
+			'other usage' => array(
+				array( EntityUsage::OTHER_USAGE ),
+				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::LINKS_UPDATE_ACTION )
 			),
-			array( // #5
-				$changes['item-deletion-linked'], $all, $none
+			'all usage' => array(
+				array( EntityUsage::ALL_USAGE ),
+				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::LINKS_UPDATE_ACTION )
 			),
-
-			array( // #6
-				$changes['set-de-label'], $all, $none
-			),
-			array( // #7
-				$changes['set-en-label'], $all, $none // may change
-			),
-			array( // #8
-				$changes['set-en-aliases'], $none, $any
-			),
-
-			array( // #9
-				$changes['add-claim'], $all, $none
-			),
-			array( // #10
-				$changes['remove-claim'], $all, $none
-			),
-
-			array( // #11
-				$changes['set-dewiki-sitelink'], $all, $none // may change
-			),
-			array( // #12
-				$changes['set-enwiki-sitelink'], $all, $none // may change
-			),
-
-			array( // #13
-				$changes['change-dewiki-sitelink'], $all, $none // may change
-			),
-			array( // #14
-				$changes['change-enwiki-sitelink'], $all, $none // may change
-			),
-
-			array( // #15
-				$changes['remove-dewiki-sitelink'], $all, $none // may change
-			),
-			array( // #16
-				$changes['remove-enwiki-sitelink'], $all, $none // may change
+			'sitelink and other usage (no redundant links update)' => array(
+				array( EntityUsage::SITELINK_USAGE, EntityUsage::OTHER_USAGE ),
+				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::LINKS_UPDATE_ACTION )
 			),
 		);
 	}
 
 	/**
-	 * @dataProvider provideGetActions
+	 * @dataProvider provideGetUpdateActions
 	 */
-	public function testGetActions( Change $change, $expected, $unexpected ) {
+	public function testGetUpdateActions( $aspects, $expected, $not = array() ) {
 		$handler = $this->newChangeHandler();
-		$actions = $handler->getActions( $change );
+		$actions = $handler->getUpdateActions( $aspects );
 
-		$this->assertEquals( $expected, ( $actions & $expected ), "expected actions" );
-		$this->assertEquals( 0, ( $actions & $unexpected ), "unexpected actions" );
+		sort( $expected );
+		sort( $actions );
+
+		// check that $actions contains AT LEAST $expected
+		$actual = array_intersect( $actions, $expected );
+		$this->assertEquals( array_values( $expected ), array_values( $actual ), "expected actions" );
+
+		$unexpected = array_intersect( $actions, $not );
+		$this->assertEmpty( array_values( $unexpected ), "unexpected actions: " . implode( '|', $unexpected ) );
 	}
 
 	public static function provideGetEditComment() {
@@ -502,120 +474,6 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function provideGetPagesToUpdate() {
-		$changes = TestChanges::getChanges();
-
-		return array(
-			array( // #0
-				$changes['property-creation'],
-				array( 'q100' => array() ),
-				array()
-			),
-			array( // #1
-				$changes['property-deletion'],
-				array( 'q100' => array() ),
-				array()
-			),
-			array( // #2
-				$changes['property-set-label'],
-				array( 'q100' => array() ),
-				array()
-			),
-
-			array( // #3
-				$changes['item-creation'],
-				array( 'q100' => array() ),
-				array()
-			),
-			array( // #4
-				$changes['item-deletion'],
-				array( 'q100' => array() ),
-				array()
-			),
-			array( // #5
-				$changes['item-deletion-linked'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array( 'Emmy2' )
-			),
-
-			array( // #6
-				$changes['set-de-label'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array(), // For the dummy page, only label and sitelink usage is defined.
-			),
-			array( // #7
-				$changes['set-de-label'],
-				array( 'q100' => array( 'enwiki' => 'User:Emmy2' ) ), // bad namespace
-				array( )
-			),
-			array( // #8
-				$changes['set-en-label'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array( 'Emmy2' )
-			),
-			array( // #8
-				$changes['set-en-label'],
-				array( 'q100' => array( 'enwiki' => 'User:Emmy2' ) ), // bad namespace
-				array( )
-			),
-			array( // #9
-				$changes['set-en-aliases'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array(), // For the dummy page, only label and sitelink usage is defined.
-			),
-
-			array( // #10
-				$changes['add-claim'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array( ) // statements are ignored
-			),
-			array( // #11
-				$changes['remove-claim'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array( ) // statements are ignored
-			),
-
-			array( // #12
-				$changes['set-dewiki-sitelink'],
-				array( 'q100' => array() ),
-				array( ) // not yet linked
-			),
-			array( // #13
-				$changes['set-enwiki-sitelink'],
-				array( 'q100' => array( 'enwiki' => 'Emmy' ) ),
-				array( 'Emmy' )
-			),
-
-			array( // #14
-				$changes['change-dewiki-sitelink'],
-				array( 'q100' => array( 'enwiki' => 'Emmy' ) ),
-				array( 'Emmy' )
-			),
-			array( // #15
-				$changes['change-enwiki-sitelink'],
-				array( 'q100' => array( 'enwiki' => 'Emmy' ), 'q200' => array( 'enwiki' => 'Emmy2' ) ),
-				array( 'Emmy', 'Emmy2' ),
-				true
-			),
-			array( // #16
-				$changes['change-enwiki-sitelink-badges'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array( 'Emmy2' ) // do we really want/need this to be updated?
-			),
-
-			array( // #17
-				$changes['remove-dewiki-sitelink'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array( 'Emmy2' )
-			),
-			array( // #18
-				$changes['remove-enwiki-sitelink'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				array( 'Emmy2' )
-			),
-		);
-	}
-
 	private function updateMockRepo( MockRepository $repo, $entities ) {
 		foreach ( $entities as $id => $siteLinks ) {
 			if ( !( $siteLinks instanceof Entity ) ) {
@@ -639,83 +497,145 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
-	private function titles2strings( array $titles ) {
-		return array_map(
-			function ( Title $title ) {
-				return $title->getPrefixedDBKey();
-			},
-			$titles
-		);
-	}
-
-	/**
-	 * @dataProvider provideGetPagesToUpdate
-	 */
-	public function testGetPagesToUpdate( Change $change, $entities, array $expected, $dummy = false ) {
-		$handler = $this->newChangeHandler( null, $entities );
-
-		$toUpdate = $handler->getPagesToUpdate( $change );
-		$toUpdate = $this->titles2strings( $toUpdate );
-
-		$this->assertArrayEquals( $expected, $toUpdate );
-	}
-
-	public static function provideUpdatePages() {
-		$rc = WikibaseClient::getDefaultInstance()->getSettings()
-				->getSetting( 'injectRecentChanges' );
-
-		$pto = self::provideGetPagesToUpdate();
-
-		$cases = array();
-
-		foreach ( $pto as $case ) {
-			$updated = $case[2];
-
-			$cases[] = array(
-				$case[0], // $change
-				$case[1], // $entities
-				array(    // $expected // todo: depend on getAction()
-					'purgeParserCache' => $updated,
-					'purgeWebCache' => $updated,
-					'scheduleRefreshLinks' => $updated,
-					'injectRCRecord' => ( $rc ? $updated : array() ),
-				)
-			);
-		}
-
-		return $cases;
-	}
-
-	/**
-	 * @dataProvider provideUpdatePages
-	 */
-	public function testUpdatePages( Change $change, $entities, array $expected ) {
-		$updater = new MockPageUpdater();
-		$handler = $this->newChangeHandler( $updater, $entities );
-
-		$toUpdate = $handler->getPagesToUpdate( $change );
-		$actions = $handler->getActions( $change );
-
-		$handler->updatePages( $change, $actions, $toUpdate );
-		$updates = $updater->getUpdates();
-
-		foreach ( $expected as $k => $exp ) {
-			$up = array_keys( $updates[$k] );
-			$this->assertArrayEquals( $exp, $up );
-		}
-
-		if ( isset( $updates['injectRCRecord'] ) ) {
-			foreach ( $updates['injectRCRecord'] as $rcAttr ) {
-				$this->assertType( 'array', $rcAttr );
-				$this->assertArrayHasKey( 'wikibase-repo-change', $rcAttr );
-				$this->assertType( 'array', $rcAttr['wikibase-repo-change'] );
-				$this->assertArrayHasKey( 'entity_type', $rcAttr['wikibase-repo-change'] );
-			}
-		}
-	}
-
 	public static function provideHandleChange() {
-		return self::provideUpdatePages();
+		$changes = TestChanges::getChanges();
+
+		$empty = array(
+			'purgeParserCache' => array(),
+			'scheduleRefreshLinks' => array(),
+			'purgeWebCache' => array(),
+			'injectRCRecord' => array(),
+		);
+
+		$emmy2PurgeParser = array(
+			'purgeParserCache' => array( 'Emmy2' => true ),
+			'scheduleRefreshLinks' => array(),
+			'purgeWebCache' => array( 'Emmy2' => true ),
+			'injectRCRecord' => array( 'Emmy2' => true ),
+		);
+
+		$emmyUpdateLinks = array(
+			'purgeParserCache' => array(),
+			'scheduleRefreshLinks' => array( 'Emmy' => true ),
+			'purgeWebCache' => array( 'Emmy' => true ),
+			'injectRCRecord' => array( 'Emmy' => true ),
+		);
+
+		$emmy2UpdateLinks = array(
+			'purgeParserCache' => array( ),
+			'scheduleRefreshLinks' => array( 'Emmy2' => true ),
+			'purgeWebCache' => array( 'Emmy2' => true ),
+			'injectRCRecord' => array( 'Emmy2' => true ),
+		);
+
+		return array(
+			array( // #0
+				$changes['property-creation'],
+				array( 'q100' => array() ),
+				$empty
+			),
+			array( // #1
+				$changes['property-deletion'],
+				array( 'q100' => array() ),
+				$empty
+			),
+			array( // #2
+				$changes['property-set-label'],
+				array( 'q100' => array() ),
+				$empty
+			),
+
+			array( // #3
+				$changes['item-creation'],
+				array( 'q100' => array() ),
+				$empty
+			),
+			array( // #4
+				$changes['item-deletion'],
+				array( 'q100' => array() ),
+				$empty
+			),
+			array( // #5
+				$changes['item-deletion-linked'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				$emmy2PurgeParser
+			),
+
+			array( // #6
+				$changes['set-de-label'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				$empty, // For the dummy page, only label and sitelink usage is defined.
+			),
+			array( // #7
+				$changes['set-en-label'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				$emmy2PurgeParser
+			),
+			array( // #8
+				$changes['set-en-label'],
+				array( 'q100' => array( 'enwiki' => 'User:Emmy2' ) ), // bad namespace
+				$empty
+			),
+			array( // #9
+				$changes['set-en-aliases'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				$empty, // For the dummy page, only label and sitelink usage is defined.
+			),
+
+			array( // #10
+				$changes['add-claim'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				$empty // statements are ignored
+			),
+			array( // #11
+				$changes['remove-claim'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				$empty // statements are ignored
+			),
+
+			array( // #12
+				$changes['set-dewiki-sitelink'],
+				array( 'q100' => array() ),
+				$empty // not yet linked
+			),
+			array( // #13
+				$changes['set-enwiki-sitelink'],
+				array( 'q100' => array( 'enwiki' => 'Emmy' ) ),
+				$emmyUpdateLinks
+			),
+
+			array( // #14
+				$changes['change-dewiki-sitelink'],
+				array( 'q100' => array( 'enwiki' => 'Emmy' ) ),
+				$emmyUpdateLinks
+			),
+			array( // #15
+				$changes['change-enwiki-sitelink'],
+				array( 'q100' => array( 'enwiki' => 'Emmy' ), 'q200' => array( 'enwiki' => 'Emmy2' ) ),
+				array(
+					'purgeParserCache' => array(),
+					'scheduleRefreshLinks' => array( 'Emmy' => true, 'Emmy2' => true ),
+					'purgeWebCache' => array( 'Emmy' => true, 'Emmy2' => true ),
+					'injectRCRecord' => array( 'Emmy' => true, 'Emmy2' => true ),
+				)
+			),
+			array( // #16
+				$changes['change-enwiki-sitelink-badges'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				$emmy2UpdateLinks
+			),
+
+			array( // #17
+				$changes['remove-dewiki-sitelink'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				$emmy2UpdateLinks
+			),
+			array( // #18
+				$changes['remove-enwiki-sitelink'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				$emmy2UpdateLinks
+			),
+		);
 	}
 
 	/**
@@ -728,9 +648,11 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$handler->handleChange( $change );
 		$updates = $updater->getUpdates();
 
+		$this->assertSameSize( $expected, $updates );
+
 		foreach ( $expected as $k => $exp ) {
-			$up = array_keys( $updates[$k] );
-			$this->assertArrayEquals( $exp, $up );
+			$up = $updates[$k];
+			$this->assertEquals( array_keys( $exp ), array_keys( $up ), $k );
 		}
 	}
 
