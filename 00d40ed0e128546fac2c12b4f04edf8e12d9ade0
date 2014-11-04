@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_0e3b1338",
+        "filename": "lib/resources/entityChangers/AliasesChanger.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-04T10:35:59Z",
+      "side": 1,
+      "message": "Was never valid.",
+      "parentUuid": "6e936f18_9b81b0ca",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_db1f38b9",
         "filename": "lib/resources/entityChangers/AliasesChanger.js",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-03T11:18:35Z",
       "side": 1,
       "message": "Parameter documentation",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_ce444bc0",
+        "filename": "lib/resources/entityChangers/AliasesChanger.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-04T10:35:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_db1f38b9",
       "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_ae49bfd4",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-04T10:35:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_3bce5c32",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_9bc77015",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityview.js",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-03T11:18:35Z",
       "side": 1,
       "message": "Parameter documentation",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_0e89d3ef",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-04T10:35:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_9bc77015",
       "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_2e636f3c",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-04T10:35:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_dbdc18e8",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_3be5fc9f",
         "filename": "lib/resources/wikibase.utilities/wikibase.utilities.ui.js",
         "patchSetId": 8
@@ -115,6 +205,24 @@
       "writtenOn": "2014-11-03T11:18:35Z",
       "side": 1,
       "message": "Please be explicit: wb -\u003e wikibase; @return missing",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_ce59ab91",
+        "filename": "lib/resources/wikibase.utilities/wikibase.utilities.ui.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-04T10:35:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_3be5fc9f",
       "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_8e53a36d",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.claimgrouplistview.tests.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-04T10:35:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_5be80877",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_fbfeb434",
         "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.claimgrouplistview.tests.js",
         "patchSetId": 8
@@ -149,6 +275,24 @@
       "writtenOn": "2014-11-03T11:18:35Z",
       "side": 1,
       "message": "claimgrouplistview instanceof $.wikibase.claimgrouplistview,",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_4ec59b0c",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.claimgrouplistview.tests.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-04T10:35:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_fbfeb434",
       "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -172,6 +316,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_6ec89725",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.claimview.tests.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-04T10:35:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_b6336309",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_bbf82c47",
         "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.entityview.tests.js",
         "patchSetId": 8
@@ -189,6 +351,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_0ecf932e",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.entityview.tests.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-04T10:35:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_bbf82c47",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_764f1b98",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 8
@@ -200,6 +380,24 @@
       "writtenOn": "2014-11-03T16:46:27Z",
       "side": 1,
       "message": "Why is wikibase.store.FetchedContentUnserializer not renamed?",
+      "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_ced8cbf6",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-04T10:35:59Z",
+      "side": 1,
+      "message": "Because I would have to move files which gerrit handles badly, so I want to do it in a separate change.",
+      "parentUuid": "6e936f18_764f1b98",
       "revId": "00d40ed0e128546fac2c12b4f04edf8e12d9ade0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
