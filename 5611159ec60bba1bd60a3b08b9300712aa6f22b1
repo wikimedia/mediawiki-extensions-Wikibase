@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_85e7013b",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-04T14:52:33Z",
+      "side": 1,
+      "message": "why not simply do \"return array( ...\"? Then you don\u0027t need to do this global thing. Right now it looks like this will break if it\u0027s included from non-global scope. Or rather, the code trying to access the var via the global keyword will, since it won\u0027t be global.",
+      "revId": "5611159ec60bba1bd60a3b08b9300712aa6f22b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_a5c9ddaf",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-04T14:52:33Z",
+      "side": 1,
+      "message": "dead code at the moment. I suggest killing it and reintroducing a more sane version when needed",
+      "revId": "5611159ec60bba1bd60a3b08b9300712aa6f22b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
