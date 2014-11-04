@@ -27,9 +27,7 @@ dataValues.QuantityValue = ( function( dv, util ) {
 
 		if( typeof unit !== 'string' ) {
 			throw new Error( 'unit must be of type string' );
-		}
-
-		if( typeof unit === '' ) {
+		} else if( unit === '' ) {
 			throw new Error( 'unit can not be an empty string (use "1" for unit-less quantities)' );
 		}
 
