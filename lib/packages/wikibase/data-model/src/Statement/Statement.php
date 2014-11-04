@@ -168,6 +168,7 @@ class Statement extends Claim {
 		}
 
 		return $this->claimFieldsEqual( $target )
+			&& $this->rank === $target->getRank()
 			&& $this->references->equals( $target->references );
 	}
 
