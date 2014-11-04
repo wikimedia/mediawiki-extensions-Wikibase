@@ -63,10 +63,12 @@ if ( !defined( 'WBL_VERSION' ) ) {
 	throw new Exception( 'WikibaseClient depends on the WikibaseLib extension.' );
 }
 
+require_once __DIR__ . '/../lib/config/WikibaseLib.default.php';
+
 call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks;
 	global $wgAPIMetaModules, $wgSpecialPages, $wgSpecialPageGroups, $wgResourceModules;
-	global $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
+	global $wgWBLibDefaultSettings, $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -132,7 +134,7 @@ call_user_func( function() {
 	$wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
 
 	$wgWBClientSettings = array_merge(
-		require( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),
+		$wgWBLibDefaultSettings,
 		require( __DIR__ . '/config/WikibaseClient.default.php' )
 	);
 
