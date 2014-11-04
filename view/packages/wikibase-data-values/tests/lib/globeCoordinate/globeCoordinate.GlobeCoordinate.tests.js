@@ -1,6 +1,7 @@
 /**
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
+ * @author Thiemo Mättig
  */
 define( [
 	'globeCoordinate/globeCoordinate',
@@ -92,7 +93,7 @@ define( [
 
 	} );
 
-	QUnit.test( 'equals()', function( assert ) {
+	QUnit.test( 'Strict (in)equality', function( assert ) {
 		var gcDefs = [
 				{ latitude: 0, longitude: 0, precision: 1 },
 				{ latitude: -3, longitude: 2, precision: 1 },
@@ -114,28 +115,66 @@ define( [
 			$.each( gcDefs, function( i2, gcDef2 ) {
 				c2 = new globeCoordinate.GlobeCoordinate( gcDef2 );
 
-				if(
-					gcDef1.latitude === gcDef2.latitude
+				if( gcDef1.latitude === gcDef2.latitude
 					&& gcDef1.longitude === gcDef2.longitude
 					&& gcDef1.precision === gcDef2.precision
 				) {
-
 					assert.ok(
 						c1.equals( c2 ),
 						'Validated equality for data set #' + i1 + '.'
 					);
-
 				} else {
-
 					assert.ok(
 						!c1.equals( c2 ),
 						'Validated inequality of data set #' + i1 + ' to #' + i2 + '.'
 					);
-
 				}
-
 			} );
+		} );
 
+	} );
+
+	QUnit.test( 'Loose equality', function( assert ) {
+		var gcDefs = [
+				{ latitude: 0, longitude: 0, precision: 1 },
+				{ latitude: 0.01, longitude: 0, precision: 1 },
+				{ latitude: 0.1, longitude: 0, precision: 1 },
+				{ latitude: 0, longitude: 0.01, precision: 1 },
+				{ latitude: 0, longitude: 0.1, precision: 1 },
+				{ latitude: 0, longitude: 0, precision: 1.000000001 },
+				{ latitude: 0, longitude: 0, precision: 1.00000001 }
+			],
+			c1 = new globeCoordinate.GlobeCoordinate( gcDefs[0] );
+
+		$.each( gcDefs, function( i2, gcDef2 ) {
+			var c2 = new globeCoordinate.GlobeCoordinate( gcDef2 );
+			assert.ok(
+				c1.equals( c2 ),
+				'Validated equality of data set #0 to #' + i2 + '.'
+			);
+		} );
+
+	} );
+
+	QUnit.test( 'Loose inequality', function( assert ) {
+		var c1 = new globeCoordinate.GlobeCoordinate(
+				{ latitude: 0, longitude: 0, precision: 1 / 3600 }
+			),
+			gcDefs = [
+				{ latitude: 0.4 / 3600, longitude: 0, precision: 1 / 3600 },
+				{ latitude: 0.0002, longitude: 0, precision: 1 / 3600 },
+				{ latitude: 0, longitude: 0.4 / 3600, precision: 1 / 3600 },
+				{ latitude: 0, longitude: 0.0002, precision: 1 / 3600 },
+				{ latitude: 0, longitude: 0, precision: 1 / 3600 + 0.0000001 },
+				{ latitude: 0, longitude: 0, precision: 1 / 3600 - 0.0000001 }
+			];
+
+		$.each( gcDefs, function( i2, gcDef2 ) {
+			var c2 = new globeCoordinate.GlobeCoordinate( gcDef2 );
+			assert.ok(
+				!c1.equals( c2 ),
+				'Validated inequality to data set #' + i2 + '.'
+			);
 		} );
 
 	} );

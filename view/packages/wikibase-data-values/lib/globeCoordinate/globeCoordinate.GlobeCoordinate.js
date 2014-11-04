@@ -145,7 +145,7 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 			var gc1Iso6709 = globeCoordinate.iso6709( this.getDecimal() ),
 				gc2Iso6709 = globeCoordinate.iso6709( otherGlobeCoordinate.getDecimal() );
 
-			return this.getPrecision() === otherGlobeCoordinate.getPrecision()
+			return Math.abs( this.getPrecision() - otherGlobeCoordinate.getPrecision() ) < 0.00000001
 				&& gc1Iso6709 === gc2Iso6709;
 		}
 
