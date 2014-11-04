@@ -212,7 +212,9 @@ define( [
 
 				assert.ok(
 					value1.equals( value2 ) && value2.equals( value1 ),
-					'data value created from another data values JSON is equal to its donor'
+					'DataValue created from another DataValue\'s JSON is equal to its donor ('
+						+ JSON.stringify( jsonValue ) + ' -> '
+						+ JSON.stringify( value2.toJSON() ) + ').'
 				);
 			}
 		},
