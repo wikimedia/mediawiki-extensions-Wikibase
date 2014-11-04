@@ -3,6 +3,10 @@ language: php
 php:
 - 5.3
 
+env:
+- RUNJOB=jshint
+- RUNJOB=qunit
+
 script: bash ./build/travis/script.sh
 
 notifications:
