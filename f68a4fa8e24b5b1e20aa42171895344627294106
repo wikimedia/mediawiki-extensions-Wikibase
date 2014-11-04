@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_116fb3c1",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-04T20:15:21Z",
+      "side": 1,
+      "message": "agree and it\u0027s gone",
+      "parentUuid": "6e936f18_e5b36594",
+      "revId": "f68a4fa8e24b5b1e20aa42171895344627294106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_25694df6",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 3
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_b1659fdf",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-04T20:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_25694df6",
+      "revId": "f68a4fa8e24b5b1e20aa42171895344627294106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_057691d5",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 3
@@ -64,6 +100,24 @@
       "writtenOn": "2014-11-04T16:03:20Z",
       "side": 1,
       "message": "Having 4 parameters strongly suggests something is going wrong",
+      "revId": "f68a4fa8e24b5b1e20aa42171895344627294106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b1b4bf34",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-04T20:15:21Z",
+      "side": 1,
+      "message": "do agree, but this is no worse than before when using getPermissionStatusForEntity method.\n\nthen in later patches this method gets removed again since it\u0027s not needed at all to use this EntityPermissionChecker in ViewEntityAction.",
+      "parentUuid": "6e936f18_057691d5",
       "revId": "f68a4fa8e24b5b1e20aa42171895344627294106",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
