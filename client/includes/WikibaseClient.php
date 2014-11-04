@@ -16,6 +16,7 @@ use SiteStore;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\AffectedPagesFinder;
+use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
@@ -740,12 +741,17 @@ final class WikibaseClient {
 	 * @return ChangeHandler
 	 */
 	public function getChangeHandler() {
+		$siteId = $this->getSite()->getGlobalId();
+
 		return new ChangeHandler(
-			$this->getEntityChangeFactory(),
 			$this->getAffectedPagesFinder(),
 			new WikiPageUpdater(),
-			$this->getStore()->getEntityRevisionLookup(),
-			$this->getSite()->getGlobalId(),
+			new ChangeRunCoalescer(
+				$this->getStore()->getEntityRevisionLookup(),
+				$this->getEntityChangeFactory(),
+				$siteId
+			),
+			$siteId,
 			$this->getSettings()->getSetting( 'injectRecentChanges' ),
 			$this->getSettings()->getSetting( 'allowDataTransclusion' )
 		);
