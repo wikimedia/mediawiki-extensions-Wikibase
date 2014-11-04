@@ -33,6 +33,24 @@
       "revId": "5611159ec60bba1bd60a3b08b9300712aa6f22b1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e53e0587",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-04T14:54:25Z",
+      "side": 1,
+      "message": "I disagree. It\u0027s sensible to have placeholders for registering specific kinds of things in the right place. That way, you know where to look. I really don\u0027t want to see experimental types defined all over the place.",
+      "parentUuid": "6e936f18_a5c9ddaf",
+      "revId": "5611159ec60bba1bd60a3b08b9300712aa6f22b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
