@@ -69,8 +69,6 @@
 	"wikibase-validator-bad-value-type": "Εσφαλμένη τιμή τύπου  $1 , με την αναμενόμενη$2",
 	"wikibase-validator-bad-url": "Εσφαλμένη διεύθυνση URL: $1",
 	"wikibase-validator-bad-url-scheme": "Μη υποστηριζόμενο σύστημα URL:$1",
-	"wikibase-validator-bad-http-url": "Ακατάλληλο HTTP URL: $1",
-	"wikibase-validator-bad-mailto-url": "Ακατάλληλη μορφή URL: $1",
 	"wikibase-validator-unknown-unit": "Άγνωστη μονάδα: $1",
 	"wikibase-validator-not-allowed": "Εσφαλμένη τιμή: $1",
 	"datatypes-type-wikibase-item": "Αντικείμενο",

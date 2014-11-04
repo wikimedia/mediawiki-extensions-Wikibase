@@ -89,8 +89,6 @@
 	"wikibase-validator-bad-value-type": "Недопустимое значение типа «$1», ожидаемый тип — «$2»",
 	"wikibase-validator-bad-url": "Искажённый URL: $1",
 	"wikibase-validator-bad-url-scheme": "Неподдерживаемая схема URL: $1",
-	"wikibase-validator-bad-http-url": "Искажённый HTTP URL: $1",
-	"wikibase-validator-bad-mailto-url": "Искажённый URL адреса эл. почты («mailto:»): $1",
 	"wikibase-validator-unknown-unit": "Неизвестная единица измерения: $1",
 	"wikibase-validator-not-allowed": "Недопустимое значение: $1",
 	"datatypes-type-wikibase-item": "Элемент",
