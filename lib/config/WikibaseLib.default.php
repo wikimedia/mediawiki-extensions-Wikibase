@@ -15,104 +15,102 @@
  * @licence GNU GPL v2+
  */
 
-return call_user_func( function() {
+$wgWBLibDefaultSettings = array(
 
-	$defaults = array(
+	// whether changes get recorded to wb_changes
+	'useChangesTable' => true,
 
-		// whether changes get recorded to wb_changes
-		'useChangesTable' => true,
+	// whether property meta data is available in wb_property_info
+	'usePropertyInfoTable' => true,
 
-		// whether property meta data is available in wb_property_info
-		'usePropertyInfoTable' => true,
+	'entityPrefixes' => array(
+		'q' => 'item',
+		'p' => 'property',
+	),
 
-		'entityPrefixes' => array(
-			'q' => 'item',
-			'p' => 'property',
-		),
+	'siteLinkGroups' => array(
+		'wikipedia',
+	),
 
-		'siteLinkGroups' => array(
-			'wikipedia',
-		),
+	'specialSiteLinkGroups' => array(),
 
-		'specialSiteLinkGroups' => array(),
+	// local by default. Set to something LBFactory understands.
+	'changesDatabase' => false,
 
-		// local by default. Set to something LBFactory understands.
-		'changesDatabase' => false,
+	// list of logical database names of local client wikis.
+	// may contain mappings from site-id to db-name.
+	'localClientDatabases' => array(),
 
-		// list of logical database names of local client wikis.
-		// may contain mappings from site-id to db-name.
-		'localClientDatabases' => array(),
+	// Prefix to use for cache keys that should be shared among
+	// a wikibase repo and all its clients.
+	// The default includes WBL_VERSION and $wgDBname;
+	// In order to share caches between clients (and the repo),
+	// set a prefix based on the repo's name and WBL_VERSION
+	// or a similar version ID.
+	// NOTE: WikibaseClient.default.php overrides this to depend
+	// on repoDatabase dynamically.
+	'sharedCacheKeyPrefix' => $GLOBALS['wgDBname'] . ':WBL/' . WBL_VERSION,
 
-		// Prefix to use for cache keys that should be shared among
-		// a wikibase repo and all its clients.
-		// The default includes WBL_VERSION and $wgDBname;
-		// In order to share caches between clients (and the repo),
-		// set a prefix based on the repo's name and WBL_VERSION
-		// or a similar version ID.
-		// NOTE: WikibaseClient.default.php overrides this to depend
-		// on repoDatabase dynamically.
-		'sharedCacheKeyPrefix' => $GLOBALS['wgDBname'] . ':WBL/' . WBL_VERSION,
+	// The duration of the object cache, in seconds.
+	'sharedCacheDuration' => 60 * 60,
 
-		// The duration of the object cache, in seconds.
-		'sharedCacheDuration' => 60 * 60,
+	// The type of object cache to use. Use CACHE_XXX constants.
+	'sharedCacheType' => $GLOBALS['wgMainCacheType'],
 
-		// The type of object cache to use. Use CACHE_XXX constants.
-		'sharedCacheType' => $GLOBALS['wgMainCacheType'],
+	'dispatchBatchChunkFactor' => 3,
+	'dispatchBatchCacheFactor' => 3,
 
-		'dispatchBatchChunkFactor' => 3,
-		'dispatchBatchCacheFactor' => 3,
+	// Allow the TermIndex table to work without weights,
+	// for sites that can not easily roll out schema changes on large tables.
+	// This means that all searches will return an undefined order
+	// (depending on the database's inner working).
+	'withoutTermWeight' => false,
 
-		// Allow the TermIndex table to work without weights,
-		// for sites that can not easily roll out schema changes on large tables.
-		// This means that all searches will return an undefined order
-		// (depending on the database's inner working).
-		'withoutTermWeight' => false,
+	'changeHandlers' => array(
+		'wikibase-item~add' => 'Wikibase\ItemChange',
+		'wikibase-property~add' => 'Wikibase\EntityChange',
+		'wikibase-query~add' => 'Wikibase\EntityChange',
 
-		'changeHandlers' => array(
-			'wikibase-item~add' => 'Wikibase\ItemChange',
-			'wikibase-property~add' => 'Wikibase\EntityChange',
-			'wikibase-query~add' => 'Wikibase\EntityChange',
+		'wikibase-item~update' => 'Wikibase\ItemChange',
+		'wikibase-property~update' => 'Wikibase\EntityChange',
+		'wikibase-query~update' => 'Wikibase\EntityChange',
 
-			'wikibase-item~update' => 'Wikibase\ItemChange',
-			'wikibase-property~update' => 'Wikibase\EntityChange',
-			'wikibase-query~update' => 'Wikibase\EntityChange',
+		'wikibase-item~remove' => 'Wikibase\ItemChange',
+		'wikibase-property~remove' => 'Wikibase\EntityChange',
+		'wikibase-query~remove' => 'Wikibase\EntityChange',
 
-			'wikibase-item~remove' => 'Wikibase\ItemChange',
-			'wikibase-property~remove' => 'Wikibase\EntityChange',
-			'wikibase-query~remove' => 'Wikibase\EntityChange',
+		'wikibase-item~refresh' => 'Wikibase\ItemChange',
+		'wikibase-property~refresh' => 'Wikibase\EntityChange',
+		'wikibase-query~refresh' => 'Wikibase\EntityChange',
 
-			'wikibase-item~refresh' => 'Wikibase\ItemChange',
-			'wikibase-property~refresh' => 'Wikibase\EntityChange',
-			'wikibase-query~refresh' => 'Wikibase\EntityChange',
+		'wikibase-item~restore' => 'Wikibase\ItemChange',
+		'wikibase-property~restore' => 'Wikibase\EntityChange',
+		'wikibase-query~restore' => 'Wikibase\EntityChange',
+	),
 
-			'wikibase-item~restore' => 'Wikibase\ItemChange',
-			'wikibase-property~restore' => 'Wikibase\EntityChange',
-			'wikibase-query~restore' => 'Wikibase\EntityChange',
-		),
+	'dataTypes' => array(
+		'commonsMedia',
+		'globe-coordinate',
+		'quantity',
+		'monolingualtext',
+		'string',
+		'time',
+		'url',
+		'wikibase-item',
+	),
 
-		'dataTypes' => array(
-			'commonsMedia',
-			'globe-coordinate',
-			'quantity',
-			'monolingualtext',
-			'string',
-			'time',
-			'url',
-			'wikibase-item',
-		),
+	// URL schemes allowed for values of the URL type.
+	// Supported types include 'http', 'https', 'ftp', and 'mailto'.
+	'urlSchemes' => array( 'http', 'https', 'ftp' )
+);
 
-		// URL schemes allowed for values of the URL type.
-		// Supported types include 'http', 'https', 'ftp', and 'mailto'.
-		'urlSchemes' => array( 'http', 'https', 'ftp' )
+// experimental stuff
+if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+	// experimental data types
+	$wgWBLibDefaultSettings['dataTypes'] = array_merge(
+		$wgWBLibDefaultSettings['dataTypes'],
+		array() //'multilingual-text'
 	);
+}
 
-	// experimental stuff
-	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-		// experimental data types
-		$defaults['dataTypes'] = array_merge( $defaults['dataTypes'], array(
-			//'multilingual-text',
-		) );
-	}
-
-	return $defaults;
-} );
+return $wgWBLibDefaultSettings;
