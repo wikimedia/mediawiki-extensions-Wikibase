@@ -3,7 +3,6 @@
 namespace Wikibase\Test\Validators;
 
 use ValueValidators\Result;
-use ValueValidators\ValueValidator;
 use Wikibase\Validators\UrlSchemeValidators;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
@@ -17,6 +16,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  * @group WikibaseValidators
  *
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
 
@@ -24,9 +24,8 @@ class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validUrlProvider
 	 */
 	public function testValidUrl( $scheme, $url ) {
-		/* @var ValueValidator $validator */
 		$factory = new UrlSchemeValidators();
-		$validator = $factory->$scheme();
+		$validator = $factory->getValidator( $scheme );
 		$result = $validator->validate( $url );
 
 		$this->assertTrue( $result->isValid() );
@@ -36,9 +35,8 @@ class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidUrlProvider
 	 */
 	public function testInvalidUrl( $scheme, $url ) {
-		/* @var ValueValidator $validator */
 		$factory = new UrlSchemeValidators();
-		$validator = $factory->$scheme();
+		$validator = $factory->getValidator( $scheme );
 		$result = $validator->validate( $url );
 
 		$this->assertFalse( $result->isValid() );
@@ -53,8 +51,10 @@ class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
 			array( 'https', 'https://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ),
 			array( 'ftp', 'ftp://acme.com' ),
 			array( 'ftp', 'ftp://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ),
+			array( 'irc', 'irc://chat.freenode.net/gimp' ),
 			array( 'mailto', 'mailto:foo@bar' ),
 			array( 'mailto', 'mailto:Eve.Elder+spam@some.place.else?Subject=test' ),
+			array( 'telnet', 'telnet://user:password@host:9999/' ),
 			array( 'any', 'http://acme.com' ),
 			array( 'any', 'dummy:some/stuff' ),
 			array( 'any', 'dummy+me:other-stuff' ),
@@ -89,6 +89,10 @@ class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
 			array( 'any', ':' ),
 			array( 'any', 'foo:' ),
 			array( 'any', ':bar' ),
+			array( 'any', '+must:start-with-character' ),
+			array( 'any', '.must:start-with-character' ),
+			array( 'any', '-must:start-with-character' ),
+			array( 'any', '0must:start-with-character' ),
 			array( 'any', 'doo*da:foo' ),
 			array( 'any', 'foo:' . "\n" . '.bar' ),
 		);
@@ -112,7 +116,9 @@ class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNotNull( $factory->getValidator( 'http' ), 'http' );
 		$this->assertNotNull( $factory->getValidator( 'https' ), 'https' );
 		$this->assertNotNull( $factory->getValidator( 'ftp' ), 'ftp' );
+		$this->assertNotNull( $factory->getValidator( 'irc' ), 'irc' );
 		$this->assertNotNull( $factory->getValidator( 'mailto' ), 'mailto' );
+		$this->assertNotNull( $factory->getValidator( 'telnet' ), 'telnet' );
 
 		$this->assertNull( $factory->getValidator( 'notaprotocol' ), 'notaprotocol' );
 	}
