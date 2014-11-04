@@ -22,11 +22,15 @@ use Wikibase\PropertyLabelResolver;
  */
 class PropertyIdResolver {
 
+	private $entityLookup;
+
 	private $propertyLabelResolver;
 
 	public function __construct(
+		EntityLookup $entityLookup,
 		PropertyLabelResolver $propertyLabelResolver
 	) {
+		$this->entityLookup = $entityLookup;
 		$this->propertyLabelResolver = $propertyLabelResolver;
 	}
 
@@ -42,6 +46,11 @@ class PropertyIdResolver {
 	public function resolvePropertyId( $propertyLabelOrId, $languageCode ) {
 		try {
 			$propertyId = new PropertyId( $propertyLabelOrId );
+
+			if ( !$this->entityLookup->getEntity( $propertyId ) ) {
+				throw new PropertyLabelNotResolvedException( $propertyLabelOrId, $languageCode );
+			}
+
 		} catch ( InvalidArgumentException $ex ) {
 			$propertyId = $this->findPropertyByLabel( $propertyLabelOrId, $languageCode );
 		}

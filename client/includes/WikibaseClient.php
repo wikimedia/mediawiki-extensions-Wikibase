@@ -712,11 +712,12 @@ final class WikibaseClient {
 	 * @return PropertyParserFunctionRendererFactory
 	 */
 	private function getPropertyParserFunctionRendererFactory() {
-		$snaksFinder = new SnaksFinder(
-			$this->getEntityLookup()
-		);
+		$entityLookup = $this->getEntityLookup();
+
+		$snaksFinder = new SnaksFinder( $entityLookup );
 
 		$propertyIdResolver = new PropertyIdResolver(
+			$entityLookup,
 			$this->getStore()->getPropertyLabelResolver()
 		);
 
