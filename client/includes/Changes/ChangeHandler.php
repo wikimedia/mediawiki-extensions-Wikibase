@@ -6,14 +6,10 @@ use InvalidArgumentException;
 use MWException;
 use Title;
 use Wikibase\Change;
-use Wikibase\Client\Changes\AffectedPagesFinder;
-use Wikibase\Client\Changes\PageUpdater;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
-use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\SiteLinkCommentCreator;
 
 /**
@@ -25,9 +21,6 @@ use Wikibase\SiteLinkCommentCreator;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
- * @fixme: ChangeNotification, ChangeHandler, ClientHooks::onWikibasePollHandle
- *         and ClientChangeHandler need to be combined and refactored.
  */
 class ChangeHandler {
 
@@ -63,14 +56,9 @@ class ChangeHandler {
 	private $updater;
 
 	/**
-	 * @var EntityRevisionLookup $entityRevisionLookup
+	 * @var ChangeListTransformer
 	 */
-	private $entityRevisionLookup;
-
-	/**
-	 * @var EntityChangeFactory
-	 */
-	private $changeFactory;
+	private $changeListTransformer;
 
 	/**
 	 * @var AffectedPagesFinder
@@ -83,18 +71,16 @@ class ChangeHandler {
 	private $localSiteId;
 
 	public function __construct(
-		EntityChangeFactory $changeFactory,
 		AffectedPagesFinder $affectedPagesFinder,
 		PageUpdater $updater,
-		EntityRevisionLookup $entityRevisionLookup,
+		ChangeListTransformer $changeListTransformer,
 		$localSiteId,
 		$injectRC,
 		$allowDataTransclusion
 	) {
-		$this->changeFactory = $changeFactory;
+		$this->changeListTransformer = $changeListTransformer;
 		$this->affectedPagesFinder = $affectedPagesFinder;
 		$this->updater = $updater;
-		$this->entityRevisionLookup = $entityRevisionLookup;
 
 		if ( !is_string( $localSiteId ) ) {
 			throw new InvalidArgumentException( '$localSiteId must be a string' );
@@ -111,277 +97,6 @@ class ChangeHandler {
 		$this->localSiteId = $localSiteId;
 		$this->injectRC = (bool)$injectRC;
 		$this->dataTransclusionAllowed = $allowDataTransclusion;
-
-		$this->mirrorUpdater = null;
-	}
-
-	/**
-	 * Group changes by the entity they were applied to.
-	 *
-	 * @since 0.4
-	 *
-	 * @param EntityChange[] $changes
-	 * @return EntityChange[][] an associative array using entity IDs for keys. Associated with each
-	 *         entity ID is the list of changes performed on that entity.
-	 */
-	public function groupChangesByEntity( array $changes ) {
-		wfProfileIn( __METHOD__ );
-		$groups = array();
-
-		foreach ( $changes as $change ) {
-			$id = $change->getEntityId()->getSerialization();
-
-			if ( !isset( $groups[$id] ) ) {
-				$groups[$id] = array();
-			}
-
-			$groups[$id][] = $change;
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $groups;
-	}
-
-	/**
-	 * Combines a set of changes into one change. All changes are assume to have been performed
-	 * by the same user on the same entity. They are further assumed to be UPDATE actions
-	 * and sorted in causal (chronological) order.
-	 *
-	 * If $changes is empty, this method returns null. If $changes contains exactly one change,
-	 * that change is returned. Otherwise, a combined change is returned.
-	 *
-	 * @since 0.4
-	 *
-	 * @param EntityChange[] $changes The changes to combine.
-	 *
-	 * @throws MWException
-	 * @return Change a combined change representing the activity from all the original changes.
-	 */
-	public function mergeChanges( array $changes ) {
-		if ( empty( $changes ) )  {
-			return null;
-		} elseif ( count( $changes ) === 1 )  {
-			return reset( $changes );
-		}
-
-		wfProfileIn( __METHOD__ );
-
-		// we now assume that we have a list if EntityChanges,
-		// all done by the same user on the same entity.
-
-		/* @var EntityChange $last */
-		/* @var EntityChange $first */
-		$last = end( $changes );
-		$first = reset( $changes );
-
-		$minor = true;
-		$bot = true;
-
-		$ids = array();
-
-		foreach ( $changes as $change ) {
-			$ids[] = $change->getId();
-			$meta = $change->getMetadata();
-
-			$minor &= isset( $meta['minor'] ) && (bool)$meta['minor'];
-			$bot &= isset( $meta['bot'] ) && (bool)$meta['bot'];
-		}
-
-		$lastmeta = $last->getMetadata();
-		$firstmeta = $first->getMetadata();
-
-		$entityId = $first->getEntityId();
-
-		$parentRevId = $firstmeta['parent_id'];
-		$latestRevId = $firstmeta['rev_id'];
-
-		$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $latestRevId );
-
-		if ( !$entityRev ) {
-			throw new MWException( "Failed to load revision $latestRevId of $entityId" );
-		}
-
-		$parentRev = $parentRevId ? $this->entityRevisionLookup->getEntityRevision( $entityId, $parentRevId ) : null;
-
-		//XXX: we could avoid loading the entity data by merging the diffs programatically
-		//     instead of re-calculating.
-		$change = $this->changeFactory->newFromUpdate(
-			$parentRev ? EntityChange::UPDATE : EntityChange::ADD,
-			$parentRev === null ? null : $parentRev->getEntity(),
-			$entityRev->getEntity()
-		);
-
-		$change->setFields(
-			array(
-				'revision_id' => $last->getField( 'revision_id' ),
-				'user_id' => $last->getField( 'user_id' ),
-				'object_id' => $last->getField( 'object_id' ),
-				'time' => $last->getField( 'time' ),
-			)
-		);
-
-		$change->setMetadata( array_merge(
-			$lastmeta,
-			array(
-				'parent_id' => $parentRevId,
-				'minor' => $minor,
-				'bot' => $bot,
-			)
-			//FIXME: size before & size after
-			//FIXME: size before & size after
-		) );
-
-		$info = $change->hasField( 'info' ) ? $change->getField( 'info' ) : array();
-		$info['change-ids'] = $ids;
-		$info['changes'] = $changes;
-		$change->setField( 'info', $info );
-
-		wfProfileOut( __METHOD__ );
-		return $change;
-	}
-
-	/**
-	 * Coalesce consecutive changes by the same user to the same entity into one.
-	 * A run of changes may be broken if the action performed changes (e.g. deletion
-	 * instead of update) or if a sitelink pointing to the local wiki was modified.
-	 *
-	 * Some types of actions, like deletion, will break runs.
-	 * Interleaved changes to different items will break runs.
-	 *
-	 * @since 0.4
-	 *
-	 * @param EntityChange[] $changes
-	 * @return EntityChange[] grouped changes
-	 */
-	public function coalesceRuns( array $changes ) {
-		wfProfileIn( __METHOD__ );
-
-		$coalesced = array();
-
-		$currentRun = array();
-		$currentUser = null;
-		$currentEntity = null;
-		$currentAction = null;
-		$breakNext = false;
-
-		foreach ( $changes as $change ) {
-			try {
-				$action = $change->getAction();
-				$meta = $change->getMetadata();
-				$user = $meta['user_text'];
-				$entityId = $change->getEntityId()->__toString();
-
-				$break = $breakNext
-					|| $currentAction !== $action
-					|| $currentUser !== $user
-					|| $currentEntity !== $entityId;
-
-				$breakNext = false;
-
-				if ( !$break && ( $change instanceof ItemChange ) ) {
-					$siteLinkDiff = $change->getSiteLinkDiff();
-					if ( isset( $siteLinkDiff[ $this->localSiteId ] ) ) {
-						$break = true;
-						$breakNext = true;
-					};
-				}
-
-				// FIXME: We should call changeNeedsRendering() and see if the needs-rendering
-				//        stays the same, and break the run if not. This way, uninteresting
-				//        changes can be sorted out more cleanly later.
-				// FIXME: Perhaps more easily, get rid of them here and now!
-				if ( $break ) {
-					if ( !empty( $currentRun ) ) {
-						try {
-							$coalesced[] = $this->mergeChanges( $currentRun );
-						} catch ( MWException $ex ) {
-							// Something went wrong while trying to merge the changes.
-							// Just keep the original run.
-							wfWarn( $ex->getMessage() );
-							$coalesced = array_merge( $coalesced, $currentRun );
-						}
-					}
-
-					$currentRun = array();
-					$currentUser = $user;
-					$currentEntity = $entityId;
-					$currentAction = $action === EntityChange::ADD ? EntityChange::UPDATE : $action;
-				}
-
-				$currentRun[] = $change;
-			// skip any change that failed to process in some way (bug 49417)
-			} catch ( \Exception $e ) {
-				wfLogWarning( __METHOD__ . ':' . $e->getMessage() );
-			}
-		}
-
-		if ( !empty( $currentRun ) ) {
-			try {
-				$coalesced[] = $this->mergeChanges( $currentRun );
-			} catch ( MWException $ex ) {
-				// Something went wrong while trying to merge the changes.
-				// Just keep the original run.
-				wfWarn( $ex->getMessage() );
-				$coalesced = array_merge( $coalesced, $currentRun );
-			}
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $coalesced;
-	}
-
-	/**
-	 * Coalesce changes where possible. This combines any consecutive changes by the same user
-	 * to the same entity into one. Interleaved changes to different items are handled gracefully.
-	 *
-	 * @since 0.4
-	 *
-	 * @param EntityChange[] $changes
-	 * @return Change[] grouped changes
-	 */
-	public function coalesceChanges( array $changes ) {
-		wfProfileIn( __METHOD__ );
-		$coalesced = array();
-
-		$changesByEntity = $this->groupChangesByEntity( $changes );
-		foreach ( $changesByEntity as $entityChanges ) {
-			$entityChanges = $this->coalesceRuns( $entityChanges );
-			$coalesced = array_merge( $coalesced, $entityChanges );
-		}
-
-		usort( $coalesced, 'Wikibase\Client\Changes\ChangeHandler::compareChangesByTimestamp' );
-
-		wfDebugLog( __CLASS__, __METHOD__ . ": coalesced "
-			. count( $changes ) . " into " . count( $coalesced ) . " changes"  );
-
-		wfProfileOut( __METHOD__ );
-		return $coalesced;
-	}
-
-	/**
-	 * Compares two changes based on their timestamp.
-	 *
-	 * @param Change $a
-	 * @param Change $b
-	 *
-	 * @return Mixed
-	 */
-	public static function compareChangesByTimestamp( Change $a, Change $b ) {
-		//NOTE: beware https://bugs.php.net/bug.php?id=50688 !
-
-		if ( $a->getTime() > $b->getTime() ) {
-			return 1;
-		} elseif ( $a->getTime() < $b->getTime() ) {
-			return -1;
-		}
-
-		if ( $a->getId() > $b->getId() ) {
-			return 1;
-		} elseif ( $a->getId() < $b->getId() ) {
-			return -1;
-		}
-
-		return 0;
 	}
 
 	/**
@@ -394,7 +109,7 @@ class ChangeHandler {
 	public function handleChanges( array $changes ) {
 		wfProfileIn( __METHOD__ );
 
-		$changes = $this->coalesceChanges( $changes );
+		$changes = $this->changeListTransformer->transformChangeList( $changes );
 
 		if ( !wfRunHooks( 'WikibaseHandleChanges', array( $changes ) ) ) {
 			wfProfileOut( __METHOD__ );
@@ -441,11 +156,6 @@ class ChangeHandler {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": No actions to take for change #$chid." );
 			wfProfileOut( __METHOD__ );
 			return false;
-		}
-
-		if ( $this->mirrorUpdater !== null && ( $change instanceof EntityChange ) ) {
-			// keep local mirror up to date
-			$this->mirrorUpdater->handleChange( $change );
 		}
 
 		$titlesToUpdate = $this->getPagesToUpdate( $change );
