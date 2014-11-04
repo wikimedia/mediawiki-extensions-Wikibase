@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_858b81c3",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-04T16:03:20Z",
+      "side": 1,
+      "message": "why protected?",
+      "revId": "f68a4fa8e24b5b1e20aa42171895344627294106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e5b36594",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-04T16:03:20Z",
+      "side": 1,
+      "message": "why have this method to begin with? It takes 4 parameters which are essentially just forwarded. I see more cost than gain",
+      "revId": "f68a4fa8e24b5b1e20aa42171895344627294106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_25694df6",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-04T16:03:20Z",
+      "side": 1,
+      "message": "missing parameter",
+      "revId": "f68a4fa8e24b5b1e20aa42171895344627294106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_057691d5",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-04T16:03:20Z",
+      "side": 1,
+      "message": "Having 4 parameters strongly suggests something is going wrong",
+      "revId": "f68a4fa8e24b5b1e20aa42171895344627294106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
