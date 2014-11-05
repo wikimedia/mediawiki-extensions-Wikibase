@@ -9,7 +9,7 @@ https://commons.wikimedia.org/wiki/File:Wikibase_JavaScript_Data_Model_1.0.svg
 
 ## Release notes
 
-### 1.0 (dev)
+### 1.0 (2014-11-05)
 
 #### Breaking changes
 * Removed wikibase.datamodel.Reference.setSnaks(). Generate new Reference objects when interacting with the API to reflect hash changes performed in the back-end.
