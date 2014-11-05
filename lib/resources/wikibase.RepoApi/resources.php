@@ -36,7 +36,6 @@ return call_user_func( function() {
 				'wikibase-error-remove-generic',
 				'wikibase-error-save-timeout',
 				'wikibase-error-remove-timeout',
-				'wikibase-error-ui-no-external-page',
 				'wikibase-error-ui-edit-conflict',
 			),
 			'dependencies' => array(
