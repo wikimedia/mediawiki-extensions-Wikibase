@@ -68,7 +68,6 @@ return call_user_func( function() {
 				'wikibase.RepoApi/wikibase.RepoApi.tests.js',
 			),
 			'dependencies' => array(
-				'mw.config.values.wbRepo',
 				'wikibase',
 				'wikibase.api.getLocationAgnosticMwApi',
 				'wikibase.RepoApi',
