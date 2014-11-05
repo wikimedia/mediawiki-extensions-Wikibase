@@ -1,47 +1,11 @@
 /**
- * Replacing the native MediaWiki search suggestions with Wikibase's entity selector widget.
+ * Replacing the native MediaWiki search suggestions with the jQuery.wikibase.entitysearch widget.
  *
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
 ( function( $, mw ) {
 	'use strict';
-
-	$.widget( 'wikibase.entitysearch', $.wikibase.entityselector, {
-		/**
-		 *@see jQuery.wikibase.entityselector._createMenuItemFromSuggestion
-		 */
-		_createMenuItemFromSuggestion: function( suggestion ) {
-			var $label = this._createLabelFromSuggestion( suggestion ),
-				value = suggestion.label || suggestion.id;
-
-			return new $.wikibase.entityselector.Item( $label, value, suggestion );
-		},
-
-		/**
-		 * @see jQuery.wikibase.entityselector._createMenuItemFromSuggestion
-		 */
-		_initMenu: function( ooMenu ) {
-			$.wikibase.entityselector.prototype._initMenu.apply( this, arguments );
-
-			ooMenu.element.addClass( 'wikibase-entitysearch-list' );
-
-			$( ooMenu )
-			.off( 'selected' )
-			.on( 'selected.entitysearch', function( event, item ) {
-				if(
-					event.originalEvent
-					&& /^key/.test( event.originalEvent.type )
-					&& !( item instanceof $.ui.ooMenu.CustomItem )
-				) {
-					window.location.href = item.getEntityStub().url;
-				}
-			} );
-
-			return ooMenu;
-		}
-
-	} );
 
 	$( function() {
 		var $form = $( '#searchform ' ),
@@ -90,6 +54,10 @@
 			$.removeData( input, 'suggestionsContext' );
 		}
 
+		var suggestionsPlaceholder = new $.ui.ooMenu.CustomItem(
+			$( '<div/>' ).append( $.createSpinner() )
+		);
+
 		var $searchContaining = $( '<div>' )
 			.addClass( 'suggestions-special' )
 			.append(
@@ -135,7 +103,8 @@
 				{},
 				$.wikibase.entityselector.prototype.options.position,
 				{ offset: '-1 2' }
-			)
+			),
+			suggestionsPlaceholder: suggestionsPlaceholder
 		} )
 		.on( 'entityselectoropen', function( event ) {
 			updateSuggestionSpecial( searchContaining );
