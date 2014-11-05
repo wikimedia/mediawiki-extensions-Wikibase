@@ -446,7 +446,7 @@ class EditEntity extends ModifyEntity {
 					$linkPage = null;
 
 					if ( !$item->hasLinkToSite( $globalSiteId ) ) {
-						$this->dieError( "Cannot modify badges: sitelink to '{$globalSiteId}' doesn't exist", 'no-such-sitelink' );
+						$this->dieMessage( 'no-such-sitelink', $globalSiteId );
 					}
 				}
 
