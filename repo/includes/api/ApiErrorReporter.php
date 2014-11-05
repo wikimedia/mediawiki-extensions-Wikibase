@@ -209,7 +209,7 @@ class ApiErrorReporter {
 	 * replacement for ApiBase::dieUsage().
 	 *
 	 * Localization of the error code is attempted by looking up a message key
-	 * constructed using the given code in "wikibase-error-$errorCode". If such a message
+	 * constructed using the given code in "wikibase-api-$errorCode". If such a message
 	 * exists, it is included in the error's extra data.
 	 *
 	 * @see ApiBase::dieUsage()
