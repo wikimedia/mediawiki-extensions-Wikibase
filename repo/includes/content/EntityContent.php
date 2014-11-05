@@ -268,17 +268,23 @@ abstract class EntityContent extends AbstractContent {
 	protected function getParserOutputFromEntityView( Title $title, $revId = null,
 		ParserOptions $options = null, $generateHtml = true
 	) {
-		$editable = !$options? true : $options->getEditSection();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$entityParserOutputGeneratorFactory = $wikibaseRepo->getEntityParserOutputGeneratorFactory();
 
-		if ( $revId === null || $revId === 0 ) {
-			$revId = $title->getLatestRevID();
-		}
+		$entityRevision = $this->getEntityRevision( $title, $revId );
 
-		$revision = new EntityRevision( $this->getEntity(), $revId );
+		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator(
+			$entityRevision,
+			$options
+		);
 
-		// generate parser output
-		$outputGenerator = $this->getEntityParserOutputGenerator( null, $options, null );
-		$output = $outputGenerator->getParserOutput( $revision, $editable, $generateHtml );
+		$editable = !$options ? true : $options->getEditSection();
+
+		$output = $outputGenerator->getParserOutput(
+			$entityRevision,
+			$editable,
+			$generateHtml
+		);
 
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
@@ -291,155 +297,18 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * Creates an EntityParserOutputGenerator to create the ParserOutput for the entity
+	 * @param Title $title
+	 * @param int|null $revId
 	 *
-	 * @param IContextSource|null $context
-	 * @param ParserOptions|null $options
-	 * @param LanguageFallbackChain|null $uiLanguageFallbackChain
-	 *
-	 * @note: this uses global state to access the services needed for
-	 * displaying the entity.
-	 *
-	 * @return EntityParserOutputGenerator
+	 * @return EntityRevision
 	 */
-	private function getEntityParserOutputGenerator(
-		IContextSource $context = null,
-		ParserOptions $options = null,
-		LanguageFallbackChain $uiLanguageFallbackChain = null
-	) {
-		if ( $context === null ) {
-			$context = RequestContext::getMain();
+	private function getEntityRevision( Title $title, $revId = null ) {
+		if ( $revId === null || $revId === 0 ) {
+			$revId = $title->getLatestRevID();
 		}
 
-		$languageCode = $context->getLanguage()->getCode();
-
-		if ( $options !== null ) {
-			// NOTE: Parser Options language overrides context language!
-			$languageCode = $options->getUserLang();
-		}
-
-		$formatterOptions = new FormatterOptions();
-		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $languageCode );
-
-		// Force the context's language to be the one specified by the parser options.
-		if ( $context && $context->getLanguage()->getCode() !== $languageCode ) {
-			$context = clone $context;
-			$context->setLanguage( $languageCode );
-		}
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		if ( !$uiLanguageFallbackChain ) {
-			$factory = $wikibaseRepo->getLanguageFallbackChainFactory();
-			$uiLanguageFallbackChain = $factory->newFromContextForPageView( $context );
-		}
-
-		$formatterOptions->setOption( 'languages', $uiLanguageFallbackChain );
-
-		// get all the necessary services ----
-		$snakFormatter = $wikibaseRepo->getSnakFormatterFactory()
-			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
-
-		$entityInfoBuilderFactory = $wikibaseRepo->getStore()->getEntityInfoBuilderFactory();
-		$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
-
-		$serializationOptions = $this->makeSerializationOptions( $languageCode, $uiLanguageFallbackChain );
-
-		$entityView = $this->getEntityView(
-			$snakFormatter,
-			$entityContentFactory,
-			$entityInfoBuilderFactory,
-			$context->getLanguage()
-		);
-
-		// ---------------------------------------------------------------------
-
-		$configBuilder = new ParserOutputJsConfigBuilder(
-			$entityInfoBuilderFactory,
-			$wikibaseRepo->getEntityIdParser(),
-			$entityContentFactory,
-			new ReferencedEntitiesFinder(),
-			$context->getLanguage()->getCode()
-		);
-
-		$dataTypeLookup = $wikibaseRepo->getPropertyDataTypeLookup();
-
-		return new EntityParserOutputGenerator(
-			$entityView,
-			$configBuilder,
-			$serializationOptions,
-			$entityContentFactory,
-			$dataTypeLookup
-		);
+		return new EntityRevision( $this->getEntity(), $revId );
 	}
-
-	/**
-	 * Creates an EntityView suitable for rendering the entity.
-	 *
-	 * @since 0.5
-	 *
-	 * @param SnakFormatter $snakFormatter
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
-	 * @param Language $language
-	 *
-	 * @return EntityView
-	 */
-	private function getEntityView(
-		SnakFormatter $snakFormatter,
-		EntityTitleLookup $entityTitleLookup,
-		EntityInfoBuilderFactory $entityInfoBuilderFactory,
-		Language $language
-	) {
-		//TODO: cache last used entity view
-		$sectionEditLinkGenerator = new SectionEditLinkGenerator();
-
-		$snakHtmlGenerator = new SnakHtmlGenerator(
-			$snakFormatter,
-			$entityTitleLookup
-		);
-
-		$claimHtmlGenerator = new ClaimHtmlGenerator(
-			$snakHtmlGenerator,
-			$entityTitleLookup
-		);
-
-		$claimsView =  new ClaimsView(
-			$entityInfoBuilderFactory,
-			$entityTitleLookup,
-			$sectionEditLinkGenerator,
-			$claimHtmlGenerator,
-			$language->getCode()
-		);
-
-		$fingerprintView = new FingerprintView(
-			$sectionEditLinkGenerator,
-			$language->getCode()
-		);
-
-		return $this->newEntityView(
-			$fingerprintView,
-			$claimsView,
-			$language
-		);
-	}
-
-	/**
-	 * Instantiates an EntityView.
-	 *
-	 * @see getEntityView()
-	 *
-	 * @param FingerprintView $fingerprintView
-	 * @param ClaimsView $claimsView
-	 * @param Language $language
-	 *
-	 * @return EntityView
-	 */
-	protected abstract function newEntityView(
-		FingerprintView $fingerprintView,
-		ClaimsView $claimsView,
-		Language $language
-	);
 
 	/**
 	 * @return String a string representing the content in a way useful for building a full text
@@ -849,21 +718,6 @@ abstract class EntityContent extends AbstractContent {
 		$handler = $this->getContentHandler();
 		$status = $handler->getValidationErrorLocalizer()->getResultStatus( $result );
 		return $status;
-	}
-
-	/**
-	 * @param string $languageCode
-	 * @param LanguageFallbackChain $fallbackChain
-	 *
-	 * @return SerializationOptions
-	 */
-	private function makeSerializationOptions( $languageCode, LanguageFallbackChain $fallbackChain ) {
-		$languageCodes = Utils::getLanguageCodes() + array( $languageCode => $fallbackChain );
-
-		$options = new SerializationOptions();
-		$options->setLanguages( $languageCodes );
-
-		return $options;
 	}
 
 	/**

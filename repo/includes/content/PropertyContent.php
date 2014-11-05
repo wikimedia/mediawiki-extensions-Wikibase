@@ -104,21 +104,4 @@ class PropertyContent extends EntityContent {
 		return true;
 	}
 
-	/**
-	 * @see getEntityView()
-	 *
-	 * @param FingerprintView $fingerprintView
-	 * @param ClaimsView $claimsView
-	 * @param Language $language
-	 *
-	 * @return PropertyView
-	 */
-	protected function newEntityView(
-		FingerprintView $fingerprintView,
-		ClaimsView $claimsView,
-		Language $language
-	) {
-		return new PropertyView( $fingerprintView, $claimsView, $language );
-	}
-
 }
