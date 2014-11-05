@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_dbe721de",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-05T13:16:36Z",
+      "side": 1,
+      "message": "string, not mixed. Ok, maybe int would work too, but generally, message parameters should always be strings.",
+      "revId": "e1e1a5e3b76b631f59cdd76738eca015fbf7766f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_7bce0d61",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-05T13:16:36Z",
+      "side": 1,
+      "message": "Perhaps also add a parameter to no-such-sitelink?",
+      "revId": "e1e1a5e3b76b631f59cdd76738eca015fbf7766f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1b05897c",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-05T13:16:36Z",
+      "side": 1,
+      "message": "Please make a convenience method in ApiWikibase, so API modules can use $this-\u003edieMessage() directly",
+      "revId": "e1e1a5e3b76b631f59cdd76738eca015fbf7766f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
