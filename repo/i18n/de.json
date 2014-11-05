@@ -247,7 +247,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Du kannst sie bearbeiten, indem du <nowiki>{{#babel:}}</nowiki> in {{GENDER:$1|deine}} [[Special:MyPage|Benutzerseite]] einfügst.",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, konvertiert von $3 – $4",
 	"wikibase-api-unresolved-redirect": "Die angegebene Objektkennung bezieht sich auf eine Weiterleitung, die in diesem Kontext nicht unterstützt wird.",
-	"wikibase-api-no-such-sitelink": "Dieser Websitelink konnte nicht gefunden werden",
+	"wikibase-api-no-such-sitelink": "Beim Versuch, Auszeichnungen zu bearbeiten, konnte der Websitelink zu „$1“ nicht gefunden werden.",
 	"wikibase-api-target-not-empty": "Die Weiterleitung kann nur am Anfang eines leeren Objekts erstellt werden.",
 	"wikibase-api-target-is-redirect": "Das Weiterleitungsziel darf ebenfalls keine Weiterleitung sein.",
 	"wikibase-api-target-is-incompatible": "Versuch einer Weiterleitung auf ein Objekt eines anderen Typs.",

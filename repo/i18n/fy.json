@@ -1,11 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kening Aldgilles"
+			"Kening Aldgilles",
+			"Robin0van0der0vliet"
 		]
 	},
 	"wikibase-edit": "bewurkje",
 	"wikibase-save": "fêstlizze",
-	"wikibase-cancel": "ôfbrekke",
-	"wikibase-add": "tafoegje"
+	"wikibase-cancel": "Annulearje",
+	"wikibase-add": "tafoegje",
+	"wikibase-itembytitle-submit": "Sykje",
+	"wikibase-itemdisambiguation-lookup-language": "Taal:",
+	"wikibase-itemdisambiguation-submit": "Sykje",
+	"wikibase-modifyterm-language": "Taal:",
+	"wikibase-entitieswithoutlabel-label-language": "Taal:",
+	"wikibase-entitieswithoutlabel-submit": "Sykje"
 }
