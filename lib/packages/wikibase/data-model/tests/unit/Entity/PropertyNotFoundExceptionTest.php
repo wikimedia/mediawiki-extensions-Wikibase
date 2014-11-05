@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Test\Entity;
 
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\PropertyNotFoundException;
