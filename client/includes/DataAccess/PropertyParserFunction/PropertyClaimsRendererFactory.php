@@ -86,7 +86,7 @@ class PropertyClaimsRendererFactory {
 	 *
 	 * @return LanguageAwareRenderer
 	 */
-	public function newLanguageAwareRenderer( Language $language, UsageAccumulator $usageAccumulator ) {
+	private function newLanguageAwareRenderer( Language $language, UsageAccumulator $usageAccumulator ) {
 		return new LanguageAwareRenderer(
 			$language,
 			$this->propertyIdResolver,
@@ -102,7 +102,7 @@ class PropertyClaimsRendererFactory {
 	 *
 	 * @return LanguageAwareRenderer
 	 */
-	public function getLanguageAwareRendererFromCode( $languageCode, UsageAccumulator $usageAccumulator ) {
+	private function getLanguageAwareRendererFromCode( $languageCode, UsageAccumulator $usageAccumulator ) {
 		if ( !isset( $this->languageAwareRenderers[$languageCode] ) ) {
 			$languageAwareRenderer = $this->newLanguageAwareRendererFromCode( $languageCode, $usageAccumulator );
 			$this->languageAwareRenderers[$languageCode] = $languageAwareRenderer;
@@ -119,7 +119,11 @@ class PropertyClaimsRendererFactory {
 	 */
 	private function newLanguageAwareRendererFromCode( $languageCode, UsageAccumulator $usageAccumulator ) {
 		$language = Language::factory( $languageCode );
-		return $this->newLanguageAwareRenderer( $language, $usageAccumulator );
+
+		return $this->newLanguageAwareRenderer(
+			$language,
+			$usageAccumulator
+		);
 	}
 
 	/**
@@ -129,7 +133,16 @@ class PropertyClaimsRendererFactory {
 	 * @return VariantsAwareRenderer
 	 */
 	private function newVariantsAwareRenderer( array $variants, UsageAccumulator $usageAccumulator ) {
-		return new VariantsAwareRenderer( $this, $variants, $usageAccumulator );
+		$languageAwareRenderers = array();
+
+		foreach( $variants as $variant ) {
+			$languageAwareRenderers[$variant] = $this->getLanguageAwareRendererFromCode(
+				$variant,
+				$usageAccumulator
+			);
+		}
+
+		return new VariantsAwareRenderer( $languageAwareRenderers, $variants );
 	}
 
 	/**
