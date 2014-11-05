@@ -69,12 +69,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewLanguageAwareRenderer() {
-		$rendererFactory = new PropertyClaimsRendererFactory(
-			$this->getPropertyIdResolver(),
-			$this->getSnaksFinder(),
-			$this->getLanguageFallbackChainFactory(),
-			$this->getSnakFormatterFactory()
-		);
+		$rendererFactory = $this->getPropertyClaimsRendererFactory();
 
 		$language = Language::factory( 'he' );
 		$usageAcc = new HashUsageAccumulator();
@@ -82,6 +77,24 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$languageRendererClass = 'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer';
 		$this->assertInstanceOf( $languageRendererClass, $renderer );
+	}
+
+	public function testGetLanguageAwareRendererFromCode() {
+		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$usageAcc = new HashUsageAccumulator();
+		$renderer = $rendererFactory->getLanguageAwareRendererFromCode( 'ar', $usageAcc );
+
+		$languageRendererClass = 'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer';
+		$this->assertInstanceOf( $languageRendererClass, $renderer );
+	}
+
+	private function getPropertyClaimsRendererFactory() {
+		return new PropertyClaimsRendererFactory(
+			$this->getPropertyIdResolver(),
+			$this->getSnaksFinder(),
+			$this->getLanguageFallbackChainFactory(),
+			$this->getSnakFormatterFactory()
+		);
 	}
 
 	private function getPropertyIdResolver() {

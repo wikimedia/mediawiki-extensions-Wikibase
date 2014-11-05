@@ -54,6 +54,10 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			->method( 'newLanguageAwareRenderer' )
 			->will( $this->returnValue( $languageRenderer ) );
 
+		$rendererFactory->expects( $this->any() )
+			->method( 'getLanguageAwareRendererFromCode' )
+			->will( $this->returnValue( $languageRenderer ) );
+
 		$usageAccumulator = $this->getUsageAccumulator();
 
 		$variantsRenderer = new VariantsAwareRenderer(
