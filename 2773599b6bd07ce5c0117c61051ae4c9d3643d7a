@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_7665c4dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 26
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-05T14:28:02Z",
+      "side": 1,
+      "message": "wb_items_per_sites",
+      "revId": "2773599b6bd07ce5c0117c61051ae4c9d3643d7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_168b2073",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-05T14:28:02Z",
+      "side": 1,
+      "message": "it\u0027s not? but use it anyway?",
+      "revId": "2773599b6bd07ce5c0117c61051ae4c9d3643d7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
