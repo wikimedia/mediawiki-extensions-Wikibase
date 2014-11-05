@@ -23,6 +23,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityFactory;
+use Wikibase\EntityParserOutputGeneratorFactory;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
@@ -942,6 +943,21 @@ class WikibaseRepo {
 		}
 
 		return $this->entityNamespaceLookup;
+	}
+
+	/**
+	 * @return EntityParserOutputGeneratorFactory
+	 */
+	public function getEntityParserOutputGeneratorFactory() {
+		return new EntityParserOutputGeneratorFactory(
+			$this->getSnakFormatterFactory(),
+			$this->getStore()->getEntityInfoBuilderFactory(),
+			$this->getEntityContentFactory(),
+			$this->getEntityIdParser(),
+			$this->getPropertyDataTypeLookup(),
+			$this->getLanguageFallbackChainFactory(),
+			new ReferencedEntitiesFinder()
+		);
 	}
 
 }
