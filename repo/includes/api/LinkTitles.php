@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use SiteList;
 use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
@@ -67,13 +68,17 @@ class LinkTitles extends ApiWikibase {
 
 		// Sites are already tested through allowed params ;)
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
-		$fromSite = $sites->getSite( $params['fromsite'] );
-		$toSite = $sites->getSite( $params['tosite'] );
 
-		$fromPage = $fromSite->normalizePageName( $params['fromtitle'] );
-		$this->validatePage( $fromPage, 'from' );
-		$toPage = $toSite->normalizePageName( $params['totitle'] );
-		$this->validatePage( $toPage, 'to' );
+		list( $fromSite, $fromPage ) = $this->getSiteAndNormalizedPageName(
+			$sites,
+			$params['fromsite'],
+			$params['fromtitle']
+		);
+		list( $toSite, $toPage ) = $this->getSiteAndNormalizedPageName(
+			$sites,
+			$params['tosite'],
+			$params['totitle']
+		);
 
 		$siteLinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
 		$fromId = $siteLinkCache->getItemIdForLink( $fromSite->getGlobalId(), $fromPage );
@@ -143,16 +148,17 @@ class LinkTitles extends ApiWikibase {
 	}
 
 	/**
-	 * @param string $page
-	 * @param string $label
+	 * @param SiteList $sites
+	 * @param string $site
+	 * @param string $pageTitle
 	 */
-	private function validatePage( $page, $label ) {
-		if ( $page === false ) {
-			$this->dieError(
-				"The external client site did not provide page information for the {$label} page" ,
-				'no-external-page'
-			);
+	private function getSiteAndNormalizedPageName( SiteList $sites, $site, $pageTitle ) {
+		$siteObj = $sites->getSite( $site );
+		$page = $siteObj->normalizePageName( $pageTitle );
+		if( $page === false ) {
+			$this->dieMessage( 'no-external-page', $site, $pageTitle );
 		}
+		return array( $siteObj, $page );
 	}
 
 	/**
