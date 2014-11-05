@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_fb5bfdfa",
+        "filename": "lib/resources/parsers/getStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-05T12:02:58Z",
+      "side": 1,
+      "message": "Using parserIdToDataValueType would allow to reduce the code duplication here.",
+      "revId": "6a17c47cd051164bf714f0c5d6ebc813617bcefe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
