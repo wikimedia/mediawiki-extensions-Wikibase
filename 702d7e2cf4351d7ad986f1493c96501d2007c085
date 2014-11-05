@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e936f18_d68b78e6",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-05T15:55:30Z",
+      "side": 1,
+      "message": "This is rather nasty... ideally, we\u0027d get the EntityView object here, or a factory. Or we would automatically determine the appropriate class inside the EntityParserOutputGeneratorFactory, given an entity type (or, perhaps better, an EntityContent object).",
+      "revId": "702d7e2cf4351d7ad986f1493c96501d2007c085",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_16900045",
         "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
         "patchSetId": 15
@@ -13,6 +30,40 @@
       "writtenOn": "2014-11-05T15:07:27Z",
       "side": 1,
       "message": "it appears all we need $language for is to know the language code and direction.  there has to be a better way to do that...",
+      "revId": "702d7e2cf4351d7ad986f1493c96501d2007c085",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1669e01c",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-05T15:55:30Z",
+      "side": 1,
+      "message": "If we do refactoring in order to improve DI and testability, let\u0027s do it right and get rid of global state. This could be done by 1) moving as much logic as possible into EntityHandler (EntityContent can still access it via getHandler()) and 2) inject all the necessary bits into the EntityHandler via the constructor, ideally, the full EntityParserOutputGeneratorFactory.",
+      "revId": "702d7e2cf4351d7ad986f1493c96501d2007c085",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_56dd28e0",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-05T15:55:30Z",
+      "side": 1,
+      "message": "I reall dislike passing around class names as strings. Can\u0027t we rather construct the respective object directly? Or have a proper registery/factory?",
       "revId": "702d7e2cf4351d7ad986f1493c96501d2007c085",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
