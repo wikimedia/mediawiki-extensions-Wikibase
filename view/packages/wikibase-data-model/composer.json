@@ -2,7 +2,7 @@
 	"name": "wikibase/data-model-javascript",
 	"description": "Wikibase datamodel implementation in JavaScript",
 	"require": {
-		"data-values/javascript": "~0.5.0"
+		"data-values/javascript": "~0.6.0"
 	},
 	"license": "GPL-2.0+",
 	"authors": [
