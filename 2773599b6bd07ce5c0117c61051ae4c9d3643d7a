@@ -33,6 +33,24 @@
       "revId": "2773599b6bd07ce5c0117c61051ae4c9d3643d7a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_56d3e804",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-05T15:25:48Z",
+      "side": 1,
+      "message": "oh, right, the comment should go.",
+      "parentUuid": "6e936f18_168b2073",
+      "revId": "2773599b6bd07ce5c0117c61051ae4c9d3643d7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
