@@ -561,19 +561,50 @@
 	} );
 
 	QUnit.test( 'CustomItem constructor', function( assert ) {
-		var item = new $.ui.ooMenu.CustomItem( 'label' );
+		var testSets = [
+			['label'],
+			[$( '<div>label</div>' )],
+			['label', true],
+			['label', false],
+			['label', function() { return true; }],
+			['label', null, function() { return 'action'; }, 'cssClass', 'someLink']
+		];
 
-		assert.ok(
-			item instanceof $.ui.ooMenu.CustomItem,
-			'Instantiated custom item with plain string label.'
-		);
+		for( var i = 0; i < testSets.length; i++ ) {
+			var args = testSets[i].concat( new Array( 5 - testSets[i].length ) ),
+				item = new $.ui.ooMenu.CustomItem( args[0], args[1], args[2], args[3], args[4] );
 
-		item = new $.ui.ooMenu.CustomItem( $( '<div>label</div>' ) );
+			assert.ok(
+				item instanceof $.ui.ooMenu.CustomItem,
+				'Test set #' + i + ': Instantiated custom item.'
+			);
 
-		assert.ok(
-			item instanceof $.ui.ooMenu.CustomItem,
-			'Instantiated custom item with jQuery object label.'
-		);
+			var expectedVisibility = true;
+
+			if( $.isFunction( testSets[i][1] ) ) {
+				expectedVisibility = testSets[i][1]();
+			} else if( typeof testSets[i][1] === 'boolean' ) {
+				expectedVisibility = testSets[i][1];
+			}
+
+			assert.strictEqual(
+				item.getVisibility(),
+				expectedVisibility,
+				'Test set #' + i + ': Verified getVisibile() return value.'
+			);
+
+			assert.equal(
+				item.getAction(),
+				$.isFunction( testSets[i][2] ) ? testSets[i][2] : null,
+				'Test set #' + i + ': Verified getAction() return value.'
+			);
+
+			assert.equal(
+				item.getCssClass(),
+				testSets[i][3] || '',
+				'Test set #' + i + ': Verified getCssClass() return value.'
+			);
+		}
 	} );
 
 }( jQuery, QUnit ) );

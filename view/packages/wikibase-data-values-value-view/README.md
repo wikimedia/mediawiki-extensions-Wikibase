@@ -105,6 +105,11 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.8.1 (dev)
+
+#### Enhancements
+* $.ui.ooMenu.CustomItem: Added `setVisibility`, `setAction` and `setCssClass` functions. Visibility may be set to a static (boolean) value.
+
 ### 0.8.0 (2014-11-03)
 
 #### Enhancements
