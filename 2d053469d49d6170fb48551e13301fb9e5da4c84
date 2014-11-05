@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_a16d442f",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-05T18:15:54Z",
+      "side": 1,
+      "message": "php sucks :)",
+      "revId": "2d053469d49d6170fb48551e13301fb9e5da4c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
