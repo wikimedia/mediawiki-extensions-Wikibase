@@ -397,11 +397,11 @@ class EditEntity extends ModifyEntity {
 	 * @since 0.4
 	 *
 	 * @param array $siteLinks
-	 * @param Entity|Item $entity
+	 * @param Item $entity
 	 *
 	 * @return ChangeOp[]
 	 */
-	protected function getSiteLinksChangeOps( $siteLinks, Entity $entity ) {
+	protected function getSiteLinksChangeOps( $siteLinks, Item $item ) {
 		$siteLinksChangeOps = array();
 
 		if ( !is_array( $siteLinks ) ) {
@@ -445,7 +445,7 @@ class EditEntity extends ModifyEntity {
 				} else {
 					$linkPage = null;
 
-					if ( !$entity->hasLinkToSite( $globalSiteId ) ) {
+					if ( !$item->hasLinkToSite( $globalSiteId ) ) {
 						$this->dieError( "Cannot modify badges: sitelink to '{$globalSiteId}' doesn't exist", 'no-such-sitelink' );
 					}
 				}
