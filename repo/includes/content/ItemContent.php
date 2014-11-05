@@ -198,23 +198,6 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * @see getEntityView()
-	 *
-	 * @param FingerprintView $fingerprintView
-	 * @param ClaimsView $claimsView
-	 * @param Language $language
-	 *
-	 * @return ItemView
-	 */
-	protected function newEntityView(
-		FingerprintView $fingerprintView,
-		ClaimsView $claimsView,
-		Language $language
-	) {
-		return new ItemView( $fingerprintView, $claimsView, $language );
-	}
-
-	/**
 	 * @see EntityContent::getEntityPageProperties
 	 *
 	 * Records the number of sitelinks in the 'wb-sitelinks' key.
