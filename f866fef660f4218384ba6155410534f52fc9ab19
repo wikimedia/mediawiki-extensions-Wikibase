@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_b6e4acdc",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-05T15:17:27Z",
+      "side": 0,
+      "message": "You are right, it\u0027s not really related to this change, would be more fitting for the follow-up  I4ef7a931. I just killed it while I was at it removing obsolete/unused members.",
+      "parentUuid": "6e936f18_b63eec85",
+      "revId": "f866fef660f4218384ba6155410534f52fc9ab19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_f63474a9",
         "filename": "client/includes/ChangeHandler.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-05T14:35:04Z",
       "side": 0,
       "message": "why is this removed?",
+      "revId": "f866fef660f4218384ba6155410534f52fc9ab19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_96c97057",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-05T15:17:27Z",
+      "side": 0,
+      "message": "Because it does nothing: $this-\u003eactionMask is hard coded to be 0xFFFF. Also, actions are changed to be strings, not bitmaps, by the follow up I4ef7a9315b1.",
+      "parentUuid": "6e936f18_f63474a9",
       "revId": "f866fef660f4218384ba6155410534f52fc9ab19",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
