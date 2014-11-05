@@ -9,19 +9,19 @@ The recommended way to use this library is via [Composer](http://getcomposer.org
 To add this package as a local, per-project dependency to your project, simply add a
 dependency on `wikibase/serialization-javascript` to your project's `composer.json` file.
 Here is a minimal example of a `composer.json` file that just defines a dependency on
-version 1.0 of this package:
+version 2.0 of this package:
 
 ```json
 {
 	"require": {
-		"wikibase/serialization-javascript": "1.0.*"
+		"wikibase/serialization-javascript": "2.0.*"
 	}
 }
 ```
 
 ## Release notes
 
-### 2.0 (dev)
+### 2.0 (2014-11-05)
 
 * Removed <code>wikibase.serialization.entities</code> ResourceLoader module; use <code>wikibase.serialization.EntityDeserializer</code> instead.
 * Removed options from Serializer/Deserializer as it was never used and there is no intention to use options.
