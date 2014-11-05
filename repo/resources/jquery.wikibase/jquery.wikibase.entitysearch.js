@@ -1,0 +1,126 @@
+/**
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+( function( $ ) {
+	'use strict';
+
+	var PARENT = $.wikibase.entityselector;
+
+/**
+ * Entity selector widget enhanced to be used as global search element.
+ * @extends jQuery.wikibase.entityselector
+ *
+ * @option {jQuery.ui.ooMenu.CustomItem} [suggestionsPlaceholder]
+ *         Suggestions list item to be displayed while suggestions are retrieved.
+ */
+$.widget( 'wikibase.entitysearch', PARENT, {
+
+	/**
+	 * @see jQuery.wikibase.entityselector.options
+	 */
+	options: {
+		suggestionsPlaceholder: null
+	},
+
+	/**
+	 * @see jQuery.wikibase.entityselector._create
+	 */
+	_create: function() {
+		var self = this;
+
+		PARENT.prototype._create.call( this );
+
+		this.element
+		.on( 'eachchange.' + this.widgetName, function() {
+			if( self.options.suggestionsPlaceholder ) {
+				self.options.suggestionsPlaceholder.setVisibility( true );
+			}
+			self._updateMenu( [] );
+		} );
+	},
+
+	/**
+	 *@see jQuery.wikibase.entityselector._createMenuItemFromSuggestion
+	 */
+	_createMenuItemFromSuggestion: function( suggestion ) {
+		var $label = this._createLabelFromSuggestion( suggestion ),
+			value = suggestion.label || suggestion.id;
+
+		return new PARENT.Item( $label, value, suggestion );
+	},
+
+	/**
+	 * @see jQuery.ui.suggester._setOption
+	 */
+	_setOption: function( key, value ) {
+		if( key === 'suggestionsPlaceholder' ) {
+			var customItems = this.options.menu.option( 'customItems' );
+
+			customItems.splice( $.inArray( this.options.suggestionsPlaceholder, customItems ), 1 );
+
+			if( value instanceof $.ui.ooMenu.CustomItem ) {
+				customItems.unshift( value );
+			}
+
+			this._close();
+		}
+		return PARENT.prototype._setOption.apply( this,  arguments );
+	},
+
+	/**
+	 * @see jQuery.wikibase.entityselector._initMenu
+	 */
+	_initMenu: function( ooMenu ) {
+		PARENT.prototype._initMenu.apply( this, arguments );
+
+		if( this.options.suggestionsPlaceholder ) {
+			ooMenu.option( 'customItems' ).unshift( this.options.suggestionsPlaceholder );
+		}
+
+		ooMenu.element.addClass( 'wikibase-entitysearch-list' );
+
+		$( ooMenu )
+		.off( 'selected' )
+		.on( 'selected.entitysearch', function( event, item ) {
+			if(
+				event.originalEvent
+				&& /^key/.test( event.originalEvent.type )
+				&& !( item instanceof $.ui.ooMenu.CustomItem )
+			) {
+				window.location.href = item.getEntityStub().url;
+			}
+		} );
+
+		return ooMenu;
+	},
+
+	/**
+	 * @see jQuery.ui.suggester._updateMenuVisibility
+	 */
+	_updateMenuVisibility: function() {
+		if( !this._term.length ) {
+			this._close();
+		} else {
+			this._open();
+			this.repositionMenu();
+		}
+	},
+
+	/**
+	 * @see jQuery.wikibase.entityselector._getSuggestions
+	 */
+	_getSuggestions: function( term ) {
+		var self = this,
+			promise = PARENT.prototype._getSuggestions.call( this, term );
+
+		return promise.done( function( suggestions, searchTerm ) {
+			if( self.options.suggestionsPlaceholder ) {
+				self.options.suggestionsPlaceholder.setVisibility( false );
+			}
+		} );
+	}
+
+} );
+
+}( jQuery ) );
