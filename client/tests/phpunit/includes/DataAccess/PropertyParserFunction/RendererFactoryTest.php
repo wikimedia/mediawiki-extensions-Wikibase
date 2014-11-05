@@ -38,6 +38,7 @@ class RendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$rendererFactory = new RendererFactory(
+			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder(),
 			$this->getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory()
@@ -66,6 +67,7 @@ class RendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNewLanguageAwareRenderer() {
 		$rendererFactory = new RendererFactory(
+			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder(),
 			$this->getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory()
@@ -77,6 +79,16 @@ class RendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$languageRendererClass = 'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer';
 		$this->assertInstanceOf( $languageRendererClass, $renderer );
+	}
+
+	private function getPropertyIdResolver() {
+		$propertyIdResolver = $this->getMockBuilder(
+				'Wikibase\DataAccess\PropertyParserFunction\PropertyIdResolver'
+			)
+			->disableOriginalConstructor()
+			->getMock();
+
+		return $propertyIdResolver;
 	}
 
 	private function getSnaksFinder() {

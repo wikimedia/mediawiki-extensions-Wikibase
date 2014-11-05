@@ -30,26 +30,21 @@ use Wikibase\PropertyLabelResolver;
 class SnaksFinder {
 
 	private $entityLookup;
-	private $propertyLabelResolver;
 
-	public function __construct(
-		EntityLookup $entityLookup,
-		PropertyLabelResolver $propertyLabelResolver
-	) {
+	public function __construct( EntityLookup $entityLookup ) {
 		$this->entityLookup = $entityLookup;
-		$this->propertyLabelResolver = $propertyLabelResolver;
 	}
 
 	/**
-	 * @param EntityId $entityId
-	 * @param string $propertyLabel
-	 * @param string $languageCode
+	 * @param EntityId $entityId - the item or property that the property is used on
+	 * @param PropertyId $propertyId - the PropertyId for which we want the formatted Snaks
+	 * @param string $languageCode - language to render values
 	 *
 	 * TODO: use SnakList instead of array of Snaks
 	 *
 	 * @return Snak[]
 	 */
-	public function findSnaks( EntityId $entityId, $propertyLabel, $languageCode ) {
+	public function findSnaks( EntityId $entityId, PropertyId $propertyId, $languageCode ) {
 		wfProfileIn( __METHOD__ );
 
 		$entity = $this->entityLookup->getEntity( $entityId );
@@ -62,7 +57,7 @@ class SnaksFinder {
 
 		// We only want the best claims over here, so that we only show the most
 		// relevant information.
-		$claims = $this->getClaimsForProperty( $entity, $propertyLabel, $languageCode );
+		$claims = $this->getClaimsForProperty( $entity, $propertyId, $languageCode );
 
 		$bestClaims = $claims->getBestClaims();
 
@@ -80,58 +75,18 @@ class SnaksFinder {
 
 	/**
 	 * Returns such Claims from $entity that have a main Snak for the property that
-	 * is specified by $propertyLabel.
+	 * is specified by $propertyId.
 	 *
 	 * @param Entity $entity The Entity from which to get the clams
-	 * @param string $propertyLabel A property label (in the wiki's content language) or a prefixed property ID.
+	 * @param string $propertyId
 	 * @param string $languageCode
 	 *
 	 * @return Claims The claims for the given property.
 	 */
-	private function getClaimsForProperty( Entity $entity, $propertyLabel, $languageCode ) {
+	private function getClaimsForProperty( Entity $entity, $propertyId, $languageCode ) {
 		$allClaims = new Claims( $entity->getClaims() );
 
-		$propertyId = $this->getPropertyIdFromIdSerializationOrLabel( $propertyLabel, $languageCode );
-		$claims = $allClaims->getClaimsForProperty( $propertyId );
-
-		return $claims;
-	}
-
-	/**
-	 * @param string $idOrLabel
-	 * @param string $languageCode
-	 *
-	 * @throws InvalidArgumentException
-	 * @throws PropertyLabelNotResolvedException
-	 * @return PropertyId
-	 */
-	private function getPropertyIdFromIdSerializationOrLabel( $idOrLabel, $languageCode ) {
-		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
-
-		try {
-			$propertyId = $idParser->parse( $idOrLabel );
-
-			if ( !( $propertyId instanceof PropertyId ) ) {
-				throw new InvalidArgumentException( 'Not a valid property id' );
-			}
-		} catch ( EntityIdParsingException $ex ) {
-			//XXX: It might become useful to give the PropertyLabelResolver a hint as to which
-			//     properties may become relevant during the present request, namely the ones
-			//     used by the Item linked to the current page. This could be done with
-			//     something like this:
-			//
-			//     $this->propertyLabelResolver->preloadLabelsFor( $propertiesUsedByItem );
-
-			$propertyIds = $this->propertyLabelResolver->getPropertyIdsForLabels( array( $idOrLabel ) );
-
-			if ( empty( $propertyIds ) ) {
-				throw new PropertyLabelNotResolvedException( $idOrLabel, $languageCode );
-			}
-
-			$propertyId = $propertyIds[$idOrLabel];
-		}
-
-		return $propertyId;
+		return $allClaims->getClaimsForProperty( $propertyId );
 	}
 
 }
