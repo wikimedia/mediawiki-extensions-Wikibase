@@ -183,8 +183,6 @@ class DirectSqlStore implements ClientStore {
 					new TitleFactory()
 				);
 			} else {
-				throw new RuntimeException( 'useLegacyUsageIndex must be set to true, until client side tracking is fully implemented.' );
-
 				$this->usageLookup = $this->getUsageTracker();
 			}
 		}
