@@ -169,7 +169,7 @@ class ApiErrorReporter {
 			// NOTE: Ignore generic error messages, rely on the code instead!
 			// XXX: No better way to do this?
 			if ( $key !== 'wikibase-error-unexpected' ) {
-				$this->dieMessage( $message, $errorCode, $httpRespCode, $extradata );
+				$this->dieMessageObject( $message, $errorCode, $httpRespCode, $extradata );
 			}
 		}
 
@@ -179,8 +179,32 @@ class ApiErrorReporter {
 	}
 
 	/**
-	 * Aborts the request with an error message. This is intended as an alternative
-	 * for ApiBase::dieUsage(). The given message is included in the error's extra data.
+	 * Aborts the request with an error message derived from the error code.
+	 *
+	 * @param string $errorCode A code identifying the error.
+	 * @param mixed ... Parameters for the Message.
+	 *
+	 * @throws LogicException
+	 */
+	public function dieMessage( $errorCode ) {
+		$messageName = "wikibase-api-$errorCode";
+		$params = func_get_args();
+		array_shift( $params );
+		$message = wfMessage( $messageName, $params );
+
+		if ( !$message || !$message->exists() ) {
+			// TODO: log warning
+			// TODO: replace with generic message
+		}
+
+		$this->dieMessageObject( $message, $errorCode );
+
+		throw new LogicException( 'UsageException not thrown' );
+	}
+
+	/**
+	 * Aborts the request with an error message. The given message is included in
+	 * the error's extra data.
 	 *
 	 * @see ApiBase::dieUsage()
 	 *
@@ -194,7 +218,7 @@ class ApiErrorReporter {
 	 *
 	 * @throws LogicException
 	 */
-	public function dieMessage( Message $message, $errorCode, $httpRespCode = 0, $extradata = array() ) {
+	private function dieMessageObject( Message $message, $errorCode, $httpRespCode = 0, $extradata = array() ) {
 		$description = $this->forceMessageLanguage( $message, 'en' )->useDatabase( false )->plain();
 
 		$this->addMessageToResult( $message, $extradata );

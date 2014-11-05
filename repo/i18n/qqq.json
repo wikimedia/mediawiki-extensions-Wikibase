@@ -288,7 +288,7 @@
 	"wikibase-api-invalid-entity-id": "!!DO NOT TRANSLATE!! Invalid entityid has been supplied",
 	"wikibase-api-no-common-iten": "!!DO NOT TRANSLATE!! There is no common item between to passed parameters when there should be",
 	"wikibase-api-no-data": "!!DO NOT TRANSLATE!! This is an error message for a situation where the \"data\" argument to the API is lacking content. Usually this should never be shown to the user, unless there are some exceptional error condition. This message should probably not exist in the final version.",
-	"wikibase-api-no-external-page": "!!DO NOT TRANSLATE!! This is an error message where the external client did reply, but either because of a faulty reply or because the page title could not be unwound, it was not possible to identify an external page.",
+	"wikibase-api-no-external-page": "This is an error message where the external client did reply, but either because of a faulty reply or because the page title could not be unwound, it was not possible to identify an external page.\n* $1 - the site id\n* $2 - the page id",
 	"wikibase-api-nosuchrevid": "!!DO NOT TRANSLATE!! Page or entity with this revision id could not be found in the database",
 	"wikibase-api-no-such-claim": "!!DO NOT TRANSLATE!! Could not find such a claim on wikidata, this could be to the user entering the wrong data",
 	"wikibase-api-no-such-entity": "!!DO NOT TRANSLATE!! Could not find such an entity, this could be to the user entering the wrong data",

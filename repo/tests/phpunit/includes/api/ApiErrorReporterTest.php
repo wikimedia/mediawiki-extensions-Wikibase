@@ -146,54 +146,39 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	}
 
 	public function messageProvider() {
-		$message = new Message( 'wikibase-api-no-such-sitelink', array( 'Foo' ) );
+		$code = 'no-such-sitelink';
+		$param = 'Foo';
 
 		return array(
-			// Using an (existing) message, the message should be included in the extra data.
-			// The code string should be unchanged.
+			// The appropriate message should be included in the extra data.
 			// Most importantly, the info field should contain the message text in English,
 			// while the HTML should be in German. Any Message parameters must be present.
 			'known error code' => array(
-				'$message' => $message,
-				'$code' => 'errorreporter-test-ugh',
-				'$httpStatusCode' => 0,
-				'$extradata' => null,
+				'$code' => $code,
+				'$param' => $param,
 				'$infoPattern' => '/sitelink/',
-				'$expectedData' => array(
+				'$expectedDataFields' => array(
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
 					'messages/0/html/*' => '/gefunden/', // in German
 					'messages/0/parameters/0' => '/Foo/',
 				),
-			),
-
-			// Any extra data should be passed through.
-			// The HTTP status code should be used.
-			'extradata' => array(
-				'$message' => $message,
-				'$code' => 'errorreporter-test-ugh',
-				'$httpStatusCode' => 555,
-				'$extradata' => array( 'fruit' => 'Banana' ),
-				'$infoPattern' => null,
-				'$expectedData' => array(
-					'fruit' => 'Banana',
-				),
-			),
+			)
 		);
 	}
 
 	/**
 	 * @dataProvider messageProvider
 	 */
-	public function testDieMessage( Message $message, $code, $httpStatusCode, $extradata, $infoPattern, $expectedDataFields ) {
+	public function testDieMessage( $code, $param, $infoPattern, $expectedDataFields ) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
 
 		try {
-			$reporter->dieMessage( $message, $code, $httpStatusCode, $extradata );
+			$reporter->dieMessage( $code, $param );
 			$this->fail( 'UsageException was not thrown!' );
 		} catch ( UsageException $ex ) {
-			$this->assertUsageException( $infoPattern, $code, $httpStatusCode, $expectedDataFields, $ex );
+			$this->assertUsageException( $infoPattern, $code, null, $expectedDataFields, $ex );
 		}
 	}
 
