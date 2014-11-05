@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_e1090c30",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-05T16:26:40Z",
+      "side": 1,
+      "message": "Context is not needed here, afaik.  All that is needed is $languageCode and then  in EntityView, it also needs language direction. (which has to come from the Language object somehow).\n\npossibly Language::factory( $languageCode ) would work for EntityView, either injecting that for now or passing the $languageCode and $direction if that\u0027s all that we really need.\n\nit appears there is in process caching of the Language object, via the factory method, so maybe it\u0027s not completely terrible thing to do and imho is better for now than using the context object.",
+      "revId": "702d7e2cf4351d7ad986f1493c96501d2007c085",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_81104854",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-05T16:26:40Z",
+      "side": 1,
+      "message": "i realize this is just moved here, but appear all that the LanguageFallbackChainFactory actually needs is the Language and User-\u003eisAnon (or maybe the User object)\n\ni don\u0027t see a method for that there, but think something like that would be better than having to deal with the Context object here.",
+      "revId": "702d7e2cf4351d7ad986f1493c96501d2007c085",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_16900045",
         "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
         "patchSetId": 15
