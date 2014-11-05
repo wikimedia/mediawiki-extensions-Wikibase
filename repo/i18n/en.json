@@ -271,7 +271,7 @@
 	"wikibase-api-no-such-entity-link": "Could not find such an entity link",
 	"wikibase-api-no-such-reference": "Could not find such a reference",
 	"wikibase-api-no-such-site": "Could not find such a site",
-	"wikibase-api-no-such-sitelink": "Could not find such a sitelink",
+	"wikibase-api-no-such-sitelink": "Could not find a sitelink to '$1' when trying to edit badges.",
 	"wikibase-api-no-such-statement": "Could not find such a statement",
 	"wikibase-api-not-statement": "Not a statement",
 	"wikibase-api-not-item": "Not an item",

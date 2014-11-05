@@ -296,7 +296,7 @@
 	"wikibase-api-no-such-entity-link": "!!DO NOT TRANSLATE!! Could not find such an entity link, this could be to the user entering the wrong data",
 	"wikibase-api-no-such-reference": "!!DO NOT TRANSLATE!! Could not find such a reference, this could be to the user entering the wrong data",
 	"wikibase-api-no-such-site": "!!DO NOT TRANSLATE!! Could not find such a site, this could be to the user entering the wrong data",
-	"wikibase-api-no-such-sitelink": "Could not find such a sitelink, this could be to the user entering the wrong data",
+	"wikibase-api-no-such-sitelink": "Could not find such a sitelink, this could be to the user entering the wrong data\n* $1 - the site id",
 	"wikibase-api-no-such-statement": "!!DO NOT TRANSLATE!! Could not find such a statement, this could be to the user entering the wrong data",
 	"wikibase-api-not-statement": "!!DO NOT TRANSLATE!! The passed parameter is Not a statement when a statement is expected",
 	"wikibase-api-not-item": "!!DO NOT TRANSLATE!! The passed parameter is Not an item when an item is expected (the passed parameter may infact be a property)",
