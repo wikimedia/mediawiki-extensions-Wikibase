@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_bb40155c",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-05T13:59:35Z",
+      "side": 1,
+      "message": "think it would be better not to introduce the setting yet, imho, if it doesn\u0027t work yet and not hooked up.\n\nsuppose we can live with this though given the follow up patches.",
+      "revId": "f866fef660f4218384ba6155410534f52fc9ab19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
