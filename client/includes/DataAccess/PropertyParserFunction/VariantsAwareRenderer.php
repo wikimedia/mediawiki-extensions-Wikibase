@@ -17,10 +17,10 @@ use Wikibase\Client\Usage\UsageAccumulator;
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
  */
-class VariantsAwareRenderer implements Renderer {
+class VariantsAwareRenderer implements PropertyClaimsRenderer {
 
 	/**
-	 * @var RendererFactory
+	 * @var PropertyClaimsRendererFactory
 	 */
 	private $rendererFactory;
 
@@ -35,11 +35,11 @@ class VariantsAwareRenderer implements Renderer {
 	private $usageAccumulator;
 
 	/**
-	 * @param RendererFactory $rendererFactory
+	 * @param PropertyClaimsRendererFactory $rendererFactory
 	 * @param string[] $variants
 	 * @param UsageAccumulator $usageAccumulator
 	 */
-	public function __construct( RendererFactory $rendererFactory, array $variants, UsageAccumulator $usageAccumulator ) {
+	public function __construct( PropertyClaimsRendererFactory $rendererFactory, array $variants, UsageAccumulator $usageAccumulator ) {
 		$this->rendererFactory = $rendererFactory;
 		$this->variants = $variants;
 		$this->usageAccumulator = $usageAccumulator;
