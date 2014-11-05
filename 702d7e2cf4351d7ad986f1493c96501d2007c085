@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_16900045",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-05T15:07:27Z",
+      "side": 1,
+      "message": "it appears all we need $language for is to know the language code and direction.  there has to be a better way to do that...",
+      "revId": "702d7e2cf4351d7ad986f1493c96501d2007c085",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
