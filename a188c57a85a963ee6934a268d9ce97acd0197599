@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_3b1725f4",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-05T12:20:35Z",
+      "side": 1,
+      "message": "Since you set self._term \u003d item.getValue(), this code seems to be trivial and not behaving the way you wanted it to.",
+      "revId": "a188c57a85a963ee6934a268d9ce97acd0197599",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
