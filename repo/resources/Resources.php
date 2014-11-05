@@ -19,6 +19,21 @@ return call_user_func( function() {
 	);
 
 	$modules = array(
+
+		'jquery.wikibase.entitysearch' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.entitysearch.js',
+			),
+			'styles' => array(
+				'jquery.wikibase/themes/default/jquery.wikibase.entitysearch.css',
+			),
+			'dependencies' => array(
+				'jquery.event.special.eachchange',
+				'jquery.ui.ooMenu',
+				'jquery.wikibase.entityselector',
+			),
+		),
+
 		'wikibase.ui.entityViewInit' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.ui.entityViewInit.js' // should probably be adjusted for more modularity
@@ -82,11 +97,11 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wikibase.ui.entitysearch.js',
 			),
-			'styles' => array(
-				'themes/default/wikibase.ui.entitysearch.css',
-			),
 			'dependencies' => array(
 				'jquery.event.special.eachchange',
+				'jquery.spinner',
+				'jquery.ui.ooMenu',
+				'jquery.wikibase.entitysearch',
 				'jquery.wikibase.entityselector',
 			),
 			'messages' => array(
