@@ -1,7 +1,6 @@
 <?php
 namespace Wikibase\Client\Tests\Usage;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Client\Usage\UsageLookup;
@@ -9,7 +8,7 @@ use PHPUnit_Framework_Assert as Assert;
 use Wikibase\Client\Usage\UsageTracker;
 
 /**
- * Base class for unit tests for UsageLookup implementations, providing
+ * Helper class for unit tests for UsageLookup implementations, providing
  * generic tests for the interface's contract.
  *
  * @license GPL 2+

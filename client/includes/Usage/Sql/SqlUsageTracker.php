@@ -157,7 +157,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * @see UsageTracker::getUsageForPage
+	 * @see UsageTracker::getUsagesForPage
 	 *
 	 * @param int $pageId
 	 *
