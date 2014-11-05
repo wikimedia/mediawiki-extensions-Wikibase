@@ -107,6 +107,23 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_902bb8da",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/PropertyIdResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-05T09:33:41Z",
+      "side": 1,
+      "message": "This should perhaps be called PropertyNameResolver (where the \"name\" could be a label or an id). This doesn\u0027t resolve ids. It resolved *to* ids.",
+      "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_822ff79b",
         "filename": "client/includes/DataAccess/PropertyParserFunction/PropertyIdResolver.php",
         "patchSetId": 6
@@ -135,6 +152,24 @@
       "writtenOn": "2014-11-04T19:36:42Z",
       "side": 1,
       "message": "added check for if the property exists in https://gerrit.wikimedia.org/r/#/c/171009/\n\nas for name, what do you suggest? i\u0027m always open to better naming ideas :) maybe this is more of a PropertyId parser of some kind?",
+      "parentUuid": "6e936f18_822ff79b",
+      "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_f0147ca2",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/PropertyIdResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-05T09:33:41Z",
+      "side": 1,
+      "message": "It resolves a property name (which may be a label or an id string), and returns the appropriate PropertyId. Seems fien to me.",
       "parentUuid": "6e936f18_822ff79b",
       "revId": "87b3a215bdafbc48dca598b83d2d0ba797817e85",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
