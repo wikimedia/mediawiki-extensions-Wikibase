@@ -349,20 +349,31 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromContextForPageView( IContextSource $context ) {
+		return $this->newFromUserAndLanguageCodeForPageView(
+			$context->getUser(),
+			$context->getLanguage()->getCode()
+		);
+	}
+
+	/**
+	 * @param User $user
+	 * @param string $languageCode
+	 *
+	 * @return LanguageFallbackChain
+	 */
+	public function newFromUserAndLanguageCodeForPageView( User $user, $languageCode ) {
 		if ( $this->isExperimentalMode ) {
 			// The generated chain should yield a cacheable result
-			if ( $this->anonymousPageViewCached && $context->getUser()->isAnon() ) {
+			if ( $this->anonymousPageViewCached && $user->isAnon() ) {
 				// Anonymous users share the same Squid cache, which is splitted by URL.
-				// That means we can't do anything except for what completely depends by URL such as &uselang=.
-				return $this->newFromLanguage( $context->getLanguage() );
+				// That means we can't do anything except for what completely depends
+				// by URL such as &uselang=.
+				return $this->newFromLanguageCode( $languageCode );
 			}
 
-			return $this->newFromContext( $context );
+			return $this->newFromUserAndLanguageCode( $user, $languageCode );
 		} else {
-			return $this->newFromLanguage(
-				$context->getLanguage(),
-				self::FALLBACK_SELF
-			);
+			return $this->newFromLanguageCode( $languageCode, self::FALLBACK_SELF );
 		}
 	}
 
