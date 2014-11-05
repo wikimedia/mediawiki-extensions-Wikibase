@@ -549,4 +549,16 @@ abstract class ApiWikibase extends ApiBase {
 		$this->errorReporter->dieException( $exception, $code, $httpStatusCode, $extradata );
 	}
 
+	/**
+	 * @see ApiErrorReporter::dieMessage()
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $errorCode A code identifying the error.
+	 * @param string ... Parameters for the Message.
+	 */
+	protected function dieMessage( $errorCode ) {
+		call_user_func_array( array( $this->errorReporter, 'dieMessage' ), func_get_args() );
+	}
+
 }
