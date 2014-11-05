@@ -141,7 +141,7 @@ class SetSiteLink extends ModifyEntity {
 
 				if ( $page === false ) {
 					wfProfileOut( __METHOD__ );
-					$this->dieError( 'The external client site did not provide page information' , 'no-external-page' );
+					$this->getErrorReporter()->dieMessage( 'no-external-page', $linksite, $params['linktitle'] );
 				}
 			} else {
 				$page = null;

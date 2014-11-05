@@ -263,7 +263,7 @@
 	"wikibase-api-invalid-entity-id": "Invalid entity id",
 	"wikibase-api-no-common-iten": "There is no common item",
 	"wikibase-api-no-data": "No data to operate on",
-	"wikibase-api-no-external-page": "The external client site did not provide page information",
+	"wikibase-api-no-external-page": "The external client site '$1' did not provide page information for page '$2'.",
 	"wikibase-api-nosuchrevid": "Revision with id not found",
 	"wikibase-api-no-such-claim": "Could not find such a claim",
 	"wikibase-api-no-such-entity": "Could not find such an entity",
