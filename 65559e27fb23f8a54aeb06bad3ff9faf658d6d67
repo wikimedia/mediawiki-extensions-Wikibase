@@ -186,6 +186,74 @@
       "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_509be278",
+        "filename": "repo/tests/phpunit/includes/content/DeferredCopyEntityHolderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:53:25Z",
+      "side": 1,
+      "message": "FYI: You can just do \"-\u003esetId( 17 )\". That is not deprecated, since it\u0027s unambiguous for items.",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_9093aa51",
+        "filename": "repo/tests/phpunit/includes/content/DeferredCopyEntityHolderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:53:25Z",
+      "side": 1,
+      "message": "This creates new usage of deprecated code. Entities are not guaranteed to have labels. In this test you know you have an item, so you can get the label via the fingerprint. Then again, why should you just get this label? Why not do full comparison? That\u0027s simpler and will catch more issues (such as a random other label being added (granted, that is not likely to happen)).",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_30c73669",
+        "filename": "repo/tests/phpunit/includes/content/DeferredDecodingEntityHolderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:53:25Z",
+      "side": 1,
+      "message": "like this its more of an integration test, since it binds to the real factory, serializers and deserializers. Unfortunate but not a blocker",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_709e1e5a",
+        "filename": "repo/tests/phpunit/includes/content/DeferredDecodingEntityHolderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:53:25Z",
+      "side": 1,
+      "message": "same issue here",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
