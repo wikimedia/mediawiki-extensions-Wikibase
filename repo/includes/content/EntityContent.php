@@ -355,10 +355,8 @@ abstract class EntityContent extends AbstractContent {
 		// ---------------------------------------------------------------------
 
 		$configBuilder = new ParserOutputJsConfigBuilder(
-			$entityInfoBuilderFactory,
 			$wikibaseRepo->getEntityIdParser(),
 			$entityContentFactory,
-			new ReferencedEntitiesFinder(),
 			$context->getLanguage()->getCode()
 		);
 
@@ -369,7 +367,9 @@ abstract class EntityContent extends AbstractContent {
 			$configBuilder,
 			$serializationOptions,
 			$entityContentFactory,
-			$dataTypeLookup
+			$dataTypeLookup,
+			$entityInfoBuilderFactory,
+			$context->getLanguage()->getCode()
 		);
 	}
 
