@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_b5e57908",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-06T17:00:53Z",
+      "side": 1,
+      "message": "The order of these properties is confusing, I love to have them in the same order as in the constructor.",
+      "revId": "aed488210e22af228a335df6179947bbe60fec9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1569cd87",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-06T17:00:53Z",
+      "side": 1,
+      "message": "What\u0027s RC? How is it possible to \"inject recent changes\" somewhere? Inject to? From? What?",
+      "revId": "aed488210e22af228a335df6179947bbe60fec9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d50285bd",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-06T17:00:53Z",
+      "side": 1,
+      "message": "What does this mean?",
+      "revId": "aed488210e22af228a335df6179947bbe60fec9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_15f6adc2",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-06T17:00:53Z",
+      "side": 1,
+      "message": "Bool check is already done above.",
+      "revId": "aed488210e22af228a335df6179947bbe60fec9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_75185123",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-06T17:00:53Z",
+      "side": 1,
+      "message": "The last two properties are not declared.",
+      "revId": "aed488210e22af228a335df6179947bbe60fec9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_950cfdf1",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-06T17:00:53Z",
+      "side": 1,
+      "message": "This is dead code. Also not declared.",
+      "revId": "aed488210e22af228a335df6179947bbe60fec9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_35eac99c",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-06T17:00:53Z",
+      "side": 1,
+      "message": "Not sure why but this is always null and therefor dead code.",
+      "revId": "aed488210e22af228a335df6179947bbe60fec9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
