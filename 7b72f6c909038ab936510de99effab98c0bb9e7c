@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_1066bab8",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-06T19:42:53Z",
+      "side": 1,
+      "message": "Should specify the structure of the array, e.g. \"As returned by EntityInfoBuilder::getEntityInfo\"",
+      "revId": "7b72f6c909038ab936510de99effab98c0bb9e7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_3063b6a8",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-06T19:42:53Z",
+      "side": 1,
+      "message": "If we want to apply fallbacks, we need all relevant language codes here.",
+      "revId": "7b72f6c909038ab936510de99effab98c0bb9e7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_30fad6b6",
+        "filename": "repo/includes/ParserOutputJsConfigBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-06T19:42:53Z",
+      "side": 1,
+      "message": "Please specify the structure of such records, or refer to where this structure is specified.",
+      "revId": "7b72f6c909038ab936510de99effab98c0bb9e7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_10147aec",
+        "filename": "repo/includes/ParserOutputJsConfigBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-06T19:42:53Z",
+      "side": 1,
+      "message": "Perhaps this logic should also go into the EntityInfoBuilder",
+      "revId": "7b72f6c909038ab936510de99effab98c0bb9e7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
