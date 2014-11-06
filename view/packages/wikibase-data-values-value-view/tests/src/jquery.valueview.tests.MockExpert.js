@@ -4,7 +4,7 @@
  */
 jQuery.valueview.tests = jQuery.valueview.tests || {};
 
-( function( vv ) {
+( function( $, vv ) {
 	'use strict';
 
 	var PARENT = vv.Expert;
@@ -45,7 +45,8 @@ jQuery.valueview.tests = jQuery.valueview.tests || {};
 		 */
 		draw: function() {
 			this.$viewPort.empty();
+			return $.Deferred().resolve().promise();
 		}
 	} );
 
-}( jQuery.valueview ) );
+}( jQuery, jQuery.valueview ) );

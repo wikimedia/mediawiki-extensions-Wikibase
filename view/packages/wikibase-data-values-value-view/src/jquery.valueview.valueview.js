@@ -14,7 +14,7 @@ var PARENT = $.Widget;
  * an expert currently, nothing will be done.
  *
  * @param {string} fnName Name of the function in jQuery.valueview.Expert
- * @returns {Function}
+ * @return {Function}
  */
 function expertProxy( fnName ) {
 	return function() {
@@ -84,14 +84,30 @@ function expertProxy( fnName ) {
  * @option {Object} mediaWiki mediaWiki JavaScript object that may be used in MediaWiki environment.
  *         Default: null
  *
- * @event change: Triggered when the widget's value is updated.
- *        (1) {jQuery.event} event
+ * @event change
+ *        Triggered when the widget's value is updated.
+ *        - {jQuery.Event}
  *
- * @event parse: Triggered before the value gets parsed.
- *       (1) {jQuery.event} event
+ * @event parse
+ *        Triggered before the value gets parsed.
+ *       - {jQuery.Event}
  *
- * @event afterparse: Triggered after the value has been parsed.
- *       (1) {jQuery.event} event
+ * @event afterparse
+ *        Triggered after the value has been parsed.
+ *       - {jQuery.Event}
+ *
+ * @event afterstartediting
+ *        Triggered after edit mode has been started and rendered.
+ *        - {jQuery.Event}
+ *
+ * @event afterstopediting
+ *        Triggered after edit mode has been stopped and the widget has been redrawn.
+ *        - {jQuery.Event}
+ *        - {boolean} dropValue
+ *
+ * @event afterdraw
+ *        Triggered after the widget has been redrawn.
+ *        - {jQuery.Event}
  */
 $.widget( 'valueview.valueview', PARENT, {
 	/**
@@ -239,15 +255,21 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @since 0.1
 	 */
 	startEditing: function() {
+		var self = this;
+
 		if( this.isInEditMode() ) {
 			return; // return nothing to allow chaining
 		}
+
 		this._initialValue = this.value();
 		this._isInEditMode = true;
 
 		this.element.html( this.$value );
 
-		this.draw();
+		this.draw()
+		.done( function() {
+			self._trigger( 'afterstartediting' );
+		} );
 	},
 
 	/**
@@ -266,10 +288,14 @@ $.widget( 'valueview.valueview', PARENT, {
 		if( !this.isInEditMode() ) {
 			return;
 		}
+
+		var self = this;
+
 		if( dropValue ) {
 			// reinstate initial value from before edit mode
 			this.value( this.initialValue() );
 		}
+
 		this._initialValue = null;
 		this._isInEditMode = false;
 		delete this.__lastValueCharacteristics;
@@ -279,7 +305,10 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		this.$value.detach();
 
-		this.draw();
+		this.draw()
+		.done( function() {
+			self._trigger( 'afterstopediting', null, [dropValue] );
+		} );
 	},
 
 	/**
@@ -515,13 +544,17 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Will render the valueview's current state (does consider edit mode, current value, etc.).
 	 * @since 0.1
+	 *
+	 * @return {jQuery.Promise}
+	 *         No resolved parameters.
+	 *         No rejected parameters.
 	 */
 	draw: function() {
+		var self = this;
+
 		// have native $.Widget functionality add/remove state css classes
 		// (see jQuery.Widget._setOption)
 		PARENT.prototype.option.call( this, 'disabled', this.isDisabled() );
-
-		this.drawContent();
 
 		// add/remove edit mode ui class:
 		var staticModeClass = this.widgetBaseClass + '-instaticmode',
@@ -532,10 +565,22 @@ $.widget( 'valueview.valueview', PARENT, {
 		} else {
 			this.element.addClass( staticModeClass ).removeClass( editModeClass );
 		}
+
+		return this.drawContent()
+			.done( function() {
+				self._trigger( 'afterdraw' );
+			} );
 	},
 
+	/**
+	 * @return {jQuery.Promise}
+	 *         No resolved parameters.
+	 *         No rejected parameters.
+	 */
 	drawContent: function() {
-		var self = this;
+		var self = this,
+			deferred = $.Deferred();
+
 		if( this.isInEditMode() ) {
 			this._updateTextValue().then( function () {
 				if( !self.isInEditMode() ) {
@@ -549,11 +594,20 @@ $.widget( 'valueview.valueview', PARENT, {
 				//  and no value at the same time:
 				// if( !self._expert ) { ... }
 
-				self._expert.draw();
+				self._expert.draw()
+				.done( function() {
+					deferred.resolve();
+				} )
+				.fail( function() {
+					deferred.reject();
+				} );
 			} );
 		} else {
 			this.drawStaticContent();
+			deferred.resolve();
 		}
+
+		return deferred.promise();
 	},
 
 	drawStaticContent: function() {
