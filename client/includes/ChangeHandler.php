@@ -65,7 +65,7 @@ class ChangeHandler {
 	private $affectedPagesFinder;
 
 	/**
-	 * @var Client\Store\TitleFactory
+	 * @var TitleFactory
 	 */
 	private $titleFactory;
 
@@ -84,6 +84,22 @@ class ChangeHandler {
 	 */
 	private $localSiteId;
 
+	/**
+	 * @var bool
+	 */
+	private $injectRecentChanges;
+
+	/**
+	 * @param EntityChangeFactory $changeFactory
+	 * @param AffectedPagesFinder $affectedPagesFinder
+	 * @param TitleFactory $titleFactory
+	 * @param PageUpdater $updater
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param string $localSiteId
+	 * @param bool $injectRecentChanges
+	 *
+	 * @throws InvalidArgumentException
+	 */
 	public function __construct(
 		EntityChangeFactory $changeFactory,
 		AffectedPagesFinder $affectedPagesFinder,
@@ -91,26 +107,23 @@ class ChangeHandler {
 		PageUpdater $updater,
 		EntityRevisionLookup $entityRevisionLookup,
 		$localSiteId,
-		$injectRC
+		$injectRecentChanges
 	) {
+		if ( !is_string( $localSiteId ) ) {
+			throw new InvalidArgumentException( '$localSiteId must be a string' );
+		}
+
+		if ( !is_bool( $injectRecentChanges ) ) {
+			throw new InvalidArgumentException( '$injectRecentChanges must be a bool' );
+		}
+
 		$this->changeFactory = $changeFactory;
 		$this->affectedPagesFinder = $affectedPagesFinder;
 		$this->titleFactory = $titleFactory;
 		$this->updater = $updater;
 		$this->entityRevisionLookup = $entityRevisionLookup;
-
-		if ( !is_string( $localSiteId ) ) {
-			throw new InvalidArgumentException( '$localSiteId must be a string' );
-		}
-
-		if ( !is_bool( $injectRC ) ) {
-			throw new InvalidArgumentException( '$injectRC must be a bool' );
-		}
-
 		$this->localSiteId = $localSiteId;
-		$this->injectRC = (bool)$injectRC;
-
-		$this->mirrorUpdater = null;
+		$this->injectRecentChanges = $injectRecentChanges;
 	}
 
 	/**
@@ -308,7 +321,7 @@ class ChangeHandler {
 
 				$currentRun[] = $change;
 			// skip any change that failed to process in some way (bug 49417)
-			} catch ( \Exception $e ) {
+			} catch ( Exception $e ) {
 				wfLogWarning( __METHOD__ . ':' . $e->getMessage() );
 			}
 		}
@@ -426,21 +439,21 @@ class ChangeHandler {
 	public function handleChange( Change $change ) {
 		wfProfileIn( __METHOD__ );
 
-		$chid = self::getChangeIdForLog( $change );
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$chid"
+		$changeId = $this->getChangeIdForLog( $change );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$changeId"
 			. " (" . $change->getType() . ")" );
 
 		$usagesPerPage = $this->affectedPagesFinder->getPagesToUpdate( $change );
 
 		if ( empty( $usagesPerPage ) ) {
 			// nothing to do
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": No pages to update for change #$chid." );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": No pages to update for change #$changeId." );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": updating " . count( $usagesPerPage )
-			. " page(s) for change #$chid." );
+			. " page(s) for change #$changeId." );
 
 		$actionBuckets = array();
 
@@ -538,7 +551,7 @@ class ChangeHandler {
 			$this->updater->scheduleRefreshLinks( $titlesToUpdate );
 		}
 
-		if ( $this->injectRC && (  $action === self::RC_ENTRY_ACTION ) > 0 ) {
+		if ( $this->injectRecentChanges && $action === self::RC_ENTRY_ACTION ) {
 			$rcAttribs = $this->getRCAttributes( $change );
 
 			if ( $rcAttribs !== false ) {
@@ -584,16 +597,16 @@ class ChangeHandler {
 	 *
 	 * @return string
 	 */
-	private static function getChangeIdForLog( Change $change ) {
+	private function getChangeIdForLog( Change $change ) {
 		$fields = $change->getFields(); //@todo: add getFields() to the interface, or provide getters!
 
 		if ( isset( $fields['info']['change-ids'] ) ) {
-			$chid = implode( '|', $fields['info']['change-ids'] );
+			$changeId = implode( '|', $fields['info']['change-ids'] );
 		} else {
-			$chid = $change->getId();
+			$changeId = $change->getId();
 		}
 
-		return $chid;
+		return $changeId;
 	}
 
 	/**
@@ -601,7 +614,7 @@ class ChangeHandler {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \Wikibase\EntityChange $change The Change that caused the update
+	 * @param EntityChange $change The Change that caused the update
 	 *
 	 * @return array|boolean an array of RC attributes,
 	 *         or false if the change does not provide edit meta data
@@ -652,7 +665,7 @@ class ChangeHandler {
 	 *
 	 * @param EntityChange $change the change to get a comment for
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 * @return array
 	 */
 	public function getEditComment( EntityChange $change ) {
@@ -667,7 +680,7 @@ class ChangeHandler {
 
 		$editComment = $commentCreator->getEditComment( $siteLinkDiff, $action, $comment );
 		if( is_array( $editComment ) && !isset( $editComment['message'] ) ) {
-			throw new \MWException( 'getEditComment returned an empty comment' );
+			throw new MWException( 'getEditComment returned an empty comment' );
 		}
 
 		return $editComment;
