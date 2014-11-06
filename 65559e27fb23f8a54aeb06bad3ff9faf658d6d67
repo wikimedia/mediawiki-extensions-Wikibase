@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_501e8212",
+        "filename": "repo/includes/content/DeferredCopyEntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:46:21Z",
+      "side": 1,
+      "message": "|null",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_301176fc",
+        "filename": "repo/includes/content/DeferredCopyEntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:46:21Z",
+      "side": 1,
+      "message": "\"be compatible with\"?",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b0258658",
+        "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:46:21Z",
+      "side": 1,
+      "message": "|null",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_90208a48",
+        "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:46:21Z",
+      "side": 1,
+      "message": "Just null?",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d02a922a",
+        "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:46:21Z",
+      "side": 1,
+      "message": "\"be compatible with\"???",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_f02f8e38",
+        "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:46:21Z",
+      "side": 1,
+      "message": "unused parameter",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_30f096c3",
+        "filename": "repo/includes/content/EntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:46:21Z",
+      "side": 1,
+      "message": "Why are you putting this in the Content namespace? This interface appears to not be specific to the content stuff.",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_90df2a3f",
+        "filename": "repo/includes/content/EntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:46:21Z",
+      "side": 1,
+      "message": "\"be compatible with\"???",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b0e4a60b",
+        "filename": "repo/includes/content/EntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:46:21Z",
+      "side": 1,
+      "message": "How is that intended to be used anyway? Seems rather weird to me.",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_70ea9ed7",
+        "filename": "repo/includes/content/EntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:46:21Z",
+      "side": 1,
+      "message": "EntityDocument? As discussed before, please do not add new interfaces that type hint against Entity. Same goes for the weird string class ref, if that stays.",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_10f31ad3",
+        "filename": "repo/includes/content/EntityInstanceHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-06T19:46:21Z",
+      "side": 1,
+      "message": "EntityDocument",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
