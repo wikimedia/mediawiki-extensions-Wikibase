@@ -17,6 +17,8 @@ use WebRequest;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EscapingValueFormatter;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
@@ -67,10 +69,14 @@ abstract class EditEntityAction extends ViewEntityAction {
 			ValueFormatter::OPT_LANG => $langCode
 		) );
 
-		$labelFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$termLookup = new EntityRetrievingTermLookup( $wikibaseRepo->getEntityLookup() );
+		$labelLookup = new LanguageLabelLookup( $termLookup, $langCode );
+		$labelFormatter = new EntityIdLabelFormatter( $options, $labelLookup );
+
 		$this->propertyNameFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$formatterFactory = $wikibaseRepo->getSnakFormatterFactory();
 		$this->detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
 		$this->terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );

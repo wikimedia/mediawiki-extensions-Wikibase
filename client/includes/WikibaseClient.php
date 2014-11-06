@@ -45,6 +45,8 @@ use Wikibase\Lib\Serializers\ForbiddenSerializer;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
