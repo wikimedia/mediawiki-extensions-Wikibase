@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_1aa7ba4d",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApiError.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-06T15:31:02Z",
+      "side": 0,
+      "message": "Uh, what? This line is wrong.",
+      "revId": "53194a5f9c40beaa0289de3296470eb39a156d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
