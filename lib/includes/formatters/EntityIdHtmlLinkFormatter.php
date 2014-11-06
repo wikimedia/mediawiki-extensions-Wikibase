@@ -7,8 +7,8 @@ use OutOfBoundsException;
 use Title;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LabelLookup;
 
 /**
  * Formats entity IDs by generating an HTML link to the corresponding page title.
@@ -22,16 +22,21 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	/**
+	 * @var LabelLookup
+	 */
+	private $labelLookup;
+
+	/**
 	 * @var EntityTitleLookup|null
 	 */
 	protected $entityTitleLookup;
 
 	public function __construct(
 		FormatterOptions $options,
-		EntityLookup $entityLookup,
+		LabelLookup $labelLookup,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
-		parent::__construct( $options, $entityLookup );
+		parent::__construct( $options, $labelLookup );
 
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
