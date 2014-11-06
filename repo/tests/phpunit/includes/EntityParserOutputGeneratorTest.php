@@ -12,6 +12,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 
 /**
  * @covers Wikibase\EntityParserOutputGenerator
@@ -51,7 +52,9 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$this->getConfigBuilderMock(),
 			$this->getMock( 'Wikibase\Lib\Serializers\SerializationOptions' ),
 			$this->getEntityTitleLookupMock(),
-			$this->getDataTypeLookup()
+			$this->getDataTypeLookup(),
+			new SqlEntityInfoBuilderFactory(),
+			'en'
 		);
 	}
 
@@ -100,7 +103,7 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	private function getEntityTitleLookupMock() {
 		$entityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
-		
+
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {

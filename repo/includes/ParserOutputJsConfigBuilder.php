@@ -24,11 +24,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class ParserOutputJsConfigBuilder {
 
 	/**
-	 * @var EntityInfoBuilderFactory
-	 */
-	protected $entityInfoBuilderFactory;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	protected $entityIdParser;
@@ -37,11 +32,6 @@ class ParserOutputJsConfigBuilder {
 	 * @var EntityTitleLookup
 	 */
 	protected $entityTitleLookup;
-
-	/**
-	 * @var ReferencedEntitiesFinder
-	 */
-	protected $refFinder;
 
 	/**
 	 * @var string
@@ -54,20 +44,17 @@ class ParserOutputJsConfigBuilder {
 	protected $serializerFactory;
 
 	/**
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param ReferencedEntitiesFinder $refFinder
 	 * @param string $langCode
 	 */
-	public function __construct( EntityInfoBuilderFactory $entityInfoBuilderFactory,
-		EntityIdParser $entityIdParser, EntityTitleLookup $entityTitleLookup,
-		ReferencedEntitiesFinder $refFinder, $langCode
+	public function __construct(
+		EntityIdParser $entityIdParser,
+		EntityTitleLookup $entityTitleLookup,
+		$langCode
 	) {
-		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->refFinder = $refFinder;
 		$this->langCode = $langCode;
 
 		$this->serializerFactory = new SerializerFactory();
@@ -75,23 +62,12 @@ class ParserOutputJsConfigBuilder {
 
 	/**
 	 * @param Entity $entity
+	 * @param array $entityInfo
 	 * @param SerializationOptions $options
 	 *
 	 * @return array
 	 */
-	public function build( Entity $entity, SerializationOptions $options ) {
-		$configVars = $this->getEntityVars( $entity, $options );
-
-		return $configVars;
-	}
-
-	/**
-	 * @param Entity $entity
-	 * @param SerializationOptions $options
-	 *
-	 * @return array
-	 */
-	protected function getEntityVars( Entity $entity, SerializationOptions $options ) {
+	public function build( Entity $entity, array $entityInfo, SerializationOptions $options ) {
 		$entityId = $entity->getId();
 
 		if ( !$entityId ) {
@@ -100,42 +76,15 @@ class ParserOutputJsConfigBuilder {
 			$entityId = $entityId->getSerialization();
 		}
 
+		$revisionInfo = $this->attachRevisionInfo( $entityInfo );
+
 		$configVars = array(
 			'wbEntityId' => $entityId,
-			'wbUsedEntities' => FormatJson::encode( $this->getBasicEntityInfo( $entity ) ),
+			'wbUsedEntities' => FormatJson::encode( $revisionInfo ),
 			'wbEntity' => FormatJson::encode( $this->getSerializedEntity( $entity, $options ) )
 		);
 
 		return $configVars;
-	}
-
-	/**
-	 * Fetches some basic entity information required for the entity view in JavaScript from a
-	 * set of entity IDs.
-	 * @since 0.4
-	 *
-	 * @param Entity $entity
-	 * @return string
-	 */
-	protected function getBasicEntityInfo( Entity $entity ) {
-		wfProfileIn( __METHOD__ );
-
-		$entityIds = $this->refFinder->findSnakLinks( $entity->getAllSnaks() );
-
-		// TODO: apply language fallback!
-		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
-
-		$entityInfoBuilder->resolveRedirects();
-		$entityInfoBuilder->removeMissing();
-		$entityInfoBuilder->collectTerms( array( 'label', 'description' ), array( $this->langCode ) );
-		$entityInfoBuilder->collectDataTypes();
-		$entityInfoBuilder->retainEntityInfo( $entityIds );
-
-		$entityInfo = $entityInfoBuilder->getEntityInfo();
-		$revisionInfo = $this->attachRevisionInfo( $entityInfo );
-
-		wfProfileOut( __METHOD__ );
-		return $revisionInfo;
 	}
 
 	/**
@@ -145,27 +94,27 @@ class ParserOutputJsConfigBuilder {
 	 * able to pick which information is actually needed in which context. E.g. we are skipping the
 	 * actual revision ID here, and thereby avoiding any database access.
 	 *
-	 * @param array $entities A list of entity records
+	 * @param array $entities A list of entity records from EntityInfoBuilder::getEntityInfo
 	 *
 	 * @return array A list of revision records
 	 */
-	private function attachRevisionInfo( array $entities ) {
+	private function attachRevisionInfo( array $entityInfoRecords ) {
 		$idParser = $this->entityIdParser;
 		$titleLookup = $this->entityTitleLookup;
 
-		return array_map( function( $entity ) use ( $idParser, $titleLookup ) {
-				$id = $idParser->parse( $entity['id'] );
+		return array_map( function( $entityInfoRecord ) use ( $idParser, $titleLookup ) {
+				$entityId = $idParser->parse( $entityInfoRecord['id'] );
 
 				// If the title lookup needs DB access, we really need a better way to do this!
-				$title = $titleLookup->getTitleForId( $id );
+				$title = $titleLookup->getTitleForId( $entityId );
 
 				return array(
-					'content' => $entity,
+					'content' => $entityInfoRecord,
 					'title' => $title->getPrefixedText(),
 					//'revision' => 0,
 				);
 			},
-			$entities
+			$entityInfoRecords
 		);
 	}
 
