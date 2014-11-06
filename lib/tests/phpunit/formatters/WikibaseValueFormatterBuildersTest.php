@@ -370,7 +370,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 
 	public function testGetWidgetFormatters() {
 		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
-		$options = new FormatterOptions();
+		$options = $this->newFormatterOptions();
 
 		// check for all the required types, that is, the ones supported by the fallback format
 		$required = array_keys( $builders->getHtmlFormatters( $options ) );
@@ -389,7 +389,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 
 	public function testGetDiffFormatters() {
 		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
-		$options = new FormatterOptions();
+		$options = $this->newFormatterOptions();
 
 		// check for all the required types, that is, the ones supported by the fallback format
 		$required = array_keys( $builders->getHtmlFormatters( $options ) );

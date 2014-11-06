@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdLabelFormatter;
+use Wikibase\Lib\Store\CachingLanguageLabelLookup;
 use Wikibase\Lib\Store\EntityRedirect;
 
 /**
@@ -25,127 +26,52 @@ use Wikibase\Lib\Store\EntityRedirect;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
-
-	protected function newEntityLoader() {
-		$loader = new MockRepository();
-
-		$entity = Item::newEmpty();
-		$entity->setLabel( 'en', 'foo' );
-		$entity->setLabel( 'nl', 'bar' );
-		$entity->setLabel( 'zh-cn', '测试' );
-		$entity->setId( new ItemId( 'Q42' ) );
-
-		$loader->putEntity( $entity );
-		$loader->putRedirect( new EntityRedirect( new ItemId( 'Q23' ), new ItemId( 'Q42' ) ) );
-
-		return $loader;
-	}
 
 	/**
 	 * @return array
 	 */
 	public function validProvider() {
-		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
-
 		$argLists = array();
 
 		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'es' );
 
-		$argLists[] = array( new ItemId( 'Q42' ), 'foo', $options );
-
-
-		$options = new FormatterOptions();
-		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage( Language::factory( 'en' ) ) );
-
-		$argLists[] = array( new ItemId( 'q42' ), 'foo', $options );
-
-
-		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'nl' );
-
-		$argLists[] = array( new ItemId( 'Q42' ), 'bar', $options );
-
+		$argLists[] = array( new ItemId( 'Q42' ), 'es', 'foo', $options );
 
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'de' );
+		$options->setOption(
+			EntityIdLabelFormatter::OPT_LABEL_FALLBACK,
+			EntityIdLabelFormatter::FALLBACK_EMPTY_STRING
+		);
 
-		$argLists[] = array( new ItemId( 'Q42' ), 'Q42', $options );
-
-
-		$options = new FormatterOptions();
-		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage( Language::factory( 'de' ) ) );
-
-		$argLists[] = array( new ItemId( 'q42' ), 'foo', $options );
-
-
-		$options = new FormatterOptions();
-		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage( Language::factory( 'zh' ) ) );
-
-		$argLists[] = array( new ItemId( 'q42' ), '测试', $options );
-
-
-		$options = new FormatterOptions();
-		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage( Language::factory( 'zh-tw' ) ) );
-
-		$argLists[] = array( new ItemId( 'q42' ), '測試', $options );
-
-
-		$options = new FormatterOptions();
-		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage(
-			Language::factory( 'zh-tw' ), LanguageFallbackChainFactory::FALLBACK_SELF
-		) );
-
-		$argLists[] = array( new ItemId( 'q42' ), 'Q42', $options );
-
-
-		$options = new FormatterOptions();
-		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage(
-			Language::factory( 'zh-tw' ),
-			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
-		) );
-
-		$argLists[] = array( new ItemId( 'q42' ), '測試', $options );
-
-
-		$options = new FormatterOptions();
-		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage(
-			Language::factory( 'sr' )
-		) );
-
-		$argLists[] = array( new ItemId( 'q42' ), 'foo', $options );
-
-
-		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'de' );
-		$options->setOption( EntityIdLabelFormatter::OPT_LABEL_FALLBACK, EntityIdLabelFormatter::FALLBACK_EMPTY_STRING );
-
-		$argLists[] = array( new EntityIdValue( new ItemId( 'Q42' ) ), '', $options );
+		$argLists[] = array( new EntityIdValue( new ItemId( 'Q42' ) ), 'de', '', $options );
 
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
 		$options->setOption( EntityIdLabelFormatter::OPT_LOOKUP_LABEL, false );
 
-		$argLists[] = array( new EntityIdValue( new ItemId( 'Q42' ) ), 'Q42', $options );
+		$argLists[] = array( new EntityIdValue( new ItemId( 'Q42' ) ), 'en', 'Q42', $options );
 
 
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
 
-		$argLists[] = array( new EntityIdValue( new ItemId( 'Q9001' ) ), 'Q9001', $options );
+		$argLists[] = array( new EntityIdValue( new ItemId( 'Q9001' ) ), 'en', 'Q9001', $options );
 
 
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
 
-		$argLists[] = array( new PropertyId( 'P9001' ), 'P9001', $options );
+		$argLists[] = array( new PropertyId( 'P9001' ), 'en', 'P9001', $options );
 
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
 
-		$argLists['unresolved-redirect'] = array( new ItemId( 'Q23' ), 'Q23', $options );
+		$argLists['unresolved-redirect'] = array( new ItemId( 'Q23' ), 'en', 'Q23', $options );
 
 		return $argLists;
 	}
@@ -154,16 +80,38 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validProvider
 	 *
 	 * @param EntityId|EntityIdValue $entityId
+	 * @param string $languageCode
 	 * @param string $expectedString
 	 * @param FormatterOptions $formatterOptions
 	 */
-	public function testParseWithValidArguments( $entityId, $expectedString, FormatterOptions $formatterOptions ) {
-		$formatter = new EntityIdLabelFormatter( $formatterOptions, $this->newEntityLoader() );
+	public function testParseWithValidArguments( $entityId, $languageCode, $expectedString,
+		FormatterOptions $formatterOptions
+	) {
+		$labelLookup = $this->getLabelLookup( $languageCode );
+		$formatter = new EntityIdLabelFormatter( $formatterOptions, $labelLookup );
 
 		$formattedValue = $formatter->format( $entityId );
 
 		$this->assertInternalType( 'string', $formattedValue );
 		$this->assertEquals( $expectedString, $formattedValue );
+	}
+
+	protected function getLabelLookup( $languageCode ) {
+		$labelLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\LabelLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnCallback( function( EntityId $entityId ) use ( $languageCode ) {
+				if ( $entityId->getSerialization() === 'Q42' && $languageCode === 'es' ) {
+					return 'foo';
+				} else {
+					throw new \OutOfBoundsException( 'Label not found' );
+				}
+			} ) );
+
+		return $labelLookup;
 	}
 
 }
