@@ -38,13 +38,13 @@ class SiteLinkCommentCreator {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Diff $siteLinkDiff
-	 * @param string $action
+	 * @param Diff|null $siteLinkDiff
+	 * @param string $action e.g. 'remove', see the constants in EntityChange
 	 * @param string $comment
 	 *
 	 * @return array|string
 	 */
-	public function getEditComment( Diff $siteLinkDiff, $action, $comment ) {
+	public function getEditComment( Diff $siteLinkDiff = null, $action, $comment ) {
 		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
 			$siteLinkComment = $this->getSiteLinkComment( $action, $siteLinkDiff );
 
@@ -60,7 +60,7 @@ class SiteLinkCommentCreator {
 	 * Returns an array structure suitable for building an edit summary for the respective
 	 * change to site links.
 	 *
-	 * @param string $action Change action
+	 * @param string $action e.g. 'remove', see the constants in EntityChange
 	 * @param Diff $siteLinkDiff The change's site link diff
 	 *
 	 * @return array|null
@@ -188,7 +188,7 @@ class SiteLinkCommentCreator {
 
 	/**
 	 * @param DiffOp $diffOp
-	 * @param string $action
+	 * @param string $action e.g. 'remove', see the constants in EntityChange
 	 * @param string $siteId
 	 *
 	 * @return array|null
@@ -225,4 +225,5 @@ class SiteLinkCommentCreator {
 
 		return $params;
 	}
+
 }
