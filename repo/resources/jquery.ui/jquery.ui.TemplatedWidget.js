@@ -161,6 +161,4 @@
 		}
 	} );
 
-	$.TemplatedWidget = $.ui.TemplatedWidget;
-
 }( jQuery ) );
