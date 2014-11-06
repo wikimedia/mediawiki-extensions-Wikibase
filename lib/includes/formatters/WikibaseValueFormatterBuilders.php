@@ -13,6 +13,9 @@ use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
+use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
@@ -234,7 +237,7 @@ class WikibaseValueFormatterBuilders {
 	 * @todo  : Sort out how the desired language is specified. We have two language options,
 	 *        each accepting different ways of specifying the language. That's not good.
 	 */
-	public function applyLanguageDefaults( $options ) {
+	public function applyLanguageDefaults( FormatterOptions $options ) {
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
 
 		if ( !$options->hasOption( ValueFormatter::OPT_LANG ) ) {
@@ -371,7 +374,6 @@ class WikibaseValueFormatterBuilders {
 		return $htmlFormatters;
 	}
 
-
 	/**
 	 * Returns a full set of formatters for generating HTML widgets.
 	 * If there are formatters defined for HTML that are not defined for widgets,
@@ -497,6 +499,38 @@ class WikibaseValueFormatterBuilders {
 	}
 
 	/**
+	 * @param FormatterOptions $options
+	 * @param WikibaseValueFormatterBuilders $builders
+	 *
+	 * @throws InvalidArgumentException
+	 * @return LabelLookup
+	 */
+	private static function newLabelLookup(
+		FormatterOptions $options,
+		WikibaseValueFormatterBuilders $builders
+	) {
+		$termLookup = new EntityRetrievingTermLookup( $builders->entityLookup );
+
+		// @fixme inject the label lookup
+		if ( $options->hasOption( 'languages' ) ) {
+			$labelLookup = new LanguageFallbackLabelLookup(
+				$termLookup,
+				$options->getOption( 'languages' )
+			);
+		} else if ( $options->hasOption( ValueFormatter::OPT_LANG ) ) {
+			$labelLookup = new LanguageLabelLookup(
+				$termLookup,
+				$options->getOption( ValueFormatter::OPT_LANG )
+			);
+		} else {
+			throw new InvalidArgumentException( 'OPT_LANG or languages (fallback chain) '
+				. 'must be set in FormatterOptions.' );
+		}
+
+		return $labelLookup;
+	}
+
+	/**
 	 * Builder callback for use in WikibaseValueFormatterBuilders::$valueFormatterSpecs.
 	 * Used to inject services into the EntityIdLabelFormatter.
 	 *
@@ -509,7 +543,8 @@ class WikibaseValueFormatterBuilders {
 		FormatterOptions $options,
 		WikibaseValueFormatterBuilders $builders
 	) {
-		return new EntityIdLabelFormatter( $options, $builders->entityLookup );
+		$labelLookup = self::newLabelLookup( $options, $builders );
+		return new EntityIdLabelFormatter( $options, $labelLookup );
 	}
 
 	/**
@@ -527,7 +562,7 @@ class WikibaseValueFormatterBuilders {
 	) {
 		return new EntityIdHtmlLinkFormatter(
 			$options,
-			$builders->entityLookup,
+			self::newLabelLookup( $options, $builders ),
 			$builders->entityTitleLookup
 		);
 	}
