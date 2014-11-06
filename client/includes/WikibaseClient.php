@@ -41,6 +41,7 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Serializers\ForbiddenSerializer;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\CachingLanguageLabelLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
@@ -201,13 +202,9 @@ final class WikibaseClient {
 	 * @return EntityIdLabelFormatter
 	 */
 	public function newEntityIdLabelFormatter( $languageCode ) {
-		$options = new FormatterOptions( array(
-			EntityIdLabelFormatter::OPT_LANG => $languageCode
-		) );
+		$labelLookup = new CachingLanguageLabelLookup( $this->getEntityLookup(), $languageCode );
 
-		$labelFormatter = new EntityIdLabelFormatter( $options, $this->getEntityLookup() );
-
-		return $labelFormatter;
+		return new EntityIdLabelFormatter( $options, $labelLookup );
 	}
 
 	/**
