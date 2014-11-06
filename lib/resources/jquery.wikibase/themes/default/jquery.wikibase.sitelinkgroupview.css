@@ -21,4 +21,5 @@
 
 .wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container > .wikibase-toolbar-container {
 	margin-top: 1.9em;
+	z-index: 1;
 }
