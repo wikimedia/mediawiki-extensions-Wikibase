@@ -9,6 +9,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
+use Wikibase\Lib\Store\CachingLanguageLabelLookup;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -162,13 +163,22 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 * @param string $langCode
 	 */
 	protected function displayDisambiguationPage( array /* of Item */ $items, $langCode ) {
+		// @fixme it is confusing to have so many $langCodes here, coming from
+		// different places and maybe not necessary to be this way.
+
 		$formatterOptions = new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => $this->getLanguage()->getCode()
 		) );
 
+		// @fixme inject this!
+		$labelLookup = new CachingLanguageLabelLookup(
+			$this->entityLookup,
+			$this->getLanguage()->getCode()
+		);
+
 		$linkFormatter = new EntityIdHtmlLinkFormatter(
 			$formatterOptions,
-			$this->entityLookup,
+			$labelLookup,
 			$this->entityTitleLookup
 		);
 
