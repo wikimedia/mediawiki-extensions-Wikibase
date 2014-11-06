@@ -3,12 +3,7 @@
 namespace Wikibase\Tests;
 
 use ConfigFactory;
-use DerivativeContext;
-use OutputPage;
-use RequestContext;
-use Title;
 use Wikibase\RepoHooks;
-use Wikibase\Repo\WikibaseRepo;
 use WikiImporter;
 
 /**
@@ -23,20 +18,6 @@ use WikiImporter;
  * @author Daniel Kinzler
  */
 class RepoHooksTest extends \MediaWikiTestCase {
-
-	public function testOnMakeGlobalVariablesScript() {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-
-		$propertyNamespace = $entityNamespaceLookup->getEntityNamespace( 'wikibase-property' );
-		$this->assertInternalType( 'int', $propertyNamespace );
-
-		$context = new DerivativeContext( RequestContext::getMain() );
-		$context->setTitle( Title::makeTitle( $propertyNamespace, 'P1' ) );
-		$outputPage = new OutputPage( $context );
-
-		$success = RepoHooks::onMakeGlobalVariablesScript( array(), $outputPage );
-		$this->assertTrue( $success );
-	}
 
 	public function revisionInfoProvider() {
 		return array(
