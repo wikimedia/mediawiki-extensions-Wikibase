@@ -13,6 +13,8 @@ use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\CachingLanguageFallbackLabelLookup;
+use Wikibase\Lib\Store\CachingLanguageLabelLookup;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
@@ -371,7 +373,6 @@ class WikibaseValueFormatterBuilders {
 		return $htmlFormatters;
 	}
 
-
 	/**
 	 * Returns a full set of formatters for generating HTML widgets.
 	 * If there are formatters defined for HTML that are not defined for widgets,
@@ -497,6 +498,32 @@ class WikibaseValueFormatterBuilders {
 	}
 
 	/**
+	 * @param FormatterOptions $options
+	 * @param WikibaseValueFormatterBuilders $builders
+	 *
+	 * @return LabelLookup
+	 */
+	private static function newLabelLookup(
+		FormatterOptions $options,
+		WikibaseValueFormatterBuilders $builders
+	) {
+		// @fixme inject the label lookup
+		if ( $options->hasOption( 'languages' ) ) {
+			$labelLookup = new CachingLanguageFallbackLabelLookup(
+				$builders->entityLookup,
+				$options->getOption( 'languages' )
+			);
+		} else {
+			$labelLookup = new CachingLanguageLabelLookup(
+				$builders->entityLookup,
+				$options->getOption( ValueFormatter::OPT_LANG )
+			);
+		}
+
+		return $labelLookup;
+	}
+
+	/**
 	 * Builder callback for use in WikibaseValueFormatterBuilders::$valueFormatterSpecs.
 	 * Used to inject services into the EntityIdLabelFormatter.
 	 *
@@ -509,7 +536,8 @@ class WikibaseValueFormatterBuilders {
 		FormatterOptions $options,
 		WikibaseValueFormatterBuilders $builders
 	) {
-		return new EntityIdLabelFormatter( $options, $builders->entityLookup );
+		$labelLookup = self::newLabelLookup( $options, $builders );
+		return new EntityIdLabelFormatter( $options, $labelLookup );
 	}
 
 	/**
@@ -527,7 +555,7 @@ class WikibaseValueFormatterBuilders {
 	) {
 		return new EntityIdHtmlLinkFormatter(
 			$options,
-			$builders->entityLookup,
+			self::newLabelLookup( $options, $builders ),
 			$builders->entityTitleLookup
 		);
 	}
