@@ -197,7 +197,7 @@ $.widget( 'ui.ooMenu', {
 	/**
 	 * Returns whether the menu currently features visible items.
 	 *
-	 * @param {boolean} includeCustomItems
+	 * @param {boolean} [includeCustomItems]
 	 * @return {boolean}
 	 */
 	hasVisibleItems: function( includeCustomItems ) {
