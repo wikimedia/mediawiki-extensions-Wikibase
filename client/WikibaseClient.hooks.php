@@ -502,8 +502,8 @@ final class ClientHooks {
 		global $wgExtensionAssetsPath;
 
 		 preg_match(
-			 '+^.*?' . preg_quote( DIRECTORY_SEPARATOR, '+' ) . '(?:vendor|extensions)' .
-				 preg_quote( DIRECTORY_SEPARATOR, '+' ) . '(.*)$+',
+			 '+^.*?' . preg_quote( DIRECTORY_SEPARATOR, '+' ) . '((?:vendor|extensions)' .
+				 preg_quote( DIRECTORY_SEPARATOR, '+' ) . '.*)$+',
 			 __DIR__,
 			 $remoteExtPathParts
 		 );
