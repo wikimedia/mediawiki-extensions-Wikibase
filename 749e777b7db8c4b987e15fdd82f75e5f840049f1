@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_da8cf234",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.siteselector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-11-06T14:00:09Z",
+      "side": 1,
+      "message": "This is just a proper adaption to the base $.ui.suggester widget. The implementation there would need to be changed first which might have implications on other widgets inheriting from $.ui.suggester. Can be done in the next major version of ValueView.",
+      "parentUuid": "6e936f18_ba57a604",
+      "revId": "749e777b7db8c4b987e15fdd82f75e5f840049f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_5a3ea2b6",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.siteselector.js",
         "patchSetId": 3
