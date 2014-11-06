@@ -230,7 +230,7 @@
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 — $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 — $2, претворено од $3 — $4",
 	"wikibase-api-unresolved-redirect": "Дадената ознака на единицата се однесува на пренасочување, што не е поддржано во овој контекст.",
-	"wikibase-api-no-such-sitelink": "Не пронајдов таква викиврска",
+	"wikibase-api-no-such-sitelink": "Не ја пронајдов викиврската до „$1“ при обидот за измена на значките.",
 	"wikibase-api-target-not-empty": "Пренасочувањето може да се направи само врз празна единица.",
 	"wikibase-api-target-is-redirect": "Целта на пренасочувањето не смее самата да биде пренасочување.",
 	"wikibase-api-target-is-incompatible": "Се обидувате да пренасочите кон единица од друг тип.",

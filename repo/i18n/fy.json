@@ -9,9 +9,11 @@
 	"wikibase-save": "fêstlizze",
 	"wikibase-cancel": "Annulearje",
 	"wikibase-add": "tafoegje",
+	"wikibase-entityselector-more": "mear",
 	"wikibase-itembytitle-submit": "Sykje",
 	"wikibase-itemdisambiguation-lookup-language": "Taal:",
 	"wikibase-itemdisambiguation-submit": "Sykje",
+	"wikibase-newentity-submit": "Oanmeitsje",
 	"wikibase-modifyterm-language": "Taal:",
 	"wikibase-entitieswithoutlabel-label-language": "Taal:",
 	"wikibase-entitieswithoutlabel-submit": "Sykje"

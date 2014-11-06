@@ -213,6 +213,7 @@
 	"wikibase-entitydata-storage-error": "Falha ao carregar a entidade $1.",
 	"wikibase-entitydata-title": "Dados de entidade",
 	"wikibase-api-unresolved-redirect": "O identificador (ID) fornecido refere-se a um redirecionamento, o que não é suportado neste contexto.",
+	"wikibase-api-no-such-sitelink": "Não foi possível encontrar uma ligação de sítio para '$1' ao tentar editar os emblemas.",
 	"wikibase-conflict-patched": "A sua edição foi actualizada para a versão mais recente.",
 	"wikibase-restoreold": "restaurar",
 	"wikibase-restore-summary": "Restaurar revisão $1 por [[Special:Contributions/$2|$2]]",

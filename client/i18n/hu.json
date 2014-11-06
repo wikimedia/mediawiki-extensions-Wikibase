@@ -7,7 +7,8 @@
 			"JulesWinnfield-hu",
 			"Tacsipacsi",
 			"Csega",
-			"Dorgan"
+			"Dorgan",
+			"Grin"
 		]
 	},
 	"wikibase-client-desc": "Kliens a Wikibase kiterjesztéshez",
@@ -28,6 +29,7 @@
 	"wikibase-editlinks": "szerkesztés",
 	"wikibase-editlinkstitle": "Nyelvközi hivatkozások szerkesztése",
 	"wikibase-linkitem-addlinks": "Hozzáadás",
+	"wikibase-linkitem-close": "Ablak bezárása és a lap újratöltése",
 	"wikibase-linkitem-title": "Összekapcsolás más lappal",
 	"wikibase-linkitem-linkpage": "Összekapcsolás",
 	"wikibase-linkitem-selectlink": "Válassz ki egy wikit és egy lapot, amit össze szeretnél kapcsolni ezzel a lappal.",
@@ -36,6 +38,7 @@
 	"wikibase-linkitem-confirmitem-text": "A kiválasztott lap már össze van kapcsolva egy [$1 fogalommal a központi adatbázisban]. Kérlek győződj meg arról, hogy valóban össze akarod kapcsolni ezt a lapot az alábbi {{PLURAL:$2|lappal|lapokkal}}.",
 	"wikibase-linkitem-confirmitem-button": "Megerősít",
 	"wikibase-linkitem-not-loggedin-title": "Be kell jelentkezned",
+	"wikibase-linkitem-success-link": "A lapokat sikeresen összekapcsoltad. Az összekapcsolást tartalmazó bejegyzést a [$1 központi adattárban] találhatod.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}}-szerkesztések $1",
 	"wikibase-rc-hide-wikidata-hide": "elrejtése",
 	"wikibase-rc-hide-wikidata-show": "megjelenítése",
