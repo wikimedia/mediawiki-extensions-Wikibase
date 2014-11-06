@@ -3,10 +3,12 @@
 namespace Wikibase;
 
 use ParserOutput;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
@@ -47,18 +49,39 @@ class EntityParserOutputGenerator {
 	 */
 	private $dataTypeLookup;
 
+	/**
+	 * @var EntityInfoBuilderFactory
+	 */
+	private $entityInfoBuilderFactory;
+
+	/**
+	 * @var string
+	 */
+	private $languageCode;
+
+	/**
+	 * @var ReferencedEntitiesFinder
+	 */
+	private $referencedEntitiesFinder;
+
 	public function __construct(
 		EntityView $entityView,
 		ParserOutputJsConfigBuilder $configBuilder,
 		SerializationOptions $serializationOptions,
 		EntityTitleLookup $entityTitleLookup,
-		PropertyDataTypeLookup $dataTypeLookup
+		PropertyDataTypeLookup $dataTypeLookup,
+		EntityInfoBuilderFactory $entityInfoBuilderFactory,
+		$languageCode
 	) {
 		$this->entityView = $entityView;
 		$this->configBuilder = $configBuilder;
 		$this->serializationOptions = $serializationOptions;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->dataTypeLookup = $dataTypeLookup;
+		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
+		$this->languageCode = $languageCode;
+
+		$this->referencedEntitiesFinder = new ReferencedEntitiesFinder();
 	}
 
 	/**
@@ -76,12 +99,20 @@ class EntityParserOutputGenerator {
 		$pout = new ParserOutput();
 
 		$entity =  $entityRevision->getEntity();
+		$snaks = $entity->getAllSnaks();
 
-		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-		$configVars = $this->configBuilder->build( $entity, $this->serializationOptions, $isExperimental );
+		$referencedEntityIds = $this->referencedEntitiesFinder->findSnakLinks( $snaks );
+		$entityInfo = $this->getEntityInfo( $referencedEntityIds );
+
+		$configVars = $this->configBuilder->build(
+			$entity,
+			$entityInfo,
+			$this->serializationOptions
+		);
+
 		$pout->addJsConfigVars( $configVars );
 
-		$this->addSnaksToParserOutput( $pout, $entity->getAllSnaks() );
+		$this->addSnaksToParserOutput( $pout, $referencedEntityIds, $snaks );
 
 		if ( $entity instanceof Item ) {
 			$this->addBadgesToParserOutput( $pout, $entity->getSiteLinkList() );
@@ -105,11 +136,7 @@ class EntityParserOutputGenerator {
 		return $pout;
 	}
 
-	private function addSnaksToParserOutput( ParserOutput $pout, array $snaks ) {
-		// treat referenced entities as page links ------
-		$entitiesFinder = new ReferencedEntitiesFinder();
-		$usedEntityIds = $entitiesFinder->findSnakLinks( $snaks );
-
+	private function addSnaksToParserOutput( ParserOutput $pout, array $usedEntityIds, array $snaks ) {
 		foreach ( $usedEntityIds as $entityId ) {
 			$pout->addLink( $this->entityTitleLookup->getTitleForId( $entityId ) );
 		}
@@ -135,6 +162,37 @@ class EntityParserOutputGenerator {
 				$pout->addImage( str_replace( ' ', '_', $value ) );
 			}
 		}
+	}
+
+	/**
+	 * Fetches some basic entity information required for the entity view in JavaScript from a
+	 * set of entity IDs.
+	 * @since 0.4
+	 *
+	 * @param EntityId[] $entityIds
+	 * @return array
+	 */
+	private function getEntityInfo( array $entityIds ) {
+		wfProfileIn( __METHOD__ );
+
+		// TODO: apply language fallback!
+		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
+
+		$entityInfoBuilder->resolveRedirects();
+		$entityInfoBuilder->removeMissing();
+
+		$entityInfoBuilder->collectTerms(
+			array( 'label', 'description' ),
+			array( $this->languageCode )
+		);
+
+		$entityInfoBuilder->collectDataTypes();
+		$entityInfoBuilder->retainEntityInfo( $entityIds );
+
+		$entityInfo = $entityInfoBuilder->getEntityInfo();
+
+		wfProfileOut( __METHOD__ );
+		return $entityInfo;
 	}
 
 	private function addBadgesToParserOutput( ParserOutput $pout, SiteLinkList $siteLinkList ) {

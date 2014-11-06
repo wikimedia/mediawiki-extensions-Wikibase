@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -40,14 +39,14 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider buildProvider
 	 */
-	public function testBuild( Entity $entity, $usedEntities ) {
+	public function testBuild( array $usedEntities, Entity $entity, array $entityInfo ) {
 		$langCode = 'en';
 		$langCodes = array( 'de', 'en', 'es', 'fr' );
 
 		$configBuilder = $this->getConfigBuilder( $langCode );
 		$options = $this->getSerializationOptions( $langCode, $langCodes );
 
-		$configVars = $configBuilder->build( $entity, $options );
+		$configVars = $configBuilder->build( $entity, $entityInfo, $options );
 
 		$this->assertInternalType( 'array', $configVars );
 
@@ -72,30 +71,26 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 
 	public function buildProvider() {
 		$entity = $this->getMainItem();
+
 		$referencedItem = $this->getReferencedItem();
-
-		$property = $this->getProperty();
-		$redirect = $this->getRedirect();
-
-		$propertyKey = $property->getId()->getSerialization();
-		$redirectKey = $redirect->getEntityId()->getSerialization();
+		$entityInfo = $this->getEntityInfo( $referencedItem );
 
 		$usedEntities = array(
-			$propertyKey => $this->getPropertyInfo( $property ),
-			$redirectKey => $this->getEntityInfo( $referencedItem ),
+			array(
+				'content' => $this->getEntityInfoContent( $referencedItem ),
+				'title' => 'item:Q55'
+			)
 		);
 
 		return array(
-			array( $entity, $usedEntities ),
+			array( $usedEntities, $entity, $entityInfo )
 		);
 	}
 
 	private function getConfigBuilder( $langCode ) {
 		$configBuilder = new ParserOutputJsConfigBuilder(
-			$this->getMockRepository(),
 			new BasicEntityIdParser(),
 			$this->getEntityTitleLookupMock(),
-			new ReferencedEntitiesFinder(),
 			$langCode
 		);
 
@@ -127,14 +122,7 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 		return $options;
 	}
 
-	private function getRedirect() {
-		$redirect = new EntityRedirect( new ItemId( 'Q44' ), new ItemId( 'Q55' ) );
-		return $redirect;
-	}
-
 	private function getMainItem() {
-		$redirect = $this->getRedirect();
-
 		$item = Item::newEmpty();
 		$itemId = new ItemId( 'Q5881' );
 		$item->setId( $itemId );
@@ -155,56 +143,30 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 
 	private function getReferencedItem() {
 		$item = Item::newEmpty();
-		$itemId = new ItemId( 'Q55' );
-		$item->setId( $itemId );
+		$item->setId( new ItemId( 'Q55' ) );
 		$item->setLabel( 'en', 'Vanilla' );
 
 		return $item;
 	}
 
-	private function getProperty() {
-		$property = Property::newFromType( 'wikibase-item' );
-		$property->setId( new PropertyId( 'P794' ) );
-		$property->setLabel( 'en', 'AwesomeID' );
-
-		return $property;
-	}
-
-	private function getPropertyInfo( Property $property ) {
-		$info = $this->getEntityInfo( $property );
-		$info['content']['datatype'] = $property->getDataTypeId();
-
-		return $info;
-	}
-
 	private function getEntityInfo( Entity $entity ) {
-		$entityId = $entity->getId()->getSerialization();
-
 		return array(
-			'content' => array(
-				'id' => $entityId,
-				'type' => $entity->getType(),
-				'labels' => array(
-					'en' => array(
-						'language' => 'en',
-						'value' => $entity->getLabel( 'en' )
-					)
-				),
-				'descriptions' => $entity->getDescriptions(),
-			),
-			'title' => $entity->getType() . ":$entityId"
+			$this->getEntityInfoContent( $entity )
 		);
 	}
 
-	private function getMockRepository() {
-		$mockRepo = new MockRepository();
-
-		$mockRepo->putEntity( $this->getMainItem() );
-		$mockRepo->putEntity( $this->getReferencedItem() );
-		$mockRepo->putRedirect( $this->getRedirect() );
-		$mockRepo->putEntity( $this->getProperty() );
-
-		return $mockRepo;
+	private function getEntityInfoContent( Entity $entity ) {
+		return array(
+			'id' => $entity->getId()->getSerialization(),
+			'type' => $entity->getType(),
+			'labels' => array(
+				'en' => array(
+					'language' => 'en',
+					'value' => $entity->getLabel( 'en' )
+				)
+			),
+			'descriptions' => $entity->getDescriptions()
+		);
 	}
 
 	/**
