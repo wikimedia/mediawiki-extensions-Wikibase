@@ -38,8 +38,7 @@
 				'claimlistview',
 				'claim-qualifiers-snak',
 				'references',
-				'referenceview-snakview',
-				'sitelinkgroupview-sitelinklistview'
+				'referenceview-snakview'
 			],
 			edittoolbar: [
 				'aliasesview',
