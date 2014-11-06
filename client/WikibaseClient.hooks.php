@@ -501,8 +501,14 @@ final class ClientHooks {
 	public static function onGetBetaFeaturePreferences( User $user, array &$betaPreferences ) {
 		global $wgExtensionAssetsPath;
 
-		$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
-		$assetsPath = $wgExtensionAssetsPath . '/' . $remoteExtPathParts[1];
+		 preg_match(
+			 '+^.*?' . preg_quote( DIRECTORY_SEPARATOR, '+' ) . '(?:vendor|extensions)' .
+				 preg_quote( DIRECTORY_SEPARATOR, '+' ) . '(.*)$+',
+			 __DIR__,
+			 $remoteExtPathParts
+		 );
+
+		$assetsPath = $wgExtensionAssetsPath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $remoteExtPathParts[1];
 
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		if ( !$settings->getSetting( 'otherProjectsLinksBeta' ) || $settings->getSetting( 'otherProjectsLinksByDefault' ) ) {
