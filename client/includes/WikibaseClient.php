@@ -14,9 +14,12 @@ use Site;
 use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
+use Wikibase\ChangeHandler;
+use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory;
@@ -50,6 +53,7 @@ use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
+use Wikibase\WikiPageUpdater;
 
 /**
  * Top level factory for the WikibaseClient extension.
@@ -749,4 +753,33 @@ final class WikibaseClient {
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' )
 		);
 	}
+
+	/**
+	 * @return AffectedPagesFinder
+	 */
+	public function getAffectedPagesFinder() {
+		return new AffectedPagesFinder(
+			$this->getStore()->getUsageLookup(),
+			$this->getNamespaceChecker(),
+			new TitleFactory(),
+			$this->settings->getSetting( 'siteGlobalID' ),
+			true
+		);
+	}
+
+	/**
+	 * @return ChangeHandler
+	 */
+	public function getChangeHandler() {
+		return new ChangeHandler(
+			$this->getEntityChangeFactory(),
+			$this->getAffectedPagesFinder(),
+			new WikiPageUpdater(),
+			$this->getStore()->getEntityRevisionLookup(),
+			$this->getSite()->getGlobalId(),
+			$this->getSettings()->getSetting( 'injectRecentChanges' ),
+			$this->getSettings()->getSetting( 'allowDataTransclusion' )
+		);
+	}
+
 }
