@@ -92,6 +92,10 @@ function expertProxy( fnName ) {
  *
  * @event afterparse: Triggered after the value has been parsed.
  *       (1) {jQuery.event} event
+ *
+ * @event afterdraw
+ *        Triggered after the widget has been redrawn.
+ *        - {jQuery.Event}
  */
 $.widget( 'valueview.valueview', PARENT, {
 	/**
@@ -515,13 +519,17 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Will render the valueview's current state (does consider edit mode, current value, etc.).
 	 * @since 0.1
+	 *
+	 * @return {jQuery.Promise}
+	 *         No resolved parameters.
+	 *         No rejected parameters.
 	 */
 	draw: function() {
+		var self = this;
+
 		// have native $.Widget functionality add/remove state css classes
 		// (see jQuery.Widget._setOption)
 		PARENT.prototype.option.call( this, 'disabled', this.isDisabled() );
-
-		this.drawContent();
 
 		// add/remove edit mode ui class:
 		var staticModeClass = this.widgetBaseClass + '-instaticmode',
@@ -532,10 +540,22 @@ $.widget( 'valueview.valueview', PARENT, {
 		} else {
 			this.element.addClass( staticModeClass ).removeClass( editModeClass );
 		}
+
+		return this.drawContent()
+			.done( function() {
+				self._trigger( 'afterdraw' );
+			} );
 	},
 
+	/**
+	 * @return {jQuery.Promise}
+	 *         No resolved parameters.
+	 *         No rejected parameters.
+	 */
 	drawContent: function() {
-		var self = this;
+		var self = this,
+			deferred = $.Deferred();
+
 		if( this.isInEditMode() ) {
 			this._updateTextValue().then( function () {
 				if( !self.isInEditMode() ) {
@@ -549,11 +569,20 @@ $.widget( 'valueview.valueview', PARENT, {
 				//  and no value at the same time:
 				// if( !self._expert ) { ... }
 
-				self._expert.draw();
+				self._expert.draw()
+				.done( function() {
+					deferred.resolve();
+				} )
+				.fail( function() {
+					deferred.reject();
+				} );
 			} );
 		} else {
 			this.drawStaticContent();
+			deferred.resolve();
 		}
+
+		return deferred.promise();
 	},
 
 	drawStaticContent: function() {

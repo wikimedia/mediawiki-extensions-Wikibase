@@ -240,6 +240,10 @@ jQuery.valueview = jQuery.valueview || {};
 		 * Will draw the user interface components for the user to edit the value.
 		 *
 		 * @since 0.1
+		 *
+		 * @return {Object} jQuery.Promise
+		 *         No resolved parameters.
+		 *         No rejected parameters.
 		 */
 		draw: function() {
 			this._extendable.callExtensions( 'draw' );

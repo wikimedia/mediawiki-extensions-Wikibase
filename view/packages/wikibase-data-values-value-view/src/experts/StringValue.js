@@ -79,6 +79,8 @@
 			this.$input.prop('disabled', this.viewState().isDisabled() );
 
 			PARENT.prototype.draw.call( this );
+
+			return $.Deferred().resolve().promise();
 		},
 
 		/**

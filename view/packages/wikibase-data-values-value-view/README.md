@@ -109,6 +109,8 @@ Other methods an Expert needs to provide:
 
 #### Enhancements
 * $.ui.ooMenu.CustomItem: Added `setVisibility`, `setAction` and `setCssClass` functions. Visibility may be set to a static (boolean) value.
+* `$.valueview.draw` (`$.valueview.valueview.draw`), `$.valueview.drawContent` (`$.valueview.valueview.drawContent`) and `$.valueview.Expert.draw` return jQuery promises.
+* `$.valueview.draw` (`$.valueview.valueview.draw`) triggers `afterdraw` event.
 
 ### 0.8.0 (2014-11-03)
 

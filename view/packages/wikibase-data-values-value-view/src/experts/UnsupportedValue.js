@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( vv ) {
+( function( $, vv ) {
 	'use strict';
 
 	var PARENT = vv.Expert;
@@ -71,7 +71,12 @@
 			this.$viewPort.text( unsupportedMsg );
 		},
 
-		draw: function() { }
+		/**
+		 * @see jQuery.valueview.Expert.draw
+		 */
+		draw: function() {
+			return $.Deferred().resolve().promise();
+		}
 	} );
 
-}( jQuery.valueview ) );
+}( jQuery, jQuery.valueview ) );
