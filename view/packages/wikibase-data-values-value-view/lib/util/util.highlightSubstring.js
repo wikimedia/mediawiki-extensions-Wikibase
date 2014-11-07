@@ -34,7 +34,7 @@ util.highlightSubstring = function( substring, string, options ) {
 	}
 
 	options = options || {};
-	options.caseInsensitive = !!options.caseInsensitive;
+	options.caseInsensitive = options.caseInsensitive !== false;
 	options.withinString = !!options.withinString;
 	options.wrapperNodeName = options.wrapperNodeName || 'span';
 	options.wrapperNodeClass = options.wrapperNodeClass || 'highlight';
