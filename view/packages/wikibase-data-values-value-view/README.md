@@ -105,14 +105,15 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.8.1 (dev)
+### 0.8.1 (2014-11-07)
 
 #### Enhancements
-* $.ui.ooMenu.CustomItem: Added `setVisibility`, `setAction` and `setCssClass` functions. Visibility may be set to a static (boolean) value.
+* `$.ui.ooMenu.CustomItem`: Added `setVisibility`, `setAction` and `setCssClass` functions. Visibility may be set to a static (boolean) value.
 * `$.valueview.draw` (`$.valueview.valueview.draw`), `$.valueview.drawContent` (`$.valueview.valueview.drawContent`) and `$.valueview.Expert.draw` return jQuery promises.
 * `$.valueview.draw` (`$.valueview.valueview.draw`) triggers `afterdraw` event.
 * `$.valueview.startEditing` (`$.valueview.valueview.startEditing`) triggers `afterstartediting` event.
 * `$.valueview.stopEditing` (`$.valueview.valueview.stopEditing`) triggers `afterstopediting` event.
+* Fixed precision auto-detection of `$.valueview.experts.GlobeCoordinateInput`.
 
 ### 0.8.0 (2014-11-03)
 
