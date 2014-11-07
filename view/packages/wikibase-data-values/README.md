@@ -15,6 +15,14 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.6.1 (2014-11-07)
+
+#### Enhancements
+* `Time` object's month and day attributes default to 0 instead of 1 now.
+* Fixed `Time.newFromIso8601()`.
+* Improved PhantomJS Testrunner, outputs failed assertions on the console now.
+* Improved `globeCoordinate.GlobeCoordinate.equals()`
+
 ### 0.6.0 (2014-09-01)
 
 #### Breaking changes
