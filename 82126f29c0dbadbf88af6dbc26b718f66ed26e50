@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_b603390f",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-07T14:45:12Z",
+      "side": 1,
+      "message": "This function seems to be unused, so maybe just drop it instead of fixing it.\nCreating getTermLookup() instead would be nice. Should go into the Store, though.",
+      "revId": "82126f29c0dbadbf88af6dbc26b718f66ed26e50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_362e498a",
+        "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-07T14:45:12Z",
+      "side": 1,
+      "message": "This message is now wrong.",
+      "revId": "82126f29c0dbadbf88af6dbc26b718f66ed26e50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b651f912",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-07T14:45:12Z",
+      "side": 1,
+      "message": "The Term lookup itself should probably be injected",
+      "revId": "82126f29c0dbadbf88af6dbc26b718f66ed26e50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_364f293b",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-07T14:45:12Z",
+      "side": 1,
+      "message": "That\u0027s what WikibaseRepo::getEntitiyIdLabelFormatter does, right? Maybe that should be used here after all? Constructing service objects ad-hoc is a serious code smell...",
+      "revId": "82126f29c0dbadbf88af6dbc26b718f66ed26e50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
