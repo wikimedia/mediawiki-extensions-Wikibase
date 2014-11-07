@@ -2,10 +2,6 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use Diff\Comparer\CallbackComparer;
-use Diff\DiffOp\Diff\Diff;
-use Diff\Patcher\ListPatcher;
-use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Claim\Claim;
@@ -15,6 +11,7 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\StatementListProvider;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
@@ -26,7 +23,7 @@ use Wikibase\DataModel\Term\Fingerprint;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Item extends Entity {
+class Item extends Entity implements StatementListProvider {
 
 	const ENTITY_TYPE = 'item';
 
