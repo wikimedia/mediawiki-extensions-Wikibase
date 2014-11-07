@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_227924f2",
+        "filename": "repo/includes/UpdateRepo/UpdateRepoOnDeleteJob.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-07T13:42:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_5f59b48e",
+      "revId": "80da4d70d392ae5bfe371631b986213818eeb88a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_9f5f3c77",
         "filename": "repo/tests/phpunit/includes/UpdateRepo/UpdateRepoOnDeleteJobTest.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-06T10:32:06Z",
       "side": 1,
       "message": "Please inject mock services for everything. It would be great if we could test this without touching the database.",
+      "revId": "80da4d70d392ae5bfe371631b986213818eeb88a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_228da4d8",
+        "filename": "repo/tests/phpunit/includes/UpdateRepo/UpdateRepoOnDeleteJobTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-07T13:42:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_9f5f3c77",
       "revId": "80da4d70d392ae5bfe371631b986213818eeb88a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
