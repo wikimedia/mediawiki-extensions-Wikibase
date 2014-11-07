@@ -5,7 +5,7 @@ namespace Wikibase\DataModel;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * Interface for classes that can contain Statements.
+ * Interface for classes that contain a StatementList.
  *
  * @since 2.2.0
  *
