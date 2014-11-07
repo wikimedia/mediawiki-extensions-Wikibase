@@ -16,6 +16,24 @@
       "revId": "7513af2322be3ed8eb6d33850de65615dea940e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_acad269a",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-07T19:15:42Z",
+      "side": 1,
+      "message": "It only does the 50px if there\u0027s space to do so. It just goes straight to the top, if there\u0027s no space.",
+      "parentUuid": "6e936f18_ac20c647",
+      "revId": "7513af2322be3ed8eb6d33850de65615dea940e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
