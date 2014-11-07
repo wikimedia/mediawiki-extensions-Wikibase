@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e936f18_ecec8e90",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-07T19:43:00Z",
+      "side": 1,
+      "message": "feel free to give yourself some credit, if you rewrite things.",
+      "revId": "0f259bdecf13065173b721f9199606e6f9682840",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_cce752a6",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-07T19:43:00Z",
+      "side": 1,
+      "message": "empty line here would be nice",
+      "revId": "0f259bdecf13065173b721f9199606e6f9682840",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_ac8526d5",
         "filename": "client/includes/specials/SpecialUnconnectedPages.php",
         "patchSetId": 2
