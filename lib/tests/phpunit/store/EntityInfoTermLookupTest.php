@@ -4,25 +4,26 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityTermLookup;
+use Wikibase\Lib\Store\EntityInfoTermLookup;
 
 /**
- * @covers Wikibase\Lib\Store\EntityTermLookup
+ * @covers Wikibase\Lib\Store\EntityInfoTermLookup
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert
+ * @author Daniel Kinzler
  */
-class EntityTermLookupTest extends \MediaWikiTestCase {
+class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 
 	public function testGetLabel() {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityInfoTermLookup();
 
 		$label = $termLookup->getLabel( new ItemId( 'Q116' ), 'en' );
 		$this->assertEquals( 'New York City', $label );
 	}
 
 	public function testGetLabel_notFoundThrowsException() {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityInfoTermLookup();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 		$termLookup->getLabel( new ItemId( 'Q120' ), 'en' );
@@ -32,7 +33,7 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 	 * @dataProvider getLabelsProvider
 	 */
 	public function testGetLabels( $expected, EntityId $entityId ) {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityInfoTermLookup();
 
 		$labels = $termLookup->getLabels( $entityId );
 		$this->assertEquals( $expected, $labels );
@@ -52,7 +53,7 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetDescription() {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityInfoTermLookup();
 
 		$description = $termLookup->getDescription( new ItemId( 'Q116' ), 'de' );
 		$expected = 'Metropole an der Ostküste der Vereinigten Staaten';
@@ -61,7 +62,7 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetDescription_notFoundThrowsException() {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityInfoTermLookup();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 		$termLookup->getDescription( new ItemId( 'Q90000' ), 'fr' );
@@ -71,7 +72,7 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 	 * @dataProvider getDescriptionsProvider
 	 */
 	public function getDescriptions( $expected, EntityId $entityId ) {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityInfoTermLookup();
 
 		$descriptions = $termLookup->getDescriptions( $entityId );
 		$this->assertEquals( $expected, $descriptions );
@@ -93,51 +94,32 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 		);
 	}
 
-	private function getEntityTermLookup() {
-		$termIndex = $this->getTermIndex();
-		return new EntityTermLookup( $termIndex );
+	private function getEntityInfoTermLookup() {
+		$entityInfo = $this->makeEntityInfo();
+		return new EntityInfoTermLookup( $entityInfo );
 	}
 
-	private function getTermIndex() {
-		$terms = array(
-			new \Wikibase\Term( array(
-				'entityId' => 116,
-				'entityType' => 'item',
-				'termType' => 'label',
-				'termLanguage' => 'en',
-				'termText' => 'New York City'
-			) ),
-			new \Wikibase\Term( array(
-				'entityId' => 116,
-				'entityType' => 'item',
-				'termType' => 'label',
-				'termLanguage' => 'es',
-				'termText' => 'Nueva York'
-			) ),
-			new \Wikibase\Term( array(
-				'entityId' => 116,
-				'entityType' => 'item',
-				'termType' => 'description',
-				'termLanguage' => 'en',
-				'termText' => 'largest city in New York and the United States of America'
-			) ),
-			new \Wikibase\Term( array(
-				'entityId' => 116,
-				'entityType' => 'item',
-				'termType' => 'description',
-				'termLanguage' => 'de',
-				'termText' => 'Metropole an der Ostküste der Vereinigten Staaten'
-			) ),
-			new \Wikibase\Term( array(
-				'entityId' => 117,
-				'entityType' => 'item',
-				'termType' => 'label',
-				'termLanguage' => 'en',
-				'termText' => 'Berlin'
-			) ),
+	private function makeEntityInfo() {
+		$entityInfo = array(
+			'Q116' => array(
+				'labels' => array(
+					'en' => array( 'language' => 'en', 'value' => 'New York City' ),
+					'es' => 'Nueva York', // terse form also supported
+				),
+				'descriptions' => array(
+					'en' => array( 'language' => 'en', 'value' => 'largest city in New York and the United States of America' ),
+					'de' => array( 'language' => 'de', 'value' => 'Metropole an der Ostküste der Vereinigten Staaten' ),
+				),
+			),
+
+			'Q117' => array(
+				'labels' => array(
+					'de' => array( 'language' => 'de', 'value' => 'Berlin' ),
+				),
+			),
 		);
 
-		return new MockTermIndex( $terms );
+		return $entityInfo;
 	}
 
 }
