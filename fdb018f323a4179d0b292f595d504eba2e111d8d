@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_f9a772b8",
+        "filename": "client/includes/parserhooks/NoLangLinkHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-07T17:40:34Z",
+      "side": 1,
+      "message": "?",
+      "revId": "fdb018f323a4179d0b292f595d504eba2e111d8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
