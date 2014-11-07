@@ -259,6 +259,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.statementview',
+				'test.sinonjs',
+				'wikibase.datamodel',
 			),
 		),
 
