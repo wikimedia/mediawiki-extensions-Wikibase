@@ -37,7 +37,6 @@ use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
@@ -195,23 +194,6 @@ final class WikibaseClient {
 		}
 
 		return $this->entityIdParser;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param string $languageCode
-	 *
-	 * @return EntityIdLabelFormatter
-	 */
-	public function newEntityIdLabelFormatter( $languageCode ) {
-		$options = new FormatterOptions( array(
-			EntityIdLabelFormatter::OPT_LANG => $languageCode
-		) );
-
-		$labelFormatter = new EntityIdLabelFormatter( $options, $this->getEntityLookup() );
-
-		return $labelFormatter;
 	}
 
 	/**
