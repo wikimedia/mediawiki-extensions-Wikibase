@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_ac20c647",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-07T19:12:54Z",
+      "side": 1,
+      "message": "Why 50px from the top? On very small screens this could be worse than the current situation. I suggest \"top+5%\" instead.\n\nAlso single quotes.",
+      "revId": "7513af2322be3ed8eb6d33850de65615dea940e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
