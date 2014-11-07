@@ -2,6 +2,8 @@
 
 ## Version 2.2.0 (dev)
 
+* `Item` and `Property` now implement `StatementListProvider`
+* Introduced the `StatementListProvider` interface for classes containing a `StatementList`
 * Added rank comparison to `Statement::equals`
 
 ## Version 2.1.0 (2014-10-27)
