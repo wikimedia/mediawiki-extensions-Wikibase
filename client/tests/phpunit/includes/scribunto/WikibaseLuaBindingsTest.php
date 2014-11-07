@@ -54,6 +54,11 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'structured-cat' ) );
 
+		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( 'LabelString' ) );
+
 		return new WikibaseLuaBindings(
 			new BasicEntityIdParser(),
 			$entityLookup ? $entityLookup : new MockRepository(),
@@ -62,6 +67,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			$language, // language
 			new SettingsArray(),
 			$propertyDataTypeLookup,
+			$labelLookup,
 			array( 'de', 'en', 'es', 'ja' ),
 			"enwiki" // siteId
 		);
@@ -105,6 +111,47 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	public function testGetGlobalSiteId() {
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation();
 		$this->assertEquals( 'enwiki', $wikibaseLibrary->getGlobalSiteId() );
+	}
+
+	public function getLabelProvider() {
+		return array(
+			array( 'LabelString', 'Q123' ),
+			array( '', 'DoesntExist' )
+		);
+	}
+
+	/**
+	 * @dataProvider getLabelProvider
+	 *
+	 * @param string $expected
+	 * @param string $itemId
+	 */
+	public function testGetLabel( $expected, $itemId ) {
+		$wikibaseLibrary = $this->getWikibaseLibraryImplementation();
+		$this->assertEquals( $expected, $wikibaseLibrary->getLabel( $itemId ) );
+	}
+
+	public function getSiteLinkProvider() {
+		return array(
+			array( 'Beer', 'Q666' ),
+			array( '', 'DoesntExist' )
+		);
+	}
+
+	/**
+	 * @dataProvider getSiteLinkProvider
+	 *
+	 * @param string $expected
+	 * @param string $itemId
+	 */
+	public function testGetSiteLink( $expected, $itemId ) {
+		$item = $this->getItem();
+
+		$entityLookup = new MockRepository();
+		$entityLookup->putEntity( $item );
+
+		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
+		$this->assertSame( $expected, $wikibaseLibrary->getSiteLink( $itemId ) );
 	}
 
 	protected function getItem() {

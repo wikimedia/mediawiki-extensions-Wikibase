@@ -63,7 +63,7 @@ function wikibase.setupInterface()
 	-- Get the mw.wikibase.entity object for the current page
 	wikibase.getEntityObject = function( id )
 		if id ~= nil and type( id ) ~= 'string' then
-			error( 'Id must be either of type string or nil, ' .. type( id ) .. ' given' )
+			error( 'id must be either of type string or nil, ' .. type( id ) .. ' given', 2 )
 		end
 
 		if id == nil then
@@ -71,7 +71,7 @@ function wikibase.setupInterface()
 		end
 
 		if not php.getSetting( 'allowArbitraryDataAccess' ) and id ~= getEntityIdForCurrentPage() then
-			error( 'Access to arbitrary items has been disabled.' )
+			error( 'Access to arbitrary items has been disabled.', 2 )
 		end
 
 		if id == nil then
@@ -85,26 +85,22 @@ function wikibase.setupInterface()
 	--
 	-- @param id
 	wikibase.label = function( id )
-		local entity = getEntityObject( id )
-
-		if entity == nil then
-			return nil
+		if type( id ) ~= 'string' then
+			error( 'id must be of type string, ' .. type( id ) .. ' given', 2 )
 		end
 
-		return entity:getLabel()
+		return php.getLabel( id )
 	end
 
 	-- Get the local sitelink title for the given entity id (if one exists)
 	--
 	-- @param id
 	wikibase.sitelink = function( id )
-		local entity = getEntityObject( id )
-
-		if entity == nil then
-			return nil
+		if type( id ) ~= 'string' then
+			error( 'id must be of type string, ' .. type( id ) .. ' given', 2 )
 		end
 
-		return entity:getSitelink()
+		return php.getSiteLink( id )
 	end
 
 	mw = mw or {}
