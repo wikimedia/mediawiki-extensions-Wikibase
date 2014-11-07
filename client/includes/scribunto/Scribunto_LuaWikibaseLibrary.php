@@ -4,6 +4,8 @@ use Wikibase\Client\Scribunto\WikibaseLuaBindings;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Utils;
+use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
@@ -34,14 +36,21 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
+		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
+		$labelLookup = new LanguageLabelLookup(
+			new EntityRetrievingTermLookup( $entityLookup ),
+			$wgContLang->getCode()
+		);
+
 		$this->wbLibrary = new WikibaseLuaBindings(
 			$wikibaseClient->getEntityIdParser(),
-			$wikibaseClient->getStore()->getEntityLookup(),
+			$entityLookup,
 			$wikibaseClient->getStore()->getSiteLinkTable(),
 			$wikibaseClient->getLanguageFallbackChainFactory(),
 			$language,
 			$wikibaseClient->getSettings(),
 			$wikibaseClient->getPropertyDataTypeLookup(),
+			$labelLookup,
 			Utils::getLanguageCodes(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
@@ -58,9 +67,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function register() {
 		$lib = array(
+			'getLabel' => array( $this, 'getLabel' ),
 			'getEntity' => array( $this, 'getEntity' ),
 			'getSetting' => array( $this, 'getSetting' ),
 			'getEntityId' => array( $this, 'getEntityId' ),
+			'getSiteLinkPageName' => array( $this, 'getSiteLinkPageName' ),
 			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' )
 		);
 
@@ -134,4 +145,31 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return array( $this->wbLibrary->getSetting( $setting ) );
 	}
 
+	/**
+	 * Wrapper for getLabel in Scribunto_LuaWikibaseLibraryImplementation
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $prefixedEntityId
+	 *
+	 * @return string[]
+	 */
+	public function getLabel( $prefixedEntityId ) {
+		$this->checkType( 'getLabel', 1, $prefixedEntityId, 'string' );
+		return array( $this->wbLibrary->getLabel( $prefixedEntityId ) );
+	}
+
+	/**
+	 * Wrapper for getSiteLinkPageName in Scribunto_LuaWikibaseLibraryImplementation
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $prefixedEntityId
+	 *
+	 * @return string[]
+	 */
+	public function getSiteLinkPageName( $prefixedEntityId ) {
+		$this->checkType( 'getSiteLinkPageName', 1, $prefixedEntityId, 'string' );
+		return array( $this->wbLibrary->getSiteLinkPageName( $prefixedEntityId ) );
+	}
 }
