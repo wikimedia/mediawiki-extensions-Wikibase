@@ -146,4 +146,20 @@ define( [
 		time.settings.daybeforemonth = dbmStateBefore; // reset state of evil global setting
 	} );
 
+	QUnit.test( 'Equality of Time objects with different calendar model', function( assert ) {
+		$.each( validTimeDefinitions, function( name, definition ) {
+			var time1 = new Time( definition ),
+				time2 = new Time( definition, {
+					calendarname: definition.calendarname === Time.CALENDAR.GREGORIAN
+						? Time.CALENDAR.JULIAN
+						: Time.CALENDAR.GREGORIAN
+				} );
+
+			assert.ok(
+				!time1.equals( time2 ) && !time2.equals( time1 ),
+				'Time created from string "' + name + '" but different calendar model is not equal'
+			);
+		} );
+	} );
+
 } );
