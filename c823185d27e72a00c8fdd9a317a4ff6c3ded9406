@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_65a4119f",
+        "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-07T22:59:12Z",
+      "side": 1,
+      "message": "the part about this returning false is not true, but that\u0027s not an issue in any of the callers (they all catch the exception).",
+      "revId": "c823185d27e72a00c8fdd9a317a4ff6c3ded9406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
