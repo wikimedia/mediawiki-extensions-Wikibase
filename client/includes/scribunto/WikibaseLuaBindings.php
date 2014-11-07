@@ -3,7 +3,10 @@
 namespace Wikibase\Client\Scribunto;
 
 use Language;
+use InvalidArgumentException;
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -11,7 +14,9 @@ use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\SettingsArray;
 
 /**
@@ -71,6 +76,11 @@ class WikibaseLuaBindings {
 	private $dataTypeLookup;
 
 	/**
+	 * @var LabelLookup
+	 */
+	private $labelLookup;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityLookup $entityLookup
 	 * @param SiteLinkLookup $siteLinkTable
@@ -78,6 +88,7 @@ class WikibaseLuaBindings {
 	 * @param Language $language
 	 * @param SettingsArray $settings
 	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 * @param LabelLookup $labelLookup
 	 * @param string[] $languageCodes
 	 * @param string $siteId
 	 */
@@ -89,6 +100,7 @@ class WikibaseLuaBindings {
 		Language $language,
 		SettingsArray $settings,
 		PropertyDataTypeLookup $dataTypeLookup,
+		LabelLookup $labelLookup,
 		$languageCodes,
 		$siteId
 	) {
@@ -98,9 +110,10 @@ class WikibaseLuaBindings {
 		$this->fallbackChainFactory = $fallbackChainFactory;
 		$this->language = $language;
 		$this->settings = $settings;
+		$this->dataTypeLookup = $dataTypeLookup;
+		$this->labelLookup = $labelLookup;
 		$this->languageCodes = $languageCodes;
 		$this->siteId = $siteId;
-		$this->dataTypeLookup = $dataTypeLookup;
 	}
 
 	/**
@@ -235,4 +248,46 @@ class WikibaseLuaBindings {
 		return $this->settings->getSetting( $setting );
 	}
 
+	/**
+	 * @param string $prefixedEntityId
+	 *
+	 * @since 0.5
+	 * @return string Emtpy string if entity couldn't be found/ no label present
+	 */
+	public function getLabel( $prefixedEntityId ) {
+		try {
+			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
+		} catch( EntityIdParsingException $e ) {
+			return '';
+		}
+
+		try {
+			$label = $this->labelLookup->getLabel( $entityId );
+		} catch ( OutOfBoundsException $ex ) {
+			return '';
+		}
+
+		return $label;
+	}
+
+	/**
+	 * @param string $prefixedEntityId
+	 *
+	 * @since 0.5
+	 * @return string Emtpy string if entity couldn't be found/ no sitelink present
+	 */
+	public function getSiteLinkPageName( $prefixedEntityId ) {
+		try {
+			$itemId = new ItemId( $prefixedEntityId );
+		} catch( InvalidArgumentException $e ) {
+			return '';
+		}
+
+		$item = $this->entityLookup->getEntity( $itemId );
+		if ( !$item || !$item->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) ) {
+			return '';
+		}
+
+		return $item->getSiteLinkList()->getBySiteId( $this->siteId )->getPageName();
+	}
 }
