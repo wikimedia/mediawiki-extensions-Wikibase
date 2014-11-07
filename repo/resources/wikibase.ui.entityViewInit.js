@@ -138,10 +138,10 @@
 		.on( 'labelviewchange labelviewafterstopediting', function( event ) {
 			var $labelview = $( event.target ),
 				labelview = $labelview.data( 'labelview' ),
-				label = labelview.value().label;
+				label = labelview.value().getText();
 
 			$( 'title' ).text(
-				mw.msg( 'pagetitle', label && label !== '' ? label : mw.config.get( 'wgTitle' ) )
+				mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
 			);
 		} )
 		.on( 'entityviewafterstartediting', function() {
