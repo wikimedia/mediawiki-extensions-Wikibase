@@ -23,6 +23,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.aliasesview',
+				'wikibase.datamodel.MultiTerm',
 			),
 		),
 
@@ -108,6 +109,7 @@ return call_user_func( function() {
 				),
 				'dependencies' => array(
 					'jquery.wikibase.fingerprintgroupview',
+					'wikibase.datamodel.MultiTerm',
 				),
 			),
 
@@ -117,6 +119,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.fingerprintlistview',
+				'wikibase.datamodel.MultiTerm',
 			),
 		),
 
