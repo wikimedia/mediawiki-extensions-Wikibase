@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_a209b4e1",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-07T11:51:41Z",
+      "side": 1,
+      "message": "That\u0027s a lot of dependencies. If some of them are used only by some bits of EntityParserOutputGeneratorFactory, consider splitting these bits into a separate class.",
+      "revId": "b5c9c6e9443c1bca16a754459bb153576eccc61d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_22fda4ae",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-07T11:51:41Z",
+      "side": 1,
+      "message": "No global state please! Get what you need from the EntityHandler. The EntityHandler can have it injected via the constructor.\n\nAlso, as a rule of thumb, try to move as much logic as possible to EntityHandler. EntityContent should be as dumb as possible. It can just delegate to $this-\u003egetHandler()-\u003ewhatever.\n\nI realize the reference to WikibaseRepo was in here before, but introducing a factory seems the appropriate time for getting rid of that.",
+      "revId": "b5c9c6e9443c1bca16a754459bb153576eccc61d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
