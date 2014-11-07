@@ -161,6 +161,7 @@ $.widget( 'wikibase.linkitem', {
 				title: mw.message( 'wikibase-linkitem-title' ).escaped(),
 				width: 500,
 				resizable: false,
+				position: { my: "top", at: "center", of: mw.util.$content },
 				buttons: [ {
 					text: mw.msg( 'wikibase-linkitem-linkpage' ),
 					id: 'wbclient-linkItem-goButton',
