@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_0f2a0c7a",
+        "filename": "client/composer.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-07T20:06:11Z",
+      "side": 1,
+      "message": "do we really need all these things in client?\n\nand to define them again here, when client depends on lib which has these?\n\nseems somewhat a bit more overhead to maintain the versions in all these places.",
+      "revId": "ae4031bad9d6e48dce119e57757142722a4044a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
