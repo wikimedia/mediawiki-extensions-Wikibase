@@ -15,8 +15,8 @@
 			"Cwlin0416"
 		]
 	},
-	"wikibase-client-desc": "Wikibase 擴充套件客戶端",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}} 客戶端",
+	"wikibase-client-desc": "Wikibase 擴充套件用戶端",
+	"specialpages-group-wikibaseclient": "{{WBREPONAME}} 用戶端",
 	"tooltip-t-wikibase": "連結至已連接的資料儲存庫項目",
 	"wikibase-after-page-move": "您可以 [$1 更新] 與已移動頁面關聯的 {{WBREPONAME}} 項目，來維護語言連結。",
 	"wikibase-after-page-move-queued": "與此頁面關聯的 [$1 {{WBREPONAME}} 項目] 將會於稍後自動更新。",

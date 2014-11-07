@@ -5,5 +5,7 @@
 		]
 	},
 	"wikibase-error-unexpected": "Flater $1.",
+	"wikibase-globedetails-longitude": "Lingtegraad",
+	"wikibase-globedetails-latitude": "Breedtegraad",
 	"wikibase-sitelinks-sitename-columnheading": "Taal"
 }

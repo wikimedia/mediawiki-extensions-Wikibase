@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"बिप्लब आनन्द"
+		]
+	},
+	"specialpages-group-wikibaseclient": "{{WBREPONAME}} ग्राहक",
+	"tooltip-t-wikibase": "जुडल दत्तांश निधान बिषयके लेल लिंक",
+	"wikibase-comment-add": "{{WBREPONAME}} वस्तु बनाओल गेल अछि।",
+	"wikibase-comment-remove": "जुडल {{WBREPONAME}} वस्तु मेटाओल गेल अछि । भाषास जुडल लिंक हटाओल गेल अछि।",
+	"wikibase-comment-linked": "{{WBREPONAME}} वस्तु ई पन्नास जुडल गेल अछि।",
+	"wikibase-comment-unlink": "इ पन्नाके विकिडेटा आइटमस हटाओल गेल अछि । भाषा लिंक हटाओल गेल।",
+	"wikibase-comment-restore": "जुडल {{WBREPONAME}} वस्तु नै मेटाओल गेल अछि । भाषास जुडल लिंक मौलिक रुपमे आनल गेल।",
+	"wikibase-comment-update": "{{WBREPONAME}} बिषय परिवर्तित",
+	"wikibase-comment-sitelink-add": "भाषा लिंक जुडल: $1",
+	"wikibase-comment-sitelink-change": "भाषा लिंक $1 स $2 मे बदलल गेल",
+	"wikibase-comment-sitelink-remove": "भाषा लिंक हटाओल गेल: $1",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|परिवर्त्तन|परिवर्त्तन}}",
+	"wikibase-dataitem": "{{WBREPONAME}} बिषय",
+	"wikibase-editlinks": "लिंक संपादित करू",
+	"wikibase-editlinkstitle": "अन्तरभाषा लिंक संपादित करू",
+	"wikibase-linkitem-addlinks": "लिंक जोडू",
+	"wikibase-linkitem-title": "पन्नाके साथ लिंक",
+	"wikibase-linkitem-linkpage": "पन्नाके साथ लिंक",
+	"wikibase-linkitem-selectlink": "कृपया अहाँ ई पन्नाके लिंक करए स पहिले कोनो साइट वा पन्ना छानु",
+	"wikibase-linkitem-input-site": "भाषा:",
+	"wikibase-linkitem-input-page": "पन्ना:",
+	"wikibase-linkitem-confirmitem-button": "पक्का छी",
+	"wikibase-linkitem-not-loggedin-title": "अहाँके सम्प्रवेषित होबए पडत",
+	"wikibase-rc-hide-wikidata-hide": "नुकाऊ",
+	"wikibase-rc-hide-wikidata-show": "देखाऊ",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} संपादन",
+	"wikibase-watchlist-show-changes-pref": "अपन साकांक्ष सूची {{WBREPONAME}} मे सम्पादन देखाऊ",
+	"wikibase-unconnectedpages-submit": "जाऊ",
+	"wikibase-unconnectedpages-invalid-language": "\"$1\" मूल भाषा कोड नै छी।",
+	"wikibase-unconnectedpages-iwdata-label": "मात्र अंतरभाषा लिंक भेल पन्ना",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} बिषय आइडी",
+	"wikibase-pageinfo-entity-id-none": "कोनो नै",
+	"wikibase-otherprojects": "अन्य प्रोजेक्ट सभ",
+	"wikibase-otherprojects-beta-message": "अन्य प्रोजेक्ट साइडबार"
+}
