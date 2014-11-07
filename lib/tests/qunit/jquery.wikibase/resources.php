@@ -110,6 +110,7 @@ return call_user_func( function() {
 				'dependencies' => array(
 					'jquery.wikibase.fingerprintgroupview',
 					'wikibase.datamodel.MultiTerm',
+					'wikibase.datamodel.Term',
 				),
 			),
 
@@ -120,6 +121,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.fingerprintlistview',
 				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.Term',
 			),
 		),
 
@@ -138,6 +140,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.labelview',
+				'wikibase.datamodel.Term',
 			),
 		),
 
