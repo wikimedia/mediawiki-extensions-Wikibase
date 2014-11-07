@@ -320,6 +320,8 @@ $.widget( 'wikibase.linkitem', {
 	 * @return {jQuery}
 	 */
 	_createPageInput: function() {
+		var self = this;
+
 		return $( '<label>' )
 		.attr( 'for', 'wbclient-linkItem-page' )
 		.text( mw.msg( 'wikibase-linkitem-input-page' ) )
@@ -331,10 +333,16 @@ $.widget( 'wikibase.linkitem', {
 				disabled: 'disabled',
 				'class' : 'wbclient-linkItem-input'
 			} )
-			.on( 'focus', $.proxy( function () {
-				// Enable the button by the time the user uses this field
-				this.$goButton.button( 'enable' );
-			}, this ) )
+			.on( 'eachchange', function () {
+				// Enable the button if the field has a value
+				self.$goButton.button( $( this ).val() === '' ? 'disable' : 'enable' );
+			} )
+			.on( 'keypress', function( e ) {
+				if ( !self.$goButton.prop( 'disabled' ) && e.which === 13 ) {
+					// Enter should submit
+					self.$goButton.trigger( 'click' );
+				}
+			} )
 		);
 	},
 
