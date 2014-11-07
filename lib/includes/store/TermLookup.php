@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -19,6 +20,7 @@ interface TermLookup {
 	 * @param string $languageCode
 	 *
 	 * @return string
+	 * @throws OutOfBoundsException if no such label was found
 	 */
 	public function getLabel( EntityId $entityId, $languageCode );
 
@@ -27,7 +29,7 @@ interface TermLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return string[]
+	 * @return string[] labels, keyed by language.
 	 */
 	public function getLabels( EntityId $entityId );
 
@@ -38,6 +40,7 @@ interface TermLookup {
 	 * @param string $languageCode
 	 *
 	 * @return string
+	 * @throws OutOfBoundsException if no such description was found
 	 */
 	public function getDescription( EntityId $entityId, $languageCode );
 
@@ -46,7 +49,7 @@ interface TermLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return string[]
+	 * @return string[] descriptions, keyed by language.
 	 */
 	public function getDescriptions( EntityId $entityId );
 
