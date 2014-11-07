@@ -12,14 +12,14 @@ use Wikibase\Repo\WikibaseRepo;
  */
 return call_user_func( function() {
 	preg_match(
-		'+^.*?' . preg_quote( DIRECTORY_SEPARATOR, '+' ) . '(?:vendor|extensions)' .
-			preg_quote( DIRECTORY_SEPARATOR, '+' ) . '(.*)$+',
+		'+' . preg_quote( DIRECTORY_SEPARATOR, '+' ) . '((?:vendor|extensions)' .
+			preg_quote( DIRECTORY_SEPARATOR, '+' ) . '.*)$+',
 		__DIR__,
 		$remoteExtPathParts
 	);
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' => $remoteExtPathParts[1],
+		'remoteExtPath' => '..' . DIRECTORY_SEPARATOR . $remoteExtPathParts[1],
 	);
 
 	$modules = array(
