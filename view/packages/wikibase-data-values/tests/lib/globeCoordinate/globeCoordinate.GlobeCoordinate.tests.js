@@ -161,9 +161,7 @@ define( [
 				{ latitude: 0, longitude: 0, precision: 1 / 3600 }
 			),
 			gcDefs = [
-				{ latitude: 0.1 / 3600, longitude: 0, precision: 1 / 3600 },
 				{ latitude: 0.0002, longitude: 0, precision: 1 / 3600 },
-				{ latitude: 0, longitude: 0.1 / 3600, precision: 1 / 3600 },
 				{ latitude: 0, longitude: 0.0002, precision: 1 / 3600 },
 				{ latitude: 0, longitude: 0, precision: 1 / 3600 + 0.0000001 },
 				{ latitude: 0, longitude: 0, precision: 1 / 3600 - 0.0000001 }
