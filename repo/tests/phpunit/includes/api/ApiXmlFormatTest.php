@@ -19,12 +19,13 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
+ * @group Database
  * @group medium
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ApiXmlFormatTest extends \PHPUnit_Framework_TestCase {
+class ApiXmlFormatTest extends \MediaWikiTestCase {
 
 	/**
 	 * @var EntityRevision
