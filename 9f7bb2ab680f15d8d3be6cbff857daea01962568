@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_229284a2",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-07T11:06:35Z",
+      "side": 1,
+      "message": "can haz visibility?",
+      "revId": "9f7bb2ab680f15d8d3be6cbff857daea01962568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_829918c9",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-07T11:06:35Z",
+      "side": 1,
+      "message": "i don\u0027t like the complexity of these record arrays, but maybe not enough to block the patch.\n\nif okay performance-wise, i think there should be some sort of object that represents the records.",
+      "revId": "9f7bb2ab680f15d8d3be6cbff857daea01962568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_428f9078",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-07T11:06:35Z",
+      "side": 1,
+      "message": "i would says \"labels\" with lowercase.",
+      "revId": "9f7bb2ab680f15d8d3be6cbff857daea01962568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e2efbc19",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-07T11:06:35Z",
+      "side": 1,
+      "message": "i would say \"descriptions\"",
+      "revId": "9f7bb2ab680f15d8d3be6cbff857daea01962568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
