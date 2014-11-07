@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_f62a212a",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-07T14:53:13Z",
+      "side": 1,
+      "message": "already gone :) removed in another patch (that i had laying around) and merged",
+      "parentUuid": "6e936f18_b603390f",
+      "revId": "82126f29c0dbadbf88af6dbc26b718f66ed26e50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_362e498a",
         "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
         "patchSetId": 16
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-07T14:45:12Z",
       "side": 1,
       "message": "This message is now wrong.",
+      "revId": "82126f29c0dbadbf88af6dbc26b718f66ed26e50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d6e4c50c",
+        "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-07T14:53:13Z",
+      "side": 1,
+      "message": "how? only thing i see wrong is that i missed a period. (fixed)",
+      "parentUuid": "6e936f18_362e498a",
       "revId": "82126f29c0dbadbf88af6dbc26b718f66ed26e50",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_16c6ad71",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-07T14:53:13Z",
+      "side": 1,
+      "message": "agree and likely will be done in one of the follow up patches.",
+      "parentUuid": "6e936f18_b651f912",
+      "revId": "82126f29c0dbadbf88af6dbc26b718f66ed26e50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_364f293b",
         "filename": "repo/includes/actions/EditEntityAction.php",
         "patchSetId": 16
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-07T14:45:12Z",
       "side": 1,
       "message": "That\u0027s what WikibaseRepo::getEntitiyIdLabelFormatter does, right? Maybe that should be used here after all? Constructing service objects ad-hoc is a serious code smell...",
+      "revId": "82126f29c0dbadbf88af6dbc26b718f66ed26e50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d60e05e8",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-07T14:53:13Z",
+      "side": 1,
+      "message": "that doesn\u0027t exist there.  might be a good idea, as constructing all the things here is nasty",
+      "parentUuid": "6e936f18_364f293b",
       "revId": "82126f29c0dbadbf88af6dbc26b718f66ed26e50",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
