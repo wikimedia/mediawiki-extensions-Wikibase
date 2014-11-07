@@ -7,8 +7,7 @@ use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 
@@ -19,8 +18,6 @@ use Wikibase\Lib\Store\UnresolvedRedirectException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
- *
- * @todo: add support for language fallback chains
  */
 class EntityIdLabelFormatter extends EntityIdFormatter {
 
@@ -39,23 +36,21 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	const FALLBACK_NONE = 2;
 
 	/**
-	 * @var EntityLookup
+	 * @var LabelLookup
 	 */
-	protected $entityLookup;
+	private $labelLookup;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param FormatterOptions $options Supported options: OPT_LOOKUP_LABEL (boolean),
 	 *        OPT_LABEL_FALLBACK (FALLBACK_XXX)
-	 * @param EntityLookup $entityLookup
+	 * @param LabelLookup $labelLookup
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( FormatterOptions $options, EntityLookup $entityLookup ) {
+	public function __construct( FormatterOptions $options, LabelLookup $labelLookup ) {
 		parent::__construct( $options );
-
-		$this->entityLookup = $entityLookup;
 
 		$this->defaultOption( self::OPT_LOOKUP_LABEL, true );
 		$this->defaultOption( self::OPT_LABEL_FALLBACK, self::FALLBACK_PREFIXED_ID );
@@ -76,6 +71,8 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 		if ( !is_bool( $this->getOption( self::OPT_LOOKUP_LABEL ) ) ) {
 			throw new InvalidArgumentException( 'Bad value for OPT_LOOKUP_LABEL option: must be a boolean' );
 		}
+
+		$this->labelLookup = $labelLookup;
 	}
 
 	/**
@@ -97,6 +94,7 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 			}
 		}
 
+		// @fixme check if the entity is deleted and format differently?
 		if ( !is_string( $label ) ) {
 			switch ( $this->getOption( self::OPT_LABEL_FALLBACK ) ) {
 				case self::FALLBACK_PREFIXED_ID:
@@ -125,35 +123,11 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 */
 	protected function lookupEntityLabel( EntityId $entityId ) {
 		try {
-			$entity = $this->entityLookup->getEntity( $entityId );
-		} catch ( UnresolvedRedirectException $ex )  {
-			$entity = null;
-		} catch ( StorageException $ex )  {
-			$entity = null;
-			wfLogWarning( 'Failed to load entity: '
-				. $entityId->getSerialization() . ': '
-				. $ex->getMessage() );
-		}
-
-		if ( $entity === null ) {
-			// double redirect, deleted entity, etc
-			throw new OutOfBoundsException( "An Entity with the id $entityId could not be loaded" );
-		}
-
-		/* @var LanguageFallbackChain $languageFallbackChain */
-		if ( $this->options->hasOption( 'languages' ) ) {
-			$languageFallbackChain = $this->getOption( 'languages' );
-
-			$extractedData = $languageFallbackChain->extractPreferredValue( $entity->getLabels() );
-
-			if ( $extractedData === null ) {
-				return false;
-			} else {
-				return $extractedData['value'];
-			}
-		} else {
-			$lang = $this->getOption( self::OPT_LANG );
-			return $entity->getLabel( $lang );
+			return $this->labelLookup->getLabel( $entityId );
+		} catch ( StorageException $ex ) {
+			// @todo maybe handle formatting in this in a better way.
+			throw new OutOfBoundsException( "An Entity with the id $entityId "
+				. "could not be loaded." );
 		}
 	}
 
