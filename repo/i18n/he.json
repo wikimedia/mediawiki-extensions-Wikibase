@@ -236,7 +236,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "ניתן לערוך אותה באמצעות שימוש בקוד <nowiki>{{#babel: }}</nowiki> ב[[Special:MyPage|דף המשתמש]] {{GENDER:$1|שלך}}.",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, הומר מ־$3 – $4",
 	"wikibase-api-unresolved-redirect": "מזהה הישות ID מתייחס להפניה, וזה לא נתמך בהקשר הנוכחי.",
-	"wikibase-api-no-such-sitelink": "לא נמצא קישור אתר כזה",
+	"wikibase-api-no-such-sitelink": "לא נמצא קישור אתר ל־\"$1\" בעת ניסיון לערוך סמלים.",
 	"wikibase-api-target-not-empty": "אפשר ליצור הפניה רק על גבי ישות ריקה.",
 	"wikibase-api-target-is-redirect": "אסור שיעד ההפניה יהיה בעצמו הפניה.",
 	"wikibase-api-target-is-incompatible": "ניסיון להפנות לישות מסוג אחר.",
