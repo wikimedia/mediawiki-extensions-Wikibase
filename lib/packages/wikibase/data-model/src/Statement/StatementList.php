@@ -51,12 +51,12 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 
 	private function assertAreStatements( $statements ) {
 		if ( !is_array( $statements ) && !( $statements instanceof Traversable ) ) {
-			throw new InvalidArgumentException( '$statements should be an array or a Traversable' );
+			throw new InvalidArgumentException( '$statements must be an array or an instance of Traversable' );
 		}
 
 		foreach ( $statements as $statement ) {
 			if ( !( $statement instanceof Statement ) ) {
-				throw new InvalidArgumentException( 'All elements need to be of type Statement' );
+				throw new InvalidArgumentException( 'Every element in $statements must be an instance of Statement' );
 			}
 		}
 	}

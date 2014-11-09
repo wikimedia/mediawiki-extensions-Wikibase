@@ -69,7 +69,7 @@ class Item extends Entity implements StatementListProvider {
 			$this->id = ItemId::newFromNumber( $id );
 		}
 		else {
-			throw new InvalidArgumentException( __METHOD__ . ' only accepts ItemId, integer and null' );
+			throw new InvalidArgumentException( '$id must be an instance of ItemId, an integer, or null' );
 		}
 	}
 
@@ -246,7 +246,7 @@ class Item extends Entity implements StatementListProvider {
 	 */
 	public function addClaim( Claim $statement ) {
 		if ( !( $statement instanceof Statement ) ) {
-			throw new InvalidArgumentException( 'Claims are not supported any more, use Statements.' );
+			throw new InvalidArgumentException( '$statement must be an instance of Statement' );
 		} elseif ( $statement->getGuid() === null ) {
 			throw new InvalidArgumentException( 'Can\'t add a Claim without a GUID.' );
 		}

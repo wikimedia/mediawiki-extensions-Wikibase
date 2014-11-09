@@ -54,7 +54,7 @@ class PropertyPatcher implements EntityPatcherStrategy {
 
 	private function assertIsProperty( EntityDocument $property ) {
 		if ( !( $property instanceof Property ) ) {
-			throw new InvalidArgumentException( 'All entities need to be properties' );
+			throw new InvalidArgumentException( '$property must be an instance of Property' );
 		}
 	}
 

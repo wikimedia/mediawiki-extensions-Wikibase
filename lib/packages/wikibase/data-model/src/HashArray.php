@@ -414,10 +414,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 		if ( !$this->hasValidType( $value ) ) {
 			$type = is_object( $value ) ? get_class( $value ) : gettype( $value );
 
-			throw new InvalidArgumentException(
-				'Can only add ' . $this->getObjectType() . ' implementing objects to ' . get_called_class() . ', ' .
-				'but got a ' . $type . ' instead'
-			);
+			throw new InvalidArgumentException( '$value must be an instance of ' . $this->getObjectType() . '; got ' . $type );
 		}
 
 		if ( is_null( $index ) ) {

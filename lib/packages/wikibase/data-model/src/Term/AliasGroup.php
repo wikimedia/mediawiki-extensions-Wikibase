@@ -34,7 +34,7 @@ class AliasGroup implements Comparable, Countable {
 
 	private function setLanguageCode( $languageCode ) {
 		if ( !is_string( $languageCode ) ) {
-			throw new InvalidArgumentException( '$languageCode needs to be a string' );
+			throw new InvalidArgumentException( '$languageCode must be a string; got ' . gettype( $languageCode ) );
 		}
 
 		$this->languageCode = $languageCode;
@@ -43,7 +43,7 @@ class AliasGroup implements Comparable, Countable {
 	private function setAliases( array $aliases ) {
 		foreach ( $aliases as $alias ) {
 			if ( !is_string( $alias ) ) {
-				throw new InvalidArgumentException( 'All elements in $aliases need to be strings' );
+				throw new InvalidArgumentException( 'Every element in $aliases must be a string; found ' . gettype( $alias ) );
 			}
 		}
 

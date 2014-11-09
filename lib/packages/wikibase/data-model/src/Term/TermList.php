@@ -32,7 +32,7 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	public function __construct( array $terms = array() ) {
 		foreach ( $terms as $term ) {
 			if ( !( $term instanceof Term ) ) {
-				throw new InvalidArgumentException( 'TermList can only contain instances of Term' );
+				throw new InvalidArgumentException( 'Every element in $terms must be an instance of Term' );
 			}
 
 			$this->terms[$term->getLanguageCode()] = $term;
@@ -81,9 +81,7 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 		$this->assertIsLanguageCode( $languageCode );
 
 		if ( !array_key_exists( $languageCode, $this->terms ) ) {
-			throw new OutOfBoundsException(
-				'There is no Term with language code "' . $languageCode . '" in the list'
-			);
+			throw new OutOfBoundsException( 'Term with languageCode "' . $languageCode . '" not found' );
 		}
 
 		return $this->terms[$languageCode];
@@ -101,7 +99,7 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 
 	private function assertIsLanguageCode( $languageCode ) {
 		if ( !is_string( $languageCode ) ) {
-			throw new InvalidArgumentException( '$languageCode should be a string' );
+			throw new InvalidArgumentException( '$languageCode must be a string; got ' . gettype( $languageCode ) );
 		}
 	}
 

@@ -34,7 +34,7 @@ class MapValueHasher implements MapHasher {
 	 */
 	public function hash( $map ) {
 		if ( !is_array( $map ) && !( $map instanceof Traversable ) ) {
-			throw new InvalidArgumentException( 'MapHasher::hash only accepts Traversable objects (including arrays)' );
+			throw new InvalidArgumentException( '$map must be an array or an instance of Traversable' );
 		}
 
 		$hashes = array();

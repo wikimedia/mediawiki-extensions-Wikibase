@@ -26,11 +26,11 @@ class PropertyId extends EntityId {
 
 	private function assertValidIdFormat( $idSerialization ) {
 		if ( !is_string( $idSerialization ) ) {
-			throw new InvalidArgumentException( 'The id serialization needs to be a string.' );
+			throw new InvalidArgumentException( '$idSerialization must be a string; got ' . gettype( $idSerialization ) );
 		}
 
 		if ( !preg_match( self::PATTERN, $idSerialization ) ) {
-			throw new InvalidArgumentException( 'Invalid PropertyId serialization provided.' );
+			throw new InvalidArgumentException( '$idSerialization must match ' . self::PATTERN );
 		}
 	}
 
@@ -80,7 +80,7 @@ class PropertyId extends EntityId {
 	 */
 	public static function newFromNumber( $numericId ) {
 		if ( !is_numeric( $numericId ) ) {
-			throw new InvalidArgumentException( '$number needs to be numeric.' );
+			throw new InvalidArgumentException( '$numericId must be numeric' );
 		}
 
 		return new self( 'P' . $numericId );

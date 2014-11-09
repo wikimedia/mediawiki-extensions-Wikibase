@@ -35,7 +35,7 @@ class ClaimList implements \IteratorAggregate {
 		}
 
 		if ( !is_array( $claims ) ) {
-			throw new InvalidArgumentException( '$claims should be an array' );
+			throw new InvalidArgumentException( '$claims must be an array; got ' . gettype( $claims ) );
 		}
 
 		$this->claims = $claims;

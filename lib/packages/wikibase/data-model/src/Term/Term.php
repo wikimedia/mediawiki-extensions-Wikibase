@@ -26,11 +26,11 @@ class Term implements Comparable {
 	 */
 	public function __construct( $languageCode, $text ) {
 		if ( !is_string( $languageCode ) ) {
-			throw new InvalidArgumentException( '$languageCode should be a string' );
+			throw new InvalidArgumentException( '$languageCode must be a string; got ' . gettype( $languageCode ) );
 		}
 
 		if ( !is_string( $text ) ) {
-			throw new InvalidArgumentException( '$text should be a string' );
+			throw new InvalidArgumentException( '$text must be a string; got ' . gettype( $text ) );
 		}
 
 		$this->languageCode = $languageCode;

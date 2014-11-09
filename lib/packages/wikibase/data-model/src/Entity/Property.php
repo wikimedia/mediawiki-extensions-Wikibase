@@ -62,7 +62,7 @@ class Property extends Entity implements StatementListProvider {
 			$this->id = PropertyId::newFromNumber( $id );
 		}
 		else {
-			throw new InvalidArgumentException( __METHOD__ . ' only accepts PropertyId, integer and null' );
+			throw new InvalidArgumentException( '$id must be an instance of PropertyId, an integer, or null' );
 		}
 	}
 
@@ -84,7 +84,7 @@ class Property extends Entity implements StatementListProvider {
 	 */
 	public function setDataTypeId( $dataTypeId ) {
 		if ( !is_string( $dataTypeId ) ) {
-			throw new InvalidArgumentException( '$dataTypeId needs to be a string' );
+			throw new InvalidArgumentException( '$dataTypeId must be a string; got ' . gettype( $dataTypeId ) );
 		}
 
 		$this->dataTypeId = $dataTypeId;

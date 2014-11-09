@@ -57,7 +57,7 @@ class PropertyDiffer implements EntityDifferStrategy {
 
 	private function assertIsProperty( EntityDocument $item ) {
 		if ( !( $item instanceof Property ) ) {
-			throw new InvalidArgumentException( 'All entities need to be properties' );
+			throw new InvalidArgumentException( '$item must be an instance of Property' );
 		}
 	}
 

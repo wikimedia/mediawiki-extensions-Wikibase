@@ -38,11 +38,11 @@ class SiteLink implements Comparable {
 	 */
 	public function __construct( $siteId, $pageName, $badges = null ) {
 		if ( !is_string( $siteId ) ) {
-			throw new InvalidArgumentException( '$siteId needs to be a string' );
+			throw new InvalidArgumentException( '$siteId must be a string; got ' . gettype( $siteId ) );
 		}
 
 		if ( !is_string( $pageName ) ) {
-			throw new InvalidArgumentException( '$pageName needs to be a string' );
+			throw new InvalidArgumentException( '$pageName must be a string; got ' . gettype( $pageName ) );
 		}
 
 		$this->siteId = $siteId;
@@ -56,7 +56,7 @@ class SiteLink implements Comparable {
 		} elseif ( is_array( $badges ) ) {
 			$badges = new ItemIdSet( $badges );
 		} elseif ( !( $badges instanceof ItemIdSet ) ) {
-			throw new InvalidArgumentException( '$badges needs to be ItemIdSet, ItemId[] or null' );
+			throw new InvalidArgumentException( '$badges must be an instance of ItemIdSet, an array of instances of ItemId, or null' );
 		}
 
 		$this->badges = $badges;

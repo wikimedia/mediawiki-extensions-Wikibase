@@ -40,7 +40,7 @@ class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 			$this->snaks = new SnakList( $snaks );
 		}
 		else {
-			throw new InvalidArgumentException();
+			throw new InvalidArgumentException( '$snaks must be an instance of Snaks, an array of instances of Snak, or null' );
 		}
 	}
 

@@ -122,7 +122,7 @@ class ByPropertyIdArray extends \ArrayObject {
 		$this->assertIndexIsBuild();
 
 		if ( !( array_key_exists( $propertyId->getSerialization(), $this->byId ) ) ) {
-			throw new OutOfBoundsException( 'Property id array key does not exist.' );
+			throw new OutOfBoundsException( 'Object with propertyId "' . $propertyId->getSerialization() . '" not found' );
 		}
 
 		return $this->byId[$propertyId->getSerialization()];
