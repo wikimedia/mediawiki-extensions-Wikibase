@@ -2,18 +2,13 @@
 
 namespace Wikibase;
 
-use Language;
 use ParserOutput;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\StatementListProvider;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\EntityViewFactory;
@@ -214,7 +209,7 @@ class EntityParserOutputGenerator {
 	 * set of entity IDs.
 	 *
 	 * @param EntityId[] $entityIds
-	 * @return array obtained from EntityInfoBuilder::getEntityInfo
+	 * @return array[] obtained from EntityInfoBuilder::getEntityInfo
 	 */
 	private function getEntityInfoForJsConfig( array $entityIds ) {
 		wfProfileIn( __METHOD__ );
@@ -244,11 +239,11 @@ class EntityParserOutputGenerator {
 
 	/**
 	 * @param EntityId[] $entityIds
-	 * @return array obtained from EntityInfoBuilder::getEntityInfo
+	 * @return array[] obtained from EntityInfoBuilder::getEntityInfo
 	 */
 	private function getEntityInfoForView( array $entityIds ) {
-		$propertyIds = array_filter( $entityIds, function ( EntityId $id ) {
-			return $id->getEntityType() === Property::ENTITY_TYPE;
+		$propertyIds = array_filter( $entityIds, function ( EntityId $entityId ) {
+			return $entityId->getEntityType() === 'property';
 		} );
 
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $propertyIds );
@@ -268,6 +263,7 @@ class EntityParserOutputGenerator {
 	 * @param SiteLinkList $siteLinkList
 	 */
 	private function addBadgesToParserOutput( ParserOutput $parserOutput, SiteLinkList $siteLinkList ) {
+		/** @var SiteLink $siteLink */
 		foreach ( $siteLinkList as $siteLink ) {
 			foreach ( $siteLink->getBadges() as $badge ) {
 				$parserOutput->addLink( $this->entityTitleLookup->getTitleForId( $badge ) );
@@ -278,14 +274,14 @@ class EntityParserOutputGenerator {
 	/**
 	 * @param ParserOutput $parserOutput
 	 * @param EntityRevision $entityRevision
-	 * @param array $entityIds obtained from EntityInfoBuilder::getEntityInfo
-	 * $param boolean $editable
+	 * @param EntityId[] $entityIds obtained from EntityInfoBuilder::getEntityInfo
+	 * @param bool $editable
 	 */
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
 		EntityRevision $entityRevision,
 		array $entityIds,
-		$editable
+		$editable = true
 	) {
 		$entityView = $this->entityViewFactory->newEntityView(
 			$this->languageFallbackChain,
@@ -300,7 +296,11 @@ class EntityParserOutputGenerator {
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
 	}
 
-	private function addModules( ParserOutput $parserOutput, $editable ) {
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param bool $editable
+	 */
+	private function addModules( ParserOutput $parserOutput, $editable = true ) {
 		// make css available for JavaScript-less browsers
 		$parserOutput->addModuleStyles( array(
 			'wikibase.common',

@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use InvalidArgumentException;
 use LogicException;
 use UsageException;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -101,9 +102,9 @@ class MergeItems extends ApiBase {
 
 		try {
 			return new ItemId( $value );
-		} catch ( \InvalidArgumentException $ex ) {
+		} catch ( InvalidArgumentException $ex ) {
 			$this->errorReporter->dieError( $ex->getMessage(), 'invalid-entity-id' );
-			throw new \LogicException( 'ErrorReporter::dieError did not throw an exception' );
+			throw new LogicException( 'ErrorReporter::dieError did not throw an exception' );
 		}
 	}
 
