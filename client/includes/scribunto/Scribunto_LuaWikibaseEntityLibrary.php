@@ -2,6 +2,7 @@
 
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\SnakFormatter;
 
@@ -27,7 +28,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @param Scribunto_LuaEngine $engine
 	 * @since 0.5
 	 */
-	public function __construct( $engine ) {
+	public function __construct( Scribunto_LuaEngine $engine ) {
 		// For the language we need $wgContLang, not parser target language or anything else.
 		// See Scribunto_LuaLanguageLibrary::getContLangCode().
 		global $wgContLang;
@@ -43,6 +44,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		$this->wbLibrary = new WikibaseLuaEntityBindings(
 			$snakFormatter,
 			$wikibaseClient->getStore()->getEntityLookup(),
+			new ParserOutputUsageAccumulator( $engine->getParser()->getOutput() ),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' ),
 			$wgContLang
 		);

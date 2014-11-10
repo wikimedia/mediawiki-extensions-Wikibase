@@ -135,6 +135,7 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 	}
 
 	/**
+	 * @todo Share code with WikibaseLuaEntityBindings::trackUsage
 	 * @param Snak[] $snaks
 	 */
 	private function trackUsage( array $snaks ) {
@@ -156,12 +157,14 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 	}
 
 	/**
+	 * @todo Share code with WikibaseLuaEntityBindings.
+	 *
 	 * @param EntityId $entityId
 	 * @param PropertyId $propertyId
 	 *
 	 * @return Status a status object wrapping a wikitext string
 	 */
-	private function renderWithStatus( EntityId $entityId, PropertyId $propertyId ) {
+	public function renderWithStatus( EntityId $entityId, PropertyId $propertyId ) {
 		wfProfileIn( __METHOD__ );
 
 		$snaks = $this->snaksFinder->findSnaks(
