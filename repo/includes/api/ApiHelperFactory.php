@@ -3,9 +3,9 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;

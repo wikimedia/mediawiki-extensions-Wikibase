@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Interactors;
 
-use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRedirect;

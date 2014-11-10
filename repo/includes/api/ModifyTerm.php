@@ -44,13 +44,13 @@ abstract class ModifyTerm extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 * @see ModifyEntity::getRequiredPermissions()
 	 *
 	 * @param Entity $entity
 	 * @param array $params
 	 *
-	 * @throws \InvalidArgumentException
-	 * @return array|\Status
+	 * @throws InvalidArgumentException
+	 * @return string[]
 	 */
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
@@ -66,7 +66,7 @@ abstract class ModifyTerm extends ModifyEntity {
 	}
 
 	/**
-	 * @see \ApiBase::getAllowedParams()
+	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
 		return array_merge(
@@ -87,7 +87,7 @@ abstract class ModifyTerm extends ModifyEntity {
 	}
 
 	/**
-	 * @see \ApiBase::getParamDescription()
+	 * @see ApiBase::getParamDescription()
 	 */
 	public function getParamDescription() {
 		return array_merge(
