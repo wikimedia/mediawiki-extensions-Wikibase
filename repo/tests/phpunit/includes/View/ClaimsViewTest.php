@@ -80,7 +80,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	public function testGetHtml( array $claims ) {
 		$claimsView = $this->newClaimsView();
 
-		$html = $claimsView->getHtml( $claims );
+		$html = $claimsView->getHtml( $claims, array() );
 
 		foreach ( $claims as $claim ) {
 			$this->assertContains( $claim->getGuid(), $html );
@@ -91,13 +91,11 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	 * @return ClaimsView
 	 */
 	private function newClaimsView() {
-		$mockRepo = new MockRepository();
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
 		$sectionEditLinkGenerator = new SectionEditLinkGenerator();
 		$claimHtmlGenerator = $this->getClaimHtmlGeneratorMock();
 
 		return new ClaimsView(
-			$mockRepo,
 			$entityTitleLookup,
 			$sectionEditLinkGenerator,
 			$claimHtmlGenerator,

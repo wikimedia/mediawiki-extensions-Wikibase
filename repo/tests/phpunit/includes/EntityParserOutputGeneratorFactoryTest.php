@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Test;
 
 use Language;
 use ParserOptions;
@@ -17,47 +17,32 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 
-	/**
-	 * @dataProvider getEntityParserOutputGeneratorProvider
-	 */
-	public function testGetEntityParserOutputGenerator( $entityType ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$parserOutputGeneratorFactory = $wikibaseRepo->getEntityParserOutputGeneratorFactory();
+	public function testGetEntityParserOutputGenerator() {
+		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
+
+		$testUser = new TestUser( 'Wikibase User' );
 
 		$parserOutputGenerator = $parserOutputGeneratorFactory->getEntityParserOutputGenerator(
-			$entityType,
-			$this->getParserOptions()
+			new ParserOptions( $testUser->getUser(), Language::factory( 'en' ) )
 		);
 
-		$this->assertInstanceOf(
-			'Wikibase\EntityParserOutputGenerator',
-			$parserOutputGenerator
-		);
+		$this->assertInstanceOf( 'Wikibase\EntityParserOutputGenerator', $parserOutputGenerator );
 	}
 
-	public function getEntityParserOutputGeneratorProvider() {
-		return array(
-			array( 'item' ),
-			array( 'property' )
-		);
-	}
+	public function testGetEntityParserOutputGenerator_noParserOptionLanguage() {
+		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
 
-	public function testGetEntityParserOutputGenerator_invalidType() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$parserOutputGeneratorFactory = $wikibaseRepo->getEntityParserOutputGeneratorFactory();
-
-		$this->setExpectedException( 'InvalidArgumentException' );
-
-		$parserOutputGeneratorFactory->getEntityParserOutputGenerator(
-			'kittens',
-			$this->getParserOptions()
-		);
-	}
-
-	private function getParserOptions() {
 		$testUser = new TestUser( 'Wikibase User' );
-		$language = Language::factory( 'en' );
 
-		return new ParserOptions( $testUser->getUser(), $language );
+		$parserOutputGenerator = $parserOutputGeneratorFactory->getEntityParserOutputGenerator(
+			new ParserOptions( $testUser->getUser() )
+		);
+
+		$this->assertInstanceOf( 'Wikibase\EntityParserOutputGenerator', $parserOutputGenerator );
 	}
+
+	private function getEntityParserOutputGeneratorFactory() {
+		return WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory();
+	}
+
 }

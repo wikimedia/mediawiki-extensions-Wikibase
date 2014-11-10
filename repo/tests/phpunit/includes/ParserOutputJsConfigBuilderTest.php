@@ -40,13 +40,8 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	 * @dataProvider buildProvider
 	 */
 	public function testBuild( array $usedEntities, Entity $entity, array $entityInfo ) {
-		$langCode = 'en';
-		$langCodes = array( 'de', 'en', 'es', 'fr' );
-
-		$configBuilder = $this->getConfigBuilder( $langCode );
-		$options = $this->getSerializationOptions( $langCode, $langCodes );
-
-		$configVars = $configBuilder->build( $entity, $entityInfo, $options );
+		$configBuilder = $this->getConfigBuilder( 'en', array( 'de', 'en', 'es', 'fr' ) );
+		$configVars = $configBuilder->build( $entity, $entityInfo );
 
 		$this->assertInternalType( 'array', $configVars );
 
@@ -87,11 +82,12 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 		);
 	}
 
-	private function getConfigBuilder( $langCode ) {
+	private function getConfigBuilder( $languageCode, array $languageCodes ) {
 		$configBuilder = new ParserOutputJsConfigBuilder(
 			new BasicEntityIdParser(),
 			$this->getEntityTitleLookupMock(),
-			$langCode
+			$this->getSerializationOptions( $languageCode, $languageCodes ),
+			$languageCode
 		);
 
 		return $configBuilder;
