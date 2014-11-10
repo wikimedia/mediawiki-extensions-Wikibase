@@ -132,6 +132,7 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 	}
 
 	/**
+	 * @todo Share code with WikibaseLuaEntityBindings::trackUsage
 	 * @param Snak[] $snaks
 	 */
 	private function trackUsage( array $snaks ) {
@@ -153,6 +154,8 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 	}
 
 	/**
+	 * @todo Share code with WikibaseLuaEntityBindings.
+	 *
 	 * @param EntityId $entityId
 	 * @param PropertyId $propertyId
 	 *

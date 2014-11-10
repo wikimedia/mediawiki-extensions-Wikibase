@@ -2,6 +2,7 @@
 
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\SnakFormatter;
 
@@ -21,13 +22,15 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	private $wbLibrary;
 
-	/**
-	 * Constructor for wrapper class, initialize member object holding implementation
-	 *
-	 * @param Scribunto_LuaEngine $engine
-	 * @since 0.5
-	 */
-	public function __construct( $engine ) {
+	private function getImplementation() {
+		if ( !$this->wbLibrary ) {
+			$this->wbLibrary = $this->newImplementation();
+		}
+
+		return $this->wbLibrary;
+	}
+
+	private function newImplementation() {
 		// For the language we need $wgContLang, not parser target language or anything else.
 		// See Scribunto_LuaLanguageLibrary::getContLangCode().
 		global $wgContLang;
@@ -40,14 +43,13 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			SnakFormatter::FORMAT_WIKI, $formatterOptions
 		);
 
-		$this->wbLibrary = new WikibaseLuaEntityBindings(
+		return new WikibaseLuaEntityBindings(
 			$snakFormatter,
 			$wikibaseClient->getStore()->getEntityLookup(),
+			new ParserOutputUsageAccumulator( $this->getParser()->getOutput() ),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' ),
 			$wgContLang
 		);
-
-		parent::__construct( $engine );
 	}
 
 	/**
@@ -76,7 +78,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]
 	 */
 	public function getGlobalSiteId() {
-		return array( $this->wbLibrary->getGlobalSiteId() );
+		return array( $this->getImplementation()->getGlobalSiteId() );
 	}
 
 	/**
@@ -99,7 +101,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'formatPropertyValues', 1, $propertyId, 'string' );
 		$this->checkType( 'formatPropertyValues', 2, $acceptableRanks, 'table' );
 		try {
-			return array( $this->wbLibrary->formatPropertyValues( $entityId, $propertyId, $acceptableRanks ) );
+			return array( $this->getImplementation()->formatPropertyValues( $entityId, $propertyId, $acceptableRanks ) );
 		} catch ( InvalidArgumentException $e ) {
 			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
 		}
