@@ -464,20 +464,20 @@ final class WikibaseClient {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	private function newSnakFormatterFactory() {
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
-			$this->getEntityLookup(),
-			$this->contentLanguage
-		);
-
-		$builders = new WikibaseSnakFormatterBuilders(
-			$valueFormatterBuilders,
+		return new OutputFormatSnakFormatterFactory(
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
+	}
 
-		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
-
-		return $factory;
+	/**
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	public function getValueFormatterBuilders() {
+		return new WikibaseValueFormatterBuilders(
+			$this->getEntityLookup(),
+			$this->contentLanguage
+		);
 	}
 
 	/**
