@@ -1,6 +1,7 @@
 <?php
 
 use Wikibase\Client\Scribunto\WikibaseLuaBindings;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Utils;
@@ -51,6 +52,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getSettings(),
 			$wikibaseClient->getPropertyDataTypeLookup(),
 			$labelLookup,
+			new ParserOutputUsageAccumulator( $this->getEngine()->getParser()->getOutput() ),
 			Utils::getLanguageCodes(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);

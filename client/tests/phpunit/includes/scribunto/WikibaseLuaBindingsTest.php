@@ -4,7 +4,11 @@ namespace Wikibase\Client\Scribunto\Test;
 
 use Language;
 use Wikibase\Client\Scribunto\WikibaseLuaBindings;
+use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\HashUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -35,7 +39,10 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	private function getWikibaseLibraryImplementation( EntityLookup $entityLookup = null ) {
+	private function getWikibaseLibraryImplementation(
+		EntityLookup $entityLookup = null,
+		UsageAccumulator $usageAccumulator = null
+	) {
 		$language = new Language( "en" );
 
 		$siteLinkTable = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkTable' )
@@ -68,9 +75,16 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			new SettingsArray(),
 			$propertyDataTypeLookup,
 			$labelLookup,
+			$usageAccumulator ? $usageAccumulator : new HashUsageAccumulator(),
 			array( 'de', 'en', 'es', 'ja' ),
 			"enwiki" // siteId
 		);
+	}
+
+	private function hasUsage( $actualUsages, EntityId $entityId, $aspect ) {
+		$usage = new EntityUsage( $entityId, $aspect );
+		$key = $usage->getIdentityString();
+		return isset( $actualUsages[$key] );
 	}
 
 	/**
@@ -79,9 +93,24 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	public function testGetEntity( array $expected, Item $item, EntityLookup $entityLookup ) {
 		$prefixedId = $item->getId()->getSerialization();
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
+
 		$entityArr = $wikibaseLibrary->getEntity( $prefixedId );
 		$actual = is_array( $entityArr ) ? array_keys( $entityArr ) : array();
 		$this->assertEquals( $expected, $actual );
+	}
+
+	public function testGetEntity_usage() {
+		$item = $this->getItem();
+		$itemId = $item->getId();
+
+		$entityLookup = new MockRepository();
+		$entityLookup->putEntity( $item );
+
+		$usages = new HashUsageAccumulator();
+		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup, $usages );
+
+		$wikibaseLibrary->getEntity( $itemId->getSerialization() );
+		$this->assertTrue( $this->hasUsage( $usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE ), 'all usage' );
 	}
 
 	public function getEntityProvider() {
@@ -100,9 +129,14 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetEntityId() {
-		$wikibaseLibrary = $this->getWikibaseLibraryImplementation();
+		$usages = new HashUsageAccumulator();
+		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( null, $usages );
+
 		$itemId = $wikibaseLibrary->getEntityId( 'Rome' );
 		$this->assertEquals( 'Q33' , $itemId );
+
+		$this->assertTrue( $this->hasUsage( $usages->getUsages(), new ItemId( $itemId ), EntityUsage::TITLE_USAGE ), 'title usage' );
+		$this->assertFalse( $this->hasUsage( $usages->getUsages(), new ItemId( $itemId ), EntityUsage::SITELINK_USAGE ), 'sitelink usage' );
 
 		$itemId = $wikibaseLibrary->getEntityId( 'Barcelona' );
 		$this->assertSame( null, $itemId );
@@ -131,6 +165,18 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $wikibaseLibrary->getLabel( $itemId ) );
 	}
 
+	public function testGetLabel_usage() {
+		$usages = new HashUsageAccumulator();
+		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( null, $usages );
+
+		$itemId = new ItemId( 'Q7' );
+		$wikibaseLibrary->getLabel( $itemId->getSerialization() );
+
+		$this->assertTrue( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::LABEL_USAGE ), 'label usage' );
+		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::TITLE_USAGE ), 'title usage' );
+		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::ALL_USAGE ), 'all usage' );
+	}
+
 	public function getSiteLinkProvider() {
 		return array(
 			array( 'Beer', 'Q666' ),
@@ -152,6 +198,23 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
 		$this->assertSame( $expected, $wikibaseLibrary->getSiteLink( $itemId ) );
+	}
+
+	public function testGetSiteLink_usage() {
+		$item = $this->getItem();
+
+		$entityLookup = new MockRepository();
+		$entityLookup->putEntity( $item );
+
+		$usages = new HashUsageAccumulator();
+		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup, $usages );
+
+		$itemId = $item->getId();
+		$wikibaseLibrary->getSiteLink( $itemId->getSerialization() );
+
+		$this->assertTrue( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::TITLE_USAGE ), 'title usage' );
+		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::LABEL_USAGE ), 'label usage' );
+		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::ALL_USAGE ), 'all usage' );
 	}
 
 	protected function getItem() {

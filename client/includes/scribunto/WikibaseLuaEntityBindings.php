@@ -3,11 +3,14 @@
 namespace Wikibase\Client\Scribunto;
 
 use Language;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
@@ -34,6 +37,11 @@ class WikibaseLuaEntityBindings {
 	private $entityLookup;
 
 	/**
+	 * @var UsageAccumulator
+	 */
+	private $usageAccumulator;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -50,18 +58,21 @@ class WikibaseLuaEntityBindings {
 
 	/**
 	 * @param SnakFormatter $snakFormatter
-	 * @param EntityLookup $entityLookup,
-	 * @param string $siteId,
+	 * @param EntityLookup $entityLookup ,
+	 * @param UsageAccumulator $usageAccumulator
+	 * @param string $siteId ,
 	 * @param Language $language
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
 		EntityLookup $entityLookup,
+		UsageAccumulator $usageAccumulator,
 		$siteId,
 		Language $language
 	) {
 		$this->snakFormatter = $snakFormatter;
 		$this->entityLookup = $entityLookup;
+		$this->usageAccumulator = $usageAccumulator;
 		$this->siteId = $siteId;
 		$this->language = $language;
 	}
@@ -125,9 +136,32 @@ class WikibaseLuaEntityBindings {
 	}
 
 	/**
+	 * @todo Share code with LanguageAwareRenderner::trackUsage
+	 * @param Snak[] $snaks
+	 */
+	private function trackUsage( array $snaks ) {
+		// Note: we track any EntityIdValue as a label usage.
+		// This is making assumptions about what the respective formatter actually does.
+		// Ideally, the formatter itself would perform the tracking, but that seems nasty to model.
+
+		foreach ( $snaks as $snak ) {
+			if ( !( $snak instanceof PropertyValueSnak ) ) {
+				continue;
+			}
+
+			$value = $snak->getDataValue();
+
+			if ( $value instanceof EntityIdValue ) {
+				$this->usageAccumulator->addLabelUsage( $value->getEntityId() );
+			}
+		}
+	}
+
+	/**
 	 * Render the main Snaks belonging to a Claim (which is identified by a PropertyId).
 	 *
 	 * @since 0.5
+	 * @todo Share code with LanguageAwareRenderer.
 	 *
 	 * @param string $entityId
 	 * @param string $propertyId
@@ -161,6 +195,8 @@ class WikibaseLuaEntityBindings {
 		}
 
 		$snakList = $claims->getMainSnaks();
+
+		$this->trackUsage( $snakList );
 		return $this->formatSnakList( $snakList );
 	}
 
