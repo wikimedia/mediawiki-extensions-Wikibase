@@ -11,6 +11,7 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\Lib\WikibaseValueFormatterBuilders;
 
 /**
  * @since 0.5
@@ -46,21 +47,29 @@ class PropertyClaimsRendererFactory {
 	private $languageAwareRenderers = array();
 
 	/**
+	 * @var WikibaseValueFormatterBuilders
+	 */
+	private $valueFormatterBuilders;
+
+	/**
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
+	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders
 	 */
 	public function __construct(
 		PropertyIdResolver $propertyIdResolver,
 		SnaksFinder $snaksFinder,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		OutputFormatSnakFormatterFactory $snakFormatterFactory
+		OutputFormatSnakFormatterFactory $snakFormatterFactory,
+		WikibaseValueFormatterBuilders $valueFormatterBuilders
 	) {
 		$this->propertyIdResolver = $propertyIdResolver;
 		$this->snaksFinder = $snaksFinder;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
+		$this->valueFormatterBuilders = $valueFormatterBuilders;
 	}
 
 	/**
@@ -186,6 +195,7 @@ class PropertyClaimsRendererFactory {
 
 		$snakFormatter = $this->snakFormatterFactory->getSnakFormatter(
 			SnakFormatter::FORMAT_WIKI,
+			$this->valueFormatterBuilders,
 			$options
 		);
 
