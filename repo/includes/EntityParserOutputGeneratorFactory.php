@@ -107,15 +107,13 @@ class EntityParserOutputGeneratorFactory {
 	private function getLanguageCode( ParserOptions $options = null ) {
 		// NOTE: Parser Options language overrides context language!
 		if ( $options !== null ) {
-			$languageCode = $options->getUserLang();
-		} else {
-			// @todo do we still need to fallback to context here?
-			// if needed, then maybe inject some 'default' in the constructor.
-			$context = RequestContext::getMain();
-			$languageCode = $context->getLanguage()->getCode();
+			return $options->getUserLang();
 		}
 
-		return $languageCode;
+		// @todo do we still need to fallback to context here?
+		// if needed, then maybe inject some 'default' in the constructor.
+		$context = RequestContext::getMain();
+		return $context->getLanguage()->getCode();
 	}
 
 	/**
