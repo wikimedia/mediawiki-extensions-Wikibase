@@ -33,12 +33,12 @@ class ByPropertyIdGrouper {
 
 	private function assertArePropertyIdProviders( $propertyIdProviders ) {
 		if ( !is_array( $propertyIdProviders ) && !( $propertyIdProviders instanceof Traversable ) ) {
-			throw new InvalidArgumentException( '$propertyIdProviders should be an array or a Traversable' );
+			throw new InvalidArgumentException( '$propertyIdProviders must be an array or an instance of Traversable' );
 		}
 
 		foreach ( $propertyIdProviders as $propertyIdProvider ) {
 			if ( !( $propertyIdProvider instanceof PropertyIdProvider ) ) {
-				throw new InvalidArgumentException( 'All elements need implement PropertyIdProvider' );
+				throw new InvalidArgumentException( 'Every element in $propertyIdProviders must be an instance of PropertyIdProvider' );
 			}
 		}
 	}
@@ -89,7 +89,7 @@ class ByPropertyIdGrouper {
 		$idSerialization = $propertyId->getSerialization();
 
 		if ( !isset( $this->byPropertyId[$idSerialization] ) ) {
-			throw new OutOfBoundsException( 'Property id does not exist.' );
+			throw new OutOfBoundsException( 'PropertyIdProvider with propertyId "' . $idSerialization . '" not found' );
 		}
 
 		return $this->byPropertyId[$idSerialization];

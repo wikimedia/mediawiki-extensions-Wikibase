@@ -38,7 +38,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 
 		if ( $input !== null ) {
 			if ( !is_array( $input ) && !( $input instanceof Traversable ) ) {
-				throw new InvalidArgumentException( '$input must be traversable' );
+				throw new InvalidArgumentException( '$input must be an array or an instance of Traversable' );
 			}
 
 			foreach ( $input as $claim ) {
@@ -55,7 +55,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 */
 	private function getGuidKey( $guid ) {
 		if ( !is_string( $guid ) ) {
-			throw new InvalidArgumentException( 'Expected a GUID string' );
+			throw new InvalidArgumentException( '$guid must be a string; got ' . gettype( $guid ) );
 		}
 
 		$key = strtoupper( $guid );
@@ -93,7 +93,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 */
 	public function addClaim( Claim $claim, $index = null ) {
 		if ( !is_null( $index ) && !is_integer( $index ) ) {
-			throw new InvalidArgumentException( 'Index needs to be null or an integer value' );
+			throw new InvalidArgumentException( '$index must be an integer or null; got ' . gettype( $index ) );
 		} else if ( is_null( $index ) || $index >= count( $this ) ) {
 			$this[] = $claim;
 		} else {
@@ -269,7 +269,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 */
 	public function offsetSet( $guid, $claim ) {
 		if ( !( $claim instanceof Claim ) ) {
-			throw new InvalidArgumentException( 'Expected a Claim instance' );
+			throw new InvalidArgumentException( '$claim must be an instance of Claim' );
 		}
 
 		$claimKey = $this->getClaimKey( $claim );

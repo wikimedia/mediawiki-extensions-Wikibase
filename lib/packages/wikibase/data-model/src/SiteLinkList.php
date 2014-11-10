@@ -33,7 +33,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	public function __construct( array $siteLinks = array() ) {
 		foreach ( $siteLinks as $siteLink ) {
 			if ( !( $siteLink instanceof SiteLink ) ) {
-				throw new InvalidArgumentException( 'SiteLinkList only accepts SiteLink objects' );
+				throw new InvalidArgumentException( 'Every element of $siteLinks must be an instance of SiteLink' );
 			}
 
 			$this->addSiteLink( $siteLink );
@@ -98,7 +98,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	 */
 	public function getBySiteId( $siteId ) {
 		if ( !$this->hasLinkWithSiteId( $siteId ) ) {
-			throw new OutOfBoundsException( 'No SiteLink with site id: ' . $siteId  );
+			throw new OutOfBoundsException( 'SiteLink with siteId "' . $siteId . '" not found'  );
 		}
 
 		return $this->siteLinks[$siteId];
@@ -114,7 +114,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	 */
 	public function hasLinkWithSiteId( $siteId ) {
 		if ( !is_string( $siteId ) ) {
-			throw new InvalidArgumentException( '$siteId should be a string' );
+			throw new InvalidArgumentException( '$siteId must be a string; got ' . gettype( $siteId ) );
 		}
 
 		return array_key_exists( $siteId, $this->siteLinks );
@@ -154,7 +154,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	 */
 	public function removeLinkWithSiteId( $siteId ) {
 		if ( !is_string( $siteId ) ) {
-			throw new InvalidArgumentException( '$siteId should be a string' );
+			throw new InvalidArgumentException( '$siteId must be a string; got ' . gettype( $siteId ) );
 		}
 
 		unset( $this->siteLinks[$siteId] );

@@ -34,7 +34,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	public function __construct( array $aliasGroups = array() ) {
 		foreach ( $aliasGroups as $aliasGroup ) {
 			if ( !( $aliasGroup instanceof AliasGroup ) ) {
-				throw new InvalidArgumentException( 'AliasGroupList can only contain AliasGroup instances' );
+				throw new InvalidArgumentException( 'Every element in $aliasGroups must be an instance of AliasGroup' );
 			}
 
 			$this->setGroup( $aliasGroup );
@@ -68,9 +68,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 		$this->assertIsLanguageCode( $languageCode );
 
 		if ( !array_key_exists( $languageCode, $this->groups ) ) {
-			throw new OutOfBoundsException(
-				'There is no AliasGroup with language code "' . $languageCode . '" in the list'
-			);
+			throw new OutOfBoundsException( 'AliasGroup with languageCode "' . $languageCode . '" not found' );
 		}
 
 		return $this->groups[$languageCode];
@@ -87,7 +85,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 
 	private function assertIsLanguageCode( $languageCode ) {
 		if ( !is_string( $languageCode ) ) {
-			throw new InvalidArgumentException( '$languageCode should be a string' );
+			throw new InvalidArgumentException( '$languageCode must be a string; got ' . gettype( $languageCode ) );
 		}
 	}
 

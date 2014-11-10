@@ -60,7 +60,7 @@ class ItemPatcher implements EntityPatcherStrategy {
 
 	private function assertIsItem( EntityDocument $item ) {
 		if ( !( $item instanceof Item ) ) {
-			throw new InvalidArgumentException( 'All entities need to be items' );
+			throw new InvalidArgumentException( '$item must be an instance of Item' );
 		}
 	}
 

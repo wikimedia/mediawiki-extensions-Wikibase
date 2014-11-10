@@ -31,7 +31,7 @@ class ItemIdSet implements IteratorAggregate, Countable, Comparable {
 	public function __construct( array $ids = array() ) {
 		foreach ( $ids as $id ) {
 			if ( !( $id instanceof ItemId ) ) {
-				throw new InvalidArgumentException( 'ItemIdSet can only contain instances of ItemId' );
+				throw new InvalidArgumentException( 'Every element in $ids must be an instance of ItemId' );
 			}
 
 			$this->ids[$id->getNumericId()] = $id;

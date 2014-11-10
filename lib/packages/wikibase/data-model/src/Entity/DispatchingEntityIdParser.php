@@ -55,7 +55,7 @@ class DispatchingEntityIdParser implements EntityIdParser {
 	 */
 	private function assertIdIsString( $idSerialization ) {
 		if ( !is_string( $idSerialization ) ) {
-			throw new EntityIdParsingException( 'Entity id serializations need to be strings' );
+			throw new EntityIdParsingException( '$idSerialization must be a string; got ' . gettype( $idSerialization ) );
 		}
 	}
 

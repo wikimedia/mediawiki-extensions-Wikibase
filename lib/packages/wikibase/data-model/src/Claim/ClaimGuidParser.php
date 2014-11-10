@@ -32,7 +32,7 @@ class ClaimGuidParser {
 	 */
 	public function parse( $serialization ) {
 		if ( !is_string( $serialization ) ) {
-			throw new ClaimGuidParsingException( '$serialization needs to be a string' );
+			throw new ClaimGuidParsingException( '$serialization must be a string; got ' . gettype( $serialization ) );
 		}
 
 		$keyParts = explode( ClaimGuid::SEPARATOR, $serialization );

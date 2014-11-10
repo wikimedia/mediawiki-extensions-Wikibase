@@ -53,7 +53,7 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 
 	private function verifyDataTypeIdType( $dataTypeId ) {
 		if ( !is_string( $dataTypeId ) ) {
-			throw new InvalidArgumentException( '$dataTypeId needs to be a string' );
+			throw new InvalidArgumentException( '$dataTypeId must be a string; got ' . gettype( $dataTypeId ) );
 		}
 	}
 

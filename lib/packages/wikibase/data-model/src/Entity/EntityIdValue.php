@@ -140,7 +140,7 @@ class EntityIdValue extends DataValueObject {
 	 */
 	public static function newFromArray( $data ) {
 		if ( !is_array( $data ) ) {
-			throw new IllegalValueException( "array expected" );
+			throw new IllegalValueException( '$data must be an array; got ' . gettype( $data ) );
 		}
 
 		if ( !array_key_exists( 'entity-type', $data ) ) {
