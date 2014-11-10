@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_6a761503",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-10T20:52:53Z",
+      "side": 1,
+      "message": "Do we still need this method? Would be nice to get rid of the dependency on IContextSource",
+      "revId": "cb797ac10e7859d87fa147bbc22fac2166db2de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_6a4db5c6",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-10T20:52:53Z",
+      "side": 1,
+      "message": "Should come from the ContentHandler, which should get it injected via the constructor. On the other hand, that would require all the services needed by the factory to be initialized very early, any time the ContentHandler is needed. \n\nDependency injection doesn\u0027t play nice with lazy initialization...",
+      "revId": "cb797ac10e7859d87fa147bbc22fac2166db2de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
