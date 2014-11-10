@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
-			"Yona b"
+			"Yona b",
+			"Guycn2"
 		]
 	},
 	"wikibase-lib-desc": "הפעולות המשותפות להרחבות Wikibase ו־Wikibase Client",
@@ -31,12 +32,7 @@
 	"wikibase-error-remove-timeout": "יש לנו קשיים טכניים. לא ניתן להשלים את ההסרה שלך.",
 	"wikibase-error-autocomplete-connection": "לא ניתן לבצע שאילתה מתוך ה־API של האתר. נא לנסות שוב מאוחר יותר.",
 	"wikibase-error-autocomplete-response": "השרת ענה: $1",
-	"wikibase-error-ui-client-error": "החיבור לדף הלקוח נכשל. נא לנסות שוב מאוחר יותר.",
 	"wikibase-error-ui-no-external-page": "הערך שהוזן לא נמצא באתר המתאים.",
-	"wikibase-error-ui-cant-edit": "אין לך הרשאה לבצע את הפעולה הזאת.",
-	"wikibase-error-ui-no-permissions": "אין לך מספיק הרשאות לבצע את הפעולה הזאת.",
-	"wikibase-error-ui-link-exists": "אין לך אפשרות לקשר לדף הזה כי פריט אחר כבר מקשר אליו.",
-	"wikibase-error-ui-session-failure": "השיחה שלך פגה. נא להיכנס שוב.",
 	"wikibase-error-ui-edit-conflict": "אירעה התנגשות עריכה. נא לרענן את הדף ולשמור מחדש.",
 	"wikibase-quantitydetails-amount": "כמות",
 	"wikibase-quantitydetails-upperbound": "גבול עליון",
@@ -58,7 +54,7 @@
 	"wikibase-parse-error-entity-id": "מזהה הישות אינו תקין.",
 	"wikibase-parse-error-quantity": "ערך הכמות אינו תקין.",
 	"wikibase-parse-error-time": "ערך הזמן אינו תקין.",
-	"wikibase-replicationnote": "יש לשים לב לכך שייקח מספר דקות עד שהשינויים יוצגו בכל אתרי הוויקי",
+	"wikibase-replicationnote": "יש לשים לב שייתכן שייקח מספר דקות עד שהשינויים יוצגו בכל אתרי הוויקי.",
 	"wikibase-sitelinks-wikipedia": "דפי ויקיפדיה שמקושרים לפריט הזה",
 	"wikibase-sitelinks-sitename-columnheading": "שפה",
 	"wikibase-sitelinks-sitename-columnheading-special": "אתר",
@@ -84,8 +80,6 @@
 	"wikibase-validator-bad-value-type": "סוג הערך $1 אינו נכון, זה היה אמור להיות $2",
 	"wikibase-validator-bad-url": "כתובת URL בלתי־תקינה: $1",
 	"wikibase-validator-bad-url-scheme": "סכמת URL לא נתמכת: $1",
-	"wikibase-validator-bad-http-url": "כתובת URL של HTTP בלתי־תקינה: $1",
-	"wikibase-validator-bad-mailto-url": "כתובת URL של mailto בלתי־תקינה: $1",
 	"wikibase-validator-unknown-unit": "יחידה בלתי־ידועה: $1",
 	"wikibase-validator-not-allowed": "ערך בלתי־תקין: $1",
 	"datatypes-type-wikibase-item": "פריט",
