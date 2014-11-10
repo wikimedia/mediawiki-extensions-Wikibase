@@ -2,9 +2,13 @@
 
 namespace Wikibase\Lib\Test;
 
+use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\WikibaseValueFormatterBuilders;
 
 /**
  * @covers Wikibase\Lib\OutputFormatSnakFormatterFactory
@@ -20,30 +24,54 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider constructorErrorsProvider
+	 * @dataProvider getSnakFormatterProvider
 	 */
-	public function testConstructorErrors( $builder, $error ) {
-		$this->setExpectedException( $error );
+	public function testGetSnakFormatter( $builders, $format ) {
+		$factory = new OutputFormatSnakFormatterFactory(
+			$this->getWikibaseSnakFormatterBuilders( $builders )
+		);
 
-		$typeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
-		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
+		$valueFormatterBuilders = $this->getValueFormatterBuilders();
+		$formatter = $factory->getSnakFormatter(
+			$format,
+			$valueFormatterBuilders,
+			new FormatterOptions()
+		);
 
-		new OutputFormatSnakFormatterFactory( $builder );
+		$this->assertInstanceOf( 'Wikibase\Lib\SnakFormatter', $formatter );
+		$this->assertEquals( $format, $formatter->getFormat() );
 	}
 
-	public function constructorErrorsProvider() {
-		$stringFormatter = new StringFormatter( new FormatterOptions() );
+	public function getSnakFormatterProvider() {
+		$this_ = $this;
+
+		$builders = array(
+			'foo' => function () use ( $this_ ) { return $this_->makeMockSnakFormatter( 'foo', 'FOO' ); },
+			'bar' => function () use ( $this_ ) { return $this_->makeMockSnakFormatter( 'bar', 'BAR' ); },
+		);
 
 		return array(
-			'keys must be strings' => array(
-				array( 17 => $stringFormatter ),
-				'InvalidArgumentException'
+			'foo' => array(
+				$builders,
+				'foo'
 			),
-			'builder must be callable' => array(
-				array( 'foo' => 17 ),
-				'InvalidArgumentException'
+			'bar' => array(
+				$builders,
+				'bar'
 			),
 		);
+	}
+
+	private function getWikibaseSnakFormatterBuilders( array $builders ) {
+		$snakFormatterBuilders = $this->getMockBuilder( 'Wikibase\Lib\WikibaseSnakFormatterBuilders' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$snakFormatterBuilders->expects( $this->any() )
+			->method( 'getSnakFormatterBuildersForFormats' )
+			->will( $this->returnValue( $builders ) );
+
+		return $snakFormatterBuilders;
 	}
 
 	public function makeMockSnakFormatter( $format, $value ) {
@@ -60,34 +88,39 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
-	/**
-	 * @dataProvider getSnakFormatterProvider
-	 */
-	public function testGetSnakFormatter( $builders, $format ) {
-		$factory = new OutputFormatSnakFormatterFactory( $builders );
-		$formatter = $factory->getSnakFormatter( $format, new FormatterOptions() );
-
-		$this->assertInstanceOf( 'Wikibase\Lib\SnakFormatter', $formatter );
-		$this->assertEquals( $format, $formatter->getFormat() );
+	private function getValueFormatterBuilders() {
+		return new WikibaseValueFormatterBuilders(
+			$this->getEntityLookup(),
+			Language::factory( 'en' ),
+			$this->getLabelLookup()
+		);
 	}
 
-	public function getSnakFormatterProvider() {
-		$this_ = $this;
-		$builders = array(
-			'foo' => function () use ( $this_ ) { return $this_->makeMockSnakFormatter( 'foo', 'FOO' ); },
-			'bar' => function () use ( $this_ ) { return $this_->makeMockSnakFormatter( 'bar', 'BAR' ); },
-		);
+	private function getEntityLookup() {
+		$itemId = new ItemId( 'Q5' );
 
-		return array(
-			'foo' => array(
-				$builders,
-				'foo'
-			),
-			'bar' => array(
-				$builders,
-				'bar'
-			),
-		);
+		$item = Item::newEmpty();
+		$item->setId( $itemId );
+		$item->setLabel( 'en', 'Label for ' . $itemId->getSerialization() );
+
+		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
+		$entityLookup->expects( $this->any() )
+			->method( 'getEntity' )
+			->will( $this->returnValue( $item ) );
+
+		return $entityLookup;
+	}
+
+	private function getLabelLookup() {
+		$labelLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\LabelLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( 'Label for Q5' ) );
+
+		return $labelLookup;
 	}
 
 }

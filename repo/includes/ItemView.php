@@ -23,21 +23,15 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getMainHtml
 	 */
-	protected function getMainHtml( EntityRevision $entityRevision, array $entityInfo,
-		$editable = true
-	) {
+	protected function getMainHtml( EntityRevision $entityRevision, $editable = true ) {
 		$item = $entityRevision->getEntity();
 
 		if ( !( $item instanceof Item ) ) {
 			throw new InvalidArgumentException( '$entityRevision must contain an Item.' );
 		}
 
-		$html = parent::getMainHtml( $entityRevision, $entityInfo, $editable );
-		$html .= $this->claimsView->getHtml(
-			$item->getClaims(),
-			$entityInfo,
-			'wikibase-statements'
-		);
+		$html = parent::getMainHtml( $entityRevision, $editable );
+		$html .= $this->claimsView->getHtml( $item->getClaims(), 'wikibase-statements' );
 
 		return $html;
 	}

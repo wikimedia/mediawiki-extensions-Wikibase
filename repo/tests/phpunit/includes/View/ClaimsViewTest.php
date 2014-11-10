@@ -37,7 +37,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		return Title::makeTitle( NS_MAIN, $name );
 	}
 
-	public function getHtmlForClaim( Claim $claim, array $entityInfo, $htmlForEditSection ) {
+	public function getHtmlForClaim( Claim $claim, $htmlForEditSection ) {
 		return $claim->getGuid();
 	}
 
@@ -96,11 +96,24 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		$claimHtmlGenerator = $this->getClaimHtmlGeneratorMock();
 
 		return new ClaimsView(
+			$this->getEntityIdFormatter(),
 			$entityTitleLookup,
 			$sectionEditLinkGenerator,
 			$claimHtmlGenerator,
 			'en'
 		);
+	}
+
+	private function getEntityIdFormatter() {
+		$entityIdFormatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$entityIdFormatter->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnValue( 'formatted entity id' ) );
+
+		return $entityIdFormatter;
 	}
 
 	/**

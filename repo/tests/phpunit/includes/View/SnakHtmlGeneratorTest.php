@@ -34,6 +34,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$patterns
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
+			$this->getEntityIdFormatter(),
 			$snakFormatter,
 			$entityTitleLookup
 		);
@@ -47,7 +48,6 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	public function getSnakHtmlProvider() {
 		$snakFormatter = $this->getSnakFormatterMock();
-
 		$entityTitleLookupMock = $this->getEntityTitleLookupMock();
 
 		$testCases = array();
@@ -86,6 +86,18 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return $testCases;
+	}
+
+	private function getEntityIdFormatter() {
+		$entityIdFormatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$entityIdFormatter->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnValue( 'formatted entity id' ) );
+
+		return $entityIdFormatter;
 	}
 
 	/**

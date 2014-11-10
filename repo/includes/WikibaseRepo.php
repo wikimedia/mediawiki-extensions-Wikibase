@@ -493,6 +493,7 @@ class WikibaseRepo {
 		return new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
 			$wgContLang,
+			new LanguageLabelLookup( $termLookup, $wgContLang->getCode() ),
 			$this->getEntityTitleLookup()
 		);
 	}
@@ -501,15 +502,12 @@ class WikibaseRepo {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	protected function newSnakFormatterFactory() {
-		$builders = new WikibaseSnakFormatterBuilders(
-			$this->getValueFormatterBuilders(),
+		$snakFormatterBuilders = new WikibaseSnakFormatterBuilders(
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
 
-		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
-
-		return $factory;
+		return new OutputFormatSnakFormatterFactory( $snakFormatterBuilders );
 	}
 
 	/**
@@ -589,29 +587,25 @@ class WikibaseRepo {
 
 		$valueFormatterBuilders = $this->getValueFormatterBuilders();
 
-		$snakFormatterBuilders = new WikibaseSnakFormatterBuilders(
-			$valueFormatterBuilders,
-			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory()
-		);
-
 		$valueFormatterBuilders->setValueFormatter(
 			SnakFormatter::FORMAT_PLAIN,
 			'VT:wikibase-entityid',
 			$idFormatter
 		);
 
-		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
-			$snakFormatterBuilders->getSnakFormatterBuildersForFormats()
+		$termLookup = new EntityRetrievingTermLookup( $this->getEntityLookup() );
+
+		$snakFormatterFactory = $this->getSnakFormatterFactory();
+		$snakFormatter = $snakFormatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_PLAIN,
+			$valueFormatterBuilders,
+			$options
 		);
+
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
 			$valueFormatterBuilders->getValueFormatterBuildersForFormats()
 		);
 
-		$snakFormatter = $snakFormatterFactory->getSnakFormatter(
-			SnakFormatter::FORMAT_PLAIN,
-			$options
-		);
 		$valueFormatter = $valueFormatterFactory->getValueFormatter(
 			SnakFormatter::FORMAT_PLAIN,
 			$options

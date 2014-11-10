@@ -15,10 +15,11 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Lib\Store\TermLookup;
+use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Repo\View\EntityViewFactory;
 
 /**
@@ -115,7 +116,7 @@ class EntityParserOutputGenerator {
 		$snaks = $entity->getAllSnaks();
 
 		$usedEntityIds = $this->referencedEntitiesFinder->findSnakLinks( $snaks );
-		$entityInfo = $this->getEntityInfoForJsConfig( $usedEntityIds );
+		$entityInfo = $this->makeEntityInfo( $usedEntityIds );
 
 		$configVars = $this->configBuilder->build( $entity, $entityInfo );
 		$parserOutput->addJsConfigVars( $configVars );
@@ -127,10 +128,12 @@ class EntityParserOutputGenerator {
 		}
 
 		if ( $generateHtml ) {
+			$termLookup = new EntityInfoTermLookup( $entityInfo );
+
 			$this->addHtmlToParserOutput(
 				$parserOutput,
 				$entityRevision,
-				$usedEntityIds,
+				$termLookup,
 				$editable
 			);
 		}
@@ -212,7 +215,7 @@ class EntityParserOutputGenerator {
 	 * @param EntityId[] $entityIds
 	 * @return array obtained from EntityInfoBuilder::getEntityInfo
 	 */
-	private function getEntityInfoForJsConfig( array $entityIds ) {
+	private function makeEntityInfo( array $entityIds ) {
 		wfProfileIn( __METHOD__ );
 
 		// @todo: use same instance of entity info, as for the view (see below)
@@ -239,27 +242,6 @@ class EntityParserOutputGenerator {
 	}
 
 	/**
-	 * @param EntityId[] $entityIds
-	 * @return array obtained from EntityInfoBuilder::getEntityInfo
-	 */
-	private function getEntityInfoForView( array $entityIds ) {
-		$propertyIds = array_filter( $entityIds, function ( EntityId $id ) {
-			return $id->getEntityType() === Property::ENTITY_TYPE;
-		} );
-
-		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $propertyIds );
-
-		$entityInfoBuilder->removeMissing();
-
-		$entityInfoBuilder->collectTerms(
-			array( 'label', 'description' ),
-			array( $this->languageCode )
-		);
-
-		return $entityInfoBuilder->getEntityInfo();
-	}
-
-	/**
 	 * @param ParserOutput $parserOutput
 	 * @param SiteLinkList $siteLinkList
 	 */
@@ -274,24 +256,23 @@ class EntityParserOutputGenerator {
 	/**
 	 * @param ParserOutput $parserOutput
 	 * @param EntityRevision $entityRevision
-	 * @param array $entityIds obtained from EntityInfoBuilder::getEntityInfo
+	 * @param TermLookup $termLookup
 	 * $param boolean $editable
 	 */
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
 		EntityRevision $entityRevision,
-		array $entityIds,
+		TermLookup $termLookup,
 		$editable
 	) {
 		$entityView = $this->entityViewFactory->newEntityView(
+			$termLookup,
 			$this->languageFallbackChain,
 			$this->languageCode,
 			$entityRevision->getEntity()->getType()
 		);
 
-		$entityInfo = $this->getEntityInfoForView( $entityIds );
-
-		$html = $entityView->getHtml( $entityRevision, $entityInfo, $editable );
+		$html = $entityView->getHtml( $entityRevision, $editable );
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
 	}
