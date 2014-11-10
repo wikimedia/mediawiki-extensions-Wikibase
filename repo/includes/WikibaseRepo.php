@@ -47,6 +47,8 @@ use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -480,9 +482,12 @@ class WikibaseRepo {
 	public function getValueFormatterBuilders() {
 		global $wgContLang;
 
+		$termLookup = new EntityRetrievingTermLookup( $this->getEntityLookup() );
+
 		return new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
 			$wgContLang,
+			new LanguageLabelLookup( $termLookup, $wgContLang->getCode() ),
 			$this->getEntityTitleLookup()
 		);
 	}
@@ -491,15 +496,10 @@ class WikibaseRepo {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	protected function newSnakFormatterFactory() {
-		$builders = new WikibaseSnakFormatterBuilders(
-			$this->getValueFormatterBuilders(),
+		return new OutputFormatSnakFormatterFactory(
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
-
-		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
-
-		return $factory;
 	}
 
 	/**
@@ -579,29 +579,23 @@ class WikibaseRepo {
 
 		$valueFormatterBuilders = $this->getValueFormatterBuilders();
 
-		$snakFormatterBuilders = new WikibaseSnakFormatterBuilders(
-			$valueFormatterBuilders,
-			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory()
-		);
-
 		$valueFormatterBuilders->setValueFormatter(
 			SnakFormatter::FORMAT_PLAIN,
 			'VT:wikibase-entityid',
 			$idFormatter
 		);
 
-		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
-			$snakFormatterBuilders->getSnakFormatterBuildersForFormats()
+		$snakFormatterFactory = $this->getSnakFormatterFactory();
+		$snakFormatter = $snakFormatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_PLAIN,
+			$valueFormatterBuilders,
+			$options
 		);
+
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
 			$valueFormatterBuilders->getValueFormatterBuildersForFormats()
 		);
 
-		$snakFormatter = $snakFormatterFactory->getSnakFormatter(
-			SnakFormatter::FORMAT_PLAIN,
-			$options
-		);
 		$valueFormatter = $valueFormatterFactory->getValueFormatter(
 			SnakFormatter::FORMAT_PLAIN,
 			$options
@@ -956,7 +950,9 @@ class WikibaseRepo {
 			$this->getEntityIdParser(),
 			$this->getPropertyDataTypeLookup(),
 			$this->getLanguageFallbackChainFactory(),
-			new ReferencedEntitiesFinder()
+			new ReferencedEntitiesFinder(),
+			$this->getValueFormatterBuilders(),
+			$this->getEntityLookup()
 		);
 	}
 
