@@ -32,7 +32,7 @@ use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
- * Base handler class for Wikibase\DataModel\Entity\Entity content classes.
+ * Base handler class for Entity content classes.
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -85,7 +85,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *        the blob an the serialization format. It must return true if re-serialization is needed.
 	 *        False positives are acceptable, false negatives are not.
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		$modelId,
@@ -139,7 +139,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string
 	 */
 	protected function getDiffEngineClass() {
-		return '\Wikibase\Repo\Diff\EntityContentDiffView';
+		return 'Wikibase\Repo\Diff\EntityContentDiffView';
 	}
 
 	/**

@@ -96,10 +96,11 @@ class EntityViewFactory {
 		$language = Language::factory( $languageCode );
 
 		// @fixme support more entity types
-		if ( $entityType === 'item' ) {
-			return new ItemView( $fingerprintView, $claimsView, $language, $this->siteLinkGroups, $editable );
-		} elseif ( $entityType === 'property' ) {
-			return new PropertyView( $fingerprintView, $claimsView, $language );
+		switch ( $entityType ) {
+			case 'item':
+				return new ItemView( $fingerprintView, $claimsView, $language, $this->siteLinkGroups, $editable );
+			case 'property':
+				return new PropertyView( $fingerprintView, $claimsView, $language, $editable );
 		}
 
 		throw new InvalidArgumentException( 'No EntityView for entity type: ' . $entityType );

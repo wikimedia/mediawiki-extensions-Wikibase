@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\IO;
 
 use Disposable;
+use InvalidArgumentException;
 use Iterator;
 
 /**
@@ -50,19 +51,19 @@ class LineReader implements Iterator, Disposable {
 	 * @param bool $autoDispose Whether to automatically call dispose() when reaching EOF
 	 *             or when this reader is destructed.
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $fileHandle, $canClose = true, $autoDispose = false ) {
 		if ( !is_resource( $fileHandle ) ) {
-			throw new \InvalidArgumentException( '$fileHandle must be a file resource.' );
+			throw new InvalidArgumentException( '$fileHandle must be a file resource.' );
 		}
 
 		if ( !is_bool( $canClose ) ) {
-			throw new \InvalidArgumentException( '$canClose must be a boolean.' );
+			throw new InvalidArgumentException( '$canClose must be a boolean.' );
 		}
 
 		if ( !is_bool( $autoDispose ) ) {
-			throw new \InvalidArgumentException( '$autoDispose must be a boolean.' );
+			throw new InvalidArgumentException( '$autoDispose must be a boolean.' );
 		}
 
 		$this->fileHandle = $fileHandle;
@@ -152,4 +153,5 @@ class LineReader implements Iterator, Disposable {
 			$this->next();
 		}
 	}
+
 }
