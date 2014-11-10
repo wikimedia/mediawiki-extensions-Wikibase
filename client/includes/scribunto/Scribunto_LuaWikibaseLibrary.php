@@ -1,6 +1,7 @@
 <?php
 
 use Wikibase\Client\Scribunto\WikibaseLuaBindings;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Utils;
@@ -28,7 +29,19 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @param Scribunto_LuaEngine $engine
 	 * @since 0.5
 	 */
-	public function __construct( $engine ) {
+	public function __construct( Scribunto_LuaEngine $engine ) {
+		parent::__construct( $engine );
+	}
+
+	private function getImplementation() {
+		if ( !$this->wbLibrary ) {
+			$this->wbLibrary = $this->newImplementation();
+		}
+
+		return $this->wbLibrary;
+	}
+
+	private function newImplementation() {
 		// For the language we need $wgContLang, not parser target language or anything else.
 		// See Scribunto_LuaLanguageLibrary::getContLangCode().
 		global $wgContLang;
@@ -42,7 +55,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wgContLang->getCode()
 		);
 
-		$this->wbLibrary = new WikibaseLuaBindings(
+		return new WikibaseLuaBindings(
 			$wikibaseClient->getEntityIdParser(),
 			$entityLookup,
 			$wikibaseClient->getStore()->getSiteLinkTable(),
@@ -51,11 +64,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getSettings(),
 			$wikibaseClient->getPropertyDataTypeLookup(),
 			$labelLookup,
+			new ParserOutputUsageAccumulator( $this->getParser()->getOutput() ),
 			Utils::getLanguageCodes(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
-
-		parent::__construct( $engine );
 	}
 
 	/**
@@ -95,7 +107,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
 		$this->checkType( 'getEntity', 2, $legacyStyle, 'boolean' );
 		try {
-			$entityArr = $this->wbLibrary->getEntity( $prefixedEntityId, $legacyStyle );
+			$entityArr = $this->getImplementation()->getEntity( $prefixedEntityId, $legacyStyle );
 			return array( $entityArr );
 		}
 		catch ( EntityIdParsingException $e ) {
@@ -117,7 +129,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getEntityId( $pageTitle = null ) {
 		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
-		return array( $this->wbLibrary->getEntityId( $pageTitle ) );
+		return array( $this->getImplementation()->getEntityId( $pageTitle ) );
 	}
 
 	/**
@@ -128,7 +140,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]
 	 */
 	public function getGlobalSiteId() {
-		return array( $this->wbLibrary->getGlobalSiteId() );
+		return array( $this->getImplementation()->getGlobalSiteId() );
 	}
 
 	/**
@@ -142,7 +154,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getSetting( $setting ) {
 		$this->checkType( 'setting', 1, $setting, 'string' );
-		return array( $this->wbLibrary->getSetting( $setting ) );
+		return array( $this->getImplementation()->getSetting( $setting ) );
 	}
 
 	/**
@@ -156,7 +168,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getLabel( $prefixedEntityId ) {
 		$this->checkType( 'getLabel', 1, $prefixedEntityId, 'string' );
-		return array( $this->wbLibrary->getLabel( $prefixedEntityId ) );
+		return array( $this->getImplementation()->getLabel( $prefixedEntityId ) );
 	}
 
 	/**
@@ -170,6 +182,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getSiteLink( $prefixedEntityId ) {
 		$this->checkType( 'getSiteLink', 1, $prefixedEntityId, 'string' );
-		return array( $this->wbLibrary->getSiteLink( $prefixedEntityId ) );
+		return array( $this->getImplementation()->getSiteLink( $prefixedEntityId ) );
 	}
 }
