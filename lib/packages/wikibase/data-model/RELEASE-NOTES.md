@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 2.2.0 (dev)
+## Version 2.2.0 (2014-11-10)
 
 * `Item` and `Property` now implement `StatementListProvider`
 * Introduced the `StatementListProvider` interface for classes containing a `StatementList`
