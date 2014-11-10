@@ -42,7 +42,6 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Serializers\ForbiddenSerializer;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
@@ -216,18 +215,6 @@ final class WikibaseClient {
 		}
 
 		return $this->propertyDataTypeLookup;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param string $format The desired format, use SnakFormatter::FORMAT_XXX
-	 * @param FormatterOptions $options
-	 *
-	 * @return SnakFormatter
-	 */
-	public function newSnakFormatter( $format = SnakFormatter::FORMAT_PLAIN, FormatterOptions $options ) {
-		return $this->getSnakFormatterFactory()->getSnakFormatter( $format, $options );
 	}
 
 	/**

@@ -8,7 +8,6 @@ use SiteStore;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\SettingsArray;
 
 /**
@@ -38,14 +37,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetPropertyDataTypeLookupReturnType() {
 		$returnValue = $this->getDefaultInstance()->getPropertyDataTypeLookup();
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup', $returnValue );
-	}
-
-	public function testNewSnakFormatterReturnType() {
-		$returnValue = $this->getDefaultInstance()->newSnakFormatter(
-			SnakFormatter::FORMAT_PLAIN,
-			new FormatterOptions()
-		);
-		$this->assertInstanceOf( 'Wikibase\Lib\SnakFormatter', $returnValue );
 	}
 
 	public function testGetStringNormalizerReturnType() {
