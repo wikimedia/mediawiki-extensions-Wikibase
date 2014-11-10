@@ -8,8 +8,6 @@ use ParserOptions;
 use ParserOutput;
 use RequestContext;
 use User;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -19,7 +17,9 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
@@ -70,6 +70,16 @@ class EntityParserOutputGeneratorFactory {
 	private $referencedEntitiesFinder;
 
 	/**
+	 * @var WikibaseValueFormatterBuilders
+	 */
+	private $valueFormatterBuilders;
+
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
 	 * @var SectionEditLinkGenerator
 	 */
 	private $sectionEditLinkGenerator;
@@ -81,7 +91,9 @@ class EntityParserOutputGeneratorFactory {
 		EntityIdParser $entityIdParser,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		ReferencedEntitiesFinder $referencedEntitiesFinder
+		ReferencedEntitiesFinder $referencedEntitiesFinder,
+		WikibaseValueFormatterBuilders $valueFormatterBuilders,
+		EntityLookup $entityLookup
 	) {
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
@@ -90,6 +102,8 @@ class EntityParserOutputGeneratorFactory {
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->referencedEntitiesFinder = $referencedEntitiesFinder;
+		$this->valueFormatterBuilders = $valueFormatterBuilders;
+		$this->entityLookup = $entityLookup;
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 	}
 
@@ -111,26 +125,11 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityTitleLookup,
 			$this->propertyDataTypeLookup,
 			$this->entityInfoBuilderFactory,
+			$this->valueFormatterBuilders,
+			$this->snakFormatterFactory,
+			$this->getLanguageFallbackChain( $languageCode ),
+			$this->entityLookup,
 			$languageCode
-		);
-	}
-
-	/**
-	 * @param string $languageCode
-	 *
-	 * @return SnakFormatter
-	 */
-	private function getSnakFormatter( $languageCode ) {
-		$formatterOptions = new FormatterOptions();
-		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $languageCode );
-
-		// @fixme don't get fallback chain twice and it's also probably not needed here.
-		$languageFallbackChain = $this->getLanguageFallbackChain( $languageCode );
-		$formatterOptions->setOption( 'languages', $languageFallbackChain );
-
-		return $this->snakFormatterFactory->getSnakFormatter(
-			SnakFormatter::FORMAT_HTML_WIDGET,
-			$formatterOptions
 		);
 	}
 
@@ -170,15 +169,8 @@ class EntityParserOutputGeneratorFactory {
 	 * @return ClaimsView
 	 */
 	private function newClaimsView( $languageCode ) {
-		// @fixme SnakFormatterFactory needs to be injected into ClaimsView,
-		// and also the entity info records via a TermLookup or such.
-		$snakHtmlGenerator = new SnakHtmlGenerator(
-			$this->getSnakFormatter( $languageCode ),
-			$this->entityTitleLookup
-		);
-
 		$claimHtmlGenerator = new ClaimHtmlGenerator(
-			$snakHtmlGenerator,
+			new SnakHtmlGenerator( $this->entityTitleLookup ),
 			$this->entityTitleLookup
 		);
 

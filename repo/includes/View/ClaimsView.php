@@ -8,6 +8,7 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\ReferencedEntitiesFinder;
@@ -73,18 +74,21 @@ class ClaimsView {
 	 *
 	 * @since 0.5
 	 *
+	 * @param SnakFormatter $snakFormatter
 	 * @param Claim[] $claims the claims to render
 	 * @param string $heading the message key of the heading
 	 * @return string
 	 */
-	public function getHtml( array $claims, $heading = 'wikibase-claims' ) {
+	public function getHtml( SnakFormatter $snakFormatter,
+		array $claims, $heading = 'wikibase-claims'
+	) {
 		// aggregate claims by properties
 		$claimsByProperty = $this->groupClaimsByProperties( $claims );
 		$entityInfo = $this->getEntityInfo( $claims, $this->languageCode );
 
 		$claimsHtml = '';
 		foreach ( $claimsByProperty as $claims ) {
-			$claimsHtml .= $this->getHtmlForClaimGroup( $claims, $entityInfo );
+			$claimsHtml .= $this->getHtmlForClaimGroup( $snakFormatter, $claims, $entityInfo );
 		}
 
 		$claimgrouplistviewHtml = wfTemplate( 'wb-claimgrouplistview', $claimsHtml, '' );
@@ -176,11 +180,15 @@ class ClaimsView {
 	/**
 	 * Returns the HTML for a group of claims.
 	 *
+	 * @param SnakFormatter $snakFormatter
 	 * @param Claim[] $claims
 	 * @param array $entityInfo
+	 *
 	 * @return string
 	 */
-	private function getHtmlForClaimGroup( array $claims, array $entityInfo ) {
+	private function getHtmlForClaimGroup( SnakFormatter $snakFormatter,
+		array $claims, array $entityInfo
+	) {
 		$propertyHtml = '';
 
 		$propertyId = $claims[0]->getMainSnak()->getPropertyId();
@@ -207,6 +215,7 @@ class ClaimsView {
 		foreach ( $claims as $claim ) {
 			$propertyHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 				$claim,
+				$snakFormatter,
 				$entityInfo,
 				$htmlForEditSection
 			);

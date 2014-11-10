@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SiteLinksView;
 use Wikibase\Repo\WikibaseRepo;
@@ -23,15 +24,21 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 */
-	protected function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
+	protected function getInnerHtml( EntityRevision $entityRevision,
+		SnakFormatter $snakFormatter, $editable = true
+	) {
 		$item = $entityRevision->getEntity();
 
 		if ( !( $item instanceof Item ) ) {
 			throw new InvalidArgumentException( '$entityRevision must contain an Item.' );
 		}
 
-		$html = parent::getInnerHtml( $entityRevision, $editable );
-		$html .= $this->claimsView->getHtml( $item->getClaims(), 'wikibase-statements' );
+		$html = parent::getInnerHtml( $entityRevision, $snakFormatter, $editable );
+		$html .= $this->claimsView->getHtml(
+			$snakFormatter,
+			$item->getClaims(),
+			'wikibase-statements'
+		);
 		$html .= $this->getHtmlForSiteLinks( $item, $editable );
 
 		return $html;

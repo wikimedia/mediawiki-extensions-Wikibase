@@ -22,13 +22,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class SnakHtmlGenerator {
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var SnakFormatter
-	 */
-	protected $snakFormatter;
-
-	/**
 	 * @since 0.5
 	 *
 	 * @var EntityTitleLookup
@@ -36,22 +29,11 @@ class SnakHtmlGenerator {
 	protected $entityTitleLookup;
 
 	/**
-	 * @param SnakFormatter $snakFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct(
-		SnakFormatter $snakFormatter,
-		EntityTitleLookup $entityTitleLookup
-	) {
-		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
-				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
-			throw new InvalidArgumentException( '$snakFormatter is expected to return text/html, not '
-					. $snakFormatter->getFormat() );
-		}
-
-		$this->snakFormatter = $snakFormatter;
+	public function __construct( EntityTitleLookup $entityTitleLookup ) {
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
@@ -59,16 +41,19 @@ class SnakHtmlGenerator {
 	 * Generates the HTML for a single snak.
 	 *
 	 * @param Snak $snak
+	 * @param SnakFormatter $snakFormatter
 	 * @param array[] $entityInfo
 	 * @param bool $showPropertyLink
 	 *
 	 * @return string
 	 */
-	public function getSnakHtml( Snak $snak, array $entityInfo, $showPropertyLink = false ) {
+	public function getSnakHtml( Snak $snak, SnakFormatter $snakFormatter,
+		array $entityInfo, $showPropertyLink = false
+	) {
 		$snakViewVariation = $this->getSnakViewVariation( $snak );
 		$snakViewCssClass = 'wb-snakview-variation-' . $snakViewVariation;
 
-		$formattedValue = $this->getFormattedSnakValue( $snak );
+		$formattedValue = $this->getFormattedSnakValue( $snak, $snakFormatter );
 
 		if ( $formattedValue === '' ) {
 			$formattedValue = '&nbsp;';
@@ -125,11 +110,13 @@ class SnakHtmlGenerator {
 	 * localised exception messages.
 	 *
 	 * @param Snak $snak
+	 * @param SnakFormatter $snakFormatter
+	 *
 	 * @return string
 	 */
-	protected function getFormattedSnakValue( $snak ) {
+	protected function getFormattedSnakValue( $snak, SnakFormatter $snakFormatter ) {
 		try {
-			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
+			$formattedSnak = $snakFormatter->formatSnak( $snak );
 		} catch ( FormattingException $ex ) {
 			return $this->getInvalidSnakMessage();
 		} catch ( PropertyNotFoundException $ex ) {
