@@ -2,14 +2,24 @@
 
 namespace Wikibase;
 
+use Language;
 use ParserOutput;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Lib\WikibaseValueFormatterBuilders;
 
 /**
  * Creates the parser output for an entity.
@@ -55,6 +65,21 @@ class EntityParserOutputGenerator {
 	private $entityInfoBuilderFactory;
 
 	/**
+	 * @var OutputFormatSnakFormatterFactory
+	 */
+	private $snakFormatterFactory;
+
+	/**
+	 * @var LanguageFallbackChain
+	 */
+	private $languageFallbackChain;
+
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
 	 * @var string
 	 */
 	private $languageCode;
@@ -71,6 +96,10 @@ class EntityParserOutputGenerator {
 		EntityTitleLookup $entityTitleLookup,
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
+		WikibaseValueFormatterBuilders $valueFormatterBuilders,
+		OutputFormatSnakFormatterFactory $snakFormatterFactory,
+		LanguageFallbackChain $languageFallbackChain,
+		EntityLookup $entityLookup,
 		$languageCode
 	) {
 		$this->entityView = $entityView;
@@ -79,7 +108,11 @@ class EntityParserOutputGenerator {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
+		$this->valueFormatterBuilders = $valueFormatterBuilders;
+		$this->snakFormatterFactory = $snakFormatterFactory;
+		$this->languageFallbackChain = $languageFallbackChain;
 		$this->languageCode = $languageCode;
+		$this->entityLookup = $entityLookup;
 
 		$this->referencedEntitiesFinder = new ReferencedEntitiesFinder();
 	}
@@ -204,7 +237,8 @@ class EntityParserOutputGenerator {
 	}
 
 	private function addHtmlToParserOutput( ParserOutput $pout, EntityRevision $entityRevision, $editable ) {
-		$html = $this->entityView->getHtml( $entityRevision, $editable );
+		$snakFormatter = $this->getSnakFormatter();
+		$html = $this->entityView->getHtml( $entityRevision, $snakFormatter, $editable );
 		$pout->setText( $html );
 		$pout->setExtensionData( 'wikibase-view-chunks', $this->entityView->getPlaceholders() );
 	}
@@ -223,6 +257,36 @@ class EntityParserOutputGenerator {
 			// make sure required client sided resources will be loaded:
 			$pout->addModules( 'wikibase.ui.entityViewInit' );
 		}
+	}
+
+	/**
+	 * @return SnakFormatter
+	 */
+	private function getSnakFormatter() {
+		$formatterOptions = new FormatterOptions();
+		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->languageCode );
+		$formatterOptions->setOption( 'languages', $this->languageFallbackChain );
+
+		// @fixme use language fallback here
+		return $this->snakFormatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_HTML_WIDGET,
+			$this->getValueFormatterBuilders( $this->languageCode ),
+			$formatterOptions
+		);
+	}
+
+	/**
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	private function getValueFormatterBuilders() {
+		$termLookup = new EntityRetrievingTermLookup( $this->entityLookup );
+
+		return new WikibaseValueFormatterBuilders(
+			$this->entityLookup,
+			Language::factory( $this->languageCode ),
+			new LanguageLabelLookup( $termLookup, $this->languageCode ),
+			$this->entityTitleLookup
+		);
 	}
 
 }
