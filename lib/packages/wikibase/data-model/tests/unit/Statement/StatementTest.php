@@ -395,7 +395,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 
 		$statementMainSnakNotEqual = $this->newStatement();
 		$statementMainSnakNotEqual->setClaim(
-			new Claim( new PropertyNoValueSnak( 9000 ), $qualifiers )
+			new Claim( new PropertyNoValueSnak( 9000 ) )
 		);
 
 		return array(
