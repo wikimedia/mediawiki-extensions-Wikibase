@@ -81,12 +81,11 @@ abstract class EntityView {
 	 * @since 0.1
 	 *
 	 * @param EntityRevision $entityRevision the entity to render
-	 * @param array obtained from EntityInfoBuilder::getEntityInfo
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string HTML
 	 */
-	public function getHtml( EntityRevision $entityRevision, array $entityInfo, $editable = true ) {
+	public function getHtml( EntityRevision $entityRevision, $editable = true ) {
 		$entity = $entityRevision->getEntity();
 
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
@@ -98,7 +97,7 @@ abstract class EntityView {
 			$entityId,
 			$this->language->getCode(),
 			$this->language->getDir(),
-			$this->getMainHtml( $entityRevision, $entityInfo, $editable ),
+			$this->getMainHtml( $entityRevision, $editable ),
 			$this->getSideHtml( $entityRevision, $editable )
 		);
 
@@ -133,15 +132,12 @@ if ( $ ) {
 	 * Builds and returns the HTML to be put into the main container of an entity's HTML structure.
 	 *
 	 * @param EntityRevision $entityRevision
-	 * @param array obtained from EntityInfoBuilder::getEntityInfo
 	 * @param bool $editable
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	protected function getMainHtml( EntityRevision $entityRevision, array $entityInfo,
-		$editable = true
-	) {
+	protected function getMainHtml( EntityRevision $entityRevision, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
 		$entity = $entityRevision->getEntity();
