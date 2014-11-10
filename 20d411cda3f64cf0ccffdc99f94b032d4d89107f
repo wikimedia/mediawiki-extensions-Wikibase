@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_aa709d06",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-10T15:06:13Z",
+      "side": 1,
+      "message": "wow, this is getting complex :o",
+      "revId": "20d411cda3f64cf0ccffdc99f94b032d4d89107f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
