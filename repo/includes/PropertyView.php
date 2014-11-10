@@ -22,7 +22,9 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 */
-	public function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
+	public function getInnerHtml( EntityRevision $entityRevision, SnakFormatter $snakFormatter,
+		$editable = true
+	) {
 		wfProfileIn( __METHOD__ );
 
 		$property = $entityRevision->getEntity();
@@ -31,7 +33,7 @@ class PropertyView extends EntityView {
 			throw new InvalidArgumentException( '$entityRevision must contain a Property.' );
 		}
 
-		$html = parent::getInnerHtml( $entityRevision, $editable );
+		$html = parent::getInnerHtml( $entityRevision, $snakFormatter, $editable );
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {

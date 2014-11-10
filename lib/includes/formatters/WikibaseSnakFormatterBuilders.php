@@ -20,11 +20,6 @@ use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 class WikibaseSnakFormatterBuilders {
 
 	/**
-	 * @var WikibaseValueFormatterBuilders
-	 */
-	private $valueFormatterBuilders;
-
-	/**
 	 * @var PropertyDataTypeLookup
 	 */
 	private $propertyDataTypeLookup;
@@ -35,16 +30,13 @@ class WikibaseSnakFormatterBuilders {
 	private $dataTypeFactory;
 
 	/**
-	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param DataTypeFactory $dataTypeFactory
 	 */
 	public function __construct(
-		WikibaseValueFormatterBuilders $valueFormatterBuilders,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		DataTypeFactory $dataTypeFactory
 	) {
-		$this->valueFormatterBuilders = $valueFormatterBuilders;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
 	}
@@ -70,21 +62,25 @@ class WikibaseSnakFormatterBuilders {
 	 * Returns a DispatchingSnakFormatter for the given format, that will dispatch based on
 	 * the snak type. The instance returned by this method will cover all standard snak types.
 	 *
-	 * @param OutputFormatSnakFormatterFactory $factory
-	 * @param string               $format
-	 * @param FormatterOptions     $options
+	 * @param string $format
+	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders
+	 * @param FormatterOptions $options
 	 *
 	 * @return DispatchingSnakFormatter
 	 */
-	public function buildDispatchingSnakFormatter( OutputFormatSnakFormatterFactory $factory, $format, FormatterOptions $options ) {
-		$this->valueFormatterBuilders->applyLanguageDefaults( $options );
+	public function buildDispatchingSnakFormatter(
+		$format,
+		WikibaseValueFormatterBuilders $valueFormatterBuilders,
+		FormatterOptions $options
+	) {
+		$valueFormatterBuilders->applyLanguageDefaults( $options );
 		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 
 		$noValueSnakFormatter = new MessageSnakFormatter( 'novalue', $this->getMessage( 'wikibase-snakview-snaktypeselector-novalue', $lang ), $format );
 		$someValueSnakFormatter = new MessageSnakFormatter( 'somevalue', $this->getMessage( 'wikibase-snakview-snaktypeselector-somevalue', $lang ), $format );
 
-		$factory = new OutputFormatValueFormatterFactory( $this->valueFormatterBuilders->getValueFormatterBuildersForFormats() );
-		$valueFormatter = $this->valueFormatterBuilders->buildDispatchingValueFormatter( $factory, $format, $options );
+		$factory = new OutputFormatValueFormatterFactory( $valueFormatterBuilders->getValueFormatterBuildersForFormats() );
+		$valueFormatter = $valueFormatterBuilders->buildDispatchingValueFormatter( $factory, $format, $options );
 		$valueSnakFormatter = new PropertyValueSnakFormatter(
 			$format,
 			$options,
