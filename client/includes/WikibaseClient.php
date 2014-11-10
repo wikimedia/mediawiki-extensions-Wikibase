@@ -44,6 +44,8 @@ use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Serializers\ForbiddenSerializer;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -464,20 +466,25 @@ final class WikibaseClient {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	private function newSnakFormatterFactory() {
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
-			$this->getEntityLookup(),
-			$this->contentLanguage
-		);
-
-		$builders = new WikibaseSnakFormatterBuilders(
-			$valueFormatterBuilders,
+		$snakFormatterBuilders = new WikibaseSnakFormatterBuilders(
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
 
-		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+		return new OutputFormatSnakFormatterFactory( $snakFormatterBuilders );
+	}
 
-		return $factory;
+	/**
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	public function getValueFormatterBuilders() {
+		$termLookup = new EntityRetrievingTermLookup( $this->getEntityLookup() );
+
+		return new WikibaseValueFormatterBuilders(
+			$this->getEntityLookup(),
+			$this->contentLanguage,
+			new LanguageLabelLookup( $termLookup, $this->contentLanguage->getCode() )
+		);
 	}
 
 	/**
@@ -498,14 +505,11 @@ final class WikibaseClient {
 	 * @return OutputFormatValueFormatterFactory
 	 */
 	private function newValueFormatterFactory() {
-		$builders = new WikibaseValueFormatterBuilders(
-			$this->getEntityLookup(),
-			$this->contentLanguage
+		$builders = $this->getValueFormatterBuilders();
+
+		return new OutputFormatValueFormatterFactory(
+			$builders->getValueFormatterBuildersForFormats()
 		);
-
-		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
-
-		return $factory;
 	}
 
 	/**
@@ -697,7 +701,8 @@ final class WikibaseClient {
 			$propertyIdResolver,
 			$snaksFinder,
 			$this->getLanguageFallbackChainFactory(),
-			$this->getSnakFormatterFactory()
+			$this->getSnakFormatterFactory(),
+			$this->getValueFormatterBuilders()
 		);
 	}
 

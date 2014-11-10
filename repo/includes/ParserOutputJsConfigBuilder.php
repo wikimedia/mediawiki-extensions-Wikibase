@@ -26,48 +26,46 @@ class ParserOutputJsConfigBuilder {
 	/**
 	 * @var EntityIdParser
 	 */
-	protected $entityIdParser;
+	private $entityIdParser;
 
 	/**
 	 * @var EntityTitleLookup
 	 */
-	protected $entityTitleLookup;
+	private $entityTitleLookup;
 
 	/**
-	 * @var string
+	 * @var SerializationOptions
 	 */
-	protected $langCode;
+	private $serializationOptions;
 
 	/**
 	 * @var SerializerFactory
 	 */
-	protected $serializerFactory;
+	private $serializerFactory;
 
 	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param string $langCode
+	 * @param SerializationOptions $serializationOptions
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityTitleLookup $entityTitleLookup,
-		$langCode
+		SerializationOptions $serializationOptions
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->langCode = $langCode;
-
+		$this->serializationOptions = $serializationOptions;
 		$this->serializerFactory = new SerializerFactory();
 	}
 
 	/**
 	 * @param Entity $entity
 	 * @param array $entityInfo
-	 * @param SerializationOptions $options
 	 *
 	 * @return array
 	 */
-	public function build( Entity $entity, array $entityInfo, SerializationOptions $options ) {
+	public function build( Entity $entity, array $entityInfo ) {
 		$entityId = $entity->getId();
 
 		if ( !$entityId ) {
@@ -81,7 +79,7 @@ class ParserOutputJsConfigBuilder {
 		$configVars = array(
 			'wbEntityId' => $entityId,
 			'wbUsedEntities' => FormatJson::encode( $revisionInfo ),
-			'wbEntity' => FormatJson::encode( $this->getSerializedEntity( $entity, $options ) )
+			'wbEntity' => FormatJson::encode( $this->getSerializedEntity( $entity ) )
 		);
 
 		return $configVars;
@@ -120,12 +118,15 @@ class ParserOutputJsConfigBuilder {
 
 	/**
 	 * @param Entity $entity
-	 * @param SerializationOptions $options
 	 *
 	 * @return string
 	 */
-	protected function getSerializedEntity( Entity $entity, SerializationOptions $options ) {
-		$serializer = $this->getEntitySerializer( $entity->getType(), $options );
+	protected function getSerializedEntity( Entity $entity ) {
+		$serializer = $this->getEntitySerializer(
+			$entity->getType(),
+			$this->serializationOptions
+		);
+
 		return $serializer->getSerialized( $entity );
 	}
 
