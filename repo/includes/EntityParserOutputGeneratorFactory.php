@@ -2,18 +2,14 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
 use Language;
 use ParserOptions;
-use ParserOutput;
 use RequestContext;
-use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
@@ -23,7 +19,6 @@ use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @since 0.5
@@ -95,19 +90,16 @@ class EntityParserOutputGeneratorFactory {
 	/**
 	 * Creates an EntityParserOutputGenerator to create the ParserOutput for the entity
 	 *
-	 * @param EntityRevision $entityRevision
+	 * @param string $entityType
 	 * @param ParserOptions|null $options
 	 *
 	 * @return EntityParserOutputGenerator
 	 */
-	public function getEntityParserOutputGenerator(
-		EntityRevision $entityRevision,
-		ParserOptions $options = null
-	) {
+	public function getEntityParserOutputGenerator( $entityType, ParserOptions $options = null ) {
 		$languageCode = $this->getLanguageCode( $options );
 
 		return new EntityParserOutputGenerator(
-			$this->newEntityView( $entityRevision, $languageCode ),
+			$this->newEntityView( $entityType, $languageCode ),
 			$this->newParserOutputJsConfigBuilder( $languageCode ),
 			$this->makeSerializationOptions( $languageCode ),
 			$this->entityTitleLookup,
@@ -155,16 +147,13 @@ class EntityParserOutputGeneratorFactory {
 	 * @return string
 	 */
 	private function getLanguageCode( ParserOptions $options = null ) {
-		$context = RequestContext::getMain();
-
 		// NOTE: Parser Options language overrides context language!
 		if ( $options !== null ) {
-			$languageCode = $options->getUserLang();
-		} else {
-			$languageCode = $context->getLanguage()->getCode();
+			return $options->getUserLang();
 		}
 
-		return $languageCode;
+		$context = RequestContext::getMain();
+		return $context->getLanguage()->getCode();
 	}
 
 	/**
@@ -209,24 +198,25 @@ class EntityParserOutputGeneratorFactory {
 	/**
 	 * Creates an EntityView suitable for rendering the entity.
 	 *
-	 * @param EntityRevision $entityRevision
+	 * @param string $entityType
 	 * @param string $languageCode
 	 *
+	 * @throws \InvalidArgumentException
 	 * @return EntityView
 	 */
-	private function newEntityView( EntityRevision $entityRevision, $languageCode ) {
+	private function newEntityView( $entityType, $languageCode ) {
 		$fingerprintView = $this->newFingerprintView( $languageCode );
 		$claimsView = $this->newClaimsView( $languageCode );
-		$entityType = $entityRevision->getEntity()->getType();
 
 		// @fixme all that seems needed in EntityView is language code and dir.
 		$language = Language::factory( $languageCode );
 
 		// @fixme support more entity types
-		if ( $entityType === 'item' ) {
-			return new ItemView( $fingerprintView, $claimsView, $language );
-		} elseif ( $entityType === 'property' ) {
-			return new PropertyView( $fingerprintView, $claimsView, $language );
+		switch ( $entityType ) {
+			case 'item':
+				return new ItemView( $fingerprintView, $claimsView, $language );
+			case 'property':
+				return new PropertyView( $fingerprintView, $claimsView, $language );
 		}
 
 		throw new InvalidArgumentException( 'No EntityView for entity type: ' . $entityType );

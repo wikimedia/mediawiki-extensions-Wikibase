@@ -7,17 +7,17 @@ use OutOfBoundsException;
 use SiteStore;
 use Title;
 use User;
-use Wikibase\Summary;
-use Wikibase\SummaryFormatter;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\EditEntity;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\EditEntity;
+use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Job for updating the repo after a page on the client has been moved.

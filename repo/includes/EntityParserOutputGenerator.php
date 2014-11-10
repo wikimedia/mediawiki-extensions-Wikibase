@@ -3,9 +3,10 @@
 namespace Wikibase;
 
 use ParserOutput;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
@@ -170,7 +171,7 @@ class EntityParserOutputGenerator {
 	 * @since 0.4
 	 *
 	 * @param EntityId[] $entityIds
-	 * @return array obtained from EntityInfoBuilder::getEntityInfo
+	 * @return array[] obtained from EntityInfoBuilder::getEntityInfo
 	 */
 	private function getEntityInfo( array $entityIds ) {
 		wfProfileIn( __METHOD__ );
@@ -196,6 +197,7 @@ class EntityParserOutputGenerator {
 	}
 
 	private function addBadgesToParserOutput( ParserOutput $pout, SiteLinkList $siteLinkList ) {
+		/** @var SiteLink $siteLink */
 		foreach ( $siteLinkList as $siteLink ) {
 			foreach ( $siteLink->getBadges() as $badge ) {
 				$pout->addLink( $this->entityTitleLookup->getTitleForId( $badge ) );
@@ -203,13 +205,13 @@ class EntityParserOutputGenerator {
 		}
 	}
 
-	private function addHtmlToParserOutput( ParserOutput $pout, EntityRevision $entityRevision, $editable ) {
+	private function addHtmlToParserOutput( ParserOutput $pout, EntityRevision $entityRevision, $editable = true ) {
 		$html = $this->entityView->getHtml( $entityRevision, $editable );
 		$pout->setText( $html );
 		$pout->setExtensionData( 'wikibase-view-chunks', $this->entityView->getPlaceholders() );
 	}
 
-	private function addModules( ParserOutput $pout, $editable ) {
+	private function addModules( ParserOutput $pout, $editable = true ) {
 		// make css available for JavaScript-less browsers
 		$pout->addModuleStyles( array(
 			'wikibase.common',

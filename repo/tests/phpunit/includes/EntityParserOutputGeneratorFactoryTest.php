@@ -4,9 +4,6 @@ namespace Wikibase;
 
 use Language;
 use ParserOptions;
-use TestUser;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -21,18 +18,12 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$parserOutputGeneratorFactory = $wikibaseRepo->getEntityParserOutputGeneratorFactory();
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q777' ) );
-		$item->setLabel( 'en', 'elephant' );
-
-		$entityRevision = new EntityRevision( $item, 7777 );
-
-		$testUser = new TestUser( 'Wikibase User' );
+		$testUser = new \TestUser( 'Wikibase User' );
 		$language = Language::factory( 'en' );
 		$parserOptions = new ParserOptions( $testUser->getUser(), $language );
 
 		$parserOutputGenerator = $parserOutputGeneratorFactory->getEntityParserOutputGenerator(
-			$entityRevision,
+			'item',
 			$parserOptions
 		);
 
