@@ -16,6 +16,108 @@
       "revId": "11fe77fa995810fdf8ab1943303a1715ebee133f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_957dc6b2",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-10T17:16:17Z",
+      "side": 1,
+      "message": "Not sure if this makes sense here, but why not write @return string[]?",
+      "revId": "11fe77fa995810fdf8ab1943303a1715ebee133f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b58482b5",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-10T17:16:17Z",
+      "side": 1,
+      "message": "I prefer to have the parameters in the same order in all three places (class variables, constructor parameters and constructor implementation).",
+      "revId": "11fe77fa995810fdf8ab1943303a1715ebee133f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d5b02e8b",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-10T17:16:17Z",
+      "side": 1,
+      "message": "Pretty sure this always returns a string, even if it\u0027s empty (which should be documented, by the way).",
+      "revId": "11fe77fa995810fdf8ab1943303a1715ebee133f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_95ae262a",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-10T17:16:17Z",
+      "side": 1,
+      "message": "As above the documentation should describe what this can return.",
+      "revId": "11fe77fa995810fdf8ab1943303a1715ebee133f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_f5b52a79",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-10T17:16:17Z",
+      "side": 1,
+      "message": "We usually use \"SiteLink\" as the name of a class/object. If this returns a string it probably returns just the page name of a StieLink. Please try to be more specific.",
+      "revId": "11fe77fa995810fdf8ab1943303a1715ebee133f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_55f65e5b",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaBindingsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-10T17:16:17Z",
+      "side": 1,
+      "message": "assertSame would be better because of the empty string in the provider. Currently this would succeed with \u0027\u0027 \u003d\u003d false.",
+      "revId": "11fe77fa995810fdf8ab1943303a1715ebee133f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
