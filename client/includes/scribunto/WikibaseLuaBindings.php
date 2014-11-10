@@ -5,6 +5,7 @@ namespace Wikibase\Client\Scribunto;
 use Language;
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -82,6 +83,11 @@ class WikibaseLuaBindings {
 	private $labelLookup;
 
 	/**
+	 * @var UsageAccumulator
+	 */
+	private $usageAccumulator;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityLookup $entityLookup
 	 * @param SiteLinkLookup $siteLinkTable
@@ -90,6 +96,7 @@ class WikibaseLuaBindings {
 	 * @param SettingsArray $settings
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param LabelLookup $labelLookup
+	 * @param UsageAccumulator $usageAccumulator
 	 * @param string[] $languageCodes
 	 * @param string $siteId
 	 */
@@ -102,6 +109,7 @@ class WikibaseLuaBindings {
 		SettingsArray $settings,
 		PropertyDataTypeLookup $dataTypeLookup,
 		LabelLookup $labelLookup,
+		UsageAccumulator $usageAccumulator,
 		$languageCodes,
 		$siteId
 	) {
@@ -115,6 +123,7 @@ class WikibaseLuaBindings {
 		$this->labelLookup = $labelLookup;
 		$this->languageCodes = $languageCodes;
 		$this->siteId = $siteId;
+		$this->usageAccumulator = $usageAccumulator;
 	}
 
 	/**
@@ -171,6 +180,7 @@ class WikibaseLuaBindings {
 			$entityArr['schemaVersion'] = 2;
 		}
 
+		$this->usageAccumulator->addAllUsage( $entityId );
 		return $entityArr;
 	}
 
@@ -224,6 +234,7 @@ class WikibaseLuaBindings {
 			return null;
 		}
 
+		$this->usageAccumulator->addPageUsage( $id );
 		return $id->getSerialization();
 	}
 
@@ -270,6 +281,12 @@ class WikibaseLuaBindings {
 			return '';
 		}
 
+		// NOTE: This tracks a label usage in the wiki's content language.
+		//       If the actual label is derived via language fallback,
+		//       updates to the source language will not be seen to apply
+		//       to this usage. We would need to trigger on changes to
+		//       *all* languages to fix that.
+		$this->usageAccumulator->addLabelUsage( $entityId );
 		return $label;
 	}
 
@@ -291,6 +308,8 @@ class WikibaseLuaBindings {
 			return '';
 		}
 
+		$this->usageAccumulator->addPageUsage( $itemId );
 		return $item->getSiteLinkList()->getBySiteId( $this->siteId )->getPageName();
 	}
+
 }
