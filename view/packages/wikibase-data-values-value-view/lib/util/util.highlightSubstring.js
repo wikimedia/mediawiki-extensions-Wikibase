@@ -18,7 +18,7 @@ this.util = this.util || {};
  * @param {string} string
  * @param {Object} [options]
  *        - {boolean} [caseInsensitive]
- *          Default: false
+ *          Default: true
  *        - {boolean} [withinString]
  *          Whether to highlight characters within the string, in contrast to at the beginning only.
  *          Default: false
