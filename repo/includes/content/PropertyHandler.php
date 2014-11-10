@@ -44,7 +44,7 @@ class PropertyHandler extends EntityHandler {
 	 * @return string
 	 */
 	protected function getContentClass() {
-		return '\Wikibase\PropertyContent';
+		return 'Wikibase\PropertyContent';
 	}
 
 	/**
@@ -93,7 +93,7 @@ class PropertyHandler extends EntityHandler {
 	 */
 	protected function newContent( Entity $property ) {
 		if ( ! $property instanceof Property ) {
-			throw new \InvalidArgumentException( '$property must be an instance of Property' );
+			throw new InvalidArgumentException( '$property must be an instance of Property' );
 		}
 
 		return PropertyContent::newFromProperty( $property );
@@ -104,10 +104,10 @@ class PropertyHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
-			'history' => '\Wikibase\HistoryPropertyAction',
-			'view' => '\Wikibase\ViewPropertyAction',
-			'edit' => '\Wikibase\EditPropertyAction',
-			'submit' => '\Wikibase\SubmitPropertyAction',
+			'history' => 'Wikibase\HistoryPropertyAction',
+			'view' => 'Wikibase\ViewPropertyAction',
+			'edit' => 'Wikibase\EditPropertyAction',
+			'submit' => 'Wikibase\SubmitPropertyAction',
 		);
 	}
 

@@ -10,13 +10,11 @@ use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
 use Diff\Patcher\PatcherException;
-use IContextSource;
 use Language;
 use LogicException;
 use MWException;
 use ParserOptions;
 use ParserOutput;
-use RequestContext;
 use RuntimeException;
 use Status;
 use Title;
@@ -26,18 +24,10 @@ use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\EntitySearchTextGenerator;
-use Wikibase\Repo\View\ClaimsView;
-use Wikibase\Repo\View\FingerprintView;
-use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Validators\EntityValidator;
 use WikiPage;
@@ -183,9 +173,12 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @return DataUpdate[]
 	 */
-	public function getSecondaryDataUpdates( Title $title, Content $oldContent = null,
-		$recursive = false, ParserOutput $parserOutput = null ) {
-
+	public function getSecondaryDataUpdates(
+		Title $title,
+		Content $oldContent = null,
+		$recursive = false,
+		ParserOutput $parserOutput = null
+	) {
 		/** @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 		$updates = $handler->getEntityModificationUpdates( $this, $title );
@@ -207,19 +200,22 @@ abstract class EntityContent extends AbstractContent {
 	 * @see Content::getParserOutput
 	 *
 	 * @param Title $title
-	 * @param int|null $revId
+	 * @param int|null $revisionId
 	 * @param ParserOptions|null $options
 	 * @param bool $generateHtml
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null,
+	public function getParserOutput(
+		Title $title,
+		$revisionId = null,
+		ParserOptions $options = null,
 		$generateHtml = true
 	) {
 		if ( $this->isRedirect() ) {
 			return $this->getParserOutputForRedirect( $generateHtml );
 		} else {
-			return $this->getParserOutputFromEntityView( $title, $revId, $options, $generateHtml );
+			return $this->getParserOutputFromEntityView( $title, $revisionId, $options, $generateHtml );
 		}
 	}
 
@@ -259,26 +255,28 @@ abstract class EntityContent extends AbstractContent {
 	 * @note Will fail if this EntityContent represents a redirect.
 	 *
 	 * @param Title $title
-	 * @param null $revId
-	 * @param ParserOptions $options
+	 * @param int|null $revisionId
+	 * @param ParserOptions|null $options
 	 * @param bool $generateHtml
 	 *
 	 * @return ParserOutput
 	 */
-	protected function getParserOutputFromEntityView( Title $title, $revId = null,
-		ParserOptions $options = null, $generateHtml = true
+	protected function getParserOutputFromEntityView(
+		Title $title,
+		$revisionId = null,
+		ParserOptions $options = null,
+		$generateHtml = true
 	) {
 		// @todo: move this to the ContentHandler
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityParserOutputGeneratorFactory = $wikibaseRepo->getEntityParserOutputGeneratorFactory();
 
-		$entityRevision = $this->getEntityRevision( $title, $revId );
-
 		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator(
-			$entityRevision->getEntity()->getType(),
+			$this->getEntity()->getType(),
 			$options
 		);
 
+		$entityRevision = $this->getEntityRevision( $title, $revisionId );
 		$editable = $options ? $options->getEditSection() : true;
 
 		$output = $outputGenerator->getParserOutput(
@@ -299,16 +297,16 @@ abstract class EntityContent extends AbstractContent {
 
 	/**
 	 * @param Title $title
-	 * @param int|null $revId
+	 * @param int|null $revisionId
 	 *
 	 * @return EntityRevision
 	 */
-	private function getEntityRevision( Title $title, $revId = null ) {
-		if ( $revId === null || $revId === 0 ) {
-			$revId = $title->getLatestRevID();
+	private function getEntityRevision( Title $title, $revisionId = null ) {
+		if ( $revisionId === null || $revisionId === 0 ) {
+			$revisionId = $title->getLatestRevID();
 		}
 
-		return new EntityRevision( $this->getEntity(), $revId );
+		return new EntityRevision( $this->getEntity(), $revisionId );
 	}
 
 	/**

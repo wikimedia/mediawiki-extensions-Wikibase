@@ -22,6 +22,7 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\EntityFactory;
 use Wikibase\EntityParserOutputGeneratorFactory;
 use Wikibase\InternalSerialization\DeserializerFactory;
@@ -41,12 +42,12 @@ use Wikibase\Lib\Localizer\MessageExceptionLocalizer;
 use Wikibase\Lib\Localizer\ParseExceptionLocalizer;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -55,7 +56,6 @@ use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
-use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Notifications\ChangeNotifier;
@@ -75,7 +75,6 @@ use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
-use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * Top level factory for the WikibaseRepo extension.

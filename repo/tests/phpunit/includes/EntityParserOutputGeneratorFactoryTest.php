@@ -4,12 +4,11 @@ namespace Wikibase;
 
 use Language;
 use ParserOptions;
-use TestUser;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
+ * @covers Wikibase\EntityParserOutputGeneratorFactory
+ *
  * @group Database
  *
  * @licence GNU GPL v2+
@@ -55,9 +54,10 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 	}
 
 	private function getParserOptions() {
-		$testUser = new TestUser( 'Wikibase User' );
+		$testUser = new \TestUser( 'Wikibase User' );
 		$language = Language::factory( 'en' );
 
 		return new ParserOptions( $testUser->getUser(), $language );
 	}
+
 }
