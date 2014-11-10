@@ -84,13 +84,14 @@ class EntityViewFactory {
 		$language = Language::factory( $languageCode );
 
 		// @fixme support more entity types
-		if ( $entityType === 'item' ) {
-			return new ItemView( $fingerprintView, $claimsView, $language, $this->siteLinkGroups );
-		} elseif ( $entityType === 'property' ) {
-			$displayStatementsOnProperties = WikibaseRepo::getDefaultInstance()->getSettings()
-					->getSetting( 'displayStatementsOnProperties' );
+		switch ( $entityType ) {
+			case 'item':
+				return new ItemView( $fingerprintView, $claimsView, $language, $this->siteLinkGroups );
+			case 'property':
+				$displayStatementsOnProperties = WikibaseRepo::getDefaultInstance()->getSettings()
+						->getSetting( 'displayStatementsOnProperties' );
 
-			return new PropertyView( $fingerprintView, $claimsView, $language, $displayStatementsOnProperties );
+				return new PropertyView( $fingerprintView, $claimsView, $language, $displayStatementsOnProperties );
 		}
 
 		throw new InvalidArgumentException( 'No EntityView for entity type: ' . $entityType );

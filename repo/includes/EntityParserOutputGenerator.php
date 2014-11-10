@@ -3,11 +3,11 @@
 namespace Wikibase;
 
 use ParserOutput;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
@@ -210,7 +210,7 @@ class EntityParserOutputGenerator {
 	 * Fetches some basic entity information from a set of entity IDs.
 	 *
 	 * @param EntityId[] $entityIds
-	 * @return array obtained from EntityInfoBuilder::getEntityInfo
+	 * @return array[] obtained from EntityInfoBuilder::getEntityInfo
 	 */
 	private function getEntityInfo( array $entityIds ) {
 		wfProfileIn( __METHOD__ );
@@ -239,6 +239,7 @@ class EntityParserOutputGenerator {
 	 * @param SiteLinkList $siteLinkList
 	 */
 	private function addBadgesToParserOutput( ParserOutput $parserOutput, SiteLinkList $siteLinkList ) {
+		/** @var SiteLink $siteLink */
 		foreach ( $siteLinkList as $siteLink ) {
 			foreach ( $siteLink->getBadges() as $badge ) {
 				$parserOutput->addLink( $this->entityTitleLookup->getTitleForId( $badge ) );
@@ -250,13 +251,13 @@ class EntityParserOutputGenerator {
 	 * @param ParserOutput $parserOutput
 	 * @param EntityRevision $entityRevision
 	 * @param array $entityInfo obtained from EntityInfoBuilder::getEntityInfo
-	 * @param boolean $editable
+	 * @param bool $editable
 	 */
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
 		EntityRevision $entityRevision,
 		array $entityInfo,
-		$editable
+		$editable = true
 	) {
 
 		$labelLookup = new LanguageFallbackLabelLookup(
@@ -276,7 +277,11 @@ class EntityParserOutputGenerator {
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
 	}
 
-	private function addModules( ParserOutput $parserOutput, $editable ) {
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param bool $editable
+	 */
+	private function addModules( ParserOutput $parserOutput, $editable = true ) {
 		// make css available for JavaScript-less browsers
 		$parserOutput->addModuleStyles( array(
 			'wikibase.common',

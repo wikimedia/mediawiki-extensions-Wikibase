@@ -78,7 +78,7 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @param int $pageId
 	 * @param EntityId $targetId
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	private function addRow( EntityId $entityId, $pageId, EntityId $targetId = null ) {
 		if ( !is_int( $pageId ) ) {
