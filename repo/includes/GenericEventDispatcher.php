@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo;
 
+use InvalidArgumentException;
+
 /**
  * Dispatches a notification to a set of watchers.
  *
@@ -40,12 +42,12 @@ class GenericEventDispatcher {
 	 *
 	 * @param object $listener
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @return mixed The listener key, for removing the listener later.
 	 */
 	public function registerWatcher( $listener ) {
 		if ( !is_subclass_of( $listener, $this->interface ) ) {
-			throw new \InvalidArgumentException( '$listener must implement ' . $this->interface );
+			throw new InvalidArgumentException( '$listener must implement ' . $this->interface );
 		}
 
 		$key = ++$this->key;
@@ -59,11 +61,11 @@ class GenericEventDispatcher {
 	 *
 	 * @param mixed $key A watcher key as returned by registerWatcher().
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function unregisterWatcher( $key ) {
 		if ( is_object( $key ) || is_array( $key ) ) {
-			throw new \InvalidArgumentException( '$key must be a primitive value' );
+			throw new InvalidArgumentException( '$key must be a primitive value' );
 		}
 
 		if ( isset( $this->watchers[$key] ) ) {
@@ -79,11 +81,11 @@ class GenericEventDispatcher {
 	 *
 	 * @param * any extra parameters are passed to the watcher method.
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function dispatch( $event ) {
 		if ( !is_string( $event ) ) {
-			throw new \InvalidArgumentException( '$event must be a string' );
+			throw new InvalidArgumentException( '$event must be a string' );
 		}
 
 		$args = func_get_args();

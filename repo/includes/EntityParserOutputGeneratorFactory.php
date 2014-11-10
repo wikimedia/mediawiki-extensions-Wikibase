@@ -2,22 +2,14 @@
 
 namespace Wikibase;
 
-use InvalidArgumentException;
 use ParserOptions;
-use ParserOutput;
 use RequestContext;
-use User;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\EntityViewFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @since 0.5
@@ -115,15 +107,13 @@ class EntityParserOutputGeneratorFactory {
 	private function getLanguageCode( ParserOptions $options = null ) {
 		// NOTE: Parser Options language overrides context language!
 		if ( $options !== null ) {
-			$languageCode = $options->getUserLang();
-		} else {
-			// @todo do we still need to fallback to context here?
-			// if needed, then maybe inject some 'default' in the constructor.
-			$context = RequestContext::getMain();
-			$languageCode = $context->getLanguage()->getCode();
+			return $options->getUserLang();
 		}
 
-		return $languageCode;
+		// @todo do we still need to fallback to context here?
+		// if needed, then maybe inject some 'default' in the constructor.
+		$context = RequestContext::getMain();
+		return $context->getLanguage()->getCode();
 	}
 
 	/**

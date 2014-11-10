@@ -84,7 +84,7 @@ abstract class EntityView {
 	 * @since 0.1
 	 *
 	 * @param EntityRevision $entityRevision the entity to render
-	 * @param array obtained from EntityInfoBuilder::getEntityInfo
+	 * @param array $entityInfo obtained from EntityInfoBuilder::getEntityInfo
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string HTML
@@ -136,7 +136,7 @@ if ( $ ) {
 	 * Builds and returns the HTML to be put into the main container of an entity's HTML structure.
 	 *
 	 * @param EntityRevision $entityRevision
-	 * @param array obtained from EntityInfoBuilder::getEntityInfo
+	 * @param array $entityInfo obtained from EntityInfoBuilder::getEntityInfo
 	 * @param bool $editable
 	 *
 	 * @throws InvalidArgumentException
