@@ -149,7 +149,24 @@ class EntityViewFactory {
 		// @fixme use language fallback here
 		return $this->snakFormatterFactory->getSnakFormatter(
 			SnakFormatter::FORMAT_HTML_WIDGET,
+			$this->getValueFormatterBuilders( $languageCode ),
 			$formatterOptions
+		);
+	}
+
+	/**
+	 * @param string $languageCode
+	 *
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	private function getValueFormatterBuilders( $languageCode ) {
+		$termLookup = new EntityRetrievingTermLookup( $this->entityLookup );
+
+		return new WikibaseValueFormatterBuilders(
+			$this->entityLookup,
+			Language::factory( $languageCode ),
+			new LanguageLabelLookup( $termLookup, $languageCode ),
+			$this->entityTitleLookup
 		);
 	}
 
