@@ -23,11 +23,6 @@ use Wikibase\ReferencedEntitiesFinder;
 class ClaimsView {
 
 	/**
-	 * @var EntityInfoBuilderFactory
-	 */
-	private $entityInfoBuilderFactory;
-
-	/**
 	 * @var EntityTitleLookup
 	 */
 	private $entityTitleLookup;
@@ -48,20 +43,17 @@ class ClaimsView {
 	private $languageCode;
 
 	/**
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EnttiyTitleLookup $entityTitleLookup
 	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
 	 * @param ClaimHtmlGenerator $claimHtmlGenerator
 	 * @param string $languageCode
 	 */
 	public function __construct(
-		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
 		SectionEditLinkGenerator $sectionEditLinkGenerator,
 		ClaimHtmlGenerator $claimHtmlGenerator,
 		$languageCode
 	) {
-		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->claimHtmlGenerator = $claimHtmlGenerator;
@@ -74,13 +66,13 @@ class ClaimsView {
 	 * @since 0.5
 	 *
 	 * @param Claim[] $claims the claims to render
+	 * @param array $entityInfo
 	 * @param string $heading the message key of the heading
 	 * @return string
 	 */
-	public function getHtml( array $claims, $heading = 'wikibase-claims' ) {
+	public function getHtml( array $claims, array $entityInfo, $heading = 'wikibase-claims' ) {
 		// aggregate claims by properties
 		$claimsByProperty = $this->groupClaimsByProperties( $claims );
-		$entityInfo = $this->getEntityInfo( $claims, $this->languageCode );
 
 		$claimsHtml = '';
 		foreach ( $claimsByProperty as $claims ) {
@@ -125,37 +117,6 @@ class ClaimsView {
 			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
 		}
 		return $claimsByProperty;
-	}
-
-	/**
-	 * Fetches labels and descriptions for all entities used as properties in snaks in the given
-	 * entity.
-	 *
-	 * @param Snak[] $claims
-	 * @param string $languageCode the language code of the labels to fetch.
-	 * @return array[] Entity info array that maps property IDs to labels and descriptions.
-	 */
-	private function getEntityInfo( array $claims, $languageCode ) {
-		// TODO: Share cache with PropertyLabelResolver
-		// TODO: ... or share info with getBasicEntityInfo.
-
-		// TODO: Make a finder just for properties, so we don't have to filter.
-		$refFinder = new ReferencedEntitiesFinder();
-		$snaks = $this->getSnaksFromClaims( $claims );
-		$entityIds = $refFinder->findSnakLinks( $snaks );
-		$propertyIds = array_filter( $entityIds, function ( EntityId $id ) {
-			return $id->getEntityType() === Property::ENTITY_TYPE;
-		} );
-
-		// NOTE: This is a bit hackish, it would be more appropriate to use a TermTable here.
-		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $propertyIds );
-		$entityInfoBuilder->removeMissing();
-		$entityInfoBuilder->collectTerms(
-			array( 'label', 'description' ),
-			array( $languageCode )
-		);
-
-		return $entityInfoBuilder->getEntityInfo();
 	}
 
 	/**

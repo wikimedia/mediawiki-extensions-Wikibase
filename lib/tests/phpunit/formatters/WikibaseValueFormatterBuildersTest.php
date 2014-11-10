@@ -42,9 +42,9 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param EntityId $entityId The Id of an entity to use for all entity lookups
-	 * @return WikibaseValueFormatterBuilders
+	 * @return EntityLookup
 	 */
-	private function newWikibaseValueFormatterBuilders( EntityId $entityId ) {
+	private function getEntityLookup( EntityId $entityId ) {
 		$entity = EntityFactory::singleton()->newEmpty( $entityId->getEntityType() );
 		$entity->setId( $entityId );
 		$entity->setLabel( 'en', 'Label for ' . $entityId->getSerialization() );
@@ -54,7 +54,34 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
-		return new WikibaseValueFormatterBuilders( $entityLookup, Language::factory( 'en' ) );
+		return $entityLookup;
+	}
+
+	/**
+	 * @param EntityId $entityId The Id of an entity to use for all entity lookups
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	private function newWikibaseValueFormatterBuilders( EntityId $entityId ) {
+		return new WikibaseValueFormatterBuilders(
+			$this->getEntityLookup( $entityId ),
+			Language::factory( 'en' ),
+			$this->getLabelLookup()
+		);
+	}
+
+	/**
+	 * @return LabelLookup
+	 */
+	private function getLabelLookup() {
+		$labelLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\LabelLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( 'Label for Q5' ) );
+
+		return $labelLookup;
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {
