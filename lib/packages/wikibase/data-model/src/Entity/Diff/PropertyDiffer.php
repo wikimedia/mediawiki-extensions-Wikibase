@@ -55,9 +55,9 @@ class PropertyDiffer implements EntityDifferStrategy {
 		return $this->diffProperties( $from, $to );
 	}
 
-	private function assertIsProperty( EntityDocument $item ) {
-		if ( !( $item instanceof Property ) ) {
-			throw new InvalidArgumentException( '$item must be an instance of Property' );
+	private function assertIsProperty( EntityDocument $property ) {
+		if ( !( $property instanceof Property ) ) {
+			throw new InvalidArgumentException( '$property must be an instance of Property' );
 		}
 	}
 
@@ -76,12 +76,12 @@ class PropertyDiffer implements EntityDifferStrategy {
 		return $this->recursiveMapDiffer->doDiff( $from, $to );
 	}
 
-	private function toDiffArray( Property $item ) {
+	private function toDiffArray( Property $property ) {
 		$array = array();
 
-		$array['aliases'] = $item->getAllAliases();
-		$array['label'] = $item->getLabels();
-		$array['description'] = $item->getDescriptions();
+		$array['aliases'] = $property->getAllAliases();
+		$array['label'] = $property->getLabels();
+		$array['description'] = $property->getDescriptions();
 
 		return $array;
 	}
