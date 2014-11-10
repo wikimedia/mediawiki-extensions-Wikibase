@@ -22,6 +22,7 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		$entityViewFactory = $this->getEntityViewFactory();
 
 		$entityView = $entityViewFactory->newEntityView(
+			$this->getTermLookup(),
 			new LanguageFallbackChain( array() ),
 			'de',
 			$entityType
@@ -43,6 +44,7 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->setExpectedException( 'InvalidArgumentException' );
 
 		$entityViewFactory->newEntityView(
+			$this->getTermLookup(),
 			new LanguageFallbackChain( array() ),
 			'de',
 			'kittens'
@@ -55,6 +57,10 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 			new MockRepository(),
 			$this->getSnakFormatterFactory()
 		);
+	}
+
+	private function getTermLookup() {
+		return $this->getMock( 'Wikibase\Lib\Store\TermLookup' );
 	}
 
 	private function getEntityTitleLookup() {

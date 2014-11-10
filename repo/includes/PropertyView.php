@@ -22,9 +22,7 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getMainHtml
 	 */
-	public function getMainHtml( EntityRevision $entityRevision, array $entityInfo,
-		$editable = true
-	) {
+	public function getMainHtml( EntityRevision $entityRevision, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
 		$property = $entityRevision->getEntity();
@@ -33,16 +31,12 @@ class PropertyView extends EntityView {
 			throw new InvalidArgumentException( '$entityRevision must contain a Property.' );
 		}
 
-		$html = parent::getMainHtml( $entityRevision, $entityInfo, $editable );
+		$html = parent::getMainHtml( $entityRevision, $editable );
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 			// @fixme Property::getClaims no longer returns any statements for properties!
-			$html .= $this->claimsView->getHtml(
-				$property->getClaims(),
-				$entityInfo,
-				'wikibase-attributes'
-			);
+			$html .= $this->claimsView->getHtml( $property->getClaims(), 'wikibase-attributes' );
 		}
 
 		$footer = wfMessage( 'wikibase-property-footer' );
