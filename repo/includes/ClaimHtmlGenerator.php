@@ -8,6 +8,7 @@ use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snaks;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
@@ -55,16 +56,20 @@ class ClaimHtmlGenerator {
 	 * @since 0.4
 	 *
 	 * @param Claim $claim the claim to render
+	 * @param SnakFormatter $snakFormatter
 	 * @param array[] $entityInfo
 	 * @param null|string $editSectionHtml has the html for the edit section
 	 *
 	 * @return string
 	 */
-	public function getHtmlForClaim( Claim $claim, array $entityInfo, $editSectionHtml = null ) {
+	public function getHtmlForClaim( Claim $claim, SnakFormatter $snakFormatter,
+		array $entityInfo, $editSectionHtml = null
+	) {
 		wfProfileIn( __METHOD__ );
 
 		$mainSnakHtml = $this->snakHtmlGenerator->getSnakHtml(
 			$claim->getMainSnak(),
+			$snakFormatter,
 			$entityInfo,
 			false
 		);
@@ -73,7 +78,7 @@ class ClaimHtmlGenerator {
 			$claimHtml = wfTemplate( 'wb-claim',
 				$claim->getGuid(),
 				$mainSnakHtml,
-				$this->getHtmlForQualifiers( $claim->getQualifiers(), $entityInfo ),
+				$this->getHtmlForQualifiers( $claim->getQualifiers(), $snakFormatter, $entityInfo ),
 				$editSectionHtml
 			);
 		} else {
@@ -99,6 +104,7 @@ class ClaimHtmlGenerator {
 
 			$referencesHtml = $this->getHtmlForReferences(
 				$claim->getReferences(),
+				$snakFormatter,
 				$entityInfo
 			);
 
@@ -107,7 +113,7 @@ class ClaimHtmlGenerator {
 				wfTemplate( 'wb-claim',
 					$claim->getGuid(),
 					$mainSnakHtml,
-					$this->getHtmlForQualifiers( $claim->getQualifiers(), $entityInfo ),
+					$this->getHtmlForQualifiers( $claim->getQualifiers(), $snakFormatter, $entityInfo ),
 					''
 				),
 				$editSectionHtml,
@@ -124,11 +130,14 @@ class ClaimHtmlGenerator {
 	 * Generates and returns the HTML representing a claim's qualifiers.
 	 *
 	 * @param Snaks $qualifiers
+	 * @param SnakFormatter $snakFormatter
 	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForQualifiers( Snaks $qualifiers, array $entityInfo ) {
+	protected function getHtmlForQualifiers( Snaks $qualifiers, SnakFormatter $snakFormatter,
+		array $entityInfo
+	) {
 		$qualifiersByProperty = new ByPropertyIdArray( iterator_to_array( $qualifiers ) );
 		$qualifiersByProperty->buildIndex();
 
@@ -137,6 +146,7 @@ class ClaimHtmlGenerator {
 		foreach( $qualifiersByProperty->getPropertyIds() as $propertyId ) {
 			$snaklistviewsHtml .= $this->getSnaklistviewHtml(
 				$qualifiersByProperty->getByPropertyId( $propertyId ),
+				$snakFormatter,
 				$entityInfo
 			);
 		}
@@ -152,11 +162,13 @@ class ClaimHtmlGenerator {
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForReferences( ReferenceList $referenceList, array $entityInfo ) {
+	protected function getHtmlForReferences( ReferenceList $referenceList,
+		SnakFormatter $snakFormatter, array $entityInfo
+	) {
 		$referencesHtml = '';
 
 		foreach( $referenceList as $reference ) {
-			$referencesHtml .= $this->getHtmlForReference( $reference, $entityInfo );
+			$referencesHtml .= $this->getHtmlForReference( $reference, $snakFormatter, $entityInfo );
 		}
 
 		return $this->wrapInListview( $referencesHtml );
@@ -174,11 +186,14 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a Reference object.
 	 *
 	 * @param Reference $reference
+	 * @param SnakFormatter $snakFormatter
 	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForReference( $reference, array $entityInfo ) {
+	protected function getHtmlForReference( $reference, SnakFormatter $snakFormatter,
+		array $entityInfo
+	) {
 		$snaks = $reference->getSnaks();
 
 		$referenceSnaksByProperty = new ByPropertyIdArray( iterator_to_array( $snaks ) );
@@ -189,6 +204,7 @@ class ClaimHtmlGenerator {
 		foreach( $referenceSnaksByProperty->getPropertyIds() as $propertyId ) {
 			$snaklistviewsHtml .= $this->getSnaklistviewHtml(
 				$referenceSnaksByProperty->getByPropertyId( $propertyId ),
+				$snakFormatter,
 				$entityInfo
 			);
 		}
@@ -203,16 +219,24 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a list of snaks.
 	 *
 	 * @param Snak[] $snaks
+	 * @param SnakFormatter $snakFormatter
 	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getSnaklistviewHtml( $snaks, array $entityInfo ) {
+	protected function getSnaklistviewHtml( $snaks, SnakFormatter $snakFormatter,
+		array $entityInfo
+	) {
 		$snaksHtml = '';
 		$i = 0;
 
 		foreach( $snaks as $snak ) {
-			$snaksHtml .= $this->snakHtmlGenerator->getSnakHtml( $snak, $entityInfo, ( $i++ === 0 ) );
+			$snaksHtml .= $this->snakHtmlGenerator->getSnakHtml(
+				$snak,
+				$snakFormatter,
+				$entityInfo,
+				( $i++ === 0 )
+			);
 		}
 
 		return wfTemplate(

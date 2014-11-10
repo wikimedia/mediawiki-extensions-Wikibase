@@ -33,30 +33,17 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param string $propertyType The property data type to use for all properties.
-	 * @param EntityId $entityId   The Id of an entity to use for all entity lookups
 	 *
 	 * @return WikibaseSnakFormatterBuilders
 	 */
-	public function newBuilders( $propertyType, EntityId $entityId ) {
-		$typeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
-		$typeLookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( $propertyType ) );
-
-		$typeMap = array(
-			'url' => 'string',
-			'string' => 'string',
-			'wikibase-item' => 'wikibase-entityid',
-			'globecoordinate' => 'globecoordinate',
+	public function newBuilders( $propertyType ) {
+		return new WikibaseSnakFormatterBuilders(
+			$this->getPropertyDataTypeLookup( $propertyType ),
+			$this->getDataTypeFactory()
 		);
+	}
 
-		$typeFactory = $this->getMock( 'DataTypes\DataTypeFactory' );
-		$typeFactory->expects( $this->any() )
-			->method( 'getType' )
-			->will( $this->returnCallback( function ( $id ) use ( $typeMap ) {
-				return new DataType( $id, $typeMap[$id], array() );
-			} ) );
-
+	private function getEntityLookup( EntityId $entityId ) {
 		$entity = EntityFactory::singleton()->newEmpty( $entityId->getEntityType() );
 		$entity->setId( $entityId );
 		$entity->setLabel( 'en', 'Label for ' . $entityId->getSerialization() );
@@ -66,14 +53,58 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
-		$lang = Language::factory( 'en' );
+		return $entityLookup;
+	}
 
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders( $entityLookup, $lang );
-		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup, $typeFactory );
+	private function getPropertyDataTypeLookup( $propertyType ) {
+		$propertyDataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
+		$propertyDataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( $propertyType ) );
+
+		return $propertyDataTypeLookup;
+	}
+
+	private function getDataTypeFactory() {
+		$typeMap = array(
+			'url' => 'string',
+			'string' => 'string',
+			'wikibase-item' => 'wikibase-entityid',
+			'globecoordinate' => 'globecoordinate',
+		);
+
+		$dataTypeFactory = $this->getMock( 'DataTypes\DataTypeFactory' );
+		$dataTypeFactory->expects( $this->any() )
+			->method( 'getType' )
+			->will( $this->returnCallback( function ( $id ) use ( $typeMap ) {
+				return new DataType( $id, $typeMap[$id], array() );
+			} ) );
+
+		return $dataTypeFactory;
+	}
+
+	private function getValueFormatterBuilders( EntityId $entityId ) {
+		return new WikibaseValueFormatterBuilders(
+			$this->getEntityLookup( $entityId ),
+			Language::factory( 'en' ),
+			$this->getLabelLookup()
+		);
+	}
+
+	private function getLabelLookup() {
+		$labelLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\LabelLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( 'Label for Q5' ) );
+
+		return $labelLookup;
 	}
 
 	public function testGetSnakFormatterBuildersForFormats() {
-		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
+		$builders = $this->newBuilders( 'string' );
 
 		$buildersForFormats = $builders->getSnakFormatterBuildersForFormats();
 
@@ -97,12 +128,11 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider buildDispatchingSnakFormatterProvider
 	 */
 	public function testBuildDispatchingSnakFormatter( $format, $options, $type, $snak, $expected ) {
-		$builders = $this->newBuilders( $type, new ItemId( 'Q5' ) );
-		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+		$builders = $this->newBuilders( $type );
 
 		$formatter = $builders->buildDispatchingSnakFormatter(
-			$factory,
 			$format,
+			$this->getValueFormatterBuilders( new ItemId( 'Q5' ) ),
 			$options
 		);
 

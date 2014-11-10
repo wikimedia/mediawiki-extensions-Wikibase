@@ -6,6 +6,7 @@ use Html;
 use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\TextInjector;
@@ -85,7 +86,9 @@ abstract class EntityView {
 	 *
 	 * @return string HTML
 	 */
-	public function getHtml( EntityRevision $entityRevision, $editable = true ) {
+	public function getHtml( EntityRevision $entityRevision, SnakFormatter $snakFormatter,
+		$editable = true
+	) {
 		$entity = $entityRevision->getEntity();
 
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
@@ -97,7 +100,7 @@ abstract class EntityView {
 			$entityId,
 			$this->language->getCode(),
 			$this->language->getDir(),
-			$this->getInnerHtml( $entityRevision, $editable )
+			$this->getInnerHtml( $entityRevision, $snakFormatter, $editable )
 		);
 
 		if ( $editable ) {
@@ -132,12 +135,15 @@ if ( $ ) {
 	 * this does not group all the HTMl within one parent node as one entity.
 	 *
 	 * @param EntityRevision $entityRevision
+	 * @param SnakFormatter $snakFormatter
 	 * @param bool $editable
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	protected function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
+	protected function getInnerHtml( EntityRevision $entityRevision,
+		SnakFormatter $snakFormatter, $editable = true
+	) {
 		wfProfileIn( __METHOD__ );
 
 		$entity = $entityRevision->getEntity();
