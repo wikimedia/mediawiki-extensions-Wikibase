@@ -2,14 +2,25 @@
 
 namespace Wikibase;
 
+use Language;
 use ParserOutput;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Lib\WikibaseValueFormatterBuilders;
+use Wikibase\Repo\View\EntityViewFactory;
 
 /**
  * Creates the parser output for an entity.
@@ -21,13 +32,14 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  *
  * @license GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityParserOutputGenerator {
 
 	/**
-	 * @var EntityView
+	 * @var EntityViewFactory
 	 */
-	private $entityView;
+	private $entityViewFactory;
 
 	/**
 	 * @var ParserOutputJsConfigBuilder
@@ -35,24 +47,24 @@ class EntityParserOutputGenerator {
 	private $configBuilder;
 
 	/**
-	 * @var SerializationOptions
-	 */
-	private $serializationOptions;
-
-	/**
 	 * @var EntityTitleLookup
 	 */
 	private $entityTitleLookup;
 
 	/**
-	 * @var PropertyDataTypeLookup
+	 * @var ValuesFinder
 	 */
-	private $dataTypeLookup;
+	private $valuesFinder;
 
 	/**
 	 * @var EntityInfoBuilderFactory
 	 */
 	private $entityInfoBuilderFactory;
+
+	/**
+	 * @var LanguageFallbackChain
+	 */
+	private $languageFallbackChain;
 
 	/**
 	 * @var string
@@ -65,20 +77,20 @@ class EntityParserOutputGenerator {
 	private $referencedEntitiesFinder;
 
 	public function __construct(
-		EntityView $entityView,
+		EntityViewFactory $entityViewFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
-		SerializationOptions $serializationOptions,
 		EntityTitleLookup $entityTitleLookup,
-		PropertyDataTypeLookup $dataTypeLookup,
+		ValuesFinder $valuesFinder,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
+		LanguageFallbackChain $languageFallbackChain,
 		$languageCode
 	) {
-		$this->entityView = $entityView;
+		$this->entityViewFactory = $entityViewFactory;
 		$this->configBuilder = $configBuilder;
-		$this->serializationOptions = $serializationOptions;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->dataTypeLookup = $dataTypeLookup;
+		$this->valuesFinder = $valuesFinder;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
+		$this->languageFallbackChain = $languageFallbackChain;
 		$this->languageCode = $languageCode;
 
 		$this->referencedEntitiesFinder = new ReferencedEntitiesFinder();
@@ -95,71 +107,101 @@ class EntityParserOutputGenerator {
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( EntityRevision $entityRevision, $editable = true, $generateHtml = true ) {
-		$pout = new ParserOutput();
+	public function getParserOutput( EntityRevision $entityRevision, $editable = true,
+		$generateHtml = true
+	) {
+		$parserOutput = new ParserOutput();
 
-		$entity =  $entityRevision->getEntity();
+		$entity = $entityRevision->getEntity();
 		$snaks = $entity->getAllSnaks();
 
-		$referencedEntityIds = $this->referencedEntitiesFinder->findSnakLinks( $snaks );
-		$entityInfo = $this->getEntityInfo( $referencedEntityIds );
+		$usedEntityIds = $this->referencedEntitiesFinder->findSnakLinks( $snaks );
+		$entityInfo = $this->getEntityInfoForJsConfig( $usedEntityIds );
 
-		$configVars = $this->configBuilder->build(
-			$entity,
-			$entityInfo,
-			$this->serializationOptions
-		);
+		$configVars = $this->configBuilder->build( $entity, $entityInfo );
+		$parserOutput->addJsConfigVars( $configVars );
 
-		$pout->addJsConfigVars( $configVars );
-
-		$this->addSnaksToParserOutput( $pout, $referencedEntityIds, $snaks );
+		$this->addLinksToParserOutput( $parserOutput, $usedEntityIds, $snaks );
 
 		if ( $entity instanceof Item ) {
-			$this->addBadgesToParserOutput( $pout, $entity->getSiteLinkList() );
+			$this->addBadgesToParserOutput( $parserOutput, $entity->getSiteLinkList() );
 		}
 
 		if ( $generateHtml ) {
-			$this->addHtmlToParserOutput( $pout, $entityRevision, $editable );
+			$this->addHtmlToParserOutput(
+				$parserOutput,
+				$entityRevision,
+				$usedEntityIds,
+				$editable
+			);
 		}
 
 		//@todo: record sitelinks as iwlinks
 		//@todo: record CommonsMedia values as imagelinks
 
-		$this->addModules( $pout, $editable );
+		$this->addModules( $parserOutput, $editable );
 
 		//FIXME: some places, like Special:NewItem, don't want to override the page title.
 		//	 But we still want to use OutputPage::addParserOutput to apply the modules etc from the ParserOutput.
 		//	 So, for now, we leave it to the caller to override the display title, if desired.
 		// set the display title
-		//$pout->setTitleText( $entity>getLabel( $langCode ) );
+		//$parserOutput->setTitleText( $entity>getLabel( $langCode ) );
 
-		return $pout;
+		return $parserOutput;
 	}
 
-	private function addSnaksToParserOutput( ParserOutput $pout, array $usedEntityIds, array $snaks ) {
-		foreach ( $usedEntityIds as $entityId ) {
-			$pout->addLink( $this->entityTitleLookup->getTitleForId( $entityId ) );
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param EntityId[] $usedEntityIds
+	 * @param Snak[] $snaks
+	 */
+	private function addLinksToParserOutput( ParserOutput $parserOutput, array $usedEntityIds,
+		array $snaks
+	) {
+		$this->addEntityLinksToParserOutput( $parserOutput, $usedEntityIds );
+		$this->addExternalLinksToParserOutput( $parserOutput, $snaks );
+		$this->addImageLinksToParserOutput( $parserOutput, $snaks );
+	}
+
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param EntityId[] $entityIds
+	 */
+	private function addEntityLinksToParserOutput( ParserOutput $parserOutput, array $entityIds ) {
+		foreach ( $entityIds as $entityId ) {
+			$parserOutput->addLink( $this->entityTitleLookup->getTitleForId( $entityId ) );
 		}
+	}
 
-		$valuesFinder = new ValuesFinder( $this->dataTypeLookup );
-
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param Snak[] $snaks
+	 */
+	private function addExternalLinksToParserOutput( ParserOutput $parserOutput, array $snaks ) {
 		// treat URL values as external links ------
-		$usedUrls = $valuesFinder->findFromSnaks( $snaks, 'url' );
+		$usedUrls = $this->valuesFinder->findFromSnaks( $snaks, 'url' );
 
 		foreach ( $usedUrls as $url ) {
 			$value = $url->getValue();
 			if ( is_string( $value ) ) {
-				$pout->addExternalLink( $value );
+				$parserOutput->addExternalLink( $value );
 			}
 		}
+	}
 
-		// treat CommonsMedia values as file transclusions ------
-		$usedImages = $valuesFinder->findFromSnaks( $snaks, 'commonsMedia' );
+	/**
+	 * Treat CommonsMedia values as file transclusions
+	 *
+	 * @param ParserOutput $parserOutput
+	 * @param array $snaks
+	 */
+	private function addImageLinksToParserOutput( ParserOutput $parserOutput, array $snaks ) {
+		$usedImages = $this->valuesFinder->findFromSnaks( $snaks, 'commonsMedia' );
 
 		foreach ( $usedImages as $image ) {
 			$value = $image->getValue();
 			if ( is_string( $value ) ) {
-				$pout->addImage( str_replace( ' ', '_', $value ) );
+				$parserOutput->addImage( str_replace( ' ', '_', $value ) );
 			}
 		}
 	}
@@ -167,15 +209,17 @@ class EntityParserOutputGenerator {
 	/**
 	 * Fetches some basic entity information required for the entity view in JavaScript from a
 	 * set of entity IDs.
-	 * @since 0.4
 	 *
 	 * @param EntityId[] $entityIds
 	 * @return array obtained from EntityInfoBuilder::getEntityInfo
 	 */
-	private function getEntityInfo( array $entityIds ) {
+	private function getEntityInfoForJsConfig( array $entityIds ) {
 		wfProfileIn( __METHOD__ );
 
-		// TODO: apply language fallback!
+		// @todo: use same instance of entity info, as for the view (see below)
+		// but appears there are some differences in what is collected for each.
+
+		// @todo: apply language fallback!
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
 
 		$entityInfoBuilder->resolveRedirects();
@@ -195,23 +239,67 @@ class EntityParserOutputGenerator {
 		return $entityInfo;
 	}
 
-	private function addBadgesToParserOutput( ParserOutput $pout, SiteLinkList $siteLinkList ) {
+	/**
+	 * @param EntityId[] $entityIds
+	 * @return array obtained from EntityInfoBuilder::getEntityInfo
+	 */
+	private function getEntityInfoForView( array $entityIds ) {
+		$propertyIds = array_filter( $entityIds, function ( EntityId $id ) {
+			return $id->getEntityType() === Property::ENTITY_TYPE;
+		} );
+
+		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $propertyIds );
+
+		$entityInfoBuilder->removeMissing();
+
+		$entityInfoBuilder->collectTerms(
+			array( 'label', 'description' ),
+			array( $this->languageCode )
+		);
+
+		return $entityInfoBuilder->getEntityInfo();
+	}
+
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param SiteLinkList $siteLinkList
+	 */
+	private function addBadgesToParserOutput( ParserOutput $parserOutput, SiteLinkList $siteLinkList ) {
 		foreach ( $siteLinkList as $siteLink ) {
 			foreach ( $siteLink->getBadges() as $badge ) {
-				$pout->addLink( $this->entityTitleLookup->getTitleForId( $badge ) );
+				$parserOutput->addLink( $this->entityTitleLookup->getTitleForId( $badge ) );
 			}
 		}
 	}
 
-	private function addHtmlToParserOutput( ParserOutput $pout, EntityRevision $entityRevision, $editable ) {
-		$html = $this->entityView->getHtml( $entityRevision, $editable );
-		$pout->setText( $html );
-		$pout->setExtensionData( 'wikibase-view-chunks', $this->entityView->getPlaceholders() );
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param EntityRevision $entityRevision
+	 * @param array $entityIds obtained from EntityInfoBuilder::getEntityInfo
+	 * $param boolean $editable
+	 */
+	private function addHtmlToParserOutput(
+		ParserOutput $parserOutput,
+		EntityRevision $entityRevision,
+		array $entityIds,
+		$editable
+	) {
+		$entityView = $this->entityViewFactory->newEntityView(
+			$this->languageFallbackChain,
+			$this->languageCode,
+			$entityRevision->getEntity()->getType()
+		);
+
+		$entityInfo = $this->getEntityInfoForView( $entityIds );
+
+		$html = $entityView->getHtml( $entityRevision, $entityInfo, $editable );
+		$parserOutput->setText( $html );
+		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
 	}
 
-	private function addModules( ParserOutput $pout, $editable ) {
+	private function addModules( ParserOutput $parserOutput, $editable ) {
 		// make css available for JavaScript-less browsers
-		$pout->addModuleStyles( array(
+		$parserOutput->addModuleStyles( array(
 			'wikibase.common',
 			'wikibase.toc',
 			'jquery.ui.core',
@@ -221,7 +309,7 @@ class EntityParserOutputGenerator {
 
 		if ( $editable ) {
 			// make sure required client sided resources will be loaded:
-			$pout->addModules( 'wikibase.ui.entityViewInit' );
+			$parserOutput->addModules( 'wikibase.ui.entityViewInit' );
 		}
 	}
 

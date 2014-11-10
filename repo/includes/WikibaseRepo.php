@@ -47,6 +47,9 @@ use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -63,6 +66,7 @@ use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\DummyChangeTransmitter;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
@@ -75,7 +79,7 @@ use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\ValuesFinder;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -481,9 +485,12 @@ class WikibaseRepo {
 	public function getValueFormatterBuilders() {
 		global $wgContLang;
 
+		$termLookup = new EntityRetrievingTermLookup( $this->getEntityLookup() );
+
 		return new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
 			$wgContLang,
+			new LanguageLabelLookup( $termLookup, $wgContLang->getCode() ),
 			$this->getEntityTitleLookup()
 		);
 	}
@@ -492,15 +499,12 @@ class WikibaseRepo {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	protected function newSnakFormatterFactory() {
-		$builders = new WikibaseSnakFormatterBuilders(
-			$this->getValueFormatterBuilders(),
+		$snakFormatterBuilders = new WikibaseSnakFormatterBuilders(
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
 
-		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
-
-		return $factory;
+		return new OutputFormatSnakFormatterFactory( $snakFormatterBuilders );
 	}
 
 	/**
@@ -580,29 +584,25 @@ class WikibaseRepo {
 
 		$valueFormatterBuilders = $this->getValueFormatterBuilders();
 
-		$snakFormatterBuilders = new WikibaseSnakFormatterBuilders(
-			$valueFormatterBuilders,
-			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory()
-		);
-
 		$valueFormatterBuilders->setValueFormatter(
 			SnakFormatter::FORMAT_PLAIN,
 			'VT:wikibase-entityid',
 			$idFormatter
 		);
 
-		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
-			$snakFormatterBuilders->getSnakFormatterBuildersForFormats()
+		$termLookup = new EntityRetrievingTermLookup( $this->getEntityLookup() );
+
+		$snakFormatterFactory = $this->getSnakFormatterFactory();
+		$snakFormatter = $snakFormatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_PLAIN,
+			$valueFormatterBuilders,
+			$options
 		);
+
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
 			$valueFormatterBuilders->getValueFormatterBuildersForFormats()
 		);
 
-		$snakFormatter = $snakFormatterFactory->getSnakFormatter(
-			SnakFormatter::FORMAT_PLAIN,
-			$options
-		);
 		$valueFormatter = $valueFormatterFactory->getValueFormatter(
 			SnakFormatter::FORMAT_PLAIN,
 			$options
@@ -617,16 +617,6 @@ class WikibaseRepo {
 		);
 
 		return $formatter;
-	}
-
-	public function getParserOutputJsConfigBuilder( $langCode ) {
-		return new ParserOutputJsConfigBuilder(
-			$this->getStore()->getEntityInfoBuilderFactory(),
-			$this->getEntityIdParser(),
-			$this->getEntityContentFactory(),
-			new ReferencedEntitiesFinder(),
-			$langCode
-		);
 	}
 
 	/**
@@ -950,14 +940,21 @@ class WikibaseRepo {
 	 * @return EntityParserOutputGeneratorFactory
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
+		$entityTitleLookup = $this->getEntityContentFactory();
+
+		$entityViewFactory = new EntityViewFactory(
+			$entityTitleLookup,
+			$this->getEntityLookup(),
+			$this->getSnakFormatterFactory()
+		);
+
 		return new EntityParserOutputGeneratorFactory(
-			$this->getSnakFormatterFactory(),
+			$entityViewFactory,
 			$this->getStore()->getEntityInfoBuilderFactory(),
-			$this->getEntityContentFactory(),
+			$entityTitleLookup,
 			$this->getEntityIdParser(),
-			$this->getPropertyDataTypeLookup(),
-			$this->getLanguageFallbackChainFactory(),
-			new ReferencedEntitiesFinder()
+			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
+			$this->getLanguageFallbackChainFactory()
 		);
 	}
 
