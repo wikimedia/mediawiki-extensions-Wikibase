@@ -26,18 +26,11 @@ use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\EntitySearchTextGenerator;
-use Wikibase\Repo\View\ClaimsView;
-use Wikibase\Repo\View\FingerprintView;
-use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Validators\EntityValidator;
 use WikiPage;
@@ -272,17 +265,14 @@ abstract class EntityContent extends AbstractContent {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityParserOutputGeneratorFactory = $wikibaseRepo->getEntityParserOutputGeneratorFactory();
 
-		$entityRevision = $this->getEntityRevision( $title, $revId );
-
 		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator(
-			$entityRevision->getEntity()->getType(),
 			$options
 		);
 
 		$editable = $options ? $options->getEditSection() : true;
 
 		$output = $outputGenerator->getParserOutput(
-			$entityRevision,
+			$this->getEntityRevision( $title, $revId ),
 			$editable,
 			$generateHtml
 		);

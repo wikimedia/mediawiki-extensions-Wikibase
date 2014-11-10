@@ -85,7 +85,7 @@ abstract class EntityView {
 	 *
 	 * @return string HTML
 	 */
-	public function getHtml( EntityRevision $entityRevision, $editable = true ) {
+	public function getHtml( EntityRevision $entityRevision, array $entityInfo, $editable = true ) {
 		$entity = $entityRevision->getEntity();
 
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
@@ -97,7 +97,7 @@ abstract class EntityView {
 			$entityId,
 			$this->language->getCode(),
 			$this->language->getDir(),
-			$this->getInnerHtml( $entityRevision, $editable )
+			$this->getInnerHtml( $entityRevision, $entityInfo, $editable )
 		);
 
 		if ( $editable ) {
@@ -137,7 +137,9 @@ if ( $ ) {
 	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	protected function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
+	protected function getInnerHtml( EntityRevision $entityRevision, array $entityInfo,
+		$editable = true
+	) {
 		wfProfileIn( __METHOD__ );
 
 		$entity = $entityRevision->getEntity();

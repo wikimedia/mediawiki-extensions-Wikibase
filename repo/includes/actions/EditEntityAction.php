@@ -63,7 +63,8 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$langCode = $this->getContext()->getLanguage()->getCode();
 
-		//TODO: proper injection
+		// @todo: proper injection of all this stuff!
+		// and seems much, if not all, code here is duplicated in EntityContentDiffView
 		$options = new FormatterOptions( array(
 			//TODO: fallback chain
 			ValueFormatter::OPT_LANG => $langCode
@@ -78,8 +79,19 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$this->propertyNameFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
 
 		$formatterFactory = $wikibaseRepo->getSnakFormatterFactory();
-		$this->detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
-		$this->terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
+		$valueFormatterBuilders = $wikibaseRepo->getValueFormatterBuilders();
+
+		$this->detailedSnakFormatter = $formatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_HTML_DIFF,
+			$valueFormatterBuilders,
+			$options
+		);
+
+		$this->terseSnakFormatter = $formatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_HTML,
+			$valueFormatterBuilders,
+			$options
+		);
 
 		$this->diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),

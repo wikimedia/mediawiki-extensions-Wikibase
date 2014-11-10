@@ -37,7 +37,9 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		$formatterOptions = new FormatterOptions( array( "language" => $wgContLang ) );
 
 		$snakFormatter = $wikibaseClient->getSnakFormatterFactory()->getSnakFormatter(
-			SnakFormatter::FORMAT_WIKI, $formatterOptions
+			SnakFormatter::FORMAT_WIKI,
+			$wikibaseClient->getValueFormatterBuilders(),
+			$formatterOptions
 		);
 
 		$this->wbLibrary = new WikibaseLuaEntityBindings(
