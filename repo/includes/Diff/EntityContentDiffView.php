@@ -86,8 +86,19 @@ class EntityContentDiffView extends DifferenceEngine {
 		$this->propertyNameFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
 
 		$formatterFactory = $wikibaseRepo->getSnakFormatterFactory();
-		$this->detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
-		$this->terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
+		$valueFormatterBuilders = $wikibaseRepo->getValueFormatterBuilders();
+
+		$this->detailedSnakFormatter = $formatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_HTML_DIFF,
+			$valueFormatterBuilders,
+			$options
+		);
+
+		$this->terseSnakFormatter = $formatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_HTML,
+			$valueFormatterBuilders,
+			$options
+		);
 
 		// @fixme inject!
 		$this->diffVisualizer = new EntityDiffVisualizer(

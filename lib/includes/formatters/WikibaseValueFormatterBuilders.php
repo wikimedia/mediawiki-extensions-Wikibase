@@ -14,8 +14,9 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
 
@@ -43,6 +44,11 @@ class WikibaseValueFormatterBuilders {
 	 * @var EntityTitleLookup|null
 	 */
 	private $entityTitleLookup;
+
+	/**
+	 * @var LabelLookup
+	 */
+	private $labelLookup;
 
 	/**
 	 * This determines which value is formatted how by providing a formatter mapping
@@ -114,10 +120,12 @@ class WikibaseValueFormatterBuilders {
 	public function __construct(
 		EntityLookup $entityLookup,
 		Language $defaultLanguage,
+		LabelLookup $labelLookup = null,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		$this->entityLookup = $entityLookup;
 		$this->defaultLanguage = $defaultLanguage;
+		$this->labelLookup = $labelLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
@@ -543,8 +551,7 @@ class WikibaseValueFormatterBuilders {
 		FormatterOptions $options,
 		WikibaseValueFormatterBuilders $builders
 	) {
-		$labelLookup = self::newLabelLookup( $options, $builders );
-		return new EntityIdLabelFormatter( $options, $labelLookup );
+		return new EntityIdLabelFormatter( $options, $builders->labelLookup );
 	}
 
 	/**
@@ -562,7 +569,7 @@ class WikibaseValueFormatterBuilders {
 	) {
 		return new EntityIdHtmlLinkFormatter(
 			$options,
-			self::newLabelLookup( $options, $builders ),
+			$builders->labelLookup,
 			$builders->entityTitleLookup
 		);
 	}
