@@ -110,7 +110,8 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder(),
 			$this->getLanguageFallbackChainFactory(),
-			$this->getSnakFormatterFactory()
+			$this->getSnakFormatterFactory(),
+			$this->getValueFormatterBuilders()
 		);
 	}
 
@@ -160,6 +161,12 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $snakFormatter ) );
 
 		return $snakFormatterFactory;
+	}
+
+	private function getValueFormatterBuilders() {
+		return $this->getMockBuilder( 'Wikibase\Lib\WikibaseValueFormatterBuilders' )
+			->disableOriginalConstructor()
+			->getMock();
 	}
 
 	private function getParser( $languageCode, $interfaceMessage, $disableContentConversion,
