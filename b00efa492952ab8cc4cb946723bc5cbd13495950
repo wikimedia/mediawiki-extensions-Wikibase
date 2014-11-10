@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_e7b25b46",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-10T20:33:50Z",
+      "side": 1,
+      "message": "The border is set on .wb-statementview, so this should be .wb-statementview:last-child, right?",
+      "revId": "b00efa492952ab8cc4cb946723bc5cbd13495950",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_87bb5722",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-10T20:33:50Z",
+      "side": 1,
+      "message": "border-bottom: 0; is the more common shortcut, but doesn\u0027t really matter, obviously. ;-)",
+      "revId": "b00efa492952ab8cc4cb946723bc5cbd13495950",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
