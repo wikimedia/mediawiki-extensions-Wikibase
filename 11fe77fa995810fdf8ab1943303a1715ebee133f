@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_44dc7273",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-10T03:22:21Z",
+      "side": 1,
+      "message": "This and the below construction of WikibaseLuaBindings is better placed in its own method in WikibaseClient",
+      "revId": "11fe77fa995810fdf8ab1943303a1715ebee133f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
