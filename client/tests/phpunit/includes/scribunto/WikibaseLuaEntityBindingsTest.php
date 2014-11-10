@@ -4,10 +4,16 @@ namespace Wikibase\Client\Scribunto\Test;
 
 use Language;
 use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
+use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\HashUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
@@ -34,12 +40,16 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	private function getWikibaseLibraryImplementation( EntityLookup $entityLookup = null ) {
+	private function getWikibaseLibraryImplementation(
+		EntityLookup $entityLookup = null,
+		UsageAccumulator $usageAccumulator = null
+	) {
 		$language = new Language( 'en' );
 
 		return new WikibaseLuaEntityBindings(
 			$this->newSnakFormatterMock(),
 			$entityLookup ? $entityLookup : new MockRepository(),
+			$usageAccumulator ? $usageAccumulator : new HashUsageAccumulator(),
 			'enwiki',
 			$language // language
 		);
@@ -49,11 +59,8 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	 * @return Item
 	 */
 	private function getItem() {
-		$snakFactory = new SnakFactory();
-		$snak = $snakFactory->newSnak(
-			new PropertyId( 'P123456' ),
-			'somevalue'
-		);
+		$propertyId = new PropertyId( 'P123456' );
+		$snak = new PropertyValueSnak( $propertyId, new EntityIdValue( new ItemId( 'Q11' ) ));
 		$statement = new Statement( new Claim( $snak ) );
 		$statement->setGuid( 'gsdfgsadg' );
 
@@ -94,10 +101,16 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->getItem();
 
 		$entityLookup = $this->getEntityLookupMock( $item );
-		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
+		$usageAccumulator = new HashUsageAccumulator();
+		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup, $usageAccumulator );
+
 		$ret = $wikibaseLibrary->formatPropertyValues( 'Q1', 'P123456' );
 
 		$this->assertSame( 'Snak snak snak', $ret );
+
+		$expectedUsage = new EntityUsage( new ItemId( 'Q11' ), EntityUsage::LABEL_USAGE );
+		$usages = $usageAccumulator->getUsages();
+		$this->assertArrayHasKey( $expectedUsage->getIdentityString(), $usages );
 	}
 
 	public function testFormatPropertyValuesNoProperty() {
