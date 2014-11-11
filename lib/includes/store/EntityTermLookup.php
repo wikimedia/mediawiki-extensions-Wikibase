@@ -20,16 +20,24 @@ class EntityTermLookup implements TermLookup {
 	private $termIndex;
 
 	/**
-	 * @param TermIndex $termIndex
+	 * @var EntityLookup
 	 */
-	public function __construct( TermIndex $termIndex ) {
+	private $entityLookup;
+
+	/**
+	 * @param TermIndex $termIndex
+	 * @param EntityLookup $entityLookup
+	 */
+	public function __construct( TermIndex $termIndex, EntityLookup $entityLookup ) {
 		$this->termIndex = $termIndex;
+		$this->entityLookup = $entityLookup;
 	}
 
 	/**
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
+	 * @throws StorageException if entity does not exist
 	 * @throws OutOfBoundsException
 	 * @return string
 	 */
@@ -41,6 +49,7 @@ class EntityTermLookup implements TermLookup {
 	/**
 	 * @param EntityId $entityId
 	 *
+	 * @throws StorageException if entity does not exist
 	 * @return string[]
 	 */
 	public function getLabels( EntityId $entityId ) {
@@ -51,6 +60,7 @@ class EntityTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
+	 * @throws StorageException if entity does not exist
 	 * @throws OutOfBoundsException
 	 * @return string
 	 */
@@ -62,6 +72,7 @@ class EntityTermLookup implements TermLookup {
 	/**
 	 * @param EntityId $entityId
 	 *
+	 * @throws StorageException if entity does not exist
 	 * @return string[]
 	 */
 	public function getDescriptions( EntityId $entityId ) {
@@ -72,26 +83,35 @@ class EntityTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $termType
 	 *
+	 * @throws StorageException if entity does not exist.
 	 * @return string[]
 	 */
 	private function getTermsOfType( EntityId $entityId, $termType ) {
 		$wikibaseTerms = $this->termIndex->getTermsOfEntity( $entityId );
+
+		if ( $wikibaseTerms === array() ) {
+			if ( !$this->entityLookup->hasEntity( $entityId ) ) {
+				throw new StorageException( 'Entity not found for '
+					. $entityId->getSerialization() );
+			}
+		}
+
 		return $this->convertTermsToTermTypeArray( $wikibaseTerms, $termType );
 	}
 
 	/**
-	 * @param string[] $labels
+	 * @param string[] $terms
 	 * @param string $languageCode
 	 *
 	 * @throws OutOfBoundsException
 	 * @return string
 	 */
-	private function filterByLanguage( array $labels, $languageCode ) {
-		if ( array_key_exists( $languageCode, $labels ) ) {
-			return $labels[$languageCode];
+	private function filterByLanguage( array $terms, $languageCode ) {
+		if ( array_key_exists( $languageCode, $terms ) ) {
+			return $terms[$languageCode];
 		}
 
-		throw new OutOfBoundsException( 'Label not found for ' . $languageCode );
+		throw new OutOfBoundsException( 'Term not found for ' . $languageCode );
 	}
 
 	/**
