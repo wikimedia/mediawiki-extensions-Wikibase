@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_ee03100e",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-11-11T07:59:22Z",
+      "side": 1,
+      "message": "This actually fixes the whole logic. The statementview is supposed to manage the claimview. Consequently, all claimview events need to be encapsulated by the statementview - anything else might (and does) result in conflicts. This proper encapsulation has been forgotten when splitting off statementview and claimview. See, for example, jquery.wikibase._createWidgets for the same logic.",
+      "parentUuid": "6e936f18_67096be0",
+      "revId": "b8bd9999cf3a04f584ad7597e61856f8cb601883",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_a763f3a5",
         "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
         "patchSetId": 7
@@ -47,6 +65,24 @@
       "writtenOn": "2014-11-10T20:43:22Z",
       "side": 1,
       "message": "What happened to the propertySelector bit?",
+      "revId": "b8bd9999cf3a04f584ad7597e61856f8cb601883",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_73084d30",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-11-11T07:59:22Z",
+      "side": 1,
+      "message": "See line 359.",
+      "parentUuid": "6e936f18_a763f3a5",
       "revId": "b8bd9999cf3a04f584ad7597e61856f8cb601883",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
