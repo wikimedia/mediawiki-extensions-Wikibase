@@ -29,7 +29,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.inputautoexpand',
 				'jquery.ui.tagadata',
-				'jquery.ui.TemplatedWidget',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.datamodel.MultiTerm',
@@ -351,7 +351,7 @@ return call_user_func( function() {
 				'jquery.event.special.eachchange',
 				'jquery.sticknode',
 				'jquery.tablesorter',
-				'jquery.ui.TemplatedWidget',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.addtoolbar',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.listview',
