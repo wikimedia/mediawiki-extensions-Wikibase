@@ -17,7 +17,7 @@ use WebRequest;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Thiemo Mättig < thiemo.maettig@wikimedia.de >
+ * @author Thiemo Mättig
  */
 class ContentRetriever {
 

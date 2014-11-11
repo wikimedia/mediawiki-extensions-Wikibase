@@ -29,7 +29,7 @@ use Wikibase\Utils;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Thiemo Mättig < thiemo.maettig@wikimedia.de >
+ * @author Thiemo Mättig
  */
 class SearchEntities extends ApiBase {
 
