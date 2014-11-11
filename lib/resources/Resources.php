@@ -135,6 +135,17 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.EditableTemplatedWidget' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.EditableTemplatedWidget.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.TemplatedWidget',
+				'util.inherit',
+				'wikibase.templates',
+			),
+		),
+
 		'jquery.ui.tagadata' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.tagadata.js',
