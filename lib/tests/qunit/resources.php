@@ -53,6 +53,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.EditableTemplatedWidget.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.EditableTemplatedWidget.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.EditableTemplatedWidget',
+				'wikibase.templates',
+			),
+		),
+
 		'jquery.ui.tagadata.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.tagadata.tests.js',
