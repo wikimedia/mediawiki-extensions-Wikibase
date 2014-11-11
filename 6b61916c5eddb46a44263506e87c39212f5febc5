@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_54e736a7",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T19:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_b42d5a8e",
+      "revId": "6b61916c5eddb46a44263506e87c39212f5febc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_744b5263",
         "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-11T17:35:09Z",
       "side": 1,
       "message": "Do we want to rely on global state here? Do we even need this code path?",
+      "revId": "6b61916c5eddb46a44263506e87c39212f5febc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_946b7e15",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T19:58:24Z",
+      "side": 1,
+      "message": "this is unchanged from the old code.\n\nnot sure if we need this, or at least we might be able to inject some \u0027default\u0027 language code.\n\nI wouldn\u0027t be surprised if some extensions or such might be calling getParserOutput without the language option, so better to keep for now until we investigate.  (could put debug log here, then we know)\n\nadded @todo for this.",
+      "parentUuid": "6e936f18_744b5263",
       "revId": "6b61916c5eddb46a44263506e87c39212f5febc5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_d48ee67b",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T19:58:24Z",
+      "side": 1,
+      "message": "probably not, but prefer not to change in this patch",
+      "parentUuid": "6e936f18_74a112f4",
+      "revId": "6b61916c5eddb46a44263506e87c39212f5febc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_94505e0f",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-11T17:35:09Z",
       "side": 1,
       "message": "If you must go via the default instance here, please add a TODO.",
+      "revId": "6b61916c5eddb46a44263506e87c39212f5febc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1470ce04",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T19:58:24Z",
+      "side": 1,
+      "message": "added",
+      "parentUuid": "6e936f18_94505e0f",
       "revId": "6b61916c5eddb46a44263506e87c39212f5febc5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
