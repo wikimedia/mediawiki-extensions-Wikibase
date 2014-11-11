@@ -216,7 +216,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		)
 		. Html::input(
 			'label',
-			$this->label ? $this->label : '',
+			$this->label ?: '',
 			'text',
 			array(
 				'id' => 'wb-newentity-label',
@@ -237,7 +237,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		)
 		. Html::input(
 			'description',
-			$this->description ? $this->description : '',
+			$this->description ?: '',
 			'text',
 			array(
 				'id' => 'wb-newentity-description',

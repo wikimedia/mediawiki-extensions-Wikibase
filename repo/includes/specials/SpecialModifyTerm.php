@@ -28,20 +28,16 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * The language the value is set in.
 	 *
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
-	protected $language;
+	private $languageCode;
 
 	/**
 	 * The value to set.
 	 *
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
-	protected $value;
+	private $value;
 
 	/**
 	 * @var FingerprintChangeOpFactory
@@ -75,16 +71,16 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 
 		// Language
-		$this->language = $request->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
+		$this->languageCode = $request->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
 
-		if ( $this->language === '' ) {
-			$this->language = null;
+		if ( $this->languageCode === '' ) {
+			$this->languageCode = null;
 		}
 
-		if ( !$this->isValidLanguageCode( $this->language ) && $this->language !== null ) {
+		if ( $this->languageCode !== null && !$this->isValidLanguageCode( $this->languageCode ) ) {
 			$errorMessage = $this->msg(
 				'wikibase-wikibaserepopage-invalid-langcode',
-				$this->language
+				$this->languageCode
 			)->parse();
 
 			$this->showErrorHTML( $errorMessage );
@@ -146,7 +142,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 */
 	protected function modifyEntity( Entity $entity ) {
 		try {
-			$summary = $this->setValue( $entity, $this->language, $this->value );
+			$summary = $this->setValue( $entity, $this->languageCode, $this->value );
 		} catch ( ChangeOpException $e ) {
 			$this->showErrorHTML( $e->getMessage() );
 			return false;
@@ -161,7 +157,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @throws PermissionsError
 	 * @throws InvalidArgumentException
 	 */
-	protected function checkTermChangePermissions( Entity $entity ) {
+	private function checkTermChangePermissions( Entity $entity ) {
 		if( $entity instanceof Item ) {
 			$type = 'item';
 		} else if ( $entity instanceof Property ) {
@@ -196,10 +192,13 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @return string
 	 */
 	protected function getFormElements( Entity $entity = null ) {
-		$this->language = $this->language ? $this->language : $this->getLanguage()->getCode();
-		if ( $this->value === null ) {
-			$this->value = $this->getValue( $entity, $this->language );
+		if ( $this->languageCode === null ) {
+			$this->languageCode = $this->getLanguage()->getCode();
 		}
+		if ( $this->value === null ) {
+			$this->value = $this->getValue( $entity, $this->languageCode );
+		}
+
 		$valueinput = Html::input(
 			'value',
 			$this->getRequest()->getVal( 'value' ) ? $this->getRequest()->getVal( 'value' ) : $this->value,
@@ -212,9 +211,9 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		)
 		. Html::element( 'br' );
 
-		$languageName = Language::fetchLanguageName( $this->language, $this->getLanguage()->getCode() );
+		$languageName = Language::fetchLanguageName( $this->languageCode, $this->getLanguage()->getCode() );
 
-		if ( $entity !== null && $this->language !== null && $languageName !== '' ) {
+		if ( $entity !== null && $this->languageCode !== null && $languageName !== '' ) {
 			return Html::rawElement(
 				'p',
 				array(),
@@ -226,12 +225,11 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 					$languageName
 				)->parse()
 			)
-			. Html::input( 'language', $this->language, 'hidden' )
+			. Html::input( 'language', $this->languageCode, 'hidden' )
 			. Html::input( 'id', $entity->getId()->getSerialization(), 'hidden' )
 			. Html::input( 'remove', 'remove', 'hidden' )
 			. $valueinput;
-		}
-		else {
+		} else {
 			return Html::rawElement(
 				'p',
 				array(),
@@ -250,7 +248,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			)
 			. Html::input(
 				'language',
-				$this->language,
+				$this->languageCode,
 				'text',
 				array(
 					'class' => 'wb-input',
@@ -287,11 +285,11 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @since 0.5
 	 *
 	 * @param Entity|null $entity
-	 * @param string $language
+	 * @param string $languageCode
 	 *
 	 * @return string
 	 */
-	abstract protected function getValue( $entity, $language );
+	abstract protected function getValue( $entity, $languageCode );
 
 	/**
 	 * Setting the value of the entity name by the given language
@@ -299,11 +297,11 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @since 0.5
 	 *
 	 * @param Entity|null $entity
-	 * @param string $language
+	 * @param string $languageCode
 	 * @param string $value
 	 *
 	 * @return Summary
 	 */
-	abstract protected function setValue( $entity, $language, $value );
+	abstract protected function setValue( $entity, $languageCode, $value );
 
 }
