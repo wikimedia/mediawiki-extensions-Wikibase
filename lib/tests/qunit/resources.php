@@ -62,6 +62,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.TemplatedWidget.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.TemplatedWidget.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.TemplatedWidget',
+				'wikibase.templates',
+			),
+		),
+
 		'wikibase.dataTypes.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.dataTypes/wikibase.dataTypes.tests.js',
