@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_d141183b",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T14:33:20Z",
+      "side": 1,
+      "message": "somewhat unrelated to your change, but this comment is inaccurate now. we support many types now.  I would remove the comment or else instead reference to the validator where these are listed.",
+      "revId": "b91270f5d1186ad405702586e86fdf449da899fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
