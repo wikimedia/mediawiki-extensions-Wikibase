@@ -279,7 +279,9 @@ return call_user_func( function() {
 				'jquery.wikibase.pagesuggester.js',
 			),
 			'dependencies' => array(
+				'jquery.ui.ooMenu',
 				'jquery.ui.suggester',
+				'util.highlightSubstring',
 				'wikibase.sites',
 			),
 		),
@@ -400,6 +402,7 @@ return call_user_func( function() {
 				'jquery.event.special.eachchange',
 				'jquery.ui.ooMenu',
 				'jquery.ui.suggester',
+				'util.highlightSubstring',
 			),
 		),
 
