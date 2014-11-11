@@ -16,6 +16,17 @@ return call_user_func( function() {
 	);
 
 	$modules = array(
+
+		'jquery.ui.TemplatedWidget.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.TemplatedWidget.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.TemplatedWidget',
+				'wikibase.templates',
+			),
+		),
+
 		'templates.tests' => $moduleBase + array(
 			'scripts' => array(
 				'templates.tests.js',
@@ -24,6 +35,7 @@ return call_user_func( function() {
 				'wikibase.templates',
 			),
 		),
+
 	);
 
 	return $modules;
