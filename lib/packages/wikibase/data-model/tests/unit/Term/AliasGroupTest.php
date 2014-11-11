@@ -93,4 +93,9 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 		new AliasGroup( null, array( 'foo' ) );
 	}
 
+	public function testGivenInvalidAlias_constructorThrowsException() {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new AliasGroup( 'en', array( 21 ) );
+	}
+
 }
