@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_6e7940f1",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T10:25:22Z",
+      "side": 1,
+      "message": "agree, but don\u0027t know if it is still used.",
+      "parentUuid": "6e936f18_6a761503",
+      "revId": "cb797ac10e7859d87fa147bbc22fac2166db2de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_6a4db5c6",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-10T20:52:53Z",
       "side": 1,
       "message": "Should come from the ContentHandler, which should get it injected via the constructor. On the other hand, that would require all the services needed by the factory to be initialized very early, any time the ContentHandler is needed. \n\nDependency injection doesn\u0027t play nice with lazy initialization...",
+      "revId": "cb797ac10e7859d87fa147bbc22fac2166db2de6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_ae5ae882",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T10:25:22Z",
+      "side": 1,
+      "message": "don\u0027t want to change this in this patch, but would be okay if done in a follow up.",
+      "parentUuid": "6e936f18_6a4db5c6",
       "revId": "cb797ac10e7859d87fa147bbc22fac2166db2de6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
