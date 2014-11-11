@@ -75,12 +75,12 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 * Initialize essential settings for this special page.
 	 * may be used by unit tests to override global settings.
 	 *
-	 * @param $normalizeItemByTitlePageNames
-	 * @param $siteLinkGroups
+	 * @param bool $normalizeItemByTitlePageNames
+	 * @param string[] $siteLinkGroups
 	 */
 	public function initSettings(
 		$normalizeItemByTitlePageNames,
-		$siteLinkGroups
+		array $siteLinkGroups
 	) {
 		$this->normalizeItemByTitlePageNames = $normalizeItemByTitlePageNames;
 		$this->groups = $siteLinkGroups;
@@ -170,7 +170,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 * @param string $siteId
 	 * @param string $page
 	 */
-	protected function switchForm( $siteId, $page ) {
+	private function switchForm( $siteId, $page ) {
 		if ( $this->sites->getSites()->hasSite( $siteId ) ) {
 			$site = $this->sites->getSite( $siteId );
 			$siteExists = in_array( $site->getGroup(), $this->groups );
@@ -246,8 +246,8 @@ class SpecialItemByTitle extends SpecialItemResolver {
 				Html::openElement( 'div' )
 				. $this->msg( 'wikibase-itembytitle-create' )
 					->params(
-						wfUrlencode( $siteId ? $siteId : '' ),
-						wfUrlencode( $page ? $page : '' )
+						wfUrlencode( $siteId ?: '' ),
+						wfUrlencode( $page ?: '' )
 					)
 					->parse()
 				. Html::closeElement( 'div' )

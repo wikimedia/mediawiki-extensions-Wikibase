@@ -54,7 +54,6 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 * @since 0.1
 	 */
 	public function __construct() {
-		// args $name, $restriction, $listed
 		parent::__construct( 'ItemDisambiguation', '', true );
 
 		$this->initServices(
@@ -94,10 +93,10 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		// Setup
 		$request = $this->getRequest();
 		$parts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
-		$language = $request->getVal( 'language', isset( $parts[0] ) ? $parts[0] : '' );
+		$languageCode = $request->getVal( 'language', isset( $parts[0] ) ? $parts[0] : '' );
 
-		if ( $language === '' ) {
-			$language = $this->getLanguage()->getCode();
+		if ( $languageCode === '' ) {
+			$languageCode = $this->getLanguage()->getCode();
 		}
 
 		if ( $request->getCheck( 'label' ) ) {
@@ -107,21 +106,21 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 			$label = isset( $parts[1] ) ? str_replace( '_', ' ', $parts[1] ) : '';
 		}
 
-		$this->switchForm( $language, $label );
+		$this->switchForm( $languageCode, $label );
 
 		// Display the result set
-		if ( isset( $language ) && isset( $label ) && $label !== '' ) {
+		if ( isset( $languageCode ) && isset( $label ) && $label !== '' ) {
 			$items = $this->findLabelUsage(
-				$language,
+				$languageCode,
 				$label
 			);
 
 			//@todo: show a message if count( $items ) > $this->limit.
 			if ( 0 < count( $items ) ) {
 				$this->getOutput()->setPageTitle( $this->msg( 'wikibase-disambiguation-title', $label )->escaped() );
-				$this->displayDisambiguationPage( $items, $language );
+				$this->displayDisambiguationPage( $items, $languageCode );
 			} else {
-				$this->showNothingFound( $language, $label );
+				$this->showNothingFound( $languageCode, $label );
 			}
 		}
 
@@ -131,15 +130,15 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	/**
 	 * Shows information, assuming no results were found.
 	 *
-	 * @param $language
-	 * @param $label
+	 * @param string $languageCode
+	 * @param string $label
 	 */
-	private function showNothingFound( $language, $label ) {
+	private function showNothingFound( $languageCode, $label ) {
 		// No results found
-		if ( ( Language::isValidBuiltInCode( $language ) && ( Language::fetchLanguageName( $language ) !== "" ) ) ) {
+		if ( ( Language::isValidBuiltInCode( $languageCode ) && ( Language::fetchLanguageName( $languageCode ) !== "" ) ) ) {
 			$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-nothing-found' );
 
-			if ( $language === $this->getLanguage()->getCode() ) {
+			if ( $languageCode === $this->getLanguage()->getCode() ) {
 				$this->getOutput()->addWikiMsg(
 					'wikibase-itemdisambiguation-search',
 					urlencode( $label )
@@ -161,9 +160,9 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 * @since 0.1
 	 *
 	 * @param Item[] $items
-	 * @param string $langCode
+	 * @param string $languageCode
 	 */
-	protected function displayDisambiguationPage( array /* of Item */ $items, $langCode ) {
+	private function displayDisambiguationPage( array $items, $languageCode ) {
 		// @fixme it is confusing to have so many $langCodes here, coming from
 		// different places and maybe not necessary to be this way.
 
@@ -184,7 +183,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		);
 
 		$disambiguationList = new ItemDisambiguation(
-			$langCode,
+			$languageCode,
 			$this->getContext()->getLanguage()->getCode(),
 			$linkFormatter
 		);
@@ -198,10 +197,10 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string|null $langCode
+	 * @param string|null $languageCode
 	 * @param string|null $label
 	 */
-	protected function switchForm( $langCode, $label ) {
+	private function switchForm( $languageCode, $label ) {
 		$this->getOutput()->addModules( 'wikibase.special.itemDisambiguation' );
 
 		$this->getOutput()->addHTML(
@@ -227,7 +226,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 			)
 			. Html::input(
 				'language',
-				$langCode ? $langCode : '',
+				$languageCode ?: '',
 				'text',
 				array(
 					'id' => 'wb-itemdisambiguation-languagename',
@@ -243,7 +242,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 			)
 			. Html::input(
 				'label',
-				$label ? $label : '',
+				$label ?: '',
 				'text',
 				array(
 					'id' => 'labelname',
@@ -272,13 +271,13 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 * @todo: Make this use an EntityInfoBuilder or similar instead of loading full entities.
 	 * @todo: Should search over aliases as well, not just labels! Needs smart display though...
 	 *
-	 * @param string $language
+	 * @param string $languageCode
 	 * @param string $label
 	 *
 	 * @return Item[]
 	 */
-	private function findLabelUsage( $language, $label ) {
-		$entityIds = $this->termIndex->getEntityIdsForLabel( $label, $language, Item::ENTITY_TYPE, true );
+	private function findLabelUsage( $languageCode, $label ) {
+		$entityIds = $this->termIndex->getEntityIdsForLabel( $label, $languageCode, Item::ENTITY_TYPE, true );
 		$entities = array();
 
 		$count = 0;

@@ -61,7 +61,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 
 		return new WikibaseLuaBindings(
 			new BasicEntityIdParser(),
-			$entityLookup ? $entityLookup : new MockRepository(),
+			$entityLookup ?: new MockRepository(),
 			$siteLinkTable,
 			new LanguageFallbackChainFactory(),
 			$language, // language
