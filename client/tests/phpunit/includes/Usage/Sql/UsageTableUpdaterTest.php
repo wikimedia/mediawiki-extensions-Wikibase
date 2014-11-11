@@ -27,7 +27,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 
 	protected function setUp() {
 		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
-			$this->markTestSkipped( 'Skipping test for SqlUsageTracker, because the useLegacyUsageIndex option is set.' );
+			$this->markTestSkipped( 'Skipping test for UsageTableUpdater, because the useLegacyUsageIndex option is set.' );
 		}
 
 		$this->tablesUsed[] = $this->tableName;
