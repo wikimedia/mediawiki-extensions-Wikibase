@@ -101,7 +101,7 @@ $wgWBLibDefaultSettings = array(
 
 	// URL schemes allowed for values of the URL type.
 	// Supported types include 'http', 'https', 'ftp', and 'mailto'.
-	'urlSchemes' => array( 'http', 'https', 'ftp' )
+	'urlSchemes' => array( 'ftp', 'http', 'https', 'irc' )
 );
 
 // experimental stuff
