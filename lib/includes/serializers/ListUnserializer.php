@@ -15,11 +15,9 @@ class ListUnserializer implements Unserializer {
 	/**
 	 * @var Unserializer
 	 */
-	protected $elementUnserializer;
+	private $elementUnserializer;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param Unserializer $elementUnserializer
 	 */
 	public function __construct( Unserializer $elementUnserializer ) {

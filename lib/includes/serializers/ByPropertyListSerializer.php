@@ -20,29 +20,27 @@ class ByPropertyListSerializer extends SerializerObject {
 	const OPT_ADD_LOWER_CASE_KEYS = 'addLowerCaseKeys';
 
 	/**
-	 * @since 0.2
-	 *
 	 * @var string
 	 */
-	protected $elementName;
+	private $elementName;
 
 	/**
-	 * @since 0.2
-	 *
 	 * @var Serializer
 	 */
-	protected $elementSerializer;
+	private $elementSerializer;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.2
 	 *
 	 * @param string $elementName
 	 * @param Serializer $elementSerializer
 	 * @param SerializationOptions|null $options
 	 */
-	public function __construct( $elementName, Serializer $elementSerializer, SerializationOptions $options = null ) {
+	public function __construct(
+		$elementName,
+		Serializer $elementSerializer,
+		SerializationOptions $options = null
+	) {
 		parent::__construct( $options );
 
 		$this->elementName = $elementName;

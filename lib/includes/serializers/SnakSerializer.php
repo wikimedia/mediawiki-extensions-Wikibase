@@ -50,7 +50,7 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 	 *
 	 * @since 0.2
 	 *
-	 * @param mixed $snak
+	 * @param Snak $snak
 	 *
 	 * @return array
 	 * @throws InvalidArgumentException

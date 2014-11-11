@@ -18,17 +18,6 @@ use InvalidArgumentException;
 class AliasSerializer extends SerializerObject implements Unserializer {
 
 	/**
-	 * Constructor.
-	 *
-	 * @since 0.4
-	 *
-	 * @param SerializationOptions $options
-	 */
-	public function __construct( SerializationOptions $options = null ) {
-		parent::__construct( $options );
-	}
-
-	/**
 	 * Returns a serialized array of aliases.
 	 *
 	 * @since 0.4
@@ -136,4 +125,5 @@ class AliasSerializer extends SerializerObject implements Unserializer {
 
 		return $aliases;
 	}
+
 }

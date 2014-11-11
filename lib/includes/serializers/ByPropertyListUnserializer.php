@@ -22,11 +22,9 @@ class ByPropertyListUnserializer implements Unserializer {
 	 *
 	 * @var Serializer
 	 */
-	protected $elementUnserializer;
+	private $elementUnserializer;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.2
 	 *
 	 * @param Unserializer $elementUnserializer

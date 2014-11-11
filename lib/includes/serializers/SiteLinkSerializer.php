@@ -25,15 +25,11 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkSerializer extends SerializerObject {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var SiteStore $siteStore
 	 */
-	protected $siteStore;
+	private $siteStore;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param SerializationOptions $options
@@ -44,8 +40,9 @@ class SiteLinkSerializer extends SerializerObject {
 			'sitelinks',
 		) );
 
-		$this->siteStore = $siteStore;
 		parent::__construct( $options );
+
+		$this->siteStore = $siteStore;
 	}
 
 	/**
@@ -53,9 +50,9 @@ class SiteLinkSerializer extends SerializerObject {
 	 *
 	 * @since 0.4
 	 *
-	 * @param array $siteLinks
+	 * @param SiteLink[] $siteLinks
 	 *
-	 * @return array
+	 * @return array[]
 	 * @throws InvalidArgumentException
 	 */
 	final public function getSerialized( $siteLinks ) {
@@ -72,9 +69,9 @@ class SiteLinkSerializer extends SerializerObject {
 		$includeUrls = in_array( 'sitelinks/urls', $parts );
 		$setRemoved = in_array( 'sitelinks/removed' , $parts );
 
-		foreach ( $this->sortSiteLinks( $siteLinks ) as $link ) {
-			$siteId = $link->getSiteId();
-			$pageName = $link->getPageName();
+		foreach ( $this->sortSiteLinks( $siteLinks ) as $siteLink ) {
+			$siteId = $siteLink->getSiteId();
+			$pageName = $siteLink->getPageName();
 
 			$response = array(
 				'site' => $siteId,
@@ -92,7 +89,7 @@ class SiteLinkSerializer extends SerializerObject {
 			if ( !$setRemoved ) {
 				$badges = array();
 
-				foreach ( $link->getBadges() as $badge ) {
+				foreach ( $siteLink->getBadges() as $badge ) {
 					$badges[] = $badge->getSerialization();
 				}
 
@@ -108,7 +105,7 @@ class SiteLinkSerializer extends SerializerObject {
 			}
 
 			if ( !$this->options->shouldIndexTags() ) {
-				$serialization[$link->getSiteId()] = $response;
+				$serialization[$siteLink->getSiteId()] = $response;
 			}
 			else {
 				$serialization[] = $response;
@@ -214,4 +211,5 @@ class SiteLinkSerializer extends SerializerObject {
 
 		return $badges;
 	}
+
 }

@@ -39,7 +39,7 @@ class ClaimsSerializer extends SerializerObject implements Unserializer {
 	 *
 	 * @since 0.2
 	 *
-	 * @param mixed $claims
+	 * @param Claims $claims
 	 *
 	 * @return array
 	 * @throws InvalidArgumentException

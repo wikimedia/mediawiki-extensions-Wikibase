@@ -23,7 +23,7 @@ use Wikibase\Lib\Serializers\SiteLinkSerializer;
  */
 class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 
-	public function validProvider() {
+	public function validSiteLinksProvider() {
 		$validArgs = array();
 
 		$options = new SerializationOptions();
@@ -74,7 +74,7 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider validProvider
+	 * @dataProvider validSiteLinksProvider
 	 */
 	public function testGetSerialized( $siteLinks, $options, $expectedSerialization ) {
 		$siteStore = SiteSQLStore::newInstance();
@@ -85,24 +85,22 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedSerialization, $serializedSiteLinks );
 	}
 
-	public function invalidProvider() {
-		$invalidArgs = array();
-
-		$invalidArgs[] = array( 'foo' );
-		$invalidArgs[] = array( 42 );
-
-		return $invalidArgs;
+	public function invalidSiteLinksProvider() {
+		return array(
+			array( 'foo' ),
+			array( 42 ),
+		);
 	}
 
 	/**
-	 * @dataProvider invalidProvider
+	 * @dataProvider invalidSiteLinksProvider
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidGetSerialized( $sitelinks ) {
+	public function testInvalidGetSerialized( $siteLinks ) {
 		$options = new SerializationOptions();
 		$siteStore = SiteSQLStore::newInstance();
 		$siteLinkSerializer = new SiteLinkSerializer( $options, $siteStore );
-		$siteLinkSerializer->getSerialized( $sitelinks );
+		$siteLinkSerializer->getSerialized( $siteLinks );
 	}
 
 	/**

@@ -28,11 +28,9 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 	 *
 	 * @var SiteStore
 	 */
-	protected $siteStore;
+	private $siteStore;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param ClaimSerializer $claimSerializer
@@ -49,9 +47,9 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 		SerializationOptions $options = null,
 		EntityFactory $entityFactory = null
 	) {
-		$this->siteStore = $siteStore;
-
 		parent::__construct( $claimSerializer, $options, $entityFactory );
+
+		$this->siteStore = $siteStore;
 	}
 
 	/**
