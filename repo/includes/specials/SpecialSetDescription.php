@@ -38,12 +38,12 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
-	 * @param string $language
+	 * @param string $languageCode
 	 *
 	 * @return string
 	 */
-	protected function getValue( $entity, $language ) {
-		return $entity === null ? '' : $entity->getDescription( $language );
+	protected function getValue( $entity, $languageCode ) {
+		return $entity === null ? '' : $entity->getDescription( $languageCode );
 	}
 
 	/**
@@ -52,19 +52,19 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
-	 * @param string $language
+	 * @param string $languageCode
 	 * @param string $value
 	 *
 	 * @return Summary
 	 */
-	protected function setValue( $entity, $language, $value ) {
+	protected function setValue( $entity, $languageCode, $value ) {
 		$value = $value === '' ? null : $value;
 		$summary = $this->getSummary( 'wbsetdescription' );
 
 		if ( $value === null ) {
-			$changeOp = $this->termChangeOpFactory->newRemoveDescriptionOp( $language );
+			$changeOp = $this->termChangeOpFactory->newRemoveDescriptionOp( $languageCode );
 		} else {
-			$changeOp = $this->termChangeOpFactory->newSetDescriptionOp( $language, $value );
+			$changeOp = $this->termChangeOpFactory->newSetDescriptionOp( $languageCode, $value );
 		}
 
 		$this->applyChangeOp( $changeOp, $entity, $summary );
