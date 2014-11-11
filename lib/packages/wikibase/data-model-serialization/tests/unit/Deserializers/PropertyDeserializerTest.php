@@ -2,12 +2,12 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Deserializers\PropertyDeserializer;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Claim\Claim;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\PropertyDeserializer

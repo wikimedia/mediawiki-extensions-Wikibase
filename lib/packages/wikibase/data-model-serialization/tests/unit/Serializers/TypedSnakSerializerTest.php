@@ -4,8 +4,8 @@ namespace Tests\Wikibase\DataModel\Serializers;
 
 use Serializers\Serializer;
 use Wikibase\DataModel\Serializers\TypedSnakSerializer;
-use Wikibase\DataModel\Snak\TypedSnak;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\TypedSnak;
 
 /**
  * @covers Wikibase\DataModel\Serializers\TypedSnakSerializer

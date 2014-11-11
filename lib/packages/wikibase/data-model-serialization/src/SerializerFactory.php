@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel;
 
+use InvalidArgumentException;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\Serializers\ClaimSerializer;
@@ -9,12 +10,11 @@ use Wikibase\DataModel\Serializers\ClaimsSerializer;
 use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Serializers\PropertySerializer;
-use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Serializers\ReferenceListSerializer;
+use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Serializers\SnaksSerializer;
-use InvalidArgumentException;
 
 /**
  * Factory for constructing Serializer objects that can serialize WikibaseDataModel objects.

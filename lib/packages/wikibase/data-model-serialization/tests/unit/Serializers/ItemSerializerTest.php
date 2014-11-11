@@ -2,15 +2,14 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
-use Wikibase\DataModel\Statement\Statement;
+use stdClass;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Serializers\FingerprintSerializer;
+use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\SiteLink;
-use stdClass;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\DataModel\Serializers\ItemSerializer
