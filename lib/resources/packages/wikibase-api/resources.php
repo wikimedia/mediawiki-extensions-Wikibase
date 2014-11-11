@@ -33,7 +33,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.api.__namespace',
-				'wikibase.RepoApiError',
+				'wikibase.api.RepoApiError',
 			)
 		),
 
@@ -53,7 +53,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.api.__namespace',
-				'wikibase.RepoApiError',
+				'wikibase.api.RepoApiError',
 			)
 		),
 
