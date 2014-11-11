@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_0eb3dcfd",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-11T10:00:44Z",
+      "side": 1,
+      "message": "An array.",
+      "revId": "fe5cdd3bdac6849d3418a858aab25999a939d167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8e9e0c65",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-11T10:00:44Z",
+      "side": 1,
+      "message": "If we are using it in different places, can\u0027t we give it a name (and a class) instead of calling it ›record‹?",
+      "revId": "fe5cdd3bdac6849d3418a858aab25999a939d167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_2e8fb830",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-11T10:00:44Z",
+      "side": 1,
+      "message": "These appear to be strings.",
+      "revId": "fe5cdd3bdac6849d3418a858aab25999a939d167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_ee847011",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-11T10:00:44Z",
+      "side": 1,
+      "message": "string?",
+      "revId": "fe5cdd3bdac6849d3418a858aab25999a939d167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_4e932453",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-11T10:00:44Z",
+      "side": 1,
+      "message": "Ambigous name: This does not _get values_ by language, but get _values by language_ by field.",
+      "revId": "fe5cdd3bdac6849d3418a858aab25999a939d167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
