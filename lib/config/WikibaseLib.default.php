@@ -99,9 +99,8 @@ $wgWBLibDefaultSettings = array(
 		'wikibase-item',
 	),
 
-	// URL schemes allowed for values of the URL type.
-	// Supported types include 'http', 'https', 'ftp', and 'mailto'.
-	'urlSchemes' => array( 'http', 'https', 'ftp' )
+	// URL schemes allowed for URL values. See UrlSchemeValidators for a full list.
+	'urlSchemes' => array( 'ftp', 'http', 'https', 'irc' )
 );
 
 // experimental stuff
