@@ -42,7 +42,7 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbar',
 				'jquery.wikibase.toolbarbutton',
 				'jquery.wikibase.wbtooltip',
-				'wikibase.RepoApiError',
+				'wikibase.api.RepoApiError',
 			),
 			'messages' => array(
 				'wikibase-cancel',
