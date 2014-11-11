@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_95f6268b",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T10:27:22Z",
+      "side": 1,
+      "message": "provide a better name :)",
+      "parentUuid": "6e936f18_75bb5aba",
+      "revId": "38463093d20dbfe27ab377e4839ab36ea1c5ca20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_15dc561b",
         "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-10T16:49:03Z",
       "side": 1,
       "message": "That\u0027s a hell lot of parameters, isn\u0027t it? Hm, guess it\u0027s not this classes fault, this is just what the EntityParserOutputGenerator needs, right?",
+      "revId": "38463093d20dbfe27ab377e4839ab36ea1c5ca20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_75e91aa6",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T10:27:22Z",
+      "side": 1,
+      "message": "@todo is to split some of this into an EntityViewFactory or such.  not in this patch though",
+      "parentUuid": "6e936f18_15dc561b",
       "revId": "38463093d20dbfe27ab377e4839ab36ea1c5ca20",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_ee8550d4",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T10:27:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_f5e68ae2",
+      "revId": "38463093d20dbfe27ab377e4839ab36ea1c5ca20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_95cf065b",
         "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
         "patchSetId": 9
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-10T16:49:03Z",
       "side": 1,
       "message": "Don\u0027t need the context (and possibly instantiate it) if options are set.",
+      "revId": "38463093d20dbfe27ab377e4839ab36ea1c5ca20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_3537124d",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T10:27:22Z",
+      "side": 1,
+      "message": "true :)",
+      "parentUuid": "6e936f18_95cf065b",
       "revId": "38463093d20dbfe27ab377e4839ab36ea1c5ca20",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_4e8564d3",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T10:27:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_b5cc8266",
+      "revId": "38463093d20dbfe27ab377e4839ab36ea1c5ca20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_55d5fee7",
         "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
         "patchSetId": 9
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_2e8018c4",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T10:27:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_55d5fee7",
+      "revId": "38463093d20dbfe27ab377e4839ab36ea1c5ca20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_55be5eac",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 9
@@ -115,6 +223,24 @@
       "writtenOn": "2014-11-10T16:49:03Z",
       "side": 1,
       "message": "$editable \u003d $options ? $options-\u003egetEditSection() : true;",
+      "revId": "38463093d20dbfe27ab377e4839ab36ea1c5ca20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_6e506061",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-11T10:27:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_55be5eac",
       "revId": "38463093d20dbfe27ab377e4839ab36ea1c5ca20",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
