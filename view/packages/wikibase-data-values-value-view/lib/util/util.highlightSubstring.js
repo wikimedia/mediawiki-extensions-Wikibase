@@ -18,7 +18,7 @@ this.util = this.util || {};
  * @param {string} string
  * @param {Object} [options]
  *        - {boolean} [caseInsensitive]
- *          Default: false
+ *          Default: true
  *        - {boolean} [withinString]
  *          Whether to highlight characters within the string, in contrast to at the beginning only.
  *          Default: false
@@ -34,7 +34,7 @@ util.highlightSubstring = function( substring, string, options ) {
 	}
 
 	options = options || {};
-	options.caseInsensitive = !!options.caseInsensitive;
+	options.caseInsensitive = options.caseInsensitive !== false;
 	options.withinString = !!options.withinString;
 	options.wrapperNodeName = options.wrapperNodeName || 'span';
 	options.wrapperNodeClass = options.wrapperNodeClass || 'highlight';
