@@ -322,8 +322,8 @@ class ResultBuilder {
 			$entitySerialization = $entitySerializer->getSerialized( $entity );
 
 			if ( !empty( $siteIds ) && array_key_exists( 'sitelinks', $entitySerialization ) ) {
-				foreach ( $entitySerialization['sitelinks'] as $siteId => $sitelink ) {
-					if ( is_array( $sitelink ) && !in_array( $sitelink['site'], $siteIds ) ) {
+				foreach ( $entitySerialization['sitelinks'] as $siteId => $siteLink ) {
+					if ( is_array( $siteLink ) && !in_array( $siteLink['site'], $siteIds ) ) {
 						unset( $entitySerialization['sitelinks'][$siteId] );
 					}
 				}
@@ -542,21 +542,18 @@ class ResultBuilder {
 	 * @param string|null|array $path Where in the result to put the revision id
 	 */
 	public function addRevisionIdFromStatusToResult( Status $status, $path ) {
-		$statusValue = $status->getValue();
+		$value = $status->getValue();
 
-		/* @var Revision $revision */
-		$revision = isset( $statusValue['revision'] )
-			? $statusValue['revision'] : null;
+		if ( isset( $value['revision'] ) ) {
+			$revision = $value['revision'];
 
-		if ( $revision ) {
-			//HACK: $revision may be a Revision or EntityRevision
-			$revId = ( $revision instanceof Revision ) ? $revision->getId() : $revision->getRevision();
+			if ( $revision instanceof Revision ) {
+				$revisionId = $revision->getId();
+			} elseif ( $revision instanceof EntityRevision ) {
+				$revisionId = $revision->getRevision();
+			}
 
-			$this->setValue(
-				$path,
-				'lastrevid',
-				intval( $revId )
-			);
+			$this->setValue( $path, 'lastrevid', empty( $revisionId ) ? 0 : $revisionId );
 		}
 	}
 

@@ -229,34 +229,34 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		// -- check the result only has our changed data (if any)  ------------
 		$linkSite = $params['linksite'];
-		$sitelinks = $result['entity']['sitelinks'];
+		$siteLinks = $result['entity']['sitelinks'];
 
-		$this->assertEquals( 1, count( $sitelinks ),
+		$this->assertEquals( 1, count( $siteLinks ),
 			"Entity return contained more than a single site"
 		);
 
-		$this->assertArrayHasKey( $linkSite, $sitelinks,
+		$this->assertArrayHasKey( $linkSite, $siteLinks,
 			"Entity doesn't return expected site"
 		);
 
-		$sitelink = $sitelinks[$linkSite];
+		$siteLink = $siteLinks[$linkSite];
 
-		$this->assertEquals( $linkSite, $sitelink['site'],
+		$this->assertEquals( $linkSite, $siteLink['site'],
 			"Returned incorrect site"
 		);
 
 		if ( array_key_exists( $linkSite, $expected['value'] ) ) {
-			$expSitelink = $expected['value'][ $linkSite ];
+			$expectedSiteLink = $expected['value'][$linkSite];
 
-			$this->assertArrayHasKey( 'url', $sitelink );
-			$this->assertEquals( $expSitelink['title'], $sitelink['title'],
+			$this->assertArrayHasKey( 'url', $siteLink );
+			$this->assertEquals( $expectedSiteLink['title'], $siteLink['title'],
 				"Returned incorrect title"
 			);
 
-			$this->assertArrayHasKey( 'badges', $sitelink );
-			$this->assertArrayEquals( $expSitelink['badges'], $sitelink['badges'] );
+			$this->assertArrayHasKey( 'badges', $siteLink );
+			$this->assertArrayEquals( $expectedSiteLink['badges'], $siteLink['badges'] );
 		} else if ( empty( $expected['value'] ) ) {
-			$this->assertArrayHasKey( 'removed', $sitelink,
+			$this->assertArrayHasKey( 'removed', $siteLink,
 				"Entity doesn't return expected 'removed' marker"
 			);
 		}

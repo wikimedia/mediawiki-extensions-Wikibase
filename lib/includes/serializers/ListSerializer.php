@@ -18,16 +18,18 @@ class ListSerializer extends SerializerObject {
 	/**
 	 * @var Serializer
 	 */
-	protected $elementSerializer;
+	private $elementSerializer;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param string $elementName
 	 * @param Serializer $elementSerializer
 	 * @param SerializationOptions|null $options
 	 */
-	public function __construct( $elementName, Serializer $elementSerializer, SerializationOptions $options = null ) {
+	public function __construct(
+		$elementName,
+		Serializer $elementSerializer,
+		SerializationOptions $options = null
+	) {
 		parent::__construct( $options );
 
 		$this->elementName = $elementName;

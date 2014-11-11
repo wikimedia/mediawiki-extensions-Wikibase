@@ -24,8 +24,6 @@ abstract class SerializerObject implements Serializer {
 	protected $options;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.3
 	 *
 	 * @param SerializationOptions|null $options

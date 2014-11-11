@@ -41,7 +41,7 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 	 *
 	 * @since 0.3
 	 *
-	 * @param mixed $reference
+	 * @param Reference $reference
 	 *
 	 * @return array
 	 * @throws InvalidArgumentException

@@ -20,25 +20,25 @@ class LabelSerializer extends SerializerObject implements Unserializer {
 	/**
 	 * @var MultilingualSerializer
 	 */
-	protected $multilingualSerializer;
+	private $multilingualSerializer;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param SerializationOptions $options
 	 * @param MultilingualSerializer $multilingualSerializer
 	 */
-	public function __construct( SerializationOptions $options = null,
+	public function __construct(
+		SerializationOptions $options = null,
 		MultilingualSerializer $multilingualSerializer = null
 	) {
+		parent::__construct( $options );
+
 		if ( $multilingualSerializer === null ) {
 			$this->multilingualSerializer = new MultilingualSerializer( $options );
 		} else {
 			$this->multilingualSerializer = $multilingualSerializer;
 		}
-		parent::__construct( $options );
 	}
 
 	/**

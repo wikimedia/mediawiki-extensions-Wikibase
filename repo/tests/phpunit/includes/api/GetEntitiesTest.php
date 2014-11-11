@@ -352,9 +352,9 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	 * @param array $entity
 	 */
 	private function assertEntityPropsSitelinksUrls( $entity ) {
-		foreach ( $entity['sitelinks'] as $sitelink ) {
-			$this->assertArrayHasKey( 'url', $sitelink );
-			$this->assertNotEmpty( $sitelink['url'] );
+		foreach ( $entity['sitelinks'] as $siteLink ) {
+			$this->assertArrayHasKey( 'url', $siteLink );
+			$this->assertNotEmpty( $siteLink['url'] );
 		}
 	}
 
@@ -362,11 +362,11 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	 * @param array $entity
 	 */
 	private function assertEntityPropsSitelinksBadges( $entity ) {
-		foreach ( $entity['sitelinks'] as $sitelink ) {
-			$this->assertArrayHasKey( 'badges', $sitelink );
-			$this->assertInternalType( 'array', $sitelink['badges'] );
+		foreach ( $entity['sitelinks'] as $siteLink ) {
+			$this->assertArrayHasKey( 'badges', $siteLink );
+			$this->assertInternalType( 'array', $siteLink['badges'] );
 
-			foreach ( $sitelink['badges'] as $badge ) {
+			foreach ( $siteLink['badges'] as $badge ) {
 				$this->assertStringStartsWith( 'Q', $badge );
 				$this->assertGreaterThan( 1, strlen( $badge ) );
 			}
@@ -540,7 +540,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		$this->assertEquals( $expectedDescriptions, $res['entities'][$id]['descriptions'] );
 	}
 
-	public function testSitelinkFilter () {
+	public function testSiteLinkFilter () {
 		$id = EntityTestHelper::getId( 'Oslo' );
 
 		list( $res,, ) = $this->doApiRequest(
@@ -552,7 +552,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 			)
 		);
 
-		$expectedSitelinks = array(
+		$expectedSiteLinks = array(
 			'dewiki' => array(
 				'site' => 'dewiki',
 				'title' => 'Oslo',
@@ -564,6 +564,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 				'badges' => array(),
 			),
 		);
-		$this->assertEquals( $expectedSitelinks, $res['entities'][$id]['sitelinks'] );
+		$this->assertEquals( $expectedSiteLinks, $res['entities'][$id]['sitelinks'] );
 	}
+
 }

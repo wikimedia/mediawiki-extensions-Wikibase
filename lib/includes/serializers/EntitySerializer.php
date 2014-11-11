@@ -58,8 +58,6 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 	private $claimSerializer;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.2
 	 *
 	 * @param ClaimSerializer $claimSerializer
@@ -68,7 +66,11 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 	 *
 	 * @todo: make $entityFactory required
 	 */
-	public function __construct( ClaimSerializer $claimSerializer, SerializationOptions $options = null, EntityFactory $entityFactory = null ) {
+	public function __construct(
+		ClaimSerializer $claimSerializer,
+		SerializationOptions $options = null,
+		EntityFactory $entityFactory = null
+	) {
 		if ( $options === null ) {
 			$options = new SerializationOptions();
 		}
@@ -109,7 +111,7 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 	/**
 	 * @since 0.2
 	 *
-	 * @param mixed $entity
+	 * @param Entity $entity
 	 *
 	 * @return array
 	 * @throws InvalidArgumentException

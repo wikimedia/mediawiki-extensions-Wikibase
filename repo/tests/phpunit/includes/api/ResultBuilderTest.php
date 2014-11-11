@@ -519,7 +519,10 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddSiteLinks(){
 		$result = $this->getDefaultResult();
-		$sitelinks = array( new SiteLink( 'enwiki', 'User:Addshore' ), new SiteLink( 'dewikivoyage', 'Berlin' ) );
+		$siteLinks = array(
+			new SiteLink( 'enwiki', 'User:Addshore' ),
+			new SiteLink( 'dewikivoyage', 'Berlin' ),
+		);
 		$path = array( 'entities', 'Q1' );
 		$expected = array(
 			'entities' => array(
@@ -541,7 +544,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addSiteLinks( $sitelinks, $path );
+		$resultBuilder->addSiteLinks( $siteLinks, $path );
 
 		$this->assertEquals( $expected, $result->getData() );
 	}

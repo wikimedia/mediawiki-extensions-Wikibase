@@ -19,7 +19,6 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 	 */
 	public function __construct() {
 		parent::__construct( 'DispatchStats' );
-
 	}
 
 	protected function outputRow( $data, $tag = 'td', $attr = array() ) {

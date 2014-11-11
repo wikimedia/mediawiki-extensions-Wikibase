@@ -14,15 +14,11 @@ use Wikibase\LanguageFallbackChain;
 class MultilingualSerializer {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var SerializationOptions
 	 */
-	protected $options;
+	private $options;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param SerializationOptions $options
@@ -45,7 +41,6 @@ class MultilingualSerializer {
 	 * @return array
 	 */
 	public function serializeMultilingualValues( array $data ) {
-
 		$values = array();
 		$idx = 0;
 
@@ -104,4 +99,5 @@ class MultilingualSerializer {
 
 		return $values;
 	}
+
 }

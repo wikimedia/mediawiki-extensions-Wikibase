@@ -14,17 +14,6 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	// TODO: would we benefit from using cached page here?
 
 	/**
-	 * @since 0.1
-	 *
-	 * @param string $name
-	 * @param string $restriction
-	 * @param boolean $listed
-	 */
-	public function __construct( $name = '', $restriction = '', $listed = true ) {
-		parent::__construct( $name, $restriction, $listed );
-	}
-
-	/**
 	 * @see SpecialWikibasePagePage::$subPage
 	 *
 	 * @since 0.1
