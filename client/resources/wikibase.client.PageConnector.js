@@ -10,7 +10,7 @@
  * @constructor
  * @since 0.5
  *
- * @param {wb.RepoApi} repoApi
+ * @param {wikibase.api.RepoApi} repoApi
  * @param {string} firstSiteId
  * @param {string} firstPageName
  * @param {string} secondSiteId
@@ -33,7 +33,7 @@ wb.PageConnector = function PageConnector(
 
 $.extend( wb.PageConnector.prototype, {
 	/**
-	 * @type wikibase.RepoApi
+	 * @type wikibase.api.RepoApi
 	 */
 	_repoApi: null,
 

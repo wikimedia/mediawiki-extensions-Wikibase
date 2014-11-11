@@ -85,7 +85,7 @@
 	 * Builds an entity store.
 	 * @todo Move to a top-level factory or application scope
 	 *
-	 * @param {wikibase.RepoApi} repoApi
+	 * @param {wikibase.api.RepoApi} repoApi
 	 * @return {wikibase.store.CombiningEntityStore}
 	 */
 	function buildEntityStore( repoApi ) {
@@ -112,7 +112,7 @@
 	function createEntityDom( entity, $entityview ) {
 		var repoConfig = mw.config.get( 'wbRepo' );
 		var mwApi = wb.api.getLocationAgnosticMwApi( repoConfig.url + repoConfig.scriptPath + '/api.php' );
-		var repoApi = new wb.RepoApi( mwApi ),
+		var repoApi = new wb.api.RepoApi( mwApi ),
 			entityStore = buildEntityStore( repoApi ),
 			revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
 			entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
