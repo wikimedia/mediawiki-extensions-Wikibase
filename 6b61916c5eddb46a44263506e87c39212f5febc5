@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_b42d5a8e",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-11T17:35:09Z",
+      "side": 1,
+      "message": "should probably be @deprecated",
+      "revId": "6b61916c5eddb46a44263506e87c39212f5febc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_744b5263",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-11T17:35:09Z",
+      "side": 1,
+      "message": "Do we want to rely on global state here? Do we even need this code path?",
+      "revId": "6b61916c5eddb46a44263506e87c39212f5febc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_74a112f4",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-11T17:35:09Z",
+      "side": 1,
+      "message": "Does it make sense to have this factory method in EntityContent at all? Previously, the reason was to have the entity-type specific code on the respective subclasses of EntityContent. This reason is now gone.",
+      "revId": "6b61916c5eddb46a44263506e87c39212f5febc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_94505e0f",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-11T17:35:09Z",
+      "side": 1,
+      "message": "If you must go via the default instance here, please add a TODO.",
+      "revId": "6b61916c5eddb46a44263506e87c39212f5febc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
