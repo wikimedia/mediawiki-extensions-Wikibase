@@ -181,6 +181,25 @@ final class RepoHooks {
 	}
 
 	/**
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
+	 *
+	 * @since 0.2 (in repo as RepoHooks::onResourceLoaderTestModules in 0.1)
+	 *
+	 * @param array &$testModules
+	 * @param \ResourceLoader &$resourceLoader
+	 *
+	 * @return boolean
+	 */
+	public static function registerQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
+		$testModules['qunit'] = array_merge(
+			$testModules['qunit'],
+			include( __DIR__ . '/tests/qunit/resources.php' )
+		);
+
+		return true;
+	}
+
+	/**
 	 * Handler for the NamespaceIsMovable hook.
 	 *
 	 * Implemented to prevent moving pages that are in an entity namespace.

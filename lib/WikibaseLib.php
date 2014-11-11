@@ -95,43 +95,6 @@ call_user_func( function() {
 		// @codeCoverageIgnoreEnd
 	};
 
-	/**
-	 * Called when setup is done. This is somewhat ugly, find a better time to register templates.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SetupAfterCache
-	 *
-	 * @return bool
-	 */
-	$wgHooks['SetupAfterCache'][] = function() {
-		\Wikibase\TemplateRegistry::singleton()->addTemplates( include( __DIR__ . "/resources/templates.php" ) );
-		return true;
-	};
-
-	/**
-	 * Shorthand function to retrieve a template filled with the specified parameters.
-	 *
-	 * important! note that the Template class does not escape anything.
-	 * be sure to escape your params before using this function!
-	 *
-	 * @since 0.2
-	 *
-	 * @param $key string template key
-	 * Varargs: normal template parameters
-	 *
-	 * @return string
-	 */
-	function wfTemplate( $key /*...*/ ) {
-		$params = func_get_args();
-		array_shift( $params );
-
-		if ( isset( $params[0] ) && is_array( $params[0] ) ) {
-			$params = $params[0];
-		}
-
-		$template = new \Wikibase\Template( \Wikibase\TemplateRegistry::singleton(), $key, $params );
-
-		return $template->render();
-	}
-
 	// Resource Loader Modules:
 	$wgResourceModules = array_merge( $wgResourceModules, include( __DIR__ . "/resources/Resources.php" ) );
 
