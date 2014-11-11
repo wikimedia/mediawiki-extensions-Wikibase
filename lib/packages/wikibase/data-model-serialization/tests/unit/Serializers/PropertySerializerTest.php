@@ -5,8 +5,8 @@ namespace Tests\Wikibase\DataModel\Serializers;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Serializers\PropertySerializer;
 use Wikibase\DataModel\Serializers\FingerprintSerializer;
+use Wikibase\DataModel\Serializers\PropertySerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**

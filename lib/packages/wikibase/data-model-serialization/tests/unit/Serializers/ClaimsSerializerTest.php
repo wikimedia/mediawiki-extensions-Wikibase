@@ -2,11 +2,11 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use stdClass;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Serializers\ClaimsSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use stdClass;
 
 /**
  * @covers Wikibase\DataModel\Serializers\ClaimsSerializer
