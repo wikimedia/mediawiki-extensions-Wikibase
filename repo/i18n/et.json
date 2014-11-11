@@ -228,7 +228,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Saad seda muuta, kui paned {{GENDER:$1|oma}} [[Special:MyPage|kasutajaleheküljele]] parserifunktsiooni <nowiki>{{#babel: }}</nowiki>.",
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 – $2",
 	"wikibase-api-unresolved-redirect": "See üksuse identifikaator viitab ümbersuunamisele, mida siin ei toetata.",
-	"wikibase-api-no-such-sitelink": "Sellist võrgukohalinki ei õnnestu leida.",
+	"wikibase-api-no-such-sitelink": "Äramärkimiste muutmisel ei leitud linki võrgukohta \"$1\".",
 	"wikibase-api-target-not-empty": "Ümbersuunamise saab teha ainult tühja olemi algusesse.",
 	"wikibase-api-target-is-redirect": "Ümbersuunamise sihtlehekülg ei tohi olla samuti ümbersuunamine.",
 	"wikibase-api-target-is-incompatible": "Ümbersuunamiskatse teist tüüpi olemi juurde.",
