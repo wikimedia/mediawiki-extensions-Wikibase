@@ -38,12 +38,12 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
-	 * @param string $language
+	 * @param string $languageCode
 	 *
 	 * @return string
 	 */
-	protected function getValue( $entity, $language ) {
-		return $entity === null ? '' : implode( '|', $entity->getAliases( $language ) );
+	protected function getValue( $entity, $languageCode ) {
+		return $entity === null ? '' : implode( '|', $entity->getAliases( $languageCode ) );
 	}
 
 	/**
@@ -52,17 +52,17 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
-	 * @param string $language
+	 * @param string $languageCode
 	 * @param string $value
 	 *
 	 * @return Summary
 	 */
-	protected function setValue( $entity, $language, $value ) {
+	protected function setValue( $entity, $languageCode, $value ) {
 		$summary = $this->getSummary( 'wbsetaliases' );
 		if ( $value === '' ) {
-			$changeOp = $this->termChangeOpFactory->newRemoveAliasesOp( $language, $entity->getAliases( $language ) );
+			$changeOp = $this->termChangeOpFactory->newRemoveAliasesOp( $languageCode, $entity->getAliases( $languageCode ) );
 		} else {
-			$changeOp = $this->termChangeOpFactory->newSetAliasesOp( $language, explode( '|', $value ) );
+			$changeOp = $this->termChangeOpFactory->newSetAliasesOp( $languageCode, explode( '|', $value ) );
 		}
 
 		$this->applyChangeOp( $changeOp, $entity, $summary );
