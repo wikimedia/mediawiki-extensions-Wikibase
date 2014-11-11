@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_b4f23acc",
+        "filename": "repo/includes/UpdateRepo/UpdateRepoJob.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-11T19:14:03Z",
+      "side": 1,
+      "message": "Done, although I doubt this is something that is likely going to happen.",
+      "parentUuid": "6e936f18_6a8ff578",
+      "revId": "8c9620dd1f84de42e5e8a9d9ebf8be94bf3d2a67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_aac73d98",
         "filename": "repo/tests/phpunit/includes/UpdateRepo/UpdateRepoOnMoveJobTest.php",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_149e8e58",
+        "filename": "repo/tests/phpunit/includes/UpdateRepo/UpdateRepoOnMoveJobTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-11T19:14:03Z",
+      "side": 1,
+      "message": "Sadly this can\u0027t be removed (as UpdateRepoJob checks for the user\u0027s presence). Reinserted the @group Database",
+      "parentUuid": "6e936f18_aac73d98",
+      "revId": "8c9620dd1f84de42e5e8a9d9ebf8be94bf3d2a67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_4ac0f97e",
         "filename": "repo/tests/phpunit/includes/UpdateRepo/UpdateRepoOnMoveJobTest.php",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2014-11-10T13:22:40Z",
       "side": 1,
       "message": "Mock me! And perhaps the SummaryFormatter too (we don\u0027t check the summary, so it may just as well be empty)",
+      "revId": "8c9620dd1f84de42e5e8a9d9ebf8be94bf3d2a67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d4a34695",
+        "filename": "repo/tests/phpunit/includes/UpdateRepo/UpdateRepoOnMoveJobTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-11T19:14:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_4ac0f97e",
       "revId": "8c9620dd1f84de42e5e8a9d9ebf8be94bf3d2a67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
