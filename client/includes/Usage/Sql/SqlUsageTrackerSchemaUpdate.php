@@ -4,6 +4,7 @@ namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
  * Schema updater for SqlUsageTracker
@@ -29,6 +30,8 @@ class SqlUsageTrackerSchemaUpdater {
 	 * Static entry point for MediaWiki's LoadExtensionSchemaUpdates hook.
 	 *
 	 * @param DatabaseUpdater $dbUpdater
+	 *
+	 * @return bool
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $dbUpdater ) {
 		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
@@ -45,11 +48,40 @@ class SqlUsageTrackerSchemaUpdater {
 	 * Applies any schema updates
 	 */
 	public function doSchemaUpdate() {
-		$db = $this->dbUpdater->getDB();
-		$type = $db->getType();
+		$table = 'wbc_entity_usage';
 
-		$script = $this->getUpdateScriptPath( 'entity_usage', $type );
-		$this->dbUpdater->addExtensionTable( 'wbc_entity_usage', $script );
+		if ( !$this->dbUpdater->tableExists( $table ) ) {
+			$db = $this->dbUpdater->getDB();
+			$script = $this->getUpdateScriptPath( 'entity_usage', $db->getType() );
+			$this->dbUpdater->addExtensionTable( $table, $script );
+
+			// Register function for populating the table.
+			// Note that this must be done with a static function,
+			// for reasons that do not need explaining at this juncture.
+			$this->dbUpdater->addExtensionUpdate( array(
+				array( __CLASS__, 'fillUsageTable' ),
+				$table
+			) );
+		}
+	}
+
+	/**
+	 * Static wrapper for EntityUsageTableBuilder::fillUsageTable
+	 *
+	 * @param DatabaseUpdater $dbUpdater
+	 * @param string $table
+	 */
+	public static function fillUsageTable( DatabaseUpdater $dbUpdater, $table ) {
+		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
+
+		$primer = new EntityUsageTableBuilder(
+			$idParser,
+			wfGetLB(), // would be nice to pass in $dbUpdater->getDB().
+			$table,
+			1000
+		);
+
+		$primer->fillUsageTable();
 	}
 
 	private function getUpdateScriptPath( $name, $type ) {
