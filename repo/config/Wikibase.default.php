@@ -18,13 +18,6 @@ return call_user_func( function() {
 
 	$defaults = array(
 		'idBlacklist' => array(
-			1,
-			23,
-			42,
-			1337,
-			9001,
-			31337,
-			720101010,
 		),
 
 		// Allow the TermIndex table to work without the term_search_key field,
