@@ -1,9 +1,7 @@
 <?php
 /**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- *
- * @codeCoverageIgnoreStart
+ * @license GNU GPL v2+
+ * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
 return call_user_func( function() {
 	preg_match(
@@ -18,37 +16,26 @@ return call_user_func( function() {
 	);
 
 	$modules = array(
-
-		'wikibase.api.RepoApi' => $moduleTemplate + array(
+		'wikibase.RepoApi' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.RepoApi.js',
 			),
 			'dependencies' => array(
-				'json',
-				'wikibase.api.__namespace',
+				'wikibase',
+				'wikibase.api.RepoApi',
 			),
 		),
-
-		'wikibase.api.RepoApiError' => $moduleTemplate + array(
+		'wikibase.RepoApiError' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.RepoApiError.js',
 			),
-			'messages' => array(
-				'wikibase-error-unexpected',
-				'wikibase-error-save-generic',
-				'wikibase-error-remove-generic',
-				'wikibase-error-save-timeout',
-				'wikibase-error-remove-timeout',
-				'wikibase-error-ui-no-external-page',
-				'wikibase-error-ui-edit-conflict',
-			),
 			'dependencies' => array(
-				'util.inherit',
-				'wikibase.api.__namespace',
+				'wikibase',
+				'wikibase.api.RepoApiError',
 			),
 		),
-
 	);
 
 	return $modules;
+
 } );
