@@ -84,6 +84,7 @@ return call_user_func( function() {
 				'mediawiki.api',
 				'mediawiki.util',
 				'mediawiki.jqueryMsg',
+				'jquery.event.special.eachchange',
 				'wikibase.client.currentSite',
 				'wikibase.sites',
 				'wikibase.RepoApi',
