@@ -75,7 +75,7 @@ return call_user_func( function() {
 				'wikibase.formatters.getStore',
 				'wikibase.EntityInitializer',
 				'wikibase.parsers.getStore',
-				'wikibase.RepoApi',
+				'wikibase.api.RepoApi',
 				'wikibase.RevisionStore',
 				'wikibase.serialization.EntityDeserializer',
 				'wikibase.sites',

@@ -356,7 +356,7 @@ $.widget( 'wikibase.linkitem', {
 		this.targetArticle = $( '#wbclient-linkItem-page' ).val();
 
 		this._pageConnector = new wb.PageConnector(
-			new wb.RepoApi( this.options.mwApiForRepo ),
+			new wb.api.RepoApi( this.options.mwApiForRepo ),
 			this.options.globalSiteId,
 			this.options.pageTitle,
 			this.targetSite,
@@ -591,7 +591,7 @@ $.widget( 'wikibase.linkitem', {
 	 */
 	_onError: function( errorCode, errorInfo ) {
 		var error = errorInfo
-			? wb.RepoApiError.newFromApiResponse( errorInfo )
+			? wb.api.RepoApiError.newFromApiResponse( errorInfo )
 			: errorCode;
 
 		var $elem = $( '#wbclient-linkItem-page' );

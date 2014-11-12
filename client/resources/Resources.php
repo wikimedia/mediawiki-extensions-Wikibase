@@ -87,8 +87,8 @@ return call_user_func( function() {
 				'jquery.event.special.eachchange',
 				'wikibase.client.currentSite',
 				'wikibase.sites',
-				'wikibase.RepoApi',
-				'wikibase.RepoApiError',
+				'wikibase.api.RepoApi',
+				'wikibase.api.RepoApiError',
 				'wikibase.client.PageConnector'
 			),
 			'messages' => array(
