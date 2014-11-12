@@ -29,6 +29,10 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 */
 	private $dateTimeFormatter;
 
+	/**
+	 * @param FormatterOptions $options
+	 * @param ValueFormatter $dateTimeFormatter
+	 */
 	public function __construct( FormatterOptions $options, ValueFormatter $dateTimeFormatter ) {
 		$this->dateTimeFormatter = $dateTimeFormatter;
 
@@ -65,25 +69,31 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 * Display the calendar being used if the date lies within a time frame when
 	 * multiple calendars have been in use or if the time value features a calendar that
 	 * is uncommon for the specified time.
+	 *
+	 * @param TimeValue $value
+	 * @return string
 	 */
 	private function formatOptionalCalendarName( TimeValue $value ) {
 		return $this->calendarNameNeeded( $value ) ? $this->formatCalendarName( $value ) : '';
 	}
 
+	/**
+	 * @param TimeValue $value
+	 * @return bool
+	 */
 	private function calendarNameNeeded( TimeValue $value ) {
 		preg_match( '/^[+-](\d+)-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/',
 			$value->getTime(), $matches );
 		$year = intval( $matches[1] );
 		$calendar = $this->getCalendarKey( $value->getCalendarModel() );
 
-		return $value->getPrecision() > 10
-			&& (
-				$year > 1581 && $year < 1930
-				|| $year <= 1581 && $calendar === 'gregorian'
-				|| $year >= 1930 && $calendar === 'julian'
-			);
+		return $value->getPrecision() > 10 && ( $year <= 1581 || $calendar !== 'gregorian' );
 	}
 
+	/**
+	 * @param TimeValue $value
+	 * @return string
+	 */
 	private function formatCalendarName( TimeValue $value ) {
 		$calendarKey = $this->getCalendarKey( $value->getCalendarModel() );
 		return $this->getMessage( 'valueview-expert-timevalue-calendar-' . $calendarKey );
