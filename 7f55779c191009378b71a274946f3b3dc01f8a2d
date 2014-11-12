@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_009c04b7",
+        "filename": "repo/includes/globalFunctions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-12T13:26:50Z",
+      "side": 1,
+      "message": "Core calls this GlobalFunctions.php with upper case G and I think we should stick with that.\n\nAlso I think this needs an \"not a valid entry point\" check. At least:\n\nif ( !defined( \u0027MEDIAWIKI\u0027 ) ) {\n\tdie( \u0027Not an entry point.\u0027 );\n}",
+      "revId": "7f55779c191009378b71a274946f3b3dc01f8a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

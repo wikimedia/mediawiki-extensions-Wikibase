@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_e08eb87b",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-12T13:26:50Z",
+      "side": 0,
+      "message": "So this hook is not needed any more? Great!",
+      "revId": "3558045508b9a1d6bfd4eebb303d3d171fa979c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
