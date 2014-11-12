@@ -9,6 +9,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
@@ -35,10 +36,11 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$entityTitleLookup,
+			'en'
 		);
 
-		$html = $snakHtmlGenerator->getSnakHtml( $snak, $entityInfo );
+		$html = $snakHtmlGenerator->getSnakHtml( $snak, new EntityInfo( $entityInfo ) );
 
 		foreach( $patterns as $message => $pattern ) {
 			$this->assertRegExp( $pattern, $html, $message );

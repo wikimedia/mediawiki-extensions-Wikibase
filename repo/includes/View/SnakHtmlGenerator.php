@@ -7,6 +7,7 @@ use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Entity\PropertyNotFoundException;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
@@ -38,12 +39,14 @@ class SnakHtmlGenerator {
 	/**
 	 * @param SnakFormatter $snakFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param string $languageCode
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws \InvalidArgumentException
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleLookup $entityTitleLookup,
+		$languageCode
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
 				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
@@ -51,20 +54,25 @@ class SnakHtmlGenerator {
 					. $snakFormatter->getFormat() );
 		}
 
+		if ( !is_string( $languageCode ) ) {
+			throw new InvalidArgumentException( '$languageCode must be a string' );
+		}
+
 		$this->snakFormatter = $snakFormatter;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->languageCode = $languageCode;
 	}
 
 	/**
 	 * Generates the HTML for a single snak.
 	 *
 	 * @param Snak $snak
-	 * @param array[] $entityInfo
+	 * @param EntityInfo $entityInfo
 	 * @param bool $showPropertyLink
 	 *
 	 * @return string
 	 */
-	public function getSnakHtml( Snak $snak, array $entityInfo, $showPropertyLink = false ) {
+	public function getSnakHtml( Snak $snak, EntityInfo $entityInfo, $showPropertyLink = false ) {
 		$snakViewVariation = $this->getSnakViewVariation( $snak );
 		$snakViewCssClass = 'wb-snakview-variation-' . $snakViewVariation;
 
@@ -89,20 +97,21 @@ class SnakHtmlGenerator {
 
 	/**
 	 * @param Snak $snak
-	 * @param array[] $entityInfo
+	 * @param EntityInfo $entityInfo
 	 *
 	 * @return string
 	 */
-	private function makePropertyLink( Snak $snak, array $entityInfo ) {
+	private function makePropertyLink( Snak $snak, EntityInfo $entityInfo ) {
 		$propertyId = $snak->getPropertyId();
-		$key = $propertyId->getSerialization();
-		$propertyLabel = $key;
-		if ( isset( $entityInfo[$key] ) && !empty( $entityInfo[$key]['labels'] ) ) {
-			$entityInfoLabel = reset( $entityInfo[$key]['labels'] );
-			$propertyLabel = $entityInfoLabel['value'];
+
+		// @todo  use a LabelLookup or, better, an EntityIdFormatter
+		$propertyLabel = $entityInfo->getLabel( $propertyId, $this->languageCode );
+
+		if ( $propertyLabel === null ) {
+			$propertyLabel = $propertyId->getSerialization();
 		}
 
-		// @todo use EntityIdHtmlLinkFormatter here
+		// @todo use EntityIdHtmlLinkFormatter here, see above
 		$propertyLink = \Linker::link(
 			$this->entityTitleLookup->getTitleForId( $propertyId ),
 			htmlspecialchars( $propertyLabel )

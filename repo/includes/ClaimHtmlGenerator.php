@@ -4,10 +4,13 @@ namespace Wikibase;
 
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\Snaks;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
@@ -55,12 +58,12 @@ class ClaimHtmlGenerator {
 	 * @since 0.4
 	 *
 	 * @param Claim $claim the claim to render
-	 * @param array[] $entityInfo
+	 * @param EntityInfo $entityInfo
 	 * @param null|string $editSectionHtml has the html for the edit section
 	 *
 	 * @return string
 	 */
-	public function getHtmlForClaim( Claim $claim, array $entityInfo, $editSectionHtml = null ) {
+	public function getHtmlForClaim( Claim $claim, EntityInfo $entityInfo, $editSectionHtml = null ) {
 		wfProfileIn( __METHOD__ );
 
 		$mainSnakHtml = $this->snakHtmlGenerator->getSnakHtml(
@@ -124,11 +127,11 @@ class ClaimHtmlGenerator {
 	 * Generates and returns the HTML representing a claim's qualifiers.
 	 *
 	 * @param Snaks $qualifiers
-	 * @param array[] $entityInfo
+	 * @param EntityInfo $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForQualifiers( Snaks $qualifiers, array $entityInfo ) {
+	protected function getHtmlForQualifiers( Snaks $qualifiers, EntityInfo $entityInfo ) {
 		$qualifiersByProperty = new ByPropertyIdArray( iterator_to_array( $qualifiers ) );
 		$qualifiersByProperty->buildIndex();
 
@@ -148,11 +151,11 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a ReferenceList object.
 	 *
 	 * @param ReferenceList $referenceList
-	 * @param array[] $entityInfo
+	 * @param EntityInfo $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForReferences( ReferenceList $referenceList, array $entityInfo ) {
+	protected function getHtmlForReferences( ReferenceList $referenceList, EntityInfo $entityInfo ) {
 		$referencesHtml = '';
 
 		foreach( $referenceList as $reference ) {
@@ -174,11 +177,11 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a Reference object.
 	 *
 	 * @param Reference $reference
-	 * @param array[] $entityInfo
+	 * @param EntityInfo $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForReference( $reference, array $entityInfo ) {
+	protected function getHtmlForReference( $reference, EntityInfo $entityInfo ) {
 		$snaks = $reference->getSnaks();
 
 		$referenceSnaksByProperty = new ByPropertyIdArray( iterator_to_array( $snaks ) );
@@ -203,11 +206,11 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a list of snaks.
 	 *
 	 * @param Snak[] $snaks
-	 * @param array[] $entityInfo
+	 * @param EntityInfo $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getSnaklistviewHtml( $snaks, array $entityInfo ) {
+	protected function getSnaklistviewHtml( $snaks, EntityInfo $entityInfo ) {
 		$snaksHtml = '';
 		$i = 0;
 

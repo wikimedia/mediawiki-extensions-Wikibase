@@ -111,7 +111,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	 */
 	public function testGetEntityInfo( array $ids, array $expected ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
-		$actual = $builder->getEntityInfo();
+		$actual = $builder->getEntityInfo()->asArray();
 
 		$this->assertArrayEquals( $expected, $actual, false, true );
 	}
@@ -145,7 +145,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->resolveRedirects();
-		$entityInfo = $builder->getEntityInfo();
+		$entityInfo = $builder->getEntityInfo()->asArray();
 
 		$resolvedIds = array_map(
 			function( $record ) {
@@ -249,7 +249,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->collectTerms( $types, $languages );
-		$entityInfo = $builder->getEntityInfo();
+		$entityInfo = $builder->getEntityInfo()->asArray();
 
 		$this->assertSameSize( $expected, $entityInfo );
 
@@ -280,7 +280,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 
 		$builder->resolveRedirects();
 		$builder->collectTerms( array( 'label' ), array( 'de' ) );
-		$entityInfo = $builder->getEntityInfo();
+		$entityInfo = $builder->getEntityInfo()->asArray();
 
 		$this->assertEquals( array_keys( $expected ), array_keys( $entityInfo ) );
 
@@ -323,7 +323,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->collectDataTypes();
-		$entityInfo = $builder->getEntityInfo();
+		$entityInfo = $builder->getEntityInfo()->asArray();
 
 		$this->assertSameSize( $expected, $entityInfo );
 
@@ -380,7 +380,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->removeMissing( 'remove-redirects' );
-		$entityInfo = $builder->getEntityInfo();
+		$entityInfo = $builder->getEntityInfo()->asArray();
 
 		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
 	}
@@ -433,7 +433,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->removeMissing();
-		$entityInfo = $builder->getEntityInfo();
+		$entityInfo = $builder->getEntityInfo()->asArray();
 
 		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
 	}
@@ -475,7 +475,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->removeEntityInfo( $remove );
-		$entityInfo = $builder->getEntityInfo();
+		$entityInfo = $builder->getEntityInfo()->asArray();
 
 		$this->assertArrayEquals( $expected, array_keys( $entityInfo ) );
 	}
@@ -517,7 +517,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->retainEntityInfo( $retain );
-		$entityInfo = $builder->getEntityInfo();
+		$entityInfo = $builder->getEntityInfo()->asArray();
 
 		$this->assertArrayEquals( $expected, array_keys( $entityInfo ) );
 	}
