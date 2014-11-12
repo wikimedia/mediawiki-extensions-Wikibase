@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests;
 
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\EntityId;

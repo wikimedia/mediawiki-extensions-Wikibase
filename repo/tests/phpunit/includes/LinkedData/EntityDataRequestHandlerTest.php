@@ -68,7 +68,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 * @return EntityDataRequestHandler
 	 */
 	protected function newHandler() {
-		$entityLookup = EntityDataTestProvider::getMockRepo();
+		$entityLookup = EntityDataTestProvider::getMockRepository();
 
 		$idParser = new BasicEntityIdParser(); // we only test for items and properties here.
 

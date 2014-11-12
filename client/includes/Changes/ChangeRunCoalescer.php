@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Changes;
 
+use Exception;
 use MWException;
 use Wikibase\Change;
 use Wikibase\EntityChange;
@@ -19,7 +20,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
  */
 class ChangeRunCoalescer implements ChangeListTransformer {
 
@@ -71,20 +71,20 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 			$coalesced = array_merge( $coalesced, $entityChanges );
 		}
 
-		usort( $coalesced, 'Wikibase\Client\Changes\ChangeRunCoalescer::compareChangesByTimestamp' );
+		usort( $coalesced, array( $this, 'compareChangesByTimestamp' ) );
 
-		wfDebugLog( __CLASS__, __METHOD__ . ": coalesced "
-			. count( $changes ) . " into " . count( $coalesced ) . " changes"  );
+		wfDebugLog( __CLASS__, __METHOD__ . ': coalesced '
+			. count( $changes ) . ' into ' . count( $coalesced ) . ' changes'  );
 
 		wfProfileOut( __METHOD__ );
 		return $coalesced;
 	}
 
-
 	/**
 	 * Group changes by the entity they were applied to.
 	 *
 	 * @param EntityChange[] $changes
+	 *
 	 * @return EntityChange[][] an associative array using entity IDs for keys. Associated with each
 	 *         entity ID is the list of changes performed on that entity.
 	 */
@@ -211,6 +211,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 * Interleaved changes to different items will break runs.
 	 *
 	 * @param EntityChange[] $changes
+	 *
 	 * @return EntityChange[] grouped changes
 	 */
 	private function coalesceRuns( array $changes ) {
@@ -270,8 +271,8 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 
 				$currentRun[] = $change;
 				// skip any change that failed to process in some way (bug 49417)
-			} catch ( \Exception $e ) {
-				wfLogWarning( __METHOD__ . ':' . $e->getMessage() );
+			} catch ( Exception $ex ) {
+				wfLogWarning( __METHOD__ . ':' . $ex->getMessage() );
 			}
 		}
 
@@ -298,7 +299,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 *
 	 * @return int
 	 */
-	public static function compareChangesByTimestamp( Change $a, Change $b ) {
+	public function compareChangesByTimestamp( Change $a, Change $b ) {
 		//NOTE: beware https://bugs.php.net/bug.php?id=50688 !
 
 		if ( $a->getTime() > $b->getTime() ) {
