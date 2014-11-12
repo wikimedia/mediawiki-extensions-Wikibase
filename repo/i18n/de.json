@@ -303,6 +303,7 @@
 	"wikibase-item-summary-wbsetclaim-update-references": "{{PLURAL:$4|Eine Referenz|$4 Referenzen}} {{PLURAL:$3|einer Aussage|von Aussagen}} geändert",
 	"wikibase-item-summary-wbsetclaim-update-rank": "Den Rang der {{PLURAL:$3|Aussage|Aussagen}} geändert",
 	"wikibase-item-summary-clientsitelink-update": "Seite von [$3] nach [$4] verschoben",
+	"wikibase-item-summary-clientsitelink-remove": "Seite auf [$3] gelöscht",
 	"wikibase-item-summary-wbsetqualifier-add": "{{PLURAL:$1|Qualifikator|Qualifikatoren}} hinzugefügt",
 	"wikibase-item-summary-wbsetqualifier-update": "{{PLURAL:$1|Qualifikator|Qualifikatoren}} geändert",
 	"wikibase-item-summary-wbremovequalifiers-remove": "{{PLURAL:$1|Qualifikator|Qualifikatoren}} entfernt",
