@@ -2,12 +2,11 @@
 
 namespace Wikibase\Client\Changes;
 
+use Exception;
 use InvalidArgumentException;
 use MWException;
 use Title;
 use Wikibase\Change;
-use Wikibase\Client\Changes\AffectedPagesFinder;
-use Wikibase\Client\Changes\PageUpdater;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\EntityChange;
@@ -310,7 +309,7 @@ class ChangeHandler {
 
 				$currentRun[] = $change;
 			// skip any change that failed to process in some way (bug 49417)
-			} catch ( \Exception $e ) {
+			} catch ( Exception $e ) {
 				wfLogWarning( __METHOD__ . ':' . $e->getMessage() );
 			}
 		}
@@ -349,7 +348,7 @@ class ChangeHandler {
 			$coalesced = array_merge( $coalesced, $entityChanges );
 		}
 
-		usort( $coalesced, 'Wikibase\Client\Changes\ChangeHandler::compareChangesByTimestamp' );
+		usort( $coalesced, array( $this, 'compareChangesByTimestamp' ) );
 
 		wfDebugLog( __CLASS__, __METHOD__ . ": coalesced "
 			. count( $changes ) . " into " . count( $coalesced ) . " changes"  );
@@ -364,9 +363,9 @@ class ChangeHandler {
 	 * @param Change $a
 	 * @param Change $b
 	 *
-	 * @return Mixed
+	 * @return int
 	 */
-	public static function compareChangesByTimestamp( Change $a, Change $b ) {
+	public function compareChangesByTimestamp( Change $a, Change $b ) {
 		//NOTE: beware https://bugs.php.net/bug.php?id=50688 !
 
 		if ( $a->getTime() > $b->getTime() ) {
@@ -552,7 +551,7 @@ class ChangeHandler {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \Wikibase\EntityChange $change The Change that caused the update
+	 * @param EntityChange $change The Change that caused the update
 	 *
 	 * @return array|boolean an array of RC attributes,
 	 *         or false if the change does not provide edit meta data
@@ -644,7 +643,7 @@ class ChangeHandler {
 	 *
 	 * @param EntityChange $change the change to get a comment for
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 * @return array
 	 */
 	public function getEditComment( EntityChange $change ) {
@@ -659,7 +658,7 @@ class ChangeHandler {
 
 		$editComment = $commentCreator->getEditComment( $siteLinkDiff, $action, $comment );
 		if( is_array( $editComment ) && !isset( $editComment['message'] ) ) {
-			throw new \MWException( 'getEditComment returned an empty comment' );
+			throw new MWException( 'getEditComment returned an empty comment' );
 		}
 
 		return $editComment;

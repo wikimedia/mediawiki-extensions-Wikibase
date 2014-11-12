@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\UpdateRepoOnMove;
@@ -122,4 +122,5 @@ class UpdateRepoOnMoveTest extends \MediaWikiTestCase {
 
 		$updateRepo->injectJob( $jobQueueGroupMock );
 	}
+
 }
