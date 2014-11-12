@@ -66,11 +66,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.templates' => $moduleTemplate + array(
-			'class' => 'Wikibase\TemplateModule',
-			'scripts' => 'templates.js',
-		),
-
 		'wikibase' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.js',
@@ -152,17 +147,6 @@ return call_user_func( function() {
 				'jquery.effects.blind',
 				'jquery.inputautoexpand',
 				'jquery.ui.widget',
-			),
-		),
-
-		'jquery.ui.TemplatedWidget' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.ui/jquery.ui.TemplatedWidget.js',
-			),
-			'dependencies' => array(
-				'wikibase.templates',
-				'jquery.ui.widget',
-				'util.inherit',
 			),
 		),
 

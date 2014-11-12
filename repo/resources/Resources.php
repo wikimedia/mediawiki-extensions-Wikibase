@@ -25,6 +25,17 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'jquery.ui.TemplatedWidget' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.TemplatedWidget.js',
+			),
+			'dependencies' => array(
+				'wikibase.templates',
+				'jquery.ui.widget',
+				'util.inherit',
+			),
+		),
+
 		'jquery.wikibase.entitysearch' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.entitysearch.js',
@@ -37,6 +48,11 @@ return call_user_func( function() {
 				'jquery.ui.ooMenu',
 				'jquery.wikibase.entityselector',
 			),
+		),
+
+		'wikibase.templates' => $moduleTemplate + array(
+			'class' => 'Wikibase\TemplateModule',
+			'scripts' => 'templates.js',
 		),
 
 		'wikibase.ui.entityViewInit' => $moduleTemplate + array(
