@@ -15,6 +15,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
@@ -85,7 +86,8 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$entityTitleLookup,
+			'en'
 		);
 
 		$claimHtmlGenerator = new ClaimHtmlGenerator(
@@ -93,7 +95,7 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$entityTitleLookup
 		);
 
-		$html = $claimHtmlGenerator->getHtmlForClaim( $claim, array(), 'edit' );
+		$html = $claimHtmlGenerator->getHtmlForClaim( $claim, new EntityInfo( array() ), 'edit' );
 
 		foreach( $patterns as $message => $pattern ) {
 			$this->assertRegExp( $pattern, $html, $message );

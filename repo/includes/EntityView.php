@@ -6,6 +6,7 @@ use Html;
 use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\TextInjector;
@@ -81,12 +82,12 @@ abstract class EntityView {
 	 * @since 0.1
 	 *
 	 * @param EntityRevision $entityRevision the entity to render
-	 * @param array obtained from EntityInfoBuilder::getEntityInfo
+	 * @param EntityInfo $entityInfo from EntityInfoBuilder::getEntityInfo
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string HTML
 	 */
-	public function getHtml( EntityRevision $entityRevision, array $entityInfo, $editable = true ) {
+	public function getHtml( EntityRevision $entityRevision, EntityInfo $entityInfo, $editable = true ) {
 		$entity = $entityRevision->getEntity();
 
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
@@ -133,13 +134,13 @@ if ( $ ) {
 	 * Builds and returns the HTML to be put into the main container of an entity's HTML structure.
 	 *
 	 * @param EntityRevision $entityRevision
-	 * @param array obtained from EntityInfoBuilder::getEntityInfo
+	 * @param EntityInfo $entityInfo obtained from EntityInfoBuilder::getEntityInfo
 	 * @param bool $editable
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	protected function getMainHtml( EntityRevision $entityRevision, array $entityInfo,
+	protected function getMainHtml( EntityRevision $entityRevision, EntityInfo $entityInfo,
 		$editable = true
 	) {
 		wfProfileIn( __METHOD__ );

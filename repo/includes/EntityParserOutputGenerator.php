@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
@@ -211,7 +212,7 @@ class EntityParserOutputGenerator {
 	 * set of entity IDs.
 	 *
 	 * @param EntityId[] $entityIds
-	 * @return array obtained from EntityInfoBuilder::getEntityInfo
+	 * @return EntityInfo
 	 */
 	private function getEntityInfoForJsConfig( array $entityIds ) {
 		wfProfileIn( __METHOD__ );
@@ -241,7 +242,7 @@ class EntityParserOutputGenerator {
 
 	/**
 	 * @param EntityId[] $entityIds
-	 * @return array obtained from EntityInfoBuilder::getEntityInfo
+	 * @return EntityInfo
 	 */
 	private function getEntityInfoForView( array $entityIds ) {
 		$propertyIds = array_filter( $entityIds, function ( EntityId $id ) {
