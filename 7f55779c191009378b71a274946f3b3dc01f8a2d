@@ -16,6 +16,24 @@
       "revId": "7f55779c191009378b71a274946f3b3dc01f8a2d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_60d14857",
+        "filename": "repo/includes/globalFunctions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-12T13:29:52Z",
+      "side": 1,
+      "message": "This is not a class, so I would not start it with an upper-case letter. Why should this need a MEDIAWIKI check? Only four files in Wikibase.git have that.",
+      "parentUuid": "6e936f18_009c04b7",
+      "revId": "7f55779c191009378b71a274946f3b3dc01f8a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
