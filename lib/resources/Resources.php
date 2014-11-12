@@ -1,8 +1,5 @@
 <?php
 
-use Wikibase\Client\WikibaseClient;
-use Wikibase\Repo\WikibaseRepo;
-
 /**
  * @licence GNU GPL v2+
  * @author Daniel Werner
@@ -23,22 +20,6 @@ return call_user_func( function() {
 	);
 
 	$modules = array(
-
-		'mw.config.values.wbDataTypes' => $moduleTemplate + array(
-			'class' => 'DataTypes\DataTypesModule',
-			'datatypefactory' => function() {
-				// TODO: relative uglynes here! Get rid of this method!
-				if ( defined( 'WB_VERSION' ) ) { // repo mode
-					$wikibase = WikibaseRepo::getDefaultInstance();
-				} elseif ( defined( 'WBC_VERSION' ) ) { // client mode
-					$wikibase = WikibaseClient::getDefaultInstance();
-				} else {
-					throw new \RuntimeException( "Neither repo nor client found!" );
-				}
-				return $wikibase->getDataTypeFactory();
-			},
-			'datatypesconfigvarname' => 'wbDataTypes',
-		),
 
 		'mw.config.values.wbSiteDetails' => $moduleTemplate + array(
 			'class' => 'Wikibase\SitesModule',
@@ -129,18 +110,6 @@ return call_user_func( function() {
 				'jquery.effects.blind',
 				'jquery.inputautoexpand',
 				'jquery.ui.widget',
-			),
-		),
-
-		'wikibase.dataTypes' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.dataTypes/wikibase.dataTypes.js',
-			),
-			'dependencies' => array(
-				'dataTypes.DataType',
-				'dataTypes.DataTypeStore',
-				'mw.config.values.wbDataTypes',
-				'wikibase',
 			),
 		),
 

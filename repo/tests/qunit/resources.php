@@ -36,6 +36,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.dataTypes.tests' => $moduleBase + array(
+			'scripts' => array(
+				'dataTypes/wikibase.dataTypes.tests.js',
+			),
+			'dependencies' => array(
+				'dataTypes.DataTypeStore',
+				'wikibase.dataTypes',
+			),
+		),
+
 		'wikibase.ValueViewBuilder.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.ValueViewBuilder.tests.js'
@@ -45,7 +55,6 @@ return call_user_func( function() {
 				'wikibase.ValueViewBuilder'
 			)
 		),
-
 	);
 
 	return array_merge(
