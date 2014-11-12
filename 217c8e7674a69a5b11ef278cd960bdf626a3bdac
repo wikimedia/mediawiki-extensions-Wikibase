@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_e689f0cb",
+        "filename": "repo/tests/phpunit/includes/UpdateRepo/UpdateRepoOnDeleteJobTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-12T18:32:59Z",
+      "side": 1,
+      "message": "You\u0027d need to inject a UserFactory to get around that. Came up with TitleFactory for the exact same reason.",
+      "revId": "217c8e7674a69a5b11ef278cd960bdf626a3bdac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
