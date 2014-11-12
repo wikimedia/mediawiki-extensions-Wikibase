@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\Changes;
 
 use Title;
-use Wikibase\PageUpdater;
+use Wikibase\Client\Changes\PageUpdater;
 
 /**
  * Mock version of the service object for triggering different kinds of page updates

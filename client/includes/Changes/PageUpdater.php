@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\Changes;
 
 /**
  * Service interface for triggering different kinds of page updates

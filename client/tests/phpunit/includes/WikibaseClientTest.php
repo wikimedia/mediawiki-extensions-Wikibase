@@ -1,17 +1,17 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client;
 
 use Language;
 use MediaWikiSite;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\SettingsArray;
+use Wikibase\Test\MockSiteStore;
 
 /**
- * @covers Wikibase\Client\WikibaseClient
+ * @covers Wikibase\Client\Changes\WikibaseClient
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -200,7 +200,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetChangeHandler() {
 		$handler = $this->getDefaultInstance()->getChangeHandler();
-		$this->assertInstanceOf( 'Wikibase\ChangeHandler', $handler );
+		$this->assertInstanceOf( 'Wikibase\Client\Changes\ChangeHandler', $handler );
 	}
 
 	public function testGetParserFunctionRegistrant() {

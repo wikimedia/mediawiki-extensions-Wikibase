@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\WikibaseClient;
 
 /**

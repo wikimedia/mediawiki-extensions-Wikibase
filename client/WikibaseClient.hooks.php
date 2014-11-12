@@ -24,6 +24,7 @@ use SplFileInfo;
 use Title;
 use UnexpectedValueException;
 use User;
+use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\ChangesPageWikibaseFilterHandler;
