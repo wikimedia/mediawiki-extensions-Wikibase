@@ -20,9 +20,9 @@ use Wikibase\Repo\WikibaseRepo;
 class PropertyView extends EntityView {
 
 	/**
-	 * @see EntityView::getInnerHtml
+	 * @see EntityView::getMainHtml
 	 */
-	public function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
+	public function getMainHtml( EntityRevision $entityRevision, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
 		$property = $entityRevision->getEntity();
@@ -31,7 +31,7 @@ class PropertyView extends EntityView {
 			throw new InvalidArgumentException( '$entityRevision must contain a Property.' );
 		}
 
-		$html = parent::getInnerHtml( $entityRevision, $editable );
+		$html = parent::getMainHtml( $entityRevision, $editable );
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {

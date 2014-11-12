@@ -97,7 +97,8 @@ abstract class EntityView {
 			$entityId,
 			$this->language->getCode(),
 			$this->language->getDir(),
-			$this->getInnerHtml( $entityRevision, $editable )
+			$this->getMainHtml( $entityRevision, $editable ),
+			$this->getSideHtml( $entityRevision, $editable )
 		);
 
 		if ( $editable ) {
@@ -128,8 +129,7 @@ if ( $ ) {
 	}
 
 	/**
-	 * Builds and returns the inner HTML for representing a whole WikibaseEntity. The difference to getHtml() is that
-	 * this does not group all the HTMl within one parent node as one entity.
+	 * Builds and returns the HTML to be put into the main container of an entity's HTML structure.
 	 *
 	 * @param EntityRevision $entityRevision
 	 * @param bool $editable
@@ -137,7 +137,7 @@ if ( $ ) {
 	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	protected function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
+	protected function getMainHtml( EntityRevision $entityRevision, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
 		$entity = $entityRevision->getEntity();
@@ -148,6 +148,17 @@ if ( $ ) {
 
 		wfProfileOut( __METHOD__ );
 		return $html;
+	}
+
+	/**
+	 * Builds and Returns HTML to put into the sidebar of the entity's HTML structure.
+	 *
+	 * @param EntityRevision $entityRevision
+	 * @param bool $editable
+	 * @return string
+	 */
+	protected function getSideHtml( EntityRevision $entityRevision, $editable = true ) {
+		return '';
 	}
 
 	/**

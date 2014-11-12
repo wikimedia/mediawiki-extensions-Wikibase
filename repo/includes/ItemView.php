@@ -21,20 +21,27 @@ use Wikibase\Repo\WikibaseRepo;
 class ItemView extends EntityView {
 
 	/**
-	 * @see EntityView::getInnerHtml
+	 * @see EntityView::getMainHtml
 	 */
-	protected function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
+	protected function getMainHtml( EntityRevision $entityRevision, $editable = true ) {
 		$item = $entityRevision->getEntity();
 
 		if ( !( $item instanceof Item ) ) {
 			throw new InvalidArgumentException( '$entityRevision must contain an Item.' );
 		}
 
-		$html = parent::getInnerHtml( $entityRevision, $editable );
+		$html = parent::getMainHtml( $entityRevision, $editable );
 		$html .= $this->claimsView->getHtml( $item->getClaims(), 'wikibase-statements' );
-		$html .= $this->getHtmlForSiteLinks( $item, $editable );
 
 		return $html;
+	}
+
+	/**
+	 * @see EntityView::getSideHtml
+	 */
+	protected function getSideHtml( EntityRevision $entityRevision, $editable = true ) {
+		$item = $entityRevision->getEntity();
+		return $this->getHtmlForSiteLinks( $item, $editable );
 	}
 
 	/**

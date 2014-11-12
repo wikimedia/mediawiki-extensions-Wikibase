@@ -67,14 +67,6 @@ h2.wb-section-heading {
 	width: 100%;
 }
 
-/* entity container */
-.wikibase-entityview {
-	width: 100%;
-	max-width: 65em;
-	float: left; /* float left to let widget container float right next to it */
-	clear: both; /* wrap around success message */
-}
-
 .wikibase-entityview input {
 	/* prevent browsers from applying their default styles */
 	padding: 0 2px;

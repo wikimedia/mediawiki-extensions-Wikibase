@@ -1,0 +1,18 @@
+/**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.wikibase-entityview {
+	width: 100%;
+	float: left; /* float left to let widget container float right next to it */
+	clear: both; /* wrap around success message */
+}
+
+.wikibase-entityview > * {
+	float: left;
+	max-width: 65em;
+}
+
+.wikibase-entityview .wikibase-entityview-main {
+	margin-right: 2em;
+}
