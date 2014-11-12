@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_056656ea",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-12T09:42:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_4503fe0f",
+      "revId": "3212d7bb6f9fa139e51754bdf0573150f25eead0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_a502020b",
         "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_256352da",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-12T09:42:08Z",
+      "side": 1,
+      "message": "Ok... fixed that",
+      "parentUuid": "6e936f18_a502020b",
+      "revId": "3212d7bb6f9fa139e51754bdf0573150f25eead0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_65087a2b",
         "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2014-11-12T09:19:23Z",
       "side": 1,
       "message": "Empty",
+      "revId": "3212d7bb6f9fa139e51754bdf0573150f25eead0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_656ddac6",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-12T09:42:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_65087a2b",
       "revId": "3212d7bb6f9fa139e51754bdf0573150f25eead0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
