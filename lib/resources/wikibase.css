@@ -303,6 +303,7 @@ div .wb-snak-value span.error.wb-format-error {
 
 .wb-claimlistview > .wikibase-toolbar-wrapper {
 	background-color: #F8F8F8;
+	border-top: 1px dashed #AAA;
 	display: block;
 	float: left;
 	position: relative;
@@ -525,6 +526,10 @@ div .wb-snak-value span.error.wb-format-error {
 	width: 100%;
 	position: relative;
 	padding-bottom: 1em;
+}
+
+.wb-statementview:last-child {
+	border-bottom: 0;
 }
 
 .wb-statementview .wb-statement-rank {
