@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_a5f442ef",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.fingerprintview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-12T10:08:15Z",
+      "side": 1,
+      "message": "value.aliases is not marked as optional in the documentation. value itself is, though, so I guess you have to check if self.options.value is defined and then take self.options.value.aliases (because that has to be defined if value is given).",
+      "revId": "793198046d21a3e2620fcb349ba3deeb544efc9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
