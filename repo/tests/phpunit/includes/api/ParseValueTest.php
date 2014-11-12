@@ -18,7 +18,7 @@ namespace Wikibase\Test\Api;
  */
 class ParseValueTest extends WikibaseApiTestCase {
 
-	public function setUp() {
+	protected function setUp() {
 		$this->mergeMwGlobalArrayValue(
 			'wgValueParsers',
 			array( 'decimal' => 'ValueParsers\DecimalParser' )

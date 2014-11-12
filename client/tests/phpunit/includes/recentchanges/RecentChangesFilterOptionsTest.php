@@ -17,7 +17,7 @@ use Wikibase\Client\WikibaseClient;
  * @author Marius Hoch < hoo@online.de >
  */
 class RecentChangesFilterOptionsTest extends \MediaWikiTestCase {
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$user = User::newFromName( 'RecentChangesFilterOptionsTest' );

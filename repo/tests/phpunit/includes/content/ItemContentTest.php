@@ -40,7 +40,7 @@ use Wikibase\Repo\Content\EntityContentDiff;
  */
 class ItemContentTest extends EntityContentTest {
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 	}
 

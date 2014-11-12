@@ -22,7 +22,7 @@ use WikiPage;
  */
 class ViewEntityActionTest extends ActionTestCase {
 
-	public function setUp() {
+	protected function setUp() {
 		// NOTE: use a language here for which we actually have labels etc
 		$this->languageCode = 'de';
 

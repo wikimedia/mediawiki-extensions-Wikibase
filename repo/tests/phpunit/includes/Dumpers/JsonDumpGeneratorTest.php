@@ -40,7 +40,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public $serializationOptions = null;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->serializerFactory = new SerializerFactory();

@@ -18,7 +18,7 @@ use Wikibase\Repo\Specials\SpecialListDatatypes;
  */
 class SpecialListDataTypesTest extends SpecialPageTestBase {
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->setMwGlobals( array(

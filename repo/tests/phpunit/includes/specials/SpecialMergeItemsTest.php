@@ -47,7 +47,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 */
 	private $entityModificationTestHelper = null;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->entityModificationTestHelper = new EntityModificationTestHelper();

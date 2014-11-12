@@ -27,7 +27,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	/* @var MockRepository */
 	protected $repo;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 		$this->repo = new MockRepository();
 	}
