@@ -70,7 +70,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			->method( 'getPagesUsing' )
 			->will( $this->returnValue( new ArrayIterator( $usage ) ) );
 
-		$namespaceChecker = $this->getMockBuilder( '\Wikibase\NamespaceChecker' )
+		$namespaceChecker = $this->getMockBuilder( 'Wikibase\NamespaceChecker' )
 							->disableOriginalConstructor()->getMock();
 
 		$namespaceChecker->expects( $this->any() )
