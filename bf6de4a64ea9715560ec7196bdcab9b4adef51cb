@@ -34,6 +34,40 @@
       "revId": "bf6de4a64ea9715560ec7196bdcab9b4adef51cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_9abf20f7",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-12T19:10:05Z",
+      "side": 1,
+      "message": "This is the unrelated change I\u0027m talking about. It causes a big number of changed lines in this patch. Can you please split this? And explain what exactly it does?",
+      "revId": "bf6de4a64ea9715560ec7196bdcab9b4adef51cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_fa450419",
+        "filename": "client/resources/wikibase.client.linkitem.init.css",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-12T19:10:05Z",
+      "side": 1,
+      "message": "Just no. Adding dead links to the output is completely pointless if all you can do is hiding them. Users with no JS and no CSS will still see them and be confused. Screenreaders are pretty good these days but there are still some not so good out there.",
+      "revId": "bf6de4a64ea9715560ec7196bdcab9b4adef51cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
