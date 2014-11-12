@@ -160,7 +160,7 @@ class MergeItemsTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	function testMergeRequest( $pre1, $pre2, $expectedFrom, $expectedTo, $ignoreConflicts = null ){
+	public function testMergeRequest( $pre1, $pre2, $expectedFrom, $expectedTo, $ignoreConflicts = null ){
 		// -- set up params ---------------------------------
 		$params = array(
 			'action' => 'wbmergeitems',
