@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_cb2ddd8d",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-12T15:05:14Z",
+      "side": 1,
+      "message": "superfluous space, superfluous comma.",
+      "revId": "45915c9df2522b4c5baaf3d94a355f952b54104e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8b4b5562",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-12T15:05:14Z",
+      "side": 1,
+      "message": "superfluous space, superfluous comma.",
+      "revId": "45915c9df2522b4c5baaf3d94a355f952b54104e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_ab50910e",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-12T15:05:14Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "45915c9df2522b4c5baaf3d94a355f952b54104e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
