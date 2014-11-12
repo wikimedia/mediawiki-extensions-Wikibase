@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
-use Site;
+use Diff\Differ\MapDiffer;
 use Title;
 use Wikibase\Change;
 use Wikibase\Client\Changes\AffectedPagesFinder;
@@ -12,10 +12,8 @@ use Wikibase\Client\Changes\PageUpdater;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
@@ -39,54 +37,45 @@ use Wikibase\Test\TestChanges;
  */
 class ChangeHandlerTest extends \MediaWikiTestCase {
 
-	/** @var Site $site */
-	protected $site;
-
-	protected function setUp() {
-		parent::setUp();
-
-		$this->site = new \MediaWikiSite();
-		$this->site->setGlobalId( 'enwiki' );
-		$this->site->setLanguageCode( 'en' );
-		$this->site->addNavigationId( 'en' );
-	}
-
-	private function newChangeHandler( PageUpdater $updater = null, array $entities = array() ) {
-		$repo = $this->getMockRepo( $entities );
-
-		$usageLookup = $this->getUsageLookup( $repo );
-		$titleFactory = $this->getTitleFactory( $entities );
-
-		$transformer = $this->getMock( 'Wikibase\Client\Changes\ChangeListTransformer' );
-
-		$transformer->expects( $this->any() )
-			->method( 'transformChangeList' )
-			->will( $this->returnArgument( 0 ) );
-
+	private function getAffectedPagesFinder( array $pageNamesPerItemId ) {
+		$mockRepository = $this->getMockRepository( $pageNamesPerItemId );
+		$usageLookup = $this->getUsageLookup( $mockRepository );
 		$namespaceChecker = new NamespaceChecker( array(), array( NS_MAIN ) );
+		$titleFactory = $this->getTitleFactory( $pageNamesPerItemId );
 
 		// @todo: mock the finder directly
-		$affectedPagesFinder = new AffectedPagesFinder(
+		return new AffectedPagesFinder(
 			$usageLookup,
 			$namespaceChecker,
 			$titleFactory,
 			'enwiki',
 			false
 		);
-
-		$handler = new ChangeHandler(
-			$affectedPagesFinder,
-			$updater ? : new MockPageUpdater(),
-			$transformer,
-			'enwiki',
-			true,
-			true
-		);
-
-		return $handler;
 	}
 
-	private function getMockRepo( array $entities = array() ) {
+	private function getChangeListTransformer() {
+		$transformer = $this->getMock( 'Wikibase\Client\Changes\ChangeListTransformer' );
+
+		$transformer->expects( $this->any() )
+			->method( 'transformChangeList' )
+			->willReturnArgument( 0 );
+
+		return $transformer;
+	}
+
+	private function getChangeHandler( array $pageNamesPerItemId = array(), PageUpdater $pageUpdater = null ) {
+		$affectedPagesFinder = $this->getAffectedPagesFinder( $pageNamesPerItemId );
+		$changeListTransformer = $this->getChangeListTransformer();
+
+		return new ChangeHandler(
+			$affectedPagesFinder,
+			$pageUpdater ?: new MockPageUpdater(),
+			$changeListTransformer,
+			'enwiki'
+		);
+	}
+
+	private function getMockRepository( array $pageNamesPerItemId ) {
 		$repo = new MockRepository();
 
 		// entity 1, revision 11
@@ -125,7 +114,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$entity1->setDescription( 'en', 'the second' );
 		$repo->putEntity( $entity1, 1211 );
 
-		$this->updateMockRepo( $repo, $entities );
+		$this->updateMockRepo( $repo, $pageNamesPerItemId );
 
 		return $repo;
 	}
@@ -174,7 +163,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$handleChangeCallCount = 0;
 		$handleChangesCallCount = 0;
 
-		$changeHandler = $this->newChangeHandler();
+		$changeHandler = $this->getChangeHandler();
 
 		$changeHandler->handleChanges( $changes );
 
@@ -185,9 +174,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		unset( $handleChangesCallCount );
 	}
 
-	// ==========================================================================================
-
-	public static function provideGetActions() {
+	public function provideGetActions() {
 		$changes = TestChanges::getChanges();
 
 		$none = 0;
@@ -263,17 +250,17 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	 * @dataProvider provideGetActions
 	 */
 	public function testGetActions( Change $change, $expected, $unexpected ) {
-		$handler = $this->newChangeHandler();
+		$handler = $this->getChangeHandler();
 		$actions = $handler->getActions( $change );
 
-		$this->assertEquals( $expected, ( $actions & $expected ), "expected actions" );
-		$this->assertEquals( 0, ( $actions & $unexpected ), "unexpected actions" );
+		$this->assertEquals( $expected, ( $actions & $expected ), 'expected actions' );
+		$this->assertEquals( 0, ( $actions & $unexpected ), 'unexpected actions' );
 	}
 
-	public static function provideGetEditComment() {
+	public function provideGetEditComment() {
 		$changes = TestChanges::getChanges();
 
-		$dummy = \Title::newFromText( "Dummy" );
+		$dummy = Title::newFromText( 'Dummy' );
 
 		return array(
 			array( // #0
@@ -373,27 +360,26 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	 * @example if Q100 has a link enwiki => 'Emmy',
 	 * then 100 => 'Emmy' will be in the map returned by this method.
 	 *
-	 * @param array[] $entities Assoc array mapping entity IDs to lists of sitelinks.
-	 * This is the form expected by the $entities parameter of testGetPagesToUpdate, etc.
+	 * @param array[] $pageNamesPerItemId Assoc array mapping entity IDs to lists of sitelinks.
 	 *
 	 * @return string[]
 	 */
-	private function getFakePageIdMap( array $entities ) {
+	private function getFakePageIdMap( array $pageNamesPerItemId ) {
 		$titlesByPageId = array();
-		$siteId = $this->site->getGlobalId();
+		$siteId = 'enwiki';
 
-		foreach ( $entities as $entityKey => $links ) {
-			$id = new ItemId( $entityKey );
+		foreach ( $pageNamesPerItemId as $idString => $pageNames ) {
+			$itemId = new ItemId( $idString );
 
 			// If $links[0] is set, it's considered a link to the local wiki.
 			// The index 0 is effectively an alias for $siteId;
-			if ( isset( $links[0] ) ) {
-				$links[$siteId] = $links[0];
+			if ( isset( $pageNames[0] ) ) {
+				$pageNames[$siteId] = $pageNames[0];
 			}
 
-			if ( isset( $links[$siteId] ) ) {
-				$pageId = $id->getNumericId();
-				$titlesByPageId[$pageId] = $links[$siteId];
+			if ( isset( $pageNames[$siteId] ) ) {
+				$pageId = $itemId->getNumericId();
+				$titlesByPageId[$pageId] = $pageNames[$siteId];
 			}
 		}
 
@@ -404,29 +390,28 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	 * Title factory, using spoofed local page ids that correspond to the ids of items linked to
 	 * the respective page (see getUsageLookup).
 	 *
-	 * @param array[] $entities Assoc array mapping entity IDs to lists of sitelinks.
-	 * This is the form expected by the $entities parameter of testGetPagesToUpdate, etc.
+	 * @param array[] $pageNamesPerItemId Assoc array mapping entity IDs to lists of sitelinks.
 	 *
 	 * @return TitleFactory
 	 */
-	private function getTitleFactory( array $entities ) {
-		$titlesById = $this->getFakePageIdMap( $entities );
+	private function getTitleFactory( array $pageNamesPerItemId ) {
+		$titlesById = $this->getFakePageIdMap( $pageNamesPerItemId );
 
 		$titleFactory = $this->getMock( 'Wikibase\Client\Store\TitleFactory' );
 
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromID' )
-			->will( $this->returnCallback( function( $id ) use ( $titlesById ) {
+			->willReturnCallback( function( $id ) use ( $titlesById ) {
 				if ( isset( $titlesById[$id] ) ) {
 					return Title::newFromText( $titlesById[$id] );
 				} else {
 					throw new StorageException( 'Unknown ID: ' . $id );
 				}
-			} ) );
+			} );
 
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromText' )
-			->will( $this->returnCallback( function( $text, $defaultNs = NS_MAIN ) {
+			->willReturnCallback( function( $text, $defaultNs = NS_MAIN ) {
 				$title = Title::newFromText( $text, $defaultNs );
 
 				if ( !$title ) {
@@ -434,7 +419,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 				}
 
 				return $title;
-			} ) );
+			} );
 
 		return $titleFactory;
 	}
@@ -443,24 +428,22 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	 * Returns a usage lookup based on $siteLinklookup.
 	 * Local page IDs are spoofed using the numeric item ID as the local page ID.
 	 *
-	 * @param SiteLinkLookup $siteLinklookup
+	 * @param SiteLinkLookup $siteLinkLookup
 	 *
 	 * @return UsageLookup
 	 */
-	private function getUsageLookup( SiteLinkLookup $siteLinklookup ) {
-		$site = $this->site;
-
+	private function getUsageLookup( SiteLinkLookup $siteLinkLookup ) {
 		$usageLookup = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
 		$usageLookup->expects( $this->any() )
 			->method( 'getPagesUsing' )
-			->will( $this->returnCallback(
-				function( $ids ) use ( $siteLinklookup, $site ) {
+			->willReturnCallback(
+				function( $ids ) use ( $siteLinkLookup ) {
 					$pages = array();
 
 					foreach ( $ids as $id ) {
-						$links = $siteLinklookup->getSiteLinksForItem( $id );
+						$links = $siteLinkLookup->getSiteLinksForItem( $id );
 						foreach ( $links as $link ) {
-							if ( $link->getSiteId() == $site->getGlobalId() ) {
+							if ( $link->getSiteId() === 'enwiki' ) {
 								// we use the numeric item id as the fake page id of the local page!
 								$pages[] = $id->getNumericId();
 							}
@@ -468,7 +451,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 					}
 
 					return new ArrayIterator( $pages );
-				} ) );
+				} );
 
 		return $usageLookup;
 	}
@@ -476,8 +459,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetEditComment
 	 */
-	public function testGetEditComment( Change $change, \Title $title, $entities, $expected ) {
-		$handler = $this->newChangeHandler( null, $entities );
+	public function testGetEditComment( Change $change, Title $title, $pageNamesPerItemId, $expected ) {
+		$handler = $this->getChangeHandler( $pageNamesPerItemId );
 		$comment = $handler->getEditComment( $change, $title );
 
 		if ( is_array( $comment ) && is_array( $expected ) ) {
@@ -487,7 +470,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function provideGetPagesToUpdate() {
+	public function provideGetPagesToUpdate() {
 		$changes = TestChanges::getChanges();
 
 		return array(
@@ -596,26 +579,28 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		);
 	}
 
-	private function updateMockRepo( MockRepository $repo, $entities ) {
-		foreach ( $entities as $id => $siteLinks ) {
-			if ( !( $siteLinks instanceof Entity ) ) {
-				$entity = Item::newEmpty();
-				$entity->setId( new ItemId( $id ) );
+	/**
+	 * @param MockRepository $mockRepository
+	 * @param array $pageNamesPerItemId Associative array of item id string => either Item object
+	 * or array of site id => page name.
+	 */
+	private function updateMockRepo( MockRepository $mockRepository, array $pageNamesPerItemId ) {
+		foreach ( $pageNamesPerItemId as $idString => $pageNames ) {
+			if ( is_array( $pageNames ) ) {
+				$item = Item::newEmpty();
+				$item->setId( new ItemId( $idString ) );
 
-				foreach ( $siteLinks as $siteId => $page ) {
-					if ( is_int( $siteId ) ) {
-						$siteIdentifier = $this->site->getGlobalId();
-					} else {
-						$siteIdentifier = $siteId;
+				foreach ( $pageNames as $siteId => $pageName ) {
+					if ( !is_string( $siteId ) ) {
+						$siteId = 'enwiki';
 					}
-
-					$entity->addSiteLink( new SiteLink( $siteIdentifier, $page ) );
+					$item->getSiteLinkList()->addNewSiteLink( $siteId, $pageName );
 				}
 			} else {
-				$entity = $siteLinks;
+				$item = $pageNames;
 			}
 
-			$repo->putEntity( $entity );
+			$mockRepository->putEntity( $item );
 		}
 	}
 
@@ -631,8 +616,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetPagesToUpdate
 	 */
-	public function testGetPagesToUpdate( Change $change, $entities, array $expected ) {
-		$handler = $this->newChangeHandler( null, $entities );
+	public function testGetPagesToUpdate( Change $change, $pageNamesPerItemId, array $expected ) {
+		$handler = $this->getChangeHandler( $pageNamesPerItemId );
 
 		$toUpdate = $handler->getPagesToUpdate( $change );
 		$toUpdate = $this->titles2strings( $toUpdate );
@@ -640,11 +625,11 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $expected, $toUpdate );
 	}
 
-	public static function provideUpdatePages() {
+	public function provideUpdatePages() {
 		$rc = WikibaseClient::getDefaultInstance()->getSettings()
 				->getSetting( 'injectRecentChanges' );
 
-		$pto = self::provideGetPagesToUpdate();
+		$pto = $this->provideGetPagesToUpdate();
 
 		$cases = array();
 
@@ -655,7 +640,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 			$cases[] = array(
 				$case[0], // $change
-				$case[1], // $entities
+				$case[1],
 				array(    // $expected // todo: depend on getAction()
 					'purgeParserCache' => $updated,
 					'purgeWebCache' => $updated,
@@ -671,9 +656,9 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideUpdatePages
 	 */
-	public function testUpdatePages( Change $change, $entities, array $expected ) {
+	public function testUpdatePages( Change $change, $pageNamesPerItemId, array $expected ) {
 		$updater = new MockPageUpdater();
-		$handler = $this->newChangeHandler( $updater, $entities );
+		$handler = $this->getChangeHandler( $pageNamesPerItemId, $updater );
 
 		$toUpdate = $handler->getPagesToUpdate( $change );
 		$actions = $handler->getActions( $change );
@@ -696,16 +681,12 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function provideHandleChange() {
-		return self::provideUpdatePages();
-	}
-
 	/**
-	 * @dataProvider provideHandleChange
+	 * @dataProvider provideUpdatePages
 	 */
-	public function testHandleChange( Change $change, $entities, array $expected ) {
+	public function testHandleChange( Change $change, $pageNamesPerItemId, array $expected ) {
 		$updater = new MockPageUpdater();
-		$handler = $this->newChangeHandler( $updater, $entities );
+		$handler = $this->getChangeHandler( $pageNamesPerItemId, $updater );
 
 		$handler->handleChange( $change );
 		$updates = $updater->getUpdates();
