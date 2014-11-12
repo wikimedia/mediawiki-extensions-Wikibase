@@ -25,7 +25,6 @@ return call_user_func( function() {
 				'getApiBasedValueFormatterConstructor.js',
 			),
 			'dependencies' => array(
-				'wikibase.dataTypes',
 				'util.inherit',
 				'valueFormatters.ValueFormatter',
 			),
