@@ -68,7 +68,7 @@ util.highlightSubstring = function( substring, string, options ) {
 	}
 
 	var matches = string.match(
-		new RegExp( regExpString, !options.caseSensitive ? 'i' : '' )
+		new RegExp( regExpString, options.caseSensitive ? '' : 'i' )
 	);
 
 	if( matches ) {
