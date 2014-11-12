@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_006644ea",
+        "filename": "lib/includes/ChangeNotificationJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-12T13:18:51Z",
+      "side": 0,
+      "message": "Not this change, but: lib uses client!?",
+      "revId": "aed488210e22af228a335df6179947bbe60fec9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

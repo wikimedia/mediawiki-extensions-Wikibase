@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_80a1f4f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-12T13:18:51Z",
+      "side": 1,
+      "message": "Full stop missing.",
+      "revId": "53138c23b1c8de841c0adf646b6ea70bcb0352d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_a077509a",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-12T13:18:51Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be Wikibase\\Client\\Tests?",
+      "revId": "53138c23b1c8de841c0adf646b6ea70bcb0352d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
