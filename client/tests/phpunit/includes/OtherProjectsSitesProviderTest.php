@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Test;
+namespace Wikibase\Client\Tests;
 
 use MediaWikiSite;
 use Site;
@@ -172,4 +172,5 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 
 		return new MockSiteStore( $sites );
 	}
+
 }

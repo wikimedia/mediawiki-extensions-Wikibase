@@ -19,8 +19,8 @@ use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -109,7 +109,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	 *
 	 * @return MockRepository
 	 */
-	private function getMockRepo( $links ) {
+	private function getMockRepository( $links ) {
 		$repo = new MockRepository();
 
 		foreach ( $links as $itemKey => $itemLinks ) {
@@ -189,7 +189,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
 		$siteStore = $this->getSiteStore();
 
-		$mockRepo = $this->getMockRepo( $links );
+		$mockRepo = $this->getMockRepository( $links );
 		$mockRepo->putEntity( $this->getBadgeItem() );
 
 		$otherProjectsSidebarGenerator = new OtherProjectsSidebarGenerator(

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests;
 
 use MWNamespace;
 use Wikibase\NamespaceChecker;
@@ -103,4 +103,5 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 		$result = $namespaceChecker->getWikibaseNamespaces();
 		$this->assertArrayEquals( $expected, $result );
 	}
+
 }

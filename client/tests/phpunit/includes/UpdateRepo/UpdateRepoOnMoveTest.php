@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\UpdateRepo;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers Wikibase\Client\UpdateRepo\UpdateRepoOnMove
@@ -122,4 +122,5 @@ class UpdateRepoOnMoveTest extends \MediaWikiTestCase {
 
 		$updateRepo->injectJob( $jobQueueGroupMock );
 	}
+
 }
