@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Changes;
 
+use Exception;
 use MWException;
 use Wikibase\Change;
 use Wikibase\EntityChange;
@@ -71,7 +72,7 @@ class ChangeRunCoalescer implements ChangeListMangler {
 			$coalesced = array_merge( $coalesced, $entityChanges );
 		}
 
-		usort( $coalesced, 'Wikibase\Client\Changes\ChangeRunCoalescer::compareChangesByTimestamp' );
+		usort( $coalesced, array( $this, 'compareChangesByTimestamp' ) );
 
 		wfDebugLog( __CLASS__, __METHOD__ . ": coalesced "
 			. count( $changes ) . " into " . count( $coalesced ) . " changes"  );
@@ -276,8 +277,8 @@ class ChangeRunCoalescer implements ChangeListMangler {
 
 				$currentRun[] = $change;
 				// skip any change that failed to process in some way (bug 49417)
-			} catch ( \Exception $e ) {
-				wfLogWarning( __METHOD__ . ':' . $e->getMessage() );
+			} catch ( Exception $ex ) {
+				wfLogWarning( __METHOD__ . ':' . $ex->getMessage() );
 			}
 		}
 
@@ -302,9 +303,9 @@ class ChangeRunCoalescer implements ChangeListMangler {
 	 * @param Change $a
 	 * @param Change $b
 	 *
-	 * @return Mixed
+	 * @return int
 	 */
-	public static function compareChangesByTimestamp( Change $a, Change $b ) {
+	public function compareChangesByTimestamp( Change $a, Change $b ) {
 		//NOTE: beware https://bugs.php.net/bug.php?id=50688 !
 
 		if ( $a->getTime() > $b->getTime() ) {

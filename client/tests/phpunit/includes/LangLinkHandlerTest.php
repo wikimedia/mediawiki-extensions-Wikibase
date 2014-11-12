@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests;
 
 use MediaWikiSite;
 use ParserOutput;
@@ -8,13 +8,15 @@ use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Test\MockRepository;
+use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\LangLinkHandler

@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
 use Diff\Differ\MapDiffer;
+use MediaWikiSite;
 use Site;
 use SiteList;
 use Title;
@@ -47,7 +48,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->site = new \MediaWikiSite();
+		$this->site = new MediaWikiSite();
 		$this->site->setGlobalId( 'enwiki' );
 		$this->site->setLanguageCode( 'en' );
 		$this->site->addNavigationId( 'en' );
@@ -282,7 +283,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	public static function provideGetEditComment() {
 		$changes = TestChanges::getChanges();
 
-		$dummy = \Title::newFromText( "Dummy" );
+		$dummy = Title::newFromText( 'Dummy' );
 
 		return array(
 			array( // #0
@@ -490,7 +491,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$siteList->expects( $this->any() )
 			->method( 'getSite' )
 			->will( $this->returnCallback( function( $globalSiteId ) {
-				$site = new \MediaWikiSite();
+				$site = new MediaWikiSite();
 
 				$site->setGlobalId( $globalSiteId );
 				$site->setLanguageCode( substr( $globalSiteId, 0, 2 ) );
@@ -504,7 +505,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetEditComment
 	 */
-	public function testGetEditComment( Change $change, \Title $title, $entities, $expected ) {
+	public function testGetEditComment( Change $change, Title $title, $entities, $expected ) {
 		$handler = $this->newChangeHandler( null, $entities );
 		$comment = $handler->getEditComment( $change, $title );
 
