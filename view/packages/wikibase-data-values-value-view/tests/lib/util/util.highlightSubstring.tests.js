@@ -13,9 +13,9 @@ QUnit.test( 'Highlight with default options', function( assert ) {
 		['abc', 'abc', '<span class="highlight">abc</span>'],
 		['abcdef', 'abc', '<span class="highlight">abc</span>def'],
 		['abcdef', 'def', 'abcdef'],
-		['abcdef', 'Abc', 'abcdef'],
-		['Abcdef', 'abc', 'Abcdef'],
-		['ABCDEF', 'abc', 'ABCDEF']
+		['abcdef', 'Abc', '<span class="highlight">abc</span>def'],
+		['Abcdef', 'abc', '<span class="highlight">Abc</span>def'],
+		['ABCDEF', 'abc', '<span class="highlight">ABC</span>DEF']
 	];
 
 	for( var i = 0; i < testCases.length; i++ ) {
@@ -31,11 +31,11 @@ QUnit.test( 'Highlight with default options', function( assert ) {
 	}
 } );
 
-QUnit.test( 'Highlight (caseInsensitive === true)', function( assert ) {
+QUnit.test( 'Highlight (caseSensitive === true)', function( assert ) {
 	var testCases = [
 		['abcdef', 'abc', '<span class="highlight">abc</span>def'],
-		['Abcdef', 'abc', '<span class="highlight">Abc</span>def'],
-		['abcdef', 'Abc', '<span class="highlight">abc</span>def'],
+		['Abcdef', 'abc', 'Abcdef'],
+		['abcdef', 'Abc', 'abcdef'],
 		['ABCDEF', 'ABC', '<span class="highlight">ABC</span>DEF']
 	];
 
@@ -45,7 +45,7 @@ QUnit.test( 'Highlight (caseInsensitive === true)', function( assert ) {
 			expected = testCases[i][2];
 
 		assert.equal(
-			util.highlightSubstring( substring, string, { caseInsensitive: true } ),
+			util.highlightSubstring( substring, string, { caseSensitive: true } ),
 			expected,
 			'Test set #' + i + ': Highlighting "' + substring + '" in "' + string + '" '
 			+ 'results in "' + expected + '".'

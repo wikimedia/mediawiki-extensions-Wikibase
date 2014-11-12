@@ -17,8 +17,8 @@ this.util = this.util || {};
  * @param {string} substring
  * @param {string} string
  * @param {Object} [options]
- *        - {boolean} [caseInsensitive]
- *          Default: true
+ *        - {boolean} [caseSensitive]
+ *          Default: false
  *        - {boolean} [withinString]
  *          Whether to highlight characters within the string, in contrast to at the beginning only.
  *          Default: false
@@ -34,7 +34,7 @@ util.highlightSubstring = function( substring, string, options ) {
 	}
 
 	options = options || {};
-	options.caseInsensitive = options.caseInsensitive !== false;
+	options.caseSensitive = !!options.caseSensitive;
 	options.withinString = !!options.withinString;
 	options.wrapperNodeName = options.wrapperNodeName || 'span';
 	options.wrapperNodeClass = options.wrapperNodeClass || 'highlight';
@@ -47,14 +47,14 @@ util.highlightSubstring = function( substring, string, options ) {
 
 	var indexOfSubstring = string.indexOf( substring );
 
-	if( !options.caseInsensitive
+	if( options.caseSensitive
 		&& (
 			!options.withinString && indexOfSubstring !== 0
 			|| options.withinString && indexOfSubstring === -1
 		)
 	) {
 		return string;
-	} else if( options.caseInsensitive ) {
+	} else if( !options.caseInsensitive ) {
 		var lowerCaseString = string.toLowerCase(),
 			lowerCaseSubstring = substring.toLowerCase(),
 			caseInsensitiveIndexOfSubstring = lowerCaseString.indexOf( lowerCaseSubstring );
@@ -68,7 +68,7 @@ util.highlightSubstring = function( substring, string, options ) {
 	}
 
 	var matches = string.match(
-		new RegExp( regExpString, options.caseInsensitive ? 'i' : '' )
+		new RegExp( regExpString, options.caseSensitive ? '' : 'i' )
 	);
 
 	if( matches ) {
