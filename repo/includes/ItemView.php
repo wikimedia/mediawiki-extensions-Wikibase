@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SiteLinksView;
 use Wikibase\Repo\WikibaseRepo;
@@ -23,7 +24,7 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getMainHtml
 	 */
-	protected function getMainHtml( EntityRevision $entityRevision, array $entityInfo,
+	protected function getMainHtml( EntityRevision $entityRevision, EntityInfo $entityInfo,
 		$editable = true
 	) {
 		$item = $entityRevision->getEntity();
