@@ -225,16 +225,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.siteselector.tests' => $moduleBase + array(
-			'scripts' => array(
-				'jquery.wikibase.siteselector.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.siteselector',
-				'wikibase.Site',
-			),
-		),
-
 		'jquery.wikibase.snaklistview.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.wikibase.snaklistview.tests.js',
@@ -268,15 +258,6 @@ return call_user_func( function() {
 				'jquery.wikibase.statementview',
 				'test.sinonjs',
 				'wikibase.datamodel',
-			),
-		),
-
-		'jquery.wikibase.wbtooltip.tests' => $moduleBase + array(
-			'scripts' => array(
-				'jquery.wikibase.wbtooltip.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.wbtooltip',
 			),
 		),
 
