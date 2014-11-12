@@ -74,7 +74,7 @@ return call_user_func( function() {
 
 		'wikibase.api.RepoApi.tests' => $moduleBase + array(
 			'scripts' => array(
-				'wikibase.RepoApi/wikibase.RepoApi.tests.js',
+				'api/RepoApi.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase',
@@ -85,7 +85,7 @@ return call_user_func( function() {
 
 		'wikibase.api.RepoApiError.tests' => $moduleBase + array(
 			'scripts' => array(
-				'wikibase.RepoApi/wikibase.RepoApiError.tests.js',
+				'api/RepoApiError.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase',
