@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_a023d0b3",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/PropertyClaimsRendererFactoryTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-12T16:03:19Z",
+      "side": 1,
+      "message": "So, this will return null for all methods? And that doesn\u0027t cause any tests to fail? That seems strange...",
+      "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8b24b5ae",
+        "filename": "lib/includes/formatters/OutputFormatSnakFormatterFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-12T16:03:19Z",
+      "side": 1,
+      "message": "Passing around a meta-factory like this makes me uneasy. It should really be avoided, if at all possible.",
+      "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_4b030d10",
+        "filename": "lib/includes/formatters/OutputFormatSnakFormatterFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-12T16:03:19Z",
+      "side": 1,
+      "message": "I don\u0027t think this should be done here. We don\u0027t have to check that *another* class it\u0027s following the contract it declares (there would be no end to that). Previously, we had to enforce this classe\u0027s contract in the constructor, now we now longer take an array there, so the check is no longer needed.",
+      "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_eb2a1973",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-12T16:03:19Z",
+      "side": 1,
+      "message": "Passing a meta-factory as a parameter to a factory method seems like a bad thing... not sure there are good alternatives, though.",
+      "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_6b836957",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-12T16:03:19Z",
+      "side": 1,
+      "message": "eeek!",
+      "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_0be3c532",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-12T16:03:19Z",
+      "side": 1,
+      "message": "What are these? I guess these are the IDs of referenced entities - that should be reflected by the parameter name and/or documentation.",
+      "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
