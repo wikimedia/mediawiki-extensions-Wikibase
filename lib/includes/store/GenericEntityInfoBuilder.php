@@ -281,10 +281,10 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	/**
 	 * @see EntityInfoBuilder::getEntityInfo
 	 *
-	 * @return array[]
+	 * @return EntityInfo
 	 */
 	public function getEntityInfo() {
-		return $this->entityInfo;
+		return new EntityInfo( $this->entityInfo );
 	}
 
 	/**
