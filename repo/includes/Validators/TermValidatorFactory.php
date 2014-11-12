@@ -54,7 +54,7 @@ class TermValidatorFactory {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	function __construct(
+	public function __construct(
 		$maxLength,
 		array $languageCodes,
 		EntityIdParser $idParser,

@@ -64,7 +64,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		parent::tearDown();
 	}
 
-	function applyPermissions( $permissions ) {
+	protected function applyPermissions( $permissions ) {
 		global $wgGroupPermissions, $wgUser;
 
 		if ( !$permissions ) {
@@ -220,6 +220,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @param Title $title the page to return the token for
 	 * @param String $for the action to return the token for, e.g. 'edit'.
 	 *
+	 * @throws MWException
 	 * @return String the token
 	 */
 	protected function getToken( Title $title, $for = 'edit' ) {

@@ -27,7 +27,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	/**
 	 * @param SiteLinkLookup $siteLinkLookup
 	 */
-	function __construct( SiteLinkLookup $siteLinkLookup ) {
+	public function __construct( SiteLinkLookup $siteLinkLookup ) {
 		$this->siteLinkLookup = $siteLinkLookup;
 	}
 

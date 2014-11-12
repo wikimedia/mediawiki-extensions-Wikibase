@@ -2,9 +2,12 @@
 
 namespace Wikibase\Test\Api;
 
+use MWException;
+use UsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
+use WikiPage;
 
 /**
  * Tests for blocking of direct editing.
@@ -26,7 +29,7 @@ class EditPageTest extends WikibaseApiTestCase {
 	/**
 	 * @group API
 	 */
-	function testEditItemDirectly() {
+	public function testEditItemDirectly() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$item = Item::newEmpty(); //@todo: do this with all kinds of entities.
@@ -54,12 +57,12 @@ class EditPageTest extends WikibaseApiTestCase {
 	/**
 	 * @group API
 	 */
-	function testEditTextInItemNamespace() {
+	public function testEditTextInItemNamespace() {
 		global $wgContentHandlerUseDB;
 
 		$id = new ItemId( "Q1234567" );
 		$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $id );
-		$page = new \WikiPage( $title );
+		$page = new WikiPage( $title );
 
 		$text = "hallo welt";
 
@@ -75,17 +78,15 @@ class EditPageTest extends WikibaseApiTestCase {
 			);
 
 			$this->fail( "Saving wikitext to the item namespace should not be possible." );
-		} catch ( \UsageException $ex ) {
-			//ok, pass
-			//print "\n$ex\n";
+		} catch ( UsageException $ex ) {
 			$this->assertTrue( true );
-		} catch ( \MWException $ex ) {
+		} catch ( MWException $ex ) {
 			if ( !$wgContentHandlerUseDB ) {
 				$this->markTestSkipped( 'With $wgContentHandlerUseDB, attempts to use a non-default content modfel will always fail.' );
 			} else {
 				throw $ex;
 			}
 		}
-
 	}
+
 }
