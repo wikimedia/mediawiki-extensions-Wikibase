@@ -34,6 +34,24 @@
       "revId": "7f55779c191009378b71a274946f3b3dc01f8a2d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_dad3682e",
+        "filename": "repo/includes/globalFunctions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-12T19:26:30Z",
+      "side": 1,
+      "message": "A file name is not a class name. WikibaseClient.php, ExampleSettings.php and lots more are no class either. I\u0027m just asking for consistency.\n\nI don\u0027t care much about the entry point check, was just a suggestion.",
+      "parentUuid": "6e936f18_60d14857",
+      "revId": "7f55779c191009378b71a274946f3b3dc01f8a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
