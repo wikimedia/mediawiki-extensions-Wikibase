@@ -3,6 +3,7 @@
 namespace Wikibase;
 use ResourceLoaderContext;
 use ResourceLoaderFileModule;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Injects templates into JavaScript.
@@ -26,7 +27,8 @@ class TemplateModule extends ResourceLoaderFileModule {
 	 */
 	public function getScript( ResourceLoaderContext $context ) {
 		// register HTML templates
-		$templatesJson = \FormatJson::encode( TemplateRegistry::singleton()->getTemplates() );
+		$templateRegistry = WikibaseRepo::getDefaultInstance()->getTemplateRegistry();
+		$templatesJson = \FormatJson::encode( $templateRegistry->getTemplates() );
 
 		// template store JavaScript initialisation
 		$script = <<<EOT
