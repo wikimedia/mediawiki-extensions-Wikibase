@@ -11,7 +11,6 @@ use Wikibase\Change;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
  */
 interface ChangeListMangler {
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Changes;
 
+use Exception;
 use MWException;
 use Wikibase\Change;
 use Wikibase\EntityChange;
@@ -19,7 +20,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
  */
 class ChangeRunCoalescer implements ChangeListMangler {
 
@@ -71,7 +71,7 @@ class ChangeRunCoalescer implements ChangeListMangler {
 			$coalesced = array_merge( $coalesced, $entityChanges );
 		}
 
-		usort( $coalesced, 'Wikibase\Client\Changes\ChangeRunCoalescer::compareChangesByTimestamp' );
+		usort( $coalesced, array( $this, 'compareChangesByTimestamp' ) );
 
 		wfDebugLog( __CLASS__, __METHOD__ . ": coalesced "
 			. count( $changes ) . " into " . count( $coalesced ) . " changes"  );
@@ -80,17 +80,15 @@ class ChangeRunCoalescer implements ChangeListMangler {
 		return $coalesced;
 	}
 
-
 	/**
 	 * Group changes by the entity they were applied to.
 	 *
-	 * @since 0.4
-	 *
 	 * @param EntityChange[] $changes
+	 *
 	 * @return EntityChange[][] an associative array using entity IDs for keys. Associated with each
 	 *         entity ID is the list of changes performed on that entity.
 	 */
-	public function groupChangesByEntity( array $changes ) {
+	private function groupChangesByEntity( array $changes ) {
 		wfProfileIn( __METHOD__ );
 		$groups = array();
 
@@ -115,8 +113,6 @@ class ChangeRunCoalescer implements ChangeListMangler {
 	 *
 	 * If $changes is empty, this method returns null. If $changes contains exactly one change,
 	 * that change is returned. Otherwise, a combined change is returned.
-	 *
-	 * @since 0.4
 	 *
 	 * @param EntityChange[] $changes The changes to combine.
 	 *
@@ -214,9 +210,8 @@ class ChangeRunCoalescer implements ChangeListMangler {
 	 * Some types of actions, like deletion, will break runs.
 	 * Interleaved changes to different items will break runs.
 	 *
-	 * @since 0.4
-	 *
 	 * @param EntityChange[] $changes
+	 *
 	 * @return EntityChange[] grouped changes
 	 */
 	private function coalesceRuns( array $changes ) {
@@ -276,8 +271,8 @@ class ChangeRunCoalescer implements ChangeListMangler {
 
 				$currentRun[] = $change;
 				// skip any change that failed to process in some way (bug 49417)
-			} catch ( \Exception $e ) {
-				wfLogWarning( __METHOD__ . ':' . $e->getMessage() );
+			} catch ( Exception $ex ) {
+				wfLogWarning( __METHOD__ . ':' . $ex->getMessage() );
 			}
 		}
 
@@ -302,9 +297,9 @@ class ChangeRunCoalescer implements ChangeListMangler {
 	 * @param Change $a
 	 * @param Change $b
 	 *
-	 * @return Mixed
+	 * @return int
 	 */
-	public static function compareChangesByTimestamp( Change $a, Change $b ) {
+	public function compareChangesByTimestamp( Change $a, Change $b ) {
 		//NOTE: beware https://bugs.php.net/bug.php?id=50688 !
 
 		if ( $a->getTime() > $b->getTime() ) {

@@ -51,52 +51,61 @@ class ChangeHandler {
 	const HISTORY_ENTRY_ACTION = 16;
 
 	/**
-	 * @var PageUpdater $updater
+	 * @var AffectedPagesFinder
+	 */
+	private $affectedPagesFinder;
+
+	/**
+	 * @var PageUpdater
 	 */
 	private $updater;
 
 	/**
-	 * @var ChangeListMangler|null
+	 * @var ChangeListMangler
 	 */
 	private $changeListMangler;
-
-	/**
-	 * @var AffectedPagesFinder
-	 */
-	private $affectedPagesFinder;
 
 	/**
 	 * @var string
 	 */
 	private $localSiteId;
 
+	/**
+	 * @var bool
+	 */
+	private $injectRecentChanges;
+
+	/**
+	 * @var bool
+	 */
+	private $allowDataTransclusion;
+
 	public function __construct(
 		AffectedPagesFinder $affectedPagesFinder,
 		PageUpdater $updater,
 		ChangeListMangler $changeListMangler,
 		$localSiteId,
-		$injectRC,
+		$injectRecentChanges,
 		$allowDataTransclusion
 	) {
-		$this->changeListMangler = $changeListMangler;
-		$this->affectedPagesFinder = $affectedPagesFinder;
-		$this->updater = $updater;
-
 		if ( !is_string( $localSiteId ) ) {
 			throw new InvalidArgumentException( '$localSiteId must be a string' );
 		}
 
-		if ( !is_bool( $injectRC ) ) {
-			throw new InvalidArgumentException( '$injectRC must be a bool' );
+		if ( !is_bool( $injectRecentChanges ) ) {
+			throw new InvalidArgumentException( '$injectRecentChanges must be a bool' );
 		}
 
 		if ( !is_bool( $allowDataTransclusion ) ) {
 			throw new InvalidArgumentException( '$allowDataTransclusion must be a bool' );
 		}
 
+		$this->affectedPagesFinder = $affectedPagesFinder;
+		$this->updater = $updater;
+		$this->changeListMangler = $changeListMangler;
 		$this->localSiteId = $localSiteId;
-		$this->injectRC = (bool)$injectRC;
-		$this->dataTransclusionAllowed = $allowDataTransclusion;
+		$this->injectRecentChanges = $injectRecentChanges;
+		$this->allowDataTransclusion = $allowDataTransclusion;
 	}
 
 	/**
@@ -109,11 +118,9 @@ class ChangeHandler {
 	public function handleChanges( array $changes ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( $this->changeListMangler ) {
-			$changes = $this->changeListMangler->mangleChanges( $changes );
-		}
+		$changes = $this->changeListMangler->mangleChanges( $changes );
 
-		if ( !wfRunHooks( 'WikibaseHandleChanges', array( $changes ) ) ) {
+		if ( !wfRunHooks( 'WikibaseHandleChanges', $changes ) ) {
 			wfProfileOut( __METHOD__ );
 			return;
 		}
@@ -139,7 +146,6 @@ class ChangeHandler {
 	 * @param Change $change
 	 *
 	 * @throws MWException
-	 *
 	 * @return bool
 	 */
 	public function handleChange( Change $change ) {
@@ -221,7 +227,7 @@ class ChangeHandler {
 
 		/* @var Title $title */
 		foreach ( $titlesToUpdate as $title ) {
-			if ( $this->injectRC && ( $actions & self::RC_ENTRY_ACTION ) > 0 ) {
+			if ( $this->injectRecentChanges && ( $actions & self::RC_ENTRY_ACTION ) > 0 ) {
 				$rcAttribs = $this->getRCAttributes( $change );
 
 				if ( $rcAttribs !== false ) {
@@ -264,7 +270,7 @@ class ChangeHandler {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \Wikibase\EntityChange $change The Change that caused the update
+	 * @param EntityChange $change The Change that caused the update
 	 *
 	 * @return array|boolean an array of RC attributes,
 	 *         or false if the change does not provide edit meta data
@@ -330,7 +336,7 @@ class ChangeHandler {
 					| self::RC_ENTRY_ACTION | self::HISTORY_ENTRY_ACTION;
 			}
 
-			if ( $this->dataTransclusionAllowed ) {
+			if ( $this->allowDataTransclusion ) {
 				if ( $diff instanceof EntityDiff && !$diff->getClaimsDiff()->isEmpty() ) {
 					$actions |= self::PARSER_PURGE_ACTION | self::WEB_PURGE_ACTION | self::LINKS_UPDATE_ACTION
 						| self::RC_ENTRY_ACTION | self::HISTORY_ENTRY_ACTION;
@@ -356,7 +362,7 @@ class ChangeHandler {
 	 *
 	 * @param EntityChange $change the change to get a comment for
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 * @return array
 	 */
 	public function getEditComment( EntityChange $change ) {
@@ -371,7 +377,7 @@ class ChangeHandler {
 
 		$editComment = $commentCreator->getEditComment( $siteLinkDiff, $action, $comment );
 		if( is_array( $editComment ) && !isset( $editComment['message'] ) ) {
-			throw new \MWException( 'getEditComment returned an empty comment' );
+			throw new MWException( 'getEditComment returned an empty comment' );
 		}
 
 		return $editComment;

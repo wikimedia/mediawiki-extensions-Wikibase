@@ -28,8 +28,8 @@ use Wikibase\Test\TestChanges;
  */
 class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 
-	private function newCoalescer( array $entities = array() ) {
-		$repo = $this->getMockRepo( $entities );
+	private function getChangeRunCoalescer() {
+		$repo = $this->getMockRepository();
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
 
@@ -42,7 +42,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		return $coalescer;
 	}
 
-	private function getMockRepo( array $entities = array() ) {
+	private function getMockRepository() {
 		$repo = new MockRepository();
 
 		// entity 1, revision 11
@@ -81,32 +81,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		$entity1->setDescription( 'en', 'the second' );
 		$repo->putEntity( $entity1, 1211 );
 
-		$this->updateMockRepo( $repo, $entities );
-
 		return $repo;
-	}
-
-	private function updateMockRepo( MockRepository $repo, $entities ) {
-		foreach ( $entities as $id => $siteLinks ) {
-			if ( !( $siteLinks instanceof Entity ) ) {
-				$entity = Item::newEmpty();
-				$entity->setId( new ItemId( $id ) );
-
-				foreach ( $siteLinks as $siteId => $page ) {
-					if ( is_int( $siteId ) ) {
-						$siteIdentifier = $this->site->getGlobalId();
-					} else {
-						$siteIdentifier = $siteId;
-					}
-
-					$entity->addSiteLink( new SiteLink( $siteIdentifier, $page ) );
-				}
-			} else {
-				$entity = $siteLinks;
-			}
-
-			$repo->putEntity( $entity );
-		}
 	}
 
 	/**
@@ -408,7 +383,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 	 * @dataProvider provideCoalesceChanges
 	 */
 	public function testCoalesceChanges( $changes, $expected ) {
-		$coalescer = $this->newCoalescer();
+		$coalescer = $this->getChangeRunCoalescer();
 		$coalesced = $coalescer->mangleChanges( $changes );
 
 		$this->assertEquals( count( $expected ), count( $coalesced ), "number of changes" );
