@@ -1,8 +1,5 @@
 <?php
 
-use Wikibase\Client\WikibaseClient;
-use Wikibase\Repo\WikibaseRepo;
-
 /**
  * @licence GNU GPL v2+
  * @author Daniel Werner
@@ -23,22 +20,6 @@ return call_user_func( function() {
 	);
 
 	$modules = array(
-
-		'mw.config.values.wbDataTypes' => $moduleTemplate + array(
-			'class' => 'DataTypes\DataTypesModule',
-			'datatypefactory' => function() {
-				// TODO: relative uglynes here! Get rid of this method!
-				if ( defined( 'WB_VERSION' ) ) { // repo mode
-					$wikibase = WikibaseRepo::getDefaultInstance();
-				} elseif ( defined( 'WBC_VERSION' ) ) { // client mode
-					$wikibase = WikibaseClient::getDefaultInstance();
-				} else {
-					throw new \RuntimeException( "Neither repo nor client found!" );
-				}
-				return $wikibase->getDataTypeFactory();
-			},
-			'datatypesconfigvarname' => 'wbDataTypes',
-		),
 
 		'mw.config.values.wbSiteDetails' => $moduleTemplate + array(
 			'class' => 'Wikibase\SitesModule',
@@ -111,6 +92,36 @@ return call_user_func( function() {
 				'dataTypes.DataTypeStore',
 				'mw.config.values.wbDataTypes',
 				'wikibase',
+			),
+		),
+
+		'jquery.removeClassByRegex' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.removeClassByRegex.js',
+			),
+		),
+
+		'jquery.sticknode' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.sticknode.js',
+			),
+			'dependencies' => array(
+				'jquery.throttle-debounce',
+			),
+		),
+
+		'jquery.ui.tagadata' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.tagadata.js',
+			),
+			'styles' => array(
+				'jquery.ui/jquery.ui.tagadata.css',
+			),
+			'dependencies' => array(
+				'jquery.event.special.eachchange',
+				'jquery.effects.blind',
+				'jquery.inputautoexpand',
+				'jquery.ui.widget',
 			),
 		),
 
