@@ -36,7 +36,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SetQualifierTest extends WikibaseApiTestCase {
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		static $hasEntities = false;

@@ -47,7 +47,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	/** @var Site $site */
 	protected $site;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->site = new \MediaWikiSite();

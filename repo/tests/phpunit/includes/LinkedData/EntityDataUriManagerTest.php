@@ -28,7 +28,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	 */
 	private $idParser;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->idParser = new BasicEntityIdParser();

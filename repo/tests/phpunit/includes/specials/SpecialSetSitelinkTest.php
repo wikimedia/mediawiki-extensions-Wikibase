@@ -85,7 +85,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		return new SpecialSetSiteLink();
 	}
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		if ( !self::$badgeId ) {
@@ -101,7 +101,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array( self::$badgeId => '' ) );
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', self::$oldBadgeItemsSetting );
 		parent::tearDown();
 	}

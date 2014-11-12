@@ -54,7 +54,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 */
 	private $propertyValueFormatter = null;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		static $hasEntities = false;

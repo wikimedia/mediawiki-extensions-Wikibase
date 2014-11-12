@@ -60,7 +60,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		return $items;
 	}
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->langLinkHandler = $this->getLangLinkHandler( array() );

@@ -25,7 +25,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 
 	private $tableName = 'wbc_entity_usage';
 
-	public function setUp() {
+	protected function setUp() {
 		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
 			$this->markTestSkipped( 'Skipping test for SqlUsageTracker, because the useLegacyUsageIndex option is set.' );
 		}

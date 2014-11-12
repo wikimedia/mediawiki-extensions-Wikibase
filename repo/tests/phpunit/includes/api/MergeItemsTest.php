@@ -43,7 +43,7 @@ class MergeItemsTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private $apiModuleTestHelper = null;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->entityModificationTestHelper = new EntityModificationTestHelper();

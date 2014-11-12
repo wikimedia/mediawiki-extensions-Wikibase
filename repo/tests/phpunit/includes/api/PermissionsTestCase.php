@@ -19,7 +19,7 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 
 	private static $hasSetup;
 
-	public function setUp() {
+	protected function setUp() {
 		global $wgGroupPermissions, $wgUser;
 
 		parent::setUp();
