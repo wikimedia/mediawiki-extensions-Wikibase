@@ -14,8 +14,9 @@ use Site;
 use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
-use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\AffectedPagesFinder;
+use Wikibase\Client\Changes\ChangeHandler;
+use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
@@ -51,7 +52,6 @@ use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
-use Wikibase\Client\Changes\WikiPageUpdater;
 
 /**
  * Top level factory for the WikibaseClient extension.
@@ -65,11 +65,6 @@ use Wikibase\Client\Changes\WikiPageUpdater;
 final class WikibaseClient {
 
 	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	public $propertyDataTypeLookup;
-
-	/**
 	 * @var SettingsArray
 	 */
 	private $settings;
@@ -80,62 +75,67 @@ final class WikibaseClient {
 	private $contentLanguage;
 
 	/**
-	 * @var DataTypeFactory
-	 */
-	private $dataTypeFactory = null;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser = null;
-
-	/**
-	 * @var LanguageFallbackChainFactory
-	 */
-	private $languageFallbackChainFactory = null;
-
-	/**
-	 * @var ClientStore
-	 */
-	private $store = null;
-
-	/**
-	 * @var StringNormalizer
-	 */
-	private $stringNormalizer;
-
-	/**
-	 * @var Site
-	 */
-	private $site = null;
-
-	/**
-	 * @var string
-	 */
-	private $siteGroup = null;
-
-	/**
-	 * @var OutputFormatSnakFormatterFactory
-	 */
-	private $snakFormatterFactory;
-
-	/**
-	 * @var OutputFormatValueFormatterFactory
-	 */
-	private $valueFormatterFactory;
-
-	/**
-	 * @var SiteStore
+	 * @var SiteStore|null
 	 */
 	private $siteStore;
 
 	/**
-	 * @var LangLinkHandler
+	 * @var DataTypeFactory|null
+	 */
+	private $dataTypeFactory = null;
+
+	/**
+	 * @var EntityIdParser|null
+	 */
+	private $entityIdParser = null;
+
+	/**
+	 * @var PropertyDataTypeLookup|null
+	 */
+	public $propertyDataTypeLookup = null;
+
+	/**
+	 * @var LanguageFallbackChainFactory|null
+	 */
+	private $languageFallbackChainFactory = null;
+
+	/**
+	 * @var ClientStore|null
+	 */
+	private $store = null;
+
+	/**
+	 * @var StringNormalizer|null
+	 */
+	private $stringNormalizer = null;
+
+	/**
+	 * @var Site|null
+	 */
+	private $site = null;
+
+	/**
+	 * @var string|null
+	 */
+	private $siteGroup = null;
+
+	/**
+	 * @var OutputFormatSnakFormatterFactory|null
+	 */
+	private $snakFormatterFactory = null;
+
+	/**
+	 * @var OutputFormatValueFormatterFactory|null
+	 */
+	private $valueFormatterFactory = null;
+
+	/**
+	 * @var LangLinkHandler|null
 	 */
 	private $langLinkHandler = null;
 
 	/**
-	 * @var NamespaceChecker
+	 * @var NamespaceChecker|null
 	 */
 	private $namespaceChecker = null;
 
@@ -144,7 +144,7 @@ final class WikibaseClient {
 	 *
 	 * @param SettingsArray $settings
 	 * @param Language $contentLanguage
-	 * @param SiteStore $siteStore
+	 * @param SiteStore|null $siteStore
 	 */
 	public function __construct(
 		SettingsArray $settings,
@@ -163,7 +163,7 @@ final class WikibaseClient {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			$urlSchemes = $this->getSettings()->getSetting( 'urlSchemes' );
+			$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
 			$builders = new WikibaseDataTypeBuilders(
 				$this->getEntityLookup(),
 				$this->getEntityIdParser(),
@@ -268,12 +268,11 @@ final class WikibaseClient {
 	 * @return ClientStore
 	 */
 	public function getStore() {
-		// NOTE: $repoDatabase is null per default, meaning no direct access to the repo's database.
-		// If $repoDatabase is false, the local wiki IS the repository.
-		// Otherwise, $repoDatabase needs to be a logical database name that LBFactory understands.
-		$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
-
 		if ( $this->store === null ) {
+			// NOTE: $repoDatabase is null per default, meaning no direct access to the repo's
+			// database. If $repoDatabase is false, the local wiki IS the repository. Otherwise,
+			// $repoDatabase needs to be a logical database name that LBFactory understands.
+			$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
 			$this->store = new DirectSqlStore(
 				$this->getEntityContentDataCodec(),
 				$this->getContentLanguage(),
@@ -439,7 +438,7 @@ final class WikibaseClient {
 	 * @return string
 	 */
 	public function getSiteGroup() {
-		if ( !$this->siteGroup ) {
+		if ( $this->siteGroup === null ) {
 			$this->siteGroup = $this->newSiteGroup();
 		}
 
@@ -453,7 +452,7 @@ final class WikibaseClient {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	public function getSnakFormatterFactory() {
-		if ( !$this->snakFormatterFactory ) {
+		if ( $this->snakFormatterFactory === null ) {
 			$this->snakFormatterFactory = $this->newSnakFormatterFactory();
 		}
 
@@ -487,7 +486,7 @@ final class WikibaseClient {
 	 * @return OutputFormatValueFormatterFactory
 	 */
 	public function getValueFormatterFactory() {
-		if ( !$this->valueFormatterFactory ) {
+		if ( $this->valueFormatterFactory === null ) {
 			$this->valueFormatterFactory = $this->newValueFormatterFactory();
 		}
 
@@ -512,12 +511,10 @@ final class WikibaseClient {
 	 * @return NamespaceChecker
 	 */
 	public function getNamespaceChecker() {
-		if ( !$this->namespaceChecker ) {
-			$settings = $this->getSettings();
-
+		if ( $this->namespaceChecker === null ) {
 			$this->namespaceChecker = new NamespaceChecker(
-				$settings->getSetting( 'excludeNamespaces' ),
-				$settings->getSetting( 'namespaces' )
+				$this->settings->getSetting( 'excludeNamespaces' ),
+				$this->settings->getSetting( 'namespaces' )
 			);
 		}
 
@@ -528,13 +525,11 @@ final class WikibaseClient {
 	 * @return LangLinkHandler
 	 */
 	public function getLangLinkHandler() {
-		if ( !$this->langLinkHandler ) {
-			$settings = $this->getSettings();
-
+		if ( $this->langLinkHandler === null ) {
 			$this->langLinkHandler = new LangLinkHandler(
 				$this->getOtherProjectsSidebarGenerator(),
 				$this->getLanguageLinkBadgeDisplay(),
-				$settings->getSetting( 'siteGlobalID' ),
+				$this->settings->getSetting( 'siteGlobalID' ),
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkTable(),
 				$this->getStore()->getEntityLookup(),
@@ -552,7 +547,7 @@ final class WikibaseClient {
 	public function getLanguageLinkBadgeDisplay() {
 		global $wgLang;
 
-		$badgeClassNames = $this->getSettings()->getSetting( 'badgeClassNames' );
+		$badgeClassNames = $this->settings->getSetting( 'badgeClassNames' );
 
 		return new LanguageLinkBadgeDisplay(
 			$this->getEntityLookup(),
@@ -567,7 +562,7 @@ final class WikibaseClient {
 	 * @return SiteStore
 	 */
 	public function getSiteStore() {
-		if ( !$this->siteStore ) {
+		if ( $this->siteStore === null ) {
 			$this->siteStore = SiteSQLStore::newInstance();
 		}
 
@@ -643,13 +638,11 @@ final class WikibaseClient {
 	 * @return OtherProjectsSidebarGenerator
 	 */
 	public function getOtherProjectsSidebarGenerator() {
-		$settings = $this->getSettings();
-
 		return new OtherProjectsSidebarGenerator(
-			$settings->getSetting( 'siteGlobalID' ),
+			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->getStore()->getSiteLinkTable(),
 			$this->getSiteStore(),
-			$settings->getSetting( 'otherProjectsLinks' )
+			$this->settings->getSetting( 'otherProjectsLinks' )
 		);
 	}
 
@@ -677,12 +670,12 @@ final class WikibaseClient {
 	 */
 	public function getParserFunctionRegistrant() {
 		return new ParserFunctionRegistrant(
-			$this->getSettings()->getSetting( 'allowDataTransclusion' )
+			$this->settings->getSetting( 'allowDataTransclusion' )
 		);
 	}
 
 	/**
-	 * @return RendererFactory
+	 * @return PropertyClaimsRendererFactory
 	 */
 	private function getPropertyClaimsRendererFactory() {
 		$snaksFinder = new SnaksFinder(
@@ -708,7 +701,7 @@ final class WikibaseClient {
 		return new Runner(
 			$this->getPropertyClaimsRendererFactory(),
 			$this->getStore()->getSiteLinkTable(),
-			$this->getSettings()->getSetting( 'siteGlobalID' )
+			$this->settings->getSetting( 'siteGlobalID' )
 		);
 	}
 
@@ -719,7 +712,7 @@ final class WikibaseClient {
 		return new OtherProjectsSitesProvider(
 			$this->getSiteStore()->getSites(),
 			$this->getSite(),
-			$this->getSettings()->getSetting( 'specialSiteLinkGroups' )
+			$this->settings->getSetting( 'specialSiteLinkGroups' )
 		);
 	}
 
@@ -746,8 +739,8 @@ final class WikibaseClient {
 			new WikiPageUpdater(),
 			$this->getStore()->getEntityRevisionLookup(),
 			$this->getSite()->getGlobalId(),
-			$this->getSettings()->getSetting( 'injectRecentChanges' ),
-			$this->getSettings()->getSetting( 'allowDataTransclusion' )
+			$this->settings->getSetting( 'injectRecentChanges' ),
+			$this->settings->getSetting( 'allowDataTransclusion' )
 		);
 	}
 
