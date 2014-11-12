@@ -18,7 +18,7 @@ use Wikibase\Client\Changes\PageUpdater;
  */
 class MockPageUpdater implements PageUpdater {
 
-	protected $updates = array(
+	private $updates = array(
 		'purgeParserCache' => array(),
 		'purgeWebCache' => array(),
 		'scheduleRefreshLinks' => array(),

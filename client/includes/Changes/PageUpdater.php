@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client\Changes;
 
+use Title;
+
 /**
  * Service interface for triggering different kinds of page updates
  * and generally notifying the local wiki of external changes.
@@ -21,7 +23,7 @@ interface PageUpdater {
 	 *
 	 * @since    0.4
 	 *
-	 * @param \Title[] $titles The Titles of the pages to update
+	 * @param Title[] $titles The Titles of the pages to update
 	 */
 	public function purgeParserCache( array $titles );
 
@@ -30,7 +32,7 @@ interface PageUpdater {
 	 *
 	 * @since    0.4
 	 *
-	 * @param \Title[] $titles The Titles of the pages to update
+	 * @param Title[] $titles The Titles of the pages to update
 	 */
 	public function purgeWebCache( array $titles );
 
@@ -39,17 +41,18 @@ interface PageUpdater {
 	 *
 	 * @since    0.4
 	 *
-	 * @param \Title[] $titles The Titles of the pages to update
+	 * @param Title[] $titles The Titles of the pages to update
 	 */
 	public function scheduleRefreshLinks( array $titles );
 
 	/**
 	 * Injects an RC entry into the recentchanges, using the the given title and attribs
 	 *
-	 * @param \Title $title
+	 * @param Title $title
 	 * @param array $attribs
 	 *
 	 * @return bool
 	 */
-	public function injectRCRecord( \Title $title, array $attribs );
+	public function injectRCRecord( Title $title, array $attribs );
+
 }

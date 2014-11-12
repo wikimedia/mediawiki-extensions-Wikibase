@@ -48,7 +48,10 @@ use Wikibase\Utils;
  */
 abstract class EntityViewTest extends \MediaWikiLangTestCase {
 
-	protected static $mockRepo;
+	/**
+	 * @var MockRepository
+	 */
+	private $mockRepository;
 
 	protected function newEntityIdParser() {
 		// The data provides use P123 and Q123 IDs, so the parser needs to understand these.
@@ -123,10 +126,10 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 			$languageFallbackChain = $factory->newFromLanguage( Language::factory( $langCode ) );
 		}
 
-		$mockRepo = $this->getMockRepo();
+		$mockRepository = $this->getMockRepository();
 
 		if ( !$entityInfoBuilderFactory ) {
-			$entityInfoBuilderFactory = $mockRepo;
+			$entityInfoBuilderFactory = $mockRepository;
 		}
 
 		if ( !$entityTitleLookup ) {
@@ -158,7 +161,7 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 		$entityView = new $class(
 			$context,
 			$snakFormatter,
-			$mockRepo,
+			$mockRepository,
 			$entityInfoBuilderFactory,
 			$entityTitleLookup,
 			$options,
@@ -179,25 +182,25 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 		return $options;
 	}
 
-	protected function getMockRepo() {
-		if ( !isset( self::$mockRepo ) ) {
-			$mockRepo = new MockRepository();
+	private function getMockRepository() {
+		if ( $this->mockRepository === null ) {
+			$mockRepository = new MockRepository();
 
-			$mockRepo->putEntity( $this->makeItem( 'Q33' ) );
-			$mockRepo->putEntity( $this->makeItem( 'Q22' ) );
-			$mockRepo->putEntity( $this->makeItem( 'Q23' ) );
-			$mockRepo->putEntity( $this->makeItem( 'Q24' ) );
+			$mockRepository->putEntity( $this->makeItem( 'Q33' ) );
+			$mockRepository->putEntity( $this->makeItem( 'Q22' ) );
+			$mockRepository->putEntity( $this->makeItem( 'Q23' ) );
+			$mockRepository->putEntity( $this->makeItem( 'Q24' ) );
 
-			$mockRepo->putEntity( $this->makeProperty( 'P11', 'wikibase-item' ) );
-			$mockRepo->putEntity( $this->makeProperty( 'P23', 'string' ) );
-			$mockRepo->putEntity( $this->makeProperty( 'P42', 'url' ) );
-			$mockRepo->putEntity( $this->makeProperty( 'P43', 'commonsMedia' ) );
-			$mockRepo->putEntity( $this->makeProperty( 'P44', 'wikibase-item' ) );
+			$mockRepository->putEntity( $this->makeProperty( 'P11', 'wikibase-item' ) );
+			$mockRepository->putEntity( $this->makeProperty( 'P23', 'string' ) );
+			$mockRepository->putEntity( $this->makeProperty( 'P42', 'url' ) );
+			$mockRepository->putEntity( $this->makeProperty( 'P43', 'commonsMedia' ) );
+			$mockRepository->putEntity( $this->makeProperty( 'P44', 'wikibase-item' ) );
 
-			self::$mockRepo = $mockRepo;
+			$this->mockRepository = $mockRepository;
 		}
 
-		return self::$mockRepo;
+		return $this->mockRepository;
 	}
 
 	/**
