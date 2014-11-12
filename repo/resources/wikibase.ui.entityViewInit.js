@@ -133,6 +133,7 @@
 				mw.config.get( 'wgUserLanguage' ),
 				mw
 			),
+			dataTypeStore: dataTypes,
 			languages: getUserLanguages()
 		} )
 		.on( 'labelviewchange labelviewafterstopediting', function( event ) {
