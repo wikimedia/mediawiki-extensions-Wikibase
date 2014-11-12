@@ -20,6 +20,15 @@ return call_user_func( function() {
 
 	return array(
 
+		'wikibase.experts.__namespace' => $moduleTemplate + array(
+			'scripts' => array(
+				'__namespace.js'
+			),
+			'dependencies' => array(
+				'wikibase',
+			)
+		),
+
 		'wikibase.experts.getStore' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.experts.js',
@@ -33,8 +42,8 @@ return call_user_func( function() {
 				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.experts.TimeInput',
 				'jquery.valueview.experts.UnsupportedValue',
-				'wikibase',
-				'wikibase.datamodel',
+				'wikibase.datamodel.EntityId',
+				'wikibase.experts.__namespace',
 				'wikibase.experts.EntityIdInput',
 			),
 		),
@@ -50,7 +59,7 @@ return call_user_func( function() {
 				'jquery.wikibase.entityselector',
 				'mw.config.values.wbRepo',
 				'mediawiki.util',
-				'wikibase',
+				'wikibase.experts.__namespace',
 			),
 		),
 	);
