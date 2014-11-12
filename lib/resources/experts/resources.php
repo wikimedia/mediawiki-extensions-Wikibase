@@ -20,7 +20,7 @@ return call_user_func( function() {
 
 	return array(
 
-		'wikibase.experts' => $moduleTemplate + array(
+		'wikibase.experts.getStore' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.experts.js',
 			),
@@ -34,7 +34,6 @@ return call_user_func( function() {
 				'jquery.valueview.experts.TimeInput',
 				'jquery.valueview.experts.UnsupportedValue',
 				'wikibase',
-				'wikibase.dataTypes',
 				'wikibase.datamodel',
 				'wikibase.experts.EntityIdInput',
 			),

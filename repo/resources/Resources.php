@@ -71,7 +71,7 @@ return call_user_func( function() {
 				'wikibase.api.getLocationAgnosticMwApi',
 				'wikibase.dataTypes',
 				'wikibase.entityChangers.EntityChangersFactory',
-				'wikibase.experts',
+				'wikibase.experts.getStore',
 				'wikibase.formatters.getStore',
 				'wikibase.EntityInitializer',
 				'wikibase.parsers.getStore',
