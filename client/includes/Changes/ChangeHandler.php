@@ -51,9 +51,14 @@ class ChangeHandler {
 	const HISTORY_ENTRY_ACTION = 16;
 
 	/**
-	 * @var PageUpdater $updater
+	 * @var AffectedPagesFinder
 	 */
-	private $updater;
+	private $affectedPagesFinder;
+
+	/**
+	 * @var PageUpdater
+	 */
+	private $pageUpdater;
 
 	/**
 	 * @var ChangeListTransformer
@@ -61,42 +66,46 @@ class ChangeHandler {
 	private $changeListTransformer;
 
 	/**
-	 * @var AffectedPagesFinder
-	 */
-	private $affectedPagesFinder;
-
-	/**
 	 * @var string
 	 */
 	private $localSiteId;
 
+	/**
+	 * @var bool
+	 */
+	private $injectRecentChanges;
+
+	/**
+	 * @var bool
+	 */
+	private $allowDataTransclusion;
+
 	public function __construct(
 		AffectedPagesFinder $affectedPagesFinder,
-		PageUpdater $updater,
+		PageUpdater $pageUpdater,
 		ChangeListTransformer $changeListTransformer,
 		$localSiteId,
-		$injectRC,
-		$allowDataTransclusion
+		$injectRecentChanges = true,
+		$allowDataTransclusion = true
 	) {
-		$this->changeListTransformer = $changeListTransformer;
-		$this->affectedPagesFinder = $affectedPagesFinder;
-		$this->updater = $updater;
-
 		if ( !is_string( $localSiteId ) ) {
 			throw new InvalidArgumentException( '$localSiteId must be a string' );
 		}
 
-		if ( !is_bool( $injectRC ) ) {
-			throw new InvalidArgumentException( '$injectRC must be a bool' );
+		if ( !is_bool( $injectRecentChanges ) ) {
+			throw new InvalidArgumentException( '$injectRecentChanges must be a bool' );
 		}
 
 		if ( !is_bool( $allowDataTransclusion ) ) {
 			throw new InvalidArgumentException( '$allowDataTransclusion must be a bool' );
 		}
 
+		$this->affectedPagesFinder = $affectedPagesFinder;
+		$this->pageUpdater = $pageUpdater;
+		$this->changeListTransformer = $changeListTransformer;
 		$this->localSiteId = $localSiteId;
-		$this->injectRC = (bool)$injectRC;
-		$this->dataTransclusionAllowed = $allowDataTransclusion;
+		$this->injectRecentChanges = $injectRecentChanges;
+		$this->allowDataTransclusion = $allowDataTransclusion;
 	}
 
 	/**
@@ -144,7 +153,7 @@ class ChangeHandler {
 
 		$chid = self::getChangeIdForLog( $change );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$chid"
-			. " (" . $change->getType() . ")" );
+			. ' (' . $change->getType() . ')' );
 
 		//TODO: Actions may be per-title, depending on how the change applies to that page.
 		//      We'll need on list of titles per action.
@@ -166,8 +175,8 @@ class ChangeHandler {
 			return false;
 		}
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": updating " . count( $titlesToUpdate )
-			. " pages (actions: " . dechex( $actions ). ") for change #$chid." );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating ' . count( $titlesToUpdate )
+			. ' pages (actions: ' . dechex( $actions ). ") for change #$chid." );
 
 		$this->updatePages( $change, $actions, $titlesToUpdate );
 
@@ -205,27 +214,27 @@ class ChangeHandler {
 		wfProfileIn( __METHOD__ );
 
 		if ( ( $actions & self::PARSER_PURGE_ACTION ) > 0 ) {
-			$this->updater->purgeParserCache( $titlesToUpdate );
+			$this->pageUpdater->purgeParserCache( $titlesToUpdate );
 		}
 
 		if ( ( $actions & self::WEB_PURGE_ACTION ) > 0 ) {
-			$this->updater->purgeWebCache( $titlesToUpdate );
+			$this->pageUpdater->purgeWebCache( $titlesToUpdate );
 		}
 
 		if ( ( $actions & self::LINKS_UPDATE_ACTION ) > 0 ) {
-			$this->updater->scheduleRefreshLinks( $titlesToUpdate );
+			$this->pageUpdater->scheduleRefreshLinks( $titlesToUpdate );
 		}
 
 		/* @var Title $title */
 		foreach ( $titlesToUpdate as $title ) {
-			if ( $this->injectRC && ( $actions & self::RC_ENTRY_ACTION ) > 0 ) {
+			if ( $this->injectRecentChanges && ( $actions & self::RC_ENTRY_ACTION ) > 0 ) {
 				$rcAttribs = $this->getRCAttributes( $change );
 
 				if ( $rcAttribs !== false ) {
-					$this->updater->injectRCRecord( $title, $rcAttribs );
+					$this->pageUpdater->injectRCRecord( $title, $rcAttribs );
 				} else {
-					trigger_error( "change #" . self::getChangeIdForLog( $change )
-						. " did not provide RC info", E_USER_WARNING );
+					trigger_error( 'change #' . self::getChangeIdForLog( $change )
+						. ' did not provide RC info', E_USER_WARNING );
 				}
 			}
 
@@ -327,7 +336,7 @@ class ChangeHandler {
 					| self::RC_ENTRY_ACTION | self::HISTORY_ENTRY_ACTION;
 			}
 
-			if ( $this->dataTransclusionAllowed ) {
+			if ( $this->allowDataTransclusion ) {
 				if ( $diff instanceof EntityDiff && !$diff->getClaimsDiff()->isEmpty() ) {
 					$actions |= self::PARSER_PURGE_ACTION | self::WEB_PURGE_ACTION | self::LINKS_UPDATE_ACTION
 						| self::RC_ENTRY_ACTION | self::HISTORY_ENTRY_ACTION;
