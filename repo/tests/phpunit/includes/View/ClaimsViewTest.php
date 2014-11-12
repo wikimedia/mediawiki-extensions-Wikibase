@@ -14,6 +14,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
@@ -37,7 +38,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		return Title::makeTitle( NS_MAIN, $name );
 	}
 
-	public function getHtmlForClaim( Claim $claim, array $entityInfo, $htmlForEditSection ) {
+	public function getHtmlForClaim( Claim $claim, EntityInfo $entityInfo, $htmlForEditSection ) {
 		return $claim->getGuid();
 	}
 
@@ -80,7 +81,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	public function testGetHtml( array $claims ) {
 		$claimsView = $this->newClaimsView();
 
-		$html = $claimsView->getHtml( $claims, array() );
+		$html = $claimsView->getHtml( $claims, new EntityInfo( array() ) );
 
 		foreach ( $claims as $claim ) {
 			$this->assertContains( $claim->getGuid(), $html );
