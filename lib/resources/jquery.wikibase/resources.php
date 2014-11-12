@@ -166,6 +166,9 @@ return call_user_func( function() {
 			'scripts' => array(
 				'jquery.wikibase.entityview.js',
 			),
+			'styles' => array(
+				'themes/default/jquery.wikibase.entityview.css',
+			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.aliasesview',

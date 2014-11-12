@@ -18,11 +18,10 @@ return call_user_func( function() {
 	$templates = array();
 
 	$templates['wikibase-entityview'] =
-// container reserved for widgets, will be displayed on the right side if there is space
-// TODO: no point in inserting this here, is there? Should be generated in JS!
 <<<HTML
-<div id="wb-$1-$2" class="wikibase-entityview wb-$1" lang="$3" dir="$4">$5</div>
-<div id="wb-widget-container-$2" class="wb-widget-container"></div>
+<div id="wb-$1-$2" class="wikibase-entityview wb-$1" lang="$3" dir="$4">
+	<div class="wikibase-entityview-main">$5</div>
+	<div class="wikibase-entityview-side">$6</div>
 HTML;
 
 
