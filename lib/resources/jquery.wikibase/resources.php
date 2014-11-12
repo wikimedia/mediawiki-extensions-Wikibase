@@ -32,6 +32,7 @@ return call_user_func( function() {
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.toolbarcontroller',
+				'wikibase.datamodel.MultiTerm',
 				'wikibase.templates',
 			),
 			'messages' => array(
@@ -178,6 +179,7 @@ return call_user_func( function() {
 				'jquery.wikibase.sitelinkgrouplistview',
 				'jquery.wikibase.statementview',
 				'wikibase',
+				'wikibase.datamodel.MultiTerm',
 				'wikibase.templates',
 			),
 			'messages' => array(
@@ -249,13 +251,13 @@ return call_user_func( function() {
 				'themes/default/jquery.wikibase.fingerprintview.css',
 			),
 			'dependencies' => array(
-				'mediawiki.Title',
-				'wikibase',
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.descriptionview',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.labelview',
 				'jquery.wikibase.toolbarcontroller',
+				'mediawiki.Title',
+				'wikibase',
 			),
 			'messages' => array(
 				'wikibase-fingerprintview-input-help-message',
