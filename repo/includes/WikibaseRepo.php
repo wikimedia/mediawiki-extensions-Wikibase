@@ -22,6 +22,7 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
@@ -40,7 +41,6 @@ use Wikibase\Lib\Localizer\MessageExceptionLocalizer;
 use Wikibase\Lib\Localizer\ParseExceptionLocalizer;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
@@ -102,64 +102,69 @@ class WikibaseRepo {
 	private $snakConstructionService = null;
 
 	/**
-	 * @var PropertyDataTypeLookup
+	 * @var PropertyDataTypeLookup|null
 	 */
-	private $propertyDataTypeLookup;
+	private $propertyDataTypeLookup = null;
 
 	/**
-	 * @var LanguageFallbackChainFactory
+	 * @var LanguageFallbackChainFactory|null
 	 */
-	private $languageFallbackChainFactory;
+	private $languageFallbackChainFactory = null;
 
 	/**
-	 * @var ClaimGuidValidator
+	 * @var ClaimGuidValidator|null
 	 */
 	private $claimGuidValidator = null;
 
 	/**
-	 * @var EntityIdParser
+	 * @var EntityIdParser|null
 	 */
 	private $entityIdParser = null;
 
 	/**
-	 * @var StringNormalizer
+	 * @var StringNormalizer|null
 	 */
-	private $stringNormalizer;
+	private $stringNormalizer = null;
 
 	/**
-	 * @var OutputFormatSnakFormatterFactory
+	 * @var OutputFormatSnakFormatterFactory|null
 	 */
-	private $snakFormatterFactory;
+	private $snakFormatterFactory = null;
 
 	/**
-	 * @var OutputFormatValueFormatterFactory
+	 * @var OutputFormatValueFormatterFactory|null
 	 */
-	private $valueFormatterFactory;
+	private $valueFormatterFactory = null;
 
 	/**
-	 * @var SummaryFormatter
+	 * @var SummaryFormatter|null
 	 */
-	private $summaryFormatter;
+	private $summaryFormatter = null;
 
 	/**
-	 * @var ExceptionLocalizer
+	 * @var ExceptionLocalizer|null
 	 */
-	private $exceptionLocalizer;
+	private $exceptionLocalizer = null;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteStore|null
 	 */
-	private $siteStore;
+	private $siteStore = null;
 
 	/**
-	 * @var Store
+	 * @var Store|null
 	 */
-	private $store;
+	private $store = null;
 
 	/**
-	 * @var TemplateRegistry
+	 * @var EntityNamespaceLookup|null
 	 */
-	private $templateRegistry;
+	private $entityNamespaceLookup = null;
+
+	/**
+	 * @var TemplateRegistry|null
+	 */
+	private $templateRegistry = null;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -195,7 +200,6 @@ class WikibaseRepo {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-
 			$urlSchemes = $this->getSettings()->getSetting( 'urlSchemes' );
 			$builders = new WikibaseDataTypeBuilders(
 				$this->getEntityLookup(),
@@ -455,7 +459,7 @@ class WikibaseRepo {
 	 * @return Store
 	 */
 	public function getStore() {
-		if ( !$this->store ) {
+		if ( $this->store === null ) {
 			$this->store = new SqlStore(
 				$this->getEntityContentDataCodec(),
 				$this->getEntityIdParser()
@@ -472,7 +476,7 @@ class WikibaseRepo {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	public function getSnakFormatterFactory() {
-		if ( !$this->snakFormatterFactory ) {
+		if ( $this->snakFormatterFactory === null ) {
 			$this->snakFormatterFactory = $this->newSnakFormatterFactory();
 		}
 
@@ -514,7 +518,7 @@ class WikibaseRepo {
 	 * @return OutputFormatValueFormatterFactory
 	 */
 	public function getValueFormatterFactory() {
-		if ( !$this->valueFormatterFactory ) {
+		if ( $this->valueFormatterFactory === null ) {
 			$this->valueFormatterFactory = $this->newValueFormatterFactory();
 		}
 
@@ -536,7 +540,7 @@ class WikibaseRepo {
 	 * @return ExceptionLocalizer
 	 */
 	public function getExceptionLocalizer() {
-		if ( !$this->exceptionLocalizer ) {
+		if ( $this->exceptionLocalizer === null ) {
 			$formatter = $this->getMessageParameterFormatter();
 			$localizers = $this->getExceptionLocalizers( $formatter );
 
@@ -566,7 +570,7 @@ class WikibaseRepo {
 	 * @return SummaryFormatter
 	 */
 	public function getSummaryFormatter() {
-		if ( !$this->summaryFormatter ) {
+		if ( $this->summaryFormatter === null ) {
 			$this->summaryFormatter = $this->newSummaryFormatter();
 		}
 
@@ -686,7 +690,7 @@ class WikibaseRepo {
 	 * @return SiteStore
 	 */
 	public function getSiteStore() {
-		if ( !$this->siteStore ) {
+		if ( $this->siteStore === null ) {
 			$this->siteStore = SiteSQLStore::newInstance();
 		}
 
@@ -941,20 +945,22 @@ class WikibaseRepo {
 	 * @return EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup() {
-		if ( !isset( $this->entityNamespaceLookup ) ) {
+		if ( $this->entityNamespaceLookup === null ) {
 			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-			$this->getSettings()->getSetting( 'entityNamespaces' )
-		);
+				$this->getSettings()->getSetting( 'entityNamespaces' )
+			);
 		}
 
 		return $this->entityNamespaceLookup;
 	}
 
 	public function getTemplateRegistry() {
-		if( !isset( $this->templateRegistry ) ) {
+		if ( $this->templateRegistry === null ) {
 			$this->templateRegistry = new TemplateRegistry();
-			$this->templateRegistry->addTemplates( include( __DIR__ . "/../resources/templates.php" ) );
+			$this->templateRegistry->addTemplates( include( __DIR__ . '/../resources/templates.php' ) );
 		}
+
 		return $this->templateRegistry;
 	}
+
 }
