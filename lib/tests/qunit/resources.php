@@ -117,24 +117,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.utilities.ClaimGuidGenerator.tests' => $moduleBase + array(
-			'scripts' => array(
-				'wikibase.utilities/wikibase.utilities.ClaimGuidGenerator.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.utilities.ClaimGuidGenerator',
-			),
-		),
-
-		'wikibase.utilities.GuidGenerator.tests' => $moduleBase + array(
-			'scripts' => array(
-				'wikibase.utilities/wikibase.utilities.GuidGenerator.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.utilities.GuidGenerator',
-			),
-		),
-
 		'wikibase.Site.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.Site.tests.js',
