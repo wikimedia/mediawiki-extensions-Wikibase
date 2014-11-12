@@ -44,7 +44,7 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 	 */
 	protected $propertyDataTypeLookup;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$numericValidator = new TestValidator( '/^[0-9]+$/' );

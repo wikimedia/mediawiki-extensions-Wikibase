@@ -21,7 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class IntegrationApiTest extends ApiTestCase {
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 		$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
 		$sitesTable->clear();

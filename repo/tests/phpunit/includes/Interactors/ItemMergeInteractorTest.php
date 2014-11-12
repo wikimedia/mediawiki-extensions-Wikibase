@@ -39,7 +39,7 @@ class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private $testHelper = null;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->testHelper = new EntityModificationTestHelper();

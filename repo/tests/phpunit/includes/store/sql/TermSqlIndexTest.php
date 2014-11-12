@@ -27,7 +27,7 @@ use Wikibase\TermSqlIndex;
  */
 class TermSqlIndexTest extends TermIndexTest {
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->tablesUsed[] = 'wb_terms';
