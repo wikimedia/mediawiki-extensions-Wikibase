@@ -54,7 +54,7 @@ util.highlightSubstring = function( substring, string, options ) {
 		)
 	) {
 		return string;
-	} else if( !options.caseInsensitive ) {
+	} else if( !options.caseSensitive ) {
 		var lowerCaseString = string.toLowerCase(),
 			lowerCaseSubstring = substring.toLowerCase(),
 			caseInsensitiveIndexOfSubstring = lowerCaseString.indexOf( lowerCaseSubstring );
