@@ -53,7 +53,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.getEntityObject (id must be string)', func = mw.wikibase.getEntityObject,
 	  args = { 123 },
-	  expect = 'Id must be either of type string or nil, number given'
+	  expect = 'id must be either of type string or nil, number given'
 	},
 	{ name = 'mw.wikibase.label', func = mw.wikibase.label, type='ToString',
 	  args = { 'Q32487' },
