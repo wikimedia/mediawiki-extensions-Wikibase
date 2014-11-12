@@ -5,6 +5,7 @@ namespace Wikibase;
 use DataTypes\DataType;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -22,7 +23,7 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getMainHtml
 	 */
-	public function getMainHtml( EntityRevision $entityRevision, array $entityInfo,
+	public function getMainHtml( EntityRevision $entityRevision, EntityInfo $entityInfo,
 		$editable = true
 	) {
 		wfProfileIn( __METHOD__ );

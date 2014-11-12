@@ -104,7 +104,8 @@ class EntityViewFactory {
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->getSnakFormatter( $fallbackChain, $languageCode ),
-			$this->entityTitleLookup
+			$this->entityTitleLookup,
+			$languageCode
 		);
 
 		$claimHtmlGenerator = new ClaimHtmlGenerator(

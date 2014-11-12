@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\LegacyIdInterpreter;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 
 /**
@@ -165,10 +166,10 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	/**
 	 * @see EntityInfoBuilder::getEntityInfo
 	 *
-	 * @return array[]
+	 * @return EntityInfo
 	 */
 	public function getEntityInfo() {
-		return $this->entityInfo;
+		return new EntityInfo( $this->entityInfo );
 	}
 
 	/**
