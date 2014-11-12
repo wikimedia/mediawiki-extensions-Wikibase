@@ -6,6 +6,7 @@ use ResourceLoaderContext;
 use ResourceLoaderModule;
 use Site;
 use SiteSQLStore;
+use Xml;
 
 /**
  *
@@ -102,7 +103,7 @@ class SitesModule extends ResourceLoaderModule {
 				)
 			);
 
-			//TODO: figure out which name ist best
+			//TODO: figure out which name is best
 			//$localIds = $site->getLocalIds();
 			//$name = empty( $localIds['equivalent'] ) ? $site->getGlobalId() : $localIds['equivalent'][0];
 
@@ -117,7 +118,7 @@ class SitesModule extends ResourceLoaderModule {
 			);
 		}
 
-		return 'mediaWiki.config.set( "wbSiteDetails", ' . \FormatJson::encode( $sites ) . ' );';
+		return Xml::encodeJsCall( 'mediaWiki.config.set', array( 'wbSiteDetails', $sites ) );
 	}
 
 	/**
