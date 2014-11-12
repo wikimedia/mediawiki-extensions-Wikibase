@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_ab8411d9",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/PropertyClaimsRendererFactoryTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-12T16:29:18Z",
+      "side": 1,
+      "message": "value formatter builders are not used beyond being present as an argument in the PropertyClaimsRenderer constructor for construction of the SnakFormatter object.\n\ntherefore, what the methods do is not important here.",
+      "parentUuid": "6e936f18_a023d0b3",
+      "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_8b24b5ae",
         "filename": "lib/includes/formatters/OutputFormatSnakFormatterFactory.php",
         "patchSetId": 5
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_eb7539f5",
+        "filename": "lib/includes/formatters/OutputFormatSnakFormatterFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-12T16:29:18Z",
+      "side": 1,
+      "message": "ok, removed",
+      "parentUuid": "6e936f18_4b030d10",
+      "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_eb2a1973",
         "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
         "patchSetId": 5
@@ -64,6 +100,24 @@
       "writtenOn": "2014-11-12T16:03:19Z",
       "side": 1,
       "message": "Passing a meta-factory as a parameter to a factory method seems like a bad thing... not sure there are good alternatives, though.",
+      "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8bc5950f",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-12T16:29:18Z",
+      "side": 1,
+      "message": "this seems to be least evil of evil options here.\n\nwould be happy to see follow up patches to make it nicer.",
+      "parentUuid": "6e936f18_eb2a1973",
       "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_6b8a89e5",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-12T16:29:18Z",
+      "side": 1,
+      "message": "omg!",
+      "parentUuid": "6e936f18_6b836957",
+      "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_0be3c532",
         "filename": "repo/includes/EntityParserOutputGenerator.php",
         "patchSetId": 5
@@ -98,6 +170,24 @@
       "writtenOn": "2014-11-12T16:03:19Z",
       "side": 1,
       "message": "What are these? I guess these are the IDs of referenced entities - that should be reflected by the parameter name and/or documentation.",
+      "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_0b73c514",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-12T16:29:18Z",
+      "side": 1,
+      "message": "documented",
+      "parentUuid": "6e936f18_0be3c532",
       "revId": "ef00e8f6e951557ee5aa3999d52de98d4a93dfec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
