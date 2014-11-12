@@ -16,6 +16,24 @@
       "revId": "bf6de4a64ea9715560ec7196bdcab9b4adef51cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_6b57e9cd",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-12T15:42:41Z",
+      "side": 1,
+      "message": "This is hidden by CSS if the user doesn\u0027t have JS enabled. I agree that there should be some kind of no-js link, but just linking special:createitem wont work: A page without sitelinks *can* have an item (which then only has one sitelink or only one sitelink to the current sitegroup). Handling that is doable, but should probably be a different change.",
+      "parentUuid": "6e936f18_0082c401",
+      "revId": "bf6de4a64ea9715560ec7196bdcab9b4adef51cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
