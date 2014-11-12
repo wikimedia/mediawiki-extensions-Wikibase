@@ -60,19 +60,4 @@ class TemplateRegistry {
 		$this->templates[$key] = str_replace( "\t", '', $snippet );
 	}
 
-	/**
-	 * Singleton pattern integration.
-	 *
-	 * @return TemplateRegistry
-	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$instance = new static();
-		}
-
-		return $instance;
-	}
-
 }
