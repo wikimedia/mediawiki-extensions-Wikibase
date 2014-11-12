@@ -75,6 +75,7 @@ use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * Top level factory for the WikibaseRepo extension.

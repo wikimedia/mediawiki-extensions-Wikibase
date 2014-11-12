@@ -364,6 +364,7 @@
 	"wikibase-item-summary-wbsetclaim-update-references": "Automatic edit summary generated when modifying the references of a claim using setclaim. Parameters:\n* $3 - number of claims changed\n* $4 - number of references changed",
 	"wikibase-item-summary-wbsetclaim-update-rank": "Automatic edit summary generated when modifying the rank of a claim using setclaim. Parameters:\n* $3 - number of claims changed",
 	"wikibase-item-summary-clientsitelink-update": "Automatic edit summary (autocomment) when a language link has been automatically updated after a page move. Parameters:\n* $3 - siteid and name of the old page name (like enwiki:Foo)\n* $4 - siteid and name of the new page name (like enwiki:Bar)\n{{wikibase summary messages|sitelinks}}",
+	"wikibase-item-summary-clientsitelink-remove": "Automatic edit summary (autocomment) when a language link has been automatically removed after a page deletion. Parameters:\n* $3 - siteid\n{{wikibase summary messages|sitelinks}}",
 	"wikibase-item-summary-wbsetqualifier-add": "Automatic edit summary when adding qualifiers. Parameters:\n* $1 is the number of qualifiers added.",
 	"wikibase-item-summary-wbsetqualifier-update": "Automatic edit summary when setting qualifiers. Parameters:\n* $1 is the number of qualifiers updated.",
 	"wikibase-item-summary-wbremovequalifiers-remove": "Automatic edit summary when removing qualifiers. Parameters:\n* $1 is the number of qualifiers removed.",
