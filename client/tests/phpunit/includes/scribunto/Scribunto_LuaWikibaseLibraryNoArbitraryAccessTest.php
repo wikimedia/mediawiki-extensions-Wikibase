@@ -18,9 +18,10 @@ use Wikibase\Client\Scribunto\Test\Scribunto_LuaWikibaseLibraryTestCase;
  * @author Marius Hoch < hoo@online.de >
  */
 class Scribunto_LuaWikibaseLibraryNoArbitraryAccessTest extends Scribunto_LuaWikibaseLibraryTestCase {
+
 	protected static $moduleName = 'LuaWikibaseLibraryNoArbitraryAccessTests';
 
-	function getTestModules() {
+	protected function getTestModules() {
 		return parent::getTestModules() + array(
 			'LuaWikibaseLibraryNoArbitraryAccessTests' => __DIR__ . '/LuaWikibaseLibraryNoArbitraryAccessTests.lua',
 		);
