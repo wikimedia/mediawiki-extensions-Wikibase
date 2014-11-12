@@ -1,4 +1,7 @@
 <?php
+
+use Wikibase\Repo\WikibaseRepo;
+
 /**
  * Wikibase Repo ResourceLoader modules
  *
@@ -97,6 +100,26 @@ return call_user_func( function() {
 				'jquery.event.special.eachchange',
 				'jquery.ui.ooMenu',
 				'jquery.wikibase.entityselector',
+			),
+		),
+
+		'mw.config.values.wbDataTypes' => $moduleTemplate + array(
+			'class' => 'DataTypes\DataTypesModule',
+			'datatypefactory' => function() {
+				return WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
+			},
+			'datatypesconfigvarname' => 'wbDataTypes',
+		),
+
+		'wikibase.dataTypes' => $moduleTemplate + array(
+			'scripts' => array(
+				'dataTypes/wikibase.dataTypes.js',
+			),
+			'dependencies' => array(
+				'dataTypes.DataType',
+				'dataTypes.DataTypeStore',
+				'mw.config.values.wbDataTypes',
+				'wikibase',
 			),
 		),
 
