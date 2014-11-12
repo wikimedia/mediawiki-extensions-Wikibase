@@ -72,24 +72,24 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.RepoApi.tests' => $moduleBase + array(
+		'wikibase.api.RepoApi.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.RepoApi/wikibase.RepoApi.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase',
 				'wikibase.api.getLocationAgnosticMwApi',
-				'wikibase.RepoApi',
+				'wikibase.api.RepoApi',
 			),
 		),
 
-		'wikibase.RepoApiError.tests' => $moduleBase + array(
+		'wikibase.api.RepoApiError.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.RepoApi/wikibase.RepoApiError.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase',
-				'wikibase.RepoApiError',
+				'wikibase.api.RepoApiError',
 			),
 			'messages' => array(
 				'wikibase-error-unexpected',

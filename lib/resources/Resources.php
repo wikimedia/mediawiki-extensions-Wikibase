@@ -167,6 +167,7 @@ return call_user_func( function() {
 	$modules = array_merge(
 		$modules,
 		include( __DIR__ . '/api/resources.php' ),
+		include( __DIR__ . '/deprecated/resources.php' ),
 		include( __DIR__ . '/entityChangers/resources.php' ),
 		include( __DIR__ . '/experts/resources.php' ),
 		include( __DIR__ . '/formatters/resources.php' ),
