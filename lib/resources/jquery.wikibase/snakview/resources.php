@@ -110,7 +110,6 @@ return call_user_func( function() {
 				'jquery.wikibase.snakview.variations',
 				'jquery.wikibase.snakview.variations.Variation',
 				'wikibase.datamodel',
-				'wikibase.dataTypes',
 			),
 			'messages' => array(
 				'wikibase-snakview-variation-datavaluetypemismatch',
