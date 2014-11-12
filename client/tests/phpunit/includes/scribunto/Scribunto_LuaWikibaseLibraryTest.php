@@ -22,9 +22,10 @@ use Wikibase\Client\WikibaseClient;
  * @author Marius Hoch < hoo@online.de >
  */
 class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestCase {
+
 	protected static $moduleName = 'LuaWikibaseLibraryTests';
 
-	function getTestModules() {
+	protected function getTestModules() {
 		return parent::getTestModules() + array(
 			'LuaWikibaseLibraryTests' => __DIR__ . '/LuaWikibaseLibraryTests.lua',
 		);

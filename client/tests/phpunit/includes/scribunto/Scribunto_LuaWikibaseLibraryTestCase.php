@@ -100,7 +100,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 		parent::setUp();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		parent::tearDown();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
