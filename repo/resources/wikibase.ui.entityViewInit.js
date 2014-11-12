@@ -4,7 +4,7 @@
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  */
 
-( function( $, mw, wb, dataTypes, experts, getFormatterStore, getParserStore ) {
+( function( $, mw, wb, dataTypes, getExpertsStore, getFormatterStore, getParserStore ) {
 	'use strict';
 
 	mw.hook( 'wikipage.content' ).add( function() {
@@ -127,7 +127,7 @@
 			entityChangersFactory: entityChangersFactory,
 			entityStore: entityStore,
 			valueViewBuilder: new wb.ValueViewBuilder(
-				experts,
+				getExpertsStore( dataTypes ),
 				getFormatterStore( repoApi, dataTypes ),
 				getParserStore( repoApi ),
 				mw.config.get( 'wgUserLanguage' ),
@@ -342,7 +342,7 @@
 	mediaWiki,
 	wikibase,
 	wikibase.dataTypes,
-	wikibase.experts.store,
+	wikibase.experts.getStore,
 	wikibase.formatters.getStore,
 	wikibase.parsers.getStore
 );
