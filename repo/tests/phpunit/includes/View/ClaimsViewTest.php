@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use TestUser;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -66,7 +65,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	 */
 	private function makeProperty() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$testUser = new TestUser( 'WikibaseUser' );
+		$testUser = new \TestUser( 'WikibaseUser' );
 
 		$property = Property::newFromType( 'string' );
 		$property->setLabel( 'en', "<script>alert( 'omg!!!' );</script>" );
@@ -143,6 +142,8 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	}
 
 	/**
+	 * @param EntityTitleLookup $entityTitleLookup
+	 *
 	 * @return ClaimsView
 	 */
 	private function newClaimsView( EntityTitleLookup $entityTitleLookup ) {

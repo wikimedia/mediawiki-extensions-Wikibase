@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Language;
 use ParserOptions;
-use TestUser;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -18,7 +17,7 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 	public function testGetEntityParserOutputGenerator() {
 		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
 
-		$testUser = new TestUser( 'Wikibase User' );
+		$testUser = new \TestUser( 'Wikibase User' );
 
 		$parserOutputGenerator = $parserOutputGeneratorFactory->getEntityParserOutputGenerator(
 			new ParserOptions( $testUser->getUser(), Language::factory( 'en' ) )
@@ -30,7 +29,7 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 	public function testGetEntityParserOutputGenerator_noParserOptionLanguage() {
 		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
 
-		$testUser = new TestUser( 'Wikibase User' );
+		$testUser = new \TestUser( 'Wikibase User' );
 
 		$parserOutputGenerator = $parserOutputGeneratorFactory->getEntityParserOutputGenerator(
 			new ParserOptions( $testUser->getUser() )

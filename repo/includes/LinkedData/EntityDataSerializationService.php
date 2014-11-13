@@ -13,10 +13,10 @@ use MWException;
 use RequestContext;
 use SiteList;
 use Wikibase\Api\ResultBuilder;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\RdfSerializer;
 
