@@ -25,6 +25,17 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'jquery.ui.EditableTemplatedWidget' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.EditableTemplatedWidget.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.TemplatedWidget',
+				'util.inherit',
+				'wikibase.templates',
+			),
+		),
+
 		'jquery.ui.TemplatedWidget' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.TemplatedWidget.js',
