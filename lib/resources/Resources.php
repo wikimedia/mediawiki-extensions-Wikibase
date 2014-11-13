@@ -72,7 +72,6 @@ return call_user_func( function() {
 				'wikibase.js',
 			),
 			'dependencies' => array(
-				'wikibase.common',
 			),
 			'messages' => array(
 				'special-createitem',
