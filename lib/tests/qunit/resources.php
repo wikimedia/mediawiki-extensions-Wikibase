@@ -53,15 +53,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.ui.tagadata.tests' => $moduleBase + array(
-			'scripts' => array(
-				'jquery.ui/jquery.ui.tagadata.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.ui.tagadata',
-			),
-		),
-
 		'wikibase.dataTypes.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.dataTypes/wikibase.dataTypes.tests.js',

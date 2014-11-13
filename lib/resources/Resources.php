@@ -117,21 +117,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.ui.tagadata' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.ui/jquery.ui.tagadata.js',
-			),
-			'styles' => array(
-				'jquery.ui/jquery.ui.tagadata.css',
-			),
-			'dependencies' => array(
-				'jquery.event.special.eachchange',
-				'jquery.effects.blind',
-				'jquery.inputautoexpand',
-				'jquery.ui.widget',
-			),
-		),
-
 		'wikibase.dataTypes' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.dataTypes/wikibase.dataTypes.js',

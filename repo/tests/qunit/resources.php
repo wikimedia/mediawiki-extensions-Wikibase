@@ -17,6 +17,15 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'jquery.ui.tagadata.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.tagadata.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.tagadata',
+			),
+		),
+
 		'jquery.ui.TemplatedWidget.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.TemplatedWidget.tests.js',
