@@ -28,7 +28,7 @@ interface EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throw StorageException
+	 * @throws StorageException
 	 * @return Entity|null
 	 */
 	public function getEntity( EntityId $entityId );
@@ -46,7 +46,7 @@ interface EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throw StorageException
+	 * @throws StorageException
 	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId );

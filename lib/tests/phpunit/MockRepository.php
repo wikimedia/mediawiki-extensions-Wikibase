@@ -95,7 +95,7 @@ class MockRepository implements
 	 *
 	 * @return Entity|null
 	 *
-	 * @throw StorageException
+	 * @throws StorageException
 	 */
 	public function getEntity( EntityId $entityId ) {
 		$rev = $this->getEntityRevision( $entityId );
@@ -112,7 +112,6 @@ class MockRepository implements
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
-	 * @throw StorageException
 	 */
 	public function getEntityRevision( EntityId $entityId, $revision = 0 ) {
 		$key = $entityId->getSerialization();

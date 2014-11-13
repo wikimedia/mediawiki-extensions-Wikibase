@@ -97,7 +97,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @param EntityId $entityId
 	 * @param int      $revisionId The desired revision id, 0 means "current".
 	 *
-	 * @throw StorageException
+	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
 	public function getEntityRevision( EntityId $entityId, $revisionId = 0 ) {
@@ -136,8 +136,8 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @param EntityId $entityId
 	 * @param int $revisionId
 	 *
-	 * @throw StorageException
-	 * @return null|EntityRevision
+	 * @throws StorageException
+	 * @return EntityRevision|null
 	 */
 	private function fetchEntityRevision( EntityId $entityId, $revisionId = 0 ) {
 		wfProfileIn( __METHOD__ );

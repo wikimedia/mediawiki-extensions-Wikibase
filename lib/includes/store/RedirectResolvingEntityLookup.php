@@ -43,7 +43,7 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throw StorageException
+	 * @throws StorageException
 	 * @return Entity|null
 	 */
 	public function getEntity( EntityId $entityId ) {
@@ -58,7 +58,7 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throw StorageException
+	 * @throws StorageException
 	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId ) {
