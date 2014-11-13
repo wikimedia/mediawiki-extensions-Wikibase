@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_bf4be62a",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 0,
+      "message": "In general there are much more test cases removed here compared to the new test cases for the new class. I guess this is not a bad thing. Simplifying the code also means less, simpler tests are sufficient, right? Right?",
+      "revId": "362e784f3e75ac3f7252d80c114cec96f19acd40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_bfbc4602",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 0,
+      "message": "The group method is still public in the new class but not tested any more. Did you forgot to move this test? Or forgot to make the method private?",
+      "revId": "362e784f3e75ac3f7252d80c114cec96f19acd40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_3f57d6ce",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 0,
+      "message": "I think this is not moved to the new file. On purpose?",
+      "revId": "362e784f3e75ac3f7252d80c114cec96f19acd40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_df6fd28d",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 0,
+      "message": "This is also not moved. On purpose?",
+      "revId": "362e784f3e75ac3f7252d80c114cec96f19acd40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

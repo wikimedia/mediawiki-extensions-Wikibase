@@ -2,6 +2,125 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e936f18_5f03c2c1",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 1,
+      "message": "Can not be null.",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_7f08fedc",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 1,
+      "message": "The order again...",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_9ffceab3",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 1,
+      "message": "Can not be null.",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_7fa6be0e",
+        "filename": "client/includes/Changes/ChangeListMangler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 1,
+      "message": "Mangler? That\u0027s what\u0027s a mangle is for me: http://www.suchebiete.com/userbilder/4ca9e56e7d21e.jpg\n\nWhat about Consolidator? Reducer? Merger? Combiner?\n\nBut wait, this interface must not know what happens to the array. It could also grow in size. It\u0027s just a ChangeListTransformator.\n\nIf you want a guarantee the returned list is never larger please add this to the documentation.",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_bf8e867a",
+        "filename": "client/includes/Changes/ChangeListMangler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 1,
+      "message": "See, even your own description does not contain anything about \"mangling\".",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_3f6d96c7",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 1,
+      "message": "Cola... koala... coalescer? This word is in not even in my dictionary. Merger? Combiner? Consolidator? Joiner? Aggregator?\n\nBesides the naming: I checked and everything in this file is just moved code. That\u0027s also why the @since tags are there. Can easily be fixed later.",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1f20da45",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 1,
+      "message": "Newline.",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_0045e4b8",
         "filename": "client/includes/Changes/ChangeRunCoalescer.php",
         "patchSetId": 3
@@ -30,6 +149,40 @@
       "writtenOn": "2014-11-12T14:30:19Z",
       "side": 1,
       "message": "since tag for private method?",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_7ff47eee",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 1,
+      "message": "Oh, this is possible? Why nobody told me!",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1fcc5abf",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeRunCoalescerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T12:53:44Z",
+      "side": 1,
+      "message": "Inconsistency, even in this file. getChangeRunCoalescer, please.",
       "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
