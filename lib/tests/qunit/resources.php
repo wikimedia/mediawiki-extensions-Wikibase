@@ -98,25 +98,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.store.CombiningEntityStore.tests' => $moduleBase + array(
-			'scripts' => array(
-				'wikibase.store/store.CombiningEntityStore.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.store.CombiningEntityStore',
-				'wikibase.store.EntityStore',
-			),
-		),
-
-		'wikibase.store.MwConfigEntityStore.tests' => $moduleBase + array(
-			'scripts' => array(
-				'wikibase.store/store.MwConfigEntityStore.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.store.MwConfigEntityStore',
-			),
-		),
-
 		'wikibase.Site.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.Site.tests.js',
