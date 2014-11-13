@@ -39,6 +39,7 @@ class SnakHtmlGenerator {
 	private $propertyIdFormatter;
 
 	/**
+	 * @param TemplateFactory $templateFactory
 	 * @param SnakFormatter $snakFormatter
 	 * @param EntityIdFormatter $propertyIdFormatter
 	 *
