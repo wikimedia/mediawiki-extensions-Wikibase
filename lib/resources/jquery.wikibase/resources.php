@@ -316,6 +316,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
+				'jquery.util.EventSingletonManager',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.sitelinkgroupview',
 			),
@@ -334,6 +335,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.sticknode',
 				'jquery.ui.TemplatedWidget',
+				'jquery.util.EventSingletonManager',
 				'jquery.wikibase.sitelinklistview',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase.sites',
@@ -352,6 +354,7 @@ return call_user_func( function() {
 				'jquery.sticknode',
 				'jquery.tablesorter',
 				'jquery.ui.EditableTemplatedWidget',
+				'jquery.util.EventSingletonManager',
 				'jquery.wikibase.addtoolbar',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.listview',
@@ -387,6 +390,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
+				'jquery.util.EventSingletonManager',
 				'jquery.wikibase.badgeselector',
 				'jquery.wikibase.pagesuggester',
 				'jquery.wikibase.siteselector',
