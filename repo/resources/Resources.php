@@ -25,6 +25,30 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'jquery.removeClassByRegex' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.removeClassByRegex.js',
+			),
+		),
+
+		'jquery.sticknode' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.sticknode.js',
+			),
+			'dependencies' => array(
+				'jquery.util.EventSingletonManager',
+			),
+		),
+
+		'jquery.util.EventSingletonManager' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.util.EventSingletonManager.js',
+			),
+			'dependencies' => array(
+				'jquery.throttle-debounce',
+			),
+		),
+
 		'jquery.ui.tagadata' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.tagadata.js',
