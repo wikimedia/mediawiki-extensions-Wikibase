@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
- *
- * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
 	$remoteExtPathParts = explode(
@@ -17,30 +15,24 @@ return call_user_func( function() {
 
 	$modules = array(
 
-		'jquery.ui.TemplatedWidget.tests' => $moduleBase + array(
+		'wikibase.utilities.ClaimGuidGenerator.tests' => $moduleBase + array(
 			'scripts' => array(
-				'jquery.ui/jquery.ui.TemplatedWidget.tests.js',
+				'ClaimGuidGenerator.tests.js',
 			),
 			'dependencies' => array(
-				'jquery.ui.TemplatedWidget',
-				'wikibase.templates',
+				'wikibase.utilities.ClaimGuidGenerator',
 			),
 		),
 
-		'templates.tests' => $moduleBase + array(
+		'wikibase.utilities.GuidGenerator.tests' => $moduleBase + array(
 			'scripts' => array(
-				'templates.tests.js',
+				'GuidGenerator.tests.js',
 			),
 			'dependencies' => array(
-				'wikibase.templates',
+				'wikibase.utilities.GuidGenerator',
 			),
 		),
-
 	);
 
-	return array_merge(
-		$modules,
-		include __DIR__ . '/utilities/resources.php'
-	);
-
+	return $modules;
 } );

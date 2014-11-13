@@ -181,6 +181,9 @@ return call_user_func( function() {
 		$modules['wikibase.special.entitiesWithout']['dependencies'][] = 'ext.uls.mediawiki';
 	}
 
-	return $modules;
+	return array_merge(
+		$modules,
+		include( __DIR__ . '/utilities/resources.php' )
+	);
 } );
 // @codeCoverageIgnoreEnd
