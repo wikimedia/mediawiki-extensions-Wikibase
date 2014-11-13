@@ -23,18 +23,14 @@ use Wikibase\Lib\SnakFormatter;
 class SnakHtmlGenerator {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var SnakFormatter
 	 */
-	protected $snakFormatter;
+	private $snakFormatter;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var EntityIdFormatter
 	 */
-	protected $propertyIdFormatter;
+	private $propertyIdFormatter;
 
 	/**
 	 * @param SnakFormatter $snakFormatter
@@ -114,7 +110,7 @@ class SnakHtmlGenerator {
 	 * @param Snak $snak
 	 * @return string
 	 */
-	protected function getFormattedSnakValue( $snak ) {
+	private function getFormattedSnakValue( $snak ) {
 		try {
 			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
 		} catch ( FormattingException $ex ) {

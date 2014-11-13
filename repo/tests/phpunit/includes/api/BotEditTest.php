@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test\Api;
 
-use ApiTestCase;
-use TestUser;
 use Title;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -34,7 +32,7 @@ class BotEditTest extends WikibaseApiTestCase {
 	private static $hasSetup;
 
 	/**
-	 * @var TestUser
+	 * @var \TestUser
 	 */
 	private static $wbBotUser;
 
@@ -42,7 +40,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		parent::setUp();
 
 		if ( !isset( self::$wbBotUser ) ) {
-			self::$wbBotUser = new TestUser(
+			self::$wbBotUser = new \TestUser(
 				'Apitestbot',
 				'Api Test Bot',
 				'api_test_bot@example.com',
@@ -50,7 +48,7 @@ class BotEditTest extends WikibaseApiTestCase {
 			);
 		}
 
-		ApiTestCase::$users['wbbot'] = self::$wbBotUser;
+		\ApiTestCase::$users['wbbot'] = self::$wbBotUser;
 
 		if( !isset( self::$hasSetup ) ){
 			$this->initTestEntities( array( 'Empty' ) );
