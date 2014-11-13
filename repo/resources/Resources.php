@@ -108,6 +108,25 @@ return call_user_func( function() {
 			'datatypesconfigvarname' => 'wbDataTypes',
 		),
 
+		// common styles independent from JavaScript being enabled or disabled
+		'wikibase.common' => $moduleTemplate + array(
+			'styles' => array(
+				// Order must be hierarchical, do not order alphabetically
+				'wikibase.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.aliasesview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.descriptionview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.entityview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.fingerprintgroupview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.fingerprintlistview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.fingerprintview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.labelview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.sitelinkgrouplistview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.sitelinkview.css',
+			)
+		),
+
 		'wikibase.dataTypes' => $moduleTemplate + array(
 			'scripts' => array(
 				'dataTypes/wikibase.dataTypes.js',
@@ -285,6 +304,7 @@ return call_user_func( function() {
 		include( __DIR__ . '/entityChangers/resources.php' ),
 		include( __DIR__ . '/experts/resources.php' ),
 		include( __DIR__ . '/formatters/resources.php' ),
+		include( __DIR__ . '/jquery.wikibase/resources.php' ),
 		include( __DIR__ . '/parsers/resources.php' ),
 		include( __DIR__ . '/store/resources.php' ),
 		include( __DIR__ . '/utilities/resources.php' )
