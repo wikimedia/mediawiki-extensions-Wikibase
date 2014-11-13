@@ -6,10 +6,15 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
 
+/**
+ * @group Wikibase
+ * @group WikibaseLib
+ * @group WikibaseStore
+ */
 class LanguageLabelLookupTest extends \MediaWikiTestCase {
 
 	public function testGetLabel() {
-		$termLookup = new EntityTermLookup( $this->getTermIndex() );
+		$termLookup = $this->getTermLookup();
 		$labelLookup = new LanguageLabelLookup( $termLookup, 'en' );
 
 		$label = $labelLookup->getLabel( new ItemId( 'Q116' ) );
@@ -17,12 +22,27 @@ class LanguageLabelLookupTest extends \MediaWikiTestCase {
 		$this->assertEquals( 'New York City', $label );
 	}
 
-	public function testGetLabel_notFound() {
-		$termLookup = new EntityTermLookup( $this->getTermIndex() );
+	public function testGetLabel_entityNotFound() {
+		$termLookup = $this->getTermLookup();
 		$labelLookup = new LanguageLabelLookup( $termLookup, 'en' );
 
+		$this->setExpectedException( 'Wikibase\Lib\Store\StorageException' );
+		$labelLookup->getLabel( new ItemId( 'Q120' ) );
+	}
+
+	public function testGetLabel_notFound() {
+		$termLookup = $this->getTermLookup();
+		$labelLookup = new LanguageLabelLookup( $termLookup, 'fa' );
+
 		$this->setExpectedException( 'OutOfBoundsException' );
-		$label = $labelLookup->getLabel( new ItemId( 'Q120' ) );
+
+		$labelLookup->getLabel( new ItemId( 'Q116' ) );
+	}
+
+	private function getTermLookup() {
+		$entityLookup = new MockRepository();
+
+		return new EntityTermLookup( $this->getTermIndex(), $entityLookup );
 	}
 
 	private function getTermIndex() {
