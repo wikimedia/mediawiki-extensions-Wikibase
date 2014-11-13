@@ -2,16 +2,12 @@
 
 namespace Wikibase\Test;
 
-use Language;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdLabelFormatter;
-use Wikibase\Lib\Store\EntityRedirect;
 
 /**
  * @covers Wikibase\Lib\EntityIdLabelFormatter

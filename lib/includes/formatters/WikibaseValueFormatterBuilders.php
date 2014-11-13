@@ -13,11 +13,11 @@ use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * Defines the formatters for DataValues supported by Wikibase.

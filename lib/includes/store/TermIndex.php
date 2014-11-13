@@ -2,9 +2,9 @@
 
 namespace Wikibase;
 
-use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\LabelConflictFinder;
 
 /**
  * Interface to a cache for terms with both write and lookup methods.

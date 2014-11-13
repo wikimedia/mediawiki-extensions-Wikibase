@@ -3,11 +3,8 @@
 namespace Wikibase\Lib\Store;
 
 use OutOfBoundsException;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibaes\DataModel\Term\Fingerprint;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * @since 0.5
