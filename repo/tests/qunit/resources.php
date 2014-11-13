@@ -17,6 +17,24 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'jquery.removeClassByRegex.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery/jquery.removeClassByRegex.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.removeClassByRegex',
+			),
+		),
+
+		'jquery.sticknode.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery/jquery.sticknode.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.sticknode',
+			),
+		),
+
 		'jquery.ui.tagadata.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.tagadata.tests.js',

@@ -102,21 +102,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.removeClassByRegex' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery/jquery.removeClassByRegex.js',
-			),
-		),
-
-		'jquery.sticknode' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery/jquery.sticknode.js',
-			),
-			'dependencies' => array(
-				'jquery.throttle-debounce',
-			),
-		),
-
 		'wikibase.dataTypes' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.dataTypes/wikibase.dataTypes.js',
