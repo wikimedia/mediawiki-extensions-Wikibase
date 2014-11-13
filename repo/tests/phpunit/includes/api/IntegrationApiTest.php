@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test\Api;
 
-use ApiTestCase;
-use TestSites;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -19,13 +17,13 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @author Adam Shorland
  */
-class IntegrationApiTest extends ApiTestCase {
+class IntegrationApiTest extends \ApiTestCase {
 
 	public function setUp() {
 		parent::setUp();
 		$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
 		$sitesTable->clear();
-		$sitesTable->saveSites( TestSites::getSites() );
+		$sitesTable->saveSites( \TestSites::getSites() );
 	}
 
 	public function apiRequestProvider() {

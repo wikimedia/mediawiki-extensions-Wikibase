@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\Api;
 
-use ApiTestCase;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -19,7 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class AvailabeBadgesTest extends ApiTestCase {
+class AvailabeBadgesTest extends \ApiTestCase {
 
 	static $badgeItems = array(
 		'Q123' => '',

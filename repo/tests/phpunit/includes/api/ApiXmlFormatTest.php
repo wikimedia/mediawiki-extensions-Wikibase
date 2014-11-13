@@ -4,7 +4,6 @@ namespace Wikibase\Test\Api;
 
 use ApiBase;
 use ApiMain;
-use Exception;
 use FauxRequest;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
