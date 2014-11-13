@@ -31,7 +31,7 @@ return call_user_func( function() {
 
 		'wikibase.experts.getStore' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.experts.js',
+				'getStore.js',
 			),
 			'dependencies' => array(
 				'dataValues.values',
