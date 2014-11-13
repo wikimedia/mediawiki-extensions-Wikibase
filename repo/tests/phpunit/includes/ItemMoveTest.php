@@ -114,4 +114,3 @@ class ItemMoveTest extends \MediaWikiTestCase {
 	}
 
 }
-

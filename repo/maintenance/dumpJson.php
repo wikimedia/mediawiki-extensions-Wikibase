@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -52,7 +53,7 @@ class DumpJson extends Maintenance {
 	private $entityPerPage;
 
 	/**
-	 * @var bool|resource
+	 * @var resource|bool
 	 */
 	private $logFileHandle = false;
 
@@ -114,7 +115,7 @@ class DumpJson extends Maintenance {
 	 *
 	 * @param $file
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	private function openLogFile( $file ) {
 		$this->closeLogFile();
@@ -127,7 +128,7 @@ class DumpJson extends Maintenance {
 		$this->logFileHandle = fopen( $file, 'a' );
 
 		if ( !$this->logFileHandle ) {
-			throw new \MWException( 'Failed to open log file: ' . $file );
+			throw new MWException( 'Failed to open log file: ' . $file );
 		}
 	}
 
@@ -137,8 +138,8 @@ class DumpJson extends Maintenance {
 	private function closeLogFile() {
 		if ( $this->logFileHandle
 			&& $this->logFileHandle !== STDERR
-			&& $this->logFileHandle !== STDOUT ) {
-
+			&& $this->logFileHandle !== STDOUT
+		) {
 			fclose( $this->logFileHandle );
 		}
 
@@ -170,7 +171,7 @@ class DumpJson extends Maintenance {
 		$output = fopen( $outFile, 'w' ); //TODO: Allow injection of an OutputStream
 
 		if ( !$output ) {
-			throw new \MWException( 'Failed to open ' . $outFile . '!' );
+			throw new MWException( "Failed to open $outFile!" );
 		}
 
 		if ( $this->hasOption( 'list-file' ) ) {
@@ -251,7 +252,7 @@ class DumpJson extends Maintenance {
 		$input = fopen( $listFile, 'r' );
 
 		if ( !$input ) {
-			throw new \MWException( "Failed to open ID file: $input" );
+			throw new MWException( "Failed to open ID file: $input" );
 		}
 
 		$stream = new EntityIdReader( new LineReader( $input ), new BasicEntityIdParser() );
