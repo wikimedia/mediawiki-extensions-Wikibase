@@ -70,6 +70,7 @@ use Wikibase\SqlStore;
 use Wikibase\Store;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\TemplateRegistry;
 use Wikibase\Utils;
 use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\SnakValidator;
@@ -156,6 +157,11 @@ class WikibaseRepo {
 	 * @var Store
 	 */
 	private $store;
+
+	/**
+	 * @var TemplateRegistry
+	 */
+	private $templateRegistry;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -961,4 +967,11 @@ class WikibaseRepo {
 		);
 	}
 
+	public function getTemplateRegistry() {
+		if( !isset( $this->templateRegistry ) ) {
+			$this->templateRegistry = new TemplateRegistry();
+			$this->templateRegistry->addTemplates( include( __DIR__ . "/../resources/templates.php" ) );
+		}
+		return $this->templateRegistry;
+	}
 }
