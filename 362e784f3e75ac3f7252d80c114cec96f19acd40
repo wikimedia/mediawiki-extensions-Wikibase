@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_893cb8e0",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-13T08:08:01Z",
+      "side": 0,
+      "message": "All changes in this file except the ParserOutputUsageAccumulator usage could have gone in a separate patch.",
+      "revId": "362e784f3e75ac3f7252d80c114cec96f19acd40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e92a1c8e",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-13T08:08:01Z",
+      "side": 0,
+      "message": "All changes in this file except the ParserOutputUsageAccumulator usage could have gone in a separate patch.",
+      "revId": "362e784f3e75ac3f7252d80c114cec96f19acd40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
