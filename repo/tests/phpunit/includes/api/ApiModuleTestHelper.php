@@ -6,9 +6,9 @@ use ApiBase;
 use ApiMain;
 use Exception;
 use FauxRequest;
+use PHPUnit_Framework_Assert as Assert;
 use UsageException;
 use User;
-use PHPUnit_Framework_Assert as Assert;
 
 /**
  * @license GPL 2+
@@ -59,12 +59,10 @@ class ApiModuleTestHelper {
 	}
 
 	/**
-	 * Asserts that the given API response has the given error code.
-	 *
-	 * @param string $expectedCode
-	 * @param array $response
+	 * @param string|string[] $expected
+	 * @param Exception $ex
 	 */
-	public function assertUsageException( $expected, Exception $ex  ) {
+	public function assertUsageException( $expected, Exception $ex ) {
 		Assert::assertInstanceOf( 'UsageException', $ex );
 		/** @var UsageException $ex */
 
@@ -84,7 +82,7 @@ class ApiModuleTestHelper {
 	/**
 	 * Asserts the existence of some path in the result, represented by any additional parameters.
 	 *
-	 * @param array $path
+	 * @param string[] $path
 	 * @param array $response
 	 */
 	public function assertResultHasKeyInPath( $path, $response ) {

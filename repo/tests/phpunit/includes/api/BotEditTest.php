@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test\Api;
 
-use ApiTestCase;
-use TestUser;
 use Title;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -36,7 +34,7 @@ class BotEditTest extends WikibaseApiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		ApiTestCase::$users['wbbot'] = new TestUser(
+		\ApiTestCase::$users['wbbot'] = new \TestUser(
 			'Apitestbot',
 			'Api Test Bot',
 			'api_test_bot@example.com',
