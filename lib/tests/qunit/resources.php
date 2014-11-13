@@ -35,24 +35,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.removeClassByRegex.tests' => $moduleBase + array(
-			'scripts' => array(
-				'jquery/jquery.removeClassByRegex.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.removeClassByRegex',
-			),
-		),
-
-		'jquery.sticknode.tests' => $moduleBase + array(
-			'scripts' => array(
-				'jquery/jquery.sticknode.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.sticknode',
-			),
-		),
-
 		'jquery.util.EventSingletonManager.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery/jquery.util.EventSingletonManager.tests.js',
