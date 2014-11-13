@@ -58,8 +58,8 @@ abstract class UpdateRepoJob extends Job {
 	 * @param Title $title Ignored
 	 * @param array $params
 	 */
-	public function __construct( $name, Title $title, array $params ) {
-		parent::__construct( $name, $title, $params );
+	public function __construct( $command, Title $title, array $params ) {
+		parent::__construct( $command, $title, $params );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initRepoJobServices(
@@ -186,14 +186,16 @@ abstract class UpdateRepoJob extends Job {
 	}
 
 	/**
-	 * @return bool
+	 * @param string $userName
+	 *
+	 * @return User|bool
 	 */
-	private function getUser( $name ) {
-		$user = User::newFromName( $name );
+	private function getUser( $userName ) {
+		$user = User::newFromName( $userName );
 		if ( !$user || !$user->isLoggedIn() ) {
 			// This should never happen as we check with CentralAuth
 			// that the user actually does exist
-			wfLogWarning( "User $name doesn't exist while CentralAuth pretends it does" );
+			wfLogWarning( "User $userName doesn't exist while CentralAuth pretends it does" );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
@@ -202,9 +204,7 @@ abstract class UpdateRepoJob extends Job {
 	}
 
 	/**
-	 * Run the job
-	 *
-	 * @return boolean success
+	 * @return bool success
 	 */
 	public function run() {
 		wfProfileIn( __METHOD__ );
