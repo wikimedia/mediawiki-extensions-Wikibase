@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_a8616933",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-13T21:15:37Z",
+      "side": 1,
+      "message": "doesnt need since if private",
+      "revId": "27e240648f8b7d24864b3ab91bdf20055bd17b23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_485a2586",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-13T21:15:37Z",
+      "side": 1,
+      "message": "doesnt need since if private",
+      "revId": "27e240648f8b7d24864b3ab91bdf20055bd17b23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_6857e15b",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-13T21:15:37Z",
+      "side": 1,
+      "message": "doesnt need since if private",
+      "revId": "27e240648f8b7d24864b3ab91bdf20055bd17b23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
