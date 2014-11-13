@@ -5,7 +5,6 @@ namespace Wikibase\Repo\View;
 use Language;
 use Message;
 use Title;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Utils;

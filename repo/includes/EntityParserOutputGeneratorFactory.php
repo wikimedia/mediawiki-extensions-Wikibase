@@ -5,16 +5,11 @@ namespace Wikibase;
 use InvalidArgumentException;
 use Language;
 use ParserOptions;
-use ParserOutput;
 use RequestContext;
-use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
@@ -24,7 +19,6 @@ use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @since 0.5

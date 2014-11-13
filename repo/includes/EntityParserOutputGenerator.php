@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use ParserOutput;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\SiteLinkList;
