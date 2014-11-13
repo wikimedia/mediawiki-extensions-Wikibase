@@ -38,7 +38,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	 */
 	private $entityStore;
 
-	function setUp() {
+	protected function setUp() {
 		global $wgGroupPermissions, $wgUser;
 
 		parent::setUp();
@@ -49,7 +49,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
 	}
 
-	function tearDown() {
+	protected function tearDown() {
 		global $wgGroupPermissions;
 		global $wgUser;
 

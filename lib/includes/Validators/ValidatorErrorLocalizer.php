@@ -27,7 +27,7 @@ class ValidatorErrorLocalizer {
 	 * parameters. MUST return wikitext. This is typically some kind of dispatcher. If not
 	 * provided, naive formatting will be used, which will fail on non-primitive parameters.
 	 */
-	function __construct( ValueFormatter $paramFormatter = null ) {
+	public function __construct( ValueFormatter $paramFormatter = null ) {
 		$this->paramFormatter = $paramFormatter;
 	}
 

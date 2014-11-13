@@ -38,7 +38,7 @@ class MessageSnakFormatter implements SnakFormatter {
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	function __construct( $snakType, Message $message, $format ) {
+	public function __construct( $snakType, Message $message, $format ) {
 		if ( !is_string( $snakType ) ) {
 			throw new InvalidArgumentException( '$snakType must be a string' );
 		}

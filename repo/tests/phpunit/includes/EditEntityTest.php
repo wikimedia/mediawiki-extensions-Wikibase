@@ -45,7 +45,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		return $user;
 	}
 
-	function setUp() {
+	protected function setUp() {
 		global $wgGroupPermissions, $wgHooks;
 
 		parent::setUp();
@@ -59,7 +59,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 	}
 
-	function tearDown() {
+	protected function tearDown() {
 		global $wgGroupPermissions, $wgHooks;
 
 		$wgGroupPermissions = $this->permissions;

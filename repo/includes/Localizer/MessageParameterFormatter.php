@@ -53,7 +53,7 @@ class MessageParameterFormatter implements ValueFormatter {
 	 * @param SiteStore $sites
 	 * @param Language $language
 	 */
-	function __construct(
+	public function __construct(
 		ValueFormatter $dataValueFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		SiteStore $sites,
@@ -152,4 +152,5 @@ class MessageParameterFormatter implements ValueFormatter {
 
 		return "[$url $siteId:$page]";
 	}
+
 }
