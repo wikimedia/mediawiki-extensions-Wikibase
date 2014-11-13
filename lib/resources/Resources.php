@@ -136,7 +136,6 @@ return call_user_func( function() {
 		include( __DIR__ . '/api/resources.php' ),
 		include( __DIR__ . '/deprecated/resources.php' ),
 		include( __DIR__ . '/experts/resources.php' ),
-		include( __DIR__ . '/formatters/resources.php' ),
 		include( __DIR__ . '/jquery.wikibase/resources.php' ),
 		include( __DIR__ . '/parsers/resources.php' ),
 		include( __DIR__ . '/wikibase.RepoApi/resources.php' )
