@@ -135,6 +135,7 @@ return call_user_func( function() {
 	return array_merge(
 		$modules,
 		include( __DIR__ . '/entityChangers/resources.php' ),
+		include( __DIR__ . '/jquery.wikibase/resources.php' ),
 		include __DIR__ . '/store/resources.php',
 		include __DIR__ . '/utilities/resources.php'
 	);
