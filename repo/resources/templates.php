@@ -186,14 +186,6 @@ HTML;
 </div>
 HTML;
 
-	$templates['wb-property'] =
-<<<HTML
-<span class="wb-property-container-value wb-value-container">
-	<span class="wb-value $1" dir="auto">$2</span>
-	$3
-</span>
-HTML;
-
 	$templates['wikibase-aliasesview'] =
 <<<HTML
 <div class="wikibase-aliasesview $1">
