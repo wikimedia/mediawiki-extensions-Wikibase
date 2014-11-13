@@ -3,8 +3,6 @@
 namespace Wikibase\DataAccess;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\PropertyLabelResolver;

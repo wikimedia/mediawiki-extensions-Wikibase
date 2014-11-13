@@ -4,13 +4,13 @@ namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
 use Title;
+use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Test\TestChanges;
 
 /**

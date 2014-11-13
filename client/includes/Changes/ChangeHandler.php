@@ -6,8 +6,6 @@ use InvalidArgumentException;
 use MWException;
 use Title;
 use Wikibase\Change;
-use Wikibase\Client\Changes\AffectedPagesFinder;
-use Wikibase\Client\Changes\PageUpdater;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\EntityChange;

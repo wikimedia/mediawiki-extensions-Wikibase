@@ -4,11 +4,11 @@ namespace Wikibase\Client\Test\Store;
 
 use PHPUnit_Framework_Assert;
 use Wikibase\Client\Store\UsageUpdater;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\SubscriptionManager;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
-use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers Wikibase\Client\Store\UsageUpdater

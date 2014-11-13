@@ -14,8 +14,9 @@ use Site;
 use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
-use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\AffectedPagesFinder;
+use Wikibase\Client\Changes\ChangeHandler;
+use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
@@ -51,7 +52,6 @@ use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
-use Wikibase\Client\Changes\WikiPageUpdater;
 
 /**
  * Top level factory for the WikibaseClient extension.

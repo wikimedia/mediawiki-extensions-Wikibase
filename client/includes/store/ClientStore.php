@@ -3,11 +3,11 @@
 namespace Wikibase;
 
 use Wikibase\Client\Usage\SubscriptionManager;
+use Wikibase\Client\Usage\UsageLookup;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\Client\Usage\UsageTracker;
 
 /**
  * Client store interface.

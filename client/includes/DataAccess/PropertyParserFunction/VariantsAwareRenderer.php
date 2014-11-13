@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataAccess\PropertyParserFunction;
 
-use Language;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**

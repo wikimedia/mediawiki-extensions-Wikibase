@@ -1,11 +1,11 @@
 <?php
 namespace Wikibase\Client\Tests\Usage;
 
-use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Client\Usage\UsageLookup;
 use PHPUnit_Framework_Assert as Assert;
+use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * Helper class for unit tests for UsageLookup implementations, providing
