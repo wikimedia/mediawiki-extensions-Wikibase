@@ -2,21 +2,21 @@
 
 namespace Wikibase\Repo\UpdateRepo;
 
+use InvalidArgumentException;
 use Job;
 use Title;
 use User;
-use InvalidArgumentException;
-use Wikibase\Summary;
-use Wikibase\SummaryFormatter;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EditEntity;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\EditEntity;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Job template for updating the repo after a change in client.

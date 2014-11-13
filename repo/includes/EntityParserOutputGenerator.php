@@ -2,18 +2,13 @@
 
 namespace Wikibase;
 
-use Language;
 use ParserOutput;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\StatementListProvider;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\EntityViewFactory;

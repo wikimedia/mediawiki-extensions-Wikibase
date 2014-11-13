@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Diff;
 
+use Diff\Differ\ListDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Diff\Differ\ListDiffer;
 use Exception;
 use InvalidArgumentException;
 use Message;

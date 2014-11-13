@@ -2,9 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Language;
-use ParserOptions;
-use TestUser;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\EntityViewFactory;

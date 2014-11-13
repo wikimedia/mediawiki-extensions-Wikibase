@@ -18,10 +18,8 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\ParserOutputJsConfigBuilder;
-use Wikibase\ReferencedEntitiesFinder;
 
 /**
  * @covers Wikibase\ParserOutputJsConfigBuilder
