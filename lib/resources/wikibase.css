@@ -82,31 +82,12 @@ h2.wb-section-heading {
 	font-family: inherit;
 }
 
-/* container for the value itself */
-.wb-value,
-.wb-gridhelper {
-	word-wrap: break-word; /* force word wrap for that toolbar will not overlay very long values */
-	display: block; /* need to force block explicitly to achieve 100% width */
-}
-
 /* horizontal rule below the description */
 .wb-hr {
 	float: left;
 	width: 100%;
 	height: 1px;
 	margin: 0;
-}
-
-.wb-widget-container {
-	float: left;
-}
-
-/* basically, a row in the grid layout */
-.wb-value-row {
-	float: left; /* make row to take the dimensions of its containing blocks avoiding clipping */
-	font-size: 100%; /* font size needs to be set since it influences positioning */
-	position: relative; /* make absolute positioned toolbar align to the right edge */
-	width: 100%;
 }
 
 .wikibase-entityview .wikibase-toolbar-container {
@@ -119,15 +100,6 @@ h2.wb-section-heading {
 .wikibase-entityview .wikibase-toolbar-container > .wikibase-toolbar-container {
 	position: static;
 	width: auto;
-}
-
-.wb-value-container {
-	margin-left: 0;
-	display: block; /* need to force block explicitly to achieve 100% width */
-}
-
-.wb-value {
-	display: inline;
 }
 
 .wb-empty {
