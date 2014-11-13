@@ -53,6 +53,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.util.EventSingletonManager.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery/jquery.util.EventSingletonManager.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.util.EventSingletonManager',
+			),
+		),
+
 		'jquery.ui.tagadata.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.tagadata.tests.js',
