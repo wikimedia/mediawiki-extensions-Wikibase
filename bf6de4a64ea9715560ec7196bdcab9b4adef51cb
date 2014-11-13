@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_69692cf5",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-13T07:51:49Z",
+      "side": 1,
+      "message": "I don\u0027t understand your point why newitem won\u0027t work. For a page X on enwiki with no item linked, https://www.wikidata.org/wiki/Special:NewItem?site\u003denwiki\u0026page\u003dX seems to me to be exactly the right place.",
+      "parentUuid": "6e936f18_6b57e9cd",
+      "revId": "bf6de4a64ea9715560ec7196bdcab9b4adef51cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_9abf20f7",
         "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
         "patchSetId": 5
