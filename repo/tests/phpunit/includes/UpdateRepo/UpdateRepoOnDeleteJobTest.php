@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use Status;
 use Title;
 use User;
-use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;

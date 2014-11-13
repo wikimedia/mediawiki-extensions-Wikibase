@@ -18,7 +18,6 @@ use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;

@@ -3,11 +3,11 @@
 namespace Wikibase\Test;
 
 use Diff\Comparer\ComparableComparer;
+use Diff\Differ\OrderedListDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Diff\Differ\OrderedListDiffer;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;

@@ -6,9 +6,9 @@ use ApiBase;
 use ApiMain;
 use Exception;
 use FauxRequest;
+use PHPUnit_Framework_Assert as Assert;
 use UsageException;
 use User;
-use PHPUnit_Framework_Assert as Assert;
 
 /**
  * @license GPL 2+

@@ -4,9 +4,6 @@ namespace Wikibase\Test;
 
 use Language;
 use ParserOptions;
-use TestUser;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

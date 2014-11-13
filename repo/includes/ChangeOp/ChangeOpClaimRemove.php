@@ -8,7 +8,6 @@ use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Summary;

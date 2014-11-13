@@ -4,8 +4,8 @@ namespace Wikibase\Repo\View;
 
 use InvalidArgumentException;
 use ValueFormatters\FormattingException;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Entity\PropertyNotFoundException;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 

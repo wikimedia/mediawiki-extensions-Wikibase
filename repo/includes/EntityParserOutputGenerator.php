@@ -3,11 +3,10 @@
 namespace Wikibase;
 
 use ParserOutput;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
