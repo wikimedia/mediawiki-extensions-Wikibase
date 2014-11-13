@@ -19,6 +19,7 @@ use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -39,22 +40,22 @@ class DumpJson extends Maintenance {
 	/**
 	 * @var EntityLookup
 	 */
-	public $entityLookup;
+	private $entityLookup;
 
 	/**
 	 * @var Serializer
 	 */
-	public $entitySerializer;
+	private $entitySerializer;
 
 	/**
 	 * @var EntityPerPage
 	 */
-	public $entityPerPage;
+	private $entityPerPage;
 
 	/**
 	 * @var bool|resource
 	 */
-	public $logFileHandle = false;
+	private $logFileHandle = false;
 
 	public function __construct() {
 		parent::__construct();
@@ -72,7 +73,7 @@ class DumpJson extends Maintenance {
 		$this->addOption( 'snippet', "Output a JSON snippet without square brackets at the start and end. Allows output to be combined more freely.", false, false );
 	}
 
-	public function initServices() {
+	private function initServices() {
 		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 		$serializerOptions = new SerializationOptions();
 
@@ -100,7 +101,7 @@ class DumpJson extends Maintenance {
 	 *
 	 * @param string $message
 	 */
-	public function logMessage( $message ) {
+	private function logMessage( $message ) {
 		if ( $this->logFileHandle ) {
 			fwrite( $this->logFileHandle, "$message\n" );
 			fflush( $this->logFileHandle );
@@ -114,9 +115,9 @@ class DumpJson extends Maintenance {
 	 *
 	 * @param $file
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 */
-	protected function openLogFile( $file ) {
+	private function openLogFile( $file ) {
 		$this->closeLogFile();
 
 		if ( $file === '-' ) {
@@ -127,14 +128,14 @@ class DumpJson extends Maintenance {
 		$this->logFileHandle = fopen( $file, 'a' );
 
 		if ( !$this->logFileHandle ) {
-			throw new \MWException( 'Failed to open log file: ' . $file );
+			throw new MWException( 'Failed to open log file: ' . $file );
 		}
 	}
 
 	/**
 	 * Closes any currently open file opened with openLogFile().
 	 */
-	protected function closeLogFile() {
+	private function closeLogFile() {
 		if ( $this->logFileHandle
 			&& $this->logFileHandle !== STDERR
 			&& $this->logFileHandle !== STDOUT ) {
@@ -170,7 +171,7 @@ class DumpJson extends Maintenance {
 		$output = fopen( $outFile, 'w' ); //TODO: Allow injection of an OutputStream
 
 		if ( !$output ) {
-			throw new \MWException( 'Failed to open ' . $outFile . '!' );
+			throw new MWException( 'Failed to open ' . $outFile . '!' );
 		}
 
 		if ( $this->hasOption( 'list-file' ) ) {
@@ -218,7 +219,7 @@ class DumpJson extends Maintenance {
 	 *
 	 * @return EntityIdPager a stream of EntityId objects
 	 */
-	public function makeIdStream( $entityType = null, ExceptionHandler $exceptionReporter = null ) {
+	private function makeIdStream( $entityType = null, ExceptionHandler $exceptionReporter = null ) {
 		$listFile = $this->getOption( 'list-file' );
 
 		if ( $listFile !== null ) {
@@ -235,7 +236,7 @@ class DumpJson extends Maintenance {
 	 *
 	 * @return EntityIdPager
 	 */
-	protected function makeIdQueryStream( $entityType ) {
+	private function makeIdQueryStream( $entityType ) {
 		$stream = new EntityPerPageIdPager( $this->entityPerPage, $entityType );
 		return $stream;
 	}
@@ -247,11 +248,11 @@ class DumpJson extends Maintenance {
 	 * @throws MWException
 	 * @return EntityIdPager
 	 */
-	protected function makeIdFileStream( $listFile, ExceptionHandler $exceptionReporter = null ) {
+	private function makeIdFileStream( $listFile, ExceptionHandler $exceptionReporter = null ) {
 		$input = fopen( $listFile, 'r' );
 
 		if ( !$input ) {
-			throw new \MWException( "Failed to open ID file: $input" );
+			throw new MWException( "Failed to open ID file: $input" );
 		}
 
 		$stream = new EntityIdReader( new LineReader( $input ), new BasicEntityIdParser() );

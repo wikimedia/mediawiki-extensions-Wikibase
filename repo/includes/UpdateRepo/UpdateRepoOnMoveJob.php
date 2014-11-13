@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\UpdateRepo;
 
-use Job;
 use OutOfBoundsException;
 use SiteStore;
 use Title;

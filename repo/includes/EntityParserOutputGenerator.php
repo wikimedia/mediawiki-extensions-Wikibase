@@ -5,7 +5,9 @@ namespace Wikibase;
 use ParserOutput;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
@@ -237,6 +239,7 @@ class EntityParserOutputGenerator {
 	 * @param SiteLinkList $siteLinkList
 	 */
 	private function addBadgesToParserOutput( ParserOutput $parserOutput, SiteLinkList $siteLinkList ) {
+		/** @var SiteLink $siteLink */
 		foreach ( $siteLinkList as $siteLink ) {
 			foreach ( $siteLink->getBadges() as $badge ) {
 				$parserOutput->addLink( $this->entityTitleLookup->getTitleForId( $badge ) );
@@ -248,13 +251,13 @@ class EntityParserOutputGenerator {
 	 * @param ParserOutput $parserOutput
 	 * @param EntityRevision $entityRevision
 	 * @param array $entityInfo obtained from EntityInfoBuilder::getEntityInfo
-	 * @param boolean $editable
+	 * @param bool $editable
 	 */
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
 		EntityRevision $entityRevision,
 		array $entityInfo,
-		$editable
+		$editable = true
 	) {
 
 		$labelLookup = new LanguageFallbackLabelLookup(

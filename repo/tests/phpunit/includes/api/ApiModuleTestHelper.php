@@ -59,12 +59,10 @@ class ApiModuleTestHelper {
 	}
 
 	/**
-	 * Asserts that the given API response has the given error code.
-	 *
-	 * @param string $expectedCode
-	 * @param array $response
+	 * @param string $expected
+	 * @param Exception $ex
 	 */
-	public function assertUsageException( $expected, Exception $ex  ) {
+	public function assertUsageException( $expected, Exception $ex ) {
 		Assert::assertInstanceOf( 'UsageException', $ex );
 		/** @var UsageException $ex */
 
