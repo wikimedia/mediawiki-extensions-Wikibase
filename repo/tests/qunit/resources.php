@@ -82,6 +82,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.getLanguageNameByCode.tests' => $moduleBase + array(
+			'scripts' => array(
+				'wikibase.getLanguageNameByCode.tests.js'
+			),
+			'dependencies' => array(
+				'wikibase.getLanguageNameByCode'
+			)
+		),
+
 		'wikibase.ValueViewBuilder.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.ValueViewBuilder.tests.js'

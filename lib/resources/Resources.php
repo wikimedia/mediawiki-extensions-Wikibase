@@ -126,7 +126,6 @@ return call_user_func( function() {
 	);
 
 	if ( defined( 'ULS_VERSION' ) ) {
-		$modules['wikibase']['dependencies'][] = 'ext.uls.mediawiki';
 		$modules['wikibase.Site']['dependencies'][] = 'ext.uls.mediawiki';
 	}
 
