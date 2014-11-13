@@ -21,35 +21,33 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 		$this->assertEquals( 'New York City', $label );
 	}
 
-	public function testGetLabel_notFoundThrowsException() {
+	public function testGetLabel_noLabelFoundThrowsException() {
 		$termLookup = $this->getEntityTermLookup();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
-		$termLookup->getLabel( new ItemId( 'Q120' ), 'en' );
+		$termLookup->getLabel( new ItemId( 'Q116' ), 'fa' );
 	}
 
-	/**
-	 * @dataProvider getLabelsProvider
-	 */
-	public function testGetLabels( $expected, EntityId $entityId ) {
+	public function testGetLabels() {
 		$termLookup = $this->getEntityTermLookup();
 
-		$labels = $termLookup->getLabels( $entityId );
+		$expected =  array(
+			'en' => 'New York City',
+			'es' => 'Nueva York'
+		);
+
+		$labels = $termLookup->getLabels( new ItemId( 'Q116' ) );
 		$this->assertEquals( $expected, $labels );
 	}
 
-	public function getLabelsProvider() {
-		return array(
-			array(
-				array( 'en' => 'New York City', 'es' => 'Nueva York' ),
-				new ItemId( 'Q116' )
-			),
-			array(
-				array(),
-				new ItemId( 'Q120' )
-			)
-		);
+	public function testGetLabels_entityNotFoundThrowsStorageException() {
+		$termLookup = $this->getEntityTermLookup();
+
+		$this->setExpectedException( 'Wikibase\Lib\Store\StorageException' );
+
+		$termLookup->getLabels( new ItemId( 'Q9999' ) );
 	}
+
 
 	public function testGetDescription() {
 		$termLookup = $this->getEntityTermLookup();
@@ -60,42 +58,39 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $description );
 	}
 
-	public function testGetDescription_notFoundThrowsException() {
+	public function testGetDescription_descriptionNotFoundThrowsException() {
 		$termLookup = $this->getEntityTermLookup();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
-		$termLookup->getDescription( new ItemId( 'Q90000' ), 'fr' );
+		$termLookup->getDescription( new ItemId( 'Q116' ), 'fr' );
 	}
 
-	/**
-	 * @dataProvider getDescriptionsProvider
-	 */
-	public function getDescriptions( $expected, EntityId $entityId ) {
+	public function getDescriptions() {
 		$termLookup = $this->getEntityTermLookup();
 
-		$descriptions = $termLookup->getDescriptions( $entityId );
+		$descriptions = $termLookup->getDescriptions( new ItemId( 'Q116' ) );
+
+		$expected = array(
+			'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
+			'en' => 'largest city in New York and the United States of America',
+		);
+
 		$this->assertEquals( $expected, $descriptions );
 	}
 
-	public function getDescriptionsProvider() {
-		return array(
-			array(
-				array(
-					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
-					'en' => 'largest city in New York and the United States of America',
-				),
-				new ItemId( 'Q116' )
-			),
-			array(
-				array(),
-				new ItemId( 'Q90001' )
-			)
-		);
-	}
-
 	private function getEntityTermLookup() {
+		$entityLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$entityLookup->expects( $this->any() )
+			->method( 'hasEntity' )
+			->will( $this->returnCallback( function( EntityId $entityId ) {
+				return $entityId->getSerialization() === 'Q116';
+			} ) );
+
 		$termIndex = $this->getTermIndex();
-		return new EntityTermLookup( $termIndex );
+		return new EntityTermLookup( $termIndex, $entityLookup );
 	}
 
 	private function getTermIndex() {
@@ -127,13 +122,6 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 				'termType' => 'description',
 				'termLanguage' => 'de',
 				'termText' => 'Metropole an der Ostküste der Vereinigten Staaten'
-			) ),
-			new \Wikibase\Term( array(
-				'entityId' => 117,
-				'entityType' => 'item',
-				'termType' => 'label',
-				'termLanguage' => 'en',
-				'termText' => 'Berlin'
 			) ),
 		);
 
