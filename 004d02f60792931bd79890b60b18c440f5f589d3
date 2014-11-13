@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_df635208",
+        "filename": "lib/resources/jquery/jquery.util.EventSingletonManager.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-13T14:35:19Z",
+      "side": 1,
+      "message": "Why is this in a jQuery namespace at all?",
+      "revId": "004d02f60792931bd79890b60b18c440f5f589d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_5f0e6137",
+        "filename": "lib/resources/jquery/jquery.util.EventSingletonManager.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-13T14:35:19Z",
+      "side": 1,
+      "message": "Actually, you can either pass one namespace with a leading dot or a white-space separated list of event names.",
+      "revId": "004d02f60792931bd79890b60b18c440f5f589d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
