@@ -147,16 +147,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.ValueViewBuilder.tests' => $moduleBase + array(
-			'scripts' => array(
-				'wikibase.ValueViewBuilder.tests.js'
-			),
-			'dependencies' => array(
-				'test.sinonjs',
-				'wikibase.ValueViewBuilder'
-			)
-		),
-
 	);
 
 	return array_merge(

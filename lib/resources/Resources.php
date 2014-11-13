@@ -80,15 +80,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.RevisionStore' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.RevisionStore.js',
-			),
-			'dependencies' => array(
-				'wikibase'
-			)
-		),
-
 		'wikibase.Site' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.Site.js',
@@ -108,16 +99,6 @@ return call_user_func( function() {
 				'mw.config.values.wbSiteDetails',
 				'wikibase',
 				'wikibase.Site',
-			),
-		),
-
-		'wikibase.ValueViewBuilder' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.ValueViewBuilder.js',
-			),
-			'dependencies' => array(
-				'wikibase',
-				'jquery.valueview',
 			),
 		),
 

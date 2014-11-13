@@ -50,9 +50,28 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.RevisionStore' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.RevisionStore.js',
+			),
+			'dependencies' => array(
+				'wikibase'
+			)
+		),
+
 		'wikibase.templates' => $moduleTemplate + array(
 			'class' => 'Wikibase\TemplateModule',
 			'scripts' => 'templates.js',
+		),
+
+		'wikibase.ValueViewBuilder' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.ValueViewBuilder.js',
+			),
+			'dependencies' => array(
+				'wikibase',
+				'jquery.valueview',
+			),
 		),
 
 		'wikibase.ui.entityViewInit' => $moduleTemplate + array(
