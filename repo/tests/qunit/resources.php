@@ -36,6 +36,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.getLanguageNameByCode.tests' => $moduleBase + array(
+			'scripts' => array(
+				'wikibase.getLanguageNameByCode.tests.js'
+			),
+			'dependencies' => array(
+				'wikibase.getLanguageNameByCode'
+			)
+		),
+
 	);
 
 	return array_merge(

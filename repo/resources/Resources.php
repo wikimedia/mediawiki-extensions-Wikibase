@@ -50,6 +50,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.getLanguageNameByCode' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.getLanguageNameByCode.js'
+			),
+			'dependencies' => array(
+				'wikibase'
+			)
+		),
+
 		'wikibase.templates' => $moduleTemplate + array(
 			'class' => 'Wikibase\TemplateModule',
 			'scripts' => 'templates.js',
@@ -175,6 +184,7 @@ return call_user_func( function() {
 	);
 
 	if ( defined( 'ULS_VERSION' ) ) {
+		$modules['wikibase.getLanguageNameByCode']['dependencies'][] = 'ext.uls.mediawiki';
 		$modules['wikibase.initTermBox']['dependencies'][] = 'ext.uls.displaysettings';
 		$modules['wikibase.initTermBox']['dependencies'][] = 'ext.uls.mediawiki';
 		$modules['wikibase.special.itemDisambiguation']['dependencies'][] = 'ext.uls.mediawiki';
