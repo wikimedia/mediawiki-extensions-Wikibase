@@ -59,7 +59,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @return {string}
+	 * @return {wikibase.datamodel.Term|null}
 	 */
 	getLabelFor: function( languageCode ) {
 		return this._labels.getItemByKey( languageCode );
@@ -114,7 +114,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @return {string}
+	 * @return {wikibase.datamodel.Term|null}
 	 */
 	getDescriptionFor: function( languageCode ) {
 		return this._descriptions.getItemByKey( languageCode );
@@ -169,7 +169,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} [languageCode]
-	 * @return {wikibase.datamodel.MultiTerm}
+	 * @return {wikibase.datamodel.MultiTerm|null}
 	 */
 	getAliasesFor: function( languageCode ) {
 		return this._aliases.getItemByKey( languageCode );
