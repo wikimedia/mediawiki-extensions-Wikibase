@@ -5,12 +5,15 @@ namespace Wikibase;
 use Language;
 use LoadBalancer;
 use ObjectCache;
-use RuntimeException;
 use Site;
+use Wikibase\Client\Store\Sql\ConnectionManager;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\Client\Usage\SiteLinkUsageLookup;
+use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\Usage\SubscriptionManager;
+use Wikibase\Client\Usage\UsageLookup;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
@@ -22,10 +25,6 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
-use Wikibase\Client\Store\Sql\ConnectionManager;
-use Wikibase\Client\Usage\Sql\SqlUsageTracker;
-use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\Client\Usage\UsageTracker;
 
 /**
  * Implementation of the client store interface using direct access to the repository's

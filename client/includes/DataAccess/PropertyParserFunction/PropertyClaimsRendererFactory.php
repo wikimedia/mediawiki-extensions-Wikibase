@@ -5,12 +5,12 @@ namespace Wikibase\DataAccess\PropertyParserFunction;
 use Language;
 use Parser;
 use ValueFormatters\FormatterOptions;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
-use Wikibase\Client\Usage\UsageAccumulator;
 
 /**
  * @since 0.5

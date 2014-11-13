@@ -3,16 +3,11 @@
 namespace Wikibase\DataAccess\Tests;
 
 use DataValues\StringValue;
-use Language;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataModel\Claim;
 use Wikibase\DataModel\Claim\Statement;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Test\MockPropertyLabelResolver;
 use Wikibase\Test\MockRepository;
 

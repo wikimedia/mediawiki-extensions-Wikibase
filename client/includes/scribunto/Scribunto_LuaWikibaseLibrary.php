@@ -3,9 +3,9 @@
 use Wikibase\Client\Scribunto\WikibaseLuaBindings;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Utils;
-use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Utils;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
