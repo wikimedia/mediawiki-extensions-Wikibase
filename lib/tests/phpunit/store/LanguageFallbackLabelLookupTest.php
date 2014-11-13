@@ -2,9 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Language;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
 

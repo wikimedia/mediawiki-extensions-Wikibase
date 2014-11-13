@@ -9,7 +9,6 @@ use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
 
 /**
  * @since 0.4

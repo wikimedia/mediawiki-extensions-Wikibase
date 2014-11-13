@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Store;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\StorageException;
 
 /**
  * @since 0.5

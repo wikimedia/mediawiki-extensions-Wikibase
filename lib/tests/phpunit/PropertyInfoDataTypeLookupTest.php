@@ -3,9 +3,9 @@
 namespace Wikibase\Lib\Test;
 
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Test\MockPropertyInfoStore;
