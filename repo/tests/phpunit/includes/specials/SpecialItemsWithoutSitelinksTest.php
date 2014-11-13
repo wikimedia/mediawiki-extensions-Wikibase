@@ -21,7 +21,7 @@ use Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks;
  */
 class SpecialItemsWithoutSitelinksTest extends SpecialPageTestBase {
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->setMwGlobals( array(

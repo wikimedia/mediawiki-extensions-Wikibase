@@ -28,7 +28,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		parent::__construct( $name, $data, $dataName );
 	}
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		if ( !defined( 'WB_VERSION' ) ) {

@@ -42,7 +42,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	 */
 	protected $wikibaseRepo;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->wikibaseRepo = WikibaseRepo::getDefaultInstance();

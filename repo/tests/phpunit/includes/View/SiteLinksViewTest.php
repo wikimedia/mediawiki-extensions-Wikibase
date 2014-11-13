@@ -34,12 +34,12 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		)
 	);
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 		$this->switchSettings();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		parent::tearDown();
 		$this->switchSettings();
 	}

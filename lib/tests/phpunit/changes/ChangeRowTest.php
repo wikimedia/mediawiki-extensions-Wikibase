@@ -60,7 +60,7 @@ class ChangeRowTest extends \ORMRowTest {
 		);
 	}
 
-	public function setUp() {
+	protected function setUp() {
 		if ( !defined( 'WB_VERSION' ) ) {
 			//TODO: remove this once ChangeRow no longer needs the ChangesTable as a factory.
 			$this->markTestSkipped( "Skipping because cannot test changes table on client" );

@@ -28,14 +28,14 @@ class AvailabeBadgesTest extends ApiTestCase {
 
 	static $oldBadgeItems;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 		// Allow some badges for testing
 		self::$oldBadgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', self::$badgeItems );
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		parent::tearDown();
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', self::$oldBadgeItems );
 	}

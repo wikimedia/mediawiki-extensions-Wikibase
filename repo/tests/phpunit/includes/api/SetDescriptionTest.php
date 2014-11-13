@@ -23,7 +23,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 
 	private static $hasSetup;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		self::$testAction = 'wbsetdescription';

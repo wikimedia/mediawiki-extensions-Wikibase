@@ -42,7 +42,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 */
 	protected $languageCode = 'qqx';
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$testUser = new \TestUser( 'ActionTestUser' );
@@ -59,7 +59,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		ApiQueryInfo::resetTokenCache();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		ApiQueryInfo::resetTokenCache();
 		parent::tearDown();
 	}

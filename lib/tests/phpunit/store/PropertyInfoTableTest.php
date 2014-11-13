@@ -31,7 +31,7 @@ class PropertyInfoTableTest extends \MediaWikiTestCase {
 		$this->helper = new PropertyInfoStoreTestHelper( $this, array( $this, 'newPropertyInfoTable' ) );
 	}
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		if ( !defined( 'WB_VERSION' ) ) {

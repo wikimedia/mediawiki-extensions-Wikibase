@@ -20,7 +20,7 @@ class SearchEntitiesTest extends WikibaseApiTestCase {
 
 	private static $hasSetup;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		if( !isset( self::$hasSetup ) ) {

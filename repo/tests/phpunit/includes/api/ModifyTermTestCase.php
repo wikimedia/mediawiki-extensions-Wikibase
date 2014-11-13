@@ -14,7 +14,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 	protected static $testId;
 	private static $hasSetup;
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		if( !isset( self::$hasSetup ) ){
