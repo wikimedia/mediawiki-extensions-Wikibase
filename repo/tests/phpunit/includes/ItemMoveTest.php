@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -54,7 +53,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		if ( !$hasSites ) {
 			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
 			$sitesTable->clear();
-			$sitesTable->saveSites( TestSites::getSites() );
+			$sitesTable->saveSites( \TestSites::getSites() );
 			$hasSites = true;
 		}
 
@@ -114,4 +113,3 @@ class ItemMoveTest extends \MediaWikiTestCase {
 	}
 
 }
-

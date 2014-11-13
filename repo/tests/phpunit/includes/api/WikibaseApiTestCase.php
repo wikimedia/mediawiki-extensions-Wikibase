@@ -2,10 +2,7 @@
 
 namespace Wikibase\Test\Api;
 
-use ApiTestCase;
 use Revision;
-use TestSites;
-use TestUser;
 use UsageException;
 use User;
 use Wikibase\EntityFactory;
@@ -18,7 +15,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Adam Shorland
  */
-abstract class WikibaseApiTestCase extends ApiTestCase {
+abstract class WikibaseApiTestCase extends \ApiTestCase {
 
 	protected static $loginSession = null;
 	protected static $loginUser = null;
@@ -35,7 +32,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		if ( !$isSetup ) {
 			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
 			$sitesTable->clear();
-			$sitesTable->saveSites( TestSites::getSites() );
+			$sitesTable->saveSites( \TestSites::getSites() );
 
 			$this->login();
 
@@ -49,7 +46,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 	private function setupUser() {
 		if ( !self::$wbTestUser ) {
-			self::$wbTestUser = new TestUser(
+			self::$wbTestUser = new \TestUser(
 				'Apitesteditor',
 				'Api Test Editor',
 				'api_test_editor@example.com',
@@ -57,7 +54,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			);
 		}
 
-		ApiTestCase::$users['wbeditor'] = self::$wbTestUser;
+		\ApiTestCase::$users['wbeditor'] = self::$wbTestUser;
 
 		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->user );
 	}

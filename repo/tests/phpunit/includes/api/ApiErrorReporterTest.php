@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use ApiMain;
 use DataValues\IllegalValueException;
 use Language;
-use Message;
 use Status;
 use UsageException;
 use ValueParsers\ParseException;

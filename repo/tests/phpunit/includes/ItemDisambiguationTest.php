@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use MediaWikiTestCase;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -128,7 +127,7 @@ class ItemDisambiguationTest extends \PHPUnit_Framework_TestCase {
 		$html = $disambig->getHTML( $items );
 
 		foreach ( $matchers as $key => $matcher ) {
-			MediaWikiTestCase::assertTag( $matcher, $html, "Failed to match HTML output with tag '{$key}'" );
+			\MediaWikiTestCase::assertTag( $matcher, $html, "Failed to match HTML output with tag '{$key}'" );
 		}
 	}
 
