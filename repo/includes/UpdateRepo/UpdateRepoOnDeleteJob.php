@@ -41,7 +41,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 	 *
 	 * @see Job::factory.
 	 *
-	 * @param Title $title Ignored
+	 * @param Title $title
 	 * @param array|bool $params
 	 */
 	public function __construct( Title $title, $params = false ) {

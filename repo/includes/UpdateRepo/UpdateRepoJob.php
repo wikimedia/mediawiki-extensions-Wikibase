@@ -56,10 +56,10 @@ abstract class UpdateRepoJob extends Job {
 	/**
 	 * @param string $command job command
 	 * @param Title $title Ignored
-	 * @param array $params
+	 * @param array|bool $params
 	 */
-	public function __construct( $name, Title $title, array $params ) {
-		parent::__construct( $name, $title, $params );
+	public function __construct( $command, Title $title, $params = false ) {
+		parent::__construct( $command, $title, $params );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initRepoJobServices(
@@ -186,7 +186,9 @@ abstract class UpdateRepoJob extends Job {
 	}
 
 	/**
-	 * @return bool
+	 * @param string $name
+	 *
+	 * @return User|bool
 	 */
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );
@@ -202,9 +204,7 @@ abstract class UpdateRepoJob extends Job {
 	}
 
 	/**
-	 * Run the job
-	 *
-	 * @return boolean success
+	 * @return bool success
 	 */
 	public function run() {
 		wfProfileIn( __METHOD__ );
