@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_629e225a",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T17:08:00Z",
+      "side": 1,
+      "message": "I\u0027m not sure (because it looks like this did not changed in this patch) but why is this a single-element array of an array of changes?",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_7fa6be0e",
         "filename": "client/includes/Changes/ChangeListMangler.php",
         "patchSetId": 3
@@ -183,6 +200,23 @@
       "writtenOn": "2014-11-13T12:53:44Z",
       "side": 1,
       "message": "Inconsistency, even in this file. getChangeRunCoalescer, please.",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e2e0f2c9",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeRunCoalescerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-13T17:08:00Z",
+      "side": 1,
+      "message": "$siteLinks is an instance of Entity? What? Something is really, really messed up here. Luckily all this code is not used at all because the $entities parameter is never used. I removed it in my follow up.",
       "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
