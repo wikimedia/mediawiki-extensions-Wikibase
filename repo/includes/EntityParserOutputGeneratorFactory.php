@@ -2,21 +2,13 @@
 
 namespace Wikibase;
 
-use InvalidArgumentException;
 use ParserOptions;
-use ParserOutput;
 use RequestContext;
-use User;
-use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\EntityViewFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @since 0.5

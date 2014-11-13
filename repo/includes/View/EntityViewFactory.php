@@ -11,16 +11,9 @@ use Wikibase\ItemView;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\PropertyView;
-use Wikibase\Repo\View\ClaimsView;
-use Wikibase\Repo\View\FingerprintView;
-use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
  * @since 0.5

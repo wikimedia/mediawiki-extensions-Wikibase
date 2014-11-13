@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Exception;
 use ValueFormatters\ValueFormatter;
-use ValueParsers\ParseException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpValidationException;

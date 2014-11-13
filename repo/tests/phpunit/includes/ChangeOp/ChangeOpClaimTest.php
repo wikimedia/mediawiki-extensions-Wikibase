@@ -4,11 +4,9 @@ namespace Wikibase\Test;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
-use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpClaim;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;

@@ -15,10 +15,10 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
