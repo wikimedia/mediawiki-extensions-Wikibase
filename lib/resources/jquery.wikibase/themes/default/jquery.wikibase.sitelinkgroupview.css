@@ -3,23 +3,41 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 .wikibase-sitelinkgroupview {
+	border: 1px solid #C9C9C9;
 	float: left;
-	width: 100%;
+	margin: 0 2em 2em 0;
+	width: 30em;
 }
 
-.wikibase-sitelinkgroupview h2 {
-	width: auto;
+@media screen and ( min-width: 1570px ) {
+	.wikibase-sitelinkgroupview {
+		margin-right: 0;
+		width: 100%
+	}
+}
+
+.wikibase-sitelinkgroupview.wb-edit {
+	background-color: #D6F3FF;
 }
 
 .wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container {
-	position: relative;
+	background-color: #FFFFFF;
+	display: table-row;
 }
 
-.wikibase-sitelinkgroupview .wikibase-toolbar-container .wikibase-toolbar-container {
-	position: static;
+.wikibase-sitelinkgroupview.wb-edit .wikibase-sitelinkgroupview-heading-container {
+	background-color: #D6F3FF;
+}
+
+.wikibase-sitelinkgroupview h2 {
+	display: table-cell;
+	float: none;
+	width: auto;
 }
 
 .wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container > .wikibase-toolbar-container {
-	margin-top: 1.9em;
-	z-index: 1;
+	display: table-cell;
+	position: static;
+	padding-left: 0.5em;
+	width: auto;
 }
