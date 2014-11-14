@@ -3,110 +3,30 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-.wikibase-sitelinklistview {
-	border-spacing: 0;
-	width: 100%;
-	border-bottom: 1px solid #C9C9C9;
+.wikibase-sitelinklistview .wikibase-sitelinklistview-listview {
+	list-style: outside none none;
+	margin: 0 0 0 10px;
 	clear: both;
 }
 
-.wikibase-sitelinklistview th {
-	background-color: #C9C9C9;
-	text-align: left;
+.wikibase-sitelinklistview .wikibase-sitelinklistview-listview > * {
+	margin: 3px 0;
 }
 
-.wikibase-sitelinklistview td {
-	height: 2.2em;
-	border-top: 1px solid #C9C9C9;
-}
-
-.wikibase-sitelinklistview .wikibase-sitelinkview-sitename {
-	width: 25%;
-	word-wrap: break-word;
-	padding-left: 10px;
-	padding-right: 10px;
-	border-left: 1px solid #C9C9C9;
-}
-
-.wikibase-sitelinklistview .wikibase-sitelinkview-siteid {
-	width: 10%;
-	padding: 0 10px;
+.wikibase-sitelinklistview .wikibase-sitelinklistview-listview .wikibase-sitelinkview-siteid {
+	background-color: #F0F0F0;
+	padding: 0.2em 0.4em;
 	white-space: nowrap;
 }
 
-.wikibase-sitelinklistview .wikibase-sitelinkview-link {
-	width: 65%;
+.wikibase-sitelinklistview .wikibase-sitelinklistview-listview .wikibase-sitelinkview-link {
+	display: inline-block;
+	margin-left: 0.2em;
+	white-space: nowrap;
 	word-wrap: break-word;
-	padding-left: 10px;
-	padding-right: 16px;
 }
 
-.wikibase-sitelinklistview .wikibase-sitelinkview-badges {
-	display: table-cell;
-}
-
-.wikibase-sitelinklistview .wikibase-sitelinkview-page {
-	display: table-cell;
-	width: 100%;
-}
-
-.wikibase-sitelinklistview tbody td {
-	background: #F0F0F0;
-}
-.wikibase-sitelinklistview tbody tr:nth-child(even) td {
-	background: #F8F8F8;
-}
-.wikibase-sitelinklistview tbody td.wikibase-sitelinkview-siteid {
-	background: #E8E8E8;
-}
-.wikibase-sitelinklistview tbody tr:nth-child(even) td.wikibase-sitelinkview-siteid {
-	background: #F0F0F0;
-}
-
-.wikibase-sitelinklistview td:last-child {
-	border-right: 1px solid #C9C9C9;
-	padding-right: 0;
-	height: 32px;
-	display: table-cell;
-	float: none;
-}
-
-.wikibase-sitelinklistview .wikibase-toolbar-container {
-	float: right;
+.wikibase-sitelinklistview .wikibase-sitelinklistview-listview .wikibase-toolbar-container {
+	padding-left: 0.5em;
 	position: static;
 }
-
-.wikibase-sitelinklistview tfoot td.wikibase-sitelinklistview-placeholder {
-	padding-left: 10px;
-	padding-right: 10px;
-	border-left: 1px solid #C9C9C9;
-}
-
-.wikibase-sitelinklistview .wikibase-sitelinkview.wb-edit td {
-	background-color: #D6F3FF; /* hihglight color when editing */
-}
-.wikibase-sitelinklistview .wikibase-sitelinkview.wb-edit td.wikibase-sitelinkview-siteid {
-	background-color: #D0EBF7;
-}
-
-.wikibase-sitelinklistview .wikibase-sitelinkview.wb-edit.wb-error td {
-	background-color: #FFDFC9;
-}
-
-.wikibase-sitelinklistview .wikibase-toolbar {
-	float: none; /* prevent white space jittering */
-}
-
-.wikibase-sitelinklistview .wikibase-sitelinkview.wb-edit .wikibase-sitelinkview-sitename {
-	white-space: normal;
-}
-
-.wikibase-sitelinklistview .wikibase-sitelinkview.wb-edit .wikibase-sitelinkview-link {
-	padding-left: 7px;
-}
-@-moz-document url-prefix() { /* Firefox */
-	.wikibase-sitelinklistview .wikibase-sitelinkview.wb-edit .wikibase-sitelinkview-link {
-		padding-left: 6px;
-	}
-}
-
