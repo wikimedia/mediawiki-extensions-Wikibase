@@ -7,21 +7,17 @@ use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\ClaimHtmlGenerator;
+use Wikibase\EntityView;
 use Wikibase\ItemView;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyView;
-use Wikibase\Repo\View\ClaimsView;
-use Wikibase\Repo\View\FingerprintView;
-use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
  * @since 0.5
@@ -69,6 +65,7 @@ class EntityViewFactory {
 	 * @param string $languageCode
 	 * @param string $entityType
 	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityView
 	 */
 	public function newEntityView(
