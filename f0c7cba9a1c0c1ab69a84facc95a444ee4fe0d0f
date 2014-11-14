@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_cb986a21",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:54:24Z",
+      "side": 1,
+      "message": "i have no idea...",
+      "parentUuid": "6e936f18_89559828",
+      "revId": "f0c7cba9a1c0c1ab69a84facc95a444ee4fe0d0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_2946c480",
         "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_4b845ab4",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:54:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_2946c480",
+      "revId": "f0c7cba9a1c0c1ab69a84facc95a444ee4fe0d0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_293d64da",
         "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2014-11-13T08:08:01Z",
       "side": 1,
       "message": "Empty constructor can go away. Also, documentation does not match behaviour anymore.",
+      "revId": "f0c7cba9a1c0c1ab69a84facc95a444ee4fe0d0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_2b878ebb",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:54:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_293d64da",
       "revId": "f0c7cba9a1c0c1ab69a84facc95a444ee4fe0d0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

@@ -33,6 +33,24 @@
       "revId": "362e784f3e75ac3f7252d80c114cec96f19acd40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8b9ee208",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:54:24Z",
+      "side": 0,
+      "message": "The reason they are here is that I wasn\u0027t sure about the initialization order of things inside the Engine object; in particular, it\u0027s unclear whether the Parser is already available from the Engine when the constructor is called. It seems safer to only ask the Engine for the Parser later, when the actual parsing is already in progress.",
+      "parentUuid": "6e936f18_e92a1c8e",
+      "revId": "362e784f3e75ac3f7252d80c114cec96f19acd40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
