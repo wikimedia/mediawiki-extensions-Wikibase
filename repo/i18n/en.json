@@ -62,7 +62,6 @@
 	"wikibase-ui-pendingquantitycounter-pending-pendingsubpart": "+$1",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|One value|$1 values}} not saved yet",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|entry|entries}}",
-	"wikibase-sitelinksedittool-full": "Links to pages are already set for all known sites.",
 	"wikibase-disambiguation-title": "Disambiguation for \"$1\"",
 	"wb-special-newitem-new-item-notification": "New item $1 created and redirected to its page. Back to $2.",
 	"wikibase-aliases-label": "Also known as:",
