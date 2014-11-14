@@ -15,8 +15,9 @@ use SiteList;
 use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
-use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\AffectedPagesFinder;
+use Wikibase\Client\Changes\ChangeHandler;
+use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
@@ -52,7 +53,6 @@ use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
-use Wikibase\Client\Changes\WikiPageUpdater;
 
 /**
  * Top level factory for the WikibaseClient extension.
@@ -126,14 +126,14 @@ final class WikibaseClient {
 	private $valueFormatterFactory;
 
 	/**
-	 * @var SiteList
-	 */
-	private $siteList = null;
-
-	/**
 	 * @var SiteStore
 	 */
 	private $siteStore;
+
+	/**
+	 * @var SiteList|null
+	 */
+	private $siteList = null;
 
 	/**
 	 * @var LangLinkHandler
@@ -169,7 +169,7 @@ final class WikibaseClient {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			$urlSchemes = $this->getSettings()->getSetting( 'urlSchemes' );
+			$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
 			$builders = new WikibaseDataTypeBuilders(
 				$this->getEntityLookup(),
 				$this->getEntityIdParser(),
@@ -481,9 +481,7 @@ final class WikibaseClient {
 			$this->getDataTypeFactory()
 		);
 
-		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
-
-		return $factory;
+		return new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
 	}
 
 	/**
@@ -509,9 +507,7 @@ final class WikibaseClient {
 			$this->contentLanguage
 		);
 
-		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
-
-		return $factory;
+		return new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
 	}
 
 	/**
@@ -519,11 +515,9 @@ final class WikibaseClient {
 	 */
 	public function getNamespaceChecker() {
 		if ( !$this->namespaceChecker ) {
-			$settings = $this->getSettings();
-
 			$this->namespaceChecker = new NamespaceChecker(
-				$settings->getSetting( 'excludeNamespaces' ),
-				$settings->getSetting( 'namespaces' )
+				$this->settings->getSetting( 'excludeNamespaces' ),
+				$this->settings->getSetting( 'namespaces' )
 			);
 		}
 
@@ -535,12 +529,10 @@ final class WikibaseClient {
 	 */
 	public function getLangLinkHandler() {
 		if ( !$this->langLinkHandler ) {
-			$settings = $this->getSettings();
-
 			$this->langLinkHandler = new LangLinkHandler(
 				$this->getOtherProjectsSidebarGenerator(),
 				$this->getLanguageLinkBadgeDisplay(),
-				$settings->getSetting( 'siteGlobalID' ),
+				$this->settings->getSetting( 'siteGlobalID' ),
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkTable(),
 				$this->getStore()->getEntityLookup(),
@@ -558,24 +550,13 @@ final class WikibaseClient {
 	public function getLanguageLinkBadgeDisplay() {
 		global $wgLang;
 
-		$badgeClassNames = $this->getSettings()->getSetting( 'badgeClassNames' );
+		$badgeClassNames = $this->settings->getSetting( 'badgeClassNames' );
 
 		return new LanguageLinkBadgeDisplay(
 			$this->getEntityLookup(),
 			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
 			$wgLang
 		);
-	}
-
-	/**
-	 * @return SiteList
-	 */
-	public function getSiteList() {
-		if ( $this->siteList === null ) {
-			$this->siteList = $this->getSiteStore()->getSites();
-		}
-
-		return $this->siteList;
 	}
 
 	/**
@@ -589,6 +570,17 @@ final class WikibaseClient {
 		}
 
 		return $this->siteStore;
+	}
+
+	/**
+	 * @return SiteList
+	 */
+	public function getSiteList() {
+		if ( $this->siteList === null ) {
+			$this->siteList = $this->getSiteStore()->getSites();
+		}
+
+		return $this->siteList;
 	}
 
 	/**
@@ -660,13 +652,11 @@ final class WikibaseClient {
 	 * @return OtherProjectsSidebarGenerator
 	 */
 	public function getOtherProjectsSidebarGenerator() {
-		$settings = $this->getSettings();
-
 		return new OtherProjectsSidebarGenerator(
-			$settings->getSetting( 'siteGlobalID' ),
+			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->getStore()->getSiteLinkTable(),
 			$this->getSiteList(),
-			$settings->getSetting( 'otherProjectsLinks' )
+			$this->settings->getSetting( 'otherProjectsLinks' )
 		);
 	}
 
@@ -694,12 +684,12 @@ final class WikibaseClient {
 	 */
 	public function getParserFunctionRegistrant() {
 		return new ParserFunctionRegistrant(
-			$this->getSettings()->getSetting( 'allowDataTransclusion' )
+			$this->settings->getSetting( 'allowDataTransclusion' )
 		);
 	}
 
 	/**
-	 * @return RendererFactory
+	 * @return PropertyClaimsRendererFactory
 	 */
 	private function getPropertyClaimsRendererFactory() {
 		$snaksFinder = new SnaksFinder(
@@ -725,7 +715,7 @@ final class WikibaseClient {
 		return new Runner(
 			$this->getPropertyClaimsRendererFactory(),
 			$this->getStore()->getSiteLinkTable(),
-			$this->getSettings()->getSetting( 'siteGlobalID' )
+			$this->settings->getSetting( 'siteGlobalID' )
 		);
 	}
 
@@ -739,7 +729,7 @@ final class WikibaseClient {
 		return new OtherProjectsSitesProvider(
 			$this->getSiteList(),
 			$this->getSite(),
-			$this->getSettings()->getSetting( 'specialSiteLinkGroups' )
+			$this->settings->getSetting( 'specialSiteLinkGroups' )
 		);
 	}
 
@@ -765,9 +755,9 @@ final class WikibaseClient {
 			$this->getAffectedPagesFinder(),
 			new WikiPageUpdater(),
 			$this->getStore()->getEntityRevisionLookup(),
-			$this->getSettings()->getSetting( 'siteGlobalID' ),
-			$this->getSettings()->getSetting( 'injectRecentChanges' ),
-			$this->getSettings()->getSetting( 'allowDataTransclusion' )
+			$this->settings->getSetting( 'siteGlobalID' ),
+			$this->settings->getSetting( 'injectRecentChanges' ),
+			$this->settings->getSetting( 'allowDataTransclusion' )
 		);
 	}
 
