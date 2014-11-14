@@ -11,6 +11,7 @@ use LogicException;
 use MediaWikiSite;
 use MWException;
 use Site;
+use SiteList;
 use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
@@ -123,6 +124,11 @@ final class WikibaseClient {
 	 * @var OutputFormatValueFormatterFactory
 	 */
 	private $valueFormatterFactory;
+
+	/**
+	 * @var SiteList
+	 */
+	private $siteList = null;
 
 	/**
 	 * @var SiteStore
@@ -538,7 +544,7 @@ final class WikibaseClient {
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkTable(),
 				$this->getStore()->getEntityLookup(),
-				$this->getSiteStore()->getSites(),
+				$this->getSiteList(),
 				$this->getLangLinkSiteGroup()
 			);
 		}
@@ -559,6 +565,17 @@ final class WikibaseClient {
 			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
 			$wgLang
 		);
+	}
+
+	/**
+	 * @return SiteList
+	 */
+	public function getSiteList() {
+		if ( $this->siteList === null ) {
+			$this->siteList = $this->getSiteStore()->getSites();
+		}
+
+		return $this->siteList;
 	}
 
 	/**
@@ -648,7 +665,7 @@ final class WikibaseClient {
 		return new OtherProjectsSidebarGenerator(
 			$settings->getSetting( 'siteGlobalID' ),
 			$this->getStore()->getSiteLinkTable(),
-			$this->getSiteStore(),
+			$this->getSiteList(),
 			$settings->getSetting( 'otherProjectsLinks' )
 		);
 	}
@@ -716,9 +733,12 @@ final class WikibaseClient {
 	 * @return OtherProjectsSitesProvider
 	 */
 	public function getOtherProjectsSitesProvider() {
+		$siteList = $this->getSiteList();
+		$siteId = $this->getSettings()->getSetting( 'siteGlobalID' );
+
 		return new OtherProjectsSitesProvider(
-			$this->getSiteStore()->getSites(),
-			$this->getSite(),
+			$siteList,
+			$siteList->getSite( $siteId ),
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' )
 		);
 	}
