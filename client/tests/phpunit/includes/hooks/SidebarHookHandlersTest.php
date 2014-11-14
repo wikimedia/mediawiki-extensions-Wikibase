@@ -212,7 +212,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			$namespaceChecker,
 			$mockRepo,
 			$mockRepo,
-			$siteStore,
+			$siteStore->getSites(),
 			$siteGroup
 		);
 
