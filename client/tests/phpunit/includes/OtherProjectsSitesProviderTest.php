@@ -28,9 +28,9 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 	 * @dataProvider otherProjectSitesProvider
 	 */
 	public function testOtherProjectSites( array $supportedSites, Site $inputSite, SiteList $expectedSites ) {
-		$siteStore = $this->getSiteStoreMock();
+		$sites = $this->getSiteStoreMock()->getSites();
 
-		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $siteStore, $inputSite, array( 'wikidata' ) );
+		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $sites, $inputSite, array( 'wikidata' ) );
 
 		$this->assertEquals(
 			$expectedSites,
@@ -42,8 +42,8 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 	 * @dataProvider otherProjectSitesProvider
 	 */
 	public function testOtherProjectSiteIds( array $supportedSites, Site $inputSite, SiteList $expectedSites ) {
-		$siteStore = $this->getSiteStoreMock();
-		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $siteStore, $inputSite, array( 'wikidata' ) );
+		$sites = $this->getSiteStoreMock()->getSites();
+		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $sites, $inputSite, array( 'wikidata' ) );
 
 		$expectedSiteIds = array();
 		foreach ( $expectedSites as $site ) {
