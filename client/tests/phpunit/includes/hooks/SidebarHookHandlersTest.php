@@ -195,7 +195,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$otherProjectsSidebarGenerator = new OtherProjectsSidebarGenerator(
 			$siteId,
 			$mockRepo,
-			$siteStore,
+			$siteStore->getSites(),
 			$otherProjectIds
 		);
 

@@ -11,6 +11,7 @@ use LogicException;
 use MediaWikiSite;
 use MWException;
 use Site;
+use SiteList;
 use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
@@ -649,7 +650,7 @@ final class WikibaseClient {
 		return new OtherProjectsSidebarGenerator(
 			$settings->getSetting( 'siteGlobalID' ),
 			$this->getStore()->getSiteLinkTable(),
-			$this->getSiteStore(),
+			$this->getSiteStore()->getSites(),
 			$settings->getSetting( 'otherProjectsLinks' )
 		);
 	}
@@ -717,6 +718,9 @@ final class WikibaseClient {
 	 * @return OtherProjectsSitesProvider
 	 */
 	public function getOtherProjectsSitesProvider() {
+		// @fixme don't use getSite here, but instead get site from the SiteList.
+		// though the in-process caching appears to interfere with tests, so need
+		// to resolve that also.
 		return new OtherProjectsSitesProvider(
 			$this->getSiteStore()->getSites(),
 			$this->getSite(),
