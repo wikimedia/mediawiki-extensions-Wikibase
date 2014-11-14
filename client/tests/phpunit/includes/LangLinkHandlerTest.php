@@ -73,7 +73,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			$this->mockRepo->putEntity( $item );
 		}
 
-		$sites = MockSiteStore::newFromTestSites();
+		$siteStore = MockSiteStore::newFromTestSites();
 
 		return new LangLinkHandler(
 			$this->getOtherProjectsSidebarGenerator( $otherProjects ),
@@ -82,7 +82,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			new NamespaceChecker( array( NS_TALK ), array() ),
 			$this->mockRepo,
 			$this->mockRepo,
-			$sites,
+			$siteStore->getSites(),
 			'wikipedia'
 		);
 	}
