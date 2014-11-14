@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Hooks;
 
 use Site;
-use SiteStore;
+use SiteList;
 use Title;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -29,9 +29,9 @@ class OtherProjectsSidebarGenerator {
 	private $siteLinkLookup;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteList
 	 */
-	private $siteStore;
+	private $siteList;
 
 	/**
 	 * @var string[]
@@ -41,13 +41,15 @@ class OtherProjectsSidebarGenerator {
 	/**
 	 * @param string $localSiteId
 	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param SiteStore $siteStore
+	 * @param SiteList $sites
 	 * @param string[] $siteIdsToOutput
 	 */
-	public function __construct( $localSiteId, SiteLinkLookup $siteLinkLookup, SiteStore $siteStore, array $siteIdsToOutput ) {
+	public function __construct( $localSiteId, SiteLinkLookup $siteLinkLookup, SiteList $sites,
+		array $siteIdsToOutput
+	) {
 		$this->localSiteId = $localSiteId;
 		$this->siteLinkLookup = $siteLinkLookup;
-		$this->siteStore = $siteStore;
+		$this->sites = $sites;
 		$this->siteIdsToOutput = $siteIdsToOutput;
 	}
 
@@ -72,7 +74,7 @@ class OtherProjectsSidebarGenerator {
 			if ( !in_array( $siteLink->getSiteId(), $this->siteIdsToOutput ) ) {
 				continue;
 			}
-			$site = $this->siteStore->getSite( $siteLink->getSiteId() );
+			$site = $this->sites->getSite( $siteLink->getSiteId() );
 			if ( $site === null ) {
 				continue;
 			}
