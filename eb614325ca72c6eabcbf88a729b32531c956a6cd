@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_cb02aa0c",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-14T11:42:46Z",
+      "side": 1,
+      "message": "null should be in the doc.",
+      "revId": "eb614325ca72c6eabcbf88a729b32531c956a6cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e8076c1e",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-14T11:42:46Z",
+      "side": 1,
+      "message": "I would have put this under $siteStore.",
+      "revId": "eb614325ca72c6eabcbf88a729b32531c956a6cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8b08222c",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-14T11:42:46Z",
+      "side": 1,
+      "message": "I would have put this under getSiteStore.",
+      "revId": "eb614325ca72c6eabcbf88a729b32531c956a6cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_2b38eece",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-14T11:42:46Z",
+      "side": 1,
+      "message": "Uh what? LOL. :-)",
+      "revId": "eb614325ca72c6eabcbf88a729b32531c956a6cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
