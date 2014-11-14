@@ -172,12 +172,14 @@ $.extend( StickyNode.prototype, {
 			offset: this.$node.offset(),
 			position: this.$node.css( 'position' ),
 			top: this.$node.css( 'top' ),
-			left: this.$node.css( 'left' )
+			left: this.$node.css( 'left' ),
+			width: this.$node.css( 'width' )
 		};
 
 		this.$node
 		.css( 'left', this._initialAttributes.offset.left + 'px' )
 		.css( 'top', this.$node.outerHeight() - this.$node.outerHeight( true ) )
+		.css( 'width', this.$node.width() )
 		.css( 'position', 'fixed' );
 	},
 
@@ -185,6 +187,7 @@ $.extend( StickyNode.prototype, {
 		this.$node
 		.css( 'left', this._initialAttributes.left )
 		.css( 'top', this._initialAttributes.top )
+		.css( 'width', this._initialAttributes.width )
 		.css( 'position', this._initialAttributes.position );
 
 		this._initialAttributes.offset = null;

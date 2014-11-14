@@ -31,7 +31,6 @@
 	margin: 0;
 	font-family: inherit;
 	font-size: 1em; /* prevent font size rounding errors */
-	width: 100%;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;

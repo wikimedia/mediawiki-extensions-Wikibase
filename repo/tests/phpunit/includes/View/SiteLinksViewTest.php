@@ -80,7 +80,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 					'data-wb-sitelinks-group' => 'wikipedia'
 				),
 				'descendant' => array(
-					'tag' => 'td',
+					'tag' => 'span',
 					'class' => 'wikibase-sitelinkview-link-enwiki',
 					'content' => 'test'
 				)
@@ -97,7 +97,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 					'data-wb-sitelinks-group' => 'wikipedia'
 				),
 				'descendant' => array(
-					'tag' => 'td',
+					'tag' => 'span',
 					'class' => 'wikibase-sitelinkview-link-enwiki',
 					'content' => 'test'
 				)
@@ -117,34 +117,6 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 				'attributes' => array(
 					'data-wb-sitelinks-group' => 'special'
 				),
-				'child' => array(
-					'tag' => 'table',
-					'child' => array(
-						'tag' => 'thead',
-						'child' => array(
-							'tag' => 'tr'
-						)
-					)
-				)
-			)
-		);
-
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q1' ) );
-
-		$testCases[] = array(
-			$item,
-			array( 'wikipedia', 'special' ),
-			true,
-			array(
-				'tag' => 'div',
-				'descendant' => array(
-					'tag' => 'table',
-					'child' => array(
-						'tag' => 'thead',
-						'content' => ''
-					)
-				)
 			)
 		);
 
