@@ -58,7 +58,7 @@
 	width: auto;
 }
 
-.wikibase-fingerprintview .wikibase-aliasesview-container {
+.wikibase-fingerprintview .wikibase-aliasesview .wikibase-aliasesview-container {
 	display: inline-block !important;
 	padding-left: 0;
 	padding-right: 0;
