@@ -11,6 +11,7 @@ use LogicException;
 use MediaWikiSite;
 use MWException;
 use Site;
+use SiteList;
 use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
@@ -123,6 +124,11 @@ final class WikibaseClient {
 	 * @var OutputFormatValueFormatterFactory
 	 */
 	private $valueFormatterFactory;
+
+	/**
+	 * @var SiteList
+	 */
+	private $siteList = null;
 
 	/**
 	 * @var SiteStore
@@ -538,7 +544,7 @@ final class WikibaseClient {
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkTable(),
 				$this->getStore()->getEntityLookup(),
-				$this->getSiteStore()->getSites(),
+				$this->getSiteList(),
 				$this->getLangLinkSiteGroup()
 			);
 		}
@@ -559,6 +565,17 @@ final class WikibaseClient {
 			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
 			$wgLang
 		);
+	}
+
+	/**
+	 * @return SiteList
+	 */
+	public function getSiteList() {
+		if ( $this->siteList === null ) {
+			$this->siteList = $this->getSiteStore()->getSites();
+		}
+
+		return $this->siteList;
 	}
 
 	/**
@@ -648,7 +665,7 @@ final class WikibaseClient {
 		return new OtherProjectsSidebarGenerator(
 			$settings->getSetting( 'siteGlobalID' ),
 			$this->getStore()->getSiteLinkTable(),
-			$this->getSiteStore(),
+			$this->getSiteList(),
 			$settings->getSetting( 'otherProjectsLinks' )
 		);
 	}
@@ -716,8 +733,11 @@ final class WikibaseClient {
 	 * @return OtherProjectsSitesProvider
 	 */
 	public function getOtherProjectsSitesProvider() {
+		// @fixme don't use getSite here, but instead get site from the SiteList.
+		// though the in-process caching appears to interfere with tests, so need
+		// to resolve that also.
 		return new OtherProjectsSitesProvider(
-			$this->getSiteStore()->getSites(),
+			$this->getSiteList(),
 			$this->getSite(),
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' )
 		);
@@ -745,7 +765,7 @@ final class WikibaseClient {
 			$this->getAffectedPagesFinder(),
 			new WikiPageUpdater(),
 			$this->getStore()->getEntityRevisionLookup(),
-			$this->getSite()->getGlobalId(),
+			$this->getSettings()->getSetting( 'siteGlobalID' ),
 			$this->getSettings()->getSetting( 'injectRecentChanges' ),
 			$this->getSettings()->getSetting( 'allowDataTransclusion' )
 		);
