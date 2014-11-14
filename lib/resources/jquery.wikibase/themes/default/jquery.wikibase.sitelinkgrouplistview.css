@@ -4,5 +4,11 @@
  */
 .wikibase-sitelinkgrouplistview {
 	float: left;
-	width: 100%;
+	width: 65em;
+}
+
+@media screen and ( min-width: 1570px ) {
+	.wikibase-sitelinkgrouplistview {
+		width: 26em;
+	}
 }
