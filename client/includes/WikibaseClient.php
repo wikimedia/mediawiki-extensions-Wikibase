@@ -649,7 +649,7 @@ final class WikibaseClient {
 		return new OtherProjectsSidebarGenerator(
 			$settings->getSetting( 'siteGlobalID' ),
 			$this->getStore()->getSiteLinkTable(),
-			$this->getSiteStore(),
+			$this->getSiteStore()->getSites(),
 			$settings->getSetting( 'otherProjectsLinks' )
 		);
 	}

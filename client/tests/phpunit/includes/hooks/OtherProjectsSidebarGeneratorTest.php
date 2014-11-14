@@ -33,10 +33,12 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		$mockRepo = new MockRepository();
 		$mockRepo->putEntity( $item );
 
+		$siteStore = MockSiteStore::newFromTestSites();
+
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
 			$mockRepo,
-			MockSiteStore::newFromTestSites(),
+			$siteStore->getSites(),
 			$siteIdsToOutput
 		);
 
