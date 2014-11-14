@@ -261,7 +261,7 @@
 	"wikibase-item-summary-wbsetclaim-update-qualifiers": "Se {{PLURAL:$4|modificó un calificador|modificaron $4 calificadores}} de {{PLURAL:$3|una afirmación|afirmaciones}}",
 	"wikibase-property-summary-wbeditentity-create": "Se creó una nueva propiedad",
 	"wikibase-property-summary-wbeditentity-update": "Se cambió una propiedad",
-	"wikibase-property-summary-wbeditentity-override": "Se sobreescribió una propiedad",
+	"wikibase-property-summary-wbeditentity-override": "Se eliminó una propiedad",
 	"wikibase-property-summary-wbsetlabel-set": "Se cambió la etiqueta [$2]",
 	"wikibase-property-summary-wbsetlabel-remove": "Se eliminó la etiqueta [$2]",
 	"wikibase-property-summary-wbsetdescription-set": "Se cambió la descripción [$2]",

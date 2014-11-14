@@ -263,6 +263,7 @@
 	"wikibase-item-summary-wbsetclaim-update-references": "Alterou {{PLURAL:$4|uma referência|referências}} de {{PLURAL:$3|uma alegação|alegações}}",
 	"wikibase-item-summary-wbsetclaim-update-rank": "Alterou a classificação de {{PLURAL:$3|alegação|alegações}}",
 	"wikibase-item-summary-clientsitelink-update": "Página movida de [$3] para [$4]",
+	"wikibase-item-summary-clientsitelink-remove": "Página em [$3] eliminada",
 	"wikibase-item-summary-wbsetqualifier-add": "Adicionou {{PLURAL:$1|um qualificador|qualificadores}}",
 	"wikibase-item-summary-wbsetqualifier-update": "Alterou {{PLURAL:$1|qualificador|qualificadores}}",
 	"wikibase-item-summary-wbremovequalifiers-remove": "Removeu {{PLURAL:$1|um qualificador|qualificadores}}",

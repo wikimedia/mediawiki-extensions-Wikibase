@@ -286,6 +286,7 @@
 	"wikibase-item-summary-wbsetclaim-update-references": "{{PLURAL:$4|Изменет еден|Изменети $4}} {{PLURAL:$4|навод|наводи}} за {{PLURAL:$3|тврдење|тврдења}}",
 	"wikibase-item-summary-wbsetclaim-update-rank": "Сменет рангот на {{PLURAL:$3|тврдење|тврдења}}",
 	"wikibase-item-summary-clientsitelink-update": "Страницата е преместена од [$3] на [$4]",
+	"wikibase-item-summary-clientsitelink-remove": "Страницата на [$3] е избришана",
 	"wikibase-item-summary-wbsetqualifier-add": "{{PLURAL:$1|Додадена определница|Додадени определници}}",
 	"wikibase-item-summary-wbsetqualifier-update": "{{PLURAL:$1|Изменета определница|Изменети определници}}",
 	"wikibase-item-summary-wbremovequalifiers-remove": "{{PLURAL:$1|Отстранета определница|Отстранети определници}}",

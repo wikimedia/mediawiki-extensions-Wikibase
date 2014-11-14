@@ -292,6 +292,7 @@
 	"wikibase-item-summary-wbsetclaim-update-references": "{{PLURAL:$4|שוּנתה אסמכתה אחת|שונו $4 אסמכתאות}} של {{PLURAL:$3|טענה|טענות}}",
 	"wikibase-item-summary-wbsetclaim-update-rank": "שונה דירוג של {{PLURAL:$3|טענה|טענות}}",
 	"wikibase-item-summary-clientsitelink-update": "הדף הועבר מ־[ִ$3] אל [$4]",
+	"wikibase-item-summary-clientsitelink-remove": "הדף ב־[$3] נמחק",
 	"wikibase-item-summary-wbsetqualifier-add": "{{PLURAL:$1|נוסף מבחין|נוספו מבחינים}}",
 	"wikibase-item-summary-wbsetqualifier-update": "{{PLURAL:$1|שוּנה מבחין|שונו מבחינים}}",
 	"wikibase-item-summary-wbremovequalifiers-remove": "{{PLURAL:$1|הוסר מבחין|הוסרו מבחינים}}",

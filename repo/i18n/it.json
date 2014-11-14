@@ -239,7 +239,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Puoi modificarla inserendo <nowiki>{{#babel: }}</nowiki> nella {{GENDER:$1|tua}} [[Special:MyPage|pagina utente]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, convertito da $3 - $4",
 	"wikibase-api-unresolved-redirect": "L'ID di entità specificato si riferisce a un redirect, che non è supportato in questo contesto.",
-	"wikibase-api-no-such-sitelink": "Non è possibile trovare un collegamento al sito",
+	"wikibase-api-no-such-sitelink": "Non è possibile trovare un collegamento al sito '$1' quando si cerca di modificare il distintivo.",
 	"wikibase-api-target-not-empty": "Il reindirizzamento può essere creato solo in cima a un'entità vuota.",
 	"wikibase-api-target-is-redirect": "La destinazione del reindirizzamento non deve essere un redirect.",
 	"wikibase-api-target-is-incompatible": "Tentativo di reindirizzare a un'entità di tipo diverso.",

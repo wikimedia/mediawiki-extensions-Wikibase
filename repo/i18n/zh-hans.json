@@ -309,6 +309,7 @@
 	"wikibase-item-summary-wbsetclaim-update-references": "更改{{PLURAL:$3|声称}}的$4个参考",
 	"wikibase-item-summary-wbsetclaim-update-rank": "更改{{PLURAL:$3|声称}}的等级",
 	"wikibase-item-summary-clientsitelink-update": "页面自[$3]移动至[$4]。",
+	"wikibase-item-summary-clientsitelink-remove": "[$3]上的页面已被删除",
 	"wikibase-item-summary-wbsetqualifier-add": "添加{{PLURAL:$1|限定符}}",
 	"wikibase-item-summary-wbsetqualifier-update": "更改{{PLURAL:$1|限定符}}",
 	"wikibase-item-summary-wbremovequalifiers-remove": "删除{{PLURAL:$1|限定符}}",

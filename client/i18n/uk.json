@@ -13,7 +13,8 @@
 			"Sergento",
 			"Ата",
 			"Максим Підліснюк",
-			"Tkalyn"
+			"Tkalyn",
+			"DixonD"
 		]
 	},
 	"wikibase-client-desc": "Клієнт для розширення Wikibase",
@@ -71,5 +72,5 @@
 	"wikibase-property-render-error": "Не вдалося відобразити властивість $1: $2",
 	"wikibase-otherprojects": "Інші проекти",
 	"wikibase-otherprojects-beta-message": "Бічна панель інших проектів",
-	"wikibase-otherprojects-beta-description": "Додає на бічну панель розділ «{{int:wikibase-otherprojects}}», який містить посилання на інші проекти Фонду Вікімедіа на основі данних {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Додає розділ «{{int:wikibase-otherprojects}}» на бічну панель, який містить посилання на інші проекти Фонду Вікімедіа, використовуючи {{WBREPONAME}} для отримання потрібних для цього даних."
 }

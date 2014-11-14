@@ -7,7 +7,8 @@
 			"Lokal Profil",
 			"Rippitippi",
 			"Vivaelcelta",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Warrakkk"
 		]
 	},
 	"wikibase-desc": "Strukturerad datalagring",
@@ -234,7 +235,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Du kan redigera den genom att lägga in <nowiki>{{#babel: }}</nowiki> på {{GENDER:$1|din}} [[Special:MyPage|användarsida]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, konverterade från $3 - $4",
 	"wikibase-api-unresolved-redirect": "Angiven enhets-ID hänvisar till en omdirigering, som inte stöds i detta sammanhang.",
-	"wikibase-api-no-such-sitelink": "Kunde inte hitta en sådan webbplatslänk",
+	"wikibase-api-no-such-sitelink": "Kunde inte hitta en wepplatslänk till '$1' när du försökte redigera märken.",
 	"wikibase-api-target-not-empty": "Omdirigeringen kan enbart skapas ovanpå en tom entitet.",
 	"wikibase-api-target-is-redirect": "Omdirigeringens mål får i sin tur inte vara en omdirigering.",
 	"wikibase-api-target-is-incompatible": "Försök att omdirigera till en entitet av en annan typ.",
@@ -290,6 +291,7 @@
 	"wikibase-item-summary-wbsetclaim-update-references": "Ändrade {{PLURAL:$4|en referens|$4 referenser}} för {{PLURAL:$3|påstående|påståenden}}",
 	"wikibase-item-summary-wbsetclaim-update-rank": "Ändrade rank för {{PLURAL:$3|anspråk}}",
 	"wikibase-item-summary-clientsitelink-update": "Sida flyttades från [$3] till [$4]",
+	"wikibase-item-summary-clientsitelink-remove": "Sidan på [$3] raderades",
 	"wikibase-item-summary-wbsetqualifier-add": "La till {{PLURAL:$1|kvalifikator|kvalifikatorer}}",
 	"wikibase-item-summary-wbsetqualifier-update": "Ändrade {{PLURAL:$1|kvalifikator|kvalifikatorer}}",
 	"wikibase-item-summary-wbremovequalifiers-remove": "Tog bort {{PLURAL:$1|kvalifikator|kvalifikatorer}}",
