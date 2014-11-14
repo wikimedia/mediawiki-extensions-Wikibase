@@ -8,28 +8,65 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
 
+/**
+ * @group Wikibase
+ * @group WikibaseLib
+ * @group WikibaseStore
+ */
 class LanguageFallbackLabelLookupTest extends \MediaWikiTestCase {
 
 	public function testGetLabel() {
-		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
-		$fallbackChain = $languageFallbackChainFactory->newFromLanguage( Language::factory( 'zh' ) );
+		$termLookup = $this->getTermLookup();
+		$fallbackChain = $this->getLanguageFallbackChain( 'zh' );
 
-		$termLookup = new EntityTermLookup( $this->getTermIndex() );
 		$labelLookup = new LanguageFallbackLabelLookup( $termLookup, $fallbackChain );
 
 		$label = $labelLookup->getLabel( new ItemId( 'Q118' ) );
-		$this->assertEquals( '测试', $label );
+		$this->assertEquals( 'fallbackLabel', $label );
+	}
+
+	public function testGetLabel_entityNotFound() {
+		$termLookup = $this->getTermLookup();
+		$fallbackChain = $this->getLanguageFallbackChain( 'zh' );
+
+		$labelLookup = new LanguageFallbackLabelLookup( $termLookup, $fallbackChain );
+
+		$this->setExpectedException( 'Wikibase\Lib\Store\StorageException' );
+		$labelLookup->getLabel( new ItemId( 'Q120' ) );
 	}
 
 	public function testGetLabel_notFound() {
-		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
-		$fallbackChain = $languageFallbackChainFactory->newFromLanguage( Language::factory( 'zh' ) );
+		$termLookup = $this->getTermLookup();
+		$fallbackChain = $this->getLanguageFallbackChain( 'ar' );
 
-		$termLookup = new EntityTermLookup( $this->getTermIndex() );
 		$labelLookup = new LanguageFallbackLabelLookup( $termLookup, $fallbackChain );
 
 		$this->setExpectedException( 'OutOfBoundsException' );
-		$label = $labelLookup->getLabel( new ItemId( 'Q120' ) );
+		$labelLookup->getLabel( new ItemId( 'Q116' ) );
+	}
+
+	private function getLanguageFallbackChain( $languageCode ) {
+		$languageFallbackChain = $this->getMockBuilder( 'Wikibase\LanguageFallbackChain' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$languageFallbackChain->expects( $this->any() )
+			->method( 'extractPreferredValue' )
+			->will( $this->returnCallback( function( array $fallbackData ) use ( $languageCode ) {
+				if ( $languageCode === 'zh' && array_key_exists( 'zh-cn', $fallbackData ) ) {
+					return array( 'value' => 'fallbackLabel' );
+				} else {
+					return null;
+				}
+			} ) );
+
+		return $languageFallbackChain;
+	}
+
+	private function getTermLookup() {
+		$entityLookup = new MockRepository();
+
+		return new EntityTermLookup( $this->getTermIndex(), $entityLookup );
 	}
 
 	private function getTermIndex() {
