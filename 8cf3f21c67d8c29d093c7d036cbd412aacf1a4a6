@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_0bd2d200",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:21:36Z",
+      "side": 1,
+      "message": "You seem to be the only one who cares :)",
+      "parentUuid": "6e936f18_7f08fedc",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_9ffceab3",
         "filename": "client/includes/Changes/ChangeHandler.php",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2014-11-13T12:53:44Z",
       "side": 1,
       "message": "Can not be null.",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_ebd446ef",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:21:36Z",
+      "side": 1,
+      "message": "Yea, changed that back and forth a couple of times, forgot about it. Thanks!",
+      "parentUuid": "6e936f18_9ffceab3",
       "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_4bcc5a65",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:21:36Z",
+      "side": 1,
+      "message": "Because the parameters of hooks are given as an array, and the first parameter is $changes, and array of changes.",
+      "parentUuid": "6e936f18_629e225a",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_7fa6be0e",
         "filename": "client/includes/Changes/ChangeListMangler.php",
         "patchSetId": 3
@@ -81,6 +135,24 @@
       "writtenOn": "2014-11-13T12:53:44Z",
       "side": 1,
       "message": "Mangler? That\u0027s what\u0027s a mangle is for me: http://www.suchebiete.com/userbilder/4ca9e56e7d21e.jpg\n\nWhat about Consolidator? Reducer? Merger? Combiner?\n\nBut wait, this interface must not know what happens to the array. It could also grow in size. It\u0027s just a ChangeListTransformator.\n\nIf you want a guarantee the returned list is never larger please add this to the documentation.",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8bfd826b",
+        "filename": "client/includes/Changes/ChangeListMangler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:21:36Z",
+      "side": 1,
+      "message": "No such guarantee is intended.\n\nThe idea is that classes implementing this interface are intended to \"smoothen\" the list of changes for our purpose. \n\n\"Transformer\" would work, though to me it implies that it would turn the list into some other data structure.\n\n\"Manipulator\"? \"Mogrifyer\"? \"Frobber\"?...",
+      "parentUuid": "6e936f18_7fa6be0e",
       "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_4bf3fa9a",
+        "filename": "client/includes/Changes/ChangeListMangler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:21:36Z",
+      "side": 1,
+      "message": "But \"ChangeListSomeOperationDoer\" didn\u0027t seem like a good name.",
+      "parentUuid": "6e936f18_bf8e867a",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_3f6d96c7",
         "filename": "client/includes/Changes/ChangeRunCoalescer.php",
         "patchSetId": 3
@@ -115,6 +205,24 @@
       "writtenOn": "2014-11-13T12:53:44Z",
       "side": 1,
       "message": "Cola... koala... coalescer? This word is in not even in my dictionary. Merger? Combiner? Consolidator? Joiner? Aggregator?\n\nBesides the naming: I checked and everything in this file is just moved code. That\u0027s also why the @since tags are there. Can easily be fixed later.",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_2b454eb9",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:21:36Z",
+      "side": 1,
+      "message": "Yes it is: http://www.merriam-webster.com/dictionary/coalesce\n\nIt means \"combine into one\". \n\nCompare:\nhttps://docs.oracle.com/javase/7/docs/api/java/awt/Component.html#coalesceEvents%28java.awt.AWTEvent,%20java.awt.AWTEvent%29\n\nhttp://www-01.ibm.com/support/docview.wss?uid\u003dswg21622709\n\nhttps://dev.mysql.com/doc/refman/5.0/en/comparison-operators.html#function_coalesce\n\n\n\"Merger\" would imply that all the given changes are merged into a single change. this is not the case. \"Combiner\" begs the question \"combine with what\"?  \"Joiner\"... join with what? \"Aggregator\" would imply building something new from parts. \n\n\"Consolidator\" might work. But \"Consolidator\" is the correct technical term, especially in the context of event notifications.",
+      "parentUuid": "6e936f18_3f6d96c7",
       "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_4b421ab2",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:21:36Z",
+      "side": 1,
+      "message": "yes.",
+      "parentUuid": "6e936f18_1f20da45",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_0045e4b8",
         "filename": "client/includes/Changes/ChangeRunCoalescer.php",
         "patchSetId": 3
@@ -149,6 +275,24 @@
       "writtenOn": "2014-11-12T14:30:19Z",
       "side": 1,
       "message": "o really?",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_eb4a06c8",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:21:36Z",
+      "side": 1,
+      "message": "copy\u0026paste...",
+      "parentUuid": "6e936f18_0045e4b8",
       "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -200,6 +344,24 @@
       "writtenOn": "2014-11-13T12:53:44Z",
       "side": 1,
       "message": "Inconsistency, even in this file. getChangeRunCoalescer, please.",
+      "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_4b29badf",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeRunCoalescerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:21:36Z",
+      "side": 1,
+      "message": "Can do, but still: a ChangeRunCoalescer is a Coalescer, so the name is correct.",
+      "parentUuid": "6e936f18_1fcc5abf",
       "revId": "8cf3f21c67d8c29d093c7d036cbd412aacf1a4a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

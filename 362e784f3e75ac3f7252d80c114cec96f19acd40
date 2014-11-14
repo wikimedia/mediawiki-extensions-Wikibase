@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_cb1dcac8",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:21:36Z",
+      "side": 0,
+      "message": "Yes. The old test cases where largely redundant, and several methods they tested are now private. I don\u0027t think the coverage is any worse now.",
+      "parentUuid": "6e936f18_bf4be62a",
+      "revId": "362e784f3e75ac3f7252d80c114cec96f19acd40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_bfbc4602",
         "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
         "patchSetId": 3
@@ -64,6 +82,24 @@
       "writtenOn": "2014-11-13T12:53:44Z",
       "side": 0,
       "message": "This is also not moved. On purpose?",
+      "revId": "362e784f3e75ac3f7252d80c114cec96f19acd40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8b1342b8",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-14T13:21:36Z",
+      "side": 0,
+      "message": "method is now private.",
+      "parentUuid": "6e936f18_df6fd28d",
       "revId": "362e784f3e75ac3f7252d80c114cec96f19acd40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
