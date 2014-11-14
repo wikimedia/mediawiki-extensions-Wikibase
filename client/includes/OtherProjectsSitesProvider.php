@@ -4,7 +4,6 @@ namespace Wikibase\Client;
 
 use Site;
 use SiteList;
-use SiteStore;
 
 /**
  * Provides a list of sites that should be displayed in the "other project" sidebar
@@ -18,9 +17,9 @@ use SiteStore;
 class OtherProjectsSitesProvider {
 
 	/**
-	 * @param SiteStore $siteStore
+	 * @param SiteList $sites
 	 */
-	private $siteStore;
+	private $sites;
 
 	/**
 	 * @var Site
@@ -33,12 +32,12 @@ class OtherProjectsSitesProvider {
 	private $specialSiteGroups;
 
 	/**
-	 * @param SiteStore $siteStore
+	 * @param SiteList $sites
 	 * @param Site $currentSite
 	 * @param string[] $specialSiteGroups
 	 */
-	public function __construct( SiteStore $siteStore, Site $currentSite, array $specialSiteGroups ) {
-		$this->siteStore = $siteStore;
+	public function __construct( SiteList $sites, Site $currentSite, array $specialSiteGroups ) {
+		$this->sites = $sites;
 		$this->currentSite = $currentSite;
 		$this->specialSiteGroups = $specialSiteGroups;
 	}
@@ -100,7 +99,7 @@ class OtherProjectsSitesProvider {
 	 * @return Site|null
 	 */
 	private function getSiteForGroup( $groupId ) {
-		$siteGroupList = $this->siteStore->getSites()->getGroup( $groupId );
+		$siteGroupList = $this->sites->getGroup( $groupId );
 		if ( $siteGroupList->count() === 1 ) {
 			return $siteGroupList[0];
 		}
