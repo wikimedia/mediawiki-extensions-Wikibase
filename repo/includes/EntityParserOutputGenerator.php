@@ -2,11 +2,9 @@
 
 namespace Wikibase;
 
-use Language;
 use ParserOutput;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -134,7 +132,7 @@ class EntityParserOutputGenerator {
 			$this->addHtmlToParserOutput(
 				$parserOutput,
 				$entityRevision,
-				$usedEntityIds,
+				$entityInfo,
 				$editable
 			);
 		}
@@ -218,9 +216,6 @@ class EntityParserOutputGenerator {
 	private function getEntityInfo( array $entityIds ) {
 		wfProfileIn( __METHOD__ );
 
-		// @todo: use same instance of entity info, as for the view (see below)
-		// but appears there are some differences in what is collected for each.
-
 		// @todo: apply language fallback!
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
 
@@ -256,17 +251,15 @@ class EntityParserOutputGenerator {
 	/**
 	 * @param ParserOutput $parserOutput
 	 * @param EntityRevision $entityRevision
-	 * @param array $entityIds obtained from EntityInfoBuilder::getEntityInfo
-	 * $param boolean $editable
+	 * @param array $entityInfo obtained from EntityInfoBuilder::getEntityInfo
+	 * @param boolean $editable
 	 */
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
 		EntityRevision $entityRevision,
-		array $entityIds,
+		array $entityInfo,
 		$editable
 	) {
-		$entityInfo = $this->getEntityInfo( $entityIds );
-
 		$entityView = $this->entityViewFactory->newEntityView(
 			$this->languageFallbackChain,
 			$this->languageCode,
