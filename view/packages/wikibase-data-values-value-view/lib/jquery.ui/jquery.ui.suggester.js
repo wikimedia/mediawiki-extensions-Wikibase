@@ -224,9 +224,12 @@
 					self._close();
 					self._trigger( 'change' );
 
-					setTimeout( function() {
-						self.element.focus();
-					}, 0 );
+					if( !event.originalEvent || !/^key/.test( event.originalEvent.type ) ) {
+						setTimeout( function() {
+							// Run refocusing out of the execution chain to allow redrawing in IE.
+							self.element.focus();
+						}, 0 );
+					}
 				}
 			} );
 
