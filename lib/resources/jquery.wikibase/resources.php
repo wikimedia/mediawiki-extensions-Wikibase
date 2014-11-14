@@ -351,7 +351,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.event.special.eachchange',
-				'jquery.sticknode',
 				'jquery.tablesorter',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.EventSingletonManager',
@@ -373,11 +372,6 @@ return call_user_func( function() {
 				'wikibase-propertyedittool-counter-pending-tooltip',
 				'wikibase-sitelink-site-edit-placeholder',
 				'wikibase-sitelink-page-edit-placeholder',
-				'wikibase-sitelinks-sitename-columnheading',
-				'wikibase-sitelinks-sitename-columnheading-special',
-				'wikibase-sitelinks-siteid-columnheading',
-				'wikibase-sitelinks-link-columnheading',
-				'wikibase-sitelinksedittool-full',
 			),
 		),
 
