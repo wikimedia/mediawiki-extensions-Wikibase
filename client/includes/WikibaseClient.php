@@ -717,7 +717,7 @@ final class WikibaseClient {
 	 */
 	public function getOtherProjectsSitesProvider() {
 		return new OtherProjectsSitesProvider(
-			$this->getSiteStore(),
+			$this->getSiteStore()->getSites(),
 			$this->getSite(),
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' )
 		);
