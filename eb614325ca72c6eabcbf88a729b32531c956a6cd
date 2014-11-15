@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_6b410d39",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-15T10:42:57Z",
+      "side": 1,
+      "message": "I generally prefer to put public methods above private methods. \n\ngetSiteStore is currently not private but imho should be made made private (no direct public access), soon as usages are removed, and folks encouraged to use getSiteList() instead.\n\nThat is why I put the SiteList stuff above SiteStore here.",
+      "parentUuid": "6e936f18_8b08222c",
+      "revId": "eb614325ca72c6eabcbf88a729b32531c956a6cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_2b38eece",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 2
