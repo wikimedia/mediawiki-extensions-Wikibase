@@ -19,7 +19,7 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private $deserializer;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->deserializer = new EntityDeserializer(
 			$this->getStubLegacyDeserializer(),
 			$this->getStubCurrentDeserializer()

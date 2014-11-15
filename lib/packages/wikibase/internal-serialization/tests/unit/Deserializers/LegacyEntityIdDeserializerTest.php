@@ -22,7 +22,7 @@ class LegacyEntityIdDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private $deserializer;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->deserializer = new LegacyEntityIdDeserializer( new BasicEntityIdParser() );
 	}
 
