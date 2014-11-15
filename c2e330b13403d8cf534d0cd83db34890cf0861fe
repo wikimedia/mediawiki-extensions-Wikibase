@@ -16,6 +16,24 @@
       "revId": "c2e330b13403d8cf534d0cd83db34890cf0861fe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8e134767",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-15T21:12:14Z",
+      "side": 1,
+      "message": "But we may in the future. It\u0027s good to have a heads up here.",
+      "parentUuid": "6e936f18_ae56435d",
+      "revId": "c2e330b13403d8cf534d0cd83db34890cf0861fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
