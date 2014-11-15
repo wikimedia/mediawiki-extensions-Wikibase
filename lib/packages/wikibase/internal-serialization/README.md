@@ -64,32 +64,32 @@ catch ( DeserializationException $ex ) {
 ```
 
 All access to services provided by this library should happen through the
-SerializerFactory and DeserializerFactory. The rest of the code is an implementation
-detail which users should not know about.
+`SerializerFactory` and `DeserializerFactory`. The rest of the code is an implementation
+detail which users are not allowed to know about.
 
 ## Library structure
 
 The Wikibase DataModel objects can all be serialized to a generic format from which the objects
-can later be reconstructed. This is done via a set of Serializers/Serializer implementing objects.
-These objects turn for instance a Claim object into a data structure containing only primitive
-types and arrays. This data structure can thus be readily fed to json_encode, serialize, or the
+can later be reconstructed. This is done via a set of `Serializers/Serializer` implementing objects.
+These objects turn for instance a `Claim` object into a data structure containing only primitive
+types and arrays. This data structure can thus be readily fed to `json_encode`, serialize, or the
 like. The process of reconstructing the objects from such a serialization is provided by
-objects implementing the Deserializers/Deserializer interface.
+objects implementing the `Deserializers/Deserializer` interface.
 
-Serializers can be obtained via an instance of SerializerFactory and deserializers can be obtained
-via an instance of DeserializerFactory. You are not allowed to construct these serializers and
+Serializers can be obtained via an instance of `SerializerFactory` and deserializers can be obtained
+via an instance of `DeserializerFactory`. You are not allowed to construct these serializers and
 deserializers directly yourself or to have any kind of knowledge of them (ie type hinting). These
 objects are internal to this serialization and might change name or structure at any time. All you
-are allowed to know when calling $serializerFactory->newEntitySerializer() is that you get back
-an instance of Serializers\Serializer.
+are allowed to know when calling `$serializerFactory->newEntitySerializer()` is that you get back
+an instance of `Serializers\Serializer`.
 
 The library contains deserializers that handle the legacy internal serialization format. Those
-can be found in Wikibase\InternalSerialization\Deserializers, and all start with the word "Legacy".
+can be found in `Wikibase\InternalSerialization\Deserializers`, and all start with the word "Legacy".
 The remaining deserializers in this namespace are not specific to any format. They detect the one
 that is used and forward to the appropriate deserializer. These deserializers can thus deal with
 serializations in the old legacy format and those in the new one.
 
-The DeserializerFactory only returns deserializers that can deal with both the legacy and the
+The `DeserializerFactory` only returns deserializers that can deal with both the legacy and the
 new format.
 
 ## Tests
