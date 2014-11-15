@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_ae56435d",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-15T19:39:53Z",
+      "side": 1,
+      "message": "We don\u0027t do label fallbacks for Lua stuffs",
+      "revId": "c2e330b13403d8cf534d0cd83db34890cf0861fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
