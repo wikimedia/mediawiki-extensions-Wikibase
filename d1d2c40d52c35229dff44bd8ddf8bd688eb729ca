@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_cb38613c",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaBindingsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-15T12:59:53Z",
+      "side": 0,
+      "message": "This code is using a non-explicit check. Being explicit makes it easier to figure out what the code is expected to be doing type wise",
+      "revId": "d1d2c40d52c35229dff44bd8ddf8bd688eb729ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
