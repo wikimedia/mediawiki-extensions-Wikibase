@@ -65,7 +65,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks;
-	global $wgAPIMetaModules, $wgSpecialPages, $wgSpecialPageGroups, $wgResourceModules;
+	global $wgAPIMetaModules, $wgAPIPropModules, $wgSpecialPages, $wgSpecialPageGroups, $wgResourceModules;
 	global $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
 
 	$wgExtensionCredits['wikibase'][] = array(
@@ -122,6 +122,18 @@ call_user_func( function() {
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = 'Wikibase\ApiClientInfo';
+	$wgAPIPropModules['pageterms'] = array(
+		'class' => 'Wikibase\PageTerms',
+		'factory' => function ( ApiQuery $query, $moduleName ) {
+			$client = \Wikibase\Client\WikibaseClient::getDefaultInstance();
+			return new Wikibase\PageTerms(
+				$client->getStore()->getTermIndex(),
+				$client->getEntityIdParser(),
+				$query,
+				$moduleName
+			);
+		}
+	);
 
 	// Special page registration
 	$wgSpecialPages['UnconnectedPages']						= 'Wikibase\Client\Specials\SpecialUnconnectedPages';
