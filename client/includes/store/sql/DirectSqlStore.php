@@ -6,6 +6,8 @@ use Language;
 use LoadBalancer;
 use ObjectCache;
 use Site;
+use Wikibase\Client\Store\EntityIdLookup;
+use Wikibase\Client\Store\PagePropesEntityIdLookup;
 use Wikibase\Client\Store\Sql\ConnectionManager;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\NullUsageTracker;
@@ -52,6 +54,11 @@ class DirectSqlStore implements ClientStore {
 	 * @var TermIndex
 	 */
 	private $termIndex = null;
+
+	/**
+	 * @var EntityIdLookup
+	 */
+	private $entityIdLookup = null;
 
 	/**
 	 * @var PropertyInfoTable
@@ -332,6 +339,22 @@ class DirectSqlStore implements ClientStore {
 		}
 
 		return $this->termIndex;
+	}
+
+	/**
+	 * Get a EntityIdLookup object
+	 *
+	 * @return EntityIdLookup
+	 */
+	public function getEntityIdLookup() {
+		if ( !$this->entityIdLookup ) {
+			$this->entityIdLookup = new PagePropesEntityIdLookup(
+				wfGetLB(),
+				$this->entityIdParser
+			);
+		}
+
+		return $this->entityIdLookup;
 	}
 
 	/**
