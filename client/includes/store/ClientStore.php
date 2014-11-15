@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Wikibase\Client\Store\EntityIdLookup;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
@@ -75,6 +76,13 @@ interface ClientStore {
 	 * @return TermIndex
 	 */
 	public function getTermIndex();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityIdLookup
+	 */
+	public function getEntityIdLookup();
 
 	/**
 	 * @since 0.4
