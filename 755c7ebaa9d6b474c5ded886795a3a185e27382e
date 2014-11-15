@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_cbf9417f",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-15T12:57:23Z",
+      "side": 1,
+      "message": "Oh no, you did two things in one commit! And you did not even mention this in the commit message. Also, this was wrong before, and I think we should discuss this change separately.\n\n\n... :)",
+      "revId": "755c7ebaa9d6b474c5ded886795a3a185e27382e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
