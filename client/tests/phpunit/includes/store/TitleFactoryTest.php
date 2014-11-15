@@ -1,7 +1,7 @@
 <?php
+
 namespace Wikibase\Client\Tests\Usage;
 
-use MediaWikiTestCase;
 use PHPUnit_Framework_TestCase;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
@@ -20,7 +20,7 @@ use WikitextContent;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class TitleFactoryTest extends MediaWikiTestCase {
+class TitleFactoryTest extends \MediaWikiTestCase {
 
 	private function makePage( $name ) {
 		$title = Title::makeTitle( NS_HELP, $name );

@@ -1,10 +1,10 @@
 <?php
 namespace Wikibase\Client\Usage\Tests;
 
-use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Client\Usage\UsageAccumulator;
 use PHPUnit_Framework_Assert as Assert;
+use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * Contract tester for implementations of the UsageAccumulator interface

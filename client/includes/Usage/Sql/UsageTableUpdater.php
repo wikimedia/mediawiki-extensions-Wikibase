@@ -5,7 +5,6 @@ namespace Wikibase\Client\Usage\Sql;
 use DatabaseBase;
 use InvalidArgumentException;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Helper class for updating the wb_entity_usage table.

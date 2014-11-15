@@ -2,22 +2,22 @@
 
 namespace Wikibase\Client\Scribunto;
 
-use Language;
 use InvalidArgumentException;
+use Language;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\SettingsArray;
 
 /**

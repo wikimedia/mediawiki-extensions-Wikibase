@@ -7,10 +7,10 @@ use ParserOutput;
 use StripState;
 use Title;
 use Wikibase\Client\Store\UsageUpdater;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\NamespaceChecker;
 use Wikibase\Updates\DataUpdateAdapter;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**
  * Hook handlers for triggering data updates.
