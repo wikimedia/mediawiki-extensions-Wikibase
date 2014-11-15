@@ -16,6 +16,24 @@
       "revId": "17c44f26ed42ca998888042ae828f79f1557b06b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b9b1af43",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-15T21:49:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_f9abb7d1",
+      "revId": "17c44f26ed42ca998888042ae828f79f1557b06b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
