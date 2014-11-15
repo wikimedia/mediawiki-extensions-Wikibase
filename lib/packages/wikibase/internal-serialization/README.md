@@ -108,7 +108,7 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ### 1.3.0 (2014-10-15)
 
-* Compatibility with DataModel 2.x added
+* Added compatibility with DataModel 2.x
 
 ### 1.2.1 (2014-09-11)
 * Added LegacyStatementDeserializer
