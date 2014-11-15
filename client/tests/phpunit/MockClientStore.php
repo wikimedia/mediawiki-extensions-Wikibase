@@ -31,6 +31,7 @@ class MockClientStore implements ClientStore {
 	}
 	public function getPropertyLabelResolver() {}
 	public function getTermIndex() {}
+	public function getEntityIdLookup() {}
 	public function newChangesTable() {}
 	public function clear() {}
 	public function rebuild() {}
