@@ -7,10 +7,8 @@ use BaseTemplate;
 use ChangesList;
 use FormOptions;
 use IContextSource;
-use JobQueueGroup;
 use Message;
 use MovePageForm;
-use MWException;
 use OutputPage;
 use Parser;
 use QuickTemplate;
@@ -25,9 +23,6 @@ use Title;
 use UnexpectedValueException;
 use User;
 use Wikibase\Client\Changes\ChangeHandler;
-use WikiPage;
-use Content;
-use ManualLogEntry;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\ChangesPageWikibaseFilterHandler;
@@ -39,8 +34,6 @@ use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFilterOptions;
 use Wikibase\Client\RepoItemLinkGenerator;
-use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
-use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
@@ -689,165 +682,6 @@ final class ClientHooks {
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
 
-		return true;
-	}
-
-	/**
-	 * After a page has been moved also update the item on the repo
-	 * This only works with CentralAuth
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleMoveComplete
-	 *
-	 * @param Title $oldTitle
-	 * @param Title $newTitle
-	 * @param User $user
-	 * @param integer $pageId database ID of the page that's been moved
-	 * @param integer $redirectId database ID of the created redirect
-	 * @param string $reason
-	 *
-	 * @return bool
-	 */
-	public static function onTitleMoveComplete(
-		Title $oldTitle,
-		Title $newTitle,
-		User $user,
-		$pageId,
-		$redirectId,
-		$reason
-	) {
-
-		if ( !self::isWikibaseEnabled( $oldTitle->getNamespace() )
-			&& !self::isWikibaseEnabled( $newTitle->getNamespace() ) ) {
-			// shorten out
-			return true;
-		}
-
-		wfProfileIn( __METHOD__ );
-
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
-
-		if ( $settings->getSetting( 'propagateChangesToRepo' ) !== true ) {
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
-
-		$repoDB = $settings->getSetting( 'repoDatabase' );
-		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
-		$jobQueueGroup = JobQueueGroup::singleton( $repoDB );
-
-		if ( !$jobQueueGroup ) {
-			wfLogWarning( "Failed to acquire a JobQueueGroup for $repoDB" );
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
-
-		$updateRepo = new UpdateRepoOnMove(
-			$repoDB,
-			$siteLinkLookup,
-			$user,
-			$settings->getSetting( 'siteGlobalID' ),
-			$oldTitle,
-			$newTitle
-		);
-
-		if ( !$updateRepo || !$updateRepo->getEntityId() || !$updateRepo->userIsValidOnRepo() ) {
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
-
-		try {
-			$updateRepo->injectJob( $jobQueueGroup );
-
-			// To be able to find out about this in the SpecialMovepageAfterMove hook
-			$newTitle->wikibasePushedMoveToRepo = true;
-		} catch( MWException $e ) {
-			// This is not a reason to let an exception bubble up, we just
-			// show a message to the user that the Wikibase item needs to be
-			// manually updated.
-			wfLogWarning( $e->getMessage() );
-		}
-
-		wfProfileOut( __METHOD__ );
-		return true;
-	}
-
-	/**
-	 * After a page has been deleted also update the item on the repo
-	 * This only works with CentralAuth
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
-	 *
-	 * @param WikiPage $article
-	 * @param User $user
-	 * @param string $reason
-	 * @param int $id id of the article that was deleted
-	 * @param Content $content
-	 * @param ManualLogEntry $logEntry
-	 *
-	 * @return bool
-	 */
-	public static function onArticleDeleteComplete(
-		WikiPage &$article,
-		User &$user,
-		$reason,
-		$id,
-		Content $content,
-		ManualLogEntry $logEntry
-	) {
-		$title = $article->getTitle();
-
-		if ( !self::isWikibaseEnabled( $title->getNamespace() ) ) {
-			// shorten out
-			return true;
-		}
-
-		wfProfileIn( __METHOD__ );
-
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
-
-		if ( $settings->getSetting( 'propagateChangesToRepo' ) !== true ) {
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
-
-		$repoDB = $settings->getSetting( 'repoDatabase' );
-		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
-		$jobQueueGroup = JobQueueGroup::singleton( $repoDB );
-
-		if ( !$jobQueueGroup ) {
-			wfLogWarning( "Failed to acquire a JobQueueGroup for $repoDB" );
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
-
-		$updateRepo = new UpdateRepoOnDelete(
-			$repoDB,
-			$siteLinkLookup,
-			$user,
-			$settings->getSetting( 'siteGlobalID' ),
-			$title
-		);
-
-		if ( !$updateRepo || !$updateRepo->getEntityId() || !$updateRepo->userIsValidOnRepo() ) {
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
-
-		try {
-			$updateRepo->injectJob( $jobQueueGroup );
-
-			// To be able to find out about this in the ArticleDeleteAfter hook
-			$title->wikibasePushedDeleteToRepo = true;
-		} catch( MWException $e ) {
-			// This is not a reason to let an exception bubble up, we just
-			// show a message to the user that the Wikibase item needs to be
-			// manually updated.
-			wfLogWarning( $e->getMessage() );
-		}
-
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
