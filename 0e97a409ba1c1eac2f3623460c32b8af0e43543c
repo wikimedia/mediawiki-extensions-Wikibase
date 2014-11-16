@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_94135a67",
+        "filename": "client/includes/store/sql/PagePropsEntityIdLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-16T10:54:39Z",
+      "side": 1,
+      "message": "nope... but you could actually do that if the entity id parsing below fails. IMO not worth it, though",
+      "revId": "0e97a409ba1c1eac2f3623460c32b8af0e43543c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
