@@ -7,6 +7,9 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Claim\Claims;
 
 /**
  * @covers Wikibase\DataModel\Entity\Property
@@ -205,6 +208,35 @@ class PropertyTest extends EntityTest {
 		$property->setStatements( $this->newNonEmptyStatementList() );
 
 		$this->assertFalse( $property->isEmpty() );
+	}
+
+	public function testNewClaimReturnsStatementWithProvidedMainSnak() {
+		/** @var Snak $snak */
+		$snak = $this->getMock( 'Wikibase\DataModel\Snak\Snak' );
+
+		$property = Property::newFromType( 'string' );
+		$statement = $property->newClaim( $snak );
+
+		$this->assertInstanceOf( 'Wikibase\DataModel\Statement\Statement', $statement );
+		$this->assertEquals( $snak, $statement->getMainSnak() );
+	}
+
+	public function testSetClaims() {
+		$property = Property::newFromType( 'string' );
+
+		$statement0 = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement0->setGuid( 'TEST$NVS42' );
+
+		$statement1 = new Statement( new Claim( new PropertySomeValueSnak( 42 ) ) );
+		$statement1->setGuid( 'TEST$SVS42' );
+
+		$statements = array( $statement0, $statement1 );
+
+		$property->setClaims( new Claims( $statements ) );
+		$this->assertEquals( count( $statements ), $property->getStatements()->count(), "added some statements" );
+
+		$property->setClaims( new Claims() );
+		$this->assertTrue( $property->getStatements()->isEmpty(), "should be empty again" );
 	}
 
 }

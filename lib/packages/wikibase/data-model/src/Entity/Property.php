@@ -3,6 +3,10 @@
 namespace Wikibase\DataModel\Entity;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\StatementListProvider;
@@ -201,6 +205,61 @@ class Property extends Entity implements StatementListProvider {
 	 */
 	public function setStatements( StatementList $statements ) {
 		$this->statements = $statements;
+	}
+
+	/**
+	 * @deprecated since 1.0, use getStatements instead
+	 *
+	 * @return Statement[]
+	 */
+	public function getClaims() {
+		return $this->statements->toArray();
+	}
+
+	/**
+	 * @deprecated since 1.0, use setStatements instead
+	 *
+	 * @param Claims $claims
+	 */
+	public function setClaims( Claims $claims ) {
+		$this->statements = new StatementList( iterator_to_array( $claims ) );
+	}
+
+	/**
+	 * @deprecated since 1.0, use getStatements instead
+	 *
+	 * @return bool
+	 */
+	public function hasClaims() {
+		return $this->statements->count() !== 0;
+	}
+
+	/**
+	 * @deprecated since 1.0
+	 *
+	 * @param Snak $mainSnak
+	 *
+	 * @return Statement
+	 */
+	public function newClaim( Snak $mainSnak ) {
+		return new Statement( new Claim( $mainSnak ) );
+	}
+
+	/**
+	 * @deprecated since 1.0, use getStatements instead
+	 *
+	 * @param Claim $statement This needs to be a Statement as of 1.0
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function addClaim( Claim $statement ) {
+		if ( !( $statement instanceof Statement ) ) {
+			throw new InvalidArgumentException( '$statement must be an instance of Statement' );
+		} elseif ( $statement->getGuid() === null ) {
+			throw new InvalidArgumentException( 'Can\'t add a Claim without a GUID.' );
+		}
+
+		$this->statements->addStatement( $statement );
 	}
 
 }
