@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_9f9db3b6",
+        "filename": "client/includes/store/sql/PagePropsEntityIdLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-16T12:49:38Z",
+      "side": 1,
+      "message": "See PS4",
+      "revId": "9ea5ff954bf019060806367e52b954ffe95c9f3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
