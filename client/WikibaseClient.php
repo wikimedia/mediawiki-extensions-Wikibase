@@ -109,10 +109,10 @@ call_user_func( function() {
 	$wgHooks['ScribuntoExternalLibraries'][]      = '\Wikibase\ClientHooks::onScribuntoExternalLibraries';
 	$wgHooks['SpecialWatchlistFilters'][]          = '\Wikibase\ClientHooks::onSpecialWatchlistFilters';
 	$wgHooks['InfoAction'][] 								= '\Wikibase\ClientHooks::onInfoAction';
-	$wgHooks['TitleMoveComplete'][]          = '\Wikibase\ClientHooks::onTitleMoveComplete';
+	$wgHooks['TitleMoveComplete'][]          = '\Wikibase\Client\Hooks\UpdateRepoHookHandlers::onTitleMoveComplete';
 	$wgHooks['BaseTemplateAfterPortlet'][] = '\Wikibase\ClientHooks::onBaseTemplateAfterPortlet';
 	$wgHooks['GetBetaFeaturePreferences'][] = '\Wikibase\ClientHooks::onGetBetaFeaturePreferences';
-	$wgHooks['ArticleDeleteComplete'][] = '\Wikibase\ClientHooks::onArticleDeleteComplete';
+	$wgHooks['ArticleDeleteComplete'][] = '\Wikibase\Client\Hooks\UpdateRepoHookHandlers::onArticleDeleteComplete';
 	$wgHooks['ArticleDeleteAfterSuccess'][] = '\Wikibase\ClientHooks::onArticleDeleteAfterSuccess';
 
 	// update hooks
