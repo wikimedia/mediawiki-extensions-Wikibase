@@ -7,6 +7,7 @@ use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -178,7 +179,7 @@ class ItemMergeInteractor {
 		}
 	}
 
-	private function validateEntities( Entity $fromEntity, Entity $toEntity ) {
+	private function validateEntities( EntityDocument $fromEntity, EntityDocument $toEntity ) {
 		if ( !( $fromEntity instanceof Item && $toEntity instanceof Item ) ) {
 			throw new ItemMergeException( 'One or more of the entities are not items', 'not-item' );
 		}
