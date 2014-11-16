@@ -180,8 +180,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * TODO: this method belongs in Entity itself. This change can only be made once
-	 * there is a sane Term object in DataModel itself though.
+	 * FIXME: this code assumes all entities have descriptions labels and aliases
+	 * FIXME: this code uses deprecated Entity
+	 * FIXME: OCP violation. No support for new types of entities can be registered
 	 *
 	 * @param Entity $entity
 	 *
