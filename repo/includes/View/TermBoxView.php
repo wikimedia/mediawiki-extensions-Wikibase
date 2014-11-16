@@ -7,6 +7,7 @@ use Message;
 use Title;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Utils;
 
 /**
@@ -51,20 +52,19 @@ class TermBoxView {
 	 * @since 0.4
 	 *
 	 * @param Title $title The title of the page the term box is to be shown on
-	 * @param Entity $entity the entity to render
+	 * @param Fingerprint $fingerprint the Fingerprint to render
 	 * @param string[] $languageCodes list of language codes to show terms for
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	public function renderTermBox( Title $title, Entity $entity, array $languageCodes, $editable = true ) {
+	public function renderTermBox( Title $title, Fingerprint $fingerprint, array $languageCodes, $editable = true ) {
 		if ( empty( $languageCodes ) ) {
 			return '';
 		}
 
 		wfProfileIn( __METHOD__ );
 
-		$fingerprint = $entity->getFingerprint();
 		$labels = $fingerprint->getLabels();
 		$descriptions = $fingerprint->getDescriptions();
 		$aliasGroups = $fingerprint->getAliasGroups();
