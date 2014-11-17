@@ -154,6 +154,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.event.special.eachchange',
+				'jquery.throttle-debounce',
 				'jquery.ui.suggester',
 				'jquery.ui.ooMenu',
 				'jquery.ui.widget',
