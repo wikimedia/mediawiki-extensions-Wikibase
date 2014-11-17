@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use Exception;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Term;
 use Wikibase\TermIndex;
@@ -168,7 +168,7 @@ class MockTermIndex implements TermIndex {
 	/**
 	 * @throws Exception always
 	 */
-	public function saveTermsOfEntity( Entity $entity ) {
+	public function saveTermsOfEntity( EntityDocument $entity ) {
 		throw new Exception( 'not implemented by mock class ' );
 	}
 
