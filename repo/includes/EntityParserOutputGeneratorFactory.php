@@ -3,27 +3,19 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
-use Language;
 use ParserOptions;
 use ParserOutput;
 use RequestContext;
 use User;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\View\ClaimsView;
-use Wikibase\Repo\View\FingerprintView;
-use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Repo\View\SnakHtmlGenerator;
+use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -35,9 +27,9 @@ use Wikibase\Repo\WikibaseRepo;
 class EntityParserOutputGeneratorFactory {
 
 	/**
-	 * @var OutputFormatSnakFormatterFactory
+	 * @var EntityViewFactory
 	 */
-	private $snakFormatterFactory;
+	private $entityViewFactory;
 
 	/**
 	 * @var EntityInfoBuilderFactory
@@ -55,82 +47,49 @@ class EntityParserOutputGeneratorFactory {
 	private $entityIdParser;
 
 	/**
-	 * @var PropertyDataTypeLookup
+	 * @var ValuesFinder
 	 */
-	private $propertyDataTypeLookup;
+	private $valuesFinder;
 
 	/**
 	 * @var LanguageFallbackChainFactory
 	 */
 	private $languageFallbackChainFactory;
 
-	/**
-	 * @var ReferencedEntitiesFinder
-	 */
-	private $referencedEntitiesFinder;
-
-	/**
-	 * @var SectionEditLinkGenerator
-	 */
-	private $sectionEditLinkGenerator;
-
 	public function __construct(
-		OutputFormatSnakFormatterFactory $snakFormatterFactory,
+		EntityViewFactory $entityViewFactory,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $entityIdParser,
-		PropertyDataTypeLookup $propertyDataTypeLookup,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		ReferencedEntitiesFinder $referencedEntitiesFinder
+		ValuesFinder $valuesFinder,
+		LanguageFallbackChainFactory $languageFallbackChainFactory
 	) {
-		$this->snakFormatterFactory = $snakFormatterFactory;
+		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityIdParser = $entityIdParser;
-		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->valuesFinder = $valuesFinder;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
-		$this->referencedEntitiesFinder = $referencedEntitiesFinder;
-		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 	}
 
 	/**
 	 * Creates an EntityParserOutputGenerator to create the ParserOutput for the entity
 	 *
-	 * @param EntityRevision $entityRevision
 	 * @param ParserOptions|null $options
 	 *
 	 * @return EntityParserOutputGenerator
 	 */
-	public function getEntityParserOutputGenerator( $entityType, ParserOptions $options = null ) {
+	public function getEntityParserOutputGenerator( ParserOptions $options = null ) {
 		$languageCode = $this->getLanguageCode( $options );
 
 		return new EntityParserOutputGenerator(
-			$this->newEntityView( $entityType, $languageCode ),
+			$this->entityViewFactory,
 			$this->newParserOutputJsConfigBuilder( $languageCode ),
-			$this->makeSerializationOptions( $languageCode ),
 			$this->entityTitleLookup,
-			$this->propertyDataTypeLookup,
+			$this->valuesFinder,
 			$this->entityInfoBuilderFactory,
+			$this->getLanguageFallbackChain( $languageCode ),
 			$languageCode
-		);
-	}
-
-	/**
-	 * @param string $languageCode
-	 *
-	 * @return SnakFormatter
-	 */
-	private function getSnakFormatter( $languageCode ) {
-		$formatterOptions = new FormatterOptions();
-		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $languageCode );
-
-		// @fixme don't get fallback chain twice and it's also probably not needed here.
-		$languageFallbackChain = $this->getLanguageFallbackChain( $languageCode );
-		$formatterOptions->setOption( 'languages', $languageFallbackChain );
-
-		return $this->snakFormatterFactory->getSnakFormatter(
-			SnakFormatter::FORMAT_HTML_WIDGET,
-			$formatterOptions
 		);
 	}
 
@@ -143,7 +102,7 @@ class EntityParserOutputGeneratorFactory {
 		return new ParserOutputJsConfigBuilder(
 			$this->entityIdParser,
 			$this->entityTitleLookup,
-			$languageCode
+			$this->makeSerializationOptions( $languageCode )
 		);
 	}
 
@@ -164,70 +123,6 @@ class EntityParserOutputGeneratorFactory {
 		}
 
 		return $languageCode;
-	}
-
-	/**
-	 * @param string $languageCode
-	 *
-	 * @return ClaimsView
-	 */
-	private function newClaimsView( $languageCode ) {
-		// @fixme SnakFormatterFactory needs to be injected into ClaimsView,
-		// and also the entity info records via a TermLookup or such.
-		$snakHtmlGenerator = new SnakHtmlGenerator(
-			$this->getSnakFormatter( $languageCode ),
-			$this->entityTitleLookup
-		);
-
-		$claimHtmlGenerator = new ClaimHtmlGenerator(
-			$snakHtmlGenerator,
-			$this->entityTitleLookup
-		);
-
-		return new ClaimsView(
-			$this->entityInfoBuilderFactory,
-			$this->entityTitleLookup,
-			$this->sectionEditLinkGenerator,
-			$claimHtmlGenerator,
-			$languageCode
-		);
-	}
-
-	/**
-	 * @param string $languageCode
-	 *
-	 * @return FingerprintView
-	 */
-	private function newFingerprintView( $languageCode ) {
-		return new FingerprintView(
-			$this->sectionEditLinkGenerator,
-			$languageCode
-		);
-	}
-
-	/**
-	 * Creates an EntityView suitable for rendering the entity.
-	 *
-	 * @param EntityRevision $entityRevision
-	 * @param string $languageCode
-	 *
-	 * @return EntityView
-	 */
-	private function newEntityView( $entityType, $languageCode ) {
-		$fingerprintView = $this->newFingerprintView( $languageCode );
-		$claimsView = $this->newClaimsView( $languageCode );
-
-		// @fixme all that seems needed in EntityView is language code and dir.
-		$language = Language::factory( $languageCode );
-
-		// @fixme support more entity types
-		if ( $entityType === 'item' ) {
-			return new ItemView( $fingerprintView, $claimsView, $language );
-		} elseif ( $entityType === 'property' ) {
-			return new PropertyView( $fingerprintView, $claimsView, $language );
-		}
-
-		throw new InvalidArgumentException( 'No EntityView for entity type: ' . $entityType );
 	}
 
 	/**
