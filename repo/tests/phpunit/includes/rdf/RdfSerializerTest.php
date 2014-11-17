@@ -101,10 +101,10 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 
 	private function newRdfSerializer( $formatName ) {
 		$format = RdfSerializer::getFormat( $formatName );
-		$mockRepo = new MockRepository();
+		$entityLookup = new MockRepository();
 
 		foreach( $this->getTestEntities() as $entity ) {
-			$mockRepo->putEntity( $entity );
+			$entityLookup->putEntity( $entity );
 		}
 
 		return new RdfSerializer(
@@ -112,7 +112,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			RdfBuilderTest::URI_BASE,
 			RdfBuilderTest::URI_DATA,
 			new SiteList(),
-			$mockRepo
+			$entityLookup
 		);
 	}
 

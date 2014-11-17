@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityChange;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Test\MockRepository;
 use Wikibase\Test\TestChanges;
 
@@ -29,11 +30,11 @@ use Wikibase\Test\TestChanges;
 class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 
 	private function getChangeRunCoalescer() {
-		$mockRepository = $this->getMockRepository();
+		$entityRevisionLookup = $this->getEntityRevisionLookup();
 		$changeFactory = TestChanges::getEntityChangeFactory();
 
 		$coalescer = new ChangeRunCoalescer(
-			$mockRepository,
+			$entityRevisionLookup,
 			$changeFactory,
 			'enwiki'
 		);
@@ -41,7 +42,10 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		return $coalescer;
 	}
 
-	private function getMockRepository() {
+	/**
+	 * @return EntityRevisionLookup
+	 */
+	private function getEntityRevisionLookup() {
 		$repo = new MockRepository();
 
 		// entity 1, revision 11

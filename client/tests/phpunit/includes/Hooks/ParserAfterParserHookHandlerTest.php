@@ -105,7 +105,7 @@ class ParserAfterParseHookHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @return MockRepository
 	 */
-	private function getMockRepo( $links ) {
+	private function getMockRepository( array $links ) {
 		$repo = new MockRepository();
 
 		foreach ( $links as $itemKey => $itemLinks ) {
@@ -162,22 +162,22 @@ class ParserAfterParseHookHandlerTest extends \MediaWikiTestCase {
 		$namespaces = $settings->getSetting( 'namespaces' );
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
 
-		$mockRepo = $this->getMockRepo( $links );
-		$mockRepo->putEntity( $this->getBadgeItem() );
+		$mockRepository = $this->getMockRepository( $links );
+		$mockRepository->putEntity( $this->getBadgeItem() );
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$mockRepo,
+			$mockRepository,
 			array( 'Q17' => 'featured' ),
 			Language::factory( 'en' )
 		);
 
 		$langLinkHandler = new LangLinkHandler(
-			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo ),
+			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepository ),
 			$badgeDisplay,
 			$settings->getSetting( 'siteGlobalID' ),
 			$namespaceChecker,
-			$mockRepo,
-			$mockRepo,
+			$mockRepository,
+			$mockRepository,
 			$this->getSiteStore(),
 			$settings->getSetting( 'languageLinkSiteGroup' )
 		);

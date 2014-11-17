@@ -31,9 +31,9 @@ use Wikibase\Test\MockSiteStore;
 class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 	/**
-	 * @var MockRepository
+	 * @var MockRepository|null
 	 */
-	private $mockRepo;
+	private $mockRepo = null;
 
 	/**
 	 * @var LangLinkHandler
