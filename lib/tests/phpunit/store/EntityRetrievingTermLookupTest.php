@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 
 /**
@@ -16,21 +17,21 @@ use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetLabel() {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityRetrievingTermLookup();
 
 		$label = $termLookup->getLabel( new ItemId( 'Q116' ), 'en' );
 		$this->assertEquals( 'New York City', $label );
 	}
 
 	public function testGetLabel_notFoundThrowsException() {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityRetrievingTermLookup();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 		$termLookup->getLabel( new ItemId( 'Q116' ), 'fa' );
 	}
 
 	public function testGetLabel_entityNotFound() {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityRetrievingTermLookup();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 		$termLookup->getLabel( new ItemId( 'Q120' ), 'en' );
@@ -58,14 +59,14 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getLabelsProvider
 	 */
 	public function testGetLabels( array $expected, ItemId $itemId, array $languageCodes = null ) {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityRetrievingTermLookup();
 
 		$labels = $termLookup->getLabels( $itemId, $languageCodes );
 		$this->assertEquals( $expected, $labels );
 	}
 
 	public function testGetDescription() {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityRetrievingTermLookup();
 
 		$description = $termLookup->getDescription( new ItemId( 'Q116' ), 'de' );
 		$expected = 'Metropole an der Ostküste der Vereinigten Staaten';
@@ -74,7 +75,7 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetDescription_notFoundThrowsException() {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityRetrievingTermLookup();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 		$termLookup->getDescription( new ItemId( 'Q116' ), 'fr' );
@@ -108,16 +109,22 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getDescriptionsProvider
 	 */
 	public function testGetDescriptions( array $expected, ItemId $itemId, array $languageCodes = null ) {
-		$termLookup = $this->getEntityTermLookup();
+		$termLookup = $this->getEntityRetrievingTermLookup();
 
 		$descriptions = $termLookup->getDescriptions( $itemId, $languageCodes );
 		$this->assertEquals( $expected, $descriptions );
 	}
 
-	private function getEntityTermLookup() {
+	/**
+	 * @return EntityRetrievingTermLookup
+	 */
+	private function getEntityRetrievingTermLookup() {
 		return new EntityRetrievingTermLookup( $this->getEntityLookup() );
 	}
 
+	/**
+	 * @return EntityLookup
+	 */
 	private function getEntityLookup() {
 		$mockRepo = new MockRepository();
 

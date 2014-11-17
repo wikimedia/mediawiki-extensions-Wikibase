@@ -264,4 +264,5 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 			$this->assertNull( $actual, $format );
 		}
 	}
+
 }
