@@ -19,7 +19,7 @@ use Wikibase\DataModel\Entity\Property;
 class ItemPatcherTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenEmptyDiff_itemIsReturnedAsIs() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getFingerprint()->setLabel( 'en', 'foo' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'bar' );
 
@@ -54,7 +54,7 @@ class ItemPatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testPatchesLabels() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getFingerprint()->setLabel( 'en', 'foo' );
 		$item->getFingerprint()->setLabel( 'de', 'bar' );
 

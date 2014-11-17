@@ -22,18 +22,18 @@ class ItemDifferTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenTwoEmptyItems_emptyItemDiffIsReturned() {
 		$differ = new ItemDiffer();
 
-		$diff = $differ->diffEntities( Item::newEmpty(), Item::newEmpty() );
+		$diff = $differ->diffEntities( new Item(), new Item() );
 
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Diff\ItemDiff', $diff );
 		$this->assertTrue( $diff->isEmpty() );
 	}
 
 	public function testFingerprintIsDiffed() {
-		$firstItem = Item::newEmpty();
+		$firstItem = new Item();
 		$firstItem->getFingerprint()->setLabel( 'en', 'kittens' );
 		$firstItem->getFingerprint()->setAliasGroup( 'en', array( 'cats' ) );
 
-		$secondItem = Item::newEmpty();
+		$secondItem = new Item();
 		$secondItem->getFingerprint()->setLabel( 'en', 'nyan' );
 		$secondItem->getFingerprint()->setDescription( 'en', 'foo bar baz' );
 
@@ -57,9 +57,9 @@ class ItemDifferTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testClaimsAreDiffed() {
-		$firstItem = Item::newEmpty();
+		$firstItem = new Item();
 
-		$secondItem = Item::newEmpty();
+		$secondItem = new Item();
 		$secondItem->getStatements()->addNewStatement( new PropertySomeValueSnak( 42 ), null, null, 'guid' );
 
 		$differ = new ItemDiffer();
@@ -70,16 +70,16 @@ class ItemDifferTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenEmptyItem_constructionDiffIsEmpty() {
 		$differ = new ItemDiffer();
-		$this->assertTrue( $differ->getConstructionDiff( Item::newEmpty() )->isEmpty() );
+		$this->assertTrue( $differ->getConstructionDiff( new Item() )->isEmpty() );
 	}
 
 	public function testGivenEmptyItem_destructionDiffIsEmpty() {
 		$differ = new ItemDiffer();
-		$this->assertTrue( $differ->getDestructionDiff( Item::newEmpty() )->isEmpty() );
+		$this->assertTrue( $differ->getDestructionDiff( new Item() )->isEmpty() );
 	}
 
 	public function testConstructionDiffContainsAddOperations() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getFingerprint()->setLabel( 'en', 'foo' );
 		$item->getSiteLinkList()->addNewSiteLink( 'bar', 'baz' );
 

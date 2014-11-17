@@ -53,7 +53,7 @@ class PropertyPatcherTest extends \PHPUnit_Framework_TestCase {
 		$patcher = new PropertyPatcher();
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$patcher->patchEntity( Item::newEmpty(), new EntityDiff() );
+		$patcher->patchEntity( new Item(), new EntityDiff() );
 	}
 
 	public function testStatementsArePatched() {

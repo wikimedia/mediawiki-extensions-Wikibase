@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -388,7 +387,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testCopyRetainsLabels() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$item->getFingerprint()->setLabel( 'en', 'foo' );
 		$item->getFingerprint()->setLabel( 'de', 'bar' );
