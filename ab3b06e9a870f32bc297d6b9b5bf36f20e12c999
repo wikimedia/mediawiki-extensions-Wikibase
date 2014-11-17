@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_e75d497f",
+        "filename": "lib/tests/phpunit/changes/TestChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-17T15:36:11Z",
+      "side": 1,
+      "message": "$new-\u003egetStatements()-\u003eaddStatement( $statement );",
+      "revId": "ab3b06e9a870f32bc297d6b9b5bf36f20e12c999",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_67513964",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpStatementRankTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-17T15:36:11Z",
+      "side": 1,
+      "message": "$item-\u003egetStatements()-\u003eaddNewStatetemnt( ... );\n\nYou can easily avoid doing the \"new Statement( new Claim( $mainSnak ) );\" you hate so much here",
+      "revId": "ab3b06e9a870f32bc297d6b9b5bf36f20e12c999",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
