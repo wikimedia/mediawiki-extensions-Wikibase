@@ -297,7 +297,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param string[] $labels
 	 */
 	public function setLabels( array $labels ) {
-		$this->fingerprint->setLabels( new TermList( array() ) );
+		$this->fingerprint->setLabels( new TermList() );
 
 		foreach ( $labels as $languageCode => $labelText ) {
 			$this->setLabel( $languageCode, $labelText );
@@ -315,7 +315,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param string[] $descriptions
 	 */
 	public function setDescriptions( array $descriptions ) {
-		$this->fingerprint->setDescriptions( new TermList( array() ) );
+		$this->fingerprint->setDescriptions( new TermList() );
 
 		foreach ( $descriptions as $languageCode => $descriptionText ) {
 			$this->setDescription( $languageCode, $descriptionText );
@@ -334,7 +334,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param array[] $aliasLists
 	 */
 	public function setAllAliases( array $aliasLists ) {
-		$this->fingerprint->setAliasGroups( new AliasGroupList( array() ) );
+		$this->fingerprint->setAliasGroups( new AliasGroupList() );
 
 		foreach( $aliasLists as $languageCode => $aliasList ) {
 			$this->setAliases( $languageCode, $aliasList );

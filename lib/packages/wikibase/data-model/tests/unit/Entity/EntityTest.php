@@ -605,8 +605,8 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
 				) ),
-				new TermList( array() ),
-				new AliasGroupList( array() )
+				new TermList(),
+				new AliasGroupList()
 			),
 			$entity->getFingerprint()
 		);

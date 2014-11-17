@@ -174,21 +174,21 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 			array(
 				new Fingerprint(
 					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new TermList( array() ),
-					new AliasGroupList( array() )
+					new TermList(),
+					new AliasGroupList()
 				)
 			),
 			array(
 				new Fingerprint(
-					new TermList( array() ),
+					new TermList(),
 					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new AliasGroupList( array() )
+					new AliasGroupList()
 				)
 			),
 			array(
 				new Fingerprint(
-					new TermList( array() ),
-					new TermList( array() ),
+					new TermList(),
+					new TermList(),
 					new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
 				)
 			),
@@ -215,35 +215,35 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 				Fingerprint::newEmpty(),
 				new Fingerprint(
 					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new TermList( array() ),
-					new AliasGroupList( array() )
+					new TermList(),
+					new AliasGroupList()
 				)
 			),
 			array(
 				new Fingerprint(
 					new TermList( array( new Term( 'en', 'foo' ), new Term( 'de', 'bar' ) ) ),
-					new TermList( array() ),
-					new AliasGroupList( array() )
+					new TermList(),
+					new AliasGroupList()
 				),
 				new Fingerprint(
 					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new TermList( array() ),
-					new AliasGroupList( array() )
+					new TermList(),
+					new AliasGroupList()
 				)
 			),
 			array(
 				Fingerprint::newEmpty(),
 				new Fingerprint(
-					new TermList( array() ),
+					new TermList(),
 					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new AliasGroupList( array() )
+					new AliasGroupList()
 				)
 			),
 			array(
 				Fingerprint::newEmpty(),
 				new Fingerprint(
-					new TermList( array() ),
-					new TermList( array() ),
+					new TermList(),
+					new TermList(),
 					new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
 				)
 			),
@@ -278,23 +278,23 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 			array(
 				new Fingerprint(
 					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new TermList( array() ),
-					new AliasGroupList( array() )
+					new TermList(),
+					new AliasGroupList()
 				)
 			),
 
 			array(
 				new Fingerprint(
-					new TermList( array() ),
+					new TermList(),
 					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new AliasGroupList( array() )
+					new AliasGroupList()
 				)
 			),
 
 			array(
 				new Fingerprint(
-					new TermList( array() ),
-					new TermList( array() ),
+					new TermList(),
+					new TermList(),
 					new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
 				)
 			),
