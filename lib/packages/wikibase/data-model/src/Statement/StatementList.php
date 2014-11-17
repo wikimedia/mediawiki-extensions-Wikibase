@@ -44,8 +44,13 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	private function addStatements( $statements ) {
 		$this->assertAreStatements( $statements );
 
-		foreach ( $statements as $statement ) {
-			$this->statements[] = $statement;
+		if ( is_array( $statements ) ) {
+			$this->statements = $statements;
+		}
+		else {
+			foreach ( $statements as $statement ) {
+				$this->statements[] = $statement;
+			}
 		}
 	}
 

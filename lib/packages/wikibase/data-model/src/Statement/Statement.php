@@ -52,7 +52,7 @@ class Statement extends Claim {
 	}
 
 	/**
-	 * @since 2.2
+	 * @since 2.3
 	 *
 	 * @param Snak $mainSnak
 	 *
