@@ -7,6 +7,7 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
@@ -414,6 +415,33 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 				new PropertyNoValueSnak( 9001 ),
 			),
 			$list->getMainSnaks()
+		);
+	}
+
+	public function testGivenNotKnownPropertyId_getWithPropertyIdReturnsEmptyList() {
+		$list = new StatementList();
+		$list->addNewStatement( new PropertyNoValueSnak( 42 ) );
+
+		$this->assertEquals(
+			new StatementList(),
+			$list->getWithPropertyId( new PropertyId( 'P2' ) )
+		);
+	}
+
+	public function testGivenKnownPropertyId_getWithPropertyIdReturnsListWithOnlyMatchingStatements() {
+		$list = new StatementList();
+		$list->addNewStatement( new PropertyNoValueSnak( 42 ) );
+		$list->addNewStatement( new PropertyNoValueSnak( 9001 ) );
+		$list->addNewStatement( new PropertySomeValueSnak( 42 ) );
+		$list->addNewStatement( new PropertySomeValueSnak( 9001 ) );
+
+		$expected = new StatementList();
+		$expected->addNewStatement( new PropertyNoValueSnak( 42 ) );
+		$expected->addNewStatement( new PropertySomeValueSnak( 42 ) );
+
+		$this->assertEquals(
+			$expected,
+			$list->getWithPropertyId( new PropertyId( 'P42' ) )
 		);
 	}
 

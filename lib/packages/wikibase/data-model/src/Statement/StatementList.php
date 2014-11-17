@@ -89,8 +89,6 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 		return $propertyIds;
 	}
 
-
-
 	public function addStatement( Statement $statement ) {
 		$this->statements[] = $statement;
 	}
@@ -122,6 +120,25 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 
 		foreach ( $this->statements as $statement ) {
 			$statements[$statement->getMainSnak()->getHash()] = $statement;
+		}
+
+		return new self( $statements );
+	}
+
+	/**
+	 * @since 2.3
+	 *
+	 * @param PropertyId $id
+	 *
+	 * @return StatementList
+	 */
+	public function getWithPropertyId( PropertyId $id ) {
+		$statements = array();
+
+		foreach ( $this->statements as $statement ) {
+			if ( $statement->getPropertyId()->equals( $id ) ) {
+				$statements[] = $statement;
+			}
 		}
 
 		return new self( $statements );
