@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\EntitySearchTextGenerator;
 
@@ -21,11 +21,11 @@ class EntitySearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 	public function generateProvider() {
 		$item = Item::newEmpty();
 
-		$item->setLabel( 'en', 'Test' );
-		$item->setLabel( 'de', 'Testen' );
-		$item->setDescription( 'en', 'city in Spain' );
-		$item->setAliases( 'en', array( 'abc', 'cde' ) );
-		$item->setAliases( 'de', array( 'xyz', 'uvw' ) );
+		$item->getFingerprint()->setLabel( 'en', 'Test' );
+		$item->getFingerprint()->setLabel( 'de', 'Testen' );
+		$item->getFingerprint()->setDescription( 'en', 'city in Spain' );
+		$item->getFingerprint()->setAliasGroup( 'en', array( 'abc', 'cde' ) );
+		$item->getFingerprint()->setAliasGroup( 'de', array( 'xyz', 'uvw' ) );
 
 		$patterns = array(
 			'/^Test$/',
@@ -46,16 +46,22 @@ class EntitySearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider generateProvider
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param array $patterns
 	 */
-	public function testGenerate( Entity $entity, array $patterns ) {
+	public function testGenerate( EntityDocument $entity, array $patterns ) {
 		$generator = new EntitySearchTextGenerator();
 		$text = $generator->generate( $entity );
 
 		foreach ( $patterns as $pattern ) {
 			$this->assertRegExp( $pattern . 'm', $text );
 		}
+	}
+
+	public function testGivenEntityWithoutFingerprint_emptyStringIsReturned() {
+		$generator = new EntitySearchTextGenerator();
+		$entityDocument = $this->getMock( 'Wikibase\DataModel\Entity\EntityDocument' );
+		$this->assertSame( '', $generator->generate( $entityDocument ) );
 	}
 
 }
