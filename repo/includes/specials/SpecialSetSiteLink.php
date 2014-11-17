@@ -79,15 +79,15 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	public function __construct() {
 		parent::__construct( 'SetSiteLink' );
 
-		$repo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$settings = $repo->getSettings();
+		$settings = $wikibaseRepo->getSettings();
 
 		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 
-		$this->siteLinkChangeOpFactory = $repo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
+		$this->siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
 	}
 
 	/**

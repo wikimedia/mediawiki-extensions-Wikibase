@@ -29,7 +29,7 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 	 * @return SiteLinkLookup
 	 */
 	private function getSiteLinkLookup( array $links ) {
-		$repo = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		foreach ( $links as $name => $itemId ) {
 			$item = Item::newEmpty();
@@ -38,10 +38,10 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'badwiki', "$name" ) );
 			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'sadwiki', "42" ) );
 
-			$repo->putEntity( $item );
+			$mockRepository->putEntity( $item );
 		}
 
-		return $repo;
+		return $mockRepository;
 	}
 
 	/**

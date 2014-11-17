@@ -79,7 +79,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		$repo = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		$one = Item::newEmpty();
 		$one->setId( new ItemId( 'Q1' ) );
@@ -88,16 +88,16 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		$one->setDescription( 'en', 'number' );
 		$one->setDescription( 'de', 'Zahl' );
 
-		$repo->putEntity( $one );
+		$mockRepository->putEntity( $one );
 
 		$oneone = Item::newEmpty();
 		$oneone->setId( new ItemId( 'Q11' ) );
 		$oneone->setLabel( 'en', 'oneone' );
 		$oneone->setLabel( 'de', 'einseins' );
 
-		$repo->putEntity( $oneone );
+		$mockRepository->putEntity( $oneone );
 
-		return $repo;
+		return $mockRepository;
 	}
 
 	protected function newSpecialPage() {

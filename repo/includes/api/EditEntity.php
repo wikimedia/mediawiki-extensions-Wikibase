@@ -85,8 +85,8 @@ class EditEntity extends ModifyEntity {
 
 		$this->validLanguageCodes = array_flip( Utils::getLanguageCodes() );
 
-		$repo = WikibaseRepo::getDefaultInstance();
-		$changeOpFactoryProvider = $repo->getChangeOpFactoryProvider();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
 		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
 		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();

@@ -31,9 +31,9 @@ use Wikibase\Test\MockSiteStore;
 class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 	/**
-	 * @var MockRepository $mockRepo
+	 * @var MockRepository|null
 	 */
-	private $mockRepo;
+	private $mockRepository = null;
 
 	/**
 	 * @var LangLinkHandler $langLinkHandler
@@ -69,14 +69,14 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->langLinkHandler = $this->getLangLinkHandler( array() );
+		$this->langLinkHandler = $this->getLangLinkHandler();
 	}
 
-	private function getLangLinkHandler( array $otherProjects ) {
-		$this->mockRepo = new MockRepository();
+	private function getLangLinkHandler( array $otherProjects = array() ) {
+		$this->mockRepository = new MockRepository();
 
 		foreach ( $this->getItems() as $item ) {
-			$this->mockRepo->putEntity( $item );
+			$this->mockRepository->putEntity( $item );
 		}
 
 		$siteStore = MockSiteStore::newFromTestSites();
@@ -86,8 +86,8 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			$this->getLanguageLinkBadgeDisplay(),
 			'srwiki',
 			new NamespaceChecker( array( NS_TALK ), array() ),
-			$this->mockRepo,
-			$this->mockRepo,
+			$this->mockRepository,
+			$this->mockRepository,
 			$siteStore->getSites(),
 			'wikipedia'
 		);
@@ -118,12 +118,12 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this_ = $this;
+		$self = $this;
 
 		$badgeDisplay->expects( $this->any() )
 			->method( 'attachBadgesToOutput' )
-			->will( $this->returnCallback( function ( array $siteLinks, ParserOutput $parserOutput ) use ( $this_ ) {
-				$badges = $this_->linksToBadges( $siteLinks );
+			->will( $this->returnCallback( function( array $siteLinks, ParserOutput $parserOutput ) use ( $self ) {
+				$badges = $self->linksToBadges( $siteLinks );
 				$parserOutput->setExtensionData( 'wikibase_badges', $badges );
 			} ) );
 
@@ -445,7 +445,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 		$out = $this->makeParserOutput( $langLinks, $noExternalLangLinks );
 
-		$langLinkHandler = $this->getLangLinkHandler( array() );
+		$langLinkHandler = $this->getLangLinkHandler();
 		$langLinkHandler->addLinksFromRepository( $title, $out );
 
 		$this->assertArrayEquals( $expectedLinks, $out->getLanguageLinks(), false, false );
@@ -587,7 +587,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateItemIdProperty() {
-		$langLinkHandler = $this->getLangLinkHandler( array() );
+		$langLinkHandler = $this->getLangLinkHandler();
 
 		$parserOutput = new ParserOutput();
 
@@ -597,7 +597,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$langLinkHandler->updateItemIdProperty( $title, $parserOutput );
 		$property = $parserOutput->getProperty( 'wikibase_item' );
 
-		$itemId = $this->mockRepo->getItemIdForLink( 'srwiki', $titleText );
+		$itemId = $this->mockRepository->getItemIdForLink( 'srwiki', $titleText );
 		$this->assertEquals( $itemId->getSerialization(), $property );
 
 		$this->assertUsageTracking( $itemId, EntityUsage::SITELINK_USAGE, $parserOutput );
@@ -612,7 +612,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateItemIdPropertyForUnconnectedPage() {
-		$langLinkHandler = $this->getLangLinkHandler( array() );
+		$langLinkHandler = $this->getLangLinkHandler();
 
 		$parserOutput = new ParserOutput();
 

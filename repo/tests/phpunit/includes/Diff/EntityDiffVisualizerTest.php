@@ -121,7 +121,7 @@ class EntityDiffVisualizerTest extends \MediaWikiTestCase {
 		$enwiki = new Site();
 		$enwiki->setGlobalId( 'enwiki' );
 		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		$entityRevisionLookup = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		return new EntityDiffVisualizer(
 			$this->getMockContext(),
@@ -129,7 +129,7 @@ class EntityDiffVisualizerTest extends \MediaWikiTestCase {
 			$this->getMockClaimDiffVisualizer(),
 			new MockSiteStore( array( $enwiki ) ),
 			$entityTitleLookup,
-			$entityRevisionLookup
+			$mockRepository
 		);
 	}
 

@@ -19,112 +19,112 @@ use Wikibase\SettingsArray;
 class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetDataTypeFactoryReturnType() {
-		$returnValue = $this->getDefaultInstance()->getDataTypeFactory();
+		$returnValue = $this->getWikibaseRepo()->getDataTypeFactory();
 		$this->assertInstanceOf( 'DataTypes\DataTypeFactory', $returnValue );
 	}
 
 	public function testGetDataValueFactoryReturnType() {
-		$returnValue = $this->getDefaultInstance()->getDataValueFactory();
+		$returnValue = $this->getWikibaseRepo()->getDataValueFactory();
 		$this->assertInstanceOf( 'DataValues\DataValueFactory', $returnValue );
 	}
 
 	public function testGetEntityContentFactoryReturnType() {
-		$returnValue = $this->getDefaultInstance()->getEntityContentFactory();
+		$returnValue = $this->getWikibaseRepo()->getEntityContentFactory();
 		$this->assertInstanceOf( 'Wikibase\Repo\Content\EntityContentFactory', $returnValue );
 	}
 
 	public function testGetEntityTitleLookupReturnType() {
-		$returnValue = $this->getDefaultInstance()->getEntityTitleLookup();
+		$returnValue = $this->getWikibaseRepo()->getEntityTitleLookup();
 		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityTitleLookup', $returnValue );
 	}
 
 	public function testGetEntityRevisionLookupReturnType() {
-		$returnValue = $this->getDefaultInstance()->getEntityRevisionLookup();
+		$returnValue = $this->getWikibaseRepo()->getEntityRevisionLookup();
 		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityRevisionLookup', $returnValue );
 	}
 
 	public function testGetEntityStoreReturnType() {
-		$returnValue = $this->getDefaultInstance()->getEntityStore();
+		$returnValue = $this->getWikibaseRepo()->getEntityStore();
 		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityStore', $returnValue );
 	}
 
 	public function testGetPropertyDataTypeLookupReturnType() {
-		$returnValue = $this->getDefaultInstance()->getPropertyDataTypeLookup();
+		$returnValue = $this->getWikibaseRepo()->getPropertyDataTypeLookup();
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup', $returnValue );
 	}
 
 	public function testGetStringNormalizerReturnType() {
-		$returnValue = $this->getDefaultInstance()->getStringNormalizer();
+		$returnValue = $this->getWikibaseRepo()->getStringNormalizer();
 		$this->assertInstanceOf( 'Wikibase\StringNormalizer', $returnValue );
 	}
 
 	public function testGetEntityLookupReturnType() {
-		$returnValue = $this->getDefaultInstance()->getEntityLookup();
+		$returnValue = $this->getWikibaseRepo()->getEntityLookup();
 		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityLookup', $returnValue );
 	}
 
 	public function testGetSnakConstructionServiceReturnType() {
-		$returnValue = $this->getDefaultInstance()->getSnakConstructionService();
+		$returnValue = $this->getWikibaseRepo()->getSnakConstructionService();
 		$this->assertInstanceOf( 'Wikibase\Lib\SnakConstructionService', $returnValue );
 	}
 
 	public function testGetEntityIdParserReturnType() {
-		$returnValue = $this->getDefaultInstance()->getEntityIdParser();
+		$returnValue = $this->getWikibaseRepo()->getEntityIdParser();
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\EntityIdParser', $returnValue );
 	}
 
 	public function testGetClaimGuidParser() {
-		$returnValue = $this->getDefaultInstance()->getClaimGuidParser();
+		$returnValue = $this->getWikibaseRepo()->getClaimGuidParser();
 		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\ClaimGuidParser', $returnValue );
 	}
 
 	public function testGetLanguageFallbackChainFactory() {
-		$returnValue = $this->getDefaultInstance()->getLanguageFallbackChainFactory();
+		$returnValue = $this->getWikibaseRepo()->getLanguageFallbackChainFactory();
 		$this->assertInstanceOf( 'Wikibase\LanguageFallbackChainFactory', $returnValue );
 	}
 
 	public function testGetClaimGuidValidator() {
-		$returnValue = $this->getDefaultInstance()->getClaimGuidValidator();
+		$returnValue = $this->getWikibaseRepo()->getClaimGuidValidator();
 		$this->assertInstanceOf( 'Wikibase\Lib\ClaimGuidValidator', $returnValue );
 	}
 
 	public function testGetSettingsReturnType() {
-		$returnValue = $this->getDefaultInstance()->getSettings();
+		$returnValue = $this->getWikibaseRepo()->getSettings();
 		$this->assertInstanceOf( 'Wikibase\SettingsArray', $returnValue );
 	}
 
 	public function testGetStoreReturnType() {
-		$returnValue = $this->getDefaultInstance()->getStore();
+		$returnValue = $this->getWikibaseRepo()->getStore();
 		$this->assertInstanceOf( 'Wikibase\Store', $returnValue );
 	}
 
 	public function testGetSnakFormatterFactory() {
-		$returnValue = $this->getDefaultInstance()->getSnakFormatterFactory();
+		$returnValue = $this->getWikibaseRepo()->getSnakFormatterFactory();
 		$this->assertInstanceOf( 'Wikibase\Lib\OutputFormatSnakFormatterFactory', $returnValue );
 	}
 
 	public function testGetValueFormatterFactory() {
-		$returnValue = $this->getDefaultInstance()->getValueFormatterFactory();
+		$returnValue = $this->getWikibaseRepo()->getValueFormatterFactory();
 		$this->assertInstanceOf( 'Wikibase\Lib\OutputFormatValueFormatterFactory', $returnValue );
 	}
 
 	public function testGetSummaryFormatter() {
-		$returnValue = $this->getDefaultInstance()->getSummaryFormatter();
+		$returnValue = $this->getWikibaseRepo()->getSummaryFormatter();
 		$this->assertInstanceOf( 'Wikibase\SummaryFormatter', $returnValue );
 	}
 
 	public function testGetChangeOpFactory() {
-		$returnValue = $this->getDefaultInstance()->getChangeOpFactoryProvider();
+		$returnValue = $this->getWikibaseRepo()->getChangeOpFactoryProvider();
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOpFactoryProvider', $returnValue );
 	}
 
 	public function testGetChangeNotifier() {
-		$factory = $this->getDefaultInstance()->getChangeNotifier();
+		$factory = $this->getWikibaseRepo()->getChangeNotifier();
 		$this->assertInstanceOf( 'Wikibase\Repo\Notifications\ChangeNotifier', $factory );
 	}
 
 	public function testGetContentModelMappings() {
-		$array = $this->getDefaultInstance()->getContentModelMappings();
+		$array = $this->getWikibaseRepo()->getContentModelMappings();
 		foreach( $array as $entityType => $contentModel ) {
 			$this->assertTrue( is_scalar( $entityType ) );
 			$this->assertTrue( is_scalar( $contentModel ) );
@@ -132,104 +132,104 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetExceptionLocalizer() {
-		$localizer = $this->getDefaultInstance()->getExceptionLocalizer();
+		$localizer = $this->getWikibaseRepo()->getExceptionLocalizer();
 		$this->assertInstanceOf( 'Wikibase\Lib\Localizer\ExceptionLocalizer', $localizer );
 	}
 
 	public function testGetEntityContentDataCodec() {
-		$codec = $this->getDefaultInstance()->getEntityContentDataCodec();
+		$codec = $this->getWikibaseRepo()->getEntityContentDataCodec();
 		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityContentDataCodec', $codec );
 	}
 
 	public function testGetInternalEntitySerializer() {
-		$serializer = $this->getDefaultInstance()->getInternalEntitySerializer();
+		$serializer = $this->getWikibaseRepo()->getInternalEntitySerializer();
 		$this->assertInstanceOf( 'Serializers\Serializer', $serializer );
 	}
 
 	public function testGetInternalEntityDeserializer() {
-		$deserializer = $this->getDefaultInstance()->getInternalEntityDeserializer();
+		$deserializer = $this->getWikibaseRepo()->getInternalEntityDeserializer();
 		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
 	}
 
 	public function testGetEntityChangeFactory() {
-		$factory = $this->getDefaultInstance()->getEntityChangeFactory();
+		$factory = $this->getWikibaseRepo()->getEntityChangeFactory();
 		$this->assertInstanceOf( 'Wikibase\Lib\Changes\EntityChangeFactory', $factory );
 	}
 
 	public function testNewItemHandler() {
-		$repo = $this->getDefaultInstance();
-		$handler = $repo->newItemHandler();
+		$wikibaseRepo = $this->getWikibaseRepo();
+		$handler = $wikibaseRepo->newItemHandler();
 		$this->assertInstanceOf( 'Wikibase\Repo\Content\EntityHandler', $handler );
 	}
 
 	public function testNewPropertyHandler() {
-		$repo = $this->getDefaultInstance();
-		$handler = $repo->newPropertyHandler();
+		$wikibaseRepo = $this->getWikibaseRepo();
+		$handler = $wikibaseRepo->newPropertyHandler();
 		$this->assertInstanceOf( 'Wikibase\Repo\Content\EntityHandler', $handler );
 	}
 
 	public function testNewItemHandler_noTransform() {
-		$repo = $this->getDefaultInstance();
-		$repo->getSettings()->setSetting( 'transformLegacyFormatOnExport', false );
+		$wikibaseRepo = $this->getWikibaseRepo();
+		$wikibaseRepo->getSettings()->setSetting( 'transformLegacyFormatOnExport', false );
 
-		$handler = $repo->newItemHandler();
+		$handler = $wikibaseRepo->newItemHandler();
 		$this->assertNull( $handler->getLegacyExportFormatDetector() );
 	}
 
 	public function testNewPropertyHandler_noTransform() {
-		$repo = $this->getDefaultInstance();
-		$repo->getSettings()->setSetting( 'transformLegacyFormatOnExport', false );
+		$wikibaseRepo = $this->getWikibaseRepo();
+		$wikibaseRepo->getSettings()->setSetting( 'transformLegacyFormatOnExport', false );
 
-		$handler = $repo->newPropertyHandler();
+		$handler = $wikibaseRepo->newPropertyHandler();
 		$this->assertNull( $handler->getLegacyExportFormatDetector() );
 	}
 
 	public function testNewItemHandler_withTransform() {
-		$repo = $this->getDefaultInstance();
-		$repo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
-		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', null );
+		$wikibaseRepo = $this->getWikibaseRepo();
+		$wikibaseRepo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
+		$wikibaseRepo->getSettings()->setSetting( 'internalEntitySerializerClass', null );
 
-		$handler = $repo->newItemHandler();
+		$handler = $wikibaseRepo->newItemHandler();
 		$this->assertNotNull( $handler->getLegacyExportFormatDetector() );
 	}
 
 	public function testNewPropertyHandler_withTransform() {
-		$repo = $this->getDefaultInstance();
-		$repo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
-		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', null );
+		$wikibaseRepo = $this->getWikibaseRepo();
+		$wikibaseRepo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
+		$wikibaseRepo->getSettings()->setSetting( 'internalEntitySerializerClass', null );
 
-		$handler = $repo->newPropertyHandler();
+		$handler = $wikibaseRepo->newPropertyHandler();
 		$this->assertNotNull( $handler->getLegacyExportFormatDetector() );
 	}
 
 	public function testNewItemHandler_badSerializerSetting() {
-		$repo = $this->getDefaultInstance();
-		$repo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
-		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
+		$wikibaseRepo = $this->getWikibaseRepo();
+		$wikibaseRepo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
+		$wikibaseRepo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
 
 		$this->setExpectedException( 'RuntimeException' );
-		$repo->newItemHandler();
+		$wikibaseRepo->newItemHandler();
 	}
 
 	public function testNewPropertyHandler_badSerializerSetting() {
-		$repo = $this->getDefaultInstance();
-		$repo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
-		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
+		$wikibaseRepo = $this->getWikibaseRepo();
+		$wikibaseRepo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
+		$wikibaseRepo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
 
 		$this->setExpectedException( 'RuntimeException' );
-		$repo->newPropertyHandler();
+		$wikibaseRepo->newPropertyHandler();
 	}
 
 	/**
 	 * @return WikibaseRepo
 	 */
-	private function getDefaultInstance() {
+	private function getWikibaseRepo() {
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 		return new WikibaseRepo( $settings );
 	}
 
 	public function testGetApiHelperFactory() {
-		$factory = $this->getDefaultInstance()->getApiHelperFactory();
+		$factory = $this->getWikibaseRepo()->getApiHelperFactory();
 		$this->assertInstanceOf( 'Wikibase\Api\ApiHelperFactory', $factory );
 	}
 

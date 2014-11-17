@@ -62,16 +62,16 @@ class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 	}
 
 	private function getLanguageLinkBadgeDisplay() {
-		$mockRepo = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		foreach ( $this->getItems() as $item ) {
-			$mockRepo->putEntity( $item );
+			$mockRepository->putEntity( $item );
 		}
 
 		$badgeClassNames = array( 'Q4' => 'foo', 'Q3' => 'bar' );
 
 		return new LanguageLinkBadgeDisplay(
-			$mockRepo,
+			$mockRepository,
 			$badgeClassNames,
 			Language::factory( 'de' )
 		);

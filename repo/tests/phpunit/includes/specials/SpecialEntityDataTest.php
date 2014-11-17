@@ -74,9 +74,9 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	}
 
 	protected function newRequestHandler() {
-		$mockRepo = EntityDataTestProvider::getMockRepo();
+		$mockRepository = EntityDataTestProvider::getMockRepository();
 
-		$entityRevisionLookup = $mockRepo;
+		$entityRevisionLookup = $mockRepository;
 
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$titleLookup->expects( $this->any() )
@@ -102,7 +102,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$serializationService = new EntityDataSerializationService(
 			self::URI_BASE,
 			self::URI_DATA,
-			$mockRepo,
+			$mockRepository,
 			$titleLookup,
 			$serializerFactory,
 			new SiteList()

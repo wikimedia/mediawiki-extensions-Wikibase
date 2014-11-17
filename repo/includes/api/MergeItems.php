@@ -53,22 +53,21 @@ class MergeItems extends ApiBase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$repo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->setServices(
-			$repo->getEntityIdParser(),
-			$repo->getApiHelperFactory()->getErrorReporter( $this ),
-			$repo->getApiHelperFactory()->getResultBuilder( $this ),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getApiHelperFactory()->getErrorReporter( $this ),
+			$wikibaseRepo->getApiHelperFactory()->getResultBuilder( $this ),
 			new ItemMergeInteractor(
-				$repo->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
-				$repo->getEntityRevisionLookup( 'uncached' ),
-				$repo->getEntityStore(),
-				$repo->getEntityPermissionChecker(),
-				$repo->getSummaryFormatter(),
+				$wikibaseRepo->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
+				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+				$wikibaseRepo->getEntityStore(),
+				$wikibaseRepo->getEntityPermissionChecker(),
+				$wikibaseRepo->getSummaryFormatter(),
 				$this->getUser()
 			)
 		);
-
 	}
 
 	public function setServices(

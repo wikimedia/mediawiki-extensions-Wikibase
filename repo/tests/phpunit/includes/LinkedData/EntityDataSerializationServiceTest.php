@@ -26,7 +26,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 	const URI_DATA = 'http://data.acme.test/';
 
 	private function newService() {
-		$entityLookup = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$dataTypeLookup->expects( $this->any() )
@@ -46,7 +46,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 		$service = new EntityDataSerializationService(
 			self::URI_BASE,
 			self::URI_DATA,
-			$entityLookup,
+			$mockRepository,
 			$titleLookup,
 			$serializerFactory,
 			new SiteList()
@@ -264,4 +264,5 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 			$this->assertNull( $actual, $format );
 		}
 	}
+
 }

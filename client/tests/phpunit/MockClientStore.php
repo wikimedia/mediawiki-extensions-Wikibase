@@ -18,6 +18,16 @@ use Wikibase\PropertyInfoStore;
  */
 class MockClientStore implements ClientStore {
 
+	/**
+	 * @var MockRepository|null
+	 */
+	private static $mockRepository = null;
+
+	/**
+	 * @var PropertyInfoStore|null
+	 */
+	private static $propertyInfoStore = null;
+
 	public function getUsageLookup() {
 		return new NullUsageTracker();
 	}
@@ -29,51 +39,60 @@ class MockClientStore implements ClientStore {
 	public function getSubscriptionManager() {
 		return new SubscriptionManager();
 	}
-	public function getPropertyLabelResolver() {}
-	public function getTermIndex() {}
-	public function newChangesTable() {}
-	public function clear() {}
-	public function rebuild() {}
 
-	private function getMock() {
-		static $mockRepo = false;
-		if ( !$mockRepo ) {
-			$mockRepo = new MockRepository();
+	public function getPropertyLabelResolver() {
+	}
+
+	public function getTermIndex() {
+	}
+
+	public function newChangesTable() {
+	}
+
+	public function clear() {
+	}
+
+	public function rebuild() {
+	}
+
+	private function getMockRepository() {
+		if ( self::$mockRepository === null ) {
+			self::$mockRepository = new MockRepository();
 		}
 
-		return $mockRepo;
+		return self::$mockRepository;
 	}
 
 	/*
 	 * @return EntityLookup
 	 */
 	public function getEntityLookup() {
-		return $this->getMock();
+		return $this->getMockRepository();
 	}
 
 	/*
 	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup() {
-		return $this->getMock();
+		return $this->getMockRepository();
 	}
 
 	/**
 	 * @return SiteLinkLookup
 	 */
 	public function getSiteLinkTable() {
-		return $this->getMock();
+		return $this->getMockRepository();
 	}
 
 	/**
 	 * @return PropertyInfoStore
 	 */
 	public function getPropertyInfoStore() {
-		static $mockPropertyInfoStore = false;
-		if ( !$mockPropertyInfoStore ) {
-			$mockPropertyInfoStore = new MockPropertyInfoStore();
+		if ( self::$propertyInfoStore === null ) {
+			self::$propertyInfoStore = new MockPropertyInfoStore();
 		}
-		return $mockPropertyInfoStore;
+
+		return self::$propertyInfoStore;
 	}
 
 }

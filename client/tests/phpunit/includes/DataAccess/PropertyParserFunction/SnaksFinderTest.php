@@ -26,16 +26,16 @@ use Wikibase\Test\MockRepository;
  */
 class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 
-	private function getDefaultInstance() {
-		$repo = $this->newMockRepository();
+	private function getSnaksFinder() {
+		$mockRepository = $this->getMockRepository();
 
-		return new SnaksFinder( $repo );
+		return new SnaksFinder( $mockRepository );
 	}
 
-	private function newMockRepository() {
+	private function getMockRepository() {
 		$propertyId = new PropertyId( 'P1337' );
 
-		$entityLookup = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		$statement1 = new Statement( new Claim( new PropertyValueSnak(
 			$propertyId,
@@ -67,17 +67,17 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 		$property->setId( $propertyId );
 		$property->setLabel( 'en', 'a kitten!' );
 
-		$entityLookup->putEntity( $item );
-		$entityLookup->putEntity( $property );
+		$mockRepository->putEntity( $item );
+		$mockRepository->putEntity( $property );
 
-		return $entityLookup;
+		return $mockRepository;
 	}
 
 	/**
 	 * @dataProvider findSnaksProvider
 	 */
 	public function testFindSnaks( $expected, ItemId $itemId, $propertyLabelOrId ) {
-		$snaksFinder = $this->getDefaultInstance();
+		$snaksFinder = $this->getSnaksFinder();
 
 		$snakList = $snaksFinder->findSnaks( $itemId, $propertyLabelOrId, 'en' );
 		$this->assertEquals( $expected, $snakList );
