@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_826793b3",
+        "filename": "client/includes/hooks/UpdateRepoHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-17T16:23:10Z",
+      "side": 1,
+      "message": "what is this if for? looks like it will always be evaluated to true...",
+      "revId": "a4a65852759857058781d0a840b25109f27f3094",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
