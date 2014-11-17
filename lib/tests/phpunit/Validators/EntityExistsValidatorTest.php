@@ -40,10 +40,10 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 		$q8 = Item::newEmpty();
 		$q8->setId( 8 );
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $q8 );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $q8 );
 
-		$validator = new EntityExistsValidator( $entityLookup );
+		$validator = new EntityExistsValidator( $mockRepository );
 		$result = $validator->validate( $value );
 
 		$this->assertEquals( $expected, $result->isValid(), $message );

@@ -91,13 +91,13 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	 * @return ClaimsView
 	 */
 	private function newClaimsView() {
-		$mockRepo = new MockRepository();
+		$mockRepository = new MockRepository();
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
 		$sectionEditLinkGenerator = new SectionEditLinkGenerator();
 		$claimHtmlGenerator = $this->getClaimHtmlGeneratorMock();
 
 		return new ClaimsView(
-			$mockRepo,
+			$mockRepository,
 			$entityTitleLookup,
 			$sectionEditLinkGenerator,
 			$claimHtmlGenerator,

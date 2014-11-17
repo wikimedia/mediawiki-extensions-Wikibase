@@ -2,9 +2,9 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRedirect;
 
 /**
@@ -39,18 +39,18 @@ class EntityDataTestProvider {
 		return array( $redirect );
 	}
 
-	public static function getMockRepo() {
-		$repo = new MockRepository();
+	public static function getMockRepository() {
+		$mockRepository = new MockRepository();
 
 		foreach ( self::getEntityRevisions() as $entityRev ) {
-			$repo->putEntity( $entityRev->getEntity(), $entityRev->getRevision(), $entityRev->getTimestamp() );
+			$mockRepository->putEntity( $entityRev->getEntity(), $entityRev->getRevision(), $entityRev->getTimestamp() );
 		}
 
 		foreach ( self::getEntityRedirects() as $entityRedir ) {
-			$repo->putRedirect( $entityRedir );
+			$mockRepository->putRedirect( $entityRedir );
 		}
 
-		return $repo;
+		return $mockRepository;
 	}
 
 	public static function provideHandleRequest() {
@@ -445,4 +445,5 @@ class EntityDataTestProvider {
 
 		return $cases;
 	}
+
 }

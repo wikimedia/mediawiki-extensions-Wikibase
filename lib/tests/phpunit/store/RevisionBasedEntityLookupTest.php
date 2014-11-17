@@ -28,12 +28,12 @@ class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$item10->setId( $q10 );
 		$item10->setLabel( 'en', 'ten' );
 
-		$repo = new MockRepository();
-		$repo->putEntity( $item10 );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $item10 );
 
 		return array(
-			'found' => array( $repo, $q10, $q10 ),
-			'not found' => array( $repo, $q11, null ),
+			'found' => array( $mockRepository, $q10, $q10 ),
+			'not found' => array( $mockRepository, $q11, null ),
 		);
 	}
 

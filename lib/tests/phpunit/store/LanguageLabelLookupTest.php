@@ -40,9 +40,9 @@ class LanguageLabelLookupTest extends \MediaWikiTestCase {
 	}
 
 	private function getTermLookup() {
-		$entityLookup = new MockRepository();
+		$mockRepository = new MockRepository();
 
-		return new EntityTermLookup( $this->getTermIndex(), $entityLookup );
+		return new EntityTermLookup( $this->getTermIndex(), $mockRepository );
 	}
 
 	private function getTermIndex() {

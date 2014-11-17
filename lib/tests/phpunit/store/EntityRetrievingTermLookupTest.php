@@ -76,7 +76,7 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getEntityLookup() {
-		$mockRepo = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q116' ) );
@@ -87,9 +87,9 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 		$item->setDescription( 'de', 'Metropole an der Ostküste der Vereinigten Staaten' );
 		$item->setDescription( 'en', 'largest city in New York and the United States of America' );
 
-		$mockRepo->putEntity( $item );
+		$mockRepository->putEntity( $item );
 
-		return $mockRepo;
+		return $mockRepository;
 	}
 
 }

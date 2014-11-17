@@ -50,20 +50,20 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	public function __construct() {
 		parent::__construct( 'MergeItems', 'item-merge' );
 
-		$repo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initServices(
-			$repo->getEntityIdParser(),
-			$repo->getExceptionLocalizer(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getExceptionLocalizer(),
 			new TokenCheckInteractor(
 				$this->getUser()
 			),
 			new ItemMergeInteractor(
-				$repo->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
-				$repo->getEntityRevisionLookup( 'uncached' ),
-				$repo->getEntityStore(),
-				$repo->getEntityPermissionChecker(),
-				$repo->getSummaryFormatter(),
+				$wikibaseRepo->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
+				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+				$wikibaseRepo->getEntityStore(),
+				$wikibaseRepo->getEntityPermissionChecker(),
+				$wikibaseRepo->getSummaryFormatter(),
 				$this->getUser()
 			)
 		);

@@ -46,7 +46,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function makeMockSnakFormatter( $format, $value ) {
+	public function getSnakFormatter( $format, $value ) {
 		$mock = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
 
 		$mock->expects( $this->atLeastOnce() )
@@ -72,10 +72,10 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getSnakFormatterProvider() {
-		$this_ = $this;
+		$self = $this;
 		$builders = array(
-			'foo' => function () use ( $this_ ) { return $this_->makeMockSnakFormatter( 'foo', 'FOO' ); },
-			'bar' => function () use ( $this_ ) { return $this_->makeMockSnakFormatter( 'bar', 'BAR' ); },
+			'foo' => function() use ( $self ) { return $self->getSnakFormatter( 'foo', 'FOO' ); },
+			'bar' => function() use ( $self ) { return $self->getSnakFormatter( 'bar', 'BAR' ); },
 		);
 
 		return array(
