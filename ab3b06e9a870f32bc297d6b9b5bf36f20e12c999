@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_a77e61ab",
+        "filename": "lib/tests/phpunit/changes/TestChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-17T15:52:20Z",
+      "side": 1,
+      "message": "Right. I did not realize how bad the surrounding code here is.",
+      "parentUuid": "6e936f18_47bf5d5c",
+      "revId": "ab3b06e9a870f32bc297d6b9b5bf36f20e12c999",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_67513964",
         "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpStatementRankTest.php",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Doesn\u0027t compute. How to set a GUID then?",
       "parentUuid": "6e936f18_67513964",
+      "revId": "ab3b06e9a870f32bc297d6b9b5bf36f20e12c999",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_6784d9a3",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpStatementRankTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-17T15:52:20Z",
+      "side": 1,
+      "message": "It has a GUID parameter?",
+      "parentUuid": "6e936f18_07b5d577",
       "revId": "ab3b06e9a870f32bc297d6b9b5bf36f20e12c999",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
