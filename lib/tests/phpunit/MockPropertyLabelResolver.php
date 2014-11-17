@@ -15,14 +15,14 @@ use Wikibase\PropertyLabelResolver;
 class MockPropertyLabelResolver implements PropertyLabelResolver {
 
 	/**
-	 * @var MockRepository
-	 */
-	private $mockRepository;
-
-	/**
 	 * @var string
 	 */
 	private $languageCode;
+
+	/**
+	 * @var MockRepository
+	 */
+	private $mockRepository;
 
 	/**
 	 * @param string $languageCode
