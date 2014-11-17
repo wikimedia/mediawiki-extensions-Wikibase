@@ -30,14 +30,14 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
 		$item->addSiteLink( new SiteLink( 'enwiktionary', 'Nyan Cat' ) );
 
-		$mockRepo = new MockRepository();
-		$mockRepo->putEntity( $item );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $item );
 
 		$siteStore = MockSiteStore::newFromTestSites();
 
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
-			$mockRepo,
+			$mockRepository,
 			$siteStore->getSites(),
 			$siteIdsToOutput
 		);
@@ -71,4 +71,5 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			)
 		);
 	}
+
 }

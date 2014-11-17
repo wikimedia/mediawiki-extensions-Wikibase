@@ -51,7 +51,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @return WikibaseRepo
 	 */
-	protected function getRepo( SettingsArray $settings = null ) {
+	protected function getWikibaseRepo( SettingsArray $settings = null ) {
 		$repoSettings = WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy();
 
 		if ( $settings ) {
@@ -415,7 +415,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$settings->setSetting( 'internalEntitySerializerClass', null );
 
 		$entity = $this->newEntity();
-		$currentSerializer = $this->getRepo( $settings )->getInternalEntitySerializer();
+		$currentSerializer = $this->getWikibaseRepo( $settings )->getInternalEntitySerializer();
 		$expected = json_encode( $currentSerializer->serialize( $entity ) );
 
 		$handler = $this->getHandler( $settings, $codec );
