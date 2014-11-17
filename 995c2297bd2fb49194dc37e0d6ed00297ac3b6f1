@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_d1aa4f15",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-17T10:58:21Z",
+      "side": 1,
+      "message": "No need to use Claims here, you can use ByPropertyIdGrouper",
+      "revId": "995c2297bd2fb49194dc37e0d6ed00297ac3b6f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
