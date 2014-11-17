@@ -1,11 +1,12 @@
 <?php
 
-namespace Wikibase\Client;
+namespace Wikibase\Client\Tests;
 
 use Language;
 use MediaWikiSite;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\SettingsArray;
 use Wikibase\Test\MockSiteStore;
