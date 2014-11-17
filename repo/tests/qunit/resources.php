@@ -73,6 +73,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.wikibase.entitysearch.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.entitysearch.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.entitysearch',
+			),
+		),
+
 		'templates.tests' => $moduleBase + array(
 			'scripts' => array(
 				'templates.tests.js',
