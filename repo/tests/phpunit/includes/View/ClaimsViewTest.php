@@ -3,11 +3,8 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use TestUser;
-use Title;
 use Wikibase\ClaimHtmlGenerator;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -68,7 +65,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	 */
 	private function makeProperty() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$testUser = new TestUser( 'WikibaseUser' );
+		$testUser = new \TestUser( 'WikibaseUser' );
 
 		$property = Property::newEmpty();
 		$property->setLabel( 'en', "<script>alert( 'omg!!!' );</script>" );
@@ -79,6 +76,11 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		return $revision->getEntity();
 	}
 
+	/**
+	 * @param Property $property
+	 *
+	 * @return array[]
+	 */
 	private function makeEntityInfo( Property $property ) {
 		$prefixedId = $property->getId()->getSerialization();
 
@@ -101,8 +103,13 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		return $entityInfo;
 	}
 
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return Claim[]
+	 */
 	private function makeClaims( PropertyId $propertyId ) {
-		$claims = array(
+		return array(
 			$this->makeClaim( new PropertyNoValueSnak(
 				$propertyId
 			) ),
@@ -126,10 +133,14 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 				new EntityIdValue( new ItemId( 'Q555' ) )
 			) ),
 		);
-
-		return $claims;
 	}
 
+	/**
+	 * @param Snak $mainSnak
+	 * @param string|null $guid
+	 *
+	 * @return Claim
+	 */
 	private function makeClaim( Snak $mainSnak, $guid = null ) {
 		static $guidCounter = 0;
 
@@ -145,13 +156,15 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	}
 
 	/**
+	 * @param EntityTitleLookup $entityTitleLookup
+	 *
 	 * @return ClaimsView
 	 */
 	private function newClaimsView( EntityTitleLookup $entityTitleLookup ) {
 		return new ClaimsView(
 			$entityTitleLookup,
 			new SectionEditLinkGenerator(),
-			$this->getClaimHtmlGeneratorMock(),
+			$this->getClaimHtmlGenerator(),
 			'en'
 		);
 	}
@@ -159,7 +172,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	/**
 	 * @return ClaimHtmlGenerator
 	 */
-	private function getClaimHtmlGeneratorMock() {
+	private function getClaimHtmlGenerator() {
 		$claimHtmlGenerator = $this->getMockBuilder( 'Wikibase\ClaimHtmlGenerator' )
 			->disableOriginalConstructor()
 			->getMock();

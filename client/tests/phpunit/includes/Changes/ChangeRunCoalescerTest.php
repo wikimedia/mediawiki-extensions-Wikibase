@@ -7,8 +7,10 @@ use Wikibase\Change;
 use Wikibase\ChangesTable;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
 use Wikibase\Test\MockRepository;
 use Wikibase\Test\TestChanges;
@@ -29,12 +31,12 @@ use Wikibase\Test\TestChanges;
 class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 
 	private function newCoalescer( array $entities = array() ) {
-		$repo = $this->getMockRepo( $entities );
+		$mockRepository = $this->getMockRepository( $entities );
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
 
 		$coalescer = new ChangeRunCoalescer(
-			$repo,
+			$mockRepository,
 			$changeFactory,
 			'enwiki'
 		);
@@ -42,51 +44,51 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		return $coalescer;
 	}
 
-	private function getMockRepo( array $entities = array() ) {
-		$repo = new MockRepository();
+	private function getMockRepository( array $entities = array() ) {
+		$mockRepository = new MockRepository();
 
 		// entity 1, revision 11
 		$entity1 = Item::newEmpty();
 		$entity1->setId( new ItemId( 'q1' ) );
 		$entity1->setLabel( 'en', 'one' );
-		$repo->putEntity( $entity1, 11 );
+		$mockRepository->putEntity( $entity1, 11 );
 
 		// entity 1, revision 12
 		$entity1->setLabel( 'de', 'eins' );
-		$repo->putEntity( $entity1, 12 );
+		$mockRepository->putEntity( $entity1, 12 );
 
 		// entity 1, revision 13
 		$entity1->setLabel( 'it', 'uno' );
-		$repo->putEntity( $entity1, 13 );
+		$mockRepository->putEntity( $entity1, 13 );
 
 		// entity 1, revision 1111
 		$entity1->setDescription( 'en', 'the first' );
-		$repo->putEntity( $entity1, 1111 );
+		$mockRepository->putEntity( $entity1, 1111 );
 
 		// entity 2, revision 21
 		$entity1 = Item::newEmpty();
 		$entity1->setId( new ItemId( 'q2' ) );
 		$entity1->setLabel( 'en', 'two' );
-		$repo->putEntity( $entity1, 21 );
+		$mockRepository->putEntity( $entity1, 21 );
 
 		// entity 2, revision 22
 		$entity1->setLabel( 'de', 'zwei' );
-		$repo->putEntity( $entity1, 22 );
+		$mockRepository->putEntity( $entity1, 22 );
 
 		// entity 2, revision 23
 		$entity1->setLabel( 'it', 'due' );
-		$repo->putEntity( $entity1, 23 );
+		$mockRepository->putEntity( $entity1, 23 );
 
 		// entity 2, revision 1211
 		$entity1->setDescription( 'en', 'the second' );
-		$repo->putEntity( $entity1, 1211 );
+		$mockRepository->putEntity( $entity1, 1211 );
 
-		$this->updateMockRepo( $repo, $entities );
+		$this->updateMockRepository( $mockRepository, $entities );
 
-		return $repo;
+		return $mockRepository;
 	}
 
-	private function updateMockRepo( MockRepository $repo, $entities ) {
+	private function updateMockRepository( MockRepository $mockRepository, $entities ) {
 		foreach ( $entities as $id => $siteLinks ) {
 			if ( !( $siteLinks instanceof Entity ) ) {
 				$entity = Item::newEmpty();
@@ -105,7 +107,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 				$entity = $siteLinks;
 			}
 
-			$repo->putEntity( $entity );
+			$mockRepository->putEntity( $entity );
 		}
 	}
 

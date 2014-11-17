@@ -94,8 +94,8 @@ class PropertyHandlerTest extends EntityHandlerTest {
 	 * @return PropertyHandler
 	 */
 	protected function getHandler( SettingsArray $settings = null ) {
-		$repo = $this->getRepo( $settings );
-		return $repo->newPropertyHandler();
+		$wikibaseRepo = $this->getWikibaseRepo( $settings );
+		return $wikibaseRepo->newPropertyHandler();
 	}
 
 }

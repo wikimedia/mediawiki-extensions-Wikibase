@@ -28,18 +28,18 @@ class GenericEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	protected function newEntityInfoBuilder( array $ids ) {
 		$idParser = new BasicEntityIdParser();
 
-		$repo = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		foreach ( $this->getKnownEntities() as $entity ) {
-			$repo->putEntity( $entity );
+			$mockRepository->putEntity( $entity );
 		}
 
 		foreach ( $this->getKnownRedirects() as $from => $toId ) {
 			$fromId = $idParser->parse( $from );
-			$repo->putRedirect( new EntityRedirect( $fromId, $toId ) );
+			$mockRepository->putRedirect( new EntityRedirect( $fromId, $toId ) );
 		}
 
-		return new GenericEntityInfoBuilder( $ids, $idParser, $repo );
+		return new GenericEntityInfoBuilder( $ids, $idParser, $mockRepository );
 	}
 
 }

@@ -48,7 +48,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 
 		return new WikibaseLuaEntityBindings(
 			$this->newSnakFormatterMock(),
-			$entityLookup ? $entityLookup : new MockRepository(),
+			$entityLookup ?: new MockRepository(),
 			$usageAccumulator ? $usageAccumulator : new HashUsageAccumulator(),
 			'enwiki',
 			$language,

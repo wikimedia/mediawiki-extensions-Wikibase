@@ -30,12 +30,12 @@ use Wikibase\Test\MockRepository;
 class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var MockRepository
+	 * @var MockRepository|null
 	 */
-	private $repo = null;
+	private $mockRepository = null;
 
 	/**
-	 * @var EntityModificationTestHelper
+	 * @var EntityModificationTestHelper|null
 	 */
 	private $testHelper = null;
 
@@ -44,7 +44,7 @@ class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 
 		$this->testHelper = new EntityModificationTestHelper();
 
-		$this->repo = $this->testHelper->getRepository();
+		$this->mockRepository = $this->testHelper->getMockRepository();
 
 		$this->testHelper->putEntities( array(
 			'Q1' => array(),
@@ -100,8 +100,8 @@ class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 
 		$interactor = new ItemMergeInteractor(
 			$changeOpsFactory,
-			$this->repo,
-			$this->repo,
+			$this->mockRepository,
+			$this->mockRepository,
 			$this->getPermissionCheckers(),
 			$summaryFormatter,
 			$user
@@ -280,8 +280,8 @@ class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 		$this->testHelper->assertEntityEquals( $expectedFrom, $actualFrom, 'modified source item' );
 
 		// -- check the edit summaries --------------------------------------------
-		$fromRevId = $this->repo->getLatestRevisionId( $fromId );
-		$toRevId = $this->repo->getLatestRevisionId( $toId );
+		$fromRevId = $this->mockRepository->getLatestRevisionId( $fromId );
+		$toRevId = $this->mockRepository->getLatestRevisionId( $toId );
 
 		$this->testHelper->assertRevisionSummary( '@^/\* *wbmergeitems-to:0\|\|Q2 *\*/ *CustomSummary$@', $fromRevId, 'summary for source item' );
 		$this->testHelper->assertRevisionSummary( '@^/\* *wbmergeitems-from:0\|\|Q1 *\*/ *CustomSummary$@', $toRevId, 'summary for target item' );

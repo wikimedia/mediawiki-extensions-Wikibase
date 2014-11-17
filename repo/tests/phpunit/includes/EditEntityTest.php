@@ -124,7 +124,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param MockRepository $repo
+	 * @param MockRepository $mockRepository
 	 * @param Entity $entity
 	 * @param User $user
 	 * @param bool $baseRevId
@@ -133,7 +133,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 *
 	 * @return EditEntity
 	 */
-	protected function makeEditEntity( MockRepository $repo, Entity $entity, User $user = null, $baseRevId = false, $permissions = null ) {
+	protected function makeEditEntity( MockRepository $mockRepository, Entity $entity, User $user = null, $baseRevId = false, $permissions = null ) {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 
@@ -144,7 +144,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$titleLookup = $this->newTitleLookupMock();
 		$permissionChecker = $this->newEntityPermissionCheckerMock( $permissions );
 
-		$edit = new EditEntity( $titleLookup, $repo, $repo, $permissionChecker, $entity, $user, $baseRevId, $context );
+		$edit = new EditEntity( $titleLookup, $mockRepository, $mockRepository, $permissionChecker, $entity, $user, $baseRevId, $context );
 
 		return $edit;
 	}
@@ -152,8 +152,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 	/**
 	 * @return MockRepository
 	 */
-	protected function makeMockRepo() {
-		$repo = new MockRepository();
+	private function getMockRepository() {
+		$mockRepository = new MockRepository();
 
 		$user = self::getUser( 'EditEntityTestUser1' );
 		$otherUser = self::getUser( 'EditEntityTestUser2' );
@@ -162,22 +162,22 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q17' ) );
 		$item->setLabel('en', 'foo' );
-		$repo->putEntity( $item, 10, 0, $user );
+		$mockRepository->putEntity( $item, 10, 0, $user );
 
 		$item = $item->copy();
 		$item->setLabel( 'en', 'bar' );
-		$repo->putEntity( $item, 11, 0, $otherUser );
+		$mockRepository->putEntity( $item, 11, 0, $otherUser );
 
 		$item = $item->copy();
 		$item->setLabel( 'de', 'bar' );
-		$repo->putEntity( $item, 12, 0, $user );
+		$mockRepository->putEntity( $item, 12, 0, $user );
 
 		$item = $item->copy();
 		$item->setLabel('en', 'test' );
 		$item->setDescription( 'en', 'more testing' );
-		$repo->putEntity( $item, 13, 0, $user );
+		$mockRepository->putEntity( $item, 13, 0, $user );
 
-		return $repo;
+		return $mockRepository;
 	}
 
 	public function provideHasEditConflict() {
@@ -262,13 +262,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideHasEditConflict
 	 */
 	public function testHasEditConflict( $inputData, $baseRevisionId, $expectedConflict, $expectedFix, array $expectedData = null ) {
-		$repo = $this->makeMockRepo();
+		$mockRepository = $this->getMockRepository();
 
 		$entityId = new ItemId( 'Q17' );
-		$revision = $repo->getEntityRevision( $entityId, $baseRevisionId );
+		$revision = $mockRepository->getEntityRevision( $entityId, $baseRevisionId );
 		$entity = $revision->getEntity( $entityId );
 
-		// NOTE: the user name must be the one used in makeMockRepo()
+		// NOTE: the user name must be the one used in getMockRepository()
 		$user = self::getUser( 'EditEntityTestUser1' );
 
 		// change entity ----------------------------------
@@ -295,7 +295,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 
 		// save entity ----------------------------------
-		$editEntity = $this->makeEditEntity( $repo, $entity, $user, $baseRevisionId );
+		$editEntity = $this->makeEditEntity( $mockRepository, $entity, $user, $baseRevisionId );
 
 		$conflict = $editEntity->hasEditConflict();
 		$this->assertEquals( $expectedConflict, $conflict, 'hasEditConflict()' );
@@ -333,7 +333,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideAttemptSaveWithLateConflict
 	 */
 	public function testAttemptSaveWithLateConflict( $baseRevId, $expectedConflict ) {
-		$repo = $this->makeMockRepo();
+		$mockRepository = $this->getMockRepository();
 
 		$user = self::getUser( 'EditEntityTestUser' );
 
@@ -341,13 +341,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$entity = Item::newEmpty();
 		$entity->setLabel( 'en', 'Test' );
 
-		$repo->putEntity( $entity, 0, 0, $user );
+		$mockRepository->putEntity( $entity, 0, 0, $user );
 
 		// begin editing the entity
 		$entity = $entity->copy();
 		$entity->setLabel( 'en', 'Trust' );
 
-		$editEntity = $this->makeEditEntity( $repo,  $entity, $user, $baseRevId );
+		$editEntity = $this->makeEditEntity( $mockRepository,  $entity, $user, $baseRevId );
 		$editEntity->getLatestRevision(); // make sure EditEntity has page and revision
 
 		$this->assertEquals( $baseRevId !== false, $editEntity->doesCheckForEditConflicts(), 'doesCheckForEditConflicts()' );
@@ -357,7 +357,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$user2 = self::getUser( "EditEntityTestUser2" );
 
 		$entity2->setLabel( 'en', 'Toast' );
-		$repo->putEntity( $entity2, 0, 0, $user2 );
+		$mockRepository->putEntity( $entity2, 0, 0, $user2 );
 
 		// now try to save the original edit. The conflict should still be detected
 		$token = $user->getEditToken();
@@ -385,14 +385,14 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	public function testErrorPage_DoesNotDoubleEscapeHtmlCharacters() {
-		$repo = $this->makeMockRepo();
+		$mockRepository = $this->getMockRepository();
 		$permissions = array();
 		$context = new RequestContext();
 		// Can not reuse makeEditEntity because we need the access the context
 		$editEntity = new EditEntity(
 			$this->newTitleLookupMock(),
-			$repo,
-			$repo,
+			$mockRepository,
+			$mockRepository,
 			$this->newEntityPermissionCheckerMock( $permissions ),
 			Item::newEmpty(),
 			self::getUser( 'EditEntityTestUser' ),
@@ -423,12 +423,12 @@ class EditEntityTest extends \MediaWikiTestCase {
 		);
 	}
 
-	protected function prepareItemForPermissionCheck( User $user, MockRepository $repo, $create ) {
+	protected function prepareItemForPermissionCheck( User $user, MockRepository $mockRepository, $create ) {
 		$item = Item::newEmpty();
 
 		if ( $create ) {
 			$item->setLabel( 'de', 'Test' );
-			$repo->putEntity( $item, 0, 0, $user );
+			$mockRepository->putEntity( $item, 0, 0, $user );
 		}
 
 		return $item;
@@ -438,12 +438,12 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider dataCheckEditPermissions
 	 */
 	public function testCheckEditPermissions( $permissions, $create, $expectedOK ) {
-		$repo = $this->makeMockRepo();
+		$mockRepository = $this->getMockRepository();
 
 		$user = self::getUser( "EditEntityTestUser" );
-		$item = $this->prepareItemForPermissionCheck( $user, $repo, $create );
+		$item = $this->prepareItemForPermissionCheck( $user, $mockRepository, $create );
 
-		$edit = $this->makeEditEntity( $repo, $item, $user, false, $permissions );
+		$edit = $this->makeEditEntity( $mockRepository, $item, $user, false, $permissions );
 		$edit->checkEditPermissions();
 
 		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK() );
@@ -454,13 +454,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider dataCheckEditPermissions
 	 */
 	public function testAttemptSavePermissions( $permissions, $create, $expectedOK ) {
-		$repo = $this->makeMockRepo();
+		$mockRepository = $this->getMockRepository();
 
 		$user = self::getUser( "EditEntityTestUser" );
-		$item = $this->prepareItemForPermissionCheck( $user, $repo, $create );
+		$item = $this->prepareItemForPermissionCheck( $user, $mockRepository, $create );
 
 		$token = $user->getEditToken();
-		$edit = $this->makeEditEntity( $repo, $item, $user, false, $permissions );
+		$edit = $this->makeEditEntity( $mockRepository, $item, $user, false, $permissions );
 
 		$edit->attemptSave( "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), $token );
 
@@ -594,7 +594,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider dataAttemptSaveRateLimit
 	 */
 	public function testAttemptSaveRateLimit( $limits, $groups, $edits ) {
-		$repo = $this->makeMockRepo();
+		$mockRepository = $this->getMockRepository();
 
 		$this->setMwGlobals(
 			'wgRateLimits',
@@ -628,7 +628,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 			$item->setLabel( 'en', $label );
 
-			$edit = $this->makeEditEntity( $repo, $item, $user );
+			$edit = $this->makeEditEntity( $mockRepository, $item, $user );
 			$edit->attemptSave( "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), false );
 
 			$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
@@ -661,11 +661,11 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideIsTokenOk
 	 */
 	public function testIsTokenOk( $token, $shouldWork ) {
-		$repo = $this->makeMockRepo();
+		$mockRepository = $this->getMockRepository();
 		$user = self::getUser( "EditEntityTestUser" );
 
 		$item = Item::newEmpty();
-		$edit = $this->makeEditEntity( $repo, $item, $user );
+		$edit = $this->makeEditEntity( $mockRepository, $item, $user );
 
 		// check valid token --------------------
 		if ( $token === true ) {
@@ -701,7 +701,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideAttemptSaveWatch
 	 */
 	public function testAttemptSaveWatch( $watchdefault, $watchcreations, $new, $watched, $watch, $expected ) {
-		$repo = $this->makeMockRepo();
+		$mockRepository = $this->getMockRepository();
 
 		$user = self::getUser( "EditEntityTestUser2" );
 
@@ -716,16 +716,16 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$item->setLabel( "en", "Test" );
 
 		if ( !$new ) {
-			$repo->putEntity( $item ) ;
-			$repo->updateWatchlist( $user, $item->getId(), $watched );
+			$mockRepository->putEntity( $item ) ;
+			$mockRepository->updateWatchlist( $user, $item->getId(), $watched );
 		}
 
-		$edit = $this->makeEditEntity( $repo, $item, $user );
+		$edit = $this->makeEditEntity( $mockRepository, $item, $user );
 		$status = $edit->attemptSave( "testing", $new ? EDIT_NEW : EDIT_UPDATE, false, $watch );
 
 		$this->assertTrue( $status->isOK(), "edit failed: " . $status->getWikiText() ); // sanity
 
-		$this->assertEquals( $expected, $repo->isWatching( $user, $item->getId() ), "watched" );
+		$this->assertEquals( $expected, $mockRepository->isWatching( $user, $item->getId() ), "watched" );
 	}
 
 }
