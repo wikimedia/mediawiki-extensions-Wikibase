@@ -35,13 +35,13 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.dataTypes.tests' => $moduleBase + array(
+		'wikibase.dataTypeStore.tests' => $moduleBase + array(
 			'scripts' => array(
-				'wikibase.dataTypes/wikibase.dataTypes.tests.js',
+				'wikibase.dataTypes/wikibase.dataTypeStore.tests.js',
 			),
 			'dependencies' => array(
 				'dataTypes.DataTypeStore',
-				'wikibase.dataTypes',
+				'wikibase.dataTypeStore',
 			),
 		),
 

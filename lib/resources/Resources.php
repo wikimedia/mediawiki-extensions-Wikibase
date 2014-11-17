@@ -83,9 +83,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.dataTypes' => $moduleTemplate + array(
+		'wikibase.dataTypeStore' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.dataTypes/wikibase.dataTypes.js',
+				'wikibase.dataTypes/wikibase.dataTypeStore.js',
 			),
 			'dependencies' => array(
 				'dataTypes.DataType',

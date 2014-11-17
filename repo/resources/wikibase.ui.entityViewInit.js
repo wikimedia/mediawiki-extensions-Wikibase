@@ -342,7 +342,7 @@
 	jQuery,
 	mediaWiki,
 	wikibase,
-	wikibase.dataTypes,
+	wikibase.dataTypeStore,
 	wikibase.experts.getStore,
 	wikibase.formatters.getStore,
 	wikibase.parsers.getStore
