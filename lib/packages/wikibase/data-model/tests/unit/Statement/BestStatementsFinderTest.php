@@ -164,4 +164,13 @@ class BestStatementsFinderTest extends \PHPUnit_Framework_TestCase {
 		return $statement;
 	}
 
+	public function testGetBestStatementsForPropertyReturnsEmptyArrayWhenNoSuchProperty() {
+		$bestStatementFinder = new BestStatementsFinder( array() );
+
+		$this->assertSame(
+			array(),
+			$bestStatementFinder->getBestStatementsForProperty( new PropertyId( 'P1' ) )
+		);
+	}
+
 }
