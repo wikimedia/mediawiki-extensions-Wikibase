@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Test;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\SnakFormatter;
 
 /**
  * @covers Wikibase\Lib\OutputFormatSnakFormatterFactory
@@ -22,13 +23,13 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider constructorErrorsProvider
 	 */
-	public function testConstructorErrors( $builder, $error ) {
+	public function testConstructorErrors( array $builders, $error ) {
 		$this->setExpectedException( $error );
 
 		$typeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
-		new OutputFormatSnakFormatterFactory( $builder );
+		new OutputFormatSnakFormatterFactory( $builders );
 	}
 
 	public function constructorErrorsProvider() {
@@ -63,7 +64,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getSnakFormatterProvider
 	 */
-	public function testGetSnakFormatter( $builders, $format ) {
+	public function testGetSnakFormatter( array $builders, $format ) {
 		$factory = new OutputFormatSnakFormatterFactory( $builders );
 		$formatter = $factory->getSnakFormatter( $format, new FormatterOptions() );
 

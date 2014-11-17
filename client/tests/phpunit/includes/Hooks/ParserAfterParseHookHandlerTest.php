@@ -104,7 +104,7 @@ class ParserAfterParseHookHandlerTest extends MediaWikiTestCase {
 	 *
 	 * @return MockRepository
 	 */
-	private function getMockRepo( $links ) {
+	private function getMockRepo( array $links ) {
 		$repo = new MockRepository();
 
 		foreach ( $links as $itemKey => $itemLinks ) {

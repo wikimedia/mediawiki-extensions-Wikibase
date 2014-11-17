@@ -18,6 +18,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\SnakFactory;
 use Wikibase\Test\MockClientStore;
+use Wikibase\Test\MockRepository;
 
 /**
  * Helper class for Lua integration tests.
@@ -30,10 +31,10 @@ class WikibaseDataAccessTestItemSetUpHelper {
 	/**
 	 * @var MockRepository
 	 */
-	protected $mockRepository;
+	private $siteLinkLookup;
 
-	public function __construct( MockClientStore $mockClientStore ) {
-		$this->mockRepository = $mockClientStore->getEntityLookup();
+	public function __construct( MockClientStore $clientStore ) {
+		$this->siteLinkLookup = $clientStore->getSiteLinkLookup();
 	}
 
 	/**
@@ -45,7 +46,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 			'WikibaseClientDataAccessTest'
 		);
 
-		if ( $this->mockRepository->getEntityIdForSiteLink( $siteLink ) ) {
+		if ( $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink ) ) {
 			// Already set up for this MockRepository
 			return;
 		}
@@ -80,7 +81,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$statement1->addNewReference( $referenceSnak );
 
 		$stringProperty->getStatements()->addStatement( $statement1 );
-		$this->mockRepository->putEntity( $stringProperty );
+		$this->siteLinkLookup->putEntity( $stringProperty );
 
 		$stringSnak2 = $this->getTestSnak(
 			$stringProperty->getId(),
@@ -146,7 +147,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 			$item->setSiteLinkList( new SiteLinkList( $siteLinks ) );
 		}
 
-		$this->mockRepository->putEntity( $item );
+		$this->siteLinkLookup->putEntity( $item );
 
 		return $item;
 	}

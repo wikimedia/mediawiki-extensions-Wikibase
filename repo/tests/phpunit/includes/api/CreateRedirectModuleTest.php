@@ -38,34 +38,34 @@ class CreateRedirectModuleTest extends \MediaWikiTestCase {
 	/**
 	 * @var MockRepository|null
 	 */
-	private $repo = null;
+	private $mockRepository = null;
 
 	protected function setUp() {
 		parent::setUp();
 
-		$this->repo = new MockRepository();
+		$this->mockRepository = new MockRepository();
 
 		// empty item
 		$item = new Item( new ItemId( 'Q11' ) );
-		$this->repo->putEntity( $item );
+		$this->mockRepository->putEntity( $item );
 
 		// non-empty item
 		$item->setLabel( 'en', 'Foo' );
 		$item->setId( new ItemId( 'Q12' ) );
-		$this->repo->putEntity( $item );
+		$this->mockRepository->putEntity( $item );
 
 		// a property
 		$prop = Property::newFromType( 'string' );
 		$prop->setId( new PropertyId( 'P11' ) );
-		$this->repo->putEntity( $prop );
+		$this->mockRepository->putEntity( $prop );
 
 		// another property
 		$prop->setId( new PropertyId( 'P12' ) );
-		$this->repo->putEntity( $prop );
+		$this->mockRepository->putEntity( $prop );
 
 		// redirect
 		$redirect = new EntityRedirect( new ItemId( 'Q22' ), new ItemId( 'Q12' ) );
-		$this->repo->putRedirect( $redirect );
+		$this->mockRepository->putRedirect( $redirect );
 	}
 
 	private function getPermissionCheckers() {
@@ -115,8 +115,8 @@ class CreateRedirectModuleTest extends \MediaWikiTestCase {
 			$idParser,
 			$errorReporter,
 			new RedirectCreationInteractor(
-				$this->repo,
-				$this->repo,
+				$this->mockRepository,
+				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
 				$user

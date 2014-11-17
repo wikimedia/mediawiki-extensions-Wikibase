@@ -35,7 +35,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	/**
 	 * @var MockRepository|null
 	 */
-	private $repo = null;
+	private $mockRepository = null;
 
 	/**
 	 * @var User|null
@@ -52,7 +52,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$this->entityModificationTestHelper = new EntityModificationTestHelper();
 
-		$this->repo = $this->entityModificationTestHelper->getRepository();
+		$this->mockRepository = $this->entityModificationTestHelper->getMockRepository();
 
 		$this->entityModificationTestHelper->putEntities( array(
 			'Q1' => array(),
@@ -113,8 +113,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			new TokenCheckInteractor( $user ),
 			new ItemMergeInteractor(
 				$changeOpsFactory,
-				$this->repo,
-				$this->repo,
+				$this->mockRepository,
+				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
 				$user

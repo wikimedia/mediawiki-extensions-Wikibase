@@ -37,20 +37,20 @@ class EntityModificationTestHelper {
 	/**
 	 * @var MockRepository
 	 */
-	private $repository;
+	private $mockRepository;
 
 	public function __construct() {
 		$this->idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 		$this->serializer = WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer();
 		$this->deserializer = WikibaseRepo::getDefaultInstance()->getInternalEntityDeserializer();
-		$this->repository = new MockRepository();
+		$this->mockRepository = new MockRepository();
 	}
 
 	/**
 	 * @return MockRepository
 	 */
-	public function getRepository() {
-		return $this->repository;
+	public function getMockRepository() {
+		return $this->mockRepository;
 	}
 
 	/**
@@ -90,7 +90,7 @@ class EntityModificationTestHelper {
 				$redirect = new EntityRedirect( $from, $target );
 			}
 
-			$this->repository->putRedirect( $redirect );
+			$this->mockRepository->putRedirect( $redirect );
 		}
 	}
 
@@ -111,7 +111,7 @@ class EntityModificationTestHelper {
 			$entity->setId( $id );
 		}
 
-		$this->repository->putEntity( $entity );
+		$this->mockRepository->putEntity( $entity );
 	}
 
 	public function getEntity( $id ) {
@@ -119,7 +119,7 @@ class EntityModificationTestHelper {
 			$id = $this->idParser->parse( $id );
 		}
 
-		return $this->repository->getEntity( $id );
+		return $this->mockRepository->getEntity( $id );
 	}
 
 	/**
@@ -228,7 +228,7 @@ class EntityModificationTestHelper {
 			$regex = "!$r!";
 		}
 
-		$entry = $this->repository->getLogEntry( $revid );
+		$entry = $this->mockRepository->getLogEntry( $revid );
 		Assert::assertNotNull( $entry, "revision not found: $revid" );
 		Assert::assertRegExp( $regex, $entry['summary'] );
 	}
