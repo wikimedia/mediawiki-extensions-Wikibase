@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_6415b7e8",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-17T11:59:44Z",
+      "side": 1,
+      "message": "Not your fault, but: what?",
+      "revId": "2578ade3735683c662da8a7b6b92fa59f42782fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
