@@ -271,4 +271,16 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 		$list->setAliasesForLanguage( 'en', array( 'foo', null ) );
 	}
 
+	public function testToArray() {
+		$array = array(
+			'en' => new AliasGroup( 'en', array( 'foo' ) ),
+			'de' => new AliasGroup( 'de', array( 'bar' ) ),
+			'nl' => new AliasGroup( 'nl', array( 'baz' ) ),
+		);
+
+		$list = new AliasGroupList( $array );
+
+		$this->assertEquals( $array, $list->toArray() );
+	}
+
 }

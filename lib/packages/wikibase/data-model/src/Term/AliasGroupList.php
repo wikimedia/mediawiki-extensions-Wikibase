@@ -58,6 +58,17 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	}
 
 	/**
+	 * The array keys are the language codes of their associated AliasGroup.
+	 *
+	 * @since 2.3
+	 *
+	 * @return AliasGroup[]
+	 */
+	public function toArray() {
+		return $this->groups;
+	}
+
+	/**
 	 * @param string $languageCode
 	 *
 	 * @return AliasGroup
