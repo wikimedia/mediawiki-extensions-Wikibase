@@ -14,7 +14,6 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityFactory;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
@@ -44,11 +43,28 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	 * @param EntityId $entityId The Id of an entity to use for all entity lookups
 	 * @return WikibaseValueFormatterBuilders
 	 */
-	private function newWikibaseValueFormatterBuilders( EntityId $entityId ) {
+	private function newWikibaseValueFormatterBuilders() {
 		$termLookup = $this->getMock( 'Wikibase\Lib\Store\TermLookup' );
+
 		$termLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnValue( 'Label for ' . $entityId->getSerialization() ) );
+			->will( $this->returnCallback( function ( EntityId $entityId, $language ) {
+				switch ( $language ) {
+					case 'de':
+						return 'Name für ' . $entityId->getSerialization();
+					default:
+						return 'Label for ' . $entityId->getSerialization();
+				}
+			} ) );
+
+		$termLookup->expects( $this->any() )
+			->method( 'getLabels' )
+			->will( $this->returnCallback( function ( EntityId $entityId ) {
+				return array(
+					'de' => 'Name für ' . $entityId->getSerialization(),
+					'en' => 'Label for ' . $entityId->getSerialization(),
+				);
+			} ) );
 
 		return new WikibaseValueFormatterBuilders( $termLookup, Language::factory( 'en' ) );
 	}
@@ -62,13 +78,13 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider buildDispatchingValueFormatterProvider
 	 */
-	public function testBuildDispatchingValueFormatter( $format, $options, $snak, $expected, $dataTypeId = null ) {
-		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+	public function testBuildDispatchingValueFormatter( $format, $options, $value, $expected, $dataTypeId = null ) {
+		$builders = $this->newWikibaseValueFormatterBuilders();
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
 		$formatter = $builders->buildDispatchingValueFormatter( $factory, $format, $options );
 
-		$text = $formatter->formatValue( $snak, $dataTypeId );
+		$text = $formatter->formatValue( $value, $dataTypeId );
 		$this->assertRegExp( $expected, $text );
 	}
 
@@ -172,13 +188,61 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @dataProvider buildDispatchingValueFormatterProvider_LabelLookupOption
+	 */
+	public function testBuildDispatchingValueFormatter_LabelLookupOption( $options, ItemId $value, $expected ) {
+		$builders = $this->newWikibaseValueFormatterBuilders();
+
+		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
+		$formatter = $builders->buildDispatchingValueFormatter( $factory, SnakFormatter::FORMAT_HTML, $options );
+
+		$value = new EntityIdValue( $value );
+		$text = $formatter->formatValue( $value, 'wikibase-item' );
+		$this->assertRegExp( $expected, $text );
+	}
+
+	public function buildDispatchingValueFormatterProvider_LabelLookupOption() {
+		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( 'Custom LabelLookup' ) );
+
+		$fallbackFactory = new LanguageFallbackChainFactory();
+		$fallbackChain = $fallbackFactory->newFromLanguage( Language::factory( 'de-ch' ) );
+
+		return array(
+			'language option' => array(
+				new FormatterOptions( array(
+					ValueFormatter::OPT_LANG => 'de',
+				) ),
+				new ItemId( 'Q5' ),
+				'@>Name für Q5<@'
+			),
+			'fallback option' => array(
+				new FormatterOptions( array(
+					'languages' => $fallbackChain,
+				) ),
+				new ItemId( 'Q5' ),
+				'@>Name für Q5<@'
+			),
+			'LabelLookup option' => array(
+				new FormatterOptions( array(
+					'LabelLookup' => $labelLookup,
+				) ),
+				new ItemId( 'Q5' ),
+				'@>Custom LabelLookup<@'
+			),
+		);
+	}
+
 	public function testSetValueFormatter() {
 		$mockFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
 		$mockFormatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnValue( 'MOCK!' ) );
 
-		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders();
 		$builders->setValueFormatter( SnakFormatter::FORMAT_PLAIN, 'VT:string', $mockFormatter );
 		$builders->setValueFormatter( SnakFormatter::FORMAT_PLAIN, 'VT:time', null );
 
@@ -210,7 +274,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	}
 
 	public function testSetValueFormatterClass() {
-		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders();
 		$builders->setValueFormatterClass(
 			SnakFormatter::FORMAT_PLAIN,
 			'VT:wikibase-entityid',
@@ -258,7 +322,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 			return new EntityIdFormatter( $options );
 		};
 
-		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders();
 		$builders->setValueFormatterBuilder(
 			SnakFormatter::FORMAT_PLAIN,
 			'VT:wikibase-entityid',
@@ -300,7 +364,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetPlainTextFormatters() {
-		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders();
 		$options = new FormatterOptions();
 
 		// check for all the required types
@@ -327,7 +391,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetWikiTextFormatters() {
-		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders();
 		$options = new FormatterOptions();
 
 		// check for all the required types, that is, the ones supported by the fallback format
@@ -346,7 +410,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetHtmlFormatters() {
-		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders();
 		$options = new FormatterOptions();
 
 		// check for all the required types, that is, the ones supported by the fallback format
@@ -365,7 +429,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetWidgetFormatters() {
-		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders();
 		$options = $this->newFormatterOptions();
 
 		// check for all the required types, that is, the ones supported by the fallback format
@@ -384,7 +448,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetDiffFormatters() {
-		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders();
 		$options = $this->newFormatterOptions();
 
 		// check for all the required types, that is, the ones supported by the fallback format
@@ -427,7 +491,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	}
 
 	public function testMakeEscapingFormatters() {
-		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders();
 
 		$formatters = $builders->makeEscapingFormatters(
 			array( new StringFormatter( new FormatterOptions() ) ),
@@ -442,7 +506,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	 * @dataProvider applyLanguageDefaultsProvider
 	 */
 	public function testApplyLanguageDefaults( FormatterOptions $options, $expectedLanguage, $expectedFallback ) {
-		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders();
 
 		$builders->applyLanguageDefaults( $options );
 

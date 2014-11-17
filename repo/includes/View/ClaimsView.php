@@ -43,7 +43,7 @@ class ClaimsView {
 	private $languageCode;
 
 	/**
-	 * @param EnttiyTitleLookup $entityTitleLookup
+	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
 	 * @param ClaimHtmlGenerator $claimHtmlGenerator
 	 * @param string $languageCode

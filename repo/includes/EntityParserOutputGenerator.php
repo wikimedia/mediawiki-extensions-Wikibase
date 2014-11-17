@@ -10,10 +10,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\StatementListProvider;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
 use Wikibase\Repo\View\EntityViewFactory;
 
 /**
@@ -216,12 +216,12 @@ class EntityParserOutputGenerator {
 	private function getEntityInfo( array $entityIds ) {
 		wfProfileIn( __METHOD__ );
 
-		// @todo: apply language fallback!
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
 
 		$entityInfoBuilder->resolveRedirects();
 		$entityInfoBuilder->removeMissing();
 
+		// @todo: apply language fallback!
 		$entityInfoBuilder->collectTerms(
 			array( 'label', 'description' ),
 			array( $this->languageCode )
@@ -260,10 +260,17 @@ class EntityParserOutputGenerator {
 		array $entityInfo,
 		$editable
 	) {
+
+		$labelLookup = new LanguageFallbackLabelLookup(
+			new EntityInfoTermLookup( $entityInfo ),
+			$this->languageFallbackChain
+		);
+
 		$entityView = $this->entityViewFactory->newEntityView(
-			$this->languageFallbackChain,
+			$entityRevision->getEntity()->getType(),
 			$this->languageCode,
-			$entityRevision->getEntity()->getType()
+			$this->languageFallbackChain,
+			$labelLookup
 		);
 
 		$html = $entityView->getHtml( $entityRevision, $entityInfo, $editable );
