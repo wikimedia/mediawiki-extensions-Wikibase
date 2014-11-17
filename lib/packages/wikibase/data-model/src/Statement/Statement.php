@@ -78,6 +78,7 @@ class Statement extends Claim {
 	 * @since 2.0
 	 *
 	 * @param Snak $snak
+	 * @param Snak [$snak2, ...]
 	 *
 	 * @throws InvalidArgumentException
 	 */
