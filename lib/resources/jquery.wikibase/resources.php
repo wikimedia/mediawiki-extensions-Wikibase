@@ -406,18 +406,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.siteselector' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.wikibase.siteselector.js',
-			),
-			'dependencies' => array(
-				'jquery.event.special.eachchange',
-				'jquery.ui.ooMenu',
-				'jquery.ui.suggester',
-				'util.highlightSubstring',
-			),
-		),
-
 		'jquery.wikibase.snaklistview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase.snaklistview.js',
@@ -464,23 +452,6 @@ return call_user_func( function() {
 				'wikibase-statementview-referencesheading-pendingcountersubject',
 				'wikibase-statementview-referencesheading-pendingcountertooltip',
 				'wikibase-addreference',
-			),
-		),
-
-		'jquery.wikibase.wbtooltip' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.wikibase.wbtooltip.js',
-			),
-			'styles' => array(
-				'themes/default/jquery.wikibase.wbtooltip.css'
-			),
-			'dependencies' => array(
-				'jquery.tipsy',
-				'jquery.ui.toggler',
-				'jquery.ui.widget',
-			),
-			'messages' => array(
-				'wikibase-tooltip-error-details',
 			),
 		),
 
