@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataAccess\PropertyParserFunction\VariantsAwareRenderer;

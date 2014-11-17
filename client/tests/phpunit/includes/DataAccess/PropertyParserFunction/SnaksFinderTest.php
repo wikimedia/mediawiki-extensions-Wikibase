@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
+namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
 use DataValues\StringValue;
 use Wikibase\DataAccess\PropertyParserFunction\SnaksFinder;
