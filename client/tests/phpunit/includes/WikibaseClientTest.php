@@ -157,15 +157,17 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Client\Hooks\LanguageLinkBadgeDisplay', $returnValue );
 	}
 
-	public function testGetOtherProjectsSidebarGeneratorReturnType() {
+	public function testGetOtherProjectsSidebarGeneratorFactoryReturnType() {
 		$settings = $this->getDefaultInstance()->getSettings();
 
 		$otherProjectsLinks = $settings->getSetting( 'otherProjectsLinks' );
 
 		$settings->setSetting( 'otherProjectsLinks', array( 'my_wiki' ) );
 
-		$returnValue = $this->getDefaultInstance()->getOtherProjectsSidebarGenerator();
-		$this->assertInstanceOf( 'Wikibase\Client\Hooks\OtherProjectsSidebarGenerator', $returnValue );
+		$this->assertInstanceOf(
+			'Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory',
+			$this->getDefaultInstance()->getOtherProjectsSidebarGeneratorFactory()
+		);
 
 		$settings->setSetting( 'otherProjectsLinks', $otherProjectsLinks );
 	}
