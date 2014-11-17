@@ -87,9 +87,9 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 		$enGroup = new AliasGroup( 'en', array( 'foo' ) );
 
 		$list = new AliasGroupList( array(
-			new AliasGroup( 'de', array() ),
+			new AliasGroup( 'de' ),
 			$enGroup,
-			new AliasGroup( 'nl', array() ),
+			new AliasGroup( 'nl' ),
 		) );
 
 		$this->assertEquals( $enGroup, $list->getByLanguage( 'en' ) );
@@ -153,14 +153,14 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 		$enGroup = new AliasGroup( 'en', array( 'foo' ) );
 
 		$list = new AliasGroupList( array(
-			new AliasGroup( 'de', array() ),
+			new AliasGroup( 'de' ),
 			$enGroup,
-			new AliasGroup( 'en', array() ),
-			new AliasGroup( 'nl', array() ),
+			new AliasGroup( 'en' ),
+			new AliasGroup( 'nl' ),
 		) );
 
 		$expectedList = new AliasGroupList( array(
-			new AliasGroup( 'en', array() ),
+			new AliasGroup( 'en' ),
 		) );
 
 		$this->assertEquals( $expectedList, $list );
@@ -173,8 +173,8 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 
 		$expectedList = new AliasGroupList( array() );
 
-		$list->setGroup( new AliasGroup( 'en', array() ) );
-		$list->setGroup( new AliasGroup( 'de', array() ) );
+		$list->setGroup( new AliasGroup( 'en' ) );
+		$list->setGroup( new AliasGroup( 'de' ) );
 
 		$this->assertEquals( $expectedList, $list );
 	}

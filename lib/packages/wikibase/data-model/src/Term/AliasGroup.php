@@ -27,7 +27,7 @@ class AliasGroup implements Comparable, Countable {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $languageCode, array $aliases ) {
+	public function __construct( $languageCode, array $aliases = array() ) {
 		$this->setLanguageCode( $languageCode );
 		$this->setAliases( $aliases );
 	}
