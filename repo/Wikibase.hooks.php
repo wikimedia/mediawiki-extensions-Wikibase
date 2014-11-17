@@ -687,8 +687,8 @@ final class RepoHooks {
 	 * @return EntityId|null
 	 */
 	private static function getEntityIdFromOutputPage( OutputPage $out ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
+		$repo = WikibaseRepo::getDefaultInstance();
+		$entityContentFactory = $repo->getEntityContentFactory();
 
 		if ( !$entityContentFactory->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
 			return null;
@@ -700,7 +700,7 @@ final class RepoHooks {
 			$idString = $jsConfigVars['wbEntityId'];
 
 			try {
-				return $wikibaseRepo->getEntityIdParser()->parse( $idString );
+				return $repo->getEntityIdParser()->parse( $idString );
 			} catch ( EntityIdParsingException $ex ) {
 				wfLogWarning( 'Failed to parse EntityId config var: ' . $idString );
 			}

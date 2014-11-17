@@ -278,14 +278,14 @@ class SqlStore implements Store {
 		);
 
 		$table = new PropertyInfoTable( false );
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$repo = WikibaseRepo::getDefaultInstance();
 
-		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
-		$useRedirectTargetColumn = $wikibaseRepo->getSettings()->getSetting( 'useRedirectTargetColumn' );
+		$contentCodec = $repo->getEntityContentDataCodec();
+		$useRedirectTargetColumn = $repo->getSettings()->getSetting( 'useRedirectTargetColumn' );
 
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
-			$wikibaseRepo->getEntityIdParser(),
+			$repo->getEntityIdParser(),
 			false
 		);
 

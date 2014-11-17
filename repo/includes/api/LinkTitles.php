@@ -43,14 +43,14 @@ class LinkTitles extends ApiWikibase {
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$repo = WikibaseRepo::getDefaultInstance();
 
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
+			$repo->getSiteStore(),
+			$repo->getSettings()->getSetting( 'specialSiteLinkGroups' )
 		);
 
-		$this->siteLinkGroups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
+		$this->siteLinkGroups = $repo->getSettings()->getSetting( 'siteLinkGroups' );
 	}
 
 	/**

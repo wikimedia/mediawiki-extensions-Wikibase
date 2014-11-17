@@ -104,15 +104,15 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	 * @return MockRepository
 	 */
 	private function getMockRepository( $siteLinksPerItem ) {
-		$repo = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		foreach ( $siteLinksPerItem as $idString => $siteLinks ) {
 			$itemId = new ItemId( $idString );
 			$item = $this->newItem( $itemId, $siteLinks );
-			$repo->putEntity( $item );
+			$mockRepository->putEntity( $item );
 		}
 
-		return $repo;
+		return $mockRepository;
 	}
 
 	/**
@@ -200,11 +200,11 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
 		$siteStore = $this->getSiteStore();
 
-		$mockRepo = $this->getMockRepository( $siteLinksPerItem );
-		$mockRepo->putEntity( $this->getBadgeItem() );
+		$mockRepository = $this->getMockRepository( $siteLinksPerItem );
+		$mockRepository->putEntity( $this->getBadgeItem() );
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$mockRepo,
+			$mockRepository,
 			array( 'Q17' => 'featured' ),
 			$en
 		);

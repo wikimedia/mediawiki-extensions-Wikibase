@@ -81,19 +81,19 @@ abstract class ModifyEntity extends ApiWikibase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$repo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		//TODO: provide a mechanism to override the services
-		$this->stringNormalizer = $repo->getStringNormalizer();
+		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
 
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$repo->getSiteStore(),
-			$repo->getSettings()->getSetting( 'specialSiteLinkGroups' )
+			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
 		);
 
-		$this->siteLinkGroups = $repo->getSettings()->getSetting( 'siteLinkGroups' );
-		$this->siteLinkLookup = $repo->getStore()->newSiteLinkCache();
-		$this->badgeItems = $repo->getSettings()->getSetting( 'badgeItems' );
+		$this->siteLinkGroups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
+		$this->siteLinkLookup = $wikibaseRepo->getStore()->newSiteLinkCache();
+		$this->badgeItems = $wikibaseRepo->getSettings()->getSetting( 'badgeItems' );
 	}
 
 	/**

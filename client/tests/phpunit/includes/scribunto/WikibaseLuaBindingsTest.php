@@ -103,11 +103,11 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->getItem();
 		$itemId = $item->getId();
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $item );
 
 		$usages = new HashUsageAccumulator();
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( $entityLookup, $usages );
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( $mockRepository, $usages );
 
 		$wikibaseLuaBindings->getEntity( $itemId->getSerialization() );
 		$this->assertTrue( $this->hasUsage( $usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE ), 'all usage' );
@@ -116,15 +116,15 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	public function getEntityProvider() {
 		$item = $this->getItem();
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $item );
 
 		$item2 = $item->newEmpty();
 		$item2->setId( new ItemId( 'Q9999' ) );
 
 		return array(
-			array( array( 'id', 'type', 'descriptions', 'labels', 'sitelinks', 'schemaVersion' ), $item, $entityLookup ),
-			array( array(), $item2, $entityLookup )
+			array( array( 'id', 'type', 'descriptions', 'labels', 'sitelinks', 'schemaVersion' ), $item, $mockRepository ),
+			array( array(), $item2, $mockRepository )
 		);
 	}
 
@@ -195,21 +195,21 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	public function testGetSiteLinkPageName( $expected, $itemId ) {
 		$item = $this->getItem();
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $item );
 
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( $entityLookup );
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( $mockRepository );
 		$this->assertSame( $expected, $wikibaseLuaBindings->getSiteLinkPageName( $itemId ) );
 	}
 
 	public function testGetSiteLinkPageName_usage() {
 		$item = $this->getItem();
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $item );
 
 		$usages = new HashUsageAccumulator();
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( $entityLookup, $usages );
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( $mockRepository, $usages );
 
 		$itemId = $item->getId();
 		$wikibaseLuaBindings->getSiteLinkPageName( $itemId->getSerialization() );

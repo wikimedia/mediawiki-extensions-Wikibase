@@ -32,7 +32,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 
 	public function __construct() {
 		$clientStore = new MockClientStore();
-		$this->mockRepository = $clientStore->getEntityLookup();
+		$this->mockRepository = $clientStore->getSiteLinkLookup();
 	}
 
 	/**

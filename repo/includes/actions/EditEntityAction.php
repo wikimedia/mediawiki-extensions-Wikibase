@@ -58,15 +58,15 @@ abstract class EditEntityAction extends ViewEntityAction {
 			ValueFormatter::OPT_LANG => $languageCode
 		) );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$repo = WikibaseRepo::getDefaultInstance();
 
-		$termLookup = new EntityRetrievingTermLookup( $wikibaseRepo->getEntityLookup() );
+		$termLookup = new EntityRetrievingTermLookup( $repo->getEntityLookup() );
 		$labelLookup = new LanguageLabelLookup( $termLookup, $languageCode );
 		$labelFormatter = new EntityIdLabelFormatter( $options, $labelLookup );
 
 		$propertyIdFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
 
-		$formatterFactory = $wikibaseRepo->getSnakFormatterFactory();
+		$formatterFactory = $repo->getSnakFormatterFactory();
 		$snakDetailsFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
 		$snakBreadCrumbFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
 
@@ -79,9 +79,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 				$snakBreadCrumbFormatter,
 				$languageCode
 			),
-			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->getEntityRevisionLookup()
+			$repo->getSiteStore(),
+			$repo->getEntityTitleLookup(),
+			$repo->getEntityRevisionLookup()
 		);
 	}
 

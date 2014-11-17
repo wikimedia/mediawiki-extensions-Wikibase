@@ -536,7 +536,7 @@ final class WikibaseClient {
 				$this->getLanguageLinkBadgeDisplay(),
 				$this->settings->getSetting( 'siteGlobalID' ),
 				$this->getNamespaceChecker(),
-				$this->getStore()->getSiteLinkTable(),
+				$this->getStore()->getSiteLinkLookup(),
 				$this->getStore()->getEntityLookup(),
 				$this->getSiteStore()->getSites(),
 				$this->getLangLinkSiteGroup()
@@ -645,7 +645,7 @@ final class WikibaseClient {
 	public function getOtherProjectsSidebarGeneratorFactory() {
 		return new OtherProjectsSidebarGeneratorFactory(
 			$this->settings,
-			$this->getStore()->getSiteLinkTable(),
+			$this->getStore()->getSiteLinkLookup(),
 			$this->getSiteStore()
 		);
 	}
@@ -704,7 +704,7 @@ final class WikibaseClient {
 	public function getPropertyParserFunctionRunner() {
 		return new Runner(
 			$this->getPropertyClaimsRendererFactory(),
-			$this->getStore()->getSiteLinkTable(),
+			$this->getStore()->getSiteLinkLookup(),
 			$this->settings->getSetting( 'siteGlobalID' )
 		);
 	}

@@ -68,7 +68,6 @@ class MergeItems extends ApiBase {
 				$this->getUser()
 			)
 		);
-
 	}
 
 	public function setServices(

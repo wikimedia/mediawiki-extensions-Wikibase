@@ -71,15 +71,15 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 */
 	public function __construct( $title, $restriction ) {
 		parent::__construct( $title, $restriction );
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$repo = WikibaseRepo::getDefaultInstance();
 
 		$this->setServices(
-			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->getEntityStore(),
-			$wikibaseRepo->getEntityPermissionChecker(),
-			$wikibaseRepo->getSiteStore()
+			$repo->getSummaryFormatter(),
+			$repo->getEntityRevisionLookup( 'uncached' ),
+			$repo->getEntityTitleLookup(),
+			$repo->getEntityStore(),
+			$repo->getEntityPermissionChecker(),
+			$repo->getSiteStore()
 		);
 	}
 
