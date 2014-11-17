@@ -122,4 +122,5 @@ class UpdateRepoOnMoveTest extends \MediaWikiTestCase {
 
 		$updateRepo->injectJob( $jobQueueGroupMock );
 	}
+
 }

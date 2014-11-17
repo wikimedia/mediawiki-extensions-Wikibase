@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests;
 
 use MediaWikiSite;
 use ParserOutput;
@@ -15,6 +15,8 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
+use Wikibase\Test\MockRepository;
+use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\LangLinkHandler
@@ -28,10 +30,14 @@ use Wikibase\NoLangLinkHandler;
  */
 class LangLinkHandlerTest extends \MediaWikiTestCase {
 
-	/* @var MockRepository $mockRepo */
+	/**
+	 * @var MockRepository $mockRepo
+	 */
 	private $mockRepo;
 
-	/* @var LangLinkHandler $langLinkHandler */
+	/**
+	 * @var LangLinkHandler $langLinkHandler
+	 */
 	private $langLinkHandler;
 
 	private function getItems() {
