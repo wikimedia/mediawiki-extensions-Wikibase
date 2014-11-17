@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_0239433d",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2014-11-17T17:50:12Z",
+      "side": 1,
+      "message": "\u0027pt\u0027 as a prefix conflicts with list\u003dprotectedtitles in core. How about \u0027wbpt\u0027?",
+      "revId": "92d7decb2f16b9bf97686d75bd421095b9a6b7d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_827a33e5",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2014-11-17T17:50:12Z",
+      "side": 1,
+      "message": "Isn\u0027t it possible for Wikibase to have data for a page that doesn\u0027t exist on the local wiki?",
+      "revId": "92d7decb2f16b9bf97686d75bd421095b9a6b7d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_c2da7bec",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2014-11-17T17:50:12Z",
+      "side": 1,
+      "message": "Then you should ksort it. ApiPageSet::getGoodTitles() doesn\u0027t guarantee an order. Although in your code below, the only part that actually needs sorting is your \u0027for\u0027 loop in addTermsToResult().\n\nNote you could as easily use Title::compare() to order the titles and have your continue parameter be $title-\u003egetNamespace() . \u0027|\u0027 . $title-\u003egetDBkey(). Or you could order by anything else as long as any title that actually produces data has a strict ordering.",
+      "revId": "92d7decb2f16b9bf97686d75bd421095b9a6b7d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_42c74b16",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2014-11-17T17:50:12Z",
+      "side": 1,
+      "message": "You should validate the continue parameter. Something like this should do:\n\n $continue \u003d 0;\n if ( $params[\u0027continue\u0027] !\u003d\u003d null ) {\n     $continue \u003d (int)$params[\u0027continue\u0027];\n     $this-\u003edieContinueUsageIf( $params[\u0027continue\u0027] !\u003d\u003d (string)$continue );\n }\n\n $pagesToEntityIds \u003d $this-\u003egetEntityIdsForTitles( $titles, $continue );",
+      "revId": "92d7decb2f16b9bf97686d75bd421095b9a6b7d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_626b6716",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2014-11-17T17:50:12Z",
+      "side": 1,
+      "message": "\"Crashes hard\" as in an uncaught exception or a PHP fatal? That needs fixing before a merge.",
+      "revId": "92d7decb2f16b9bf97686d75bd421095b9a6b7d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_c27efbac",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2014-11-17T17:50:12Z",
+      "side": 1,
+      "message": "It seems like you\u0027ll need a call to $result-\u003esetIndexedTagName() on $terms somewhere in here, or things will break with format\u003dxml.",
+      "revId": "92d7decb2f16b9bf97686d75bd421095b9a6b7d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
