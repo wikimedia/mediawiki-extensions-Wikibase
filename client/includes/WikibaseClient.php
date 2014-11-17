@@ -19,7 +19,7 @@ use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
@@ -525,7 +525,7 @@ final class WikibaseClient {
 	public function getLangLinkHandler() {
 		if ( !$this->langLinkHandler ) {
 			$this->langLinkHandler = new LangLinkHandler(
-				$this->getOtherProjectsSidebarGenerator(),
+				$this->getOtherProjectsSidebarGeneratorFactory(),
 				$this->getLanguageLinkBadgeDisplay(),
 				$this->settings->getSetting( 'siteGlobalID' ),
 				$this->getNamespaceChecker(),
@@ -633,14 +633,13 @@ final class WikibaseClient {
 	/**
 	 * @since 0.5
 	 *
-	 * @return OtherProjectsSidebarGenerator
+	 * @return OtherProjectsSidebarGeneratorFactory
 	 */
-	public function getOtherProjectsSidebarGenerator() {
-		return new OtherProjectsSidebarGenerator(
-			$this->settings->getSetting( 'siteGlobalID' ),
+	public function getOtherProjectsSidebarGeneratorFactory() {
+		return new OtherProjectsSidebarGeneratorFactory(
+			$this->settings,
 			$this->getStore()->getSiteLinkTable(),
-			$this->getSiteStore()->getSites(),
-			$this->settings->getSetting( 'otherProjectsLinks' )
+			$this->getSiteStore()
 		);
 	}
 

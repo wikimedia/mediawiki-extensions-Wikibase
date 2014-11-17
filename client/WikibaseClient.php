@@ -92,7 +92,7 @@ call_user_func( function() {
 	$wgHooks['OldChangesListRecentChangesLine'][]		= '\Wikibase\ClientHooks::onOldChangesListRecentChangesLine';
 	$wgHooks['OutputPageParserOutput'][]		= '\Wikibase\Client\Hooks\SidebarHookHandlers::onOutputPageParserOutput';
 	$wgHooks['SkinTemplateGetLanguageLink'][]		= '\Wikibase\Client\Hooks\SidebarHookHandlers::onSkinTemplateGetLanguageLink';
-	$wgHooks['ParserAfterParse'][]				= '\Wikibase\Client\Hooks\SidebarHookHandlers::onParserAfterParse';
+	$wgHooks['ParserAfterParse'][]				= '\Wikibase\Client\Hooks\ParserAfterParseHookHandler::onParserAfterParse';
 	$wgHooks['SidebarBeforeOutput'][] = '\Wikibase\Client\Hooks\SidebarHookHandlers::onSidebarBeforeOutput';
 	$wgHooks['ParserAfterParse'][]				= '\Wikibase\Client\Hooks\DataUpdateHookHandlers::onParserAfterParse';
 	$wgHooks['ParserFirstCallInit'][]			= '\Wikibase\ClientHooks::onParserFirstCallInit';
