@@ -1,8 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
-
-use Wikibase\Client\Scribunto\Test\Scribunto_LuaWikibaseLibraryTestCase;
+namespace Wikibase\Client\Tests\Scribunto;
 
 /**
  * Verifies that arbitrary data access doesn't work, if it's disabled.
