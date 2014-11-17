@@ -39,7 +39,7 @@ class TermBoxViewTest extends \PHPUnit_Framework_TestCase {
 
 		$languages = array( 'de', 'ru' );
 
-		$html = $view->renderTermBox( $title, $entity, $languages );
+		$html = $view->renderTermBox( $title, $entity->getFingerprint(), $languages );
 
 		$this->assertNotRegExp( '/Moskow/', $html, 'unexpected English label, should not be there' );
 

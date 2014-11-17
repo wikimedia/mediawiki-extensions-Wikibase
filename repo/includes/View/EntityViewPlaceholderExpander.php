@@ -241,7 +241,7 @@ class EntityViewPlaceholderExpander {
 		}
 
 		$termBoxView = new TermBoxView( $this->uiLanguage );
-		$html = $termBoxView->renderTermBox( $this->targetPage, $entity, $languages );
+		$html = $termBoxView->renderTermBox( $this->targetPage, $entity->getFingerprint(), $languages );
 
 		return $html;
 	}
