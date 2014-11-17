@@ -273,11 +273,11 @@ div .wb-snak-value span.error.wb-format-error {
 	width: 100%;
 }
 
-.wb-claimlistview > .wikibase-addtoolbar-wrapper {
+.wb-claimlistview > .wikibase-toolbar-wrapper {
 	border-top: 1px dashed #AAA;
 }
 
-.wb-claimlistview.wb-new > .wikibase-addtoolbar-wrapper {
+.wb-claimlistview.wb-new > .wikibase-toolbar-wrapper {
 	border-top: 0;
 }
 
