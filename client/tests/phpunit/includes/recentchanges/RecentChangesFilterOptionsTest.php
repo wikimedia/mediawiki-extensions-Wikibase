@@ -1,5 +1,6 @@
 <?php
-namespace Wikibase\Test;
+
+namespace Wikibase\Client\Tests\RecentChanges;
 
 use FormOptions;
 use User;
@@ -88,4 +89,5 @@ class RecentChangesFilterOptionsTest extends \MediaWikiTestCase {
 			),
 		);
 	}
+
 }
