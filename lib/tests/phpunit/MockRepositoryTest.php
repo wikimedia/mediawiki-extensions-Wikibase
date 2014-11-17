@@ -24,11 +24,14 @@ use Wikibase\Lib\Store\EntityRedirect;
  */
 class MockRepositoryTest extends \MediaWikiTestCase {
 
-	/* @var MockRepository */
-	protected $repo;
+	/**
+	 * @var MockRepository|null
+	 */
+	private $repo = null;
 
 	protected function setUp() {
 		parent::setUp();
+
 		$this->repo = new MockRepository();
 	}
 

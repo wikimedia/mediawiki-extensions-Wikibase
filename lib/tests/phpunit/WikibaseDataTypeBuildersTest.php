@@ -41,13 +41,13 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 		$p8 = Property::newFromType( 'string' );
 		$p8->setId( new PropertyId( 'P8' ) );
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $q8 );
-		$entityLookup->putEntity( $p8 );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $q8 );
+		$mockRepository->putEntity( $p8 );
 
 		$urlSchemes = array( 'http', 'https', 'ftp', 'mailto' );
 
-		$builders = new WikibaseDataTypeBuilders( $entityLookup, $entityIdParser, $urlSchemes );
+		$builders = new WikibaseDataTypeBuilders( $mockRepository, $entityIdParser, $urlSchemes );
 		$dataTypeFactory = new DataTypeFactory( $builders->getDataTypeBuilders() );
 
 		return $dataTypeFactory;
