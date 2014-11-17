@@ -38,7 +38,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 		$mockInfoStore = new MockPropertyInfoStore();
 
 		$mockRepo = new MockRepository();
-		$mockDataTypeLookup = new EntityRetrievingDataTypeLookup( $mockRepo );
+		$propertyDataTypeLookup = new EntityRetrievingDataTypeLookup( $mockRepo );
 
 		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
 			$id = new PropertyId( $propertyId );
@@ -65,7 +65,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 			// try with via fallback
 			$argLists[] = array(
 				$emptyInfoStore,
-				$mockDataTypeLookup,
+				$propertyDataTypeLookup,
 				$id,
 				$dataTypeId
 			);
@@ -85,7 +85,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 		// try with via fallback
 		$argLists[] = array(
 			$emptyInfoStore,
-			$mockDataTypeLookup,
+			$propertyDataTypeLookup,
 			$id,
 			false
 		);

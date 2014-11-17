@@ -71,4 +71,5 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			)
 		);
 	}
+
 }

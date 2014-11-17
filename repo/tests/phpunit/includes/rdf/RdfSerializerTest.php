@@ -100,8 +100,6 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 
 	protected static function newRdfSerializer( $formatName ) {
 		$format = RdfSerializer::getFormat( $formatName );
-
-
 		$mockRepo = new MockRepository();
 
 		foreach( self::getTestEntities() as $entity ) {

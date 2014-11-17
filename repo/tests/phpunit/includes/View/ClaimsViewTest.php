@@ -56,8 +56,13 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		$this->assertContains( $link, $html );
 	}
 
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return Claim[]
+	 */
 	private function makeClaims( PropertyId $propertyId ) {
-		$claims = array(
+		return array(
 			$this->makeClaim( new PropertyNoValueSnak(
 				$propertyId
 			) ),
@@ -81,10 +86,14 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 				new EntityIdValue( new ItemId( 'Q555' ) )
 			) ),
 		);
-
-		return $claims;
 	}
 
+	/**
+	 * @param Snak $mainSnak
+	 * @param string|null $guid
+	 *
+	 * @return Claim
+	 */
 	private function makeClaim( Snak $mainSnak, $guid = null ) {
 		static $guidCounter = 0;
 
@@ -108,21 +117,21 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		return new ClaimsView(
 			$propertyIdFormatter,
 			new SectionEditLinkGenerator(),
-			$this->getClaimHtmlGeneratorMock()
+			$this->getClaimHtmlGenerator()
 		);
 	}
 
 	/**
 	 * @return ClaimHtmlGenerator
 	 */
-	private function getClaimHtmlGeneratorMock() {
+	private function getClaimHtmlGenerator() {
 		$claimHtmlGenerator = $this->getMockBuilder( 'Wikibase\Repo\View\ClaimHtmlGenerator' )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$claimHtmlGenerator->expects( $this->any() )
 			->method( 'getHtmlForClaim' )
-			->will( $this->returnCallback( function( Claim $claim, $htmlForEditSection ) {
+			->will( $this->returnCallback( function( Claim $claim, $editSectionHtml = null ) {
 				return $claim->getGuid();
 			} ) );
 

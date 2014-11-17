@@ -34,10 +34,10 @@ class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 		$property->setId( $propertyId );
 		$property->setLabel( 'en', 'a kitten!' );
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $property );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $property );
 
-		return $entityLookup;
+		return $mockRepository;
 	}
 
 	/**

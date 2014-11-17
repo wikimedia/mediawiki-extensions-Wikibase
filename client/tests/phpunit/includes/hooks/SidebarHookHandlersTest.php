@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Test\Hooks;
 
-use FauxRequest;
 use IContextSource;
 use Language;
 use MediaWikiSite;
@@ -14,6 +13,7 @@ use SiteStore;
 use Skin;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
 use Wikibase\Client\WikibaseClient;
@@ -104,15 +104,15 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	 * @return MockRepository
 	 */
 	private function getMockRepository( $siteLinksPerItem ) {
-		$repo = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		foreach ( $siteLinksPerItem as $idString => $siteLinks ) {
 			$itemId = new ItemId( $idString );
 			$item = $this->newItem( $itemId, $siteLinks );
-			$repo->putEntity( $item );
+			$mockRepository->putEntity( $item );
 		}
 
-		return $repo;
+		return $mockRepository;
 	}
 
 	/**
