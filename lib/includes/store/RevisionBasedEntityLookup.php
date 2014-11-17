@@ -51,8 +51,7 @@ class RevisionBasedEntityLookup implements EntityLookup {
 	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId ) {
-		$latest = $this->lookup->getLatestRevisionId( $entityId );
-		return $latest !== false;
+		return $this->lookup->getLatestRevisionId( $entityId ) !== false;
 
 	}
 
