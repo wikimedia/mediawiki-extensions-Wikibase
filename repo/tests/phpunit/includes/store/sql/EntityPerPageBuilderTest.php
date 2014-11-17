@@ -30,17 +30,17 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @var EntityPerPage
 	 */
-	protected $entityPerPageTable;
+	private $entityPerPageTable;
 
 	/**
 	 * @var array[]
 	 */
-	protected $entityPerPageRows;
+	private $entityPerPageRows;
 
 	/**
 	 * @var WikibaseRepo
 	 */
-	protected $wikibaseRepo;
+	private $wikibaseRepo;
 
 	protected function setUp() {
 		parent::setUp();

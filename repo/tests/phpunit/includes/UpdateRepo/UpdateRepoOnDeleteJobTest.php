@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use Status;
 use Title;
 use User;
-use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;
@@ -109,14 +109,14 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 		$item = Item::newEmpty();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Delete me', array( new ItemId( 'Q42' ) ) );
 
-		$store = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		$user = User::newFromName( 'UpdateRepo' );
 
 		// Needed as UpdateRepoOnDeleteJob instantiates a User object
 		$user->addToDatabase();
 
-		$store->saveEntity( $item, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
+		$mockRepository->saveEntity( $item, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
 
 		$params = array(
 			'siteId' => 'enwiki',
@@ -128,8 +128,8 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 		$job = new UpdateRepoOnDeleteJob( Title::newMainPage(), $params );
 		$job->initServices(
 			$this->getEntityTitleLookup( $item->getId() ),
-			$store,
-			$store,
+			$mockRepository,
+			$mockRepository,
 			$this->getSummaryFormatter(),
 			$this->getEntityPermissionChecker(),
 			$this->getSiteStore( $titleExists )
@@ -137,7 +137,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 
 		$job->run();
 
-		$item = $store->getEntity( $item->getId() );
+		$item = $mockRepository->getEntity( $item->getId() );
 
 		$this->assertSame(
 			!$expected,
@@ -145,4 +145,5 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 			'Sitelink has been removed.'
 		);
 	}
+
 }

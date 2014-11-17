@@ -14,17 +14,23 @@ use Wikibase\PropertyLabelResolver;
  */
 class MockPropertyLabelResolver implements PropertyLabelResolver {
 
-	protected $repo;
-
-	protected $lang;
+	/**
+	 * @var string
+	 */
+	private $languageCode;
 
 	/**
-	 * @param string  $lang
-	 * @param MockRepository $repo
+	 * @var MockRepository
 	 */
-	public function __construct( $lang, MockRepository $repo ) {
-		$this->lang = $lang;
-		$this->repo = $repo;
+	private $mockRepository;
+
+	/**
+	 * @param string  $languageCode
+	 * @param MockRepository $mockRepository
+	 */
+	public function __construct( $languageCode, MockRepository $mockRepository ) {
+		$this->languageCode = $languageCode;
+		$this->mockRepository = $mockRepository;
 	}
 
 	/**
@@ -37,7 +43,7 @@ class MockPropertyLabelResolver implements PropertyLabelResolver {
 		$ids = array();
 
 		foreach ( $labels as $label ) {
-			$prop = $this->repo->getPropertyByLabel( $label, $this->lang );
+			$prop = $this->mockRepository->getPropertyByLabel( $label, $this->languageCode );
 
 			if ( $prop !== null ) {
 				$ids[$label] = $prop->getId();
