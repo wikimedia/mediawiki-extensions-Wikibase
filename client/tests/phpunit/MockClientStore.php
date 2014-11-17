@@ -18,6 +18,16 @@ use Wikibase\PropertyInfoStore;
  */
 class MockClientStore implements ClientStore {
 
+	/**
+	 * @var MockRepository|null
+	 */
+	private $mockRepository = null;
+
+	/**
+	 * @var PropertyInfoStore|null
+	 */
+	private $propertyInfoStore = null;
+
 	public function getUsageLookup() {
 		return new NullUsageTracker();
 	}
@@ -29,51 +39,60 @@ class MockClientStore implements ClientStore {
 	public function getSubscriptionManager() {
 		return new SubscriptionManager();
 	}
-	public function getPropertyLabelResolver() {}
-	public function getTermIndex() {}
-	public function newChangesTable() {}
-	public function clear() {}
-	public function rebuild() {}
 
-	private function getMock() {
-		static $mockRepo = false;
-		if ( !$mockRepo ) {
-			$mockRepo = new MockRepository();
+	public function getPropertyLabelResolver() {
+	}
+
+	public function getTermIndex() {
+	}
+
+	public function newChangesTable() {
+	}
+
+	public function clear() {
+	}
+
+	public function rebuild() {
+	}
+
+	private function getMockRepository() {
+		if ( $this->mockRepository === null ) {
+			$this->mockRepository = new MockRepository();
 		}
 
-		return $mockRepo;
+		return $this->mockRepository;
 	}
 
 	/*
 	 * @return EntityLookup
 	 */
 	public function getEntityLookup() {
-		return $this->getMock();
+		return $this->getMockRepository();
 	}
 
 	/*
 	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup() {
-		return $this->getMock();
+		return $this->getMockRepository();
 	}
 
 	/**
 	 * @return SiteLinkLookup
 	 */
 	public function getSiteLinkTable() {
-		return $this->getMock();
+		return $this->getMockRepository();
 	}
 
 	/**
 	 * @return PropertyInfoStore
 	 */
 	public function getPropertyInfoStore() {
-		static $mockPropertyInfoStore = false;
-		if ( !$mockPropertyInfoStore ) {
-			$mockPropertyInfoStore = new MockPropertyInfoStore();
+		if ( $this->propertyInfoStore === null ) {
+			$this->propertyInfoStore = new MockPropertyInfoStore();
 		}
-		return $mockPropertyInfoStore;
+
+		return $this->propertyInfoStore;
 	}
 
 }

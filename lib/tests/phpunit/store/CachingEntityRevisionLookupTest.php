@@ -31,36 +31,36 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	 * @return EntityLookup
 	 */
 	protected function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects ) {
-		$mock = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		foreach ( $entityRevisions as $entityRev ) {
-			$mock->putEntity( $entityRev->getEntity(), $entityRev->getRevision() );
+			$mockRepository->putEntity( $entityRev->getEntity(), $entityRev->getRevision() );
 		}
 
 		foreach ( $entityRedirects as $entityRedir ) {
-			$mock->putRedirect( $entityRedir );
+			$mockRepository->putRedirect( $entityRedir );
 		}
 
-		return new CachingEntityRevisionLookup( $mock, new \HashBagOStuff() );
+		return new CachingEntityRevisionLookup( $mockRepository, new \HashBagOStuff() );
 	}
 
 	public function testWithRevisionVerification() {
-		$mock = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		$id = new ItemId( 'Q123' );
 		$item = Item::newEmpty();
 		$item->setId( $id );
 
-		$mock->putEntity( $item, 11 );
+		$mockRepository->putEntity( $item, 11 );
 
-		$lookup = new CachingEntityRevisionLookup( $mock, new \HashBagOStuff() );
+		$lookup = new CachingEntityRevisionLookup( $mockRepository, new \HashBagOStuff() );
 		$lookup->setVerifyRevision( true );
 
 		// fetch first revision, so it gets cached
 		$lookup->getEntityRevision( $id );
 
 		// create new revision
-		$mock->putEntity( $item, 12 );
+		$mockRepository->putEntity( $item, 12 );
 
 		// make sure we get the new revision automatically
 		$revId = $lookup->getLatestRevisionId( $id );
@@ -70,7 +70,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$this->assertEquals( 12, $rev->getRevision(), 'new revision should be detected if verification is enabled' );
 
 		// remove the item
-		$mock->removeEntity( $id );
+		$mockRepository->removeEntity( $id );
 
 		// try to fetch it again
 		$revId = $lookup->getLatestRevisionId( $id );
@@ -81,22 +81,22 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	}
 
 	public function testWithoutRevisionVerification() {
-		$mock = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		$id = new ItemId( 'Q123' );
 		$item = Item::newEmpty();
 		$item->setId( $id );
 
-		$mock->putEntity( $item, 11 );
+		$mockRepository->putEntity( $item, 11 );
 
-		$lookup = new CachingEntityRevisionLookup( $mock, new \HashBagOStuff() );
+		$lookup = new CachingEntityRevisionLookup( $mockRepository, new \HashBagOStuff() );
 		$lookup->setVerifyRevision( false );
 
 		// fetch first revision, so it gets cached
 		$lookup->getEntityRevision( $id );
 
 		// create new revision
-		$mock->putEntity( $item, 12 );
+		$mockRepository->putEntity( $item, 12 );
 
 		// check that we are still getting the old revision
 		$revId = $lookup->getLatestRevisionId( $id );
@@ -106,7 +106,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$this->assertEquals( 11, $rev->getRevision(), 'new revision should be ignored if verification is disabled' );
 
 		// remove the item
-		$mock->removeEntity( $id );
+		$mockRepository->removeEntity( $id );
 
 		// try to fetch it again - should still be cached
 		$revId = $lookup->getLatestRevisionId( $id );
@@ -117,22 +117,22 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	}
 
 	public function testEntityUpdated() {
-		$mock = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		$id = new ItemId( 'Q123' );
 		$item = Item::newEmpty();
 		$item->setId( $id );
 
-		$mock->putEntity( $item, 11 );
+		$mockRepository->putEntity( $item, 11 );
 
-		$lookup = new CachingEntityRevisionLookup( $mock, new \HashBagOStuff() );
+		$lookup = new CachingEntityRevisionLookup( $mockRepository, new \HashBagOStuff() );
 		$lookup->setVerifyRevision( false );
 
 		// fetch first revision, so it gets cached
 		$lookup->getEntityRevision( $id );
 
 		// create new revision
-		$rev12 = $mock->putEntity( $item, 12 );
+		$rev12 = $mockRepository->putEntity( $item, 12 );
 
 		// now, notify the cache
 		$lookup->entityUpdated( $rev12 );
@@ -146,15 +146,15 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	}
 
 	public function testRedirectUpdated() {
-		$mock = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		$id = new ItemId( 'Q123' );
 		$item = Item::newEmpty();
 		$item->setId( $id );
 
-		$mock->putEntity( $item, 11 );
+		$mockRepository->putEntity( $item, 11 );
 
-		$lookup = new CachingEntityRevisionLookup( $mock, new \HashBagOStuff() );
+		$lookup = new CachingEntityRevisionLookup( $mockRepository, new \HashBagOStuff() );
 		$lookup->setVerifyRevision( false );
 
 		// fetch first revision, so it gets cached
@@ -163,7 +163,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		// replace by a redirect
 		$targetId = new ItemId( 'Q222' );
 		$redir = new EntityRedirect( $id, $targetId );
-		$mock->putRedirect( $redir );
+		$mockRepository->putRedirect( $redir );
 
 		// now, notify the cache
 		$lookup->redirectUpdated( $redir, 17 );
@@ -178,22 +178,22 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	}
 
 	public function testEntityDeleted() {
-		$mock = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		$id = new ItemId( 'Q123' );
 		$item = Item::newEmpty();
 		$item->setId( $id );
 
-		$mock->putEntity( $item, 11 );
+		$mockRepository->putEntity( $item, 11 );
 
-		$lookup = new CachingEntityRevisionLookup( $mock, new \HashBagOStuff() );
+		$lookup = new CachingEntityRevisionLookup( $mockRepository, new \HashBagOStuff() );
 		$lookup->setVerifyRevision( false );
 
 		// fetch first revision, so it gets cached
 		$lookup->getEntityRevision( $id );
 
 		// remove entity
-		$mock->removeEntity( $id );
+		$mockRepository->removeEntity( $id );
 
 		// now, notify the cache
 		$lookup->entityDeleted( $id );

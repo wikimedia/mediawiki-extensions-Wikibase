@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use Status;
 use Title;
 use User;
-use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
@@ -96,9 +96,8 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider runProvider
-	 *
-	 * @param bool $expected
-	 * @param bool $titleExists
+	 * @param string $expected
+	 * @param string $normalizedPageName
 	 * @param string $oldTitle
 	 */
 	public function testRun( $expected, $normalizedPageName, $oldTitle ) {
@@ -110,9 +109,9 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$item = Item::newEmpty();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Old page name', array( new ItemId( 'Q42' ) ) );
 
-		$store = new MockRepository();
+		$mockRepository = new MockRepository();
 
-		$store->saveEntity( $item, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
+		$mockRepository->saveEntity( $item, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
 
 		$params = array(
 			'siteId' => 'enwiki',
@@ -125,8 +124,8 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$job = new UpdateRepoOnMoveJob( Title::newMainPage(), $params );
 		$job->initServices(
 			$this->getEntityTitleLookup( $item->getId() ),
-			$store,
-			$store,
+			$mockRepository,
+			$mockRepository,
 			$this->getSummaryFormatter(),
 			$this->getEntityPermissionChecker(),
 			$this->getSiteStore( $normalizedPageName )
@@ -134,7 +133,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 
 		$job->run();
 
-		$item = $store->getEntity( $item->getId() );
+		$item = $mockRepository->getEntity( $item->getId() );
 
 		$this->assertSame(
 			$expected,
@@ -147,4 +146,5 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 			array( new ItemId( 'Q42' ) )
 		);
 	}
+
 }

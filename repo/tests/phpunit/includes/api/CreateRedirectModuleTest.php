@@ -35,37 +35,37 @@ use Wikibase\Test\MockRepository;
 class CreateRedirectModuleTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var MockRepository
+	 * @var MockRepository|null
 	 */
-	private $repo = null;
+	private $mockRepository = null;
 
 	protected function setUp() {
 		parent::setUp();
 
-		$this->repo = new MockRepository();
+		$this->mockRepository = new MockRepository();
 
 		// empty item
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q11' ) );
-		$this->repo->putEntity( $item );
+		$this->mockRepository->putEntity( $item );
 
 		// non-empty item
 		$item->setLabel( 'en', 'Foo' );
 		$item->setId( new ItemId( 'Q12' ) );
-		$this->repo->putEntity( $item );
+		$this->mockRepository->putEntity( $item );
 
 		// a property
 		$prop = Property::newEmpty();
 		$prop->setId( new PropertyId( 'P11' ) );
-		$this->repo->putEntity( $prop );
+		$this->mockRepository->putEntity( $prop );
 
 		// another property
 		$prop->setId( new PropertyId( 'P12' ) );
-		$this->repo->putEntity( $prop );
+		$this->mockRepository->putEntity( $prop );
 
 		// redirect
 		$redirect = new EntityRedirect( new ItemId( 'Q22' ), new ItemId( 'Q12' ) );
-		$this->repo->putRedirect( $redirect );
+		$this->mockRepository->putRedirect( $redirect );
 	}
 
 	private function getPermissionCheckers() {
@@ -115,8 +115,8 @@ class CreateRedirectModuleTest extends \PHPUnit_Framework_TestCase {
 			$idParser,
 			$errorReporter,
 			new RedirectCreationInteractor(
-				$this->repo,
-				$this->repo,
+				$this->mockRepository,
+				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
 				$user

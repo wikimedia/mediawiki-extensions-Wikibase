@@ -68,7 +68,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 
 		return new WikibaseLuaBindings(
 			new BasicEntityIdParser(),
-			$entityLookup ? $entityLookup : new MockRepository(),
+			$entityLookup ?: new MockRepository(),
 			$siteLinkTable,
 			new LanguageFallbackChainFactory(),
 			$language, // language
@@ -103,11 +103,11 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->getItem();
 		$itemId = $item->getId();
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $item );
 
 		$usages = new HashUsageAccumulator();
-		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup, $usages );
+		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $mockRepository, $usages );
 
 		$wikibaseLibrary->getEntity( $itemId->getSerialization() );
 		$this->assertTrue( $this->hasUsage( $usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE ), 'all usage' );
@@ -116,15 +116,15 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	public function getEntityProvider() {
 		$item = $this->getItem();
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $item );
 
 		$item2 = $item->newEmpty();
 		$item2->setId( new ItemId( 'Q9999' ) );
 
 		return array(
-			array( array( 'id', 'type', 'descriptions', 'labels', 'sitelinks', 'schemaVersion' ), $item, $entityLookup ),
-			array( array(), $item2, $entityLookup )
+			array( array( 'id', 'type', 'descriptions', 'labels', 'sitelinks', 'schemaVersion' ), $item, $mockRepository ),
+			array( array(), $item2, $mockRepository )
 		);
 	}
 
@@ -193,21 +193,21 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	public function testGetSiteLinkPageName( $expected, $itemId ) {
 		$item = $this->getItem();
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $item );
 
-		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
+		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $mockRepository );
 		$this->assertSame( $expected, $wikibaseLibrary->getSiteLinkPageName( $itemId ) );
 	}
 
 	public function testGetSiteLinkPageName_usage() {
 		$item = $this->getItem();
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
+		$mockRepository = new MockRepository();
+		$mockRepository->putEntity( $item );
 
 		$usages = new HashUsageAccumulator();
-		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup, $usages );
+		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $mockRepository, $usages );
 
 		$itemId = $item->getId();
 		$wikibaseLibrary->getSiteLinkPageName( $itemId->getSerialization() );

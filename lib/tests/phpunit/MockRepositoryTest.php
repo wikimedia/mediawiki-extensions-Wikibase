@@ -24,12 +24,15 @@ use Wikibase\Lib\Store\EntityRedirect;
  */
 class MockRepositoryTest extends \MediaWikiTestCase {
 
-	/* @var MockRepository */
-	protected $repo;
+	/**
+	 * @var MockRepository|null
+	 */
+	private $mockRepository = null;
 
 	protected function setUp() {
 		parent::setUp();
-		$this->repo = new MockRepository();
+
+		$this->mockRepository = new MockRepository();
 	}
 
 	public function testHasEntity() {
@@ -41,19 +44,19 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		$item = Item::newEmpty();
 		$item->setId( $q23 );
-		$this->repo->putEntity( $item );
+		$this->mockRepository->putEntity( $item );
 
 		$prop = Property::newFromType( 'string' );
 		$prop->setId( $p23 );
-		$this->repo->putEntity( $prop );
+		$this->mockRepository->putEntity( $prop );
 
 		// test item
-		$this->assertTrue( $this->repo->hasEntity( $q23 ) );
-		$this->assertFalse( $this->repo->hasEntity( $q42 ) );
+		$this->assertTrue( $this->mockRepository->hasEntity( $q23 ) );
+		$this->assertFalse( $this->mockRepository->hasEntity( $q42 ) );
 
 		// test prop
-		$this->assertTrue( $this->repo->hasEntity( $p23 ) );
-		$this->assertFalse( $this->repo->hasEntity( $p42 ) );
+		$this->assertTrue( $this->mockRepository->hasEntity( $p23 ) );
+		$this->assertFalse( $this->mockRepository->hasEntity( $p42 ) );
 	}
 
 	public function testGetEntity() {
@@ -61,12 +64,12 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$item->setLabel( 'en', 'foo' );
 
 		// set up a data Item
-		$this->repo->putEntity( $item, 23 );
+		$this->mockRepository->putEntity( $item, 23 );
 		$itemId = $item->getId();
 
 		// set up another version of the data Item
 		$item->setLabel( 'de', 'bar' );
-		$this->repo->putEntity( $item, 24 );
+		$this->mockRepository->putEntity( $item, 24 );
 
 		// set up a property
 		$prop = Property::newFromType( 'string' );
@@ -74,10 +77,10 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$prop->setId( $itemId->getNumericId() ); // same numeric id, different prefix
 
 		$propId = $prop->getId();
-		$this->repo->putEntity( $prop );
+		$this->mockRepository->putEntity( $prop );
 
 		// test latest item
-		$item = $this->repo->getEntity( $itemId );
+		$item = $this->mockRepository->getEntity( $itemId );
 		$this->assertNotNull( $item, "Entity " . $itemId );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $item, "Entity " . $itemId );
 		$this->assertEquals( 'foo', $item->getLabel( 'en' ) );
@@ -85,11 +88,11 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// test we can't mess with entities in the repo
 		$item->setLabel( 'en', 'STRANGE' );
-		$item = $this->repo->getEntity( $itemId );
+		$item = $this->mockRepository->getEntity( $itemId );
 		$this->assertEquals( 'foo', $item->getLabel( 'en' ) );
 
 		// test latest prop
-		$prop = $this->repo->getEntity( $propId );
+		$prop = $this->mockRepository->getEntity( $propId );
 		$this->assertNotNull( $prop, "Entity " . $propId );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $prop, "Entity " . $propId );
 	}
@@ -99,12 +102,12 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$item->setLabel( 'en', 'foo' );
 
 		// set up a data Item
-		$this->repo->putEntity( $item, 23, "20130101000000" );
+		$this->mockRepository->putEntity( $item, 23, "20130101000000" );
 		$itemId = $item->getId();
 
 		// set up another version of the data Item
 		$item->setLabel( 'de', 'bar' );
-		$this->repo->putEntity( $item, 24 );
+		$this->mockRepository->putEntity( $item, 24 );
 
 		// set up a property
 		$prop = Property::newFromType( 'string' );
@@ -112,17 +115,17 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$prop->setId( $itemId->getNumericId() ); // same numeric id, different prefix
 
 		$propId = $prop->getId();
-		$this->repo->putEntity( $prop );
+		$this->mockRepository->putEntity( $prop );
 
 		// test latest item
-		$itemRev = $this->repo->getEntityRevision( $itemId );
+		$itemRev = $this->mockRepository->getEntityRevision( $itemId );
 		$this->assertNotNull( $item, "Entity " . $itemId );
 		$this->assertInstanceOf( '\Wikibase\EntityRevision', $itemRev, "Entity " . $itemId );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $itemRev->getEntity(), "Entity " . $itemId );
 		$this->assertEquals( 24, $itemRev->getRevision() );
 
 		// test item by rev id
-		$itemRev = $this->repo->getEntityRevision( $itemId, 23 );
+		$itemRev = $this->mockRepository->getEntityRevision( $itemId, 23 );
 		$this->assertNotNull( $item, "Entity " . $itemId . "@23" );
 		$this->assertInstanceOf( '\Wikibase\EntityRevision', $itemRev, "Entity " . $itemId );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $itemRev->getEntity(), "Entity " . $itemId );
@@ -130,7 +133,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( "20130101000000", $itemRev->getTimestamp() );
 
 		// test latest prop
-		$propRev = $this->repo->getEntityRevision( $propId );
+		$propRev = $this->mockRepository->getEntityRevision( $propId );
 		$this->assertNotNull( $propRev, "Entity " . $propId );
 		$this->assertInstanceOf( '\Wikibase\EntityRevision', $propRev, "Entity " . $propId );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $propRev->getEntity(), "Entity " . $propId );
@@ -141,24 +144,24 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 
 		// test item lookup
-		$this->repo->putEntity( $item );
+		$this->mockRepository->putEntity( $item );
 		$itemId = $item->getId();
 
-		$this->assertEquals( $itemId, $this->repo->getItemIdForLink( 'enwiki', 'Foo' ) );
-		$this->assertEquals( null, $this->repo->getItemIdForLink( 'xywiki', 'Foo' ) );
+		$this->assertEquals( $itemId, $this->mockRepository->getItemIdForLink( 'enwiki', 'Foo' ) );
+		$this->assertEquals( null, $this->mockRepository->getItemIdForLink( 'xywiki', 'Foo' ) );
 
 		// test lookup after item modification
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Bar' ), 'set' );
-		$this->repo->putEntity( $item );
+		$this->mockRepository->putEntity( $item );
 
-		$this->assertEquals( null, $this->repo->getItemIdForLink( 'enwiki', 'Foo' ) );
-		$this->assertEquals( $itemId, $this->repo->getItemIdForLink( 'enwiki', 'Bar' ) );
+		$this->assertEquals( null, $this->mockRepository->getItemIdForLink( 'enwiki', 'Foo' ) );
+		$this->assertEquals( $itemId, $this->mockRepository->getItemIdForLink( 'enwiki', 'Bar' ) );
 
 		// test lookup after item deletion
-		$this->repo->removeEntity( $itemId );
+		$this->mockRepository->removeEntity( $itemId );
 
-		$this->assertEquals( null, $this->repo->getItemIdForLink( 'enwiki', 'Foo' ) );
-		$this->assertEquals( null, $this->repo->getItemIdForLink( 'enwiki', 'Bar' ) );
+		$this->assertEquals( null, $this->mockRepository->getItemIdForLink( 'enwiki', 'Foo' ) );
+		$this->assertEquals( null, $this->mockRepository->getItemIdForLink( 'enwiki', 'Bar' ) );
 	}
 
 	public static function provideGetConflictsForItem() {
@@ -213,8 +216,8 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	 * @dataProvider provideGetConflictsForItem
 	 */
 	public function testGetConflictsForItem( Item $a, Item $b, $expectedConflicts ) {
-		$this->repo->putEntity( $a );
-		$conflicts = $this->repo->getConflictsForItem( $b );
+		$this->mockRepository->putEntity( $a );
+		$conflicts = $this->mockRepository->getConflictsForItem( $b );
 
 		$this->assertArrayEquals( $expectedConflicts, $conflicts );
 	}
@@ -306,10 +309,10 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	 */
 	public function testGetLinks( array $items, array $itemIds, array $sites, array $pages, array $expectedLinks ) {
 		foreach ( $items as $item ) {
-			$this->repo->putEntity( $item );
+			$this->mockRepository->putEntity( $item );
 		}
 
-		$links = $this->repo->getLinks( $itemIds, $sites, $pages );
+		$links = $this->mockRepository->getLinks( $itemIds, $sites, $pages );
 
 		$this->assertArrayEquals( $expectedLinks, $links );
 	}
@@ -319,10 +322,10 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	 */
 	public function testCountLinks( array $items, array $itemIds, array $sites, array $pages, array $expectedLinks ) {
 		foreach ( $items as $item ) {
-			$this->repo->putEntity( $item );
+			$this->mockRepository->putEntity( $item );
 		}
 
-		$n = $this->repo->countLinks( $itemIds, $sites, $pages );
+		$n = $this->mockRepository->countLinks( $itemIds, $sites, $pages );
 
 		$this->assertEquals( count( $expectedLinks ), $n );
 	}
@@ -382,13 +385,13 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$prop->setId( 4 );
 		$prop->setLabel( 'en', 'property!' );
 
-		$this->repo->putEntity( $one, 1001 );
-		$this->repo->putEntity( $two, 1002 );
-		$this->repo->putEntity( $three, 1003 );
-		$this->repo->putEntity( $prop, 1101 );
+		$this->mockRepository->putEntity( $one, 1001 );
+		$this->mockRepository->putEntity( $two, 1002 );
+		$this->mockRepository->putEntity( $three, 1003 );
+		$this->mockRepository->putEntity( $prop, 1101 );
 
 		$one->setLabel( 'de', "eins" );
-		$this->repo->putEntity( $one, 1011 );
+		$this->mockRepository->putEntity( $one, 1011 );
 	}
 
 	/**
@@ -410,7 +413,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// do it!
 		try {
-			$entities = $this->repo->getEntities( $ids );
+			$entities = $this->mockRepository->getEntities( $ids );
 
 			if ( $expectedError !== false  ) {
 				$this->fail( "expected error: " . $expectedError );
@@ -467,7 +470,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$one->addSiteLink( new SiteLink( 'dewiki', 'Xoo' ) );
 		$one->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 
-		$this->repo->putEntity( $one );
+		$this->mockRepository->putEntity( $one );
 
 		// check link retrieval
 		$this->assertEquals(
@@ -475,11 +478,11 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 				new SiteLink( 'dewiki', 'Xoo' ),
 				new SiteLink( 'enwiki', 'Foo' ),
 			),
-			$this->repo->getSiteLinksForItem( $one->getId() )
+			$this->mockRepository->getSiteLinksForItem( $one->getId() )
 		);
 
 		// check links of unknown id
-		$this->assertEmpty( $this->repo->getSiteLinksForItem( new ItemId( 'q123' ) ) );
+		$this->assertEmpty( $this->mockRepository->getSiteLinksForItem( new ItemId( 'q123' ) ) );
 	}
 
 	public function provideSaveEntity() {
@@ -551,20 +554,20 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 			$this->setExpectedException( $error );
 		}
 
-		$rev = $this->repo->saveEntity( $entity, 'f00', $GLOBALS['wgUser'], $flags, $baseRevId );
+		$rev = $this->mockRepository->saveEntity( $entity, 'f00', $GLOBALS['wgUser'], $flags, $baseRevId );
 
-		$logEntry = $this->repo->getLogEntry( $rev->getRevision() );
+		$logEntry = $this->mockRepository->getLogEntry( $rev->getRevision() );
 		$this->assertNotNull( $logEntry );
 		$this->assertEquals( $rev->getRevision(), $logEntry['revision'] );
 		$this->assertEquals( $entity->getId()->getSerialization(), $logEntry['entity'] );
 		$this->assertEquals( 'f00', $logEntry['summary'] );
 
 		$this->assertEquals( $entity->getLabels(), $rev->getEntity()->getLabels() );
-		$this->assertEquals( $entity->getLabels(), $this->repo->getEntity( $entity->getId() )->getLabels() );
+		$this->assertEquals( $entity->getLabels(), $this->mockRepository->getEntity( $entity->getId() )->getLabels() );
 
 		// test we can't mess with entities in the repo
 		$entity->setLabel( 'en', 'STRANGE' );
-		$entity = $this->repo->getEntity( $entity->getId() );
+		$entity = $this->mockRepository->getEntity( $entity->getId() );
 		$this->assertNotNull( $entity );
 		$this->assertNotEquals( 'STRANGE', $entity->getLabel( 'en' ) );
 	}
@@ -576,18 +579,18 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$q1 = new ItemId( 'Q1' );
 
 		$redirect = new EntityRedirect( $q10, $q1 );
-		$revId = $this->repo->saveRedirect( $redirect, 'redirected Q10 to Q1', $GLOBALS['wgUser'] );
+		$revId = $this->mockRepository->saveRedirect( $redirect, 'redirected Q10 to Q1', $GLOBALS['wgUser'] );
 
 		$this->assertGreaterThan( 0, $revId );
 
-		$logEntry = $this->repo->getLogEntry( $revId );
+		$logEntry = $this->mockRepository->getLogEntry( $revId );
 		$this->assertNotNull( $logEntry );
 		$this->assertEquals( $revId, $logEntry['revision'] );
 		$this->assertEquals( $redirect->getEntityId()->getSerialization(), $logEntry['entity'] );
 		$this->assertEquals( 'redirected Q10 to Q1', $logEntry['summary'] );
 
 		$this->setExpectedException( 'Wikibase\Lib\Store\UnresolvedRedirectException' );
-		$this->repo->getEntity( $q10 );
+		$this->mockRepository->getEntity( $q10 );
 	}
 
 	public function testGetLogEntry() {
@@ -597,9 +600,9 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$q11 = new ItemId( 'Q11' );
 
 		$redirect = new EntityRedirect( $q10, $q11 );
-		$revId = $this->repo->saveRedirect( $redirect, 'foo', $GLOBALS['wgUser'], EDIT_NEW );
+		$revId = $this->mockRepository->saveRedirect( $redirect, 'foo', $GLOBALS['wgUser'], EDIT_NEW );
 
-		$logEntry = $this->repo->getLogEntry( $revId );
+		$logEntry = $this->mockRepository->getLogEntry( $revId );
 
 		$this->assertNotNull( $logEntry );
 		$this->assertEquals( $revId, $logEntry['revision'] );
@@ -616,9 +619,9 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// first entry
 		$redirect = new EntityRedirect( $q10, $q11 );
-		$revId = $this->repo->saveRedirect( $redirect, 'foo', $GLOBALS['wgUser'], EDIT_NEW );
+		$revId = $this->mockRepository->saveRedirect( $redirect, 'foo', $GLOBALS['wgUser'], EDIT_NEW );
 
-		$logEntry = $this->repo->getLatestLogEntryFor( $q10 );
+		$logEntry = $this->mockRepository->getLatestLogEntryFor( $q10 );
 
 		$this->assertNotNull( $logEntry );
 		$this->assertEquals( $revId, $logEntry['revision'] );
@@ -627,9 +630,9 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// second entry
 		$redirect = new EntityRedirect( $q10, $q12 );
-		$revId = $this->repo->saveRedirect( $redirect, 'bar', $GLOBALS['wgUser'], EDIT_NEW );
+		$revId = $this->mockRepository->saveRedirect( $redirect, 'bar', $GLOBALS['wgUser'], EDIT_NEW );
 
-		$logEntry = $this->repo->getLatestLogEntryFor( $q10 );
+		$logEntry = $this->mockRepository->getLatestLogEntryFor( $q10 );
 
 		$this->assertNotNull( $logEntry );
 		$this->assertEquals( $revId, $logEntry['revision'] );
@@ -641,32 +644,32 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$q23 = new ItemId( 'q23' );
 		$item = Item::newEmpty();
 		$item->setId( $q23 );
-		$this->repo->putEntity( $item );
+		$this->mockRepository->putEntity( $item );
 
-		$this->repo->deleteEntity( $item->getId(), 'testing', $GLOBALS['wgUser'] );
-		$this->assertFalse( $this->repo->hasEntity( $item->getId() ) );
+		$this->mockRepository->deleteEntity( $item->getId(), 'testing', $GLOBALS['wgUser'] );
+		$this->assertFalse( $this->mockRepository->hasEntity( $item->getId() ) );
 	}
 
 	public function testDeleteRedirect( ) {
 		$redirect = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q1' ) );
-		$this->repo->putRedirect( $redirect );
+		$this->mockRepository->putRedirect( $redirect );
 
-		$this->repo->deleteEntity( $redirect->getEntityId(), 'testing', $GLOBALS['wgUser'] );
-		$this->assertNull( $this->repo->getEntity( $redirect->getEntityId() ) );
+		$this->mockRepository->deleteEntity( $redirect->getEntityId(), 'testing', $GLOBALS['wgUser'] );
+		$this->assertNull( $this->mockRepository->getEntity( $redirect->getEntityId() ) );
 	}
 
 	public function testUpdateWatchlist() {
 		$user = User::newFromName( "WikiPageEntityStoreTestUser2" );
 
 		$item = Item::newEmpty();
-		$this->repo->saveEntity( $item, 'testing', $user, EDIT_NEW );
+		$this->mockRepository->saveEntity( $item, 'testing', $user, EDIT_NEW );
 		$itemId = $item->getId();
 
-		$this->repo->updateWatchlist( $user, $itemId, true );
-		$this->assertTrue(  $this->repo->isWatching( $user, $itemId ) );
+		$this->mockRepository->updateWatchlist( $user, $itemId, true );
+		$this->assertTrue(  $this->mockRepository->isWatching( $user, $itemId ) );
 
-		$this->repo->updateWatchlist( $user, $itemId, false );
-		$this->assertFalse(  $this->repo->isWatching( $user, $itemId ) );
+		$this->mockRepository->updateWatchlist( $user, $itemId, false );
+		$this->assertFalse(  $this->mockRepository->isWatching( $user, $itemId ) );
 	}
 
 	public function testUserWasLastToEdit() {
@@ -676,28 +679,28 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		// initial revision
 		$item = Item::newEmpty();
 		$item->setLabel( 'en', 'one' );
-		$rev1 = $this->repo->saveEntity( $item, 'testing 1', $user1, EDIT_NEW );
+		$rev1 = $this->mockRepository->saveEntity( $item, 'testing 1', $user1, EDIT_NEW );
 		$itemId = $item->getId();
 
-		$this->assertTrue( $this->repo->userWasLastToEdit( $user1, $itemId, $rev1->getRevision() ), 'user was first and last to edit' );
-		$this->assertFalse( $this->repo->userWasLastToEdit( $user2, $itemId, $rev1->getRevision() ), 'user has not edited yet' );
+		$this->assertTrue( $this->mockRepository->userWasLastToEdit( $user1, $itemId, $rev1->getRevision() ), 'user was first and last to edit' );
+		$this->assertFalse( $this->mockRepository->userWasLastToEdit( $user2, $itemId, $rev1->getRevision() ), 'user has not edited yet' );
 
 		// second edit by another user
 		$item = $item->copy();
 		$item->setLabel( 'en', 'two' );
-		$rev2 = $this->repo->saveEntity( $item, 'testing 2', $user2, EDIT_UPDATE );
+		$rev2 = $this->mockRepository->saveEntity( $item, 'testing 2', $user2, EDIT_UPDATE );
 
-		$this->assertFalse( $this->repo->userWasLastToEdit( $user1, $itemId, $rev1->getRevision() ), 'original user was no longer last to edit' );
-		$this->assertTrue( $this->repo->userWasLastToEdit( $user2, $itemId, $rev2->getRevision() ), 'second user has just edited' );
+		$this->assertFalse( $this->mockRepository->userWasLastToEdit( $user1, $itemId, $rev1->getRevision() ), 'original user was no longer last to edit' );
+		$this->assertTrue( $this->mockRepository->userWasLastToEdit( $user2, $itemId, $rev2->getRevision() ), 'second user has just edited' );
 
 		// subsequent edit by the original user
 		$item = $item->copy();
 		$item->setLabel( 'en', 'three' );
-		$rev3 = $this->repo->saveEntity( $item, 'testing 3', $user1, EDIT_UPDATE );
+		$rev3 = $this->mockRepository->saveEntity( $item, 'testing 3', $user1, EDIT_UPDATE );
 
-		$this->assertFalse( $this->repo->userWasLastToEdit( $user1, $itemId, $rev1->getRevision() ), 'another user had edited at some point' );
-		$this->assertTrue( $this->repo->userWasLastToEdit( $user1, $itemId, $rev3->getRevision() ), 'original user was last to edit' );
-		$this->assertFalse( $this->repo->userWasLastToEdit( $user2, $itemId, $rev2->getRevision() ), 'other user was no longer last to edit' );
+		$this->assertFalse( $this->mockRepository->userWasLastToEdit( $user1, $itemId, $rev1->getRevision() ), 'another user had edited at some point' );
+		$this->assertTrue( $this->mockRepository->userWasLastToEdit( $user1, $itemId, $rev3->getRevision() ), 'original user was last to edit' );
+		$this->assertFalse( $this->mockRepository->userWasLastToEdit( $user2, $itemId, $rev2->getRevision() ), 'other user was no longer last to edit' );
 	}
 
 }
