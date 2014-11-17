@@ -8,9 +8,12 @@ use InvalidArgumentException;
 use Iterator;
 use MWException;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\LegacyIdInterpreter;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintProvider;
 
 /**
  * Term lookup cache.
@@ -88,11 +91,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function saveTermsOfEntity( Entity $entity ) {
+	public function saveTermsOfEntity( EntityDocument $entity ) {
 		wfProfileIn( __METHOD__ );
 
 		//First check whether there's anything to update
@@ -118,7 +121,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		if ( $ok && $termsToInsert ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": " . count( $termsToInsert ) . " terms to insert." );
-			$ok = $dbw->deadlockLoop( array( $this, 'insertTermsInternal' ), $entity, $termsToInsert, $dbw );
+
+			// TODO: remove silly self hack when we can use PHP 5.4
+			$self = $this;
+			$ok = $dbw->deadlockLoop( function() use ( $self, $entity, $termsToInsert, $dbw ) {
+				return $self->insertTermsInternal( $entity, $termsToInsert, $dbw );
+			} );
 		}
 
 		$this->releaseConnection( $dbw );
@@ -135,18 +143,20 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param Term[] $terms
 	 * @param DatabaseBase $dbw
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function insertTermsInternal( Entity $entity, $terms, DatabaseBase $dbw ) {
+	public function insertTermsInternal( EntityDocument $entity, $terms, DatabaseBase $dbw ) {
 		wfProfileIn( __METHOD__ );
 
 		$entityIdentifiers = array(
+			// FIXME: this will fail for IDs that do not have a numeric form
 			'term_entity_id' => $entity->getId()->getNumericId(),
-			'term_entity_type' => $entity->getId()->getEntityType()
+
+			'term_entity_type' => $entity->getType()
 		);
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting terms for ' . $entity->getId()->getSerialization() );
@@ -180,17 +190,24 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * TODO: this method belongs in Entity itself. This change can only be made once
-	 * there is a sane Term object in DataModel itself though.
-	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return Term[]
 	 */
-	public function getEntityTerms( Entity $entity ) {
+	public function getEntityTerms( EntityDocument $entity ) {
+		// FIXME: OCP violation. No support for new types of entities can be registered
+
+		if ( $entity instanceof FingerprintProvider ) {
+			return $this->getFingerprintTerms( $entity->getFingerprint() );
+		}
+
+		return array();
+	}
+
+	private function getFingerprintTerms( Fingerprint $fingerprint ) {
 		$terms = array();
 
-		foreach ( $entity->getDescriptions() as $languageCode => $description ) {
+		foreach ( $fingerprint->getDescriptions()->toTextArray() as $languageCode => $description ) {
 			$term = new Term();
 
 			$term->setLanguage( $languageCode );
@@ -200,7 +217,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			$terms[] = $term;
 		}
 
-		foreach ( $entity->getLabels() as $languageCode => $label ) {
+		foreach ( $fingerprint->getLabels()->toTextArray() as $languageCode => $label ) {
 			$term = new Term();
 
 			$term->setLanguage( $languageCode );
@@ -210,11 +227,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			$terms[] = $term;
 		}
 
-		foreach ( $entity->getAllAliases() as $languageCode => $aliases ) {
-			foreach ( $aliases as $alias ) {
+		foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
+			foreach ( $aliasGroup->getAliases() as $alias ) {
 				$term = new Term();
 
-				$term->setLanguage( $languageCode );
+				$term->setLanguage( $aliasGroup->getLanguageCode() );
 				$term->setType( Term::TYPE_ALIAS );
 				$term->setText( $alias );
 
@@ -290,11 +307,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return float weight
 	 */
-	protected function getWeight( Entity $entity ) {
+	protected function getWeight( EntityDocument $entity ) {
+		// FIXME: OCP violation. No support for new types of entities can be registered
+
 		if ( $entity instanceof Item ) {
 			return $entity->getSiteLinkList()->count() / 1000.0;
 		}
