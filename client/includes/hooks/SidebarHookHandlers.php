@@ -2,17 +2,12 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Exception;
 use OutputPage;
-use Parser;
 use ParserOutput;
 use Skin;
-use StripState;
 use StubUserLang;
 use Title;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\InterwikiSorter;
-use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
 use Wikibase\SettingsArray;
@@ -40,24 +35,9 @@ class SidebarHookHandlers {
 	private $namespaceChecker;
 
 	/**
-	 * @var LangLinkHandler
-	 */
-	private $langLinkHandler;
-
-	/**
 	 * @var LanguageLinkBadgeDisplay
 	 */
 	private $badgeDisplay;
-
-	/**
-	 * @var InterwikiSorter
-	 */
-	private $interwikiSorter;
-
-	/**
-	 * @var bool
-	 */
-	private $alwaysSort;
 
 	/**
 	 * @var bool
@@ -69,11 +49,6 @@ class SidebarHookHandlers {
 	 */
 	private $otherProjectsLinksDefault;
 
-	/**
-	 * @var OtherProjectsSidebarGenerator
-	 */
-	private $otherProjectsSidebarGenerator;
-
 	public static function newFromGlobalState() {
 		global $wgLang;
 		StubUserLang::unstub( $wgLang );
@@ -82,7 +57,6 @@ class SidebarHookHandlers {
 		$settings = $wikibaseClient->getSettings();
 
 		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
-		$langLinkHandler = $wikibaseClient->getLangLinkHandler();
 
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		$badgeClassNames = $settings->getSetting( 'badgeClassNames' );
@@ -93,42 +67,13 @@ class SidebarHookHandlers {
 			$wgLang
 		);
 
-		$interwikiSorter = new InterwikiSorter(
-			$settings->getSetting( 'sort' ),
-			$settings->getSetting( 'interwikiSortOrders' ),
-			$settings->getSetting( 'sortPrepend' )
-		);
-
-		$otherProjectsSidebarGenerator = $wikibaseClient->getOtherProjectsSidebarGenerator();
-
 		return new SidebarHookHandlers(
 			$namespaceChecker,
-			$langLinkHandler,
 			$badgeDisplay,
-			$interwikiSorter,
-			$otherProjectsSidebarGenerator,
-			$settings
+			$wikibaseClient->getOtherProjectsSidebarGeneratorFactory(),
+			$settings->getSetting( 'otherProjectsLinksBeta' ),
+			$settings->getSetting( 'otherProjectsLinksByDefault' )
 		);
-	}
-
-	/**
-	 * Static handler for the ParserAfterParse hook.
-	 *
-	 * @param Parser|null &$parser
-	 * @param string|null &$text Unused.
-	 * @param StripState|null $stripState Unused.
-	 *
-	 * @return bool
-	 */
-	public static function onParserAfterParse( Parser &$parser = null, &$text = null, StripState $stripState = null ) {
-		// this hook tries to access repo SiteLinkTable
-		// it interferes with any test that parses something, like a page or a message
-		if ( $parser === null || defined( 'MW_PHPUNIT_TEST' ) ) {
-			return true;
-		}
-
-		$handler = self::newFromGlobalState();
-		return $handler->doParserAfterParse( $parser );
 	}
 
 	/**
@@ -175,74 +120,16 @@ class SidebarHookHandlers {
 
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
-		LangLinkHandler $langLinkHandler,
 		LanguageLinkBadgeDisplay $badgeDisplay,
-		InterwikiSorter $sorter,
-		OtherProjectsSidebarGenerator $otherProjectsSidebarGenerator,
-		SettingsArray $settings
+		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
+		$otherProjectsLinksBeta,
+		$otherProjectsLinksDefault
 	) {
-
 		$this->namespaceChecker = $namespaceChecker;
-		$this->langLinkHandler = $langLinkHandler;
 		$this->badgeDisplay = $badgeDisplay;
-		$this->interwikiSorter = $sorter;
-		$this->otherProjectsSidebarGenerator = $otherProjectsSidebarGenerator;
-
-		$this->alwaysSort = $settings->getSetting( 'alwaysSort' );
-		$this->otherProjectsLinksBeta = $settings->getSetting( 'otherProjectsLinksBeta' );
-		$this->otherProjectsLinksDefault = $settings->getSetting( 'otherProjectsLinksByDefault' );
-	}
-
-	/**
-	 * Hook runs after internal parsing
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserAfterParse
-	 *
-	 * @param Parser &$parser
-	 *
-	 * @return bool
-	 */
-	public function doParserAfterParse( Parser &$parser ) {
-		$title = $parser->getTitle();
-
-		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
-			// shorten out
-			return true;
-		}
-
-		wfProfileIn( __METHOD__ );
-
-		// @todo split up the multiple responsibilities here and in lang link handler
-
-		// only run this once, for the article content and not interface stuff
-		//FIXME: this also runs for messages in EditPage::showEditTools! Ugh!
-		if ( $parser->getOptions()->getInterfaceMessage() ) {
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
-
-		$parserOutput = $parser->getOutput();
-		$useRepoLinks = $this->langLinkHandler->useRepoLinks( $title, $parserOutput );
-
-		try {
-			if ( $useRepoLinks ) {
-				// add links
-				$this->langLinkHandler->addLinksFromRepository( $title, $parserOutput );
-			}
-
-			$this->langLinkHandler->updateItemIdProperty( $title, $parserOutput );
-			$this->langLinkHandler->updateOtherProjectsLinksData( $title, $parserOutput );
-		} catch ( Exception $e ) {
-			wfWarn( 'Failed to add repo links: ' . $e->getMessage() );
-		}
-
-		if ( $useRepoLinks || $this->alwaysSort ) {
-			$interwikiLinks = $parserOutput->getLanguageLinks();
-			$sortedLinks = $this->interwikiSorter->sortLinks( $interwikiLinks );
-			$parserOutput->setLanguageLinks( $sortedLinks );
-		}
-
-		wfProfileOut( __METHOD__ );
-		return true;
+		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
+		$this->otherProjectsLinksBeta = $otherProjectsLinksBeta;
+		$this->otherProjectsLinksDefault = $otherProjectsLinksDefault;
 	}
 
 	/**
@@ -337,7 +224,9 @@ class SidebarHookHandlers {
 
 			// in case of stuff in cache without the other projects
 			if ( $otherProjectsSidebar === null ) {
-				$otherProjectsSidebar = $this->otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
+				$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory
+					->getOtherProjectsSidebarGenerator();
+				$otherProjectsSidebar = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
 			}
 
 			if ( !empty( $otherProjectsSidebar ) ) {
