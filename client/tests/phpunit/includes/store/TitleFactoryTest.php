@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\Usage;
+namespace Wikibase\Client\Tests\Store;
 
 use PHPUnit_Framework_TestCase;
 use Title;

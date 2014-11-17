@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\Hooks;
 
 use RequestContext;
 use Skin;

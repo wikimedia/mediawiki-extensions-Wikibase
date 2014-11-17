@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\Hooks;
 
 use FauxRequest;
 use Language;
@@ -12,6 +12,7 @@ use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Client\Hooks\LanguageLinkBadgeDisplay

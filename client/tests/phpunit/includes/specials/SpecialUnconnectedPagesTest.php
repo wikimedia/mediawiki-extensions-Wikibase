@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\Specials;
 
 use Title;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\NamespaceChecker;
+use Wikibase\Test\SpecialPageTestBase;
 
 /**
  * @covers Wikibase\Client\Specials\SpecialUnconnectedPages

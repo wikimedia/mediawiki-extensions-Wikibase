@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\Store\Sql;
 
 use Wikibase\Client\Store\Sql\ConnectionManager;
 
