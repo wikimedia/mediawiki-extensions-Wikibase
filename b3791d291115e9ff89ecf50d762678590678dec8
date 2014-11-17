@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_9174c731",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-17T10:18:46Z",
+      "side": 1,
+      "message": "Fascinating. You changed semantics here. Is this intended?\nBefore: Iterate the settings array. If a badge could not be found in the entityStore it is rendered with it\u0027s item id.\nAfter: Badges that are not found as an item are not rendered.",
+      "revId": "b3791d291115e9ff89ecf50d762678590678dec8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
