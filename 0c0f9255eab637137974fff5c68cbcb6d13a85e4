@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_d19d6f5c",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-17T10:16:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_e8e8cc0d",
+      "revId": "0c0f9255eab637137974fff5c68cbcb6d13a85e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_28e31433",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-14T08:17:46Z",
       "side": 1,
       "message": "That is done in line 602 already.",
+      "revId": "0c0f9255eab637137974fff5c68cbcb6d13a85e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_51b95fc5",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-17T10:16:15Z",
+      "side": 1,
+      "message": "Moved to a separate patch.",
+      "parentUuid": "6e936f18_28e31433",
       "revId": "0c0f9255eab637137974fff5c68cbcb6d13a85e4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
