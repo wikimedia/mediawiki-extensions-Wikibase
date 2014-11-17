@@ -1,13 +1,12 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\Scribunto;
 
 use Parser;
 use ParserOptions;
 use Scribunto;
 use Scribunto_LuaWikibaseEntityLibrary;
 use Title;
-use Wikibase\Client\Scribunto\Test\Scribunto_LuaWikibaseLibraryTestCase;
 use Wikibase\Client\WikibaseClient;
 
 /**

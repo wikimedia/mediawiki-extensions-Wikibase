@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Scribunto\Test;
+namespace Wikibase\Client\Tests\Scribunto;
 
 use DataValues\DataValue;
 use DataValues\StringValue;

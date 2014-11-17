@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Scribunto\Test;
+namespace Wikibase\Client\Tests\Scribunto;
 
 if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
 	// This needs Scribunto

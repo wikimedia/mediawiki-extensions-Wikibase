@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Scribunto\Test;
+namespace Wikibase\Client\Tests\Scribunto;
 
 use Language;
 use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
@@ -17,7 +17,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\SnakFactory;
 use Wikibase\Test\MockRepository;
 
 /**
