@@ -59,13 +59,13 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q42' ) );
-		$item->addClaim( $statement1 );
-		$item->addClaim( $statement2 );
-		$item->addClaim( $statement3 );
+		$item->getStatements()->addStatement( $statement1 );
+		$item->getStatements()->addStatement( $statement2 );
+		$item->getStatements()->addStatement( $statement3 );
 
 		$property = Property::newFromType( 'string' );
 		$property->setId( $propertyId );
-		$property->setLabel( 'en', 'a kitten!' );
+		$property->getFingerprint()->setLabel( 'en', 'a kitten!' );
 
 		$entityLookup->putEntity( $item );
 		$entityLookup->putEntity( $property );
@@ -89,8 +89,8 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 		$propertyId = new PropertyId( 'P1337' );
 
 		$snaks = array(
-			'Q42$1' => new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
-			'Q42$2' => new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
+			new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
+			new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
 		);
 
 		return array(
