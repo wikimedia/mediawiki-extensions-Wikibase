@@ -7,7 +7,7 @@ use Site;
 use SiteList;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -29,9 +29,9 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 class LangLinkHandler {
 
 	/**
-	 * @var OtherProjectsSidebarGenerator
+	 * @var OtherProjectsSidebarGeneratorFactory
 	 */
-	private $otherProjectsSidebarGenerator;
+	private $otherProjectsSidebarGeneratorFactory;
 
 	/**
 	 * @var LanguageLinkBadgeDisplay
@@ -74,7 +74,7 @@ class LangLinkHandler {
 	private $itemIds;
 
 	/**
-	 * @param OtherProjectsSidebarGenerator $otherProjectsSidebarGenerator
+	 * @param OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory
 	 * @param LanguageLinkBadgeDisplay $badgeDisplay
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param NamespaceChecker $namespaceChecker determines which namespaces wikibase is enabled on
@@ -84,7 +84,7 @@ class LangLinkHandler {
 	 * @param string $siteGroup The ID of the site group to use for showing language links.
 	 */
 	public function __construct(
-		OtherProjectsSidebarGenerator $otherProjectsSidebarGenerator,
+		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
 		LanguageLinkBadgeDisplay $badgeDisplay,
 		$siteId,
 		NamespaceChecker $namespaceChecker,
@@ -93,7 +93,7 @@ class LangLinkHandler {
 		SiteList $sites,
 		$siteGroup
 	) {
-		$this->otherProjectsSidebarGenerator = $otherProjectsSidebarGenerator;
+		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
 		$this->badgeDisplay = $badgeDisplay;
 		$this->siteId = $siteId;
 		$this->namespaceChecker = $namespaceChecker;
@@ -496,7 +496,10 @@ class LangLinkHandler {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
-			$otherProjects = $this->otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
+			$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory->
+				getOtherProjectsSidebarGenerator();
+
+			$otherProjects = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
 			$out->setExtensionData( 'wikibase-otherprojects-sidebar', $otherProjects );
 		} else {
 			$out->setExtensionData( 'wikibase-otherprojects-sidebar', array() );
