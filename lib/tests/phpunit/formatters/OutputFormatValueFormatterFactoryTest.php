@@ -42,7 +42,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 		);
 	}
 
-	public function makeMockValueFormatter( $value ) {
+	public function getValueFormatter( $value ) {
 		$mock = $this->getMock( 'ValueFormatters\ValueFormatter' );
 
 		$mock->expects( $this->atLeastOnce() )
@@ -63,10 +63,10 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 	}
 
 	public function getValueFormatterProvider() {
-		$this_ = $this;
+		$self = $this;
 		$builders = array(
-			'foo' => function () use ( $this_ ) { return $this_->makeMockValueFormatter( 'FOO' ); },
-			'bar' => function () use ( $this_ ) { return $this_->makeMockValueFormatter( 'BAR' ); },
+			'foo' => function() use ( $self ) { return $self->getValueFormatter( 'FOO' ); },
+			'bar' => function() use ( $self ) { return $self->getValueFormatter( 'BAR' ); },
 		);
 
 		return array(

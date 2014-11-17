@@ -28,11 +28,11 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	/**
 	 * @var MockRepository
 	 */
-	protected $mockRepository;
+	private $siteLinkLookup;
 
 	public function __construct() {
 		$clientStore = new MockClientStore();
-		$this->mockRepository = $clientStore->getEntityLookup();
+		$this->siteLinkLookup = $clientStore->getSiteLinkLookup();
 	}
 
 	/**
@@ -44,7 +44,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 			'WikibaseClientLuaTest'
 		);
 
-		if ( $this->mockRepository->getEntityIdForSiteLink( $siteLink ) ) {
+		if ( $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink ) ) {
 			// Already set up for this MockRepository
 			return;
 		}
@@ -60,7 +60,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 		$statement1->setRank( Statement::RANK_PREFERRED );
 
 		$stringProperty->getStatements()->addStatement( $statement1 );
-		$this->mockRepository->putEntity( $stringProperty );
+		$this->siteLinkLookup->putEntity( $stringProperty );
 
 		$stringSnak2 = $this->getTestSnak(
 			$stringProperty->getId(),
@@ -130,7 +130,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 			}
 		}
 
-		$this->mockRepository->putEntity( $item );
+		$this->siteLinkLookup->putEntity( $item );
 
 		return $item;
 	}

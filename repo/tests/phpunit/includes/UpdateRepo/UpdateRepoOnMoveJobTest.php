@@ -109,9 +109,9 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$item = Item::newEmpty();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Old page name', array( new ItemId( 'Q42' ) ) );
 
-		$store = new MockRepository();
+		$mockRepository = new MockRepository();
 
-		$store->saveEntity( $item, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
+		$mockRepository->saveEntity( $item, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
 
 		$params = array(
 			'siteId' => 'enwiki',
@@ -124,8 +124,8 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$job = new UpdateRepoOnMoveJob( Title::newMainPage(), $params );
 		$job->initServices(
 			$this->getEntityTitleLookup( $item->getId() ),
-			$store,
-			$store,
+			$mockRepository,
+			$mockRepository,
 			$this->getSummaryFormatter(),
 			$this->getEntityPermissionChecker(),
 			$this->getSiteStore( $normalizedPageName )
@@ -134,7 +134,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$job->run();
 
 		/** @var Item $item */
-		$item = $store->getEntity( $item->getId() );
+		$item = $mockRepository->getEntity( $item->getId() );
 
 		$this->assertSame(
 			$expected,

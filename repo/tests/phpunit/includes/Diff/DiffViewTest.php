@@ -114,9 +114,9 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 		$diff = new Diff( $this->getDiffOps( $oldValue, $newValue ) );
 		$siteStore = MockSiteStore::newFromTestSites();
 		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		$mockRepository = new MockRepository();
-		$mockRepository->putEntity( $this->getBadgeItem() );
-		$diffView = new DiffView( $path, $diff, $siteStore, $entityTitleLookup, $mockRepository );
+		$entityRevisionLookup = new MockRepository();
+		$entityRevisionLookup->putEntity( $this->getBadgeItem() );
+		$diffView = new DiffView( $path, $diff, $siteStore, $entityTitleLookup, $entityRevisionLookup );
 
 		$html = $diffView->getHtml();
 

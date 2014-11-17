@@ -31,7 +31,7 @@ class MergeItemsTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @var MockRepository|null
 	 */
-	private $repo = null;
+	private $mockRepository = null;
 
 	/**
 	 * @var EntityModificationTestHelper|null
@@ -49,7 +49,7 @@ class MergeItemsTest extends \PHPUnit_Framework_TestCase {
 		$this->entityModificationTestHelper = new EntityModificationTestHelper();
 		$this->apiModuleTestHelper = new ApiModuleTestHelper();
 
-		$this->repo = $this->entityModificationTestHelper->getRepository();
+		$this->mockRepository = $this->entityModificationTestHelper->getMockRepository();
 
 		$this->entityModificationTestHelper->putEntities( array(
 			'Q1' => array(),
@@ -103,8 +103,8 @@ class MergeItemsTest extends \PHPUnit_Framework_TestCase {
 			$resultBuilder,
 			new ItemMergeInteractor(
 				$changeOpsFactory,
-				$this->repo,
-				$this->repo,
+				$this->mockRepository,
+				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
 				$module->getUser()

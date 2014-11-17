@@ -24,18 +24,18 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 * @return EntityInfo
 	 */
 	private function getEntityInfo( array $entities ) {
-		$repo = new MockRepository();
+		$entityRevisionLookup = new MockRepository();
 		$ids = array();
 
 		foreach ( $entities as $entity ) {
-			$repo->putEntity( $entity );
+			$entityRevisionLookup->putEntity( $entity );
 			$ids[] = $entity->getId();
 		}
 
 		$builder = new GenericEntityInfoBuilder(
 			$ids,
 			new BasicEntityIdParser(),
-			$repo
+			$entityRevisionLookup
 		);
 
 		$builder->collectTerms();

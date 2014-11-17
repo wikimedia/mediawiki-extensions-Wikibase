@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Test;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Test\MockRepository;
 
 /**
@@ -26,6 +27,9 @@ class EntityRetrievingDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 		'P9001' => 'positive whole number',
 	);
 
+	/**
+	 * @return EntityLookup
+	 */
 	private function newEntityLookup() {
 		$lookup = new MockRepository();
 

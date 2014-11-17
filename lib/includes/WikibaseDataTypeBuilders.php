@@ -50,17 +50,17 @@ class WikibaseDataTypeBuilders {
 	private $urlSchemes;
 
 	/**
-	 * @param EntityLookup $lookup
-	 * @param EntityIdParser $idParser
+	 * @param EntityLookup $entityLookup
+	 * @param EntityIdParser $entityIdParser
 	 * @param string[] $urlSchemes
 	 */
 	public function __construct(
-		EntityLookup $lookup,
-		EntityIdParser $idParser,
+		EntityLookup $entityLookup,
+		EntityIdParser $entityIdParser,
 		array $urlSchemes
 	) {
-		$this->entityIdParser = $idParser;
-		$this->entityLookup = $lookup;
+		$this->entityLookup = $entityLookup;
+		$this->entityIdParser = $entityIdParser;
 		$this->urlSchemes = $urlSchemes;
 	}
 

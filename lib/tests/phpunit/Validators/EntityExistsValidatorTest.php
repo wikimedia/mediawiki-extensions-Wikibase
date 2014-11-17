@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Test\MockRepository;
 use Wikibase\Validators\EntityExistsValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
@@ -23,6 +24,9 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @return EntityLookup
+	 */
 	private function getEntityLookup() {
 		$q8 = new Item( new ItemId( 'Q8' ) );
 
