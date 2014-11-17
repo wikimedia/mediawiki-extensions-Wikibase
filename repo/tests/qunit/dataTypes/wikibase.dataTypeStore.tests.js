@@ -7,13 +7,13 @@
 ( function( QUnit, dataTypeStore, dataTypes ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.dataTypes' );
+	QUnit.module( 'wikibase.dataTypeStore' );
 
 	QUnit.test( 'instance check', function( assert ) {
 		assert.ok(
 			dataTypeStore instanceof dataTypes.DataTypeStore,
-			'wikibase.dataTypes is a data type store.'
+			'wikibase.dataTypeStore is a DataTypeStore.'
 		);
 	} );
 
-}( QUnit, wikibase.dataTypes, dataTypes ) );
+}( QUnit, wikibase.dataTypeStore, dataTypes ) );
