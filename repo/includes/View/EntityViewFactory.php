@@ -7,21 +7,15 @@ use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\ClaimHtmlGenerator;
+use Wikibase\EntityView;
 use Wikibase\ItemView;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageLabelLookup;
-use Wikibase\Lib\WikibaseValueFormatterBuilders;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\PropertyView;
-use Wikibase\Repo\View\ClaimsView;
-use Wikibase\Repo\View\FingerprintView;
-use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
  * @since 0.5
@@ -65,19 +59,22 @@ class EntityViewFactory {
 	/**
 	 * Creates an EntityView suitable for rendering the entity.
 	 *
-	 * @param LanguageFallbackChain $fallbackChain
-	 * @param string $languageCode
 	 * @param string $entityType
+	 * @param string $languageCode
+	 * @param LanguageFallbackChain|null $fallbackChain
+	 * @param LabelLookup|null $labelLookup
 	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityView
 	 */
 	public function newEntityView(
-		LanguageFallbackChain $fallbackChain,
+		$entityType,
 		$languageCode,
-		$entityType
+		LanguageFallbackChain $fallbackChain = null,
+		LabelLookup $labelLookup = null
 	 ) {
 		$fingerprintView = $this->newFingerprintView( $languageCode );
-		$claimsView = $this->newClaimsView( $fallbackChain, $languageCode );
+		$claimsView = $this->newClaimsView( $languageCode, $fallbackChain, $labelLookup );
 
 		// @fixme all that seems needed in EntityView is language code and dir.
 		$language = Language::factory( $languageCode );
@@ -93,17 +90,19 @@ class EntityViewFactory {
 	}
 
 	/**
-	 * @param LanguageFallbackChain $fallbackChain
 	 * @param string $languageCode
+	 * @param LanguageFallbackChain|null $fallbackChain
+	 * @param LabelLookup|null $labelLookup
 	 *
 	 * @return ClaimsView
 	 */
 	private function newClaimsView(
-		LanguageFallbackChain $fallbackChain,
-		$languageCode
+		$languageCode,
+		LanguageFallbackChain $fallbackChain = null,
+		LabelLookup $labelLookup = null
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
-			$this->getSnakFormatter( $fallbackChain, $languageCode ),
+			$this->getSnakFormatter( $languageCode, $fallbackChain, $labelLookup ),
 			$this->entityTitleLookup
 		);
 
@@ -133,20 +132,28 @@ class EntityViewFactory {
 	}
 
 	/**
-	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param string $languageCode
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param LabelLookup $labelLookup
 	 *
 	 * @return SnakFormatter
 	 */
 	private function getSnakFormatter(
-		LanguageFallbackChain $languageFallbackChain,
-		$languageCode
+		$languageCode,
+		LanguageFallbackChain $languageFallbackChain = null,
+		LabelLookup $labelLookup = null
 	) {
 		$formatterOptions = new FormatterOptions();
 		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $languageCode );
-		$formatterOptions->setOption( 'languages', $languageFallbackChain );
 
-		// @fixme use language fallback here
+		if ( $languageFallbackChain ) {
+			$formatterOptions->setOption( 'languages', $languageFallbackChain );
+		}
+
+		if ( $labelLookup ) {
+			$formatterOptions->setOption( 'LabelLookup', $labelLookup );
+		}
+
 		return $this->snakFormatterFactory->getSnakFormatter(
 			SnakFormatter::FORMAT_HTML_WIDGET,
 			$formatterOptions
