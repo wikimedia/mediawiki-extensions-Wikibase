@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\RecentChanges;
 
 use Wikibase\Client\RecentChanges\RevisionData;
 
@@ -54,4 +54,5 @@ class RevisionDataTest extends \PHPUnit_Framework_TestCase {
 		$comment = array( 'key' => 'wikibase-comment-update' );
 		return new RevisionData( 'Cat', 5, 92, 90, '20130819111741', $comment, 'testrepo' );
 	}
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Scribunto\Test;
 
 use Wikibase\Client\Scribunto\Test\Scribunto_LuaWikibaseLibraryTestCase;
 
@@ -18,6 +18,7 @@ use Wikibase\Client\Scribunto\Test\Scribunto_LuaWikibaseLibraryTestCase;
  * @author Marius Hoch < hoo@online.de >
  */
 class Scribunto_LuaWikibaseLibraryNoArbitraryAccessTest extends Scribunto_LuaWikibaseLibraryTestCase {
+
 	protected static $moduleName = 'LuaWikibaseLibraryNoArbitraryAccessTests';
 
 	function getTestModules() {
