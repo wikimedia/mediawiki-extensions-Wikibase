@@ -7,25 +7,20 @@ use IContextSource;
 use Language;
 use MediaWikiSite;
 use OutputPage;
-use Parser;
-use ParserOptions;
 use ParserOutput;
 use RequestContext;
 use Site;
 use SiteStore;
 use Skin;
-use StripState;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\InterwikiSorter;
-use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -133,7 +128,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			'interwikiSortOrders' => array( 'alphabetic' => array(
 				'ar', 'de', 'en', 'sv', 'zh'
 			) ),
-			'siteGlobalid' => 'enwiki',
+			'siteGlobalID' => 'enwiki',
 			'languageLinkSiteGroup' => 'wikipedia',
 			'namespaces' => array( NS_MAIN, NS_CATEGORY ),
 			'alwaysSort' => false,
@@ -162,6 +157,25 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		return $sidebarGenerator;
 	}
 
+	/**
+	 * @return OtherProjectsSidebarGeneratorFactory
+	 */
+	private function getOtherProjectsSidebarGeneratorFactory( array $projects ) {
+		$otherProjectsSidebarGenerator = $this->getSidebarGenerator( $projects );
+
+		$otherProjectsSidebarGeneratorFactory = $this->getMockBuilder(
+				'Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory'
+			)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$otherProjectsSidebarGeneratorFactory->expects( $this->any() )
+			->method( 'getOtherProjectsSidebarGenerator' )
+			->will( $this->returnValue( $otherProjectsSidebarGenerator ) );
+
+		return $otherProjectsSidebarGeneratorFactory;
+	}
+
 	private function newSidebarHookHandlers( array $settings = array() ) {
 		$badgeId = $this->getBadgeItem()->getId();
 
@@ -181,10 +195,8 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$en = Language::factory( 'en' );
 		$settings = $this->newSettings( $settings );
 
-		$siteId = $settings->getSetting( 'siteGlobalid' );
 		$siteGroup = $settings->getSetting( 'languageLinkSiteGroup' );
 		$namespaces = $settings->getSetting( 'namespaces' );
-		$otherProjectIds = $settings->getSetting( 'otherProjectsLinks' );
 
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
 		$siteStore = $this->getSiteStore();
@@ -192,59 +204,20 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$mockRepo = $this->getMockRepo( $links );
 		$mockRepo->putEntity( $this->getBadgeItem() );
 
-		$otherProjectsSidebarGenerator = new OtherProjectsSidebarGenerator(
-			$siteId,
-			$mockRepo,
-			$siteStore->getSites(),
-			$otherProjectIds
-		);
-
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
 			$mockRepo,
 			array( 'Q17' => 'featured' ),
 			$en
 		);
 
-		$langLinkHandler = new LangLinkHandler(
-			$otherProjectsSidebarGenerator,
-			$badgeDisplay,
-			$siteId,
-			$namespaceChecker,
-			$mockRepo,
-			$mockRepo,
-			$siteStore->getSites(),
-			$siteGroup
-		);
-
-		$interwikiSorter = new InterwikiSorter(
-			$settings->getSetting( 'sort' ),
-			$settings->getSetting( 'interwikiSortOrders' ),
-			$settings->getSetting( 'sortPrepend' )
-		);
-
-		$sidebarGenerator = $this->getSidebarGenerator( array( 'dummy' => 'xyz' ) );
-
 		return new SidebarHookHandlers(
 			$namespaceChecker,
-			$langLinkHandler,
 			$badgeDisplay,
-			$interwikiSorter,
-			$sidebarGenerator,
-			$settings
+			$this->getOtherProjectsSidebarGeneratorFactory( array( 'dummy' => 'xyz' ) ),
+			$settings->getSetting( 'otherProjectsLinksBeta' ),
+			$settings->getSetting( 'otherProjectsLinksByDefault' )
 		);
 
-	}
-
-	private function newParser( Title $title, array $pageProps, array $extensionData ) {
-		$popt = new ParserOptions();
-		$parser = new Parser();
-
-		$parser->startExternalParse( $title, $popt, Parser::OT_HTML );
-
-		$parserOutput = $parser->getOutput();
-		$this->primeParserOutput( $parserOutput, $pageProps, $extensionData );
-
-		return $parser;
 	}
 
 	private function primeParserOutput( ParserOutput $parserOutput, array $pageProps, array $extensionData ) {
@@ -267,138 +240,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Client\Hooks\SidebarHookHandlers', $handler );
 
 		$settings->setSetting( 'siteGroup', $oldSiteGroupValue );
-	}
-
-	public function parserAfterParseProvider() {
-		$commonsOxygen = array(
-			'msg' => 'wikibase-otherprojects-commons',
-			'class' => 'wb-otherproject-link wb-otherproject-commons',
-			'href' => 'http://commonswiki.test.com/wiki/Oxygen',
-			'hreflang' => 'en',
-		);
-
-		$badgesQ1 = array(
-			'class' => 'badge-Q17 featured',
-			'label' => 'featured',
-		);
-
-		return array(
-			'repo-links' => array(
-				Title::makeTitle( NS_MAIN, 'Oxygen' ),
-				'Q1',
-				array(),
-				array( 'de:Sauerstoff' ),
-				array( $commonsOxygen ),
-				array( 'de' => $badgesQ1 ),
-			),
-
-			'noexternallanglinks=*' => array(
-				Title::makeTitle( NS_MAIN, 'Oxygen' ),
-				'Q1',
-				array( 'noexternallanglinks' => serialize( array( '*' ) ) ),
-				array(),
-				array( $commonsOxygen ),
-				null,
-			),
-
-			'noexternallanglinks=de' => array(
-				Title::makeTitle( NS_MAIN, 'Oxygen' ),
-				'Q1',
-				array( 'noexternallanglinks' => serialize( array( 'de' ) ) ),
-				array(),
-				array( $commonsOxygen ),
-				array(),
-			),
-
-			'noexternallanglinks=ja' => array(
-				Title::makeTitle( NS_MAIN, 'Oxygen' ),
-				'Q1',
-				array( 'noexternallanglinks' => serialize( array( 'ja' ) ) ),
-				array( 'de:Sauerstoff' ),
-				array( $commonsOxygen ),
-				array( 'de' => $badgesQ1 ),
-			),
-		);
-	}
-
-	/**
-	 * @dataProvider parserAfterParseProvider
-	 */
-	public function testDoParserAfterParse(
-		Title $title,
-		$expectedItem,
-		$pagePropsBefore,
-		$expectedLanguageLinks,
-		$expectedSisterLinks,
-		$expectedBadges
-	) {
-		$parser = $this->newParser( $title, $pagePropsBefore, array() );
-		$handler = $this->newSidebarHookHandlers();
-
-		$handler->doParserAfterParse( $parser );
-
-		$expectedUsage = array(
-			new EntityUsage(
-				new ItemId( $expectedItem ),
-				EntityUsage::SITELINK_USAGE
-			)
-		);
-
-		$parserOutput = $parser->getOutput();
-
-		$this->assertEquals( $expectedItem, $parserOutput->getProperty( 'wikibase_item' ) );
-		$this->assertLanguageLinks( $expectedLanguageLinks, $parserOutput );
-		$this->assertSisterLinks( $expectedSisterLinks, $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
-
-		$actualUsage = $parserOutput->getExtensionData( 'wikibase-entity-usage' );
-
-		$this->assertEquals( array_values( $expectedUsage ), array_values( $actualUsage ) );
-
-		$actualBadges = $parserOutput->getExtensionData( 'wikibase_badges' );
-
-		// $actualBadges contains info arrays, these are checked by LanguageLinkBadgeDisplayTest and LangLinkHandlerTest
-		$this->assertEquals( $expectedBadges , $actualBadges );
-	}
-
-	/**
-	 * @see https://bugzilla.wikimedia.org/show_bug.cgi?id=71772
-	 */
-	public function testOnParserAfterParse_withoutParameters() {
-		$this->assertTrue( SidebarHookHandlers::onParserAfterParse() );
-	}
-
-	public function parserAfterParseProvider_noItem() {
-		return array(
-			'no-item' => array(
-				Title::makeTitle( NS_MAIN, 'Plutonium' ),
-			),
-
-			'ignored-namespace' => array(
-				Title::makeTitle( NS_USER, 'Foo' ),
-			),
-		);
-	}
-
-	/**
-	 * @dataProvider parserAfterParseProvider_noItem
-	 */
-	public function testDoParserAfterParse_noItem( Title $title ) {
-
-		$parser = $this->newParser( $title, array(), array() );
-		$handler = $this->newSidebarHookHandlers();
-
-		$text = '';
-		$stripState = new StripState( 'x' );
-		$handler->doParserAfterParse( $parser, $text, $stripState );
-
-		$parserOutput = $parser->getOutput();
-		$this->assertEquals( null, $parserOutput->getProperty( 'wikibase_item' ) );
-
-		$this->assertEmpty( $parserOutput->getLanguageLinks() );
-		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
-
-		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
-		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase_badges' ) );
 	}
 
 	public function testDoOutputPageParserOutput() {
@@ -557,34 +398,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 		foreach ( $props as $key => $value ) {
 			$this->assertEquals( $value, $outputPage->getProperty( $key ), 'OutputProperty: ' . $key );
-		}
-	}
-
-	private function assertLanguageLinks( $links, ParserOutput $parserOutput ) {
-		$this->assertInternalType( 'array', $links );
-
-		$actualLinks = $parserOutput->getLanguageLinks();
-
-		foreach ( $links as $link ) {
-			$this->assertContains( $link, $actualLinks, 'LanguageLink: ' );
-		}
-
-		$this->assertSameSize( $links, $actualLinks, 'Unmatched languageLinks!' );
-	}
-
-
-	private function assertSisterLinks( $expectedLinks, $actualLinks ) {
-		if ( !is_array( $expectedLinks ) ) {
-			$this->assertEquals( $expectedLinks, $actualLinks );
-			return;
-		}
-
-		$this->assertSameSize( $expectedLinks, $actualLinks, 'SisterLinks' );
-
-		$actual = reset( $actualLinks );
-		foreach ( $expectedLinks as $expected ) {
-			$this->assertEquals( $expected, $actual, 'SisterLink: ' );
-			$actual = next( $actualLinks );
 		}
 	}
 

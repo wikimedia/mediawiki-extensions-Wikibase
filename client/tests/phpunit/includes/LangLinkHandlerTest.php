@@ -82,7 +82,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$siteStore = MockSiteStore::newFromTestSites();
 
 		return new LangLinkHandler(
-			$this->getOtherProjectsSidebarGenerator( $otherProjects ),
+			$this->getOtherProjectsSidebarGeneratorFactory( $otherProjects ),
 			$this->getLanguageLinkBadgeDisplay(),
 			'srwiki',
 			new NamespaceChecker( array( NS_TALK ), array() ),
@@ -91,6 +91,22 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			$siteStore->getSites(),
 			'wikipedia'
 		);
+	}
+
+	private function getOtherProjectsSidebarGeneratorFactory( array $otherProjects ) {
+		$otherProjectsSidebarGenerator = $this->getOtherProjectsSidebarGenerator( $otherProjects );
+
+		$otherProjectsSidebarGeneratorFactory = $this->getMockBuilder(
+				'Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory'
+			)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$otherProjectsSidebarGeneratorFactory->expects( $this->any() )
+			->method( 'getOtherProjectsSidebarGenerator' )
+			->will( $this->returnValue( $otherProjectsSidebarGenerator ) );
+
+		return $otherProjectsSidebarGeneratorFactory;
 	}
 
 	/**
