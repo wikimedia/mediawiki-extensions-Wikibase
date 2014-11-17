@@ -2,11 +2,14 @@
 
 namespace Wikibase\DataAccess\PropertyParserFunction;
 
-use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\BestStatementsFinder;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\Store\EntityLookup;
 
 /**
@@ -52,17 +55,20 @@ class SnaksFinder {
 
 		// We only want the best claims over here, so that we only show the most
 		// relevant information.
-		$claims = $this->getClaimsForProperty( $entity, $propertyId, $languageCode );
+		$bestStatements = $this->getBestStatementsForProperty( $entity, $propertyId );
 
-		$bestClaims = $claims->getBestClaims();
-
-		if ( $bestClaims->isEmpty() ) {
+		if ( $bestStatements->isEmpty() ) {
 			wfDebugLog( __CLASS__, __METHOD__ . ': no claims found.' );
 			wfProfileOut( __METHOD__ );
 			return array();
 		}
 
-		$snaks = $bestClaims->getMainSnaks();
+		$snaks = array_map(
+			function( Statement $statement ) {
+				return $statement->getMainSnak();
+			},
+			$bestStatements
+		);
 
 		wfProfileOut( __METHOD__ );
 		return $snaks;
@@ -72,16 +78,18 @@ class SnaksFinder {
 	 * Returns such Claims from $entity that have a main Snak for the property that
 	 * is specified by $propertyId.
 	 *
-	 * @param Entity $entity The Entity from which to get the clams
-	 * @param string $propertyId
-	 * @param string $languageCode
+	 * @param EntityDocument $entity The Entity from which to get the clams
+	 * @param PropertyId $propertyId
 	 *
-	 * @return Claims The claims for the given property.
+	 * @return StatementList
 	 */
-	private function getClaimsForProperty( Entity $entity, $propertyId, $languageCode ) {
-		$allClaims = new Claims( $entity->getClaims() );
+	private function getBestStatementsForProperty( EntityDocument $entity, PropertyId $propertyId ) {
+		if ( $entity instanceof StatementListProvider ) {
+			$bestStatementsFinder = new BestStatementsFinder( $entity->getStatements() );
+			return $bestStatementsFinder->getBestStatementsForProperty( $propertyId );
+		}
 
-		return $allClaims->getClaimsForProperty( $propertyId );
+		return new StatementList();
 	}
 
 }
