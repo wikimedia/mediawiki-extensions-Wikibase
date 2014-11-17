@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -29,7 +29,7 @@ interface EntityLookup {
 	 * @param EntityId $entityId
 	 *
 	 * @throws StorageException
-	 * @return Entity|null
+	 * @return EntityDocument|null
 	 */
 	public function getEntity( EntityId $entityId );
 

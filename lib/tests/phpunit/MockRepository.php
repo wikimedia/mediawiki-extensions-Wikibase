@@ -7,6 +7,7 @@ use Status;
 use User;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -93,7 +94,7 @@ class MockRepository implements
 	 *
 	 * @param EntityID $entityId
 	 *
-	 * @return Entity|null
+	 * @return EntityDocument|null
 	 *
 	 * @throws StorageException
 	 */
