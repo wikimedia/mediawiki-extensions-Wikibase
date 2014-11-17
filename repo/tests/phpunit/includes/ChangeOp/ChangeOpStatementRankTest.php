@@ -5,11 +5,13 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpStatementRank;
-use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
@@ -80,15 +82,14 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $rank, $expectedRank, "No reference with expected hash" );
 	}
 
-	private function newItemWithClaim( $itemIdString, $snak ) {
+	private function newItemWithClaim( $itemIdString, $mainSnak ) {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( $itemIdString ) );
 
-		$claim = $item->newClaim( $snak );
-		$claim->setGuid( $itemIdString . '$D8499CDA-25E4-4334-AG03-A3290BCD9CQP' );
-		$claims = new Claims();
-		$claims->addClaim( $claim );
-		$item->setClaims( $claims );
+		$statement = new Statement( new Claim( $mainSnak ) );
+		$statement->setGuid( $itemIdString . '$D8499CDA-25E4-4334-AG03-A3290BCD9CQP' );
+		$statements = new StatementList( array( $statement ) );
+		$item->setStatements( $statements );
 
 		return $item;
 	}

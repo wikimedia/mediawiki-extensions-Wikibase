@@ -6,7 +6,6 @@ use Wikibase\Change;
 use Wikibase\ChangeRow;
 use Wikibase\ChangesTable;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -15,6 +14,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DiffChange;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
@@ -178,13 +178,13 @@ final class TestChanges {
 			$statement = new Statement( new Claim( $snak ) );
 			$statement->setGuid( 'TEST$test-guid' );
 
-			$claims = new Claims( array( $statement ) );
-			$new->setClaims( $claims );
+			$statements = new StatementList( array( $statement ) );
+			$new->setStatements( $statements );
 			$changes['add-claim'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$claims = new Claims();
-			$new->setClaims( $claims );
+			$statements = new StatementList();
+			$new->setStatements( $statements );
 			$changes['remove-claim'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 

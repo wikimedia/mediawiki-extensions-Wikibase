@@ -181,11 +181,6 @@ class EditEntity extends ModifyEntity {
 				}
 			}
 			$entity->clear();
-
-			// bug 67791 (can be removed with DataModel 1.0)
-			if ( method_exists( $entity, 'setClaims' ) ) {
-				$entity->setClaims( new Claims() );
-			}
 		}
 
 		// if we create a new property, make sure we set the datatype
