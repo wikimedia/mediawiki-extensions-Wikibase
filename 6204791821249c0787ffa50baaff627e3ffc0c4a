@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_04acf3e9",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-17T11:31:44Z",
+      "side": 1,
+      "message": "Where does this number come from?",
+      "revId": "6204791821249c0787ffa50baaff627e3ffc0c4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
