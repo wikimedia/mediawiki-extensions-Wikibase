@@ -12,7 +12,7 @@ use Wikibase\SettingsArray;
 use Wikibase\Test\MockSiteStore;
 
 /**
- * @covers Wikibase\Client\Changes\WikibaseClient
+ * @covers Wikibase\Client\WikibaseClient
  *
  * @group Wikibase
  * @group WikibaseClient
