@@ -60,14 +60,12 @@ class BestStatementsFinder {
 	 *
 	 * @param PropertyId $propertyId
 	 * @return Statement[]
-	 * @throws OutOfBoundsException
 	 */
 	public function getBestStatementsForProperty( PropertyId $propertyId ) {
 		$bestRank = Statement::RANK_NORMAL;
 		$statements = array();
 
-		/** @var Statement $statement */
-		foreach ( $this->byPropertyIdGrouper->getByPropertyId( $propertyId ) as $statement ) {
+		foreach ( $this->getStatementsBy( $propertyId ) as $statement ) {
 			$rank = $statement->getRank();
 			if ( $rank > $bestRank ) {
 				// clear statements if we found a better one
@@ -80,6 +78,19 @@ class BestStatementsFinder {
 		}
 
 		return $statements;
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return Statement[]
+	 */
+	private function getStatementsBy( PropertyId $propertyId ) {
+		if ( $this->byPropertyIdGrouper->hasPropertyId( $propertyId ) ) {
+			return $this->byPropertyIdGrouper->getByPropertyId( $propertyId );
+		}
+
+		return array();
 	}
 
 }
