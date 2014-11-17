@@ -38,10 +38,6 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $statements = array() ) {
-		$this->addStatements( $statements );
-	}
-
-	private function addStatements( $statements ) {
 		$this->assertAreStatements( $statements );
 
 		if ( is_array( $statements ) ) {

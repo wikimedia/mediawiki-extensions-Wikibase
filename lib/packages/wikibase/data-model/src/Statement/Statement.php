@@ -52,17 +52,6 @@ class Statement extends Claim {
 	}
 
 	/**
-	 * @since 2.3
-	 *
-	 * @param Snak $mainSnak
-	 *
-	 * @return Statement
-	 */
-	public static function newFromMainSnak( Snak $mainSnak ) {
-		return new self( new Claim( $mainSnak ) );
-	}
-
-	/**
 	 * Returns the references attached to this statement.
 	 *
 	 * @since 0.1

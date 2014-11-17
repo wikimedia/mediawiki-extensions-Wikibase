@@ -5,7 +5,6 @@
 * Added `AliasGroupList::toArray`
 * Added `StatementList::getMainSnaks`
 * Added `StatementList::getWithPropertyId`
-* Added `Statement::newFromMainSnak`
 * `BestStatementsFinder::getBestStatementsForProperty` no longer throws an `OutOfBounds` exception
 
 ## Version 2.2.0 (2014-11-10)
