@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_64f4d7b9",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseEntityLibraryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-17T12:03:10Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be wikibase\\Client\\Tests\\Scribunto?",
+      "revId": "28e0d79f009c368afc30f41b6036b8c55f2bcafb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_24c24f5e",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryNoArbitraryAccessTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-17T12:03:10Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be wikibase\\Client\\Tests\\Scribunto?",
+      "revId": "28e0d79f009c368afc30f41b6036b8c55f2bcafb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_44c51b63",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-17T12:03:10Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be wikibase\\Client\\Tests\\Scribunto?",
+      "revId": "28e0d79f009c368afc30f41b6036b8c55f2bcafb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
