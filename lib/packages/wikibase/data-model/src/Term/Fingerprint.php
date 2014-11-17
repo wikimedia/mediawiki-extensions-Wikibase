@@ -19,9 +19,9 @@ class Fingerprint implements Comparable {
 	 */
 	public static function newEmpty() {
 		return new self(
-			new TermList( array() ),
-			new TermList( array() ),
-			new AliasGroupList( array() )
+			new TermList(),
+			new TermList(),
+			new AliasGroupList()
 		);
 	}
 
