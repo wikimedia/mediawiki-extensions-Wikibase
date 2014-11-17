@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
@@ -394,9 +395,26 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	public function testNonEmptyListIsNotEmpty() {
 		$list = new StatementList( array(
 			$this->getStatementWithSnak( 1, 'foo' ),
-		));
+		) );
 
 		$this->assertFalse( $list->isEmpty() );
+	}
+
+	public function testGetMainSnaks() {
+		$list = new StatementList();
+
+		$list->addNewStatement( new PropertyNoValueSnak( 42 ) );
+		$list->addNewStatement( new PropertyNoValueSnak( 1337 ), array( new PropertyNoValueSnak( 32202 ) ) );
+		$list->addNewStatement( new PropertyNoValueSnak( 9001 ) );
+
+		$this->assertEquals(
+			array(
+				new PropertyNoValueSnak( 42 ),
+				new PropertyNoValueSnak( 1337 ),
+				new PropertyNoValueSnak( 9001 ),
+			),
+			$list->getMainSnaks()
+		);
 	}
 
 }
