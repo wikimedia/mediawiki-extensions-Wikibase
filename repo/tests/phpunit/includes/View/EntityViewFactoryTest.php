@@ -7,6 +7,8 @@ use ParserOptions;
 use TestUser;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfoTermLookup;
+use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Repo\View\EntityViewFactory;
 
 /**
@@ -21,10 +23,14 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewEntityView( $expectedClass, $entityType ) {
 		$entityViewFactory = $this->getEntityViewFactory();
 
+		$languageFallback = new LanguageFallbackChain( array() );
+		$labelLookup = new LanguageLabelLookup( new EntityInfoTermLookup( array() ), 'de' );
+
 		$entityView = $entityViewFactory->newEntityView(
-			new LanguageFallbackChain( array() ),
+			$entityType,
 			'de',
-			$entityType
+			$languageFallback,
+			$labelLookup
 		);
 
 		$this->assertInstanceOf( $expectedClass, $entityView );
@@ -43,9 +49,8 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->setExpectedException( 'InvalidArgumentException' );
 
 		$entityViewFactory->newEntityView(
-			new LanguageFallbackChain( array() ),
-			'de',
-			'kittens'
+			'kittens',
+			'de'
 		);
 	}
 
