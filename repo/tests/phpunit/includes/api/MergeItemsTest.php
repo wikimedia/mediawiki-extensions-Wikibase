@@ -32,7 +32,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	/**
 	 * @var MockRepository|null
 	 */
-	private $repo = null;
+	private $mockRepository = null;
 
 	/**
 	 * @var EntityModificationTestHelper|null
@@ -50,7 +50,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		$this->entityModificationTestHelper = new EntityModificationTestHelper();
 		$this->apiModuleTestHelper = new ApiModuleTestHelper();
 
-		$this->repo = $this->entityModificationTestHelper->getRepository();
+		$this->mockRepository = $this->entityModificationTestHelper->getMockRepository();
 
 		$this->entityModificationTestHelper->putEntities( array(
 			'Q1' => array(),
@@ -104,8 +104,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			$resultBuilder,
 			new ItemMergeInteractor(
 				$changeOpsFactory,
-				$this->repo,
-				$this->repo,
+				$this->mockRepository,
+				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
 				$module->getUser()
