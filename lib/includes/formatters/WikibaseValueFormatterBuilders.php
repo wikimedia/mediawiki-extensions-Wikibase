@@ -16,6 +16,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
 
@@ -511,8 +512,14 @@ class WikibaseValueFormatterBuilders {
 	) {
 		$termLookup = new EntityRetrievingTermLookup( $builders->entityLookup );
 
-		// @fixme inject the label lookup
-		if ( $options->hasOption( 'languages' ) ) {
+		if ( $options->hasOption( 'LabelLookup' ) ) {
+			$labelLookup = $options->getOption( 'LabelLookup' );
+
+			if ( !( $labelLookup instanceof LabelLookup ) ) {
+				throw new InvalidArgumentException( 'Option LabelLookup must be used ' .
+					'with an instance of LabelLookup.' );
+			}
+		} elseif ( $options->hasOption( 'languages' ) ) {
 			$labelLookup = new LanguageFallbackLabelLookup(
 				$termLookup,
 				$options->getOption( 'languages' )
