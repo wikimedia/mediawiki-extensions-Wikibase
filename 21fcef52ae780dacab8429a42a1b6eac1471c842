@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_a2bc0f02",
+        "filename": "client/includes/hooks/DeletePageNotice.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-17T16:20:38Z",
+      "side": 1,
+      "message": "The class name suggests this is a value object, yet it is actually a service. It does not represent a delete page notice at all. (And if it did, PageDeletionNotice or PageDeletedNotice would be a better grammars)",
+      "revId": "21fcef52ae780dacab8429a42a1b6eac1471c842",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e2df776a",
+        "filename": "client/includes/hooks/DeletePageNotice.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-17T16:20:38Z",
+      "side": 1,
+      "message": "\u003cinsert complaint about the final here /\u003e",
+      "revId": "21fcef52ae780dacab8429a42a1b6eac1471c842",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_623a8795",
+        "filename": "client/tests/phpunit/includes/UpdateRepo/UpdateRepoOnDeleteTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-17T16:20:38Z",
+      "side": 1,
+      "message": "Does this need to derive from MediaWikiTestCase? I did not readily see anything that needs it.",
+      "revId": "21fcef52ae780dacab8429a42a1b6eac1471c842",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_42374bac",
+        "filename": "client/tests/phpunit/includes/UpdateRepo/UpdateRepoOnDeleteTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-17T16:20:38Z",
+      "side": 1,
+      "message": "can be private",
+      "revId": "21fcef52ae780dacab8429a42a1b6eac1471c842",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
