@@ -1,11 +1,9 @@
 <?php
 
-namespace Wikibase\DataAccess\Tests;
+namespace Wikibase\Client\Tests\DataAccess;
 
 use DataValues\StringValue;
 use Wikibase\DataAccess\PropertyIdResolver;
-use Wikibase\DataModel\Claim;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Test\MockPropertyLabelResolver;
@@ -79,4 +77,5 @@ class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 			array( 'Q100' )
 		);
 	}
+
 }
