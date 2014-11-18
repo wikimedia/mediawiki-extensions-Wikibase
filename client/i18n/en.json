@@ -14,6 +14,8 @@
 	"accesskey-t-wikibase": "g",
 	"wikibase-after-page-move": "You may also [$1 update] the associated {{WBREPONAME}} item to maintain language links on moved page.",
 	"wikibase-after-page-move-queued": "The [$1 {{WBREPONAME}} item] associated with this page will be automatically updated soon.",
+	"wikibase-after-page-delete": "You may also remove the link to this page from the associated [$1 {{WBREPONAME}} item] to maintain language links.",
+	"wikibase-after-page-delete-queued": "The [$1 {{WBREPONAME}} item] associated with this page will be automatically updated soon.",
 	"wikibase-comment-add": "A {{WBREPONAME}} item has been created.",
 	"wikibase-comment-remove": "Associated {{WBREPONAME}} item deleted. Language links removed.",
 	"wikibase-comment-linked": "A {{WBREPONAME}} item has been linked to this page.",
