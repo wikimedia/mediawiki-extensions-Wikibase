@@ -467,11 +467,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.tipsy',
-				'jquery.ui.toggler',
 				'jquery.ui.widget',
-			),
-			'messages' => array(
-				'wikibase-tooltip-error-details',
+				'wikibase.utilities',
 			),
 		),
 

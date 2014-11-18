@@ -179,4 +179,36 @@
 		return $msg;
 	};
 
+	/**
+	 * Generates standardized output for errors.
+	 *
+	 * @param {Error} error
+	 * @return {jQuery}
+	 */
+	wb.utilities.ui.buildErrorOutput = function( error ) {
+		var $message = $( '<div/>' ).addClass( 'wb-error' );
+
+		$message.append( $( '<div/>' ).addClass( 'wb-error-message' ).text( error.message ) );
+
+		// Append detailed error message if given; hide it behind toggle:
+		if( error.detailedMessage ) {
+			var $detailedMessage = $( '<div/>', {
+				'class': 'wb-error-details',
+				html: error.detailedMessage
+			} )
+			.hide();
+
+			var $toggler = $( '<a/>' )
+				.addClass( 'wb-error-details-link' )
+				.text( mw.msg( 'wikibase-tooltip-error-details' ) )
+				.toggler( { $subject: $detailedMessage, duration: 'fast' } );
+
+			$message
+			.append( $toggler )
+			.append( $detailedMessage );
+		}
+
+		return $message;
+	};
+
 }( mediaWiki, wikibase, jQuery ) );
