@@ -27,13 +27,13 @@ use Title;
 use UnexpectedValueException;
 use User;
 use Wikibase\Client\Changes\ChangeHandler;
-use Wikibase\Client\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\ChangesPageWikibaseFilterHandler;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
-use Wikibase\Client\MovePageNotice;
+use Wikibase\Client\MovePageNoticeCreator;
+use Wikibase\Client\DeletePageNoticeCreator;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFilterOptions;
@@ -184,7 +184,7 @@ final class ClientHooks {
 		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
 		$repoLinker = $wikibaseClient->newRepoLinker();
 
-		$movePageNotice = new MovePageNotice(
+		$movePageNotice = new MovePageNoticeCreator(
 			$siteLinkLookup,
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' ),
 			$repoLinker

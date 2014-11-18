@@ -8,15 +8,15 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * Adds a notice about the Wikibase Item belonging to the current page
+ * Gets a notice about the Wikibase Item belonging to the current page
  * after a move (in case there's one).
  *
- * @since 0.4
+ * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-final class MovePageNotice {
+class MovePageNoticeCreator {
 
 	/**
 	 * @var SiteLinkLookup
