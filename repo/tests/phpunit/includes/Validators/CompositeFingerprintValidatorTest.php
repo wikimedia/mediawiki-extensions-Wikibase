@@ -48,9 +48,9 @@ class CompositeFingerprintValidatorTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testValidateFingerprint( $validators, $expected ) {
 		$fingerprint = new Fingerprint(
-			new TermList( array() ),
-			new TermList( array() ),
-			new AliasGroupList( array() )
+			new TermList(),
+			new TermList(),
+			new AliasGroupList()
 		);
 
 		$validator = new CompositeFingerprintValidator( $validators );

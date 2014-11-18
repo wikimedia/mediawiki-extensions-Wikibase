@@ -682,7 +682,7 @@ class EntityTestHelper {
 						new Term( 'en', 'City in Saxony.' ),
 					)
 				),
-				new AliasGroupList( array() )
+				new AliasGroupList()
 			)
 		);
 
@@ -703,7 +703,7 @@ class EntityTestHelper {
 						new Term( 'zh-hk', "廣東的省會。" ),
 					)
 				),
-				new AliasGroupList( array() )
+				new AliasGroupList()
 			)
 		);
 

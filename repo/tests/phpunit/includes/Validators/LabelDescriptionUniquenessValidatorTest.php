@@ -43,8 +43,8 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 			'no description' => array(
 				new Fingerprint(
 					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
-					new TermList( array() ),
-					new AliasGroupList( array() )
+					new TermList(),
+					new AliasGroupList()
 				),
 				$q99
 			),
@@ -52,7 +52,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 				new Fingerprint(
 					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
 					new TermList( array( new Term( 'de', 'Foo' ) ) ),
-					new AliasGroupList( array() )
+					new AliasGroupList()
 				),
 				$q99
 			),
@@ -62,7 +62,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 				new Fingerprint(
 					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
 					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
-					new AliasGroupList( array() )
+					new AliasGroupList()
 				),
 				new PropertyId( 'P666' ) // ignore conflicts with P666
 			),
@@ -71,7 +71,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 				new Fingerprint(
 					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
 					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
-					new AliasGroupList( array() )
+					new AliasGroupList()
 				),
 				$q99,
 				array( 'en' ) // only consider conflicts in english
@@ -151,7 +151,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 		$badFingerprint = new Fingerprint(
 			new TermList( array( new Term( 'de', 'DUPE' ) ) ),
 			new TermList( array( new Term( 'de', 'DUPE' ) ) ),
-			new AliasGroupList( array() )
+			new AliasGroupList()
 		);
 
 		return array(

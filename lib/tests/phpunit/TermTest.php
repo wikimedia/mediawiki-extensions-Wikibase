@@ -82,8 +82,8 @@ class TermTest extends \MediaWikiTestCase {
 		$tests = array();
 
 		$tests[] = array( // #0
-			new Term( array() ),
-			new Term( array() ),
+			new Term(),
+			new Term(),
 			true
 		);
 
@@ -166,19 +166,19 @@ class TermTest extends \MediaWikiTestCase {
 	public static function provideEquals() {
 		$tests = array(
 			array( // #0
-				new Term( array() ),
+				new Term(),
 				null,
 				false
 			),
 
 			array( // #1
-				new Term( array() ),
+				new Term(),
 				false,
 				false
 			),
 
 			array( // #2
-				new Term( array() ),
+				new Term(),
 				"",
 				false
 			),

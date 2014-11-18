@@ -55,7 +55,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 			new TermList( array(
 				new Term( 'en', 'bla' ),
 			) ),
-			new AliasGroupList( array() )
+			new AliasGroupList()
 		);
 
 		$labelDupeFingerprint = new Fingerprint(
@@ -65,7 +65,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 			new TermList( array(
 				new Term( 'en', 'DUPE' ),
 			) ),
-			new AliasGroupList( array() )
+			new AliasGroupList()
 		);
 
 		$q99 = new ItemId( 'Q99' );

@@ -127,7 +127,7 @@ class TermSqlIndexTest extends TermIndexTest {
 		$fingerprint = new Fingerprint(
 			new TermList( $labels ),
 			new TermList( $descriptions ),
-			new AliasGroupList( array() )
+			new AliasGroupList()
 		);
 
 		$label = new Term( array( 'termType' => Term::TYPE_LABEL ) );
