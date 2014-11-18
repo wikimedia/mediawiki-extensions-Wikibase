@@ -21,6 +21,7 @@ interface TermLookup {
 	 *
 	 * @throws OutOfBoundsException for label not found
 	 * @throws StorageException for Entity not found
+	 *
 	 * @return string
 	 * @throws OutOfBoundsException if no such label was found
 	 */
