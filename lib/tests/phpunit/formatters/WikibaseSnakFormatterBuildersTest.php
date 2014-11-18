@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityFactory;
+use Wikibase\Lib\FormatterLabelLookupFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
@@ -64,7 +65,11 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 
 		$lang = Language::factory( 'en' );
 
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders( $termLookup, $lang );
+		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
+			$lang,
+			new FormatterLabelLookupFactory( $termLookup )
+		);
+
 		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup, $typeFactory );
 	}
 

@@ -7,6 +7,7 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use Language;
+use Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\TimeFormatter;
@@ -17,6 +18,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\FormatterLabelLookupFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -66,7 +68,10 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 				);
 			} ) );
 
-		return new WikibaseValueFormatterBuilders( $termLookup, Language::factory( 'en' ) );
+		return new WikibaseValueFormatterBuilders(
+			Language::factory( 'en' ),
+			new FormatterLabelLookupFactory( $termLookup )
+		);
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {
