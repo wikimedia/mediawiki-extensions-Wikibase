@@ -69,45 +69,16 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return string
-	 */
-	protected abstract function getContentClass();
-
-	/**
 	 * @return EntityId
 	 */
 	protected abstract function getDummyId();
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 *
 	 * @return EntityContent
 	 */
-	protected function newEmpty( EntityId $id = null ) {
-		$class = $this->getContentClass();
-		$empty = $class::newEmpty();
-
-		if ( $id ) {
-			$empty->getEntity()->setId( $id );
-		}
-
-		return $empty;
-	}
-
-	/**
-	 * @param EntityId $id
-	 * @param EntityId $target
-	 *
-	 * @return EntityContent
-	 */
-	protected function newRedirect( EntityId $id, EntityId $target ) {
-		//FIXME: use the respective EntityHandler instead of going via the global title lookup!
-		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		$title = $titleLookup->getTitleForId( $target );
-
-		$class = $this->getContentClass();
-		return $class::newFromRedirect( new EntityRedirect( $id, $target ), $title );
-	}
+	protected abstract function newEmpty( EntityId $entityId = null );
 
 	/**
 	 * @dataProvider getTextForSearchIndexProvider

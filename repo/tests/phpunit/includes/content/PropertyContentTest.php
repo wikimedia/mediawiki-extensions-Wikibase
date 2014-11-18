@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\PropertyContent;
 
 /**
  * @covers Wikibase\PropertyContent
@@ -20,27 +21,25 @@ use Wikibase\DataModel\Entity\PropertyId;
 class PropertyContentTest extends EntityContentTest {
 
 	/**
-	 * @see EntityContentTest::getContentClass
-	 */
-	protected function getContentClass() {
-		return '\Wikibase\PropertyContent';
-	}
-
-	/**
-	 * @return EntityId
+	 * @return PropertyId
 	 */
 	protected function getDummyId() {
 		return new PropertyId( 'P100' );
 	}
 
 	/**
-	 * @see EntityContentTest::newEmpty
+	 * @param EntityId $propertyId
+	 *
+	 * @return PropertyContent
 	 */
-	protected function newEmpty( EntityId $id = null ) {
-		$content = parent::newEmpty( $id );
-		$content->getProperty()->setDataTypeId( 'string' );
+	protected function newEmpty( EntityId $propertyId = null ) {
+		$empty = PropertyContent::newEmpty();
 
-		return $content;
+		if ( $propertyId !== null ) {
+			$empty->getProperty()->setId( $propertyId );
+		}
+
+		return $empty;
 	}
 
 	public function provideGetEntityId() {

@@ -8,7 +8,6 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use Title;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -21,6 +20,7 @@ use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Content\EntityContentDiff;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\ItemContent
@@ -45,17 +45,39 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	/**
-	 * @see EntityContentTest::getContentClass
-	 */
-	protected function getContentClass() {
-		return '\Wikibase\ItemContent';
-	}
-
-	/**
-	 * @return EntityId
+	 * @return ItemId
 	 */
 	protected function getDummyId() {
 		return new ItemId( 'Q100' );
+	}
+
+	/**
+	 * @param EntityId $itemId
+	 *
+	 * @return ItemContent
+	 */
+	protected function newEmpty( EntityId $itemId = null ) {
+		$empty = ItemContent::newEmpty();
+
+		if ( $itemId !== null ) {
+			$empty->getItem()->setId( $itemId );
+		}
+
+		return $empty;
+	}
+
+	/**
+	 * @param ItemId $itemId
+	 * @param ItemId $targetId
+	 *
+	 * @return ItemContent
+	 */
+	private function newRedirect( ItemId $itemId, ItemId $targetId ) {
+		// FIXME: Use the respective EntityHandler instead of going via the global title lookup!
+		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$title = $titleLookup->getTitleForId( $targetId );
+
+		return ItemContent::newFromRedirect( new EntityRedirect( $itemId, $targetId ), $title );
 	}
 
 	/**
@@ -70,7 +92,6 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	public function getTextForSearchIndexProvider() {
-		/** @var ItemContent $itemContent */
 		$itemContent = $this->newEmpty();
 		$itemContent->getEntity()->setLabel( 'en', "cake" );
 		$itemContent->getEntity()->addSiteLink( new SiteLink( 'dewiki', 'Berlin' ) );
@@ -153,33 +174,31 @@ class ItemContentTest extends EntityContentTest {
 	 * @return EntityContent
 	 */
 	private function getItemContentWithClaim() {
-		/* @var Item $itemWithClaims */
-		$itemContentWithClaims = $this->newEmpty();
-		$itemWithClaims = $itemContentWithClaims->getItem();
+		$itemContent = $this->newEmpty();
+		$item = $itemContent->getItem();
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( new PropertyId( 'P11' ) ) ) );
-		$claim->setGuid( 'Whatever' );
+		$item->getStatements()->addNewStatement(
+			new PropertyNoValueSnak( new PropertyId( 'P11' ) ),
+			null,
+			null,
+			'Whatever'
+		);
 
-		$itemWithClaims->setClaims( new Claims( array(
-			$claim
-		) ) );
-
-		return $itemContentWithClaims;
+		return $itemContent;
 	}
 
 	/**
 	 * @return EntityContent
 	 */
 	private function getItemContentWithSiteLink() {
-		/* @var Item $itemWithSiteLinks */
-		$itemContentWithSiteLinks = $this->newEmpty();
-		$itemWithSiteLinks = $itemContentWithSiteLinks->getItem();
+		$itemContent = $this->newEmpty();
+		$item = $itemContent->getItem();
 
-		$itemWithSiteLinks->setSiteLinkList( new SiteLinkList( array(
+		$item->setSiteLinkList( new SiteLinkList( array(
 			new SiteLink( 'enwiki', 'Foo' )
 		) ) );
 
-		return $itemContentWithSiteLinks;
+		return $itemContent;
 	}
 
 	public function provideGetEntityPageProperties() {
