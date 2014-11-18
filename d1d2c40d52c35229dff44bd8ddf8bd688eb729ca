@@ -16,6 +16,24 @@
       "revId": "d1d2c40d52c35229dff44bd8ddf8bd688eb729ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_adb4f77c",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaBindingsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-18T14:12:39Z",
+      "side": 0,
+      "message": "This is a simple fallback, perfect for the short ?: syntax. I try to avoid using ?: but it\u0027s perfect in this case.",
+      "parentUuid": "6e936f18_cb38613c",
+      "revId": "d1d2c40d52c35229dff44bd8ddf8bd688eb729ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
