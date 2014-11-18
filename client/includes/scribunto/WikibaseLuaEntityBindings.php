@@ -4,14 +4,15 @@ namespace Wikibase\Client\Scribunto;
 
 use Language;
 use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
@@ -24,7 +25,6 @@ use Wikibase\Lib\Store\EntityLookup;
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-
 class WikibaseLuaEntityBindings {
 
 	/**
@@ -53,7 +53,12 @@ class WikibaseLuaEntityBindings {
 	private $language;
 
 	/**
-	 * @var Entity[]
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
+	 * @var EntityDocument[]
 	 */
 	private $entities = array();
 
@@ -82,13 +87,51 @@ class WikibaseLuaEntityBindings {
 	}
 
 	/**
+	 * Render the main Snaks belonging to a Statement (which is identified by a PropertyId).
+	 *
+	 * @since 0.5
+	 * @todo Share code with LanguageAwareRenderer.
+	 *
+	 * @param string $entityId
+	 * @param string $propertyId
+	 * @param int[]|null $acceptableRanks
+	 *
+	 * @return string
+	 */
+	public function formatPropertyValues( $entityId, $propertyId, array $acceptableRanks = null ) {
+		$propertyId = new PropertyId( $propertyId );
+
+		$entity = $this->getEntity( $this->entityIdParser->parse( $entityId ) );
+
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			return '';
+		}
+
+		$statements = $entity->getStatements()->getWithPropertyId( $propertyId );
+
+		if ( $acceptableRanks === null ) {
+			// We only want the best claims over here, so that we only show the most
+			// relevant information.
+			$statements = $statements->getBestStatements();
+		} else {
+			// ... unless the user passed in a table of acceptable ranks
+			$statements = $statements->getWithRank( $acceptableRanks );
+		}
+
+		$snakList = $statements->getMainSnaks();
+
+		$this->trackUsage( $snakList );
+		return $this->formatSnakList( $snakList );
+	}
+
+	/**
 	 * Get the entity for the given EntityId (cached within the class).
 	 * This *might* be redundant with caching in EntityLookup, but we
 	 * don't want to rely on that (per Daniel).
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return Entity|null
+	 * @return EntityDocument|null
 	 */
 	private function getEntity( EntityId $entityId ) {
 		if ( !isset( $this->entities[ $entityId->getSerialization() ] ) ) {
@@ -97,21 +140,6 @@ class WikibaseLuaEntityBindings {
 		}
 
 		return $this->entities[ $entityId->getSerialization() ];
-	}
-
-	/**
-	 * Returns such Claims from $entity that have a main Snak for the property that
-	 * is specified by $propertyId.
-	 *
-	 * @param StatementListProvider $statementListProvider
-	 * @param PropertyId $propertyId
-	 *
-	 * @return Claims
-	 */
-	private function getClaimsForProperty( StatementListProvider $statementListProvider, PropertyId $propertyId ) {
-		$allClaims = new Claims( $statementListProvider->getStatements() );
-
-		return $allClaims->getClaimsForProperty( $propertyId );
 	}
 
 	/**
@@ -159,49 +187,6 @@ class WikibaseLuaEntityBindings {
 				$this->usageAccumulator->addLabelUsage( $value->getEntityId() );
 			}
 		}
-	}
-
-	/**
-	 * Render the main Snaks belonging to a Claim (which is identified by a PropertyId).
-	 *
-	 * @since 0.5
-	 * @todo Share code with LanguageAwareRenderer.
-	 *
-	 * @param string $entityId
-	 * @param string $propertyId
-	 * @param int[]|null $acceptableRanks
-	 *
-	 * @return string
-	 */
-	public function formatPropertyValues( $entityId, $propertyId, array $acceptableRanks = null ) {
-		$entityId = $this->entityIdParser->parse( $entityId );
-		$propertyId = new PropertyId( $propertyId );
-
-		$entity = $this->getEntity( $entityId );
-
-		if ( !( $entity instanceof StatementListProvider ) ) {
-			return '';
-		}
-
-		$claims = $this->getClaimsForProperty( $entity, $propertyId );
-
-		if ( !$acceptableRanks ) {
-			// We only want the best claims over here, so that we only show the most
-			// relevant information.
-			$claims = $claims->getBestClaims();
-		} else {
-			// ... unless the user passed in a table of acceptable ranks
-			$claims = $claims->getByRanks( $acceptableRanks );
-		}
-
-		if ( $claims->isEmpty() ) {
-			return '';
-		}
-
-		$snakList = $claims->getMainSnaks();
-
-		$this->trackUsage( $snakList );
-		return $this->formatSnakList( $snakList );
 	}
 
 	/**
