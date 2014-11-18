@@ -62,3 +62,23 @@ body.rtl .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
 }
 
 /****** /PENDING-COUNTER ******/
+
+
+/***** ERROR OUTPUT *****/
+
+.wb-error .wb-error-message {
+	border-bottom: 1px dotted #B27631;
+	padding-bottom: 1em;
+}
+
+.wb-error .wb-error-details {
+	margin-top: .2em;
+	margin-bottom: .5em;
+	font-family: 'Courier New', Courier, 'Andale Mono', serif;
+	background-color: #FFF2E4;
+	padding: .2em;
+	border-radius: 5px;
+	font-size: .9em;
+}
+
+/***** /ERROR OUTPUT *****/
