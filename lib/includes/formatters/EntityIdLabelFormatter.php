@@ -123,6 +123,8 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	protected function lookupEntityLabel( EntityId $entityId ) {
 		try {
 			return $this->labelLookup->getLabel( $entityId );
+		} catch ( OutOfBoundsException $e ) {
+			return false;
 		} catch ( StorageException $ex ) {
 			// @todo maybe handle formatting in this in a better way.
 			throw new OutOfBoundsException( "An Entity with the id $entityId "
