@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_4df77388",
+        "filename": "repo/resources/wikibase.getLanguageNameByCode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-18T13:47:58Z",
+      "side": 1,
+      "message": "This is not true any more. ;-) It\u0027s mostly Ebrahim Byagowi and me.",
+      "revId": "02f104e9efdacf744701953192f504b0aebfbe18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8df9fb7f",
+        "filename": "repo/resources/wikibase.getLanguageNameByCode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-18T13:47:58Z",
+      "side": 1,
+      "message": "the getNative... function is new. I don\u0027t think it\u0027s a problem to make it private. But this is old and may be used in widgets. On the other hand it\u0027s a very simple implementation. Depending code can just repeat this if really needed.",
+      "revId": "02f104e9efdacf744701953192f504b0aebfbe18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
