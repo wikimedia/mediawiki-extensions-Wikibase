@@ -17,6 +17,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\FormatterLabelLookupFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -68,7 +69,11 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 				);
 			} ) );
 
-		return new WikibaseValueFormatterBuilders( $termLookup, Language::factory( 'en' ), $entityTitleLookup );
+		return new WikibaseValueFormatterBuilders(
+			Language::factory( 'en' ),
+			new FormatterLabelLookupFactory( $termLookup ),
+			$entityTitleLookup
+		);
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {
