@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 2.3.0 (dev)
+## Version 2.3.0 (2014-11-18)
 
 * Added `AliasGroupList::toArray`
 * Added `StatementList::getMainSnaks`
