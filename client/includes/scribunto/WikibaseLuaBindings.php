@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Language;
 use OutOfBoundsException;
 use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
@@ -187,12 +187,12 @@ class WikibaseLuaBindings {
 	/**
 	 * @since 0.5
 	 *
-	 * @param Entity $entityObject
+	 * @param EntityDocument $entityObject
 	 * @param bool $lowerCaseIds Whether to also use lower case ids
 	 *
 	 * @return Serializer
 	 */
-	private function getEntitySerializer( Entity $entityObject, $lowerCaseIds ) {
+	private function getEntitySerializer( EntityDocument $entityObject, $lowerCaseIds ) {
 		$opt = new SerializationOptions();
 		$serializerFactory = new SerializerFactory( $opt, $this->dataTypeLookup );
 
