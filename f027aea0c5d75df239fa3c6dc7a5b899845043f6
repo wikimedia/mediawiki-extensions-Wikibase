@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_885d6980",
+        "filename": "repo/includes/View/EntityViewFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-18T16:19:51Z",
+      "side": 1,
+      "message": "This is an OCP violation as outlined at https://bugzilla.wikimedia.org/show_bug.cgi?id\u003d73496 . It thus is a blocker for the software supporting new types of entities.\n\nDedicated bug created: https://bugzilla.wikimedia.org/show_bug.cgi?id\u003d73559",
+      "revId": "f027aea0c5d75df239fa3c6dc7a5b899845043f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_08515964",
+        "filename": "repo/includes/View/EntityViewFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-18T16:19:51Z",
+      "side": 1,
+      "message": "Keep in mind that we want to get rid of Statements being Claims. From this code I\u0027m guessing ClaimsView is reinforcing this inheritance. Not an issue in this commit, just pointing it out.",
+      "revId": "f027aea0c5d75df239fa3c6dc7a5b899845043f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
