@@ -33,19 +33,4 @@ tipsy styles in shared.css are removed and we want to remove the blue color from
 	border-color: #B27631;
 }
 
-.wikibase-wbtooltip-tip .wikibase-wbtooltip-error-top-message {
-	border-bottom:1px dotted #B27631;
-	padding-bottom:1em;
-}
-
-.wikibase-wbtooltip-tip .wikibase-wbtooltip-error-details {
-	margin-top: .2em;
-	margin-bottom: .5em;
-	font-family: 'Courier New', Courier, 'Andale Mono', serif;
-	background-color: #FFF2E4;
-	padding: .2em;
-	border-radius: 5px;
-	font-size: .9em;
-}
-
 /***** /ERROR TOOLTIP *****/
