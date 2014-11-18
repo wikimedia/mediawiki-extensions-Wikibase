@@ -31,7 +31,7 @@ class ParserFunctionRegistrant {
 		$parser->setFunctionHook(
 			'noexternallanglinks',
 			'\Wikibase\NoLangLinkHandler::handle',
-			SFH_NO_HASH
+			Parser::SFH_NO_HASH
 		);
 	}
 
