@@ -148,11 +148,12 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$item = Item::newEmpty();
 		$item->setId( 123 );
 
-		$claim = $item->newClaim( $snak );
-		$claim->setGuid( $item->getId()->getSerialization() . '$D8404CDA-25E4-4334-AG03-A3290BCD9CQP' );
-		$claims = new Claims();
-		$claims->addClaim( $claim );
-		$item->setClaims( $claims );
+		$item->getStatements()->addNewStatement(
+			$snak,
+			null,
+			null,
+			$item->getId()->getSerialization() . '$D8404CDA-25E4-4334-AG03-A3290BCD9CQP'
+		);
 
 		return $item;
 	}

@@ -81,13 +81,14 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( $itemIdString ) );
 
-		$claim = $item->newClaim( $snak );
-		$claim->setGuid( $itemIdString . '$D8404CDA-25E4-4334-AG03-A3290BCD9CQP' );
-		$claims = new Claims();
-		$claims->addClaim( $claim );
-		$item->setClaims( $claims );
+		$item->getStatements()->addNewStatement(
+			$snak,
+			null,
+			null,
+			$itemIdString . '$D8404CDA-25E4-4334-AG03-A3290BCD9CQP'
+		);
 
 		return $item;
 	}
 
-} 
+}

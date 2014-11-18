@@ -9,9 +9,9 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Api\ApiErrorReporter;
 use Wikibase\Api\ClaimModificationHelper;
 use Wikibase\Api\CreateClaim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Localizer\DispatchingExceptionLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -75,9 +75,7 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$claim = $item->newClaim( $snak );
 		$claim->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );
-		$claims = new Claims();
-		$claims->addClaim( $claim );
-		$item->setClaims( $claims );
+		$item->getStatements()->addStatement( new Statement( $claim ) );
 		$claimGuid = $claim->getGuid();
 
 		$this->assertEquals( $claim, $claimModificationHelper->getClaimFromEntity( $claimGuid, $item ) );
