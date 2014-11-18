@@ -16,6 +16,24 @@
       "revId": "ae4031bad9d6e48dce119e57757142722a4044a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_7ccb02a7",
+        "filename": "client/composer.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-18T16:57:52Z",
+      "side": 1,
+      "message": "If there is a thing we do not actually need in client, please point it out. We can always remove ones later if we find they are not needed.\n\nIf code in a package directly depends on something, then the package should also specify that dependency, even if the code might [at present and with default config] be pulled in regardless.\n\nLib probably should not have these direct dependencies in its code (but then Lib should not exist to begin with). DataModel for instance only depends on the data-values/data-values package and does not care which specific values or versions of those you have.\n\nOverhead might be created by bad package organization, and be in part visible in the dependency lists. Omitting actual dependencies does not fix the real issue and is dangerous.",
+      "parentUuid": "6e936f18_0f2a0c7a",
+      "revId": "ae4031bad9d6e48dce119e57757142722a4044a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
