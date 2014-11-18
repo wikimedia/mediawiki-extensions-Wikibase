@@ -74,7 +74,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	}
 
 	protected function newRequestHandler() {
-		$mockRepo = EntityDataTestProvider::getMockRepo();
+		$mockRepo = EntityDataTestProvider::getMockRepository();
 
 		$entityRevisionLookup = $mockRepo;
 

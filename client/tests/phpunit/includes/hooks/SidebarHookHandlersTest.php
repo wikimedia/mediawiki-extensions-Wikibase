@@ -105,16 +105,16 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param array[] $links
+	 * @param array[] $siteLinksPerItem
 	 *
 	 * @return MockRepository
 	 */
-	private function getMockRepo( $links ) {
+	private function getMockRepository( $siteLinksPerItem ) {
 		$repo = new MockRepository();
 
-		foreach ( $links as $itemKey => $itemLinks ) {
-			$itemId = new ItemId( $itemKey );
-			$item = $this->newItem( $itemId, $itemLinks );
+		foreach ( $siteLinksPerItem as $idString => $siteLinks ) {
+			$itemId = new ItemId( $idString );
+			$item = $this->newItem( $itemId, $siteLinks );
 			$repo->putEntity( $item );
 		}
 
@@ -165,7 +165,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	private function newSidebarHookHandlers( array $settings = array() ) {
 		$badgeId = $this->getBadgeItem()->getId();
 
-		$links = array(
+		$siteLinksPerItem = array(
 			'Q1' => array(
 				new SiteLink( 'dewiki', 'Sauerstoff', array( $badgeId ) ),
 				new SiteLink( 'enwiki', 'Oxygen' ),
@@ -189,7 +189,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
 		$siteStore = $this->getSiteStore();
 
-		$mockRepo = $this->getMockRepo( $links );
+		$mockRepo = $this->getMockRepository( $siteLinksPerItem );
 		$mockRepo->putEntity( $this->getBadgeItem() );
 
 		$otherProjectsSidebarGenerator = new OtherProjectsSidebarGenerator(
