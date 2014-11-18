@@ -342,7 +342,12 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$autoSummary = $restore ? $this->makeRestoreSummary( $olderRevision )
 								: $this->makeUndoSummary( $newerRevision );
 
-		$this->showConfirmationForm( $autoSummary );
+		$hiddenParams = array();
+		if ( !$restore ) {
+			$hiddenParams = array( 'wpUndidRevision' => $newerRevision->getId() );
+		}
+
+		$this->showConfirmationForm( $autoSummary, $hiddenParams );
 	}
 
 	/**
@@ -539,9 +544,10 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @since 0.1
 	 *
 	 * @param string $summary
+	 * @param array  $hiddenParams
 	 * @param int    $tabindex
 	 */
-	protected function showConfirmationForm( $summary = '', &$tabindex = 2 ) {
+	protected function showConfirmationForm( $summary = '', $hiddenParams = array(), &$tabindex = 2 ) {
 		$req = $this->getRequest();
 
 		$args = array(
@@ -587,8 +593,11 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$this->getOutput()->addHTML( "</p><!-- editButtons -->\n</p><!-- editOptions -->\n" );
 
-		$this->getOutput()->addHTML( "\n" . Html::hidden( "wpEditToken", $this->getUser()->getEditToken() ) . "\n" );
-		$this->getOutput()->addHTML( "\n" . Html::hidden( "wpBaseRev", $this->getTitle()->getLatestRevID() ) . "\n" );
+		$hiddenParams['wpEditToken'] = $this->getUser()->getEditToken();
+		$hiddenParams['wpBaseRev'] = $this->getTitle()->getLatestRevID();
+		foreach ( $hiddenParams as $name => $value ) {
+			$this->getOutput()->addHTML( "\n" . Html::hidden( $name, $value ) . "\n" );
+		}
 
 		$this->getOutput()->addHTML( Html::closeElement( 'form' ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'div' ) );
