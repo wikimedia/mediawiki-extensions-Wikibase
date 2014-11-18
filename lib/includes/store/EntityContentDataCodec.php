@@ -126,7 +126,6 @@ class EntityContentDataCodec {
 	/**
 	 * Encodes an Entity into a blob for storage.
 	 *
-	 * @see Entity::toArray()
 	 * @see EntityHandler::serializeContent()
 	 *
 	 * @param Entity $entity
