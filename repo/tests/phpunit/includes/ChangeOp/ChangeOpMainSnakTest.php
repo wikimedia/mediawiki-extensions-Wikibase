@@ -183,11 +183,12 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( $itemIdString ) );
 
-		$claim = $item->newClaim( $snak );
-		$claim->setGuid( $this->mockProvider->getGuidGenerator()->newGuid( $item->getId() ) );
-		$claims = new Claims();
-		$claims->addClaim( $claim );
-		$item->setClaims( $claims );
+		$item->getStatements()->addNewStatement(
+			$snak,
+			null,
+			null,
+			$this->mockProvider->getGuidGenerator()->newGuid( $item->getId() )
+		);
 
 		return $item;
 	}

@@ -5,13 +5,10 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpStatementRank;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
@@ -86,10 +83,12 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( $itemIdString ) );
 
-		$statement = new Statement( new Claim( $mainSnak ) );
-		$statement->setGuid( $itemIdString . '$D8499CDA-25E4-4334-AG03-A3290BCD9CQP' );
-		$statements = new StatementList( array( $statement ) );
-		$item->setStatements( $statements );
+		$item->getStatements()->addNewStatement(
+			$mainSnak,
+			null,
+			null,
+			$itemIdString . '$D8499CDA-25E4-4334-AG03-A3290BCD9CQP'
+		);
 
 		return $item;
 	}

@@ -9,7 +9,6 @@ use Wikibase\DataModel\Entity\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
@@ -60,15 +59,13 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	private function newItem() {
 		$item = Item::newEmpty();
-		$statements = new StatementList();
+		$statements = $item->getStatements();
 
 		$statements->addNewStatement( new PropertyValueSnak( 42, new StringValue( 'http://an.url.com' ) ) );
 		$statements->addNewStatement( new PropertyValueSnak( 42, new StringValue( 'https://another.url.org' ) ) );
 
 		$statements->addNewStatement( new PropertyValueSnak( 10, new StringValue( 'File:This is a file.pdf' ) ) );
 		$statements->addNewStatement( new PropertyValueSnak( 10, new StringValue( 'File:Selfie.jpg' ) ) );
-
-		$item->setStatements( $statements );
 
 		return $item;
 	}

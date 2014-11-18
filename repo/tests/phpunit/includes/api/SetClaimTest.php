@@ -247,25 +247,22 @@ class SetClaimTest extends WikibaseApiTestCase {
 	public function testSetClaimAtIndex() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		// Generate an item with some claims:
 		$item = Item::newEmpty();
-		$claims = new Claims();
 
-		// Initialize item content with empty claims:
-		$item->setClaims( $claims );
 		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
 		$itemId = $item->getId();
 
 		$guidGenerator = new ClaimGuidGenerator();
 
 		for ( $i = 1; $i <= 3; $i++ ) {
-			$preexistingClaim = $item->newClaim( new PropertyNoValueSnak( $i ) );
-			$preexistingClaim->setGuid( $guidGenerator->newGuid( $itemId ) );
-			$claims->addClaim( $preexistingClaim );
+			$item->getStatements()->addNewStatement(
+				new PropertyNoValueSnak( $i ),
+				null,
+				null,
+				$guidGenerator->newGuid( $itemId )
+			);
 		}
 
-		// Add preexisting claims:
-		$item->setClaims( $claims );
 		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		$guid = $guidGenerator->newGuid( $itemId );
@@ -398,19 +395,19 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		// Initialize item content with empty claims:
 		$item = Item::newEmpty();
-		$claims = new Claims();
-		$item->setClaims( $claims );
 		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
 
 		// Generate a single claim:
 		$itemId = $item->getId();
 		$guidGenerator = new ClaimGuidGenerator();
-		$preexistingClaim = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[1] ) );
-		$preexistingClaim->setGuid( $guidGenerator->newGuid( $itemId ) );
-		$claims->addClaim( $preexistingClaim );
 
 		// Save the single claim
-		$item->setClaims( $claims );
+		$item->getStatements()->addNewStatement(
+			new PropertyNoValueSnak( self::$propertyIds[1] ),
+			null,
+			null,
+			$guidGenerator->newGuid( $itemId )
+		);
 		$revision = $store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		// Add new claim at index 3 using the baserevid and a different property id
