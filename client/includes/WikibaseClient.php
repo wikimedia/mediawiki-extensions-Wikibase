@@ -13,6 +13,7 @@ use MWException;
 use Site;
 use SiteSQLStore;
 use SiteStore;
+use StubObject;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
@@ -39,6 +40,7 @@ use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
+use Wikibase\Lib\FormatterLabelLookupFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
@@ -46,6 +48,7 @@ use Wikibase\Lib\Serializers\ForbiddenSerializer;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -473,8 +476,8 @@ final class WikibaseClient {
 	 */
 	private function newSnakFormatterFactory() {
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
-			$this->getTermLookup(),
-			$this->contentLanguage
+			$this->contentLanguage,
+			new FormatterLabelLookupFactory( $this->getTermLookup() )
 		);
 
 		$builders = new WikibaseSnakFormatterBuilders(
@@ -505,8 +508,8 @@ final class WikibaseClient {
 	 */
 	private function newValueFormatterFactory() {
 		$builders = new WikibaseValueFormatterBuilders(
-			$this->getTermLookup(),
-			$this->contentLanguage
+			$this->contentLanguage,
+			new FormatterLabelLookupFactory( $this->getTermLookup() )
 		);
 
 		return new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
@@ -551,6 +554,7 @@ final class WikibaseClient {
 	 */
 	public function getLanguageLinkBadgeDisplay() {
 		global $wgLang;
+		StubObject::unstub( $wgLang );
 
 		$badgeClassNames = $this->settings->getSetting( 'badgeClassNames' );
 
