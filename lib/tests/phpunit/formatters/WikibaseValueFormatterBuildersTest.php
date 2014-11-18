@@ -7,6 +7,7 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use Language;
+use Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\TimeFormatter;
@@ -18,6 +19,7 @@ use Wikibase\EntityFactory;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\FormatterLabelLookupFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -55,7 +57,18 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
-		return new WikibaseValueFormatterBuilders( $entityLookup, Language::factory( 'en' ) );
+		$title = Title::makeTitle( NS_MAIN, $entityId->getSerialization() );
+		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnValue( $title ) );
+
+		return new WikibaseValueFormatterBuilders(
+			$entityLookup,
+			Language::factory( 'en' ),
+			$titleLookup,
+			new FormatterLabelLookupFactory( $entityLookup )
+		);
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {
