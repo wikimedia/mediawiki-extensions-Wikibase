@@ -42,8 +42,8 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 			'no conflict' => array(
 				new Fingerprint(
 					new TermList( array( new Term( 'de', 'Foo' ) ) ),
-					new TermList( array() ),
-					new AliasGroupList( array() )
+					new TermList(),
+					new AliasGroupList()
 				),
 				$p99
 			),
@@ -51,8 +51,8 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 				// the mock considers "DUPE" a dupe with P666
 				new Fingerprint(
 					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
-					new TermList( array() ),
-					new AliasGroupList( array() )
+					new TermList(),
+					new AliasGroupList()
 				),
 				new PropertyId( 'P666' ) // ignore conflicts with P666
 			),
@@ -60,8 +60,8 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 				// the mock considers "DUPE" a dupe with P666
 				new Fingerprint(
 					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
-					new TermList( array() ),
-					new AliasGroupList( array() )
+					new TermList(),
+					new AliasGroupList()
 				),
 				$p99,
 				array( 'en' ) // only consider conflicts in english
@@ -106,8 +106,8 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	public function invalidFingerprintProvider() {
 		$badFingerprint = new Fingerprint(
 			new TermList( array( new Term( 'de', 'DUPE' ) ) ),
-			new TermList( array( ) ),
-			new AliasGroupList( array() )
+			new TermList(),
+			new AliasGroupList()
 		);
 
 		return array(
