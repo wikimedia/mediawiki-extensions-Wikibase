@@ -4,13 +4,13 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
 use Title;
-use Wikibase\Client\MovePageNotice;
+use Wikibase\Client\MovePageNoticeCreator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @covers Wikibase\Client\MovePageNotice
+ * @covers Wikibase\Client\MovePageNoticeCreator
  *
  * @group WikibaseClient
  * @group Wikibase
@@ -19,7 +19,7 @@ use Wikibase\DataModel\SiteLink;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class MovePageNoticeTest extends \MediaWikiTestCase {
+class MovePageNoticeCreatorTest extends \MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
@@ -56,7 +56,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 			->with( new SiteLink( 'dewiki', 'New Amsterdam' ) )
 			->will( $this->returnValue( new ItemId( 'Q4880' ) ) );
 
-		$movePageNotice = new MovePageNotice(
+		$movePageNotice = new MovePageNoticeCreator(
 			$siteLinkLookup,
 			'dewiki',
 			$this->getRepoLinker()
