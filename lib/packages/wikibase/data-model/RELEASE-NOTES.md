@@ -1,8 +1,10 @@
 # Wikibase DataModel release notes
 
-## Version 2.4.0 (alpha)
+## Version 2.4.0 (dev)
 
 * Added `AliasGroup::isEmpty`
+* Added `StatementList::getBestStatements`
+* Added `StatementList::getWithRank`
 * Added `TermList::isEmpty`
 
 ## Version 2.3.0 (2014-11-18)
