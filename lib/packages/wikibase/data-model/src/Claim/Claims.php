@@ -386,11 +386,10 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * Returns true if this list contains no claims
+	 * @return bool
 	 */
 	public function isEmpty() {
-		$iter = $this->getIterator();
-		return !$iter->valid();
+		return !$this->getIterator()->valid();
 	}
 
 	/**

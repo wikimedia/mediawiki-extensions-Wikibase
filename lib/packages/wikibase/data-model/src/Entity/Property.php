@@ -157,10 +157,11 @@ class Property extends Entity implements StatementListProvider {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isEmpty() {
-		return $this->fingerprint->isEmpty() && $this->statements->isEmpty();
+		return $this->fingerprint->isEmpty()
+			&& $this->statements->isEmpty();
 	}
 
 	/**

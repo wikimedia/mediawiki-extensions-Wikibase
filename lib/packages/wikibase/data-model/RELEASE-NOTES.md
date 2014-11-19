@@ -1,5 +1,10 @@
 # Wikibase DataModel release notes
 
+## Version 2.4.0 (alpha)
+
+* Added `AliasGroup::isEmpty`
+* Added `TermList::isEmpty`
+
 ## Version 2.3.0 (2014-11-18)
 
 * Added `AliasGroupList::toArray`

@@ -18,7 +18,14 @@ use InvalidArgumentException;
  */
 class AliasGroup implements Comparable, Countable {
 
+	/**
+	 * @var string
+	 */
 	private $languageCode;
+
+	/**
+	 * @var string[]
+	 */
 	private $aliases;
 
 	/**

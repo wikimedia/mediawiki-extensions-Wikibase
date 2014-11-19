@@ -217,12 +217,12 @@ class Item extends Entity implements StatementListProvider {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isEmpty() {
 		return $this->fingerprint->isEmpty()
-			&& $this->siteLinks->isEmpty()
-			&& $this->statements->count() === 0;
+			&& $this->statements->isEmpty()
+			&& $this->siteLinks->isEmpty();
 	}
 
 	/**
@@ -296,7 +296,7 @@ class Item extends Entity implements StatementListProvider {
 	 * @return bool
 	 */
 	public function hasClaims() {
-		return $this->statements->count() !== 0;
+		return !$this->statements->isEmpty();
 	}
 
 	/**
