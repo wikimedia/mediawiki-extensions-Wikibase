@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_ccf37b05",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/SnaksFinderTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-19T14:42:12Z",
+      "side": 1,
+      "message": "We still need to discuss if this should be done in a gazillion places or simply un-deprecated.",
+      "revId": "bb4aec988db1cffe23c84c48e5d265c64ba6a55e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_2ce45f38",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/SnaksFinderTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-19T14:42:12Z",
+      "side": 1,
+      "message": "Ok, double checked, the array keys are not used.",
+      "revId": "bb4aec988db1cffe23c84c48e5d265c64ba6a55e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
