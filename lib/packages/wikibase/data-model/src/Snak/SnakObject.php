@@ -85,15 +85,12 @@ abstract class SnakObject implements Snak {
 	 * @return bool
 	 */
 	public function equals( $target ) {
-		if ( $target === $this ) {
+		if ( $this === $target ) {
 			return true;
 		}
 
-		if ( !( $target instanceof Snak ) ) {
-			return false;
-		}
-
-		return $this->getHash() === $target->getHash();
+		return $target instanceof self
+			&& $this->getHash() === $target->getHash();
 	}
 
 	/**

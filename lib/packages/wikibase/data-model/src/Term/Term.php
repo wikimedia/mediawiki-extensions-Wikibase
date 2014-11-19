@@ -59,9 +59,13 @@ class Term implements Comparable {
 	 * @return bool
 	 */
 	public function equals( $target ) {
+		if ( $this === $target ) {
+			return true;
+		}
+
 		return $target instanceof self
-			&& $this->text === $target->getText()
-			&& $this->languageCode === $target->getLanguageCode();
+			&& $this->languageCode === $target->getLanguageCode()
+			&& $this->text === $target->getText();
 	}
 
 }

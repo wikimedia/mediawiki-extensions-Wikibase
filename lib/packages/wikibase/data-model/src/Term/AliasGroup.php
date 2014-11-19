@@ -91,6 +91,10 @@ class AliasGroup implements Comparable, Countable {
 	 * @return bool
 	 */
 	public function equals( $target ) {
+		if ( $this === $target ) {
+			return true;
+		}
+
 		return $target instanceof self
 			&& $this->languageCode === $target->languageCode
 			&& $this->aliases == $target->aliases;

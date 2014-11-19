@@ -469,14 +469,16 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 *
 	 * @param mixed $target
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $target ) {
-		if ( !( $target instanceof self ) ) {
-			return false;
+		if ( $this === $target ) {
+			return true;
 		}
 
-		if ( $this->count() !== $target->count() ) {
+		if ( !( $target instanceof self )
+			|| $this->count() !== $target->count()
+		) {
 			return false;
 		}
 

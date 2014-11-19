@@ -101,15 +101,12 @@ class SiteLink implements Comparable {
 	 * @return bool
 	 */
 	public function equals( $target ) {
-		if ( $target === $this ) {
+		if ( $this === $target ) {
 			return true;
 		}
 
-		if ( !( $target instanceof self ) ) {
-			return false;
-		}
-
-		return $this->siteId === $target->siteId
+		return $target instanceof self
+			&& $this->siteId === $target->siteId
 			&& $this->pageName === $target->pageName
 			&& $this->badges->equals( $target->badges );
 	}

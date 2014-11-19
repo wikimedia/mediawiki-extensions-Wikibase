@@ -208,22 +208,22 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	/**
 	 * @see Comparable::equals
 	 *
-	 * @param mixed $statementList
+	 * @param mixed $target
 	 *
 	 * @return bool
 	 */
-	public function equals( $statementList ) {
-		if ( $this === $statementList ) {
+	public function equals( $target ) {
+		if ( $this === $target ) {
 			return true;
 		}
 
-		if ( !( $statementList instanceof self )
-			|| $this->count() !== $statementList->count()
+		if ( !( $target instanceof self )
+			|| $this->count() !== $target->count()
 		) {
 			return false;
 		}
 
-		return $this->statementsEqual( $statementList->statements );
+		return $this->statementsEqual( $target->statements );
 	}
 
 	private function statementsEqual( array $statements ) {

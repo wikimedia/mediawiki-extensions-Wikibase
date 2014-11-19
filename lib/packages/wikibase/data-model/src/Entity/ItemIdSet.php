@@ -70,14 +70,15 @@ class ItemIdSet implements IteratorAggregate, Countable, Comparable {
 	 *
 	 * @param mixed $target
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $target ) {
-		if ( !( $target instanceof self ) ) {
-			return false;
+		if ( $this === $target ) {
+			return true;
 		}
 
-		return $this->ids == $target->ids;
+		return $target instanceof self
+			&& $this->ids == $target->ids;
 	}
 
 }

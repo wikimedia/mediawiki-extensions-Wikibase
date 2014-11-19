@@ -55,9 +55,13 @@ abstract class EntityId implements \Comparable, \Serializable {
 	 *
 	 * @param mixed $target
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $target ) {
+		if ( $this === $target ) {
+			return true;
+		}
+
 		return $target instanceof self
 			&& $target->serialization === $this->serialization;
 	}
