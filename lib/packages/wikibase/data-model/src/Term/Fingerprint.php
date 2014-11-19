@@ -15,6 +15,8 @@ use InvalidArgumentException;
 class Fingerprint implements Comparable {
 
 	/**
+	 * @deprecated since 2.5, use new Fingerprint() instead.
+	 *
 	 * @return Fingerprint
 	 */
 	public static function newEmpty() {
