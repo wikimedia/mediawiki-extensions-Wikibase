@@ -14,6 +14,14 @@ use Wikibase\DataModel\Term\TermList;
  */
 class TermListTest extends \PHPUnit_Framework_TestCase {
 
+	public function testIsEmpty() {
+		$list = new TermList();
+		$this->assertTrue( $list->isEmpty() );
+
+		$list = new TermList( array( new Term( 'en', 'foo' ) ) );
+		$this->assertFalse( $list->isEmpty() );
+	}
+
 	public function testGivenNoTerms_sizeIsZero() {
 		$list = new TermList();
 		$this->assertCount( 0, $list );

@@ -14,6 +14,14 @@ use Wikibase\DataModel\Term\AliasGroupList;
  */
 class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 
+	public function testIsEmpty() {
+		$list = new AliasGroupList();
+		$this->assertTrue( $list->isEmpty() );
+
+		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) );
+		$this->assertFalse( $list->isEmpty() );
+	}
+
 	public function testGivenNoTerms_sizeIsZero() {
 		$list = new AliasGroupList();
 		$this->assertCount( 0, $list );
