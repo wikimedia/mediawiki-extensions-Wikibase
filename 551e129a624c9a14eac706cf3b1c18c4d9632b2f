@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_529dc659",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-19T20:46:29Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "6e936f18_68349dda",
+      "revId": "551e129a624c9a14eac706cf3b1c18c4d9632b2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_6897bd4b",
         "filename": "client/includes/hooks/ParserAfterParseHookHandler.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-18T15:36:26Z",
       "side": 1,
       "message": "You switched the order of this code section and the section below. Are you sure the result is still the same?",
+      "revId": "551e129a624c9a14eac706cf3b1c18c4d9632b2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_5d6cf798",
+        "filename": "client/includes/hooks/ParserAfterParseHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-19T20:46:29Z",
+      "side": 1,
+      "message": "i am sure this would be the same, but now think it this is too much unrelated to the patch and changed it back.",
+      "parentUuid": "6e936f18_6897bd4b",
       "revId": "551e129a624c9a14eac706cf3b1c18c4d9632b2f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_7d53f3e1",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-19T20:46:29Z",
+      "side": 1,
+      "message": "ok, i made an actual factory for this.",
+      "parentUuid": "6e936f18_881b2972",
+      "revId": "551e129a624c9a14eac706cf3b1c18c4d9632b2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_c88ff12d",
         "filename": "client/tests/phpunit/includes/hooks/SidebarHookHandlersTest.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-18T15:36:26Z",
       "side": 1,
       "message": "Was this a bug?",
+      "revId": "551e129a624c9a14eac706cf3b1c18c4d9632b2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1d62efa2",
+        "filename": "client/tests/phpunit/includes/hooks/SidebarHookHandlersTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-19T20:46:29Z",
+      "side": 1,
+      "message": "the real setting is siteGlobalID and think we should be consistent here.",
+      "parentUuid": "6e936f18_c88ff12d",
       "revId": "551e129a624c9a14eac706cf3b1c18c4d9632b2f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
