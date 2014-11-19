@@ -169,7 +169,7 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @param string $entityId
 	 * @param string $propertyId
-	 * @param int[] $acceptableRanks
+	 * @param int[]|null $acceptableRanks
 	 *
 	 * @return string
 	 */

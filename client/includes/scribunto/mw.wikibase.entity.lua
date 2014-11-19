@@ -119,7 +119,7 @@ end
 -- @param propertyId
 -- @param acceptableRanks
 methodtable.formatPropertyValues = function( entity, propertyId, acceptableRanks )
-	acceptableRanks = acceptableRanks or {}
+	acceptableRanks = acceptableRanks or nil
 
 	local formatted = php.formatPropertyValues(
 		entity.id,
