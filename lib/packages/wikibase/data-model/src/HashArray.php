@@ -465,7 +465,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 * @return bool
 	 */
 	public function isEmpty() {
-		return $this->count() === 0;
+		return !$this->getIterator()->valid();
 	}
 
 }

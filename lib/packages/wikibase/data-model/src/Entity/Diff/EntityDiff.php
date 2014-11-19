@@ -127,12 +127,12 @@ class EntityDiff extends Diff {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isEmpty() {
-		return $this->getDescriptionsDiff()->isEmpty()
+		return $this->getLabelsDiff()->isEmpty()
+			&& $this->getDescriptionsDiff()->isEmpty()
 			&& $this->getAliasesDiff()->isEmpty()
-			&& $this->getLabelsDiff()->isEmpty()
 			&& $this->getClaimsDiff()->isEmpty();
 	}
 

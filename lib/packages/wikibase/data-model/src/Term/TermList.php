@@ -147,6 +147,15 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	}
 
 	/**
+	 * @since 2.4.0
+	 *
+	 * @return bool
+	 */
+	public function isEmpty() {
+		return empty( $this->terms );
+	}
+
+	/**
 	 * @since 0.7.4
 	 *
 	 * @param Term $term

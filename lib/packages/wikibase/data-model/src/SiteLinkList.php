@@ -24,10 +24,14 @@ use Wikibase\DataModel\Entity\ItemIdSet;
  */
 class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 
+	/**
+	 * @var SiteLink[]
+	 */
 	private $siteLinks = array();
 
 	/**
 	 * @param SiteLink[] $siteLinks
+	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $siteLinks = array() ) {
@@ -83,6 +87,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 
 	/**
 	 * @see Countable::count
+	 *
 	 * @return int
 	 */
 	public function count() {
@@ -141,7 +146,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	/**
 	 * @since 1.0
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isEmpty() {
 		return empty( $this->siteLinks );
@@ -151,6 +156,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	 * @since 0.8
 	 *
 	 * @param string $siteId
+	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function removeLinkWithSiteId( $siteId ) {

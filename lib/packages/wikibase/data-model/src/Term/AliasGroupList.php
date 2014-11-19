@@ -145,6 +145,15 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	}
 
 	/**
+	 * @since 2.4.0
+	 *
+	 * @return bool
+	 */
+	public function isEmpty() {
+		return empty( $this->groups );
+	}
+
+	/**
 	 * @since 0.7.4
 	 *
 	 * @param AliasGroup $group
