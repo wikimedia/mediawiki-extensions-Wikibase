@@ -232,7 +232,7 @@ class Item extends Entity implements StatementListProvider {
 	 * @since 0.1
 	 */
 	public function clear() {
-		$this->fingerprint = Fingerprint::newEmpty();
+		$this->fingerprint = new Fingerprint();
 		$this->siteLinks = new SiteLinkList();
 		$this->statements = new StatementList();
 	}

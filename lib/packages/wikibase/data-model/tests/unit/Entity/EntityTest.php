@@ -555,7 +555,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getNewEmpty();
 
 		$this->assertEquals(
-			Fingerprint::newEmpty(),
+			new Fingerprint(),
 			$entity->getFingerprint()
 		);
 	}
@@ -571,9 +571,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 				new TermList( array(
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
-				) ),
-				new TermList(),
-				new AliasGroupList()
+				) )
 			),
 			$entity->getFingerprint()
 		);
@@ -604,7 +602,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenEmptyFingerprint_noTermsAreSet() {
 		$entity = $this->getNewEmpty();
-		$entity->setFingerprint( Fingerprint::newEmpty() );
+		$entity->setFingerprint( new Fingerprint() );
 
 		$this->assertHasNoTerms( $entity );
 	}
@@ -622,7 +620,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$entity->setDescription( 'en', 'foo bar' );
 		$entity->setAliases( 'en', array( 'foo', 'bar' ) );
 
-		$entity->setFingerprint( Fingerprint::newEmpty() );
+		$entity->setFingerprint( new Fingerprint() );
 
 		$this->assertHasNoTerms( $entity );
 	}

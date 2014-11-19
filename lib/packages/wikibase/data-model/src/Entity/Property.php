@@ -129,7 +129,7 @@ class Property extends Entity implements StatementListProvider {
 	public static function newFromType( $dataTypeId ) {
 		return new self(
 			null,
-			Fingerprint::newEmpty(),
+			new Fingerprint(),
 			$dataTypeId
 		);
 	}
@@ -179,7 +179,7 @@ class Property extends Entity implements StatementListProvider {
 	 * @since 0.1
 	 */
 	public function clear() {
-		$this->fingerprint = Fingerprint::newEmpty();
+		$this->fingerprint = new Fingerprint();
 	}
 
 	/**

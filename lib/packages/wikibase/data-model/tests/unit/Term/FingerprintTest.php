@@ -69,6 +69,14 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testEmptyConstructor() {
+		$fingerprint = new Fingerprint();
+
+		$this->assertTrue( $fingerprint->getLabels()->isEmpty() );
+		$this->assertTrue( $fingerprint->getDescriptions()->isEmpty() );
+		$this->assertTrue( $fingerprint->getAliasGroups()->isEmpty() );
+	}
+
 	public function testConstructorSetsValues() {
 		$fingerprint = new Fingerprint( $this->labels, $this->descriptions, $this->aliasGroups );
 
@@ -169,20 +177,17 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	public function fingerprintProvider() {
 		return array(
 			array(
-				Fingerprint::newEmpty()
+				new Fingerprint()
 			),
 			array(
 				new Fingerprint(
-					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new TermList(),
-					new AliasGroupList()
+					new TermList( array( new Term( 'en', 'foo' ) ) )
 				)
 			),
 			array(
 				new Fingerprint(
 					new TermList(),
-					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new AliasGroupList()
+					new TermList( array( new Term( 'en', 'foo' ) ) )
 				)
 			),
 			array(
@@ -212,35 +217,28 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	public function differentFingerprintsProvider() {
 		return array(
 			array(
-				Fingerprint::newEmpty(),
+				new Fingerprint(),
 				new Fingerprint(
-					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new TermList(),
-					new AliasGroupList()
+					new TermList( array( new Term( 'en', 'foo' ) ) )
 				)
 			),
 			array(
 				new Fingerprint(
-					new TermList( array( new Term( 'en', 'foo' ), new Term( 'de', 'bar' ) ) ),
-					new TermList(),
-					new AliasGroupList()
+					new TermList( array( new Term( 'en', 'foo' ), new Term( 'de', 'bar' ) ) )
 				),
 				new Fingerprint(
-					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new TermList(),
-					new AliasGroupList()
+					new TermList( array( new Term( 'en', 'foo' ) ) )
 				)
 			),
 			array(
-				Fingerprint::newEmpty(),
+				new Fingerprint(),
 				new Fingerprint(
 					new TermList(),
-					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new AliasGroupList()
+					new TermList( array( new Term( 'en', 'foo' ) ) )
 				)
 			),
 			array(
-				Fingerprint::newEmpty(),
+				new Fingerprint(),
 				new Fingerprint(
 					new TermList(),
 					new TermList(),
@@ -263,7 +261,8 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testEmptyFingerprintIsEmpty() {
-		$this->assertTrue( Fingerprint::newEmpty()->isEmpty() );
+		$fingerprint = new Fingerprint();
+		$this->assertTrue( $fingerprint->isEmpty() );
 	}
 
 	/**
@@ -277,17 +276,14 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				new Fingerprint(
-					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new TermList(),
-					new AliasGroupList()
+					new TermList( array( new Term( 'en', 'foo' ) ) )
 				)
 			),
 
 			array(
 				new Fingerprint(
 					new TermList(),
-					new TermList( array( new Term( 'en', 'foo' ) ) ),
-					new AliasGroupList()
+					new TermList( array( new Term( 'en', 'foo' ) ) )
 				)
 			),
 
@@ -310,7 +306,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetLabels() {
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'foo' );
 
 		$labels = new TermList( array(
@@ -323,7 +319,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetDescriptions() {
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setDescription( 'en', 'foo' );
 
 		$descriptions = new TermList( array(
@@ -336,7 +332,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetAliasGroups() {
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setAliasGroup( 'en', array( 'foo' ) );
 
 		$groups = new AliasGroupList( array(
@@ -349,19 +345,22 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testEmptyFingerprintDoesNotHaveLabel() {
-		$this->assertFalse( Fingerprint::newEmpty()->hasLabel( 'en' ) );
+		$fingerprint = new Fingerprint();
+		$this->assertFalse( $fingerprint->hasLabel( 'en' ) );
 	}
 
 	public function testEmptyFingerprintDoesNotHaveDescription() {
-		$this->assertFalse( Fingerprint::newEmpty()->hasDescription( 'en' ) );
+		$fingerprint = new Fingerprint();
+		$this->assertFalse( $fingerprint->hasDescription( 'en' ) );
 	}
 
 	public function testEmptyFingerprintDoesNotHaveAliasGroup() {
-		$this->assertFalse( Fingerprint::newEmpty()->hasAliasGroup( 'en' ) );
+		$fingerprint = new Fingerprint();
+		$this->assertFalse( $fingerprint->hasAliasGroup( 'en' ) );
 	}
 
 	public function testHasLabelReturnsTrueOnlyWhenLabelExists() {
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'foo' );
 
 		$this->assertTrue( $fingerprint->hasLabel( 'en' ) );
@@ -369,7 +368,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testHasDescriptionReturnsTrueOnlyWhenDescriptionExists() {
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setDescription( 'en', 'foo' );
 
 		$this->assertTrue( $fingerprint->hasDescription( 'en' ) );
@@ -377,7 +376,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testHasAliasGroupReturnsTrueOnlyWhenAliasGroupExists() {
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setAliasGroup( 'en', array( 'foo' ) );
 
 		$this->assertTrue( $fingerprint->hasAliasGroup( 'en' ) );
