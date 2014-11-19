@@ -77,8 +77,7 @@
 		} );
 
 		$input
-		.removeAttr( 'name' )
-		.after( $hiddenInput );
+		.before( $hiddenInput );
 
 		$input
 		.one( 'focus', function( event ) {
