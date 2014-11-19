@@ -116,7 +116,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	public function getLabelProvider() {
 		return array(
 			array( 'LabelString', 'Q123' ),
-			array( '', 'DoesntExist' )
+			array( null, 'DoesntExist' )
 		);
 	}
 
@@ -134,7 +134,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	public function getSiteLinkPageNameProvider() {
 		return array(
 			array( 'Beer', 'Q666' ),
-			array( '', 'DoesntExist' )
+			array( null, 'DoesntExist' )
 		);
 	}
 

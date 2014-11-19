@@ -80,6 +80,8 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 
 		$this->createTestItem( new ItemId( 'Q32487' ), $labels, array( $statement1, $statement2 ), $siteLinks );
 
+		$this->createTestItem( new ItemId( 'Q32488' ), array(), array( $statement1 ), array() );
+
 		// Create another test item to test arbitrary access
 		$this->createTestItem( new ItemId( 'Q199024' ), array( 'de' => 'Arbitrary access \o/' ) );
 	}

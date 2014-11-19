@@ -259,15 +259,15 @@ class WikibaseLuaBindings {
 		try {
 			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
 		} catch( EntityIdParsingException $e ) {
-			return '';
+			return null;
 		}
 
 		try {
 			$label = $this->labelLookup->getLabel( $entityId );
 		} catch ( StorageException $ex ) {
-			return '';
+			return null;
 		} catch ( OutOfBoundsException $ex ) {
-			return '';
+			return null;
 		}
 
 		return $label;
@@ -283,12 +283,12 @@ class WikibaseLuaBindings {
 		try {
 			$itemId = new ItemId( $prefixedEntityId );
 		} catch( InvalidArgumentException $e ) {
-			return '';
+			return null;
 		}
 
 		$item = $this->entityLookup->getEntity( $itemId );
 		if ( !$item || !$item->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) ) {
-			return '';
+			return null;
 		}
 
 		return $item->getSiteLinkList()->getBySiteId( $this->siteId )->getPageName();

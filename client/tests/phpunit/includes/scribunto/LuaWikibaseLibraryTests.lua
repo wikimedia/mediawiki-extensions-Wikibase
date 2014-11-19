@@ -59,9 +59,18 @@ local tests = {
 	  args = { 'Q32487' },
 	  expect = { 'Lua Test Item' }
 	},
+	{ name = 'mw.wikibase.label', func = mw.wikibase.label, type='ToString',
+	  args = { 'Q32488' },
+	  expect = { nil }
+	},
 	{ name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
 	  args = { 'Q32487' },
 	  expect = { 'WikibaseClientLuaTest' }
+	},
+	{
+	  name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
+	  args = { 'Q32488' },
+	  expect = { nil }
 	}
 }
 
