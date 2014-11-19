@@ -31,7 +31,7 @@ class UsageAccumulatorContractTester  {
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
 
-		$this->usageAccumulator->addSitelinksUsage( $q2 );
+		$this->usageAccumulator->addSiteLinksUsage( $q2 );
 		$this->usageAccumulator->addLabelUsage( $q2 );
 		$this->usageAccumulator->addPageUsage( $q2 );
 		$this->usageAccumulator->addAllUsage( $q3 );

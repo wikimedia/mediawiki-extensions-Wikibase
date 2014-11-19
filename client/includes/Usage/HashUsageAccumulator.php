@@ -16,11 +16,7 @@ class HashUsageAccumulator implements UsageAccumulator {
 	/**
 	 * @var EntityUsage[]
 	 */
-	private $usages;
-
-	public function __construct() {
-		$this->usages = array();
-	}
+	private $usages = array();
 
 	/**
 	 * Registers usage of the given aspect of the given entity.
@@ -68,7 +64,7 @@ class HashUsageAccumulator implements UsageAccumulator {
 	 *
 	 * @param EntityId $id
 	 */
-	public function addSitelinksUsage( EntityId $id ) {
+	public function addSiteLinksUsage( EntityId $id ) {
 		$this->addUsage( $id, EntityUsage::SITELINK_USAGE );
 	}
 

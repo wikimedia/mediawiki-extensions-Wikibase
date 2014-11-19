@@ -32,7 +32,7 @@ interface UsageAccumulator {
 	 *
 	 * @param EntityId $id
 	 */
-	public function addSitelinksUsage( EntityId $id );
+	public function addSiteLinksUsage( EntityId $id );
 
 	/**
 	 * Registers the usage of other or all data of an entity (e.g. when accessed

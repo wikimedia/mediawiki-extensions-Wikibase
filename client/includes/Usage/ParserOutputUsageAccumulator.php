@@ -21,7 +21,6 @@ class ParserOutputUsageAccumulator implements UsageAccumulator {
 	private $parserOutput;
 
 	public function __construct( ParserOutput $parserOutput ) {
-
 		$this->parserOutput = $parserOutput;
 	}
 
@@ -75,7 +74,7 @@ class ParserOutputUsageAccumulator implements UsageAccumulator {
 	 *
 	 * @param EntityId $id
 	 */
-	public function addSitelinksUsage( EntityId $id ) {
+	public function addSiteLinksUsage( EntityId $id ) {
 		$this->addUsage( $id, EntityUsage::SITELINK_USAGE );
 	}
 
