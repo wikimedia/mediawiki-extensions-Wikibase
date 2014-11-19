@@ -19,7 +19,6 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
-use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Repo\View\EntityViewFactory;
 
 /**

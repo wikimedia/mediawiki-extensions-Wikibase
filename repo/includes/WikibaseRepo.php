@@ -47,7 +47,6 @@ use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
@@ -490,8 +489,6 @@ class WikibaseRepo {
 	 */
 	public function getValueFormatterBuilders() {
 		global $wgContLang;
-
-		$termLookup = new EntityRetrievingTermLookup( $this->getEntityLookup() );
 
 		return new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
