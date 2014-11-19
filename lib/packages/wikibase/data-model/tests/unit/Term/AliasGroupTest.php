@@ -23,7 +23,7 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testIsEmpty() {
-		$emptyGroup = new AliasGroup( 'en', array() );
+		$emptyGroup = new AliasGroup( 'en' );
 		$this->assertTrue( $emptyGroup->isEmpty() );
 
 		$filledGroup = new AliasGroup( 'en', array( 'foo' ) );
@@ -48,7 +48,7 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 		$group = new AliasGroup( 'en', array( 'foo', 'bar' ) );
 
 		$this->assertFalse( $group->equals( new AliasGroup( 'de', array( 'foo', 'bar' ) ) ) );
-		$this->assertFalse( $group->equals( new AliasGroup( 'de', array() ) ) );
+		$this->assertFalse( $group->equals( new AliasGroup( 'de' ) ) );
 	}
 
 	public function testGroupDoesNotEqualWhenOrderIsDifferent() {
@@ -67,7 +67,7 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testIsCountable() {
-		$this->assertCount( 0, new AliasGroup( 'en', array() ) );
+		$this->assertCount( 0, new AliasGroup( 'en' ) );
 		$this->assertCount( 1, new AliasGroup( 'en', array( 'foo' ) ) );
 		$this->assertCount( 2, new AliasGroup( 'en', array( 'foo', 'bar' ) ) );
 	}
