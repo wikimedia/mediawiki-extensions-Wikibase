@@ -160,14 +160,15 @@ class Statement extends Claim {
 	 *
 	 * @param mixed $target
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $target ) {
-		if ( !( $target instanceof self ) ) {
-			return false;
+		if ( $this === $target ) {
+			return true;
 		}
 
-		return $this->claimFieldsEqual( $target )
+		return $target instanceof self
+			&& $this->claimFieldsEqual( $target )
 			&& $this->rank === $target->getRank()
 			&& $this->references->equals( $target->references );
 	}

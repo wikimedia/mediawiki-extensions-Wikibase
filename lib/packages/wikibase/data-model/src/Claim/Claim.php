@@ -209,10 +209,16 @@ class Claim implements Hashable, Comparable, PropertyIdProvider {
 	 *
 	 * @param mixed $target
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $target ) {
-		if ( !( $target instanceof self ) || $target instanceof Statement ) {
+		if ( $this === $target ) {
+			return true;
+		}
+
+		if ( !( $target instanceof self )
+			|| $target instanceof Statement
+		) {
 			return false;
 		}
 

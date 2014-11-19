@@ -289,13 +289,17 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 *
 	 * @since 0.3
 	 *
-	 * @param mixed $mixed
+	 * @param mixed $target
 	 *
 	 * @return bool
 	 */
-	public function equals( $mixed ) {
-		return $mixed instanceof self
-			&& $this->getHash() === $mixed->getHash();
+	public function equals( $target ) {
+		if ( $this === $target ) {
+			return true;
+		}
+
+		return $target instanceof self
+			&& $this->getHash() === $target->getHash();
 	}
 
 	/**

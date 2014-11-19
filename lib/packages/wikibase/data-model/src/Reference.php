@@ -92,13 +92,17 @@ class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 	 *
 	 * @since 0.3
 	 *
-	 * @param mixed $mixed
+	 * @param mixed $target
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
-	public function equals( $mixed ) {
-		return $mixed instanceof self
-			&& $this->snaks->equals( $mixed->snaks );
+	public function equals( $target ) {
+		if ( $this === $target ) {
+			return true;
+		}
+
+		return $target instanceof self
+			&& $this->snaks->equals( $target->snaks );
 	}
 
 }

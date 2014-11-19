@@ -195,14 +195,15 @@ class Fingerprint implements Comparable {
 	 *
 	 * @param mixed $target
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $target ) {
-		if ( !( $target instanceof self ) ) {
-			return false;
+		if ( $this === $target ) {
+			return true;
 		}
 
-		return $this->descriptions->equals( $target->getDescriptions() )
+		return $target instanceof self
+			&& $this->descriptions->equals( $target->getDescriptions() )
 			&& $this->labels->equals( $target->getLabels() )
 			&& $this->aliasGroups->equals( $target->getAliasGroups() );
 	}

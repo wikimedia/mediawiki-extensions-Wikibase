@@ -127,14 +127,15 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	 *
 	 * @param mixed $target
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $target ) {
-		if ( !( $target instanceof self ) ) {
-			return false;
+		if ( $this === $target ) {
+			return true;
 		}
 
-		return $this->siteLinks == $target->siteLinks;
+		return $target instanceof self
+			&& $this->siteLinks == $target->siteLinks;
 	}
 
 	/**

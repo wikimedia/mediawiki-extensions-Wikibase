@@ -60,6 +60,10 @@ class ClaimGuid implements Comparable {
 	 * @return bool
 	 */
 	public function equals( $target ) {
+		if ( $this === $target ) {
+			return true;
+		}
+
 		return $target instanceof self
 			&& $target->serialization === $this->serialization;
 	}

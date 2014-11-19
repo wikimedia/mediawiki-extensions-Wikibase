@@ -4,8 +4,8 @@ namespace Wikibase\DataModel\Entity;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\StatementListProvider;
+use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * Represents a single Wikibase property.
@@ -136,22 +136,19 @@ class Property extends Entity implements StatementListProvider {
 	 *
 	 * @since 0.1
 	 *
-	 * @param mixed $that
+	 * @param mixed $target
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
-	public function equals( $that ) {
-		if ( $this === $that ) {
+	public function equals( $target ) {
+		if ( $this === $target ) {
 			return true;
 		}
 
-		if ( !( $that instanceof self ) ) {
-			return false;
-		}
-
-		return $this->dataTypeId === $that->dataTypeId
-			&& $this->fingerprint->equals( $that->fingerprint )
-			&& $this->statements->equals( $that->statements );
+		return $target instanceof self
+			&& $this->dataTypeId === $target->dataTypeId
+			&& $this->fingerprint->equals( $target->fingerprint )
+			&& $this->statements->equals( $target->statements );
 	}
 
 	/**
