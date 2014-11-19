@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e936f18_c9604da2",
+        "filename": "client/includes/DataAccess/PropertyIdResolver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-19T09:57:25Z",
+      "side": 1,
+      "message": "use clause was missing.",
+      "revId": "746b52314170ab22d3fb14bf591fbdc6a4b80176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_b06d942f",
         "filename": "client/includes/DataAccess/PropertyIdResolver.php",
         "patchSetId": 1
@@ -31,6 +48,24 @@
       "side": 1,
       "message": "aaaah, i already had that. where did it go? will change this again or property info lookup might be even better.",
       "parentUuid": "6e936f18_b06d942f",
+      "revId": "746b52314170ab22d3fb14bf591fbdc6a4b80176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8956c5cf",
+        "filename": "client/includes/DataAccess/PropertyIdResolver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-19T09:57:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_70814c91",
       "revId": "746b52314170ab22d3fb14bf591fbdc6a4b80176",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
