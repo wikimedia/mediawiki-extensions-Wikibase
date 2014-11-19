@@ -2,9 +2,16 @@
 
 namespace Wikibase\Repo;
 
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintProvider;
 
 /**
+ * FIXME: OCP violation. Extensions that add new types of entities with
+ * new types of terms cannot register proper support.
+ *
  * @since 0.5
  *
  * @licence GNU GPL v2+
@@ -13,19 +20,24 @@ use Wikibase\DataModel\Entity\Entity;
 class EntitySearchTextGenerator {
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return string
 	 */
-	public function generate( Entity $entity ) {
-		$labels = $entity->getLabels();
-		$text = $this->getArrayAsText( $labels );
+	public function generate( EntityDocument $entity ) {
+		if ( $entity instanceof FingerprintProvider ) {
+			return $this->getTextForFingerprint( $entity->getFingerprint() );
+		}
 
-		$descriptions = $entity->getDescriptions();
-		$text .= "\n" . $this->getArrayAsText( $descriptions );
+		return '';
+	}
 
-		$allAliases = $entity->getAllAliases();
-		$text .= $this->getAllAliasesText( $allAliases );
+	private function getTextForFingerprint( Fingerprint $fingerprint ) {
+		$text = $this->getArrayAsText( $fingerprint->getLabels()->toTextArray() );
+
+		$text .= "\n" . $this->getArrayAsText( $fingerprint->getDescriptions()->toTextArray() );
+
+		$text .= $this->getAllAliasesText( $fingerprint->getAliasGroups() );
 
 		return $text;
 	}
@@ -40,15 +52,15 @@ class EntitySearchTextGenerator {
 	}
 
 	/**
-	 * @param array $allAliases
+	 * @param AliasGroupList $aliasGroups
 	 *
 	 * @return string
 	 */
-	protected function getAllAliasesText( array $allAliases ) {
+	protected function getAllAliasesText( AliasGroupList $aliasGroups ) {
 		$text = '';
 
-		foreach ( $allAliases as $aliases ) {
-			$text .= "\n" . implode( "\n", $aliases );
+		foreach ( $aliasGroups as $aliasGroup ) {
+			$text .= "\n" . implode( "\n", $aliasGroup->getAliases() );
 		}
 
 		return $text;
