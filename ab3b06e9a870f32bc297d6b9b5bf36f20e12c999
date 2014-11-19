@@ -105,6 +105,24 @@
       "revId": "ab3b06e9a870f32bc297d6b9b5bf36f20e12c999",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_09c6356b",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpStatementRankTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-11-19T10:43:30Z",
+      "side": 1,
+      "message": "I would just do\n$item-\u003egetStatements()-\u003eaddNewStatetemnt( $mainSnak, null, null, \u0027$D8499CDA-25E4-4334-AG03-A3290BCD9CQP\u0027 );\nThat would work, right?",
+      "parentUuid": "6e936f18_6784d9a3",
+      "revId": "ab3b06e9a870f32bc297d6b9b5bf36f20e12c999",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
