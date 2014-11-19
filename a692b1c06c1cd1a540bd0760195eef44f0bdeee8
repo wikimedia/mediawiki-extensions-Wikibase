@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_e95ae951",
+        "filename": "client/composer.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-19T12:08:58Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s used; not even util.inherit is used in client.",
+      "revId": "a692b1c06c1cd1a540bd0760195eef44f0bdeee8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_c93b6de6",
+        "filename": "client/composer.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-19T12:08:58Z",
+      "side": 1,
+      "message": "Not used.",
+      "revId": "a692b1c06c1cd1a540bd0760195eef44f0bdeee8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_0956352d",
+        "filename": "client/composer.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-19T12:08:58Z",
+      "side": 1,
+      "message": "Apparently not used.",
+      "revId": "a692b1c06c1cd1a540bd0760195eef44f0bdeee8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_a93861ec",
+        "filename": "client/composer.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-19T12:08:58Z",
+      "side": 1,
+      "message": "Not used.",
+      "revId": "a692b1c06c1cd1a540bd0760195eef44f0bdeee8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_693ed9d8",
+        "filename": "lib/composer.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-19T12:08:58Z",
+      "side": 1,
+      "message": "Currently needed, but should go away until split.",
+      "revId": "a692b1c06c1cd1a540bd0760195eef44f0bdeee8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
