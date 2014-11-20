@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_17408337",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-20T21:52:04Z",
+      "side": 1,
+      "message": "I find this a bit odd. You are re-enabling the remove button without really knowing why it was disabled?",
+      "revId": "f708017ae0077be1320de533954445fc64f9a500",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
