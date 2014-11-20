@@ -49,6 +49,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LabelLookupFactory;
 use Wikibase\Lib\Store\WikibaseLabelLookupFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
@@ -489,10 +490,19 @@ class WikibaseRepo {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	public function getValueFormatterBuilders() {
+		return $this->getValueFormatterBuildersForLabelLookupFactory(
+			$this->getLabelLookupFactory()
+		);
+	}
+
+	/**
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	public function getValueFormatterBuildersForLabelLookupFactory( LabelLookupFactory $labelLookupFactory) {
 		global $wgContLang;
 
 		return new WikibaseValueFormatterBuilders(
-			$this->getLabelLookupFactory(),
+			$labelLookupFactory,
 			$wgContLang,
 			$this->getEntityTitleLookup()
 		);
@@ -506,8 +516,19 @@ class WikibaseRepo {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	protected function newSnakFormatterFactory() {
+		return $this->newSnakFormatterFactoryForValueFormatterBuilders(
+			$this->getValueFormatterBuilders()
+		);
+	}
+
+	/**
+	 * @return OutputFormatSnakFormatterFactory
+	 */
+	protected function newSnakFormatterFactoryForValueFormatterBuilders(
+		WikibaseValueFormatterBuilders $valueFormatterBuilders
+	) {
 		$builders = new WikibaseSnakFormatterBuilders(
-			$this->getValueFormatterBuilders(),
+			$valueFormatterBuilders,
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
@@ -956,10 +977,18 @@ class WikibaseRepo {
 	public function getEntityParserOutputGeneratorFactory() {
 		$entityTitleLookup = $this->getEntityContentFactory();
 
+		$self = $this;
+
 		$entityViewFactory = new EntityViewFactory(
 			$entityTitleLookup,
 			$this->getEntityLookup(),
-			$this->getSnakFormatterFactory()
+			function( LabelLookupFactory $labelLookupFactory ) use ($self) {
+				return $self->newSnakFormatterFactoryForValueFormatterBuilders(
+					$self->getValueFormatterBuildersForLabelLookupFactory(
+						$labelLookupFactory
+					)
+				);
+			}
 		);
 
 		return new EntityParserOutputGeneratorFactory(
