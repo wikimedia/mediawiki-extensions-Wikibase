@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_75aea77d",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-20T12:53:34Z",
+      "side": 0,
+      "message": "entityLookup is not needed anymore.",
+      "revId": "f657ca009ad4faf7a42c7b71ad93283ab81150cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
