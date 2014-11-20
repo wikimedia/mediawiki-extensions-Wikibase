@@ -156,11 +156,11 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * @return StatementList
 	 */
 	public function getWithRank( $acceptableRanks ) {
-		$acceptableRanks = (array)$acceptableRanks;
+		$acceptableRanks = array_flip( (array)$acceptableRanks );
 		$statements = array();
 
 		foreach ( $this->statements as $statement ) {
-			if ( in_array( $statement->getRank(), $acceptableRanks ) ) {
+			if ( array_key_exists( $statement->getRank(), $acceptableRanks ) ) {
 				$statements[] = $statement;
 			}
 		}
