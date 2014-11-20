@@ -35,7 +35,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$this->getPropertyLinkFormatter()
 		);
 
 		$html = $snakHtmlGenerator->getSnakHtml( $snak, $entityInfo );
@@ -126,6 +126,20 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
 
 		return $lookup;
+	}
+
+	private function getPropertyLinkFormatter() {
+		$propertyLinkFormatter = $this->getMockBuilder(
+				'Wikibase\Repo\View\EntityInfoPropertyLinkFormatter'
+			)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$propertyLinkFormatter->expects( $this->any() )
+			->method( 'makePropertyLink' )
+			->will( $this->returnValue( 'property-link' ) );
+
+		return $propertyLinkFormatter;
 	}
 
 }

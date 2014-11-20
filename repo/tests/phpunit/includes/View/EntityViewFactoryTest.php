@@ -53,7 +53,8 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new EntityViewFactory(
 			$this->getEntityTitleLookup(),
 			new MockRepository(),
-			$this->getSnakFormatterFactory()
+			$this->getSnakFormatterFactory(),
+			$this->getPropertyLinkFormatter()
 		);
 	}
 
@@ -86,6 +87,20 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $snakFormatter ) );
 
 		return $snakFormatterFactory;
+	}
+
+	private function getPropertyLinkFormatter() {
+		$propertyLinkFormatter = $this->getMockBuilder(
+				'Wikibase\Repo\View\EntityInfoPropertyLinkFormatter'
+			)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$propertyLinkFormatter->expects( $this->any() )
+			->method( 'makePropertyLink' )
+			->will( $this->returnValue( 'property-link' ) );
+
+		return $propertyLinkFormatter;
 	}
 
 }

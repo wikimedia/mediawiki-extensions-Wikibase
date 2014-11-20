@@ -46,6 +46,11 @@ class EntityViewFactory {
 	private $snakFormatterFactory;
 
 	/**
+	 * @var EntityInfoPropertyLinkFormatter
+	 */
+	private $propertyLinkFormatter;
+
+	/**
 	 * @var SectionEditLinkGenerator
 	 */
 	private $sectionEditLinkGenerator;
@@ -53,11 +58,13 @@ class EntityViewFactory {
 	public function __construct(
 		EntityTitleLookup $entityTitleLookup,
 		EntityLookup $entityLookup,
-		OutputFormatSnakFormatterFactory $snakFormatterFactory
+		OutputFormatSnakFormatterFactory $snakFormatterFactory,
+		EntityInfoPropertyLinkFormatter $propertyLinkFormatter
 	) {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityLookup = $entityLookup;
 		$this->snakFormatterFactory = $snakFormatterFactory;
+		$this->propertyLinkFormatter = $propertyLinkFormatter;
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 	}
 
@@ -103,7 +110,7 @@ class EntityViewFactory {
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->getSnakFormatter( $fallbackChain, $languageCode ),
-			$this->entityTitleLookup
+			$this->propertyLinkFormatter
 		);
 
 		$claimHtmlGenerator = new ClaimHtmlGenerator(
@@ -112,9 +119,9 @@ class EntityViewFactory {
 		);
 
 		return new ClaimsView(
-			$this->entityTitleLookup,
 			$this->sectionEditLinkGenerator,
 			$claimHtmlGenerator,
+			$this->propertyLinkFormatter,
 			$languageCode
 		);
 	}

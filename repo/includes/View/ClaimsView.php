@@ -23,11 +23,6 @@ use Wikibase\ReferencedEntitiesFinder;
 class ClaimsView {
 
 	/**
-	 * @var EntityTitleLookup
-	 */
-	private $entityTitleLookup;
-
-	/**
 	 * @var SectionEditLinkGenerator
 	 */
 	private $sectionEditLinkGenerator;
@@ -38,25 +33,30 @@ class ClaimsView {
 	private $claimHtmlGenerator;
 
 	/**
+	 * @var EntityInfoPropertyLinkFormatter
+	 */
+	private $propertyLinkFormatter;
+
+	/**
 	 * @var string
 	 */
 	private $languageCode;
 
 	/**
-	 * @param EnttiyTitleLookup $entityTitleLookup
 	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
 	 * @param ClaimHtmlGenerator $claimHtmlGenerator
+	 * @param EntityInfoPropertyLinkFormatter $propertyLinkFormatter
 	 * @param string $languageCode
 	 */
 	public function __construct(
-		EntityTitleLookup $entityTitleLookup,
 		SectionEditLinkGenerator $sectionEditLinkGenerator,
 		ClaimHtmlGenerator $claimHtmlGenerator,
+		EntityInfoPropertyLinkFormatter $propertyLinkFormatter,
 		$languageCode
 	) {
-		$this->entityTitleLookup = $entityTitleLookup;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->claimHtmlGenerator = $claimHtmlGenerator;
+		$this->propertyLinkFormatter = $propertyLinkFormatter;
 		$this->languageCode = $languageCode;
 	}
 
@@ -145,17 +145,7 @@ class ClaimsView {
 		$propertyHtml = '';
 
 		$propertyId = $claims[0]->getMainSnak()->getPropertyId();
-		$key = $propertyId->getSerialization();
-		$propertyLabel = $key;
-		if ( isset( $entityInfo[$key] ) && !empty( $entityInfo[$key]['labels'] ) ) {
-			$entityInfoLabel = reset( $entityInfo[$key]['labels'] );
-			$propertyLabel = $entityInfoLabel['value'];
-		}
-
-		$propertyLink = Linker::link(
-			$this->entityTitleLookup->getTitleForId( $propertyId ),
-			htmlspecialchars( $propertyLabel )
-		);
+		$propertyLink = $this->propertyLinkFormatter->makePropertyLink( $propertyId, $entityInfo );
 
 		// TODO: add link to SpecialPage
 		$htmlForEditSection = $this->sectionEditLinkGenerator->getHtmlForEditSection(
