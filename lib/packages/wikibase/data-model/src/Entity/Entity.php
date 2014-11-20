@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
 use RuntimeException;
 use Wikibase\DataModel\Claim\Claim;
