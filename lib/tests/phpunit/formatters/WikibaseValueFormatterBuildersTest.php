@@ -45,16 +45,17 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders( EntityId $entityId ) {
-		$entity = EntityFactory::singleton()->newEmpty( $entityId->getEntityType() );
-		$entity->setId( $entityId );
-		$entity->setLabel( 'en', 'Label for ' . $entityId->getSerialization() );
+		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( 'Label for ' . $entityId->getSerialization() ) );
 
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
-		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
-			->will( $this->returnValue( $entity ) );
+		$labelLookupFactory = $this->getMock( 'Wikibase\Lib\Store\LabelLookupFactory' );
+		$labelLookupFactory->expects( $this->any() )
+			->method( 'getLabelLookup' )
+			->will( $this->returnValue( $labelLookup ) );
 
-		return new WikibaseValueFormatterBuilders( $entityLookup, Language::factory( 'en' ) );
+		return new WikibaseValueFormatterBuilders( $labelLookupFactory, Language::factory( 'en' ) );
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {

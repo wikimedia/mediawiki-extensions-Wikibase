@@ -46,6 +46,8 @@ use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Serializers\ForbiddenSerializer;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\WikibaseLabelLookupFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -465,10 +467,7 @@ final class WikibaseClient {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	private function newSnakFormatterFactory() {
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
-			$this->getEntityLookup(),
-			$this->contentLanguage
-		);
+		$valueFormatterBuilders = $this->newWikibaseValueFormatterBuilders();
 
 		$builders = new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
@@ -497,12 +496,28 @@ final class WikibaseClient {
 	 * @return OutputFormatValueFormatterFactory
 	 */
 	private function newValueFormatterFactory() {
+		$builders = $this->newWikibaseValueFormatterBuilders();
+
+		return new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
+	}
+
+	/**
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	private function newWikibaseValueFormatterBuilders() {
 		$builders = new WikibaseValueFormatterBuilders(
-			$this->getEntityLookup(),
+			$this->getLabelLookupFactory(),
 			$this->contentLanguage
 		);
 
-		return new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
+		return $builders;
+	}
+
+	/**
+	 * @return WikibaseLabelLookupFactory
+	 */
+	private function getLabelLookupFactory() {
+		return new WikibaseLabelLookupFactory( new EntityRetrievingTermLookup( $this->getEntityLookup() ) );
 	}
 
 	/**
