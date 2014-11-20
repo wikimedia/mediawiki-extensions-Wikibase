@@ -231,7 +231,7 @@ class Property extends Entity implements StatementListProvider {
 	 * @return bool
 	 */
 	public function hasClaims() {
-		return $this->statements->count() !== 0;
+		return !$this->statements->isEmpty();
 	}
 
 	/**
