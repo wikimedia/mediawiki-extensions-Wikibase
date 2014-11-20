@@ -25,16 +25,6 @@ return call_user_func( function() {
 			'position' => 'top'
 		),
 
-		'wikibase.experts.EntityIdInput.tests' => $moduleBase + array(
-			'scripts' => array(
-				'experts/EntityIdInput.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.experts.EntityIdInput',
-				'wikibase.tests.qunit.testrunner',
-			),
-		),
-
 		'wikibase.api.RepoApi.tests' => $moduleBase + array(
 			'scripts' => array(
 				'api/RepoApi.tests.js',

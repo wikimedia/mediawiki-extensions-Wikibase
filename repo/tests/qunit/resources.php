@@ -101,6 +101,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.experts.EntityIdInput.tests' => $moduleBase + array(
+			'scripts' => array(
+				'experts/EntityIdInput.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.experts.EntityIdInput',
+				'wikibase.tests.qunit.testrunner',
+			),
+		),
+
 		'wikibase.getLanguageNameByCode.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.getLanguageNameByCode.tests.js'
