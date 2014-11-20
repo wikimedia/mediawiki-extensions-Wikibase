@@ -36,93 +36,41 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class ClaimsViewTest extends \MediaWikiLangTestCase {
 
-	protected function setUp() {
-		parent::setUp();
-
-		$this->setMwGlobals( array(
-			'wgArticlePath' => '/wiki/$1'
-		) );
-	}
-
 	public function testGetHtml() {
-		$property = $this->makeProperty();
-		$entityInfo = $this->makeEntityInfo( $property );
-		$claims = $this->makeClaims( $property->getId() );
+		$claims = $this->makeClaims();
+		$claimsView = $this->newClaimsView();
 
-		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$propertyTitle = $entityTitleLookup->getTitleForId( $property->getId() );
-
-		$claimsView = $this->newClaimsView( $entityTitleLookup );
-
-		$html = $claimsView->getHtml( $claims, $entityInfo );
+		$html = $claimsView->getHtml( $claims, array() );
 
 		foreach ( $claims as $claim ) {
 			$this->assertContains( $claim->getGuid(), $html );
 		}
 
-		$this->assertPropertyLink( $propertyTitle->getPrefixedText(), $html );
+		$this->assertContains( 'property-link', $html );
 	}
 
-	/**
-	 * @return Property
-	 */
-	private function makeProperty() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$testUser = new TestUser( 'WikibaseUser' );
-
-		$property = Property::newEmpty();
-		$property->setLabel( 'en', "<script>alert( 'omg!!!' );</script>" );
-		$property->setDataTypeId( 'string' );
-
-		$revision = $store->saveEntity( $property, 'test property', $testUser->getUser(), EDIT_NEW );
-
-		return $revision->getEntity();
-	}
-
-	private function makeEntityInfo( Property $property ) {
-		$prefixedId = $property->getId()->getSerialization();
-
-		$entityInfo = array(
-			$prefixedId => array(
-				'type' => 'property',
-				'id' => 'P31',
-				'descriptions' => array(),
-				'labels' => array()
-			)
-		);
-
-		foreach( $property->getLabels() as $languageCode => $label ) {
-			$entityInfo[$prefixedId]['labels'][$languageCode] = array(
-				'language' => $languageCode,
-				'value' => $label
-			);
-		}
-
-		return $entityInfo;
-	}
-
-	private function makeClaims( PropertyId $propertyId ) {
+	private function makeClaims() {
 		$claims = array(
 			$this->makeClaim( new PropertyNoValueSnak(
-				$propertyId
+				new PropertyId( 'P10' )
 			) ),
 			$this->makeClaim( new PropertyValueSnak(
-				$propertyId,
+				new PropertyId( 'P10' ),
 				new EntityIdValue( new ItemId( 'Q22' ) )
 			) ),
 			$this->makeClaim( new PropertyValueSnak(
-				$propertyId,
+				new PropertyId( 'P10' ),
 				new StringValue( 'test' )
 			) ),
 			$this->makeClaim( new PropertyValueSnak(
-				$propertyId,
+				new PropertyId( 'P10' ),
 				new StringValue( 'File:Image.jpg' )
 			) ),
 			$this->makeClaim( new PropertySomeValueSnak(
-				$propertyId
+				new PropertyId( 'P10' )
 			) ),
 			$this->makeClaim( new PropertyValueSnak(
-				$propertyId,
+				new PropertyId( 'P10' ),
 				new EntityIdValue( new ItemId( 'Q555' ) )
 			) ),
 		);
@@ -147,11 +95,11 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	/**
 	 * @return ClaimsView
 	 */
-	private function newClaimsView( EntityTitleLookup $entityTitleLookup ) {
+	private function newClaimsView() {
 		return new ClaimsView(
-			$entityTitleLookup,
 			new SectionEditLinkGenerator(),
 			$this->getClaimHtmlGeneratorMock(),
+			$this->getPropertyLinkFormatter(),
 			'en'
 		);
 	}
@@ -173,11 +121,18 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		return $claimHtmlGenerator;
 	}
 
-	private function assertPropertyLink( $titleText, $html ) {
-		$regExp = '/<a href="\/wiki\/' . $titleText . '" title="' . $titleText . '">'
-			. "&lt;script&gt;alert\( \'omg!!!\' \);&lt;\/script&gt;<\/a>/";
+	private function getPropertyLinkFormatter() {
+		$propertyLinkFormatter = $this->getMockBuilder(
+				'Wikibase\Repo\View\EntityInfoPropertyLinkFormatter'
+			)
+			->disableOriginalConstructor()
+			->getMock();
 
-		$this->assertRegExp( $regExp, $html );
+		$propertyLinkFormatter->expects( $this->any() )
+			->method( 'makePropertyLink' )
+			->will( $this->returnValue( 'property-link' ) );
+
+		return $propertyLinkFormatter;
 	}
 
 }

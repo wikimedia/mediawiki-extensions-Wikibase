@@ -65,6 +65,7 @@ use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\DummyChangeTransmitter;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\View\EntityInfoPropertyLinkFormatter;
 use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -954,7 +955,8 @@ class WikibaseRepo {
 		$entityViewFactory = new EntityViewFactory(
 			$entityTitleLookup,
 			$this->getEntityLookup(),
-			$this->getSnakFormatterFactory()
+			$this->getSnakFormatterFactory(),
+			new EntityInfoPropertyLinkFormatter( $entityTitleLookup )
 		);
 
 		return new EntityParserOutputGeneratorFactory(
