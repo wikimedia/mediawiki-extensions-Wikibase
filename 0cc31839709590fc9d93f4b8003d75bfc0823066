@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_d75a1b52",
+        "filename": "client/includes/hooks/OtherProjectsSidebarGeneratorFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-20T23:38:00Z",
+      "side": 1,
+      "message": "The fact that you are storing the SiteStore instead of the Sites is intentional, right?",
+      "revId": "0cc31839709590fc9d93f4b8003d75bfc0823066",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_172c03a9",
+        "filename": "client/includes/hooks/OtherProjectsSidebarGeneratorFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-20T23:38:00Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s necessary to split this as a method. Just my opinion.",
+      "revId": "0cc31839709590fc9d93f4b8003d75bfc0823066",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
