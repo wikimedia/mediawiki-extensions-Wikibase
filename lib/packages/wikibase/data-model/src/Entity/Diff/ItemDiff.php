@@ -21,7 +21,7 @@ class ItemDiff extends EntityDiff {
 	public function __construct( array $operations = array() ) {
 		$this->fixSubstructureDiff( $operations, 'links' );
 
-		parent::__construct( $operations, true );
+		parent::__construct( $operations );
 	}
 
 	/**
@@ -40,7 +40,7 @@ class ItemDiff extends EntityDiff {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isEmpty() {
 		return parent::isEmpty()
