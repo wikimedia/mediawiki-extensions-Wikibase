@@ -24,7 +24,8 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		$entityView = $entityViewFactory->newEntityView(
 			new LanguageFallbackChain( array() ),
 			'de',
-			$entityType
+			$entityType,
+			$this->getTermLookup()
 		);
 
 		$this->assertInstanceOf( $expectedClass, $entityView );
@@ -45,15 +46,19 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		$entityViewFactory->newEntityView(
 			new LanguageFallbackChain( array() ),
 			'de',
-			'kittens'
+			'kittens',
+			$this->getTermLookup()
 		);
 	}
 
 	private function getEntityViewFactory() {
+		$self = $this;
 		return new EntityViewFactory(
 			$this->getEntityTitleLookup(),
 			new MockRepository(),
-			$this->getSnakFormatterFactory()
+			function() use ( $self ) {
+				return $self->getSnakFormatter();
+			}
 		);
 	}
 
@@ -70,22 +75,18 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		return $entityTitleLookup;
 	}
 
-	private function getSnakFormatterFactory() {
+	private function getSnakFormatter() {
 		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
 
-		$snakFormatterFactory = $this->getMockBuilder( 'Wikibase\Lib\OutputFormatSnakFormatterFactory' )
-			->disableOriginalConstructor()
-			->getMock();
+		return $snakFormatter;
+	}
 
-		$snakFormatterFactory->expects( $this->any() )
-			->method( 'getSnakFormatter' )
-			->will( $this->returnValue( $snakFormatter ) );
-
-		return $snakFormatterFactory;
+	private function getTermLookup() {
+		return $this->getMock( 'Wikibase\Lib\Store\TermLookup' );
 	}
 
 }

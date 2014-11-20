@@ -47,8 +47,10 @@ use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -485,13 +487,29 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @return TermLookup
+	 */
+	public function getTermLookup() {
+		return new EntityRetrievingTermLookup( $this->getEntityLookup() );
+	}
+
+	/**
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	public function getValueFormatterBuilders() {
+		return $this->getValueFormatterBuildersForTermLookup(
+			$this->getTermLookup()
+		);
+	}
+
+	/**
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	public function getValueFormatterBuildersForTermLookup( TermLookup $termLookup ) {
 		global $wgContLang;
 
 		return new WikibaseValueFormatterBuilders(
-			$this->getEntityLookup(),
+			$termLookup,
 			$wgContLang,
 			$this->getEntityTitleLookup()
 		);
@@ -501,8 +519,19 @@ class WikibaseRepo {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	protected function newSnakFormatterFactory() {
+		return $this->newSnakFormatterFactoryForValueFormatterBuilders(
+			$this->getValueFormatterBuilders()
+		);
+	}
+
+	/**
+	 * @return OutputFormatSnakFormatterFactory
+	 */
+	public function newSnakFormatterFactoryForValueFormatterBuilders(
+		WikibaseValueFormatterBuilders $valueFormatterBuilders
+	) {
 		$builders = new WikibaseSnakFormatterBuilders(
-			$this->getValueFormatterBuilders(),
+			$valueFormatterBuilders,
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
@@ -951,10 +980,19 @@ class WikibaseRepo {
 	public function getEntityParserOutputGeneratorFactory() {
 		$entityTitleLookup = $this->getEntityContentFactory();
 
+		$self = $this;
+
 		$entityViewFactory = new EntityViewFactory(
 			$entityTitleLookup,
 			$this->getEntityLookup(),
-			$this->getSnakFormatterFactory()
+			function( TermLookup $termLookup, $outputFormat, FormatterOptions $formatterOptions ) use ($self) {
+				$snakFormatterFactory = $self->newSnakFormatterFactoryForValueFormatterBuilders(
+					$self->getValueFormatterBuildersForTermLookup(
+						$termLookup
+					)
+				);
+				return $snakFormatterFactory->getSnakFormatter( $outputFormat, $formatterOptions );
+			}
 		);
 
 		return new EntityParserOutputGeneratorFactory(
