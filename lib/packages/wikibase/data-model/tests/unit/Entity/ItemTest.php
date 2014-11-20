@@ -149,9 +149,9 @@ class ItemTest extends EntityTest {
 		$items[] = $item;
 
 		$item = $item->copy();
-		$item->getStatements()->addStatement( new Statement(
-			new Claim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) )
-		) );
+		$item->getStatements()->addNewStatement(
+			new PropertyNoValueSnak( new PropertyId( 'P42' ) )
+		);
 		$items[] = $item;
 
 		$argLists = array();
