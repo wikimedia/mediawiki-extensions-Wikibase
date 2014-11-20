@@ -448,7 +448,6 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenInvalidRank_getWithRankReturnsEmptyList() {
 		$list = new StatementList();
 		$this->assertEquals( new StatementList(), $list->getWithRank( 42 ) );
-		$this->assertEquals( new StatementList(), $list->getWithRank( 42, 1337 ) );
 	}
 
 	public function testGivenValidRank_getWithRankReturnsOnlyMatchingStatements() {
