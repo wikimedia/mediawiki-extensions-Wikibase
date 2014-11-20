@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_f11ba21f",
+        "filename": "client/resources/wikibase.client.linkitem.init.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-20T13:20:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_c9ce595f",
+      "revId": "64e564404b49f3a51842b5adc9259a40f805429d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_09e581d7",
         "filename": "client/resources/wikibase.client.linkitem.init.js",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-07T18:15:04Z",
       "side": 1,
       "message": "Dependency missing AFAIS",
+      "revId": "64e564404b49f3a51842b5adc9259a40f805429d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d118a625",
+        "filename": "client/resources/wikibase.client.linkitem.init.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-20T13:20:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_09e581d7",
       "revId": "64e564404b49f3a51842b5adc9259a40f805429d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
