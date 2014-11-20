@@ -24,7 +24,8 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		$entityView = $entityViewFactory->newEntityView(
 			new LanguageFallbackChain( array() ),
 			'de',
-			$entityType
+			$entityType,
+			$this->getLabelLookupFactory()
 		);
 
 		$this->assertInstanceOf( $expectedClass, $entityView );
@@ -45,15 +46,19 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		$entityViewFactory->newEntityView(
 			new LanguageFallbackChain( array() ),
 			'de',
-			'kittens'
+			'kittens',
+			$this->getLabelLookupFactory()
 		);
 	}
 
 	private function getEntityViewFactory() {
+		$self = $this;
 		return new EntityViewFactory(
 			$this->getEntityTitleLookup(),
 			new MockRepository(),
-			$this->getSnakFormatterFactory()
+			function() use ( $self ) {
+				return $self->getSnakFormatterFactory();
+			}
 		);
 	}
 
@@ -86,6 +91,10 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $snakFormatter ) );
 
 		return $snakFormatterFactory;
+	}
+
+	private function getLabelLookupFactory() {
+		return $this->getMock( 'Wikibase\Lib\Store\LabelLookupFactory' );
 	}
 
 }
