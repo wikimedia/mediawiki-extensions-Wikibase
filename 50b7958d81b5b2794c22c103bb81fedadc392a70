@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_f59cf76e",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-20T12:50:04Z",
+      "side": 1,
+      "message": "I don\u0027t think a LabelLookupFactory should know anything about FormatterOptions. I agree that the current LabelLookupFactory interface is not optimal.",
+      "parentUuid": "6e936f18_d54f7b37",
+      "revId": "50b7958d81b5b2794c22c103bb81fedadc392a70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_154ac32a",
         "filename": "lib/includes/store/WikibaseLabelLookupFactory.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_b592ef54",
+        "filename": "lib/includes/store/WikibaseLabelLookupFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-20T12:50:04Z",
+      "side": 1,
+      "message": "We should have something lika a LanguageSpec which can be a LanguageFallbackChain or a SingleLanguageSpec.",
+      "parentUuid": "6e936f18_154ac32a",
+      "revId": "50b7958d81b5b2794c22c103bb81fedadc392a70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_b5398fa0",
         "filename": "lib/includes/store/WikibaseLabelLookupFactory.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2014-11-20T11:56:19Z",
       "side": 1,
       "message": "needs to check is_string( $languageSpec ) and fail otherwise.",
+      "revId": "50b7958d81b5b2794c22c103bb81fedadc392a70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_958fb32e",
+        "filename": "lib/includes/store/WikibaseLabelLookupFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-20T12:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_b5398fa0",
       "revId": "50b7958d81b5b2794c22c103bb81fedadc392a70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
