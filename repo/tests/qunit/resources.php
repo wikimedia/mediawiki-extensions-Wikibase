@@ -44,6 +44,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.closeable.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.closeable.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.closeable',
+			),
+		),
+
 		'jquery.ui.tagadata.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.tagadata.tests.js',

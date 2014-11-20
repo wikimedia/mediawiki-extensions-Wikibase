@@ -75,8 +75,13 @@ $.fn.sticknode = function( options ) {
  * @param {Object} options
  */
 var StickyNode = function( $node, options ) {
+	var self = this;
+
 	this.$node = $node;
 	this.$node.data( PLUGIN_NAME, this );
+	this.$node.on( 'resize', function() {
+		self.refresh();
+	} );
 
 	this._options = $.extend( {
 		$container: null
@@ -250,6 +255,17 @@ $.extend( StickyNode.prototype, {
 		}
 
 		return changedState;
+	},
+
+	/**
+	 * Re-fixes the node if it is fixed, properly updating scroll position. Should be called
+	 * whenever the node's content has been updated.
+	 */
+	refresh: function() {
+		if( this.isFixed() ) {
+			this._unfix();
+			this._fix();
+		}
 	}
 } );
 
