@@ -15,6 +15,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -69,7 +70,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$item = Item::newEmpty();
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-		$statement = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[0] ) );
+		$statement = new Statement( new Claim( new PropertyNoValueSnak( self::$propertyIds[0] ) ) );
 		$statement->setGuid( $item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P' );
 
 		$reference = new Reference( new SnakList(
@@ -138,7 +139,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		// Create a statement to act upon:
-		$statement = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[0] ) );
+		$statement = new Statement( new Claim( new PropertyNoValueSnak( self::$propertyIds[0] ) ) );
 		$statement->setGuid(
 			$item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P'
 		);
@@ -160,7 +161,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		// Create a statement to act upon:
-		$statement = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[0] ) );
+		$statement = new Statement( new Claim( new PropertyNoValueSnak( self::$propertyIds[0] ) ) );
 		$statement->setGuid(
 			$item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P'
 		);

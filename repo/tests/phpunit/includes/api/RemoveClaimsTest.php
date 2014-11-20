@@ -5,7 +5,6 @@ namespace Wikibase\Test\Api;
 use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -68,7 +67,10 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		return $item;
 	}
 
-	public function entityProvider() {
+	/**
+	 * @return Item[]
+	 */
+	public function itemProvider() {
 		$fingerprint = Fingerprint::newEmpty();
 		$fingerprint->setLabel( 'en', 'kittens' );
 
@@ -82,30 +84,30 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	}
 
 	public function testValidRequests() {
-		foreach ( $this->entityProvider() as $entity ) {
-			$this->doTestValidRequestSingle( $entity );
+		foreach ( $this->itemProvider() as $item ) {
+			$this->doTestValidRequestSingle( $item );
 		}
 
-		foreach ( $this->entityProvider() as $entity ) {
-			$this->doTestValidRequestMultiple( $entity );
+		foreach ( $this->itemProvider() as $item ) {
+			$this->doTestValidRequestMultiple( $item );
 		}
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param Item $item
 	 */
-	public function doTestValidRequestSingle( Entity $entity ) {
+	public function doTestValidRequestSingle( Item $item ) {
 		$obtainedClaims = null;
 
 		/**
 		 * @var Claim[] $claims
 		 */
-		$claims = $entity->getClaims();
+		$claims = $item->getClaims();
 		while ( $claim = array_shift( $claims ) ) {
 			$this->makeTheRequest( array( $claim->getGuid() ) );
 
-			$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entity->getId() );
-			$obtainedClaims = new Claims( $entity->getClaims() );
+			$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
+			$obtainedClaims = new Claims( $item->getClaims() );
 
 			$this->assertFalse( $obtainedClaims->hasClaimWithGuid( $claim->getGuid() ) );
 
@@ -118,23 +120,22 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param Item $item
 	 */
-	public function doTestValidRequestMultiple( Entity $entity ) {
+	public function doTestValidRequestMultiple( Item $item ) {
 		$guids = array();
 
-		/**
-		 * @var Claim $claim
-		 */
-		foreach ( $entity->getClaims() as $claim ) {
-			$guids[] = $claim->getGuid();
+		/** @var Statement $statement */
+		foreach ( $item->getStatements() as $statement ) {
+			$guids[] = $statement->getGuid();
 		}
 
 		$this->makeTheRequest( $guids );
 
-		$obtainedEntity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entity->getId() );
+		/** @var Item $obtainedItem */
+		$obtainedItem = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
 
-		$this->assertFalse( $obtainedEntity->hasClaims() );
+		$this->assertTrue( $obtainedItem->getStatements()->isEmpty() );
 	}
 
 	private function makeTheRequest( array $claimGuids ) {

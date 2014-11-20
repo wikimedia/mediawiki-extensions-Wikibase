@@ -9,6 +9,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Api\ApiErrorReporter;
 use Wikibase\Api\ClaimModificationHelper;
 use Wikibase\Api\CreateClaim;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -73,12 +74,12 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 		$item->setId( 42 );
 
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$claim = $item->newClaim( $snak );
-		$claim->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );
-		$item->getStatements()->addStatement( new Statement( $claim ) );
-		$claimGuid = $claim->getGuid();
+		$statement = new Statement( new Claim( $snak ) );
+		$statement->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );
+		$item->getStatements()->addStatement( $statement );
+		$claimGuid = $statement->getGuid();
 
-		$this->assertEquals( $claim, $claimModificationHelper->getClaimFromEntity( $claimGuid, $item ) );
+		$this->assertEquals( $statement, $claimModificationHelper->getClaimFromEntity( $claimGuid, $item ) );
 		$this->setExpectedException( '\UsageException' );
 		$claimModificationHelper->getClaimFromEntity( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N', $item );
 	}
