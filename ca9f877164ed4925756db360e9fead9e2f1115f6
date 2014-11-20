@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_d5669bb7",
+        "filename": "repo/includes/View/EntityViewFactory.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-20T12:00:32Z",
+      "side": 1,
+      "message": "WikibaseValueFormatterBuilders is an application scope factory. It shouldn\u0027t be passed around, much less instantiated on the fly. This approach may work with a more limited ValueFormatterFactory, but still, instantiating on the fly here partially defies the purpose of having a factory, and it introduces otherwise unwarranted dependencies.",
+      "revId": "ca9f877164ed4925756db360e9fead9e2f1115f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
