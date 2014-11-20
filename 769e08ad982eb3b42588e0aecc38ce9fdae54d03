@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_7588e722",
+        "filename": "lib/includes/store/PresetLabelLookupFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-20T12:49:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_15d5e312",
+      "revId": "769e08ad982eb3b42588e0aecc38ce9fdae54d03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_75ba27db",
         "filename": "lib/includes/store/PresetLabelLookupFactory.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-20T12:30:13Z",
       "side": 1,
       "message": "LSP violation...",
+      "revId": "769e08ad982eb3b42588e0aecc38ce9fdae54d03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1583a306",
+        "filename": "lib/includes/store/PresetLabelLookupFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-20T12:49:44Z",
+      "side": 1,
+      "message": "I thought about passing in a fallbackLabelLookup.",
+      "parentUuid": "6e936f18_75ba27db",
       "revId": "769e08ad982eb3b42588e0aecc38ce9fdae54d03",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
