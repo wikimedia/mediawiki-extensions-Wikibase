@@ -39,6 +39,9 @@
 		]
 	},
 	"wikibase-desc": "{{desc|name=Wikibase|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
+	"wikibase-entity-item": "How we refer to entities of type item. See also Wikidata's glossary on [[d:Wikidata:Glossary#item|item]].\n{{Identical|Item}}",
+	"wikibase-entity-property": "How we refer to entities of type property. See also Wikidatas glossary on [[d:Wikidata:Glossary#entity|entity]].\n{{Identical|Property}}",
+	"wikibase-entity-query": "How we refer to entities of type query. See also Wikidatas glossary on [[d:Wikidata:Glossary#entity|entity]].\n{{Identical|Query}}",
 	"specialpages-group-wikibaserepo": "{{doc-special-group|that=are related to the Wikibase (repository) extension|like=[[Special:NewItem]], [[Special:NewProperty]], [[Special:ItemByTitle]], [[Special:ItemDisambiguation]], [[Special:ItemsWithoutSitelinks]], [[Special:SetLabel]], [[Special:SetDescription]], [[Special:SetAliases]], [[Special:EntitiesWithoutLabel]], [[Special:EntityData]], [[Special:ListDatatypes]], [[Special:DispatchStats]]}}\nSee example: [[d:Special:SpecialPages#mw-specialpagesgroup-wikibaserepo|d:Special:SpecialPages]]",
 	"wikibase-edit": "[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]\n[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]\nThis is a generic text used for a link (fig. 1 and 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an existing element of some kind.\n{{Identical|Edit}}",
 	"wikibase-save": "[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]\nThis is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that saves what the user has done while the user interface has been in edit mode.\n\nUsed as <code>$1</code> in {{msg-mw|Wikibase-shortcopyrightwarning}}.\n{{Identical|Save}}",
@@ -46,6 +49,16 @@
 	"wikibase-add": "[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]\n[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]\nThis is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an additional element of some kind.\n{{Identical|Add}}",
 	"wikibase-addqualifier": "Label of the link to add a qualifier (see [[d:Wikidata:Glossary]]) to a claim or statement.",
 	"wikibase-addreference": "Label of the link to add a reference (see [[d:Wikidata:Glossary]]) to a statement.",
+	"wikibase-diffview-reference": "Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects a reference. Will be shown as e.g. \"claim / property q1 / reference\".\n{{Identical|Reference}}",
+	"wikibase-diffview-rank": "Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects the rank of the statement. Will be shown as e.g. \"claim / property q1 / rank\".\n{{Identical|Rank}}",
+	"wikibase-diffview-rank-preferred": "The [[d:Wikidata:Glossary#Rank-preferred|Preferred Rank]] to be shown in diffs.",
+	"wikibase-diffview-rank-normal": "The [[d:Wikidata:Glossary#Rank-normal|Normal Rank]] to be shown in diffs.",
+	"wikibase-diffview-rank-deprecated": "The [[d:Wikidata:Glossary#Rank-deprecated|Deprecated Rank]] to be shown in diffs.",
+	"wikibase-diffview-qualifier": "Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects a qualifier. Will be shown as e.g. \"claim / property q1 / qualifier\".",
+	"wikibase-diffview-label": "Sub heading for label changes in a diff.\n{{Identical|Label}}",
+	"wikibase-diffview-alias": "Sub heading for alias changes in a diff\n{{Identical|Alias}}",
+	"wikibase-diffview-description": "Sub heading for description changes in a diff.\n{{Identical|Description}}",
+	"wikibase-diffview-link": "Sub heading for link changes in a diff.\n{{Identical|Link}}",
 	"wikibase-save-inprogress": "[[File:Screenshot WikidataRepo 2012-05-25 L.png|right|350px]]\n[[File:Screenshot WikidataRepo 2012-05-25 J.png|right|350px]]\n[[File:Screenshot WikidataRepo 2012-05-25 K.png|right|350px]]\nThis is a generic placeholder message used while a save is in progress, and replaces the save and cancel links.\n{{Identical|Saving}}",
 	"wikibase-remove-inprogress": "[[File:Screenshot WikidataRepo 2012-05-25 L.png|right|350px]]\n[[File:Screenshot WikidataRepo 2012-05-25 M.png|right|350px]]\nThis is a generic placeholder message used while a remove is in progress, and replaces the edit and remove.",
 	"wikibase-label-empty": "Placeholder message displayed instead of the item's label in case no label has been specified yet. This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
@@ -414,5 +427,6 @@
 	"right-item-merge": "{{doc-right|item-merge}}\nRight to alter the contents of [[d:Special:MyLanguage/Wikidata:Glossary#Item|items]].\n{{Identical|Merge item}}",
 	"right-item-redirect": "{{doc-right|item-redirect}}\nRight to create [[d:Special:MyLanguage/Wikidata:Glossary#Item|item]] redirects after merging items.",
 	"right-property-term": "{{doc-right|property-term}}\nRight to alter the [[d:Wikidata:Glossary#Term|terms]] of [[d:Wikidata:Glossary#Item|items]].",
-	"right-property-create": "{{doc-right|property-create}}\nRight to create new [[d:Wikidata:Glossary#Property|properties]]."
+	"right-property-create": "{{doc-right|property-create}}\nRight to create new [[d:Wikidata:Glossary#Property|properties]].",
+	"wikibase-add-badges": "Title for an empty (dummy) badge sign that asks the user to add badges to a sitelink."
 }
