@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\DataModel\Tests\Statement;
 
 use DataValues\StringValue;
 use Diff\DiffOp\Diff\Diff;

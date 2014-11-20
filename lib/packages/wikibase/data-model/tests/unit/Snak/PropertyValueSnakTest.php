@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Snak;
+namespace Wikibase\DataModel\Tests\Snak;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;

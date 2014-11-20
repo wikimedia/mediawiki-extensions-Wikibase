@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wikibase\DataModel;
+namespace Wikibase\DataModel\Tests;
 
 /**
  * @licence GNU GPL v2+

@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\DataModel\Tests;
 
+use Wikibase\DataModel\Fixtures\HashableObject;
 use Wikibase\DataModel\HashableObjectStorage;
-use Wikibase\Test\DataModel\Fixtures\HashableObject;
 
 /**
  * @covers Wikibase\DataModel\HashableObjectStorage
@@ -130,5 +130,3 @@ class HashableObjectStorageTest extends \PHPUnit_Framework_TestCase {
 	}
 
 }
-
-

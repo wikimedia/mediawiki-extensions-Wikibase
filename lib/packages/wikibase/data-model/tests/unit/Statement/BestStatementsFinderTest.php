@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\DataModel\Tests\Statement;
 
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\BestStatementsFinder;

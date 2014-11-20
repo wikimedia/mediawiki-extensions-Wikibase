@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Entity;
+namespace Wikibase\DataModel\Tests\Entity;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;

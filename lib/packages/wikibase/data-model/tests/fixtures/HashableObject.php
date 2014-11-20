@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\DataModel\Fixtures;
+namespace Wikibase\DataModel\Fixtures;
 
 /**
  * @licence GNU GPL v2+

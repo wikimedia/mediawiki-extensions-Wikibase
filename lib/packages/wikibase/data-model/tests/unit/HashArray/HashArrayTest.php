@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\HashArray;
+namespace Wikibase\DataModel\Tests\HashArray;
 
 use Hashable;
 use Wikibase\DataModel\HashArray;

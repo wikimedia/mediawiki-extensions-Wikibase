@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\DataModel\Tests\Claim;
 
 use Wikibase\DataModel\Claim\ClaimGuid;
 use Wikibase\DataModel\Claim\ClaimGuidParser;

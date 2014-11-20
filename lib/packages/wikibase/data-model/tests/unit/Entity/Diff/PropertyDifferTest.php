@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Entity\Diff;
+namespace Wikibase\DataModel\Tests\Entity\Diff;
 
 use Wikibase\DataModel\Entity\Diff\PropertyDiffer;
 use Wikibase\DataModel\Entity\Property;
@@ -37,4 +37,3 @@ class PropertyDifferTest extends \PHPUnit_Framework_TestCase {
 	}
 
 }
-

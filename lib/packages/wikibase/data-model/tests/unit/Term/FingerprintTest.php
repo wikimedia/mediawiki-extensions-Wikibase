@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Term\Test;
+namespace Wikibase\DataModel\Tests\Term;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Term\AliasGroup;

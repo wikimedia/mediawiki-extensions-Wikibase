@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\DataModel\Tests;
 
 use DataValues\StringValue;
 use ReflectionClass;
