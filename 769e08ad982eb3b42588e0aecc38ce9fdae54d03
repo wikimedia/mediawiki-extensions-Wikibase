@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_15d5e312",
+        "filename": "lib/includes/store/PresetLabelLookupFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-20T12:30:13Z",
+      "side": 1,
+      "message": "Please use type hints and document parameter types",
+      "revId": "769e08ad982eb3b42588e0aecc38ce9fdae54d03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_75ba27db",
+        "filename": "lib/includes/store/PresetLabelLookupFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-20T12:30:13Z",
+      "side": 1,
+      "message": "LSP violation...",
+      "revId": "769e08ad982eb3b42588e0aecc38ce9fdae54d03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d5ca1b70",
+        "filename": "repo/includes/View/EntityViewFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-20T12:30:13Z",
+      "side": 1,
+      "message": "Eeeekk! Very JS...",
+      "revId": "769e08ad982eb3b42588e0aecc38ce9fdae54d03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_55ae0b96",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-20T12:30:13Z",
+      "side": 1,
+      "message": "So, if we need more services, we\u0027ll do this all over again? Which classes can and should know about which services are or could be needed?",
+      "revId": "769e08ad982eb3b42588e0aecc38ce9fdae54d03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
