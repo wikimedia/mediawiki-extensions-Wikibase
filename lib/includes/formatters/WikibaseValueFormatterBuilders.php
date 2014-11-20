@@ -14,11 +14,8 @@ use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
-use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Lib\Store\LabelLookupFactory;
 
 /**
  * Defines the formatters for DataValues supported by Wikibase.
@@ -31,9 +28,9 @@ use Wikibase\Lib\Store\LanguageLabelLookup;
 class WikibaseValueFormatterBuilders {
 
 	/**
-	 * @var EntityLookup
+	 * @var LabelLookupFactory
 	 */
-	private $entityLookup;
+	private $labelLookupFactory;
 
 	/**
 	 * @var Language
@@ -113,11 +110,11 @@ class WikibaseValueFormatterBuilders {
 	);
 
 	public function __construct(
-		EntityLookup $entityLookup,
+		LabelLookupFactory $labelLookupFactory,
 		Language $defaultLanguage,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
-		$this->entityLookup = $entityLookup;
+		$this->labelLookupFactory = $labelLookupFactory;
 		$this->defaultLanguage = $defaultLanguage;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
@@ -511,26 +508,18 @@ class WikibaseValueFormatterBuilders {
 	 * @throws InvalidArgumentException
 	 * @return LabelLookup
 	 */
-	private function newLabelLookup( FormatterOptions $options ) {
-		$termLookup = new EntityRetrievingTermLookup( $this->entityLookup );
-
-		// @fixme inject the label lookup
+	private function getLabelLookup( FormatterOptions $options ) {
+		$languageSpec = null;
 		if ( $options->hasOption( 'languages' ) ) {
-			$labelLookup = new LanguageFallbackLabelLookup(
-				$termLookup,
-				$options->getOption( 'languages' )
-			);
+			$languageSpec = $options->getOption( 'languages' );
 		} else if ( $options->hasOption( ValueFormatter::OPT_LANG ) ) {
-			$labelLookup = new LanguageLabelLookup(
-				$termLookup,
-				$options->getOption( ValueFormatter::OPT_LANG )
-			);
+			$languageSpec = $options->getOption( ValueFormatter::OPT_LANG );
 		} else {
 			throw new InvalidArgumentException( 'OPT_LANG or languages (fallback chain) '
 				. 'must be set in FormatterOptions.' );
 		}
 
-		return $labelLookup;
+		return $this->labelLookupFactory->getLabelLookup( $languageSpec );
 	}
 
 	/**
@@ -542,7 +531,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return EntityIdLabelFormatter
 	 */
 	private function newEntityIdFormatter( FormatterOptions $options ) {
-		$labelLookup = $this->newLabelLookup( $options );
+		$labelLookup = $this->getLabelLookup( $options );
 		return new EntityIdLabelFormatter( $options, $labelLookup );
 	}
 
@@ -557,7 +546,7 @@ class WikibaseValueFormatterBuilders {
 	private function newEntityIdHtmlLinkFormatter( FormatterOptions $options ) {
 		return new EntityIdHtmlLinkFormatter(
 			$options,
-			$this->newLabelLookup( $options ),
+			$this->getLabelLookup( $options ),
 			$this->entityTitleLookup
 		);
 	}
