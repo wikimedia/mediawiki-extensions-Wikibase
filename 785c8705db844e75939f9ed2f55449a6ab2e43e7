@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e936f18_3c1a441c",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 78
+      },
+      "writtenOn": "2014-11-20T20:50:12Z",
+      "side": 1,
+      "message": "Could you add a brief explanation of what \u0027terms\u0027 are? Are they labels and descriptions? Adding a getDescription() function would be useful as well since it\u0027s not obvious what \u0027pageterms\u0027 means.",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_c676ef9e",
         "filename": "client/includes/api/PageTerms.php",
         "patchSetId": 14
