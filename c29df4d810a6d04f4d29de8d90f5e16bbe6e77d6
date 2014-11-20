@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_37d57fba",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-20T23:17:51Z",
+      "side": 1,
+      "message": "This callback should be reworked the same way, otherwise it\u0027s a bit confusing to have two styles next to each other.",
+      "revId": "c29df4d810a6d04f4d29de8d90f5e16bbe6e77d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_f774f7f9",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-20T23:17:51Z",
+      "side": 1,
+      "message": "Please make this private now that you reworked the caller. This was public because it would have been marked as unused otherwise.",
+      "revId": "c29df4d810a6d04f4d29de8d90f5e16bbe6e77d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_37fc9f3a",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-20T23:17:51Z",
+      "side": 1,
+      "message": "Private, as above.",
+      "revId": "c29df4d810a6d04f4d29de8d90f5e16bbe6e77d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
