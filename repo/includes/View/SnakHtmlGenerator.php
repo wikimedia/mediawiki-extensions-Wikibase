@@ -29,21 +29,19 @@ class SnakHtmlGenerator {
 	protected $snakFormatter;
 
 	/**
-	 * @since 0.5
-	 *
-	 * @var EntityTitleLookup
+	 * @var EntityInfoPropertyLinkFormatter
 	 */
-	protected $entityTitleLookup;
+	private $propertyLinkFormatter;
 
 	/**
 	 * @param SnakFormatter $snakFormatter
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityInfoPropertyLinkFormatter $propertyLinkFormatter
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
-		EntityTitleLookup $entityTitleLookup
+		EntityInfoPropertyLinkFormatter $propertyLinkFormatter
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
 				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
@@ -52,7 +50,7 @@ class SnakHtmlGenerator {
 		}
 
 		$this->snakFormatter = $snakFormatter;
-		$this->entityTitleLookup = $entityTitleLookup;
+		$this->propertyLinkFormatter = $propertyLinkFormatter;
 	}
 
 	/**
@@ -74,8 +72,14 @@ class SnakHtmlGenerator {
 			$formattedValue = '&nbsp;';
 		}
 
-		$propertyLink = $showPropertyLink ?
-			$this->makePropertyLink( $snak, $entityInfo, $showPropertyLink ) : '';
+		if ( $showPropertyLink ) {
+			$propertyLink = $this->propertyLinkFormatter->makePropertyLink(
+				$snak->getPropertyId(),
+				$entityInfo
+			);
+		} else {
+			$propertyLink = '';
+		}
 
 		$html = wfTemplate( 'wb-snak',
 			// Display property link only once for snaks featuring the same property:
@@ -85,30 +89,6 @@ class SnakHtmlGenerator {
 		);
 
 		return $html;
-	}
-
-	/**
-	 * @param Snak $snak
-	 * @param array[] $entityInfo
-	 *
-	 * @return string
-	 */
-	private function makePropertyLink( Snak $snak, array $entityInfo ) {
-		$propertyId = $snak->getPropertyId();
-		$key = $propertyId->getSerialization();
-		$propertyLabel = $key;
-		if ( isset( $entityInfo[$key] ) && !empty( $entityInfo[$key]['labels'] ) ) {
-			$entityInfoLabel = reset( $entityInfo[$key]['labels'] );
-			$propertyLabel = $entityInfoLabel['value'];
-		}
-
-		// @todo use EntityIdHtmlLinkFormatter here
-		$propertyLink = \Linker::link(
-			$this->entityTitleLookup->getTitleForId( $propertyId ),
-			htmlspecialchars( $propertyLabel )
-		);
-
-		return $propertyLink;
 	}
 
 	/**

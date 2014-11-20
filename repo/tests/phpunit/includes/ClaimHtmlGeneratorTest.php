@@ -85,7 +85,7 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$this->getPropertyLinkFormatter()
 		);
 
 		$claimHtmlGenerator = new ClaimHtmlGenerator(
@@ -151,6 +151,20 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return $testCases;
+	}
+
+	private function getPropertyLinkFormatter() {
+		$propertyLinkFormatter = $this->getMockBuilder(
+				'Wikibase\Repo\View\EntityInfoPropertyLinkFormatter'
+			)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$propertyLinkFormatter->expects( $this->any() )
+			->method( 'makePropertyLink' )
+			->will( $this->returnValue( 'property-link' ) );
+
+		return $propertyLinkFormatter;
 	}
 
 }
