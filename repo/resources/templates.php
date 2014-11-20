@@ -248,9 +248,11 @@ HTML;
 	$templates['wikibase-sitelinkgroupview'] =
 <<<HTML
 <div class="wikibase-sitelinkgroupview" data-wb-sitelinks-group="$5">
-	<div class="wikibase-sitelinkgroupview-heading-container">
-		<h2 class="wb-section-heading wikibase-sitelinkgroupview-heading" dir="auto" id="$1">$2<span class="wikibase-sitelinkgroupview-counter">$3</span></h2>
-		<!-- wikibase-toolbar -->$6
+	<div class="wikibase-sitelinkgroupview-heading-section">
+		<div class="wikibase-sitelinkgroupview-heading-container">
+			<h2 class="wb-section-heading" dir="auto" id="$1">$2<span class="wikibase-sitelinkgroupview-counter">$3</span></h2>
+			<!-- wikibase-toolbar -->$6
+		</div>
 	</div>
 	<!-- wikibase-sitelinklistview -->$4
 </div>
@@ -331,6 +333,14 @@ HTML;
 	$templates['wikibase-toolbar-bracketed'] =
 <<<HTML
 [$1]
+HTML;
+
+	$templates['ui-closeable'] =
+<<<HTML
+<div class="ui-closeable">
+	<div class="ui-closeable-close">✕</div>
+	<div class="ui-closeable-content">$1</div>
+</div>
 HTML;
 
 	return $templates;

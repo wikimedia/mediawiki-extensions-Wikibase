@@ -335,6 +335,7 @@ return call_user_func( function() {
 				'jquery.wikibase.sitelinklistview',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase.sites',
+				'wikibase.utilities',
 			),
 		),
 
