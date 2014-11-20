@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_15e40338",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-20T11:51:33Z",
+      "side": 1,
+      "message": "Nice B/C hack... but there should be a better way to achieve the same thing. Perhaps $spec[0] \u003d\u003d\u003d \u0027this\u0027 should also work for this.",
+      "revId": "c591b3554ed0b7b9ec292c127bc538ae3e09429b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
