@@ -120,21 +120,6 @@ class ClaimsView {
 	}
 
 	/**
-	 * Returns all snaks which are stored in this list of claims.
-	 *
-	 * @param Claim[] $claims
-	 * @return Snak[]
-	 */
-	private function getSnaksFromClaims( array $claims ) {
-		$snaks = array();
-		/** @var Claim $claim */
-		foreach ( $claims as $claim ) {
-			$snaks = array_merge( $snaks, $claim->getAllSnaks() );
-		}
-		return $snaks;
-	}
-
-	/**
 	 * Returns the HTML for a group of claims.
 	 *
 	 * @param Claim[] $claims
