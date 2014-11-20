@@ -14,7 +14,10 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
+use Wikibase\Lib\Store\PresetLabelLookupFactory;
 use Wikibase\Repo\View\EntityViewFactory;
 
 /**
@@ -279,13 +282,22 @@ class EntityParserOutputGenerator {
 		array $entityIds,
 		$editable
 	) {
+		$entityInfo = $this->getEntityInfoForView( $entityIds );
+
+		$labelLookup = new LanguageFallbackLabelLookup(
+			new EntityInfoTermLookup( $entityInfo ),
+			$this->languageFallbackChain
+		);
+
 		$entityView = $this->entityViewFactory->newEntityView(
 			$this->languageFallbackChain,
 			$this->languageCode,
-			$entityRevision->getEntity()->getType()
+			$entityRevision->getEntity()->getType(),
+			new PresetLabelLookupFactory(
+				$this->languageFallbackChain,
+				$labelLookup
+			)
 		);
-
-		$entityInfo = $this->getEntityInfoForView( $entityIds );
 
 		$html = $entityView->getHtml( $entityRevision, $entityInfo, $editable );
 		$parserOutput->setText( $html );
