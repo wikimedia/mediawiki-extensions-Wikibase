@@ -57,19 +57,26 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				return new DataType( $id, $typeMap[$id], array() );
 			} ) );
 
-		$entity = EntityFactory::singleton()->newEmpty( $entityId->getEntityType() );
-		$entity->setId( $entityId );
-		$entity->setLabel( 'en', 'Label for ' . $entityId->getSerialization() );
-
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
-		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
-			->will( $this->returnValue( $entity ) );
-
-		$lang = Language::factory( 'en' );
-
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders( $entityLookup, $lang );
+		$valueFormatterBuilders = $this->newWikibaseValueFormatterBuilders( $entityId );
 		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup, $typeFactory );
+	}
+
+	/**
+	 * @param EntityId $entityId The Id of an entity to use for all entity lookups
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	private function newWikibaseValueFormatterBuilders( EntityId $entityId ) {
+		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( 'Label for ' . $entityId->getSerialization() ) );
+
+		$labelLookupFactory = $this->getMock( 'Wikibase\Lib\Store\LabelLookupFactory' );
+		$labelLookupFactory->expects( $this->any() )
+			->method( 'getLabelLookup' )
+			->will( $this->returnValue( $labelLookup ) );
+
+		return new WikibaseValueFormatterBuilders( $labelLookupFactory, Language::factory( 'en' ) );
 	}
 
 	public function testGetSnakFormatterBuildersForFormats() {
