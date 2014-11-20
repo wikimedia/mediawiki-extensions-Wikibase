@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
-use Diff\Differ\MapDiffer;
 use Site;
 use Title;
 use Wikibase\Change;

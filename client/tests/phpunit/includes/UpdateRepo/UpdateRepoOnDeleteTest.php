@@ -4,8 +4,8 @@ namespace Wikibase\Client\Tests\UpdateRepo;
 
 use Title;
 use User;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers Wikibase\Client\UpdateRepo\UpdateRepoOnDelete

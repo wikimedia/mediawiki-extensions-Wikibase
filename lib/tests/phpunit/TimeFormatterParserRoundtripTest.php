@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Test;
 use DataValues\TimeValue;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
-use ValueParsers\ParserOptions;
 use Wikibase\Lib\MwTimeIsoFormatter;
 use Wikibase\Lib\Parsers\TimeParser;
 

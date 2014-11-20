@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use DataValues\StringValue;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Lib\Serializers\SerializationOptions;
 

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\DataAccess;
 
-use DataValues\StringValue;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;

@@ -13,7 +13,6 @@ use MWException;
 use Site;
 use SiteSQLStore;
 use SiteStore;
-use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;

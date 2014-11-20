@@ -7,14 +7,14 @@ use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\StatementListProvider;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension

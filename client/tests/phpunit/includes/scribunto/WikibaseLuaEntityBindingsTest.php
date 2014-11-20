@@ -8,6 +8,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -17,7 +18,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Test\MockRepository;
 
 /**
