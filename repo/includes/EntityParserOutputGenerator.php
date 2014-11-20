@@ -13,6 +13,7 @@ use Wikibase\DataModel\StatementListProvider;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\EntityViewFactory;
 
@@ -263,7 +264,8 @@ class EntityParserOutputGenerator {
 		$entityView = $this->entityViewFactory->newEntityView(
 			$this->languageFallbackChain,
 			$this->languageCode,
-			$entityRevision->getEntity()->getType()
+			$entityRevision->getEntity()->getType(),
+			new EntityInfoTermLookup( $entityInfo )
 		);
 
 		$html = $entityView->getHtml( $entityRevision, $entityInfo, $editable );
