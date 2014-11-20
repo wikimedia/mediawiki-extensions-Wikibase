@@ -251,15 +251,37 @@
 		}
 
 		var $message = $( '<span><p>' + copyRightMessageHtml + '</p></span>' ),
-			edittoolbar = $origin.data( 'edittoolbar' );
+			$hideMessage = $( '<a/>', {
+				text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
+			} ).appendTo( $message ),
+			editableTemplatedWidget = $origin.data( 'EditableTemplatedWidget' );
+
+		// TODO: Use notification system for copyright messages on all widgets.
+		if( editableTemplatedWidget ) {
+			editableTemplatedWidget.notification( $message, 'wb-edit' );
+
+			$hideMessage.on( 'click', function( event ) {
+				event.preventDefault();
+				editableTemplatedWidget.notification();
+				if( mw.user.isAnon() ) {
+					$.cookie( cookieKey, copyRightVersion, { 'expires': 365 * 3, 'path': '/' } );
+				} else {
+					var api = new mw.Api();
+					api.postWithToken( 'options', {
+						'action': 'options',
+						'optionname': optionsKey,
+						'optionvalue': copyRightVersion
+					} );
+				}
+			} );
+			return;
+		}
+
+		var edittoolbar = $origin.data( 'edittoolbar' );
 
 		if( !edittoolbar ) {
 			return;
 		}
-
-		var $hideMessage = $( '<a/>', {
-			text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
-		} ).appendTo( $message );
 
 		// Tooltip gets its own anchor since other elements might have their own tooltip.
 		// we don't even have to add this new toolbar element to the toolbar, we only use it

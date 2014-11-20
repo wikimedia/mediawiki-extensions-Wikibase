@@ -50,6 +50,22 @@ are also triggered down the document */
 	font-style: italic;
 }
 
+.ui-closeable {
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #C9C9C9;
+	border-top: 1px solid #C9C9C9;
+	padding: 0.2em 10px;
+	font-size: 0.9em;
+}
+
+.ui-closeable.wb-edit {
+	background-color: #D6F3FF;
+}
+
+.ui-closeable.wb-error {
+	background-color: #FFDFC9;
+}
+
 
 /********** BASIC LAYOUT **********/
 

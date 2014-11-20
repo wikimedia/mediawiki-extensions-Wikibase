@@ -68,7 +68,11 @@ body.rtl .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
 
 .wb-error .wb-error-message {
 	border-bottom: 1px dotted #B27631;
-	padding-bottom: 1em;
+	padding-bottom: .5em;
+}
+
+.wb-error .wb-error-details-link {
+	margin-top: .2em;
 }
 
 .wb-error .wb-error-details {

@@ -25,6 +25,12 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'jquery.ba-resize' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.ba-resize.js',
+			),
+		),
+
 		'jquery.removeClassByRegex' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.removeClassByRegex.js',
@@ -36,6 +42,7 @@ return call_user_func( function() {
 				'jquery/jquery.sticknode.js',
 			),
 			'dependencies' => array(
+				'jquery.ba-resize',
 				'jquery.util.EventSingletonManager',
 			),
 		),
@@ -46,6 +53,18 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.throttle-debounce',
+			),
+		),
+
+		'jquery.ui.closeable' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.closeable.js',
+			),
+			'styles' => array(
+				'jquery.ui/jquery.ui.closeable.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.TemplatedWidget',
 			),
 		),
 
@@ -69,9 +88,9 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.EditableTemplatedWidget.js',
 			),
 			'dependencies' => array(
+				'jquery.ui.closeable',
 				'jquery.ui.TemplatedWidget',
 				'util.inherit',
-				'wikibase.templates',
 			),
 		),
 

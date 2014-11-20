@@ -1,0 +1,9 @@
+/**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+
+.ui-closeable-close {
+	cursor: pointer;
+	float: right;
+}
