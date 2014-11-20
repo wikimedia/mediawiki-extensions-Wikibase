@@ -53,6 +53,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
+		this.element.data( 'EditableTemplatedWidget', this );
 		PARENT.prototype._create.call( this );
 	},
 
@@ -251,6 +252,21 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 */
 	removeError: function() {
 		this.element.removeClass( 'wb-error' );
+	},
+
+	/**
+	 * Sets or removes notification.
+	 *
+	 * @param {jQuery} [$content]
+	 * @param {string} [additionalCssClasses]
+	 * @return {jQuery|null}
+	 */
+	notification: function( $content, additionalCssClasses ) {
+		if( !this._$notification ) {
+			this._$notification = $( '<div/>' ).closeable();
+		}
+		this._$notification.data( 'closeable' ).setContent( $content, additionalCssClasses );
+		return this._$notification;
 	}
 } );
 

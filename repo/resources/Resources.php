@@ -49,6 +49,18 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.closeable' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.closeable.js',
+			),
+			'styles' => array(
+				'jquery.ui/jquery.ui.closeable.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.TemplatedWidget',
+			),
+		),
+
 		'jquery.ui.tagadata' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.tagadata.js',
@@ -69,9 +81,9 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.EditableTemplatedWidget.js',
 			),
 			'dependencies' => array(
+				'jquery.ui.closeable',
 				'jquery.ui.TemplatedWidget',
 				'util.inherit',
-				'wikibase.templates',
 			),
 		),
 
