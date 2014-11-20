@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_35e9ffe0",
+        "filename": "repo/includes/View/ClaimsView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-20T12:18:17Z",
+      "side": 1,
+      "message": "The Formatter we inject here should not be specific to the Claims we later plan to process; that would make it mendetory to create a new ClaimsView for every Entity (or set of Claims) we want to process. While we currently do this, this is not required or guaranteed anywhere, and it\u0027s not obvious from the code either.",
+      "revId": "4265497109371cb31c58bec165d64c3dcd7f6936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
