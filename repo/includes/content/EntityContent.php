@@ -10,13 +10,11 @@ use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
 use Diff\Patcher\PatcherException;
-use IContextSource;
 use Language;
 use LogicException;
 use MWException;
 use ParserOptions;
 use ParserOutput;
-use RequestContext;
 use RuntimeException;
 use Status;
 use Title;
@@ -26,8 +24,8 @@ use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\EntitySearchTextGenerator;
@@ -771,9 +769,13 @@ abstract class EntityContent extends AbstractContent {
 	 * @return int
 	 */
 	public function getEntityStatus() {
+		$entity = $this->getEntity();
+
 		if ( $this->isEmpty() ) {
 			return self::STATUS_EMPTY;
-		} elseif ( !$this->getEntity()->hasClaims() ) {
+		} elseif ( $entity instanceof StatementListProvider
+			&& $entity->getStatements()->isEmpty()
+		) {
 			return self::STATUS_STUB;
 		} else {
 			return self::STATUS_NONE;

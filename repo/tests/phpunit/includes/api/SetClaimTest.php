@@ -411,9 +411,9 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$revision = $store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		// Add new claim at index 3 using the baserevid and a different property id
-		$newClaim = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[2] ) );
-		$newClaim->setGuid( $guidGenerator->newGuid( $itemId ) );
-		$this->makeRequest( $newClaim, $itemId, 2, 'addition request', 3, $revision->getRevision() );
+		$statement = new Statement( new Claim( new PropertyNoValueSnak( self::$propertyIds[2] ) ) );
+		$statement->setGuid( $guidGenerator->newGuid( $itemId ) );
+		$this->makeRequest( $statement, $itemId, 2, 'addition request', 3, $revision->getRevision() );
 	}
 
 	public function testBadPropertyError() {

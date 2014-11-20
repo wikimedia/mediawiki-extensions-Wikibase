@@ -234,9 +234,10 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			);
 		}
 
-		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
+		/** @var Item $obtainedItem */
+		$obtainedItem = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
 
-		$this->assertFalse( $item->hasClaims() );
+		$this->assertTrue( $obtainedItem->getStatements()->isEmpty() );
 	}
 
 	public function testMultipleRequests() {

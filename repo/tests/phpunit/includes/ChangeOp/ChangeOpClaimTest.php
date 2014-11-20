@@ -4,14 +4,11 @@ namespace Wikibase\Test;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
-use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpClaim;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -81,19 +78,19 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideTestApply
 	 *
-	 * @param Entity $entity
+	 * @param Item $item
 	 * @param Statement $statement
 	 * @param Statement[] $expected
 	 * @param int|null $index
 	 */
-	public function testApply( Entity $entity, Statement $statement, array $expected,
+	public function testApply( Item $item, Statement $statement, array $expected,
 		$index = null
 	) {
 		$changeOpClaim = $this->newChangeOpClaim( $statement, $index );
-		$changeOpClaim->apply( $entity );
+		$changeOpClaim->apply( $item );
 
 		$expectedStatementList = new StatementList( $expected );
-		$this->assertTrue( $entity->getStatements()->equals( $expectedStatementList ) );
+		$this->assertTrue( $item->getStatements()->equals( $expectedStatementList ) );
 	}
 
 	public function provideTestApply() {
@@ -220,8 +217,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$property = Property::newEmpty();
 		$property->setId( new PropertyId( 'P73923' ) );
 
-		$claim = $this->makeClaim( $property, new PropertyNoValueSnak( 45 ) );
-		$statement = new Statement( $claim );
+		$statement = $this->makeStatement( $property, new PropertyNoValueSnak( 45 ) );
 		$expected = new StatementList( array( $statement ) );
 
 		$changeOpClaim = $this->newChangeOpClaim( $statement );
@@ -233,14 +229,14 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider applyInvalidThrowsExceptionProvider
 	 *
-	 * @param Entity $entity
+	 * @param Item $item
 	 * @param Statement $statement
 	 */
-	public function testApplyInvalidThrowsException( Entity $entity, Statement $statement ) {
+	public function testApplyInvalidThrowsException( Item $item, Statement $statement ) {
 		$this->setExpectedException( '\Wikibase\ChangeOp\ChangeOpException' );
 
 		$changeOpClaim = $this->newChangeOpClaim( $statement );
-		$changeOpClaim->apply( $entity );
+		$changeOpClaim->apply( $item );
 	}
 
 	public function applyInvalidThrowsExceptionProvider() {
@@ -271,7 +267,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param Statement $statement
-	 * @param index|null $index
+	 * @param int|null $index
 	 *
 	 * @return ChangeOpClaim
 	 */
@@ -302,7 +298,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		// apply change to the wrong item
 		$wrongItem = Item::newEmpty();
 		$wrongItem->setId( new ItemId( "Q888" ) );
-		$args['wrong entity'] = array ( $wrongItem, $this->newChangeOpClaim( $newStatement ) );
+		$args['wrong entity'] = array( $wrongItem, $this->newChangeOpClaim( $newStatement ) );
 
 		// update an existing claim with wrong main snak property
 		$newSnak = new PropertyNoValueSnak( 23452345 );
@@ -310,7 +306,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOp = $this->newChangeOpClaim( $newStatement );
 
-		$args['wrong main snak property'] = array ( $item, $changeOp );
+		$args['wrong main snak property'] = array( $item, $changeOp );
 
 		return $args;
 	}
@@ -318,45 +314,49 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideInvalidApply
 	 */
-	public function testInvalidApply( Entity $item, ChangeOpClaim $changeOp ) {
+	public function testInvalidApply( Item $item, ChangeOpClaim $changeOp ) {
 		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
 
 		$changeOp->apply( $item );
 	}
 
 	/**
-	 * @param integer $itemId
-	 * @param Snak $snak
+	 * @param string $idString
+	 * @param Snak $mainSnak
+	 *
 	 * @return Item
 	 */
-	private function makeNewItemWithStatement( $itemId, Snak $snak ) {
+	private function makeNewItemWithStatement( $idString, Snak $mainSnak ) {
 		$item = Item::newEmpty();
-		$item->setId( new ItemId( $itemId ) );
+		$item->setId( new ItemId( $idString ) );
 
-		$this->addClaimsToEntity( $item, $snak );
+		$this->addStatementsToItem( $item, $mainSnak );
 
 		return $item;
 	}
 
 	/**
 	 * @param Entity $entity
+	 * @param Snak $mainSnak
+	 *
+	 * @return Statement
 	 */
-	private function makeClaim( Entity $entity, Snak $snak ) {
-		$claim = $entity->newClaim( $snak );
+	private function makeStatement( Entity $entity, Snak $mainSnak ) {
+		$statement = new Statement( new Claim( $mainSnak ) );
 		$guidGenerator = new ClaimGuidGenerator();
-		$claim->setGuid( $guidGenerator->newGuid( $entity->getId() ) );
+		$statement->setGuid( $guidGenerator->newGuid( $entity->getId() ) );
 
-		return $claim;
+		return $statement;
 	}
 
 	/**
-	 * @param Entity $entity
-	 * @param Snak $snak
+	 * @param Item $item
+	 * @param Snak $mainSnak
 	 */
-	private function addClaimsToEntity( Entity $entity, Snak $snak ) {
-		$claim = $this->makeClaim( $entity, $snak );
+	private function addStatementsToItem( Item $item, Snak $mainSnak ) {
+		$statement = $this->makeStatement( $item, $mainSnak );
 
-		$entity->getStatements()->addStatement( new Statement( $claim ) );
+		$item->getStatements()->addStatement( $statement );
 	}
 
 	public function validateProvider() {
@@ -408,13 +408,13 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider validateProvider
 	 */
-	public function testValidate( EntityId $entityId, Statement $statement ) {
+	public function testValidate( ItemId $itemId, Statement $statement ) {
 		$changeOpClaim = $this->newChangeOpClaim( $statement, 0 );
 
-		$entity = Item::newEmpty();
-		$entity->setId( $entityId );
+		$item = Item::newEmpty();
+		$item->setId( $itemId );
 
-		$result = $changeOpClaim->validate( $entity );
+		$result = $changeOpClaim->validate( $item );
 		$this->assertFalse( $result->isValid(), 'isValid()' );
 	}
 

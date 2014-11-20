@@ -57,17 +57,18 @@ class GetClaimsTest extends \ApiTestCase {
 
 	/**
 	 * @param Item $item
+	 * @param PropertyId $propertyId
 	 */
-	private function addStatements( Item $item, PropertyId $property ) {
+	private function addStatements( Item $item, PropertyId $propertyId ) {
 		if ( !$item->getId() ) {
 			$this->save( $item );
 		}
 
 		/** @var $statements Statement[] */
-		$statements[0] = $item->newClaim( new PropertyNoValueSnak( $property ) );
-		$statements[1] = $item->newClaim( new PropertyNoValueSnak( $property ) );
-		$statements[2] = $item->newClaim( new PropertySomeValueSnak( $property ) );
-		$statements[3] = $item->newClaim( new PropertyValueSnak( $property, new StringValue( 'o_O' ) ) );
+		$statements[0] = new Statement( new Claim( new PropertyNoValueSnak( $propertyId ) ) );
+		$statements[1] = new Statement( new Claim( new PropertyNoValueSnak( $propertyId ) ) );
+		$statements[2] = new Statement( new Claim( new PropertySomeValueSnak( $propertyId ) ) );
+		$statements[3] = new Statement( new Claim( new PropertyValueSnak( $propertyId, new StringValue( 'o_O' ) ) ) );
 
 		foreach ( $statements as $key => $statement ) {
 			$statement->setGuid( $item->getId()->getSerialization() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );
