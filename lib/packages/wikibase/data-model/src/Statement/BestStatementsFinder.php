@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Statement;
 
 use InvalidArgumentException;
-use OutOfBoundsException;
 use Traversable;
 use Wikibase\DataModel\ByPropertyIdGrouper;
 use Wikibase\DataModel\Entity\PropertyId;
