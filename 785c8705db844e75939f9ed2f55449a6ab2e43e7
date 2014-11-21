@@ -179,6 +179,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_e66682e9",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-21T20:18:38Z",
+      "side": 1,
+      "message": "Well, of course there are a lot of data items for which there are no pages locally. But for these, there is no way to associate them with a page title. We could search by label, but would generate a lost of matching items - which is not what we need here. That info could be used to auto-generate a disambiguation page though.",
+      "parentUuid": "6e936f18_60181a85",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_266793e7",
         "filename": "client/includes/api/PageTerms.php",
         "patchSetId": 14
@@ -226,6 +244,24 @@
       "side": 1,
       "message": "In PHP, the array you get is a copy unless you\u0027re using reference syntax, so sorting it isn\u0027t going to affect anything else (deep modifications to the Title objects might, but that doesn\u0027t happen here).\n\nAs far as paging, at the point the prop modules get called the generator has already finished running and added its continuation data to the ApiResult.",
       "parentUuid": "6e936f18_a0daa275",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_71678e4a",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-21T20:18:38Z",
+      "side": 1,
+      "message": "Yea, i know arrays are passed by value, I just wasn\u0027t sure how the two levels of paging interact - that is, whether the generator would make any assumptions about how the query\u0027s paging works.",
+      "parentUuid": "6e936f18_801f6670",
       "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -320,6 +356,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_315d867e",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-21T20:18:38Z",
+      "side": 1,
+      "message": "Not sure that would be much better.",
+      "parentUuid": "6e936f18_200e923e",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_26b6b33c",
         "filename": "client/includes/api/PageTerms.php",
         "patchSetId": 14
@@ -367,6 +421,24 @@
       "side": 1,
       "message": "pageprops doesn\u0027t use ApiBase::PARAM_HELP_MSG for its \u0027prop\u0027 parameter though.",
       "parentUuid": "6e936f18_004a762a",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_5160522d",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-21T20:18:38Z",
+      "side": 1,
+      "message": "hm, i wonder where i got that from, then ;)",
+      "parentUuid": "6e936f18_c0080e32",
       "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
