@@ -107,4 +107,5 @@ class WikiPageUpdater implements PageUpdater {
 		wfProfileOut( __METHOD__ );
 		return true;
 	}
+
 }
