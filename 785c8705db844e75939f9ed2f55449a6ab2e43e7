@@ -37,6 +37,42 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_c0e9ee10",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-21T11:46:25Z",
+      "side": 1,
+      "message": "The fact that the description is no longer obvious in the source code is a disadvantage of the new system...",
+      "parentUuid": "6e936f18_3cd00421",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_80f0c6fb",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-21T11:46:25Z",
+      "side": 1,
+      "message": "I\u0027ll add an example.",
+      "parentUuid": "6e936f18_3c1a441c",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_c676ef9e",
         "filename": "client/includes/api/PageTerms.php",
         "patchSetId": 14
@@ -48,6 +84,24 @@
       "writtenOn": "2014-11-20T18:03:15Z",
       "side": 1,
       "message": "\u0027pt\u0027 as a prefix conflicts with list\u003dprotectedtitles in core. How about \u0027wbpt\u0027?",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e0e42a38",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-21T11:46:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_c676ef9e",
       "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_80d7664f",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-21T11:46:25Z",
+      "side": 1,
+      "message": "You can only sitelink an item to an existing wiki page. However, there is no guarantee that page wasn\u0027t deleted later - so yes, it can happen, but it\u0027s considered a broken link. \n\nAlso, the tracking of this relationship in the local database is based on the page id (it\u0027s using page_props), so it will only work for existing pages.",
+      "parentUuid": "6e936f18_66691bbb",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_266793e7",
         "filename": "client/includes/api/PageTerms.php",
         "patchSetId": 14
@@ -82,6 +154,24 @@
       "writtenOn": "2014-11-20T18:03:15Z",
       "side": 1,
       "message": "Then you should ksort it. ApiPageSet::getGoodTitles() doesn\u0027t guarantee an order. Although in your code below, the only part that actually needs sorting is your \u0027for\u0027 loop in addTermsToResult().\n\nNote you could as easily use Title::compare() to order the titles and have your continue parameter be $title-\u003egetNamespace() . \u0027|\u0027 . $title-\u003egetDBkey(). Or you could order by anything else as long as any title that actually produces data has a strict ordering.",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_a0daa275",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-21T11:46:25Z",
+      "side": 1,
+      "message": "Wouldn\u0027t re-ordering mess with any pages the generator may be doing? That was my thought when I investigated this, but my understanding of the combined paging for generators and query modules is patchy at best.",
+      "parentUuid": "6e936f18_266793e7",
       "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_40cddeba",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-21T11:46:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_06585727",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_66a83bd8",
         "filename": "client/includes/api/PageTerms.php",
         "patchSetId": 14
@@ -122,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_60d01a54",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-21T11:46:25Z",
+      "side": 1,
+      "message": "Ugh! This is why I want to fill format\u003dxml. let\u0027s keep wddx instead, for people who insist on using XML...",
+      "parentUuid": "6e936f18_66a83bd8",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_26b6b33c",
         "filename": "client/includes/api/PageTerms.php",
         "patchSetId": 14
@@ -133,6 +259,24 @@
       "writtenOn": "2014-11-20T18:03:15Z",
       "side": 1,
       "message": "Why not just use the default message (apihelp-query+pageterms-param-terms)?",
+      "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_004a762a",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-21T11:46:25Z",
+      "side": 1,
+      "message": "adopted this from pageprops. will change.",
+      "parentUuid": "6e936f18_26b6b33c",
       "revId": "785c8705db844e75939f9ed2f55449a6ab2e43e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
