@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e936f18_8c2ebd3c",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 43
+      },
+      "writtenOn": "2014-11-21T22:41:25Z",
+      "side": 1,
+      "message": "I personally don\u0027t know what\u0027s the default parameter type is. Suspect that many others don\u0027t know this either.",
+      "revId": "7641c0f44bf859f717889591e6b9568bf09a877c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_eb116b57",
         "filename": "client/includes/api/PageTerms.php",
         "patchSetId": 15
@@ -31,6 +48,23 @@
       "side": 1,
       "message": "Oh hm, implicite message usage... Yeasy to forget to add the messages, then.",
       "parentUuid": "6e936f18_eb116b57",
+      "revId": "7641c0f44bf859f717889591e6b9568bf09a877c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_a3fdc7af",
+        "filename": "client/includes/store/sql/PagePropsEntityIdLookup.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 43
+      },
+      "writtenOn": "2014-11-21T22:41:25Z",
+      "side": 1,
+      "message": "DB_READ is deprecated, use DB_SLAVE.",
       "revId": "7641c0f44bf859f717889591e6b9568bf09a877c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
