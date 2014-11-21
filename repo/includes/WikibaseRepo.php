@@ -7,10 +7,11 @@ use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
+use RequestContext;
 use RuntimeException;
 use Serializers\Serializer;
-use SiteSQLStore;
 use SiteStore;
+use SiteStoreFactory;
 use StubObject;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -682,7 +683,9 @@ class WikibaseRepo {
 	 */
 	public function getSiteStore() {
 		if ( !$this->siteStore ) {
-			$this->siteStore = SiteSQLStore::newInstance();
+			$config = RequestContext::getMain()->getConfig();
+			$siteStoreFactory = new SiteStoreFactory( $config );
+			$this->siteStore = $siteStoreFactory->getSiteStore();
 		}
 
 		return $this->siteStore;
