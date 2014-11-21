@@ -18,12 +18,13 @@ use Wikibase\DataModel\Entity\PropertyId;
 class ByPropertyIdGrouper {
 
 	/**
-	 * @var PropertyIdProvider[][]
+	 * @var array[]
 	 */
 	private $byPropertyId = array();
 
 	/**
-	 * @param PropertyIdProvider[] $propertyIdProviders
+	 * @param PropertyIdProvider[]|Traversable $propertyIdProviders
+	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $propertyIdProviders ) {
@@ -82,8 +83,9 @@ class ByPropertyIdGrouper {
 	 * @since 1.1
 	 *
 	 * @param PropertyId $propertyId
-	 * @return PropertyIdProvider[]
+	 *
 	 * @throws OutOfBoundsException
+	 * @return PropertyIdProvider[]
 	 */
 	public function getByPropertyId( PropertyId $propertyId ) {
 		$idSerialization = $propertyId->getSerialization();
@@ -101,7 +103,8 @@ class ByPropertyIdGrouper {
 	 * @since 1.1
 	 *
 	 * @param PropertyId $propertyId
-	 * @return boolean
+	 *
+	 * @return bool
 	 */
 	public function hasPropertyId( PropertyId $propertyId ) {
 		return isset( $this->byPropertyId[$propertyId->getSerialization()] );

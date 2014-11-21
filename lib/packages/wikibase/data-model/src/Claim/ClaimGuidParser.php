@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Claim;
 
-use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
@@ -14,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 class ClaimGuidParser {
 
 	/**
-	 * @var DispatchingEntityIdParser $entityIdParser
+	 * @var EntityIdParser $entityIdParser
 	 */
 	private $entityIdParser;
 

@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Traversable;
 use Wikibase\DataModel\ByPropertyIdGrouper;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\PropertyIdProvider;
 
 /**
  * Service class to find the best statements in a list of them.
@@ -24,6 +25,7 @@ class BestStatementsFinder {
 
 	/**
 	 * @param Statement[]|Traversable $statements
+	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $statements ) {
@@ -58,6 +60,7 @@ class BestStatementsFinder {
 	 * @since 1.1
 	 *
 	 * @param PropertyId $propertyId
+	 *
 	 * @return Statement[]
 	 */
 	public function getBestStatementsForProperty( PropertyId $propertyId ) {
@@ -65,14 +68,15 @@ class BestStatementsFinder {
 		$statements = array();
 
 		foreach ( $this->getStatementsBy( $propertyId ) as $statement ) {
-			$rank = $statement->getRank();
-			if ( $rank > $bestRank ) {
-				// clear statements if we found a better one
-				$statements = array();
-				$bestRank = $rank;
-			}
-			if ( $rank === $bestRank ) {
-				$statements[] = $statement;
+			if ( $statement instanceof Statement ) {
+				$rank = $statement->getRank();
+
+				if ( $rank === $bestRank ) {
+					$statements[] = $statement;
+				} elseif ( $rank > $bestRank ) {
+					$statements = array( $statement );
+					$bestRank = $rank;
+				}
 			}
 		}
 
@@ -82,7 +86,7 @@ class BestStatementsFinder {
 	/**
 	 * @param PropertyId $propertyId
 	 *
-	 * @return Statement[]
+	 * @return PropertyIdProvider[]
 	 */
 	private function getStatementsBy( PropertyId $propertyId ) {
 		if ( $this->byPropertyIdGrouper->hasPropertyId( $propertyId ) ) {
