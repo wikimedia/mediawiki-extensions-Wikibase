@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_9abef75e",
+        "filename": "repo/tests/phpunit/includes/ItemDisambiguationTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "odd change....\nAs far as I know we favour the previous version!",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_5ab4ef7b",
+        "filename": "repo/tests/phpunit/includes/ItemMoveTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "As with the previous file I believe this is a step back!",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_faae1b2a",
+        "filename": "repo/tests/phpunit/includes/View/SiteLinksViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "again this is a step back!",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1aaae715",
+        "filename": "repo/tests/phpunit/includes/api/AvailableBadgesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "a step back again?",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_baa41348",
+        "filename": "repo/tests/phpunit/includes/api/BotEditTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "should be as it was before!",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_da9f9ff8",
+        "filename": "repo/tests/phpunit/includes/api/BotEditTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "should be as it was before!",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_7a6a0bec",
+        "filename": "repo/tests/phpunit/includes/api/BotEditTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "should be as it was before!",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_9a6d9703",
+        "filename": "repo/tests/phpunit/includes/api/IntegrationApiTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "should be as it was before!",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_3a7003d8",
+        "filename": "repo/tests/phpunit/includes/api/IntegrationApiTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "should be as it was before!",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_5a738fe4",
+        "filename": "repo/tests/phpunit/includes/api/WikibaseApiTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "should be as it was before!",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_fa7dbbb0",
+        "filename": "repo/tests/phpunit/includes/api/WikibaseApiTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "should be as it was before!",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1a7987c2",
+        "filename": "repo/tests/phpunit/includes/api/WikibaseApiTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "should be as it was before!",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_ba83b39a",
+        "filename": "repo/tests/phpunit/includes/api/WikibaseApiTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-11-21T01:49:26Z",
+      "side": 1,
+      "message": "should be as it was before!",
+      "revId": "bb6bf3613260cf89db4b3cb0a58739504ace29d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
