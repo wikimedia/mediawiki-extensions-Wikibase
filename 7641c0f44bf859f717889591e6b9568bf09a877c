@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_eb116b57",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2014-11-21T14:34:54Z",
+      "side": 1,
+      "message": "Note the ApiBase::PARAM_HELP_MSG isn\u0027t necessary here. This is already the default, and you\u0027re not subclassing this where you\u0027d want to reuse the same message for the subclass.",
+      "revId": "7641c0f44bf859f717889591e6b9568bf09a877c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
