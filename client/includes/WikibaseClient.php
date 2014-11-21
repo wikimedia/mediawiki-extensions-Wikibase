@@ -10,9 +10,10 @@ use Language;
 use LogicException;
 use MediaWikiSite;
 use MWException;
+use RequestContext;
 use Site;
-use SiteSQLStore;
 use SiteStore;
+use SiteStoreFactory;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
@@ -561,7 +562,8 @@ final class WikibaseClient {
 	 */
 	public function getSiteStore() {
 		if ( !$this->siteStore ) {
-			$this->siteStore = SiteSQLStore::newInstance();
+			$siteStoreFactory = SiteStoreFactory::getDefaultInstance();
+			$this->siteStore = $siteStoreFactory->getSiteStore();
 		}
 
 		return $this->siteStore;
