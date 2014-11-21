@@ -1,13 +1,14 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( wb, $ ) {
 'use strict';
 
 /**
- * @constructor
+ * Object featuring a main snak and a list of qualifiers.
+ * @class wikibase.datamodel.Claim
  * @since 0.3
+ * @licence GNU GPL v2+
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ *
+ * @constructor
  *
  * @param {wikibase.datamodel.Snak} mainSnak
  * @param {wikibase.datamodel.SnakList|null} [qualifiers]
@@ -23,16 +24,19 @@ var SELF = wb.datamodel.Claim = function WbDataModelClaim( mainSnak, qualifiers,
 $.extend( SELF.prototype, {
 	/**
 	 * @type {wikibase.datamodel.Snak}
+	 * @private
 	 */
 	_mainSnak: null,
 
 	/**
 	 * @type {wikibase.datamodel.SnakList}
+	 * @private
 	 */
 	_qualifiers: null,
 
 	/**
 	 * @type {string|null}
+	 * @private
 	 */
 	_guid: null,
 
@@ -59,6 +63,8 @@ $.extend( SELF.prototype, {
 	 * Overwrites the current main Snak.
 	 *
 	 * @param {wikibase.datamodel.Snak} mainSnak
+	 *
+	 * @throws {Error} if parameter is not a Snak instance.
 	 */
 	setMainSnak: function( mainSnak ) {
 		if( !( mainSnak instanceof wb.datamodel.Snak ) ) {
@@ -88,6 +94,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {wikibase.datamodel.SnakList} qualifiers
+	 *
+	 * @throws {Error} if parameter is not a SnakList instance.
 	 */
 	setQualifiers: function( qualifiers ) {
 		if( !( qualifiers instanceof wb.datamodel.SnakList ) ) {

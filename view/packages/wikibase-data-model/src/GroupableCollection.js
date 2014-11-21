@@ -1,27 +1,30 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $, util ) {
 'use strict';
 
 /**
- * @constructor
- * @since 1.0
+ * Interface defining interaction with a Group instance.
+ * @class wikibase.datamodel.GroupableCollection
  * @abstract
+ * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 var SELF = wb.datamodel.GroupableCollection = function WbDataModelGroupableCollection() {};
 
 $.extend( SELF.prototype, {
 	/**
-	 * Returns a copy the grouped items as list.
+	 * Returns a copy the collection items as list.
+	 * @abstract
 	 *
 	 * @return {*[]}
 	 */
 	toArray: util.abstractMember,
 
 	/**
-	 * Returns whether the group contains a specific item.
+	 * Returns whether the collection contains a specific item.
+	 * @abstract
 	 *
 	 * @param {*} item
 	 * @return {boolean}
@@ -29,36 +32,41 @@ $.extend( SELF.prototype, {
 	hasItem: util.abstractMember,
 
 	/**
-	 * Adds an item to the group.
+	 * Adds an item to the collection.
+	 * @abstract
 	 *
 	 * @param {*} item
 	 */
 	addItem: util.abstractMember,
 
 	/**
-	 * Removes an item from the group.
+	 * Removes an item from the collection.
+	 * @abstract
 	 *
 	 * @param {*} item
 	 */
 	removeItem: util.abstractMember,
 
 	/**
-	 * Returns whether the group contains any items.
+	 * Returns whether the collection contains any items.
+	 * @abstract
 	 *
 	 * @return {boolean}
 	 */
 	isEmpty: util.abstractMember,
 
 	/**
-	 * Returns whether the group is equal to another object.
+	 * Returns whether the collection is equal to another object.
+	 * @abstract
 	 *
-	 * @param {*}
+	 * @param {*} groupableCollection
 	 * @return {boolean}
 	 */
 	equals: util.abstractMember,
 
 	/**
 	 * Returns an item's key.
+	 * @abstract
 	 *
 	 * @param {*} item
 	 * @return {*}

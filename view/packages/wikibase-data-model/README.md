@@ -9,6 +9,11 @@ https://commons.wikimedia.org/wiki/File:Wikibase_JavaScript_Data_Model_1.0.svg
 
 ## Release notes
 
+### 1.0.2 (dev)
+
+#### Enhancements
+* Updated code documentation for being able to automatically generate a proper documentation using JSDuck.
+
 ### 1.0.1 (2014-11-05)
 * Using DataValues JavaScript 0.6.x.
 

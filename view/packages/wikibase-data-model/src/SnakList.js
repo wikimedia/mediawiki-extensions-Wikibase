@@ -1,16 +1,18 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 var PARENT = wb.datamodel.List;
 
 /**
- * @constructor
+ * List of Snak objects.
+ * @class wikibase.datamodel.SnakList
+ * @extends wikibase.datamodel.List
  * @abstract
  * @since 0.3
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {wikibase.datamodel.Snak[]} [snaks]
  */

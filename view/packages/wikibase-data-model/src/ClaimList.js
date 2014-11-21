@@ -1,15 +1,16 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 var PARENT = wb.datamodel.List;
 
 /**
- * @constructor
+ * List of Claim objects.
+ * @class wikibase.datamodel.ClaimList
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {wikibase.datamodel.Claim[]} [claims]
  */

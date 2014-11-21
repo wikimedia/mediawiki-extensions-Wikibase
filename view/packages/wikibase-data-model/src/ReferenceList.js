@@ -1,15 +1,17 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb ) {
 'use strict';
 
 var PARENT = wb.datamodel.List;
 
 /**
- * @constructor
+ * List of Reference objects.
+ * @class wikibase.datamodel.ReferenceList
+ * @extends wikibase.datamodel.List
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {wikibase.datamodel.Reference[]} [references]
  */

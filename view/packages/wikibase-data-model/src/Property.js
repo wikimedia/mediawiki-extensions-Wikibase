@@ -1,21 +1,24 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util ) {
 	'use strict';
 
 var PARENT = wb.datamodel.Entity;
 
 /**
- * @constructor
+ * Entity derivative featuring a data type and statements.
+ * @class wikibase.datamodel.Property
  * @extends wikibase.datamodel.Entity
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {string} entityId
  * @param {string} dataTypeId
  * @param {wikibase.datamodel.Fingerprint|null} [fingerprint]
  * @param {wikibase.datamodel.StatementGroupSet|null} [statementGroupSet]
+ *
+ * @throws {Error} if a required parameter is not specified properly.
  */
 var SELF = wb.datamodel.Property = util.inherit(
 	'WbDataModelProperty',
@@ -41,11 +44,13 @@ var SELF = wb.datamodel.Property = util.inherit(
 {
 	/**
 	 * @type {string}
+	 * @private
 	 */
 	_dataTypeId: null,
 
 	/**
 	 * @type {wikibase.datamodel.StatementGroupSet}
+	 * @private
 	 */
 	_statementGroupSet: null,
 
@@ -100,7 +105,9 @@ var SELF = wb.datamodel.Property = util.inherit(
 
 
 /**
- * @see wikibase.datamodel.Entity.TYPE
+ * @inheritdoc
+ * @type {string}
+ * @static
  */
 SELF.TYPE = 'property';
 

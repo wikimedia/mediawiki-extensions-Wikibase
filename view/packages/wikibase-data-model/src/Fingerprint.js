@@ -1,18 +1,20 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 /**
  * Container for sets of labels, descriptions and aliases.
- * @constructor
+ * @class wikibase.datamodel.Fingerprint
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {wikibase.datamodel.TermMap|null} [labels]
  * @param {wikibase.datamodel.TermMap|null} [descriptions]
  * @param {wikibase.datamodel.MultiTermMap|null} [aliases]
+ *
+ * @throws {Error} if a required parameter is not specified properly.
  */
 var SELF
 	= wb.datamodel.Fingerprint
@@ -37,16 +39,19 @@ var SELF
 $.extend( SELF.prototype, {
 	/**
 	 * @type {wikibase.datamodel.TermMap}
+	 * @private
 	 */
 	_labels: null,
 
 	/**
 	 * @type {wikibase.datamodel.TermMap}
+	 * @private
 	 */
 	_descriptions: null,
 
 	/**
 	 * @type {wikibase.datamodel.MultiTermMap}
+	 * @private
 	 */
 	_aliases: null,
 
@@ -194,7 +199,10 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} [languageCode]
-	 * @param {wikibase.datamodel.MultiTerm|wikibase.datamodel.MultiTermMap} aliases
+	 * @param {wikibase.datamodel.MultiTerm|wikibase.datamodel.MultiTermMap} [aliases]
+	 *
+	 * @throws {Error} when passing a MultiTerm without a language code.
+	 * @throws {Error} when passing a MultiTermMap with a language code.
 	 */
 	setAliases: function( languageCode, aliases ) {
 		if( typeof languageCode !== 'string' ) {

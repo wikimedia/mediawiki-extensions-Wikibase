@@ -1,20 +1,27 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 var PARENT = wb.datamodel.GroupableCollection;
 
 /**
- * Unordered set.
- * @constructor
+ * Stores items without imposing any order.
+ * @class wikibase.datamodel.Set
+ * @extends wikibase.datamodel.GroupableCollection
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {Function} ItemConstructor
  * @param {string} itemKeyFunctionName
  * @param {*[]} [items]
+ *
+ * @throws {Error} if item constructor is not a Function.
+ * @throws {Error} if item constructor prototype does not feature an equals() function.
+ * @throws {Error} if item constructor prototype does not feature the specified function to retrieve
+ *         the item key.
+ * @throws {Error} when the items array does contain items that feature the same key.
  */
 var SELF = wb.datamodel.Set = util.inherit(
 	'WbDataModelSet',
@@ -49,16 +56,19 @@ var SELF = wb.datamodel.Set = util.inherit(
 {
 	/**
 	 * @type {Function}
+	 * @private
 	 */
 	_ItemConstructor: null,
 
 	/**
 	 * @type {string}
+	 * @private
 	 */
 	_itemKeyFunctionName: null,
 
 	/**
 	 * @type {Object}
+	 * @private
 	 */
 	_items: null,
 
@@ -68,21 +78,25 @@ var SELF = wb.datamodel.Set = util.inherit(
 	length: 0,
 
 	/**
-	 * @see jQuery.fn.each
+	 * (see jQuery.fn.each)
+	 *
+	 * @param {Function} fn
 	 */
 	each: function( fn ) {
 		$.each.call( null, this._items, fn );
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.toArray
+	 * @inheritdoc
+	 *
+	 * @throws {Error} when being called since a set cannot be converted to an array.
 	 */
 	toArray: function() {
 		throw new Error( 'Set cannot be exported to an array' );
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.hasItem
+	 * @inheritdoc
 	 */
 	hasItem: function( item ) {
 		this._assertIsItem( item );
@@ -91,7 +105,9 @@ var SELF = wb.datamodel.Set = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.addItem
+	 * @inheritdoc
+	 *
+	 * @throws {Error} when trying to add an item that is registered already.
 	 */
 	addItem: function( item ) {
 		this._assertIsItem( item );
@@ -104,7 +120,9 @@ var SELF = wb.datamodel.Set = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.removeItem
+	 * @inheritdoc
+	 *
+	 * throws {Error} when trying to remove an item that is not registered.
 	 */
 	removeItem: function( item ) {
 		this._assertIsItem( item );
@@ -119,14 +137,14 @@ var SELF = wb.datamodel.Set = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.isEmpty
+	 * @inheritdoc
 	 */
 	isEmpty: function() {
 		return this.length === 0;
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.equals
+	 * @inheritdoc
 	 */
 	equals: function( set ) {
 		if( set === this ) {
@@ -145,7 +163,7 @@ var SELF = wb.datamodel.Set = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.getItemKey
+	 * @inheritdoc
 	 */
 	getItemKey: function( item ) {
 		return item[this._itemKeyFunctionName]();
@@ -206,7 +224,12 @@ var SELF = wb.datamodel.Set = util.inherit(
 	},
 
 	/**
+	 * @private
+	 *
 	 * @param {*} item
+	 *
+	 * @throws {Error} if the item is not an instance of the constructor registered with the Set
+	 *         object.
 	 */
 	_assertIsItem: function( item ) {
 		if( !( item instanceof this._ItemConstructor ) ) {

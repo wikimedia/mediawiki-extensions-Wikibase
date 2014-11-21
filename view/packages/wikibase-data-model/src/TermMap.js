@@ -1,15 +1,17 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb ) {
 'use strict';
 
 var PARENT = wb.datamodel.Map;
 
 /**
- * @constructor
+ * Map of Term objects.
+ * @class wikibase.datamodel.TermMap
+ * @extends wikibase.datamodel.Map
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {Object} [terms]
  */
