@@ -45,6 +45,7 @@
 	"wikibase-rc-show-wikidata-pref": "Прикажувај ги уредувањата на {{WBREPONAME}} во скорешните промени",
 	"wikibase-rc-wikibase-edit-letter": "ВП",
 	"wikibase-rc-wikibase-edit-title": "Уредување на {{WBREPONAME}}",
+	"wikibase-replicationnote": "Имајте предвид дека се потребни неколку минути за промените да станат видливи на сите викија",
 	"wikibase-watchlist-show-changes-pref": "Прикажи уредувања на {{WBREPONAME}} во набљудуваните",
 	"wikibase-error-serialize-error": "Не успеав да ги серијализирам податоците",
 	"wikibase-error-invalid-entity-id": "Назнаката не му е позната на системот. Внесете важечка назнака.",

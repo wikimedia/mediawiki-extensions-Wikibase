@@ -56,6 +56,7 @@
 	"wikibase-rc-show-wikidata-pref": "Показати зміни {{grammar:genitive|{{WBREPONAME}}}} у списку нових редагувань",
 	"wikibase-rc-wikibase-edit-letter": "Р",
 	"wikibase-rc-wikibase-edit-title": "Редагування {{grammar:genitive|{{WBREPONAME}}}}",
+	"wikibase-replicationnote": "Будь ласка, зверніть увагу, що це може зайняти декілька хвилин, поки зміни будуть помітні на всіх вікі.",
 	"wikibase-watchlist-show-changes-pref": "Показувати редагування {{grammar:genitive|{{WBREPONAME}}}} у Вашому списку спостереження",
 	"wikibase-error-serialize-error": "Не вдалося серіалізувати дані.",
 	"wikibase-error-invalid-entity-id": "Введений ідентифікатор не відомий системі. Будь ласка, введіть коректний ідентифікатор сутності.",

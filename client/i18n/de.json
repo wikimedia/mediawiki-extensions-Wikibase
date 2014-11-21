@@ -47,6 +47,7 @@
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}}-Bearbeitungen in den „Letzten Änderungen“ anzeigen",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-Bearbeitung",
+	"wikibase-replicationnote": "Bitte bedenke, dass es einige Minuten dauern kann, bis die Änderungen auf allen Wikis sichtbar sind.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-Bearbeitungen in der Beobachtungsliste anzeigen",
 	"wikibase-error-serialize-error": "Die Daten konnten nicht serialisiert werden",
 	"wikibase-error-invalid-entity-id": "Die eingegebene Kennung ist für das System unbekannt. Bitte verwende eine gültige Objektkennung.",

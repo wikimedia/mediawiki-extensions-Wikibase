@@ -60,6 +60,7 @@
 	"wikibase-rc-show-wikidata-pref": "在最近更改中显示{{WBREPONAME}}编辑",
 	"wikibase-rc-wikibase-edit-letter": "数",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}编辑",
+	"wikibase-replicationnote": "该更改可能需要几分钟才能在所有的维基项目上显示，请谅解。",
 	"wikibase-watchlist-show-changes-pref": "在你的监视列表中显示{{WBREPONAME}}编辑",
 	"wikibase-error-serialize-error": "无法序列化数据。",
 	"wikibase-error-invalid-entity-id": "输入的ID在系统中是未知的。请使用一个有效的实体ID。",

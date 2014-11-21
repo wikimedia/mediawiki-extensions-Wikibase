@@ -4,5 +4,30 @@
 			"Don Alessandro"
 		]
 	},
-	"wikibase-editlinks": "Bağlantılarnı deñiştir"
+	"wikibase-editlinks": "Bağlantılarnı deñiştir",
+	"wikibase-editlinkstitle": "Başqa tillerge bağlantılarnı deñiştir",
+	"wikibase-linkitem-addlinks": "Bağlantılar qoş",
+	"wikibase-linkitem-close": "Dialognı qapatıp saifeni yañıdan aç",
+	"wikibase-linkitem-title": "Saifege bağlanuv",
+	"wikibase-linkitem-linkpage": "Saifege bağlanuv",
+	"wikibase-linkitem-selectlink": "Lütfen, bu saifege bağlamaq istegen bir til bölügini ve saifeñizni saylañız.",
+	"wikibase-linkitem-input-site": "Til:",
+	"wikibase-linkitem-input-page": "Saife:",
+	"wikibase-linkitem-confirmitem-text": "Saylağan saifeñiz endi [$1 merkeziy malümat repozitoriyimizniñ bir elementine] bağlı. Lütfen, aşağıdaki {{PLURAL:$2|1=bir saifege|bütün saifelerge}} onı bağlamaq istegeniñizni tasdıqlañız.",
+	"wikibase-linkitem-confirmitem-button": "Tasdıqla",
+	"wikibase-linkitem-not-loggedin-title": "Sistemağa kirmek kereksiñiz",
+	"wikibase-linkitem-not-loggedin": "Bunı yapmaq içün bu vikide em de [$1 merkeziy malümat repozitoriyinde] sistemağa kirmek kereksiñiz.",
+	"wikibase-linkitem-success-link": "Saifeler muvafaqiyetnen bağlandı. Bağlanğanını köstergen element [$1 merkeziy malümat repozitoriyimizde] buluna.",
+	"wikibase-property-notfound": "$1 hususiyeti tapılamadı.",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} deñiştirilmelerini $1",
+	"wikibase-rc-hide-wikidata-hide": "gizle",
+	"wikibase-rc-hide-wikidata-show": "köster",
+	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} deñiştirilmelerini soñki deñiştirmeler cedvelinde köster",
+	"wikibase-rc-wikibase-edit-letter": "d",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} deñiştirilmesi",
+	"wikibase-watchlist-show-changes-pref": "Közetüv cedvelimde {{WBREPONAME}} deñiştirilmelerini köster",
+	"wikibase-error-serialize-error": "Malümat serializatsiya etilip olamadı.",
+	"wikibase-error-invalid-entity-id": "Yazılğan ID sistemağa belli degil. Keçerli IDlerden birini qullanıñız.",
+	"special-unconnectedpages": "Elementlerge bağlanmağan saifeler",
+	"wikibase-unconnectedpages-legend": "Bağlanmağan saifeler parametrleri"
 }
