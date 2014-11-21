@@ -16,6 +16,24 @@
       "revId": "095f4ad6fd440c23de3bccd4e77360742701773f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_abe92311",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-21T15:15:12Z",
+      "side": 1,
+      "message": "It must be because of the way it is called in the usort call above. There is a way to make such callback methods private but I don\u0027t like it (involves a $self \u003d $this;).",
+      "parentUuid": "6e936f18_3d047d16",
+      "revId": "095f4ad6fd440c23de3bccd4e77360742701773f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
