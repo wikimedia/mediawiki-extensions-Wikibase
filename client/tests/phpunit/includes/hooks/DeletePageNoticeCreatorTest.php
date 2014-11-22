@@ -4,12 +4,12 @@ namespace Wikibase\Test;
 
 use Language;
 use Title;
-use Wikibase\Client\DeletePageNoticeCreator;
+use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\DeletePageNoticeCreator
+ * @covers Wikibase\Client\Hooks\DeletePageNoticeCreator
  *
  * @group WikibaseClient
  * @group Wikibase

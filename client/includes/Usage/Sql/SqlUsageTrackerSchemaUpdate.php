@@ -29,6 +29,8 @@ class SqlUsageTrackerSchemaUpdater {
 	 * Static entry point for MediaWiki's LoadExtensionSchemaUpdates hook.
 	 *
 	 * @param DatabaseUpdater $dbUpdater
+	 *
+	 * @return bool
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $dbUpdater ) {
 		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
