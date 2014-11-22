@@ -6,11 +6,11 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Hook\OutputPageJsConfigHookHandler;
+use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Settings;
 
 /**
- * @covers Wikibase\Hook\OutputPageJsConfigHookHandler
+ * @covers Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler
  *
  * @since 0.5
  *

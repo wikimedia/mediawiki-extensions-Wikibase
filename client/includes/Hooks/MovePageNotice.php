@@ -1,9 +1,10 @@
 <?php
 
-namespace Wikibase\Client;
+namespace Wikibase\Client\Hooks;
 
 use Html;
 use Title;
+use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 

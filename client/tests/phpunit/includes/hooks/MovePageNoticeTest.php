@@ -4,13 +4,13 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
 use Title;
-use Wikibase\Client\MovePageNotice;
+use Wikibase\Client\Hooks\MovePageNotice;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @covers Wikibase\Client\MovePageNotice
+ * @covers Wikibase\Client\Hooks\MovePageNotice
  *
  * @group WikibaseClient
  * @group Wikibase
