@@ -37,8 +37,6 @@ class SnaksFinder {
 	 * @param PropertyId $propertyId - the PropertyId for which we want the formatted Snaks
 	 * @param string $languageCode - language to render values
 	 *
-	 * TODO: use SnakList instead of array of Snaks
-	 *
 	 * @return Snak[]
 	 */
 	public function findSnaks( EntityId $entityId, PropertyId $propertyId, $languageCode ) {
@@ -52,40 +50,27 @@ class SnaksFinder {
 			return array();
 		}
 
-		// We only want the best claims over here, so that we only show the most
-		// relevant information.
-		$bestStatements = $this->getBestStatementsForProperty( $entity, $propertyId );
+		$snaks = $this->getBestMainSnaksForProperty( $entity, $propertyId );
 
-		if ( empty( $bestStatements ) ) {
+		if ( empty( $snaks ) ) {
 			wfDebugLog( __CLASS__, __METHOD__ . ': no claims found.' );
 			wfProfileOut( __METHOD__ );
 			return array();
 		}
-
-		$snaks = array_map(
-			function( Statement $statement ) {
-				return $statement->getMainSnak();
-			},
-			$bestStatements
-		);
 
 		wfProfileOut( __METHOD__ );
 		return $snaks;
 	}
 
 	/**
-	 * Returns such Claims from $entity that have a main Snak for the property that
-	 * is specified by $propertyId.
-	 *
 	 * @param EntityDocument $entity The Entity from which to get the clams
 	 * @param PropertyId $propertyId
 	 *
-	 * @return Statement[]
+	 * @return Snak[]
 	 */
-	private function getBestStatementsForProperty( EntityDocument $entity, PropertyId $propertyId ) {
+	private function getBestMainSnaksForProperty( EntityDocument $entity, PropertyId $propertyId ) {
 		if ( $entity instanceof StatementListProvider ) {
-			$bestStatementsFinder = new BestStatementsFinder( $entity->getStatements() );
-			return $bestStatementsFinder->getBestStatementsForProperty( $propertyId );
+			return $entity->getStatements()->getWithPropertyId( $propertyId )->getBestStatements()->getMainSnaks();
 		}
 
 		return array();
