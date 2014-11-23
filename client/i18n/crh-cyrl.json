@@ -4,5 +4,29 @@
 			"Don Alessandro"
 		]
 	},
-	"wikibase-editlinks": "Багълантыларны денъиштир"
+	"wikibase-editlinks": "Багълантыларны денъиштир",
+	"wikibase-editlinkstitle": "Башкъа тиллерге багълантыларны денъиштир",
+	"wikibase-linkitem-addlinks": "Багълантылар къош",
+	"wikibase-linkitem-title": "Саифеге багъланув",
+	"wikibase-linkitem-linkpage": "Саифеге багъланув",
+	"wikibase-linkitem-selectlink": "Лютфен, бу саифеге багъламакъ истеген бир тиль болюгини ве саифенъизни сайланъыз.",
+	"wikibase-linkitem-input-site": "Тиль:",
+	"wikibase-linkitem-input-page": "Саифе:",
+	"wikibase-linkitem-confirmitem-text": "Сайлагъан саифенъиз энди [$1 меркезий малюмат репозиторийимизнинъ бир элементине] багълы. Лютфен, ашагъыдаки {{ПЛУРАЛ:$2|1=бир саифеге|бютюн саифелерге}} оны багъламакъ истегенинъизни тасдыкъланъыз.",
+	"wikibase-linkitem-confirmitem-button": "Тасдыкъла",
+	"wikibase-linkitem-not-loggedin-title": "Системагъа кирмек керексинъиз",
+	"wikibase-linkitem-not-loggedin": "Буны япмакъ ичюн бу викиде эм де [$1 меркезий малюмат репозиторийинде] системагъа кирмек керексинъиз.",
+	"wikibase-linkitem-success-link": "Саифелер мувафакъиетнен багъланды. Багълангъаныны косьтерген элемент [$1 меркезий малюмат репозиторийимизде] булуна.",
+	"wikibase-property-notfound": "$1 хусусиети тапыламады.",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} денъиштирильмелерини $1",
+	"wikibase-rc-hide-wikidata-hide": "гизле",
+	"wikibase-rc-hide-wikidata-show": "косьтер",
+	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} денъиштирильмелерини сонъки денъиштирмелер джедвелинде косьтер",
+	"wikibase-rc-wikibase-edit-letter": "д",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} денъиштирильмеси",
+	"wikibase-watchlist-show-changes-pref": "Козетюв джедвелимде {{WBREPONAME}} денъиштирильмелерини косьтер",
+	"wikibase-error-serialize-error": "Малюмат сериализация этилип оламады.",
+	"wikibase-error-invalid-entity-id": "Язылгъан ID системагъа белли дегиль. Кечерли IDлерден бирини къулланынъыз.",
+	"special-unconnectedpages": "Элементлерге багъланмагъан саифелер",
+	"wikibase-unconnectedpages-legend": "Багъланмагъан саифелер параметрлери"
 }

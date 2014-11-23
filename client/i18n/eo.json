@@ -7,7 +7,7 @@
 		]
 	},
 	"wikibase-client-desc": "Kliento por la Vikidatuma etendaĵo",
-	"specialpages-group-wikibaseclient": "Vikidatuma kliento",
+	"specialpages-group-wikibaseclient": "Kliento de {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Ligilo al konektita datuma ero",
 	"wikibase-after-page-move": "Vi povas [$1 ĝisdatigi] la ligitan Vikidatuman eron por pluteni la lingvan ligilon al la la movita paĝo.",
 	"wikibase-after-page-move-queued": "La [$1 Vikidatuma ero] asociigita kun tiu ĉi paĝo estos baldaŭ aŭtomate ĝisdatigita.",
@@ -21,7 +21,7 @@
 	"wikibase-comment-sitelink-change": "Lingva ligilo ŝanĝita de $1 al $2",
 	"wikibase-comment-sitelink-remove": "Lingva ligilo forigita: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|ŝanĝo|ŝanĝoj}}",
-	"wikibase-dataitem": "Datuma ero",
+	"wikibase-dataitem": "Ero en {{WBREPONAME}}",
 	"wikibase-editlinks": "Redaktu ligilojn",
 	"wikibase-editlinkstitle": "Redaktu interlingvajn ligilojn",
 	"wikibase-linkitem-addlinks": "Aldoni ligilojn",
@@ -43,8 +43,9 @@
 	"wikibase-rc-hide-wikidata-show": "Montri",
 	"wikibase-rc-show-wikidata-pref": "Montru Vikidatumajn redaktojn en la lastaj ŝanĝoj",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Redakto en Vikidatumoj",
-	"wikibase-watchlist-show-changes-pref": "Montri Vikidatumajn redaktojn en via atentaro",
+	"wikibase-rc-wikibase-edit-title": "Redakto en {{WBREPONAME}}",
+	"wikibase-replicationnote": "Bonvolu noti, ke povas daŭri kelkajn minutojn ĝis la ŝanĝoj estos videblaj en ĉiuj vikioj.",
+	"wikibase-watchlist-show-changes-pref": "Montri redaktojn de {{WBREPONAME}} en via atentaro",
 	"wikibase-error-invalid-entity-id": "La enigita identigilo estas nekonata de la sistemo. Bonvolu uzi validan identigilon.",
 	"special-unconnectedpages": "Paĝoj nekonektitaj al eroj",
 	"wikibase-unconnectedpages-legend": "Opcioj de nekonektitaj paĝoj",
@@ -53,7 +54,9 @@
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" ne estas valida lingva kodo.",
 	"wikibase-unconnectedpages-iwdata-label": "Nur paĝon kun interlingva ligiloj",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlingva ligilo|interlingvaj ligiloj}} en la paĝo)",
-	"wikibase-pageinfo-entity-id": "Identigilo de Vikidatuma ero",
+	"wikibase-pageinfo-entity-id": "Identigilo de ero en {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nenio",
-	"wikibase-otherprojects": "Aliaj projektoj"
+	"wikibase-otherprojects": "Aliaj projektoj",
+	"wikibase-otherprojects-beta-message": "Aliaj projektoj en flanka strio",
+	"wikibase-otherprojects-beta-description": "Aldonas al flanka strio sekcion \"{{int:wikibase-otherprojects}}\", kiu provizas ligilojn al aliaj Vikimediaj projektoj laŭ datumoj de {{WBREPONAME}}."
 }
