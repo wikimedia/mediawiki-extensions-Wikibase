@@ -39,7 +39,7 @@ class PropertyView extends EntityView {
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 			// @fixme Property::getClaims no longer returns any statements for properties!
 			$html .= $this->claimsView->getHtml(
-				$property->getClaims(),
+				$property->getStatements()->toArray(),
 				$entityInfo,
 				'wikibase-attributes'
 			);
