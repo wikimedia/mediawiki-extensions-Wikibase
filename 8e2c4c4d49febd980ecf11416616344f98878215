@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_2571b4dd",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-23T02:44:58Z",
+      "side": 1,
+      "message": "we normally put these in alphabetical order, so think where DeletePageNoticeCreator was before is ok.",
+      "revId": "8e2c4c4d49febd980ecf11416616344f98878215",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
