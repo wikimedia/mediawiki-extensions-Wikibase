@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_054038a7",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-23T00:34:45Z",
+      "side": 1,
+      "message": "This cannot be done yet, since the $self hack is used. We can do this properly once using an actually supported version of PHP.",
+      "parentUuid": "6e936f18_f774f7f9",
+      "revId": "c29df4d810a6d04f4d29de8d90f5e16bbe6e77d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_37fc9f3a",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 10
