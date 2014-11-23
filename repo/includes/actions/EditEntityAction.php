@@ -39,57 +39,50 @@ use Wikibase\Repo\WikibaseRepo;
 abstract class EditEntityAction extends ViewEntityAction {
 
 	/**
-	 * @var EntityIdLabelFormatter
-	 */
-	protected $propertyNameFormatter;
-
-	/**
-	 * @var SnakFormatter
-	 */
-	protected $detailedSnakFormatter;
-
-	/**
-	 * @var SnakFormatter
-	 */
-	protected $terseSnakFormatter;
-
-	/**
 	 * @var EntityDiffVisualizer
 	 */
-	protected $diffVisualizer;
+	private $entityDiffVisualizer;
 
+	/**
+	 * @param Page $page
+	 * @param IContextSource|null $context
+	 */
 	public function __construct( Page $page, IContextSource $context = null ) {
 		parent::__construct( $page, $context );
 
-		$langCode = $this->getContext()->getLanguage()->getCode();
+		$languageCode = $this->getContext()->getLanguage()->getCode();
 
 		//TODO: proper injection
 		$options = new FormatterOptions( array(
 			//TODO: fallback chain
-			ValueFormatter::OPT_LANG => $langCode
+			ValueFormatter::OPT_LANG => $languageCode
 		) );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$termLookup = new EntityRetrievingTermLookup( $wikibaseRepo->getEntityLookup() );
-		$labelLookup = new LanguageLabelLookup( $termLookup, $langCode );
+		$labelLookup = new LanguageLabelLookup( $termLookup, $languageCode );
 		$labelFormatter = new EntityIdLabelFormatter( $options, $labelLookup );
 
-		$this->propertyNameFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
+		$propertyIdFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
 
 		$formatterFactory = $wikibaseRepo->getSnakFormatterFactory();
-		$this->detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
-		$this->terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
+		$snakDetailsFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
+		$snakBreadCrumbFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
 
-		$this->diffVisualizer = new EntityDiffVisualizer(
+		$this->entityDiffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->detailedSnakFormatter, $this->terseSnakFormatter, $langCode ),
+			new ClaimDifferenceVisualizer(
+				$propertyIdFormatter,
+				$snakDetailsFormatter,
+				$snakBreadCrumbFormatter,
+				$languageCode
+			),
 			$wikibaseRepo->getSiteStore(),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->getEntityRevisionLookup()
 		);
-
 	}
 
 	/**
@@ -108,13 +101,12 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @since 0.1
 	 *
-	 * @param String $action the action to check
+	 * @param string $action The action to check
 	 *
 	 * @return bool true if there were permission errors
 	 */
-	public function showPermissionError( $action ) {
+	protected function showPermissionError( $action ) {
 		if ( !$this->getTitle()->userCan( $action, $this->getUser() ) ) {
-
 			$this->getOutput()->showPermissionsErrorPage(
 				array( $this->getTitle()->getUserPermissionsErrors( $action, $this->getUser() ) ),
 				$action
@@ -135,7 +127,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @return Status a Status object containing an array with three revisions, ($olderRevision, $newerRevision, $latestRevision)
 	 * @throws MWException if the page's latest revision can not be loaded
 	 */
-	public function loadRevisions( ) {
+	protected function loadRevisions( ) {
 		$latestRevId = $this->getTitle()->getLatestRevID();
 
 		if ( $latestRevId === 0 ) {
@@ -148,10 +140,15 @@ abstract class EditEntityAction extends ViewEntityAction {
 			throw new MWException( "latest revision not found: $latestRevId" );
 		}
 
-		$req = $this->getRequest();
-		return $this->getStatus( $req, $latestRevision );
+		return $this->getStatus( $this->getRequest(), $latestRevision );
 	}
 
+	/**
+	 * @param WebRequest $req
+	 * @param Revision $latestRevision
+	 *
+	 * @return Status
+	 */
 	private function getStatus( WebRequest $req, Revision $latestRevision ){
 		if ( $req->getCheck( 'restore' ) ) { // nearly the same as undoafter without undo
 			$olderRevision = Revision::newFromId( $req->getInt( 'restore' ) );
@@ -227,12 +224,12 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $title String: message key for page title
-	 * @param $status Status: The status to report.
+	 * @param string $title Message key for page title
+	 * @param Status $status The status to report.
 	 *
 	 * @todo: would be handy to have this in OutputPage
 	 */
-	public function showStatusErrorsPage( $title, Status $status ) {
+	protected function showStatusErrorsPage( $title, Status $status ) {
 		$this->getOutput()->prepareErrorPage( $this->msg( $title ), $this->msg( 'errorpagetitle' ) );
 
 		$this->getOutput()->addWikiText( $status->getMessage() );
@@ -257,15 +254,10 @@ abstract class EditEntityAction extends ViewEntityAction {
 		}
 	}
 
-	/**
-	 * Show an undo form
-	 *
-	 * @since 0.1
-	 */
-	public function showUndoForm() {
+	private function showUndoForm() {
 		$req = $this->getRequest();
 
-		if ( $this->showPermissionError( "read" ) || $this->showPermissionError( "edit" ) ) {
+		if ( $this->showPermissionError( 'read' ) || $this->showPermissionError( 'edit' ) ) {
 			return;
 		}
 
@@ -318,48 +310,47 @@ abstract class EditEntityAction extends ViewEntityAction {
 			$omitted = $diff->count() - $appDiff->count();
 
 			if ( !$appDiff->isEmpty() ) {
-				$this->getOutput()->addHTML( Html::openElement("p") );
+				$this->getOutput()->addHTML( Html::openElement( 'p' ) );
 				$this->getOutput()->addWikiMsg( $omitted > 0 ? 'wikibase-partial-undo' : 'undo-success' );
-				$this->getOutput()->addHTML( Html::closeElement("p") );
+				$this->getOutput()->addHTML( Html::closeElement( 'p' ) );
 			}
 
 			if ( $omitted > 0 ) {
-				$this->getOutput()->addHTML( Html::openElement("p") );
+				$this->getOutput()->addHTML( Html::openElement( 'p' ) );
 				$this->getOutput()->addWikiMsg( 'wikibase-omitted-undo-ops', $omitted );
-				$this->getOutput()->addHTML( Html::closeElement("p") );
+				$this->getOutput()->addHTML( Html::closeElement( 'p' ) );
 			}
 		}
 
 		if ( $appDiff->isEmpty() ) {
-			$this->getOutput()->addHTML( Html::openElement("p") );
+			$this->getOutput()->addHTML( Html::openElement( 'p' ) );
 			$this->getOutput()->addWikiMsg( 'wikibase-empty-undo' );
-			$this->getOutput()->addHTML( Html::closeElement("p") );
+			$this->getOutput()->addHTML( Html::closeElement( 'p' ) );
 			return;
 		}
 
 		$this->displayUndoDiff( $appDiff );
 
-		$autoSummary = $restore ? $this->makeRestoreSummary( $olderRevision )
-								: $this->makeUndoSummary( $newerRevision );
-
-		$hiddenParams = array();
-		if ( !$restore ) {
-			$hiddenParams = array( 'wpUndidRevision' => $newerRevision->getId() );
+		if ( $restore ) {
+			$this->showConfirmationForm(
+				$this->makeRestoreSummary( $olderRevision )
+			);
+		} else {
+			$this->showConfirmationForm(
+				$this->makeUndoSummary( $newerRevision ),
+				$newerRevision->getId()
+			);
 		}
-
-		$this->showConfirmationForm( $autoSummary, $hiddenParams );
 	}
 
 	/**
 	 * Returns the label that should be shown to represent the given entity.
 	 *
-	 * @since 0.1
-	 *
 	 * @param EntityContent $content
 	 *
-	 * @return String
+	 * @return string
 	 */
-	public function getLabelText( EntityContent $content ) {
+	private function getLabelText( EntityContent $content ) {
 		$labelData = null;
 
 		// TODO: use a message like <autoredircomment> to represent the redirect.
@@ -382,7 +373,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @param Revision $olderRevision
 	 *
-	 * @return String
+	 * @return string
 	 */
 	protected function makeRestoreSummary( Revision $olderRevision ) {
 		$autoSummary = wfMessage( //TODO: use translatable auto-comment!
@@ -401,7 +392,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @param Revision $newerRevision
 	 *
-	 * @return String
+	 * @return string
 	 */
 	protected function makeUndoSummary( Revision $newerRevision ) {
 		$autoSummary = wfMessage( //TODO: use translatable auto-comment!
@@ -416,11 +407,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 	/**
 	 * Returns a cancel link back to viewing the entity's page
 	 *
-	 * @since 0.1
-	 *
 	 * @return string
 	 */
-	public function getCancelLink() {
+	private function getCancelLink() {
 		$cancelParams = array();
 
 		return Linker::linkKnown(
@@ -433,39 +422,31 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 	/**
 	 * Add style sheets and supporting JS for diff display.
-	 *
-	 * @since 0.1
-	 *
 	 */
-	public function showDiffStyle() {
+	private function showDiffStyle() {
 		$this->getOutput()->addModuleStyles( 'mediawiki.action.history.diff' );
 	}
 
 	/**
 	 * Generate standard summary input and label (wgSummary), compatible to EditPage.
 	 *
-	 * @since 0.1
-	 *
 	 * @param $summary string The value of the summary input
 	 * @param $labelText string The html to place inside the label
-	 * @param $inputAttrs array of attrs to use on the input
-	 * @param $spanLabelAttrs array of attrs to use on the span inside the label
 	 *
 	 * @return array An array in the format array( $label, $input )
 	 */
-	public function getSummaryInput( $summary = "", $labelText = null, $inputAttrs = null, $spanLabelAttrs = null ) {
+	private function getSummaryInput( $summary, $labelText ) {
 		// Note: the maxlength is overriden in JS to 255 and to make it use UTF-8 bytes, not characters.
-		$inputAttrs = ( is_array( $inputAttrs ) ? $inputAttrs : array() ) + array(
+		$inputAttrs = array(
 			'id' => 'wpSummary',
-			'maxlength' => '200',
-			'tabindex' => '1',
+			'maxlength' => 200,
 			'size' => 60,
 			'spellcheck' => 'true',
 		) + Linker::tooltipAndAccesskeyAttribs( 'summary' );
 
-		$spanLabelAttrs = ( is_array( $spanLabelAttrs ) ? $spanLabelAttrs : array() ) + array(
+		$spanLabelAttrs = array(
 			'class' => 'mw-summary',
-			'id' => "wpSummaryLabel"
+			'id' => 'wpSummaryLabel',
 		);
 
 		$label = null;
@@ -480,13 +461,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 	}
 
 	/**
-	 * Displays the undo diff.
-	 *
-	 * @since 0.1
-	 *
 	 * @param EntityContentDiff $diff
 	 */
-	protected function displayUndoDiff( EntityContentDiff $diff ) {
+	private function displayUndoDiff( EntityContentDiff $diff ) {
 		$tableClass = 'diff diff-contentalign-' . htmlspecialchars( $this->getTitle()->getPageLanguage()->alignStart() );
 
 		$this->getOutput()->addHTML( Html::openElement( 'table', array( 'class' => $tableClass ) ) );
@@ -502,7 +479,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->addHTML( Html::rawElement( 'td', array( 'colspan' => '2' ), Html::rawElement( 'div', array( 'id' => 'mw-diff-ntitle1' ), $new ) ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
 
-		$this->getOutput()->addHTML( $this->diffVisualizer->visualizeEntityContentDiff( $diff ) );
+		$this->getOutput()->addHTML( $this->entityDiffVisualizer->visualizeEntityContentDiff( $diff ) );
 
 		$this->getOutput()->addHTML( Html::closeElement( 'tbody' ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'table' ) );
@@ -511,47 +488,30 @@ abstract class EditEntityAction extends ViewEntityAction {
 	}
 
 	/**
-	 * Returns an array of html code of the following buttons:
-	 * save, diff, preview and live
-	 *
-	 * @since 0.1
-	 *
-	 * @param $tabindex int Current tabindex
-	 *
-	 * @return array
+	 * @return string
 	 */
-	public function getEditButtons( &$tabindex ) {
-		$buttons = array();
-
-		$temp = array(
+	private function getEditButton() {
+		return Html::element( 'input', array(
 			'id'        => 'wpSave',
 			'name'      => 'wpSave',
 			'type'      => 'submit',
-			'tabindex'  => ++$tabindex,
 			'value'     => $this->msg( 'savearticle' )->text(),
 			'accesskey' => $this->msg( 'accesskey-save' )->text(),
 			'title'     => $this->msg( 'tooltip-save' )->text() . ' [' . $this->msg( 'accesskey-save' )->text() . ']',
-		);
-		$buttons['save'] = Html::element( 'input', $temp, '' );
-
-		++$tabindex; // use the same for preview and live preview
-		return $buttons;
+		) );
 	}
 
 	/**
 	 * Shows a form that can be used to confirm the requested undo/restore action.
 	 *
-	 * @since 0.1
-	 *
 	 * @param string $summary
-	 * @param array  $hiddenParams
-	 * @param int    $tabindex
+	 * @param int $undidRevision
 	 */
-	protected function showConfirmationForm( $summary = '', $hiddenParams = array(), &$tabindex = 2 ) {
+	private function showConfirmationForm( $summary, $undidRevision = 0 ) {
 		$req = $this->getRequest();
 
 		$args = array(
-			'action' => "submit",
+			'action' => 'submit',
 		);
 
 		if ( $req->getInt( 'undo' ) )  {
@@ -568,11 +528,11 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$actionUrl = $this->getTitle()->getLocalURL( $args );
 
-		$this->getOutput()->addHTML( Html::openElement( 'div', array( 'style' =>"margin-top: 1em") ) );
+		$this->getOutput()->addHTML( Html::openElement( 'div', array( 'style' => 'margin-top: 1em;' ) ) );
 
 		$this->getOutput()->addHTML( Html::openElement( 'form', array(
-			'id' =>"undo",
-			'name' => "undo",
+			'id' => 'undo',
+			'name' => 'undo',
 			'method' => 'post',
 			'action' => $actionUrl,
 			'enctype' => 'multipart/form-data' ) ) );
@@ -581,9 +541,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$labelText = wfMessage( 'summary' )->text();
 		list( $label, $field ) = $this->getSummaryInput( $summary, $labelText );
-		$this->getOutput()->addHTML( $label . " " . $field );
+		$this->getOutput()->addHTML( $label . ' ' . $field );
 		$this->getOutput()->addHTML( "<p class='editButtons'>\n" );
-		$this->getOutput()->addHTML( implode( $this->getEditButtons( $tabindex ), "\n" ) . "\n" );
+		$this->getOutput()->addHTML( $this->getEditButton() . "\n" );
 
 		$cancel = $this->getCancelLink();
 		if ( $cancel !== '' ) {
@@ -593,9 +553,14 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$this->getOutput()->addHTML( "</p><!-- editButtons -->\n</p><!-- editOptions -->\n" );
 
-		$hiddenParams['wpEditToken'] = $this->getUser()->getEditToken();
-		$hiddenParams['wpBaseRev'] = $this->getTitle()->getLatestRevID();
-		foreach ( $hiddenParams as $name => $value ) {
+		$hidden = array(
+			'wpEditToken' => $this->getUser()->getEditToken(),
+			'wpBaseRev' => $this->getTitle()->getLatestRevID(),
+		);
+		if ( !empty( $undidRevision ) ) {
+			$hidden['wpUndidRevision'] = $undidRevision;
+		}
+		foreach ( $hidden as $name => $value ) {
 			$this->getOutput()->addHTML( "\n" . Html::hidden( $name, $value ) . "\n" );
 		}
 
