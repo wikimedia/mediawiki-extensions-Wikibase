@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_651c9c7d",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-23T02:57:35Z",
+      "side": 1,
+      "message": "this will break compatibility with statements on properties, please use $this-\u003eentityIdParser to parse the input.",
+      "revId": "90bda6c7a29149f0c4c3da49df81020b1bb028a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
