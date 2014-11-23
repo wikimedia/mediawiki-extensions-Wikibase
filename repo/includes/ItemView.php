@@ -34,7 +34,7 @@ class ItemView extends EntityView {
 
 		$html = parent::getMainHtml( $entityRevision, $entityInfo, $editable );
 		$html .= $this->claimsView->getHtml(
-			$item->getClaims(),
+			$item->getStatements()->toArray(),
 			$entityInfo,
 			'wikibase-statements'
 		);
