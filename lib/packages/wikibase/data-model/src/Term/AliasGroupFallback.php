@@ -10,7 +10,7 @@ use InvalidArgumentException;
  *
  * Duplicates and whitespace only values are removed. Values are trimmed.
  *
- * @since 2.3.0
+ * @since 2.4.0
  *
  * @licence GNU GPL v2+
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
