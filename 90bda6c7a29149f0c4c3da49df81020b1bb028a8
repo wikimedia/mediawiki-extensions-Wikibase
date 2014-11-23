@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4ea06b5a_b018a07b",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-23T03:42:16Z",
+      "side": 1,
+      "message": "hmmm, am i blind or is $entityIdParser undefined above as member of class?",
+      "revId": "90bda6c7a29149f0c4c3da49df81020b1bb028a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_651c9c7d",
         "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
         "patchSetId": 7
