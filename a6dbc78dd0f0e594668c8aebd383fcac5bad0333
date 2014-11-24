@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_23976995",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-24T16:49:02Z",
+      "side": 1,
+      "message": "does it really handle typos and fuzzy search? :) and typo also in your example description.",
+      "revId": "a6dbc78dd0f0e594668c8aebd383fcac5bad0333",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
