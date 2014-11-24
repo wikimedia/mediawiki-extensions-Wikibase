@@ -1,4 +1,4 @@
-dataValues.DecimalValue = ( function( dv, util ) {
+( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.DataValue;
@@ -28,6 +28,66 @@ dataValues.DecimalValue = ( function( dv, util ) {
 
 		this._value = value;
 	};
+
+	var SELF = dv.DecimalValue = util.inherit( 'DvDecimalValue', PARENT, constructor, {
+		/**
+		 * @inheritdoc
+		 *
+		 * @since 0.1
+		 *
+		 * @return {string}
+		 */
+		getSortKey: function() {
+			return this._value;
+		},
+
+		/**
+		 * @inheritdoc
+		 *
+		 * @since 0.1
+		 *
+		 * @return {string}
+		 */
+		getValue: function() {
+			return this._value;
+		},
+
+		/**
+		 * @inheritdoc
+		 *
+		 * @since 0.1
+		 */
+		equals: function( value ) {
+			if ( !( value instanceof this.constructor ) ) {
+				return false;
+			}
+
+			return this._value === value.getValue();
+		},
+
+		/**
+		 * @inheritdoc
+		 *
+		 * @since 0.1
+		 *
+		 * @return {string}
+		 */
+		toJSON: function() {
+			return this._value;
+		}
+	} );
+
+	/**
+	 * @inheritdoc
+	 */
+	SELF.newFromJSON = function( json ) {
+		return new SELF( json );
+	};
+
+	/**
+	 * @inheritdoc
+	 */
+	SELF.TYPE = 'decimal';
 
 	/**
 	 * Converts a number to a string confirming to the DecimalValue definition.
@@ -109,69 +169,6 @@ dataValues.DecimalValue = ( function( dv, util ) {
 
 		return string;
 	}
-
-	var DecimalValue = util.inherit( 'DvDecimalValue', PARENT, constructor, {
-		/**
-		 * @inheritdoc
-		 *
-		 * @since 0.1
-		 *
-		 * @return {string}
-		 */
-		getSortKey: function() {
-			return this._value;
-		},
-
-		/**
-		 * @inheritdoc
-		 *
-		 * @since 0.1
-		 *
-		 * @return {string}
-		 */
-		getValue: function() {
-			return this._value;
-		},
-
-		/**
-		 * @inheritdoc
-		 *
-		 * @since 0.1
-		 */
-		equals: function( value ) {
-			if ( !( value instanceof this.constructor ) ) {
-				return false;
-			}
-
-			return this._value === value.getValue();
-		},
-
-		/**
-		 * @inheritdoc
-		 *
-		 * @since 0.1
-		 *
-		 * @return {string}
-		 */
-		toJSON: function() {
-			return this._value;
-		}
-
-	} );
-
-	/**
-	 * @inheritdoc
-	 */
-	DecimalValue.newFromJSON = function( json ) {
-		return new DecimalValue( json );
-	};
-
-	/**
-	 * @inheritdoc
-	 */
-	DecimalValue.TYPE = 'decimal';
-
-	return DecimalValue;
 
 }( dataValues, util ) );
 
