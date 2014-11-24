@@ -16,6 +16,23 @@
       "revId": "a6dbc78dd0f0e594668c8aebd383fcac5bad0333",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_c3c1e584",
+        "filename": "client/tests/phpunit/includes/api/PageTermsTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-24T16:56:32Z",
+      "side": 1,
+      "message": "can\u0027t use $this inside the callback with php 5.3",
+      "revId": "a6dbc78dd0f0e594668c8aebd383fcac5bad0333",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
