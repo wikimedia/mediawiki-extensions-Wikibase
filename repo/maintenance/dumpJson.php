@@ -19,6 +19,7 @@ use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -86,8 +87,10 @@ class DumpJson extends Maintenance {
 		//TODO: allow injection for unit tests
 		$this->entityPerPage = WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage();
 
-		// Use an uncached EntityRevisionLookup here to avoid memory leaks
-		$this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );
+		// Use an uncached EntityRevisionLookup here to avoid leaking memory (we only need every entity once)
+		$revisionLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup( 'uncached' );
+		// This is not purposefully not resolving redirects, as we don't want them in the dump
+		$this->entityLookup = new RevisionBasedEntityLookup( $revisionLookup );
 	}
 
 	/**

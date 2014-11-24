@@ -16,6 +16,7 @@ use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityIdPager;
 
 /**
@@ -89,10 +90,11 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param EntityId[] $ids
 	 * @param EntityId[] $missingIds
+	 * @param EntityId[] $redirectedIds
 	 *
 	 * @return JsonDumpGenerator
 	 */
-	protected function newDumpGenerator( array $ids = array(), array $missingIds = array() ) {
+	protected function newDumpGenerator( array $ids = array(), array $missingIds = array(), array $redirectedIds = array() ) {
 		$out = fopen( 'php://output', 'w' );
 
 		$serializer = new DispatchingEntitySerializer( $this->serializerFactory );
@@ -102,9 +104,12 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnCallback( function ( EntityId $id ) use ( $entities, $missingIds ) {
+			->will( $this->returnCallback( function ( EntityId $id ) use ( $entities, $missingIds, $redirectedIds ) {
 					if ( in_array( $id, $missingIds ) ) {
 						return null;
+					}
+					if ( in_array( $id, $redirectedIds ) ) {
+						throw new UnresolvedRedirectException( new ItemId( 'Q123' ) );
 					}
 
 					$key = $id->getSerialization();
@@ -495,4 +500,23 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testRedirectsNotIncluded() {
+		$ids = array();
+
+		for ( $i = 1; $i<=10; $i++) {
+			$id = new ItemId( "Q$i" );
+			$ids[] = $id;
+		}
+
+		$dumper = $this->newDumpGenerator( $ids, array(), array( new ItemId( 'Q9' ) ) );
+		$pager = $this->makeIdPager( $ids );
+
+		$dumper->setBatchSize( 10 );
+
+		ob_start();
+		$dumper->generateDump( $pager );
+		$json = trim( ob_get_clean() );
+
+		$this->assertSame( 9, count( json_decode( $json ) ), 'Redirected Item Q9 not in dump' );
+	}
 }

@@ -13,10 +13,13 @@ use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
 use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityIdPager;
 
 /**
- * JsonDumpGenerator generates an JSON dump of a given set of entities.
+ * JsonDumpGenerator generates an JSON dump of a given set of entities, excluding
+ * redirects.
  *
  * @since 0.5
  *
@@ -83,7 +86,7 @@ class JsonDumpGenerator {
 
 	/**
 	 * @param resource $out
-	 * @param EntityLookup $lookup
+	 * @param EntityLookup $lookup Must not resolve redirects
 	 * @param Serializer $entitySerializer
 	 *
 	 * @throws InvalidArgumentException
@@ -91,6 +94,9 @@ class JsonDumpGenerator {
 	public function __construct( $out, EntityLookup $lookup, Serializer $entitySerializer ) {
 		if ( !is_resource( $out ) ) {
 			throw new InvalidArgumentException( '$out must be a file handle!' );
+		}
+		if ( $lookup instanceof RedirectResolvingEntityLookup ) {
+			throw new InvalidArgumentException( '$lookup must not resolve redirects!' );
 		}
 
 		$this->out = $out;
@@ -237,6 +243,9 @@ class JsonDumpGenerator {
 
 			try {
 				$json = $this->generateJsonForEntityId( $entityId );
+				if ( $json === null ) {
+					continue;
+				}
 
 				if ( $dumpCount > 0 ) {
 					$this->writeToDump( ",\n" );
@@ -250,6 +259,13 @@ class JsonDumpGenerator {
 		}
 	}
 
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @throws StorageException
+	 *
+	 * @return string|null
+	 */
 	private function generateJsonForEntityId( EntityId $entityId ) {
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
@@ -260,6 +276,8 @@ class JsonDumpGenerator {
 		} catch( MWContentSerializationException $ex ) {
 			throw new StorageException( 'Deserialization error for '
 				. $entityId->getSerialization() );
+		} catch( UnresolvedRedirectException $e ) {
+			return null;
 		}
 
 		$data = $this->entitySerializer->getSerialized( $entity );
