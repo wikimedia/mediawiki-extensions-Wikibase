@@ -11,12 +11,13 @@
 
 	/**
 	 * Constructor for creating a data value representing time.
+	 * @class dataValues.TimeValue
+	 * @extends dataValues.DataValue
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
-	 * @extends dv.DataValue
-	 * @since 0.1
 	 *
 	 * @param {String} value
 	 */

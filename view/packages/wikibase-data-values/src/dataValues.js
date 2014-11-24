@@ -1,9 +1,10 @@
 /**
- * Global 'dataValues' object
+ * Global 'dataValues' object.
+ * @class dataValues
+ * @singleton
+ * @since 0.1
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @since 0.1
- * @type Object
  */
 this.dataValues = new( function Dv() {
 	'use strict';

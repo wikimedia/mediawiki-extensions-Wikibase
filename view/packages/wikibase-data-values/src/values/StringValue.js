@@ -11,13 +11,14 @@ var PARENT = dv.DataValue,
 
 /**
  * Constructor for creating a data value representing a string.
+ * @class dataValues.StringValue
+ * @extends dataValues.DataValue
+ * @since 0.1
  * @licence GNU GPL v2+
  * @author Daniel Werner
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  *
  * @constructor
- * @extends dv.DataValue
- * @since 0.1
  *
  * @param {string} value
  */

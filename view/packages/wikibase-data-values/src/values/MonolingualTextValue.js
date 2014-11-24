@@ -11,13 +11,14 @@ var PARENT = dv.DataValue,
 /**
  * Constructor for creating a monolingual text value. A monolingual text is a string which is
  * dedicated to one specific language.
+ * @class dataValues.MonolingualTextValue
+ * @extends dataValues.DataValue
+ * @since 0.1
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  *
  * @constructor
- * @extends dv.DataValue
- * @since 0.1
  *
  * @param {String} languageCode
  * @param {String} value

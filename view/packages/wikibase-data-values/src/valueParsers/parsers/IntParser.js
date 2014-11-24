@@ -5,12 +5,13 @@
 
 	/**
 	 * Constructor for string-to-float parsers.
+	 * @class valueParsers.IntParser
+	 * @extends valueParsers.ValueParser
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
-	 * @extends valueParsers.ValueParser
-	 * @since 0.1
 	 */
 	vp.IntParser = util.inherit( PARENT, {
 		/**

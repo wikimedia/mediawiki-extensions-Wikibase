@@ -5,12 +5,13 @@
 
 	/**
 	 * Constructor for string parsers.
+	 * @class valueParsers.StringParser
+	 * @extends valueParsers.ValueParser
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < danweetz@web.de >
 	 *
 	 * @constructor
-	 * @extends valueParsers.ValueParser
-	 * @since 0.1
 	 */
 	vp.StringParser = util.inherit( PARENT, {
 		/**

@@ -5,12 +5,13 @@
 
 	/**
 	 * Constructor for string-to-BoolValue parsers.
+	 * @class valueParsers.BoolParser
+	 * @extends valueParsers.ValueParser
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
-	 * @extends valueParsers.ValueParser
-	 * @since 0.1
 	 */
 	vp.BoolParser = util.inherit( PARENT, {
 		/**

@@ -5,11 +5,14 @@ dataValues.QuantityValue = ( function( dv, util ) {
 
 	/**
 	 * Constructor for a data value representing a quantity.
+	 * @class dataValues.QuantityValue
+	 * @extend dataValues.dataValue
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
-	 * @since 0.1
+	 * @constructor
 	 *
 	 * @param {dataValues.DecimalValue} amount Numeric string or a number.
 	 * @param {string} unit A unit identifier. Must not be empty, use "1" for unit-less quantities.

@@ -13,12 +13,13 @@
 
 	/**
 	 * Constructor for creating a data value representing a globe coordinate.
+	 * @class dataValues.GlobeCoordinateValue
+	 * @extends dataValues.DataValue
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
-	 * @extends dv.DataValue
-	 * @since 0.1
 	 *
 	 * @param {globeCoordinate.GlobeCoordinate} value
 	 */

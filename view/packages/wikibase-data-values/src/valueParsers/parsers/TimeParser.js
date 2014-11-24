@@ -5,12 +5,13 @@
 
 	/**
 	 * Constructor for time parsers.
+	 * @class valueParsers.TimeParser
+	 * @extends valueParsers.ValueParser
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < danweetz@web.de >
 	 *
 	 * @constructor
-	 * @extends valueParsers.ValueParser
-	 * @since 0.1
 	 */
 	vp.TimeParser = util.inherit( PARENT, {
 		/**

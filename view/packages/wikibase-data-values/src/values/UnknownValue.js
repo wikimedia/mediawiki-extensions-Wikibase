@@ -9,12 +9,13 @@
 
 	/**
 	 * Constructor for creating a data value holding a value of unknown nature.
+	 * @class dataValues.UnknownValue
+	 * @extends dataValues.DataValue
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Jeroen De Dauw < jeroendedauw@gmail.com >
 	 *
 	 * @constructor
-	 * @extends dv.DataValue
-	 * @since 0.1
 	 *
 	 * @param {string} value
 	 */

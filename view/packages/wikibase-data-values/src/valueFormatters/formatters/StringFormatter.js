@@ -4,13 +4,14 @@
 	var PARENT = vf.ValueFormatter;
 
 	/**
-	 * String formatter
+	 * String formatter.
+	 * @class valueFormatters.StringFormatter
+	 * @extends valueFormatters.ValueFormatter
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
-	 * @extends valueFormatters.ValueFormatter
-	 * @since 0.1
 	 */
 	vf.StringFormatter = util.inherit( PARENT, {
 		/**

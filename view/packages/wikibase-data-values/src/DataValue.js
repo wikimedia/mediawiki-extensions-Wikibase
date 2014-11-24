@@ -4,12 +4,13 @@
 /**
  * Base constructor for objects representing a data value. DataValue objects are immutable, meaning
  * that the actual value can't be altered.
+ * @class dataValues.DataValue
+ * @abstract
+ * @since 0.1
  * @licence GNU GPL v2+
  * @author Daniel Werner
  *
  * @constructor
- * @abstract
- * @since 0.1
  */
 var SELF = dv.DataValue = function DvDataValue() {
 	if( !this.constructor.TYPE ) {

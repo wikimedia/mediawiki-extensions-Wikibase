@@ -2,12 +2,13 @@
 	'use strict';
 
 	/**
-	 * Store managing ValueFormatter instances
+	 * Store managing ValueFormatter instances.
+	 * @class valueFormatters.ValueFormatterStore
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
-	 * @since 0.1
 	 *
 	 * @param {Function} [DefaultFormatter] Constructor of a default formatter that shall be
 	 *        returned when no formatter is registered for a specific purpose.

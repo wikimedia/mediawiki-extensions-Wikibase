@@ -10,13 +10,14 @@ var PARENT = dv.DataValue,
 /**
  * Constructor for creating a multilingual text value. A multilingual text is a collection of
  * monolingual text values with the same meaning in different languages.
+ * @class dataValues.MultilingualTextValue
+ * @extends dataValues.DataValue
+ * @since 0.1
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  *
  * @constructor
- * @extends dv.DataValue
- * @since 0.1
  *
  * @param {dv.MonolingualTextValue[]} monoLingualValues
  */

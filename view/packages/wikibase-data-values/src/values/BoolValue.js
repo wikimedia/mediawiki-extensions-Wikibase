@@ -11,12 +11,13 @@ var PARENT = dv.DataValue,
 
 /**
  * Constructor for creating a data value representing a boolean.
+ * @class dataValues.BoolValue
+ * @extends dataValues.DataValue
+ * @since 0.1
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  *
  * @constructor
- * @extends dv.DataValue
- * @since 0.1
  *
  * @param {boolean} value
  */

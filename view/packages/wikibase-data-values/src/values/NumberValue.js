@@ -9,12 +9,13 @@
 
 	/**
 	 * Constructor for creating a data value representing a number.
+	 * @class dataValues.NumberValue
+	 * @extends dataValues.DataValue
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < danweetz@web.de >
 	 *
 	 * @constructor
-	 * @extends dv.DataValue
-	 * @since 0.1
 	 *
 	 * @param {Number} value
 	 */

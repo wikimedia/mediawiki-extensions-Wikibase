@@ -4,18 +4,19 @@
 	var PARENT = vf.ValueFormatter;
 
 	/**
-	 * Null Formatter
+	 * Null Formatter.
 	 * The Null Formatter formats any DataValue instance and may be used as a fallback for DataValue
 	 * instances that cannot be identified (e.g. due to missing implementation). The formatted value
 	 * will be the string casted result of the data value's toJSON() function.
 	 * If the data value could not be identified, the data value passed on to the $.Promise returned
 	 * by the format function will be an UnknownValue DataValue instance.
+	 * @class valueFormatters.NullFormatter
+	 * @extends valueFormatters.ValueFormatter
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
-	 * @extends valueFormatters.ValueFormatter
-	 * @since 0.1
 	 */
 	vf.NullFormatter = util.inherit( PARENT, function() {}, {
 		/**

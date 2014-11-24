@@ -2,12 +2,13 @@
 	'use strict';
 
 	/**
-	 * Store managing ValueParser instances
+	 * Store managing ValueParser instances.
+	 * @class valueParsers.ValueParserStore
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
-	 * @since 0.1
 	 *
 	 * @param {Function} [DefaultParser] Constructor of a default parser that shall be returned when
 	 *        no parser is registered for a specific purpose.

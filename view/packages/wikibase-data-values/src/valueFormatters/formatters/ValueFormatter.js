@@ -3,12 +3,13 @@
 
 	/**
 	 * Base constructor for objects representing a value formatter.
+	 * @class valueFormatters.ValueFormatter
+	 * @abstract
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
-	 * @abstract
-	 * @since 0.1
 	 *
 	 * @param {Object} options
 	 */

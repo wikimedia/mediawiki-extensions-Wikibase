@@ -3,12 +3,13 @@
 
 	/**
 	 * Base constructor for objects representing a value parser.
+	 * @class valueParsers.ValueParser
+	 * @abstract
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Jeroen De Dauw < jeroendedauw@gmail.com >
 	 *
 	 * @constructor
-	 * @abstract
-	 * @since 0.1
 	 *
 	 * @param {Object} options
 	 */

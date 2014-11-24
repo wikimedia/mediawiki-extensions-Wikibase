@@ -11,10 +11,11 @@ dataValues.DecimalValue = ( function( dv, util ) {
 
 	/**
 	 * Constructor for a data value representing a decimal value.
+	 * @class dataValues.DecimalValue
+	 * @extends dataValues.DataValue
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
-	 *
-	 * @since 0.1
 	 *
 	 * @param {string|number} value
 	 */
