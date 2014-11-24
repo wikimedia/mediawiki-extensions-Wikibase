@@ -68,7 +68,7 @@ var SELF = wb.datamodel.Set = util.inherit(
 
 	/**
 	 * @property {Object}
-	 * @private
+	 * @protected
 	 */
 	_items: null,
 

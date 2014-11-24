@@ -42,7 +42,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @property {Object}
-	 * @private
+	 * @protected
 	 */
 	_items: null,
 

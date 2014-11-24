@@ -48,7 +48,7 @@ var SELF = wb.datamodel.List = util.inherit(
 
 	/**
 	 * @property {*[]}
-	 * @private
+	 * @protected
 	 */
 	_items: null,
 
