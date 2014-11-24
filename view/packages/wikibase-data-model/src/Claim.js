@@ -23,19 +23,19 @@ var SELF = wb.datamodel.Claim = function WbDataModelClaim( mainSnak, qualifiers,
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {wikibase.datamodel.Snak}
+	 * @property {wikibase.datamodel.Snak}
 	 * @private
 	 */
 	_mainSnak: null,
 
 	/**
-	 * @type {wikibase.datamodel.SnakList}
+	 * @property {wikibase.datamodel.SnakList}
 	 * @private
 	 */
 	_qualifiers: null,
 
 	/**
-	 * @type {string|null}
+	 * @property {string|null}
 	 * @private
 	 */
 	_guid: null,

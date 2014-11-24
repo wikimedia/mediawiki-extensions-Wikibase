@@ -43,13 +43,13 @@ var SELF = wb.datamodel.Property = util.inherit(
 	},
 {
 	/**
-	 * @type {string}
+	 * @property {string}
 	 * @private
 	 */
 	_dataTypeId: null,
 
 	/**
-	 * @type {wikibase.datamodel.StatementGroupSet}
+	 * @property {wikibase.datamodel.StatementGroupSet}
 	 * @private
 	 */
 	_statementGroupSet: null,
@@ -106,7 +106,7 @@ var SELF = wb.datamodel.Property = util.inherit(
 
 /**
  * @inheritdoc
- * @type {string}
+ * @property {string} [TYPE='property']
  * @static
  */
 SELF.TYPE = 'property';

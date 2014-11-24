@@ -19,20 +19,20 @@ var SELF = wb.datamodel.Entity = function WbDataModelEntity() {
 
 /**
  * String to identify this type of Entity.
- * @type {null}
+ * @property {string} [TYPE=null]
  * @static
  */
 SELF.TYPE = null;
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {string}
+	 * @property {string}
 	 * @private
 	 */
 	_id: null,
 
 	/**
-	 * @type {wikibase.datamodel.Fingerprint}
+	 * @property {wikibase.datamodel.Fingerprint}
 	 * @private
 	 */
 	_fingerprint: null,

@@ -28,19 +28,19 @@ var SELF = wb.datamodel.SiteLink = function WbDataModelSiteLink( siteId, pageNam
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {string}
+	 * @property {string}
 	 * @private
 	 */
 	_siteId: null,
 
 	/**
-	 * @type {string|null}
+	 * @property {string|null}
 	 * @private
 	 */
 	_pageName: null,
 
 	/**
-	 * @type {string[]}
+	 * @property {string[]}
 	 * @private
 	 */
 	_badges: null,

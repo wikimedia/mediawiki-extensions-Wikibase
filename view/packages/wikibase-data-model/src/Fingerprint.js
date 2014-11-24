@@ -38,19 +38,19 @@ var SELF
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {wikibase.datamodel.TermMap}
+	 * @property {wikibase.datamodel.TermMap}
 	 * @private
 	 */
 	_labels: null,
 
 	/**
-	 * @type {wikibase.datamodel.TermMap}
+	 * @property {wikibase.datamodel.TermMap}
 	 * @private
 	 */
 	_descriptions: null,
 
 	/**
-	 * @type {wikibase.datamodel.MultiTermMap}
+	 * @property {wikibase.datamodel.MultiTermMap}
 	 * @private
 	 */
 	_aliases: null,

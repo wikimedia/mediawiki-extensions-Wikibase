@@ -30,7 +30,7 @@ var SELF = wb.datamodel.PropertyValueSnak = util.inherit(
 	},
 {
 	/**
-	 * @type {dataValues.DataValue}
+	 * @property {dataValues.DataValue}
 	 * @private
 	 */
 	_value: null,
@@ -54,7 +54,7 @@ var SELF = wb.datamodel.PropertyValueSnak = util.inherit(
 
 /**
  * @inheritdoc
- * @type {string}
+ * @property {string} [TYPE='value']
  * @static
  */
 SELF.TYPE = 'value';

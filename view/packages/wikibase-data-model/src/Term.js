@@ -20,13 +20,13 @@ var SELF = wb.datamodel.Term = function WbDataModelTerm( languageCode, text ) {
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {string}
+	 * @property {string}
 	 * @private
 	 */
 	_languageCode: null,
 
 	/**
-	 * @type {string}
+	 * @property {string}
 	 * @private
 	 */
 	_text: null,

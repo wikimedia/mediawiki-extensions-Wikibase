@@ -41,19 +41,19 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 {
 	/**
-	 * @type {Function}
+	 * @property {Function}
 	 * @private
 	 */
 	_ItemConstructor: null,
 
 	/**
-	 * @type {*[]}
+	 * @property {*[]}
 	 * @private
 	 */
 	_items: null,
 
 	/**
-	 * @type {number}
+	 * @property {number}
 	 */
 	length: 0,
 

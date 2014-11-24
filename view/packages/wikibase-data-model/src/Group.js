@@ -48,25 +48,25 @@ var SELF = wb.datamodel.Group = function WbDataModelGroup(
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {*}
+	 * @property {*}
 	 * @private
 	 */
 	_key: null,
 
 	/**
-	 * @type {Function}
+	 * @property {Function}
 	 * @private
 	 */
 	_GroupableCollectionConstructor: null,
 
 	/**
-	 * @type {string}
+	 * @property {string}
 	 * @private
 	 */
 	_groupableCollectionGetKeysFunctionName: null,
 
 	/**
-	 * @type {wikibase.datamodel.GroupableCollection}
+	 * @property {wikibase.datamodel.GroupableCollection}
 	 * @private
 	 */
 	_groupableCollection: null,

@@ -44,13 +44,13 @@ var SELF = wb.datamodel.Item = util.inherit(
 	},
 {
 	/**
-	 * @type {wikibase.datamodel.SiteLinkSet}
+	 * @property {wikibase.datamodel.SiteLinkSet}
 	 * @private
 	 */
 	_siteLinkSet: null,
 
 	/**
-	 * @type {wikibase.datamodel.StatementGroupSet}
+	 * @property {wikibase.datamodel.StatementGroupSet}
 	 * @private
 	 */
 	_statementGroupSet: null,
@@ -122,7 +122,7 @@ var SELF = wb.datamodel.Item = util.inherit(
 
 /**
  * @inheritdoc
- * @type {string}
+ * @property {string} [TYPE='item']
  * @static
  */
 SELF.TYPE = 'item';

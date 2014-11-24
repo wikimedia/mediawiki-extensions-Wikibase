@@ -20,13 +20,13 @@ var SELF = wb.datamodel.MultiTerm = function WbDataModelMultiTerm( languageCode,
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {string}
+	 * @property {string}
 	 * @private
 	 */
 	_languageCode: null,
 
 	/**
-	 * @type {string[]}
+	 * @property {string[]}
 	 * @private
 	 */
 	_texts: null,

@@ -27,14 +27,14 @@ var SELF = wb.datamodel.Snak = function WbDataModelSnak( propertyId ) {
 
 /**
  * String to identify this type of Snak.
- * @type {null}
+ * @property {string} [TYPE=null]
  * @static
  */
 SELF.TYPE = null;
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {string}
+	 * @property {string}
 	 * @private
 	 */
 	_propertyId: null,

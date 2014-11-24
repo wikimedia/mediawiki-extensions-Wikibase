@@ -32,13 +32,13 @@ var SELF = wb.datamodel.Reference = function WbDataModelReference( snaks, hash )
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {string|null}
+	 * @property {string|null}
 	 * @private
 	 */
 	_hash: null,
 
 	/**
-	 * @type {wikibase.datamodel.SnakList}
+	 * @property {wikibase.datamodel.SnakList}
 	 * @private
 	 */
 	_snaks: null,

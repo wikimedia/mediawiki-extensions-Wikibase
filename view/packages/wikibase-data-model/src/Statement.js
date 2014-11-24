@@ -23,20 +23,20 @@ var SELF = wb.datamodel.Statement = function WbDataModelStatement( claim, refere
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {wikibase.datamodel.Claim}
+	 * @property {wikibase.datamodel.Claim}
 	 * @private
 	 */
 	_claim: null,
 
 	/**
-	 * @type {wikibase.datamodel.ReferenceList}
+	 * @property {wikibase.datamodel.ReferenceList}
 	 * @private
 	 */
 	_references: null,
 
 	/**
 	 * (see wikibase.statement.RANK)
-	 * @type {number}
+	 * @property {number}
 	 * @private
 	 */
 	_rank: null,
@@ -116,7 +116,7 @@ $.extend( SELF.prototype, {
 
 /**
  * Rank enum.
- * @type {Object}
+ * @property {Object}
  * @static
  */
 SELF.RANK = {

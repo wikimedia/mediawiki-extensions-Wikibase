@@ -55,25 +55,25 @@ var SELF = wb.datamodel.Set = util.inherit(
 	},
 {
 	/**
-	 * @type {Function}
+	 * @property {Function}
 	 * @private
 	 */
 	_ItemConstructor: null,
 
 	/**
-	 * @type {string}
+	 * @property {string}
 	 * @private
 	 */
 	_itemKeyFunctionName: null,
 
 	/**
-	 * @type {Object}
+	 * @property {Object}
 	 * @private
 	 */
 	_items: null,
 
 	/**
-	 * @type {number}
+	 * @property {number}
 	 */
 	length: 0,
 

@@ -36,13 +36,13 @@ wb.datamodel.EntityId = util.inherit(
 	},
 {
 	/**
-	 * @type {string}
+	 * @property {string}
 	 * @private
 	 */
 	_entityType: null,
 
 	/**
-	 * @type {number}
+	 * @property {number}
 	 * @private
 	 */
 	_numericId: null,
@@ -124,11 +124,17 @@ wb.datamodel.EntityId = util.inherit(
 /**
  * @inheritdoc
  * @static
+ *
+ * @return {wikibase.datamodel.EntityId}
  */
 wb.datamodel.EntityId.newFromJSON = function( json ) {
 	return new wb.datamodel.EntityId( json['entity-type'], json['numeric-id'] );
 };
 
+/**
+ * @inheritdoc
+ * @property {string} [TYPE='wikibase-entityid']
+ */
 wb.datamodel.EntityId.TYPE = 'wikibase-entityid';
 
 dv.registerDataValue( wb.datamodel.EntityId );

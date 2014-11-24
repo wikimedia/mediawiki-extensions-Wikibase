@@ -35,19 +35,19 @@ var SELF = wb.datamodel.Map = function( ItemConstructor, map ) {
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {Function}
+	 * @property {Function}
 	 * @private
 	 */
 	_ItemConstructor: null,
 
 	/**
-	 * @type {Object}
+	 * @property {Object}
 	 * @private
 	 */
 	_items: null,
 
 	/**
-	 * @type {number}
+	 * @property {number}
 	 */
 	length: 0,
 

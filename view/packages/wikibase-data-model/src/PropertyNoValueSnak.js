@@ -21,7 +21,7 @@ var SELF
 
 /**
  * @inheritdoc
- * @type {string}
+ * @property {string} [TYPE='novalue']
  * @static
  */
 SELF.TYPE = 'novalue';
