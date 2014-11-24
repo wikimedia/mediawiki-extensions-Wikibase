@@ -1,11 +1,7 @@
 ( function( dv, util ) {
 	'use strict';
 
-	var PARENT = dv.DataValue,
-		constructor = function( value ) {
-			// TODO: validate
-			this._value = value;
-		};
+	var PARENT = dv.DataValue;
 
 	/**
 	 * Constructor for creating a data value representing a number.
@@ -19,11 +15,20 @@
 	 *
 	 * @param {Number} value
 	 */
-	dv.NumberValue = util.inherit( 'DvNumberValue', PARENT, constructor, {
+	var SELF = dv.NumberValue = util.inherit( 'DvNumberValue', PARENT, function( value ) {
+		// TODO: validate
+		this._value = value;
+	}, {
+		/**
+		 * @property {number}
+		 * @private
+		 */
+		_value: null,
+
 		/**
 		 * @inheritdoc
 		 *
-		 * @return Number
+		 * @return {number}
 		 */
 		getSortKey: function() {
 			return this._value;
@@ -32,7 +37,7 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @return Number
+		 * @return {number}
 		 */
 		getValue: function() {
 			return this._value;
@@ -51,6 +56,8 @@
 
 		/**
 		 * @inheritdoc
+		 *
+		 * @return {number}
 		 */
 		toJSON: function() {
 			return this._value;
@@ -59,17 +66,20 @@
 
 	/**
 	 * @inheritdoc
+	 *
+	 * @return {dataValues.NumberValue}
 	 */
-	dv.NumberValue.newFromJSON = function( json ) {
-		return new dv.NumberValue( json );
+	SELF.newFromJSON = function( json ) {
+		return new SELF( json );
 	};
 
 	/**
 	 * @inheritdoc
+	 * @property {string} [TYPE='number']
 	 */
-	dv.NumberValue.TYPE = 'number';
+	SELF.TYPE = 'number';
 
 	// make this data value available in the store:
-	dv.registerDataValue( dv.NumberValue );
+	dv.registerDataValue( SELF );
 
 }( dataValues, util ) );

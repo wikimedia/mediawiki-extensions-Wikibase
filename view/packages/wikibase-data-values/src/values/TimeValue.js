@@ -1,13 +1,7 @@
 ( function( dv, util, $, Time ) {
 	'use strict';
 
-	var PARENT = dv.DataValue,
-		constructor = function( value ) {
-			if( !( value instanceof Time ) ) {
-				throw new Error( 'The given value has to be a time.Time object' );
-			}
-			this._value = value;
-		};
+	var PARENT = dv.DataValue;
 
 	/**
 	 * Constructor for creating a data value representing time.
@@ -19,15 +13,26 @@
 	 *
 	 * @constructor
 	 *
-	 * @param {String} value
+	 * @param {string} value
+	 *
+	 * @throws {Error} if value is not a time.Time object.
 	 */
-	var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, constructor, {
+	var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( value ) {
+		if( !( value instanceof Time ) ) {
+			throw new Error( 'The given value has to be a time.Time object' );
+		}
+		this._value = value;
+	}, {
+		/**
+		 * @property {time.Time}
+		 * @private
+		 */
+		_value: null,
+
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
-		 *
-		 * @return String
+		 * @return {string}
 		 */
 		getSortKey: function() {
 			return this.getValue().iso8601();
@@ -36,9 +41,7 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
-		 *
-		 * @return time.Time
+		 * @return {time.Time}
 		 */
 		getValue: function() {
 			return this._value;
@@ -46,8 +49,6 @@
 
 		/**
 		 * @inheritdoc
-		 *
-		 * @since 0.1
 		 */
 		equals: function( value ) {
 			if ( !( value instanceof SELF ) ) {
@@ -59,7 +60,7 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
+		 * @return {Object}
 		 */
 		toJSON: function() {
 			var time = this.getValue();
@@ -78,6 +79,10 @@
 
 	/**
 	 * @inheritdoc
+	 *
+	 * @return {dataValues.TimeValue}
+	 *
+	 * @throws {Error} if detected calendar model is unknown.
 	 */
 	SELF.newFromJSON = function( json ) {
 		// TODO: not good to do it this way, there are some lost information, e.g. before/after and
@@ -119,6 +124,7 @@
 
 	/**
 	 * @inheritdoc
+	 * @property {string} [TYPE='time']
 	 */
 	SELF.TYPE = 'time';
 

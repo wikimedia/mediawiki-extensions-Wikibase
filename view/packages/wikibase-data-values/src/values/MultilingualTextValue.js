@@ -1,11 +1,7 @@
 ( function( dv, util ) {
 'use strict';
 
-var PARENT = dv.DataValue,
-	constructor = function( monoLingualValues ) {
-		// TODO: validate
-		this._texts = monoLingualValues;
-	};
+var PARENT = dv.DataValue;
 
 /**
  * Constructor for creating a multilingual text value. A multilingual text is a collection of
@@ -19,16 +15,25 @@ var PARENT = dv.DataValue,
  *
  * @constructor
  *
- * @param {dv.MonolingualTextValue[]} monoLingualValues
+ * @param {dataValues.MonolingualTextValue[]} monoLingualValues
  */
-dv.MultilingualTextValue = util.inherit( 'DvMultilingualTextValue', PARENT, constructor, {
+var SELF
+	= dv.MultilingualTextValue
+	= util.inherit( 'DvMultilingualTextValue', PARENT, function( monoLingualValues ) {
+		// TODO: validate
+		this._texts = monoLingualValues;
+	},
+{
+	/**
+	 * @property {dataValues.MonolingualTextValue[]}
+	 * @private
+	 */
+	_texts: null,
 
 	/**
 	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return string
+	 * @return {string}
 	 */
 	getSortKey: function() {
 		return this._texts.length < 1 ? '' : this._texts[0].getSortKey();
@@ -37,9 +42,7 @@ dv.MultilingualTextValue = util.inherit( 'DvMultilingualTextValue', PARENT, cons
 	/**
 	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return dataValues.MultilingualTextValue
+	 * @return {dataValues.MultilingualTextValue}
 	 */
 	getValue: function() {
 		return this;
@@ -47,8 +50,6 @@ dv.MultilingualTextValue = util.inherit( 'DvMultilingualTextValue', PARENT, cons
 
 	/**
 	 * @inheritdoc
-	 *
-	 * @since 0.1
 	 */
 	equals: function( value ) {
 		if ( !( value instanceof dv.MultilingualTextValue ) ) {
@@ -64,9 +65,7 @@ dv.MultilingualTextValue = util.inherit( 'DvMultilingualTextValue', PARENT, cons
 	/**
 	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return Object
+	 * @return {Object}
 	 */
 	toJSON: function() {
 		var texts = {};
@@ -81,9 +80,7 @@ dv.MultilingualTextValue = util.inherit( 'DvMultilingualTextValue', PARENT, cons
 	/**
 	 * Returns the text in all languages available.
 	 *
-	 * @since 0.1
-	 *
-	 * @return Array
+	 * @return {string[]}
 	 */
 	getTexts: function() {
 		return this._texts;
@@ -91,7 +88,11 @@ dv.MultilingualTextValue = util.inherit( 'DvMultilingualTextValue', PARENT, cons
 
 } );
 
-dv.MultilingualTextValue.newFromJSON = function( json ) {
+/**
+ * @inheritdoc
+ * @return {dataValues.MultilingualTextValue}
+ */
+SELF.newFromJSON = function( json ) {
 	var monolingualValues = [];
 
 	for ( var languageCode in json ) {
@@ -100,11 +101,15 @@ dv.MultilingualTextValue.newFromJSON = function( json ) {
 		}
 	}
 
-	return new dv.MultilingualTextValue( monolingualValues );
+	return new SELF( monolingualValues );
 };
 
-dv.MultilingualTextValue.TYPE = 'multilingualtext';
+/**
+ * @inheritdoc
+ * @property {string} [TYPE='multilingualtext']
+ */
+SELF.TYPE = 'multilingualtext';
 
-dv.registerDataValue( dv.MultilingualTextValue );
+dv.registerDataValue( SELF );
 
 }( dataValues, util ) );

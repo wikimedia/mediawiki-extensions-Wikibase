@@ -1,21 +1,7 @@
 ( function( dv, util, $ ) {
 	'use strict';
 
-	var PARENT = dv.DataValue,
-		constructor = function( unUnserializableStructure, ofType, unserializeError ) {
-			if( !$.isPlainObject( unUnserializableStructure ) ) {
-				throw new Error( 'The un-unserializable structure has to be a plain object' );
-			}
-			if( typeof ofType !== 'string' ) {
-				throw new Error( '' );
-			}
-			if( !unserializeError || !( unserializeError instanceof Error ) ) {
-				throw new Error( 'No Error object given' );
-			}
-			this._unUnserializableStructure = $.extend( {}, unUnserializableStructure );
-			this._targetType = ofType;
-			this._unserializeError = unserializeError;
-		};
+	var PARENT = dv.DataValue;
 
 	/**
 	 * Constructor for creating a data value representing a value which could not have been
@@ -35,13 +21,46 @@
 	 * @param {Error} unserializeError The error thrown during the attempt to unserialize the given
 	 *        structure.
 	 */
-	var SELF = dv.UnUnserializableValue = util.inherit( 'DvUnUnserializableValue', PARENT, constructor, {
+	var SELF = dv.UnUnserializableValue = util.inherit(
+		'DvUnUnserializableValue',
+		PARENT,
+		function( unUnserializableStructure, ofType, unserializeError ) {
+			if( !$.isPlainObject( unUnserializableStructure ) ) {
+				throw new Error( 'The un-unserializable structure has to be a plain object' );
+			}
+			if( typeof ofType !== 'string' ) {
+				throw new Error( '' );
+			}
+			if( !unserializeError || !( unserializeError instanceof Error ) ) {
+				throw new Error( 'No Error object given' );
+			}
+			this._unUnserializableStructure = $.extend( {}, unUnserializableStructure );
+			this._targetType = ofType;
+			this._unserializeError = unserializeError;
+		},
+	{
+		/**
+		 * @property {Object}
+		 * @private
+		 */
+		_unUnserializableStructure: null,
+
+		/**
+		 * @property {string}
+		 * @private
+		 */
+		_targetType: null,
+
+		/**
+		 * @property {Error}
+		 * @private
+		 */
+		_unserializeError: null,
+
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
-		 *
-		 * @return String
+		 * @return {string}
 		 */
 		getSortKey: function() {
 			return this.getReason().name;
@@ -50,9 +69,7 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
-		 *
-		 * @return dataValues.UnUnserializableValue
+		 * @return {dataValues.UnUnserializableValue}
 		 */
 		getValue: function() {
 			return this;
@@ -61,9 +78,7 @@
 		/**
 		 * Returns the structure not possible to unserialize.
 		 *
-		 * @since 0.1
-		 *
-		 * @return Object
+		 * @return {Object}
 		 */
 		getStructure: function() {
 			return $.extend( {}, this._unUnserializableStructure );
@@ -72,7 +87,7 @@
 		/**
 		 * Returns the data value type into which the structure should have been unserialized.
 		 *
-		 * @returns string
+		 * @return {string}
 		 */
 		getTargetType: function() {
 			return this._targetType;
@@ -82,9 +97,7 @@
 		 * Returns the error object stating why some unserializer was not able to unserialize the
 		 * structure.
 		 *
-		 * @since 0.1
-		 *
-		 * @returns Error
+		 * @return {Error}
 		 */
 		getReason: function() {
 			return this._unserializeError;
@@ -92,8 +105,6 @@
 
 		/**
 		 * @inheritdoc
-		 *
-		 * @since 0.1
 		 */
 		equals: function( other ) {
 			// TODO: Do deep equal of the structures and reasons instead.
@@ -103,7 +114,7 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
+		 * @throws {Error} whenever the function is called (implementation missing).
 		 */
 		toJSON: function() {
 			// TODO
@@ -113,6 +124,8 @@
 
 	/**
 	 * @inheritdoc
+	 *
+	 * @throws {Error} whenever the function is called (implementation missing).
 	 */
 	SELF.newFromJSON = function( json ) {
 		// TODO
@@ -121,6 +134,7 @@
 
 	/**
 	 * @inheritdoc
+	 * @property {string} [TYPE='ununserializable']
 	 */
 	SELF.TYPE = 'ununserializable';
 

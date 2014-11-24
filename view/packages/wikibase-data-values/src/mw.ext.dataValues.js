@@ -47,8 +47,8 @@ mediaWiki.ext.dataValues = ( function( mw, dataValues, time, $ ) {
 	}
 
 	/**
-	 * Returns an array of arrays where each holds different string representations of a month
-	 * name. Considers the MediaWiki user's interface language.
+	 * Returns an array of arrays where each holds different string representations of a month name.
+	 * Considers the MediaWiki user's interface language.
 	 *
 	 * @return {string[][]}
 	 */

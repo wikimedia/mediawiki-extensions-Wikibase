@@ -1,12 +1,7 @@
 ( function( dv, util ) {
 'use strict';
 
-var PARENT = dv.DataValue,
-	constructor = function( languageCode, text ) {
-		// TODO: validate
-		this._languageCode = languageCode;
-		this._text = text;
-	};
+var PARENT = dv.DataValue;
 
 /**
  * Constructor for creating a monolingual text value. A monolingual text is a string which is
@@ -23,12 +18,28 @@ var PARENT = dv.DataValue,
  * @param {String} languageCode
  * @param {String} value
  */
-dv.MonolingualTextValue = util.inherit( 'DvMonolingualTextValue', PARENT, constructor, {
+var SELF
+	= dv.MonolingualTextValue
+	= util.inherit( 'DvMonolingualTextValue', PARENT, function( languageCode, text ) {
+		// TODO: validate
+		this._languageCode = languageCode;
+		this._text = text;
+	},
+{
+	/**
+	 * @property {string}
+	 * @private
+	 */
+	_languageCode: null,
+
+	/**
+	 * @property {string}
+	 * @private
+	 */
+	_text: null,
 
 	/**
 	 * @inheritdoc
-	 *
-	 * @since 0.1
 	 *
 	 * @return string
 	 */
@@ -39,9 +50,7 @@ dv.MonolingualTextValue = util.inherit( 'DvMonolingualTextValue', PARENT, constr
 	/**
 	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return dv.MonolingualTextValue
+	 * @return {dataValues.MonolingualTextValue}
 	 */
 	getValue: function() {
 		return this;
@@ -49,8 +58,6 @@ dv.MonolingualTextValue = util.inherit( 'DvMonolingualTextValue', PARENT, constr
 
 	/**
 	 * @inheritdoc
-	 *
-	 * @since 0.1
 	 */
 	equals: function( value ) {
 		if ( !( value instanceof dv.MonolingualTextValue ) ) {
@@ -63,7 +70,7 @@ dv.MonolingualTextValue = util.inherit( 'DvMonolingualTextValue', PARENT, constr
 	/**
 	 * @inheritdoc
 	 *
-	 * @since 0.1
+	 * @return {Object}
 	 */
 	toJSON: function() {
 		return {
@@ -75,20 +82,16 @@ dv.MonolingualTextValue = util.inherit( 'DvMonolingualTextValue', PARENT, constr
 	/**
 	 * Returns the text.
 	 *
-	 * @since 0.1
-	 *
-	 * @return string
+	 * @return {string}
 	 */
 	getText: function() {
 		return this._text;
 	},
 
 	/**
-	 * Returns the language code of the values language.
+	 * Returns the language code of the value's language.
 	 *
-	 * @since 0.1
-	 *
-	 * @return string
+	 * @return {string}
 	 */
 	getLanguageCode: function() {
 		return this._languageCode;
@@ -96,12 +99,21 @@ dv.MonolingualTextValue = util.inherit( 'DvMonolingualTextValue', PARENT, constr
 
 } );
 
-dv.MonolingualTextValue.newFromJSON = function( json ) {
-	return new dv.MonolingualTextValue( json.language, json.text );
+/**
+ * @inheritdoc
+ *
+ * @return {dataValues.MonolingualTextValue}
+ */
+SELF.newFromJSON = function( json ) {
+	return new SELF( json.language, json.text );
 };
 
-dv.MonolingualTextValue.TYPE = 'monolingualtext';
+/**
+ * @inheritdoc
+ * @property {string} [TYPE='monolingualtext']
+ */
+SELF.TYPE = 'monolingualtext';
 
-dv.registerDataValue( dv.MonolingualTextValue );
+dv.registerDataValue( SELF );
 
 }( dataValues, util ) );

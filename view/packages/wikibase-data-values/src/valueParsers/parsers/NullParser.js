@@ -21,12 +21,6 @@
 
 		/**
 		 * @inheritdoc
-		 *
-		 * @since 0.1
-		 *
-		 * @param {string} rawValue
-		 *
-		 * @return $.Promise
 		 */
 		parse: function( rawValue ) {
 			var deferred = $.Deferred(),

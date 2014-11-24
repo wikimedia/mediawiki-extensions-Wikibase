@@ -16,10 +16,6 @@
 	vf.StringFormatter = util.inherit( PARENT, {
 		/**
 		 * @inheritdoc
-		 * @since 0.1
-		 *
-		 * @param {dataValues.StringValue} dataValue
-		 * @return {$.Promise}
 		 */
 		format: function( dataValue ) {
 			var deferred = $.Deferred();

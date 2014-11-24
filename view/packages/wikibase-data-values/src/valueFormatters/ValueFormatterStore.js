@@ -24,27 +24,30 @@
 		 * Default formatter constructor to be returned when no formatter is registered for a
 		 * specific purpose.
 		 * @property {Function|null}
+		 * @private
 		 */
 		_DefaultFormatter: null,
 
 		/**
 		 * @property {Object}
+		 * @private
 		 */
 		_formattersForDataTypes: null,
 
 		/**
 		 * @property {Object}
+		 * @private
 		 */
 		_formattersForDataValueTypes: null,
 
 		/**
 		 * Registers a formatter for a certain data type.
-		 * @since 0.1
 		 *
 		 * @param {Function} Formatter
 		 * @param {string} dataTypeId
 		 *
-		 * @throws {Error} if a formatter for the specified dataType object is registered already.
+		 * @throws {Error} if the data type id is omitted.
+		 * @throws {Error} if a formatter for the specified data type id is registered already.
 		 */
 		registerDataTypeFormatter: function( Formatter, dataTypeId ) {
 			assertIsValueFormatterConstructor( Formatter );
@@ -54,7 +57,7 @@
 			}
 
 			if( this._formattersForDataTypes[dataTypeId] ) {
-				throw new Error( 'Formatter for DataType "' + dataTypeId + '" is registered '
+				throw new Error( 'Formatter for data type "' + dataTypeId + '" is registered '
 					+ 'already' );
 			}
 
@@ -63,13 +66,12 @@
 
 		/**
 		 * Registers a formatter for a certain data value type.
-		 * @since 0.1
 		 *
 		 * @param {Function} Formatter
 		 * @param {string} dataValueType
 		 *
 		 * @throws {Error} if no data type id is specified.
-		 * @throws {Error} if a formatter for the specified DataValue type is registered already.
+		 * @throws {Error} if a formatter for the specified data value type is registered already.
 		 */
 		registerDataValueFormatter: function( Formatter, dataValueType ) {
 			assertIsValueFormatterConstructor( Formatter );
@@ -90,13 +92,11 @@
 		/**
 		 * Returns the ValueFormatter constructor registered for the specified purpose or the
 		 * default formatter if no ValueFormatter is registered for that purpose.
-		 * @since 0.1
 		 *
 		 * @param {string} dataValueType
 		 * @param {string} [dataTypeId]
 		 * @return {Function|null}
 		 *
-		 * @throws {Error} if no data value type is specified.
 		 * @throws {Error} if no proper purpose is provided to retrieve a formatter.
 		 */
 		getFormatter: function( dataValueType, dataTypeId ) {
@@ -118,6 +118,7 @@
 
 	/**
 	 * @param {Function} Formatter
+	 *
 	 * @throws {Error} if the provided argument is not a valueFormatters.ValueFormatter constructor.
 	 */
 	function assertIsValueFormatterConstructor( Formatter ) {

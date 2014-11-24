@@ -16,10 +16,8 @@
 	vp.BoolParser = util.inherit( PARENT, {
 		/**
 		 * @inheritdoc
-		 * @since 0.1
 		 *
 		 * @param {string} rawValue
-		 * @return jQuery.Promise
 		 */
 		parse: function( rawValue ) {
 			var deferred = $.Deferred(),
@@ -38,6 +36,11 @@
 		}
 	} );
 
+	/**
+	 * Enum featuring the strings detecting a boolean value.
+	 * @property {Object}
+	 * @static
+	 */
 	vp.BoolParser.values = {
 		'yes': true,
 		'on': true,

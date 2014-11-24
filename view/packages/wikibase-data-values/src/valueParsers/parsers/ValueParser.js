@@ -21,13 +21,12 @@
 		/**
 		 * Parser options.
 		 * @property {Object}
+		 * @private
 		 */
 		_options: {},
 
 		/**
 		 * Returns the parser's options as set in the constructor.
-		 *
-		 * @since 0.1
 		 *
 		 * @return {Object}
 		 */
@@ -41,23 +40,21 @@
 		 * e.g. the parser is using the API and the API can't be reached. In case of success, the
 		 * callbacks will get a dataValues.DataValue object. In case of failure, the callback's
 		 * parameter will be an error object of some sort (not implemented yet!).
-		 *
-		 * TODO: Specify Error object for parser failure. Consider different error scenarios e.g.
-		 *       API can not be reached or real parsing issues.
-		 * TODO: Think about introducing parser warnings or a status object in done() callbacks.
-		 *
-		 * @since 0.1
+		 * @abstract
 		 *
 		 * @param {*} rawValue
-		 *
-		 * @return {jQuery.Promise}
-		 *         Resolved parameters:
-		 *         - {dataValues.DataValue|null} Parsed DataValue object or "null" if empty.
-		 *         Rejected parameters:
-		 *         - {string} HTML error message.
+		 * @return {Object} jQuery.Promise
+		 * @return {Function} return.done
+		 * @return {dataValues.DataValue|null} return.done.dataValue Parsed DataValue object or
+		 *         "null" if empty.
+		 * @return {Function} return.fail
+		 * @return {string} return.fail.message HTML error message.
 		 */
 		parse: util.abstractMember
+		// TODO: Specify Error object for parser failure. Consider different error scenarios e.g.
+		//       API can not be reached or real parsing issues.
+		// TODO: Think about introducing parser warnings or a status object in done() callbacks.
 
-	} );
+} );
 
 }( valueParsers, jQuery, util ) );

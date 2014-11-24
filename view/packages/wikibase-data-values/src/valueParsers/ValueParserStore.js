@@ -24,28 +24,30 @@
 		 * Default parser constructor to be returned when no parser is registered for a specific
 		 * purpose.
 		 * @property {Function|null}
+		 * @private
 		 */
 		_DefaultParser: null,
 
 		/**
 		 * @property {Object}
+		 * @private
 		 */
 		_parsersForDataTypes: null,
 
 		/**
 		 * @property {Object}
+		 * @private
 		 */
 		_parsersForDataValueTypes: null,
 
 		/**
 		 * Registers a parser for a certain data type.
-		 * @since 0.1
 		 *
 		 * @param {Function} Parser
 		 * @param {string} dataTypeId
 		 *
 		 * @throws {Error} if no data type id is specified.
-		 * @throws {Error} if a parser for the specified dataType object is registered already.
+		 * @throws {Error} if a parser for the specified data type id is registered already.
 		 */
 		registerDataTypeParser: function( Parser, dataTypeId ) {
 			assertIsValueParserConstructor( Parser );
@@ -55,7 +57,8 @@
 			}
 
 			if( this._parsersForDataTypes[dataTypeId] ) {
-				throw new Error( 'Parser for DataType "' + dataTypeId + '" is registered already' );
+				throw new Error( 'Parser for data type "' + dataTypeId + '" is registered '
+					+ 'already' );
 			}
 
 			this._parsersForDataTypes[dataTypeId] = Parser;
@@ -63,13 +66,12 @@
 
 		/**
 		 * Registers a parser for a certain data value type.
-		 * @since 0.1
 		 *
 		 * @param {Function} Parser
 		 * @param {string} dataValueType
 		 *
 		 * @throws {Error} if no data value type is specified.
-		 * @throws {Error} if a parser for the specified DataValue type is registered already.
+		 * @throws {Error} if a parser for the specified data value type is registered already.
 		 */
 		registerDataValueParser: function( Parser, dataValueType ) {
 			assertIsValueParserConstructor( Parser );
@@ -89,7 +91,6 @@
 		/**
 		 * Returns the ValueParser constructor registered for the specified purpose or the default
 		 * parser if no ValueParser is registered for that purpose.
-		 * @since 0.1
 		 *
 		 * @param {string} dataValueType
 		 * @param {string} [dataTypeId]
@@ -116,6 +117,7 @@
 
 	/**
 	 * @param {Function} Parser
+	 *
 	 * @throws {Error} if the provided argument is not a valueParsers.ValueParser constructor.
 	 */
 	function assertIsValueParserConstructor( Parser ) {

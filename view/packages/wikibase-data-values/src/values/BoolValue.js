@@ -1,13 +1,7 @@
 ( function( dv, util ) {
 'use strict';
 
-var PARENT = dv.DataValue,
-	constructor = function( value ) {
-		if( typeof value !== 'boolean' ) {
-			throw new Error( 'A boolean value has to be given' );
-		}
-		this._value = value;
-	};
+var PARENT = dv.DataValue;
 
 /**
  * Constructor for creating a data value representing a boolean.
@@ -20,15 +14,25 @@ var PARENT = dv.DataValue,
  * @constructor
  *
  * @param {boolean} value
+ *
+ * @throws {Error} if value is not of type boolean.
  */
-dv.BoolValue = util.inherit( 'DvBoolValue', PARENT, constructor, {
+var SELF = dv.BoolValue = util.inherit( 'DvBoolValue', PARENT, function( value ) {
+	if( typeof value !== 'boolean' ) {
+		throw new Error( 'A boolean value has to be given' );
+	}
+	this._value = value;
+}, {
+	/**
+	 * @property {boolean}
+	 * @private
+	 */
+	_value: null,
 
 	/**
 	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return number
+	 * @return {number}
 	 */
 	getSortKey: function() {
 		return this._value ? 1 : 0;
@@ -37,9 +41,7 @@ dv.BoolValue = util.inherit( 'DvBoolValue', PARENT, constructor, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
+	 * @return {boolean}
 	 */
 	getValue: function() {
 		return this._value;
@@ -47,8 +49,6 @@ dv.BoolValue = util.inherit( 'DvBoolValue', PARENT, constructor, {
 
 	/**
 	 * @inheritdoc
-	 *
-	 * @since 0.1
 	 */
 	equals: function( value ) {
 		if ( !( value instanceof dv.BoolValue ) ) {
@@ -61,9 +61,7 @@ dv.BoolValue = util.inherit( 'DvBoolValue', PARENT, constructor, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
+	 * @return {boolean}
 	 */
 	toJSON: function() {
 		return this._value;
@@ -71,12 +69,22 @@ dv.BoolValue = util.inherit( 'DvBoolValue', PARENT, constructor, {
 
 } );
 
-dv.BoolValue.newFromJSON = function( json ) {
+/**
+ * @inheritdoc
+ * @static
+ *
+ * @return {dataValues.BoolValue}
+ */
+SELF.newFromJSON = function( json ) {
 	return new dv.BoolValue( json );
 };
 
-dv.BoolValue.TYPE = 'boolean';
+/**
+ * @inheritdoc
+ * @property {string} [TYPE='boolean']
+ */
+SELF.TYPE = 'boolean';
 
-dv.registerDataValue( dv.BoolValue );
+dv.registerDataValue( SELF );
 
 }( dataValues, util ) );

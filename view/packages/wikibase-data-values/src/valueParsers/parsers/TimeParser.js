@@ -16,14 +16,11 @@
 	vp.TimeParser = util.inherit( PARENT, {
 		/**
 		 * @inheritdoc
-		 * @since 0.1
 		 *
 		 * @param {time.Time} time
-		 * @return $.Promise
 		 */
 		parse: function( time ) {
-			var deferred = $.Deferred().resolve( new dv.TimeValue( time ) );
-			return deferred.promise();
+			return $.Deferred().resolve( new dv.TimeValue( time ) ).promise();
 		}
 	} );
 

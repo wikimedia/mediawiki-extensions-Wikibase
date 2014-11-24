@@ -16,17 +16,11 @@
 	vp.StringParser = util.inherit( PARENT, {
 		/**
 		 * @inheritdoc
-		 * @since 0.1
 		 *
 		 * @param {string} rawValue
-		 * @return $.Promise
 		 */
 		parse: function( rawValue ) {
-			var deferred = $.Deferred();
-
-			deferred.resolve( new dv.StringValue( rawValue ) );
-
-			return deferred.promise();
+			return $.Deferred().resolve( new dv.StringValue( rawValue ) ).promise();
 		}
 	} );
 

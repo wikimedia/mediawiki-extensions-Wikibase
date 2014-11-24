@@ -1,4 +1,4 @@
-dataValues.QuantityValue = ( function( dv, util ) {
+( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.DataValue;
@@ -6,7 +6,7 @@ dataValues.QuantityValue = ( function( dv, util ) {
 	/**
 	 * Constructor for a data value representing a quantity.
 	 * @class dataValues.QuantityValue
-	 * @extend dataValues.dataValue
+	 * @extends dataValues.DataValue
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
@@ -21,38 +21,61 @@ dataValues.QuantityValue = ( function( dv, util ) {
 	 *
 	 * @throws {Error} if constructor parameters are invalid.
 	 */
-	var constructor = function( amount, unit, upperBound, lowerBound ) {
-		if( !amount || !( amount instanceof dv.DecimalValue ) ) {
-			throw new Error( 'amount needs to be a DecimalValue object' );
-		}
+	var SELF
+		= dv.QuantityValue
+		= util.inherit( 'DvQuantityValue', PARENT, function( amount, unit, upperBound, lowerBound ) {
+			if( !amount || !( amount instanceof dv.DecimalValue ) ) {
+				throw new Error( 'amount needs to be a DecimalValue object' );
+			}
 
-		if( typeof unit !== 'string' ) {
-			throw new Error( 'unit must be of type string' );
-		} else if( unit === '' ) {
-			throw new Error( 'unit can not be an empty string (use "1" for unit-less quantities)' );
-		}
+			if( typeof unit !== 'string' ) {
+				throw new Error( 'unit must be of type string' );
+			} else if( unit === '' ) {
+				throw new Error( 'unit can not be an empty string (use "1" for unit-less quantities)' );
+			}
 
-		if( !lowerBound || !( lowerBound instanceof dv.DecimalValue ) ) {
-			throw new Error( 'lowerBound needs to be a DecimalValue object' );
-		}
+			if( !lowerBound || !( lowerBound instanceof dv.DecimalValue ) ) {
+				throw new Error( 'lowerBound needs to be a DecimalValue object' );
+			}
 
-		if( !upperBound || !( upperBound instanceof dv.DecimalValue ) ) {
-			throw new Error( 'upperBound needs to be a DecimalValue object' );
-		}
+			if( !upperBound || !( upperBound instanceof dv.DecimalValue ) ) {
+				throw new Error( 'upperBound needs to be a DecimalValue object' );
+			}
 
-		this._amount = amount;
-		this._unit = unit;
-		this._lowerBound = lowerBound;
-		this._upperBound = upperBound;
-	};
+			this._amount = amount;
+			this._unit = unit;
+			this._lowerBound = lowerBound;
+			this._upperBound = upperBound;
+		},
+	{
+		/**
+		 * @property {dataValues.DecimalValue}
+		 * @private
+		 */
+		_amount: null,
 
-	var QuantityValue = util.inherit( 'DvQuantityValue', PARENT, constructor, {
+		/**
+		 * @property {string}
+		 * @private
+		 */
+		_unit: null,
+
+		/**
+		 * @property {dataValues.DecimalValue}
+		 * @private
+		 */
+		_lowerBound: null,
+
+		/**
+		 * @property {dataValues.DecimalValue}
+		 * @private
+		 */
+		_upperBound: null,
+
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
-		 *
-		 * @return string
+		 * @return {string}
 		 */
 		getSortKey: function() {
 			return this.getAmount().getValue();
@@ -60,9 +83,8 @@ dataValues.QuantityValue = ( function( dv, util ) {
 
 		/**
 		 * @inheritdoc
-		 * @since 0.1
 		 *
-		 * @return dataValues.QuantityValue
+		 * @return {dataValues.QuantityValue}
 		 */
 		getValue: function() {
 			return this;
@@ -71,9 +93,7 @@ dataValues.QuantityValue = ( function( dv, util ) {
 		/**
 		 * Returns the amount held by this quantity, as a string in standard format.
 		 *
-		 * @since 0.1
-		 *
-		 * @return string
+		 * @return {string}
 		 */
 		getAmount: function() {
 			return this._amount;
@@ -82,9 +102,7 @@ dataValues.QuantityValue = ( function( dv, util ) {
 		/**
 		 * Returns the unit held by this quantity. Returns null in case of unit-less quantities.
 		 *
-		 * @since 0.1
-		 *
-		 * @return string|null
+		 * @return {string|null}
 		 */
 		getUnit: function() {
 			return this._unit;
@@ -92,8 +110,6 @@ dataValues.QuantityValue = ( function( dv, util ) {
 
 		/**
 		 * Returns the quantity's lower boundary.
-		 *
-		 * @since 0.1
 		 *
 		 * @return {dataValues.DecimalValue|null}
 		 */
@@ -104,8 +120,6 @@ dataValues.QuantityValue = ( function( dv, util ) {
 		/**
 		 * Returns the quantity's upper boundary.
 		 *
-		 * @since 0.1
-		 *
 		 * @return {dataValues.DecimalValue|null}
 		 */
 		getUpperBound: function() {
@@ -114,8 +128,6 @@ dataValues.QuantityValue = ( function( dv, util ) {
 
 		/**
 		 * @inheritdoc
-		 *
-		 * @since 0.1
 		 */
 		equals: function( that ) {
 			if ( !( that instanceof this.constructor ) ) {
@@ -131,8 +143,6 @@ dataValues.QuantityValue = ( function( dv, util ) {
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
-		 *
 		 * @return {Object}
 		 */
 		toJSON: function() {
@@ -147,9 +157,11 @@ dataValues.QuantityValue = ( function( dv, util ) {
 
 	/**
 	 * @inheritdoc
+	 *
+	 * @return {dataValues.QuantityValue}
 	 */
-	QuantityValue.newFromJSON = function( json ) {
-		return new QuantityValue(
+	SELF.newFromJSON = function( json ) {
+		return new SELF(
 			new dv.DecimalValue( json.amount ),
 			json.unit,
 			new dv.DecimalValue( json.upperBound ),
@@ -159,11 +171,10 @@ dataValues.QuantityValue = ( function( dv, util ) {
 
 	/**
 	 * @inheritdoc
+	 * @property {string} [TYPE='quantity']
 	 */
-	QuantityValue.TYPE = 'quantity';
+	SELF.TYPE = 'quantity';
 
-	return QuantityValue;
+	dv.registerDataValue( SELF );
 
 }( dataValues, util ) );
-
-dataValues.registerDataValue( dataValues.QuantityValue );

@@ -16,10 +16,8 @@
 	vp.IntParser = util.inherit( PARENT, {
 		/**
 		 * @inheritdoc
-		 * @since 0.1
 		 *
 		 * @param {string} rawValue
-		 * @return jQuery.Promise
 		 */
 		parse: function( rawValue ) {
 			var deferred = $.Deferred();

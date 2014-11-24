@@ -19,7 +19,7 @@
 	 *
 	 * @param {string|number} value
 	 */
-	var constructor = function( value ) {
+	var SELF = dv.DecimalValue = util.inherit( 'DvDecimalValue', PARENT, function( value ) {
 		if( typeof value === 'number' ) {
 			value = convertToDecimalString( value );
 		}
@@ -27,13 +27,15 @@
 		assertDecimalString( value );
 
 		this._value = value;
-	};
+	}, {
+		/**
+		 * @property {number}
+		 * @private
+		 */
+		_value: null,
 
-	var SELF = dv.DecimalValue = util.inherit( 'DvDecimalValue', PARENT, constructor, {
 		/**
 		 * @inheritdoc
-		 *
-		 * @since 0.1
 		 *
 		 * @return {string}
 		 */
@@ -44,8 +46,6 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
-		 *
 		 * @return {string}
 		 */
 		getValue: function() {
@@ -54,8 +54,6 @@
 
 		/**
 		 * @inheritdoc
-		 *
-		 * @since 0.1
 		 */
 		equals: function( value ) {
 			if ( !( value instanceof this.constructor ) ) {
@@ -68,8 +66,6 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
-		 *
 		 * @return {string}
 		 */
 		toJSON: function() {
@@ -79,6 +75,8 @@
 
 	/**
 	 * @inheritdoc
+	 *
+	 * @return {dataValues.DecimalValue}
 	 */
 	SELF.newFromJSON = function( json ) {
 		return new SELF( json );
@@ -86,6 +84,7 @@
 
 	/**
 	 * @inheritdoc
+	 * @property {string} [TYPE='decimal']
 	 */
 	SELF.TYPE = 'decimal';
 

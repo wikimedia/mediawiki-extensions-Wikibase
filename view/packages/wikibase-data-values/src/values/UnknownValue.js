@@ -1,11 +1,7 @@
 ( function( dv, util ) {
 	'use strict';
 
-	var PARENT = dv.DataValue,
-		constructor = function( value ) {
-			// TODO: validate
-			this._value = value;
-		};
+	var PARENT = dv.DataValue;
 
 	/**
 	 * Constructor for creating a data value holding a value of unknown nature.
@@ -17,16 +13,21 @@
 	 *
 	 * @constructor
 	 *
-	 * @param {string} value
+	 * @param {*} value
 	 */
-	dv.UnknownValue = util.inherit( 'DvUnknownValue', PARENT, constructor, {
+	var SELF = dv.UnknownValue = util.inherit( 'DvUnknownValue', PARENT, function( value ) {
+		// TODO: validate
+		this._value = value;
+	}, {
+		/**
+		 * @property {*}
+		 */
+		_value: null,
 
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
-		 *
-		 * @return number
+		 * @return {number}
 		 */
 		getSortKey: function() {
 			return 0;
@@ -35,22 +36,16 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
-		 *
-		 * @return string
+		 * @return {*}
 		 */
 		getValue: function() {
 			return this._value;
 		},
 
 		/**
+		 * Since the type of value is not known, it's not possible to perform a comparison always
+		 * correct and meaningful. Therefore, false negatives might be returned.
 		 * @inheritdoc
-		 *
-		 * Since the type of value is not known, it's not possible to perform
-		 * an always correct and always meaningful comparison. Therefore false
-		 * negatives might be returned.
-		 *
-		 * @since 0.1
 		 */
 		equals: function( value ) {
 			if ( !( value instanceof dv.UnknownValue ) ) {
@@ -63,7 +58,7 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @since 0.1
+		 * @return {*}
 		 */
 		toJSON: function() {
 			return this._value;
@@ -71,18 +66,21 @@
 
 	} );
 
-	dv.UnknownValue.newFromJSON = function( json ) {
-		return new dv.UnknownValue( json );
+	/**
+	 * @inheritdoc
+	 *
+	 * @return {dataValues.UnknownValue}
+	 */
+	SELF.newFromJSON = function( json ) {
+		return new SELF( json );
 	};
 
 	/**
 	 * @inheritdoc
+	 * @property {string} [TYPE='unknown']
 	 */
-	dv.UnknownValue.TYPE = 'unknown';
+	SELF.TYPE = 'unknown';
 
-	/**
-	 * @inheritdoc
-	 */
-	dv.registerDataValue( dv.UnknownValue );
+	dv.registerDataValue( SELF );
 
 }( dataValues, util ) );

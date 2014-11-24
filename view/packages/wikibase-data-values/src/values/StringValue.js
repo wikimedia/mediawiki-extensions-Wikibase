@@ -1,13 +1,7 @@
 ( function( dv, util ) {
 'use strict';
 
-var PARENT = dv.DataValue,
-	constructor = function( value ) {
-		if( typeof value !== 'string' ) {
-			throw new Error( 'A string value has to be given' );
-		}
-		this._value = value;
-	};
+var PARENT = dv.DataValue;
 
 /**
  * Constructor for creating a data value representing a string.
@@ -21,15 +15,25 @@ var PARENT = dv.DataValue,
  * @constructor
  *
  * @param {string} value
+ *
+ * @throws {Error} if value is not a string.
  */
-dv.StringValue = util.inherit( 'DvStringValue', PARENT, constructor, {
+var SELF = dv.StringValue = util.inherit( 'DvStringValue', PARENT, function( value ) {
+	if( typeof value !== 'string' ) {
+		throw new Error( 'A string value has to be given' );
+	}
+	this._value = value;
+}, {
+	/**
+	 * @property {string}
+	 * @private
+	 */
+	_value: null,
 
 	/**
 	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return string
+	 * @return {string}
 	 */
 	getSortKey: function() {
 		return this._value;
@@ -38,9 +42,7 @@ dv.StringValue = util.inherit( 'DvStringValue', PARENT, constructor, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return string
+	 * @return {string}
 	 */
 	getValue: function() {
 		return this._value;
@@ -48,8 +50,6 @@ dv.StringValue = util.inherit( 'DvStringValue', PARENT, constructor, {
 
 	/**
 	 * @inheritdoc
-	 *
-	 * @since 0.1
 	 */
 	equals: function( value ) {
 		if ( !( value instanceof dv.StringValue ) ) {
@@ -62,9 +62,7 @@ dv.StringValue = util.inherit( 'DvStringValue', PARENT, constructor, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return string
+	 * @return {string}
 	 */
 	toJSON: function() {
 		return this._value;
@@ -74,16 +72,19 @@ dv.StringValue = util.inherit( 'DvStringValue', PARENT, constructor, {
 
 /**
  * @inheritdoc
+ *
+ * @return {dataValues.StringValue}
  */
-dv.StringValue.newFromJSON = function( json ) {
-	return new dv.StringValue( json );
+SELF.newFromJSON = function( json ) {
+	return new SELF( json );
 };
 
 /**
  * @inheritdoc
+ * @property {string} [TYPE='string']
  */
-dv.StringValue.TYPE = 'string';
+SELF.TYPE = 'string';
 
-dv.registerDataValue( dv.StringValue );
+dv.registerDataValue( SELF );
 
 }( dataValues, util ) );
