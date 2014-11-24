@@ -18,6 +18,7 @@
 	$.extend( SELF.prototype, {
 		/**
 		 * Constructs the original object from the provided serialization.
+		 * @abstract
 		 *
 		 * @param {Object} serialization
 		 */

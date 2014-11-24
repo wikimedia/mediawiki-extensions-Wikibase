@@ -6,7 +6,7 @@ var MODULE = wb.serialization,
 
 /**
  * @class wikibase.serialization.ItemDeserializer
- * @extends {wikibase.serialization.Deserializer}
+ * @extends wikibase.serialization.Deserializer
  * @since 2.0
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >

@@ -6,7 +6,7 @@ var MODULE = wb.serialization,
 
 /**
  * @class wikibase.serialization.EntityDeserializer
- * @extends {wikibase.serialization.Deserializer}
+ * @extends wikibase.serialization.Deserializer
  * @since 1.0
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
@@ -24,6 +24,7 @@ MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, functi
 }, {
 	/**
 	 * @property {wikibase.serialization.StrategyProvider}
+	 * @private
 	 */
 	_strategyProvider: null,
 

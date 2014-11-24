@@ -18,6 +18,7 @@
 	$.extend( SELF.prototype, {
 		/**
 		 * Returns the serialized form of some object.
+		 * @abstract
 		 *
 		 * @param {Object} object
 		 */
