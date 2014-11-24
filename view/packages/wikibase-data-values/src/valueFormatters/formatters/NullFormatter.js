@@ -19,7 +19,7 @@
 	 */
 	vf.NullFormatter = util.inherit( PARENT, function() {}, {
 		/**
-		 * @see valueFormatters.ValueFormatter.format
+		 * @inheritdoc
 		 */
 		format: function( dataValue ) {
 			var deferred = $.Deferred();

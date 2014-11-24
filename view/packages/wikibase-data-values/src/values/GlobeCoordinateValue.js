@@ -24,7 +24,7 @@
 	 */
 	var SELF = dv.GlobeCoordinateValue = util.inherit( 'DvGlobeCoordinateValue', PARENT, constructor, {
 		/**
-		 * @see dv.DataValue.getSortKey
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -35,7 +35,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.getValue
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -46,7 +46,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.equals
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 */
@@ -58,7 +58,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.toJSON
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 */
@@ -76,7 +76,7 @@
 	} );
 
 	/**
-	 * @see dv.DataValue.newFromJSON
+	 * @inheritdoc
 	 */
 	SELF.newFromJSON = function( json ) {
 		var gc = new GlobeCoordinate( {
@@ -91,7 +91,7 @@
 	};
 
 	/**
-	 * @see dv.DataValue.TYPE
+	 * @inheritdoc
 	 */
 	SELF.TYPE = 'globecoordinate';
 

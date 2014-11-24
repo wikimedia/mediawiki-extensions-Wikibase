@@ -25,7 +25,7 @@ var PARENT = dv.DataValue,
 dv.MonolingualTextValue = util.inherit( 'DvMonolingualTextValue', PARENT, constructor, {
 
 	/**
-	 * @see dv.DataValue.getSortKey
+	 * @inheritdoc
 	 *
 	 * @since 0.1
 	 *
@@ -36,7 +36,7 @@ dv.MonolingualTextValue = util.inherit( 'DvMonolingualTextValue', PARENT, constr
 	},
 
 	/**
-	 * @see dv.DataValue.getValue
+	 * @inheritdoc
 	 *
 	 * @since 0.1
 	 *
@@ -47,7 +47,7 @@ dv.MonolingualTextValue = util.inherit( 'DvMonolingualTextValue', PARENT, constr
 	},
 
 	/**
-	 * @see dv.DataValue.equals
+	 * @inheritdoc
 	 *
 	 * @since 0.1
 	 */
@@ -60,7 +60,7 @@ dv.MonolingualTextValue = util.inherit( 'DvMonolingualTextValue', PARENT, constr
 	},
 
 	/**
-	 * @see dv.DataValue.toJSON
+	 * @inheritdoc
 	 *
 	 * @since 0.1
 	 */

@@ -14,7 +14,7 @@
 	 */
 	vf.StringFormatter = util.inherit( PARENT, {
 		/**
-		 * @see valueFormatters.ValueFormatter.format
+		 * @inheritdoc
 		 * @since 0.1
 		 *
 		 * @param {dataValues.StringValue} dataValue

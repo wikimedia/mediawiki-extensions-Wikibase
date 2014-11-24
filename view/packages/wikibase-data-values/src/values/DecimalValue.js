@@ -111,7 +111,7 @@ dataValues.DecimalValue = ( function( dv, util ) {
 
 	var DecimalValue = util.inherit( 'DvDecimalValue', PARENT, constructor, {
 		/**
-		 * @see dv.DataValue.getSortKey
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -122,7 +122,7 @@ dataValues.DecimalValue = ( function( dv, util ) {
 		},
 
 		/**
-		 * @see dv.DataValue.getValue
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -133,7 +133,7 @@ dataValues.DecimalValue = ( function( dv, util ) {
 		},
 
 		/**
-		 * @see dv.DataValue.equals
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 */
@@ -146,7 +146,7 @@ dataValues.DecimalValue = ( function( dv, util ) {
 		},
 
 		/**
-		 * @see dv.DataValue.toJSON
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -159,14 +159,14 @@ dataValues.DecimalValue = ( function( dv, util ) {
 	} );
 
 	/**
-	 * @see dv.DataValue.newFromJSON
+	 * @inheritdoc
 	 */
 	DecimalValue.newFromJSON = function( json ) {
 		return new DecimalValue( json );
 	};
 
 	/**
-	 * @see dv.DataValue.TYPE
+	 * @inheritdoc
 	 */
 	DecimalValue.TYPE = 'decimal';
 

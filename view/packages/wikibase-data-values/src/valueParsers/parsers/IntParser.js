@@ -14,7 +14,7 @@
 	 */
 	vp.IntParser = util.inherit( PARENT, {
 		/**
-		 * @see valueParsers.ValueParser.parse
+		 * @inheritdoc
 		 * @since 0.1
 		 *
 		 * @param {string} rawValue

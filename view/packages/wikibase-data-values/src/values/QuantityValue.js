@@ -45,7 +45,7 @@ dataValues.QuantityValue = ( function( dv, util ) {
 
 	var QuantityValue = util.inherit( 'DvQuantityValue', PARENT, constructor, {
 		/**
-		 * @see dv.DataValue.getSortKey
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -56,8 +56,7 @@ dataValues.QuantityValue = ( function( dv, util ) {
 		},
 
 		/**
-		 * Returns a self-reference.
-		 * @see dv.DataValue.getValue
+		 * @inheritdoc
 		 * @since 0.1
 		 *
 		 * @return dataValues.QuantityValue
@@ -111,7 +110,7 @@ dataValues.QuantityValue = ( function( dv, util ) {
 		},
 
 		/**
-		 * @see dv.DataValue.equals
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 */
@@ -127,7 +126,7 @@ dataValues.QuantityValue = ( function( dv, util ) {
 		},
 
 		/**
-		 * @see dv.DataValue.toJSON
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -144,7 +143,7 @@ dataValues.QuantityValue = ( function( dv, util ) {
 	} );
 
 	/**
-	 * @see dv.DataValue.newFromJSON
+	 * @inheritdoc
 	 */
 	QuantityValue.newFromJSON = function( json ) {
 		return new QuantityValue(
@@ -156,7 +155,7 @@ dataValues.QuantityValue = ( function( dv, util ) {
 	};
 
 	/**
-	 * @see dv.DataValue.TYPE
+	 * @inheritdoc
 	 */
 	QuantityValue.TYPE = 'quantity';
 

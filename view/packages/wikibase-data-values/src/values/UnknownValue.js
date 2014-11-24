@@ -21,7 +21,7 @@
 	dv.UnknownValue = util.inherit( 'DvUnknownValue', PARENT, constructor, {
 
 		/**
-		 * @see dv.DataValue.getSortKey
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -32,7 +32,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.getValue
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -43,7 +43,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.equals
+		 * @inheritdoc
 		 *
 		 * Since the type of value is not known, it's not possible to perform
 		 * an always correct and always meaningful comparison. Therefore false
@@ -60,7 +60,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.toJSON
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 */
@@ -75,12 +75,12 @@
 	};
 
 	/**
-	 * @see dv.DataValue.newFromJSON
+	 * @inheritdoc
 	 */
 	dv.UnknownValue.TYPE = 'unknown';
 
 	/**
-	 * @see dv.DataValue.TYPE
+	 * @inheritdoc
 	 */
 	dv.registerDataValue( dv.UnknownValue );
 

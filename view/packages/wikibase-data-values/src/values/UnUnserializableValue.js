@@ -36,7 +36,7 @@
 	 */
 	var SELF = dv.UnUnserializableValue = util.inherit( 'DvUnUnserializableValue', PARENT, constructor, {
 		/**
-		 * @see dv.DataValue.getSortKey
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -47,7 +47,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.getValue
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -90,7 +90,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.equals
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 */
@@ -100,7 +100,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.toJSON
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 */
@@ -111,7 +111,7 @@
 	} );
 
 	/**
-	 * @see dv.DataValue.newFromJSON
+	 * @inheritdoc
 	 */
 	SELF.newFromJSON = function( json ) {
 		// TODO
@@ -119,7 +119,7 @@
 	};
 
 	/**
-	 * @see dv.DataValue.TYPE
+	 * @inheritdoc
 	 */
 	SELF.TYPE = 'ununserializable';
 

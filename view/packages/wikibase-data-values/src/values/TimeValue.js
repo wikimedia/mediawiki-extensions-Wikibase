@@ -22,7 +22,7 @@
 	 */
 	var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, constructor, {
 		/**
-		 * @see dv.DataValue.getSortKey
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -33,7 +33,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.getValue
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
@@ -44,7 +44,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.equals
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 */
@@ -56,7 +56,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.toJSON
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 */
@@ -76,7 +76,7 @@
 	} );
 
 	/**
-	 * @see dv.DataValue.newFromJSON
+	 * @inheritdoc
 	 */
 	SELF.newFromJSON = function( json ) {
 		// TODO: not good to do it this way, there are some lost information, e.g. before/after and
@@ -117,7 +117,7 @@
 	};
 
 	/**
-	 * @see dv.DataValue.TYPE
+	 * @inheritdoc
 	 */
 	SELF.TYPE = 'time';
 

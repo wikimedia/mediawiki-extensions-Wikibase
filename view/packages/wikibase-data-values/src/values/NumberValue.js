@@ -20,7 +20,7 @@
 	 */
 	dv.NumberValue = util.inherit( 'DvNumberValue', PARENT, constructor, {
 		/**
-		 * @see dv.DataValue.getSortKey
+		 * @inheritdoc
 		 *
 		 * @return Number
 		 */
@@ -29,7 +29,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.getValue
+		 * @inheritdoc
 		 *
 		 * @return Number
 		 */
@@ -38,7 +38,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.equals
+		 * @inheritdoc
 		 */
 		equals: function( value ) {
 			if ( !( value instanceof dv.NumberValue ) ) {
@@ -49,7 +49,7 @@
 		},
 
 		/**
-		 * @see dv.DataValue.toJSON
+		 * @inheritdoc
 		 */
 		toJSON: function() {
 			return this._value;
@@ -57,14 +57,14 @@
 	} );
 
 	/**
-	 * @see dv.DataValue.newFromJSON
+	 * @inheritdoc
 	 */
 	dv.NumberValue.newFromJSON = function( json ) {
 		return new dv.NumberValue( json );
 	};
 
 	/**
-	 * @see dv.DataValue.TYPE
+	 * @inheritdoc
 	 */
 	dv.NumberValue.TYPE = 'number';
 

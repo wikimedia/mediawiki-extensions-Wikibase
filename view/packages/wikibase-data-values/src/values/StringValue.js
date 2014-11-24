@@ -24,7 +24,7 @@ var PARENT = dv.DataValue,
 dv.StringValue = util.inherit( 'DvStringValue', PARENT, constructor, {
 
 	/**
-	 * @see dv.DataValue.getSortKey
+	 * @inheritdoc
 	 *
 	 * @since 0.1
 	 *
@@ -35,7 +35,7 @@ dv.StringValue = util.inherit( 'DvStringValue', PARENT, constructor, {
 	},
 
 	/**
-	 * @see dv.DataValue.getValue
+	 * @inheritdoc
 	 *
 	 * @since 0.1
 	 *
@@ -46,7 +46,7 @@ dv.StringValue = util.inherit( 'DvStringValue', PARENT, constructor, {
 	},
 
 	/**
-	 * @see dv.DataValue.equals
+	 * @inheritdoc
 	 *
 	 * @since 0.1
 	 */
@@ -59,7 +59,7 @@ dv.StringValue = util.inherit( 'DvStringValue', PARENT, constructor, {
 	},
 
 	/**
-	 * @see dv.DataValue.toJSON
+	 * @inheritdoc
 	 *
 	 * @since 0.1
 	 *
@@ -72,14 +72,14 @@ dv.StringValue = util.inherit( 'DvStringValue', PARENT, constructor, {
 } );
 
 /**
- * @see dv.DataValue.newFromJSON
+ * @inheritdoc
  */
 dv.StringValue.newFromJSON = function( json ) {
 	return new dv.StringValue( json );
 };
 
 /**
- * @see dv.DataValue.TYPE
+ * @inheritdoc
  */
 dv.StringValue.TYPE = 'string';
 

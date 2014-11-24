@@ -18,7 +18,7 @@
 	vp.NullParser = util.inherit( PARENT, constructor, {
 
 		/**
-		 * @see valueParsers.ValueParser.parse
+		 * @inheritdoc
 		 *
 		 * @since 0.1
 		 *
