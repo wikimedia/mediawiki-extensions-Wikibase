@@ -92,6 +92,7 @@ SELF.TYPE = 'decimal';
 
 /**
  * Converts a number to a string confirming to the DecimalValue definition.
+ * @ignore
  *
  * @param {number} number
  * @return {string}
@@ -113,6 +114,7 @@ function convertToDecimalString( number ) {
 
 /**
  * Checks whether a string conforms to the DecimalValue definition.
+ * @ignore
  *
  * @param {string} decimalString
  *
@@ -137,6 +139,7 @@ function assertDecimalString( decimalString ) {
 
 /**
  * Converts a number of a string. This involves resolving the exponent (if any).
+ * @ignore
  *
  * @param {number} number
  * @return {string}

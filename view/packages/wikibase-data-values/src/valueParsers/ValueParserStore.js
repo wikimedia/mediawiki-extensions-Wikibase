@@ -116,6 +116,8 @@ $.extend( SELF.prototype, {
 } );
 
 /**
+ * @ignore
+ *
  * @param {Function} Parser
  *
  * @throws {Error} if the provided argument is not a valueParsers.ValueParser constructor.

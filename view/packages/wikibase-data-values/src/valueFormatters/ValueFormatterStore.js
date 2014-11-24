@@ -117,6 +117,8 @@ $.extend( SELF.prototype, {
 } );
 
 /**
+ * @ignore
+ *
  * @param {Function} Formatter
  *
  * @throws {Error} if the provided argument is not a valueFormatters.ValueFormatter constructor.

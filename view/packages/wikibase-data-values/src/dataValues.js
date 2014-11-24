@@ -13,6 +13,7 @@ this.dataValues = new ( function Dv() {
 
 	/**
 	 * Returns the constructor associated with the provided DataValue type.
+	 * @ignore
 	 *
 	 * @param {string} dataValueType
 	 * @return {dataValues.DataValue}
