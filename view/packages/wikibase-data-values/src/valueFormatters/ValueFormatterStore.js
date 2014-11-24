@@ -23,17 +23,17 @@
 		/**
 		 * Default formatter constructor to be returned when no formatter is registered for a
 		 * specific purpose.
-		 * @type {Function|null}
+		 * @property {Function|null}
 		 */
 		_DefaultFormatter: null,
 
 		/**
-		 * @type {Object}
+		 * @property {Object}
 		 */
 		_formattersForDataTypes: null,
 
 		/**
-		 * @type {Object}
+		 * @property {Object}
 		 */
 		_formattersForDataValueTypes: null,
 

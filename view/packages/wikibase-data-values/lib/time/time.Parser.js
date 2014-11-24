@@ -36,7 +36,7 @@ time.Parser = ( function( time ) {
 
 	/**
 	 * Parser settings
-	 * @type {Object}
+	 * @property {Object}
 	 */
 	Parser.prototype._settings = null;
 

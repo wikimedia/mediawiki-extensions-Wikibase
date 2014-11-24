@@ -23,17 +23,17 @@
 		/**
 		 * Default parser constructor to be returned when no parser is registered for a specific
 		 * purpose.
-		 * @type {Function|null}
+		 * @property {Function|null}
 		 */
 		_DefaultParser: null,
 
 		/**
-		 * @type {Object}
+		 * @property {Object}
 		 */
 		_parsersForDataTypes: null,
 
 		/**
-		 * @type {Object}
+		 * @property {Object}
 		 */
 		_parsersForDataValueTypes: null,
 

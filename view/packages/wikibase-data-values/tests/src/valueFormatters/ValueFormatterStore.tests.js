@@ -144,7 +144,7 @@ define( [
 
 	/**
 	 * Array of test definitions used as provider for "valueFormatterStoreRegistrationTest".
-	 * @type {Object[]}
+	 * @property {Object[]}
 	 */
 	var valueFormatterStoreRegistrationTestCases = [
 		{

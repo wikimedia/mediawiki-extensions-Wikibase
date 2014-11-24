@@ -55,25 +55,25 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 
 		/**
 		 * Globe URI
-		 * @type {string}
+		 * @property {string}
 		 */
 		_globe: null,
 
 		/**
 		 * Latitude (decimal)
-		 * @type {number}
+		 * @property {number}
 		 */
 		_latitude: null,
 
 		/**
 		 * Longitude (decimal)
-		 * @type {number}
+		 * @property {number}
 		 */
 		_longitude: null,
 
 		/**
 		 * Precision
-		 * @type {number}
+		 * @property {number}
 		 */
 		_precision: null,
 

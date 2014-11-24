@@ -77,7 +77,7 @@ this.time = ( function() { // 'this' is global scope, e.g. 'window' in the brows
 	/**
 	 * Factors correlating to settings.outputprecision. These are use when detecting and
 	 * re-converting input specified in one of the formats specified in outputprecisions.
-	 * @type {number[]}
+	 * @property {number[]}
 	 */
 	settings.outputprecisionFactors = [
 		1000000000,

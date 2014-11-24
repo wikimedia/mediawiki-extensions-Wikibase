@@ -20,7 +20,7 @@
 	$.extend( SELF.prototype, {
 		/**
 		 * Formatter options.
-		 * @type {Object}
+		 * @property {Object}
 		 */
 		_options: null,
 

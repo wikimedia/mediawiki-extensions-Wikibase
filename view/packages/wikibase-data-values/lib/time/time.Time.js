@@ -283,7 +283,7 @@ time.Time = ( function( time, $ ) {
 
 	/**
 	 * All possible precisions of Time.
-	 * @type {Object} holding fields of type number
+	 * @property {Object}
 	 */
 	Time.PRECISION = {
 		GY: 0, // Gigayear
@@ -339,7 +339,7 @@ time.Time = ( function( time, $ ) {
 
 	/**
 	 * All supported calendar models
-	 * @type {Object}
+	 * @property {Object}
 	 */
 	Time.CALENDAR = {
 		GREGORIAN: 'Gregorian',

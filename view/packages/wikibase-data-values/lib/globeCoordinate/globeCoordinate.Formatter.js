@@ -58,7 +58,7 @@ globeCoordinate.Formatter = ( function( globeCoordinate ) {
 
 		/**
 		 * Options
-		 * @type {Object}
+		 * @property {Object}
 		 */
 		_options: null,
 

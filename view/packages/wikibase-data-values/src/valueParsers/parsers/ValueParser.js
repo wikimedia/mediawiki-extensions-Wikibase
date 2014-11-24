@@ -20,7 +20,7 @@
 	$.extend( SELF.prototype, {
 		/**
 		 * Parser options.
-		 * @type {Object}
+		 * @property {Object}
 		 */
 		_options: {},
 

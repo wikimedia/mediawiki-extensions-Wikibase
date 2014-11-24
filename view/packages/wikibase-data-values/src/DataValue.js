@@ -21,7 +21,7 @@ var SELF = dv.DataValue = function DvDataValue() {
 /**
  * Type of the DataValue. A static definition of the type like this has to be defined for all
  * DataValue implementations.
- * @type String
+ * @property {string}
  */
 SELF.TYPE = null;
 
