@@ -54,6 +54,7 @@ var SELF = wb.datamodel.List = util.inherit(
 
 	/**
 	 * @property {number}
+	 * @readonly
 	 */
 	length: 0,
 

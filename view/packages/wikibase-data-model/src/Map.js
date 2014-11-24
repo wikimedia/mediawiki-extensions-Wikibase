@@ -48,6 +48,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @property {number}
+	 * @readonly
 	 */
 	length: 0,
 
