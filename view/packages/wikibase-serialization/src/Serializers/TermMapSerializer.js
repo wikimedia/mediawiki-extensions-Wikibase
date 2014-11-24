@@ -19,6 +19,8 @@ MODULE.TermMapSerializer = util.inherit( 'WbTermMapSerializer', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.TermMap} termMap
 	 * @return {Object}
+	 *
+	 * @throws {Error} if termMap is not a TermMap instance.
 	 */
 	serialize: function( termMap ) {
 		if( !( termMap instanceof wb.datamodel.TermMap ) ) {

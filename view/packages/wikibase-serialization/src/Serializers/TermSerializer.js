@@ -19,6 +19,8 @@ MODULE.TermSerializer = util.inherit( 'WbTermSerializer', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.Term} term
 	 * @return {Object}
+	 *
+	 * @throws {Error} if term is not a Term instance.
 	 */
 	serialize: function( term ) {
 		if( !( term instanceof wb.datamodel.Term ) ) {

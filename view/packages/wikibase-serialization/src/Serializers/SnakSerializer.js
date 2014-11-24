@@ -19,6 +19,8 @@ MODULE.SnakSerializer = util.inherit( 'WbSnakSerializer', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.Snak} snak
 	 * @return {Object}
+	 *
+	 * @throws {Error} if snak is not a Snak instance.
 	 */
 	serialize: function( snak ) {
 		if( !( snak instanceof wb.datamodel.Snak ) ) {

@@ -19,6 +19,8 @@ MODULE.SnakDeserializer = util.inherit( 'WbSnakDeserializer', PARENT, {
 	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.Snak}
+	 *
+	 * @throws {Error} if no constructor for the snak type detected exists.
 	 */
 	deserialize: function( serialization ) {
 		if( serialization.snaktype === 'novalue' ) {

@@ -18,6 +18,8 @@ MODULE.ItemDeserializer = util.inherit( 'WbItemDeserializer', PARENT, {
 	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.Item}
+	 *
+	 * @throws {Error} if serialization does not resolve to a serialized Item.
 	 */
 	deserialize: function( serialization ) {
 		if( serialization.type !== wb.datamodel.Item.TYPE ) {

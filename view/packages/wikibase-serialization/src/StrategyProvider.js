@@ -25,6 +25,8 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {*} strategy
 	 * @param {*} key
+	 *
+	 * @throws {Error} if a strategy for the provided key is registered already.
 	 */
 	registerStrategy: function( strategy, key ) {
 		if( this._hasStrategyFor( key ) ) {
@@ -55,6 +57,8 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {*} key
 	 * @return {*}
+	 *
+	 * @throws {Error} if no strategy is registered for the key.
 	 */
 	getStrategyFor: function( key ) {
 		for( var i = 0; i < this._strategies.length; i++ ) {

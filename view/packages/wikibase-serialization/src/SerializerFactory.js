@@ -47,6 +47,10 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {Object|Function} objectOrConstructor
 	 * @return {wikibase.serialization.Serializer}
+	 *
+	 * @throws {Error} if argument is omitted.
+	 * @throws {Error} if argument is not a constructor or the object constructor could not be
+	 *         determined.
 	 */
 	newSerializerFor: function( objectOrConstructor ) {
 		if( !objectOrConstructor ) {
@@ -67,6 +71,9 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {Function} Serializer
 	 * @param {Function} Constructor
+	 *
+	 * @throws {Error} if serializer constructor does not inherit from Serializer base class.
+	 * @throws {Error} if constructor is not a function.
 	 */
 	registerSerializer: function( Serializer, Constructor ) {
 		if( !$.isFunction( Constructor ) ) {

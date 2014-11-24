@@ -19,6 +19,8 @@ MODULE.SiteLinkSerializer = util.inherit( 'WbSiteLinkSerializer', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.SiteLink} siteLink
 	 * @return {Object}
+	 *
+	 * @throws {Error} if siteLink is not a SiteLink instance.
 	 */
 	serialize: function( siteLink ) {
 		if( !( siteLink instanceof wb.datamodel.SiteLink ) ) {

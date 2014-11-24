@@ -19,6 +19,8 @@ MODULE.MultiTermMapSerializer = util.inherit( 'WbMultiTermMapSerializer', PARENT
 	 *
 	 * @param {wikibase.datamodel.MultiTermMap} multiTermMap
 	 * @return {Object}
+	 *
+	 * @throws {Error} if multiTermMap is not a MultiTermMap instance.
 	 */
 	serialize: function( multiTermMap ) {
 		if( !( multiTermMap instanceof wb.datamodel.MultiTermMap ) ) {

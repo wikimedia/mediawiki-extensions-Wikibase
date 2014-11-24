@@ -41,6 +41,8 @@ MODULE.EntitySerializer = util.inherit( 'WbEntitySerializer', PARENT, function()
 	 *
 	 * @param {wikibase.datamodel.Entity} entity
 	 * @return {Object}
+	 *
+	 * @throws {Error} if entity is not an Entity instance.
 	 */
 	serialize: function( entity ) {
 		if( !( entity instanceof wb.datamodel.Entity ) ) {

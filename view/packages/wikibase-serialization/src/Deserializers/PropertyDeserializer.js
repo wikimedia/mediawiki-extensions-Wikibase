@@ -18,6 +18,8 @@ MODULE.PropertyDeserializer = util.inherit( 'WbPropertyDeserializer', PARENT, {
 	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.Property}
+	 *
+	 * @throws {Error} if serialization does not resolve to a serialized Property.
 	 */
 	deserialize: function( serialization ) {
 		if( serialization.type !== wb.datamodel.Property.TYPE ) {

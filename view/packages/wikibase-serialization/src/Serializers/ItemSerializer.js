@@ -19,6 +19,8 @@ MODULE.ItemSerializer = util.inherit( 'WbItemSerializer', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.Item} item
 	 * @return {Object}
+	 *
+	 * @throws {Error} if item is not an Item instance.
 	 */
 	serialize: function( item ) {
 		if( !( item instanceof wb.datamodel.Item ) ) {

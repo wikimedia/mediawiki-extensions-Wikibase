@@ -19,6 +19,8 @@ MODULE.StatementSerializer = util.inherit( 'WbStatementSerializer', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.Statement} statement
 	 * @return {Object}
+	 *
+	 * @throws {Error} if statement is not a Statement instance.
 	 */
 	serialize: function( statement ) {
 		if( !( statement instanceof wb.datamodel.Statement ) ) {

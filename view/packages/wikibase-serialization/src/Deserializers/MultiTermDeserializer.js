@@ -18,6 +18,8 @@ MODULE.MultiTermDeserializer = util.inherit( 'WbMultiTermDeserializer', PARENT, 
 	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.MultiTerm}
+	 *
+	 * @throws {Error} if serialization is empty.
 	 */
 	deserialize: function( serialization ) {
 		if( !serialization.length ) {

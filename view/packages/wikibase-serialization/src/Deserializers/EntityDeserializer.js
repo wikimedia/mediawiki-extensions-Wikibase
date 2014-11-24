@@ -40,6 +40,8 @@ MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, functi
 	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.Entity}
+	 *
+	 * @throws {Error} if unable to detect the entity type from the serialization.
 	 */
 	deserialize: function( serialization ) {
 		if( !serialization.type || typeof serialization.type !== 'string' ) {

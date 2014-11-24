@@ -19,6 +19,8 @@ MODULE.PropertySerializer = util.inherit( 'WbPropertySerializer', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.Property} property
 	 * @return {Object}
+	 *
+	 * @throws {Error} if property is not a Property instance.
 	 */
 	serialize: function( property ) {
 		if( !( property instanceof wb.datamodel.Property ) ) {

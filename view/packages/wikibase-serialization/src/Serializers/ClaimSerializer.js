@@ -19,6 +19,8 @@ MODULE.ClaimSerializer = util.inherit( 'WbClaimSerializer', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.Claim} claim
 	 * @return {Object}
+	 *
+	 * @throws {Error} if claim is not a Claim instance.
 	 */
 	serialize: function( claim ) {
 		if( !( claim instanceof wb.datamodel.Claim ) ) {

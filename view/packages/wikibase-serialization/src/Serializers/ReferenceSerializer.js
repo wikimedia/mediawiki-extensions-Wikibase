@@ -19,6 +19,8 @@ MODULE.ReferenceSerializer = util.inherit( 'WbReferenceSerializer', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.Reference} reference
 	 * @return {Object}
+	 *
+	 * @throws {Error} if reference is not a Reference instance.
 	 */
 	serialize: function( reference ) {
 		if( !( reference instanceof wb.datamodel.Reference ) ) {

@@ -19,6 +19,8 @@ MODULE.ReferenceListSerializer = util.inherit( 'WbReferenceLisSerializer', PAREN
 	 *
 	 * @param {wikibase.datamodel.ReferenceList} referenceList
 	 * @return {Object[]}
+	 *
+	 * @throws {Error} if referenceList is not a ReferenceList instance.
 	 */
 	serialize: function( referenceList ) {
 		if( !( referenceList instanceof wb.datamodel.ReferenceList ) ) {

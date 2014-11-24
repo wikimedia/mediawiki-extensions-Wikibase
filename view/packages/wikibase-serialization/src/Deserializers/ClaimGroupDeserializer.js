@@ -18,6 +18,8 @@ MODULE.ClaimGroupDeserializer = util.inherit( 'WbClaimGroupDeserializer', PARENT
 	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.ClaimGroup}
+	 *
+	 * @throws {Error} if serialization is an empty object.
 	 */
 	deserialize: function( serialization ) {
 		if( $.isEmptyObject( serialization ) ) {

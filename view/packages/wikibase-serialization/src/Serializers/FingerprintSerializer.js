@@ -19,6 +19,8 @@ MODULE.FingerprintSerializer = util.inherit( 'WbFingerprintSerializer', PARENT, 
 	 *
 	 * @param {wikibase.datamodel.Fingerprint} fingerprint
 	 * @return {Object}
+	 *
+	 * @throws {Error} if fingerprint is not a Fingerprint instance.
 	 */
 	serialize: function( fingerprint ) {
 		if( !( fingerprint instanceof wb.datamodel.Fingerprint ) ) {

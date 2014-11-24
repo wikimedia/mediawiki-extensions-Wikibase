@@ -19,6 +19,8 @@ MODULE.StatementGroupSerializer = util.inherit( 'WbStatementGroupSerializer', PA
 	 *
 	 * @param {wikibase.datamodel.StatementGroup} statementGroup
 	 * @return {Object}
+	 *
+	 * @throws {Error} if statementGroup is not a StatementGroup instance.
 	 */
 	serialize: function( statementGroup ) {
 		if( !( statementGroup instanceof wb.datamodel.StatementGroup ) ) {

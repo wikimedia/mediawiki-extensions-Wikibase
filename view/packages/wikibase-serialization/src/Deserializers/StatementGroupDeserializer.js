@@ -18,6 +18,8 @@ MODULE.StatementGroupDeserializer = util.inherit( 'WbStatementGroupDeserializer'
 	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.StatementGroup}
+	 *
+	 * @throws {Error} if serialization is an empty object.
 	 */
 	deserialize: function( serialization ) {
 		if( $.isEmptyObject( serialization ) ) {

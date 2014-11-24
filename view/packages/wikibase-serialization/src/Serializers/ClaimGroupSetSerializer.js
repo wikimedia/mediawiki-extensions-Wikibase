@@ -19,6 +19,8 @@ MODULE.ClaimGroupSetSerializer = util.inherit( 'WbClaimGroupSetSerializer', PARE
 	 *
 	 * @param {wikibase.datamodel.ClaimGroupSet} claimGroupSet
 	 * @return {Object}
+	 *
+	 * @throws {Error} if claimGroupSet is not a ClaimGroupSet instance.
 	 */
 	serialize: function( claimGroupSet ) {
 		if( !( claimGroupSet instanceof wb.datamodel.ClaimGroupSet ) ) {

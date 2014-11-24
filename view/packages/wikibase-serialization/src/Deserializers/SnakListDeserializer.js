@@ -20,6 +20,11 @@ MODULE.SnakListDeserializer = util.inherit( 'WbSnakListDeserializer', PARENT, {
 	 * @param {Object} serialization
 	 * @param {string[]} [order]
 	 * @return {wikibase.datamodel.SnakList}
+	 *
+	 * @throws {Error} if the order parameter is provided but the property id of a snak
+	 *         serialization is no represented in the order.
+	 * @throws {Error} if the order parameter is provided but no snak exists for a property
+	 *         represented in the order.
 	 */
 	deserialize: function( serialization, order ) {
 		var snakList = new wb.datamodel.SnakList();

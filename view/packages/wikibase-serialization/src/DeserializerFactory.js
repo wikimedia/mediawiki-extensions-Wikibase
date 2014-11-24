@@ -47,6 +47,8 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {Function} Constructor
 	 * @return {wikibase.serialization.Deserializer}
+	 *
+	 * @throws {Error} if constructor is not a function.
 	 */
 	newDeserializerFor: function( Constructor ) {
 		if( !$.isFunction( Constructor ) ) {
@@ -59,6 +61,9 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {Function} Deserializer
 	 * @param {Function} Constructor
+	 *
+	 * @throws {Error} if deserializer constructor does not inherit from Deserializer base class.
+	 * @throws {Error} if constructor is not a function.
 	 */
 	registerDeserializer: function( Deserializer, Constructor ) {
 		if( !$.isFunction( Constructor ) ) {
