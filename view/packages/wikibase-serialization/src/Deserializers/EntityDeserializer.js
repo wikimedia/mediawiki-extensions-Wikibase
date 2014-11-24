@@ -36,7 +36,7 @@ MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, functi
 	},
 
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.Entity}
 	 */

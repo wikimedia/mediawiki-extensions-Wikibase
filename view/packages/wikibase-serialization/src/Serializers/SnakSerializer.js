@@ -15,7 +15,7 @@ var MODULE = wb.serialization,
  */
 MODULE.SnakSerializer = util.inherit( 'WbSnakSerializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Serializer.serialize
+	 * @inheritdoc
 	 *
 	 * @param {wikibase.datamodel.Snak} snak
 	 * @return {Object}

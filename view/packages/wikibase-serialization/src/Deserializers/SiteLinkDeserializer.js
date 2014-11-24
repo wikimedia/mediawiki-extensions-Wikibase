@@ -15,7 +15,7 @@ var MODULE = wb.serialization,
  */
 MODULE.SiteLinkDeserializer = util.inherit( 'WbSiteLinkDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @param {Object} serialization
 	 * @return {wikibase.datamodel.SiteLink}

@@ -16,7 +16,7 @@ var MockEntitySerializer = util.inherit(
 	wb.serialization.Serializer,
 {
 	/**
-	 * @see wikibase.serialization.Serializer.serialize
+	 * @inheritdoc
 	 *
 	 * @param {MockEntity} mockEntity
 	 * @return {Object}

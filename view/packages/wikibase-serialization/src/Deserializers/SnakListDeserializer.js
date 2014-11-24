@@ -15,7 +15,7 @@ var MODULE = wb.serialization,
  */
 MODULE.SnakListDeserializer = util.inherit( 'WbSnakListDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @param {Object} serialization
 	 * @param {string[]} [order]

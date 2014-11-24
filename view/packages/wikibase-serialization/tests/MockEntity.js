@@ -22,14 +22,14 @@ var SELF = wb.serialization.tests.MockEntity = util.inherit(
 	},
 {
 	/**
-	 * @see wikibase.datamodel.Entity
+	 * @inheritdoc
 	 */
 	isEmpty: function() {
 		return this._fingerprint.isEmpty();
 	},
 
 	/**
-	 * @see wikibase.datamodel.Entity
+	 * @inheritdoc
 	 */
 	equals: function( mock ) {
 		return this._id === mock.getId() && this._fingerprint.equals( mock.getFingerprint() );

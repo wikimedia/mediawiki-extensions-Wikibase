@@ -15,7 +15,7 @@ var MODULE = wb.serialization,
  */
 MODULE.ClaimGroupSerializer = util.inherit( 'WbClaimGroupSerializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Serializer.serialize
+	 * @inheritdoc
 	 *
 	 * @param {wikibase.datamodel.ClaimGroup} claimGroup
 	 * @return {Object}

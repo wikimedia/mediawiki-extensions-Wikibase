@@ -15,7 +15,7 @@ var MODULE = wb.serialization,
  */
 MODULE.TermDeserializer = util.inherit( 'WbTermDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.Term}
 	 */

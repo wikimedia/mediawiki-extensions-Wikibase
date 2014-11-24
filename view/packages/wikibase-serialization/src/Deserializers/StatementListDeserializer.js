@@ -15,7 +15,7 @@ var MODULE = wb.serialization,
  */
 MODULE.StatementListDeserializer = util.inherit( 'WbStatementListDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.StatementList}
 	 */

@@ -15,7 +15,7 @@ var MODULE = wb.serialization,
  */
 MODULE.PropertySerializer = util.inherit( 'WbPropertySerializer', PARENT, {
 	/**
-	 * @see wb.serialization.Serializer.serialize
+	 * @inheritdoc
 	 *
 	 * @param {wikibase.datamodel.Property} property
 	 * @return {Object}

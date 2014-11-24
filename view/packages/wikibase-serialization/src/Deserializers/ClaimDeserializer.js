@@ -16,7 +16,7 @@ var MODULE = wb.serialization,
  */
 MODULE.ClaimDeserializer = util.inherit( 'WbClaimDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.Claim}
 	 */

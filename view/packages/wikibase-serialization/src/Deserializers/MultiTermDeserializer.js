@@ -15,7 +15,7 @@ var MODULE = wb.serialization,
  */
 MODULE.MultiTermDeserializer = util.inherit( 'WbMultiTermDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.MultiTerm}
 	 */

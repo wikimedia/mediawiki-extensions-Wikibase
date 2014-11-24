@@ -15,7 +15,7 @@ var MODULE = wb.serialization,
  */
 MODULE.FingerprintDeserializer = util.inherit( 'WbFingerprintDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.Fingerprint}
 	 */

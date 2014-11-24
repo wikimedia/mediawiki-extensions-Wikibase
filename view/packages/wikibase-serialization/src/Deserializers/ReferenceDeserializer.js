@@ -15,7 +15,7 @@ var MODULE = wb.serialization,
  */
 MODULE.ReferenceDeserializer = util.inherit( 'WbReferenceDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.Reference}
 	 */

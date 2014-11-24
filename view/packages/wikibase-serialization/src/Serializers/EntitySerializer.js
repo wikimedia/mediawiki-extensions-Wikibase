@@ -36,7 +36,7 @@ MODULE.EntitySerializer = util.inherit( 'WbEntitySerializer', PARENT, function()
 	},
 
 	/**
-	 * @see wikibase.serialization.Serializer.serialize
+	 * @inheritdoc
 	 *
 	 * @param {wikibase.datamodel.Entity} entity
 	 * @return {Object}
