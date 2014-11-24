@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util ) {
 	'use strict';
 
@@ -9,6 +5,9 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
  * @constructor
  * @extends {wikibase.serialization.Deserializer}
  * @since 2.0

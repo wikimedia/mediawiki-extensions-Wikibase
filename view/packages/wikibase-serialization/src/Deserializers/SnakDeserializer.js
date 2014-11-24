@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( wb, util, dv, $ ) {
 	'use strict';
 
@@ -10,6 +5,10 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ *
  * @constructor
  * @extends wikibase.serialization.Deserializer
  * @since 2.0

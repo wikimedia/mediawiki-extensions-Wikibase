@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 	'use strict';
 
@@ -9,6 +5,9 @@ var MODULE = wb.serialization;
 
 /**
  * Factory for creating serializers specific to certain objects, e.g. of the Wikibase data model.
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
  * @constructor
  * @since 1.0
  */
