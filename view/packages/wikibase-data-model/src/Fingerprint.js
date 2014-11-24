@@ -198,16 +198,20 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {string} [languageCode]
-	 * @param {wikibase.datamodel.MultiTerm|wikibase.datamodel.MultiTermMap} [aliases]
+	 * @param {string|wikibase.datamodel.MultiTermMap} languageCodeOrAliases
+	 * @param {wikibase.datamodel.MultiTerm} [aliases]
 	 *
 	 * @throws {Error} when passing a MultiTerm without a language code.
 	 * @throws {Error} when passing a MultiTermMap with a language code.
+	 * @throws {Error} when neither passing a MultiTerm nor a MultiTermMap object.
 	 */
-	setAliases: function( languageCode, aliases ) {
-		if( typeof languageCode !== 'string' ) {
-			aliases = languageCode;
-			languageCode = undefined;
+	setAliases: function( languageCodeOrAliases, aliases ) {
+		var languageCode;
+
+		if( typeof languageCodeOrAliases === 'string' ) {
+			languageCode = languageCodeOrAliases;
+		} else {
+			aliases = languageCodeOrAliases;
 		}
 
 		if( aliases instanceof wb.datamodel.MultiTerm ) {
@@ -217,6 +221,10 @@ $.extend( SELF.prototype, {
 			}
 			this._aliases.setItem( languageCode, aliases );
 		} else if( aliases instanceof wb.datamodel.MultiTermMap ) {
+			if( languageCode ) {
+				throw new Error( 'Unable to handle language code when setting a '
+					+ 'wb.datamodel.MultiTermMap' );
+			}
 			this._aliases = aliases;
 		} else {
 			throw new Error( 'Aliases need to be specified as wb.datamodel.MultiTerm or '

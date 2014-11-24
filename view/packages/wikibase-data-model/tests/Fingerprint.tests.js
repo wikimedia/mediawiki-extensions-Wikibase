@@ -283,6 +283,13 @@ QUnit.test( 'setAliases()', function( assert ) {
 		'Set aliases passing a MultiTerm object.'
 	);
 
+	assert.throws(
+		function() {
+			fingerprint.setAliases( 'de', aliases );
+		},
+		'Throwing error when trying to set a MultiTermMap with a language code.'
+	);
+
 	assert.ok(
 		!fingerprint.hasAliases( 'en', enAliases ),
 		'Verified fingerprint not featuring the aliases that will be added.'
