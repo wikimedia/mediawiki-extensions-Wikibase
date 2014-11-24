@@ -51,6 +51,41 @@
       "revId": "0cc31839709590fc9d93f4b8003d75bfc0823066",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_c3ea4505",
+        "filename": "client/includes/hooks/OtherProjectsSidebarGeneratorFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-24T16:58:46Z",
+      "side": 1,
+      "message": "Yea... I started doing this at some point in WikibaseRepo, but it\u0027s probably pointless if the new... function is trivial.",
+      "parentUuid": "6e936f18_172c03a9",
+      "revId": "0cc31839709590fc9d93f4b8003d75bfc0823066",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_63425115",
+        "filename": "client/includes/hooks/ParserAfterParseHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-24T16:58:46Z",
+      "side": 1,
+      "message": "I would suggest to name the class after the purpose of the handling, not the hook. More than one hook may be involved, or the hook used for the purpose may change. In this case, the purpose is to put additional information into the ParserOutput object, to make use of the parser cache. So, the name could be ParserOutputAugmentationHookHandler or some such.",
+      "revId": "0cc31839709590fc9d93f4b8003d75bfc0823066",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
