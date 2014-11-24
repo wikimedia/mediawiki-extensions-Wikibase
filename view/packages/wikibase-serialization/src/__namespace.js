@@ -2,7 +2,7 @@
 	'use strict';
 
 	/**
-	 * @property {Object}
+	 * @ignore
 	 */
 	wb.serialization = {};
 

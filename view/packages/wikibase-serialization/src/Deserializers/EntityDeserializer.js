@@ -5,12 +5,13 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
+ * @class wikibase.serialization.EntityDeserializer
+ * @extends {wikibase.serialization.Deserializer}
+ * @since 1.0
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
- * @extends {wikibase.serialization.Deserializer}
- * @since 1.0
  */
 MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, function() {
 	this._strategyProvider = new MODULE.StrategyProvider();

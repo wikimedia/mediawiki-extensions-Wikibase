@@ -5,11 +5,12 @@ var MODULE = wb.serialization;
 
 /**
  * Factory for creating serializers specific to certain objects, e.g. of the Wikibase data model.
+ * @class wikibase.serialization.SerializerFactory
+ * @since 1.0
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
- * @since 1.0
  */
 var SELF = MODULE.SerializerFactory = function WbSerializerProvider() {
 	this._strategyProvider = new MODULE.StrategyProvider();

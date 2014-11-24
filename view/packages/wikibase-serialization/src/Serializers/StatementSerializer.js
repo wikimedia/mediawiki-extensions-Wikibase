@@ -5,12 +5,13 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Serializer;
 
 /**
+ * @class wikibase.serialization.StatementSerializer
+ * @extends wikibase.serialization.Serializer
+ * @since 2.0
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
- * @extends wikibase.serialization.Serializer
- * @since 2.0
  */
 MODULE.StatementSerializer = util.inherit( 'WbStatementSerializer', PARENT, {
 	/**

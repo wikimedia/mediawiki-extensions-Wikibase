@@ -5,12 +5,13 @@
 
 	/**
 	 * Base for serializers.
+	 * @class wikibase.serialization.Serializer
+	 * @abstract
+	 * @since 1.0
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
-	 * @abstract
-	 * @since 1.0
 	 */
 	var SELF = MODULE.Serializer = function WbSerializer() {};
 

@@ -5,12 +5,13 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
+ * @class wikibase.serialization.FingerprintDeserializer
+ * @extends wikibase.serialization.Deserializer
+ * @since 2.0
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
- * @extends wikibase.serialization.Deserializer
- * @since 2.0
  */
 MODULE.FingerprintDeserializer = util.inherit( 'WbFingerprintDeserializer', PARENT, {
 	/**
