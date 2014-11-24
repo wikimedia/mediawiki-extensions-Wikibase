@@ -6,7 +6,7 @@
 	'use strict';
 
 	/**
-	 * @type {Object}
+	 * @property {Object}
 	 */
 	wb.serialization = {};
 

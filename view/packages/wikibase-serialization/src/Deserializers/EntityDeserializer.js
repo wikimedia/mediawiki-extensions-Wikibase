@@ -23,7 +23,7 @@ MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, functi
 	);
 }, {
 	/**
-	 * @type {wikibase.serialization.StrategyProvider}
+	 * @property {wikibase.serialization.StrategyProvider}
 	 */
 	_strategyProvider: null,
 

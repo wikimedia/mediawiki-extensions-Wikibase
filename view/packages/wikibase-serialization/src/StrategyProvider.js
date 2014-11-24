@@ -17,7 +17,7 @@ var SELF = MODULE.StrategyProvider = function WbSerializationStrategyProvider() 
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {Object[]}
+	 * @property {Object[]}
 	 */
 	_strategies: null,
 

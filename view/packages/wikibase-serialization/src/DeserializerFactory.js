@@ -39,7 +39,7 @@ var SELF = MODULE.DeserializerFactory = function wbDeserializerFactory() {
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {wikibase.serialization.StrategyProvider}
+	 * @property {wikibase.serialization.StrategyProvider}
 	 */
 	_strategyProvider: null,
 
