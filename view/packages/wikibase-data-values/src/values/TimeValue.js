@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( dv, util, $, Time ) {
 	'use strict';
 
@@ -15,6 +11,8 @@
 
 	/**
 	 * Constructor for creating a data value representing time.
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
 	 * @extends dv.DataValue

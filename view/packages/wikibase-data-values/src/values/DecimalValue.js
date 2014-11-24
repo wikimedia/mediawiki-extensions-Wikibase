@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 dataValues.DecimalValue = ( function( dv, util ) {
 	'use strict';
 
@@ -15,6 +11,8 @@ dataValues.DecimalValue = ( function( dv, util ) {
 
 	/**
 	 * Constructor for a data value representing a decimal value.
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @since 0.1
 	 *

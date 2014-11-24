@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- */
 ( function( dv, util ) {
 'use strict';
 
@@ -16,6 +11,9 @@ var PARENT = dv.DataValue,
 /**
  * Constructor for creating a monolingual text value. A monolingual text is a string which is
  * dedicated to one specific language.
+ * @licence GNU GPL v2+
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  *
  * @constructor
  * @extends dv.DataValue

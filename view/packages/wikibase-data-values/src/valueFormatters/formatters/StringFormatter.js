@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( $, vf, util ) {
 	'use strict';
 
@@ -9,6 +5,9 @@
 
 	/**
 	 * String formatter
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
+	 *
 	 * @constructor
 	 * @extends valueFormatters.ValueFormatter
 	 * @since 0.1

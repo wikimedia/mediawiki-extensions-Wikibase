@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( dv, util ) {
 'use strict';
 
@@ -15,6 +10,9 @@ var PARENT = dv.DataValue,
 /**
  * Constructor for creating a multilingual text value. A multilingual text is a collection of
  * monolingual text values with the same meaning in different languages.
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  *
  * @constructor
  * @extends dv.DataValue

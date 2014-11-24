@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- */
 ( function( dv, util ) {
 'use strict';
 
@@ -16,6 +11,9 @@ var PARENT = dv.DataValue,
 
 /**
  * Constructor for creating a data value representing a string.
+ * @licence GNU GPL v2+
+ * @author Daniel Werner
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  *
  * @constructor
  * @extends dv.DataValue

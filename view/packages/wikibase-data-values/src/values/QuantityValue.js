@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.a.r.werner@gmail.com >
- * @author H. Snater < mediawiki@snater.com >
- */
 dataValues.QuantityValue = ( function( dv, util ) {
 	'use strict';
 
@@ -10,6 +5,9 @@ dataValues.QuantityValue = ( function( dv, util ) {
 
 	/**
 	 * Constructor for a data value representing a quantity.
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @since 0.1
 	 *

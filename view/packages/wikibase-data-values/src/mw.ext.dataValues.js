@@ -1,15 +1,14 @@
 /**
- * Entrypoint for MediaWiki "DataValues" extension JavaScript code. Adds an extension object to the
- * global MediaWiki object and does configuration on "DataValues"  or its dependencies.
- *
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @ignore
  */
-
 mediaWiki.ext = mediaWiki.ext || {};
 
 /**
  * Object representing the MediaWiki "DataValues" extension.
+ * Entrypoint for MediaWiki "DataValues" extension JavaScript code. Adds an extension object to the
+ * global MediaWiki object and does configuration on "DataValues"  or its dependencies.
+ * @licence GNU GPL v2+
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  *
  * @since 0.1
  */

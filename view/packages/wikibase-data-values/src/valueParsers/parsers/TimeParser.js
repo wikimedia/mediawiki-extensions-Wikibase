@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < danweetz@web.de >
- */
 ( function( vp, dv, $, util ) {
 	'use strict';
 
@@ -9,6 +5,8 @@
 
 	/**
 	 * Constructor for time parsers.
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < danweetz@web.de >
 	 *
 	 * @constructor
 	 * @extends valueParsers.ValueParser

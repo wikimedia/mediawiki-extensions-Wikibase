@@ -1,12 +1,10 @@
-/**
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- */
 ( function( vp, $, util ) {
 	'use strict';
 
 	/**
 	 * Base constructor for objects representing a value parser.
+	 * @licence GNU GPL v2+
+	 * @author Jeroen De Dauw < jeroendedauw@gmail.com >
 	 *
 	 * @constructor
 	 * @abstract

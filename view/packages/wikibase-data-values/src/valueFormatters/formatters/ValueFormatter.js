@@ -1,12 +1,11 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( $, vf, util ) {
 	'use strict';
 
 	/**
 	 * Base constructor for objects representing a value formatter.
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
+	 *
 	 * @constructor
 	 * @abstract
 	 * @since 0.1

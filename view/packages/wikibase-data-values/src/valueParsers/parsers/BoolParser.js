@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( vp, dv, util, $ ) {
 	'use strict';
 
@@ -9,6 +5,8 @@
 
 	/**
 	 * Constructor for string-to-BoolValue parsers.
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
 	 * @extends valueParsers.ValueParser

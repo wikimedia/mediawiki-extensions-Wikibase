@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- */
 ( function( vp, dv, $, util ) {
 	'use strict';
 
@@ -12,6 +8,8 @@
 	 * Constructor for null parsers. Null parser will take any value for parsing. The parsed value
 	 * will be an UnknownValue data value except if null got passed in or a DataValue got passed in.
 	 * In those cases, the value given to the parse function will be the parse result.
+	 * @licence GNU GPL v2+
+	 * @author Jeroen De Dauw < jeroendedauw@gmail.com >
 	 *
 	 * @constructor
 	 * @extends valueParsers.ValueParser

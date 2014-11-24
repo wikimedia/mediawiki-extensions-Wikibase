@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( $, vf, dv, util ) {
 	'use strict';
 
@@ -14,6 +10,8 @@
 	 * will be the string casted result of the data value's toJSON() function.
 	 * If the data value could not be identified, the data value passed on to the $.Promise returned
 	 * by the format function will be an UnknownValue DataValue instance.
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
 	 * @extends valueFormatters.ValueFormatter

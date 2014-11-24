@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < danweetz@web.de >
- */
 ( function( dv, util ) {
 	'use strict';
 
@@ -13,6 +9,8 @@
 
 	/**
 	 * Constructor for creating a data value representing a number.
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < danweetz@web.de >
 	 *
 	 * @constructor
 	 * @extends dv.DataValue

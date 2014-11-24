@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( dv, util, GlobeCoordinate ) {
 	'use strict';
 
@@ -17,6 +13,8 @@
 
 	/**
 	 * Constructor for creating a data value representing a globe coordinate.
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
 	 * @extends dv.DataValue

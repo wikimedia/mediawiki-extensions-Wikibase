@@ -1,10 +1,7 @@
 /**
+ * Global 'dataValues' object
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- */
-
-/**
- * Global 'dataValues' object
  * @since 0.1
  * @type Object
  */

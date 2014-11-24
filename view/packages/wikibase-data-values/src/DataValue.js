@@ -1,13 +1,11 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner
- */
 ( function( dv, $, util ) {
 'use strict';
 
 /**
  * Base constructor for objects representing a data value. DataValue objects are immutable, meaning
  * that the actual value can't be altered.
+ * @licence GNU GPL v2+
+ * @author Daniel Werner
  *
  * @constructor
  * @abstract

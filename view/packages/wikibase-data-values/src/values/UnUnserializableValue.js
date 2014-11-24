@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( dv, util, $ ) {
 	'use strict';
 
@@ -25,6 +21,8 @@
 	 * Constructor for creating a data value representing a value which could not have been
 	 * unserialized for some reason. Holds the serialized value which can not be unserialized as
 	 * well as an error object describing the reason why the value can not be unserialized properly.
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
 	 * @extends dv.DataValue

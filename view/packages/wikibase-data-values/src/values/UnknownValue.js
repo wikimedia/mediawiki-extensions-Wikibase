@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- */
 ( function( dv, util ) {
 	'use strict';
 
@@ -13,6 +9,8 @@
 
 	/**
 	 * Constructor for creating a data value holding a value of unknown nature.
+	 * @licence GNU GPL v2+
+	 * @author Jeroen De Dauw < jeroendedauw@gmail.com >
 	 *
 	 * @constructor
 	 * @extends dv.DataValue
