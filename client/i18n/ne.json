@@ -1,0 +1,42 @@
+{
+	"@metadata": {
+		"authors": [
+			"बिप्लब आनन्द"
+		]
+	},
+	"specialpages-group-wikibaseclient": "{{WBREPONAME}} क्लाइनट",
+	"tooltip-t-wikibase": "जडान गरिएको डाटा भण्डार आइटमको लागि लिङ्क",
+	"wikibase-comment-add": "एउटा {{WBREPONAME}} आइटम निर्माण भयो।",
+	"wikibase-comment-remove": "सम्बद्ध {{WBREPONAME}} आइटम मेटियो। भाषाको कडी मेटियो।",
+	"wikibase-comment-linked": "एउटा {{WBREPONAME}} आइटम यस पृष्ठसँग जोडिएको छ।",
+	"wikibase-comment-update": "{{WBREPONAME}} आइटम परिवर्तन",
+	"wikibase-comment-sitelink-add": "भाषा लिङ्क जोडियो: $1",
+	"wikibase-comment-sitelink-change": "भाषा लिङ्क $1 देखि $2 मा परिवर्तन भयो",
+	"wikibase-comment-sitelink-remove": "भाषा लिङ्क मेटियो: $1",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|परिवर्तन|परिवर्तनहरु}}",
+	"wikibase-dataitem": "{{WBREPONAME}} आइटम",
+	"wikibase-editlinks": "लिङ्क सम्पादन गर्नुहोस्",
+	"wikibase-editlinkstitle": "अन्तरभाषिक लिङ्क सम्पादन गर्नुहोस्",
+	"wikibase-linkitem-addlinks": "लिङ्क थप्नुहोस",
+	"wikibase-linkitem-close": "संवाद बन्द गर्नुहोस् र पृष्ठ पुन: लोड गर्नुहोस्",
+	"wikibase-linkitem-title": "पृष्ठसँग लिङ्क गर्नुहोस्",
+	"wikibase-linkitem-linkpage": "पृष्ठसँग लिङ्क गर्नुहोस्",
+	"wikibase-linkitem-input-site": "भाषा:",
+	"wikibase-linkitem-input-page": "पृष्ठ:",
+	"wikibase-linkitem-confirmitem-button": "निश्चित गर्ने",
+	"wikibase-linkitem-not-loggedin-title": "तपाईंलाई प्रवेश गर्नु आवश्यक छ",
+	"wikibase-property-notfound": "$1 वस्तु भेटिएन।",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "लुकाउनुहोस्",
+	"wikibase-rc-hide-wikidata-show": "देखाउनुहोस्",
+	"wikibase-rc-show-wikidata-pref": "हालै भएको परिवर्तनमा {{WBREPONAME}} सम्पादन देखाउनुहोस्",
+	"wikibase-rc-wikibase-edit-letter": "द",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} सम्पादन",
+	"wikibase-watchlist-show-changes-pref": "तपाई आफ्नो ध्यानसूचीमा {{WBREPONAME}} सम्पादन देखाउनुहोस्",
+	"wikibase-error-serialize-error": "डाटालाई मिलाउन असफल।",
+	"wikibase-unconnectedpages-submit": "जाउ",
+	"wikibase-unconnectedpages-invalid-language": "\"$1\" मान्य भाषा कोड होइन।",
+	"wikibase-pageinfo-entity-id-none": "कुनै पनि होइन",
+	"wikibase-otherprojects": "अन्य प्रोजेक्टहरू",
+	"wikibase-otherprojects-beta-message": "अन्य प्रोजेक्ट साइडबार"
+}
