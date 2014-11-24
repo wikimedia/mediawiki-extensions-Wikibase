@@ -13,14 +13,9 @@ mediaWiki.ext = mediaWiki.ext || {};
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-mediaWiki.ext.dataValues = ( function( mw, dataValues, time, $ ) {
+mediaWiki.ext.dataValues = new ( function( mw, dataValues, time, $ ) {
 	'use strict';
 
-	/**
-	 * Constructor for extension singleton.
-	 *
-	 * @constructor
-	 */
 	function MwExtDataValues() {
 		time.settings.daybeforemonth = getDayBeforeMonthTimeSettingFromMWContext();
 		time.settings.monthnames = getMonthNameTimeSettingsFromMWContext();
@@ -34,6 +29,7 @@ mediaWiki.ext.dataValues = ( function( mw, dataValues, time, $ ) {
 	/**
 	 * Returns whether the language used in MediaWiki prefers the day before the month in its
 	 * numerical date notation.
+	 * @ignore
 	 *
 	 * @return {boolean}
 	 */
@@ -49,6 +45,7 @@ mediaWiki.ext.dataValues = ( function( mw, dataValues, time, $ ) {
 	/**
 	 * Returns an array of arrays where each holds different string representations of a month name.
 	 * Considers the MediaWiki user's interface language.
+	 * @ignore
 	 *
 	 * @return {string[][]}
 	 */
@@ -78,6 +75,6 @@ mediaWiki.ext.dataValues = ( function( mw, dataValues, time, $ ) {
 		];
 	}
 
-	return new MwExtDataValues(); // expose extension singleton
+	return new MwExtDataValues;
 
 }( mediaWiki, dataValues, time, jQuery ) );

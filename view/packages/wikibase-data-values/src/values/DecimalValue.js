@@ -6,6 +6,7 @@
 	/**
 	 * Regular expression for matching decimal strings that conform to the format
 	 * defined for DecimalValue.
+	 * @ignore
 	 */
 	var DECIMAL_VALUE_PATTERN = /^[+-]?(?:[1-9]\d*|\d)(?:\.\d+)?$/;
 
