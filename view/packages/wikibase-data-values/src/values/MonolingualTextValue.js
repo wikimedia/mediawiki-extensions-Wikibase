@@ -111,6 +111,7 @@ SELF.newFromJSON = function( json ) {
 /**
  * @inheritdoc
  * @property {string} [TYPE='monolingualtext']
+ * @static
  */
 SELF.TYPE = 'monolingualtext';
 

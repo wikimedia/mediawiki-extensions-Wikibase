@@ -135,6 +135,7 @@ SELF.newFromJSON = function( json ) {
 /**
  * @inheritdoc
  * @property {string} [TYPE='ununserializable']
+ * @static
  */
 SELF.TYPE = 'ununserializable';
 

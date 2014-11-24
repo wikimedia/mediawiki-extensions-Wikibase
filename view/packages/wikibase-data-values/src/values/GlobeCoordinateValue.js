@@ -100,6 +100,7 @@ SELF.newFromJSON = function( json ) {
 /**
  * @inheritdoc
  * @property {string} [TYPE='globecoordinate']
+ * @static
  */
 SELF.TYPE = 'globecoordinate';
 

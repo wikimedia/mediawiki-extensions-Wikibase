@@ -82,6 +82,7 @@ SELF.newFromJSON = function( json ) {
 /**
  * @inheritdoc
  * @property {string} [TYPE='string']
+ * @static
  */
 SELF.TYPE = 'string';
 
