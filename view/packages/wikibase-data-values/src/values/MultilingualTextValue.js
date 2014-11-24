@@ -97,7 +97,9 @@ SELF.newFromJSON = function( json ) {
 
 	for ( var languageCode in json ) {
 		if ( json.hasOwnProperty( languageCode ) ) {
-			monolingualValues.push( new dv.MonolingualTextValue( languageCode, json[languageCode] ) );
+			monolingualValues.push(
+				new dv.MonolingualTextValue( languageCode, json[languageCode] )
+			);
 		}
 	}
 
