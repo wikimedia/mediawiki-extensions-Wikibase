@@ -8,10 +8,12 @@
 wb.serialization.tests = wb.serialization.tests || {};
 
 /**
+ * @extends wikibase.datamodel.Entity
+ *
+ * @constructor
+ *
  * @param {string} id
  * @param {wikibase.datamodel.Fingerprint} fingerprint
- * @constructor
- * @extends {wikibase.datamodel.Entity}
  */
 var SELF = wb.serialization.tests.MockEntity = util.inherit(
 	'wbMockEntity',

@@ -8,8 +8,9 @@
 QUnit.module( 'wikibase.serialization.EntitySerializer' );
 
 /**
+ * @extends wikibase.serialization.Serializer
+ *
  * @constructor
- * @extends {wikibase.serialization.Serializer}
  */
 var MockEntitySerializer = util.inherit(
 	'WbMockEntitySerializer',
