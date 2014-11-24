@@ -24,14 +24,14 @@ define( [
 	vp.tests.StringParserTest = util.inherit( PARENT, {
 
 		/**
-		 * @see vp.tests.ValueParserTest.getConstructor
+		 * @inheritdoc
 		 */
 		getConstructor: function() {
 			return vp.StringParser;
 		},
 
 		/**
-		 * @see vp.tests.ValueParserTest.getParseArguments
+		 * @inheritdoc
 		 */
 		getParseArguments: function() {
 			return [

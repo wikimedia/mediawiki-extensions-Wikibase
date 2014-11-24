@@ -23,14 +23,14 @@ define( [
 	dv.tests.GlobeCoordinateValueTest = util.inherit( PARENT, {
 
 		/**
-		 * @see dv.tests.DataValueTest.getConstructor
+		 * @inheritdoc
 		 */
 		getConstructor: function() {
 			return dv.GlobeCoordinateValue;
 		},
 
 		/**
-		 * @see dv.tests.DataValueTest.getConstructorArguments
+		 * @inheritdoc
 		 */
 		getConstructorArguments: function() {
 			return [

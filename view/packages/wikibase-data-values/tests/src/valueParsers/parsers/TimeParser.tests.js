@@ -25,14 +25,14 @@ define( [
 	vp.tests.TimeParserTest = util.inherit( PARENT, {
 
 		/**
-		 * @see vp.tests.ValueParserTest.getConstructor
+		 * @inheritdoc
 		 */
 		getConstructor: function() {
 			return vp.TimeParser;
 		},
 
 		/**
-		 * @see vp.tests.ValueParserTest.getParseArguments
+		 * @inheritdoc
 		 */
 		getParseArguments: function() {
 			return [

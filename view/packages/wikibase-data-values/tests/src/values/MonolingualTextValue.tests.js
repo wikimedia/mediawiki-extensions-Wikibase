@@ -22,14 +22,14 @@ define( [
 	dv.tests.MonolingualTextValueTest = util.inherit( PARENT, {
 
 		/**
-		 * @see dv.tests.DataValueTest.getConstructor
+		 * @inheritdoc
 		 */
 		getConstructor: function() {
 			return dv.MonolingualTextValue;
 		},
 
 		/**
-		 * @see dv.tests.DataValueTest.getConstructorArguments
+		 * @inheritdoc
 		 */
 		getConstructorArguments: function() {
 			return [

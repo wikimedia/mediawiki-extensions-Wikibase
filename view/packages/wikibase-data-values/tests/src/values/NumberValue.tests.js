@@ -22,14 +22,14 @@ define( [
 	dv.tests.NumberValueTest = util.inherit( PARENT, {
 
 		/**
-		 * @see dv.tests.DataValueTest.getConstructor
+		 * @inheritdoc
 		 */
 		getConstructor: function() {
 			return dv.NumberValue;
 		},
 
 		/**
-		 * @see dv.tests.DataValueTest.getConstructorArguments
+		 * @inheritdoc
 		 */
 		getConstructorArguments: function() {
 			return [

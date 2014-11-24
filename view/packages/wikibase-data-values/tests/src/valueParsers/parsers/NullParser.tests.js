@@ -26,14 +26,14 @@ define( [
 	vp.tests.NullParserTest = util.inherit( PARENT, constructor, {
 
 		/**
-		 * @see vp.tests.ValueParserTest.getConstructor
+		 * @inheritdoc
 		 */
 		getConstructor: function() {
 			return vp.NullParser;
 		},
 
 		/**
-		 * @see vp.tests.ValueParserTest.getParseArguments
+		 * @inheritdoc
 		 */
 		getParseArguments: function() {
 			var date = new Date(),
