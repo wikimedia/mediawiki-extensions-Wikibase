@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( wb, util, $ ) {
 	'use strict';
 
@@ -9,16 +5,20 @@
 
 	/**
 	 * Base for deserializers.
-	 *
-	 * @constructor
+	 * @class wikibase.serialization.Deserializer
 	 * @abstract
 	 * @since 1.0
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
+	 *
+	 * @constructor
 	 */
 	var SELF = MODULE.Deserializer = function WbDeserializer() {};
 
 	$.extend( SELF.prototype, {
 		/**
 		 * Constructs the original object from the provided serialization.
+		 * @abstract
 		 *
 		 * @param {Object} serialization
 		 */

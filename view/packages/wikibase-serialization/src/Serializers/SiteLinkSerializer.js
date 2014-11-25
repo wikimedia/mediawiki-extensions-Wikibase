@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util ) {
 	'use strict';
 
@@ -9,16 +5,22 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Serializer;
 
 /**
- * @constructor
+ * @class wikibase.serialization.SiteLinkSerializer
  * @extends wikibase.serialization.Serializer
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 MODULE.SiteLinkSerializer = util.inherit( 'WbSiteLinkSerializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Serializer.serialize
+	 * @inheritdoc
 	 *
 	 * @param {wikibase.datamodel.SiteLink} siteLink
 	 * @return {Object}
+	 *
+	 * @throws {Error} if siteLink is not a SiteLink instance.
 	 */
 	serialize: function( siteLink ) {
 		if( !( siteLink instanceof wb.datamodel.SiteLink ) ) {

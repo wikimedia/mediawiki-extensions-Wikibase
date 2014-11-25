@@ -1,15 +1,15 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 	'use strict';
 
 var MODULE = wb.serialization;
 
 /**
- * @constructor
+ * @class wikibase.serialization.StrategyProvider
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 var SELF = MODULE.StrategyProvider = function WbSerializationStrategyProvider() {
 	this._strategies = [];
@@ -17,13 +17,16 @@ var SELF = MODULE.StrategyProvider = function WbSerializationStrategyProvider() 
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {Object[]}
+	 * @property {Object[]}
+	 * @private
 	 */
 	_strategies: null,
 
 	/**
 	 * @param {*} strategy
 	 * @param {*} key
+	 *
+	 * @throws {Error} if a strategy for the provided key is registered already.
 	 */
 	registerStrategy: function( strategy, key ) {
 		if( this._hasStrategyFor( key ) ) {
@@ -37,6 +40,8 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
+	 * @private
+	 *
 	 * @param {*} key
 	 * @return {boolean}
 	 */
@@ -52,6 +57,8 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {*} key
 	 * @return {*}
+	 *
+	 * @throws {Error} if no strategy is registered for the key.
 	 */
 	getStrategyFor: function( key ) {
 		for( var i = 0; i < this._strategies.length; i++ ) {

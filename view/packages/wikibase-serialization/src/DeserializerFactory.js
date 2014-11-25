@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 	'use strict';
 
@@ -9,8 +5,12 @@ var MODULE = wb.serialization;
 
 /**
  * Factory for creating deserializers specific to certain objects, e.g. of the Wikibase data model.
- * @constructor
+ * @class wikibase.serialization.DeserializerFactory
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 var SELF = MODULE.DeserializerFactory = function wbDeserializerFactory() {
 	this._strategyProvider = new MODULE.StrategyProvider();
@@ -39,13 +39,16 @@ var SELF = MODULE.DeserializerFactory = function wbDeserializerFactory() {
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {wikibase.serialization.StrategyProvider}
+	 * @property {wikibase.serialization.StrategyProvider}
+	 * @private
 	 */
 	_strategyProvider: null,
 
 	/**
 	 * @param {Function} Constructor
 	 * @return {wikibase.serialization.Deserializer}
+	 *
+	 * @throws {Error} if constructor is not a function.
 	 */
 	newDeserializerFor: function( Constructor ) {
 		if( !$.isFunction( Constructor ) ) {
@@ -58,6 +61,9 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {Function} Deserializer
 	 * @param {Function} Constructor
+	 *
+	 * @throws {Error} if deserializer constructor does not inherit from Deserializer base class.
+	 * @throws {Error} if constructor is not a function.
 	 */
 	registerDeserializer: function( Deserializer, Constructor ) {
 		if( !$.isFunction( Constructor ) ) {

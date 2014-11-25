@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util, $ ) {
 	'use strict';
 
@@ -9,17 +5,26 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
- * @constructor
+ * @class wikibase.serialization.SnakListDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 MODULE.SnakListDeserializer = util.inherit( 'WbSnakListDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @param {Object} serialization
 	 * @param {string[]} [order]
 	 * @return {wikibase.datamodel.SnakList}
+	 *
+	 * @throws {Error} if the order parameter is provided but the property id of a snak
+	 *         serialization is no represented in the order.
+	 * @throws {Error} if the order parameter is provided but no snak exists for a property
+	 *         represented in the order.
 	 */
 	deserialize: function( serialization, order ) {
 		var snakList = new wb.datamodel.SnakList();

@@ -21,6 +21,11 @@ version 2.0 of this package:
 
 ## Release notes
 
+### 2.0.2 (dev)
+
+#### Enhancements
+* Updated code documentation for being able to automatically generate a proper documentation using JSDuck.
+
 ### 2.0.1 (2014-11-05)
 * Fixed the required DataModel JavaScript version.
 

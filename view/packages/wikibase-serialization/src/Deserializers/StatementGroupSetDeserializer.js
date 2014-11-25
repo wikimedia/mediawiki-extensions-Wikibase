@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util ) {
 	'use strict';
 
@@ -9,13 +5,17 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
- * @constructor
+ * @class wikibase.serialization.StatementGroupSetDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 MODULE.StatementGroupSetDeserializer = util.inherit( 'WbStatementGroupSetDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.StatementGroupSet}
 	 */

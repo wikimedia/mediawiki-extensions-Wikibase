@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util ) {
 	'use strict';
 
@@ -9,16 +5,22 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Serializer;
 
 /**
- * @constructor
+ * @class wikibase.serialization.ClaimSerializer
  * @extends wikibase.serialization.Serializer
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 MODULE.ClaimSerializer = util.inherit( 'WbClaimSerializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Serializer.serialize
+	 * @inheritdoc
 	 *
 	 * @param {wikibase.datamodel.Claim} claim
 	 * @return {Object}
+	 *
+	 * @throws {Error} if claim is not a Claim instance.
 	 */
 	serialize: function( claim ) {
 		if( !( claim instanceof wb.datamodel.Claim ) ) {

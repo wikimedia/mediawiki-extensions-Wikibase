@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( wb, util, dv, $ ) {
 	'use strict';
 
@@ -10,15 +5,22 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
- * @constructor
+ * @class wikibase.serialization.SnakDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ *
+ * @constructor
  */
 MODULE.SnakDeserializer = util.inherit( 'WbSnakDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.Snak}
+	 *
+	 * @throws {Error} if no constructor for the snak type detected exists.
 	 */
 	deserialize: function( serialization ) {
 		if( serialization.snaktype === 'novalue' ) {

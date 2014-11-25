@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util, $ ) {
 	'use strict';
 
@@ -9,15 +5,21 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
- * @constructor
+ * @class wikibase.serialization.StatementGroupDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 MODULE.StatementGroupDeserializer = util.inherit( 'WbStatementGroupDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.StatementGroup}
+	 *
+	 * @throws {Error} if serialization is an empty object.
 	 */
 	deserialize: function( serialization ) {
 		if( $.isEmptyObject( serialization ) ) {

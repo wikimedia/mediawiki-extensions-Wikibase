@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util ) {
 	'use strict';
 
@@ -9,16 +5,22 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Serializer;
 
 /**
- * @constructor
+ * @class wikibase.serialization.FingerprintSerializer
  * @extends wikibase.serialization.Serializer
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 MODULE.FingerprintSerializer = util.inherit( 'WbFingerprintSerializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Serializer.serialize
+	 * @inheritdoc
 	 *
 	 * @param {wikibase.datamodel.Fingerprint} fingerprint
 	 * @return {Object}
+	 *
+	 * @throws {Error} if fingerprint is not a Fingerprint instance.
 	 */
 	serialize: function( fingerprint ) {
 		if( !( fingerprint instanceof wb.datamodel.Fingerprint ) ) {

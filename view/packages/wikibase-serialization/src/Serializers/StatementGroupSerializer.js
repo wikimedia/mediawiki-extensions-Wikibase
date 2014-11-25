@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util ) {
 	'use strict';
 
@@ -9,16 +5,22 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Serializer;
 
 /**
- * @constructor
+ * @class wikibase.serialization.StatementGroupSerializer
  * @extends wikibase.serialization.Serializer
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 MODULE.StatementGroupSerializer = util.inherit( 'WbStatementGroupSerializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Serializer.serialize
+	 * @inheritdoc
 	 *
 	 * @param {wikibase.datamodel.StatementGroup} statementGroup
 	 * @return {Object}
+	 *
+	 * @throws {Error} if statementGroup is not a StatementGroup instance.
 	 */
 	serialize: function( statementGroup ) {
 		if( !( statementGroup instanceof wb.datamodel.StatementGroup ) ) {

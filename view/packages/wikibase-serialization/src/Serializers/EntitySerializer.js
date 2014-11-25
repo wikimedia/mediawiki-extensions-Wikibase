@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util ) {
 	'use strict';
 
@@ -9,9 +5,13 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Serializer;
 
 /**
- * @constructor
- * @extends {wikibase.serialization.Serializer}
+ * @class wikibase.serialization.EntitySerializer
+ * @extends wikibase.serialization.Serializer
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 MODULE.EntitySerializer = util.inherit( 'WbEntitySerializer', PARENT, function() {
 	this._strategyProvider = new MODULE.StrategyProvider();
@@ -23,7 +23,8 @@ MODULE.EntitySerializer = util.inherit( 'WbEntitySerializer', PARENT, function()
 	);
 }, {
 	/**
-	 * @type {wikibase.serialization.StrategyProvider}
+	 * @property {wikibase.serialization.StrategyProvider}
+	 * @private
 	 */
 	_strategyProvider: null,
 
@@ -36,10 +37,12 @@ MODULE.EntitySerializer = util.inherit( 'WbEntitySerializer', PARENT, function()
 	},
 
 	/**
-	 * @see wikibase.serialization.Serializer.serialize
+	 * @inheritdoc
 	 *
 	 * @param {wikibase.datamodel.Entity} entity
 	 * @return {Object}
+	 *
+	 * @throws {Error} if entity is not an Entity instance.
 	 */
 	serialize: function( entity ) {
 		if( !( entity instanceof wb.datamodel.Entity ) ) {

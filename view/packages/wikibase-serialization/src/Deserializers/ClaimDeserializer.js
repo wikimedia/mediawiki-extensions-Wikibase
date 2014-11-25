@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( wb, util ) {
 	'use strict';
 
@@ -10,13 +5,18 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
- * @constructor
+ * @class wikibase.serialization.ClaimDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ *
+ * @constructor
  */
 MODULE.ClaimDeserializer = util.inherit( 'WbClaimDeserializer', PARENT, {
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.Claim}
 	 */

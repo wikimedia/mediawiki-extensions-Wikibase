@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 	'use strict';
 
@@ -9,8 +5,12 @@ var MODULE = wb.serialization;
 
 /**
  * Factory for creating serializers specific to certain objects, e.g. of the Wikibase data model.
- * @constructor
+ * @class wikibase.serialization.SerializerFactory
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 var SELF = MODULE.SerializerFactory = function WbSerializerProvider() {
 	this._strategyProvider = new MODULE.StrategyProvider();
@@ -39,13 +39,18 @@ var SELF = MODULE.SerializerFactory = function WbSerializerProvider() {
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {wikibase.serialization.StrategyProvider}
+	 * @property {wikibase.serialization.StrategyProvider}
+	 * @private
 	 */
 	_strategyProvider: null,
 
 	/**
 	 * @param {Object|Function} objectOrConstructor
 	 * @return {wikibase.serialization.Serializer}
+	 *
+	 * @throws {Error} if argument is omitted.
+	 * @throws {Error} if argument is not a constructor or the object constructor could not be
+	 *         determined.
 	 */
 	newSerializerFor: function( objectOrConstructor ) {
 		if( !objectOrConstructor ) {
@@ -66,6 +71,9 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {Function} Serializer
 	 * @param {Function} Constructor
+	 *
+	 * @throws {Error} if serializer constructor does not inherit from Serializer base class.
+	 * @throws {Error} if constructor is not a function.
 	 */
 	registerSerializer: function( Serializer, Constructor ) {
 		if( !$.isFunction( Constructor ) ) {

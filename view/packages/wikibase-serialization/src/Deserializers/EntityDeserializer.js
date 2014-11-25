@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util ) {
 	'use strict';
 
@@ -9,9 +5,13 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
- * @constructor
- * @extends {wikibase.serialization.Deserializer}
+ * @class wikibase.serialization.EntityDeserializer
+ * @extends wikibase.serialization.Deserializer
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, function() {
 	this._strategyProvider = new MODULE.StrategyProvider();
@@ -23,7 +23,8 @@ MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, functi
 	);
 }, {
 	/**
-	 * @type {wikibase.serialization.StrategyProvider}
+	 * @property {wikibase.serialization.StrategyProvider}
+	 * @private
 	 */
 	_strategyProvider: null,
 
@@ -36,9 +37,11 @@ MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, functi
 	},
 
 	/**
-	 * @see wikibase.serialization.Deserializer.deserialize
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.Entity}
+	 *
+	 * @throws {Error} if unable to detect the entity type from the serialization.
 	 */
 	deserialize: function( serialization ) {
 		if( !serialization.type || typeof serialization.type !== 'string' ) {

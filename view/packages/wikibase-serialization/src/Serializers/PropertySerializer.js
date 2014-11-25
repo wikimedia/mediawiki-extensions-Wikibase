@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util, $ ) {
 	'use strict';
 
@@ -9,16 +5,22 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Serializer;
 
 /**
- * @constructor
- * @extends {wikibase.serialization.Serializer}
+ * @class wikibase.serialization.PropertySerializer
+ * @extends wikibase.serialization.Serializer
  * @since 2.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  */
 MODULE.PropertySerializer = util.inherit( 'WbPropertySerializer', PARENT, {
 	/**
-	 * @see wb.serialization.Serializer.serialize
+	 * @inheritdoc
 	 *
 	 * @param {wikibase.datamodel.Property} property
 	 * @return {Object}
+	 *
+	 * @throws {Error} if property is not a Property instance.
 	 */
 	serialize: function( property ) {
 		if( !( property instanceof wb.datamodel.Property ) ) {
