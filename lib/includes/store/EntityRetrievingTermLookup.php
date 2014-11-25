@@ -91,13 +91,13 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @return Fingerprint
 	 */
 	private function getFingerprint( EntityId $entityId ) {
-		$prefixedId = $entityId->getSerialization();
+		$idSerialization = $entityId->getSerialization();
 
-		if ( !isset( $this->fingerprints[$prefixedId] ) ) {
-			$this->fingerprints[$prefixedId] = $this->fetchFingerprint( $entityId );
+		if ( !isset( $this->fingerprints[$idSerialization] ) ) {
+			$this->fingerprints[$idSerialization] = $this->fetchFingerprint( $entityId );
 		}
 
-		return $this->fingerprints[$prefixedId];
+		return $this->fingerprints[$idSerialization];
 	}
 
 	/**
