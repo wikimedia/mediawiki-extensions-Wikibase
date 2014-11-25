@@ -8,14 +8,14 @@ use OutputPage;
 use ParserOutput;
 use RequestContext;
 use Title;
-use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\SiteLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\Client\Hooks\LanguageLinkBadgeDisplay
+ * @covers Wikibase\Client\Hooks\SiteLinkBadgeDisplay
  *
  * @since 0.5
  *
@@ -26,7 +26,7 @@ use Wikibase\Test\MockRepository;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
+class SiteLinkBadgeDisplayTest extends \MediaWikiTestCase {
 
 	private function getItems() {
 		$items = array();
@@ -70,7 +70,7 @@ class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 
 		$badgeClassNames = array( 'Q4' => 'foo', 'Q3' => 'bar' );
 
-		return new LanguageLinkBadgeDisplay(
+		return new SiteLinkBadgeDisplay(
 			$mockRepo,
 			$badgeClassNames,
 			Language::factory( 'de' )
