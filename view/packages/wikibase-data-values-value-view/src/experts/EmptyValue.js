@@ -25,7 +25,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert._init
+		 * @inheritdoc
 		 */
 		_init: function() {
 			this.$viewPort.text(
@@ -34,14 +34,14 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.rawValue
+		 * @inheritdoc
 		 */
 		rawValue: function() {
 			return null;
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.draw
+		 * @inheritdoc
 		 */
 		draw: function() {
 			return $.Deferred().resolve().promise();

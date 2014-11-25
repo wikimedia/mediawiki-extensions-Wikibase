@@ -156,7 +156,7 @@ $.widget( 'ui.listrotator', {
 	_rotatingTo: null,
 
 	/**
-	 * @see $.ui.Widget._create
+	 * @inheritdoc
 	 */
 	_create: function() {
 		var self = this,
@@ -239,7 +239,7 @@ $.widget( 'ui.listrotator', {
 	},
 
 	/**
-	 * @see $.Widget.destroy
+	 * @inheritdoc
 	 */
 	destroy: function() {
 		var menu = this.$menu.data( 'menu' );

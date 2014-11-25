@@ -19,7 +19,7 @@
 	 */
 	vv.experts.CommonsMediaType = vv.expert( 'CommonsMediaType', PARENT, {
 		/**
-		 * @see jQuery.valueview.experts.StringValue._init
+		 * @inheritdoc
 		 */
 		_init: function() {
 			PARENT.prototype._init.call( this );

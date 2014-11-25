@@ -11,7 +11,7 @@
  */
 $.widget( 'ui.languagesuggester', $.ui.suggester, {
 	/**
-	 * @see $.ui.suggester._getSuggestionsFromArray
+	 * @inheritdoc
 	 */
 	_getSuggestionsFromArray: function( term, source ) {
 		var self = this,

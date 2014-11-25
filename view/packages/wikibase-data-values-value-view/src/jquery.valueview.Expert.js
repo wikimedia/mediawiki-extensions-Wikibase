@@ -10,7 +10,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 *  widget automatically. The expert has to be registered in a jQuery.valueview.ExpertStore
 	 *  instance which has to be used as expert store in the valueview widget's options.
 	 *
-	 * (see jQuery.valueview.Expert)
+	 * @see jQuery.valueview.Expert
 	 *
 	 * @member jQuery.valueview
 	 * @method expert

@@ -16,7 +16,7 @@
 	$.widget( 'ui.commonssuggester', $.ui.suggester, {
 
 		/**
-		 * @see ui.suggester._create
+		 * @inheritdoc
 		 */
 		_create: function() {
 			if( !this.options.source ) {
@@ -57,7 +57,7 @@
 		},
 
 		/**
-		 * @see jQuery.ui.suggester._createMenuItemFromSuggestion
+		 * @inheritdoc
 		 */
 		_createMenuItemFromSuggestion: function( suggestion, requestTerm ) {
 			suggestion = suggestion.replace( /^File:/, '' );

@@ -21,7 +21,7 @@
 	 */
 	vv.experts.SuggestedStringValue = vv.expert( 'SuggestedStringValue', PARENT, {
 		/**
-		 * @see jQuery.valueview.experts.StringValue._init
+		 * @inheritdoc
 		 */
 		_init: function() {
 			PARENT.prototype._init.call( this );

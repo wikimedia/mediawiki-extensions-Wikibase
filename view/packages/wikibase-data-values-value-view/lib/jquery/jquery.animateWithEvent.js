@@ -9,7 +9,7 @@ jQuery.fn.animateWithEvent = ( function( $ ) {
 	 *
 	 * The "startCallback" can be used to trigger an event, stating that an animation is about to
 	 * be executed. In the event the AnimationEvent can be used to allow event listeners to add
-	 * specialized callbacks per animation stage (see AnimationEvent documentation).
+	 * specialized callbacks per animation stage.
 	 *
 	 * DEPENDENCY: jQuery.AnimationEvent
 	 *
@@ -22,6 +22,8 @@ jQuery.fn.animateWithEvent = ( function( $ ) {
 	 *             self._trigger( 'animation', animationEvent );
 	 *         }
 	 *     );
+	 *
+	 * @see jQuery.AnimationEvent
 	 *
 	 * @member jQuery.fn
 	 * @method animateWithEvent

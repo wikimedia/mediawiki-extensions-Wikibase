@@ -128,7 +128,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.destroy
+		 * @inheritdoc
 		 */
 		destroy: function() {
 			this.preview = null;
@@ -139,7 +139,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.valueCharacteristics
+		 * @inheritdoc
 		 */
 		valueCharacteristics: function() {
 			var options = {},

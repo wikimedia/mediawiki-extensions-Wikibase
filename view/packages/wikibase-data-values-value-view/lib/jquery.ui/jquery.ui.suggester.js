@@ -90,7 +90,7 @@
 $.widget( 'ui.suggester', {
 
 	/**
-	 * @see jQuery.Widget.options
+	 * @inheritdoc
 	 */
 	options: {
 		source: null,
@@ -123,7 +123,7 @@ $.widget( 'ui.suggester', {
 	_minTermLength: 1,
 
 	/**
-	 * @see jQuery.Widget._create
+	 * @inheritdoc
 	 */
 	_create: function() {
 		var self = this;
@@ -151,7 +151,7 @@ $.widget( 'ui.suggester', {
 	},
 
 	/**
-	 * @see jQuery.Widget.destroy
+	 * @inheritdoc
 	 */
 	destroy: function() {
 		var menu = this.option( 'menu' );
@@ -172,7 +172,7 @@ $.widget( 'ui.suggester', {
 	},
 
 	/**
-	 * @see jQuery.Widget._setOption
+	 * @inheritdoc
 	 */
 	_setOption: function( key, value ) {
 		if( key === 'menu' ) {

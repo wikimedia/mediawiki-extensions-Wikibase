@@ -28,14 +28,14 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.rawValue
+		 * @inheritdoc
 		 */
 		rawValue: function() {
 			return this.viewState().getTextValue();
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert._init
+		 * @inheritdoc
 		 */
 		_init: function() {
 			// This expert just displays a message that whatever value currently set in the
@@ -71,7 +71,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.draw
+		 * @inheritdoc
 		 */
 		draw: function() {
 			return $.Deferred().resolve().promise();

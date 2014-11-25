@@ -69,7 +69,7 @@ $.widget( 'ui.toggler', {
 	$toggleIcon: null,
 
 	/**
-	 * @see jQuery.Widget._create
+	 * @inheritdoc
 	 */
 	_create: function() {
 		var self = this;
@@ -124,7 +124,7 @@ $.widget( 'ui.toggler', {
 	},
 
 	/**
-	 * @see jQuery.Widget.destroy
+	 * @inheritdoc
 	 */
 	destroy: function() {
 		var label = this.element.children( this.widgetBaseClass + '-label' ).text();

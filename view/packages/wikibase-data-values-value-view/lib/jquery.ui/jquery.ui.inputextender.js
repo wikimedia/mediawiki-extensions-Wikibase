@@ -145,7 +145,7 @@ $.widget( 'ui.inputextender', {
 	_offset: null,
 
 	/**
-	 * @see jQuery.Widget._create
+	 * @inheritdoc
 	 */
 	_create: function() {
 		var self = this;
@@ -228,7 +228,7 @@ $.widget( 'ui.inputextender', {
 	},
 
 	/**
-	 * @see jQuery.Widget.destroy
+	 * @inheritdoc
 	 */
 	destroy: function() {
 		if( this.extensionIsActive() ) {

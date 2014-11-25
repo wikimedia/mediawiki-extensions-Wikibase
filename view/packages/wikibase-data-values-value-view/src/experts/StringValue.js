@@ -25,7 +25,7 @@
 		$input: null,
 
 		/**
-		 * @see jQuery.valueview.Expert.init
+		 * @inheritdoc
 		 */
 		init: function() {
 			var notifier = this._viewNotifier;
@@ -48,7 +48,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.destroy
+		 * @inheritdoc
 		 */
 		destroy: function() {
 			if( this.$input ) {
@@ -60,14 +60,14 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.rawValue
+		 * @inheritdoc
 		 */
 		rawValue: function() {
 			return this.$input.val();
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.draw
+		 * @inheritdoc
 		 */
 		draw: function() {
 			// Resize textarea to fit the value (which might be empty):
@@ -94,7 +94,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.focus
+		 * @inheritdoc
 		 */
 		focus: function() {
 			// Move text cursor to the end of the textarea:
@@ -102,7 +102,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.blur
+		 * @inheritdoc
 		 */
 		blur: function() {
 			this.$input.blur();

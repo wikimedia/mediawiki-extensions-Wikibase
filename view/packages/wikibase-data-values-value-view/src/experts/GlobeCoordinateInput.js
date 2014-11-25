@@ -85,7 +85,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.valueCharacteristics
+		 * @inheritdoc
 		 */
 		valueCharacteristics: function() {
 			if( !this.precisionRotator ) { // happens when called statically
@@ -103,7 +103,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.destroy
+		 * @inheritdoc
 		 */
 		destroy: function() {
 			this.precisionRotator = null;

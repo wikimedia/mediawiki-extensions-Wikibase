@@ -43,7 +43,7 @@
 $.widget( 'ui.ooMenu', {
 
 	/**
-	 * @see jQuery.Widget.options
+	 * @inheritdoc
 	 */
 	options: {
 		items: [],
@@ -53,7 +53,7 @@ $.widget( 'ui.ooMenu', {
 	},
 
 	/**
-	 * @see jQuery.Widget._create
+	 * @inheritdoc
 	 */
 	_create: function() {
 		this.element
@@ -65,7 +65,7 @@ $.widget( 'ui.ooMenu', {
 	},
 
 	/**
-	 * @see jQuery.Widget.destroy
+	 * @inheritdoc
 	 */
 	destroy: function() {
 		this.element
@@ -79,7 +79,7 @@ $.widget( 'ui.ooMenu', {
 	},
 
 	/**
-	 * @see jQuery.Widget._setOption
+	 * @inheritdoc
 	 *
 	 * @throws {Error} when trying to set "items" or "customItems" option with improper values.
 	 */
@@ -499,7 +499,7 @@ CustomItem = util.inherit(
 		_cssClass: null,
 
 		/**
-		 * @see jQuery.ui.ooMenu.Item.getValue
+		 * @inheritdoc
 		 */
 		getValue: function() {
 			return '';
