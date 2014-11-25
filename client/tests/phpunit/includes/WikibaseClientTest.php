@@ -151,9 +151,9 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\OutputFormatValueFormatterFactory', $returnValue );
 	}
 
-	public function testGetLanguageLinkBadgeDisplay() {
-		$returnValue = $this->getDefaultInstance()->getLanguageLinkBadgeDisplay();
-		$this->assertInstanceOf( 'Wikibase\Client\Hooks\LanguageLinkBadgeDisplay', $returnValue );
+	public function testGetSiteLinkBadgeDisplay() {
+		$returnValue = $this->getDefaultInstance()->getSiteLinkBadgeDisplay();
+		$this->assertInstanceOf( 'Wikibase\Client\Hooks\SiteLinkBadgeDisplay', $returnValue );
 	}
 
 	public function testGetOtherProjectsSidebarGeneratorFactoryReturnType() {
