@@ -89,8 +89,8 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 	private function updateMockRepo( MockRepository $repo, $entities ) {
 		foreach ( $entities as $id => $siteLinks ) {
 			if ( !( $siteLinks instanceof Entity ) ) {
-				$entity = Item::newEmpty();
-				$entity->setId( new ItemId( $id ) );
+				$item = Item::newEmpty();
+				$item->setId( $id );
 
 				foreach ( $siteLinks as $siteId => $page ) {
 					if ( is_int( $siteId ) ) {
@@ -99,13 +99,13 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 						$siteIdentifier = $siteId;
 					}
 
-					$entity->addSiteLink( new SiteLink( $siteIdentifier, $page ) );
+					$item->getSiteLinkList()->addNewSiteLink( $siteIdentifier, $page );
 				}
 			} else {
-				$entity = $siteLinks;
+				$item = $siteLinks;
 			}
 
-			$repo->putEntity( $entity );
+			$repo->putEntity( $item );
 		}
 	}
 
