@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests;
 use MediaWikiSite;
 use ParserOutput;
 use Title;
-use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\SiteLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
@@ -83,7 +83,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 		return new LangLinkHandler(
 			$this->getOtherProjectsSidebarGeneratorFactory( $otherProjects ),
-			$this->getLanguageLinkBadgeDisplay(),
+			$this->getSiteLinkBadgeDisplay(),
 			'srwiki',
 			new NamespaceChecker( array( NS_TALK ), array() ),
 			$this->mockRepo,
@@ -127,10 +127,10 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return LanguageLinkBadgeDisplay
+	 * @return SiteLinkBadgeDisplay
 	 */
-	private function getLanguageLinkBadgeDisplay() {
-		$badgeDisplay = $this->getMockBuilder( 'Wikibase\Client\Hooks\LanguageLinkBadgeDisplay' )
+	private function getSiteLinkBadgeDisplay() {
+		$badgeDisplay = $this->getMockBuilder( 'Wikibase\Client\Hooks\SiteLinkBadgeDisplay' )
 			->disableOriginalConstructor()
 			->getMock();
 
