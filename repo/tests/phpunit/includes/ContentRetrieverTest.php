@@ -175,7 +175,7 @@ class ContentRetrieverTest extends \MediaWikiTestCase {
 			$item->setDescription( 'en', $description );
 
 			$rev = $store->saveEntity( $item, "edit description", $GLOBALS['wgUser'], EDIT_UPDATE );
-			$revIds[] = $rev->getRevision();
+			$revIds[] = $rev->getRevisionId();
 		}
 
 		/**

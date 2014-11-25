@@ -288,7 +288,7 @@ class EditEntity {
 		wfProfileIn( __METHOD__ );
 		if ( $this->latestRevId === null ) {
 			if ( $this->latestRev !== null ) {
-				$this->latestRevId = $this->latestRev->getRevision();
+				$this->latestRevId = $this->latestRev->getRevisionId();
 			} else {
 				$this->latestRevId = $this->entityRevisionLookup->getLatestRevisionId( $this->getEntityId() );
 			}

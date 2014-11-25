@@ -132,7 +132,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$entityId = $r1->getEntity()->getId();
 
 		$r1actual = $lookup->getEntityRevision( $entityId );
-		$this->assertEquals( $r1->getRevision(), $r1actual->getRevision(), 'revid' );
+		$this->assertEquals( $r1->getRevisionId(), $r1actual->getRevisionId(), 'revid' );
 		$this->assertEquals( $r1->getTimestamp(), $r1actual->getTimestamp(), 'timestamp' );
 		$this->assertEquals( $r1->getEntity()->getId(), $r1actual->getEntity()->getId(), 'entity id' );
 
@@ -143,10 +143,10 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$entity->setLabel( 'en', 'UPDATED' );
 
 		$r2 = $store->saveEntity( $entity, 'update one', $user, EDIT_UPDATE );
-		$this->assertNotEquals( $r1->getRevision(), $r2->getRevision(), 'expected new revision id' );
+		$this->assertNotEquals( $r1->getRevisionId(), $r2->getRevisionId(), 'expected new revision id' );
 
 		$r2actual = $lookup->getEntityRevision( $entityId );
-		$this->assertEquals( $r2->getRevision(), $r2actual->getRevision(), 'revid' );
+		$this->assertEquals( $r2->getRevisionId(), $r2actual->getRevisionId(), 'revid' );
 		$this->assertEquals( $r2->getTimestamp(), $r2actual->getTimestamp(), 'timestamp' );
 		$this->assertEquals( $r2->getEntity()->getId(), $r2actual->getEntity()->getId(), 'entity id' );
 
@@ -199,7 +199,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		// inject ids
 		if ( is_int( $baseRevId ) ) {
 			// use target item's revision as an offset
-			$baseRevId += $r1->getRevision();
+			$baseRevId += $r1->getRevisionId();
 		}
 
 		if ( $entity->getId() === null ) {
@@ -268,7 +268,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		// Revert to original content
 		$r1 = $store->saveEntity( $one, 'restore one', $user, EDIT_UPDATE );
-		$revision = Revision::newFromId( $r1->getRevision() );
+		$revision = Revision::newFromId( $r1->getRevisionId() );
 
 		$this->assertFalse( $revision->getTitle()->isRedirect(), 'Title::isRedirect' );
 		$this->assertFalse( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
@@ -411,7 +411,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		try {
 			$rev = $store->saveEntity( $entity, $summary, $user, $flags, $baseRevId );
-			$status = Status::newGood( Revision::newFromId( $rev->getRevision() ) );
+			$status = Status::newGood( Revision::newFromId( $rev->getRevisionId() ) );
 		} catch ( StorageException $ex ) {
 			$status = $ex->getStatus();
 
