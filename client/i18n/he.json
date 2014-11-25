@@ -62,7 +62,7 @@
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" אינו קוד שפה תקין.",
 	"wikibase-unconnectedpages-page-warning": "לא ניתן היה להשתמש בכותרת הדף לשאילתה והמערכת תתעלם ממנה.",
 	"wikibase-unconnectedpages-iwdata-label": "רק דפים עם קישורים לשפות אחרות",
-	"wikibase-unconnectedpages-format-row": "({{PLURAL:|קישור אחד לשפה אחרת|$1 קישורים לשפות אחרות}} בדף)",
+	"wikibase-unconnectedpages-format-row": "(בדף יש {{PLURAL:$1|קישור אחד לשפה אחרת|$1 קישורים לשפות אחרות}})",
 	"wikibase-pageinfo-entity-id": "מזהה פריט ב{{GRAMMAR:תחילית|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "אין",
 	"wikibase-property-render-error": "כשל בהכנת המאפיין $1 לתצוגה: $2",

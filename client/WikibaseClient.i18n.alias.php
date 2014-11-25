@@ -49,7 +49,7 @@ $specialPageAliases['fi'] = array(
 
 /** Hebrew (עברית) */
 $specialPageAliases['he'] = array(
-	'UnconnectedPages' => array( 'דפים_שלא_מקושרים_לפריטים' ),
+	'UnconnectedPages' => array( 'דפים_שאינם_מקושרים_לפריטים', 'דפים_שלא_מקושרים_לפריטים' ),
 );
 
 /** Italian (italiano) */
