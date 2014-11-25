@@ -96,8 +96,7 @@
 	}, {
 
 		/**
-		 * Default options
-		 * @type {Object}
+		 * @inheritdoc
 		 */
 		_options: {
 			messages: {
@@ -108,17 +107,17 @@
 
 		/**
 		 * The preview widget.
-		 * @type {jQuery.valueview.ExpertExtender.Preview}
+		 * @property {jQuery.valueview.ExpertExtender.Preview}
 		 */
 		preview: null,
 
 		/**
-		 * @type {jQuery.valueview.ExpertExtender.Listrotator}
+		 * @property {jQuery.valueview.ExpertExtender.Listrotator}
 		 */
 		precisionRotator: null,
 
 		/**
-		 * @type {jQuery.valueview.ExpertExtender.Listrotator}
+		 * @property {jQuery.valueview.ExpertExtender.Listrotator}
 		 */
 		calendarRotator: null,
 

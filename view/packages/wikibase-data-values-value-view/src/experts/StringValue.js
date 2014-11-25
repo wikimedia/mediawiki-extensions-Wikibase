@@ -20,7 +20,7 @@
 		/**
 		 * The nodes of the input element. The input element will be used to display the value
 		 * during edit mode.
-		 * @type jQuery
+		 * @property {jQuery}
 		 */
 		$input: null,
 

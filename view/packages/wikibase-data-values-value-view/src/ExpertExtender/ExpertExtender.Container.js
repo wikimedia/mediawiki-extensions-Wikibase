@@ -20,12 +20,12 @@
 
 	$.extend( ExpertExtender.Container.prototype, {
 		/**
-		 * @type {jQuery}
+		 * @property {jQuery}
 		 */
 		$container: null,
 
 		/**
-		 * @type {Object}
+		 * @property {Object}
 		 */
 		_child: null,
 

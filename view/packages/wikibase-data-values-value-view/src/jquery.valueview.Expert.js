@@ -117,38 +117,38 @@ jQuery.valueview = jQuery.valueview || {};
 		 * A unique UI class for this Expert definition. Should be used to prefix classes on DOM
 		 * nodes within the Expert's view port. If a new expert definition will be created using
 		 * jQuery.valueview.Expert(), then this will be set by that function.
-		 * @type String
+		 * @property {string}
 		 */
 		uiBaseClass: '',
 
 		/**
 		 * The DOM node which has to be updated by the draw() function. Displays current state
 		 * and/or input elements for user interaction during valueview's edit mode.
-		 * @type jQuery
+		 * @property {jQuery}
 		 */
 		$viewPort: null,
 
 		/**
 		 * Object representing the state of the related valueview.
-		 * @type jQuery.valueview.ViewState
+		 * @property {jQuery.valueview.ViewState}
 		 */
 		_viewState: null,
 
 		/**
 		 * Object for publishing changes to the outside.
-		 * @type util.Notifier
+		 * @property {util.Notifier}
 		 */
 		_viewNotifier: null,
 
 		/**
 		 * The expert's options, received through the constructor.
-		 * @type Object
+		 * @property {Object}
 		 */
 		_options: null,
 
 		/**
 		 * Message provider used to fetch messages from mediaWiki if available.
-		 * @type {util.MessageProvider}
+		 * @property {util.MessageProvider}
 		 */
 		_messageProvider: null,
 

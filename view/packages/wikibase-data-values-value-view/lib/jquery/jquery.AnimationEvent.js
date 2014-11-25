@@ -63,7 +63,7 @@ jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 
 		/**
 		 * The purpose stated for the animation which is about to be started.
-		 * @type {string}
+		 * @property {string}
 		 */
 		this.animationPurpose = animationPurpose;
 

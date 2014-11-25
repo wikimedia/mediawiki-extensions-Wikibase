@@ -15,7 +15,7 @@
 	 */
 	vv.experts.UnsupportedValue = vv.expert( 'UnsupportedValue', PARENT, {
 		/**
-		 * @type {Object}
+		 * @inheritdoc
 		 */
 		_options: {
 			messages: {

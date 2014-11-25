@@ -30,27 +30,27 @@
 
 	$.extend( ExpertExtender.Listrotator.prototype, {
 		/**
-		 * @type {Function}
+		 * @property {Function}
 		 */
 		_onValueChange: null,
 
 		/**
-		 * @type {Function}
+		 * @property {Function}
 		 */
 		_getUpstreamValue: null,
 
 		/**
-		 * @type {jQuery}
+		 * @property {jQuery}
 		 */
 		_$customItem: null,
 
 		/**
-		 * @type {number|null}
+		 * @property {number|null}
 		 */
 		_customValueIndex: null,
 
 		/**
-		 * @type {jQuery.ui.listrotator}
+		 * @property {jQuery.ui.listrotator}
 		 */
 		rotator: null,
 

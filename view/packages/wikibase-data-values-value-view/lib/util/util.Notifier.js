@@ -5,7 +5,7 @@ util.Notifier = ( function() {
 
 	/**
 	 * Tracks the current notifications for the Notifier's current function.
-	 * @type {Array}
+	 * @property {string[]}
 	 */
 	var currentNotifications = [];
 

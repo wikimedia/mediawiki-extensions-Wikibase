@@ -21,7 +21,7 @@ jQuery.valueview.tests = jQuery.valueview.tests || {};
 	vv.tests.MockExpert = vv.expert( 'Mock', PARENT, {
 		/**
 		 * Current value.
-		 * @type {*}
+		 * @property {*}
 		 */
 		value: null,
 

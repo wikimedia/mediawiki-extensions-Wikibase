@@ -25,17 +25,17 @@
 	};
 	$.extend( vv.ExpertExtender.prototype, {
 		/**
-		 * @type {jQuery}
+		 * @property {jQuery}
 		 */
 		$input: null,
 
 		/**
-		 * @type {jQuery.ui.inputextender}
+		 * @property {jQuery.ui.inputextender}
 		 */
 		_inputextender: null,
 
 		/**
-		 * @type {util.Extendable}
+		 * @property {util.Extendable}
 		 */
 		_extendable: null,
 

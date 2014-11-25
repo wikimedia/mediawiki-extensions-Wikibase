@@ -35,7 +35,7 @@
 
 	$.extend( ExpertExtender.LanguageSelector.prototype, {
 		/**
-		 * @type {util.MessageProvider}
+		 * @property {util.MessageProvider}
 		 */
 		_messageProvider: null,
 

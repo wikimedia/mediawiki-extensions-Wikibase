@@ -408,17 +408,17 @@ var Item = function( label, value, link ) {
 
 $.extend( Item.prototype, {
 	/**
-	 * @type {jQuery|string}
+	 * @property {jQuery|string}
 	 */
 	_label: null,
 
 	/**
-	 * @type {string}
+	 * @property {string}
 	 */
 	_value: null,
 
 	/**
-	 * @type {string|null}
+	 * @property {string|null}
 	 */
 	_link: null,
 
@@ -482,17 +482,17 @@ CustomItem = util.inherit(
 	CustomItem,
 	{
 		/**
-		 * @type {Function|boolean|null}
+		 * @property {Function|boolean|null}
 		 */
 		_visibility: null,
 
 		/**
-		 * @type {Function|null}
+		 * @property {Function|null}
 		 */
 		_action: null,
 
 		/**
-		 * @type {string}
+		 * @property {string}
 		 */
 		_cssClass: null,
 

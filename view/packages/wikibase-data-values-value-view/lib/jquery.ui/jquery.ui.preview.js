@@ -20,7 +20,7 @@
 $.widget( 'ui.preview', {
 
 	/**
-	 * @type {Object}
+	 * @inheritdoc
 	 */
 	options: {
 		$input: null,
@@ -33,7 +33,7 @@ $.widget( 'ui.preview', {
 
 	/**
 	 * The node of the previewed value.
-	 * @type {jQuery}
+	 * @property {jQuery}
 	 */
 	$value: null,
 

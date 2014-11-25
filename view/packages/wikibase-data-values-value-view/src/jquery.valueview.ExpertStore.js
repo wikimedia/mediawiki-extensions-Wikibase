@@ -24,17 +24,17 @@ jQuery.valueview = jQuery.valueview || {};
 		/**
 		 * Default expert constructor to be returned when no expert is registered for a specific
 		 * purpose.
-		 * @type {Function|null}
+		 * @property {Function|null}
 		 */
 		_DefaultExpert: null,
 
 		/**
-		 * @type {Object}
+		 * @property {Object}
 		 */
 		_expertsForDataValueTypes: null,
 
 		/**
-		 * @type {Object}
+		 * @property {Object}
 		 */
 		_expertsForDataTypes: null,
 

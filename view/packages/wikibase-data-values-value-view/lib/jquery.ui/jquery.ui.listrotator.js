@@ -3,13 +3,13 @@
 
 	/**
 	 * Whether loaded in MediaWiki context.
-	 * @type {boolean}
+	 * @property {boolean}
 	 */
 	var IS_MW_CONTEXT = ( typeof mediaWiki !== 'undefined' && mediaWiki.msg );
 
 	/**
 	 * Whether actual listrotator resource loader module is loaded.
-	 * @type {boolean}
+	 * @property {boolean}
 	 */
 	var IS_MODULE_LOADED = (
 		IS_MW_CONTEXT
@@ -93,8 +93,7 @@
 	 */
 	$.widget( 'ui.listrotator', {
 		/**
-		 * Additional options
-		 * @type {Object}
+		 * @inheritdoc
 		 */
 		options: {
 			values: [],
@@ -120,38 +119,38 @@
 
 		/**
 		 * Node of the selectable "auto" option.
-		 * @type {jQuery}
+		 * @property {jQuery}
 		 */
 		$auto: null,
 
 		/**
 		 * Node of the previous list item section.
-		 * @type {jQuery}
+		 * @property {jQuery}
 		 */
 		$prev: null,
 
 		/**
 		 * Node of the current list item section.
-		 * @type {jQuery}
+		 * @property {jQuery}
 		 */
 		$curr: null,
 
 		/**
 		 * Node of the next list item section.
-		 * @type {jQuery}
+		 * @property {jQuery}
 		 */
 		$next: null,
 
 		/**
 		 * Node of the menu opening when clicking on the "current" section.
-		 * @type {jQuery}
+		 * @property {jQuery}
 		 */
 		$menu: null,
 
 		/**
 		 * Temporarily caching the value the rotator is rotating to while the animation is being
 		 * performed.
-		 * @type {*}
+		 * @property {*}
 		 */
 		_rotatingTo: null,
 

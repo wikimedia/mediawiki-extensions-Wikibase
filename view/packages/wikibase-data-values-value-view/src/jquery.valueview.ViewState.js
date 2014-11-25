@@ -26,7 +26,7 @@ jQuery.valueview = jQuery.valueview || {};
 	$.extend( SELF.prototype, {
 		/**
 		 * The widget object whose status is represented.
-		 * @type jQuery.valueview
+		 * @property {jQuery.valueview}
 		 */
 		_view: null,
 

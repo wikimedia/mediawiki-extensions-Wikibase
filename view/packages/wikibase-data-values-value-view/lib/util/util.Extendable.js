@@ -18,7 +18,7 @@ this.util = this.util || {};
 		/**
 		 * The list of registered extensions
 		 *
-		 * @type {Object[]}
+		 * @property {Object[]}
 		 */
 		_extensions: null,
 

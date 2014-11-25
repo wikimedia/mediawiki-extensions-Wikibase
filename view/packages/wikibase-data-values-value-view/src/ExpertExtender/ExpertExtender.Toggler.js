@@ -21,17 +21,17 @@
 
 	$.extend( ExpertExtender.Toggler.prototype, {
 		/**
-		 * @type {util.MessageProvider}
+		 * @property {util.MessageProvider}
 		 */
 		_messageProvider: null,
 
 		/**
-		 * @type {jQuery}
+		 * @property {jQuery}
 		 */
 		$toggler: null,
 
 		/**
-		 * @type {jQuery}
+		 * @property {jQuery}
 		 */
 		$subject: null,
 

@@ -207,12 +207,12 @@ function testExpert( testDefinition ) {
  /**
   * Object holding all fields required by testExpert's first argument's object.
   * @since 0.1
-  * @type Object
+  * @property {Object}
   */
 testExpert.basicTestDefinition = {
 	/**
 	 * A jQuery.valueview.Expert implementation's constructor to be tested.
-	 * @type Function
+	 * @property {Function}
 	 */
 	expertConstructor: valueview.experts.StringValue
 };

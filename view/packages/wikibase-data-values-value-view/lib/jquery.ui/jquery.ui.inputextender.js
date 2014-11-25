@@ -4,7 +4,7 @@
 /**
  * Caches whether the widget is used in a rtl context. This, however, depends on using an "rtl"
  * class on the document body like it is done in MediaWiki.
- * @type {boolean}
+ * @property {boolean} [IS_RTL=false]
  */
 var IS_RTL = false;
 
@@ -15,7 +15,7 @@ $( document ).ready( function() {
 /**
  * Collection for keeping track which input extender widgets have their extension shown at the
  * moment.
- * @type {jQuery.ui.inputextender}
+ * @property {jQuery.ui.inputextender} [inputExtendersWithVisibleExtension=Object]
  */
 var inputExtendersWithVisibleExtension = ( function() {
 	var inputExtenders = [];
@@ -90,8 +90,7 @@ var inputExtendersWithVisibleExtension = ( function() {
  */
 $.widget( 'ui.inputextender', {
 	/**
-	 * Additional options
-	 * @type {Object}
+	 * @inheritdoc
 	 */
 	options: {
 		content: [],
@@ -113,32 +112,32 @@ $.widget( 'ui.inputextender', {
 	 * @private Use extension() instead. extension() will return null if the $extension is not
 	 *          being used. $extension might be destroyed in that case in future versions, so
 	 *          do not rely on it being set all of the time after its first initialization.
-	 * @type {jQuery|null}
+	 * @property {jQuery|null}
 	 */
 	$extension: null,
 
 	/**
 	 * Whether the input extender is in its extended state right now.
-	 * @type {boolean}
+	 * @property {boolean} [_isExtended=false]
 	 */
 	_isExtended: false,
 
 	/**
 	 * Whether the input extender is visible
-	 * @type {boolean}
+	 * @property {boolean} [_extensionIsVisible=false]
 	 */
 	_extensionIsVisible: false,
 
 	/**
 	 * Caches the timeout when the actual input extender animation should kick in.
-	 * @type {number}
+	 * @property {number}
 	 */
 	_animationTimeout: null,
 
 	/**
 	 * Caches the element's offset to determine whether the input extension has to be
 	 * repositioned on draw() calls.
-	 * @type {Object}
+	 * @property {Object}
 	 */
 	_offset: null,
 

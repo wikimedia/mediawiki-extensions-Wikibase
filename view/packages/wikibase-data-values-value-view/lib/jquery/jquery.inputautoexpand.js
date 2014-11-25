@@ -401,7 +401,7 @@ function supports0Height() {
 
 /**
  * Rulers used for measuring the input content.
- * @type {jQuery}
+ * @property {jQuery}
  * @ignore
  */
 var $rulerX, $rulerY;

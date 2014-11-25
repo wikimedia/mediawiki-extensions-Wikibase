@@ -4,15 +4,15 @@
 /**
  * Whether page is rendered in rtl context. This, however, depends on the css class "rtl"
  * being assigned to the body element.
- * @type {boolean|null}
+ * @property {boolean} [isRtl=false]
  */
-var isRtl;
+var isRtl = false;
 
 /**
  * Whether the user client supports CSS3 transformation.
- * @type {boolean|null}
+ * @property {boolean} [browserSupportsTransform=false]
  */
-var browserSupportsTransform;
+var browserSupportsTransform = false;
 
 $( document ).ready( function() {
 	// have to wait for document to be loaded for this, otherwise 'rtl' might not yet be there!
@@ -48,8 +48,7 @@ $( document ).ready( function() {
 $.widget( 'ui.toggler', {
 
 	/**
-	 * Additional options.
-	 * @type {Object}
+	 * @inheritdoc
 	 */
 	options: {
 		$subject: null
@@ -57,13 +56,13 @@ $.widget( 'ui.toggler', {
 
 	/**
 	 * The node subject to getting toggled.
-	 * @type {jQuery}
+	 * @property {jQuery}
 	 */
 	$subject: null,
 
 	/**
 	 * The toggler's icon.
-	 * @type {jQuery}
+	 * @property {jQuery}
 	 */
 	$toggleIcon: null,
 

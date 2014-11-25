@@ -31,12 +31,12 @@
 
 	$.extend( ExpertExtender.Preview.prototype, {
 		/**
-		 * @type {function}
+		 * @property {Function}
 		 */
 		_getUpstreamValue: null,
 
 		/**
-		 * @type {jQuery.ui.preview}
+		 * @property {jQuery.ui.preview}
 		 */
 		_preview: null,
 

@@ -112,19 +112,19 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Counter for the number of pending requests.
-	 * @type {number}
+	 * @property {number}
 	 */
 	_pending: null,
 
 	/**
 	 * Current search term.
-	 * @type {string}
+	 * @property {string}
 	 */
 	_term: null,
 
 	/**
 	 * Minimum amount of characters to begin a search.
-	 * @type {int}
+	 * @property {int} [_minTermLength=1]
 	 */
 	_minTermLength: 1,
 

@@ -16,8 +16,7 @@
 	 */
 	vv.experts.EmptyValue = vv.expert( 'EmptyValue', PARENT, {
 		/**
-		 * Options.
-		 * @type {Object}
+		 * @inheritdoc
 		 */
 		_options: {
 			messages: {

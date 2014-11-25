@@ -17,14 +17,14 @@ jQuery.NativeEventHandler.test.testDefinition = ( function ( $, QUnit ) {
 		/**
 		 * Descriptive name of the event handler system which is used together with the
 		 * NativeEventHandler in this test definition.
-		 * @type {String}
+		 * @property {string}
 		 */
 		eventSystem: '',
 
 		/**
 		 * Whether custom results are supported by the event handler system in use. E.g. $.Widget's
 		 * _trigger() does not allow for custom results while $.trigger() does.
-		 * @type Boolean
+		 * @property {boolean}
 		 */
 		supportsCustomResults: false,
 

@@ -111,31 +111,31 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Current, accepted value. Might be "behind" the expert's raw value until the raw value gets
 	 * parsed and the parsed result set as the new accepted value.
-	 * @type dv.DataValue|null
+	 * @property {dataValues.DataValue|null}
 	 */
 	_value: null,
 
 	/**
 	 * Most current formatted value. Might be "behind" the expert's raw value as well as the
 	 * valueview's parsed DataValue since formatting might involve an asynchronous request.
-	 * @type {string|jQuery|null}
+	 * @property {string|jQuery|null}
 	 */
 	_formattedValue: null,
 
 	/**
 	 * The DOM node containing the actual value representation. This is the expert's viewport.
-	 * @type jQuery
+	 * @property {jQuery}
 	 */
 	$value: null,
 
 	/**
 	 * Value from before edit mode.
-	 * @type dv.DataValue|null
+	 * @property {dataValues.DataValue|null}
 	 */
 	_initialValue: null,
 
 	/**
-	 * @type boolean
+	 * @property {boolean} [_isInEditMode=false]
 	 */
 	_isInEditMode: false,
 
@@ -144,13 +144,13 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * when in edit mode, otherwise it is null.
 	 * Can also be null if the current value has a data value type unknown to the expert store given
 	 * in the "expertStore" option.
-	 * @type jQuery.valueview.Expert|null
+	 * @property {jQuery.valueview.Expert|null}
 	 */
 	_expert: null,
 
 	/**
 	 * Timeout id of the currently running setTimeout function that delays the parser API request.
-	 * @type {number}
+	 * @property {number}
 	 */
 	_parseTimer: null,
 

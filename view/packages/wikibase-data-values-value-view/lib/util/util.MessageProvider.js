@@ -29,7 +29,7 @@ util.MessageProvider = ( function() {
 		constructor: MessageProvider,
 
 		/**
-		 * @type {Object}
+		 * @property {Object}
 		 */
 		_options: null,
 
