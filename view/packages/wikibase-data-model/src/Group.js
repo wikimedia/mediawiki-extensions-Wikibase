@@ -13,7 +13,7 @@
  * @param {*} key
  * @param {Function} GroupableCollectionConstructor
  * @param {string} groupableCollectionGetKeysFunctionName
- * @param {wikibase.datamodel.GroupableCollection} groupableCollection
+ * @param {wikibase.datamodel.GroupableCollection} [groupableCollection=new GroupableCollectionConstructor()]
  *
  * @throws {Error} if a required parameter is not specified properly.
  */

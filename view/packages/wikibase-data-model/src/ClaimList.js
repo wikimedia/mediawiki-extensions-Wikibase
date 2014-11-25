@@ -12,7 +12,7 @@ var PARENT = wb.datamodel.List;
  *
  * @constructor
  *
- * @param {wikibase.datamodel.Claim[]} [claims]
+ * @param {wikibase.datamodel.Claim[]} [claims=[]]
  */
 wb.datamodel.ClaimList = util.inherit( 'WbDataModelClaimList', PARENT, function( claims ) {
 	PARENT.call( this, wikibase.datamodel.Claim, claims );

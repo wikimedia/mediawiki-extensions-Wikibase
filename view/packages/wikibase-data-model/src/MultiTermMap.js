@@ -13,7 +13,7 @@ var PARENT = wb.datamodel.Map;
  *
  * @constructor
  *
- * @param {Object} [multiTerms]
+ * @param {Object} [multiTerms={}]
  */
 wb.datamodel.MultiTermMap = util.inherit(
 	'WbDataModelMultiTermMap',

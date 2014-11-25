@@ -13,7 +13,7 @@ var PARENT = wb.datamodel.Group;
  *
  * @constructor
  *
- * @param {wikibase.datamodel.ClaimList} [claimList]
+ * @param {wikibase.datamodel.ClaimList} [claimList=new wikibase.datamodel.ClaimList()]
  */
 wb.datamodel.ClaimGroup = util.inherit( 'wbClaimGroup', PARENT, function( propertyId, claimList ) {
 	PARENT.call( this, propertyId, wb.datamodel.ClaimList, 'getPropertyIds', claimList );

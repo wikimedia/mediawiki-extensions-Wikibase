@@ -13,7 +13,7 @@ var PARENT = wb.datamodel.Map;
  *
  * @constructor
  *
- * @param {Object} [terms]
+ * @param {Object} [terms={}]
  */
 wb.datamodel.TermMap = util.inherit( 'WbDataModelTermMap', PARENT, function( terms ) {
 	PARENT.call( this, wb.datamodel.Term, terms );

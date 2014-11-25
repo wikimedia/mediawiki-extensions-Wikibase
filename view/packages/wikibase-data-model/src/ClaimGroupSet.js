@@ -13,7 +13,7 @@ var PARENT = wb.datamodel.Set;
  *
  * @constructor
  *
- * @param {wikibase.datamodel.ClaimGroup[]} [claimGroups]
+ * @param {wikibase.datamodel.ClaimGroup[]} [claimGroups=new wikibase.datamodel.ClaimGroup]
  */
 wb.datamodel.ClaimGroupSet = util.inherit( 'WbDataModelClaimGroupSet',
 	PARENT,

@@ -15,8 +15,8 @@ var PARENT = wb.datamodel.Entity;
  *
  * @param {string} entityId
  * @param {string} dataTypeId
- * @param {wikibase.datamodel.Fingerprint|null} [fingerprint]
- * @param {wikibase.datamodel.StatementGroupSet|null} [statementGroupSet]
+ * @param {wikibase.datamodel.Fingerprint|null} [fingerprint=new wikibase.datamodel.Fingerprint()]
+ * @param {wikibase.datamodel.StatementGroupSet|null} [statementGroupSet=new wikibase.datamodel.StatementGroupSet()]
  *
  * @throws {Error} if a required parameter is not specified properly.
  */

@@ -11,7 +11,7 @@
  * @constructor
  *
  * @param {Function} ItemConstructor
- * @param {Object} [map]
+ * @param {Object} [map={}]
  *
  * @throws {Error} if item constructor is not a Function.
  * @throws {Error} if item constructor prototype does not feature an equals() function.

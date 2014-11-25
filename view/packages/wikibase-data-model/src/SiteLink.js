@@ -12,7 +12,7 @@
  *
  * @param {string} siteId
  * @param {string} pageName
- * @param {string[]} [badges]
+ * @param {string[]} [badges=[]]
  *
  * @throws {Error} if a required parameter is not specified properly.
  */
@@ -60,7 +60,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {string[]} [badges]
+	 * @param {string[]} [badges=[]]
 	 */
 	setBadges: function( badges ) {
 		this._badges = badges || [];

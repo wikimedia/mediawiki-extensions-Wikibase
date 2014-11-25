@@ -14,7 +14,7 @@ var PARENT = wb.datamodel.GroupableCollection;
  * @constructor
  *
  * @param {Function} ItemConstructor
- * @param {*[]} [items]
+ * @param {*[]} [items=[]]
  *
  * @throws {Error} if item constructor is not a Function.
  * @throws {Error} if item constructor prototype does not feature an equals() function.

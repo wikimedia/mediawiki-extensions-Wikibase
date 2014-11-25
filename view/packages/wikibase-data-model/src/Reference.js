@@ -14,8 +14,8 @@
  *
  * @constructor
  *
- * @param {wikibase.datamodel.SnakList|null} [snaks]
- * @param {string} [hash] Omit, if the Reference object should represent a new reference.
+ * @param {wikibase.datamodel.SnakList|null} [snaks=new wikibase.datamodel.SnakList()]
+ * @param {string} [hash=null] Omit, if the Reference object should represent a new reference.
  *
  * @throws {Error} if snaks are not passed as SnakList instance.
  */
@@ -27,7 +27,7 @@ var SELF = wb.datamodel.Reference = function WbDataModelReference( snaks, hash )
 	}
 
 	this._snaks = snaks;
-	this._hash = hash;
+	this._hash = hash || null;
 };
 
 $.extend( SELF.prototype, {

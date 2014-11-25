@@ -11,9 +11,9 @@
  * @constructor
  *
  * @param {wikibase.datamodel.Snak} mainSnak
- * @param {wikibase.datamodel.SnakList|null} [qualifiers]
- * @param {string|null} [guid] The Global Unique Identifier of this Claim. Can be omitted or null
- *        if this is a new Claim, not yet stored in the database and associated with some entity.
+ * @param {wikibase.datamodel.SnakList|null} [qualifiers=new wikibase.datamodel.SnakList()]
+ * @param {string|null} [guid=null] The Global Unique Identifier of this Claim. Can be null if this
+ *        is a new Claim, not yet stored in the database and associated with some entity.
  */
 var SELF = wb.datamodel.Claim = function WbDataModelClaim( mainSnak, qualifiers, guid ) {
 	this.setMainSnak( mainSnak );

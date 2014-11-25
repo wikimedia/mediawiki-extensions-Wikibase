@@ -12,8 +12,8 @@
  * @constructor
  *
  * @param {wikibase.datamodel.Claim} claim
- * @param {wikibase.datamodel.ReferenceList|null} [references]
- * @param {number} [rank]
+ * @param {wikibase.datamodel.ReferenceList|null} [references=new wikibase.datamodel.ReferenceList()]
+ * @param {number} [rank=wikibase.datamodel.Statement.RANK.NORMAL]
  */
 var SELF = wb.datamodel.Statement = function WbDataModelStatement( claim, references, rank ) {
 	this.setClaim( claim );

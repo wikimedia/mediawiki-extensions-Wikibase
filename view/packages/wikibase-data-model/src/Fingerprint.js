@@ -10,9 +10,9 @@
  *
  * @constructor
  *
- * @param {wikibase.datamodel.TermMap|null} [labels]
- * @param {wikibase.datamodel.TermMap|null} [descriptions]
- * @param {wikibase.datamodel.MultiTermMap|null} [aliases]
+ * @param {wikibase.datamodel.TermMap|null} [labels=new wikibase.datamodel.TermMap()]
+ * @param {wikibase.datamodel.TermMap|null} [descriptions=new wikibase.datamodel.TermMap()]
+ * @param {wikibase.datamodel.MultiTermMap|null} [aliases=new wikibase.datamodel.MultiTermMap()]
  *
  * @throws {Error} if a required parameter is not specified properly.
  */
@@ -173,7 +173,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {string} [languageCode]
+	 * @param {string} languageCode
 	 * @return {wikibase.datamodel.MultiTerm|null}
 	 */
 	getAliasesFor: function( languageCode ) {

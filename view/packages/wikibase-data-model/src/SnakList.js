@@ -14,7 +14,7 @@ var PARENT = wb.datamodel.List;
  *
  * @constructor
  *
- * @param {wikibase.datamodel.Snak[]} [snaks]
+ * @param {wikibase.datamodel.Snak[]} [snaks=[]]
  */
 wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( snaks ) {
 	PARENT.call( this, wikibase.datamodel.Snak, snaks );
@@ -23,7 +23,7 @@ wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( s
 	 * Returns a SnakList with the snaks featuring a specific property id. If the property id
 	 * parameter is omitted, a copy of the whole SnakList object is returned.
 	 *
-	 * @param {string} [propertyId]
+	 * @param {string|null} [propertyId=null]
 	 * @return {wikibase.datamodel.SnakList}
 	 */
 	getFilteredSnakList: function( propertyId ) {

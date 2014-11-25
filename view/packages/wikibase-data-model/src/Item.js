@@ -14,9 +14,9 @@ var PARENT = wb.datamodel.Entity;
  * @constructor
  *
  * @param {string} entityId
- * @param {wikibase.datamodel.Fingerprint|null} [fingerprint]
- * @param {wikibase.datamodel.StatementGroupSet|null} [statementGroupSet]
- * @param {wikibase.datamodel.SiteLinkSet|null} [siteLinkSet]
+ * @param {wikibase.datamodel.Fingerprint|null} [fingerprint=new wikibase.datamodel.Fingerprint()]
+ * @param {wikibase.datamodel.StatementGroupSet|null} [statementGroupSet=new wikibase.datamodel.StatementGroupSet()]
+ * @param {wikibase.datamodel.SiteLinkSet|null} [siteLinkSet=new wikibase.datamodel.SiteLinkSet()]
  *
  * @throws {Error} if a required parameter is not specified properly.
  */

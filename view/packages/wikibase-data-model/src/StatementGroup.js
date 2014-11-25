@@ -13,7 +13,7 @@ var PARENT = wb.datamodel.Group;
  *
  * @constructor
  *
- * @param {wikibase.datamodel.StatementList} [statementList]
+ * @param {wikibase.datamodel.StatementList} [statementList=new wikibase.datamodel.StatementList()]
  */
 wb.datamodel.StatementGroup = util.inherit(
 	'WbDataModelStatementGroup',

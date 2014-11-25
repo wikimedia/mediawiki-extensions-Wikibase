@@ -13,7 +13,7 @@ var PARENT = wb.datamodel.Set;
  *
  * @constructor
  *
- * @param {wikibase.datamodel.StatementGroup[]} [statementGroups]
+ * @param {wikibase.datamodel.StatementGroup[]} [statementGroups=[]]
  */
 wb.datamodel.StatementGroupSet = util.inherit(
 	'WbDataModelStatementGroupSet',

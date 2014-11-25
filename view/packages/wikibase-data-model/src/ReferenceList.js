@@ -13,7 +13,7 @@ var PARENT = wb.datamodel.List;
  *
  * @constructor
  *
- * @param {wikibase.datamodel.Reference[]} [references]
+ * @param {wikibase.datamodel.Reference[]} [references=[]]
  */
 wb.datamodel.ReferenceList = util.inherit(
 	'wbDataModelReferenceList',
