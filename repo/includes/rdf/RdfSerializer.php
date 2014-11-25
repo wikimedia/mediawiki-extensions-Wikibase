@@ -121,7 +121,7 @@ class RdfSerializer {
 
 		$builder->addEntityRevisionInfo(
 			$entityRevision->getEntity()->getId(),
-			$entityRevision->getRevision(),
+			$entityRevision->getRevisionId(),
 			$entityRevision->getTimestamp()
 		);
 

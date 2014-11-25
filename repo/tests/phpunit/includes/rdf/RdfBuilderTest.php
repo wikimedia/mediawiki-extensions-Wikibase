@@ -228,7 +228,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder = $this->newRdfBuilder();
 
 		$builder->addEntity( $entityRevision->getEntity() );
-		$builder->addEntityRevisionInfo( $entityRevision->getEntity()->getId(), $entityRevision->getRevision(), $entityRevision->getTimestamp() );
+		$builder->addEntityRevisionInfo( $entityRevision->getEntity()->getId(), $entityRevision->getRevisionId(), $entityRevision->getTimestamp() );
 		$graph = $builder->getGraph();
 
 		foreach ( $expectedGraph->resources() as $rc ) {

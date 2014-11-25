@@ -235,7 +235,7 @@ if ( $ ) {
 			return $this->textInjector->newMarker(
 				'termbox',
 				$entityId->getSerialization(),
-				$entityRevision->getRevision()
+				$entityRevision->getRevisionId()
 			);
 		}
 
