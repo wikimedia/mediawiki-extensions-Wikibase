@@ -9,7 +9,7 @@ use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -72,11 +72,11 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return EntityLookup
 	 */
-	private function getEntityLookupMock( Entity $entity = null ) {
+	private function getEntityLookupMock( EntityDocument $entity = null ) {
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 
 		$entityLookup->expects( $this->any() )->method( 'getEntity' )
