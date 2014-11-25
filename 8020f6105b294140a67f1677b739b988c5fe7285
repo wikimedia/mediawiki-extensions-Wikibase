@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_3d553953",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-25T21:13:49Z",
+      "side": 1,
+      "message": "You could keep the TODO, so its clear the stuff can be made private once we can use PHP 5.4.",
+      "revId": "8020f6105b294140a67f1677b739b988c5fe7285",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
