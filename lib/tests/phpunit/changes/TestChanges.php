@@ -37,13 +37,13 @@ final class TestChanges {
 
 	protected static function getItem() {
 		$item = Item::newEmpty();
-		$item->setLabel( 'en', 'Venezuela' );
-		$item->setDescription( 'en', 'a country' );
-		$item->addAliases( 'en', array( 'Bolivarian Republic of Venezuela' ) );
+		$item->getFingerprint()->setLabel( 'en', 'Venezuela' );
+		$item->getFingerprint()->setDescription( 'en', 'a country' );
+		$item->getFingerprint()->setAliasGroup( 'en', array( 'Bolivarian Republic of Venezuela' ) );
 
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Venezuela' )  );
-		$item->addSiteLink( new SiteLink( 'jawiki', 'ベネズエラ' )  );
-		$item->addSiteLink( new SiteLink( 'cawiki', 'Veneçuela' )  );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Venezuela' );
+		$item->getSiteLinkList()->addNewSiteLink( 'jawiki', 'ベネズエラ' );
+		$item->getSiteLinkList()->addNewSiteLink( 'cawiki', 'Veneçuela' );
 
 		return $item;
 	}
