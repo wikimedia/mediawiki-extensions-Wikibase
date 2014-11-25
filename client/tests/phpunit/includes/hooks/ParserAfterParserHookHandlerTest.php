@@ -11,7 +11,7 @@ use Site;
 use SiteStore;
 use StripState;
 use Title;
-use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\SiteLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserAfterParseHookHandler;
 use Wikibase\Client\Usage\EntityUsage;
@@ -165,7 +165,7 @@ class ParserAfterParseHookHandlerTest extends \MediaWikiTestCase {
 		$mockRepo = $this->getMockRepo( $links );
 		$mockRepo->putEntity( $this->getBadgeItem() );
 
-		$badgeDisplay = new LanguageLinkBadgeDisplay(
+		$badgeDisplay = new SiteLinkBadgeDisplay(
 			$mockRepo,
 			array( 'Q17' => 'featured' ),
 			Language::factory( 'en' )
