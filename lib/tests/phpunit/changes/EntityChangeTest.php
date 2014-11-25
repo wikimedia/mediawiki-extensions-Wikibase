@@ -128,19 +128,6 @@ class EntityChangeTest extends DiffChangeTest {
 	}
 
 	/**
-	 * @dataProvider entityProvider
-	 *
-	 * @param Entity $entity
-	 */
-	public function testSetAndGetEntity( Entity $entity ) {
-		$changeFactory = TestChanges::getEntityChangeFactory();
-		$entityChange = $changeFactory->newForEntity( EntityChange::UPDATE, $entity->getId() );
-
-		$entityChange->setEntity( $entity );
-		$this->assertEquals( $entity, $entityChange->getEntity() );
-	}
-
-	/**
 	 * @dataProvider changeProvider
 	 * @since 0.3
 	 */
