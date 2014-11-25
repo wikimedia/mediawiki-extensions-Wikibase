@@ -13,7 +13,7 @@ use Site;
 use SiteStore;
 use Skin;
 use Title;
-use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\SiteLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
 use Wikibase\Client\Usage\EntityUsage;
@@ -204,7 +204,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$mockRepo = $this->getMockRepository( $siteLinksPerItem );
 		$mockRepo->putEntity( $this->getBadgeItem() );
 
-		$badgeDisplay = new LanguageLinkBadgeDisplay(
+		$badgeDisplay = new SiteLinkBadgeDisplay(
 			$mockRepo,
 			array( 'Q17' => 'featured' ),
 			$en
