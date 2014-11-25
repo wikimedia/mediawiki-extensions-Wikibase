@@ -145,7 +145,7 @@ class MockRepository implements
 		$entityRev = $revisions[$revision];
 		$entityRev = new EntityRevision( // return a copy!
 			$entityRev->getEntity()->copy(), // return a copy!
-			$entityRev->getRevision(),
+			$entityRev->getRevisionId(),
 			$entityRev->getTimestamp()
 		);
 
@@ -629,7 +629,7 @@ class MockRepository implements
 	public function getLatestRevisionId( EntityId $entityId ) {
 		$rev = $this->getEntityRevision( $entityId );
 
-		return $rev === null ? false : $rev->getRevision();
+		return $rev === null ? false : $rev->getRevisionId();
 	}
 
 	/**
@@ -666,7 +666,7 @@ class MockRepository implements
 			throw new StorageException( 'No base revision found for ' . $id->getSerialization() );
 		}
 
-		if ( $baseRevId !== false && $this->getEntityRevision( $id )->getRevision() !== $baseRevId ) {
+		if ( $baseRevId !== false && $this->getEntityRevision( $id )->getRevisionId() !== $baseRevId ) {
 			$status->fatal( 'edit-conflict' );
 		}
 
@@ -676,7 +676,7 @@ class MockRepository implements
 
 		$entityRevision = $this->putEntity( $entity, 0, 0, $user );
 
-		$this->putLog( $entityRevision->getRevision(), $entity->getId(), $summary, $user->getName() );
+		$this->putLog( $entityRevision->getRevisionId(), $entity->getId(), $summary, $user->getName() );
 		return $entityRevision;
 	}
 
@@ -734,8 +734,9 @@ class MockRepository implements
 			return false;
 		}
 
+		/** @var EntityRevision $rev */
 		foreach ( $this->entities[$key] as $rev ) {
-			if ( $rev->getRevision() >= $lastRevId ) {
+			if ( $rev->getRevisionId() >= $lastRevId ) {
 				if ( isset( $rev->user ) && $rev->user !== $user->getName() ) {
 					return false;
 				}

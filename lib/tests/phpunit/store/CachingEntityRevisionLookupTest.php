@@ -34,7 +34,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$mock = new MockRepository();
 
 		foreach ( $entityRevisions as $entityRev ) {
-			$mock->putEntity( $entityRev->getEntity(), $entityRev->getRevision() );
+			$mock->putEntity( $entityRev->getEntity(), $entityRev->getRevisionId() );
 		}
 
 		foreach ( $entityRedirects as $entityRedir ) {
@@ -67,7 +67,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$this->assertEquals( 12, $revId, 'new revision should be detected if verification is enabled' );
 
 		$rev = $lookup->getEntityRevision( $id );
-		$this->assertEquals( 12, $rev->getRevision(), 'new revision should be detected if verification is enabled' );
+		$this->assertEquals( 12, $rev->getRevisionId(), 'new revision should be detected if verification is enabled' );
 
 		// remove the item
 		$mock->removeEntity( $id );
@@ -103,7 +103,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$this->assertEquals( 11, $revId, 'new revision should be ignored if verification is disabled' );
 
 		$rev = $lookup->getEntityRevision( $id );
-		$this->assertEquals( 11, $rev->getRevision(), 'new revision should be ignored if verification is disabled' );
+		$this->assertEquals( 11, $rev->getRevisionId(), 'new revision should be ignored if verification is disabled' );
 
 		// remove the item
 		$mock->removeEntity( $id );
@@ -113,7 +113,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$this->assertEquals( 11, $revId, 'deletion should be ignored if verification is disabled' );
 
 		$rev = $lookup->getEntityRevision( $id );
-		$this->assertEquals( 11, $rev->getRevision(), 'deletion should be ignored if verification is disabled' );
+		$this->assertEquals( 11, $rev->getRevisionId(), 'deletion should be ignored if verification is disabled' );
 	}
 
 	public function testEntityUpdated() {
@@ -142,7 +142,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$this->assertEquals( 12, $revId, 'new revision should be detected after notification' );
 
 		$rev = $lookup->getEntityRevision( $id );
-		$this->assertEquals( 12, $rev->getRevision(), 'new revision should be detected after notification' );
+		$this->assertEquals( 12, $rev->getRevisionId(), 'new revision should be detected after notification' );
 	}
 
 	public function testRedirectUpdated() {

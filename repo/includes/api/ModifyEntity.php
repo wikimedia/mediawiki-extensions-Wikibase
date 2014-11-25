@@ -328,7 +328,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			}
 		} else {
 			$entity = $entityRev->getEntity();
-			$entityRevId = $entityRev->getRevision();
+			$entityRevId = $entityRev->getRevisionId();
 		}
 
 		if ( $entity->getId() === null ) {
