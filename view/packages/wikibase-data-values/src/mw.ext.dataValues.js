@@ -77,4 +77,4 @@ mediaWiki.ext.dataValues = new ( function( mw, dataValues, time, $ ) {
 
 	return new MwExtDataValues;
 
-}( mediaWiki, dataValues, time, jQuery ) );
+} )( mediaWiki, dataValues, time, jQuery );
