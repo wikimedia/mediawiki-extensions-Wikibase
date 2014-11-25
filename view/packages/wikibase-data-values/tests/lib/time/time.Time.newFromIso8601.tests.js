@@ -6,7 +6,6 @@ define( [
 	'time/time.Time',
 	'jquery',
 	'qunit',
-	'time/time.Time.validate',
 	'tests/lib/time/time.validTimeDefinitions'
 ], function( Time, $, QUnit ) {
 	'use strict';
