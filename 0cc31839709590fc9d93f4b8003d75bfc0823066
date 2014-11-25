@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_8e445d70",
+        "filename": "client/tests/phpunit/includes/hooks/ParserAfterParserHookHandlerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-25T13:01:16Z",
+      "side": 1,
+      "message": "only moved this code, but agree with suggestion :)",
+      "parentUuid": "4ea06b5a_8e4d3d9e",
+      "revId": "0cc31839709590fc9d93f4b8003d75bfc0823066",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_eef72155",
         "filename": "client/tests/phpunit/includes/hooks/ParserAfterParserHookHandlerTest.php",
         "patchSetId": 5
@@ -189,6 +207,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "4ea06b5a_eef72155",
+      "revId": "0cc31839709590fc9d93f4b8003d75bfc0823066",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_2e29899a",
+        "filename": "client/tests/phpunit/includes/hooks/ParserAfterParserHookHandlerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-25T13:01:16Z",
+      "side": 1,
+      "message": "yay!",
+      "parentUuid": "4ea06b5a_4e5f3545",
       "revId": "0cc31839709590fc9d93f4b8003d75bfc0823066",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
