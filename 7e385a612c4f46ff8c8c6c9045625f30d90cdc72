@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_dd7a15e7",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-25T21:12:23Z",
+      "side": 1,
+      "message": "a note about PHP 5.3 -\u003e 5.4 would have been nice, so that we can more easily find these for the update in a few weeks.",
+      "revId": "7e385a612c4f46ff8c8c6c9045625f30d90cdc72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
