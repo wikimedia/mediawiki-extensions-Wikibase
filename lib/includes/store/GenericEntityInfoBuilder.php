@@ -7,6 +7,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintProvider;
 
 /**
  * EntityInfoBuilder based on an EntityLookup.
@@ -168,22 +170,24 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 				$entity = Item::newEmpty();
 			}
 
-			if ( $types === null || in_array( 'label', $types ) ) {
-				$this->injectLabels( $entityRecord, $entity, $languages );
-			}
+			if ( $entity instanceof FingerprintProvider ) {
+				if ( $types === null || in_array( 'label', $types ) ) {
+					$this->injectLabels( $entityRecord, $entity->getFingerprint(), $languages );
+				}
 
-			if ( $types === null || in_array( 'description', $types ) ) {
-				$this->injectDescriptions( $entityRecord, $entity, $languages );
-			}
+				if ( $types === null || in_array( 'description', $types ) ) {
+					$this->injectDescriptions( $entityRecord, $entity->getFingerprint(), $languages );
+				}
 
-			if ( $types === null || in_array( 'alias', $types ) ) {
-				$this->injectAliases( $entityRecord, $entity, $languages );
+				if ( $types === null || in_array( 'alias', $types ) ) {
+					$this->injectAliases( $entityRecord, $entity->getFingerprint(), $languages );
+				}
 			}
 		}
 	}
 
-	private function injectLabels( array &$entityRecord, Entity $entity, $languages ) {
-		$labels = $entity->getLabels( $languages );
+	private function injectLabels( array &$entityRecord, Fingerprint $fingerprint, $languages ) {
+		$labels = $fingerprint->getLabels( $languages )->toTextArray();
 
 		if ( !isset( $entityRecord['labels'] ) ) {
 			$entityRecord['labels'] = array();
@@ -197,8 +201,8 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		}
 	}
 
-	private function injectDescriptions( array &$entityRecord, Entity $entity, $languages ) {
-		$descriptions = $entity->getDescriptions( $languages );
+	private function injectDescriptions( array &$entityRecord, Fingerprint $fingerprint, $languages ) {
+		$descriptions = $fingerprint->getDescriptions( $languages )->toTextArray();
 
 		if ( !isset( $entityRecord['descriptions'] ) ) {
 			$entityRecord['descriptions'] = array();
@@ -212,9 +216,9 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		}
 	}
 
-	private function injectAliases( array &$entityRecord, Entity $entity, $languages ) {
+	private function injectAliases( array &$entityRecord, Fingerprint $fingerprint, $languages ) {
 		if ( $languages === null ) {
-			$languages = array_keys( $entity->getAllAliases() );
+			$languages = array_keys( $fingerprint->getAliasGroups()->toArray() );
 		}
 
 		if ( !isset( $entityRecord['aliases'] ) ) {
@@ -222,10 +226,10 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		}
 
 		foreach ( $languages as $lang ) {
-			$aliases = $entity->getAliases( $lang );
+			$aliasGroup = $fingerprint->getAliasGroup( $lang );
 			$entityRecord['aliases'][$lang] = array();
 
-			foreach ( $aliases as $text ) {
+			foreach ( $aliasGroup->getAliases() as $text ) {
 				$entityRecord['aliases'][$lang][] = array( // note: append
 					'language' => $lang,
 					'value' => $text,
