@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_31f568c8",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-25T14:55:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_0810445a",
+      "revId": "28f7f3e227aed59ca1f3d64b9cf52d894597a84f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_c809fc35",
         "filename": "client/includes/api/PageTerms.php",
         "patchSetId": 18
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-25T09:53:23Z",
       "side": 1,
       "message": "$entityIds[$pid] can be undefined with the current EntityIdLookup implementation.",
+      "revId": "28f7f3e227aed59ca1f3d64b9cf52d894597a84f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b133b8bf",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-25T14:55:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_c809fc35",
       "revId": "28f7f3e227aed59ca1f3d64b9cf52d894597a84f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_d138c49d",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-25T14:55:23Z",
+      "side": 1,
+      "message": "Done, no longer the case as getEntityIdsForTitles has been fixed.",
+      "parentUuid": "4ea06b5a_48164c5c",
+      "revId": "28f7f3e227aed59ca1f3d64b9cf52d894597a84f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_0e160d4e",
         "filename": "client/includes/api/PageTerms.php",
         "patchSetId": 18
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-25T10:01:24Z",
       "side": 1,
       "message": "this can be a type hint",
+      "revId": "28f7f3e227aed59ca1f3d64b9cf52d894597a84f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_9159dc03",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-25T14:55:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_0e160d4e",
       "revId": "28f7f3e227aed59ca1f3d64b9cf52d894597a84f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
