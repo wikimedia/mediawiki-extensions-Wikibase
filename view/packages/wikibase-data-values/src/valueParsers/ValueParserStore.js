@@ -10,8 +10,8 @@
  *
  * @constructor
  *
- * @param {Function} [DefaultParser] Constructor of a default parser that shall be returned when no
- *        parser is registered for a specific purpose.
+ * @param {Function|null} [DefaultParser=null] Constructor of a default parser that shall be
+ *        returned when no parser is registered for a specific purpose.
  */
 var SELF = vp.ValueParserStore = function VpValueParserStore( DefaultParser ) {
 	this._DefaultParser = DefaultParser || null;

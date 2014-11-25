@@ -10,8 +10,8 @@
  *
  * @constructor
  *
- * @param {Function} [DefaultFormatter] Constructor of a default formatter that shall be returned
- *        when no formatter is registered for a specific purpose.
+ * @param {Function|null} [DefaultFormatter=null] Constructor of a default formatter that shall be
+ *        returned when no formatter is registered for a specific purpose.
  */
 var SELF = vf.ValueFormatterStore = function VpValueFormatterStore( DefaultFormatter ) {
 	this._DefaultFormatter = DefaultFormatter || null;

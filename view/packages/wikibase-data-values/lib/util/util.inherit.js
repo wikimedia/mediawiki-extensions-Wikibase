@@ -27,7 +27,8 @@ this.util = this.util || {};
 	/**
 	 * Helper to create a function which will execute a given function.
 	 *
-	 * @param {Function} [originalFn] Optional function which will be executed by new function.
+	 * @param {Function} [originalFn=function() {}] Optional function which will be executed by new
+	 *        function.
 	 * @return {Function}
 	 */
 	function createFunction( originalFn ) {

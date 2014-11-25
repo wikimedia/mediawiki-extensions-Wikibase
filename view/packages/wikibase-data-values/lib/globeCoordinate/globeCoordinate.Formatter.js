@@ -29,7 +29,7 @@
 	 *
 	 * @constructor
 	 *
-	 * @param {Object} [options]
+	 * @param {Object} [options={}]
 	 */
 	var SELF = globeCoordinate.Formatter = function Formatter( options ) {
 		options = options || {};
@@ -136,7 +136,7 @@
 	 * @static
 	 *
 	 * @param {number} precision
-	 * @param {Object} [options]
+	 * @param {Object} [options={}]
 	 * @return {string}
 	 */
 	SELF.PRECISIONTEXT = function( precision, options ) {

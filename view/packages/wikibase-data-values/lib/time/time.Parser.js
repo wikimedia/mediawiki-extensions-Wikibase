@@ -16,9 +16,11 @@
 	 *
 	 * @constructor
 	 *
-	 * @param {Object} [settings]
+	 * @param {Object} [settings={}]
 	 */
 	var SELF = time.Parser = function Parser( settings ) {
+		settings = settings || {};
+
 		this._settings = time.settings;
 
 		for( var key in settings ) {

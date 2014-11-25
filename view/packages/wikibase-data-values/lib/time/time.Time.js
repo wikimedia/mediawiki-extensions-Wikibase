@@ -278,7 +278,7 @@
 		/**
 		 * Returns the formatted date.
 		 *
-		 * @param [options]
+		 * @param [options={}]
 		 * @return {string}
 		 */
 		text: function( options ) {
@@ -373,7 +373,8 @@
 	 * @static
 	 *
 	 * @param {string} iso8601String
-	 * @param {number} [precision] If not given, precision will be as high as possible.
+	 * @param {number} [precision=time.Time.PRECISION.DAY] If not given, precision will be as high
+	 *        as possible.
 	 * @return time.Time
 	 *
 	 * @throws {Error} If the input string is invalid.
