@@ -6,7 +6,7 @@ use ParserOutput;
 use Site;
 use SiteList;
 use Title;
-use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\SiteLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
@@ -34,7 +34,7 @@ class LangLinkHandler {
 	private $otherProjectsSidebarGeneratorFactory;
 
 	/**
-	 * @var LanguageLinkBadgeDisplay
+	 * @var SiteLinkBadgeDisplay
 	 */
 	private $badgeDisplay;
 
@@ -75,7 +75,7 @@ class LangLinkHandler {
 
 	/**
 	 * @param OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory
-	 * @param LanguageLinkBadgeDisplay $badgeDisplay
+	 * @param SiteLinkBadgeDisplay $badgeDisplay
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param NamespaceChecker $namespaceChecker determines which namespaces wikibase is enabled on
 	 * @param SiteLinkLookup $siteLinkLookup A site link lookup service
@@ -85,7 +85,7 @@ class LangLinkHandler {
 	 */
 	public function __construct(
 		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
-		LanguageLinkBadgeDisplay $badgeDisplay,
+		SiteLinkBadgeDisplay $badgeDisplay,
 		$siteId,
 		NamespaceChecker $namespaceChecker,
 		SiteLinkLookup $siteLinkLookup,
