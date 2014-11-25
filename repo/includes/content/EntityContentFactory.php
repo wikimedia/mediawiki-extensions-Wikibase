@@ -9,7 +9,7 @@ use Revision;
 use Status;
 use Title;
 use User;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityRedirect;
@@ -163,11 +163,11 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @since 0.3
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return EntityContent
 	 */
-	public function newFromEntity( Entity $entity ) {
+	public function newFromEntity( EntityDocument $entity ) {
 		$handler = $this->getContentHandlerForType( $entity->getType() );
 		return $handler->makeEntityContent( $entity );
 	}
@@ -282,14 +282,14 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @param User $user
 	 * @param string $permission
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param string $quick
 	 *
 	 * @return Status a status object representing the check's result.
 	 *
 	 * @todo Move to a separate service (merge into WikiPageEntityStore?)
 	 */
-	public function getPermissionStatusForEntity( User $user, $permission, Entity $entity, $quick = '' ) {
+	public function getPermissionStatusForEntity( User $user, $permission, EntityDocument $entity, $quick = '' ) {
 		$id = $entity->getId();
 		$status = null;
 
