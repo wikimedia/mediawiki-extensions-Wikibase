@@ -60,33 +60,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @deprecated: as of version 0.4, no code calls setEntity(), so getEntity() will always return null.
-	 *
-	 * @return Entity|null
-	 */
-	public function getEntity() {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		if ( !array_key_exists( 'entity', $info ) ) {
-			return null;
-		} else {
-			return $info['entity'];
-		}
-	}
-
-	/**
-	 * @note: as of version 0.4, no code calls setEntity(), so getEntity() will always return null.
-	 * This is kept in the expectation that we may want to construct EntityChange objects
-	 * from an atom feed or the like, where full entity data would be included and useful.
-	 *
-	 * @param Entity $entity
-	 */
-	public function setEntity( Entity $entity ) {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		$info['entity'] = $entity;
-		$this->setField( 'info', $info );
-	}
-
-	/**
 	 * @return string
 	 */
 	public function getType() {
@@ -392,24 +365,6 @@ class EntityChange extends DiffChange {
 		}
 
 		return $data;
-	}
-
-	/**
-	 * @see ChangeRow::serializeInfo()
-	 *
-	 * Overwritten to use the array representation of the diff.
-	 *
-	 * @since 0.4
-	 * @param array $info
-	 * @return string
-	 */
-	public function serializeInfo( array $info ) {
-		if ( isset( $info['entity'] ) ) {
-			// never serialize full entity data in a change, it's huge.
-			unset( $info['entity'] );
-		}
-
-		return parent::serializeInfo( $info );
 	}
 
 }

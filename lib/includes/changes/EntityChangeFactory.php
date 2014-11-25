@@ -127,7 +127,6 @@ class EntityChangeFactory {
 		$diff = $oldEntity->getDiff( $newEntity );
 		$instance = self::newForEntity( $action, $theEntity->getId(), $fields );
 		$instance->setDiff( $diff );
-		$instance->setEntity( $theEntity );
 
 		return $instance;
 	}
