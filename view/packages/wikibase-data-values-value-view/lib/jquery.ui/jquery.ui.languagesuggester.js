@@ -2,8 +2,12 @@
 	'use strict';
 
 /**
+ * @class jQuery.ui.languagesuggester
+ * @extends jQuery.ui.suggester
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
+ *
+ * @constructor
  */
 $.widget( 'ui.languagesuggester', $.ui.suggester, {
 	/**

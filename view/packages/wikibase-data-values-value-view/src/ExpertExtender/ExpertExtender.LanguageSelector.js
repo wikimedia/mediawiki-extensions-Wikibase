@@ -1,7 +1,3 @@
-/**
- * @license GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
- */
 ( function( $, uls, ExpertExtender ) {
 
 	// FIXME: uls knows way more languages than \Languages
@@ -9,7 +5,10 @@
 	'use strict';
 
 	/**
-	 * An ExpertExtender module for selecting a language
+	 * An ExpertExtender module for selecting a language.
+	 * @class jQuery.valueview.ExpertExtender.LanguageSelector
+	 * @license GNU GPL v2+
+	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *
 	 * @constructor
 	 *

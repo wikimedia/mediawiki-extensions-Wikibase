@@ -4,13 +4,14 @@
 	/**
 	 * Commons suggester.
 	 * Enhances an input box with suggestion functionality for Wikimedia Commons asset names.
+	 * DEPENDENCY: jQuery.ui.suggester
+	 * DEPENDENCY: util.highlightSubstring
+	 * @class jQuery.ui.commonssuggester
+	 * @extends jQuery.ui.suggester
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
-	 * @example $( 'input' ).commonssuggester();
-	 *
-	 * @dependency jQuery.ui.suggester
-	 * @dependency util.highlightSubstring
+	 * @constructor
 	 */
 	$.widget( 'ui.commonssuggester', $.ui.suggester, {
 

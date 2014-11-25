@@ -1,16 +1,15 @@
-/**
- * @license GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
- */
 ( function( $, ExpertExtender, mw, MessageProvider ) {
 	'use strict';
 
 	/**
-	 * An ExpertExtender module which shows a preview of a value
+	 * An ExpertExtender module which shows a preview of a value.
+	 * @class jQuery.valueview.ExpertExtender.Preview
+	 * @license GNU GPL v2+
+	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *
 	 * @constructor
 	 *
-	 * @param {function} getUpstreamValue A getter for the current formatted upstream value
+	 * @param {Function} getUpstreamValue A getter for the current formatted upstream value
 	 */
 	ExpertExtender.Preview = function( getUpstreamValue ) {
 		this._getUpstreamValue = getUpstreamValue;

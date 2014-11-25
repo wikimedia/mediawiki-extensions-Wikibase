@@ -2,11 +2,14 @@
 	'use strict';
 
 	/**
+	 * @class jQuery.valueview.ExpertExtender
 	 * @licence GNU GPL v2+
 	 * @author Adrian Lang < adrian.lang@wikimedia.de >
 	 *
+	 * @constructor
+	 *
 	 * @param {jQuery} $input
-	 * @param {Object[]} [extensions] An array of extensions for this ExpertExtender.
+	 * @param {Object[]} [extensions=[]] An array of extensions for this ExpertExtender.
 	 *        An extension may have any of the following methods:
 	 *        - init( $container )
 	 *        - onInitialShow()

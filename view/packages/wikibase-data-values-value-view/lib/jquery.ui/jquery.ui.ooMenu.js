@@ -4,44 +4,41 @@
 /**
  * jQuery.ui.ooMenu provides an object-oriented menu structure. Menu items are managed using
  * specific objects instead of DOM elements.
- *
+ * DEPENDENCY: jQuery.util.getscrollbarwidth
+ * DEPENDENCY: util.inherit
+ * @class jQuery.ui.ooMenu
+ * @extends jQuery.ui.Widget
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
- * @option {jQuery.ui.ooMenu.Item[]} [items]
- *         List of items to display.
- *         Default: []
+ * @constructor
  *
- * @option {jQuery.ui.ooMenu.CustomItem[]} [customItems]
- *         List of custom items.
- *         Default: []
+ * @param {Object} options
+ * @param {jQuery.ui.ooMenu.Item[]} [options.items=[]]
+ *        List of items to display.
+ * @param {jQuery.ui.ooMenu.CustomItem[]} [options.customItems=[]]
+ *        List of custom items.
+ * @param {Function|null} [options.manipulateLabel=null]
+ *        Function applied to each label before rendering.
+ *        Parameters:
+ *        - {string} Item label.
+ *        Expected return value:
+ *        - {string} Item label.
+ * @param {number|null} [options.maxItems=10]
+ *        Maximum number of visible items. If there are more items, scrollbars will be shown. Set
+ *        to "null" to never have scrollbars on the menu.
  *
- * @option {Function|null} [manipulateLabel]
- *         Function applied to each label before rendering.
- *         Parameters:
- *         - {string} Item label.
- *         Expected return value:
- *         - {string} Item label.
- *         Default: null
- *
- * @option {number|null} [maxItems]
- *         Maximum number of visible items. If there are more items, scrollbars will be shown. Set
- *         to "null" to never have scrollbars on the menu.
- *         Default: 10
- *
- * @event focus: Triggered when focusing/activating an item.
- *        (1) {jQuery.Event}
- *        (2) {jQuery.ui.ooMenu.Item}
- *
- * @event blur: Triggered when blurring/deactivating an item.
- *        (1) {jQuery.Event}
- *
- * @event selected: Triggered when selecting an item.
- *        (1) {jQuery.Event}
- *        (2) {jQuery.ui.ooMenu.Item|null}
- *
- * @dependency jQuery.util.getscrollbarwidth
- * @dependency util.inherit
+ * @event focus
+ *        Triggered when focusing/activating an item.
+ *        @param {jQuery.Event} event
+ *        @param {jQuery.ui.ooMenu.Item} item
+ * @event blur
+ *        Triggered when blurring/deactivating an item.
+ *        @param {jQuery.Event} event
+ * @event selected
+ *        Triggered when selecting an item.
+ *        @param {jQuery.Event} event
+ *        @param {jQuery.ui.ooMenu.Item|null} item
  */
 $.widget( 'ui.ooMenu', {
 
@@ -388,11 +385,14 @@ $.widget( 'ui.ooMenu', {
 
 /**
  * Default menu item.
+ * @class jQuery.ui.ooMenu.Item
+ *
  * @constructor
  *
  * @param {string|jQuery} label The label to display in the menu.
  * @param {string|null} [value] The value to display in the input element if the item is selected.
- * @param {string} [link] Optional URL the item shall link to.
+ *        If no value is specified, the label text will be used.
+ * @param {string|null} [link=null] Optional URL the item shall link to.
  *
  * @throws {Error} if any required parameter is not specified properly.
  */
@@ -448,20 +448,22 @@ $.extend( Item.prototype, {
 
 /**
  * Customizable menu item.
- * @constructor
+ * @class jQuery.ui.ooMenu.CustomItem
  * @extends jQuery.ui.ooMenu.Item
  *
+ * @constructor
+ *
  * @param {string|jQuery} label
- * @param {Function|boolean|null} [visibility]
+ * @param {Function|boolean|null} [visibility=null]
  *        Function to determine the item's visibility or boolean defining static visibility. If
  *        "null" or omitted, the item will always be visible.
  *        Function parameters:
  *        - {jQuery.ui.ooMenu}
  *        Expected return value:
  *        - {boolean}
- * @param {Function|null} [action]
- * @param {string|null} [cssClass]
- * @param {string} [link]
+ * @param {Function|null} [action=null]
+ * @param {string|null} [cssClass=null]
+ * @param {string} [link=null]
  *
  * @throws {Error} if any required parameter is not specified properly.
  */

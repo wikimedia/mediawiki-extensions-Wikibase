@@ -4,40 +4,44 @@
 /**
  * jQuery.ui.suggester enhances an input box by retrieving a list of suggestions that are displayed
  * in a list below the input box.
- *
+ * DEPENDENCY: jQuery.ui.ooMenu
+ * DEPENDENCY: jQuery.ui.position
+ * @class jQuery.ui.suggester
+ * @extends jQuery.Widget
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
- * @example $( 'input' ).suggester( { source: ['a', 'b', 'c'] } );
- * @desc Creates a simple suggester using an array as result set.
+ *     @example Creates a simple suggester using an array as result set.
+ *     $( 'input' ).suggester( { source: ['a', 'b', 'c'] } );
  *
- * @example $( 'input' ).suggester( {
- *   source: function( term ) {
- *     var deferred = $.Deferred();
+ *     @example Creates an auto-completion input element fetching suggestions via AJAX.
+ *     $( 'input' ).suggester( {
+ *         source: function( term ) {
+ *             var deferred = $.Deferred();
  *
- *     $.ajax( {
- *       url: location.protocol + '//commons.wikimedia.org/w/api.php',
- *       dataType: 'jsonp',
- *       data: {
- *         search: term,
- *         action: 'opensearch',
- *         namespace: 6
- *       },
- *       timeout: 8000
- *     } )
- *     .done( function( response ) {
- *       deferred.resolve( response[1], response[0] );
- *     } )
- *     .fail( function( jqXHR, textStatus ) {
- *       deferred.reject( textStatus );
+ *             $.ajax( {
+ *                 url: location.protocol + '//commons.wikimedia.org/w/api.php',
+ *                 dataType: 'jsonp',
+ *                 data: {
+ *                 search: term,
+ *                 action: 'opensearch',
+ *                 namespace: 6
+ *             }, timeout: 8000 } )
+ *             .done( function( response ) {
+ *                 deferred.resolve( response[1], response[0] );
+ *             } )
+ *             .fail( function( jqXHR, textStatus ) {
+ *                 deferred.reject( textStatus );
+ *             } );
+ *
+ *             return deferred.promise();
+ *         }
  *     } );
  *
- *     return deferred.promise();
- *   }
- * } );
- * @desc Creates an auto-completion input element fetching suggestions via AJAX.
+ * @constructor
  *
- * @option {string[]|Function} source
+ * @param {Object} options
+ * @param {string[]|Function} options.source
  *         An array of strings that shall be used to provide suggestions. Alternatively, a function
  *         may be provided:
  *         Parameters:
@@ -50,48 +54,38 @@
  *             checking whether the response belongs to the most current request.
  *           Rejected parameters:
  *           - {string} Plain text or HTML error message.
- *
- * @option {number} [delay]
+ * @param {number} [options.delay=300]
  *         Delay in milliseconds of the request querying for suggestions.
- *         Default: 300
- *
- * @option {jQuery.ui.ooMenu|null} [menu]
+ * @param {jQuery.ui.ooMenu|null} [menu=null]
  *         A pre-initialized menu instance featuring one or more custom list item may be provided.
  *         This should be the preferred way to define custom items.
- *         Default: null (no default menu)
- *
- * @option {Object} [position]
+ * @param {Object} [position=Object]
  *         Object to be evaluated by jQuery.ui.position to set the suggestion list's position. In
  *         RTL context, the specified value is flipped automatically.
  *         Default: (position suggestion list's top left corner at input box's bottom left corner)
- *
- * @option {jQuery|null} [confineMinWidthTo]
+ * @param {jQuery|null} [confineMinWidthTo]
  *         The suggestion list's width shall not be smaller than the width of the referenced
  *         element. If "undefined", the minimum width will be the width of the element the suggester
  *         is initialized on. Specifying "null" will prevent applying a minimum width.
- *         Default: undefined
  *
  * @event open
  *        Triggered when the list of suggestions is opened.
- *        - {jQuery.Event}
+ *        @param {jQuery.Event} event
  *
  * @event close
  *        Triggered when the list of suggestions is closed.
- *        - {jQuery.Event}
+ *        @param {jQuery.Event} event
  *
  * @event change
  *        Triggered when the suggester's value has changed.
- *        - {jQuery.Event}
+ *        @param {jQuery.Event} event
  *
  * @event error
  *        Triggered whenever an error occurred while gathering suggestions. This may happen only
  *        when using a function as source. The {string} parameter is forwarded from the rejected
  *        promise returned by the source function.
- *        - {jQuery.Event}
- *        - {string}
- *
- * @dependency jQuery.ui.ooMenu
- * @dependency jQuery.ui.position
+ *        @param {jQuery.Event} event
+ *        @param {string} message
  */
 $.widget( 'ui.suggester', {
 

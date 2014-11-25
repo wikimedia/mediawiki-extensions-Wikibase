@@ -3,21 +3,21 @@
 
 	var PARENT = vv.experts.StringValue;
 
+	// TODO: Implement this as an "extension" for the StringValue expert. This could be done by
+	//  adding a system for extensions which get initialized in addition to a specific expert.
+	//  Those extensions would also require registration, this should probably be done by
+	//  introducing more complex format for registering an expert plus extensions to an expert
+	//  store.
 	/**
 	 * Valueview expert based on StringValue expert but with a jQuery suggester loaded for offering
 	 * the user auto completion features.
-	 *
+	 * @class jQuery.valueview.experts.SuggestedStringValue
+	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
-	 * @extends jQuery.valueview.experts.StringValue
-	 *
-	 * TODO: Implement this as an "extension" for the StringValue expert. This could be done by
-	 *  adding a system for extensions which get initialized in addition to a specific expert.
-	 *  Those extensions would also require registration, this should probably be done by introducing
-	 *  a more complex format for registering an expert plus extensions to an expert store.
 	 */
 	vv.experts.SuggestedStringValue = vv.expert( 'SuggestedStringValue', PARENT, {
 		/**

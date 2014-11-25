@@ -1,12 +1,11 @@
-/**
- * @license GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
- */
 ( function( $, ExpertExtender, Time ) {
 	'use strict';
 
 	/**
-	 * An ExpertExtender module for showing a hint about the used calendar model
+	 * An ExpertExtender module for showing a hint about the used calendar model.
+	 * @class jQuery.valueview.ExpertExtender.CalendarHint
+	 * @license GNU GPL v2+
+	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *
 	 * @constructor
 	 *

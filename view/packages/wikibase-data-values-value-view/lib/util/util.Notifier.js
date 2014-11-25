@@ -17,22 +17,20 @@ util.Notifier = ( function() {
 	 * the outside, the notifier will also be affected.
 	 * Instantiation also works without using the "new" keyword.
 	 *
-	 * @example
-	 * <code>
-	 * var notifier = util.Notifier( {
-	 *     valid: function() { this.current() },
-	 *     invalid: function() { this.current() }
-	 * } );
-	 * notifier.notify( 'valid' ); // will alert 'valid'
-	 * notifier.notify( 'invalid' ); // will alert 'invalid'
-	 * notifier.notify( 'whatever' ); // Nothing happens, no notification registered for this one.
-	 * </code>
+	 *     @example
+	 *     var notifier = util.Notifier( {
+	 *         valid: function() { this.current() },
+	 *         invalid: function() { this.current() }
+	 *     } );
+	 *     notifier.notify( 'valid' ); // will alert 'valid'
+	 *     notifier.notify( 'invalid' ); // will alert 'invalid'
+	 *     notifier.notify( 'whatever' ); // Nothing happens, no notification registered for this one.
 	 *
+	 * @class util.Notifier
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
-	 * @since 0.1
 	 *
 	 * @param {Object} [notificationMap={}] Map from notification IDs to callback functions. The
 	 *        context of the functions when called by notify() is Notifier instance.

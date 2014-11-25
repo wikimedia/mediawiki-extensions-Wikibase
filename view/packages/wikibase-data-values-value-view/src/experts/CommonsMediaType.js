@@ -9,13 +9,13 @@
 	 * type is using the String data value type.
 	 * This expert is based on the StringValue expert but will add a dropdown for choosing commons
 	 * media sources. It will also display the value as a link to commons.
-	 *
+	 * @class jQuery.valueview.experts.CommonsMediaType
+	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
-	 * @extends jQuery.valueview.experts.SuggestedStringValue
 	 */
 	vv.experts.CommonsMediaType = vv.expert( 'CommonsMediaType', PARENT, {
 		/**

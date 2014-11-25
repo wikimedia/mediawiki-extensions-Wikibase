@@ -7,10 +7,6 @@
 	// confusing and since we don't even need or want a namespace for the valueview, we just
 	// overwrite the namespace "valueview" created by jQuery.widget with the actual widget
 	// constructor.
-	/**
-	 * @licence GNU GPL v2+
-	 * @author Daniel Werner < daniel.werner@wikimedia.de >
-	 */
 	$.valueview = $.valueview.valueview;
 
 	// Copy everything else defined so far:

@@ -6,13 +6,13 @@
 	/**
 	 * Valueview expert for empty valueviews without any hint about what kind of value the user
 	 * should be allowed to enter.
-	 *
+	 * @class jQuery.valueview.experts.EmptyValue
+	 * @extends jQuery.valueview.Expert
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
-	 * @extends jQuery.valueview.Expert
 	 */
 	vv.experts.EmptyValue = vv.expert( 'EmptyValue', PARENT, {
 		/**

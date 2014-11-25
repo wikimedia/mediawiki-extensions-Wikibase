@@ -5,6 +5,7 @@ this.util = this.util || {};
 
 	/**
 	 * A simple event-like system for plugging in extensions
+	 * @class util.Extendable
 	 * @licence GNU GPL v2+
 	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *

@@ -8,18 +8,20 @@
 
 	/**
 	 * Valueview expert handling input of time values.
-	 *
+	 * @class jQuery.valueview.TimeInput
+	 * @extends jQuery.valueview.StringValue
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
-	 * @extends jQuery.valueview.Expert
 	 *
-	 * @option {Object} messages Default messages used by the widget. The keys correspond to
-	 *         mediaWiki message keys since these will be picked when in MediaWiki environment and
-	 *         the mediaWiki JavaScript object has been passed to the expert constructor.
+	 * @param {Object} options
+	 * @param {Object} options.messages
+	 *        Default messages used by the widget. The keys correspond to mediaWiki message keys
+	 *        since these will be picked when in MediaWiki environment and the mediaWiki JavaScript
+	 *        object has been passed to the expert constructor.
 	 */
 	vv.experts.TimeInput = vv.expert( 'TimeInput', PARENT, function() {
 		PARENT.apply( this, arguments );

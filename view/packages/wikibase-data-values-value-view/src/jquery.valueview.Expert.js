@@ -10,8 +10,10 @@ jQuery.valueview = jQuery.valueview || {};
 	 *  widget automatically. The expert has to be registered in a jQuery.valueview.ExpertStore
 	 *  instance which has to be used as expert store in the valueview widget's options.
 	 *
-	 * @see jQuery.valueview.Expert
+	 * (see jQuery.valueview.Expert)
 	 *
+	 * @member jQuery.valueview
+	 * @method expert
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
@@ -19,16 +21,21 @@ jQuery.valueview = jQuery.valueview || {};
 	 * @param {string} name Should be all-lowercase and without any special characters. Will be used
 	 *        in within some DOM class attributes and
 	 * @param {Function} base Constructor of the expert the new expert should be based on.
-	 * @param {Function} [constructor] Constructor of the new expert.
-	 * @param {Object} expertDefinition Definition of the expert.
-	 *
+	 * @param {Function} constructorOrExpertDefinition Constructor of the new expert.
+	 * @param {Object} [expertDefinition] Definition of the expert.
 	 * @return {jQuery.valueview.Expert} the new expert constructor.
+	 *
+	 * @throws {Error} if the base constructor is not a function.
 	 */
-	vv.expert = function( name, base, constructor, expertDefinition ) {
-		if( !expertDefinition ){
-			expertDefinition = constructor;
-			constructor = null;
+	vv.expert = function( name, base, constructorOrExpertDefinition, expertDefinition ) {
+		var constructor = null;
+
+		if( expertDefinition ) {
+			constructor = constructorOrExpertDefinition;
+		} else {
+			expertDefinition = constructorOrExpertDefinition;
 		}
+
 		if( !$.isFunction( base ) ) {
 			throw new Error( 'The expert\'s base must be a constructor function' );
 		}
@@ -44,6 +51,9 @@ jQuery.valueview = jQuery.valueview || {};
 		);
 	};
 
+	// TODO: think about whether there should be a function to add multiple notifiers for widget
+	//  developers or whether they should rather listen to the valueview widget while the experts
+	//  can not be touched. Less performant alternative would be the usage of DOM events.
 	/**
 	 * Abstract class for strategies used in jQuery.valueview.valueview for displaying and handling
 	 * a certain type of data value or data values suitable for a certain data type.
@@ -55,23 +65,21 @@ jQuery.valueview = jQuery.valueview || {};
 	 * NOTE: Consider using jQuery.valueview.expert to define a new expert instead of inheriting
 	 *       from this base directly.
 	 *
+	 * @class jQuery.valueview.Expert
+	 * @abstract
 	 * @since 0.1
+	 *
+	 * @constructor
 	 *
 	 * @param {HTMLElement|jQuery} viewPortNode
 	 * @param {jQuery.valueview.ViewState} relatedViewState
-	 * @param {util.Notifier} [valueViewNotifier] Required so the expert can notify the valueview
-	 *        about certain events. The following notification keys can be used:
+	 * @param {util.Notifier} [valueViewNotifier=util.Notifier()]
+	 *        Required so the expert can notify the valueview about certain events. The following
+	 *        notification keys can be used:
 	 *        - change: will be sent when raw value displayed by the expert changes. Either by a
 	 *                  user action or by calling the rawValue() method. First parameter is a
 	 *                  reference to the Expert itself.
 	 * @param {Object} [options={}]
-	 *
-	 * TODO: think about whether there should be a function to add multiple notifiers for widget
-	 *  developers or whether they should rather listen to the valueview widget while the experts
-	 *  can not be touched. Less performant alternative would be the usage of DOM events.
-	 *
-	 * @constructor
-	 * @abstract
 	 */
 	vv.Expert = function( viewPortNode, relatedViewState, valueViewNotifier, options ) {
 		if( !( relatedViewState instanceof vv.ViewState ) ) {

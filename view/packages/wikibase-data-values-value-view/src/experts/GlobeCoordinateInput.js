@@ -1,7 +1,3 @@
-/**
- * @author H. Snater < mediawiki@snater.com >
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( $, vv, Formatter ) {
 	'use strict';
 
@@ -9,11 +5,13 @@
 
 	/**
 	 * Valueview expert handling input of globe coordinate values.
-	 *
+	 * @class jQuery.valueview.GlobeCoordinateValue
+	 * @extends jQuery.valueview.StringValue
 	 * @since 0.1
+	 * @author H. Snater < mediawiki@snater.com >
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
-	 * @extends jQuery.valueview.Expert
 	 */
 	vv.experts.GlobeCoordinateInput = vv.expert( 'GlobeCoordinateInput', PARENT, function() {
 		PARENT.apply( this, arguments );

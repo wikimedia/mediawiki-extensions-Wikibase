@@ -26,24 +26,26 @@ $( document ).ready( function() {
 } );
 
 /**
- * Toggler widget
- *
+ * Toggler widget.
+ * The toggler hides a references subject node an toggles its visibility whenever clicking the
+ * element the toggler is initialized on. The toggler considers the subject's current "display"
+ * style, so if it is set to "none", it is considered invisible initially.
+ * DEPENDENCY: jQuery.animateWithEvent
+ * @class jQuery.ui.toggler
+ * @extends jQuery.Widget
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner < danweetz@web.de >
  *
- * The toggler hides a references subject node an toggles its visibility whenever clicking the
- * element the toggler is initialized on. The toggler considers the subject's current "display"
- * style, so if it is set to "none", it is considered invisible initially.
+ * @constructor
  *
- * @option {jQuery} $subject (REQUIRED) The node whose visibility shall be toggled.
+ * @param {Object} options
+ * @param {jQuery} options.$subject
+ *        The node whose visibility shall be toggled.
  *
- * @event animation Triggered at the beginning of toggler animations.
- *        (1) {jQuery.AnimationEvent} event
- *
- * @dependency jQuery
- * @dependency jQuery.Widget
- * @dependency jQuery.animateWithEvent
+ * @event animation
+ *        Triggered at the beginning of toggler animations.
+ *        @param {jQuery.AnimationEvent} event
  */
 $.widget( 'ui.toggler', {
 

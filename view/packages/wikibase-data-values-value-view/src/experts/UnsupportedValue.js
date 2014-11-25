@@ -6,12 +6,13 @@
 	/**
 	 * Valueview expert for displaying (or rather not displaying) a data value not supported by the
 	 * valueview UI because there is not specialised expert devoted to that data value type.
+	 * @class jQuery.valueview.UnsupportedValue
+	 * @extends jQuery.valueview.Expert
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
-	 * @extends jQuery.valueview.Expert
 	 */
 	vv.experts.UnsupportedValue = vv.expert( 'UnsupportedValue', PARENT, {
 		/**

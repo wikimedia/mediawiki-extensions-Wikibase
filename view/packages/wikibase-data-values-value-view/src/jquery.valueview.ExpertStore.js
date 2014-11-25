@@ -4,15 +4,17 @@ jQuery.valueview = jQuery.valueview || {};
 	'use strict';
 
 	/**
-	 * Store managing jQuery.valueview.Expert instances
+	 * Store managing jQuery.valueview.Expert instances.
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
-	 *
-	 * @constructor
+	 * @class jQuery.valueview.ExpertStore
 	 * @since 0.1
 	 *
-	 * @param {Function} [DefaultExpert] Constructor of a default expert that shall be returned when
-	 *        no expert is registered for a specific purpose.
+	 * @constructor
+	 *
+	 * @param {Function|null} [DefaultExpert=null]
+	 *        Constructor of a default expert that shall be returned when no expert is registered
+	 *        for a specific purpose.
 	 */
 	var SELF = $.valueview.ExpertStore = function ValueviewExpertStore( DefaultExpert ) {
 		this._DefaultExpert = DefaultExpert || null;

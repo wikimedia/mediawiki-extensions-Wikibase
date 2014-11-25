@@ -1,12 +1,11 @@
-/**
- * @license GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
- */
 ( function( $, ExpertExtender ) {
 	'use strict';
 
 	/**
-	 * An ExpertExtender module which wraps another module in a container
+	 * An ExpertExtender module which wraps another module in a container.
+	 * @class jQuery.valueview.ExpertExtender.Container
+	 * @license GNU GPL v2+
+	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *
 	 * @constructor
 	 *

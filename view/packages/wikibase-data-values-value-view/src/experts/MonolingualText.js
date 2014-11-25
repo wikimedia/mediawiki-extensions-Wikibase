@@ -4,12 +4,13 @@
 	var PARENT = vv.experts.StringValue;
 
 	/**
+	 * @class jQuery.valueview.experts.MonolingualText
+	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.6
 	 * @licence GNU GPL v2+
 	 * @author Adrian Lang < adrian.lang@wikimedia.de >
 	 *
 	 * @constructor
-	 * @extends jQuery.valueview.experts.StringValue
 	 */
 	vv.experts.MonolingualText = vv.expert( 'MonolingualText', PARENT, function() {
 		PARENT.apply( this, arguments );

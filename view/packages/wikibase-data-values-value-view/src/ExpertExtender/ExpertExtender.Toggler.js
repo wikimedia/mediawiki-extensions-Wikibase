@@ -1,12 +1,11 @@
-/**
- * @license GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
- */
 ( function( $, ExpertExtender ) {
 	'use strict';
 
 	/**
-	 * An ExpertExtender module which toggles DOM elements
+	 * An ExpertExtender module which toggles DOM elements.
+	 * @class jQuery.valueview.ExpertExtender.Toggler
+	 * @license GNU GPL v2+
+	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *
 	 * @constructor
 	 *

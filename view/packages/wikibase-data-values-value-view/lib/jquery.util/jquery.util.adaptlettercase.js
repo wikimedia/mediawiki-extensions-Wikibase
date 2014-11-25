@@ -7,10 +7,10 @@ jQuery.util.adaptlettercase = ( function( $ ) {
 	 * Applies the letter case of a source string to a destination string. The destination string's
 	 * character sequence is supposed to mirror the source string's first (or all) characters
 	 * (although the characters may differ in their letter-case of course).
+	 * @member jQuery.util
+	 * @method adaptlettercase
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
-	 *
-	 * @dependency jQuery
 	 *
 	 * @param {string} destination String the source string's letter-case shall be applied to.
 	 * @param {string} source String whose letter-case shall be applied to destination.

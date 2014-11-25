@@ -5,13 +5,13 @@
 
 	/**
 	 * Valueview expert for adding string data value support to valueview widget.
-	 *
+	 * @class jQuery.valueview.experts.StringValue
+	 * @extends jQuery.valueview.Expert
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
-	 * @extends jQuery.valueview.Expert
 	 */
 	vv.experts.StringValue = vv.expert( 'StringValue', PARENT, function() {
 		PARENT.apply( this, arguments );

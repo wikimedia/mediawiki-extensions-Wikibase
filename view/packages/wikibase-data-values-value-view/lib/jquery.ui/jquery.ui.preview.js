@@ -4,18 +4,21 @@
 /**
  * Preview widget whose visible content may be switched between a spinner animation and a value.
  * If the value to be set is empty, the widget will display an appropriate message.
- *
+ * @class jQuery.ui.preview
+ * @extends jQuery.Widget
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
- * @option {jQuery} [$input] Input element node. If specified, the preview will not be updated when
- *         the input element is cleared, e.g. if the input will be hidden, it is not necessary to
- *         update the value.
+ * @constructor
  *
- * @option {Object} [messages] Default messages to use.
- *
- * @option {util.MessageProvider} [messageProvider] Message provider to fetch messages from instead
- *         of using the default messages.
+ * @param {Object} options
+ * @param {jQuery|null} [options.$input=null]
+ *        Input element node. If specified, the preview will not be updated when the input element
+ *        is cleared, e.g. if the input will be hidden, it is not necessary to update the value.
+ * @param {Object} [options.messages=Object]
+ *        Default messages to use.
+ * @param {util.MessageProvider|null} [options.messageProvider=null]
+ *        Message provider to fetch messages from instead of using the default messages.
  */
 $.widget( 'ui.preview', {
 

@@ -6,24 +6,23 @@ this.util = this.util || {};
 /**
  * "Highlights" matching characters in a string using HTML.
  *
- * @example var highlighted = util.highlightSubstring( 'abc', 'abcdef' );
- *          ---> highlighted === '<span class="highlighted">abc</span>def';
+ *     @example
+ *     var highlighted = util.highlightSubstring( 'abc', 'abcdef' );
+ *     ---> highlighted === '<span class="highlighted">abc</span>def';
  *
+ * @member util
+ * @method highlightSubstring
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @param {string} substring
  * @param {string} string
  * @param {Object} [options]
- *        - {boolean} [caseSensitive]
- *          Default: false
- *        - {boolean} [withinString]
- *          Whether to highlight characters within the string, in contrast to at the beginning only.
- *          Default: false
- *        - {string} [wrapperNodeName]
- *          Default: "span"
- *        - {string} [wrapperNodeClass]
- *          Default: "highlight"
+ * @param {boolean} [options.caseSensitive=false]
+ * @param {boolean} [options.withinString=false]
+ *        Whether to highlight characters within the string, in contrast to at the beginning only.
+ * @param {string} [options.wrapperNodeName='span']
+ * @param {string} [options.wrapperNodeClass='highlight']
  * @return {string}
  */
 util.highlightSubstring = function( substring, string, options ) {

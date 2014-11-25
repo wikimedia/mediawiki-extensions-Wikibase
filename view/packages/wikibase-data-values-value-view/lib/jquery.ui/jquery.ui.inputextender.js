@@ -45,48 +45,51 @@ var inputExtendersWithVisibleExtension = ( function() {
  * Input extender widget
  *
  * The input extender extends an input element with additional contents displayed underneath the.
+ * DEPENDENCY: jQuery.animateWithEvent
+ * DEPENDENCY: jQuery.event.special.eachchange
+ * DEPENDENCY: jQuery.ui.position
+ * @class jQuery.ui.inputextender
+ * @extends jQuery.Widget
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  *
- * @option {jQuery[]} [content] Default/"fixed" extender contents that always should be visible as
- *         long as the extension itself is visible.
- *         Default value: []
+ * @constructor
  *
- * @option {Function} [initCallback] Function triggered before the extension is being shown for
- *         the first time. This may be used to init some widgets that need to be visible on
- *         initialization for measuring dimension according to their container's styles.
- *         Context of the callback is the widget, first parameter is the extension's DOM in a jQuery
- *         container.
- *
- * @option {boolean} [hideWhenInputEmpty] Whether all of the input extender's contents shall be
- *         hidden when the associated input element is empty.
- *         Default value: true
- *
- * @option {string} [contentAnimationEvents] One or more events (separated with spaces) which imply
+ * @param {Object} options
+ * @param {jQuery[]} [options.content=[]]
+ *        Default/"fixed" extender contents that always should be visible as long as the extension
+ *        itself is visible.
+ * @param {Function|null} [options.initCallback=null]
+ *        Function triggered before the extension is being shown for the first time. This may be
+ *        used to init some widgets that need to be visible on initialization for measuring
+ *        dimension according to their container's styles.
+ *        Context of the callback is the widget, first parameter is the extension's DOM in a jQuery
+ *        container.
+ * @param {boolean} [options.hideWhenInputEmpty=true]
+ *        Whether all of the input extender's contents shall be hidden when the associated input
+ *        element is empty.
+ * @param {string} [options.contentAnimationEvents='']
+ *        One or more events (separated with spaces) which imply
  *         that the input extenders extension's content is about to be animated. Those events should
  *         give a jQuery.AnimationEvent object as their event object. If this is the case and the
  *         event bubbles up to the input extender's extension node, then this will trigger the
  *         "contentanimation" event on the widget node.
  *
- * @event animation: Triggered at the beginning of an animation of the input's extension.
- *        (1) {jQuery.AnimationEvent} animationEvent
- *
- * @event contentanimation: Triggered at the beginning of an animation of the extender's
- *        extension content. Depends on the "contentAnimationEvents" option.
- *        (1) {jQuery.AnimationEvent} animationEvent The animation event gets passed on from the
- *            event within the input extender's extension causing the "contentanimation" event.
- *
- * @event aftertoggle: Triggered after showExtension or hideExtension has been called. At this point
- *        extension() will already return the extension's node but the extension might still not
- *        be visible for the user since the animation has just been started.
- *        (1) {jQuery.Event}
- *
- * @dependency jQuery
- * @dependency jQuery.Widget
- * @dependency jQuery.animateWithEvent
- * @dependency jQuery.event.special.eachchange
- * @dependency jQuery.ui.position
+ * @event animation
+ *        Triggered at the beginning of an animation of the input's extension.
+ *        @param {jQuery.AnimationEvent} animationEvent
+ * @event contentanimation
+ *        Triggered at the beginning of an animation of the extender's extension content. Depends on
+ *        the "contentAnimationEvents" option.
+ *        @param {jQuery.AnimationEvent} animationEvent
+ *        The animation event gets passed on from the event within the input extender's extension
+ *        causing the "contentanimation" event.
+ * @event aftertoggle
+ *        Triggered after showExtension or hideExtension has been called. At this point extension()
+ *        will already return the extension's node but the extension might still not be visible for
+ *        the user since the animation has just been started.
+ *        @param {jQuery.Event} event
  */
 $.widget( 'ui.inputextender', {
 	/**

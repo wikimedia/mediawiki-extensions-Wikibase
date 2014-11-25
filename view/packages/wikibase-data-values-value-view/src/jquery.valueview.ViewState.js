@@ -8,13 +8,16 @@ jQuery.valueview = jQuery.valueview || {};
 	 * to actively change the view. It serves as a state object to inform subsystems of the view's
 	 * current status. Those subsystems should not have full access to the entire view though since
 	 * interaction in both directions would very likely mess things up.
+	 * @class jQuery.valueview.ViewState
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
-	 *
-	 * @constructor
 	 * @since 0.1
 	 *
+	 * @constructor
+	 *
 	 * @param {jQuery.valueview} valueview
+	 *
+	 * @throws {Error} if no jQuery.valueview.valueview instance is provided.
 	 */
 	var SELF = vv.ViewState = function ValueviewViewState( valueview ) {
 		if( !( valueview instanceof vv.valueview ) ) {
