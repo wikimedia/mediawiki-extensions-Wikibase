@@ -53,9 +53,9 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetAndGetMainSnak() {
-		$snak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
-		$statement = new Statement( new Claim( $snak ) );
-		$this->assertSame( $snak, $statement->getMainSnak() );
+		$mainSnak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
+		$statement = new Statement( new Claim( $mainSnak ) );
+		$this->assertSame( $mainSnak, $statement->getMainSnak() );
 	}
 
 	public function testSetAndGetQualifiers() {
@@ -100,9 +100,8 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	public function instanceProvider() {
 		$instances = array();
 
-		$id42 = new PropertyId( 'P42' );
-
-		$baseInstance = new Statement( new Claim( new PropertyNoValueSnak( $id42 ) ) );
+		$propertyId = new PropertyId( 'P42' );
+		$baseInstance = new Statement( new Claim( new PropertyNoValueSnak( $propertyId ) ) );
 
 		$instances[] = $baseInstance;
 
@@ -151,8 +150,8 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 					new PropertyId( 'P1' ),
 					new StringValue( 'a' )
 				)
-			) ) )
-		);
+			) )
+		) );
 
 
 		$statement->setReferences( $references );

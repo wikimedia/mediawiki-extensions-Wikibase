@@ -26,32 +26,33 @@ use Wikibase\DataModel\Snak\Snaks;
 class ClaimTest extends \PHPUnit_Framework_TestCase {
 
 	public function constructorProvider() {
-		$argLists = array();
+		$propertyId = new PropertyId( 'P42' );
 
-		$id42 = new PropertyId( 'P42' );
-
-		$argLists[] = array( new PropertyNoValueSnak( $id42 ) );
-
-		$argLists[] = array( new PropertyNoValueSnak( $id42 ), new SnakList() );
-
-		$argLists[] = array(
-			new PropertyNoValueSnak( $id42 ),
-			new SnakList( array(
-				new PropertyValueSnak( $id42, new StringValue( 'a' ) ),
-				new PropertySomeValueSnak( new PropertyId( 'P1' ) ),
-				new PropertyNoValueSnak( new PropertyId( 'P2' ) )
-			) )
+		return array(
+			array(
+				new PropertyNoValueSnak( $propertyId ),
+			),
+			array(
+				new PropertyNoValueSnak( $propertyId ),
+				new SnakList(),
+			),
+			array(
+				new PropertyNoValueSnak( $propertyId ),
+				new SnakList( array(
+					new PropertyValueSnak( $propertyId, new StringValue( 'a' ) ),
+					new PropertySomeValueSnak( new PropertyId( 'P1' ) ),
+					new PropertyNoValueSnak( new PropertyId( 'P2' ) )
+				) ),
+			)
 		);
-
-		return $argLists;
 	}
 
 	public function instanceProvider() {
 		return array_map(
 			function( array $arguments ) {
-				$snak = $arguments[0];
+				$mainSnak = $arguments[0];
 				$qualifiers = array_key_exists( 1, $arguments ) ? $arguments[1] : null;
-				return array( new Claim( $snak, $qualifiers ) );
+				return array( new Claim( $mainSnak, $qualifiers ) );
 			},
 			$this->constructorProvider()
 		);
@@ -60,60 +61,56 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider constructorProvider
 	 *
-	 * @param Snak $snak
-	 * @param null|Snaks $qualifiers
+	 * @param Snak $mainSnak
+	 * @param Snaks|null $qualifiers
 	 */
-	public function testConstructor( Snak $snak, Snaks $qualifiers = null ) {
-		$claim = new Claim( $snak, $qualifiers );
+	public function testConstructor( Snak $mainSnak, Snaks $qualifiers = null ) {
+		$claim = new Claim( $mainSnak, $qualifiers );
 
 		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claim', $claim );
 
-		$this->assertEquals( $snak, $claim->getMainSnak() );
+		$this->assertEquals( $mainSnak, $claim->getMainSnak() );
 
 		if ( $qualifiers === null ) {
-			$this->assertEquals( 0, count( $claim->getQualifiers() ) );
-		}
-		else {
-			$this->assertEquals(
-				$qualifiers,
-				$claim->getQualifiers()
-			);
+			$this->assertCount( 0, $claim->getQualifiers() );
+		} else {
+			$this->assertEquals( $qualifiers, $claim->getQualifiers() );
 		}
 	}
 
 	public function testSetMainSnak() {
-		$id42 = new PropertyId( 'P42' );
+		$propertyId = new PropertyId( 'P42' );
 
-		$claim = new Claim( new PropertyNoValueSnak( $id42 ) );
+		$claim = new Claim( new PropertyNoValueSnak( $propertyId ) );
 
-		$snak = new PropertyNoValueSnak( new PropertyId( 'P41' ) );
-		$claim->setMainSnak( $snak );
-		$this->assertEquals( $snak, $claim->getMainSnak() );
+		$mainSnak = new PropertyNoValueSnak( new PropertyId( 'P41' ) );
+		$claim->setMainSnak( $mainSnak );
+		$this->assertEquals( $mainSnak, $claim->getMainSnak() );
 
-		$snak = new PropertyValueSnak( new PropertyId( 'P43' ), new StringValue( 'a' ) );
-		$claim->setMainSnak( $snak );
-		$this->assertEquals( $snak, $claim->getMainSnak() );
+		$mainSnak = new PropertyValueSnak( new PropertyId( 'P43' ), new StringValue( 'a' ) );
+		$claim->setMainSnak( $mainSnak );
+		$this->assertEquals( $mainSnak, $claim->getMainSnak() );
 
-		$snak = new PropertyNoValueSnak( $id42 );
-		$claim->setMainSnak( $snak );
-		$this->assertEquals( $snak, $claim->getMainSnak() );
+		$mainSnak = new PropertyNoValueSnak( $propertyId );
+		$claim->setMainSnak( $mainSnak );
+		$this->assertEquals( $mainSnak, $claim->getMainSnak() );
 	}
 
 	public function testSetQualifiers() {
-		$id42 = new PropertyId( 'P42' );
+		$propertyId = new PropertyId( 'P42' );
 
-		$claim = new Claim( new PropertyNoValueSnak( $id42 ) );
+		$claim = new Claim( new PropertyNoValueSnak( $propertyId ) );
 
 		$qualifiers = new SnakList();
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );
 
-		$qualifiers = new SnakList( array( new PropertyValueSnak( $id42, new StringValue( 'a' ) ) ) );
+		$qualifiers = new SnakList( array( new PropertyValueSnak( $propertyId, new StringValue( 'a' ) ) ) );
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );
 
 		$qualifiers = new SnakList( array(
-			new PropertyValueSnak( $id42, new StringValue( 'a' ) ),
+			new PropertyValueSnak( $propertyId, new StringValue( 'a' ) ),
 			new PropertySomeValueSnak( new PropertyId( 'P2' ) ),
 			new PropertyNoValueSnak( new PropertyId( 'P3' ) )
 		) );
@@ -171,10 +168,10 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetInvalidGuidCausesException() {
-		$claim0 = new Claim( new PropertyNoValueSnak( 42 ) );
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$claim0->setGuid( 42 );
+		$claim->setGuid( 42 );
 	}
 
 	/**
