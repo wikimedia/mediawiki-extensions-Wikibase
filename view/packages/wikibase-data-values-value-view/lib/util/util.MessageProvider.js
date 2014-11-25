@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 this.util = this.util || {};
 
 util.MessageProvider = ( function() {
@@ -9,6 +5,8 @@ util.MessageProvider = ( function() {
 
 	/**
 	 * Providing messages using specified default messages or a function provided.
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @param {Object} options Object that may contain the following key-value pairs:
 	 *                 - {Object} defaultMessages

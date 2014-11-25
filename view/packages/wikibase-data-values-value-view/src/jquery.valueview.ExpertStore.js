@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
-
 jQuery.valueview = jQuery.valueview || {};
 
 ( function( $ ) {
@@ -10,6 +5,9 @@ jQuery.valueview = jQuery.valueview || {};
 
 	/**
 	 * Store managing jQuery.valueview.Expert instances
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
+	 *
 	 * @constructor
 	 * @since 0.1
 	 *

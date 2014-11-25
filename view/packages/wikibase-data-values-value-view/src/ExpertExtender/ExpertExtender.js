@@ -1,11 +1,10 @@
-/**
- * @licence GNU GPL v2+
- * @author Adrian Lang < adrian.lang@wikimedia.de >
- */
 ( function( $, Extendable, vv ) {
 	'use strict';
 
 	/**
+	 * @licence GNU GPL v2+
+	 * @author Adrian Lang < adrian.lang@wikimedia.de >
+	 *
 	 * @param {jQuery} $input
 	 * @param {Object[]} [extensions] An array of extensions for this ExpertExtender.
 	 *        An extension may have any of the following methods:

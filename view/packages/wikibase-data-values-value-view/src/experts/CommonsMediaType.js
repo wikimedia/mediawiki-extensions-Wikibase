@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( $, vv ) {
 	'use strict';
 
@@ -15,6 +11,8 @@
 	 * media sources. It will also display the value as a link to commons.
 	 *
 	 * @since 0.1
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
 	 * @extends jQuery.valueview.experts.SuggestedStringValue

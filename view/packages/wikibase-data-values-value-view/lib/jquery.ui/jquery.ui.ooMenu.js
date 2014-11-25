@@ -1,3 +1,6 @@
+( function( $, util ) {
+'use strict';
+
 /**
  * jQuery.ui.ooMenu provides an object-oriented menu structure. Menu items are managed using
  * specific objects instead of DOM elements.
@@ -40,9 +43,6 @@
  * @dependency jQuery.util.getscrollbarwidth
  * @dependency util.inherit
  */
-( function( $, util ) {
-'use strict';
-
 $.widget( 'ui.ooMenu', {
 
 	/**

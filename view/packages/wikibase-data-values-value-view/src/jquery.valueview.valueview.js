@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( dv, util, $, vf, vp ) {
 'use strict';
 
@@ -31,6 +26,9 @@ function expertProxy( fnName ) {
  *
  * @extends jQuery.Widget
  * @since 0.1
+ * @licence GNU GPL v2+
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  *
  * @option {jQuery.valueview.ExpertStore} expertStore Used to determine an expert depending on the
  *         data value type or the data type the valueview should handle.

@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
-
 this.util = this.util || {};
 
 util.Notifier = ( function() {
@@ -32,6 +27,9 @@ util.Notifier = ( function() {
 	 * notifier.notify( 'invalid' ); // will alert 'invalid'
 	 * notifier.notify( 'whatever' ); // Nothing happens, no notification registered for this one.
 	 * </code>
+	 *
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
 	 * @since 0.1

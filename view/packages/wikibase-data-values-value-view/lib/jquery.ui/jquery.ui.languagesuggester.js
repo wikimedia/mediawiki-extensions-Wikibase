@@ -1,10 +1,10 @@
+( function( $ ) {
+	'use strict';
+
 /**
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
-( function( $ ) {
-	'use strict';
-
 $.widget( 'ui.languagesuggester', $.ui.suggester, {
 	/**
 	 * @see $.ui.suggester._getSuggestionsFromArray

@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Adrian Lang < adrian.lang@wikimedia.de >
- */
 ( function( vv, LanguageSelector ) {
 	'use strict';
 
@@ -9,6 +5,8 @@
 
 	/**
 	 * @since 0.6
+	 * @licence GNU GPL v2+
+	 * @author Adrian Lang < adrian.lang@wikimedia.de >
 	 *
 	 * @constructor
 	 * @extends jQuery.valueview.experts.StringValue

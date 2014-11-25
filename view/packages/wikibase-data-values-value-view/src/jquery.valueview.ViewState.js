@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 jQuery.valueview = jQuery.valueview || {};
 
 ( function( $, vv ) {
@@ -12,6 +8,8 @@ jQuery.valueview = jQuery.valueview || {};
 	 * to actively change the view. It serves as a state object to inform subsystems of the view's
 	 * current status. Those subsystems should not have full access to the entire view though since
 	 * interaction in both directions would very likely mess things up.
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
 	 * @since 0.1

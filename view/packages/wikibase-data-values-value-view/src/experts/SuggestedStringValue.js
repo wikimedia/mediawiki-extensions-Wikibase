@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( vv ) {
 	'use strict';
 
@@ -12,6 +8,8 @@
 	 * the user auto completion features.
 	 *
 	 * @since 0.1
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
 	 * @extends jQuery.valueview.experts.StringValue

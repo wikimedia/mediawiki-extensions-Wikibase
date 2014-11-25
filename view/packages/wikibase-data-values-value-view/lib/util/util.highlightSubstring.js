@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
-
 this.util = this.util || {};
 
 ( function( util ) {
@@ -13,6 +8,9 @@ this.util = this.util || {};
  *
  * @example var highlighted = util.highlightSubstring( 'abc', 'abcdef' );
  *          ---> highlighted === '<span class="highlighted">abc</span>def';
+ *
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
  *
  * @param {string} substring
  * @param {string} string

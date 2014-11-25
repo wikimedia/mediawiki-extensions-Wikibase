@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( $, vv, time ) {
 	'use strict';
 
@@ -15,6 +10,9 @@
 	 * Valueview expert handling input of time values.
 	 *
 	 * @since 0.1
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
 	 * @extends jQuery.valueview.Expert

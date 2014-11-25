@@ -1,17 +1,17 @@
-/**
- * Commons suggester.
- * Enhances an input box with suggestion functionality for Wikimedia Commons asset names.
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- *
- * @example $( 'input' ).commonssuggester();
- *
- * @dependency jQuery.ui.suggester
- * @dependency util.highlightSubstring
- */
 ( function( $, util ) {
 	'use strict';
 
+	/**
+	 * Commons suggester.
+	 * Enhances an input box with suggestion functionality for Wikimedia Commons asset names.
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
+	 *
+	 * @example $( 'input' ).commonssuggester();
+	 *
+	 * @dependency jQuery.ui.suggester
+	 * @dependency util.highlightSubstring
+	 */
 	$.widget( 'ui.commonssuggester', $.ui.suggester, {
 
 		/**

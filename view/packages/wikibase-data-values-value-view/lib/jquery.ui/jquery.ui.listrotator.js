@@ -1,48 +1,3 @@
-/**
- * List rotator widget
- *
- * The list rotator may be used to rotate through a list of values. The previous and next value
- * according to the currently selected value are displayed as links next to the current value. In
- * addition, clicking the current value reveals a drop-down list to directly select a value from the
- * list values.
- *
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- *
- * @option {Object[]} values (REQUIRED) Array of objects containing the values to rotate.
- *         Single object structure:
- *         { value: <actual value (being returned on value())>, label: <the value's label> }
- *
- * @option {Object} [menu] Options for the jQuery.menu widget used as drop-down menu:
- *         {Object} [menu.position] Default object passed to jQuery.ui.position when positioning the
- *         menu. Positions will be flipped if isRtl option returns "true".
- *
- * @option {Object} [animation] Object containing parameters used for the rotation animation.
- *         {string[]} [margins] Defines how far the sections should be shifted when animating the
- *         rotation. First value when shifting to the left and vice versa. Values will be flipped in
- *         rtl context.
- *         Default: ['-15px', '15px']
- *         {number} [duration] Defines the animation's duration in milliseconds.
- *         Default: 150
- *
- * @option {boolean} [deferInit] Whether to defer initializing the section widths until initWidths()
- *         is called "manually".
- *         Default: false
- *
- * @option {boolean|Function} [isRTL] Whether widget is used in an RTL context.
- *         Default: function() { return $( 'body' ).hasClass( 'rtl' ); }
- *
- * @event auto: Triggered when "auto" options is selected.
- *        (1) {jQuery.Event}
- *
- * @event selected: Triggered when a specific value is selected.
- *        (1) {jQuery.Event}
- *        (2) {*} Value as specified in the "values" option.
- *
- * @dependency jQuery.Widget
- * @dependency jQuery.ui.menu
- * @dependency jQuery.ui.position
- */
 ( function( $ ) {
 	'use strict';
 
@@ -91,6 +46,51 @@
 		return widths;
 	}
 
+	/**
+	 * List rotator widget
+	 *
+	 * The list rotator may be used to rotate through a list of values. The previous and next value
+	 * according to the currently selected value are displayed as links next to the current value. In
+	 * addition, clicking the current value reveals a drop-down list to directly select a value from the
+	 * list values.
+	 *
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
+	 *
+	 * @option {Object[]} values (REQUIRED) Array of objects containing the values to rotate.
+	 *         Single object structure:
+	 *         { value: <actual value (being returned on value())>, label: <the value's label> }
+	 *
+	 * @option {Object} [menu] Options for the jQuery.menu widget used as drop-down menu:
+	 *         {Object} [menu.position] Default object passed to jQuery.ui.position when positioning the
+	 *         menu. Positions will be flipped if isRtl option returns "true".
+	 *
+	 * @option {Object} [animation] Object containing parameters used for the rotation animation.
+	 *         {string[]} [margins] Defines how far the sections should be shifted when animating the
+	 *         rotation. First value when shifting to the left and vice versa. Values will be flipped in
+	 *         rtl context.
+	 *         Default: ['-15px', '15px']
+	 *         {number} [duration] Defines the animation's duration in milliseconds.
+	 *         Default: 150
+	 *
+	 * @option {boolean} [deferInit] Whether to defer initializing the section widths until initWidths()
+	 *         is called "manually".
+	 *         Default: false
+	 *
+	 * @option {boolean|Function} [isRTL] Whether widget is used in an RTL context.
+	 *         Default: function() { return $( 'body' ).hasClass( 'rtl' ); }
+	 *
+	 * @event auto: Triggered when "auto" options is selected.
+	 *        (1) {jQuery.Event}
+	 *
+	 * @event selected: Triggered when a specific value is selected.
+	 *        (1) {jQuery.Event}
+	 *        (2) {*} Value as specified in the "values" option.
+	 *
+	 * @dependency jQuery.Widget
+	 * @dependency jQuery.ui.menu
+	 * @dependency jQuery.ui.position
+	 */
 	$.widget( 'ui.listrotator', {
 		/**
 		 * Additional options

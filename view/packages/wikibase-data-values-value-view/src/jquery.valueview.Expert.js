@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 jQuery.valueview = jQuery.valueview || {};
 
 ( function( $, vv, util ) {
@@ -17,6 +13,8 @@ jQuery.valueview = jQuery.valueview || {};
 	 * @see jQuery.valueview.Expert
 	 *
 	 * @since 0.1
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @param {string} name Should be all-lowercase and without any special characters. Will be used
 	 *        in within some DOM class attributes and
