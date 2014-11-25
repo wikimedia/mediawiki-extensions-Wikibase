@@ -15,6 +15,11 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.6.2 (dev)
+
+#### Enhancements
+* Consolidated code structure, updated and added code documentation to allow generating a proper documentation using JSDuck.
+
 ### 0.6.1 (2014-11-07)
 
 #### Enhancements
