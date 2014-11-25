@@ -63,11 +63,11 @@ class Claim implements Hashable, Comparable, PropertyIdProvider {
 
 	/**
 	 * @param Snak $mainSnak
-	 * @param null|Snaks $qualifiers
+	 * @param Snaks|null $qualifiers
 	 */
 	public function __construct( Snak $mainSnak, Snaks $qualifiers = null ) {
 		$this->mainSnak = $mainSnak;
-		$this->qualifiers = $qualifiers === null ? new SnakList() : $qualifiers;
+		$this->qualifiers = $qualifiers ?: new SnakList();
 	}
 
 	/**
