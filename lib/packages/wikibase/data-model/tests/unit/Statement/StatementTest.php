@@ -3,13 +3,16 @@
 namespace Wikibase\DataModel\Tests\Statement;
 
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Snak\Snaks;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
@@ -23,6 +26,62 @@ use Wikibase\DataModel\Statement\Statement;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class StatementTest extends \PHPUnit_Framework_TestCase {
+
+	public function testMinimalConstructor() {
+		$mainSnak = new PropertyNoValueSnak( 1 );
+		$statement = new Statement( $mainSnak );
+		$this->assertTrue( $mainSnak->equals( $statement->getMainSnak() ) );
+	}
+
+	/**
+	 * @dataProvider validConstructorArgumentsProvider
+	 */
+	public function testConstructorWithValidArguments(
+		Snak $mainSnak,
+		Snaks $qualifiers = null,
+		ReferenceList $references = null,
+		$guid
+	) {
+		$statement = new Statement( $mainSnak, $qualifiers, $references, $guid );
+		$this->assertTrue( $statement->getMainSnak()->equals( $mainSnak ) );
+		$this->assertTrue( $statement->getQualifiers()->equals( $qualifiers ?: new SnakList() ) );
+		$this->assertTrue( $statement->getReferences()->equals( $references ?: new ReferenceList() ) );
+		$this->assertSame( $guid, $statement->getGuid() );
+	}
+
+	public function validConstructorArgumentsProvider() {
+		$snak = new PropertyNoValueSnak( 1 );
+		$qualifiers = new SnakList( array( $snak ) );
+		$references = new ReferenceList( array( new Reference( array( $snak ) ) ) );
+
+		return array(
+			array( $snak, null, null, null ),
+			array( $snak, null, null, 'guid' ),
+			array( $snak, $qualifiers, $references, 'guid' ),
+		);
+	}
+
+	/**
+	 * @dataProvider invalidConstructorArgumentsProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testConstructorWithInvalidArguments(
+		$mainSnak,
+		$qualifiers,
+		$references,
+		$guid
+	) {
+		new Statement( $mainSnak, $qualifiers, $references, $guid );
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$snak = new PropertyNoValueSnak( 1 );
+
+		return array(
+			array( $snak, null, null, false ),
+			array( $snak, null, null, 1 ),
+		);
+	}
 
 	/**
 	 * @dataProvider instanceProvider
