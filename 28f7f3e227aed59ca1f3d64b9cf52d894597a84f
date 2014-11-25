@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_48164c5c",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-25T09:43:32Z",
+      "side": 1,
+      "message": "Can also be null",
+      "revId": "28f7f3e227aed59ca1f3d64b9cf52d894597a84f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
