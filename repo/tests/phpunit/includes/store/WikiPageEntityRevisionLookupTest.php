@@ -59,7 +59,7 @@ class WikipageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		// make sure all test entities are in the database.
 
 		foreach ( $entityRevisions as $entityRev ) {
-			$logicalRev = $entityRev->getRevision();
+			$logicalRev = $entityRev->getRevisionId();
 
 			if ( !isset( self::$testEntities[$logicalRev] ) ) {
 				$rev = self::storeTestEntity( $entityRev->getEntity() );
@@ -82,7 +82,7 @@ class WikipageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 	protected function resolveLogicalRevision( $revision ) {
 		if ( is_int( $revision ) && isset( self::$testEntities[$revision] ) ) {
-			$revision = self::$testEntities[$revision]->getRevision();
+			$revision = self::$testEntities[$revision]->getRevisionId();
 		}
 
 		return $revision;

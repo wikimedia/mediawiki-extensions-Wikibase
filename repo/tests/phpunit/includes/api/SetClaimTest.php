@@ -413,7 +413,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		// Add new claim at index 3 using the baserevid and a different property id
 		$newClaim = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[2] ) );
 		$newClaim->setGuid( $guidGenerator->newGuid( $itemId ) );
-		$this->makeRequest( $newClaim, $itemId, 2, 'addition request', 3, $revision->getRevision() );
+		$this->makeRequest( $newClaim, $itemId, 2, 'addition request', 3, $revision->getRevisionId() );
 	}
 
 	public function testBadPropertyError() {

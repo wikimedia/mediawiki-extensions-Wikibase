@@ -60,11 +60,10 @@ class EntityRevision {
 
 	/**
 	 * @see Revision::getId
-	 * @todo Rename to getRevisionId, it does not return a Revision.
 	 *
 	 * @return int
 	 */
-	public function getRevision() {
+	public function getRevisionId() {
 		return $this->revisionId;
 	}
 

@@ -43,7 +43,7 @@ class EntityDataTestProvider {
 		$mockRepository = new MockRepository();
 
 		foreach ( self::getEntityRevisions() as $entityRev ) {
-			$mockRepository->putEntity( $entityRev->getEntity(), $entityRev->getRevision(), $entityRev->getTimestamp() );
+			$mockRepository->putEntity( $entityRev->getEntity(), $entityRev->getRevisionId(), $entityRev->getTimestamp() );
 		}
 
 		foreach ( self::getEntityRedirects() as $entityRedir ) {

@@ -195,9 +195,9 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		$this->getOutput()->addWikiMsg(
 			'wikibase-mergeitems-success',
 			$fromId->getSerialization(),
-			$newRevisionFrom->getRevision(),
+			$newRevisionFrom->getRevisionId(),
 			$toId->getSerialization(),
-			$newRevisionTo->getRevision() );
+			$newRevisionTo->getRevisionId() );
 	}
 
 	/**
