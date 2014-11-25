@@ -50,6 +50,23 @@
       "revId": "28f7f3e227aed59ca1f3d64b9cf52d894597a84f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_0e160d4e",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-25T10:01:24Z",
+      "side": 1,
+      "message": "this can be a type hint",
+      "revId": "28f7f3e227aed59ca1f3d64b9cf52d894597a84f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
