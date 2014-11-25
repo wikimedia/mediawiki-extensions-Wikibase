@@ -348,7 +348,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$result = $rev->getEntity();
 
 		//XXX: hack - glue refid to item, so we can compare it later in resetTestItem()
-		$result->revid = $rev->getRevision();
+		$result->revid = $rev->getRevisionId();
 		return $result;
 	}
 

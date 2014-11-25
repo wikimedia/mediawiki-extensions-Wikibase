@@ -312,7 +312,7 @@ class ResultBuilder {
 				$record['pageid'] = $title->getArticleID();
 				$record['ns'] = intval( $title->getNamespace() );
 				$record['title'] = $title->getPrefixedText();
-				$record['lastrevid'] = intval( $entityRevision->getRevision() );
+				$record['lastrevid'] = intval( $entityRevision->getRevisionId() );
 				$record['modified'] = wfTimestamp( TS_ISO_8601, $entityRevision->getTimestamp() );
 			}
 
@@ -550,7 +550,7 @@ class ResultBuilder {
 			if ( $revision instanceof Revision ) {
 				$revisionId = $revision->getId();
 			} elseif ( $revision instanceof EntityRevision ) {
-				$revisionId = $revision->getRevision();
+				$revisionId = $revision->getRevisionId();
 			}
 
 			$this->setValue( $path, 'lastrevid', empty( $revisionId ) ? 0 : $revisionId );
