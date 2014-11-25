@@ -46,7 +46,7 @@ class Property extends Entity implements StatementListProvider {
 		$this->id = $id;
 		$this->fingerprint = $fingerprint;
 		$this->setDataTypeId( $dataTypeId );
-		$this->statements = $statements === null ? new StatementList() : $statements;
+		$this->statements = $statements ?: new StatementList();
 	}
 
 	/**

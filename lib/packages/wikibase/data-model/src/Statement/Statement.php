@@ -48,7 +48,7 @@ class Statement extends Claim {
 	 */
 	public function __construct( Claim $claim, ReferenceList $references = null ) {
 		$this->setClaim( $claim );
-		$this->references = $references === null ? new ReferenceList() : $references;
+		$this->references = $references ?: new ReferenceList();
 	}
 
 	/**
