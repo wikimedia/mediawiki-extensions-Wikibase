@@ -93,11 +93,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 				$item->setId( $id );
 
 				foreach ( $siteLinks as $siteId => $page ) {
-					if ( is_int( $siteId ) ) {
-						$siteIdentifier = $this->site->getGlobalId();
-					} else {
-						$siteIdentifier = $siteId;
-					}
+					$siteIdentifier = $siteId;
 
 					$item->getSiteLinkList()->addNewSiteLink( $siteIdentifier, $page );
 				}
