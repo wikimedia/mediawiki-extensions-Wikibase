@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\StatementListProvider;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
@@ -108,7 +109,13 @@ class EntityParserOutputGenerator {
 		$parserOutput = new ParserOutput();
 
 		$entity = $entityRevision->getEntity();
-		$snaks = $entity->getAllSnaks();
+
+		if ( $entity instanceof StatementListProvider ) {
+			$snaks = $entity->getStatements()->getAllSnaks();
+		}
+		else {
+			$snaks = array();
+		}
 
 		$usedEntityIds = $this->referencedEntitiesFinder->findSnakLinks( $snaks );
 		$entityInfo = $this->getEntityInfoForJsConfig( $usedEntityIds );
@@ -118,6 +125,7 @@ class EntityParserOutputGenerator {
 
 		$this->addLinksToParserOutput( $parserOutput, $usedEntityIds, $snaks );
 
+		// FIXME: OCP violation - https://phabricator.wikimedia.org/T75495
 		if ( $entity instanceof Item ) {
 			$this->addBadgesToParserOutput( $parserOutput, $entity->getSiteLinkList() );
 		}
