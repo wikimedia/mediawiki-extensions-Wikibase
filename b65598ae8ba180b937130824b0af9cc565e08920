@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_0e65adaa",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-25T11:30:06Z",
+      "side": 1,
+      "message": "I think this changes semantics. I suggest we discuss this in a separate patch.",
+      "revId": "b65598ae8ba180b937130824b0af9cc565e08920",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
