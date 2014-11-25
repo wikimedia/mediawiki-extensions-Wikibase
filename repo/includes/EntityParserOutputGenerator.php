@@ -112,7 +112,7 @@ class EntityParserOutputGenerator {
 		$snaks = $entity->getAllSnaks();
 
 		$usedEntityIds = $this->referencedEntitiesFinder->findSnakLinks( $snaks );
-		$entityInfo = $this->getEntityInfoForJsConfig( $usedEntityIds );
+		$entityInfo = $this->getEntityInfo( $usedEntityIds );
 
 		$configVars = $this->configBuilder->build( $entity, $entityInfo );
 		$parserOutput->addJsConfigVars( $configVars );
@@ -203,13 +203,12 @@ class EntityParserOutputGenerator {
 	}
 
 	/**
-	 * Fetches some basic entity information required for the entity view in JavaScript from a
-	 * set of entity IDs.
+	 * Fetches some basic entity information from a set of entity IDs.
 	 *
 	 * @param EntityId[] $entityIds
 	 * @return array obtained from EntityInfoBuilder::getEntityInfo
 	 */
-	private function getEntityInfoForJsConfig( array $entityIds ) {
+	private function getEntityInfo( array $entityIds ) {
 		wfProfileIn( __METHOD__ );
 
 		// @todo: use same instance of entity info, as for the view (see below)
@@ -236,27 +235,6 @@ class EntityParserOutputGenerator {
 	}
 
 	/**
-	 * @param EntityId[] $entityIds
-	 * @return array obtained from EntityInfoBuilder::getEntityInfo
-	 */
-	private function getEntityInfoForView( array $entityIds ) {
-		$propertyIds = array_filter( $entityIds, function ( EntityId $id ) {
-			return $id->getEntityType() === Property::ENTITY_TYPE;
-		} );
-
-		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $propertyIds );
-
-		$entityInfoBuilder->removeMissing();
-
-		$entityInfoBuilder->collectTerms(
-			array( 'label', 'description' ),
-			array( $this->languageCode )
-		);
-
-		return $entityInfoBuilder->getEntityInfo();
-	}
-
-	/**
 	 * @param ParserOutput $parserOutput
 	 * @param SiteLinkList $siteLinkList
 	 */
@@ -280,7 +258,7 @@ class EntityParserOutputGenerator {
 		array $entityIds,
 		$editable
 	) {
-		$entityInfo = $this->getEntityInfoForView( $entityIds );
+		$entityInfo = $this->getEntityInfo( $entityIds );
 
 		$entityView = $this->entityViewFactory->newEntityView(
 			$this->languageFallbackChain,
