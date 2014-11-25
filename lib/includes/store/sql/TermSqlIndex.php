@@ -7,7 +7,6 @@ use DBAccessBase;
 use InvalidArgumentException;
 use Iterator;
 use MWException;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -251,13 +250,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param Term[] $terms
 	 * @param DatabaseBase $dbw
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function deleteTermsInternal( Entity $entity, $terms, DatabaseBase $dbw ) {
+	public function deleteTermsInternal( EntityDocument $entity, $terms, DatabaseBase $dbw ) {
 		wfProfileIn( __METHOD__ );
 
 		//TODO: Make getTermsOfEntity() collect term_row_id values, so we can use them here.
