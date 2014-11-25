@@ -37,13 +37,13 @@ final class TestChanges {
 
 	protected static function getItem() {
 		$item = Item::newEmpty();
-		$item->setLabel( 'en', 'Venezuela' );
-		$item->setDescription( 'en', 'a country' );
-		$item->addAliases( 'en', array( 'Bolivarian Republic of Venezuela' ) );
+		$item->getFingerprint()->setLabel( 'en', 'Venezuela' );
+		$item->getFingerprint()->setDescription( 'en', 'a country' );
+		$item->getFingerprint()->setAliasGroup( 'en', array( 'Bolivarian Republic of Venezuela' ) );
 
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Venezuela' )  );
-		$item->addSiteLink( new SiteLink( 'jawiki', 'ベネズエラ' )  );
-		$item->addSiteLink( new SiteLink( 'cawiki', 'Veneçuela' )  );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Venezuela' );
+		$item->getSiteLinkList()->addNewSiteLink( 'jawiki', 'ベネズエラ' );
+		$item->getSiteLinkList()->addNewSiteLink( 'cawiki', 'Veneçuela' );
 
 		return $item;
 	}
@@ -96,7 +96,7 @@ final class TestChanges {
 			$old->setId( new PropertyId( 'p100' ) );
 			$new = $old->copy();
 
-			$new->setLabel( "de", "dummy" );
+			$new->getFingerprint()->setLabel( "de", "dummy" );
 			$changes['property-set-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 
 			// -----
@@ -117,58 +117,58 @@ final class TestChanges {
 			//       generated here, or elsewhere in test cases.
 
 			$link = new SiteLink( 'dewiki', "Dummy" );
-			$new->addSiteLink( $link, 'add' );
+			$new->getSiteLinkList()->addSiteLink( $link );
 			$changes['set-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			$link = new SiteLink( 'enwiki', "Emmy" );
-			$new->addSiteLink( $link, 'add' );
+			$new->getSiteLinkList()->addSiteLink( $link );
 			$changes['set-enwiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			// -----
-			$new->removeSiteLink( 'enwiki' );
-			$new->removeSiteLink( 'dewiki' );
+			$new->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
+			$new->getSiteLinkList()->removeLinkWithSiteId( 'dewiki' );
 
 			$link = new SiteLink( 'enwiki', "Emmy" );
-			$new->addSiteLink( $link, 'add' );
+			$new->getSiteLinkList()->addSiteLink( $link );
 
 			$link = new SiteLink( 'dewiki', "Dummy" );
-			$new->addSiteLink( $link, 'add' );
+			$new->getSiteLinkList()->addSiteLink( $link );
 
 			$changes['change-sitelink-order'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			// -----
 			$link = new SiteLink( 'dewiki', "Dummy2" );
-			$new->addSiteLink( $link, 'set' );
+			$new->getSiteLinkList()->addSiteLink( $link );
 			$changes['change-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			$link = new SiteLink( 'enwiki', "Emmy2" );
-			$new->addSiteLink( $link, 'set' );
+			$new->getSiteLinkList()->addSiteLink( $link );
 			$changes['change-enwiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			$link = new SiteLink( 'enwiki', "Emmy2", array( new ItemId( 'Q17' ) ) );
-			$new->addSiteLink( $link, 'set' );
+			$new->getSiteLinkList()->addSiteLink( $link );
 			$changes['change-enwiki-sitelink-badges'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$new->removeSiteLink( 'dewiki' );
+			$new->getSiteLinkList()->removeLinkWithSiteId( 'dewiki' );
 			$changes['remove-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			// -----
-			$new->setLabel( "de", "dummy" );
+			$new->getFingerprint()->setLabel( "de", "dummy" );
 			$changes['set-de-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$new->setLabel( "en", "emmy" );
+			$new->getFingerprint()->setLabel( "en", "emmy" );
 			$changes['set-en-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$new->setAliases( "en", array( "foo", "bar" ) );
+			$new->getFingerprint()->setAliasGroup( "en", array( "foo", "bar" ) );
 			$changes['set-en-aliases'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
@@ -192,7 +192,7 @@ final class TestChanges {
 			$changes['item-deletion-linked'] = $changeFactory->newFromUpdate( EntityChange::REMOVE, $old, null );
 
 			// -----
-			$new->removeSiteLink( 'enwiki' );
+			$new->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
 			$changes['remove-enwiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 
 			// apply all the defaults ----------
@@ -313,7 +313,7 @@ final class TestChanges {
 			$entityList[] = $entity;
 
 			$entity->setId( 112 );
-			$entity->setLabel( 'ja', '\u30d3\u30fc\u30eb' );
+			$entity->getFingerprint()->setLabel( 'ja', '\u30d3\u30fc\u30eb' );
 
 			$entityList[] = $entity;
 		}
