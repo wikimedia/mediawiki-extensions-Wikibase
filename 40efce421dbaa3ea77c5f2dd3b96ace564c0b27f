@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_94bd4ad4",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-25T16:59:01Z",
+      "side": 0,
+      "message": "Used in EntityChangeFactory::newFromUpdate",
+      "revId": "40efce421dbaa3ea77c5f2dd3b96ace564c0b27f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
