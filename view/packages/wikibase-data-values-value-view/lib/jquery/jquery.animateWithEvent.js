@@ -1,9 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- *
- * @dependency jQuery.AnimationEvent
- */
 jQuery.fn.animateWithEvent = ( function( $ ) {
 	'use strict';
 
@@ -17,31 +11,47 @@ jQuery.fn.animateWithEvent = ( function( $ ) {
 	 * be executed. In the event the AnimationEvent can be used to allow event listeners to add
 	 * specialized callbacks per animation stage (see AnimationEvent documentation).
 	 *
-	 * @example <code>
-	 * $.animationWithEvent(
-	 *     'mywidgetsgreatanimation',
-	 *     'fadeIn',
-	 *     { duration: 200 },
-	 *     function( animationEvent ) {
-	 *         self._trigger( 'animation', animationEvent );
-	 *     }
-	 * );
-	 * </code>
+	 * DEPENDENCY: jQuery.AnimationEvent
+	 *
+	 *     @example
+	 *     $.animationWithEvent(
+	 *         'mywidgetsgreatanimation',
+	 *         'fadeIn',
+	 *         { duration: 200 },
+	 *         function( animationEvent ) {
+	 *             self._trigger( 'animation', animationEvent );
+	 *         }
+	 *     );
+	 *
+	 * @member jQuery.fn
+	 * @method animateWithEvent
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
+	 *
+	 * @constructor
 	 *
 	 * @param {string} animationPurpose Will be forwarded to jQuery.AnimationEvent.
 	 * @param {string|Object} animationProperties Name of a jQuery.fn member which is dedicated to
 	 *        some animation (e.g. "fadeIn") and takes an "options" argument. Can also be an object
 	 *        of properties to animate, in this case jQuery.fn.animate will be used.
-	 * @param {Object} [options] Options passed to the animation ("duration", "easing" etc.).
-	 * @param {Function( jQuery.AnimationEvent event )} [startCallback] Callback which will be fired
-	 *        before the animation starts. This is different from the options.start callback since
-	 *        it will get a jQuery.AnimationEvent instance. Also, the callback will be triggered
+	 * @param {Object} [options={}] Options passed to the animation ("duration", "easing" etc.).
+	 * @param {Function} [startCallback=jQuery.noop] Callback which will be fired before the
+	 *        animation starts.
+	 *        This is different from the options.start callback since it will be passed a
+	 *        jQuery.AnimationEvent instance as parameter. Also, the callback will be triggered
 	 *        before any options.start callback.
+	 *        Parameters:
+	 *        - {jQuery.AnimationEvent} event
 	 * @return {jQuery}
 	 *
 	 * @throws {Error} If animationProperties is a string but not a member of jQuery.fn
 	 */
-	return function AnimateWithEvent( animationPurpose, animationProperties, options, startCallback ) {
+	return function AnimateWithEvent(
+		animationPurpose,
+		animationProperties,
+		options,
+		startCallback
+	) {
 		var animationFunction;
 		if( typeof animationProperties !== 'string' ) {
 			// Custom animation, forward to jQuery.fn.animate( animationProperties, options )
