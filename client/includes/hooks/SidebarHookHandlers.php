@@ -35,7 +35,7 @@ class SidebarHookHandlers {
 	private $namespaceChecker;
 
 	/**
-	 * @var LanguageLinkBadgeDisplay
+	 * @var SiteLinkBadgeDisplay
 	 */
 	private $badgeDisplay;
 
@@ -61,7 +61,7 @@ class SidebarHookHandlers {
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		$badgeClassNames = $settings->getSetting( 'badgeClassNames' );
 
-		$badgeDisplay = new LanguageLinkBadgeDisplay(
+		$badgeDisplay = new SiteLinkBadgeDisplay(
 			$entityLookup,
 			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
 			$wgLang
@@ -120,7 +120,7 @@ class SidebarHookHandlers {
 
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
-		LanguageLinkBadgeDisplay $badgeDisplay,
+		SiteLinkBadgeDisplay $badgeDisplay,
 		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
 		$otherProjectsLinksBeta,
 		$otherProjectsLinksDefault
