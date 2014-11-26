@@ -11,7 +11,6 @@ use SpecialPage;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -19,7 +18,6 @@ use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Specials\SpecialEntityData;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialEntityData
@@ -40,28 +38,6 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
 
-	protected function saveItem( Item $item ) {
-		//TODO: Same as in EntityDataRequestHandlerTest. Factor out.
-
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
-	}
-
-	public function getTestItem() {
-		//TODO: Same as in EntityDataRequestHandlerTest. Factor out.
-
-		$prefix = get_class( $this ) . '/';
-		static $item;
-
-		if ( $item === null ) {
-			$item = Item::newEmpty();
-			$item->setLabel( 'en', $prefix . 'Raarrr' );
-			$this->saveItem( $item );
-		}
-
-		return $item;
-	}
-
 	protected function newSpecialPage() {
 		$page = new SpecialEntityData();
 
@@ -73,10 +49,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		return $page;
 	}
 
-	protected function newRequestHandler() {
-		$mockRepo = EntityDataTestProvider::getMockRepository();
-
-		$entityRevisionLookup = $mockRepo;
+	private function newRequestHandler() {
+		$mockRepository = EntityDataTestProvider::getMockRepository();
 
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$titleLookup->expects( $this->any() )
@@ -102,7 +76,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$serializationService = new EntityDataSerializationService(
 			self::URI_BASE,
 			self::URI_DATA,
-			$mockRepo,
+			$mockRepository,
 			$titleLookup,
 			$serializerFactory,
 			new SiteList()
@@ -130,7 +104,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$uriManager,
 			$titleLookup,
 			$idParser,
-			$entityRevisionLookup,
+			$mockRepository,
 			$serializationService,
 			$defaultFormat,
 			$maxAge,
