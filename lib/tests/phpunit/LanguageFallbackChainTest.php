@@ -3,7 +3,9 @@
 namespace Wikibase\Test;
 
 use Language;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\LanguageWithConversion;
 
 /**
  * @covers Wikibase\LanguageFallbackChain
@@ -196,6 +198,21 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 				'language' => 'en',
 			) ),
 		);
+	}
+
+	/**
+	 */
+	public function testGetLanguageCodes() {
+		$chain = new LanguageFallbackChain( array(
+			LanguageWithConversion::factory( 'de-ch' ),
+			LanguageWithConversion::factory( 'de' ),
+			LanguageWithConversion::factory( 'en' ),
+		) );
+
+		$codes = $chain->getLanguageCodes();
+
+		$expected = array( 'de-ch', 'de', 'en' );
+		$this->assertEquals( $expected, $codes );
 	}
 
 }

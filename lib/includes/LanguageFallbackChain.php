@@ -39,6 +39,21 @@ class LanguageFallbackChain {
 	}
 
 	/**
+	 * Returns the language codes of the languages in the fallback chain.
+	 *
+	 * @return string[]
+	 */
+	public function getLanguageCodes() {
+		$codes = array();
+
+		foreach ( $this->chain as $language ) {
+			$codes[] = $language->getLanguageCode();
+		}
+
+		return $codes;
+	}
+
+	/**
 	 * Try to fetch the best value in a multilingual data array.
 	 *
 	 * @param string[]|array[] $data Multilingual data with language codes as keys
