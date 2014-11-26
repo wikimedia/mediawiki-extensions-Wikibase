@@ -16,6 +16,24 @@
       "revId": "535aa7343f5213cccba5ffd06cee392c9cc001ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_2e165e4e",
+        "filename": "repo/includes/ChangeOp/ChangeOpMainSnak.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-26T14:35:29Z",
+      "side": 1,
+      "message": "Isn\u0027t the use case here exactly why we introduced the interface? We shouldn\u0027t assume every Entity supports Statements. So sorry, but I don\u0027t really know what you mean.",
+      "parentUuid": "4ea06b5a_348556b2",
+      "revId": "535aa7343f5213cccba5ffd06cee392c9cc001ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
