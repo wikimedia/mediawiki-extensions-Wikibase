@@ -521,7 +521,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 
 	/**
 	 * @dataProvider provideLanguageFallback
-	 * @todo factor this into the main test method
 	 */
 	public function testLanguageFallback( $handle, $languages, $expectedLabels, $expectedDescriptions ) {
 		$id = EntityTestHelper::getId( $handle );
