@@ -36,11 +36,13 @@ class PropertyView extends EntityView {
 		$html = parent::getMainHtml( $entityRevision, $entityInfo, $editable );
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
-		$html .= $this->claimsView->getHtml(
-			$property->getStatements()->toArray(),
-			$entityInfo,
-			'wikibase-attributes'
-		);
+		if ( $this->shouldShowStatements() ) {
+			$html .= $this->claimsView->getHtml(
+				$property->getStatements()->toArray(),
+				$entityInfo,
+				'wikibase-attributes'
+			);
+		}
 
 		$footer = wfMessage( 'wikibase-property-footer' );
 
@@ -55,6 +57,11 @@ class PropertyView extends EntityView {
 	private function getDataType( Property $property ) {
 		return WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
 			->getType( $property->getDataTypeId() );
+	}
+
+	private function shouldShowStatements() {
+		return WikibaseRepo::getDefaultInstance()->getSettings()
+			->getSetting( 'displayStatementsOnProperties' );
 	}
 
 	/**
