@@ -21,7 +21,6 @@ return call_user_func( function() {
 				'RepoApi.tests.js',
 			),
 			'dependencies' => array(
-				'wikibase',
 				'wikibase.api.getLocationAgnosticMwApi',
 				'wikibase.api.RepoApi',
 			),
@@ -32,7 +31,6 @@ return call_user_func( function() {
 				'RepoApiError.tests.js',
 			),
 			'dependencies' => array(
-				'wikibase',
 				'wikibase.api.RepoApiError',
 			),
 			'messages' => array(
