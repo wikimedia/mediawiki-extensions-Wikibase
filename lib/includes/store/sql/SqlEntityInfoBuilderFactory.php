@@ -48,12 +48,12 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	/**
 	 * @see EntityInfoBuilderFactory::newEntityInfoBuilder
 	 *
-	 * @param EntityId[] $ids
+	 * @param EntityId[] $entityIds
 	 *
 	 * @return EntityInfoBuilder
 	 */
-	public function newEntityInfoBuilder( array $ids ) {
-		return new SqlEntityInfoBuilder( $ids, $this->useRedirectTargetColumn, $this->wiki );
+	public function newEntityInfoBuilder( array $entityIds ) {
+		return new SqlEntityInfoBuilder( $entityIds, $this->useRedirectTargetColumn, $this->wiki );
 	}
 
 }
