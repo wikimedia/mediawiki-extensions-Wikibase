@@ -1,0 +1,27 @@
+{
+	"name": "wikibase/javascript-api",
+	"description": "Wikibase API client in JavaScript",
+	"require": {
+		"data-values/javascript": "~0.5.0"
+	},
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "H. Snater",
+			"homepage": "http://www.snater.com"
+		},
+		{
+			"name": "Adrian Lang",
+			"email": "adrian.lang@wikimedia.de"
+		}
+	],
+	"support": {
+		"issues": "https://bugzilla.wikimedia.org/",
+		"irc": "irc://irc.freenode.net/wikidata"
+	},
+	"autoload": {
+		"files": [
+			"init.php"
+		]
+	}
+}
