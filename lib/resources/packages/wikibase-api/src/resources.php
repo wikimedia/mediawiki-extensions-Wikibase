@@ -19,7 +19,6 @@ return call_user_func( function() {
 				'namespace.js'
 			),
 			'dependencies' => array(
-				'wikibase' // For the namespace
 			)
 		),
 
