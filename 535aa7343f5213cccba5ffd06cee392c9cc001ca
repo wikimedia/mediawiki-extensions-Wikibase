@@ -34,6 +34,24 @@
       "revId": "535aa7343f5213cccba5ffd06cee392c9cc001ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_0effe2a8",
+        "filename": "repo/includes/ChangeOp/ChangeOpMainSnak.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-26T15:38:32Z",
+      "side": 1,
+      "message": "Sorry, I didn\u0027t think about the fact that ChangeOps should fail \"gracefully\" (as in throw a ChangeOpException) in these cases.",
+      "parentUuid": "4ea06b5a_2e165e4e",
+      "revId": "535aa7343f5213cccba5ffd06cee392c9cc001ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
