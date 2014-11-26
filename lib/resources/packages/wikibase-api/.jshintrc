@@ -50,7 +50,7 @@
 
 	"indent": 4,
 	"quotmark": false,
-	"maxlen": 110,
+	"maxlen": 100,
 	"maxparams": 7,
 	"maxdepth": 4,
 	"maxstatements": 19,
