@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_69f1c091",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-26T18:56:51Z",
+      "side": 1,
+      "message": "getFetchLanguageCodes",
+      "revId": "95d575660b600560711b47aa3bb3917b9f83c549",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_c92fb4f2",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-26T18:56:51Z",
+      "side": 1,
+      "message": "getFetchLanguageCode",
+      "revId": "95d575660b600560711b47aa3bb3917b9f83c549",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
