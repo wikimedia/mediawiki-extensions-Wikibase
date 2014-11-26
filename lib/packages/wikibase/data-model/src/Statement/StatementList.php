@@ -41,19 +41,6 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $statements = array() ) {
-		$this->assertAreStatements( $statements );
-
-		if ( is_array( $statements ) ) {
-			$this->statements = $statements;
-		}
-		else {
-			foreach ( $statements as $statement ) {
-				$this->statements[] = $statement;
-			}
-		}
-	}
-
-	private function assertAreStatements( $statements ) {
 		if ( !is_array( $statements ) && !( $statements instanceof Traversable ) ) {
 			throw new InvalidArgumentException( '$statements must be an array or an instance of Traversable' );
 		}
@@ -62,6 +49,8 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 			if ( !( $statement instanceof Statement ) ) {
 				throw new InvalidArgumentException( 'Every element in $statements must be an instance of Statement' );
 			}
+
+			$this->statements[] = $statement;
 		}
 	}
 

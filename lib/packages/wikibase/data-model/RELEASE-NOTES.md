@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 2.4.1 (2014-11-26)
+
+* Fixed `StatementList` not reindexing array keys
+
 ## Version 2.4.0 (2014-11-23)
 
 * `Property` now implements the deprecated claim related methods defined in `Entity`
