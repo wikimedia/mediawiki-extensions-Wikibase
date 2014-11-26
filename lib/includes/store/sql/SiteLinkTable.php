@@ -383,13 +383,11 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	/**
 	 * @see SiteLinkLookup::countLinks
 	 *
-	 * @since 0.3
+	 * @param int[] $itemIds
+	 * @param string[] $siteIds
+	 * @param string[] $pageNames
 	 *
-	 * @param array $itemIds
-	 * @param array $siteIds
-	 * @param array $pageNames
-	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function countLinks( array $itemIds, array $siteIds = array(), array $pageNames = array() ) {
 		$dbr = $this->getConnection( DB_SLAVE );
@@ -422,15 +420,12 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	/**
 	 * @see SiteLinkLookup::getLinks
 	 *
-	 * @note: SiteLink objects returned from this method will not contain badges!
-	 *
-	 * @since 0.3
-	 *
-	 * @param array $itemIds
-	 * @param array $siteIds
-	 * @param array $pageNames
+	 * @param int[] $itemIds
+	 * @param string[] $siteIds
+	 * @param string[] $pageNames
 	 *
 	 * @return array[]
+	 * @note The arrays returned by this method do not contain badges!
 	 */
 	public function getLinks( array $itemIds, array $siteIds = array(), array $pageNames = array() ) {
 		$dbr = $this->getConnection( DB_SLAVE );

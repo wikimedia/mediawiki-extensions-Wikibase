@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use DatabaseBase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -21,14 +22,14 @@ interface SiteLinkLookup {
 	 * currently in the store. The array is empty if there are no such conflicts.
 	 *
 	 * The items in the return array are arrays with the following elements:
-	 * - integer itemId
+	 * - int itemId
 	 * - string siteId
 	 * - string sitePage
 	 *
 	 * @since 0.1
 	 *
 	 * @param Item          $item
-	 * @param \DatabaseBase|null $db The database object to use (optional).
+	 * @param DatabaseBase|null $db The database object to use (optional).
 	 *        If conflict checking is performed as part of a save operation,
 	 *        this should be used to provide the master DB connection that will
 	 *        also be used for saving. This will preserve transactional integrity
@@ -36,7 +37,7 @@ interface SiteLinkLookup {
 	 *
 	 * @return array of array
 	 */
-	public function getConflictsForItem( Item $item, \DatabaseBase $db = null );
+	public function getConflictsForItem( Item $item, DatabaseBase $db = null );
 
 	/**
 	 * Returns the id of the item that is equivalent to the
@@ -59,11 +60,11 @@ interface SiteLinkLookup {
 	 *
 	 * @since 0.3
 	 *
-	 * @param array $itemIds
-	 * @param array $siteIds
-	 * @param array $pageNames
+	 * @param int[] $itemIds
+	 * @param string[] $siteIds
+	 * @param string[] $pageNames
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function countLinks( array $itemIds, array $siteIds = array(), array $pageNames = array() );
 
@@ -79,9 +80,9 @@ interface SiteLinkLookup {
 	 *
 	 * @since 0.3
 	 *
-	 * @param array $itemIds
-	 * @param array $siteIds
-	 * @param array $pageNames
+	 * @param int[] $itemIds
+	 * @param string[] $siteIds
+	 * @param string[] $pageNames
 	 *
 	 * @return array[]
 	 */

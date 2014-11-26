@@ -20,9 +20,10 @@ interface EntityInfoBuilderFactory {
 	 * Returns a new EntityInfoBuilder for gathering information about the
 	 * Entities specified by the given IDs.
 	 *
-	 * @param EntityId[] $ids
+	 * @param EntityId[] $entityIds
 	 *
 	 * @return EntityInfoBuilder
 	 */
-	public function newEntityInfoBuilder( array $ids );
+	public function newEntityInfoBuilder( array $entityIds );
+
 }
