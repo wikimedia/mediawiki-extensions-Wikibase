@@ -25,32 +25,6 @@ return call_user_func( function() {
 			'position' => 'top'
 		),
 
-		'wikibase.api.RepoApi.tests' => $moduleBase + array(
-			'scripts' => array(
-				'api/RepoApi.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase',
-				'wikibase.api.getLocationAgnosticMwApi',
-				'wikibase.api.RepoApi',
-			),
-		),
-
-		'wikibase.api.RepoApiError.tests' => $moduleBase + array(
-			'scripts' => array(
-				'api/RepoApiError.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase',
-				'wikibase.api.RepoApiError',
-			),
-			'messages' => array(
-				'wikibase-error-unexpected',
-				'wikibase-error-remove-timeout',
-				'wikibase-error-ui-client-error',
-			),
-		),
-
 		'wikibase.Site.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.Site.tests.js',
