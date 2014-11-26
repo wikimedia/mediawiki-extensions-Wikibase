@@ -519,8 +519,19 @@ class WikibaseRepo {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	protected function newSnakFormatterFactory() {
+		return $this->newSnakFormatterFactoryForValueFormatterBuilders(
+			$this->getValueFormatterBuilders()
+		);
+	}
+
+	/**
+	 * @return OutputFormatSnakFormatterFactory
+	 */
+	public function newSnakFormatterFactoryForValueFormatterBuilders(
+		WikibaseValueFormatterBuilders $valueFormatterBuilders
+	) {
 		$builders = new WikibaseSnakFormatterBuilders(
-			$this->getValueFormatterBuilders(),
+			$valueFormatterBuilders,
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
@@ -969,10 +980,20 @@ class WikibaseRepo {
 	public function getEntityParserOutputGeneratorFactory() {
 		$entityTitleLookup = $this->getEntityContentFactory();
 
+		// TODO: remove silly self hack when we can use PHP 5.4
+		$self = $this;
+
 		$entityViewFactory = new EntityViewFactory(
 			$entityTitleLookup,
 			$this->getEntityLookup(),
-			$this->getSnakFormatterFactory()
+			function( TermLookup $termLookup, $outputFormat, FormatterOptions $formatterOptions ) use ($self) {
+				$snakFormatterFactory = $self->newSnakFormatterFactoryForValueFormatterBuilders(
+					$self->getValueFormatterBuildersForTermLookup(
+						$termLookup
+					)
+				);
+				return $snakFormatterFactory->getSnakFormatter( $outputFormat, $formatterOptions );
+			}
 		);
 
 		return new EntityParserOutputGeneratorFactory(
