@@ -13,8 +13,7 @@ use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
@@ -30,9 +29,9 @@ use Wikibase\Lib\Store\LanguageLabelLookup;
 class WikibaseValueFormatterBuilders {
 
 	/**
-	 * @var EntityLookup
+	 * @var TermLookup
 	 */
-	private $entityLookup;
+	private $termLookup;
 
 	/**
 	 * @var Language
@@ -112,11 +111,11 @@ class WikibaseValueFormatterBuilders {
 	);
 
 	public function __construct(
-		EntityLookup $entityLookup,
+		TermLookup $termLookup,
 		Language $defaultLanguage,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
-		$this->entityLookup = $entityLookup;
+		$this->termLookup = $termLookup;
 		$this->defaultLanguage = $defaultLanguage;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
@@ -509,7 +508,7 @@ class WikibaseValueFormatterBuilders {
 		FormatterOptions $options,
 		WikibaseValueFormatterBuilders $builders
 	) {
-		$termLookup = new EntityRetrievingTermLookup( $builders->entityLookup );
+		$termLookup = $builders->termLookup;
 
 		// @fixme inject the label lookup
 		if ( $options->hasOption( 'languages' ) ) {
