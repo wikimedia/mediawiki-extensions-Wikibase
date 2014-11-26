@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 2.5.0 (dev)
+
+* 
+
 ## Version 2.4.1 (2014-11-26)
 
 * Fixed `StatementList` not reindexing array keys
