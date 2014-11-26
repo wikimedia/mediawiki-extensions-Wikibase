@@ -12,7 +12,7 @@ if ( defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
 	return 1;
 }
 
-define( 'WIKIBASE_DATAMODEL_VERSION', '2.4.0' );
+define( 'WIKIBASE_DATAMODEL_VERSION', '2.4.1' );
 
 if ( defined( 'MEDIAWIKI' ) ) {
 	call_user_func( function() {

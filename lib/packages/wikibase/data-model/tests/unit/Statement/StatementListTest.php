@@ -28,11 +28,11 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenStatements_getPropertyIdsReturnsArrayWithoutDuplicates() {
 		$list = new StatementList( array(
-			$this->getStubStatement( 1, 'kittens' ),
-			$this->getStubStatement( 3, 'foo' ),
-			$this->getStubStatement( 2, 'bar' ),
-			$this->getStubStatement( 2, 'baz' ),
-			$this->getStubStatement( 1, 'bah' ),
+			$this->getStatement( 1, 'kittens' ),
+			$this->getStatement( 3, 'foo' ),
+			$this->getStatement( 2, 'bar' ),
+			$this->getStatement( 2, 'baz' ),
+			$this->getStatement( 1, 'bah' ),
 		) );
 
 		$this->assertEquals(
@@ -45,7 +45,21 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	private function getStubStatement( $propertyId, $guid, $rank = Statement::RANK_NORMAL ) {
+	public function testGivenStatementsWithArrayKeys_reindexesArray() {
+		$statement = $this->getStatement( 1, 'guid' );
+		$list = new StatementList( array( 'ignore-me' => $statement ) );
+
+		$this->assertSame( array( 0 => $statement ), $list->toArray() );
+	}
+
+	/**
+	 * @param int $propertyId
+	 * @param string $guid
+	 * @param int $rank
+	 *
+	 * @return Statement
+	 */
+	private function getStatement( $propertyId, $guid, $rank = Statement::RANK_NORMAL ) {
 		$statement = $this->getMockBuilder( 'Wikibase\DataModel\Statement\Statement' )
 			->disableOriginalConstructor()->getMock();
 
@@ -65,7 +79,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testCanIterate() {
-		$statement = $this->getStubStatement( 1, 'kittens' );
+		$statement = $this->getStatement( 1, 'kittens' );
 		$list = new StatementList( array( $statement ) );
 
 		foreach ( $list as $statementFormList ) {
@@ -75,27 +89,27 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetBestStatementPerProperty() {
 		$list = new StatementList( array(
-			$this->getStubStatement( 1, 'one', Statement::RANK_PREFERRED ),
-			$this->getStubStatement( 1, 'two', Statement::RANK_NORMAL ),
-			$this->getStubStatement( 1, 'three', Statement::RANK_PREFERRED ),
+			$this->getStatement( 1, 'one', Statement::RANK_PREFERRED ),
+			$this->getStatement( 1, 'two', Statement::RANK_NORMAL ),
+			$this->getStatement( 1, 'three', Statement::RANK_PREFERRED ),
 
-			$this->getStubStatement( 2, 'four', Statement::RANK_DEPRECATED ),
+			$this->getStatement( 2, 'four', Statement::RANK_DEPRECATED ),
 
-			$this->getStubStatement( 3, 'five', Statement::RANK_DEPRECATED ),
-			$this->getStubStatement( 3, 'six', Statement::RANK_NORMAL ),
+			$this->getStatement( 3, 'five', Statement::RANK_DEPRECATED ),
+			$this->getStatement( 3, 'six', Statement::RANK_NORMAL ),
 
-			$this->getStubStatement( 4, 'seven', Statement::RANK_PREFERRED ),
-			$this->getStubStatement( 4, 'eight', Claim::RANK_TRUTH ),
+			$this->getStatement( 4, 'seven', Statement::RANK_PREFERRED ),
+			$this->getStatement( 4, 'eight', Claim::RANK_TRUTH ),
 		) );
 
 		$this->assertEquals(
 			array(
-				$this->getStubStatement( 1, 'one', Statement::RANK_PREFERRED ),
-				$this->getStubStatement( 1, 'three', Statement::RANK_PREFERRED ),
+				$this->getStatement( 1, 'one', Statement::RANK_PREFERRED ),
+				$this->getStatement( 1, 'three', Statement::RANK_PREFERRED ),
 
-				$this->getStubStatement( 3, 'six', Statement::RANK_NORMAL ),
+				$this->getStatement( 3, 'six', Statement::RANK_NORMAL ),
 
-				$this->getStubStatement( 4, 'eight', Claim::RANK_TRUTH ),
+				$this->getStatement( 4, 'eight', Claim::RANK_TRUTH ),
 			),
 			$list->getBestStatementPerProperty()->toArray()
 		);
@@ -298,22 +312,15 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function statementArrayProvider() {
 		return array(
-			array(
-				array(
-					$this->getStatementWithSnak( 1, 'foo' ),
-					$this->getStatementWithSnak( 2, 'bar' ),
-				)
-			),
-
-			array(
-				array(
-					$this->getStatementWithSnak( 1, 'foo' ),
-				)
-			),
-
-			array(
-				array()
-			),
+			array( array(
+				$this->getStatementWithSnak( 1, 'foo' ),
+				$this->getStatementWithSnak( 2, 'bar' ),
+			) ),
+			array( array(
+				$this->getStatementWithSnak( 1, 'foo' ),
+			) ),
+			array( array(
+			) ),
 		);
 	}
 
