@@ -168,7 +168,7 @@ class MergeItems extends ApiBase {
 
 	private function addEntityToOutput( EntityRevision $entityRevision, $name ) {
 		$entityId = $entityRevision->getEntity()->getId();
-		$revisionId = $entityRevision->getRevision();
+		$revisionId = $entityRevision->getRevisionId();
 
 		$this->resultBuilder->addBasicEntityInformation( $entityId, $name );
 

@@ -104,6 +104,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 		wfProfileIn( __METHOD__ );
 		$key = $this->getCacheKey( $entityId );
 
+		/** @var EntityRevision $entityRevision */
 		$entityRevision = $this->cache->get( $key );
 
 		if ( $entityRevision !== false ) {
@@ -117,7 +118,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 				}
 			}
 
-			if ( $revisionId !== 0 && $entityRevision->getRevision() !== $revisionId ) {
+			if ( $revisionId !== 0 && $entityRevision->getRevisionId() !== $revisionId ) {
 				$entityRevision = false;
 			}
 		}
@@ -174,10 +175,11 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	public function getLatestRevisionId( EntityId $entityId ) {
 		if ( !$this->shouldVerifyRevision ) {
 			$key = $this->getCacheKey( $entityId );
+			/** @var EntityRevision $entityRevision */
 			$entityRevision = $this->cache->get( $key );
 
 			if ( $entityRevision ) {
-				return $entityRevision->getRevision();
+				return $entityRevision->getRevisionId();
 			}
 		}
 
