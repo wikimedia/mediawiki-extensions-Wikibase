@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_8bb8c4e3",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-26T11:41:41Z",
+      "side": 1,
+      "message": "Please also rename the alias in this file from dataTypes to dataTypeStore.",
+      "revId": "b7c236b42ce746be78d97429f08941b0d150ccc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
