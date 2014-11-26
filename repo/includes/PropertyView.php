@@ -36,14 +36,11 @@ class PropertyView extends EntityView {
 		$html = parent::getMainHtml( $entityRevision, $entityInfo, $editable );
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-			// @fixme Property::getClaims no longer returns any statements for properties!
-			$html .= $this->claimsView->getHtml(
-				$property->getStatements()->toArray(),
-				$entityInfo,
-				'wikibase-attributes'
-			);
-		}
+		$html .= $this->claimsView->getHtml(
+			$property->getStatements()->toArray(),
+			$entityInfo,
+			'wikibase-attributes'
+		);
 
 		$footer = wfMessage( 'wikibase-property-footer' );
 
