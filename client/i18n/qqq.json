@@ -13,7 +13,8 @@
 			"Vadgt",
 			"Liuxinyu970226",
 			"Amire80",
-			"Lokal Profil"
+			"Lokal Profil",
+			"Purodha"
 		]
 	},
 	"wikibase-client-desc": "{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
@@ -33,7 +34,7 @@
 	"wikibase-comment-linked": "Autocomment message in the client for when a Wikidata item is linked to a page in the client.",
 	"wikibase-comment-unlink": "Autocomment message for client (e.g. Wikipedia) recent changes when a site link to a page gets removed. This results in the associated item being disconnected from the client page and all the language links being removed.",
 	"wikibase-comment-restore": "Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item gets undeleted and has a site link to this page. Language links get readded to the client page.",
-	"wikibase-comment-update": "Autocomment message for client (e.g. Wikipedia) recent changes when a linked Wikidata item get changed. This can include label changes and statements.",
+	"wikibase-comment-update": "Autocomment message for client (e.g. Wikipedia) recent changes when a linked Wikidata item gets changed. This can include label changes and statements.",
 	"wikibase-comment-sitelink-add": "Autocomment message for client (e.g. Wikipedia) when a particular site link gets added on the repository. This change appears on the client as a new language link in the sidebar.\n\nParameters:\n* $1 - the wikilink that was added, in form of [[:de:Berlin|de:Berlin]]",
 	"wikibase-comment-sitelink-change": "Autocomment message for client (e.g. Wikipedia) when a particular site link gets changed on the repository.\n\nParameters:\n* $1 - the wikilink for the old link\n* $2 - the new wikilink\nFormat of wikilink is [[:de:Berlin|de:Berlin]].",
 	"wikibase-comment-sitelink-remove": "Autocomment message for client (e.g. Wikipedia) when a particular site link gets removed on the repository.  $1 is the wikilink for the link removed, in format [[:de:Berlin|de:Berlin]].",
