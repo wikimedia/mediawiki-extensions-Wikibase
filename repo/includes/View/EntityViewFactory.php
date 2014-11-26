@@ -16,6 +16,7 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\PropertyView;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @since 0.5
@@ -83,7 +84,10 @@ class EntityViewFactory {
 		if ( $entityType === 'item' ) {
 			return new ItemView( $fingerprintView, $claimsView, $language );
 		} elseif ( $entityType === 'property' ) {
-			return new PropertyView( $fingerprintView, $claimsView, $language );
+			$displayStatementsOnProperties = WikibaseRepo::getDefaultInstance()->getSettings()
+					->getSetting( 'displayStatementsOnProperties' );
+
+			return new PropertyView( $fingerprintView, $claimsView, $language, $displayStatementsOnProperties );
 		}
 
 		throw new InvalidArgumentException( 'No EntityView for entity type: ' . $entityType );
