@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_f7329005",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-26T10:01:50Z",
+      "side": 1,
+      "message": "bool",
+      "revId": "f657ca009ad4faf7a42c7b71ad93283ab81150cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_62056013",
+        "filename": "repo/includes/View/EntityViewFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-26T10:01:50Z",
+      "side": 1,
+      "message": "can also be null",
+      "revId": "f657ca009ad4faf7a42c7b71ad93283ab81150cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_c200f406",
+        "filename": "repo/includes/View/EntityViewFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-26T10:01:50Z",
+      "side": 1,
+      "message": "can also be null",
+      "revId": "f657ca009ad4faf7a42c7b71ad93283ab81150cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
