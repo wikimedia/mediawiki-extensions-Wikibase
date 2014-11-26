@@ -297,4 +297,40 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$list->setTextForLanguage( 'en', null );
 	}
 
+	public function testGivenEmptyList_getWithLanguagesReturnsEmptyList() {
+		$list = new TermList();
+		$this->assertEquals( new TermList(), $list->getWithLanguages( array() ) );
+		$this->assertEquals( new TermList(), $list->getWithLanguages( array( 'en', 'de' ) ) );
+	}
+
+	public function testGivenNoLanguages_getWithLanguagesReturnsEmptyList() {
+		$list = new TermList();
+		$list->setTextForLanguage( 'en', 'foo' );
+		$list->setTextForLanguage( 'de', 'bar' );
+
+		$this->assertEquals( new TermList(), $list->getWithLanguages( array() ) );
+	}
+
+	public function testGivenAllLanguages_getWithLanguagesReturnsFullList() {
+		$list = new TermList();
+		$list->setTextForLanguage( 'en', 'foo' );
+		$list->setTextForLanguage( 'de', 'bar' );
+
+		$this->assertEquals( $list, $list->getWithLanguages( array( 'en', 'de' ) ) );
+	}
+
+	public function testGivenSomeLanguages_getWithLanguagesReturnsPartialList() {
+		$list = new TermList();
+		$list->setTextForLanguage( 'en', 'foo' );
+		$list->setTextForLanguage( 'de', 'bar' );
+		$list->setTextForLanguage( 'nl', 'baz' );
+		$list->setTextForLanguage( 'fr', 'hax' );
+
+		$expectedList = new TermList();
+		$expectedList->setTextForLanguage( 'en', 'foo' );
+		$expectedList->setTextForLanguage( 'nl', 'baz' );
+
+		$this->assertEquals( $expectedList, $list->getWithLanguages( array( 'en', 'nl' ) ) );
+	}
+
 }

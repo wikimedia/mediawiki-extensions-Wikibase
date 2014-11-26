@@ -291,4 +291,40 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $array, $list->toArray() );
 	}
 
+	public function testGivenEmptyList_getWithLanguagesReturnsEmptyList() {
+		$list = new AliasGroupList();
+		$this->assertEquals( new AliasGroupList(), $list->getWithLanguages( array() ) );
+		$this->assertEquals( new AliasGroupList(), $list->getWithLanguages( array( 'en', 'de' ) ) );
+	}
+
+	public function testGivenNoLanguages_getWithLanguagesReturnsEmptyList() {
+		$list = new AliasGroupList();
+		$list->setAliasesForLanguage( 'en', array( 'foo' ) );
+		$list->setAliasesForLanguage( 'de', array( 'bar' ) );
+
+		$this->assertEquals( new AliasGroupList(), $list->getWithLanguages( array() ) );
+	}
+
+	public function testGivenAllLanguages_getWithLanguagesReturnsFullList() {
+		$list = new AliasGroupList();
+		$list->setAliasesForLanguage( 'en', array( 'foo' ) );
+		$list->setAliasesForLanguage( 'de', array( 'bar' ) );
+
+		$this->assertEquals( $list, $list->getWithLanguages( array( 'en', 'de' ) ) );
+	}
+
+	public function testGivenSomeLanguages_getWithLanguagesReturnsPartialList() {
+		$list = new AliasGroupList();
+		$list->setAliasesForLanguage( 'en', array( 'foo' ) );
+		$list->setAliasesForLanguage( 'de', array( 'bar' ) );
+		$list->setAliasesForLanguage( 'nl', array( 'baz' ) );
+		$list->setAliasesForLanguage( 'fr', array( 'hax' ) );
+
+		$expectedList = new AliasGroupList();
+		$expectedList->setAliasesForLanguage( 'en', array( 'foo' ) );
+		$expectedList->setAliasesForLanguage( 'nl', array( 'baz' ) );
+
+		$this->assertEquals( $expectedList, $list->getWithLanguages( array( 'en', 'nl' ) ) );
+	}
+
 }
