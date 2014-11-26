@@ -87,6 +87,17 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 		return $this->terms[$languageCode];
 	}
 
+	/**
+	 * @since 2.5
+	 *
+	 * @param string[] $languageCodes
+	 *
+	 * @return TermList
+	 */
+	public function getWithLanguages( array $languageCodes ) {
+		return new self( array_intersect_key( $this->terms, array_flip( $languageCodes ) ) );
+	}
+
 	public function removeByLanguage( $languageCode ) {
 		$this->assertIsLanguageCode( $languageCode );
 		unset( $this->terms[$languageCode] );
