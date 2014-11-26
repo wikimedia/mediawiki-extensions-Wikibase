@@ -16,6 +16,24 @@
       "revId": "2027196ab1183e5a90a742c2e6703e11dd65d5cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_da8210cd",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-11-26T21:58:39Z",
+      "side": 1,
+      "message": "done with https://github.com/wmde/WikibaseDataModel/pull/313",
+      "parentUuid": "4ea06b5a_e25bb055",
+      "revId": "2027196ab1183e5a90a742c2e6703e11dd65d5cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
