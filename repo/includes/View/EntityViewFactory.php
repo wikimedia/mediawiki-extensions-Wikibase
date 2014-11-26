@@ -10,11 +10,10 @@ use Wikibase\ClaimHtmlGenerator;
 use Wikibase\EntityView;
 use Wikibase\ItemView;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Lib\Store\TermLookup;
 use Wikibase\PropertyView;
 
 /**
@@ -36,9 +35,9 @@ class EntityViewFactory {
 	private $entityLookup;
 
 	/**
-	 * @var OutputFormatSnakFormatterFactory
+	 * @var {callable}
 	 */
-	private $snakFormatterFactory;
+	private $getSnakFormatterForTermLookup;
 
 	/**
 	 * @var SectionEditLinkGenerator
@@ -48,11 +47,15 @@ class EntityViewFactory {
 	public function __construct(
 		EntityTitleLookup $entityTitleLookup,
 		EntityLookup $entityLookup,
-		OutputFormatSnakFormatterFactory $snakFormatterFactory
+		$getSnakFormatterForTermLookup
 	) {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityLookup = $entityLookup;
-		$this->snakFormatterFactory = $snakFormatterFactory;
+		// TODO: replace with callable type hint when we can use PHP 5.4
+		if( !is_callable( $getSnakFormatterForTermLookup ) ) {
+			throw new InvalidArgumentException( 'getSnakFormatter has to be callable' );
+		}
+		$this->getSnakFormatterForTermLookup = $getSnakFormatterForTermLookup;
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 	}
 
@@ -61,8 +64,8 @@ class EntityViewFactory {
 	 *
 	 * @param string $entityType
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain|null $fallbackChain
-	 * @param LabelLookup|null $labelLookup
+	 * @param LanguageFallbackChain $fallbackChain
+	 * @param TermLookup $termLookup
 	 *
 	 * @throws InvalidArgumentException
 	 * @return EntityView
@@ -70,11 +73,11 @@ class EntityViewFactory {
 	public function newEntityView(
 		$entityType,
 		$languageCode,
-		LanguageFallbackChain $fallbackChain = null,
-		LabelLookup $labelLookup = null
+		LanguageFallbackChain $fallbackChain,
+		TermLookup $termLookup
 	 ) {
 		$fingerprintView = $this->newFingerprintView( $languageCode );
-		$claimsView = $this->newClaimsView( $languageCode, $fallbackChain, $labelLookup );
+		$claimsView = $this->newClaimsView( $languageCode, $fallbackChain, $termLookup );
 
 		// @fixme all that seems needed in EntityView is language code and dir.
 		$language = Language::factory( $languageCode );
@@ -91,18 +94,18 @@ class EntityViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain|null $fallbackChain
-	 * @param LabelLookup|null $labelLookup
+	 * @param LanguageFallbackChain $fallbackChain
+	 * @param TermLookup $termLookup
 	 *
 	 * @return ClaimsView
 	 */
 	private function newClaimsView(
 		$languageCode,
-		LanguageFallbackChain $fallbackChain = null,
-		LabelLookup $labelLookup = null
+		LanguageFallbackChain $fallbackChain,
+		TermLookup $termLookup
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
-			$this->getSnakFormatter( $languageCode, $fallbackChain, $labelLookup ),
+			$this->getSnakFormatter( $languageCode, $fallbackChain, $termLookup ),
 			$this->entityTitleLookup
 		);
 
@@ -133,28 +136,23 @@ class EntityViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain|null $languageFallbackChain
-	 * @param LabelLookup|null $labelLookup
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param TermLookup $termLookup
 	 *
 	 * @return SnakFormatter
 	 */
 	private function getSnakFormatter(
 		$languageCode,
-		LanguageFallbackChain $languageFallbackChain = null,
-		LabelLookup $labelLookup = null
+		LanguageFallbackChain $languageFallbackChain,
+		TermLookup $termLookup
 	) {
 		$formatterOptions = new FormatterOptions();
 		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $languageCode );
+		$formatterOptions->setOption( 'languages', $languageFallbackChain );
 
-		if ( $languageFallbackChain ) {
-			$formatterOptions->setOption( 'languages', $languageFallbackChain );
-		}
-
-		if ( $labelLookup ) {
-			$formatterOptions->setOption( 'LabelLookup', $labelLookup );
-		}
-
-		return $this->snakFormatterFactory->getSnakFormatter(
+		return call_user_func(
+			$this->getSnakFormatterForTermLookup,
+			$termLookup,
 			SnakFormatter::FORMAT_HTML_WIDGET,
 			$formatterOptions
 		);

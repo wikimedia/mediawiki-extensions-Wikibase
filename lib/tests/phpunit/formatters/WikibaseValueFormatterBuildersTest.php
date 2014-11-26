@@ -188,54 +188,6 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider buildDispatchingValueFormatterProvider_LabelLookupOption
-	 */
-	public function testBuildDispatchingValueFormatter_LabelLookupOption( $options, ItemId $value, $expected ) {
-		$builders = $this->newWikibaseValueFormatterBuilders();
-
-		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
-		$formatter = $builders->buildDispatchingValueFormatter( $factory, SnakFormatter::FORMAT_HTML, $options );
-
-		$value = new EntityIdValue( $value );
-		$text = $formatter->formatValue( $value, 'wikibase-item' );
-		$this->assertRegExp( $expected, $text );
-	}
-
-	public function buildDispatchingValueFormatterProvider_LabelLookupOption() {
-		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
-		$labelLookup->expects( $this->any() )
-			->method( 'getLabel' )
-			->will( $this->returnValue( 'Custom LabelLookup' ) );
-
-		$fallbackFactory = new LanguageFallbackChainFactory();
-		$fallbackChain = $fallbackFactory->newFromLanguage( Language::factory( 'de-ch' ) );
-
-		return array(
-			'language option' => array(
-				new FormatterOptions( array(
-					ValueFormatter::OPT_LANG => 'de',
-				) ),
-				new ItemId( 'Q5' ),
-				'@>Name für Q5<@'
-			),
-			'fallback option' => array(
-				new FormatterOptions( array(
-					'languages' => $fallbackChain,
-				) ),
-				new ItemId( 'Q5' ),
-				'@>Name für Q5<@'
-			),
-			'LabelLookup option' => array(
-				new FormatterOptions( array(
-					'LabelLookup' => $labelLookup,
-				) ),
-				new ItemId( 'Q5' ),
-				'@>Custom LabelLookup<@'
-			),
-		);
-	}
-
 	public function testSetValueFormatter() {
 		$mockFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
 		$mockFormatter->expects( $this->any() )
