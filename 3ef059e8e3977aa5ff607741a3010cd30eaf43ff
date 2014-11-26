@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_ba7dc4e6",
+        "filename": "repo/includes/PropertyView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-11-26T21:57:44Z",
+      "side": 1,
+      "message": "showStatements or displayStatements or shouldShowStatements?",
+      "revId": "3ef059e8e3977aa5ff607741a3010cd30eaf43ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
