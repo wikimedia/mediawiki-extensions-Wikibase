@@ -45,6 +45,7 @@ use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Serializers\ForbiddenSerializer;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -200,6 +201,13 @@ final class WikibaseClient {
 	 */
 	private function getEntityLookup() {
 		return $this->getStore()->getEntityLookup();
+	}
+
+	/**
+	 * @return TermLookup
+	 */
+	private function getTermLookup() {
+		return new EntityRetrievingTermLookup( $this->getEntityLookup() );
 	}
 
 	/**
@@ -465,7 +473,7 @@ final class WikibaseClient {
 	 */
 	private function newSnakFormatterFactory() {
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
-			$this->getEntityLookup(),
+			$this->getTermLookup(),
 			$this->contentLanguage
 		);
 
@@ -497,7 +505,7 @@ final class WikibaseClient {
 	 */
 	private function newValueFormatterFactory() {
 		$builders = new WikibaseValueFormatterBuilders(
-			$this->getEntityLookup(),
+			$this->getTermLookup(),
 			$this->contentLanguage
 		);
 

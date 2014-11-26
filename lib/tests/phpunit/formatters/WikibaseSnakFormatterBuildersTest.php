@@ -57,18 +57,14 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				return new DataType( $id, $typeMap[$id], array() );
 			} ) );
 
-		$entity = EntityFactory::singleton()->newEmpty( $entityId->getEntityType() );
-		$entity->setId( $entityId );
-		$entity->setLabel( 'en', 'Label for ' . $entityId->getSerialization() );
-
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
-		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
-			->will( $this->returnValue( $entity ) );
+		$termLookup = $this->getMock( 'Wikibase\Lib\Store\TermLookup' );
+		$termLookup->expects( $this->any() )
+			->method( 'getLabels' )
+			->will( $this->returnValue( array( 'en' => 'Label for ' . $entityId->getSerialization() ) ) );
 
 		$lang = Language::factory( 'en' );
 
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders( $entityLookup, $lang );
+		$valueFormatterBuilders = new WikibaseValueFormatterBuilders( $termLookup, $lang );
 		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup, $typeFactory );
 	}
 
