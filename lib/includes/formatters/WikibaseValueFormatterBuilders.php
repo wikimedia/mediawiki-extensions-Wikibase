@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib;
 
+use Closure;
 use DataValues\Geo\Formatters\GeoCoordinateFormatter;
 use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
 use InvalidArgumentException;
@@ -70,10 +71,10 @@ class WikibaseValueFormatterBuilders {
 		// formatters to use for plain text output
 		SnakFormatter::FORMAT_PLAIN => array(
 			'VT:string' => 'ValueFormatters\StringFormatter',
-			'VT:globecoordinate' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newGlobeCoordinateFormatter' ),
-			'VT:quantity' =>  array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newQuantityFormatter' ),
+			'VT:globecoordinate' => array( 'this', 'newGlobeCoordinateFormatter' ),
+			'VT:quantity' =>  array( 'this', 'newQuantityFormatter' ),
 			'VT:time' => 'Wikibase\Lib\MwTimeIsoFormatter',
-			'VT:wikibase-entityid' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newEntityIdFormatter' ),
+			'VT:wikibase-entityid' => array( 'this', 'newEntityIdFormatter' ),
 			'VT:bad' => 'Wikibase\Lib\UnDeserializableValueFormatter',
 			'VT:monolingualtext' => 'Wikibase\Formatters\MonolingualTextFormatter',
 		),
@@ -91,8 +92,8 @@ class WikibaseValueFormatterBuilders {
 		SnakFormatter::FORMAT_HTML => array(
 			'PT:url' => 'Wikibase\Lib\HtmlUrlFormatter',
 			'PT:commonsMedia' => 'Wikibase\Lib\CommonsLinkFormatter',
-			'PT:wikibase-item' =>  array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newEntityIdHtmlLinkFormatter' ),
-			'VT:time' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newHtmlTimeFormatter' ),
+			'PT:wikibase-item' =>  array( 'this', 'newEntityIdHtmlLinkFormatter' ),
+			'VT:time' => array( 'this', 'newHtmlTimeFormatter' ),
 			'VT:monolingualtext' => 'Wikibase\Formatters\MonolingualHtmlFormatter',
 		),
 
@@ -484,8 +485,14 @@ class WikibaseValueFormatterBuilders {
 			$obj = $spec;
 		} elseif ( is_string( $spec ) ) {
 			$obj = new $spec( $options );
-		} else {
+		} elseif ( $spec instanceof Closure ) {
 			$obj = call_user_func( $spec, $options, $this );
+		} elseif ( $spec instanceof ValueFormatter ) {
+			$obj = $spec;
+		} elseif ( is_array( $spec ) && $spec[0] === 'this' ) {
+			$obj = call_user_func( array( $this, $spec[1] ), $options );
+		} else {
+			throw new RuntimeException( 'Unknown spec for ValueFormatter construction' );
 		}
 
 		if ( !( $obj instanceof ValueFormatter ) ) {
@@ -499,16 +506,12 @@ class WikibaseValueFormatterBuilders {
 
 	/**
 	 * @param FormatterOptions $options
-	 * @param WikibaseValueFormatterBuilders $builders
 	 *
 	 * @throws InvalidArgumentException
 	 * @return LabelLookup
 	 */
-	private static function newLabelLookup(
-		FormatterOptions $options,
-		WikibaseValueFormatterBuilders $builders
-	) {
-		$termLookup = $builders->termLookup;
+	private function newLabelLookup( FormatterOptions $options ) {
+		$termLookup = $this->termLookup;
 
 		// @fixme inject the label lookup
 		if ( $options->hasOption( 'languages' ) ) {
@@ -534,15 +537,11 @@ class WikibaseValueFormatterBuilders {
 	 * Used to inject services into the EntityIdLabelFormatter.
 	 *
 	 * @param FormatterOptions $options
-	 * @param WikibaseValueFormatterBuilders $builders
 	 *
 	 * @return EntityIdLabelFormatter
 	 */
-	protected static function newEntityIdFormatter(
-		FormatterOptions $options,
-		WikibaseValueFormatterBuilders $builders
-	) {
-		$labelLookup = self::newLabelLookup( $options, $builders );
+	private function newEntityIdFormatter( FormatterOptions $options ) {
+		$labelLookup = $this->newLabelLookup( $options );
 		return new EntityIdLabelFormatter( $options, $labelLookup );
 	}
 
@@ -551,18 +550,14 @@ class WikibaseValueFormatterBuilders {
 	 * Used to inject services into the EntityIdHtmlLinkFormatter.
 	 *
 	 * @param FormatterOptions $options
-	 * @param WikibaseValueFormatterBuilders $builders
 	 *
 	 * @return EntityIdHtmlLinkFormatter
 	 */
-	protected static function newEntityIdHtmlLinkFormatter(
-		FormatterOptions $options,
-		WikibaseValueFormatterBuilders $builders
-	) {
+	private function newEntityIdHtmlLinkFormatter( FormatterOptions $options ) {
 		return new EntityIdHtmlLinkFormatter(
 			$options,
-			self::newLabelLookup( $options, $builders ),
-			$builders->entityTitleLookup
+			$this->newLabelLookup( $options ),
+			$this->entityTitleLookup
 		);
 	}
 
@@ -571,14 +566,10 @@ class WikibaseValueFormatterBuilders {
 	 * Used to inject a formatter into the HtmlTimeFormatter.
 	 *
 	 * @param FormatterOptions $options
-	 * @param WikibaseValueFormatterBuilders $builders
 	 *
 	 * @return HtmlTimeFormatter
 	 */
-	protected static function newHtmlTimeFormatter(
-		FormatterOptions $options,
-		WikibaseValueFormatterBuilders $builders
-	) {
+	private function newHtmlTimeFormatter( FormatterOptions $options ) {
 		return new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) );
 	}
 
@@ -587,14 +578,10 @@ class WikibaseValueFormatterBuilders {
 	 * Used to compose the QuantityFormatter.
 	 *
 	 * @param FormatterOptions $options
-	 * @param WikibaseValueFormatterBuilders $builders
 	 *
 	 * @return QuantityFormatter
 	 */
-	protected static function newQuantityFormatter(
-		FormatterOptions $options,
-		WikibaseValueFormatterBuilders $builders
-	) {
+	private function newQuantityFormatter( FormatterOptions $options ) {
 		//TODO: use a builder for this DecimalFormatter
 		$language = Language::factory( $options->getOption( ValueFormatter::OPT_LANG ) );
 		$localizer = new MediaWikiNumberLocalizer( $language );
@@ -607,14 +594,10 @@ class WikibaseValueFormatterBuilders {
 	 * Used to compose the GlobeCoordinateFormatter.
 	 *
 	 * @param FormatterOptions $options
-	 * @param WikibaseValueFormatterBuilders $builders
 	 *
 	 * @return GlobeCoordinateFormatter
 	 */
-	protected static function newGlobeCoordinateFormatter(
-		FormatterOptions $options,
-		WikibaseValueFormatterBuilders $builders
-	) {
+	private function newGlobeCoordinateFormatter( FormatterOptions $options ) {
 		$options->setOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS );
 		$options->setOption( GeoCoordinateFormatter::OPT_SPACING_LEVEL, array(
 			GeoCoordinateFormatter::OPT_SPACE_LATLONG
