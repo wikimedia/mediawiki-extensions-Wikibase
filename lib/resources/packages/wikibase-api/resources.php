@@ -9,7 +9,9 @@
  */
 return call_user_func( function() {
 	global $wgResourceModules;
+
 	$wgResourceModules = array_merge(
 		$wgResourceModules,
-		include 'src/resources.php'
+		include( __DIR__ . '/src/resources.php' )
 	);
+} );
