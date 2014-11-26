@@ -333,5 +333,4 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedList, $list->getWithLanguages( array( 'en', 'nl' ) ) );
 	}
 
-
 }
