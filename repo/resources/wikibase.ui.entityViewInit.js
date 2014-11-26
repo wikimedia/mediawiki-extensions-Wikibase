@@ -4,7 +4,7 @@
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  */
 
-( function( $, mw, wb, dataTypes, getExpertsStore, getFormatterStore, getParserStore ) {
+( function( $, mw, wb, dataTypeStore, getExpertsStore, getFormatterStore, getParserStore ) {
 	'use strict';
 
 	mw.hook( 'wikipage.content' ).add( function() {
@@ -127,13 +127,13 @@
 			entityChangersFactory: entityChangersFactory,
 			entityStore: entityStore,
 			valueViewBuilder: new wb.ValueViewBuilder(
-				getExpertsStore( dataTypes ),
-				getFormatterStore( repoApi, dataTypes ),
+				getExpertsStore( dataTypeStore ),
+				getFormatterStore( repoApi, dataTypeStore ),
 				getParserStore( repoApi ),
 				mw.config.get( 'wgUserLanguage' ),
 				mw
 			),
-			dataTypeStore: dataTypes,
+			dataTypeStore: dataTypeStore,
 			languages: getUserLanguages()
 		} )
 		.on( 'labelviewchange labelviewafterstopediting', function( event ) {
@@ -342,7 +342,7 @@
 	jQuery,
 	mediaWiki,
 	wikibase,
-	wikibase.dataTypes,
+	wikibase.dataTypeStore,
 	wikibase.experts.getStore,
 	wikibase.formatters.getStore,
 	wikibase.parsers.getStore

@@ -108,9 +108,9 @@ return call_user_func( function() {
 			'datatypesconfigvarname' => 'wbDataTypes',
 		),
 
-		'wikibase.dataTypes' => $moduleTemplate + array(
+		'wikibase.dataTypeStore' => $moduleTemplate + array(
 			'scripts' => array(
-				'dataTypes/wikibase.dataTypes.js',
+				'dataTypes/wikibase.dataTypeStore.js',
 			),
 			'dependencies' => array(
 				'dataTypes.DataType',
@@ -167,7 +167,7 @@ return call_user_func( function() {
 				'jquery.wikibase.claimgrouplabelscroll',
 				'jquery.wikibase.sitelinkgroupview',
 				'wikibase.api.getLocationAgnosticMwApi',
-				'wikibase.dataTypes',
+				'wikibase.dataTypeStore',
 				'wikibase.entityChangers.EntityChangersFactory',
 				'wikibase.experts.getStore',
 				'wikibase.formatters.getStore',
