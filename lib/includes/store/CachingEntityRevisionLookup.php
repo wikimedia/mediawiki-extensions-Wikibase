@@ -19,31 +19,31 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	/**
 	 * @var EntityRevisionLookup
 	 */
-	protected $lookup;
+	private $lookup;
 
 	/**
 	 * The cache to use for caching entities.
 	 *
 	 * @var BagOStuff
 	 */
-	protected $cache;
+	private $cache;
 
 	/**
 	 * @var int $cacheTimeout
 	 */
-	protected $cacheTimeout;
+	private $cacheTimeout;
 
 	/**
 	 * The key prefix to use when caching entities in memory.
 	 *
 	 * @var $cacheKeyPrefix
 	 */
-	protected $cacheKeyPrefix;
+	private $cacheKeyPrefix;
 
 	/**
 	 * @var bool $shouldVerifyRevision
 	 */
-	protected $shouldVerifyRevision;
+	private $shouldVerifyRevision;
 
 	/**
 	 * @param EntityRevisionLookup $entityRevisionLookup The lookup to use
@@ -81,7 +81,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 *
 	 * @return String
 	 */
-	protected function getCacheKey( EntityId $entityId ) {
+	private function getCacheKey( EntityId $entityId ) {
 		$cacheKey = $this->cacheKeyPrefix . ':' . $entityId->getSerialization();
 
 		return $cacheKey;
