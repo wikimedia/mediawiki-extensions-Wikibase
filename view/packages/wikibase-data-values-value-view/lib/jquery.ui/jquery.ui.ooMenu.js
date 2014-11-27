@@ -7,7 +7,7 @@
  * DEPENDENCY: jQuery.util.getscrollbarwidth
  * DEPENDENCY: util.inherit
  * @class jQuery.ui.ooMenu
- * @extends jQuery.ui.Widget
+ * @extends jQuery.Widget
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *

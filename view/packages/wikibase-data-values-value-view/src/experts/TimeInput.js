@@ -8,8 +8,8 @@
 
 	/**
 	 * Valueview expert handling input of time values.
-	 * @class jQuery.valueview.TimeInput
-	 * @extends jQuery.valueview.StringValue
+	 * @class jQuery.valueview.experts.TimeInput
+	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
