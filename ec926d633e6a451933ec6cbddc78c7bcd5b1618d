@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_2360b09f",
+        "filename": "client/includes/hooks/UpdateRepoHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-27T00:43:55Z",
+      "side": 1,
+      "message": "We probably don\u0027t want this check... if the page has been linked anyway (Which is possible), we probably still want to unlink it",
+      "revId": "ec926d633e6a451933ec6cbddc78c7bcd5b1618d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_c3546ccc",
+        "filename": "client/includes/hooks/UpdateRepoHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-27T00:43:55Z",
+      "side": 1,
+      "message": "We probably don\u0027t want this check... if the page has been linked anyway (Which is possible), we probably still want to move the link along, if the new page is in an enabled name space",
+      "revId": "ec926d633e6a451933ec6cbddc78c7bcd5b1618d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
