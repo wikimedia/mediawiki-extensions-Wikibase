@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_c939ed3f",
+        "filename": "repo/includes/PropertyView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-27T10:01:09Z",
+      "side": 1,
+      "message": "Please inject settings or this setting.",
+      "revId": "7b7a6878b9675ffa3de524a167d56c1249bd59a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
