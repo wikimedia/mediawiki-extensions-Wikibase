@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
@@ -61,11 +61,11 @@ class ParserOutputJsConfigBuilder {
 
 	/**
 	 * @param Entity $entity
-	 * @param array $entityInfo
+	 * @param EntityInfo $entityInfo
 	 *
 	 * @return array
 	 */
-	public function build( Entity $entity, array $entityInfo ) {
+	public function build( Entity $entity, EntityInfo $entityInfo ) {
 		$entityId = $entity->getId();
 
 		if ( !$entityId ) {
@@ -74,7 +74,8 @@ class ParserOutputJsConfigBuilder {
 			$entityId = $entityId->getSerialization();
 		}
 
-		$revisionInfo = $this->attachRevisionInfo( $entityInfo );
+		$entityInfoArray = $entityInfo->asArray();
+		$revisionInfo = $this->attachRevisionInfo( $entityInfoArray );
 
 		$configVars = array(
 			'wbEntityId' => $entityId,
