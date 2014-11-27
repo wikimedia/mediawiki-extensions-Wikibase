@@ -59,8 +59,7 @@ class PropertyView extends EntityView {
 		if ( $this->displayStatementsOnProperties ) {
 			$html .= $this->claimsView->getHtml(
 				$property->getStatements()->toArray(),
-				$entityInfo,
-				'wikibase-attributes'
+				$entityInfo
 			);
 		}
 
