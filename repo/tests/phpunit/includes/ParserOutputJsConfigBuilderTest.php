@@ -18,6 +18,7 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\ParserOutputJsConfigBuilder;
@@ -39,7 +40,7 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider buildProvider
 	 */
-	public function testBuild( array $usedEntities, Entity $entity, array $entityInfo ) {
+	public function testBuild( array $usedEntities, Entity $entity, EntityInfo $entityInfo ) {
 		$configBuilder = $this->getConfigBuilder( 'en', array( 'de', 'en', 'es', 'fr' ) );
 		$configVars = $configBuilder->build( $entity, $entityInfo );
 
@@ -146,9 +147,9 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	}
 
 	private function getEntityInfo( Entity $entity ) {
-		return array(
+		return new EntityInfo( array(
 			$this->getEntityInfoContent( $entity )
-		);
+		) );
 	}
 
 	private function getEntityInfoContent( Entity $entity ) {
