@@ -59,7 +59,7 @@ var SELF = wb.datamodel.List = util.inherit(
 	length: 0,
 
 	/**
-	 * (see jQuery.fn.each)
+	 * @see jQuery.fn.each
 	 *
 	 * @param {Function} fn
 	 */

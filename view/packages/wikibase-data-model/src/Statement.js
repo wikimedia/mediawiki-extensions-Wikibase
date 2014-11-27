@@ -35,7 +35,7 @@ $.extend( SELF.prototype, {
 	_references: null,
 
 	/**
-	 * (see wikibase.statement.RANK)
+	 * @see wikibase.datamodel.Statement.RANK
 	 * @property {number}
 	 * @private
 	 */
@@ -80,14 +80,18 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {number} (see wikibase.datamodel.Statement.RANK)
+	 * @see wikibase.datamodel.Statement.RANK
+	 *
+	 * @return {number}
 	 */
 	getRank: function() {
 		return this._rank;
 	},
 
 	/**
-	 * @param {number} rank (see wikibase.datamodel.Statement.RANK)
+	 * @see wikibase.datamodel.Statement.RANK
+	 *
+	 * @param {number} rank
 	 *
 	 * @throws {Error} if rank is not defined in wikibase.datamodel.Statement.RANK.
 	 */

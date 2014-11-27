@@ -53,7 +53,7 @@ $.extend( SELF.prototype, {
 	length: 0,
 
 	/**
-	 * (see jQuery.fn.each)
+	 * @see jQuery.fn.each
 	 *
 	 * @param {Function} fn
 	 */
