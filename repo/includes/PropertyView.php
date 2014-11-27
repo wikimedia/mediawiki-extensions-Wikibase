@@ -40,8 +40,7 @@ class PropertyView extends EntityView {
 			// @fixme Property::getClaims no longer returns any statements for properties!
 			$html .= $this->claimsView->getHtml(
 				$property->getStatements()->toArray(),
-				$entityInfo,
-				'wikibase-attributes'
+				$entityInfo
 			);
 		}
 
