@@ -2,8 +2,12 @@
 
 namespace Wikibase\DataModel\Statement;
 
+use Comparable;
+use Hashable;
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\PropertyIdProvider;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
@@ -20,7 +24,7 @@ use Wikibase\DataModel\Snak\Snaks;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class Statement extends Claim {
+class Statement implements Hashable, Comparable, PropertyIdProvider {
 
 	/**
 	 * Rank enum. Higher values are more preferred.
@@ -31,22 +35,25 @@ class Statement extends Claim {
 	const RANK_NORMAL = 1;
 	const RANK_DEPRECATED = 0;
 
+	/** @deprecated since 2.0 */
+	const RANK_TRUTH = 3;
+
 	/**
 	 * @var string|null
 	 */
-	protected $guid = null;
+	private $guid = null;
 
 	/**
 	 * @var Snak
 	 */
-	protected $mainSnak;
+	private $mainSnak;
 
 	/**
 	 * The property value snaks making up the qualifiers for this statement.
 	 *
 	 * @var Snaks
 	 */
-	protected $qualifiers;
+	private $qualifiers;
 
 	/**
 	 * @var ReferenceList
@@ -230,21 +237,38 @@ class Statement extends Claim {
 	}
 
 	/**
-	 * In addition to the Snaks returned by Claim::getAllSnaks(), this also includes all
-	 * snaks from any References in this Statement.
+	 * Returns the id of the property of the main snak.
+	 * Short for ->getMainSnak()->getPropertyId()
+	 *
+	 * @see PropertyIdProvider::getPropertyId
+	 *
+	 * @since 0.2
+	 *
+	 * @return PropertyId
+	 */
+	public function getPropertyId() {
+		return $this->getMainSnak()->getPropertyId();
+	}
+
+	/**
+	 * Returns a list of all Snaks on this statement. This includes the main snak and all snaks
+	 * from qualifiers and references.
+	 *
+	 * This is a convenience method for use in code that needs to operate on all snaks, e.g.
+	 * to find all referenced Entities.
 	 *
 	 * @return Snak[]
 	 */
 	public function getAllSnaks() {
 		$snaks = array( $this->mainSnak );
 
-		foreach( $this->qualifiers as $qualifier ) {
+		foreach ( $this->qualifiers as $qualifier ) {
 			$snaks[] = $qualifier;
 		}
 
 		/* @var Reference $reference */
-		foreach( $this->getReferences() as $reference ) {
-			foreach( $reference->getSnaks() as $referenceSnak ) {
+		foreach ( $this->getReferences() as $reference ) {
+			foreach ( $reference->getSnaks() as $referenceSnak ) {
 				$snaks[] = $referenceSnak;
 			}
 		}
@@ -267,8 +291,10 @@ class Statement extends Claim {
 		}
 
 		return $target instanceof self
-			&& $this->claimFieldsEqual( $target )
-			&& $this->rank === $target->getRank()
+			&& $this->guid === $target->guid
+			&& $this->rank === $target->rank
+			&& $this->mainSnak->equals( $target->mainSnak )
+			&& $this->qualifiers->equals( $target->qualifiers )
 			&& $this->references->equals( $target->references );
 	}
 

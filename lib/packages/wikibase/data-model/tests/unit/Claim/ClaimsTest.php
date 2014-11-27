@@ -32,13 +32,13 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	protected function makeClaim( Snak $mainSnak, $guid = null ) {
 		if ( $guid === null ) {
 			$this->guidCounter++;
-			$guid = 'TEST$claim-' . $this->guidCounter;
+			$guid = 'TEST$statement-' . $this->guidCounter;
 		}
 
-		$claim = new Claim( $mainSnak );
-		$claim->setGuid( $guid );
+		$statement = new Statement( $mainSnak );
+		$statement->setGuid( $guid );
 
-		return $claim;
+		return $statement;
 	}
 
 	protected function makeStatement( Snak $mainSnak, $guid = null ) {
@@ -47,10 +47,10 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 			$guid = 'TEST$statement-' . $this->guidCounter;
 		}
 
-		$claim = new Statement( $mainSnak );
-		$claim->setGuid( $guid );
+		$statement = new Statement( $mainSnak );
+		$statement->setGuid( $guid );
 
-		return $claim;
+		return $statement;
 	}
 
 	public function testArrayObjectNotConstructedFromObject() {
@@ -60,12 +60,12 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$statementList = new StatementList();
 		$statementList->addStatement( $statement1 );
 
-		$claims = new Claims( $statementList );
+		$statements = new Claims( $statementList );
 		// According to the documentation append() "cannot be called when the ArrayObject was
 		// constructed from an object." This test makes sure it was not constructed from an object.
-		$claims->append( $statement2 );
+		$statements->append( $statement2 );
 
-		$this->assertSame( 2, $claims->count() );
+		$this->assertSame( 2, $statements->count() );
 	}
 
 	/**
@@ -86,381 +86,384 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testHasClaim() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$this->assertFalse( $claims->hasClaim( $claim1 ) );
-		$this->assertFalse( $claims->hasClaim( $claim2 ) );
+		$this->assertFalse( $statements->hasClaim( $statement1 ) );
+		$this->assertFalse( $statements->hasClaim( $statement2 ) );
 
-		$claims->addClaim( $claim1 );
-		$this->assertTrue( $claims->hasClaim( $claim1 ) );
-		$this->assertFalse( $claims->hasClaim( $claim2 ) );
+		$statements->addClaim( $statement1 );
+		$this->assertTrue( $statements->hasClaim( $statement1 ) );
+		$this->assertFalse( $statements->hasClaim( $statement2 ) );
 
-		$claims->addClaim( $claim2 );
-		$this->assertTrue( $claims->hasClaim( $claim1 ) );
-		$this->assertTrue( $claims->hasClaim( $claim2 ) );
+		$statements->addClaim( $statement2 );
+		$this->assertTrue( $statements->hasClaim( $statement1 ) );
+		$this->assertTrue( $statements->hasClaim( $statement2 ) );
 
 		// no guid
-		$claim0 = new Claim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$this->assertFalse( $claims->hasClaim( $claim0 ) );
+		$statement0 = new Statement( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$this->assertFalse( $statements->hasClaim( $statement0 ) );
 	}
 
 	public function testHasClaimWithGuid() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$this->assertFalse( $claims->hasClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertFalse( $claims->hasClaimWithGuid( $claim2->getGuid() ) );
+		$this->assertFalse( $statements->hasClaimWithGuid( $statement1->getGuid() ) );
+		$this->assertFalse( $statements->hasClaimWithGuid( $statement2->getGuid() ) );
 
-		$claims->addClaim( $claim1 );
-		$this->assertTrue( $claims->hasClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertFalse( $claims->hasClaimWithGuid( $claim2->getGuid() ) );
+		$statements->addClaim( $statement1 );
+		$this->assertTrue( $statements->hasClaimWithGuid( $statement1->getGuid() ) );
+		$this->assertFalse( $statements->hasClaimWithGuid( $statement2->getGuid() ) );
 
-		$claims->addClaim( $claim2 );
-		$this->assertTrue( $claims->hasClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertTrue( $claims->hasClaimWithGuid( $claim2->getGuid() ) );
+		$statements->addClaim( $statement2 );
+		$this->assertTrue( $statements->hasClaimWithGuid( $statement1->getGuid() ) );
+		$this->assertTrue( $statements->hasClaimWithGuid( $statement2->getGuid() ) );
 	}
 
 	public function testRemoveClaim() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$claims->addClaim( $claim1 );
-		$claims->addClaim( $claim2 );
-		$this->assertSame( 2, $claims->count() );
+		$statements->addClaim( $statement1 );
+		$statements->addClaim( $statement2 );
+		$this->assertSame( 2, $statements->count() );
 
-		$claims->removeClaim( $claim1 );
-		$this->assertFalse( $claims->hasClaim( $claim1 ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertSame( 1, $claims->count() );
+		$statements->removeClaim( $statement1 );
+		$this->assertFalse( $statements->hasClaim( $statement1 ) );
+		$this->assertNull( $statements->getClaimWithGuid( $statement1->getGuid() ) );
+		$this->assertSame( 1, $statements->count() );
 
-		$claims->removeClaim( $claim2 );
-		$this->assertFalse( $claims->hasClaim( $claim2 ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
-		$this->assertSame( 0, $claims->count() );
+		$statements->removeClaim( $statement2 );
+		$this->assertFalse( $statements->hasClaim( $statement2 ) );
+		$this->assertNull( $statements->getClaimWithGuid( $statement2->getGuid() ) );
+		$this->assertSame( 0, $statements->count() );
 
 		// no guid
-		$claim0 = new Claim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claims->removeClaim( $claim0 );
+		$statement0 = new Statement( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statements->removeClaim( $statement0 );
 	}
 
 	public function testRemoveClaimWithGuid() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$claims->addClaim( $claim1 );
-		$claims->addClaim( $claim2 );
-		$this->assertSame( 2, $claims->count() );
+		$statements->addClaim( $statement1 );
+		$statements->addClaim( $statement2 );
+		$this->assertSame( 2, $statements->count() );
 
-		$claims->removeClaimWithGuid( $claim1->getGuid() );
-		$this->assertFalse( $claims->hasClaim( $claim1 ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertSame( 1, $claims->count() );
+		$statements->removeClaimWithGuid( $statement1->getGuid() );
+		$this->assertFalse( $statements->hasClaim( $statement1 ) );
+		$this->assertNull( $statements->getClaimWithGuid( $statement1->getGuid() ) );
+		$this->assertSame( 1, $statements->count() );
 
-		$claims->removeClaimWithGuid( $claim2->getGuid() );
-		$this->assertFalse( $claims->hasClaim( $claim2 ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
-		$this->assertSame( 0, $claims->count() );
+		$statements->removeClaimWithGuid( $statement2->getGuid() );
+		$this->assertFalse( $statements->hasClaim( $statement2 ) );
+		$this->assertNull( $statements->getClaimWithGuid( $statement2->getGuid() ) );
+		$this->assertSame( 0, $statements->count() );
 	}
 
 	public function testOffsetUnset() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$claims->addClaim( $claim1 );
-		$claims->addClaim( $claim2 );
-		$this->assertSame( 2, $claims->count() );
+		$statements->addClaim( $statement1 );
+		$statements->addClaim( $statement2 );
+		$this->assertSame( 2, $statements->count() );
 
-		$claims->offsetUnset( $claim1->getGuid() );
-		$this->assertFalse( $claims->hasClaim( $claim1 ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertSame( 1, $claims->count() );
+		$statements->offsetUnset( $statement1->getGuid() );
+		$this->assertFalse( $statements->hasClaim( $statement1 ) );
+		$this->assertNull( $statements->getClaimWithGuid( $statement1->getGuid() ) );
+		$this->assertSame( 1, $statements->count() );
 
-		$claims->offsetUnset( $claim2->getGuid() );
-		$this->assertFalse( $claims->hasClaim( $claim2 ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
-		$this->assertSame( 0, $claims->count() );
+		$statements->offsetUnset( $statement2->getGuid() );
+		$this->assertFalse( $statements->hasClaim( $statement2 ) );
+		$this->assertNull( $statements->getClaimWithGuid( $statement2->getGuid() ) );
+		$this->assertSame( 0, $statements->count() );
 	}
 
 	public function testGetClaimWithGuid() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$claims->addClaim( $claim1 );
-		$this->assertSame( $claim1, $claims->getClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
+		$statements->addClaim( $statement1 );
+		$this->assertSame( $statement1, $statements->getClaimWithGuid( $statement1->getGuid() ) );
+		$this->assertNull( $statements->getClaimWithGuid( $statement2->getGuid() ) );
 
-		$claims->addClaim( $claim2 );
-		$this->assertSame( $claim1, $claims->getClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertSame( $claim2, $claims->getClaimWithGuid( $claim2->getGuid() ) );
+		$statements->addClaim( $statement2 );
+		$this->assertSame( $statement1, $statements->getClaimWithGuid( $statement1->getGuid() ) );
+		$this->assertSame( $statement2, $statements->getClaimWithGuid( $statement2->getGuid() ) );
 	}
 
 	public function testOffsetGet() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$claims->addClaim( $claim1 );
-		$this->assertSame( $claim1, $claims->offsetGet( $claim1->getGuid() ) );
+		$statements->addClaim( $statement1 );
+		$this->assertSame( $statement1, $statements->offsetGet( $statement1->getGuid() ) );
 
-		$claims->addClaim( $claim2 );
-		$this->assertSame( $claim1, $claims->offsetGet( $claim1->getGuid() ) );
-		$this->assertSame( $claim2, $claims->offsetGet( $claim2->getGuid() ) );
+		$statements->addClaim( $statement2 );
+		$this->assertSame( $statement1, $statements->offsetGet( $statement1->getGuid() ) );
+		$this->assertSame( $statement2, $statements->offsetGet( $statement2->getGuid() ) );
 	}
 
 	public function testAddClaim() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$claims->addClaim( $claim1 );
-		$claims->addClaim( $claim2 );
+		$statements->addClaim( $statement1 );
+		$statements->addClaim( $statement2 );
 
-		$this->assertSame( 2, $claims->count() );
-		$this->assertEquals( $claim1, $claims[$claim1->getGuid()] );
-		$this->assertEquals( $claim2, $claims[$claim2->getGuid()] );
+		$this->assertSame( 2, $statements->count() );
+		$this->assertEquals( $statement1, $statements[$statement1->getGuid()] );
+		$this->assertEquals( $statement2, $statements[$statement2->getGuid()] );
 
-		$claims->addClaim( $claim1 );
-		$claims->addClaim( $claim2 );
+		$statements->addClaim( $statement1 );
+		$statements->addClaim( $statement2 );
 
-		$this->assertSame( 2, $claims->count() );
+		$this->assertSame( 2, $statements->count() );
 
-		$this->assertNotNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertNotNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
+		$this->assertNotNull( $statements->getClaimWithGuid( $statement1->getGuid() ) );
+		$this->assertNotNull( $statements->getClaimWithGuid( $statement2->getGuid() ) );
 
 		// Insert claim at the beginning:
-		$claim3 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P17' ) ) );
-		$claims->addClaim( $claim3, 0 );
-		$this->assertEquals( 0, $claims->indexOf( $claim3 ), 'Inserting claim at the beginning failed' );
+		$statement3 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P17' ) ) );
+		$statements->addClaim( $statement3, 0 );
+		$this->assertEquals( 0, $statements->indexOf( $statement3 ), 'Inserting statement at the beginning failed' );
 
 		// Insert claim at another index:
-		$claim4 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P18' ) ) );
-		$claims->addClaim( $claim4, 1 );
-		$this->assertEquals( 1, $claims->indexOf( $claim4 ), 'Inserting claim at index 1 failed' );
+		$statement4 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P18' ) ) );
+		$statements->addClaim( $statement4, 1 );
+		$this->assertEquals( 1, $statements->indexOf( $statement4 ), 'Inserting statement at index 1 failed' );
 
 		// Insert claim with an index out of bounds:
-		$claim5 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P19' ) ) );
-		$claims->addClaim( $claim5, 99999 );
-		$this->assertEquals( 4, $claims->indexOf( $claim5 ), 'Appending claim by specifying an index out of bounds failed' );
+		$statement5 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P19' ) ) );
+		$statements->addClaim( $statement5, 99999 );
+		$this->assertEquals( 4,
+			$statements->indexOf( $statement5 ),
+			'Appending statement by specifying an index out of bounds failed'
+		);
 	}
 
 	public function testIndexOf() {
-		$claims = new Claims();
-		$claimArray = array(
+		$statements = new Claims();
+		$statementArray = array(
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ),
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) ),
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P3' ) ) ),
 		);
 		$excludedClaim = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P99' ) ) );
 
-		foreach( $claimArray as $claim ) {
-			$claims->addClaim( $claim );
+		foreach( $statementArray as $statement ) {
+			$statements->addClaim( $statement );
 		}
 
-		$this->assertFalse( $claims->indexOf( $excludedClaim ) );
+		$this->assertFalse( $statements->indexOf( $excludedClaim ) );
 
 		$i = 0;
-		foreach( $claimArray as $claim ) {
-			$this->assertEquals( $i++, $claims->indexOf( $claim ) );
+		foreach( $statementArray as $statement ) {
+			$this->assertEquals( $i++, $statements->indexOf( $statement ) );
 		}
 	}
 
 	public function testAppend() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$claims->append( $claim1 );
-		$claims->append( $claim2 );
+		$statements->append( $statement1 );
+		$statements->append( $statement2 );
 
-		$this->assertSame( 2, $claims->count() );
-		$this->assertEquals( $claim1, $claims[$claim1->getGuid()] );
-		$this->assertEquals( $claim2, $claims[$claim2->getGuid()] );
+		$this->assertSame( 2, $statements->count() );
+		$this->assertEquals( $statement1, $statements[$statement1->getGuid()] );
+		$this->assertEquals( $statement2, $statements[$statement2->getGuid()] );
 
-		$claims->append( $claim1 );
-		$claims->append( $claim2 );
+		$statements->append( $statement1 );
+		$statements->append( $statement2 );
 
-		$this->assertSame( 2, $claims->count() );
+		$this->assertSame( 2, $statements->count() );
 	}
 
 	public function testAppendOperator() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$claims[] = $claim1;
-		$claims[] = $claim2;
+		$statements[] = $statement1;
+		$statements[] = $statement2;
 
-		$this->assertSame( 2, $claims->count() );
-		$this->assertEquals( $claim1, $claims[$claim1->getGuid()] );
-		$this->assertEquals( $claim2, $claims[$claim2->getGuid()] );
+		$this->assertSame( 2, $statements->count() );
+		$this->assertEquals( $statement1, $statements[$statement1->getGuid()] );
+		$this->assertEquals( $statement2, $statements[$statement2->getGuid()] );
 
-		$claims[] = $claim1;
-		$claims[] = $claim2;
+		$statements[] = $statement1;
+		$statements[] = $statement2;
 
-		$this->assertSame( 2, $claims->count() );
+		$this->assertSame( 2, $statements->count() );
 	}
 
 	/**
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testAppendWithNonClaimFails() {
-		$claims = new Claims();
-		$claims->append( 'bad' );
+		$statements = new Claims();
+		$statements->append( 'bad' );
 	}
 
 	public function testOffsetSet() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$claims->offsetSet( $claim1->getGuid(), $claim1 );
-		$claims->offsetSet( $claim2->getGuid(), $claim2 );
+		$statements->offsetSet( $statement1->getGuid(), $statement1 );
+		$statements->offsetSet( $statement2->getGuid(), $statement2 );
 
-		$this->assertSame( 2, $claims->count() );
-		$this->assertEquals( $claim1, $claims[$claim1->getGuid()] );
-		$this->assertEquals( $claim2, $claims[$claim2->getGuid()] );
+		$this->assertSame( 2, $statements->count() );
+		$this->assertEquals( $statement1, $statements[$statement1->getGuid()] );
+		$this->assertEquals( $statement2, $statements[$statement2->getGuid()] );
 
-		$claims->offsetSet( $claim1->getGuid(), $claim1 );
-		$claims->offsetSet( $claim2->getGuid(), $claim2 );
+		$statements->offsetSet( $statement1->getGuid(), $statement1 );
+		$statements->offsetSet( $statement2->getGuid(), $statement2 );
 
-		$this->assertSame( 2, $claims->count() );
+		$this->assertSame( 2, $statements->count() );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$claims->offsetSet( 'spam', $claim1 );
+		$statements->offsetSet( 'spam', $statement1 );
 	}
 
 	public function testOffsetSetOperator() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$claims[$claim1->getGuid()] = $claim1;
-		$claims[$claim2->getGuid()] = $claim2;
+		$statements[$statement1->getGuid()] = $statement1;
+		$statements[$statement2->getGuid()] = $statement2;
 
-		$this->assertSame( 2, $claims->count() );
-		$this->assertEquals( $claim1, $claims[$claim1->getGuid()] );
-		$this->assertEquals( $claim2, $claims[$claim2->getGuid()] );
+		$this->assertSame( 2, $statements->count() );
+		$this->assertEquals( $statement1, $statements[$statement1->getGuid()] );
+		$this->assertEquals( $statement2, $statements[$statement2->getGuid()] );
 
-		$claims[$claim1->getGuid()] = $claim1;
-		$claims[$claim2->getGuid()] = $claim2;
+		$statements[$statement1->getGuid()] = $statement1;
+		$statements[$statement2->getGuid()] = $statement2;
 
-		$this->assertSame( 2, $claims->count() );
+		$this->assertSame( 2, $statements->count() );
 	}
 
 	public function testGuidNormalization() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$claim1LowerGuid = strtolower( $claim1->getGuid() );
-		$claim2UpperGuid = strtoupper( $claim2->getGuid() );
+		$statement1LowerGuid = strtolower( $statement1->getGuid() );
+		$statement2UpperGuid = strtoupper( $statement2->getGuid() );
 
-		$claims->addClaim( $claim1 );
-		$claims->addClaim( $claim2 );
-		$this->assertSame( 2, $claims->count() );
+		$statements->addClaim( $statement1 );
+		$statements->addClaim( $statement2 );
+		$this->assertSame( 2, $statements->count() );
 
-		$this->assertEquals( $claim1, $claims->getClaimWithGuid( $claim1LowerGuid ) );
-		$this->assertEquals( $claim2, $claims->getClaimWithGuid( $claim2UpperGuid ) );
+		$this->assertEquals( $statement1, $statements->getClaimWithGuid( $statement1LowerGuid ) );
+		$this->assertEquals( $statement2, $statements->getClaimWithGuid( $statement2UpperGuid ) );
 
-		$this->assertEquals( $claim1, $claims->offsetGet( $claim1LowerGuid ) );
-		$this->assertEquals( $claim2, $claims->offsetGet( $claim2UpperGuid ) );
+		$this->assertEquals( $statement1, $statements->offsetGet( $statement1LowerGuid ) );
+		$this->assertEquals( $statement2, $statements->offsetGet( $statement2UpperGuid ) );
 
-		$this->assertEquals( $claim1, $claims[$claim1LowerGuid] );
-		$this->assertEquals( $claim2, $claims[$claim2UpperGuid] );
+		$this->assertEquals( $statement1, $statements[$statement1LowerGuid] );
+		$this->assertEquals( $statement2, $statements[$statement2UpperGuid] );
 
-		$claims = new Claims();
-		$claims->offsetSet( strtoupper( $claim1LowerGuid ), $claim1 );
-		$claims->offsetSet( strtolower( $claim2UpperGuid ), $claim2 );
-		$this->assertSame( 2, $claims->count() );
+		$statements = new Claims();
+		$statements->offsetSet( strtoupper( $statement1LowerGuid ), $statement1 );
+		$statements->offsetSet( strtolower( $statement2UpperGuid ), $statement2 );
+		$this->assertSame( 2, $statements->count() );
 
-		$this->assertEquals( $claim1, $claims->getClaimWithGuid( $claim1LowerGuid ) );
-		$this->assertEquals( $claim2, $claims->getClaimWithGuid( $claim2UpperGuid ) );
+		$this->assertEquals( $statement1, $statements->getClaimWithGuid( $statement1LowerGuid ) );
+		$this->assertEquals( $statement2, $statements->getClaimWithGuid( $statement2UpperGuid ) );
 	}
 
 	public function testGetMainSnaks() {
-		$claims = new Claims( array(
+		$statements = new Claims( array(
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
 			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) ),
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ) ),
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ) ),
 		) );
 
-		$snaks = $claims->getMainSnaks();
+		$snaks = $statements->getMainSnaks();
 		$this->assertInternalType( 'array', $snaks );
-		$this->assertSameSize( $claims, $snaks );
+		$this->assertSameSize( $statements, $snaks );
 
 		foreach ( $snaks as $guid => $snak ) {
 			$this->assertInstanceOf( 'Wikibase\DataModel\Snak\Snak', $snak );
-			$this->assertTrue( $claims->hasClaimWithGuid( $guid ) );
+			$this->assertTrue( $statements->hasClaimWithGuid( $guid ) );
 		}
 	}
 
 	public function testGetGuids() {
-		$claims = new Claims( array(
+		$statements = new Claims( array(
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
 			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) ),
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ) ),
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ) ),
 		) );
 
-		$guids = $claims->getGuids();
+		$guids = $statements->getGuids();
 		$this->assertInternalType( 'array', $guids );
-		$this->assertSameSize( $claims, $guids );
+		$this->assertSameSize( $statements, $guids );
 
 		foreach ( $guids as $guid ) {
 			$this->assertInternalType( 'string', $guid );
-			$this->assertTrue( $claims->hasClaimWithGuid( $guid ) );
+			$this->assertTrue( $statements->hasClaimWithGuid( $guid ) );
 		}
 	}
 
 	public function testGetHashes() {
-		$claims = new Claims( array(
+		$statements = new Claims( array(
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
 			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) ),
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ) ),
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ) ),
 		) );
 
-		$hashes = $claims->getHashes();
+		$hashes = $statements->getHashes();
 		$this->assertInternalType( 'array', $hashes );
 		$this->assertContainsOnly( 'string', $hashes );
-		$this->assertSameSize( $claims, $hashes );
+		$this->assertSameSize( $statements, $hashes );
 
 		$hashSet = array_flip( $hashes );
 
 		/**
-		 * @var Claim $claim
+		 * @var Claim $statement
 		 */
-		foreach ( $claims as $claim ) {
-			$hash = $claim->getHash();
+		foreach ( $statements as $statement ) {
+			$hash = $statement->getHash();
 			$this->assertArrayHasKey( $hash, $hashSet );
 		}
 	}
 
 	public function testGetClaimsForProperty() {
-		$claims = new Claims( array(
+		$statements = new Claims( array(
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
 			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) ),
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ) ),
 		) );
 
-		$matches = $claims->getClaimsForProperty( new PropertyId( 'P42' ) );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $claims );
+		$matches = $statements->getClaimsForProperty( new PropertyId( 'P42' ) );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $statements );
 		$this->assertSame( 2, $matches->count() );
 
-		$matches = $claims->getClaimsForProperty( new PropertyId( 'P23' ) );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $claims );
+		$matches = $statements->getClaimsForProperty( new PropertyId( 'P23' ) );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $statements );
 		$this->assertSame( 1, $matches->count() );
 
-		$matches = $claims->getClaimsForProperty( new PropertyId( 'P9000' ) );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $claims );
+		$matches = $statements->getClaimsForProperty( new PropertyId( 'P9000' ) );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $statements );
 		$this->assertSame( 0, $matches->count() );
 	}
 
@@ -468,11 +471,11 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	 * Attempts to add Claims with no GUID set will fail.
 	 */
 	public function testNoGuidFailure() {
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$list = new Claims();
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$list->addClaim( $claim );
+		$list->addClaim( $statement );
 	}
 
 	public function testDuplicateClaims() {
@@ -495,24 +498,24 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetHash() {
-		$claimsA = new Claims();
-		$claimsB = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
+		$statementsA = new Claims();
+		$statementsB = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statement2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
 
-		$this->assertEquals( $claimsA->getHash(), $claimsB->getHash(), 'empty list' );
+		$this->assertEquals( $statementsA->getHash(), $statementsB->getHash(), 'empty list' );
 
-		$claimsA->addClaim( $claim1 );
-		$claimsB->addClaim( $claim2 );
-		$this->assertNotEquals( $claimsA->getHash(), $claimsB->getHash(), 'different content' );
+		$statementsA->addClaim( $statement1 );
+		$statementsB->addClaim( $statement2 );
+		$this->assertNotEquals( $statementsA->getHash(), $statementsB->getHash(), 'different content' );
 
-		$claimsA->addClaim( $claim2 );
-		$claimsB->addClaim( $claim1 );
-		$this->assertNotEquals( $claimsA->getHash(), $claimsB->getHash(), 'different order' );
+		$statementsA->addClaim( $statement2 );
+		$statementsB->addClaim( $statement1 );
+		$this->assertNotEquals( $statementsA->getHash(), $statementsB->getHash(), 'different order' );
 
-		$claimsA->removeClaim( $claim1 );
-		$claimsB->removeClaim( $claim1 );
-		$this->assertEquals( $claimsA->getHash(), $claimsB->getHash(), 'same content' );
+		$statementsA->removeClaim( $statement1 );
+		$statementsB->removeClaim( $statement1 );
+		$this->assertEquals( $statementsA->getHash(), $statementsB->getHash(), 'same content' );
 	}
 
 	public function testIterator() {
@@ -523,23 +526,23 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 			'TESTCLAIM4' => $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ), 'testclaim4' ),
 		);
 
-		$claims = new Claims( $expected );
-		$actual = iterator_to_array( $claims->getIterator() );
+		$statements = new Claims( $expected );
+		$actual = iterator_to_array( $statements->getIterator() );
 
 		$this->assertSame( $expected, $actual );
 	}
 
 	public function testIsEmpty() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
+		$statements = new Claims();
+		$statement1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
 
-		$this->assertTrue( $claims->isEmpty() );
+		$this->assertTrue( $statements->isEmpty() );
 
-		$claims->addClaim( $claim1 );
-		$this->assertFalse( $claims->isEmpty() );
+		$statements->addClaim( $statement1 );
+		$this->assertFalse( $statements->isEmpty() );
 
-		$claims->removeClaim( $claim1 );
-		$this->assertTrue( $claims->isEmpty() );
+		$statements->removeClaim( $statement1 );
+		$this->assertTrue( $statements->isEmpty() );
 	}
 
 	public function provideGetByRank() {
@@ -564,12 +567,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 				new Claims( array( $s2 ) ),
 				Statement::RANK_PREFERRED,
 				new Claims( array( $s2 ) ),
-			),
-			// s2 has RANK_PREFERRED, so doesn't match RANK_TRUTH
-			array(
-				new Claims( array( $s2 ) ),
-				Claim::RANK_TRUTH,
-				new Claims(),
 			),
 			// s2 and s3 have RANK_PREFERRED, so return them
 			array(
@@ -628,24 +625,24 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetBestClaimsEmpty() {
-		$claims = new Claims();
-		$this->assertEquals( $claims->getBestClaims(), new Claims() );
+		$statements = new Claims();
+		$this->assertEquals( $statements->getBestClaims(), new Claims() );
 	}
 
 	public function testGetBestClaimsOnlyOne() {
 		$statement = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
 		$statement->setRank( Statement::RANK_NORMAL );
 
-		$claims = new Claims( array( $statement ) );
-		$this->assertEquals( $claims->getBestClaims(), $claims );
+		$statements = new Claims( array( $statement ) );
+		$this->assertEquals( $statements->getBestClaims(), $statements );
 	}
 
 	public function testGetBestClaimsNoDeprecated() {
 		$statement = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
 		$statement->setRank( Statement::RANK_DEPRECATED );
 
-		$claims = new Claims( array( $statement ) );
-		$this->assertEquals( $claims->getBestClaims(), new Claims() );
+		$statements = new Claims( array( $statement ) );
+		$this->assertEquals( $statements->getBestClaims(), new Claims() );
 	}
 
 	public function testGetBestClaimsReturnOne() {
@@ -655,9 +652,9 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) );
 		$s2->setRank( Statement::RANK_NORMAL );
 
-		$claims = new Claims( array( $s1, $s2 ) );
+		$statements = new Claims( array( $s1, $s2 ) );
 		$expected = new Claims( array( $s2 ) );
-		$this->assertEquals( $claims->getBestClaims(), $expected );
+		$this->assertEquals( $statements->getBestClaims(), $expected );
 	}
 
 	public function testGetBestClaimsReturnTwo() {
@@ -670,21 +667,9 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$s3 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P3' ) ) );
 		$s3->setRank( Statement::RANK_PREFERRED );
 
-		$claims = new Claims( array( $s3, $s1, $s2 ) );
+		$statements = new Claims( array( $s3, $s1, $s2 ) );
 		$expected = new Claims( array( $s2, $s3 ) );
-		$this->assertEquals( $claims->getBestClaims(), $expected );
-	}
-
-	public function testGetBestClaimsReturnsTruthRanks() {
-		$s1 = new Claim( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
-		$s1->setGuid( 'kittens' );
-
-		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) );
-		$s2->setRank( Statement::RANK_NORMAL );
-
-		$claims = new Claims( array( $s1, $s2 ) );
-		$expected = new Claims( array( $s1 ) );
-		$this->assertEquals( $claims->getBestClaims(), $expected );
+		$this->assertEquals( $statements->getBestClaims(), $expected );
 	}
 
 	public function testEmptyListEqualsEmptyList() {
@@ -724,13 +709,13 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenDifferentClaimWithSameGuid_equalsReturnsFalse() {
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'kittens' );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'kittens' );
 
-		$newClaim = new Claim( new PropertyNoValueSnak( 1337 ) );
+		$newClaim = new Statement( new PropertyNoValueSnak( 1337 ) );
 		$newClaim->setGuid( 'kittens' );
 
-		$list = new Claims( array( $claim ) );
+		$list = new Claims( array( $statement ) );
 		$newList = new Claims( array( $newClaim ) );
 
 		$this->assertFalse( $list->equals( $newList ) );

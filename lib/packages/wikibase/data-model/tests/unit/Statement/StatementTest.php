@@ -188,14 +188,6 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$statement->setRank( 9001 );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testSetRankToTruth( Statement $statement ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$statement->setRank( Claim::RANK_TRUTH );
-	}
-
 	public function testStatementRankCompatibility() {
 		$this->assertEquals( Claim::RANK_DEPRECATED, Statement::RANK_DEPRECATED );
 		$this->assertEquals( Claim::RANK_PREFERRED, Statement::RANK_PREFERRED );

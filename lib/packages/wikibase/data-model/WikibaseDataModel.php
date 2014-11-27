@@ -19,3 +19,5 @@ if ( defined( 'MEDIAWIKI' ) ) {
 		require_once __DIR__ . '/WikibaseDataModel.mw.php';
 	} );
 }
+
+class_alias( 'Wikibase\DataModel\Statement\Statement', 'Wikibase\DataModel\Claim\Claim' );
