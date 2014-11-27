@@ -52,6 +52,8 @@ class EntityRevision {
 	}
 
 	/**
+	 * TODO: change return type to EntityDocument
+	 *
 	 * @return Entity
 	 */
 	public function getEntity() {
