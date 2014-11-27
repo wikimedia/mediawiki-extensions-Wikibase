@@ -81,6 +81,10 @@ jQuery.valueview = jQuery.valueview || {};
 	 *                  user action or by calling the rawValue() method. First parameter is a
 	 *                  reference to the Expert itself.
 	 * @param {Object} [options={}]
+	 *
+	 * @throws {Error} if viewPortNode is not or does not feature a proper DOM node.
+	 * @throws {Error} relatedViewState is not a jQuery.valueview.ViewState instance.
+	 * @throws {Error} if valueViewNotifier is not an util.Notifier instance.
 	 */
 	vv.Expert = function( viewPortNode, relatedViewState, valueViewNotifier, options ) {
 		if( !( relatedViewState instanceof vv.ViewState ) ) {
@@ -100,7 +104,7 @@ jQuery.valueview = jQuery.valueview || {};
 			viewPortNode = viewPortNode.get( 0 );
 		}
 
-		if( !( viewPortNode.nodeType ) ) { // IE8 can't check for instanceof HTMLELement
+		if( !( viewPortNode.nodeType ) ) { // IE8 can't check for instanceof HTMLElement
 			throw new Error( 'No sufficient DOM node provided for the valueview expert' );
 		}
 

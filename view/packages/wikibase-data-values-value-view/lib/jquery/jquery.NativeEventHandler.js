@@ -91,6 +91,9 @@ var NEH_OPTIONS = [
  *          by the outer function if the native handler won't be called (because of
  *          jQuery.preventDefault)
  * @return {Function}
+ *
+ * @throws {Error} when trying to set options unknown to NativeEventHandler.
+ * @throws {Error} when no native handler function is provided.
  */
 return function( eventName, fn ) {
 	var initialFn = function() {},

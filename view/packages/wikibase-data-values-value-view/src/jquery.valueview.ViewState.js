@@ -17,7 +17,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 *
 	 * @param {jQuery.valueview} valueview
 	 *
-	 * @throws {Error} if no jQuery.valueview.valueview instance is provided.
+	 * @throws {Error} if no jQuery(.valueview).valueview instance is provided.
 	 */
 	var SELF = vv.ViewState = function ValueviewViewState( valueview ) {
 		if( !( valueview instanceof vv.valueview ) ) {

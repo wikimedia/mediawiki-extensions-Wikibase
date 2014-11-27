@@ -46,7 +46,7 @@ jQuery.fn.animateWithEvent = ( function( $ ) {
 	 *        - {jQuery.AnimationEvent} event
 	 * @return {jQuery}
 	 *
-	 * @throws {Error} If animationProperties is a string but not a member of jQuery.fn
+	 * @throws {Error} if animationProperties is a string but not a member of jQuery.fn
 	 */
 	return function AnimateWithEvent(
 		animationPurpose,

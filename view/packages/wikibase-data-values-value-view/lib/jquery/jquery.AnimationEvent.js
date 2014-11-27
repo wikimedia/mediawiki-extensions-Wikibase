@@ -102,8 +102,10 @@ jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 		 * @param {Object} [baseOptions={}]
 		 * @return {Object}
 		 *
-		 * @throws {Error} If animationOptions() has been called already and the returned options
+		 * @throws {Error} if animationOptions() has been called already and the returned options
 		 *         have been passed to some animation whose execution has started already.
+		 * @throws {Error} when trying to use the an AnimationEvent instance's animationOptions()
+		 *         for two different animations.
 		 */
 		this.animationOptions = function( baseOptions ) {
 			if( this.animation ) {

@@ -23,9 +23,9 @@ var IS_MODULE_LOADED = (
  * If it has not been loaded, the corresponding string defined in the options will be returned.
  * @ignore
  *
- * @param {String} msgKey
- * @param {String} string
- * @return {String}
+ * @param {string} msgKey
+ * @param {string} string
+ * @return {string}
  */
 function mwMsgOrString( msgKey, string ) {
 	return ( IS_MODULE_LOADED ) ? mediaWiki.msg( msgKey ) : string;
@@ -177,6 +177,8 @@ $.widget( 'ui.listrotator', {
 	/**
 	 * @see jQuery.Widget._create
 	 * @protected
+	 *
+	 * @throws {Error} if not values are supplied.
 	 */
 	_create: function() {
 		var self = this,

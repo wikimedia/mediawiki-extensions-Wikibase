@@ -286,7 +286,8 @@ $.widget( 'ui.ooMenu', {
 		} else if( item instanceof jQuery && item.data( 'ui-ooMenu-item' ) ) {
 			$item = item;
 		} else {
-			throw new Error( 'Need $.ui.ooMenu.Item instance or menu item jQuery object to activate' );
+			throw new Error( 'Need $.ui.ooMenu.Item instance or menu item jQuery object to '
+				+ 'activate' );
 		}
 
 		this.element.children( '.ui-state-hover' ).removeClass( 'ui-state-hover' );

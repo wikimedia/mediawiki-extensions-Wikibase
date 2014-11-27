@@ -77,6 +77,8 @@ $.widget( 'ui.toggler', {
 	/**
 	 * @see jQuery.Widget._create
 	 * @protected
+	 *
+	 * @throws {Error} if $subject option is not specified.
 	 */
 	_create: function() {
 		var self = this;

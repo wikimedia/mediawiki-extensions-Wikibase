@@ -11,6 +11,7 @@
 	/**
 	 * Returns a DOM object within a HTML page
 	 * @return {jQuery}
+	 *
 	 * @throws {Error} If the test runs in a non-browser environment or on a unsuitable HTML page.
 	 */
 	function getDomInsertionTestViewport() {

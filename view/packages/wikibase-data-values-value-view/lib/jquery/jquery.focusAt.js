@@ -43,9 +43,12 @@ jQuery.fn.focusAt = ( function( $ ) {
 	 * Helper which will normalize a given position or throw an error if it is an invalid one.
 	 * @ignore
 	 *
-	 * @param {number|string} position
+	 * @param {number|string} position Either a number specifying the position or one of the strings
+	 *        "start" and "end".
 	 * @param {jQuery} $forElem
 	 * @return {number}
+	 *
+	 * @throws {Error} if position is not specified properly.
 	 */
 	function normalizePosition( position, $forElem ) {
 		var textLength = $forElem.val().length;

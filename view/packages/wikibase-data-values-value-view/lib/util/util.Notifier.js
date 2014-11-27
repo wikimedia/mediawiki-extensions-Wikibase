@@ -36,6 +36,8 @@ util.Notifier = ( function() {
 	 *
 	 * @param {Object} [notificationMap={}] Map from notification IDs to callback functions. The
 	 *        context of the functions when called by notify() is Notifier instance.
+	 *
+	 * @throws {Error} if notification map is not specified properly.
 	 */
 	var SELF = function Notifier( notificationMap ) {
 		// allow instance without "new":

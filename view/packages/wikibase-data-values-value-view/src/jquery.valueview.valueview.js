@@ -183,6 +183,8 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * @see jQuery.Widget._create
 	 * @protected
+	 *
+	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
 		if(
@@ -370,13 +372,16 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *
 	 * @param {dataValues.DataValue|null} [value]
 	 * @return {dataValues.DataValue|null|undefined} null if no value is set currently
+	 *
+	 * @throws {Error} if value provided is not a dataValues.DataValue instance.
 	 */
 	value: function( value ) {
 		if( value === undefined ) {
 			return this._value;
 		}
 		if( value !== null && !( value instanceof dv.DataValue ) ) {
-			throw new Error( 'The given value has to be an instance of dataValue.DataValue or null' );
+			throw new Error( 'The given value has to be an instance of dataValues.DataValue or '
+				+ 'null' );
 		}
 		this._setValue( value );
 	},
@@ -404,6 +409,8 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * make sure that the new value will be displayed.
 	 *
 	 * @param {dataValues.DataValue|null} value
+	 *
+	 * @throws {Error} if value provided is not a dataValues.DataValue instance.
 	 */
 	_setValue: function( value ) {
 		// Check whether given value is actually suitable for the widget:
@@ -460,6 +467,8 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @since 0.4
 	 *
 	 * @return {string}
+	 *
+	 * @throws {Error} if current text value is null.
 	 */
 	getTextValue: function() {
 		if( this._textValue === null ) {
@@ -490,6 +499,9 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Will update the constructor currently used for creating an expert, if one is needed.
 	 * @private
+	 *
+	 * @throws {Error} if no expert store being an instance of jQuery.valueview.ExpertStore is set
+	 *         in the options.
 	 */
 	_updateExpertConstructor: function() {
 		if( !( this.options.expertStore instanceof $.valueview.ExpertStore ) ) {
@@ -821,6 +833,9 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *
 	 * @param {Object} [additionalParserOptions]
 	 * @return {valueParsers.ValueParser}
+	 *
+	 * @throws {Error} if no parser store being an instance of valueParsers.ValueParserStore is set
+	 *         in the options.
 	 */
 	_instantiateParser: function( additionalParserOptions ) {
 		if( !( this.options.parserStore instanceof vp.ValueParserStore ) ) {
@@ -928,6 +943,9 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *
 	 * @param {Object} [additionalFormatterOptions]
 	 * @return {valueFormatters.ValueFormatter}
+	 *
+	 * @throws {Error} if no formatter store being an instance of
+	 *         valueFormatters.ValueFormatterStore is set in the options.
 	 */
 	_instantiateFormatter: function( additionalFormatterOptions ) {
 		if( !( this.options.formatterStore instanceof vf.ValueFormatterStore ) ) {

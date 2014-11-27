@@ -38,6 +38,8 @@ jQuery.NativeEventHandler.test.testDefinition = ( function ( $, QUnit ) {
 		 *         - 'initialHandlerContext' The object which should be the context for initial handler.
 		 *         - 'customHandlerContext' The object which should be the context for custom handlers.
 		 *         - 'nativeHandlerContext' The object which should be the context for native handler.
+		 *
+		 * @throws {Error} when called.
 		 */
 		newWidgetTestBody: function() {
 			throw new Error( '"newWidgetTestBody" has to be overwritten in specific test '
