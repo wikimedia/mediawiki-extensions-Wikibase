@@ -4,6 +4,7 @@
 	/**
 	 * An ExpertExtender module for showing a hint about the used calendar model.
 	 * @class jQuery.valueview.ExpertExtender.CalendarHint
+	 * @since 0.6
 	 * @licence GNU GPL v2+
 	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *

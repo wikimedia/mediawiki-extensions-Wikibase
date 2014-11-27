@@ -7,6 +7,7 @@
 	/**
 	 * An ExpertExtender module for selecting a language.
 	 * @class jQuery.valueview.ExpertExtender.LanguageSelector
+	 * @since 0.6
 	 * @licence GNU GPL v2+
 	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *
