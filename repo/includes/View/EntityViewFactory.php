@@ -10,9 +10,9 @@ use Wikibase\ClaimHtmlGenerator;
 use Wikibase\EntityView;
 use Wikibase\ItemView;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\PropertyView;
@@ -26,16 +26,6 @@ use Wikibase\PropertyView;
 class EntityViewFactory {
 
 	/**
-	 * @var EntityTitleLookup
-	 */
-	private $entityTitleLookup;
-
-	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
-
-	/**
 	 * @var OutputFormatSnakFormatterFactory
 	 */
 	private $snakFormatterFactory;
@@ -45,13 +35,16 @@ class EntityViewFactory {
 	 */
 	private $sectionEditLinkGenerator;
 
+	/**
+	 * @var OutputFormatIdFormatterFactory
+	 */
+	private $idFormatterFactory;
+
 	public function __construct(
-		EntityTitleLookup $entityTitleLookup,
-		EntityLookup $entityLookup,
+		OutputFormatIdFormatterFactory $idFormatterFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory
 	) {
-		$this->entityTitleLookup = $entityTitleLookup;
-		$this->entityLookup = $entityLookup;
+		$this->idFormatterFactory = $idFormatterFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 	}
@@ -63,6 +56,7 @@ class EntityViewFactory {
 	 * @param string $languageCode
 	 * @param LanguageFallbackChain|null $fallbackChain
 	 * @param LabelLookup|null $labelLookup
+	 * @param bool $editable
 	 *
 	 * @throws InvalidArgumentException
 	 * @return EntityView
@@ -71,7 +65,8 @@ class EntityViewFactory {
 		$entityType,
 		$languageCode,
 		LanguageFallbackChain $fallbackChain = null,
-		LabelLookup $labelLookup = null
+		LabelLookup $labelLookup = null,
+		$editable = true
 	 ) {
 		$fingerprintView = $this->newFingerprintView( $languageCode );
 		$claimsView = $this->newClaimsView( $languageCode, $fallbackChain, $labelLookup );
@@ -81,9 +76,9 @@ class EntityViewFactory {
 
 		// @fixme support more entity types
 		if ( $entityType === 'item' ) {
-			return new ItemView( $fingerprintView, $claimsView, $language );
+			return new ItemView( $fingerprintView, $claimsView, $language, $editable );
 		} elseif ( $entityType === 'property' ) {
-			return new PropertyView( $fingerprintView, $claimsView, $language );
+			return new PropertyView( $fingerprintView, $claimsView, $language, $editable );
 		}
 
 		throw new InvalidArgumentException( 'No EntityView for entity type: ' . $entityType );
@@ -101,21 +96,21 @@ class EntityViewFactory {
 		LanguageFallbackChain $fallbackChain = null,
 		LabelLookup $labelLookup = null
 	) {
+		$propertyIdFormatter = $this->getPropertyIdFormatter( $languageCode, $fallbackChain, $labelLookup );
+
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->getSnakFormatter( $languageCode, $fallbackChain, $labelLookup ),
-			$this->entityTitleLookup
+			$propertyIdFormatter
 		);
 
 		$claimHtmlGenerator = new ClaimHtmlGenerator(
-			$snakHtmlGenerator,
-			$this->entityTitleLookup
+			$snakHtmlGenerator
 		);
 
 		return new ClaimsView(
-			$this->entityTitleLookup,
+			$propertyIdFormatter,
 			$this->sectionEditLinkGenerator,
-			$claimHtmlGenerator,
-			$languageCode
+			$claimHtmlGenerator
 		);
 	}
 
@@ -132,13 +127,13 @@ class EntityViewFactory {
 	}
 
 	/**
-	 * @param string $languageCode
-	 * @param LanguageFallbackChain|null $languageFallbackChain
-	 * @param LabelLookup|null $labelLookup
+	 * @param $languageCode
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param LabelLookup $labelLookup
 	 *
-	 * @return SnakFormatter
+	 * @return FormatterOptions
 	 */
-	private function getSnakFormatter(
+	private function getFormatterOptions(
 		$languageCode,
 		LanguageFallbackChain $languageFallbackChain = null,
 		LabelLookup $labelLookup = null
@@ -154,7 +149,44 @@ class EntityViewFactory {
 			$formatterOptions->setOption( 'LabelLookup', $labelLookup );
 		}
 
+		return $formatterOptions;
+	}
+
+	/**
+	 * @param string $languageCode
+	 * @param LanguageFallbackChain|null $languageFallbackChain
+	 * @param LabelLookup|null $labelLookup
+	 *
+	 * @return SnakFormatter
+	 */
+	private function getSnakFormatter(
+		$languageCode,
+		LanguageFallbackChain $languageFallbackChain = null,
+		LabelLookup $labelLookup = null
+	) {
+		$formatterOptions = $this->getFormatterOptions( $languageCode, $languageFallbackChain, $labelLookup );
+
 		return $this->snakFormatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_HTML_WIDGET,
+			$formatterOptions
+		);
+	}
+
+	/**
+	 * @param string $languageCode
+	 * @param LanguageFallbackChain|null $languageFallbackChain
+	 * @param LabelLookup|null $labelLookup
+	 *
+	 * @return EntityIdFormatter
+	 */
+	private function getPropertyIdFormatter(
+		$languageCode,
+		LanguageFallbackChain $languageFallbackChain = null,
+		LabelLookup $labelLookup = null
+	) {
+		$formatterOptions = $this->getFormatterOptions( $languageCode, $languageFallbackChain, $labelLookup );
+
+		return $this->idFormatterFactory->getEntityIdFormatter(
 			SnakFormatter::FORMAT_HTML_WIDGET,
 			$formatterOptions
 		);

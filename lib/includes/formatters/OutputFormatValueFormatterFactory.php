@@ -7,7 +7,7 @@ use ValueFormatters\ValueFormatter;
 
 /**
  * OutputFormatValueFormatterFactory is a service
- * for obtaining a SnakFormatter for a desired output format.
+ * for obtaining a ValueFormatter for a desired output format.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
