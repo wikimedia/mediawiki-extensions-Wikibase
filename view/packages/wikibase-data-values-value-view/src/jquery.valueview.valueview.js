@@ -39,9 +39,9 @@ function expertProxy( fnName ) {
  *        Used to determine an expert depending on the data value type or the data type the
  *        valueview should handle. The valueview will be able to handle all data value types and
  *        data types the given store has experts registered for.
- * @param {valueParsers.valueParserStore} parserStore
+ * @param {valueParsers.ValueParserStore} parserStore
  *        Store providing the parsers values may be parsed with.
- * @param {valueFormatters.valueFormatterStore} formatterStore
+ * @param {valueFormatters.ValueFormatterStore} formatterStore
  *        Store providing the formatters values may be formatted with.
  * @param {string} language
  *         Language code of the language the valueview shall interact with parsers and formatters.
@@ -344,8 +344,8 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *
 	 * If null is given or returned, this means that the view is or should be empty.
 	 *
-	 * @param {dv.DataValue|null} [value]
-	 * @return {dv.DataValue|null|undefined} null if no value is set currently
+	 * @param {dataValues.DataValue|null} [value]
+	 * @return {dataValues.DataValue|null|undefined} null if no value is set currently
 	 *
 	 * TODO: think about another function which should rather use some kind of "ValidatedDataValue",
 	 *       holding a reference to the used data type and the info that it is valid against it.
@@ -386,7 +386,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Sets the value internally and triggers the validation process on the new value, will also
 	 * make sure that the new value will be displayed.
 	 *
-	 * @param {dv.DataValue|null} value
+	 * @param {dataValues.DataValue|null} value
 	 */
 	_setValue: function( value ) {
 		// Check whether given value is actually suitable for the widget:

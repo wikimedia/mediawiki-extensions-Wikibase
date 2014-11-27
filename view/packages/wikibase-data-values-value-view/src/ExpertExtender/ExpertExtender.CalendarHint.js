@@ -10,8 +10,8 @@
 	 * @constructor
 	 *
 	 * @param {util.MessageProvider} messageProvider
-	 * @param {function} getUpstreamValue A getter for the current DataValue instance in use
-	 * @param {function} setUpstreamCalendar A setter for the current calendar name used
+	 * @param {Function} getUpstreamValue A getter for the current DataValue instance in use
+	 * @param {Function} setUpstreamCalendar A setter for the current calendar name used
 	 */
 	ExpertExtender.CalendarHint = function( messageProvider, getUpstreamValue, setUpstreamCalendar ) {
 		this._messageProvider = messageProvider;

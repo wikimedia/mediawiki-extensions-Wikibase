@@ -14,6 +14,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 *
 	 * @member jQuery.valueview
 	 * @method expert
+	 * @static
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >

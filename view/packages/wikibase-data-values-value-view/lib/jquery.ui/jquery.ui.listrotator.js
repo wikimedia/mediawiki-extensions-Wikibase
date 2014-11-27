@@ -70,7 +70,7 @@ function measureMaximumStringWidths( $container, strings ) {
  * @param {Object[]} options.values
  *        Array of objects containing the values to rotate.
  *        Single object structure:
- *        { value: <actual value (being returned on value())>, label: <the value's label> }
+ *        ```{ value: actual value (being returned on value()), label: the value's label }```
  * @param {Object} [options.menu=Object]
  *        Options for the jQuery.menu widget used as drop-down menu:
  * @param {Object} [options.menu.position=Object]

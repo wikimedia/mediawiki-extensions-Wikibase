@@ -124,7 +124,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Minimum amount of characters to begin a search.
-	 * @property {int} [_minTermLength=1]
+	 * @property {number} [_minTermLength=1]
 	 */
 	_minTermLength: 1,
 
