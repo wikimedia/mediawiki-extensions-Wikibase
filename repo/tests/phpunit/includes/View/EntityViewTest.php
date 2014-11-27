@@ -21,7 +21,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityRevision;
-use Wikibase\EntityView;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
@@ -29,11 +28,12 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\ReferencedEntitiesFinder;
+use Wikibase\Repo\View\EntityView;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 
 /**
- * @covers Wikibase\EntityView
+ * @covers Wikibase\Repo\View\EntityView
  *
  * @group Wikibase
  * @group WikibaseRepo

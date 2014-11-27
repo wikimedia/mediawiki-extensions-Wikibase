@@ -1,11 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\View;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Repo\View\SiteLinksView;
+use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
