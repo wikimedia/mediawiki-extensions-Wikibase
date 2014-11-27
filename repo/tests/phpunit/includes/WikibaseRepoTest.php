@@ -108,6 +108,11 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\OutputFormatValueFormatterFactory', $returnValue );
 	}
 
+	public function testGetIdFormatterFactory() {
+		$returnValue = $this->getDefaultInstance()->getIdFormatterFactory();
+		$this->assertInstanceOf( 'Wikibase\Lib\OutputFormatIdFormatterFactory', $returnValue );
+	}
+
 	public function testGetSummaryFormatter() {
 		$returnValue = $this->getDefaultInstance()->getSummaryFormatter();
 		$this->assertInstanceOf( 'Wikibase\SummaryFormatter', $returnValue );

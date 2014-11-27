@@ -39,6 +39,7 @@ use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\Localizer\GenericExceptionLocalizer;
 use Wikibase\Lib\Localizer\MessageExceptionLocalizer;
 use Wikibase\Lib\Localizer\ParseExceptionLocalizer;
+use Wikibase\Lib\OutputFormatIdFormatterFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
@@ -556,6 +557,17 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @return OutputFormatIdFormatterFactory
+	 */
+	public function getIdFormatterFactory() {
+		$builders = $this->getValueFormatterBuilders();
+
+		$factory = new OutputFormatIdFormatterFactory( $builders->getIdFormatterBuildersForFormats() );
+
+		return $factory;
+	}
+
+	/**
 	 * @return ExceptionLocalizer
 	 */
 	public function getExceptionLocalizer() {
@@ -970,8 +982,7 @@ class WikibaseRepo {
 		$entityTitleLookup = $this->getEntityContentFactory();
 
 		$entityViewFactory = new EntityViewFactory(
-			$entityTitleLookup,
-			$this->getEntityLookup(),
+			$this->getIdFormatterFactory(),
 			$this->getSnakFormatterFactory()
 		);
 
