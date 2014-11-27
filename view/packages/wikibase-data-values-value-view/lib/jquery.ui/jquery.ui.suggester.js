@@ -6,10 +6,6 @@
  * in a list below the input box.
  * DEPENDENCY: jQuery.ui.ooMenu
  * DEPENDENCY: jQuery.ui.position
- * @class jQuery.ui.suggester
- * @extends jQuery.Widget
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
  *
  *     @example
  *     // Creates a simple suggester using an array as result set.
@@ -38,6 +34,11 @@
  *             return deferred.promise();
  *         }
  *     } );
+ *
+ * @class jQuery.ui.suggester
+ * @extends jQuery.Widget
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  *

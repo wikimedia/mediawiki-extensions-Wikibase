@@ -28,9 +28,9 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 	 *         return callbacks.facade();
 	 *     }
 	 *     someAction()
-	 *    .add( 'done', function() { alert( 'done' ) } );
-	 *    .add( 'fail', function( reason ) { alert( 'error: ' + reason ) } );
-	 *    .add( 'fail', function( reason ) { alert( 'ERROR!' } );
+	 *     .add( 'done', function() { alert( 'done' ) } );
+	 *     .add( 'fail', function( reason ) { alert( 'error: ' + reason ) } );
+	 *     .add( 'fail', function( reason ) { alert( 'ERROR!' } );
 	 *
 	 * @class jQuery.PurposedCallbacks
 	 * @licence GNU GPL v2+

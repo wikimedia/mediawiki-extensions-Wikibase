@@ -40,14 +40,13 @@
 	/**
 	 * Convenience function for testing behavior before/after/during showing and hiding extension.
 	 *
-	 * @example <code>
-	 *  showAndHideExtensionAgain( newTestInputextender(), {
-	 *      afterCallingShowExtension: function( instance ) {},
-	 *      whenFullyShown: function() { instance },
-	 *      afterCallingHideExtension: function( instance ) {},
-	 *      whenFullyHiddenAgain: function( instance ) {}
-	 *  } );
-	 * </code>
+	 *     @example
+	 *     showAndHideExtensionAgain( newTestInputextender(), {
+	 *         afterCallingShowExtension: function( instance ) {},
+	 *         whenFullyShown: function() { instance },
+	 *         afterCallingHideExtension: function( instance ) {},
+	 *         whenFullyHiddenAgain: function( instance ) {}
+	 *     } );
 	 *
 	 * @param {jQuery.ui.inputextender} instance
 	 * @param {jQuery.Promise} [hideControl] If given, then the "hide" action will only be done

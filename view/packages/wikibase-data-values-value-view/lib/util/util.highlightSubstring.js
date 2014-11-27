@@ -8,7 +8,7 @@ this.util = this.util || {};
  *
  *     @example
  *     var highlighted = util.highlightSubstring( 'abc', 'abcdef' );
- *     ---> highlighted === '<span class="highlighted">abc</span>def';
+ *     // highlighted === '<span class="highlighted">abc</span>def';
  *
  * @member util
  * @method highlightSubstring
