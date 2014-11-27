@@ -100,7 +100,7 @@ var inputExtendersWithVisibleExtension = ( function() {
  */
 $.widget( 'ui.inputextender', {
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget.options
 	 */
 	options: {
 		content: [],
@@ -152,7 +152,7 @@ $.widget( 'ui.inputextender', {
 	_offset: null,
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget._create
 	 */
 	_create: function() {
 		var self = this;
@@ -235,7 +235,7 @@ $.widget( 'ui.inputextender', {
 	},
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget.destroy
 	 */
 	destroy: function() {
 		if( this.extensionIsActive() ) {

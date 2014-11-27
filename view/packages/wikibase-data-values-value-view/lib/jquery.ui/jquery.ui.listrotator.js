@@ -101,7 +101,7 @@ function measureMaximumStringWidths( $container, strings ) {
  */
 $.widget( 'ui.listrotator', {
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget.options
 	 */
 	options: {
 		values: [],
@@ -163,7 +163,7 @@ $.widget( 'ui.listrotator', {
 	_rotatingTo: null,
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget._create
 	 */
 	_create: function() {
 		var self = this,
@@ -246,7 +246,7 @@ $.widget( 'ui.listrotator', {
 	},
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget.destroy
 	 */
 	destroy: function() {
 		var menu = this.$menu.data( 'menu' );

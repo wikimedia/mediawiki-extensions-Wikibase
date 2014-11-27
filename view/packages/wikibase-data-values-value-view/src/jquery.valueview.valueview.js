@@ -157,7 +157,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	_parseTimer: null,
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget.options
 	 */
 	options: {
 		expertStore: null,
@@ -173,7 +173,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget._create
 	 */
 	_create: function() {
 		if(
@@ -201,7 +201,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget.destroy
 	 */
 	destroy: function() {
 		// remove classes we added in this._createWidget() as well as others
@@ -220,7 +220,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget._setOption
 	 *
 	 * @throws {Error} when trying to set an option that cannot be set after initialization.
 	 */
@@ -610,7 +610,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Marks the valueview disabled and triggers re-drawing it.
 	 * Since the visual state should be managed completely by the draw method, toggling the css
 	 * classes is done in draw() by issuing a call to $.Widget.option().
-	 * @inheritdoc
+	 * @see jQuery.Widget.disable
 	 */
 	disable: function() {
 		this._setDisabled( true );
@@ -620,7 +620,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Marks the valueview enabled and triggers re-drawing the valueview.
 	 * Since the visual state should be managed completely by the draw method, toggling the css
 	 * classes is done in draw() by issuing a call to $.Widget.option().
-	 * @inheritdoc
+	 * @see jQuery.Widget.enable
 	 */
 	enable: function() {
 		this._setDisabled( false );

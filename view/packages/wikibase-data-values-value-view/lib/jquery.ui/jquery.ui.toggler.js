@@ -53,7 +53,7 @@ $( document ).ready( function() {
 $.widget( 'ui.toggler', {
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget.options
 	 */
 	options: {
 		$subject: null
@@ -72,7 +72,7 @@ $.widget( 'ui.toggler', {
 	$toggleIcon: null,
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget._create
 	 */
 	_create: function() {
 		var self = this;
@@ -127,7 +127,7 @@ $.widget( 'ui.toggler', {
 	},
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget.destroy
 	 */
 	destroy: function() {
 		var label = this.element.children( this.widgetBaseClass + '-label' ).text();
@@ -165,14 +165,14 @@ $.widget( 'ui.toggler', {
 	},
 
 	/**
-	 * Disables the toggler.
+	 * @see jQuery.Widget.disable
 	 */
 	disable: function() {
 		this.element.addClass( 'ui-state-disabled' );
 	},
 
 	/**
-	 * Enables the toggler.
+	 * @see jQuery.Widget.enable
 	 */
 	enable: function() {
 		this.element.removeClass( 'ui-state-disabled' );

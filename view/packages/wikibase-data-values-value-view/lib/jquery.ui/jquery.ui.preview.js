@@ -23,7 +23,7 @@
 $.widget( 'ui.preview', {
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget.options
 	 */
 	options: {
 		$input: null,
@@ -41,7 +41,7 @@ $.widget( 'ui.preview', {
 	$value: null,
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget._create
 	 */
 	_create: function() {
 		if( this.options.messageProvider ) {
@@ -64,7 +64,7 @@ $.widget( 'ui.preview', {
 	},
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget.destroy
 	 */
 	destroy: function() {
 		this.$value.remove();

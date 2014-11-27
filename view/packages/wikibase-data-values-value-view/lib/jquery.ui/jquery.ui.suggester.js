@@ -96,7 +96,7 @@
 $.widget( 'ui.suggester', {
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget.options
 	 */
 	options: {
 		source: null,
@@ -129,7 +129,7 @@ $.widget( 'ui.suggester', {
 	_minTermLength: 1,
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget._create
 	 */
 	_create: function() {
 		var self = this;
@@ -157,7 +157,7 @@ $.widget( 'ui.suggester', {
 	},
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget.destroy
 	 */
 	destroy: function() {
 		var menu = this.option( 'menu' );
@@ -178,7 +178,7 @@ $.widget( 'ui.suggester', {
 	},
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.Widget._setOption
 	 */
 	_setOption: function( key, value ) {
 		if( key === 'menu' ) {
@@ -638,6 +638,7 @@ $.widget( 'ui.suggester', {
 
 /**
  * Flips a complete position specification to be used by jQuery.ui.position (1.8).
+ * @ignore
  *
  * @param {Object} position
  * @return {Object}

@@ -176,6 +176,10 @@ jQuery.valueview = jQuery.valueview || {};
 			this._extendable.callExtensions( 'init' );
 		},
 
+		/**
+		 * Custom expert initialization routine.
+		 * @private
+		 */
 		_init: function() {},
 
 		/**
