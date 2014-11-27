@@ -14,9 +14,8 @@ jQuery.util.adaptlettercase = ( function( $ ) {
 	 *
 	 * @param {string} destination String the source string's letter-case shall be applied to.
 	 * @param {string} source String whose letter-case shall be applied to destination.
-	 * @param {string|undefined} method "all" will adapt source's letter case for all destination
-	 *        characters, "first" will adapt the first letter only. By default, no adaption is
-	 *        taking place.
+	 * @param {string} [method] "all" will adapt source's letter case for all destination characters
+	 *        "first" will adapt the first letter only. By default, no adaption is taking place.
 	 * @return {string}
 	 *
 	 * @throws {Error} if destination and/or source string is/are not specified.

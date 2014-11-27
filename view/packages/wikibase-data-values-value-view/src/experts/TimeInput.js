@@ -7,21 +7,13 @@
 	var PARENT = vv.experts.StringValue;
 
 	/**
-	 * Valueview expert handling input of time values.
+	 * `Valueview` expert handling input of `Time` values.
 	 * @class jQuery.valueview.experts.TimeInput
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 * @author H. Snater < mediawiki@snater.com >
-	 *
-	 * @constructor
-	 *
-	 * @param {Object} options
-	 * @param {Object} options.messages
-	 *        Default messages used by the widget. The keys correspond to mediaWiki message keys
-	 *        since these will be picked when in MediaWiki environment and the mediaWiki JavaScript
-	 *        object has been passed to the expert constructor.
 	 */
 	vv.experts.TimeInput = vv.expert( 'TimeInput', PARENT, function() {
 		PARENT.apply( this, arguments );
@@ -111,24 +103,21 @@
 		/**
 		 * The preview widget.
 		 * @property {jQuery.valueview.ExpertExtender.Preview}
-		 * @private
 		 */
 		preview: null,
 
 		/**
 		 * @property {jQuery.valueview.ExpertExtender.Listrotator}
-		 * @private
 		 */
 		precisionRotator: null,
 
 		/**
 		 * @property {jQuery.valueview.ExpertExtender.Listrotator}
-		 * @private
 		 */
 		calendarRotator: null,
 
 		/**
-		 * @private
+		 * @protected
 		 */
 		_onRotatorChange: function() {
 			this._viewNotifier.notify( 'change' );

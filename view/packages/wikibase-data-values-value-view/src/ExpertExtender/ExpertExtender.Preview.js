@@ -2,7 +2,7 @@
 	'use strict';
 
 	/**
-	 * An ExpertExtender module which shows a preview of a value.
+	 * An `ExpertExtender` module which shows a preview of a value.
 	 * @class jQuery.valueview.ExpertExtender.Preview
 	 * @since 0.6
 	 * @licence GNU GPL v2+
@@ -43,7 +43,7 @@
 		_preview: null,
 
 		/**
-		 * Callback for the init ExpertExtender event
+		 * Callback for the `init` `ExpertExtender` event.
 		 *
 		 * @param {jQuery} $extender
 		 */
@@ -59,7 +59,7 @@
 		},
 
 		/**
-		 * Callback for the destroy ExpertExtender event
+		 * Callback for the `destroy` `ExpertExtender` event.
 		 */
 		destroy: function( ){
 			this._preview.destroy();
@@ -70,7 +70,7 @@
 		},
 
 		/**
-		 * Public method for setting the preview's value
+		 * Public method for setting the preview's value.
 		 *
 		 * @param {string} value HTML to show
 		 */
@@ -79,7 +79,7 @@
 		},
 
 		/**
-		 * Public method for replacing the preview with a spinner
+		 * Public method for replacing the preview with a spinner.
 		 */
 		showSpinner: function() {
 			if( this._preview ) {

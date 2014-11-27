@@ -4,7 +4,7 @@ util.Notifier = ( function() {
 	'use strict';
 
 	/**
-	 * Tracks the current notifications for the Notifier's current function.
+	 * Tracks the current notifications for the `Notifier`'s current function.
 	 * @property {string[]}
 	 * @ignore
 	 */
@@ -12,11 +12,11 @@ util.Notifier = ( function() {
 
 	/**
 	 * Constructor to create an object which takes several callbacks in its constructor. Each
-	 * callback is mapped to a keyword. The keyword can be used in a "notify" function which will
+	 * callback is mapped to a keyword. The keyword can be used in a `notify` function which will
 	 * then trigger the callback. The notification object itself is immutable. The object will only
-	 * hold a reference to the given map though and won't copy the map, so if the map changes from
+	 * hold a reference to the given map though, and won't copy the map. So, if the map changes from
 	 * the outside, the notifier will also be affected.
-	 * Instantiation also works without using the "new" keyword.
+	 * Instantiation also works without using the `new` keyword.
 	 *
 	 *     @example
 	 *     var notifier = util.Notifier( {
@@ -34,7 +34,7 @@ util.Notifier = ( function() {
 	 * @constructor
 	 *
 	 * @param {Object} [notificationMap={}] Map from notification IDs to callback functions. The
-	 *        context of the functions when called by notify() is Notifier instance.
+	 *        context of the functions when called by `notify()` is the `Notifier` instance.
 	 *
 	 * @throws {Error} if notification map is not specified properly.
 	 */
@@ -83,8 +83,8 @@ util.Notifier = ( function() {
 		};
 
 		/**
-		 * Returns whether the Notifier actually has a listener for a certain notification topic.
-		 * false if no callback is registered for the notification subject.
+		 * Returns whether the `Notifier` actually has a listener for a certain notification topic.
+		 * `false` if no callback is registered for the notification subject.
 		 *
 		 * @param {string} notification
 		 * @return {boolean}

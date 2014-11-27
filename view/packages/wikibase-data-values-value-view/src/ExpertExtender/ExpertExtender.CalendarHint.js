@@ -2,7 +2,7 @@
 	'use strict';
 
 	/**
-	 * An ExpertExtender module for showing a hint about the used calendar model.
+	 * An `ExpertExtender` module for showing a hint about the used calendar model.
 	 * @class jQuery.valueview.ExpertExtender.CalendarHint
 	 * @since 0.6
 	 * @licence GNU GPL v2+
@@ -11,8 +11,8 @@
 	 * @constructor
 	 *
 	 * @param {util.MessageProvider} messageProvider
-	 * @param {Function} getUpstreamValue A getter for the current DataValue instance in use
-	 * @param {Function} setUpstreamCalendar A setter for the current calendar name used
+	 * @param {Function} getUpstreamValue A getter for the current `DataValue` instance in use.
+	 * @param {Function} setUpstreamCalendar A setter for the current calendar name used.
 	 */
 	ExpertExtender.CalendarHint = function( messageProvider, getUpstreamValue, setUpstreamCalendar ) {
 		this._messageProvider = messageProvider;
@@ -62,7 +62,7 @@
 		_prefix: 'valueview-expertextender-calendarhint',
 
 		/**
-		 * Callback for the init ExpertExtender event
+		 * Callback for the `init` `ExpertExtender` event.
 		 *
 		 * @param {jQuery} $extender
 		 */
@@ -86,7 +86,7 @@
 		},
 
 		/**
-		 * Callback for the ExpertExtender draw event
+		 * Callback for the `ExpertExtender` draw event.
 		 */
 		draw: function() {
 			var value = this._getUpstreamValue();
@@ -125,7 +125,7 @@
 		},
 
 		/**
-		 * Callback for the ExpertExtender destroy event
+		 * Callback for the `ExpertExtender` destroy event.
 		 */
 		destroy: function() {
 			this._messageProvider = null;

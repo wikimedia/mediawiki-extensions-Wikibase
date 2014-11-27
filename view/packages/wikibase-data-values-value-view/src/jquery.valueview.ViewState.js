@@ -4,10 +4,10 @@ jQuery.valueview = jQuery.valueview || {};
 	'use strict';
 
 	/**
-	 * Allows to receive information about a related valueview object but doesn't provide functions
-	 * to actively change the view. It serves as a state object to inform subsystems of the view's
-	 * current status. Those subsystems should not have full access to the entire view though since
-	 * interaction in both directions would very likely mess things up.
+	 * Allows to receive information about a related `valueview` object but doesn't provide
+	 * functions to actively change the view. It serves as a state object to inform subsystems of
+	 * the `valueview`'s current status. Those subsystems should not have full access to the entire
+	 * view though since interaction in both directions would very likely mess things up.
 	 * @class jQuery.valueview.ViewState
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
@@ -17,7 +17,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 *
 	 * @param {jQuery.valueview} valueview
 	 *
-	 * @throws {Error} if no jQuery(.valueview).valueview instance is provided.
+	 * @throws {Error} if no `jQuery.valueview` instance is provided.
 	 */
 	var SELF = vv.ViewState = function ValueviewViewState( valueview ) {
 		if( !( valueview instanceof vv.valueview ) ) {
@@ -51,7 +51,7 @@ jQuery.valueview = jQuery.valueview || {};
 		},
 
 		/**
-		 * Returns the related view's current value. Does not allow to change the value.
+		 * Returns the related `valueview`'s current value. Does not allow to change the value.
 		 * @see jQuery.valueview.value
 		 * @inheritdoc jQuery.valueview#value
 		 */
@@ -60,7 +60,7 @@ jQuery.valueview = jQuery.valueview || {};
 		},
 
 		/**
-		 * Returns the related valueview's current formatted value.
+		 * Returns the related `valueview`'s current formatted value.
 		 * @see jQuery.valueview.getFormattedValue
 		 * @inheritdoc jQuery.valueview#getFormattedValue
 		 */
@@ -69,7 +69,7 @@ jQuery.valueview = jQuery.valueview || {};
 		},
 
 		/**
-		 * Returns the related valueview's current plain text value.
+		 * Returns the related `valueview`'s current plain text value.
 		 * @see jQuery.valueview.getTextValue
 		 * @inheritdoc jQuery.valueview#getTextValue
 		 * @since 0.4
@@ -79,8 +79,8 @@ jQuery.valueview = jQuery.valueview || {};
 		},
 
 		/**
-		 * Returns the options or a specific option of the related view. Does not allow to set any
-		 * option.
+		 * Returns the options or a specific option of the related `valueview`. Does not allow
+		 * to set any option.
 		 * @see jQuery.Widget.option
 		 *
 		 * @param {string} [key]

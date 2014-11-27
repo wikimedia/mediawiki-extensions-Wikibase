@@ -32,7 +32,7 @@ $( document ).ready( function() {
  * The toggler hides a references subject node an toggles its visibility whenever clicking the
  * element the toggler is initialized on. The toggler considers the subject's current "display"
  * style, so if it is set to "none", it is considered invisible initially.
- * DEPENDENCY: jQuery.animateWithEvent
+ * (uses `jQuery.animateWithEvent`)
  * @class jQuery.ui.toggler
  * @extends jQuery.Widget
  * @licence GNU GPL v2+
@@ -54,6 +54,7 @@ $.widget( 'ui.toggler', {
 
 	/**
 	 * @see jQuery.Widget.options
+	 * @protected
 	 * @readonly
 	 */
 	options: {
@@ -63,6 +64,7 @@ $.widget( 'ui.toggler', {
 	/**
 	 * The node subject to getting toggled.
 	 * @property {jQuery}
+	 * @protected
 	 * @readonly
 	 */
 	$subject: null,
@@ -70,6 +72,7 @@ $.widget( 'ui.toggler', {
 	/**
 	 * The toggler's icon.
 	 * @property {jQuery}
+	 * @protected
 	 * @readonly
 	 */
 	$toggleIcon: null,
@@ -173,6 +176,7 @@ $.widget( 'ui.toggler', {
 
 	/**
 	 * @see jQuery.Widget.disable
+	 * @protected
 	 */
 	disable: function() {
 		this.element.addClass( 'ui-state-disabled' );
@@ -180,6 +184,7 @@ $.widget( 'ui.toggler', {
 
 	/**
 	 * @see jQuery.Widget.enable
+	 * @protected
 	 */
 	enable: function() {
 		this.element.removeClass( 'ui-state-disabled' );

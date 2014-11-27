@@ -11,15 +11,15 @@ util.MessageProvider = ( function() {
 	 *
 	 * @constructor
 	 *
-	 * @param {Object} options
-	 * @param {Object} options.defaultMessages
+	 * @param {Object} [options={}]
+	 * @param {Object} [options.defaultMessages]
 	 *        Messages to use if no message getter function is provided or the getter does not
 	 *        return a message. The keys the messages are indexed with are passed to the message
 	 *        getter.
-	 * @param {Function} options.messageGetter
+	 * @param {Function} [options.messageGetter]
 	 *        Function to retrieve a message from. The function receives the message key as first
 	 *        argument and a variable number of arguments as message parameters.
-	 * @param {string} options.prefix
+	 * @param {string} [options.prefix]
 	 *        String the message key should be prefixed with when querying the message getter
 	 *        function.
 	 */
@@ -42,7 +42,7 @@ util.MessageProvider = ( function() {
 		 * returned.
 		 *
 		 * @param {string} key
-		 * @param {string[]} [params] Message parameters.
+		 * @param {string[]} [params=[]] Message parameters.
 		 * @return {string|null}
 		 */
 		getMessage: function( key, params ) {

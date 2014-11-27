@@ -2,8 +2,6 @@
 	'use strict';
 
 /**
- * jQuery.inputautoexpand plugin
- *
  * Makes input or textarea elements automatically expand/contract their size according to their
  * input value while typing. Vertical resizing will of course work for textareas only.
  * The input/textarea element the plugin is initialized on needs to be in the DOM in order to be
@@ -11,17 +9,18 @@
  * Compatibility: IE >= 8
  *
  * Based on:
- * - autoGrowInput plugin by James Padolsey (http://jsbin.com/ahaxe)
- * - Autosize plugin by Jack Moore (licence: MIT) (http://www.jacklmoore.com/autosize)
  *
- * DEPENDENCY: jquery.event.special.eachchange
+ * - autoGrowInput plugin by James Padolsey (http://jsbin.com/ahaxe)
+ *
+ * - Autosize plugin by Jack Moore (licence: MIT) (http://www.jacklmoore.com/autosize)
  *
  * @member jQuery.fn
  * @method inputautoexpand
+ * @uses jQuery.AutoExpandInput
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki at snater.com >
  *
- * @param {Object} options
+ * @param {Object} [options={}]
  * @param {boolean} [options.expandWidth=true]
  *        Whether to horizontally expand/contract the input element.
  * @param {boolean} [options.expandHeight=false]
@@ -85,12 +84,13 @@ $.fn.inputautoexpand = function( options ) {
 /**
  * Manages expanding input elements.
  * @class jQuery.AutoExpandInput
+ * @uses jQuery.event.special.eachchange
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki at snater.com >
  *
  * @constructor
  *
- * @param {Object} element
+ * @param {HTMLElement} element
  * @param {Object} options
  */
 $.AutoExpandInput = function( element, options ) {
@@ -131,6 +131,7 @@ $.extend( $.AutoExpandInput.prototype, {
 	/**
 	 * The input element the auto-expand mechanism is initialized on.
 	 * @property {jQuery}
+	 * @private
 	 * @readonly
 	 */
 	$input: null,

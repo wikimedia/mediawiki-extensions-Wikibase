@@ -2,10 +2,9 @@
 	'use strict';
 
 /**
- * jQuery.ui.suggester enhances an input box by retrieving a list of suggestions that are displayed
- * in a list below the input box.
- * DEPENDENCY: jQuery.ui.ooMenu
- * DEPENDENCY: jQuery.ui.position
+ * Enhances an input box by retrieving a list of suggestions that are displayed in a list below the
+ * input box.
+ * (uses `jQuery.ui.ooMenu`, `jQuery.ui.position`)
  *
  *     @example
  *     // Creates a simple suggester using an array as result set.
@@ -37,6 +36,7 @@
  *
  * @class jQuery.ui.suggester
  * @extends jQuery.Widget
+ * @uses jQuery.ui
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
@@ -44,31 +44,41 @@
  *
  * @param {Object} options
  * @param {string[]|Function} options.source
- *         An array of strings that shall be used to provide suggestions. Alternatively, a function
- *         may be provided:
- *         Parameters:
- *         - {string} Search term
- *         Expected return values:
- *         - {Object} jQuery promise
- *           Resolved parameters:
- *           - {string[]} Suggestions
- *           - {string} (optional) Search term corresponding to the suggestions. This allows
- *             checking whether the response belongs to the most current request.
- *           Rejected parameters:
- *           - {string} Plain text or HTML error message.
+ *        An array of strings that shall be used to provide suggestions. Alternatively, a function
+ *        may be provided
+ *        Parameters:
+ *
+ * - {string} Search term
+ *
+ * Expected return values:
+ *
+ * - {Object} jQuery promise
+ *
+ * Resolved parameters:
+ *
+ * - {string[]} Suggestions
+ *
+ * - {string} (optional) Search term corresponding to the suggestions. This allows checking whether
+ *   the response belongs to the most current request.
+ *
+ * Rejected parameters:
+ *
+ * - {string} Plain text or HTML error message.
+ *
  * @param {number} [options.delay=300]
- *         Delay in milliseconds of the request querying for suggestions.
+ *        Delay in milliseconds of the request querying for suggestions.
  * @param {jQuery.ui.ooMenu|null} [menu=null]
- *         A pre-initialized menu instance featuring one or more custom list item may be provided.
- *         This should be the preferred way to define custom items.
+ *        A pre-initialized menu instance featuring one or more custom list item may be provided.
+ *        This should be the preferred way to define custom items.
  * @param {Object} [position=Object]
- *         Object to be evaluated by jQuery.ui.position to set the suggestion list's position. In
- *         RTL context, the specified value is flipped automatically.
- *         Default: (position suggestion list's top left corner at input box's bottom left corner)
+ *        Object to be evaluated by `jQuery.ui.position` to set the suggestion list's position.
+ *        In RTL context, the specified value is flipped automatically.
+ *        Default: (position suggestion list's top left corner at input box's bottom left corner)
  * @param {jQuery|null} [confineMinWidthTo]
- *         The suggestion list's width shall not be smaller than the width of the referenced
- *         element. If "undefined", the minimum width will be the width of the element the suggester
- *         is initialized on. Specifying "null" will prevent applying a minimum width.
+ *        The suggestion list's width shall not be smaller than the width of the referenced
+ *        element. If `undefined`, the minimum width will be the width of the element the suggester
+ *        is initialized on. Specifying `null` or `undefined` will prevent applying a minimum
+ *        width.
  */
 /**
  * @event open
@@ -97,6 +107,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * @see jQuery.Widget.options
+	 * @protected
 	 * @readonly
 	 */
 	options: {
@@ -338,7 +349,7 @@ $.widget( 'ui.suggester', {
 	},
 
 	/**
-	 * Attaches event listeners to the "window" object.
+	 * Attaches event listeners to the `window` object.
 	 * @protected
 	 */
 	_attachWindowEventHandlers: function() {

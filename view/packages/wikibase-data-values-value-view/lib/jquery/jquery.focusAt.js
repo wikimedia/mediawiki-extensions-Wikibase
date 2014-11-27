@@ -2,10 +2,8 @@ jQuery.fn.focusAt = ( function( $ ) {
 	'use strict';
 
 	/**
-	 * "jQuery.focusAt" introduces a "focusAt" function to jQuery instances. This allows to focus an
+	 * `jQuery.focusAt` introduces a `focusAt` function to jQuery instances. This allows to focus an
 	 * element and set the caret to a certain position within the input element.
-	 *
-	 * DEPENDENCY: jQuery
 	 *
 	 *     @example
 	 *     $( 'input' ).val( 'Foo Bar' ).focusAt( 0 );     // |Foo Bar
@@ -19,6 +17,9 @@ jQuery.fn.focusAt = ( function( $ ) {
 	 * @method focusAt
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner
+	 *
+	 * @param {number|string} position Either a number specifying the position or one of the strings
+	 *        "start" and "end".
 	 */
 	var focusAt = function focusAt( position ) {
 		// If we have a collection of elements, only consider the first one, just like the native

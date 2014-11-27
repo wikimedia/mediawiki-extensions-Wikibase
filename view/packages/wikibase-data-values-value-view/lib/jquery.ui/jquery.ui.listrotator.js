@@ -57,10 +57,10 @@ function measureMaximumStringWidths( $container, strings ) {
  * according to the currently selected value are displayed as links next to the current value. In
  * addition, clicking the current value reveals a drop-down list to directly select a value from the
  * list values.
- * DEPENDENCY: jQuery.ui.menu
- * DEPENDENCY: jQuery.ui.position
+ * (uses `jQuery.ui.menu`, `jQuery.ui.position`)
  * @class jQuery.ui.listrotator
  * @extends jQuery.Widget
+ * @uses jQuery.ui
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
@@ -70,12 +70,12 @@ function measureMaximumStringWidths( $container, strings ) {
  * @param {Object[]} options.values
  *        Array of objects containing the values to rotate.
  *        Single object structure:
- *        ```{ value: actual value (being returned on value()), label: the value's label }```
+ *        `{ value: actual value (being returned on value()), label: the value's label }`
  * @param {Object} [options.menu=Object]
- *        Options for the jQuery.menu widget used as drop-down menu:
+ *        Options for the `jQuery.ui.menu` widget used as drop-down menu:
  * @param {Object} [options.menu.position=Object]
- *        Default object passed to jQuery.ui.position when positioning the menu. Positions will be
- *        flipped if isRtl option returns "true".
+ *        Default object passed to `jQuery.ui.position` when positioning the menu. Positions will be
+ *        flipped if isRtl option returns `true`.
  * @param {Object} [options.animation=Object]
  *        Object containing parameters used for the rotation animation.
  * @param {string[]} [options.animation.margins=['-15px', '15px']]
@@ -84,7 +84,8 @@ function measureMaximumStringWidths( $container, strings ) {
  * @param {number} [options.animation.duration=150]
  *        Defines the animation's duration in milliseconds.
  * @param {boolean} [options.deferInit=false]
- *        Whether to defer initializing the section widths until initWidths() is called "manually".
+ *        Whether to defer initializing the section widths until `initWidths()` is called
+ *        "manually".
  * @param {boolean|Function} [isRTL=function() { return $( 'body' ).hasClass( 'rtl' ); }]
  *        Whether widget is used in an RTL context.
  */
@@ -92,16 +93,17 @@ function measureMaximumStringWidths( $container, strings ) {
  * @event selected
  * Triggered when a specific value is selected.
  * @param {jQuery.Event} event
- * @param {*} value Value as specified in the "values" option.
+ * @param {*} value Value as specified in the `values` option.
  */
 /**
  * @event auto
- * Triggered when "auto" options is selected.
+ * Triggered when "auto" option is selected.
  * @param {jQuery.Event} event
  */
 $.widget( 'ui.listrotator', {
 	/**
 	 * @see jQuery.Widget.options
+	 * @protected
 	 * @readonly
 	 */
 	options: {
@@ -178,7 +180,7 @@ $.widget( 'ui.listrotator', {
 	 * @see jQuery.Widget._create
 	 * @protected
 	 *
-	 * @throws {Error} if not values are supplied.
+	 * @throws {Error} if no values are supplied.
 	 */
 	_create: function() {
 		var self = this,

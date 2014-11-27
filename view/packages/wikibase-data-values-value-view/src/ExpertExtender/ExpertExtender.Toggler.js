@@ -2,7 +2,7 @@
 	'use strict';
 
 	/**
-	 * An ExpertExtender module which toggles DOM elements.
+	 * An `ExpertExtender` module which toggles DOM elements.
 	 * @class jQuery.valueview.ExpertExtender.Toggler
 	 * @since 0.6
 	 * @licence GNU GPL v2+
@@ -41,7 +41,7 @@
 		$subject: null,
 
 		/**
-		 * Callback for the init ExpertExtender event
+		 * Callback for the `init` `ExpertExtender` event.
 		 *
 		 * @param {jQuery} $extender
 		 */
@@ -53,7 +53,7 @@
 		},
 
 		/**
-		 * Callback for the onInitialShow ExpertExtender event
+		 * Callback for the `onInitialShow` `ExpertExtender` event.
 		 */
 		onInitialShow: function() {
 			this.$toggler.toggler( { $subject: this.$subject } );
@@ -61,7 +61,7 @@
 		},
 
 		/**
-		 * Callback for the destroy ExpertExtender event
+		 * Callback for the `destroy` `ExpertExtender` event.
 		 */
 		destroy: function() {
 			var toggler = this.$toggler.data( 'toggler' );

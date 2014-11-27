@@ -2,7 +2,7 @@ jQuery.fn.autocompletestring = ( function( $ ) {
 	'use strict';
 
 	/**
-	 * Applied to an input or textarea element, jQuery.fn.autocompletestring is fed with a
+	 * Applied to an input or textarea element, `jQuery.fn.autocompletestring` is fed with a
 	 * "complete" string and an "incomplete" - latter is supposed to consist out of the first
 	 * letter(s) of the "complete" string. The form element is filled with the "complete" string
 	 * while a text selection is applied to the characters missing in the "incomplete" string.

@@ -4,14 +4,12 @@
 	var PARENT = vv.Expert;
 
 	/**
-	 * Valueview expert for adding string data value support to valueview widget.
+	 * `Valueview` expert for adding `String` data value support to `valueview` widget.
 	 * @class jQuery.valueview.experts.StringValue
 	 * @extends jQuery.valueview.Expert
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
-	 *
-	 * @constructor
 	 */
 	vv.experts.StringValue = vv.expert( 'StringValue', PARENT, function() {
 		PARENT.apply( this, arguments );
@@ -21,6 +19,7 @@
 		 * The nodes of the input element. The input element will be used to display the value
 		 * during edit mode.
 		 * @property {jQuery}
+		 * @protected
 		 * @readonly
 		 */
 		$input: null,
@@ -84,7 +83,7 @@
 
 		/**
 		 * Will resize the input box to fit its current content.
-		 * @private
+		 * @protected
 		 */
 		_resizeInput: function() {
 			this.$input.inputautoexpand( {

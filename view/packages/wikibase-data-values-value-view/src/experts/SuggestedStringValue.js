@@ -9,15 +9,13 @@
 	//  introducing more complex format for registering an expert plus extensions to an expert
 	//  store.
 	/**
-	 * Valueview expert based on StringValue expert but with a jQuery suggester loaded for offering
-	 * the user auto completion features.
+	 * `Valueview` expert based on `StringValue` expert but with a jQuery suggester loaded for
+	 * offering the user auto completion features.
 	 * @class jQuery.valueview.experts.SuggestedStringValue
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
-	 *
-	 * @constructor
 	 */
 	vv.experts.SuggestedStringValue = vv.expert( 'SuggestedStringValue', PARENT, {
 		/**

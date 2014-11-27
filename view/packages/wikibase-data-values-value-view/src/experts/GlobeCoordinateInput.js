@@ -4,15 +4,13 @@
 	var PARENT = vv.experts.StringValue;
 
 	/**
-	 * Valueview expert handling input of globe coordinate values.
+	 * `Valueview` expert handling input of `GlobeCoordinate` values.
 	 * @class jQuery.valueview.experts.GlobeCoordinateValue
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
-	 *
-	 * @constructor
 	 */
 	vv.experts.GlobeCoordinateInput = vv.expert( 'GlobeCoordinateInput', PARENT, function() {
 		PARENT.apply( this, arguments );

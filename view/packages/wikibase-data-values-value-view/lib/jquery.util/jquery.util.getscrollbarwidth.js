@@ -6,6 +6,8 @@ jQuery.util = jQuery.util || {};
  * @method getscrollbarwidth
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
+ *
+ * @return {number} Scrollbar width in pixel.
  */
 jQuery.util.getscrollbarwidth = ( function( $ ) {
 	'use strict';

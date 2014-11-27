@@ -48,7 +48,7 @@
 		_extendable: null,
 
 		/**
-		 * Callback for expert init
+		 * Callback for expert `init`.
 		 */
 		init: function() {
 			this.$input.inputextender( {
@@ -59,7 +59,7 @@
 		},
 
 		/**
-		 * Callback for expert draw
+		 * Callback for expert `draw`.
 		 */
 		draw: function() {
 			if( this._inputextender.extensionIsVisible() ) {
@@ -68,7 +68,7 @@
 		},
 
 		/**
-		 * Callback for expert destroy
+		 * Callback for expert `destroy`.
 		 */
 		destroy: function() {
 			// Since inputextender is created in init, it might not be set

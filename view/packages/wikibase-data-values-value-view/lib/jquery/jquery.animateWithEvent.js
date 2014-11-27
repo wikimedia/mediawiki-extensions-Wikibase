@@ -2,16 +2,14 @@ jQuery.fn.animateWithEvent = ( function( $ ) {
 	'use strict';
 
 	/**
-	 * Same as jQuery.fn.animate or any other animation function with the difference that for each
-	 * element to be animated, a jQuery.AnimationEvent will be created. The AnimationEvent instance
-	 * will be available as first parameter in the "startCallback" which will be called for each
-	 * element's animation when the animation is about to start.
+	 * Same as `jQuery.fn.animate` or any other animation function with the difference that for each
+	 * each element to be animated, a `jQuery.AnimationEvent` will be created. The `AnimationEvent`
+	 * instance will be available as first parameter in the `startCallback` which will be called for
+	 * each element's animation when the animation is about to start.
 	 *
-	 * The "startCallback" can be used to trigger an event, stating that an animation is about to
-	 * be executed. In the event the AnimationEvent can be used to allow event listeners to add
+	 * The `startCallback` can be used to trigger an event, stating that an animation is about to be
+	 * to be executed. In the event the `AnimationEvent` can be used to allow event listeners to add
 	 * specialized callbacks per animation stage.
-	 *
-	 * DEPENDENCY: jQuery.AnimationEvent
 	 *
 	 *     @example
 	 *     $.animationWithEvent(
@@ -23,30 +21,28 @@ jQuery.fn.animateWithEvent = ( function( $ ) {
 	 *         }
 	 *     );
 	 *
-	 * @see jQuery.AnimationEvent
-	 *
 	 * @member jQuery.fn
 	 * @method animateWithEvent
+	 * @uses jQuery.AnimationEvent
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor
 	 *
-	 * @param {string} animationPurpose Will be forwarded to jQuery.AnimationEvent.
-	 * @param {string|Object} animationProperties Name of a jQuery.fn member which is dedicated to
-	 *        some animation (e.g. "fadeIn") and takes an "options" argument. Can also be an object
-	 *        of properties to animate, in this case jQuery.fn.animate will be used.
-	 * @param {Object} [options={}] Options passed to the animation ("duration", "easing" etc.).
+	 * @param {string} animationPurpose Will be forwarded to `jQuery.AnimationEvent`.
+	 * @param {string|Object} animationProperties Name of a `jQuery.fn` member which is dedicated
+	 *        to some animation (e.g. `fadeIn`) and takes an `options` argument. Can also be an
+	 *        object of properties to animate, in this case `jQuery.fn.animate` will be used.
+	 * @param {Object} [options={}] Options passed to the animation (`duration`, `easing` etc.).
 	 * @param {Function} [startCallback=jQuery.noop] Callback which will be fired before the
 	 *        animation starts.
-	 *        This is different from the options.start callback since it will be passed a
-	 *        jQuery.AnimationEvent instance as parameter. Also, the callback will be triggered
-	 *        before any options.start callback.
-	 *        Parameters:
-	 *        - {jQuery.AnimationEvent} event
+	 *        This is different from the `options.start` callback since it will be passed a
+	 *        `jQuery.AnimationEvent` instance as parameter. Also, the callback will be triggered
+	 *        before any `options.start` callback.
+	 * @param {jQuery.AnimationEvent} startCallback.event
 	 * @return {jQuery}
 	 *
-	 * @throws {Error} if animationProperties is a string but not a member of jQuery.fn
+	 * @throws {Error} if `animationProperties` is a string but not a member of `jQuery.fn`.
 	 */
 	return function AnimateWithEvent(
 		animationPurpose,

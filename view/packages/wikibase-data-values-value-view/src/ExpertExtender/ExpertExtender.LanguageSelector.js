@@ -5,7 +5,7 @@
 	'use strict';
 
 	/**
-	 * An ExpertExtender module for selecting a language.
+	 * An `ExpertExtender` module for selecting a language.
 	 * @class jQuery.valueview.ExpertExtender.LanguageSelector
 	 * @since 0.6
 	 * @licence GNU GPL v2+
@@ -78,7 +78,7 @@
 		_prefix: 'valueview-expertextender-languageselector',
 
 		/**
-		 * Callback for the init ExpertExtender event
+		 * Callback for the `init` `ExpertExtender` event.
 		 *
 		 * @param {jQuery} $extender
 		 */
@@ -99,7 +99,7 @@
 		},
 
 		/**
-		 * Callback for the onInitialShow ExpertExtender event
+		 * Callback for the `onInitialShow` `ExpertExtender` event.
 		 */
 		onInitialShow: function() {
 			var value = this._getUpstreamValue();
@@ -110,7 +110,7 @@
 		},
 
 		/**
-		 * Callback for the destroy ExpertExtender event
+		 * Callback for the `destroy` `ExpertExtender` event.
 		 */
 		destroy: function() {
 			this._getUpstreamValue = null;
@@ -122,7 +122,7 @@
 		},
 
 		/**
-		 * Get the current value set in the rotator
+		 * Gets the value currently set in the rotator.
 		 *
 		 * @return {string|null} The current value
 		 */

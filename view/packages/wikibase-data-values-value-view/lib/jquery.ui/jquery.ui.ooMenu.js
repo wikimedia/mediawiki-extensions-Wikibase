@@ -4,26 +4,27 @@
 /**
  * jQuery.ui.ooMenu provides an object-oriented menu structure. Menu items are managed using
  * specific objects instead of DOM elements.
- * DEPENDENCY: jQuery.util.getscrollbarwidth
- * DEPENDENCY: util.inherit
+ * (uses `jQuery.util.getscrollbarwidth`, `util.inherit`)
  * @class jQuery.ui.ooMenu
  * @extends jQuery.Widget
+ * @uses jQuery.util
+ * @uses util
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  *
- * @param {Object} options
+ * @param {Object} [options]
  * @param {jQuery.ui.ooMenu.Item[]} [options.items=[]]
  *        List of items to display.
  * @param {jQuery.ui.ooMenu.CustomItem[]} [options.customItems=[]]
  *        List of custom items.
  * @param {Function|null} [options.manipulateLabel=null]
- *        Function applied to each label before rendering.
- *        Parameters:
- *        - {string} Item label.
- *        Expected return value:
- *        - {string} Item label.
+ *        Function applied to each label before rendering, expects {string} to be returned.
+ *        Function parameter:
+ *
+ * - {string} options.manipulateLabel.label
+ *
  * @param {number|null} [options.maxItems=10]
  *        Maximum number of visible items. If there are more items, scrollbars will be shown. Set
  *        to "null" to never have scrollbars on the menu.
@@ -49,6 +50,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * @see jQuery.Widget.options
+	 * @protected
 	 * @readonly
 	 */
 	options: {
@@ -60,6 +62,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * @see jQuery.Widget._create
+	 * @protected
 	 */
 	_create: function() {
 		this.element
@@ -86,8 +89,9 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * @see jQuery.Widget._setOption
+	 * @protected
 	 *
-	 * @throws {Error} when trying to set "items" or "customItems" option with improper values.
+	 * @throws {Error} when trying to set `items` or `customItems` option with improper values.
 	 */
 	_setOption: function( key, value ) {
 		if( key === 'items' || key === 'customItems' ) {
@@ -116,6 +120,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * Updates the menu content.
+	 * @protected
 	 */
 	_refresh: function() {
 		this.element.empty();
@@ -135,6 +140,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * Evaluates whether a custom item is supposed to be visible or not.
+	 * @protected
 	 *
 	 * @param {jQuery.ui.ooMenu.CustomItem} customItem
 	 * @return {boolean}
@@ -145,6 +151,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * Appends an item to the menu.
+	 * @protected
 	 *
 	 * @param {jQuery.ui.ooMenu.Item} item
 	 */
@@ -319,6 +326,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * Returns whether there is an active menu item.
+	 * @protected
 	 *
 	 * @return {boolean}
 	 */
@@ -342,6 +350,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * Moves focus in a specific direction.
+	 * @protected
 	 *
 	 * @param {string} direction Either "next" or "prev".
 	 * @param {jQuery} $edge
@@ -470,11 +479,11 @@ $.extend( Item.prototype, {
  * @param {string|jQuery} label
  * @param {Function|boolean|null} [visibility=null]
  *        Function to determine the item's visibility or boolean defining static visibility. If
- *        "null" or omitted, the item will always be visible.
- *        Function parameters:
- *        - {jQuery.ui.ooMenu}
- *        Expected return value:
- *        - {boolean}
+ *        "null" or omitted, the item will always be visible. Function expects {boolean} to be
+ *        returned. Function parameter:
+ *
+ * - {jQuery.ui.ooMenu} [visibility.menu]
+ *
  * @param {Function|null} [action=null]
  * @param {string|null} [cssClass=null]
  * @param {string} [link=null]

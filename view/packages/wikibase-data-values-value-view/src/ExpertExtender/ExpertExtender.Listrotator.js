@@ -2,7 +2,7 @@
 	'use strict';
 
 	/**
-	 * An ExpertExtender module for a jQuery.ui.listrotator.
+	 * An `ExpertExtender` module for a `jQuery.ui.listrotator`.
 	 * @class jQuery.valueview.ExpertExtender.Listrotator
 	 * @since 0.6
 	 * @licence GNU GPL v2+
@@ -60,7 +60,7 @@
 		rotator: null,
 
 		/**
-		 * Callback for the init ExpertExtender event
+		 * Callback for the `init` `ExpertExtender` event.
 		 *
 		 * @param {jQuery} $extender
 		 */
@@ -80,7 +80,7 @@
 		},
 
 		/**
-		 * Callback for the draw ExpertExtender event
+		 * Callback for the `draw` `ExpertExtender` event.
 		 */
 		draw: function() {
 			var value = this._getUpstreamValue();
@@ -111,7 +111,7 @@
 		},
 
 		/**
-		 * Callback for the destroy ExpertExtender event
+		 * Callback for the `destroy` `ExpertExtender` event.
 		 */
 		destroy: function() {
 			if( this.rotator ) {

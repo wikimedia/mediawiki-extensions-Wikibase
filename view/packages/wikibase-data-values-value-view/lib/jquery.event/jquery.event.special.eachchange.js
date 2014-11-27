@@ -18,14 +18,21 @@
 	/**
 	 * eachchange jQuery event
 	 *
-	 * The "eachchange" event catches all designated input events. In recent browsers, it basically
-	 * delegates to the "input" event. Older browsers are supported by fallback events to achieve
-	 * some kind of simulation of the "input" event.
+	 * The `eachchange` event catches all designated input events. In recent browsers, it basically
+	 * delegates to the `input` event. Older browsers are supported by fallback events to achieve
+	 * some kind of simulation of the `input` event.
 	 *
-	 * DEPENDENCY: jquery.client
+	 *     @example
+	 *     $( 'input' ).on( 'eachchange', function( event, previousValue ) {
+	 *         console.log( 'previous value: ' + previousValue );
+	 *         console.log( 'new value: ' + $( event.target ).val() );
+	 *     } );
+	 *
+	 * @see jQuery.event.special
 	 *
 	 * @class jQuery.event.special.eachchange
 	 * @extends jQuery.Event
+	 * @uses jQuery.client
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *

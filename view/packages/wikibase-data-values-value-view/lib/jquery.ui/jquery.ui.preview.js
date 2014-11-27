@@ -11,7 +11,7 @@
  *
  * @constructor
  *
- * @param {Object} options
+ * @param {Object} [options]
  * @param {jQuery|null} [options.$input=null]
  *        Input element node. If specified, the preview will not be updated when the input element
  *        is cleared, e.g. if the input will be hidden, it is not necessary to update the value.
@@ -24,6 +24,7 @@ $.widget( 'ui.preview', {
 
 	/**
 	 * @see jQuery.Widget.options
+	 * @protected
 	 * @readonly
 	 */
 	options: {

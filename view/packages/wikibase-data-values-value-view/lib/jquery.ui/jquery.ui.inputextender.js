@@ -47,18 +47,18 @@ var inputExtendersWithVisibleExtension = ( function() {
  * Input extender widget
  *
  * The input extender extends an input element with additional contents displayed underneath the.
- * DEPENDENCY: jQuery.animateWithEvent
- * DEPENDENCY: jQuery.event.special.eachchange
- * DEPENDENCY: jQuery.ui.position
+ * (uses `jQuery.animateWithEvent`, `jQuery.ui.position`)
  * @class jQuery.ui.inputextender
  * @extends jQuery.Widget
+ * @uses jQuery.event.special.eachchange
+ * @uses jQuery.ui
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  *
  * @constructor
  *
- * @param {Object} options
+ * @param {Object} [options]
  * @param {jQuery[]} [options.content=[]]
  *        Default/"fixed" extender contents that always should be visible as long as the extension
  *        itself is visible.
@@ -72,11 +72,11 @@ var inputExtendersWithVisibleExtension = ( function() {
  *        Whether all of the input extender's contents shall be hidden when the associated input
  *        element is empty.
  * @param {string} [options.contentAnimationEvents='']
- *        One or more events (separated with spaces) which imply
- *         that the input extenders extension's content is about to be animated. Those events should
- *         give a jQuery.AnimationEvent object as their event object. If this is the case and the
- *         event bubbles up to the input extender's extension node, then this will trigger the
- *         "contentanimation" event on the widget node.
+ *        One or more events (separated with spaces) which imply that the input extenders
+ *        extension's content is about to be animated. Those events should give a
+ *        `jQuery.AnimationEvent` object as their event object. If this is the case and the event
+ *        bubbles up to the input extender's extension node, then this will trigger the
+ *        `contentanimation` event on the widget node.
  */
 /**
  * @event animation
@@ -101,6 +101,7 @@ var inputExtendersWithVisibleExtension = ( function() {
 $.widget( 'ui.inputextender', {
 	/**
 	 * @see jQuery.Widget.options
+	 * @protected
 	 * @readonly
 	 */
 	options: {
@@ -344,7 +345,7 @@ $.widget( 'ui.inputextender', {
 		}
 
 		if( !$extension ) {
-			this.$extension = $extension = this._buildExtension();
+			this._$extension = $extension = this._buildExtension();
 			$extension.appendTo( $( 'body' ) );
 
 			if( $.isFunction( this.options.initCallback ) ) {
