@@ -20,80 +20,16 @@ use Wikibase\DataModel\Entity\EntityId;
 class EntityInfoTermLookup implements TermLookup {
 
 	/**
-	 * @var array
+	 * @var EntityInfo
 	 */
-	private $entityRecords;
+	private $entityInfo;
 
 	/**
-	 * @param array $entityRecords An array of entity records, as returned
+	 * @param EntityInfo $entityInfo An array of entity records, as returned
 	 * by EntityInfoBuilder::getEntityInfo.
 	 */
-	public function __construct( array $entityRecords ) {
-		$this->entityRecords = $entityRecords;
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 * @param string $field
-	 * @param string $languageCode
-	 *
-	 * @return string|null
-	 * @throws OutOfBoundsException
-	 */
-	private function getValue( EntityId $entityId, $field, $languageCode ) {
-		$id = $entityId->getSerialization();
-
-		if ( !isset( $this->entityRecords[$id] ) ) {
-			throw new OutOfBoundsException( 'No terms known for entity ' . $id );
-		}
-
-		if ( !isset( $this->entityRecords[$id][$field] ) ) {
-			throw new OutOfBoundsException( 'No ' . $field . ' known for entity ' . $id );
-		}
-
-		if ( !isset( $this->entityRecords[$id][$field][$languageCode] ) ) {
-			throw new OutOfBoundsException( 'No ' . $field . ' known in ' . $languageCode . ' for entity ' . $id );
-		}
-
-		$value = $this->entityRecords[$id][$field][$languageCode];
-
-		if ( is_array( $value ) ) {
-			// $value may be a record with "language" and "value" fields.
-			$value = $value['value'];
-		}
-
-		return $value;
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 * @param string $field
-	 *
-	 * @return string[]
-	 */
-	private function getLanguageToValueMapping( EntityId $entityId, $field ) {
-		$id = $entityId->getSerialization();
-
-		if ( !isset( $this->entityRecords[$id] ) ) {
-			return array();
-		}
-
-		if ( !isset( $this->entityRecords[$id][$field] ) ) {
-			return array();
-		}
-
-		$values = array();
-
-		foreach ( $this->entityRecords[$id][$field] as $languageCode => $value ) {
-			if ( is_array( $value ) ) {
-				// $value may be a record with "language" and "value" fields.
-				$value = $value['value'];
-			}
-
-			$values[$languageCode] = $value;
-		}
-
-		return $values;
+	public function __construct( EntityInfo $entityInfo ) {
+		$this->entityInfo = $entityInfo;
 	}
 
 	/**
@@ -105,7 +41,10 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @return string
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
-		return $this->getValue( $entityId, 'labels', $languageCode );
+		$label = $this->entityInfo->getLabel( $entityId, $languageCode );
+
+		$this->checkOutOfBOunds( $label, $languageCode );
+		return $label;
 	}
 
 	/**
@@ -116,7 +55,8 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @return string[]
 	 */
 	public function getLabels( EntityId $entityId ) {
-		return $this->getLanguageToValueMapping( $entityId, 'labels' );
+		$labels = $this->entityInfo->getLabels( $entityId );
+		return $labels;
 	}
 
 	/**
@@ -128,7 +68,10 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @return string
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		return $this->getValue( $entityId, 'descriptions', $languageCode );
+		$description = $this->entityInfo->getDescription( $entityId, $languageCode );
+
+		$this->checkOutOfBOunds( $description, $languageCode );
+		return $description;
 	}
 
 	/**
@@ -139,7 +82,19 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @return string[]
 	 */
 	public function getDescriptions( EntityId $entityId ) {
-		return $this->getLanguageToValueMapping( $entityId, 'descriptions' );
+		$descriptions = $this->entityInfo->getDescriptions( $entityId );
+		return $descriptions;
 	}
 
+	/**
+	 * @param string $value
+	 * @param string $languageCode
+	 *
+	 * @throws OutOfBoundsException
+	 */
+	private function checkOutOfBOunds( $value, $languageCode ) {
+		if ( $value === null ) {
+			throw new OutOfBoundsException( 'No entry found for language ' . $languageCode );
+		}
+	}
 }
