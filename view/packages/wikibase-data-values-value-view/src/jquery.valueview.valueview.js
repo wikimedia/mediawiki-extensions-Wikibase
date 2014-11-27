@@ -530,9 +530,9 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Will render the valueview's current state (does consider edit mode, current value, etc.).
 	 *
-	 * @return {jQuery.Promise}
-	 *         No resolved parameters.
-	 *         No rejected parameters.
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {Function} return.fail
 	 */
 	draw: function() {
 		var self = this;
@@ -558,9 +558,9 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * @return {jQuery.Promise}
-	 *         No resolved parameters.
-	 *         No rejected parameters.
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {Function} return.fail
 	 */
 	drawContent: function() {
 		var self = this,
@@ -708,12 +708,12 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Parses the current raw value.
 	 *
-	 * @return {jQuery.Promise}
-	 *         Resolved parameters:
-	 *         - {dataValues.DataValue}
-	 *         Rejected parameters:
-	 *         - {string|undefined} HTML error message or "undefined" if the result shall be
-	 *           ignored.
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {dataValues.DataValue} return.done.value
+	 * @return {Function} return.fail
+	 * @return {string|undefined} return.fail.message HTML error message or "undefined" if the
+	 *         result shall be ignored.
 	 *
 	 * @throws {Error} if the parser result is neither a DataValue instance nor null.
 	 */
@@ -812,12 +812,12 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Formats a specific data value.
 	 *
 	 * @param {dataValues.DataValue} dataValue
-	 * @return {jQuery.Promise}
-	 *         Resolved parameters:
-	 *         - {string} Formatted DataValue.
-	 *         Rejected parameters:
-	 *         - {string|undefined} HTML error message or "undefined" if the result shall be
-	 *           ignored.
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {string} return.done.formattedValue
+	 * @return {Function} return.fail
+	 * @return {string|undefined} return.fail.message HTML error message or "undefined" if the
+	 *         result shall be ignored.
 	 */
 	_formatValue: function( dataValue ) {
 		var self = this,

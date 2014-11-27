@@ -13,8 +13,8 @@
 	 * @constructor
 	 *
 	 * @param {util.MessageProvider} messageProvider
-	 * @param {function} getUpstreamValue
-	 * @param {function} onValueChange
+	 * @param {Function} getUpstreamValue
+	 * @param {Function} onValueChange
 	 */
 	ExpertExtender.LanguageSelector = function( messageProvider, getUpstreamValue, onValueChange ) {
 		this._messageProvider = messageProvider;

@@ -427,11 +427,11 @@ $.widget( 'ui.suggester', {
 	 * Performs a search on the current input.
 	 *
 	 * @param {jQuery.Event} event The original event that triggered the search.
-	 * @return {jQuery.Promise}
-	 *         Resolved parameters:
-	 *         - {string[]}
-	 *         Rejected parameters:
-	 *         - {string}
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {string[]} return.done.suggestions
+	 * @return {Function} return.fail
+	 * @return {string} return.fail.message
 	 */
 	search: function( event ) {
 		var self = this,
@@ -520,12 +520,12 @@ $.widget( 'ui.suggester', {
 	 * Retrieves the suggestions for a specific search term.
 	 *
 	 * @param {string} term
-	 * @return {jQuery.Promise}
-	 *         Resolved parameters:
-	 *         - {string[]} suggestions
-	 *         - {string} requestTerm
-	 *         Rejected parameters:
-	 *         - {string}
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {string[]} return.done.suggestions
+	 * @return {string} return.done.requestTerm
+	 * @return {Function} return.fail
+	 * @return {string} return.fail.message
 	 */
 	_getSuggestions: function( term ) {
 		if ( typeof this.options.source === 'function' ) {
@@ -540,11 +540,12 @@ $.widget( 'ui.suggester', {
 	 *
 	 * @param {string} term
 	 * @param {string[]} source
-	 * @return {jQuery.Promise}
-	 *         Resolved parameters:
-	 *         - {string[]} suggestions
-	 *         - {string} requestTerm
-	 *         Promise may not be rejected.
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {string[]} return.done.suggestions
+	 * @return {string} return.done.requestTerm
+	 * @return {Function} return.fail
+	 * @return {string} return.fail.message
 	 */
 	_getSuggestionsFromArray: function( term, source ) {
 		var deferred = $.Deferred();

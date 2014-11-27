@@ -49,12 +49,12 @@
 	 *     } );
 	 *
 	 * @param {jQuery.ui.inputextender} instance
-	 * @param {jQuery.Promise} [hideControl] If given, then the "hide" action will only be done
-	 *        after the promise got resolved. If the promise gets rejected, then the hide action
-	 *        will never be performed.
+	 * @param {Object} [hideControl] jQuery.Promise. If given, then the "hide" action will only be
+	 *        done after the promise got resolved. If the promise gets rejected, then the hide
+	 *        action will never be performed.
 	 * @param {Object} callbacks
-	 * @return {jQuery.Promise} Resolved after final hiding is done. Can be rejected in case a
-	 *         hideControl has been injected and gets rejected.
+	 * @return {Object} jQuery.Promise Resolved after final hiding is done. Can be rejected in case
+	 *         a hideControl has been injected and gets rejected.
 	 */
 	function showAndHideExtensionAgain( instance, hideControl, callbacks ) {
 		var deferred = $.Deferred();
@@ -239,7 +239,7 @@
 	 *
 	 * @param assert
 	 * @param inactiveExtenders
-	 * @return {jQuery.Promise}
+	 * @return {Object} jQuery.Promise
 	 */
 	function testGetInstancesWithVisibleExtensions(
 		assert, inactiveExtenders, /* private */ activeExtenders
