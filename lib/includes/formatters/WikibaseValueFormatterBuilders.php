@@ -229,6 +229,22 @@ class WikibaseValueFormatterBuilders {
 	}
 
 	/**
+	 * @return array DataType builder specs
+	 */
+	public function getIdFormatterBuildersForFormats() {
+		$buildIdFormatterForFormat = array( $this, 'buildIdFormatterForFormat' );
+
+		$types = array(
+			SnakFormatter::FORMAT_WIKI => $buildIdFormatterForFormat,
+			SnakFormatter::FORMAT_PLAIN => $buildIdFormatterForFormat,
+			SnakFormatter::FORMAT_HTML => $buildIdFormatterForFormat,
+			SnakFormatter::FORMAT_HTML_WIDGET => $buildIdFormatterForFormat,
+		);
+
+		return $types;
+	}
+
+	/**
 	 * Initializes the options keys ValueFormatter::OPT_LANG and 'languages' if
 	 * they are not yet set.
 	 *
@@ -297,6 +313,21 @@ class WikibaseValueFormatterBuilders {
 		}
 
 		return new DispatchingValueFormatter( $formatters );
+	}
+
+	/**
+	 * Returns an EntityIdFormatter for the given format.
+	 *
+	 * @param OutputFormatValueFormatterFactory $factory (unused)
+	 * @param string $format
+	 * @param FormatterOptions $options
+	 *
+	 * @throws InvalidArgumentException
+	 * @return EntityIdFormatter
+	 */
+	public function buildIdValueFormatterForFormat( OutputFormatValueFormatterFactory $factory, $format, FormatterOptions $options ) {
+
+		return !!!!!!!!!TODO!!!!!!!!!!!!;
 	}
 
 	/**
