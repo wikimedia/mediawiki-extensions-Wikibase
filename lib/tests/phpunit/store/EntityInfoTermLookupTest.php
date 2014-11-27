@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 
 /**
@@ -119,7 +120,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 			),
 		);
 
-		return $entityInfo;
+		return new EntityInfo( $entityInfo );
 	}
 
 }
