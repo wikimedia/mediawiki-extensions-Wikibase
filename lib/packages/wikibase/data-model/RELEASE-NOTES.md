@@ -2,7 +2,8 @@
 
 ## Version 2.5.0 (dev)
 
-* 
+* Added `TermList::getWithLanguages`
+* Added `AliasGroupList::getWithLanguages`
 
 ## Version 2.4.1 (2014-11-26)
 
