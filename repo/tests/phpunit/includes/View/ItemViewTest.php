@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\ItemView
+ * @covers Wikibase\Repo\View\ItemView
  *
  * @group Wikibase
  * @group WikibaseItemView
@@ -22,7 +22,7 @@ use Wikibase\DataModel\Statement\Statement;
 class ItemViewTest extends EntityViewTest {
 
 	protected function getEntityViewClass() {
-		return 'Wikibase\ItemView';
+		return 'Wikibase\Repo\View\ItemView';
 	}
 
 	/**

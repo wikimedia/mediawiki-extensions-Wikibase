@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\View;
 
 use DataTypes\DataType;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\ClaimsView;

@@ -38,8 +38,8 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function newEntityViewProvider() {
 		return array(
-			array( 'Wikibase\ItemView', 'item' ),
-			array( 'Wikibase\PropertyView', 'property' )
+			array( 'Wikibase\Repo\View\ItemView', 'item' ),
+			array( 'Wikibase\Repo\View\PropertyView', 'property' )
 		);
 	}
 

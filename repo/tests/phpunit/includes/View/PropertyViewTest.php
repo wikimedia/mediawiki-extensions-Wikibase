@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\PropertyView
+ * @covers Wikibase\Repo\View\PropertyView
  *
  * @group Wikibase
  * @group WikibasePropertyView
@@ -23,7 +23,7 @@ use Wikibase\DataModel\Statement\Statement;
 class PropertyViewTest extends EntityViewTest {
 
 	protected function getEntityViewClass() {
-		return 'Wikibase\PropertyView';
+		return 'Wikibase\Repo\View\PropertyView';
 	}
 
 	/**
