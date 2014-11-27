@@ -7,6 +7,7 @@ use ParserOptions;
 use TestUser;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Repo\View\EntityViewFactory;
@@ -24,7 +25,8 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		$entityViewFactory = $this->getEntityViewFactory();
 
 		$languageFallback = new LanguageFallbackChain( array() );
-		$labelLookup = new LanguageLabelLookup( new EntityInfoTermLookup( array() ), 'de' );
+		$termLookup = new EntityInfoTermLookup( new EntityInfo( array() ) );
+		$labelLookup = new LanguageLabelLookup( $termLookup, 'de' );
 
 		$entityView = $entityViewFactory->newEntityView(
 			$entityType,
