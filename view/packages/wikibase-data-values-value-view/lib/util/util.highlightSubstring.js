@@ -88,6 +88,7 @@ util.highlightSubstring = function( substring, string, options ) {
 
 /**
  * Escapes a string to be used in a regular expression.
+ * @ignore
  *
  * @param {string} value
  * @return {string}

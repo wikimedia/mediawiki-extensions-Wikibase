@@ -101,6 +101,12 @@
 		}
 	} );
 
+	/**
+	 * @ignore
+	 *
+	 * @param {Function} getMsg
+	 * @return {Object}
+	 */
 	function getLanguagesMaps( getMsg ) {
 		var languagesMap = {};
 		var inverseLanguagesMap = {};

@@ -5,12 +5,14 @@
  * Whether page is rendered in rtl context. This, however, depends on the css class "rtl"
  * being assigned to the body element.
  * @property {boolean} [isRtl=false]
+ * @ignore
  */
 var isRtl = false;
 
 /**
  * Whether the user client supports CSS3 transformation.
  * @property {boolean} [browserSupportsTransform=false]
+ * @ignore
  */
 var browserSupportsTransform = false;
 

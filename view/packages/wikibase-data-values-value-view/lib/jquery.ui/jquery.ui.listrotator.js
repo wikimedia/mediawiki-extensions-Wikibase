@@ -4,12 +4,14 @@
 /**
  * Whether loaded in MediaWiki context.
  * @property {boolean}
+ * @ignore
  */
 var IS_MW_CONTEXT = ( typeof mediaWiki !== 'undefined' && mediaWiki.msg );
 
 /**
  * Whether actual listrotator resource loader module is loaded.
  * @property {boolean}
+ * @ignore
  */
 var IS_MODULE_LOADED = (
 	IS_MW_CONTEXT
@@ -19,6 +21,7 @@ var IS_MODULE_LOADED = (
 /**
  * Returns a message from the MediaWiki context if the listrotator module has been loaded.
  * If it has not been loaded, the corresponding string defined in the options will be returned.
+ * @ignore
  *
  * @param {String} msgKey
  * @param {String} string
@@ -31,6 +34,7 @@ function mwMsgOrString( msgKey, string ) {
 /**
  * Measures the maximum width of a container according to a list of strings. The width is
  * determined by the widest string.
+ * @ignore
  *
  * @param {jQuery} $container
  * @param {string[]} strings

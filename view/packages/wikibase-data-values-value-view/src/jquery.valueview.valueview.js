@@ -7,6 +7,7 @@ var PARENT = $.Widget;
  * Helper for defining a valueview member function which will just call a valueview's Expert's
  * member function and return the value received from that function. If the valueview does not have
  * an expert currently, nothing will be done.
+ * @ignore
  *
  * @param {string} fnName Name of the function in jQuery.valueview.Expert
  * @return {Function}

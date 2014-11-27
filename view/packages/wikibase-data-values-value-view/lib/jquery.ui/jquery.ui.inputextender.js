@@ -5,6 +5,7 @@
  * Caches whether the widget is used in a rtl context. This, however, depends on using an "rtl"
  * class on the document body like it is done in MediaWiki.
  * @property {boolean} [IS_RTL=false]
+ * @ignore
  */
 var IS_RTL = false;
 
@@ -16,6 +17,7 @@ $( document ).ready( function() {
  * Collection for keeping track which input extender widgets have their extension shown at the
  * moment.
  * @property {jQuery.ui.inputextender} [inputExtendersWithVisibleExtension=Object]
+ * @ignore
  */
 var inputExtendersWithVisibleExtension = ( function() {
 	var inputExtenders = [];

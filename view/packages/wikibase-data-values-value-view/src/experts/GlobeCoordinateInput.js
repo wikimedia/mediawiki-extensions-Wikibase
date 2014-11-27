@@ -114,6 +114,7 @@
 
 	/**
 	 * Rounds a given precision for being able to use it as internal "constant".
+	 * @ignore
 	 *
 	 * @param {number} precision
 	 * @return {number}
@@ -124,6 +125,7 @@
 
 	/**
 	 * Returns the original precision level for an unrounded precision.
+	 * @ignore
 	 *
 	 * @param {number} precision
 	 * @return {number|null}
@@ -142,6 +144,11 @@
 		return actualPrecision;
 	}
 
+	/**
+	 * @ignore
+	 *
+	 * @return {Object[]}
+	 */
 	function getPrecisionValues() {
 		var precisionValues = [];
 		$.each( PRECISIONS, function( i, precision ) {

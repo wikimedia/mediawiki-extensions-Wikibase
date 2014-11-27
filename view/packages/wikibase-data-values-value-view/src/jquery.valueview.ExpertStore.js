@@ -116,6 +116,8 @@ jQuery.valueview = jQuery.valueview || {};
 	} );
 
 	/**
+	 * @ignore
+	 *
 	 * @param {Function} Expert
 	 * @throws {Error} if the provided argument is not a jQuery.valueview.Expert constructor.
 	 */

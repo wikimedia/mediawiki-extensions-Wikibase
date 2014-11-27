@@ -158,6 +158,8 @@
 	} );
 
 	/**
+	 * @ignore
+	 *
 	 * @return {Object[]} [{ value: <{number}>, label: <{string}>}, ...]
 	 */
 	function getPrecisionValues() {
@@ -172,8 +174,10 @@
 	}
 
 	/**
+	 * @ignore
+	 *
 	 * @param {util.MessageProvider} messageProvider
-	 * @return @return {Object[]} [{ value: <{string}>, label: <{string}>}, ...]
+	 * @return {Object[]} [{ value: <{string}>, label: <{string}>}, ...]
 	 */
 	function getCalendarValues( messageProvider ) {
 		var calendarValues = [];
@@ -187,6 +191,8 @@
 	}
 
 	/**
+	 * @ignore
+	 *
 	 * @param {string} calendarname
 	 * @return {time.Time}
 	 */
