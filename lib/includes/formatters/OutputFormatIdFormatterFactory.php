@@ -6,13 +6,13 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
 /**
- * OutputFormatValueFormatterFactory is a service
- * for obtaining a ValueFormatter for a desired output format.
+ * OutputFormatIdFormatterFactory is a service
+ * for obtaining a EntityIdFormatter for a desired output format.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class OutputFormatValueFormatterFactory {
+class OutputFormatIdFormatterFactory {
 
 	/**
 	 * @var callable[]
@@ -21,8 +21,8 @@ class OutputFormatValueFormatterFactory {
 
 	/**
 	 * @param callable[] $builders maps formats to callable builders. Each builder must accept
-	 *        three parameters, this OutputFormatValueFormatterFactory, a format ID, and an FormatOptions object,
-	 *        and return an instance of ValueFormatter suitable for the given output format.
+	 *        three parameters, this factory, the format, and an FormatOptions object,
+	 *        and return an instance of EntityIdFormatter suitable for the given output format.
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -41,7 +41,7 @@ class OutputFormatValueFormatterFactory {
 	}
 
 	/**
-	 * Returns an ValueFormatter for rendering DataValues in the desired format
+	 * Returns an EntityIdFormatter for rendering DataValues in the desired format
 	 * using the given options.
 	 *
 	 * @param string $format Use the SnakFormatter::FORMAT_XXX constants.
@@ -49,9 +49,9 @@ class OutputFormatValueFormatterFactory {
 	 *
 	 * @throws RuntimeException
 	 * @throws InvalidArgumentException
-	 * @return ValueFormatter
+	 * @return EntityIdFormatter
 	 */
-	public function getValueFormatter( $format, FormatterOptions $options ) {
+	public function getIdFormatter( $format, FormatterOptions $options ) {
 		if ( !array_key_exists( $format, $this->builders ) ) {
 			throw new InvalidArgumentException( "Unsupported format: $format" );
 		}
@@ -61,8 +61,8 @@ class OutputFormatValueFormatterFactory {
 		$instance = call_user_func( $builder, $this, $format, $options );
 
 
-		if( !( $instance instanceof ValueFormatter ) ) {
-			throw new RuntimeException( get_class( $instance ) . ' does not implement ValueFormatter' );
+		if( !( $instance instanceof EntityIdFormatter ) ) {
+			throw new RuntimeException( get_class( $instance ) . ' does not implement EntityIdFormatter' );
 		}
 
 		return $instance;
