@@ -240,7 +240,7 @@
 	 *
 	 * @param assert
 	 * @param inactiveExtenders
-	 * @returns {jQuery.Promise}
+	 * @return {jQuery.Promise}
 	 */
 	function testGetInstancesWithVisibleExtensions(
 		assert, inactiveExtenders, /* private */ activeExtenders

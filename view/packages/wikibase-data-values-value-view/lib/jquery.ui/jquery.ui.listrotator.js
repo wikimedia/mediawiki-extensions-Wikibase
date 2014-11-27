@@ -34,7 +34,7 @@ function mwMsgOrString( msgKey, string ) {
  *
  * @param {jQuery} $container
  * @param {string[]} strings
- * @returns {number[]} The container's maximum width in pixel
+ * @return {number[]} The container's maximum width in pixel
  */
 function measureMaximumStringWidths( $container, strings ) {
 	var widths = [];

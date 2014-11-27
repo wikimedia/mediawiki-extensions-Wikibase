@@ -88,7 +88,7 @@ util.Notifier = ( function() {
 		 * @since 0.1
 		 *
 		 * @param {string} notification
-		 * @returns boolean
+		 * @return {boolean}
 		 */
 		this.hasListenerFor = function( notification ) {
 			return !!notificationMap[ notification ];
@@ -100,7 +100,7 @@ util.Notifier = ( function() {
 		 *
 		 * @since 0.1
 		 *
-		 * @returns string|null
+		 * @return {string|null}
 		 */
 		this.current = function() {
 			var current = currentNotifications[ currentNotifications.length - 1 ];

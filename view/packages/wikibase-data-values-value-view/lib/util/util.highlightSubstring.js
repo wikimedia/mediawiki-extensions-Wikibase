@@ -90,7 +90,7 @@ util.highlightSubstring = function( substring, string, options ) {
  * Escapes a string to be used in a regular expression.
  *
  * @param {string} value
- * @returns {string}
+ * @return {string}
  */
 function escapeRegex( value ) {
 	return value.replace( /[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&' );

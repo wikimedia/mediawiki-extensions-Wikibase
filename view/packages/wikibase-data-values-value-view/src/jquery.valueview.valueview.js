@@ -458,7 +458,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Whether there is currently any value in the view. Basically, whether value() returns null.
 	 * @since 0.1
 	 *
-	 * @returns {boolean}
+	 * @return {boolean}
 	 */
 	isEmpty: function() {
 		return this.value() === null;

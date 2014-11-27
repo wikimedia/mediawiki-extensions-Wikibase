@@ -87,7 +87,7 @@ jQuery.valueview = jQuery.valueview || {};
 		 * @since 0.1
 		 *
 		 * @param key
-		 * @returns {*}
+		 * @return {*}
 		 */
 		option: function( key ) {
 			return this._view.option( key );
