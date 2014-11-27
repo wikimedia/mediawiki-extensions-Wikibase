@@ -4,8 +4,10 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\View\ItemView;
 
 /**
  * @covers Wikibase\Repo\View\ItemView
@@ -21,18 +23,17 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class ItemViewTest extends EntityViewTest {
 
-	protected function getEntityViewClass() {
-		return 'Wikibase\Repo\View\ItemView';
-	}
-
-	/**
-	 * @param EntityId $id
-	 * @param Statement[] $statements
-	 *
-	 * @return Entity
-	 */
 	protected function makeEntity( EntityId $id, array $statements = array() ) {
-		return $this->makeItem( $id, $statements );
+		$item = Item::newEmpty();
+		$item->setId( $id );
+		$item->setLabel( 'en', "label:$id" );
+		$item->setDescription( 'en', "description:$id" );
+
+		foreach ( $statements as $statement ) {
+			$item->addClaim( $statement );
+		}
+
+		return $item;
 	}
 
 	/**
@@ -46,4 +47,26 @@ class ItemViewTest extends EntityViewTest {
 		return new ItemId( "Q$n");
 	}
 
+	public function provideTestGetHtml() {
+		$itemView = new ItemView(
+			$this->getMockBuilder( 'Wikibase\Repo\View\FingerprintView' )
+				->disableOriginalConstructor()
+				->getMock(),
+			$this->getMockBuilder( 'Wikibase\Repo\View\ClaimsView' )
+				->disableOriginalConstructor()
+				->getMock(),
+			$this->getMock( 'Language' ),
+			array()
+		);
+
+		return array(
+			array(
+				$itemView,
+				$this->newEntityRevisionForStatements( array() ),
+				array(),
+				true,
+				'/wb-item/'
+			)
+		);
+	}
 }
