@@ -220,7 +220,8 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * @inheritdoc
-	 * @triggers {Error} when trying to set an option that cannot be set after initialization.
+	 *
+	 * @throws {Error} when trying to set an option that cannot be set after initialization.
 	 */
 	_setOption: function( key, value ) {
 		switch( key ) {
@@ -714,7 +715,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *           ignored.
 	 *
 	 * @throws {Error} if the parser result is neither a DataValue instance nor null.
-	 * @triggers afterparse
 	 */
 	_parseValue: function() {
 		var self = this,
@@ -817,8 +817,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *         Rejected parameters:
 	 *         - {string|undefined} HTML error message or "undefined" if the result shall be
 	 *           ignored.
-	 *
-	 * @triggers afterformat
 	 */
 	_formatValue: function( dataValue ) {
 		var self = this,
