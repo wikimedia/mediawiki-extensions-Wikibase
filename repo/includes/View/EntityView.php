@@ -45,6 +45,11 @@ abstract class EntityView {
 	 */
 	protected $textInjector;
 
+	/**
+	 * @param FingerprintView $fingerprintView
+	 * @param ClaimsView $claimsView
+	 * @param Language $language
+	 */
 	public function __construct(
 		FingerprintView $fingerprintView,
 		ClaimsView $claimsView,

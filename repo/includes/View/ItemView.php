@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\View;
 
 use InvalidArgumentException;
+use Language;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
@@ -18,6 +19,30 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Werner
  */
 class ItemView extends EntityView {
+
+	/**
+	 * @var string[]
+	 */
+	private $siteLinkGroups;
+
+	/**
+	 * @see EntityView::__construct
+	 *
+	 * @param FingerprintView $fingerprintView
+	 * @param ClaimsView $claimsView
+	 * @param Language $language
+	 * @param string[] $siteLinkGroups
+	 */
+	public function __construct(
+		FingerprintView $fingerprintView,
+		ClaimsView $claimsView,
+		Language $language,
+		array $siteLinkGroups
+	) {
+		parent::__construct( $fingerprintView, $claimsView, $language );
+
+		$this->siteLinkGroups = $siteLinkGroups;
+	}
 
 	/**
 	 * @see EntityView::getMainHtml
@@ -54,8 +79,7 @@ class ItemView extends EntityView {
 	protected function getTocSections() {
 		$array = parent::getTocSections();
 		$array['claims'] = 'wikibase-statements';
-		$groups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'siteLinkGroups' );
-		foreach ( $groups as $group ) {
+		foreach ( $this->siteLinkGroups as $group ) {
 			$id = htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES );
 			$array[$id] = 'wikibase-sitelinks-' . $group;
 		}
@@ -74,7 +98,6 @@ class ItemView extends EntityView {
 	 */
 	protected function getHtmlForSiteLinks( Item $item, $editable = true ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$groups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
 
 		// FIXME: Inject this
 		$siteLinksView = new SiteLinksView(
@@ -86,7 +109,12 @@ class ItemView extends EntityView {
 
 		$itemId = $item->getId();
 
-		return $siteLinksView->getHtml( $item->getSiteLinks(), $itemId, $groups, $editable );
+		return $siteLinksView->getHtml(
+			$item->getSiteLinks(),
+			$itemId,
+			$this->siteLinkGroups,
+			$editable
+		);
 	}
 
 }

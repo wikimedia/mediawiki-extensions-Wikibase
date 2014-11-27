@@ -58,7 +58,8 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new EntityViewFactory(
 			$this->getEntityTitleLookup(),
 			new MockRepository(),
-			$this->getSnakFormatterFactory()
+			$this->getSnakFormatterFactory(),
+			array()
 		);
 	}
 
