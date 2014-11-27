@@ -4,7 +4,7 @@
 	/**
 	 * An ExpertExtender module for a jQuery.ui.listrotator.
 	 * @class jQuery.valueview.ExpertExtender.Listrotator
-	 * @license GNU GPL v2+
+	 * @licence GNU GPL v2+
 	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *
 	 * @constructor
