@@ -19,7 +19,7 @@ class MediaWikiNumberLocalizer implements NumberLocalizer {
 	/**
 	 * @var Language
 	 */
-	protected $language;
+	private $language;
 
 	/**
 	 * @param Language $language
@@ -29,17 +29,16 @@ class MediaWikiNumberLocalizer implements NumberLocalizer {
 	}
 
 	/**
-	 * @see Localizer::localize()
+	 * @see NumberLocalizer::localizeNumber
 	 *
-	 * @since 0.5
+	 * @param string|int|float $number
 	 *
-	 * @param string $number a numeric string
-	 *
-	 * @return string
 	 * @throws InvalidArgumentException
+	 * @return string
 	 */
 	public function localizeNumber( $number ) {
-		$localiezdNumber = $this->language->formatNum( $number );
-		return $localiezdNumber;
+		$localizedNumber = $this->language->formatNum( $number );
+		return $localizedNumber;
 	}
+
 }
