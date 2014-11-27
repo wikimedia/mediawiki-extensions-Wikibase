@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use TestUser;
 use Title;
-use Wikibase\ClaimHtmlGenerator;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -17,6 +16,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\View\ClaimHtmlGenerator;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\WikibaseRepo;
@@ -160,7 +160,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	 * @return ClaimHtmlGenerator
 	 */
 	private function getClaimHtmlGeneratorMock() {
-		$claimHtmlGenerator = $this->getMockBuilder( 'Wikibase\ClaimHtmlGenerator' )
+		$claimHtmlGenerator = $this->getMockBuilder( 'Wikibase\Repo\View\ClaimHtmlGenerator' )
 			->disableOriginalConstructor()
 			->getMock();
 

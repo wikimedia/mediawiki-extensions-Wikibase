@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\View;
 
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
@@ -9,7 +9,6 @@ use Wikibase\DataModel\Snak\Snaks;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
  * Base class for generating the HTML for a Claim in Entity View.

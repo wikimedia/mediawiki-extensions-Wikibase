@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Title;
-use Wikibase\ClaimHtmlGenerator;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
@@ -16,6 +15,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\View\ClaimHtmlGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**

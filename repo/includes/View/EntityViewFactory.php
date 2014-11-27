@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\ClaimHtmlGenerator;
 use Wikibase\EntityView;
 use Wikibase\ItemView;
 use Wikibase\LanguageFallbackChain;

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\View;
 
 use Linker;
-use Wikibase\ClaimHtmlGenerator;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
