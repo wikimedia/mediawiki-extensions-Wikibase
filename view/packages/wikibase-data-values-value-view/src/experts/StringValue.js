@@ -83,7 +83,6 @@
 
 		/**
 		 * Will resize the input box to fit its current content.
-		 * @since 0.1
 		 */
 		_resizeInput: function() {
 			this.$input.inputautoexpand( {

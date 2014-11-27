@@ -7,7 +7,6 @@ jQuery.NativeEventHandler.test.testDefinition = ( function ( $, QUnit ) {
 
 	/**
 	 * Test definition for running wb.tests.nativeEventHandlerTest with.
-	 *
 	 * @since 0.1
 	 *
 	 * @constructor

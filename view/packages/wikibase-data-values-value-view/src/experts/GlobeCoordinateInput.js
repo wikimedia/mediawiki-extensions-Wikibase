@@ -115,8 +115,6 @@
 	/**
 	 * Rounds a given precision for being able to use it as internal "constant".
 	 *
-	 * @since 0.1
-	 *
 	 * @param {number} precision
 	 * @return {number}
 	 */
@@ -126,8 +124,6 @@
 
 	/**
 	 * Returns the original precision level for an unrounded precision.
-	 *
-	 * @since 0.1
 	 *
 	 * @param {number} precision
 	 * @return {number|null}

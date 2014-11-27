@@ -27,6 +27,7 @@ util.Notifier = ( function() {
 	 *     notifier.notify( 'whatever' ); // Nothing happens, no notification registered for this one.
 	 *
 	 * @class util.Notifier
+	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
@@ -50,8 +51,6 @@ util.Notifier = ( function() {
 		/**
 		 * Will trigger a callback related to a given notification string if there is a callback
 		 * function defined for that string.
-		 *
-		 * @since 0.1
 		 *
 		 * @param {string} notification
 		 * @param [args=[]] array Optional arguments that will be provided to the callback.
@@ -85,8 +84,6 @@ util.Notifier = ( function() {
 		 * Returns whether the Notifier actually has a listener for a certain notification topic.
 		 * false if no callback is registered for the notification subject.
 		 *
-		 * @since 0.1
-		 *
 		 * @param {string} notification
 		 * @return {boolean}
 		 */
@@ -97,8 +94,6 @@ util.Notifier = ( function() {
 		/**
 		 * Returns what is currently being notified. Will only return a value when used within a
 		 * callback because only within callbacks things are being notified.
-		 *
-		 * @since 0.1
 		 *
 		 * @return {string|null}
 		 */

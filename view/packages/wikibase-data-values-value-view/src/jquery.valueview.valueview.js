@@ -243,8 +243,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * When calling this, the view will transform into a form with input fields or advanced widgets
 	 * for editing the related data value.
-	 *
-	 * @since 0.1
 	 */
 	startEditing: function() {
 		var self = this;
@@ -270,8 +268,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * different since the input interface will not be visible anymore.
 	 * By default the current value will be adopted if it is valid. If not valid or if the first
 	 * parameter is false, the value from before the edit mode will be restored.
-	 *
-	 * @since 0.1
 	 *
 	 * @param {Boolean} [dropValue] If true, the value from before edit mode has been started will
 	 *        be reinstated. false by default. Consider using cancelEditing() instead.
@@ -306,7 +302,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * short-cut for stopEditing( false ). Closes the edit view and restores the value from before
 	 * the edit mode has been started.
-	 * @since 0.1
 	 */
 	cancelEditing: function() {
 		return this.stopEditing( true );
@@ -314,7 +309,6 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Returns whether the view is in its editable state currently.
-	 * @since 0.1
 	 *
 	 * @return Boolean
 	 */
@@ -325,7 +319,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Returns the value from before the edit mode has been started.
 	 * If its not in edit mode, the current value will be returned.
-	 * @since 0.1
 	 */
 	initialValue: function() {
 		if( !this.isInEditMode() ) {
@@ -342,8 +335,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * will trigger validation of the value.
 	 *
 	 * If null is given or returned, this means that the view is or should be empty.
-	 *
-	 * @since 0.1
 	 *
 	 * @param {dv.DataValue|null} [value]
 	 * @return {dv.DataValue|null|undefined} null if no value is set currently
@@ -386,7 +377,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Sets the value internally and triggers the validation process on the new value, will also
 	 * make sure that the new value will be displayed.
-	 * @since 0.1
 	 *
 	 * @param {dv.DataValue|null} value
 	 */
@@ -433,7 +423,6 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Returns the most current formatted value featured by this valueview.
-	 * @since 0.1
 	 *
 	 * @return {string|jQuery|null}
 	 */
@@ -456,7 +445,6 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Whether there is currently any value in the view. Basically, whether value() returns null.
-	 * @since 0.1
 	 *
 	 * @return {boolean}
 	 */
@@ -467,7 +455,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Returns the valueview's expert object required for handling the desired value type.
 	 * If there is no expert available for handling that value type, then null will be returned.
-	 * @since 0.1
 	 *
 	 * @return jQuery.valueview.Expert|null
 	 */
@@ -499,7 +486,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Will update the expert responsible for handling the value type of the current value. If there
 	 * is no value set currently (empty value), the expert will be chosen based on the "dataTypeId"
 	 * or "dataValueType" option of the valueview widget.
-	 * @since 0.1
 	 */
 	_updateExpert: function() {
 		if(
@@ -535,7 +521,6 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Will render the valueview's current state (does consider edit mode, current value, etc.).
-	 * @since 0.1
 	 *
 	 * @return {jQuery.Promise}
 	 *         No resolved parameters.
@@ -618,8 +603,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Since the visual state should be managed completely by the draw method, toggling the css
 	 * classes is done in draw() by issuing a call to $.Widget.option().
 	 * @inheritdoc
-	 *
-	 * @since 0.1
 	 */
 	disable: function() {
 		this._setDisabled( true );
@@ -630,8 +613,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Since the visual state should be managed completely by the draw method, toggling the css
 	 * classes is done in draw() by issuing a call to $.Widget.option().
 	 * @inheritdoc
-	 *
-	 * @since 0.1
 	 */
 	enable: function() {
 		this._setDisabled( false );
@@ -639,7 +620,6 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Returns whether the valueview is disabled.
-	 * @since 0.1
 	 *
 	 * @return {boolean}
 	 */
@@ -649,15 +629,11 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Focuses the widget.
-	 *
-	 * @since 0.1
 	 */
 	focus: expertProxy( 'focus' ),
 
 	/**
 	 * Removes focus from the widget.
-	 *
-	 * @since 0.1
 	 */
 	blur: expertProxy( 'blur' ),
 
@@ -675,8 +651,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Will take the current raw value of the valueview's expert and parse and format it
 	 * using the valueParserProvider and valueFormatterProvider.
-	 *
-	 * @since 0.1
 	 */
 	_updateValue: function() {
 		var self = this;
@@ -937,8 +911,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * passed if information about the view should be revealed to some function or constructor
 	 * without making the whole view object available.
 	 *
-	 * @since 0.1
-	 *
 	 * @return jQuery.valueview.ViewState
 	 */
 	viewState: function() {
@@ -948,8 +920,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Returns an object which allows to notify the view about certain events. This is required in
 	 * the view's expert and should only be used with caution if used from other places.
-	 *
-	 * @since 0.1
 	 *
 	 * @return {util.Notifier}
 	 */

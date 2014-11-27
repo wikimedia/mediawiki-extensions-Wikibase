@@ -168,7 +168,6 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * Will be called initially for new expert instances.
-		 *
 		 * @since 0.5
 		 */
 		init: function() {
@@ -188,8 +187,6 @@ jQuery.valueview = jQuery.valueview || {};
 		 * not the Expert's responsibility to be able to serve a plain text representation of the
 		 * value. If the value should be represented as plain text after the expert's construction,
 		 * let the responsible controller use a value formatter for that.
-		 *
-		 * @since 0.1
 		 */
 		destroy: function() {
 			if( !this.$viewPort ) {
@@ -212,8 +209,6 @@ jQuery.valueview = jQuery.valueview || {};
 		 *
 		 * TODO: This should actually move out of here together with all the advanced input features
 		 *  of certain experts (time/coordinate).
-		 *
-		 * @since 0.1
 		 */
 		valueCharacteristics: function() {
 			return {};
@@ -224,8 +219,6 @@ jQuery.valueview = jQuery.valueview || {};
 		 * The expert reflects that state, so everything that is true for the related view, is also
 		 * true for the expert (e.g. whether it is in edit mode or disabled).
 		 *
-		 * @since 0.1
-		 *
 		 * @return jQuery.valueview.ViewState
 		 */
 		viewState: function() {
@@ -234,8 +227,6 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * Will return the value as a string.
-		 *
-		 * @since 0.1
 		 * @abstract
 		 *
 		 * @return {string} Returns the current raw value.
@@ -244,8 +235,6 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * Will draw the user interface components for the user to edit the value.
-		 *
-		 * @since 0.1
 		 *
 		 * @return {Object} jQuery.Promise
 		 *         No resolved parameters.
@@ -257,15 +246,11 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * Will set the focus if there is some focusable input elements.
-		 *
-		 * @since 0.1
 		 */
 		focus: function() {},
 
 		/**
 		 * Makes sure that the focus will be removed from any focusable input elements.
-		 *
-		 * @since 0.1
 		 */
 		blur: function() {}
 	};

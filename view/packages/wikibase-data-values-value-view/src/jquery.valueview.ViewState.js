@@ -35,8 +35,6 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * @see jQuery.valueview.isInEditMode
-		 *
-		 * @since 0.1
 		 */
 		isInEditMode: function() {
 			return this._view.isInEditMode();
@@ -44,8 +42,6 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * @see jQuery.valueview.isDisabled
-		 *
-		 * @since 0.1
 		 */
 		isDisabled: function() {
 			return this._view.isDisabled();
@@ -54,8 +50,6 @@ jQuery.valueview = jQuery.valueview || {};
 		/**
 		 * Returns the related view's current value. Does not allow to change the value.
 		 * @see jQuery.valueview.value
-		 *
-		 * @since 0.1
 		 */
 		value: function() {
 			return this._view.value();
@@ -64,7 +58,6 @@ jQuery.valueview = jQuery.valueview || {};
 		/**
 		 * Returns the related valueview's current formatted value.
 		 * @see jQuery.valueview.getFormattedValue
-		 * @since 0.1
 		 */
 		getFormattedValue: function() {
 			return this._view.getFormattedValue();
@@ -83,8 +76,6 @@ jQuery.valueview = jQuery.valueview || {};
 		 * Returns the options or a specific option of the related view. Does not allow to set any
 		 * option.
 		 * @see jQuery.Widget.option
-		 *
-		 * @since 0.1
 		 *
 		 * @param key
 		 * @return {*}

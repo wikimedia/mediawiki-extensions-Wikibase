@@ -5,10 +5,10 @@ jQuery.valueview = jQuery.valueview || {};
 
 	/**
 	 * Store managing jQuery.valueview.Expert instances.
-	 * @licence GNU GPL v2+
-	 * @author H. Snater < mediawiki@snater.com >
 	 * @class jQuery.valueview.ExpertStore
 	 * @since 0.1
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
 	 *
@@ -42,7 +42,6 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * Registers a valueview expert for displaying data values suitable for a certain data type.
-		 * @since 0.1
 		 *
 		 * @param {Function} Expert
 		 * @param {string} dataTypeId
@@ -66,7 +65,6 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * Registers a valueview expert for displaying values of a certain data value type.
-		 * @since 0.1
 		 *
 		 * @param {Function} Expert
 		 * @param {string} dataValueType
