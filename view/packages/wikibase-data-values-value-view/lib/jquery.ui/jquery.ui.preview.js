@@ -24,6 +24,7 @@ $.widget( 'ui.preview', {
 
 	/**
 	 * @see jQuery.Widget.options
+	 * @readonly
 	 */
 	options: {
 		$input: null,
@@ -37,11 +38,13 @@ $.widget( 'ui.preview', {
 	/**
 	 * The node of the previewed value.
 	 * @property {jQuery}
+	 * @readonly
 	 */
 	$value: null,
 
 	/**
 	 * @see jQuery.Widget._create
+	 * @protected
 	 */
 	_create: function() {
 		if( this.options.messageProvider ) {
@@ -109,6 +112,7 @@ $.widget( 'ui.preview', {
 	/**
 	 * Either retrieves a message from the message provider (if set) or returns the default
 	 * message.
+	 * @protected
 	 *
 	 * @param {string} key
 	 * @return {string|null}

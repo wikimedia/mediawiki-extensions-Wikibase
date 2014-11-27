@@ -77,6 +77,7 @@
 
 		/**
 		 * @inheritdoc
+		 * @protected
 		 */
 		_options: {
 			messages: {

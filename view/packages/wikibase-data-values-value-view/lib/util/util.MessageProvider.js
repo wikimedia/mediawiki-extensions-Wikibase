@@ -31,7 +31,8 @@ util.MessageProvider = ( function() {
 		constructor: MessageProvider,
 
 		/**
-		 * @property {Object}
+		 * @property {Object} [_options={}]
+		 * @private
 		 */
 		_options: null,
 

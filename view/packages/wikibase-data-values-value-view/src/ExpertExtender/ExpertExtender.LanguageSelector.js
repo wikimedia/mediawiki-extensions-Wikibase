@@ -35,15 +35,45 @@
 	$.extend( ExpertExtender.LanguageSelector.prototype, {
 		/**
 		 * @property {util.MessageProvider}
+		 * @private
 		 */
 		_messageProvider: null,
 
+		/**
+		 * @property {Function}
+		 * @private
+		 */
 		_getUpstreamValue: null,
+
+		/**
+		 * @property {Function}
+		 * @private
+		 */
 		_onValueChange: null,
+
+		/**
+		 * @property {Object}
+		 * @private
+		 */
 		_languagesMap: null,
+
+		/**
+		 * @property {Object}
+		 * @private
+		 */
 		_inverseLanguagesMap: null,
+
+		/**
+		 * @property {jQuery}
+		 * @private
+		 * @readonly
+		 */
 		$selector: null,
 
+		/**
+		 * @property {string} [_prefix='valueview-expertextender-languageselector']
+		 * @private
+		 */
 		_prefix: 'valueview-expertextender-languageselector',
 
 		/**

@@ -12,6 +12,7 @@
 $.widget( 'ui.languagesuggester', $.ui.suggester, {
 	/**
 	 * @inheritdoc
+	 * @protected
 	 */
 	_getSuggestionsFromArray: function( term, source ) {
 		var self = this,
@@ -44,6 +45,8 @@ $.widget( 'ui.languagesuggester', $.ui.suggester, {
 	},
 
 	/**
+	 * @protected
+	 *
 	 * @param {string} a
 	 * @param {string} b
 	 * @return {boolean}

@@ -17,6 +17,7 @@
 	vv.experts.EmptyValue = vv.expert( 'EmptyValue', PARENT, {
 		/**
 		 * @inheritdoc
+		 * @protected
 		 */
 		_options: {
 			messages: {
@@ -26,6 +27,7 @@
 
 		/**
 		 * @inheritdoc
+		 * @protected
 		 */
 		_init: function() {
 			this.$viewPort.text(

@@ -101,6 +101,7 @@ var inputExtendersWithVisibleExtension = ( function() {
 $.widget( 'ui.inputextender', {
 	/**
 	 * @see jQuery.Widget.options
+	 * @readonly
 	 */
 	options: {
 		content: [],
@@ -119,28 +120,31 @@ $.widget( 'ui.inputextender', {
 	 * The input extension's node. Will be null until the extension is required for the first
 	 * time.
 	 *
-	 * @private Use extension() instead. extension() will return null if the $extension is not
-	 *          being used. $extension might be destroyed in that case in future versions, so
-	 *          do not rely on it being set all of the time after its first initialization.
+	 * @protected Use extension() instead. extension() will return null if the _$extension is not
+	 *            being used. _$extension might be destroyed in that case in future versions, so
+	 *            do not rely on it being set all of the time after its first initialization.
 	 * @property {jQuery|null}
 	 */
-	$extension: null,
+	_$extension: null,
 
 	/**
 	 * Whether the input extender is in its extended state right now.
 	 * @property {boolean} [_isExtended=false]
+	 * @protected
 	 */
 	_isExtended: false,
 
 	/**
 	 * Whether the input extender is visible
 	 * @property {boolean} [_extensionIsVisible=false]
+	 * @protected
 	 */
 	_extensionIsVisible: false,
 
 	/**
 	 * Caches the timeout when the actual input extender animation should kick in.
 	 * @property {number}
+	 * @protected
 	 */
 	_animationTimeout: null,
 
@@ -148,11 +152,13 @@ $.widget( 'ui.inputextender', {
 	 * Caches the element's offset to determine whether the input extension has to be
 	 * repositioned on draw() calls.
 	 * @property {Object}
+	 * @protected
 	 */
 	_offset: null,
 
 	/**
 	 * @see jQuery.Widget._create
+	 * @protected
 	 */
 	_create: function() {
 		var self = this;
@@ -191,7 +197,7 @@ $.widget( 'ui.inputextender', {
 				event.preventDefault();
 				// When tabbing out of the input element, focus the first focusable element
 				// within the extension.
-				var $focusable = self.$extension.find( ':focusable' );
+				var $focusable = self._$extension.find( ':focusable' );
 				if( $focusable.length ) {
 					$focusable.first().focus();
 					clearTimeout( self._animationTimeout );
@@ -220,7 +226,7 @@ $.widget( 'ui.inputextender', {
 
 				// Hide the extension neither it nor the corresponding input element is
 				// clicked:
-				if( !$target.closest( widget.element.add( widget.$extension ) ).length ) {
+				if( !$target.closest( widget.element.add( widget._$extension ) ).length ) {
 					widget.hideExtension();
 				}
 
@@ -243,11 +249,11 @@ $.widget( 'ui.inputextender', {
 			this.hideExtension();
 		}
 
-		if( this.$extension ) {
+		if( this._$extension ) {
 			// Stop any ongoing extension hiding animation immediately, jump to its end.
-			this.$extension.stop( false, true );
-			this.$extension.remove();
-			this.$extension = null;
+			this._$extension.stop( false, true );
+			this._$extension.remove();
+			this._$extension = null;
 		}
 
 		$.Widget.prototype.destroy.call( this );
@@ -286,7 +292,7 @@ $.widget( 'ui.inputextender', {
 	 * @return {jQuery|null}
 	 */
 	extension: function() {
-		return this.extensionIsVisible() ? this.$extension : null;
+		return this.extensionIsVisible() ? this._$extension : null;
 	},
 
 	/**
@@ -305,7 +311,7 @@ $.widget( 'ui.inputextender', {
 	 * @return {boolean}
 	 */
 	extensionIsVisible: function() {
-		if( !this.$extension ) {
+		if( !this._$extension ) {
 			return false;
 		}
 		return this._extensionIsVisible;
@@ -313,17 +319,24 @@ $.widget( 'ui.inputextender', {
 
 	/**
 	 * Draws the widget.
+	 *
+	 * @param {Function} [callback] Parameter is for private use only.
 	 */
-	draw: function( /* private: */ callback ) {
+	draw: function( callback ) {
 		this.element[ this._isExtended ? 'addClass' : 'removeClass' ](
 			this.widgetBaseClass + '-extended' );
 
 		this._drawExtension( callback );
 	},
 
+	/**
+	 * @protected
+	 *
+	 * @param {Function} [callback]
+	 */
 	_drawExtension: function( callback ) {
 		var extensionIsVisible = this.extensionIsVisible(),
-			$extension = this.$extension;
+			$extension = this._$extension;
 
 		if( !extensionIsVisible && !this._isExtended ) {
 			// Extension not displayed and not supposed to be displayed.
@@ -360,6 +373,11 @@ $.widget( 'ui.inputextender', {
 		}
 	},
 
+	/**
+	 * @protected
+	 *
+	 * @param {Function} callback
+	 */
 	_drawExtensionExpansion: function( callback ) {
 		var self = this;
 		this._extensionIsVisible = true;
@@ -367,11 +385,11 @@ $.widget( 'ui.inputextender', {
 		// When blurring the browser viewport and an re-focusing, Chrome is firing the "focus"
 		// event twice. jQuery fadeIn sets the opacity to 0 for the first fadeIn but does not
 		// pick up the value when triggering fadeIn the second time.
-		if( this.$extension.css( 'opacity' ) === '0' ) {
-			this.$extension.css( 'opacity', '1' );
+		if( this._$extension.css( 'opacity' ) === '0' ) {
+			this._$extension.css( 'opacity', '1' );
 		}
 
-		this.$extension.stop( true ).animateWithEvent(
+		this._$extension.stop( true ).animateWithEvent(
 			'extensionexpansion',
 			'fadeIn',
 			{
@@ -389,11 +407,16 @@ $.widget( 'ui.inputextender', {
 		inputExtendersWithVisibleExtension.add( this );
 	},
 
+	/**
+	 * @protected
+	 *
+	 * @param {Function} [callback]
+	 */
 	_drawExtensionRemoval: function( callback ) {
 		var self = this;
 		this._extensionIsVisible = false;
 
-		this.$extension.stop( true ).animateWithEvent(
+		this._$extension.stop( true ).animateWithEvent(
 			'extensionremoval',
 			'fadeOut',
 			{
@@ -413,6 +436,7 @@ $.widget( 'ui.inputextender', {
 
 	/**
 	 * Repositions the extension.
+	 * @protected
 	 */
 	_reposition: function() {
 		var offset = this.element.offset(),
@@ -446,12 +470,17 @@ $.widget( 'ui.inputextender', {
 
 		// TODO: Repositioning is not optimal in RTL context when hitting the toggler in the
 		//  extension to hide additional input. This seems to be caused by a width
-		//  miscalculation which can be debugged with "console.log( this.$extension.width() )".
-		this.$extension.position( $.extend( {}, this.options.position, positionParams ) );
+		//  miscalculation which can be debugged with "console.log( this._$extension.width() )".
+		this._$extension.position( $.extend( {}, this.options.position, positionParams ) );
 
 		this._offset = offset;
 	},
 
+	/**
+	 * @protected
+	 *
+	 * @return {jQuery}
+	 */
 	_buildExtension: function() {
 		var self = this;
 		var $closeButton = this._buildExtensionCloseButton();
@@ -477,7 +506,7 @@ $.widget( 'ui.inputextender', {
 		.on( 'keydown.' + this.widgetName, function( event ) {
 			// Take care of tabbing out of the extension again:
 			if( event.keyCode === $.ui.keyCode.TAB ) {
-				var $focusable = self.$extension.find( ':focusable' );
+				var $focusable = self._$extension.find( ':focusable' );
 
 				if( $focusable.first().is( event.target ) && event.shiftKey ) {
 					event.preventDefault();
@@ -501,6 +530,11 @@ $.widget( 'ui.inputextender', {
 		return $extension;
 	},
 
+	/**
+	 * @protected
+	 *
+	 * @return {jQuery}
+	 */
 	_buildExtensionCloseButton: function() {
 		var self = this,
 			$closeButton = $( '<div/>' ),
@@ -525,6 +559,9 @@ $.widget( 'ui.inputextender', {
 
 /**
  * Returns all the widget instances with currently visible extensions.
+ * @member jQuery.ui.inputextender
+ * @method getInstancesWithVisibleExtensions
+ * @static
  *
  * @return {jQuery.ui.inputextender[]}
  */
@@ -536,6 +573,9 @@ $.ui.inputextender.getInstancesWithVisibleExtensions = function() {
  * Will redraw all currently visible extensions of all input extender instances.
  * This is useful when changing the DOM, making sure that extensions are still next to their
  * input boxes in case position of the input boxes has changed.
+ * @member jQuery.ui.inputextender
+ * @method redrawVisibleExtensions
+ * @static
  */
 $.ui.inputextender.redrawVisibleExtensions = function() {
 	$.each( $.ui.inputextender.getInstancesWithVisibleExtensions(), function( i, instance ) {

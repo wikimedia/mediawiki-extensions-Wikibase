@@ -102,6 +102,7 @@ function measureMaximumStringWidths( $container, strings ) {
 $.widget( 'ui.listrotator', {
 	/**
 	 * @see jQuery.Widget.options
+	 * @readonly
 	 */
 	options: {
 		values: [],
@@ -128,30 +129,40 @@ $.widget( 'ui.listrotator', {
 	/**
 	 * Node of the selectable "auto" option.
 	 * @property {jQuery}
+	 * @protected
+	 * @readonly
 	 */
 	$auto: null,
 
 	/**
 	 * Node of the previous list item section.
 	 * @property {jQuery}
+	 * @protected
+	 * @readonly
 	 */
 	$prev: null,
 
 	/**
 	 * Node of the current list item section.
 	 * @property {jQuery}
+	 * @protected
+	 * @readonly
 	 */
 	$curr: null,
 
 	/**
 	 * Node of the next list item section.
 	 * @property {jQuery}
+	 * @protected
+	 * @readonly
 	 */
 	$next: null,
 
 	/**
 	 * Node of the menu opening when clicking on the "current" section.
 	 * @property {jQuery}
+	 * @protected
+	 * @readonly
 	 */
 	$menu: null,
 
@@ -159,11 +170,13 @@ $.widget( 'ui.listrotator', {
 	 * Temporarily caching the value the rotator is rotating to while the animation is being
 	 * performed.
 	 * @property {*}
+	 * @protected
 	 */
 	_rotatingTo: null,
 
 	/**
 	 * @see jQuery.Widget._create
+	 * @protected
 	 */
 	_create: function() {
 		var self = this,
@@ -318,6 +331,7 @@ $.widget( 'ui.listrotator', {
 
 	/**
 	 * Creates a widget section.
+	 * @protected
 	 *
 	 * @param {string} classSuffix
 	 * @param {Function} clickCallback
@@ -337,6 +351,7 @@ $.widget( 'ui.listrotator', {
 
 	/**
 	 * Create the drop-down menu assigned to the "current" section.
+	 * @protected
 	 */
 	_createMenu: function() {
 		var self = this;
@@ -352,6 +367,12 @@ $.widget( 'ui.listrotator', {
 		this.$menu.menu();
 	},
 
+	/**
+	 * @protected
+	 *
+	 * @param {Object} item
+	 * @return {jQuery}
+	 */
 	_addMenuItem: function( item ) {
 		var self = this;
 		return $( '<li/>' )
@@ -369,15 +390,14 @@ $.widget( 'ui.listrotator', {
 			.appendTo( this.$menu );
 	},
 
+	// TODO: Change behavior: value as setter should return "this" for allowing chaining calls
+	//  to the widget.
 	/**
 	 * Sets/Gets the widget's value. Setting the value involves setting the rotator to the
 	 * specified value without any animation.
 	 *
-	 * TODO: Change behavior: value as setter should return "this" for allowing chaining calls
-	 *  to the widget.
-	 *
-	 * @param [value] The value to assign. (Has to match a value actually existing in the
-	 *        widget's options.)
+	 * @param [value] The value to assign. (Has to match a value actually existing in the widget's
+	 *        options.)
 	 * @return {string} Current value.
 	 */
 	value: function( value ) {
@@ -439,6 +459,7 @@ $.widget( 'ui.listrotator', {
 
 	/**
 	 * Sets a new value rotating to the new value.
+	 * @protected
 	 *
 	 * @param {*} newValue
 	 */
@@ -549,6 +570,7 @@ $.widget( 'ui.listrotator', {
 
 	/**
 	 * Returns whether in RTL context.
+	 * @protected
 	 *
 	 * @return {boolean}
 	 */
@@ -592,6 +614,7 @@ $.widget( 'ui.listrotator', {
 
 	/**
 	 * Shows the drop-down menu.
+	 * @protected
 	 */
 	_showMenu: function() {
 		this.$menu.show();
@@ -617,6 +640,7 @@ $.widget( 'ui.listrotator', {
 
 	/**
 	 * Hides the drop-down menu.
+	 * @protected
 	 */
 	_hideMenu: function() {
 		this.$menu.hide();

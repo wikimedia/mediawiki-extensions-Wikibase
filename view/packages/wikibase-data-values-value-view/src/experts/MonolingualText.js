@@ -33,8 +33,15 @@
 
 		this.addExtension( inputExtender );
 	}, {
+		/**
+		 * @property {jQuery.valueview.ExpertExtender.LanguageSelector}
+		 * @private
+		 */
 		_languageSelector: null,
 
+		/**
+		 * @inheritdoc
+		 */
 		valueCharacteristics: function() {
 			var options = {};
 			if( this._languageSelector ) {
@@ -43,6 +50,9 @@
 			return options;
 		},
 
+		/**
+		 * @inheritdoc
+		 */
 		destroy: function() {
 			PARENT.prototype.destroy.call( this );
 			this._languageSelector = null;

@@ -17,6 +17,7 @@
 	vv.experts.UnsupportedValue = vv.expert( 'UnsupportedValue', PARENT, {
 		/**
 		 * @inheritdoc
+		 * @protected
 		 */
 		_options: {
 			messages: {
@@ -36,6 +37,7 @@
 
 		/**
 		 * @inheritdoc
+		 * @protected
 		 */
 		_init: function() {
 			// This expert just displays a message that whatever value currently set in the

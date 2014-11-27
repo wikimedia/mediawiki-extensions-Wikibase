@@ -20,11 +20,14 @@
 	$.extend( ExpertExtender.Container.prototype, {
 		/**
 		 * @property {jQuery}
+		 * @private
+		 * @readonly
 		 */
 		$container: null,
 
 		/**
 		 * @property {Object}
+		 * @private
 		 */
 		_child: null,
 
@@ -62,7 +65,8 @@
 		},
 
 		/**
-		 * A helper function for calling the child just like util.Extendable does
+		 * A helper function for calling the child just like util.Extendable does.
+		 * @private
 		 *
 		 * @param {string} method
 		 * @param {*[]} [args]

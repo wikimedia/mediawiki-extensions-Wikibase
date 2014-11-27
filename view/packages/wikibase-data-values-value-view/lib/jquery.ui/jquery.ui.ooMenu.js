@@ -49,6 +49,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * @see jQuery.Widget.options
+	 * @readonly
 	 */
 	options: {
 		items: [],
@@ -414,16 +415,19 @@ var Item = function( label, value, link ) {
 $.extend( Item.prototype, {
 	/**
 	 * @property {jQuery|string}
+	 * @protected
 	 */
 	_label: null,
 
 	/**
 	 * @property {string}
+	 * @protected
 	 */
 	_value: null,
 
 	/**
 	 * @property {string|null}
+	 * @protected
 	 */
 	_link: null,
 
@@ -490,16 +494,19 @@ CustomItem = util.inherit(
 	{
 		/**
 		 * @property {Function|boolean|null}
+		 * @protected
 		 */
 		_visibility: null,
 
 		/**
 		 * @property {Function|null}
+		 * @protected
 		 */
 		_action: null,
 
 		/**
 		 * @property {string}
+		 * @protected
 		 */
 		_cssClass: null,
 

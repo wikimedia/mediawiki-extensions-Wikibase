@@ -54,6 +54,7 @@ $.widget( 'ui.toggler', {
 
 	/**
 	 * @see jQuery.Widget.options
+	 * @readonly
 	 */
 	options: {
 		$subject: null
@@ -62,17 +63,20 @@ $.widget( 'ui.toggler', {
 	/**
 	 * The node subject to getting toggled.
 	 * @property {jQuery}
+	 * @readonly
 	 */
 	$subject: null,
 
 	/**
 	 * The toggler's icon.
 	 * @property {jQuery}
+	 * @readonly
 	 */
 	$toggleIcon: null,
 
 	/**
 	 * @see jQuery.Widget._create
+	 * @protected
 	 */
 	_create: function() {
 		var self = this;
@@ -138,6 +142,7 @@ $.widget( 'ui.toggler', {
 
 	/**
 	 * Reflects the toggler's subject visibility in the toggler's icon.
+	 * @protected
 	 *
 	 * @param {boolean} [inverted]
 	 */

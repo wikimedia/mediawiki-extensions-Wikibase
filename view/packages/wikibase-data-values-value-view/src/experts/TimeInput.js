@@ -99,6 +99,7 @@
 
 		/**
 		 * @inheritdoc
+		 * @protected
 		 */
 		_options: {
 			messages: {
@@ -110,19 +111,25 @@
 		/**
 		 * The preview widget.
 		 * @property {jQuery.valueview.ExpertExtender.Preview}
+		 * @private
 		 */
 		preview: null,
 
 		/**
 		 * @property {jQuery.valueview.ExpertExtender.Listrotator}
+		 * @private
 		 */
 		precisionRotator: null,
 
 		/**
 		 * @property {jQuery.valueview.ExpertExtender.Listrotator}
+		 * @private
 		 */
 		calendarRotator: null,
 
+		/**
+		 * @private
+		 */
 		_onRotatorChange: function() {
 			this._viewNotifier.notify( 'change' );
 		},

@@ -20,6 +20,7 @@
 	vv.experts.CommonsMediaType = vv.expert( 'CommonsMediaType', PARENT, {
 		/**
 		 * @inheritdoc
+		 * @protected
 		 */
 		_init: function() {
 			PARENT.prototype._init.call( this );

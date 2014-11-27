@@ -127,6 +127,7 @@ jQuery.valueview = jQuery.valueview || {};
 		 * nodes within the Expert's view port. If a new expert definition will be created using
 		 * jQuery.valueview.Expert(), then this will be set by that function.
 		 * @property {string}
+		 * @readonly
 		 */
 		uiBaseClass: '',
 
@@ -134,33 +135,42 @@ jQuery.valueview = jQuery.valueview || {};
 		 * The DOM node which has to be updated by the draw() function. Displays current state
 		 * and/or input elements for user interaction during valueview's edit mode.
 		 * @property {jQuery}
+		 * @readonly
 		 */
 		$viewPort: null,
 
 		/**
 		 * Object representing the state of the related valueview.
 		 * @property {jQuery.valueview.ViewState}
+		 * @protected
 		 */
 		_viewState: null,
 
 		/**
 		 * Object for publishing changes to the outside.
 		 * @property {util.Notifier}
+		 * @protected
 		 */
 		_viewNotifier: null,
 
 		/**
 		 * The expert's options, received through the constructor.
-		 * @property {Object}
+		 * @property {Object} [_options={}]
+		 * @protected
 		 */
 		_options: null,
 
 		/**
 		 * Message provider used to fetch messages from mediaWiki if available.
 		 * @property {util.MessageProvider}
+		 * @protected
 		 */
 		_messageProvider: null,
 
+		/**
+		 * @property {util.Extendable} [_ectendable=new util.Extendable()]
+		 * @protected
+		 */
 		_extendable: null,
 
 		addExtension: function( extension ){
@@ -179,7 +189,7 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * Custom expert initialization routine.
-		 * @private
+		 * @protected
 		 */
 		_init: function() {},
 
@@ -206,14 +216,15 @@ jQuery.valueview = jQuery.valueview || {};
 			this._options = null;
 		},
 
+		// TODO: This should actually move out of here together with all the advanced input features
+		//  of certain experts (time/coordinate).
 		/**
 		 * Returns an object with characteristics specified for the value. The object can be used
 		 * as parser options definition.
 		 *
 		 * This method should allow to be called statically, i. e. without a useful `this` context.
 		 *
-		 * TODO: This should actually move out of here together with all the advanced input features
-		 *  of certain experts (time/coordinate).
+		 * @return {Object}
 		 */
 		valueCharacteristics: function() {
 			return {};
@@ -224,7 +235,7 @@ jQuery.valueview = jQuery.valueview || {};
 		 * The expert reflects that state, so everything that is true for the related view, is also
 		 * true for the expert (e.g. whether it is in edit mode or disabled).
 		 *
-		 * @return jQuery.valueview.ViewState
+		 * @return {jQuery.valueview.ViewState}
 		 */
 		viewState: function() {
 			return this._viewState;
@@ -242,8 +253,8 @@ jQuery.valueview = jQuery.valueview || {};
 		 * Will draw the user interface components for the user to edit the value.
 		 *
 		 * @return {Object} jQuery.Promise
-		 *         No resolved parameters.
-		 *         No rejected parameters.
+		 * @return {Function} return.done
+		 * @return {Function} return.fail
 		 */
 		draw: function() {
 			this._extendable.callExtensions( 'draw' );

@@ -14,9 +14,9 @@
 	 * @constructor
 	 */
 	$.widget( 'ui.commonssuggester', $.ui.suggester, {
-
 		/**
 		 * @inheritdoc
+		 * @protected
 		 */
 		_create: function() {
 			if( !this.options.source ) {
@@ -27,6 +27,7 @@
 
 		/**
 		 * Initializes the default source pointing the "opensearch" API module on Wikimedia Commons.
+		 * @protected
 		 *
 		 * @return {Function}
 		 */
@@ -58,6 +59,7 @@
 
 		/**
 		 * @inheritdoc
+		 * @protected
 		 */
 		_createMenuItemFromSuggestion: function( suggestion, requestTerm ) {
 			suggestion = suggestion.replace( /^File:/, '' );

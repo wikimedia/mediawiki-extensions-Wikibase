@@ -29,16 +29,20 @@
 	$.extend( vv.ExpertExtender.prototype, {
 		/**
 		 * @property {jQuery}
+		 * @private
+		 * @readonly
 		 */
 		$input: null,
 
 		/**
 		 * @property {jQuery.ui.inputextender}
+		 * @private
 		 */
 		_inputextender: null,
 
 		/**
 		 * @property {util.Extendable}
+		 * @private
 		 */
 		_extendable: null,
 
@@ -79,6 +83,8 @@
 		},
 
 		/**
+		 * @private
+		 *
 		 * @param {jQuery} $extender
 		 */
 		_initExtensions: function( $extender ) {

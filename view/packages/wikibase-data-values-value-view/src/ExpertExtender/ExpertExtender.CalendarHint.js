@@ -24,33 +24,39 @@
 	$.extend( ExpertExtender.CalendarHint.prototype, {
 		/**
 		 * @property {util.MessageProvider}
+		 * @private
 		 */
 		_messageProvider: null,
 
 		/**
 		 * @property {Function}
+		 * @private
 		 */
 		_getUpstreamValue: null,
 
 		/**
 		 * @property {Function}
+		 * @private
 		 */
 		_setUpstreamCalendar: null,
 
 		/**
 		 * @property {jQuery}
+		 * @private
+		 * @readonly
 		 */
 		$calendarhint: null,
 
 		/**
 		 * @property {string}
+		 * @private
 		 */
 		_otherCalendar: null,
 
 		/**
 		 * The common prefix for CSS classes and message keys
-		 *
-		 * @property {string}
+		 * @property {string} [_prefix='valueview-expertextender-calendarhint']
+		 * @private
 		 */
 		_prefix: 'valueview-expertextender-calendarhint',
 

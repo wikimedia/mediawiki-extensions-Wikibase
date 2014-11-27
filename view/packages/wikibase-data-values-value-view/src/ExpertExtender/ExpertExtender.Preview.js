@@ -31,11 +31,13 @@
 	$.extend( ExpertExtender.Preview.prototype, {
 		/**
 		 * @property {Function}
+		 * @private
 		 */
 		_getUpstreamValue: null,
 
 		/**
 		 * @property {jQuery.ui.preview}
+		 * @private
 		 */
 		_preview: null,
 

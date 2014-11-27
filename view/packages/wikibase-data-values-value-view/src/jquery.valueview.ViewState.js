@@ -30,11 +30,13 @@ jQuery.valueview = jQuery.valueview || {};
 		/**
 		 * The widget object whose status is represented.
 		 * @property {jQuery.valueview}
+		 * @private
 		 */
 		_view: null,
 
 		/**
 		 * @see jQuery.valueview.isInEditMode
+		 * @inheritdoc jQuery.valueview#isInEditMode
 		 */
 		isInEditMode: function() {
 			return this._view.isInEditMode();
@@ -42,6 +44,7 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * @see jQuery.valueview.isDisabled
+		 * @inheritdoc jQuery.valueview#isDisabled
 		 */
 		isDisabled: function() {
 			return this._view.isDisabled();
@@ -50,6 +53,7 @@ jQuery.valueview = jQuery.valueview || {};
 		/**
 		 * Returns the related view's current value. Does not allow to change the value.
 		 * @see jQuery.valueview.value
+		 * @inheritdoc jQuery.valueview#value
 		 */
 		value: function() {
 			return this._view.value();
@@ -58,6 +62,7 @@ jQuery.valueview = jQuery.valueview || {};
 		/**
 		 * Returns the related valueview's current formatted value.
 		 * @see jQuery.valueview.getFormattedValue
+		 * @inheritdoc jQuery.valueview#getFormattedValue
 		 */
 		getFormattedValue: function() {
 			return this._view.getFormattedValue();
@@ -66,6 +71,7 @@ jQuery.valueview = jQuery.valueview || {};
 		/**
 		 * Returns the related valueview's current plain text value.
 		 * @see jQuery.valueview.getTextValue
+		 * @inheritdoc jQuery.valueview#getTextValue
 		 * @since 0.4
 		 */
 		getTextValue: function() {
@@ -77,7 +83,7 @@ jQuery.valueview = jQuery.valueview || {};
 		 * option.
 		 * @see jQuery.Widget.option
 		 *
-		 * @param key
+		 * @param {string} [key]
 		 * @return {*}
 		 */
 		option: function( key ) {

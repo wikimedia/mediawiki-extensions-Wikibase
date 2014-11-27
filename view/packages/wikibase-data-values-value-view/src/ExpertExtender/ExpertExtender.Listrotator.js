@@ -31,21 +31,25 @@
 	$.extend( ExpertExtender.Listrotator.prototype, {
 		/**
 		 * @property {Function}
+		 * @private
 		 */
 		_onValueChange: null,
 
 		/**
 		 * @property {Function}
+		 * @private
 		 */
 		_getUpstreamValue: null,
 
 		/**
 		 * @property {jQuery}
+		 * @private
 		 */
 		_$customItem: null,
 
 		/**
 		 * @property {number|null}
+		 * @private
 		 */
 		_customValueIndex: null,
 
@@ -118,7 +122,7 @@
 		},
 
 		/**
-		 * Get the current value set in the rotator
+		 * Gets the current value set in the rotator.
 		 *
 		 * @return {string|null} The current value or null, if autoActive
 		 */

@@ -22,6 +22,7 @@
 	vv.experts.SuggestedStringValue = vv.expert( 'SuggestedStringValue', PARENT, {
 		/**
 		 * @inheritdoc
+		 * @protected
 		 */
 		_init: function() {
 			PARENT.prototype._init.call( this );

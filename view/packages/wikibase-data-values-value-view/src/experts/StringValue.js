@@ -21,6 +21,7 @@
 		 * The nodes of the input element. The input element will be used to display the value
 		 * during edit mode.
 		 * @property {jQuery}
+		 * @readonly
 		 */
 		$input: null,
 
@@ -83,6 +84,7 @@
 
 		/**
 		 * Will resize the input box to fit its current content.
+		 * @private
 		 */
 		_resizeInput: function() {
 			this.$input.inputautoexpand( {
