@@ -11,10 +11,11 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
- *     @example Creates a simple suggester using an array as result set.
+ *     @example
+ *     // Creates a simple suggester using an array as result set.
  *     $( 'input' ).suggester( { source: ['a', 'b', 'c'] } );
  *
- *     @example Creates an auto-completion input element fetching suggestions via AJAX.
+ *     // Creates an auto-completion input element fetching suggestions via AJAX.
  *     $( 'input' ).suggester( {
  *         source: function( term ) {
  *             var deferred = $.Deferred();
@@ -67,25 +68,29 @@
  *         The suggestion list's width shall not be smaller than the width of the referenced
  *         element. If "undefined", the minimum width will be the width of the element the suggester
  *         is initialized on. Specifying "null" will prevent applying a minimum width.
- *
+ */
+/**
  * @event open
- *        Triggered when the list of suggestions is opened.
- *        @param {jQuery.Event} event
- *
+ * Triggered when the list of suggestions is opened.
+ * @param {jQuery.Event} event
+ */
+/**
  * @event close
- *        Triggered when the list of suggestions is closed.
- *        @param {jQuery.Event} event
- *
+ * Triggered when the list of suggestions is closed.
+ * @param {jQuery.Event} event
+ */
+/**
  * @event change
- *        Triggered when the suggester's value has changed.
- *        @param {jQuery.Event} event
- *
+ * Triggered when the suggester's value has changed.
+ * @param {jQuery.Event} event
+ */
+/**
  * @event error
- *        Triggered whenever an error occurred while gathering suggestions. This may happen only
- *        when using a function as source. The {string} parameter is forwarded from the rejected
- *        promise returned by the source function.
- *        @param {jQuery.Event} event
- *        @param {string} message
+ * Triggered whenever an error occurred while gathering suggestions. This may happen only when using
+ * a function as source. The {string} parameter is forwarded from the rejected promise returned by
+ * the source function.
+ * @param {jQuery.Event} event
+ * @param {string} message
  */
 $.widget( 'ui.suggester', {
 

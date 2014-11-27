@@ -27,18 +27,23 @@
  * @param {number|null} [options.maxItems=10]
  *        Maximum number of visible items. If there are more items, scrollbars will be shown. Set
  *        to "null" to never have scrollbars on the menu.
- *
+ */
+/**
  * @event focus
- *        Triggered when focusing/activating an item.
- *        @param {jQuery.Event} event
- *        @param {jQuery.ui.ooMenu.Item} item
+ * Triggered when focusing/activating an item.
+ * @param {jQuery.Event} event
+ * @param {jQuery.ui.ooMenu.Item} item
+ */
+/**
  * @event blur
- *        Triggered when blurring/deactivating an item.
- *        @param {jQuery.Event} event
+ * Triggered when blurring/deactivating an item.
+ * @param {jQuery.Event} event
+ */
+/**
  * @event selected
- *        Triggered when selecting an item.
- *        @param {jQuery.Event} event
- *        @param {jQuery.ui.ooMenu.Item|null} item
+ * Triggered when selecting an item.
+ * @param {jQuery.Event} event
+ * @param {jQuery.ui.ooMenu.Item|null} item
  */
 $.widget( 'ui.ooMenu', {
 

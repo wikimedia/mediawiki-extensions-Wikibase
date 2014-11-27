@@ -75,21 +75,26 @@ var inputExtendersWithVisibleExtension = ( function() {
  *         give a jQuery.AnimationEvent object as their event object. If this is the case and the
  *         event bubbles up to the input extender's extension node, then this will trigger the
  *         "contentanimation" event on the widget node.
- *
+ */
+/**
  * @event animation
- *        Triggered at the beginning of an animation of the input's extension.
- *        @param {jQuery.AnimationEvent} animationEvent
+ * Triggered at the beginning of an animation of the input's extension.
+ * @param {jQuery.AnimationEvent} animationEvent
+ */
+/**
  * @event contentanimation
- *        Triggered at the beginning of an animation of the extender's extension content. Depends on
- *        the "contentAnimationEvents" option.
- *        @param {jQuery.AnimationEvent} animationEvent
- *        The animation event gets passed on from the event within the input extender's extension
- *        causing the "contentanimation" event.
+ * Triggered at the beginning of an animation of the extender's extension content. Depends on the
+ * "contentAnimationEvents" option.
+ * @param {jQuery.AnimationEvent} animationEvent
+ * The animation event gets passed on from the event within the input extender's extension
+ * causing the "contentanimation" event.
+ */
+/**
  * @event aftertoggle
- *        Triggered after showExtension or hideExtension has been called. At this point extension()
- *        will already return the extension's node but the extension might still not be visible for
- *        the user since the animation has just been started.
- *        @param {jQuery.Event} event
+ * Triggered after showExtension or hideExtension has been called. At this point extension() will
+ * already return the extension's node but the extension might still not be visible for the user
+ * since the animation has just been started.
+ * @param {jQuery.Event} event
  */
 $.widget( 'ui.inputextender', {
 	/**

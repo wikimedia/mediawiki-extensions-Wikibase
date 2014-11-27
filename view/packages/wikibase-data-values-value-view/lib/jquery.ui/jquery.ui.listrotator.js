@@ -67,7 +67,7 @@ function measureMaximumStringWidths( $container, strings ) {
  *        Array of objects containing the values to rotate.
  *        Single object structure:
  *        { value: <actual value (being returned on value())>, label: <the value's label> }
- * @param {Object} [optiosn.menu=Object]
+ * @param {Object} [options.menu=Object]
  *        Options for the jQuery.menu widget used as drop-down menu:
  * @param {Object} [options.menu.position=Object]
  *        Default object passed to jQuery.ui.position when positioning the menu. Positions will be
@@ -77,20 +77,23 @@ function measureMaximumStringWidths( $container, strings ) {
  * @param {string[]} [options.animation.margins=['-15px', '15px']]
  *        Defines how far the sections should be shifted when animating the rotation. First value
  *        when shifting to the left and vice versa. Values will be flipped in rtl context.
- * @param {number} [options.animations.duration=150]
+ * @param {number} [options.animation.duration=150]
  *        Defines the animation's duration in milliseconds.
  * @param {boolean} [options.deferInit=false]
  *        Whether to defer initializing the section widths until initWidths() is called "manually".
  * @param {boolean|Function} [isRTL=function() { return $( 'body' ).hasClass( 'rtl' ); }]
  *        Whether widget is used in an RTL context.
- *
- * @event auto
- *        Triggered when "auto" options is selected.
- *        @param {jQuery.Event} event
+ */
+/**
  * @event selected
- *        Triggered when a specific value is selected.
- *        @param {jQuery.Event} event
- *        @param {*} value Value as specified in the "values" option.
+ * Triggered when a specific value is selected.
+ * @param {jQuery.Event} event
+ * @param {*} value Value as specified in the "values" option.
+ */
+/**
+ * @event auto
+ * Triggered when "auto" options is selected.
+ * @param {jQuery.Event} event
  */
 $.widget( 'ui.listrotator', {
 	/**

@@ -42,10 +42,11 @@ $( document ).ready( function() {
  * @param {Object} options
  * @param {jQuery} options.$subject
  *        The node whose visibility shall be toggled.
- *
+ */
+/**
  * @event animation
- *        Triggered at the beginning of toggler animations.
- *        @param {jQuery.AnimationEvent} event
+ * Triggered at the beginning of toggler animations.
+ * @param {jQuery.AnimationEvent} event
  */
 $.widget( 'ui.toggler', {
 

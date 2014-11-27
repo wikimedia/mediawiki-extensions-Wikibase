@@ -76,31 +76,37 @@ function expertProxy( fnName ) {
  *        in the meantime.
  * @param {Object|null} [mediaWiki=null]
  *        mediaWiki JavaScript object that may be used in MediaWiki environment.
- *
+ */
+/**
  * @event change
- *        Triggered when the widget's value is updated.
- *        @param {jQuery.Event} event
- *
+ * Triggered when the widget's value is updated.
+ * @param {jQuery.Event} event
+ */
+/**
  * @event parse
- *        Triggered before the value gets parsed.
- *       @param {jQuery.Event} event
- *
+ * Triggered before the value gets parsed.
+ * @param {jQuery.Event} event
+ */
+/**
  * @event afterparse
- *        Triggered after the value has been parsed.
- *        @param {jQuery.Event} event
- *
+ * Triggered after the value has been parsed.
+ * @param {jQuery.Event} event
+ */
+/**
  * @event afterstartediting
- *        Triggered after edit mode has been started and rendered.
- *        @param {jQuery.Event} event
- *
+ * Triggered after edit mode has been started and rendered.
+ * @param {jQuery.Event} event
+ */
+/**
  * @event afterstopediting
- *        Triggered after edit mode has been stopped and the widget has been redrawn.
- *        @param {jQuery.Event} event
- *        @param {boolean} dropValue
- *
+ * Triggered after edit mode has been stopped and the widget has been redrawn.
+ * @param {jQuery.Event} event
+ * @param {boolean} dropValue
+ */
+/**
  * @event afterdraw
- *        Triggered after the widget has been redrawn.
- *        @param {jQuery.Event} event
+ * Triggered after the widget has been redrawn.
+ * @param {jQuery.Event} event
  */
 $.widget( 'valueview.valueview', PARENT, {
 	/**
