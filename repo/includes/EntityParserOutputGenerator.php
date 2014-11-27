@@ -7,9 +7,10 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\StatementListProvider;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -211,7 +212,8 @@ class EntityParserOutputGenerator {
 	 * Fetches some basic entity information from a set of entity IDs.
 	 *
 	 * @param EntityId[] $entityIds
-	 * @return array obtained from EntityInfoBuilder::getEntityInfo
+	 *
+	 * @return EntityInfo
 	 */
 	private function getEntityInfo( array $entityIds ) {
 		wfProfileIn( __METHOD__ );
@@ -251,13 +253,13 @@ class EntityParserOutputGenerator {
 	/**
 	 * @param ParserOutput $parserOutput
 	 * @param EntityRevision $entityRevision
-	 * @param array $entityInfo obtained from EntityInfoBuilder::getEntityInfo
+	 * @param EntityInfo $entityInfo obtained from EntityInfoBuilder::getEntityInfo
 	 * @param boolean $editable
 	 */
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
 		EntityRevision $entityRevision,
-		array $entityInfo,
+		EntityInfo $entityInfo,
 		$editable
 	) {
 
