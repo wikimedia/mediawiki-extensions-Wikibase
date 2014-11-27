@@ -28,7 +28,6 @@ util.Notifier = ( function() {
 	 *     notifier.notify( 'whatever' ); // Nothing happens, no notification registered for this one.
 	 *
 	 * @class util.Notifier
-	 * @since 0.1
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *

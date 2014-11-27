@@ -8,6 +8,7 @@
 	 * @class jQuery.valueview.experts.GlobeCoordinateValue
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
+	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
