@@ -972,7 +972,8 @@ class WikibaseRepo {
 		$entityViewFactory = new EntityViewFactory(
 			$entityTitleLookup,
 			$this->getEntityLookup(),
-			$this->getSnakFormatterFactory()
+			$this->getSnakFormatterFactory(),
+			$this->getSettings()->getSetting( 'siteLinkGroups' )
 		);
 
 		return new EntityParserOutputGeneratorFactory(
