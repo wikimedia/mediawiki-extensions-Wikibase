@@ -77,7 +77,7 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$entityView = $this->getMockBuilder( 'Wikibase\EntityView' )
+		$entityView = $this->getMockBuilder( 'Wikibase\Repo\View\EntityView' )
 			->disableOriginalConstructor()
 			->getMock();
 
