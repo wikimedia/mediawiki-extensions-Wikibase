@@ -205,11 +205,6 @@ class UpdateRepoHookHandlers {
 	 * @return bool
 	 */
 	private function doArticleDeleteComplete( Title $title, User $user ) {
-		if ( !$this->isWikibaseEnabled( $title->getNamespace() ) ) {
-			// shorten out
-			return true;
-		}
-
 		if ( $this->propagateChangesToRepo !== true ) {
 			return true;
 		}
@@ -249,8 +244,7 @@ class UpdateRepoHookHandlers {
 	 * @return bool
 	 */
 	private function doTitleMoveComplete( Title $oldTitle, Title $newTitle, User $user ) {
-		if ( !$this->isWikibaseEnabled( $oldTitle->getNamespace() )
-			&& !$this->isWikibaseEnabled( $newTitle->getNamespace() ) ) {
+		if ( !$this->isWikibaseEnabled( $newTitle->getNamespace() ) ) {
 			return true;
 		}
 
