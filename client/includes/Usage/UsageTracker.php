@@ -14,6 +14,8 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 interface UsageTracker {
 
+	const TABLE_NAME = 'wbc_entity_usage';
+
 	/**
 	 * Updates entity usage information for the given page.
 	 *
@@ -22,8 +24,8 @@ interface UsageTracker {
 	 *
 	 * See docs/usagetracking.wiki for details.
 	 *
-	 * @return EntityUsage[] Usages before the update
 	 * @throws UsageTrackerException
+	 * @return EntityUsage[] Usages before the update
 	 */
 	public function trackUsedEntities( $pageId, array $usages );
 

@@ -3,6 +3,8 @@
 namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
+use MWException;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -47,36 +49,27 @@ class SqlUsageTrackerSchemaUpdater {
 	 * Applies any schema updates
 	 */
 	public function doSchemaUpdate() {
-		$table = 'wbc_entity_usage';
-
-		if ( !$this->dbUpdater->tableExists( $table ) ) {
+		if ( !$this->dbUpdater->tableExists( UsageTracker::TABLE_NAME ) ) {
 			$db = $this->dbUpdater->getDB();
 			$script = $this->getUpdateScriptPath( 'entity_usage', $db->getType() );
-			$this->dbUpdater->addExtensionTable( $table, $script );
+			$this->dbUpdater->addExtensionTable( UsageTracker::TABLE_NAME, $script );
 
 			// Register function for populating the table.
-			// Note that this must be done with a static function,
-			// for reasons that do not need explaining at this juncture.
-			$this->dbUpdater->addExtensionUpdate( array(
-				array( __CLASS__, 'fillUsageTable' ),
-				$table
-			) );
+			$this->dbUpdater->addExtensionUpdate( array( array( $this, 'fillUsageTable' ) ) );
 		}
 	}
 
 	/**
-	 * Static wrapper for EntityUsageTableBuilder::fillUsageTable
+	 * Static wrapper for SqlUsageTrackerSchemaUpdater::doSchemaUpdate
 	 *
-	 * @param DatabaseUpdater $dbUpdater
-	 * @param string $table
+	 * @param DatabaseUpdater $dbUpdater Unused.
 	 */
-	public static function fillUsageTable( DatabaseUpdater $dbUpdater, $table ) {
+	public function fillUsageTable( DatabaseUpdater $dbUpdater ) {
 		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
 
 		$primer = new EntityUsageTableBuilder(
 			$idParser,
 			wfGetLB(), // would be nice to pass in $dbUpdater->getDB().
-			$table,
 			1000
 		);
 
@@ -97,7 +90,7 @@ class SqlUsageTrackerSchemaUpdater {
 			}
 		}
 
-		throw new \MWException( "Could not find schema update script '$name'." );
+		throw new MWException( "Could not find schema update script '$name'." );
 	}
 
 }
