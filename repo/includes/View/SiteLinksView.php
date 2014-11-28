@@ -114,16 +114,39 @@ class SiteLinksView {
 	 * @return string
 	 */
 	private function getHtmlForSiteLinkGroup( array $siteLinks, $itemId, $group, $editable ) {
-		return wfTemplate( 'wikibase-sitelinkgroupview',
+		$isSpecialGroup = $group === 'special';
+
+		$sites = $this->getSitesForGroup( $group );
+		$siteLinksForTable = $this->getSiteLinksForTable( $sites, $siteLinks );
+
+		$html = $thead = $tbody = $tfoot = '';
+
+		if ( !empty( $siteLinksForTable ) ) {
+			$thead = $this->getTableHeadHtml( $isSpecialGroup );
+			$tbody = $this->getTableBodyHtml(
+				$siteLinksForTable,
+				$itemId,
+				$isSpecialGroup,
+				$editable
+			);
+		}
+
+		// Build table footer with button to add site-links, consider list could be complete!
+		// The list is complete if it has a site link for every known site. Since
+		// $siteLinksForTable only has an entry for links to existing sites, this
+		// simple comparison works.
+		$isFull = count( $siteLinksForTable ) >= count( $sites );
+		$tfoot = $this->getTableFootHtml( $isFull );
+
+		return $html . wfTemplate( 'wikibase-sitelinkgroupview',
 			// TODO: support entity-id as prefix for element IDs.
 			htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES ),
 			wfMessage( 'wikibase-sitelinks-' . $group )->parse(),
 			'', // counter
 			wfTemplate( 'wikibase-sitelinklistview',
-				$this->getHtmlForSiteLinks(
-					$this->getSiteLinksForTable( $this->getSitesForGroup( $group ), $siteLinks ),
-					$group === 'special'
-				)
+				$thead,
+				$tbody,
+				$tfoot
 			),
 			htmlspecialchars( $group ),
 			$this->getHtmlForEditSection( $itemId, '', 'edit', $editable )
@@ -197,28 +220,70 @@ class SiteLinksView {
 	}
 
 	/**
-	 * @param array[] $siteLinksForTable
 	 * @param bool $isSpecialGroup
 	 *
 	 * @return string
 	 */
-	private function getHtmlForSiteLinks( $siteLinksForTable, $isSpecialGroup ) {
-		$html = '';
-
-		foreach ( $siteLinksForTable as $siteLinkForTable ) {
-			$html .= $this->getHtmlForSiteLink( $siteLinkForTable, $isSpecialGroup );
+	private function getTableHeadHtml( $isSpecialGroup ) {
+		// FIXME: quickfix to allow a custom site-name / handling for the site groups which are
+		// special according to the specialSiteLinkGroups setting
+		$siteNameMessageKey = 'wikibase-sitelinks-sitename-columnheading';
+		if ( $isSpecialGroup ) {
+			$siteNameMessageKey .= '-special';
 		}
 
-		return $html;
+		$thead = wfTemplate( 'wikibase-sitelinklistview-thead',
+			wfMessage( $siteNameMessageKey )->parse(),
+			wfMessage( 'wikibase-sitelinks-siteid-columnheading' )->parse(),
+			wfMessage( 'wikibase-sitelinks-link-columnheading' )->parse()
+		);
+
+		return $thead;
 	}
 
 	/**
-	 * @param array $siteLinkForTable
+	 * @param object[] $siteLinksForTable
+	 * @param ItemId|null $itemId
 	 * @param bool $isSpecialGroup
 	 *
 	 * @return string
 	 */
-	private function getHtmlForSiteLink( $siteLinkForTable, $isSpecialGroup ) {
+	private function getTableBodyHtml( $siteLinksForTable, $itemId, $isSpecialGroup ) {
+		$tbody = '';
+
+		foreach ( $siteLinksForTable as $siteLinkForTable ) {
+			$tbody .= $this->getHtmlForSiteLink(
+				$siteLinkForTable,
+				$itemId,
+				$isSpecialGroup
+			);
+		}
+
+		return $tbody;
+	}
+
+	/**
+	 * @param bool $isFull
+	 *
+	 * @return string
+	 */
+	private function getTableFootHtml( $isFull ) {
+		$tfoot = wfTemplate( 'wikibase-sitelinklistview-tfoot',
+			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->parse() : '',
+			''
+		);
+
+		return $tfoot;
+	}
+
+	/**
+	 * @param object $siteLinkForTable
+	 * @param ItemId|null $itemId The id of the item
+	 * @param bool $isSpecialGroup
+	 *
+	 * @return string
+	 */
+	private function getHtmlForSiteLink( $siteLinkForTable, $itemId, $isSpecialGroup ) {
 		/** @var Site $site */
 		$site = $siteLinkForTable['site'];
 
@@ -226,7 +291,7 @@ class SiteLinksView {
 		$siteLink = $siteLinkForTable['siteLink'];
 
 		if ( $site->getDomain() === '' ) {
-			return $this->getHtmlForUnknownSiteLink( $siteLink );
+			return $this->getHtmlForUnknownSiteLink( $siteLink, $itemId );
 		}
 
 		$languageCode = $site->getLanguageCode();
@@ -250,8 +315,8 @@ class SiteLinksView {
 			htmlspecialchars( $siteId ), // ID used in classes
 			$languageCode,
 			'auto',
-			htmlspecialchars( $siteId ), // displayed site ID
 			$siteName,
+			htmlspecialchars( $siteId ), // displayed site ID
 			$this->getHtmlForPage( $siteLink, $site )
 		);
 	}
@@ -275,14 +340,19 @@ class SiteLinksView {
 
 	/**
 	 * @param SiteLink $siteLink
+	 * @param ItemId|null $itemId The id of the item
 	 *
 	 * @return string
 	 */
-	private function getHtmlForUnknownSiteLink( $siteLink ) {
+	private function getHtmlForUnknownSiteLink( $siteLink, $itemId ) {
+		$siteId = $siteLink->getSiteId();
+		$pageName = $siteLink->getPageName();
+
 		// FIXME: No need for separate template; Use 'wikibase-sitelinkview' template.
 		return wfTemplate( 'wikibase-sitelinkview-unknown',
-			htmlspecialchars( $siteLink->getSiteId() ),
-			htmlspecialchars(  $siteLink->getPageName() )
+			htmlspecialchars( $siteId ),
+			htmlspecialchars( $pageName ),
+			$this->getHtmlForEditSection( $itemId, $siteId )
 		);
 	}
 
