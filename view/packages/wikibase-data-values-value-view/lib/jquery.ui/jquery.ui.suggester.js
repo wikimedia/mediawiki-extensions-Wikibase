@@ -388,7 +388,6 @@ $.widget( 'ui.suggester', {
 
 		if( !this.options.menu.element.is( ':visible' ) ) {
 			clearTimeout( this.__searching );
-			this._cache = {};
 			this.search( event );
 			return;
 		}
