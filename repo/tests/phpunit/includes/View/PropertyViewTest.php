@@ -2,11 +2,13 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\View\PropertyView;
 
 /**
  * @covers Wikibase\Repo\View\PropertyView
@@ -22,10 +24,6 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class PropertyViewTest extends EntityViewTest {
 
-	protected function getEntityViewClass() {
-		return 'Wikibase\Repo\View\PropertyView';
-	}
-
 	/**
 	 * @param EntityId $id
 	 * @param Statement[] $statements
@@ -33,7 +31,23 @@ class PropertyViewTest extends EntityViewTest {
 	 * @return Entity
 	 */
 	protected function makeEntity( EntityId $id, array $statements = array() ) {
-		return $this->makeProperty( $id, 'string', $statements );
+		$dataTypeId = 'string';
+
+		if ( is_string( $id ) ) {
+			$id = new PropertyId( $id );
+		}
+
+		$property = Property::newFromType( $dataTypeId );
+		$property->setId( $id );
+
+		$property->setLabel( 'en', "label:$id" );
+		$property->setDescription( 'en', "description:$id" );
+
+		foreach ( $statements as $statement ) {
+			$property->addClaim( $statement );
+		}
+
+		return $property;
 	}
 
 	/**
@@ -57,6 +71,29 @@ class PropertyViewTest extends EntityViewTest {
 	protected function prepareEntityData( Entity $entity, array &$entityData ) {
 		/* @var Property $entity */
 		$entityData['datatype'] = $entity->getDataTypeId();
+	}
+
+	public function provideTestGetHtml() {
+		$propertyView = new PropertyView(
+			$this->getMockBuilder( 'Wikibase\Repo\View\FingerprintView' )
+				->disableOriginalConstructor()
+				->getMock(),
+			$this->getMockBuilder( 'Wikibase\Repo\View\ClaimsView' )
+				->disableOriginalConstructor()
+				->getMock(),
+			Language::factory( 'en' ),
+			false
+		);
+
+		return array(
+			array(
+				$propertyView,
+				$this->newEntityRevisionForStatements( array() ),
+				array(),
+				true,
+				'/wb-property/'
+			)
+		);
 	}
 
 }
