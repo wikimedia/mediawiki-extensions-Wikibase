@@ -6,6 +6,7 @@ use DatabaseBase;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
+use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -31,7 +32,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 			$this->markTestSkipped( 'Skipping test for EntityUsageTable, because the useLegacyUsageIndex option is set.' );
 		}
 
-		$this->tablesUsed[] = 'wbc_entity_usage';
+		$this->tablesUsed[] = SqlUsageTracker::DEFAULT_TABLE_NAME;
 	}
 
 	private function makeUsages( $n ) {
@@ -123,7 +124,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 
 	private function getEntityUsageTable( $batchSize = 1000 ) {
 		return new EntityUsageTable(
-			new BasicEntityIdParser(), wfGetDB( DB_MASTER ), 'wbc_entity_usage', $batchSize
+			new BasicEntityIdParser(), wfGetDB( DB_MASTER ), SqlUsageTracker::DEFAULT_TABLE_NAME, $batchSize
 		);
 	}
 
@@ -554,7 +555,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	 * @return bool
 	 */
 	private function rowExists( DatabaseBase $db, $conditions ) {
-		$count = $db->selectRowCount( 'wbc_entity_usage', '*', $conditions );
+		$count = $db->selectRowCount( SqlUsageTracker::DEFAULT_TABLE_NAME, '*', $conditions );
 		return $count > 0;
 	}
 

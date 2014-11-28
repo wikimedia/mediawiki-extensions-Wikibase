@@ -63,24 +63,29 @@ class EntityUsageTableBuilder {
 	/**
 	 * @param EntityIdParser $idParser
 	 * @param LoadBalancer $loadBalancer
-	 * @param string $usageTableName
-	 * @param int $batchSize
+	 * @param int $batchSize defaults to 1000
+	 * @param string|null $usageTableName defaults to wbc_entity_usage
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdParser $idParser, LoadBalancer $loadBalancer, $usageTableName, $batchSize = 1000 ) {
-		if ( !is_string( $usageTableName ) ) {
-			throw new InvalidArgumentException( '$usageTableName must be a string' );
-		}
-
+	public function __construct(
+		EntityIdParser $idParser,
+		LoadBalancer $loadBalancer,
+		$batchSize = 1000,
+		$usageTableName = null
+	) {
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 
+		if ( !is_string( $usageTableName ) && $usageTableName !== null ) {
+			throw new InvalidArgumentException( '$usageTableName must be a string or null' );
+		}
+
 		$this->idParser = $idParser;
 		$this->loadBalancer = $loadBalancer;
-		$this->usageTableName = $usageTableName;
 		$this->batchSize = $batchSize;
+		$this->usageTableName = $usageTableName ?: SqlUsageTracker::DEFAULT_TABLE_NAME;
 
 		$this->exceptionHandler = new LogWarningExceptionHandler();
 		$this->progressReporter = new NullMessageReporter();
