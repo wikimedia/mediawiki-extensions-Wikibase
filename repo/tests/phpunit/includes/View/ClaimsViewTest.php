@@ -70,7 +70,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		$testUser = new TestUser( 'WikibaseUser' );
 
-		$property = Property::newEmpty();
+		$property = Property::newFromType( 'string' );
 		$property->setLabel( 'en', "<script>alert( 'omg!!!' );</script>" );
 		$property->setDataTypeId( 'string' );
 

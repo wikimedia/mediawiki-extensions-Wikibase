@@ -50,7 +50,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 		$this->repo->putEntity( $item );
 
 		// a property
-		$prop = Property::newEmpty();
+		$prop = Property::newFromType( 'string' );
 		$prop->setId( new PropertyId( 'P11' ) );
 		$this->repo->putEntity( $prop );
 
