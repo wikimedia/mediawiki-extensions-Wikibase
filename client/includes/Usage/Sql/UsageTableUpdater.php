@@ -5,6 +5,7 @@ namespace Wikibase\Client\Usage\Sql;
 use DatabaseBase;
 use InvalidArgumentException;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\UsageTracker;
 
 /**
  * Helper class for updating the wb_entity_usage table.
@@ -21,33 +22,22 @@ class UsageTableUpdater {
 	private $connection;
 
 	/**
-	 * @var string
-	 */
-	private $tableName;
-
-	/**
 	 * @var int
 	 */
 	private $batchSize;
 
 	/**
 	 * @param DatabaseBase $connection
-	 * @param string $tableName
 	 * @param int $batchSize
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( DatabaseBase $connection, $tableName, $batchSize ) {
-		if ( !is_string( $tableName ) ) {
-			throw new InvalidArgumentException( '$tableName must be a string' );
-		}
-
+	public function __construct( DatabaseBase $connection, $batchSize ) {
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 
 		$this->connection = $connection;
-		$this->tableName = $tableName;
 		$this->batchSize = $batchSize;
 	}
 
@@ -187,7 +177,7 @@ class UsageTableUpdater {
 
 		foreach ( $batches as $batch ) {
 			$this->connection->delete(
-				$this->tableName,
+				UsageTracker::TABLE_NAME,
 				array(
 					'eu_page_id' => (int)$pageId,
 					'eu_aspect' => (string)$aspect,
@@ -222,7 +212,7 @@ class UsageTableUpdater {
 
 		foreach ( $batches as $rows ) {
 			$this->connection->insert(
-				$this->tableName,
+				UsageTracker::TABLE_NAME,
 				$rows,
 				__METHOD__
 			);
@@ -248,7 +238,7 @@ class UsageTableUpdater {
 
 		foreach ( $batches as $batch ) {
 			$this->connection->delete(
-				$this->tableName,
+				UsageTracker::TABLE_NAME,
 				array(
 					'eu_entity_id' => $batch,
 				),
