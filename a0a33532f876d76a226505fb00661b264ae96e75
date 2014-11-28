@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_eafb740f",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T18:35:57Z",
+      "side": 1,
+      "message": "ha, of course - i knew there must be a simpler way ;)",
+      "parentUuid": "4ea06b5a_47770136",
+      "revId": "a0a33532f876d76a226505fb00661b264ae96e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_e78bad19",
         "filename": "client/includes/Changes/ChangeHandler.php",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-28T15:32:11Z",
       "side": 1,
       "message": "Looks like a switch. Why not use a switch then? At least some elseif?",
+      "revId": "a0a33532f876d76a226505fb00661b264ae96e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_0a010008",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T18:35:57Z",
+      "side": 1,
+      "message": "yea, should be a switch",
+      "parentUuid": "4ea06b5a_e78bad19",
       "revId": "a0a33532f876d76a226505fb00661b264ae96e75",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -64,6 +100,24 @@
       "writtenOn": "2014-11-28T15:32:11Z",
       "side": 1,
       "message": "The old comment was much more meaningful. Why remove it?",
+      "revId": "a0a33532f876d76a226505fb00661b264ae96e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_aa056c15",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T18:35:57Z",
+      "side": 1,
+      "message": "because the old comment made assumptions that may be wrong.",
+      "parentUuid": "4ea06b5a_07925957",
       "revId": "a0a33532f876d76a226505fb00661b264ae96e75",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
