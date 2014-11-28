@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_0739f99e",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T14:07:22Z",
+      "side": 1,
+      "message": "Both messages are very technical. Also a simple \"can\u0027t\" isn\u0027t very helpful. Suggestion:\n\nContent type mismatch\n\nThe given content of type \"$1\" is not an Entity and can not be displayed by the Wikibase extension.",
+      "revId": "95dbf9db4849415d4a42c34ab668f1a0ebfa58e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
