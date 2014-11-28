@@ -472,7 +472,10 @@ $.widget( 'ui.suggester', {
 				// Skip request since it does not correspond to the current search term.
 				return;
 			}
-			self._updateMenu( suggestions, requestTerm );
+			if( self.options.menu ) {
+				// Suggester (including the menu) might have been destroyed in the meantime.
+				self._updateMenu( suggestions, requestTerm );
+			}
 		} )
 		.fail( function( message ) {
 			self.element.addClass( 'ui-suggester-error' );
