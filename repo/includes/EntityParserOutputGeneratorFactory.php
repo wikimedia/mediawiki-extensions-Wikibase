@@ -7,6 +7,7 @@ use ParserOptions;
 use ParserOutput;
 use RequestContext;
 use User;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -102,7 +103,7 @@ class EntityParserOutputGeneratorFactory {
 		return new ParserOutputJsConfigBuilder(
 			$this->entityIdParser,
 			$this->entityTitleLookup,
-			$this->makeSerializationOptions( $languageCode )
+			$this->makeJsConfigSerializationOptions( $languageCode )
 		);
 	}
 
@@ -145,12 +146,13 @@ class EntityParserOutputGeneratorFactory {
 	 *
 	 * @return SerializationOptions
 	 */
-	private function makeSerializationOptions( $languageCode ) {
-		$fallbackChain = $this->getLanguageFallbackChain( $languageCode );
-		$languageCodes = Utils::getLanguageCodes() + array( $languageCode => $fallbackChain );
+	private function makeJsConfigSerializationOptions( $languageCode ) {
+		// NOTE: when serializing the full entity to be stored in the
+		// wbEntity JS config variable, we currently do not want any
+		// language fallback to be applied.
 
 		$options = new SerializationOptions();
-		$options->setLanguages( $languageCodes );
+		$options->setOption( ValueFormatter::OPT_LANG, $languageCode );
 
 		return $options;
 	}
