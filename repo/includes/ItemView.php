@@ -23,19 +23,16 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getMainHtml
 	 */
-	protected function getMainHtml( EntityRevision $entityRevision, array $entityInfo,
-		$editable = true
-	) {
+	protected function getMainHtml( EntityRevision $entityRevision ) {
 		$item = $entityRevision->getEntity();
 
 		if ( !( $item instanceof Item ) ) {
 			throw new InvalidArgumentException( '$entityRevision must contain an Item.' );
 		}
 
-		$html = parent::getMainHtml( $entityRevision, $entityInfo, $editable );
+		$html = parent::getMainHtml( $entityRevision );
 		$html .= $this->claimsView->getHtml(
 			$item->getStatements()->toArray(),
-			$entityInfo,
 			'wikibase-statements'
 		);
 
@@ -45,9 +42,9 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getSideHtml
 	 */
-	protected function getSideHtml( EntityRevision $entityRevision, $editable = true ) {
+	protected function getSideHtml( EntityRevision $entityRevision ) {
 		$item = $entityRevision->getEntity();
-		return $this->getHtmlForSiteLinks( $item, $editable );
+		return $this->getHtmlForSiteLinks( $item );
 	}
 
 	/**
@@ -70,11 +67,10 @@ class ItemView extends EntityView {
 	 * @since 0.1
 	 *
 	 * @param Item $item the entity to render
-	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForSiteLinks( Item $item, $editable = true ) {
+	protected function getHtmlForSiteLinks( Item $item ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$groups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
 
@@ -88,7 +84,7 @@ class ItemView extends EntityView {
 
 		$itemId = $item->getId();
 
-		return $siteLinksView->getHtml( $item->getSiteLinks(), $itemId, $groups, $editable );
+		return $siteLinksView->getHtml( $item->getSiteLinks(), $itemId, $groups, $this->editable );
 	}
 
 }

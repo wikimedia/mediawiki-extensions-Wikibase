@@ -2,15 +2,9 @@
 
 namespace Wikibase\Repo\View;
 
-use Linker;
 use Wikibase\ClaimHtmlGenerator;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\ReferencedEntitiesFinder;
+use Wikibase\Lib\EntityIdFormatter;
 
 /**
  * Generates HTML to display claims.
@@ -19,13 +13,14 @@ use Wikibase\ReferencedEntitiesFinder;
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Daniel Kinzler
  */
 class ClaimsView {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityIdFormatter
 	 */
-	private $entityTitleLookup;
+	private $propertyIdFormatter;
 
 	/**
 	 * @var SectionEditLinkGenerator
@@ -38,26 +33,18 @@ class ClaimsView {
 	private $claimHtmlGenerator;
 
 	/**
-	 * @var string
-	 */
-	private $languageCode;
-
-	/**
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityIdFormatter $propertyIdFormatter
 	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
 	 * @param ClaimHtmlGenerator $claimHtmlGenerator
-	 * @param string $languageCode
 	 */
 	public function __construct(
-		EntityTitleLookup $entityTitleLookup,
+		EntityIdFormatter $propertyIdFormatter,
 		SectionEditLinkGenerator $sectionEditLinkGenerator,
-		ClaimHtmlGenerator $claimHtmlGenerator,
-		$languageCode
+		ClaimHtmlGenerator $claimHtmlGenerator
 	) {
-		$this->entityTitleLookup = $entityTitleLookup;
+		$this->propertyIdFormatter = $propertyIdFormatter;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->claimHtmlGenerator = $claimHtmlGenerator;
-		$this->languageCode = $languageCode;
 	}
 
 	/**
@@ -66,17 +53,16 @@ class ClaimsView {
 	 * @since 0.5
 	 *
 	 * @param Claim[] $claims the claims to render
-	 * @param array $entityInfo
 	 * @param string $heading the message key of the heading
 	 * @return string
 	 */
-	public function getHtml( array $claims, array $entityInfo, $heading = 'wikibase-claims' ) {
+	public function getHtml( array $claims, $heading = 'wikibase-claims' ) {
 		// aggregate claims by properties
 		$claimsByProperty = $this->groupClaimsByProperties( $claims );
 
 		$claimsHtml = '';
 		foreach ( $claimsByProperty as $claims ) {
-			$claimsHtml .= $this->getHtmlForClaimGroup( $claims, $entityInfo );
+			$claimsHtml .= $this->getHtmlForClaimGroup( $claims );
 		}
 
 		$claimgrouplistviewHtml = wfTemplate( 'wb-claimgrouplistview', $claimsHtml, '' );
@@ -90,6 +76,8 @@ class ClaimsView {
 
 	/**
 	 * Returns the HTML for the heading of the statements section
+	 *
+	 * @param string $heading message key of the heading
 	 *
 	 * @return string
 	 */
@@ -120,42 +108,16 @@ class ClaimsView {
 	}
 
 	/**
-	 * Returns all snaks which are stored in this list of claims.
-	 *
-	 * @param Claim[] $claims
-	 * @return Snak[]
-	 */
-	private function getSnaksFromClaims( array $claims ) {
-		$snaks = array();
-		/** @var Claim $claim */
-		foreach ( $claims as $claim ) {
-			$snaks = array_merge( $snaks, $claim->getAllSnaks() );
-		}
-		return $snaks;
-	}
-
-	/**
 	 * Returns the HTML for a group of claims.
 	 *
 	 * @param Claim[] $claims
-	 * @param array $entityInfo
 	 * @return string
 	 */
-	private function getHtmlForClaimGroup( array $claims, array $entityInfo ) {
+	private function getHtmlForClaimGroup( array $claims ) {
 		$propertyHtml = '';
 
 		$propertyId = $claims[0]->getMainSnak()->getPropertyId();
-		$key = $propertyId->getSerialization();
-		$propertyLabel = $key;
-		if ( isset( $entityInfo[$key] ) && !empty( $entityInfo[$key]['labels'] ) ) {
-			$entityInfoLabel = reset( $entityInfo[$key]['labels'] );
-			$propertyLabel = $entityInfoLabel['value'];
-		}
-
-		$propertyLink = Linker::link(
-			$this->entityTitleLookup->getTitleForId( $propertyId ),
-			htmlspecialchars( $propertyLabel )
-		);
+		$propertyLink = $this->propertyIdFormatter->format( $propertyId );
 
 		// TODO: add link to SpecialPage
 		$htmlForEditSection = $this->sectionEditLinkGenerator->getHtmlForEditSection(
@@ -168,7 +130,6 @@ class ClaimsView {
 		foreach ( $claims as $claim ) {
 			$propertyHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 				$claim,
-				$entityInfo,
 				$htmlForEditSection
 			);
 		}
