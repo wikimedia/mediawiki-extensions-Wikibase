@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_95c6924d",
+        "filename": "repo/tests/phpunit/includes/View/ItemViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-28T11:10:51Z",
+      "side": 1,
+      "message": "deprecated",
+      "revId": "140d92f6649a817e54dab4da9049aeaf04c2da33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b5c38e3c",
+        "filename": "repo/tests/phpunit/includes/View/ItemViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-28T11:10:51Z",
+      "side": 1,
+      "message": "deprecated",
+      "revId": "140d92f6649a817e54dab4da9049aeaf04c2da33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_75a666a9",
+        "filename": "repo/tests/phpunit/includes/View/ItemViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-28T11:10:51Z",
+      "side": 1,
+      "message": "deprecated",
+      "revId": "140d92f6649a817e54dab4da9049aeaf04c2da33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_15b362e9",
+        "filename": "repo/tests/phpunit/includes/View/PropertyViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-28T11:10:51Z",
+      "side": 1,
+      "message": "deprecated",
+      "revId": "140d92f6649a817e54dab4da9049aeaf04c2da33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_35b8dec2",
+        "filename": "repo/tests/phpunit/includes/View/PropertyViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-28T11:10:51Z",
+      "side": 1,
+      "message": "deprecated",
+      "revId": "140d92f6649a817e54dab4da9049aeaf04c2da33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_d5ac1a87",
+        "filename": "repo/tests/phpunit/includes/View/PropertyViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-11-28T11:10:51Z",
+      "side": 1,
+      "message": "deprecated",
+      "revId": "140d92f6649a817e54dab4da9049aeaf04c2da33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
