@@ -214,7 +214,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testApplyWithProperty() {
-		$property = Property::newEmpty();
+		$property = Property::newFromType( 'string' );
 		$property->setId( new PropertyId( 'P73923' ) );
 
 		$statement = $this->makeStatement( $property, new PropertyNoValueSnak( 45 ) );
