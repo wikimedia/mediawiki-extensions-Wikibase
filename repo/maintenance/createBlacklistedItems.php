@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -70,8 +70,8 @@ class CreatedBlacklistedItems extends \Maintenance {
 			$item = Item::newEmpty();
 
 			$item->setId( $id );
-			$item->setLabel( 'en', $name );
-			$item->addSiteLink( new SiteLink( 'enwiki', $name ) );
+			$item->getFingerprint()->setLabel( 'en', $name );
+			$item->getSiteLinkList()->addNewSiteLink( 'enwiki', $name );
 
 			$store->saveEntity( $item, 'Import', $user, EDIT_NEW );
 		}
