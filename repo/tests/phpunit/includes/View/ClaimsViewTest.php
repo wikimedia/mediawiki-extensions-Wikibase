@@ -5,30 +5,26 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use TestUser;
 use Title;
+use Html;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Repo\View\ClaimHtmlGenerator;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\View\ClaimsView
  *
  * @group Wikibase
  * @group WikibaseRepo
- *
- * @group Database
- *		^---- needed because we rely on Title objects internally
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -45,60 +41,21 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	}
 
 	public function testGetHtml() {
-		$property = $this->makeProperty();
-		$entityInfo = $this->makeEntityInfo( $property );
-		$claims = $this->makeClaims( $property->getId() );
+		$propertyId = new PropertyId( 'P77' );
+		$claims = $this->makeClaims( $propertyId );
 
-		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$propertyTitle = $entityTitleLookup->getTitleForId( $property->getId() );
+		$propertyIdFormatter = $this->getPropertyIdFormatterMock();
+		$link = $this->getLinkForId( $propertyId );
 
-		$claimsView = $this->newClaimsView( $entityTitleLookup );
+		$claimsView = $this->newClaimsView( $propertyIdFormatter );
 
-		$html = $claimsView->getHtml( $claims, $entityInfo );
+		$html = $claimsView->getHtml( $claims );
 
 		foreach ( $claims as $claim ) {
 			$this->assertContains( $claim->getGuid(), $html );
 		}
 
-		$this->assertPropertyLink( $propertyTitle->getPrefixedText(), $html );
-	}
-
-	/**
-	 * @return Property
-	 */
-	private function makeProperty() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$testUser = new TestUser( 'WikibaseUser' );
-
-		$property = Property::newEmpty();
-		$property->setLabel( 'en', "<script>alert( 'omg!!!' );</script>" );
-		$property->setDataTypeId( 'string' );
-
-		$revision = $store->saveEntity( $property, 'test property', $testUser->getUser(), EDIT_NEW );
-
-		return $revision->getEntity();
-	}
-
-	private function makeEntityInfo( Property $property ) {
-		$prefixedId = $property->getId()->getSerialization();
-
-		$entityInfo = array(
-			$prefixedId => array(
-				'type' => 'property',
-				'id' => 'P31',
-				'descriptions' => array(),
-				'labels' => array()
-			)
-		);
-
-		foreach( $property->getLabels() as $languageCode => $label ) {
-			$entityInfo[$prefixedId]['labels'][$languageCode] = array(
-				'language' => $languageCode,
-				'value' => $label
-			);
-		}
-
-		return $entityInfo;
+		$this->assertContains( $link, $html );
 	}
 
 	private function makeClaims( PropertyId $propertyId ) {
@@ -145,14 +102,15 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	}
 
 	/**
+	 * @param EntityIdFormatter $propertyIdFormatter
+	 *
 	 * @return ClaimsView
 	 */
-	private function newClaimsView( EntityTitleLookup $entityTitleLookup ) {
+	private function newClaimsView( EntityIdFormatter $propertyIdFormatter ) {
 		return new ClaimsView(
-			$entityTitleLookup,
+			$propertyIdFormatter,
 			new SectionEditLinkGenerator(),
-			$this->getClaimHtmlGeneratorMock(),
-			'en'
+			$this->getClaimHtmlGeneratorMock()
 		);
 	}
 
@@ -166,18 +124,37 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 
 		$claimHtmlGenerator->expects( $this->any() )
 			->method( 'getHtmlForClaim' )
-			->will( $this->returnCallback( function( Claim $claim, array $entityInfo, $htmlForEditSection ) {
+			->will( $this->returnCallback( function( Claim $claim, $htmlForEditSection ) {
 				return $claim->getGuid();
 			} ) );
 
 		return $claimHtmlGenerator;
 	}
 
-	private function assertPropertyLink( $titleText, $html ) {
-		$regExp = '/<a href="\/wiki\/' . $titleText . '" title="' . $titleText . '">'
-			. "&lt;script&gt;alert\( \'omg!!!\' \);&lt;\/script&gt;<\/a>/";
+	/**
+	 * @param EntityId $id
+	 * @return string
+	 */
+	public function getLinkForId( EntityId $id ) {
+		$name = $id->getEntityType() . ':' . $id->getSerialization();
+		$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
 
-		$this->assertRegExp( $regExp, $html );
+		return Html::element( 'a', array( 'href' => $url ), $name );
+	}
+
+	/**
+	 * @return EntityIdFormatter
+	 */
+	protected function getPropertyIdFormatterMock() {
+		$lookup = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$lookup->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnCallback( array( $this, 'getLinkForId' ) ) );
+
+		return $lookup;
 	}
 
 }

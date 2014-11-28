@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use Html;
 use Title;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
@@ -13,6 +14,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\DispatchingSnakFormatter;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\ClaimHtmlGenerator;
@@ -55,21 +57,26 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param EntityId $id
-	 * @return Title
+	 * @return string
 	 */
-	public function getTitleForId( EntityId $id ) {
+	public function getLinkForId( EntityId $id ) {
 		$name = $id->getEntityType() . ':' . $id->getSerialization();
-		return Title::makeTitle( NS_MAIN, $name );
+		$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
+
+		return Html::element( 'a', array( 'href' => $url ), $name );
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityIdFormatter
 	 */
-	protected function getEntityTitleLookupMock() {
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+	protected function getPropertyIdFormatterMock() {
+		$lookup = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
+			->disableOriginalConstructor()
+			->getMock();
+
 		$lookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
+			->method( 'format' )
+			->will( $this->returnCallback( array( $this, 'getLinkForId' ) ) );
 
 		return $lookup;
 	}
@@ -78,22 +85,21 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getHtmlForClaimProvider
 	 */
 	public function testGetHtmlForClaim(
-		$snakFormatter,
-		$entityTitleLookup,
-		$claim,
+		SnakFormatter $snakFormatter,
+		EntityIdFormatter $propertyIdFormatter,
+		Claim $claim,
 		$patterns
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$propertyIdFormatter
 		);
 
 		$claimHtmlGenerator = new ClaimHtmlGenerator(
-			$snakHtmlGenerator,
-			$entityTitleLookup
+			$snakHtmlGenerator
 		);
 
-		$html = $claimHtmlGenerator->getHtmlForClaim( $claim, array(), 'edit' );
+		$html = $claimHtmlGenerator->getHtmlForClaim( $claim, 'edit' );
 
 		foreach( $patterns as $message => $pattern ) {
 			$this->assertRegExp( $pattern, $html, $message );
@@ -103,13 +109,13 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	public function getHtmlForClaimProvider() {
 		$snakFormatter = $this->getSnakFormatterMock();
 
-		$entityTitleLookupMock = $this->getEntityTitleLookupMock();
+		$propertyIdFormatterMock = $this->getPropertyIdFormatterMock();
 
 		$testCases = array();
 
 		$testCases[] = array(
 			$snakFormatter,
-			$entityTitleLookupMock,
+			$propertyIdFormatterMock,
 			new Claim( new PropertySomeValueSnak( 42 ) ),
 			array(
 				'snak variation css' => '/wb-snakview-variation-somevalue/',
@@ -119,7 +125,7 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$testCases[] = array(
 			$snakFormatter,
-			$entityTitleLookupMock,
+			$propertyIdFormatterMock,
 			new Claim(
 				new PropertySomeValueSnak( 42 ),
 				new SnakList( array(
@@ -134,7 +140,7 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$testCases[] = array(
 			$snakFormatter,
-			$entityTitleLookupMock,
+			$propertyIdFormatterMock,
 			new Statement(
 				new Claim(
 					new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),

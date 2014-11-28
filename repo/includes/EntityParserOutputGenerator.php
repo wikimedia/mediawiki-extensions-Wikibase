@@ -294,10 +294,11 @@ class EntityParserOutputGenerator {
 			$entityRevision->getEntity()->getType(),
 			$this->languageCode,
 			$this->languageFallbackChain,
-			$labelLookup
+			$labelLookup,
+			$editable
 		);
 
-		$html = $entityView->getHtml( $entityRevision, $entityInfo, $editable );
+		$html = $entityView->getHtml( $entityRevision );
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
 	}
