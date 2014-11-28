@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Store;
 use OutOfBoundsException;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\FingerprintProvider;
 
 /**
  * @since 0.5
@@ -123,7 +124,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 			throw new StorageException( "An Entity with the id $entityId could not be loaded" );
 		}
 
-		return $entity->getFingerprint();
+		return $entity instanceof FingerprintProvider ? $entity->getFingerprint() : Fingerprint::newEmpty();
 	}
 
 }
