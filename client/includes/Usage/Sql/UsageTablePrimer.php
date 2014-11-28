@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use LoadBalancer;
 use ResultWrapper;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Reporting\ExceptionHandler;
@@ -38,11 +39,6 @@ class UsageTablePrimer {
 	private $loadBalancer;
 
 	/**
-	 * @var string
-	 */
-	private $usageTableName;
-
-	/**
 	 * @var int
 	 */
 	private $batchSize;
@@ -60,23 +56,17 @@ class UsageTablePrimer {
 	/**
 	 * @param EntityIdParser $idParser
 	 * @param LoadBalancer $loadBalancer
-	 * @param string $usageTableName
 	 * @param int $batchSize
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdParser $idParser, LoadBalancer $loadBalancer, $usageTableName, $batchSize = 1000 ) {
-		if ( !is_string( $usageTableName ) ) {
-			throw new InvalidArgumentException( '$usageTableName must be a string' );
-		}
-
+	public function __construct( EntityIdParser $idParser, LoadBalancer $loadBalancer, $batchSize = 1000 ) {
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 
 		$this->idParser = $idParser;
 		$this->loadBalancer = $loadBalancer;
-		$this->usageTableName = $usageTableName;
 		$this->batchSize = $batchSize;
 
 		$this->exceptionHandler = new LogWarningExceptionHandler();
@@ -86,7 +76,7 @@ class UsageTablePrimer {
 	/**
 	 * @param MessageReporter $progressReporter
 	 */
-	public function setProgressReporter( $progressReporter ) {
+	public function setProgressReporter( MessageReporter $progressReporter ) {
 		$this->progressReporter = $progressReporter;
 	}
 
@@ -100,7 +90,7 @@ class UsageTablePrimer {
 	/**
 	 * @param ExceptionHandler $exceptionHandler
 	 */
-	public function setExceptionHandler( $exceptionHandler ) {
+	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
 		$this->exceptionHandler = $exceptionHandler;
 	}
 
@@ -159,7 +149,7 @@ class UsageTablePrimer {
 		$c = 0;
 		foreach ( $entityPerPage as $pageId => $entityId ) {
 			$db->insert(
-				$this->usageTableName,
+				UsageTracker::TABLE_NAME,
 				array(
 					'eu_page_id' => (int)$pageId,
 					'eu_aspect' => EntityUsage::ALL_USAGE,
@@ -219,10 +209,10 @@ class UsageTablePrimer {
 				$this->exceptionHandler->handleException(
 					$ex,
 					'badEntityId',
-					__METHOD__ .': ' .
-						'Failed to parse entity ID: ' .
+					__METHOD__ . ': ' . 'Failed to parse entity ID: ' .
 						$row->pp_value . ' at page ' .
-						$row->pp_page );
+						$row->pp_page
+				);
 			}
 		}
 

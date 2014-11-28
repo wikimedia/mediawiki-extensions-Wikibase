@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use DatabaseBase;
@@ -6,6 +7,7 @@ use PHPUnit_Framework_Assert as Assert;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\Sql\UsageTableUpdater;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -23,14 +25,12 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class UsageTableUpdaterTest extends \MediaWikiTestCase {
 
-	private $tableName = 'wbc_entity_usage';
-
 	protected function setUp() {
 		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
 			$this->markTestSkipped( 'Skipping test for UsageTableUpdater, because the useLegacyUsageIndex option is set.' );
 		}
 
-		$this->tablesUsed[] = $this->tableName;
+		$this->tablesUsed[] = UsageTracker::TABLE_NAME;
 
 		parent::setUp();
 	}
@@ -117,7 +117,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	private function getUsageTableUpdater( $batchSize = 1000 ) {
-		return new UsageTableUpdater( wfGetDB( DB_WRITE ), $this->tableName, $batchSize );
+		return new UsageTableUpdater( wfGetDB( DB_WRITE ), $batchSize );
 	}
 
 	public function testUpdateUsage() {
@@ -233,7 +233,8 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	 * @return bool
 	 */
 	private function rowExists( DatabaseBase $db, $conditions ) {
-		$count = $db->selectRowCount( $this->tableName, '*', $conditions );
+		$count = $db->selectRowCount( UsageTracker::TABLE_NAME, '*', $conditions );
 		return $count > 0;
 	}
+
 }

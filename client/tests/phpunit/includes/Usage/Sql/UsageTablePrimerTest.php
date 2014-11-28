@@ -1,12 +1,15 @@
 <?php
+
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use PHPUnit_Framework_MockObject_Matcher;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Usage\Sql\UsageTablePrimer;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Reporting\ExceptionHandler;
+use Wikibase\Lib\Reporting\MessageReporter;
 
 /**
  * @covers Wikibase\Client\Usage\Sql\UsageTablePrimer
@@ -21,24 +24,22 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
  */
 class UsageTablePrimerTest extends \MediaWikiTestCase {
 
-	private $tableName = 'wbc_entity_usage';
-
 	public function setUp() {
 		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
 			$this->markTestSkipped( 'Skipping test for UsageTablePrimer, because the useLegacyUsageIndex option is set.' );
 		}
 
-		$this->tablesUsed[] = $this->tableName;
+		$this->tablesUsed[] = UsageTracker::TABLE_NAME;
 		$this->tablesUsed[] = 'page_props';
 
 		parent::setUp();
 	}
 
-	private function getUsageTablePrimer( $bastchSize = 10 ) {
+	private function getUsageTablePrimer( $batchSize = 10 ) {
 		$loadBalancer = wfGetLB();
 		$idParser = new BasicEntityIdParser();
 
-		return new UsageTablePrimer( $idParser, $loadBalancer, $this->tableName, $bastchSize );
+		return new UsageTablePrimer( $idParser, $loadBalancer, $batchSize );
 	}
 
 	public function testFillUsageTable() {
@@ -89,7 +90,7 @@ class UsageTablePrimerTest extends \MediaWikiTestCase {
 	private function fetchAllUsageStrings() {
 		$db = wfGetDB( DB_MASTER );
 
-		$res = $db->select( $this->tableName, "*", '', __METHOD__ );
+		$res = $db->select( UsageTracker::TABLE_NAME, '*', '', __METHOD__ );
 
 		$usages = array();
 		foreach ( $res as $row ) {
@@ -102,7 +103,7 @@ class UsageTablePrimerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher $matcher
+	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
 	 *
 	 * @return ExceptionHandler
 	 */
@@ -115,9 +116,9 @@ class UsageTablePrimerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher $matcher
+	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
 	 *
-	 * @return ExceptionHandler
+	 * @return MessageReporter
 	 */
 	private function getMessageReporter( PHPUnit_Framework_MockObject_Matcher_Invocation $matcher ) {
 		$mock = $this->getMock( 'Wikibase\Lib\Reporting\MessageReporter' );

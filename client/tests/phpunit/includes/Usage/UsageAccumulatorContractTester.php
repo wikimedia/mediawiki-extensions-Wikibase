@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Client\Usage\Tests;
 
 use PHPUnit_Framework_Assert as Assert;
