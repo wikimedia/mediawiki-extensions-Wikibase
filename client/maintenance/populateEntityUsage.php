@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use LoggedUpdateMaintenance;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
@@ -23,7 +24,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class PopulateEntityUsage extends LoggedUpdateMaintenance {
 
 	public function __construct() {
-		$this->mDescription = 'Populate the wbc_entity_usage table based on entries in page_props.';
+		$this->mDescription = 'Populate the ' . UsageTracker::TABLE_NAME . ' table based on entries in page_props.';
 
 		$this->addOption( 'start-page', "The page ID to start from.", false, true );
 
@@ -53,7 +54,6 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 		$builder = new EntityUsageTableBuilder(
 			WikibaseClient::getDefaultInstance()->getEntityIdParser(),
 			wfGetLB(),
-			'wbc_entity_usage',
 			$this->mBatchSize
 		);
 

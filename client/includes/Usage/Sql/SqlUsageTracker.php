@@ -55,7 +55,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return UsageTableUpdater
 	 */
 	private function newTableUpdater( DatabaseBase $db ) {
-		return new UsageTableUpdater( $db, 'wbc_entity_usage', $this->batchSize );
+		return new UsageTableUpdater( $db, $this->batchSize );
 	}
 
 	/**
@@ -103,6 +103,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityUsage[]
 	 * @throws InvalidArgumentException
 	 * @throws UsageTrackerException
+	 * @throws Exception
 	 */
 	public function trackUsedEntities( $pageId, array $usages, $touched ) {
 		if ( !is_int( $pageId ) ) {
@@ -198,7 +199,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		}
 
 		$res = $db->select(
-			'wbc_entity_usage',
+			UsageTracker::TABLE_NAME,
 			array( 'eu_aspect', 'eu_entity_id' ),
 			array( 'eu_page_id' => $pageId ),
 			__METHOD__
@@ -250,7 +251,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		$db = $this->connectionManager->getReadConnection();
 
 		$res = $db->select(
-			'wbc_entity_usage',
+			UsageTracker::TABLE_NAME,
 			array( 'eu_page_id', 'eu_entity_id', 'eu_aspect' ),
 			$where,
 			__METHOD__
@@ -329,7 +330,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		$db = $this->connectionManager->getReadConnection();
 
 		$res = $db->select(
-			'wbc_entity_usage',
+			UsageTracker::TABLE_NAME,
 			array( 'eu_entity_id' ),
 			$where,
 			__METHOD__
