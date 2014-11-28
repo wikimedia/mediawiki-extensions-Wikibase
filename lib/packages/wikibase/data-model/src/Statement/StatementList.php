@@ -222,7 +222,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	}
 
 	/**
-	 * @return Statement[]
+	 * @return Statement[] Numerically indexed (non-sparse) array.
 	 */
 	public function toArray() {
 		return $this->statements;

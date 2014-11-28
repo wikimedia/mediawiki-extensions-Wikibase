@@ -27,6 +27,7 @@ class ClaimList implements \IteratorAggregate {
 
 	/**
 	 * @param Claim[]|Traversable $claims
+	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $claims = array() ) {
@@ -99,6 +100,8 @@ class ClaimList implements \IteratorAggregate {
 	}
 
 	/**
+	 * FIXME: This does not reindex sparse arrays!
+	 *
 	 * @return Claim[]
 	 */
 	public function toArray() {
