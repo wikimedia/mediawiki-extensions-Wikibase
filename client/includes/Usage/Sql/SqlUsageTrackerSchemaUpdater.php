@@ -4,6 +4,7 @@ namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
 use MWException;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 
@@ -49,7 +50,7 @@ class SqlUsageTrackerSchemaUpdater {
 	 * Applies any schema updates
 	 */
 	public function doSchemaUpdate() {
-		$table = 'wbc_entity_usage';
+		$table = UsageTracker::TABLE_NAME;
 		$db = $this->dbUpdater->getDB();
 
 		if ( !$this->dbUpdater->tableExists( $table ) ) {
@@ -78,16 +79,14 @@ class SqlUsageTrackerSchemaUpdater {
 	/**
 	 * Static wrapper for EntityUsageTableBuilder::fillUsageTable
 	 *
-	 * @param DatabaseUpdater $dbUpdater
-	 * @param string $table
+	 * @param DatabaseUpdater $dbUpdater Unused.
 	 */
-	public static function fillUsageTable( DatabaseUpdater $dbUpdater, $table ) {
+	public static function fillUsageTable( DatabaseUpdater $dbUpdater ) {
 		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
 
 		$primer = new EntityUsageTableBuilder(
 			$idParser,
 			wfGetLB(), // would be nice to pass in $dbUpdater->getDB().
-			$table,
 			1000
 		);
 
