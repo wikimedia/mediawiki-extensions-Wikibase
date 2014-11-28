@@ -4,6 +4,9 @@
 
 * Added `TermList::getWithLanguages`
 * Added `AliasGroupList::getWithLanguages`
+* Added `SiteLinkList::toArray`
+* Added `SiteLinkList::setSiteLink`
+* Added `SiteLinkList::setNewSiteLink`
 
 ## Version 2.4.1 (2014-11-26)
 

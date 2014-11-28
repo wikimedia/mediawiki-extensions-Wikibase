@@ -75,6 +75,26 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	}
 
 	/**
+	 * @since 2.5
+	 *
+	 * @param SiteLink $link
+	 */
+	public function setSiteLink( SiteLink $link ) {
+		$this->siteLinks[$link->getSiteId()] = $link;
+	}
+
+	/**
+	 * @since 2.5
+	 *
+	 * @param string $siteId
+	 * @param string $pageName
+	 * @param ItemIdSet|ItemId[]|null $badges
+	 */
+	public function setNewSiteLink( $siteId, $pageName, $badges = null ) {
+		$this->setSiteLink( new SiteLink( $siteId, $pageName, $badges ) );
+	}
+
+	/**
 	 * @see IteratorAggregate::getIterator
 	 *
 	 * Returns a Traversable of SiteLink in which the keys are the site ids.
@@ -150,6 +170,15 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	 */
 	public function isEmpty() {
 		return empty( $this->siteLinks );
+	}
+
+	/**
+	 * @since 2.5
+	 *
+	 * @return SiteLink[]
+	 */
+	public function toArray() {
+		return $this->siteLinks;
 	}
 
 	/**
