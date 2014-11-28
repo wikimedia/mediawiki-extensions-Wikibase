@@ -296,8 +296,8 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 	 */
 	protected function getTestEntity() {
 		$entity = $this->makeEntity( $this->makeEntityId( 22 ) );
-		$entity->setLabel( 'de', 'fuh' );
-		$entity->setLabel( 'en', 'foo' );
+		$entity->getFingerprint()->setLabel( 'de', 'fuh' );
+		$entity->getFingerprint()->setLabel( 'en', 'foo' );
 
 		$entity->setDescription( 'de', 'fuh barr' );
 		$entity->setDescription( 'en', 'foo bar' );

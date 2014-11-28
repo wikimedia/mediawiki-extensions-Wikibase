@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EntityRevision;
 use Wikibase\RdfBuilder;
 
@@ -46,15 +47,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		$entity = Item::newEmpty();
 		$entities['terms'] = $entity;
-
-		$entity->setLabel( 'en', 'Berlin' );
-		$entity->setLabel( 'ru', 'Берлин' );
-
-		$entity->setDescription( 'en', 'German city' );
-		$entity->setDescription( 'ru', 'столица и одновременно земля Германии' );
-
-		$entity->addAliases( 'en', array( 'Berlin, Germany', 'Land Berlin' ) );
-		$entity->addAliases( 'ru', array( 'Berlin' ) );
+		$entity->setFingerprint( self::newTestFingerprint() );
 
 		// TODO: test links
 		// TODO: test data values
@@ -69,6 +62,21 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		}
 
 		return $entities;
+	}
+
+	private static function newTestFingerprint() {
+		$fingerprint = Fingerprint::newEmpty();
+
+		$fingerprint->setLabel( 'en', 'Berlin' );
+		$fingerprint->setLabel( 'ru', 'Берлин' );
+
+		$fingerprint->setDescription( 'en', 'German city' );
+		$fingerprint->setDescription( 'ru', 'столица и одновременно земля Германии' );
+
+		$fingerprint->setAliasGroup( 'en', array( 'Berlin, Germany', 'Land Berlin' ) );
+		$fingerprint->setAliasGroup( 'ru', array( 'Berlin' ) );
+
+		return $fingerprint;
 	}
 
 	/**
