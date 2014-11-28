@@ -327,8 +327,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddEntityRevisionWithSiteLinksFilter() {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q123099' ) );
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Berlin' ) );
-		$item->addSiteLink( new SiteLink( 'dewiki', 'Berlin' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin' );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 		$entityRevision = new EntityRevision( $item );
 
 		$options = new SerializationOptions();
@@ -365,8 +365,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q123100' ) );
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Berlin' ) );
-		$item->addSiteLink( new SiteLink( 'dewiki', 'Berlin' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin' );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 		$entityRevision = new EntityRevision( $item );
 
 		$options = new SerializationOptions();

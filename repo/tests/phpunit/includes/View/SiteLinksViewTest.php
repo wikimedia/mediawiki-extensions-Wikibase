@@ -68,7 +68,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q1' ) );
-		$item->addSiteLink( new SiteLink( 'enwiki', 'test' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'test' );
 
 		$testCases[] = array(
 			$item,
@@ -106,7 +106,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q1' ) );
-		$item->addSiteLink( new SiteLink( 'specialwiki', 'test' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'specialwiki', 'test' );
 
 		$testCases[] = array(
 			$item,
@@ -217,7 +217,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			false,
 		);
 
-		$item->addSiteLink( new SiteLink( 'enwiki', 'test' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'test' );
 
 		$testCases[] = array(
 			$item,

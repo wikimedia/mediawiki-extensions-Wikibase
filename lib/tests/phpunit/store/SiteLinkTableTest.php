@@ -74,16 +74,17 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		// save initial links
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'q177' ) );
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
-		$item->addSiteLink( new SiteLink( 'dewiki', 'Bar' ) );
-		$item->addSiteLink( new SiteLink( 'svwiki', 'Börk' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Bar' );
+		$item->getSiteLinkList()->addNewSiteLink( 'svwiki', 'Börk' );
 
 		$this->siteLinkTable->saveLinksOfItem( $item );
 
 		// modify links, and save again
-		$item->addSiteLink( new SiteLink( 'enwiki', 'FooK' ) );
+		$item->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'FooK' );
 		$item->removeSiteLink( 'dewiki' );
-		$item->addSiteLink( new SiteLink( 'nlwiki', 'GrooK' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'GrooK' );
 
 		$this->siteLinkTable->saveLinksOfItem( $item );
 
