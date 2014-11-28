@@ -1,6 +1,6 @@
 <?php
 
-define( 'WIKIBASE_JAVASCRIPT_API_VERSION', '1.0' );
+define( 'WIKIBASE_JAVASCRIPT_API_VERSION', '1.0.1' );
 
 if ( defined( 'MEDIAWIKI' ) ) {
 	call_user_func( function() {
