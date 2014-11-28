@@ -14,6 +14,8 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 interface UsageTracker {
 
+	const TABLE_NAME = 'wbc_entity_usage';
+
 	/**
 	 * Updates entity usage information for the given page.
 	 *

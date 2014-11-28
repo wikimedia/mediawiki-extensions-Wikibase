@@ -5,6 +5,7 @@ namespace Wikibase;
 use Maintenance;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
@@ -23,7 +24,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class UpdateSubscriptions extends Maintenance {
 
 	public function __construct() {
-		$this->mDescription = 'Updates the repo\'s wb_changes_subscription table based on entries in wbc_entity_usage.';
+		$this->mDescription = 'Updates the repo\'s wb_changes_subscription table based on entries in ' . UsageTracker::TABLE_NAME . '.';
 
 		$this->addOption( 'start-item', "The entity ID to start from.", false, true );
 		$this->addOption( 'purge', "Purge subscriptions first. If not given, subscriptions are only added, not removed.", false, false );
