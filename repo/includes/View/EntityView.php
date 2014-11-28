@@ -41,6 +41,11 @@ abstract class EntityView {
 	protected $language;
 
 	/**
+	 * @var bool
+	 */
+	protected $editable;
+
+	/**
 	 * @var TextInjector
 	 */
 	protected $textInjector;
@@ -49,16 +54,18 @@ abstract class EntityView {
 	 * @param FingerprintView $fingerprintView
 	 * @param ClaimsView $claimsView
 	 * @param Language $language
+	 * @param bool $editable
 	 */
 	public function __construct(
 		FingerprintView $fingerprintView,
 		ClaimsView $claimsView,
-		Language $language
+		Language $language,
+		$editable  = true
 	) {
-		// @todo: move the $editable flag here, instead of passing it around everywhere
 		$this->fingerprintView = $fingerprintView;
 		$this->claimsView = $claimsView;
 		$this->language = $language;
+		$this->editable = $editable;
 
 		$this->textInjector = new TextInjector();
 	}
@@ -84,12 +91,10 @@ abstract class EntityView {
 	 * @since 0.1
 	 *
 	 * @param EntityRevision $entityRevision the entity to render
-	 * @param array obtained from EntityInfoBuilder::getEntityInfo
-	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string HTML
 	 */
-	public function getHtml( EntityRevision $entityRevision, array $entityInfo, $editable = true ) {
+	public function getHtml( EntityRevision $entityRevision ) {
 		$entity = $entityRevision->getEntity();
 
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
@@ -101,11 +106,11 @@ abstract class EntityView {
 			$entityId,
 			$this->language->getCode(),
 			$this->language->getDir(),
-			$this->getMainHtml( $entityRevision, $entityInfo, $editable ),
-			$this->getSideHtml( $entityRevision, $editable )
+			$this->getMainHtml( $entityRevision ),
+			$this->getSideHtml( $entityRevision )
 		);
 
-		if ( $editable ) {
+		if ( $this->editable ) {
 			$html .= $this->getLoadingSpinnerInlineScript();
 		}
 
@@ -136,22 +141,18 @@ if ( $ ) {
 	 * Builds and returns the HTML to be put into the main container of an entity's HTML structure.
 	 *
 	 * @param EntityRevision $entityRevision
-	 * @param array obtained from EntityInfoBuilder::getEntityInfo
-	 * @param bool $editable
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	protected function getMainHtml( EntityRevision $entityRevision, array $entityInfo,
-		$editable = true
-	) {
+	protected function getMainHtml( EntityRevision $entityRevision ) {
 		wfProfileIn( __METHOD__ );
 
 		$entity = $entityRevision->getEntity();
 
-		$html = $this->getHtmlForFingerprint( $entity, $editable );
+		$html = $this->getHtmlForFingerprint( $entity );
 		$html .= $this->getHtmlForToc();
-		$html .= $this->getHtmlForTermBox( $entityRevision, $editable );
+		$html .= $this->getHtmlForTermBox( $entityRevision );
 
 		wfProfileOut( __METHOD__ );
 		return $html;
@@ -161,10 +162,10 @@ if ( $ ) {
 	 * Builds and Returns HTML to put into the sidebar of the entity's HTML structure.
 	 *
 	 * @param EntityRevision $entityRevision
-	 * @param bool $editable
+	 *
 	 * @return string
 	 */
-	protected function getSideHtml( EntityRevision $entityRevision, $editable = true ) {
+	protected function getSideHtml( EntityRevision $entityRevision ) {
 		return '';
 	}
 
@@ -172,12 +173,11 @@ if ( $ ) {
 	 * Builds and returns the HTML for the entity's fingerprint.
 	 *
 	 * @param Entity $entity
-	 * @param bool $editable
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForFingerprint( Entity $entity, $editable = true ) {
-		return $this->fingerprintView->getHtml( $entity->getFingerprint(), $entity->getId(), $editable );
+	protected function getHtmlForFingerprint( Entity $entity ) {
+		return $this->fingerprintView->getHtml( $entity->getFingerprint(), $entity->getId(), $this->editable );
 	}
 
 	/**

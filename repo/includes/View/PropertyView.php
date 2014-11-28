@@ -23,7 +23,7 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getMainHtml
 	 */
-	public function getMainHtml( EntityRevision $entityRevision, array $entityInfo,
+	public function getMainHtml( EntityRevision $entityRevision,
 		$editable = true
 	) {
 		wfProfileIn( __METHOD__ );
@@ -34,12 +34,11 @@ class PropertyView extends EntityView {
 			throw new InvalidArgumentException( '$entityRevision must contain a Property.' );
 		}
 
-		$html = parent::getMainHtml( $entityRevision, $entityInfo, $editable );
+		$html = parent::getMainHtml( $entityRevision );
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
 		$html .= $this->claimsView->getHtml(
-			$property->getStatements()->toArray(),
-			$entityInfo
+			$property->getStatements()->toArray()
 		);
 
 		$footer = wfMessage( 'wikibase-property-footer' );
