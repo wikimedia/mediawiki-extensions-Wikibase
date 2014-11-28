@@ -93,7 +93,7 @@ class WikibaseValueFormatterBuilders {
 		SnakFormatter::FORMAT_HTML => array(
 			'PT:url' => 'Wikibase\Lib\HtmlUrlFormatter',
 			'PT:commonsMedia' => 'Wikibase\Lib\CommonsLinkFormatter',
-			'PT:wikibase-item' =>  array( 'this', 'newEntityIdHtmlLinkFormatter' ),
+			'PT:wikibase-item' =>  array( 'this', 'newEntityIdHtmlFormatter' ),
 			'VT:time' => array( 'this', 'newHtmlTimeFormatter' ),
 			'VT:monolingualtext' => 'Wikibase\Formatters\MonolingualHtmlFormatter',
 		),
@@ -558,14 +558,19 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @param FormatterOptions $options
 	 *
-	 * @return EntityIdHtmlLinkFormatter
+	 * @return ValueFormatter
 	 */
-	private function newEntityIdHtmlLinkFormatter( FormatterOptions $options ) {
-		return new EntityIdHtmlLinkFormatter(
-			$options,
-			$this->newLabelLookup( $options ),
-			$this->entityTitleLookup
-		);
+	private function newEntityIdHtmlFormatter( FormatterOptions $options ) {
+		$labelLookup = $this->newLabelLookup( $options );
+
+		if ( !$this->entityTitleLookup ) {
+			return new EscapingValueFormatter(
+				new EntityIdLabelFormatter( $options, $labelLookup ),
+				'htmlspecialchars'
+			);
+		}
+
+		return new EntityIdHtmlLinkFormatter( $options, $labelLookup, $this->entityTitleLookup );
 	}
 
 	/**
