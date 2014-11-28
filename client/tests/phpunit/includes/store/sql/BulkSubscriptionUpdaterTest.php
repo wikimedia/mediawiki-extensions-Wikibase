@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Store\Sql;
 
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
@@ -34,7 +35,7 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 		}
 
 		$this->tablesUsed[] = 'wb_changes_subscription';
-		$this->tablesUsed[] = 'wbc_entity_usage';
+		$this->tablesUsed[] = UsageTracker::TABLE_NAME;
 
 		parent::setUp();
 	}
@@ -194,7 +195,7 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 
 	private function truncateEntityUsage() {
 		$db = wfGetDB( DB_MASTER );
-		$db->delete( 'wbc_entity_usage', '*' );
+		$db->delete( UsageTracker::TABLE_NAME, '*' );
 	}
 
 	private function putEntityUsage( array $entries ) {
@@ -206,7 +207,7 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 			list( $entityId, $pageId ) = $entry;
 			$aspect = 'X';
 
-			$db->insert( 'wbc_entity_usage', array(
+			$db->insert( UsageTracker::TABLE_NAME, array(
 				'eu_entity_id' => $entityId,
 				'eu_aspect' => $aspect,
 				'eu_page_id' => (int)$pageId,
