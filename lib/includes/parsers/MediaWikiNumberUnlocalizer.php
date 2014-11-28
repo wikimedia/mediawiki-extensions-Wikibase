@@ -1,12 +1,11 @@
 <?php
 
 namespace Wikibase\Lib;
+
 use Language;
 use ValueParsers\BasicNumberUnlocalizer;
 
 /**
- * MediaWikiNumberUnlocalizer
- *
  * @since 0.5
  *
  * @license GPL 2+
@@ -33,11 +32,11 @@ class MediaWikiNumberUnlocalizer extends BasicNumberUnlocalizer {
 	}
 
 	/**
-	 * @see Unlocalizer::unlocalize()
+	 * @see NumberUnlocalizer::unlocalizeNumber
 	 *
 	 * @param string $number string to process
 	 *
-	 * @return string unlocalized string
+	 * @return string unlocalized number, in a form suitable for floatval resp. intval.
 	 */
 	public function unlocalizeNumber( $number ) {
 		$canonicalizedNumber = $this->language->parseFormattedNumber( $number );
@@ -52,7 +51,7 @@ class MediaWikiNumberUnlocalizer extends BasicNumberUnlocalizer {
 	}
 
 	/**
-	 * @see Unlocalizer::getNumberRegex()
+	 * @see NumberUnlocalizer::getNumberRegex
 	 *
 	 * Constructs a regular expression based on Language::digitTransformTable()
 	 * and Language::separatorTransformTable().
