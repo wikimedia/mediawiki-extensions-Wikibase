@@ -15,7 +15,7 @@
 ## Version 2.4.0 (2014-11-23)
 
 * `Property` now implements the deprecated claim related methods defined in `Entity`
-* Added `AliasGroup::isEmpty`
+* Added `AliasGroupList::isEmpty`
 * Added `StatementList::getBestStatements`
 * Added `StatementList::getWithRank`
 * Added `TermList::isEmpty`
