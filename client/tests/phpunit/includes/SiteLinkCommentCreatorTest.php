@@ -87,7 +87,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Japan' ) );
 
 		$item2 = $this->getNewItem();
-		$item2->removeSiteLink( 'enwiki' );
+		$item2->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
 		$change = $changeFactory->newFromUpdate( ItemChange::UPDATE, $item, $item2 );
@@ -162,7 +162,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item->addSiteLink( new SiteLink( 'dewiki', 'Japan' ) );
 
 		$item2 = $item->copy();
-		$item2->removeSiteLink( 'dewiki' );
+		$item2->getSiteLinkList()->removeLinkWithSiteId( 'dewiki' );
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
 		$change = $changeFactory->newFromUpdate( ItemChange::UPDATE, $item, $item2 );
