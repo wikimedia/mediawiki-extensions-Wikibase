@@ -258,51 +258,17 @@ HTML;
 
 	$templates['wikibase-sitelinklistview'] =
 <<<HTML
-<table class="wikibase-sitelinklistview">
-	<colgroup>
-		<col class="wikibase-sitelinklistview-sitename" />
-		<col class="wikibase-sitelinklistview-siteid" />
-		<col class="wikibase-sitelinklistview-link" />
-		<col/>
-	</colgroup>
-	<thead>
-		<!-- wikibase-sitelinklist-thead -->$1
-	</thead>
-	<tbody>
-		<!-- [0,*] wikibase-sitelinkview -->$2
-	</tbody>
-	<tfoot>
-		<!-- wikibase-sitelinklistview-tfoot -->$3
-	</tfoot>
-</table>
-HTML;
-
-	$templates['wikibase-sitelinklistview-thead'] =
-<<<HTML
-<tr class="wikibase-sitelinklistview-columnheaders">
-	<th class="wikibase-sitelinkview-sitename">$1</th>
-	<th class="wikibase-sitelinkview-siteid">$2</th>
-	<th class="wikibase-sitelinkview-link">$3</th>
-	<th class="unsortable"></th>
-</tr>
-HTML;
-
-	$templates['wikibase-sitelinklistview-tfoot'] =
-<<<HTML
-<tr>
-	<td colspan="3" class="wikibase-sitelinklistview-placeholder">$1</td>
-	<td><!-- wikibase-toolbar -->$2</td>
-</tr>
+<div class="wikibase-sitelinklistview">
+	<ul class="wikibase-sitelinklistview-listview"><!-- [0,*] wikibase-sitelinkview -->$1</ul>
+</div>
 HTML;
 
 	$templates['wikibase-sitelinkview'] =
 <<<HTML
-<tr class="wikibase-sitelinkview wikibase-sitelinkview-$1" data-wb-siteid="$1">
-	<td class="wikibase-sitelinkview-sitename wikibase-sitelinkview-sitename-$1" lang="$2" dir="$3">$4</td>
-	<td class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-$1">$5</td>
-	<td class="wikibase-sitelinkview-link wikibase-sitelinkview-link-$1" lang="$2" dir="$3"><!-- wikibase-sitelinkview-pagename -->$6</td>
-	<td><!-- placeholder for remove toolbar dynamically generated in edit mode --></td>
-</tr>
+<li class="wikibase-sitelinkview wikibase-sitelinkview-$1" data-wb-siteid="$1">
+	<span class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-$1" title="$5">$4</span>
+	<span class="wikibase-sitelinkview-link wikibase-sitelinkview-link-$1" lang="$2" dir="$3"><!-- wikibase-sitelinkview-pagename -->$6</span>
+</li>
 HTML;
 
 	$templates['wikibase-sitelinkview-pagename'] =
@@ -312,12 +278,10 @@ HTML;
 
 	$templates['wikibase-sitelinkview-unknown'] =
 <<<HTML
-<tr class="wikibase-sitelinkview-site-unknown">
-	<td class="wikibase-sitelinkview-sitename wikibase-sitelinkview-sitename-unknown"></td>
-	<td class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-unknown">$2</td>
-	<td class="wikibase-sitelinkview-link wikibase-sitelinkview-link-unknown">$3</td>
-	<td><!-- placeholder for remove toolbar dynamically generated in edit mode --></td>
-</tr>
+<li class="wikibase-sitelinkview-site-unknown">
+	<span class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-unknown">$1</span>
+	<span class="wikibase-sitelinkview-link wikibase-sitelinkview-link-unknown">$2</span>
+</li>
 HTML;
 
 	$templates['wb-badge'] =
