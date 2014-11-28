@@ -4,6 +4,7 @@ namespace Wikibase\Client\Store\Sql;
 
 use InvalidArgumentException;
 use ResultWrapper;
+use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
@@ -210,7 +211,7 @@ class BulkSubscriptionUpdater {
 		}
 
 		$res = $dbr->select(
-			'wbc_entity_usage',
+			SqlUsageTracker::DEFAULT_TABLE_NAME,
 			array( 'DISTINCT eu_entity_id' ),
 			$continuationCondition,
 			__METHOD__,

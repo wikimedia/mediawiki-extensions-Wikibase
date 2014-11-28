@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use LoggedUpdateMaintenance;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
+use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
@@ -53,7 +54,6 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 		$builder = new EntityUsageTableBuilder(
 			WikibaseClient::getDefaultInstance()->getEntityIdParser(),
 			wfGetLB(),
-			'wbc_entity_usage',
 			$this->mBatchSize
 		);
 
