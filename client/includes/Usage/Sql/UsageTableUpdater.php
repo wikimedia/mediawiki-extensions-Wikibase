@@ -5,6 +5,7 @@ namespace Wikibase\Client\Usage\Sql;
 use DatabaseBase;
 use InvalidArgumentException;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\UsageTracker;
 
 /**
  * Helper class for updating the wb_entity_usage table.
@@ -21,33 +22,22 @@ class UsageTableUpdater {
 	private $connection;
 
 	/**
-	 * @var string
-	 */
-	private $tableName;
-
-	/**
 	 * @var int
 	 */
 	private $batchSize;
 
 	/**
 	 * @param DatabaseBase $connection
-	 * @param string $tableName
 	 * @param int $batchSize
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( DatabaseBase $connection, $tableName, $batchSize ) {
-		if ( !is_string( $tableName ) ) {
-			throw new InvalidArgumentException( '$tableName must be a string' );
-		}
-
+	public function __construct( DatabaseBase $connection, $batchSize ) {
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 
 		$this->connection = $connection;
-		$this->tableName = $tableName;
 		$this->batchSize = $batchSize;
 	}
 
@@ -142,7 +132,7 @@ class UsageTableUpdater {
 		}
 
 		$this->connection->update(
-			$this->tableName,
+			UsageTracker::TABLE_NAME,
 			array(
 				'eu_touched' => wfTimestamp( TS_MW, $touched ),
 			),
@@ -221,7 +211,7 @@ class UsageTableUpdater {
 
 		foreach ( $batches as $batch ) {
 			$this->connection->delete(
-				$this->tableName,
+				UsageTracker::TABLE_NAME,
 				array(
 					'eu_page_id' => (int)$pageId,
 					'eu_aspect' => $aspect,
@@ -240,6 +230,7 @@ class UsageTableUpdater {
 	 * @param EntityUsage[] $usages
 	 * @param string|false $touched timestamp, may be false only if $usages is empty.
 	 *
+	 * @throws InvalidArgumentException
 	 * @return int The number of entries added
 	 */
 	private function addUsageForPage( $pageId, array $usages, $touched ) {
@@ -259,7 +250,8 @@ class UsageTableUpdater {
 		$c = 0;
 
 		foreach ( $batches as $rows ) {
-			$this->connection->insert( $this->tableName, $rows, __METHOD__, array( 'IGNORE' ) );
+			$this->connection->insert( UsageTracker::TABLE_NAME, $rows, __METHOD__, array( 'IGNORE' ) );
+
 			$c += $this->connection->affectedRows();
 		}
 
@@ -281,7 +273,7 @@ class UsageTableUpdater {
 
 		foreach ( $batches as $batch ) {
 			$this->connection->delete(
-				$this->tableName,
+				UsageTracker::TABLE_NAME,
 				array(
 					'eu_entity_id' => $batch,
 				),
