@@ -563,7 +563,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( $entity->getLabels(), $this->repo->getEntity( $entity->getId() )->getLabels() );
 
 		// test we can't mess with entities in the repo
-		$entity->setLabel( 'en', 'STRANGE' );
+		$entity->getFingerprint()->setLabel( 'en', 'STRANGE' );
 		$entity = $this->repo->getEntity( $entity->getId() );
 		$this->assertNotNull( $entity );
 		$this->assertNotEquals( 'STRANGE', $entity->getLabel( 'en' ) );

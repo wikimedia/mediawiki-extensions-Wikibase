@@ -339,13 +339,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		// create item
 		$entity = Item::newEmpty();
-		$entity->setLabel( 'en', 'Test' );
+		$entity->getFingerprint()->setLabel( 'en', 'Test' );
 
 		$repo->putEntity( $entity, 0, 0, $user );
 
 		// begin editing the entity
 		$entity = $entity->copy();
-		$entity->setLabel( 'en', 'Trust' );
+		$entity->getFingerprint()->setLabel( 'en', 'Trust' );
 
 		$editEntity = $this->makeEditEntity( $repo,  $entity, $user, $baseRevId );
 		$editEntity->getLatestRevision(); // make sure EditEntity has page and revision
