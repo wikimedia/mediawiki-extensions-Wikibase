@@ -43,7 +43,7 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 			$this->markTestSkipped( 'Skipping test for SqlUsageTracker, because the useLegacyUsageIndex option is set.' );
 		}
 
-		$this->tablesUsed[] = 'wbc_entity_usage';
+		$this->tablesUsed[] = EntityUsageTable::DEFAULT_TABLE_NAME;
 		$this->tablesUsed[] = 'page';
 
 		parent::setUp();
@@ -59,13 +59,13 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 
 	public function getUsages( $pageId, $timestamp ) {
 		$db = wfGetDB( DB_SLAVE );
-		$updater = new EntityUsageTable( new BasicEntityIdParser(), $db, 'wbc_entity_usage', 1000 );
+		$updater = new EntityUsageTable( new BasicEntityIdParser(), $db );
 		return $updater->queryUsages( $pageId, '>=', $timestamp );
 	}
 
 	public function putUsages( $pageId, array $usages, $timestamp ) {
 		$db = wfGetDB( DB_MASTER );
-		$updater = new EntityUsageTable( new BasicEntityIdParser(), $db, 'wbc_entity_usage', 1000 );
+		$updater = new EntityUsageTable( new BasicEntityIdParser(), $db );
 		return $updater->addUsages( $pageId, $usages, $timestamp );
 	}
 

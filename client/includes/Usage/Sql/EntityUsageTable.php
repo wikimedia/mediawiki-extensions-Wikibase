@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
- * Helper class for updating the wb_entity_usage table.
+ * Helper class for updating the wbc_entity_usage table.
  * This is used internally by SqlUsageTracker.
  *
  * @license GPL 2+
@@ -20,6 +20,8 @@ use Wikibase\DataModel\Entity\EntityIdParser;
  * @internal
  */
 class EntityUsageTable {
+
+	const DEFAULT_TABLE_NAME = 'wbc_entity_usage';
 
 	/**
 	 * @var EntityIdParser
@@ -44,28 +46,37 @@ class EntityUsageTable {
 	/**
 	 * @param EntityIdParser $idParser
 	 * @param DatabaseBase $connection
-	 * @param string $tableName
-	 * @param int $batchSize
+	 * @param int $batchSize defaults to 1000
+	 * @param string|null $tableName defaults to wbc_entity_usage
+	 *
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdParser $idParser, DatabaseBase $connection, $tableName, $batchSize ) {
-		if ( !is_string( $tableName ) ) {
-			throw new InvalidArgumentException( '$tableName must be a string' );
-		}
-
+	public function __construct(
+		EntityIdParser $idParser,
+		DatabaseBase $connection,
+		$batchSize = 1000,
+		$tableName = null
+	) {
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 
+		if ( !is_string( $tableName ) && $tableName !== null ) {
+			throw new InvalidArgumentException( '$tableName must be a string or null' );
+		}
+
 		$this->idParser = $idParser;
 		$this->connection = $connection;
-		$this->tableName = $tableName;
 		$this->batchSize = $batchSize;
+		$this->tableName = $tableName ?: self::DEFAULT_TABLE_NAME;
 	}
 
 	/**
 	 * Sets the "touched" timestamp for the given usages.
+	 *
+	 * @param int $pageId
 	 * @param EntityUsage[] $usages
-	 * @param string $touched timestamp
+	 * @param string $touched timestamp in any format MWTimestamp accepts
 	 */
 	public function touchUsages( $pageId, array $usages, $touched ) {
 		if ( empty( $usages ) ) {
@@ -129,6 +140,7 @@ class EntityUsageTable {
 	 * @param EntityUsage[] $usages
 	 * @param string|false $touched timestamp, may be false only if $usages is empty.
 	 *
+	 * @throws InvalidArgumentException
 	 * @return int The number of entries added
 	 */
 	public function addUsages( $pageId, array $usages, $touched ) {
@@ -160,8 +172,8 @@ class EntityUsageTable {
 	 * @param string|null $timeOp Operator to use with $timestamp, e.g. "<" or ">=".
 	 * @param string|null $timestamp
 	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityUsage[]
-	 *
 	 */
 	public function queryUsages( $pageId, $timeOp = null, $timestamp = null ) {
 		if ( !is_int( $pageId ) ) {
@@ -201,7 +213,7 @@ class EntityUsageTable {
 		}
 
 		$res = $this->connection->select(
-			'wbc_entity_usage',
+			$this->tableName,
 			array( 'eu_aspect', 'eu_entity_id' ),
 			$where,
 			__METHOD__
@@ -249,6 +261,7 @@ class EntityUsageTable {
 	 * @param int $pageId
 	 * @param string $lastUpdatedBefore timestamp; if empty, '00000000000000' is assumed
 	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityUsage[]
 	 */
 	public function pruneStaleUsages( $pageId, $lastUpdatedBefore ) {
@@ -327,7 +340,7 @@ class EntityUsageTable {
 		}
 
 		$res = $this->connection->select(
-			'wbc_entity_usage',
+			$this->tableName,
 			array( 'eu_page_id', 'eu_entity_id', 'eu_aspect' ),
 			$where,
 			__METHOD__
@@ -403,7 +416,7 @@ class EntityUsageTable {
 		$where = array( 'eu_entity_id' => $idStrings );
 
 		$res = $this->connection->select(
-			'wbc_entity_usage',
+			$this->tableName,
 			array( 'eu_entity_id' ),
 			$where,
 			__METHOD__
