@@ -81,7 +81,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		if ( $entity instanceof Item ) {
-			$entity->addSiteLink( new SiteLink( 'test', 'Foo' ) );
+			$entity->getSiteLinkList()->addNewSiteLink( 'test', 'Foo' );
 		}
 
 		return $entity;

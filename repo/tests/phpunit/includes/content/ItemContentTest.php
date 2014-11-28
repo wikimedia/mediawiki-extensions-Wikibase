@@ -94,7 +94,7 @@ class ItemContentTest extends EntityContentTest {
 	public function getTextForSearchIndexProvider() {
 		$itemContent = $this->newEmpty();
 		$itemContent->getEntity()->setLabel( 'en', "cake" );
-		$itemContent->getEntity()->addSiteLink( new SiteLink( 'dewiki', 'Berlin' ) );
+		$itemContent->getEntity()->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 
 		return array(
 			array( $itemContent, '!^cake$!' ),

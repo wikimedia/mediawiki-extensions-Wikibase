@@ -553,10 +553,10 @@ class EntityTestHelper {
 				)
 			)
 		);
-		$entities['Q3']->addSiteLink( new SiteLink( 'dewiki', 'Berlin' ) );
-		$entities['Q3']->addSiteLink( new SiteLink( 'enwiki', 'Berlin' ) );
-		$entities['Q3']->addSiteLink( new SiteLink( 'nlwiki', 'Berlin' ) );
-		$entities['Q3']->addSiteLink( new SiteLink( 'nnwiki', 'Berlin' ) );
+		$entities['Q3']->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
+		$entities['Q3']->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin' );
+		$entities['Q3']->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'Berlin' );
+		$entities['Q3']->getSiteLinkList()->addNewSiteLink( 'nnwiki', 'Berlin' );
 		$claim = new Claim (
 			new PropertyValueSnak(
 				PropertyId::newFromNumber( 1 ),
@@ -595,10 +595,10 @@ class EntityTestHelper {
 				)
 			)
 		);
-		$entities['Q4']->addSiteLink( new SiteLink( 'dewiki', 'London' ) );
-		$entities['Q4']->addSiteLink( new SiteLink( 'enwiki', 'London' ) );
-		$entities['Q4']->addSiteLink( new SiteLink( 'nlwiki', 'London' ) );
-		$entities['Q4']->addSiteLink( new SiteLink( 'nnwiki', 'London' ) );
+		$entities['Q4']->getSiteLinkList()->addNewSiteLink( 'dewiki', 'London' );
+		$entities['Q4']->getSiteLinkList()->addNewSiteLink( 'enwiki', 'London' );
+		$entities['Q4']->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'London' );
+		$entities['Q4']->getSiteLinkList()->addNewSiteLink( 'nnwiki', 'London' );
 
 		$entities['Q5'] = Item::newEmpty();
 		$entities['Q5']->setId( ItemId::newFromNumber( 5 ) );
@@ -631,10 +631,10 @@ class EntityTestHelper {
 				)
 			)
 		);
-		$entities['Q5']->addSiteLink( new SiteLink( 'dewiki', 'Oslo' ) );
-		$entities['Q5']->addSiteLink( new SiteLink( 'enwiki', 'Oslo' ) );
-		$entities['Q5']->addSiteLink( new SiteLink( 'nlwiki', 'Oslo' ) );
-		$entities['Q5']->addSiteLink( new SiteLink( 'nnwiki', 'Oslo' ) );
+		$entities['Q5']->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Oslo' );
+		$entities['Q5']->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Oslo' );
+		$entities['Q5']->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'Oslo' );
+		$entities['Q5']->getSiteLinkList()->addNewSiteLink( 'nnwiki', 'Oslo' );
 
 		$entities['Q6'] = Item::newEmpty();
 		$entities['Q6']->setId( ItemId::newFromNumber( 6 ) );
