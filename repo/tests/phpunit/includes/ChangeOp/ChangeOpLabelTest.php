@@ -57,7 +57,7 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApply( ChangeOp $changeOpLabel, $expectedLabel ) {
 		$entity = $this->provideNewEntity();
-		$entity->setLabel( 'en', 'INVALID' );
+		$entity->getFingerprint()->setLabel( 'en', 'INVALID' );
 
 		$changeOpLabel->apply( $entity );
 
@@ -115,11 +115,11 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 		$args = array();
 
 		$entity = $this->provideNewEntity();
-		$entity->setLabel( 'de', 'Test' );
+		$entity->getFingerprint()->setLabel( 'de', 'Test' );
 		$args[] = array ( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung', $validatorFactory ), 'set', 'de' );
 
 		$entity = $this->provideNewEntity();
-		$entity->setLabel( 'de', 'Test' );
+		$entity->getFingerprint()->setLabel( 'de', 'Test' );
 		$args[] = array ( $entity, new ChangeOpLabel( 'de', null, $validatorFactory ), 'remove', 'de' );
 
 		$entity = $this->provideNewEntity();

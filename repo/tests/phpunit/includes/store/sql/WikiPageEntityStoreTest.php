@@ -140,7 +140,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		// update entity
 		$entity->clear();
-		$entity->setLabel( 'en', 'UPDATED' );
+		$entity->getFingerprint()->setLabel( 'en', 'UPDATED' );
 
 		$r2 = $store->saveEntity( $entity, 'update one', $user, EDIT_UPDATE );
 		$this->assertNotEquals( $r1->getRevisionId(), $r2->getRevisionId(), 'expected new revision id' );

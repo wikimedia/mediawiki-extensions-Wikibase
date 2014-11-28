@@ -47,14 +47,14 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$entity = Item::newEmpty();
 		$entities['terms'] = $entity;
 
-		$entity->setLabel( 'en', 'Berlin' );
-		$entity->setLabel( 'ru', 'Берлин' );
+		$entity->getFingerprint()->setLabel( 'en', 'Berlin' );
+		$entity->getFingerprint()->setLabel( 'ru', 'Берлин' );
 
-		$entity->setDescription( 'en', 'German city' );
-		$entity->setDescription( 'ru', 'столица и одновременно земля Германии' );
+		$entity->getFingerprint()->setDescription( 'en', 'German city' );
+		$entity->getFingerprint()->setDescription( 'ru', 'столица и одновременно земля Германии' );
 
-		$entity->addAliases( 'en', array( 'Berlin, Germany', 'Land Berlin' ) );
-		$entity->addAliases( 'ru', array( 'Berlin' ) );
+		$entity->getFingerprint()->setAliasGroup( 'en', array( 'Berlin, Germany', 'Land Berlin' ) );
+		$entity->getFingerprint()->setAliasGroup( 'ru', array( 'Berlin' ) );
 
 		// TODO: test links
 		// TODO: test data values
