@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_47770136",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T15:32:11Z",
+      "side": 1,
+      "message": "Oh. Oh. Ouch. This code is clever. I love clever code. But all the $i and ++ stuff is just not necessary. Just set all the array values to \"true\" to indicate that this action is needed and use array_keys instead of array_flip in the end. Done.",
+      "revId": "a0a33532f876d76a226505fb00661b264ae96e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_e78bad19",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T15:32:11Z",
+      "side": 1,
+      "message": "Looks like a switch. Why not use a switch then? At least some elseif?",
+      "revId": "a0a33532f876d76a226505fb00661b264ae96e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_6799dd7f",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T15:32:11Z",
+      "side": 1,
+      "message": "This change is incomplete. Luckily it does not invert the check. (Are the strings equal? Yes. True \u003e 0? Yes.)\n\nFixed in my follow up.",
+      "revId": "a0a33532f876d76a226505fb00661b264ae96e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_07925957",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T15:32:11Z",
+      "side": 1,
+      "message": "The old comment was much more meaningful. Why remove it?",
+      "revId": "a0a33532f876d76a226505fb00661b264ae96e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
