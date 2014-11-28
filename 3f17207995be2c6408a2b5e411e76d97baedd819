@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_4744e14a",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T13:45:14Z",
+      "side": 1,
+      "message": "For clients that use more than one repo, we will likely want one tracking table per repo. So it can\u0027t be a constant. It may become a setting or a parameter later.",
+      "parentUuid": "4ea06b5a_156842f1",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_7582e698",
         "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-28T13:36:41Z",
       "side": 1,
       "message": "Parameter mismatch here and in the call!",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_a76a85af",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T13:45:14Z",
+      "side": 1,
+      "message": "Yes - from the documentation of addExtensionUpdate: \"Note that callback functions will receive this object as first parameter\".",
+      "parentUuid": "4ea06b5a_7582e698",
       "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_876189d2",
+        "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T13:45:14Z",
+      "side": 1,
+      "message": "It will \"downgrade\". I\u0027ll add more information.",
+      "parentUuid": "4ea06b5a_558faad1",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_b5fb8e43",
         "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-28T13:36:41Z",
       "side": 1,
       "message": "Why can\u0027t the table name be a constant or just inlined? You even mention the table name in the doc above. \u0027page_props\u0027, for example, is inlined.",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_475b8126",
+        "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T13:45:14Z",
+      "side": 1,
+      "message": "Because clients with multiple repose will likely have one tracking table per repo. That at least seems to most sensible approach to me.",
+      "parentUuid": "4ea06b5a_b5fb8e43",
       "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_e79f2db8",
+        "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T13:45:14Z",
+      "side": 1,
+      "message": "Having a setter without a getter is a bit strange. I think there should always be a getter, so you can save the previous value before calling the setter.",
+      "parentUuid": "4ea06b5a_55f80a46",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_75f5064c",
         "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
         "patchSetId": 6
@@ -98,6 +188,24 @@
       "writtenOn": "2014-11-28T13:36:41Z",
       "side": 1,
       "message": "Not used. Is this really needed?",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_07a57900",
+        "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T13:45:14Z",
+      "side": 1,
+      "message": "see above.",
+      "parentUuid": "4ea06b5a_75f5064c",
       "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_67b31d4d",
+        "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T13:45:14Z",
+      "side": 1,
+      "message": "\"slurp\" is often used to describe the process of reading a stream or iterator into a list or array. E.g. http://search.cpan.org/~uri/File-Slurp-9999.19/lib/File/Slurp.pm or http://www.ymeme.com/slurping-a-file-common-lisp-83.html\n\nbtw, Googeling for \"php slurp\" will get you the page on get_file_contents, even though \"slurp\" is no where on that page :)",
+      "parentUuid": "4ea06b5a_15928200",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_f5a03640",
         "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
         "patchSetId": 6
@@ -132,6 +258,24 @@
       "writtenOn": "2014-11-28T13:36:41Z",
       "side": 1,
       "message": "Spacing and indention is a bit odd here. Last bracket belongs to a new line, for example.",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_87b0a93f",
+        "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T13:45:14Z",
+      "side": 1,
+      "message": "whatever :)",
+      "parentUuid": "4ea06b5a_f5a03640",
       "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_27bd1517",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/UsageTablePrimerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T13:45:14Z",
+      "side": 1,
+      "message": "why?",
+      "parentUuid": "4ea06b5a_95d772c4",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_b5d4eebf",
         "filename": "client/tests/phpunit/includes/Usage/Sql/UsageTablePrimerTest.php",
         "patchSetId": 6
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_47baa11f",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/UsageTablePrimerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T13:45:14Z",
+      "side": 1,
+      "message": "as I said before: it\u0027s likely that this will become a constructor parameter, because we\u0027ll need one tracking table per repo.",
+      "parentUuid": "4ea06b5a_b5d4eebf",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_15eb6278",
         "filename": "client/tests/phpunit/includes/Usage/Sql/UsageTablePrimerTest.php",
         "patchSetId": 6
@@ -183,6 +363,24 @@
       "writtenOn": "2014-11-28T13:36:41Z",
       "side": 1,
       "message": "Typo.",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_e7864d6a",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/UsageTablePrimerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-11-28T13:45:14Z",
+      "side": 1,
+      "message": "eek!",
+      "parentUuid": "4ea06b5a_15eb6278",
       "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
