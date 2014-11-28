@@ -263,4 +263,63 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		) ) ) );
 	}
 
+	public function testToArray() {
+		$list = new SiteLinkList();
+		$list->addNewSiteLink( 'enwiki', 'foo' );
+		$list->addNewSiteLink( 'dewiki', 'bar' );
+
+		$expected = array(
+			'enwiki' => new SiteLink( 'enwiki', 'foo' ),
+			'dewiki' => new SiteLink( 'dewiki', 'bar' ),
+		);
+
+		$this->assertEquals( $expected, $list->toArray() );
+	}
+
+	public function testGivenNewSiteLink_setSiteLinkAddsIt() {
+		$list = new SiteLinkList();
+		$list->setSiteLink( new SiteLink( 'enwiki', 'foo' ) );
+
+		$expectedList = new SiteLinkList();
+		$expectedList->addNewSiteLink( 'enwiki', 'foo' );
+
+		$this->assertEquals( $expectedList, $list );
+	}
+
+	public function testGivenSiteLinkWithExistingId_setSiteLinkReplacesIt() {
+		$list = new SiteLinkList();
+		$list->addNewSiteLink( 'enwiki', 'foo' );
+		$list->addNewSiteLink( 'dewiki', 'bar' );
+		$list->setSiteLink( new SiteLink( 'enwiki', 'HAX' ) );
+
+		$expectedList = new SiteLinkList();
+		$expectedList->addNewSiteLink( 'enwiki', 'HAX' );
+		$expectedList->addNewSiteLink( 'dewiki', 'bar' );
+
+		$this->assertEquals( $expectedList, $list );
+	}
+
+	public function testGivenNewSiteLink_setNewSiteLinkAddsIt() {
+		$list = new SiteLinkList();
+		$list->setNewSiteLink( 'enwiki', 'foo' );
+
+		$expectedList = new SiteLinkList();
+		$expectedList->addNewSiteLink( 'enwiki', 'foo' );
+
+		$this->assertEquals( $expectedList, $list );
+	}
+
+	public function testGivenSiteLinkWithExistingId_setNewSiteLinkReplacesIt() {
+		$list = new SiteLinkList();
+		$list->addNewSiteLink( 'enwiki', 'foo' );
+		$list->addNewSiteLink( 'dewiki', 'bar' );
+		$list->setNewSiteLink( 'enwiki', 'HAX' );
+
+		$expectedList = new SiteLinkList();
+		$expectedList->addNewSiteLink( 'enwiki', 'HAX' );
+		$expectedList->addNewSiteLink( 'dewiki', 'bar' );
+
+		$this->assertEquals( $expectedList, $list );
+	}
+
 }
