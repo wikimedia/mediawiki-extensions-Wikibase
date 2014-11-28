@@ -17,7 +17,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class CreatedBlacklistedItems extends \Maintenance {
+class CreateBlacklistedItems extends \Maintenance {
 
 	public function __construct() {
 		$this->mDescription = 'Created blacklisted items';
