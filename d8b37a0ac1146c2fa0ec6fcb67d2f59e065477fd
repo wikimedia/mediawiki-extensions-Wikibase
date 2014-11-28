@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_950f7233",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-28T09:35:10Z",
+      "side": 1,
+      "message": "wfProfileOut missing",
+      "revId": "d8b37a0ac1146c2fa0ec6fcb67d2f59e065477fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b50cee3e",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-28T09:35:10Z",
+      "side": 1,
+      "message": "Sure we need that?",
+      "revId": "d8b37a0ac1146c2fa0ec6fcb67d2f59e065477fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_3528de80",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-28T09:35:10Z",
+      "side": 1,
+      "message": "Referred bug seems to be fixed, is this note still relevant?",
+      "revId": "d8b37a0ac1146c2fa0ec6fcb67d2f59e065477fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_d51c1a6d",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-11-28T09:35:10Z",
+      "side": 1,
+      "message": "Same here; is this note still relevant?",
+      "revId": "d8b37a0ac1146c2fa0ec6fcb67d2f59e065477fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
