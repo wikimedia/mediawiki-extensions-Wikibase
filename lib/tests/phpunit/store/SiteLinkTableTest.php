@@ -83,7 +83,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		// modify links, and save again
 		$item->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'FooK' );
-		$item->removeSiteLink( 'dewiki' );
+		$item->getSiteLinkList()->removeLinkWithSiteId( 'dewiki' );
 		$item->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'GrooK' );
 
 		$this->siteLinkTable->saveLinksOfItem( $item );
