@@ -57,7 +57,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 		);
 
 		$statement1 = $this->getTestStatement( $stringSnak );
-		$statement1->setRank( Claim::RANK_PREFERRED );
+		$statement1->setRank( Statement::RANK_PREFERRED );
 
 		$stringProperty->getStatements()->addStatement( $statement1 );
 		$this->mockRepository->putEntity( $stringProperty );
@@ -68,7 +68,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 		);
 
 		$statement2 = $this->getTestStatement( $stringSnak2 );
-		$statement2->setRank( Claim::RANK_NORMAL );
+		$statement2->setRank( Statement::RANK_NORMAL );
 
 		$siteLinks = array( $siteLink );
 		$siteLinks[] = new SiteLink(
