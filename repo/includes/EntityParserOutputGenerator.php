@@ -7,7 +7,6 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
@@ -221,10 +220,9 @@ class EntityParserOutputGenerator {
 		$entityInfoBuilder->resolveRedirects();
 		$entityInfoBuilder->removeMissing();
 
-		// @todo: apply language fallback!
 		$entityInfoBuilder->collectTerms(
 			array( 'label', 'description' ),
-			array( $this->languageCode )
+			$this->languageFallbackChain->getFetchLanguageCodes()
 		);
 
 		$entityInfoBuilder->collectDataTypes();
