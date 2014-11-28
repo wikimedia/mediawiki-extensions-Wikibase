@@ -15,7 +15,6 @@
  */
 
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -24,6 +23,7 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) 
 require_once $basePath . '/maintenance/Maintenance.php';
 
 class importInterlang extends Maintenance {
+
 	protected $verbose = false;
 	protected $ignore_errors = false;
 	protected $skip = 0;
@@ -141,8 +141,8 @@ class importInterlang extends Maintenance {
 			$name = strtr( $title, "_", " " );
 			$label = preg_replace( '/ *\(.*\)$/u', '', $name );
 
-			$item->setLabel( $lang, $label );
-			$item->addSiteLink( new SiteLink( $lang . 'wiki',  $name ) );
+			$item->getFingerprint()->setLabel( $lang, $label );
+			$item->getSiteLinkList()->addNewSiteLink( $lang . 'wiki',  $name );
 		}
 
 		try {
