@@ -2,11 +2,12 @@
 
 namespace Wikibase\Lib\Test;
 
+use Language;
+use Title;
 use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
-use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\TimeFormatter;
@@ -14,12 +15,12 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * @covers Wikibase\Lib\WikibaseValueFormatterBuilders
@@ -41,9 +42,10 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param EntityId $entityId The Id of an entity to use for all entity lookups
+	 * @param EntityTitleLookup|null $entityTitleLookup
 	 * @return WikibaseValueFormatterBuilders
 	 */
-	private function newWikibaseValueFormatterBuilders() {
+	private function newWikibaseValueFormatterBuilders( EntityTitleLookup $entityTitleLookup = null ) {
 		$termLookup = $this->getMock( 'Wikibase\Lib\Store\TermLookup' );
 
 		$termLookup->expects( $this->any() )
@@ -66,7 +68,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 				);
 			} ) );
 
-		return new WikibaseValueFormatterBuilders( $termLookup, Language::factory( 'en' ) );
+		return new WikibaseValueFormatterBuilders( $termLookup, Language::factory( 'en' ), $entityTitleLookup );
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {
@@ -76,10 +78,25 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @return EntityTitleLookup
+	 */
+	private function newEntityTitleLookup() {
+		$entityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function ( EntityId $entityId ) {
+				return Title::newFromText( $entityId->getSerialization() );
+			} )
+		);
+
+		return $entityTitleLookup;
+	}
+
+	/**
 	 * @dataProvider buildDispatchingValueFormatterProvider
 	 */
 	public function testBuildDispatchingValueFormatter( $format, $options, $value, $expected, $dataTypeId = null ) {
-		$builders = $this->newWikibaseValueFormatterBuilders();
+		$builders = $this->newWikibaseValueFormatterBuilders( $this->newEntityTitleLookup() );
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
 		$formatter = $builders->buildDispatchingValueFormatter( $factory, $format, $options );
@@ -189,10 +206,44 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * In case WikibaseValueFormatterBuilders doesn't have a EntityTitleLookup it returns
+	 * a formatter which doesn't link the entity id.
+	 *
+	 * @dataProvider buildDispatchingValueFormatterNoTitleLookupProvider
+	 */
+	public function testBuildDispatchingValueFormatter_noTitleLookup( $format, $options, $value, $expected, $dataTypeId = null ) {
+		$builders = $this->newWikibaseValueFormatterBuilders();
+
+		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
+		$formatter = $builders->buildDispatchingValueFormatter( $factory, $format, $options );
+
+		$text = $formatter->formatValue( $value, $dataTypeId );
+		$this->assertRegExp( $expected, $text );
+	}
+
+	public function buildDispatchingValueFormatterNoTitleLookupProvider() {
+		return array(
+			'plain item label' => array(
+				SnakFormatter::FORMAT_PLAIN,
+				$this->newFormatterOptions(),
+				new EntityIdValue( new ItemId( 'Q5' ) ),
+				'@^Label for Q5$@'
+			),
+			'widget item link' => array(
+				SnakFormatter::FORMAT_HTML_WIDGET,
+				$this->newFormatterOptions(),
+				new EntityIdValue( new ItemId( 'Q5' ) ),
+				'/^Label for Q5*$/',
+				'wikibase-item'
+			)
+		);
+	}
+
+	/**
 	 * @dataProvider buildDispatchingValueFormatterProvider_LabelLookupOption
 	 */
 	public function testBuildDispatchingValueFormatter_LabelLookupOption( $options, ItemId $value, $expected ) {
-		$builders = $this->newWikibaseValueFormatterBuilders();
+		$builders = $this->newWikibaseValueFormatterBuilders( $this->newEntityTitleLookup() );
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
 		$formatter = $builders->buildDispatchingValueFormatter( $factory, SnakFormatter::FORMAT_HTML, $options );
