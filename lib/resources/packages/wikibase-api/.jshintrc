@@ -48,7 +48,6 @@
 
 	"browser"       : true,     // Standard browser globals e.g. `window`, `document`.
 
-	"indent": 4,
 	"quotmark": false,
 	"maxlen": 100,
 	"maxparams": 7,
