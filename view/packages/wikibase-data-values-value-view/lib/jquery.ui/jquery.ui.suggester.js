@@ -65,6 +65,8 @@
  *
  * - {string} Plain text or HTML error message.
  *
+ * @param {number} [minTermLength=1]
+ *        Minimum number of characters to trigger a search with.
  * @param {number} [options.delay=300]
  *        Delay in milliseconds of the request querying for suggestions.
  * @param {jQuery.ui.ooMenu|null} [menu=null]
@@ -112,6 +114,7 @@ $.widget( 'ui.suggester', {
 	 */
 	options: {
 		source: null,
+		minTermLength: 1,
 		delay: 300,
 		menu: null,
 		position: {
@@ -135,13 +138,6 @@ $.widget( 'ui.suggester', {
 	 * @protected
 	 */
 	_term: null,
-
-	/**
-	 * Minimum amount of characters to begin a search.
-	 * @property {number} [_minTermLength=1]
-	 * @protected
-	 */
-	_minTermLength: 1,
 
 	/**
 	 * @see jQuery.Widget._create
@@ -462,7 +458,7 @@ $.widget( 'ui.suggester', {
 
 		this._term = this.element.val();
 
-		if( this._term.length < this._minTermLength ) {
+		if( this._term.length < this.options.minTermLength ) {
 			this._close();
 			return deferred.resolve( [], this._term ).promise();
 		}
