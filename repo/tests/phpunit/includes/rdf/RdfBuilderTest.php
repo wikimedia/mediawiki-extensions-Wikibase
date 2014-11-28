@@ -47,7 +47,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$entity = Item::newEmpty();
 		$entities['terms'] = $entity;
 
-		$entity->setLabel( 'en', 'Berlin' );
+		$entity->getFingerprint()->setLabel( 'en', 'Berlin' );
 		$entity->setLabel( 'ru', 'Берлин' );
 
 		$entity->setDescription( 'en', 'German city' );
