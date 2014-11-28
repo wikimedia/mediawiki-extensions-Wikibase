@@ -33,6 +33,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\DispatchingValueFormatter;
+use Wikibase\Lib\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\FormatterLabelLookupFactory;
@@ -960,22 +961,27 @@ class WikibaseRepo {
 		return $this->entityNamespaceLookup;
 	}
 
+	private function getEntityIdHtmlLinkFormatter() {
+		return new EntityIdHtmlLinkFormatterFactory(
+			new FormatterLabelLookupFactory( $this->getTermLookup() ),
+			$this->getEntityTitleLookup()
+		);
+	}
+
 	/**
 	 * @return EntityParserOutputGeneratorFactory
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
-		$entityTitleLookup = $this->getEntityContentFactory();
 
 		$entityViewFactory = new EntityViewFactory(
-			$entityTitleLookup,
-			$this->getEntityLookup(),
+			$this->getEntityIdHtmlLinkFormatter(),
 			$this->getSnakFormatterFactory()
 		);
 
 		return new EntityParserOutputGeneratorFactory(
 			$entityViewFactory,
 			$this->getStore()->getEntityInfoBuilderFactory(),
-			$entityTitleLookup,
+			$this->getEntityContentFactory(),
 			$this->getEntityIdParser(),
 			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
 			$this->getLanguageFallbackChainFactory()
