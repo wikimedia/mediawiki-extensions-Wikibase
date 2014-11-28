@@ -33,23 +33,24 @@ use Wikibase\Test\MockRepository;
 class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstructor() {
-		$wikibaseLibrary = $this->getWikibaseLibraryImplementation();
+		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings();
+
 		$this->assertInstanceOf(
 			'Wikibase\Client\Scribunto\WikibaseLuaEntityBindings',
-			$wikibaseLibrary
+			$wikibaseLuaEntityBindings
 		);
 	}
 
-	private function getWikibaseLibraryImplementation(
+	private function getWikibaseLuaEntityBindings(
 		EntityLookup $entityLookup = null,
 		UsageAccumulator $usageAccumulator = null
 	) {
 		$language = new Language( 'en' );
 
 		return new WikibaseLuaEntityBindings(
-			$this->newSnakFormatterMock(),
-			$entityLookup ? $entityLookup : new MockRepository(),
-			$usageAccumulator ? $usageAccumulator : new HashUsageAccumulator(),
+			$this->getSnakFormatter(),
+			$entityLookup ?: new MockRepository(),
+			$usageAccumulator ?: new HashUsageAccumulator(),
 			'enwiki',
 			$language,
 			new BasicEntityIdParser()
@@ -72,11 +73,11 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param EntityDocument $entity
+	 * @param EntityDocument|null $entity
 	 *
 	 * @return EntityLookup
 	 */
-	private function getEntityLookupMock( EntityDocument $entity = null ) {
+	private function getEntityLookup( EntityDocument $entity = null ) {
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 
 		$entityLookup->expects( $this->any() )->method( 'getEntity' )
@@ -88,7 +89,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return SnakFormatter
 	 */
-	private function newSnakFormatterMock() {
+	private function getSnakFormatter() {
 		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
 
 		$snakFormatter->expects( $this->any() )->method( 'formatSnak' )
@@ -101,11 +102,11 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	public function testFormatPropertyValues() {
 		$item = $this->getItem();
 
-		$entityLookup = $this->getEntityLookupMock( $item );
+		$entityLookup = $this->getEntityLookup( $item );
 		$usageAccumulator = new HashUsageAccumulator();
-		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup, $usageAccumulator );
+		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings( $entityLookup, $usageAccumulator );
 
-		$ret = $wikibaseLibrary->formatPropertyValues( 'Q1', 'P123456' );
+		$ret = $wikibaseLuaEntityBindings->formatPropertyValues( 'Q1', 'P123456' );
 
 		$this->assertSame( 'Snak snak snak', $ret );
 
@@ -115,26 +116,27 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFormatPropertyValuesNoProperty() {
-		$entityLookup = $this->getEntityLookupMock( Item::newEmpty() );
+		$entityLookup = $this->getEntityLookup( Item::newEmpty() );
 
-		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
-		$ret = $wikibaseLibrary->formatPropertyValues( 'Q2', 'P123456' );
+		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings( $entityLookup );
+		$ret = $wikibaseLuaEntityBindings->formatPropertyValues( 'Q2', 'P123456' );
 
 		$this->assertSame( '', $ret );
 	}
 
 	public function testFormatPropertyValuesNoEntity() {
-		$entityLookup = $this->getEntityLookupMock();
+		$entityLookup = $this->getEntityLookup();
 
-		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
-		$ret = $wikibaseLibrary->formatPropertyValues( 'Q3', 'P123456' );
+		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings( $entityLookup );
+		$ret = $wikibaseLuaEntityBindings->formatPropertyValues( 'Q3', 'P123456' );
 
 		$this->assertSame( '', $ret );
 	}
 
 	public function testGetGlobalSiteId() {
-		$wikibaseLibrary = $this->getWikibaseLibraryImplementation();
-		$this->assertEquals( 'enwiki', $wikibaseLibrary->getGlobalSiteId() );
+		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings();
+
+		$this->assertEquals( 'enwiki', $wikibaseLuaEntityBindings->getGlobalSiteId() );
 	}
 
 }
