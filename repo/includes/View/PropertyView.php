@@ -7,8 +7,6 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Repo\View\FingerprintView;
-use Wikibase\Repo\View\ClaimsView;
 use Language;
 
 /**
@@ -32,10 +30,17 @@ class PropertyView extends EntityView {
 	 * @param FingerprintView $fingerprintView
 	 * @param ClaimsView $claimsView
 	 * @param Language $language
+	 * @param bool $editable
 	 * @param bool $displayStatementsOnProperties
 	 */
-	public function __construct( FingerprintView $fingerprintView, ClaimsView $claimsView, Language $language, $displayStatementsOnProperties ) {
-		parent::__construct($fingerprintView, $claimsView, $language);
+	public function __construct(
+		FingerprintView $fingerprintView,
+		ClaimsView $claimsView,
+		Language $language,
+		$editable,
+		$displayStatementsOnProperties
+	) {
+		parent::__construct( $fingerprintView, $claimsView, $language, $editable );
 
 		$this->displayStatementsOnProperties = $displayStatementsOnProperties;
 	}
@@ -43,7 +48,7 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getMainHtml
 	 */
-	public function getMainHtml( EntityRevision $entityRevision, array $entityInfo,
+	public function getMainHtml( EntityRevision $entityRevision,
 		$editable = true
 	) {
 		wfProfileIn( __METHOD__ );
@@ -54,13 +59,13 @@ class PropertyView extends EntityView {
 			throw new InvalidArgumentException( '$entityRevision must contain a Property.' );
 		}
 
-		$html = parent::getMainHtml( $entityRevision, $entityInfo, $editable );
+		$html = parent::getMainHtml( $entityRevision );
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
 		if ( $this->displayStatementsOnProperties ) {
 			$html .= $this->claimsView->getHtml(
 				$property->getStatements()->toArray(),
-				$entityInfo
+				'wikibase-attributes'
 			);
 		}
 
