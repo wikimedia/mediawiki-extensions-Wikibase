@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_156842f1",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T13:36:41Z",
+      "side": 1,
+      "message": "Make this a constant in the UsageTracker interface please ...\n\n const TABLE_NAME \u003d \u0027wbc_entity_usage\u0027;\n\n... and reuse it in all classes. Or just merge my follow up which does that.",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_7582e698",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T13:36:41Z",
+      "side": 1,
+      "message": "Parameter mismatch here and in the call!",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_558faad1",
+        "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T13:36:41Z",
+      "side": 1,
+      "message": "This sentence could be a bit more descriptive/easier to understand because it\u0027s so important here. Also: Will these \"X\" be stuck or downgraded with later updates?",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b5fb8e43",
+        "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T13:36:41Z",
+      "side": 1,
+      "message": "Why can\u0027t the table name be a constant or just inlined? You even mention the table name in the doc above. \u0027page_props\u0027, for example, is inlined.",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_55f80a46",
+        "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T13:36:41Z",
+      "side": 1,
+      "message": "Not used. Is this really needed?",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_75f5064c",
+        "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T13:36:41Z",
+      "side": 1,
+      "message": "Not used. Is this really needed?",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_15928200",
+        "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T13:36:41Z",
+      "side": 1,
+      "message": "Slur... what? Was alcohol involved? ;-)",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_f5a03640",
+        "filename": "client/includes/Usage/Sql/UsageTablePrimer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T13:36:41Z",
+      "side": 1,
+      "message": "Spacing and indention is a bit odd here. Last bracket belongs to a new line, for example.",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_95d772c4",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/UsageTablePrimerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T13:36:41Z",
+      "side": 1,
+      "message": "Newline missing.",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b5d4eebf",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/UsageTablePrimerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T13:36:41Z",
+      "side": 1,
+      "message": "Having a constant like this is almost pointless. I recently inlined similar occurrences in other classes.\n\nOh, wait, it\u0027s not even a constant. It\u0027s a field. Why? No code should be able to change this so it should be a constant or inlined.",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_15eb6278",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/UsageTablePrimerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-28T13:36:41Z",
+      "side": 1,
+      "message": "Typo.",
+      "revId": "3f17207995be2c6408a2b5e411e76d97baedd819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
