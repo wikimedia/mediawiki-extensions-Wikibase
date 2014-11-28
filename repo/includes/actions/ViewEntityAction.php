@@ -95,6 +95,15 @@ abstract class ViewEntityAction extends ViewAction {
 				$this->getArticle()
 			);
 
+			if ( !( $content instanceof EntityContent ) ) {
+				$this->getOutput()->showErrorPage(
+						'wikibase-entity-not-viewable-title',
+						'wikibase-entity-not-viewable',
+						$content->getModel()
+				);
+				return;
+			}
+
 			$this->displayEntityContent( $content );
 		}
 	}
@@ -123,8 +132,9 @@ abstract class ViewEntityAction extends ViewAction {
 	 *
 	 * @param EntityContent $content
 	 */
-	protected function displayEntityContent( EntityContent $content ) {
+	private function displayEntityContent( EntityContent $content ) {
 		$outputPage = $this->getOutput();
+
 		$editable = $this->isEditable();
 
 		// NOTE: page-wide property, independent of user permissions
