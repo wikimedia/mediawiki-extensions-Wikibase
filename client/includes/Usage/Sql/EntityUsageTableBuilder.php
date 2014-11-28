@@ -116,8 +116,10 @@ class EntityUsageTableBuilder {
 
 	/**
 	 * Fill the usage table with rows based on entries in page_props.
+	 *
+	 * @param int $fromPageId
 	 */
-	public function fillUsageTable() {
+	public function fillUsageTable( $fromPageId = 0 ) {
 		do {
 			$count = $this->processUsageBatch( $fromPageId );
 			$this->progressReporter->reportMessage( "Filling usage table: processed $count pages, starting with page #$fromPageId." );
