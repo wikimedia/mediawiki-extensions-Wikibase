@@ -25,8 +25,8 @@ class ItemSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$item->setDescription( 'en', 'city in Spain' );
 		$item->setAliases( 'en', array( 'abc', 'cde' ) );
 		$item->setAliases( 'de', array( 'xyz', 'uvw' ) );
-		$item->addSiteLink( new SiteLink( 'dewiki', 'Berlin' ) );
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Rome' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Rome' );
 
 		$patterns = array(
 			'/^Test$/',

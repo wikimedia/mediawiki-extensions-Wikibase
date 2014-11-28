@@ -198,7 +198,7 @@ class TermSqlIndexTest extends TermIndexTest {
 		$item1->setId( 42 );
 
 		$item1->setLabel( $languageCode, $termText );
-		$item1->addSiteLink( new SiteLink( 'enwiki', 'A' ) );
+		$item1->getSiteLinkList()->addNewSiteLink( 'enwiki', 'A' );
 
 		$termIndex->saveTermsOfEntity( $item1 );
 
@@ -206,10 +206,10 @@ class TermSqlIndexTest extends TermIndexTest {
 		$item2->setId( 23 );
 
 		$item2->setLabel( $languageCode, $termText );
-		$item2->addSiteLink( new SiteLink( 'enwiki', 'B' ) );
-		$item2->addSiteLink( new SiteLink( 'dewiki', 'B' ) );
-		$item2->addSiteLink( new SiteLink( 'hrwiki', 'B' ) );
-		$item2->addSiteLink( new SiteLink( 'uzwiki', 'B' ) );
+		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'B' );
+		$item2->getSiteLinkList()->addNewSiteLink( 'dewiki', 'B' );
+		$item2->getSiteLinkList()->addNewSiteLink( 'hrwiki', 'B' );
+		$item2->getSiteLinkList()->addNewSiteLink( 'uzwiki', 'B' );
 
 		$termIndex->saveTermsOfEntity( $item2 );
 
@@ -217,8 +217,8 @@ class TermSqlIndexTest extends TermIndexTest {
 		$item3->setId( 108 );
 
 		$item3->setLabel( $languageCode, $termText );
-		$item3->addSiteLink( new SiteLink( 'hrwiki', 'C' ) );
-		$item3->addSiteLink( new SiteLink( 'uzwiki', 'C' ) );
+		$item3->getSiteLinkList()->addNewSiteLink( 'hrwiki', 'C' );
+		$item3->getSiteLinkList()->addNewSiteLink( 'uzwiki', 'C' );
 
 		$termIndex->saveTermsOfEntity( $item3 );
 

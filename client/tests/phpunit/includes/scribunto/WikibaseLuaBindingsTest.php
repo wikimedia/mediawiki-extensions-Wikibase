@@ -224,8 +224,8 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$item->setId( $itemId );
 		$item->setLabel( 'en', 'Beer' );
 		$item->setDescription( 'en', 'yummy beverage' );
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Beer' ) );
-		$item->addSiteLink( new SiteLink( 'dewiki', 'Bier' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Beer' );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Bier' );
 
 		return $item;
 	}

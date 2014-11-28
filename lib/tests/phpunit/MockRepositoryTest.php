@@ -138,7 +138,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 	public function testGetItemIdForLink() {
 		$item = Item::newEmpty();
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		// test item lookup
 		$this->repo->putEntity( $item );
@@ -167,42 +167,42 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		// #0: same link ---------
 		$a = Item::newEmpty();
 		$a->setId( 1 );
-		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
-		$a->addSiteLink( new SiteLink( 'dewiki', 'Foo' ) );
+		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
+		$a->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Foo' );
 
 		$b = Item::newEmpty();
 		$b->setId( 2 );
-		$b->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
-		$b->addSiteLink( new SiteLink( 'dewiki', 'Bar' ) );
+		$b->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
+		$b->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Bar' );
 
 		$cases[] = array( $a, $b, array( array( 'enwiki', 'Foo', 1 ) ) );
 
 		// #1: same site ---------
 		$a = Item::newEmpty();
 		$a->setId( 1 );
-		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
+		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		$b = Item::newEmpty();
 		$b->setId( 2 );
-		$b->addSiteLink( new SiteLink( 'enwiki', 'Bar' ) );
+		$b->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Bar' );
 
 		$cases[] = array( $a, $b, array() );
 
 		// #2: same page ---------
 		$a = Item::newEmpty();
 		$a->setId( 1 );
-		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
+		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		$b = Item::newEmpty();
 		$b->setId( 2 );
-		$b->addSiteLink( new SiteLink( 'dewiki', 'Foo' ) );
+		$b->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Foo' );
 
 		$cases[] = array( $a, $b, array() );
 
 		// #3: same item ---------
 		$a = Item::newEmpty();
 		$a->setId( 1 );
-		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
+		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		$cases[] = array( $a, $a, array() );
 
@@ -224,13 +224,13 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		$a = Item::newEmpty();
 		$a->setId( 1 );
-		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
-		$a->addSiteLink( new SiteLink( 'dewiki', 'Bar' ) );
+		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
+		$a->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Bar' );
 
 		$b = Item::newEmpty();
 		$b->setId( 2 );
-		$b->addSiteLink( new SiteLink( 'enwiki', 'Bar' ) );
-		$b->addSiteLink( new SiteLink( 'dewiki', 'Xoo' ) );
+		$b->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Bar' );
+		$b->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Xoo' );
 
 		$items = array( $a, $b );
 
@@ -464,8 +464,8 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$one = Item::newEmpty();
 		$one->setId( 1 );
 
-		$one->addSiteLink( new SiteLink( 'dewiki', 'Xoo' ) );
-		$one->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
+		$one->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Xoo' );
+		$one->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		$this->repo->putEntity( $one );
 
