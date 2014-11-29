@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_3d30c4fb",
+        "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-29T13:12:08Z",
+      "side": 1,
+      "message": "I dislike the \"new...\" naming scheme and prefer \"get...\". Just a note, not important here.",
+      "revId": "1148a81953890ef6dd67508028018ca15ff9844b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
