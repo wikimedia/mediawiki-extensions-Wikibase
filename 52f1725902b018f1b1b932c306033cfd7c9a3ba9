@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_5d291099",
+        "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-29T13:09:09Z",
+      "side": 1,
+      "message": "DataValue? Are you sure?",
+      "revId": "52f1725902b018f1b1b932c306033cfd7c9a3ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_bd44d46f",
+        "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-29T13:09:09Z",
+      "side": 1,
+      "message": "Where do all these names come from?",
+      "revId": "52f1725902b018f1b1b932c306033cfd7c9a3ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_1d33880b",
+        "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-29T13:09:09Z",
+      "side": 1,
+      "message": "Reuse the options object if it\u0027s the same in all three test cases.",
+      "revId": "52f1725902b018f1b1b932c306033cfd7c9a3ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_7d264ccb",
+        "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-29T13:09:09Z",
+      "side": 1,
+      "message": "What \"parse\"?",
+      "revId": "52f1725902b018f1b1b932c306033cfd7c9a3ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
