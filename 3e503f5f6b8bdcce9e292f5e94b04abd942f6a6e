@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_e0fb930f",
+        "filename": "client/maintenance/populateEntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-11-29T13:41:53Z",
+      "side": 1,
+      "message": "Typo. Also should default to 0, as in the rest of the code.",
+      "revId": "3e503f5f6b8bdcce9e292f5e94b04abd942f6a6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
