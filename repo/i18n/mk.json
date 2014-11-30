@@ -40,9 +40,7 @@
 	"wikibase-description-input-help-message": "Внесете краток опис на оваа единица на $1.",
 	"wikibase-fingerprintgroupview-input-help-message": "Внесете го натписот на оваа единица, краток опис и алијаси за секој јазик на кој работите.",
 	"wikibase-fingerprintview-input-help-message": "Внесете го натписот на оваа единица, краток опис и алијаси на $1.",
-	"wikibase-claims": "Тврдења",
 	"wikibase-statements": "Искази",
-	"wikibase-attributes": "Атрибути",
 	"wikibase-terms": "На други јазици",
 	"wikibase-sitelinkgroupview-input-help-message": "Додајте врска укажувајќи мрежно место и страницата на него, или пак отстранете ги постоечките",
 	"wikibase-sitelinks-empty": "Досега нема страници поврзани со овој предмет.",
@@ -65,7 +63,6 @@
 	"wikibase-ui-pendingquantitycounter-pending-pendingsubpart": "+$1",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Една вредност остана незачувана|$1 вредности останаа незачувани}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "($1 {{PLURAL:$1|ставка|ставки}})",
-	"wikibase-sitelinksedittool-full": "Веќе се зададени врски за страници на сите познати викија.",
 	"wikibase-disambiguation-title": "Појаснување за „$1“",
 	"wb-special-newitem-new-item-notification": "Новиот предмет $1 е создаден и пренасочен на својата страница. Назад на $2.",
 	"wikibase-aliases-label": "Познато и како:",
@@ -350,5 +347,7 @@
 	"right-item-merge": "Спојување на предмети",
 	"right-item-redirect": "Создавање на пренасочувања на предмети",
 	"right-property-term": "Менување на условите за својствата (натписи, описи, алијаси)",
-	"right-property-create": "Создавање на својства"
+	"right-property-create": "Создавање на својства",
+	"wikibase-entity-not-viewable-title": "Несовпаѓање во типот на содржината. Не можам да ја прикажам.",
+	"wikibase-entity-not-viewable": "Дадениот тип на содржина „$1“ не претставува Единица и затоа  Викибазата не може да го прикаже."
 }

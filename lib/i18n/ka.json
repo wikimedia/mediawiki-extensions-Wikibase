@@ -20,8 +20,6 @@
 	"wikibase-error-ui-edit-conflict": "რედაქტირების კონფლიქტი. გადატვირთეთ და თავიდან შეინახეთ.",
 	"wikibase-sitelinks-wikipedia": "ამ ელემენტთან დაკავშირებული ვიკიპედიის გვერდები",
 	"wikibase-sitelinks-sitename-columnheading": "ენა",
-	"wikibase-sitelinks-sitename-columnheading-special": "საიტი",
-	"wikibase-sitelinks-siteid-columnheading": "კოდი",
 	"wikibase-sitelinks-link-columnheading": "დაკავშირებული გვერდი",
 	"wikibase-snakview-snaktypeselector-somevalue": "უცნობი მნიშვნელობა",
 	"wikibase-snakview-snaktypeselector-novalue": "მნიშვნელობა არ არის მითითებული",

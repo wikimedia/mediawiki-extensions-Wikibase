@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Glaisher"
+		]
+	},
+	"tooltip-t-wikibase": "ޑޭޓާ ދަފްތަރާ ގުޅާލައްވާ",
+	"wikibase-dataitem": "{{WBREPONAME}} ޞަފްޙާ",
+	"wikibase-editlinks": "އުނިއިތުރުގެންނަވާ",
+	"wikibase-linkitem-addlinks": "އިތުރުކުރައްވާ",
+	"wikibase-linkitem-input-site": "ބަސްː",
+	"wikibase-linkitem-input-page": "ޞަފްޙާ",
+	"wikibase-linkitem-confirmitem-button": "ޔަޤީންކުރައްވާ",
+	"wikibase-rc-hide-wikidata-hide": "ފޮރުވާ",
+	"wikibase-rc-hide-wikidata-show": "ދައްކަވާ",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} އުނިއިތުރު",
+	"wikibase-unconnectedpages-submit": "ދުރުވޭ"
+}

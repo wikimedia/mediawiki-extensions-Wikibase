@@ -62,9 +62,7 @@
 	"wikibase-description-input-help-message": "使用$1输入对此实体的简短描述。",
 	"wikibase-fingerprintgroupview-input-help-message": "对每种语言输入此实体的一个标签，一段简短描述和别名。",
 	"wikibase-fingerprintview-input-help-message": "在$1输入此实体的标签，一段简短描述和别名。",
-	"wikibase-claims": "声称",
 	"wikibase-statements": "声明",
-	"wikibase-attributes": "属性",
 	"wikibase-terms": "其他语言",
 	"wikibase-sitelinkgroupview-input-help-message": "通过指定一个站点和对应站点的一个页面添加、编辑站点链接，或移除现有的站点链接。",
 	"wikibase-sitelinks-empty": "尚无页面连接至该项。",
@@ -86,7 +84,6 @@
 	"wikibase-undo-nocontent": "无法载入页面$1的版本$2的内容",
 	"wikibase-propertyedittool-counter-pending-tooltip": "$1个值还没有保存",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|条}}",
-	"wikibase-sitelinksedittool-full": "所有已知网站均已设置页面链接。",
 	"wikibase-disambiguation-title": "“$1”的消歧义",
 	"wb-special-newitem-new-item-notification": "新项$1已创建并已重定向至其页面。返回$2。",
 	"wikibase-aliases-label": "别名：",
@@ -373,5 +370,7 @@
 	"right-item-merge": "合并项",
 	"right-item-redirect": "创建项重定向",
 	"right-property-term": "更改属性术语（标签、说明、别名）",
-	"right-property-create": "创建属性"
+	"right-property-create": "创建属性",
+	"wikibase-entity-not-viewable-title": "内容类型不匹配：不能显示内容",
+	"wikibase-entity-not-viewable": "指定的内容类型“$1”不是实体，不能通过Wikibase显示。"
 }
