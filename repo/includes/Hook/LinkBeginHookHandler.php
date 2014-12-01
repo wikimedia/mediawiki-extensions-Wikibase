@@ -4,16 +4,14 @@ namespace Wikibase\Repo\Hook;
 
 use DummyLinker;
 use Html;
-use IContextSource;
 use Language;
-use MWContentSerializationException;
+use OutputPage;
 use RequestContext;
 use Title;
-use Wikibase\EntityContent;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\Store\TermLookup;
+use Wikibase\Repo\Store\PageEntityIdLookup;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * @since 0.5
@@ -23,29 +21,38 @@ use WikiPage;
 class LinkBeginHookHandler {
 
 	/**
-	 * @var EntityContentFactory
+	 * @var PageEntityIdLookup
 	 */
-	private $entityContentFactory;
+	private $entityIdLookup;
 
 	/**
-	 * @var LanguageFallbackChainFactory
+	 * @var TermLookup
 	 */
-	private $languageFallbackChainFactory;
+	private $termLookup;
 
 	/**
-	 * @var IContextSource
+	 * @var LanguageFallbackChain
 	 */
-	private $context;
+	private $languageFallback;
+
+	/**
+	 * @var Language
+	 */
+	private $pageLanguage;
 
 	/**
 	 * @return LinkBeginHookHandler
 	 */
-	public static function newFromGlobalState() {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+	private static function newFromGlobalState() {
 		$context = RequestContext::getMain();
 
-		return new self( $entityContentFactory, $languageFallbackChainFactory, $context );
+		$entityIdLookup = WikibaseRepo::getDefaultInstance()->getPageEntityIdLookup();
+		$termLookup = WikibaseRepo::getDefaultInstance()->getTermLookup();
+
+		$languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $context );
+
+		return new self( $entityIdLookup, $termLookup, $languageFallbackChain, $context->getLanguage() );
 	}
 
 	/**
@@ -66,120 +73,126 @@ class LinkBeginHookHandler {
 		&$options, &$ret
 	) {
 		$handler = self::newFromGlobalState();
-		return $handler->doOnLinkBegin( $target, $html, $customAttribs );
+		$context = RequestContext::getMain();
+
+		$handler->doOnLinkBegin( $target, $html, $customAttribs, $context->getOutput() );
+
+		return true;
 	}
 
 	/**
-	 * @param EntityContentFactory $entityContentFactory
-	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
-	 * @param IContextSource $context
+	 * @param PageEntityIdLookup $entityIdLookup
+	 * @param TermLookup $termLookup
+	 * @param LanguageFallbackChain $languageFallback
+	 * @param Language $pageLanguage
+	 *
+	 * @todo: Would be nicer to take a LabelLookup instead of TermLookup + FallbackChain.
+	 *        But LabelLookup does not support descriptions at the moment.
 	 */
 	public function __construct(
-		EntityContentFactory $entityContentFactory,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		IContextSource $context
+		PageEntityIdLookup $entityIdLookup,
+		TermLookup $termLookup,
+		LanguageFallbackChain $languageFallback,
+		Language $pageLanguage
 	) {
-		$this->entityContentFactory = $entityContentFactory;
-		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
-		$this->context = $context;
+		$this->entityIdLookup = $entityIdLookup;
+		$this->termLookup = $termLookup;
+		$this->languageFallback = $languageFallback;
+		$this->pageLanguage = $pageLanguage;
 	}
 
 	/**
 	 * @param Title $target
 	 * @param string &$html
 	 * @param array &$customAttribs
-	 *
-	 * @return boolean
+	 * @param OutputPage $out
 	 */
-	public function doOnLinkBegin( Title $target, &$html, array &$customAttribs ) {
+	public function doOnLinkBegin( Title $target, &$html, array &$customAttribs, OutputPage $out ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( !$this->onSpecialPage() || !$this->isEntityContent( $target ) ) {
+		$currentTitle = $out->getTitle();
+
+		if ( $currentTitle === null || !$currentTitle->isSpecialPage() ) {
+			// Note: this may not work right with special page transclusion. If $out->getTitle()
+			// doesn't return the transcluded special page's title, the transcluded text will
+			// not have entity IDs resolved to labels.
 			wfProfileOut( __METHOD__ );
-			return true;
+			return;
 		}
 
 		// if custom link text is given, there is no point in overwriting it
 		// but not if it is similar to the plain title
 		if ( $html !== null && $target->getFullText() !== $html ) {
 			wfProfileOut( __METHOD__ );
-			return true;
+			return;
 		}
 
-		$entity = $this->getEntityForTitle( $target );
+		$entityId = $this->entityIdLookup->getPageEntityId( $target );
 
-		if ( !$entity ) {
+		if ( !$entityId ) {
 			wfProfileOut( __METHOD__ );
-			return true;
+			return;
 		}
 
-		// Try to find the most preferred available language to display data in current context.
-		$languageFallbackChain = $this->languageFallbackChainFactory->newFromContext( $this->context );
+		//@todo: only fetch the labels we need for the fallback chain
+		$labels = $this->termLookup->getLabels( $entityId );
+		$descriptions = $this->termLookup->getDescriptions( $entityId );
 
-		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $entity->getLabels() );
+		$labelData = $this->getPreferredTerm( $labels );
+		$descriptionData = $this->getPreferredTerm( $descriptions );
 
-		if ( $labelData ) {
-			$labelText = $labelData['value'];
-			$labelLang = Language::factory( $labelData['language'] );
-		} else {
-			$labelText = '';
-			$labelLang = $this->context->getLanguage();
-		}
-
-		$descriptionData = $languageFallbackChain->extractPreferredValueOrAny(
-			$entity->getDescriptions()
-		);
-
-		$html = $this->getHtml( $target, $labelLang, $labelText );
+		$html = $this->getHtml( $target, $labelData );
 
 		$customAttribs['title'] = $this->getTitleAttribute(
 			$target,
-			$labelLang,
-			$labelText,
+			$labelData,
 			$descriptionData
 		);
 
 		// add wikibase styles in all cases, so we can format the link properly:
-		$this->context->getOutput()->addModuleStyles( array( 'wikibase.common' ) );
+		$out->addModuleStyles( array( 'wikibase.common' ) );
 
 		wfProfileOut( __METHOD__ );
-		return true;
 	}
 
-	private function onSpecialPage() {
-		// Title is temporarily set to special pages Title in case of special page inclusion!
-		// Therefore we can just check whether the page is a special page and
-		// if not, disable the behavior.
-		$currentTitle = $this->context->getTitle();
+	private function getPreferredTerm( $termsByLanguage ) {
+		if ( empty( $termsByLanguage ) ) {
+			return null;
+		}
 
-		return $currentTitle !== null && $currentTitle->isSpecialPage();
+		return $this->languageFallback->extractPreferredValueOrAny(
+			$termsByLanguage
+		);
 	}
 
-	private function isEntityContent( Title $title ) {
-		return $this->entityContentFactory->isEntityContentModel( $title->getContentModel() );
-	}
-
-	private function getEntityForTitle( Title $title ) {
-		$page = new WikiPage( $title );
-
-		try {
-			$content = $page->getContent();
-
-			// Failed, can't continue. This could happen because the content is empty
-			// (page doesn't exist), e.g. after item was deleted.
-
-			// TODO: resolve redirect, show redirect info in link
-			if ( $content instanceof EntityContent && !$content->isRedirect() ) {
-				return $content->getEntity();
-			}
-		} catch ( MWContentSerializationException $ex ) {
-			// if this fails, it's not horrible.
-			wfWarn( 'Failed to get entity object for [[' . $title->getFullText() . ']]'
-					. ': ' . $ex->getMessage() );
+	/**
+	 * @param array $termData A term record as returned by
+	 * LanguageFallbackChain::extractPreferredValueOrAny(),
+	 * containing the 'value' and 'language' fields, or null
+	 * or an empty array.
+	 *
+	 * @see LanguageFallbackChain::extractPreferredValueOrAny
+	 *
+	 * @return array list( string $text, Language $language )
+	 */
+	private function extractTextAndLanguage( $termData ) {
+		if ( $termData ) {
+			return array(
+				$termData['value'],
+				Language::factory( $termData['language'] )
+			);
+		} else {
+			return array(
+				'',
+				$this->pageLanguage
+			);
 		}
 	}
 
-	private function getHtml( Title $title, $labelLang, $labelText ) {
+	private function getHtml( Title $title, $labelData ) {
+		/** @var Language $labelLang */
+		list( $labelText, $labelLang ) = $this->extractTextAndLanguage( $labelData );
+
 		$idHtml = Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
 			. wfMessage(
 				'wikibase-itemlink-id-wrapper',
@@ -203,26 +216,27 @@ class LinkBeginHookHandler {
 			. Html::closeElement( 'span' );
 	}
 
-	private function getTitleAttribute( Title $title, $labelLang, $labelText, $descriptionData ) {
-		if ( $descriptionData ) {
-			$descriptionText = $descriptionData['value'];
-			$descriptionLang = Language::factory( $descriptionData['language'] );
-		} else {
-			$descriptionText = '';
-			$descriptionLang = $this->context->getLanguage();
-		}
+	private function getTitleAttribute( Title $title, $labelData, $descriptionData ) {
+		/** @var Language $labelLang */
+		/** @var Language $descriptionLang */
+
+		list( $labelText, $labelLang ) = $this->extractTextAndLanguage( $labelData );
+		list( $descriptionText, $descriptionLang ) = $this->extractTextAndLanguage( $descriptionData );
 
 		// Set title attribute for constructed link, and make tricks with the directionality to get it right
 		$titleText = ( $labelText !== '' )
-			? $labelLang->getDirMark() . $labelText . $this->context->getLanguage()->getDirMark()
+			? $labelLang->getDirMark() . $labelText
+				. $this->pageLanguage->getDirMark()
 			: $title->getPrefixedText();
+
+		$descriptionText = $descriptionLang->getDirMark() . $descriptionText
+			. $this->pageLanguage->getDirMark();
 
 		return ( $descriptionText !== '' ) ?
 			wfMessage(
 				'wikibase-itemlink-title',
 				$titleText,
-				$descriptionLang->getDirMark() . $descriptionText
-					. $this->context->getLanguage()->getDirMark()
+				$descriptionText
 			)->inContentLanguage()->text() :
 			$titleText; // no description, just display the title then
 	}

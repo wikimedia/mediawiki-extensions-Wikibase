@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use ContentHandler;
+use Title;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -80,6 +81,15 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$title = $factory->getTitleForId( new ItemId( 'Q42' ) );
 
 		$this->assertEquals( 'Q42', $title->getText() );
+	}
+
+	public function testGetPageEntityId() {
+		$factory = $this->newFactory();
+
+		$title = Title::makeTitle( $factory->getNamespaceForType( Item::ENTITY_TYPE ), 'Q42' );
+		$entityId = $factory->getPageEntityId( $title );
+
+		$this->assertEquals( 'Q42', $entityId->getSerialization() );
 	}
 
 	public function testGetNamespaceForType() {
