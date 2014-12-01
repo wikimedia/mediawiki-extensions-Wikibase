@@ -56,26 +56,29 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	private $redirects = null;
 
 	/**
-	 * @param EntityId[] $ids
-	 * @param EntityIdParser $idParser
+	 * @param EntityId[] $entityIds
+	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 */
-	public function __construct( array $ids, EntityIdParser $idParser, EntityRevisionLookup $entityRevisionLookup ) {
-		$this->idParser = $idParser;
+	public function __construct(
+		array $entityIds,
+		EntityIdParser $entityIdParser,
+		EntityRevisionLookup $entityRevisionLookup
+	) {
+		$this->setEntityIds( $entityIds );
+		$this->idParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
-
-		$this->setEntityIds( $ids );
 	}
 
 	/**
-	 * @param EntityId[] $ids
+	 * @param EntityId[] $entityIds
 	 */
-	private function setEntityIds( $ids ) {
+	private function setEntityIds( array $entityIds ) {
 		$this->entityInfo = array();
 
-		foreach ( $ids as $id ) {
-			$key = $id->getSerialization();
-			$type = $id->getEntityType();
+		foreach ( $entityIds as $entityId ) {
+			$key = $entityId->getSerialization();
+			$type = $entityId->getEntityType();
 
 			$this->entityInfo[$key] = array(
 				'id' => $key,
