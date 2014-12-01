@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_98947f8f",
+        "filename": "repo/resources/jquery/jquery.sticknode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:31:36Z",
+      "side": 1,
+      "message": "{jQuery|null}?",
+      "revId": "8797d11182168a5ed9221edb743f72e6439f5789",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b8913b9e",
+        "filename": "repo/resources/jquery/jquery.sticknode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:31:36Z",
+      "side": 1,
+      "message": "{Object|null}?",
+      "revId": "8797d11182168a5ed9221edb743f72e6439f5789",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_18f86fe1",
+        "filename": "repo/resources/jquery/jquery.sticknode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:31:36Z",
+      "side": 1,
+      "message": "Can be null, please add a !\u003d\u003d null check.",
+      "revId": "8797d11182168a5ed9221edb743f72e6439f5789",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_18cf0fb7",
+        "filename": "repo/resources/jquery/jquery.sticknode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:31:36Z",
+      "side": 1,
+      "message": "Isn\u0027t some kind of\n if( !this.isFixed() ) { return; }\nmissing here?",
+      "revId": "8797d11182168a5ed9221edb743f72e6439f5789",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_38d44b48",
+        "filename": "repo/resources/jquery/jquery.sticknode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:31:36Z",
+      "side": 1,
+      "message": "Are you sure this can\u0027t be null? I\u0027m not so sure.",
+      "revId": "8797d11182168a5ed9221edb743f72e6439f5789",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
