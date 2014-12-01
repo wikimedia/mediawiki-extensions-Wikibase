@@ -48,6 +48,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Lib\Store\TermLookup;
@@ -490,7 +491,7 @@ class WikibaseRepo {
 	 * @return TermLookup
 	 */
 	public function getTermLookup() {
-		return new EntityRetrievingTermLookup( $this->getEntityLookup() );
+		return new EntityTermLookup( $this->getStore()->getTermIndex(), $this->getEntityLookup() );
 	}
 
 	/**
