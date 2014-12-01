@@ -397,6 +397,7 @@ return call_user_func( function() {
 				'jquery.wikibase.siteselector',
 				'jquery.wikibase.toolbarcontroller',
 				'mediawiki.util',
+				'oojs-ui',
 				'wikibase.datamodel.SiteLink',
 				'wikibase.sites',
 				'wikibase.templates',
