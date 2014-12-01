@@ -1,0 +1,327 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_321c6a79",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "We are really trying to code Java in PHP. ;-)",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_d56e5093",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "Remove, we want Properties!",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_752e5c40",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "array_merge on a single array? What? Bracket misplaced?",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_951688f5",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "Why are you dropping the iterator only to create a new one in the end? Make getPagesUsing return an array if possible.",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_f5190c28",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "Switch, in_array can be expensive, instanceof is cheap.",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_95cc488e",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "Another reason to avoid using iterators.",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_5529e034",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "This probably uses PHP\u0027s magic of comparing objects. Please double check.",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b507041f",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "\"virtual\"? There is nothing virtual when looking at this method. Whatever. it\u0027s private.",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b5fce4b2",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "What about an isEmpty()?",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b54e243b",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "Please check if this is unused code.",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_355a14f7",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "Please don\u0027t name this \"getPages...\" if it returns usages objects. get(Relevant?)UsagesPerPage.",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_35d45448",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Runner.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "Comment wrong now.",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_75dadc79",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "\"the specific usage flag\"? Which one? You mean S+L+T+O\u003dX.",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b591449e",
+        "filename": "client/includes/Usage/PageEntityUsages.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "Why 1? null or true seems more logical.",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b55b8425",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "Not true any more. Also did you changed all usages?",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b5baa41c",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "Better try-catch this.",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_5571e0a5",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "\"page\" \u003d\u003e \"title\"?",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_1506f820",
+        "filename": "client/includes/Usage/UsageAspectTransformater.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "Class and file name are different. :-(",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_f5334cf1",
+        "filename": "client/includes/Usage/UsageAspectTransformater.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:08:24Z",
+      "side": 1,
+      "message": "Try to find an other word for \"relevant\" and \"effective\". Maybe \"usedAspects\" and \"changedAspects\"? Or make the interface symmetric:\n\n setAspectsForEntity( EntityId $entityId, array $aspects )\n intersectAspectsForEntity( EntityId $entityId, array $aspects )",
+      "revId": "4f51f9b9e712e9db11d3305a075161c262a4a86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
