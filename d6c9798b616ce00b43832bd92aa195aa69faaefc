@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_98479f50",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.sitelinklistview.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:25:18Z",
+      "side": 1,
+      "message": "We should try to avoid this. It tends to hide text that\u0027s crucial in certain situations. Let it flow, that\u0027s how HTML was meant to be. However, not a reason to block this patch. Can be refined later.",
+      "revId": "d6c9798b616ce00b43832bd92aa195aa69faaefc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_3870cb9f",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.sitelinklistview.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:25:18Z",
+      "side": 1,
+      "message": "Huh? Why?",
+      "revId": "d6c9798b616ce00b43832bd92aa195aa69faaefc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_985ebf16",
+        "filename": "lib/resources/jquery.wikibase/toolbar/jquery.wikibase.removetoolbar.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:25:18Z",
+      "side": 1,
+      "message": "Uh, that\u0027s awful. Why \"buttonElement\" and \"buttonWidget\"?",
+      "revId": "d6c9798b616ce00b43832bd92aa195aa69faaefc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_78a5f3ff",
+        "filename": "lib/resources/jquery.wikibase/toolbar/jquery.wikibase.removetoolbar.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:25:18Z",
+      "side": 1,
+      "message": "Suggestion:\n\n $link.attr( \u0027title\u0027 ) || $link.text()",
+      "revId": "d6c9798b616ce00b43832bd92aa195aa69faaefc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_18814f4f",
+        "filename": "repo/resources/jquery/jquery.sticknode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:25:18Z",
+      "side": 1,
+      "message": "This is unrelated, right? Not a problem, just asking.",
+      "revId": "d6c9798b616ce00b43832bd92aa195aa69faaefc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
