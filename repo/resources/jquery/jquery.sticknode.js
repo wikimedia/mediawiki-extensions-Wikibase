@@ -198,7 +198,8 @@ $.extend( StickyNode.prototype, {
 		.css( 'left', this._initialAttributes.offset.left + 'px' )
 		.css( 'top', this.$node.outerHeight() - this.$node.outerHeight( true ) )
 		.css( 'width', this.$node.width() )
-		.css( 'position', 'fixed' );
+		.css( 'position', 'fixed' )
+		.css( 'z-index', '1');
 	},
 
 	_unfix: function() {

@@ -4,37 +4,70 @@
  */
 
 .wikibase-sitelinklistview .wikibase-sitelinklistview-listview {
+	line-height: 1;
 	list-style: outside none none;
 	margin: 0 0 0 10px;
 	clear: both;
 }
 
 .wikibase-sitelinklistview .wikibase-sitelinklistview-listview > * {
-	margin: 3px 0;
+	margin: 1px 0;
 }
 
-.wikibase-sitelinklistview .wikibase-sitelinklistview-listview .wikibase-sitelinkview-siteid {
-	background-color: #F0F0F0;
-	padding: 0.2em 0.4em;
+/***** sitelinkview in sitelinklistview *****/
+
+.wikibase-sitelinklistview .wikibase-sitelinkview {
+	clear: both;
+	float: left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+}
+.wikibase-sitelinklistview .wikibase-sitelinkview-new {
+	white-space: normal;
+}
+
+.wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-siteid-container {
+	background: #E8E8E8;
+	border: 1px solid #C9C9C9;
+	display: inline-block;
+	line-height: 1.5;
+	padding-left: 0.2em;
+	padding-right: 0;
+}
+
+.wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-siteid-container .wikibase-sitelinkview-siteid {
+	background: none;
+	padding: 0 0.2em 0 0;
 	white-space: nowrap;
 }
 
-.wikibase-sitelinklistview .wikibase-sitelinklistview-listview .wikibase-sitelinkview-link {
+.wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-link {
 	display: inline;
-	margin-left: 0.2em;
+	margin-left: 0.4em;
 	white-space: nowrap;
 	word-wrap: break-word;
 }
-.wikibase-sitelinklistview .wikibase-sitelinklistview-listview .wikibase-sitelinkview-link-new {
+.wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-link-new {
 	display: inline-block;
 }
 
-.wikibase-sitelinklistview .wikibase-sitelinklistview-listview .wikibase-toolbar-container {
+.wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-toolbar-container {
 	padding-left: 0.5em;
 	position: static;
 }
 
-.wikibase-sitelinklistview .wikibase-sitelinkview {
-	overflow: hidden;
-	text-overflow: ellipsis;
+.wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-removetoolbar-container {
+	background: white;
+	display: inline-block;
+	line-height: 1.5;
+	margin-left: 0;
+	padding: 0 0.2em;
+	vertical-align: bottom;
+	width: auto;
+}
+
+.wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-removetoolbar-container * {
+	line-height: 0;
 }
