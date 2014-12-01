@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_b8593b5f",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T18:49:39Z",
+      "side": 1,
+      "message": "array type hint missing.",
+      "revId": "489e5ca49db690edc5903972049b723053fc6f36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_783bb3e8",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T18:49:39Z",
+      "side": 1,
+      "message": "Must this return a Language object? Otherwise this could return a Term object.",
+      "revId": "489e5ca49db690edc5903972049b723053fc6f36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_18494f90",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T18:49:39Z",
+      "side": 1,
+      "message": "@throws EntityIdParsingException",
+      "revId": "489e5ca49db690edc5903972049b723053fc6f36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_98855fa2",
+        "filename": "repo/tests/phpunit/includes/Hook/LinkBeginHookHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T18:49:39Z",
+      "side": 1,
+      "message": "This contains quite a lot of unrelated refactoring. Looks like 90% of the changes here can go in an separate patch (below this one). Not sure if this is worth the trouble. Probably not.",
+      "revId": "489e5ca49db690edc5903972049b723053fc6f36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
