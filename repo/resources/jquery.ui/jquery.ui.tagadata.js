@@ -307,16 +307,21 @@ $.widget( 'ui.tagadata', {
 			return $tag;
 		}
 
-		var $label = $( '<span/>' ).addClass( 'tagadata-label' ),
-			$input = $( '<input />' ).attr( 'name', this.options.itemName + '[]' );
+		var $label = $( '<span>', { 'class': 'tagadata-label' } ),
+			$input = $( '<input>', { name: this.options.itemName + '[]' } );
 
 		$tag = this._createTagNode().addClass( additionalClasses || '' ).append( $label );
 
 		if( this.options.editableTags || forceTextInput ) {
+			var dir = ( $.uls && $.uls.data ) ?
+				$.uls.data.getDir( this.options.value.getLanguageCode() ) :
+				$( 'html' ).prop( 'dir' );
+
 			$input.attr( {
 				type: 'text',
 				value: value,
-				'class': 'tagadata-label-text'
+				'class': 'tagadata-label-text',
+				dir: dir
 			} )
 			.appendTo( $label );
 
@@ -325,7 +330,7 @@ $.widget( 'ui.tagadata', {
 			// we need input only for the form to contain the data
 			$input.attr( {
 				type: 'hidden',
-				style: 'display:none;'
+				style: 'display: none;'
 			} )
 			.appendTo( $tag );
 
