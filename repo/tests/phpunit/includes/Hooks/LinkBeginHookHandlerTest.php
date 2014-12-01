@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Hooks;
 
 use Language;
 use RequestContext;
@@ -8,11 +8,11 @@ use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\Hook\LinkBeginHookHandler;
+use Wikibase\Repo\Hooks\LinkBeginHookHandler;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Hook\LinkBeginHookHandler
+ * @covers Wikibase\Repo\Hooks\LinkBeginHookHandler
  *
  * @since 0.5
  *
@@ -185,4 +185,5 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		);
 
 	}
+
 }
