@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_1b72a9e2",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-01T20:06:24Z",
+      "side": 1,
+      "message": "no, can be null. didn\u0027t want to make it optional.",
+      "parentUuid": "4ea06b5a_b8593b5f",
+      "revId": "489e5ca49db690edc5903972049b723053fc6f36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_783bb3e8",
         "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
         "patchSetId": 4
@@ -82,6 +100,24 @@
       "writtenOn": "2014-12-01T18:49:39Z",
       "side": 1,
       "message": "This contains quite a lot of unrelated refactoring. Looks like 90% of the changes here can go in an separate patch (below this one). Not sure if this is worth the trouble. Probably not.",
+      "revId": "489e5ca49db690edc5903972049b723053fc6f36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_3b45256b",
+        "filename": "repo/tests/phpunit/includes/Hook/LinkBeginHookHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-01T20:06:24Z",
+      "side": 1,
+      "message": "No, they can\u0027t: the handler now needs completely different services on the constructor. So all the setup/mocking has to be changed.",
+      "parentUuid": "4ea06b5a_98855fa2",
       "revId": "489e5ca49db690edc5903972049b723053fc6f36",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
