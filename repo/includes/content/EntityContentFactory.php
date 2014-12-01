@@ -8,13 +8,16 @@ use OutOfBoundsException;
 use Revision;
 use Status;
 use Title;
+use TitleValue;
 use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\PageEntityIdLookup;
 
 /**
  * Factory for EntityContent objects.
@@ -25,7 +28,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker {
+class EntityContentFactory implements EntityTitleLookup, PageEntityIdLookup, EntityPermissionChecker {
 
 	/**
 	 * @since 0.5
@@ -85,6 +88,31 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	public function getTitleForId( EntityId $id ) {
 		$handler = $this->getContentHandlerForType( $id->getEntityType() );
 		return $handler->getTitleForId( $id );
+	}
+
+	/**
+	 * Returns the ID of the entity associated with the given page title.
+	 *
+	 * @note There is no guarantee that the EntityId returned by this method refers to
+	 * an existing entity.
+	 *
+	 * @param Title $title
+	 *
+	 * @return EntityId|null
+	 */
+	public function getPageEntityId( Title $title ) {
+		$contentModel = $title->getContentModel();
+		$handler = ContentHandler::getForModelID( $contentModel );
+
+		if ( $handler instanceof EntityHandler ) {
+			try {
+				return $handler->getIdForTitle( $title );
+			} catch ( EntityIdParsingException $ex ) {
+				// Not a valid entity page title.
+			}
+		}
+
+		return null;
 	}
 
 	/**
