@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Hook;
+namespace Wikibase\Repo\Hooks;
 
 use DummyLinker;
 use Language;

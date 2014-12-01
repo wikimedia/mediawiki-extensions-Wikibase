@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Hook;
+namespace Wikibase\Repo\Hooks;
 
 use ChangesList;
 use RequestContext;
@@ -8,11 +8,10 @@ use ResultWrapper;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Store\TermBuffer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
+use Wikibase\Store\TermBuffer;
 use Wikibase\Term;
-
 
 /**
  * Hook handlers for triggering prefetching of labels.
@@ -102,6 +101,13 @@ class LabelPrefetchHookHandlers {
 		return $handler->doChangesListInitRows( $list, $rows );
 	}
 
+	/**
+	 * @param TermBuffer $buffer
+	 * @param EntityIdLookup $idLookup
+	 * @param TitleFactory $titleFactory
+	 * @param string[] $termTypes
+	 * @param string[] $languageCodes
+	 */
 	public function __construct(
 		TermBuffer $buffer,
 		EntityIdLookup $idLookup,
@@ -109,7 +115,6 @@ class LabelPrefetchHookHandlers {
 		array $termTypes,
 		array $languageCodes
 	) {
-
 		$this->buffer = $buffer;
 		$this->idLookup = $idLookup;
 		$this->titleFactory = $titleFactory;
@@ -149,4 +154,5 @@ class LabelPrefetchHookHandlers {
 
 		return $titles;
 	}
+
 }
