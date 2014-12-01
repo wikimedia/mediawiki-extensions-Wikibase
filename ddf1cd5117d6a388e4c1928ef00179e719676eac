@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_9b5eb916",
+        "filename": "client/tests/phpunit/includes/hooks/SiteLinkBadgeDisplayTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T18:58:55Z",
+      "side": 1,
+      "message": "Please search and replace all $languageLinkBadgeDisplay variables.",
+      "revId": "ddf1cd5117d6a388e4c1928ef00179e719676eac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
