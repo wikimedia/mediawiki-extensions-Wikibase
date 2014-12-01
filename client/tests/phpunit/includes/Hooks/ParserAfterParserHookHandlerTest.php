@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Test\Hooks;
+namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
 use MediaWikiSite;
