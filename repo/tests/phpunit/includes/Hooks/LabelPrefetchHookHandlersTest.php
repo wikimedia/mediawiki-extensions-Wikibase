@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Hooks;
 
 use ChangesList;
 use FauxRequest;
@@ -13,10 +13,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Repo\Hook\LabelPrefetchHookHandlers;
+use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
 
 /**
- * @covers Wikibase\Repo\Hook\LabelPrefetchHookHandlers
+ * @covers Wikibase\Repo\Hooks\LabelPrefetchHookHandlers
  *
  * @since 0.5
  *
@@ -57,11 +57,12 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param callback $prefetchTerms
+	 * @param string[] $termTypes
+	 * @param string[] $languageCodes
 	 *
 	 * @return LabelPrefetchHookHandlers
 	 */
-	private function getLabelPrefetchHookHandlers( $prefetchTerms, $termTypes, $languageCodes ) {
-
+	private function getLabelPrefetchHookHandlers( $prefetchTerms, array $termTypes, array $languageCodes ) {
 		$termBuffer = $this->getMock( 'Wikibase\Store\TermBuffer' );
 		$termBuffer->expects( $this->atLeastOnce() )
 			->method( 'prefetchTerms' )
@@ -81,11 +82,9 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 			$termTypes,
 			$languageCodes
 		);
-
 	}
 
 	public function testDoChangesListInitRows() {
-
 		$rows = array(
 			(object)array( 'rc_namespace' => NS_MAIN, 'rc_title' => 'XYZ' ),
 			(object)array( 'rc_namespace' => NS_MAIN, 'rc_title' => 'Q23' ),
@@ -109,8 +108,12 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 			$expectedTermTypes,
 			$expectedLanguageCodes
 		) {
-			$expectedIdStrings = array_map( function ( $id ) { return $id->getSerialization(); }, $expectedIds );
-			$entityIdStrings = array_map( function ( $id ) { return $id->getSerialization(); }, $entityIds );
+			$expectedIdStrings = array_map( function( EntityId $id ) {
+				return $id->getSerialization();
+			}, $expectedIds );
+			$entityIdStrings = array_map( function( EntityId $id ) {
+				return $id->getSerialization();
+			}, $entityIds );
 
 			sort( $expectedIdStrings );
 			sort( $entityIdStrings );

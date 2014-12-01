@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Hook;
+namespace Wikibase\Repo\Hooks;
 
 use ChangesList;
 use RequestContext;
@@ -101,6 +101,13 @@ class LabelPrefetchHookHandlers {
 		return $handler->doChangesListInitRows( $list, $rows );
 	}
 
+	/**
+	 * @param TermBuffer $buffer
+	 * @param EntityIdLookup $idLookup
+	 * @param TitleFactory $titleFactory
+	 * @param string[] $termTypes
+	 * @param string[] $languageCodes
+	 */
 	public function __construct(
 		TermBuffer $buffer,
 		EntityIdLookup $idLookup,
@@ -108,7 +115,6 @@ class LabelPrefetchHookHandlers {
 		array $termTypes,
 		array $languageCodes
 	) {
-
 		$this->buffer = $buffer;
 		$this->idLookup = $idLookup;
 		$this->titleFactory = $titleFactory;
@@ -148,4 +154,5 @@ class LabelPrefetchHookHandlers {
 
 		return $titles;
 	}
+
 }
