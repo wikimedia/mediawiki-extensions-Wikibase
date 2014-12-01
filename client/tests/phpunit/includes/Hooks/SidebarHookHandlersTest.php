@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Test\Hooks;
+namespace Wikibase\Client\Tests\Hooks;
 
 use FauxRequest;
 use IContextSource;
@@ -14,9 +14,9 @@ use SiteStore;
 use Skin;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
-use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -158,6 +158,8 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @param array $projects
+	 *
 	 * @return OtherProjectsSidebarGeneratorFactory
 	 */
 	private function getOtherProjectsSidebarGeneratorFactory( array $projects ) {

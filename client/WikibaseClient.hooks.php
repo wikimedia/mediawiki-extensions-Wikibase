@@ -5,7 +5,6 @@ namespace Wikibase;
 use Action;
 use BaseTemplate;
 use ChangesList;
-use Content;
 use FormOptions;
 use IContextSource;
 use Message;
@@ -24,23 +23,20 @@ use Title;
 use UnexpectedValueException;
 use User;
 use Wikibase\Client\Changes\ChangeHandler;
-use Wikibase\Client\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\ChangesPageWikibaseFilterHandler;
+use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
+use Wikibase\Client\Hooks\MovePageNoticeCreator;
 use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
-use Wikibase\Client\MovePageNoticeCreator;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFilterOptions;
 use Wikibase\Client\RepoItemLinkGenerator;
-use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
-use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
-use WikiPage;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
