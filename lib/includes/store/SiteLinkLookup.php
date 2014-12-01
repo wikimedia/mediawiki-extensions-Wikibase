@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use DatabaseBase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -21,22 +22,22 @@ interface SiteLinkLookup {
 	 * currently in the store. The array is empty if there are no such conflicts.
 	 *
 	 * The items in the return array are arrays with the following elements:
-	 * - integer itemId
+	 * - int itemId Numeric (unprefixed) item id
 	 * - string siteId
 	 * - string sitePage
 	 *
 	 * @since 0.1
 	 *
 	 * @param Item          $item
-	 * @param \DatabaseBase|null $db The database object to use (optional).
+	 * @param DatabaseBase|null $db The database object to use (optional).
 	 *        If conflict checking is performed as part of a save operation,
 	 *        this should be used to provide the master DB connection that will
 	 *        also be used for saving. This will preserve transactional integrity
 	 *        and avoid race conditions.
 	 *
-	 * @return array of array
+	 * @return array[]
 	 */
-	public function getConflictsForItem( Item $item, \DatabaseBase $db = null );
+	public function getConflictsForItem( Item $item, DatabaseBase $db = null );
 
 	/**
 	 * Returns the id of the item that is equivalent to the
@@ -59,36 +60,37 @@ interface SiteLinkLookup {
 	 *
 	 * @since 0.3
 	 *
-	 * @param array $itemIds
-	 * @param array $siteIds
-	 * @param array $pageNames
+	 * @param int[] $numericIds Numeric (unprefixed) item ids
+	 * @param string[] $siteIds
+	 * @param string[] $pageNames
 	 *
-	 * @return integer
+	 * @return int
 	 */
-	public function countLinks( array $itemIds, array $siteIds = array(), array $pageNames = array() );
+	public function countLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() );
 
 	/**
 	 * Returns the links that match the provided conditions.
 	 * The links are returned as arrays with the following elements in specified order:
-	 * - siteId
-	 * - pageName
-	 * - itemId (unprefixed)
+	 * - string siteId
+	 * - string pageName
+	 * - int itemId Numeric (unprefixed) item id
 	 *
 	 * Note: if the conditions are not very selective the result set can be very big.
 	 * Thus the caller is responsible for not executing too expensive queries in its context.
 	 *
 	 * @since 0.3
 	 *
-	 * @param array $itemIds
-	 * @param array $siteIds
-	 * @param array $pageNames
+	 * @param int[] $numericIds Numeric (unprefixed) item ids
+	 * @param string[] $siteIds
+	 * @param string[] $pageNames
 	 *
 	 * @return array[]
 	 */
-	public function getLinks( array $itemIds, array $siteIds = array(), array $pageNames = array() );
+	public function getLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() );
 
 	/**
-	 * Returns an array of SiteLink for an EntityId
+	 * Returns an array of SiteLink objects for an item. If the item isn't known or not an Item,
+	 * an empty array is returned.
 	 *
 	 * @since 0.4
 	 *
