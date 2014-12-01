@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Hook;
+namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
 use Wikibase\OutputPageJsConfigBuilder;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Hooks;
 
 use Language;
 use RequestContext;
@@ -11,11 +11,11 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\TermLookup;
-use Wikibase\Repo\Hook\LinkBeginHookHandler;
+use Wikibase\Repo\Hooks\LinkBeginHookHandler;
 use Wikibase\Repo\Store\PageEntityIdLookup;
 
 /**
- * @covers Wikibase\Repo\Hook\LinkBeginHookHandler
+ * @covers Wikibase\Repo\Hooks\LinkBeginHookHandler
  *
  * @since 0.5
  *
@@ -213,4 +213,5 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		);
 
 	}
+
 }
