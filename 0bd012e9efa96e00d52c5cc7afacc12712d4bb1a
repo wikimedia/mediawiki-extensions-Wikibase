@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_780733ce",
+        "filename": "lib/resources/jquery.wikibase-shared/jquery.wikibase.siteselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:44:15Z",
+      "side": 1,
+      "message": "This is removing a feature, right? Please link the relevant task/bug. Thanks.",
+      "revId": "0bd012e9efa96e00d52c5cc7afacc12712d4bb1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_d81c471b",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:44:15Z",
+      "side": 1,
+      "message": "Please avoid comma separated \"var ...\" statements that span multiple lines. It\u0027s not a big problem in this case, but similar code is really hard to read. Better start a new \"var ...\".",
+      "revId": "0bd012e9efa96e00d52c5cc7afacc12712d4bb1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_18238f55",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:44:15Z",
+      "side": 1,
+      "message": "I would prefer to have this inlined:\n\n if( $siteIdInput.length \u0026\u0026 $siteIdInput.data( \u0027inputautoexpand\u0027 ) )",
+      "revId": "0bd012e9efa96e00d52c5cc7afacc12712d4bb1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_9816bff5",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.sitelinklistview.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T17:44:15Z",
+      "side": 1,
+      "message": "This looks like it\u0027s not closely related. Or is it?",
+      "revId": "0bd012e9efa96e00d52c5cc7afacc12712d4bb1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
