@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Noor2020"
+			"Noor2020",
+			"Obaid Raza"
 		]
 	},
+	"wikibase-linkitem-input-site": "زبان:",
+	"wikibase-linkitem-input-page": "صفحہ:",
+	"wikibase-rc-wikibase-edit-letter": "ڈی",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ترمیم",
 	"wikibase-unconnectedpages-page": "نتائج فہرست اس صفحہ سے شروع کریں:"
 }

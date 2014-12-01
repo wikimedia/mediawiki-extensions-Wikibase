@@ -3,7 +3,8 @@
 		"authors": [
 			"Adithyavr",
 			"Bill william compton",
-			"Siddhartha Ghai"
+			"Siddhartha Ghai",
+			"बिप्लब आनन्द"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस एक्सटेंशन के लिए क्लाइन्ट",
@@ -38,5 +39,7 @@
 	"wikibase-linkitem-success-link": "पृष्ठ सफलतापूर्वक जुड़ गया है। आप कड़ियाँ युक्त आइटम को हमारी [$1 केन्द्रीय डेटा रिपोज़िटरी] में पा सकते हैं।",
 	"wikibase-rc-hide-wikidata": "विकिडेटा $1",
 	"wikibase-rc-show-wikidata-pref": "विकिडेटा संपादनो को हाल के परिवर्तनों में दिखाएँ",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} परिवर्तन्"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} परिवर्तन्",
+	"wikibase-unconnectedpages-submit": "जाएँ",
+	"wikibase-unconnectedpages-invalid-language": "\"$1\" एक मान्य भाषा कोड नहीं है।"
 }
