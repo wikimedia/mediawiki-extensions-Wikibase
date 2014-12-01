@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_864d00e3",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-01T21:22:36Z",
+      "side": 0,
+      "message": "is Item::ENTITY_TYPE deprecated or what reason to remove this? I think the constant is ok here.",
+      "revId": "b2e7f00aac04a91601a9d73d7b8d45cd2a4b6cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_a68cbcdc",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-01T21:22:36Z",
+      "side": 0,
+      "message": "why remove the constant?",
+      "revId": "b2e7f00aac04a91601a9d73d7b8d45cd2a4b6cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

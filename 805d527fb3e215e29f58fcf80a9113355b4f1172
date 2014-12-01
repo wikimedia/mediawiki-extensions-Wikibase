@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_8652e068",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-01T21:22:36Z",
+      "side": 1,
+      "message": "maybe get the $itemId once here? instead of twice? not a big deal, though.",
+      "revId": "805d527fb3e215e29f58fcf80a9113355b4f1172",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
