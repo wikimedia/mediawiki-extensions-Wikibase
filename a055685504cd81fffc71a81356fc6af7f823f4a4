@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_0606d020",
+        "filename": "client/maintenance/populateEntityUsage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T20:13:34Z",
+      "side": 1,
+      "message": "Quote: \"If a script supports this, they should set a default with setBatchSize\" (in the constructor). This is missing.",
+      "revId": "a055685504cd81fffc71a81356fc6af7f823f4a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
