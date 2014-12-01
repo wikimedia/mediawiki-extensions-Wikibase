@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_7b764da1",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-01T19:00:34Z",
+      "side": 1,
+      "message": "Language is used to get the direction mark",
+      "parentUuid": "4ea06b5a_783bb3e8",
+      "revId": "489e5ca49db690edc5903972049b723053fc6f36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_18494f90",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 4
