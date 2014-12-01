@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_b282ba95",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-01T14:40:47Z",
+      "side": 1,
+      "message": "...and my follow-up changes this again to use OutputPage:.getTitle, for which this is probably not true. Annoying. But then, if we get this wrong for special page transclusion, it\u0027s not that horrible. special page transclusion is wonky in many ways, and not widely used.",
+      "parentUuid": "4ea06b5a_b2f5da4e",
+      "revId": "f2d15328b49e13c3d3e72a554f6ec34637754635",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_d2fe6635",
         "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-01T14:26:10Z",
       "side": 1,
       "message": "I miss an explicit \"return null\" here.",
+      "revId": "f2d15328b49e13c3d3e72a554f6ec34637754635",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_d27bc6bb",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-01T14:40:47Z",
+      "side": 1,
+      "message": "I\u0027m removing this method in my follow-up",
+      "parentUuid": "4ea06b5a_d2fe6635",
       "revId": "f2d15328b49e13c3d3e72a554f6ec34637754635",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
