@@ -36,9 +36,9 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	private static $noLabelItemId = null;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityContentFactory
 	 */
-	private $entityTitleLookup = null;
+	private $entityContentFactory = null;
 
 	protected function setUp() {
 		parent::setUp();
@@ -46,7 +46,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$language = Language::factory( 'en' );
 
 		$this->setMwGlobals( array(
-			'wgLanguageCode' =>  'en',
+			'wgLanguageCode' => 'en',
 			'wgLang' => $language,
 			'wgContLang' => $language
 		) );
@@ -76,12 +76,12 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$contextTitle = Title::newFromText( 'Special:Recentchanges' );
 		$linkBeginHookHandler = $this->getLinkBeginHookHandler( $contextTitle );
 
-		$title = $this->getEntityTitleLookup()->getTitleForId( self::$itemId );
+		$title = $this->getEntityContentFactory()->getTitleForId( self::$itemId );
 
 		$html = $title->getFullText();
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $this->getOutput( $contextTitle ) );
 
 		$expectedHtml = '<span class="wb-itemlink">'
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr">linkbegin-label</span> '
@@ -95,15 +95,16 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testDoOnLinkBegin_onNonSpecialPage() {
-		$linkBeginHookHandler = $this->getLinkBeginHookHandler( Title::newMainPage() );
+		$contextTitle = Title::newMainPage();
+		$linkBeginHookHandler = $this->getLinkBeginHookHandler( $contextTitle );
 
-		$title = $this->getEntityTitleLookup()->getTitleForId( self::$itemId );
+		$title = $this->getEntityContentFactory()->getTitleForId( self::$itemId );
 
 		$titleText = $title->getFullText();
 		$html = $titleText;
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $this->getOutput( $contextTitle ) );
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
@@ -119,7 +120,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$html = $titleText;
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $this->getOutput( $contextTitle ) );
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
@@ -130,13 +131,13 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$linkBeginHookHandler = $this->getLinkBeginHookHandler( $contextTitle );
 
 		$itemId = ItemId::newFromNumber( mt_rand( 0, 9999999999 ) );
-		$title = $this->getEntityTitleLookup()->getTitleForId( $itemId );
+		$title = $this->getEntityContentFactory()->getTitleForId( $itemId );
 
 		$titleText = $title->getFullText();
 		$html = $titleText;
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $this->getOutput( $contextTitle ) );
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
@@ -146,12 +147,12 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$contextTitle = Title::newFromText( 'Special:Recentchanges' );
 		$linkBeginHookHandler = $this->getLinkBeginHookHandler( $contextTitle );
 
-		$title = $this->getEntityTitleLookup()->getTitleForId( self::$noLabelItemId );
+		$title = $this->getEntityContentFactory()->getTitleForId( self::$noLabelItemId );
 
 		$html = $title->getFullText();
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $this->getOutput( $contextTitle ) );
 
 		$expected = '<span class="wb-itemlink">'
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr"></span> '
@@ -163,25 +164,36 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$this->assertContains( self::$noLabelItemId->getSerialization(), $customAttribs['title'] );
 	}
 
-	private function getEntityTitleLookup() {
-		if ( $this->entityTitleLookup === null ) {
+	private function getEntityContentFactory() {
+		if ( $this->entityContentFactory === null ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$this->entityTitleLookup = $wikibaseRepo->getEntityTitleLookup();
+			$this->entityContentFactory = $wikibaseRepo->getEntityContentFactory();
 		}
 
-		return $this->entityTitleLookup;
+		return $this->entityContentFactory;
+	}
+
+	private function getOutput( Title $title ) {
+		return $this->getContext( $title )->getOutput();
+	}
+
+	private function getContext( Title $title ) {
+		$context = RequestContext::getMain();
+		$context->setTitle( $title );
+
+		return $context;
 	}
 
 	private function getLinkBeginHookHandler( Title $title ) {
-		$context = RequestContext::getMain();
-		$context->setTitle( $title );
+		$context = $this->getContext( $title );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new LinkBeginHookHandler(
-			$this->getEntityTitleLookup(),
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
-			$context
+			$wikibaseRepo->getEntityContentFactory(),
+			$wikibaseRepo->getTermLookup(),
+			$wikibaseRepo->getLanguageFallbackChainFactory()->newFromContext( $context ),
+			$context->getLanguage()
 		);
 
 	}
