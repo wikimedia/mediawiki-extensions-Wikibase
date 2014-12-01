@@ -1,22 +1,23 @@
 <?php
 
-namespace Wikibase\Client;
+namespace Wikibase\Client\Hooks;
 
 use Html;
 use Title;
+use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * Gets a notice about the Wikibase Item belonging to the current page
- * after a move (in case there's one).
+ * Creates a notice about the Wikibase Item belonging to the current page
+ * after a delete (in case there's one).
  *
  * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class MovePageNoticeCreator {
+class DeletePageNoticeCreator {
 
 	/**
 	 * @var SiteLinkLookup
@@ -68,24 +69,22 @@ class MovePageNoticeCreator {
 	}
 
 	/**
-	 * @param Title $oldTitle Title of the page before the move
-	 * @param Title $newTitle Title of the page after the move
+	 * @param Title $title
 	 *
 	 * @return string|null
 	 */
-	public function getPageMoveNoticeHtml( Title $oldTitle, Title $newTitle ) {
-		$itemLink = $this->getItemUrl( $oldTitle );
+	public function getPageDeleteNoticeHtml( Title $title ) {
+		$itemLink = $this->getItemUrl( $title );
 
 		if ( !$itemLink ) {
 			return null;
 		}
 
-		$msg = $this->getPageMoveMessage( $newTitle );
+		$msg = $this->getMessage( $title );
 
 		$html = Html::rawElement(
 			'div',
 			array(
-				'id' => 'wbc-after-page-move',
 				'class' => 'plainlinks'
 			),
 			wfMessage( $msg, $itemLink )->parse()
@@ -94,14 +93,14 @@ class MovePageNoticeCreator {
 		return $html;
 	}
 
-	private function getPageMoveMessage( Title $newTitle ) {
-		if ( isset( $newTitle->wikibasePushedMoveToRepo ) ) {
+	private function getMessage( Title $title ) {
+		if ( isset( $title->wikibasePushedDeleteToRepo ) ) {
 			// We're going to update the item using the repo job queue \o/
-			return 'wikibase-after-page-move-queued';
+			return 'wikibase-after-page-delete-queued';
 		}
 
 		// The user has to update the item per hand for some reason
-		return 'wikibase-after-page-move';
+		return 'wikibase-after-page-delete';
 	}
 
 }

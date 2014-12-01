@@ -1,24 +1,25 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
 use Title;
-use Wikibase\Client\DeletePageNoticeCreator;
+use Wikibase\Client\Hooks\MovePageNoticeCreator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink;
 
 /**
- * @covers Wikibase\Client\DeletePageNoticeCreator
+ * @covers Wikibase\Client\Hooks\MovePageNoticeCreator
  *
  * @group WikibaseClient
  * @group Wikibase
  * @group Database
  *
  * @licence GNU GPL v2+
- * @author Marius Hoch < hoo@online.de >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
+class MovePageNoticeCreatorTest extends \MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
@@ -41,9 +42,9 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider getPageDeleteNoticeHtmlProvider
+	 * @dataProvider getMovePageNoticeHtmlProvider
 	 */
-	public function testGetPageDeleteNoticeHtml( $expected, Title $title, $message ) {
+	public function testGetMovePageNoticeHtml( $expected, Title $oldTitle, Title $newTitle, $message ) {
 		$siteLinkLookup = $this->getMock(
 			'Wikibase\Lib\Store\SiteLinkTable',
 			array( 'getEntityIdForSiteLink' ),
@@ -52,9 +53,10 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getEntityIdForSiteLink' )
+			->with( new SiteLink( 'dewiki', 'New Amsterdam' ) )
 			->will( $this->returnValue( new ItemId( 'Q4880' ) ) );
 
-		$deletePageNotice = new DeletePageNoticeCreator(
+		$movePageNotice = new MovePageNoticeCreator(
 			$siteLinkLookup,
 			'dewiki',
 			$this->getRepoLinker()
@@ -62,27 +64,28 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 
 		$this->assertEquals(
 			$expected,
-			$deletePageNotice->getPageDeleteNoticeHtml( $title ),
+			$movePageNotice->getPageMoveNoticeHtml( $oldTitle, $newTitle ),
 			$message
 		);
 	}
 
-	public function getPageDeleteNoticeHtmlProvider() {
-		$title = Title::newFromText( 'New Amsterdam' );
-		$expected = $this->getParsedMessage( 'wikibase-after-page-delete' );
+	public function getMovePageNoticeHtmlProvider() {
+		$oldTitle = Title::newFromText( 'New Amsterdam' );
+		$newTitle = Title::newFromText( 'New York City' );
+		$expected = $this->getParsedMessage( 'wikibase-after-page-move' );
 
-		$title2 = Title::newFromText( 'New York' );
-		$title2->wikibasePushedDeleteToRepo = true;
-		$expected2 = $this->getParsedMessage( 'wikibase-after-page-delete-queued' );
+		$newTitle2 = Title::newFromText( 'New York' );
+		$newTitle2->wikibasePushedMoveToRepo = true;
+		$expected2 = $this->getParsedMessage( 'wikibase-after-page-move-queued' );
 
 		return array(
-			array( $expected, $title, 'after page delete' ),
-			array( $expected2, $title2, 'page delete queued' )
+			array( $expected, $oldTitle, $newTitle, 'after page move' ),
+			array( $expected2, $oldTitle, $newTitle2, 'page move queued' )
 		);
 	}
 
 	protected function getParsedMessage( $messageKey ) {
-		return '<div class="plainlinks">'
+		return '<div id="wbc-after-page-move" class="plainlinks">'
 			. wfMessage( $messageKey, 'http://www.example.com/wiki/Q4880' )
 				->inLanguage( 'de' )->parse()
 			. '</div>';

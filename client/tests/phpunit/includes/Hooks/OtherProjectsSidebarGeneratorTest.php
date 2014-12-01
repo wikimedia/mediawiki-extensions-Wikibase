@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Hooks\Test;
+namespace Wikibase\Client\Tests\Hooks;
 
 use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
@@ -71,4 +71,5 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			)
 		);
 	}
+
 }
