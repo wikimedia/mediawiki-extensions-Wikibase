@@ -18,3 +18,12 @@
 .wikibase-toolbarbutton-disabled .ui-icon {
 	background-image: url(../../../../../../../../resources/lib/jquery.ui/themes/smoothness/images/ui-icons_888888_256x240.png);
 }
+
+.wikibase-toolbarbutton.oo-ui-buttonElement {
+	padding: 0;
+}
+
+.wikibase-toolbarbutton.oo-ui-buttonElement > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon {
+	height: 1em;
+	width: 1em;
+}
