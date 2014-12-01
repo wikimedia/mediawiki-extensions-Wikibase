@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_b2f5da4e",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T14:26:10Z",
+      "side": 1,
+      "message": "Are you sure this is still true? Because you changed the implementation from \"wgTitle\" to \"context-\u003egetTitle\". From what I see in SpecialPageFactory::capturePath this does not apply any more.",
+      "revId": "f2d15328b49e13c3d3e72a554f6ec34637754635",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_d2fe6635",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T14:26:10Z",
+      "side": 1,
+      "message": "I miss an explicit \"return null\" here.",
+      "revId": "f2d15328b49e13c3d3e72a554f6ec34637754635",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
