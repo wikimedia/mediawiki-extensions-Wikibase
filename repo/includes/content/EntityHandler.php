@@ -21,6 +21,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRedirect;
@@ -408,6 +409,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @param Title $target
 	 *
+	 * @throws EntityIdParsingException
 	 * @return EntityId
 	 */
 	public function getIdForTitle( Title $target ) {

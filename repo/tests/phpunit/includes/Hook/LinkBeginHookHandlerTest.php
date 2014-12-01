@@ -5,11 +5,14 @@ namespace Wikibase\Test;
 use Language;
 use RequestContext;
 use Title;
-use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\LanguageFallbackChain;
+use Wikibase\LanguageWithConversion;
+use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Repo\Hook\LinkBeginHookHandler;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Store\PageEntityIdLookup;
 
 /**
  * @covers Wikibase\Repo\Hook\LinkBeginHookHandler
@@ -18,92 +21,56 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @group WikibaseRepo
  * @group Wikibase
- * @group Database
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
-	/**
-	 * @var ItemId
-	 */
-	private static $itemId = null;
-
-	/**
-	 * @var ItemId
-	 */
-	private static $noLabelItemId = null;
-
-	/**
-	 * @var EntityTitleLookup
-	 */
-	private $entityTitleLookup = null;
-
-	protected function setUp() {
-		parent::setUp();
-
-		$language = Language::factory( 'en' );
-
-		$this->setMwGlobals( array(
-			'wgLanguageCode' =>  'en',
-			'wgLang' => $language,
-			'wgContLang' => $language
-		) );
-
-		if ( self::$itemId === null ) {
-			$this->setupItems();
-		}
-	}
-
-	private function setupItems() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-
-		$item = Item::newEmpty();
-		$item->setLabel( 'en', 'linkbegin-label' );
-		$item->setDescription( 'en', 'linkbegin-description' );
-
-		$user = $GLOBALS['wgUser'];
-
-		$entityRevision = $store->saveEntity( $item, 'testing', $user, EDIT_NEW );
-		self::$itemId = $entityRevision->getEntity()->getId();
-
-		$entityRevision = $store->saveEntity( Item::newEmpty(), 'testing', $user, EDIT_NEW );
-		self::$noLabelItemId = $entityRevision->getEntity()->getId();
-	}
+	const ITEM_WITH_LABEL = 'Q1';
+	const ITEM_WITHOUT_LABEL = 'Q11';
+	const ITEM_DELETED = 'Q111';
 
 	public function testDoOnLinkBegin() {
 		$contextTitle = Title::newFromText( 'Special:Recentchanges' );
-		$linkBeginHookHandler = $this->getLinkBeginHookHandler( $contextTitle );
+		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
 
-		$title = $this->getEntityTitleLookup()->getTitleForId( self::$itemId );
+		$title = Title::makeTitle( NS_MAIN, self::ITEM_WITH_LABEL );
+		$title->resetArticleID( 1 );
+		$this->assertTrue( $title->exists() ); // sanity check
 
 		$html = $title->getFullText();
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs );
+		$out = $this->getOutputPage( $contextTitle );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $out );
 
 		$expectedHtml = '<span class="wb-itemlink">'
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr">linkbegin-label</span> '
-			. '<span class="wb-itemlink-id">(' . self::$itemId->getSerialization()
-			. ')</span></span>';
+			. '<span class="wb-itemlink-id">(' . self::ITEM_WITH_LABEL . ')</span></span>';
 
 		$this->assertEquals( $expectedHtml, $html );
 
 		$this->assertContains( 'linkbegin-label', $customAttribs['title'] );
 		$this->assertContains( 'linkbegin-description', $customAttribs['title'] );
+
+		$this->assertContains( 'wikibase.common', $out->getModuleStyles() );
 	}
 
 	public function testDoOnLinkBegin_onNonSpecialPage() {
-		$linkBeginHookHandler = $this->getLinkBeginHookHandler( Title::newMainPage() );
+		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
 
-		$title = $this->getEntityTitleLookup()->getTitleForId( self::$itemId );
+		$title = Title::makeTitle( NS_MAIN, self::ITEM_WITH_LABEL );
+		$title->resetArticleID( 1 );
+		$this->assertTrue( $title->exists() ); // sanity check
 
 		$titleText = $title->getFullText();
 		$html = $titleText;
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs );
+		$out = $this->getOutputPage( Title::newMainPage() );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $out );
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
@@ -111,15 +78,18 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 	public function testDoOnLinkBegin_nonEntityTitleLink() {
 		$contextTitle = Title::newFromText( 'Special:Recentchanges' );
-		$linkBeginHookHandler = $this->getLinkBeginHookHandler( $contextTitle );
+		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
 
 		$title = Title::newMainPage();
+		$title->resetArticleID( 1 );
+		$this->assertTrue( $title->exists() ); // sanity check
 
 		$titleText = $title->getFullText();
 		$html = $titleText;
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs );
+		$out = $this->getOutputPage( $contextTitle );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $out );
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
@@ -127,16 +97,18 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 	public function testDoOnLinkBegin_unknownEntityTitle() {
 		$contextTitle = Title::newFromText( 'Special:Recentchanges' );
-		$linkBeginHookHandler = $this->getLinkBeginHookHandler( $contextTitle );
+		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
 
-		$itemId = ItemId::newFromNumber( mt_rand( 0, 9999999999 ) );
-		$title = $this->getEntityTitleLookup()->getTitleForId( $itemId );
+		$title = Title::makeTitle( NS_MAIN, self::ITEM_DELETED );
+		$title->resetArticleID( 0 );
+		$this->assertFalse( $title->exists() ); // sanity check
 
 		$titleText = $title->getFullText();
 		$html = $titleText;
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs );
+		$out = $this->getOutputPage( $contextTitle );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $out );
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
@@ -144,44 +116,100 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 	public function testDoOnLinkBegin_itemHasNoLabel() {
 		$contextTitle = Title::newFromText( 'Special:Recentchanges' );
-		$linkBeginHookHandler = $this->getLinkBeginHookHandler( $contextTitle );
+		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
 
-		$title = $this->getEntityTitleLookup()->getTitleForId( self::$noLabelItemId );
+		$title = Title::makeTitle( NS_MAIN, self::ITEM_WITHOUT_LABEL );
+		$title->resetArticleID( 1 );
+		$this->assertTrue( $title->exists() ); // sanity check
 
 		$html = $title->getFullText();
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs );
+		$out = $this->getOutputPage( $contextTitle );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $out );
 
 		$expected = '<span class="wb-itemlink">'
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr"></span> '
-			. '<span class="wb-itemlink-id">('
-			. self::$noLabelItemId->getSerialization()
-			. ')</span></span>';
+			. '<span class="wb-itemlink-id">(' . self::ITEM_WITHOUT_LABEL . ')</span></span>';
 
 		$this->assertEquals( $expected, $html );
-		$this->assertContains( self::$noLabelItemId->getSerialization(), $customAttribs['title'] );
+		$this->assertContains( self::ITEM_WITHOUT_LABEL, $customAttribs['title'] );
 	}
 
-	private function getEntityTitleLookup() {
-		if ( $this->entityTitleLookup === null ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$this->entityTitleLookup = $wikibaseRepo->getEntityTitleLookup();
-		}
-
-		return $this->entityTitleLookup;
+	private function getOutputPage( Title $title ) {
+		$context = RequestContext::newExtraneousContext( $title );
+		return $context->getOutput();
 	}
 
-	private function getLinkBeginHookHandler( Title $title ) {
-		$context = RequestContext::getMain();
-		$context->setTitle( $title );
+	/**
+	 * @return PageEntityIdLookup
+	 */
+	private function getPageEntityIdLookup() {
+		$entityIdLookup = $this->getMock( 'Wikibase\Repo\Store\PageEntityIdLookup' );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$entityIdLookup->expects( $this->any() )
+			->method( 'getPageEntityId' )
+			->will( $this->returnCallback( function( Title $title ) {
+				if ( preg_match( '/^Q(\d+)$/', $title->getText(), $m ) ) {
+					return new ItemId( $m[0] );
+				}
+
+				return null;
+			} ) );
+
+		return $entityIdLookup;
+	}
+
+	/**
+	 * @return TermLookup
+	 */
+	private function getTermLookup() {
+		$termLookup = $this->getMock( 'Wikibase\Lib\Store\TermLookup' );
+
+		$termLookup->expects( $this->any() )
+			->method( 'getLabels' )
+			->will( $this->returnCallback( function ( EntityId $id ) {
+				if ( $id->getSerialization() == LinkBeginHookHandlerTest::ITEM_WITH_LABEL ) {
+					return array( 'en' => 'linkbegin-label' );
+				}
+
+				if ( $id->getSerialization() == LinkBeginHookHandlerTest::ITEM_WITHOUT_LABEL ) {
+					return array();
+				}
+
+				throw new StorageException( 'No such entity: ' . $id->getSerialization() );
+			} ) );
+
+		$termLookup->expects( $this->any() )
+			->method( 'getDescriptions' )
+			->will( $this->returnCallback( function ( EntityId $id ) {
+				if ( $id->getSerialization() == LinkBeginHookHandlerTest::ITEM_WITH_LABEL ) {
+					return array( 'en' => 'linkbegin-description' );
+				}
+
+
+				if ( $id->getSerialization() == LinkBeginHookHandlerTest::ITEM_WITHOUT_LABEL ) {
+					return array();
+				}
+
+				throw new StorageException( 'No such entity: ' . $id->getSerialization() );
+			} ) );
+
+		return $termLookup;
+	}
+
+	private function getLinkBeginHookHandler() {
+		$languageFallback = new LanguageFallbackChain( array(
+			LanguageWithConversion::factory( 'de-ch' ),
+			LanguageWithConversion::factory( 'de' ),
+			LanguageWithConversion::factory( 'en' ),
+		) );
 
 		return new LinkBeginHookHandler(
-			$this->getEntityTitleLookup(),
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
-			$context
+			$this->getPageEntityIdLookup(),
+			$this->getTermLookup(),
+			$languageFallback,
+			Language::factory( 'en' )
 		);
 
 	}
