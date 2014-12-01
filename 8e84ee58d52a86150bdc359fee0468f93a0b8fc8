@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_32454a6b",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T15:00:59Z",
+      "side": 1,
+      "message": "This comment must be reworded or removed or replaced with a TODO or at least be moved up.",
+      "revId": "8e84ee58d52a86150bdc359fee0468f93a0b8fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
