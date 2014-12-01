@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_5b34b1a7",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-01T19:07:10Z",
+      "side": 1,
+      "message": "This still requires an Entity. I don\u0027t think we should assume every EntityDocument is an Entity. Otherwise the change would be pretty pointless.",
+      "revId": "3309ad17a028beb7e2e4c1762200d591c2d6d0ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
