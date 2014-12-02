@@ -4,7 +4,6 @@ namespace Wikibase\Lib;
 
 use Html;
 use OutOfBoundsException;
-use Title;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTitleLookup;
