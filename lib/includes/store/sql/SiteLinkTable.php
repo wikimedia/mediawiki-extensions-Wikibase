@@ -243,8 +243,6 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 *
 	 * @todo may want to deprecate this or change it to always return entity id object only
 	 *
-	 * @since 0.1
-	 *
 	 * @param string $globalSiteId
 	 * @param string $pageTitle
 	 *
@@ -272,8 +270,6 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	/**
 	 * @see SiteLinkLookup::getEntityIdForSiteLink
 	 *
-	 * @since 0.4
-	 *
 	 * @param SiteLink $siteLink
 	 *
 	 * @return ItemId|null
@@ -288,12 +284,10 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	/**
 	 * @see SiteLinkLookup::getConflictsForItem
 	 *
-	 * @since 0.1
-	 *
 	 * @param Item $item
 	 * @param DatabaseBase|null $db
 	 *
-	 * @return array of array
+	 * @return array[]
 	 */
 	public function getConflictsForItem( Item $item, DatabaseBase $db = null ) {
 		wfProfileIn( __METHOD__ );
@@ -383,21 +377,19 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	/**
 	 * @see SiteLinkLookup::countLinks
 	 *
-	 * @since 0.3
+	 * @param int[] $numericIds Numeric (unprefixed) item ids
+	 * @param string[] $siteIds
+	 * @param string[] $pageNames
 	 *
-	 * @param array $itemIds
-	 * @param array $siteIds
-	 * @param array $pageNames
-	 *
-	 * @return integer
+	 * @return int
 	 */
-	public function countLinks( array $itemIds, array $siteIds = array(), array $pageNames = array() ) {
+	public function countLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() ) {
 		$dbr = $this->getConnection( DB_SLAVE );
 
 		$conditions = array();
 
-		if ( $itemIds !== array() ) {
-			$conditions['ips_item_id'] = $itemIds;
+		if ( $numericIds !== array() ) {
+			$conditions['ips_item_id'] = $numericIds;
 		}
 
 		if ( $siteIds !== array() ) {
@@ -422,23 +414,20 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	/**
 	 * @see SiteLinkLookup::getLinks
 	 *
-	 * @note: SiteLink objects returned from this method will not contain badges!
-	 *
-	 * @since 0.3
-	 *
-	 * @param array $itemIds
-	 * @param array $siteIds
-	 * @param array $pageNames
+	 * @param int[] $numericIds Numeric (unprefixed) item ids
+	 * @param string[] $siteIds
+	 * @param string[] $pageNames
 	 *
 	 * @return array[]
+	 * @note The arrays returned by this method do not contain badges!
 	 */
-	public function getLinks( array $itemIds, array $siteIds = array(), array $pageNames = array() ) {
+	public function getLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() ) {
 		$dbr = $this->getConnection( DB_SLAVE );
 
 		$conditions = array();
 
-		if ( $itemIds !== array() ) {
-			$conditions['ips_item_id'] = $itemIds;
+		if ( $numericIds !== array() ) {
+			$conditions['ips_item_id'] = $numericIds;
 		}
 
 		if ( $siteIds !== array() ) {
@@ -477,15 +466,10 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	/**
 	 * @see SiteLinkLookup::getSiteLinksForItem
 	 *
-	 * Get array of SiteLink for an item or returns empty array if no site links
-	 *
-	 * @note: SiteLink objects returned from this method will not contain badges!
-	 *
-	 * @since 0.4
-	 *
 	 * @param ItemId $itemId
 	 *
 	 * @return SiteLink[]
+	 * @note The SiteLink objects returned by this method do not contain badges!
 	 */
 	public function getSiteLinksForItem( ItemId $itemId ) {
 		$numericId = $itemId->getNumericId();
