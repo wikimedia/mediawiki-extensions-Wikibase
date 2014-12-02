@@ -30,17 +30,17 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @var EntityPerPage
 	 */
-	protected $entityPerPageTable;
+	private $entityPerPageTable;
 
 	/**
 	 * @var array[]
 	 */
-	protected $entityPerPageRows;
+	private $entityPerPageRows;
 
 	/**
 	 * @var WikibaseRepo
 	 */
-	protected $wikibaseRepo;
+	private $wikibaseRepo;
 
 	protected function setUp() {
 		parent::setUp();
@@ -61,7 +61,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @return User
 	 */
-	protected function getUser() {
+	private function getUser() {
 		$user = User::newFromName( 'zombie1' );
 
 		if ( $user->getId() === 0 ) {
@@ -71,7 +71,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		return $user;
 	}
 
-	protected function clearTables() {
+	private function clearTables() {
 		$dbw = wfGetDB( DB_MASTER );
 
 		$dbw->delete( 'page', array( "1" ) );
@@ -82,12 +82,18 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		}
 	}
 
+	/**
+	 * @return bool
+	 */
 	private function itemSupportsRedirect() {
 		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
 		return $handler->supportsRedirects();
 	}
 
-	protected function addItems() {
+	/**
+	 * @return Item[]
+	 */
+	private function addItems() {
 		$user = $this->getUser();
 
 		$labels = array( 'New York City', 'Tokyo', 'Jakarta', 'Nairobi',
@@ -125,16 +131,19 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		return $items;
 	}
 
-	protected function partialClearEntityPerPageTable( $pageId ) {
+	/**
+	 * @param int $pageId
+	 */
+	private function partialClearEntityPerPageTable( $pageId ) {
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->delete( 'wb_entity_per_page', array( 'epp_page_id > ' . $pageId ) );
 	}
 
 	/**
-	 * @return int
 	 * @throws RuntimeException
+	 * @return int
 	 */
-	protected function getPageIdForPartialClear() {
+	private function getPageIdForPartialClear() {
 		$dbw = wfGetDB( DB_MASTER );
 		$pageRow = $dbw->select(
 			'page',
@@ -158,7 +167,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @return int
 	 */
-	protected function countPages() {
+	private function countPages() {
 		$dbw = wfGetDB( DB_MASTER );
 		$pages = $dbw->select( 'page', array( 'page_id' ), array(), __METHOD__ );
 
@@ -168,7 +177,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @return int
 	 */
-	protected function countEntityPerPageRows() {
+	private function countEntityPerPageRows() {
 		$dbw = wfGetDB( DB_MASTER );
 		$eppRows = $dbw->selectField( 'wb_entity_per_page', 'count(*)', array(), __METHOD__ );
 
@@ -176,9 +185,9 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return array
+	 * @return array[]
 	 */
-	protected function getEntityPerPageData() {
+	private function getEntityPerPageData() {
 		$dbw = wfGetDB( DB_MASTER );
 		$rows = $dbw->select(
 			'wb_entity_per_page',
@@ -235,6 +244,9 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$this->assertRows( $this->entityPerPageRows );
 	}
 
+	/**
+	 * @param array[] $expectedRows
+	 */
 	private function assertRows( $expectedRows ) {
 		$dbw = wfGetDB( DB_MASTER );
 
