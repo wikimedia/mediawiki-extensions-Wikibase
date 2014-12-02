@@ -19,8 +19,6 @@ use RuntimeException;
 use Status;
 use Title;
 use User;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;

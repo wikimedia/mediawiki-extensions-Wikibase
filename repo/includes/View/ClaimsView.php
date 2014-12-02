@@ -4,7 +4,6 @@ namespace Wikibase\Repo\View;
 
 use Linker;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**

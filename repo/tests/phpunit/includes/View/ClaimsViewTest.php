@@ -4,9 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use TestUser;
-use Title;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;

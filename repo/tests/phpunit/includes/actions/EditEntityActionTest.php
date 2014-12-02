@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use MWException;
 use Title;
 use User;
-use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
