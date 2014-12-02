@@ -6,6 +6,8 @@ use DataTypes\DataType;
 use DataValues\TimeValue;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Utils;
 use Wikibase\Validators\CompositeValidator;
@@ -73,26 +75,28 @@ class WikibaseDataTypeBuilders {
 
 		/**
 		 * Data types to data value types mapping:
-		 * commonsMedia     => string (camel case, FIXME maybe?)
-		 * globe-coordinate => globecoordinate (FIXME!)
-		 * monolingualtext  => monolingualtext
-		 * multilingualtext => multilingualtext
-		 * quantity         => quantity
-		 * string           => string
-		 * time             => time
-		 * url              => string
-		 * wikibase-item    => wikibase-entityid
+		 * commonsMedia      => string (camel case, FIXME maybe?)
+		 * globe-coordinate  => globecoordinate (FIXME!)
+		 * monolingualtext   => monolingualtext
+		 * multilingualtext  => multilingualtext
+		 * quantity          => quantity
+		 * string            => string
+		 * time              => time
+		 * url               => string
+		 * wikibase-item     => wikibase-entityid
+		 * wikibase-property => wikibase-entityid
 		 */
 
 		$types = array(
-			'commonsMedia'     => array( $this, 'buildMediaType' ),
-			'globe-coordinate' => array( $this, 'buildCoordinateType' ),
-			'quantity'         => array( $this, 'buildQuantityType' ),
-			'string'           => array( $this, 'buildStringType' ),
-			'time'             => array( $this, 'buildTimeType' ),
-			'url'              => array( $this, 'buildUrlType' ),
-			'wikibase-item'    => array( $this, 'buildItemType' ),
-			'monolingualtext'  => array( $this, 'buildMonolingualTextType' ),
+			'commonsMedia'      => array( $this, 'buildMediaType' ),
+			'globe-coordinate'  => array( $this, 'buildCoordinateType' ),
+			'quantity'          => array( $this, 'buildQuantityType' ),
+			'string'            => array( $this, 'buildStringType' ),
+			'time'              => array( $this, 'buildTimeType' ),
+			'url'               => array( $this, 'buildUrlType' ),
+			'wikibase-item'     => array( $this, 'buildItemType' ),
+			'wikibase-property' => array( $this, 'buildPropertyType' ),
+			'monolingualtext'   => array( $this, 'buildMonolingualTextType' ),
 		);
 
 		$experimental = array(
@@ -116,7 +120,22 @@ class WikibaseDataTypeBuilders {
 
 		//NOTE: The DataValue in question is going to be an instance of EntityId!
 		$validators[] = new TypeValidator( 'Wikibase\DataModel\Entity\EntityIdValue' );
-		$validators[] = new EntityExistsValidator( $this->entityLookup );
+		$validators[] = new EntityExistsValidator( $this->entityLookup, Item::ENTITY_TYPE );
+
+		return new DataType( $id, 'wikibase-entityid', $validators );
+	}
+
+	/**
+	 * @param string $id Data type ID, typically 'wikibase-property'
+	 *
+	 * @return DataType
+	 */
+	public function buildPropertyType( $id ) {
+		$validators = array();
+
+		//NOTE: The DataValue in question is going to be an instance of EntityId!
+		$validators[] = new TypeValidator( 'Wikibase\DataModel\Entity\EntityIdValue' );
+		$validators[] = new EntityExistsValidator( $this->entityLookup, Property::ENTITY_TYPE );
 
 		return new DataType( $id, 'wikibase-entityid', $validators );
 	}

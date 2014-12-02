@@ -19,9 +19,14 @@ use Wikibase\Lib\Store\EntityLookup;
 class EntityExistsValidator implements ValueValidator {
 
 	private $entityLookup;
+	/**
+	 * @var null
+	 */
+	private $entityType;
 
-	public function __construct( EntityLookup $entityLookup ) {
+	public function __construct( EntityLookup $entityLookup, $entityType = null ) {
 		$this->entityLookup = $entityLookup;
+		$this->entityType = $entityType;
 	}
 
 	/**
@@ -39,6 +44,10 @@ class EntityExistsValidator implements ValueValidator {
 
 		if ( !( $value instanceof EntityId ) ) {
 			throw new InvalidArgumentException( "Expected an EntityId object" );
+		}
+
+		if ( $this->entityType !== null && $value->getEntityType() !== $this->entityType ) {
+			throw new InvalidArgumentException( "Expected type " . $this->entityType );
 		}
 
 		if ( !$this->entityLookup->hasEntity( $value ) ) {
