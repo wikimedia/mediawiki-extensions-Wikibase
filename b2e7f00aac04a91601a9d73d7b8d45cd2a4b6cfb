@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_9cba2c1d",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-02T10:20:18Z",
+      "side": 0,
+      "message": "It still is constant, a string constant. That\u0027s the same, if not better. It\u0027s better readable and doesn\u0027t need a dependency. However, I will revert this for now.",
+      "parentUuid": "4ea06b5a_864d00e3",
+      "revId": "b2e7f00aac04a91601a9d73d7b8d45cd2a4b6cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_a68cbcdc",
         "filename": "lib/tests/phpunit/MockRepository.php",
         "patchSetId": 2
