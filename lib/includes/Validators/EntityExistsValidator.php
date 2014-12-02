@@ -18,10 +18,23 @@ use Wikibase\Lib\Store\EntityLookup;
  */
 class EntityExistsValidator implements ValueValidator {
 
+	/**
+	 * @var EntityLookup
+	 */
 	private $entityLookup;
 
-	public function __construct( EntityLookup $entityLookup ) {
+	/**
+	 * @var string|null
+	 */
+	private $entityType;
+
+	public function __construct( EntityLookup $entityLookup, $entityType = null ) {
+		if ( !is_string( $entityType ) && !is_null( $entityType ) ) {
+			throw new InvalidArgumentException( '$entityType must be a string or null' );
+		}
+
 		$this->entityLookup = $entityLookup;
+		$this->entityType = $entityType;
 	}
 
 	/**
@@ -41,14 +54,29 @@ class EntityExistsValidator implements ValueValidator {
 			throw new InvalidArgumentException( "Expected an EntityId object" );
 		}
 
-		if ( !$this->entityLookup->hasEntity( $value ) ) {
-			return Result::newError( array(
-				//XXX: we are passing an EntityId as a message parameter here - make sure to turn it into a string later!
-				Error::newError( "Entity not found: " . $value, null, 'no-such-entity', array( $value ) ),
-			) );
+		$actualType =  $value->getEntityType();
+
+		$errors = array();
+
+		if ( $this->entityType !== null && $actualType !== $this->entityType ) {
+			$errors[] = Error::newError(
+				"Wrong entity type: " . $actualType,
+				null,
+				'bad-entity-type',
+				array( $actualType )
+			);
 		}
 
-		return Result::newSuccess();
+		if ( !$this->entityLookup->hasEntity( $value ) ) {
+			$errors[] = Error::newError(
+				"Entity not found: " . $value,
+				null,
+				'no-such-entity',
+				array( $value )
+			);
+		}
+
+		return empty( $errors ) ? Result::newSuccess() : Result::newError( $errors );
 	}
 
 	/**

@@ -97,6 +97,7 @@ $wgWBLibDefaultSettings = array(
 		'time',
 		'url',
 		'wikibase-item',
+		'wikibase-property',
 	),
 
 	// URL schemes allowed for URL values. See UrlSchemeValidators for a full list.
