@@ -32,7 +32,7 @@
 
 //TODO: Use a different file for jenkins, use this for a standard repo+client setup.
 
-if( isset( $wgWikimediaJenkinsCI ) && !$wgWikimediaJenkinsCI ) {
+if ( !isset( $wgWikimediaJenkinsCI ) || !$wgWikimediaJenkinsCI ) {
 	die( "This entry point is for use by the Jenkins testing framework only.\n"
 		. "Use repo/Wikibase.php resp. client/WikibaseClient.php instead.\n" );
 }
