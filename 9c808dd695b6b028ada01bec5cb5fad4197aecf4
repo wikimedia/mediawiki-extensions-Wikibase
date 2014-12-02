@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_dc6e742a",
+        "filename": "repo/includes/Hook/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-02T12:54:54Z",
+      "side": 1,
+      "message": "Please add two htmlspecialchars() here, even if it seems unnecessary.",
+      "revId": "9c808dd695b6b028ada01bec5cb5fad4197aecf4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
