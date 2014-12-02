@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_3e7668a0",
+        "filename": "lib/includes/formatters/FormatterLabelLookupFactory.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-02T21:40:33Z",
+      "side": 1,
+      "message": "i think it\u0027s somewhat strange to combine these checks and then say \u0027Option lang must be used with an instance of string.\u0027 which is:\n\n1) confusing, what is \u0027lang\u0027? would be more clear if it say \u0027ValueFormatter::OPT_LANG\u0027 or \u0027OPT_LANG\u0027 instead of \u0027lang\u0027\n\n2) OPT_LANG really should *not* be instance of string... it should be a string type variable.",
+      "revId": "9d147e6dd8dc64e45863bf31b8ed49a0c8178274",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
