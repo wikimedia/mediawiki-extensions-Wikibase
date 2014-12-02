@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_2dfc0408",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-02T18:13:03Z",
+      "side": 1,
+      "message": "I don\u0027t know any more why this is here.",
+      "revId": "a6701c9e7e689a44f415bb8d886432a4df23270d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
