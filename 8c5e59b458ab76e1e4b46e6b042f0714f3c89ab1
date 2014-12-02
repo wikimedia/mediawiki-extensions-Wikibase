@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_129b636b",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-02T17:37:50Z",
+      "side": 1,
+      "message": "Yes, this fails in tests if wgLang wasn\u0027t unstubbed. This may happen if the test doesn\u0027t use MediaWikiTestCase. Without this change, this change triggers an exception here - not sure while.",
+      "parentUuid": "4ea06b5a_6f33e40a",
+      "revId": "8c5e59b458ab76e1e4b46e6b042f0714f3c89ab1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_2f1ddc78",
         "filename": "lib/includes/formatters/FormatterLabelLookupFactory.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-02T17:02:08Z",
       "side": 1,
       "message": "probably a good time to split the code within the if / elseif into separate methods.\n\nalso, why do we have \"elseif\" and \"else if\"? (realize it\u0027s a copy and paste from the old code)\n\ncodesniffer tells me \"Usage of ELSE IF is discouraged; use ELSEIF instead\".",
+      "revId": "8c5e59b458ab76e1e4b46e6b042f0714f3c89ab1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_f2fa7772",
+        "filename": "lib/includes/formatters/FormatterLabelLookupFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-02T17:37:50Z",
+      "side": 1,
+      "message": "yea, elseif.\n\nregarding the split... it\u0027s a bit annoying that we\u0027d then be doing the type check in the individual methods, which don\u0027t know about the options key and can\u0027t include it in the error message. Or we pass in the $options, which makes the split a bit pointless...",
+      "parentUuid": "4ea06b5a_2f1ddc78",
       "revId": "8c5e59b458ab76e1e4b46e6b042f0714f3c89ab1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
