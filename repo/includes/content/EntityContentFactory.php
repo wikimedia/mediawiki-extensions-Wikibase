@@ -8,7 +8,6 @@ use OutOfBoundsException;
 use Revision;
 use Status;
 use Title;
-use TitleValue;
 use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
