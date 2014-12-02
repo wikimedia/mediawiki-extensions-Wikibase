@@ -808,6 +808,13 @@ class EditEntity extends ModifyEntity {
 				"An array was expected, but not found in the json for the langCode {$langCode}" ,
 				'not-recognized-array' );
 		}
+
+		if ( !array_key_exists( 'language', $arg ) ) {
+			$this->dieError(
+				"'language' was not found in the label or description json for {$langCode}",
+					'missing-language' );
+		}
+
 		if ( !is_string( $arg['language'] ) ) {
 			$this->dieError(
 				"A string was expected, but not found in the json for the langCode {$langCode} and argument 'language'" ,
