@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;

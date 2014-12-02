@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Diff;
 
-use Diff;
 use Html;
 
 /**
