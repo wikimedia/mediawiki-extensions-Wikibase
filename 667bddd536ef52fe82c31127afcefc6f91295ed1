@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_875c1a50",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-02T02:39:04Z",
+      "side": 1,
+      "message": "unused, but will make follow up patch for this nitpick",
+      "revId": "667bddd536ef52fe82c31127afcefc6f91295ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_0c0cb1ef",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 8
