@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Test\MockRepository;
 
 /**
@@ -26,16 +27,19 @@ use Wikibase\Test\MockRepository;
  */
 class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 
-	private function getDefaultInstance() {
-		$repo = $this->newMockRepository();
+	private function getSnaksFinder() {
+		$entityLookup = $this->getEntityLookup();
 
-		return new SnaksFinder( $repo );
+		return new SnaksFinder( $entityLookup );
 	}
 
-	private function newMockRepository() {
+	/**
+	 * @return EntityLookup
+	 */
+	private function getEntityLookup() {
 		$propertyId = new PropertyId( 'P1337' );
 
-		$entityLookup = new MockRepository();
+		$mockRepository = new MockRepository();
 
 		$statement1 = new Statement( new Claim( new PropertyValueSnak(
 			$propertyId,
@@ -67,19 +71,19 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 		$property->setId( $propertyId );
 		$property->getFingerprint()->setLabel( 'en', 'a kitten!' );
 
-		$entityLookup->putEntity( $item );
-		$entityLookup->putEntity( $property );
+		$mockRepository->putEntity( $item );
+		$mockRepository->putEntity( $property );
 
-		return $entityLookup;
+		return $mockRepository;
 	}
 
 	/**
 	 * @dataProvider findSnaksProvider
 	 */
-	public function testFindSnaks( $expected, ItemId $itemId, $propertyLabelOrId ) {
-		$snaksFinder = $this->getDefaultInstance();
+	public function testFindSnaks( array $expected, ItemId $itemId, PropertyId $propertyId ) {
+		$snaksFinder = $this->getSnaksFinder();
 
-		$snakList = $snaksFinder->findSnaks( $itemId, $propertyLabelOrId, 'en' );
+		$snakList = $snaksFinder->findSnaks( $itemId, $propertyId, 'en' );
 		$this->assertEquals( $expected, $snakList );
 	}
 

@@ -20,14 +20,14 @@ use Wikibase\Test\MockRepository;
  */
 class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 
-	private function getDefaultInstance() {
-		$repo = $this->newMockRepository();
-		$propertyLabelResolver = new MockPropertyLabelResolver( 'en', $repo );
+	private function getPropertyIdResolver() {
+		$mockRepository = $this->getMockRepository();
+		$propertyLabelResolver = new MockPropertyLabelResolver( 'en', $mockRepository );
 
 		return new PropertyIdResolver( $propertyLabelResolver );
 	}
 
-	private function newMockRepository() {
+	private function getMockRepository() {
 		$propertyId = new PropertyId( 'P1337' );
 
 		$property = Property::newFromType( 'string' );
@@ -43,8 +43,8 @@ class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider resolvePropertyIdProvider
 	 */
-	public function testResolvePropertyId( $expected, $propertyLabelOrId ) {
-		$propertyIdResolver = $this->getDefaultInstance();
+	public function testResolvePropertyId( PropertyId $expected, $propertyLabelOrId ) {
+		$propertyIdResolver = $this->getPropertyIdResolver();
 
 		$propertyId = $propertyIdResolver->resolvePropertyId( $propertyLabelOrId, 'en' );
 		$this->assertEquals( $expected, $propertyId );
@@ -63,7 +63,7 @@ class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider resolvePropertyIdWithInvalidInput_throwsExceptionProvider
 	 */
 	public function testResolvePropertyIdWithInvalidInput_throwsException( $propertyIdOrLabel ) {
-		$propertyIdResolver = $this->getDefaultInstance();
+		$propertyIdResolver = $this->getPropertyIdResolver();
 
 		$this->setExpectedException( 'Wikibase\Lib\PropertyLabelNotResolvedException' );
 
