@@ -203,27 +203,24 @@ class LinkBeginHookHandler {
 		/** @var Language $labelLang */
 		list( $labelText, $labelLang ) = $this->extractTextAndLanguage( $labelData );
 
-		$idHtml = Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
+		$idHtml = '<span class="wb-itemlink-id">'
 			. wfMessage(
 				'wikibase-itemlink-id-wrapper',
 				$title->getText()
 			)->inContentLanguage()->escaped()
-			. Html::closeElement( 'span' );
+			. '</span>';
 
-		$labelHtml = Html::openElement( 'span', array(
-				'class' => 'wb-itemlink-label',
-				'lang' => $labelLang->getHtmlCode(),
-				'dir' => $labelLang->getDir()
-			) )
+		$labelHtml = '<span class="wb-itemlink-label" lang="' . $labelLang->getHtmlCode()
+				. '" dir="' . $labelLang->getDir() . '">'
 			. htmlspecialchars( $labelText )
-			. Html::closeElement( 'span' );
+			. '</span>';
 
-		return Html::openElement( 'span', array( 'class' => 'wb-itemlink' ) )
+		return '<span class="wb-itemlink">'
 			. wfMessage( 'wikibase-itemlink' )->rawParams(
 				$labelHtml,
 				$idHtml
 			)->inContentLanguage()->escaped()
-			. Html::closeElement( 'span' );
+			. '</span>';
 	}
 
 	private function getTitleAttribute( Title $title, $labelData, $descriptionData ) {
