@@ -6,8 +6,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Statement\BestStatementsFinder;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\Store\EntityLookup;
 

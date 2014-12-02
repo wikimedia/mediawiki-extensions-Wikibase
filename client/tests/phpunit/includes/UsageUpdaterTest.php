@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Test\Store;
 
-use PHPUnit_Framework_Assert;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\SubscriptionManager;

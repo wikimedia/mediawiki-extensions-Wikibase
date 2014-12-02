@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Store;
 
-use PHPUnit_Framework_TestCase;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Lib\Store\StorageException;
