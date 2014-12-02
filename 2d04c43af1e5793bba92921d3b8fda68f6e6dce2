@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_6febe409",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-02T16:06:57Z",
+      "side": 1,
+      "message": "Why is \"X\" always relevant? Doesn\u0027t this mean the \"changed aspects\" are meaningless because everything is relevant anyway?\n\nAlso: Use the constant.",
+      "revId": "2d04c43af1e5793bba92921d3b8fda68f6e6dce2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
