@@ -4,6 +4,8 @@ namespace Wikibase\Test\Validators;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Test\MockRepository;
 use Wikibase\Validators\EntityExistsValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
@@ -21,42 +23,79 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 
+	private function getEntityLookup() {
+		$q8 = Item::newEmpty();
+		$q8->setId( 8 );
+
+		$p8 = Property::newFromType( 'string' );
+		$p8->setId( 8 );
+
+		$entityLookup = new MockRepository();
+		$entityLookup->putEntity( $q8 );
+		$entityLookup->putEntity( $p8 );
+
+		return $entityLookup;
+	}
+
 	public static function provideValidate() {
 		return array(
-			array( 'q3', false, 'InvalidArgumentException', "Expect an EntityId" ),
-			array( new ItemId( 'q3' ), false, null, "missing entity" ),
-			array( new ItemId( 'q8' ), true, null, "existing entity" ),
+			"existing entity" => array( new ItemId( 'Q8' ), null ),
+			"is an item" => array( new ItemId( 'Q8' ), Item::ENTITY_TYPE ),
+			"is a property" => array( new PropertyId( 'P8' ), Property::ENTITY_TYPE ),
 		);
 	}
 
 	/**
 	 * @dataProvider provideValidate()
 	 */
-	public function testValidate( $value, $expected, $exception, $message ) {
-		if ( $exception !== null ) {
-			$this->setExpectedException( $exception );
-		}
-
-		$q8 = Item::newEmpty();
-		$q8->setId( 8 );
-
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $q8 );
-
-		$validator = new EntityExistsValidator( $entityLookup );
+	public function testValidate( $value, $type ) {
+		$validator = new EntityExistsValidator( $this->getEntityLookup(), $type );
 		$result = $validator->validate( $value );
 
-		$this->assertEquals( $expected, $result->isValid(), $message );
+		$this->assertTrue( $result->isValid() );
+	}
 
-		if ( !$expected ) {
-			$errors = $result->getErrors();
-			$this->assertCount( 1, $errors, $message );
-			$this->assertEquals( 'no-such-entity', $errors[0]->getCode(), $message );
+	public static function provideValidate_failure() {
+		return array(
+			"missing entity" => array( new ItemId( 'Q3' ), null, 'no-such-entity' ),
+			"not an item" => array( new PropertyId( 'P8' ), Item::ENTITY_TYPE, 'bad-entity-type' ),
+			"not a property" => array( new ItemId( 'Q8' ), Property::ENTITY_TYPE, 'bad-entity-type' ),
+		);
+	}
 
-			$localizer = new ValidatorErrorLocalizer( );
-			$msg = $localizer->getErrorMessage( $errors[0] );
-			$this->assertTrue( $msg->exists(), $msg );
-		}
+	/**
+	 * @dataProvider provideValidate_failure()
+	 */
+	public function testValidate_failure( $value, $type, $errorCode ) {
+		$validator = new EntityExistsValidator( $this->getEntityLookup(), $type );
+		$result = $validator->validate( $value );
+
+		$this->assertFalse( $result->isValid() );
+
+		$errors = $result->getErrors();
+		$this->assertCount( 1, $errors );
+		$this->assertEquals( $errorCode, $errors[0]->getCode() );
+
+		$localizer = new ValidatorErrorLocalizer( );
+		$msg = $localizer->getErrorMessage( $errors[0] );
+		$this->assertTrue( $msg->exists(), $msg );
+	}
+
+	public static function provideValidate_exception() {
+		return array(
+			"Not an EntityId" => array( 'Q3', null ),
+			"Type is not a string" => array( new ItemId( 'Q8' ), array( 'foo' ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideValidate_exception()
+	 */
+	public function testValidate_exception( $value, $type ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+
+		$validator = new EntityExistsValidator( $this->getEntityLookup(), $type );
+		$validator->validate( $value );
 	}
 
 }

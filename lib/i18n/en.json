@@ -68,6 +68,7 @@
 	"wikibase-validator-unknown-unit": "Unknown unit: $1",
 	"wikibase-validator-not-allowed": "Illegal value: $1",
 	"datatypes-type-wikibase-item": "Item",
+	"datatypes-type-wikibase-property": "Property",
 	"datatypes-type-commonsMedia": "Commons media file",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 billion years CE",

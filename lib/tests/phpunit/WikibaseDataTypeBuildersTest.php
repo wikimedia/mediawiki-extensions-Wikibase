@@ -16,6 +16,8 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 
 /**
@@ -34,10 +36,14 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 		$entityIdParser = new BasicEntityIdParser();
 
 		$q8 = Item::newEmpty();
-		$q8->setId( new ItemId( 'q8' ) );
+		$q8->setId( new ItemId( 'Q8' ) );
+
+		$p8 = Property::newFromType( 'string' );
+		$p8->setId( new PropertyId( 'P8' ) );
 
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $q8 );
+		$entityLookup->putEntity( $p8 );
 
 		$urlSchemes = array( 'http', 'https', 'ftp', 'mailto' );
 
@@ -56,6 +62,10 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'wikibase-item', new StringValue( 'q8' ), false, 'Expected EntityId, StringValue supplied' ),
 			array( 'wikibase-item', new EntityIdValue( new ItemId( 'q8' ) ), true, 'existing entity' ),
 			array( 'wikibase-item', new EntityIdValue( new ItemId( 'q3' ) ), false, 'missing entity' ),
+			array( 'wikibase-item', new EntityIdValue( new PropertyId( 'p8' ) ), false, 'not an item' ),
+
+			array( 'wikibase-property', new EntityIdValue( new PropertyId( 'p8' ) ), true, 'existing entity' ),
+			array( 'wikibase-property', new EntityIdValue( new ItemId( 'q8' ) ), false, 'not a property' ),
 
 			//commonsMedia
 			array( 'commonsMedia', 'Foo.jpg', false, 'StringValue expected, string supplied' ),
