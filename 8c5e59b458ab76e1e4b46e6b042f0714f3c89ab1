@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_6f33e40a",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-02T17:02:08Z",
+      "side": 1,
+      "message": "is this for tests or what? looks like an unrelated change.\n\nalso, \"use StubObject\" if we must do this.",
+      "revId": "8c5e59b458ab76e1e4b46e6b042f0714f3c89ab1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_2f1ddc78",
+        "filename": "lib/includes/formatters/FormatterLabelLookupFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-02T17:02:08Z",
+      "side": 1,
+      "message": "probably a good time to split the code within the if / elseif into separate methods.\n\nalso, why do we have \"elseif\" and \"else if\"? (realize it\u0027s a copy and paste from the old code)\n\ncodesniffer tells me \"Usage of ELSE IF is discouraged; use ELSEIF instead\".",
+      "revId": "8c5e59b458ab76e1e4b46e6b042f0714f3c89ab1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
