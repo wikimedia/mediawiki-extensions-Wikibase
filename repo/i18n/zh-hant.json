@@ -176,7 +176,7 @@
 	"wikibase-setsitelink-badges": "徽章：",
 	"wikibase-setsitelink-submit": "設定網站連結",
 	"wikibase-setsitelink-warning-remove": "您真的要移除 [[$1]] 的網站連結？",
-	"wikibase-setsitelink-invalid-site": "不明網站 ID \"$1\"。請使用一個己存在的網站 ID，如 \"enwiki\"。",
+	"wikibase-setsitelink-invalid-site": "不明網站 ID \"$1\"。請使用一個己存在的網站 ID，如 \"zhwiki\"。",
 	"wikibase-setsitelink-not-item": "ID $1 不屬於任何項目。",
 	"wikibase-setsitelink-not-badge": "項目 $1 不是一個徽章。",
 	"wikibase-setsitelink-add-failed": "無法儲存該網站連結。",
