@@ -4,7 +4,6 @@ namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
  * Schema updater for SqlUsageTracker

@@ -2,7 +2,6 @@
 namespace Wikibase\Client\Tests\Usage;
 
 use PHPUnit_Framework_Assert as Assert;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\DataModel\Entity\ItemId;

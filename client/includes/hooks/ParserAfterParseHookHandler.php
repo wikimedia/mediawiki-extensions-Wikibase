@@ -10,8 +10,6 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
-use Wikibase\NoLangLinkHandler;
-use Wikibase\SettingsArray;
 
 /**
  * @since 0.5.

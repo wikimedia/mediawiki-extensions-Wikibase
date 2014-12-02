@@ -1,7 +1,6 @@
 <?php
 namespace Wikibase\Client\Tests\Usage\Sql;
 
-use PHPUnit_Framework_Assert as Assert;
 use Wikibase\Client\Store\Sql\ConnectionManager;
 use Wikibase\Client\Tests\Usage\UsageLookupContractTester;
 use Wikibase\Client\Tests\Usage\UsageTrackerContractTester;
