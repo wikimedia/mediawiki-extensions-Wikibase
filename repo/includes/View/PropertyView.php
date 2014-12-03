@@ -91,7 +91,7 @@ class PropertyView extends EntityView {
 			wfMessage( 'wikibase-propertypage-datatype' )->escaped(),
 			'datatype'
 		)
-		. wfTemplate( 'wb-property-datatype',
+		. wfTemplate( 'wikibase-propertyview-datatype',
 			htmlspecialchars( $dataType->getLabel( $this->language->getCode() ) )
 		);
 	}
