@@ -75,9 +75,9 @@ class Runner {
 		$rendered = $renderer->render( $entityId, $propertyLabelOrId );
 		$result = $this->buildResult( $rendered );
 
-		// Track usage of "all" (that is, arbitrary) data from the item.
+		// Track usage of "other" (that is, not label/title/sitelinks) data from the item.
 		$usageAcc = new ParserOutputUsageAccumulator( $parser->getOutput() );
-		$usageAcc->addAllUsage( $entityId );
+		$usageAcc->addOtherUsage( $entityId );
 
 		wfProfileOut( __METHOD__ );
 		return $result;
