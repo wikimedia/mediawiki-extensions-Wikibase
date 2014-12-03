@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_68b993e5",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:07:03Z",
+      "side": 1,
+      "message": "$params is an array with one element which is an array. This is correct.",
+      "parentUuid": "4ea06b5a_7dbcf3d5",
+      "revId": "962f47305af5f03cc353a919cf93d3f836070564",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_1dd36f31",
         "filename": "lib/includes/ChangeNotificationJob.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-03T13:11:44Z",
       "side": 1,
       "message": "The note about when and where this is initialized should stay.",
+      "revId": "962f47305af5f03cc353a919cf93d3f836070564",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_68b0b3f1",
+        "filename": "lib/includes/ChangeNotificationJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:07:03Z",
+      "side": 1,
+      "message": "We have hundreds of such lazy initialized properties in dozens of classes. Why is this information important here but not in all other places? However, I re-added the comment.",
+      "parentUuid": "4ea06b5a_1dd36f31",
       "revId": "962f47305af5f03cc353a919cf93d3f836070564",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
