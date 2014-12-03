@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store\SQL;
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\EntityLookup;
@@ -92,7 +93,6 @@ class ItemsPerSiteBuilder {
 	private function rebuildSiteLinks( array $entityIds ) {
 		$c = 0;
 		foreach ( $entityIds as $entityId ) {
-			/* @var $entityId EntityId */
 			if ( !$entityId->getEntityType() === Item::ENTITY_TYPE ) {
 				// Just in case someone is using a EntityIdPager which doesn't filter non-Items
 				continue;

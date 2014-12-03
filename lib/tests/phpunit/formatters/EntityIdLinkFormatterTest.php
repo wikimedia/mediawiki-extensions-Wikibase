@@ -58,16 +58,15 @@ class EntityIdLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public function getTitleForId( EntityId $id ) {
-		if ( $id->getEntityType() === Item::ENTITY_TYPE ) {
-			$name = 'ITEM-TEST--' . $id->getSerialization();
-		} elseif ( $id->getEntityType() === Property::ENTITY_TYPE ) {
-			$name = 'PROPERTY-TEST--' . $id->getSerialization();
-		} else {
-			throw new LogicException( "oops!" );
+	public function getTitleForId( EntityId $entityId ) {
+		switch ( $entityId->getEntityType() ) {
+			case Item::ENTITY_TYPE:
+				return Title::makeTitle( NS_MAIN, 'ITEM-TEST--' . $entityId->getSerialization() );
+			case Property::ENTITY_TYPE:
+				return Title::makeTitle( NS_MAIN, 'PROPERTY-TEST--' . $entityId->getSerialization() );
+			default:
+				throw new LogicException( "oops!" );
 		}
-
-		return Title::makeTitle( NS_MAIN, $name );
 	}
 
 	protected function newEntityIdLinkFormatter() {
