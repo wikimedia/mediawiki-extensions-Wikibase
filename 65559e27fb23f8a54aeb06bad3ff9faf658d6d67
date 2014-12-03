@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_9d23ffa5",
+        "filename": "repo/includes/content/DeferredCopyEntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_501e8212",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_301176fc",
         "filename": "repo/includes/content/DeferredCopyEntityHolder.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-06T19:46:21Z",
       "side": 1,
       "message": "\"be compatible with\"?",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_dd19877f",
+        "filename": "repo/includes/content/DeferredCopyEntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "Yes. The class which the result is expected to be compatible with. \nThe class with which the result is expected to be compatible.",
+      "parentUuid": "6e936f18_301176fc",
       "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_bd26fbb3",
+        "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_b0258658",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_90208a48",
         "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-06T19:46:21Z",
       "side": 1,
       "message": "Just null?",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_5d1d7765",
+        "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_90208a48",
       "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_7d207396",
+        "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "afaik, this is grammatically and semantically correct, but i rephrased. \"The class with which the result is expected to be compatible.\"",
+      "parentUuid": "6e936f18_d02a922a",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_f02f8e38",
         "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
         "patchSetId": 4
@@ -98,6 +188,24 @@
       "writtenOn": "2014-11-06T19:46:21Z",
       "side": 1,
       "message": "unused parameter",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_3d398bcb",
+        "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "ha, forgot to implement the actual check! will fix.",
+      "parentUuid": "6e936f18_f02f8e38",
       "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_5daa57d2",
+        "filename": "repo/includes/content/EntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "Because it\u0027s intended for use as an internal composite of EntityContent. But you are right, it could be used elsewhere. I just see no other use case for this.",
+      "parentUuid": "6e936f18_30f096c3",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_90df2a3f",
         "filename": "repo/includes/content/EntityHolder.php",
         "patchSetId": 4
@@ -132,6 +258,24 @@
       "writtenOn": "2014-11-06T19:46:21Z",
       "side": 1,
       "message": "\"be compatible with\"???",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_bda35bfc",
+        "filename": "repo/includes/content/EntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "hmhm.",
+      "parentUuid": "6e936f18_90df2a3f",
       "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_1db4cf32",
+        "filename": "repo/includes/content/EntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "If we replace an Item object with an EntityHolder, we somehow have to make sure that the entity we get from the holder is actually an Item. See ItemContent::getItem, for example.",
+      "parentUuid": "6e936f18_b0e4a60b",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_70ea9ed7",
         "filename": "repo/includes/content/EntityHolder.php",
         "patchSetId": 4
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_fd59e32d",
+        "filename": "repo/includes/content/EntityHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "But the code that uses this type-hints against Entity. We can\u0027t start the transition at the \"bottom\" of the food chain here. This is one of the reasons why adoption of EntityDocument is slow, and I would prefer a different migration path.",
+      "parentUuid": "6e936f18_70ea9ed7",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_10f31ad3",
         "filename": "repo/includes/content/EntityInstanceHolder.php",
         "patchSetId": 4
@@ -183,6 +363,24 @@
       "writtenOn": "2014-11-06T19:46:21Z",
       "side": 1,
       "message": "EntityDocument",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_bd8a7b6c",
+        "filename": "repo/includes/content/EntityInstanceHolder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "Could do that here, but getEntity() would still require an Entity, so it seems pointless.",
+      "parentUuid": "6e936f18_10f31ad3",
       "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +421,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_3d966b98",
+        "filename": "repo/tests/phpunit/includes/content/DeferredCopyEntityHolderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_9093aa51",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_30c73669",
         "filename": "repo/tests/phpunit/includes/content/DeferredDecodingEntityHolderTest.php",
         "patchSetId": 4
@@ -251,6 +467,24 @@
       "writtenOn": "2014-11-06T19:53:25Z",
       "side": 1,
       "message": "same issue here",
+      "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_fd8fa376",
+        "filename": "repo/tests/phpunit/includes/content/DeferredDecodingEntityHolderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T11:35:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_709e1e5a",
       "revId": "65559e27fb23f8a54aeb06bad3ff9faf658d6d67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
