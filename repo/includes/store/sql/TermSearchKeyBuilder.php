@@ -20,16 +20,16 @@ class TermSearchKeyBuilder {
 	/**
 	 * @since 0.4
 	 *
-	 * @var TermSqlIndex $table
+	 * @var TermSqlIndex
 	 */
 	protected $table;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @var MessageReporter $reporter
+	 * @var MessageReporter|null
 	 */
-	protected $reporter;
+	protected $reporter = null;
 
 	/**
 	 * Whether all keys should be updated, or only missing keys
@@ -39,9 +39,7 @@ class TermSearchKeyBuilder {
 	protected $all = true;
 
 	/**
-	 * Whether all keys should be updated, or only missing keys
-	 *
-	 * @var bool
+	 * @var int
 	 */
 	protected $fromId = 1;
 
@@ -64,7 +62,7 @@ class TermSearchKeyBuilder {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getRebuildAll() {
 		return $this->all;
@@ -78,14 +76,14 @@ class TermSearchKeyBuilder {
 	}
 
 	/**
-	 * @return boolean
+	 * @return int
 	 */
 	public function getFromId() {
 		return $this->fromId;
 	}
 
 	/**
-	 * @param boolean $all
+	 * @param bool $all
 	 */
 	public function setRebuildAll( $all ) {
 		$this->all = $all;
@@ -99,7 +97,7 @@ class TermSearchKeyBuilder {
 	}
 
 	/**
-	 * @param boolean $fromId
+	 * @param int $fromId
 	 */
 	public function setFromId( $fromId ) {
 		$this->fromId = $fromId;
@@ -126,7 +124,7 @@ class TermSearchKeyBuilder {
 	public function rebuildSearchKey() {
 		$dbw = $this->table->getWriteDb();
 
-		$rowId = $this->fromId -1;
+		$rowId = $this->fromId - 1;
 
 		$total = 0;
 

@@ -18,13 +18,20 @@ use Wikibase\Repo\Store\EntityIdPager;
  */
 class ItemsPerSiteBuilder {
 
+	/**
+	 * @var SiteLinkTable
+	 */
 	private $siteLinkTable;
+
+	/**
+	 * @var EntityLookup
+	 */
 	private $entityLookup;
 
 	/**
-	 * @var MessageReporter $reporter
+	 * @var MessageReporter|null
 	 */
-	private $reporter;
+	private $reporter = null;
 
 	/**
 	 * The batch size, giving the number of rows to be updated in each database transaction.

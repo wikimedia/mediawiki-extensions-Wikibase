@@ -29,21 +29,21 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	private $cache;
 
 	/**
-	 * @var int $cacheTimeout
+	 * @var int
 	 */
 	private $cacheTimeout;
 
 	/**
 	 * The key prefix to use when caching entities in memory.
 	 *
-	 * @var $cacheKeyPrefix
+	 * @var string
 	 */
 	private $cacheKeyPrefix;
 
 	/**
-	 * @var bool $shouldVerifyRevision
+	 * @var bool
 	 */
-	private $shouldVerifyRevision;
+	private $shouldVerifyRevision = false;
 
 	/**
 	 * @param EntityRevisionLookup $entityRevisionLookup The lookup to use

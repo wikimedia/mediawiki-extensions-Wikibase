@@ -41,7 +41,9 @@ use Wikibase\Test\TestChanges;
  */
 class ChangeHandlerTest extends \MediaWikiTestCase {
 
-	/** @var Site $site */
+	/**
+	 * @var Site
+	 */
 	protected $site;
 
 	protected function setUp() {

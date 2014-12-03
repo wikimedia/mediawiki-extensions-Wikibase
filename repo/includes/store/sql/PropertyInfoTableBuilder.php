@@ -18,13 +18,20 @@ use Wikibase\Lib\Store\EntityLookup;
  */
 class PropertyInfoTableBuilder {
 
+	/**
+	 * @var PropertyInfoTable
+	 */
 	private $propertyInfoTable;
+
+	/**
+	 * @var EntityLookup
+	 */
 	private $entityLookup;
 
 	/**
-	 * @var MessageReporter $reporter
+	 * @var MessageReporter|null
 	 */
-	private $reporter;
+	private $reporter = null;
 
 	/**
 	 * @var bool
@@ -70,7 +77,7 @@ class PropertyInfoTableBuilder {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getRebuildAll() {
 		return $this->shouldUpdateAllEntities;
@@ -91,7 +98,7 @@ class PropertyInfoTableBuilder {
 	}
 
 	/**
-	 * @param boolean $all
+	 * @param bool $all
 	 */
 	public function setRebuildAll( $all ) {
 		$this->shouldUpdateAllEntities = $all;
