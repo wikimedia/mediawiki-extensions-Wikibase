@@ -32,14 +32,16 @@ class ItemView extends EntityView {
 	 * @param ClaimsView $claimsView
 	 * @param Language $language
 	 * @param string[] $siteLinkGroups
+	 * @param bool $editable
 	 */
 	public function __construct(
 		FingerprintView $fingerprintView,
 		ClaimsView $claimsView,
 		Language $language,
-		array $siteLinkGroups
+		array $siteLinkGroups,
+		$editable  = true
 	) {
-		parent::__construct( $fingerprintView, $claimsView, $language );
+		parent::__construct( $fingerprintView, $claimsView, $language, $editable );
 
 		$this->siteLinkGroups = $siteLinkGroups;
 	}
@@ -47,19 +49,16 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getMainHtml
 	 */
-	protected function getMainHtml( EntityRevision $entityRevision, array $entityInfo,
-		$editable = true
-	) {
+	protected function getMainHtml( EntityRevision $entityRevision ) {
 		$item = $entityRevision->getEntity();
 
 		if ( !( $item instanceof Item ) ) {
 			throw new InvalidArgumentException( '$entityRevision must contain an Item.' );
 		}
 
-		$html = parent::getMainHtml( $entityRevision, $entityInfo, $editable );
+		$html = parent::getMainHtml( $entityRevision );
 		$html .= $this->claimsView->getHtml(
-			$item->getStatements()->toArray(),
-			$entityInfo
+			$item->getStatements()->toArray()
 		);
 
 		return $html;
@@ -68,9 +67,9 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getSideHtml
 	 */
-	protected function getSideHtml( EntityRevision $entityRevision, $editable = true ) {
+	protected function getSideHtml( EntityRevision $entityRevision ) {
 		$item = $entityRevision->getEntity();
-		return $this->getHtmlForSiteLinks( $item, $editable );
+		return $this->getHtmlForSiteLinks( $item );
 	}
 
 	/**
@@ -92,11 +91,10 @@ class ItemView extends EntityView {
 	 * @since 0.1
 	 *
 	 * @param Item $item the entity to render
-	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForSiteLinks( Item $item, $editable = true ) {
+	protected function getHtmlForSiteLinks( Item $item ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		// FIXME: Inject this
@@ -113,7 +111,7 @@ class ItemView extends EntityView {
 			$item->getSiteLinks(),
 			$itemId,
 			$this->siteLinkGroups,
-			$editable
+			$this->editable
 		);
 	}
 
