@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Test\Serializers;
 
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -85,7 +84,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 	public function entityTypeProvider() {
 		return array(
 			array( Item::ENTITY_TYPE ),
-			array( Property::ENTITY_TYPE ),
+			array( 'property' ),
 		);
 	}
 

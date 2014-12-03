@@ -1,8 +1,8 @@
 <?php
+
 namespace Wikibase\Test\Validators;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\Validators\NotEntityIdValidator;
 
 /**
@@ -21,8 +21,8 @@ class NotEntityIdValidatorTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'empty' => array( '', 'label-no-entityid', null, null ),
 			'silly' => array( 'silly', 'label-no-entityid', null, null ),
-			'allowed type' => array( 'Q13', 'label-no-entityid', array( Property::ENTITY_TYPE ), null ),
-			'forbidden type' => array( 'P13', 'label-no-entityid', array( Property::ENTITY_TYPE ), 'label-no-entityid' ),
+			'allowed type' => array( 'Q13', 'label-no-entityid', array( 'property' ), null ),
+			'forbidden type' => array( 'P13', 'label-no-entityid', array( 'property' ), 'label-no-entityid' ),
 			'all forbidden' => array( 'Q13', 'label-no-entityid', null, 'label-no-entityid' ),
 		);
 	}

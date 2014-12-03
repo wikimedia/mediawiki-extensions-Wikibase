@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityFactory;
 
 /**
@@ -23,7 +22,7 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 		$this->assertInternalType( 'array', $types );
 
 		$this->assertTrue( in_array( Item::ENTITY_TYPE, $types ), "must contain item type" );
-		$this->assertTrue( in_array( Property::ENTITY_TYPE, $types ), "must contain property type" );
+		$this->assertTrue( in_array( 'property', $types ), "must contain property type" );
 	}
 
 	public static function provideIsEntityType() {
@@ -50,7 +49,7 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 	public static function provideNewEmpty() {
 		return array(
 			array( Item::ENTITY_TYPE, 'Wikibase\DataModel\Entity\Item' ),
-			array( Property::ENTITY_TYPE, 'Wikibase\DataModel\Entity\Property' ),
+			array( 'property', 'Wikibase\DataModel\Entity\Property' ),
 		);
 	}
 

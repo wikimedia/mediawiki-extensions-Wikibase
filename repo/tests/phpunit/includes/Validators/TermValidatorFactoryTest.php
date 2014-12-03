@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
@@ -100,7 +99,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testGetLabelValidator_property() {
 		$builders = $this->newFactory( 8, array( 'en' ) );
 
-		$validator = $builders->getLabelValidator( Property::ENTITY_TYPE );
+		$validator = $builders->getLabelValidator( 'property' );
 
 		$this->assertInstanceOf( 'ValueValidators\ValueValidator', $validator );
 

@@ -21,7 +21,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\EntityFactory;
 use Wikibase\EntityParserOutputGeneratorFactory;
@@ -771,7 +770,7 @@ class WikibaseRepo {
 		// @TODO: We should have smth. like this for namespaces too
 		$map = array(
 			Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
-			Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY
+			'property' => CONTENT_MODEL_WIKIBASE_PROPERTY
 		);
 
 		wfRunHooks( 'WikibaseContentModelMapping', array( &$map ) );
@@ -785,7 +784,7 @@ class WikibaseRepo {
 	public function getEntityFactory() {
 		$entityClasses = array(
 			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
-			Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
+			'property' => 'Wikibase\DataModel\Entity\Property',
 		);
 
 		//TODO: provide a hook or registry for adding more.

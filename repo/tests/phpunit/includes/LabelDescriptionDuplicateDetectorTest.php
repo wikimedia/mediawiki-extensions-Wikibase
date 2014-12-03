@@ -6,7 +6,6 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Term;
 use Wikibase\Validators\UniquenessViolation;
@@ -45,7 +44,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			'termType' => Term::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'entityId' => 17,
-			'entityType' => Property::ENTITY_TYPE,
+			'entityType' => 'property',
 			'termText' => 'property label',
 		) );
 
@@ -98,7 +97,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 			'other entity type' => array(
 				$world,
-				Property::ENTITY_TYPE,
+				'property',
 				array( 'en' => 'item label' ),
 				null,
 				null,

@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyInfoStore;
 
@@ -33,7 +32,7 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 	 * @throws InvalidArgumentException
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
-		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
+		if ( $propertyId->getEntityType() !== 'property' ) {
 			throw new InvalidArgumentException( 'Property ID expected! ' . $propertyId );
 		}
 

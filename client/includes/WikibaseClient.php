@@ -31,7 +31,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DirectSqlStore;
 use Wikibase\EntityFactory;
@@ -584,7 +583,7 @@ final class WikibaseClient {
 	public function getEntityFactory() {
 		$entityClasses = array(
 			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
-			Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
+			'property' => 'Wikibase\DataModel\Entity\Property',
 		);
 
 		//TODO: provide a hook or registry for adding more.

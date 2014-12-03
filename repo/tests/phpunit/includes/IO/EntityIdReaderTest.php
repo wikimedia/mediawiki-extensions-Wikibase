@@ -6,7 +6,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
@@ -73,7 +72,7 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 				'EntityIdReaderTest.txt', null, 100, array( $q1, $p2, $q3, $p4 )
 			),
 			'just properties' => array(
-				'EntityIdReaderTest.txt', Property::ENTITY_TYPE, 100, array( $p2, $p4 )
+				'EntityIdReaderTest.txt', 'property', 100, array( $p2, $p4 )
 			),
 			'limit' => array(
 				'EntityIdReaderTest.txt', null, 2, array( $q1, $p2 )

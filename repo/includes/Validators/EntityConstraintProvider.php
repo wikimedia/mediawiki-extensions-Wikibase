@@ -3,7 +3,6 @@
 namespace Wikibase\Validators;
 
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -54,7 +53,7 @@ class EntityConstraintProvider {
 		$validators = array();
 
 		switch ( $entityType ) {
-			case Property::ENTITY_TYPE:
+			case 'property':
 				$validators[] = new LabelUniquenessValidator( $this->duplicateDetector );
 				break;
 
@@ -83,7 +82,7 @@ class EntityConstraintProvider {
 		$validators = $this->getUpdateValidators( $entityType );
 
 		switch ( $entityType ) {
-			case Property::ENTITY_TYPE:
+			case 'property':
 				break;
 
 			case Item::ENTITY_TYPE:

@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\Lib\Store\EntityInfoBuilder;
@@ -455,12 +454,12 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		wfProfileIn( __METHOD__ );
 
-		if ( empty( $this->numericIdsByType[Property::ENTITY_TYPE] ) ) {
+		if ( empty( $this->numericIdsByType['property'] ) ) {
 			// there are no Property entities, so there is nothing to do.
 			return;
 		}
 
-		$numericPropertyIds = $this->numericIdsByType[Property::ENTITY_TYPE];
+		$numericPropertyIds = $this->numericIdsByType['property'];
 
 		$dbw = $this->getConnection( DB_SLAVE );
 
@@ -473,7 +472,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		$this->injectDataTypes( $res );
 		$this->setDefaultValue( 'datatype', null, function( $entity ) {
-			return $entity['type'] === Property::ENTITY_TYPE;
+			return $entity['type'] === 'property';
 		} );
 
 		$this->releaseConnection( $dbw );
