@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_831ac07c",
+        "filename": "repo/includes/View/ClaimsView.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-03T18:00:23Z",
+      "side": 0,
+      "message": "ah, i see.  that\u0027s better but still was some overhead of instantiating the handler etc. and otherwise generally in using Linker::link.\n\ni still expect some performance improvement or at least not a performance degradation.",
+      "parentUuid": "4ea06b5a_6340d45b",
+      "revId": "2e08a00996eb8fee21811f52c74d0a0a9df62fdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_83b64084",
         "filename": "repo/includes/View/SnakHtmlGenerator.php",
         "patchSetId": 16
