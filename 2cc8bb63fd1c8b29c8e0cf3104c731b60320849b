@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_23ce4c60",
+        "filename": "lib/includes/formatters/EntityIdFormatterFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T17:28:29Z",
+      "side": 1,
+      "message": "I still don\u0027t understand why there should be a newline there :)",
+      "parentUuid": "4ea06b5a_082faf9d",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_0806cf23",
         "filename": "lib/includes/formatters/EntityIdFormatterFactory.php",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-03T17:10:02Z",
       "side": 1,
       "message": "Would be helpful if this descriptions mentions the word \"MIME\" (see the CONTENT_FORMAT_... constants in core\u0027s Defines.php) or an example (e.g. \"text/html\").",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_03d31006",
+        "filename": "lib/includes/formatters/EntityIdFormatterFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T17:28:29Z",
+      "side": 1,
+      "message": "Then we would GUARANTEE that this will ALWAYS be mime types.\nCurrently they are. I see no reason to guarantee this. \nWhat would that guarantee be useful for?\nAll code should use the constants anyway.",
+      "parentUuid": "4ea06b5a_0806cf23",
       "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_c333e85d",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatterFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T17:28:29Z",
+      "side": 1,
+      "message": "Yes, this is an older issue - we actually use these constants in WikibaseEntityValueBuilders, etc. They should really be defined somewhere neutral.\n\nHowever, I do not want to use plain strings. Constants are useful, especially for stuff like FORMAT_HTML_DIFF, etc. You want to type out \u0027text/html; disposition\u003ddiff\u0027?...",
+      "parentUuid": "4ea06b5a_a3fc9c09",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_c33768aa",
         "filename": "repo/includes/View/ClaimsView.php",
         "patchSetId": 14
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_433fd820",
+        "filename": "repo/includes/View/ClaimsView.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T17:28:29Z",
+      "side": 1,
+      "message": "I didn\u0027t put this there, it comes from a rebase. I think adreian added this this... maybe this should not be here. will check.",
+      "parentUuid": "4ea06b5a_c33768aa",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_633e9489",
         "filename": "repo/includes/View/EntityViewFactory.php",
         "patchSetId": 14
@@ -81,6 +153,24 @@
       "writtenOn": "2014-12-03T17:10:02Z",
       "side": 1,
       "message": "Again, why are these constants in a \"Snak...\" class?",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_0349d0d2",
+        "filename": "repo/includes/View/EntityViewFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T17:28:29Z",
+      "side": 1,
+      "message": "Because that\u0027s where they were first defiend. They should be moved - got a good idea where they should live?",
+      "parentUuid": "4ea06b5a_633e9489",
       "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
