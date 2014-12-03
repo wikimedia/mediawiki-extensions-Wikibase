@@ -410,7 +410,7 @@ final class WikibaseClient {
 	 */
 	public function getLangLinkSiteGroup() {
 		$group = $this->settings->getSetting( 'languageLinkSiteGroup' );
-
+return 'wikipedia';
 		if ( $group === null ) {
 			$group = $this->getSiteGroup();
 		}
@@ -541,7 +541,7 @@ final class WikibaseClient {
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkLookup(),
 				$this->getStore()->getEntityLookup(),
-				$this->getSiteStore()->getSites(),
+				$this->getSiteStore(),
 				$this->getLangLinkSiteGroup()
 			);
 		}

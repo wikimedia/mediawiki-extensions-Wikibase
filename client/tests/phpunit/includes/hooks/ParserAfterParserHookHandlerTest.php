@@ -178,7 +178,7 @@ class ParserAfterParseHookHandlerTest extends \MediaWikiTestCase {
 			$namespaceChecker,
 			$mockRepo,
 			$mockRepo,
-			$this->getSiteStore()->getSites(),
+			$this->getSiteStore(),
 			$settings->getSetting( 'languageLinkSiteGroup' )
 		);
 
