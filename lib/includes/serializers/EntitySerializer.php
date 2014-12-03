@@ -7,7 +7,6 @@ use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityFactory;
 
 /**
@@ -98,7 +97,7 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 			$this->entityFactory = new EntityFactory(
 				array(
 					Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
-					Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
+					'property' => 'Wikibase\DataModel\Entity\Property',
 				)
 			);
 		} else {

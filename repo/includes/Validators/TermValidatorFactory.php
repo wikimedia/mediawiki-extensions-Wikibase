@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -105,8 +104,8 @@ class TermValidatorFactory {
 		$validators = $this->getCommonTermValidators();
 
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
-		if ( $entityType === Property::ENTITY_TYPE ) {
-			$validators[] = new NotEntityIdValidator( $this->idParser, 'label-no-entityid', array( Property::ENTITY_TYPE ) );
+		if ( $entityType === 'property' ) {
+			$validators[] = new NotEntityIdValidator( $this->idParser, 'label-no-entityid', array( 'property' ) );
 		}
 
 		return new CompositeValidator( $validators, true );

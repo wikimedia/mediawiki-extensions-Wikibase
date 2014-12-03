@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use HashBagOStuff;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyLabelResolver;
 use Wikibase\Term;
@@ -62,28 +61,28 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => 1,
-				'entityType' => Property::ENTITY_TYPE,
+				'entityType' => 'property',
 				'termText' => 'Eins',
 			) ),
 			new Term( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => 2,
-				'entityType' => Property::ENTITY_TYPE,
+				'entityType' => 'property',
 				'termText' => 'Zwei',
 			) ),
 			new Term( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => 3,
-				'entityType' => Property::ENTITY_TYPE,
+				'entityType' => 'property',
 				'termText' => 'Drei',
 			) ),
 			new Term( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => 4,
-				'entityType' => Property::ENTITY_TYPE,
+				'entityType' => 'property',
 				'termText' => 'vier', // lower case
 			) ),
 
@@ -92,7 +91,7 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'entityId' => 1,
-				'entityType' => Property::ENTITY_TYPE,
+				'entityType' => 'property',
 				'termText' => 'One',
 			) ),
 			new Term( array(
@@ -106,14 +105,14 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 				'termType' => 'alias', // not a label
 				'termLanguage' => 'en',
 				'entityId' => 3,
-				'entityType' => Property::ENTITY_TYPE,
+				'entityType' => 'property',
 				'termText' => 'Three',
 			) ),
 			new Term( array(
 				'termType' => 'description', // not a label
 				'termLanguage' => 'en',
 				'entityId' => 4,
-				'entityType' => Property::ENTITY_TYPE,
+				'entityType' => 'property',
 				'termText' => 'Four',
 			) ),
 		);
