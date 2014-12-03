@@ -26,7 +26,7 @@ interface ClientStore {
 	 *
 	 * @return SiteLinkLookup
 	 */
-	public function getSiteLinkTable();
+	public function getSiteLinkLookup();
 
 	/**
 	 * @since 0.5

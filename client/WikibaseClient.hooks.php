@@ -174,7 +174,7 @@ final class ClientHooks {
 	public static function onSpecialMovepageAfterMove( MovePageForm $movePage, Title &$oldTitle,
 		Title &$newTitle ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
+		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
 		$repoLinker = $wikibaseClient->newRepoLinker();
 
 		$movePageNotice = new MovePageNoticeCreator(
@@ -377,7 +377,7 @@ final class ClientHooks {
 		}
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
+		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
 		return $siteLinkLookup->getEntityIdForSiteLink(
 			new SiteLink(
 				$wikibaseClient->getSite()->getGlobalId(),
@@ -672,7 +672,7 @@ final class ClientHooks {
 		$infoActionHookHandler = new InfoActionHookHandler(
 			$namespaceChecker,
 			$wikibaseClient->newRepoLinker(),
-			$wikibaseClient->getStore()->getSiteLinkTable(),
+			$wikibaseClient->getStore()->getSiteLinkLookup(),
 			$settings->getSetting( 'siteGlobalID' )
 		);
 
@@ -692,7 +692,7 @@ final class ClientHooks {
 	 */
 	public static function onArticleDeleteAfterSuccess( Title $title, OutputPage $out ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
+		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
 		$repoLinker = $wikibaseClient->newRepoLinker();
 
 		$deletePageNotice = new DeletePageNoticeCreator(

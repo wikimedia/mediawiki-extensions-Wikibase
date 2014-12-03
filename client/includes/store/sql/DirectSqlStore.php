@@ -185,7 +185,7 @@ class DirectSqlStore implements ClientStore {
 			if ( $this->useLegacyUsageIndex ) {
 				$this->usageLookup = new SiteLinkUsageLookup(
 					$this->getSite()->getGlobalId(),
-					$this->getSiteLinkTable(),
+					$this->getSiteLinkLookup(),
 					new TitleFactory()
 				);
 			} else {
@@ -245,13 +245,11 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * @see Store::getSiteLinkTable
-	 *
-	 * @since 0.4
+	 * @see ClientStore::getSiteLinkLookup
 	 *
 	 * @return SiteLinkLookup
 	 */
-	public function getSiteLinkTable() {
+	public function getSiteLinkLookup() {
 		if ( !$this->siteLinkTable ) {
 			$this->siteLinkTable = $this->newSiteLinkTable();
 		}

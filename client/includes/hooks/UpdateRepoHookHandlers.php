@@ -75,7 +75,7 @@ class UpdateRepoHookHandlers {
 			return true;
 		}
 
-		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
+		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
 
 		return new UpdateRepoHookHandlers(
 			$namespaceChecker,
