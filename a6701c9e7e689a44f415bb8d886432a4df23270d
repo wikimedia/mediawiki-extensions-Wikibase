@@ -16,6 +16,24 @@
       "revId": "a6701c9e7e689a44f415bb8d886432a4df23270d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_9a1d457b",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T10:30:51Z",
+      "side": 1,
+      "message": "Ok, convinced myself: we need to find the list of pages that either uses one of the aspects that changed, or the \"X\" aspect, since X means that any aspect might be used.",
+      "parentUuid": "4ea06b5a_2dfc0408",
+      "revId": "a6701c9e7e689a44f415bb8d886432a4df23270d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
