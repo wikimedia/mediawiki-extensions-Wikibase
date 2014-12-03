@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_83b64084",
+        "filename": "repo/includes/View/SnakHtmlGenerator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-03T17:50:20Z",
+      "side": 0,
+      "message": "also was using Linker here, so once again loading entities to get labels and descriptions.",
+      "revId": "2e08a00996eb8fee21811f52c74d0a0a9df62fdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
