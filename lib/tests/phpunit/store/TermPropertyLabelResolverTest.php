@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use HashBagOStuff;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyLabelResolver;
 use Wikibase\Term;
@@ -98,7 +97,7 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'entityId' => 2,
-				'entityType' => Item::ENTITY_TYPE, // not a property
+				'entityType' => 'item', // not a property
 				'termText' => 'Two',
 			) ),
 			new Term( array(

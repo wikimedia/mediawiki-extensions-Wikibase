@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
@@ -116,7 +115,7 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 			),
 			'limit and filter' => array(
 				array( $item, $property, $item2 ),
-				Item::ENTITY_TYPE,
+				'item',
 				1,
 				array(
 					array( $item ),

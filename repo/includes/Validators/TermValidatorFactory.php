@@ -5,7 +5,6 @@ namespace Wikibase\Validators;
 use InvalidArgumentException;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -87,7 +86,7 @@ class TermValidatorFactory {
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
 
 		switch ( $entityType ) {
-			case Item::ENTITY_TYPE:
+			case 'item':
 				return new LabelDescriptionUniquenessValidator( $this->duplicateDetector );
 
 			default:

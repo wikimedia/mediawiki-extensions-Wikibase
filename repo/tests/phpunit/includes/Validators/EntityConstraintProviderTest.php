@@ -2,7 +2,6 @@
 
 namespace Wikibase\Validators\Test;
 
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\Validators\EntityConstraintProvider;
 
 /**
@@ -29,17 +28,17 @@ class EntityConstraintProviderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetUpdateValidators() {
 		$provider = $this->getEntityConstraintProvider();
-		$validators = $provider->getUpdateValidators( Item::ENTITY_TYPE );
+		$validators = $provider->getUpdateValidators( 'item' );
 		$this->assertValidators( $validators );
 	}
 
 	public function testGetCreationValidators() {
 		$provider = $this->getEntityConstraintProvider();
-		$validators = $provider->getCreationValidators( Item::ENTITY_TYPE );
+		$validators = $provider->getCreationValidators( 'item' );
 		$this->assertValidators( $validators );
 
 		// Creation validators must be a superset of update validators
-		$updateValidators = $provider->getUpdateValidators( Item::ENTITY_TYPE );
+		$updateValidators = $provider->getUpdateValidators( 'item' );
 		$this->assertContainsAll( $updateValidators, $validators );
 	}
 

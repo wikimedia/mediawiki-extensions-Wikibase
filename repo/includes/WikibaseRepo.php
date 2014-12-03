@@ -20,7 +20,6 @@ use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\EntityFactory;
 use Wikibase\EntityParserOutputGeneratorFactory;
@@ -254,7 +253,7 @@ class WikibaseRepo {
 	public function getEntityChangeFactory() {
 		//TODO: take this from a setting or registry.
 		$changeClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
+			'item' => 'Wikibase\ItemChange',
 			// Other types of entities will use EntityChange
 		);
 
@@ -793,7 +792,7 @@ class WikibaseRepo {
 	public function getContentModelMappings() {
 		// @TODO: We should have smth. like this for namespaces too
 		$map = array(
-			Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
+			'item' => CONTENT_MODEL_WIKIBASE_ITEM,
 			'property' => CONTENT_MODEL_WIKIBASE_PROPERTY
 		);
 
@@ -807,7 +806,7 @@ class WikibaseRepo {
 	 */
 	public function getEntityFactory() {
 		$entityClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
+			'item' => 'Wikibase\DataModel\Entity\Item',
 			'property' => 'Wikibase\DataModel\Entity\Property',
 		);
 

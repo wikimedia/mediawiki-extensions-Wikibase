@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use ValueValidators\Error;
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Term;
@@ -28,7 +27,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			'termType' => Term::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'entityId' => 42,
-			'entityType' => Item::ENTITY_TYPE,
+			'entityType' => 'item',
 			'termText' => 'item label',
 		) );
 
@@ -36,7 +35,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			'termType' => Term::TYPE_DESCRIPTION,
 			'termLanguage' => 'en',
 			'entityId' => 42,
-			'entityType' => Item::ENTITY_TYPE,
+			'entityType' => 'item',
 			'termText' => 'item description',
 		) );
 
@@ -79,7 +78,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		return array(
 			'no label conflict' => array(
 				$world,
-				Item::ENTITY_TYPE,
+				'item',
 				array( 'en' => 'foo' ),
 				null,
 				null,
@@ -88,7 +87,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 			'label conflict' => array(
 				$world,
-				Item::ENTITY_TYPE,
+				'item',
 				array( 'en' => 'item label' ),
 				null,
 				null,
@@ -106,7 +105,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 			'ignored label conflict' => array(
 				$world,
-				Item::ENTITY_TYPE,
+				'item',
 				array( 'en' => 'item label' ),
 				null,
 				new ItemId( 'Q42' ),
@@ -115,7 +114,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 			'no label/description conflict' => array(
 				$world,
-				Item::ENTITY_TYPE,
+				'item',
 				array( 'en' => 'item label' ),
 				array(),
 				null,
@@ -124,7 +123,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 			'label/description conflict' => array(
 				$world,
-				Item::ENTITY_TYPE,
+				'item',
 				array( 'en' => 'item label' ),
 				array( 'en' => 'item description' ),
 				null,
@@ -133,7 +132,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 			'ignored label/description conflict' => array(
 				$world,
-				Item::ENTITY_TYPE,
+				'item',
 				array( 'en' => 'item label' ),
 				array( 'en' => 'item description' ),
 				new ItemId( 'Q42' ),

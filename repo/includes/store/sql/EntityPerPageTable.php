@@ -7,7 +7,6 @@ use DBError;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\Repo\Store\EntityPerPage;
@@ -296,7 +295,7 @@ class EntityPerPageTable implements EntityPerPage {
 		$conditions = array(
 			'ips_site_page IS NULL'
 		);
-		$conditions['epp_entity_type'] = Item::ENTITY_TYPE;
+		$conditions['epp_entity_type'] = 'item';
 
 		$joinConditions = 'ips_item_id = epp_entity_id';
 

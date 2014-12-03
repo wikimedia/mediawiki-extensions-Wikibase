@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -43,7 +42,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testGetFingerprintValidator() {
 		$builders = $this->newFactory( 20, array( 'ja', 'ru' ) );
 
-		$validator = $builders->getFingerprintValidator( Item::ENTITY_TYPE );
+		$validator = $builders->getFingerprintValidator( 'item' );
 
 		$this->assertInstanceOf( 'Wikibase\Validators\FingerprintValidator', $validator );
 
@@ -87,7 +86,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testGetLabelValidator() {
 		$builders = $this->newFactory( 8, array( 'en' ) );
 
-		$validator = $builders->getLabelValidator( Item::ENTITY_TYPE );
+		$validator = $builders->getLabelValidator( 'item' );
 
 		$this->assertInstanceOf( 'ValueValidators\ValueValidator', $validator );
 
@@ -114,7 +113,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testGetDescriptionValidator() {
 		$builders = $this->newFactory( 8, array( 'en' ) );
 
-		$validator = $builders->getDescriptionValidator( Item::ENTITY_TYPE );
+		$validator = $builders->getDescriptionValidator( 'item' );
 
 		$this->assertInstanceOf( 'ValueValidators\ValueValidator', $validator );
 
@@ -126,7 +125,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testGetAliasValidator() {
 		$builders = $this->newFactory( 8, array( 'en' ) );
 
-		$validator = $builders->getAliasValidator( Item::ENTITY_TYPE );
+		$validator = $builders->getAliasValidator( 'item' );
 
 		$this->assertInstanceOf( 'ValueValidators\ValueValidator', $validator );
 
