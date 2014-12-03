@@ -4,7 +4,6 @@ namespace Wikibase\Test\IO;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\IO\EntityIdReader;
@@ -78,7 +77,7 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 				'EntityIdReaderTest.txt', null, 2, array( $q1, $p2 )
 			),
 			'limit and filter' => array(
-				'EntityIdReaderTest.txt', Item::ENTITY_TYPE, 1, array( $q1 )
+				'EntityIdReaderTest.txt', 'item', 1, array( $q1 )
 			),
 		);
 	}
@@ -114,7 +113,7 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'limit and filter' => array(
 				'EntityIdReaderTest.txt',
-				Item::ENTITY_TYPE,
+				'item',
 				1,
 				array(
 					array( $q1 ),

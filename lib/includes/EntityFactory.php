@@ -5,7 +5,6 @@ namespace Wikibase;
 use MWException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\Item;
 
 /**
  * Factory for Entity objects.
@@ -48,7 +47,7 @@ class EntityFactory {
 
 		if ( $instance === false ) {
 			$typeToClass = array(
-				Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
+				'item' => 'Wikibase\DataModel\Entity\Item',
 				'property' => 'Wikibase\DataModel\Entity\Property',
 			);
 

@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityFactory;
 
 /**
@@ -96,7 +95,7 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 			// which currently allows all parameters to be null.
 			$this->entityFactory = new EntityFactory(
 				array(
-					Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
+					'item' => 'Wikibase\DataModel\Entity\Item',
 					'property' => 'Wikibase\DataModel\Entity\Property',
 				)
 			);

@@ -7,7 +7,6 @@ use Title;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdTitleFormatter;
@@ -59,7 +58,7 @@ class EntityIdTitleFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	public function getTitleForId( EntityId $entityId ) {
 		switch ( $entityId->getEntityType() ) {
-			case Item::ENTITY_TYPE:
+			case 'item':
 				return Title::makeTitle( NS_MAIN, 'ITEM-TEST--' . $entityId->getSerialization() );
 			case 'property':
 				return Title::makeTitle( NS_MAIN, 'PROPERTY-TEST--' . $entityId->getSerialization() );
