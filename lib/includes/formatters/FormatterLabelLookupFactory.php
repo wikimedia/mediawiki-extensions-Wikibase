@@ -39,17 +39,6 @@ class FormatterLabelLookupFactory {
 		$this->termLookup = $termLookup;
 	}
 
-	private function getOption( FormatterOptions $options, $key, $type ) {
-		$value = $options->getOption( $key );
-
-		if ( !( $value instanceof $type ) && gettype( $value ) !== $type ) {
-			throw new InvalidArgumentException( 'Option ' . $key . ' must be used ' .
-				'with an instance of ' . $type . '.' );
-		}
-
-		return $value;
-	}
-
 	/**
 	 * @param FormatterOptions $options
 	 *
@@ -58,24 +47,48 @@ class FormatterLabelLookupFactory {
 	 */
 	public function getLabelLookup( FormatterOptions $options ) {
 		if ( $options->hasOption( 'LabelLookup' ) ) {
-			$labelLookup = $this->getOption( $options, 'LabelLookup', 'Wikibase\Lib\Store\LabelLookup' );
-
+			return $this->getLabelLookupFromOptions( $options );
 		} elseif ( $options->hasOption( 'languages' ) ) {
-			$fallbackChain = $this->getOption( $options, 'languages', 'Wikibase\LanguageFallbackChain' );
-			$labelLookup = new LanguageFallbackLabelLookup( $this->termLookup, $fallbackChain );
-
+			return $this->newLanguageFallbackLabelLookup( $options );
 		} elseif ( $options->hasOption( ValueFormatter::OPT_LANG ) ) {
-			$language = $this->getOption( $options, ValueFormatter::OPT_LANG, 'string' );
-			$labelLookup = new LanguageLabelLookup( $this->termLookup, $language );
-
+			return $this->newLanguageLabelLookup( $options );
 		} else {
-			throw new InvalidArgumentException(
-				'OPT_LANG, languages (fallback chain), or LabelLookup ' .
-				'must be set in FormatterOptions.'
-			);
+			throw new InvalidArgumentException( 'OPT_LANG, languages (fallback chain), '
+				. 'or LabelLookup must be set in FormatterOptions.' );
+		}
+	}
+
+	private function getLabelLookupFromOptions( FormatterOptions $options ) {
+		$labelLookup = $options->getOption( 'LabelLookup' );
+
+		if ( !( $labelLookup instanceof LabelLookup ) ) {
+			throw new InvalidArgumentException( 'Option LabelLookup must be used ' .
+				'with an instance of LabelLookup.' );
 		}
 
 		return $labelLookup;
+	}
+
+	private function newLanguageFallbackLabelLookup( FormatterOptions $options ) {
+		$fallbackChain = $options->getOption( 'languages' );
+
+		if ( !( $fallbackChain instanceof LanguageFallbackChain ) ) {
+			throw new InvalidArgumentException( 'Option `languages` must be used ' .
+				'with an instance of LanguageFallbackChain.' );
+		}
+
+		return new LanguageFallbackLabelLookup( $this->termLookup, $fallbackChain );
+	}
+
+	private function newLanguageLabelLookup( FormatterOptions $options ) {
+		$languageCode = $options->getOption( ValueFormatter::OPT_LANG );
+
+		if ( !is_string( $languageCode ) ) {
+			throw new InvalidArgumentException( 'ValueFormatter::OPT_LANG must be a '
+				. 'language code string.' );
+		}
+
+		return new LanguageLabelLookup( $this->termLookup, $languageCode );
 	}
 
 }
