@@ -337,16 +337,22 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	 *
 	 * @param boolean $enabled
 	 * @param array|null $projects A list of projects
+	 * @param string $itemId
+	 * @param string|null $action
 	 *
 	 * @return array The resulting sidebar array
 	 */
-	private function callDoSidebarBeforeOutput( $enabled, $projects ) {
+	private function callDoSidebarBeforeOutput( $enabled, $projects, $itemId = 'Q42', $action = null ) {
 		$title = Title::makeTitle( NS_MAIN, 'Oxygen' );
 
-		$context = new RequestContext( new FauxRequest() );
+		$requestData = $action === null ? array() : array( 'action' => $action );
+
+		$context = new RequestContext();
+		$context->setRequest( new FauxRequest( $requestData ) );
 
 		$output = new OutputPage( $context );
 		$output->setTitle( $title );
+		$output->setProperty( 'wikibase_item' , $itemId );
 		$output->setProperty( 'wikibase-otherprojects-sidebar', $projects );
 
 		$context->setOutput( $output );
@@ -368,6 +374,18 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 		$this->assertArrayHasKey( 'wikibase-otherprojects', $sidebar );
 		$this->assertEquals( $sidebar['wikibase-otherprojects'], $projects );
+	}
+
+	public function testDoSidebarBeforeOutput_nonItem() {
+		$sidebar = $this->callDoSidebarBeforeOutput( true, null, null );
+
+		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );
+	}
+
+	public function testDoSidebarBeforeOutput_nonView() {
+		$sidebar = $this->callDoSidebarBeforeOutput( true, null, 'Q42', 'history' );
+
+		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );
 	}
 
 	public function testDoSidebarBeforeOutput_empty() {
