@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4ea06b5a_43a8381d",
+        "filename": "repo/includes/View/ClaimsView.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-03T17:50:52Z",
+      "side": 0,
+      "message": "but we were also using Linker here! so, hitting onLinkBegin which loaded the full entity before (from the revision / external store / memcached caching of revisions in core -- dyk that exists and is used in production?) and still is at the moment (from caching entity revision lookup) or potentially somewaht equally evil alternative of successive terms table lookups.\n\ni would have thought that not doing that now would be better and still think so, though wonder where the performance hit is coming from.  I was comparing this patch to cachegrind snapshot that i saved yesterday. Still could be some other change in master or core that is the reason, so i am making a new snapshot from master today.\n\ni still think this patch should proceed, though but somewhat surprised not to see expected improvement.",
+      "revId": "2e08a00996eb8fee21811f52c74d0a0a9df62fdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_83b64084",
         "filename": "repo/includes/View/SnakHtmlGenerator.php",
         "patchSetId": 16
