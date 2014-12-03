@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_082faf9d",
+        "filename": "lib/includes/formatters/EntityIdFormatterFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T17:10:02Z",
+      "side": 1,
+      "message": "Newline missing... yea, I know. You are free to ignore such comments but I find it helpful to mark such spots if I see them.",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_0806cf23",
+        "filename": "lib/includes/formatters/EntityIdFormatterFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T17:10:02Z",
+      "side": 1,
+      "message": "Would be helpful if this descriptions mentions the word \"MIME\" (see the CONTENT_FORMAT_... constants in core\u0027s Defines.php) or an example (e.g. \"text/html\").",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_a3fc9c09",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatterFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T17:10:02Z",
+      "side": 1,
+      "message": "Using something from a Snak... class is really odd. I suggest to use \u0027text/html\u0027 as a string constant.",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_c33768aa",
+        "filename": "repo/includes/View/ClaimsView.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T17:10:02Z",
+      "side": 1,
+      "message": "This seems incomplete. This var is not used. The const is wikibase-statements below.",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_633e9489",
+        "filename": "repo/includes/View/EntityViewFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T17:10:02Z",
+      "side": 1,
+      "message": "Again, why are these constants in a \"Snak...\" class?",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
