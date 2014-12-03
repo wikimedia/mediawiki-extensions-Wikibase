@@ -16,6 +16,24 @@
       "revId": "9140e2e1a81ca331d6e54ab3cde3b97341e6b3cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_dd8f47d0",
+        "filename": "lib/includes/formatters/FormatterLabelLookupFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-03T14:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_daa66d50",
+      "revId": "9140e2e1a81ca331d6e54ab3cde3b97341e6b3cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
