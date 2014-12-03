@@ -2,11 +2,19 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\ChangesTable;
+use Wikibase\Client\Store\EntityIdLookup;
 use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\Client\Usage\SubscriptionManager;
+use Wikibase\Client\Usage\UsageLookup;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\ClientStore;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\PropertyInfoStore;
+use Wikibase\PropertyLabelResolver;
+use Wikibase\TermIndex;
 
 /**
  * (Incomplete) ClientStore mock
@@ -18,45 +26,115 @@ use Wikibase\PropertyInfoStore;
  */
 class MockClientStore implements ClientStore {
 
+	/**
+	 * @var MockRepository|null
+	 */
+	private static $mockRepository = null;
+
+	/**
+	 * @var MockPropertyInfoStore|null
+	 */
+	private static $mockPropertyInfoStore = null;
+
+	/**
+	 * @see ClientStore::getUsageLookup
+	 *
+	 * @return UsageLookup
+	 */
 	public function getUsageLookup() {
 		return new NullUsageTracker();
 	}
 
+	/**
+	 * @see ClientStore::getUsageTracker
+	 *
+	 * @return UsageTracker
+	 */
 	public function getUsageTracker() {
 		return new NullUsageTracker();
 	}
 
+	/**
+	 * @see ClientStore::getSubscriptionManager
+	 *
+	 * @return SubscriptionManager
+	 */
 	public function getSubscriptionManager() {
 		return new SubscriptionManager();
 	}
-	public function getPropertyLabelResolver() {}
-	public function getTermIndex() {}
-	public function getEntityIdLookup() {}
-	public function newChangesTable() {}
-	public function clear() {}
-	public function rebuild() {}
 
-	private function getMock() {
-		static $mockRepo = false;
-		if ( !$mockRepo ) {
-			$mockRepo = new MockRepository();
-		}
-
-		return $mockRepo;
+	/**
+	 * @see ClientStore::getPropertyLabelResolver
+	 *
+	 * @return PropertyLabelResolver
+	 */
+	public function getPropertyLabelResolver() {
+		// FIXME: Incomplete
 	}
 
-	/*
+	/**
+	 * @see ClientStore::getTermIndex
+	 *
+	 * @return TermIndex
+	 */
+	public function getTermIndex() {
+		// FIXME: Incomplete
+	}
+
+	/**
+	 * @see ClientStore::getEntityIdLookup
+	 *
+	 * @return EntityIdLookup
+	 */
+	public function getEntityIdLookup() {
+		// FIXME: Incomplete
+	}
+
+	/**
+	 * @see ClientStore::newChangesTable
+	 *
+	 * @return ChangesTable
+	 */
+	public function newChangesTable() {
+		// FIXME: Incomplete
+	}
+
+	/**
+	 * @see ClientStore::clear
+	 */
+	public function clear() {
+	}
+
+	/**
+	 * @see ClientStore::rebuild
+	 */
+	public function rebuild() {
+	}
+
+	private function getMockRepository() {
+		if ( self::$mockRepository === null ) {
+			self::$mockRepository = new MockRepository();
+		}
+
+		return self::$mockRepository;
+	}
+
+	/**
+	 * @see ClientStore::getEntityLookup
+	 *
 	 * @return EntityLookup
 	 */
 	public function getEntityLookup() {
-		return $this->getMock();
+		return $this->getMockRepository();
 	}
 
-	/*
+	/**
+	 * @see ClientStore::getEntityRevisionLookup
+	 *
 	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup() {
-		return $this->getMock();
+		return $this->getMockRepository();
 	}
 
 	/**
@@ -65,18 +143,20 @@ class MockClientStore implements ClientStore {
 	 * @return SiteLinkLookup
 	 */
 	public function getSiteLinkLookup() {
-		return $this->getMock();
+		return $this->getMockRepository();
 	}
 
 	/**
+	 * @see ClientStore::getPropertyInfoStore
+	 *
 	 * @return PropertyInfoStore
 	 */
 	public function getPropertyInfoStore() {
-		static $mockPropertyInfoStore = false;
-		if ( !$mockPropertyInfoStore ) {
-			$mockPropertyInfoStore = new MockPropertyInfoStore();
+		if ( self::$mockPropertyInfoStore === null ) {
+			self::$mockPropertyInfoStore = new MockPropertyInfoStore();
 		}
-		return $mockPropertyInfoStore;
+
+		return self::$mockPropertyInfoStore;
 	}
 
 }
