@@ -530,7 +530,7 @@ final class WikibaseClient {
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkTable(),
 				$this->getStore()->getEntityLookup(),
-				$this->getSiteStore()->getSites(),
+				$this->getSiteStore(),
 				$this->getLangLinkSiteGroup()
 			);
 		}

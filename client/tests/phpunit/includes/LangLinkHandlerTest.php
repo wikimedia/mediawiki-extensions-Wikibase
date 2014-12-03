@@ -88,7 +88,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			new NamespaceChecker( array( NS_TALK ), array() ),
 			$this->mockRepo,
 			$this->mockRepo,
-			$siteStore->getSites(),
+			$siteStore,
 			'wikipedia'
 		);
 	}
