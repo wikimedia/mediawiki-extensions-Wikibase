@@ -4,7 +4,6 @@ namespace Wikibase;
 
 use BagOStuff;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -132,13 +131,13 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 		$termTemplate = new Term( array(
 			'termType' => 'label',
 			'termLanguage' => $this->languageCode,
-			'entityType' => Property::ENTITY_TYPE
+			'entityType' => 'property',
 		) );
 
 		$terms = $this->termIndex->getMatchingTerms(
 			array( $termTemplate ),
 			'label',
-			Property::ENTITY_TYPE,
+			'property',
 			array(
 				'caseSensitive' => true,
 				'prefixSearch' => false,
