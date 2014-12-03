@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
+use Action;
 use OutputPage;
 use ParserOutput;
 use Skin;
@@ -210,7 +211,8 @@ class SidebarHookHandlers {
 		$outputPage = $skin->getContext()->getOutput();
 		$title = $outputPage->getTitle();
 
-		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ||
+			Action::getActionName( $skin->getContext() ) !== 'view' ) {
 			return true;
 		}
 
