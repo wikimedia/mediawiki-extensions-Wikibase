@@ -170,14 +170,9 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.aliasesview',
-				'jquery.wikibase.claimgrouplistview',
-				'jquery.wikibase.claimlistview',
 				'jquery.wikibase.descriptionview',
 				'jquery.wikibase.fingerprintgroupview',
 				'jquery.wikibase.labelview',
-				'jquery.wikibase.toolbarcontroller',
-				'jquery.wikibase.sitelinkgrouplistview',
-				'jquery.wikibase.statementview',
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.datamodel.Term',
 				'wikibase.getLanguageNameByCode',
@@ -243,6 +238,18 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.wikibase.itemview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase.itemview.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.claimgrouplistview',
+				'jquery.wikibase.entityview',
+				'jquery.wikibase.sitelinkgrouplistview',
+				'wikibase.sites',
+			),
+		),
+
 		'jquery.wikibase.labelview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase.labelview.js'
@@ -287,6 +294,16 @@ return call_user_func( function() {
 				'jquery.ui.suggester',
 				'util.highlightSubstring',
 				'wikibase.sites',
+			),
+		),
+
+		'jquery.wikibase.propertyview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase.propertyview.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.claimgrouplistview',
+				'jquery.wikibase.entityview',
 			),
 		),
 
