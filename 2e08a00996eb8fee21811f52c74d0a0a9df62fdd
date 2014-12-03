@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_6340d45b",
+        "filename": "repo/includes/View/ClaimsView.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T17:58:21Z",
+      "side": 0,
+      "message": "Ah, you expected a performance improvement because we were using Linker, which would trigger the LinkBegin hook, which would load the full Entity to look up the label. \n\nWe were hitting the hook, but the hook handler was bailing out on the ( $html !\u003d\u003d null \u0026\u0026 $target-\u003egetFullText() !\u003d\u003d $html ). Basically, the LinkBegin hook handler would only fetch an entity if there was no custom html. Since we construct custom html here, the handler would abort, causign no performance hit.",
+      "parentUuid": "4ea06b5a_43a8381d",
+      "revId": "2e08a00996eb8fee21811f52c74d0a0a9df62fdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_83b64084",
         "filename": "repo/includes/View/SnakHtmlGenerator.php",
         "patchSetId": 16
