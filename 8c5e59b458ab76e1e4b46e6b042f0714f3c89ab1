@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_9d8d3f39",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:15:09Z",
+      "side": 1,
+      "message": "We have 11 occurrences of global $wgLang in our code base but only 1 StubObject::unstub (in WikibaseRepo for the same variable). Strange.",
+      "parentUuid": "4ea06b5a_129b636b",
+      "revId": "8c5e59b458ab76e1e4b46e6b042f0714f3c89ab1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_2f1ddc78",
         "filename": "lib/includes/formatters/FormatterLabelLookupFactory.php",
         "patchSetId": 6
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "i would pass the options like Idf6b3eaa",
       "parentUuid": "4ea06b5a_f2fa7772",
+      "revId": "8c5e59b458ab76e1e4b46e6b042f0714f3c89ab1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_1d9a8f75",
+        "filename": "lib/includes/formatters/FormatterLabelLookupFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:15:09Z",
+      "side": 1,
+      "message": "I don\u0027t have a problem with this elseif chain. Splitting this into methods doesn\u0027t necessarily makes the code better readable. Also, possible refactoring is more a question of style and personal preference and not a reason to block this patch.",
+      "parentUuid": "4ea06b5a_ad3d74ba",
       "revId": "8c5e59b458ab76e1e4b46e6b042f0714f3c89ab1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
