@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_7dbcf3d5",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T13:11:44Z",
+      "side": 1,
+      "message": "the values in the array are not all arrays, so array[] is wrong.",
+      "revId": "962f47305af5f03cc353a919cf93d3f836070564",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_1dd36f31",
+        "filename": "lib/includes/ChangeNotificationJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T13:11:44Z",
+      "side": 1,
+      "message": "The note about when and where this is initialized should stay.",
+      "revId": "962f47305af5f03cc353a919cf93d3f836070564",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
