@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_4377d8cf",
+        "filename": "lib/includes/formatters/EntityIdFormatterFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-03T17:52:42Z",
+      "side": 1,
+      "message": "don\u0027t know that we need to follow every psr-2 guideline, but this one we do follow:\n\n\"There MUST be one blank line after the namespace declaration, and there MUST be one blank line after the block of use declarations\"\n\nhttp://www.php-fig.org/psr/psr-2/",
+      "parentUuid": "4ea06b5a_838ba0e7",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_0806cf23",
         "filename": "lib/includes/formatters/EntityIdFormatterFactory.php",
         "patchSetId": 14
