@@ -125,6 +125,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.inputautoexpand',
 				'jquery.ui.TemplatedWidget',
+				'jquery.util.getDirectionality',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.datamodel.Term',
@@ -258,6 +259,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
+				'jquery.util.getDirectionality',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.datamodel.Term',
