@@ -108,6 +108,8 @@
 	/**
 	 * @param {wikibase.datamodel.Entity} entity
 	 * @param {jQuery} $entityview
+	 *
+	 * @throws {Error} if no widget to render the entity exists.
 	 */
 	function createEntityDom( entity, $entityview ) {
 		var repoConfig = mw.config.get( 'wbRepo' );
@@ -121,8 +123,13 @@
 				entity
 			);
 
-		$entityview
-		.entityview( {
+		var view = entity.getType() + 'view';
+
+		if( !$.wikibase[view] ) {
+			throw new Error( 'View for entity type ' + entity.getType() + ' does not exist' );
+		}
+
+		$entityview[entity.getType() + 'view']( {
 			value: entity,
 			entityChangersFactory: entityChangersFactory,
 			entityStore: entityStore,
