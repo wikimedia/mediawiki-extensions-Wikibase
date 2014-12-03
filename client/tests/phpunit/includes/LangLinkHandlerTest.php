@@ -31,12 +31,12 @@ use Wikibase\Test\MockSiteStore;
 class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 	/**
-	 * @var MockRepository $mockRepo
+	 * @var MockRepository
 	 */
 	private $mockRepo;
 
 	/**
-	 * @var LangLinkHandler $langLinkHandler
+	 * @var LangLinkHandler
 	 */
 	private $langLinkHandler;
 

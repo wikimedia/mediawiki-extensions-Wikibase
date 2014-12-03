@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Job;
+use Title;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\WikibaseClient;
 
@@ -13,10 +15,10 @@ use Wikibase\Client\WikibaseClient;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ChangeNotificationJob extends \Job {
+class ChangeNotificationJob extends Job {
 
 	/**
-	 * @var Change[] $changes: initialized lazily by getChanges().
+	 * @var Change[]|null Initialized lazily by getChanges.
 	 */
 	private $changes = null;
 
@@ -28,11 +30,11 @@ class ChangeNotificationJob extends \Job {
 	/**
 	 * Creates a ChangeNotificationJob representing the given changes.
 	 *
-	 * @param array       $changes The list of changes to be processed
+	 * @param Change[] $changes The list of changes to be processed
 	 * @param string      $repo The name of the repository the changes come from (default: "").
 	 * @param array|bool  $params extra job parameters, see Job::__construct (default: false).
 	 *
-	 * @return \Wikibase\ChangeNotificationJob: the job
+	 * @return ChangeNotificationJob
 	 */
 	public static function newFromChanges( array $changes, $repo = '', $params = false ) {
 		static $dummyTitle = null;
@@ -41,7 +43,7 @@ class ChangeNotificationJob extends \Job {
 		// Note: we don't really care about the title and will use a dummy
 		if ( $dummyTitle === null ) {
 			// The Job class wants a Title object for some reason. Supply a dummy.
-			$dummyTitle = \Title::newFromText( "ChangeNotificationJob", NS_SPECIAL );
+			$dummyTitle = Title::newFromText( "ChangeNotificationJob", NS_SPECIAL );
 		}
 
 		// get the list of change IDs
@@ -76,12 +78,11 @@ class ChangeNotificationJob extends \Job {
 	 *
 	 * @see      Job::factory.
 	 *
-	 * @param \Title $title ignored
-	 * @param  $params array|bool
-	 * @param  $id     int
+	 * @param Title $title
+	 * @param array|bool $params
 	 */
-	public function __construct( \Title $title, $params = false, $id = 0 ) {
-		parent::__construct( 'ChangeNotification', $title, $params, $id );
+	public function __construct( Title $title, $params = false ) {
+		parent::__construct( 'ChangeNotification', $title, $params );
 	}
 
 	/**
@@ -123,9 +124,7 @@ class ChangeNotificationJob extends \Job {
 	}
 
 	/**
-	 * Run the job
-	 *
-	 * @return boolean success
+	 * @return bool success
 	 */
 	public function run() {
 		$changes = $this->getChanges();
@@ -158,4 +157,5 @@ class ChangeNotificationJob extends \Job {
 
 		return $this->changeHandler;
 	}
+
 }

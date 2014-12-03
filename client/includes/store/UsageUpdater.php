@@ -18,7 +18,7 @@ use Wikibase\DataModel\Entity\EntityId;
 class UsageUpdater {
 
 	/**
-	 * @var string $clientId
+	 * @var string
 	 */
 	private $clientId;
 

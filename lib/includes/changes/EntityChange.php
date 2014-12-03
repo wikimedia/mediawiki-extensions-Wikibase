@@ -31,14 +31,14 @@ class EntityChange extends DiffChange {
 	const RESTORE = 'restore';
 
 	/**
-	 * @var EntityId $entityId
+	 * @var EntityId|null
 	 */
 	private $entityId = null;
 
 	/**
-	 * @var string $comment
+	 * @var string|null
 	 */
-	protected $comment;
+	protected $comment = null;
 
 	/**
 	 * @see ORMRow::setField
