@@ -226,7 +226,7 @@ class WikibaseLuaBindings {
 	 *
 	 * @param string $pageTitle
 	 *
-	 * @return string|null $id
+	 * @return string|null
 	 */
 	public function getEntityId( $pageTitle ) {
 		$id = $this->siteLinkTable->getItemIdForLink( $this->siteId, $pageTitle );

@@ -55,7 +55,7 @@ class ClaimSummaryBuilder {
 	 * @param Claims $existingClaims
 	 * @param Claim $newClaim
 	 *
-	 * @return Summary $summary
+	 * @return Summary
 	 */
 	public function buildClaimSummary( Claims $existingClaims, Claim $newClaim ) {
 		$summary = new Summary( $this->apiModuleName );
@@ -109,7 +109,7 @@ class ClaimSummaryBuilder {
 	 *
 	 * @return array[] Associative array that contains property ID => array of main Snaks
 	 */
-	protected function buildSummaryArgs( Claims $claims, array $guids ) {
+	private function buildSummaryArgs( Claims $claims, array $guids ) {
 		$pairs = array();
 
 		foreach( $guids as $guid ) {
