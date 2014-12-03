@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_838ba0e7",
+        "filename": "lib/includes/formatters/EntityIdFormatterFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T17:35:12Z",
+      "side": 1,
+      "message": "Simple rule: Always an empty line after \u003c?php. Everything else looks ugly.",
+      "parentUuid": "4ea06b5a_23ce4c60",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_0806cf23",
         "filename": "lib/includes/formatters/EntityIdFormatterFactory.php",
         "patchSetId": 14
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Then we would GUARANTEE that this will ALWAYS be mime types.\nCurrently they are. I see no reason to guarantee this. \nWhat would that guarantee be useful for?\nAll code should use the constants anyway.",
       "parentUuid": "4ea06b5a_0806cf23",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_c381a8c9",
+        "filename": "lib/includes/formatters/EntityIdFormatterFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T17:35:12Z",
+      "side": 1,
+      "message": "Huh? I did not said that. Not at all. Read the description in Defines.php. It doesn\u0027t talk about a \"guarantee\".",
+      "parentUuid": "4ea06b5a_03d31006",
       "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -136,6 +172,24 @@
       "side": 1,
       "message": "I didn\u0027t put this there, it comes from a rebase. I think adreian added this this... maybe this should not be here. will check.",
       "parentUuid": "4ea06b5a_c33768aa",
+      "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_0320f0f0",
+        "filename": "repo/includes/View/ClaimsView.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T17:35:12Z",
+      "side": 1,
+      "message": "In this case your rebase obviously messed something up. Seems to be fixed in PS15.",
+      "parentUuid": "4ea06b5a_433fd820",
       "revId": "2cc8bb63fd1c8b29c8e0cf3104c731b60320849b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
