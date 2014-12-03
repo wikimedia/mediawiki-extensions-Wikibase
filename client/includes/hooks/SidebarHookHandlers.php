@@ -7,6 +7,7 @@ use ParserOutput;
 use Skin;
 use StubUserLang;
 use Title;
+use Action;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
@@ -210,7 +211,8 @@ class SidebarHookHandlers {
 		$outputPage = $skin->getContext()->getOutput();
 		$title = $outputPage->getTitle();
 
-		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ||
+			Action::getActionName( $skin ) !== 'view' ) {
 			return true;
 		}
 

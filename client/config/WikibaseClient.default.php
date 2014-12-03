@@ -28,7 +28,6 @@ return call_user_func( function() {
 		// @todo would be great to just get this from the sites stuff
 		// but we will need to make sure the caching works good enough
 		'siteLocalID' => $wgLanguageCode,
-		'languageLinkSiteGroup' => null,
 		'injectRecentChanges' => true,
 		'showExternalRecentChanges' => true,
 		// default for repo items in main namespace
@@ -244,6 +243,10 @@ return call_user_func( function() {
 	$defaults['otherProjectsLinks'] = function ( SettingsArray $settings ) {
 		$otherProjectsSitesProvider = WikibaseClient::getDefaultInstance()->getOtherProjectsSitesProvider();
 		return $otherProjectsSitesProvider->getOtherProjectsSiteIds( $settings->getSetting( 'siteLinkGroups' ) );
+	};
+
+	$defaults['languageLinkSiteGroup'] = function ( SettingsArray $settings ) {
+		return WikibaseClient::getDefaultInstance()->getSiteGroup();
 	};
 
 	// Prefix to use for cache keys that should be shared among
