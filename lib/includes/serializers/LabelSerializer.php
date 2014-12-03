@@ -89,10 +89,10 @@ class LabelSerializer extends SerializerObject implements Unserializer {
 	 *
 	 * @since 0.5
 	 *
-	 * @param array $data
+	 * @param array[] $data
 	 *
 	 * @throws InvalidArgumentException
-	 * @return array $labels
+	 * @return string[]
 	 */
 	public function newFromSerialization( array $data ) {
 		$labels = array();
@@ -114,4 +114,5 @@ class LabelSerializer extends SerializerObject implements Unserializer {
 
 		return $labels;
 	}
+
 }
