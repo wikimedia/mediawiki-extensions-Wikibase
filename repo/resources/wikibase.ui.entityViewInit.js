@@ -131,6 +131,7 @@
 
 		$entityview[entity.getType() + 'view']( {
 			value: entity,
+			languages: getUserLanguages(),
 			entityChangersFactory: entityChangersFactory,
 			entityStore: entityStore,
 			valueViewBuilder: new wb.ValueViewBuilder(
@@ -140,8 +141,7 @@
 				mw.config.get( 'wgUserLanguage' ),
 				mw
 			),
-			dataTypeStore: dataTypeStore,
-			languages: getUserLanguages()
+			dataTypeStore: dataTypeStore
 		} )
 		.on( 'labelviewchange labelviewafterstopediting', function( event ) {
 			var $labelview = $( event.target ),
@@ -174,6 +174,8 @@
 			languages = $.merge( [], userLanguages );
 			languages.splice( $.inArray( mw.config.get( 'wgUserLanguage' ), userLanguages ), 1 );
 		}
+
+		languages.unshift( mw.config.get( 'wgUserLanguage' ) );
 
 		return languages;
 	}
