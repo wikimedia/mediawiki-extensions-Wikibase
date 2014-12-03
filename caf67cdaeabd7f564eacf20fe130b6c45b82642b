@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_f18fc7cf",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-03T23:49:53Z",
+      "side": 1,
+      "message": "ok i guess for backport but i would rename the variable to $siteStore so it\u0027s totally clear",
+      "revId": "caf67cdaeabd7f564eacf20fe130b6c45b82642b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
