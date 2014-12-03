@@ -40,6 +40,7 @@ $specialPageAliases['ar'] = array(
 	'NewItem' => array( 'إنشاء_مدخلة' ),
 	'NewProperty' => array( 'خاصية_جديدة' ),
 	'ItemByTitle' => array( 'المدخلات_بالعنوان' ),
+	'GoToLinkedPage' => array( 'الذهاب_للصفحة_الموصولة' ),
 	'ItemDisambiguation' => array( 'المدخلات_بالعلامة' ),
 	'ListDatatypes' => array( 'عرض_أنواع_البيانات' ),
 	'SetLabel' => array( 'ضبط_العلامة' ),
@@ -127,12 +128,12 @@ $specialPageAliases['de'] = array(
 
 /** Zazaki (Zazaki) */
 $specialPageAliases['diq'] = array(
-	'NewItem' => array( 'LeteVırazé' ),
-	'NewProperty' => array( 'XısusiyetéNewey' ),
-	'ItemByTitle' => array( 'SernuşteyéLeti' ),
-	'ItemDisambiguation' => array( 'EtiketéLeti' ),
-	'ListDatatypes' => array( 'ListeyaBabetandeMelumati' ),
-	'SetLabel' => array( 'SazéEtiketan' ),
+	'NewItem' => array( 'LeteVırazên' ),
+	'NewProperty' => array( 'XısusiyetêNewey' ),
+	'ItemByTitle' => array( 'SernuşteyêLetey' ),
+	'ItemDisambiguation' => array( 'EtiketêLetey' ),
+	'ListDatatypes' => array( 'ListaBabetanêMelumati' ),
+	'SetLabel' => array( 'SazêEtiketan' ),
 );
 
 /** Esperanto (Esperanto) */
