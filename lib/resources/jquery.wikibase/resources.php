@@ -27,6 +27,7 @@ return call_user_func( function() {
 				'jquery.inputautoexpand',
 				'jquery.ui.tagadata',
 				'jquery.ui.EditableTemplatedWidget',
+				'jquery.util.getDirectionality',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.datamodel.MultiTerm',
