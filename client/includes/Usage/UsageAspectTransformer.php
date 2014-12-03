@@ -32,7 +32,7 @@ class UsageAspectTransformer {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param array[] $aspects
+	 * @param string[] $aspects
 	 */
 	public function setRelevantAspects( EntityId $entityId, array $aspects ) {
 		$key = $entityId->getSerialization();
@@ -61,7 +61,7 @@ class UsageAspectTransformer {
 	 * @param EntityId $entityId
 	 * @param string[] $aspects
 	 *
-	 * @return EntityUsage[] $usages;
+	 * @return EntityUsage[]
 	 */
 	public function getFilteredUsages( EntityId $entityId, array $aspects ) {
 		$relevant = $this->getRelevantAspects( $entityId );
@@ -96,7 +96,7 @@ class UsageAspectTransformer {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param array[] $aspects
+	 * @param string[] $aspects
 	 *
 	 * @return EntityUsage[]
 	 */

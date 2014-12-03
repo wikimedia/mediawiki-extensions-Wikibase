@@ -18,11 +18,11 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageAspectTransformer;
 use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityChange;
+use Wikibase\ItemChange;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\NamespaceChecker;
 
@@ -45,6 +45,11 @@ class AffectedPagesFinder {
 	private $namespaceChecker;
 
 	/**
+	 * @var TitleFactory
+	 */
+	private $titleFactory;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -55,14 +60,9 @@ class AffectedPagesFinder {
 	private $contentLanguageCode;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $checkPageExistence;
-
-	/**
-	 * @var TitleFactory
-	 */
-	private $titleFactory;
 
 	/**
 	 * @param UsageLookup $usageLookup
@@ -70,7 +70,7 @@ class AffectedPagesFinder {
 	 * @param TitleFactory $titleFactory
 	 * @param string $siteId
 	 * @param string $contentLanguageCode
-	 * @param boolean $checkPageExistence
+	 * @param bool $checkPageExistence
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -96,10 +96,10 @@ class AffectedPagesFinder {
 
 		$this->usageLookup = $usageLookup;
 		$this->namespaceChecker = $namespaceChecker;
+		$this->titleFactory = $titleFactory;
 		$this->siteId = $siteId;
 		$this->contentLanguageCode = $contentLanguageCode;
 		$this->checkPageExistence = $checkPageExistence;
-		$this->titleFactory = $titleFactory;
 	}
 
 	/**
@@ -110,14 +110,12 @@ class AffectedPagesFinder {
 	 * @return Iterator<PageEntityUsages>
 	 */
 	public function getAffectedUsagesByPage( Change $change ) {
-		if ( ! ( $change instanceof EntityChange ) ) {
-			return array();
+		if ( $change instanceof EntityChange ) {
+			$usages = $this->getAffectedPages( $change );
+			return $this->filterUpdates( $usages );
 		}
 
-		$pageUpdates = $this->getAffectedPages( $change );
-		$pageUpdates = $this->filterUpdates( $pageUpdates );
-
-		return $pageUpdates;
+		return array();
 	}
 
 	/**
@@ -128,25 +126,26 @@ class AffectedPagesFinder {
 	public function getChangedAspects( EntityChange $change ) {
 		$aspects = array();
 
-		/** @var EntityDiff $diff */
 		$diff = $change->getDiff();
 		$remainingDiffOps = count( $diff ); // this is a "deep" count!
 
 		if ( $diff instanceof ItemDiff && !$diff->getSiteLinkDiff()->isEmpty() ) {
-			$sitelinkDiff = $diff->getSiteLinkDiff();
+			$siteLinkDiff = $diff->getSiteLinkDiff();
 
 			$aspects[] = EntityUsage::SITELINK_USAGE;
-			$remainingDiffOps-= count( $sitelinkDiff );
+			$remainingDiffOps -= count( $siteLinkDiff );
 
-			if ( isset( $sitelinkDiff[$this->siteId] ) && !$this->isBadgesOnlyChange( $sitelinkDiff[$this->siteId] ) ) {
+			if ( isset( $siteLinkDiff[$this->siteId] )
+				&& !$this->isBadgesOnlyChange( $siteLinkDiff[$this->siteId] )
+			) {
 				$aspects[] = EntityUsage::TITLE_USAGE;
 			}
 		}
 
-		if ( !$diff->getLabelsDiff()->isEmpty() ) {
-			$labelDiff = $diff->getLabelsDiff();
+		if ( $diff instanceof EntityDiff && !$diff->getLabelsDiff()->isEmpty() ) {
+			$labelsDiff = $diff->getLabelsDiff();
 
-			if ( isset( $labelDiff[$this->contentLanguageCode] ) ) {
+			if ( isset( $labelsDiff[$this->contentLanguageCode] ) ) {
 				$aspects[] = EntityUsage::LABEL_USAGE;
 				$remainingDiffOps--;
 			}
@@ -156,7 +155,6 @@ class AffectedPagesFinder {
 			$aspects[] = EntityUsage::OTHER_USAGE;
 		}
 
-		sort( $aspects );
 		return $aspects;
 	}
 
@@ -168,23 +166,26 @@ class AffectedPagesFinder {
 	 * @return Iterator<PageEntityUsages>
 	 */
 	private function getAffectedPages( EntityChange $change ) {
-		$itemId = $change->getEntityId();
+		$entityId = $change->getEntityId();
 		$changedAspects = $this->getChangedAspects( $change );
 
-		// @todo: more than one item at once!
-		$relevantAspects = array_merge( array( 'X' ), $changedAspects ); // X implies all!
-		$usages = $this->usageLookup->getPagesUsing( array( $itemId ), $relevantAspects );
+		$usages = $this->usageLookup->getPagesUsing(
+			// @todo: more than one entity at once!
+			array( $entityId ),
+			// Look up pages that are marked as either using one of the changed or all aspects
+			$changedAspects + array( EntityUsage::ALL_USAGE )
+		);
 
 		// @todo: use iterators throughout!
 		$usages = iterator_to_array( $usages, true );
 
-		$usages = $this->transformAllPageEntityUsages( $usages, $itemId, $changedAspects );
+		$usages = $this->transformAllPageEntityUsages( $usages, $entityId, $changedAspects );
 
 		if ( $change instanceof ItemChange && in_array( EntityUsage::TITLE_USAGE, $changedAspects ) ) {
 			$siteLinkDiff = $change->getSiteLinkDiff();
 			$namesFromDiff = $this->getPagesReferencedInDiff( $siteLinkDiff );
 			$titlesFromDiff = $this->getTitlesFromTexts( $namesFromDiff );
-			$usagesFromDiff = $this->makeVirtualUsages( $titlesFromDiff, $itemId, array( EntityUsage::SITELINK_USAGE ) );
+			$usagesFromDiff = $this->makeVirtualUsages( $titlesFromDiff, $entityId, array( EntityUsage::SITELINK_USAGE ) );
 
 			//FIXME: we can't really merge if $usages is an iterator, not an array.
 			//TODO: Inject $usagesFromDiff "on the fly" while streaming other usages.
@@ -199,11 +200,10 @@ class AffectedPagesFinder {
 	}
 
 	/**
-	 * @param PageEntityUsages[] $from PageEntityUsages
+	 * @param PageEntityUsages[] $from
 	 * @param PageEntityUsages[] &$into Array to merge into
 	 */
 	private function mergeUsagesInto( array $from, array &$into ) {
-		/** @var PageEntityUsages $pageEntityUsages */
 		foreach ( $from as $pageEntityUsages ) {
 			$key = $pageEntityUsages->getPageId();
 
@@ -219,7 +219,7 @@ class AffectedPagesFinder {
 	 * @param Diff $siteLinkDiff
 	 *
 	 * @throws UnexpectedValueException
-	 * @return array
+	 * @return string[]
 	 */
 	private function getPagesReferencedInDiff( Diff $siteLinkDiff ) {
 		$pagesToUpdate = array();
@@ -228,7 +228,7 @@ class AffectedPagesFinder {
 		// containing map diffs. For B/C, handle both cases.
 		$siteLinkDiffOp = $siteLinkDiff[$this->siteId];
 
-		if ( ( $siteLinkDiffOp instanceof Diff ) && ( array_key_exists( 'name', $siteLinkDiffOp ) ) ) {
+		if ( $siteLinkDiffOp instanceof Diff && array_key_exists( 'name', $siteLinkDiffOp ) ) {
 			$siteLinkDiffOp = $siteLinkDiffOp['name'];
 		}
 
@@ -251,11 +251,10 @@ class AffectedPagesFinder {
 	/**
 	 * @param DiffOp $siteLinkDiffOp
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isBadgesOnlyChange( DiffOp $siteLinkDiffOp ) {
-
-		return ( $siteLinkDiffOp instanceof Diff && !array_key_exists( 'name', $siteLinkDiffOp ) );
+		return $siteLinkDiffOp instanceof Diff && !array_key_exists( 'name', $siteLinkDiffOp );
 	}
 
 	/**
@@ -266,11 +265,12 @@ class AffectedPagesFinder {
 	 *
 	 * @return Iterator<PageEntityUsages>
 	 */
-	private function filterUpdates( $updates ) {
+	private function filterUpdates( $usages ) {
 		$titlesToUpdate = array();
 
-		foreach ( $updates as $pageUpdates ) {
-			$title = $this->titleFactory->newFromID( $pageUpdates->getPageId() );
+		/** @var PageEntityUsages $pageEntityUsages */
+		foreach ( $usages as $pageEntityUsages ) {
+			$title = $this->titleFactory->newFromID( $pageEntityUsages->getPageId() );
 
 			if ( $this->checkPageExistence && !$title->exists() ) {
 				continue;
@@ -283,7 +283,7 @@ class AffectedPagesFinder {
 			}
 
 			$key = $title->getArticleID();
-			$titlesToUpdate[$key] = $pageUpdates;
+			$titlesToUpdate[$key] = $pageEntityUsages;
 		}
 
 		return new ArrayIterator( $titlesToUpdate );
@@ -294,7 +294,7 @@ class AffectedPagesFinder {
 	 *
 	 * @return Title[]
 	 */
-	private function getTitlesFromTexts( $names ) {
+	private function getTitlesFromTexts( array $names ) {
 		$titles = array();
 
 		foreach ( $names as $name ) {
@@ -323,21 +323,29 @@ class AffectedPagesFinder {
 
 		$usagesPerPage = array();
 		foreach ( $titles as $title ) {
-			$pid = $title->getArticleID();
-			$usagesPerPage[$pid] = new PageEntityUsages( $pid, $usagesForItem );
+			$pageId = $title->getArticleID();
+			$usagesPerPage[$pageId] = new PageEntityUsages( $pageId, $usagesForItem );
 		}
 
 		return $usagesPerPage;
 	}
 
+	/**
+	 * @param PageEntityUsages[] $usages
+	 * @param EntityId $entityId
+	 * @param string[] $changedAspects
+	 *
+	 * @return PageEntityUsages[]
+	 */
 	private function transformAllPageEntityUsages( array $usages, EntityId $entityId, array $changedAspects ) {
 		$aspectTransformer = new UsageAspectTransformer();
 		$aspectTransformer->setRelevantAspects( $entityId, $changedAspects );
 
 		$transformed = array();
 
-		foreach( $usages as $key => $usagesOnPage ) {
+		foreach ( $usages as $key => $usagesOnPage ) {
 			$transformedUsagesOnPage = $aspectTransformer->transformPageEntityUsages( $usagesOnPage );
+
 			if ( !$transformedUsagesOnPage->isEmpty() ) {
 				$transformed[$key] = $transformedUsagesOnPage;
 			}
