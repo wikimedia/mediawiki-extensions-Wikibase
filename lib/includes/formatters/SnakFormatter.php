@@ -25,7 +25,6 @@ interface SnakFormatter {
 	const FORMAT_HTML = 'text/html';
 	const FORMAT_HTML_WIDGET = 'text/html; disposition=widget';
 	const FORMAT_HTML_DIFF = 'text/html; disposition=diff';
-	const FORMAT_JSON = 'application/json';
 
 	/**
 	 * Formats a snak.
