@@ -51,7 +51,7 @@ class ChangeHandler {
 	const HISTORY_ENTRY_ACTION = 16;
 
 	/**
-	 * @var PageUpdater $updater
+	 * @var PageUpdater
 	 */
 	private $updater;
 
@@ -263,7 +263,7 @@ class ChangeHandler {
 	 *
 	 * @param EntityChange $change The Change that caused the update
 	 *
-	 * @return array|boolean an array of RC attributes,
+	 * @return array[]|bool an array of RC attributes,
 	 *         or false if the change does not provide edit meta data
 	 */
 	private function getRCAttributes( EntityChange $change ) {

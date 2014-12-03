@@ -16,7 +16,7 @@ use Wikibase\Client\WikibaseClient;
 class ChangeNotificationJob extends \Job {
 
 	/**
-	 * @var Change[] $changes: initialized lazily by getChanges().
+	 * @var Change[]|null
 	 */
 	private $changes = null;
 
@@ -123,9 +123,7 @@ class ChangeNotificationJob extends \Job {
 	}
 
 	/**
-	 * Run the job
-	 *
-	 * @return boolean success
+	 * @return bool success
 	 */
 	public function run() {
 		$changes = $this->getChanges();

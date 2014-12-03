@@ -67,7 +67,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @see EditEntity::attemptSave
 	 * @see WikiPage::doEditContent
 	 *
-	 * @var int $flags
+	 * @var int
 	 */
 	protected $flags;
 

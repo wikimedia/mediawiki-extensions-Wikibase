@@ -22,28 +22,28 @@ class EntityPerPageBuilder {
 	/**
 	 * @since 0.4
 	 *
-	 * @var EntityPerPage $entityPerPageTable
+	 * @var EntityPerPage
 	 */
 	protected $entityPerPageTable;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @var EntityContentFactory $entityContentFactory
+	 * @var EntityContentFactory
 	 */
 	protected $entityContentFactory;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @var EntityIdParser $entityIdParser
+	 * @var EntityIdParser
 	 */
 	protected $entityIdParser;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @var MessageReporter $reporter
+	 * @var MessageReporter
 	 */
 	protected $reporter;
 
@@ -57,7 +57,7 @@ class EntityPerPageBuilder {
 	/**
 	 * Rebuild the entire table
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $rebuildAll = false;
 
@@ -102,7 +102,7 @@ class EntityPerPageBuilder {
 	/**
 	 * @since 0.4
 	 *
-	 * @param boolean $rebuildAll
+	 * @param bool $rebuildAll
 	 */
 	public function setRebuildAll( $rebuildAll ) {
 		$this->rebuildAll = $rebuildAll;

@@ -25,7 +25,7 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkSerializer extends SerializerObject {
 
 	/**
-	 * @var SiteStore $siteStore
+	 * @var SiteStore
 	 */
 	private $siteStore;
 
