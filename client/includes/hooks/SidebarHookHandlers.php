@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
+use Action;
 use OutputPage;
 use ParserOutput;
 use Skin;
@@ -211,7 +212,8 @@ class SidebarHookHandlers {
 		$outputPage = $skin->getContext()->getOutput();
 		$title = $outputPage->getTitle();
 
-		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ||
+			!$outputPage->getProperty( 'wikibase_item' ) ) {
 			return true;
 		}
 
