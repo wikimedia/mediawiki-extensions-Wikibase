@@ -51,7 +51,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 	public static function provideGetters() {
 		return array(
-			array( 'getSiteLinkTable', 'Wikibase\Lib\Store\SiteLinkTable' ),
+			array( 'getSiteLinkLookup', 'Wikibase\Lib\Store\SiteLinkTable' ),
 			array( 'getEntityLookup', 'Wikibase\Lib\Store\EntityLookup' ),
 			array( 'getTermIndex', 'Wikibase\TermIndex' ),
 			array( 'getPropertyLabelResolver', 'Wikibase\PropertyLabelResolver' ),

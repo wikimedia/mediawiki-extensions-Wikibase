@@ -60,9 +60,11 @@ class MockClientStore implements ClientStore {
 	}
 
 	/**
+	 * @see ClientStore::getSiteLinkLookup
+	 *
 	 * @return SiteLinkLookup
 	 */
-	public function getSiteLinkTable() {
+	public function getSiteLinkLookup() {
 		return $this->getMock();
 	}
 
