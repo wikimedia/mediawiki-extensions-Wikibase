@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_c34d2877",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T16:12:38Z",
+      "side": 0,
+      "message": "It is now *always* a record with label and value field, and EntityInfo takes care of handling that.",
+      "parentUuid": "4ea06b5a_889f3f06",
+      "revId": "fb75b112a102c8e6da748682a995fb7a107b0741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_a868fbf2",
         "filename": "lib/includes/store/EntityInfoTermLookup.php",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-03T15:46:41Z",
       "side": 0,
       "message": "As above.",
+      "revId": "fb75b112a102c8e6da748682a995fb7a107b0741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_63545402",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T16:12:38Z",
+      "side": 0,
+      "message": "idem.",
+      "parentUuid": "4ea06b5a_a868fbf2",
       "revId": "fb75b112a102c8e6da748682a995fb7a107b0741",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

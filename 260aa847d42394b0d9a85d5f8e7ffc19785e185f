@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_c32688b5",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T16:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_e8528369",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_c8c78714",
         "filename": "lib/includes/store/EntityInfo.php",
         "patchSetId": 13
@@ -81,6 +99,24 @@
       "writtenOn": "2014-12-03T15:46:41Z",
       "side": 1,
       "message": "The labels, keyed by language.",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_a3233ca5",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T16:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_c8c78714",
       "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_03155040",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T16:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_a8c47b12",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_084ecfc4",
         "filename": "lib/includes/store/EntityInfo.php",
         "patchSetId": 13
@@ -115,6 +169,24 @@
       "writtenOn": "2014-12-03T15:46:41Z",
       "side": 1,
       "message": "The term value, or null if no such term value is known.",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_e319447f",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T16:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_084ecfc4",
       "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +227,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_433278f0",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T16:12:38Z",
+      "side": 1,
+      "message": "How would you word this? This really can\u0027t happen unless something is badly broken. Perhaps it should be a RuntimeException.",
+      "parentUuid": "4ea06b5a_28d86bf3",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_68e5139f",
         "filename": "lib/includes/store/EntityInfo.php",
         "patchSetId": 13
@@ -166,6 +256,24 @@
       "writtenOn": "2014-12-03T15:46:41Z",
       "side": 1,
       "message": "Strange wording.",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_e33064e7",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T16:12:38Z",
+      "side": 1,
+      "message": "Strange comment ;)",
+      "parentUuid": "4ea06b5a_68e5139f",
       "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +297,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_83572005",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T16:12:38Z",
+      "side": 1,
+      "message": "Because EntityInfo doesn\u0027t know whether the label doesn\u0027t *exist*, or whether we just never asked for labels to be included in the entity info.\n\nAlso, very simply: I tend to return null or an empty array when asked for something that isn\u0027t there. Katie likes OOB exceptions. I designed EntityInfo. She designed the LabelLookup interface.",
+      "parentUuid": "4ea06b5a_08a24f3b",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_a84f9b96",
         "filename": "lib/tests/phpunit/store/EntityInfoTest.php",
         "patchSetId": 13
@@ -206,6 +332,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_233e4cb6",
+        "filename": "lib/tests/phpunit/store/EntityInfoTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T16:12:38Z",
+      "side": 1,
+      "message": "Yes it does. The contract of asArray() is to return the array that was passed to the constructur. That is tested here.\n\nWe might check the actual structure, but EntityInfo is just a dumb wrapper. It doesn\u0027t generate the structure, and currently also does not validate it.",
+      "parentUuid": "4ea06b5a_a84f9b96",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_884c1fa1",
         "filename": "lib/tests/phpunit/store/EntityInfoTest.php",
         "patchSetId": 13
@@ -217,6 +361,24 @@
       "writtenOn": "2014-12-03T15:46:41Z",
       "side": 1,
       "message": "Please replace all ...NotNull... with $this-\u003eassertInternalType( \u0027array\u0027, ...",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_e347044f",
+        "filename": "lib/tests/phpunit/store/EntityInfoTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-03T16:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_884c1fa1",
       "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
