@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_c8dd4719",
+        "filename": "lib/includes/formatters/FormatterLabelLookupFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:15:57Z",
+      "side": 1,
+      "message": "\"byed\"? Means \"based\"?",
+      "revId": "2e08a00996eb8fee21811f52c74d0a0a9df62fdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_a801db72",
+        "filename": "lib/includes/formatters/FormatterLabelLookupFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:15:57Z",
+      "side": 1,
+      "message": "*shudder*, as argued before. This looks like PHPUnit code. I\u0027m fine with such code in tests but not here. Please do specific tests with specific messages (done in Idf6b3ea).",
+      "revId": "2e08a00996eb8fee21811f52c74d0a0a9df62fdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
