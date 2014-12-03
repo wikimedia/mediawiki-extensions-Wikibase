@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_685f5378",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "array[]",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_8862df35",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "array[]",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_28594b90",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "array[]",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_e8528369",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "The description, or null if no such description is known.",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_c8c78714",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "The labels, keyed by language.",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_a8c47b12",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "The descriptions, keyed by language.",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_084ecfc4",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "The term value, or null if no such term value is known.",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_68ce7333",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "This check is not needed, the check below does the same.",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_28d86bf3",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "Strange wording.",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_68e5139f",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "Strange wording.",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_08a24f3b",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "I find this odd. Why not let EntityInfo::getLabel and so on throw an OutOfBoundsException? Would make much more sense in my opinion.",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_a84f9b96",
+        "filename": "lib/tests/phpunit/store/EntityInfoTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "This is not actually testing anything. It compares the result from one asArray call with the result from an other asArray call.",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_884c1fa1",
+        "filename": "lib/tests/phpunit/store/EntityInfoTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-03T15:46:41Z",
+      "side": 1,
+      "message": "Please replace all ...NotNull... with $this-\u003eassertInternalType( \u0027array\u0027, ...",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
