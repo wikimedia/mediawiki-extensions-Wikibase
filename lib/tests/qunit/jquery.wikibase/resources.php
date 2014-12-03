@@ -85,22 +85,22 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.entityview.tests' => $moduleBase + array(
-			'scripts' => array(
-				'jquery.wikibase.entityview.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.entityview',
-				'wikibase.datamodel'
-			),
-		),
-
 		'jquery.wikibase.entityselector.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.wikibase.entityselector.tests.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.entityselector',
+			),
+		),
+
+		'jquery.wikibase.entityview.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.wikibase.entityview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.entityview',
+				'wikibase.datamodel.Property',
 			),
 		),
 
@@ -135,6 +135,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.wikibase.itemview.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.wikibase.itemview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.itemview',
+				'wikibase.datamodel.Item',
+			),
+		),
+
 		'jquery.wikibase.labelview.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.wikibase.labelview.tests.js',
@@ -160,6 +170,16 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.pagesuggester',
+			),
+		),
+
+		'jquery.wikibase.propertyview.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.wikibase.propertyview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.propertyview',
+				'wikibase.datamodel.Property',
 			),
 		),
 

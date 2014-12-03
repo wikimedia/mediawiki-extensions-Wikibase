@@ -160,7 +160,8 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'mediawiki.user',
 				'mw.config.values.wbRepo',
-				'jquery.wikibase.entityview',
+				'jquery.wikibase.itemview',
+				'jquery.wikibase.propertyview',
 				'jquery.wikibase.toolbarcontroller',
 				'jquery.wikibase.wbtooltip',
 				'jquery.cookie',
