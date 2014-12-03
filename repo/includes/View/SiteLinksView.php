@@ -63,9 +63,7 @@ class SiteLinksView {
 		$this->languageCode = $languageCode;
 
 		// @todo inject option/objects instead of using the singleton
-		$repo = WikibaseRepo::getDefaultInstance();
-
-		$settings = $repo->getSettings();
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$this->specialSiteLinkGroups = $settings->getSetting( 'specialSiteLinkGroups' );
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 	}

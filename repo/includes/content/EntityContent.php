@@ -258,8 +258,7 @@ abstract class EntityContent extends AbstractContent {
 		ParserOptions $options = null, $generateHtml = true
 	) {
 		// @todo: move this to the ContentHandler
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$entityParserOutputGeneratorFactory = $wikibaseRepo->getEntityParserOutputGeneratorFactory();
+		$entityParserOutputGeneratorFactory = WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory();
 
 		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator(
 			$options
