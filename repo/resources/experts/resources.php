@@ -41,6 +41,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.EntityId',
 				'wikibase.experts.__namespace',
 				'wikibase.experts.Item',
+				'wikibase.experts.Property',
 			),
 		),
 
@@ -65,6 +66,17 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.valueview.Expert',
 				'jquery.wikibase.entityselector',
+				'wikibase.experts.__namespace',
+				'wikibase.experts.Entity',
+			),
+		),
+
+		'wikibase.experts.Property' => $moduleTemplate + array(
+			'scripts' => array(
+				'Property.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.Expert',
 				'wikibase.experts.__namespace',
 				'wikibase.experts.Entity',
 			),
