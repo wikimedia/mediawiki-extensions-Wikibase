@@ -111,6 +111,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.experts.Property.tests' => $moduleBase + array(
+			'scripts' => array(
+				'experts/Property.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.experts.Property',
+				'wikibase.tests.qunit.testrunner',
+			),
+		),
+
 		'wikibase.getLanguageNameByCode.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.getLanguageNameByCode.tests.js'

@@ -105,7 +105,7 @@
 	} );
 
 	/**
-	 * Entity type this `Expert` supports.
+	 * `Entity` type this `Expert` supports.
 	 * @property {string} [TYPE=null]
 	 * @static
 	 */
