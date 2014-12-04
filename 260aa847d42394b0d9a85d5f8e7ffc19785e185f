@@ -245,6 +245,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_a5fed964",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-04T14:10:03Z",
+      "side": 1,
+      "message": "\"Term record for entity $id is missing the \u0027value\u0027 field\"",
+      "parentUuid": "4ea06b5a_433278f0",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_68e5139f",
         "filename": "lib/includes/store/EntityInfo.php",
         "patchSetId": 13
@@ -315,6 +333,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_65f0d18e",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-04T14:10:03Z",
+      "side": 1,
+      "message": "Yea, that\u0027s exactly why it should not return null:\n* OutOfBounds should be OutOfBounds, not null. Null is reserved for \"entity exists but doesn\u0027t have this term set\".\n* You need an OutOfBounds anyway.",
+      "parentUuid": "4ea06b5a_83572005",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_a84f9b96",
         "filename": "lib/tests/phpunit/store/EntityInfoTest.php",
         "patchSetId": 13
@@ -344,6 +380,24 @@
       "side": 1,
       "message": "Yes it does. The contract of asArray() is to return the array that was passed to the constructur. That is tested here.\n\nWe might check the actual structure, but EntityInfo is just a dumb wrapper. It doesn\u0027t generate the structure, and currently also does not validate it.",
       "parentUuid": "4ea06b5a_a84f9b96",
+      "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_25d3a906",
+        "filename": "lib/tests/phpunit/store/EntityInfoTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-04T14:10:03Z",
+      "side": 1,
+      "message": "That\u0027s not what\u0027s tested here. This compares asArray() \u003d\u003d asArray(), not the constructor argument.",
+      "parentUuid": "4ea06b5a_233e4cb6",
       "revId": "260aa847d42394b0d9a85d5f8e7ffc19785e185f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
