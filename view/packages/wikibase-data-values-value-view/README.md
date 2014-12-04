@@ -109,6 +109,7 @@ Other methods an Expert needs to provide:
 
 #### Breaking changes
 * `util.highlightSubstring`: Replaced `caseInsensitive` option with `caseSensitive` option defaulting to `false`.
+* `$.ui.suggester`: Moved protected `_minTermLength` member to `options`.
 
 #### Enhancements
 * `$.ui.suggester`: Fixed input element being refocused when selecting a suggestion via keyboard input.
