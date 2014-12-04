@@ -65,7 +65,7 @@
  *
  * - {string} Plain text or HTML error message.
  *
- * @param {number} [minTermLength=1]
+ * @param {number} [options.minTermLength=1]
  *        Minimum number of characters to trigger a search with.
  * @param {number} [options.delay=300]
  *        Delay in milliseconds of the request querying for suggestions.
