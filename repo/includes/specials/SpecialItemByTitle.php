@@ -169,7 +169,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 * @param string $page
 	 */
 	private function switchForm( $siteId, $page ) {
-		if ( $this->sites->getSites()->hasSite( $siteId ) ) {
+		if ( $this->sites->getSite( $siteId ) ) {
 			$site = $this->sites->getSite( $siteId );
 			$siteExists = in_array( $site->getGroup(), $this->groups );
 		} else {
