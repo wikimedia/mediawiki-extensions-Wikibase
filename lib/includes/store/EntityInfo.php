@@ -2,6 +2,8 @@
 
 namespace Wikibase\Lib\Store;
 
+use OutOfBoundsException;
+use RuntimeException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -64,8 +66,11 @@ class EntityInfo {
 	/**
 	 * @param EntityId $id
 	 *
-	 * @return array An array structure representing information about the given entity.
-	 *         If that entity isn't know, the resulting structure will contain only the ID.
+	 * @throws OutOfBoundsException If this EntityInfo does not have information about the
+	 *         requested Entity. This does say anything about whether the Entity exists in
+	 *         the database.
+	 * @return array[] An array structure representing information about the given entity.
+	 *         Refer to the class level documentation for information about the structure.
 	 */
 	public function getEntityInfo( EntityId $id ) {
 		$key = $id->getSerialization();
@@ -73,7 +78,7 @@ class EntityInfo {
 		if ( isset( $this->info[$key] ) ) {
 			return $this->info[$key];
 		} else {
-			return array( 'id' => $key );
+			throw new OutOfBoundsException( 'Unknown entity: ' . $id );
 		}
 	}
 
@@ -81,9 +86,9 @@ class EntityInfo {
 	 * @param EntityId $id
 	 * @param string $languageCode
 	 *
-	 * @throws StorageException
+	 * @throws OutOfBoundsException If nothing is known about the entity or its labels.
 	 * @return string|null The entity's label in the given language,
-	 *         or null if no such descriptions is known.
+	 *         or null if no such label exists on the entity.
 	 */
 	public function getLabel( EntityId $id, $languageCode ) {
 		return $this->getTermValue( $id, 'labels', $languageCode );
@@ -93,9 +98,9 @@ class EntityInfo {
 	 * @param EntityId $id
 	 * @param string $languageCode
 	 *
-	 * @throws StorageException
+	 * @throws OutOfBoundsException If nothing is known about the entity or its descriptions.
 	 * @return string|null The entity's description in the given language,
-	 *         or null if no such descriptions is known.
+	 *         or null if no such description exists on the entity.
 	 */
 	public function getDescription( EntityId $id, $languageCode ) {
 		return $this->getTermValue( $id, 'descriptions', $languageCode );
@@ -104,7 +109,7 @@ class EntityInfo {
 	/**
 	 * @param EntityId $id
 	 *
-	 * @throws StorageException
+	 * @throws OutOfBoundsException If nothing is known about the entity or its labels.
 	 * @return string[] The given entity's labels, keyed by language.
 	 */
 	public function getLabels( EntityId $id ) {
@@ -114,7 +119,7 @@ class EntityInfo {
 	/**
 	 * @param EntityId $id
 	 *
-	 * @throws StorageException
+	 * @throws OutOfBoundsException If nothing is known about the entity or its descriptions.
 	 * @return string[] The given entity's descriptions, keyed by language.
 	 */
 	public function getDescriptions( EntityId $id ) {
@@ -126,18 +131,25 @@ class EntityInfo {
 	 * @param string $termField The term field (e.g. 'labels' or 'descriptions').
 	 * @param string $languageCode
 	 *
-	 * @throws StorageException
-	 * @return string|null The term value, or null if no such term is known.
+	 * @throws RuntimeException
+	 * @throws OutOfBoundsException If nothing is known about the entity
+	 *         or terms of the requested type.
+	 * @return string|null The term value of the requested type and language,
+	 *         or null if no such term is set on the entity.
 	 */
 	private function getTermValue( EntityId $id, $termField, $languageCode ) {
 		$entityInfo = $this->getEntityInfo( $id );
+
+		if ( !isset( $entityInfo[$termField] ) ) {
+			throw new OutOfBoundsException( 'Term field ' . $termField . ' is unknown.' );
+		}
 
 		if ( !isset( $entityInfo[$termField][$languageCode] ) ) {
 			return null;
 		}
 
 		if ( !isset( $entityInfo[$termField][$languageCode]['value'] ) ) {
-			throw new StorageException( 'Term record is missing `value` key (' . $id->getSerialization() . ')' );
+			throw new RuntimeException( 'Term record is missing `value` key (' . $id->getSerialization() . ')' );
 		}
 
 		return $entityInfo[$termField][$languageCode]['value'];
@@ -147,21 +159,23 @@ class EntityInfo {
 	 * @param EntityId $id
 	 * @param string $termField The term field (e.g. 'labels' or 'descriptions').
 	 *
-	 * @throws StorageException
-	 * @return string[] The entity's term values, keyed by language.
+	 * @throws RuntimeException
+	 * @throws OutOfBoundsException If nothing is known about the entity
+	 *         or terms of the requested type.
+	 * @return string[] The entity's term values of the requested type, keyed by language.
 	 */
 	private function getTermValues( EntityId $id, $termField ) {
 		$entityInfo = $this->getEntityInfo( $id );
 
 		if ( !isset( $entityInfo[$termField] ) ) {
-			return array();
+			throw new OutOfBoundsException( 'Term field `' . $termField . '` is unknown.' );
 		}
 
 		$values = array();
 
 		foreach ( $entityInfo[$termField] as $key => $entry ) {
 			if ( !isset( $entry['value'] ) ) {
-				throw new StorageException( 'Term record is missing `value` key (' . $id->getSerialization() . ')' );
+				throw new RuntimeException( 'Term record is missing `value` key (' . $id->getSerialization() . ')' );
 			}
 
 			$values[$key] = $entry['value'];
