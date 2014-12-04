@@ -101,12 +101,12 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.experts.Entity.tests' => $moduleBase + array(
+		'wikibase.experts.Item.tests' => $moduleBase + array(
 			'scripts' => array(
-				'experts/Entity.tests.js',
+				'experts/Item.tests.js',
 			),
 			'dependencies' => array(
-				'wikibase.experts.Entity',
+				'wikibase.experts.Item',
 				'wikibase.tests.qunit.testrunner',
 			),
 		),

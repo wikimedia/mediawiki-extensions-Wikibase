@@ -7,10 +7,10 @@
 
 	var testExpert = valueview.tests.testExpert;
 
-	QUnit.module( 'wikibase.experts.Entity' );
+	QUnit.module( 'wikibase.experts.Item' );
 
 	testExpert( {
-		expertConstructor: wb.experts.Entity
+		expertConstructor: wb.experts.Item
 	} );
 
 }( QUnit, jQuery.valueview, wikibase ) );
