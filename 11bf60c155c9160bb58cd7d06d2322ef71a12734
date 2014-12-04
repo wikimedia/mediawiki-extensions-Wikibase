@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_aa1a287c",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-04T12:04:10Z",
+      "side": 1,
+      "message": "What about edit previews? The action is \u0027submit\u0027 then, isn\u0027t it?",
+      "revId": "11bf60c155c9160bb58cd7d06d2322ef71a12734",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
