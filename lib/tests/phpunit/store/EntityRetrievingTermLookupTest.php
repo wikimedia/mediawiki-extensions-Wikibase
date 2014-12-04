@@ -25,7 +25,7 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	public function testGetLabel_entityNotFound() {
 		$termLookup = $this->getEntityTermLookup();
 
-		$this->setExpectedException( '\Wikibase\Lib\Store\StorageException' );
+		$this->setExpectedException( 'OutOfBoundsException' );
 		$termLookup->getLabel( new ItemId( 'Q120' ), 'en' );
 	}
 
