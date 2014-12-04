@@ -23,7 +23,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 * @param {string} name Should be all-lowercase and without any special characters. Will be used
 	 *        in within some DOM class attributes and
 	 * @param {Function} base Constructor of the `Expert` the new `Expert` should be based on.
-	 * @param {Function} constructorOrExpertDefinition Constructor of the new `Expert`.
+	 * @param {Function|Object} constructorOrExpertDefinition Constructor of the new `Expert`.
 	 * @param {Object} [expertDefinition] Definition of the `Expert`.
 	 * @return {jQuery.valueview.Expert} the new `Expert` constructor.
 	 *
