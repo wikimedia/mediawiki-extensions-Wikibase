@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_4544b5bd",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-04T14:13:45Z",
+      "side": 0,
+      "message": "I don\u0027t see that in EntityInfo. It throws an Exception instead. I\u0027m not sure if this is a problem. Are you sure it is *not* a problem to remove this fall back? if not, please make sure it still works.",
+      "parentUuid": "4ea06b5a_c34d2877",
+      "revId": "fb75b112a102c8e6da748682a995fb7a107b0741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_a868fbf2",
         "filename": "lib/includes/store/EntityInfoTermLookup.php",
         "patchSetId": 13
