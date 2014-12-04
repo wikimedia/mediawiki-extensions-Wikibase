@@ -1,11 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @version 0.1
- * @author Daniel Werner < daniel.a.r.werner@gmail.com >
- *
- * @dependency jQuery
- * @dependency jQuery.PurposedCallbacks
- */
 jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 	'use strict';
 
@@ -15,39 +7,42 @@ jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 	 * information and services related to an animation.
 	 * It is up to the instantiating code to propagate the event and to start the actual animation
 	 * related to the event. An animation related to the event should be started by using the
-	 * event's "animationOptions" member. This ensures that the animation option's callback
-	 * parameters consider changes to the event's "animationCallbacks" property.
+	 * event's `animationOptions` member. This ensures that the animation option's callback
+	 * parameters consider changes to the event's `animationCallbacks` property.
+	 *
+	 *     @example
+	 *     var animationEvent = jQuery.AnimationEvent( 'explode' ),
+	 *         $node = $( '.some-node' );
+	 *
+	 *     $node.animate( animationEvent.animationOptions( {
+	 *         duration: 'slow',
+	 *         queue: 'explosions',
+	 *         start: function() {
+	 *             // Right before the animation actually starts, the 'explode' event will be
+	 *             // triggered and the animationEvent will be provided as event object.
+	 *             $node.trigger( animationEvent );
+	 *         }
+	 *     } ) );
+	 *
+	 *     // Using event triggered in first example. Alert something once the animation is done:
+	 *     $( 'body' ).on( 'explode', function( animationEvent ) {
+	 *         animationEvent.animationCallbacks.add( 'complete', function() {
+	 *             alert( 'The thing exploded!' );
+	 *         } );
+	 *     } );
+	 *
+	 * @class jQuery.AnimationEvent
+	 * @extends jQuery.Event
+	 * @uses jQuery.PurposedCallbacks
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 *
 	 * @constructor
-	 * @extends jQuery.Event
 	 *
-	 * @example <code>
-	 *   var animationEvent = jQuery.AnimationEvent( 'explode' )
-	 *   var $node = $( '.some-node' );
-	 *
-	 *   $node.animate( animationEvent.animationOptions( {
-	 *     duration: 'slow',
-	 *     queue: 'explosions',
-	 *     start: function() {
-	 *       // Right before the animation actually starts, the 'explode' event will be triggered
-	 *       // and the animationEvent will be provided as event object.
-	 *       $node.trigger( animationEvent );
-	 *     }
-	 *   } ) );
-	 * </code>
-	 * @example <code>
-	 *   // Using event triggered in first example. Alert something once the animation is done:
-	 *   $( 'body' ).on( 'explode', function( animationEvent ) {
-	 *     animationEvent.animationCallbacks.add( 'complete', function() {
-	 *       alert( 'The thing exploded!' );
-	 *     } );
-	 *   } );
-	 * </code>
-	 *
-	 * @param {string} animationPurpose Will be available as "animationPurpose" field. This will
-	 *        not end up as the event's "type". The "type" will always be set to "animation".
+	 * @param {string} animationPurpose Will be available as `animationPurpose` field. This will not
+	 *        end up as the event's `type`. The `type` will always be set to `animation`.
 	 * @param {Object} props Additional event properties which will be copied into the object.
-	 * @return {jQuery.AnimationEvent} Can be instantiated without "new".
+	 * @return {jQuery.AnimationEvent} Can be instantiated without `new`.
 	 *
 	 * @throws {Error} when the animation purpose is not specified.
 	 */
@@ -67,53 +62,50 @@ jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 
 		/**
 		 * The purpose stated for the animation which is about to be started.
-		 *
-		 * @type {string}
-		 * @since 0.1
+		 * @property {string}
 		 */
 		this.animationPurpose = animationPurpose;
 
 		/**
-		 * A jQuery.PurposedCallbacks.Facade which allows for registering callbacks for different
+		 * A `jQuery.PurposedCallbacks.Facade` which allows for registering callbacks for different
 		 * stages of the animation which is about to be started. The possible stages are those
-		 * defined in jQuery.AnimationEvent.ANIMATION_STEPS.
+		 * defined in `jQuery.AnimationEvent.ANIMATION_STEPS.`
+		 * (see http://api.jquery.com/animate For a detailed description for each animation stage.)
 		 *
-		 * @see http://api.jquery.com/animate For a detailed description for each animation stage.
-		 * @example event.animationCallbacks.add( 'step', function() { ... } );
+		 *     @example
+		 *     event.animationCallbacks.add( 'step', function() { ... } );
 		 *
-		 * @type {jQuery.PurposedCallbacks.Facade}
-		 * @since 0.1
+		 * @see jQuery.AnimationEvent.ANIMATION_STEPS
+		 * @property {jQuery.PurposedCallbacks.Facade}
 		 */
 		this.animationCallbacks = callbacksList.facade();
 
 		/**
-		 * The jQuery.Animation object associated with the event. This will only be set if the
-		 * animationOptions() object generated by this instance is used as options for an animation
-		 * and after the animation has been started (not just queued).
-		 *
-		 * @type {Object} A jQuery.Promise with some additional fields. See jQuery.Animation.
-		 * @since 0.1
+		 * The `jQuery.Animation` object associated with the event. This will only be set if the
+		 * `animationOptions()` object generated by this instance is used as options for an
+		 * animation and after the animation has been started (not just queued).
+		 * @property {Object}
 		 */
 		this.animation = null;
 
 		/**
-		 * Returns an object which can be used as options for jQuery.animate or any shortcut
-		 * version of it (e.g. jQuery.fadeIn). Defines all animation callback fields with functions
-		 * which will trigger all registered callbacks and all callbacks still registered to the
-		 * "animationCallbacks" field's jQuery.PurposedCallbacks.Facade object in the future.
-		 * Optionally, an object of options to be mixed in can be given. If this object has
+		 * Returns an object which can be used as options for `jQuery.animate` or any shortcut
+		 * version of it (e.g. `jQuery.fadeIn`). Defines all animation callback fields with
+		 * functions which will trigger all registered callbacks and all callbacks still registered
+		 * to the `animationCallbacks` field's `jQuery.PurposedCallbacks.Facade` object in the
+		 * future. Optionally, an object of options to be mixed in can be given. If this object has
 		 * callbacks defined already, then these callbacks will be mixed in and called first.
 		 *
-		 * IMPORTANT: The options generated by one AnimationEvent instance should only be used for
-		 *  one animation.
+		 * IMPORTANT: The options generated by one `AnimationEvent` instance should only be used for
+		 * one animation.
 		 *
-		 * @since 0.1
-		 *
-		 * @param {Object} [baseOptions]
+		 * @param {Object} [baseOptions={}]
 		 * @return {Object}
 		 *
-		 * @throws {Error} If animationOptions() has been called already and the returned options
+		 * @throws {Error} if `animationOptions()` has been called already and the returned options
 		 *         have been passed to some animation whose execution has started already.
+		 * @throws {Error} when trying to use the an `AnimationEvent` instance's
+		 *         `animationOptions()` for two different animations.
 		 */
 		this.animationOptions = function( baseOptions ) {
 			if( this.animation ) {
@@ -161,10 +153,9 @@ jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 	delete( SELF.prototype[ jQuery.expando ] );
 
 	/**
-	 * All animation step callback option names usable in jQuery.Animation's options
-	 *
-	 * @type {string[]}
-	 * @since 0.1
+	 * All animation step callback option names usable in `jQuery.Animation`'s options.
+	 * @property {string[]}
+	 * @static
 	 */
 	SELF.ANIMATION_STEPS = [ 'start', 'step', 'progress', 'complete', 'done', 'fail', 'always' ];
 

@@ -1,7 +1,3 @@
-/**
- * @license GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
- */
 ( function( $, uls, ExpertExtender ) {
 
 	// FIXME: uls knows way more languages than \Languages
@@ -9,13 +5,17 @@
 	'use strict';
 
 	/**
-	 * An ExpertExtender module for selecting a language
+	 * An `ExpertExtender` module for selecting a language.
+	 * @class jQuery.valueview.ExpertExtender.LanguageSelector
+	 * @since 0.6
+	 * @licence GNU GPL v2+
+	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *
 	 * @constructor
 	 *
 	 * @param {util.MessageProvider} messageProvider
-	 * @param {function} getUpstreamValue
-	 * @param {function} onValueChange
+	 * @param {Function} getUpstreamValue
+	 * @param {Function} onValueChange
 	 */
 	ExpertExtender.LanguageSelector = function( messageProvider, getUpstreamValue, onValueChange ) {
 		this._messageProvider = messageProvider;
@@ -35,20 +35,50 @@
 
 	$.extend( ExpertExtender.LanguageSelector.prototype, {
 		/**
-		 * @type {util.MessageProvider}
+		 * @property {util.MessageProvider}
+		 * @private
 		 */
 		_messageProvider: null,
 
+		/**
+		 * @property {Function}
+		 * @private
+		 */
 		_getUpstreamValue: null,
+
+		/**
+		 * @property {Function}
+		 * @private
+		 */
 		_onValueChange: null,
+
+		/**
+		 * @property {Object}
+		 * @private
+		 */
 		_languagesMap: null,
+
+		/**
+		 * @property {Object}
+		 * @private
+		 */
 		_inverseLanguagesMap: null,
+
+		/**
+		 * @property {jQuery}
+		 * @private
+		 * @readonly
+		 */
 		$selector: null,
 
+		/**
+		 * @property {string} [_prefix='valueview-expertextender-languageselector']
+		 * @private
+		 */
 		_prefix: 'valueview-expertextender-languageselector',
 
 		/**
-		 * Callback for the init ExpertExtender event
+		 * Callback for the `init` `ExpertExtender` event.
 		 *
 		 * @param {jQuery} $extender
 		 */
@@ -69,7 +99,7 @@
 		},
 
 		/**
-		 * Callback for the onInitialShow ExpertExtender event
+		 * Callback for the `onInitialShow` `ExpertExtender` event.
 		 */
 		onInitialShow: function() {
 			var value = this._getUpstreamValue();
@@ -80,7 +110,7 @@
 		},
 
 		/**
-		 * Callback for the destroy ExpertExtender event
+		 * Callback for the `destroy` `ExpertExtender` event.
 		 */
 		destroy: function() {
 			this._getUpstreamValue = null;
@@ -92,7 +122,7 @@
 		},
 
 		/**
-		 * Get the current value set in the rotator
+		 * Gets the value currently set in the rotator.
 		 *
 		 * @return {string|null} The current value
 		 */
@@ -102,6 +132,12 @@
 		}
 	} );
 
+	/**
+	 * @ignore
+	 *
+	 * @param {Function} getMsg
+	 * @return {Object}
+	 */
 	function getLanguagesMaps( getMsg ) {
 		var languagesMap = {};
 		var inverseLanguagesMap = {};

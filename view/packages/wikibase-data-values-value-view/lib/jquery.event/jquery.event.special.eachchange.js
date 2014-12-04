@@ -1,30 +1,44 @@
-/**
- * eachchange jQuery event
- *
- * The "eachchange" event catches all designated input events. In recent browsers, it basically
- * delegates to the "input" event. Older browsers are supported by fallback events to achieve some
- * kind of simulation of the "input" event.
- *
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- *
- * @dependency jquery.client
- */
 ( function( $ ) {
 	'use strict';
 
 	/**
 	 * Event id used for data binding and as namespace.
-	 * @type {string}
+	 * @property {string}
+	 * @ignore
 	 */
 	var EVENT_ID = 'jqueryEventSpecialEachchange';
 
 	/**
 	 * Name(s) of events that are in fact supported by the client.
-	 * @type {string}
+	 * @property {string}
+	 * @ignore
 	 */
 	var inputEvent = null;
 
+	/**
+	 * eachchange jQuery event
+	 *
+	 * The `eachchange` event catches all designated input events. In recent browsers, it basically
+	 * delegates to the `input` event. Older browsers are supported by fallback events to achieve
+	 * some kind of simulation of the `input` event.
+	 *
+	 *     @example
+	 *     $( 'input' ).on( 'eachchange', function( event, previousValue ) {
+	 *         console.log( 'previous value: ' + previousValue );
+	 *         console.log( 'new value: ' + $( event.target ).val() );
+	 *     } );
+	 *
+	 * @see jQuery.event.special
+	 *
+	 * @class jQuery.event.special.eachchange
+	 * @extends jQuery.Event
+	 * @uses jQuery.client
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
+	 *
+	 * @param {jQuery.Event} event
+	 * @param {string} previousValue
+	 */
 	$.event.special.eachchange = {
 		setup: function( data, namespaces, eventHandle ) {
 			inputEvent = getInputEvent();
@@ -132,6 +146,7 @@
 
 	/**
 	 * Checks whether a handler with a given event id has already been triggered.
+	 * @ignore
 	 *
 	 * @param {string} eventId
 	 * @param {number} index Numeric index within the list of handlers attached with the same
@@ -149,6 +164,7 @@
 	/**
 	 * Returns the value of a jQuery element or null if the element does not feature retrieving its
 	 * value via .val().
+	 * @ignore
 	 *
 	 * @param {jQuery} $elem
 	 * @return {*}
@@ -165,6 +181,7 @@
 
 	/**
 	 * Assigns a namespace to a string of one or more event names separated by a space character.
+	 * @ignore
 	 *
 	 * @param {string} eventNames
 	 * @param {string} namespace
@@ -184,6 +201,7 @@
 	/**
 	 * Returns a string of on or more event names to be used for detecting any instant changes of an
 	 * input box. This should be just 'input' in recent browsers.
+	 * @ignore
 	 *
 	 * @return {string}
 	 */

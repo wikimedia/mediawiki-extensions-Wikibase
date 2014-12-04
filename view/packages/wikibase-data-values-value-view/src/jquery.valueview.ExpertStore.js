@@ -1,20 +1,20 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
-
 jQuery.valueview = jQuery.valueview || {};
 
 ( function( $ ) {
 	'use strict';
 
 	/**
-	 * Store managing jQuery.valueview.Expert instances
-	 * @constructor
+	 * Store managing `jQuery.valueview.Expert` instances.
+	 * @class jQuery.valueview.ExpertStore
 	 * @since 0.1
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
-	 * @param {Function} [DefaultExpert] Constructor of a default expert that shall be returned when
-	 *        no expert is registered for a specific purpose.
+	 * @constructor
+	 *
+	 * @param {Function|null} [DefaultExpert=null]
+	 *        Constructor of a default expert that shall be returned when no expert is registered
+	 *        for a specific purpose.
 	 */
 	var SELF = $.valueview.ExpertStore = function ValueviewExpertStore( DefaultExpert ) {
 		this._DefaultExpert = DefaultExpert || null;
@@ -24,25 +24,28 @@ jQuery.valueview = jQuery.valueview || {};
 
 	$.extend( SELF.prototype, {
 		/**
-		 * Default expert constructor to be returned when no expert is registered for a specific
+		 * Default `Expert` constructor to be returned when no `Expert` is registered for a specific
 		 * purpose.
-		 * @type {Function|null}
+		 * @property {Function|null}
+		 * @private
 		 */
 		_DefaultExpert: null,
 
 		/**
-		 * @type {Object}
+		 * @property {Object}
+		 * @private
 		 */
 		_expertsForDataValueTypes: null,
 
 		/**
-		 * @type {Object}
+		 * @property {Object}
+		 * @private
 		 */
 		_expertsForDataTypes: null,
 
 		/**
-		 * Registers a valueview expert for displaying data values suitable for a certain data type.
-		 * @since 0.1
+		 * Registers a `valueview` `Expert` for displaying data values suitable for a certain data
+		 * type.
 		 *
 		 * @param {Function} Expert
 		 * @param {string} dataTypeId
@@ -65,8 +68,7 @@ jQuery.valueview = jQuery.valueview || {};
 		},
 
 		/**
-		 * Registers a valueview expert for displaying values of a certain data value type.
-		 * @since 0.1
+		 * Registers a `valueview` `Expert` for displaying values of a certain data value type.
 		 *
 		 * @param {Function} Expert
 		 * @param {string} dataValueType
@@ -90,9 +92,9 @@ jQuery.valueview = jQuery.valueview || {};
 		},
 
 		/**
-		 * Returns the expert registered for a data type (if a data type expert is registered and
-		 * a data type id is specified) or the expert registered for a data value type. If no expert
-		 * is registered regarding the specified parameters, "null" is returned.
+		 * Returns the `Expert` registered for a data type (if a data type `Expert` is registered
+		 * and a data type id is specified) or the `Expert` registered for a data value type. If no
+		 * `Expert` is registered regarding the specified parameters, `null` is returned.
 		 *
 		 * @param {string} dataValueType
 		 * @param {string} [dataTypeId]
@@ -118,8 +120,10 @@ jQuery.valueview = jQuery.valueview || {};
 	} );
 
 	/**
+	 * @ignore
+	 *
 	 * @param {Function} Expert
-	 * @throws {Error} if the provided argument is not a jQuery.valueview.Expert constructor.
+	 * @throws {Error} if the provided argument is not a `jQuery.valueview.Expert` constructor.
 	 */
 	function assertIsExpertConstructor( Expert ) {
 		if( !( $.isFunction( Expert ) && Expert.prototype instanceof $.valueview.Expert ) ) {

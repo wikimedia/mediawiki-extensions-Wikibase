@@ -1,25 +1,21 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( $, vv ) {
 	'use strict';
 
 	var PARENT = vv.Expert;
 
 	/**
-	 * Valueview expert for empty valueviews without any hint about what kind of value the user
-	 * should be allowed to enter.
-	 *
-	 * @since 0.1
-	 *
-	 * @constructor
+	 * `Valueview` expert for empty `valueview` objects without any hint about what kind of
+	 * value the user should be allowed to enter.
+	 * @class jQuery.valueview.experts.EmptyValue
 	 * @extends jQuery.valueview.Expert
+	 * @since 0.1
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 */
 	vv.experts.EmptyValue = vv.expert( 'EmptyValue', PARENT, {
 		/**
-		 * Options.
-		 * @type {Object}
+		 * @inheritdoc
+		 * @protected
 		 */
 		_options: {
 			messages: {
@@ -28,7 +24,8 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert._init
+		 * @inheritdoc
+		 * @protected
 		 */
 		_init: function() {
 			this.$viewPort.text(
@@ -37,14 +34,14 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.rawValue
+		 * @inheritdoc
 		 */
 		rawValue: function() {
 			return null;
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.draw
+		 * @inheritdoc
 		 */
 		draw: function() {
 			return $.Deferred().resolve().promise();

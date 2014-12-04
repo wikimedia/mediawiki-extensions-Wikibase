@@ -1,51 +1,50 @@
-/**
- * jQuery.PurposedCallbacks and jQuery.PurposedCallbacks.Facade constructors.
- *
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.a.r.werner@gmail.com >
- *
- * @dependency jQuery
- */
 jQuery.PurposedCallbacks = ( function( $ ) {
 	'use strict';
 
 	/**
-	 * An instance of jQuery.PurposedCallbacks is a list of $.Callbacks instances, one per
+	 * An instance of `jQuery.PurposedCallbacks` is a list of `jQuery.Callbacks` instances, one per
 	 * "purpose". The purposes are string identifiers for groups of callbacks. Callbacks can be
 	 * registered for a purpose. Callbacks registered for one purpose will be executed together.
 	 *
-	 * This is conceptually similar to jQuery.Deferred but more flexible since it allows to define
-	 * custom purposes other than "done", "fail" and "progress".
-	 * Also, there is an equivalent to jQuery.Deferred.prototype.promise which is
-	 * jQuery.PurposedCallbacks.prototype.facade.
+	 * This is conceptually similar to `jQuery.Deferred` but more flexible since it allows to define
+	 * define custom purposes other than `done`, `fail` and `progress`.
+	 * Also, there is an equivalent to `jQuery.Deferred.prototype.promise` which is
+	 * `jQuery.PurposedCallbacks.prototype.facade`.
+	 *
+	 *     @example
+	 *     function someAction() {
+	 *         var callbacks = $.PurposedCallbacks( [ 'done', 'fail' ] );
+	 *
+	 *         someAsynchronousAction(
+	 *             function() {
+	 *                 callbacks.fire( 'done' );
+	 *             },
+	 *             function( errorMsg ) {
+	 *                 callbacks.fire( 'fail', errorMsg );
+	 *             }
+	 *         );
+	 *
+	 *         // Only expose object for registering more callbacks, but not for firing them:
+	 *         return callbacks.facade();
+	 *     }
+	 *     someAction()
+	 *     .add( 'done', function() { alert( 'done' ) } );
+	 *     .add( 'fail', function( reason ) { alert( 'error: ' + reason ) } );
+	 *     .add( 'fail', function( reason ) { alert( 'ERROR!' } );
+	 *
+	 * @class jQuery.PurposedCallbacks
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 *
 	 * @constructor
 	 *
-	 * @example <code>
-	 *   function someAction() {
-	 *     var callbacks = $.PurposedCallbacks( [ 'done', 'fail' ] );
+	 * @param {string[]|string} [predefinedPurposes] Allows to predefine which purposes are allowed.
+	 *        If of type `string`, the parameter is assumed to be the callback options.
+	 * @param {string} [callbackOptions] Same options as for `jQuery.Callbacks`, will be
+	 *        forwarded.
+	 * @return {jQuery.PurposedCallbacks} Can be instantiated without `new`.
 	 *
-	 *     someAsynchronousAction(
-	 *       function() {
-	 *         callbacks.fire( 'done' );
-	 *       },
-	 *       function( errorMsg ) {
-	 *         callbacks.fire( 'fail', errorMsg );
-	 *       }
-	 *    );
-	 *
-	 *     // Only expose object for registering more callbacks, but not for firing them:
-	 *     return callbacks.facade();
-	 *  }
-	 *  someAction()
-	 *    .add( 'done', function() { alert( 'done' ) } );
-	 *    .add( 'fail', function( reason ) { alert( 'error: ' + reason ) } );
-	 *    .add( 'fail', function( reason ) { alert( 'ERROR!' } );
-	 * </code>
-	 *
-	 * @param {string[]} [predefinedPurposes] Allows to predefine which purposes are allowed.
-	 * @param {string} [callbackOptions] Same options as for jQuery.Callbacks, will be forwarded.
-	 * @return {jQuery.PurposedCallbacks} Can be instantiated without "new".
+	 * @throws {Error} if purpose is unknown.
 	 */
 	var SELF = function PurposedCallbacks( predefinedPurposes, callbackOptions ) {
 		if( !( this instanceof SELF ) ) {
@@ -58,13 +57,16 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 		}
 
 		/**
-		 * cache for .facade() member.
-		 * @type jQuery.PurposedCallbacks.Facade
+		 * Cache for .facade() member.
+		 * @property {jQuery.PurposedCallbacks.Facade}
+		 * @ignore
 		 */
 		var facade;
 
 		/**
-		 * @type {Object} Field names are purposes, each holding a jQuery.Callbacks instance.
+		 * Field names are purposes, each holding a jQuery.Callbacks instance.
+		 * @property {Object}
+		 * @ignore
 		 */
 		var callbacksPerPurpose = {};
 
@@ -75,7 +77,7 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 		 * @param {Function|Function[]} callbacks
 		 * @return {*}
 		 *
-		 * @throws {Error} If purposes are predefined via the constructor and "purpose" is not
+		 * @throws {Error} if purposes are predefined via the constructor and "purpose" is not
 		 *         one of them.
 		 */
 		this.add = function( purpose, callbacks ) {
@@ -129,9 +131,9 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 		/**
 		 * Returns all purposes used for registering callbacks. If purposes got defined via the
 		 * constructor, then all those purposes will be returned. If purposes were not defined via
-		 * the constructor, then all purposes used to register a callback via "add" will be returned,
-		 * even if the callback got removed again and there are no callbacks left for the queue of
-		 * that purpose.
+		 * the constructor, then all purposes used to register a callback via `add` will be
+		 * returned, even if the callback got removed again and there are no callbacks left for the
+		 * queue of that purpose.
 		 *
 		 * @return {string[]}
 		 */
@@ -149,10 +151,10 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 		/**
 		 * Fires the callbacks of the given purposes or of all purposes with the provided
 		 * arguments. Context for the callbacks will be the PurposedCallbacks or the
-		 * PurposedCallbacks.Facade instance the callback has been added with.
+		 * `PurposedCallbacks.Facade` instance the callback has been added with.
 		 *
 		 * @param {string|string[]} purposes
-		 * @param {array} [args]
+		 * @param {*[]} [args]
 		 */
 		this.fire = function( purposes, args ) {
 			this.fireWith( this, purposes, args );
@@ -160,14 +162,14 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 		};
 
 		/**
-		 * same as fire() but with the callbacks called in a given context.
+		 * Same as fire() but with the callbacks called in a given context.
 		 *
 		 * @param {*} context
 		 * @param {string|string[]} purposes
 		 * @param [args]
 		 * @return {*}
 		 *
-		 * @throws {Error} In case purposes were defined in the constructor and a purpose given
+		 * @throws {Error} in case `purposes` were defined in the constructor and a purpose given
 		 *         here is not one of them.
 		 */
 		this.fireWith = function( context, purposes, args ) {
@@ -197,13 +199,13 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 
 		/**
 		 * Returns a facade to the object, only allowing for adding/removing new callbacks but not
-		 * allowing to fire them. Similar to jQuery.Deferred's promise().
-		 * The object returned here could for example be exposed as return value of a function
-		 * which is initiating some asynchronous action. After the asynchronous action is done,
-		 * the "fire" function will be called by the function. The code which received the facade
-		 * by the function can only add and remove callbacks but not fire them.
+		 * allowing to fire them. Similar to `jQuery.Deferred's promise()`.
+		 * The object returned here could for example be exposed as return value of a function which
+		 * is initiating some asynchronous action. After the asynchronous action is done, the `fire`
+		 * function will be called by the function. The code which received the facade by the
+		 * function can only add and remove callbacks but not fire them.
 		 *
-		 * @return jQuery.PurposedCallbacks.Facade
+		 * @return {jQuery.PurposedCallbacks.Facade}
 		 */
 		this.facade = function() {
 			if( !facade ) {
@@ -214,14 +216,17 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 	};
 
 	/**
-	 * Facade of jQuery.PurposedCallbacks which only allows access to the "add", "remove", "has"
-	 * and "purposes" members.
-	 * This is to jQuery.PurposedCallbacks what the "Promise" is to jQuery.Deferred.
+	 * Facade of `jQuery.PurposedCallbacks` which only allows access to the `add`, `remove`, `has`
+	 * and `purposes` members. This is to `jQuery.PurposedCallbacks` what the "Promise" is to
+	 * `jQuery.Deferred`.
+	 * @class jQuery.PurposedCallbacks.Facade
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 *
 	 * @constructor
 	 *
 	 * @param {jQuery.PurposedCallbacks} base
-	 * @return {jQuery.PurposedCallbacks.Facade} Can be instantiated without "new".
+	 * @return {jQuery.PurposedCallbacks.Facade} Can be instantiated without `new`.
 	 */
 	SELF.Facade = function PurposedCallbacksFacade( base ) {
 		if( !( this instanceof SELF.Facade ) ) {

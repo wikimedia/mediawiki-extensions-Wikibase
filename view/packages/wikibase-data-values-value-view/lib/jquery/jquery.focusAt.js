@@ -1,22 +1,26 @@
-/**
- * "jQuery.focusAt" introduces a "focusAt" function to jQuery instances. This allows to focus an
- * element and set the caret to a certain position within the input element.
- *
- * @example $( 'input' ).val( 'Foo Bar' ).focusAt( 0 );     // |Foo Bar
- * @example $( 'input' ).val( 'Foo Bar' ).focusAt( 2 );     // Fo|o Bar
- * @example $( 'input' ).val( 'Foo Bar' ).focusAt( -1 );    // Foo Ba|r
- * @example $( 'input' ).val( 'Foo Bar' ).focusAt( 'end' ); // Foo Bar|
- * @example $( 'input' ).val( 'Foo Bar' ).focusAt( 999 );   // Foo Bar|
- * @example $( 'input' ).val( 'Foo Bar' ).focusAt( -999 );  // |Foo Bar
- *
- * @licence GNU GPL v2+
- * @author Daniel Werner
- *
- * @dependency jQuery
- */
 jQuery.fn.focusAt = ( function( $ ) {
 	'use strict';
 
+	/**
+	 * `jQuery.focusAt` introduces a `focusAt` function to jQuery instances. This allows to focus an
+	 * element and set the caret to a certain position within the input element.
+	 *
+	 *     @example
+	 *     $( 'input' ).val( 'Foo Bar' ).focusAt( 0 );     // |Foo Bar
+	 *     $( 'input' ).val( 'Foo Bar' ).focusAt( 2 );     // Fo|o Bar
+	 *     $( 'input' ).val( 'Foo Bar' ).focusAt( -1 );    // Foo Ba|r
+	 *     $( 'input' ).val( 'Foo Bar' ).focusAt( 'end' ); // Foo Bar|
+	 *     $( 'input' ).val( 'Foo Bar' ).focusAt( 999 );   // Foo Bar|
+	 *     $( 'input' ).val( 'Foo Bar' ).focusAt( -999 );  // |Foo Bar
+	 *
+	 * @member jQuery.fn
+	 * @method focusAt
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner
+	 *
+	 * @param {number|string} position Either a number specifying the position or one of the strings
+	 *        "start" and "end".
+	 */
 	var focusAt = function focusAt( position ) {
 		// If we have a collection of elements, only consider the first one, just like the native
 		// jQuery.fn.focus does.
@@ -38,10 +42,14 @@ jQuery.fn.focusAt = ( function( $ ) {
 
 	/**
 	 * Helper which will normalize a given position or throw an error if it is an invalid one.
+	 * @ignore
 	 *
-	 * @param {number|string} position
+	 * @param {number|string} position Either a number specifying the position or one of the strings
+	 *        "start" and "end".
 	 * @param {jQuery} $forElem
-	 * @return number
+	 * @return {number}
+	 *
+	 * @throws {Error} if position is not specified properly.
 	 */
 	function normalizePosition( position, $forElem ) {
 		var textLength = $forElem.val().length;
@@ -62,10 +70,11 @@ jQuery.fn.focusAt = ( function( $ ) {
 	 * Calculates the position within a string relative to a string's start (0). Can take a position
 	 * relative to the strings start (positive number) or relative to the strings end (negative
 	 * number).
+	 * @ignore
 	 *
 	 * @param {number} relativePosition
 	 * @param {number} totalLength
-	 * @return number
+	 * @return {number}
 	 */
 	function calculateAbsolutePosition( relativePosition, totalLength ) {
 		if( relativePosition < 0 ) {
@@ -78,7 +87,8 @@ jQuery.fn.focusAt = ( function( $ ) {
 
 	/**
 	 * Will set the caret to a given position within an input box.
-	 * @see http://stackoverflow.com/questions/512528/set-cursor-position-in-html-textbox
+	 * (see http://stackoverflow.com/questions/512528/set-cursor-position-in-html-textbox)
+	 * @ignore
 	 *
 	 * @param {HTMLElement} elem
 	 * @param {number} caretPos

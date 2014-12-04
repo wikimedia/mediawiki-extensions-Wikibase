@@ -1,17 +1,14 @@
-/**
- * @licence GNU GPL v2+
- * @author Adrian Lang < adrian.lang@wikimedia.de >
- */
 ( function( vv, LanguageSelector ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
 
 	/**
-	 * @since 0.6
-	 *
-	 * @constructor
+	 * @class jQuery.valueview.experts.MonolingualText
 	 * @extends jQuery.valueview.experts.StringValue
+	 * @since 0.6
+	 * @licence GNU GPL v2+
+	 * @author Adrian Lang < adrian.lang@wikimedia.de >
 	 */
 	vv.experts.MonolingualText = vv.expert( 'MonolingualText', PARENT, function() {
 		PARENT.apply( this, arguments );
@@ -34,8 +31,15 @@
 
 		this.addExtension( inputExtender );
 	}, {
+		/**
+		 * @property {jQuery.valueview.ExpertExtender.LanguageSelector}
+		 * @private
+		 */
 		_languageSelector: null,
 
+		/**
+		 * @inheritdoc
+		 */
 		valueCharacteristics: function() {
 			var options = {};
 			if( this._languageSelector ) {
@@ -44,6 +48,9 @@
 			return options;
 		},
 
+		/**
+		 * @inheritdoc
+		 */
 		destroy: function() {
 			PARENT.prototype.destroy.call( this );
 			this._languageSelector = null;

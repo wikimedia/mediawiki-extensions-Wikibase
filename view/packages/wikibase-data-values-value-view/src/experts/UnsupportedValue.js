@@ -1,23 +1,21 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( $, vv ) {
 	'use strict';
 
 	var PARENT = vv.Expert;
 
 	/**
-	 * Valueview expert for displaying (or rather not displaying) a data value not supported by the
-	 * valueview UI because there is not specialised expert devoted to that data value type.
-	 * @since 0.1
-	 *
-	 * @constructor
+	 * `Valueview` expert for displaying (or rather not displaying) a data value not supported by
+	 * the `valueview` UI because there is not specialised expert devoted to that data value type.
+	 * @class jQuery.valueview.experts.UnsupportedValue
 	 * @extends jQuery.valueview.Expert
+	 * @since 0.1
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 */
 	vv.experts.UnsupportedValue = vv.expert( 'UnsupportedValue', PARENT, {
 		/**
-		 * @type {Object}
+		 * @inheritdoc
+		 * @protected
 		 */
 		_options: {
 			messages: {
@@ -29,14 +27,15 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.rawValue
+		 * @inheritdoc
 		 */
 		rawValue: function() {
 			return this.viewState().getTextValue();
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert._init
+		 * @inheritdoc
+		 * @protected
 		 */
 		_init: function() {
 			// This expert just displays a message that whatever value currently set in the
@@ -72,7 +71,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.draw
+		 * @inheritdoc
 		 */
 		draw: function() {
 			return $.Deferred().resolve().promise();

@@ -1,18 +1,18 @@
-/**
- * @license GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
- */
 ( function( $, ExpertExtender, Time ) {
 	'use strict';
 
 	/**
-	 * An ExpertExtender module for showing a hint about the used calendar model
+	 * An `ExpertExtender` module for showing a hint about the used calendar model.
+	 * @class jQuery.valueview.ExpertExtender.CalendarHint
+	 * @since 0.6
+	 * @licence GNU GPL v2+
+	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *
 	 * @constructor
 	 *
 	 * @param {util.MessageProvider} messageProvider
-	 * @param {function} getUpstreamValue A getter for the current DataValue instance in use
-	 * @param {function} setUpstreamCalendar A setter for the current calendar name used
+	 * @param {Function} getUpstreamValue A getter for the current `DataValue` instance in use.
+	 * @param {Function} setUpstreamCalendar A setter for the current calendar name used.
 	 */
 	ExpertExtender.CalendarHint = function( messageProvider, getUpstreamValue, setUpstreamCalendar ) {
 		this._messageProvider = messageProvider;
@@ -24,39 +24,45 @@
 
 	$.extend( ExpertExtender.CalendarHint.prototype, {
 		/**
-		 * @type {util.MessageProvider}
+		 * @property {util.MessageProvider}
+		 * @private
 		 */
 		_messageProvider: null,
 
 		/**
-		 * @type {function}
+		 * @property {Function}
+		 * @private
 		 */
 		_getUpstreamValue: null,
 
 		/**
-		 * @type {function}
+		 * @property {Function}
+		 * @private
 		 */
 		_setUpstreamCalendar: null,
 
 		/**
-		 * @type {jQuery}
+		 * @property {jQuery}
+		 * @private
+		 * @readonly
 		 */
 		$calendarhint: null,
 
 		/**
-		 * @type {string}
+		 * @property {string}
+		 * @private
 		 */
 		_otherCalendar: null,
 
 		/**
 		 * The common prefix for CSS classes and message keys
-		 *
-		 * @type {string}
+		 * @property {string} [_prefix='valueview-expertextender-calendarhint']
+		 * @private
 		 */
 		_prefix: 'valueview-expertextender-calendarhint',
 
 		/**
-		 * Callback for the init ExpertExtender event
+		 * Callback for the `init` `ExpertExtender` event.
 		 *
 		 * @param {jQuery} $extender
 		 */
@@ -80,7 +86,7 @@
 		},
 
 		/**
-		 * Callback for the ExpertExtender draw event
+		 * Callback for the `ExpertExtender` draw event.
 		 */
 		draw: function() {
 			var value = this._getUpstreamValue();
@@ -119,7 +125,7 @@
 		},
 
 		/**
-		 * Callback for the ExpertExtender destroy event
+		 * Callback for the `ExpertExtender` destroy event.
 		 */
 		destroy: function() {
 			this._messageProvider = null;

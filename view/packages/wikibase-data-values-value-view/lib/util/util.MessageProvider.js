@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 this.util = this.util || {};
 
 util.MessageProvider = ( function() {
@@ -9,19 +5,23 @@ util.MessageProvider = ( function() {
 
 	/**
 	 * Providing messages using specified default messages or a function provided.
+	 * @class util.MessageProvider
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
-	 * @param {Object} options Object that may contain the following key-value pairs:
-	 *                 - {Object} defaultMessages
-	 *                   Messages to use if no message getter function is provided or the getter
-	 *                   does not return a message. The keys the messages are indexed with are
-	 *                   passed to the message getter.
-	 *                 - {Function} messageGetter
-	 *                   Function to retrieve a message from. The function receives the message key
-	 *                   as first argument and a variable number of arguments as message parameters.
-	 *                 - {string} prefix
-	 *                   String the message key should be prefixed with when querying the message
-	 *                   getter function.
 	 * @constructor
+	 *
+	 * @param {Object} [options={}]
+	 * @param {Object} [options.defaultMessages]
+	 *        Messages to use if no message getter function is provided or the getter does not
+	 *        return a message. The keys the messages are indexed with are passed to the message
+	 *        getter.
+	 * @param {Function} [options.messageGetter]
+	 *        Function to retrieve a message from. The function receives the message key as first
+	 *        argument and a variable number of arguments as message parameters.
+	 * @param {string} [options.prefix]
+	 *        String the message key should be prefixed with when querying the message getter
+	 *        function.
 	 */
 	function MessageProvider( options ) {
 		this._options = options || {};
@@ -31,7 +31,8 @@ util.MessageProvider = ( function() {
 		constructor: MessageProvider,
 
 		/**
-		 * @type {Object}
+		 * @property {Object} [_options={}]
+		 * @private
 		 */
 		_options: null,
 
@@ -41,7 +42,7 @@ util.MessageProvider = ( function() {
 		 * returned.
 		 *
 		 * @param {string} key
-		 * @param {string[]} [params] Message parameters.
+		 * @param {string[]} [params=[]] Message parameters.
 		 * @return {string|null}
 		 */
 		getMessage: function( key, params ) {

@@ -11,7 +11,7 @@
 	 * Test definition for running NativeEventHandler tests within a plain Object's environment.
 	 * For triggering events on the object, $( obj ).trigger() will be used.
 	 *
-	 * @type Object
+	 * @property {Object}
 	 */
 	testDefinition = $.extend( {}, testDefinitionBase, {
 		/**
@@ -48,7 +48,7 @@
 	 * Test definition for running NativeEventHandler tests within jQuery Widget environment,
 	 * meaning, the jQuery.Widget's _trigger() function will be used to trigger events.
 	 *
-	 * @type Object
+	 * @property {Object}
 	 */
 	testDefinition = $.extend( {}, testDefinitionBase, {
 		/**

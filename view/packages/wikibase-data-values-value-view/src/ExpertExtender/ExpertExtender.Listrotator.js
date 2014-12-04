@@ -1,12 +1,13 @@
-/**
- * @license GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
- */
 ( function( $, ExpertExtender ) {
 	'use strict';
 
 	/**
-	 * An ExpertExtender module for a jQuery.ui.listrotator
+	 * An `ExpertExtender` module for a `jQuery.ui.listrotator`.
+	 * @class jQuery.valueview.ExpertExtender.Listrotator
+	 * @since 0.6
+	 * @licence GNU GPL v2+
+	 * @author Adrian Lang <adrian.lang@wikimedia.de>
+	 *
 	 * @constructor
 	 *
 	 * @param {string} className
@@ -30,32 +31,36 @@
 
 	$.extend( ExpertExtender.Listrotator.prototype, {
 		/**
-		 * @type {Function}
+		 * @property {Function}
+		 * @private
 		 */
 		_onValueChange: null,
 
 		/**
-		 * @type {Function}
+		 * @property {Function}
+		 * @private
 		 */
 		_getUpstreamValue: null,
 
 		/**
-		 * @type {jQuery}
+		 * @property {jQuery}
+		 * @private
 		 */
 		_$customItem: null,
 
 		/**
-		 * @type {number|null}
+		 * @property {number|null}
+		 * @private
 		 */
 		_customValueIndex: null,
 
 		/**
-		 * @type {jQuery.ui.listrotator}
+		 * @property {jQuery.ui.listrotator}
 		 */
 		rotator: null,
 
 		/**
-		 * Callback for the init ExpertExtender event
+		 * Callback for the `init` `ExpertExtender` event.
 		 *
 		 * @param {jQuery} $extender
 		 */
@@ -75,7 +80,7 @@
 		},
 
 		/**
-		 * Callback for the draw ExpertExtender event
+		 * Callback for the `draw` `ExpertExtender` event.
 		 */
 		draw: function() {
 			var value = this._getUpstreamValue();
@@ -106,7 +111,7 @@
 		},
 
 		/**
-		 * Callback for the destroy ExpertExtender event
+		 * Callback for the `destroy` `ExpertExtender` event.
 		 */
 		destroy: function() {
 			if( this.rotator ) {
@@ -118,7 +123,7 @@
 		},
 
 		/**
-		 * Get the current value set in the rotator
+		 * Gets the current value set in the rotator.
 		 *
 		 * @return {string|null} The current value or null, if autoActive
 		 */

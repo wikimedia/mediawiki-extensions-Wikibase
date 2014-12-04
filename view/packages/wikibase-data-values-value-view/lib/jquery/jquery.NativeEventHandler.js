@@ -1,7 +1,15 @@
+jQuery.NativeEventHandler = ( function( $  ) {
+	'use strict';
+
+var NEH_OPTIONS = [
+	'natively',
+	'nativeHandler',
+	'initially',
+	'initialHandler',
+	'allowCustomResult'
+];
+
 /**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- *
  * Returns a function (outer function) which executes some given logic and does additional event
  * handling for a given event. The event handling is separated in up to three steps and handles
  * advanced features offered by jQuery. The following steps (handlers) in detail:
@@ -43,10 +51,35 @@
  *       The initial handler is available as 'initialHandler' property (just an empty function
  *       if not provided)
  *
- * @version 0.1
+ *     @example
+ *     // Will focus the element and return true if focus has been set, false if the process failed.
+ *     // Will trigger 'focus' event if focus isn't set already.
+ *     SomeConstructor.prototype.focus = $.NativeEventHandler( 'focus', {
+ *         // event: jQuery.Event which will be triggered after this if event.stopPropagation() not called
+ *         // The other arguments are those who were given to the public, outer focus() function
+ *         initially: function( event, highlight, someInternal ) {
+ *             if( this.hasFocus() ) {
+ *                 event.cancel(); // focus is set already, stop everything...
+ *                 return true; // ... and let the outer focus() function return true
+ *             }
+ *             event.customHandlerArgs = [ highlight ]; // don't give the someInternal arg to custom event handlers
+ *             return false; // will be returned by outer focus() if custom handlers call event.preventDefault()
+ *         },
+ *         natively: function( event, highlight, somethingInternal ) {
+ *             // this will only be called after 'focus' event was called and default wasn't prevented
+ *             doSomething();
+ *             return true; // final return value for outer focus()
+ *         }
+ *     } )
  *
- * @param eventName String
- * @param fn Function|Object if this is a function, then it will be taken as native handler and
+ * @class jQuery.NativeEventHandler
+ * @licence GNU GPL v2+
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ *
+ * @constructor
+ *
+ * @param {string} eventName
+ * @param {Function|Object} fn If this is a function, then it will be taken as native handler and
  *        will be executed after custom event handlers are executed.
  *        If this is an object, this can hold properties defining the native as well as the
  *        initial handler as well as additional options for changing the event handling
@@ -57,166 +90,134 @@
  *        - allowCustomResult: if set to true, custom handlers result values will be returned
  *          by the outer function if the native handler won't be called (because of
  *          jQuery.preventDefault)
+ * @return {Function}
  *
- * @return Function
- *
- * @example
- * <code>
- * // Will focus the element and return true if focus has been set, false if the process failed.
- * // Will trigger 'focus' event if focus isn't set already.
- * SomeConstructor.prototype.focus = $.NativeEventHandler( 'focus', {
- *     // event: jQuery.Event which will be triggered after this if event.stopPropagation() not called
- *     // The other arguments are those who were given to the public, outer focus() function
- *     initially: function( event, highlight, someInternal ) {
- *         if( this.hasFocus() ) {
- *             event.cancel(); // focus is set already, stop everything...
- *             return true; // ... and let the outer focus() function return true
- *         }
- *         event.customHandlerArgs = [ highlight ]; // don't give the someInternal arg to custom event handlers
- *         return false; // will be returned by outer focus() if custom handlers call event.preventDefault()
- *     },
- *     natively: function( event, highlight, somethingInternal ) {
- *         // this will only be called after 'focus' event was called and default wasn't prevented
- *         doSomething();
- *         return true; // final return value for outer focus()
- *     }
- * } )
- * </code>
+ * @throws {Error} when trying to set options unknown to NativeEventHandler.
+ * @throws {Error} when no native handler function is provided.
  */
-jQuery.NativeEventHandler = ( function( $  ) {
-	'use strict';
+return function( eventName, fn ) {
+	var initialFn = function() {},
+		allowCustomResult = false;
 
-	var NEH_OPTIONS = [
-		'natively',
-		'nativeHandler',
-		'initially',
-		'initialHandler',
-		'allowCustomResult'
-	];
+	if( !$.isFunction( fn ) ) { // not just a native handler but additional callbacks/options
+		// check for spelling errors in definition object
+		$.each( fn, function( key, elem ) {
+			if( $.inArray( key, NEH_OPTIONS ) === -1 ) {
+				throw new Error( 'Unknown native event handler option "' + key + '"' );
+			}
+		} );
 
-	return function( eventName, fn ) {
-		var initialFn = function() {},
-			allowCustomResult = false;
+		// get options
+		allowCustomResult = fn.allowCustomResult !== undefined
+			? fn.allowCustomResult
+			: allowCustomResult;
 
-		if( !$.isFunction( fn ) ) { // not just a native handler but additional callbacks/options
-			// check for spelling errors in definition object
-			$.each( fn, function( key, elem ) {
-				if( $.inArray( key, NEH_OPTIONS ) === -1 ) {
-					throw new Error( 'Unknown native event handler option "' + key + '"' );
-				}
-			} );
+		// get handlers
+		initialFn = fn.initially || fn.initialHandler || initialFn;
+		fn = fn.natively || fn.nativeHandler;
 
-			// get options
-			allowCustomResult = fn.allowCustomResult !== undefined
-				? fn.allowCustomResult
-				: allowCustomResult;
+		// make sure we have a native handler or fail
+		if( !$.isFunction( fn ) ) {
+			throw new Error( 'No native handler function provided' );
+		}
+	}
 
-			// get handlers
-			initialFn = fn.initially || fn.initialHandler || initialFn;
-			fn = fn.natively || fn.nativeHandler;
+	/**
+	 * The returned function handling all the stages of handlers.
+	 * 1. initial, 2. custom, 3. native
+	 * @ignore
+	 *
+	 * @return {*}
+	 */
+	var handler = function() {
+		var event = $.Event( eventName, {
+			handlerArgs: false,
+			customHandlerArgs: false,
+			nativeHandlerArgs: false,
+			cancel: function() {
+				event.stopImmediatePropagation();
+				event.preventDefault();
+			}
+		} );
+		var args = $( arguments ).toArray();
 
-			// make sure we have a native handler or fail
-			if( !$.isFunction( fn ) ) {
-				throw new Error( 'No native handler function provided' );
+		// Does all the preparation and can cancel the whole thing:
+		var ret = handler.initialHandler.apply( this, [ event ].concat( args ) );
+
+		var defaultPreventedByWidget = false;
+
+		// Store this so custom callbacks can't interfere with internal default prevention:
+		var defaultPreventedEarly = event.isDefaultPrevented();
+
+		// Allow for different arguments for custom/native event handlers:
+		var handlerArgs = event.handlerArgs || args;
+		var customHandlerArgs = event.customHandlerArgs || handlerArgs;
+		var nativeHandlerArgs = event.nativeHandlerArgs || handlerArgs;
+
+		// Don't reveal this to custom handlers!
+		event.handlerArgs = event.customHandlerArgs = event.nativeHandlerArgs = event.cancel
+			= undefined;
+
+		// Trigger all registered events (custom handlers).
+		// This might be prevented by the initial handler for some reason.
+		if( !event.isImmediatePropagationStopped() ) {
+			if( $.Widget && ( this instanceof $.Widget ) ) {
+				// Use the $.Widget's native trigger mechanisms.
+				// $.Widget._trigger will use its own event but return false if prevented.
+				// Also, context of custom handlers will be the DOM node rather than the widget.
+				defaultPreventedByWidget = !this._trigger( event.type, null, customHandlerArgs );
+				// TODO: attach our own event as some field of the widget's event
+			} else {
+				// Don't use trigger(); it might end up in an endless loop since it would try to
+				// execute a function named after the event in the object.
+				$( this ).triggerHandler( event, customHandlerArgs );
+			}
+
+			// If desired for this event, let custom handlers last return value overwrite
+			// initial handlers one.
+			if( allowCustomResult && event.result !== undefined ) {
+				ret = event.result;
 			}
 		}
 
-		/**
-		 * The returned function handling all the stages of handlers.
-		 * 1. initial, 2. custom, 3. native
-		 *
-		 * @return {*}
-		 */
-		var handler = function() {
-			var event = $.Event( eventName, {
-				handlerArgs: false,
-				customHandlerArgs: false,
-				nativeHandlerArgs: false,
-				cancel: function() {
-					event.stopImmediatePropagation();
-					event.preventDefault();
-				}
-			} );
-			var args = $( arguments ).toArray();
+		// Initial handler and custom handlers can prevent native event from being executed.
+		if( !defaultPreventedEarly
+			&& ( !defaultPreventedByWidget && !event.isDefaultPrevented() )
+		) {
+			// Call native handler for the event.
+			// Give event as first argument just like jQuery does for custom handlers!
+			var nativeRet = handler.nativeHandler.apply( this, [ event ].concat( nativeHandlerArgs ) );
 
-			// Does all the preparation and can cancel the whole thing:
-			var ret = handler.initialHandler.apply( this, [ event ].concat( args ) );
+			// If native handler returns undefined, return previously gathered return value.
+			ret = nativeRet !== undefined ? nativeRet : ret; // might be the same value
+		}
 
-			var defaultPreventedByWidget = false;
-
-			// Store this so custom callbacks can't interfere with internal default prevention:
-			var defaultPreventedEarly = event.isDefaultPrevented();
-
-			// Allow for different arguments for custom/native event handlers:
-			var handlerArgs = event.handlerArgs || args;
-			var customHandlerArgs = event.customHandlerArgs || handlerArgs;
-			var nativeHandlerArgs = event.nativeHandlerArgs || handlerArgs;
-
-			// Don't reveal this to custom handlers!
-			event.handlerArgs = event.customHandlerArgs = event.nativeHandlerArgs = event.cancel
-				= undefined;
-
-			// Trigger all registered events (custom handlers).
-			// This might be prevented by the initial handler for some reason.
-			if( !event.isImmediatePropagationStopped() ) {
-				if( $.Widget && ( this instanceof $.Widget ) ) {
-					// Use the $.Widget's native trigger mechanisms.
-					// $.Widget._trigger will use its own event but return false if prevented.
-					// Also, context of custom handlers will be the DOM node rather than the widget.
-					defaultPreventedByWidget = !this._trigger( event.type, null, customHandlerArgs );
-					// TODO: attach our own event as some field of the widget's event
-				} else {
-					// Don't use trigger(); it might end up in an endless loop since it would try to
-					// execute a function named after the event in the object.
-					$( this ).triggerHandler( event, customHandlerArgs );
-				}
-
-				// If desired for this event, let custom handlers last return value overwrite
-				// initial handlers one.
-				if( allowCustomResult && event.result !== undefined ) {
-					ret = event.result;
-				}
-			}
-
-			// Initial handler and custom handlers can prevent native event from being executed.
-			if( !defaultPreventedEarly
-				&& ( !defaultPreventedByWidget && !event.isDefaultPrevented() )
-			) {
-				// Call native handler for the event.
-				// Give event as first argument just like jQuery does for custom handlers!
-				var nativeRet = handler.nativeHandler.apply( this, [ event ].concat( nativeHandlerArgs ) );
-
-				// If native handler returns undefined, return previously gathered return value.
-				ret = nativeRet !== undefined ? nativeRet : ret; // might be the same value
-			}
-
-			return ret; // whatever the initial or custom handler(s) returned last (ignoring undefined)
-		};
-
-		/**
-		 * @type Function
-		 * @since 0.1
-		 *
-		 * @param event {jQuery.Event} the event which is about to be triggered
-		 * @param args {Array} arguments which will be applied to the native handler as well as to
-		 *        the custom callbacks (except if the return value is an array in which case these
-		 *        values will be used for custom callbacks).
-		 * @return {undefined|Boolean|Array} if undefined or true the native handler as well as all
-		 *         custom callbacks will be executed. If false, the whole event will be cancelled.
-		 *         If an array is returned, its contents will be applied to the custom callbacks as
-		 *         parameters, the native handler will still receive the arguments of the args array.
-		 */
-		handler.initialHandler = initialFn;
-
-		/**
-		 * Holds the pure functionality of the native event handler.
-		 *
-		 * @type Function
-		 * @since 0.1
-		 */
-		handler.nativeHandler = fn; // for outside world and inheritance
-
-		return handler;
+		return ret; // whatever the initial or custom handler(s) returned last (ignoring undefined)
 	};
+
+	/**
+	 * @property {Function}
+	 * @ignore
+	 *
+	 * @param {jQuery.Event} event the event which is about to be triggered
+	 * @param {Array} args arguments which will be applied to the native handler as well as to
+	 *        the custom callbacks (except if the return value is an array in which case these
+	 *        values will be used for custom callbacks).
+	 * @return {boolean|*[]} [continuation] If undefined or true the native handler as well as all
+	 *         custom callbacks will be executed. If false, the whole event will be cancelled.
+	 *         If an array is returned, its contents will be applied to the custom callbacks as
+	 *         parameters, the native handler will still receive the arguments of the args array.
+	 */
+	handler.initialHandler = initialFn;
+
+	/**
+	 * Holds the pure functionality of the native event handler.
+	 * @property {Function}
+	 * @ignore
+	 */
+	handler.nativeHandler = fn; // for outside world and inheritance
+
+	return handler;
+};
 
 }( jQuery ) );

@@ -1,19 +1,15 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( $, vv ) {
 	'use strict';
 
 	var PARENT = vv.Expert;
 
 	/**
-	 * Valueview expert for adding string data value support to valueview widget.
-	 *
-	 * @since 0.1
-	 *
-	 * @constructor
+	 * `Valueview` expert for adding `String` data value support to `valueview` widget.
+	 * @class jQuery.valueview.experts.StringValue
 	 * @extends jQuery.valueview.Expert
+	 * @since 0.1
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 */
 	vv.experts.StringValue = vv.expert( 'StringValue', PARENT, function() {
 		PARENT.apply( this, arguments );
@@ -22,12 +18,14 @@
 		/**
 		 * The nodes of the input element. The input element will be used to display the value
 		 * during edit mode.
-		 * @type jQuery
+		 * @property {jQuery}
+		 * @protected
+		 * @readonly
 		 */
 		$input: null,
 
 		/**
-		 * @see jQuery.valueview.Expert.init
+		 * @inheritdoc
 		 */
 		init: function() {
 			var notifier = this._viewNotifier;
@@ -50,7 +48,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.destroy
+		 * @inheritdoc
 		 */
 		destroy: function() {
 			if( this.$input ) {
@@ -62,14 +60,14 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.rawValue
+		 * @inheritdoc
 		 */
 		rawValue: function() {
 			return this.$input.val();
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.draw
+		 * @inheritdoc
 		 */
 		draw: function() {
 			// Resize textarea to fit the value (which might be empty):
@@ -85,7 +83,7 @@
 
 		/**
 		 * Will resize the input box to fit its current content.
-		 * @since 0.1
+		 * @protected
 		 */
 		_resizeInput: function() {
 			this.$input.inputautoexpand( {
@@ -96,7 +94,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.focus
+		 * @inheritdoc
 		 */
 		focus: function() {
 			// Move text cursor to the end of the textarea:
@@ -104,7 +102,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.blur
+		 * @inheritdoc
 		 */
 		blur: function() {
 			this.$input.blur();

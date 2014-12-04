@@ -40,7 +40,7 @@
 	 *
 	 * @param {string} mockExpertId Used in the constructor name for simple identification if some
 	 *        assertion goes wrong.
-	 * @returns {jQuery.valueview.Expert}
+	 * @return {jQuery.valueview.Expert}
 	 */
 	function newMockExpertConstructor( mockExpertId ) {
 		return vv.expert(
@@ -149,7 +149,7 @@
 
 	/**
 	 * Array of test definitions as provider for "expertStoreRegistrationTest".
-	 * @type {Object[]}
+	 * @property {Object[]}
 	 */
 	var expertStoreRegistrationTestCases = [
 		{

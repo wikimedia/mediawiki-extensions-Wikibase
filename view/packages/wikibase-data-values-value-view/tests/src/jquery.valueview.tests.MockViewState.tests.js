@@ -15,7 +15,7 @@
 	 * Helper which returns a test function for a member of MockViewState.
 	 *
 	 * @param {string} memberName
-	 * @returns {Function}
+	 * @return {Function}
 	 */
 	function buildMemberTestFn( memberName ) {
 		return function( params, assert ) {

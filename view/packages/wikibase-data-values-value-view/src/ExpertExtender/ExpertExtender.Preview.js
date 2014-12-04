@@ -1,16 +1,16 @@
-/**
- * @license GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
- */
 ( function( $, ExpertExtender, mw, MessageProvider ) {
 	'use strict';
 
 	/**
-	 * An ExpertExtender module which shows a preview of a value
+	 * An `ExpertExtender` module which shows a preview of a value.
+	 * @class jQuery.valueview.ExpertExtender.Preview
+	 * @since 0.6
+	 * @licence GNU GPL v2+
+	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *
 	 * @constructor
 	 *
-	 * @param {function} getUpstreamValue A getter for the current formatted upstream value
+	 * @param {Function} getUpstreamValue A getter for the current formatted upstream value
 	 */
 	ExpertExtender.Preview = function( getUpstreamValue ) {
 		this._getUpstreamValue = getUpstreamValue;
@@ -31,17 +31,19 @@
 
 	$.extend( ExpertExtender.Preview.prototype, {
 		/**
-		 * @type {function}
+		 * @property {Function}
+		 * @private
 		 */
 		_getUpstreamValue: null,
 
 		/**
-		 * @type {jQuery.ui.preview}
+		 * @property {jQuery.ui.preview}
+		 * @private
 		 */
 		_preview: null,
 
 		/**
-		 * Callback for the init ExpertExtender event
+		 * Callback for the `init` `ExpertExtender` event.
 		 *
 		 * @param {jQuery} $extender
 		 */
@@ -57,7 +59,7 @@
 		},
 
 		/**
-		 * Callback for the destroy ExpertExtender event
+		 * Callback for the `destroy` `ExpertExtender` event.
 		 */
 		destroy: function( ){
 			this._preview.destroy();
@@ -68,7 +70,7 @@
 		},
 
 		/**
-		 * Public method for setting the preview's value
+		 * Public method for setting the preview's value.
 		 *
 		 * @param {string} value HTML to show
 		 */
@@ -77,7 +79,7 @@
 		},
 
 		/**
-		 * Public method for replacing the preview with a spinner
+		 * Public method for replacing the preview with a spinner.
 		 */
 		showSpinner: function() {
 			if( this._preview ) {

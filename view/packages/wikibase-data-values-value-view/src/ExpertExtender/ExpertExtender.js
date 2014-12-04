@@ -1,13 +1,16 @@
-/**
- * @licence GNU GPL v2+
- * @author Adrian Lang < adrian.lang@wikimedia.de >
- */
 ( function( $, Extendable, vv ) {
 	'use strict';
 
 	/**
+	 * @class jQuery.valueview.ExpertExtender
+	 * @since 0.6
+	 * @licence GNU GPL v2+
+	 * @author Adrian Lang < adrian.lang@wikimedia.de >
+	 *
+	 * @constructor
+	 *
 	 * @param {jQuery} $input
-	 * @param {Object[]} [extensions] An array of extensions for this ExpertExtender.
+	 * @param {Object[]} [extensions=[]] An array of extensions for this ExpertExtender.
 	 *        An extension may have any of the following methods:
 	 *        - init( $container )
 	 *        - onInitialShow()
@@ -26,22 +29,26 @@
 	};
 	$.extend( vv.ExpertExtender.prototype, {
 		/**
-		 * @type {jQuery}
+		 * @property {jQuery}
+		 * @private
+		 * @readonly
 		 */
 		$input: null,
 
 		/**
-		 * @type {jQuery.ui.inputextender}
+		 * @property {jQuery.ui.inputextender}
+		 * @private
 		 */
 		_inputextender: null,
 
 		/**
-		 * @type {util.Extendable}
+		 * @property {util.Extendable}
+		 * @private
 		 */
 		_extendable: null,
 
 		/**
-		 * Callback for expert init
+		 * Callback for expert `init`.
 		 */
 		init: function() {
 			this.$input.inputextender( {
@@ -52,7 +59,7 @@
 		},
 
 		/**
-		 * Callback for expert draw
+		 * Callback for expert `draw`.
 		 */
 		draw: function() {
 			if( this._inputextender.extensionIsVisible() ) {
@@ -61,7 +68,7 @@
 		},
 
 		/**
-		 * Callback for expert destroy
+		 * Callback for expert `destroy`.
 		 */
 		destroy: function() {
 			// Since inputextender is created in init, it might not be set
@@ -77,6 +84,8 @@
 		},
 
 		/**
+		 * @private
+		 *
 		 * @param {jQuery} $extender
 		 */
 		_initExtensions: function( $extender ) {

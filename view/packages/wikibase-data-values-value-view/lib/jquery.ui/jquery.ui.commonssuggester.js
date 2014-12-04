@@ -1,21 +1,22 @@
-/**
- * Commons suggester.
- * Enhances an input box with suggestion functionality for Wikimedia Commons asset names.
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- *
- * @example $( 'input' ).commonssuggester();
- *
- * @dependency jQuery.ui.suggester
- * @dependency util.highlightSubstring
- */
 ( function( $, util ) {
 	'use strict';
 
+	/**
+	 * Commons suggester.
+	 * Enhances an input box with suggestion functionality for Wikimedia Commons asset names.
+	 * (uses `util.highlightSubstring`)
+	 * @class jQuery.ui.commonssuggester
+	 * @extends jQuery.ui.suggester
+	 * @uses util
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
+	 *
+	 * @constructor
+	 */
 	$.widget( 'ui.commonssuggester', $.ui.suggester, {
-
 		/**
-		 * @see ui.suggester._create
+		 * @inheritdoc
+		 * @protected
 		 */
 		_create: function() {
 			if( !this.options.source ) {
@@ -26,6 +27,7 @@
 
 		/**
 		 * Initializes the default source pointing the "opensearch" API module on Wikimedia Commons.
+		 * @protected
 		 *
 		 * @return {Function}
 		 */
@@ -56,7 +58,8 @@
 		},
 
 		/**
-		 * @see jQuery.ui.suggester._createMenuItemFromSuggestion
+		 * @inheritdoc
+		 * @protected
 		 */
 		_createMenuItemFromSuggestion: function( suggestion, requestTerm ) {
 			suggestion = suggestion.replace( /^File:/, '' );

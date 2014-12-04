@@ -7,7 +7,6 @@ jQuery.NativeEventHandler.test.testDefinition = ( function ( $, QUnit ) {
 
 	/**
 	 * Test definition for running wb.tests.nativeEventHandlerTest with.
-	 *
 	 * @since 0.1
 	 *
 	 * @constructor
@@ -17,14 +16,14 @@ jQuery.NativeEventHandler.test.testDefinition = ( function ( $, QUnit ) {
 		/**
 		 * Descriptive name of the event handler system which is used together with the
 		 * NativeEventHandler in this test definition.
-		 * @type {String}
+		 * @property {string}
 		 */
 		eventSystem: '',
 
 		/**
 		 * Whether custom results are supported by the event handler system in use. E.g. $.Widget's
 		 * _trigger() does not allow for custom results while $.trigger() does.
-		 * @type Boolean
+		 * @property {boolean}
 		 */
 		supportsCustomResults: false,
 
@@ -39,6 +38,8 @@ jQuery.NativeEventHandler.test.testDefinition = ( function ( $, QUnit ) {
 		 *         - 'initialHandlerContext' The object which should be the context for initial handler.
 		 *         - 'customHandlerContext' The object which should be the context for custom handlers.
 		 *         - 'nativeHandlerContext' The object which should be the context for native handler.
+		 *
+		 * @throws {Error} when called.
 		 */
 		newWidgetTestBody: function() {
 			throw new Error( '"newWidgetTestBody" has to be overwritten in specific test '

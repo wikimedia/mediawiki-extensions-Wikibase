@@ -1,12 +1,12 @@
-/**
- * @license GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
- */
 ( function( $, ExpertExtender ) {
 	'use strict';
 
 	/**
-	 * An ExpertExtender module which wraps another module in a container
+	 * An `ExpertExtender` module which wraps another module in a container.
+	 * @class jQuery.valueview.ExpertExtender.Container
+	 * @since 0.6
+	 * @licence GNU GPL v2+
+	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *
 	 * @constructor
 	 *
@@ -20,17 +20,20 @@
 
 	$.extend( ExpertExtender.Container.prototype, {
 		/**
-		 * @type {jQuery}
+		 * @property {jQuery}
+		 * @private
+		 * @readonly
 		 */
 		$container: null,
 
 		/**
-		 * @type {Object}
+		 * @property {Object}
+		 * @private
 		 */
 		_child: null,
 
 		/**
-		 * Callback for the init ExpertExtender event
+		 * Callback for the `init` `ExpertExtender` event.
 		 *
 		 * @param {jQuery} $extender
 		 */
@@ -40,21 +43,21 @@
 		},
 
 		/**
-		 * Callback for the onInitialShow ExpertExtender event
+		 * Callback for the `onInitialShow` `ExpertExtender` event.
 		 */
 		onInitialShow: function() {
 			this._callChild( 'onInitialShow' );
 		},
 
 		/**
-		 * Callback for the draw ExpertExtender event
+		 * Callback for the `draw` `ExpertExtender` event.
 		 */
 		draw: function() {
 			this._callChild( 'draw' );
 		},
 
 		/**
-		 * Callback for the destroy ExpertExtender event
+		 * Callback for the `destroy` `ExpertExtender` event.
 		 */
 		destroy: function() {
 			this.$container = null;
@@ -63,7 +66,8 @@
 		},
 
 		/**
-		 * A helper function for calling the child just like util.Extendable does
+		 * A helper function for calling the child just like `util.Extendable` does.
+		 * @private
 		 *
 		 * @param {string} method
 		 * @param {*[]} [args]

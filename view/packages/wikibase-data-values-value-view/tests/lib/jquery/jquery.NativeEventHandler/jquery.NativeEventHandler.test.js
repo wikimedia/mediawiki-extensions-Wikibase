@@ -8,7 +8,6 @@ jQuery.NativeEventHandler.test = ( function ( $, QUnit ) {
 /**
  * Will execute NativeEventHandler tests based on a given test definition.
  * @see jQuery.NativeEventHandler.test.testDefinition
- *
  * @since 0.1
  *
  * @param {Object} testDefinition

@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( $, vv, time ) {
 	'use strict';
 
@@ -12,16 +7,13 @@
 	var PARENT = vv.experts.StringValue;
 
 	/**
-	 * Valueview expert handling input of time values.
-	 *
+	 * `Valueview` expert handling input of `Time` values.
+	 * @class jQuery.valueview.experts.TimeInput
+	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
-	 *
-	 * @constructor
-	 * @extends jQuery.valueview.Expert
-	 *
-	 * @option {Object} messages Default messages used by the widget. The keys correspond to
-	 *         mediaWiki message keys since these will be picked when in MediaWiki environment and
-	 *         the mediaWiki JavaScript object has been passed to the expert constructor.
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
+	 * @author H. Snater < mediawiki@snater.com >
 	 */
 	vv.experts.TimeInput = vv.expert( 'TimeInput', PARENT, function() {
 		PARENT.apply( this, arguments );
@@ -98,8 +90,8 @@
 	}, {
 
 		/**
-		 * Default options
-		 * @type {Object}
+		 * @inheritdoc
+		 * @protected
 		 */
 		_options: {
 			messages: {
@@ -110,26 +102,29 @@
 
 		/**
 		 * The preview widget.
-		 * @type {jQuery.valueview.ExpertExtender.Preview}
+		 * @property {jQuery.valueview.ExpertExtender.Preview}
 		 */
 		preview: null,
 
 		/**
-		 * @type {jQuery.valueview.ExpertExtender.Listrotator}
+		 * @property {jQuery.valueview.ExpertExtender.Listrotator}
 		 */
 		precisionRotator: null,
 
 		/**
-		 * @type {jQuery.valueview.ExpertExtender.Listrotator}
+		 * @property {jQuery.valueview.ExpertExtender.Listrotator}
 		 */
 		calendarRotator: null,
 
+		/**
+		 * @protected
+		 */
 		_onRotatorChange: function() {
 			this._viewNotifier.notify( 'change' );
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.destroy
+		 * @inheritdoc
 		 */
 		destroy: function() {
 			this.preview = null;
@@ -140,7 +135,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.valueCharacteristics
+		 * @inheritdoc
 		 */
 		valueCharacteristics: function() {
 			var options = {},
@@ -159,6 +154,8 @@
 	} );
 
 	/**
+	 * @ignore
+	 *
 	 * @return {Object[]} [{ value: <{number}>, label: <{string}>}, ...]
 	 */
 	function getPrecisionValues() {
@@ -173,8 +170,10 @@
 	}
 
 	/**
+	 * @ignore
+	 *
 	 * @param {util.MessageProvider} messageProvider
-	 * @return @return {Object[]} [{ value: <{string}>, label: <{string}>}, ...]
+	 * @return {Object[]} [{ value: <{string}>, label: <{string}>}, ...]
 	 */
 	function getCalendarValues( messageProvider ) {
 		var calendarValues = [];
@@ -188,6 +187,8 @@
 	}
 
 	/**
+	 * @ignore
+	 *
 	 * @param {string} calendarname
 	 * @return {time.Time}
 	 */

@@ -1,8 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( dv, util, $, vf, vp ) {
 'use strict';
 
@@ -12,6 +7,7 @@ var PARENT = $.Widget;
  * Helper for defining a valueview member function which will just call a valueview's Expert's
  * member function and return the value received from that function. If the valueview does not have
  * an expert currently, nothing will be done.
+ * @ignore
  *
  * @param {string} fnName Name of the function in jQuery.valueview.Expert
  * @return {Function}
@@ -25,140 +21,155 @@ function expertProxy( fnName ) {
 }
 
 /**
- * valueview widget which is responsible for displaying and serving input for creating/changing
- * data value objects (dataValue.DataValue). Depending on the data value type, the widget will
+ * `valueview` widget which is responsible for displaying and serving input for creating/changing
+ * data value objects (`dataValue.DataValue`). Depending on the data value type, the widget will
  * choose a different strategy for handing interaction with a specific instance of that data value.
  *
+ * @class jQuery.valueview
+ * @alternateClassName jQuery.valueview.valueview
  * @extends jQuery.Widget
  * @since 0.1
+ * @licence GNU GPL v2+
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  *
- * @option {jQuery.valueview.ExpertStore} expertStore Used to determine an expert depending on the
- *         data value type or the data type the valueview should handle.
- *         The valueview will be able to handle all data value types and data types the given store
- *         has experts registered for.
+ * @constructor
  *
- * @option {valueParsers.valueParserStore} parserStore Store providing the parsers values may
- *         be parsed with.
- *
- * @option {valueFormatters.valueFormatterStore} formatterStore Store providing the formatters
- *         values may be formatted with.
- *
- * @option {string} language
- *         Language code of the language the valueview shall interact with parsers and formatters.
- *
- * @option {string|null} [dataTypeId] If set, an expert (jQuery.valueview.Expert), a parser
- *         (valueParsers.ValueParser) and a formatter (valueFormatters.ValueFormatter) will be
- *         determined from the provided factories according to the specified data type id.
- *         When setting the valueview's value to a data value that is not valid against the data
- *         type referenced by the data type id, a note that the value is not suitable for the
- *         widget's current definition will be displayed.
- *         If the "dataTypeId" option is null, expert, parser and formatter will be determined using
- *         the "dataValueType" option.
- *         Default: null
- *
- * @option {string|null} [dataValueType] If set while the "dataTypeId" option is "null", a parser
- *         (valueParsers.ValueParser) and a formatter (valueFormatters.ValueFormatter) will be
- *         determined from the provided factories according to the specified data value type.
- *         When setting the valueview's value to a data value that is not valid against the data
- *         value referenced by the data value type, a note that the value is not suitable for the
- *         widget's current definition will be displayed.
- *         If the "dataValueType" option as well as the "dataTypeId" option is null, expert, parser
- *         and formatter will be determined using the widget's current value. Consequently, if the
- *         value itself is null, the widget will not be able to offer any input for new values.
- *         Default: null
- *
- * @option {dataValues.DataValue|null} [value] The data value this view should represent initially.
- *         If omitted, an empty view will be served, ready to take some input by the user. The value
- *         can also be overwritten later, by using the value() function.
- *         Default: null
- *
- * @option {boolean} [autoStartEditing] Whether or not view should go into edit mode by its own upon
- *         initialization if its initial value is empty.
- *         Default: true
- *
- * @option {number} [parseDelay] Time milliseconds that the parser should wait before parsing. A delay
- *         is useful to limit the number of API request that are outdated when returning because the
- *         input has changed in the meantime.
- *         Default: 300
- *
- * @option {Object} mediaWiki mediaWiki JavaScript object that may be used in MediaWiki environment.
- *         Default: null
- *
+ * @param {jQuery.valueview.ExpertStore} expertStore
+ *        Used to determine an `Expert` depending on the data value type or the data type the
+ *        `valueview` should handle. The `valueview` will be able to handle all data value types and
+ *        data types the given store has `Experts` registered for.
+ * @param {valueParsers.ValueParserStore} parserStore
+ *        Store providing the parsers values may be parsed with.
+ * @param {valueFormatters.ValueFormatterStore} formatterStore
+ *        Store providing the formatters values may be formatted with.
+ * @param {string} language
+ *        Language code of the language the `valueview` shall interact with parsers and
+ *        formatters.
+ * @param {string|null} [dataTypeId=null]
+ *        If set, an expert (`jQuery.valueview.Expert`), a parser (`valueParsers.ValueParser`) and a
+ *        formatter (`valueFormatters.ValueFormatter`) will be determined from the provided
+ *        factories according to the specified data type id.
+ *        When setting the `valueview`'s value to a data value that is not valid against the data
+ *        type referenced by the data type id, a note that the value is not suitable for the
+ *        widget's current definition will be displayed.
+ *        If the `dataTypeId` option is `null`, expert, parser and formatter will be determined
+ *        using the `dataValueType` option.
+ * @param {string|null} [dataValueType=null]
+ *        If set while the `dataTypeId` option is `null`, a parser (`valueParsers.ValueParser`) and
+ *        a formatter (`valueFormatters.ValueFormatter`) will be determined from the provided
+ *        factories according to the specified data value type.
+ *        When setting the `valueview`'s value to a data value that is not valid against the data
+ *        value referenced by the data value type, a note that the value is not suitable for the
+ *        widget's current definition will be displayed.
+ *        If the `dataValueType` option as well as the `dataTypeId` option is `null`, expert, parser
+ *        and formatter will be determined using the widget's current value.
+ *        Consequently, if the value itself is `null`, the widget will not be able to offer any
+ *        input for new values.
+ * @param {dataValues.DataValue|null} [value=null]
+ *        The data value this view should represent initially.
+ *        If omitted, an empty view will be served, ready to take some input by the user. The value
+ *        can also be overwritten later, by using the `value()` function.
+ * @param {boolean} [autoStartEditing=true]
+ *        Whether or not view should go into edit mode by its own upon initialization if its initial
+ *        value is empty.
+ * @param {number} [parseDelay=300]
+ *        Time milliseconds that the parser should wait before parsing. A delay is useful to limit
+ *        the number of API request that are outdated when returning because the input has changed
+ *        in the meantime.
+ * @param {Object|null} [mediaWiki=null]
+ *        `mediaWiki` JavaScript object that may be used when in MediaWiki environment.
+ */
+/**
  * @event change
- *        Triggered when the widget's value is updated.
- *        - {jQuery.Event}
- *
+ * Triggered when the widget's value is updated.
+ * @param {jQuery.Event} event
+ */
+/**
  * @event parse
- *        Triggered before the value gets parsed.
- *       - {jQuery.Event}
- *
+ * Triggered before the value gets parsed.
+ * @param {jQuery.Event} event
+ */
+/**
  * @event afterparse
- *        Triggered after the value has been parsed.
- *       - {jQuery.Event}
- *
+ * Triggered after the value has been parsed.
+ * @param {jQuery.Event} event
+ */
+/**
  * @event afterstartediting
- *        Triggered after edit mode has been started and rendered.
- *        - {jQuery.Event}
- *
+ * Triggered after edit mode has been started and rendered.
+ * @param {jQuery.Event} event
+ */
+/**
  * @event afterstopediting
- *        Triggered after edit mode has been stopped and the widget has been redrawn.
- *        - {jQuery.Event}
- *        - {boolean} dropValue
- *
+ * Triggered after edit mode has been stopped and the widget has been redrawn.
+ * @param {jQuery.Event} event
+ * @param {boolean} dropValue
+ */
+/**
  * @event afterdraw
- *        Triggered after the widget has been redrawn.
- *        - {jQuery.Event}
+ * Triggered after the widget has been redrawn.
+ * @param {jQuery.Event} event
  */
 $.widget( 'valueview.valueview', PARENT, {
 	/**
-	 * Current, accepted value. Might be "behind" the expert's raw value until the raw value gets
+	 * Current, accepted value. Might be "behind" the `Expert`'s raw value until the raw value gets
 	 * parsed and the parsed result set as the new accepted value.
-	 * @type dv.DataValue|null
+	 * @property {dataValues.DataValue|null}
+	 * @private
 	 */
 	_value: null,
 
 	/**
-	 * Most current formatted value. Might be "behind" the expert's raw value as well as the
-	 * valueview's parsed DataValue since formatting might involve an asynchronous request.
-	 * @type {string|jQuery|null}
+	 * Most current formatted value. Might be "behind" the `Expert`'s raw value as well as the
+	 * `valueview`'s parsed `DataValue` since formatting might involve an asynchronous
+	 * request.
+	 * @property {string|jQuery|null}
+	 * @private
 	 */
 	_formattedValue: null,
 
 	/**
-	 * The DOM node containing the actual value representation. This is the expert's viewport.
-	 * @type jQuery
+	 * The DOM node containing the actual value representation. This is the `Expert`'s viewport.
+	 * @property {jQuery}
+	 * @readonly
 	 */
 	$value: null,
 
 	/**
 	 * Value from before edit mode.
-	 * @type dv.DataValue|null
+	 * @property {dataValues.DataValue|null}
+	 * @private
 	 */
 	_initialValue: null,
 
 	/**
-	 * @type boolean
+	 * @property {boolean} [_isInEditMode=false]
+	 * @private
 	 */
 	_isInEditMode: false,
 
 	/**
-	 * Expert object responsible for serving the DOM to edit the current value. This is only available
-	 * when in edit mode, otherwise it is null.
-	 * Can also be null if the current value has a data value type unknown to the expert store given
-	 * in the "expertStore" option.
-	 * @type jQuery.valueview.Expert|null
+	 * `Expert` object responsible for serving the DOM to edit the current value. This is only
+	 * available when in edit mode, otherwise it is `null`.
+	 * Can also be `null` if the current value has a data value type unknown to the expert store
+	 * given in the `expertStore` option.
+	 * @property {jQuery.valueview.Expert|null}
+	 * @private
 	 */
 	_expert: null,
 
 	/**
-	 * Timeout id of the currently running setTimeout function that delays the parser API request.
-	 * @type {number}
+	 * Timeout id of the currently running `setTimeout` function that delays the parser API request.
+	 * @property {number}
+	 * @private
 	 */
 	_parseTimer: null,
 
 	/**
-	 * Default options
 	 * @see jQuery.Widget.options
+	 * @protected
+	 * @readonly
 	 */
 	options: {
 		expertStore: null,
@@ -175,6 +186,9 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * @see jQuery.Widget._create
+	 * @protected
+	 *
+	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
 		if(
@@ -221,8 +235,10 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * @see jQuery.widget._setOption
-	 * @triggers {Error} when trying to set an option that cannot be set after initialization.
+	 * @see jQuery.Widget._setOption
+	 * @protected
+	 *
+	 * @throws {Error} when trying to set an option that cannot be set after initialization.
 	 */
 	_setOption: function( key, value ) {
 		switch( key ) {
@@ -251,8 +267,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * When calling this, the view will transform into a form with input fields or advanced widgets
 	 * for editing the related data value.
-	 *
-	 * @since 0.1
 	 */
 	startEditing: function() {
 		var self = this;
@@ -279,15 +293,15 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * By default the current value will be adopted if it is valid. If not valid or if the first
 	 * parameter is false, the value from before the edit mode will be restored.
 	 *
-	 * @since 0.1
-	 *
-	 * @param {Boolean} [dropValue] If true, the value from before edit mode has been started will
-	 *        be reinstated. false by default. Consider using cancelEditing() instead.
+	 * @param {boolean} [dropValue=false] If `true`, the value from before edit mode has been
+	 *        started will be reinstated.
 	 */
 	stopEditing: function( dropValue ) {
 		if( !this.isInEditMode() ) {
 			return;
 		}
+
+		dropValue = !!dropValue;
 
 		var self = this;
 
@@ -312,9 +326,8 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * short-cut for stopEditing( false ). Closes the edit view and restores the value from before
-	 * the edit mode has been started.
-	 * @since 0.1
+	 * Short-cut for `stopEditing( true )`. Closes the edit view and restores the value from
+	 * before the edit mode has been started.
 	 */
 	cancelEditing: function() {
 		return this.stopEditing( true );
@@ -322,9 +335,8 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Returns whether the view is in its editable state currently.
-	 * @since 0.1
 	 *
-	 * @return Boolean
+	 * @return {boolean}
 	 */
 	isInEditMode: function() {
 		return this._isInEditMode;
@@ -333,7 +345,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Returns the value from before the edit mode has been started.
 	 * If its not in edit mode, the current value will be returned.
-	 * @since 0.1
 	 */
 	initialValue: function() {
 		if( !this.isInEditMode() ) {
@@ -342,6 +353,18 @@ $.widget( 'valueview.valueview', PARENT, {
 		return this._initialValue;
 	},
 
+	// TODO: think about another function which should rather use some kind of "ValidatedDataValue",
+	//       holding a reference to the used data type and the info that it is valid against it.
+	//       As soon as we have validations we have to consider that the given value is invalid,
+	//       this would require the following considerations:
+	//       1) allow setting invalid values (wouldn't be that bad, invalid values should probably
+	//          be displayed anyhow in some cases where we have old values for a property but the
+	//          property definition has changed (e.g. allowed range from 0-1,000 changed to 0-100).
+	//       2) Trigger a validation after the value is set. If invalid, warning in UI
+	//       Probably we want both, a ValidatedDataValue AND the ability to set an invalid value as
+	//       described.
+	//       A ValidatedDataValue could always be returned by another function and be an indicator
+	//       for whether the value is valid or not.
 	/**
 	 * Returns the value of the view. If the view is in edit mode, this will return the current
 	 * value the user is typing. There is no guarantee that the returned value is valid.
@@ -349,36 +372,30 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * If the first parameter is given, this will change the value represented to that value. This
 	 * will trigger validation of the value.
 	 *
-	 * If null is given or returned, this means that the view is or should be empty.
+	 * If `null` is given or returned, this means that the view is or should be empty.
 	 *
-	 * @since 0.1
+	 * @param {dataValues.DataValue|null} [value]
+	 * @return {dataValues.DataValue|null|undefined} `null` if no value is set currently
 	 *
-	 * @param {dv.DataValue|null} [value]
-	 * @return {dv.DataValue|null|undefined} null if no value is set currently
-	 *
-	 * TODO: think about another function which should rather use some kind of "ValidatedDataValue",
-	 *       holding a reference to the used data type and the info that it is valid against it.
-	 *       As soon as we have validations we have to consider that the given value is invalid,
-	 *       this would require the following considerations:
-	 *       1) allow setting invalid values (wouldn't be that bad, invalid values should probably
-	 *          be displayed anyhow in some cases where we have old values for a property but the
-	 *          property definition has changed (e.g. allowed range from 0-1,000 changed to 0-100).
-	 *       2) Trigger a validation after the value is set. If invalid, warning in UI
-	 *       Probably we want both, a ValidatedDataValue AND the ability to set an invalid value as
-	 *       described.
-	 *       A ValidatedDataValue could always be returned by another function and be an indicator
-	 *       for whether the value is valid or not.
+	 * @throws {Error} if value provided is not a `dataValues.DataValue` instance.
 	 */
 	value: function( value ) {
 		if( value === undefined ) {
 			return this._value;
 		}
 		if( value !== null && !( value instanceof dv.DataValue ) ) {
-			throw new Error( 'The given value has to be an instance of dataValue.DataValue or null' );
+			throw new Error( 'The given value has to be an instance of dataValues.DataValue or '
+				+ 'null' );
 		}
 		this._setValue( value );
 	},
 
+	/**
+	 * @private
+	 *
+	 * @param {dataValues.DataValue|null} value
+	 * @return {dataValues.DataValue|null|undefined}
+	 */
 	_initValue: function( value ) {
 		var formattedValue = this.element.html();
 		if( !formattedValue ) {
@@ -394,9 +411,10 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Sets the value internally and triggers the validation process on the new value, will also
 	 * make sure that the new value will be displayed.
-	 * @since 0.1
 	 *
-	 * @param {dv.DataValue|null} value
+	 * @param {dataValues.DataValue|null} value
+	 *
+	 * @throws {Error} if value provided is not a `dataValues.DataValue` instance.
 	 */
 	_setValue: function( value ) {
 		// Check whether given value is actually suitable for the widget:
@@ -440,8 +458,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * Returns the most current formatted value featured by this valueview.
-	 * @since 0.1
+	 * Returns the most current formatted value featured by this `valueview`.
 	 *
 	 * @return {string|jQuery|null}
 	 */
@@ -450,10 +467,12 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * Returns the current value formatted as plain text
+	 * Returns the current value formatted as plain text.
 	 * @since 0.4
 	 *
 	 * @return {string}
+	 *
+	 * @throws {Error} if current text value is null.
 	 */
 	getTextValue: function() {
 		if( this._textValue === null ) {
@@ -463,28 +482,31 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * Whether there is currently any value in the view. Basically, whether value() returns null.
-	 * @since 0.1
+	 * Whether there is currently any value in the view. Basically, whether `value()` returns
+	 * `null`.
 	 *
-	 * @returns {boolean}
+	 * @return {boolean}
 	 */
 	isEmpty: function() {
 		return this.value() === null;
 	},
 
 	/**
-	 * Returns the valueview's expert object required for handling the desired value type.
-	 * If there is no expert available for handling that value type, then null will be returned.
-	 * @since 0.1
+	 * Returns the `valueview`'s `Expert` object required for handling the desired value type. If
+	 * there is no `Expert` available for handling that value type, then null will be returned.
 	 *
-	 * @return jQuery.valueview.Expert|null
+	 * @return {jQuery.valueview.Expert|null}
 	 */
 	expert: function() {
 		return this._expert;
 	},
 
 	/**
-	 * Will update the constructor currently used for creating an expert, if one is needed.
+	 * Will update the constructor currently used for creating an `Expert`, if one is needed.
+	 * @private
+	 *
+	 * @throws {Error} if no `Expert` store being an instance of `jQuery.valueview.ExpertStore` is
+	 *         set in the options.
 	 */
 	_updateExpertConstructor: function() {
 		if( !( this.options.expertStore instanceof $.valueview.ExpertStore ) ) {
@@ -504,10 +526,10 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * Will update the expert responsible for handling the value type of the current value. If there
-	 * is no value set currently (empty value), the expert will be chosen based on the "dataTypeId"
-	 * or "dataValueType" option of the valueview widget.
-	 * @since 0.1
+	 * Will update the `Expert` responsible for handling the value type of the current value. If
+	 * there is no value set currently (empty value), the expert will be chosen based on the
+	 * `dataTypeId` or `dataValueType` option of the `valueview` widget.
+	 * @private
 	 */
 	_updateExpert: function() {
 		if(
@@ -536,18 +558,20 @@ $.widget( 'valueview.valueview', PARENT, {
 		}
 	},
 
+	/**
+	 * @private
+	 */
 	_destroyExpert: function() {
 		this._expert.destroy();
 		this._expert = null;
 	},
 
 	/**
-	 * Will render the valueview's current state (does consider edit mode, current value, etc.).
-	 * @since 0.1
+	 * Will render the `valueview`'s current state (does consider edit mode, current value, etc.).
 	 *
-	 * @return {jQuery.Promise}
-	 *         No resolved parameters.
-	 *         No rejected parameters.
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {Function} return.fail
 	 */
 	draw: function() {
 		var self = this;
@@ -573,9 +597,9 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * @return {jQuery.Promise}
-	 *         No resolved parameters.
-	 *         No rejected parameters.
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {Function} return.fail
 	 */
 	drawContent: function() {
 		var self = this,
@@ -610,10 +634,18 @@ $.widget( 'valueview.valueview', PARENT, {
 		return deferred.promise();
 	},
 
+	/**
+	 * Draws static content.
+	 */
 	drawStaticContent: function() {
 		this.element.html( this.getFormattedValue() );
 	},
 
+	/**
+	 * @private
+	 *
+	 * @param {boolean} disabledValue
+	 */
 	_setDisabled: function( disabledValue ) {
 		if( this.options.disabled !== disabledValue ) {
 			this.options.disabled = disabledValue;
@@ -622,32 +654,27 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * Marks the valueview disabled and triggers re-drawing it.
-	 * Since the visual state should be managed completely by the draw method, toggling the css
-	 * classes is done in draw() by issuing a call to $.Widget.option().
+	 * Marks the `valueview` disabled and triggers re-drawing it.
+	 * Since the visual state should be managed completely by the `draw` method, toggling the css
+	 * classes is done in `draw()` by issuing a call to `jQuery.Widget.option()`.
 	 * @see jQuery.Widget.disable
-	 *
-	 * @since 0.1
 	 */
 	disable: function() {
 		this._setDisabled( true );
 	},
 
 	/**
-	 * Marks the valueview enabled and triggers re-drawing the valueview.
-	 * Since the visual state should be managed completely by the draw method, toggling the css
-	 * classes is done in draw() by issuing a call to $.Widget.option().
+	 * Marks the `valueview` enabled and triggers re-drawing the `valueview`.
+	 * Since the visual state should be managed completely by the `draw` method, toggling the css
+	 * classes is done in `draw()` by issuing a call to `jQuery.Widget.option()`.
 	 * @see jQuery.Widget.enable
-	 *
-	 * @since 0.1
 	 */
 	enable: function() {
 		this._setDisabled( false );
 	},
 
 	/**
-	 * Returns whether the valueview is disabled.
-	 * @since 0.1
+	 * Returns whether the `valueview` is disabled.
 	 *
 	 * @return {boolean}
 	 */
@@ -657,15 +684,11 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Focuses the widget.
-	 *
-	 * @since 0.1
 	 */
 	focus: expertProxy( 'focus' ),
 
 	/**
 	 * Removes focus from the widget.
-	 *
-	 * @since 0.1
 	 */
 	blur: expertProxy( 'blur' ),
 
@@ -681,10 +704,9 @@ $.widget( 'valueview.valueview', PARENT, {
 //	validatedValue: function() {},
 
 	/**
-	 * Will take the current raw value of the valueview's expert and parse and format it
-	 * using the valueParserProvider and valueFormatterProvider.
-	 *
-	 * @since 0.1
+	 * Will take the current raw value of the `valueview`'s `Expert` and parse and format it using
+	 * the `valueParserProvider` and `valueFormatterProvider` injected via the options.
+	 * @private
 	 */
 	_updateValue: function() {
 		var self = this;
@@ -722,6 +744,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Renders an error message.
+	 * @private
 	 *
 	 * @param {string} message HTML error message.
 	 */
@@ -733,16 +756,16 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Parses the current raw value.
+	 * @private
 	 *
-	 * @return {jQuery.Promise}
-	 *         Resolved parameters:
-	 *         - {dataValues.DataValue}
-	 *         Rejected parameters:
-	 *         - {string|undefined} HTML error message or "undefined" if the result shall be
-	 *           ignored.
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {dataValues.DataValue} return.done.value
+	 * @return {Function} return.fail
+	 * @return {string|undefined} return.fail.message HTML error message or `undefined` if the
+	 *         result shall be ignored.
 	 *
-	 * @throws {Error} if the parser result is neither a DataValue instance nor null.
-	 * @triggers afterparse
+	 * @throws {Error} if the parser result is neither a `DataValue` instance nor null.
 	 */
 	_parseValue: function() {
 		var self = this,
@@ -811,8 +834,13 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
+	 * @private
+	 *
 	 * @param {Object} [additionalParserOptions]
 	 * @return {valueParsers.ValueParser}
+	 *
+	 * @throws {Error} if no parser store being an instance of `valueParsers.ValueParserStore` is
+	 *         set in the options.
 	 */
 	_instantiateParser: function( additionalParserOptions ) {
 		if( !( this.options.parserStore instanceof vp.ValueParserStore ) ) {
@@ -837,16 +865,15 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Formats a specific data value.
+	 * @private
 	 *
 	 * @param {dataValues.DataValue} dataValue
-	 * @return {jQuery.Promise}
-	 *         Resolved parameters:
-	 *         - {string} Formatted DataValue.
-	 *         Rejected parameters:
-	 *         - {string|undefined} HTML error message or "undefined" if the result shall be
-	 *           ignored.
-	 *
-	 * @triggers afterformat
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {string} return.done.formattedValue
+	 * @return {Function} return.fail
+	 * @return {string|undefined} return.fail.message HTML error message or `undefined` if the
+	 *         result shall be ignored.
 	 */
 	_formatValue: function( dataValue ) {
 		var self = this,
@@ -873,6 +900,17 @@ $.widget( 'valueview.valueview', PARENT, {
 		return deferred.promise();
 	},
 
+	/**
+	 * @private
+	 *
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {string|null} return.done.formatted Formatted `DataValue`.
+	 * @return {dataValues.DataValue|null} return.done.dataValue `DataValue` object that has been
+	 *         formatted.
+	 * @return {Function} return.fail
+	 * @return {string} return.fail.message HTML error message.
+	 */
 	_updateTextValue: function() {
 		var self = this,
 			deferred = $.Deferred(),
@@ -898,16 +936,21 @@ $.widget( 'valueview.valueview', PARENT, {
 					deferred.reject();
 				}
 			} )
-			.fail( function( error, details ) {
-				deferred.reject( error, details );
+			.fail( function( message ) {
+				deferred.reject( message );
 			} );
 
 		return deferred.promise();
 	},
 
 	/**
+	 * @private
+	 *
 	 * @param {Object} [additionalFormatterOptions]
 	 * @return {valueFormatters.ValueFormatter}
+	 *
+	 * @throws {Error} if no formatter store being an instance of
+	 *         `valueFormatters.ValueFormatterStore` is set in the options.
 	 */
 	_instantiateFormatter: function( additionalFormatterOptions ) {
 		if( !( this.options.formatterStore instanceof vf.ValueFormatterStore ) ) {
@@ -931,6 +974,8 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
+	 * @private
+	 *
 	 * @return {string|null}
 	 */
 	_determineDataValueType: function() {
@@ -945,9 +990,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * passed if information about the view should be revealed to some function or constructor
 	 * without making the whole view object available.
 	 *
-	 * @since 0.1
-	 *
-	 * @return jQuery.valueview.ViewState
+	 * @return {jQuery.valueview.ViewState}
 	 */
 	viewState: function() {
 		return new $.valueview.ViewState( this );
@@ -955,9 +998,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Returns an object which allows to notify the view about certain events. This is required in
-	 * the view's expert and should only be used with caution if used from other places.
-	 *
-	 * @since 0.1
+	 * the `valueview`'s `Expert` and should only be used with caution if used from other places.
 	 *
 	 * @return {util.Notifier}
 	 */
@@ -1002,6 +1043,11 @@ $.widget( 'valueview.valueview', PARENT, {
 		} );
 	},
 
+	/**
+	 * @see jQuery.valueview.Expert.valueCharacteristics
+	 *
+	 * @return {Object}
+	 */
 	valueCharacteristics: function() {
 		if( this._expert ) {
 			return this._expert.valueCharacteristics();

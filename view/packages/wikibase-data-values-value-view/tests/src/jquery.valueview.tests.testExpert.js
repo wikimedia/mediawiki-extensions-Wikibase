@@ -207,12 +207,12 @@ function testExpert( testDefinition ) {
  /**
   * Object holding all fields required by testExpert's first argument's object.
   * @since 0.1
-  * @type Object
+  * @property {Object}
   */
 testExpert.basicTestDefinition = {
 	/**
 	 * A jQuery.valueview.Expert implementation's constructor to be tested.
-	 * @type Function
+	 * @property {Function}
 	 */
 	expertConstructor: valueview.experts.StringValue
 };
@@ -222,13 +222,16 @@ testExpert.basicTestDefinition = {
   * the given test definition.
   *
   * @param {Object} testDefinition
+  *
+  * @throws {Error} if testDefinitions expertConstructor field is not an implementation of
+  *         jQuery.valueview.Expert.
   */
 testExpert.verifyTestDefinition = function( testDefinition ) {
 	if( !testDefinition.expertConstructor
 		|| !( testDefinition.expertConstructor.prototype instanceof valueview.Expert )
 	) {
-		throw new Error( 'Test definition\'s "expertConstructor" field has to hold a constructor ' +
-			'implementing jQuery.valueview.Expert' );
+		throw new Error( 'Test definition\'s "expertConstructor" field has to hold a constructor '
+			+ 'implementing jQuery.valueview.Expert' );
 	}
 };
 

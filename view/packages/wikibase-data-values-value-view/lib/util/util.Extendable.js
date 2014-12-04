@@ -1,15 +1,14 @@
-/**
- * @licence GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
- */
-
 this.util = this.util || {};
 
 ( function( util, $ ) {
 	'use strict';
 
 	/**
-	 * A simple event-like system for plugging in extensions
+	 * A simple event-like system for plugging in extensions.
+	 * @class util.Extendable
+	 * @uses jQuery
+	 * @licence GNU GPL v2+
+	 * @author Adrian Lang <adrian.lang@wikimedia.de>
 	 *
 	 * @constructor
 	 */
@@ -19,14 +18,15 @@ this.util = this.util || {};
 
 	util.Extendable.prototype = {
 		/**
-		 * The list of registered extensions
+		 * The list of registered extensions.
+		 * @private
 		 *
-		 * @type {Object[]}
+		 * @property {Object[]} [_extensions=[]]
 		 */
 		_extensions: null,
 
 		/**
-		 * Add an extension to the extendable
+		 * Adds an extension to the extendable.
 		 *
 		 * @param {Object} extension
 		 */
@@ -35,10 +35,10 @@ this.util = this.util || {};
 		},
 
 		/**
-		 * Call a specific method on all registered extensions, if present
+		 * Calls a specific method on all registered extensions, if present.
 		 *
-		 * @param string callName The method to call on the extensions
-		 * @param [Array] args Arguments to be passed to all extensions
+		 * @param {string} callName The method to call on the extensions
+		 * @param {*[]} args Arguments to be passed to all extensions
 		 */
 		callExtensions: function( callName, args ) {
 			args = args || [];

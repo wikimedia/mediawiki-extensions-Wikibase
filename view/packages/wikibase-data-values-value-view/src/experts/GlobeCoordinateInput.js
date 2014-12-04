@@ -1,19 +1,16 @@
-/**
- * @author H. Snater < mediawiki@snater.com >
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( $, vv, Formatter ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
 
 	/**
-	 * Valueview expert handling input of globe coordinate values.
-	 *
+	 * `Valueview` expert handling input of `GlobeCoordinate` values.
+	 * @class jQuery.valueview.experts.GlobeCoordinateValue
+	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
-	 *
-	 * @constructor
-	 * @extends jQuery.valueview.Expert
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 */
 	vv.experts.GlobeCoordinateInput = vv.expert( 'GlobeCoordinateInput', PARENT, function() {
 		PARENT.apply( this, arguments );
@@ -68,18 +65,18 @@
 	}, {
 
 		/**
-		 * @type {jQuery.valueview.ExpertExtender.Preview}
+		 * @property {jQuery.valueview.ExpertExtender.Preview}
 		 */
 		preview: null,
 
 		/**
-		 * @type {jQuery.valueview.ExpertExtender.Listrotator}
+		 * @property {jQuery.valueview.ExpertExtender.Listrotator}
 		 */
 		precisionRotator: null,
 
 		/**
-		 * Options.
-		 * @type {Object}
+		 * @inheritdoc
+		 * @protected
 		 */
 		_options: {
 			messages: {
@@ -88,7 +85,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.valueCharacteristics
+		 * @inheritdoc
 		 */
 		valueCharacteristics: function() {
 			if( !this.precisionRotator ) { // happens when called statically
@@ -106,7 +103,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.destroy
+		 * @inheritdoc
 		 */
 		destroy: function() {
 			this.precisionRotator = null;
@@ -117,8 +114,7 @@
 
 	/**
 	 * Rounds a given precision for being able to use it as internal "constant".
-	 *
-	 * @since 0.1
+	 * @ignore
 	 *
 	 * @param {number} precision
 	 * @return {number}
@@ -129,8 +125,7 @@
 
 	/**
 	 * Returns the original precision level for an unrounded precision.
-	 *
-	 * @since 0.1
+	 * @ignore
 	 *
 	 * @param {number} precision
 	 * @return {number|null}
@@ -149,6 +144,11 @@
 		return actualPrecision;
 	}
 
+	/**
+	 * @ignore
+	 *
+	 * @return {Object[]}
+	 */
 	function getPrecisionValues() {
 		var precisionValues = [];
 		$.each( PRECISIONS, function( i, precision ) {

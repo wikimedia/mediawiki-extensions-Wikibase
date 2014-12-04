@@ -1,13 +1,18 @@
-/**
- * @licence GNU GPL v2+
- * @author Thiemo Mättig
- */
 ( function( $ ) {
 	'use strict';
 
+/**
+ * @class jQuery.ui.languagesuggester
+ * @extends jQuery.ui.suggester
+ * @licence GNU GPL v2+
+ * @author Thiemo Mättig
+ *
+ * @constructor
+ */
 $.widget( 'ui.languagesuggester', $.ui.suggester, {
 	/**
-	 * @see $.ui.suggester._getSuggestionsFromArray
+	 * @inheritdoc
+	 * @protected
 	 */
 	_getSuggestionsFromArray: function( term, source ) {
 		var self = this,
@@ -40,6 +45,8 @@ $.widget( 'ui.languagesuggester', $.ui.suggester, {
 	},
 
 	/**
+	 * @protected
+	 *
 	 * @param {string} a
 	 * @param {string} b
 	 * @return {boolean}

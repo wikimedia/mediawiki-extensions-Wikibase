@@ -17,6 +17,8 @@ jQuery.valueview.tests.MockViewState = ( function( $, ViewState, util ) {
 	 * @param {Object} [definition={}] A plain object with the fields "isInEditMode", "isDisabled",
 	 *        "value" and "options". This will just keep a reference to the object, so changing the
 	 *        object from the outside will also update the ViewState's functions return values.
+	 *
+	 * @throws {Error} if definition is not a plain object.
 	 */
 	return util.inherit( 'ValueviewMockViewState', ViewState, function ( definition ) {
 		if( definition !== undefined && !$.isPlainObject( definition ) ) {

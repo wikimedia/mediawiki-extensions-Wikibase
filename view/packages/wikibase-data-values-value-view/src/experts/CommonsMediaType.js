@@ -1,27 +1,24 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( $, vv ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
 
 	/**
-	 * Valueview expert for adding specialized handling for CommonsMedia data type. Without this
-	 * more specialized expert, the StringValue expert would be used since the CommonsMedia data
-	 * type is using the String data value type.
-	 * This expert is based on the StringValue expert but will add a dropdown for choosing commons
-	 * media sources. It will also display the value as a link to commons.
-	 *
+	 * `Valueview` expert for adding specialized handling for `CommonsMedia` data type.
+	 * Without this more specialized expert, the `StringValue` expert would be used since the
+	 * `CommonsMedia` data type is using the `String` data value type.
+	 * This expert is based on the ``StringValue` expert but will add a drop-down for choosing
+	 * Commons media sources. It will also display the value as a link to Commons.
+	 * @class jQuery.valueview.experts.CommonsMediaType
+	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
-	 *
-	 * @constructor
-	 * @extends jQuery.valueview.experts.SuggestedStringValue
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 */
 	vv.experts.CommonsMediaType = vv.expert( 'CommonsMediaType', PARENT, {
 		/**
-		 * @see jQuery.valueview.experts.StringValue._init
+		 * @inheritdoc
+		 * @protected
 		 */
 		_init: function() {
 			PARENT.prototype._init.call( this );
