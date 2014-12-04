@@ -16,6 +16,24 @@
       "revId": "11bf60c155c9160bb58cd7d06d2322ef71a12734",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_202cf78e",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-04T15:52:45Z",
+      "side": 1,
+      "message": "Indeed. We should show language links and sister links for edit previews. I actually think we should always show them.",
+      "parentUuid": "4ea06b5a_aa1a287c",
+      "revId": "11bf60c155c9160bb58cd7d06d2322ef71a12734",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
