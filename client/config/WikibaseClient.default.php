@@ -33,7 +33,7 @@ return call_user_func( function() {
 		'showExternalRecentChanges' => true,
 		// default for repo items in main namespace
 		'repoNamespaces' => array(
-			'wikibase-item' => '',
+			'wikibase-item' => 'Item',
 			'wikibase-property' => 'Property'
 		),
 		'allowDataTransclusion' => true,
