@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_f1334708",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-04T00:00:50Z",
+      "side": 1,
+      "message": "should be outside the loop. but it\u0027s cached, so no big deal.",
+      "revId": "8c91cfb472f0ade7871917d6ab7e418b144ea63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_312a0f90",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-04T00:00:50Z",
+      "side": 1,
+      "message": "Should be outside the loop.",
+      "revId": "8c91cfb472f0ade7871917d6ab7e418b144ea63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
