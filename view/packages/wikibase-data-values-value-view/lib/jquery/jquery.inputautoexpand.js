@@ -85,6 +85,7 @@ $.fn.inputautoexpand = function( options ) {
  * Manages expanding input elements.
  * @class jQuery.AutoExpandInput
  * @uses jQuery.event.special.eachchange
+ * @private
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki at snater.com >
  *
