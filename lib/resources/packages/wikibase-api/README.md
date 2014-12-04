@@ -8,10 +8,11 @@
 * Updated code documentation to be able to generate documentation using JSDuck.
 * `wikibase.api.RepoApi` QUnit tests have been rewritten to not execute actual API requests anymore.
 * Added `wikibase.api.RepoApi` QUnit tests for functions not yet tested.
+* Added type checks to `wikibase.api.RepoApi` functions to actually reflect parameter documentation in the code instead of relying on the back-end handling.
 
 ### Bugfixes
 * An empty `Entity` may be created by omitting the `data` parameter on `wikibase.api.RepoApi.createEntity()` again.
-* `wikibase.api.RepoApi` always submits `normalize` parameter if it is specified explicitly (before, `false` resolved to `undefined`).
+* `wikibase.api.RepoApi` functions explicitly submit default parameters if not set otherwise.
 
 ### 1.0.1 (2014-11-28)
 

@@ -52,10 +52,12 @@
 	"maxlen": 100,
 	"maxparams": 7,
 	"maxdepth": 4,
-	"maxstatements": 19,
+	"maxstatements": 100,
 	"predef": [
 		"jQuery",
 		"mediaWiki",
+		"QUnit",
+		"sinon",
 		"util",
 		"wikibase"
 	]
