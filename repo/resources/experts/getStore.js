@@ -14,11 +14,6 @@ MODULE.getStore = function( dataTypeStore ) {
 	var expertStore = new vv.ExpertStore( vv.experts.UnsupportedValue );
 
 	expertStore.registerDataValueExpert(
-		wb.experts.Entity,
-		wb.datamodel.EntityId.TYPE
-	);
-
-	expertStore.registerDataValueExpert(
 		vv.experts.GlobeCoordinateInput,
 		dv.GlobeCoordinateValue.TYPE
 	);
@@ -49,6 +44,14 @@ MODULE.getStore = function( dataTypeStore ) {
 		);
 	}
 
+	var monoTextType = dataTypeStore.getDataType( 'monolingualtext' );
+	if( monoTextType ) {
+		expertStore.registerDataTypeExpert(
+			vv.experts.MonolingualText,
+			monoTextType.getId()
+		);
+	}
+
 	var urlType = dataTypeStore.getDataType( 'url' );
 	if( urlType ) {
 		expertStore.registerDataTypeExpert(
@@ -57,11 +60,11 @@ MODULE.getStore = function( dataTypeStore ) {
 		);
 	}
 
-	var monoTextType = dataTypeStore.getDataType( 'monolingualtext' );
-	if( monoTextType ) {
+	var wikibaseItemType = dataTypeStore.getDataType( 'wikibase-item' );
+	if( wikibaseItemType ) {
 		expertStore.registerDataTypeExpert(
-			vv.experts.MonolingualText,
-			monoTextType.getId()
+			wb.experts.Item,
+			wikibaseItemType.getId()
 		);
 	}
 
