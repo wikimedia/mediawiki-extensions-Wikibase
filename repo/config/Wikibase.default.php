@@ -41,7 +41,7 @@ return call_user_func( function() {
 		),
 
 		// Should the page names (titles) be normalized against the external site
-		'normalizeItemByTitlePageNames' => false,
+		'normalizeItemByTitlePageNames' => true,
 
 		// Items allowed to be used as badges pointing to their CSS class names
 		'badgeItems' => array(),
