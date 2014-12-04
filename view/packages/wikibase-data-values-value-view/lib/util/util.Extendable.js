@@ -38,7 +38,7 @@ this.util = this.util || {};
 		 * Calls a specific method on all registered extensions, if present.
 		 *
 		 * @param {string} callName The method to call on the extensions
-		 * @param {*[]} args Arguments to be passed to all extensions
+		 * @param {*[]} [args=[]] Arguments to be passed to all extensions
 		 */
 		callExtensions: function( callName, args ) {
 			args = args || [];
