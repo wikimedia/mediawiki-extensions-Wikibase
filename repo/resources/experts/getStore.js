@@ -68,6 +68,14 @@ MODULE.getStore = function( dataTypeStore ) {
 		);
 	}
 
+	var wikibasePropertyType = dataTypeStore.getDataType( 'wikibase-property' );
+	if( wikibasePropertyType ) {
+		expertStore.registerDataTypeExpert(
+			wb.experts.Property,
+			wikibasePropertyType.getId()
+		);
+	}
+
 	return expertStore;
 
 };
