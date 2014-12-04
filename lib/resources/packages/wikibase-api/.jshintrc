@@ -57,6 +57,7 @@
 		"jQuery",
 		"mediaWiki",
 		"QUnit",
+		"sinon",
 		"util",
 		"wikibase"
 	]

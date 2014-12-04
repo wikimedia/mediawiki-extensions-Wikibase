@@ -6,6 +6,7 @@
 
 #### Enhancements
 * Updated code documentation to be able to generate documentation using JSDuck.
+* `wikibase.api.RepoApi` QUnit tests have been rewritten to not execute actual API requests anymore.
 
 ### Bugfixes
 * An empty `Entity` may be created by omitting the `data` parameter on `wikibase.api.RepoApi.createEntity()` again.
