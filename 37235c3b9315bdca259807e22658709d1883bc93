@@ -16,6 +16,24 @@
       "revId": "37235c3b9315bdca259807e22658709d1883bc93",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_46411c0d",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-04T18:23:54Z",
+      "side": 1,
+      "message": "the current implementation of siteStore does, yes. But this code no longer forces all sites to be loaded.\n\ncallign it twice is a bit silly, I agree.",
+      "parentUuid": "4ea06b5a_66a0d8f1",
+      "revId": "37235c3b9315bdca259807e22658709d1883bc93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
