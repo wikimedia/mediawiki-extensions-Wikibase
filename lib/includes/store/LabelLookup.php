@@ -16,8 +16,7 @@ interface LabelLookup {
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException
-	 * @throws StorageException for entity not found
+	 * @throws OutOfBoundsException if no such label or entity could be found
 	 * @return string
 	 */
 	public function getLabel( EntityId $entityId );

@@ -7,7 +7,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
-use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use ValueFormatters\FormatterOptions;
 
 /**
@@ -31,15 +31,6 @@ class EntityIdHtmlLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 		return $labelLookup;
 	}
 
-	private function getLabelLookupNoEntity() {
-		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
-		$labelLookup->expects( $this->any() )
-			->method( 'getLabel' )
-			->will( $this->throwException( new StorageException( 'meep' ) ) );
-
-		return $labelLookup;
-	}
-
 	private function getLabelLookupNoLabel() {
 		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
 		$labelLookup->expects( $this->any() )
@@ -52,12 +43,15 @@ class EntityIdHtmlLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return EntityTitleLookup
 	 */
-	private function newEntityTitleLookup() {
+	private function newEntityTitleLookup( $exists = true ) {
 		$entityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function ( EntityId $entityId ) {
-				return Title::newFromText( $entityId->getSerialization() );
+			->will( $this->returnCallback( function ( EntityId $entityId ) use ( $exists ) {
+				$title = Title::newFromText( $entityId->getSerialization() );
+				$title->resetArticleID( $exists ? $entityId->getNumericId() : 0 );
+
+				return $title;
 			} )
 		);
 
@@ -117,13 +111,13 @@ class EntityIdHtmlLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 		if ( $hasLabel ) {
 			$labelLookup = $this->getLabelLookup();
 		} elseif ( !$exists ) {
-			$labelLookup = $this->getLabelLookupNoEntity();
+			$labelLookup = $this->getLabelLookupNoLabel();
 		} else {
 			// Exists, but w/o label
 			$labelLookup = $this->getLabelLookupNoLabel();
 		}
 
-		$entityTitleLookup = $this->newEntityTitleLookup();
+		$entityTitleLookup = $this->newEntityTitleLookup( $exists );
 
 		$entityIdHtmlLinkFormatter = new EntityIdHtmlLinkFormatter( $options, $labelLookup, $entityTitleLookup );
 		$result = $entityIdHtmlLinkFormatter->format( new ItemId( 'Q42' ) );

@@ -68,7 +68,7 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @return string
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		$description = $this->entityInfo->getLabel( $entityId, $languageCode );
+		$description = $this->entityInfo->getDescription( $entityId, $languageCode );
 
 		$this->checkOutOfBOunds( $description, $languageCode );
 		return $description;
