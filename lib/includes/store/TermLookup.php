@@ -31,11 +31,12 @@ interface TermLookup {
 	 * Gets all labels of an Entity with the specified EntityId.
 	 *
 	 * @param EntityId $entityId
+	 * @param array $languages The list of languages to fetch (or null for all)
 	 *
 	 * @throws StorageException for Entity not found
 	 * @return string[] labels, keyed by language.
 	 */
-	public function getLabels( EntityId $entityId );
+	public function getLabels( EntityId $entityId, array $languages = null );
 
 	/**
 	 * Gets the description of an Entity with the specified EntityId and language code.
@@ -54,10 +55,10 @@ interface TermLookup {
 	 * Gets all descriptions of an Entity with the specified EntityId.
 	 *
 	 * @param EntityId $entityId
+	 * @param array $languages The list of languages to fetch (or null for all)
 	 *
-	 * @throws StorageException for Entity not found
 	 * @return string[] descriptions, keyed by language.
 	 */
-	public function getDescriptions( EntityId $entityId );
+	public function getDescriptions( EntityId $entityId, array $languages = null );
 
 }
