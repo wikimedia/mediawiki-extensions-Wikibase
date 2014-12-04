@@ -2,12 +2,12 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
-use PHPUnit_Framework_MockObject_Matcher;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Reporting\ExceptionHandler;
+use Wikibase\Lib\Reporting\MessageReporter;
 
 /**
  * @covers Wikibase\Client\Usage\Sql\EntityUsageTableBuilder
@@ -103,7 +103,7 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher $matcher
+	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
 	 *
 	 * @return ExceptionHandler
 	 */
@@ -116,9 +116,9 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher $matcher
+	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
 	 *
-	 * @return ExceptionHandler
+	 * @return MessageReporter
 	 */
 	private function getMessageReporter( PHPUnit_Framework_MockObject_Matcher_Invocation $matcher ) {
 		$mock = $this->getMock( 'Wikibase\Lib\Reporting\MessageReporter' );

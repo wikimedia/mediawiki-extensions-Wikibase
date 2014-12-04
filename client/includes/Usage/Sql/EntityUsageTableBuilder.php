@@ -89,7 +89,7 @@ class EntityUsageTableBuilder {
 	/**
 	 * @param MessageReporter $progressReporter
 	 */
-	public function setProgressReporter( $progressReporter ) {
+	public function setProgressReporter( MessageReporter $progressReporter ) {
 		$this->progressReporter = $progressReporter;
 	}
 
@@ -103,7 +103,7 @@ class EntityUsageTableBuilder {
 	/**
 	 * @param ExceptionHandler $exceptionHandler
 	 */
-	public function setExceptionHandler( $exceptionHandler ) {
+	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
 		$this->exceptionHandler = $exceptionHandler;
 	}
 
@@ -224,8 +224,7 @@ class EntityUsageTableBuilder {
 				$this->exceptionHandler->handleException(
 					$ex,
 					'badEntityId',
-					__METHOD__ .': ' .
-						'Failed to parse entity ID: ' .
+					__METHOD__ . ': ' . 'Failed to parse entity ID: ' .
 						$row->pp_value . ' at page ' .
 						$row->pp_page
 				);
