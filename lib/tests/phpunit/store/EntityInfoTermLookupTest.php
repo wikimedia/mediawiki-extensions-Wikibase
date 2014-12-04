@@ -27,7 +27,27 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 		$termLookup = $this->getEntityInfoTermLookup();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
-		$termLookup->getLabel( new ItemId( 'Q120' ), 'en' );
+		$termLookup->getLabel( new ItemId( 'Q117' ), 'fr' );
+	}
+
+	public function testGetLabel_noEntityThrowsException() {
+		$termLookup = $this->getEntityInfoTermLookup();
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$termLookup->getLabel( new ItemId( 'Q90000' ), 'en' );
+	}
+
+	public function getLabelsProvider() {
+		return array(
+			array(
+				array( 'en' => 'New York City', 'es' => 'Nueva York' ),
+				new ItemId( 'Q116' )
+			),
+			array(
+				array( 'de' => 'Berlin' ),
+				new ItemId( 'Q117' )
+			)
+		);
 	}
 
 	/**
@@ -40,17 +60,11 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $labels );
 	}
 
-	public function getLabelsProvider() {
-		return array(
-			array(
-				array( 'en' => 'New York City', 'es' => 'Nueva York' ),
-				new ItemId( 'Q116' )
-			),
-			array(
-				array(),
-				new ItemId( 'Q120' )
-			)
-		);
+	public function testGetLabels_noEntityThrowsException() {
+		$termLookup = $this->getEntityInfoTermLookup();
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$termLookup->getLabels( new ItemId( 'Q90000' ) );
 	}
 
 	public function testGetDescription() {
@@ -66,17 +80,14 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 		$termLookup = $this->getEntityInfoTermLookup();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
-		$termLookup->getDescription( new ItemId( 'Q90000' ), 'fr' );
+		$termLookup->getDescription( new ItemId( 'Q117' ), 'fr' );
 	}
 
-	/**
-	 * @dataProvider getDescriptionsProvider
-	 */
-	public function getDescriptions( $expected, EntityId $entityId ) {
+	public function testGetDescription_noEntityThrowsException() {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$descriptions = $termLookup->getDescriptions( $entityId );
-		$this->assertEquals( $expected, $descriptions );
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$termLookup->getDescription( new ItemId( 'Q90000' ), 'en' );
 	}
 
 	public function getDescriptionsProvider() {
@@ -90,9 +101,26 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 			),
 			array(
 				array(),
-				new ItemId( 'Q90001' )
+				new ItemId( 'Q117' )
 			)
 		);
+	}
+
+	/**
+	 * @dataProvider getDescriptionsProvider
+	 */
+	public function testGetDescriptions( $expected, EntityId $entityId ) {
+		$termLookup = $this->getEntityInfoTermLookup();
+
+		$descriptions = $termLookup->getDescriptions( $entityId );
+		$this->assertEquals( $expected, $descriptions );
+	}
+
+	public function testGetDescriptions_noEntityThrowsException() {
+		$termLookup = $this->getEntityInfoTermLookup();
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$termLookup->getDescriptions( new ItemId( 'Q90000' ) );
 	}
 
 	private function getEntityInfoTermLookup() {
@@ -105,7 +133,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 			'Q116' => array(
 				'labels' => array(
 					'en' => array( 'language' => 'en', 'value' => 'New York City' ),
-					'es' => 'Nueva York', // terse form also supported
+					'es' => array( 'language' => 'es', 'value' => 'Nueva York' ),
 				),
 				'descriptions' => array(
 					'en' => array( 'language' => 'en', 'value' => 'largest city in New York and the United States of America' ),
@@ -117,6 +145,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 				'labels' => array(
 					'de' => array( 'language' => 'de', 'value' => 'Berlin' ),
 				),
+				'descriptions' => array()
 			),
 		);
 
