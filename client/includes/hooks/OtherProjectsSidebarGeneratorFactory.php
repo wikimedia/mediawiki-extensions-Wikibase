@@ -67,7 +67,7 @@ class OtherProjectsSidebarGeneratorFactory {
 		return new OtherProjectsSidebarGenerator(
 			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->siteLinkLookup,
-			$this->siteStore->getSites(),
+			$this->siteStore,
 			$this->settings->getSetting( 'otherProjectsLinks' )
 		);
 	}
