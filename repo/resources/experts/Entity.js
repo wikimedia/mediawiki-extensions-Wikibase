@@ -1,7 +1,3 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( mw, wb, $, vv ) {
 	'use strict';
 
@@ -11,22 +7,20 @@
 		'P': 'property'
 	};
 
-	var MODULE = wb.experts;
-	var PARENT = vv.experts.StringValue;
+	var MODULE = wb.experts,
+		PARENT = vv.experts.StringValue;
 
 	/**
-	 * Valueview expert for wb.datamodel.EntityId. This is a simple expert, only handling the input,
-	 * based on the StringValue input but with the jQuery.wikibase.entityselector for convenience.
-	 *
-	 * @since 0.4
-	 *
-	 * @constructor
+	 * `valueview` `Expert` for specifying a reference to a Wikibase `Entity`.
+	 * @class wikibase.experts.Entity
 	 * @extends jQuery.valueview.experts.StringValue
+	 * @since 0.4
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 */
-	MODULE.EntityIdInput = vv.expert( 'wikibaseentityidinput', PARENT, {
-
+	MODULE.Entity = vv.expert( 'wikibaseentity', PARENT, {
 		/**
-		 * @see Query.valueview.experts.StringValue._init
+		 * @inheritdoc
 		 */
 		_init: function() {
 			PARENT.prototype._init.call( this );
@@ -44,8 +38,8 @@
 				selectOnAutocomplete: true
 			} );
 
-			var value = this.viewState().value();
-			var entityId = value && value.getPrefixedId( WB_ENTITIES_PREFIXMAP );
+			var value = this.viewState().value(),
+				entityId = value && value.getPrefixedId( WB_ENTITIES_PREFIXMAP );
 
 			this.$input.data( 'entityselector' ).selectedEntity( entityId );
 			$input
@@ -59,7 +53,7 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.destroy
+		 * @inheritdoc
 		 */
 		destroy: function() {
 			// Prevent error when issuing destroy twice:
@@ -75,9 +69,9 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.rawValue
+		 * @inheritdoc
 		 *
-		 * @return string
+		 * @return {string}
 		 */
 		rawValue: function() {
 			var entitySelector = this.$input.data( 'entityselector' ),
@@ -85,7 +79,6 @@
 
 			return selectedEntity ? selectedEntity.id : '';
 		}
-
 	} );
 
 }( mediaWiki, wikibase, jQuery, jQuery.valueview ) );
