@@ -8,7 +8,6 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\LabelLookup;
-use Wikibase\Lib\Store\StorageException;
 
 /**
  * @since 0.4
@@ -86,11 +85,7 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 		$label = null;
 
 		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
-			try {
-				$label = $this->lookupEntityLabel( $entityId );
-			} catch ( OutOfBoundsException $ex ) {
-				/* Use fallbacks below */
-			}
+			$label = $this->lookupEntityLabel( $entityId );
 		}
 
 		// @fixme check if the entity is deleted and format differently?
@@ -117,7 +112,6 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException If an entity with that ID could not be loaded.
 	 * @return string|bool False if no label was found in the language or language fallback chain.
 	 */
 	protected function lookupEntityLabel( EntityId $entityId ) {
@@ -125,10 +119,6 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 			return $this->labelLookup->getLabel( $entityId );
 		} catch ( OutOfBoundsException $e ) {
 			return false;
-		} catch ( StorageException $ex ) {
-			// @todo maybe handle formatting in this in a better way.
-			throw new OutOfBoundsException( "An Entity with the id $entityId "
-				. "could not be loaded." );
 		}
 	}
 

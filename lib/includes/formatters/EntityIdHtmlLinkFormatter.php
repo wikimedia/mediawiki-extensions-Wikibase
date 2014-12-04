@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use Html;
-use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -53,18 +52,15 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		$label = $entityId->getSerialization();
 
 		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
-			try {
-				$itemLabel = $this->lookupEntityLabel( $entityId );
-				if ( is_string( $itemLabel ) ) {
-					$label = $itemLabel;
-				}
-			} catch ( OutOfBoundsException $ex ) {
+			$itemLabel = $this->lookupEntityLabel( $entityId );
+			if ( is_string( $itemLabel ) ) {
+				$label = $itemLabel;
+			} elseif ( !$title->exists() ) {
 				return $this->getHtmlForNonExistent( $entityId );
 			}
 		}
 
 		$html = Html::element( 'a', $attributes, $label );
-
 		return $html;
 	}
 
