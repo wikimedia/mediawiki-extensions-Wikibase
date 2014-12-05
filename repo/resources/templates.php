@@ -294,10 +294,10 @@ HTML;
 <span class="wikibase-badgeselector wikibase-sitelinkview-badges"><!-- [0,*] wb-badge -->$1</span>
 HTML;
 
-	$templates['wb-property-datatype'] =
+	$templates['wikibase-propertyview-datatype'] =
 <<<HTML
-<div class="wb-datatype">
-	<div class="wb-datatype-value">$1</div>
+<div class="wikibase-propertyview-datatype">
+	<div class="wikibase-propertyview-datatype-value">$1</div>
 </div>
 HTML;
 
