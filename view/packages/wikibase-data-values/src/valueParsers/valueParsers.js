@@ -1,11 +1,4 @@
 /**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
-
-/**
- * Global 'valueParsers' object
- * @since 0.1
- * @type {Object}
+ * @ignore
  */
 this.valueParsers = this.valueParsers || {};

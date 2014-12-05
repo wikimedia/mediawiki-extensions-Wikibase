@@ -11,14 +11,14 @@ define( [
 
 	/**
 	 * Values that are used in combination with the "precisions" object.
-	 * @type {number[]}
+	 * @property {number[]}
 	 */
 	var values = [0, 0.06, 0.4, 0.5, 1, 10, 17];
 
 	/**
 	 * Keyed by the precision to apply, this object contains the results for the values specified in
 	 * the "values" array.
-	 * @type {Object}
+	 * @property {Object}
 	 */
 	var precisions = {
 		0: {
@@ -145,7 +145,7 @@ define( [
 
 	/**
 	 * ISO 6709 representations keyed by the input string used to generate a GlobeCoordinate object.
-	 * @type {Object}
+	 * @property {Object}
 	 */
 	var iso6709representations = {
 		'+00+000/': { latitude: 0, longitude: 0, precision: 1 },

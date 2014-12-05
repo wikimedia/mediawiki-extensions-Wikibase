@@ -42,7 +42,6 @@ return call_user_func( function() {
 			'scripts' => array(
 				'time/time.js',
 				'time/time.Time.js',
-				'time/time.Time.validate.js',
 				'time/time.Parser.js',
 			),
 		),

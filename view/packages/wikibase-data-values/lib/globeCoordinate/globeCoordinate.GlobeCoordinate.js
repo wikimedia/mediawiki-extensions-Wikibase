@@ -1,29 +1,23 @@
-/**
- * Globe coordinate object
- *
- * @since 0.1
- * @file
- * @ingroup globeCoordinate.js
- * @licence GNU GPL v2+
- *
- * @author H. Snater < mediawiki@snater.com >
- *
- * @dependency globeCoordinate
- */
-globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
+( function( globeCoordinate ) {
 	'use strict';
 
 	/**
-	 * Constructor for an object representing a globe coordinate with a certain precision.
-	 *
-	 * @param {Object} gcDef Needs the following attributes:
-	 *                 - {number} latitude
-	 *                 - {number} longitude
-	 *                 - {number} precision
+	 * Globe coordinate object.
+	 * @class globeCoordinate.GlobeCoordinate
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
+	 *
+	 * @param {Object} gcDef Needs the following attributes:
+	 *        - {number} latitude
+	 *        - {number} longitude
+	 *        - {number} precision
+	 *
+	 * @throws {Error} when latitude is greater than 360.
+	 * @throws {Error} when longitude is greater than 360.
 	 */
-	function GlobeCoordinate( gcDef ) {
+	var SELF = globeCoordinate.GlobeCoordinate = function GlobeCoordinate( gcDef ) {
 		if( !gcDef || typeof gcDef !== 'object'
 			|| gcDef.latitude === undefined
 			|| gcDef.longitude === undefined
@@ -47,33 +41,37 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 		}
 
 		this._globe = 'http://www.wikidata.org/entity/Q2'; // TODO: Support other globes
-	}
+	};
 
-	GlobeCoordinate.prototype = {
+	SELF.prototype = {
 		// Don't forget about "constructor" since we are overwriting the whole prototype here:
-		constructor: GlobeCoordinate,
+		constructor: SELF,
 
 		/**
 		 * Globe URI
-		 * @type {string}
+		 * @property {string}
+		 * @private
 		 */
 		_globe: null,
 
 		/**
 		 * Latitude (decimal)
-		 * @type {number}
+		 * @property {number}
+		 * @private
 		 */
 		_latitude: null,
 
 		/**
 		 * Longitude (decimal)
-		 * @type {number}
+		 * @property {number}
+		 * @private
 		 */
 		_longitude: null,
 
 		/**
 		 * Precision
-		 * @type {number}
+		 * @property {number}
+		 * @private
 		 */
 		_precision: null,
 
@@ -122,7 +120,7 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 
 		/**
 		 * Returns a coordinate's ISO 6709 string representation.
-		 * @see globeCoordinate.iso6709
+		 * (see globeCoordinate.iso6709)
 		 *
 		 * @return {string}
 		 */
@@ -148,9 +146,6 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 			return Math.abs( this.getPrecision() - otherGlobeCoordinate.getPrecision() ) < 0.00000001
 				&& gc1Iso6709 === gc2Iso6709;
 		}
-
 	};
-
-	return GlobeCoordinate;
 
 }( globeCoordinate ) );

@@ -1,55 +1,54 @@
-/**
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- */
 ( function( dv, util ) {
 'use strict';
 
-var PARENT = dv.DataValue,
-	constructor = function( value ) {
-		if( typeof value !== 'boolean' ) {
-			throw new Error( 'A boolean value has to be given' );
-		}
-		this._value = value;
-	};
+var PARENT = dv.DataValue;
 
 /**
  * Constructor for creating a data value representing a boolean.
+ * @class dataValues.BoolValue
+ * @extends dataValues.DataValue
+ * @since 0.1
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  *
  * @constructor
- * @extends dv.DataValue
- * @since 0.1
  *
  * @param {boolean} value
+ *
+ * @throws {Error} if value is not of type boolean.
  */
-dv.BoolValue = util.inherit( 'DvBoolValue', PARENT, constructor, {
+var SELF = dv.BoolValue = util.inherit( 'DvBoolValue', PARENT, function( value ) {
+	if( typeof value !== 'boolean' ) {
+		throw new Error( 'A boolean value has to be given' );
+	}
+	this._value = value;
+}, {
+	/**
+	 * @property {boolean}
+	 * @private
+	 */
+	_value: null,
 
 	/**
-	 * @see dv.DataValue.getSortKey
+	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return number
+	 * @return {number}
 	 */
 	getSortKey: function() {
 		return this._value ? 1 : 0;
 	},
 
 	/**
-	 * @see dv.DataValue.getValue
+	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
+	 * @return {boolean}
 	 */
 	getValue: function() {
 		return this._value;
 	},
 
 	/**
-	 * @see dv.DataValue.equals
-	 *
-	 * @since 0.1
+	 * @inheritdoc
 	 */
 	equals: function( value ) {
 		if ( !( value instanceof dv.BoolValue ) ) {
@@ -60,11 +59,9 @@ dv.BoolValue = util.inherit( 'DvBoolValue', PARENT, constructor, {
 	},
 
 	/**
-	 * @see dv.DataValue.toJSON
+	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
+	 * @return {boolean}
 	 */
 	toJSON: function() {
 		return this._value;
@@ -72,12 +69,23 @@ dv.BoolValue = util.inherit( 'DvBoolValue', PARENT, constructor, {
 
 } );
 
-dv.BoolValue.newFromJSON = function( json ) {
+/**
+ * @inheritdoc
+ * @static
+ *
+ * @return {dataValues.BoolValue}
+ */
+SELF.newFromJSON = function( json ) {
 	return new dv.BoolValue( json );
 };
 
-dv.BoolValue.TYPE = 'boolean';
+/**
+ * @inheritdoc
+ * @property {string} [TYPE='boolean']
+ * @static
+ */
+SELF.TYPE = 'boolean';
 
-dv.registerDataValue( dv.BoolValue );
+dv.registerDataValue( SELF );
 
 }( dataValues, util ) );

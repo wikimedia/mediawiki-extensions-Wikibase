@@ -1,55 +1,55 @@
-/**
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( dv, util ) {
 'use strict';
 
-var PARENT = dv.DataValue,
-	constructor = function( monoLingualValues ) {
-		// TODO: validate
-		this._texts = monoLingualValues;
-	};
+var PARENT = dv.DataValue;
 
 /**
  * Constructor for creating a multilingual text value. A multilingual text is a collection of
  * monolingual text values with the same meaning in different languages.
+ * @class dataValues.MultilingualTextValue
+ * @extends dataValues.DataValue
+ * @since 0.1
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  *
  * @constructor
- * @extends dv.DataValue
- * @since 0.1
  *
- * @param {dv.MonolingualTextValue[]} monoLingualValues
+ * @param {dataValues.MonolingualTextValue[]} monoLingualValues
  */
-dv.MultilingualTextValue = util.inherit( 'DvMultilingualTextValue', PARENT, constructor, {
+var SELF
+	= dv.MultilingualTextValue
+	= util.inherit( 'DvMultilingualTextValue', PARENT, function( monoLingualValues ) {
+		// TODO: validate
+		this._texts = monoLingualValues;
+	},
+{
+	/**
+	 * @property {dataValues.MonolingualTextValue[]}
+	 * @private
+	 */
+	_texts: null,
 
 	/**
-	 * @see dv.DataValue.getSortKey
+	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return string
+	 * @return {string}
 	 */
 	getSortKey: function() {
 		return this._texts.length < 1 ? '' : this._texts[0].getSortKey();
 	},
 
 	/**
-	 * @see dv.DataValue.getValue
+	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return dataValues.MultilingualTextValue
+	 * @return {dataValues.MultilingualTextValue}
 	 */
 	getValue: function() {
 		return this;
 	},
 
 	/**
-	 * @see dv.DataValue.equals
-	 *
-	 * @since 0.1
+	 * @inheritdoc
 	 */
 	equals: function( value ) {
 		if ( !( value instanceof dv.MultilingualTextValue ) ) {
@@ -63,11 +63,9 @@ dv.MultilingualTextValue = util.inherit( 'DvMultilingualTextValue', PARENT, cons
 	},
 
 	/**
-	 * @see dv.DataValue.toJSON
+	 * @inheritdoc
 	 *
-	 * @since 0.1
-	 *
-	 * @return Object
+	 * @return {Object}
 	 */
 	toJSON: function() {
 		var texts = {};
@@ -82,9 +80,7 @@ dv.MultilingualTextValue = util.inherit( 'DvMultilingualTextValue', PARENT, cons
 	/**
 	 * Returns the text in all languages available.
 	 *
-	 * @since 0.1
-	 *
-	 * @return Array
+	 * @return {string[]}
 	 */
 	getTexts: function() {
 		return this._texts;
@@ -92,20 +88,31 @@ dv.MultilingualTextValue = util.inherit( 'DvMultilingualTextValue', PARENT, cons
 
 } );
 
-dv.MultilingualTextValue.newFromJSON = function( json ) {
+/**
+ * @inheritdoc
+ * @return {dataValues.MultilingualTextValue}
+ */
+SELF.newFromJSON = function( json ) {
 	var monolingualValues = [];
 
 	for ( var languageCode in json ) {
 		if ( json.hasOwnProperty( languageCode ) ) {
-			monolingualValues.push( new dv.MonolingualTextValue( languageCode, json[languageCode] ) );
+			monolingualValues.push(
+				new dv.MonolingualTextValue( languageCode, json[languageCode] )
+			);
 		}
 	}
 
-	return new dv.MultilingualTextValue( monolingualValues );
+	return new SELF( monolingualValues );
 };
 
-dv.MultilingualTextValue.TYPE = 'multilingualtext';
+/**
+ * @inheritdoc
+ * @property {string} [TYPE='multilingualtext']
+ * @static
+ */
+SELF.TYPE = 'multilingualtext';
 
-dv.registerDataValue( dv.MultilingualTextValue );
+dv.registerDataValue( SELF );
 
 }( dataValues, util ) );

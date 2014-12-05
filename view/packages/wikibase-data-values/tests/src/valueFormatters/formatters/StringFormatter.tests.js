@@ -24,14 +24,14 @@ define( [
 	vf.tests.StringFormatterTest = util.inherit( PARENT, {
 
 		/**
-		 * @see valueFormatters.tests.ValueFormatterTest.getObject
+		 * @inheritdoc
 		 */
 		getConstructor: function() {
 			return vf.StringFormatter;
 		},
 
 		/**
-		 * @see valueFormatters.tests.ValueFormatterTest.getFormatArguments
+		 * @inheritdoc
 		 */
 		getFormatArguments: function() {
 			return [

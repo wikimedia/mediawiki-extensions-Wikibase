@@ -1,26 +1,29 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.a.r.werner@gmail.com >
- * @author H. Snater < mediawiki@snater.com >
- */
-dataValues.QuantityValue = ( function( dv, util ) {
+( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.DataValue;
 
-	/**
-	 * Constructor for a data value representing a quantity.
-	 *
-	 * @since 0.1
-	 *
-	 * @param {dataValues.DecimalValue} amount Numeric string or a number.
-	 * @param {string} unit A unit identifier. Must not be empty, use "1" for unit-less quantities.
-	 * @param {dataValues.DecimalValue} upperBound The upper bound of the quantity, inclusive.
-	 * @param {dataValues.DecimalValue} lowerBound The lower bound of the quantity, inclusive.
-	 *
-	 * @throws {Error} if constructor parameters are invalid.
-	 */
-	var constructor = function( amount, unit, upperBound, lowerBound ) {
+/**
+ * Constructor for a data value representing a quantity.
+ * @class dataValues.QuantityValue
+ * @extends dataValues.DataValue
+ * @since 0.1
+ * @licence GNU GPL v2+
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
+ *
+ * @param {dataValues.DecimalValue} amount Numeric string or a number.
+ * @param {string} unit A unit identifier. Must not be empty, use "1" for unit-less quantities.
+ * @param {dataValues.DecimalValue} upperBound The upper bound of the quantity, inclusive.
+ * @param {dataValues.DecimalValue} lowerBound The lower bound of the quantity, inclusive.
+ *
+ * @throws {Error} if constructor parameters are invalid.
+ */
+var SELF
+	= dv.QuantityValue
+	= util.inherit( 'DvQuantityValue', PARENT, function( amount, unit, upperBound, lowerBound ) {
 		if( !amount || !( amount instanceof dv.DecimalValue ) ) {
 			throw new Error( 'amount needs to be a DecimalValue object' );
 		}
@@ -43,127 +46,136 @@ dataValues.QuantityValue = ( function( dv, util ) {
 		this._unit = unit;
 		this._lowerBound = lowerBound;
 		this._upperBound = upperBound;
-	};
+	},
+{
+	/**
+	 * @property {dataValues.DecimalValue}
+	 * @private
+	 */
+	_amount: null,
 
-	var QuantityValue = util.inherit( 'DvQuantityValue', PARENT, constructor, {
-		/**
-		 * @see dv.DataValue.getSortKey
-		 *
-		 * @since 0.1
-		 *
-		 * @return string
-		 */
-		getSortKey: function() {
-			return this.getAmount().getValue();
-		},
+	/**
+	 * @property {string}
+	 * @private
+	 */
+	_unit: null,
 
-		/**
-		 * Returns a self-reference.
-		 * @see dv.DataValue.getValue
-		 * @since 0.1
-		 *
-		 * @return dataValues.QuantityValue
-		 */
-		getValue: function() {
-			return this;
-		},
+	/**
+	 * @property {dataValues.DecimalValue}
+	 * @private
+	 */
+	_lowerBound: null,
 
-		/**
-		 * Returns the amount held by this quantity, as a string in standard format.
-		 *
-		 * @since 0.1
-		 *
-		 * @return string
-		 */
-		getAmount: function() {
-			return this._amount;
-		},
+	/**
+	 * @property {dataValues.DecimalValue}
+	 * @private
+	 */
+	_upperBound: null,
 
-		/**
-		 * Returns the unit held by this quantity. Returns null in case of unit-less quantities.
-		 *
-		 * @since 0.1
-		 *
-		 * @return string|null
-		 */
-		getUnit: function() {
-			return this._unit;
-		},
+	/**
+	 * @inheritdoc
+	 *
+	 * @return {string}
+	 */
+	getSortKey: function() {
+		return this.getAmount().getValue();
+	},
 
-		/**
-		 * Returns the quantity's lower boundary.
-		 *
-		 * @since 0.1
-		 *
-		 * @return {dataValues.DecimalValue|null}
-		 */
-		getLowerBound: function() {
-			return this._lowerBound;
-		},
+	/**
+	 * @inheritdoc
+	 *
+	 * @return {dataValues.QuantityValue}
+	 */
+	getValue: function() {
+		return this;
+	},
 
-		/**
-		 * Returns the quantity's upper boundary.
-		 *
-		 * @since 0.1
-		 *
-		 * @return {dataValues.DecimalValue|null}
-		 */
-		getUpperBound: function() {
-			return this._upperBound;
-		},
+	/**
+	 * Returns the amount held by this quantity, as a string in standard format.
+	 *
+	 * @return {string}
+	 */
+	getAmount: function() {
+		return this._amount;
+	},
 
-		/**
-		 * @see dv.DataValue.equals
-		 *
-		 * @since 0.1
-		 */
-		equals: function( that ) {
-			if ( !( that instanceof this.constructor ) ) {
-				return false;
-			}
+	/**
+	 * Returns the unit held by this quantity. Returns null in case of unit-less quantities.
+	 *
+	 * @return {string|null}
+	 */
+	getUnit: function() {
+		return this._unit;
+	},
 
-			return this.getAmount().equals( that.getAmount() )
-				&& this.getUnit() === that.getUnit()
-				&& this.getLowerBound().equals( that.getLowerBound() )
-				&& this.getUpperBound().equals( that.getUpperBound() );
-		},
+	/**
+	 * Returns the quantity's lower boundary.
+	 *
+	 * @return {dataValues.DecimalValue|null}
+	 */
+	getLowerBound: function() {
+		return this._lowerBound;
+	},
 
-		/**
-		 * @see dv.DataValue.toJSON
-		 *
-		 * @since 0.1
-		 *
-		 * @return {Object}
-		 */
-		toJSON: function() {
-			return {
-				amount: this.getAmount().toJSON(),
-				unit: this.getUnit(),
-				upperBound: this.getUpperBound().toJSON(),
-				lowerBound: this.getLowerBound().toJSON()
-			};
+	/**
+	 * Returns the quantity's upper boundary.
+	 *
+	 * @return {dataValues.DecimalValue|null}
+	 */
+	getUpperBound: function() {
+		return this._upperBound;
+	},
+
+	/**
+	 * @inheritdoc
+	 */
+	equals: function( that ) {
+		if ( !( that instanceof this.constructor ) ) {
+			return false;
 		}
-	} );
+
+		return this.getAmount().equals( that.getAmount() )
+			&& this.getUnit() === that.getUnit()
+			&& this.getLowerBound().equals( that.getLowerBound() )
+			&& this.getUpperBound().equals( that.getUpperBound() );
+	},
 
 	/**
-	 * @see dv.DataValue.newFromJSON
+	 * @inheritdoc
+	 *
+	 * @return {Object}
 	 */
-	QuantityValue.newFromJSON = function( json ) {
-		return new QuantityValue(
-			new dv.DecimalValue( json.amount ),
-			json.unit,
-			new dv.DecimalValue( json.upperBound ),
-			new dv.DecimalValue( json.lowerBound )
-		);
-	};
+	toJSON: function() {
+		return {
+			amount: this.getAmount().toJSON(),
+			unit: this.getUnit(),
+			upperBound: this.getUpperBound().toJSON(),
+			lowerBound: this.getLowerBound().toJSON()
+		};
+	}
+} );
 
-	/**
-	 * @see dv.DataValue.TYPE
-	 */
-	QuantityValue.TYPE = 'quantity';
+/**
+ * @inheritdoc
+ *
+ * @return {dataValues.QuantityValue}
+ */
+SELF.newFromJSON = function( json ) {
+	return new SELF(
+		new dv.DecimalValue( json.amount ),
+		json.unit,
+		new dv.DecimalValue( json.upperBound ),
+		new dv.DecimalValue( json.lowerBound )
+	);
+};
 
-	return QuantityValue;
+/**
+ * @inheritdoc
+ * @property {string} [TYPE='quantity']
+ * @static
+ */
+SELF.TYPE = 'quantity';
+
+dv.registerDataValue( SELF );
 
 }( dataValues, util ) );
-
-dataValues.registerDataValue( dataValues.QuantityValue );

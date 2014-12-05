@@ -69,10 +69,6 @@ this.config = ( function() {
 				exports: 'time.Time',
 				deps: ['time/time', 'jquery', 'time/time.Parser']
 			},
-			'time/time.Time.validate': {
-				exports: 'time.Time.validate',
-				deps: ['time/time.Time']
-			},
 
 			'dataValues/dataValues': {
 				exports: 'dataValues'
@@ -110,7 +106,7 @@ this.config = ( function() {
 				'jquery',
 				'dataValues/DataValue',
 				'util/util.inherit',
-				'time/time.Parser', 'time/time.Time', 'time/time.Time.validate'
+				'time/time.Parser', 'time/time.Time'
 			],
 			'values/QuantityValue': [
 				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'

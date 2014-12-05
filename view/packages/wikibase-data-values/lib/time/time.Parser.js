@@ -1,15 +1,4 @@
-/**
- * time.js's Time parser.
- *
- * @since 0.1
- * @file
- * @ingroup Time.js
- * @licence GNU GPL v2+
- *
- * @author Denny Vrandečić
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
-time.Parser = ( function( time ) {
+( function( time ) {
 	'use strict';
 
 	// TODO: this should probably already return a time.Time instance and time.Time constructor
@@ -19,12 +8,19 @@ time.Parser = ( function( time ) {
 	//  without touching existing code. Parser code for similar models can still be shared.
 
 	/**
-	 * Time Parser
+	 * time.js's Time parser.
+	 * @class time.Parser
+	 * @licence GNU GPL v2+
+	 * @author Denny Vrandečić
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
-	 * @param {Object} settings
 	 * @constructor
+	 *
+	 * @param {Object} [settings={}]
 	 */
-	function Parser( settings ) {
+	var SELF = time.Parser = function Parser( settings ) {
+		settings = settings || {};
+
 		this._settings = time.settings;
 
 		for( var key in settings ) {
@@ -32,21 +28,22 @@ time.Parser = ( function( time ) {
 				this._settings[key] = settings[key];
 			}
 		}
-	}
+	};
 
 	/**
-	 * Parser settings
-	 * @type {Object}
+	 * Parser settings.
+	 * @property {Object}
+	 * @private
 	 */
-	Parser.prototype._settings = null;
+	SELF.prototype._settings = null;
 
 	/**
-	 * Parsing
+	 * Parses a string.
 	 *
 	 * @param {string} text
 	 * @return {Object}
 	 */
-	Parser.prototype.parse = function( text ) {
+	SELF.prototype.parse = function( text ) {
 		// TODO: instead of injecting settings, the parser should properly set up its own tokenizer
 		//  instance once such an object is available.
 
@@ -126,11 +123,12 @@ time.Parser = ( function( time ) {
 	 * Analyzes a string if it is a time value that has been specified in one of the output
 	 * precision formats specified in the settings. If so, this method re-converts such an output
 	 * string to an object that can be used to instantiate a time.Time object.
+	 * @private
 	 *
 	 * @param {string} string
-	 * @return {Object|false}
+	 * @return {Object|boolean}
 	 */
-	Parser.prototype._reconvertOutputString = function( string ) {
+	SELF.prototype._reconvertOutputString = function( string ) {
 		for( var precisionIndex in this._settings.outputprecision ) {
 			var regExp = new RegExp(
 				'^\\s*([^\\d\\s]*|)\\s*'
@@ -166,6 +164,7 @@ time.Parser = ( function( time ) {
 
 	/**
 	 * Returns an array of grammars which should be used.
+	 * @ignore
 	 *
 	 * @param {boolean} daybeforemonth Whether the day is usually written before the month.
 	 * @return {string[]}
@@ -405,7 +404,5 @@ time.Parser = ( function( time ) {
 		}
 		return str === matches[0];
 	}
-
-	return Parser; // expose
 
 }( time ) );

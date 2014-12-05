@@ -26,14 +26,14 @@ define( [
 	vf.tests.NullParserTest = util.inherit( PARENT, constructor, {
 
 		/**
-		 * @see valueFormatters.tests.ValueFormatterTest.getConstructor
+		 * @inheritdoc
 		 */
 		getConstructor: function() {
 			return vf.NullFormatter;
 		},
 
 		/**
-		 * @see valueFormatters.tests.ValueFormatterTest.getFormatArguments
+		 * @inheritdoc
 		 */
 		getFormatArguments: function() {
 			var date = new Date(),

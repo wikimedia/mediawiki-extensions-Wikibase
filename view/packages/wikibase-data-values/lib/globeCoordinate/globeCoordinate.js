@@ -1,14 +1,10 @@
 /**
  * Globe coordinate detection global routines
  * Original source: http://simia.net/valueparser/coordinate.js
- *
  * VERSION: 0.1
- *
- * @since 0.1
- * @file
- * @ingroup globeCoordinate.js
+ * @class globeCoordinate
+ * @singleton
  * @licence GNU GPL v2+
- *
  * @author Denny Vrandečić
  * @author H. Snater < mediawiki@snater.com >
  */

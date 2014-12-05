@@ -1,16 +1,4 @@
-/**
- * Globe coordinate formatter
- *
- * @since 0.1
- * @file
- * @ingroup globeCoordinate.js
- * @licence GNU GPL v2+
- *
- * @author H. Snater < mediawiki@snater.com >
- *
- * @dependency globeCoordinate
- */
-globeCoordinate.Formatter = ( function( globeCoordinate ) {
+( function( globeCoordinate ) {
 	'use strict';
 
 	var defaultOptions = {
@@ -34,13 +22,16 @@ globeCoordinate.Formatter = ( function( globeCoordinate ) {
 	};
 
 	/**
-	 * Constructor for a GlobeCoordinate formatter.
-	 *
-	 * @param {Object} [options]
+	 * Globe coordinate formatter.
+	 * @class globeCoordinate.Formatter
+	 * @licence GNU GPL v2+
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
+	 *
+	 * @param {Object} [options={}]
 	 */
-	function Formatter( options ) {
+	var SELF = globeCoordinate.Formatter = function Formatter( options ) {
 		options = options || {};
 
 		this._options = defaultOptions;
@@ -50,15 +41,16 @@ globeCoordinate.Formatter = ( function( globeCoordinate ) {
 				this._options[key] = options[key];
 			}
 		}
-	}
+	};
 
-	Formatter.prototype = {
+	SELF.prototype = {
 		// Don't forget about "constructor" since we are overwriting the whole prototype here:
-		constructor: Formatter,
+		constructor: SELF,
 
 		/**
 		 * Options
-		 * @type {Object}
+		 * @property {Object}
+		 * @private
 		 */
 		_options: null,
 
@@ -79,7 +71,7 @@ globeCoordinate.Formatter = ( function( globeCoordinate ) {
 		 * @return {string}
 		 */
 		precisionText: function( precision ) {
-			return Formatter.PRECISIONTEXT( precision, this._options );
+			return SELF.PRECISIONTEXT( precision, this._options );
 		},
 
 		/**
@@ -136,17 +128,18 @@ globeCoordinate.Formatter = ( function( globeCoordinate ) {
 				+ text( longDeg.second, this._options.second )
 				+ ( ( lon < 0 ) ? this._options.west : this._options.east );
 		}
-
 	};
 
 	/**
 	 * Returns a precision's string representation.
+	 * @property {Function}
+	 * @static
 	 *
 	 * @param {number} precision
-	 * @param {Object} [options]
+	 * @param {Object} [options={}]
 	 * @return {string}
 	 */
-	Formatter.PRECISIONTEXT = function( precision, options ) {
+	SELF.PRECISIONTEXT = function( precision, options ) {
 		var precisionText,
 			combinedOptions = {};
 
@@ -170,7 +163,5 @@ globeCoordinate.Formatter = ( function( globeCoordinate ) {
 
 		return precisionText;
 	};
-
-	return Formatter;
 
 }( globeCoordinate ) );

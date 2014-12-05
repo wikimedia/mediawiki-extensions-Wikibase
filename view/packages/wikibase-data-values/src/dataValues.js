@@ -1,46 +1,40 @@
 /**
+ * Global 'dataValues' object.
+ * @class dataValues
+ * @singleton
+ * @since 0.1
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-
-/**
- * Global 'dataValues' object
- * @since 0.1
- * @type Object
- */
-this.dataValues = new( function Dv() {
+this.dataValues = new ( function Dv() {
 	'use strict';
 
 	var dvs = [];
 
 	/**
 	 * Returns the constructor associated with the provided DataValue type.
+	 * @ignore
 	 *
-	 * @since 0.1
+	 * @param {string} dataValueType
+	 * @return {dataValues.DataValue}
 	 *
-	 * @param {String} dataValueType
-	 *
-	 * @return dv.DataValue
+	 * @throws {Error} if the data value type is unknown.
 	 */
 	function getDataValueConstructor( dataValueType ) {
 		if ( dvs[dataValueType] !== undefined ) {
 			return dvs[dataValueType];
 		}
 
-		throw new Error( 'Unknown data value type "' + dataValueType + '" has no associated DataValue class' );
+		throw new Error( 'Unknown data value type "' + dataValueType + '" has no associated '
+			+ 'DataValue class' );
 	}
 
 	/**
 	 * Constructs and returns a new DataValue of specified type with the provided data.
 	 *
-	 * @since 0.1
-	 *
-	 * @throws {Error} If the a unknown data value type is given.
-	 * @throws {Error} If the given data is not sufficient for constructing the data value.
-	 *
-	 * @param {String} dataValueType
+	 * @param {string} dataValueType
 	 * @param {*} data
-	 * @return dv.DataValue
+	 * @return {dataValues.DataValue}
 	 */
 	this.newDataValue = function( dataValueType, data ) {
 		return getDataValueConstructor( dataValueType ).newFromJSON( data );
@@ -49,9 +43,7 @@ this.dataValues = new( function Dv() {
 	/**
 	 * Returns the types of the registered DataValues.
 	 *
-	 * @since 0.1
-	 *
-	 * @return String[]
+	 * @return {string[]}
 	 */
 	this.getDataValues = function() {
 		var keys = [];
@@ -68,11 +60,8 @@ this.dataValues = new( function Dv() {
 	/**
 	 * Returns if there is a DataValue with the provided type.
 	 *
-	 * @since 0.1
-	 *
-	 * @param {String} dataValueType
-	 *
-	 * @return Boolean
+	 * @param {string} dataValueType
+	 * @return {boolean}
 	 */
 	this.hasDataValue = function( dataValueType ) {
 		return dvs[dataValueType] !== undefined;
@@ -80,12 +69,10 @@ this.dataValues = new( function Dv() {
 
 	/**
 	 * Registers a data value.
-	 * If there is a data value already with the provided name,
-	 * it will be overridden with the newly provided data.
+	 * If a data value with the provided name is registered already, the registration will be
+	 * overwritten with the newly provided data.
 	 *
-	 * @since 0.1
-	 *
-	 * @param {dv.DataValue} dataValueConstructor
+	 * @param {dataValues.DataValue} dataValueConstructor
 	 */
 	this.registerDataValue = function( dataValueConstructor ) {
 		dvs[dataValueConstructor.TYPE] = dataValueConstructor;
