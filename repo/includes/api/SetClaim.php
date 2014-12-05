@@ -58,14 +58,15 @@ class SetClaim extends ModifyClaim {
 	public function execute() {
 		$params = $this->extractRequestParams();
 		$claim = $this->getClaimFromParams( $params );
-
 		$guid = $claim->getGuid();
-		if( $guid === null ){
+
+		if ( $guid === null ){
 			$this->dieError( 'GUID must be set when setting a claim', 'invalid-claim' );
 		}
-		$guid = $this->claimGuidParser->parse( $guid );
 
-		$entityId = $guid->getEntityId();
+		$claimGuid = $this->claimGuidParser->parse( $guid );
+
+		$entityId = $claimGuid->getEntityId();
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
@@ -74,7 +75,7 @@ class SetClaim extends ModifyClaim {
 
 		$changeop = $this->claimChangeOpFactory->newSetClaimOp(
 			$claim,
-			( isset( $params['index'] ) ? $params['index'] : null )
+			isset( $params['index'] ) ? $params['index'] : null
 		);
 
 		$this->claimModificationHelper->applyChangeOp( $changeop, $entity, $summary );
@@ -88,7 +89,9 @@ class SetClaim extends ModifyClaim {
 	 * @param array $params
 	 * @param Claim $claim
 	 * @param Entity $entity
+	 *
 	 * @return Summary
+	 *
 	 * @todo this summary builder is ugly and summary stuff needs to be refactored
 	 */
 	protected function getSummary( array $params, Claim $claim, Entity $entity ){
@@ -100,9 +103,11 @@ class SetClaim extends ModifyClaim {
 			new Claims( $entity->getClaims() ),
 			$claim
 		);
+
 		if ( isset( $params['summary'] ) ) {
 			$summary->setUserSummary( $params['summary'] );
 		}
+
 		return $summary;
 	}
 
@@ -122,17 +127,17 @@ class SetClaim extends ModifyClaim {
 
 		try {
 			$serializedClaim = FormatJson::decode( $params['claim'], true );
-			if( !is_array( $serializedClaim ) ){
+			if ( !is_array( $serializedClaim ) ){
 				throw new IllegalValueException( 'Failed to get claim from claim Serialization' );
 			}
 			$claim = $unserializer->newFromSerialization( $serializedClaim );
-			if( !$claim instanceof Claim ) {
+			if ( !$claim instanceof Claim ) {
 				throw new IllegalValueException( 'Failed to get claim from claim Serialization' );
 			}
 			return $claim;
-		} catch( InvalidArgumentException $invalidArgumentException ) {
+		} catch ( InvalidArgumentException $invalidArgumentException ) {
 			$this->dieError( 'Failed to get claim from claim Serialization ' . $invalidArgumentException->getMessage(), 'invalid-claim' );
-		} catch( OutOfBoundsException $outOfBoundsException ) {
+		} catch ( OutOfBoundsException $outOfBoundsException ) {
 			$this->dieError( 'Failed to get claim from claim Serialization ' . $outOfBoundsException->getMessage(), 'invalid-claim' );
 		}
 
@@ -184,7 +189,7 @@ class SetClaim extends ModifyClaim {
 	 *
 	 * @since 0.4
 	 *
-	 * @return string
+	 * @return string[]
 	 */
 	public function getDescription() {
 		return array(
@@ -197,7 +202,7 @@ class SetClaim extends ModifyClaim {
 	 *
 	 * @since 0.4
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	protected function getExamples() {
 		return array(
