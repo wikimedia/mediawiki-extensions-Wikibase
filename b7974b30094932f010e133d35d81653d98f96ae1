@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_1082b2a9",
+        "filename": "client/includes/CachingOtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-05T15:36:27Z",
+      "side": 1,
+      "message": "Yeah... done",
+      "parentUuid": "2e9df725_958234cc",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_d520bcf4",
         "filename": "client/includes/CachingOtherProjectsSitesProvider.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-05T13:48:58Z",
       "side": 1,
       "message": "json_encode? why not just implode( \u0027|\u0027, $siteLinkGroups ) ?",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_b08e5ed4",
+        "filename": "client/includes/CachingOtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-05T15:36:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_d520bcf4",
       "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_d0a20a3b",
+        "filename": "client/includes/OtherProjectsSitesGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-05T15:36:27Z",
+      "side": 1,
+      "message": "Made this a string containing the id of the local site only",
+      "parentUuid": "2e9df725_f5705809",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_f557f85a",
         "filename": "client/includes/OtherProjectsSitesGenerator.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-12-05T13:48:58Z",
       "side": 1,
       "message": "That would be language links, which are covered elsewhere, right?",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_107872be",
+        "filename": "client/includes/OtherProjectsSitesGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-05T15:36:27Z",
+      "side": 1,
+      "message": "yeah (please note that I just copied this code)",
+      "parentUuid": "2e9df725_f557f85a",
       "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_30480e8c",
+        "filename": "client/includes/OtherProjectsSitesGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-05T15:36:27Z",
+      "side": 1,
+      "message": "This is a SiteList object, so I can\u0027t just use arbitrary keys",
+      "parentUuid": "2e9df725_d54e7cc4",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_75c3e80a",
         "filename": "client/includes/OtherProjectsSitesGenerator.php",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2014-12-05T13:48:58Z",
       "side": 1,
       "message": "If you use the site IDs as the array keys, this can simply be implemented as array_keys( $this-\u003egetOtherProjectsSites( $siteLinkGroups )  ).",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_102632ca",
+        "filename": "client/includes/OtherProjectsSitesGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-05T15:36:27Z",
+      "side": 1,
+      "message": "It\u0027s a SiteList, so it\u0027s not that easy... but given that this code is more or less a 1:1 copy and the list is very small in production (it will never outgrow 10 Sites)",
+      "parentUuid": "2e9df725_75c3e80a",
       "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_44539f1a",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-05T15:36:27Z",
+      "side": 1,
+      "message": "Well, but we don\u0027t really (except of manually nuking cache keys, but that\u0027s not exactly fun)",
+      "parentUuid": "2e9df725_15d4e4bd",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_35cd6035",
         "filename": "client/tests/phpunit/includes/CachingOtherProjectsSitesProviderTest.php",
         "patchSetId": 1
@@ -132,6 +258,24 @@
       "writtenOn": "2014-12-05T13:48:58Z",
       "side": 1,
       "message": "please don\u0027t use an empty array here for testing. The implementation may simply shorten out if the input is empty, so no caching logic would be tested.",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_e443cb41",
+        "filename": "client/tests/phpunit/includes/CachingOtherProjectsSitesProviderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-05T15:36:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_35cd6035",
       "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
