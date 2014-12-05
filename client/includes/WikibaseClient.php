@@ -705,10 +705,16 @@ final class WikibaseClient {
 	 * @return OtherProjectsSitesProvider
 	 */
 	public function getOtherProjectsSitesProvider() {
-		return new OtherProjectsSitesProvider(
+		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator(
 			$this->getSiteStore(),
-			$this->getSite(),
+			$this->getSettings()->getSetting( 'siteGlobalID' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' )
+		);
+
+		return new CachingOtherProjectsSitesProvider(
+			$otherProjectsSitesProvider,
+			wfGetMainCache(),
+			60 * 60
 		);
 	}
 
