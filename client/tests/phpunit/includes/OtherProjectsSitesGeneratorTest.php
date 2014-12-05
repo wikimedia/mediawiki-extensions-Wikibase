@@ -5,11 +5,11 @@ namespace Wikibase\Client\Tests;
 use MediaWikiSite;
 use Site;
 use SiteList;
-use Wikibase\Client\OtherProjectsSitesProvider;
+use Wikibase\Client\OtherProjectsSitesGenerator;
 use Wikibase\Test\MockSiteStore;
 
 /**
- * @covers Wikibase\Client\OtherProjectsSitesProvider
+ * @covers Wikibase\Client\OtherProjectsSitesGenerator
  *
  * @since 0.5
  *
@@ -22,15 +22,15 @@ use Wikibase\Test\MockSiteStore;
  * @author Thomas Pellissier Tanon
  * @author Marius Hoch < hoo@online.de >
  */
-class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
+class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider otherProjectSitesProvider
 	 */
-	public function testOtherProjectSites( array $supportedSites, Site $inputSite, SiteList $expectedSites ) {
+	public function testOtherProjectSites( array $supportedSites, $localSiteId, SiteList $expectedSites ) {
 		$siteStore = $this->getSiteStoreMock();
 
-		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $siteStore, $inputSite, array( 'wikidata' ) );
+		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator( $siteStore, $localSiteId, array( 'wikidata' ) );
 
 		$this->assertEquals(
 			$expectedSites,
@@ -41,9 +41,9 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider otherProjectSitesProvider
 	 */
-	public function testOtherProjectSiteIds( array $supportedSites, Site $inputSite, SiteList $expectedSites ) {
+	public function testOtherProjectSiteIds( array $supportedSites, $localSiteId, SiteList $expectedSites ) {
 		$siteStore = $this->getSiteStoreMock();
-		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $siteStore, $inputSite, array( 'wikidata' ) );
+		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator( $siteStore, $localSiteId, array( 'wikidata' ) );
 
 		$expectedSiteIds = array();
 		foreach ( $expectedSites as $site ) {
@@ -64,7 +64,7 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 		$result[] = $siteStore->getSite( 'frwiki' );
 		$tests['Same language'] = array(
 			array( 'wikipedia', 'wikisource' ),
-			$siteStore->getSite( 'frwikisource' ),
+			'frwikisource',
 			$result
 		);
 
@@ -73,7 +73,7 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 		$result[] = $siteStore->getSite( 'commonswiki' );
 		$tests['Same language + only one in group'] = array(
 			array( 'wikipedia', 'wikisource', 'commons' ),
-			$siteStore->getSite( 'frwikisource' ),
+			'frwikisource',
 			$result
 		);
 
@@ -81,7 +81,7 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 		$result[] = $siteStore->getSite( 'commonswiki' );
 		$tests['Only one in group'] = array(
 			array( 'wikipedia', 'wikisource', 'commons' ),
-			$siteStore->getSite( 'eswiki' ),
+			'eswiki',
 			$result
 		);
 
@@ -89,7 +89,7 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 		$result[] = $siteStore->getSite( 'wikidatawiki' );
 		$tests['Special group'] = array(
 			array( 'wikipedia', 'wikisource', 'special' ),
-			$siteStore->getSite( 'eswiki' ),
+			'eswiki',
 			$result
 		);
 
@@ -98,14 +98,14 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 		$result[] = $siteStore->getSite( 'wikidatawiki' );
 		$tests['Special group + language'] = array(
 			array( 'wikipedia', 'wikisource', 'special' ),
-			$siteStore->getSite( 'frwiki' ),
+			'frwiki',
 			$result
 		);
 
 		$result = new SiteList();
 		$tests['No other sites'] = array(
 			array( 'wikipedia', 'wikisource' ),
-			$siteStore->getSite( 'eswiki' ),
+			'eswiki',
 			$result
 		);
 
