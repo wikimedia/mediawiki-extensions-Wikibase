@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_95c31461",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T12:52:34Z",
+      "side": 1,
+      "message": "Nice. Thanks for explaining.",
+      "parentUuid": "2e9df725_355480c9",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_6a86a76c",
         "filename": "lib/includes/store/EntityInfo.php",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "no, if we don\u0027t know the labels, we throw an exception.",
       "parentUuid": "2e9df725_6a86a76c",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_35e1e0fb",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T12:52:34Z",
+      "side": 1,
+      "message": "Uh? That\u0027s not what I said. Language not known -\u003e return null.",
+      "parentUuid": "2e9df725_156b8483",
       "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -324,6 +360,24 @@
       "side": 1,
       "message": "to be compatible with what? This test case was the *only* think using it.",
       "parentUuid": "2e9df725_4aae4be6",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_75be88d3",
+        "filename": "lib/tests/phpunit/store/EntityInfoTermLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T12:52:34Z",
+      "side": 1,
+      "message": "I\u0027m not 100% sure about this. Are you? See my I9391f2c.",
+      "parentUuid": "2e9df725_f5f4d8cd",
       "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
