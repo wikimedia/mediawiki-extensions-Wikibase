@@ -49,18 +49,27 @@ class WikibaseDataTypeBuilders {
 	private $urlSchemes;
 
 	/**
+	 * PCRE regular expression matching supported units.
+	 * @var string
+	 */
+	private $allowedUnitPattern;
+
+	/**
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
+	 * @param string $allowedUnitPattern PCRE regular expression
 	 */
 	public function __construct(
 		EntityLookup $lookup,
 		EntityIdParser $idParser,
-		array $urlSchemes
+		array $urlSchemes,
+		$allowedUnitPattern
 	) {
 		$this->entityIdParser = $idParser;
 		$this->entityLookup = $lookup;
 		$this->urlSchemes = $urlSchemes;
+		$this->allowedUnitPattern = $allowedUnitPattern;
 	}
 
 	/**
@@ -357,7 +366,7 @@ class WikibaseDataTypeBuilders {
 		// only allow the '1' unit for now:
 		$unitValidators = array(
 			new TypeValidator( 'string' ),
-			new RegexValidator( '/^1$/', false, 'unknown-unit' ),
+			new RegexValidator( $this->allowedUnitPattern, false, 'unknown-unit' ),
 		);
 
 		$validators[] = new DataFieldValidator( 'unit', // Note: validate the 'unit' field

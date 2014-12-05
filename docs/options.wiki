@@ -21,6 +21,9 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;sharedCacheType: The type of cache to use for the shared object cache. Defaults to $wgMainCacheType. Use CACHE_XXX constants.
 ;urlSchemes: Which URL schemes should be allowed in URL data values. The default is array( 'http', 'https' ). Other supported schemes are 'ftp' and 'mailto'. Schemes (protocols) added here will only have any effect if validation is supported for that protocol; that is, adding 'mailto' will work, while adding 'gopher' will do nothing.
 :* NOTE: This setting is only really meaningful for the repository, it's shared with the client extension for technical reasons.
+;unitPattern: Which units to allow for quantity values, as a regular expression (PCRE). The default is '@^.+$@', meaning any.
+:* NOTE: This pattern should at least match the string '1', which is the unit "unit" - i.e. the unit used to represent unitless quantities, such as counts or ratios.
+:* NOTE: This setting is only really meaningful for the repository, it's shared with the client extension for technical reasons.
 ;entityPrefixes: ID prefixes to use for the different entity types, as an associative array mapping prefixes to entity type constants. Default:
 <poem>
           array(

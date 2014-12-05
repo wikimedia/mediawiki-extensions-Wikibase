@@ -46,8 +46,9 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 		$entityLookup->putEntity( $p8 );
 
 		$urlSchemes = array( 'http', 'https', 'ftp', 'mailto' );
+		$unitPattern = '@^(1|m|kg)$@';
 
-		$builders = new WikibaseDataTypeBuilders( $entityLookup, $entityIdParser, $urlSchemes );
+		$builders = new WikibaseDataTypeBuilders( $entityLookup, $entityIdParser, $urlSchemes, $unitPattern );
 		$dataTypeFactory = new DataTypeFactory( $builders->getDataTypeBuilders() );
 
 		return $dataTypeFactory;
@@ -172,8 +173,9 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 
 			//quantity
 			array( 'quantity', QuantityValue::newFromNumber( 5 ), true, 'Simple integer' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5, 'm' ), false, 'We don\'t support units yet' ),
-			array( 'quantity', QuantityValue::newFromDecimal( '-11.234', '1', '-10', '-12' ), true, 'decimal strings' ),
+			array( 'quantity', QuantityValue::newFromNumber( 5, 'm' ), true, 'Supported unit' ),
+			array( 'quantity', QuantityValue::newFromNumber( 5, 'kittens' ), false, 'Bad unit' ),
+			array( 'quantity', QuantityValue::newFromNumber( '-11.234', '1', '-10', '-12' ), true, 'decimal strings' ),
 
 			//monolingual text
 			array( 'monolingualtext', new MonolingualTextValue( 'en', 'text' ), true, 'Simple value' ),
