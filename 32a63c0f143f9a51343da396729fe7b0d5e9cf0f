@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_9091e254",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T14:56:19Z",
+      "side": 1,
+      "message": "there\u0027s a difference between \"not set\" and \"not known\". \"not known\" means we don\u0027t have it, but we don\u0027t know whether it\u0027s set. Which is not what returning null indicates.",
+      "parentUuid": "2e9df725_35e1e0fb",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_8a8bf371",
         "filename": "lib/includes/store/EntityInfo.php",
         "patchSetId": 1
@@ -119,6 +137,24 @@
       "writtenOn": "2014-12-05T09:51:48Z",
       "side": 1,
       "message": "Copy-paste again. Description, not label.\n\n... or null if a description in that language is not known.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_508b5a20",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T14:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_8a8bf371",
       "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -142,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_3086ce19",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T14:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_db0eb337",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_4a85eb59",
         "filename": "lib/includes/store/EntityInfo.php",
         "patchSetId": 1
@@ -153,6 +207,24 @@
       "writtenOn": "2014-12-05T09:51:48Z",
       "side": 1,
       "message": "... or null if a term in that language is not known.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_107dd217",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T14:56:19Z",
+      "side": 1,
+      "message": "\"not set\".",
+      "parentUuid": "2e9df725_4a85eb59",
       "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -188,6 +260,23 @@
       "side": 1,
       "message": "The exceptions are declared by the interface. I see no reason to repeat them here. Generally, we only do that if the methods throws the exception directly. Could also drop the documentation for the exception below.",
       "parentUuid": "2e9df725_5b22a3a3",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_708bf61b",
+        "filename": "lib/includes/store/EntityRetrievingTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T14:56:19Z",
+      "side": 1,
+      "message": "I\u0027m documenting this here because the condition is more restrictive than the one documented in the interface: this throws OOB *only* if the entity does not exist.",
       "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -246,6 +335,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_f09e2659",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T14:56:19Z",
+      "side": 1,
+      "message": "But not directly. The fact that it might throw OOB is documented in the interface - which is what callers are coding against. I see no reason to repeat that here, and it makes the interface spec harder to maintain.",
+      "parentUuid": "2e9df725_8aa45306",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_aa5d8f1c",
         "filename": "lib/includes/store/TermLookup.php",
         "patchSetId": 1
@@ -274,6 +381,24 @@
       "writtenOn": "2014-12-05T10:48:14Z",
       "side": 1,
       "message": "eas? :)",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_b0a89e75",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T14:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_bb2c0791",
       "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -314,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_109cf25e",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T14:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_7b4e7f74",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_2aa97fdc",
         "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
         "patchSetId": 1
@@ -325,6 +468,24 @@
       "writtenOn": "2014-12-05T09:51:48Z",
       "side": 1,
       "message": "This elseif-else doesn\u0027t make sense any more.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_d0a52a9c",
+        "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T14:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_2aa97fdc",
       "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -378,6 +539,24 @@
       "side": 1,
       "message": "I\u0027m not 100% sure about this. Are you? See my I9391f2c.",
       "parentUuid": "2e9df725_f5f4d8cd",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_50e83aaf",
+        "filename": "lib/tests/phpunit/store/EntityInfoTermLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T14:56:19Z",
+      "side": 1,
+      "message": "I know that EntityInfoBuilder is the only thing (besides test cases) that instantiates EntityInfo, so yea. But you are right that this shouldn\u0027t fail silently, thanks for spotting that!",
+      "parentUuid": "2e9df725_75be88d3",
       "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
