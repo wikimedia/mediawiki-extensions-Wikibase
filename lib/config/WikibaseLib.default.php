@@ -101,7 +101,10 @@ $wgWBLibDefaultSettings = array(
 	),
 
 	// URL schemes allowed for URL values. See UrlSchemeValidators for a full list.
-	'urlSchemes' => array( 'ftp', 'http', 'https', 'irc' )
+	'urlSchemes' => array( 'ftp', 'http', 'https', 'irc' ),
+
+	// Any non-empty string is allowed as a unit.
+	'unitPattern' => '@^.+$@',
 );
 
 // experimental stuff

@@ -168,10 +168,13 @@ final class WikibaseClient {
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
 			$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
+			$unitPattern = $this->settings->getSetting( 'unitPattern' );
+
 			$builders = new WikibaseDataTypeBuilders(
 				$this->getEntityLookup(),
 				$this->getEntityIdParser(),
-				$urlSchemes
+				$urlSchemes,
+				$unitPattern
 			);
 
 			$typeBuilderSpecs = array_intersect_key(
