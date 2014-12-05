@@ -5,11 +5,11 @@ namespace Wikibase\Client\Tests;
 use MediaWikiSite;
 use Site;
 use SiteList;
-use Wikibase\Client\OtherProjectsSitesProvider;
+use Wikibase\Client\OtherProjectsSitesGenerator;
 use Wikibase\Test\MockSiteStore;
 
 /**
- * @covers Wikibase\Client\OtherProjectsSitesProvider
+ * @covers Wikibase\Client\OtherProjectsSitesGenerator
  *
  * @since 0.5
  *
@@ -22,7 +22,7 @@ use Wikibase\Test\MockSiteStore;
  * @author Thomas Pellissier Tanon
  * @author Marius Hoch < hoo@online.de >
  */
-class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
+class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider otherProjectSitesProvider
@@ -30,7 +30,7 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 	public function testOtherProjectSites( array $supportedSites, Site $inputSite, SiteList $expectedSites ) {
 		$siteStore = $this->getSiteStoreMock();
 
-		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $siteStore, $inputSite, array( 'wikidata' ) );
+		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator( $siteStore, $inputSite, array( 'wikidata' ) );
 
 		$this->assertEquals(
 			$expectedSites,
@@ -43,7 +43,7 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 	 */
 	public function testOtherProjectSiteIds( array $supportedSites, Site $inputSite, SiteList $expectedSites ) {
 		$siteStore = $this->getSiteStoreMock();
-		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $siteStore, $inputSite, array( 'wikidata' ) );
+		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator( $siteStore, $inputSite, array( 'wikidata' ) );
 
 		$expectedSiteIds = array();
 		foreach ( $expectedSites as $site ) {
