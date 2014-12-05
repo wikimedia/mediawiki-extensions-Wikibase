@@ -44,18 +44,14 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 	}
 
 	/**
-	 * Provides a list of sites to link to in the "other project" sidebar
+	 * Get the site ids of other projects to use.
 	 *
-	 * This list contains the wiki in the same language if it exists for each other site groups and the wikis alone in their
-	 * sites groups (like commons)
-	 *
-	 * @param string[] $supportedSiteGroupIds
-	 *
-	 * @return SiteList
+	 * @param array $siteLinkGroups
+	 * @return string[]
 	 */
-	public function getOtherProjectsSites( array $siteLinkGroups ) {
+	public function getOtherProjectsSiteIds( array $siteLinkGroups ) {
 		$currentGroupId = $this->getLocalSite()->getGroup();
-		$otherProjectsSites = new SiteList();
+		$otherProjectsSiteIds = array();
 
 		$this->expandSpecialGroups( $siteLinkGroups );
 		foreach ( $siteLinkGroups as $groupId ) {
@@ -65,25 +61,8 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 
 			$siteToAdd = $this->getSiteForGroup( $groupId );
 			if ( $siteToAdd ) {
-				$otherProjectsSites[] = $siteToAdd;
+				$otherProjectsSiteIds[] = $siteToAdd->getGlobalId();
 			}
-		}
-
-		return $otherProjectsSites;
-	}
-
-	/**
-	 * Get the site ids of other projects to use.
-	 *
-	 * @param array $siteLinkGroups
-	 * @return string[]
-	 */
-	public function getOtherProjectsSiteIds( array $siteLinkGroups ) {
-		$otherProjectsSites = $this->getOtherProjectsSites( $siteLinkGroups );
-
-		$otherProjectsSiteIds = array();
-		foreach ( $otherProjectsSites as $site ) {
-			$otherProjectsSiteIds[] = $site->getGlobalId();
 		}
 
 		return $otherProjectsSiteIds;
