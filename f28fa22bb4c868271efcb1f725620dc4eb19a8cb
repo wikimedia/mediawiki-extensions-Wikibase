@@ -16,6 +16,24 @@
       "revId": "f28fa22bb4c868271efcb1f725620dc4eb19a8cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_b56730b4",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T12:43:02Z",
+      "side": 0,
+      "message": "indeed :)",
+      "parentUuid": "2e9df725_9b182b7c",
+      "revId": "f28fa22bb4c868271efcb1f725620dc4eb19a8cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_355480c9",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T12:43:02Z",
+      "side": 1,
+      "message": "It\u0027s an improvement, as it uses the LinkCache. \n\nPreviously, we used EntityLookup::hasEntity, which in the end hits WikiPageEntityRevisionLookup::getLatestRevisionId, which does a database lookup.",
+      "parentUuid": "2e9df725_0a6123d0",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_6a86a76c",
         "filename": "lib/includes/store/EntityInfo.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-05T09:51:48Z",
       "side": 1,
       "message": "... or null if a label in that language is not known.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_156b8483",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T12:43:02Z",
+      "side": 1,
+      "message": "no, if we don\u0027t know the labels, we throw an exception.",
+      "parentUuid": "2e9df725_6a86a76c",
       "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_7501a8b8",
+        "filename": "lib/includes/store/EntityRetrievingTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T12:43:02Z",
+      "side": 1,
+      "message": "The exceptions are declared by the interface. I see no reason to repeat them here. Generally, we only do that if the methods throws the exception directly. Could also drop the documentation for the exception below.",
+      "parentUuid": "2e9df725_5b22a3a3",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_6a9f87ba",
         "filename": "lib/includes/store/EntityTermLookup.php",
         "patchSetId": 1
@@ -115,6 +169,24 @@
       "writtenOn": "2014-12-05T09:51:48Z",
       "side": 1,
       "message": "Still @throws OutOfBoundsException.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_55102c04",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T12:43:02Z",
+      "side": 1,
+      "message": "Yes. It\u0027s documented in the interface.  PHP doesn\u0027t make guaranteed about *not* throwing specific exceptions anywhere.",
+      "parentUuid": "2e9df725_6a9f87ba",
       "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -234,6 +306,24 @@
       "writtenOn": "2014-12-05T09:51:48Z",
       "side": 1,
       "message": "Uh. See? I would prefer to keep this compatibility feature.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_f5f4d8cd",
+        "filename": "lib/tests/phpunit/store/EntityInfoTermLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T12:43:02Z",
+      "side": 1,
+      "message": "to be compatible with what? This test case was the *only* think using it.",
+      "parentUuid": "2e9df725_4aae4be6",
       "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
