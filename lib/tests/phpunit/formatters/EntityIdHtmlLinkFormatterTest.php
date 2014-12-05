@@ -4,11 +4,11 @@ namespace Wikibase\Lib\Test;
 
 use OutOfBoundsException;
 use Title;
+use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use ValueFormatters\FormatterOptions;
 
 /**
  * @covers Wikibase\Lib\EntityIdHtmlLinkFormatter
@@ -41,6 +41,8 @@ class EntityIdHtmlLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param bool $exists
+	 *
 	 * @return EntityTitleLookup
 	 */
 	private function newEntityTitleLookup( $exists = true ) {
@@ -121,4 +123,5 @@ class EntityIdHtmlLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertRegExp( $expectedRegex, $result );
 	}
+
 }
