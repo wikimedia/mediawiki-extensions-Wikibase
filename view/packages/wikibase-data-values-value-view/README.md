@@ -105,7 +105,7 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.9.0 (dev)
+### 0.9.0 (2014-12-05)
 
 #### Breaking changes
 * `util.highlightSubstring`: Replaced `caseInsensitive` option with `caseSensitive` option defaulting to `false`.
