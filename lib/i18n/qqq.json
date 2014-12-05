@@ -74,6 +74,7 @@
 	"wikibase-validator-bad-url-scheme": "Input validation error shown when the value is a URL using an unsupported protocol (scheme).\n\nParameters:\n* $1 - the scheme name\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-unknown-unit": "Input validation error when the value has an unknown unit.\n\nParameters:\n* $1 - the unknown unit\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-not-allowed": "Input validation error when the given value is not found in the known list of allowed values.\n\nParameters:\n* $1 - the illegal value\n{{Related|Wikibase-validator}}",
+	"wikibase-validator-no-validators": "Input validation error when there are no validators that can pass (that is, the validation always fails, per configuration).\n\n{{Related|Wikibase-validator}}",
 	"datatypes-type-wikibase-item": "The name of a data type for items in Wikibase.\n{{Identical|Item}}",
 	"datatypes-type-wikibase-property": "The name of a data type for properties in Wikibase.\n{{Identical|Property}}",
 	"datatypes-type-commonsMedia": "The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).",
