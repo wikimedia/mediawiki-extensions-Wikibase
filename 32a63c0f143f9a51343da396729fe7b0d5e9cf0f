@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_0a6123d0",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T09:51:48Z",
+      "side": 1,
+      "message": "What\u0027s the performance-implication of this?",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_6a86a76c",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T09:51:48Z",
+      "side": 1,
+      "message": "... or null if a label in that language is not known.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_8a8bf371",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T09:51:48Z",
+      "side": 1,
+      "message": "Copy-paste again. Description, not label.\n\n... or null if a description in that language is not known.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_4a85eb59",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T09:51:48Z",
+      "side": 1,
+      "message": "... or null if a term in that language is not known.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_6a9f87ba",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T09:51:48Z",
+      "side": 1,
+      "message": "Still @throws OutOfBoundsException.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_8aa45306",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T09:51:48Z",
+      "side": 1,
+      "message": "Still @throws OutOfBoundsException.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_aa5d8f1c",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T09:51:48Z",
+      "side": 1,
+      "message": "\"eas\"?",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_ca5a5b22",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T09:51:48Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_2aa97fdc",
+        "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T09:51:48Z",
+      "side": 1,
+      "message": "This elseif-else doesn\u0027t make sense any more.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_4aae4be6",
+        "filename": "lib/tests/phpunit/store/EntityInfoTermLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T09:51:48Z",
+      "side": 1,
+      "message": "Uh. See? I would prefer to keep this compatibility feature.",
+      "revId": "32a63c0f143f9a51343da396729fe7b0d5e9cf0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
