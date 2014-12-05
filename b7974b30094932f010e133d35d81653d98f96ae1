@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_958234cc",
+        "filename": "client/includes/CachingOtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T13:48:58Z",
+      "side": 1,
+      "message": "please document the required structure of the array. that\u0027s string[] right?",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_d520bcf4",
+        "filename": "client/includes/CachingOtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T13:48:58Z",
+      "side": 1,
+      "message": "json_encode? why not just implode( \u0027|\u0027, $siteLinkGroups ) ?",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_f5705809",
+        "filename": "client/includes/OtherProjectsSitesGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T13:48:58Z",
+      "side": 1,
+      "message": "what does \"current\" mean here? the local/present site? \"current\", to me, implies change over time.",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_f557f85a",
+        "filename": "client/includes/OtherProjectsSitesGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T13:48:58Z",
+      "side": 1,
+      "message": "That would be language links, which are covered elsewhere, right?",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_d54e7cc4",
+        "filename": "client/includes/OtherProjectsSitesGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T13:48:58Z",
+      "side": 1,
+      "message": "Use the site\u0027s global ID as the array key, for convenience. Mention this in the @return line.",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_75c3e80a",
+        "filename": "client/includes/OtherProjectsSitesGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T13:48:58Z",
+      "side": 1,
+      "message": "If you use the site IDs as the array keys, this can simply be implemented as array_keys( $this-\u003egetOtherProjectsSites( $siteLinkGroups )  ).",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_15d4e4bd",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T13:48:58Z",
+      "side": 1,
+      "message": "If we had a good way to purge this, the cache duration could be a lot longer....",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_35cd6035",
+        "filename": "client/tests/phpunit/includes/CachingOtherProjectsSitesProviderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-05T13:48:58Z",
+      "side": 1,
+      "message": "please don\u0027t use an empty array here for testing. The implementation may simply shorten out if the input is empty, so no caching logic would be tested.",
+      "revId": "b7974b30094932f010e133d35d81653d98f96ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
