@@ -76,7 +76,7 @@
 	"wikibase-validator-not-allowed": "Input validation error when the given value is not found in the known list of allowed values.\n\nParameters:\n* $1 - the illegal value\n{{Related|Wikibase-validator}}",
 	"datatypes-type-wikibase-item": "The name of a data type for items in Wikibase.\n{{Identical|Item}}",
 	"datatypes-type-wikibase-property": "The name of a data type for properties in Wikibase.\n{{Identical|Property}}",
-	"datatypes-type-commonsMedia": "The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).",
+	"datatypes-type-commonsMedia": "The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).\n\n{{related|Datatypes-type}}",
 	"version-wikibase": "Name of the Wikibase extension collection, used on [[Special:Version]]",
 	"wikibase-time-precision-Gannum": "!!DO NOT TRANSLATE!! Used to present a point in time with the precession of 1 billion of years\n{{Related|Wikibase-time-precision}}",
 	"wikibase-time-precision-Mannum": "!!DO NOT TRANSLATE!! Used to present a point in time with the precession of 1 million of years\n{{Related|Wikibase-time-precision}}",
