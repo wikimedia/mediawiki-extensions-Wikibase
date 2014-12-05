@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Utils;
+use Wikibase\Validators\AlternativeValidator;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataFieldValidator;
 use Wikibase\Validators\DataValueValidator;
@@ -355,10 +356,14 @@ class WikibaseDataTypeBuilders {
 		// the 'digits' field is already validated by QuantityValue's constructor
 
 		// only allow the '1' unit for now:
-		$unitValidators = array(
-			new TypeValidator( 'string' ),
-			new RegexValidator( '/^1$/', false, 'unknown-unit' ),
-		);
+		$unitValidators = array();
+		$unitValidators[] = new AlternativeValidator( array (
+			// NOTE: "1" is always considered legal for historical reasons,
+			// since we use it to represent "unitless" quantities. We could also use
+			// http://qudt.org/vocab/unit#Unitless or https://www.wikidata.org/entity/Q199
+			new RegexValidator( '/^1$/' ),
+			$this->buildUrlValidator( array( 'http', 'https' ), 255 ),
+		) );
 
 		$validators[] = new DataFieldValidator( 'unit', // Note: validate the 'unit' field
 			new CompositeValidator( $unitValidators, true ) //Note: each validator is fatal

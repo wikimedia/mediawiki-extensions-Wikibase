@@ -172,8 +172,11 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 
 			//quantity
 			array( 'quantity', QuantityValue::newFromNumber( 5 ), true, 'Simple integer' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5, 'm' ), false, 'We don\'t support units yet' ),
-			array( 'quantity', QuantityValue::newFromDecimal( '-11.234', '1', '-10', '-12' ), true, 'decimal strings' ),
+			array( 'quantity', QuantityValue::newFromNumber( 5, 'http://qudt.org/vocab/unit#Meter' ), true, 'Vocabulary URI' ),
+			array( 'quantity', QuantityValue::newFromNumber( 5, 'https://www.wikidata.org/entity/Q11573' ), true, 'Wikidata URI' ),
+			array( 'quantity', QuantityValue::newFromNumber( 5, '1' ), true, '1 means unitless' ),
+			array( 'quantity', QuantityValue::newFromNumber( 5, 'kittens' ), false, 'Bad unit URI' ),
+			array( 'quantity', QuantityValue::newFromNumber( '-11.234', '1', '-10', '-12' ), true, 'decimal strings' ),
 
 			//monolingual text
 			array( 'monolingualtext', new MonolingualTextValue( 'en', 'text' ), true, 'Simple value' ),
