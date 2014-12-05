@@ -271,7 +271,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 		$parserOutput = new ParserOutput();
 
-		$context = new RequestContext( new FauxRequest() );
+		$context = new RequestContext();
 		$outputPage = new OutputPage( $context );
 		$outputPage->setTitle( $title );
 
@@ -305,7 +305,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 		$dummy = Title::makeTitle( NS_MAIN, 'Dummy' );
 
-		$context = new RequestContext( new FauxRequest() );
+		$context = new RequestContext();
 		$output = new OutputPage( $context );
 		$output->setProperty( 'wikibase_badges', $badges );
 

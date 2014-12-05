@@ -138,7 +138,7 @@ class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 
 		$languageLinkTitle = Title::makeTitle( NS_MAIN, 'Test', '', 'en' );
 
-		$context = new RequestContext( new FauxRequest() );
+		$context = new RequestContext();
 		$output = new OutputPage( $context );
 		$output->setProperty( 'wikibase_badges', $badges );
 
