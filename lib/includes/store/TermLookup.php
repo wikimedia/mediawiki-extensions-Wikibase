@@ -35,7 +35,7 @@ interface TermLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException if the entity eas not found (not guaranteed).
+	 * @throws OutOfBoundsException if the entity was not found (not guaranteed).
 	 * @return string[] labels, keyed by language.
 	 *         An empty array may or may not indicate that the entity does not exist.
 	 */
@@ -57,7 +57,7 @@ interface TermLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException if the entity eas not found (not guaranteed).
+	 * @throws OutOfBoundsException if the entity was not found (not guaranteed).
 	 * @return string[] descriptions, keyed by language.
 	 *         An empty array may or may not indicate that the entity does not exist.
 	 */
