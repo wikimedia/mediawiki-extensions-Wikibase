@@ -5,7 +5,7 @@ if ( defined( 'VALUEVIEW_VERSION' ) ) {
 	return 1;
 }
 
-define( 'VALUEVIEW_VERSION', '0.9.0-alpha' );
+define( 'VALUEVIEW_VERSION', '0.9.0' );
 
 /**
  * @deprecated
