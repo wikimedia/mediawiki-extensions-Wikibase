@@ -158,17 +158,12 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetOtherProjectsSidebarGeneratorFactoryReturnType() {
 		$settings = $this->getWikibaseClient()->getSettings();
-
-		$otherProjectsLinks = $settings->getSetting( 'otherProjectsLinks' );
-
 		$settings->setSetting( 'otherProjectsLinks', array( 'my_wiki' ) );
 
 		$this->assertInstanceOf(
 			'Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory',
 			$this->getWikibaseClient()->getOtherProjectsSidebarGeneratorFactory()
 		);
-
-		$settings->setSetting( 'otherProjectsLinks', $otherProjectsLinks );
 	}
 
 	public function testGetOtherProjectsSitesProvider() {
