@@ -33,6 +33,7 @@ class EntityTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
+	 * @throws OutOfBoundsException if no label in that language is known
 	 * @return string
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
@@ -57,10 +58,11 @@ class EntityTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
+	 * @throws OutOfBoundsException if no description in that language is known
 	 * @return string
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		$descriptions = $this->getTermsOfType( $entityId, 'description' );
+		$descriptions = $this->getDescriptions( $entityId );
 		return $this->filterByLanguage( $descriptions, $languageCode );
 	}
 
@@ -91,7 +93,7 @@ class EntityTermLookup implements TermLookup {
 	 * @param string[] $terms
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException
+	 * @throws OutOfBoundsException if no term in that language is known
 	 * @return string
 	 */
 	private function filterByLanguage( array $terms, $languageCode ) {

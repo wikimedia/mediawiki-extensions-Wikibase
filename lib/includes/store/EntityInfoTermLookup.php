@@ -25,8 +25,7 @@ class EntityInfoTermLookup implements TermLookup {
 	private $entityInfo;
 
 	/**
-	 * @param EntityInfo $entityInfo An array of entity records, as returned
-	 * by EntityInfoBuilder::getEntityInfo.
+	 * @param EntityInfo $entityInfo
 	 */
 	public function __construct( EntityInfo $entityInfo ) {
 		$this->entityInfo = $entityInfo;
@@ -38,12 +37,16 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
+	 * @throws OutOfBoundsException if no label in that language is known
 	 * @return string
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
 		$label = $this->entityInfo->getLabel( $entityId, $languageCode );
 
-		$this->checkOutOfBOunds( $label, $languageCode );
+		if ( $label === null ) {
+			throw new OutOfBoundsException( "No label found for language '$languageCode'" );
+		}
+
 		return $label;
 	}
 
@@ -52,11 +55,11 @@ class EntityInfoTermLookup implements TermLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
+	 * @throws OutOfBoundsException
 	 * @return string[]
 	 */
 	public function getLabels( EntityId $entityId ) {
-		$labels = $this->entityInfo->getLabels( $entityId );
-		return $labels;
+		return $this->entityInfo->getLabels( $entityId );
 	}
 
 	/**
@@ -65,12 +68,16 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
+	 * @throws OutOfBoundsException if no description in that language is known
 	 * @return string
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
 		$description = $this->entityInfo->getDescription( $entityId, $languageCode );
 
-		$this->checkOutOfBOunds( $description, $languageCode );
+		if ( $description === null ) {
+			throw new OutOfBoundsException( "No description found for language '$languageCode'" );
+		}
+
 		return $description;
 	}
 
@@ -79,22 +86,11 @@ class EntityInfoTermLookup implements TermLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
+	 * @throws OutOfBoundsException
 	 * @return string[]
 	 */
 	public function getDescriptions( EntityId $entityId ) {
-		$descriptions = $this->entityInfo->getDescriptions( $entityId );
-		return $descriptions;
+		return $this->entityInfo->getDescriptions( $entityId );
 	}
 
-	/**
-	 * @param string $value
-	 * @param string $languageCode
-	 *
-	 * @throws OutOfBoundsException
-	 */
-	private function checkOutOfBOunds( $value, $languageCode ) {
-		if ( $value === null ) {
-			throw new OutOfBoundsException( 'No entry found for language ' . $languageCode );
-		}
-	}
 }
