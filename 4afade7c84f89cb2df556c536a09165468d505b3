@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_aa46ef52",
+        "filename": "repo/resources/wikibase.RevisionStore.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-05T09:25:52Z",
+      "side": 1,
+      "message": "Doesn\u0027t \u0027lang\u0027 need to be a string? Same for \u0027claimGuid\u0027 below.\n\nOr: Why not this._revisions.sitelinksRevision.hasOwnProperty( \u0027lang\u0027 )? Both this._revisions.sitelinksRevision and this._revisions.claimRevisions are guaranteed to be set.",
+      "revId": "4afade7c84f89cb2df556c536a09165468d505b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
