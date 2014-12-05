@@ -33,6 +33,7 @@ class EntityTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
+	 * @throws OutOfBoundsException
 	 * @return string
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
@@ -57,6 +58,7 @@ class EntityTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
+	 * @throws OutOfBoundsException
 	 * @return string
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
