@@ -734,66 +734,35 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription
+	 * @see ApiBase:getExamplesMessages()
+	 *
+	 * @return array
 	 */
-	public function getParamDescription() {
-		return array_merge(
-			parent::getParamDescription(),
-			parent::getParamDescriptionForId(),
-			parent::getParamDescriptionForSiteLink(),
-			parent::getParamDescriptionForEntity(),
-			array(
-				'data' => array( 'The serialized object that is used as the data source.',
-					"A newly created entity will be assigned an 'id'."
-				),
-				'clear' => array( 'If set, the complete entity is emptied before proceeding.',
-					'The entity will not be saved before it is filled with the "data", possibly with parts excluded.'
-				),
-				'new' => array( "If set, a new entity will be created.",
-					"Set this to the type of the entity you want to create - currently 'item'|'property'.",
-					"It is not allowed to have this set when 'id' is also set."
-				),
-			)
-		);
-	}
-
-	/**
-	 * @see ApiBase::getDescription
-	 */
-	public function getDescription() {
-		return array(
-			'API module to create a single new Wikibase entity and modify it with serialised information.'
-		);
-	}
-
-	/**
-	 * @see ApiBase::getExamples
-	 */
-	protected function getExamples() {
+	protected function getExamplesMessages() {
 		return array(
 			// Creating new entites
-			'api.php?action=wbeditentity&new=item&data={}'
-			=> 'Create a new empty item, return full entity structure',
-			'api.php?action=wbeditentity&new=item&data={"labels":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
-			=> 'Create a new item and set labels for de and en',
-			'api.php?action=wbeditentity&new=property&data={"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}'
-			=> 'Create a new property containing the json data, returns extended with the item structure',
+			'action=wbeditentity&new=item&data={}'
+			=> 'apihelp-wbeditentity-example-1',
+			'action=wbeditentity&new=item&data={"labels":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
+			=> 'apihelp-wbeditentity-example-2',
+			'action=wbeditentity&new=property&data={"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}'
+			=> 'apihelp-wbeditentity-example-3',
 			// Clearing entities
-			'api.php?action=wbeditentity&clear=true&id=Q42&data={}'
-			=> 'Clear all data from entity with id Q42',
-			'api.php?action=wbeditentity&clear=true&id=Q42&data={"labels":{"en":{"language":"en","value":"en-value"}}}'
-			=> 'Clear all data from entity with id Q42 and set a label for en',
+			'action=wbeditentity&clear=true&id=Q42&data={}'
+			=> 'apihelp-wbeditentity-example-4',
+			'action=wbeditentity&clear=true&id=Q42&data={"labels":{"en":{"language":"en","value":"en-value"}}}'
+			=> 'apihelp-wbeditentity-example-5',
 			// Setting stuff
-			'api.php?action=wbeditentity&id=Q42&data={"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}'
-			=> 'Sets sitelink for nowiki, overwriting it if it already exists',
-			'api.php?action=wbeditentity&id=Q42&data={"descriptions":{"nb":{"language":"nb","value":"nb-Description-Here"}}}'
-			=> 'Sets description for nb, overwriting it if it already exists',
-			'api.php?action=wbeditentity&id=Q42&data={"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ExampleString","type":"string"}},"type":"statement","rank":"normal"}]}'
-			=> 'Creates a new claim on the item for the property P56 and a value of "ExampleString"',
-			'api.php?action=wbeditentity&id=Q42&data={"claims":[{"id":"Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F","remove":""},{"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","remove":""}]}'
-			=> 'Removes the claims from the item with the guids Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F and Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X',
-			'api.php?action=wbeditentity&id=Q42&data={"claims":[{"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ChangedString","type":"string"}},"type":"statement","rank":"normal"}]}'
-			=> 'Sets the claim with the GUID to the value of the claim',
+			'action=wbeditentity&id=Q42&data={"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}'
+			=> 'apihelp-wbeditentity-example-6',
+			'action=wbeditentity&id=Q42&data={"descriptions":{"nb":{"language":"nb","value":"nb-Description-Here"}}}'
+			=> 'apihelp-wbeditentity-example-7',
+			'action=wbeditentity&id=Q42&data={"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ExampleString","type":"string"}},"type":"statement","rank":"normal"}]}'
+			=> 'apihelp-wbeditentity-example-8',
+			'action=wbeditentity&id=Q42&data={"claims":[{"id":"Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F","remove":""},{"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","remove":""}]}'
+			=> 'apihelp-wbeditentity-example-9',
+			'action=wbeditentity&id=Q42&data={"claims":[{"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ChangedString","type":"string"}},"type":"statement","rank":"normal"}]}'
+			=> 'apihelp-wbeditentity-example-10',
 		);
 	}
 
