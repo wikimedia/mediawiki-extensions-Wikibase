@@ -33,6 +33,7 @@ class AvailableBadges extends ApiBase {
 	}
 
 	/**
+	 * @deprecated since MediaWiki core 1.25
 	 * @see ApiBase::getDescription
 	 *
 	 * @since 0.5
@@ -46,6 +47,7 @@ class AvailableBadges extends ApiBase {
 	}
 
 	/**
+	 * @deprecated since MediaWiki core 1.25
 	 * @see ApiBase::getExamples
 	 *
 	 * @since 0.5
@@ -59,4 +61,15 @@ class AvailableBadges extends ApiBase {
 		);
 	}
 
+	/**
+	 * @see ApiBase:getExamplesMessages()
+	 *
+	 * @return array
+	 */
+	protected function getExamplesMessages() {
+		return array(
+		       'action=wbavailablebadges' =>
+		       		'apihelp-wbavailablebadges-example-1',
+		);
+	}
 }
