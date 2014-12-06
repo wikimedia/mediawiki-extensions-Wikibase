@@ -419,5 +419,16 @@
 	"right-property-term": "Change property terms (labels, descriptions, aliases)",
 	"right-property-create": "Create properties",
 	"wikibase-entity-not-viewable-title": "Content type mismatch: Can not display content",
-	"wikibase-entity-not-viewable": "The given content of type \"$1\" is not an Entity and can not be displayed by Wikibase."
+	"wikibase-entity-not-viewable": "The given content of type \"$1\" is not an Entity and can not be displayed by Wikibase.",
+	"apihelp-wbavailablebadges-description": "API module to query available badge items.",
+	"apihelp-wbavailablebadges-example-1": "Queries all available badge items",
+	"apihelp-wbcreateclaim-description": "API module for creating Wikibase claims.",
+	"apihelp-wbcreateclaim-param-entity": "Id of the entity you are adding the claim to",
+	"apihelp-wbcreateclaim-param-property": "Id of the snaks property",
+	"apihelp-wbcreateclaim-param-value": "Value of the snak when creating a claim with a snak that has a value",
+	"apihelp-wbcreateclaim-param-snaktype": "The type of the snak",
+	"apihelp-wbcreateclaim-example-1": "Creates a claim for item Q42 of property P9001 with a novalue snak.",
+	"apihelp-wbcreateclaim-example-2": "Creates a claim for item Q42 of property P9002 with string value \"itsastring\"",
+	"apihelp-wbcreateclaim-example-3": "Creates a claim for item Q42 of property P9003 with a value of item Q1",
+	"apihelp-wbcreateclaim-example-4": "Creates a claim for item Q42 of property P9004 with a coordinate snak value"
 }
