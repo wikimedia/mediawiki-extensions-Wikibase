@@ -21,6 +21,13 @@ local function testGetEntityObjectType()
 	return type( mw.wikibase.getEntityObject() )
 end
 
+local function testGetEntityObjectIsCloned()
+	mw.wikibase.getEntityObject( 'Q199024' ).id = 'a'
+
+	-- We should get a freshly cloned table here, so the changes above wont persist
+	return mw.wikibase.getEntityObject( 'Q199024' ).id
+end
+
 local function testGetEntityObjectSchemaVersion()
 	return mw.wikibase.getEntityObject().schemaVersion
 end
@@ -40,6 +47,9 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.getEntityObject (type)', func = testGetEntityObjectType, type='ToString',
 	  expect = { 'table' }
+	},
+	{ name = 'mw.wikibase.getEntityObject (is cloned)', func = testGetEntityObjectIsCloned, type='ToString',
+	  expect = { 'Q199024' }
 	},
 	{ name = 'mw.wikibase.getEntityObject (schema version)', func = testGetEntityObjectSchemaVersion,
 	  expect = { 2 }
@@ -67,8 +77,7 @@ local tests = {
 	  args = { 'Q32487' },
 	  expect = { 'WikibaseClientLuaTest' }
 	},
-	{
-	  name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
+	{ name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
 	  args = { 'Q32488' },
 	  expect = { nil }
 	}
