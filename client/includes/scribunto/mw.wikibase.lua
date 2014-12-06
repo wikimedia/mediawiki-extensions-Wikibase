@@ -15,7 +15,7 @@ function wikibase.setupInterface()
 	local php = mw_interface
 	mw_interface = nil
 
-	-- Caching variable for the wikibase.entity objects
+	-- Caching variable for the entity tables as obtained from PHP
 	local entities = {}
 	-- Caching variable for the entity id string belonging to the current page (nil if page is not linked to an entity)
 	local pageEntityId = false
@@ -30,11 +30,13 @@ function wikibase.setupInterface()
 				return nil
 			end
 
-			entities[ id ] = wikibase.entity.create( entity )
+			entities[ id ] = entity
 		end
 
 		if type( entities[ id ] ) == 'table' then
-			return entities[ id ]
+			return wikibase.entity.create(
+				mw.clone( entities[ id ] ) -- Use a clone here, so that people can't modify the entity
+			)
 		else
 			return nil
 		end
