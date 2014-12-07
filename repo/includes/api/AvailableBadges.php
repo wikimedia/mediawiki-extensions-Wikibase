@@ -33,29 +33,14 @@ class AvailableBadges extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getDescription
-	 *
-	 * @since 0.5
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
-		return array(
-			'API module to query available badge items.'
-		);
-	}
-
-	/**
-	 * @see ApiBase::getExamples
-	 *
-	 * @since 0.5
+	 * @see ApiBase::getExamplesMessages()
 	 *
 	 * @return array
 	 */
-	protected function getExamples() {
+	protected function getExamplesMessages() {
 		return array(
-			'api.php?action=wbavailablebadges' =>
-				'Queries all available badge items',
+			'action=wbavailablebadges' =>
+				'apihelp-wbavailablebadges-example-1',
 		);
 	}
 

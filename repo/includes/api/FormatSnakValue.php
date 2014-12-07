@@ -198,56 +198,25 @@ class FormatSnakValue extends ApiWikibase {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription
-	 *
-	 * @since 0.1
+	 * @see ApiBase::getExamplesMessages()
 	 *
 	 * @return array
 	 */
-	public function getParamDescription() {
-		return array(
-			'generate' => 'The desired output format to generate.',
-			'datatype' => 'The value\'s data type. This is distinct from the value\'s type',
-			'datavalue' => 'The data to format. This has to be the JSON serialization of a DataValue object.',
-			'options' => 'The options the formatter should use. Provided as a JSON object.',
-		);
-	}
-
-	/**
-	 * @see ApiBase::getDescription
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
-		return array(
-			'API module for formatting DataValues.'
-		);
-	}
-
-	/**
-	 * @see ApiBase::getExamples
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	protected function getExamples() {
-		$query = "api.php?action=" . $this->getModuleName() ;
+	protected function getExamplesMessages() {
+		$query = "action=" . $this->getModuleName() ;
 		$hello = new StringValue( 'hello' );
 		$acme = new StringValue( 'http://acme.org' );
 
 		return array(
 			$query . '&' . wfArrayToCgi( array(
 				'datavalue' => json_encode( $hello->toArray() ),
-			) ) => 'Format a simple string value.',
+			) ) => 'apihelp-wbformatvalue-example-1',
 
 			$query . '&' . wfArrayToCgi( array(
 				'datavalue' => json_encode( $acme->toArray() ),
 				'datatype' => 'url',
 				'generate' => 'text/html',
-			) ) => 'Format a string value as a URL in HTML.',
+			) ) => 'apihelp-wbformatvalue-example-2',
 
 			//TODO: example for the options parameter, once we have something sensible to show there.
 		);

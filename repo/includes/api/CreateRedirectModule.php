@@ -177,40 +177,14 @@ class CreateRedirectModule extends ApiBase {
 	}
 
 	/**
-	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
-	 * needed.
+	 * @see ApiBase::getExamplesMessages()
 	 *
-	 * @return array|bool False on no parameter descriptions
+	 * @return array
 	 */
-	public function getParamDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'from' => array( 'Entity ID to make a redirect' ),
-			'to' => array( 'Entity ID to point the redirect to' ),
-			'token' => 'A "edittoken" token previously obtained through the token module',
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
-		);
-	}
-
-	/**
-	 * Returns the description string for this module
-	 * @return mixed string or array of strings
-	 */
-	public function getDescription() {
-		return array(
-			'API module for creating Entity redirects.'
-		);
-	}
-
-	/**
-	 * Returns usage examples for this module. Return false if no examples are available.
-	 * @return bool|string|array
-	 */
-	protected function getExamples() {
-		return array(
-			'api.php?action=wbcreateredirect&from=Q11&to=Q12'
-				=> 'Turn Q11 into a redirect to Q12',
+			'action=wbcreateredirect&from=Q11&to=Q12'
+				=> 'apihelp-wbcreateredirect-example-1',
 		);
 	}
 
