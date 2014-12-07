@@ -152,11 +152,14 @@ class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 				'de' => array( 'language' => 'de', 'value' => 'berlin' )
 			) ),
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'bar' ) ) ),
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array( 'labels' => array(
+			array( ),
+			array(
+				'labels' => array(
 				'en' => array( 'language' => 'en', 'value' => 'bar' ),
 				'de' => array( 'language' => 'de', 'value' => 'berlin' )
-			) ),
+			),
+				'aliases' => array( 'en' => array( array( 'language' => 'en', 'value' => 'foo' ) ) )
+			),
 			'label'
 		);
 		$testCases['descriptionMerge'] = array(
