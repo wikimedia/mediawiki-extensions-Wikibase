@@ -228,53 +228,20 @@ class GetClaims extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::getParamDescription
-	 *
-	 * @since 0.3
+	 * @see ApiBase::getExamplesMessages()
 	 *
 	 * @return array
 	 */
-	public function getParamDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'entity' => 'Id of the entity from which to obtain claims. Required unless claim GUID is provided.',
-			'property' => 'Optional filter to only return claims with a main snak that has the specified property.',
-			'claim' => 'A GUID identifying the claim. Required unless entity is provided. The GUID is the globally unique identifier for a claim, e.g. "q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F".',
-			'rank' => 'Optional filter to return only the claims that have the specified rank',
-			'props' => 'Some parts of the claim are returned optionally. This parameter controls which ones are returned.',
-			'ungroupedlist' => 'Do not group snaks by property id',
-		);
-	}
-
-	/**
-	 * @see \ApiBase::getDescription
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
-		return array(
-			'API module for getting Wikibase claims.'
-		);
-	}
-
-	/**
-	 * @see \ApiBase::getExamples
-	 *
-	 * @since 0.3
-	 *
-	 * @return array
-	 */
-	protected function getExamples() {
-		return array(
-			"api.php?action=wbgetclaims&entity=Q42" =>
-				"Get claims for item with ID Q42",
-			"api.php?action=wbgetclaims&entity=Q42&property=P2" =>
-				"Get claims for item with ID Q42 and property with ID P2",
-			"api.php?action=wbgetclaims&entity=Q42&rank=normal" =>
-				"Get claims for item with ID Q42 that are ranked as normal",
-			'api.php?action=wbgetclaims&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' =>
-				'Get claim with GUID of Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F',
+			"action=wbgetclaims&entity=Q42" =>
+				"apihelp-wbgetclaims-example-1",
+			"action=wbgetclaims&entity=Q42&property=P2" =>
+				"apihelp-wbgetclaims-example-2",
+			"action=wbgetclaims&entity=Q42&rank=normal" =>
+				"apihelp-wbgetclaims-example-3",
+			'action=wbgetclaims&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' =>
+				'apihelp-wbgetclaims-example-4',
 		);
 	}
 

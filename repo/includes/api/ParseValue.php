@@ -173,44 +173,14 @@ class ParseValue extends ApiWikibase {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription
-	 *
-	 * @since 0.1
+	 * @see ApiBase::getExamplesMessages()
 	 *
 	 * @return array
 	 */
-	public function getParamDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'parser' => 'Id of the ValueParser to use',
-			'values' => 'The values to parse',
-			'options' => 'The options the parser should use. Provided as a JSON object.',
-		);
-	}
-
-	/**
-	 * @see ApiBase::getDescription
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
-		return array(
-			'API module for parsing values using a ValueParser.'
-		);
-	}
-
-	/**
-	 * @see ApiBase::getExamples
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	protected function getExamples() {
-		return array(
-			'api.php?action=wbparsevalue&parser=null&values=foo|bar' => 'No change to the format of the string.',
-			'api.php?action=wbparsevalue&parser=time&values=1994-02-08&options={"precision":9}' => 'Parse 1994-02-08 to a date format with a precision of 9 (the year).',
+			'action=wbparsevalue&parser=null&values=foo|bar' => 'apihelp-wbparsevalue-example-1',
+			'action=wbparsevalue&parser=time&values=1994-02-08&options={"precision":9}' => 'apihelp-wbparsevalue-example-2',
 		);
 	}
 

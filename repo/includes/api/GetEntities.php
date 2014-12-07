@@ -342,77 +342,38 @@ class GetEntities extends ApiWikibase {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription()
+	 * @see ApiBase::getExamplesMessages()
+	 *
+	 * @return array
 	 */
-	public function getParamDescription() {
-		return array_merge( parent::getParamDescription(), array(
-			'ids' => 'The IDs of the entities to get the data from',
-			'sites' => array( 'Identifier for the site on which the corresponding page resides',
-				"Use together with 'title', but only give one site for several titles or several sites for one title."
-			),
-			'titles' => array( 'The title of the corresponding page',
-				"Use together with 'sites', but only give one site for several titles or several sites for one title."
-			),
-			'redirects' => array( 'Whether redirects shall be resolved.',
-				'If set to "no", redirects will be treated like deleted entities.'
-			),
-			'props' => array( 'The names of the properties to get back from each entity.',
-				"Will be further filtered by any languages given."
-			),
-			'languages' => array( 'By default the internationalized values are returned in all available languages.',
-				'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
-			),
-			'languagefallback' => array( 'Apply language fallback for languages defined in the "languages" parameter,',
-				'with the current context of API call.'
-			),
-			'normalize' => array( 'Try to normalize the page title against the client site.',
-				'This only works if exactly one site and one page have been given.'
-			),
-			'ungroupedlist' => array( 'Do not group snaks by property id.' ),
-			'sitefilter' => array( 'Filter sitelinks in entities to those with these siteids.' ),
-		) );
-	}
-
-	/**
-	 * @see ApiBase::getDescription()
-	 */
-	public function getDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'API module to get the data for multiple Wikibase entities.'
-		);
-	}
-
-	/**
-	 * @see ApiBase::getExamples()
-	 */
-	protected function getExamples() {
-		return array(
-			"api.php?action=wbgetentities&ids=Q42"
-			=> "Get entities with ID Q42 with all available attributes in all available languages",
-			"api.php?action=wbgetentities&ids=P17"
-			=> "Get entities with ID P17 with all available attributes in all available languages",
-			"api.php?action=wbgetentities&ids=Q42|P17"
-			=> "Get entities with IDs Q42 and P17 with all available attributes in all available languages",
-			"api.php?action=wbgetentities&ids=Q42&languages=en"
-			=> "Get entities with ID Q42 with all available attributes in English language",
-			"api.php?action=wbgetentities&ids=Q42&languages=ii&languagefallback="
-			=> "Get entities with ID Q42 with all available attributes in any possible fallback language for the ii language",
-			"api.php?action=wbgetentities&ids=Q42&props=labels"
-			=> "Get entities with ID Q42 showing all labels in all available languages",
-			"api.php?action=wbgetentities&ids=P17|P3&props=datatype"
-			=> "Get entities with IDs P17 and P3 showing only datatypes",
-			"api.php?action=wbgetentities&ids=Q42&props=aliases&languages=en"
-			=> "Get entities with ID Q42 showing all aliases in English language",
-			"api.php?action=wbgetentities&ids=Q1|Q42&props=descriptions&languages=en|de|fr"
-			=> "Get entities with IDs Q1 and Q42 showing descriptions in English, German and French languages",
-			'api.php?action=wbgetentities&sites=enwiki&titles=Berlin&languages=en'
-			=> 'Get the item for page "Berlin" on the site "enwiki", with language attributes in English language',
-			'api.php?action=wbgetentities&sites=enwiki&titles=berlin&normalize='
-			=> 'Get the item for page "Berlin" on the site "enwiki" after normalizing the title from "berlin"',
-			'api.php?action=wbgetentities&ids=Q42&props=sitelinks'
-			=> 'Get the sitelinks for item Q42',
-			'api.php?action=wbgetentities&ids=Q42&sitefilter=enwiki'
-			=> 'Get entities with ID Q42 showing only sitelinks from enwiki'
+			"action=wbgetentities&ids=Q42"
+			=> "apihelp-wbgetentities-example-1",
+			"action=wbgetentities&ids=P17"
+			=> "apihelp-wbgetentities-example-2",
+			"action=wbgetentities&ids=Q42|P17"
+			=> "apihelp-wbgetentities-example-3",
+			"action=wbgetentities&ids=Q42&languages=en"
+			=> "apihelp-wbgetentities-example-4",
+			"action=wbgetentities&ids=Q42&languages=ii&languagefallback="
+			=> "apihelp-wbgetentities-example-5",
+			"action=wbgetentities&ids=Q42&props=labels"
+			=> "apihelp-wbgetentities-example-6",
+			"action=wbgetentities&ids=P17|P3&props=datatype"
+			=> "apihelp-wbgetentities-example-7",
+			"action=wbgetentities&ids=Q42&props=aliases&languages=en"
+			=> "apihelp-wbgetentities-example-8",
+			"action=wbgetentities&ids=Q1|Q42&props=descriptions&languages=en|de|fr"
+			=> "apihelp-wbgetentities-example-9",
+			'action=wbgetentities&sites=enwiki&titles=Berlin&languages=en'
+			=> 'apihelp-wbgetentities-example-10',
+			'action=wbgetentities&sites=enwiki&titles=berlin&normalize='
+			=> 'apihelp-wbgetentities-example-11',
+			'action=wbgetentities&ids=Q42&props=sitelinks'
+			=> 'apihelp-wbgetentities-example-12',
+			'action=wbgetentities&ids=Q42&sitefilter=enwiki'
+			=> 'apihelp-wbgetentities-example-13'
 		);
 	}
 
