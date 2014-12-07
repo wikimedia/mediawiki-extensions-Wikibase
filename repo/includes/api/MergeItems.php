@@ -204,47 +204,20 @@ class MergeItems extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription
+	 * @see ApiBase::getExamplesMessages()
+	 *
+	 * @return array
 	 */
-	public function getParamDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'fromid' => array( 'The id to merge from' ),
-			'toid' => array( 'The id to merge to' ),
-			'ignoreconflicts' => array( 'Array of elements of the item to ignore conflicts for, can only contain values of "label" and or "description" and or "sitelink"' ),
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'summary' => array( 'Summary for the edit.',
-				"Will be prepended by an automatically generated comment. The length limit of the
-				autocomment together with the summary is 260 characters. Be aware that everything above that
-				limit will be cut off."
-			),
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
-		);
-	}
-
-	/**
-	 * @see ApiBase::getDescription
-	 */
-	public function getDescription() {
-		return array(
-			'API module to merge multiple items.'
-		);
-	}
-
-	/**
-	 * @see ApiBase::getExamples
-	 */
-	protected function getExamples() {
-		return array(
-			'api.php?action=wbmergeitems&fromid=Q42&toid=Q222' =>
-				'Merges data from Q42 into Q222',
-			'api.php?action=wbmergeitems&fromid=Q555&toid=Q3' =>
-				'Merges data from Q555 into Q3',
-			'api.php?action=wbmergeitems&fromid=Q66&toid=Q99&ignoreconflicts=label' =>
-				'Merges data from Q66 into Q99 ignoring any conflicting labels',
-			'api.php?action=wbmergeitems&fromid=Q66&toid=Q99&ignoreconflicts=label|description' =>
-				'Merges data from Q66 into Q99 ignoring any conflicting labels and descriptions',
+			'action=wbmergeitems&fromid=Q42&toid=Q222' =>
+				'apihelp-wbmergeitems-example-1',
+			'action=wbmergeitems&fromid=Q555&toid=Q3' =>
+				'apihelp-wbmergeitems-example-2',
+			'action=wbmergeitems&fromid=Q66&toid=Q99&ignoreconflicts=label' =>
+				'apihelp-wbmergeitems-example-3',
+			'action=wbmergeitems&fromid=Q66&toid=Q99&ignoreconflicts=label|description' =>
+				'apihelp-wbmergeitems-example-4',
 		);
 	}
 
