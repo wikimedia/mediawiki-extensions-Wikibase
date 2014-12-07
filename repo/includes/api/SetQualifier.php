@@ -185,22 +185,18 @@ class SetQualifier extends ModifyClaim {
 		return array_merge(
 			parent::getParamDescription(),
 			array(
-				'claim' => 'A GUID identifying the claim for which a qualifier is being set',
+				'claim' => '',
 				'property' => array(
-					'Id of the snaks property.',
-					'Should only be provided when creating a new qualifier or changing the property of an existing one'
+					''
 				),
 				'snaktype' => array(
-					'The type of the snak.',
-					'Should only be provided when creating a new qualifier or changing the type of an existing one'
+					''
 				),
 				'value' => array(
-					'The new value of the qualifier. ',
-					'Should only be provdied for PropertyValueSnak qualifiers'
+					''
 				),
 				'snakhash' => array(
-					'The hash of the snak to modify.',
-					'Should only be provided for existing qualifiers'
+					''
 				),
 			)
 		);
@@ -215,20 +211,18 @@ class SetQualifier extends ModifyClaim {
 	 */
 	public function getDescription() {
 		return array(
-			'API module for creating a qualifier or setting the value of an existing one.'
+			''
 		);
 	}
 
 	/**
-	 * @see ApiBase::getExamples
-	 *
-	 * @since 0.3
+	 * @see ApiBase::getExamplesMessages()
 	 *
 	 * @return array
 	 */
-	protected function getExamples() {
+	protected function getExamplesMessages() {
 		return array(
-			'api.php?action=wbsetqualifier&claim=Q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&property=P1&value=GdyjxP8I6XB3&snaktype=value&token=foobar' => 'Set the qualifier for the given claim with property P1 to string value GdyjxP8I6XB3',
+			'action=wbsetqualifier&claim=Q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&property=P1&value=GdyjxP8I6XB3&snaktype=value&token=foobar' => 'apihelp-wbsetqualifier-example-1',
 		);
 	}
 }
