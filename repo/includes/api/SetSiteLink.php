@@ -188,56 +188,28 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
-	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
-	 * needed.
+	 * @see ApiBase::getExamplesMessages()
 	 *
-	 * @return array|bool False on no parameter descriptions
+	 * @return array
 	 */
-	public function getParamDescription() {
-		return array_merge(
-			parent::getParamDescription(),
-			parent::getParamDescriptionForId(),
-			parent::getParamDescriptionForSiteLink(),
-			parent::getParamDescriptionForEntity(),
-			array(
-				'linksite' => 'The identifier of the site on which the article to link resides',
-				'linktitle' => 'The title of the article to link. If this parameter is an empty string or both linktitle and badges are not set, the link will be removed.',
-				'badges' => 'The IDs of items to be set as badges. They will replace the current ones. If this parameter is not set, the badges will not be changed',
-			)
-		);
-	}
-
-	/**
-	 * @see \ApiBase::getDescription()
-	 */
-	public function getDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'API module to associate an article on a wiki with a Wikibase item or remove an already made such association.'
-		);
-	}
-
-	/**
-	 * Returns usage examples for this module. Return false if no examples are available.
-	 * @return bool|string|array
-	 */
-	protected function getExamples() {
-		return array(
-			'api.php?action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen'
-			=> 'Add a sitelink "Hydrogen" for English page with id "Q42", if the site link does not exist',
-			'api.php?action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen&summary=World%20domination%20will%20be%20mine%20soon!'
-			=> 'Add a sitelink "Hydrogen" for English page with id "Q42", if the site link does not exist with an edit summary of "World domination will be mine soon!"',
-			'api.php?action=wbsetsitelink&site=enwiki&title=Hydrogen&linksite=dewiki&linktitle=Wasserstoff'
-			=> 'Add a sitelink "Wasserstoff" for the German page on item with the link for the English page to "Hydrogen", if the site link does not exist',
-			'api.php?action=wbsetsitelink&site=enwiki&title=Hydrogen&linksite=dewiki'
-			=> 'Removes the German sitelink from the item',
-			'api.php?action=wbsetsitelink&site=enwiki&title=Hydrogen&linksite=plwiki&linktitle=Wodór&badges=Q149'
-			=> 'Add a sitelink "Wodór" for the Polish page on item with the link for the English page to "Hydrogen" with one badge pointing to the item with id "Q149"',
-			'api.php?action=wbsetsitelink&id=Q42&linksite=plwiki&badges=Q2|Q149'
-			=> 'Change badges for the link to Polish page from the item with id "Q42" to two badges pointing to the items with ids "Q2" and "Q149" wothout providing the link title',
-			'api.php?action=wbsetsitelink&id=Q42&linksite=plwiki&linktitle=Warszawa'
-			=> 'Change the link to Polish page from the item with id "Q42" without changing badges',
-			'api.php?action=wbsetsitelink&id=Q42&linksite=plwiki&linktitle=Wodór&badges='
-			=> 'Change the link to Polish page from the item with id "Q42" and remove all of its badges',
+			'action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen'
+			=> 'apihelp-wbsetsitelink-example-1',
+			'action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen&summary=World%20domination%20will%20be%20mine%20soon!'
+			=> 'apihelp-wbsetsitelink-example-2',
+			'action=wbsetsitelink&site=enwiki&title=Hydrogen&linksite=dewiki&linktitle=Wasserstoff'
+			=> 'apihelp-wbsetsitelink-example-3',
+			'action=wbsetsitelink&site=enwiki&title=Hydrogen&linksite=dewiki'
+			=> 'apihelp-wbsetsitelink-example-4',
+			'action=wbsetsitelink&site=enwiki&title=Hydrogen&linksite=plwiki&linktitle=Wodór&badges=Q149'
+			=> 'apihelp-wbsetsitelink-example-5',
+			'action=wbsetsitelink&id=Q42&linksite=plwiki&badges=Q2|Q149'
+			=> 'apihelp-wbsetsitelink-example-6',
+			'action=wbsetsitelink&id=Q42&linksite=plwiki&linktitle=Warszawa'
+			=> 'apihelp-wbsetsitelink-example-7',
+			'action=wbsetsitelink&id=Q42&linksite=plwiki&linktitle=Wodór&badges='
+			=> 'apihelp-wbsetsitelink-example-8',
 		);
 	}
 
