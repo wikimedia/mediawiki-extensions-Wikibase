@@ -148,46 +148,14 @@ class RemoveQualifiers extends ModifyClaim {
 	}
 
 	/**
-	 * @see \ApiBase::getParamDescription
-	 *
-	 * @since 0.3
+	 * @see ApiBase::getExamplesMessages()
 	 *
 	 * @return array
 	 */
-	public function getParamDescription() {
-		return array_merge(
-			parent::getParamDescription(),
-			array(
-				'claim' => 'A GUID identifying the claim from which to remove qualifiers',
-				'qualifiers' => 'Snak hashes of the qualifiers to remove',
-			)
-		);
-	}
-
-	/**
-	 * @see \ApiBase::getDescription
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'API module for removing a qualifier from a claim.'
-		);
-	}
-
-	/**
-	 * @see \ApiBase::getExamples
-	 *
-	 * @since 0.3
-	 *
-	 * @return array
-	 */
-	protected function getExamples() {
-		return array(
-			'api.php?action=wbremovequalifiers&statement=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&references=1eb8793c002b1d9820c833d234a1b54c8e94187e&token=foobar&baserevid=7201010'=>
-				'Remove qualifier with hash "1eb8793c002b1d9820c833d234a1b54c8e94187e" from claim with GUID of "Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F"',
+			'action=wbremovequalifiers&statement=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&references=1eb8793c002b1d9820c833d234a1b54c8e94187e&token=foobar&baserevid=7201010'=>
+				'apihelp-wbremovequalifiers-example-1',
 		);
 	}
 

@@ -354,35 +354,15 @@ class SearchEntities extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription
+	 * @see ApiBase::getExamplesMessages()
+	 *
+	 * @return array
 	 */
-	public function getParamDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'search' => 'Search for this text.',
-			'language' => 'Search in this language.',
-			'type' => 'Search for this type of entity.',
-			'limit' => 'Maximal number of results',
-			'continue' => 'Offset where to continue a search',
-		);
-	}
-
-	/**
-	 * @see ApiBase::getDescription
-	 */
-	public function getDescription() {
-		return array(
-			'API module to search for entities.'
-		);
-	}
-
-	/**
-	 * @see ApiBase::getExamples
-	 */
-	protected function getExamples() {
-		return array(
-			'api.php?action=wbsearchentities&search=abc&language=en' => 'Search for "abc" in English language, with defaults for type and limit',
-			'api.php?action=wbsearchentities&search=abc&language=en&limit=50' => 'Search for "abc" in English language with a limit of 50',
-			'api.php?action=wbsearchentities&search=alphabet&language=en&type=property' => 'Search for "alphabet" in English language for type property',
+			'action=wbsearchentities&search=abc&language=en' => 'apihelp-wbsearchentities-example-1',
+			'action=wbsearchentities&search=abc&language=en&limit=50' => 'apihelp-wbsearchentities-example-2',
+			'action=wbsearchentities&search=alphabet&language=en&type=property' => 'apihelp-wbsearchentities-example-3',
 		);
 	}
 

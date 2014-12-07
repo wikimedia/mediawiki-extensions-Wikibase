@@ -152,45 +152,13 @@ class RemoveReferences extends ModifyClaim {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription
-	 *
-	 * @since 0.3
+	 * @see ApiBase::getExamplesMessages()
 	 *
 	 * @return array
 	 */
-	public function getParamDescription() {
-		return array_merge(
-			parent::getParamDescription(),
-			array(
-				'statement' => 'A GUID identifying the statement for which a reference is being set',
-				'references' => 'The hashes of the references that should be removed',
-			)
-		);
-	}
-
-	/**
-	 * @see ApiBase::getDescription
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'API module for removing one or more references of the same statement.'
-		);
-	}
-
-	/**
-	 * @see ApiBase::getExamples
-	 *
-	 * @since 0.3
-	 *
-	 * @return array
-	 */
-	protected function getExamples() {
-		return array(
-			'api.php?action=wbremovereferences&statement=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&references=455481eeac76e6a8af71a6b493c073d54788e7e9&token=foobar&baserevid=7201010' => 'Remove reference with hash "455481eeac76e6a8af71a6b493c073d54788e7e9" from claim with GUID of "Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F"',
+			'action=wbremovereferences&statement=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&references=455481eeac76e6a8af71a6b493c073d54788e7e9&token=foobar&baserevid=7201010' => 'apihelp-wbremovereferences-example-1',
 		);
 	}
 
