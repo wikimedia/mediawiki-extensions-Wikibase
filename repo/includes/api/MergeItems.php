@@ -210,7 +210,10 @@ class MergeItems extends ApiBase {
 		return array(
 			'fromid' => array( 'The id to merge from' ),
 			'toid' => array( 'The id to merge to' ),
-			'ignoreconflicts' => array( 'Array of elements of the item to ignore conflicts for, can only contain values of "label" and or "description" and or "sitelink"' ),
+			'ignoreconflicts' => array(
+				'Array of elements of the item to ignore conflicts for, can only contain values of "description" or "sitelink"',
+				'The use of "label" here is deprecated!',
+			),
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'summary' => array( 'Summary for the edit.',
 				"Will be prepended by an automatically generated comment. The length limit of the
