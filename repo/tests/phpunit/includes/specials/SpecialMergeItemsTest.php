@@ -330,8 +330,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	public function provideExceptionConflictsData() {
 		return array(
 			array(
-				array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-				array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo2' ) ) ),
+				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
+				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo2' ) ) ),
 			),
 			array(
 				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),

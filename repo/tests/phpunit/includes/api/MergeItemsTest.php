@@ -259,8 +259,8 @@ class MergeItemsTest extends \PHPUnit_Framework_TestCase {
 	public static function provideExceptionConflictsData() {
 		return array(
 			array(
-				array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-				array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo2' ) ) ),
+				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
+				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo2' ) ) ),
 			),
 			array(
 				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
