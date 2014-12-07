@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Wizardist",
-			"Zedlik"
+			"Zedlik",
+			"Red Winged Duck"
 		]
 	},
 	"wikibase-client-desc": "Кліент для пашырэньня Wikibase",
@@ -10,6 +11,7 @@
 	"tooltip-t-wikibase": "Спасылка на аб’ект у рэпазыторыі зьвестак",
 	"wikibase-after-page-move": "Каб захаваць міжмоўныя спасылкі на перанесеную старонку, вы можаце [$1 абнавіць] злучаны аб’ект у Вікізьвестках.",
 	"wikibase-after-page-move-queued": "[$1 Аб’ект Вікізьвестак], злучаны з гэтай старонкай, хутка будзе абноўлены.",
+	"wikibase-after-page-delete-queued": "[$1 Аб’ект {{GRAMMAR:родны|{{WBREPONAME}}}}], зьвязаны з гэтай старонкай, будзе абноўлены аўтаматычна.",
 	"wikibase-comment-add": "Быў створаны аб’ект Вікізьвестак.",
 	"wikibase-comment-remove": "Злучаны аб’ект выдалены зь Вікізьвестак. Моўныя спасылкі былі выдаленыя.",
 	"wikibase-comment-linked": "Аб’ект Вікізьвестак быў злучаны з гэтай старонкай.",
@@ -42,6 +44,7 @@
 	"wikibase-rc-show-wikidata-pref": "Паказваць праўкі Вікізьвестак у сьпісе апошніх зьменаў",
 	"wikibase-rc-wikibase-edit-letter": "З",
 	"wikibase-rc-wikibase-edit-title": "Праўка ў Вікізьвестках",
+	"wikibase-replicationnote": "Калі ласка заўважце, што зьмены могуць зьявіцца ў вікі-праектах толькі празь некалькі хвілін.",
 	"wikibase-watchlist-show-changes-pref": "Паказваць зьмены Вікізьвестак у вашым сьпісе назіраньня",
 	"wikibase-error-serialize-error": "Не ўдалося сэрыялізаваць зьвесткі",
 	"wikibase-error-invalid-entity-id": "Уведзены ідэнтыфікатар не вядомы сыстэме. Калі ласка, выкарыстоўвайце існыя ідэнтыфікатары аб’ектаў.",
