@@ -59,7 +59,7 @@ class ChangeOpsMerge {
 	 */
 	private $changeOpFactoryProvider;
 
-	static $conflictTypes = array( 'label', 'description', 'sitelink' );
+	public static $conflictTypes = array( 'description', 'sitelink' );
 
 	/**
 	 * @param Item $fromItem
@@ -102,7 +102,8 @@ class ChangeOpsMerge {
 			throw new InvalidArgumentException( '$ignoreConflicts must be an array' );
 		}
 
-		if ( array_diff( $ignoreConflicts, self::$conflictTypes ) ) {
+		//TODO remove the adition of 'label' below. This was added to allow a soft deprecation 11-12-14
+		if ( array_diff( $ignoreConflicts, array_merge( self::$conflictTypes, array( 'label' ) ) ) ) {
 			throw new InvalidArgumentException(
 				'$ignoreConflicts array can only contain "label", "description" and or "sitelink" values'
 			);
@@ -168,9 +169,8 @@ class ChangeOpsMerge {
 				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveLabelOp( $langCode ) );
 				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newSetLabelOp( $langCode, $label ) );
 			} else {
-				if ( !in_array( 'label', $this->ignoreConflicts ) ) {
-					throw new ChangeOpException( "Conflicting labels for language {$langCode}" );
-				}
+				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveLabelOp( $langCode ) );
+				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newAddAliasesOp( $langCode, array( $label ) ) );
 			}
 		}
 	}
