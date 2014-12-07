@@ -168,7 +168,10 @@ class ChangeOpsMerge {
 				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveLabelOp( $langCode ) );
 				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newSetLabelOp( $langCode, $label ) );
 			} else {
-				if ( !in_array( 'label', $this->ignoreConflicts ) ) {
+				if ( in_array( 'label', $this->ignoreConflicts ) ) {
+					$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveLabelOp( $langCode ) );
+					$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newAddAliasesOp( $langCode, array( $label ) ) );
+				} else {
 					throw new ChangeOpException( "Conflicting labels for language {$langCode}" );
 				}
 			}
