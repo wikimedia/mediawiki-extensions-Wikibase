@@ -88,6 +88,11 @@ class WikibaseLuaBindings {
 	private $usageAccumulator;
 
 	/**
+	 * @var SerializationOptions
+	 */
+	private $serializationOptions = null;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityLookup $entityLookup
 	 * @param SiteLinkLookup $siteLinkTable
@@ -193,16 +198,40 @@ class WikibaseLuaBindings {
 	 * @return Serializer
 	 */
 	private function getEntitySerializer( EntityDocument $entityObject, $lowerCaseIds ) {
-		$opt = new SerializationOptions();
-		$serializerFactory = new SerializerFactory( $opt, $this->dataTypeLookup );
+		$options = $this->getSerializationOptions( $lowerCaseIds );
+		$serializerFactory = new SerializerFactory( $options, $this->dataTypeLookup );
+
+		return $serializerFactory->newSerializerForObject( $entityObject, $options );
+	}
+
+	/**
+	 * @param bool $lowerCaseIds
+	 *
+	 * @return SerializationOptions
+	 */
+	private function getSerializationOptions( $lowerCaseIds ) {
+		if ( $this->serializationOptions === null ) {
+			$this->serializationOptions = $this->newSerializationOptions();
+		}
 
 		// Using "ID_KEYS_BOTH" here means that all lists of Snaks or Claims will be listed
 		// twice, once with a lower case key and once with an upper case key.
 		// This is a B/C hack to allow existing lua code to use hardcoded IDs
 		// in both lower (legacy) and upper case.
 		if ( $lowerCaseIds ) {
-			$opt->setIdKeyMode( SerializationOptions::ID_KEYS_BOTH );
+			$this->serializationOptions->setIdKeyMode( SerializationOptions::ID_KEYS_BOTH );
+		} else {
+			$this->serializationOptions->setIdKeyMode( SerializationOptions::ID_KEYS_UPPER );
 		}
+
+		return $this->serializationOptions;
+	}
+
+	/**
+	 * @return SerializationOptions
+	 */
+	private function newSerializationOptions() {
+		$options = new SerializationOptions();
 
 		// See mw.wikibase.lua. This is the only way to inject values into mw.wikibase.label( ),
 		// so any customized Lua modules can access labels of another entity written in another variant,
@@ -212,10 +241,12 @@ class WikibaseLuaBindings {
 			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
 		);
 
-		// SerializationOptions accepts mixed types of keys happily.
-		$opt->setLanguages( $this->languageCodes + array( $this->language->getCode() => $chain ) );
+		$languages = $this->languageCodes + array( $this->language->getCode() => $chain );
 
-		return $serializerFactory->newSerializerForObject( $entityObject, $opt );
+		// SerializationOptions accepts mixed types of keys happily.
+		$options->setLanguages( $languages );
+
+		return $options;
 	}
 
 	/**
