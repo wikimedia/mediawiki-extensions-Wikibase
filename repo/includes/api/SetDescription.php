@@ -83,36 +83,16 @@ class SetDescription extends ModifyTerm {
 	}
 
 	/**
-	 * @see \ApiBase::getParamDescription()
+	 * @see ApiBase::getExamplesMessages()
+	 *
+	 * @return array
 	 */
-	public function getParamDescription() {
-		return array_merge(
-			parent::getParamDescription(),
-			array(
-				'language' => 'Language of the description',
-				'value' => 'The value to set for the description',
-			)
-		);
-	}
-
-	/**
-	 * @see \ApiBase::getDescription()
-	 */
-	public function getDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'API module to set a description for a single Wikibase entity.'
-		);
-	}
-
-	/**
-	 * @see \ApiBase::getExamples()
-	 */
-	protected function getExamples() {
-		return array(
-			'api.php?action=wbsetdescription&id=Q42&language=en&value=An%20encyclopedia%20that%20everyone%20can%20edit'
-				=> 'Set the string "An encyclopedia that everyone can edit" for page with id "Q42" as a description in English language',
-			'api.php?action=wbsetdescription&site=enwiki&title=Wikipedia&language=en&value=An%20encyclopedia%20that%20everyone%20can%20edit'
-				=> 'Set the string "An encyclopedia that everyone can edit" as a description in English language for page with a sitelink to enwiki:Wikipedia',
+			'action=wbsetdescription&id=Q42&language=en&value=An%20encyclopedia%20that%20everyone%20can%20edit'
+				=> 'apihelp-wbsetdescription-example-1',
+			'action=wbsetdescription&site=enwiki&title=Wikipedia&language=en&value=An%20encyclopedia%20that%20everyone%20can%20edit'
+				=> 'apihelp-wbsetdescription-example-2',
 		);
 	}
 
