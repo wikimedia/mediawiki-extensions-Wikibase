@@ -217,48 +217,23 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription()
+	 * @see ApiBase::getExamplesMessages()
+	 *
+	 * @return array
 	 */
-	public function getParamDescription() {
-		return array_merge(
-			parent::getParamDescription(),
-			parent::getParamDescriptionForId(),
-			parent::getParamDescriptionForSiteLink(),
-			parent::getParamDescriptionForEntity(),
-			array(
-				'add' => 'List of aliases to add (can be combined with remove)',
-				'remove' => 'List of aliases to remove (can be combined with add)',
-				'set' => 'A list of aliases that will replace the current list (can not be combined with neither add nor remove)',
-				'language' => 'The language of which to set the aliases',
-			)
-		);
-	}
-
-	/**
-	 * @see ApiBase::getDescription()
-	 */
-	public function getDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'API module to set the aliases for a Wikibase entity.'
-		);
-	}
+			'action=wbsetaliases&language=en&id=Q1&set=Foo|Bar'
+				=> 'apihelp-wbsetaliases-example-1',
 
-	/**
-	 * @see ApiBase::getExamples()
-	 */
-	protected function getExamples() {
-		return array(
-			'api.php?action=wbsetaliases&language=en&id=Q1&set=Foo|Bar'
-				=> 'Set the English aliases for the entity with id Q1 to Foo and Bar',
+			'action=wbsetaliases&language=en&id=Q1&add=Foo|Bar'
+				=> 'apihelp-wbsetaliases-example-2',
 
-			'api.php?action=wbsetaliases&language=en&id=Q1&add=Foo|Bar'
-				=> 'Add Foo and Bar to the list of English aliases for the entity with id Q1',
+			'action=wbsetaliases&language=en&id=Q1&remove=Foo|Bar'
+				=> 'apihelp-wbsetaliases-example-3',
 
-			'api.php?action=wbsetaliases&language=en&id=Q1&remove=Foo|Bar'
-				=> 'Remove Foo and Bar from the list of English aliases for the entity with id Q1',
-
-			'api.php?action=wbsetaliases&language=en&id=Q1&remove=Foo&add=Bar'
-				=> 'Remove Foo from the list of English aliases for the entity with id Q1 while adding Bar to it',
+			'action=wbsetaliases&language=en&id=Q1&remove=Foo&add=Bar'
+				=> 'apihelp-wbsetaliases-example-4',
 		);
 	}
 

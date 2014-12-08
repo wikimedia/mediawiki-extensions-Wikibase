@@ -163,46 +163,13 @@ class RemoveClaims extends ModifyClaim {
 	}
 
 	/**
-	 * @see \ApiBase::getParamDescription
-	 *
-	 * @since 0.3
+	 * @see ApiBase::getExamplesMessages()
 	 *
 	 * @return array
 	 */
-	public function getParamDescription() {
-		return array_merge(
-			parent::getParamDescription(),
-			array(
-				'claim' => array( 'One GUID or several (pipe-separated) GUIDs identifying the claims to be removed.',
-					'All claims must belong to the same entity.'
-				),
-			)
-		);
-	}
-
-	/**
-	 * @see \ApiBase::getDescription
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'API module for removing Wikibase claims.'
-		);
-	}
-
-	/**
-	 * @see \ApiBase::getExamples
-	 *
-	 * @since 0.3
-	 *
-	 * @return array
-	 */
-	protected function getExamples() {
-		return array(
-			'api.php?action=wbremoveclaims&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N&token=foobar&baserevid=7201010' => 'Remove claim with GUID of "Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N"',
+			'action=wbremoveclaims&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N&token=foobar&baserevid=7201010' => 'apihelp-wbremoveclaims-example-1',
 		);
 	}
 
