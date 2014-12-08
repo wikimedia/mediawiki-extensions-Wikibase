@@ -1,17 +1,19 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb ) {
 'use strict';
 
 var PARENT = wb.datamodel.Set;
 
 /**
- * @constructor
+ * Set of StatementGroup objects.
+ * @class wikibase.datamodel.StatementGroupSet
+ * @extends wikibase.datamodel.Set
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
  *
- * @param {wikibase.datamodel.StatementGroup[]} [statementGroups]
+ * @constructor
+ *
+ * @param {wikibase.datamodel.StatementGroup[]} [statementGroups=[]]
  */
 wb.datamodel.StatementGroupSet = util.inherit(
 	'WbDataModelStatementGroupSet',

@@ -1,18 +1,20 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 /**
  * Container for sets of labels, descriptions and aliases.
- * @constructor
+ * @class wikibase.datamodel.Fingerprint
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
  *
- * @param {wikibase.datamodel.TermMap|null} [labels]
- * @param {wikibase.datamodel.TermMap|null} [descriptions]
- * @param {wikibase.datamodel.MultiTermMap|null} [aliases]
+ * @constructor
+ *
+ * @param {wikibase.datamodel.TermMap|null} [labels=new wikibase.datamodel.TermMap()]
+ * @param {wikibase.datamodel.TermMap|null} [descriptions=new wikibase.datamodel.TermMap()]
+ * @param {wikibase.datamodel.MultiTermMap|null} [aliases=new wikibase.datamodel.MultiTermMap()]
+ *
+ * @throws {Error} if a required parameter is not specified properly.
  */
 var SELF
 	= wb.datamodel.Fingerprint
@@ -36,17 +38,20 @@ var SELF
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {wikibase.datamodel.TermMap}
+	 * @property {wikibase.datamodel.TermMap}
+	 * @private
 	 */
 	_labels: null,
 
 	/**
-	 * @type {wikibase.datamodel.TermMap}
+	 * @property {wikibase.datamodel.TermMap}
+	 * @private
 	 */
 	_descriptions: null,
 
 	/**
-	 * @type {wikibase.datamodel.MultiTermMap}
+	 * @property {wikibase.datamodel.MultiTermMap}
+	 * @private
 	 */
 	_aliases: null,
 
@@ -168,7 +173,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {string} [languageCode]
+	 * @param {string} languageCode
 	 * @return {wikibase.datamodel.MultiTerm|null}
 	 */
 	getAliasesFor: function( languageCode ) {
@@ -193,13 +198,20 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {string} [languageCode]
-	 * @param {wikibase.datamodel.MultiTerm|wikibase.datamodel.MultiTermMap} aliases
+	 * @param {string|wikibase.datamodel.MultiTermMap} languageCodeOrAliases
+	 * @param {wikibase.datamodel.MultiTerm} [aliases]
+	 *
+	 * @throws {Error} when passing a MultiTerm without a language code.
+	 * @throws {Error} when passing a MultiTermMap with a language code.
+	 * @throws {Error} when neither passing a MultiTerm nor a MultiTermMap object.
 	 */
-	setAliases: function( languageCode, aliases ) {
-		if( typeof languageCode !== 'string' ) {
-			aliases = languageCode;
-			languageCode = undefined;
+	setAliases: function( languageCodeOrAliases, aliases ) {
+		var languageCode;
+
+		if( typeof languageCodeOrAliases === 'string' ) {
+			languageCode = languageCodeOrAliases;
+		} else {
+			aliases = languageCodeOrAliases;
 		}
 
 		if( aliases instanceof wb.datamodel.MultiTerm ) {
@@ -209,6 +221,10 @@ $.extend( SELF.prototype, {
 			}
 			this._aliases.setItem( languageCode, aliases );
 		} else if( aliases instanceof wb.datamodel.MultiTermMap ) {
+			if( languageCode ) {
+				throw new Error( 'Unable to handle language code when setting a '
+					+ 'wb.datamodel.MultiTermMap' );
+			}
 			this._aliases = aliases;
 		} else {
 			throw new Error( 'Aliases need to be specified as wb.datamodel.MultiTerm or '

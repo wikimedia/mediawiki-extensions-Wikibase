@@ -1,17 +1,19 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb ) {
 'use strict';
 
 var PARENT = wb.datamodel.Set;
 
 /**
- * @constructor
+ * Set of ClaimGroup objects.
+ * @class wikibase.datamodel.ClaimGroupSet
+ * @extends wikibase.datamodel.Set
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
  *
- * @param {wikibase.datamodel.ClaimGroup[]} [claimGroups]
+ * @constructor
+ *
+ * @param {wikibase.datamodel.ClaimGroup[]} [claimGroups=new wikibase.datamodel.ClaimGroup]
  */
 wb.datamodel.ClaimGroupSet = util.inherit( 'WbDataModelClaimGroupSet',
 	PARENT,

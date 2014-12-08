@@ -1,18 +1,22 @@
-/**
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- */
 ( function( wb, dv, util ) {
 	'use strict';
 
 var PARENT = dv.DataValue;
 
 /**
- * @constructor
+ * EntityId data value.
+ * @class wikibase.datamodel.EntityId
+ * @extends dataValues.DataValue
  * @since 0.3
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ *
+ * @constructor
  *
  * @param {string} entityType
  * @param {number} numericId
+ *
+ * @throws {Error} if a required parameter is not specified properly.
  */
 wb.datamodel.EntityId = util.inherit(
 	'WbDataModelEntityId',
@@ -32,12 +36,14 @@ wb.datamodel.EntityId = util.inherit(
 	},
 {
 	/**
-	 * @type {string}
+	 * @property {string}
+	 * @private
 	 */
 	_entityType: null,
 
 	/**
-	 * @type {number}
+	 * @property {number}
+	 * @private
 	 */
 	_numericId: null,
 
@@ -60,6 +66,9 @@ wb.datamodel.EntityId = util.inherit(
 	 *        If the same entity type appears multiple times with different prefixes, the prefix
 	 *        found first will be applied.
 	 * @return {string}
+	 *
+	 * @throws {Error} when the prefix map does not contain a prefix for the entity type set on the
+	 *         object.
 	 */
 	getPrefixedId: function( prefixMap ) {
 		var entityType = this._entityType;
@@ -76,7 +85,7 @@ wb.datamodel.EntityId = util.inherit(
 	},
 
 	/**
-	 * @see dataValues.DataValue.equals
+	 * @inheritdoc
 	 */
 	equals: function( entityId ) {
 		return entityId === this
@@ -86,7 +95,7 @@ wb.datamodel.EntityId = util.inherit(
 	},
 
 	/**
-	 * @see dataValues.DataValue.getValue
+	 * @inheritdoc
 	 *
 	 * @return {wikibase.datamodel.EntityId}
 	 */
@@ -95,14 +104,14 @@ wb.datamodel.EntityId = util.inherit(
 	},
 
 	/**
-	 * @see dataValues.DataValue.getSortKey
+	 * @inheritdoc
 	 */
 	getSortKey: function() {
 		return this._entityType + this._numericId;
 	},
 
 	/**
-	 * @see dataValues.DataValue.toJSON
+	 * @inheritdoc
 	 */
 	toJSON: function() {
 		return {
@@ -113,12 +122,19 @@ wb.datamodel.EntityId = util.inherit(
 } );
 
 /**
- * @see dataValues.DataValue.newFromJSON
+ * @inheritdoc
+ * @static
+ *
+ * @return {wikibase.datamodel.EntityId}
  */
 wb.datamodel.EntityId.newFromJSON = function( json ) {
 	return new wb.datamodel.EntityId( json['entity-type'], json['numeric-id'] );
 };
 
+/**
+ * @inheritdoc
+ * @property {string} [TYPE='wikibase-entityid']
+ */
 wb.datamodel.EntityId.TYPE = 'wikibase-entityid';
 
 dv.registerDataValue( wb.datamodel.EntityId );

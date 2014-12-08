@@ -1,21 +1,24 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, util ) {
 	'use strict';
 
 var PARENT = wb.datamodel.Entity;
 
 /**
- * @constructor
+ * Entity derivative featuring statements and site links.
+ * @class wikibase.datamodel.Item
  * @extends wikibase.datamodel.Entity
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {string} entityId
- * @param {wikibase.datamodel.Fingerprint|null} [fingerprint]
- * @param {wikibase.datamodel.StatementGroupSet|null} [statementGroupSet]
- * @param {wikibase.datamodel.SiteLinkSet|null} [siteLinkSet]
+ * @param {wikibase.datamodel.Fingerprint|null} [fingerprint=new wikibase.datamodel.Fingerprint()]
+ * @param {wikibase.datamodel.StatementGroupSet|null} [statementGroupSet=new wikibase.datamodel.StatementGroupSet()]
+ * @param {wikibase.datamodel.SiteLinkSet|null} [siteLinkSet=new wikibase.datamodel.SiteLinkSet()]
+ *
+ * @throws {Error} if a required parameter is not specified properly.
  */
 var SELF = wb.datamodel.Item = util.inherit(
 	'WbDataModelItem',
@@ -41,12 +44,14 @@ var SELF = wb.datamodel.Item = util.inherit(
 	},
 {
 	/**
-	 * @type {wikibase.datamodel.SiteLinkSet}
+	 * @property {wikibase.datamodel.SiteLinkSet}
+	 * @private
 	 */
 	_siteLinkSet: null,
 
 	/**
-	 * @type {wikibase.datamodel.StatementGroupSet}
+	 * @property {wikibase.datamodel.StatementGroupSet}
+	 * @private
 	 */
 	_statementGroupSet: null,
 
@@ -116,7 +121,9 @@ var SELF = wb.datamodel.Item = util.inherit(
 } );
 
 /**
- * @see wikibase.datamodel.Entity.TYPE
+ * @inheritdoc
+ * @property {string} [TYPE='item']
+ * @static
  */
 SELF.TYPE = 'item';
 

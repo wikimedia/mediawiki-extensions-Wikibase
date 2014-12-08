@@ -1,14 +1,14 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 /**
- * Represents a term (combination of a language code and a text string).
- * @constructor
+ * Combination of a language code and a text string.
+ * @class wikibase.datamodel.Term
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {string} languageCode
  * @param {string} text
@@ -20,12 +20,14 @@ var SELF = wb.datamodel.Term = function WbDataModelTerm( languageCode, text ) {
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {string}
+	 * @property {string}
+	 * @private
 	 */
 	_languageCode: null,
 
 	/**
-	 * @type {string}
+	 * @property {string}
+	 * @private
 	 */
 	_text: null,
 
@@ -38,6 +40,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
+	 *
+	 * @throws {Error} if language code is not a string.
 	 */
 	setLanguageCode: function( languageCode ) {
 		if( typeof languageCode !== 'string' ) {
@@ -55,6 +59,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} text
+	 *
+	 * @throws {Error} if text is not a string.
 	 */
 	setText: function( text ) {
 		if( typeof text !== 'string' ) {

@@ -1,19 +1,23 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 var PARENT = wb.datamodel.GroupableCollection;
 
 /**
- * Ordered list.
- * @constructor
+ * Stores items in order.
+ * @class wikibase.datamodel.List
+ * @extends wikibase.datamodel.GroupableCollection
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {Function} ItemConstructor
- * @param {*[]} [items]
+ * @param {*[]} [items=[]]
+ *
+ * @throws {Error} if item constructor is not a Function.
+ * @throws {Error} if item constructor prototype does not feature an equals() function.
  */
 var SELF = wb.datamodel.List = util.inherit(
 	'WbDataModelList',
@@ -37,36 +41,41 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 {
 	/**
-	 * @type {Function}
+	 * @property {Function}
+	 * @private
 	 */
 	_ItemConstructor: null,
 
 	/**
-	 * @type {*[]}
+	 * @property {*[]}
+	 * @protected
 	 */
 	_items: null,
 
 	/**
-	 * @type {number}
+	 * @property {number}
+	 * @readonly
 	 */
 	length: 0,
 
 	/**
 	 * @see jQuery.fn.each
+	 *
+	 * @param {Function} fn
 	 */
 	each: function( fn ) {
 		$.each.call( null, this._items, fn );
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.toArray
+	 * @inheritdoc
 	 */
 	toArray: function() {
 		return this._items.slice();
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.hasItem
+	 * @inheritdoc
 	 */
 	hasItem: function( item ) {
 		this._assertIsItem( item );
@@ -80,7 +89,7 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.additem
+	 * @inheritdoc
 	 */
 	addItem: function( item ) {
 		this._assertIsItem( item );
@@ -90,7 +99,9 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.removeItem
+	 * @inheritdoc
+	 *
+	 * @throws {Error} when trying to remove a claim which is not registered.
 	 */
 	removeItem: function( item ) {
 		this._assertIsItem( item );
@@ -106,14 +117,14 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.isEmpty
+	 * @inheritdoc
 	 */
 	isEmpty: function() {
 		return this.length === 0;
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.equals
+	 * @inheritdoc
 	 */
 	equals: function( list ) {
 		if( list === this ) {
@@ -132,7 +143,10 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.GroupableCollection.getItemKey
+	 * @inheritdoc
+	 *
+	 * @throws {Error} when trying to retrieve a key for an item since a list does not feature
+	 *         unique keys.
 	 */
 	getItemKey: function( item ) {
 		throw new Error( 'List does not feature any unique keys' );
@@ -154,7 +168,12 @@ var SELF = wb.datamodel.List = util.inherit(
 	},
 
 	/**
+	 * @private
+	 *
 	 * @param {*} item
+	 *
+	 * @throws {Error} if the item is not an instance of the constructor registered with the List
+	 *         object.
 	 */
 	_assertIsItem: function( item ) {
 		if( !( item instanceof this._ItemConstructor ) ) {

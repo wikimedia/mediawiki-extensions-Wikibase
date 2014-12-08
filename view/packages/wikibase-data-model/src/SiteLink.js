@@ -1,19 +1,20 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 /**
- * @constructor
+ * Combination of a site id, a page name and a list of badges.
+ * @class wikibase.datamodel.SiteLink
  * @since 0.3
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {string} siteId
  * @param {string} pageName
- * @param {string[]} [badges]
+ * @param {string[]} [badges=[]]
  *
- * @throws {Error} if required parameters are not specified.
+ * @throws {Error} if a required parameter is not specified properly.
  */
 var SELF = wb.datamodel.SiteLink = function WbDataModelSiteLink( siteId, pageName, badges ) {
 	if( siteId === undefined || pageName === undefined ) {
@@ -27,17 +28,20 @@ var SELF = wb.datamodel.SiteLink = function WbDataModelSiteLink( siteId, pageNam
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {string}
+	 * @property {string}
+	 * @private
 	 */
 	_siteId: null,
 
 	/**
-	 * @type {string|null}
+	 * @property {string|null}
+	 * @private
 	 */
 	_pageName: null,
 
 	/**
-	 * @type {string[]}
+	 * @property {string[]}
+	 * @private
 	 */
 	_badges: null,
 
@@ -56,7 +60,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {string[]} [badges]
+	 * @param {string[]} [badges=[]]
 	 */
 	setBadges: function( badges ) {
 		this._badges = badges || [];

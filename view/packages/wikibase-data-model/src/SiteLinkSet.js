@@ -1,17 +1,19 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb ) {
 'use strict';
 
 var PARENT = wb.datamodel.Set;
 
 /**
- * @constructor
+ * Set of SiteLink objects.
+ * @class wikibase.datamodel.SiteLinkSet
+ * @extends wikibase.datamodel.Set
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
  *
- * @param {wikibase.datamodel.SiteLink[]} [siteLinks]
+ * @constructor
+ *
+ * @param {wikibase.datamodel.SiteLink[]} [siteLinks=[]]
  */
 wb.datamodel.SiteLinkSet = util.inherit( 'WbDataModelSiteLinkSet', PARENT, function( siteLinks ) {
 	PARENT.call( this, wb.datamodel.SiteLink, 'getSiteId', siteLinks );

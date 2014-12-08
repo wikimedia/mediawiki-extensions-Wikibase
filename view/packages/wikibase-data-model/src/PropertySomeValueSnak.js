@@ -1,16 +1,17 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner
- */
 ( function( wb, util ) {
 'use strict';
 
 var PARENT = wb.datamodel.Snak;
 
 /**
- * @constructor
+ * Snak occupying some value.
+ * @class wikibase.datamodel.PropertySomeValueSnak
  * @extends wikibase.datamodel.Snak
  * @since 0.3
+ * @licence GNU GPL v2+
+ * @author Daniel Werner
+ *
+ * @constructor
  *
  * @param {string} propertyId
  */
@@ -19,7 +20,9 @@ var SELF
 	= util.inherit( 'WbDataModelPropertySomeValueSnak', PARENT, {} );
 
 /**
- * @see wikibase.datamodel.Snak.TYPE
+ * @inheritdoc
+ * @property {string} [TYPE='somevalue']
+ * @static
  */
 SELF.TYPE = 'somevalue';
 

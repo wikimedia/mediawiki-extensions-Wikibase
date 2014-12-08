@@ -130,7 +130,7 @@ QUnit.test( 'getValidMoveIndices()', function( assert ) {
 
 	/**
 	 * Expected indices where the individual snaks (with or without its groups) may be moved to.
-	 * @type {number[][]}
+	 * @property {number[][]}
 	 */
 	var validIndices = [
 		[1, 5, 6, 7],
@@ -171,7 +171,7 @@ QUnit.test( 'move()', function( assert ) {
 	 * [0] => Index of element to move
 	 * [1] => Index where to move element
 	 * [2] => Expected result when concatenating the string values of the SnakList's Snaks.
-	 * @type {*[][]}
+	 * @property {*[][]}
 	 */
 	var testCases = [
 		[ 0, 1, 'bacdefg' ],
@@ -244,7 +244,7 @@ QUnit.test( 'moveUp() and moveDown()', function( assert ) {
 	 * structure:
 	 * [0] => Resulting order after moving the element having the same index in the SnakList up.
 	 * [1] => Resulting order after moving the element having the same index in the SnakList down.
-	 * @type {string[][]}
+	 * @property {string[][]}
 	 */
 	var testCases = [
 		['abcdefg', 'bacdefg' ],

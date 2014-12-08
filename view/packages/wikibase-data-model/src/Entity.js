@@ -1,14 +1,17 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 	'use strict';
 
 /**
- * @constructor
+ * Abstract Entity base class featuring an id and a fingerprint.
+ * @class wikibase.datamodel.Entity
  * @abstract
  * @since 0.3
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
+ *
+ * @throws {Error} when trying to instantiate since Entity is abstract.
  */
 var SELF = wb.datamodel.Entity = function WbDataModelEntity() {
 	throw new Error( 'Cannot construct abstract Entity object' );
@@ -16,18 +19,21 @@ var SELF = wb.datamodel.Entity = function WbDataModelEntity() {
 
 /**
  * String to identify this type of Entity.
- * @type {string}
+ * @property {string} [TYPE=null]
+ * @static
  */
 SELF.TYPE = null;
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {string}
+	 * @property {string}
+	 * @private
 	 */
 	_id: null,
 
 	/**
-	 * @type {wikibase.datamodel.Fingerprint}
+	 * @property {wikibase.datamodel.Fingerprint}
+	 * @private
 	 */
 	_fingerprint: null,
 
@@ -62,12 +68,16 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
+	 * @abstract
+	 *
 	 * @return {boolean}
 	 */
 	isEmpty: util.abstractMember,
 
 	/**
-	 * @param {*}
+	 * @abstract
+	 *
+	 * @param {*} entity
 	 * @return {boolean}
 	 */
 	equals: util.abstractMember

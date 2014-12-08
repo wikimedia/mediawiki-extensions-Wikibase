@@ -1,18 +1,19 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( wb, $ ) {
 'use strict';
 
 /**
- * @constructor
+ * Object featuring a main snak and a list of qualifiers.
+ * @class wikibase.datamodel.Claim
  * @since 0.3
+ * @licence GNU GPL v2+
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ *
+ * @constructor
  *
  * @param {wikibase.datamodel.Snak} mainSnak
- * @param {wikibase.datamodel.SnakList|null} [qualifiers]
- * @param {string|null} [guid] The Global Unique Identifier of this Claim. Can be omitted or null
- *        if this is a new Claim, not yet stored in the database and associated with some entity.
+ * @param {wikibase.datamodel.SnakList|null} [qualifiers=new wikibase.datamodel.SnakList()]
+ * @param {string|null} [guid=null] The Global Unique Identifier of this Claim. Can be null if this
+ *        is a new Claim, not yet stored in the database and associated with some entity.
  */
 var SELF = wb.datamodel.Claim = function WbDataModelClaim( mainSnak, qualifiers, guid ) {
 	this.setMainSnak( mainSnak );
@@ -22,17 +23,20 @@ var SELF = wb.datamodel.Claim = function WbDataModelClaim( mainSnak, qualifiers,
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {wikibase.datamodel.Snak}
+	 * @property {wikibase.datamodel.Snak}
+	 * @private
 	 */
 	_mainSnak: null,
 
 	/**
-	 * @type {wikibase.datamodel.SnakList}
+	 * @property {wikibase.datamodel.SnakList}
+	 * @private
 	 */
 	_qualifiers: null,
 
 	/**
-	 * @type {string|null}
+	 * @property {string|null}
+	 * @private
 	 */
 	_guid: null,
 
@@ -59,6 +63,8 @@ $.extend( SELF.prototype, {
 	 * Overwrites the current main Snak.
 	 *
 	 * @param {wikibase.datamodel.Snak} mainSnak
+	 *
+	 * @throws {Error} if parameter is not a Snak instance.
 	 */
 	setMainSnak: function( mainSnak ) {
 		if( !( mainSnak instanceof wb.datamodel.Snak ) ) {
@@ -88,6 +94,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {wikibase.datamodel.SnakList} qualifiers
+	 *
+	 * @throws {Error} if parameter is not a SnakList instance.
 	 */
 	setQualifiers: function( qualifiers ) {
 		if( !( qualifiers instanceof wb.datamodel.SnakList ) ) {

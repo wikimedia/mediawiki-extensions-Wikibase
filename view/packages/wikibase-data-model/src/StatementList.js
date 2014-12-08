@@ -1,17 +1,19 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 var PARENT = wb.datamodel.List;
 
 /**
- * @constructor
+ * List of Statement objects.
+ * @class wikibase.datamodel.StatementList
+ * @extends wikibase.datamodel.List
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
  *
- * @param {wikibase.datamodel.Statement[]} [statements]
+ * @constructor
+ *
+ * @param {wikibase.datamodel.Statement[]} [statements=[]]
  */
 wb.datamodel.StatementList = util.inherit(
 	'WbDataModelStatementList',

@@ -1,14 +1,14 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 /**
- * Ordered set of texts for one language.
- * @constructor
+ * List of texts for one language.
+ * @class wikibase.datamodel.MultiTerm
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {string} languageCode
  * @param {string[]} texts
@@ -20,12 +20,14 @@ var SELF = wb.datamodel.MultiTerm = function WbDataModelMultiTerm( languageCode,
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {string}
+	 * @property {string}
+	 * @private
 	 */
 	_languageCode: null,
 
 	/**
-	 * @type {string[]}
+	 * @property {string[]}
+	 * @private
 	 */
 	_texts: null,
 
@@ -38,6 +40,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
+	 *
+	 * @throws {Error} when the language code is not a string.
 	 */
 	setLanguageCode: function( languageCode ) {
 		if( typeof languageCode !== 'string' ) {
@@ -55,10 +59,12 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string[]} texts
+	 *
+	 * @throws {Error} when texts is not an array.
 	 */
 	setTexts: function( texts ) {
 		if( !$.isArray( texts ) ) {
-			throw new Error( 'Required parameter(s) not specified' );
+			throw new Error( 'texts needs to be an array of strings' );
 		}
 		this._texts = texts;
 	},

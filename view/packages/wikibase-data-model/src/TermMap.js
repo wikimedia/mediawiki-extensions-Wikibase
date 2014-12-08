@@ -1,17 +1,19 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb ) {
 'use strict';
 
 var PARENT = wb.datamodel.Map;
 
 /**
- * @constructor
+ * Map of Term objects.
+ * @class wikibase.datamodel.TermMap
+ * @extends wikibase.datamodel.Map
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
  *
- * @param {Object} [terms]
+ * @constructor
+ *
+ * @param {Object} [terms={}]
  */
 wb.datamodel.TermMap = util.inherit( 'WbDataModelTermMap', PARENT, function( terms ) {
 	PARENT.call( this, wb.datamodel.Term, terms );

@@ -1,18 +1,20 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 var PARENT = wb.datamodel.List;
 
 /**
- * @constructor
+ * List of Snak objects.
+ * @class wikibase.datamodel.SnakList
+ * @extends wikibase.datamodel.List
  * @abstract
  * @since 0.3
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
  *
- * @param {wikibase.datamodel.Snak[]} [snaks]
+ * @constructor
+ *
+ * @param {wikibase.datamodel.Snak[]} [snaks=[]]
  */
 wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( snaks ) {
 	PARENT.call( this, wikibase.datamodel.Snak, snaks );
@@ -21,7 +23,7 @@ wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( s
 	 * Returns a SnakList with the snaks featuring a specific property id. If the property id
 	 * parameter is omitted, a copy of the whole SnakList object is returned.
 	 *
-	 * @param {string} [propertyId]
+	 * @param {string|null} [propertyId=null]
 	 * @return {wikibase.datamodel.SnakList}
 	 */
 	getFilteredSnakList: function( propertyId ) {

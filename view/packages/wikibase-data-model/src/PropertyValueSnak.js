@@ -1,19 +1,22 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner
- */
 ( function( wb, dv, util ) {
 'use strict';
 
 var PARENT = wb.datamodel.Snak;
 
 /**
- * @constructor
+ * Snak occupying a specific value.
+ * @class wikibase.datamodel.PropertyValueSnak
  * @extends wikibase.datamodel.Snak
  * @since 0.3
+ * @licence GNU GPL v2+
+ * @author Daniel Werner
+ *
+ * @constructor
  *
  * @param {string} propertyId
  * @param {dataValues.DataValue} value
+ *
+ * @throws {Error} value is not a dataValues.DataValue instance.
  */
 var SELF = wb.datamodel.PropertyValueSnak = util.inherit(
 	'WbDataModelPropertyValueSnak',
@@ -27,7 +30,8 @@ var SELF = wb.datamodel.PropertyValueSnak = util.inherit(
 	},
 {
 	/**
-	 * @type {dataValues.DataValue}
+	 * @property {dataValues.DataValue}
+	 * @private
 	 */
 	_value: null,
 
@@ -41,7 +45,7 @@ var SELF = wb.datamodel.PropertyValueSnak = util.inherit(
 	},
 
 	/**
-	 * @see wikibase.datamodel.Snak.equals
+	 * @inheritdoc
 	 */
 	equals: function( snak ) {
 		return PARENT.prototype.equals.call( this, snak ) && this._value.equals( snak.getValue() );
@@ -49,7 +53,9 @@ var SELF = wb.datamodel.PropertyValueSnak = util.inherit(
 } );
 
 /**
- * @see wikibase.datamodel.Snak.TYPE
+ * @inheritdoc
+ * @property {string} [TYPE='value']
+ * @static
  */
 SELF.TYPE = 'value';
 

@@ -1,16 +1,20 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 /**
- * @constructor
+ * Stores items by key.
+ * @class wikibase.datamodel.Map
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {Function} ItemConstructor
- * @param {Object} [map]
+ * @param {Object} [map={}]
+ *
+ * @throws {Error} if item constructor is not a Function.
+ * @throws {Error} if item constructor prototype does not feature an equals() function.
  */
 var SELF = wb.datamodel.Map = function( ItemConstructor, map ) {
 	map = map || {};
@@ -31,22 +35,27 @@ var SELF = wb.datamodel.Map = function( ItemConstructor, map ) {
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {Function}
+	 * @property {Function}
+	 * @private
 	 */
 	_ItemConstructor: null,
 
 	/**
-	 * @type {Object}
+	 * @property {Object}
+	 * @protected
 	 */
 	_items: null,
 
 	/**
-	 * @type {number}
+	 * @property {number}
+	 * @readonly
 	 */
 	length: 0,
 
 	/**
 	 * @see jQuery.fn.each
+	 *
+	 * @param {Function} fn
 	 */
 	each: function( fn ) {
 		$.each.call( null, this._items, fn );
@@ -65,6 +74,8 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {string} key
 	 * @param {Object} item
+	 *
+	 * @throws {Error} if an item for the specified key is registered already.
 	 */
 	addItem: function( key, item ) {
 		this._assertIsItem( item );
@@ -79,6 +90,8 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {string} key
 	 * @param {Object} item
+	 *
+	 * @throws {Error} when trying to remove an item that is not registered.
 	 */
 	removeItem: function( key, item ) {
 		if( !this.hasItem( key, item ) ) {
@@ -166,8 +179,13 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
+	 * @private
+	 *
 	 * @param {*} item
 	 * @return {boolean}
+	 *
+	 * @throws {Error} if the item is not an instance of the constructor registered with the Map
+	 *         object.
 	 */
 	_assertIsItem: function( item ) {
 		if( !( item instanceof this._ItemConstructor ) ) {

@@ -1,16 +1,20 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( wb, $ ) {
 'use strict';
 
 /**
- * @constructor
+ * Abstract Snak base class featuring a property id.
+ * @class wikibase.datamodel.Snak
  * @abstract
  * @since 0.3
+ * @licence GNU GPL v2+
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ *
+ * @constructor
  *
  * @param {string} propertyId
+ *
+ * @throws {Error} when trying to instantiate an abstract Snak object.
+ * @throws {Error} when the property id is omitted.
  */
 var SELF = wb.datamodel.Snak = function WbDataModelSnak( propertyId ) {
 	if( !this.constructor.TYPE ) {
@@ -23,13 +27,15 @@ var SELF = wb.datamodel.Snak = function WbDataModelSnak( propertyId ) {
 
 /**
  * String to identify this type of Snak.
- * @type {string}
+ * @property {string} [TYPE=null]
+ * @static
  */
 SELF.TYPE = null;
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {string}
+	 * @property {string}
+	 * @private
 	 */
 	_propertyId: null,
 

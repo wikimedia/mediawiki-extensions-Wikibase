@@ -1,18 +1,19 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb ) {
 'use strict';
 
 var PARENT = wb.datamodel.Group;
 
 /**
- * Ordered list of Statement objects, each featuring the same property id.
- * @constructor
+ * List of Statement objects, constrained to a single property id.
+ * @class wikibase.datamodel.StatementGroup
+ * @extends wikibase.datamodel.Group
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
  *
- * @param {wikibase.datamodel.StatementList} [statementList]
+ * @constructor
+ *
+ * @param {wikibase.datamodel.StatementList} [statementList=new wikibase.datamodel.StatementList()]
  */
 wb.datamodel.StatementGroup = util.inherit(
 	'WbDataModelStatementGroup',

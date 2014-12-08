@@ -1,17 +1,19 @@
-/**
- * @licence GNU GPL v2+
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb ) {
 'use strict';
 
 var PARENT = wb.datamodel.Map;
 
 /**
- * @constructor
+ * Map of MultiTerm objects.
+ * @class wikibase.datamodel.MultiTermMap
+ * @extends wikibase.datamodel.Map
  * @since 1.0
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
  *
- * @param {Object} [multiTerms]
+ * @constructor
+ *
+ * @param {Object} [multiTerms={}]
  */
 wb.datamodel.MultiTermMap = util.inherit(
 	'WbDataModelMultiTermMap',

@@ -1,18 +1,19 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner
- * @author H. Snater < mediawiki@snater.com >
- */
 ( function( wb, $ ) {
 'use strict';
 
 /**
- * @constructor
+ * Combination of a claim, a rank and references.
+ * @class wikibase.datamodel.Statement
  * @since 0.3
+ * @licence GNU GPL v2+
+ * @author Daniel Werner
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @constructor
  *
  * @param {wikibase.datamodel.Claim} claim
- * @param {wikibase.datamodel.ReferenceList|null} [references]
- * @param {number} [rank]
+ * @param {wikibase.datamodel.ReferenceList|null} [references=new wikibase.datamodel.ReferenceList()]
+ * @param {number} [rank=wikibase.datamodel.Statement.RANK.NORMAL]
  */
 var SELF = wb.datamodel.Statement = function WbDataModelStatement( claim, references, rank ) {
 	this.setClaim( claim );
@@ -22,18 +23,21 @@ var SELF = wb.datamodel.Statement = function WbDataModelStatement( claim, refere
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {wikibase.datamodel.Claim}
+	 * @property {wikibase.datamodel.Claim}
+	 * @private
 	 */
 	_claim: null,
 
 	/**
-	 * @type {wikibase.datamodel.ReferenceList}
+	 * @property {wikibase.datamodel.ReferenceList}
+	 * @private
 	 */
 	_references: null,
 
 	/**
 	 * @see wikibase.datamodel.Statement.RANK
-	 * @type {number}
+	 * @property {number}
+	 * @private
 	 */
 	_rank: null,
 
@@ -46,6 +50,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {wikibase.datamodel.Claim} claim
+	 *
+	 * @throws {Error} if claim is not a Claim instance.
 	 */
 	setClaim: function( claim ) {
 		if( !( claim instanceof wb.datamodel.Claim ) ) {
@@ -63,6 +69,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {wikibase.datamodel.ReferenceList} references
+	 *
+	 * @throws {Error} if references is not a ReferenceList instance.
 	 */
 	setReferences: function( references ) {
 		if( !( references instanceof wb.datamodel.ReferenceList ) ) {
@@ -72,14 +80,20 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {number} (see wikibase.datamodel.Statement.RANK)
+	 * @see wikibase.datamodel.Statement.RANK
+	 *
+	 * @return {number}
 	 */
 	getRank: function() {
 		return this._rank;
 	},
 
 	/**
-	 * @param {number} rank (see wikibase.datamodel.Statement.RANK)
+	 * @see wikibase.datamodel.Statement.RANK
+	 *
+	 * @param {number} rank
+	 *
+	 * @throws {Error} if rank is not defined in wikibase.datamodel.Statement.RANK.
 	 */
 	setRank: function( rank ) {
 		for( var i in SELF.RANK ) {
@@ -105,7 +119,9 @@ $.extend( SELF.prototype, {
 } );
 
 /**
- * @type {Object}
+ * Rank enum.
+ * @property {Object}
+ * @static
  */
 SELF.RANK = {
 	PREFERRED: 2,
