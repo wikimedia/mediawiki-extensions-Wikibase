@@ -95,7 +95,7 @@ abstract class ViewEntityAction extends ViewAction {
 				$this->getArticle()
 			);
 
-			if ( !( $content instanceof EntityContent ) ) {
+			if ( $content && !( $content instanceof EntityContent ) ) {
 				$this->getOutput()->showErrorPage(
 						'wikibase-entity-not-viewable-title',
 						'wikibase-entity-not-viewable',
@@ -104,7 +104,10 @@ abstract class ViewEntityAction extends ViewAction {
 				return;
 			}
 
-			$this->displayEntityContent( $content );
+			$this->viewEntity();
+			if ( $content ) {
+				$this->applyLabelToTitleText( $this->getOutput(), $content );
+			}
 		}
 	}
 
@@ -126,13 +129,12 @@ abstract class ViewEntityAction extends ViewAction {
 	}
 
 	/**
-	 * Displays the entity content.
+	 * Displays the entity. Article::view takes care of all permission related things
+	 * and showing errors if eg. a revision doesn't exist.
 	 *
-	 * @since 0.1
-	 *
-	 * @param EntityContent $content
+	 * @since 0.5
 	 */
-	private function displayEntityContent( EntityContent $content ) {
+	private function viewEntity() {
 		$outputPage = $this->getOutput();
 
 		$editable = $this->isEditable();
@@ -145,8 +147,6 @@ abstract class ViewEntityAction extends ViewAction {
 
 		$this->getArticle()->setParserOptions( $parserOptions );
 		$this->getArticle()->view();
-
-		$this->applyLabelToTitleText( $outputPage, $content );
 	}
 
 	/**
