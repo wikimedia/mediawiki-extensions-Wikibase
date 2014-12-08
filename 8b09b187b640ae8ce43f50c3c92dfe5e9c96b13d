@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_81fc2cd7",
+        "filename": "repo/includes/api/SetLabel.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-08T11:42:17Z",
+      "side": 0,
+      "message": "there are several of these methods in the parent classes (e.g. ModifyEntity) that are now unused and can also be removed.",
+      "revId": "8b09b187b640ae8ce43f50c3c92dfe5e9c96b13d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

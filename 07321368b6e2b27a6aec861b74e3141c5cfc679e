@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_e1ead004",
+        "filename": "repo/includes/api/SetQualifier.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-08T11:42:17Z",
+      "side": 1,
+      "message": "do we still need this?",
+      "revId": "07321368b6e2b27a6aec861b74e3141c5cfc679e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_e15df01b",
+        "filename": "repo/includes/api/SetQualifier.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-08T11:42:17Z",
+      "side": 1,
+      "message": "should this method be removed now?",
+      "revId": "07321368b6e2b27a6aec861b74e3141c5cfc679e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
