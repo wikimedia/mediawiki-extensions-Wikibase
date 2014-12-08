@@ -2,9 +2,6 @@
 
 namespace Wikibase\DataModel\Serializers;
 
-use Serializers\Exceptions\SerializationException;
-use Serializers\Exceptions\UnsupportedObjectException;
-use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Entity;
 
 /**

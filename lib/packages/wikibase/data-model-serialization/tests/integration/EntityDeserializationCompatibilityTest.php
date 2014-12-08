@@ -21,7 +21,7 @@ class EntityDeserializationCompatibilityTest extends \PHPUnit_Framework_TestCase
 	 */
 	private $deserializer;
 
-	public function setUp() {
+	protected function setUp() {
 		$deserializerFactory = new DeserializerFactory(
 			new DataValueDeserializer(
 				array(

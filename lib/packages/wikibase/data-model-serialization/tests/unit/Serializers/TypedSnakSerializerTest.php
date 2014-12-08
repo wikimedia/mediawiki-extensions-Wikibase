@@ -20,7 +20,7 @@ class TypedSnakSerializerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private $serializer;
 
-	public function setUp() {
+	protected function setUp() {
 		$snakSerializer = $this->getMock( 'Serializers\Serializer' );
 
 		$snakSerializer->expects( $this->any() )
