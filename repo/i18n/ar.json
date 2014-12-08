@@ -11,10 +11,14 @@
 			"OsamaK",
 			"Tarawneh",
 			"زكريا",
-			"محمد أحمد عبد الفتاح"
+			"محمد أحمد عبد الفتاح",
+			"أحمد المحمودي"
 		]
 	},
 	"specialpages-group-wikibaserepo": "مستودع قاعدة ويكي",
+	"wikibase-entity-item": "عنصر",
+	"wikibase-entity-property": "خاصية",
+	"wikibase-entity-query": "طلب",
 	"wikibase-edit": "عدل",
 	"wikibase-save": "حفظ",
 	"wikibase-cancel": "إلغاء",
@@ -28,6 +32,15 @@
 	"wikibase-description-empty": "لم يتم توفير وصف بعد",
 	"wikibase-description-edit-placeholder": "أدخل وصف",
 	"wikibase-description-edit-placeholder-language-aware": "أدخل وصف في $1",
+	"wikibase-diffview-reference": "مرجع",
+	"wikibase-diffview-rank": "الترتيب",
+	"wikibase-diffview-rank-preferred": "الترتيب المفضل",
+	"wikibase-diffview-rank-normal": "الترتيب القياسي",
+	"wikibase-diffview-qualifier": "صفة",
+	"wikibase-diffview-label": "علامة",
+	"wikibase-diffview-alias": "أسماء أخرى",
+	"wikibase-diffview-description": "وصف",
+	"wikibase-diffview-link": "وصلات",
 	"wikibase-sitelink-site-edit-placeholder": "موقع",
 	"wikibase-sitelink-page-edit-placeholder": "صفحة",
 	"wikibase-alias-edit-placeholder": "أدخل كنية",
@@ -67,6 +80,9 @@
 	"wikibase-newentity-submit": "إنشاء",
 	"wikibase-setdescription-label": "الوصف:",
 	"wikibase-restoreold": "استرجاع",
+	"wikibase-property-summary-wbcreateclaim-create": "الدعوى المنشئة",
+	"wikibase-property-summary-wbsetreference": "تعيين مرجع",
+	"wikibase-property-summary-wbsetreference-add": "إضافة مرجع للدعوى",
 	"right-item-merge": "دمج العناصر",
 	"right-property-term": "تغيير شروط الملكية (التسميات والأوصاف والأسماء المستعارة)"
 }

@@ -11,11 +11,12 @@
 			"Qllach",
 			"Toniher",
 			"Vriullop",
-			"Àlex"
+			"Àlex",
+			"Macofe"
 		]
 	},
 	"wikibase-client-desc": "Client per l'extensió Wikibase",
-	"specialpages-group-wikibaseclient": "Client de Wikidata",
+	"specialpages-group-wikibaseclient": "Client de {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Enllaç a l'element del repositori de dades connectades",
 	"wikibase-after-page-move": "També podeu [$1 actualitzar] l'element associat de Wikidata per tal de mantenir els enllaços d'idioma a la pàgina que s'ha desplaçat.",
 	"wikibase-after-page-move-queued": "L'[$1 element de Wikidata] associat amb aquesta pàgina s'actualitzarà automàticament aviat.",

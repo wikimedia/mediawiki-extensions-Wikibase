@@ -6,6 +6,9 @@
 			"Les Meloures"
 		]
 	},
+	"wikibase-entity-item": "Element",
+	"wikibase-entity-property": "Eegeschaft",
+	"wikibase-entity-query": "Ufro",
 	"wikibase-edit": "änneren",
 	"wikibase-save": "späicheren",
 	"wikibase-cancel": "ofbriechen",
@@ -19,12 +22,17 @@
 	"wikibase-description-empty": "Nach keng Beschreiwung definéiert",
 	"wikibase-description-edit-placeholder": "Beschreiwung aginn",
 	"wikibase-description-edit-placeholder-language-aware": "Beschreiwung op $1 aginn",
+	"wikibase-diffview-reference": "Referenz",
+	"wikibase-diffview-rank": "Classement",
+	"wikibase-diffview-label": "Etikett",
+	"wikibase-diffview-alias": "Aliasen",
+	"wikibase-diffview-description": "Beschreiwung",
+	"wikibase-diffview-link": "Linken",
 	"wikibase-sitelink-site-edit-placeholder": "Site",
 	"wikibase-sitelink-page-edit-placeholder": "Säit",
 	"wikibase-alias-edit-placeholder": "Alias aginn",
 	"wikibase-label-input-help-message": "Gitt d'Etikett vun dëser EEnheet op $1 an.",
 	"wikibase-description-input-help-message": "Gitt eng kuerz Beschreiwung fir dës Eenheet op $1",
-	"wikibase-claims": "Fuerderungen",
 	"wikibase-statements": "Declaratiounen",
 	"wikibase-terms": "An anere Sproochen",
 	"wikibase-sitelinks-empty": "Bis ass nach keng Säit ma dësem Element verlinkt.",
@@ -43,7 +51,6 @@
 	"wikibase-undo-firstrev": "D'Uleeë vun der Säit kann net réckgängeg gemaach ginn",
 	"wikibase-undo-nocontent": "Den Inhalt vun der Versioun $2 vun der Säit $1 kann net geluede ginn",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Ee Wäert gouf|$1 Wäerter goufen}} nach net gespäichert",
-	"wikibase-sitelinksedittool-full": "D'Linken op d'Säiten si schonn agestallt fir all bekannte Siten.",
 	"wikibase-disambiguation-title": "Homonymie fir \"$1\"",
 	"wb-special-newitem-new-item-notification": "Neit Element $1 ugeluecht a virugeleet op seng Säit. Zréck op $2.",
 	"wikibase-aliases-label": "Och bekannt als:",
@@ -233,5 +240,7 @@
 	"content-model-wikibase-property": "Wikibase-Eegeschaft",
 	"content-model-wikibase-query": "Wikibase-Ufro",
 	"right-item-merge": "Elementer zesummeleeën",
-	"right-property-create": "Eegeschaften uleeën"
+	"right-property-create": "Eegeschaften uleeën",
+	"apihelp-wbmergeitems-example-1": "Fusionéiert Date vun Q42 an Q222",
+	"apihelp-wbmergeitems-example-2": "Fusionéiert Date vun Q555 an Q3"
 }
