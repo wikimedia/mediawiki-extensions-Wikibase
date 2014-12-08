@@ -181,7 +181,7 @@ class DumpJson extends Maintenance {
 			$this->logMessage( "Dumping entities of type $entityType" );
 		}
 
-		if ( $shardingFactor && $shard ) {
+		if ( $shardingFactor ) {
 			$this->logMessage( "Dumping shard $shard/$shardingFactor" );
 		}
 
