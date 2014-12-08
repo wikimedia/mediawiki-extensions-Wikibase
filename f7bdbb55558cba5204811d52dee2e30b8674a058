@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_739bf61b",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-08T03:45:47Z",
+      "side": 1,
+      "message": "two colons, please",
+      "revId": "f7bdbb55558cba5204811d52dee2e30b8674a058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_93a00240",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-08T03:45:47Z",
+      "side": 1,
+      "message": "two colons, please",
+      "revId": "f7bdbb55558cba5204811d52dee2e30b8674a058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_33856eb2",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-08T03:45:47Z",
+      "side": 1,
+      "message": "two colons, please",
+      "revId": "f7bdbb55558cba5204811d52dee2e30b8674a058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_53827aaa",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-08T03:45:47Z",
+      "side": 1,
+      "message": "two colons, please",
+      "revId": "f7bdbb55558cba5204811d52dee2e30b8674a058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_f38e26d5",
+        "filename": "repo/includes/api/ParseValue.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-08T03:45:47Z",
+      "side": 1,
+      "message": "two colons, please",
+      "revId": "f7bdbb55558cba5204811d52dee2e30b8674a058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
