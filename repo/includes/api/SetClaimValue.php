@@ -111,34 +111,13 @@ class SetClaimValue extends ModifyClaim {
 	}
 
 	/**
-	 * @see \ApiBase::getParamDescription
+	 * @see ApiBase::getExamplesMessages()
+	 *
+	 * @return array
 	 */
-	public function getParamDescription() {
-		return array_merge(
-			parent::getParamDescription(),
-			array(
-				'claim' => 'A GUID identifying the claim',
-				'snaktype' => 'The type of the snak',
-				'value' => 'The value to set the datavalue of the the main snak of the claim to',
-			)
-		);
-	}
-
-	/**
-	 * @see \ApiBase::getDescription
-	 */
-	public function getDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'API module for setting the value of a Wikibase claim.'
-		);
-	}
-
-	/**
-	 * @see \ApiBase::getExamples
-	 */
-	protected function getExamples() {
-		return array(
-			'api.php?action=wbsetclaimvalue&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&snaktype=value&value={"entity-type":"item","numeric-id":1}&token=foobar&baserevid=7201010' => 'Sets the claim with the GUID of Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F to a value of Q1',
+			'action=wbsetclaimvalue&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&snaktype=value&value={"entity-type":"item","numeric-id":1}&token=foobar&baserevid=7201010' => 'apihelp-wbsetclaimvalue-example-1',
 		);
 	}
 }
