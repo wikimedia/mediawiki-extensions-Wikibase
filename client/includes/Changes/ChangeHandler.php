@@ -2,17 +2,17 @@
 
 namespace Wikibase\Client\Changes;
 
+use Exception;
 use InvalidArgumentException;
 use MWException;
 use Title;
 use Wikibase\Change;
 use Wikibase\Client\Store\TitleFactory;
-use Wikibase\DataModel\Entity\Diff\EntityDiff;
-use Wikibase\DataModel\Entity\Diff\ItemDiff;
+use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\SiteLinkCommentCreator;
-use Wikibase\Lib\Store\StorageException;
 
 /**
  * Interface for change handling. Whenever a change is detected,
@@ -29,28 +29,28 @@ class ChangeHandler {
 	/**
 	 * The change requites any rendered version of the page to be purged from the parser cache.
 	 */
-	const PARSER_PURGE_ACTION = 1;
+	const PARSER_PURGE_ACTION = 'parser';
 
 	/**
 	 * The change requites a LinksUpdate job to be scheduled to update any links
 	 * associated with the page.
 	 */
-	const LINKS_UPDATE_ACTION = 2;
+	const LINKS_UPDATE_ACTION = 'links';
 
 	/**
 	 * The change requites any HTML output generated from the page to be purged from web cached.
 	 */
-	const WEB_PURGE_ACTION = 4;
+	const WEB_PURGE_ACTION = 'web';
 
 	/**
 	 * The change requites an entry to be injected into the recentchanges table.
 	 */
-	const RC_ENTRY_ACTION = 8;
+	const RC_ENTRY_ACTION = 'rc';
 
 	/**
 	 * The change requites an entry to be injected into the revision table.
 	 */
-	const HISTORY_ENTRY_ACTION = 16;
+	const HISTORY_ENTRY_ACTION = 'history';
 
 	/**
 	 * @var AffectedPagesFinder
@@ -83,8 +83,7 @@ class ChangeHandler {
 		PageUpdater $updater,
 		ChangeListTransformer $changeListTransformer,
 		$localSiteId,
-		$injectRC,
-		$allowDataTransclusion
+		$injectRC
 	) {
 		$this->changeListTransformer = $changeListTransformer;
 		$this->affectedPagesFinder = $affectedPagesFinder;
@@ -99,13 +98,8 @@ class ChangeHandler {
 			throw new InvalidArgumentException( '$injectRC must be a bool' );
 		}
 
-		if ( !is_bool( $allowDataTransclusion ) ) {
-			throw new InvalidArgumentException( '$allowDataTransclusion must be a bool' );
-		}
-
 		$this->localSiteId = $localSiteId;
 		$this->injectRC = (bool)$injectRC;
-		$this->dataTransclusionAllowed = $allowDataTransclusion;
 	}
 
 	/**
@@ -139,13 +133,14 @@ class ChangeHandler {
 	/**
 	 * Main entry point for handling changes
 	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/WikibasePollHandle
+	 * @todo: process multiple changes at once!
 	 *
 	 * @since 0.1
 	 *
 	 * @param Change $change
 	 *
 	 * @throws MWException
+	 *
 	 * @return bool
 	 */
 	public function handleChange( Change $change ) {
@@ -155,115 +150,153 @@ class ChangeHandler {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$chid"
 			. " (" . $change->getType() . ")" );
 
-		//TODO: Actions may be per-title, depending on how the change applies to that page.
-		//      We'll need on list of titles per action.
-		$actions = $this->getActions( $change );
+		$usagesPerPage = $this->affectedPagesFinder->getAffectedUsagesByPage( $change );
 
-		if ( $actions === 0 ) {
-			// nothing to do
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": No actions to take for change #$chid." );
-			wfProfileOut( __METHOD__ );
-			return false;
-		}
-
-		$titlesToUpdate = $this->getPagesToUpdate( $change );
-
-		if ( empty( $titlesToUpdate ) ) {
+		if ( empty( $usagesPerPage ) ) {
 			// nothing to do
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": No pages to update for change #$chid." );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": updating " . count( $titlesToUpdate )
-			. " pages (actions: " . dechex( $actions ). ") for change #$chid." );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": updating " . count( $usagesPerPage )
+			. " page(s) for change #$chid." );
 
-		$this->updatePages( $change, $actions, $titlesToUpdate );
+		$actionBuckets = array();
+
+		/** @var PageEntityUsages $usages */
+		foreach ( $usagesPerPage as $usages ) {
+			$actions = $this->getUpdateActions( $usages->getAspects() );
+			$this->updateActionBuckets( $actionBuckets, $usages->getPageId(), $actions );
+		}
+
+		foreach ( $actionBuckets as $action => $bucket ) {
+			$this->applyUpdateAction( $action, $bucket, $change );
+		}
 
 		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
 	/**
-	 * Returns the pages that need some kind of updating given the change.
+	 * @param string[] $aspects
 	 *
-	 * @param Change $change
-	 *
-	 * @return Title[] the titles of the pages to update
+	 * @return string[] A list of actions, as defined by the self::XXXX_ACTION constants.
 	 */
-	public function getPagesToUpdate( Change $change ) {
+	public function getUpdateActions( $aspects ) {
 		wfProfileIn( __METHOD__ );
 
-		$usages = $this->affectedPagesFinder->getAffectedUsagesByPage( $change );
-		$pagesToUpdate = $this->getTitlesFromPageEntityUsages( $usages );
+		$actions = array();
+		$aspects = array_flip( $aspects );
 
-		wfProfileOut( __METHOD__ );
+		$all = isset( $aspects[EntityUsage::ALL_USAGE] );
 
-		return $pagesToUpdate;
+		if ( isset( $aspects[EntityUsage::SITELINK_USAGE] ) || $all ) {
+			// Link updates might be optimized to bypass parsing
+			$actions[self::LINKS_UPDATE_ACTION] = true;
+		}
+
+		if ( isset( $aspects[EntityUsage::LABEL_USAGE] ) || $all ) {
+			$actions[self::PARSER_PURGE_ACTION] = true;
+		}
+
+		if ( isset( $aspects[EntityUsage::TITLE_USAGE] ) || $all ) {
+			$actions[self::PARSER_PURGE_ACTION] = true;
+		}
+
+		if ( isset( $aspects[EntityUsage::OTHER_USAGE] ) || $all ) {
+			$actions[self::PARSER_PURGE_ACTION] = true;
+		}
+
+		// Purge caches and inject log entries if we have reason
+		// to update the cached ParserOutput object in some way.
+		if ( isset( $actions[self::PARSER_PURGE_ACTION] ) || isset( $actions[self::LINKS_UPDATE_ACTION] ) ) {
+			$actions[self::WEB_PURGE_ACTION] = true;
+			$actions[self::RC_ENTRY_ACTION] = true;
+			$actions[self::HISTORY_ENTRY_ACTION] = true;
+		}
+
+		// If we purge the parser cache, the links update is redundant.
+		if ( isset( $actions[self::PARSER_PURGE_ACTION] ) ) {
+			unset( $actions[self::LINKS_UPDATE_ACTION] );
+		}
+
+		return array_keys( $actions );
 	}
 
 	/**
-	 * @param PageEntityUsages[]|Iterator<PageEntityUsages> $pageIds
-	 *
-	 * @return Title[]
+	 * @param array[] &$buckets Map of action names to lists of page IDs. To be updated.
+	 * @param int $pageId The page ID
+	 * @param string[] $actions Actions to perform on the page
 	 */
-	private function getTitlesFromPageEntityUsages( $usages ) {
-		$titles = array();
-
-		foreach ( $usages as $pageEntityUsages ) {
-			try {
-				$pid = $pageEntityUsages->getPageId();
-				$titles[] = $this->titleFactory->newFromID( $pid );
-			} catch ( StorageException $ex ) {
-				// Page probably got deleted just now. Skip it.
-			}
+	private function updateActionBuckets( &$buckets, $pageId, $actions ) {
+		foreach ( $actions as $action ) {
+			$buckets[$action][] = $pageId;
 		}
-
-		return $titles;
 	}
 
 	/**
-	 * Main entry point for handling changes
-	 *
-	 * @since    0.4
-	 *
-	 * @param Change   $change         the change to apply to the pages
-	 * @param int      $actions        a bit field of actions to take, as returned by getActions()
-	 * @param Title[] $titlesToUpdate the pages to update
+	 * @param string $action
+	 * @param int[] $pageIds
+	 * @param EntityChange $change
 	 */
-	public function updatePages( Change $change, $actions, array $titlesToUpdate ) {
+	private function applyUpdateAction( $action, array $pageIds, EntityChange $change ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( ( $actions & self::PARSER_PURGE_ACTION ) > 0 ) {
-			$this->updater->purgeParserCache( $titlesToUpdate );
-		}
+		$titlesToUpdate = $this->getTitlesForPageIds( $pageIds );
 
-		if ( ( $actions & self::WEB_PURGE_ACTION ) > 0 ) {
-			$this->updater->purgeWebCache( $titlesToUpdate );
-		}
+		switch ( $action ) {
 
-		if ( ( $actions & self::LINKS_UPDATE_ACTION ) > 0 ) {
-			$this->updater->scheduleRefreshLinks( $titlesToUpdate );
-		}
+			case self::PARSER_PURGE_ACTION:
+				$this->updater->purgeParserCache( $titlesToUpdate );
+				break;
 
-		/* @var Title $title */
-		foreach ( $titlesToUpdate as $title ) {
-			if ( $this->injectRC && ( $actions & self::RC_ENTRY_ACTION ) > 0 ) {
+			case self::WEB_PURGE_ACTION:
+				$this->updater->purgeWebCache( $titlesToUpdate );
+				break;
+
+			case self::LINKS_UPDATE_ACTION:
+				$this->updater->scheduleRefreshLinks( $titlesToUpdate );
+				break;
+
+			case self::RC_ENTRY_ACTION:
 				$rcAttribs = $this->getRCAttributes( $change );
 
-				if ( $rcAttribs !== false ) {
-					$this->updater->injectRCRecord( $title, $rcAttribs );
-				} else {
-					trigger_error( "change #" . self::getChangeIdForLog( $change )
-						. " did not provide RC info", E_USER_WARNING );
+				if ( $rcAttribs !== false && $this->injectRC ) {
+					//FIXME: The same change may be reported to several target pages;
+					//       The comment we generate should be adapted to the role that page
+					//       plays in the change, e.g. when a sitelink changes from one page to another,
+					//       the link was effectively removed from one and added to the other page.
+					$this->updater->injectRCRecords( $titlesToUpdate, $rcAttribs );
 				}
-			}
+
+				break;
 
 			//TODO: handling for self::HISTORY_ENTRY_ACTION goes here.
 			//      should probably be $this->updater->injectHistoryRecords() or some such.
 		}
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * @param int[] $pageIds
+	 *
+	 * @return Title[]
+	 */
+	private function getTitlesForPageIds( $pageIds ) {
+		$titles = array();
+
+		foreach ( $pageIds as $id ) {
+			try {
+				$title = $this->titleFactory->newFromID( $id );
+				$titles[] = $title;
+			} catch ( Exception $ex ) {
+				// No title for that ID, maybe the page got deleted just now.
+			}
+		}
+
+		return $titles;
 	}
 
 	/**
@@ -331,47 +364,6 @@ class ChangeHandler {
 
 		wfProfileOut( __METHOD__ );
 		return $params;
-	}
-
-	/**
-	 * Determine which actions to take for the given change.
-	 *
-	 * @since 0.4
-	 *
-	 * @param Change $change the change to get the action for
-	 *
-	 * @return int actions to take, as a bit field using the XXX_ACTION flags
-	 */
-	public function getActions( Change $change ) {
-		wfProfileIn( __METHOD__ );
-
-		$actions = 0;
-
-		if ( $change instanceof ItemChange ) {
-			$diff = $change->getDiff();
-
-			if ( $diff instanceof ItemDiff && !$diff->getSiteLinkDiff()->isEmpty() ) {
-				//TODO: make it so we don't have to re-render
-				//      if only the site links changed (see bug 45534)
-				$actions |= self::PARSER_PURGE_ACTION | self::WEB_PURGE_ACTION | self::LINKS_UPDATE_ACTION
-					| self::RC_ENTRY_ACTION | self::HISTORY_ENTRY_ACTION;
-			}
-
-			if ( $this->dataTransclusionAllowed ) {
-				if ( $diff instanceof EntityDiff && !$diff->getClaimsDiff()->isEmpty() ) {
-					$actions |= self::PARSER_PURGE_ACTION | self::WEB_PURGE_ACTION | self::LINKS_UPDATE_ACTION
-						| self::RC_ENTRY_ACTION | self::HISTORY_ENTRY_ACTION;
-				}
-
-				if ( $diff instanceof EntityDiff && !$diff->getLabelsDiff()->isEmpty() ) {
-					$actions |= self::PARSER_PURGE_ACTION | self::WEB_PURGE_ACTION | self::LINKS_UPDATE_ACTION
-						| self::RC_ENTRY_ACTION | self::HISTORY_ENTRY_ACTION;
-				}
-			}
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $actions;
 	}
 
 	/**
