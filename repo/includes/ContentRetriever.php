@@ -27,6 +27,9 @@ class ContentRetriever {
 	 * If it is a diff request, then display the revision specified
 	 * in the 'diff=' request param.
 	 *
+	 * Please note that this doesn't check for permissions, the caller needs
+	 * to take care of that.
+	 *
 	 * @todo split out the get revision id stuff, add tests and see if
 	 * any core code can be shared here
 	 *
@@ -50,7 +53,7 @@ class ContentRetriever {
 		}
 
 		return $revision !== null ?
-			$revision->getContent( Revision::FOR_THIS_USER ) : null;
+			$revision->getContent( Revision::RAW ) : null;
 	}
 
 	/**
