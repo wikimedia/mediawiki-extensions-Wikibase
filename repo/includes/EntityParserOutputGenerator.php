@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use OutOfBoundsException;
 use ParserOutput;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -125,6 +126,9 @@ class EntityParserOutputGenerator {
 			$this->addBadgesToParserOutput( $parserOutput, $entity->getSiteLinkList() );
 		}
 
+		$entityId = $entityRevision->getEntity()->getId();
+		$this->addEntityLabelTextToParserOutput( $parserOutput, $entityId );
+
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
 				$parserOutput,
@@ -246,6 +250,26 @@ class EntityParserOutputGenerator {
 
 	/**
 	 * @param ParserOutput $parserOutput
+	 * @param EntityId $entityId
+	 */
+	private function addEntityLabelTextToParserOutput(
+		ParserOutput $parserOutput,
+		EntityId $entityId
+	) {
+		$entityInfo = $this->getEntityInfo( array( $entityId ) );
+		$labelLookup = $this->getLabelLookup( $entityInfo );
+
+		try {
+			$labelText = $labelLookup->getLabel( $entityId );
+		} catch ( OutOfBoundsException $ex ) {
+			$labelText = $entityId->getSerialization();
+		}
+
+		$parserOutput->setExtensionData( 'wikibase-entity-labeltext', $labelText );
+	}
+
+	/**
+	 * @param ParserOutput $parserOutput
 	 * @param EntityRevision $entityRevision
 	 * @param array $entityInfo obtained from EntityInfoBuilder::getEntityInfo
 	 * @param boolean $editable
@@ -257,10 +281,7 @@ class EntityParserOutputGenerator {
 		$editable
 	) {
 
-		$labelLookup = new LanguageFallbackLabelLookup(
-			new EntityInfoTermLookup( $entityInfo ),
-			$this->languageFallbackChain
-		);
+		$labelLookup = $this->getLabelLookup( $entityInfo );
 
 		$entityView = $this->entityViewFactory->newEntityView(
 			$entityRevision->getEntity()->getType(),
@@ -273,6 +294,16 @@ class EntityParserOutputGenerator {
 		$html = $entityView->getHtml( $entityRevision );
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
+	}
+
+	/**
+	 * @param $entityInfo obtained from EntityInfoBuilder::getEntityInfo
+	 */
+	private function getLabelLookup( array $entityInfo ) {
+		return new LanguageFallbackLabelLookup(
+			new EntityInfoTermLookup( $entityInfo ),
+			$this->languageFallbackChain
+		);
 	}
 
 	private function addModules( ParserOutput $parserOutput, $editable ) {
