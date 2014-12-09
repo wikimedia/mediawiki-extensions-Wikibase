@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_2578bbec",
+        "filename": "repo/includes/ContentRetriever.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-09T10:19:46Z",
+      "side": 1,
+      "message": "Just a question because this is the first time I\u0027m seeing these constants: As far as I can tell this change disables the \"user is allowed to view deleted revisions\" check, right?",
+      "revId": "c431c97bc464ddd7084291e0cbb80eb908a153f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_c5647748",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-09T10:19:46Z",
+      "side": 1,
+      "message": "Is this TODO obsolete with this patch?",
+      "revId": "c431c97bc464ddd7084291e0cbb80eb908a153f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_4510675b",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-09T10:19:46Z",
+      "side": 1,
+      "message": "I find since tags pointless for private stuff.",
+      "revId": "c431c97bc464ddd7084291e0cbb80eb908a153f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
