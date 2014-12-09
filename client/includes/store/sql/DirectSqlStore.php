@@ -41,27 +41,27 @@ use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 class DirectSqlStore implements ClientStore {
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityLookup|null
 	 */
 	private $entityRevisionLookup = null;
 
 	/**
-	 * @var PropertyLabelResolver
+	 * @var PropertyLabelResolver|null
 	 */
 	private $propertyLabelResolver = null;
 
 	/**
-	 * @var TermIndex
+	 * @var TermIndex|null
 	 */
 	private $termIndex = null;
 
 	/**
-	 * @var EntityIdLookup
+	 * @var EntityIdLookup|null
 	 */
 	private $entityIdLookup = null;
 
 	/**
-	 * @var PropertyInfoTable
+	 * @var PropertyInfoTable|null
 	 */
 	private $propertyInfoTable = null;
 
@@ -81,7 +81,7 @@ class DirectSqlStore implements ClientStore {
 	private $languageCode;
 
 	/**
-	 * @var SiteLinkTable
+	 * @var SiteLinkTable|null
 	 */
 	private $siteLinkTable = null;
 
@@ -103,7 +103,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @var string
 	 */
-	private $cachePrefix;
+	private $cacheKeyPrefix;
 
 	/**
 	 * @var int
@@ -119,6 +119,11 @@ class DirectSqlStore implements ClientStore {
 	 * @var EntityContentDataCodec
 	 */
 	private $contentCodec;
+
+	/**
+	 * @var bool
+	 */
+	private $useLegacyUsageIndex;
 
 	/**
 	 * @var string
@@ -144,18 +149,11 @@ class DirectSqlStore implements ClientStore {
 
 		// @TODO: Inject
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
-		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
-		$cacheType = $settings->getSetting( 'sharedCacheType' );
-		$siteId = $settings->getSetting( 'siteGlobalID' );
-
-		$this->changesDatabase = $settings->getSetting( 'changesDatabase' );
+		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
+		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
+		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->useLegacyUsageIndex = $settings->getSetting( 'useLegacyUsageIndex' );
-
-		$this->cachePrefix = $cachePrefix;
-		$this->cacheDuration = $cacheDuration;
-		$this->cacheType = $cacheType;
-		$this->siteId = $siteId;
+		$this->siteId = $settings->getSetting( 'siteGlobalID' );
 	}
 
 	/**
@@ -185,7 +183,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return UsageLookup
 	 */
 	public function getUsageLookup() {
-		if ( !$this->usageLookup ) {
+		if ( $this->usageLookup === null ) {
 			if ( $this->useLegacyUsageIndex ) {
 				$this->usageLookup = new SiteLinkUsageLookup(
 					$this->siteId,
@@ -208,7 +206,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return UsageTracker
 	 */
 	public function getUsageTracker() {
-		if ( !$this->usageTracker ) {
+		if ( $this->usageTracker === null ) {
 			if ( $this->useLegacyUsageIndex ) {
 				$this->usageTracker = new NullUsageTracker();
 			} else {
@@ -226,7 +224,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return SiteLinkLookup
 	 */
 	public function getSiteLinkLookup() {
-		if ( !$this->siteLinkTable ) {
+		if ( $this->siteLinkTable === null ) {
 			$this->siteLinkTable = $this->newSiteLinkTable();
 		}
 
@@ -260,7 +258,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup() {
-		if ( !$this->entityRevisionLookup ) {
+		if ( $this->entityRevisionLookup === null ) {
 			$this->entityRevisionLookup = $this->newEntityRevisionLookup();
 		}
 
@@ -272,7 +270,7 @@ class DirectSqlStore implements ClientStore {
 	 */
 	private function newEntityRevisionLookup() {
 		//NOTE: Keep in sync with SqlStore::newEntityLookup on the repo
-		$key = $this->cachePrefix . ':WikiPageEntityRevisionLookup';
+		$key = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$this->contentCodec,
@@ -299,7 +297,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return TermIndex
 	 */
 	public function getTermIndex() {
-		if ( !$this->termIndex ) {
+		if ( $this->termIndex === null ) {
 			$this->termIndex = $this->newTermIndex();
 		}
 
@@ -312,7 +310,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return EntityIdLookup
 	 */
 	public function getEntityIdLookup() {
-		if ( !$this->entityIdLookup ) {
+		if ( $this->entityIdLookup === null ) {
 			$this->entityIdLookup = new PagePropsEntityIdLookup(
 				wfGetLB(),
 				$this->entityIdParser
@@ -338,7 +336,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return PropertyLabelResolver
 	 */
 	public function getPropertyLabelResolver() {
-		if ( !$this->propertyLabelResolver ) {
+		if ( $this->propertyLabelResolver === null ) {
 			$this->propertyLabelResolver = $this->newPropertyLabelResolver();
 		}
 
@@ -350,7 +348,7 @@ class DirectSqlStore implements ClientStore {
 	 */
 	private function newPropertyLabelResolver() {
 		// cache key needs to be language specific
-		$key = $this->cachePrefix . ':TermPropertyLabelResolver' . '/' . $this->languageCode;
+		$key = $this->cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $this->languageCode;
 
 		return new TermPropertyLabelResolver(
 			$this->languageCode,
@@ -394,7 +392,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return PropertyInfoStore
 	 */
 	public function getPropertyInfoStore() {
-		if ( !$this->propertyInfoTable ) {
+		if ( $this->propertyInfoTable === null ) {
 			$this->propertyInfoTable = $this->newPropertyInfoTable();
 		}
 
@@ -410,7 +408,7 @@ class DirectSqlStore implements ClientStore {
 
 		if ( $usePropertyInfoTable ) {
 			$table = new PropertyInfoTable( true, $this->repoWiki );
-			$key = $this->cachePrefix . ':CachingPropertyInfoStore';
+			$key = $this->cacheKeyPrefix . ':CachingPropertyInfoStore';
 			return new CachingPropertyInfoStore( $table, ObjectCache::getInstance( $this->cacheType ),
 				$this->cacheDuration, $key );
 		} else {
