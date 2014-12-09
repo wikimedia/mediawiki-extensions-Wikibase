@@ -32,9 +32,9 @@ class MockClientStore implements ClientStore {
 	private static $mockRepository = null;
 
 	/**
-	 * @var MockPropertyInfoStore|null
+	 * @var PropertyInfoStore|null
 	 */
-	private static $mockPropertyInfoStore = null;
+	private static $propertyInfoStore = null;
 
 	/**
 	 * @see ClientStore::getUsageLookup
@@ -152,11 +152,11 @@ class MockClientStore implements ClientStore {
 	 * @return PropertyInfoStore
 	 */
 	public function getPropertyInfoStore() {
-		if ( self::$mockPropertyInfoStore === null ) {
-			self::$mockPropertyInfoStore = new MockPropertyInfoStore();
+		if ( self::$propertyInfoStore === null ) {
+			self::$propertyInfoStore = new MockPropertyInfoStore();
 		}
 
-		return self::$mockPropertyInfoStore;
+		return self::$propertyInfoStore;
 	}
 
 }
