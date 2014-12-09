@@ -23,39 +23,6 @@ use Wikibase\Repo\WikibaseRepo;
 abstract class ViewEntityAction extends ViewAction {
 
 	/**
-	 * @var LanguageFallbackChain
-	 */
-	protected $languageFallbackChain;
-
-	/**
-	 * Get the language fallback chain.
-	 * Uses the default WikibaseRepo instance to get the service if it was not previously set.
-	 *
-	 * @since 0.4
-	 *
-	 * @return LanguageFallbackChain
-	 */
-	public function getLanguageFallbackChain() {
-		if ( $this->languageFallbackChain === null ) {
-			$this->languageFallbackChain = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
-				->newFromContext( $this->getContext() );
-		}
-
-		return $this->languageFallbackChain;
-	}
-
-	/**
-	 * Set language fallback chain.
-	 *
-	 * @since 0.4
-	 *
-	 * @param LanguageFallbackChain $chain
-	 */
-	public function setLanguageFallbackChain( LanguageFallbackChain $chain ) {
-		$this->languageFallbackChain = $chain;
-	}
-
-	/**
 	 * @see Action::getName()
 	 *
 	 * @since 0.1
@@ -82,29 +49,16 @@ abstract class ViewEntityAction extends ViewAction {
 	 *
 	 * @since 0.1
 	 *
-	 * TODO: permissing checks?
 	 * Parent is doing $this->checkCanExecute( $this->getUser() )
 	 */
 	public function show() {
 		if ( !$this->getArticle()->getPage()->exists() ) {
+			// @fixme could use ShowMissingArticle hook instead.
+			// Article checks for missing / deleted revisions and either
+			// shows appropriate error page or deleted revision, if permission allows.
 			$this->displayMissingEntity();
 		} else {
-			$contentRetriever = new ContentRetriever();
-			$content = $contentRetriever->getContentForRequest(
-				$this->getRequest(),
-				$this->getArticle()
-			);
-
-			if ( !( $content instanceof EntityContent ) ) {
-				$this->getOutput()->showErrorPage(
-						'wikibase-entity-not-viewable-title',
-						'wikibase-entity-not-viewable',
-						$content->getModel()
-				);
-				return;
-			}
-
-			$this->displayEntityContent( $content );
+			$this->showEntityPage();
 		}
 	}
 
@@ -126,13 +80,11 @@ abstract class ViewEntityAction extends ViewAction {
 	}
 
 	/**
-	 * Displays the entity content.
+	 * Displays the entity page.
 	 *
 	 * @since 0.1
-	 *
-	 * @param EntityContent $content
 	 */
-	private function displayEntityContent( EntityContent $content ) {
+	private function showEntityPage() {
 		$outputPage = $this->getOutput();
 
 		$editable = $this->isEditable();
@@ -146,21 +98,26 @@ abstract class ViewEntityAction extends ViewAction {
 		$this->getArticle()->setParserOptions( $parserOptions );
 		$this->getArticle()->view();
 
-		$this->applyLabelToTitleText( $outputPage, $content );
+		$this->overrideTitleText( $outputPage );
 	}
 
 	/**
+	 * This will be the label, if available, or else the entity id (e.g. 'Q42').
+	 * This is passed via parser output and output page to save overhead on view actions.
+	 *
 	 * @param OutputPage $outputPage
-	 * @param EntityContent $content
 	 */
-	private function applyLabelToTitleText( OutputPage $outputPage, EntityContent $content ) {
-		// Figure out which label to use for title.
-		$labelText = $this->getLabelText( $content );
+	private function overrideTitleText( OutputPage $outputPage ) {
+		$titleText = $this->getOutput()->getProperty( 'wikibase-titletext' );
+
+		if ( $titleText === null ) {
+			return;
+		}
 
 		if ( $this->isDiff() ) {
-			$this->setPageTitle( $outputPage, $labelText );
+			$this->setPageTitle( $outputPage, $titleText );
 		} else {
-			$this->setHTMLTitle( $outputPage, $labelText );
+			$this->setHTMLTitle( $outputPage, $titleText );
 		}
 	}
 
@@ -191,28 +148,6 @@ abstract class ViewEntityAction extends ViewAction {
 	private function setHTMLTitle( OutputPage $outputPage, $labelText ) {
 		// Prevent replacing {{...}} by using rawParams() instead of params():
 		$outputPage->setHTMLTitle( $this->msg( 'pagetitle' )->rawParams( $labelText ) );
-	}
-
-	/**
-	 * @param EntityContent $content
-	 *
-	 * @return string
-	 */
-	private function getLabelText( EntityContent $content ) {
-		// Figure out which label to use for title.
-		$languageFallbackChain = $this->getLanguageFallbackChain();
-		$labelData = null;
-
-		if ( !$content->isRedirect() ) {
-			$labels = $content->getEntity()->getLabels();
-			$labelData = $languageFallbackChain->extractPreferredValueOrAny( $labels );
-		}
-
-		if ( $labelData ) {
-			return $labelData['value'];
-		} else {
-			return $content->getEntityId()->getSerialization();
-		}
 	}
 
 	/**

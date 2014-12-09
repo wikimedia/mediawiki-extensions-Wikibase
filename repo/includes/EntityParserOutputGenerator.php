@@ -2,10 +2,12 @@
 
 namespace Wikibase;
 
+use OutOfBoundsException;
 use ParserOutput;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SiteLinkList;
@@ -128,6 +130,8 @@ class EntityParserOutputGenerator {
 			$this->addBadgesToParserOutput( $parserOutput, $entity->getSiteLinkList() );
 		}
 
+		$this->addTitleTextToParserOutput( $parserOutput, $entity );
+
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
 				$parserOutput,
@@ -246,6 +250,28 @@ class EntityParserOutputGenerator {
 				$parserOutput->addLink( $this->entityTitleLookup->getTitleForId( $badge ) );
 			}
 		}
+	}
+
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param Entity $entity
+	 */
+	private function addTitleTextToParserOutput( ParserOutput $parserOutput, Entity $entity ) {
+		$preferred = $this->languageFallbackChain->extractPreferredValue( $entity->getLabels() );
+
+		if ( is_array( $preferred ) ) {
+			$titleText = $preferred['value'];
+		} else {
+			$entityId = $entity->getId();
+
+			if ( !$entityId ) {
+				return;
+			}
+
+			$titleText = $entityId->getSerialization();
+		}
+
+		$parserOutput->setExtensionData( 'wikibase-titletext', $titleText );
 	}
 
 	/**

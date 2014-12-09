@@ -285,11 +285,10 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$restore = $req->getCheck( 'restore' );
 
-		//$this->getOutput()->setContext( $this->getContext() ); //XXX: WTF?
 		$this->getOutput()->setPageTitle(
 			$this->msg(
 				$restore ? 'wikibase-restore-title' : 'wikibase-undo-title',
-				$this->getLabelText( $latestContent ),
+				$this->getTitleText(),
 				$olderRevision->getId(),
 				$newerRevision->getId()
 			)
@@ -344,26 +343,19 @@ abstract class EditEntityAction extends ViewEntityAction {
 	}
 
 	/**
-	 * Returns the label that should be shown to represent the given entity.
-	 *
-	 * @param EntityContent $content
+	 * Used for overriding the page html title with the label, if available, or else the id.
+	 * This is passed via parser output and output page to save overhead on view / edit actions.
 	 *
 	 * @return string
 	 */
-	private function getLabelText( EntityContent $content ) {
-		$labelData = null;
+	private function getTitleText() {
+		$titleText = $this->getOutput()->getProperty( 'wikibase-titletext' );
 
-		// TODO: use a message like <autoredircomment> to represent the redirect.
-		if ( !$content->isRedirect() ) {
-			$languageFallbackChain = $this->getLanguageFallbackChain();
-			$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
+		if ( $titleText === null ) {
+			$titleText = '';
 		}
 
-		if ( $labelData ) {
-			return $labelData['value'];
-		} else {
-			return $this->getPageTitle();
-		}
+		return $titleText;
 	}
 
 	/**

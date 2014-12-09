@@ -99,6 +99,14 @@ class ViewEntityActionTest extends ActionTestCase {
 		$this->assertNotRegExp( '/wikibase-edittoolbar-container/', $html, 'no edit toolbar' );
 	}
 
+	public function testShowNonExistingRevision() {
+		$page = $this->getTestItemPage( 'Berlin' );
+		$params = array( 'oldid' => 95829689425 );
+
+		$html = $this->executeViewAction( $page, $params );
+		$this->assertContains( 'Die Version 95829689425', $html, 'non-existing revision' );
+	}
+
 	/**
 	 * @param WikiPage $page
 	 * @param string[] $params
