@@ -108,31 +108,4 @@ abstract class ModifyClaim extends ApiWikibase {
 			)
 		);
 	}
-
-	/**
-	 * @see ApiBase::getParamDescription()
-	 */
-	public function getParamDescription() {
-		return array_merge(
-			parent::getParamDescription(),
-			array(
-				'summary' => array(
-					'Summary for the edit.',
-					"Will be prepended by an automatically generated comment. The length limit of the
-					autocomment together with the summary is 260 characters. Be aware that everything above that
-					limit will be cut off."
-				),
-				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-				'baserevid' => array(
-					'The numeric identifier for the revision to base the modification on.',
-					"This is used for detecting conflicts during save."
-				),
-				'bot' => array(
-					'Mark this edit as bot',
-					'This URL flag will only be respected if the user belongs to the group "bot".'
-				),
-			)
-		);
-	}
-
 }
