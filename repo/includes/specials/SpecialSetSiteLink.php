@@ -9,13 +9,12 @@ use Status;
 use UserInputException;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
-use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\SiteLinkTargetProvider;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -30,59 +29,43 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	/**
 	 * The site of the site link.
 	 *
-	 * @since 0.4
-	 *
 	 * @var string|null
 	 */
-	protected $site;
+	private $site;
 
 	/**
 	 * The page of the site link.
 	 *
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
-	protected $page;
+	private $page;
 
 	/**
 	 * The badges of the site link.
 	 *
-	 * @since 0.5
-	 *
 	 * @var string[]
 	 */
-	protected $badges;
-
-	/**
-	 * @var string
-	 */
-	protected $rightsUrl;
-
-	/**
-	 * @var string
-	 */
-	protected $rightsText;
-
-	/**
-	 * @var array
-	 */
-	protected $badgeItems;
+	private $badges;
 
 	/**
 	 * @var string[]
 	 */
-	protected $siteLinkGroups;
+	private $badgeItems;
+
+	/**
+	 * @var string[]
+	 */
+	private $siteLinkGroups;
 
 	/**
 	 * @var SiteLinkChangeOpFactory
 	 */
-	protected $siteLinkChangeOpFactory;
+	private $siteLinkChangeOpFactory;
 
 	/**
 	 * @var SiteLinkTargetProvider
 	 */
-	protected $siteLinkTargetProvider;
+	private $siteLinkTargetProvider;
 
 	/**
 	 * @since 0.4
@@ -93,8 +76,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$settings = $wikibaseRepo->getSettings();
 
-		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
-		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 
@@ -197,21 +178,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		}
 
 		return $summary;
-	}
-
-	/**
-	 * @todo could factor this out into a special page form builder and renderer
-	 */
-	protected function addCopyrightText() {
-		$copyrightView = new SpecialPageCopyrightView(
-			new CopyrightMessageBuilder(),
-			$this->rightsUrl,
-			$this->rightsText
-		);
-
-		$html = $copyrightView->getHtml( $this->getLanguage() );
-
-		$this->getOutput()->addHTML( $html );
 	}
 
 	/**
@@ -402,7 +368,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @throws OutOfBoundsException
 	 * @return string
 	 */
-	protected function getSiteLink( Item $item = null, $siteId ) {
+	private function getSiteLink( Item $item = null, $siteId ) {
 		if ( $item === null || !$item->hasLinkToSite( $siteId ) ) {
 			return '';
 		}
@@ -421,16 +387,17 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @throws OutOfBoundsException
 	 * @return string[]
 	 */
-	protected function getBadges( Item $item = null, $siteId ) {
-		if ( $item === null || !$item->hasLinkToSite( $siteId ) ) {
+	private function getBadges( Item $item = null, $siteId ) {
+		if ( $item === null || !$item->getSiteLinkList()->hasLinkWithSiteId( $siteId ) ) {
 			return array();
 		}
 
-		$badges = array();
-		foreach ( $item->getSitelink( $siteId )->getBadges() as $badge ) {
-			$badges[] = $badge->getSerialization();
-		}
-		return $badges;
+		return array_map(
+			function( ItemId $badge ) {
+				return $badge->getSerialization();
+			},
+			$item->getSiteLinkList()->getBySiteId( $siteId )->getBadges()
+		);
 	}
 
 	/**
@@ -443,7 +410,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @return ItemId[]|boolean
 	 */
-	protected function parseBadges( array $badges, Status $status ) {
+	private function parseBadges( array $badges, Status $status ) {
 		$badgesObjects = array();
 
 		foreach ( $badges as $badge ) {
@@ -485,7 +452,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @return Status
 	 */
-	protected function setSiteLink( Item $item, $siteId, $pageName, $badges, &$summary ) {
+	private function setSiteLink( Item $item, $siteId, $pageName, $badges, &$summary ) {
 		$status = Status::newGood();
 		$site = $this->siteStore->getSite( $siteId );
 
