@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use Article;
 use ContentHandler;
 use LogEventsList;
 use OutputPage;
@@ -25,7 +24,7 @@ abstract class ViewEntityAction extends ViewAction {
 	/**
 	 * @var LanguageFallbackChain
 	 */
-	protected $languageFallbackChain;
+	private $languageFallbackChain;
 
 	/**
 	 * Get the language fallback chain.
@@ -35,7 +34,7 @@ abstract class ViewEntityAction extends ViewAction {
 	 *
 	 * @return LanguageFallbackChain
 	 */
-	public function getLanguageFallbackChain() {
+	protected function getLanguageFallbackChain() {
 		if ( $this->languageFallbackChain === null ) {
 			$this->languageFallbackChain = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
 				->newFromContext( $this->getContext() );
@@ -51,63 +50,41 @@ abstract class ViewEntityAction extends ViewAction {
 	 *
 	 * @param LanguageFallbackChain $chain
 	 */
-	public function setLanguageFallbackChain( LanguageFallbackChain $chain ) {
+	protected function setLanguageFallbackChain( LanguageFallbackChain $chain ) {
 		$this->languageFallbackChain = $chain;
 	}
 
 	/**
-	 * @see Action::getName()
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return 'view';
-	}
-
-	/**
-	 * Returns the current article.
-	 *
-	 * @since 0.1
-	 *
-	 * @return Article
-	 */
-	protected function getArticle() {
-		return $this->page;
-	}
-
-	/**
-	 * @see FormlessAction::show()
-	 *
-	 * @since 0.1
+	 * @see ViewAction::show
 	 *
 	 * TODO: permissing checks?
 	 * Parent is doing $this->checkCanExecute( $this->getUser() )
 	 */
 	public function show() {
-		if ( !$this->getArticle()->getPage()->exists() ) {
+		if ( !$this->page->getPage()->exists() ) {
 			$this->displayMissingEntity();
-		} else {
-			$contentRetriever = new ContentRetriever();
-			$content = $contentRetriever->getContentForRequest(
-				$this->getRequest(),
-				$this->getArticle()
+			return;
+		}
+
+		$contentRetriever = new ContentRetriever();
+		$content = $contentRetriever->getContentForRequest(
+			$this->getRequest(),
+			$this->page
+		);
+
+		if ( $content !== null && !( $content instanceof EntityContent ) ) {
+			$this->getOutput()->showErrorPage(
+				'wikibase-entity-not-viewable-title',
+				'wikibase-entity-not-viewable',
+				$content->getModel()
 			);
+			return;
+		}
 
-			if ( $content && !( $content instanceof EntityContent ) ) {
-				$this->getOutput()->showErrorPage(
-						'wikibase-entity-not-viewable-title',
-						'wikibase-entity-not-viewable',
-						$content->getModel()
-				);
-				return;
-			}
+		$this->viewEntity();
 
-			$this->viewEntity();
-			if ( $content ) {
-				$this->applyLabelToTitleText( $this->getOutput(), $content );
-			}
+		if ( $content instanceof EntityContent ) {
+			$this->applyLabelToTitleText( $this->getOutput(), $content );
 		}
 	}
 
@@ -118,7 +95,7 @@ abstract class ViewEntityAction extends ViewAction {
 	 * @return bool
 	 */
 	private function isEditable() {
-		return !$this->isDiff() && $this->getArticle()->isCurrent();
+		return !$this->isDiff() && $this->page->isCurrent();
 	}
 
 	/**
@@ -131,22 +108,19 @@ abstract class ViewEntityAction extends ViewAction {
 	/**
 	 * Displays the entity. Article::view takes care of all permission related things
 	 * and showing errors if eg. a revision doesn't exist.
-	 *
-	 * @since 0.5
 	 */
 	private function viewEntity() {
 		$outputPage = $this->getOutput();
-
 		$editable = $this->isEditable();
 
 		// NOTE: page-wide property, independent of user permissions
 		$outputPage->addJsConfigVars( 'wbIsEditView', $editable );
 
 		$user = $this->getContext()->getUser();
-		$parserOptions = $this->getArticle()->getPage()->makeParserOptions( $user );
+		$parserOptions = $this->page->getPage()->makeParserOptions( $user );
 
-		$this->getArticle()->setParserOptions( $parserOptions );
-		$this->getArticle()->view();
+		$this->page->setParserOptions( $parserOptions );
+		$this->page->view();
 	}
 
 	/**
@@ -217,12 +191,10 @@ abstract class ViewEntityAction extends ViewAction {
 
 	/**
 	 * Displays there is no entity for the current page.
-	 *
-	 * @since 0.1
 	 */
-	protected function displayMissingEntity() {
-		$title = $this->getArticle()->getTitle();
-		$oldid = $this->getArticle()->getOldID();
+	private function displayMissingEntity() {
+		$title = $this->getTitle();
+		$oldid = $this->page->getOldID();
 
 		$out = $this->getOutput();
 
@@ -231,7 +203,7 @@ abstract class ViewEntityAction extends ViewAction {
 		// TODO: Factor the "show stuff for missing page" code out from Article::showMissingArticle,
 		//       so it can be re-used here. The below code is copied & modified from there...
 
-		wfRunHooks( 'ShowMissingArticle', array( $this->getArticle() ) );
+		wfRunHooks( 'ShowMissingArticle', array( $this->page ) );
 
 		# Show delete and move logs
 		LogEventsList::showLogExtract( $out, array( 'delete', 'move' ), $title, '',
@@ -293,21 +265,27 @@ abstract class ViewEntityAction extends ViewAction {
 	}
 
 	/**
-	 * @see Action::getDescription()
+	 * @see Action::getDescription
+	 *
+	 * @return string
 	 */
 	protected function getDescription() {
 		return '';
 	}
 
 	/**
-	 * @see Action::requiresUnblock()
+	 * @see Action::requiresUnblock
+	 *
+	 * @return bool
 	 */
 	public function requiresUnblock() {
 		return false;
 	}
 
 	/**
-	 * @see Action::requiresWrite()
+	 * @see Action::requiresWrite
+	 *
+	 * @return bool
 	 */
 	public function requiresWrite() {
 		return false;
