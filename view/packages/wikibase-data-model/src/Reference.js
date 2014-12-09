@@ -15,7 +15,7 @@
  * @constructor
  *
  * @param {wikibase.datamodel.SnakList|null} [snaks=new wikibase.datamodel.SnakList()]
- * @param {string} [hash=null] Omit, if the Reference object should represent a new reference.
+ * @param {string|null} [hash=null] Omit, if the Reference object should represent a new reference.
  *
  * @throws {Error} if snaks are not passed as SnakList instance.
  */
