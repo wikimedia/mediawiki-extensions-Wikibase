@@ -390,6 +390,8 @@ class EntityPerPageTable implements EntityPerPage {
 			__METHOD__,
 			array(
 				'ORDER BY' => $orderBy,
+				// MySQL tends to use the epp_redirect_target key which has a very low selectivity
+				'USE INDEX' => 'wb_epp_entity',
 				'LIMIT' => $limit
 			)
 		);
