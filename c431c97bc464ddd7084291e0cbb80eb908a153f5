@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_801c1d6c",
+        "filename": "repo/includes/ContentRetriever.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-09T10:25:37Z",
+      "side": 1,
+      "message": "Yes, and that scares me. \"for request\" implies that it\u0027s for sending back to the user - which we shouldn\u0027t do if we used RAW to fetch the content. How about adding a $mode parameter to getContentForRequest()?",
+      "parentUuid": "2e9df725_2578bbec",
+      "revId": "c431c97bc464ddd7084291e0cbb80eb908a153f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_c5647748",
         "filename": "repo/includes/actions/ViewEntityAction.php",
         "patchSetId": 1
@@ -30,6 +48,23 @@
       "writtenOn": "2014-12-09T10:19:46Z",
       "side": 1,
       "message": "Is this TODO obsolete with this patch?",
+      "revId": "c431c97bc464ddd7084291e0cbb80eb908a153f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_8053bd19",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-09T10:25:37Z",
+      "side": 1,
+      "message": "\"display\" is more accurate than \"view\". The application doesn\u0027t view the entity, the user does. The software shows or displays it (using \"a view\").",
       "revId": "c431c97bc464ddd7084291e0cbb80eb908a153f5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
