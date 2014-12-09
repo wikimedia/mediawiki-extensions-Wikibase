@@ -51,12 +51,22 @@ class SiteLinksView {
 	private $specialSiteLinkGroups;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $badgeItems;
 
-	public function __construct( SiteList $sites, SectionEditLinkGenerator $sectionEditLinkGenerator,
-			EntityLookup $entityLookup, $languageCode ) {
+	/**
+	 * @param SiteList $sites
+	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
+	 * @param EntityLookup $entityLookup
+	 * @param string $languageCode
+	 */
+	public function __construct(
+		SiteList $sites,
+		SectionEditLinkGenerator $sectionEditLinkGenerator,
+		EntityLookup $entityLookup,
+		$languageCode
+	) {
 		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->entityLookup = $entityLookup;
@@ -64,6 +74,7 @@ class SiteLinksView {
 
 		// @todo inject option/objects instead of using the singleton
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+
 		$this->specialSiteLinkGroups = $settings->getSetting( 'specialSiteLinkGroups' );
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 	}

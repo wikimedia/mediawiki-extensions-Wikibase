@@ -29,29 +29,23 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	/**
 	 * The site of the site link.
 	 *
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
-	protected $site;
+	private $site;
 
 	/**
 	 * The page of the site link.
 	 *
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
-	protected $page;
+	private $page;
 
 	/**
 	 * The badges of the site link.
 	 *
-	 * @since 0.5
-	 *
 	 * @var string[]
 	 */
-	protected $badges;
+	private $badges;
 
 	/**
 	 * @var string
@@ -64,14 +58,14 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	protected $rightsText;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	protected $badgeItems;
+	private $badgeItems;
 
 	/**
 	 * @var SiteLinkChangeOpFactory
 	 */
-	protected $siteLinkChangeOpFactory;
+	private $siteLinkChangeOpFactory;
 
 	/**
 	 * @since 0.4
@@ -381,7 +375,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @throws OutOfBoundsException
 	 * @return string
 	 */
-	protected function getSiteLink( Item $item = null, $siteId ) {
+	private function getSiteLink( Item $item = null, $siteId ) {
 		if ( $item === null || !$item->hasLinkToSite( $siteId ) ) {
 			return '';
 		}
@@ -400,7 +394,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @throws OutOfBoundsException
 	 * @return string[]
 	 */
-	protected function getBadges( Item $item = null, $siteId ) {
+	private function getBadges( Item $item = null, $siteId ) {
 		if ( $item === null || !$item->hasLinkToSite( $siteId ) ) {
 			return array();
 		}
@@ -422,7 +416,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @return ItemId[]|boolean
 	 */
-	protected function parseBadges( array $badges, Status $status ) {
+	private function parseBadges( array $badges, Status $status ) {
 		$badgesObjects = array();
 
 		foreach ( $badges as $badge ) {
@@ -464,7 +458,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @return Status
 	 */
-	protected function setSiteLink( Item $item, $siteId, $pageName, $badges, &$summary ) {
+	private function setSiteLink( Item $item, $siteId, $pageName, $badges, &$summary ) {
 		$status = Status::newGood();
 		$site = $this->siteStore->getSite( $siteId );
 
