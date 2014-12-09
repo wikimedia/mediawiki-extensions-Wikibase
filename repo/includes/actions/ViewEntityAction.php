@@ -2,14 +2,12 @@
 
 namespace Wikibase;
 
-use Article;
 use ContentHandler;
 use LogEventsList;
 use OutputPage;
 use SpecialPage;
 use ViewAction;
 use Wikibase\Repo\Content\EntityHandler;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Handles the view action for Wikibase entities.
@@ -23,43 +21,20 @@ use Wikibase\Repo\WikibaseRepo;
 abstract class ViewEntityAction extends ViewAction {
 
 	/**
-	 * @see Action::getName()
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return 'view';
-	}
-
-	/**
-	 * Returns the current article.
-	 *
-	 * @since 0.1
-	 *
-	 * @return Article
-	 */
-	protected function getArticle() {
-		return $this->page;
-	}
-
-	/**
-	 * @see FormlessAction::show()
-	 *
-	 * @since 0.1
+	 * @see ViewAction::show
 	 *
 	 * Parent is doing $this->checkCanExecute( $this->getUser() )
 	 */
 	public function show() {
-		if ( !$this->getArticle()->getPage()->exists() ) {
+		if ( !$this->page->exists() ) {
 			// @fixme could use ShowMissingArticle hook instead.
 			// Article checks for missing / deleted revisions and either
 			// shows appropriate error page or deleted revision, if permission allows.
 			$this->displayMissingEntity();
-		} else {
-			$this->showEntityPage();
+			return;
 		}
+
+		$this->showEntityPage();
 	}
 
 	/**
@@ -69,7 +44,7 @@ abstract class ViewEntityAction extends ViewAction {
 	 * @return bool
 	 */
 	private function isEditable() {
-		return !$this->isDiff() && $this->getArticle()->isCurrent();
+		return !$this->isDiff() && $this->page->isCurrent();
 	}
 
 	/**
@@ -81,22 +56,19 @@ abstract class ViewEntityAction extends ViewAction {
 
 	/**
 	 * Displays the entity page.
-	 *
-	 * @since 0.1
 	 */
 	private function showEntityPage() {
 		$outputPage = $this->getOutput();
-
 		$editable = $this->isEditable();
 
 		// NOTE: page-wide property, independent of user permissions
 		$outputPage->addJsConfigVars( 'wbIsEditView', $editable );
 
-		$user = $this->getContext()->getUser();
-		$parserOptions = $this->getArticle()->getPage()->makeParserOptions( $user );
+		$user = $this->getUser();
+		$parserOptions = $this->page->makeParserOptions( $user );
 
-		$this->getArticle()->setParserOptions( $parserOptions );
-		$this->getArticle()->view();
+		$this->page->setParserOptions( $parserOptions );
+		$this->page->view();
 
 		$this->overrideTitleText( $outputPage );
 	}
@@ -152,12 +124,10 @@ abstract class ViewEntityAction extends ViewAction {
 
 	/**
 	 * Displays there is no entity for the current page.
-	 *
-	 * @since 0.1
 	 */
-	protected function displayMissingEntity() {
-		$title = $this->getArticle()->getTitle();
-		$oldid = $this->getArticle()->getOldID();
+	private function displayMissingEntity() {
+		$title = $this->getTitle();
+		$oldid = $this->page->getOldID();
 
 		$out = $this->getOutput();
 
@@ -166,7 +136,7 @@ abstract class ViewEntityAction extends ViewAction {
 		// TODO: Factor the "show stuff for missing page" code out from Article::showMissingArticle,
 		//       so it can be re-used here. The below code is copied & modified from there...
 
-		wfRunHooks( 'ShowMissingArticle', array( $this->getArticle() ) );
+		wfRunHooks( 'ShowMissingArticle', array( $this->page ) );
 
 		# Show delete and move logs
 		LogEventsList::showLogExtract( $out, array( 'delete', 'move' ), $title, '',
@@ -195,9 +165,9 @@ abstract class ViewEntityAction extends ViewAction {
 
 				$text = wfMessage( 'wikibase-noentity' )->plain();
 
-				if( $entityCreationPage !== null
-					&& $this->getTitle()->quickUserCan( 'create', $this->getContext()->getUser() )
-					&& $this->getTitle()->quickUserCan( 'edit', $this->getContext()->getUser() )
+				if ( $entityCreationPage !== null
+					&& $this->getTitle()->quickUserCan( 'create', $this->getUser() )
+					&& $this->getTitle()->quickUserCan( 'edit', $this->getUser() )
 				) {
 					/*
 					 * add text with link to special page for creating an entity of that type if possible and
@@ -228,21 +198,27 @@ abstract class ViewEntityAction extends ViewAction {
 	}
 
 	/**
-	 * @see Action::getDescription()
+	 * @see Action::getDescription
+	 *
+	 * @return string Empty.
 	 */
 	protected function getDescription() {
 		return '';
 	}
 
 	/**
-	 * @see Action::requiresUnblock()
+	 * @see Action::requiresUnblock
+	 *
+	 * @return bool Always false.
 	 */
 	public function requiresUnblock() {
 		return false;
 	}
 
 	/**
-	 * @see Action::requiresWrite()
+	 * @see Action::requiresWrite
+	 *
+	 * @return bool Always false.
 	 */
 	public function requiresWrite() {
 		return false;
