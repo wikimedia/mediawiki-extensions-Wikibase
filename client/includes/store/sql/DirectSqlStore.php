@@ -123,19 +123,20 @@ class DirectSqlStore implements ClientStore {
 
 	/**
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param Language $wikiLanguage
 	 * @param EntityIdParser $entityIdParser
 	 * @param string|bool $repoWiki the symbolic database name of the repo wiki
+	 * @param string $languageCode
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
-		Language $wikiLanguage,
 		EntityIdParser $entityIdParser,
-		$repoWiki
+		$repoWiki = false,
+		$languageCode
 	) {
-		$this->repoWiki = $repoWiki;
-		$this->language = $wikiLanguage;
 		$this->contentCodec = $contentCodec;
+		$this->entityIdParser = $entityIdParser;
+		$this->repoWiki = $repoWiki;
+		$this->languageCode = $languageCode;
 
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
@@ -148,7 +149,6 @@ class DirectSqlStore implements ClientStore {
 		$this->cachePrefix = $cachePrefix;
 		$this->cacheDuration = $cacheDuration;
 		$this->cacheType = $cacheType;
-		$this->entityIdParser = $entityIdParser;
 	}
 
 	/**
@@ -348,7 +348,7 @@ class DirectSqlStore implements ClientStore {
 		//TODO: Get $stringNormalizer from WikibaseClient?
 		//      Can't really pass this via the constructor...
 		$stringNormalizer = new StringNormalizer();
-		return new TermSqlIndex( $stringNormalizer , $this->repoWiki );
+		return new TermSqlIndex( $stringNormalizer, $this->repoWiki );
 	}
 
 	/**
@@ -368,13 +368,11 @@ class DirectSqlStore implements ClientStore {
 	 * @return PropertyLabelResolver
 	 */
 	private function newPropertyLabelResolver() {
-		$langCode = $this->language->getCode();
-
 		// cache key needs to be language specific
-		$key = $this->cachePrefix . ':TermPropertyLabelResolver' . '/' . $langCode;
+		$key = $this->cachePrefix . ':TermPropertyLabelResolver' . '/' . $this->languageCode;
 
 		return new TermPropertyLabelResolver(
-			$langCode,
+			$this->languageCode,
 			$this->getTermIndex(),
 			ObjectCache::getInstance( $this->cacheType ),
 			$this->cacheDuration,

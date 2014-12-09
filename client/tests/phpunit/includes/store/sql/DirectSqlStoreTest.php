@@ -25,12 +25,11 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 	protected function newStore() {
 		$site = new Site( MediaWikiSite::TYPE_MEDIAWIKI );
 		$site->setGlobalId( 'dummy' );
-		$lang = Language::factory( 'en' );
 		$idParser = new BasicEntityIdParser();
 
 		$contentCodec = WikibaseClient::getDefaultInstance()->getEntityContentDataCodec();
 
-		$store = new DirectSqlStore( $contentCodec, $lang, $idParser, 'DirectStoreSqlTestDummyRepoId');
+		$store = new DirectSqlStore( $contentCodec, $idParser, 'DirectStoreSqlTestDummyRepoId', 'en' );
 		$store->setSite( $site ); //TODO: inject via constructor once that is possible
 
 		return $store;
