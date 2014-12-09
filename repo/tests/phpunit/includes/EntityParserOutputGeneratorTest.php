@@ -7,6 +7,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityParserOutputGenerator;
@@ -39,12 +40,60 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision );
 
-		$this->assertEquals( self::$html, $parserOutput->getText() );
-		$this->assertEquals( self::$placeholders, $parserOutput->getExtensionData( 'wikibase-view-chunks' ) );
-		$this->assertEquals( self::$configVars, $parserOutput->getJsConfigVars() );
+		$this->assertEquals(
+			self::$html,
+			$parserOutput->getText(),
+			'html text'
+		);
 
-		$this->assertEquals( array( 'http://an.url.com', 'https://another.url.org' ), array_keys( $parserOutput->getExternalLinks() ) );
-		$this->assertEquals( array( 'File:This_is_a_file.pdf', 'File:Selfie.jpg' ), array_keys( $parserOutput->getImages() ) );
+		$this->assertEquals(
+			self::$placeholders,
+			$parserOutput->getExtensionData( 'wikibase-view-chunks' ),
+			'view chunks'
+		);
+
+		$this->assertEquals(
+			self::$configVars,
+			$parserOutput->getJsConfigVars(),
+			'config vars'
+		);
+
+		$this->assertEquals(
+			'kitten item',
+			$parserOutput->getExtensionData( 'wikibase-titletext' ),
+			'title text'
+		);
+
+		$this->assertEquals(
+			array( 'http://an.url.com', 'https://another.url.org' ),
+			array_keys( $parserOutput->getExternalLinks() ),
+			'external links'
+		);
+
+		$this->assertEquals(
+			array( 'File:This_is_a_file.pdf', 'File:Selfie.jpg' ),
+			array_keys( $parserOutput->getImages() ),
+			'images'
+		);
+	}
+
+	public function testTitleText_ItemHasNolabel() {
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
+
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q7799929' ) );
+		$item->setDescription( 'en', 'a kitten' );
+
+		$timestamp = wfTimestamp( TS_MW );
+		$revision = new EntityRevision( $item, 13045, $timestamp );
+
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision );
+
+		$this->assertEquals(
+			'Q7799929',
+			$parserOutput->getExtensionData( 'wikibase-titletext' ),
+			'title text'
+		);
 	}
 
 	private function newEntityParserOutputGenerator() {
@@ -54,13 +103,39 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$this->getEntityTitleLookupMock(),
 			$this->getValuesFinder(),
 			new SqlEntityInfoBuilderFactory(),
-			new LanguageFallbackChain( array() ),
+			$this->newLanguageFallbackChain(),
 			'en'
 		);
 	}
 
+	private function newLanguageFallbackChain() {
+		$fallbackChain = $this->getMockBuilder( 'Wikibase\LanguageFallbackChain' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fallbackChain->expects( $this->any() )
+			->method( 'extractPreferredValue' )
+			->will( $this->returnCallback( function( $labels ) {
+					if ( array_key_exists( 'en', $labels ) ) {
+						return array(
+							'value' => $labels['en'],
+							'language' => 'en',
+							'source' => 'en'
+						);
+					}
+
+					return null;
+				} ) );
+
+		return $fallbackChain;
+	}
+
 	private function newItem() {
 		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q7799929' ) );
+
+		$item->setLabel( 'en', 'kitten item' );
+
 		$statements = $item->getStatements();
 
 		$statements->addNewStatement( new PropertyValueSnak( 42, new StringValue( 'http://an.url.com' ) ) );

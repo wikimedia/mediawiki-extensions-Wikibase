@@ -962,6 +962,12 @@ final class RepoHooks {
 			$out->setProperty( 'wikibase-view-chunks', $placeholders );
 		}
 
+		$titleText = $parserOutput->getExtensionData( 'wikibase-titletext' );
+
+		if ( $titleText ) {
+			$out->setProperty( 'wikibase-titletext', $titleText );
+		}
+
 		return true;
 	}
 
