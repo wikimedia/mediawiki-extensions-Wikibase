@@ -5,10 +5,15 @@ namespace Wikibase;
 use Article;
 use ContentHandler;
 use LogEventsList;
+use OutOfBoundsException;
 use OutputPage;
 use SpecialPage;
 use ViewAction;
+use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
 use Wikibase\Repo\Content\EntityHandler;
+use Wikibase\Repo\Store\PageEntityIdLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -56,6 +61,26 @@ abstract class ViewEntityAction extends ViewAction {
 	}
 
 	/**
+	 * @todo inject the dependencies, with actions constructed with callback.
+	 *
+	 * @return LabelLookup
+	 */
+	public function getLabelLookup() {
+		return new LanguageFallbackLabelLookup(
+			new EntityRetrievingTermLookup( WikibaseRepo::getDefaultInstance()->getEntityLookup() ),
+			$this->getLanguageFallbackChain()
+		);
+	}
+
+	/**
+	 * @todo inject or at least allow override
+	 * @return PageEntityIdLookup
+	 */
+	public function getPageEntityIdLookup() {
+		return WikibaseRepo::getDefaultInstance()->getPageEntityIdLookup();
+	}
+
+	/**
 	 * @see Action::getName()
 	 *
 	 * @since 0.1
@@ -82,29 +107,16 @@ abstract class ViewEntityAction extends ViewAction {
 	 *
 	 * @since 0.1
 	 *
-	 * TODO: permissing checks?
 	 * Parent is doing $this->checkCanExecute( $this->getUser() )
 	 */
 	public function show() {
 		if ( !$this->getArticle()->getPage()->exists() ) {
+			// @fixme could use ShowMissingArticle hook instead.
+			// Article checks for missing / deleted revisions and either
+			// shows appropriate error page or deleted revision, if permission allows.
 			$this->displayMissingEntity();
 		} else {
-			$contentRetriever = new ContentRetriever();
-			$content = $contentRetriever->getContentForRequest(
-				$this->getRequest(),
-				$this->getArticle()
-			);
-
-			if ( !( $content instanceof EntityContent ) ) {
-				$this->getOutput()->showErrorPage(
-						'wikibase-entity-not-viewable-title',
-						'wikibase-entity-not-viewable',
-						$content->getModel()
-				);
-				return;
-			}
-
-			$this->displayEntityContent( $content );
+			$this->viewEntityPage();
 		}
 	}
 
@@ -126,13 +138,11 @@ abstract class ViewEntityAction extends ViewAction {
 	}
 
 	/**
-	 * Displays the entity content.
+	 * Displays the entity page.
 	 *
 	 * @since 0.1
-	 *
-	 * @param EntityContent $content
 	 */
-	private function displayEntityContent( EntityContent $content ) {
+	private function viewEntityPage() {
 		$outputPage = $this->getOutput();
 
 		$editable = $this->isEditable();
@@ -146,16 +156,15 @@ abstract class ViewEntityAction extends ViewAction {
 		$this->getArticle()->setParserOptions( $parserOptions );
 		$this->getArticle()->view();
 
-		$this->applyLabelToTitleText( $outputPage, $content );
+		$this->applyLabelToTitleText( $outputPage );
 	}
 
 	/**
 	 * @param OutputPage $outputPage
-	 * @param EntityContent $content
 	 */
-	private function applyLabelToTitleText( OutputPage $outputPage, EntityContent $content ) {
+	private function applyLabelToTitleText( OutputPage $outputPage ) {
 		// Figure out which label to use for title.
-		$labelText = $this->getLabelText( $content );
+		$labelText = $this->getLabelText();
 
 		if ( $this->isDiff() ) {
 			$this->setPageTitle( $outputPage, $labelText );
@@ -194,25 +203,27 @@ abstract class ViewEntityAction extends ViewAction {
 	}
 
 	/**
-	 * @param EntityContent $content
-	 *
 	 * @return string
 	 */
-	private function getLabelText( EntityContent $content ) {
-		// Figure out which label to use for title.
-		$languageFallbackChain = $this->getLanguageFallbackChain();
-		$labelData = null;
+	protected function getLabelText() {
+		wfProfileIn( __METHOD__ );
 
-		if ( !$content->isRedirect() ) {
-			$labels = $content->getEntity()->getLabels();
-			$labelData = $languageFallbackChain->extractPreferredValueOrAny( $labels );
+		$labelText = $this->getOutput()->getProperty( 'wikibase-entity-labeltext' );
+
+		// fallback if not in parser cache
+		if ( !$labelText ) {
+			$title = $this->page->getTitle();
+			$entityId = $this->getPageEntityIdLookup()->getPageEntityId( $title );
+
+			try {
+				$labelText = $this->getLabelLookup()->getLabel( $entityId );
+			} catch ( OutOfBoundsException $ex ) {
+				$labelText = $entityId->getSerialization();
+			}
 		}
 
-		if ( $labelData ) {
-			return $labelData['value'];
-		} else {
-			return $content->getEntityId()->getSerialization();
-		}
+		wfProfileOut( __METHOD__ );
+		return $labelText;
 	}
 
 	/**
