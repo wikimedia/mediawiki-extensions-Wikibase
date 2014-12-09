@@ -285,11 +285,10 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$restore = $req->getCheck( 'restore' );
 
-		//$this->getOutput()->setContext( $this->getContext() ); //XXX: WTF?
 		$this->getOutput()->setPageTitle(
 			$this->msg(
 				$restore ? 'wikibase-restore-title' : 'wikibase-undo-title',
-				$this->getLabelText( $latestContent ),
+				$this->getLabelText() ?: '',
 				$olderRevision->getId(),
 				$newerRevision->getId()
 			)
@@ -340,29 +339,6 @@ abstract class EditEntityAction extends ViewEntityAction {
 				$this->makeUndoSummary( $newerRevision ),
 				$newerRevision->getId()
 			);
-		}
-	}
-
-	/**
-	 * Returns the label that should be shown to represent the given entity.
-	 *
-	 * @param EntityContent $content
-	 *
-	 * @return string
-	 */
-	private function getLabelText( EntityContent $content ) {
-		$labelData = null;
-
-		// TODO: use a message like <autoredircomment> to represent the redirect.
-		if ( !$content->isRedirect() ) {
-			$languageFallbackChain = $this->getLanguageFallbackChain();
-			$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
-		}
-
-		if ( $labelData ) {
-			return $labelData['value'];
-		} else {
-			return $this->getPageTitle();
 		}
 	}
 
