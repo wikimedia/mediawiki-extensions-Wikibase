@@ -85,17 +85,4 @@ abstract class ModifyTerm extends ModifyEntity {
 			)
 		);
 	}
-
-	/**
-	 * @see \ApiBase::getParamDescription()
-	 */
-	public function getParamDescription() {
-		return array_merge(
-			parent::getParamDescription(),
-			parent::getParamDescriptionForId(),
-			parent::getParamDescriptionForSiteLink(),
-			parent::getParamDescriptionForEntity()
-		);
-	}
-
 }
