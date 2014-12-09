@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_6061d1cf",
+        "filename": "repo/includes/ContentRetriever.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-09T10:36:37Z",
+      "side": 1,
+      "message": "Or just rename getContentForRequest() accordingly. It\u0027s only used in ViewEntityAction::show().\n\nThe only thing used from the $request object is the diff parameter. You can change the signature to something like ContentRetriever::getContent( Article $article, $diff \u003d null );\n\n... hm, ContentRetriever is a strange service. It\u0027s so tiny. Doesn\u0027t have a constructor. Can easily be inlined instead.",
+      "parentUuid": "2e9df725_801c1d6c",
+      "revId": "c431c97bc464ddd7084291e0cbb80eb908a153f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_c5647748",
         "filename": "repo/includes/actions/ViewEntityAction.php",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2014-12-09T10:25:37Z",
       "side": 1,
       "message": "\"display\" is more accurate than \"view\". The application doesn\u0027t view the entity, the user does. The software shows or displays it (using \"a view\").",
+      "revId": "c431c97bc464ddd7084291e0cbb80eb908a153f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_806addaf",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-09T10:36:37Z",
+      "side": 1,
+      "message": "You also need to rename Article::view() to Article::display() then. :-(",
+      "parentUuid": "2e9df725_8053bd19",
       "revId": "c431c97bc464ddd7084291e0cbb80eb908a153f5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
