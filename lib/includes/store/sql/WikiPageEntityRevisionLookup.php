@@ -148,6 +148,22 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	}
 
 	/**
+	 * Fields we need to select to load a revision
+	 *
+	 * @return string[]
+	 */
+	private function selectFields() {
+		return array(
+			'rev_id',
+			'rev_content_format',
+			'rev_timestamp',
+			'old_id',
+			'old_text',
+			'old_flags'
+		);
+	}
+
+	/**
 	 * Selects revision information from the page, revision, and text tables.
 	 *
 	 * @since 0.4
@@ -159,39 +175,25 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @throws DBQueryError If the query fails.
 	 * @return object|null a raw database row object, or null if no such entity revision exists.
 	 */
-	protected function selectRevisionRow( EntityId $entityId, $revisionId = 0, $connType = DB_SLAVE ) {
+	private function selectRevisionRow( EntityId $entityId, $revisionId = 0, $connType = DB_SLAVE ) {
 		wfProfileIn( __METHOD__ );
 		$db = $this->getConnection( $connType );
-
-		$tables = array(
-			'page',
-			'revision',
-			'text'
-		);
-
-		$pageTable = $db->tableName( 'page' );
-		$revisionTable = $db->tableName( 'revision' );
-		$textTable = $db->tableName( 'text' );
-
-		$vars = "$pageTable.*, $revisionTable.*, $textTable.*";
 
 		$where = array();
 		$join = array();
 
 		if ( $revisionId > 0 ) {
+			$tables = array( 'revision', 'text' );
+
 			// pick revision by id
 			$where['rev_id'] = $revisionId;
-
-			// pick page via rev_page
-			$join['page'] = array( 'INNER JOIN', 'page_id=rev_page' );
 
 			// pick text via rev_text_id
 			$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
 
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up revision $revisionId of " . $entityId );
 		} else {
-			// entity to page mapping
-			$tables[] = 'wb_entity_per_page';
+			$tables = array( 'page', 'revision', 'text', 'wb_entity_per_page' );
 
 			$entityId = $this->getProperEntityId( $entityId );
 
@@ -211,7 +213,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up latest revision of ' . $entityId );
 		}
 
-		$res = $db->select( $tables, $vars, $where, __METHOD__, array(), $join );
+		$res = $db->select( $tables, $this->selectFields(), $where, __METHOD__, array(), $join );
 
 		if ( !$res ) {
 			// this can only happen if the DB is set to ignore errors, which shouldn't be the case...
@@ -283,7 +285,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		// pick page via epp_page_id
 		$join['page'] = array( 'INNER JOIN', 'epp_page_id=page_id' );
 
-		$res = $db->select( $tables, '*', $where, __METHOD__, array(), $join );
+		$res = $db->select( $tables, 'page_latest', $where, __METHOD__, array(), $join );
 
 		if ( !$res ) {
 			// this can only happen if the DB is set to ignore errors, which shouldn't be the case...
