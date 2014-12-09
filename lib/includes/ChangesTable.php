@@ -16,9 +16,8 @@ use MWException;
 class ChangesTable extends \ORMTable implements ChunkAccess {
 
 	/**
-	 * Constructor.
-	 *
-	 * @param String|null $changesDatabase the logical name of the database to interact with.
+	 * @param string|bool|null $changesDatabase the logical name of the database to interact with
+	 *        (or false if the local wiki shall be used).
 	 *        If null, Settings::get( 'changesDatabase' ) will be used to determine the target DB.
 	 *
 	 * @since 0.1

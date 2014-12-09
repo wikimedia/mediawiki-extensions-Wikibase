@@ -23,37 +23,37 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	 *
 	 * @var string
 	 */
-	protected $lang;
+	private $languageCode;
 
 	/**
 	 * @var TermIndex
 	 */
-	protected $termIndex;
+	private $termIndex;
 
 	/**
 	 * @var BagOStuff
 	 */
-	protected $cache;
+	private $cache;
 
 	/**
 	 * @var int
 	 */
-	protected $cacheDuration;
+	private $cacheDuration;
 
 	/**
 	 * @var string
 	 */
-	protected $cacheKey;
+	private $cacheKey;
 
 	/**
 	 * Maps labels to property IDs.
 	 *
-	 * @var EntityId[]
+	 * @var EntityId[]|null
 	 */
-	protected $propertiesByLabel = null;
+	private $propertiesByLabel = null;
 
 	/**
-	 * @param string $lang          The language of the labels to look up (typically, the wiki's content language)
+	 * @param string $languageCode The language of the labels to look up (typically, the wiki's content language)
 	 * @param TermIndex $termIndex  The TermIndex service to look up labels with
 	 * @param BagOStuff $cache      The cache to use for labels (typically from wfGetMainCache())
 	 * @param int $cacheDuration    Number of seconds to keep the cached version for.
@@ -62,10 +62,16 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	 *                              Should be set to something including the wiki name
 	 *                              of the wiki that maintains the properties.
 	 */
-	public function __construct( $lang, TermIndex $termIndex, BagOStuff $cache, $cacheDuration, $cacheKey ) {
-		$this->lang = $lang;
-		$this->cache = $cache;
+	public function __construct(
+		$languageCode,
+		TermIndex $termIndex,
+		BagOStuff $cache,
+		$cacheDuration,
+		$cacheKey
+	) {
+		$this->languageCode = $languageCode;
 		$this->termIndex = $termIndex;
+		$this->cache = $cache;
 		$this->cacheDuration = $cacheDuration;
 		$this->cacheKey = $cacheKey;
 	}
@@ -125,7 +131,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 		$termTemplate = new Term( array(
 			'termType' => 'label',
-			'termLanguage' => $this->lang,
+			'termLanguage' => $this->languageCode,
 			'entityType' => Property::ENTITY_TYPE
 		) );
 

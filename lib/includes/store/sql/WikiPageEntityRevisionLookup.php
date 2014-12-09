@@ -25,7 +25,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	/**
 	 * @var EntityIdParser
 	 */
-	protected $entityIdParser;
+	private $entityIdParser;
 
 	/**
 	 * @var EntityContentDataCodec
@@ -34,6 +34,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 
 	/**
 	 * @param EntityContentDataCodec $contentCodec
+	 * @param EntityIdParser $entityIdParser
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 */
 	public function __construct(
@@ -150,8 +151,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	/**
 	 * Selects revision information from the page, revision, and text tables.
 	 *
-	 * @since 0.4
-	 *
 	 * @param EntityId $entityId The entity to query the DB for.
 	 * @param int $revisionId The desired revision id, 0 means "current".
 	 * @param int $connType DB_SLAVE or DB_MASTER
@@ -159,7 +158,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @throws DBQueryError If the query fails.
 	 * @return object|null a raw database row object, or null if no such entity revision exists.
 	 */
-	protected function selectRevisionRow( EntityId $entityId, $revisionId = 0, $connType = DB_SLAVE ) {
+	private function selectRevisionRow( EntityId $entityId, $revisionId = 0, $connType = DB_SLAVE ) {
 		wfProfileIn( __METHOD__ );
 		$db = $this->getConnection( $connType );
 
