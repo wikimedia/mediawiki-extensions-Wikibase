@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_22daec78",
+        "filename": "repo/includes/ContentRetriever.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-09T18:33:58Z",
+      "side": 1,
+      "message": "Article::view handles permissions.  we shouldn\u0027t need Content or this class at all for the action. (see I8d3f3ccd) but hoo\u0027s patch might be good as a short term solution.",
+      "parentUuid": "2e9df725_6061d1cf",
+      "revId": "c431c97bc464ddd7084291e0cbb80eb908a153f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_c5647748",
         "filename": "repo/includes/actions/ViewEntityAction.php",
         "patchSetId": 1
