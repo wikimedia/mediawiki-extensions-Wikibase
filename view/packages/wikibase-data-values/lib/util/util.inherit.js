@@ -43,34 +43,32 @@ this.util = this.util || {};
 	 * @licence GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
-	 * @param {string|Function} [nameOrBase] The name of the new constructor. This is handy for
-	 *        debugging purposes since instances of the constructor might be displayed under that
-	 *        name.
+	 * @param {string|Function} [nameOrBase] The name of the new constructor (currently not used).
+	 *        This is handy for debugging purposes since instances of the constructor might be
+	 *        displayed under that name.
 	 *        If a function is provided, it is assumed to be the constructor to be used for the
-	 *        prototype chain (see "base" argument).
-	 * @param {Function|Object} [baseOrMembers] Constructor which will be used for the prototype
+	 *        prototype chain (see next argument).
+	 * @param {Function} [baseOrConstructor] Constructor which will be used for the prototype
 	 *        chain. This function will not be the constructor returned by the function but will be
 	 *        called by it.
-	 *        If not of type "function", the argument is assumed to be an object with new
-	 *        prototype members (see "members" argument)
+	 *        If no name is provided, this argument is assumed to be a constructor (see next
+	 *        argument).
 	 * @param {Function|Object} [constructorOrMembers] Constructor to overwriting the base
 	 *        constructor with.
-	 *        If not of type "function", the argument is assumed to be an object with new prototype
-	 *        members (see "members" argument)
+	 *        If no name is provided, this argument is assumed to be an object with new prototype
+	 *        members (see next argument).
 	 * @param {Object} [members={}] Properties overwriting or extending those of the base.
 	 * @return {Function} Constructor of the new, extended type.
 	 *
 	 * @throws {Error} in case a malicious function name is given or a reserved word is used.
 	 */
-	util.inherit = function( nameOrBase, baseOrMembers, constructorOrMembers, members ) {
-		// name is optional
-
-		var base = baseOrMembers,
+	util.inherit = function( nameOrBase, baseOrConstructor, constructorOrMembers, members ) {
+		var base = baseOrConstructor,
 			constructor = constructorOrMembers;
 
 		if( typeof nameOrBase !== 'string' ) {
 			members = constructorOrMembers;
-			constructor = baseOrMembers;
+			constructor = baseOrConstructor;
 			base = nameOrBase;
 		}
 
