@@ -21,12 +21,11 @@ use Wikibase\DirectSqlStore;
 class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 	protected function newStore() {
-		$lang = Language::factory( 'en' );
 		$idParser = new BasicEntityIdParser();
 
 		$contentCodec = WikibaseClient::getDefaultInstance()->getEntityContentDataCodec();
 
-		$store = new DirectSqlStore( $contentCodec, $lang, $idParser, 'DirectStoreSqlTestDummyRepoId' );
+		$store = new DirectSqlStore( $contentCodec, $idParser, 'DirectStoreSqlTestDummyRepoId', 'en' );
 
 		return $store;
 	}
