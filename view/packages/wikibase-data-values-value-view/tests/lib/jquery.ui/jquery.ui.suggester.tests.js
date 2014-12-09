@@ -166,6 +166,102 @@
 		} );
 	} );
 
+	QUnit.test( 'isSearching() - triggering search() programmatically', 3, function( assert ) {
+		var $suggester = newTestSuggester( {
+				source: function( term ) {
+					var deferred = new $.Deferred();
+
+					setTimeout( function() {
+						deferred.resolve( [
+							'suggestion 1',
+							'suggestion 2'
+						] );
+					}, 100 );
+
+					return deferred.promise();
+				}
+			} ),
+			suggester = $suggester.data( 'suggester' );
+
+		assert.ok(
+			!suggester.isSearching(),
+			'Returning FALSE when not having triggered a search.'
+		);
+
+		$suggester.val( 'a' );
+
+		QUnit.stop();
+
+		suggester.search()
+		.done( function( suggestions ) {
+			assert.ok(
+				!suggester.isSearching(),
+				'Returning FALSE after search has finished.'
+			);
+		} )
+		.fail( function() {
+			assert.ok(
+				false,
+				'Searching failed.'
+			);
+		} )
+		.always( function() {
+			QUnit.start();
+		} );
+
+		assert.ok(
+			suggester.isSearching(),
+			'Returning TRUE while search is in progress.'
+		);
+	} );
+
+	QUnit.test( 'isSearching() - triggering with "key" event', 3, function( assert ) {
+		var $suggester = newTestSuggester( {
+				source: function( term ) {
+					var deferred = new $.Deferred();
+
+					setTimeout( function() {
+						deferred.resolve( [
+							'suggestion 1',
+							'suggestion 2'
+						] );
+					}, 10 );
+
+					return deferred.promise();
+				}
+			} ),
+			suggester = $suggester.data( 'suggester' );
+
+		assert.ok(
+			!suggester.isSearching(),
+			'Returning FALSE when not having triggered a search.'
+		);
+
+		$suggester.val( 'a' );
+
+		QUnit.stop();
+
+		// First "change" event is triggered directly on "key" event.
+		$suggester.one( 'suggesterchange', function() {
+			// Second "change" event is triggered after gathering the suggestions.
+			$suggester.one( 'suggesterchange', function() {
+				assert.ok(
+					!suggester.isSearching(),
+					'Returning FALSE after search has finished.'
+				);
+
+				QUnit.start();
+			} );
+		} );
+
+		$suggester.trigger( 'keydown' );
+
+		assert.ok(
+			suggester.isSearching(),
+			'Returning TRUE while search is in progress.'
+		);
+	} );
+
 	QUnit.test( 'Error', 2, function( assert ) {
 		var $suggester = newTestSuggester( {
 				source: function( term ) {
