@@ -486,7 +486,7 @@ $.extend( Item.prototype, {
  *
  * @param {Function|null} [action=null]
  * @param {string|null} [cssClass=null]
- * @param {string} [link=null]
+ * @param {string|null} [link=null]
  *
  * @throws {Error} if any required parameter is not specified properly.
  */
