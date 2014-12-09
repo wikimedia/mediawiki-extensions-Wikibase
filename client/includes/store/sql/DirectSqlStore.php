@@ -269,8 +269,8 @@ class DirectSqlStore implements ClientStore {
 	 * @return EntityRevisionLookup
 	 */
 	private function newEntityRevisionLookup() {
-		//NOTE: Keep in sync with SqlStore::newEntityLookup on the repo
-		$key = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
+		// NOTE: Keep cache key in sync with SqlStore::newEntityRevisionLookup on the repository
+		$cacheKeyPrefix = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$this->contentCodec,
@@ -280,7 +280,12 @@ class DirectSqlStore implements ClientStore {
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		// We need to verify the revision ID against the database to avoid stale data.
-		$lookup = new CachingEntityRevisionLookup( $lookup, wfGetCache( $this->cacheType ), $this->cacheDuration, $key );
+		$lookup = new CachingEntityRevisionLookup(
+			$lookup,
+			wfGetCache( $this->cacheType ),
+			$this->cacheDuration,
+			$cacheKeyPrefix
+		);
 		$lookup->setVerifyRevision( true );
 
 		// Top caching layer using an in-process hash.
@@ -348,14 +353,14 @@ class DirectSqlStore implements ClientStore {
 	 */
 	private function newPropertyLabelResolver() {
 		// cache key needs to be language specific
-		$key = $this->cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $this->languageCode;
+		$cacheKey = $this->cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $this->languageCode;
 
 		return new TermPropertyLabelResolver(
 			$this->languageCode,
 			$this->getTermIndex(),
 			ObjectCache::getInstance( $this->cacheType ),
 			$this->cacheDuration,
-			$key
+			$cacheKey
 		);
 	}
 
@@ -408,9 +413,13 @@ class DirectSqlStore implements ClientStore {
 
 		if ( $usePropertyInfoTable ) {
 			$table = new PropertyInfoTable( true, $this->repoWiki );
-			$key = $this->cacheKeyPrefix . ':CachingPropertyInfoStore';
-			return new CachingPropertyInfoStore( $table, ObjectCache::getInstance( $this->cacheType ),
-				$this->cacheDuration, $key );
+			$cacheKey = $this->cacheKeyPrefix . ':CachingPropertyInfoStore';
+			return new CachingPropertyInfoStore(
+				$table,
+				ObjectCache::getInstance( $this->cacheType ),
+				$this->cacheDuration,
+				$cacheKey
+			);
 		} else {
 			// dummy info store
 			return new DummyPropertyInfoStore();
