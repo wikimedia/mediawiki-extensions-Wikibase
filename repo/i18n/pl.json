@@ -346,5 +346,7 @@
 	"right-item-merge": "Połącz elementy",
 	"right-item-redirect": "Tworzenie przekierowań elementu",
 	"right-property-term": "Zmiana określeń właściwości (etykiet, opisów, aliasów)",
-	"right-property-create": "Tworzenie właściwości"
+	"right-property-create": "Tworzenie właściwości",
+	"apihelp-wbsetlabel-param-language": "Język etykiety",
+	"apihelp-wbsetlabel-param-value": "Wartość etykiety"
 }

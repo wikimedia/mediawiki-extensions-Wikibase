@@ -391,7 +391,15 @@
 	"wikibase-entity-not-viewable-title": "内容类型不匹配：不能显示内容",
 	"wikibase-entity-not-viewable": "指定的内容类型“$1”不是实体，不能通过Wikibase显示。",
 	"apihelp-wbavailablebadges-description": "查询可用的徽章项。",
+	"apihelp-wbavailablebadges-example-1": "查询所有可用的徽章项",
 	"apihelp-wbcreateclaim-description": "创建Wikibase声称。",
+	"apihelp-wbcreateclaim-param-property": "snaks属性的ID",
+	"apihelp-wbcreateclaim-param-snaktype": "snak类型",
 	"apihelp-wbcreateredirect-example-1": "改变Q11为重定向至Q12",
-	"apihelp-wbformatvalue-description": "格式数据值。"
+	"apihelp-wbformatvalue-description": "格式数据值。",
+	"apihelp-wbgetclaims-description": "获取Wikibase声称。",
+	"apihelp-wbmergeitems-param-fromid": "要合并自的ID",
+	"apihelp-wbmergeitems-param-toid": "要合并到的ID",
+	"apihelp-wbparsevalue-description": "使用ValueParser的解析值。",
+	"apihelp-wbparsevalue-param-parser": "要使用的ValueParser的ID"
 }
