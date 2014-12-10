@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_5c135005",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T18:47:22Z",
+      "side": 1,
+      "message": "What should the behavior with an empty array be? I suggest: it means no filter, so all languages are returned. To make this change please add a test and change the two \"!\u003d\u003d null\" here with \"!empty()\".",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_1cddc847",
+        "filename": "lib/includes/store/EntityRetrievingTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T18:47:22Z",
+      "side": 1,
+      "message": "!empty(), see other comment.",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_fca57cb2",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T18:47:22Z",
+      "side": 1,
+      "message": "$termType is now wrong in this line.",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_bcaff490",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T18:47:22Z",
+      "side": 1,
+      "message": "So this is guaranteed to return an \"Array indexed by language code\"? Please add this to all string[] types in this file.",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_5cd4b0ec",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T18:47:22Z",
+      "side": 1,
+      "message": "Please add a description which types are allowed (use \"e.g.\" if you don\u0027t want a restricted set).",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_fc001c6f",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T18:47:22Z",
+      "side": 1,
+      "message": "Please rename $language(s) to $languageCode(s) in all files in this patch. Thanks.",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_3ca3e4a9",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T18:47:22Z",
+      "side": 1,
+      "message": "It\u0027s a \"list of language codes\", isn\u0027t it? Be specific, please, we have a Language class, you know?",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_3ca9a478",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T18:47:22Z",
+      "side": 1,
+      "message": "This means this table needs 2 indexes:\n* id, entity_type, term_type and language\n* id, entity_type and language",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_bce374d3",
+        "filename": "lib/tests/phpunit/store/EntityRetrievingTermLookupTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T18:47:22Z",
+      "side": 1,
+      "message": "array $expected, ItemId $itemId",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_dce8c0b1",
+        "filename": "lib/tests/phpunit/store/EntityRetrievingTermLookupTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T18:47:22Z",
+      "side": 1,
+      "message": "array $expected, ItemId $itemId",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_bcfa9471",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T18:47:22Z",
+      "side": 1,
+      "message": "Inconsistent, you are using !\u003d\u003d null below. Or use !empty() as suggested in my other comments.",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
