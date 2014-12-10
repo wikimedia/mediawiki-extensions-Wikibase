@@ -111,22 +111,24 @@ class EntityInfo {
 
 	/**
 	 * @param EntityId $entityId
+	 * @param string[]|null $languageCodes
 	 *
 	 * @throws OutOfBoundsException If nothing is known about the entity or its labels.
 	 * @return string[] The given entity's labels, keyed by language.
 	 */
-	public function getLabels( EntityId $entityId ) {
-		return $this->getTermValues( $entityId, 'labels' );
+	public function getLabels( EntityId $entityId, array $languageCodes = null ) {
+		return $this->getTermValues( $entityId, 'labels', $languageCodes );
 	}
 
 	/**
 	 * @param EntityId $entityId
+	 * @param string[]|null $languageCodes
 	 *
 	 * @throws OutOfBoundsException If nothing is known about the entity or its descriptions.
 	 * @return string[] The given entity's descriptions, keyed by language.
 	 */
-	public function getDescriptions( EntityId $entityId ) {
-		return $this->getTermValues( $entityId, 'descriptions' );
+	public function getDescriptions( EntityId $entityId, array $languageCodes = null ) {
+		return $this->getTermValues( $entityId, 'descriptions', $languageCodes );
 	}
 
 	/**
@@ -161,13 +163,14 @@ class EntityInfo {
 	/**
 	 * @param EntityId $entityId
 	 * @param string $termField The term field (e.g. 'labels' or 'descriptions').
+	 * @param string[]|null $languages
 	 *
 	 * @throws RuntimeException
 	 * @throws OutOfBoundsException If nothing is known about the entity
 	 *         or terms of the requested type.
 	 * @return string[] The entity's term values of the requested type, keyed by language.
 	 */
-	private function getTermValues( EntityId $entityId, $termField ) {
+	private function getTermValues( EntityId $entityId, $termField, array $languages = null ) {
 		$entityInfo = $this->getEntityInfo( $entityId );
 
 		if ( !array_key_exists( $termField, $entityInfo ) ) {
@@ -176,11 +179,19 @@ class EntityInfo {
 			throw new RuntimeException( "$entityId term record is invalid" );
 		}
 
+		if ( $languages !== null ) {
+			$languages = array_flip( $languages );
+		}
+
 		$values = array();
 
 		foreach ( $entityInfo[$termField] as $key => $term ) {
 			if ( !is_array( $term ) || !array_key_exists( 'value', $term ) ) {
 				throw new RuntimeException( "$entityId term record is missing the 'value' field" );
+			}
+
+			if ( $languages !== null && !isset( $languages[$key] ) ) {
+				continue;
 			}
 
 			$values[$key] = $term['value'];

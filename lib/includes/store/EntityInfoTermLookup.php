@@ -54,12 +54,13 @@ class EntityInfoTermLookup implements TermLookup {
 	 * Gets all labels of an Entity with the specified EntityId.
 	 *
 	 * @param EntityId $entityId
+	 * @param string[]|null $languages
 	 *
 	 * @throws OutOfBoundsException
 	 * @return string[]
 	 */
-	public function getLabels( EntityId $entityId ) {
-		return $this->entityInfo->getLabels( $entityId );
+	public function getLabels( EntityId $entityId, array $languages = null ) {
+		return $this->entityInfo->getLabels( $entityId, $languages );
 	}
 
 	/**
@@ -85,12 +86,13 @@ class EntityInfoTermLookup implements TermLookup {
 	 * Gets all descriptions of an Entity with the specified EntityId.
 	 *
 	 * @param EntityId $entityId
+	 * @param string[]|null $languages
 	 *
 	 * @throws OutOfBoundsException
 	 * @return string[]
 	 */
-	public function getDescriptions( EntityId $entityId ) {
-		return $this->entityInfo->getDescriptions( $entityId );
+	public function getDescriptions( EntityId $entityId, array $languages = null ) {
+		return $this->entityInfo->getDescriptions( $entityId, $languages );
 	}
 
 }

@@ -49,12 +49,19 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @see TermLookup::getLabels()
 	 *
 	 * @param EntityId $entityId
+	 * @param string[]|null $languages
 	 *
 	 * @throws OutOfBoundsException if the entity does not exist
 	 * @return string[]
 	 */
-	public function getLabels( EntityId $entityId ) {
-		return $this->getFingerprint( $entityId )->getLabels()->toTextArray();
+	public function getLabels( EntityId $entityId, array $languages = null ) {
+		$labels = $this->getFingerprint( $entityId )->getLabels()->toTextArray();
+
+		if ( $languages !== null ) {
+			$labels = array_intersect_key( $labels, array_flip( $languages ) );
+		}
+
+		return $labels;
 	}
 
 	/**
@@ -74,12 +81,19 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @see TermLookup::getDescriptions()
 	 *
 	 * @param EntityId $entityId
+	 * @param string[]|null $languages
 	 *
 	 * @throws OutOfBoundsException if the entity does not exist
 	 * @return string[]
 	 */
-	public function getDescriptions( EntityId $entityId ) {
-		return $this->getFingerprint( $entityId )->getDescriptions()->toTextArray();
+	public function getDescriptions( EntityId $entityId, array $languages = null ) {
+		$descriptions = $this->getFingerprint( $entityId )->getDescriptions()->toTextArray();
+
+		if ( $languages !== null ) {
+			$descriptions = array_intersect_key( $descriptions, array_flip( $languages ) );
+		}
+
+		return $descriptions;
 	}
 
 	/**
