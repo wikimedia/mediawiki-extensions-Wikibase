@@ -108,22 +108,24 @@ class EntityInfo {
 
 	/**
 	 * @param EntityId $id
+	 * @param string[]|null $languages
 	 *
 	 * @throws OutOfBoundsException If nothing is known about the entity or its labels.
 	 * @return string[] The given entity's labels, keyed by language.
 	 */
-	public function getLabels( EntityId $id ) {
-		return $this->getTermValues( $id, 'labels' );
+	public function getLabels( EntityId $id, array $languages = null ) {
+		return $this->getTermValues( $id, 'labels', $languages );
 	}
 
 	/**
 	 * @param EntityId $id
+	 * @param string[]|null $languages
 	 *
 	 * @throws OutOfBoundsException If nothing is known about the entity or its descriptions.
 	 * @return string[] The given entity's descriptions, keyed by language.
 	 */
-	public function getDescriptions( EntityId $id ) {
-		return $this->getTermValues( $id, 'descriptions' );
+	public function getDescriptions( EntityId $id, array $languages = null ) {
+		return $this->getTermValues( $id, 'descriptions', $languages );
 	}
 
 	/**
@@ -158,17 +160,22 @@ class EntityInfo {
 	/**
 	 * @param EntityId $id
 	 * @param string $termField The term field (e.g. 'labels' or 'descriptions').
+	 * @param string[]|null $languages
 	 *
 	 * @throws RuntimeException
 	 * @throws OutOfBoundsException If nothing is known about the entity
 	 *         or terms of the requested type.
 	 * @return string[] The entity's term values of the requested type, keyed by language.
 	 */
-	private function getTermValues( EntityId $id, $termField ) {
+	private function getTermValues( EntityId $id, $termField, array $languages = null ) {
 		$entityInfo = $this->getEntityInfo( $id );
 
 		if ( !isset( $entityInfo[$termField] ) ) {
 			throw new OutOfBoundsException( 'Term field `' . $termField . '` is unknown.' );
+		}
+
+		if ( $languages !== null ) {
+			$languages = array_flip( $languages );
 		}
 
 		$values = array();
@@ -176,6 +183,10 @@ class EntityInfo {
 		foreach ( $entityInfo[$termField] as $key => $entry ) {
 			if ( !isset( $entry['value'] ) ) {
 				throw new RuntimeException( 'Term record is missing `value` key (' . $id->getSerialization() . ')' );
+			}
+
+			if ( $languages !== null && !isset( $languages[$key] ) ) {
+				continue;
 			}
 
 			$values[$key] = $entry['value'];
