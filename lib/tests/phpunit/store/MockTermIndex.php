@@ -180,15 +180,37 @@ class MockTermIndex implements TermIndex {
 	}
 
 	/**
+	 * @param EntityId $id
+	 * @param string[]|null $termTypes
+	 * @param string[]|null $languages
+	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntity( EntityId $id ) {
+	public function getTermsOfEntity( EntityId $id, array $termTypes = null, array $languages = null ) {
 		$matchingTerms = array();
 
+		if ( $termTypes ) {
+			$termTypes = array_flip( $termTypes );
+		}
+
+		if ( $languages ) {
+			$languages = array_flip( $languages );
+		}
+
 		foreach( $this->terms as $term ) {
-			if ( $term->getEntityId()->equals( $id ) ) {
-				$matchingTerms[] = $term;
+			if ( $termTypes !== null && !isset( $termTypes[$term->getType()] ) ) {
+				continue;
 			}
+
+			if ( $languages !== null && !isset( $languages[$term->getLanguage()] ) ) {
+				continue;
+			}
+
+			if ( !$id->equals( $term->getEntityId() ) ) {
+				continue;
+			}
+
+			$matchingTerms[] = $term;
 		}
 
 		return $matchingTerms;
