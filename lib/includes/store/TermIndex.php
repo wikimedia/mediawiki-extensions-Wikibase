@@ -77,6 +77,8 @@ interface TermIndex extends LabelConflictFinder {
 	 * @param string $entityType
 	 * @param string[]|null $termTypes The types of terms to return, e.g. "label", "description",
 	 *        or "alias". Compare the Term::TYPE_XXX constants. If null, all types are returned.
+	 * @param string[]|null $languageCodes The desired languages, given as language codes.
+	 *        If null, all languages are returned.
 	 *
 	 * @return Term[]
 	 */
