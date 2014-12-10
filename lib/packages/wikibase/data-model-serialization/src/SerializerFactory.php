@@ -28,12 +28,11 @@ class SerializerFactory {
 
 	const OPTION_DEFAULT = 0;
 	const OPTION_OBJECTS_FOR_MAPS = 1;
-	const OPTION_MAXIMUM_VALUE = 1;
 
 	/**
-	 * @var integer $options
+	 * @var int
 	 */
-	private $options = 0;
+	private $options;
 
 	/**
 	 * @var Serializer
@@ -42,13 +41,16 @@ class SerializerFactory {
 
 	/**
 	 * @param Serializer $dataValueSerializer serializer for DataValue objects
-	 * @param integer $options set multiple with bitwise or
+	 * @param int $options set multiple with bitwise or
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( Serializer $dataValueSerializer, $options = 0 ) {
-		$this->dataValueSerializer = $dataValueSerializer;
-		if ( $options > self::OPTION_MAXIMUM_VALUE ) {
-			throw new InvalidArgumentException('The value of argument 2 $options must be less than 1.');
+		if ( !is_int( $options ) ) {
+			throw new InvalidArgumentException( '$options must be an integer' );
 		}
+
+		$this->dataValueSerializer = $dataValueSerializer;
 		$this->options = $options;
 	}
 
