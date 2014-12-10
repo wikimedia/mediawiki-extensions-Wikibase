@@ -79,6 +79,14 @@ class ParserAfterParseHookHandler {
 			return true;
 		}
 
+		// Only run this once, for the article content and not interface stuff
+
+		// This check needs to be here as this method is being invoked a lot,
+		// thus calling self::newFromGlobalState would be quite heavy
+		if ( $parser->getOptions()->getInterfaceMessage() ) {
+			return true;
+		}
+
 		$handler = self::newFromGlobalState();
 		return $handler->doParserAfterParse( $parser );
 	}
@@ -121,13 +129,6 @@ class ParserAfterParseHookHandler {
 		wfProfileIn( __METHOD__ );
 
 		// @todo split up the multiple responsibilities here and in lang link handler
-
-		// only run this once, for the article content and not interface stuff
-		//FIXME: this also runs for messages in EditPage::showEditTools! Ugh!
-		if ( $parser->getOptions()->getInterfaceMessage() ) {
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
 
 		$parserOutput = $parser->getOutput();
 		$useRepoLinks = $this->langLinkHandler->useRepoLinks( $title, $parserOutput );
