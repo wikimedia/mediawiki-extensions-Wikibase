@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_befcccd6",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T13:40:25Z",
+      "side": 1,
+      "message": "not that much simpler (trade off is having more internal knowledge of fallback chain here), but done.",
+      "parentUuid": "2e9df725_6b3688e6",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_4b2dcc8a",
         "filename": "repo/includes/actions/ViewEntityAction.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-10T10:35:08Z",
       "side": 1,
       "message": "ContentRetriever handled getting the right revision for diffs, too. where is that logic now?",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_4bbaac1f",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T13:40:25Z",
+      "side": 1,
+      "message": "core handles this.\n\nArticle::view, which calls Article::fetchContentObject, $this-\u003egetContext()-\u003egetRequest()-\u003egetCheck( \u0027diff\u0027 ) etc.\n\nwhy would we want to duplicate (in often bug prone way in the past) all that and fetch the content again? Each call of getContent() is expensive performance-wise, even if we defer serialization of the Entity.  Ideally, we call getContent (from parser cache) only once on page view.\n\nThe only thing we used the $content object retrieved via ContentRetriever was to get a label.  Every other bit of content comes via Article (via parser cache usually) and is not explicitly used in this class.\n\nIt would be very surprising if core was getting the wrong revision for a diff or such, since we\u0027ve been using that for a long time for all of viewing an entity (except setting the title to the label).",
+      "parentUuid": "2e9df725_4b2dcc8a",
       "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_cbe6bc13",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T13:40:25Z",
+      "side": 1,
+      "message": "this is the view action, so i think \u0027viewEntityPage\u0027 is more consistent but will rename it.",
+      "parentUuid": "2e9df725_8b33d4f2",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_6b3d28b8",
         "filename": "repo/includes/actions/ViewEntityAction.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2014-12-10T10:35:08Z",
       "side": 1,
       "message": "We already have the entity object, we can just look up the label. The to get the Entity, use $this-\u003egetArticle()-\u003egetPage()-\u003egetContent()-\u003egetEntity() (well, first check if it\u0027s a redirect, and has the correct type).",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_0b8ca488",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T13:40:25Z",
+      "side": 1,
+      "message": "gah, why do we want to getContent again!?? make a deep copy just to get a label on every page view? seems insane, even if we defer some of the serialization.",
+      "parentUuid": "2e9df725_6b3d28b8",
       "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_2b94008d",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T13:40:25Z",
+      "side": 1,
+      "message": "good point",
+      "parentUuid": "2e9df725_eb49386b",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_ab533019",
         "filename": "repo/includes/actions/ViewEntityAction.php",
         "patchSetId": 5
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_8b975493",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T13:40:25Z",
+      "side": 1,
+      "message": "this is really \u0027titletext\u0027, which contains fallback of the EntityId.\n\nthis should always return something unless somehow it is not put in parser output or the entity has no id yet. in that case, return null and skip overriding the title text. (default, whatever core does is good enough in that case)",
+      "parentUuid": "2e9df725_ab533019",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_8b3af4be",
         "filename": "repo/tests/phpunit/includes/actions/ViewEntityActionTest.php",
         "patchSetId": 5
@@ -115,6 +223,24 @@
       "writtenOn": "2014-12-10T10:35:08Z",
       "side": 1,
       "message": "do we have a test using the \"diff\" param too?",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_3ebafc1e",
+        "filename": "repo/tests/phpunit/includes/actions/ViewEntityActionTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T13:40:25Z",
+      "side": 1,
+      "message": "please scroll up :)  testShowDiff()",
+      "parentUuid": "2e9df725_8b3af4be",
       "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
