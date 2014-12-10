@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_57d48bec",
+        "filename": "lib/includes/store/CachingEntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T20:12:34Z",
+      "side": 1,
+      "message": "Why the spaces?",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_171cc3ca",
+        "filename": "lib/includes/store/CachingEntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T20:12:34Z",
+      "side": 1,
+      "message": "I think this must be an or (||).",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_97ca1349",
+        "filename": "lib/includes/store/EntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T20:12:34Z",
+      "side": 1,
+      "message": "At least rename these to something like \"LATEST_FOR_DISPLAY\".\n\nOr \"LATEST_FROM_SLAVE\" and \"LATEST_FROM_MASTER\". Yes, I know you avoided the words \"slave\" and \"master\" on purpose to not expose implementation details. But I have the strong feeling that you are trying to hide a crucial fact just for the purpose of hiding it. Avoiding these words doesn\u0027t make the code easier to read.",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_d715fb9d",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T20:12:34Z",
+      "side": 1,
+      "message": "You could use 0 and -1 for the constants, maintaining compatibility in all cases.",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_37245f07",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T20:12:34Z",
+      "side": 1,
+      "message": "You missed the parameter here! Could be on purpose but I think it\u0027s a mistake.",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_97c3f33c",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T20:12:34Z",
+      "side": 1,
+      "message": "This patch seems pointless at this point. It does nothing but switching 0 with a string constant. What\u0027s wrong with 0?",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_779f4756",
+        "filename": "repo/includes/specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T20:12:34Z",
+      "side": 1,
+      "message": "What? This doesn\u0027t make sense. I would understand a \"LATEST\" constant, but what kind of a revision id is \"FOR_UPDATE\"?",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_977d331a",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T20:12:34Z",
+      "side": 1,
+      "message": "Comment is wrong now, isn\u0027t it? Erm, wait, this is a constant in an integer field for a revision id? How is that possible?",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
