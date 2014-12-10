@@ -548,8 +548,16 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
 
 		$terms = $lookup->getTermsOfEntity( $item->getId() );
+		$this->assertEquals( 7, count( $terms ), "expected 7 terms for item" );
 
-		$this->assertEquals( 7, count( $terms ), "expected 5 terms for item" );
+		$labelTerms = $lookup->getTermsOfEntity( $item->getId(), array( 'label' ) );
+		$this->assertEquals( 3, count( $labelTerms ), "expected 3 labels" );
+
+		$englishTerms = $lookup->getTermsOfEntity( $item->getId(), null, array( 'en' ) );
+		$this->assertEquals( 2, count( $englishTerms ), "expected 2 English terms" );
+
+		$germanLabelTerms = $lookup->getTermsOfEntity( $item->getId(), array( 'label' ), array( 'de' ) );
+		$this->assertEquals( 1, count( $germanLabelTerms ), "expected 1 German label" );
 
 		// make list of strings for easy checking
 		$term_keys = array();
