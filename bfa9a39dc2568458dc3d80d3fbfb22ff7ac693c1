@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_be760cd4",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-10T14:46:41Z",
+      "side": 1,
+      "message": "Katie says this makes the query slower. If that\u0027s true, we should should filter programmatically later in this method.",
+      "revId": "bfa9a39dc2568458dc3d80d3fbfb22ff7ac693c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
