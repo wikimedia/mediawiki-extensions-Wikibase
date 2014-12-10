@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e9df725_9e48f08d",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T14:51:16Z",
+      "side": 1,
+      "message": "$termType is not used",
+      "revId": "bfa9a39dc2568458dc3d80d3fbfb22ff7ac693c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_be760cd4",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 1
