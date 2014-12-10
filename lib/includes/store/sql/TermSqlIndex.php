@@ -371,19 +371,30 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 	/**
 	 * Returns the terms stored for the given entity.
+	 *
 	 * @see TermIndex::getTermsOfEntity
 	 *
 	 * @param EntityId $entityId
+	 * @param string[]|null $termTypes
+	 * @param string[]|null $languages
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntity( EntityId $entityId ) {
+	public function getTermsOfEntity( EntityId $entityId, array $termTypes = null, array $languages = null ) {
 		wfProfileIn( __METHOD__ );
 
-		$entityIdentifiers = array(
+		$conditions = array(
 			'term_entity_id' => $entityId->getNumericId(),
 			'term_entity_type' => $entityId->getEntityType()
 		);
+
+		if ( $termTypes !== null ) {
+			$conditions['term_type'] = $termTypes;
+		}
+
+		if ( $languages !== null ) {
+			$conditions['term_language'] = $languages;
+		}
 
 		$fields = array(
 			'term_language',
@@ -396,7 +407,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		$res = $dbr->select(
 			$this->tableName,
 			$fields,
-			$entityIdentifiers,
+			$conditions,
 			__METHOD__
 		);
 
