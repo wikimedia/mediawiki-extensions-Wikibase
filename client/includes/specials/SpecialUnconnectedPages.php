@@ -60,6 +60,10 @@ class SpecialUnconnectedPages extends SpecialPage {
 		return $this->msg( 'special-' . strtolower( $this->getName() ) )->text();
 	}
 
+	public function getGroupName() {
+		return 'wikibaseclient';
+	}
+
 	public function setHeaders() {
 		$out = $this->getOutput();
 		$out->setArticleRelated( false );

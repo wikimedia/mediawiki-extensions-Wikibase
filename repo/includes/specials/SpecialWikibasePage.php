@@ -50,6 +50,10 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	 */
 	public $subPage;
 
+	public function getGroupName() {
+		return 'wikibaserepo';
+	}
+
 	/**
 	 * @see SpecialPage::getDescription
 	 *
