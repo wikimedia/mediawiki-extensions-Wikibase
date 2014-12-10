@@ -169,7 +169,11 @@ class EditEntity extends ModifyEntity {
 
 		if ( $params['clear'] ) {
 			if( $params['baserevid'] && $exists ) {
-				$latestRevision = $revisionLookup->getLatestRevisionId( $entity->getId() );
+				$latestRevision = $revisionLookup->getLatestRevisionId(
+					$entity->getId(),
+					EntityRevisionLookup::FOR_UPDATE
+				);
+
 				if( !$baseRevId === $latestRevision ) {
 					wfProfileOut( __METHOD__ );
 					$this->dieError(

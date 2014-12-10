@@ -54,19 +54,21 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @see   EntityRevisionLookup::getEntityRevision
 	 *
 	 * @param EntityId $entityId
-	 * @param int $revisionId The desired revision id, 0 means "current".
+	 * @param int|string $revisionId The desired revision id, or FOR_DISPLAY or FOR_UPDATE.
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	public function getEntityRevision( EntityId $entityId, $revisionId = 0 ) {
+	public function getEntityRevision( EntityId $entityId, $revisionId = self::FOR_DISPLAY ) {
 		wfProfileIn( __METHOD__ );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up entity ' . $entityId
 			. " (revision $revisionId)." );
 
-		if ( $revisionId === false ) { // default changed from false to 0
-			wfWarn( 'getEntityRevision() called with $revisionId = false, use 0 instead.' );
-			$revisionId = 0;
+		// default changed from false to 0 and then to FOR_DISPLAY
+		if ( $revisionId === false || $revisionId === 0 ) {
+			wfWarn( 'getEntityRevision() called with $revisionId = false or 0, ' .
+				'use EntityRevisionLookup::FOR_DISPLAY or EntityRevisionLookup::FOR_UPDATE instead.' );
+			$revisionId = self::FOR_DISPLAY;
 		}
 
 		/** @var EntityRevision $entityRevision */
@@ -98,7 +100,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			throw new BadRevisionException( "Revision $revisionId does not belong to entity $entityId" );
 		}
 
-		if ( $revisionId > 0 && $entityRevision === null ) {
+		if ( is_int( $revisionId ) && $entityRevision === null ) {
 			// If a revision ID was specified, but that revision doesn't exist:
 			throw new BadRevisionException( "No such revision found for $entityId: $revisionId" );
 		}
@@ -108,16 +110,25 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	}
 
 	/**
-	 * Returns the id of the latest revision of the given entity, or false if there is no such entity.
+	 * @see EntityRevisionLookup::getLatestRevisionId
 	 *
 	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
+	 * @param string $mode
 	 *
 	 * @return int|false
 	 */
-	public function getLatestRevisionId( EntityId $entityId ) {
-		$row = $this->loadPageLatest( $entityId );
+	public function getLatestRevisionId( EntityId $entityId, $mode = self::FOR_DISPLAY ) {
+		$row = null;
+
+		if ( $mode !== self::FOR_UPDATE ) {
+			$row = $this->selectPageLatest( $entityId, DB_SLAVE );
+		}
+
+		if ( !$row ) {
+			$row = $this->selectPageLatest( $entityId, DB_MASTER );
+		}
 
 		if ( $row ) {
 			return (int)$row->page_latest;
@@ -128,13 +139,17 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 
 	/**
 	 * @param EntityId $entityId
-	 * @param int $revisionId
+	 * @param int|string $revisionId
 	 *
 	 * @throws DBQueryError
 	 * @return object|null
 	 */
 	private function loadRevisionRow( EntityId $entityId, $revisionId ) {
-		$row = $this->selectRevisionRow( $entityId, $revisionId );
+		$row = null;
+
+		if ( $revisionId !== self::FOR_UPDATE ) {
+			$row = $this->selectRevisionRow( $entityId, $revisionId, DB_SLAVE );
+		}
 
 		if ( !$row ) {
 			// try loading from master
@@ -169,20 +184,20 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @since 0.4
 	 *
 	 * @param EntityId $entityId The entity to query the DB for.
-	 * @param int $revisionId The desired revision id, 0 means "current".
+	 * @param int|string $revisionId The desired revision id, or FOR_DISPLAY or FOR_UPDATE.
 	 * @param int $connType DB_SLAVE or DB_MASTER
 	 *
 	 * @throws DBQueryError If the query fails.
 	 * @return object|null a raw database row object, or null if no such entity revision exists.
 	 */
-	private function selectRevisionRow( EntityId $entityId, $revisionId = 0, $connType = DB_SLAVE ) {
+	private function selectRevisionRow( EntityId $entityId, $revisionId, $connType ) {
 		wfProfileIn( __METHOD__ );
 		$db = $this->getConnection( $connType );
 
 		$where = array();
 		$join = array();
 
-		if ( $revisionId > 0 ) {
+		if ( is_int( $revisionId ) ) {
 			$tables = array( 'revision', 'text' );
 
 			// pick revision by id
@@ -230,26 +245,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		}
 
 		wfProfileOut( __METHOD__ );
-		return $row;
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 *
-	 * @throws DBQueryError
-	 * @return object|null
-	 */
-	private function loadPageLatest( EntityId $entityId ) {
-		$row = $this->selectPageLatest( $entityId );
-
-		if ( !$row ) {
-			// try to load from master
-			wfDebugLog(  __CLASS__, __FUNCTION__ . ': try to load ' . $entityId
-				. ' from DB_MASTER.' );
-
-			$row = $this->selectPageLatest( $entityId, DB_MASTER );
-		}
-
 		return $row;
 	}
 
