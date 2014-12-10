@@ -81,19 +81,6 @@ HTML;
 </div>
 HTML;
 
-	$templates['wb-claim'] =
-<<<HTML
-<div class="wb-claimview">
-	<div class="wb-claim wb-claim-$1">
-		<div class="wb-claim-mainsnak" dir="auto">
-			$2 <!-- wb-snak (Main Snak) -->
-		</div>
-		<div class="wb-claim-qualifiers">$3</div>
-	</div>
-	$4 <!-- wikibase-toolbar -->
-</div>
-HTML;
-
 	// TODO: .wb-snakview should not be part of the template; check uses of that class and move them
 	// to .wb-snak
 	$templates['wb-snak'] =
@@ -111,16 +98,18 @@ HTML;
 </div>
 HTML;
 
-	// TODO: $4 is used for the non-JS toolbar to attach to. This parameter should be removed.
-	$templates['wb-statement'] =
+	$templates['wikibase-statementview'] =
 <<<HTML
-<div class="wb-statement wb-statementview wb-claimview">
-	<div class="wb-statement-rank">$1</div>
-	<!-- wb-claimview --> $2
-	<!-- wikibase-toolbar --> $3
-	<div class="wb-statement-references-heading">$4</div>
-	<div class="wb-statement-references">
-		<!-- [0,*] wb-referenceview --> $5
+<div class="wikibase-statementview wikibase-statement-$1">
+	<div class="wikibase-statementview-rankselector">$2</div>
+	<div class="wikibase-statementview-mainsnak-container">
+		<div class="wikibase-statementview-mainsnak" dir="auto"><!-- wb-snak -->$3</div>
+		<div class="wikibase-statementview-qualifiers"><!-- wb-listview -->$4</div>
+	</div>
+	<!-- wikibase-toolbar -->$5
+	<div class="wikibase-statementview-references-container">
+		<div class="wikibase-statementview-references-heading">$6</div>
+		<div class="wikibase-statementview-references"><!-- wb-listview -->$7</div>
 	</div>
 </div>
 HTML;
