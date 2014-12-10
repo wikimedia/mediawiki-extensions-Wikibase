@@ -90,14 +90,11 @@ class ClaimHtmlGenerator {
 				$claim->getReferences()
 			);
 
-			$claimHtml = wfTemplate( 'wb-statement',
+			$claimHtml = wfTemplate( 'wikibase-statementview',
+				$claim->getGuid(),
 				$rankHtml,
-				wfTemplate( 'wb-claim',
-					$claim->getGuid(),
-					$mainSnakHtml,
-					$this->getHtmlForQualifiers( $claim->getQualifiers() ),
-					''
-				),
+				$mainSnakHtml,
+				$this->getHtmlForQualifiers( $claim->getQualifiers() ),
 				$editSectionHtml,
 				$referencesHeading,
 				$referencesHtml
