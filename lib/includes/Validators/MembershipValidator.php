@@ -33,17 +33,17 @@ class MembershipValidator implements ValueValidator {
 	/**
 	 * @param array $allowed The allowed values
 	 * @param string $errorCode Code to use in Errors; should indicate what kind of value would have been allowed.
-	 * @param callable|string|null $normalizer An optional function to normalize the value before
+	 * @param callable|null $normalizer An optional function to normalize the value before
 	 *                        comparing it to the list of allowed values, e.g. 'strtolower'.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $allowed, $errorCode = 'not-allowed', $normalizer = null ) {
+	public function __construct( array $allowed, $errorCode = 'not-allowed', callable $normalizer = null ) {
 		if ( !is_string( $errorCode ) ) {
 			throw new InvalidArgumentException( 'Error code must be a string' );
 		}
 
-		if ( !is_null( $normalizer ) && !is_callable( $normalizer ) ) {
+		if ( !is_callable( $normalizer ) && !is_null( $normalizer ) ) {
 			throw new InvalidArgumentException( 'Normalizer must be callable (or null)' );
 		}
 
@@ -53,7 +53,7 @@ class MembershipValidator implements ValueValidator {
 	}
 
 	/**
-	 * @see ValueValidator::validate()
+	 * @see ValueValidator::validate
 	 *
 	 * @param string $value The value to validate
 	 *
@@ -64,9 +64,14 @@ class MembershipValidator implements ValueValidator {
 			$value = call_user_func( $this->normalizer, $value );
 		}
 
-		if ( !in_array( $value, $this->allowed ) ) {
+		if ( !in_array( $value, $this->allowed, true ) ) {
 			return Result::newError( array(
-				Error::newError( 'not a legal value: ' . $value, null, $this->errorCode, array( $value ) )
+				Error::newError(
+					'Not a legal value: ' . $value,
+					null,
+					$this->errorCode,
+					array( $value )
+				)
 			) );
 		}
 
@@ -74,7 +79,7 @@ class MembershipValidator implements ValueValidator {
 	}
 
 	/**
-	 * @see ValueValidator::setOptions()
+	 * @see ValueValidator::setOptions
 	 *
 	 * @param array $options
 	 */
