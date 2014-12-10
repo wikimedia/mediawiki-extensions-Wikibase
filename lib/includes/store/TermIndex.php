@@ -75,11 +75,12 @@ interface TermIndex extends LabelConflictFinder {
 	 *
 	 * @param EntityId[] $ids
 	 * @param string $entityType
-	 * @param string|null $languageCode language code
+	 * @param string[]|null $languageCodes The desired languages, given as language codes.
+	 *        If null, all languages are returned.
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $ids, $entityType, $languageCode = null );
+	public function getTermsOfEntities( array $ids, $entityType, array $languageCodes = null );
 
 	/**
 	 * Returns if a term with the specified parameters exists.

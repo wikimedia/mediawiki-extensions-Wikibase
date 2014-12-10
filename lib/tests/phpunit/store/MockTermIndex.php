@@ -219,7 +219,7 @@ class MockTermIndex implements TermIndex {
 	/**
 	 * @throws Exception always
 	 */
-	public function getTermsOfEntities( array $ids, $entityType, $language = null ) {
+	public function getTermsOfEntities( array $ids, $entityType, array $languageCodes = null ) {
 		throw new Exception( 'not implemented by mock class ' );
 	}
 

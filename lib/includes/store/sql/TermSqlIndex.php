@@ -435,24 +435,27 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 *
 	 * @param EntityId[] $entityIds
 	 * @param string $entityType
-	 * @param string|null $language Language code
+	 * @param string[]|null $languageCodes Language codes
 	 *
 	 * @throws MWException
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $entityIds, $entityType, $language = null ) {
-		wfProfileIn( __METHOD__ );
-
-		if ( empty( $entityIds ) ) {
-			wfProfileOut( __METHOD__ );
+	public function getTermsOfEntities( array $entityIds, $entityType, array $languageCodes = null ) {
+		if ( $entityIds !== null && empty( $entityIds ) ) {
 			return array();
 		}
+
+		if ( $languageCodes !== null && empty( $languageCodes ) ) {
+			return array();
+		}
+
+		wfProfileIn( __METHOD__ );
 
 		$entityIdentifiers = array(
 			'term_entity_type' => $entityType
 		);
-		if ( $language !== null ) {
-			$entityIdentifiers['term_language'] = $language;
+		if ( $languageCodes !== null ) {
+			$entityIdentifiers['term_language'] = $languageCodes;
 		}
 
 		$numericIds = array();
