@@ -276,13 +276,13 @@ abstract class ApiWikibase extends ApiBase {
 	 * @since 0.5
 	 *
 	 * @param EntityId $entityId : the title of the page to load the revision for
-	 * @param int $revId : the revision to load. If not given, the current revision will be loaded.
+	 * @param int|string $revId : the revision to load. If not given, the current revision will be loaded.
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
 	 * @return EntityRevision
 	 */
-	protected function loadEntityRevision( EntityId $entityId, $revId = 0 ) {
+	protected function loadEntityRevision( EntityId $entityId, $revId = EntityRevisionLookup::LATEST_FROM_MASTER ) {
 		try {
 			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, $revId );
 

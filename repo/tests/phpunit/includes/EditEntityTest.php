@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntity;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
@@ -192,7 +193,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		return array(
 			array( // #0: case I: no base rev given.
 				null,  // input data
-				0,  // base rev
+				EntityRevisionLookup::LATEST_FROM_MASTER,  // base rev
 				false, // expected conflict
 				false, // expected fix
 			),

@@ -334,7 +334,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $res );
 
 		// create an edit and check if the anon user is last to edit --------------------
-		$lastRevId = $lookup->getLatestRevisionId( $itemId );
+		$lastRevId = $lookup->getLatestRevisionId( $itemId, EntityRevisionLookup::LATEST_FROM_MASTER );
 		$item->setLabel( 'en', "Test Anon" );
 		$store->saveEntity( $item, 'Test Anon', $anonUser, EDIT_UPDATE );
 		$res = $store->userWasLastToEdit( $anonUser, $itemId, $lastRevId );
@@ -344,7 +344,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $res );
 
 		// create an edit and check if the sysop user is last to edit --------------------
-		$lastRevId = $lookup->getLatestRevisionId( $itemId );
+		$lastRevId = $lookup->getLatestRevisionId( $itemId, EntityRevisionLookup::LATEST_FROM_MASTER );
 		$item->setLabel( 'en', "Test SysOp" );
 		$store->saveEntity( $item, 'Test SysOp', $user, EDIT_UPDATE );
 		$res = $store->userWasLastToEdit( $user, $itemId, $lastRevId );
@@ -551,7 +551,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$store->deleteEntity( $entityId, 'testing', $user );
 
 		// check that it's gone
-		$this->assertFalse( $lookup->getLatestRevisionId( $entityId ), 'getLatestRevisionId()' );
+		$this->assertFalse( $lookup->getLatestRevisionId( $entityId, EntityRevisionLookup::LATEST_FROM_MASTER ), 'getLatestRevisionId()' );
 		$this->assertNull( $lookup->getEntityRevision( $entityId ), 'getEntityRevision()' );
 
 		// check that the term index got updated (via a DataUpdate).

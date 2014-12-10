@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -70,7 +71,7 @@ class GetClaims extends ApiWikibase {
 			$this->dieException( $e, 'param-invalid' );
 		}
 
-		$entityRevision = $entityId ? $this->loadEntityRevision( $entityId ) : null;
+		$entityRevision = $entityId ? $this->loadEntityRevision( $entityId, EntityRevisionLookup::LATEST_FROM_SLAVE ) : null;
 		$entity = $entityRevision->getEntity();
 
 		if( $params['ungroupedlist'] ) {
