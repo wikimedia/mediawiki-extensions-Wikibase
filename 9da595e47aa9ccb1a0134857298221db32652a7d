@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_b7486f8d",
+        "filename": "lib/includes/Validators/AlternativeValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T21:05:27Z",
+      "side": 1,
+      "message": "Somewhat strange name, sound like this validator is an \"alternative\" to an other one. ;-) Hm, whats the opposite of composite?",
+      "revId": "9da595e47aa9ccb1a0134857298221db32652a7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_173b63e9",
+        "filename": "lib/includes/Validators/AlternativeValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T21:05:27Z",
+      "side": 1,
+      "message": "No need, will fail hard on the validate() call.",
+      "revId": "9da595e47aa9ccb1a0134857298221db32652a7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_12285180",
+        "filename": "lib/includes/WikibaseDataTypeBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T21:05:27Z",
+      "side": 1,
+      "message": "I always wondered why we need the power of a regex for such a trivial string comparison. See my follow up.",
+      "revId": "9da595e47aa9ccb1a0134857298221db32652a7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_7710a75b",
+        "filename": "lib/includes/WikibaseDataTypeBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T21:05:27Z",
+      "side": 1,
+      "message": "Don\u0027t need the composite any more at this point.",
+      "revId": "9da595e47aa9ccb1a0134857298221db32652a7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
