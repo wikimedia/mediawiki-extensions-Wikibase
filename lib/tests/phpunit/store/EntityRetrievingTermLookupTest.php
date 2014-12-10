@@ -29,16 +29,31 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 		$termLookup->getLabel( new ItemId( 'Q120' ), 'en' );
 	}
 
-	public function testGetLabels() {
+	public function getLabelsProvider() {
+		return array(
+			array(
+				array( 'en' => 'New York City', 'es' => 'Nueva York' ),
+				new ItemId( 'Q116' )
+			),
+			array(
+				array( 'es' => 'Nueva York' ),
+				new ItemId( 'Q116' ),
+				array( 'es' )
+			),
+			array(
+				array( 'de' => 'Berlin' ),
+				new ItemId( 'Q117' )
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider getLabelsProvider
+	 */
+	public function testGetLabels( array $expected, ItemId $itemId, array $languageCodes = null ) {
 		$termLookup = $this->getEntityTermLookup();
 
-		$labels = $termLookup->getLabels( new ItemId( 'Q116' ) );
-
-		$expected = array(
-			'en' => 'New York City',
-			'es' => 'Nueva York'
-		);
-
+		$labels = $termLookup->getLabels( $itemId, $languageCodes );
 		$this->assertEquals( $expected, $labels );
 	}
 
@@ -58,16 +73,37 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 		$termLookup->getDescription( new ItemId( 'Q116' ), 'fr' );
 	}
 
-	public function getDescriptions() {
+
+	public function getDescriptionsProvider() {
+		return array(
+			array(
+				array(
+					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
+					'en' => 'largest city in New York and the United States of America',
+				),
+				new ItemId( 'Q116' )
+			),
+			array(
+				array(
+					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
+				),
+				new ItemId( 'Q116' ),
+				array( 'de', 'fr' )
+			),
+			array(
+				array(),
+				new ItemId( 'Q117' )
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider getDescriptionsProvider
+	 */
+	public function testGetDescriptions( array $expected, ItemId $itemId, array $languageCodes = null ) {
 		$termLookup = $this->getEntityTermLookup();
 
-		$descriptions = $termLookup->getDescriptions( new ItemId( 'Q116' ) );
-
-		$expected = array(
-			'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
-			'en' => 'largest city in New York and the United States of America',
-		);
-
+		$descriptions = $termLookup->getDescriptions( $itemId, $languageCodes );
 		$this->assertEquals( $expected, $descriptions );
 	}
 
@@ -86,6 +122,13 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$item->setDescription( 'de', 'Metropole an der Ostküste der Vereinigten Staaten' );
 		$item->setDescription( 'en', 'largest city in New York and the United States of America' );
+
+		$mockRepo->putEntity( $item );
+
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q117' ) );
+
+		$item->setLabel( 'de', 'Berlin' );
 
 		$mockRepo->putEntity( $item );
 

@@ -547,9 +547,23 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
 
-		$terms = $lookup->getTermsOfEntity( $item->getId() );
+		$labelTerms = $lookup->getTermsOfEntity( $item->getId(), array( 'label' ) );
+		$this->assertEquals( 3, count( $labelTerms ), "expected 3 labels" );
 
-		$this->assertEquals( 7, count( $terms ), "expected 5 terms for item" );
+		$englishTerms = $lookup->getTermsOfEntity( $item->getId(), null, array( 'en' ) );
+		$this->assertEquals( 2, count( $englishTerms ), "expected 2 English terms" );
+
+		$germanLabelTerms = $lookup->getTermsOfEntity( $item->getId(), array( 'label' ), array( 'de' ) );
+		$this->assertEquals( 1, count( $germanLabelTerms ), "expected 1 German label" );
+
+		$noTerms = $lookup->getTermsOfEntity( $item->getId(), array( 'label' ), array() );
+		$this->assertEmpty( $noTerms, "expected no labels" );
+
+		$noTerms = $lookup->getTermsOfEntity( $item->getId(), array(), array( 'de' ) );
+		$this->assertEmpty( $noTerms, "expected no labels" );
+
+		$terms = $lookup->getTermsOfEntity( $item->getId() );
+		$this->assertEquals( 7, count( $terms ), "expected 7 terms for item" );
 
 		// make list of strings for easy checking
 		$term_keys = array();

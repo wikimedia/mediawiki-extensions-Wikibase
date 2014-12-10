@@ -43,7 +43,8 @@ class LanguageFallbackLabelLookup implements LabelLookup {
 	 * @return string
 	 */
 	public function getLabel( EntityId $entityId ) {
-		$labels = $this->termLookup->getLabels( $entityId );
+		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
+		$labels = $this->termLookup->getLabels( $entityId, $fetchLanguages );
 		$extractedData = $this->languageFallbackChain->extractPreferredValue( $labels );
 
 		if ( $extractedData && isset( $extractedData['value'] ) ) {
