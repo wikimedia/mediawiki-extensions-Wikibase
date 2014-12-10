@@ -395,11 +395,18 @@
 	"apihelp-wbcreateclaim-description": "创建Wikibase声称。",
 	"apihelp-wbcreateclaim-param-property": "snaks属性的ID",
 	"apihelp-wbcreateclaim-param-snaktype": "snak类型",
+	"apihelp-wbcreateredirect-description": "创建实体重定向。",
 	"apihelp-wbcreateredirect-example-1": "改变Q11为重定向至Q12",
 	"apihelp-wbformatvalue-description": "格式数据值。",
+	"apihelp-wbformatvalue-example-1": "格式化简单字符串值。",
 	"apihelp-wbgetclaims-description": "获取Wikibase声称。",
+	"apihelp-wbmergeitems-description": "合并重复项。",
 	"apihelp-wbmergeitems-param-fromid": "要合并自的ID",
 	"apihelp-wbmergeitems-param-toid": "要合并到的ID",
 	"apihelp-wbparsevalue-description": "使用ValueParser的解析值。",
-	"apihelp-wbparsevalue-param-parser": "要使用的ValueParser的ID"
+	"apihelp-wbparsevalue-param-parser": "要使用的ValueParser的ID",
+	"apihelp-wbremoveclaims-description": "移除Wikibase声称。",
+	"apihelp-wbsetclaim-param-claim": "声称序列化",
+	"apihelp-wbsetlabel-param-language": "标签语言",
+	"apihelp-wbsetlabel-param-value": "标签值"
 }

@@ -382,7 +382,7 @@
 	"wikibase-item-summary-wbmergeitems-from": "Automatic edit summary when merging items. This summary is for the edit made to the item being merged TO.\n\nParameters:\n* $1 - (Unused)\n* $2 - (Unused)\n* $3 - the item id of the item being merged from",
 	"wikibase-item-summary-wbmergeitems-to": "Automatic edit summary when merging items. This summary is for the edit made to the item being merged FROM.\n\nParameters:\n* $1 - (Unused)\n* $2 - (Unused)\n* $3 - the item id of the item being merged to",
 	"wikibase-property-summary-wbcreate-new": "{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}",
-	"wikibase-property-summary-wbcreateclaim-create": "Automatic edit summary generated when creating a new claim.\n{{identical|Created claim}}",
+	"wikibase-property-summary-wbcreateclaim-create": "Automatic edit summary generated when creating a new [http://www.wikidata.org/wiki/Wikidata:Glossary/en#Claims_and_statements claim].\n{{identical|Created claim}}",
 	"wikibase-property-summary-wbcreateclaim": "{{wikibase summary messages|property-claims|Automatic edit summary when a claim is created.}}",
 	"wikibase-property-summary-wbsetclaimvalue": "{{wikibase summary messages|property-claims|Automatic edit summary when the main value of one or more claim is changed.}}\n\n{{related|Wikibase-property-summary-wbsetclaim}}",
 	"wikibase-property-summary-wbsetreference": "{{wikibase summary messages|property|Automatic edit summary generated when creating a reference or setting the value of an existing one.}} {{identical|wikibase-item-summary-wbsetreference}}",

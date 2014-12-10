@@ -85,6 +85,7 @@
 	"wikibase-item-summary-wbsetsitelink-add": "Hät ene Lengk obb_et [$2] derbeijedonn:",
 	"wikibase-item-summary-wbsetsitelink-remove": "Hät ene Lengk obb_et [$2] erußjenumme:",
 	"wikibase-item-summary-wblinktitles-connect": "{{PLURAL:$1|Sigg|Sigge|kein Sigge}} verbonge",
+	"wikibase-property-summary-wbcreateclaim-create": "Behouptong opjeschtalld.",
 	"wikibase-property-summary-wbeditentity-create": "En neu Eijeschaff aanjelaat",
 	"wikibase-property-summary-wbeditentity-update": "En Eijeschaff obb ene neue Schtand jebraat",
 	"wikibase-property-summary-wbeditentity-override": "En Eijeschaff ußjetuusch",
