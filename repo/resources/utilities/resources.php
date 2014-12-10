@@ -46,6 +46,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase',
 				'jquery.tipsy',
+				'jquery.ui.toggler',
 				'util.inherit',
 				'mediawiki.language',
 			),
@@ -57,6 +58,7 @@ return call_user_func( function() {
 				'wikibase-deletedentity-item',
 				'wikibase-deletedentity-property',
 				'wikibase-deletedentity-query',
+				'wikibase-tooltip-error-details',
 				'word-separator',
 				'parentheses',
 			),
