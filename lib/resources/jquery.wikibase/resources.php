@@ -86,7 +86,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
-				'jquery.wikibase.claimview',
+				'jquery.wikibase.statementview',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.statementview',
 				'jquery.wikibase.toolbarcontroller',
@@ -97,23 +97,6 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'wikibase-entity-property',
-			),
-		),
-
-		'jquery.wikibase.claimview' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.wikibase.claimview.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.snakview',
-				'jquery.wikibase.snaklistview',
-				'wikibase.datamodel',
-				'jquery.wikibase.toolbarcontroller',
-			),
-			'messages' => array(
-				'wikibase-addqualifier',
-				'wikibase-claimview-snak-tooltip',
-				'wikibase-claimview-snak-new-tooltip',
 			),
 		),
 
@@ -441,20 +424,27 @@ return call_user_func( function() {
 				'jquery.ui.position',
 				'jquery.ui.toggler',
 				'util.inherit',
-				'jquery.wikibase.claimview',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.referenceview',
+				'jquery.wikibase.snakview',
+				'jquery.wikibase.snaklistview',
 				'jquery.wikibase.toolbarcontroller',
-				'wikibase.datamodel',
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.ReferenceList',
+				'wikibase.datamodel.SnakList',
+				'wikibase.datamodel.Statement',
 				'wikibase.utilities',
 			),
 			'messages' => array(
+				'wikibase-addreference',
+				'wikibase-addqualifier',
+				'wikibase-claimview-snak-tooltip',
+				'wikibase-claimview-snak-new-tooltip',
 				'wikibase-statementview-rank-preferred',
 				'wikibase-statementview-rank-normal',
 				'wikibase-statementview-rank-deprecated',
 				'wikibase-statementview-referencesheading-pendingcountersubject',
 				'wikibase-statementview-referencesheading-pendingcountertooltip',
-				'wikibase-addreference',
 			),
 		),
 
