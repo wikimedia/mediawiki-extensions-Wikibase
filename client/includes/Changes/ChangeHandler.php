@@ -4,6 +4,7 @@ namespace Wikibase\Client\Changes;
 
 use Exception;
 use InvalidArgumentException;
+use IORMRow;
 use MWException;
 use Title;
 use Wikibase\Change;
@@ -77,29 +78,43 @@ class ChangeHandler {
 	 */
 	private $localSiteId;
 
+	/**
+	 * @var bool
+	 */
+	private $injectRecentChanges;
+
+	/**
+	 * @param AffectedPagesFinder $affectedPagesFinder
+	 * @param TitleFactory $titleFactory
+	 * @param PageUpdater $pageUpdater
+	 * @param ChangeListTransformer $changeListTransformer
+	 * @param string $localSiteId
+	 * @param bool $injectRecentChanges
+	 *
+	 * @throws InvalidArgumentException
+	 */
 	public function __construct(
 		AffectedPagesFinder $affectedPagesFinder,
 		TitleFactory $titleFactory,
-		PageUpdater $updater,
+		PageUpdater $pageUpdater,
 		ChangeListTransformer $changeListTransformer,
 		$localSiteId,
-		$injectRC
+		$injectRecentChanges = true
 	) {
-		$this->changeListTransformer = $changeListTransformer;
-		$this->affectedPagesFinder = $affectedPagesFinder;
-		$this->titleFactory = $titleFactory;
-		$this->updater = $updater;
-
 		if ( !is_string( $localSiteId ) ) {
 			throw new InvalidArgumentException( '$localSiteId must be a string' );
 		}
 
-		if ( !is_bool( $injectRC ) ) {
+		if ( !is_bool( $injectRecentChanges ) ) {
 			throw new InvalidArgumentException( '$injectRC must be a bool' );
 		}
 
+		$this->affectedPagesFinder = $affectedPagesFinder;
+		$this->titleFactory = $titleFactory;
+		$this->updater = $pageUpdater;
+		$this->changeListTransformer = $changeListTransformer;
 		$this->localSiteId = $localSiteId;
-		$this->injectRC = (bool)$injectRC;
+		$this->injectRecentChanges = $injectRecentChanges;
 	}
 
 	/**
@@ -140,27 +155,26 @@ class ChangeHandler {
 	 * @param Change $change
 	 *
 	 * @throws MWException
-	 *
 	 * @return bool
 	 */
 	public function handleChange( Change $change ) {
 		wfProfileIn( __METHOD__ );
 
-		$chid = self::getChangeIdForLog( $change );
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$chid"
+		$changeId = $this->getChangeIdForLog( $change );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$changeId"
 			. " (" . $change->getType() . ")" );
 
 		$usagesPerPage = $this->affectedPagesFinder->getAffectedUsagesByPage( $change );
 
 		if ( empty( $usagesPerPage ) ) {
 			// nothing to do
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": No pages to update for change #$chid." );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": No pages to update for change #$changeId." );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": updating " . count( $usagesPerPage )
-			. " page(s) for change #$chid." );
+			. " page(s) for change #$changeId." );
 
 		$actionBuckets = array();
 
@@ -262,7 +276,7 @@ class ChangeHandler {
 			case self::RC_ENTRY_ACTION:
 				$rcAttribs = $this->getRCAttributes( $change );
 
-				if ( $rcAttribs !== false && $this->injectRC ) {
+				if ( $rcAttribs !== false && $this->injectRecentChanges ) {
 					//FIXME: The same change may be reported to several target pages;
 					//       The comment we generate should be adapted to the role that page
 					//       plays in the change, e.g. when a sitelink changes from one page to another,
@@ -307,16 +321,17 @@ class ChangeHandler {
 	 *
 	 * @return string
 	 */
-	private static function getChangeIdForLog( Change $change ) {
-		$fields = $change->getFields(); //@todo: add getFields() to the interface, or provide getters!
+	private function getChangeIdForLog( Change $change ) {
+		if ( $change instanceof IORMRow ) {
+			//@todo: add getFields() to the interface, or provide getters!
+			$fields = $change->getFields();
 
-		if ( isset( $fields['info']['change-ids'] ) ) {
-			$chid = implode( '|', $fields['info']['change-ids'] );
-		} else {
-			$chid = $change->getId();
+			if ( isset( $fields['info']['change-ids'] ) ) {
+				return implode( '|', $fields['info']['change-ids'] );
+			}
 		}
 
-		return $chid;
+		return $change->getId();
 	}
 
 	/**
@@ -339,7 +354,8 @@ class ChangeHandler {
 			return false;
 		}
 
-		$fields = $change->getFields(); //@todo: add getFields() to the interface, or provide getters!
+		//@todo: add getFields() to the interface, or provide getters!
+		$fields = $change->getFields();
 		$fields['entity_type'] = $change->getEntityType();
 
 		if ( $change instanceof ItemChange ) {
@@ -376,20 +392,19 @@ class ChangeHandler {
 	 * @param EntityChange $change the change to get a comment for
 	 *
 	 * @throws MWException
-	 * @return array
+	 * @return array|string
 	 */
 	public function getEditComment( EntityChange $change ) {
-		$commentCreator = new SiteLinkCommentCreator(
-			$this->localSiteId
-		);
-
-		//FIXME: this will only work for instances of ItemChange
-		$siteLinkDiff = $change->getSiteLinkDiff();
+		$siteLinkDiff = $change instanceof ItemChange
+			? $change->getSiteLinkDiff()
+			: null;
 		$action = $change->getAction();
 		$comment = $change->getComment();
 
+		$commentCreator = new SiteLinkCommentCreator( $this->localSiteId );
 		$editComment = $commentCreator->getEditComment( $siteLinkDiff, $action, $comment );
-		if( is_array( $editComment ) && !isset( $editComment['message'] ) ) {
+
+		if ( is_array( $editComment ) && !isset( $editComment['message'] ) ) {
 			throw new MWException( 'getEditComment returned an empty comment' );
 		}
 
