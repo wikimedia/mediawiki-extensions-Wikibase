@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_b76aafaf",
+        "filename": "repo/includes/ContentRetriever.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T19:46:56Z",
+      "side": 0,
+      "message": "Inlining this odd class, yea!",
+      "revId": "f8b18e62a2245b8344ba608025ba09f03c26b2c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

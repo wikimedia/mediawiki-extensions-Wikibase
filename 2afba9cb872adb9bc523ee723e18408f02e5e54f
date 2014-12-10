@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_37477f52",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T19:46:56Z",
+      "side": 1,
+      "message": "I would love to have a comment here (and above) that explains what this bit of data means, where it comes from and why it is stored at this odd place.",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_178cc388",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T19:46:56Z",
+      "side": 1,
+      "message": "This is a re-implementation of existing code, isn\u0027t it? Is there a way to re-use the existing code?",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_97977393",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T19:46:56Z",
+      "side": 1,
+      "message": "A comment should explain where this is coming from.",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_37945f8d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T19:46:56Z",
+      "side": 1,
+      "message": "At least fall back to show the id, empty messages like \u0027Undoing edit to \"\"\u0027 or \u0027Restoring old revision of \"\"\u0027 are not good.",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_77e18728",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T19:46:56Z",
+      "side": 1,
+      "message": "We have two unmerged chains of patches now that touch this file. Dang, I guess it\u0027s my job to rebase I76fe3f3 now. :-(",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_1739239f",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T19:46:56Z",
+      "side": 1,
+      "message": "As before, explain where this comes from.",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_57bfabf6",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-10T19:46:56Z",
+      "side": 1,
+      "message": "As before, at least try to fetch the entity id from the content object to have a proper fallback.",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
