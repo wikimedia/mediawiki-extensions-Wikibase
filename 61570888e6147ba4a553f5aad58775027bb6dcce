@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_810c153f",
+        "filename": "repo/includes/content/DeferredCopyEntityHolder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T14:55:26Z",
+      "side": 1,
+      "message": "entity: ?",
+      "revId": "61570888e6147ba4a553f5aad58775027bb6dcce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
