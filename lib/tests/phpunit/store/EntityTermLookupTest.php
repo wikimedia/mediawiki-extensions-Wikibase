@@ -27,15 +27,40 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 		$termLookup->getLabel( new ItemId( 'Q116' ), 'fa' );
 	}
 
-	public function testGetLabels() {
+	public function provideGetLabels() {
+		$q116 = new ItemId( 'Q116' );
+
+		return array(
+			'all languages' => array(
+				$q116,
+				null,
+				array(
+					'en' => 'New York City',
+					'es' => 'Nueva York'
+				)
+			),
+			'some languages' => array(
+				$q116,
+				array( 'en' ),
+				array(
+					'en' => 'New York City',
+				)
+			),
+			'no languages' => array(
+				$q116,
+				array(),
+				array()
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetLabels
+	 */
+	public function testGetLabels( ItemId $itemId, $languages, array $expected ) {
 		$termLookup = $this->getEntityTermLookup();
 
-		$expected =  array(
-			'en' => 'New York City',
-			'es' => 'Nueva York'
-		);
-
-		$labels = $termLookup->getLabels( new ItemId( 'Q116' ) );
+		$labels = $termLookup->getLabels( $itemId, $languages );
 		$this->assertEquals( $expected, $labels );
 	}
 
@@ -55,25 +80,49 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 		$termLookup->getDescription( new ItemId( 'Q116' ), 'fr' );
 	}
 
-	public function getDescriptions() {
+	public function provideGetDescriptions() {
+		$q116 = new ItemId( 'Q116' );
+
+		return array(
+			'all languages' => array(
+				$q116,
+				null,
+				array(
+					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
+					'en' => 'largest city in New York and the United States of America',
+				)
+			),
+			'some languages' => array(
+				$q116,
+				array( 'de' ),
+				array(
+					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
+				)
+			),
+			'no languages' => array(
+				$q116,
+				array(),
+				array()
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetDescriptions
+	 */
+	public function testGetDescriptions( ItemId $itemId, $languages, array $expected ) {
 		$termLookup = $this->getEntityTermLookup();
 
-		$descriptions = $termLookup->getDescriptions( new ItemId( 'Q116' ) );
-
-		$expected = array(
-			'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
-			'en' => 'largest city in New York and the United States of America',
-		);
-
+		$descriptions = $termLookup->getDescriptions( $itemId, $languages );
 		$this->assertEquals( $expected, $descriptions );
 	}
 
-	private function getEntityTermLookup() {
+	protected function getEntityTermLookup() {
 		$termIndex = $this->getTermIndex();
 		return new EntityTermLookup( $termIndex );
 	}
 
-	private function getTermIndex() {
+	protected function getTermIndex() {
 		$terms = array(
 			new \Wikibase\Term( array(
 				'entityId' => 116,
