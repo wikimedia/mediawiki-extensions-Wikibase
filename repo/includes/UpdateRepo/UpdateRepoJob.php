@@ -128,7 +128,7 @@ abstract class UpdateRepoJob extends Job {
 		}
 
 		try {
-			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $itemId );
+			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $itemId, EntityRevisionLookup::LATEST_FROM_MASTER );
 		} catch ( StorageException $ex ) {
 			wfDebugLog(
 				'UpdateRepo',

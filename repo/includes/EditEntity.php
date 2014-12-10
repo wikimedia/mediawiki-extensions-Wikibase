@@ -268,7 +268,10 @@ class EditEntity {
 		wfProfileIn( __METHOD__ );
 		if ( $this->latestRev === null ) {
 			//NOTE: it's important to remember this, if someone calls clear() on $this->getPage(), this should NOT change!
-			$this->latestRev = $this->entityRevisionLookup->getEntityRevision( $this->getEntityId() );
+			$this->latestRev = $this->entityRevisionLookup->getEntityRevision(
+				$this->getEntityId(),
+				EntityRevisionLookup::LATEST_FROM_MASTER
+			);
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -290,7 +293,10 @@ class EditEntity {
 			if ( $this->latestRev !== null ) {
 				$this->latestRevId = $this->latestRev->getRevisionId();
 			} else {
-				$this->latestRevId = $this->entityRevisionLookup->getLatestRevisionId( $this->getEntityId() );
+				$this->latestRevId = $this->entityRevisionLookup->getLatestRevisionId(
+					$this->getEntityId(),
+					EntityRevisionLookup::LATEST_FROM_MASTER
+				);
 			}
 		}
 
@@ -349,6 +355,10 @@ class EditEntity {
 			} else if ( $baseRevId === $this->getLatestRevisionId() ) {
 				$this->baseRev = $this->getLatestRevision();
 			} else {
+				if ( $baseRevId === 0 ) {
+					$baseRevId = EntityRevisionLookup::LATEST_FROM_MASTER;
+				}
+
 				$entityId = $this->getEntityId();
 				$this->baseRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $baseRevId );
 

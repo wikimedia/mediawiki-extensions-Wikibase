@@ -152,14 +152,16 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @since 0.5
 	 *
 	 * @param EntityId $id
+	 * @param int|string $revisionId
 	 *
+	 * @throws \MessageException
+	 * @throws \UserInputException
 	 * @return EntityRevision
 	 *
-	 * @throws UserInputException
 	 */
-	protected function loadEntity( EntityId $id ) {
+	protected function loadEntity( EntityId $id, $revisionId = EntityRevisionLookup::LATEST_FROM_MASTER ) {
 		try {
-			$entity = $this->entityRevisionLookup->getEntityRevision( $id );
+			$entity = $this->entityRevisionLookup->getEntityRevision( $id, $revisionId );
 
 			if ( $entity === null ) {
 				throw new UserInputException(

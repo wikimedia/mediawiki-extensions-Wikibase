@@ -95,30 +95,35 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * still the latest. Otherwise, any cached revision will be used if $revisionId=0.
 	 *
 	 * @param EntityId $entityId
-	 * @param int      $revisionId The desired revision id, 0 means "current".
+	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	public function getEntityRevision( EntityId $entityId, $revisionId = 0 ) {
+	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
 		wfProfileIn( __METHOD__ );
 		$key = $this->getCacheKey( $entityId );
+
+		if ( $revisionId === 0 ) {
+			$revisionId = self::LATEST_FROM_SLAVE;
+		}
 
 		/** @var EntityRevision $entityRevision */
 		$entityRevision = $this->cache->get( $key );
 
 		if ( $entityRevision !== false ) {
-			if ( $revisionId === 0  && $this->shouldVerifyRevision ) {
-				$revisionId = $this->lookup->getLatestRevisionId( $entityId );
+			if ( !is_int( $revisionId ) && $this->shouldVerifyRevision ) {
+				$latestRevision = $this->lookup->getLatestRevisionId( $entityId, $revisionId );
 
-				if ( $revisionId === false ) {
+				if ( $latestRevision === false ) {
 					// entity no longer exists!
 					$entityRevision = null;
-					$revisionId = 0;
+				} else {
+					$revisionId = $latestRevision;
 				}
 			}
 
-			if ( $revisionId !== 0 && $entityRevision->getRevisionId() !== $revisionId ) {
+			if ( is_int( $revisionId ) && $entityRevision && $entityRevision->getRevisionId() !== $revisionId ) {
 				$entityRevision = false;
 			}
 		}
@@ -135,25 +140,23 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * Fetches the EntityRevision and updates the cache accordingly.
 	 *
 	 * @param EntityId $entityId
-	 * @param int $revisionId
+	 * @param int|string $revisionId
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	private function fetchEntityRevision( EntityId $entityId, $revisionId = 0 ) {
+	private function fetchEntityRevision( EntityId $entityId, $revisionId ) {
 		wfProfileIn( __METHOD__ );
 
 		$key = $this->getCacheKey( $entityId );
 		$entityRevision = $this->lookup->getEntityRevision( $entityId, $revisionId );
 
-		if ( $revisionId === 0 ) {
+		if ( !is_int( $revisionId ) ) {
 			if ( $entityRevision === null ) {
 				$this->cache->delete( $key );
 			} else {
 				$this->cache->set( $key, $entityRevision, $this->cacheTimeout );
 			}
-		} elseif ( $entityRevision ) {
-			$this->cache->add( $key, $entityRevision, $this->cacheTimeout );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -161,19 +164,23 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	}
 
 	/**
-	 * Returns the id of the latest revision of the given entity,
-	 * or false if there is no such entity.
+	 * @see EntityRevisionLookup::getLatestRevisionId
 	 *
 	 * @note: If this lookup is configured to verify revisions, this just delegates
 	 * to the underlying lookup. Otherwise, it may return the ID of a cached
 	 * revision.
 	 *
 	 * @param EntityId $entityId
+	 * @param string $mode
 	 *
 	 * @return int|false
 	 */
-	public function getLatestRevisionId( EntityId $entityId ) {
-		if ( !$this->shouldVerifyRevision ) {
+	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
+
+		// If we do not need to verify the revision, and the revision isn't
+		// needed for an update, we can get the revision from the cached object.
+		// XXX: whether this is actually quicker depends on the cache.
+		if ( ! ( $this->shouldVerifyRevision || $mode === self::LATEST_FROM_MASTER ) ) {
 			$key = $this->getCacheKey( $entityId );
 			/** @var EntityRevision $entityRevision */
 			$entityRevision = $this->cache->get( $key );
@@ -183,7 +190,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 			}
 		}
 
-		return $this->lookup->getLatestRevisionId( $entityId );
+		return $this->lookup->getLatestRevisionId( $entityId, $mode );
 	}
 
 	/**
