@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e9df725_d13d06ba",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-10T22:59:08Z",
+      "side": 1,
+      "message": "should be private",
+      "revId": "b9a0b0fad27009b251788654e4cdc622fd1b7bbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_f13a82bf",
         "filename": "client/includes/hooks/SidebarHookHandlers.php",
         "patchSetId": 1
