@@ -44,6 +44,11 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 				new ItemId( 'Q116' )
 			),
 			array(
+				array( 'es' => 'Nueva York' ),
+				new ItemId( 'Q116' ),
+				array( 'es' )
+			),
+			array(
 				array( 'de' => 'Berlin' ),
 				new ItemId( 'Q117' )
 			)
@@ -53,10 +58,10 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getLabelsProvider
 	 */
-	public function testGetLabels( $expected, EntityId $entityId ) {
+	public function testGetLabels( $expected, EntityId $entityId, $languages = null ) {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$labels = $termLookup->getLabels( $entityId );
+		$labels = $termLookup->getLabels( $entityId, $languages );
 		$this->assertEquals( $expected, $labels );
 	}
 
@@ -100,6 +105,13 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 				new ItemId( 'Q116' )
 			),
 			array(
+				array(
+					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
+				),
+				new ItemId( 'Q116' ),
+				array( 'de', 'fr' )
+			),
+			array(
 				array(),
 				new ItemId( 'Q117' )
 			)
@@ -109,10 +121,10 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getDescriptionsProvider
 	 */
-	public function testGetDescriptions( $expected, EntityId $entityId ) {
+	public function testGetDescriptions( $expected, EntityId $entityId, $languages = null ) {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$descriptions = $termLookup->getDescriptions( $entityId );
+		$descriptions = $termLookup->getDescriptions( $entityId, $languages );
 		$this->assertEquals( $expected, $descriptions );
 	}
 
