@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_6b3688e6",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-10T10:35:08Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this be much simpler?\n$labelTextData \u003d $this-\u003efallbackChain-\u003eextractPreferredValue( $entity-\u003egetLabels() );",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_4b2dcc8a",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-10T10:35:08Z",
+      "side": 1,
+      "message": "ContentRetriever handled getting the right revision for diffs, too. where is that logic now?",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_8b33d4f2",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-10T10:35:08Z",
+      "side": 1,
+      "message": "The code doesn\u0027t view the page, it shows it...",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_6b3d28b8",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-10T10:35:08Z",
+      "side": 1,
+      "message": "We already have the entity object, we can just look up the label. The to get the Entity, use $this-\u003egetArticle()-\u003egetPage()-\u003egetContent()-\u003egetEntity() (well, first check if it\u0027s a redirect, and has the correct type).",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_eb49386b",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-10T10:35:08Z",
+      "side": 1,
+      "message": "Will bail out of $labelText is \"0\".",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_ab533019",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-10T10:35:08Z",
+      "side": 1,
+      "message": "shouldn\u0027t there be a fallback here?",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_8b3af4be",
+        "filename": "repo/tests/phpunit/includes/actions/ViewEntityActionTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-10T10:35:08Z",
+      "side": 1,
+      "message": "do we have a test using the \"diff\" param too?",
+      "revId": "be844321c0d102e9b039cc066b099264223cb1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
