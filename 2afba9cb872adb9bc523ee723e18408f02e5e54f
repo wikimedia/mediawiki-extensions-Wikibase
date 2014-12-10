@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_cd424c13",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T21:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_37477f52",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_178cc388",
         "filename": "repo/includes/EntityParserOutputGenerator.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-10T19:46:56Z",
       "side": 1,
       "message": "This is a re-implementation of existing code, isn\u0027t it? Is there a way to re-use the existing code?",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_6d6e9895",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T21:51:46Z",
+      "side": 1,
+      "message": "i initially reused the LabelLookup, but 1) daniel suggested this 2) we already have the entity but term / label lookup means retrieving the label from somewhere else with extra sql query etc.\n\nit would be nice though to reuse code for this, if possible.",
+      "parentUuid": "2e9df725_178cc388",
       "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_0d07d4ce",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T21:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_97977393",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_37945f8d",
         "filename": "repo/includes/actions/EditEntityAction.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2014-12-10T19:46:56Z",
       "side": 1,
       "message": "At least fall back to show the id, empty messages like \u0027Undoing edit to \"\"\u0027 or \u0027Restoring old revision of \"\"\u0027 are not good.",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_cd100c07",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T21:51:46Z",
+      "side": 1,
+      "message": "agree this is not ideal, but only time it would be null is if it is somehow not in the parser output (not an issue for wikidata) or the entity does not have an id or a label (e.g. it\u0027s a new item and we somehow got here?)\n\nmaybe could fallback to $title-\u003egetPrefixedText (or unprefixed)",
+      "parentUuid": "2e9df725_37945f8d",
       "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_2dff30a9",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T21:51:46Z",
+      "side": 1,
+      "message": "sorry :(",
+      "parentUuid": "2e9df725_77e18728",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_1739239f",
         "filename": "repo/includes/actions/ViewEntityAction.php",
         "patchSetId": 6
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_cd27ac5e",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T21:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_1739239f",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_57bfabf6",
         "filename": "repo/includes/actions/ViewEntityAction.php",
         "patchSetId": 6
@@ -115,6 +223,24 @@
       "writtenOn": "2014-12-10T19:46:56Z",
       "side": 1,
       "message": "As before, at least try to fetch the entity id from the content object to have a proper fallback.",
+      "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_ad22604e",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-10T21:51:46Z",
+      "side": 1,
+      "message": "done at parse time.  this will be null only in strange edge cases (can\u0027t really think of one) or if the property is not available from parser output (won\u0027t be issue for wikidata)",
+      "parentUuid": "2e9df725_57bfabf6",
       "revId": "2afba9cb872adb9bc523ee723e18408f02e5e54f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
