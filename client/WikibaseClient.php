@@ -65,7 +65,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks;
-	global $wgAPIMetaModules, $wgAPIPropModules, $wgSpecialPages, $wgSpecialPageGroups, $wgResourceModules;
+	global $wgAPIMetaModules, $wgAPIPropModules, $wgSpecialPages, $wgResourceModules;
 	global $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
 
 	$wgExtensionCredits['wikibase'][] = array(
@@ -139,9 +139,6 @@ call_user_func( function() {
 
 	// Special page registration
 	$wgSpecialPages['UnconnectedPages']						= 'Wikibase\Client\Specials\SpecialUnconnectedPages';
-
-	// Special page groups
-	$wgSpecialPageGroups['UnconnectedPages']				= 'wikibaseclient';
 
 	// Resource loader modules
 	$wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );

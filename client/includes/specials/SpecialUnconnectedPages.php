@@ -53,6 +53,10 @@ class SpecialUnconnectedPages extends SpecialPage {
 		parent::__construct( 'UnconnectedPages' );
 	}
 
+	public function getGroupName() {
+		return 'wikibaseclient';
+	}
+
 	/**
 	 * @return string
 	 */

@@ -38,6 +38,10 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 		$this->factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
 	}
 
+	public function getGroupName() {
+		return 'wikibaserepo';
+	}
+
 	/**
 	 * @see SpecialPage::getDescription
 	 *
