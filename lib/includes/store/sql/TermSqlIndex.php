@@ -398,7 +398,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 * @see TermIndex::getTermsOfEntities
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string $entityType
+	 * @param string|null $entityType
 	 * @param string[]|null $termTypes
 	 * @param string[]|null $languageCodes Language codes
 	 *
