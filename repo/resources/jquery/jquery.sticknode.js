@@ -92,6 +92,11 @@ $.extend( StickyNode.prototype, {
 	$node: null,
 
 	/**
+	 * @type {jQuery|null}
+	 */
+	_$clone: null,
+
+	/**
 	 * @type {Object}
 	 */
 	_options: null,
@@ -116,6 +121,11 @@ $.extend( StickyNode.prototype, {
 			'.' + PLUGIN_NAME
 		);
 		this.$node.removeData( PLUGIN_NAME );
+
+		if( this._$clone ) {
+			this._$clone.remove();
+			this._$clone = null;
+		}
 	},
 
 	/**
@@ -176,6 +186,12 @@ $.extend( StickyNode.prototype, {
 			width: this.$node.css( 'width' )
 		};
 
+		// Cannot fix the clone instead of the original node since the clone does not feature event
+		// bindings.
+		this._$clone = this.$node.clone()
+			.css( 'visibility', 'hidden' )
+			.insertBefore( this.$node );
+
 		this.$node
 		.css( 'left', this._initialAttributes.offset.left + 'px' )
 		.css( 'top', this.$node.outerHeight() - this.$node.outerHeight( true ) )
@@ -184,6 +200,15 @@ $.extend( StickyNode.prototype, {
 	},
 
 	_unfix: function() {
+		if( !this.isFixed() ) {
+			return;
+		}
+
+		if( this._$clone ) {
+			this._$clone.remove();
+			this._$clone = null;
+		}
+
 		this.$node
 		.css( 'left', this._initialAttributes.left )
 		.css( 'top', this._initialAttributes.top )
@@ -210,10 +235,7 @@ $.extend( StickyNode.prototype, {
 	 * @return {boolean}
 	 */
 	update: function( scrollTop, force ) {
-		var changedState = false,
-			$document = $( document ),
-			initialDocumentHeight = $document.height(),
-			newDocumentHeight;
+		var changedState = false;
 
 		if( force && this.isFixed() ) {
 			this._unfix();
@@ -225,14 +247,6 @@ $.extend( StickyNode.prototype, {
 			&& !this._isScrolledAfterContainer()
 		) {
 			this._fix();
-
-			newDocumentHeight = $document.height();
-			if( newDocumentHeight < initialDocumentHeight ) {
-				$window.scrollTop( scrollTop - ( initialDocumentHeight - newDocumentHeight ) );
-				initialDocumentHeight = newDocumentHeight;
-				this._changesDocumentHeight = true;
-			}
-
 			changedState = true;
 		}
 
@@ -241,13 +255,6 @@ $.extend( StickyNode.prototype, {
 			|| this._clipsContainer()
 		) {
 			this._unfix();
-
-			newDocumentHeight = $document.height();
-			if( newDocumentHeight > initialDocumentHeight ) {
-				$window.scrollTop( scrollTop + ( newDocumentHeight - initialDocumentHeight ) );
-				this._changesDocumentHeight = true;
-			}
-
 			changedState = !changedState;
 		}
 
