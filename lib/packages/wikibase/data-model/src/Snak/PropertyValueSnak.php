@@ -64,12 +64,8 @@ class PropertyValueSnak extends SnakObject {
 	 * @param string $serialized
 	 */
 	public function unserialize( $serialized ) {
-		list( $propertyId, $dataValue ) = unserialize( $serialized );
-
-		$this->__construct(
-			PropertyId::newFromNumber( $propertyId ),
-			$dataValue
-		);
+		list( $numericId, $dataValue ) = unserialize( $serialized );
+		$this->__construct( $numericId, $dataValue );
 	}
 
 	/**
