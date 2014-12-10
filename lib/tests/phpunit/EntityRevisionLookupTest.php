@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\UnresolvedRedirectException;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-abstract class EntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
+abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 
 	/**
 	 * @return EntityRevision[]
