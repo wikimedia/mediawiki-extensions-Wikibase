@@ -114,7 +114,7 @@ class PageTerms extends ApiQueryBase {
 		foreach ( $entityIdGroups as $type => $entityIds ) {
 			$terms = array_merge(
 				$terms,
-				$this->termIndex->getTermsOfEntities( $entityIds, $type, $languageCode )
+				$this->termIndex->getTermsOfEntities( $entityIds, $type, array( $languageCode ) )
 			);
 		}
 

@@ -220,8 +220,8 @@ class SearchEntities extends ApiBase {
 		}
 
 		// Find all the remaining terms for the given entities
-		$terms = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->getTermsOfEntities( $ids, $entityType,
-			$language );
+		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$terms = $termIndex->getTermsOfEntities( $ids, $entityType, array( $language ) );
 		// TODO: This needs to be rethought when a different search engine is used
 		$aliasPattern = '/^' . preg_quote( $search, '/' ) . '/i';
 

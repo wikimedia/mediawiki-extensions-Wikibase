@@ -66,14 +66,16 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 		);
 
 		$this->assertEquals( $expected, $descriptions );
+
+		$descriptions = $termLookup->getDescriptions( new ItemId( 'Q116' ) );
 	}
 
-	private function getEntityTermLookup() {
+	protected function getEntityTermLookup() {
 		$termIndex = $this->getTermIndex();
 		return new EntityTermLookup( $termIndex );
 	}
 
-	private function getTermIndex() {
+	protected function getTermIndex() {
 		$terms = array(
 			new \Wikibase\Term( array(
 				'entityId' => 116,
