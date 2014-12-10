@@ -112,12 +112,12 @@ class MockRepository implements
 	 * @see EntityRevisionLookup::getEntityRevision
 	 *
 	 * @param EntityID $entityId
-	 * @param int $revisionId The desired revision id, 0 means "current".
+	 * @param int|string $revisionId The desired revision id, or FOR_DISPLAY or FOR_UPDATE.
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	public function getEntityRevision( EntityId $entityId, $revisionId = 0 ) {
+	public function getEntityRevision( EntityId $entityId, $revisionId = self::FOR_DISPLAY ) {
 		$key = $entityId->getSerialization();
 
 		if ( isset( $this->redirects[$key] ) ) {
@@ -128,15 +128,17 @@ class MockRepository implements
 			return null;
 		}
 
-		if ( $revisionId === false ) { // default changed from false to 0
-			wfWarn( 'getEntityRevision() called with $revisionId = false, use 0 instead.' );
-			$revisionId = 0;
+		// default changed from false to 0 and then to FOR_DISPLAY
+		if ( $revisionId === false || $revisionId === 0 ) {
+			wfWarn( 'getEntityRevision() called with $revisionId = false or 0, ' .
+				'use EntityRevisionLookup::FOR_DISPLAY or EntityRevisionLookup::FOR_UPDATE instead.' );
+			$revisionId = self::FOR_DISPLAY;
 		}
 
 		/** @var EntityRevision[] $revisions */
 		$revisions = $this->entities[$key];
 
-		if ( $revisionId === 0 ) { // note: be robust and accept false too.
+		if ( !is_int( $revisionId ) ) {
 			$revisionIds = array_keys( $revisions );
 			$revisionId = end( $revisionIds );
 		} else if ( !isset( $revisions[$revisionId] ) ) {
@@ -574,13 +576,14 @@ class MockRepository implements
 	}
 
 	/**
-	 * Returns the id of the latest revision of the given entity, or false if there is no such entity.
+	 * @see EntityRevisionLookup::getLatestRevisionId
 	 *
 	 * @param EntityID $entityId
+	 * @param string $mode
 	 *
 	 * @return int|false
 	 */
-	public function getLatestRevisionId( EntityId $entityId ) {
+	public function getLatestRevisionId( EntityId $entityId, $mode = self::FOR_DISPLAY ) {
 		$revision = $this->getEntityRevision( $entityId );
 
 		return $revision === null ? false : $revision->getRevisionId();

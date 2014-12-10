@@ -164,7 +164,7 @@ class ItemMergeInteractor {
 
 	private function loadEntity( EntityId $entityId ) {
 		try {
-			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId );
+			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, EntityRevisionLookup::FOR_UPDATE );
 
 			if ( !$revision ) {
 				throw new ItemMergeException(
