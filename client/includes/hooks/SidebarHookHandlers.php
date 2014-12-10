@@ -50,6 +50,22 @@ class SidebarHookHandlers {
 	 */
 	private $otherProjectsLinksDefault;
 
+	/**
+	 * @var SidebarHookHandlers
+	 */
+	private static $instance = null;
+
+	/**
+	 * @return SidebarHookHandlers
+	 */
+	private static function getInstance() {
+		if ( self::$instance === null ) {
+			self::$instance = self::newFromGlobalState();
+		}
+
+		return self::$instance;
+	}
+
 	public static function newFromGlobalState() {
 		global $wgLang;
 		StubUserLang::unstub( $wgLang );
@@ -86,7 +102,7 @@ class SidebarHookHandlers {
 	 * @return bool
 	 */
 	public static function onOutputPageParserOutput( OutputPage &$out, ParserOutput $parserOutput ) {
-		$handler = self::newFromGlobalState();
+		$handler = self::getInstance();
 		return $handler->doOutputPageParserOutput( $out, $parserOutput );
 	}
 
@@ -101,7 +117,7 @@ class SidebarHookHandlers {
 	 * @return bool
 	 */
 	public static function onSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title, OutputPage $output = null ) {
-		$handler = self::newFromGlobalState();
+		$handler = self::getInstance();
 		return $handler->doSkinTemplateGetLanguageLink( $languageLink, $languageLinkTitle, $title, $output );
 	}
 
@@ -115,7 +131,7 @@ class SidebarHookHandlers {
 	 * @return bool
 	 */
 	public static function onSidebarBeforeOutput( Skin $skin, array &$sidebar ) {
-		$handler = self::newFromGlobalState();
+		$handler = self::getInstance();
 		return $handler->doSidebarBeforeOutput( $skin, $sidebar );
 	}
 
