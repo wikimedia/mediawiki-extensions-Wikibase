@@ -26,7 +26,7 @@ class MembershipValidator implements ValueValidator {
 	private $errorCode;
 
 	/**
-	 * @var callable
+	 * @var callable|string|null
 	 */
 	private $normalizer;
 
@@ -43,7 +43,7 @@ class MembershipValidator implements ValueValidator {
 			throw new InvalidArgumentException( 'Error code must be a string' );
 		}
 
-		if ( !is_null( $normalizer ) && !is_callable( $normalizer ) ) {
+		if ( !is_callable( $normalizer ) && $normalizer !== null ) {
 			throw new InvalidArgumentException( 'Normalizer must be callable (or null)' );
 		}
 
@@ -53,7 +53,7 @@ class MembershipValidator implements ValueValidator {
 	}
 
 	/**
-	 * @see ValueValidator::validate()
+	 * @see ValueValidator::validate
 	 *
 	 * @param string $value The value to validate
 	 *
@@ -64,9 +64,14 @@ class MembershipValidator implements ValueValidator {
 			$value = call_user_func( $this->normalizer, $value );
 		}
 
-		if ( !in_array( $value, $this->allowed ) ) {
+		if ( !in_array( $value, $this->allowed, true ) ) {
 			return Result::newError( array(
-				Error::newError( 'not a legal value: ' . $value, null, $this->errorCode, array( $value ) )
+				Error::newError(
+					'Not a legal value: ' . $value,
+					null,
+					$this->errorCode,
+					array( $value )
+				)
 			) );
 		}
 
@@ -74,7 +79,7 @@ class MembershipValidator implements ValueValidator {
 	}
 
 	/**
-	 * @see ValueValidator::setOptions()
+	 * @see ValueValidator::setOptions
 	 *
 	 * @param array $options
 	 */
