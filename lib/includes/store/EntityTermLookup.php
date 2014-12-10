@@ -12,6 +12,7 @@ use Wikibase\TermIndex;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class EntityTermLookup implements TermLookup {
 
@@ -33,22 +34,29 @@ class EntityTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
+	 * @throws OutOfBoundsException if no such label was found
 	 * @return string
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
-		$labels = $this->getLabels( $entityId );
-		return $this->filterByLanguage( $labels, $languageCode );
+		$labels = $this->getLabels( $entityId, array( $languageCode ) );
+
+		if ( !isset( $labels[$languageCode] ) ) {
+			throw new OutOfBoundsException( 'No label found for language ' . $languageCode );
+		}
+
+		return $labels[$languageCode];
 	}
 
 	/**
 	 * @see TermLookup::getLabels
 	 *
 	 * @param EntityId $entityId
+	 * @param string[]|null $languages
 	 *
 	 * @return string[]
 	 */
-	public function getLabels( EntityId $entityId ) {
-		return $this->getTermsOfType( $entityId, 'label' );
+	public function getLabels( EntityId $entityId, array $languages = null ) {
+		return $this->getTermsOfType( $entityId, 'label', $languages );
 	}
 
 	/**
@@ -57,66 +65,56 @@ class EntityTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
+	 * @throws OutOfBoundsException if no such label was found
 	 * @return string
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		$descriptions = $this->getTermsOfType( $entityId, 'description' );
-		return $this->filterByLanguage( $descriptions, $languageCode );
+		$descriptions = $this->getDescriptions( $entityId, array( $languageCode ) );
+
+		if ( !isset( $descriptions[$languageCode] ) ) {
+			throw new OutOfBoundsException( 'No description found for language ' . $languageCode );
+		}
+
+		return $descriptions[$languageCode];
 	}
 
 	/**
 	 * @see TermLookup::getDescriptions
 	 *
 	 * @param EntityId $entityId
+	 * @param string[]|null $languages
 	 *
 	 * @return string[]
 	 */
-	public function getDescriptions( EntityId $entityId ) {
-		return $this->getTermsOfType( $entityId, 'description' );
+	public function getDescriptions( EntityId $entityId, array $languages = null ) {
+		return $this->getTermsOfType( $entityId, 'description', $languages );
 	}
 
 	/**
 	 * @param EntityId $entityId
 	 * @param string $termType
+	 * @param string[]|null $languages
 	 *
 	 * @throws OutOfBoundsException if entity does not exist.
 	 * @return string[]
 	 */
-	private function getTermsOfType( EntityId $entityId, $termType ) {
-		$wikibaseTerms = $this->termIndex->getTermsOfEntity( $entityId );
+	private function getTermsOfType( EntityId $entityId, $termType, array $languages = null ) {
+		$wikibaseTerms = $this->termIndex->getTermsOfEntity( $entityId, array( $termType ), $languages );
 
-		return $this->convertTermsToTermTypeArray( $wikibaseTerms, $termType );
-	}
-
-	/**
-	 * @param string[] $terms
-	 * @param string $languageCode
-	 *
-	 * @throws OutOfBoundsException
-	 * @return string
-	 */
-	private function filterByLanguage( array $terms, $languageCode ) {
-		if ( array_key_exists( $languageCode, $terms ) ) {
-			return $terms[$languageCode];
-		}
-
-		throw new OutOfBoundsException( 'Term not found for ' . $languageCode );
+		return $this->convertTermsToMap( $wikibaseTerms );
 	}
 
 	/**
 	 * @param Term[] $wikibaseTerms
-	 * @param string $termType
 	 *
-	 * @return string[]
+	 * @return string[] strings keyed by language code
 	 */
-	private function convertTermsToTermTypeArray( array $wikibaseTerms, $termType ) {
+	private function convertTermsToMap( array $wikibaseTerms ) {
 		$terms = array();
 
 		foreach( $wikibaseTerms as $wikibaseTerm ) {
-			if ( $wikibaseTerm->getType() === $termType ) {
-				$languageCode = $wikibaseTerm->getLanguage();
-				$terms[$languageCode] = $wikibaseTerm->getText();
-			}
+			$languageCode = $wikibaseTerm->getLanguage();
+			$terms[$languageCode] = $wikibaseTerm->getText();
 		}
 
 		return $terms;

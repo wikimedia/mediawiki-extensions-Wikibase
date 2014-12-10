@@ -33,13 +33,20 @@ interface TermLookup {
 	/**
 	 * Gets all labels of an Entity with the specified EntityId.
 	 *
+	 * If $languages is given, the result will contain the entries for the
+	 * requested languages, if they exist.
+	 *
+	 * @note The result may also contain labels for other languages not present
+	 *       in $languages.
+	 *
 	 * @param EntityId $entityId
+	 * @param string[]|null $languageCodes The list of languages to fetch (or null for all)
 	 *
 	 * @throws OutOfBoundsException if the entity was not found (not guaranteed).
 	 * @return string[] labels, keyed by language.
 	 *         An empty array may or may not indicate that the entity does not exist.
 	 */
-	public function getLabels( EntityId $entityId );
+	public function getLabels( EntityId $entityId, array $languageCodes = null );
 
 	/**
 	 * Gets the description of an Entity with the specified EntityId and language code.
@@ -55,12 +62,19 @@ interface TermLookup {
 	/**
 	 * Gets all descriptions of an Entity with the specified EntityId.
 	 *
+	 * If $languages is given, the result will contain the entries for the
+	 * requested languages, if they exist.
+	 *
+	 * @note The result may also contain labels for other languages not present
+	 *       in $languages.
+	 *
 	 * @param EntityId $entityId
+	 * @param string[]|null $languageCodes The list of languages to fetch (or null for all)
 	 *
 	 * @throws OutOfBoundsException if the entity was not found (not guaranteed).
 	 * @return string[] descriptions, keyed by language.
 	 *         An empty array may or may not indicate that the entity does not exist.
 	 */
-	public function getDescriptions( EntityId $entityId );
+	public function getDescriptions( EntityId $entityId, array $languageCodes = null );
 
 }

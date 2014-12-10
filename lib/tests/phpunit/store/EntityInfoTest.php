@@ -154,6 +154,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( array( 'en' => 'London' ), $info->getLabels( new ItemId( 'Q11' ) ) );
 		$this->assertEquals( array( 'en' => 'Berlin' ), $info->getLabels( new ItemId( 'Q33' ) ) );
+		$this->assertEquals( array(), $info->getLabels( new ItemId( 'Q33' ), array( 'de' ) ) );
 		$this->assertEquals( array(), $info->getLabels( new ItemId( 'Q66' ) ) );
 	}
 
@@ -177,6 +178,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( array( 'en' => 'London' ), $info->getDescriptions( new ItemId( 'Q11' ) ) );
 		$this->assertEquals( array( 'en' => 'Berlin' ), $info->getDescriptions( new ItemId( 'Q33' ) ) );
+		$this->assertEquals( array(), $info->getDescriptions( new ItemId( 'Q33' ), array( 'de' ) ) );
 		$this->assertEquals( array(), $info->getDescriptions( new ItemId( 'Q66' ) ) );
 	}
 
