@@ -59,22 +59,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.claimview.tests' => $moduleBase + array(
-			'scripts' => array(
-				'jquery.wikibase.claimview.tests.js',
-			),
-			'dependencies' => array(
-				'dataValues.values',
-				'jquery.valueview',
-				'jquery.wikibase.claimview',
-				'mediawiki.Title',
-				'valueFormatters',
-				'wikibase.datamodel',
-				'wikibase.store.FetchedContent',
-				'wikibase.ValueViewBuilder',
-			),
-		),
-
 		'jquery.wikibase.descriptionview.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.wikibase.descriptionview.tests.js',
@@ -275,9 +259,15 @@ return call_user_func( function() {
 				'jquery.wikibase.statementview.tests.js',
 			),
 			'dependencies' => array(
+				'dataValues.values',
 				'jquery.wikibase.statementview',
 				'test.sinonjs',
-				'wikibase.datamodel',
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.PropertyValueSnak',
+				'wikibase.datamodel.Reference',
+				'wikibase.datamodel.ReferenceList',
+				'wikibase.datamodel.Statement',
 			),
 		),
 
