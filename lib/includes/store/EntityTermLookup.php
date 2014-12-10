@@ -14,7 +14,7 @@ use Wikibase\TermIndex;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class EntityTermLookup implements TermLookup {
+class EntityTermLookup implements TermLookup, TermBuffer {
 
 	/**
 	 * @var TermIndex
