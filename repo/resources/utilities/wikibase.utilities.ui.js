@@ -183,9 +183,10 @@
 	 * Generates standardized output for errors.
 	 *
 	 * @param {Error} error
+	 * @param {Object} [animationOptions={ duration: 'fast' }] jQuery animation options.
 	 * @return {jQuery}
 	 */
-	wb.utilities.ui.buildErrorOutput = function( error ) {
+	wb.utilities.ui.buildErrorOutput = function( error, animationOptions ) {
 		var $message = $( '<div/>' ).addClass( 'wb-error' );
 
 		$message.append( $( '<div/>' ).addClass( 'wb-error-message' ).text( error.message ) );
@@ -201,7 +202,10 @@
 			var $toggler = $( '<a/>' )
 				.addClass( 'wb-error-details-link' )
 				.text( mw.msg( 'wikibase-tooltip-error-details' ) )
-				.toggler( { $subject: $detailedMessage, duration: 'fast' } );
+				.toggler( $.extend( {
+					$subject: $detailedMessage,
+					duration: 'fast'
+				}, animationOptions || {} ) );
 
 			$message
 			.append( $toggler )

@@ -12,6 +12,11 @@ var $window = $( window ),
 /**
  * jQuery sticknode plugin.
  * Sticks a node with "position: fixed" when vertically scrolling it out of the viewport.
+ * Be aware that plugin does not handle dynamic height changes (e.g. if the node contains
+ * interactive elements that wipe out additional content). The code applying the widget needs to be
+ * aware of dynamic height changes. Consequently, whenever the height of the node the plugin is
+ * initialized on changes, a call to the refresh() function should be made to avoid undesired
+ * clipping.
  *
  * @param {Object} [options]
  *        - {jQuery} $container
@@ -259,6 +264,17 @@ $.extend( StickyNode.prototype, {
 		}
 
 		return changedState;
+	},
+
+	/**
+	 * Re-fixes the node if it is fixed, properly updating scroll position. Should be called
+	 * whenever the node's content has been updated.
+	 */
+	refresh: function() {
+		if( this.isFixed() ) {
+			this._unfix();
+			this._fix();
+		}
 	}
 } );
 
