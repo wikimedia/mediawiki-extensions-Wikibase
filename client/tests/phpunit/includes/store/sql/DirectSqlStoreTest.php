@@ -3,8 +3,6 @@
 namespace Wikibase\Client\Tests\Store\Sql;
 
 use Language;
-use MediaWikiSite;
-use Site;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DirectSqlStore;
@@ -23,15 +21,12 @@ use Wikibase\DirectSqlStore;
 class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 	protected function newStore() {
-		$site = new Site( MediaWikiSite::TYPE_MEDIAWIKI );
-		$site->setGlobalId( 'dummy' );
 		$lang = Language::factory( 'en' );
 		$idParser = new BasicEntityIdParser();
 
 		$contentCodec = WikibaseClient::getDefaultInstance()->getEntityContentDataCodec();
 
-		$store = new DirectSqlStore( $contentCodec, $lang, $idParser, 'DirectStoreSqlTestDummyRepoId');
-		$store->setSite( $site ); //TODO: inject via constructor once that is possible
+		$store = new DirectSqlStore( $contentCodec, $lang, $idParser, 'DirectStoreSqlTestDummyRepoId' );
 
 		return $store;
 	}

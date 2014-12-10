@@ -121,6 +121,11 @@ class DirectSqlStore implements ClientStore {
 	private $contentCodec;
 
 	/**
+	 * @var string
+	 */
+	private $siteId;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param Language $wikiLanguage
 	 * @param EntityIdParser $entityIdParser
@@ -136,10 +141,12 @@ class DirectSqlStore implements ClientStore {
 		$this->language = $wikiLanguage;
 		$this->contentCodec = $contentCodec;
 
+		// @TODO: Inject
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$cacheType = $settings->getSetting( 'sharedCacheType' );
+		$siteId = $settings->getSetting( 'siteGlobalID' );
 
 		$this->changesDatabase = $settings->getSetting( 'changesDatabase' );
 		$this->useLegacyUsageIndex = $settings->getSetting( 'useLegacyUsageIndex' );
@@ -148,6 +155,7 @@ class DirectSqlStore implements ClientStore {
 		$this->cacheDuration = $cacheDuration;
 		$this->cacheType = $cacheType;
 		$this->entityIdParser = $entityIdParser;
+		$this->siteId = $siteId;
 	}
 
 	/**
@@ -184,7 +192,7 @@ class DirectSqlStore implements ClientStore {
 		if ( !$this->usageLookup ) {
 			if ( $this->useLegacyUsageIndex ) {
 				$this->usageLookup = new SiteLinkUsageLookup(
-					$this->getSite()->getGlobalId(),
+					$this->siteId,
 					$this->getSiteLinkTable(),
 					new TitleFactory()
 				);
@@ -216,32 +224,6 @@ class DirectSqlStore implements ClientStore {
 		}
 
 		return $this->usageTracker;
-	}
-
-	/**
-	 * Sets the site object representing the local wiki.
-	 * For testing only!
-	 *
-	 * @todo: remove this once the Site can be injected via the constructor!
-	 *
-	 * @param Site $site
-	 */
-	public function setSite( Site $site ) {
-		$this->site = $site;
-	}
-
-	/**
-	 * Returns the site object representing the local wiki.
-	 *
-	 * @return Site
-	 */
-	private function getSite() {
-		// @FIXME: inject the site
-		if ( $this->site === null ) {
-			$this->site = WikibaseClient::getDefaultInstance()->getSite();
-		}
-
-		return $this->site;
 	}
 
 	/**
