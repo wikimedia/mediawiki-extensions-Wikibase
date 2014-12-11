@@ -141,10 +141,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$parser = $this->newParser( $title, $usage === null ? 0 : 1 );
 		$handler = $this->newDataUpdateHookHandlers();
 
-		$text = '';
-		$stripState = new StripState( 'x' );
-
-		$handler->doParserAfterParse( $parser, $text, $stripState );
+		$handler->doParserAfterParse( $parser );
 
 		// Assertions are done by the ParserOutput mock
 		$dataUpdates = $parser->getOutput()->getSecondaryDataUpdates( $title );
