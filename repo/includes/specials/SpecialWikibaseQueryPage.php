@@ -60,15 +60,14 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * @see SpecialWikibasePage::execute
 	 *
 	 * @since 0.5
+	 *
+	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
-		if( !parent::execute( $subPage ) ) {
-			return false;
-		}
+		parent::execute( $subPage );
 
 		$output = $this->getOutput();
 		$output->setSquidMaxage( static::CACHE_TTL_IN_SECONDS );
-		return true;
 	}
 
 	/**
