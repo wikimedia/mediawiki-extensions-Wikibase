@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_a05b4225",
+        "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-11T15:23:15Z",
+      "side": 1,
+      "message": "looks okay though seems unrelated.",
+      "revId": "3eb848b3a298298c03187be27e16222705821ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_855c1850",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-11T15:23:15Z",
+      "side": 1,
+      "message": "maybe fallback to ID (instead of null) if the Entity does not have fingerprint?",
+      "revId": "3eb848b3a298298c03187be27e16222705821ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
