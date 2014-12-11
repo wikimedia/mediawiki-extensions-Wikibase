@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_65a54c00",
+        "filename": "repo/includes/specials/SpecialWikibasePage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-11T12:38:11Z",
+      "side": 1,
+      "message": "would be nice to have some documentation for the method, although looks like thiemo does this in a follow up patch.",
+      "revId": "be1e3a4c314af12f248bcfbde53820afd92559e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
