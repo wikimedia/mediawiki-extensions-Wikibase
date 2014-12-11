@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_7a90b946",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-12-11T16:07:43Z",
+      "side": 1,
+      "message": "Small r, please. And repository.",
+      "revId": "f4448bf3efd0fd3d728cdf6e333b474271341856",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_5ad7f528",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-12-11T16:07:43Z",
+      "side": 1,
+      "message": "Small c, please.",
+      "revId": "f4448bf3efd0fd3d728cdf6e333b474271341856",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
