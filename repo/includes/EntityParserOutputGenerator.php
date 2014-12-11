@@ -3,13 +3,14 @@
 namespace Wikibase;
 
 use ParserOutput;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\StatementListProvider;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
@@ -256,21 +257,26 @@ class EntityParserOutputGenerator {
 
 	/**
 	 * @param ParserOutput $parserOutput
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 */
-	private function addTitleTextToParserOutput( ParserOutput $parserOutput, Entity $entity ) {
-		$preferred = $this->languageFallbackChain->extractPreferredValue( $entity->getLabels() );
+	private function addTitleTextToParserOutput( ParserOutput $parserOutput, EntityDocument $entity ) {
+		$titleText = null;
 
-		if ( is_array( $preferred ) ) {
-			$titleText = $preferred['value'];
-		} else {
+		if ( $entity instanceof FingerprintProvider ) {
+			$labels = $entity->getFingerprint()->getLabels()->toTextArray();
+			$preferred = $this->languageFallbackChain->extractPreferredValue( $labels );
+
+			if ( is_array( $preferred ) ) {
+				$titleText = $preferred['value'];
+			}
+		}
+
+		if ( !is_string( $titleText ) ) {
 			$entityId = $entity->getId();
 
-			if ( !$entityId ) {
-				return;
+			if ( $entityId !== null ) {
+				$titleText = $entityId->getSerialization();
 			}
-
-			$titleText = $entityId->getSerialization();
 		}
 
 		$parserOutput->setExtensionData( 'wikibase-titletext', $titleText );
