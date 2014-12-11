@@ -90,7 +90,7 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {string} statementGuid
 	 * @param {wikibase.datamodel.Reference} reference
-	 * @param {number} index
+	 * @param {number} [index]
 	 * @return {jQuery.Promise}
 	 *         Resolved parameters:
 	 *         - {wikibase.datamodel.Reference} The saved reference
