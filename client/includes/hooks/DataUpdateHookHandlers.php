@@ -57,14 +57,18 @@ class DataUpdateHookHandlers {
 	/**
 	 * Static handler for the ParserAfterParse hook.
 	 *
-	 * @param Parser &$parser
-	 * @param string &$text
-	 * @param StripState $stripState
+	 * @param Parser|null &$parser
+	 * @param string|null &$text
+	 * @param StripState|null $stripState
 	 *
 	 * @return bool
 	 */
-	public static function onParserAfterParse( Parser &$parser, &$text, StripState $stripState ) {
-		if ( $parser->getOptions()->getInterfaceMessage() ) {
+	public static function onParserAfterParse(
+		Parser &$parser = null,
+		&$text = null,
+		StripState $stripState = null
+	) {
+		if ( $parser === null || $parser->getOptions()->getInterfaceMessage() ) {
 			return true;
 		}
 
@@ -91,17 +95,11 @@ class DataUpdateHookHandlers {
 	 *
 	 * @return bool
 	 */
-	public function doParserAfterParse( Parser &$parser, &$text, StripState $stripState ) {
+	public function doParserAfterParse( Parser &$parser ) {
 		$title = $parser->getTitle();
 
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			// shorten out
-			return true;
-		}
-
-		// Only run this once, for the article content and not interface stuff
-		// FIXME: this also runs for messages in EditPage::showEditTools! Ugh!
-		if ( $parser->getOptions()->getInterfaceMessage() ) {
 			return true;
 		}
 
