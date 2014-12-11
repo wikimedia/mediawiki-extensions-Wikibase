@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_ba15f142",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-11T15:29:46Z",
+      "side": 1,
+      "message": "this one needs to stay in the client, since repo and client are really separate extensions (despite having them in the same git repo)",
+      "revId": "c9b5eb5526c1231dcc3b3f1b67c6c8cfa88a76fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_5a2295a3",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-11T15:29:46Z",
+      "side": 1,
+      "message": "please keep this one in lib/sql",
+      "revId": "c9b5eb5526c1231dcc3b3f1b67c6c8cfa88a76fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
