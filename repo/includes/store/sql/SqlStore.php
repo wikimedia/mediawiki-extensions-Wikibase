@@ -247,7 +247,7 @@ class SqlStore implements Store {
 
 		if ( !$updater->tableExists( $table ) ) {
 			$type = $updater->getDB()->getType();
-			$fileBase = __DIR__ . '/../../../../lib/includes/store/sql/' . $table;
+			$fileBase = __DIR__ . '/../../../sql/' . $table;
 
 			$file = $fileBase . '.' . $type . '.sql';
 			if ( !file_exists( $file ) ) {
