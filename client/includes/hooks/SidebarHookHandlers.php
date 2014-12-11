@@ -147,25 +147,21 @@ class SidebarHookHandlers {
 		}
 
 		$noExternalLangLinks = NoLangLinkHandler::getNoExternalLangLinks( $parserOutput );
-
 		if ( !empty( $noExternalLangLinks ) ) {
 			$out->setProperty( 'noexternallanglinks', $noExternalLangLinks );
 		}
 
 		$itemId = $parserOutput->getProperty( 'wikibase_item' );
-
 		if ( $itemId !== false ) {
 			$out->setProperty( 'wikibase_item', $itemId );
 		}
 
 		$otherProjects = $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' );
-
 		if ( $otherProjects !== null ) {
 			$out->setProperty( 'wikibase-otherprojects-sidebar', $otherProjects );
 		}
 
 		$badges = $parserOutput->getExtensionData( 'wikibase_badges' );
-
 		if ( $badges !== null ) {
 			$out->setProperty( 'wikibase_badges', $badges );
 		}

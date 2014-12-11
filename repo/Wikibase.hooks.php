@@ -956,19 +956,18 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageParserOutput( OutputPage $out, ParserOutput $parserOutput ) {
+		// Set in EntityParserOutputGenerator.
 		$placeholders = $parserOutput->getExtensionData( 'wikibase-view-chunks' );
-
-		if ( $placeholders ) {
+		if ( $placeholders !== null ) {
 			$out->setProperty( 'wikibase-view-chunks', $placeholders );
 		}
 
-		// used in ViewEntityAction and EditEntityAction to override the page html title
+		// Used in ViewEntityAction and EditEntityAction to override the page HTML title
 		// with the label, if available, or else the id. Passed via parser output
 		// and output page to save overhead of fetching content and accessing an entity
 		// on page view.
 		$titleText = $parserOutput->getExtensionData( 'wikibase-titletext' );
-
-		if ( $titleText ) {
+		if ( $titleText !== null ) {
 			$out->setProperty( 'wikibase-titletext', $titleText );
 		}
 
@@ -988,7 +987,7 @@ final class RepoHooks {
 	public static function onOutputPageBeforeHTML( OutputPage $out, &$html ) {
 		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
 
-		if ( $placeholders ) {
+		if ( !empty( $placeholders ) ) {
 			$injector = new TextInjector( $placeholders );
 			$userLanguageLookup = new UserLanguageLookup();
 			$expander = new EntityViewPlaceholderExpander(

@@ -9,7 +9,6 @@ use OutputPage;
 use SpecialPage;
 use ViewAction;
 use Wikibase\Repo\Content\EntityHandler;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Handles the view action for Wikibase entities.
@@ -123,9 +122,9 @@ abstract class ViewEntityAction extends ViewAction {
 
 	/**
 	 * @param OutputPage $outputPage
-	 * @param string $labelText
+	 * @param string $titleText
 	 */
-	private function setPageTitle( OutputPage $outputPage, $labelText ) {
+	private function setPageTitle( OutputPage $outputPage, $titleText ) {
 		// Escaping HTML characters in order to retain original label that may contain HTML
 		// characters. This prevents having characters evaluated or stripped via
 		// OutputPage::setPageTitle:
@@ -133,21 +132,21 @@ abstract class ViewEntityAction extends ViewAction {
 			$this->msg(
 				'difference-title'
 				// This should be something like the following,
-				// $labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
+				// $labelLang->getDirMark() . $titleText . $wgLang->getDirMark()
 				// or should set the attribute of the h1 to correct direction.
 				// Still note that the direction is "auto" so guessing should
 				// give the right direction in most cases.
-			)->rawParams( htmlspecialchars( $labelText ) )
+			)->rawParams( htmlspecialchars( $titleText ) )
 		);
 	}
 
 	/**
 	 * @param OutputPage $outputPage
-	 * @param string $labelText
+	 * @param string $titleText
 	 */
-	private function setHTMLTitle( OutputPage $outputPage, $labelText ) {
+	private function setHTMLTitle( OutputPage $outputPage, $titleText ) {
 		// Prevent replacing {{...}} by using rawParams() instead of params():
-		$outputPage->setHTMLTitle( $this->msg( 'pagetitle' )->rawParams( $labelText ) );
+		$outputPage->setHTMLTitle( $this->msg( 'pagetitle' )->rawParams( $titleText ) );
 	}
 
 	/**
