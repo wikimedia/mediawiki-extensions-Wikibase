@@ -64,7 +64,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles, $wgMessagesDirs;
-	global $wgAPIModules, $wgSpecialPages, $wgSpecialPageGroups, $wgHooks;
+	global $wgAPIModules, $wgSpecialPages, $wgHooks;
 	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
 
 	$wgExtensionCredits['wikibase'][] = array(
@@ -158,25 +158,6 @@ call_user_func( function() {
 	$wgSpecialPages['EntityData'] 						= 'Wikibase\Repo\Specials\SpecialEntityData';
 	$wgSpecialPages['MyLanguageFallbackChain'] 			= 'Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain';
 	$wgSpecialPages['MergeItems'] 						= 'Wikibase\Repo\Specials\SpecialMergeItems';
-
-	// Special page groups
-	$wgSpecialPageGroups['NewItem']						= 'wikibaserepo';
-	$wgSpecialPageGroups['NewProperty']					= 'wikibaserepo';
-	$wgSpecialPageGroups['ItemByTitle']					= 'wikibaserepo';
-	$wgSpecialPageGroups['GoToLinkedPage']					= 'wikibaserepo';
-	$wgSpecialPageGroups['ItemDisambiguation']			= 'wikibaserepo';
-	$wgSpecialPageGroups['ItemsWithoutSitelinks']		= 'wikibaserepo';
-	$wgSpecialPageGroups['SetLabel']					= 'wikibaserepo';
-	$wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
-	$wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
-	$wgSpecialPageGroups['SetSiteLink']					= 'wikibaserepo';
-	$wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
-	$wgSpecialPageGroups['EntitiesWithoutDescription']	= 'wikibaserepo';
-	$wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
-	$wgSpecialPageGroups['DispatchStats']				= 'wikibaserepo';
-	$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
-	$wgSpecialPageGroups['MyLanguageFallbackChain'] 	= 'wikibaserepo';
-	$wgSpecialPageGroups['MergeItems'] 					= 'wikibaserepo';
 
 	// Jobs
 	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob';
