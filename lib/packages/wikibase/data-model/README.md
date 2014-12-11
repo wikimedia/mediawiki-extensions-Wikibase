@@ -88,3 +88,7 @@ Daniel Kinzler and Jeroen De Dauw.
 * [Blog posts on Wikibase DataModel](http://www.bn2vs.com/blog/tag/wikibase-datamodel/)
 * [Wikibase DataModel Serialization](https://github.com/wmde/WikibaseDataModelSerialization)
 * [Wikibase Internal Serialization](https://github.com/wmde/WikibaseInternalSerialization)
+
+# Bugs on Phabricator
+
+https://phabricator.wikimedia.org/project/view/920/
