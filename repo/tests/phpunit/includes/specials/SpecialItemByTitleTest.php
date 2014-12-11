@@ -165,8 +165,9 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		list( $output, $response ) = $this->executeSpecialPage( $sub );
 
 		if ( $target !== null ) {
-			$target = Title::newFromText( $target );
-			$this->assertEquals( $target->getFullURL(), $response->getheader( 'Location' ), 'Redirect' );
+			$target = Title::newFromText( $target )->getFullURL();
+			$expected = wfExpandUrl( $target, PROTO_CURRENT );
+			$this->assertEquals( $expected, $response->getheader( 'Location' ), 'Redirect' );
 		}
 
 		foreach( $matchers as $key => $matcher ) {

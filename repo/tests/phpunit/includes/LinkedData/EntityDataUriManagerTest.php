@@ -182,7 +182,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 
 	public static function provideGetCacheableUrls() {
 		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );
-		$base = $title->getFullURL();
+		$base = $title->getInternalURL();
 
 		return array(
 			array( 'Q12', array(
