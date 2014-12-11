@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use OutOfBoundsException;
 use ParserOutput;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -259,7 +258,7 @@ class EntityParserOutputGenerator {
 		} else {
 			$entityId = $entity->getId();
 
-			if ( !$entityId ) {
+			if ( $entityId === null ) {
 				return;
 			}
 

@@ -47,7 +47,7 @@ class ParserOutputUsageAccumulator implements UsageAccumulator {
 	 */
 	public function getUsages() {
 		$usages = $this->parserOutput->getExtensionData( 'wikibase-entity-usage' );
-		return $usages === null ? array() : $usages;
+		return $usages ?: array();
 	}
 
 	/**
