@@ -53,12 +53,6 @@
 				'claim-qualifiers-snak',
 				'referenceview-snakview-remove',
 				'sitelinkgroupview-sitelinkview'
-			],
-			movetoolbar: [
-				'claimlistview-claimview',
-				'claim-qualifiers-snak',
-				'statementview-referenceview',
-				'referenceview-snakview'
 			]
 		};
 
