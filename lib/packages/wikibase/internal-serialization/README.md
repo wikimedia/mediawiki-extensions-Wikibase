@@ -143,3 +143,7 @@ Initial release with these features:
 * [Wikibase DataModel](https://github.com/wmde/WikibaseDataModel)
 * [Wikibase DataModel Serialization](https://github.com/wmde/WikibaseDataModelSerialization) (For the public serialization format)
 * [Ask Serialization](https://github.com/wmde/AskSerialization)
+
+# Bugs on Phabricator
+
+https://phabricator.wikimedia.org/project/view/921/
