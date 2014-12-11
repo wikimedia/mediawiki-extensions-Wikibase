@@ -33,6 +33,23 @@
       "revId": "e1f918e34be3dcc0fbcb4eba6020f1ddfd401000",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_c0368ee4",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-11T15:13:35Z",
+      "side": 1,
+      "message": "huh? confusing. please elaborate",
+      "revId": "e1f918e34be3dcc0fbcb4eba6020f1ddfd401000",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
