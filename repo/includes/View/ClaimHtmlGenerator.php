@@ -76,9 +76,9 @@ class ClaimHtmlGenerator {
 
 			// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,
 			// wikibase-statementview-rank-deprecated
-			$rankHtml = wfTemplate( 'wb-rankselector',
+			$rankHtml = wfTemplate( 'wikibase-rankselector',
 				'ui-state-disabled',
-				'wb-rankselector-' . $serializedRank,
+				'wikibase-rankselector-' . $serializedRank,
 				wfMessage( 'wikibase-statementview-rank-' . $serializedRank )->text()
 			);
 

@@ -114,9 +114,9 @@ HTML;
 </div>
 HTML;
 
-	$templates['wb-rankselector'] =
+	$templates['wikibase-rankselector'] =
 <<<HTML
-<div class="wb-rankselector $1">
+<div class="wikibase-rankselector $1">
 	<span class="ui-icon ui-icon-rankselector $2" title="$3"></span>
 </div>
 HTML;
