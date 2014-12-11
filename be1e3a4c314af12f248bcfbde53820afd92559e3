@@ -16,6 +16,24 @@
       "revId": "be1e3a4c314af12f248bcfbde53820afd92559e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_c39f9c61",
+        "filename": "repo/includes/specials/SpecialWikibasePage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2014-12-11T21:29:23Z",
+      "side": 1,
+      "message": "I\u0027m now seeing that special pages in core have this method as protected, but they don\u0027t document it anyway.",
+      "parentUuid": "2e9df725_65a54c00",
+      "revId": "be1e3a4c314af12f248bcfbde53820afd92559e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
