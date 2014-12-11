@@ -25,7 +25,7 @@
 	"wikibase-linkitem-close": "संवाद बन्द गर्नुहोस् र पृष्ठ पुन: लोड गर्नुहोस्",
 	"wikibase-linkitem-title": "पृष्ठसँग लिङ्क गर्नुहोस्",
 	"wikibase-linkitem-linkpage": "पृष्ठसँग लिङ्क गर्नुहोस्",
-	"wikibase-linkitem-selectlink": "दिइएको पृष्ठ जोड्न लाग्दा अज्ञात त्रुटि उत्पन्न भयो।",
+	"wikibase-linkitem-selectlink": "कृपया तपाई कुनै साइट अथवा पृष्ठ छान्नुहोस् जो सँग तपाई यस पृष्ठलाई लिङ्क गर्न चाहनुहुन्छ।",
 	"wikibase-linkitem-input-site": "भाषा:",
 	"wikibase-linkitem-input-page": "पृष्ठ:",
 	"wikibase-linkitem-confirmitem-text": "जुन पृष्ठ तपाईले छान्नु भएको हुनुहुन्छ त्यो [$1  केन्द्रीय डाटा रिपोजिटरी] सँग पहिला नै जोडी सकिएको छ। कृपया सुनिश्चित गर्नुहोस यहाँ देखाइएको {{PLURAL:$2|page|पृष्ठ}} त्यही हो जुन तपाई {{PLURAL:$2|is|यो}} पृष्ठ सँग {{PLURAL:$2|one|जोड्न}} चाहनुहुन्छ।",

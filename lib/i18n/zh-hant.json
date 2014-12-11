@@ -74,6 +74,7 @@
 	"wikibase-validator-unknown-unit": "不明的單位：$1",
 	"wikibase-validator-not-allowed": "不合法的數值：$1",
 	"datatypes-type-wikibase-item": "項目",
+	"datatypes-type-wikibase-property": "屬性",
 	"datatypes-type-commonsMedia": "共享資源媒體檔案",
 	"version-wikibase": "Wikibase",
 	"wikibase-snakformatter-valuetype-mismatch": "數值型態 \"$1\" 與屬性型態 \"$2\" 不符。",

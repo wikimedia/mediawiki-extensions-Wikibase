@@ -400,13 +400,22 @@
 	"apihelp-wbformatvalue-description": "格式数据值。",
 	"apihelp-wbformatvalue-example-1": "格式化简单字符串值。",
 	"apihelp-wbgetclaims-description": "获取Wikibase声称。",
+	"apihelp-wbgetentities-example-12": "获取项Q42的网站链接",
 	"apihelp-wbmergeitems-description": "合并重复项。",
 	"apihelp-wbmergeitems-param-fromid": "要合并自的ID",
 	"apihelp-wbmergeitems-param-toid": "要合并到的ID",
+	"apihelp-wbmergeitems-example-1": "从Q42到Q222合并数据",
 	"apihelp-wbparsevalue-description": "使用ValueParser的解析值。",
 	"apihelp-wbparsevalue-param-parser": "要使用的ValueParser的ID",
+	"apihelp-wbparsevalue-param-values": "要解析的值",
 	"apihelp-wbremoveclaims-description": "移除Wikibase声称。",
+	"apihelp-wbsearchentities-param-search": "搜索此文本。",
+	"apihelp-wbsearchentities-param-language": "在此语言搜索。",
+	"apihelp-wbsetaliases-example-3": "从带Q1的实体的英语别名列表中移除Foo和Bar",
 	"apihelp-wbsetclaim-param-claim": "声称序列化",
+	"apihelp-wbsetclaimvalue-description": "设置Wikibase声称的值。",
+	"apihelp-wbsetdescription-param-language": "说明的语言",
 	"apihelp-wbsetlabel-param-language": "标签语言",
-	"apihelp-wbsetlabel-param-value": "标签值"
+	"apihelp-wbsetlabel-param-value": "标签值",
+	"apihelp-wbsetsitelink-param-badges": "要设置为徽章的项ID。它们将会覆盖现有的那个。如果此参数未设置，徽章将不会更改"
 }

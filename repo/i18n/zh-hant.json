@@ -356,5 +356,10 @@
 	"right-item-merge": "合併項目",
 	"right-item-redirect": "建立項目重新導向",
 	"right-property-term": "更改屬性用語 (標籤、描述與別名)",
-	"right-property-create": "建立屬性"
+	"right-property-create": "建立屬性",
+	"apihelp-wbsearchentities-description": "搜尋項目。",
+	"apihelp-wbsearchentities-param-search": "搜尋此文字。",
+	"apihelp-wbsearchentities-param-language": "搜尋此語言。",
+	"apihelp-wbsearchentities-param-type": "搜尋此類型的項目。",
+	"apihelp-wbsearchentities-param-limit": "結果數量上限"
 }

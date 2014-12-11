@@ -242,5 +242,9 @@
 	"right-item-merge": "Elementer zesummeleeën",
 	"right-property-create": "Eegeschaften uleeën",
 	"apihelp-wbmergeitems-example-1": "Fusionéiert Date vun Q42 an Q222",
-	"apihelp-wbmergeitems-example-2": "Fusionéiert Date vun Q555 an Q3"
+	"apihelp-wbmergeitems-example-2": "Fusionéiert Date vun Q555 an Q3",
+	"apihelp-wbsearchentities-param-language": "An dëser Sprooch sichen.",
+	"apihelp-wbsetdescription-param-language": "Sprooch vun der Beschreiwung",
+	"apihelp-wbsetlabel-param-language": "Sprooch vun der Etikett",
+	"apihelp-wbsetlabel-param-value": "De Wäert vun der Etikett."
 }

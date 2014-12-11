@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"David1010",
-			"Tokoko"
+			"Tokoko",
+			"MIKHEIL"
 		]
 	},
 	"wikibase-lib-desc": "ვიკიბაზისა და ვიკიბაზის კლიენტის გაფართოებების საერთო ფუნქციები",
@@ -26,5 +27,6 @@
 	"wikibase-tooltip-error-details": "დეტალები",
 	"wikibase-validator-no-such-entity": "$1 არ მოიძებნა",
 	"datatypes-type-wikibase-item": "ელემენტი",
+	"datatypes-type-wikibase-property": "თვისება",
 	"datatypes-type-commonsMedia": "მედიაფაილი ვიკისაწყობში"
 }

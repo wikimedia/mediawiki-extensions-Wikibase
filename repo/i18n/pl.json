@@ -347,6 +347,9 @@
 	"right-item-redirect": "Tworzenie przekierowań elementu",
 	"right-property-term": "Zmiana określeń właściwości (etykiet, opisów, aliasów)",
 	"right-property-create": "Tworzenie właściwości",
+	"apihelp-wbsearchentities-param-search": "Wyszukaj w tym tekście.",
+	"apihelp-wbsearchentities-param-language": "Wyszukaj w tym języku.",
+	"apihelp-wbsearchentities-param-limit": "Maksymalna liczba wyników",
 	"apihelp-wbsetdescription-param-language": "Język opisu",
 	"apihelp-wbsetlabel-param-language": "Język etykiety",
 	"apihelp-wbsetlabel-param-value": "Wartość etykiety"
