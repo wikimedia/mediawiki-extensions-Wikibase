@@ -93,7 +93,7 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testFactoryCreateWithUnexpectedValue() {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new SerializerFactory( new DataValueSerializer(), 2 );
+		new SerializerFactory( new DataValueSerializer(), 1.0 );
 	}
 
 	public function testNewSnaksSerializerWithUseObjectsForMaps() {
