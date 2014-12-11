@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_e5271c0c",
+        "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-11T14:28:18Z",
+      "side": 1,
+      "message": "how is this related?",
+      "revId": "e2ede6ea751b8cb7e8f8e291ed81ad053501fc0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_65830cd2",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-11T14:28:18Z",
+      "side": 1,
+      "message": "in this case, ok since we then use it as part of a message.",
+      "revId": "e2ede6ea751b8cb7e8f8e291ed81ad053501fc0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_c52a20d7",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-11T14:28:18Z",
+      "side": 1,
+      "message": "in this case, i don\u0027t think we need to override. the default is already prefixed text, right?",
+      "revId": "e2ede6ea751b8cb7e8f8e291ed81ad053501fc0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
