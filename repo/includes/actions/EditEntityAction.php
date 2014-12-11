@@ -276,7 +276,6 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		/**
 		 * @var EntityContent $latestContent
-		 * @var EntityContent $olderContent
 		 * @var EntityContent $newerContent
 		 */
 		$olderContent = $olderRevision->getContent();
@@ -343,7 +342,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	}
 
 	/**
-	 * Used for overriding the page html title with the label, if available, or else the id.
+	 * Used for overriding the page HTML title with the label, if available, or else the id.
 	 * This is passed via parser output and output page to save overhead on view / edit actions.
 	 *
 	 * @return string
@@ -352,7 +351,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$titleText = $this->getOutput()->getProperty( 'wikibase-titletext' );
 
 		if ( $titleText === null ) {
-			$titleText = '';
+			$titleText = $this->getTitle()->getPrefixedText();
 		}
 
 		return $titleText;
