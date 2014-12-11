@@ -243,6 +243,7 @@ return call_user_func( function() {
 				'jquery.wikibase.itemview.js',
 			),
 			'dependencies' => array(
+				'jquery.wikibase.claimgrouplabelscroll',
 				'jquery.wikibase.claimgrouplistview',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.sitelinkgrouplistview',
@@ -302,6 +303,7 @@ return call_user_func( function() {
 				'jquery.wikibase.propertyview.js',
 			),
 			'dependencies' => array(
+				'jquery.wikibase.claimgrouplabelscroll',
 				'jquery.wikibase.claimgrouplistview',
 				'jquery.wikibase.entityview',
 			),
