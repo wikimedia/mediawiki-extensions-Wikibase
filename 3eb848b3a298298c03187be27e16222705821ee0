@@ -33,6 +33,24 @@
       "revId": "3eb848b3a298298c03187be27e16222705821ee0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_9a67cdb4",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-11T15:51:01Z",
+      "side": 1,
+      "message": "That\u0027s what\u0027s happening, you must have misread the code.",
+      "parentUuid": "2e9df725_855c1850",
+      "revId": "3eb848b3a298298c03187be27e16222705821ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
