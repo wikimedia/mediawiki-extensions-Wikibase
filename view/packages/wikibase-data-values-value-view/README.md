@@ -320,3 +320,10 @@ Other methods an Expert needs to provide:
 ### 0.1 (2013-12-23)
 
 Initial release.
+
+### Bugs on Phabricator
+
+https://phabricator.wikimedia.org/T78274
+https://phabricator.wikimedia.org/T78275
+https://phabricator.wikimedia.org/T78277
+https://phabricator.wikimedia.org/T78278
