@@ -94,3 +94,7 @@ version 2.0 of this package:
 ### 1.0.0 (2014-07-03)
 
 Initial release as a library.
+
+# Bugs on Phabricator
+
+https://phabricator.wikimedia.org/project/view/919/
