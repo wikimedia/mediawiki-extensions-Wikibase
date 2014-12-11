@@ -75,11 +75,11 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @see SpecialWikibasePage::execute
 	 *
 	 * @since 0.4
+	 *
+	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
-		if ( !parent::execute( $subPage ) ) {
-			return false;
-		}
+		parent::execute( $subPage );
 
 		$this->prepareArguments( $subPage );
 		$this->setForm();
@@ -87,8 +87,6 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		if ( $this->language !== '' ) {
 			$this->showQuery();
 		}
-
-		return true;
 	}
 
 	/**

@@ -56,6 +56,11 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 		) );
 	}
 
+	/**
+	 * @see SpecialWikibasePage::execute
+	 *
+	 * @param string|null $subPage
+	 */
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
