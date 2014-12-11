@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_e582bca8",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-11T14:59:37Z",
+      "side": 1,
+      "message": "I disagree. If I ask for no languages, i should get nothing back. This is nice and consistent, and allows called to be \"nulled out\" easily.\n\nI see no value in making \"no languages\" have the same as \"any language\". I see no legit use case, just potential for confusion.",
+      "parentUuid": "2e9df725_5c135005",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_1cddc847",
         "filename": "lib/includes/store/EntityRetrievingTermLookup.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-10T18:47:22Z",
       "side": 1,
       "message": "!empty(), see other comment.",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_858f38d1",
+        "filename": "lib/includes/store/EntityRetrievingTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-11T14:59:37Z",
+      "side": 1,
+      "message": "disagree.",
+      "parentUuid": "2e9df725_1cddc847",
       "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_45b93077",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-11T14:59:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_fca57cb2",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_bcaff490",
         "filename": "lib/includes/store/EntityTermLookup.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2014-12-10T18:47:22Z",
       "side": 1,
       "message": "So this is guaranteed to return an \"Array indexed by language code\"? Please add this to all string[] types in this file.",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_a58cb4dc",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-11T14:59:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_bcaff490",
       "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_456850f2",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-11T14:59:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_5cd4b0ec",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_fc001c6f",
         "filename": "lib/includes/store/TermIndex.php",
         "patchSetId": 4
@@ -98,6 +188,24 @@
       "writtenOn": "2014-12-10T18:47:22Z",
       "side": 1,
       "message": "Please rename $language(s) to $languageCode(s) in all files in this patch. Thanks.",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_a5a3543e",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-11T14:59:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_fc001c6f",
       "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_257744d3",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-11T14:59:37Z",
+      "side": 1,
+      "message": "It\u0027s not the list of codes to be loaded, since we do not want to load codes. Technically, it is a list of codes indicating for which language the terms should be fetched. That\u0027s too long and complicated for my taste, it doesn\u0027t make the documentation clearer, even if it\u0027s more precise. This isn\u0027t a legal document, nor a mathematical thesis.\n\nRenamed to $languageCodes.",
+      "parentUuid": "2e9df725_3ca3e4a9",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_3ca9a478",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 4
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_e5787cc1",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-11T14:59:37Z",
+      "side": 1,
+      "message": "We currently use this index, suggested by Sean:\n\n-- This index has good selectivity while still allowing ICP for short string values.\nCREATE INDEX /*i*/term_search ON /*_*/wb_terms (term_language, term_entity_id, term_type, term_search_key(16));\n\nSee Wikibase.sql",
+      "parentUuid": "2e9df725_3ca9a478",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_bce374d3",
         "filename": "lib/tests/phpunit/store/EntityRetrievingTermLookupTest.php",
         "patchSetId": 4
@@ -149,6 +293,24 @@
       "writtenOn": "2014-12-10T18:47:22Z",
       "side": 1,
       "message": "array $expected, ItemId $itemId",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_65546c2b",
+        "filename": "lib/tests/phpunit/store/EntityRetrievingTermLookupTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-11T14:59:37Z",
+      "side": 1,
+      "message": "Type hints in tests? hm... what for? Against what does this protect us?",
+      "parentUuid": "2e9df725_bce374d3",
       "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -183,6 +345,24 @@
       "writtenOn": "2014-12-10T18:47:22Z",
       "side": 1,
       "message": "Inconsistent, you are using !\u003d\u003d null below. Or use !empty() as suggested in my other comments.",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_f70117ba",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-11T14:59:37Z",
+      "side": 1,
+      "message": "doesn\u0027t matter, flipping an empty array has no effect",
+      "parentUuid": "2e9df725_bcfa9471",
       "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
