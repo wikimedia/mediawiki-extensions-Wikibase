@@ -323,7 +323,4 @@ Initial release.
 
 # Bugs on Phabricator
 
-https://phabricator.wikimedia.org/T78274
-https://phabricator.wikimedia.org/T78275
-https://phabricator.wikimedia.org/T78277
-https://phabricator.wikimedia.org/T78278
+https://phabricator.wikimedia.org/tag/valueview/
