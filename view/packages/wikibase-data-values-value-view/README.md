@@ -321,7 +321,7 @@ Other methods an Expert needs to provide:
 
 Initial release.
 
-### Bugs on Phabricator
+# Bugs on Phabricator
 
 https://phabricator.wikimedia.org/T78274
 https://phabricator.wikimedia.org/T78275
