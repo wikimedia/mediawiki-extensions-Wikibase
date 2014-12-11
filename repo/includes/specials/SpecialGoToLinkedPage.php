@@ -16,7 +16,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jan Zerebecki
  */
-class SpecialGoToLinkedPage extends SpecialItemResolver {
+class SpecialGoToLinkedPage extends SpecialWikibasePage {
 
 	/**
 	 * @var SiteStore
@@ -29,7 +29,7 @@ class SpecialGoToLinkedPage extends SpecialItemResolver {
 	private $siteLinkLookup;
 
 	/**
-	 * @see SpecialItemResolver::__construct
+	 * @see SpecialWikibasePage::__construct
 	 */
 	public function __construct() {
 		parent::__construct( 'GoToLinkedPage', '', true );
@@ -108,7 +108,9 @@ class SpecialGoToLinkedPage extends SpecialItemResolver {
 	}
 
 	/**
-	 * @see SpecialItemResolver::execute
+	 * @see SpecialWikibasePage::execute
+	 *
+	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
 		parent::execute( $subPage );

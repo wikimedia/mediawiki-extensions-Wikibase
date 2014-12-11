@@ -42,15 +42,11 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	}
 
 	/**
-	 * The subpage, ie the part after Special:PageName/
-	 * Empty string if none is provided.
+	 * @see SpecialPage::getGroupName
 	 *
-	 * @since 0.1
-	 * @var string
+	 * @return string
 	 */
-	public $subPage;
-
-	public function getGroupName() {
+	protected function getGroupName() {
 		return 'wikibaserepo';
 	}
 
@@ -58,6 +54,8 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	 * @see SpecialPage::getDescription
 	 *
 	 * @since 0.1
+	 *
+	 * @return string
 	 */
 	public function getDescription() {
 		return $this->msg( 'special-' . strtolower( $this->getName() ) )->text();
@@ -78,20 +76,17 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	 * @see SpecialPage::execute
 	 *
 	 * @since 0.1
+	 *
+	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
-		$subPage = is_null( $subPage ) ? '' : $subPage;
-		$this->subPage = trim( str_replace( '_', ' ', $subPage ) );
-
 		$this->setHeaders();
-		$contLang = $this->getContext()->getLanguage();
-		$this->outputHeader( $contLang->lc( 'wikibase-' . $this->getName() ) . '-summary' );
+		$this->outputHeader( 'wikibase-' . strtolower( $this->getName() ) . '-summary' );
 
 		// If the user is authorized, display the page, if not, show an error.
 		if ( !$this->userCanExecute( $this->getUser() ) ) {
 			$this->displayRestrictionError();
 		}
-		return true;
 	}
 
 	/**

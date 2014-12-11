@@ -127,13 +127,11 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Main method
+	 * @see SpecialWikibasePage::execute
 	 *
 	 * @since 0.5
 	 *
-	 * @param string $subPage
-	 *
-	 * @return boolean
+	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
 		parent::execute( $subPage );

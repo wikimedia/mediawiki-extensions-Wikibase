@@ -132,14 +132,13 @@ class SpecialEntityData extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Main method.
+	 * @see SpecialWikibasePage::execute
 	 *
 	 * @since 0.4
 	 *
 	 * @param string|null $subPage
 	 *
 	 * @throws HttpError
-	 * @return bool
 	 */
 	public function execute( $subPage ) {
 		$this->initDependencies();
@@ -148,12 +147,10 @@ class SpecialEntityData extends SpecialWikibasePage {
 		// TODO: Don't do this if HTML is not acceptable according to HTTP headers.
 		if ( !$this->requestHandler->canHandleRequest( $subPage, $this->getRequest() ) ) {
 			$this->showForm();
-			return true;
+			return;
 		}
 
 		$this->requestHandler->handleRequest( $subPage, $this->getRequest(), $this->getOutput() );
-
-		return true;
 	}
 
 	/**

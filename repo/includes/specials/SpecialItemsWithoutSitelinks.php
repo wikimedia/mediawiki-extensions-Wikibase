@@ -22,16 +22,12 @@ class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {
 	 *
 	 * @since 0.4
 	 *
-	 * @param string $subPage
-	 * @return bool
+	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
-		if ( !parent::execute( $subPage ) ) {
-			return false;
-		}
+		parent::execute( $subPage );
 
 		$this->showQuery();
-		return true;
 	}
 
 	/**
