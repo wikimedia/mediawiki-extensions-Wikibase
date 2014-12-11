@@ -409,6 +409,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.NativeEventHandler',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.menu',
 				'jquery.ui.position',

@@ -95,10 +95,9 @@ class ClaimHtmlGenerator {
 
 			// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,
 			// wikibase-statementview-rank-deprecated
-			$rankHtml = $this->templateFactory->render( 'wb-rankselector',
+			$rankHtml = $this->templateFactory->render( 'wikibase-rankselector',
 				'ui-state-disabled',
-				'wb-rankselector-' . $serializedRank,
-				'rank',
+				'wikibase-rankselector-' . $serializedRank,
 				$this->getStatementRankText( $serializedRank )
 			);
 
