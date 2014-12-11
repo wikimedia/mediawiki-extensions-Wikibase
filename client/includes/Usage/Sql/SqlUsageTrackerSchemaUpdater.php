@@ -90,7 +90,7 @@ class SqlUsageTrackerSchemaUpdater {
 		);
 
 		foreach ( $extensions as $ext ) {
-			$path = __DIR__ . '/' . $name . $ext;
+			$path = __DIR__ . '/../../../sql/' . $name . $ext;
 
 			if ( file_exists( $path ) ) {
 				return $path;
