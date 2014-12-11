@@ -288,6 +288,7 @@ final class WikibaseClient {
 				$this->getEntityContentDataCodec(),
 				$this->contentLanguage,
 				$this->getEntityIdParser(),
+				$this->settings,
 				$repoDatabase
 			);
 		}

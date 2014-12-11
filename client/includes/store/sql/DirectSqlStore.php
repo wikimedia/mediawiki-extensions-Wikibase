@@ -135,14 +135,14 @@ class DirectSqlStore implements ClientStore {
 		EntityContentDataCodec $contentCodec,
 		Language $wikiLanguage,
 		EntityIdParser $entityIdParser,
+		SettingsArray $settings,
 		$repoWiki
 	) {
-		$this->repoWiki = $repoWiki;
 		$this->language = $wikiLanguage;
 		$this->contentCodec = $contentCodec;
+		$this->settings = $settings;
+		$this->repoWiki = $repoWiki;
 
-		// @TODO: Inject
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$cacheType = $settings->getSetting( 'sharedCacheType' );
