@@ -35,11 +35,9 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$mock->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback(
-				function ( EntityId $id ) {
-					return Title::makeTitle( NS_MAIN, $id->getSerialization() );
-				}
-			) );
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return Title::makeTitle( NS_MAIN, $id->getSerialization() );
+			} ) );
 
 		return $mock;
 	}
@@ -48,17 +46,15 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	 * @return SiteLinkLookup
 	 */
 	private function getMockSiteLinkLookup() {
-		$entityId = new ItemId( 'Q123' );
+		$itemId = new ItemId( 'Q123' );
 
 		$mock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
 
 		$mock->expects( $this->any() )
 			->method( 'getItemIdForLink' )
-			->will( $this->returnCallback(
-				function ( $siteId, $pageName ) use ( $entityId ) {
-					return ( $siteId === 'dewiki' ) ? $entityId : null;
-				}
-			) );
+			->will( $this->returnCallback( function( $siteId, $pageName ) use ( $itemId ) {
+				return $siteId === 'dewiki' ? $itemId : null;
+			} ) );
 
 		return $mock;
 	}
@@ -67,10 +63,11 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	 * @return SiteStore
 	 */
 	private function getMockSiteStore() {
-		$getSite = function ( $siteId ) {
+		$getSite = function( $siteId ) {
 			$site = new Site();
 			$site->setGlobalId( $siteId );
 			$site->setLinkPath( "http://$siteId.com/$1" );
+
 			return $site;
 		};
 

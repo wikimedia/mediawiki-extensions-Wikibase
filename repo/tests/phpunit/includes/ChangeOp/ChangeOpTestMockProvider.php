@@ -193,7 +193,7 @@ class ChangeOpTestMockProvider {
 			->getMock();
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getType' )
-			->will( PHPUnit_Framework_TestCase::returnCallback( function ( $id ) use ( $types ) {
+			->will( PHPUnit_Framework_TestCase::returnCallback( function( $id ) use ( $types ) {
 				if ( !isset( $types[$id] ) ) {
 					throw new OutOfBoundsException( "No such type: $id" );
 				}
@@ -363,11 +363,9 @@ class ChangeOpTestMockProvider {
 		}
 
 		if ( $returnValue instanceof Result ) {
-			$detectLabelConflictsForEntity = function() use ( $returnValue ) {
+			$detectTermConflicts = function() use ( $returnValue ) {
 				return $returnValue;
 			};
-
-			$detectTermConflicts = $detectLabelConflictsForEntity;
 		} else {
 			$detectTermConflicts = array( $this, 'detectTermConflicts' );
 		}

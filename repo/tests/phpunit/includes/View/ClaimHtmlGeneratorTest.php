@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Html;
-use Title;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
@@ -16,7 +15,6 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\ClaimHtmlGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
@@ -56,17 +54,6 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param EntityId $id
-	 * @return string
-	 */
-	public function getLinkForId( EntityId $id ) {
-		$name = $id->getEntityType() . ':' . $id->getSerialization();
-		$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
-
-		return Html::element( 'a', array( 'href' => $url ), $name );
-	}
-
-	/**
 	 * @return EntityIdFormatter
 	 */
 	protected function getPropertyIdFormatterMock() {
@@ -76,7 +63,11 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$lookup->expects( $this->any() )
 			->method( 'format' )
-			->will( $this->returnCallback( array( $this, 'getLinkForId' ) ) );
+			->will( $this->returnCallback( function( EntityId $id ) {
+				$name = $id->getEntityType() . ':' . $id->getSerialization();
+				$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
+				return Html::element( 'a', array( 'href' => $url ), $name );
+			} ) );
 
 		return $lookup;
 	}
