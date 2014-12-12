@@ -105,6 +105,24 @@
       "revId": "f4448bf3efd0fd3d728cdf6e333b474271341856",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_3ab8f6e1",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T15:43:21Z",
+      "side": 1,
+      "message": "* \"Client\" is a name in this case.\n* \"I\u0027m using the Mac now\".",
+      "parentUuid": "0e6cb3ef_dafbfab8",
+      "revId": "f4448bf3efd0fd3d728cdf6e333b474271341856",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
