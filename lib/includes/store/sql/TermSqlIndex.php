@@ -373,6 +373,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 * Returns the terms stored for the given entity.
 	 *
 	 * @see TermIndex::getTermsOfEntity
+	 * @todo: share more code with getTermsOfEntities. There are only subtle differences
+	 * regarding what fields are loaded.
 	 *
 	 * @param EntityId $entityId
 	 * @param string[]|null $termTypes
@@ -435,24 +437,37 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 *
 	 * @param EntityId[] $entityIds
 	 * @param string $entityType
-	 * @param string|null $language Language code
+	 * @param string[]|null $termTypes
+	 * @param string[]|null $languageCodes Language codes
 	 *
-	 * @throws MWException
+	 * @throws \MWException
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $entityIds, $entityType, $language = null ) {
-		wfProfileIn( __METHOD__ );
-
-		if ( empty( $entityIds ) ) {
-			wfProfileOut( __METHOD__ );
+	public function getTermsOfEntities( array $entityIds, $entityType, array $termTypes = null, array $languageCodes = null ) {
+		if ( $entityIds !== null && empty( $entityIds ) ) {
 			return array();
 		}
+
+		if ( $languageCodes !== null && empty( $languageCodes ) ) {
+			return array();
+		}
+
+		if ( $termTypes !== null && empty( $termTypes ) ) {
+			return array();
+		}
+
+		wfProfileIn( __METHOD__ );
 
 		$entityIdentifiers = array(
 			'term_entity_type' => $entityType
 		);
-		if ( $language !== null ) {
-			$entityIdentifiers['term_language'] = $language;
+
+		if ( $languageCodes !== null ) {
+			$entityIdentifiers['term_language'] = $languageCodes;
+		}
+
+		if ( $termTypes !== null ) {
+			$entityIdentifiers['term_type'] = $termTypes;
 		}
 
 		$numericIds = array();
