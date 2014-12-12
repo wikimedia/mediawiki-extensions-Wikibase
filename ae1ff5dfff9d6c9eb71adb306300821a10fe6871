@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_d7151342",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T13:27:02Z",
+      "side": 1,
+      "message": "That phrasing makes it less clear what the distinction is between returning null and throwing OOB.",
+      "revId": "ae1ff5dfff9d6c9eb71adb306300821a10fe6871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
