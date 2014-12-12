@@ -69,6 +69,24 @@
       "revId": "f4448bf3efd0fd3d728cdf6e333b474271341856",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_7a018eb8",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-12-12T15:33:26Z",
+      "side": 1,
+      "message": "The word client is not a name.\n\nhttps://www.wikidata.org/wiki/Q13564349\nhttps://www.wikidata.org/wiki/Q13564349\nhttps://en.wiktionary.org/wiki/client#English\nhttps://en.wikipedia.org/wiki/Capitalization_in_English",
+      "parentUuid": "0e6cb3ef_64ffb363",
+      "revId": "f4448bf3efd0fd3d728cdf6e333b474271341856",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
