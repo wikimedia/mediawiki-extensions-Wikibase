@@ -191,8 +191,11 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$testCases['ignoreConflictLabelMerge'] = array(
 			array( 'label' => array( 'en' => 'foo' ) ),
 			array( 'label' => array( 'en' => 'bar' ) ),
-			array( 'label' => array( 'en' => 'foo' ) ),
-			array( 'label' => array( 'en' => 'bar' ) ),
+			array( 'label' => array( ) ),
+			array(
+				'label' => array( 'en' => 'bar' ),
+				'aliases' => array( 'en' => array( 'foo' ) )
+			),
 			array( 'label' )
 		);
 		$testCases['descriptionMerge'] = array(
@@ -346,7 +349,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 				'links' => array( 'plwiki' => array( 'name' => 'toLink', 'badges' => array() ) ),
 			),
 			array(
-				'label' => array( 'en' => 'foo' ),
+				'label' => array( ),
 				'description' => array( 'pl' => 'pldesc' ),
 				'links' => array( 'plwiki' => array( 'name' => 'bar', 'badges' => array() ) ),
 			),
