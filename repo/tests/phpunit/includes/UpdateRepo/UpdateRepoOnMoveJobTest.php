@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use Status;
 use Title;
 use User;
-use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
@@ -71,8 +71,8 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	private function getEntityPermissionChecker() {
 		$entityPermissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
 		$entityPermissionChecker->expects( $this->any() )
-				->method( 'getPermissionStatusForEntity' )
-				->will( $this->returnValue( Status::newGood() ));
+			->method( 'getPermissionStatusForEntity' )
+			->will( $this->returnValue( Status::newGood() ) );
 
 		return $entityPermissionChecker;
 	}
@@ -97,8 +97,8 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider runProvider
 	 *
-	 * @param bool $expected
-	 * @param bool $titleExists
+	 * @param string $expected
+	 * @param string $normalizedPageName
 	 * @param string $oldTitle
 	 */
 	public function testRun( $expected, $normalizedPageName, $oldTitle ) {
@@ -147,4 +147,5 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 			array( new ItemId( 'Q42' ) )
 		);
 	}
+
 }
