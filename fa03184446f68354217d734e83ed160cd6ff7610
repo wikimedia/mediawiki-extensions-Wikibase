@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_f798577e",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T14:04:52Z",
+      "side": 1,
+      "message": "We can probably just get rid of that flag and always use the property info table now.",
+      "revId": "fa03184446f68354217d734e83ed160cd6ff7610",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
