@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_5586db19",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T17:53:13Z",
+      "side": 1,
+      "message": "Huh? Should be str_replace().",
+      "revId": "49065a5111759388978f0e0764824fb4b8e7de86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_958c733c",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T17:53:13Z",
+      "side": 1,
+      "message": "Calling the getters in the loop may be expensive (it probably isn\u0027t, but may be).",
+      "revId": "49065a5111759388978f0e0764824fb4b8e7de86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
