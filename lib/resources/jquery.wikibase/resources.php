@@ -408,9 +408,7 @@ return call_user_func( function() {
 				'themes/default/jquery.wikibase.statementview.RankSelector.css',
 			),
 			'dependencies' => array(
-				'jquery.NativeEventHandler',
 				'jquery.ui.EditableTemplatedWidget',
-				'jquery.ui.TemplatedWidget',
 				'jquery.ui.menu',
 				'jquery.ui.position',
 				'jquery.ui.toggler',
