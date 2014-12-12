@@ -31,7 +31,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 
 		$siteStoreMock->expects( $this->any() )
 			->method( 'getSite' )
-			->will( $this->returnValue( $dummySite ) );
+			->willReturn( $dummySite );
 
 		return $siteStoreMock;
 	}
@@ -63,7 +63,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 
 		$siteLinkCacheMock->expects( $this->any() )
 			->method( 'getItemIdForLink' )
-				->will( $this->returnValue( $itemId ) );
+			->willReturn( $itemId );
 
 		return $siteLinkCacheMock;
 	}
@@ -217,4 +217,5 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 
 		$itemByTitleHelper->getItemIds( $sites, $titles, $normalize );
 	}
+
 }

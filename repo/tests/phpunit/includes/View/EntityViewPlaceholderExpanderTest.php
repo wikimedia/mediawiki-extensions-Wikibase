@@ -41,7 +41,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 
 		$idParser->expects( $this->any() )
 			->method( 'parse' )
-			->will( $this->returnValue( $itemId ) );
+			->willReturn( $itemId );
 
 		$userLanguages = $this->getMockBuilder( 'Wikibase\UserLanguageLookup' )
 			->disableOriginalConstructor()
@@ -49,7 +49,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 
 		$userLanguages->expects( $this->any() )
 			->method( 'getExtraUserLanguages' )
-			->will( $this->returnValue( array( 'de', 'en', 'ru' ) ) );
+			->willReturn( array( 'de', 'en', 'ru' ) );
 
 		return new EntityViewPlaceholderExpander(
 			$title,
@@ -73,7 +73,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
-			->will( $this->returnValue( $revision ) );
+			->willReturn( $revision );
 
 		return $entityLookup;
 	}
@@ -85,10 +85,9 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
-			->will( $this->returnCallback( function() {
+			->willReturnCallback( function() {
 				throw new StorageException( 'Entity not found' );
-			} )
-		);
+			} );
 
 		return $entityLookup;
 	}
@@ -111,7 +110,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 			->getMock();
 		$user->expects( $this->any() )
 			->method( 'isAnon' )
-			->will( $this->returnValue( $isAnon ) );
+			->willReturn( $isAnon );
 		$user->setName( 'EntityViewPlaceholderExpanderTest-DummyUser' );
 
 		return $user;

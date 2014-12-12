@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use Status;
 use Title;
 use User;
-use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;
@@ -51,13 +51,13 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 		$enwiki->expects( $this->any() )
 			->method( 'normalizePageName' )
 			->with( 'Delete me' )
-			->will( $this->returnValue( $titleExists ) );
+			->willReturn( $titleExists );
 
 		$siteStore = $this->getMock( 'SiteStore' );
 		$siteStore->expects( $this->any() )
 			->method( 'getSite' )
 			->with( 'enwiki' )
-			->will( $this->returnValue( $enwiki ) );
+			->willReturn( $enwiki );
 
 		return $siteStore;
 	}
@@ -67,7 +67,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->with( $itemId )
-			->will( $this->returnValue( Title::newFromText( $itemId->getSerialization() ) ) );
+			->willReturn( Title::newFromText( $itemId->getSerialization() ) );
 
 		return $entityTitleLookup;
 	}
@@ -75,8 +75,8 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	private function getEntityPermissionChecker() {
 		$entityPermissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
 		$entityPermissionChecker->expects( $this->any() )
-				->method( 'getPermissionStatusForEntity' )
-				->will( $this->returnValue( Status::newGood() ));
+			->method( 'getPermissionStatusForEntity' )
+			->willReturn( Status::newGood() );
 
 		return $entityPermissionChecker;
 	}
@@ -145,4 +145,5 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 			'Sitelink has been removed.'
 		);
 	}
+
 }

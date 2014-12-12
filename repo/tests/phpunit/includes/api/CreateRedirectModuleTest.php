@@ -73,13 +73,13 @@ class CreateRedirectModuleTest extends \PHPUnit_Framework_TestCase {
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnCallback( function( User $user, $permission, EntityId $id ) {
+			->willReturnCallback( function( User $user, $permission, EntityId $id ) {
 				if ( $user->getName() === 'UserWithoutPermission' && $permission === 'edit' ) {
 					return Status::newFatal( 'permissiondenied' );
 				} else {
 					return Status::newGood();
 				}
-			} ) );
+			} );
 
 		return $permissionChecker;
 	}

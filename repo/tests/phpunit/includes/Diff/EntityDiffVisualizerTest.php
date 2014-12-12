@@ -89,7 +89,7 @@ class EntityDiffVisualizerTest extends \MediaWikiTestCase {
 		$mock = $this->getMock( 'IContextSource' );
 		$mock->expects( $this->any() )
 			->method( 'getLanguage' )
-			->will( $this->returnValue( $en ) );
+			->willReturn( $en );
 
 		return $mock;
 	}

@@ -56,16 +56,16 @@ class RepoHooksTest extends \MediaWikiTestCase {
 
 		$source->expects( $this->any() )
 			->method( 'atEnd' )
-			->will( $this->returnCallback( function() use ( $atEnd ) {
+			->willReturnCallback( function() use ( $atEnd ) {
 				return $atEnd->atEnd;
-			} ) );
+			} );
 
 		$source->expects( $this->any() )
 			->method( 'readChunk' )
-			->will( $this->returnCallback( function() use ( $atEnd, $xml ) {
+			->willReturnCallback( function() use ( $atEnd, $xml ) {
 				$atEnd->atEnd = true;
 				return $xml;
-			} ) );
+			} );
 
 		return $source;
 	}

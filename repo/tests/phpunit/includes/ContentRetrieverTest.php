@@ -47,23 +47,23 @@ class ContentRetrieverTest extends \MediaWikiTestCase {
 
 		$article->expects( $this->any() )
 			->method( 'getContext' )
-			->will( $this->returnValue( $context ) );
+			->willReturn( $context );
 
 		$article->expects( $this->any() )
 			->method( 'getOldID' )
-			->will( $this->returnValue( $oldId ) );
+			->willReturn( $oldId );
 
 		$article->expects( $this->any() )
 			->method( 'getPage' )
-			->will( $this->returnValue( $page ) );
+			->willReturn( $page );
 
 		$article->expects( $this->any() )
 			->method( 'getRevisionFetched' )
-			->will( $this->returnValue( $revision ) );
+			->willReturn( $revision );
 
 		$article->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $title ) );
+			->willReturn( $title );
 
 		return $article;
 	}
@@ -81,11 +81,11 @@ class ContentRetrieverTest extends \MediaWikiTestCase {
 
 		$context->expects( $this->any() )
 			->method( 'getLanguage' )
-			->will( $this->returnValue( $title->getPageLanguage() ) );
+			->willReturn( $title->getPageLanguage() );
 
 		$context->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $title ) );
+			->willReturn( $title );
 
 		return $context;
 	}
@@ -103,7 +103,7 @@ class ContentRetrieverTest extends \MediaWikiTestCase {
 
 		$page->expects( $this->any() )
 			->method( 'getContentHandler' )
-			->will( $this->returnValue( $revision->getContentHandler() ) );
+			->willReturn( $revision->getContentHandler() );
 
 		return $page;
 	}
@@ -121,15 +121,15 @@ class ContentRetrieverTest extends \MediaWikiTestCase {
 
 		$request->expects( $this->any() )
 			->method( 'getCheck' )
-			->will( $this->returnValue( isset( $queryParams['diff'] ) ) );
+			->willReturn( isset( $queryParams['diff'] ) );
 
 		$request->expects( $this->any() )
 			->method( 'getQueryValues' )
-			->will( $this->returnValue( $queryParams ) );
+			->willReturn( $queryParams );
 
 		$request->expects( $this->any() )
 			->method( 'getVal' )
-			->will( $this->returnValue( isset( $queryParams['diff'] ) ? $queryParams['diff'] : null ) );
+			->willReturn( isset( $queryParams['diff'] ) ? $queryParams['diff'] : null );
 
 		return $request;
 	}

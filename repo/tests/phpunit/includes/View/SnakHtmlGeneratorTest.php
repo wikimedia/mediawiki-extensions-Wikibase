@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Html;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -12,7 +11,6 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
@@ -48,15 +46,15 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getSnakHtmlProvider() {
-		$snakFormatter = $this->getSnakFormatterMock();
+		$snakFormatter = $this->getDispatchingSnakFormatter();
 
-		$propertyIdFormatterMock = $this->getPropertyIdFormatterMock();
+		$propertyIdFormatter = $this->getEntityIdFormatter();
 
 		$testCases = array();
 
 		$testCases[] = array(
 			$snakFormatter,
-			$propertyIdFormatterMock,
+			$propertyIdFormatter,
 			new PropertySomeValueSnak( 42 ),
 			array(
 				'snak variation css' => '/wb-snakview-variation-somevalue/',
@@ -66,7 +64,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$testCases[] = array(
 			$snakFormatter,
-			$propertyIdFormatterMock,
+			$propertyIdFormatter,
 			new PropertySomeValueSnak( 42 ),
 			array(
 				'snak variation css' => '/wb-snakview-variation-somevalue/',
@@ -76,7 +74,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$testCases[] = array(
 			$snakFormatter,
-			$propertyIdFormatterMock,
+			$propertyIdFormatter,
 			new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
 			array(
 				'snak variation css' => '/wb-snakview-variation-value/',
@@ -90,44 +88,37 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return DispatchingSnakFormatter
 	 */
-	protected function getSnakFormatterMock() {
+	private function getDispatchingSnakFormatter() {
 		$snakFormatter = $this->getMockBuilder( 'Wikibase\Lib\DispatchingSnakFormatter' )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )
-			->will( $this->returnValue( 'a snak!' ) );
+			->willReturn( 'a snak!' );
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
+			->willReturn( SnakFormatter::FORMAT_HTML );
 
 		return $snakFormatter;
 	}
 
 	/**
-	 * @param EntityId $id
-	 * @return string
-	 */
-	public function getLinkForId( EntityId $id ) {
-		$name = $id->getEntityType() . ':' . $id->getSerialization();
-		$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
-
-		return Html::element( 'a', array( 'href' => $url ), $name );
-	}
-
-	/**
 	 * @return EntityIdFormatter
 	 */
-	protected function getPropertyIdFormatterMock() {
+	private function getEntityIdFormatter() {
 		$lookup = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$lookup->expects( $this->any() )
 			->method( 'format' )
-			->will( $this->returnCallback( array( $this, 'getLinkForId' ) ) );
+			->willReturnCallback( function( EntityId $id ) {
+				$name = $id->getEntityType() . ':' . $id->getSerialization();
+				$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
+				return Html::element( 'a', array( 'href' => $url ), $name );
+			} );
 
 		return $lookup;
 	}

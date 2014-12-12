@@ -71,7 +71,7 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$labelLookupFactory->expects( $this->any() )
 			->method( 'getLabelLookup' )
-			->will( $this->returnValue( $labelLookup ) );
+			->willReturn( $labelLookup );
 
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 
@@ -83,7 +83,7 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
+			->willReturn( SnakFormatter::FORMAT_HTML );
 
 		$snakFormatterFactory = $this->getMockBuilder( 'Wikibase\Lib\OutputFormatSnakFormatterFactory' )
 			->disableOriginalConstructor()
@@ -91,7 +91,7 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$snakFormatterFactory->expects( $this->any() )
 			->method( 'getSnakFormatter' )
-			->will( $this->returnValue( $snakFormatter ) );
+			->willReturn( $snakFormatter );
 
 		return $snakFormatterFactory;
 	}

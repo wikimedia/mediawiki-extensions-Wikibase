@@ -36,13 +36,13 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 		$instance = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
 		$instance->expects( $this->any() )
 			->method( 'getFormat' )
-			->will( $this->returnValue( $format ) );
+			->willReturn( $format );
 		$instance->expects( $this->any() )
 			->method( 'canFormatSnak' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 		$instance->expects( $this->any() )
 			->method( 'formatSnak' )
-			->will( $this->returnValue( '<i>SNAK</i>' ) );
+			->willReturn( '<i>SNAK</i>' );
 		return $instance;
 	}
 
@@ -54,7 +54,7 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 
 		$instance->expects( $this->any() )
 			->method( 'format' )
-			->will( $this->returnValue( '<a>PID</a>' ) );
+			->willReturn( '<a>PID</a>' );
 
 		return $instance;
 	}

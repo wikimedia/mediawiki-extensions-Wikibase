@@ -103,18 +103,17 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnCallback( function ( EntityId $id ) use ( $entities, $missingIds, $redirectedIds ) {
-					if ( in_array( $id, $missingIds ) ) {
-						return null;
-					}
-					if ( in_array( $id, $redirectedIds ) ) {
-						throw new UnresolvedRedirectException( new ItemId( 'Q123' ) );
-					}
-
-					$key = $id->getSerialization();
-					return $entities[$key];
+			->willReturnCallback( function( EntityId $id ) use ( $entities, $missingIds, $redirectedIds ) {
+				if ( in_array( $id, $missingIds ) ) {
+					return null;
 				}
-			) );
+				if ( in_array( $id, $redirectedIds ) ) {
+					throw new UnresolvedRedirectException( new ItemId( 'Q123' ) );
+				}
+
+				$key = $id->getSerialization();
+				return $entities[$key];
+			} );
 
 		return new JsonDumpGenerator( $out, $entityLookup, $serializer );
 	}
@@ -155,17 +154,14 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	protected function makeIdPager( array $ids, $entityType = null ) {
 		$pager = $this->getMock( 'Wikibase\Repo\Store\EntityIdPager' );
 
-		$this_ = $this;
+		$self = $this;
 		$offset = 0;
 
 		$pager->expects( $this->any() )
 			->method( 'fetchIds' )
-			->will( $this->returnCallback(
-				function ( $limit ) use ( $ids, $entityType, &$offset, $this_ ) {
-					$res = $this_->listEntities( $ids, $entityType, $limit, $offset );
-					return $res;
-				}
-			) );
+			->willReturnCallback( function( $limit ) use ( $ids, $entityType, &$offset, $self ) {
+				return $self->listEntities( $ids, $entityType, $limit, $offset );
+			} );
 
 		return $pager;
 	}
@@ -212,10 +208,9 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnCallback( function ( EntityId $id ) {
-					throw new MWContentSerializationException( 'cannot deserialize!' );
-				}
-			) );
+			->willReturnCallback( function( EntityId $id ) {
+				throw new MWContentSerializationException( 'cannot deserialize!' );
+			} );
 
 		return $entityLookup;
 	}
@@ -518,4 +513,5 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertSame( 9, count( json_decode( $json ) ), 'Redirected Item Q9 not in dump' );
 	}
+
 }

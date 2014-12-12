@@ -157,7 +157,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 
 		$snakValidator->expects( $this->any() )
 			->method( 'validate' )
-			->will( $this->returnValue( $result ) );
+			->willReturn( $result );
 
 		$changeOps = new ChangeOps();
 		$changeOps->add( new ChangeOpMainSnak( $guid, $snak, $guidGenerator, $snakValidator ) );
@@ -174,17 +174,17 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 			->getMock();
 		$changeOp->expects( $this->any() )
 			->method( 'validate' )
-			->will( $this->returnCallback( function( Item $item ) {
+			->willReturnCallback( function( Item $item ) {
 				// Fail when the label is already set (by a previous apply call).
 				return $item->getLabel( 'en' )
 					? Result::newError( array() )
 					: Result::newSuccess();
-			} ) );
+			} );
 		$changeOp->expects( $this->any() )
 			->method( 'apply' )
-			->will( $this->returnCallback( function( Item $item ) {
+			->willReturnCallback( function( Item $item ) {
 				$item->setLabel( 'en', 'Label' );
-			} ) );
+			} );
 
 		$changeOps = new ChangeOps();
 		$changeOps->add( $changeOp );

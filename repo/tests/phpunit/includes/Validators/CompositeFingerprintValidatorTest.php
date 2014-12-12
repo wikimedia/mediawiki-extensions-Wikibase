@@ -28,12 +28,12 @@ class CompositeFingerprintValidatorTest extends \PHPUnit_Framework_TestCase {
 		$good = $this->getMock( 'Wikibase\Validators\FingerprintValidator' );
 		$good->expects( $this->any() )
 			->method( 'validateFingerprint' )
-			->will( $this->returnValue( $success ) );
+			->willReturn( $success );
 
 		$bad = $this->getMock( 'Wikibase\Validators\FingerprintValidator' );
 		$bad->expects( $this->any() )
 			->method( 'validateFingerprint' )
-			->will( $this->returnValue( $failure ) );
+			->willReturn( $failure );
 
 		return array(
 			array( array( $good, $bad ), false ),

@@ -31,14 +31,14 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'string' ) );
+			->willReturn( 'string' );
 
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
-			} ) );
+			} );
 
 		$serializerOptions = new SerializationOptions();
 		$serializerFactory = new SerializerFactory( $serializerOptions, $dataTypeLookup );
@@ -264,4 +264,5 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 			$this->assertNull( $actual, $format );
 		}
 	}
+
 }

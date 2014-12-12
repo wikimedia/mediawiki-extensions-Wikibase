@@ -35,11 +35,9 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$mock->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback(
-				function ( EntityId $id ) {
-					return Title::makeTitle( NS_MAIN, $id->getSerialization() );
-				}
-			) );
+			->willReturnCallback( function( EntityId $id ) {
+				return Title::makeTitle( NS_MAIN, $id->getSerialization() );
+			} );
 
 		return $mock;
 	}
@@ -48,17 +46,15 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	 * @return SiteLinkLookup
 	 */
 	private function getMockSiteLinkLookup() {
-		$entityId = new ItemId( 'Q123' );
+		$itemId = new ItemId( 'Q123' );
 
 		$mock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
 
 		$mock->expects( $this->any() )
 			->method( 'getItemIdForLink' )
-			->will( $this->returnCallback(
-				function ( $siteId, $pageName ) use ( $entityId ) {
-					return ( $siteId === 'dewiki' ) ? $entityId : null;
-				}
-			) );
+			->willReturnCallback( function( $siteId, $pageName ) use ( $itemId ) {
+				return $siteId === 'dewiki' ? $itemId : null;
+			} );
 
 		return $mock;
 	}
@@ -67,26 +63,27 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	 * @return SiteStore
 	 */
 	private function getMockSiteStore() {
-		$getSite = function ( $siteId ) {
+		$getSite = function( $siteId ) {
 			$site = new Site();
 			$site->setGlobalId( $siteId );
 			$site->setLinkPath( "http://$siteId.com/$1" );
+
 			return $site;
 		};
 
 		$mockSiteList = $this->getMock( 'SiteList' );
 		$mockSiteList->expects( $this->any() )
 			->method( 'getSite' )
-			->will( $this->returnCallback( $getSite ) );
+			->willReturnCallback( $getSite );
 
 		$mock = $this->getMock( 'SiteStore' );
 		$mock->expects( $this->any() )
 			->method( 'getSite' )
-			->will( $this->returnCallback( $getSite ) );
+			->willReturnCallback( $getSite );
 
 		$mock->expects( $this->any() )
 			->method( 'getSites' )
-			->will( $this->returnValue( $mockSiteList ) );
+			->willReturn( $mockSiteList );
 
 		return $mock;
 	}

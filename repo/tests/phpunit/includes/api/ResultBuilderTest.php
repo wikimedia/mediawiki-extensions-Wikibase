@@ -51,25 +51,25 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			->getMock();
 		$mockTitle->expects( $this->any() )
 			->method( 'getArticleID' )
-			->will( $this->returnValue( 123 ) );
+			->willReturn( 123 );
 		$mockTitle->expects( $this->any() )
 			->method( 'getNamespace' )
-			->will( $this->returnValue( 456 ) );
+			->willReturn( 456 );
 		$mockTitle->expects( $this->any() )
 			->method( 'getPrefixedText' )
-			->will( $this->returnValue( 'MockPrefixedText' ) );
+			->willReturn( 'MockPrefixedText' );
 
 		$mockEntityTitleLookup = $this->getMock( '\Wikibase\Lib\Store\EntityTitleLookup' );
 		$mockEntityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnValue( $mockTitle ) );
+			->willReturn( $mockTitle );
 
 		$mockPropertyDataTypeLookup = $this->getMock( '\Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$mockPropertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnCallback( function( $propertyId ) {
+			->willReturnCallback( function( $propertyId ) {
 				return 'DtIdFor_' . $propertyId;
-			} ) );
+			} );
 
 		// @todo inject EntityFactory and SiteStore
 		$serializerFactory = new SerializerFactory(
@@ -753,11 +753,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		->getMock();
 		$mockRevision->expects( $this->once() )
 			->method( 'getId' )
-			->will( $this->returnValue( 123 ) );
+			->willReturn( 123 );
 		$mockStatus = $this->getMock( 'Status' );
 		$mockStatus->expects( $this->once() )
 			->method( 'getValue' )
-			->will( $this->returnValue( array( 'revision' => $mockRevision ) ) );
+			->willReturn( array( 'revision' => $mockRevision ) );
 		$expected = array( 'entity' => array( 'lastrevid' => '123' ) );
 
 		$resultBuilder = $this->getResultBuilder( $result );

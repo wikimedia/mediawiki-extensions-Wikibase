@@ -71,9 +71,9 @@ class OutputPageJsConfigBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$user->expects( $this->any() )
 			->method( 'isBlockedFrom' )
-			->will( $this->returnCallback( function() use ( $isBlocked ) {
+			->willReturnCallback( function() use ( $isBlocked ) {
 				return $isBlocked;
-			} ) );
+			} );
 
 		return $user;
 	}
@@ -85,9 +85,9 @@ class OutputPageJsConfigBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$title->expects( $this->any() )
 			->method( 'userCan' )
-			->will( $this->returnCallback( function() use ( $canEdit ) {
+			->willReturnCallback( function() use ( $canEdit ) {
 				return $canEdit;
-			} ) );
+			} );
 
 		return $title;
 	}
@@ -101,23 +101,23 @@ class OutputPageJsConfigBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$out->expects( $this->any() )
 			->method( 'getUser' )
-			->will( $this->returnCallback( function() use ( $user ) {
+			->willReturnCallback( function() use ( $user ) {
 				return $user;
-			} ) );
+			} );
 
 		$out->expects( $this->any() )
 			->method( 'getLanguage' )
-			->will( $this->returnCallback( function() {
+			->willReturnCallback( function() {
 				return Language::factory( 'qqx' );
-			} ) );
+			} );
 
 		$title = $this->getTitle( $canEdit );
 
 		$out->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnCallback( function() use( $title ) {
+			->willReturnCallback( function() use ( $title ) {
 				return $title;
-			} ) );
+			} );
 
 		return $out;
 	}

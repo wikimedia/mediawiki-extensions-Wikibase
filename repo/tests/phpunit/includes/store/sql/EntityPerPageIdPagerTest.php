@@ -65,7 +65,7 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 
 		$epp->expects( $this->any() )
 			->method( 'listEntities' )
-			->will( $this->returnCallback( $listEntities ) );
+			->willReturnCallback( $listEntities );
 
 		return new EntityPerPageIdPager( $epp, $type );
 	}

@@ -40,7 +40,7 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$result->expects( $this->any() )
 			->method( 'getIsRawMode' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		$api = $this->getMockBuilder( 'ApiBase' )
 			->disableOriginalConstructor()
@@ -48,11 +48,11 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$api->expects( $this->any() )
 			->method( 'getResult' )
-			->will( $this->returnValue( $result ) );
+			->willReturn( $result );
 
 		$api->expects( $this->any() )
 			->method( 'getLanguage' )
-			->will( $this->returnValue( $language ) );
+			->willReturn( $language );
 
 		return $api;
 	}

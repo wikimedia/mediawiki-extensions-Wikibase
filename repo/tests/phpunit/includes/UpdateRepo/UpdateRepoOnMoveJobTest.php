@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use Status;
 use Title;
 use User;
-use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
@@ -47,13 +47,13 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$enwiki = $this->getMock( 'Site' );
 		$enwiki->expects( $this->any() )
 			->method( 'normalizePageName' )
-			->will( $this->returnValue( $normalizedPageName ) );
+			->willReturn( $normalizedPageName );
 
 		$siteStore = $this->getMock( 'SiteStore' );
 		$siteStore->expects( $this->any() )
 			->method( 'getSite' )
 			->with( 'enwiki' )
-			->will( $this->returnValue( $enwiki ) );
+			->willReturn( $enwiki );
 
 		return $siteStore;
 	}
@@ -63,7 +63,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->with( $itemId )
-			->will( $this->returnValue( Title::newFromText( $itemId->getSerialization() ) ) );
+			->willReturn( Title::newFromText( $itemId->getSerialization() ) );
 
 		return $entityTitleLookup;
 	}
@@ -71,8 +71,8 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	private function getEntityPermissionChecker() {
 		$entityPermissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
 		$entityPermissionChecker->expects( $this->any() )
-				->method( 'getPermissionStatusForEntity' )
-				->will( $this->returnValue( Status::newGood() ));
+			->method( 'getPermissionStatusForEntity' )
+			->willReturn( Status::newGood() );
 
 		return $entityPermissionChecker;
 	}
@@ -97,8 +97,8 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider runProvider
 	 *
-	 * @param bool $expected
-	 * @param bool $titleExists
+	 * @param string $expected
+	 * @param string $normalizedPageName
 	 * @param string $oldTitle
 	 */
 	public function testRun( $expected, $normalizedPageName, $oldTitle ) {
@@ -147,4 +147,5 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 			array( new ItemId( 'Q42' ) )
 		);
 	}
+
 }

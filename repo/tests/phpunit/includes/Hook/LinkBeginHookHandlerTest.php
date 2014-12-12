@@ -149,13 +149,13 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$entityIdLookup->expects( $this->any() )
 			->method( 'getPageEntityId' )
-			->will( $this->returnCallback( function( Title $title ) {
+			->willReturnCallback( function( Title $title ) {
 				if ( preg_match( '/^Q(\d+)$/', $title->getText(), $m ) ) {
 					return new ItemId( $m[0] );
 				}
 
 				return null;
-			} ) );
+			} );
 
 		return $entityIdLookup;
 	}
@@ -168,7 +168,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$termLookup->expects( $this->any() )
 			->method( 'getLabels' )
-			->will( $this->returnCallback( function ( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() == LinkBeginHookHandlerTest::ITEM_WITH_LABEL ) {
 					return array( 'en' => 'linkbegin-label' );
 				}
@@ -178,11 +178,11 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 				}
 
 				throw new StorageException( 'No such entity: ' . $id->getSerialization() );
-			} ) );
+			} );
 
 		$termLookup->expects( $this->any() )
 			->method( 'getDescriptions' )
-			->will( $this->returnCallback( function ( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() == LinkBeginHookHandlerTest::ITEM_WITH_LABEL ) {
 					return array( 'en' => 'linkbegin-description' );
 				}
@@ -193,7 +193,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 				}
 
 				throw new StorageException( 'No such entity: ' . $id->getSerialization() );
-			} ) );
+			} );
 
 		return $termLookup;
 	}
@@ -211,6 +211,6 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 			$languageFallback,
 			Language::factory( 'en' )
 		);
-
 	}
+
 }

@@ -83,19 +83,19 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$idFormatter->expects( $this->any() )->method( 'format' )
-			->will( $this->returnCallback( array( $this, 'formatId' ) ) );
+			->willReturnCallback( array( $this, 'formatId' ) );
 
 		$valueFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
 		$valueFormatter->expects( $this->any() )->method( 'format' )
-			->will( $this->returnCallback( array( $this, 'formatValue' ) ) );
+			->willReturnCallback( array( $this, 'formatValue' ) );
 		$valueFormatter->expects( $this->any() )->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
+			->willReturn( SnakFormatter::FORMAT_PLAIN );
 
 		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
 		$snakFormatter->expects( $this->any() )->method( 'formatSnak' )
-			->will( $this->returnCallback( array( $this, 'formatSnak' ) ) );
+			->willReturnCallback( array( $this, 'formatSnak' ) );
 		$snakFormatter->expects( $this->any() )->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
+			->willReturn( SnakFormatter::FORMAT_PLAIN );
 
 		$language = Language::factory( 'en' );
 
@@ -330,7 +330,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 	 */
 	public function testOnFormat( $model, $root, $pre, $auto, $post, $title, $local, $expected ) {
 		$itemTitle = $this->getMock( $title );
-		$itemTitle->expects( $this->once() )->method( 'getContentModel' )->will( $this->returnValue( $model ) );
+		$itemTitle->expects( $this->once() )->method( 'getContentModel' )->willReturn( $model );
 		$comment = null;
 		RepoHooks::onFormat( array($model, $root), $comment, $pre, $auto, $post, $itemTitle, $local );
 		if ( is_null( $expected ) ) {

@@ -27,12 +27,12 @@ class CompositeEntityValidatorTest extends \PHPUnit_Framework_TestCase {
 		$good = $this->getMock( 'Wikibase\Validators\EntityValidator' );
 		$good->expects( $this->any() )
 			->method( 'validateEntity' )
-			->will( $this->returnValue( $success ) );
+			->willReturn( $success );
 
 		$bad = $this->getMock( 'Wikibase\Validators\EntityValidator' );
 		$bad->expects( $this->any() )
 			->method( 'validateEntity' )
-			->will( $this->returnValue( $failure ) );
+			->willReturn( $failure );
 
 		return array(
 			array( array( $good, $bad ), false ),

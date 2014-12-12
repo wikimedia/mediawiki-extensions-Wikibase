@@ -32,10 +32,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  */
 class EditEntityTest extends \MediaWikiTestCase {
 
-	protected $permissions;
-	protected $userGroups;
-
-	protected static function getUser( $name ) {
+	private function getUser( $name ) {
 		$user = User::newFromName( $name );
 
 		if ( $user->getId() === 0 ) {
@@ -46,12 +43,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	protected function setUp() {
-		global $wgGroupPermissions, $wgHooks;
+		global $wgHooks;
 
 		parent::setUp();
-
-		$this->permissions = $wgGroupPermissions;
-		$this->userGroups = array( 'user' );
 
 		if ( empty( $wgHooks['EditFilterMergedContent'] ) ) {
 			// This fake ensures EditEntity::runEditFilterHooks is run and runtime errors are found
@@ -60,9 +54,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	protected function tearDown() {
-		global $wgGroupPermissions, $wgHooks;
-
-		$wgGroupPermissions = $this->permissions;
+		global $wgHooks;
 
 		if ( $wgHooks['EditFilterMergedContent'] === array( null ) ) {
 			unset( $wgHooks['EditFilterMergedContent'] );
@@ -74,18 +66,21 @@ class EditEntityTest extends \MediaWikiTestCase {
 	/**
 	 * @return EntityTitleLookup
 	 */
-	protected function newTitleLookupMock() {
+	private function getEntityTitleLookup() {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForID' )
-			->will( $this->returnCallback( function ( EntityId $id ) {
-				return Title::makeTitle( NS_MAIN, $id->getEntityType() . '/' . $id->getSerialization() );
-			}));
+			->willReturnCallback( function( EntityId $id ) {
+				return Title::makeTitle(
+					NS_MAIN,
+					$id->getEntityType() . '/' . $id->getSerialization()
+				);
+			} );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getNamespaceForType' )
-			->will( $this->returnValue( NS_MAIN ) );
+			->willReturn( NS_MAIN );
 
 		return $titleLookup;
 	}
@@ -95,13 +90,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 *
 	 * @return EntityPermissionChecker
 	 */
-	protected function newEntityPermissionCheckerMock( $permissions ) {
+	private function getEntityPermissionChecker( $permissions ) {
 		$permissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
 
-		$checkAction = function ( $user, $action ) use( $permissions ) {
-			if ( $permissions === null ) {
-				return Status::newGood( true );
-			} elseif ( isset( $permissions[$action] ) && $permissions[$action] )  {
+		$checkAction = function( $user, $action ) use ( $permissions ) {
+			if ( $permissions === null
+				|| ( isset( $permissions[$action] ) && $permissions[$action] )
+			) {
 				return Status::newGood( true );
 			} else {
 				return Status::newFatal( 'badaccess-group0' );
@@ -110,21 +105,21 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntity' )
-			->will( $this->returnCallback( $checkAction ) );
+			->willReturnCallback( $checkAction );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityType' )
-			->will( $this->returnCallback( $checkAction ) );
+			->willReturnCallback( $checkAction );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnCallback( $checkAction ) );
+			->willReturnCallback( $checkAction );
 
 		return $permissionChecker;
 	}
 
 	/**
-	 * @param MockRepository $repo
+	 * @param MockRepository $mockRepository
 	 * @param Entity $entity
 	 * @param User $user
 	 * @param bool $baseRevId
@@ -133,7 +128,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 *
 	 * @return EditEntity
 	 */
-	protected function makeEditEntity( MockRepository $repo, Entity $entity, User $user = null, $baseRevId = false, $permissions = null ) {
+	private function makeEditEntity(
+		MockRepository $mockRepository,
+		Entity $entity,
+		User $user = null,
+		$baseRevId = false,
+		$permissions = null
+	) {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 
@@ -141,22 +142,29 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$user = User::newFromName( 'EditEntityTestUser' );
 		}
 
-		$titleLookup = $this->newTitleLookupMock();
-		$permissionChecker = $this->newEntityPermissionCheckerMock( $permissions );
+		$titleLookup = $this->getEntityTitleLookup();
+		$permissionChecker = $this->getEntityPermissionChecker( $permissions );
 
-		$edit = new EditEntity( $titleLookup, $repo, $repo, $permissionChecker, $entity, $user, $baseRevId, $context );
-
-		return $edit;
+		return new EditEntity(
+			$titleLookup,
+			$mockRepository,
+			$mockRepository,
+			$permissionChecker,
+			$entity,
+			$user,
+			$baseRevId,
+			$context
+		);
 	}
 
 	/**
 	 * @return MockRepository
 	 */
-	protected function makeMockRepo() {
+	private function getMockRepository() {
 		$repo = new MockRepository();
 
-		$user = self::getUser( 'EditEntityTestUser1' );
-		$otherUser = self::getUser( 'EditEntityTestUser2' );
+		$user = $this->getUser( 'EditEntityTestUser1' );
+		$otherUser = $this->getUser( 'EditEntityTestUser2' );
 
 		/* @var Item $item */
 		$item = Item::newEmpty();
@@ -261,15 +269,21 @@ class EditEntityTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideHasEditConflict
 	 */
-	public function testHasEditConflict( $inputData, $baseRevisionId, $expectedConflict, $expectedFix, array $expectedData = null ) {
-		$repo = $this->makeMockRepo();
+	public function testHasEditConflict(
+		array $inputData = null,
+		$baseRevisionId,
+		$expectedConflict,
+		$expectedFix,
+		array $expectedData = null
+	) {
+		$repo = $this->getMockRepository();
 
 		$entityId = new ItemId( 'Q17' );
 		$revision = $repo->getEntityRevision( $entityId, $baseRevisionId );
 		$entity = $revision->getEntity( $entityId );
 
 		// NOTE: the user name must be the one used in makeMockRepo()
-		$user = self::getUser( 'EditEntityTestUser1' );
+		$user = $this->getUser( 'EditEntityTestUser1' );
 
 		// change entity ----------------------------------
 		if ( $inputData === null ) {
@@ -322,7 +336,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public static function provideAttemptSaveWithLateConflict() {
+	public function provideAttemptSaveWithLateConflict() {
 		return array(
 			array( true, true ),
 			array( false, false ),
@@ -333,9 +347,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideAttemptSaveWithLateConflict
 	 */
 	public function testAttemptSaveWithLateConflict( $baseRevId, $expectedConflict ) {
-		$repo = $this->makeMockRepo();
+		$repo = $this->getMockRepository();
 
-		$user = self::getUser( 'EditEntityTestUser' );
+		$user = $this->getUser( 'EditEntityTestUser' );
 
 		// create item
 		$entity = Item::newEmpty();
@@ -354,7 +368,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		// create independent Entity instance for the same entity, and modify and save it
 		$entity2 = $entity->copy();
-		$user2 = self::getUser( "EditEntityTestUser2" );
+		$user2 = $this->getUser( 'EditEntityTestUser2' );
 
 		$entity2->setLabel( 'en', 'Toast' );
 		$repo->putEntity( $entity2, 0, 0, $user2 );
@@ -385,17 +399,17 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	public function testErrorPage_DoesNotDoubleEscapeHtmlCharacters() {
-		$repo = $this->makeMockRepo();
+		$repo = $this->getMockRepository();
 		$permissions = array();
 		$context = new RequestContext();
 		// Can not reuse makeEditEntity because we need the access the context
 		$editEntity = new EditEntity(
-			$this->newTitleLookupMock(),
+			$this->getEntityTitleLookup(),
 			$repo,
 			$repo,
-			$this->newEntityPermissionCheckerMock( $permissions ),
+			$this->getEntityPermissionChecker( $permissions ),
 			Item::newEmpty(),
-			self::getUser( 'EditEntityTestUser' ),
+			$this->getUser( 'EditEntityTestUser' ),
 			false,
 			$context
 		);
@@ -423,12 +437,12 @@ class EditEntityTest extends \MediaWikiTestCase {
 		);
 	}
 
-	protected function prepareItemForPermissionCheck( User $user, MockRepository $repo, $create ) {
+	private function prepareItemForPermissionCheck( User $user, MockRepository $mockRepository, $create ) {
 		$item = Item::newEmpty();
 
 		if ( $create ) {
 			$item->setLabel( 'de', 'Test' );
-			$repo->putEntity( $item, 0, 0, $user );
+			$mockRepository->putEntity( $item, 0, 0, $user );
 		}
 
 		return $item;
@@ -438,9 +452,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider dataCheckEditPermissions
 	 */
 	public function testCheckEditPermissions( $permissions, $create, $expectedOK ) {
-		$repo = $this->makeMockRepo();
+		$repo = $this->getMockRepository();
 
-		$user = self::getUser( "EditEntityTestUser" );
+		$user = $this->getUser( 'EditEntityTestUser' );
 		$item = $this->prepareItemForPermissionCheck( $user, $repo, $create );
 
 		$edit = $this->makeEditEntity( $repo, $item, $user, false, $permissions );
@@ -454,9 +468,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider dataCheckEditPermissions
 	 */
 	public function testAttemptSavePermissions( $permissions, $create, $expectedOK ) {
-		$repo = $this->makeMockRepo();
+		$repo = $this->getMockRepository();
 
-		$user = self::getUser( "EditEntityTestUser" );
+		$user = $this->getUser( 'EditEntityTestUser' );
 		$item = $this->prepareItemForPermissionCheck( $user, $repo, $create );
 
 		$token = $user->getEditToken();
@@ -474,7 +488,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @param User $user
 	 * @param array $groups
 	 */
-	protected function setUserGroups( User $user, array $groups ) {
+	private function setUserGroups( User $user, array $groups ) {
 		if ( $user->getId() === 0 ) {
 			$user = User::createNew( $user->getName() );
 		}
@@ -491,7 +505,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function dataAttemptSaveRateLimit() {
+	public function dataAttemptSaveRateLimit() {
 		return array(
 
 			array( // #0: no limits
@@ -594,7 +608,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider dataAttemptSaveRateLimit
 	 */
 	public function testAttemptSaveRateLimit( $limits, $groups, $edits ) {
-		$repo = $this->makeMockRepo();
+		$repo = $this->getMockRepository();
 
 		$this->setMwGlobals(
 			'wgRateLimits',
@@ -607,7 +621,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 			new HashBagOStuff()
 		);
 
-		$user = self::getUser( "UserForTestAttemptSaveRateLimit" );
+		$user = $this->getUser( 'UserForTestAttemptSaveRateLimit' );
 		$this->setUserGroups( $user, $groups );
 
 		$items = array();
@@ -636,7 +650,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function provideIsTokenOk() {
+	public function provideIsTokenOk() {
 		return array(
 			array( //0
 				true, // use a newly generated valid token
@@ -661,8 +675,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideIsTokenOk
 	 */
 	public function testIsTokenOk( $token, $shouldWork ) {
-		$repo = $this->makeMockRepo();
-		$user = self::getUser( "EditEntityTestUser" );
+		$repo = $this->getMockRepository();
+		$user = $this->getUser( 'EditEntityTestUser' );
 
 		$item = Item::newEmpty();
 		$edit = $this->makeEditEntity( $repo, $item, $user );
@@ -679,7 +693,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertNotEquals( $shouldWork, $edit->showErrorPage() );
 	}
 
-	public static function provideAttemptSaveWatch() {
+	public function provideAttemptSaveWatch() {
 		// $watchdefault, $watchcreations, $new, $watched, $watch, $expected
 
 		return array(
@@ -701,9 +715,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideAttemptSaveWatch
 	 */
 	public function testAttemptSaveWatch( $watchdefault, $watchcreations, $new, $watched, $watch, $expected ) {
-		$repo = $this->makeMockRepo();
+		$repo = $this->getMockRepository();
 
-		$user = self::getUser( "EditEntityTestUser2" );
+		$user = $this->getUser( 'EditEntityTestUser2' );
 
 		if ( $user->getId() === 0 ) {
 			$user->addToDatabase();

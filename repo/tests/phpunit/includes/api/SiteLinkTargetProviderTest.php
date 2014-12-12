@@ -63,7 +63,7 @@ class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 		$mockSiteStore = $this->getMock( 'SiteStore' );
 		$mockSiteStore->expects( $this->once() )
 			->method( 'getSites' )
-			->will( $this->returnValue( $siteList ) );
+			->willReturn( $siteList );
 		return $mockSiteStore;
 	}
 
@@ -71,13 +71,13 @@ class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 		$mockSite = $this->getMock( 'Site' );
 		$mockSite->expects( $this->once() )
 			->method( 'getGroup' )
-			->will( $this->returnValue( $group ) );
+			->willReturn( $group );
 		$mockSite->expects( $this->any() )
 			->method( 'getGlobalId' )
-			->will( $this->returnValue( $globalId ) );
+			->willReturn( $globalId );
 		$mockSite->expects( $this->any() )
 			->method( 'getNavigationIds' )
-			->will( $this->returnValue( array() ) );
+			->willReturn( array() );
 		return $mockSite;
 	}
 

@@ -67,7 +67,7 @@ class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnCallback( function( User $user, $permission, EntityId $id ) {
+			->willReturnCallback( function( User $user, $permission, EntityId $id ) {
 				$userWithoutPermissionName = 'UserWithoutPermission-' . $permission;
 
 				if ( $user->getName() === $userWithoutPermissionName ) {
@@ -75,7 +75,7 @@ class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 				} else {
 					return Status::newGood();
 				}
-			} ) );
+			} );
 
 		return $permissionChecker;
 	}

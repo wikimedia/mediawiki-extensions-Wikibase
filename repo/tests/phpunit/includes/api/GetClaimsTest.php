@@ -103,7 +103,7 @@ class GetClaimsTest extends \ApiTestCase {
 
 		$lookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'string' ) );
+			->willReturn( 'string' );
 
 		return $lookup;
 	}

@@ -129,10 +129,10 @@ class ChangeOpTestMockProvider {
 			->getMock();
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'validate' )
-			->will( PHPUnit_Framework_TestCase::returnValue( true ) );
+			->willReturn( true );
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'validateFormat' )
-			->will( PHPUnit_Framework_TestCase::returnValue( true ) );
+			->willReturn( true );
 		return $mock;
 	}
 
@@ -160,7 +160,7 @@ class ChangeOpTestMockProvider {
 		$mock = $this->getMock( '\Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getDataTypeIdForProperty' )
-			->will( PHPUnit_Framework_TestCase::returnValue( 'string' ) );
+			->willReturn( 'string' );
 
 		return $mock;
 	}
@@ -193,13 +193,13 @@ class ChangeOpTestMockProvider {
 			->getMock();
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getType' )
-			->will( PHPUnit_Framework_TestCase::returnCallback( function ( $id ) use ( $types ) {
+			->willReturnCallback( function( $id ) use ( $types ) {
 				if ( !isset( $types[$id] ) ) {
 					throw new OutOfBoundsException( "No such type: $id" );
 				}
 
 				return $types[$id];
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -217,14 +217,14 @@ class ChangeOpTestMockProvider {
 
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'validate' )
-			->will( PHPUnit_Framework_TestCase::returnCallback( function( $text ) {
+			->willReturnCallback( function( $text ) {
 				if ( $text === 'INVALID' ) {
 					$error = Error::newError( 'Invalid', '', 'test-invalid' );
 					return Result::newError( array( $error ) );
 				} else {
 					return Result::newSuccess();
 				}
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -243,17 +243,17 @@ class ChangeOpTestMockProvider {
 			->getMock();
 		$mockClaimGuid->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getSerialization' )
-			->will( PHPUnit_Framework_TestCase::returnValue( 'theValidatorIsMockedSoMeh! :D' ) );
+			->willReturn( 'theValidatorIsMockedSoMeh! :D' );
 		$mockClaimGuid->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getEntityId' )
-			->will( PHPUnit_Framework_TestCase::returnValue( $entityId ) );
+			->willReturn( $entityId );
 
 		$mock = $this->getMockBuilder( 'Wikibase\DataModel\Claim\ClaimGuidParser' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'parse' )
-			->will( PHPUnit_Framework_TestCase::returnValue( $mockClaimGuid ) );
+			->willReturn( $mockClaimGuid );
 		return $mock;
 	}
 
@@ -363,11 +363,9 @@ class ChangeOpTestMockProvider {
 		}
 
 		if ( $returnValue instanceof Result ) {
-			$detectLabelConflictsForEntity = function() use ( $returnValue ) {
+			$detectTermConflicts = function() use ( $returnValue ) {
 				return $returnValue;
 			};
-
-			$detectTermConflicts = $detectLabelConflictsForEntity;
 		} else {
 			$detectTermConflicts = array( $this, 'detectTermConflicts' );
 		}
@@ -378,7 +376,7 @@ class ChangeOpTestMockProvider {
 
 		$dupeDetector->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'detectTermConflicts' )
-			->will( PHPUnit_Framework_TestCase::returnCallback( $detectTermConflicts ) );
+			->willReturnCallback( $detectTermConflicts );
 
 		return $dupeDetector;
 	}
@@ -432,7 +430,7 @@ class ChangeOpTestMockProvider {
 		$mock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkCache' );
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getConflictsForItem' )
-			->will( PHPUnit_Framework_TestCase::returnCallback( $getConflictsForItem ) );
+			->willReturnCallback( $getConflictsForItem );
 		return $mock;
 	}
 
@@ -482,33 +480,23 @@ class ChangeOpTestMockProvider {
 
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getFingerprintValidator' )
-			->will( PHPUnit_Framework_TestCase::returnCallback(
-				array( $this, 'getMockFingerprintValidator' )
-			) );
+			->willReturnCallback( array( $this, 'getMockFingerprintValidator' ) );
 
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getLanguageValidator' )
-			->will( PHPUnit_Framework_TestCase::returnCallback(
-				array( $this, 'getMockTermValidator' )
-			) );
+			->willReturnCallback( array( $this, 'getMockTermValidator' ) );
 
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getLabelValidator' )
-			->will( PHPUnit_Framework_TestCase::returnCallback(
-				array( $this, 'getMockTermValidator' )
-			) );
+			->willReturnCallback( array( $this, 'getMockTermValidator' ) );
 
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getDescriptionValidator' )
-			->will( PHPUnit_Framework_TestCase::returnCallback(
-				array( $this, 'getMockTermValidator' )
-			) );
+			->willReturnCallback( array( $this, 'getMockTermValidator' ) );
 
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getAliasValidator' )
-			->will( PHPUnit_Framework_TestCase::returnCallback(
-				array( $this, 'getMockTermValidator' )
-			) );
+			->willReturnCallback( array( $this, 'getMockTermValidator' ) );
 
 		return $mock;
 	}

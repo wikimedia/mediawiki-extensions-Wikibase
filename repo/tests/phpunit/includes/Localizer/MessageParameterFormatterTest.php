@@ -66,14 +66,12 @@ class MessageParameterFormatterTest extends \PHPUnit_Framework_TestCase {
 		$mock = $this->getMock( 'ValueFormatters\ValueFormatter' );
 		$mock->expects( $this->any() )
 			->method( 'format' )
-			->will( $this->returnCallback(
-				function ( DataValue $param ) {
-					$class = get_class( $param );
-					$value = $param->getArrayValue();
+			->willReturnCallback( function( DataValue $param ) {
+				$class = get_class( $param );
+				$value = $param->getArrayValue();
 
-					return "$class:$value";
-				}
-			) );
+				return "$class:$value";
+			} );
 
 		return $mock;
 	}
@@ -85,11 +83,9 @@ class MessageParameterFormatterTest extends \PHPUnit_Framework_TestCase {
 		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$mock->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback(
-				function ( EntityId $id ) {
-					return Title::makeTitle( NS_MAIN, $id->getSerialization() );
-				}
-			) );
+			->willReturnCallback( function( EntityId $id ) {
+				return Title::makeTitle( NS_MAIN, $id->getSerialization() );
+			} );
 
 		return $mock;
 	}
@@ -101,14 +97,12 @@ class MessageParameterFormatterTest extends \PHPUnit_Framework_TestCase {
 		$mock = $this->getMock( 'SiteStore' );
 		$mock->expects( $this->any() )
 			->method( 'getSite' )
-			->will( $this->returnCallback(
-				function ( $siteId ) {
-					$site = new Site();
-					$site->setGlobalId( $siteId );
-					$site->setLinkPath( "http://$siteId.com/$1" );
-					return $site;
-				}
-			) );
+			->willReturnCallback( function( $siteId ) {
+				$site = new Site();
+				$site->setGlobalId( $siteId );
+				$site->setLinkPath( "http://$siteId.com/$1" );
+				return $site;
+			} );
 
 		return $mock;
 	}

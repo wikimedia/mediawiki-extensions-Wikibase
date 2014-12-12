@@ -36,7 +36,7 @@ class SpecialPageCopyrightViewTest extends \PHPUnit_Framework_TestCase {
 
 		$copyrightMessageBuilder->expects( $this->any() )
 			->method( 'build' )
-			->will( $this->returnValue( $message ) );
+			->willReturn( $message );
 
 		return $copyrightMessageBuilder;
 	}
@@ -57,4 +57,3 @@ class SpecialPageCopyrightViewTest extends \PHPUnit_Framework_TestCase {
 	}
 
 }
-

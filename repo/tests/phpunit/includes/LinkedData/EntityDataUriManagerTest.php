@@ -38,9 +38,9 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
-			} ) );
+			} );
 
 		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );
 
@@ -203,4 +203,5 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$actual = $uriManager->getCacheableUrls( $id );
 		$this->assertEquals( $expected, $actual );
 	}
+
 }

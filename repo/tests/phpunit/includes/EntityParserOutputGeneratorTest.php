@@ -83,15 +83,15 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$entityView->expects( $this->any() )
 			->method( 'getHtml' )
-			->will( $this->returnValue( '<html>Nyan data!!!</html>' ) );
+			->willReturn( '<html>Nyan data!!!</html>' );
 
 		$entityView->expects( $this->any() )
 			->method( 'getPlaceholders' )
-			->will( $this->returnValue( array( 'key' => 'value' ) ) );
+			->willReturn( array( 'key' => 'value' ) );
 
 		$entityViewFactory->expects( $this->any() )
 			->method( 'newEntityView' )
-			->will( $this->returnValue( $entityView ) );
+			->willReturn( $entityView );
 
 		return $entityViewFactory;
 	}
@@ -103,7 +103,7 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$configBuilder->expects( $this->any() )
 			->method( 'build' )
-			->will( $this->returnValue( self::$configVars ) );
+			->willReturn( self::$configVars );
 
 		return $configBuilder;
 	}
@@ -113,10 +113,12 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
-				$name = $id->getEntityType() . ':' . $id->getSerialization();
-				return Title::makeTitle( NS_MAIN, $name );
-			} ) );
+			->willReturnCallback( function( EntityId $id ) {
+				return Title::makeTitle(
+					NS_MAIN,
+					$id->getEntityType() . ':' . $id->getSerialization()
+				);
+			} );
 
 		return $entityTitleLookup;
 	}
