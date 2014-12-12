@@ -87,6 +87,24 @@
       "revId": "f4448bf3efd0fd3d728cdf6e333b474271341856",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_dafbfab8",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-12-12T15:38:21Z",
+      "side": 1,
+      "message": "Oh and if you meant WikibaseClient, the \"the\" would need to be dropped. (I talked to the Jan is incorrect.)",
+      "parentUuid": "0e6cb3ef_7a018eb8",
+      "revId": "f4448bf3efd0fd3d728cdf6e333b474271341856",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
