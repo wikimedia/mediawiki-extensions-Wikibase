@@ -6,6 +6,10 @@ use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
+ * A service interface for looking up entity terms.
+ *
+ * @note: A TermLookup cannot be used to determine whether an entity exists or not.
+ *
  * @since 0.5
  *
  * @licence GNU GPL v2+
@@ -19,8 +23,7 @@ interface TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException for label not found
-	 * @throws StorageException for Entity not found
+	 * @throws OutOfBoundsException for label or entity not found
 	 *
 	 * @return string
 	 * @throws OutOfBoundsException if no such label was found
@@ -32,8 +35,9 @@ interface TermLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException for Entity not found
+	 * @throws OutOfBoundsException if the entity was not found (not guaranteed).
 	 * @return string[] labels, keyed by language.
+	 *         An empty array may or may not indicate that the entity does not exist.
 	 */
 	public function getLabels( EntityId $entityId );
 
@@ -43,10 +47,8 @@ interface TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException for description not found
-	 * @throws StorageException for Entity not found
+	 * @throws OutOfBoundsException for description or entity not found
 	 * @return string
-	 * @throws OutOfBoundsException if no such description was found
 	 */
 	public function getDescription( EntityId $entityId, $languageCode );
 
@@ -55,8 +57,9 @@ interface TermLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException for Entity not found
+	 * @throws OutOfBoundsException if the entity was not found (not guaranteed).
 	 * @return string[] descriptions, keyed by language.
+	 *         An empty array may or may not indicate that the entity does not exist.
 	 */
 	public function getDescriptions( EntityId $entityId );
 

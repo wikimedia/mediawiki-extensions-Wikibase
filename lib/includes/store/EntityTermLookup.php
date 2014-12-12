@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Term;
 use Wikibase\TermIndex;
 
 /**
@@ -20,25 +21,18 @@ class EntityTermLookup implements TermLookup {
 	private $termIndex;
 
 	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
-
-	/**
 	 * @param TermIndex $termIndex
-	 * @param EntityLookup $entityLookup
 	 */
-	public function __construct( TermIndex $termIndex, EntityLookup $entityLookup ) {
+	public function __construct( TermIndex $termIndex ) {
 		$this->termIndex = $termIndex;
-		$this->entityLookup = $entityLookup;
 	}
 
 	/**
+	 * @see TermLookup::getLabel
+	 *
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws StorageException if entity does not exist
-	 * @throws OutOfBoundsException
 	 * @return string
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
@@ -47,9 +41,10 @@ class EntityTermLookup implements TermLookup {
 	}
 
 	/**
+	 * @see TermLookup::getLabels
+	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException if entity does not exist
 	 * @return string[]
 	 */
 	public function getLabels( EntityId $entityId ) {
@@ -57,11 +52,11 @@ class EntityTermLookup implements TermLookup {
 	}
 
 	/**
+	 * @see TermLookup::getDescription
+	 *
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws StorageException if entity does not exist
-	 * @throws OutOfBoundsException
 	 * @return string
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
@@ -70,9 +65,10 @@ class EntityTermLookup implements TermLookup {
 	}
 
 	/**
+	 * @see TermLookup::getDescriptions
+	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException if entity does not exist
 	 * @return string[]
 	 */
 	public function getDescriptions( EntityId $entityId ) {
@@ -83,18 +79,10 @@ class EntityTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $termType
 	 *
-	 * @throws StorageException if entity does not exist.
 	 * @return string[]
 	 */
 	private function getTermsOfType( EntityId $entityId, $termType ) {
 		$wikibaseTerms = $this->termIndex->getTermsOfEntity( $entityId );
-
-		if ( $wikibaseTerms === array() ) {
-			if ( !$this->entityLookup->hasEntity( $entityId ) ) {
-				throw new StorageException( 'Entity not found for '
-					. $entityId->getSerialization() );
-			}
-		}
 
 		return $this->convertTermsToTermTypeArray( $wikibaseTerms, $termType );
 	}
@@ -115,7 +103,7 @@ class EntityTermLookup implements TermLookup {
 	}
 
 	/**
-	 * @param \Wikibase\Term[] $wikibaseTerms
+	 * @param Term[] $wikibaseTerms
 	 * @param string $termType
 	 *
 	 * @return string[]

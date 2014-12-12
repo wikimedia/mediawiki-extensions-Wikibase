@@ -39,7 +39,6 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$builder->collectTerms();
-
 		return $builder->getEntityInfo();
 	}
 
@@ -74,14 +73,24 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function asArrayProvider() {
-		$infoWithLabels = $this->getEntityInfo( array(
-			$this->makeItemWithLabel( 'Q11', 'London' ),
-			$this->makeItemWithLabel( 'Q33', 'Berlin' ),
-		) );
-
 		return array(
 			'empty' => array( array() ),
-			'labels' => array( $infoWithLabels->asArray() ),
+			'labels' => array( array(
+				'Q11' => array(
+					'id' => 'Q11',
+					'type' => 'item',
+					'labels' => array(
+						'de' => array(
+							'language' => 'de',
+							'value' => 'London'
+						),
+						'la' => array(
+							'language' => 'la',
+							'value' => 'Londinium'
+						),
+					)
+				)
+			) ),
 		);
 	}
 
@@ -121,10 +130,8 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'Q33', $record['id'] );
 		$this->assertArrayHasKey( 'labels', $record );
 
-		$record = $info->getEntityInfo( new ItemId( 'Q99' ) );
-		$this->assertInternalType( 'array', $record );
-		$this->assertEquals( 'Q99', $record['id'] );
-		$this->assertArrayNotHasKey( 'labels', $record );
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$info->getEntityInfo( new ItemId( 'Q99' ) );
 	}
 
 	public function testGetLabel() {
@@ -136,18 +143,18 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'London', $info->getLabel( new ItemId( 'Q11' ), 'en' ) );
 		$this->assertEquals( 'Berlin', $info->getLabel( new ItemId( 'Q33' ), 'en' ) );
 		$this->assertNull( $info->getLabel( new ItemId( 'Q11' ), 'zh' ) );
-		$this->assertNull( $info->getLabel( new ItemId( 'Q99' ), 'en' ) );
 	}
 
 	public function testGetLabels() {
 		$info = $this->getEntityInfo( array(
 			$this->makeItemWithLabel( 'Q11', 'London' ),
 			$this->makeItemWithLabel( 'Q33', 'Berlin' ),
+			$this->makeItemWithDescription( 'Q66', 'Barcelona' ),
 		) );
 
 		$this->assertEquals( array( 'en' => 'London' ), $info->getLabels( new ItemId( 'Q11' ) ) );
 		$this->assertEquals( array( 'en' => 'Berlin' ), $info->getLabels( new ItemId( 'Q33' ) ) );
-		$this->assertEquals( array(), $info->getLabels( new ItemId( 'Q99' ) ) );
+		$this->assertEquals( array(), $info->getLabels( new ItemId( 'Q66' ) ) );
 	}
 
 	public function testGetDescription() {
@@ -159,18 +166,72 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'London', $info->getDescription( new ItemId( 'Q11' ), 'en' ) );
 		$this->assertEquals( 'Berlin', $info->getDescription( new ItemId( 'Q33' ), 'en' ) );
 		$this->assertNull( $info->getDescription( new ItemId( 'Q11' ), 'zh' ) );
-		$this->assertNull( $info->getDescription( new ItemId( 'Q99' ), 'en' ) );
 	}
 
 	public function testGetDescriptions() {
 		$info = $this->getEntityInfo( array(
 			$this->makeItemWithDescription( 'Q11', 'London' ),
 			$this->makeItemWithDescription( 'Q33', 'Berlin' ),
+			$this->makeItemWithLabel( 'Q66', 'Barcelona' ),
 		) );
 
 		$this->assertEquals( array( 'en' => 'London' ), $info->getDescriptions( new ItemId( 'Q11' ) ) );
 		$this->assertEquals( array( 'en' => 'Berlin' ), $info->getDescriptions( new ItemId( 'Q33' ) ) );
-		$this->assertEquals( array(), $info->getDescriptions( new ItemId( 'Q99' ) ) );
+		$this->assertEquals( array(), $info->getDescriptions( new ItemId( 'Q66' ) ) );
+	}
+
+	public function provideBlankInfo() {
+		return array(
+			'unknown item' => array( array() ),
+			'unknown terms' => array(
+				array(
+					'Q99' => array(
+						'id' => 'Q99',
+						'type' => 'item',
+					)
+				)
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideBlankInfo
+	 */
+	public function testGetLabel_exception( $data ) {
+		$info = new EntityInfo( $data );
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$info->getLabel( new ItemId( 'Q99' ), 'en' );
+	}
+
+	/**
+	 * @dataProvider provideBlankInfo
+	 */
+	public function testGetLabels_exception( $data ) {
+		$info = new EntityInfo( $data );
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$info->getLabels( new ItemId( 'Q99' ) );
+	}
+
+	/**
+	 * @dataProvider provideBlankInfo
+	 */
+	public function testGetDescription_exception( $data ) {
+		$info = new EntityInfo( $data );
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$info->getDescription( new ItemId( 'Q99' ), 'en' );
+	}
+
+	/**
+	 * @dataProvider provideBlankInfo
+	 */
+	public function testGetDescriptions_exception( $data ) {
+		$info = new EntityInfo( $data );
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$info->getDescriptions( new ItemId( 'Q99' ) );
 	}
 
 }
