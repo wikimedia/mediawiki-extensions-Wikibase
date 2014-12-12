@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_157b83be",
+        "filename": "lib/includes/Validators/AlternativeValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-12-12T18:42:51Z",
+      "side": 1,
+      "message": "ConjunctionValidator and DisjunctionValidator are clearer.",
+      "parentUuid": "0e6cb3ef_5ab12adb",
+      "revId": "9da595e47aa9ccb1a0134857298221db32652a7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_173b63e9",
         "filename": "lib/includes/Validators/AlternativeValidator.php",
         "patchSetId": 4
