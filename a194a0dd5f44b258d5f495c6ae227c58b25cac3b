@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_b7f73f56",
+        "filename": "lib/includes/Validators/MembershipValidator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T14:25:00Z",
+      "side": 1,
+      "message": "why string?",
+      "revId": "a194a0dd5f44b258d5f495c6ae227c58b25cac3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
