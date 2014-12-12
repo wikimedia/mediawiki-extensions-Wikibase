@@ -52,6 +52,24 @@
       "revId": "ae1ff5dfff9d6c9eb71adb306300821a10fe6871",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_9aaa6281",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T15:48:58Z",
+      "side": 1,
+      "message": "The sentence is correct.\n* Don\u0027t know the entity -\u003e exception.\n* Know the entity but don\u0027t know anything about it\u0027s labels -\u003e exception.\n* Know about labels but can\u0027t fine one in that language -\u003e null.",
+      "parentUuid": "0e6cb3ef_17d4ebbd",
+      "revId": "ae1ff5dfff9d6c9eb71adb306300821a10fe6871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
