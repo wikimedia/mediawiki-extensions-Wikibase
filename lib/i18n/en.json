@@ -65,6 +65,7 @@
 	"wikibase-validator-bad-url-scheme": "Unsupported URL scheme: $1",
 	"wikibase-validator-unknown-unit": "Unknown unit: $1",
 	"wikibase-validator-not-allowed": "Illegal value: $1",
+	"wikibase-validator-no-validators": "Forbidden",
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-wikibase-property": "Property",
 	"datatypes-type-commonsMedia": "Commons media file",
