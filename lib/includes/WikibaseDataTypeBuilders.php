@@ -203,19 +203,21 @@ class WikibaseDataTypeBuilders {
 	 * @return DataType
 	 */
 	public function buildMonolingualTextType( $id ) {
-		$textValidator = new DataFieldValidator(
+		$validators = array();
+
+		$validators[] = new DataFieldValidator(
 			'text',
 			new CompositeValidator( $this->getCommonStringValidators() ) //Note: each validator is fatal
 		);
 
-		$languageValidator = new DataFieldValidator(
+		$validators[] = new DataFieldValidator(
 			'language',
 			new MembershipValidator( Utils::getLanguageCodes() )
 		);
 
-		$topValidator = new DataValueValidator( new CompositeValidator(
-			array( $textValidator, $languageValidator )
-		) );
+		$topValidator = new DataValueValidator(
+			new CompositeValidator( $validators ) //Note: each validator is fatal
+		);
 
 		return new DataType( $id, 'monolingualtext', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
@@ -229,16 +231,11 @@ class WikibaseDataTypeBuilders {
 		$validators = array();
 		$validators[] = new TypeValidator( 'array' );
 
-		// calendar model field
-		$calendarIdValidators = array();
 		// Expected to be a short IRI, see TimeFormatter and TimeParser.
-		$calendarIdValidators[] = $urlValidator = $this->buildUrlValidator( array( 'http', 'https' ), 255 );
+		$urlValidator = $this->buildUrlValidator( array( 'http', 'https' ), 255 );
 		//TODO: enforce well known calendar models from config
 
-		$validators[] = new DataFieldValidator(
-			'calendarmodel',
-			new CompositeValidator( $calendarIdValidators ) //Note: each validator is fatal
-		);
+		$validators[] = new DataFieldValidator( 'calendarmodel', $urlValidator );
 
 		// time string field
 		$timeStringValidators = array();
@@ -284,23 +281,13 @@ class WikibaseDataTypeBuilders {
 		$validators = array();
 		$validators[] = new TypeValidator( 'array' );
 
-		$globeIdValidators = array();
 		// Expected to be a short IRI, see GlobeCoordinateValue and GlobeCoordinateParser.
-		$globeIdValidators[] = $urlValidator = $this->buildUrlValidator( array( 'http', 'https' ), 255 );
+		$urlValidator = $this->buildUrlValidator( array( 'http', 'https' ), 255 );
 		//TODO: enforce well known reference globes from config
 
-		$precisionValidators = array();
-		$precisionValidators[] = new NumberValidator();
+		$validators[] = new DataFieldValidator( 'precision', new NumberValidator() );
 
-		$validators[] = new DataFieldValidator(
-			'precision',
-			new CompositeValidator( $precisionValidators )
-		);
-
-		$validators[] = new DataFieldValidator(
-			'globe',
-			new CompositeValidator( $globeIdValidators ) //Note: each validator is fatal
-		);
+		$validators[] = new DataFieldValidator( 'globe', $urlValidator );
 
 		$topValidator = new DataValueValidator(
 			new CompositeValidator( $validators ) //Note: each validator is fatal
@@ -318,6 +305,7 @@ class WikibaseDataTypeBuilders {
 	 * @return CompositeValidator
 	 */
 	public function buildUrlValidator( $urlSchemes, $maxLength = 500 ) {
+		$validators = array();
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new StringLengthValidator( 2, $maxLength );
 
@@ -355,16 +343,14 @@ class WikibaseDataTypeBuilders {
 		// the 'amount' field is already validated by QuantityValue's constructor
 		// the 'digits' field is already validated by QuantityValue's constructor
 
-		$validators[] = new DataFieldValidator(
-			'unit',
-			new AlternativeValidator( array (
-				// NOTE: "1" is always considered legal for historical reasons,
-				// since we use it to represent "unitless" quantities. We could also use
-				// http://qudt.org/vocab/unit#Unitless or https://www.wikidata.org/entity/Q199
-				new MembershipValidator( array( '1' ) ),
-				$this->buildUrlValidator( array( 'http', 'https' ), 255 ),
-			) )
-		);
+		$unitValidators = new AlternativeValidator( array(
+			// NOTE: "1" is always considered legal for historical reasons,
+			// since we use it to represent "unitless" quantities. We could also use
+			// http://qudt.org/vocab/unit#Unitless or https://www.wikidata.org/entity/Q199
+			new MembershipValidator( array( '1' ) ),
+			$this->buildUrlValidator( array( 'http', 'https' ), 255 ),
+		) );
+		$validators[] = new DataFieldValidator( 'unit', $unitValidators );
 
 		$topValidator = new DataValueValidator(
 			new CompositeValidator( $validators ) //Note: each validator is fatal
