@@ -127,8 +127,8 @@ class PageTermsTest extends \MediaWikiTestCase {
 		$termIndex->expects( $this->any() )
 			->method( 'getTermsOfEntities' )
 			->will( $this->returnCallback(
-				function ( array $entityIds, $entityType, $language = null ) use( $termObjectsByEntityId, $this_ ) {
-					return $this_->getTermsOfEntities( $termObjectsByEntityId, $entityIds, $entityType, $language );
+				function ( array $entityIds, $entityType, $termTypes = null, $languages = null ) use( $termObjectsByEntityId, $this_ ) {
+					return $this_->getTermsOfEntities( $termObjectsByEntityId, $entityIds, $entityType, $termTypes, $languages );
 				}
 			) );
 
@@ -146,7 +146,7 @@ class PageTermsTest extends \MediaWikiTestCase {
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( $termObjectsByEntityId, $entityIds, $entityType, $language = null ) {
+	public function getTermsOfEntities( $termObjectsByEntityId, $entityIds, $entityType, $termTypes, $languages ) {
 		$result = array();
 
 		foreach ( $entityIds as $id ) {
@@ -158,9 +158,15 @@ class PageTermsTest extends \MediaWikiTestCase {
 
 			/** @var Term $term */
 			foreach ( $termObjectsByEntityId[$key] as $term ) {
-				if ( $term->getLanguage() === $language ) {
-					$result[] = $term;
+				if ( $languages !== null && !in_array( $term->getLanguage(), $languages ) ) {
+					continue;
 				}
+
+				if ( $termTypes !== null && !in_array( $term->getType(), $termTypes ) ) {
+					continue;
+				}
+
+				$result[] = $term;
 			}
 		}
 
