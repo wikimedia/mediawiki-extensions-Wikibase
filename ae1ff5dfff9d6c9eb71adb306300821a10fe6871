@@ -34,6 +34,24 @@
       "revId": "ae1ff5dfff9d6c9eb71adb306300821a10fe6871",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_17d4ebbd",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-12-12T14:19:39Z",
+      "side": 1,
+      "message": "This makes it more clear:\nIf nothing is known about the entity.\n\n(omit \"or its labels\")",
+      "parentUuid": "0e6cb3ef_97d9db85",
+      "revId": "ae1ff5dfff9d6c9eb71adb306300821a10fe6871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
