@@ -15,6 +15,7 @@ use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Serializers\SnaksSerializer;
+use Wikibase\DataModel\Serializers\TypedSnakSerializer;
 
 /**
  * Factory for constructing Serializer objects that can serialize WikibaseDataModel objects.
@@ -135,6 +136,17 @@ class SerializerFactory {
 	 */
 	public function newSnakSerializer() {
 		return new SnakSerializer( $this->dataValueSerializer );
+	}
+
+	/**
+	 * Returns a Serializer that can serialize TypedSnak objects.
+	 *
+	 * @since 1.3
+	 *
+	 * @return Serializer
+	 */
+	public function newTypedSnakSerializer() {
+		return new TypedSnakSerializer( $this->newSnakSerializer() );
 	}
 
 }
