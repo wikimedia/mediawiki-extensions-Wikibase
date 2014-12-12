@@ -23,8 +23,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	 *
 	 * @return DispatchStats
 	 */
-	protected function getDispatchStats() {
-		$data = self::getTestData();
+	private function getDispatchStats() {
+		$data = $this->getTestData();
 		$now = $data['now'];
 		$changes = $data['changes'];
 		$states = $data['states'];
@@ -73,7 +73,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		return $stats;
 	}
 
-	protected static function getTestData() {
+	private function getTestData() {
 		return array(
 			'states' => array(
 				array(
@@ -202,7 +202,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetClientStates() {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -229,7 +229,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		}
 	}
 
-	protected function assertStateEquals( $expected, $actual ) {
+	private function assertStateEquals( $expected, $actual ) {
 		$this->assertInternalType( 'array', $expected );
 		$this->assertInternalType( 'object', $actual );
 
@@ -258,7 +258,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetClientCount() {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -277,7 +277,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetLockedCount() {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -296,7 +296,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetMinChangeId() {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -315,7 +315,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetMaxChangeId() {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -334,7 +334,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetMinChangeTimestamp() {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -353,7 +353,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetMaxChangeTimestamp() {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -372,7 +372,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetFreshest() {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -391,7 +391,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetStalest() {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -410,7 +410,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetAverage() {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -429,7 +429,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetMedian() {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -468,4 +468,5 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 
 		$this->assertFalse( $stats->hasStats() ); // Still no stats as the table is empty
 	}
+
 }

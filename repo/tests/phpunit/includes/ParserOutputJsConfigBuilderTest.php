@@ -84,7 +84,7 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	private function getConfigBuilder( $languageCode, array $languageCodes ) {
 		$configBuilder = new ParserOutputJsConfigBuilder(
 			new BasicEntityIdParser(),
-			$this->getEntityTitleLookupMock(),
+			$this->getEntityTitleLookup(),
 			$this->getSerializationOptions( $languageCode, $languageCodes ),
 			$languageCode
 		);
@@ -165,26 +165,21 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityId $entityId
-	 *
-	 * @return Title
-	 */
-	public function getTitleForId( EntityId $entityId ) {
-		$name = $entityId->getEntityType() . ':' . $entityId->getSerialization();
-		return Title::makeTitle( NS_MAIN, $name );
-	}
-
-	/**
 	 * @return EntityTitleLookup
 	 */
-	private function getEntityTitleLookupMock() {
+	private function getEntityTitleLookup() {
 		$lookup = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityTitleLookup' )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$lookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return Title::makeTitle(
+					NS_MAIN,
+					$id->getEntityType() . ':' . $id->getSerialization()
+				);
+			} ) );
 
 		return $lookup;
 	}

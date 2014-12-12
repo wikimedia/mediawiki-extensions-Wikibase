@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use EasyRdf_Graph;
 use SiteList;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
@@ -19,7 +20,7 @@ use Wikibase\RdfSerializer;
  */
 class RdfSerializerTest extends \MediaWikiTestCase {
 
-	protected static $formats = array(
+	private static $formats = array(
 		'rdf',
 		'application/rdf+xml',
 		'n3',
@@ -32,8 +33,8 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	/**
 	 * @return EntityRevision[]
 	 */
-	protected static function getTestEntityRevisions() {
-		$entities = self::getTestEntities();
+	private function getTestEntityRevisions() {
+		$entities = $this->getTestEntities();
 		$revisions = array();
 
 		foreach ( $entities as $name => $entity ) {
@@ -46,18 +47,18 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	/**
 	 * @return Entity[]
 	 */
-	protected static function getTestEntities() {
+	private function getTestEntities() {
 		return RdfBuilderTest::getTestEntities();
 	}
 
 	/**
-	 * @return \EasyRdf_Graph[]
+	 * @return EasyRdf_Graph[]
 	 */
-	protected static function getTestGraphs() {
+	private function getTestGraphs() {
 		return RdfBuilderTest::getTestGraphs();
 	}
 
-	protected static function getTestDataPatterns() {
+	private function getTestDataPatterns() {
 		static $patterns = array();
 
 		if ( !empty( $patterns ) ) {
@@ -98,13 +99,11 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		return $patterns;
 	}
 
-	protected static function newRdfSerializer( $formatName ) {
+	private function newRdfSerializer( $formatName ) {
 		$format = RdfSerializer::getFormat( $formatName );
-
-
 		$mockRepo = new MockRepository();
 
-		foreach( self::getTestEntities() as $entity ) {
+		foreach( $this->getTestEntities() as $entity ) {
 			$mockRepo->putEntity( $entity );
 		}
 
@@ -136,8 +135,8 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideBuildGraphForEntityRevision() {
-		$entityRevs = self::getTestEntityRevisions();
-		$graphs = self::getTestGraphs();
+		$entityRevs = $this->getTestEntityRevisions();
+		$graphs = $this->getTestGraphs();
 
 		$cases = array();
 
@@ -161,8 +160,8 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideBuildGraphForEntityRevision
 	 */
-	public function testBuildGraphForEntityRevision( EntityRevision $entityRevision, \EasyRdf_Graph $expectedGraph ) {
-		$serializer = self::newRdfSerializer( 'rdf' );
+	public function testBuildGraphForEntityRevision( EntityRevision $entityRevision, EasyRdf_Graph $expectedGraph ) {
+		$serializer = $this->newRdfSerializer( 'rdf' );
 
 		$graph = $serializer->buildGraphForEntityRevision( $entityRevision );
 
@@ -180,8 +179,8 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideSerializeRdf() {
-		$graphs = self::getTestGraphs();
-		$patterns = self::getTestDataPatterns();
+		$graphs = $this->getTestGraphs();
+		$patterns = $this->getTestDataPatterns();
 
 		$cases = array();
 
@@ -208,8 +207,8 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideSerializeRdf
 	 */
-	public function testSerializeRdf( \EasyRdf_Graph $graph, $format, $regexes ) {
-		$serializer = self::newRdfSerializer( $format );
+	public function testSerializeRdf( EasyRdf_Graph $graph, $format, $regexes ) {
+		$serializer = $this->newRdfSerializer( $format );
 
 		$data = $serializer->serializeRdf( $graph );
 
@@ -219,8 +218,8 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideSerializeEntityRevision() {
-		$entityRevs = self::getTestEntityRevisions();
-		$patterns = self::getTestDataPatterns();
+		$entityRevs = $this->getTestEntityRevisions();
+		$patterns = $this->getTestDataPatterns();
 
 		$cases = array();
 
@@ -243,7 +242,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	 * @dataProvider provideSerializeEntityRevision
 	 */
 	public function testSerializeEntityRevision( EntityRevision $entityRevision, $format, $regexes ) {
-		$serializer = self::newRdfSerializer( $format );
+		$serializer = $this->newRdfSerializer( $format );
 
 		$data = $serializer->serializeEntityRevision( $entityRevision );
 
