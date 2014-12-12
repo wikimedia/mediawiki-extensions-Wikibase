@@ -584,4 +584,74 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			"expected to find $k in terms for item" );
 	}
 
+	public function testGetTermsOfEntities() {
+		$lookup = $this->getTermIndex();
+
+		$item1 = Item::newEmpty();
+		$item1->setId( 568234314 );
+
+		$item1->setLabel( 'en', 'abc' );
+		$item1->setLabel( 'de', 'def' );
+		$item1->setLabel( 'nl', 'ghi' );
+		$item1->setDescription( 'en', 'one description' );
+		$item1->setAliases( 'fr', array( 'o', '_', 'O' ) );
+
+		$item2 = Item::newEmpty();
+		$item2->setId( 87236423 );
+
+		$item2->setLabel( 'en', 'xyz' );
+		$item2->setLabel( 'de', 'uvw' );
+		$item2->setLabel( 'nl', 'rst' );
+		$item2->setDescription( 'en', 'another description' );
+		$item2->setAliases( 'fr', array( 'X', '~', 'x' ) );
+
+		$this->assertTrue( $lookup->saveTermsOfEntity( $item1 ) );
+		$this->assertTrue( $lookup->saveTermsOfEntity( $item2 ) );
+
+		$ids = array( $item1->getId(), $item2->getId() );
+
+		$labelTerms = $lookup->getTermsOfEntities( $ids, Item::ENTITY_TYPE, array( Term::TYPE_LABEL ) );
+		$this->assertEquals( 6, count( $labelTerms ), "expected 3 labels" );
+
+		$englishTerms = $lookup->getTermsOfEntities( $ids, Item::ENTITY_TYPE, null, array( 'en' ) );
+		$this->assertEquals( 4, count( $englishTerms ), "expected 2 English terms" );
+
+		$englishTerms = $lookup->getTermsOfEntities( array( $item1->getId() ), Item::ENTITY_TYPE, null, array( 'en' ) );
+		$this->assertEquals( 2, count( $englishTerms ), "expected 2 English terms" );
+
+		$germanLabelTerms = $lookup->getTermsOfEntities( $ids, Item::ENTITY_TYPE, array( Term::TYPE_LABEL ), array( 'de' ) );
+		$this->assertEquals( 2, count( $germanLabelTerms ), "expected 1 German label" );
+
+		$noTerms = $lookup->getTermsOfEntities( $ids, Item::ENTITY_TYPE, array( Term::TYPE_LABEL ), array() );
+		$this->assertEmpty( $noTerms, "expected no labels" );
+
+		$noTerms = $lookup->getTermsOfEntities( $ids, Item::ENTITY_TYPE, array(), array( 'de' ) );
+		$this->assertEmpty( $noTerms, "expected no labels" );
+
+		$terms = $lookup->getTermsOfEntities( $ids, Item::ENTITY_TYPE );
+		$this->assertEquals( 14, count( $terms ), "expected 7 terms for item" );
+
+		// make list of strings for easy checking
+		$term_keys = array();
+		foreach ( $terms as $t ) {
+			$term_keys[] = $t->getType() . '/' .  $t->getLanguage() . '/' . $t->getText();
+		}
+
+		$k = Term::TYPE_LABEL . '/en/abc';
+		$this->assertContains( $k, $term_keys,
+			"expected to find $k in terms for item" );
+
+		$k = Term::TYPE_LABEL . '/en/xyz';
+		$this->assertContains( $k, $term_keys,
+			"expected to find $k in terms for item" );
+
+		$k = Term::TYPE_DESCRIPTION . '/en/another description';
+		$this->assertContains( $k, $term_keys,
+			"expected to find $k in terms for item" );
+
+		$k = Term::TYPE_ALIAS . '/fr/x';
+		$this->assertContains( $k, $term_keys,
+			"expected to find $k in terms for item" );
+	}
+
 }

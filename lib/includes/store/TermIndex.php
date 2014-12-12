@@ -27,8 +27,6 @@ interface TermIndex extends LabelConflictFinder {
 	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
 	 *
 	 * @return EntityId[]
-	 *
-	 * TODO: update to use Term interface
 	 */
 	public function getEntityIdsForLabel( $label, $languageCode = null, $entityType = null, $fuzzySearch = false );
 
@@ -73,13 +71,16 @@ interface TermIndex extends LabelConflictFinder {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityId[] $ids
+	 * @param EntityId[] $entityIds
 	 * @param string $entityType
-	 * @param string|null $languageCode language code
+	 * @param string[]|null $termTypes The types of terms to return, e.g. "label", "description",
+	 *        or "alias". Compare the Term::TYPE_XXX constants. If null, all types are returned.
+	 * @param string[]|null $languageCodes The desired languages, given as language codes.
+	 *        If null, all languages are returned.
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $ids, $entityType, $languageCode = null );
+	public function getTermsOfEntities( array $entityIds, $entityType, array $termTypes = null, array $languageCodes = null );
 
 	/**
 	 * Returns if a term with the specified parameters exists.
