@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
@@ -111,6 +112,10 @@ abstract class ModifyEntity extends ApiWikibase {
 		// Things that use this method assume null means we want a new entity
 		if ( $entityId !== null ) {
 			$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : 0;
+
+			if ( $baseRevisionId === 0 ) {
+				$baseRevisionId = EntityRevisionLookup::LATEST_FROM_MASTER;
+			}
 
 			try {
 				$entityRevision = $this->getEntityRevisionLookup()->getEntityRevision( $entityId, $baseRevisionId );

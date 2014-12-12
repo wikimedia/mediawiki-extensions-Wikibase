@@ -331,7 +331,11 @@ class EntityDataRequestHandler {
 
 		$lookup = $this->entityRevisionLookup;
 
-		if ( $revision == 0 ) {
+		if ( $revision === 0 ) {
+			$revision = EntityRevisionLookup::LATEST_FROM_SLAVE;
+		}
+
+		if ( is_string( $revision ) ) {
 			// If no specific revision is requested, enable automatic redirect resolution.
 			$lookup = new EntityRedirectResolvingDecorator( $lookup );
 		}

@@ -147,7 +147,7 @@ class RedirectCreationInteractor {
 	 */
 	private function checkEmpty( EntityId $entityId ) {
 		try {
-			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId );
+			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, EntityRevisionLookup::LATEST_FROM_MASTER );
 
 			if ( !$revision ) {
 				throw new RedirectCreationException(
@@ -178,7 +178,10 @@ class RedirectCreationInteractor {
 	 */
 	private function checkExists( EntityId $entityId ) {
 		try {
-			$revision = $this->entityRevisionLookup->getLatestRevisionId( $entityId );
+			$revision = $this->entityRevisionLookup->getLatestRevisionId(
+				$entityId,
+				EntityRevisionLookup::LATEST_FROM_MASTER
+			);
 
 			if ( !$revision ) {
 				throw new RedirectCreationException(
