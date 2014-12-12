@@ -42,7 +42,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		$propertyId = new PropertyId( 'P77' );
 		$claims = $this->makeClaims( $propertyId );
 
-		$propertyIdFormatter = $this->getPropertyIdFormatterMock();
+		$propertyIdFormatter = $this->getEntityIdFormatter();
 		$link = $this->getLinkForId( $propertyId );
 
 		$claimsView = $this->newClaimsView( $propertyIdFormatter );
@@ -108,14 +108,14 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		return new ClaimsView(
 			$propertyIdFormatter,
 			new SectionEditLinkGenerator(),
-			$this->getClaimHtmlGeneratorMock()
+			$this->getClaimHtmlGenerator()
 		);
 	}
 
 	/**
 	 * @return ClaimHtmlGenerator
 	 */
-	private function getClaimHtmlGeneratorMock() {
+	private function getClaimHtmlGenerator() {
 		$claimHtmlGenerator = $this->getMockBuilder( 'Wikibase\Repo\View\ClaimHtmlGenerator' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -131,19 +131,19 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 
 	/**
 	 * @param EntityId $id
+	 *
 	 * @return string
 	 */
 	public function getLinkForId( EntityId $id ) {
 		$name = $id->getEntityType() . ':' . $id->getSerialization();
 		$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
-
 		return Html::element( 'a', array( 'href' => $url ), $name );
 	}
 
 	/**
 	 * @return EntityIdFormatter
 	 */
-	protected function getPropertyIdFormatterMock() {
+	private function getEntityIdFormatter() {
 		$lookup = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
 			->disableOriginalConstructor()
 			->getMock();
