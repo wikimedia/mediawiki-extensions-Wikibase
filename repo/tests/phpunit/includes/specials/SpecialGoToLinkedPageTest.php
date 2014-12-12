@@ -25,21 +25,18 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @return SiteLinkLookup
 	 */
 	private function getMockSiteLinkLookup() {
-
 		$mock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
 
 		$mock->expects( $this->any() )
 			->method( 'getLinks' )
-			->will( $this->returnCallback(
-				function ( $itemIds, $siteIds ) {
-					$result = array( array( '', 'TestPageName' ) );
-					if ( $siteIds === array( 'dewiki' ) && $itemIds === array( 23 ) ) {
-						return $result;
-					} else {
-						return null;
-					}
+			->will( $this->returnCallback( function( $itemIds, $siteIds ) {
+				$result = array( array( '', 'TestPageName' ) );
+				if ( $siteIds === array( 'dewiki' ) && $itemIds === array( 23 ) ) {
+					return $result;
+				} else {
+					return null;
 				}
-			) );
+			} ) );
 
 		return $mock;
 	}
@@ -48,20 +45,20 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @return SiteStore
 	 */
 	private function getMockSiteStore() {
-		$getSite = function ( $siteId ) {
-			if ( substr( $siteId, -4 ) !== 'wiki' ) {
-				return null;
-			}
-			$site = new Site();
-			$site->setGlobalId( $siteId );
-			$site->setLinkPath( 'http://'.$siteId.'.com/$1' );
-			return $site;
-		};
-
 		$mock = $this->getMock( 'SiteStore' );
 		$mock->expects( $this->any() )
 			->method( 'getSite' )
-			->will( $this->returnCallback( $getSite ) );
+			->will( $this->returnCallback( function( $siteId ) {
+				if ( substr( $siteId, -4 ) !== 'wiki' ) {
+					return null;
+				}
+
+				$site = new Site();
+				$site->setGlobalId( $siteId );
+				$site->setLinkPath( 'http://'.$siteId.'.com/$1' );
+
+				return $site;
+			} ) );
 
 		return $mock;
 	}
@@ -132,7 +129,6 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		$cases['foundWithSiteIdHack'] = array( 'de/Q23', 'http://dewiki.com/TestPageName' );
 		return $cases;
 	}
-
 
 	/**
 	 * @dataProvider requestWithRedirectProvider

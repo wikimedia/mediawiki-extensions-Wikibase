@@ -189,8 +189,10 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				$name = $id->getEntityType() . ':' . $id->getSerialization();
-				return Title::makeTitle( NS_MAIN, $name );
+				return Title::makeTitle(
+					NS_MAIN,
+					$id->getEntityType() . ':' . $id->getSerialization()
+				);
 			} ) );
 
 		return $entityTitleLookup;
