@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_da645ab1",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T15:36:08Z",
+      "side": 1,
+      "message": "Wrong type, the array contains a string (the id) and arrays of labels and descriptions.",
+      "revId": "6b49d9131f9ab1325e655f1104a5f92c164de64c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
