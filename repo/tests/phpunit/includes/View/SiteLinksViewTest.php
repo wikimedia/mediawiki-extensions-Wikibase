@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use MediaWikiSite;
-use MediaWikiTestCase;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -35,7 +34,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
 		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
-		MediaWikiTestCase::assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
+		\MediaWikiTestCase::assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
 	}
 
 	public function getHtmlProvider() {
@@ -217,8 +216,8 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
 		$sectionEditLinkGenerator->expects( $this->any() )
 			->method( 'getHtmlForEditSection' )
-			->will( $this->returnCallback( function ( $url, $cssClassSuffix, $msg, $tag, $enabled ) {
-				if( $enabled ) {
+			->will( $this->returnCallback( function( $url, $cssClassSuffix, $msg, $tag, $enabled ) {
+				if ( $enabled ) {
 					return '<a class="wikibase-toolbarbutton-enabled">Edit link</a>';
 				} else {
 					return '<a class="wikibase-toolbarbutton-disabled">Disabled edit link</a>';
@@ -254,14 +253,14 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnCallback( function( EntityId $entityId ) {
-				if ( $entityId->getSerialization() === 'Q42' ) {
+			->will( $this->returnCallback( function( EntityId $id ) {
+				if ( $id->getSerialization() === 'Q42' ) {
 					$item = Item::newEmpty();
 					$item->setLabel( 'en', 'Featured article' );
 					return $item;
-				} else {
-					return null;
 				}
+
+				return null;
 			} ) );
 
 		return $entityLookup;
