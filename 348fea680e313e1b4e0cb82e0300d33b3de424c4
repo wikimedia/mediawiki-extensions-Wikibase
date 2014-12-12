@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_5ae92a7a",
+        "filename": "lib/includes/store/CachingEntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T16:43:40Z",
+      "side": 1,
+      "message": "$fromMaster \u003d $mode \u003d\u003d\u003d self::LATEST_FROM_MASTER\n\t|| $this-\u003eshouldVerifyRevision;\nif ( !$fromMaster ) {\n\t...",
+      "parentUuid": "0e6cb3ef_17614bd0",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_97ca1349",
         "filename": "lib/includes/store/EntityRevisionLookup.php",
         "patchSetId": 2
@@ -229,6 +247,23 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_9abd8266",
+        "filename": "repo/includes/specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T16:43:40Z",
+      "side": 1,
+      "message": "Wait, why  is the default FOR_UPDATE here? I was thinking the cheap option should be the default everywhere.",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_977d331a",
         "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
         "patchSetId": 2
@@ -258,6 +293,24 @@
       "side": 1,
       "message": "how? because php doesn\u0027t care ;)\nI find strings clearer than using -1 and -2 instead. Don\u0027t want to use 0 to avoid confusion.",
       "parentUuid": "2e9df725_977d331a",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_1aa97221",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T16:43:40Z",
+      "side": 1,
+      "message": "Just because a \"FOR_UPDATE\" flag is simply not a revision id. Solved by the rename, thanks.",
+      "parentUuid": "0e6cb3ef_f7461726",
       "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
