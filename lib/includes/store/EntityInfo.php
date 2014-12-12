@@ -53,110 +53,113 @@ class EntityInfo {
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 *
 	 * @return bool
 	 */
-	public function hasEntityInfo( EntityId $id ) {
-		$key = $id->getSerialization();
+	public function hasEntityInfo( EntityId $entityId ) {
+		$key = $entityId->getSerialization();
 
-		return isset( $this->info[$key] );
+		return array_key_exists( $key, $this->info );
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 *
+	 * @throws RuntimeException
 	 * @throws OutOfBoundsException If this EntityInfo does not have information about the
 	 *         requested Entity. This does say anything about whether the Entity exists in
 	 *         the database.
-	 * @return array[] An array structure representing information about the given entity.
+	 * @return array An array structure representing information about the given entity.
 	 *         Refer to the class level documentation for information about the structure.
 	 */
-	public function getEntityInfo( EntityId $id ) {
-		$key = $id->getSerialization();
+	public function getEntityInfo( EntityId $entityId ) {
+		$key = $entityId->getSerialization();
 
-		if ( isset( $this->info[$key] ) ) {
-			return $this->info[$key];
-		} else {
-			throw new OutOfBoundsException( 'Unknown entity: ' . $id );
+		if ( !array_key_exists( $key, $this->info ) ) {
+			throw new OutOfBoundsException( "Unknown entity $entityId" );
+		} elseif ( !is_array( $this->info[$key] ) ) {
+			throw new RuntimeException( "$key term record is invalid" );
 		}
+
+		return $this->info[$key];
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
 	 * @throws OutOfBoundsException If nothing is known about the entity or its labels.
 	 * @return string|null The entity's label in the given language,
-	 *         or null if no such label exists on the entity.
+	 *         or null if a label in that language is not known.
 	 */
-	public function getLabel( EntityId $id, $languageCode ) {
-		return $this->getTermValue( $id, 'labels', $languageCode );
+	public function getLabel( EntityId $entityId, $languageCode ) {
+		return $this->getTermValue( $entityId, 'labels', $languageCode );
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
 	 * @throws OutOfBoundsException If nothing is known about the entity or its descriptions.
 	 * @return string|null The entity's description in the given language,
-	 *         or null if no such description exists on the entity.
+	 *         or null if a description in that language is not known.
 	 */
-	public function getDescription( EntityId $id, $languageCode ) {
-		return $this->getTermValue( $id, 'descriptions', $languageCode );
+	public function getDescription( EntityId $entityId, $languageCode ) {
+		return $this->getTermValue( $entityId, 'descriptions', $languageCode );
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 *
 	 * @throws OutOfBoundsException If nothing is known about the entity or its labels.
 	 * @return string[] The given entity's labels, keyed by language.
 	 */
-	public function getLabels( EntityId $id ) {
-		return $this->getTermValues( $id, 'labels' );
+	public function getLabels( EntityId $entityId ) {
+		return $this->getTermValues( $entityId, 'labels' );
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 *
 	 * @throws OutOfBoundsException If nothing is known about the entity or its descriptions.
 	 * @return string[] The given entity's descriptions, keyed by language.
 	 */
-	public function getDescriptions( EntityId $id ) {
-		return $this->getTermValues( $id, 'descriptions' );
+	public function getDescriptions( EntityId $entityId ) {
+		return $this->getTermValues( $entityId, 'descriptions' );
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 * @param string $termField The term field (e.g. 'labels' or 'descriptions').
 	 * @param string $languageCode
 	 *
 	 * @throws RuntimeException
 	 * @throws OutOfBoundsException If nothing is known about the entity
 	 *         or terms of the requested type.
-	 * @return string|null The term value of the requested type and language,
-	 *         or null if no such term is set on the entity.
+	 * @return string|null The term value of the requested type and language, or null if a term in
+	 * that language is not known.
 	 */
-	private function getTermValue( EntityId $id, $termField, $languageCode ) {
-		$entityInfo = $this->getEntityInfo( $id );
+	private function getTermValue( EntityId $entityId, $termField, $languageCode ) {
+		$entityInfo = $this->getEntityInfo( $entityId );
 
-		if ( !isset( $entityInfo[$termField] ) ) {
-			throw new OutOfBoundsException( 'Term field ' . $termField . ' is unknown.' );
-		}
-
-		if ( !isset( $entityInfo[$termField][$languageCode] ) ) {
+		if ( !array_key_exists( $termField, $entityInfo ) ) {
+			throw new OutOfBoundsException( "No '$termField' in $entityId term record" );
+		} elseif ( !is_array( $entityInfo[$termField] ) ) {
+			throw new RuntimeException( "$entityId term record is invalid" );
+		} elseif ( !array_key_exists( $languageCode, $entityInfo[$termField] ) ) {
 			return null;
-		}
-
-		if ( !isset( $entityInfo[$termField][$languageCode]['value'] ) ) {
-			throw new RuntimeException( 'Term record is missing `value` key (' . $id->getSerialization() . ')' );
+		} elseif ( !is_array( $entityInfo[$termField][$languageCode] )
+			|| !array_key_exists( 'value', $entityInfo[$termField][$languageCode] )
+		) {
+			throw new RuntimeException( "$entityId term record is missing the 'value' field" );
 		}
 
 		return $entityInfo[$termField][$languageCode]['value'];
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 * @param string $termField The term field (e.g. 'labels' or 'descriptions').
 	 *
 	 * @throws RuntimeException
@@ -164,21 +167,23 @@ class EntityInfo {
 	 *         or terms of the requested type.
 	 * @return string[] The entity's term values of the requested type, keyed by language.
 	 */
-	private function getTermValues( EntityId $id, $termField ) {
-		$entityInfo = $this->getEntityInfo( $id );
+	private function getTermValues( EntityId $entityId, $termField ) {
+		$entityInfo = $this->getEntityInfo( $entityId );
 
-		if ( !isset( $entityInfo[$termField] ) ) {
-			throw new OutOfBoundsException( 'Term field `' . $termField . '` is unknown.' );
+		if ( !array_key_exists( $termField, $entityInfo ) ) {
+			throw new OutOfBoundsException( "No '$termField' in $entityId term record" );
+		} elseif ( !is_array( $entityInfo[$termField] ) ) {
+			throw new RuntimeException( "$entityId term record is invalid" );
 		}
 
 		$values = array();
 
-		foreach ( $entityInfo[$termField] as $key => $entry ) {
-			if ( !isset( $entry['value'] ) ) {
-				throw new RuntimeException( 'Term record is missing `value` key (' . $id->getSerialization() . ')' );
+		foreach ( $entityInfo[$termField] as $key => $term ) {
+			if ( !is_array( $term ) || !array_key_exists( 'value', $term ) ) {
+				throw new RuntimeException( "$entityId term record is missing the 'value' field" );
 			}
 
-			$values[$key] = $entry['value'];
+			$values[$key] = $term['value'];
 		}
 
 		return $values;

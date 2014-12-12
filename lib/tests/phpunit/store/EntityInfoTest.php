@@ -199,7 +199,6 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetLabel_exception( $data ) {
 		$info = new EntityInfo( $data );
-
 		$this->setExpectedException( 'OutOfBoundsException' );
 		$info->getLabel( new ItemId( 'Q99' ), 'en' );
 	}
@@ -209,7 +208,6 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetLabels_exception( $data ) {
 		$info = new EntityInfo( $data );
-
 		$this->setExpectedException( 'OutOfBoundsException' );
 		$info->getLabels( new ItemId( 'Q99' ) );
 	}
@@ -219,7 +217,6 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetDescription_exception( $data ) {
 		$info = new EntityInfo( $data );
-
 		$this->setExpectedException( 'OutOfBoundsException' );
 		$info->getDescription( new ItemId( 'Q99' ), 'en' );
 	}
@@ -229,8 +226,60 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetDescriptions_exception( $data ) {
 		$info = new EntityInfo( $data );
-
 		$this->setExpectedException( 'OutOfBoundsException' );
+		$info->getDescriptions( new ItemId( 'Q99' ) );
+	}
+
+	public function invalidArrayProvider() {
+		return array(
+			'value incomplete' => array(
+				array( 'Q99' => array( 'labels' => array( 'en' => array() ) ) )
+			),
+			'value invalid' => array(
+				array( 'Q99' => array( 'labels' => array( 'en' => 'not an array' ) ) )
+			),
+			'labels invalid' => array(
+				array( 'Q99' => array( 'labels' => 'not an array' ) )
+			),
+			'entity invalid' => array(
+				array( 'Q99' => 'not an array' )
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider invalidArrayProvider
+	 */
+	public function testGetLabelWithInvalidArray_throwsRuntimeException( $array ) {
+		$info = new EntityInfo( $array );
+		$this->setExpectedException( 'RuntimeException' );
+		$info->getLabel( new ItemId( 'Q99' ), 'en' );
+	}
+
+	/**
+	 * @dataProvider invalidArrayProvider
+	 */
+	public function testGetLabelsWithInvalidArray_throwsRuntimeException( $array ) {
+		$info = new EntityInfo( $array );
+		$this->setExpectedException( 'RuntimeException' );
+		$info->getLabels( new ItemId( 'Q99' ) );
+	}
+
+	/**
+	 * @dataProvider invalidArrayProvider
+	 */
+	public function testGetDescriptionWithInvalidArray_throwsRuntimeException( $array ) {
+		$info = new EntityInfo( $array );
+		$this->setExpectedException( 'RuntimeException' );
+		$info->getDescription( new ItemId( 'Q99' ), 'en' );
+	}
+
+	/**
+	 * @dataProvider invalidArrayProvider
+	 */
+	public function testGetDescriptionsWithInvalidArray_throwsRuntimeException( $array ) {
+		$info = new EntityInfo( $array );
+		$this->setExpectedException( 'RuntimeException' );
 		$info->getDescriptions( new ItemId( 'Q99' ) );
 	}
 
