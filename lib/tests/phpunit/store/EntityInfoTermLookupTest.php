@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 
 /**
@@ -104,7 +105,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 			'Q116' => array(
 				'labels' => array(
 					'en' => array( 'language' => 'en', 'value' => 'New York City' ),
-					'es' => 'Nueva York', // terse form also supported
+					'es' => array( 'language' => 'es', 'value' => 'Nueva York' ),
 				),
 				'descriptions' => array(
 					'en' => array( 'language' => 'en', 'value' => 'largest city in New York and the United States of America' ),
@@ -119,7 +120,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 			),
 		);
 
-		return $entityInfo;
+		return new EntityInfo( $entityInfo );
 	}
 
 }
