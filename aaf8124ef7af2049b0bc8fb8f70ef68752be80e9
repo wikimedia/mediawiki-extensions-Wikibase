@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_d76433b1",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T14:01:26Z",
+      "side": 1,
+      "message": "Comment is wrong now.",
+      "revId": "aaf8124ef7af2049b0bc8fb8f70ef68752be80e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_f7f4d7cd",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T14:01:26Z",
+      "side": 1,
+      "message": "Inline please and use two specific error messages.",
+      "revId": "aaf8124ef7af2049b0bc8fb8f70ef68752be80e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_57590300",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T14:01:26Z",
+      "side": 1,
+      "message": "This class possibly needs some refactoring now. Not sure if it\u0027s worth trying to turn this array into an EntityInfo object.",
+      "revId": "aaf8124ef7af2049b0bc8fb8f70ef68752be80e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_975f9be8",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T14:01:26Z",
+      "side": 1,
+      "message": "This class possibly needs some refactoring now. Not sure if it\u0027s worth trying to turn this array into an EntityInfo object.",
+      "revId": "aaf8124ef7af2049b0bc8fb8f70ef68752be80e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_d7be73fa",
+        "filename": "repo/tests/phpunit/includes/ParserOutputJsConfigBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T14:01:26Z",
+      "side": 1,
+      "message": "This method name is a bit confusing. It returns _partial_ EntityInfo content.",
+      "revId": "aaf8124ef7af2049b0bc8fb8f70ef68752be80e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_17c5cb90",
+        "filename": "repo/tests/phpunit/includes/View/EntityViewFactoryTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T14:01:26Z",
+      "side": 1,
+      "message": "This suggests the constructor parameter should be optional.",
+      "revId": "aaf8124ef7af2049b0bc8fb8f70ef68752be80e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
