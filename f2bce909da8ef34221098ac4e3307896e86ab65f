@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_77fbe711",
+        "filename": "lib/includes/store/EntityInfo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T13:42:52Z",
+      "side": 1,
+      "message": "I see zero use for a \"getEmptyArray\" method. That\u0027s what this is if you call getTermValues( $id, \u0027labels\u0027, array() ). Using !empty() instead of !\u003d\u003d null allows to use the methods like this:\n\n$filter \u003d array();\nif ( ... ) {\n\t$filter[] \u003d ...;\n}\nget...( $filter );",
+      "parentUuid": "2e9df725_e582bca8",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_1cddc847",
         "filename": "lib/includes/store/EntityRetrievingTermLookup.php",
         "patchSetId": 4
@@ -247,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_7770c7a3",
+        "filename": "lib/includes/store/TermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T13:42:52Z",
+      "side": 1,
+      "message": "\"List of codes to be loaded\"? I neither said nor meant that. The parameter is an array of language codes, not an array of Language objects.",
+      "parentUuid": "2e9df725_257744d3",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_3ca9a478",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 4
@@ -282,6 +318,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_b7eadf03",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T13:42:52Z",
+      "side": 1,
+      "message": "I indexes in MySQL work like I think they work this means we will always end with a full table scan if this method is used with no language filter.\n\nAlso why is term_entity_type completely missing? Bad selectivity?",
+      "parentUuid": "2e9df725_e5787cc1",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_bce374d3",
         "filename": "lib/tests/phpunit/store/EntityRetrievingTermLookupTest.php",
         "patchSetId": 4
@@ -311,6 +365,24 @@
       "side": 1,
       "message": "Type hints in tests? hm... what for? Against what does this protect us?",
       "parentUuid": "2e9df725_bce374d3",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_978b1b72",
+        "filename": "lib/tests/phpunit/store/EntityRetrievingTermLookupTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T13:42:52Z",
+      "side": 1,
+      "message": "You are not really asking this, aren\u0027t you? I\u0027m not going to answer this.\n\nPlease note: If I write comments like this they are not meant as a -1. Such details are clearly no reason to block a patch. But I will always add notes like this if I see potential to improve. Why shouldn\u0027t I?",
+      "parentUuid": "2e9df725_65546c2b",
       "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -363,6 +435,24 @@
       "side": 1,
       "message": "doesn\u0027t matter, flipping an empty array has no effect",
       "parentUuid": "2e9df725_bcfa9471",
+      "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_97a47b06",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-12T13:42:52Z",
+      "side": 1,
+      "message": "Probably doesn\u0027t matter when running the code, but matters when reading it. If this line does a comparison based on PHP\u0027s bool conversion why is the exact same comparison just a few lines below a specific !\u003d\u003d null one?",
+      "parentUuid": "2e9df725_f70117ba",
       "revId": "f2bce909da8ef34221098ac4e3307896e86ab65f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
