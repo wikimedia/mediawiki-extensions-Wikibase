@@ -35,6 +35,7 @@
 	line-height: 1.5;
 	padding-left: 0.2em;
 	padding-right: 0;
+	white-space: nowrap;
 }
 
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-siteid-container .wikibase-sitelinkview-siteid {
