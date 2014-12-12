@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_17614bd0",
+        "filename": "lib/includes/store/CachingEntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T13:52:36Z",
+      "side": 1,
+      "message": "No. We use the cache if we do not need to verify the revision and the result is not needed for an update. Maybe it\u0027s clearer to write ( not ( verify or update ) ) instead of ( (not verify ) and (not update) )",
+      "parentUuid": "2e9df725_171cc3ca",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_97ca1349",
         "filename": "lib/includes/store/EntityRevisionLookup.php",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2014-12-10T20:12:34Z",
       "side": 1,
       "message": "At least rename these to something like \"LATEST_FOR_DISPLAY\".\n\nOr \"LATEST_FROM_SLAVE\" and \"LATEST_FROM_MASTER\". Yes, I know you avoided the words \"slave\" and \"master\" on purpose to not expose implementation details. But I have the strong feeling that you are trying to hide a crucial fact just for the purpose of hiding it. Avoiding these words doesn\u0027t make the code easier to read.",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_7786876c",
+        "filename": "lib/includes/store/EntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T13:52:36Z",
+      "side": 1,
+      "message": "I was following SQL terminology here, though semantics is somewhat different (SQL would actually lock the things you get with SELECT FOR UPDATE). I don\u0027t really like exposing the master/slave terminology here, and do not quite see where that would be critical to know. But since MW uses DB_MASTER/DB_SLAVE all over the place, i\u0027ll go with that terminology for now. Can\u0027t think of anything better...",
+      "parentUuid": "2e9df725_97ca1349",
       "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_37cecfba",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T13:52:36Z",
+      "side": 1,
+      "message": "Yes, but I find it useful to be warned about code paths that do yet have a conscious decision whether to use master or slave.",
+      "parentUuid": "2e9df725_d715fb9d",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_37245f07",
         "filename": "lib/tests/phpunit/MockRepository.php",
         "patchSetId": 2
@@ -81,6 +135,24 @@
       "writtenOn": "2014-12-10T20:12:34Z",
       "side": 1,
       "message": "You missed the parameter here! Could be on purpose but I think it\u0027s a mistake.",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_f7c7f798",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T13:52:36Z",
+      "side": 1,
+      "message": "For the mock repo, it makes no difference, but you are right that it\u0027s better to pass the parameter.",
+      "parentUuid": "2e9df725_37245f07",
       "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_9738fb9c",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T13:52:36Z",
+      "side": 1,
+      "message": "$lookup-\u003egetEntityRevision( $id, $revision ) a few lines down requires a master/slave string; passing 0 would trigger a warning and cause tests to fail.",
+      "parentUuid": "2e9df725_97c3f33c",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_779f4756",
         "filename": "repo/includes/specials/SpecialWikibaseRepoPage.php",
         "patchSetId": 2
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_373d6f8b",
+        "filename": "repo/includes/specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T13:52:36Z",
+      "side": 1,
+      "message": "read \"load Entity X for update\". But I renamed anyway.",
+      "parentUuid": "2e9df725_779f4756",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_977d331a",
         "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
         "patchSetId": 2
@@ -132,6 +240,24 @@
       "writtenOn": "2014-12-10T20:12:34Z",
       "side": 1,
       "message": "Comment is wrong now, isn\u0027t it? Erm, wait, this is a constant in an integer field for a revision id? How is that possible?",
+      "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_f7461726",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T13:52:36Z",
+      "side": 1,
+      "message": "how? because php doesn\u0027t care ;)\nI find strings clearer than using -1 and -2 instead. Don\u0027t want to use 0 to avoid confusion.",
+      "parentUuid": "2e9df725_977d331a",
       "revId": "348fea680e313e1b4e0cb82e0300d33b3de424c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

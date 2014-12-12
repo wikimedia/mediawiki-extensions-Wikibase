@@ -16,6 +16,24 @@
       "revId": "3a65287aaeb3bf6109c8e7ad557100b04f19c47a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_37a9efdc",
+        "filename": "lib/includes/store/CachingEntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T13:52:36Z",
+      "side": 0,
+      "message": "Because we shouldn\u0027t push an old revision to the cache, that was a silly idea.",
+      "parentUuid": "2e9df725_9740d3a9",
+      "revId": "3a65287aaeb3bf6109c8e7ad557100b04f19c47a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
