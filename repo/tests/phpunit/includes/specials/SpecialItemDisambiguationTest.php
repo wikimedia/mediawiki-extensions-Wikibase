@@ -63,14 +63,15 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		$mock = $this->getMock( 'Wikibase\TermIndex' );
 		$mock->expects( $this->any() )
 			->method( 'getEntityIdsForLabel' )
-			->will( $this->returnCallback(
-				function ( $label, $languageCode = null, $entityType = null, $fuzzySearch = false )
-					use ( $matches )
-				{
-					$key = "$label,$languageCode,$entityType,$fuzzySearch";
-					return isset( $matches[$key] ) ? $matches[$key] : array();
-				}
-			) );
+			->will( $this->returnCallback( function(
+				$label,
+				$languageCode = null,
+				$entityType = null,
+				$fuzzySearch = false
+			) use ( $matches ) {
+				$key = "$label,$languageCode,$entityType,$fuzzySearch";
+				return isset( $matches[$key] ) ? $matches[$key] : array();
+			} ) );
 
 		return $mock;
 	}

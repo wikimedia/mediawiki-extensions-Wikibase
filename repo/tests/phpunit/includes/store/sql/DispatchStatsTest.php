@@ -23,8 +23,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	 *
 	 * @return DispatchStats
 	 */
-	protected function getDispatchStats() {
-		$data = self::getTestData();
+	private function getDispatchStats() {
+		$data = $this->getTestData();
 		$now = $data['now'];
 		$changes = $data['changes'];
 		$states = $data['states'];
@@ -73,7 +73,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		return $stats;
 	}
 
-	protected static function getTestData() {
+	private function getTestData() {
 		return array(
 			'states' => array(
 				array(
@@ -201,8 +201,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public static function provideGetClientStates() {
-		$data = self::getTestData();
+	public function provideGetClientStates() {
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -229,7 +229,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		}
 	}
 
-	protected function assertStateEquals( $expected, $actual ) {
+	private function assertStateEquals( $expected, $actual ) {
 		$this->assertInternalType( 'array', $expected );
 		$this->assertInternalType( 'object', $actual );
 
@@ -257,8 +257,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function provideGetClientCount() {
-		$data = self::getTestData();
+	public function provideGetClientCount() {
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -276,8 +276,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $stats->getClientCount() );
 	}
 
-	public static function provideGetLockedCount() {
-		$data = self::getTestData();
+	public function provideGetLockedCount() {
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -295,8 +295,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $stats->getLockedCount() );
 	}
 
-	public static function provideGetMinChangeId() {
-		$data = self::getTestData();
+	public function provideGetMinChangeId() {
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -314,8 +314,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $stats->getMinChangeId() );
 	}
 
-	public static function provideGetMaxChangeId() {
-		$data = self::getTestData();
+	public function provideGetMaxChangeId() {
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -333,8 +333,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $stats->getMaxChangeId() );
 	}
 
-	public static function provideGetMinChangeTimestamp() {
-		$data = self::getTestData();
+	public function provideGetMinChangeTimestamp() {
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -352,8 +352,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $stats->getMinChangeTimestamp() );
 	}
 
-	public static function provideGetMaxChangeTimestamp() {
-		$data = self::getTestData();
+	public function provideGetMaxChangeTimestamp() {
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -371,8 +371,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $stats->getMaxChangeTimestamp() );
 	}
 
-	public static function provideGetFreshest() {
-		$data = self::getTestData();
+	public function provideGetFreshest() {
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -390,8 +390,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertStateEquals( $expected, $stats->getFreshest());
 	}
 
-	public static function provideGetStalest() {
-		$data = self::getTestData();
+	public function provideGetStalest() {
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -409,8 +409,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertStateEquals( $expected, $stats->getStalest());
 	}
 
-	public static function provideGetAverage() {
-		$data = self::getTestData();
+	public function provideGetAverage() {
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -428,8 +428,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertStateEquals( $expected, $stats->getStalest());
 	}
 
-	public static function provideGetMedian() {
-		$data = self::getTestData();
+	public function provideGetMedian() {
+		$data = $this->getTestData();
 
 		return array(
 			array(
@@ -468,4 +468,5 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 
 		$this->assertFalse( $stats->hasStats() ); // Still no stats as the table is empty
 	}
+
 }
