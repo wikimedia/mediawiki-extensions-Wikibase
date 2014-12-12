@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_5ab12adb",
+        "filename": "lib/includes/Validators/AlternativeValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T16:01:34Z",
+      "side": 1,
+      "message": "Yea, i know. I was indeed looking for the opposite (or rather, the converse) of \"composite\". We could also rename them to ConjunctionValidator and DisjunctionValidator, but i\u0027m not sure that is clearer.\n\nFallbackValidator?...",
+      "parentUuid": "2e9df725_b7486f8d",
+      "revId": "9da595e47aa9ccb1a0134857298221db32652a7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_173b63e9",
         "filename": "lib/includes/Validators/AlternativeValidator.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-10T21:05:27Z",
       "side": 1,
       "message": "No need, will fail hard on the validate() call.",
+      "revId": "9da595e47aa9ccb1a0134857298221db32652a7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_9ab7c2d3",
+        "filename": "lib/includes/Validators/AlternativeValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T16:01:34Z",
+      "side": 1,
+      "message": "That\u0027s exactly why it should be checked in the constructor. Otherwise, the stack trace will not contain the offending code, which makes it hard to find.",
+      "parentUuid": "2e9df725_173b63e9",
       "revId": "9da595e47aa9ccb1a0134857298221db32652a7d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_1ac3b23e",
+        "filename": "lib/includes/WikibaseDataTypeBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T16:01:34Z",
+      "side": 1,
+      "message": "Yea, using the MembershipValidator is better. I didn\u0027t see anything for \"exact value\", so I went for the regex as the next best thing.",
+      "parentUuid": "2e9df725_12285180",
+      "revId": "9da595e47aa9ccb1a0134857298221db32652a7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_7710a75b",
         "filename": "lib/includes/WikibaseDataTypeBuilders.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2014-12-10T21:05:27Z",
       "side": 1,
       "message": "Don\u0027t need the composite any more at this point.",
+      "revId": "9da595e47aa9ccb1a0134857298221db32652a7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_7ad98e2b",
+        "filename": "lib/includes/WikibaseDataTypeBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-12T16:01:34Z",
+      "side": 1,
+      "message": "True. having it just makes it easier to add more validators. But I guess it\u0027s just clutter, and only makes the code hard to read.",
+      "parentUuid": "2e9df725_7710a75b",
       "revId": "9da595e47aa9ccb1a0134857298221db32652a7d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
