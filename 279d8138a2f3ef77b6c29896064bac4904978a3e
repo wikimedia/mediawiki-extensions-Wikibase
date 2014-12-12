@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_50cd8933",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-12T19:32:30Z",
+      "side": 1,
+      "message": "why is this not injected?",
+      "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_b0ef4582",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-12T19:32:30Z",
+      "side": 1,
+      "message": "$languageCodes as $languageCode",
+      "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_70d20dd7",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-12T19:32:30Z",
+      "side": 1,
+      "message": "Prefeteched?",
+      "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_30fb3546",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-12T19:32:30Z",
+      "side": 1,
+      "message": "is $language a Language object?",
+      "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
