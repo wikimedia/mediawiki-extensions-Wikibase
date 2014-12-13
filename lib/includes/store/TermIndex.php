@@ -17,22 +17,6 @@ use Wikibase\Lib\Store\LabelConflictFinder;
 interface TermIndex extends LabelConflictFinder {
 
 	/**
-	 * Returns the type, id tuples for the entities with the provided label in the specified language.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $label
-	 * @param string|null $languageCode
-	 * @param string|null $entityType
-	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
-	 *
-	 * @return EntityId[]
-	 *
-	 * TODO: update to use Term interface
-	 */
-	public function getEntityIdsForLabel( $label, $languageCode = null, $entityType = null, $fuzzySearch = false );
-
-	/**
 	 * Saves the terms of the provided entity in the term cache.
 	 *
 	 * @since 0.1
@@ -77,24 +61,12 @@ interface TermIndex extends LabelConflictFinder {
 	 * @param string $entityType
 	 * @param string[]|null $termTypes The types of terms to return, e.g. "label", "description",
 	 *        or "alias". Compare the Term::TYPE_XXX constants. If null, all types are returned.
+	 * @param string[]|null $languageCodes The desired languages, given as language codes.
+	 *        If null, all languages are returned.
 	 *
 	 * @return Term[]
 	 */
 	public function getTermsOfEntities( array $ids, $entityType, array $termTypes = null, array $languageCodes = null );
-
-	/**
-	 * Returns if a term with the specified parameters exists.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $termValue
-	 * @param string|null $termType
-	 * @param string|null $termLanguage Language code
-	 * @param string|null $entityType
-	 *
-	 * @return boolean
-	 */
-	public function termExists( $termValue, $termType = null, $termLanguage = null, $entityType = null );
 
 	/**
 	 * Returns the terms that match the provided conditions.

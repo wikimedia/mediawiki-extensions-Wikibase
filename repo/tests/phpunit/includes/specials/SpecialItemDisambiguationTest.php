@@ -50,11 +50,11 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		// Matches TermIndex::getEntityIdsForLabel shall return.
 		// Array keys are derived from the function parameters
 		$matches = array(
-			'one,en,item,1' => array(
+			'one,en,item,' => array(
 				new ItemId( 'Q1' ),
 				new ItemId( 'Q11' ),
 			),
-			'eins,de,item,1' => array(
+			'eins,de,item,' => array(
 				new ItemId( 'Q1' ),
 				new ItemId( 'Q11' ),
 			),
@@ -62,12 +62,14 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 
 		$mock = $this->getMock( 'Wikibase\TermIndex' );
 		$mock->expects( $this->any() )
-			->method( 'getEntityIdsForLabel' )
+			->method( 'getMatchingIDs' )
 			->will( $this->returnCallback(
-				function ( $label, $languageCode = null, $entityType = null, $fuzzySearch = false )
+				function ( array $terms, $entityType, array $options = array() )
 					use ( $matches )
 				{
-					$key = "$label,$languageCode,$entityType,$fuzzySearch";
+					$term = reset( $terms );
+					$fuzzySearch = isset( $options['caseSensitive'] ) && !$options['caseSensitive'];
+					$key = $term->getText() . ',' . $term->getLanguage() . ',' . $entityType . ',' . $fuzzySearch;
 					return isset( $matches[$key] ) ? $matches[$key] : array();
 				}
 			) );
