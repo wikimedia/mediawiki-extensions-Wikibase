@@ -14,6 +14,7 @@ use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Term;
 use Wikibase\TermIndex;
 
 /**
@@ -273,7 +274,23 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 * @return Item[]
 	 */
 	private function findLabelUsage( $languageCode, $label ) {
-		$entityIds = $this->termIndex->getEntityIdsForLabel( $label, $languageCode, Item::ENTITY_TYPE, true );
+		//@todo: optionally
+		$protoTerms = array(
+			new Term( array(
+				'termType' 		=> Term::TYPE_LABEL,
+				'termLanguage' 	=> $languageCode,
+				'termText' 		=> $label
+			) ),
+		);
+
+		//@todo: expose options
+		$options = array(
+			'caseSensitive' => true,
+			'prefixSearch' => false,
+			'LIMIT' => $this->limit
+		);
+
+		$entityIds = $this->termIndex->getMatchingIDs( $protoTerms, Item::ENTITY_TYPE, $options );
 		$entities = array();
 
 		$count = 0;
