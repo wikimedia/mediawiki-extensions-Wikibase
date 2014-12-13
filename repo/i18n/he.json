@@ -372,5 +372,12 @@
 	"right-property-term": "שינוי מונחי מאפיינים (תוויות, תיאורים, כינויים)",
 	"right-property-create": "יצירת מאפיינים",
 	"wikibase-entity-not-viewable-title": "חוסר־התאמה בסוג התוכן: לא ניתן להציג את התוכן",
-	"wikibase-entity-not-viewable": "סוג התוכן \"$1\" אינו ישות ולכן אי־אפשר להציג אותו בוויקיבייס."
+	"wikibase-entity-not-viewable": "סוג התוכן \"$1\" אינו ישות ולכן אי־אפשר להציג אותו בוויקיבייס.",
+	"apihelp-wbmergeitems-description": "ממזג מספר רב של פריטים.",
+	"apihelp-wbparsevalue-example-1": "לא לשנות את העיצוב של המחרוזת.",
+	"apihelp-wbsearchentities-param-search": "חיפוש עבור הטקסט הזה.",
+	"apihelp-wbsearchentities-param-language": "חיפוש עבור שפה זו.",
+	"apihelp-wbsearchentities-param-limit": "מספר מירבי של תוצאות",
+	"apihelp-wbsearchentities-example-2": "חיפוש עבור \"abc\" בשפה אנגלית עם מגבלה של 50",
+	"apihelp-wbsetdescription-param-language": "השפה של התיאור"
 }

@@ -64,6 +64,7 @@
 	"wikibase-validator-bad-url-scheme": "Неподдржана URL: $1",
 	"wikibase-validator-unknown-unit": "Непозната единица: $1",
 	"wikibase-validator-not-allowed": "Недопуштена вредност: $1",
+	"wikibase-validator-no-validators": "Забрането",
 	"datatypes-type-wikibase-item": "Предмет",
 	"datatypes-type-wikibase-property": "Својство",
 	"datatypes-type-commonsMedia": "Податотека од Ризницата",

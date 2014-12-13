@@ -70,6 +70,7 @@
 	"wikibase-validator-bad-url-scheme": "Nicht unterstütztes URL-Schema: $1",
 	"wikibase-validator-unknown-unit": "Unbekannte Einheit: $1",
 	"wikibase-validator-not-allowed": "Ungültiger Wert: $1",
+	"wikibase-validator-no-validators": "Unzulässig",
 	"datatypes-type-wikibase-item": "Datenobjekt",
 	"datatypes-type-wikibase-property": "Eigenschaft",
 	"datatypes-type-commonsMedia": "Mediendatei auf Commons",

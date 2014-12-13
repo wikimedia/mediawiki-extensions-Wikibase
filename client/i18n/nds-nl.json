@@ -33,6 +33,7 @@
 	"wikibase-rc-hide-wikidata-show": "Bekiek",
 	"wikibase-rc-show-wikidata-pref": "Wikidatabewarkingen laoten zien in \"Leste wiezigingen\"",
 	"wikibase-rc-wikibase-edit-title": "Wikidata-bewarking",
+	"wikibase-replicationnote": "t Kan n paor minuten duren veurdat de wiezigingen op alle wiki's zichtbaor bin.",
 	"wikibase-watchlist-show-changes-pref": "Wikidatabewarkingen laoten zien in joew volglieste",
 	"wikibase-error-serialize-error": "De gegevens konnen niet eserialiseerd wörden",
 	"wikibase-error-invalid-entity-id": "t Op-egeven nummer is niet bekend in t systeem. Gebruuk n geldig nummer.",
@@ -41,5 +42,8 @@
 	"wikibase-unconnectedpages-page": "Lieste beginnen mit zied:",
 	"wikibase-unconnectedpages-submit": "Zeuk",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" is gien geldige taalkode.",
-	"wikibase-pageinfo-entity-id-none": "Gien"
+	"wikibase-pageinfo-entity-id-none": "Gien",
+	"wikibase-otherprojects": "Aandere projekten",
+	"wikibase-otherprojects-beta-message": "Aandere projekten-ziedbalke",
+	"wikibase-otherprojects-beta-description": "Voegt n \"{{int:wikibase-otherprojects}}\"-seksie toe an de ziedbalke die toegang gif tot aandere Wikimedia-projekten op baosis van gegevens van {{WBREPONAME}}."
 }

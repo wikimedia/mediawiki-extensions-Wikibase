@@ -66,6 +66,7 @@
 	"wikibase-validator-bad-url-scheme": "סכמת URL לא נתמכת: $1",
 	"wikibase-validator-unknown-unit": "יחידה בלתי־ידועה: $1",
 	"wikibase-validator-not-allowed": "ערך בלתי־תקין: $1",
+	"wikibase-validator-no-validators": "אסור",
 	"datatypes-type-wikibase-item": "פריט",
 	"datatypes-type-wikibase-property": "מאפיין",
 	"datatypes-type-commonsMedia": "קובץ מדיה בוויקישיתוף",

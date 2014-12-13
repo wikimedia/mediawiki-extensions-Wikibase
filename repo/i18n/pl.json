@@ -347,6 +347,7 @@
 	"right-item-redirect": "Tworzenie przekierowań elementu",
 	"right-property-term": "Zmiana określeń właściwości (etykiet, opisów, aliasów)",
 	"right-property-create": "Tworzenie właściwości",
+	"apihelp-wbremovequalifiers-description": "Usuwa kwalifikator ze stwierdzenia.",
 	"apihelp-wbsearchentities-param-search": "Wyszukaj w tym tekście.",
 	"apihelp-wbsearchentities-param-language": "Wyszukaj w tym języku.",
 	"apihelp-wbsearchentities-param-limit": "Maksymalna liczba wyników",

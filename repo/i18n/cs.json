@@ -85,7 +85,7 @@
 	"wikibase-statementview-rank-preferred": "Preferované postavení",
 	"wikibase-statementview-rank-normal": "Normální postavení",
 	"wikibase-statementview-rank-deprecated": "Zavržené postavení",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|reference}}",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|reference|reference|referencí}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Jedna reference zatím nebyla uložena|$1 reference zatím nebyly uloženy|$1 referencí zatím nebylo uloženo}}",
 	"wikibase-snakview-property-input-placeholder": "vlastnost",
 	"wikibase-snakview-choosesnaktype": "Zvolte typ hodnoty.",
