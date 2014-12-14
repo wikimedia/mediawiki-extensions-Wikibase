@@ -32,6 +32,11 @@ $specialPageAliases['de'] = array(
 	'UnconnectedPages' => array( 'Nicht_verbundene_Seiten' ),
 );
 
+/** Spanish (español) */
+$specialPageAliases['es'] = array(
+	'UnconnectedPages' => array( 'PáginasSinConexión' ),
+);
+
 /** Estonian (eesti) */
 $specialPageAliases['et'] = array(
 	'UnconnectedPages' => array( 'Ühendamata_leheküljed' ),

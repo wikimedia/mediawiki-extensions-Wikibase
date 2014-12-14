@@ -36,6 +36,7 @@
 	"wikibase-validator-no-such-property": "Sifat $1 tidak dijumpai",
 	"wikibase-validator-bad-value-type": "Jenis nilai $1 tidak elok, $2 diharapkan",
 	"wikibase-validator-not-allowed": "Nilai tak sah: $1",
+	"wikibase-validator-no-validators": "Dilarang",
 	"datatypes-type-wikibase-item": "Perkara",
 	"datatypes-type-wikibase-property": "Ciri-ciri",
 	"datatypes-type-commonsMedia": "Fail media Commons",

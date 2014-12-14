@@ -157,6 +157,8 @@ $specialPageAliases['es'] = array(
 	'SetSiteLink' => array( 'DefinirEnlaceSitio' ),
 	'MergeItems' => array( 'CombinarElementos' ),
 	'EntitiesWithoutLabel' => array( 'EntidadesSinEtiqueta' ),
+	'EntitiesWithoutDescription' => array( 'EntidadesSinDescripción' ),
+	'ItemsWithoutSitelinks' => array( 'ElementosSinEnlaces' ),
 );
 
 /** Finnish (suomi) */
