@@ -310,7 +310,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	}
 
 	/**
-	 * @see ApiBase::execute()
+	 * @see ApiBase::execute
 	 *
 	 * @since 0.1
 	 */
@@ -343,7 +343,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		}
 
 		// At this point only change/edit rights should be checked
-		$status = $this->checkPermissions( $entity, $user, $params );
+		$status = $this->checkPermissions( $entity, $user );
 
 		if ( !$status->isOK() ) {
 			wfProfileOut( __METHOD__ );
@@ -408,7 +408,9 @@ abstract class ModifyEntity extends ApiWikibase {
 	}
 
 	/**
-	 * @see ApiBase::isWriteMode()
+	 * @see ApiBase::isWriteMode
+	 *
+	 * @return bool Always true.
 	 */
 	public function isWriteMode() {
 		return true;
@@ -469,4 +471,5 @@ abstract class ModifyEntity extends ApiWikibase {
 			'bot' => false,
 		);
 	}
+
 }

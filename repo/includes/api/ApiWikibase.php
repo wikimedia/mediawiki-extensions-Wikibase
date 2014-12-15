@@ -12,10 +12,10 @@ use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\EditEntity;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -155,14 +155,17 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityId|null $entityId
 	 *
 	 * @return bool
 	 */
-	protected function entityExists( Entity $entity ) {
-		$entityId = $entity->getId();
-		$title = $entityId === null ? null : $this->titleLookup->getTitleForId( $entityId );
-		return ( $title !== null && $title->exists() );
+	protected function entityExists( EntityId $entityId = null ) {
+		if ( $entityId === null ) {
+			return false;
+		}
+
+		$title = $this->titleLookup->getTitleForId( $entityId );
+		return $title !== null && $title->exists();
 	}
 
 	/**
@@ -173,29 +176,36 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams()
+	 * @see ApiBase::getAllowedParams
+	 *
+	 * @return array Empty in this abstract base implementation.
 	 */
 	public function getAllowedParams() {
-		return array(
-		);
+		return array();
 	}
 
 	/**
-	 * @see ApiBase::needsToken()
+	 * @see ApiBase::needsToken
+	 *
+	 * @return string|false
 	 */
 	public function needsToken() {
 		return $this->isWriteMode() ? 'csrf' : false;
 	}
 
 	/**
-	 * @see ApiBase::getTokenSalt()
+	 * @see ApiBase::getTokenSalt
+	 *
+	 * @return string|false
 	 */
 	public function getTokenSalt() {
 		return $this->needsToken() ? '' : false;
 	}
 
 	/**
-	 * @see ApiBase::mustBePosted()
+	 * @see ApiBase::mustBePosted
+	 *
+	 * @return bool
 	 */
 	public function mustBePosted() {
 		return $this->isWriteMode();
@@ -203,6 +213,8 @@ abstract class ApiWikibase extends ApiBase {
 
 	/**
 	 * @see ApiBase::isReadMode
+	 *
+	 * @return bool Always true in this abstract base implementation.
 	 */
 	public function isReadMode() {
 		return true;
@@ -226,12 +238,11 @@ abstract class ApiWikibase extends ApiBase {
 	 * Per default, this will include the 'read' permission if $this->isReadMode() returns true,
 	 * and the 'edit' permission if $this->isWriteMode() returns true,
 	 *
-	 * @param Entity $entity The entity to check permissions for
-	 * @param array $params Arguments for the module, describing the operation to be performed
+	 * @param EntityId|null $entityId The entity to check permissions for
 	 *
-	 * @return array A list of permissions
+	 * @return string[] A list of permissions
 	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
+	protected function getRequiredPermissions( EntityId $entityId = null ) {
 		$permissions = array();
 
 		if ( $this->isReadMode() ) {
@@ -250,13 +261,12 @@ abstract class ApiWikibase extends ApiBase {
 	 *
 	 * @param $entity Entity the entity to check
 	 * @param $user User doing the action
-	 * @param $params array of arguments for the module, passed for ModifyItem
 	 *
 	 * @return Status the check's result
 	 * @todo: use this also to check for read access in ApiGetEntities, etc
 	 */
-	protected function checkPermissions( Entity $entity, User $user, array $params ) {
-		$permissions = $this->getRequiredPermissions( $entity, $params );
+	protected function checkPermissions( Entity $entity, User $user ) {
+		$permissions = $this->getRequiredPermissions( $entity->getId() );
 		$status = Status::newGood();
 
 		foreach ( array_unique( $permissions ) as $perm ) {
@@ -313,11 +323,11 @@ abstract class ApiWikibase extends ApiBase {
 	 * @note: this function may or may not return normally, depending on whether
 	 *        the status is fatal or not.
 	 *
-	 * @see handleStatus().
+	 * @see handleStatus
 	 *
 	 * @param Status $status The status to report
 	 */
-	protected function handleSaveStatus( Status $status ) {
+	private function handleSaveStatus( Status $status ) {
 		$value = $status->getValue();
 		$errorCode = null;
 
@@ -393,7 +403,7 @@ abstract class ApiWikibase extends ApiBase {
 	 *
 	 * @throws LogicException if not in write mode
 	 * @return Status the status of the save operation, as returned by EditEntity::attemptSave()
-	 * @see  EditEntity::attemptSave()
+	 * @see EditEntity::attemptSave
 	 *
 	 * @todo: this could be factored out into a controller-like class, but that controller
 	 *        would still need knowledge of the API module to be useful. We'll put it here
@@ -406,7 +416,7 @@ abstract class ApiWikibase extends ApiBase {
 		}
 
 		if ( $summary instanceof Summary ) {
-			$summary = $this->formatSummary( $summary );
+			$summary = $this->summaryFormatter->formatSummary( $summary );
 		}
 
 		$params = $this->extractRequestParams();
@@ -444,40 +454,29 @@ abstract class ApiWikibase extends ApiBase {
 	/**
 	 * @param array $params
 	 *
-	 * @return false|null|string
+	 * @return string|bool|null Token string, or false if not needed, or null if not set.
 	 */
 	private function evaluateTokenParam( array $params ) {
 		if ( !$this->needsToken() ) {
-			// false disabled the token check
-			$token = false;
-		} else {
-			// null fails the token check
-			$token = isset( $params['token'] ) ? $params['token'] : null;
+			// False disables the token check.
+			return false;
 		}
 
-		return $token;
+		// Null fails the token check.
+		return isset( $params['token'] ) ? $params['token'] : null;
 	}
 
 	/**
 	 * @param array $params
 	 *
-	 * @return null|false|int
+	 * @return int|bool|null Revision id, or false if 0, or null if not set.
 	 */
 	private function evaluateBaseRevisionParam( array $params ) {
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+		if ( !isset( $params['baserevid'] ) ) {
+			return null;
+		}
 
-		return $baseRevisionId;
-	}
-
-	/**
-	 * @param Summary $summary
-	 *
-	 * @return string
-	 */
-	protected function formatSummary( Summary $summary ) {
-		$formatter = $this->summaryFormatter;
-		return $formatter->formatSummary( $summary );
+		return $params['baserevid'] ? (int)$params['baserevid'] : false;
 	}
 
 	/**
@@ -485,7 +484,7 @@ abstract class ApiWikibase extends ApiBase {
 	 *
 	 * @note: The returned Status will always be fatal, that is, $status->isOk() will return false.
 	 *
-	 * @see getExceptionMessage().
+	 * @see getExceptionMessage
 	 *
 	 * @param Exception $error
 	 *
@@ -514,7 +513,7 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @see ApiErrorReporter::dieError()
+	 * @see ApiErrorReporter::dieError
 	 *
 	 * @since 0.5
 	 *
@@ -528,7 +527,7 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @see ApiErrorReporter::dieException()
+	 * @see ApiErrorReporter::dieException
 	 *
 	 * @since 0.5
 	 *
@@ -542,7 +541,7 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @see ApiErrorReporter::dieMessage()
+	 * @see ApiErrorReporter::dieMessage
 	 *
 	 * @since 0.5
 	 *
