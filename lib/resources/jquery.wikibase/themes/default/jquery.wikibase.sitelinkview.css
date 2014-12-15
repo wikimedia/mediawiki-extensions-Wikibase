@@ -35,3 +35,7 @@
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 }
+
+.wikibase-sitelinkview-badges {
+	margin-left: 0.4em;
+}
