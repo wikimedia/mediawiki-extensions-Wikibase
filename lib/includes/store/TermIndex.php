@@ -4,7 +4,6 @@ namespace Wikibase;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\LabelConflictFinder;
 
 /**
  * Interface to a cache for terms with both write and lookup methods.
@@ -14,7 +13,7 @@ use Wikibase\Lib\Store\LabelConflictFinder;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface TermIndex extends LabelConflictFinder {
+interface TermIndex {
 
 	/**
 	 * Returns the type, id tuples for the entities with the provided label in the specified language.
