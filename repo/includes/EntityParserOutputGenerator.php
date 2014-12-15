@@ -2,10 +2,11 @@
 
 namespace Wikibase;
 
-use OutOfBoundsException;
 use ParserOutput;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\StatementListProvider;
@@ -101,7 +102,9 @@ class EntityParserOutputGenerator {
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( EntityRevision $entityRevision, $editable = true,
+	public function getParserOutput(
+		EntityRevision $entityRevision,
+		$editable = true,
 		$generateHtml = true
 	) {
 		$parserOutput = new ParserOutput();
@@ -243,6 +246,7 @@ class EntityParserOutputGenerator {
 	 * @param SiteLinkList $siteLinkList
 	 */
 	private function addBadgesToParserOutput( ParserOutput $parserOutput, SiteLinkList $siteLinkList ) {
+		/** @var SiteLink $siteLink */
 		foreach ( $siteLinkList as $siteLink ) {
 			foreach ( $siteLink->getBadges() as $badge ) {
 				$parserOutput->addLink( $this->entityTitleLookup->getTitleForId( $badge ) );
@@ -276,13 +280,13 @@ class EntityParserOutputGenerator {
 	 * @param ParserOutput $parserOutput
 	 * @param EntityRevision $entityRevision
 	 * @param EntityInfo $entityInfo obtained from EntityInfoBuilder::getEntityInfo
-	 * @param boolean $editable
+	 * @param bool $editable
 	 */
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
 		EntityRevision $entityRevision,
 		EntityInfo $entityInfo,
-		$editable
+		$editable = true
 	) {
 
 		$labelLookup = new LanguageFallbackLabelLookup(
@@ -303,7 +307,11 @@ class EntityParserOutputGenerator {
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
 	}
 
-	private function addModules( ParserOutput $parserOutput, $editable ) {
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param bool $editable
+	 */
+	private function addModules( ParserOutput $parserOutput, $editable = true ) {
 		// make css available for JavaScript-less browsers
 		$parserOutput->addModuleStyles( array(
 			'wikibase.common',

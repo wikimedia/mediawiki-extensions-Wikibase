@@ -184,9 +184,12 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @return DataUpdate[]
 	 */
-	public function getSecondaryDataUpdates( Title $title, Content $oldContent = null,
-		$recursive = false, ParserOutput $parserOutput = null ) {
-
+	public function getSecondaryDataUpdates(
+		Title $title,
+		Content $oldContent = null,
+		$recursive = false,
+		ParserOutput $parserOutput = null
+	) {
 		/** @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 		$updates = $handler->getEntityModificationUpdates( $this, $title );
@@ -208,19 +211,22 @@ abstract class EntityContent extends AbstractContent {
 	 * @see Content::getParserOutput
 	 *
 	 * @param Title $title
-	 * @param int|null $revId
+	 * @param int|null $revisionId
 	 * @param ParserOptions|null $options
 	 * @param bool $generateHtml
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null,
+	public function getParserOutput(
+		Title $title,
+		$revisionId = null,
+		ParserOptions $options = null,
 		$generateHtml = true
 	) {
 		if ( $this->isRedirect() ) {
 			return $this->getParserOutputForRedirect( $generateHtml );
 		} else {
-			return $this->getParserOutputFromEntityView( $title, $revId, $options, $generateHtml );
+			return $this->getParserOutputFromEntityView( $title, $revisionId, $options, $generateHtml );
 		}
 	}
 
@@ -260,14 +266,17 @@ abstract class EntityContent extends AbstractContent {
 	 * @note Will fail if this EntityContent represents a redirect.
 	 *
 	 * @param Title $title
-	 * @param null $revId
-	 * @param ParserOptions $options
+	 * @param int|null $revisionId
+	 * @param ParserOptions|null $options
 	 * @param bool $generateHtml
 	 *
 	 * @return ParserOutput
 	 */
-	protected function getParserOutputFromEntityView( Title $title, $revId = null,
-		ParserOptions $options = null, $generateHtml = true
+	protected function getParserOutputFromEntityView(
+		Title $title,
+		$revisionId = null,
+		ParserOptions $options = null,
+		$generateHtml = true
 	) {
 		// @todo: move this to the ContentHandler
 		$entityParserOutputGeneratorFactory = WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory();
@@ -276,13 +285,10 @@ abstract class EntityContent extends AbstractContent {
 			$options
 		);
 
+		$entityRevision = $this->getEntityRevision( $title, $revisionId );
 		$editable = $options ? $options->getEditSection() : true;
 
-		$output = $outputGenerator->getParserOutput(
-			$this->getEntityRevision( $title, $revId ),
-			$editable,
-			$generateHtml
-		);
+		$output = $outputGenerator->getParserOutput( $entityRevision, $editable, $generateHtml );
 
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
@@ -296,16 +302,16 @@ abstract class EntityContent extends AbstractContent {
 
 	/**
 	 * @param Title $title
-	 * @param int|null $revId
+	 * @param int|null $revisionId
 	 *
 	 * @return EntityRevision
 	 */
-	private function getEntityRevision( Title $title, $revId = null ) {
-		if ( $revId === null || $revId === 0 ) {
-			$revId = $title->getLatestRevID();
+	private function getEntityRevision( Title $title, $revisionId = null ) {
+		if ( $revisionId === null || $revisionId === 0 ) {
+			$revisionId = $title->getLatestRevID();
 		}
 
-		return new EntityRevision( $this->getEntity(), $revId );
+		return new EntityRevision( $this->getEntity(), $revisionId );
 	}
 
 	/**
