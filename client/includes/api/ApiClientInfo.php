@@ -112,55 +112,13 @@ class ApiClientInfo extends ApiQueryBase {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription
-	 *
-	 * @since 0.4
-	 *
-	 * @return array
+	 * @see ApiBase::getExamplesMessages()
 	 */
-	public function getParamDescription() {
+	protected function getExamplesMessages() {
 		return array(
-			'prop' => array(
-				'Which wikibase repository properties to get:',
-				' url          - Base url, script path and article path',
-			),
+			'api.php?action=query&meta=wikibase'
+				=> 'apihelp-query+wikibase-example-1',
 		);
-	}
-
-	/**
-	 * @see ApiBase::getExamples
-	 *
-	 * @since 0.4
-	 *
-	 * @return array
-	 */
-	protected function getExamples() {
-		return array(
-			'api.php?action=query&meta=wikibase' =>
-				'Get url path and other info for the Wikibase repo',
-		);
-	}
-
-	/**
-	 * @see ApiBase::getVersion
-	 *
-	 * @since 0.4
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return __CLASS__ . '-' . WBC_VERSION;
-	}
-
-	/**
-	 * @see ApiBase::getDescription
-	 *
-	 * @since 0.4
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
-		return 'Get information about the Wikibase repository.';
 	}
 
 }
