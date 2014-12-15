@@ -705,7 +705,7 @@ class WikibaseRepo {
 	 * @return LabelDescriptionDuplicateDetector
 	 */
 	public function getLabelDescriptionDuplicateDetector() {
-		return new LabelDescriptionDuplicateDetector( $this->getStore()->getTermIndex() );
+		return new LabelDescriptionDuplicateDetector( $this->getStore()->getLabelConflictFinder() );
 	}
 
 	/**

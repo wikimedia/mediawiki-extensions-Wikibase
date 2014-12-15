@@ -7,6 +7,7 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Repo\Store\EntityPerPage;
 
@@ -57,6 +58,15 @@ interface Store {
 	 * @return TermIndex
 	 */
 	public function getTermIndex();
+
+	/**
+	 * Returns a TermIndex for this store.
+	 *
+	 * @since 0.5
+	 *
+	 * @return LabelConflictFinder
+	 */
+	public function getLabelConflictFinder();
 
 	/**
 	 * Returns a new IdGenerator for this store.
