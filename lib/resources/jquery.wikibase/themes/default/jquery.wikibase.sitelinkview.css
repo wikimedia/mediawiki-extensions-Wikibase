@@ -44,3 +44,7 @@
 .wikibase-sitelinkview input:focus {
 	border-color: #0b0080;
 }
+
+.wikibase-sitelinkview-badges {
+	margin-left: 0.4em;
+}
