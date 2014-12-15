@@ -65,9 +65,9 @@ class EditEntity {
 	private $baseRev = null;
 
 	/**
-	 * @var int|null
+	 * @var int|bool
 	 */
-	private $baseRevId = null;
+	private $baseRevId;
 
 	/**
 	 * @var EntityRevision|null
@@ -187,7 +187,7 @@ class EditEntity {
 			$baseRevId = intval( $baseRevId );
 		}
 
-		if ( $baseRevId === '' || $baseRevId === 0 ) {
+		if ( $baseRevId === 0 ) {
 			$baseRevId = false;
 		}
 

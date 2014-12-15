@@ -5,14 +5,12 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use InvalidArgumentException;
-use Status;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -49,22 +47,14 @@ class SetAliases extends ModifyEntity {
 	/**
 	 * @see ApiWikibase::getRequiredPermissions
 	 *
-	 * @param Entity $entity
-	 * @param array $params
+	 * @param EntityDocument $entity
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string[]
 	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
-		if( $entity instanceof Item ) {
-			$type = 'item';
-		} else if ( $entity instanceof Property ) {
-			$type = 'property';
-		} else {
-			throw new InvalidArgumentException( 'Unexpected Entity type when checking special page term change permissions' );
-		}
-		$permissions[] = $type . '-term';
+	protected function getRequiredPermissions( EntityDocument $entity ) {
+		$permissions = parent::getRequiredPermissions( $entity );
+		$permissions[] = $entity->getType() . '-term';
 		return $permissions;
 	}
 
@@ -83,7 +73,7 @@ class SetAliases extends ModifyEntity {
 	 * @see ModifyEntity::createEntity
 	 */
 	protected function createEntity( array $params ) {
-		$this->dieError( 'Could not find an existing entity' , 'no-such-entity' );
+		$this->dieError( 'Could not find an existing entity', 'no-such-entity' );
 	}
 
 	/**
@@ -120,7 +110,12 @@ class SetAliases extends ModifyEntity {
 		return $summary;
 	}
 
-	private function normalizeAliases( $aliases ) {
+	/**
+	 * @param string[] $aliases
+	 *
+	 * @return string[]
+	 */
+	private function normalizeAliases( array $aliases ) {
 		$stringNormalizer = $this->stringNormalizer; // hack for PHP fail.
 
 		$aliases = array_map(
@@ -142,6 +137,7 @@ class SetAliases extends ModifyEntity {
 
 	/**
 	 * @param array $params
+	 *
 	 * @return ChangeOpAliases
 	 */
 	private function getChangeOps( array $params ) {
