@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_d92d3643",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T21:23:28Z",
+      "side": 1,
+      "message": "Right. Just a habit to add new params at the end, and give them a default, for B/C. But for a private method, that\u0027s not a valid reason.",
+      "parentUuid": "0e6cb3ef_65ca3f4c",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_e5b72fd2",
         "filename": "lib/includes/store/TermIndex.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-15T15:36:31Z",
       "side": 1,
       "message": "Why is there a separate $entityType parameter? The entity type is a property in EntityId.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_b9ede224",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T21:23:28Z",
+      "side": 1,
+      "message": "Because they all must have the same type, otherwise the query gets very inefficient. But that could be checked without giving the type explicitly. It\u0027s basically a remnant from the numeric-ids time. I didn\u0027t want to change this in this patch.",
+      "parentUuid": "0e6cb3ef_e5b72fd2",
       "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_b90162bb",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T21:23:28Z",
+      "side": 1,
+      "message": "oops",
+      "parentUuid": "0e6cb3ef_a5fff761",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_c500eb6f",
         "filename": "lib/includes/store/TermIndex.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2014-12-15T15:36:31Z",
       "side": 1,
       "message": "Please note that this will cause a breaking change in PropertySuggester.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_39e1d229",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T21:23:28Z",
+      "side": 1,
+      "message": "how so?",
+      "parentUuid": "0e6cb3ef_c500eb6f",
       "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_f9c11a84",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T21:23:28Z",
+      "side": 1,
+      "message": "no it doesn\u0027t. The if-block should *not* be executed if $entityIds is null.\nMaybe is_array() \u0026\u0026 empty() would be clearer.",
+      "parentUuid": "0e6cb3ef_c58b0b1a",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_e5908f48",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2014-12-15T15:36:31Z",
       "side": 1,
       "message": "Redundant, empty() already does this check.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_d938d69d",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T21:23:28Z",
+      "side": 1,
+      "message": "no, see above.",
+      "parentUuid": "0e6cb3ef_e5908f48",
       "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_793d0a8a",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T21:23:28Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "0e6cb3ef_85951338",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_459ffb55",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 2
@@ -132,6 +258,24 @@
       "writtenOn": "2014-12-15T15:36:31Z",
       "side": 1,
       "message": "Please merge all 3 if() to one.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_b95ac2f7",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T21:23:28Z",
+      "side": 1,
+      "message": "i find that harder to read. but i don\u0027t care much.",
+      "parentUuid": "0e6cb3ef_459ffb55",
       "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_f967dab2",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T21:23:28Z",
+      "side": 1,
+      "message": "yea, probably.",
+      "parentUuid": "0e6cb3ef_659c7f60",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_85867317",
         "filename": "lib/tests/phpunit/store/MockTermIndex.php",
         "patchSetId": 2
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_d9c3f65f",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T21:23:28Z",
+      "side": 1,
+      "message": "duh",
+      "parentUuid": "0e6cb3ef_85867317",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_a58b771f",
         "filename": "lib/tests/phpunit/store/MockTermIndex.php",
         "patchSetId": 2
@@ -183,6 +363,24 @@
       "writtenOn": "2014-12-15T15:36:31Z",
       "side": 1,
       "message": "* What kind of ids? $entityIds?\n* Wait, why is the entity type a parameter here? Entity type is a property in EntityId (1st parameter).",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_f9bfdaa5",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T21:23:28Z",
+      "side": 1,
+      "message": "See the documentation \u0026 comment for the interface.",
+      "parentUuid": "0e6cb3ef_a58b771f",
       "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
