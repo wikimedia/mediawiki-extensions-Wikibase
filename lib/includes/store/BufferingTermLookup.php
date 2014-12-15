@@ -6,7 +6,6 @@ use MapCacheLRU;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTermLookupBase;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Store\TermBuffer;
 use Wikibase\Term;
 use Wikibase\TermIndex;
 use Wikibase\Utils;
@@ -129,10 +128,10 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 		$entityIdsByType = $this->groupEntityIds( $entityIds );
 		$terms = array();
 
-		foreach ( $entityIdsByType as $entityType => $entityIdGroup ) {
+		foreach ( $entityIdsByType as $entityIdGroup ) {
 			$terms = array_merge(
 				$terms,
-				$this->termIndex->getTermsOfEntities( $entityIdGroup, $entityType, $termTypes, $languageCodes )
+				$this->termIndex->getTermsOfEntities( $entityIdGroup, $termTypes, $languageCodes )
 			);
 		}
 		$bufferedKeys = $this->setBufferedTermObjects( $terms );
@@ -249,4 +248,5 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 
 		return $entityIdsByType;
 	}
+
 }
