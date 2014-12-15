@@ -8,8 +8,8 @@ use ApiQueryBase;
 use ApiResult;
 use InvalidArgumentException;
 use Title;
-use Wikibase\Store\EntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\Term;
 use Wikibase\TermIndex;
 
@@ -108,10 +108,10 @@ class PageTerms extends ApiQueryBase {
 		$entityIdGroups = $this->splitPageEntityMapByType( $entityIds );
 		$terms = array();
 
-		foreach ( $entityIdGroups as $entityType => $entityIds ) {
+		foreach ( $entityIdGroups as $entityIds ) {
 			$terms = array_merge(
 				$terms,
-				$this->termIndex->getTermsOfEntities( $entityIds, $entityType, $termTypes, $languageCodes )
+				$this->termIndex->getTermsOfEntities( $entityIds, $termTypes, $languageCodes )
 			);
 		}
 
