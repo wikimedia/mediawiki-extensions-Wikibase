@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_c85a42f9",
+        "filename": "repo/includes/store/Store.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-15T15:40:50Z",
+      "side": 1,
+      "message": "Nope.",
+      "revId": "0d339e9249bb9af4ee61f7d5e51b0168071bfcc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
