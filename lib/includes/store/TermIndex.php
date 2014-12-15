@@ -69,18 +69,18 @@ interface TermIndex extends LabelConflictFinder {
 
 	/**
 	 * Returns the terms stored for the given entities. Can be filtered by language.
-	 * Note that the entities must all be of the given type.
+	 * Note that all entities queried in one call must be of the same type.
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityId[] $ids
-	 * @param string $entityType
+	 * @param EntityId[] $entityIds Entity ids of one type only.
 	 * @param string[]|null $termTypes The types of terms to return, e.g. "label", "description",
 	 *        or "alias". Compare the Term::TYPE_XXX constants. If null, all types are returned.
+	 * @param string[]|null $languageCodes language code
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $ids, $entityType, array $termTypes = null, array $languageCodes = null );
+	public function getTermsOfEntities( array $entityIds, array $termTypes = null, array $languageCodes = null );
 
 	/**
 	 * Returns if a term with the specified parameters exists.
