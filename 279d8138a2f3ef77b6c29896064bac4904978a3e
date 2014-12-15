@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_c5d9cb2d",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T14:53:53Z",
+      "side": 1,
+      "message": "Because it\u0027s expensive to initialize. We just hope we\u0027ll never need it.\nIf there was a LanguageInfo service interface, we could inject that.",
+      "parentUuid": "0e6cb3ef_50cd8933",
+      "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_b0ef4582",
         "filename": "lib/includes/store/BufferingTermLookup.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-12T19:32:30Z",
       "side": 1,
       "message": "$languageCodes as $languageCode",
+      "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_e5de4f14",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T14:53:53Z",
+      "side": 1,
+      "message": "these two look very similar, that makes the code harder to read. I\u0027m all for spelling out names that are part of the interface. Not local variables though. Keep them short and distinctive.",
+      "parentUuid": "0e6cb3ef_b0ef4582",
       "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_a5e857b0",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T14:53:53Z",
+      "side": 1,
+      "message": "Gah.",
+      "parentUuid": "0e6cb3ef_70d20dd7",
+      "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_30fb3546",
         "filename": "repo/includes/api/SearchEntities.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2014-12-12T19:32:30Z",
       "side": 1,
       "message": "is $language a Language object?",
+      "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_05d7c3f3",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T14:53:53Z",
+      "side": 1,
+      "message": "No, a code. Not changed here though.",
+      "parentUuid": "0e6cb3ef_30fb3546",
       "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
