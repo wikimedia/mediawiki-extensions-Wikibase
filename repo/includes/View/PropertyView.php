@@ -23,9 +23,7 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getMainHtml
 	 */
-	public function getMainHtml( EntityRevision $entityRevision,
-		$editable = true
-	) {
+	public function getMainHtml( EntityRevision $entityRevision ) {
 		wfProfileIn( __METHOD__ );
 
 		$property = $entityRevision->getEntity();
