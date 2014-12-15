@@ -26,13 +26,9 @@ use Wikibase\Repo\Store\EntityPerPage;
 interface Store {
 
 	/**
-	 * Returns a new SiteLinkCache for this store.
-	 *
 	 * @since 0.1
 	 *
 	 * @return SiteLinkCache
-	 *
-	 * @todo: rename to newSiteLinkIndex
 	 */
 	public function newSiteLinkCache();
 
@@ -44,15 +40,13 @@ interface Store {
 	public function clear();
 
 	/**
-	 * Rebuilds the store.
+	 * Rebuilds the store from the original data source.
 	 *
 	 * @since 0.1
 	 */
 	public function rebuild();
 
 	/**
-	 * Returns a TermIndex for this store.
-	 *
 	 * @since 0.4
 	 *
 	 * @return TermIndex
@@ -60,8 +54,6 @@ interface Store {
 	public function getTermIndex();
 
 	/**
-	 * Returns a TermIndex for this store.
-	 *
 	 * @since 0.5
 	 *
 	 * @return LabelConflictFinder
@@ -69,8 +61,6 @@ interface Store {
 	public function getLabelConflictFinder();
 
 	/**
-	 * Returns a new IdGenerator for this store.
-	 *
 	 * @since 0.1
 	 *
 	 * @return IdGenerator
@@ -78,8 +68,6 @@ interface Store {
 	public function newIdGenerator();
 
 	/**
-	 * Return a new EntityPerPage.
-	 *
 	 * @since 0.3
 	 *
 	 * @return EntityPerPage
@@ -87,8 +75,6 @@ interface Store {
 	public function newEntityPerPage();
 
 	/**
-	 * Returns an EntityLookup
-	 *
 	 * @since 0.4
 	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
@@ -98,8 +84,6 @@ interface Store {
 	public function getEntityLookup( $uncached = '' );
 
 	/**
-	 * Returns an EntityRevisionLookup
-	 *
 	 * @since 0.5
 	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
@@ -109,8 +93,6 @@ interface Store {
 	public function getEntityRevisionLookup( $uncached = '' );
 
 	/**
-	 * Returns an EntityStore
-	 *
 	 * @since 0.5
 	 *
 	 * @return EntityStore
@@ -128,8 +110,6 @@ interface Store {
 	public function getEntityStoreWatcher();
 
 	/**
-	 * Returns an EntityInfoBuilder
-	 *
 	 * @since 0.5
 	 *
 	 * @return EntityInfoBuilderFactory
@@ -137,8 +117,6 @@ interface Store {
 	public function getEntityInfoBuilderFactory();
 
 	/**
-	 * Returns a PropertyInfoStore
-	 *
 	 * @since 0.4
 	 *
 	 * @return PropertyInfoStore
@@ -146,8 +124,6 @@ interface Store {
 	public function getPropertyInfoStore();
 
 	/**
-	 * Returns a ChangesTable
-	 *
 	 * @since 0.5
 	 *
 	 * @return ChangesTable
