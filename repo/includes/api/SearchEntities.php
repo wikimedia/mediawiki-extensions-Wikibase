@@ -115,21 +115,22 @@ class SearchEntities extends ApiBase {
 	private function getSearchEntries( array $params ) {
 		wfProfileIn( __METHOD__ );
 
-		$ids = array();
+		$entityIds = array();
 		$required = $params['continue'] + $params['limit'] + 1;
 
 		$entityId = $this->getExactMatchForEntityId( $params['search'], $params['type'] );
 		if ( $entityId !== null ) {
-			$ids[] = $entityId;
+			$entityIds[] = $entityId;
 		}
 
-		$missing = $required - count( $ids );
-		$ids = array_merge( $ids, $this->getRankedMatches( $params['search'], $params['type'],
-			$params['language'], $missing ) );
-		$ids = array_unique( $ids );
+		$missing = $required - count( $entityIds );
+		$entityIds = array_merge(
+			$entityIds,
+			$this->getRankedMatches( $params['search'], $params['type'], $params['language'], $missing )
+		);
+		$entityIds = array_unique( $entityIds );
 
-		$entries = $this->getEntries( $ids, $params['search'], $params['type'],
-			$params['language'] );
+		$entries = $this->getEntries( $entityIds, $params['search'], $params['language'] );
 
 		wfProfileOut( __METHOD__ );
 		return $entries;
@@ -197,20 +198,19 @@ class SearchEntities extends ApiBase {
 	}
 
 	/**
-	 * @param EntityId[] $ids
+	 * @param EntityId[] $entityIds
 	 * @param string $search
-	 * @param string $entityType
-	 * @param string|null $language language code
+	 * @param string $languageCode
 	 *
 	 * @return array[]
 	 */
-	private function getEntries( array $ids, $search, $entityType, $language ) {
+	private function getEntries( array $entityIds, $search, $languageCode ) {
 		/**
 		 * @var array[] $entries
 		 */
 		$entries = array();
 
-		foreach ( $ids as $id ) {
+		foreach ( $entityIds as $id ) {
 			$key = $id->getSerialization();
 			$title = $this->titleLookup->getTitleForId( $id );
 			$entries[ $key ] = array(
@@ -221,7 +221,7 @@ class SearchEntities extends ApiBase {
 
 		// Find all the remaining terms for the given entities
 		$terms = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->getTermsOfEntities(
-			$ids, $entityType, null, array( $language ) );
+			$entityIds, null, array( $languageCode ) );
 		// TODO: This needs to be rethought when a different search engine is used
 		$aliasPattern = '/^' . preg_quote( $search, '/' ) . '/i';
 

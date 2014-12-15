@@ -436,51 +436,46 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 * @see TermIndex::getTermsOfEntities
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string $entityType
 	 * @param string[]|null $termTypes
-	 * @param string[]|null $languageCodes Language codes
+	 * @param string[]|null $languageCodes
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $entityIds, $entityType, array $termTypes = null, array $languageCodes = null ) {
-		if ( $entityIds !== null && empty( $entityIds ) ) {
-			return array();
-		}
-
-		if ( $languageCodes !== null && empty( $languageCodes ) ) {
-			return array();
-		}
-
-		if ( $termTypes !== null && empty( $termTypes ) ) {
+	public function getTermsOfEntities( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
+		if ( empty( $entityIds )
+			|| ( $termTypes !== null && empty( $termTypes ) )
+			|| ( $languageCodes !== null && empty( $languageCodes ) )
+		) {
 			return array();
 		}
 
 		wfProfileIn( __METHOD__ );
 
-		$entityIdentifiers = array(
-			'term_entity_type' => $entityType
-		);
+		$entityType = null;
+		$numericIds = array();
+
+		foreach ( $entityIds as $id ) {
+			if ( !isset( $entityType ) ) {
+				$entityType = $id->getEntityType();
+			} elseif ( $id->getEntityType() !== $entityType ) {
+				throw new MWException( 'All $entityIds must be of the same type' );
+			}
+
+			$numericIds[] = $id->getNumericId();
+		}
+
+		$conditions = array( 'term_entity_type' => $entityType );
 
 		if ( $languageCodes !== null ) {
-			$entityIdentifiers['term_language'] = $languageCodes;
+			$conditions['term_language'] = $languageCodes;
 		}
 
 		if ( $termTypes !== null ) {
-			$entityIdentifiers['term_type'] = $termTypes;
+			$conditions['term_type'] = $termTypes;
 		}
 
-		$numericIds = array();
-		foreach ( $entityIds as $entityId ) {
-			if ( $entityId->getEntityType() !== $entityType ) {
-				throw new MWException( 'ID ' . $entityId->getSerialization()
-					. " does not refer to an entity of type $entityType." );
-			}
-
-			$numericIds[] = $entityId->getNumericId();
-		}
-
-		$entityIdentifiers['term_entity_id'] = $numericIds;
+		$conditions['term_entity_id'] = $numericIds;
 
 		$fields = array(
 			'term_entity_id',
@@ -495,7 +490,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		$res = $dbr->select(
 			$this->tableName,
 			$fields,
-			$entityIdentifiers,
+			$conditions,
 			__METHOD__
 		);
 
@@ -1064,7 +1059,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 * @param string[] $textsByLanguage A list of texts, or a list of lists of texts (keyed by language on the top level)
 	 * @param string $type
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @return Term[]
 	 */
 	private function makeQueryTerms( $textsByLanguage, $type ) {

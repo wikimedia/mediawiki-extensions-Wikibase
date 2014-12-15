@@ -180,33 +180,28 @@ class MockTermIndex implements TermIndex {
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 * @param string[]|null $termTypes
 	 * @param string[]|null $languages
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntity( EntityId $id, array $termTypes = null, array $languages = null ) {
+	public function getTermsOfEntity( EntityId $entityId, array $termTypes = null, array $languages = null ) {
 		$matchingTerms = array();
 
-		if ( $termTypes ) {
+		if ( $termTypes !== null ) {
 			$termTypes = array_flip( $termTypes );
 		}
 
-		if ( $languages ) {
+		if ( $languages !== null ) {
 			$languages = array_flip( $languages );
 		}
 
-		foreach( $this->terms as $term ) {
-			if ( $termTypes !== null && !isset( $termTypes[$term->getType()] ) ) {
-				continue;
-			}
-
-			if ( $languages !== null && !isset( $languages[$term->getLanguage()] ) ) {
-				continue;
-			}
-
-			if ( !$id->equals( $term->getEntityId() ) ) {
+		foreach ( $this->terms as $term ) {
+			if ( ( $termTypes !== null && !isset( $termTypes[$term->getType()] ) )
+				|| ( $languages !== null && !isset( $languages[$term->getLanguage()] ) )
+				|| !$entityId->equals( $term->getEntityId() )
+			) {
 				continue;
 			}
 
@@ -217,12 +212,22 @@ class MockTermIndex implements TermIndex {
 	}
 
 	/**
-	 * @throws Exception always
+	 * @see TermIndex::getTermsOfEntities
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string[]|null $termTypes
+	 * @param string[]|null $languageCodes
+	 *
+	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $ids, $entityType, array $termTypes = null, array $languageCodes = null ) {
+	public function getTermsOfEntities( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
 		$terms = array();
-		foreach ( $ids as $id ) {
-			$terms = array_merge( $terms, $this->getTermsOfEntity( $id, $termTypes, $languageCodes ) );
+
+		foreach ( $entityIds as $entityId ) {
+			$terms = array_merge(
+				$terms,
+				$this->getTermsOfEntity( $entityId, $termTypes, $languageCodes )
+			);
 		}
 
 		return $terms;
@@ -370,4 +375,5 @@ class MockTermIndex implements TermIndex {
 
 		return false;
 	}
+
 }

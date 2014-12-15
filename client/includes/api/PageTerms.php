@@ -74,7 +74,7 @@ class PageTerms extends ApiQueryBase {
 		$pagesToEntityIds = $this->getEntityIdsForTitles( $titles, $continue );
 		$entityToPageMap = $this->getEntityToPageMap( $pagesToEntityIds );
 
-		$terms = $this->getTermsOfEntities( $pagesToEntityIds, $languageCode, $params['terms'] );
+		$terms = $this->getTermsOfEntities( $pagesToEntityIds, $params['terms'], $languageCode );
 
 		$termGroups = $this->groupTermsByPageAndType( $entityToPageMap, $terms );
 
@@ -99,19 +99,19 @@ class PageTerms extends ApiQueryBase {
 
 	/**
 	 * @param EntityID[] $entityIds
-	 * @param string $languageCode
 	 * @param string[]|null $termTypes
+	 * @param string $languageCode
 	 *
 	 * @return Term[]
 	 */
-	private function getTermsOfEntities( array $entityIds, $languageCode, array $termTypes = null ) {
+	private function getTermsOfEntities( array $entityIds, array $termTypes = null, $languageCode ) {
 		$entityIdGroups = $this->splitPageEntityMapByType( $entityIds );
 		$terms = array();
 
-		foreach ( $entityIdGroups as $entityType => $entityIds ) {
+		foreach ( $entityIdGroups as $entityIds ) {
 			$terms = array_merge(
 				$terms,
-				$this->termIndex->getTermsOfEntities( $entityIds, $entityType, $termTypes, array( $languageCode ) )
+				$this->termIndex->getTermsOfEntities( $entityIds, $termTypes, array( $languageCode ) )
 			);
 		}
 
