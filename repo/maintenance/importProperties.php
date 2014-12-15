@@ -1,8 +1,8 @@
 <?php
 
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Maintenance script for importing properties in Wikidata.
@@ -25,30 +25,46 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) 
 require_once $basePath . '/maintenance/Maintenance.php';
 
 class importProperties extends Maintenance {
-	protected $verbose = false;
-	protected $ignore_errors = false;
-	protected $skip = 0;
-	protected $only = 0;
+
+	/**
+	 * @var bool
+	 */
+	private $verbose = false;
+
+	/**
+	 * @var bool
+	 */
+	private $ignoreErrors = false;
+
+	/**
+	 * @var int
+	 */
+	private $skip = 0;
+
+	/**
+	 * @var int
+	 */
+	private $only = 0;
 
 	/**
 	 * @var User
 	 */
-	protected $user = null;
+	private $user;
 
 	/**
 	 * @var EntityStore
 	 */
-	protected $store = null;
+	private $store;
 
 	public function __construct() {
-		$this->mDescription = "Import properties in Wikidata.";
+		$this->mDescription = 'Import properties in Wikidata.';
 
-		$this->addOption( 'skip', "Skip number of entries in the import file" );
-		$this->addOption( 'only', "Only import the specific entry from the import file" );
-		$this->addOption( 'verbose', "Print activity " );
-		$this->addOption( 'ignore-errors', "Continue after errors" );
-		$this->addArg( 'lang', "The source wiki's language code (e.g. `en`)", true );
-		$this->addArg( 'filename', "File with interlanguage links", true );
+		$this->addOption( 'skip', 'Skip number of entries in the import file' );
+		$this->addOption( 'only', 'Only import the specific entry from the import file' );
+		$this->addOption( 'verbose', 'Print activity' );
+		$this->addOption( 'ignore-errors', 'Continue after errors' );
+		$this->addArg( 'lang', 'The source wiki\'s language code (e.g. "en")', true );
+		$this->addArg( 'filename', 'File with interlanguage links', true );
 
 		parent::__construct();
 	}
@@ -65,29 +81,29 @@ class importProperties extends Maintenance {
 		$this->store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$this->verbose = (bool)$this->getOption( 'verbose' );
-		$this->ignore_errors = (bool)$this->getOption( 'ignore-errors' );
+		$this->ignoreErrors = (bool)$this->getOption( 'ignore-errors' );
 		$this->skip = (int)$this->getOption( 'skip' );
 		$this->only = (int)$this->getOption( 'only' );
-		$lang = $this->getArg( 0 );
+		$languageCode = $this->getArg( 0 );
 		$filename = $this->getArg( 1 );
 
-		$file = fopen( $filename, "r" );
+		$file = fopen( $filename, 'r' );
 
 		if ( !$file ) {
-			$this->doPrint( "ERROR: failed to open `$filename`" );
+			$this->doPrint( 'ERROR: failed to open ' . $filename );
 			return;
 		}
 
 		$current = null;
-		$current_properties = array();
+		$currentProperties = array();
 		$count = 0;
 		$ok = true;
-		while( $link = fgetcsv( $file, 0, "\t" ) ) {
-			if( $link[0] !== $current ) {
-				if ( !empty( $current_properties ) ) {
-					$ok = $this->createProperty( $current_properties );
+		while ( $link = fgetcsv( $file, 0, "\t" ) ) {
+			if ( $link[0] !== $current ) {
+				if ( !empty( $currentProperties ) ) {
+					$ok = $this->createProperty( $currentProperties );
 
-					if ( !$ok && !$this->ignore_errors ) {
+					if ( !$ok && !$this->ignoreErrors ) {
 						break;
 					}
 				}
@@ -104,45 +120,43 @@ class importProperties extends Maintenance {
 				}
 
 				$current = $link[0];
-				$this->maybePrint( "Processing `$current`" );
-				$current_properties = array(
-					$lang => $current
-				);
+				$this->maybePrint( 'Processing ' . $current );
+				$currentProperties = array( $languageCode => $current );
 			}
 		}
 
-		if ( !$ok && !$this->ignore_errors ) {
-			$this->doPrint( "Aborted!" );
+		if ( !$ok && !$this->ignoreErrors ) {
+			$this->doPrint( 'Aborted!' );
 			return;
 		}
 
-		if ( !( $current_properties  === array() ) ) {
-			$ok = $this->createProperty( $current_properties );
+		if ( !empty( $currentProperties ) ) {
+			$ok = $this->createProperty( $currentProperties );
 		}
 
 		if ( $ok ) {
-			$this->maybePrint( "Done." );
+			$this->maybePrint( 'Done.' );
 		}
 	}
 
 	/**
-	 * @param Array $data An associative array of interlanguage links, mapping site IDs to page titles on that site.
+	 * @param string[] $labels An associative array, mapping language codes to labels.
 	 *
 	 * @return bool true if the item was created, false otherwise
 	 */
-	protected function createProperty( $data ) {
+	private function createProperty( array $labels ) {
 		$property = Property::newFromType( 'wikibase-item' );
+		$fingerprint = $property->getFingerprint();
 
-		foreach ( $data as $lang => $title ) {
-			$property->setLabel( $lang, $title );
+		foreach ( $labels as $languageCode => $label ) {
+			$fingerprint->setLabel( $languageCode, $label );
 		}
 
 		try {
 			$this->store->saveEntity( $property, 'imported', $this->user, EDIT_NEW );
-
 			return true;
 		} catch ( Exception $ex ) {
-			$this->doPrint( "ERROR: " . strtr( $ex->getMessage(), "\n", " " ) );
+			$this->doPrint( 'ERROR: ' . str_replace( "\n", ' ', $ex->getMessage() ) );
 		}
 
 		return false;
@@ -151,11 +165,10 @@ class importProperties extends Maintenance {
 	/**
 	 * Print a scalar, array or object if --verbose option is set.
 	 *
-	 * @see importInterlang::doPrint()
-	 * @see Maintenance::output()
+	 * @see doPrint
 	 */
-	protected function maybePrint( $a ) {
-		if( $this->verbose ) {
+	private function maybePrint( $a ) {
+		if ( $this->verbose ) {
 			$this->doPrint( $a );
 		}
 	}
@@ -163,18 +176,18 @@ class importProperties extends Maintenance {
 	/**
 	 * Output a scalar, array or object to the default channel
 	 *
-	 * @see Maintenance::output()
+	 * @see Maintenance::output
 	 */
-	protected function doPrint( $a ) {
-		if( is_null( $a ) ) {
-			$a = 'null';
-		} elseif( is_bool( $a ) ) {
-			$a = ( $a? "true\n": "false\n" );
-		} elseif( !is_scalar( $a ) ) {
-			$a = print_r( $a, true );
+	private function doPrint( $var ) {
+		if ( is_null( $var ) ) {
+			$var = 'null';
+		} elseif ( is_bool( $var ) ) {
+			$var = $var ? "true\n": "false\n";
+		} elseif ( !is_scalar( $var ) ) {
+			$var = print_r( $var, true );
 		}
 
-		$this->output( trim( strval( $a ) ) . "\n" );
+		$this->output( trim( strval( $var ) ) . "\n" );
 	}
 
 }
