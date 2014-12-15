@@ -10,8 +10,7 @@ use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 
@@ -32,7 +31,7 @@ class SetAliases extends ModifyEntity {
 	/**
 	 * @var FingerprintChangeOpFactory
 	 */
-	protected $termChangeOpFactory;
+	private $termChangeOpFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -47,29 +46,21 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 * @see ApiWikibase::getRequiredPermissions
 	 *
-	 * @param Entity $entity
-	 * @param array $params
+	 * @param EntityDocument $entity
 	 *
-	 * @throws \InvalidArgumentException
-	 * @return array|\Status
+	 * @throws InvalidArgumentException
+	 * @return string[]
 	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
-		if( $entity instanceof Item ) {
-			$type = 'item';
-		} else if ( $entity instanceof Property ) {
-			$type = 'property';
-		} else {
-			throw new InvalidArgumentException( 'Unexpected Entity type when checking special page term change permissions' );
-		}
-		$permissions[] = $type . '-term';
+	protected function getRequiredPermissions( EntityDocument $entity ) {
+		$permissions = parent::getRequiredPermissions( $entity );
+		$permissions[] = $entity->getType() . '-term';
 		return $permissions;
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::validateParameters()
+	 * @see ModifyEntity::validateParameters
 	 */
 	protected function validateParameters( array $params ) {
 		parent::validateParameters( $params );
@@ -80,14 +71,14 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiModifyEntity::createEntity()
+	 * @see ModifyEntity::createEntity
 	 */
 	protected function createEntity( array $params ) {
-		$this->dieError( 'Could not find an existing entity' , 'no-such-entity' );
+		$this->dieError( 'Could not find an existing entity', 'no-such-entity' );
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
+	 * @see ModifyEntity::modifyEntity
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
 		wfProfileIn( __METHOD__ );
@@ -123,7 +114,12 @@ class SetAliases extends ModifyEntity {
 		return $summary;
 	}
 
-	private function normalizeAliases( $aliases ) {
+	/**
+	 * @param string[] $aliases
+	 *
+	 * @return string[]
+	 */
+	private function normalizeAliases( array $aliases ) {
 		$stringNormalizer = $this->stringNormalizer; // hack for PHP fail.
 
 		$aliases = array_map(
@@ -144,12 +140,11 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param array $params
+	 *
 	 * @return ChangeOpAliases
 	 */
-	protected function getChangeOps( array $params ) {
+	private function getChangeOps( array $params ) {
 		wfProfileIn( __METHOD__ );
 		$changeOps = array();
 		$language = $params['language'];
@@ -187,7 +182,7 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams()
+	 * @see ApiBase::getAllowedParams
 	 */
 	public function getAllowedParams() {
 		return array_merge(
@@ -217,7 +212,7 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages()
+	 * @see ApiBase::getExamplesMessages
 	 *
 	 * @return array
 	 */
