@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use BagOStuff;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -44,6 +45,23 @@ class SearchEntities extends ApiBase {
 	protected $idParser;
 
 	/**
+	 * @var BagOStuff
+	 */
+	private $cache;
+
+	/**
+	 * @var int
+	 * @todo get from config
+	 */
+	private $cacheDuration = 900; // 15 min
+
+	/**
+	 * @var int
+	 * @todo get from config
+	 */
+	private $cacheThreshold = 3;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -56,6 +74,7 @@ class SearchEntities extends ApiBase {
 		//TODO: provide a mechanism to override the services
 		$this->titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$this->idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		$this->cache = wfGetMainCache();
 	}
 
 	/**
@@ -100,6 +119,20 @@ class SearchEntities extends ApiBase {
 		return $ids;
 	}
 
+	private function getCacheKey( array $params ) {
+		if ( mb_strlen( $params['search'] ) > $this->cacheThreshold ) {
+			return false;
+		}
+
+		return wfMemcKey( 'wbsearchentities',
+			$params['type'],
+			$params['language'],
+			$params['search'],
+			$params['continue'],
+			$params['limit']
+		);
+	}
+
 	/**
 	 * Populates the search result returning the number of requested matches plus one additional
 	 * item for being able to determine if there would be any more results.
@@ -114,6 +147,16 @@ class SearchEntities extends ApiBase {
 	 */
 	private function getSearchEntries( array $params ) {
 		wfProfileIn( __METHOD__ );
+
+		$cacheKey = $this->getCacheKey( $params );
+
+		if ( $cacheKey ) {
+			$entries = $this->cache->get( $cacheKey );
+
+			if ( is_array( $entries ) ) {
+				return $entries;
+			}
+		}
 
 		$ids = array();
 		$required = $params['continue'] + $params['limit'] + 1;
@@ -130,6 +173,10 @@ class SearchEntities extends ApiBase {
 
 		$entries = $this->getEntries( $ids, $params['search'], $params['type'],
 			$params['language'] );
+
+		if ( $cacheKey ) {
+			$this->cache->set( $cacheKey, $entries, $this->cacheDuration );
+		}
 
 		wfProfileOut( __METHOD__ );
 		return $entries;
