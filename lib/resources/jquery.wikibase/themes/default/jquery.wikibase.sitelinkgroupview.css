@@ -6,6 +6,7 @@
 	border: 1px solid #C9C9C9;
 	float: left;
 	margin: 0 2em 2em 0;
+	padding-bottom: 0.6em;
 	width: 30em;
 }
 
@@ -17,7 +18,11 @@
 }
 
 .wikibase-sitelinkgroupview.wb-edit {
-	background-color: #D6F3FF;
+	border-color: #2779aa;
+}
+
+.wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-section {
+	margin-bottom: 0.3em;
 }
 
 .wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container {
