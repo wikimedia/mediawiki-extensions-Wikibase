@@ -108,7 +108,7 @@ class PageTermsTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param array $terms
+	 * @param array[] $terms
 	 *
 	 * @return TermIndex
 	 */
@@ -121,14 +121,14 @@ class PageTermsTest extends \MediaWikiTestCase {
 			$termObjectsByEntityId[$key] = $this->makeTermsFromGroups( $entityId, $termGroups );
 		}
 
-		$this_ = $this;
+		$self = $this;
 
 		$termIndex = $this->getMock( 'Wikibase\TermIndex' );
 		$termIndex->expects( $this->any() )
 			->method( 'getTermsOfEntities' )
 			->will( $this->returnCallback(
-				function ( array $entityIds, $entityType, $termTypes = null, $languages = null ) use( $termObjectsByEntityId, $this_ ) {
-					return $this_->getTermsOfEntities( $termObjectsByEntityId, $entityIds, $entityType, $termTypes, $languages );
+				function( array $entityIds, array $termTypes = null, array $languagesCodes = null ) use ( $termObjectsByEntityId, $self ) {
+					return $self->getTermsOfEntities( $termObjectsByEntityId, $entityIds, $termTypes, $languagesCodes );
 				}
 			) );
 
@@ -139,14 +139,14 @@ class PageTermsTest extends \MediaWikiTestCase {
 	 * @note Public only because older PHP versions don't allow it to be called
 	 *       from a closure otherwise.
 	 *
-	 * @param array $termObjectsByEntityId
+	 * @param array[] $termObjectsByEntityId
 	 * @param EntityId[] $entityIds
-	 * @param string $entityType
-	 * @param string|null $language
+	 * @param string[]|null $termTypes
+	 * @param string[]|null $languageCodes
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( $termObjectsByEntityId, $entityIds, $entityType, $termTypes, $languages ) {
+	public function getTermsOfEntities( array $termObjectsByEntityId, array $entityIds, array $termTypes = null, array $languageCodes = null ) {
 		$result = array();
 
 		foreach ( $entityIds as $id ) {
@@ -158,11 +158,9 @@ class PageTermsTest extends \MediaWikiTestCase {
 
 			/** @var Term $term */
 			foreach ( $termObjectsByEntityId[$key] as $term ) {
-				if ( $languages !== null && !in_array( $term->getLanguage(), $languages ) ) {
-					continue;
-				}
-
-				if ( $termTypes !== null && !in_array( $term->getType(), $termTypes ) ) {
+				if ( ( is_array( $termTypes ) && !in_array( $term->getType(), $termTypes ) )
+					|| ( is_array( $languageCodes ) && !in_array( $term->getLanguage(), $languageCodes ) )
+				) {
 					continue;
 				}
 
@@ -175,9 +173,9 @@ class PageTermsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param array $termGroups
+	 * @param array[] $termGroups
 	 *
-	 * @return array
+	 * @return Term[]
 	 */
 	private function makeTermsFromGroups( EntityId $entityId, $termGroups ) {
 		$terms = array();
@@ -221,9 +219,9 @@ class PageTermsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param array $params
-	 * @param array $terms
+	 * @param array[] $terms
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	private function callApiModule( array $params, array $terms ) {
 		$titles = $this->makeTitles( explode( '|', $params['titles'] ) );
