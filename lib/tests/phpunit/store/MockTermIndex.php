@@ -181,33 +181,28 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 * @param string[]|null $termTypes
-	 * @param string[]|null $languages
+	 * @param string[]|null $languageCodes
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntity( EntityId $id, array $termTypes = null, array $languages = null ) {
+	public function getTermsOfEntity( EntityId $entityId, array $termTypes = null, array $languageCodes = null ) {
 		$matchingTerms = array();
 
-		if ( $termTypes ) {
+		if ( is_array( $termTypes ) ) {
 			$termTypes = array_flip( $termTypes );
 		}
 
-		if ( $languages ) {
-			$languages = array_flip( $languages );
+		if ( is_array( $languageCodes ) ) {
+			$languageCodes = array_flip( $languageCodes );
 		}
 
-		foreach( $this->terms as $term ) {
-			if ( $termTypes !== null && !isset( $termTypes[$term->getType()] ) ) {
-				continue;
-			}
-
-			if ( $languages !== null && !isset( $languages[$term->getLanguage()] ) ) {
-				continue;
-			}
-
-			if ( !$id->equals( $term->getEntityId() ) ) {
+		foreach ( $this->terms as $term ) {
+			if ( ( is_array( $termTypes ) && !isset( $termTypes[$term->getType()] ) )
+				|| ( is_array( $languageCodes ) && !isset( $languageCodes[$term->getLanguage()] ) )
+				|| !$entityId->equals( $term->getEntityId() )
+			) {
 				continue;
 			}
 
@@ -219,11 +214,21 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 	/**
 	 * @see TermIndex::getTermsOfEntities
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string[]|null $termTypes
+	 * @param string[]|null $languageCodes
+	 *
+	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $entityIds, $entityType = null, array $termTypes = null, array $languageCodes = null ) {
+	public function getTermsOfEntities( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
 		$terms = array();
+
 		foreach ( $entityIds as $id ) {
-			$terms = array_merge( $terms, $this->getTermsOfEntity( $id, $termTypes, $languageCodes ) );
+			$terms = array_merge(
+				$terms,
+				$this->getTermsOfEntity( $id, $termTypes, $languageCodes )
+			);
 		}
 
 		return $terms;
@@ -371,4 +376,5 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 		return false;
 	}
+
 }
