@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_a5e9377d",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T15:09:17Z",
+      "side": 1,
+      "message": "can\u0027t we just start using $languageObject in the case we do have a Language object?...",
+      "parentUuid": "0e6cb3ef_c52f8bf2",
+      "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_70d20dd7",
         "filename": "lib/includes/store/BufferingTermLookup.php",
         "patchSetId": 6
@@ -172,6 +190,24 @@
       "side": 1,
       "message": "hmm, not nice but ok then",
       "parentUuid": "0e6cb3ef_05d7c3f3",
+      "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_a5a0573f",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-15T15:09:17Z",
+      "side": 1,
+      "message": "Well, as I said to Thiemo recently: if the form says \"employer\", nobody expects you to glue your boss to the page. Of course it\u0027s a code, or identifier, or whatever representation. A language isn\u0027t even an object in real life.\n\nAnyway - I understand the need to be clear about language code vs. Language object, but using \"languageCode\" everywhere is getting annoying.",
+      "parentUuid": "0e6cb3ef_85399340",
       "revId": "279d8138a2f3ef77b6c29896064bac4904978a3e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
