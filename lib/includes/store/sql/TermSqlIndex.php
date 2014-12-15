@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\Lib\Store\LabelConflictFinder;
 
 /**
  * Term lookup cache.
@@ -25,7 +26,7 @@ use Wikibase\DataModel\Term\FingerprintProvider;
  * @author Daniel Kinzler
  * @author Denny
  */
-class TermSqlIndex extends DBAccessBase implements TermIndex {
+class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinder {
 
 	/**
 	 * @since 0.1
