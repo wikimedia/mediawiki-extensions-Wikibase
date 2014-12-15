@@ -19,10 +19,11 @@
 .wikibase-sitelinklistview .wikibase-sitelinkview {
 	clear: both;
 	float: left;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+	line-height: 1.2;
 	width: 100%;
+}
+.wikibase-sitelinklistview.wb-edit .wikibase-sitelinkview {
+	white-space: nowrap;
 }
 .wikibase-sitelinklistview .wikibase-sitelinkview-new {
 	white-space: normal;
@@ -47,7 +48,6 @@
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-link {
 	display: inline;
 	margin-left: 0.4em;
-	white-space: nowrap;
 	word-wrap: break-word;
 }
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-link-new {
