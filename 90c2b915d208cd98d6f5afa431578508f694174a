@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_65ca3f4c",
+        "filename": "client/includes/api/PageTerms.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-15T15:36:31Z",
+      "side": 1,
+      "message": "Parameter order is switched, all other methods have the $languageCodes last.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_e5b72fd2",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-15T15:36:31Z",
+      "side": 1,
+      "message": "Why is there a separate $entityType parameter? The entity type is a property in EntityId.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_a5fff761",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-15T15:36:31Z",
+      "side": 1,
+      "message": "You accidentally deleted the $languageCode doc.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_c500eb6f",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-15T15:36:31Z",
+      "side": 1,
+      "message": "Please note that this will cause a breaking change in PropertySuggester.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_c58b0b1a",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-15T15:36:31Z",
+      "side": 1,
+      "message": "Redundant, empty() already does this check.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_e5908f48",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-15T15:36:31Z",
+      "side": 1,
+      "message": "Redundant, empty() already does this check.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_85951338",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-15T15:36:31Z",
+      "side": 1,
+      "message": "Redundant, empty() already does this check.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_459ffb55",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-15T15:36:31Z",
+      "side": 1,
+      "message": "Please merge all 3 if() to one.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_659c7f60",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-15T15:36:31Z",
+      "side": 1,
+      "message": "Rename to $conditions, as in other code I saw before?",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_85867317",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-15T15:36:31Z",
+      "side": 1,
+      "message": "Doc is not true any more.",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_a58b771f",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-15T15:36:31Z",
+      "side": 1,
+      "message": "* What kind of ids? $entityIds?\n* Wait, why is the entity type a parameter here? Entity type is a property in EntityId (1st parameter).",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
