@@ -24,6 +24,7 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
+use Wikibase\Store\TermBuffer;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\EntityPerPage;
@@ -169,13 +170,24 @@ class SqlStore implements Store {
 	/**
 	 * @since 0.1
 	 *
-	 * @return TermIndex
+	 * @return TermSqlIndex
 	 */
 	protected function newTermIndex() {
 		//TODO: Get $stringNormalizer from WikibaseRepo?
 		//      Can't really pass this via the constructor...
 		$stringNormalizer = new StringNormalizer();
 		return new TermSqlIndex( $stringNormalizer );
+	}
+
+	/**
+	 * @see Store::getTermBuffer
+	 *
+	 * @since 0.5
+	 *
+	 * @return TermBuffer
+	 */
+	public function getTermBuffer() {
+		return $this->getTermIndex();
 	}
 
 	/**

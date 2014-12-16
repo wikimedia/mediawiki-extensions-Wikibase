@@ -9,7 +9,7 @@ use Wikibase\Term;
 use Wikibase\TermIndex;
 
 /**
- * @covers Wikibase\Lib\Store\BufferingTermLookup
+ * @covers Wikibase\Store\BufferingTermLookup
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert

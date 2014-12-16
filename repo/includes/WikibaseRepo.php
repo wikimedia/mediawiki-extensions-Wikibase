@@ -284,6 +284,7 @@ class WikibaseRepo {
 	 * @since 0.5
 	 *
 	 * @return EntityIdLookup
+	 *
 	 */
 	public function getPageEntityIdLookup() {
 		return $this->getEntityContentFactory();
