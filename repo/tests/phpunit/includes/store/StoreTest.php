@@ -55,8 +55,16 @@ class StoreTest extends \MediaWikiTestCase {
 	 * @dataProvider instanceProvider
 	 * @param Store $store
 	 */
-	public function testNewTermCache( Store $store ) {
+	public function testNewTermIndex( Store $store ) {
 		$this->assertInstanceOf( '\Wikibase\TermIndex', $store->getTermIndex() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Store $store
+	 */
+	public function testNewTermBuffer( Store $store ) {
+		$this->assertInstanceOf( '\Wikibase\Store\TermBuffer', $store->getTermBuffer() );
 	}
 
 	/**

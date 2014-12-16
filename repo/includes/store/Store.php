@@ -9,6 +9,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\SiteLinkCache;
+use Wikibase\Store\TermBuffer;
 use Wikibase\Repo\Store\EntityPerPage;
 
 /**
@@ -52,6 +53,13 @@ interface Store {
 	 * @return TermIndex
 	 */
 	public function getTermIndex();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return \Wikibase\Store\TermBuffer
+	 */
+	public function getTermBuffer();
 
 	/**
 	 * @since 0.5

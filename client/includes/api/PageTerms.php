@@ -34,13 +34,13 @@ class PageTerms extends ApiQueryBase {
 	private $termIndex;
 
 	/**
-	 * @var EntityIdLookup
+	 * @var \Wikibase\Store\EntityIdLookup
 	 */
 	private $idLookup;
 
 	/**
 	 * @param TermIndex $termIndex
-	 * @param EntityIdLookup $idLookup
+	 * @param \Wikibase\Store\EntityIdLookup $idLookup
 	 * @param ApiQuery $query
 	 * @param string $moduleName
 	 */
