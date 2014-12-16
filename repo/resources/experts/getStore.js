@@ -14,7 +14,7 @@ MODULE.getStore = function( dataTypeStore ) {
 	var expertStore = new vv.ExpertStore( vv.experts.UnsupportedValue );
 
 	expertStore.registerDataValueExpert(
-		wb.experts.EntityIdInput,
+		wb.experts.Entity,
 		wb.datamodel.EntityId.TYPE
 	);
 
