@@ -17,6 +17,15 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 
 /**
+ * Handler for the LinkBegin hook, used to change the default link text of links to wikibase Entity
+ * pages to the respective entity's label. This is used mainly for listings on special pages, where
+ * it is useful to see pages listed by label rather than their entity ID.
+ *
+ * Label lookups are relatively expensive if done repeatedly for individual labels. If possible,
+ * labels should be pre-loaded and buffered for later use via the LinkBegin hook.
+ *
+ * @see LabelPrefetchHookHandlers
+ *
  * @since 0.5
  *
  * @licence GNU GPL v2+
@@ -53,9 +62,9 @@ class LinkBeginHookHandler {
 	 */
 	private static function newFromGlobalState() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$context = RequestContext::getMain();
-
 		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
+		// NOTE: keep in sync with fallback chain construction in LabelPrefetchHookHandler::newFromGlobalState
+		$context = RequestContext::getMain();
 		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $context );
 
 		return new self(
@@ -169,10 +178,16 @@ class LinkBeginHookHandler {
 			return;
 		}
 
+		// @todo: this re-implements the logic in LanguageFallbackLabelLookup,
+		//       just so it can be applied to descriptions as well as labels. Either
+		//       have two lookups with the same interface, or two methods in the lookup
+		//       interface.
+
+		// NOTE: keep in sync with with fallback languages in LabelPrefetchHookHandler::newFromGlobalState
+
 		try {
-			//@todo: only fetch the labels we need for the fallback chain
-			$labels = $this->termLookup->getLabels( $entityId );
-			$descriptions = $this->termLookup->getDescriptions( $entityId );
+			$labels = $this->termLookup->getLabels( $entityId, $this->languageFallback->getFetchLanguageCodes() );
+			$descriptions = $this->termLookup->getDescriptions( $entityId, $this->languageFallback->getFetchLanguageCodes() );
 		} catch ( StorageException $ex ) {
 			// This shouldn't happen if $target->exists() return true!
 			wfProfileOut( __METHOD__ );
