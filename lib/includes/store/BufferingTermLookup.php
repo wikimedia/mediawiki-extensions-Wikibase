@@ -121,7 +121,15 @@ class BufferingTermLookup extends EntityTermLookup implements TermBuffer {
 		// (the ChangesListInitRows hook) would generally, trigger only one call to prefetchTerms,
 		// before any call to getTermsOfType().
 
-		$terms = $this->termIndex->getTermsOfEntities( $entityIds, null, $termTypes, $languageCodes );
+		$entityIdsByType = $this->groupEntityIds( $entityIds );
+		$terms = array();
+
+		foreach ( $entityIdsByType as $entityType => $entityIdGroup ) {
+			$terms = array_merge(
+				$terms,
+				$this->termIndex->getTermsOfEntities( $entityIdGroup, $entityType, $termTypes, $languageCodes )
+			);
+		}
 		$bufferedKeys = $this->setBufferedTermObjects( $terms );
 
 		if ( !empty( $languageCodes ) ) {
@@ -219,4 +227,21 @@ class BufferingTermLookup extends EntityTermLookup implements TermBuffer {
 		return array_filter( $terms, 'is_string' );
 	}
 
+	/**
+	 * @param EntityId[] $entityIds
+	 *
+	 * @return EntityId[][]
+	 */
+	private function groupEntityIds( $entityIds ) {
+		$entityIdsByType = array();
+
+		foreach ( $entityIds as $id ) {
+			$type = $id->getEntityType();
+			$key = $id->getSerialization();
+
+			$entityIdsByType[$type][$key] = $id;
+		}
+
+		return $entityIdsByType;
+	}
 }

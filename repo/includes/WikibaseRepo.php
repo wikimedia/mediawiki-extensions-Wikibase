@@ -68,6 +68,7 @@ use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\DummyChangeTransmitter;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Settings;
@@ -75,6 +76,7 @@ use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
 use Wikibase\SqlStore;
 use Wikibase\Store;
+use Wikibase\Store\TermBuffer;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\Template\TemplateFactory;
@@ -170,6 +172,11 @@ class WikibaseRepo {
 	 * @var EntityNamespaceLookup|null
 	 */
 	private $entityNamespaceLookup = null;
+
+	/**
+	 * @var TermLookup
+	 */
+	private $termLookup;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -498,10 +505,24 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @return TermBuffer
+	 */
+	public function getTermBuffer() {
+		return $this->getTermLookup();
+	}
+
+	/**
 	 * @return TermLookup
 	 */
 	public function getTermLookup() {
-		return new EntityTermLookup( $this->getStore()->getTermIndex(), $this->getEntityLookup() );
+		if ( !$this->termLookup ) {
+			$this->termLookup = new BufferingTermLookup(
+				$this->getStore()->getTermIndex(),
+				1000 // @todo: configure buffer size
+			);
+		}
+
+		return $this->termLookup;
 	}
 
 	/**
