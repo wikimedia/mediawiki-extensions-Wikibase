@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_5fd4a3ec",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-16T13:50:30Z",
+      "side": 1,
+      "message": "You realize this is only one of many implementations of the abstract ApiWikibase::getRequiredPermissions? Not all of them throw an exception.",
+      "parentUuid": "0e6cb3ef_dc9a0166",
+      "revId": "ae114913c0429df0c82116ac40ee9b44a9eceb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_5c77d135",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-16T10:33:20Z",
       "side": 1,
       "message": "No, that\u0027s not right. We want to require special permissions specifically for properties, because of the special semantics that properties have. Hardcoding this knowledge here isn\u0027t very nice, but hardcoding the wrong logic doesn\u0027t make it better.",
+      "revId": "ae114913c0429df0c82116ac40ee9b44a9eceb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_5feb43a0",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-16T13:50:30Z",
+      "side": 1,
+      "message": "I don\u0027t see what\u0027s \"wrong\" here. From my point of view items are special because they do *not* need a special permission. All other types need a special permission. Sure, we currently don\u0027t know if this assumption will be true for all entity types. But it makes a lot more sense this way around in my opinion.",
+      "parentUuid": "0e6cb3ef_5c77d135",
       "revId": "ae114913c0429df0c82116ac40ee9b44a9eceb69",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_bf105fae",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-16T13:50:30Z",
+      "side": 1,
+      "message": "Because *everything* we do is absolutely pointless if *nothing* is allowed. This is not how edit-protections should be implemented. Not at all. This would be just wrong. If such a filter is set to an empty array it *must* either throw an exception on construction, or ignore the empty array. (And because I prefer pragmatic solutions I prefer the later one.) Everything else is just stupid.\n\nAnd because of the way this is constructed ...\n\n $this-\u003evalidLanguageCodes \u003d array_flip( Utils::getLanguageCodes() );\n\n... I decided adding an exception to the constructor would be overkill.",
+      "parentUuid": "0e6cb3ef_7c9f3556",
+      "revId": "ae114913c0429df0c82116ac40ee9b44a9eceb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_5ca6f1a8",
         "filename": "repo/includes/api/ModifyTerm.php",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_ff7d77e5",
+        "filename": "repo/includes/api/ModifyTerm.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-16T13:50:30Z",
+      "side": 1,
+      "message": "As explained.",
+      "parentUuid": "0e6cb3ef_5ca6f1a8",
+      "revId": "ae114913c0429df0c82116ac40ee9b44a9eceb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_fcb265e3",
         "filename": "repo/includes/api/SetAliases.php",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2014-12-16T10:33:20Z",
       "side": 1,
       "message": "...again...",
+      "revId": "ae114913c0429df0c82116ac40ee9b44a9eceb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_1f838bd2",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-16T13:50:30Z",
+      "side": 1,
+      "message": "As explained.",
+      "parentUuid": "0e6cb3ef_fcb265e3",
       "revId": "ae114913c0429df0c82116ac40ee9b44a9eceb69",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
