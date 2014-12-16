@@ -12,6 +12,7 @@ use Wikibase\Lib\EntityIdFormatterFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @since 0.5
@@ -98,7 +99,22 @@ class EntityViewFactory {
 		// @fixme support more entity types
 		switch ( $entityType ) {
 			case 'item':
-				return new ItemView( $fingerprintView, $claimsView, $language, $this->siteLinkGroups, $editable );
+				// FIXME: Inject this
+				$siteLinksView = new SiteLinksView(
+					WikibaseRepo::getDefaultInstance()->getSiteStore()->getSites(),
+					$this->sectionEditLinkGenerator,
+					$this->entityLookup,
+					$language->getCode()
+				);
+
+				return new ItemView(
+					$fingerprintView,
+					$claimsView,
+					$language,
+					$siteLinksView,
+					$this->siteLinkGroups,
+					$editable
+				);
 			case 'property':
 				return new PropertyView( $fingerprintView, $claimsView, $language, $editable );
 		}

@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityRevision;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Class for creating views for Item instances.
@@ -26,11 +25,17 @@ class ItemView extends EntityView {
 	private $siteLinkGroups;
 
 	/**
+	 * @var SiteLinksView
+	 */
+	private $siteLinksView;
+
+	/**
 	 * @see EntityView::__construct
 	 *
 	 * @param FingerprintView $fingerprintView
 	 * @param ClaimsView $claimsView
 	 * @param Language $language
+	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
 	 * @param bool $editable
 	 */
@@ -38,12 +43,14 @@ class ItemView extends EntityView {
 		FingerprintView $fingerprintView,
 		ClaimsView $claimsView,
 		Language $language,
+		SiteLinksView $siteLinksView,
 		array $siteLinkGroups,
-		$editable  = true
+		$editable = true
 	) {
 		parent::__construct( $fingerprintView, $claimsView, $language, $editable );
 
 		$this->siteLinkGroups = $siteLinkGroups;
+		$this->siteLinksView = $siteLinksView;
 	}
 
 	/**
@@ -95,21 +102,9 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	protected function getHtmlForSiteLinks( Item $item ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		// FIXME: Inject this
-		$siteLinksView = new SiteLinksView(
-			$wikibaseRepo->getSiteStore()->getSites(),
-			new SectionEditLinkGenerator(),
-			$wikibaseRepo->getEntityLookup(),
-			$this->language->getCode()
-		);
-
-		$itemId = $item->getId();
-
-		return $siteLinksView->getHtml(
+		return $this->siteLinksView->getHtml(
 			$item->getSiteLinks(),
-			$itemId,
+			$item->getId(),
 			$this->siteLinkGroups,
 			$this->editable
 		);
