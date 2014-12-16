@@ -4,11 +4,13 @@ namespace Wikibase\Repo\View;
 
 use InvalidArgumentException;
 use Language;
+use SiteStore;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdFormatterFactory;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\LabelLookup;
@@ -37,17 +39,31 @@ class EntityViewFactory {
 	private $idFormatterFactory;
 
 	/**
-	 * @param EntityIdFormatterFactory $idFormatterFactory
-	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
+	 * @var EntityLookup
 	 */
+	private $entityLookup;
+
+	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
 	/**
 	 * @var string[]
 	 */
 	private $siteLinkGroups;
 
+	/**
+	 * @param EntityIdFormatterFactory $idFormatterFactory
+	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
+	 * @param EntityLookup $entityLookup
+	 * @param SiteStore $siteStore
+	 */
 	public function __construct(
 		EntityIdFormatterFactory $idFormatterFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
+		EntityLookup $entityLookup,
+		SiteStore $siteStore,
 		array $siteLinkGroups
 	) {
 		$this->checkOutputFormat( $idFormatterFactory->getOutputFormat() );
@@ -55,6 +71,8 @@ class EntityViewFactory {
 		$this->idFormatterFactory = $idFormatterFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
+		$this->entityLookup = $entityLookup;
+		$this->siteStore = $siteStore;
 		$this->siteLinkGroups = $siteLinkGroups;
 	}
 
@@ -98,7 +116,21 @@ class EntityViewFactory {
 		// @fixme support more entity types
 		switch ( $entityType ) {
 			case 'item':
-				return new ItemView( $fingerprintView, $claimsView, $language, $this->siteLinkGroups, $editable );
+				$siteLinksView = new SiteLinksView(
+					$this->siteStore->getSites(),
+					$this->sectionEditLinkGenerator,
+					$this->entityLookup,
+					$language->getCode()
+				);
+
+				return new ItemView(
+					$fingerprintView,
+					$claimsView,
+					$language,
+					$siteLinksView,
+					$this->siteLinkGroups,
+					$editable
+				);
 			case 'property':
 				return new PropertyView( $fingerprintView, $claimsView, $language, $editable );
 		}

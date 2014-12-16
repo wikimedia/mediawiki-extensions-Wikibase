@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use SiteList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
@@ -58,6 +59,8 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new EntityViewFactory(
 			$this->getEntityIdFormatterFactory(),
 			$this->getSnakFormatterFactory(),
+			$this->getMock( 'Wikibase\Lib\Store\EntityLookup' ),
+			$this->getSiteStore(),
 			array()
 		);
 	}
@@ -94,6 +97,16 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $snakFormatter ) );
 
 		return $snakFormatterFactory;
+	}
+
+	private function getSiteStore() {
+		$siteStore = $this->getMock( 'SiteStore' );
+
+		$siteStore->expects( $this->any() )
+			->method( 'getSites' )
+			->will( $this->returnValue( new SiteList() ) );
+
+		return $siteStore;
 	}
 
 }
