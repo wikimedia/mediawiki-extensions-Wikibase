@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_dc9a0166",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-16T10:33:20Z",
+      "side": 1,
+      "message": "It seems pointless to first default to null, then do this check. ok, that exception is \"less fatal\", but... why do we want that?",
+      "revId": "ae114913c0429df0c82116ac40ee9b44a9eceb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_5c77d135",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-16T10:33:20Z",
+      "side": 1,
+      "message": "No, that\u0027s not right. We want to require special permissions specifically for properties, because of the special semantics that properties have. Hardcoding this knowledge here isn\u0027t very nice, but hardcoding the wrong logic doesn\u0027t make it better.",
+      "revId": "ae114913c0429df0c82116ac40ee9b44a9eceb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_7c9f3556",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-16T10:33:20Z",
+      "side": 1,
+      "message": "So now it\u0027s impossible to disallow all languages by specifying an empty array here?\nI don\u0027t like that. Why should it not be possible to allow no language?",
+      "revId": "ae114913c0429df0c82116ac40ee9b44a9eceb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_5ca6f1a8",
+        "filename": "repo/includes/api/ModifyTerm.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-16T10:33:20Z",
+      "side": 1,
+      "message": "As in EditEntity: why allow null first, then fail if it is given? Just rely on the type hint.",
+      "revId": "ae114913c0429df0c82116ac40ee9b44a9eceb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_fcb265e3",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-16T10:33:20Z",
+      "side": 1,
+      "message": "...again...",
+      "revId": "ae114913c0429df0c82116ac40ee9b44a9eceb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
