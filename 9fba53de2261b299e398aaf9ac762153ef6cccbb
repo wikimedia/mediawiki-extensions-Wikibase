@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_850f4833",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-16T15:15:37Z",
+      "side": 1,
+      "message": "Upper case \"ID\"? This was a mistake, right? But not part of this patch.",
+      "revId": "9fba53de2261b299e398aaf9ac762153ef6cccbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_8a29979c",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-16T15:15:37Z",
+      "side": 1,
+      "message": "Dang, this will conflict hard with my follow up Ibec48cf. Did you had a look? Which one should be based on which one in your opinion?",
+      "revId": "9fba53de2261b299e398aaf9ac762153ef6cccbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_4a0a9f2a",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-16T15:15:37Z",
+      "side": 1,
+      "message": "Wait, ...? This looks like a part of my patch, but it\u0027s incomplete. Why is $entityType still a parameter of this method?",
+      "revId": "9fba53de2261b299e398aaf9ac762153ef6cccbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
