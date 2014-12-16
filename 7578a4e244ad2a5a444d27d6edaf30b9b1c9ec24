@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_6bd445ed",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-16T20:33:07Z",
+      "side": 1,
+      "message": "This can\u0027t be anything but an array because of the type hint.",
+      "revId": "7578a4e244ad2a5a444d27d6edaf30b9b1c9ec24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
