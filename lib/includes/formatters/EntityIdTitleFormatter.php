@@ -19,7 +19,7 @@ class EntityIdTitleFormatter extends EntityIdFormatter {
 	/**
 	 * @var EntityTitleLookup
 	 */
-	protected $titleLookup;
+	private $titleLookup;
 
 	/**
 	 * @param FormatterOptions $options

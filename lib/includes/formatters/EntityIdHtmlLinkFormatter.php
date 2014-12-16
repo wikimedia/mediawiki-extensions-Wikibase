@@ -22,7 +22,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	/**
 	 * @var EntityTitleLookup
 	 */
-	protected $entityTitleLookup;
+	private $entityTitleLookup;
 
 	public function __construct(
 		FormatterOptions $options,

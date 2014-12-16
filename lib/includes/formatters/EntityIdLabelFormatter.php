@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\LabelLookup;
 
@@ -17,7 +18,7 @@ use Wikibase\Lib\Store\LabelLookup;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class EntityIdLabelFormatter extends EntityIdFormatter {
+class EntityIdLabelFormatter extends EntityIdFormatter implements ValueFormatter {
 
 	/**
 	 * Whether we should try to find the label of the entity
