@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\View;
 
+use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use Language;
 use SiteStore;
@@ -49,6 +50,11 @@ class EntityViewFactory {
 	private $siteStore;
 
 	/**
+	 * @var DataTypeFactory
+	 */
+	private $dataTypeFactory;
+
+	/**
 	 * @var string[]
 	 */
 	private $siteLinkGroups;
@@ -68,12 +74,14 @@ class EntityViewFactory {
 	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
 	 * @param EntityLookup $entityLookup
 	 * @param SiteStore $siteStore
+	 * @param DataTypeFactory $dataTypeFactory
 	 */
 	public function __construct(
 		EntityIdFormatterFactory $idFormatterFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
 		EntityLookup $entityLookup,
 		SiteStore $siteStore,
+		DataTypeFactory $dataTypeFactory,
 		array $siteLinkGroups,
 		array $specialSiteLinkGroups,
 		array $badgeItems
@@ -85,6 +93,7 @@ class EntityViewFactory {
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 		$this->entityLookup = $entityLookup;
 		$this->siteStore = $siteStore;
+		$this->dataTypeFactory = $dataTypeFactory;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
@@ -148,7 +157,13 @@ class EntityViewFactory {
 					$editable
 				);
 			case 'property':
-				return new PropertyView( $fingerprintView, $claimsView, $language, $editable );
+				return new PropertyView(
+					$fingerprintView,
+					$claimsView,
+					$this->dataTypeFactory,
+					$language,
+					$editable
+				);
 		}
 
 		throw new InvalidArgumentException( 'No EntityView for entity type: ' . $entityType );

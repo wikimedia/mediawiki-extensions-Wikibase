@@ -993,6 +993,7 @@ class WikibaseRepo {
 			$this->getSnakFormatterFactory(),
 			$this->getEntityLookup(),
 			$this->getSiteStore(),
+			$this->getDataTypeFactory(),
 			$this->getSettings()->getSetting( 'siteLinkGroups' ),
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' ),
 			$this->getSettings()->getSetting( 'badgeItems' )
