@@ -28,7 +28,7 @@ abstract class EntityView {
 	/**
 	 * @var FingerprintView
 	 */
-	protected $fingerprintView;
+	private $fingerprintView;
 
 	/**
 	 * @var ClaimsView
@@ -48,7 +48,7 @@ abstract class EntityView {
 	/**
 	 * @var TextInjector
 	 */
-	protected $textInjector;
+	private $textInjector;
 
 	/**
 	 * @param FingerprintView $fingerprintView
@@ -176,7 +176,7 @@ if ( $ ) {
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForFingerprint( Entity $entity ) {
+	private function getHtmlForFingerprint( Entity $entity ) {
 		return $this->fingerprintView->getHtml( $entity->getFingerprint(), $entity->getId(), $this->editable );
 	}
 
@@ -185,7 +185,7 @@ if ( $ ) {
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForToc() {
+	private function getHtmlForToc() {
 		$tocSections = $this->getTocSections();
 
 		if ( count( $tocSections ) < 2 ) {
@@ -229,7 +229,7 @@ if ( $ ) {
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForTermBox( EntityRevision $entityRevision ) {
+	private function getHtmlForTermBox( EntityRevision $entityRevision ) {
 		$entityId = $entityRevision->getEntity()->getId();
 
 		if ( $entityId !== null ) {
