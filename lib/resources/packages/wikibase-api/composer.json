@@ -21,7 +21,7 @@
 	},
 	"autoload": {
 		"files": [
-			"init.php"
+			"WikibaseJavaScriptApi.php"
 		]
 	}
 }
