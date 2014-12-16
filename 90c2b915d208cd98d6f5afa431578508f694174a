@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_0bda6921",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-16T20:12:15Z",
+      "side": 1,
+      "message": "Click \"find usages\", find this in PropertySuggester:\n\n $terms \u003d $this-\u003etermIndex-\u003egetTermsOfEntities( $propertyIds, null, array( $languageCode ) );\n\nWhich means this is a breaking change, but PropertySuggester will not fail hard, it will just return nothing.",
+      "parentUuid": "0e6cb3ef_39e1d229",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_c58b0b1a",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 2
@@ -225,6 +243,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "0e6cb3ef_f9c11a84",
+      "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_4bd701f3",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-16T20:12:15Z",
+      "side": 1,
+      "message": "Good idea, like it.",
+      "parentUuid": "0e6cb3ef_0a010771",
       "revId": "90c2b915d208cd98d6f5afa431578508f694174a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
