@@ -109,6 +109,7 @@ Other methods an Expert needs to provide:
 
 #### Enhancements
 * `$.ui.suggester`: Added `isSearching()` function to determine whether searching is in progress.
+* Added `force` parameter to `$.AutoInputExpand.prototype.expand()`.
 
 ### 0.9.0 (2014-12-05)
 
