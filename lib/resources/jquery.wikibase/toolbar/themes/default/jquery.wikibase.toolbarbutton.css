@@ -27,3 +27,11 @@
 	height: 1em;
 	width: 1em;
 }
+
+.wikibase-toolbarbutton.ui-state-disabled.oo-ui-buttonElement > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon {
+	opacity: 0.33;
+}
+
+.wikibase-toolbarbutton.ui-state-disabled.oo-ui-buttonElement > .oo-ui-buttonElement-button {
+	cursor: default;
+}
