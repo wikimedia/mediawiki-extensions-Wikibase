@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_3f5c4f4e",
+        "filename": "repo/tests/phpunit/includes/View/EntityViewFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-16T14:08:39Z",
+      "side": 1,
+      "message": "That\u0027s a lie, EntityIdFormatter doesn\u0027t generate html, but plain text.",
+      "revId": "f4371bd87596cfbc711c584b3cd4fbf94c716809",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
