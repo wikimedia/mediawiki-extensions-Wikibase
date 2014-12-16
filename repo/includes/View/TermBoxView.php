@@ -101,7 +101,7 @@ class TermBoxView {
 		}
 
 		$html = wfTemplate( 'wikibase-fingerprintgroupview',
-			$this->msg( 'wikibase-terms' ),
+			$this->msg( 'wikibase-terms' )->text(),
 			wfTemplate( 'wikibase-fingerprintlistview', $tbody ),
 			$this->sectionEditLinkGenerator->getHtmlForEditSection(
 				'SpecialPages',
