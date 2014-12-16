@@ -374,6 +374,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * Returns the terms stored for the given entity.
 	 *
 	 * @see TermIndex::getTermsOfEntity
+	 * @todo: share more code with getTermsOfEntities. There are only subtle differences
+	 * regarding what fields are loaded.
 	 *
 	 * @param EntityId $entityId
 	 * @param string[]|null $termTypes
@@ -382,11 +384,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return Term[]
 	 */
 	public function getTermsOfEntity( EntityId $entityId, array $termTypes = null, array $languageCodes = null ) {
-		if ( $termTypes !== null && empty( $termTypes ) ) {
+		if ( is_array( $termTypes ) && empty( $termTypes ) ) {
 			return array();
 		}
 
-		if ( $languageCodes !== null && empty( $languageCodes ) ) {
+		if ( is_array( $languageCodes ) && empty( $languageCodes ) ) {
 			return array();
 		}
 
@@ -436,24 +438,37 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @param EntityId[] $entityIds
 	 * @param string $entityType
-	 * @param string|null $language Language code
+	 * @param string[]|null $termTypes
+	 * @param string[]|null $languageCodes Language codes
 	 *
-	 * @throws MWException
+	 * @throws \MWException
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $entityIds, $entityType, $language = null ) {
-		wfProfileIn( __METHOD__ );
-
-		if ( empty( $entityIds ) ) {
-			wfProfileOut( __METHOD__ );
+	public function getTermsOfEntities( array $entityIds, $entityType, array $termTypes = null, array $languageCodes = null ) {
+		if ( is_array( $entityIds ) && empty( $entityIds ) ) {
 			return array();
 		}
 
-		$entityIdentifiers = array(
+		if ( is_array( $languageCodes ) && empty( $languageCodes ) ) {
+			return array();
+		}
+
+		if ( is_array( $termTypes ) && empty( $termTypes ) ) {
+			return array();
+		}
+
+		wfProfileIn( __METHOD__ );
+
+		$conditions = array(
 			'term_entity_type' => $entityType
 		);
-		if ( $language !== null ) {
-			$entityIdentifiers['term_language'] = $language;
+
+		if ( $languageCodes !== null ) {
+			$conditions['term_language'] = $languageCodes;
+		}
+
+		if ( $termTypes !== null ) {
+			$conditions['term_type'] = $termTypes;
 		}
 
 		$numericIds = array();
@@ -466,7 +481,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$numericIds[] = $entityId->getNumericId();
 		}
 
-		$entityIdentifiers['term_entity_id'] = $numericIds;
+		$conditions['term_entity_id'] = $numericIds;
 
 		$fields = array(
 			'term_entity_id',
@@ -481,7 +496,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$res = $dbr->select(
 			$this->tableName,
 			$fields,
-			$entityIdentifiers,
+			$conditions,
 			__METHOD__
 		);
 

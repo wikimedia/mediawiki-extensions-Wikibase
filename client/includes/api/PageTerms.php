@@ -74,11 +74,7 @@ class PageTerms extends ApiQueryBase {
 		$pagesToEntityIds = $this->getEntityIdsForTitles( $titles, $continue );
 		$entityToPageMap = $this->getEntityToPageMap( $pagesToEntityIds );
 
-		$terms = $this->getTermsOfEntities( $pagesToEntityIds, $languageCode );
-
-		if ( $params['terms'] ) {
-			$terms = $this->filterTerms( $terms, $params['terms'] );
-		}
+		$terms = $this->getTermsOfEntities( $pagesToEntityIds, $params['terms'], array( $languageCode ) );
 
 		$termGroups = $this->groupTermsByPageAndType( $entityToPageMap, $terms );
 
@@ -103,18 +99,19 @@ class PageTerms extends ApiQueryBase {
 
 	/**
 	 * @param EntityID[] $entityIds
-	 * @param string $languageCode
+	 * @param string[]|null $termTypes
+	 * @param string[]|null $languageCodes
 	 *
 	 * @return Term[]
 	 */
-	private function getTermsOfEntities( array $entityIds, $languageCode ) {
+	private function getTermsOfEntities( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
 		$entityIdGroups = $this->splitPageEntityMapByType( $entityIds );
 		$terms = array();
 
-		foreach ( $entityIdGroups as $type => $entityIds ) {
+		foreach ( $entityIdGroups as $entityType => $entityIds ) {
 			$terms = array_merge(
 				$terms,
-				$this->termIndex->getTermsOfEntities( $entityIds, $type, $languageCode )
+				$this->termIndex->getTermsOfEntities( $entityIds, $entityType, $termTypes, $languageCodes )
 			);
 		}
 
@@ -157,28 +154,6 @@ class PageTerms extends ApiQueryBase {
 		);
 
 		return array_flip( $entityIdsStrings );
-	}
-
-	/**
-	 * @param Term[] $terms
-	 * @param string[] $types
-	 *
-	 * @return Term[]
-	 */
-	private function filterTerms( array $terms, array $types = null ) {
-		if ( !$types ) {
-			return $terms;
-		}
-
-		$types = array_flip( $types );
-
-		return array_filter(
-			$terms,
-			function( Term $term ) use ( $types ) {
-				$key = $term->getType();
-				return isset( $types[$key] );
-			}
-		);
 	}
 
 	/**
