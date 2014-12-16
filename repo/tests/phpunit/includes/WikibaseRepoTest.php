@@ -236,4 +236,21 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Api\ApiHelperFactory', $factory );
 	}
 
+	public function testGetTermLookup() {
+		$service = $this->getWikibaseRepo()->getTermLookup();
+		$this->assertInstanceOf( 'Wikibase\Lib\Store\TermLookup', $service );
+	}
+
+	public function testGetTermBuffer() {
+		$service = $this->getWikibaseRepo()->getTermBuffer();
+		$this->assertInstanceOf( 'Wikibase\Store\TermBuffer', $service );
+	}
+
+	public function testGetTermBuffer_instance() {
+		$repo = $this->getWikibaseRepo();
+		$service = $repo->getTermBuffer();
+		$this->assertSame( $service, $repo->getTermBuffer(), 'Second call should return same instance' );
+		$this->assertSame( $service, $repo->getTermLookup(), 'TermBuffer and TermLookup should be the same object' );
+	}
+
 }
