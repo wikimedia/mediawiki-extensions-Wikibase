@@ -8,7 +8,7 @@ use ApiQueryBase;
 use ApiResult;
 use InvalidArgumentException;
 use Title;
-use Wikibase\Client\Store\EntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Term;
 use Wikibase\TermIndex;
@@ -34,13 +34,13 @@ class PageTerms extends ApiQueryBase {
 	private $termIndex;
 
 	/**
-	 * @var EntityIdLookup
+	 * @var \Wikibase\Store\EntityIdLookup
 	 */
 	private $idLookup;
 
 	/**
 	 * @param TermIndex $termIndex
-	 * @param EntityIdLookup $idLookup
+	 * @param \Wikibase\Store\EntityIdLookup $idLookup
 	 * @param ApiQuery $query
 	 * @param string $moduleName
 	 */

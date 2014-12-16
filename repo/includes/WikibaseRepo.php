@@ -283,6 +283,8 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
+	 * @todo FIXME EntityIdLookup vs PageEntityIdLookup
+	 *
 	 * @return PageEntityIdLookup
 	 */
 	public function getPageEntityIdLookup() {

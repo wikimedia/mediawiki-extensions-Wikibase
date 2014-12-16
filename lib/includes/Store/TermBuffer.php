@@ -1,8 +1,9 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * A service interface for buffering terms.
