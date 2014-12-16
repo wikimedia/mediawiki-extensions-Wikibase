@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_3307a321",
+        "filename": "repo/includes/View/ClaimsView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-16T23:28:11Z",
+      "side": 1,
+      "message": "What if the that key doesn\u0027t exists? Is it always propagated (with the fallback)?",
+      "revId": "3b9137353b583f8dce3b12d6ecb75d4f9b6111ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_b60ac122",
+        "filename": "repo/includes/View/SnakHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-16T23:28:11Z",
+      "side": 1,
+      "message": "same as in ClaimsView",
+      "revId": "3b9137353b583f8dce3b12d6ecb75d4f9b6111ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
