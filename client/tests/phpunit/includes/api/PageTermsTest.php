@@ -9,7 +9,7 @@ use Language;
 use RequestContext;
 use Title;
 use Wikibase\Client\Api\PageTerms;
-use Wikibase\Client\Store\EntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;

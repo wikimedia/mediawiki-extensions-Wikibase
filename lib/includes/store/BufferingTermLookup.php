@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use MapCacheLRU;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Store\TermBuffer;
 use Wikibase\Term;
 use Wikibase\TermIndex;
 use Wikibase\Utils;
@@ -109,7 +110,7 @@ class BufferingTermLookup extends EntityTermLookup implements TermBuffer {
 	 * @return string|false|null The term, or false of that term is known to not exist,
 	 *         or null if the term was not yet requested via prefetchTerms().
 	 */
-	public function getPrefetechedTerm( EntityId $entityId, $termType, $languageCode ) {
+	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
 		$key = $this->getBufferKey( $entityId, $termType, $languageCode );
 		return $this->buffer->get( $key );
 	}
@@ -130,7 +131,7 @@ class BufferingTermLookup extends EntityTermLookup implements TermBuffer {
 
 		$terms = array();
 		foreach ( $languageCodes as $lang ) {
-			$term = $this->getPrefetechedTerm( $entityId, $termType, $lang );
+			$term = $this->getPrefetchedTerm( $entityId, $termType, $lang );
 
 			if ( $term !== null ) {
 				$terms[$lang] = $term;

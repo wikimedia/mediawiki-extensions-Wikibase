@@ -9,7 +9,7 @@ use Wikibase\Term;
 use Wikibase\TermIndex;
 
 /**
- * @covers Wikibase\Lib\Store\BufferingTermLookup
+ * @covers Wikibase\Store\BufferingTermLookup
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert
@@ -33,9 +33,9 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 
 		$termLookup->prefetchTerms( $items, $types, $languages );
 
-		$this->assertEquals( 'New York City', $termLookup->getPrefetechedTerm( $q116, 'label', 'en' ) );
-		$this->assertFalse( $termLookup->getPrefetechedTerm( $q116, 'label', 'de' ), 'A term that was checked but not found should yield false' );
-		$this->assertNull( $termLookup->getPrefetechedTerm( $q116, 'description', 'en' ), 'A term that was never checked should yield null' );
+		$this->assertEquals( 'New York City', $termLookup->getPrefetchedTerm( $q116, 'label', 'en' ) );
+		$this->assertFalse( $termLookup->getPrefetchedTerm( $q116, 'label', 'de' ), 'A term that was checked but not found should yield false' );
+		$this->assertNull( $termLookup->getPrefetchedTerm( $q116, 'description', 'en' ), 'A term that was never checked should yield null' );
 	}
 
 	/**

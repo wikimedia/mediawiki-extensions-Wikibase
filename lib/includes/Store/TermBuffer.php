@@ -1,8 +1,9 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * A service interface for buffering terms.
@@ -36,6 +37,6 @@ interface TermBuffer {
 	 * @return string|false|null The term, or false of that term is known to not exist,
 	 *         or null if the term was not yet requested via prefetchTerms().
 	 */
-	public function getPrefetechedTerm( EntityId $entityId, $termType, $languageCode );
+	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode );
 
 }
