@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_5c4a71c9",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-16T10:46:43Z",
+      "side": 1,
+      "message": "Maybe add a comment explaining this.",
+      "revId": "ba21ee9a66ffd68d4b97416987e37b8b9593e69a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
