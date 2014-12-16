@@ -54,6 +54,16 @@ class EntityViewFactory {
 	private $siteLinkGroups;
 
 	/**
+	 * @var string[]
+	 */
+	private $specialSiteLinkGroups;
+
+	/**
+	 * @var array
+	 */
+	private $badgeItems;
+
+	/**
 	 * @param EntityIdFormatterFactory $idFormatterFactory
 	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
 	 * @param EntityLookup $entityLookup
@@ -64,7 +74,9 @@ class EntityViewFactory {
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
 		EntityLookup $entityLookup,
 		SiteStore $siteStore,
-		array $siteLinkGroups
+		array $siteLinkGroups,
+		array $specialSiteLinkGroups,
+		array $badgeItems
 	) {
 		$this->checkOutputFormat( $idFormatterFactory->getOutputFormat() );
 
@@ -74,6 +86,8 @@ class EntityViewFactory {
 		$this->entityLookup = $entityLookup;
 		$this->siteStore = $siteStore;
 		$this->siteLinkGroups = $siteLinkGroups;
+		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
+		$this->badgeItems = $badgeItems;
 	}
 
 	/**
@@ -120,6 +134,8 @@ class EntityViewFactory {
 					$this->siteStore->getSites(),
 					$this->sectionEditLinkGenerator,
 					$this->entityLookup,
+					$this->badgeItems,
+					$this->specialSiteLinkGroups,
 					$language->getCode()
 				);
 

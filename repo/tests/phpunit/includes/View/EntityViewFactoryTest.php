@@ -61,6 +61,8 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 			$this->getSnakFormatterFactory(),
 			$this->getMock( 'Wikibase\Lib\Store\EntityLookup' ),
 			$this->getSiteStore(),
+			array(),
+			array(),
 			array()
 		);
 	}
