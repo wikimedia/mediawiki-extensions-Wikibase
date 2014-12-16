@@ -26,32 +26,6 @@ use Wikibase\Repo\View\SiteLinksView;
  */
 class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
-	private $settings = array(
-		'specialSiteLinkGroups' => array( 'special group' ),
-		'badgeItems' => array(
-			'Q42' => 'wb-badge-featuredarticle',
-			'Q12' => 'wb-badge-goodarticle'
-		)
-	);
-
-	protected function setUp() {
-		parent::setUp();
-		$this->switchSettings();
-	}
-
-	protected function tearDown() {
-		parent::tearDown();
-		$this->switchSettings();
-	}
-
-	private function switchSettings() {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		foreach ( $this->settings as $name => $value ) {
-			$this->settings[$name] = $settings->getSetting( $name );
-			$settings->setSetting( $name, $value );
-		}
-	}
-
 	/**
 	 * @dataProvider getHtmlProvider
 	 */
@@ -213,10 +187,16 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	 * @return SiteLinksView
 	 */
 	private function getSiteLinksView() {
+
 		return new SiteLinksView(
 			$this->newSiteList(),
 			$this->getSectionEditLinkGeneratorMock(),
 			$this->getEntityLookupMock(),
+			array(
+				'Q42' => 'wb-badge-featuredarticle',
+				'Q12' => 'wb-badge-goodarticle'
+			),
+			array( 'special group' ),
 			'en'
 		);
 	}
