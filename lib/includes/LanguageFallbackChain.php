@@ -39,6 +39,23 @@ class LanguageFallbackChain {
 	}
 
 	/**
+	 * Return language codes to use when fetching entries from the database.
+	 *
+	 * @see LanguageWithConversion::getFetchLanguageCode
+	 *
+	 * @return string[]
+	 */
+	public function getFetchLanguageCodes() {
+		$codes = array();
+
+		foreach ( $this->chain as $language ) {
+			$codes[] = $language->getFetchLanguageCode();
+		}
+
+		return $codes;
+	}
+
+	/**
 	 * Try to fetch the best value in a multilingual data array.
 	 *
 	 * @param string[]|array[] $data Multilingual data with language codes as keys

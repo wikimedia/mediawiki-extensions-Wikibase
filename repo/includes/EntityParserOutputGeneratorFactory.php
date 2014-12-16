@@ -132,11 +132,9 @@ class EntityParserOutputGeneratorFactory {
 	 * @return LanguageFallbackChain
 	 */
 	private function getLanguageFallbackChain( $languageCode ) {
-		// @fixme inject User
-		$context = RequestContext::getMain();
-
-		return $this->languageFallbackChainFactory->newFromUserAndLanguageCodeForPageView(
-			$context->getUser(),
+		// Language fallback must depend ONLY on the target language,
+		// so we don't confuse the parser cache with user specific HTML.
+		return $this->languageFallbackChainFactory->newFromLanguageCode(
 			$languageCode
 		);
 	}
