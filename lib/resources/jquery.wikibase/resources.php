@@ -49,9 +49,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.menu',
 				'jquery.ui.TemplatedWidget',
-				'wikibase.datamodel',
 				'wikibase.templates',
-				'wikibase.utilities',
 			),
 		),
 
