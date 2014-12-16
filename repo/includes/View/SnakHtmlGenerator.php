@@ -36,14 +36,21 @@ class SnakHtmlGenerator {
 	protected $entityTitleLookup;
 
 	/**
+	 * @var string
+	 */
+	private $languageCode;
+
+	/**
 	 * @param SnakFormatter $snakFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param $languageCode $languageCode
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleLookup $entityTitleLookup,
+		$languageCode
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
 				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
@@ -53,6 +60,7 @@ class SnakHtmlGenerator {
 
 		$this->snakFormatter = $snakFormatter;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->languageCode = $languageCode;
 	}
 
 	/**
@@ -98,8 +106,11 @@ class SnakHtmlGenerator {
 		$key = $propertyId->getSerialization();
 		$propertyLabel = $key;
 		if ( isset( $entityInfo[$key] ) && !empty( $entityInfo[$key]['labels'] ) ) {
-			$entityInfoLabel = reset( $entityInfo[$key]['labels'] );
-			$propertyLabel = $entityInfoLabel['value'];
+			$languageCode = $this->languageCode;
+
+			if ( isset( $entityInfo[$key]['labels'][$languageCode] ) ) {
+				$propertyLabel = $entityInfo[$key]['labels'][$languageCode]['value'];
+			}
 		}
 
 		// @todo use EntityIdHtmlLinkFormatter here

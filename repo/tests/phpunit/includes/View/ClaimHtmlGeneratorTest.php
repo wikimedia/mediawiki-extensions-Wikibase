@@ -85,7 +85,8 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$entityTitleLookup,
+			'en'
 		);
 
 		$claimHtmlGenerator = new ClaimHtmlGenerator(

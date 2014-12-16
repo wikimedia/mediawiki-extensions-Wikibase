@@ -127,8 +127,11 @@ class ClaimsView {
 		$key = $propertyId->getSerialization();
 		$propertyLabel = $key;
 		if ( isset( $entityInfo[$key] ) && !empty( $entityInfo[$key]['labels'] ) ) {
-			$entityInfoLabel = reset( $entityInfo[$key]['labels'] );
-			$propertyLabel = $entityInfoLabel['value'];
+			$languageCode = $this->languageCode;
+
+			if ( isset( $entityInfo[$key]['labels'][$languageCode] ) ) {
+				$propertyLabel = $entityInfo[$key]['labels'][$languageCode]['value'];
+			}
 		}
 
 		$propertyLink = Linker::link(
