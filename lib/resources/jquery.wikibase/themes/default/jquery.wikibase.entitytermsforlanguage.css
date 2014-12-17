@@ -1,0 +1,106 @@
+/**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.wikibase-entitytermsforlanguage-language {
+	width: 25%;
+	word-wrap: break-word;
+	padding-left: 10px;
+	border-left: 1px solid #C9C9C9;
+}
+
+.wikibase-entitytermsforlanguage-label,
+.wikibase-entitytermsforlanguage-description,
+.wikibase-entitytermsforlanguage-aliases {
+	width: 75%;
+	word-wrap: break-word;
+	padding-left: 10px;
+}
+
+.wikibase-entitytermsforlanguage tr td:first-child + td + td {
+	width: 25%;
+}
+
+.wikibase-entitytermsforlanguage td {
+	border-top: 1px solid #C9C9C9;
+}
+
+.wikibase-entitytermsforlanguage td:last-child {
+	padding-left: 10px;
+}
+
+.wikibase-entitytermsforlanguage-label {
+	padding: 10px;
+}
+
+.wikibase-entitytermsforlanguage .wikibase-entitytermsforlanguage-label input,
+.wikibase-entitytermsforlanguage .wikibase-entitytermsforlanguage-description input {
+	font-family: inherit;
+	width: 100%;
+}
+
+.wikibase-entitytermsforlanguage .wikibase-descriptionview .wikibase-descriptionview-container {
+	padding-left: 0;
+}
+
+.wikibase-entitytermsforlanguage .wikibase-descriptionview .wikibase-descriptionview-text {
+	line-height: 1.4;
+	padding-right: 0;
+}
+
+.wikibase-entitytermsforlanguage .wikibase-labelview,
+.wikibase-entitytermsforlanguage .wikibase-descriptionview,
+.wikibase-entitytermsforlanguage .wikibase-aliasesview {
+	display: block;
+	float: none;
+	margin-top: 0;
+	padding: 10px;
+	width: auto;
+}
+
+.wikibase-entitytermsforlanguage .wikibase-aliasesview .wikibase-aliasesview-container {
+	display: inline-block !important;
+	padding-left: 0;
+	padding-right: 0;
+	width: 100%;
+}
+
+.wikibase-entitytermsforlanguage.wb-edit .wikibase-aliasesview-list {
+	font-size: 84%;
+}
+
+.wikibase-entitytermsforlanguage.wb-edit .wikibase-aliasesview-list * {
+	font-size: 100%;
+}
+
+.wikibase-entitytermsforlanguage.wb-edit .wikibase-labelview,
+.wikibase-entitytermsforlanguage.wb-edit .wikibase-descriptionview,
+.wikibase-entitytermsforlanguage.wb-edit .wikibase-aliasesview {
+	padding: 9px 8px 9px 7px;
+}
+
+.wikibase-entitytermsforlanguage .wb-error {
+	background-color: #FFDFC9;
+}
+
+/* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
+.wikibase-entitytermsforlanguage .wb-editsection {
+	width: 18em;
+	position: static; /* clear absolute positioning */
+	float: none; /* overwrite edit section's float: right */
+	padding: 0;
+	margin-left: 0; /* reset edit section's margin which is set in the toolbar group instead;
+	                applying margin to the edit section cell should not have any effect at all */
+}
+
+.wikibase-entitytermsforlanguage .wb-editsection .wikibase-toolbar {
+	width: 18em; /* additionally assign width to toolbar to enforce width in no-JS version */
+}
+
+.wikibase-entitytermsforlanguage .wb-editsection .wikibase-toolbar .wikibase-toolbar {
+	margin-left: 1px; /* even out table cell's right border */
+}
+
+.wikibase-entitytermsforlanguage .wb-editsection .wikibase-toolbar .wikibase-toolbar {
+	margin-left: 0; /* do not apply margin to nested toolbar groups */
+}
