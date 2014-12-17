@@ -21,7 +21,7 @@ version 2.0 of this package:
 
 ## Release notes
 
-### 2.0.2 (dev)
+### 2.0.2 (2014-12-17)
 
 #### Bugfixes
 * Fixed parameter order when instantiating `dataValues.UnUnserializableValue` in `SnakSerializer`.
