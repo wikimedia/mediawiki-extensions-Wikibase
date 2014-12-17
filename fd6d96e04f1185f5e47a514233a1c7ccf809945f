@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_076b32b6",
+        "filename": "lib/resources/jquery.wikibase/resources.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-17T17:10:03Z",
+      "side": 1,
+      "message": "This is the first time we are using this dependency. Is there no other way? I wonder how it was possible to avoid it in all the other places that work with directions.",
+      "revId": "fd6d96e04f1185f5e47a514233a1c7ccf809945f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
