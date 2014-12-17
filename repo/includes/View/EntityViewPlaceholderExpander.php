@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\UserLanguageLookup;
+use Wikibase\Lib\UserLanguageLookup;
 
 /**
  * Utility for expanding the placeholders left in the HTML by EntityView.

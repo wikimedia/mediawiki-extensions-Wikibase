@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use User;
 
 /**
- * @covers Wikibase\UserLanguageLookup
+ * @covers Wikibase\Repo\BabelUserLanguageLookup
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -14,7 +14,7 @@ use User;
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
-class UserLanguageLookupTest extends \PHPUnit_Framework_TestCase {
+class BabelUserLanguageLookupTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param string $subject
@@ -55,7 +55,7 @@ class UserLanguageLookupTest extends \PHPUnit_Framework_TestCase {
 		$user->setOption( 'language', $usersLanguage );
 		// Not a real option, just to manipulate the double class
 		$user->setOption( 'babelLanguages', $babelLanguages );
-		$userLanguageLookup = new UserLanguageLookupDouble( $user );
+		$userLanguageLookup = new BabelUserLanguageLookupDouble( $user );
 
 		$this->assertEquals( $allExpected, array_values(
 			$userLanguageLookup->getAllUserLanguages( $user ) ), $message . '1' );

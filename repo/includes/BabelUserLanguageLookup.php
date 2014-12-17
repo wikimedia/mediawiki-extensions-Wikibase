@@ -1,8 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo;
 
 use User;
+use Wikibase\Utils;
+use Wikibase\Lib\UserLanguageLookup;
 
 /**
  * Service for looking up the languages understood by a user.
@@ -16,7 +18,7 @@ use User;
  * @author Thiemo Mättig
  * @author Marius Hoch
  */
-class UserLanguageLookup {
+class BabelUserLanguageLookup implements UserLanguageLookup {
 
 	/**
 	 * Local caching since calling the Babel extension can be expensive.

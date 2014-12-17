@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use User;
-use Wikibase\UserLanguageLookup;
+use Wikibase\Repo\BabelUserLanguageLookup;
 
 /**
  * Double for the PHPUnit test that overrides the only method that depends on the Babel extension
@@ -12,7 +12,7 @@ use Wikibase\UserLanguageLookup;
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
-class UserLanguageLookupDouble extends UserLanguageLookup {
+class BabelUserLanguageLookupDouble extends BabelUserLanguageLookup {
 
 	protected function getBabelLanguages( User $user ) {
 		// Not a real option, just to manipulate the double class
