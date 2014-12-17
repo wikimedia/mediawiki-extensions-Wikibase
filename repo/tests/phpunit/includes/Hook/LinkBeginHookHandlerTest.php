@@ -11,6 +11,7 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\TermLookup;
+use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\Hook\LinkBeginHookHandler;
 use Wikibase\Repo\Store\PageEntityIdLookup;
 
@@ -74,6 +75,20 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
+	}
+
+	public function testDoOnLinkBegin_overrideSpecialNewItemLink() {
+		$contextTitle = Title::newFromText( 'Special:Recentchanges' );
+		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
+
+		$title = Title::makeTitle( NS_MAIN, 'NewItem' );
+		$html = $title->getFullText();
+		$out = $this->getOutputPage( $contextTitle );
+		$attribs = array();
+
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $attribs, $out );
+
+		$this->assertContains( 'Special:NewItem', $html );
 	}
 
 	public function testDoOnLinkBegin_nonEntityTitleLink() {
@@ -198,6 +213,15 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		return $termLookup;
 	}
 
+	private function getEntityNamespaceLookup() {
+		$entityNamespaces = array(
+			'wikibase-item' => 0,
+			'wikibase-property' => 102
+		);
+
+		return new EntityNamespaceLookup( $entityNamespaces );
+	}
+
 	private function getLinkBeginHookHandler() {
 		$languageFallback = new LanguageFallbackChain( array(
 			LanguageWithConversion::factory( 'de-ch' ),
@@ -208,6 +232,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		return new LinkBeginHookHandler(
 			$this->getPageEntityIdLookup(),
 			$this->getTermLookup(),
+			$this->getEntityNamespaceLookup(),
 			$languageFallback,
 			Language::factory( 'en' )
 		);

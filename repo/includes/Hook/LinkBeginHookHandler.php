@@ -5,12 +5,15 @@ namespace Wikibase\Repo\Hook;
 use DummyLinker;
 use Html;
 use Language;
+use Linker;
 use OutputPage;
 use RequestContext;
+use SpecialPageFactory;
 use Title;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\TermLookup;
+use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\Store\PageEntityIdLookup;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -32,6 +35,11 @@ class LinkBeginHookHandler {
 	private $termLookup;
 
 	/**
+	 * @var EntityNamespaceLookup
+	 */
+	private $entityNamespaceLookup;
+
+	/**
 	 * @var LanguageFallbackChain
 	 */
 	private $languageFallback;
@@ -45,15 +53,19 @@ class LinkBeginHookHandler {
 	 * @return LinkBeginHookHandler
 	 */
 	private static function newFromGlobalState() {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$context = RequestContext::getMain();
 
-		$entityIdLookup = WikibaseRepo::getDefaultInstance()->getPageEntityIdLookup();
-		$termLookup = WikibaseRepo::getDefaultInstance()->getTermLookup();
-
-		$languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $context );
 
-		return new self( $entityIdLookup, $termLookup, $languageFallbackChain, $context->getLanguage() );
+		return new self(
+			$wikibaseRepo->getPageEntityIdLookup(),
+			$wikibaseRepo->getTermLookup(),
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$languageFallbackChain,
+			$context->getLanguage()
+		);
 	}
 
 	/**
@@ -84,6 +96,7 @@ class LinkBeginHookHandler {
 	/**
 	 * @param PageEntityIdLookup $entityIdLookup
 	 * @param TermLookup $termLookup
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param LanguageFallbackChain $languageFallback
 	 * @param Language $pageLanguage
 	 *
@@ -93,11 +106,13 @@ class LinkBeginHookHandler {
 	public function __construct(
 		PageEntityIdLookup $entityIdLookup,
 		TermLookup $termLookup,
+		EntityNamespaceLookup $entityNamespaceLookup,
 		LanguageFallbackChain $languageFallback,
 		Language $pageLanguage
 	) {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->termLookup = $termLookup;
+		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->languageFallback = $languageFallback;
 		$this->pageLanguage = $pageLanguage;
 	}
@@ -109,17 +124,28 @@ class LinkBeginHookHandler {
 	 * @param OutputPage $out
 	 */
 	public function doOnLinkBegin( Title $target, &$html, array &$customAttribs, OutputPage $out ) {
-		if ( !$target->exists() ) {
-			// The link points to a non-existing item.
-			return;
-		}
-
 		$currentTitle = $out->getTitle();
 
 		if ( $currentTitle === null || !$currentTitle->isSpecialPage() ) {
 			// Note: this may not work right with special page transclusion. If $out->getTitle()
 			// doesn't return the transcluded special page's title, the transcluded text will
 			// not have entity IDs resolved to labels.
+			return;
+		}
+
+		if ( $this->entityNamespaceLookup->isEntityNamespace( $target->getNamespace() ) ) {
+			$targetText = $target->getText();
+
+			if ( SpecialPageFactory::exists( $targetText ) ) {
+				$target = Title::makeTitle( NS_SPECIAL, $targetText );
+				$html = Linker::linkKnown( $target );
+
+				return;
+			}
+		}
+
+		if ( !$target->exists() ) {
+			// The link points to a non-existing item.
 			return;
 		}
 
