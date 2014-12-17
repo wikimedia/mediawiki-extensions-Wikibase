@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangesTable;
-use Wikibase\Client\Store\EntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
@@ -84,7 +84,7 @@ class MockClientStore implements ClientStore {
 	/**
 	 * @see ClientStore::getEntityIdLookup
 	 *
-	 * @return EntityIdLookup
+	 * @return \Wikibase\Store\EntityIdLookup
 	 */
 	public function getEntityIdLookup() {
 		// FIXME: Incomplete

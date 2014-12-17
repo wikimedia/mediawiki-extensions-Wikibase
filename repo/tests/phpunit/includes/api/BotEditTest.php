@@ -33,24 +33,15 @@ class BotEditTest extends WikibaseApiTestCase {
 
 	private static $hasSetup;
 
-	/**
-	 * @var TestUser
-	 */
-	private static $wbBotUser;
-
 	protected function setUp() {
 		parent::setUp();
 
-		if ( !isset( self::$wbBotUser ) ) {
-			self::$wbBotUser = new TestUser(
-				'Apitestbot',
-				'Api Test Bot',
-				'api_test_bot@example.com',
-				array( 'bot' )
-			);
-		}
-
-		ApiTestCase::$users['wbbot'] = self::$wbBotUser;
+		ApiTestCase::$users['wbbot'] = new TestUser(
+			'Apitestbot',
+			'Api Test Bot',
+			'api_test_bot@example.com',
+			array( 'bot' )
+		);
 
 		if( !isset( self::$hasSetup ) ){
 			$this->initTestEntities( array( 'Empty' ) );
@@ -156,13 +147,13 @@ class BotEditTest extends WikibaseApiTestCase {
 
 		$this->assertNotNull( $change, 'no change matching ID ' . $myid . ' found in recentchanges feed!' );
 
-		if( array_key_exists( 'new', $expected ) ){
+		if ( array_key_exists( 'new', $expected ) ){
 			$this->assertTrue( $expected['new'] == array_key_exists( 'new', $change ),
-				"Must" . ( $expected['new'] ? '' : ' not ' ) . "have a 'new' key in the rc-entry of the result from the API" );
+				"Must " . ( $expected['new'] ? '' : 'not ' ) . "have a 'new' key in the rc-entry of the result from the API" );
 		}
-		if( array_key_exists( 'bot', $expected ) ){
+		if ( array_key_exists( 'bot', $expected ) ){
 			$this->assertTrue( $expected['bot'] == array_key_exists( 'bot', $change ),
-				"Must" . ( $expected['bot'] ? '' : ' not ' ) . "have a 'bot' key in the rc-entry of the result from the API" );
+				"Must " . ( $expected['bot'] ? '' : 'not ' ) . "have a 'bot' key in the rc-entry of the result from the API" );
 		}
 	}
 

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Hook;
 
 use DummyLinker;
-use Html;
 use Language;
 use OutputPage;
 use RequestContext;
@@ -11,7 +10,6 @@ use Title;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\TermLookup;
-use Wikibase\Repo\Store\PageEntityIdLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -22,7 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
 class LinkBeginHookHandler {
 
 	/**
-	 * @var PageEntityIdLookup
+	 * @var EntityIdLookup
 	 */
 	private $entityIdLookup;
 
@@ -82,7 +80,7 @@ class LinkBeginHookHandler {
 	}
 
 	/**
-	 * @param PageEntityIdLookup $entityIdLookup
+	 * @param EntityIdLookup $entityIdLookup
 	 * @param TermLookup $termLookup
 	 * @param LanguageFallbackChain $languageFallback
 	 * @param Language $pageLanguage
@@ -91,7 +89,7 @@ class LinkBeginHookHandler {
 	 *        But LabelLookup does not support descriptions at the moment.
 	 */
 	public function __construct(
-		PageEntityIdLookup $entityIdLookup,
+		EntityIdLookup $entityIdLookup,
 		TermLookup $termLookup,
 		LanguageFallbackChain $languageFallback,
 		Language $pageLanguage

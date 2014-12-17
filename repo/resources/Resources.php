@@ -177,8 +177,6 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarcontroller',
 				'jquery.wikibase.wbtooltip',
 				'jquery.cookie',
-				'jquery.wikibase.claimgrouplabelscroll',
-				'jquery.wikibase.sitelinkgroupview',
 				'wikibase.api.getLocationAgnosticMwApi',
 				'wikibase.dataTypeStore',
 				'wikibase.entityChangers.EntityChangersFactory',

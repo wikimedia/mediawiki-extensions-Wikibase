@@ -4,7 +4,7 @@ namespace Wikibase\Client\Store\Sql;
 
 use LoadBalancer;
 use Title;
-use Wikibase\Client\Store\EntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
@@ -42,6 +42,8 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 	}
 
 	/**
+	 * @see EntityIdLookup::getEntityIds
+	 *
 	 * @param Title[] $titles
 	 *
 	 * @return EntityId[]
@@ -76,4 +78,16 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 		return $entityIds;
 	}
 
+	/**
+	 * @see EntityIdLookup::getEntityIdForTitle
+	 *
+	 * @param Title $title
+	 *
+	 * @return EntityId|null
+	 */
+	public function getEntityIdForTitle( Title $title ) {
+		$entityIds = $this->getEntityIds( array( $title ) );
+
+		return reset( $entityIds ) ?: null;
+	}
 }

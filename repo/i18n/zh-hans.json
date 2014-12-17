@@ -437,6 +437,7 @@
 	"apihelp-wbsetclaim-param-claim": "声称序列化",
 	"apihelp-wbsetclaim-example-1": "设置声称带指定ID至属性P1带“City”的字符串值",
 	"apihelp-wbsetclaimvalue-description": "设置Wikibase声称的值。",
+	"apihelp-wbsetclaimvalue-param-snaktype": "snak类型",
 	"apihelp-wbsetdescription-param-language": "说明的语言",
 	"apihelp-wbsetlabel-param-language": "标签语言",
 	"apihelp-wbsetlabel-param-value": "标签值",
