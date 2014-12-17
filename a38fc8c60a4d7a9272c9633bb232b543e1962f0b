@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_c76e9a93",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-17T17:30:58Z",
+      "side": 1,
+      "message": "TemplateRegistry::getDefaultFactory() would be nice.",
+      "parentUuid": "0e6cb3ef_a416044c",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_e4339cf1",
         "filename": "repo/includes/Template/TemplateFactory.php",
         "patchSetId": 1
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_075572c5",
+        "filename": "repo/includes/Template/TemplateFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-17T17:30:58Z",
+      "side": 1,
+      "message": "Why does the factory have a render function?\nThis shorthand discourages re-using the template object. \nBut at least some templates are called a LOT, and should be re-used.",
+      "parentUuid": "0e6cb3ef_447128a6",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_c4b3f84a",
         "filename": "repo/includes/TemplateRegistry.php",
         "patchSetId": 1
@@ -81,6 +117,40 @@
       "writtenOn": "2014-12-17T15:54:23Z",
       "side": 1,
       "message": "Note to self: Add a constructor to TemplateRegistry.",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_47292a35",
+        "filename": "repo/includes/View/ClaimHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-17T17:30:58Z",
+      "side": 1,
+      "message": "We should really re-use the Template object here.",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_07233255",
+        "filename": "repo/includes/View/SiteLinksView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-17T17:30:58Z",
+      "side": 1,
+      "message": "Please re-use the Template object",
       "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
