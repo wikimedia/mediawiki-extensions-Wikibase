@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\LabelLookup;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class EntityIdLabelFormatter extends EntityIdFormatter {
+class EntityIdLabelFormatter extends EntityIdFormatterBase {
 
 	/**
 	 * Whether we should try to find the label of the entity
