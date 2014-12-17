@@ -66,7 +66,7 @@ use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\DummyChangeTransmitter;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\Store\PageEntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -283,9 +283,9 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return PageEntityIdLookup
+	 * @return EntityIdLookup
 	 */
-	public function getPageEntityIdLookup() {
+	public function getEntityIdLookup() {
 		return $this->getEntityContentFactory();
 	}
 
