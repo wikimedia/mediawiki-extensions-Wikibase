@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use FauxRequest;
 use HashBagOStuff;
+use IContextSource;
 use RequestContext;
 use Status;
 use Title;
@@ -16,7 +17,9 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntity;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\EditEntity
@@ -47,27 +50,18 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	protected function setUp() {
-		global $wgGroupPermissions, $wgHooks;
+		global $wgGroupPermissions;
 
 		parent::setUp();
 
 		$this->permissions = $wgGroupPermissions;
 		$this->userGroups = array( 'user' );
-
-		if ( empty( $wgHooks['EditFilterMergedContent'] ) ) {
-			// This fake ensures EditEntity::runEditFilterHooks is run and runtime errors are found
-			$wgHooks['EditFilterMergedContent'] = array( null );
-		}
 	}
 
 	protected function tearDown() {
-		global $wgGroupPermissions, $wgHooks;
+		global $wgGroupPermissions;
 
 		$wgGroupPermissions = $this->permissions;
-
-		if ( $wgHooks['EditFilterMergedContent'] === array( null ) ) {
-			unset( $wgHooks['EditFilterMergedContent'] );
-		}
 
 		parent::tearDown();
 	}
@@ -314,6 +308,34 @@ class EditEntityTest extends \MediaWikiTestCase {
 				$this->assertArrayEquals( $expectedValue, $actualValue, false, true );
 			}
 		}
+	}
+
+	public function testEditFilterMergedContentHook_withNewEntity() {
+		$hooks = array_merge(
+			$GLOBALS['wgHooks'],
+			array( 'EditFilterMergedContent' => array() )
+		);
+
+		$testCase = $this;
+
+		$hooks['EditFilterMergedContent'][] = function( IContextSource $context ) use( $testCase ) {
+			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
+			$page = $context->getWikiPage();
+			$title = $page->getTitle();
+			$contentModel = $title->getContentModel();
+
+			$testCase->assertTrue( $entityContentFactory->isEntityContentModel( $contentModel ) );
+		};
+
+		$this->setMwGlobals( array(
+			'wgHooks' => $hooks
+		) );
+
+		$item = Item::newEmpty();
+		$item->setLabel( 'en', 'omg' );
+		$editEntity = $this->makeEditEntity( $this->makeMockRepo(), $item );
+		$editEntity->attemptSave( "Testing", EDIT_NEW, false );
 	}
 
 	private function fingerprintToPartialArray( Fingerprint $fingerprint ) {
