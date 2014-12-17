@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_18b87370",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-17T22:23:27Z",
+      "side": 1,
+      "message": "Why not MediaWikiTestCase::mergeMwGlobalArrayValue ?",
+      "revId": "6a86d69ab5ed0dc92dc5aa19d87706dc6e33f974",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
