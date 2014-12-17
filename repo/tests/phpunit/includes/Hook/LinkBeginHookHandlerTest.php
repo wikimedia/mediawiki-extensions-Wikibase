@@ -12,7 +12,7 @@ use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Repo\Hook\LinkBeginHookHandler;
-use Wikibase\Repo\Store\PageEntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers Wikibase\Repo\Hook\LinkBeginHookHandler
@@ -142,10 +142,10 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return PageEntityIdLookup
+	 * @return EntityIdLookup
 	 */
 	private function getPageEntityIdLookup() {
-		$entityIdLookup = $this->getMock( 'Wikibase\Repo\Store\PageEntityIdLookup' );
+		$entityIdLookup = $this->getMock( 'Wikibase\Store\EntityIdLookup' );
 
 		$entityIdLookup->expects( $this->any() )
 			->method( 'getPageEntityId' )
