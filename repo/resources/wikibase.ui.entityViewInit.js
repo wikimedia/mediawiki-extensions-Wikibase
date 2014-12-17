@@ -33,33 +33,35 @@
 		// The toolbars (defined per jquery.wikibase.toolbarcontroller.definition) that should
 		// be initialized:
 		var toolbarControllerConfig = {
-			addtoolbar: [
-				'claimgrouplistview',
-				'claimlistview',
-				'claim-qualifiers-snak',
-				'references',
-				'referenceview-snakview'
-			],
-			edittoolbar: [
-				'aliasesview',
-				'statementview',
-				'descriptionview',
-				'labelview',
-				'fingerprintgroupview',
-				'referenceview',
-				'sitelinkgroupview'
-			],
-			removetoolbar: [
-				'claim-qualifiers-snak',
-				'referenceview-snakview-remove',
-				'sitelinkgroupview-sitelinkview'
-			],
-			movetoolbar: [
-				'claimlistview-claimview',
-				'claim-qualifiers-snak',
-				'statementview-referenceview',
-				'referenceview-snakview'
-			]
+			toolbars: {
+				addtoolbar: [
+					'claimgrouplistview',
+					'claimlistview',
+					'claim-qualifiers-snak',
+					'references',
+					'referenceview-snakview'
+				],
+				edittoolbar: [
+					'aliasesview',
+					'statementview',
+					'descriptionview',
+					'labelview',
+					'fingerprintgroupview',
+					'referenceview',
+					'sitelinkgroupview'
+				],
+				removetoolbar: [
+					'claim-qualifiers-snak',
+					'referenceview-snakview-remove',
+					'sitelinkgroupview-sitelinkview'
+				],
+				movetoolbar: [
+					'claimlistview-claimview',
+					'claim-qualifiers-snak',
+					'statementview-referenceview',
+					'referenceview-snakview'
+				]
+			}
 		};
 
 		$entityview
