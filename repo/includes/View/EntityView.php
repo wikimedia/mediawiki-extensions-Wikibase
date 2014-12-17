@@ -68,15 +68,15 @@ abstract class EntityView {
 		FingerprintView $fingerprintView,
 		ClaimsView $claimsView,
 		Language $language,
-		$editable  = true
+		$editable = true
 	) {
+		$this->templateFactory = $templateFactory;
 		$this->fingerprintView = $fingerprintView;
 		$this->claimsView = $claimsView;
 		$this->language = $language;
 		$this->editable = $editable;
 
 		$this->textInjector = new TextInjector();
-		$this->templateFactory = $templateFactory;
 	}
 
 	/**

@@ -55,8 +55,8 @@ class ClaimHtmlGenerator {
 		TemplateFactory $templateFactory,
 		SnakHtmlGenerator $snakHtmlGenerator
 	) {
-		$this->snakHtmlGenerator = $snakHtmlGenerator;
 		$this->templateFactory = $templateFactory;
+		$this->snakHtmlGenerator = $snakHtmlGenerator;
 	}
 
 	/**

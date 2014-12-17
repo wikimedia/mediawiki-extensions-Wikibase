@@ -56,6 +56,12 @@ class EntityViewFactory {
 	private $dataTypeFactory;
 
 	/**
+	 *
+	 * @var TemplateFactory
+	 */
+	private $templateFactory;
+
+	/**
 	 * @var string[]
 	 */
 	private $siteLinkGroups;
@@ -66,15 +72,9 @@ class EntityViewFactory {
 	private $specialSiteLinkGroups;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $badgeItems;
-
-	/**
-	 *
-	 * @var TemplateFactory
-	 */
-	private $templateFactory;
 
 	/**
 	 * @param EntityIdFormatterFactory $idFormatterFactory
@@ -83,6 +83,9 @@ class EntityViewFactory {
 	 * @param SiteStore $siteStore
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory
+	 * @param string[] $siteLinkGroups
+	 * @param string[] $specialSiteLinkGroups
+	 * @param string[] $badgeItems
 	 */
 	public function __construct(
 		EntityIdFormatterFactory $idFormatterFactory,
@@ -102,17 +105,18 @@ class EntityViewFactory {
 		$this->entityLookup = $entityLookup;
 		$this->siteStore = $siteStore;
 		$this->dataTypeFactory = $dataTypeFactory;
+		$this->templateFactory = $templateFactory;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
-		$this->templateFactory = $templateFactory;
-		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator(
-			$this->templateFactory
-		);
+
+		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator( $this->templateFactory );
 	}
 
 	/**
 	 * @param string $format
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	private function checkOutputFormat( $format ) {
 		if ( $format !== SnakFormatter::FORMAT_HTML

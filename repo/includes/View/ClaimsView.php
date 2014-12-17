@@ -49,10 +49,10 @@ class ClaimsView {
 		SectionEditLinkGenerator $sectionEditLinkGenerator,
 		ClaimHtmlGenerator $claimHtmlGenerator
 	) {
+		$this->templateFactory = $templateFactory;
 		$this->propertyIdFormatter = $propertyIdFormatter;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->claimHtmlGenerator = $claimHtmlGenerator;
-		$this->templateFactory = $templateFactory;
 	}
 
 	/**

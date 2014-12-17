@@ -91,13 +91,13 @@ class EntityViewPlaceholderExpander {
 		EntityRevisionLookup $entityRevisionLookup,
 		UserLanguageLookup $userLanguageLookup
 	) {
+		$this->templateFactory = $templateFactory;
 		$this->targetPage = $targetPage;
 		$this->user = $user;
 		$this->uiLanguage = $uiLanguage;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->userLanguageLookup = $userLanguageLookup;
-		$this->templateFactory = $templateFactory;
 	}
 
 	/**

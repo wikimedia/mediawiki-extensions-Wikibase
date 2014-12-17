@@ -28,18 +28,19 @@ class TermBoxView {
 	private $templateFactory;
 
 	/**
-	 * @var SectionEditLinkGenerator
-	 */
-	private $sectionEditLinkGenerator;
-
-	/**
 	 * @var Language
 	 */
 	private $language;
 
+	/**
+	 * @var SectionEditLinkGenerator
+	 */
+	private $sectionEditLinkGenerator;
+
 	public function __construct( TemplateFactory $templateFactory, Language $language ) {
-		$this->language = $language;
 		$this->templateFactory = $templateFactory;
+		$this->language = $language;
+
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator( $templateFactory );
 	}
 
@@ -155,4 +156,5 @@ class TermBoxView {
 			);
 		}
 	}
+
 }

@@ -45,9 +45,9 @@ class FingerprintView {
 		SectionEditLinkGenerator $sectionEditLinkGenerator,
 		$languageCode
 	) {
+		$this->templateFactory = $templateFactory;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->languageCode = $languageCode;
-		$this->templateFactory = $templateFactory;
 	}
 
 	/**

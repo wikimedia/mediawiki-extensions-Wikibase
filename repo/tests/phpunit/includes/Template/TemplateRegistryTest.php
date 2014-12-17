@@ -12,52 +12,51 @@ use Wikibase\Template\TemplateRegistry;
  *
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
+ * @author Thiemo Mättig
  */
 class TemplateRegistryTest extends \MediaWikiTestCase {
 
 	/**
-	 * @dataProvider providerAddTemplate
+	 * @dataProvider templatesProvider
 	 */
-	public function testAddTemplate( $html ) {
-		$registry = new TemplateRegistry();
-		$registry->addTemplate( 'tmpl1', $html );
+	public function testConstructor( $expected ) {
+		$registry = new TemplateRegistry( $expected );
 
-		$this->assertEquals(
-			$registry->getTemplate( 'tmpl1' ),
-			$html
-		);
+		$this->assertEquals( $expected, $registry->getTemplates() );
 	}
-
-	public function providerAddTemplate() {
-		return array(
-			array( '<div>$1</div>' )
-		);
-	}
-
 
 	/**
-	 * @dataProvider providerAddTemplates
+	 * @dataProvider templatesProvider
 	 */
-	public function testAddTemplates( $data ) {
+	public function testAddTemplates( $expected ) {
 		$registry = new TemplateRegistry();
+		$registry->addTemplates( $expected );
 
-		$registry->addTemplates( $data );
-
-		$templates = $registry->getTemplates();
-		foreach( $data as $key => $html ) {
-			$this->assertEquals(
-				$templates[$key],
-				$html
-			);
-		}
+		$this->assertEquals( $expected, $registry->getTemplates() );
 	}
 
-	public function providerAddTemplates() {
+	public function templatesProvider() {
 		return array(
 			array(
 				array( 'tmpl2' => '<div>$1</div>' ),
 				array( 'tmpl3' => '<div><div>$1</div></div>' )
 			)
+		);
+	}
+
+	/**
+	 * @dataProvider templateProvider
+	 */
+	public function testAddTemplate( $expected ) {
+		$registry = new TemplateRegistry();
+		$registry->addTemplate( 'tmpl1', $expected );
+
+		$this->assertEquals( $expected, $registry->getTemplate( 'tmpl1' ) );
+	}
+
+	public function templateProvider() {
+		return array(
+			array( '<div>$1</div>' )
 		);
 	}
 

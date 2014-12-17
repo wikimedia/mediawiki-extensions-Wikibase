@@ -61,6 +61,7 @@ class SiteLinksView {
 	private $languageCode;
 
 	/**
+	 * @param TemplateFactory $templateFactory
 	 * @param SiteList $sites
 	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
 	 * @param EntityLookup $entityLookup
@@ -77,13 +78,13 @@ class SiteLinksView {
 		array $specialSiteLinkGroups,
 		$languageCode
 	) {
+		$this->templateFactory = $templateFactory;
 		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->entityLookup = $entityLookup;
 		$this->badgeItems = $badgeItems;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->languageCode = $languageCode;
-		$this->templateFactory = $templateFactory;
 	}
 
 	/**

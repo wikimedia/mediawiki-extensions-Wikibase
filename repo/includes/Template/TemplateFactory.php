@@ -14,15 +14,16 @@ class TemplateFactory {
 	private $templateRegistry;
 
 	/**
-	 * @param TemplateRegistry $templateRegistry
+	 * @param TemplateRegistry|null $templateRegistry
 	 */
-	public function __construct( TemplateRegistry $templateRegistry ) {
-		$this->templateRegistry = $templateRegistry;
+	public function __construct( TemplateRegistry $templateRegistry = null ) {
+		$this->templateRegistry = $templateRegistry ?: TemplateRegistry::getDefaultInstance();
 	}
 
 	/**
 	 * @param string $key
 	 * @param array $params
+	 *
 	 * @return Template
 	 */
 	public function get( $key, array $params ) {

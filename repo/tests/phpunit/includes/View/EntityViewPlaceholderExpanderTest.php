@@ -13,7 +13,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\View\EntityViewPlaceholderExpander;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\EntityViewPlaceholderExpander
@@ -56,7 +55,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 			->will( $this->returnValue( array( 'de', 'en', 'ru' ) ) );
 
 		return new EntityViewPlaceholderExpander(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			new TemplateFactory(),
 			$title,
 			$user,
 			$language,

@@ -13,7 +13,6 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SiteLinksView;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\SiteLinksView
@@ -190,7 +189,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	private function getSiteLinksView() {
 
 		return new SiteLinksView(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			new TemplateFactory(),
 			$this->newSiteList(),
 			$this->getSectionEditLinkGeneratorMock(),
 			$this->getEntityLookupMock(),
