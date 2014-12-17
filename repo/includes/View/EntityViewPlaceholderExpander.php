@@ -91,13 +91,13 @@ class EntityViewPlaceholderExpander {
 		EntityRevisionLookup $entityRevisionLookup,
 		UserLanguageLookup $userLanguageLookup
 	) {
+		$this->templateFactory = $templateFactory;
 		$this->targetPage = $targetPage;
 		$this->user = $user;
 		$this->uiLanguage = $uiLanguage;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->userLanguageLookup = $userLanguageLookup;
-		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -211,7 +211,7 @@ class EntityViewPlaceholderExpander {
 			return '';
 		}
 
-		$html = $this->templateFactory->renderTpl( 'wb-entity-toc-section',
+		$html = $this->templateFactory->render( 'wb-entity-toc-section',
 			0, // section number, not really used, it seems
 			'wb-terms',
 			wfMessage( 'wikibase-terms' )->inLanguage( $this->uiLanguage )->text()

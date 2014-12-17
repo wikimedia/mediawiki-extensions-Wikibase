@@ -68,15 +68,15 @@ abstract class EntityView {
 		FingerprintView $fingerprintView,
 		ClaimsView $claimsView,
 		Language $language,
-		$editable  = true
+		$editable = true
 	) {
+		$this->templateFactory = $templateFactory;
 		$this->fingerprintView = $fingerprintView;
 		$this->claimsView = $claimsView;
 		$this->language = $language;
 		$this->editable = $editable;
 
 		$this->textInjector = new TextInjector();
-		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -110,7 +110,7 @@ abstract class EntityView {
 
 		$entityId = $entity->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 
-		$html = $this->templateFactory->renderTpl( 'wikibase-entityview',
+		$html = $this->templateFactory->render( 'wikibase-entityview',
 			$entity->getType(),
 			$entityId,
 			$this->language->getCode(),
@@ -211,14 +211,14 @@ if ( $ ) {
 		$i = 1;
 
 		foreach ( $tocSections as $id => $message ) {
-			$tocContent .= $this->templateFactory->renderTpl( 'wb-entity-toc-section',
+			$tocContent .= $this->templateFactory->render( 'wb-entity-toc-section',
 				$i++,
 				$id,
 				wfMessage( $message )->text()
 			);
 		}
 
-		return $this->templateFactory->renderTpl( 'wb-entity-toc',
+		return $this->templateFactory->render( 'wb-entity-toc',
 			wfMessage( 'toc' )->text(),
 			$tocContent
 		);

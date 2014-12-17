@@ -70,7 +70,7 @@ class SpecialGoToLinkedPage extends SpecialItemResolver {
 		} catch ( InvalidArgumentException $ex ) {
 			$itemId = null;
 			$itemString = '';
-                }
+		}
 
 		return array( $site, $itemId, $itemString );
 	}

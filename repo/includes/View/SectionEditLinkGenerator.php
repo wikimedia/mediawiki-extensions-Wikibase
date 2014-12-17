@@ -56,8 +56,8 @@ class SectionEditLinkGenerator {
 		$editUrl = $enabled ? $this->getEditUrl( $specialPageName, $specialPageUrlParams ) : null;
 		$toolbarButton = $this->getToolbarButton( $cssClassSuffix, $message->text(), $editUrl );
 
-		$html = $this->templateFactory->renderTpl( 'wikibase-toolbar-container',
-			$this->templateFactory->renderTpl( 'wikibase-toolbar',
+		$html = $this->templateFactory->render( 'wikibase-toolbar-container',
+			$this->templateFactory->render( 'wikibase-toolbar',
 				'',
 				$toolbarButton
 			)
@@ -93,7 +93,7 @@ class SectionEditLinkGenerator {
 		$editUrl = $enabled ? $this->getEditUrl( $specialPageName, $specialPageUrlParams ) : null;
 		$toolbarButton = $this->getToolbarButton( $cssClassSuffix, $message->text(), $editUrl );
 
-		$html = $this->templateFactory->renderTpl(
+		$html = $this->templateFactory->render(
 			'wikibase-toolbar-container',
 			$toolbarButton
 		);
@@ -132,8 +132,8 @@ class SectionEditLinkGenerator {
 	 */
 	private function getToolbarButton( $cssClassSuffix, $buttonLabel, $editUrl = null ) {
 		if ( $editUrl !== null ) {
-			return $this->templateFactory->renderTpl( 'wikibase-toolbar-bracketed',
-				$this->templateFactory->renderTpl( 'wikibase-toolbar-button',
+			return $this->templateFactory->render( 'wikibase-toolbar-bracketed',
+				$this->templateFactory->render( 'wikibase-toolbar-button',
 					'wikibase-toolbar-button-' . $cssClassSuffix,
 					$editUrl,
 					$buttonLabel

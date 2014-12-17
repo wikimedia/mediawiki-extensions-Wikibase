@@ -56,7 +56,7 @@ class SiteLinksView {
 	private $specialSiteLinkGroups;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $badgeItems;
 
@@ -69,13 +69,13 @@ class SiteLinksView {
 		array $specialSiteLinkGroups,
 		$languageCode
 	) {
+		$this->templateFactory = $templateFactory;
 		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->entityLookup = $entityLookup;
 		$this->badgeItems = $badgeItems;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->languageCode = $languageCode;
-		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -106,8 +106,8 @@ class SiteLinksView {
 			$html .= $this->getHtmlForSiteLinkGroup( $siteLinks, $itemId, $group, $editable );
 		}
 
-		return $this->templateFactory->renderTpl( 'wikibase-sitelinkgrouplistview',
-			$this->templateFactory->renderTpl( 'wb-listview', $html )
+		return $this->templateFactory->render( 'wikibase-sitelinkgrouplistview',
+			$this->templateFactory->render( 'wb-listview', $html )
 		);
 	}
 
@@ -122,12 +122,12 @@ class SiteLinksView {
 	 * @return string
 	 */
 	private function getHtmlForSiteLinkGroup( array $siteLinks, $itemId, $group, $editable ) {
-		return $this->templateFactory->renderTpl( 'wikibase-sitelinkgroupview',
+		return $this->templateFactory->render( 'wikibase-sitelinkgroupview',
 			// TODO: support entity-id as prefix for element IDs.
 			htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES ),
 			wfMessage( 'wikibase-sitelinks-' . $group )->parse(),
 			'', // counter
-			$this->templateFactory->renderTpl( 'wikibase-sitelinklistview',
+			$this->templateFactory->render( 'wikibase-sitelinklistview',
 				$this->getHtmlForSiteLinks(
 					$this->getSiteLinksForTable( $this->getSitesForGroup( $group ), $siteLinks ),
 					$group === 'special'
@@ -254,7 +254,7 @@ class SiteLinksView {
 		// TODO: for non-JS, also set the dir attribute on the link cell;
 		// but do not build language objects for each site since it causes too much load
 		// and will fail when having too much site links
-		return $this->templateFactory->renderTpl( 'wikibase-sitelinkview',
+		return $this->templateFactory->render( 'wikibase-sitelinkview',
 			htmlspecialchars( $siteId ), // ID used in classes
 			$languageCode,
 			'auto',
@@ -273,7 +273,7 @@ class SiteLinksView {
 	private function getHtmlForPage( $siteLink, $site ) {
 		$pageName = $siteLink->getPageName();
 
-		return $this->templateFactory->renderTpl( 'wikibase-sitelinkview-pagename',
+		return $this->templateFactory->render( 'wikibase-sitelinkview-pagename',
 			htmlspecialchars( $site->getPageUrl( $pageName ) ),
 			htmlspecialchars( $pageName ),
 			$this->getHtmlForBadges( $siteLink ),
@@ -288,7 +288,7 @@ class SiteLinksView {
 	 */
 	private function getHtmlForUnknownSiteLink( $siteLink ) {
 		// FIXME: No need for separate template; Use 'wikibase-sitelinkview' template.
-		return $this->templateFactory->renderTpl( 'wikibase-sitelinkview-unknown',
+		return $this->templateFactory->render( 'wikibase-sitelinkview-unknown',
 			htmlspecialchars( $siteLink->getSiteId() ),
 			htmlspecialchars(  $siteLink->getPageName() )
 		);
@@ -333,14 +333,14 @@ class SiteLinksView {
 				$classes .= ' ' . Sanitizer::escapeClass( $this->badgeItems[$serialization] );
 			}
 
-			$html .= $this->templateFactory->renderTpl( 'wb-badge',
+			$html .= $this->templateFactory->render( 'wb-badge',
 				$classes,
 				$this->getTitleForBadge( $badge ),
 				$badge
 			);
 		}
 
-		return $this->templateFactory->renderTpl( 'wikibase-badgeselector', $html );
+		return $this->templateFactory->render( 'wikibase-badgeselector', $html );
 	}
 
 	/**

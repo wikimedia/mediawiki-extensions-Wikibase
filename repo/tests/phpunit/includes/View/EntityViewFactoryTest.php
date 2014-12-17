@@ -7,7 +7,6 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\TemplateRegistry;
 
 /**
  * @licence GNU GPL v2+
@@ -58,7 +57,7 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 			$this->getMock( 'Wikibase\Lib\Store\EntityLookup' ),
 			$this->getSiteStore(),
 			$this->getMock( 'DataTypes\DataTypeFactory' ),
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			new TemplateFactory(),
 			array(),
 			array(),
 			array()

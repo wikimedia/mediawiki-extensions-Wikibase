@@ -45,9 +45,9 @@ class FingerprintView {
 		SectionEditLinkGenerator $sectionEditLinkGenerator,
 		$languageCode
 	) {
+		$this->templateFactory = $templateFactory;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->languageCode = $languageCode;
-		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -66,7 +66,7 @@ class FingerprintView {
 
 		$html .= $this->getHtmlForLabel( $labels, $entityId, $editable );
 		$html .= $this->getHtmlForDescription( $descriptions, $entityId, $editable );
-		$html .= $this->templateFactory->renderTpl( 'wb-entity-header-separator' );
+		$html .= $this->templateFactory->render( 'wb-entity-header-separator' );
 		$html .= $this->getHtmlForAliases( $aliasGroups, $entityId, $editable );
 
 		return $html;
@@ -83,7 +83,7 @@ class FingerprintView {
 		$hasLabel = $labels->hasTermForLanguage( $this->languageCode );
 		$id = 'new';
 		$idInParentheses = '';
-		$editSection = $this->templateFactory->renderTpl( 'wikibase-toolbar-wrapper',
+		$editSection = $this->templateFactory->render( 'wikibase-toolbar-wrapper',
 			$this->getHtmlForEditSection( 'SetLabel', $entityId, $editable )
 		);
 
@@ -93,9 +93,9 @@ class FingerprintView {
 		}
 
 		if ( $hasLabel ) {
-			return $this->templateFactory->renderTpl( 'wikibase-firstHeading',
+			return $this->templateFactory->render( 'wikibase-firstHeading',
 				$id,
-				$this->templateFactory->renderTpl( 'wikibase-labelview',
+				$this->templateFactory->render( 'wikibase-labelview',
 					'',
 					htmlspecialchars( $labels->getByLanguage( $this->languageCode )->getText() ),
 					$idInParentheses,
@@ -103,9 +103,9 @@ class FingerprintView {
 				)
 			);
 		} else {
-			return $this->templateFactory->renderTpl( 'wikibase-firstHeading',
+			return $this->templateFactory->render( 'wikibase-firstHeading',
 				$id,
-				$this->templateFactory->renderTpl( 'wikibase-labelview',
+				$this->templateFactory->render( 'wikibase-labelview',
 					'wb-empty',
 					wfMessage( 'wikibase-label-empty' )->escaped(),
 					$idInParentheses,
@@ -127,13 +127,13 @@ class FingerprintView {
 		$editSection = $this->getHtmlForEditSection( 'SetDescription', $entityId, $editable );
 
 		if ( $hasDescription ) {
-			return $this->templateFactory->renderTpl( 'wikibase-descriptionview',
+			return $this->templateFactory->render( 'wikibase-descriptionview',
 				'',
 				htmlspecialchars( $descriptions->getByLanguage( $this->languageCode )->getText() ),
 				$editSection
 			);
 		} else {
-			return $this->templateFactory->renderTpl( 'wikibase-descriptionview',
+			return $this->templateFactory->render( 'wikibase-descriptionview',
 				'wb-empty',
 				wfMessage( 'wikibase-description-empty' )->escaped(),
 				$editSection
@@ -156,20 +156,20 @@ class FingerprintView {
 			$aliasesHtml = '';
 			$aliases = $aliasGroups->getByLanguage( $this->languageCode )->getAliases();
 			foreach ( $aliases as $alias ) {
-				$aliasesHtml .= $this->templateFactory->renderTpl(
+				$aliasesHtml .= $this->templateFactory->render(
 					'wikibase-aliasesview-list-item',
 					htmlspecialchars( $alias )
 				);
 			}
 
-			return $this->templateFactory->renderTpl( 'wikibase-aliasesview',
+			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->escaped(),
 				$aliasesHtml,
 				$editSection
 			);
 		} else {
-			return $this->templateFactory->renderTpl( 'wikibase-aliasesview',
+			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'wb-empty',
 				wfMessage( 'wikibase-aliases-empty' )->escaped(),
 				'',

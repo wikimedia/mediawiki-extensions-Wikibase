@@ -49,10 +49,10 @@ class ClaimsView {
 		SectionEditLinkGenerator $sectionEditLinkGenerator,
 		ClaimHtmlGenerator $claimHtmlGenerator
 	) {
+		$this->templateFactory = $templateFactory;
 		$this->propertyIdFormatter = $propertyIdFormatter;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->claimHtmlGenerator = $claimHtmlGenerator;
-		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -72,12 +72,12 @@ class ClaimsView {
 			$claimsHtml .= $this->getHtmlForClaimGroup( $claims );
 		}
 
-		$claimgrouplistviewHtml = $this->templateFactory->renderTpl( 'wb-claimgrouplistview', $claimsHtml, '' );
+		$claimgrouplistviewHtml = $this->templateFactory->render( 'wb-claimgrouplistview', $claimsHtml, '' );
 
 		// TODO: Add link to SpecialPage that allows adding a new claim.
 		$sectionHeading = $this->getHtmlForSectionHeading( 'wikibase-statements' );
 		// FIXME: claimgrouplistview should be the topmost claims related template
-		$html = $this->templateFactory->renderTpl( 'wb-claimlistview', $claimgrouplistviewHtml, '', '' );
+		$html = $this->templateFactory->render( 'wb-claimlistview', $claimgrouplistviewHtml, '', '' );
 		return $sectionHeading . $html;
 	}
 
@@ -89,7 +89,7 @@ class ClaimsView {
 	 * @return string
 	 */
 	private function getHtmlForSectionHeading( $heading ) {
-		$html = $this->templateFactory->renderTpl(
+		$html = $this->templateFactory->render(
 			'wb-section-heading',
 			wfMessage( $heading )->escaped(),
 			'claims' // ID - TODO: should not be added if output page is not the entity's page
@@ -141,7 +141,7 @@ class ClaimsView {
 			);
 		}
 
-		$toolbarHtml = $this->templateFactory->renderTpl( 'wikibase-toolbar-wrapper',
+		$toolbarHtml = $this->templateFactory->render( 'wikibase-toolbar-wrapper',
 			$this->sectionEditLinkGenerator->getSingleButtonToolbarHtml(
 				'',
 				array(),
@@ -150,9 +150,9 @@ class ClaimsView {
 			)
 		);
 
-		return $this->templateFactory->renderTpl( 'wb-claimlistview',
+		return $this->templateFactory->render( 'wb-claimlistview',
 			$propertyHtml,
-			$this->templateFactory->renderTpl(
+			$this->templateFactory->render(
 				'wb-claimgrouplistview-groupname',
 				$propertyLink
 			) . $toolbarHtml,

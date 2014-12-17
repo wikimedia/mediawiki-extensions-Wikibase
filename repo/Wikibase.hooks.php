@@ -992,7 +992,7 @@ final class RepoHooks {
 			$injector = new TextInjector( $placeholders );
 			$userLanguageLookup = new UserLanguageLookup();
 			$expander = new EntityViewPlaceholderExpander(
-				new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+				new TemplateFactory(),
 				$out->getTitle(),
 				$out->getUser(),
 				$out->getLanguage(),

@@ -31,6 +31,7 @@ class PropertyView extends EntityView {
 	 * @param TemplateFactory $templateFactory
 	 * @param FingerprintView $fingerprintView
 	 * @param ClaimsView $claimsView
+	 * @param DataTypeFactory $dataTypeFactory
 	 * @param Language $language
 	 * @param bool $editable
 	 */
@@ -90,11 +91,11 @@ class PropertyView extends EntityView {
 	 * @return string
 	 */
 	private function getHtmlForDataType( DataType $dataType ) {
-		return $this->templateFactory->renderTpl( 'wb-section-heading',
+		return $this->templateFactory->render( 'wb-section-heading',
 			wfMessage( 'wikibase-propertypage-datatype' )->escaped(),
 			'datatype'
 		)
-		. $this->templateFactory->renderTpl( 'wikibase-propertyview-datatype',
+		. $this->templateFactory->render( 'wikibase-propertyview-datatype',
 			htmlspecialchars( $dataType->getLabel( $this->language->getCode() ) )
 		);
 	}

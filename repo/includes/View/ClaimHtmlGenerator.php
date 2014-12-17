@@ -45,8 +45,8 @@ class ClaimHtmlGenerator {
 		TemplateFactory $templateFactory,
 		SnakHtmlGenerator $snakHtmlGenerator
 	) {
-		$this->snakHtmlGenerator = $snakHtmlGenerator;
 		$this->templateFactory = $templateFactory;
+		$this->snakHtmlGenerator = $snakHtmlGenerator;
 	}
 
 	/**
@@ -68,7 +68,7 @@ class ClaimHtmlGenerator {
 		);
 
 		if ( !( $claim instanceof Statement ) ) {
-			$claimHtml = $this->templateFactory->renderTpl( 'wb-claim',
+			$claimHtml = $this->templateFactory->render( 'wb-claim',
 				$claim->getGuid(),
 				$mainSnakHtml,
 				$this->getHtmlForQualifiers( $claim->getQualifiers() ),
@@ -80,7 +80,7 @@ class ClaimHtmlGenerator {
 
 			// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,
 			// wikibase-statementview-rank-deprecated
-			$rankHtml = $this->templateFactory->renderTpl( 'wb-rankselector',
+			$rankHtml = $this->templateFactory->render( 'wb-rankselector',
 				'ui-state-disabled',
 				'wb-rankselector-' . $serializedRank,
 				wfMessage( 'wikibase-statementview-rank-' . $serializedRank )->text()
@@ -99,9 +99,9 @@ class ClaimHtmlGenerator {
 				$claim->getReferences()
 			);
 
-			$claimHtml = $this->templateFactory->renderTpl( 'wb-statement',
+			$claimHtml = $this->templateFactory->render( 'wb-statement',
 				$rankHtml,
-				$this->templateFactory->renderTpl( 'wb-claim',
+				$this->templateFactory->render( 'wb-claim',
 					$claim->getGuid(),
 					$mainSnakHtml,
 					$this->getHtmlForQualifiers( $claim->getQualifiers() ),
@@ -158,7 +158,7 @@ class ClaimHtmlGenerator {
 
 	private function wrapInListview( $listviewContent ) {
 		if( $listviewContent !== '' ) {
-			return $this->templateFactory->renderTpl( 'wb-listview', $listviewContent );
+			return $this->templateFactory->render( 'wb-listview', $listviewContent );
 		} else {
 			return '';
 		}
@@ -185,7 +185,7 @@ class ClaimHtmlGenerator {
 			);
 		}
 
-		return $this->templateFactory->renderTpl( 'wb-referenceview',
+		return $this->templateFactory->render( 'wb-referenceview',
 			'wb-referenceview-' . $reference->getHash(),
 			$snaklistviewsHtml
 		);
@@ -206,7 +206,7 @@ class ClaimHtmlGenerator {
 			$snaksHtml .= $this->snakHtmlGenerator->getSnakHtml( $snak, ( $i++ === 0 ) );
 		}
 
-		return $this->templateFactory->renderTpl(
+		return $this->templateFactory->render(
 			'wb-snaklistview',
 			$snaksHtml
 		);
