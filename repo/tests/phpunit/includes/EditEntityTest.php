@@ -315,6 +315,15 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testAttemptSaveWithNewEntity() {
+		$item = Item::newEmpty();
+		$item->setLabel( 'en', 'omg' );
+		$editEntity = $this->makeEditEntity( $this->makeMockRepo(), $item );
+		$editEntity->attemptSave( "Testing", EDIT_NEW, false );
+
+		$this->assertTrue( $item->getId() !== null, 'item id is set' );
+	}
+
 	private function fingerprintToPartialArray( Fingerprint $fingerprint ) {
 		return array(
 			'label' => $fingerprint->getLabels()->toTextArray(),
