@@ -26,6 +26,7 @@ use Revision;
 use SearchResult;
 use Skin;
 use SkinTemplate;
+use SpecialPageFactory;
 use SpecialSearch;
 use SplFileInfo;
 use Title;
@@ -731,23 +732,7 @@ final class RepoHooks {
 		global $wgTitle;
 		wfProfileIn( __METHOD__ );
 
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
-		//NOTE: the model returned by Title::getContentModel() is not reliable, see bug 37209
-		$contentModel = $target->getContentModel();
-
-		// we only want to handle links to Wikibase entities differently here
-		if ( !$entityContentFactory->isEntityContentModel( $contentModel ) ) {
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
-
-		// if custom link text is given, there is no point in overwriting it
-		// but not if it is similar to the plain title
-		if ( $html !== null && $target->getFullText() !== $html ) {
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		// $wgTitle is temporarily set to special pages Title in case of special page inclusion! Therefore we can
 		// just check whether the page is a special page and if not, disable the behavior.
@@ -755,6 +740,28 @@ final class RepoHooks {
 			// no special page, we don't handle this for now
 			// NOTE: If we want to handle this, messages would have to be generated in sites language instead of
 			//       users language so they are cache independent.
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
+		if ( !$entityNamespaceLookup->isEntityNamespace( $target->getNamespace() ) ) {
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
+		$targetText = $target->getText();
+
+		if ( SpecialPageFactory::exists( $targetText ) ) {
+			$target = Title::makeTitle( NS_SPECIAL, $targetText );
+			$html = Linker::linkKnown( $target );
+
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
+		// if custom link text is given, there is no point in overwriting it
+		// but not if it is similar to the plain title
+		if ( $html !== null && $target->getFullText() !== $html ) {
 			wfProfileOut( __METHOD__ );
 			return true;
 		}

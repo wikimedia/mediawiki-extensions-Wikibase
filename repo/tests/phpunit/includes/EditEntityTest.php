@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use FauxRequest;
 use HashBagOStuff;
+use IContextSource;
 use RequestContext;
 use Status;
 use Title;
@@ -15,7 +16,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntity;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\EditEntity
@@ -46,27 +49,18 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	protected function setUp() {
-		global $wgGroupPermissions, $wgHooks;
+		global $wgGroupPermissions;
 
 		parent::setUp();
 
 		$this->permissions = $wgGroupPermissions;
 		$this->userGroups = array( 'user' );
-
-		if ( empty( $wgHooks['EditFilterMergedContent'] ) ) {
-			// This fake ensures EditEntity::runEditFilterHooks is run and runtime errors are found
-			$wgHooks['EditFilterMergedContent'] = array( null );
-		}
 	}
 
 	protected function tearDown() {
-		global $wgGroupPermissions, $wgHooks;
+		global $wgGroupPermissions;
 
 		$wgGroupPermissions = $this->permissions;
-
-		if ( $wgHooks['EditFilterMergedContent'] === array( null ) ) {
-			unset( $wgHooks['EditFilterMergedContent'] );
-		}
 
 		parent::tearDown();
 	}
@@ -126,22 +120,24 @@ class EditEntityTest extends \MediaWikiTestCase {
 	/**
 	 * @param MockRepository $repo
 	 * @param Entity $entity
-	 * @param User $user
+	 * @param EntityTitleLookup $titleLookup
+	 * @param User|null $user
 	 * @param bool $baseRevId
 	 *
 	 * @param null|array $permissions map of actions to bool, indicating which actions are allowed.
 	 *
 	 * @return EditEntity
 	 */
-	protected function makeEditEntity( MockRepository $repo, Entity $entity, User $user = null, $baseRevId = false, $permissions = null ) {
+	protected function makeEditEntity( MockRepository $repo, Entity $entity,
+		EntityTitleLookup $titleLookup, User $user = null, $baseRevId = false, $permissions = null
+	) {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 
-		if ( !$user ) {
+		if ( $user === null ) {
 			$user = User::newFromName( 'EditEntityTestUser' );
 		}
 
-		$titleLookup = $this->newTitleLookupMock();
 		$permissionChecker = $this->newEntityPermissionCheckerMock( $permissions );
 
 		$edit = new EditEntity( $titleLookup, $repo, $repo, $permissionChecker, $entity, $user, $baseRevId, $context );
@@ -295,7 +291,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 
 		// save entity ----------------------------------
-		$editEntity = $this->makeEditEntity( $repo, $entity, $user, $baseRevisionId );
+		$titleLookup = $this->newTitleLookupMock();
+		$editEntity = $this->makeEditEntity( $repo, $entity, $titleLookup, $user, $baseRevisionId );
 
 		$conflict = $editEntity->hasEditConflict();
 		$this->assertEquals( $expectedConflict, $conflict, 'hasEditConflict()' );
@@ -313,6 +310,35 @@ class EditEntityTest extends \MediaWikiTestCase {
 				$this->assertArrayEquals( $expectedValue, $actualValue, false, true );
 			}
 		}
+	}
+
+	public function testEditFilterMergedContentHook_withNewEntity() {
+		$hooks = array_merge(
+			$GLOBALS['wgHooks'],
+			array( 'EditFilterMergedContent' => array() )
+		);
+
+		$testCase = $this;
+
+		$hooks['EditFilterMergedContent'][] = function( IContextSource $context ) use( $testCase ) {
+			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
+			$page = $context->getWikiPage();
+			$title = $page->getTitle();
+			$contentModel = $title->getContentModel();
+			$testCase->assertTrue( $entityContentFactory->isEntityContentModel( $contentModel ) );
+		};
+
+		$this->setMwGlobals( array(
+			'wgHooks' => $hooks
+		) );
+
+		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+
+		$item = Item::newEmpty();
+		$item->setLabel( 'en', 'omg' );
+		$editEntity = $this->makeEditEntity( $this->makeMockRepo(), $item, $titleLookup );
+		$editEntity->attemptSave( "Testing", EDIT_NEW, false );
 	}
 
 	private function fingerprintToPartialArray( Fingerprint $fingerprint ) {
@@ -347,7 +373,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$entity = $entity->copy();
 		$entity->getFingerprint()->setLabel( 'en', 'Trust' );
 
-		$editEntity = $this->makeEditEntity( $repo,  $entity, $user, $baseRevId );
+		$titleLookup = $this->newTitleLookupMock();
+		$editEntity = $this->makeEditEntity( $repo, $entity, $titleLookup, $user, $baseRevId );
 		$editEntity->getLatestRevision(); // make sure EditEntity has page and revision
 
 		$this->assertEquals( $baseRevId !== false, $editEntity->doesCheckForEditConflicts(), 'doesCheckForEditConflicts()' );
@@ -443,7 +470,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$user = self::getUser( "EditEntityTestUser" );
 		$item = $this->prepareItemForPermissionCheck( $user, $repo, $create );
 
-		$edit = $this->makeEditEntity( $repo, $item, $user, false, $permissions );
+		$titleLookup = $this->newTitleLookupMock();
+		$edit = $this->makeEditEntity( $repo, $item, $titleLookup, $user, false, $permissions );
 		$edit->checkEditPermissions();
 
 		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK() );
@@ -455,12 +483,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 */
 	public function testAttemptSavePermissions( $permissions, $create, $expectedOK ) {
 		$repo = $this->makeMockRepo();
+		$titleLookup = $this->newTitleLookupMock();
 
 		$user = self::getUser( "EditEntityTestUser" );
 		$item = $this->prepareItemForPermissionCheck( $user, $repo, $create );
 
 		$token = $user->getEditToken();
-		$edit = $this->makeEditEntity( $repo, $item, $user, false, $permissions );
+		$edit = $this->makeEditEntity( $repo, $item, $titleLookup, $user, false, $permissions );
 
 		$edit->attemptSave( "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), $token );
 
@@ -611,6 +640,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->setUserGroups( $user, $groups );
 
 		$items = array();
+		$titleLookup = $this->newTitleLookupMock();
 
 		foreach ( $edits as $e ) {
 			$name = $e[ 'item' ];
@@ -628,7 +658,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 			$item->setLabel( 'en', $label );
 
-			$edit = $this->makeEditEntity( $repo, $item, $user );
+			$edit = $this->makeEditEntity( $repo, $item, $titleLookup, $user );
 			$edit->attemptSave( "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), false );
 
 			$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
@@ -665,7 +695,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$user = self::getUser( "EditEntityTestUser" );
 
 		$item = Item::newEmpty();
-		$edit = $this->makeEditEntity( $repo, $item, $user );
+		$titleLookup = $this->newTitleLookupMock();
+		$edit = $this->makeEditEntity( $repo, $item, $titleLookup, $user );
 
 		// check valid token --------------------
 		if ( $token === true ) {
@@ -720,7 +751,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$repo->updateWatchlist( $user, $item->getId(), $watched );
 		}
 
-		$edit = $this->makeEditEntity( $repo, $item, $user );
+		$titleLookup = $this->newTitleLookupMock();
+		$edit = $this->makeEditEntity( $repo, $item, $titleLookup, $user );
 		$status = $edit->attemptSave( "testing", $new ? EDIT_NEW : EDIT_UPDATE, false, $watch );
 
 		$this->assertTrue( $status->isOK(), "edit failed: " . $status->getWikiText() ); // sanity
