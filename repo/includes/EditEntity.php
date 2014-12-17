@@ -13,6 +13,7 @@ use Status;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -771,21 +772,13 @@ class EditEntity {
 			return;
 		}
 
-		if ( !$this->isNew() ) {
-			$context = clone $this->context;
-
-			$title = $this->getTitle();
-			$context->setTitle( $title );
-			$context->setWikiPage( new WikiPage( $title ) );
-		} else {
-			$context = $this->context;
-		}
-
 		// Run edit filter hooks
 		$filterStatus = Status::newGood();
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$entityContent = $entityContentFactory->newFromEntity( $this->newEntity );
+
+		$context = $this->getContextForFilter( $this->newEntity );
 
 		if ( !wfRunHooks( 'EditFilterMergedContent',
 			array( $context, $entityContent, &$filterStatus, $summary, $this->getUser(), false ) ) ) {
@@ -799,6 +792,25 @@ class EditEntity {
 		}
 
 		$this->status->merge( $filterStatus );
+	}
+
+	/**
+	 * EntityDocument $entity
+	 */
+	private function getContextForFilter( EntityDocument $entity ) {
+		if ( !$this->isNew() ) {
+			$context = clone $this->context;
+			$title = $this->getTitle();
+		} else {
+			$context = $this->context;
+			$this->entityStore->assignFreshId( $entity );
+			$title = $this->titleLookup->getTitleForId( $entity->getId() );
+		}
+
+		$context->setTitle( $title );
+		$context->setWikiPage( new WikiPage( $title ) );
+
+		return $context;
 	}
 
 	protected function applyPreSaveChecks() {
