@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\PlainEntityIdFormatter;
 use Wikibase\Lib\FormatterLabelLookupFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
@@ -334,7 +334,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		$builders->setValueFormatterClass(
 			SnakFormatter::FORMAT_PLAIN,
 			'VT:wikibase-entityid',
-			'Wikibase\Lib\EntityIdFormatter'
+			'Wikibase\Lib\PlainEntityIdFormatter'
 		);
 		$builders->setValueFormatterClass(
 			SnakFormatter::FORMAT_PLAIN,
@@ -375,7 +375,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	public function testSetValueFormatterBuilder() {
 		$builder = function () {
 			$options = new FormatterOptions();
-			return new EntityIdFormatter( $options );
+			return new PlainEntityIdFormatter( $options );
 		};
 
 		$builders = $this->newWikibaseValueFormatterBuilders();

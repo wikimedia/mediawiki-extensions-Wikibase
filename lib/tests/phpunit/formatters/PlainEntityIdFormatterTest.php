@@ -6,10 +6,10 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\PlainEntityIdFormatter;
 
 /**
- * @covers Wikibase\Lib\EntityIdFormatter
+ * @covers Wikibase\Lib\PlainEntityIdFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions
@@ -20,11 +20,11 @@ use Wikibase\Lib\EntityIdFormatter;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityIdFormatterTest extends \PHPUnit_Framework_TestCase {
+class PlainEntityIdFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	protected function newEntityIdFormatter() {
 		$options = new FormatterOptions();
-		return new EntityIdFormatter( $options );
+		return new PlainEntityIdFormatter( $options );
 	}
 
 	/**
