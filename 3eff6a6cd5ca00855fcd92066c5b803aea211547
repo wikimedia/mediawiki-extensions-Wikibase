@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_4a293135",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-17T18:55:46Z",
+      "side": 1,
+      "message": "Please use stashMwGlobals() in setup() instead of manually restoring this here.\nThis line is not going to run if the test fails, and the hook handler may very well make other tests fail.",
+      "revId": "3eff6a6cd5ca00855fcd92066c5b803aea211547",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
