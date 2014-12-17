@@ -106,8 +106,10 @@ class EntityViewPlaceholderExpander {
 			} else {
 				// ignore current interface language
 				$skip = array( $this->uiLanguage->getCode() );
-				$this->extraLanguages = $this->userLanguageLookup->getExtraUserLanguages(
-					$this->user, $skip );
+				$this->extraLanguages = array_diff(
+					$this->userLanguageLookup->getAllUserLanguages( $this->user ),
+					$skip
+				);
 			}
 		}
 

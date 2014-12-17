@@ -72,19 +72,6 @@ class UserLanguageLookup {
 	}
 
 	/**
-	 * Returns true if the user does have additional languages specified in addition to the
-	 * non-optional interface language, or explicitly specified to not have additional languages.
-	 *
-	 * @param User $user The current user.
-	 *
-	 * @return bool If the user specified languages.
-	 */
-	public function hasSpecifiedLanguages( User $user ) {
-		$userSpecifiedLanguages = $this->getUserSpecifiedLanguages( $user );
-		return !empty( $userSpecifiedLanguages );
-	}
-
-	/**
 	 * Collects all languages from all user settings we can reach at this point, in order of
 	 * preference, duplicates stripped:
 	 * 1. The interface language from the user's settings
@@ -113,18 +100,6 @@ class UserLanguageLookup {
 
 		wfProfileOut( __METHOD__ );
 		return $languages;
-	}
-
-	/**
-	 * Returns the languages desired by the user, in order of preference.
-	 *
-	 * @param User $user The current user.
-	 * @param string[] $skip List of language codes to skip.
-	 *
-	 * @return string[] List of language codes.
-	 */
-	public function getExtraUserLanguages( User $user, array $skip ) {
-		return array_diff( $this->getAllUserLanguages( $user ), $skip );
 	}
 
 }
