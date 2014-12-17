@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_a416044c",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-17T15:54:23Z",
+      "side": 1,
+      "message": "Can\u0027t \"TemplateRegistry::getDefaultInstance()\" be the default value in the TemplateFactory constructor?",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_e4339cf1",
+        "filename": "repo/includes/Template/TemplateFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-17T15:54:23Z",
+      "side": 1,
+      "message": "Uh, there is a \"Wikibase\\Template\" namespace and a \"Wikibase\\Template\" class? Will you move this later?",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_644f8c6f",
+        "filename": "repo/includes/Template/TemplateFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-17T15:54:23Z",
+      "side": 1,
+      "message": "Spaces missing. Also in the constructor.",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_447128a6",
+        "filename": "repo/includes/Template/TemplateFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-17T15:54:23Z",
+      "side": 1,
+      "message": "Oh, please, ... why \"Tpl\"? I know it\u0027s a common abbreviation for \"Template\", but I never liked it and I don\u0027t see a strong reason to use an abbreviation here. \"Template\" is only 5 characters longer.\n\nIf you want you cane name the public methods \"get\" and \"render\". Would be ok for me.",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_c4b3f84a",
+        "filename": "repo/includes/TemplateRegistry.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-17T15:54:23Z",
+      "side": 1,
+      "message": "Note to self: Add a constructor to TemplateRegistry.",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
