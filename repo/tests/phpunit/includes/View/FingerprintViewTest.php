@@ -14,9 +14,6 @@ use Wikibase\Repo\View\SectionEditLinkGenerator;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @group Database
- *		^---- needed because we rely on Title objects internally
- *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Mättig

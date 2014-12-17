@@ -31,7 +31,9 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 	 * @param ItemId $itemId
 	 */
 	private function newExpander( User $user, EntityRevisionLookup $entityRevisionLookup, ItemId $itemId ) {
-		$title = new Title( 'EntityViewPlaceholderExpanderTest-DummyTitleForLocalUrls' );
+		$title = $this->getMockBuilder( 'Title')
+			->disableOriginalConstructor()
+			->getMock();
 
 		$language = Language::factory( 'en' );
 

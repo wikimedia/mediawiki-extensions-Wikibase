@@ -24,7 +24,9 @@ class TermBoxViewTest extends \PHPUnit_Framework_TestCase {
 		$language = Language::factory( 'qqx' ); // so we can look for message keys in the output
 		$view = new TermBoxView( $language );
 
-		$title = Title::newFromText( 'TermBoxViewTest-DummyTitle' );
+		$title = $this->getMockBuilder( 'Title' )
+			->disableOriginalConstructor()
+			->getMock();
 
 		$entity = Item::newEmpty();
 		$entity->setId( new ItemId( 'Q23' ) );
