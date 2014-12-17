@@ -47,9 +47,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 			->method( 'parse' )
 			->will( $this->returnValue( $itemId ) );
 
-		$userLanguages = $this->getMockBuilder( 'Wikibase\UserLanguageLookup' )
-			->disableOriginalConstructor()
-			->getMock();
+		$userLanguages = $this->getMock( 'Wikibase\Lib\UserLanguageLookup' );
 
 		$userLanguages->expects( $this->any() )
 			->method( 'getAllUserLanguages' )
