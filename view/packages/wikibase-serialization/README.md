@@ -23,6 +23,9 @@ version 2.0 of this package:
 
 ### 2.0.2 (dev)
 
+#### Bugfixes
+* Fixed parameter order when instantiating `dataValues.UnUnserializableValue` in `SnakSerializer`.
+
 #### Enhancements
 * Updated code documentation for being able to automatically generate a proper documentation using JSDuck.
 
