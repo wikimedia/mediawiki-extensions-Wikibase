@@ -8,7 +8,7 @@ use ApiQueryBase;
 use ApiResult;
 use InvalidArgumentException;
 use Title;
-use Wikibase\Client\Store\EntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Term;
 use Wikibase\TermIndex;
