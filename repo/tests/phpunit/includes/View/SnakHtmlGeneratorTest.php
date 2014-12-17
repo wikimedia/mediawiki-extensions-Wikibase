@@ -35,8 +35,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup,
-			'en'
+			$entityTitleLookup
 		);
 
 		$html = $snakHtmlGenerator->getSnakHtml( $snak, $entityInfo );
