@@ -2,13 +2,16 @@
 
 namespace Wikibase\Repo\View;
 
+use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use Language;
+use SiteStore;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdFormatterFactory;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\LabelLookup;
@@ -37,25 +40,63 @@ class EntityViewFactory {
 	private $idFormatterFactory;
 
 	/**
-	 * @param EntityIdFormatterFactory $idFormatterFactory
-	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
+	 * @var EntityLookup
 	 */
+	private $entityLookup;
+
+	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
+	/**
+	 * @var DataTypeFactory
+	 */
+	private $dataTypeFactory;
+
 	/**
 	 * @var string[]
 	 */
 	private $siteLinkGroups;
 
+	/**
+	 * @var string[]
+	 */
+	private $specialSiteLinkGroups;
+
+	/**
+	 * @var array
+	 */
+	private $badgeItems;
+
+	/**
+	 * @param EntityIdFormatterFactory $idFormatterFactory
+	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
+	 * @param EntityLookup $entityLookup
+	 * @param SiteStore $siteStore
+	 * @param DataTypeFactory $dataTypeFactory
+	 */
 	public function __construct(
 		EntityIdFormatterFactory $idFormatterFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
-		array $siteLinkGroups
+		EntityLookup $entityLookup,
+		SiteStore $siteStore,
+		DataTypeFactory $dataTypeFactory,
+		array $siteLinkGroups,
+		array $specialSiteLinkGroups,
+		array $badgeItems
 	) {
 		$this->checkOutputFormat( $idFormatterFactory->getOutputFormat() );
 
 		$this->idFormatterFactory = $idFormatterFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
+		$this->entityLookup = $entityLookup;
+		$this->siteStore = $siteStore;
+		$this->dataTypeFactory = $dataTypeFactory;
 		$this->siteLinkGroups = $siteLinkGroups;
+		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
+		$this->badgeItems = $badgeItems;
 	}
 
 	/**
@@ -98,9 +139,31 @@ class EntityViewFactory {
 		// @fixme support more entity types
 		switch ( $entityType ) {
 			case 'item':
-				return new ItemView( $fingerprintView, $claimsView, $language, $this->siteLinkGroups, $editable );
+				$siteLinksView = new SiteLinksView(
+					$this->siteStore->getSites(),
+					$this->sectionEditLinkGenerator,
+					$this->entityLookup,
+					$this->badgeItems,
+					$this->specialSiteLinkGroups,
+					$language->getCode()
+				);
+
+				return new ItemView(
+					$fingerprintView,
+					$claimsView,
+					$language,
+					$siteLinksView,
+					$this->siteLinkGroups,
+					$editable
+				);
 			case 'property':
-				return new PropertyView( $fingerprintView, $claimsView, $language, $editable );
+				return new PropertyView(
+					$fingerprintView,
+					$claimsView,
+					$this->dataTypeFactory,
+					$language,
+					$editable
+				);
 		}
 
 		throw new InvalidArgumentException( 'No EntityView for entity type: ' . $entityType );

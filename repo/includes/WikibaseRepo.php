@@ -66,7 +66,7 @@ use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\DummyChangeTransmitter;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\Store\PageEntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -283,7 +283,7 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return PageEntityIdLookup
+	 * @return EntityIdLookup
 	 */
 	public function getPageEntityIdLookup() {
 		return $this->getEntityContentFactory();
@@ -705,7 +705,7 @@ class WikibaseRepo {
 	 * @return LabelDescriptionDuplicateDetector
 	 */
 	public function getLabelDescriptionDuplicateDetector() {
-		return new LabelDescriptionDuplicateDetector( $this->getStore()->getTermIndex() );
+		return new LabelDescriptionDuplicateDetector( $this->getStore()->getLabelConflictFinder() );
 	}
 
 	/**
@@ -991,7 +991,12 @@ class WikibaseRepo {
 		$entityViewFactory = new EntityViewFactory(
 			$this->getEntityIdHtmlLinkFormatter(),
 			$this->getSnakFormatterFactory(),
-			$this->getSettings()->getSetting( 'siteLinkGroups' )
+			$this->getEntityLookup(),
+			$this->getSiteStore(),
+			$this->getDataTypeFactory(),
+			$this->getSettings()->getSetting( 'siteLinkGroups' ),
+			$this->getSettings()->getSetting( 'specialSiteLinkGroups' ),
+			$this->getSettings()->getSetting( 'badgeItems' )
 		);
 
 		return new EntityParserOutputGeneratorFactory(
