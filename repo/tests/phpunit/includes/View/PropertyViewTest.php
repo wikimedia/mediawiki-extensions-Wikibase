@@ -10,6 +10,8 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\View\PropertyView;
+use Wikibase\Template\TemplateFactory;
+use Wikibase\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\PropertyView
@@ -76,6 +78,7 @@ class PropertyViewTest extends EntityViewTest {
 
 	public function provideTestGetHtml() {
 		$propertyView = new PropertyView(
+			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
 			$this->getMockBuilder( 'Wikibase\Repo\View\FingerprintView' )
 				->disableOriginalConstructor()
 				->getMock(),

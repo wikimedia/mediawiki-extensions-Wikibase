@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\View;
 
-use DataTypes\DataTypeFactory;
 use DataTypes\DataType;
+use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityRevision;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Template\TemplateFactory;
 
 /**
  * Class for creating views for Property instances.
@@ -28,19 +28,21 @@ class PropertyView extends EntityView {
 	private $dataTypeFactory;
 
 	/**
+	 * @param TemplateFactory $templateFactory
 	 * @param FingerprintView $fingerprintView
 	 * @param ClaimsView $claimsView
 	 * @param Language $language
 	 * @param bool $editable
 	 */
 	public function __construct(
+		TemplateFactory $templateFactory,
 		FingerprintView $fingerprintView,
 		ClaimsView $claimsView,
 		DataTypeFactory $dataTypeFactory,
 		Language $language,
 		$editable = true
 	) {
-		parent::__construct( $fingerprintView, $claimsView, $language, $editable );
+		parent::__construct( $templateFactory, $fingerprintView, $claimsView, $language, $editable );
 
 		$this->dataTypeFactory = $dataTypeFactory;
 	}
@@ -88,11 +90,11 @@ class PropertyView extends EntityView {
 	 * @return string
 	 */
 	private function getHtmlForDataType( DataType $dataType ) {
-		return wfTemplate( 'wb-section-heading',
+		return $this->templateFactory->render( 'wb-section-heading',
 			wfMessage( 'wikibase-propertypage-datatype' )->escaped(),
 			'datatype'
 		)
-		. wfTemplate( 'wikibase-propertyview-datatype',
+		. $this->templateFactory->render( 'wikibase-propertyview-datatype',
 			htmlspecialchars( $dataType->getLabel( $this->language->getCode() ) )
 		);
 	}

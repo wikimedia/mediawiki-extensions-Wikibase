@@ -21,6 +21,20 @@ class TemplateRegistry {
 	private $templates;
 
 	/**
+	 * @var TemplateRegistry
+	 */
+	private static $instance;
+
+
+	public static function getDefaultInstance() {
+		if ( self::$instance === null ) {
+			self::$instance = new self();
+			self::$instance->addTemplates( include( __DIR__ . '/../resources/templates.php' ) );
+		}
+		return self::$instance;
+	}
+
+	/**
 	 * Gets the array containing all templates.
 	 *
 	 * @return array

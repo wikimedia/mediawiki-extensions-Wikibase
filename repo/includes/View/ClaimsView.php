@@ -4,6 +4,7 @@ namespace Wikibase\Repo\View;
 
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Template\TemplateFactory;
 
 /**
  * Generates HTML to display claims.
@@ -15,6 +16,11 @@ use Wikibase\Lib\EntityIdFormatter;
  * @author Daniel Kinzler
  */
 class ClaimsView {
+
+	/**
+	 * @var TemplateFactory
+	 */
+	private $templateFactory;
 
 	/**
 	 * @var EntityIdFormatter
@@ -32,11 +38,13 @@ class ClaimsView {
 	private $claimHtmlGenerator;
 
 	/**
+	 * @param TemplateFactory $templateFactory
 	 * @param EntityIdFormatter $propertyIdFormatter
 	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
 	 * @param ClaimHtmlGenerator $claimHtmlGenerator
 	 */
 	public function __construct(
+		TemplateFactory $templateFactory,
 		EntityIdFormatter $propertyIdFormatter,
 		SectionEditLinkGenerator $sectionEditLinkGenerator,
 		ClaimHtmlGenerator $claimHtmlGenerator
@@ -44,6 +52,7 @@ class ClaimsView {
 		$this->propertyIdFormatter = $propertyIdFormatter;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->claimHtmlGenerator = $claimHtmlGenerator;
+		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -63,12 +72,12 @@ class ClaimsView {
 			$claimsHtml .= $this->getHtmlForClaimGroup( $claims );
 		}
 
-		$claimgrouplistviewHtml = wfTemplate( 'wb-claimgrouplistview', $claimsHtml, '' );
+		$claimgrouplistviewHtml = $this->templateFactory->render( 'wb-claimgrouplistview', $claimsHtml, '' );
 
 		// TODO: Add link to SpecialPage that allows adding a new claim.
 		$sectionHeading = $this->getHtmlForSectionHeading( 'wikibase-statements' );
 		// FIXME: claimgrouplistview should be the topmost claims related template
-		$html = wfTemplate( 'wb-claimlistview', $claimgrouplistviewHtml, '', '' );
+		$html = $this->templateFactory->render( 'wb-claimlistview', $claimgrouplistviewHtml, '', '' );
 		return $sectionHeading . $html;
 	}
 
@@ -80,7 +89,7 @@ class ClaimsView {
 	 * @return string
 	 */
 	private function getHtmlForSectionHeading( $heading ) {
-		$html = wfTemplate(
+		$html = $this->templateFactory->render(
 			'wb-section-heading',
 			wfMessage( $heading )->escaped(),
 			'claims' // ID - TODO: should not be added if output page is not the entity's page
@@ -132,7 +141,7 @@ class ClaimsView {
 			);
 		}
 
-		$toolbarHtml = wfTemplate( 'wikibase-toolbar-wrapper',
+		$toolbarHtml = $this->templateFactory->render( 'wikibase-toolbar-wrapper',
 			$this->sectionEditLinkGenerator->getSingleButtonToolbarHtml(
 				'',
 				array(),
@@ -141,9 +150,12 @@ class ClaimsView {
 			)
 		);
 
-		return wfTemplate( 'wb-claimlistview',
+		return $this->templateFactory->render( 'wb-claimlistview',
 			$propertyHtml,
-			wfTemplate( 'wb-claimgrouplistview-groupname', $propertyLink ) . $toolbarHtml,
+			$this->templateFactory->render(
+				'wb-claimgrouplistview-groupname',
+				$propertyLink
+			) . $toolbarHtml,
 			$propertyId->getSerialization()
 		);
 	}
