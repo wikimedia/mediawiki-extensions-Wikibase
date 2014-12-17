@@ -105,6 +105,11 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.9.1 (dev)
+
+#### Enhancements
+* `$.ui.suggester`: Added `isSearching()` function to determine whether searching is in progress.
+
 ### 0.9.0 (2014-12-05)
 
 #### Breaking changes

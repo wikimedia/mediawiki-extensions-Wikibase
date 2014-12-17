@@ -140,6 +140,15 @@ $.widget( 'ui.suggester', {
 	_term: null,
 
 	/**
+	 * Caches whether searching is in progress by either storing the ID of the timer used to delay
+	 * the actual search request or by storing a boolean "true" while the actual search request is
+	 * in progress.
+	 * @property {number|boolean} [_searching=false]
+	 * @private
+	 */
+	_searching: false,
+
+	/**
 	 * @see jQuery.Widget._create
 	 * @protected
 	 */
@@ -172,6 +181,8 @@ $.widget( 'ui.suggester', {
 	 * @see jQuery.Widget.destroy
 	 */
 	destroy: function() {
+		this._clearTimeout();
+
 		var menu = this.option( 'menu' );
 		menu.destroy();
 		menu.element.remove();
@@ -317,20 +328,8 @@ $.widget( 'ui.suggester', {
 						break;
 					}
 
-					clearTimeout( self.__searching );
-					self.__searching = setTimeout( function() {
-						// Only search if the value has changed:
-						if( self._term !== self.element.val() ) {
-							self._selectedItem = null;
-							self.search( event )
-							.done( function() {
-								// Widget might have been destroyed in the meantime.
-								if( self.element.data( this.widgetName ) ) {
-									self._trigger( 'change' );
-								}
-							} );
-						}
-					}, self.options.delay );
+					self._triggerSearch();
+
 					break;
 			}
 
@@ -376,6 +375,37 @@ $.widget( 'ui.suggester', {
 	},
 
 	/**
+	 * @private
+	 */
+	_triggerSearch: function() {
+		var self = this;
+
+		this._clearTimeout();
+
+		this._searching = setTimeout( function() {
+			// Only search if the value has changed:
+			if( self._term !== self.element.val() ) {
+				self.search( event )
+				.done( function() {
+					// Widget might have been destroyed in the meantime.
+					if( self.element.data( self.widgetName ) ) {
+						self._trigger( 'change' );
+					}
+				} );
+			}
+		}, this.options.delay );
+	},
+
+	/**
+	 * Returns whether searching is in progress.
+	 *
+	 * @return {boolean}
+	 */
+	isSearching: function() {
+		return this._searching !== false;
+	},
+
+	/**
 	 * Handles moving through the list of suggestions using arrow keys.
 	 * @protected
 	 *
@@ -387,7 +417,6 @@ $.widget( 'ui.suggester', {
 		event.preventDefault();
 
 		if( !this.options.menu.element.is( ':visible' ) ) {
-			clearTimeout( this.__searching );
 			this.search( event );
 			return;
 		}
@@ -455,6 +484,9 @@ $.widget( 'ui.suggester', {
 		var self = this,
 			deferred = $.Deferred();
 
+		this._clearTimeout();
+		this._searching = true;
+
 		this._term = this.element.val();
 
 		if( this._term.length < this.options.minTermLength ) {
@@ -467,6 +499,8 @@ $.widget( 'ui.suggester', {
 
 		return this._getSuggestions( this._term )
 		.done( function( suggestions, requestTerm ) {
+			self._searching = false;
+
 			if( typeof requestTerm === 'string' && requestTerm !== self._term ) {
 				// Skip request since it does not correspond to the current search term.
 				return;
@@ -485,6 +519,16 @@ $.widget( 'ui.suggester', {
 				self.element.removeClass( 'ui-suggester-loading' );
 			}
 		} );
+	},
+
+	/**
+	 * Clears the timeout used to delay searching if there is an active timer.
+	 * @protected
+	 */
+	_clearTimeout: function() {
+		if( typeof this._searching !== 'boolean' ) {
+			clearTimeout( this._searching );
+		}
 	},
 
 	/**
