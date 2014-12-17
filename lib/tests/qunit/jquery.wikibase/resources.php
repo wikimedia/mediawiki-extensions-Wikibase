@@ -104,34 +104,34 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.fingerprintgroupview.tests' => $moduleBase + array(
+		'jquery.wikibase.entitytermsview.tests' => $moduleBase + array(
 				'scripts' => array(
-					'jquery.wikibase.fingerprintgroupview.tests.js',
+					'jquery.wikibase.entitytermsview.tests.js',
 				),
 				'dependencies' => array(
-					'jquery.wikibase.fingerprintgroupview',
+					'jquery.wikibase.entitytermsview',
 					'wikibase.datamodel.MultiTerm',
 					'wikibase.datamodel.Term',
 				),
 			),
 
-		'jquery.wikibase.fingerprintlistview.tests' => $moduleBase + array(
+		'jquery.wikibase.entitytermsforlanguagelistview.tests' => $moduleBase + array(
 			'scripts' => array(
-				'jquery.wikibase.fingerprintlistview.tests.js',
+				'jquery.wikibase.entitytermsforlanguagelistview.tests.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.fingerprintlistview',
+				'jquery.wikibase.entitytermsforlanguagelistview',
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.datamodel.Term',
 			),
 		),
 
-		'jquery.wikibase.fingerprintview.tests' => $moduleBase + array(
+		'jquery.wikibase.entitytermsforlanguageview.tests' => $moduleBase + array(
 			'scripts' => array(
-				'jquery.wikibase.fingerprintview.tests.js',
+				'jquery.wikibase.entitytermsforlanguageview.tests.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.fingerprintview',
+				'jquery.wikibase.entitytermsforlanguageview',
 			),
 		),
 
