@@ -16,6 +16,24 @@
       "revId": "964bc41006638ed3a8291515f8dc6870cc1bfbd8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_c4d2182c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-17T16:13:57Z",
+      "side": 1,
+      "message": "yes, would fix that.\n\ni still have reservations about EditFilter handling code making the assumption that context title \u003d\u003d\u003d target title for the content.\n\nI think such assumptions should be avoided and maybe some mechanism for context to also have a target or something would be nice.",
+      "parentUuid": "0e6cb3ef_64dd4c47",
+      "revId": "964bc41006638ed3a8291515f8dc6870cc1bfbd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
