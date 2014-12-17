@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Template\TemplateFactory;
 
 /**
  * Generates HTML to display the fingerprint of an entity
@@ -20,6 +21,11 @@ use Wikibase\DataModel\Term\TermList;
 class FingerprintView {
 
 	/**
+	 * @var TemplateFactory
+	 */
+	private $templateFactory;
+
+	/**
 	 * @var SectionEditLinkGenerator
 	 */
 	private $sectionEditLinkGenerator;
@@ -30,12 +36,18 @@ class FingerprintView {
 	private $languageCode;
 
 	/**
+	 * @param TemplateFactory $templateFactory
 	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
 	 * @param string $languageCode
 	 */
-	public function __construct( SectionEditLinkGenerator $sectionEditLinkGenerator, $languageCode ) {
+	public function __construct(
+		TemplateFactory $templateFactory,
+		SectionEditLinkGenerator $sectionEditLinkGenerator,
+		$languageCode
+	) {
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->languageCode = $languageCode;
+		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -54,7 +66,7 @@ class FingerprintView {
 
 		$html .= $this->getHtmlForLabel( $labels, $entityId, $editable );
 		$html .= $this->getHtmlForDescription( $descriptions, $entityId, $editable );
-		$html .= wfTemplate( 'wb-entity-header-separator' );
+		$html .= $this->templateFactory->render( 'wb-entity-header-separator' );
 		$html .= $this->getHtmlForAliases( $aliasGroups, $entityId, $editable );
 
 		return $html;
@@ -71,7 +83,7 @@ class FingerprintView {
 		$hasLabel = $labels->hasTermForLanguage( $this->languageCode );
 		$id = 'new';
 		$idInParentheses = '';
-		$editSection = wfTemplate( 'wikibase-toolbar-wrapper',
+		$editSection = $this->templateFactory->render( 'wikibase-toolbar-wrapper',
 			$this->getHtmlForEditSection( 'SetLabel', $entityId, $editable )
 		);
 
@@ -81,9 +93,9 @@ class FingerprintView {
 		}
 
 		if ( $hasLabel ) {
-			return wfTemplate( 'wikibase-firstHeading',
+			return $this->templateFactory->render( 'wikibase-firstHeading',
 				$id,
-				wfTemplate( 'wikibase-labelview',
+				$this->templateFactory->render( 'wikibase-labelview',
 					'',
 					htmlspecialchars( $labels->getByLanguage( $this->languageCode )->getText() ),
 					$idInParentheses,
@@ -91,9 +103,9 @@ class FingerprintView {
 				)
 			);
 		} else {
-			return wfTemplate( 'wikibase-firstHeading',
+			return $this->templateFactory->render( 'wikibase-firstHeading',
 				$id,
-				wfTemplate( 'wikibase-labelview',
+				$this->templateFactory->render( 'wikibase-labelview',
 					'wb-empty',
 					wfMessage( 'wikibase-label-empty' )->escaped(),
 					$idInParentheses,
@@ -115,13 +127,13 @@ class FingerprintView {
 		$editSection = $this->getHtmlForEditSection( 'SetDescription', $entityId, $editable );
 
 		if ( $hasDescription ) {
-			return wfTemplate( 'wikibase-descriptionview',
+			return $this->templateFactory->render( 'wikibase-descriptionview',
 				'',
 				htmlspecialchars( $descriptions->getByLanguage( $this->languageCode )->getText() ),
 				$editSection
 			);
 		} else {
-			return wfTemplate( 'wikibase-descriptionview',
+			return $this->templateFactory->render( 'wikibase-descriptionview',
 				'wb-empty',
 				wfMessage( 'wikibase-description-empty' )->escaped(),
 				$editSection
@@ -144,20 +156,20 @@ class FingerprintView {
 			$aliasesHtml = '';
 			$aliases = $aliasGroups->getByLanguage( $this->languageCode )->getAliases();
 			foreach ( $aliases as $alias ) {
-				$aliasesHtml .= wfTemplate(
+				$aliasesHtml .= $this->templateFactory->render(
 					'wikibase-aliasesview-list-item',
 					htmlspecialchars( $alias )
 				);
 			}
 
-			return wfTemplate( 'wikibase-aliasesview',
+			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->escaped(),
 				$aliasesHtml,
 				$editSection
 			);
 		} else {
-			return wfTemplate( 'wikibase-aliasesview',
+			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'wb-empty',
 				wfMessage( 'wikibase-aliases-empty' )->escaped(),
 				'',

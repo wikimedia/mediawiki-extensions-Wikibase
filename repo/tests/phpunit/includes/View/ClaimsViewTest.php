@@ -17,6 +17,8 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Repo\View\ClaimHtmlGenerator;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
+use Wikibase\Template\TemplateFactory;
+use Wikibase\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\ClaimsView
@@ -105,9 +107,11 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	 * @return ClaimsView
 	 */
 	private function newClaimsView( EntityIdFormatter $propertyIdFormatter ) {
+		$templateFactory = new TemplateFactory( TemplateRegistry::getDefaultInstance() );
 		return new ClaimsView(
+			$templateFactory,
 			$propertyIdFormatter,
-			new SectionEditLinkGenerator(),
+			new SectionEditLinkGenerator( $templateFactory ),
 			$this->getClaimHtmlGeneratorMock()
 		);
 	}

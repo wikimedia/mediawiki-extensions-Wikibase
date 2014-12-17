@@ -49,7 +49,9 @@ use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityRetrievingTermLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\TermLookup;
@@ -75,6 +77,7 @@ use Wikibase\SqlStore;
 use Wikibase\Store;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\Template\TemplateFactory;
 use Wikibase\TemplateRegistry;
 use Wikibase\Utils;
 use Wikibase\Validators\EntityConstraintProvider;
@@ -169,11 +172,6 @@ class WikibaseRepo {
 	private $entityNamespaceLookup = null;
 
 	/**
-	 * @var TemplateRegistry|null
-	 */
-	private $templateRegistry = null;
-
-	/**
 	 * Returns the default instance constructed using newInstance().
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
@@ -265,7 +263,7 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return \Wikibase\Lib\Store\EntityStoreWatcher
+	 * @return EntityStoreWatcher
 	 */
 	public function getEntityStoreWatcher() {
 		return $this->getStore()->getEntityStoreWatcher();
@@ -294,7 +292,7 @@ class WikibaseRepo {
 	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
 	 *
-	 * @return \Wikibase\Lib\Store\EntityRevisionLookup
+	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup( $uncached = '' ) {
 		return $this->getStore()->getEntityRevisionLookup( $uncached );
@@ -303,7 +301,7 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return \Wikibase\Lib\Store\EntityStore
+	 * @return EntityStore
 	 */
 	public function getEntityStore() {
 		return $this->getStore()->getEntityStore();
@@ -994,6 +992,7 @@ class WikibaseRepo {
 			$this->getEntityLookup(),
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
+			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
 			$this->getSettings()->getSetting( 'siteLinkGroups' ),
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' ),
 			$this->getSettings()->getSetting( 'badgeItems' )
@@ -1007,15 +1006,6 @@ class WikibaseRepo {
 			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
 			$this->getLanguageFallbackChainFactory()
 		);
-	}
-
-	public function getTemplateRegistry() {
-		if ( $this->templateRegistry === null ) {
-			$this->templateRegistry = new TemplateRegistry();
-			$this->templateRegistry->addTemplates( include( __DIR__ . '/../resources/templates.php' ) );
-		}
-
-		return $this->templateRegistry;
 	}
 
 }
