@@ -11,10 +11,11 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdFormatterFactory;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Template\TemplateFactory;
 
 /**
  * @since 0.5
@@ -70,11 +71,18 @@ class EntityViewFactory {
 	private $badgeItems;
 
 	/**
+	 *
+	 * @var TemplateFactory
+	 */
+	private $templateFactory;
+
+	/**
 	 * @param EntityIdFormatterFactory $idFormatterFactory
 	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
 	 * @param EntityLookup $entityLookup
 	 * @param SiteStore $siteStore
 	 * @param DataTypeFactory $dataTypeFactory
+	 * @param TemplateFactory $templateFactory
 	 */
 	public function __construct(
 		EntityIdFormatterFactory $idFormatterFactory,
@@ -82,6 +90,7 @@ class EntityViewFactory {
 		EntityLookup $entityLookup,
 		SiteStore $siteStore,
 		DataTypeFactory $dataTypeFactory,
+		TemplateFactory $templateFactory,
 		array $siteLinkGroups,
 		array $specialSiteLinkGroups,
 		array $badgeItems
@@ -90,13 +99,16 @@ class EntityViewFactory {
 
 		$this->idFormatterFactory = $idFormatterFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
-		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 		$this->entityLookup = $entityLookup;
 		$this->siteStore = $siteStore;
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
+		$this->templateFactory = $templateFactory;
+		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator(
+			$this->templateFactory
+		);
 	}
 
 	/**
@@ -140,6 +152,7 @@ class EntityViewFactory {
 		switch ( $entityType ) {
 			case 'item':
 				$siteLinksView = new SiteLinksView(
+					$this->templateFactory,
 					$this->siteStore->getSites(),
 					$this->sectionEditLinkGenerator,
 					$this->entityLookup,
@@ -149,6 +162,7 @@ class EntityViewFactory {
 				);
 
 				return new ItemView(
+					$this->templateFactory,
 					$fingerprintView,
 					$claimsView,
 					$language,
@@ -158,6 +172,7 @@ class EntityViewFactory {
 				);
 			case 'property':
 				return new PropertyView(
+					$this->templateFactory,
 					$fingerprintView,
 					$claimsView,
 					$this->dataTypeFactory,
@@ -184,15 +199,18 @@ class EntityViewFactory {
 		$propertyIdFormatter = $this->getPropertyIdFormatter( $languageCode, $fallbackChain, $labelLookup );
 
 		$snakHtmlGenerator = new SnakHtmlGenerator(
+			$this->templateFactory,
 			$this->getSnakFormatter( $languageCode, $fallbackChain, $labelLookup ),
 			$propertyIdFormatter
 		);
 
 		$claimHtmlGenerator = new ClaimHtmlGenerator(
+			$this->templateFactory,
 			$snakHtmlGenerator
 		);
 
 		return new ClaimsView(
+			$this->templateFactory,
 			$propertyIdFormatter,
 			$this->sectionEditLinkGenerator,
 			$claimHtmlGenerator
@@ -206,6 +224,7 @@ class EntityViewFactory {
 	 */
 	private function newFingerprintView( $languageCode ) {
 		return new FingerprintView(
+			$this->templateFactory,
 			$this->sectionEditLinkGenerator,
 			$languageCode
 		);

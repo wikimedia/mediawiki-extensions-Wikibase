@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
+use Wikibase\Template\TemplateFactory;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.
@@ -24,6 +25,11 @@ use Wikibase\EntityRevision;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 abstract class EntityView {
+
+	/**
+	 * @var TemplateFactory
+	 */
+	protected $templateFactory;
 
 	/**
 	 * @var FingerprintView
@@ -51,12 +57,14 @@ abstract class EntityView {
 	private $textInjector;
 
 	/**
+	 * @param TemplateFactory $templateFactory
 	 * @param FingerprintView $fingerprintView
 	 * @param ClaimsView $claimsView
 	 * @param Language $language
 	 * @param bool $editable
 	 */
 	public function __construct(
+		TemplateFactory $templateFactory,
 		FingerprintView $fingerprintView,
 		ClaimsView $claimsView,
 		Language $language,
@@ -68,6 +76,7 @@ abstract class EntityView {
 		$this->editable = $editable;
 
 		$this->textInjector = new TextInjector();
+		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -101,7 +110,7 @@ abstract class EntityView {
 
 		$entityId = $entity->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 
-		$html = wfTemplate( 'wikibase-entityview',
+		$html = $this->templateFactory->render( 'wikibase-entityview',
 			$entity->getType(),
 			$entityId,
 			$this->language->getCode(),
@@ -202,14 +211,14 @@ if ( $ ) {
 		$i = 1;
 
 		foreach ( $tocSections as $id => $message ) {
-			$tocContent .= wfTemplate( 'wb-entity-toc-section',
+			$tocContent .= $this->templateFactory->render( 'wb-entity-toc-section',
 				$i++,
 				$id,
 				wfMessage( $message )->text()
 			);
 		}
 
-		return wfTemplate( 'wb-entity-toc',
+		return $this->templateFactory->render( 'wb-entity-toc',
 			wfMessage( 'toc' )->text(),
 			$tocContent
 		);

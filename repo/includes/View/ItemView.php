@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityRevision;
+use Wikibase\Template\TemplateFactory;
 
 /**
  * Class for creating views for Item instances.
@@ -32,6 +33,7 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::__construct
 	 *
+	 * @param TemplateFactory $templateFactory
 	 * @param FingerprintView $fingerprintView
 	 * @param ClaimsView $claimsView
 	 * @param Language $language
@@ -40,6 +42,7 @@ class ItemView extends EntityView {
 	 * @param bool $editable
 	 */
 	public function __construct(
+		TemplateFactory $templateFactory,
 		FingerprintView $fingerprintView,
 		ClaimsView $claimsView,
 		Language $language,
@@ -47,7 +50,7 @@ class ItemView extends EntityView {
 		array $siteLinkGroups,
 		$editable = true
 	) {
-		parent::__construct( $fingerprintView, $claimsView, $language, $editable );
+		parent::__construct( $templateFactory, $fingerprintView, $claimsView, $language, $editable );
 
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->siteLinksView = $siteLinksView;

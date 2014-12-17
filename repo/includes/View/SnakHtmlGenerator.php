@@ -4,10 +4,11 @@ namespace Wikibase\Repo\View;
 
 use InvalidArgumentException;
 use ValueFormatters\FormattingException;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Entity\PropertyNotFoundException;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Template\TemplateFactory;
 
 /**
  * Base class for generating Snak html.
@@ -21,6 +22,11 @@ use Wikibase\Lib\SnakFormatter;
  * @author Daniel Kinzler
  */
 class SnakHtmlGenerator {
+
+	/**
+	 * @var TemplateFactory
+	 */
+	private $templateFactory;
 
 	/**
 	 * @since 0.4
@@ -43,6 +49,7 @@ class SnakHtmlGenerator {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
+		TemplateFactory $templateFactory,
 		SnakFormatter $snakFormatter,
 		EntityIdFormatter $propertyIdFormatter
 	) {
@@ -54,6 +61,7 @@ class SnakHtmlGenerator {
 
 		$this->snakFormatter = $snakFormatter;
 		$this->propertyIdFormatter = $propertyIdFormatter;
+		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -76,7 +84,7 @@ class SnakHtmlGenerator {
 
 		$propertyLink = $showPropertyLink ? $this->makePropertyLink( $snak ) : '';
 
-		$html = wfTemplate( 'wb-snak',
+		$html = $this->templateFactory->render( 'wb-snak',
 			// Display property link only once for snaks featuring the same property:
 			$propertyLink,
 			$snakViewCssClass,

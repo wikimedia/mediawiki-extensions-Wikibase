@@ -213,5 +213,4 @@ call_user_func( function() {
 		include_once( __DIR__ . '/config/Wikibase.experimental.php' );
 	}
 
-	require __DIR__ . '/includes/GlobalFunctions.php';
 } );
