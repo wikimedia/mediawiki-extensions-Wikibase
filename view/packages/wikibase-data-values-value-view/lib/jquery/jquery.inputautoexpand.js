@@ -160,11 +160,14 @@ $.extend( $.AutoExpandInput.prototype, {
 
 	/**
 	 * Sets the input box's width to fit the box's content.
+	 *
+	 * @param {boolean} [force] Whether to evaluate height/width regardless of the element's text
+	 *        having changed.
 	 */
-	expand: function() {
+	expand: function( force ) {
 		var newVal = this.$input.val();
 
-		if( newVal === this._previousVal ) {
+		if( !force && newVal === this._previousVal ) {
 			return;
 		}
 
