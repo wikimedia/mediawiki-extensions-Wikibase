@@ -169,7 +169,7 @@ return call_user_func( function() {
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.aliasesview',
 				'jquery.wikibase.descriptionview',
-				'jquery.wikibase.fingerprintgroupview',
+				'jquery.wikibase.entitytermsview',
 				'jquery.wikibase.labelview',
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.datamodel.Term',
@@ -182,32 +182,32 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.fingerprintgroupview' => $moduleTemplate + array(
+		'jquery.wikibase.entitytermsview' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase.fingerprintgroupview.js',
+				'jquery.wikibase.entitytermsview.js',
 			),
 			'styles' => array(
-				'themes/default/jquery.wikibase.fingerprintgroupview.css',
+				'themes/default/jquery.wikibase.entitytermsview.css',
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
-				'jquery.wikibase.fingerprintlistview',
+				'jquery.wikibase.entitytermsforlanguagelistview',
 			),
 			'messages' => array(
 				'wikibase-terms',
 			),
 		),
 
-		'jquery.wikibase.fingerprintlistview' => $moduleTemplate + array(
+		'jquery.wikibase.entitytermsforlanguagelistview' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase.fingerprintlistview.js',
+				'jquery.wikibase.entitytermsforlanguagelistview.js',
 			),
 			'styles' => array(
-				'themes/default/jquery.wikibase.fingerprintlistview.css',
+				'themes/default/jquery.wikibase.entitytermsforlanguagelistview.css',
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
-				'jquery.wikibase.fingerprintview',
+				'jquery.wikibase.entitytermsforlanguage',
 				'wikibase.getLanguageNameByCode',
 			),
 			'messages' => array(
@@ -215,12 +215,12 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.fingerprintview' => $moduleTemplate + array(
+		'jquery.wikibase.entitytermsforlanguage' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase.fingerprintview.js',
+				'jquery.wikibase.entitytermsforlanguage.js',
 			),
 			'styles' => array(
-				'themes/default/jquery.wikibase.fingerprintview.css',
+				'themes/default/jquery.wikibase.entitytermsforlanguage.css',
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
