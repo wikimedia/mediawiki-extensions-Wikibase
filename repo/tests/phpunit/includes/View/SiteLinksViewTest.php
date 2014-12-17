@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use MediaWikiSite;
-use MediaWikiTestCase;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -13,7 +12,6 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SiteLinksView;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\SiteLinksView
@@ -35,7 +33,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
 		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
-		MediaWikiTestCase::assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
+		\MediaWikiTestCase::assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
 	}
 
 	public function getHtmlProvider() {
@@ -190,7 +188,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	private function getSiteLinksView() {
 
 		return new SiteLinksView(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			new TemplateFactory(),
 			$this->newSiteList(),
 			$this->getSectionEditLinkGeneratorMock(),
 			$this->getEntityLookupMock(),

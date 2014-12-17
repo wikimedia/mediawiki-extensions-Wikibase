@@ -43,6 +43,7 @@ class SnakHtmlGenerator {
 	protected $propertyIdFormatter;
 
 	/**
+	 * @param TemplateFactory $templateFactory
 	 * @param SnakFormatter $snakFormatter
 	 * @param EntityIdFormatter $propertyIdFormatter
 	 *
@@ -54,14 +55,15 @@ class SnakHtmlGenerator {
 		EntityIdFormatter $propertyIdFormatter
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
-				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
+			&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET
+		) {
 			throw new InvalidArgumentException( '$snakFormatter is expected to return text/html, not '
 					. $snakFormatter->getFormat() );
 		}
 
+		$this->templateFactory = $templateFactory;
 		$this->snakFormatter = $snakFormatter;
 		$this->propertyIdFormatter = $propertyIdFormatter;
-		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -84,7 +86,7 @@ class SnakHtmlGenerator {
 
 		$propertyLink = $showPropertyLink ? $this->makePropertyLink( $snak ) : '';
 
-		$html = $this->templateFactory->renderTpl( 'wb-snak',
+		$html = $this->templateFactory->render( 'wb-snak',
 			// Display property link only once for snaks featuring the same property:
 			$propertyLink,
 			$snakViewCssClass,

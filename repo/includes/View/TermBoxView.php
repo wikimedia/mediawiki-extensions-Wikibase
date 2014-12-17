@@ -28,18 +28,19 @@ class TermBoxView {
 	private $templateFactory;
 
 	/**
-	 * @var SectionEditLinkGenerator
-	 */
-	private $sectionEditLinkGenerator;
-
-	/**
 	 * @var Language
 	 */
 	private $language;
 
+	/**
+	 * @var SectionEditLinkGenerator
+	 */
+	private $sectionEditLinkGenerator;
+
 	public function __construct( TemplateFactory $templateFactory, Language $language ) {
-		$this->language = $language;
 		$this->templateFactory = $templateFactory;
+		$this->language = $language;
+
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator( $templateFactory );
 	}
 
@@ -81,11 +82,11 @@ class TermBoxView {
 			$hasLabel = $labels->hasTermForLanguage( $languageCode );
 			$hasDescription = $descriptions->hasTermForLanguage( $languageCode );
 
-			$tbody .= $this->templateFactory->renderTpl( 'wikibase-fingerprintview',
+			$tbody .= $this->templateFactory->render( 'wikibase-fingerprintview',
 				$languageCode,
 				$title->getLocalURL( array( 'setlang' => $languageCode ) ),
 				htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ),
-				$this->templateFactory->renderTpl( 'wikibase-labelview',
+				$this->templateFactory->render( 'wikibase-labelview',
 					$hasLabel ? '' : 'wb-empty',
 					htmlspecialchars( $hasLabel
 						? $labels->getByLanguage( $languageCode )->getText()
@@ -94,7 +95,7 @@ class TermBoxView {
 					'',
 					''
 				),
-				$this->templateFactory->renderTpl( 'wikibase-descriptionview',
+				$this->templateFactory->render( 'wikibase-descriptionview',
 					$hasDescription ? '' : 'wb-empty',
 					htmlspecialchars( $hasDescription
 						? $descriptions->getByLanguage( $languageCode )->getText()
@@ -107,9 +108,9 @@ class TermBoxView {
 			);
 		}
 
-		$html = $this->templateFactory->renderTpl( 'wikibase-fingerprintgroupview',
+		$html = $this->templateFactory->render( 'wikibase-fingerprintgroupview',
 			$this->msg( 'wikibase-terms' )->text(),
-			$this->templateFactory->renderTpl( 'wikibase-fingerprintlistview', $tbody ),
+			$this->templateFactory->render( 'wikibase-fingerprintlistview', $tbody ),
 			$this->sectionEditLinkGenerator->getHtmlForEditSection(
 				'SpecialPages',
 				array(),
@@ -131,7 +132,7 @@ class TermBoxView {
 	 */
 	private function getHtmlForAliases( AliasGroupList $aliasGroups, $languageCode ) {
 		if ( !$aliasGroups->hasGroupForLanguage( $languageCode ) ) {
-			return $this->templateFactory->renderTpl( 'wikibase-aliasesview',
+			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'wb-empty',
 				wfMessage( 'wikibase-aliases-empty' )->escaped(),
 				'',
@@ -141,13 +142,13 @@ class TermBoxView {
 			$aliasesHtml = '';
 			$aliases = $aliasGroups->getByLanguage( $languageCode )->getAliases();
 			foreach ( $aliases as $alias ) {
-				$aliasesHtml .= $this->templateFactory->renderTpl(
+				$aliasesHtml .= $this->templateFactory->render(
 					'wikibase-aliasesview-list-item',
 					htmlspecialchars( $alias )
 				);
 			}
 
-			return $this->templateFactory->renderTpl( 'wikibase-aliasesview',
+			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->escaped(),
 				$aliasesHtml,
@@ -155,4 +156,5 @@ class TermBoxView {
 			);
 		}
 	}
+
 }

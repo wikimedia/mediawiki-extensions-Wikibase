@@ -17,19 +17,20 @@ class TemplateFactory {
 	private $templateRegistry;
 
 	/**
-	 * @param TemplateRegistry $templateRegistry
+	 * @param TemplateRegistry|null $templateRegistry
 	 */
-	public function __construct(TemplateRegistry $templateRegistry) {
-		$this->templateRegistry = $templateRegistry;
+	public function __construct( TemplateRegistry $templateRegistry = null ) {
+		$this->templateRegistry = $templateRegistry ?: TemplateRegistry::getDefaultInstance();
 	}
 
 	/**
 	 * @param string $key
 	 * @param array $params
+	 *
 	 * @return Template
 	 */
-	public function getTemplate($key, array $params) {
-		return new Template($this->templateRegistry, $key, $params);
+	public function get( $key, array $params ) {
+		return new Template( $this->templateRegistry, $key, $params );
 	}
 
 	/**
@@ -45,7 +46,7 @@ class TemplateFactory {
 	 *
 	 * @return string
 	 */
-	public function renderTpl( $key /* ... */ ) {
+	public function render( $key /* ... */ ) {
 		$params = func_get_args();
 		array_shift( $params );
 
@@ -53,7 +54,7 @@ class TemplateFactory {
 			$params = $params[0];
 		}
 
-		$template = $this->getTemplate($key, $params);
+		$template = $this->get( $key, $params );
 
 		return $template->render();
 	}

@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Html;
-use Title;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
@@ -18,7 +17,6 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\ClaimHtmlGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\TemplateRegistry;
 
 /**
  * @covers Wikibase\ClaimHtmlGenerator
@@ -86,11 +84,9 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		SnakFormatter $snakFormatter,
 		EntityIdFormatter $propertyIdFormatter,
 		Claim $claim,
-		$patterns
+		array $patterns
 	) {
-		$templateFactory = new TemplateFactory(
-			TemplateRegistry::getDefaultInstance()
-		);
+		$templateFactory = new TemplateFactory();
 
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$templateFactory,
@@ -105,7 +101,7 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$html = $claimHtmlGenerator->getHtmlForClaim( $claim, 'edit' );
 
-		foreach( $patterns as $message => $pattern ) {
+		foreach ( $patterns as $message => $pattern ) {
 			$this->assertRegExp( $pattern, $html, $message );
 		}
 	}

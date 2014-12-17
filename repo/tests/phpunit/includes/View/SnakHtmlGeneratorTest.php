@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Html;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -13,7 +12,6 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\SnakHtmlGenerator
@@ -36,7 +34,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$patterns
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			new TemplateFactory(),
 			$snakFormatter,
 			$propertyIdFormatter
 		);
