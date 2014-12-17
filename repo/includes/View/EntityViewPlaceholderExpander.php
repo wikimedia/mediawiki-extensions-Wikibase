@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Template\TemplateFactory;
 use Wikibase\UserLanguageLookup;
 
 /**
@@ -31,6 +32,11 @@ use Wikibase\UserLanguageLookup;
  * @author Daniel Kinzler
  */
 class EntityViewPlaceholderExpander {
+
+	/**
+	 * @var TemplateFactory
+	 */
+	private $templateFactory;
 
 	/**
 	 * @var Title
@@ -68,6 +74,7 @@ class EntityViewPlaceholderExpander {
 	private $extraLanguages = null;
 
 	/**
+	 * @param TemplateFactory $templateFactory
 	 * @param Title $targetPage the page for which this expander is supposed to handle expansion.
 	 * @param User $user the current user
 	 * @param Language $uiLanguage the user's current UI language (as per the present request)
@@ -76,6 +83,7 @@ class EntityViewPlaceholderExpander {
 	 * @param UserLanguageLookup $userLanguageLookup
 	 */
 	public function __construct(
+		TemplateFactory $templateFactory,
 		Title $targetPage,
 		User $user,
 		Language $uiLanguage,
@@ -89,6 +97,7 @@ class EntityViewPlaceholderExpander {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->userLanguageLookup = $userLanguageLookup;
+		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -202,7 +211,7 @@ class EntityViewPlaceholderExpander {
 			return '';
 		}
 
-		$html = wfTemplate( 'wb-entity-toc-section',
+		$html = $this->templateFactory->renderTpl( 'wb-entity-toc-section',
 			0, // section number, not really used, it seems
 			'wb-terms',
 			wfMessage( 'wikibase-terms' )->inLanguage( $this->uiLanguage )->text()
@@ -240,7 +249,7 @@ class EntityViewPlaceholderExpander {
 			return '';
 		}
 
-		$termBoxView = new TermBoxView( $this->uiLanguage );
+		$termBoxView = new TermBoxView( $this->templateFactory, $this->uiLanguage );
 		$html = $termBoxView->renderTermBox( $this->targetPage, $entity->getFingerprint(), $languages );
 
 		return $html;

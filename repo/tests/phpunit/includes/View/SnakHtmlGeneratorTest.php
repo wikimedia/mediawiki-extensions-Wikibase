@@ -12,6 +12,8 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\SnakHtmlGenerator;
+use Wikibase\Template\TemplateFactory;
+use Wikibase\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\SnakHtmlGenerator
@@ -34,6 +36,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$patterns
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
+			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
 			$snakFormatter,
 			$propertyIdFormatter
 		);
