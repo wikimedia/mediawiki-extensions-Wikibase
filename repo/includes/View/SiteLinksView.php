@@ -7,9 +7,9 @@ use Message;
 use Sanitizer;
 use Site;
 use SiteList;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Utils;
 
@@ -40,9 +40,9 @@ class SiteLinksView {
 	private $entityLookup;
 
 	/**
-	 * @var string
+	 * @var string[]
 	 */
-	private $languageCode;
+	private $badgeItems;
 
 	/**
 	 * @var string[]
@@ -50,10 +50,18 @@ class SiteLinksView {
 	private $specialSiteLinkGroups;
 
 	/**
-	 * @var array
+	 * @var string
 	 */
-	private $badgeItems;
+	private $languageCode;
 
+	/**
+	 * @param SiteList $sites
+	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
+	 * @param EntityLookup $entityLookup
+	 * @param string[] $badgeItems
+	 * @param string[] $specialSiteLinkGroups
+	 * @param string $languageCode
+	 */
 	public function __construct(
 		SiteList $sites,
 		SectionEditLinkGenerator $sectionEditLinkGenerator,
@@ -317,7 +325,6 @@ class SiteLinksView {
 	private function getHtmlForBadges( SiteLink $siteLink ) {
 		$html = '';
 
-		/** @var ItemId $badge */
 		foreach ( $siteLink->getBadges() as $badge ) {
 			$serialization = $badge->getSerialization();
 			$classes = Sanitizer::escapeClass( $serialization );
@@ -339,22 +346,22 @@ class SiteLinksView {
 	 * Returns the title for the given badge id.
 	 * @todo use TermLookup when we have one
 	 *
-	 * @param EntityId $badgeId
+	 * @param ItemId $badgeId
 	 *
 	 * @return string
 	 */
-	private function getTitleForBadge( EntityId $badgeId ) {
-		$entity = $this->entityLookup->getEntity( $badgeId );
-		if ( $entity === null ) {
-			return $badgeId->getSerialization();
+	private function getTitleForBadge( ItemId $badgeId ) {
+		$badge = $this->entityLookup->getEntity( $badgeId );
+
+		if ( $badge instanceof FingerprintProvider ) {
+			$labels = $badge->getFingerprint()->getLabels();
+
+			if ( $labels->hasTermForLanguage( $this->languageCode ) ) {
+				return $labels->getByLanguage( $this->languageCode )->getText();
+			}
 		}
 
-		$labels = $entity->getFingerprint()->getLabels();
-		if ( $labels->hasTermForLanguage( $this->languageCode ) ) {
-			return $labels->getByLanguage( $this->languageCode )->getText();
-		} else {
-			return $badgeId->getSerialization();
-		}
+		return $badgeId->getSerialization();
 	}
 
 }

@@ -87,11 +87,12 @@ class SiteLinkSerializer extends SerializerObject {
 			}
 
 			if ( !$setRemoved ) {
-				$badges = array();
-
-				foreach ( $siteLink->getBadges() as $badge ) {
-					$badges[] = $badge->getSerialization();
-				}
+				$badges = array_map(
+					function( ItemId $id ) {
+						return $id->getSerialization();
+					},
+					$siteLink->getBadges()
+				);
 
 				if ( $this->options->shouldIndexTags() ) {
 					$this->setIndexedTagName( $badges, 'badge' );
