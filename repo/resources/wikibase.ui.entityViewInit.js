@@ -45,7 +45,7 @@
 				'statementview',
 				'descriptionview',
 				'labelview',
-				'fingerprintgroupview',
+				'entitytermsview',
 				'referenceview',
 				'sitelinkgroupview'
 			],
