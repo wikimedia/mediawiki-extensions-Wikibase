@@ -5,6 +5,9 @@ namespace Wikibase\Test;
 use Language;
 use RequestContext;
 use Title;
+use Linker;
+use SpecialPageFactory;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
@@ -77,18 +80,39 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( array(), $customAttribs );
 	}
 
-	public function testDoOnLinkBegin_overrideSpecialNewItemLink() {
+	public function overrideSpecialNewEntityLinkProvider() {
+		$entityTypes = array_keys( WikibaseRepo::getDefaultInstance()->getContentModelMappings() );
+
+		$linkTitles = array();
+		foreach ( $entityTypes as $entityType ) {
+			$linkTitles[] = array( 'New' . ucfirst( $entityType ) );
+		}
+
+		return $linkTitles;
+	}
+
+	/**
+	 * @dataProvider overrideSpecialNewEntityLinkProvider
+	 * @param string $linkTitle
+	 */
+	public function testDoOnLinkBegin_overrideSpecialNewEntityLink( $linkTitle ) {
 		$contextTitle = Title::newFromText( 'Special:Recentchanges' );
 		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
 
-		$title = Title::makeTitle( NS_MAIN, 'NewItem' );
+		$title = Title::makeTitle( NS_MAIN, $linkTitle );
 		$html = $title->getFullText();
 		$out = $this->getOutputPage( $contextTitle );
 		$attribs = array();
 
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $attribs, $out );
 
-		$this->assertContains( 'Special:NewItem', $html );
+		$specialPageTitle = Title::makeTitle(
+			NS_SPECIAL,
+			SpecialPageFactory::getLocalNameFor( $linkTitle )
+		);
+
+		$this->assertContains( Linker::linkKnown( $specialPageTitle ), $html );
+		$this->assertContains( $specialPageTitle->getFullText(), $html );
 	}
 
 	public function testDoOnLinkBegin_nonEntityTitleLink() {
