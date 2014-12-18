@@ -187,7 +187,11 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntity( EntityId $entityId, array $termTypes = null, array $languageCodes = null ) {
+	public function getTermsOfEntity(
+		EntityId $entityId,
+		array $termTypes = null,
+		array $languageCodes = null
+	) {
 		$matchingTerms = array();
 
 		if ( is_array( $termTypes ) ) {
@@ -221,7 +225,11 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
+	public function getTermsOfEntities(
+		array $entityIds,
+		array $termTypes = null,
+		array $languageCodes = null
+	) {
 		$terms = array();
 
 		foreach ( $entityIds as $id ) {
@@ -277,7 +285,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	/**
 	 * @throws Exception always
 	 */
-	public function getMatchingIDs( array $terms, $entityType, array $options = array() ) {
+	public function getMatchingIDs( array $terms, $entityType = null, array $options = array() ) {
 		throw new Exception( 'not implemented by mock class ' );
 	}
 
