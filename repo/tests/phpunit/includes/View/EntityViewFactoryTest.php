@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use PHPUnit_Framework_TestCase;
 use SiteList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
@@ -29,7 +30,7 @@ use Wikibase\Template\TemplateRegistry;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
+class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider newEntityViewProvider
