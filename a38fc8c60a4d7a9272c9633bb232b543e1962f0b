@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_eb0b64d7",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T08:04:19Z",
+      "side": 1,
+      "message": "I also thought about merging TemplateFactory into TemplateRegistry; right now it\u0027s pretty trivial.\n\nWe have to have access to the default TemplateRegistry instance for TemplateModule, so we can\u0027t just move the factory method to TemplateFactory (which I would like). I don\u0027t want to have two factory methods (one on TemplateFactory and one on TemplateRegistry). I suppose the default parameter solution Thiemo proposed is the one I like best.",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_e4339cf1",
         "filename": "repo/includes/Template/TemplateFactory.php",
         "patchSetId": 1
@@ -54,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_abc80cab",
+        "filename": "repo/includes/Template/TemplateFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T08:04:19Z",
+      "side": 1,
+      "message": "Sure, it\u0027s the next item on my list :)",
+      "parentUuid": "0e6cb3ef_e4339cf1",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_644f8c6f",
         "filename": "repo/includes/Template/TemplateFactory.php",
         "patchSetId": 1
@@ -65,6 +100,24 @@
       "writtenOn": "2014-12-17T15:54:23Z",
       "side": 1,
       "message": "Spaces missing. Also in the constructor.",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_cbc54092",
+        "filename": "repo/includes/Template/TemplateFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T08:04:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_644f8c6f",
       "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -106,6 +159,42 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_eb3da48b",
+        "filename": "repo/includes/Template/TemplateFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T08:04:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_447128a6",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_6b5194dc",
+        "filename": "repo/includes/Template/TemplateFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T08:04:19Z",
+      "side": 1,
+      "message": "It eases the transition. Getting rid of this would be ok for me.",
+      "parentUuid": "0e6cb3ef_075572c5",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_c4b3f84a",
         "filename": "repo/includes/TemplateRegistry.php",
         "patchSetId": 1
@@ -140,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_4b6050a0",
+        "filename": "repo/includes/View/ClaimHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T08:04:19Z",
+      "side": 1,
+      "message": "I\u0027d rather have this done in a follow-up, since it doesn\u0027t seem trivial to me.",
+      "parentUuid": "0e6cb3ef_47292a35",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_07233255",
         "filename": "repo/includes/View/SiteLinksView.php",
         "patchSetId": 1
@@ -151,6 +258,24 @@
       "writtenOn": "2014-12-17T17:30:58Z",
       "side": 1,
       "message": "Please re-use the Template object",
+      "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_eb54c4cb",
+        "filename": "repo/includes/View/SiteLinksView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T08:04:19Z",
+      "side": 1,
+      "message": "I\u0027d rather have this done in a follow-up, since it doesn\u0027t seem trivial to me.",
+      "parentUuid": "0e6cb3ef_07233255",
       "revId": "a38fc8c60a4d7a9272c9633bb232b543e1962f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
