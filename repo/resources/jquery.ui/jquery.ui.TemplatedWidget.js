@@ -35,6 +35,10 @@
 	 *         of a custom template. The used fields should stick to what is defined in the widget's
 	 *         default options definition.
 	 *
+	 * @option [encapsulate=false] {boolean} Whether non-native `jQuery.Widget` events shall be
+	 *         triggered on the widget's node only and not bubble up the DOM tree (using
+	 *         `jQuery.triggerHandler()` instead of `jQuery.trigger()`).
+	 *
 	 * NOTE: the template options have been fields in the prototype before. It makes kind of sense
 	 *       to make them available in the options though. An issue with having 'templateShortCuts'
 	 *       as a field was that inheritance would not be possible with the jQuery Widget system
@@ -62,7 +66,8 @@
 			 * @descr this.$preview will hold the DOM node (wrapped inside a jQuery object) which
 			 *        matches above expression.
 			 */
-			templateShortCuts: {}
+			templateShortCuts: {},
+			encapsulate: false
 		} ),
 
 		/**
@@ -158,6 +163,50 @@
 		 */
 		focus: function() {
 			this.element.focus();
+		},
+
+		/**
+		 * Clone of jQuery.Widget._trigger with the difference that `$.triggerHandler()` instead of
+		 * `$.trigger()` is used to trigger the event on `this.element` if `encapsulate` option is
+		 * `true`.
+		 * @see jQuery.Widget._trigger
+		 * @protected
+		 *
+		 * @param {string} type
+		 * @param {jQuery.Event|string} event
+		 * @param {*} data
+		 * @return {boolean}
+		 */
+		_trigger: function( type, event, data ) {
+			var prop,
+				orig,
+				callback = this.options[type];
+
+			data = data || {};
+			event = $.Event( event );
+			event.type = (
+				type === this.widgetEventPrefix ? type : this.widgetEventPrefix + type
+			).toLowerCase();
+			// The original event may come from any element, so we need to reset the target on the
+			// new event:
+			event.target = this.element[0];
+
+			// Copy original event properties over to the new event:
+			orig = event.originalEvent;
+			if( orig ) {
+				for( prop in orig ) {
+					if( !( prop in event ) ) {
+						event[prop] = orig[prop];
+					}
+				}
+			}
+
+			this.element[this.options.encapsulate ? 'triggerHandler' : 'trigger']( event, data );
+			return !(
+				$.isFunction( callback )
+					&& callback.apply( this.element[0], [ event ].concat( data ) ) === false
+				|| event.isDefaultPrevented()
+			);
 		}
 	} );
 
