@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_0b28182e",
+        "filename": "repo/includes/SiteLinkTargetProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T08:15:17Z",
+      "side": 1,
+      "message": "Could at lease be Wikibase\\Repo.",
+      "revId": "3266bbded515d0cca4f1df9a580fc37b79642d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
