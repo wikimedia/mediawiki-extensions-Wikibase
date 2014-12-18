@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Summary;
 
 /**
@@ -31,7 +32,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @since 0.4
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	protected $site;
 
@@ -69,9 +70,19 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	protected $badgeItems;
 
 	/**
+	 * @var string[]
+	 */
+	protected $siteLinkGroups;
+
+	/**
 	 * @var SiteLinkChangeOpFactory
 	 */
 	protected $siteLinkChangeOpFactory;
+
+	/**
+	 * @var SiteLinkTargetProvider
+	 */
+	protected $siteLinkTargetProvider;
 
 	/**
 	 * @since 0.4
@@ -85,8 +96,13 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
+		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 
 		$this->siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
+		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
+			$this->siteStore,
+			$settings->getSetting( 'specialSiteLinkGroups' )
+		);
 	}
 
 	/**
@@ -115,7 +131,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$this->site = null;
 		}
 
-		if ( !$this->isValidSiteId( $this->site ) && $this->site !== null ) {
+		if ( !$this->isValidSiteId( $this->site ) ) {
 			$this->showErrorHTML( $this->msg( 'wikibase-setsitelink-invalid-site', $this->site )->parse() );
 		}
 
@@ -136,6 +152,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 */
 	protected function validateInput() {
 		$request = $this->getRequest();
+
+		if ( !$this->isValidSiteId( $this->site ) ) {
+			return false;
+		}
 
 		if ( !parent::validateInput() ) {
 			return false;
@@ -204,7 +224,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	private function isValidSiteId( $siteId ) {
-		return $siteId !== null && $this->siteStore->getSite( $siteId ) !== null;
+		return $siteId !== null
+			&& $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups )->hasSite( $siteId );
 	}
 
 	/**
