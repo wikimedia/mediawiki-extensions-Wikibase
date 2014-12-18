@@ -263,7 +263,9 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 */
 	notification: function( $content, additionalCssClasses ) {
 		if( !this._$notification ) {
-			this._$notification = $( '<div/>' ).closeable();
+			this._$notification = $( '<div/>' ).closeable( {
+				encapsulate: true
+			} );
 		}
 		this._$notification.data( 'closeable' ).setContent( $content, additionalCssClasses );
 		return this._$notification;
