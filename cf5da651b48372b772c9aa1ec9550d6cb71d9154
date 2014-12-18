@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_eb48448e",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-18T09:31:41Z",
+      "side": 1,
+      "message": "According to PSR-0, the directory should have the same name as the namespace, which, by convention, should be upper case.",
+      "parentUuid": "0e6cb3ef_2bb39ce9",
+      "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_8b8c28dd",
         "filename": "lib/includes/Store/BufferingTermLookup.php",
         "patchSetId": 10
@@ -65,6 +83,24 @@
       "writtenOn": "2014-12-18T09:00:37Z",
       "side": 1,
       "message": "The buffered terms don\u0027t need to be converted?",
+      "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_6b85149f",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-18T09:31:41Z",
+      "side": 1,
+      "message": "No. $bufferedTerms is a string[], $fetchedTerms is a Term[].",
+      "parentUuid": "0e6cb3ef_8b78a8ee",
       "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
