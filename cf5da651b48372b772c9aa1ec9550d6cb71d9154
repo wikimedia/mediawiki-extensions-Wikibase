@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_61f533b5",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T15:48:58Z",
+      "side": 1,
+      "message": "I know, but right now most things in Wikibase\\Lib\\Store are in lib/includes/store.",
+      "parentUuid": "0e6cb3ef_eb48448e",
+      "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_8b8c28dd",
         "filename": "lib/includes/Store/BufferingTermLookup.php",
         "patchSetId": 10
@@ -101,6 +119,23 @@
       "side": 1,
       "message": "No. $bufferedTerms is a string[], $fetchedTerms is a Term[].",
       "parentUuid": "0e6cb3ef_8b78a8ee",
+      "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_4407ddcd",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T15:48:58Z",
+      "side": 1,
+      "message": "›false if that term‹",
       "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
