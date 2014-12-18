@@ -15,7 +15,7 @@
  */
 $.util.getDirectionality = function( languageCode ) {
 	var dir = $.uls && $.uls.data ? $.uls.data.getDir( languageCode ) : $( 'html' ).prop( 'dir' );
-	return dir !== '' ? dir : 'auto';
+	return dir ? dir : 'auto';
 };
 
 }( jQuery ) );
