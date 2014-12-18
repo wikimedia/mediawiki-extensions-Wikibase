@@ -48,7 +48,11 @@ interface TermIndex {
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntity( EntityId $entityId, array $termTypes = null, array $languageCodes = null );
+	public function getTermsOfEntity(
+		EntityId $entityId,
+		array $termTypes = null,
+		array $languageCodes = null
+	);
 
 	/**
 	 * Returns the terms stored for the given entities. Can be filtered by language.
@@ -64,7 +68,11 @@ interface TermIndex {
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $entityIds, array $termTypes = null, array $languageCodes = null );
+	public function getTermsOfEntities(
+		array $entityIds,
+		array $termTypes = null,
+		array $languageCodes = null
+	);
 
 	/**
 	 * Returns the terms that match the provided conditions.
@@ -91,7 +99,12 @@ interface TermIndex {
 	 *
 	 * @return Term[]
 	 */
-	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() );
+	public function getMatchingTerms(
+		array $terms,
+		$termType = null,
+		$entityType = null,
+		array $options = array()
+	);
 
 	/**
 	 * Returns the IDs that match the provided conditions.
@@ -104,7 +117,7 @@ interface TermIndex {
 	 * @since 0.4
 	 *
 	 * @param Term[] $terms
-	 * @param string $entityType
+	 * @param string|null $entityType
 	 * @param array $options
 	 *        Accepted options are:
 	 *        - caseSensitive: boolean, default true
@@ -113,7 +126,7 @@ interface TermIndex {
 	 *
 	 * @return EntityId[]
 	 */
-	public function getMatchingIDs( array $terms, $entityType, array $options = array() );
+	public function getMatchingIDs( array $terms, $entityType = null, array $options = array() );
 
 
 	/**
