@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_2bb39ce9",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T08:39:45Z",
+      "side": 1,
+      "message": "Is the upper-case directory name on purpose or an accident? Should the other files be moved in a follow-up?",
+      "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
