@@ -183,19 +183,23 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	/**
 	 * @param EntityId $id
 	 * @param string[]|null $termTypes
-	 * @param string[]|null $languages
+	 * @param string[]|null $languageCodes
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntity( EntityId $id, array $termTypes = null, array $languages = null ) {
+	public function getTermsOfEntity(
+		EntityId $id,
+		array $termTypes = null,
+		array $languageCodes = null
+	) {
 		$matchingTerms = array();
 
 		if ( $termTypes ) {
 			$termTypes = array_flip( $termTypes );
 		}
 
-		if ( $languages ) {
-			$languages = array_flip( $languages );
+		if ( $languageCodes ) {
+			$languageCodes = array_flip( $languageCodes );
 		}
 
 		foreach( $this->terms as $term ) {
@@ -203,7 +207,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 				continue;
 			}
 
-			if ( $languages !== null && !isset( $languages[$term->getLanguage()] ) ) {
+			if ( $languageCodes !== null && !isset( $languageCodes[$term->getLanguage()] ) ) {
 				continue;
 			}
 
@@ -220,8 +224,14 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	/**
 	 * @see TermIndex::getTermsOfEntities
 	 */
-	public function getTermsOfEntities( array $entityIds, $entityType = null, array $termTypes = null, array $languageCodes = null ) {
+	public function getTermsOfEntities(
+		array $entityIds,
+		$entityType = null,
+		array $termTypes = null,
+		array $languageCodes = null
+	) {
 		$terms = array();
+
 		foreach ( $entityIds as $id ) {
 			$terms = array_merge( $terms, $this->getTermsOfEntity( $id, $termTypes, $languageCodes ) );
 		}
@@ -272,7 +282,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	/**
 	 * @throws Exception always
 	 */
-	public function getMatchingIDs( array $terms, $entityType, array $options = array() ) {
+	public function getMatchingIDs( array $terms, $entityType = null, array $options = array() ) {
 		throw new Exception( 'not implemented by mock class ' );
 	}
 
@@ -371,4 +381,5 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 		return false;
 	}
+
 }
