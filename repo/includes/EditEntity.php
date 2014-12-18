@@ -807,6 +807,16 @@ class EditEntity {
 		} else {
 			$context = $this->context;
 			$entityType = $entity->getType();
+
+			// This constructs a "fake" title of the form Property:NewProperty,
+			// where the title text is assumed to be name of the special page used
+			// to create entities of the given type. This is used by the
+			// LinkBeginHookHandler::doOnLinkBegin to replace the link to the
+			// fake title with a link to the respective special page.
+			// The effect is that e.g. the AbuseFilter log will show a link to
+			// "Special:NewProperty" instead of "Property:NewProperty", while
+			// the AbuseFilter itself will get a Title object with the correct
+			// namespace IDs for Property entities.
 			$namespace = $this->titleLookup->getNamespaceForType( $entityType );
 			$title = Title::makeTitle( $namespace, 'New' . ucfirst( $entityType ) );
 		}
