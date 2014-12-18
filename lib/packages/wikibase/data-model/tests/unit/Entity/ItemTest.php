@@ -17,7 +17,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -667,12 +666,7 @@ class ItemTest extends EntityTest {
 
 		$statements = new StatementList( array( $statement ) );
 
-		$item = new Item(
-			null,
-			Fingerprint::newEmpty(),
-			new SiteLinkList(),
-			$statements
-		);
+		$item = new Item( null, Fingerprint::newEmpty(), null, $statements );
 
 		$this->assertEquals(
 			$statements,
