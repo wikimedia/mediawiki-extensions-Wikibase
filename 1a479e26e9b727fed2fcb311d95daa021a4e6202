@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_3af0c461",
+        "filename": "repo/tests/phpunit/includes/Hook/LinkBeginHookHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-18T19:17:42Z",
+      "side": 1,
+      "message": "this might not work if these settings are not the same as those used below for getEntityNamespaceLookup()",
+      "revId": "1a479e26e9b727fed2fcb311d95daa021a4e6202",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
