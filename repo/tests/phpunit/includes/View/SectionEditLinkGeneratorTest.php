@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\TemplateRegistry;
+use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\SectionEditLinkGenerator
