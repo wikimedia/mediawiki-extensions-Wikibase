@@ -304,7 +304,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	/**
 	 * @throws Exception always
 	 */
-	public function getMatchingIDs( array $terms, $entityType, array $options = array() ) {
+	public function getMatchingIDs( array $terms, $entityType = null, array $options = array() ) {
 		throw new Exception( 'not implemented by mock class ' );
 	}
 

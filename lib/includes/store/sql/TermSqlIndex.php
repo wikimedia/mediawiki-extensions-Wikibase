@@ -139,7 +139,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$entityIdentifiers = array(
 			// FIXME: this will fail for IDs that do not have a numeric form
 			'term_entity_id' => $entity->getId()->getNumericId(),
-
 			'term_entity_type' => $entity->getType()
 		);
 
@@ -177,19 +176,18 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return Term[]
 	 */
 	public function getEntityTerms( EntityDocument $entity ) {
+		$extraFields = array(
+			'entityType' => $entity->getType(),
+		);
+
+		$entityId = $entity->getId();
+		if ( $entityId !== null ) {
+			$extraFields['entityId'] = $entityId->getNumericId();
+		}
+
 		// FIXME: OCP violation. No support for new types of entities can be registered
 
 		if ( $entity instanceof FingerprintProvider ) {
-			$extraFields = array(
-				'entityType' => $entity->getType(),
-			);
-
-			$entityId = $entity->getId();
-
-			if ( $entityId !== null ) {
-				$extraFields['entityId'] = $entityId->getNumericId();
-			}
-
 			return $this->getFingerprintTerms( $entity->getFingerprint(), $extraFields );
 		}
 
@@ -541,12 +539,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @since 0.4
 	 *
 	 * @param Term[] $terms
-	 * @param string $entityType
+	 * @param string|null $entityType
 	 * @param array $options There is an implicit LIMIT of 5000 items in this implementation
 	 *
 	 * @return EntityId[]
 	 */
-	public function getMatchingIDs( array $terms, $entityType, array $options = array() ) {
+	public function getMatchingIDs( array $terms, $entityType = null, array $options = array() ) {
 		if ( empty( $terms ) ) {
 			return array();
 		}
@@ -559,7 +557,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$conditions = $this->termsToConditions( $dbr, $terms, null, $entityType, $options );
 
-		$selectionFields = array( 'term_entity_id' );
+		$selectionFields = array(
+			'term_entity_type',
+			'term_entity_id',
+		);
 
 		// TODO instead of a DB query, get a setting. Should save on a few Database round trips.
 		$hasWeight = $this->supportsWeight();
@@ -576,11 +577,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$requestedLimit = isset( $options['LIMIT'] ) ? max( intval( $options['LIMIT'] ), 0 ) : 0;
 		// if we take the weight into account, we need to grab basically all hits in order
 		// to allow for the post-search sorting below.
-		if ( !$hasWeight && $requestedLimit && $requestedLimit < $queryOptions['LIMIT'] ) {
+		if ( !$hasWeight && $requestedLimit > 0 && $requestedLimit < $queryOptions['LIMIT'] ) {
 			$queryOptions['LIMIT'] = $requestedLimit;
 		}
 
-		$obtainedIDs = $dbr->select(
+		$rows = $dbr->select(
 			$this->tableName,
 			$selectionFields,
 			implode( ' OR ', $conditions ),
@@ -588,41 +589,62 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$queryOptions
 		);
 
-		if ( $hasWeight ) {
-			$weights = array();
-			foreach ( $obtainedIDs as $obtainedID ) {
-				$weights[$obtainedID->term_entity_id] = floatval( $obtainedID->term_weight );
-			}
+		$entityIds = array();
 
-			// this is a post-search sorting by weight. This allows us to not require an additional
-			// index on the wb_terms table that is very big already. This is also why we have
-			// the internal limit of 5000, since SQL's index would explode in size if we added the
-			// weight to it here (which would allow us to delegate the sorting to SQL itself)
-			arsort( $weights, SORT_NUMERIC );
-
-			if ( $requestedLimit ) {
-				$numericIds = array_keys( array_slice( $weights, 0, $requestedLimit, true ) );
+		if ( $rows instanceof Iterator ) {
+			if ( $hasWeight ) {
+				$entityIds = $this->getEntityIdsOrderedByWeight( $rows, $requestedLimit );
 			} else {
-				$numericIds = array_keys( $weights );
-			}
-		} else {
-			$numericIds = array();
-			foreach ( $obtainedIDs as $obtainedID ) {
-				$numericIds[] = $obtainedID->term_entity_id;
+				foreach ( $rows as $row ) {
+					// FIXME: this only works for items and properties
+					$id = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, $row->term_entity_id );
+
+					$entityIds[] = $id;
+				}
 			}
 		}
 
 		$this->releaseConnection( $dbr );
 
-		// turn numbers into entity ids
-		$result = array();
+		return $entityIds;
+	}
 
-		foreach ( $numericIds as $numericId ) {
+	/**
+	 * @param Iterator $rows
+	 * @param int $limit
+	 *
+	 * @return EntityId[]
+	 */
+	private function getEntityIdsOrderedByWeight( Iterator $rows, $limit = 0 ) {
+		$weights = array();
+		$idMap = array();
+
+		foreach ( $rows as $row ) {
 			// FIXME: this only works for items and properties
-			$result[] = LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
+			$id = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, $row->term_entity_id );
+
+			$key = $id->getSerialization();
+			$weights[$key] = floatval( $row->term_weight );
+			$idMap[$key] = $id;
 		}
 
-		return $result;
+		// this is a post-search sorting by weight. This allows us to not require an additional
+		// index on the wb_terms table that is very big already. This is also why we have
+		// the internal limit of 5000, since SQL's index would explode in size if we added the
+		// weight to it here (which would allow us to delegate the sorting to SQL itself)
+		arsort( $weights, SORT_NUMERIC );
+
+		if ( $limit > 0 ) {
+			$weights = array_slice( $weights, 0, $limit, true );
+		}
+
+		$entityIds = array();
+
+		foreach ( $weights as $key => $weight ) {
+			$entityIds[] = $idMap[$key];
+		}
+
+		return $entityIds;
 	}
 
 	/**
@@ -637,8 +659,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private function termsToConditions(
 		DatabaseBase $db,
 		array $terms,
-		$termType,
-		$entityType,
+		$termType = null,
+		$entityType = null,
 		array $options = array()
 	) {
 		$conditions = array();
@@ -663,8 +685,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private function termMatchConditions(
 		DatabaseBase $db,
 		Term $term,
-		$termType,
-		$entityType,
+		$termType = null,
+		$entityType = null,
 		array $options = array()
 	) {
 		$options = array_merge(
