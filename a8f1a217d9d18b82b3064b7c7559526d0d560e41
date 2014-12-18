@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_5568e983",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-18T19:56:48Z",
+      "side": 0,
+      "message": "i now get:\n\nThe site id \"\" is unknown. Please use an existing site id, such as \"enwiki\".\n\nwhenever i visit url like Special:SetSiteLink/Q139\n\ni think the null check is still needed here (putting it back, maybe checking that first before isValidSiteId, fixes this)",
+      "revId": "a8f1a217d9d18b82b3064b7c7559526d0d560e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
