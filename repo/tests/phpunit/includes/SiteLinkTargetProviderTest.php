@@ -1,15 +1,14 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test;
 
 use SiteList;
-use Wikibase\Api\SiteLinkTargetProvider;
+use Wikibase\SiteLinkTargetProvider;
 
 /**
- * @covers Wikibase\Api\SiteLinkTargetProvider
+ * @covers Wikibase\SiteLinkTargetProvider
  *
  * @group Wikibase
- * @group WikibaseAPI
  * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
