@@ -117,7 +117,7 @@ interface TermIndex {
 	 * @since 0.4
 	 *
 	 * @param Term[] $terms
-	 * @param string $entityType
+	 * @param string|null $entityType
 	 * @param array $options
 	 *        Accepted options are:
 	 *        - caseSensitive: boolean, default true
@@ -126,8 +126,7 @@ interface TermIndex {
 	 *
 	 * @return EntityId[]
 	 */
-	public function getMatchingIDs( array $terms, $entityType, array $options = array() );
-
+	public function getMatchingIDs( array $terms, $entityType = null, array $options = array() );
 
 	/**
 	 * Clears all terms from the cache.

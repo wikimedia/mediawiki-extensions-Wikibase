@@ -225,6 +225,27 @@ class TermSqlIndexTest extends TermIndexTest {
 	/**
 	 * @dataProvider termProvider
 	 */
+	public function testGetMatchingIDs_withoutEntityType( $languageCode, $termText, $searchText, $matches ) {
+		$termIndex = $this->getTermIndex();
+		$termIndex->clear();
+
+		$item1 = new Item( new ItemId( 'Q42' ) );
+		$item1->setLabel( $languageCode, $termText );
+
+		$termIndex->saveTermsOfEntity( $item1 );
+
+		$term = new Term();
+		$term->setLanguage( $languageCode );
+		$term->setText( $termText );
+
+		$obtainedIDs = $termIndex->getMatchingIDs( array( $term ) );
+
+		$this->assertNotEmpty( $obtainedIDs );
+	}
+
+	/**
+	 * @dataProvider termProvider
+	 */
 	public function testPrefixSearch( $languageCode, $termText, $searchText, $matches ) {
 		$termIndex = $this->getTermIndex();
 		$termIndex->clear();
