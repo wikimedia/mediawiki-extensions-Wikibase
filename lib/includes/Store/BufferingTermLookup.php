@@ -4,7 +4,7 @@ namespace Wikibase\Store;
 
 use MapCacheLRU;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityTermLookup;
+use Wikibase\Lib\Store\EntityTermLookupBase;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\TermBuffer;
 use Wikibase\Term;
@@ -17,7 +17,7 @@ use Wikibase\Utils;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class BufferingTermLookup extends EntityTermLookup implements TermBuffer {
+class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 
 	/**
 	 * @var MapCacheLRU
@@ -25,12 +25,17 @@ class BufferingTermLookup extends EntityTermLookup implements TermBuffer {
 	private $buffer;
 
 	/**
+	 * @var TermIndex
+	 */
+	private $termIndex;
+
+	/**
 	 * @param TermIndex $termIndex
 	 * @param int $bufferSize
 	 */
 	public function __construct( TermIndex $termIndex, $bufferSize = 1000 ) {
-		parent::__construct( $termIndex );
 		$this->buffer = new MapCacheLRU( $bufferSize );
+		$this->termIndex = $termIndex;
 	}
 
 	/**
