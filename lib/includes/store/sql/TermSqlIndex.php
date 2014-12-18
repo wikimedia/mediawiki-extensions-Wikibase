@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\LegacyIdInterpreter;
+use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\Store\LabelConflictFinder;
@@ -150,7 +151,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$entityIdentifiers = array(
 			// FIXME: this will fail for IDs that do not have a numeric form
 			'term_entity_id' => $entity->getId()->getNumericId(),
-
 			'term_entity_type' => $entity->getType()
 		);
 
@@ -190,19 +190,18 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return Term[]
 	 */
 	public function getEntityTerms( EntityDocument $entity ) {
+		$extraFields = array(
+			'entityType' => $entity->getType(),
+		);
+
+		$entityId = $entity->getId();
+		if ( $entityId !== null ) {
+			$extraFields['entityId'] = $entityId->getNumericId();
+		}
+
 		// FIXME: OCP violation. No support for new types of entities can be registered
 
 		if ( $entity instanceof FingerprintProvider ) {
-			$extraFields = array(
-				'entityType' => $entity->getType(),
-			);
-
-			$entityId = $entity->getId();
-
-			if ( $entityId !== null ) {
-				$extraFields['entityId'] = $entityId->getNumericId();
-			}
-
 			return $this->getFingerprintTerms( $entity->getFingerprint(), $extraFields );
 		}
 
@@ -232,6 +231,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$terms[] = $term;
 		}
 
+		/** @var AliasGroup $aliasGroup */
 		foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
 			foreach ( $aliasGroup->getAliases() as $alias ) {
 				$term = new Term( $extraFields );
@@ -430,7 +430,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string[]|null $languageCodes
 	 *
 	 * @throws MWException
-	 * @return array
+	 * @return Term[]
 	 */
 	private function fetchTerms(
 		array $entityIds,
@@ -517,12 +517,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @since 0.2
 	 *
-	 * @param array $terms
+	 * @param Term[] $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
 	 * @param array $options
 	 *
-	 * @return array
+	 * @return Term[]
 	 */
 	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() ) {
 		if ( empty( $terms ) ) {
@@ -566,13 +566,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @since 0.4
 	 *
-	 * @param array $terms
-	 * @param string $entityType
+	 * @param Term[] $terms
+	 * @param string|null $entityType
 	 * @param array $options There is an implicit LIMIT of 5000 items in this implementation
 	 *
 	 * @return EntityId[]
 	 */
-	public function getMatchingIDs( array $terms, $entityType, array $options = array() ) {
+	public function getMatchingIDs( array $terms, $entityType = null, array $options = array() ) {
 		if ( empty( $terms ) ) {
 			return array();
 		}
@@ -587,7 +587,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$conditions = $this->termsToConditions( $dbr, $terms, null, $entityType, $options );
 
-		$selectionFields = array( 'term_entity_id' );
+		$selectionFields = array(
+			'term_entity_id',
+			'term_entity_type',
+		);
 
 		// TODO instead of a DB query, get a setting. Should save on a few Database round trips.
 		$hasWeight = $this->supportsWeight();
@@ -604,11 +607,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$requestedLimit = isset( $options['LIMIT'] ) ? max( intval( $options['LIMIT'] ), 0 ) : 0;
 		// if we take the weight into account, we need to grab basically all hits in order
 		// to allow for the post-search sorting below.
-		if ( !$hasWeight && $requestedLimit && $requestedLimit < $queryOptions['LIMIT'] ) {
+		if ( !$hasWeight && $requestedLimit > 0 && $requestedLimit < $queryOptions['LIMIT'] ) {
 			$queryOptions['LIMIT'] = $requestedLimit;
 		}
 
-		$obtainedIDs = $dbr->select(
+		$rows = $dbr->select(
 			$this->tableName,
 			$selectionFields,
 			implode( ' OR ', $conditions ),
@@ -617,47 +620,64 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		);
 
 		if ( $hasWeight ) {
-			$weights = array();
-			foreach ( $obtainedIDs as $obtainedID ) {
-				$weights[$obtainedID->term_entity_id] = floatval( $obtainedID->term_weight );
-			}
-
-			// this is a post-search sorting by weight. This allows us to not require an additional
-			// index on the wb_terms table that is very big already. This is also why we have
-			// the internal limit of 5000, since SQL's index would explode in size if we added the
-			// weight to it here (which would allow us to delegate the sorting to SQL itself)
-			arsort( $weights, SORT_NUMERIC );
-
-			if ( $requestedLimit ) {
-				$numericIds = array_keys( array_slice( $weights, 0, $requestedLimit, true ) );
-			} else {
-				$numericIds = array_keys( $weights );
-			}
+			$entityIds = $this->getEntityIdsOrderedByWeight( $rows, $requestedLimit );
 		} else {
-			$numericIds = array();
-			foreach ( $obtainedIDs as $obtainedID ) {
-				$numericIds[] = $obtainedID->term_entity_id;
+			$entityIds = array();
+
+			foreach ( $rows as $row ) {
+				// FIXME: this only works for items and properties
+				$id = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, $row->term_entity_id );
+
+				$entityIds[] = $id;
 			}
 		}
 
 		$this->releaseConnection( $dbr );
 
-		// turn numbers into entity ids
-		$result = array();
-
-		foreach ( $numericIds as $numericId ) {
-			// FIXME: this only works for items and properties
-			$result[] = LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
-		}
-
 		wfProfileOut( __METHOD__ );
 
-		return $result;
+		return $entityIds;
 	}
 
 	/**
-	 * @since 0.2
+	 * @param \stdClass[] $rows
+	 * @param int $limit
 	 *
+	 * @return EntityId[]
+	 */
+	private function getEntityIdsOrderedByWeight( array $rows, $limit = 0 ) {
+		$weights = array();
+		$idMap = array();
+
+		foreach ( $rows as $row ) {
+			// FIXME: this only works for items and properties
+			$id = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, $row->term_entity_id );
+
+			$key = $id->getSerialization();
+			$weights[$key] = floatval( $row->term_weight );
+			$idMap[$key] = $id;
+		}
+
+		// this is a post-search sorting by weight. This allows us to not require an additional
+		// index on the wb_terms table that is very big already. This is also why we have
+		// the internal limit of 5000, since SQL's index would explode in size if we added the
+		// weight to it here (which would allow us to delegate the sorting to SQL itself)
+		arsort( $weights, SORT_NUMERIC );
+
+		if ( $limit > 0 ) {
+			$weights = array_slice( $weights, 0, $limit, true );
+		}
+
+		$entityIds = array();
+
+		foreach ( $weights as $key => $weight ) {
+			$entityIds[] = $idMap[$key];
+		}
+
+		return $entityIds;
+	}
+
+	/**
 	 * @param DatabaseBase $db
 	 * @param Term[] $terms
 	 * @param string|null $termType
@@ -666,15 +686,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return array
 	 */
-	private function termsToConditions( DatabaseBase $db, array $terms, $termType, $entityType, array $options = array() ) {
+	private function termsToConditions( DatabaseBase $db, array $terms, $termType = null, $entityType = null, array $options = array() ) {
 		wfProfileIn( __METHOD__ );
 
 		$conditions = array();
 
-		/**
-		 * @var Term $term
-		 */
-		foreach ( $terms as $index => $term ) {
+		foreach ( $terms as $term ) {
 			$termConditions = $this->termMatchConditions( $db, $term, $termType, $entityType, $options );
 			$conditions[] = '(' . implode( ' AND ', $termConditions ) . ')';
 		}
@@ -685,8 +702,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param DatabaseBase $db
 	 * @param Term $term
 	 * @param string|null $termType
@@ -695,7 +710,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return array
 	 */
-	protected function termMatchConditions( DatabaseBase $db, Term $term, $termType, $entityType, array $options = array() ) {
+	private function termMatchConditions(
+		DatabaseBase $db,
+		Term $term,
+		$termType = null,
+		$entityType = null,
+		array $options = array()
+	) {
 		wfProfileIn( __METHOD__ );
 
 		$options = array_merge(
@@ -768,7 +789,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @param Iterator|array $obtainedTerms PHP fails for not having a common iterator/array thing :<0
 	 *
-	 * @return array
+	 * @return Term[]
 	 */
 	protected function buildTermResult( $obtainedTerms ) {
 		wfProfileIn( __METHOD__ );
