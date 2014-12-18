@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_d5fab972",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-18T20:22:54Z",
+      "side": 1,
+      "message": "this changes the order of these checks, per how it\u0027s done now in the LinkBeginHookHandler.",
+      "revId": "a3b7f3e940749f80be2434b6e18dfefbc74d1642",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
