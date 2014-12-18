@@ -40,7 +40,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		$argLists[] = array( 'enwiki', 1234 );
 		$argLists[] = array( 1234, 'Berlin' );
-		$argLists[] = array( 'enwiki', 'Berlin', 'Nyan Certified' );
 		$argLists[] = array( 'plwiki', 'Warszawa', array( 'FA', 'GA' ) );
 		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q42' ), 'FA' ) );
 		$argLists[] = array( 'plwiki', 'Warszawa', array( new PropertyId( 'P42' ) ) );
@@ -51,6 +50,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorProvider
+	 *
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testConstructorWithInvalidArguments( $siteId, $linkPage, $badges = null ) {
@@ -136,7 +136,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider changeOpSiteLinkProvider
-	 *
 	 * @param Item $entity
 	 * @param ChangeOpSiteLink $changeOpSiteLink
 	 * @param SiteLink[] $expectedSiteLinks
@@ -180,7 +179,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidChangeOpSiteLinkProvider
-	 *
 	 * @param Item $entity
 	 * @param ChangeOpSiteLink $changeOpSiteLink
 	 *
@@ -253,7 +251,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider summaryTestProvider
-	 *
 	 * @param string $expectedAction
 	 * @param array $expectedArguments
 	 * @param Item $entity

@@ -7,7 +7,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -19,40 +19,35 @@ use Wikibase\Summary;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Michał Łazowik
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thiemo Mättig
  */
 class ChangeOpSiteLink extends ChangeOpBase {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
-	protected $siteId;
+	private $siteId;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string|null
 	 */
-	protected $pageName;
+	private $pageName;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var ItemId[]|null
 	 */
-	 protected $badges;
+	private $badges;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param string $siteId
 	 * @param string|null $pageName Null to remove the sitelink (if $badges are also null)
-	 * @param array|null $badges Null for no-op
+	 * @param ItemId[]|null $badges Null for no-op
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $siteId, $pageName, $badges = null ) {
+	public function __construct( $siteId, $pageName, array $badges = null ) {
 		if ( !is_string( $siteId ) ) {
 			throw new InvalidArgumentException( '$siteId needs to be a string' );
 		}
@@ -61,14 +56,8 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			throw new InvalidArgumentException( '$linkPage needs to be a string or null' );
 		}
 
-		if ( !is_array( $badges ) && $badges !== null ) {
-			throw new InvalidArgumentException( '$badges need to be an array of ItemIds or null' );
-		}
-
 		if ( $badges !== null ) {
-			$this->validateBadges( $badges );
-
-			$badges = $this->removeDuplicateBadges( $badges );
+			$badges = $this->validateBadges( $badges );
 		}
 
 		$this->siteId = $siteId;
@@ -77,116 +66,80 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	}
 
 	/**
-	 * @param array $badges
+	 * @param ItemId[] $badges
 	 *
 	 * @throws InvalidArgumentException
+	 * @return ItemId[]
 	 */
 	private function validateBadges( array $badges ) {
 		$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
+		$uniqueBadges = array();
 
-		foreach ( $badges as $badge ) {
-			if ( !( $badge instanceof ItemId ) ) {
-				throw new InvalidArgumentException( '$badge needs to be an ItemId' );
+		foreach ( $badges as $id ) {
+			if ( !( $id instanceof ItemId ) ) {
+				throw new InvalidArgumentException( '$badges needs to be an array of ItemId instances' );
 			}
 
-			if ( !array_key_exists( $badge->getSerialization(), $badgeItems ) ) {
-				throw new InvalidArgumentException( 'Only items specified in the config can be badges' );
+			if ( !array_key_exists( $id->getSerialization(), $badgeItems ) ) {
+				throw new InvalidArgumentException( 'Only items specified in the badgeItems setting can be badges' );
 			}
+
+			$uniqueBadges[$id->getSerialization()] = $id;
 		}
+
+		return array_values( $uniqueBadges );
 	}
 
 	/**
-	 * Removes duplicate badges from the array and returns the new list of badges.
-	 *
-	 * @param ItemId[] $badges
-	 *
-	 * @return ItemId[]
-	 */
-	private function removeDuplicateBadges( array $badges ) {
-		$final = array();
-		foreach ( $badges as $badge ) {
-			if ( !$this->containsBadge( $final, $badge ) ) {
-				$final[] = $badge;
-			}
-		}
-		return $final;
-	}
-
-	/**
-	 * Checks whether the list of badges contains the badge.
-	 *
-	 * @param ItemId[] $badges
-	 * @param ItemId $badge
-	 *
-	 * @return boolean
-	 */
-	private function containsBadge( array $badges, ItemId $badge ) {
-		foreach ( $badges as $other ) {
-			if ( $badge->equals( $other ) ) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Whether an entity's sitelink has badges
-	 *
-	 * @param Entity $entity
+	 * @param SiteLinkList $siteLinks
 	 *
 	 * @return bool
 	 */
-	private function entityHasBadges( Entity $entity ) {
-		return $entity->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) &&
-				count( $entity->getSiteLinkList()->getBySiteId( $this->siteId )->getBadges() );
+	private function badgesAreEmptyAndUnchanged( SiteLinkList $siteLinks ) {
+		return ( !$siteLinks->hasLinkWithSiteId( $this->siteId )
+			|| $siteLinks->getBySiteId( $this->siteId )->getBadges() === array() )
+			&& $this->badges === array();
 	}
 
 	/**
-	 * Apply badges to an entity
-	 *
-	 * @param Entity $entity
-	 * @param array &$commentArgs
+	 * @param SiteLinkList $siteLinks
 	 * @param string &$action
+	 * @param array &$commentArgs
 	 *
-	 * @return array
+	 * @return ItemId[]
 	 */
-	private function applyBadges( Entity $entity, array &$commentArgs, &$action ) {
+	private function applyBadges( SiteLinkList $siteLinks, &$action, array &$commentArgs ) {
+		// If badges are not set in the change make sure they remain intact
 		if ( $this->badges === null ) {
-			// If badges are not set in the change make sure that they remain intact
-			if ( $entity->hasLinkToSite( $this->siteId ) ) {
-				$badges = $entity->getSiteLink( $this->siteId )->getBadges();
-			} else {
-				$badges = array();
-			}
-		} elseif ( !$this->entityHasBadges( $entity, $this->siteId ) && $this->badges === array() ) {
-			// If we didn't have badges before and aren't adding any, don't claim we changed badges
-			$badges = array();
-		} else {
-			if ( $this->pageName === null ) {
-				$action .= '-badges';
-			} else {
-				$action .= '-both';
-			}
-
-			$badges = $this->badges;
-			$commentArgs[] = $badges;
+			return $siteLinks->hasLinkWithSiteId( $this->siteId )
+				? $siteLinks->getBySiteId( $this->siteId )->getBadges()
+				: array();
 		}
 
-		return $badges;
+		if ( $this->badgesAreEmptyAndUnchanged( $siteLinks ) ) {
+			return array();
+		}
+
+		$action .= $this->pageName === null ? '-badges' : '-both';
+		$commentArgs[] = $this->badges;
+
+		return $this->badges;
 	}
 
 	/**
-	 * @see ChangeOp::apply()
+	 * @see ChangeOp::apply
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof Item ) ) {
 			throw new InvalidArgumentException( 'ChangeOpSiteLink can only be applied to Item instances' );
 		}
 
+		$siteLinks = $entity->getSiteLinkList();
+
 		if ( ( $this->pageName === null && $this->badges === null ) || $this->pageName === '' ) {
-			if ( $entity->hasLinkToSite( $this->siteId ) ) {
-				$this->updateSummary( $summary, 'remove', $this->siteId, $entity->getSiteLink( $this->siteId )->getPageName() );
-				$entity->removeSiteLink( $this->siteId );
+			if ( $siteLinks->hasLinkWithSiteId( $this->siteId ) ) {
+				$this->updateSummary( $summary, 'remove', $this->siteId, $siteLinks->getBySiteId( $this->siteId )->getPageName() );
+				$siteLinks->removeLinkWithSiteId( $this->siteId );
 			} else {
 				//TODO: throw error, or ignore silently?
 			}
@@ -194,31 +147,32 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			$commentArgs = array();
 
 			if ( $this->pageName === null ) {
-				// If page name is not set (but badges are) make sure that it remains intact
-				if ( $entity->hasLinkToSite( $this->siteId ) ) {
-					$pageName = $entity->getSiteLink( $this->siteId )->getPageName();
-				} else {
+				if ( !$siteLinks->hasLinkWithSiteId( $this->siteId ) ) {
 					throw new InvalidArgumentException( 'The sitelink does not exist' );
 				}
+
+				// If page name is not set (but badges are) make sure that it remains intact
+				$pageName = $siteLinks->getBySiteId( $this->siteId )->getPageName();
 			} else {
 				$pageName = $this->pageName;
 				$commentArgs[] = $pageName;
 			}
 
-			$action = $entity->hasLinkToSite( $this->siteId ) ? 'set' : 'add';
-
-			$badges = $this->applyBadges( $entity, $commentArgs, $action );
+			$action = $siteLinks->hasLinkWithSiteId( $this->siteId ) ? 'set' : 'add';
+			$badges = $this->applyBadges( $siteLinks, $action, $commentArgs );
 
 			$this->updateSummary( $summary, $action, $this->siteId, $commentArgs );
 
-			$entity->addSiteLink( new SiteLink( $this->siteId, $pageName, $badges ) );
+			// FIXME: Use SiteLinkList::setNewSiteLink.
+			$siteLinks->removeLinkWithSiteId( $this->siteId );
+			$siteLinks->addNewSiteLink( $this->siteId, $pageName, $badges );
 		}
 
 		return true;
 	}
 
 	/**
-	 * @see ChangeOp::validate()
+	 * @see ChangeOp::validate
 	 *
 	 * @since 0.5
 	 *
@@ -232,4 +186,5 @@ class ChangeOpSiteLink extends ChangeOpBase {
 		//TODO: move validation logic from apply() here.
 		return parent::validate( $entity );
 	}
+
 }
