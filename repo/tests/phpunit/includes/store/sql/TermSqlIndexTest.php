@@ -54,10 +54,10 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	/**
 	 * @dataProvider termProvider
-	 * @param $languageCode
-	 * @param $termText
-	 * @param $searchText
-	 * @param boolean $matches
+	 * @param string $languageCode
+	 * @param string $termText
+	 * @param string $searchText
+	 * @param bool $matches
 	 */
 	public function testGetMatchingTerms2( $languageCode, $termText, $searchText, $matches ) {
 		$withoutTermSearchKey = WikibaseRepo::getDefaultInstance()->
@@ -68,7 +68,6 @@ class TermSqlIndexTest extends TermIndexTest {
 		}
 
 		$termIndex = $this->getTermIndex();
-
 		$termIndex->clear();
 
 		$item = Item::newEmpty();
@@ -179,10 +178,10 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	/**
 	 * @dataProvider termProvider
-	 * @param $languageCode
-	 * @param $termText
-	 * @param $searchText
-	 * @param boolean $matches
+	 * @param string $languageCode
+	 * @param string $termText
+	 * @param string $searchText
+	 * @param bool $matches
 	 */
 	public function testGetMatchingTermsWeights( $languageCode, $termText, $searchText, $matches ) {
 		$termIndex = $this->getTermIndex();
@@ -241,22 +240,40 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	/**
 	 * @dataProvider termProvider
-	 * @param $languageCode
-	 * @param $termText
-	 * @param $searchText
-	 * @param boolean $matches
+	 * @param string $languageCode
+	 * @param string $termText
 	 */
-	public function testPrefixSearch( $languageCode, $termText, $searchText, $matches ) {
+	public function testGetMatchingIDs_withoutEntityType( $languageCode, $termText ) {
 		$termIndex = $this->getTermIndex();
-
 		$termIndex->clear();
 
-		$item1 = Item::newEmpty();
-		$item1->setId( 42 );
+		$item = Item::newEmpty();
+		$item->setId( 42 );
+		$item->setLabel( $languageCode, $termText );
+		$termIndex->saveTermsOfEntity( $item );
 
-		$item1->setLabel( $languageCode, $termText );
+		$term = new Term();
+		$term->setLanguage( $languageCode );
+		$term->setText( $termText );
 
-		$termIndex->saveTermsOfEntity( $item1 );
+		$obtainedIDs = $termIndex->getMatchingIDs( array( $term ) );
+
+		$this->assertNotEmpty( $obtainedIDs );
+	}
+
+	/**
+	 * @dataProvider termProvider
+	 * @param string $languageCode
+	 * @param string $termText
+	 */
+	public function testPrefixSearch( $languageCode, $termText ) {
+		$termIndex = $this->getTermIndex();
+		$termIndex->clear();
+
+		$item = Item::newEmpty();
+		$item->setId( 42 );
+		$item->setLabel( $languageCode, $termText );
+		$termIndex->saveTermsOfEntity( $item );
 
 		$term = new Term();
 		$term->setLanguage( $languageCode );
@@ -274,10 +291,11 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	/**
 	 * @dataProvider termProvider
+	 * @param string $languageCode
+	 * @param string $termText
 	 */
 	public function testPrefixSearchQuoting( $languageCode, $termText ) {
 		$termIndex = $this->getTermIndex();
-
 		$termIndex->clear();
 
 		$item1 = Item::newEmpty();
