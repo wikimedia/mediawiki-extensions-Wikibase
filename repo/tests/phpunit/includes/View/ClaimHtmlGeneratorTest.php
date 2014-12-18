@@ -17,7 +17,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\ClaimHtmlGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\TemplateRegistry;
+use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\ClaimHtmlGenerator

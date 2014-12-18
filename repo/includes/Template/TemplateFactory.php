@@ -2,9 +2,6 @@
 
 namespace Wikibase\Template;
 
-use Wikibase\Template;
-use Wikibase\TemplateRegistry;
-
 /**
  * @license GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >

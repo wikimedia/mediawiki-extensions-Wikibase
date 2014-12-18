@@ -7,7 +7,7 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\TemplateRegistry;
+use Wikibase\Template\TemplateRegistry;
 
 /**
  * @licence GNU GPL v2+

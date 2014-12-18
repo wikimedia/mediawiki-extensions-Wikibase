@@ -12,7 +12,7 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\TemplateRegistry;
+use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\SnakHtmlGenerator
