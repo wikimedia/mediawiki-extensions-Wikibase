@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_0b001869",
+        "filename": "repo/tests/phpunit/includes/SiteLinkTargetProviderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T08:50:38Z",
+      "side": 1,
+      "message": "Wrong namespace.",
+      "revId": "28616d7f7fa59ef077d08d4a382a8ec5a7538fbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
