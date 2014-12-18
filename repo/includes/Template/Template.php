@@ -1,6 +1,8 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Template;
+
+use Message;
 
 /**
  * Allows storing and accessing of templates (e.g. snippets commonly used in server-side HTML
@@ -13,7 +15,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
  */
-class Template extends \Message {
+class Template extends Message {
 
 	protected $templateRegistry;
 

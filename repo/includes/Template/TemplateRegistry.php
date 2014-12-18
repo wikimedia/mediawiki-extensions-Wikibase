@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Template;
 
 /**
  * Allows storing and accessing of templates (e.g. snippets commonly used in server-side HTML
@@ -29,7 +29,7 @@ class TemplateRegistry {
 	public static function getDefaultInstance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
-			self::$instance->addTemplates( include( __DIR__ . '/../resources/templates.php' ) );
+			self::$instance->addTemplates( include( __DIR__ . '/../../resources/templates.php' ) );
 		}
 		return self::$instance;
 	}
