@@ -139,6 +139,23 @@
       "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_64ff81a8",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T15:52:22Z",
+      "side": 1,
+      "message": "Sounds symmetrical, is not, though.",
+      "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
