@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_cb9c6062",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsforlanguage.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-12-18T08:36:40Z",
+      "side": 1,
+      "message": "Missing ›view‹.",
+      "revId": "c1c5097e0f9b3b3db9ba9a0fa0f8fba07b1b87fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
