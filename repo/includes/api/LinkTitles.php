@@ -9,6 +9,7 @@ use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Summary;
 
 /**
