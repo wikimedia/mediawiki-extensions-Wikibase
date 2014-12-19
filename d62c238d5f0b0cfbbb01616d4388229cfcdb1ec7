@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_319b02c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-19T14:21:23Z",
+      "side": 1,
+      "message": "needs to be \"Bug: T84992\" for the bot to understand and comment on phabricator",
+      "revId": "d62c238d5f0b0cfbbb01616d4388229cfcdb1ec7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
