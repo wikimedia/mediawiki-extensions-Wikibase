@@ -354,6 +354,8 @@
 	"wikibase-property-summary-special-create-property": "Eigenschaft für [$2] mit {{PLURAL:$1|Wert|Werten}} erstellt",
 	"wikibase-listdatatypes-wikibase-item-head": "Datenobjekt",
 	"wikibase-listdatatypes-wikibase-item-body": "Link zu anderen Objekten im Projekt. Falls ein Wert eingegeben wurde, wird der Objektnamensraum des Projektes für treffende Objekte durchsucht.",
+	"wikibase-listdatatypes-wikibase-property-head": "Eigenschaft",
+	"wikibase-listdatatypes-wikibase-property-body": "Link zu Eigenschaften im Projekt. Wenn ein Wert eingegeben wird, wird der Eigenschaftsnamensraum des Projektes für passende Eigenschaften durchsucht.",
 	"wikibase-listdatatypes-commonsmedia-head": "Commons-Mediendatei",
 	"wikibase-listdatatypes-commonsmedia-body": "Link zu Dateien, die auf Wikimedia Commons gespeichert sind. Falls ein Wert eingegeben wurde, wird der Dateinamensraum auf Commons für treffende Dateien durchsucht.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Koordinate",
