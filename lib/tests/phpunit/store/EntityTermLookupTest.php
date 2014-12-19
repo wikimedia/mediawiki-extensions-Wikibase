@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityTermLookup;
  * @covers Wikibase\Lib\Store\EntityTermLookup
  *
  * @licence GNU GPL v2+
- * @author Katie Filbert
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityTermLookupTest extends \MediaWikiTestCase {
 

@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Settings;
 
 /**
- * @covers Wikibase\SqlEntityInfoBuilder
+ * @covers Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder
  *
  * @group Wikibase
  * @group WikibaseLib
