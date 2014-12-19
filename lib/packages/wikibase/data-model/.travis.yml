@@ -14,7 +14,7 @@ matrix:
 
 before_script: composer install --prefer-source
 
-script: phpunit -c tests/phpunit.travis.xml
+script: phpunit
 
 notifications:
   irc:
