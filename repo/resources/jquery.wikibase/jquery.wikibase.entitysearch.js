@@ -103,11 +103,13 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 	 * @see jQuery.ui.suggester._updateMenuVisibility
 	 */
 	_updateMenuVisibility: function() {
-		if( !this._term.length ) {
-			this._close();
-		} else {
+		if( this._term || ( this.options.suggestionsPlaceholder
+			&& this.options.suggestionsPlaceholder.getVisibility() )
+		) {
 			this._open();
 			this.repositionMenu();
+		} else {
+			this._close();
 		}
 	},
 
