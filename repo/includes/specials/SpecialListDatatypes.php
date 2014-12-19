@@ -30,6 +30,8 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 		// some of the datatype descriptions
 		// 'wikibase-listdatatypes-wikibase-item-head'
 		// 'wikibase-listdatatypes-wikibase-item-body'
+		// 'wikibase-listdatatypes-wikibase-property-head'
+		// 'wikibase-listdatatypes-wikibase-property-body'
 		// 'wikibase-listdatatypes-commonsmedia-head'
 		// 'wikibase-listdatatypes-commonsmedia-body'
 		// 'wikibase-listdatatypes-geo-coordinate-head'
