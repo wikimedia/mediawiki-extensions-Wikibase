@@ -15,6 +15,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\FormatterLabelLookupFactory;
@@ -161,6 +162,13 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 				new StringValue( 'Example.jpg' ),
 				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/File:Example\\.jpg">Example\\.jpg</a>$@',
 				'commonsMedia'
+			),
+			'property link' => array(
+				SnakFormatter::FORMAT_HTML,
+				$this->newFormatterOptions(),
+				new EntityIdValue( new PropertyId( 'P5' ) ),
+				'/^<a\b[^>]* href="[^"]*\bP5">Label for P5<\/a>.*$/',
+				'wikibase-property'
 			),
 			'a month in 1920' => array(
 				SnakFormatter::FORMAT_HTML,
