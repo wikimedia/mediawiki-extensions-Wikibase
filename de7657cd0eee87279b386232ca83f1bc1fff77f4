@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_3cec39f2",
+        "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-12-19T16:45:51Z",
+      "side": 1,
+      "message": "up here is where the label is created that the WikibaseValueFormatterBuilders use.\n\nshould work ok with the property test case you added.",
+      "revId": "de7657cd0eee87279b386232ca83f1bc1fff77f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
