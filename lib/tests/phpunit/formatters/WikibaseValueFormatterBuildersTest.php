@@ -2,12 +2,13 @@
 
 namespace Wikibase\Lib\Test;
 
-use Language;
-use Title;
+use DataValues\DataValue;
 use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use Language;
+use Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\TimeFormatter;
@@ -16,13 +17,14 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\FormatterLabelLookupFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\WikibaseValueFormatterBuilders;
 
 /**
  * @covers Wikibase\Lib\WikibaseValueFormatterBuilders
@@ -43,8 +45,8 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityId $entityId The Id of an entity to use for all entity lookups
 	 * @param EntityTitleLookup|null $entityTitleLookup
+	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders( EntityTitleLookup $entityTitleLookup = null ) {
@@ -101,7 +103,13 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider buildDispatchingValueFormatterProvider
 	 */
-	public function testBuildDispatchingValueFormatter( $format, $options, $value, $expected, $dataTypeId = null ) {
+	public function testBuildDispatchingValueFormatter(
+		$format,
+		FormatterOptions $options,
+		DataValue $value,
+		$expected,
+		$dataTypeId = null
+	) {
 		$builders = $this->newWikibaseValueFormatterBuilders( $this->newEntityTitleLookup() );
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
@@ -144,6 +152,13 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 				'/^<a\b[^>]* href="[^"]*\bQ5">Label for Q5<\/a>.*$/', // compare mock object created in newBuilders()
 				'wikibase-item'
 			),
+			'property link' => array(
+				SnakFormatter::FORMAT_HTML,
+				$this->newFormatterOptions(),
+				new EntityIdValue( new PropertyId( 'P5' ) ),
+				'/^<a\b[^>]* href="[^"]*\bP5">Label for P5<\/a>.*$/',
+				'wikibase-property'
+			),
 			'diff <url>' => array(
 				SnakFormatter::FORMAT_HTML_DIFF,
 				$this->newFormatterOptions(),
@@ -162,13 +177,6 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 				new StringValue( 'Example.jpg' ),
 				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/File:Example\\.jpg">Example\\.jpg</a>$@',
 				'commonsMedia'
-			),
-			'property link' => array(
-				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
-				new EntityIdValue( new PropertyId( 'P5' ) ),
-				'/^<a\b[^>]* href="[^"]*\bP5">Label for P5<\/a>.*$/',
-				'wikibase-property'
 			),
 			'a month in 1920' => array(
 				SnakFormatter::FORMAT_HTML,
@@ -224,7 +232,13 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	 *
 	 * @dataProvider buildDispatchingValueFormatterNoTitleLookupProvider
 	 */
-	public function testBuildDispatchingValueFormatter_noTitleLookup( $format, $options, $value, $expected, $dataTypeId = null ) {
+	public function testBuildDispatchingValueFormatter_noTitleLookup(
+		$format,
+		FormatterOptions $options,
+		DataValue $value,
+		$expected,
+		$dataTypeId = null
+	) {
 		$builders = $this->newWikibaseValueFormatterBuilders();
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
@@ -255,7 +269,11 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider buildDispatchingValueFormatterProvider_LabelLookupOption
 	 */
-	public function testBuildDispatchingValueFormatter_LabelLookupOption( $options, ItemId $value, $expected ) {
+	public function testBuildDispatchingValueFormatter_LabelLookupOption(
+		FormatterOptions $options,
+		ItemId $value,
+		$expected
+	) {
 		$builders = $this->newWikibaseValueFormatterBuilders( $this->newEntityTitleLookup() );
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
@@ -580,7 +598,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		}
 
 		if ( $expectedFallback !== null ) {
-			/* @var LanguageFallbackChain $languageFallback */
+			/** @var LanguageFallbackChain $languageFallback */
 			$languageFallback = $options->getOption( 'languages' );
 			$languages = $languageFallback->getFallbackChain();
 			$lang = $languages[0]->getLanguage()->getCode();

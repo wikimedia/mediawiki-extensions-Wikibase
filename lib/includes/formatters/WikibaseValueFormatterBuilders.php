@@ -521,7 +521,7 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @param FormatterOptions $options
 	 *
-	 * @return ValueFormatter
+	 * @return EntityIdHtmlLinkFormatter
 	 */
 	private function newEntityIdHtmlFormatter( FormatterOptions $options ) {
 		$labelLookup = $this->labelLookupFactory->getLabelLookup( $options );
@@ -589,7 +589,7 @@ class WikibaseValueFormatterBuilders {
 	 * @param ValueFormatter[] $formatters
 	 * @param string $escape The escape callback, e.g. 'htmlspecialchars' or 'wfEscapeWikitext'.
 	 *
-	 * @return array
+	 * @return ValueFormatter[]
 	 */
 	public function makeEscapingFormatters( array $formatters, $escape ) {
 		$escapingFormatters = array();

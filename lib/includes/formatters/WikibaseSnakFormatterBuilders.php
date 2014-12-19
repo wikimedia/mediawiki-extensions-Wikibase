@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use DataTypes\DataTypeFactory;
+use Message;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
@@ -106,11 +107,12 @@ class WikibaseSnakFormatterBuilders {
 	 * @param string $key
 	 * @param string $lang
 	 *
-	 * @return \Message
+	 * @return Message
 	 */
 	private function getMessage( $key, $lang ) {
 		$msg = wfMessage( $key );
 		$msg = $msg->inLanguage( $lang );
 		return $msg;
 	}
+
 }
