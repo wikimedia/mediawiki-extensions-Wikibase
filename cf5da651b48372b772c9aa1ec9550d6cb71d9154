@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_b6b9487a",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T13:13:24Z",
+      "side": 1,
+      "message": "gah.",
+      "parentUuid": "0e6cb3ef_61f533b5",
+      "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_8b8c28dd",
         "filename": "lib/includes/Store/BufferingTermLookup.php",
         "patchSetId": 10
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Sorry, wrong method.",
       "parentUuid": "0e6cb3ef_8b8c28dd",
+      "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_76b3b096",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T13:13:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_cba9c022",
       "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -125,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_96b68484",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T13:13:24Z",
+      "side": 1,
+      "message": "renamed to avoid confusion",
+      "parentUuid": "0e6cb3ef_6b85149f",
+      "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_4407ddcd",
         "filename": "lib/includes/Store/BufferingTermLookup.php",
         "patchSetId": 10
@@ -142,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_36ad382f",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T13:13:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_4407ddcd",
+      "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_64ff81a8",
         "filename": "lib/includes/Store/BufferingTermLookup.php",
         "patchSetId": 10
@@ -153,6 +225,24 @@
       "writtenOn": "2014-12-18T15:52:22Z",
       "side": 1,
       "message": "Sounds symmetrical, is not, though.",
+      "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_56a8ec1c",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T13:13:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_64ff81a8",
       "revId": "cf5da651b48372b772c9aa1ec9550d6cb71d9154",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
