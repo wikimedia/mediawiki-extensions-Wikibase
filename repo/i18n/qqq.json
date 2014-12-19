@@ -415,6 +415,8 @@
 	"wikibase-property-summary-special-create-property": "Automatic edit summary when creating a property, and supplying one or more values. Parameters:\n* $1 - the number of values set (that is 0 - zero)\n* $2 - the language code of the entity page during creation",
 	"wikibase-listdatatypes-wikibase-item-head": "{{Wikibase-datatype-head|Item|wikibase-item}}\n{{Identical|Item}}",
 	"wikibase-listdatatypes-wikibase-item-body": "{{Wikibase-datatype-body|Item}}\n\nFor information about \"Iri\" and related terms, see [[:w:Internationalized resource identifier|Internationalized resource identifier]] and [[:w:URI scheme|URI scheme]].",
+	"wikibase-listdatatypes-wikibase-property-head": "{{Wikibase-datatype-head|Property|wikibase-property}}\n{{Identical|Property}}",
+	"wikibase-listdatatypes-wikibase-property-body": "{{Wikibase-datatype-body|Property}}\n\nFor information about \"Iri\" and related terms, see [[:w:Internationalized resource identifier|Internationalized resource identifier]] and [[:w:URI scheme|URI scheme]].",
 	"wikibase-listdatatypes-commonsmedia-head": "{{Wikibase-datatype-head|Commons media|commonsMedia}}",
 	"wikibase-listdatatypes-commonsmedia-body": "{{Wikibase-datatype-body|Commons media}}\n\nFor information about \"Iri\" and related terms, see [[:w:Internationalized resource identifier|Internationalized resource identifier]] and [[:w:URI scheme|URI scheme]].",
 	"wikibase-listdatatypes-globe-coordinate-head": "{{Wikibase-datatype-head|Globe coordinate|globe-coordinate}}",
