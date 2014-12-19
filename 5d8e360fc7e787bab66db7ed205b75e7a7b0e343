@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_5139d6c9",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T14:03:22Z",
+      "side": 1,
+      "message": "Copy-paste error? This If block does not look like it belongs here. It does not do anything to the $terms output of this method.",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_71541a02",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T14:03:22Z",
+      "side": 1,
+      "message": "\"Know to not be undefined\"? Uh? Double negotiation? What does that mean? What keys? \"Defined\" in which way?",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_d14de676",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T14:03:22Z",
+      "side": 1,
+      "message": "Please move this method up, next to getBufferKey. This will also help having setUndefinedTerms/stripUndefinedTerms closer to each other.",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_313782e2",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T14:03:22Z",
+      "side": 1,
+      "message": "Huh?",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_9120ce97",
+        "filename": "lib/includes/store/TermBuffer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T14:03:22Z",
+      "side": 1,
+      "message": "Some files are in Wikibase\\Store now. I think that\u0027s a good idea and should be the same here.",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_f1190a7f",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T14:03:22Z",
+      "side": 1,
+      "message": "You could make this optional via \"\u003d null\".",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_510b1626",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T14:03:22Z",
+      "side": 1,
+      "message": "You could make this optional via \"\u003d null\".",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_b61dc87a",
+        "filename": "lib/tests/phpunit/store/BufferingTermLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T14:03:22Z",
+      "side": 1,
+      "message": "Wrong namespace.",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_76173057",
+        "filename": "lib/tests/phpunit/store/BufferingTermLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T14:03:22Z",
+      "side": 1,
+      "message": "Daniel?",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_b63628ff",
+        "filename": "lib/tests/phpunit/store/EntityTermLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T14:03:22Z",
+      "side": 1,
+      "message": "Please don\u0027t put stuff in providers if it does not change. Item is irrelevant here. No reason to block this patch though.",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_56254cbb",
+        "filename": "lib/tests/phpunit/store/EntityTermLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T14:03:22Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
