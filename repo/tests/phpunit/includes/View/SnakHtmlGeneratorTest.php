@@ -9,10 +9,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
@@ -88,12 +86,10 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return DispatchingSnakFormatter
+	 * @return SnakFormatter
 	 */
 	protected function getSnakFormatterMock() {
-		$snakFormatter = $this->getMockBuilder( 'Wikibase\Lib\DispatchingSnakFormatter' )
-			->disableOriginalConstructor()
-			->getMock();
+		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )

@@ -50,9 +50,7 @@
 	"wikibase-description-input-help-message": "Introduza uma descrição breve em $1.",
 	"wikibase-fingerprintgroupview-input-help-message": "Insira um rótulo para esta entidade, uma descrição breve e nomes alternativos por idioma.",
 	"wikibase-fingerprintview-input-help-message": "Insira o rótulo, uma breve descrição e nomes alternativos para esta entidade em $1.",
-	"wikibase-claims": "Alegações",
 	"wikibase-statements": "Declarações",
-	"wikibase-attributes": "Atributos",
 	"wikibase-terms": "Noutras línguas",
 	"wikibase-sitelinkgroupview-input-help-message": "Adicione uma ligação de sítio, especificando um sítio e uma respetiva página, edite ou remova ligações de sítio existentes.",
 	"wikibase-sitelinks-empty": "Nenhuma página está ligada a este item ainda.",
@@ -74,7 +72,6 @@
 	"wikibase-undo-nocontent": "Não foi possível carregar o conteúdo da revisão $2 da página $1",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Um valor ainda não gravado|$1 valores ainda não gravados}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|entrada|entradas}}",
-	"wikibase-sitelinksedittool-full": "As ligações para as páginas já estão definidas para todos os sítios conhecidos.",
 	"wikibase-disambiguation-title": "Desambiguação de \"$1\"",
 	"wb-special-newitem-new-item-notification": "Novo item $1 criado e será redireccionado para a página correspondente. Voltar a $2.",
 	"wikibase-aliases-label": "Nomes alternativos:",
@@ -317,5 +314,6 @@
 	"right-item-term": "Alterar termos de item (rótulos, descrições, nomes alternativos)",
 	"right-item-merge": "Fundir itens",
 	"right-property-term": "Altere termos de propriedade (rótulos, descrições, nomes alternativos)",
-	"right-property-create": "Criar propriedades"
+	"right-property-create": "Criar propriedades",
+	"apihelp-wbsetdescription-param-language": "Idioma da descrição"
 }

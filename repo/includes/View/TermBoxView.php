@@ -74,7 +74,7 @@ class TermBoxView {
 			$hasLabel = $labels->hasTermForLanguage( $languageCode );
 			$hasDescription = $descriptions->hasTermForLanguage( $languageCode );
 
-			$tbody .= wfTemplate( 'wikibase-fingerprintview',
+			$tbody .= wfTemplate( 'wikibase-entitytermsforlanguageview',
 				$languageCode,
 				$title->getLocalURL( array( 'setlang' => $languageCode ) ),
 				htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ),
@@ -100,9 +100,9 @@ class TermBoxView {
 			);
 		}
 
-		$html = wfTemplate( 'wikibase-fingerprintgroupview',
-			$this->msg( 'wikibase-terms' ),
-			wfTemplate( 'wikibase-fingerprintlistview', $tbody ),
+		$html = wfTemplate( 'wikibase-entitytermsview',
+			$this->msg( 'wikibase-terms' )->text(),
+			wfTemplate( 'wikibase-entitytermsforlanguagelistview', $tbody ),
 			$this->sectionEditLinkGenerator->getHtmlForEditSection(
 				'SpecialPages',
 				array(),

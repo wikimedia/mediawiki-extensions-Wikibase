@@ -15,7 +15,7 @@ function createCloseable( options ) {
 		.closeable( options || {} );
 }
 
-QUnit.module( 'jquery.ui.tagadata', QUnit.newMwEnvironment( {
+QUnit.module( 'jquery.ui.closeable', QUnit.newMwEnvironment( {
 	teardown: function() {
 		$( '.test_closeable' ).each( function() {
 			var $closeable = $( this ),
@@ -54,14 +54,14 @@ QUnit.test( 'Close when clicking "close" anchor', function( assert ) {
 		closeable = $closeable.data( 'closeable' );
 
 	assert.ok(
-		$closeable.option( '$content' ) instanceof $,
+		closeable.option( '$content' ) instanceof $,
 		'Instantiated widget with initial content.'
 	);
 
 	closeable.$close.trigger( 'click' );
 
 	assert.strictEqual(
-		$closeable.option( '$content' ),
+		closeable.option( '$content' ),
 		null,
 		'Removed content after clicking "close" anchor.'
 	);
@@ -99,7 +99,7 @@ QUnit.test( 'setContent()', 7, function( assert ) {
 		'Set CSS class.'
 	);
 
-	closeable.setContent( $content, 'cssClass' );
+	closeable.setContent( null, null );
 
 	assert.strictEqual(
 		closeable.option( '$content' ),

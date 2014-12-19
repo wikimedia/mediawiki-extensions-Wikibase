@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Api;
+namespace Wikibase\Repo;
 
 use Site;
 use SiteList;

@@ -1,0 +1,22 @@
+/**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.wikibase-entitytermsview {
+	float: left;
+	width: 100%;
+}
+
+.wikibase-entitytermsview h2 {
+	width: auto;
+}
+
+.wikibase-entitytermsview .wikibase-toolbar-container .wikibase-toolbar-container  {
+	position: relative;
+}
+
+.wikibase-entitytermsview .wikibase-entitytermsview-heading-container > .wikibase-toolbar-container {
+	float: right;
+	margin-top: 1.9em;
+	position: static;
+}

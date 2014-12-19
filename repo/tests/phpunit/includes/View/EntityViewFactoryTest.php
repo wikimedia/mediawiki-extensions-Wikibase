@@ -2,12 +2,12 @@
 
 namespace Wikibase\Test;
 
+use SiteList;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\EntityIdHtmlLinkFormatterFactory;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\EntityIdFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityInfo;
-use Wikibase\Lib\Store\EntityInfoTermLookup;
-use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Repo\View\EntityViewFactory;
 
 /**
@@ -23,14 +23,12 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		$entityViewFactory = $this->getEntityViewFactory();
 
 		$languageFallback = new LanguageFallbackChain( array() );
-		$termLookup = new EntityInfoTermLookup( new EntityInfo( array() ) );
-		$labelLookup = new LanguageLabelLookup( $termLookup, 'de' );
 
 		$entityView = $entityViewFactory->newEntityView(
 			$entityType,
 			'de',
 			$languageFallback,
-			$labelLookup
+			$this->getMock( 'Wikibase\Lib\Store\LabelLookup' )
 		);
 
 		$this->assertInstanceOf( $expectedClass, $entityView );
@@ -58,24 +56,30 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new EntityViewFactory(
 			$this->getEntityIdFormatterFactory(),
 			$this->getSnakFormatterFactory(),
+			$this->getMock( 'Wikibase\Lib\Store\EntityLookup' ),
+			$this->getSiteStore(),
+			$this->getMock( 'DataTypes\DataTypeFactory' ),
+			array(),
+			array(),
 			array()
 		);
 	}
 
 	private function getEntityIdFormatterFactory() {
-		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
-
-		$labelLookupFactory = $this->getMockBuilder( 'Wikibase\Lib\FormatterLabelLookupFactory' )
+		$entityIdFormatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$labelLookupFactory->expects( $this->any() )
-			->method( 'getLabelLookup' )
-			->will( $this->returnValue( $labelLookup ) );
+		$formatterFactory = $this->getMock( 'Wikibase\Lib\EntityIdFormatterFactory' );
+		$formatterFactory->expects( $this->any() )
+			->method( 'getOutputFormat' )
+			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
 
-		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$formatterFactory->expects( $this->any() )
+			->method( 'getEntityIdFormater' )
+			->will( $this->returnValue( $entityIdFormatter ) );
 
-		return new EntityIdHtmlLinkFormatterFactory( $labelLookupFactory, $titleLookup );
+		return $formatterFactory;
 	}
 
 	private function getSnakFormatterFactory() {
@@ -94,6 +98,16 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $snakFormatter ) );
 
 		return $snakFormatterFactory;
+	}
+
+	private function getSiteStore() {
+		$siteStore = $this->getMock( 'SiteStore' );
+
+		$siteStore->expects( $this->any() )
+			->method( 'getSites' )
+			->will( $this->returnValue( new SiteList() ) );
+
+		return $siteStore;
 	}
 
 }

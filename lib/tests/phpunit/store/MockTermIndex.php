@@ -6,6 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Term;
 use Wikibase\TermIndex;
 
@@ -24,7 +25,7 @@ use Wikibase\TermIndex;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MockTermIndex implements TermIndex {
+class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 	/**
 	 * @var Term[]

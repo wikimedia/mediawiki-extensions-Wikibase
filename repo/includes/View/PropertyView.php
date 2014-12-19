@@ -2,8 +2,10 @@
 
 namespace Wikibase\Repo\View;
 
+use DataTypes\DataTypeFactory;
 use DataTypes\DataType;
 use InvalidArgumentException;
+use Language;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
@@ -19,6 +21,29 @@ use Wikibase\Repo\WikibaseRepo;
  * @author H. Snater < mediawiki@snater.com >
  */
 class PropertyView extends EntityView {
+
+	/**
+	 * @var DataTypeFactory
+	 */
+	private $dataTypeFactory;
+
+	/**
+	 * @param FingerprintView $fingerprintView
+	 * @param ClaimsView $claimsView
+	 * @param Language $language
+	 * @param bool $editable
+	 */
+	public function __construct(
+		FingerprintView $fingerprintView,
+		ClaimsView $claimsView,
+		DataTypeFactory $dataTypeFactory,
+		Language $language,
+		$editable = true
+	) {
+		parent::__construct( $fingerprintView, $claimsView, $language, $editable );
+
+		$this->dataTypeFactory = $dataTypeFactory;
+	}
 
 	/**
 	 * @see EntityView::getMainHtml
@@ -52,8 +77,7 @@ class PropertyView extends EntityView {
 	}
 
 	private function getDataType( Property $property ) {
-		return WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
-			->getType( $property->getDataTypeId() );
+		return $this->dataTypeFactory->getType( $property->getDataTypeId() );
 	}
 
 	/**
