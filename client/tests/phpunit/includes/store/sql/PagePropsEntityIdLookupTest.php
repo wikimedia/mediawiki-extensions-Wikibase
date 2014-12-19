@@ -45,6 +45,20 @@ class PagePropsEntityIdLookupTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function testGetEntityIdForTitle() {
+		$db = wfGetDB( DB_MASTER );
+
+		$title22 = $this->makeTitle( 22 );
+		$title99 = $this->makeTitle( 99 );
+
+		$q22 = new ItemId( 'Q22' );
+		$this->insertPageProps( $db, 22, $q22 );
+
+		$lookup = new PagePropsEntityIdLookup( wfGetLB(), new BasicEntityIdParser() );
+		$this->assertEquals( $q22, $lookup->getEntityIdForTitle( $title22 ) );
+		$this->assertNull( $lookup->getEntityIdForTitle( $title99 ) );
+	}
+
 	public function testGetEntityIds() {
 		$db = wfGetDB( DB_MASTER );
 

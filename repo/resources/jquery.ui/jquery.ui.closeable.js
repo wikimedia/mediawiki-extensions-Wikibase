@@ -63,7 +63,7 @@ $.widget( 'ui.closeable', PARENT, {
 	 */
 	setContent: function( $content, cssClasses ) {
 		this.option( '$content', $content || null );
-		this.option( 'cssClass', cssClasses || null );
+		this.option( 'cssClass', cssClasses || '' );
 		this._trigger( 'update' );
 	},
 

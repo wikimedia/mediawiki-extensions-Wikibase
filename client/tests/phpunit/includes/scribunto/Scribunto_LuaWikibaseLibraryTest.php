@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Scribunto;
 
+use Language;
 use Parser;
 use ParserOptions;
 use Scribunto;
@@ -53,6 +54,39 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$entity = $luaWikibaseLibrary->getEntity( 'Q888', false );
 		$this->assertEquals( array( null ), $entity );
+	}
+
+	public function testGetEntity_hasLanguageFallback() {
+		$this->setMwGlobals( array(
+			'wgContLang' => Language::factory( 'ku-arab' )
+		) );
+
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$entityArray = $luaWikibaseLibrary->getEntity( 'Q885588', false );
+
+		$expected = array(
+			array(
+				'id' => 'Q885588',
+				'type' => 'item',
+				'labels' => array(
+					'ku-latn' => array(
+						'language' => 'ku-latn',
+						'value' => 'Pisîk'
+					),
+					'ku-arab' => array (
+						'language' => 'ku-arab',
+						'value' => 'پسیک',
+						'source-language' => 'ku-latn',
+					)
+				),
+				'schemaVersion' => 2,
+			)
+		);
+
+		$this->assertEquals( $expected, $entityArray, 'getEntity' );
+
+		$label = $luaWikibaseLibrary->getLabel( 'Q885588' );
+		$this->assertEquals( array( 'پسیک' ), $label, 'getLabel' );
 	}
 
 	public function testGetEntityInvalidIdType() {

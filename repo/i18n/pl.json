@@ -169,6 +169,7 @@
 	"special-setsitelink": "Ustaw odnośnik do strony",
 	"wikibase-setsitelink-introfull": "Ustawiasz odnośnik do witryny $2 dla [[$1]].",
 	"wikibase-setsitelink-intro": "Ten formularz pozwala na dodanie odnośnika do strony w danym elemencie. Należy podać identyfikator (np. Q23), kod języka (np. „plwiki”) oraz tytuł strony, którą chcesz dodać.",
+	"wikibase-setsitelink-intro-badges": "Dodatkowo możesz ustawić różne odznaki dla tego odnośnika, są one wymienione poniżej.",
 	"wikibase-setsitelink-site": "Kod witryny:",
 	"wikibase-setsitelink-label": "Odnośnik:",
 	"wikibase-setsitelink-badges": "Odznaki:",
