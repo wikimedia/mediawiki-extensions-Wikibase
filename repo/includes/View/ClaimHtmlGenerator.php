@@ -58,12 +58,17 @@ class ClaimHtmlGenerator {
 			false
 		);
 
+		// TODO: Resolve if-statement after concept of Claim has been removed
+		//  (see https://github.com/wmde/WikibaseDataModel/pull/317)
 		if ( !( $claim instanceof Statement ) ) {
-			$claimHtml = wfTemplate( 'wb-claim',
+			$claimHtml = wfTemplate( 'wikibase-statementview',
 				$claim->getGuid(),
+				'',
 				$mainSnakHtml,
 				$this->getHtmlForQualifiers( $claim->getQualifiers() ),
-				$editSectionHtml
+				$editSectionHtml,
+				'',
+				''
 			);
 		} else {
 			/** @var Statement $claim */
@@ -90,14 +95,11 @@ class ClaimHtmlGenerator {
 				$claim->getReferences()
 			);
 
-			$claimHtml = wfTemplate( 'wb-statement',
+			$claimHtml = wfTemplate( 'wikibase-statementview',
+				$claim->getGuid(),
 				$rankHtml,
-				wfTemplate( 'wb-claim',
-					$claim->getGuid(),
-					$mainSnakHtml,
-					$this->getHtmlForQualifiers( $claim->getQualifiers() ),
-					''
-				),
+				$mainSnakHtml,
+				$this->getHtmlForQualifiers( $claim->getQualifiers() ),
 				$editSectionHtml,
 				$referencesHeading,
 				$referencesHtml
