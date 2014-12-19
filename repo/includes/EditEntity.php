@@ -5,6 +5,7 @@ namespace Wikibase;
 use DerivativeContext;
 use Hooks;
 use Html;
+use IContextSource;
 use InvalidArgumentException;
 use MWException;
 use ReadOnlyError;
@@ -13,6 +14,7 @@ use Status;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -771,21 +773,13 @@ class EditEntity {
 			return;
 		}
 
-		if ( !$this->isNew() ) {
-			$context = clone $this->context;
-
-			$title = $this->getTitle();
-			$context->setTitle( $title );
-			$context->setWikiPage( new WikiPage( $title ) );
-		} else {
-			$context = $this->context;
-		}
-
 		// Run edit filter hooks
 		$filterStatus = Status::newGood();
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$entityContent = $entityContentFactory->newFromEntity( $this->newEntity );
+
+		$context = $this->getContextForEditFilter( $this->newEntity );
 
 		if ( !wfRunHooks( 'EditFilterMergedContent',
 			array( $context, $entityContent, &$filterStatus, $summary, $this->getUser(), false ) ) ) {
@@ -799,6 +793,38 @@ class EditEntity {
 		}
 
 		$this->status->merge( $filterStatus );
+	}
+
+	/**
+	 * EntityDocument $entity
+	 *
+	 * @return IContextSource
+	 */
+	private function getContextForEditFilter( EntityDocument $entity ) {
+		if ( !$this->isNew() ) {
+			$context = clone $this->context;
+			$title = $this->getTitle();
+		} else {
+			$context = $this->context;
+			$entityType = $entity->getType();
+
+			// This constructs a "fake" title of the form Property:NewProperty,
+			// where the title text is assumed to be name of the special page used
+			// to create entities of the given type. This is used by the
+			// LinkBeginHookHandler::doOnLinkBegin to replace the link to the
+			// fake title with a link to the respective special page.
+			// The effect is that e.g. the AbuseFilter log will show a link to
+			// "Special:NewProperty" instead of "Property:NewProperty", while
+			// the AbuseFilter itself will get a Title object with the correct
+			// namespace IDs for Property entities.
+			$namespace = $this->titleLookup->getNamespaceForType( $entityType );
+			$title = Title::makeTitle( $namespace, 'New' . ucfirst( $entityType ) );
+		}
+
+		$context->setTitle( $title );
+		$context->setWikiPage( new WikiPage( $title ) );
+
+		return $context;
 	}
 
 	protected function applyPreSaveChecks() {

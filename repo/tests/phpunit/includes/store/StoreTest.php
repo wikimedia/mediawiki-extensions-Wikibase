@@ -63,6 +63,14 @@ class StoreTest extends \MediaWikiTestCase {
 	 * @dataProvider instanceProvider
 	 * @param Store $store
 	 */
+	public function testGetLabelConflictFinder( Store $store ) {
+		$this->assertInstanceOf( '\Wikibase\Lib\Store\LabelConflictFinder', $store->getLabelConflictFinder() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Store $store
+	 */
 	public function testNewIdGenerator( Store $store ) {
 		$this->assertInstanceOf( '\Wikibase\IdGenerator', $store->newIdGenerator() );
 	}

@@ -49,9 +49,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.menu',
 				'jquery.ui.TemplatedWidget',
-				'wikibase.datamodel',
 				'wikibase.templates',
-				'wikibase.utilities',
 			),
 		),
 
@@ -127,6 +125,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.inputautoexpand',
 				'jquery.ui.TemplatedWidget',
+				'jquery.util.getDirectionality',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.datamodel.Term',
@@ -171,7 +170,7 @@ return call_user_func( function() {
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.aliasesview',
 				'jquery.wikibase.descriptionview',
-				'jquery.wikibase.fingerprintgroupview',
+				'jquery.wikibase.entitytermsview',
 				'jquery.wikibase.labelview',
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.datamodel.Term',
@@ -184,32 +183,32 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.fingerprintgroupview' => $moduleTemplate + array(
+		'jquery.wikibase.entitytermsview' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase.fingerprintgroupview.js',
+				'jquery.wikibase.entitytermsview.js',
 			),
 			'styles' => array(
-				'themes/default/jquery.wikibase.fingerprintgroupview.css',
+				'themes/default/jquery.wikibase.entitytermsview.css',
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
-				'jquery.wikibase.fingerprintlistview',
+				'jquery.wikibase.entitytermsforlanguagelistview',
 			),
 			'messages' => array(
 				'wikibase-terms',
 			),
 		),
 
-		'jquery.wikibase.fingerprintlistview' => $moduleTemplate + array(
+		'jquery.wikibase.entitytermsforlanguagelistview' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase.fingerprintlistview.js',
+				'jquery.wikibase.entitytermsforlanguagelistview.js',
 			),
 			'styles' => array(
-				'themes/default/jquery.wikibase.fingerprintlistview.css',
+				'themes/default/jquery.wikibase.entitytermsforlanguagelistview.css',
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
-				'jquery.wikibase.fingerprintview',
+				'jquery.wikibase.entitytermsforlanguageview',
 				'wikibase.getLanguageNameByCode',
 			),
 			'messages' => array(
@@ -217,12 +216,12 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.fingerprintview' => $moduleTemplate + array(
+		'jquery.wikibase.entitytermsforlanguageview' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase.fingerprintview.js',
+				'jquery.wikibase.entitytermsforlanguageview.js',
 			),
 			'styles' => array(
-				'themes/default/jquery.wikibase.fingerprintview.css',
+				'themes/default/jquery.wikibase.entitytermsforlanguageview.css',
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
@@ -243,6 +242,7 @@ return call_user_func( function() {
 				'jquery.wikibase.itemview.js',
 			),
 			'dependencies' => array(
+				'jquery.wikibase.claimgrouplabelscroll',
 				'jquery.wikibase.claimgrouplistview',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.sitelinkgrouplistview',
@@ -259,6 +259,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
+				'jquery.util.getDirectionality',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.datamodel.Term',
@@ -302,6 +303,7 @@ return call_user_func( function() {
 				'jquery.wikibase.propertyview.js',
 			),
 			'dependencies' => array(
+				'jquery.wikibase.claimgrouplabelscroll',
 				'jquery.wikibase.claimgrouplistview',
 				'jquery.wikibase.entityview',
 			),

@@ -28,10 +28,23 @@
 }
 
 .wikibase-sitelinkview input {
+	background-color: transparent;
+	border-left: 0;
+	border-right: 0;
+	border-top: 0;
 	margin: 0;
 	font-family: inherit;
 	font-size: 1em; /* prevent font size rounding errors */
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
+	outline: none;
+}
+
+.wikibase-sitelinkview input:focus {
+	border-color: #0b0080;
+}
+
+.wikibase-sitelinkview-badges {
+	margin-left: 0.4em;
 }

@@ -367,6 +367,7 @@
 	"right-property-create": "Создавање на својства",
 	"wikibase-entity-not-viewable-title": "Несовпаѓање во типот на содржината. Не можам да ја прикажам.",
 	"wikibase-entity-not-viewable": "Дадениот тип на содржина „$1“ не претставува Единица и затоа  Викибазата не може да го прикаже.",
+	"apihelp-wbavailablebadges-description": "Бара расположиви значки.",
 	"apihelp-wbcreateclaim-description": "Создава тврдења во Викибазата.",
 	"apihelp-wbcreateclaim-param-entity": "Назнака на предметот на кој му го додавате тврдењето",
 	"apihelp-wbcreateclaim-param-property": "Назнака на својството на спојницата",

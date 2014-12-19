@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Summary;
 
 /**
