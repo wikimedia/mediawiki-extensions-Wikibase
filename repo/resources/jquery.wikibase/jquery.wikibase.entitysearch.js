@@ -39,6 +39,8 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 				&& ( !menu.option( 'items' ).length || !menu.element.is( ':visible' ) )
 			) {
 				self.options.suggestionsPlaceholder.setVisibility( true );
+				// Early update required for the suggestionsPlaceholder's visibility
+				self._term = self.element.val();
 				self._updateMenu( [] );
 			}
 		} );
@@ -103,11 +105,11 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 	 * @see jQuery.ui.suggester._updateMenuVisibility
 	 */
 	_updateMenuVisibility: function() {
-		if( !this._term.length ) {
-			this._close();
-		} else {
+		if( this._term ) {
 			this._open();
 			this.repositionMenu();
+		} else {
+			this._close();
 		}
 	},
 
