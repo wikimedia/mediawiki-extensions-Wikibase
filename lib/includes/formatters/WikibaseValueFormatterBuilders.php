@@ -90,6 +90,7 @@ class WikibaseValueFormatterBuilders {
 			'PT:url' => 'Wikibase\Lib\HtmlUrlFormatter',
 			'PT:commonsMedia' => 'Wikibase\Lib\CommonsLinkFormatter',
 			'PT:wikibase-item' =>  array( 'this', 'newEntityIdHtmlFormatter' ),
+			'PT:wikibase-property' => array( 'this', 'newEntityIdHtmlFormatter' ),
 			'VT:time' => array( 'this', 'newHtmlTimeFormatter' ),
 			'VT:monolingualtext' => 'Wikibase\Formatters\MonolingualHtmlFormatter',
 		),
