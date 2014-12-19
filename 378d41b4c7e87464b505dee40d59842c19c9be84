@@ -16,6 +16,24 @@
       "revId": "378d41b4c7e87464b505dee40d59842c19c9be84",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_d6339c5d",
+        "filename": "repo/resources/jquery/jquery.util.getDirectionality.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T12:22:15Z",
+      "side": 1,
+      "message": "Whoops, thanks.",
+      "parentUuid": "0e6cb3ef_f647c04e",
+      "revId": "378d41b4c7e87464b505dee40d59842c19c9be84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
