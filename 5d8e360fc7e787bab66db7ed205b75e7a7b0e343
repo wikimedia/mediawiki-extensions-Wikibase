@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_316542de",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T15:00:30Z",
+      "side": 1,
+      "message": "It implements negative caching for entries for languages we were asked for, but found no label for. How can this be made more clear?",
+      "parentUuid": "0e6cb3ef_5139d6c9",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_71541a02",
         "filename": "lib/includes/store/BufferingTermLookup.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-19T14:03:22Z",
       "side": 1,
       "message": "\"Know to not be undefined\"? Uh? Double negotiation? What does that mean? What keys? \"Defined\" in which way?",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_5160f6cb",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T15:00:30Z",
+      "side": 1,
+      "message": "\"known to be undefined\" means \"we tried to look this up before, and it wasn\u0027t  there, so we cached that fact\". Negative caching. Can you come up with a better description?",
+      "parentUuid": "0e6cb3ef_71541a02",
       "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_f15eea16",
+        "filename": "lib/includes/store/BufferingTermLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T15:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_d14de676",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_313782e2",
         "filename": "lib/includes/store/EntityTermLookup.php",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2014-12-19T14:03:22Z",
       "side": 1,
       "message": "Huh?",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_114d9e3f",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T15:00:30Z",
+      "side": 1,
+      "message": "bad phpstorm, bad!",
+      "parentUuid": "0e6cb3ef_313782e2",
       "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_b15b92fc",
+        "filename": "lib/includes/store/TermBuffer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T15:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_9120ce97",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_f1190a7f",
         "filename": "lib/includes/store/TermIndex.php",
         "patchSetId": 11
@@ -98,6 +188,24 @@
       "writtenOn": "2014-12-19T14:03:22Z",
       "side": 1,
       "message": "You could make this optional via \"\u003d null\".",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_9158cefe",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T15:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_f1190a7f",
       "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_316f8291",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T15:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_510b1626",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_b61dc87a",
         "filename": "lib/tests/phpunit/store/BufferingTermLookupTest.php",
         "patchSetId": 11
@@ -132,6 +258,24 @@
       "writtenOn": "2014-12-19T14:03:22Z",
       "side": 1,
       "message": "Wrong namespace.",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_1164bead",
+        "filename": "lib/tests/phpunit/store/BufferingTermLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T15:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_b61dc87a",
       "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_f1682a86",
+        "filename": "lib/tests/phpunit/store/BufferingTermLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T15:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_76173057",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_b63628ff",
         "filename": "lib/tests/phpunit/store/EntityTermLookupTest.php",
         "patchSetId": 11
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_710c1af1",
+        "filename": "lib/tests/phpunit/store/EntityTermLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T15:00:30Z",
+      "side": 1,
+      "message": "I disagree. The provider should define cases. The expected outcome of each case depends on the ID you put in. These should be defined in the same place. Having some of the info in the test case and some in the provider is bad.\n\nIt\u0027s already not great that we rely on knowledge about what terms  the mock will return for which item ID. Ideally, we\u0027d also construct the mock here, so all the info about the test case and the test data is in a single place.\n\nBasically: I think information  locality is more important than reducing the number of parameters.",
+      "parentUuid": "0e6cb3ef_b63628ff",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_56254cbb",
         "filename": "lib/tests/phpunit/store/EntityTermLookupTest.php",
         "patchSetId": 11
@@ -183,6 +363,24 @@
       "writtenOn": "2014-12-19T14:03:22Z",
       "side": 1,
       "message": "As above.",
+      "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_51f1d6d8",
+        "filename": "lib/tests/phpunit/store/EntityTermLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-19T15:00:30Z",
+      "side": 1,
+      "message": "ditto.",
+      "parentUuid": "0e6cb3ef_56254cbb",
       "revId": "5d8e360fc7e787bab66db7ed205b75e7a7b0e343",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
