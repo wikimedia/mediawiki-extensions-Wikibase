@@ -59,7 +59,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	private $options;
 
 	/**
-	 * @var DispatchingValueFormatter
+	 * @var TypedValueFormatter
 	 */
 	private $valueFormatter;
 
@@ -77,7 +77,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	 * @param string $format The name of this formatter's output format.
 	 *        Use the FORMAT_XXX constants defined in SnakFormatter.
 	 * @param FormatterOptions $options
-	 * @param DispatchingValueFormatter $valueFormatter
+	 * @param TypedValueFormatter $valueFormatter
 	 * @param PropertyDataTypeLookup $typeLookup
 	 * @param DataTypeFactory $dataTypeFactory
 	 *
@@ -86,7 +86,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	public function __construct(
 		$format,
 		FormatterOptions $options,
-		DispatchingValueFormatter $valueFormatter,
+		TypedValueFormatter $valueFormatter,
 		PropertyDataTypeLookup $typeLookup,
 		DataTypeFactory $dataTypeFactory
 	) {
@@ -276,11 +276,11 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	}
 
 	/**
-	 * @see ValueFormatter::format().
+	 * @see ValueFormatter::format
 	 *
-	 * Implemented by delegating to the DispatchingValueFormatter passed to the constructor.
+	 * Implemented by delegating to the TypedValueFormatter passed to the constructor.
 	 *
-	 * @see TypedValueFormatter::formatValue.
+	 * @see TypedValueFormatter::formatValue
 	 *
 	 * @param DataValue $value
 	 * @param string $dataTypeId
@@ -310,7 +310,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	/**
 	 * Checks whether the given snak's type is 'value'.
 	 *
-	 * @see SnakFormatter::canFormatSnak()
+	 * @see SnakFormatter::canFormatSnak
 	 *
 	 * @param Snak $snak
 	 *

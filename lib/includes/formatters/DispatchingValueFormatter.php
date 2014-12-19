@@ -27,10 +27,9 @@ class DispatchingValueFormatter extends ValueFormatterBase implements TypedValue
 	 *        Each type ID must be prefixed with either "PT:" for property data types
 	 *        or "VT:" for data value types.
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $formatters ) {
-
 		foreach ( $formatters as $type => $formatter ) {
 			if ( !is_string( $type ) ) {
 				throw new InvalidArgumentException( '$formatters must map type IDs to formatters.' );
@@ -50,7 +49,7 @@ class DispatchingValueFormatter extends ValueFormatterBase implements TypedValue
 	}
 
 	/**
-	 * @see ValueFormatter::format().
+	 * @see ValueFormatter::format
 	 *
 	 * Formats the given value by finding an appropriate formatter among the ones supplied
 	 * to the constructor, and applying it.
@@ -59,7 +58,7 @@ class DispatchingValueFormatter extends ValueFormatterBase implements TypedValue
 	 * the data type. If none is found, this falls back to finding a formatter based on the
 	 * value's type.
 	 *
-	 * @see TypedValueFormatter::formatValue.
+	 * @see TypedValueFormatter::formatValue
 	 *
 	 * @param DataValue $value
 	 * @param string    $dataTypeId
@@ -75,13 +74,13 @@ class DispatchingValueFormatter extends ValueFormatterBase implements TypedValue
 	}
 
 	/**
-	 * @see ValueFormatter::format().
+	 * @see ValueFormatter::format
 	 *
 	 * @since 0.5
 	 *
 	 * @param DataValue $value The value to format
 	 *
-	 * @throws \DataValues\IllegalValueException
+	 * @throws IllegalValueException
 	 * @return string
 	 */
 	public function format( $value ) {
