@@ -12,7 +12,7 @@ use Wikibase\Lib\EntityIdFormatter;
  * @since 0.5
  *
  * @licence GNU GPL v2+
- * @author aude
+ * @author Katie Filbert < aude.wiki@gmail.com >
  * @author jeblad
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler

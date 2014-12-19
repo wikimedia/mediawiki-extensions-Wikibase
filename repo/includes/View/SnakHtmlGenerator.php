@@ -17,7 +17,7 @@ use Wikibase\Lib\SnakFormatter;
  *
  * @author H. Snater < mediawiki@snater.com >
  * @author Pragunbhutani
- * @author Katie Filbert < aude.wiki@gmail.com>
+ * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
 class SnakHtmlGenerator {

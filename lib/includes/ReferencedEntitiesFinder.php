@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
- * @author Katie Filbert
+ * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
