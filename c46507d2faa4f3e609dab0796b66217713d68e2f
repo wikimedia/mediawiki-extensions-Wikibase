@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_9ad790c4",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-19T12:23:09Z",
+      "side": 1,
+      "message": "Mustn\u0027t this be cloned too?",
+      "revId": "c46507d2faa4f3e609dab0796b66217713d68e2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
