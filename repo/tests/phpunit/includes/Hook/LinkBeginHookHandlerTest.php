@@ -5,14 +5,18 @@ namespace Wikibase\Test;
 use Language;
 use RequestContext;
 use Title;
+use Linker;
+use SpecialPageFactory;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\TermLookup;
+use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\Hook\LinkBeginHookHandler;
-use Wikibase\Repo\Store\PageEntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers Wikibase\Repo\Hook\LinkBeginHookHandler
@@ -74,6 +78,41 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
+	}
+
+	public function overrideSpecialNewEntityLinkProvider() {
+		$entityTypes = array_keys( WikibaseRepo::getDefaultInstance()->getContentModelMappings() );
+
+		$linkTitles = array();
+		foreach ( $entityTypes as $entityType ) {
+			$linkTitles[] = array( 'New' . ucfirst( $entityType ) );
+		}
+
+		return $linkTitles;
+	}
+
+	/**
+	 * @dataProvider overrideSpecialNewEntityLinkProvider
+	 * @param string $linkTitle
+	 */
+	public function testDoOnLinkBegin_overrideSpecialNewEntityLink( $linkTitle ) {
+		$contextTitle = Title::newFromText( 'Special:Recentchanges' );
+		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
+
+		$title = Title::makeTitle( NS_MAIN, $linkTitle );
+		$html = $title->getFullText();
+		$out = $this->getOutputPage( $contextTitle );
+		$attribs = array();
+
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $attribs, $out );
+
+		$specialPageTitle = Title::makeTitle(
+			NS_SPECIAL,
+			SpecialPageFactory::getLocalNameFor( $linkTitle )
+		);
+
+		$this->assertContains( Linker::linkKnown( $specialPageTitle ), $html );
+		$this->assertContains( $specialPageTitle->getFullText(), $html );
 	}
 
 	public function testDoOnLinkBegin_nonEntityTitleLink() {
@@ -142,13 +181,13 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return PageEntityIdLookup
+	 * @return EntityIdLookup
 	 */
-	private function getPageEntityIdLookup() {
-		$entityIdLookup = $this->getMock( 'Wikibase\Repo\Store\PageEntityIdLookup' );
+	private function getEntityIdLookup() {
+		$entityIdLookup = $this->getMock( 'Wikibase\Store\EntityIdLookup' );
 
 		$entityIdLookup->expects( $this->any() )
-			->method( 'getPageEntityId' )
+			->method( 'getEntityIdForTitle' )
 			->will( $this->returnCallback( function( Title $title ) {
 				if ( preg_match( '/^Q(\d+)$/', $title->getText(), $m ) ) {
 					return new ItemId( $m[0] );
@@ -198,6 +237,15 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		return $termLookup;
 	}
 
+	private function getEntityNamespaceLookup() {
+		$entityNamespaces = array(
+			'wikibase-item' => 0,
+			'wikibase-property' => 102
+		);
+
+		return new EntityNamespaceLookup( $entityNamespaces );
+	}
+
 	private function getLinkBeginHookHandler() {
 		$languageFallback = new LanguageFallbackChain( array(
 			LanguageWithConversion::factory( 'de-ch' ),
@@ -206,8 +254,9 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		) );
 
 		return new LinkBeginHookHandler(
-			$this->getPageEntityIdLookup(),
+			$this->getEntityIdLookup(),
 			$this->getTermLookup(),
+			$this->getEntityNamespaceLookup(),
 			$languageFallback,
 			Language::factory( 'en' )
 		);

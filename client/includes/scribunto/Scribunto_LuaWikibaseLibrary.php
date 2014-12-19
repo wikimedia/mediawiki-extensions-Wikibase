@@ -4,8 +4,9 @@ use Wikibase\Client\Scribunto\WikibaseLuaBindings;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
-use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
 use Wikibase\Utils;
 
 /**
@@ -40,9 +41,15 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-		$labelLookup = new LanguageLabelLookup(
+
+		$fallbackChain = $wikibaseClient->getLanguageFallbackChainFactory()->newFromLanguage(
+			$language,
+			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
+		);
+
+		$labelLookup = new LanguageFallbackLabelLookup(
 			new EntityRetrievingTermLookup( $entityLookup ),
-			$wgContLang->getCode()
+			$fallbackChain
 		);
 
 		return new WikibaseLuaBindings(

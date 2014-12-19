@@ -13,10 +13,8 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\ClaimHtmlGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
@@ -37,12 +35,10 @@ use Wikibase\Repo\View\SnakHtmlGenerator;
 class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return DispatchingSnakFormatter
+	 * @return SnakFormatter
 	 */
 	protected function getSnakFormatterMock() {
-		$snakFormatter = $this->getMockBuilder( 'Wikibase\Lib\DispatchingSnakFormatter' )
-			->disableOriginalConstructor()
-			->getMock();
+		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )

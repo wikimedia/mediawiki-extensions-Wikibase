@@ -202,40 +202,40 @@ HTML;
 <li class="wikibase-aliasesview-list-item" dir="auto">$1</li>
 HTML;
 
-	$templates['wikibase-fingerprintgroupview'] =
+	$templates['wikibase-entitytermsview'] =
 <<<HTML
-<div class="wikibase-fingerprintgroupview">
-	<div class="wikibase-fingerprintgroupview-heading-container">
-		<h2 id="wb-terms" class="wb-section-heading wikibase-fingerprintgroupview-heading">$1</h2>
+<div class="wikibase-entitytermsview">
+	<div class="wikibase-entitytermsview-heading-container">
+		<h2 id="wb-terms" class="wb-section-heading wikibase-entitytermsview-heading">$1</h2>
 		<!-- wikibase-toolbar -->$3
 	</div>
-	<!-- wikibase-fingerprintlistview -->$2
+	<!-- wikibase-entitytermsforlanguagelistview -->$2
 </div>
 HTML;
 
-	$templates['wikibase-fingerprintlistview'] =
+	$templates['wikibase-entitytermsforlanguagelistview'] =
 <<<HTML
-<table class="wikibase-fingerprintlistview">
+<table class="wikibase-entitytermsforlanguagelistview">
 	<colgroup>
-		<col class="wikibase-fingerprintlistview-language" />
-		<col class="wikibase-fingerprintlistview-label wikibase-fingerprintlistview-description wikibase-fingerprintlistview-aliases" />
+		<col class="wikibase-entitytermsforlanguagelistview-language" />
+		<col class="wikibase-entitytermsforlanguagelistview-label wikibase-entitytermsforlanguagelistview-description wikibase-entitytermsforlanguagelistview-aliases" />
 	</colgroup>
-	<!-- [0,*] wikibase-fingerprintview -->$1
+	<!-- [0,*] wikibase-entitytermsforlanguageview -->$1
 </table>
 HTML;
 
-	$templates['wikibase-fingerprintview'] =
+	$templates['wikibase-entitytermsforlanguageview'] =
 <<<HTML
-<tbody class="wikibase-fingerprintview wikibase-fingerprintview-$1" >
+<tbody class="wikibase-entitytermsforlanguageview wikibase-entitytermsforlanguageview-$1" >
 	<tr>
-		<td class="wikibase-fingerprintview-language" rowspan="3"><a href="$2">$3</a></td>
-		<td class="wikibase-fingerprintview-label">$4</td>
+		<td class="wikibase-entitytermsforlanguageview-language" rowspan="3"><a href="$2">$3</a></td>
+		<td class="wikibase-entitytermsforlanguageview-label">$4</td>
 	</tr>
 	<tr>
-		<td class="wikibase-fingerprintview-description">$5</td>
+		<td class="wikibase-entitytermsforlanguageview-description">$5</td>
 	</tr>
 	<tr>
-		<td class="wikibase-fingerprintview-aliases">$6</td>
+		<td class="wikibase-entitytermsforlanguageview-aliases">$6</td>
 	</tr>
 </tbody>
 HTML;
@@ -270,14 +270,13 @@ HTML;
 <li class="wikibase-sitelinkview wikibase-sitelinkview-$1" data-wb-siteid="$1">
 	<span class="wikibase-sitelinkview-siteid-container">
 		<span class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-$1" title="$5">$4</span>
-	</span>
-	<span class="wikibase-sitelinkview-link wikibase-sitelinkview-link-$1" lang="$2" dir="$3"><!-- wikibase-sitelinkview-pagename -->$6</span>
+	</span><span class="wikibase-sitelinkview-link wikibase-sitelinkview-link-$1" lang="$2" dir="$3"><!-- wikibase-sitelinkview-pagename -->$6</span>
 </li>
 HTML;
 
 	$templates['wikibase-sitelinkview-pagename'] =
 <<<HTML
-$3<span class="wikibase-sitelinkview-page"><a href="$1" hreflang="$4">$2</a></span>
+<span class="wikibase-sitelinkview-page"><a href="$1" hreflang="$4">$2</a></span>$3
 HTML;
 
 	$templates['wikibase-sitelinkview-unknown'] =

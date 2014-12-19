@@ -16,8 +16,9 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\Store\PageEntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * Factory for EntityContent objects.
@@ -28,7 +29,7 @@ use Wikibase\Repo\Store\PageEntityIdLookup;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class EntityContentFactory implements EntityTitleLookup, PageEntityIdLookup, EntityPermissionChecker {
+class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityPermissionChecker {
 
 	/**
 	 * @since 0.5
@@ -100,7 +101,7 @@ class EntityContentFactory implements EntityTitleLookup, PageEntityIdLookup, Ent
 	 *
 	 * @return EntityId|null
 	 */
-	public function getPageEntityId( Title $title ) {
+	public function getEntityIdForTitle( Title $title ) {
 		$contentModel = $title->getContentModel();
 		$handler = ContentHandler::getForModelID( $contentModel );
 
@@ -113,6 +114,35 @@ class EntityContentFactory implements EntityTitleLookup, PageEntityIdLookup, Ent
 		}
 
 		return null;
+	}
+
+	/**
+	 * @see EntityIdLookup::getEntityIds
+	 *
+	 * @note: the current implementation skips non-existing entities, but there is no guarantee
+	 * that this will always be the case.
+	 *
+	 * @param Title[] $titles
+	 *
+	 * @throws StorageException
+	 * @return EntityId[] Entity IDs, keyed by page IDs.
+	 */
+	public function getEntityIds( array $titles ) {
+		$entityIds = array();
+
+		foreach ( $titles as $title ) {
+			$pageId = $title->getArticleID();
+
+			if ( $pageId > 0 ) {
+				$entityId = $this->getEntityIdForTitle( $title );
+
+				if ( $entityId !== null ) {
+					$entityIds[$pageId] = $entityId;
+				}
+			}
+		}
+
+		return $entityIds;
 	}
 
 	/**
