@@ -281,6 +281,8 @@
 	"wikibase-property-summary-special-create-property": "Se ha creado una propiedad de [$2] con {{PLURAL:$1|valor|valores}}",
 	"wikibase-listdatatypes-wikibase-item-head": "Elemento",
 	"wikibase-listdatatypes-wikibase-item-body": "Enlace hacia otros elementos en el proyecto. Cuando se ingresa un valor, se buscan elementos coincidentes en el espacio de nombres \"Item\" del proyecto.",
+	"wikibase-listdatatypes-wikibase-property-head": "Propiedad",
+	"wikibase-listdatatypes-wikibase-property-body": "Enlace a las propiedades en un proyecto. Cuando se ingrese un valor, se buscarán propiedades que coincidan en el espacio de nombres \"Propiedad\" del proyecto.",
 	"wikibase-listdatatypes-commonsmedia-head": "Archivos multimedia de Commons",
 	"wikibase-listdatatypes-commonsmedia-body": "Enlace hacia archivos almacenados en Wikimedia Commons. Cuando se ingresa un valor, se buscan archivos coincidentes en el espacio de nombres \"Archivo\" de Commons.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Coordenadas geográficas",

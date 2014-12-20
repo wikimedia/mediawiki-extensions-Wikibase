@@ -12,7 +12,8 @@
 			"Sannita",
 			"Vituzzu",
 			"Yiyi",
-			"Zolo"
+			"Zolo",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Archivio di dati strutturati",
@@ -51,9 +52,7 @@
 	"wikibase-description-input-help-message": "Inserisci una breve descrizione per questa entità in $1.",
 	"wikibase-fingerprintgroupview-input-help-message": "Inserisci l'etichetta di questa entità, una breve descrizione e gli alias nelle varie lingue.",
 	"wikibase-fingerprintview-input-help-message": "Inserisci l'etichetta di questa entità, una breve descrizione e gli alias in $1.",
-	"wikibase-claims": "Asserzioni",
 	"wikibase-statements": "Dichiarazioni",
-	"wikibase-attributes": "Attributi",
 	"wikibase-terms": "In altre lingue",
 	"wikibase-sitelinkgroupview-input-help-message": "Aggiungi un collegamento al sito specificando un sito ed una pagina, modifica o rimuovi collegamenti ai siti esistenti.",
 	"wikibase-sitelinks-empty": "Nessuna pagina è collegata a questo elemento ancora.",
@@ -75,7 +74,6 @@
 	"wikibase-undo-nocontent": "Non è possibile caricare il contenuto della versione $2 della pagina $1",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Un valore non ancora salvato|$1 valori non ancora salvati}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|sito|siti}}",
-	"wikibase-sitelinksedittool-full": "Sono già stati impostati collegamenti alle pagine per tutti i siti conosciuti.",
 	"wikibase-disambiguation-title": "Disambigua per \"$1\"",
 	"wb-special-newitem-new-item-notification": "Il nuovo elemento $1 è stato creato e reindirizza alla sua pagina. Torna a $2.",
 	"wikibase-aliases-label": "Anche conosciuto come:",
@@ -331,6 +329,7 @@
 	"wikibase-property-summary-special-create-property": "Creata una proprietà [$2] con {{PLURAL:$1|valore|valori}}",
 	"wikibase-listdatatypes-wikibase-item-head": "Elemento",
 	"wikibase-listdatatypes-wikibase-item-body": "Collega ad altri elementi nel progetto. Durante l'inserimento verranno cercati gli elementi corrispondenti nel namespace \"Item\" del progetto.",
+	"wikibase-listdatatypes-wikibase-property-head": "Proprietà",
 	"wikibase-listdatatypes-commonsmedia-head": "File multimediale su Commons",
 	"wikibase-listdatatypes-commonsmedia-body": "Collega a file archiviati su Wikimedia Commons. Durante l'inserimento verranno cercati gli elementi corrispondenti nel namespace \"File\" di Commons.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Coordinate geografiche",

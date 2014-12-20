@@ -73,6 +73,7 @@
 	"wikibase-validator-bad-url-scheme": "不支援的 URL 協定：$1",
 	"wikibase-validator-unknown-unit": "不明的單位：$1",
 	"wikibase-validator-not-allowed": "不合法的數值：$1",
+	"wikibase-validator-no-validators": "禁止",
 	"datatypes-type-wikibase-item": "項目",
 	"datatypes-type-wikibase-property": "屬性",
 	"datatypes-type-commonsMedia": "共享資源媒體檔案",

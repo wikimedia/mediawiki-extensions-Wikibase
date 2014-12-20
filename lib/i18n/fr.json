@@ -15,7 +15,8 @@
 			"Nnemo",
 			"Tititou36",
 			"Wyz",
-			"Scoopfinder"
+			"Scoopfinder",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client",
@@ -78,6 +79,7 @@
 	"wikibase-validator-bad-url-scheme": "Schéma d’URL non supporté : $1",
 	"wikibase-validator-unknown-unit": "Unité inconnue : $1",
 	"wikibase-validator-not-allowed": "Valeur interdite : $1",
+	"wikibase-validator-no-validators": "Interdit",
 	"datatypes-type-wikibase-item": "Élément",
 	"datatypes-type-wikibase-property": "Propriété",
 	"datatypes-type-commonsMedia": "Fichier multimédia de Commons",

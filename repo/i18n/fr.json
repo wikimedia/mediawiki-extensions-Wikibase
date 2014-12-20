@@ -29,7 +29,8 @@
 			"Zolo",
 			"SnowedEarth",
 			"Verdy p",
-			"Elodark"
+			"Elodark",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -347,6 +348,7 @@
 	"wikibase-property-summary-special-create-property": "Propriété [$2] créée avec {{PLURAL:$1|une valeur|des valeurs}}",
 	"wikibase-listdatatypes-wikibase-item-head": "Élément",
 	"wikibase-listdatatypes-wikibase-item-body": "Lien vers d’autres éléments du projet. Quand une valeur est saisie, l’espace de l’espace de noms « Élément » du projet sera scruté à la recherche des éléments correspondants.",
+	"wikibase-listdatatypes-wikibase-property-head": "Propriété",
 	"wikibase-listdatatypes-commonsmedia-head": "Médias communs",
 	"wikibase-listdatatypes-commonsmedia-body": "Lien vers des fichiers hébergés sur Wikimedia Commons. Quand une valeur est entrée, l’espace de noms « Fichier » de Wikimedia Commons sera scruté à la recherche des fichiers correspondantes.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Coordonnées du globe",

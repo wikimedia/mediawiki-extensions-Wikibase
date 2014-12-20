@@ -52,6 +52,7 @@
 	"wikibase-validator-not-allowed": "Valor ilegal: $1",
 	"wikibase-validator-no-validators": "Prohibido",
 	"datatypes-type-wikibase-item": "Elemento",
+	"datatypes-type-wikibase-property": "Propiedad",
 	"datatypes-type-commonsMedia": "Archivo multimedia de Commons",
 	"version-wikibase": "Wikibase"
 }

@@ -8,6 +8,7 @@
 		]
 	},
 	"wikibase-after-page-move-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.",
+	"wikibase-after-page-delete-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.",
 	"wikibase-comment-sitelink-add": "Dodana jezična poveznica: $1",
 	"wikibase-comment-sitelink-change": "Jezična poveznica je promjenjena iz $1 u $2",
 	"wikibase-comment-sitelink-remove": "Uklonjena jezična poveznica: $1",
@@ -35,6 +36,7 @@
 	"wikibase-rc-show-wikidata-pref": "Prikaži {{WBREPONAME}} promjene na popisu nedavnih promjena",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} uređivanje",
+	"wikibase-replicationnote": "Molimo Vas, vodite računa da može proći nekoliko minuta dok izmjene ne budu vidljive na svim wikijima.",
 	"wikibase-watchlist-show-changes-pref": "Prikaži {{WBREPONAME}} promjene na mom popisu praćenja",
 	"special-unconnectedpages": "Stranice koje nisu povezane sa stavkama",
 	"wikibase-unconnectedpages-submit": "Idi",
