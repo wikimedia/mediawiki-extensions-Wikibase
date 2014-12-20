@@ -34,4 +34,16 @@ class UpdateRepoOnDelete extends UpdateRepo {
 			'user' => $this->user->getName()
 		);
 	}
+
+	/**
+	 * Get the time (in seconds) for which the job execution should be delayed
+	 * (if delayed jobs are enabled).
+	 *
+	 * @return int
+	 */
+	protected function getJobDelay() {
+		// Make sure this is not being run in the next 10s, as otherwise the job
+		// might run before the client's api is up with what happened (replag)
+		return 10;
+	}
 }
