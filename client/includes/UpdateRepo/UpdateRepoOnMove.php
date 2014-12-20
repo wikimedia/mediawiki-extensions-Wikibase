@@ -63,5 +63,4 @@ class UpdateRepoOnMove extends UpdateRepo {
 			'user' => $this->user->getName()
 		);
 	}
-
 }
