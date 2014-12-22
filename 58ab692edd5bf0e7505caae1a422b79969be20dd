@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_50e786df",
+        "filename": "client/includes/UpdateRepo/UpdateRepoOnMove.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-12-22T12:22:36Z",
+      "side": 1,
+      "message": "This should probably be $wgSlaveLagCritical",
+      "revId": "58ab692edd5bf0e7505caae1a422b79969be20dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
