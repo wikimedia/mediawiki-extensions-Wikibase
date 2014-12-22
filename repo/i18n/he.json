@@ -343,6 +343,8 @@
 	"wikibase-property-summary-special-create-property": "נוצר מאפיין בשפה [$2] עם {{PLURAL:$1|ערך|ערכים}}",
 	"wikibase-listdatatypes-wikibase-item-head": "פריט",
 	"wikibase-listdatatypes-wikibase-item-body": "קישור לפריטים אחרים במיזם. כאשר מוזן ערך, ירוץ חיפוש של הפריטים המתאימים במרחב השם של הפריטים (Item) במיזם.",
+	"wikibase-listdatatypes-wikibase-property-head": "מאפיין",
+	"wikibase-listdatatypes-wikibase-property-body": "קישור למאפיינים במיזם. כאשר מוזן ערך, ירוץ חיפוש של מאפיינים מתאימים במרחב השם של המאפיינים (Property) במיזם.",
 	"wikibase-listdatatypes-commonsmedia-head": "מדיה בוויקישיתוף",
 	"wikibase-listdatatypes-commonsmedia-body": "קישור לקבצים שמאוחסנים בוויקישיתוף. בעת הזנת ערך, ייערך חיפוש קבצים מתאימים במרחב קובץ (File) בוויקישיתוף.",
 	"wikibase-listdatatypes-globe-coordinate-head": "נקודת ציון של גלובוס",

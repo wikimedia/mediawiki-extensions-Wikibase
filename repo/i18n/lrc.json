@@ -5,12 +5,18 @@
 			"Mogoeilor"
 		]
 	},
+	"wikibase-edit": "ویرایشت",
 	"wikibase-save": "اماییه کردن",
+	"wikibase-cancel": "انجوم شیو كردن",
+	"wikibase-add": "اضاف کردن",
+	"wikibase-save-inprogress": "د حال و بال اماییه کاری...",
 	"wikibase-sitelink-site-edit-placeholder": "سیلجا",
+	"wikibase-sitelink-page-edit-placeholder": "بلگه",
 	"wikibase-terms": "د زونيا هنی",
 	"wikibase-move-up": "رئتن بالا",
 	"wikibase-move-down": "رو وه هار",
 	"wikibase-copyrighttooltip-acknowledge": "مه ای قانونا نه سی ویرایشتیا نهایی م قوول کردم.دواره ای پیغوم نشو نئیه",
+	"wikibase-entityselector-more": "بیشتر",
 	"wikibase-anonymouseditwarning": "زنئار:شما وامین نیومایته.\nنشونه آی پی تو سی ویرگار ویرایشت ای چی ضفظ بوئه.",
 	"wikibase-itembytitle-lookup-fieldset": "قلمیا نه سی سیلجا و نوم ون مئن جوری کو",
 	"wikibase-itembytitle-lookup-site": "سیلجا:",

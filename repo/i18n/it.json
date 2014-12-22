@@ -13,7 +13,8 @@
 			"Vituzzu",
 			"Yiyi",
 			"Zolo",
-			"Macofe"
+			"Macofe",
+			"Ricordisamoa"
 		]
 	},
 	"wikibase-desc": "Archivio di dati strutturati",
@@ -330,6 +331,7 @@
 	"wikibase-listdatatypes-wikibase-item-head": "Elemento",
 	"wikibase-listdatatypes-wikibase-item-body": "Collega ad altri elementi nel progetto. Durante l'inserimento verranno cercati gli elementi corrispondenti nel namespace \"Item\" del progetto.",
 	"wikibase-listdatatypes-wikibase-property-head": "Proprietà",
+	"wikibase-listdatatypes-wikibase-property-body": "Collega a delle proprietà nel progetto. Durante l'inserimento verranno cercate le proprietà corrispondenti nel namespace \"Property\" del progetto.",
 	"wikibase-listdatatypes-commonsmedia-head": "File multimediale su Commons",
 	"wikibase-listdatatypes-commonsmedia-body": "Collega a file archiviati su Wikimedia Commons. Durante l'inserimento verranno cercati gli elementi corrispondenti nel namespace \"File\" di Commons.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Coordinate geografiche",
@@ -357,5 +359,16 @@
 	"right-item-merge": "Unisci elementi",
 	"right-item-redirect": "Crea elementi redirect",
 	"right-property-term": "Modifica termini proprietà (etichette, descrizioni, alias)",
-	"right-property-create": "Crea proprietà"
+	"right-property-create": "Crea proprietà",
+	"apihelp-wbcreateclaim-description": "Crea asserzioni Wikibase.",
+	"apihelp-wbcreateclaim-param-entity": "ID dell'entità a cui stai aggiungendo l'asserzione",
+	"apihelp-wbremoveclaims-description": "Rimuove asserzioni Wikibase.",
+	"apihelp-wbremovequalifiers-description": "Rimuove un qualificatore da un'asserzione.",
+	"apihelp-wbsearchentities-param-limit": "Numero massimo di risultati",
+	"apihelp-wbsetaliases-description": "Imposta gli alias per un'entità Wikibase.",
+	"apihelp-wbsetdescription-description": "Imposta una descrizione per una singola entità Wikibase.",
+	"apihelp-wbsetdescription-param-language": "Lingua della descrizione",
+	"apihelp-wbsetdescription-param-value": "Il valore da impostare per la descrizione",
+	"apihelp-wbsetlabel-param-language": "Lingua dell'etichetta",
+	"apihelp-wbsetlabel-param-value": "Il valore dell'etichetta"
 }

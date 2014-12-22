@@ -67,5 +67,6 @@
 	"wikibase-pageinfo-entity-id-none": "Cap",
 	"wikibase-property-render-error": "No s'ha pogut representar la propietat $1: $2",
 	"wikibase-otherprojects": "Altres projectes",
-	"wikibase-otherprojects-beta-message": "Barra lateral d'altres projectes"
+	"wikibase-otherprojects-beta-message": "Barra lateral d'altres projectes",
+	"wikibase-otherprojects-beta-description": "Afegeix una secció «{{int:wikibase-otherprojects}}» en la barra lateral que proporciona enllaços a altres projectes de Wikimedia segons les dades de {{WBREPONAME}}."
 }
