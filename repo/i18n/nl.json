@@ -319,6 +319,7 @@
 	"wikibase-property-summary-special-create-property": "Eigenschap voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt",
 	"wikibase-listdatatypes-wikibase-item-head": "Item",
 	"wikibase-listdatatypes-wikibase-item-body": "Koppeling naar andere items van het project. Tijdens de gegevensinvoer wordt de naamruimte \"Item\" van Wikidata doorzicht op overeenkomende items. Het bestaat uit een enkel invoerveld voor tekst.",
+	"wikibase-listdatatypes-wikibase-property-head": "Eigenschap",
 	"wikibase-listdatatypes-commonsmedia-head": "Commons media",
 	"wikibase-listdatatypes-commonsmedia-body": "Koppeling naar bestanden die zijn opgeslagen op Wikimedia Commons. Tijdens de invoer wordt de naamruimte \"File\" op Commons doorzocht voor overeenkomende bestanden.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Globale coördinaat",

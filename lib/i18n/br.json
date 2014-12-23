@@ -2,12 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Fohanno",
-			"Fulup"
+			"Fulup",
+			"Y-M D"
 		]
 	},
-	"wikibase-diffview-reference": "dave",
-	"wikibase-diffview-rank": "renk",
 	"wikibase-sitelinks-sitename-columnheading": "Yezh",
-	"wikibase-sitelinks-siteid-columnheading": "Kod",
-	"wikibase-tooltip-error-details": "Munudoù"
+	"wikibase-tooltip-error-details": "Munudoù",
+	"wikibase-validator-no-validators": "Difennet"
 }
