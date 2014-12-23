@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Asaifm",
+			"Gagnabil",
+			"Meno25",
+			"زكريا",
+			"مشعل الحربي",
+			"Tarawneh",
+			"سامي الرحيلي"
+		]
+	},
+	"wikibase-deletedentity-item": "عنصر محذوف",
+	"wikibase-deletedentity-property": "خاصية محذوفة",
+	"wikibase-deletedentity-query": "طلب محذوف",
+	"wikibase-quantitydetails-amount": "الكمية",
+	"wikibase-quantitydetails-unit": "وحدة",
+	"wikibase-timedetails-time": "زمن",
+	"wikibase-timedetails-isotime": "الطابع الزمني ISO",
+	"wikibase-timedetails-timezone": "المنطقة الزمنية",
+	"wikibase-timedetails-calendar": "التقويم",
+	"wikibase-timedetails-precision": "الدقة",
+	"wikibase-timedetails-before": "قبل",
+	"wikibase-timedetails-after": "بعد",
+	"wikibase-globedetails-longitude": "خطّ الطول",
+	"wikibase-globedetails-latitude": "خطّ العرض",
+	"wikibase-globedetails-precision": "الدقة",
+	"wikibase-snakview-snaktypeselector-novalue": "لا قيمة",
+	"wikibase-validator-bad-type": "$2 عوضا عن $1",
+	"wikibase-validator-no-such-entity": "لم يتم العثور على $1",
+	"wikibase-validator-no-such-property": "الخاصية $1 غير موجودة",
+	"wikibase-validator-unknown-unit": "وحدة غير معروفة: $1"
+}

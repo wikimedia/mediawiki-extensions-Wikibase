@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arystanbek"
+		]
+	},
+	"wikibase-deletedentity-item": "Жойылған элемент",
+	"wikibase-deletedentity-property": "Жойылған сипат",
+	"wikibase-deletedentity-query": "Жойылған сұрау",
+	"wikibase-snakview-snaktypeselector-somevalue": "белгісіз мән",
+	"wikibase-snakview-snaktypeselector-novalue": "мән жоқ",
+	"wikibase-validator-bad-entity-id": "Көріксіз ID: $1",
+	"wikibase-validator-no-such-entity": "$1 табылмады"
+}

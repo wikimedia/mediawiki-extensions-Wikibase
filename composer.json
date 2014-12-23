@@ -53,6 +53,9 @@
 			"Wikibase.composer.php"
 		],
 		"classmap": [
+			"datatypes/includes/",
+			"datatypes/tests/phpunit/",
+
 			"client/includes/",
 			"client/WikibaseClient.hooks.php",
 			"client/tests/phpunit/",

@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aftab1995",
+			"Bellayet",
+			"Gitartha.bordoloi",
+			"Leemon2010"
+		]
+	},
+	"wikibase-deletedentity-item": "আইটেম অপসারণ করা হয়েছে",
+	"wikibase-snakview-snaktypeselector-somevalue": "অজানা মান",
+	"wikibase-snakview-snaktypeselector-novalue": "মান নেই",
+	"wikibase-undeserializable-value": "মানটি অবৈধ ও প্রদর্শন করা যাবে না।",
+	"wikibase-validator-bad-type": "$1 এর পরিবর্তে $2",
+	"wikibase-validator-too-long": "{{PLURAL:$1|একটি অক্ষরের|$1টি অক্ষরের}} চেয়ে বেশি হবে না",
+	"wikibase-validator-too-short": "অন্তত {{PLURAL:$1|একটি অক্ষর|$1টি অক্ষর}} হতে হবে",
+	"wikibase-validator-too-high": "সীমার বাইরে, অবশ্যই $1-এর থেকে বেশি হতে পারবে না।",
+	"wikibase-validator-too-low": "সীমার বাইরে, অবশ্যই $1-এর থেকে কম হতে পারবে না।",
+	"wikibase-validator-malformed-value": "ত্রুটিপূর্ণভাবে গঠিত ইনপুট: $1",
+	"wikibase-validator-bad-entity-id": "ত্রুটিপূর্ণভাবে গঠিত আইডি: $1",
+	"wikibase-validator-bad-entity-type": "$1 অপ্রত্যাশিত ভুক্তির ধরণ",
+	"wikibase-validator-no-such-entity": "$1 খুঁজে পাওয়া যায়নি",
+	"wikibase-validator-unknown-unit": "অজানা একক: $1",
+	"wikibase-validator-not-allowed": "অবৈধ মান: $1"
+}

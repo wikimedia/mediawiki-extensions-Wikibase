@@ -52,6 +52,15 @@ if ( ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) || !defined( 'Diff_VERSION' ) ||
 	include_once( __DIR__ . '/../vendor/autoload.php' );
 }
 
+// Include the WikibaseDataTypes library if that hasn't been done yet, since it's required for WikibaseClient to work.
+if ( !defined( 'WBDT_VERSION' ) ) {
+	include_once( __DIR__ . '/../datatypes/WikibaseDataTypes.php' );
+}
+
+if ( !defined( 'WBDT_VERSION' ) ) {
+	throw new Exception( 'WikibaseClient depends on the WikibaseDataTypes library.' );
+}
+
 call_user_func( function() {
 	global $wgExtensionCredits, $wgJobClasses, $wgHooks, $wgResourceModules, $wgMessagesDirs;
 

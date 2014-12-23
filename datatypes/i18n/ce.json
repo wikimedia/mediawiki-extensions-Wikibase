@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Умар"
+		]
+	},
+	"wikibase-timedetails-time": "Хан",
+	"wikibase-timedetails-isotime": "Хан билгал яр ISO-форматехь",
+	"wikibase-timedetails-timezone": "Сахьтан аса",
+	"wikibase-timedetails-calendar": "Календарь",
+	"wikibase-timedetails-precision": "Билгала",
+	"wikibase-timedetails-before": "Кхачале",
+	"wikibase-timedetails-after": "ТӀехьа",
+	"wikibase-globedetails-longitude": "Дохалла",
+	"wikibase-globedetails-latitude": "Шоралла",
+	"wikibase-globedetails-precision": "Билгала",
+	"wikibase-globedetails-globe": "Глобус",
+	"wikibase-parse-error": "Нийса доцу маьӀна.",
+	"wikibase-snakview-snaktypeselector-somevalue": "маьӀна хууш дац",
+	"wikibase-snakview-snaktypeselector-novalue": "маьӀна цакарийна",
+	"wikibase-validator-invalid": "Магийна доцу маьӀна",
+	"wikibase-validator-missing-field": "Хила еза меттиг яц '$1'"
+}

@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"David1010",
+			"Tokoko",
+			"MIKHEIL"
+		]
+	},
+	"wikibase-deletedentity-item": "წაშლილი ელემენტი",
+	"wikibase-snakview-snaktypeselector-somevalue": "უცნობი მნიშვნელობა",
+	"wikibase-snakview-snaktypeselector-novalue": "მნიშვნელობა არ არის მითითებული",
+	"wikibase-validator-no-such-entity": "$1 არ მოიძებნა"
+}

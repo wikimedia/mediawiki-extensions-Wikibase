@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Anakmalaysia",
+			"Shirayuki"
+		]
+	},
+	"wikibase-deletedentity-item": "Perkara yang terhapus",
+	"wikibase-deletedentity-property": "Sifat yang terhapus",
+	"wikibase-deletedentity-query": "Pertanyaan yang terhapus",
+	"wikibase-snakview-snaktypeselector-somevalue": "nilai tidak diketahui",
+	"wikibase-snakview-snaktypeselector-novalue": "tiada nilai",
+	"wikibase-validator-bad-type": "$2, bukan $1",
+	"wikibase-validator-too-long": "Mesti tidak melebihi $1 aksara",
+	"wikibase-validator-too-short": "Mesti sekurang-kurangnya $1 aksara",
+	"wikibase-validator-malformed-value": "Input cacat: $1",
+	"wikibase-validator-bad-entity-id": "ID cacat: $1",
+	"wikibase-validator-bad-entity-type": "Jenis entiti $1 tidak dijangka",
+	"wikibase-validator-no-such-entity": "$1 tidak dijumpai",
+	"wikibase-validator-no-such-property": "Sifat $1 tidak dijumpai",
+	"wikibase-validator-bad-value-type": "Jenis nilai $1 tidak elok, $2 diharapkan",
+	"wikibase-validator-not-allowed": "Nilai tak sah: $1",
+	"wikibase-validator-no-validators": "Dilarang"
+}

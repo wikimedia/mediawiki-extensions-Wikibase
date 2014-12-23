@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Milicevic01"
+		]
+	},
+	"wikibase-deletedentity-item": "Obrisana stavka",
+	"wikibase-deletedentity-property": "Obrisano svojstvo",
+	"wikibase-deletedentity-query": "Obrisan upit",
+	"wikibase-timedetails-time": "Vreme",
+	"wikibase-timedetails-timezone": "Vremenska zona",
+	"wikibase-timedetails-calendar": "Kalendar",
+	"wikibase-timedetails-after": "Posle",
+	"wikibase-globedetails-longitude": "Geografska dužina",
+	"wikibase-globedetails-latitude": "Geografska širina",
+	"wikibase-snakview-snaktypeselector-somevalue": "nepoznata vrednost",
+	"wikibase-snakview-snaktypeselector-novalue": "nema vrednosti",
+	"wikibase-validator-bad-type": "$2 umesto $1",
+	"wikibase-validator-too-long": "Ne sme biti duže od {{PLURAL:$1|jednog znaka|$1 znakova}}",
+	"wikibase-validator-too-short": "Mora biti najmanje {{PLURAL:$1|jedan znak|$1 znakova}} dugo",
+	"wikibase-validator-malformed-value": "Neispravan unos: $1",
+	"wikibase-validator-bad-entity-id": "Neispravan identifikator: $1",
+	"wikibase-validator-bad-entity-type": "Neočekivana vrsta entiteta $1",
+	"wikibase-validator-no-such-entity": "$1 nije pronađeno",
+	"wikibase-validator-no-such-property": "Svojstvo $1 nije pronađeno",
+	"wikibase-validator-not-allowed": "Nedozvoljena vrednost: $1",
+	"wikibase-snakformatter-valuetype-mismatch": "Vrsta vrednosti „$1“ nepoklapa se sa vrstom svojstva „$2“."
+}

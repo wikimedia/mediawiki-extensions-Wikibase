@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Erdemaslancan",
+			"Marmase",
+			"Mirzali"
+		]
+	},
+	"wikibase-quantitydetails-amount": "Miqdar",
+	"wikibase-quantitydetails-unit": "Lete",
+	"wikibase-timedetails-time": "Wext",
+	"wikibase-timedetails-timezone": "Wareyê saete",
+	"wikibase-timedetails-calendar": "Teqwim",
+	"wikibase-timedetails-precision": "Hesasiyet",
+	"wikibase-timedetails-before": "Ver",
+	"wikibase-timedetails-after": "Bahdo",
+	"wikibase-globedetails-longitude": "Derganiye",
+	"wikibase-globedetails-latitude": "Verıniye",
+	"wikibase-globedetails-precision": "Hesasiyet",
+	"wikibase-globedetails-globe": "Kure",
+	"wikibase-snakview-snaktypeselector-novalue": "erc çıniyo"
+}

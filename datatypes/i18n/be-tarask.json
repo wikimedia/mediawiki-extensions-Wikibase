@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizardist",
+			"Zedlik"
+		]
+	},
+	"wikibase-deletedentity-item": "Выдалены аб’ект",
+	"wikibase-deletedentity-property": "Выдаленая ўласьцівасьць",
+	"wikibase-deletedentity-query": "Выдалены запыт",
+	"wikibase-snakview-snaktypeselector-somevalue": "невядомае значэньне",
+	"wikibase-snakview-snaktypeselector-novalue": "без значэньня",
+	"wikibase-validator-bad-type": "$2 замест $1",
+	"wikibase-validator-too-long": "Ня мусіць перавышаць даўжынёй $1 {{PLURAL:$1|сымбаль|сымбаля|сымбаляў}}",
+	"wikibase-validator-too-short": "Мусіць быць даўжынёй прынамсі $1 {{PLURAL:$1|сымбаль|сымбаля|сымбаляў}}",
+	"wikibase-validator-malformed-value": "Няслушны ўвод: $1",
+	"wikibase-validator-bad-entity-id": "Няслушны ідэнтыфікатар: $1",
+	"wikibase-validator-bad-entity-type": "Нечаканы тып элемэнта $1",
+	"wikibase-validator-no-such-entity": "$1 ня знойдзены",
+	"wikibase-validator-no-such-property": "Уласьцівасьць $1 ня знойдзеная",
+	"wikibase-validator-bad-value-type": "Благі тып значэньня $1, чакаецца $2",
+	"wikibase-validator-bad-url": "Некарэктны URL: $1",
+	"wikibase-validator-bad-url-scheme": "Схема URL не падтрымліваецца: $1",
+	"wikibase-validator-not-allowed": "Недапушчальнае значэньне: $1"
+}

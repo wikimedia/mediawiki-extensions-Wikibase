@@ -1,0 +1,43 @@
+{
+	"name": "mediawiki/wikibase-datatypes",
+	"type": "library",
+	"description": "Library for the Wikibase extension for MediaWiki",
+	"keywords": [
+		"wikibase",
+		"wikidata",
+		"datatypes"
+	],
+	"homepage": "http://wikiba.se",
+	"license": "GNU GPL v2+",
+	"authors": [
+		{
+			"name": "The Wikidata team"
+		}
+	],
+	"support": {
+		"irc": "irc://irc.freenode.net/wikidata"
+	},
+	"require": {
+		"php": ">=5.3.2",
+
+		"data-values/data-values": "~0.1.0",
+		"data-values/common": "~0.2.0",
+		"data-values/geo": "~1.0.0",
+		"data-values/interfaces": "~0.1.4",
+		"data-values/number": "~0.4.0",
+		"data-values/time": "~0.6.0",
+		"data-values/validators": "~0.1.0",
+		"data-values/data-types": "~0.4.0",
+
+		"wikibase/data-model": "~2.0"
+	},
+	"autoload": {
+		"files" : [
+			"WikibaseDataTypes.php"
+		],
+		"classmap": [
+			"includes/",
+			"tests/phpunit/"
+		]
+	}
+}

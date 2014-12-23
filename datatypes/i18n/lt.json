@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eitvys200",
+			"Hugo.arg"
+		]
+	},
+	"wikibase-deletedentity-item": "Pašalintas įrašas",
+	"wikibase-deletedentity-property": "Pašalinta savybė",
+	"wikibase-deletedentity-query": "Pašalinta užklausa",
+	"wikibase-validator-bad-type": "$2 vietoje $1",
+	"wikibase-validator-too-long": "Turi būti ne daugiau nei {{PLURAL:$1|vieno ženklo|$1 ženklų}} ilgio",
+	"wikibase-validator-too-short": "Turi būti bent {{PLURAL:$1|vieno ženklo|$1 ženklų}} ilgio",
+	"wikibase-validator-malformed-value": "Neteisingas įvedimas: $1",
+	"wikibase-validator-bad-entity-id": "Neteisingas ID: $1",
+	"wikibase-validator-bad-entity-type": "Netikėtas darinio tipas $1",
+	"wikibase-validator-no-such-entity": "$1 nerasta"
+}

@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"ArnoLagrange",
+			"KuboF",
+			"Amire80",
+			"Tlustulimu"
+		]
+	},
+	"wikibase-deletedentity-item": "Forigita ero",
+	"wikibase-quantitydetails-upperbound": "Supra limo",
+	"wikibase-quantitydetails-lowerbound": "Malsupra limo",
+	"wikibase-quantitydetails-unit": "Unuo",
+	"wikibase-timedetails-time": "Tempo",
+	"wikibase-timedetails-isotime": "Tempomarko laŭ ISO",
+	"wikibase-timedetails-calendar": "Kalendaro",
+	"wikibase-timedetails-precision": "Precizeco",
+	"wikibase-timedetails-before": "Antaŭ",
+	"wikibase-timedetails-after": "Post",
+	"wikibase-globedetails-longitude": "Longitudo",
+	"wikibase-globedetails-latitude": "Latitudo",
+	"wikibase-globedetails-precision": "Precizeco",
+	"wikibase-snakview-snaktypeselector-somevalue": "nekonata valoro",
+	"wikibase-snakview-snaktypeselector-novalue": "sen valoro",
+	"wikibase-validator-bad-type": "$2 anstataŭ $1",
+	"wikibase-validator-no-such-entity": "$1 ne trovita",
+	"wikibase-validator-unknown-unit": "Nekonata unuo: $1",
+	"wikibase-validator-not-allowed": "Malvalida valoro: $1"
+}

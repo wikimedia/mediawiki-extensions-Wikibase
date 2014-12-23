@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Armando-Martin",
+			"Dalton2",
+			"Fitoschido",
+			"Ihojose",
+			"Pegna",
+			"Savh",
+			"Vivaelcelta",
+			"Mcervera",
+			"Macofe"
+		]
+	},
+	"wikibase-deletedentity-item": "Elemento borrado",
+	"wikibase-deletedentity-property": "Propiedad borrada",
+	"wikibase-deletedentity-query": "Búsqueda borrada",
+	"wikibase-timedetails-time": "Tiempo",
+	"wikibase-timedetails-isotime": "Fecha y hora en formato ISO",
+	"wikibase-timedetails-timezone": "Zona horaria",
+	"wikibase-timedetails-calendar": "Calendario",
+	"wikibase-timedetails-precision": "Precisión",
+	"wikibase-timedetails-before": "Antes",
+	"wikibase-timedetails-after": "Después",
+	"wikibase-globedetails-longitude": "Longitud",
+	"wikibase-globedetails-latitude": "Latitud",
+	"wikibase-globedetails-precision": "Precisión",
+	"wikibase-globedetails-globe": "Globo",
+	"wikibase-snakview-snaktypeselector-somevalue": "valor desconocido",
+	"wikibase-snakview-snaktypeselector-novalue": "sin valor",
+	"wikibase-validator-invalid": "Valor no válido",
+	"wikibase-validator-missing-field": "Falta el campo obligatorio «$1»",
+	"wikibase-validator-no-such-entity": "No se encontró \"$1\"",
+	"wikibase-validator-no-such-property": "No se encontró la propiedad $1",
+	"wikibase-validator-bad-value": "Valor corrupto: $1",
+	"wikibase-validator-not-allowed": "Valor ilegal: $1",
+	"wikibase-validator-no-validators": "Prohibido"
+}

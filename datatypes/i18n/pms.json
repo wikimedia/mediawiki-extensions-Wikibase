@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Borichèt",
+			"Dragonòt",
+			"පසිඳු කාවින්ද"
+		]
+	},
+	"wikibase-deletedentity-item": "Element ëscancelà",
+	"wikibase-deletedentity-property": "Propietà scancelà",
+	"wikibase-deletedentity-query": "Arcesta scancelà",
+	"wikibase-quantitydetails-amount": "Total",
+	"wikibase-quantitydetails-upperbound": "Lìmit superior",
+	"wikibase-quantitydetails-lowerbound": "Lìmit anferior",
+	"wikibase-quantitydetails-unit": "Unità",
+	"wikibase-snakview-snaktypeselector-somevalue": "valor pa conossù",
+	"wikibase-snakview-snaktypeselector-novalue": "gnun valor",
+	"wikibase-undeserializable-value": "Ël valor a l'é nen bon e a peul nen esse mostrà.",
+	"wikibase-validator-bad-type": "$2 nopà che $1",
+	"wikibase-validator-too-long": "A dev nen esse pi longh che {{PLURAL:$1|un caràter|$1 caràter}}",
+	"wikibase-validator-too-short": "A dev esse longh almanch {{PLURAL:$1|un|$1}} caràter",
+	"wikibase-validator-too-high": "Fòra dij lìmit, a dev esse nen pi grand che $1",
+	"wikibase-validator-too-low": "Fòra dij lìmit, a dev esse nen pi cit che $1",
+	"wikibase-validator-malformed-value": "Imission ant un formà nen bon: $1",
+	"wikibase-validator-bad-entity-id": "ID ant un formà nen bon: $1",
+	"wikibase-validator-bad-entity-type": "Sòrt d'entità $1 nen ëspetà",
+	"wikibase-validator-no-such-entity": "$1 nen trovà",
+	"wikibase-validator-no-such-property": "Propietà $1 nen trovà",
+	"wikibase-validator-bad-value-type": "Sòrt ëd valor nen bon-a $1, spetà $2",
+	"wikibase-validator-bad-url": "Adrëssa dl'Aragnà malformà: $1",
+	"wikibase-validator-bad-url-scheme": "Schema d'adrëssa dl'Aragnà nen mantnù: $1",
+	"wikibase-validator-unknown-unit": "Unità sconossùa: $1",
+	"wikibase-validator-not-allowed": "Valor vietà: $1"
+}

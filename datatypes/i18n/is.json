@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Snævar"
+		]
+	},
+	"wikibase-deletedentity-item": "Eyddur hlutur",
+	"wikibase-deletedentity-property": "Eyddur eiginleiki",
+	"wikibase-deletedentity-query": "Eydd fyrirspurn",
+	"wikibase-quantitydetails-amount": "Magn",
+	"wikibase-quantitydetails-upperbound": "efri mörk",
+	"wikibase-quantitydetails-lowerbound": "neðri mörk",
+	"wikibase-quantitydetails-unit": "Eining",
+	"wikibase-timedetails-time": "Tími",
+	"wikibase-timedetails-timezone": "Tímabelti",
+	"wikibase-timedetails-calendar": "Dagatal",
+	"wikibase-snakview-snaktypeselector-somevalue": "óþekkt gildi",
+	"wikibase-snakview-snaktypeselector-novalue": "ekkert gildi",
+	"wikibase-undeserializable-value": "Gildið er ógilt og ekki er hægt að birta það.",
+	"wikibase-validator-bad-type": "$2 í staðinn fyrir $1",
+	"wikibase-validator-too-long": "Má ekki vera lengri en $1 {{PLURAL:$1|stafur|stafir}}.",
+	"wikibase-validator-too-short": "Verður að vera að minnsta kosti $1 {{PLURAL:$1|stafur|stafir}} að lengd",
+	"wikibase-validator-too-high": "Utan marka, má ekki vera hærra en $1",
+	"wikibase-validator-too-low": "Utan marka, má ekki vera lægra en $1",
+	"wikibase-validator-malformed-value": "Gallað inntak: $1",
+	"wikibase-validator-bad-entity-id": "Gallað auðkenni: $1",
+	"wikibase-validator-bad-entity-type": "Óvænt eininga gerð $1",
+	"wikibase-validator-no-such-entity": "$1 fannst ekki",
+	"wikibase-validator-no-such-property": "Eiginleikinn $1 fannst ekki",
+	"wikibase-validator-bad-url": "Gölluð vefslóð: $1",
+	"wikibase-validator-bad-url-scheme": "Óstudd vefslóðs skema: $1",
+	"wikibase-validator-unknown-unit": "Óþekkt eining: $1",
+	"wikibase-validator-not-allowed": "Ógilt gildi: $1"
+}

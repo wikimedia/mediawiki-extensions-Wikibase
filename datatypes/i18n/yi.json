@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"פוילישער",
+			"පසිඳු කාවින්ද"
+		]
+	},
+	"wikibase-deletedentity-item": "אויסגעמעקטער דאטנאביעקט",
+	"wikibase-deletedentity-property": "אויסגעמעקטע אייגנשאפט",
+	"wikibase-deletedentity-query": "אויסגעמעקטע פראגע",
+	"wikibase-quantitydetails-amount": "סכום",
+	"wikibase-quantitydetails-upperbound": "העכערער גרענעץ",
+	"wikibase-quantitydetails-lowerbound": "נידעריקער גרענעץ",
+	"wikibase-quantitydetails-unit": "איינהייט",
+	"wikibase-timedetails-time": "צײַט",
+	"wikibase-timedetails-timezone": "צײַט זאנע",
+	"wikibase-timedetails-calendar": "קאלאענדאר",
+	"wikibase-timedetails-before": "פאר",
+	"wikibase-timedetails-after": "נאך",
+	"wikibase-globedetails-longitude": "געאגראַפֿישע לענג",
+	"wikibase-globedetails-latitude": "גארטל־ליניע",
+	"wikibase-globedetails-globe": "גלאבוס",
+	"wikibase-snakview-snaktypeselector-somevalue": "אומבאקאנטער ווערט",
+	"wikibase-snakview-snaktypeselector-novalue": "קיין ווערט",
+	"wikibase-undeserializable-value": "דער ווערט איז אומגילטיק און מען קען אים נישט ווײַזן.",
+	"wikibase-validator-invalid": "אומגילטיקער ווערט",
+	"wikibase-validator-bad-type": "$2 אַנשטאָט $1",
+	"wikibase-validator-no-such-entity": "$1 נישט געטראפן"
+}

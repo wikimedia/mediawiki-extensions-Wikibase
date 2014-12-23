@@ -7,7 +7,6 @@
 		]
 	},
 	"wikibase-lib-desc": "ვიკიბაზისა და ვიკიბაზის კლიენტის გაფართოებების საერთო ფუნქციები",
-	"wikibase-deletedentity-item": "წაშლილი ელემენტი",
 	"wikibase-error-unexpected": "შეცდომა: $1.",
 	"wikibase-error-save-generic": "შენახვის მცდელობისას მოხდა შეცდომა, ამიტომ თქვენი ცვლილებები ვერ შესრულდება.",
 	"wikibase-error-remove-generic": "წაშლის მცდელობისას მოხდა შეცდომა, ამიტომ თქვენი ცვლილებები ვერ შესრულდება.",
@@ -22,10 +21,7 @@
 	"wikibase-sitelinks-wikipedia": "ამ ელემენტთან დაკავშირებული ვიკიპედიის გვერდები",
 	"wikibase-sitelinks-sitename-columnheading": "ენა",
 	"wikibase-sitelinks-link-columnheading": "დაკავშირებული გვერდი",
-	"wikibase-snakview-snaktypeselector-somevalue": "უცნობი მნიშვნელობა",
-	"wikibase-snakview-snaktypeselector-novalue": "მნიშვნელობა არ არის მითითებული",
 	"wikibase-tooltip-error-details": "დეტალები",
-	"wikibase-validator-no-such-entity": "$1 არ მოიძებნა",
 	"datatypes-type-wikibase-item": "ელემენტი",
 	"datatypes-type-wikibase-property": "თვისება",
 	"datatypes-type-commonsMedia": "მედიაფაილი ვიკისაწყობში"

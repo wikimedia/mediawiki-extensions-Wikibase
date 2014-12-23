@@ -1,0 +1,17 @@
+datatypes/includes/formatters/MonolingualHtmlFormatter.php:use Wikibase\Utils;
+datatypes/includes/formatters/EntityIdTitleFormatter.php:use Wikibase\Lib\Store\EntityTitleLookup;
+datatypes/includes/formatters/WikibaseValueFormatterBuilders.php:use Wikibase\LanguageFallbackChain;
+datatypes/includes/formatters/WikibaseValueFormatterBuilders.php:use Wikibase\LanguageFallbackChainFactory;
+datatypes/includes/formatters/WikibaseValueFormatterBuilders.php:use Wikibase\Lib\Store\EntityTitleLookup;
+datatypes/includes/formatters/EntityIdLabelFormatter.php:use Wikibase\Lib\Store\LabelLookup;
+datatypes/includes/formatters/EntityIdHtmlLinkFormatterFactory.php:use Wikibase\Lib\Store\EntityTitleLookup;
+datatypes/includes/formatters/EntityIdHtmlLinkFormatter.php:use Wikibase\Lib\Store\EntityTitleLookup;
+datatypes/includes/formatters/EntityIdHtmlLinkFormatter.php:use Wikibase\Lib\Store\LabelLookup;
+datatypes/includes/formatters/FormatterLabelLookupFactory.php:use Wikibase\LanguageFallbackChain;
+datatypes/includes/formatters/FormatterLabelLookupFactory.php:use Wikibase\Lib\Store\TermLookup;
+datatypes/includes/formatters/FormatterLabelLookupFactory.php:use Wikibase\Lib\Store\LabelLookup;
+datatypes/includes/formatters/FormatterLabelLookupFactory.php:use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
+datatypes/includes/formatters/FormatterLabelLookupFactory.php:use Wikibase\Lib\Store\LanguageLabelLookup;
+datatypes/includes/WikibaseDataTypeBuilders.php:use Wikibase\Lib\Store\EntityLookup;
+datatypes/includes/WikibaseDataTypeBuilders.php:use Wikibase\Utils;
+datatypes/includes/Validators/EntityExistsValidator.php:use Wikibase\Lib\Store\EntityLookup;

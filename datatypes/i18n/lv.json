@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Papuass"
+		]
+	},
+	"wikibase-deletedentity-item": "Dzēsts ieraksts",
+	"wikibase-deletedentity-property": "Dzēsta īpašība",
+	"wikibase-deletedentity-query": "Dzēsts vaicājums",
+	"wikibase-snakview-snaktypeselector-somevalue": "nezināma vērtība",
+	"wikibase-snakview-snaktypeselector-novalue": "nav vērtības",
+	"wikibase-validator-not-allowed": "Neatļauta vērtība: $1"
+}

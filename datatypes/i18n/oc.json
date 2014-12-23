@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cedric31"
+		]
+	},
+	"wikibase-snakview-snaktypeselector-somevalue": "valor desconeguda",
+	"wikibase-snakview-snaktypeselector-novalue": "pas cap de valor",
+	"wikibase-validator-invalid": "Valor invalida"
+}

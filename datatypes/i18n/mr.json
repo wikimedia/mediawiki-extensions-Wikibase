@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"V.narsikar",
+			"संतोष दहिवळ"
+		]
+	},
+	"wikibase-deletedentity-item": "वगळलेले कलम",
+	"wikibase-deletedentity-property": "वगळलेला गुणधर्म",
+	"wikibase-deletedentity-query": "वगळलेली पृच्छा",
+	"wikibase-quantitydetails-amount": "रक्कम",
+	"wikibase-quantitydetails-upperbound": "उच्चतम मर्यादा",
+	"wikibase-quantitydetails-lowerbound": "निम्नतम मर्यादा",
+	"wikibase-quantitydetails-unit": "एकक",
+	"wikibase-snakview-snaktypeselector-somevalue": "अनोळखी किंमत",
+	"wikibase-snakview-snaktypeselector-novalue": "किंमत टाकलेली नाही",
+	"wikibase-undeserializable-value": "किंमत अवैध आहे म्हणून दाखविल्या जाउ शकत नाही.",
+	"wikibase-validator-bad-type": "$1 ऐवजी $2",
+	"wikibase-validator-too-long": "{{PLURAL:$1|वर्णापेक्षा|$1 वर्णांपेक्षा}} जास्त लांबी नको",
+	"wikibase-validator-too-short": "किमान {{PLURAL:$1|वर्णापेक्षा|$1 वर्णांपेक्षा}} जास्त लांबी हवी",
+	"wikibase-validator-too-high": "आवाक्याबाहेर.$1 पेक्षा जास्त नको.",
+	"wikibase-validator-too-low": "आवाक्याबाहेर.$1 पेक्षा कमी नको.",
+	"wikibase-validator-malformed-value": "विकृत अंतःक्षेप:$1",
+	"wikibase-validator-bad-entity-id": "विकृत ओळखण:$1",
+	"wikibase-validator-bad-entity-type": "अनपेक्षित अस्तित्व असलेला प्रकार $1",
+	"wikibase-validator-no-such-entity": "$1 सापडले नाही",
+	"wikibase-validator-no-such-property": "गुणधर्म $1 सापडला नाही",
+	"wikibase-validator-bad-value-type": "वाईट मुल्य प्रकार $1, अपेक्षित $2",
+	"wikibase-validator-bad-url": "विकृत यूआरएल: $1",
+	"wikibase-validator-unknown-unit": "अनोळखी एकक: $1",
+	"wikibase-validator-not-allowed": "अवैध किंमत:$1"
+}

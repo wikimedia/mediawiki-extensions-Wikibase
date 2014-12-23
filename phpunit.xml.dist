@@ -27,6 +27,9 @@
             <directory suffix=".php">lib/includes</directory>
             <directory suffix=".php">lib/maintenance</directory>
 
+            <directory suffix=".php">datatypes/includes</directory>
+            <directory suffix=".php">datatypes/maintenance</directory>
+
             <directory suffix=".php">repo/includes</directory>
             <directory suffix=".php">repo/maintenance</directory>
         </whitelist>

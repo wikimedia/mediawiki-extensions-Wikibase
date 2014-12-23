@@ -5,17 +5,8 @@
 			"Mogoeilor"
 		]
 	},
-	"wikibase-timedetails-time": "گات",
-	"wikibase-timedetails-timezone": "راساگه گاتی",
-	"wikibase-timedetails-calendar": "تقویم",
-	"wikibase-timedetails-before": "دما",
-	"wikibase-timedetails-after": "نها",
-	"wikibase-globedetails-longitude": "درازا ولاتشناسی",
-	"wikibase-globedetails-latitude": "پئنا ولاتشناسی",
 	"wikibase-sitelinks-sitename-columnheading": "زون",
 	"wikibase-sitelinks-link-columnheading": "بلگه هوم پیوندار",
-	"wikibase-snakview-snaktypeselector-somevalue": "ارزایشت نادیار",
-	"wikibase-snakview-snaktypeselector-novalue": "بی ارزشت",
 	"wikibase-tooltip-error-details": "جزئیات",
 	"datatypes-type-commonsMedia": "فایل پرنمون رسانه"
 }
