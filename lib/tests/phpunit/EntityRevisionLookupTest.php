@@ -147,6 +147,74 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 		}
 	}
 
+	/**
+	 * @dataProvider provideGetEntityRevisions
+	 *
+	 * @param EntityId[] $ids
+	 * @param string $mode LATEST_FROM_SLAVE or LATEST_FROM_MASTER
+	 * @param bool[] $exist
+	 * @param array $redirectTo
+	 */
+	public function testGetEntityRevisions( array $ids, $mode, array $exist, array $redirectTo  ) {
+		$lookup = $this->getEntityRevisionLookup();
+		$result = $lookup->getEntityRevisions( $ids, $mode );
+
+		$i = 0;
+		foreach ( $result as $entityRevision ) {
+			if ( $exist[$i] ) {
+				$this->assertInstanceOf(
+					'Wikibase\EntityRevision',
+					$entityRevision,
+					$ids[$i]->getSerialization() . " should exist"
+				);
+			} elseif ( !$redirectTo[$i] ) {
+				$this->assertSame(
+					null,
+					$entityRevision,
+					$ids[$i]->getSerialization() . " should not exist"
+				);
+			} else {
+				$this->assertSame(
+					$entityRevision->getTargetId()->getSerialization(),
+					$redirectTo[$i]->getSerialization()
+				);
+			}
+
+			$i++;
+		}
+	}
+
+	public static function provideGetEntityRevisions() {
+		$cases = array(
+			array(
+				array( new ItemId( 'q42' ) ),
+				EntityRevisionLookup::LATEST_FROM_SLAVE,
+				array( true ),
+				array( false ),
+			),
+			array(
+				array( new ItemId( 'q42' ), new PropertyId( 'p753' ) ),
+				EntityRevisionLookup::LATEST_FROM_SLAVE,
+				array( true, true ),
+				array( false, false ),
+			),
+			array(
+				array( new ItemId( 'q42' ), new PropertyId( 'p75555553' ) ),
+				EntityRevisionLookup::LATEST_FROM_SLAVE,
+				array( true, false ),
+				array( false, false ),
+			),
+			array(
+				array( new PropertyId( 'p753' ), new ItemId( 'q23' ) ),
+				EntityRevisionLookup::LATEST_FROM_SLAVE,
+				array( true, false ),
+				array( false, new ItemId( 'q42' ) ),
+			),
+		);
+
+		return $cases;
+	}
+
 	public function provideGetEntityRevision_redirect() {
 		$redirects = $this->getTestRedirects();
 		$cases = array();
@@ -189,6 +257,39 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 		return $cases;
 	}
 
+	public function provideGetLatestRevisionIds() {
+		$cases = array(
+			array(
+				array( new ItemId( 'q42' ) ),
+				array( 'Q42' => 12 ),
+			),
+			array(
+				array(
+					new PropertyId( 'p753' ),
+					new ItemId( 'q42' )
+				),
+				array(
+					'P753' => 13,
+					'Q42' => 12
+				),
+			),
+			array(
+				array(
+					new PropertyId( 'p753' ),
+					new PropertyId( 'p453904583095843095' ),
+					new ItemId( 'q42' )
+				),
+				array(
+					'P753' => 13,
+					'P453904583095843095' => false,
+					'Q42' => 12
+				),
+			)
+		);
+
+		return $cases;
+	}
+
 	/**
 	 * @dataProvider provideGetLatestRevisionId
 	 *
@@ -206,6 +307,23 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 
 		$entityRev = $lookup->getEntityRevision( $id );
 		$this->assertInstanceOf( 'Wikibase\EntityRevision', $entityRev );
+	}
+
+	/**
+	 * @dataProvider provideGetLatestRevisionIds
+	 *
+	 * @param EntityId[] $id
+	 * @param mixed $expected
+	 */
+	public function testGetLatestRevisionIds( array $ids, array $expected ) {
+		$lookup = $this->getEntityRevisionLookup();
+		$result = $lookup->getLatestRevisionIds( $ids );
+
+		foreach ( $expected as &$foo ) {
+			$foo = $this->resolveLogicalRevision( $foo );
+		}
+
+		$this->assertSame( $expected, $result );
 	}
 
 	public function testGetLatestRevisionForMissing() {

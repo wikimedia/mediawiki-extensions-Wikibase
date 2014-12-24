@@ -4,12 +4,14 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
@@ -201,37 +203,38 @@ class GetEntities extends ApiWikibase {
 	 * @return EntityRevision[]
 	 */
 	protected function getEntityRevisionsFromEntityIds( $entityIds, $resolveRedirects = false ) {
-		$revisionArray = array();
+		$revisionArray = $this->getEntityRevisionLookup()->getEntityRevisions($entityIds);
 
-		foreach ( $entityIds as $entityId ) {
-			$key = $entityId->getSerialization();
-			$entityRevision = $this->getEntityRevision( $entityId, $resolveRedirects );
+		// Resolve/ throw away eventual EntityRedirects
+		foreach ( $revisionArray as &$entityRevision ) {
+			if ( !( $entityRevision instanceof EntityRedirect ) ) {
+				continue;
+			}
 
-			$revisionArray[$key] = $entityRevision;
+			$entityRevision = $this->handleRedirect( $entityRevision, $resolveRedirects );
 		}
 
 		return $revisionArray;
 	}
 
 	/**
-	 * @param EntityId $entityId
+	 * @param EntityRedirect $entityRedirect
 	 * @param bool $resolveRedirects
-	 *
 	 * @return null|EntityRevision
 	 */
-	private function getEntityRevision( EntityId $entityId, $resolveRedirects = false ) {
-		$entityRevision = null;
+	private function handleRedirect( EntityRedirect $entityRedirect, $resolveRedirects ) {
+		if ( $resolveRedirects ) {
+			$entityId = $entityRedirect->getTargetId();
 
-		try {
-			$entityRevision = $this->getEntityRevisionLookup()->getEntityRevision( $entityId );
-		} catch ( UnresolvedRedirectException $ex ) {
-			if ( $resolveRedirects ) {
-				$entityId = $ex->getRedirectTargetId();
-				$entityRevision = $this->getEntityRevision( $entityId, false );
+			try {
+				$entityRevision = $this->getEntityRevisionLookup()->getEntityRevision( $entityId );
+				return $entityRevision;
+			} catch ( UnresolvedRedirectException $ex ) {
+				// Double redirect :(
 			}
 		}
 
-		return $entityRevision;
+		return null;
 	}
 
 	/**

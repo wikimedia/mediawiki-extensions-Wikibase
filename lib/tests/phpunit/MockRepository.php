@@ -156,6 +156,37 @@ class MockRepository implements
 	}
 
 	/**
+	 * @since 0.5
+	 * @see EntityRevisionLookup::getEntityRevisions
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string $mode LATEST_FROM_SLAVE or LATEST_FROM_MASTER. LATEST_FROM_MASTER would
+	 *        force the revision to be determined from the canonical master database.
+	 *
+	 * @throws InvalidArgumentException
+	 * @throws StorageException
+	 * @return array
+	 */
+	public function getEntityRevisions( array $entityIds, $mode = self::LATEST_FROM_SLAVE ) {
+		$entityRevisions = array();
+
+		foreach ( $entityIds as $entityId ) {
+			if ( !$entityId instanceof EntityId ) {
+				throw new InvalidArgumentException( '$entityIds needs to be an array of EntityIds' );
+			}
+
+			$key = $entityId->getSerialization();
+			if ( !isset( $this->redirects[$key] ) ) {
+				$entityRevisions[$key] = $this->getEntityRevision( $entityId, $mode );
+			} else {
+				$entityRevisions[$key] = $this->redirects[$key];
+			}
+		}
+
+		return $entityRevisions;
+	}
+
+	/**
 	 * See EntityLookup::hasEntity()
 	 *
 	 * @since 0.4
@@ -587,6 +618,38 @@ class MockRepository implements
 		$revision = $this->getEntityRevision( $entityId, $mode );
 
 		return $revision === null ? false : $revision->getRevisionId();
+	}
+
+	/**
+	 * @since 0.5
+	 * @see EntityRevisionLookup::getLatestRevisionIds
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string $mode LATEST_FROM_SLAVE or LATEST_FROM_MASTER. LATEST_FROM_MASTER would force the
+	 *        revision to be determined from the canonical master database.
+	 *
+	 * @throws InvalidArgumentException
+	 * @throws StorageException
+	 * @return array
+	 */
+	public function getLatestRevisionIds( array $entityIds, $mode = self::LATEST_FROM_SLAVE ) {
+		$revisions = array();
+
+		foreach ( $entityIds as $entityId ) {
+			if ( !$entityId instanceof EntityId ) {
+				throw new InvalidArgumentException( '$entityIds needs to be an array of EntityIds' );
+			}
+
+			$revision = $this->getEntityRevision( $entityId, $mode );
+			$key = $entityId->getSerialization();
+			if ( $revision ) {
+				$revisions[$key] = $revision->getRevisionId();
+			} else {
+				$revisions[$key] = false;
+			}
+		}
+
+		return $revisions;
 	}
 
 	/**

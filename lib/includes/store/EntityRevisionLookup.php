@@ -12,6 +12,7 @@ use Wikibase\EntityRevision;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Marius Hoch < hoo@online.de >
  */
 interface EntityRevisionLookup {
 
@@ -51,6 +52,24 @@ interface EntityRevisionLookup {
 	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE );
 
 	/**
+	 * Returns an array entityid -> EntityRevision, EntityRedirect or false (if not found).
+	 * Please note that this doesn't throw UnresolvedRedirectExceptions but rather returns
+	 * EntityRedirect objects for entities that are infact redirects.
+	 *
+	 * Implementations of this method must not silently resolve redirects.
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string $mode LATEST_FROM_SLAVE or LATEST_FROM_MASTER. LATEST_FROM_MASTER would
+	 *        force the revision to be determined from the canonical master database.
+	 *
+	 * @throws StorageException
+	 * @return array entityid -> EntityRevision, EntityRedirect or null (if not found)
+	 */
+	public function getEntityRevisions( array $entityIds, $mode = self::LATEST_FROM_SLAVE );
+
+	/**
 	 * Returns the id of the latest revision of the given entity, or false if there is no such entity.
 	 *
 	 * Implementations of this method must not silently resolve redirects.
@@ -63,4 +82,17 @@ interface EntityRevisionLookup {
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE );
 
+	/**
+	 * Returns an array with entityid => the id of the latest revisions of the given entities, or
+	 * false if there is no such entity.
+	 *
+	 * Implementations of this method must not silently resolve redirects.
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string $mode LATEST_FROM_SLAVE or LATEST_FROM_MASTER. LATEST_FROM_MASTER would force the
+	 *        revision to be determined from the canonical master database.
+	 *
+	 * @return array
+	 */
+	public function getLatestRevisionIds( array $entityIds, $mode = self::LATEST_FROM_SLAVE );
 }
