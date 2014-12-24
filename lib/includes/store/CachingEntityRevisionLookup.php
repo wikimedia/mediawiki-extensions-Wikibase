@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use BagOStuff;
 use Wikibase\DataModel\Entity\EntityId;
+use InvalidArgumentException;
 use Wikibase\EntityRevision;
 
 /**
@@ -13,6 +14,7 @@ use Wikibase\EntityRevision;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Marius Hoch < hoo@online.de >
  */
 class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWatcher {
 
@@ -88,7 +90,8 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	}
 
 	/**
-	 * @see   EntityLookup::getEntity
+	 * @see EntityLookup::getEntity
+	 * @see EntityRevisionLookup::getEntityRevision
 	 *
 	 * @note: If this lookup is configured to verify revisions, getLatestRevisionId()
 	 * will be called on the underlying lookup to check whether the cached revision is
@@ -137,6 +140,122 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	}
 
 	/**
+	 * @see EntityLookup::getEntityRevisions
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string $from LATEST_FROM_SLAVE or LATEST_FROM_MASTER. LATEST_FROM_MASTER would
+	 *        force the revision to be determined from the canonical master database.
+	 *
+	 * @throws StorageException
+	 * @throws InvalidArgumentException
+	 * @return array entityid -> EntityRevision, EntityRedirect or null (if not found)
+	 */
+	public function getEntityRevisions( array $entityIds, $from = self::LATEST_FROM_SLAVE ) {
+		if ( empty( $entityIds ) ) {
+			return array();
+		}
+
+		$cacheKeys = array();
+		foreach ( $entityIds as $entityId ) {
+			if ( !$entityId instanceof EntityId ) {
+				throw new InvalidArgumentException( '$entityIds needs to be an array of EntityIds' );
+			}
+
+			$cacheKeys[$entityId->getSerialization()] = $this->getCacheKey( $entityId );
+		}
+		$entityIds = array_combine( array_keys( $cacheKeys ), $entityIds );
+
+		$entityRevisions = $this->getEntityRevisionsFromCache( $cacheKeys );
+
+		$entityRevisionsToLoad = $this->validateCachedData( $entityRevisions, $entityIds, $from );
+
+		if ( $entityRevisionsToLoad ) {
+			$entityRevisions = array_merge(
+				$entityRevisions,
+				$this->fetchEntityRevisions( $entityRevisionsToLoad, $from )
+			);
+		}
+
+		return $entityRevisions;
+	}
+
+	/**
+	 * @param string[] $cacheKeys
+	 *
+	 * @return array EntityRevision or false
+	 */
+	private function getEntityRevisionsFromCache( array $cacheKeys ) {
+		$cachedEntityRevisions = $this->cache->getMulti( $cacheKeys );
+		$entityRevisions = array();
+
+		foreach ( $cacheKeys as $id => $key ) {
+			if ( !isset( $cachedEntityRevisions[$key] ) || !$cachedEntityRevisions[$key] ) {
+				$entityRevisions[$id] = false;
+				continue;
+			}
+
+			$entityRevisions[$id] = $cachedEntityRevisions[$key];
+		}
+
+		return $entityRevisions;
+	}
+
+	/**
+	 * @param array $entityRevisions
+	 * @param EntityId[] $entityIds
+	 * @param string $from
+	 *
+	 * @return EntityId[] Entity revisions to load from an uncached storage
+	 */
+	private function validateCachedData( array &$entityRevisions, array $entityIds, $from ) {
+		$latestRevisions = array();
+		if ( $this->shouldVerifyRevision && $entityRevisions ) {
+			$latestRevisions = $this->getRevisionIdsForEntityRevisions( $entityRevisions, $from );
+		}
+
+		$entityRevisionsToLoad = array();
+
+		/** @var EntityRevision $entityRevision */
+		foreach ( $entityRevisions as $id => &$entityRevision ) {
+			if ( $entityRevision !== false && isset( $latestRevisions[$id] ) ) {
+				$latestRevision = $latestRevisions[$id];
+
+				if ( $latestRevision === false ) {
+					// entity no longer exists!
+					$entityRevision = null;
+				} elseif ( $entityRevision && $entityRevision->getRevisionId() !== $latestRevision ) {
+					$entityRevision = false;
+				}
+			}
+
+			if ( $entityRevision === false ) {
+				$entityRevisionsToLoad[] = $entityIds[$id];
+			}
+		}
+
+		return $entityRevisionsToLoad;
+	}
+
+	/**
+	 * @param array $entityRevisions
+	 * @param string $from
+	 * @return array
+	 */
+	private function getRevisionIdsForEntityRevisions( array $entityRevisions, $from ) {
+		$latestRevisionsToLoad = array();
+
+		foreach ( $entityRevisions as $entityRevision ) {
+			if ( $entityRevision ) {
+				$latestRevisionsToLoad[] = $entityRevision->getEntity()->getId();
+			}
+		}
+
+		return $this->lookup->getLatestRevisionIds( $latestRevisionsToLoad, $from );
+	}
+
+	/**
 	 * Fetches the EntityRevision and updates the cache accordingly.
 	 *
 	 * @param EntityId $entityId
@@ -164,6 +283,42 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	}
 
 	/**
+	 * Fetches the EntityRevisions and updates the cache accordingly.
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string $from LATEST_FROM_SLAVE or LATEST_FROM_MASTER. LATEST_FROM_MASTER would
+	 *        force the revision to be determined from the canonical master database.
+	 *
+	 * @throws StorageException
+	 * @return EntityRevision|null
+	 */
+	private function fetchEntityRevisions( array $entityIds, $from ) {
+		$cacheKeys = array();
+
+		foreach ( $entityIds as $entityId ) {
+			$cacheKeys[$entityId->getSerialization()] = $this->getCacheKey( $entityId );
+		}
+
+		$entityRevisions = $this->lookup->getEntityRevisions( $entityIds, $from );
+
+		$set = array();
+		foreach( $entityRevisions as $id => $entityRevision ) {
+			$key = $cacheKeys[$id];
+			if ( $entityRevision === null ) {
+				$this->cache->delete( $key );
+			} elseif( $entityRevision instanceof EntityRevision ) {
+				$set[$key] = $entityRevision;
+			}
+		}
+
+		if ( $set ) {
+			$this->cache->setMulti( $set, $this->cacheTimeout );
+		}
+
+		return $entityRevisions;
+	}
+
+	/**
 	 * @see EntityRevisionLookup::getLatestRevisionId
 	 *
 	 * @note: If this lookup is configured to verify revisions, this just delegates
@@ -176,21 +331,63 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
+		$result = $this->getLatestRevisionIds( array( $entityId ), $mode );
+		return $result[$entityId->getSerialization()];
+	}
 
+	/**
+	 * @see EntityRevisionLookup::getLatestRevisionIds
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string $mode
+	 *
+	 * @return array
+	 */
+	public function getLatestRevisionIds( array $entityIds, $mode = self::LATEST_FROM_SLAVE ) {
 		// If we do not need to verify the revision, and the revision isn't
 		// needed for an update, we can get the revision from the cached object.
 		// XXX: whether this is actually quicker depends on the cache.
 		if ( ! ( $this->shouldVerifyRevision || $mode === self::LATEST_FROM_MASTER ) ) {
-			$key = $this->getCacheKey( $entityId );
-			/** @var EntityRevision $entityRevision */
-			$entityRevision = $this->cache->get( $key );
+			return $this->getLatestRevisionIdsFromCache( $entityIds, $mode );
+		}
 
-			if ( $entityRevision ) {
-				return $entityRevision->getRevisionId();
+		return $this->lookup->getLatestRevisionIds( $entityIds, $mode );
+	}
+
+	/**
+	 * @param EntityId[] $entityIds
+	 * @param string $mode
+	 * @throws InvalidArgumentException
+	 */
+	private function getLatestRevisionIdsFromCache( array $entityIds, $mode ) {
+		$cacheKeys = array();
+
+		foreach ( $entityIds as $entityId ) {
+			if ( !$entityId instanceof EntityId ) {
+				throw new InvalidArgumentException( '$entityIds needs to be an array of EntityIds' );
+			}
+
+			$cacheKeys[$entityId->getSerialization()] = $this->getCacheKey( $entityId );
+		}
+		$entityIds = array_combine( array_keys( $cacheKeys ), $entityIds );
+
+		$cachedEntityRevisions = $this->cache->getMulti( $cacheKeys );
+		$latestRevisions = array();
+		$latestRevisionsToLoad = array();
+
+		foreach( $cacheKeys as $id => $key ) {
+			if ( !isset( $cachedEntityRevisions[$key] ) || !$cachedEntityRevisions[$key] ) {
+				$latestRevisionsToLoad[] = $entityIds[$id];
+				continue;
+			} else {
+				$latestRevisions[$id] = $cachedEntityRevisions[$key]->getRevisionId();
 			}
 		}
 
-		return $this->lookup->getLatestRevisionId( $entityId, $mode );
+		return array_merge(
+			$latestRevisions,
+			$this->lookup->getLatestRevisionIds( $latestRevisionsToLoad, $mode )
+		);
 	}
 
 	/**
