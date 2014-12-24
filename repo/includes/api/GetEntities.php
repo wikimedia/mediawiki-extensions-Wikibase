@@ -4,13 +4,14 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
@@ -201,57 +202,46 @@ class GetEntities extends ApiWikibase {
 	 * @return EntityRevision[]
 	 */
 	protected function getEntityRevisionsFromEntityIds( $entityIds, $resolveRedirects = false ) {
-		$revisionArray = array();
+		$revisionArray = $this->getEntityRevisionLookup()->getEntityRevisions($entityIds);
 
-		foreach ( $entityIds as $entityId ) {
-			$key = $entityId->getSerialization();
-			$entityRevision = $this->getEntityRevision( $entityId, $resolveRedirects );
+		// Resolve/ throw away eventual EntityRedirects
+		foreach ( $revisionArray as &$entityRevision ) {
+			if ( !( $entityRevision instanceof EntityRedirect ) ) {
+				continue;
+			}
 
-			$revisionArray[$key] = $entityRevision;
+			$entityRevision = null;
+			if ( $resolveRedirects ) {
+				$entityId = $entityRevision->getTargetId();
+				$entityRevision = $this->getEntityRevisionLookup()->getEntityRevision( $entityId );
+			}
 		}
 
 		return $revisionArray;
 	}
 
 	/**
-	 * @param EntityId $entityId
-	 * @param bool $resolveRedirects
-	 *
-	 * @return null|EntityRevision
-	 */
-	private function getEntityRevision( EntityId $entityId, $resolveRedirects = false ) {
-		$entityRevision = null;
-
-		try {
-			$entityRevision = $this->getEntityRevisionLookup()->getEntityRevision( $entityId );
-		} catch ( UnresolvedRedirectException $ex ) {
-			if ( $resolveRedirects ) {
-				$entityId = $ex->getRedirectTargetId();
-				$entityRevision = $this->getEntityRevision( $entityId, false );
-			}
-		}
-
-		return $entityRevision;
-	}
-
-	/**
 	 * Adds the given EntityRevision to the API result.
 	 *
+	 * @throws InvalidArgumentException
+	 *
 	 * @param string|null $key
-	 * @param EntityRevision|null $entityRevision
+	 * @param EntityRevision|bool $entityRevision
 	 * @param array $params
 	 */
-	protected function handleEntity( $key, EntityRevision $entityRevision = null, array $params = array() ) {
+	protected function handleEntity( $key, $entityRevision, array $params = array() ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( $entityRevision === null ) {
+		if ( $entityRevision === false ) {
 			$this->getResultBuilder()->addMissingEntity( $key, array( 'id' => $key ) );
-		} else {
+		} elseif ( $entityRevision instanceof EntityRevision ) {
 			$props = $this->getPropsFromParams( $params );
 			$options = $this->getSerializationOptions( $params, $props );
 			$siteFilterIds = $params['sitefilter'];
 
 			$this->getResultBuilder()->addEntityRevision( $key, $entityRevision, $options, $props, $siteFilterIds );
+		} else {
+			throw new InvalidArgumentException( '$entityRevision must be either EntityRevision or false' );
 		}
 
 		wfProfileOut( __METHOD__ );
