@@ -23,7 +23,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @licence GNU GPL v2+
  * @author Nikola Smolenski <smolensk@eunet.rs>
  * @author Daniel Kinzler
- * @author Katie Filbert
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class LangLinkHandler {
 

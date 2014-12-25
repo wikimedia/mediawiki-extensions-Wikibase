@@ -12,7 +12,7 @@ use Wikibase\Repo\View\SectionEditLinkGenerator;
  * @group EntityView
  *
  * @licence GNU GPL v2+
- * @author Katie Filbert
+ * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  * @author Adrian Lang
  */

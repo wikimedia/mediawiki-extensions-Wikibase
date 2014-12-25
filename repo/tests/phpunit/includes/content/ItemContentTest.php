@@ -35,7 +35,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author aude
+ * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
 class ItemContentTest extends EntityContentTest {
