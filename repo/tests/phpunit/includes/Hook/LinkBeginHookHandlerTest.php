@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\Hook\LinkBeginHookHandler;
-use Wikibase\Repo\Store\PageEntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers Wikibase\Repo\Hook\LinkBeginHookHandler
@@ -181,13 +181,13 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return PageEntityIdLookup
+	 * @return EntityIdLookup
 	 */
-	private function getPageEntityIdLookup() {
-		$entityIdLookup = $this->getMock( 'Wikibase\Repo\Store\PageEntityIdLookup' );
+	private function getEntityIdLookup() {
+		$entityIdLookup = $this->getMock( 'Wikibase\Store\EntityIdLookup' );
 
 		$entityIdLookup->expects( $this->any() )
-			->method( 'getPageEntityId' )
+			->method( 'getEntityIdForTitle' )
 			->will( $this->returnCallback( function( Title $title ) {
 				if ( preg_match( '/^Q(\d+)$/', $title->getText(), $m ) ) {
 					return new ItemId( $m[0] );
@@ -254,7 +254,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		) );
 
 		return new LinkBeginHookHandler(
-			$this->getPageEntityIdLookup(),
+			$this->getEntityIdLookup(),
 			$this->getTermLookup(),
 			$this->getEntityNamespaceLookup(),
 			$languageFallback,

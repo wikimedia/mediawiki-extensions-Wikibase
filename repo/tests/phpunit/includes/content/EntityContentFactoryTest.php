@@ -83,13 +83,42 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( 'Q42', $title->getText() );
 	}
 
-	public function testGetPageEntityId() {
+	public function testGetEntityIdForTitle() {
 		$factory = $this->newFactory();
 
 		$title = Title::makeTitle( $factory->getNamespaceForType( Item::ENTITY_TYPE ), 'Q42' );
-		$entityId = $factory->getPageEntityId( $title );
+		$title->resetArticleID( 42 );
 
+		$entityId = $factory->getEntityIdForTitle( $title );
 		$this->assertEquals( 'Q42', $entityId->getSerialization() );
+	}
+
+	public function testGetEntityIds() {
+		$factory = $this->newFactory();
+
+		/** @var Title[] $titles */
+		$titles = array(
+			 0 => Title::makeTitle( $factory->getNamespaceForType( Item::ENTITY_TYPE ), 'Q17' ),
+			10 => Title::makeTitle( $factory->getNamespaceForType( Item::ENTITY_TYPE ), 'Q42' ),
+			20 => Title::makeTitle( NS_HELP, 'Q42' ),
+			30 => Title::makeTitle( $factory->getNamespaceForType( Item::ENTITY_TYPE ), 'XXX' ),
+			40 => Title::makeTitle( $factory->getNamespaceForType( Item::ENTITY_TYPE ), 'Q144' ),
+		);
+
+		foreach ( $titles as $id => $title ) {
+			$title->resetArticleID( $id );
+		}
+
+		$entityIds = $factory->getEntityIds( array_values( $titles ) );
+
+		$this->assertArrayNotHasKey( 0, $entityIds );
+		$this->assertArrayHasKey( 10, $entityIds );
+		$this->assertArrayNotHasKey( 20, $entityIds );
+		$this->assertArrayNotHasKey( 30, $entityIds );
+		$this->assertArrayHasKey( 40, $entityIds );
+
+		$this->assertEquals( 'Q42', $entityIds[10]->getSerialization() );
+		$this->assertEquals( 'Q144', $entityIds[40]->getSerialization() );
 	}
 
 	public function testGetNamespaceForType() {

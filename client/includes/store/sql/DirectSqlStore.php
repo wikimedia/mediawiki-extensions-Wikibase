@@ -6,7 +6,7 @@ use HashBagOStuff;
 use LoadBalancer;
 use ObjectCache;
 use Site;
-use Wikibase\Client\Store\EntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\Client\Store\Sql\ConnectionManager;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\Store\TitleFactory;
@@ -96,7 +96,7 @@ class DirectSqlStore implements ClientStore {
 	private $termIndex = null;
 
 	/**
-	 * @var EntityIdLookup|null
+	 * @var \Wikibase\Store\EntityIdLookup|null
 	 */
 	private $entityIdLookup = null;
 

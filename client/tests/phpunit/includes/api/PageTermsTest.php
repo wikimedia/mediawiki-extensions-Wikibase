@@ -9,7 +9,7 @@ use Language;
 use RequestContext;
 use Title;
 use Wikibase\Client\Api\PageTerms;
-use Wikibase\Client\Store\EntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -207,10 +207,11 @@ class PageTermsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param EntityId[] $entityIds
+	 *
 	 * @return EntityIdLookup
 	 */
 	private function getEntityIdLookup( $entityIds ) {
-		$idLookup = $this->getMock( 'Wikibase\Client\Store\EntityIdLookup' );
+		$idLookup = $this->getMock( 'Wikibase\Store\EntityIdLookup' );
 		$idLookup->expects( $this->any() )
 			->method( 'getEntityIds' )
 			->will( $this->returnValue( $entityIds ) );
