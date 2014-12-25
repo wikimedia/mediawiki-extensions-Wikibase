@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_c67af11e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-12-25T05:02:46Z",
+      "side": 1,
+      "message": "This change doesn\u0027t change any message names AFAIS. Please point out where message names change via inline comments.",
+      "revId": "7c775f9eab6bfb0d5b01aa350481d090d45ed146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
