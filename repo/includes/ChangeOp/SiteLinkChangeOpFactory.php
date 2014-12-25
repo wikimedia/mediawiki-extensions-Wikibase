@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * Factory for ChangeOps that modify SiteLinks.
@@ -15,12 +16,12 @@ class SiteLinkChangeOpFactory {
 	/**
 	 * @param string $siteId
 	 * @param string $pageName
-	 * @param array|null $badges
+	 * @param ItemId[]|null $badges
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newSetSiteLinkOp( $siteId, $pageName, $badges = array() ) {
+	public function newSetSiteLinkOp( $siteId, $pageName, $badges = null ) {
 		return new ChangeOpSiteLink( $siteId, $pageName, $badges );
 	}
 
