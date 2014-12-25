@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Html;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
