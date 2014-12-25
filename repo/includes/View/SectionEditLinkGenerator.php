@@ -4,6 +4,7 @@ namespace Wikibase\Repo\View;
 
 use Message;
 use SpecialPageFactory;
+use Wikibase\Template\TemplateFactory;
 
 /**
  * Generates HTML for a section edit link
@@ -16,6 +17,18 @@ use SpecialPageFactory;
  * @author Daniel Kinzler
  */
 class SectionEditLinkGenerator {
+
+	/**
+	 * @var TemplateFactory
+	 */
+	private $templateFactory;
+
+	/**
+	 * @param TemplateFactory $templateFactory
+	 */
+	public function __construct( TemplateFactory $templateFactory ) {
+		$this->templateFactory = $templateFactory;
+	}
 
 	/**
 	 * Returns a toolbar with an edit link. In JavaScript, an enhanced toolbar will be initialized
@@ -43,8 +56,8 @@ class SectionEditLinkGenerator {
 		$editUrl = $enabled ? $this->getEditUrl( $specialPageName, $specialPageUrlParams ) : null;
 		$toolbarButton = $this->getToolbarButton( $cssClassSuffix, $message->text(), $editUrl );
 
-		$html = wfTemplate( 'wikibase-toolbar-container',
-			wfTemplate( 'wikibase-toolbar',
+		$html = $this->templateFactory->render( 'wikibase-toolbar-container',
+			$this->templateFactory->render( 'wikibase-toolbar',
 				'',
 				$toolbarButton
 			)
@@ -80,7 +93,8 @@ class SectionEditLinkGenerator {
 		$editUrl = $enabled ? $this->getEditUrl( $specialPageName, $specialPageUrlParams ) : null;
 		$toolbarButton = $this->getToolbarButton( $cssClassSuffix, $message->text(), $editUrl );
 
-		$html = wfTemplate( 'wikibase-toolbar-container',
+		$html = $this->templateFactory->render(
+			'wikibase-toolbar-container',
 			$toolbarButton
 		);
 
@@ -118,8 +132,8 @@ class SectionEditLinkGenerator {
 	 */
 	private function getToolbarButton( $cssClassSuffix, $buttonLabel, $editUrl = null ) {
 		if ( $editUrl !== null ) {
-			return wfTemplate( 'wikibase-toolbar-bracketed',
-				wfTemplate( 'wikibase-toolbar-button',
+			return $this->templateFactory->render( 'wikibase-toolbar-bracketed',
+				$this->templateFactory->render( 'wikibase-toolbar-button',
 					'wikibase-toolbar-button-' . $cssClassSuffix,
 					$editUrl,
 					$buttonLabel

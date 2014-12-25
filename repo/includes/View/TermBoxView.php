@@ -7,6 +7,7 @@ use Message;
 use Title;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Template\TemplateFactory;
 use Wikibase\Utils;
 
 /**
@@ -22,6 +23,11 @@ use Wikibase\Utils;
 class TermBoxView {
 
 	/**
+	 * @var TemplateFactory
+	 */
+	private $templateFactory;
+
+	/**
 	 * @var SectionEditLinkGenerator
 	 */
 	private $sectionEditLinkGenerator;
@@ -31,9 +37,10 @@ class TermBoxView {
 	 */
 	private $language;
 
-	public function __construct( Language $language ) {
+	public function __construct( TemplateFactory $templateFactory, Language $language ) {
 		$this->language = $language;
-		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
+		$this->templateFactory = $templateFactory;
+		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator( $templateFactory );
 	}
 
 	/**
@@ -74,11 +81,11 @@ class TermBoxView {
 			$hasLabel = $labels->hasTermForLanguage( $languageCode );
 			$hasDescription = $descriptions->hasTermForLanguage( $languageCode );
 
-			$tbody .= wfTemplate( 'wikibase-entitytermsforlanguageview',
+			$tbody .= $this->templateFactory->render( 'wikibase-entitytermsforlanguageview',
 				$languageCode,
 				$title->getLocalURL( array( 'setlang' => $languageCode ) ),
 				htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ),
-				wfTemplate( 'wikibase-labelview',
+				$this->templateFactory->render( 'wikibase-labelview',
 					$hasLabel ? '' : 'wb-empty',
 					htmlspecialchars( $hasLabel
 						? $labels->getByLanguage( $languageCode )->getText()
@@ -87,7 +94,7 @@ class TermBoxView {
 					'',
 					''
 				),
-				wfTemplate( 'wikibase-descriptionview',
+				$this->templateFactory->render( 'wikibase-descriptionview',
 					$hasDescription ? '' : 'wb-empty',
 					htmlspecialchars( $hasDescription
 						? $descriptions->getByLanguage( $languageCode )->getText()
@@ -100,9 +107,9 @@ class TermBoxView {
 			);
 		}
 
-		$html = wfTemplate( 'wikibase-entitytermsview',
+		$html = $this->templateFactory->render( 'wikibase-entitytermsview',
 			$this->msg( 'wikibase-terms' )->text(),
-			wfTemplate( 'wikibase-entitytermsforlanguagelistview', $tbody ),
+			$this->templateFactory->render( 'wikibase-entitytermsforlanguagelistview', $tbody ),
 			$this->sectionEditLinkGenerator->getHtmlForEditSection(
 				'SpecialPages',
 				array(),
@@ -124,7 +131,7 @@ class TermBoxView {
 	 */
 	private function getHtmlForAliases( AliasGroupList $aliasGroups, $languageCode ) {
 		if ( !$aliasGroups->hasGroupForLanguage( $languageCode ) ) {
-			return wfTemplate( 'wikibase-aliasesview',
+			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'wb-empty',
 				wfMessage( 'wikibase-aliases-empty' )->escaped(),
 				'',
@@ -134,13 +141,13 @@ class TermBoxView {
 			$aliasesHtml = '';
 			$aliases = $aliasGroups->getByLanguage( $languageCode )->getAliases();
 			foreach ( $aliases as $alias ) {
-				$aliasesHtml .= wfTemplate(
+				$aliasesHtml .= $this->templateFactory->render(
 					'wikibase-aliasesview-list-item',
 					htmlspecialchars( $alias )
 				);
 			}
 
-			return wfTemplate( 'wikibase-aliasesview',
+			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->escaped(),
 				$aliasesHtml,
