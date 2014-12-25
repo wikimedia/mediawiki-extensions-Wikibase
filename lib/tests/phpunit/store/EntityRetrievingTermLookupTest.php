@@ -6,6 +6,13 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 
+/**
+ * @covers Wikibase\Lib\Store\EntityRetrievingTermLookup
+ *
+ * @licence GNU GPL v2+
+ * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
+ */
 class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetLabel() {

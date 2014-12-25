@@ -7,9 +7,14 @@ use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
 
 /**
+ * @covers Wikibase\Lib\Store\LanguageLabelLookup
+ *
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseStore
+ *
+ * @licence GNU GPL v2+
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class LanguageLabelLookupTest extends \MediaWikiTestCase {
 

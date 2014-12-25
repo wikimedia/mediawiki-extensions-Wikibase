@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\PropertyLabelResolver;
 
 /**
- * @covers Wikibase\Lib\Store\EntityRedirectResolver
+ * @covers Wikibase\Lib\Store\EntityRedirectResolvingDecorator
  *
  * @group WikibaseLib
  * @group Wikibase

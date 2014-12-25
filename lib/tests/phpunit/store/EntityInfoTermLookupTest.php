@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\EntityInfoTermLookup;
  * @covers Wikibase\Lib\Store\EntityInfoTermLookup
  *
  * @licence GNU GPL v2+
- * @author Katie Filbert
+ * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
 class EntityInfoTermLookupTest extends \MediaWikiTestCase {
