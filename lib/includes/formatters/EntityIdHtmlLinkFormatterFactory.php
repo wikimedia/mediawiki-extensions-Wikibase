@@ -5,7 +5,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
- * A factory interface for generating EntityIdFormatters.
+ * A factory for generating EntityIdHtmlLinkFormatters.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
