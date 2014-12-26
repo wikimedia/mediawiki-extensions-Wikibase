@@ -514,8 +514,8 @@ final class ClientHooks {
 			'label-message' => 'wikibase-otherprojects-beta-message',
 			'desc-message' => 'wikibase-otherprojects-beta-description',
 			'screenshot' => array(
-				'ltr' => $assetsPath . '/resources/images/wb-otherprojects-beta-ltr.png',
-				'rtl' => $assetsPath . '/resources/images/wb-otherprojects-beta-rtl.png'
+				'ltr' => $assetsPath . '/resources/images/wb-otherprojects-beta-ltr.svg',
+				'rtl' => $assetsPath . '/resources/images/wb-otherprojects-beta-rtl.svg'
 			),
 			'info-link' => 'https://www.mediawiki.org/wiki/Wikibase/Beta_Features/Other_projects_sidebar',
 			'discussion-link' => 'https://www.mediawiki.org/wiki/Talk:Wikibase/Beta_Features/Other_projects_sidebar'
