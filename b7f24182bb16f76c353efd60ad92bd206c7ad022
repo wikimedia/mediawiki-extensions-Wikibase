@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_3e8df52e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2014-12-26T20:56:32Z",
+      "side": 1,
+      "message": "It looks like this line should be \"Bug: T73344\" to trigger gerritbot notifications.",
+      "revId": "b7f24182bb16f76c353efd60ad92bd206c7ad022",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
