@@ -16,6 +16,24 @@
       "revId": "7c775f9eab6bfb0d5b01aa350481d090d45ed146",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_1c5efc48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-26T11:27:39Z",
+      "side": 1,
+      "message": "There is only one difference between SpecialItemResolver::execute() and SpecialWikibasePage::execute(), which is executed now instead.\n* In the deleted SpecialItemResolver outputHeader() is called with no summary message key. It defaults to \"\u003cname\u003e-summary\".\n* In SpecialWikibasePage outputHeader() is called with \"wikibase-\u003cname\u003e-summary\".",
+      "parentUuid": "0e6cb3ef_c67af11e",
+      "revId": "7c775f9eab6bfb0d5b01aa350481d090d45ed146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

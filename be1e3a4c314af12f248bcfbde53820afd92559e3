@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_fc622805",
+        "filename": "repo/includes/specials/SpecialItemResolver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-12-26T11:27:39Z",
+      "side": 0,
+      "message": "This is the line.",
+      "revId": "be1e3a4c314af12f248bcfbde53820afd92559e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
