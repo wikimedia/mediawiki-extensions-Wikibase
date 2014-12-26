@@ -8,10 +8,14 @@
 			"Zolo",
 			"JulesWinnfield-hu",
 			"Tacsipacsi",
-			"Einstein2"
+			"Einstein2",
+			"Csega"
 		]
 	},
 	"wikibase-desc": "Strukturált adattár",
+	"wikibase-entity-item": "tétel",
+	"wikibase-entity-property": "tulajdonság",
+	"wikibase-entity-query": "lekérdezés",
 	"wikibase-edit": "szerkesztés",
 	"wikibase-save": "mentés",
 	"wikibase-cancel": "mégsem",
@@ -49,7 +53,6 @@
 	"wikibase-undo-firstrev": "A lap létrehozását nem lehet visszavonni.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Egy|$1}} érték még nincs elmentve",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|bejegyzés|bejegyzés}}",
-	"wikibase-sitelinksedittool-full": "Ez a fogalom már minden ismert wikihez hozzá van kapcsolva",
 	"wikibase-disambiguation-title": "Egyértelműsítés: „$1”",
 	"wb-special-newitem-new-item-notification": "Az új fogalom ($1) létrejött; átirányítottuk a böngészőt a fogalom lapjára. Vissza az $2 lapra.",
 	"wikibase-aliases-label": "Más néven:",
@@ -174,6 +177,7 @@
 	"wikibase-property-summary-wbsetaliases-add": "[$2] további {{PLURAL:$1|név|nevek}} hozzáadása",
 	"wikibase-property-summary-wbsetaliases-remove": "[$2] további {{PLURAL:$1|név|nevek}} törlése",
 	"wikibase-property-summary-special-create-property": "[$2] tulajdonság létrehozása {{PLURAL:$1|értékkel|értékekkel}}",
+	"wikibase-listdatatypes-wikibase-property-head": "Tulajdonság",
 	"wikibase-listdatatypes-commonsmedia-head": "Commons médiafájl",
 	"wikibase-listdatatypes-commonsmedia-body": "Link a Wikimédia Commonsban tárolt fájlra. Amikor egy értéket beírsz, a fájlnévtérben ''(File)'' fog keresni a szoftver egyező fájlneveket.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Földrajzi koordináta",

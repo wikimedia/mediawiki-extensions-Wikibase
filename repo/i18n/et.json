@@ -332,6 +332,7 @@
 	"wikibase-property-summary-wbremovereferences-remove": "Eemaldatud väite {{PLURAL:$3|viide|viited}}",
 	"wikibase-property-summary-special-create-property": "Loodud {{PLURAL:$1|väärtusega|väärtustega}} omadus [$2]",
 	"wikibase-listdatatypes-wikibase-item-head": "Üksus",
+	"wikibase-listdatatypes-wikibase-property-head": "Omadus",
 	"wikibase-listdatatypes-commonsmedia-head": "Commonsi meediafail",
 	"wikibase-listdatatypes-globe-coordinate-head": "Koordinaat",
 	"wikibase-listdatatypes-quantity-head": "Suurus",

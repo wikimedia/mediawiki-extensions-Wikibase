@@ -16,5 +16,6 @@
 	"wikibase-newentity-submit": "Oanmeitsje",
 	"wikibase-modifyterm-language": "Taal:",
 	"wikibase-entitieswithoutlabel-label-language": "Taal:",
-	"wikibase-entitieswithoutlabel-submit": "Sykje"
+	"wikibase-entitieswithoutlabel-submit": "Sykje",
+	"wikibase-listdatatypes-wikibase-property-head": "Eigenskip"
 }

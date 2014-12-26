@@ -14,7 +14,8 @@
 			"Liuxinyu970226",
 			"Amire80",
 			"Lokal Profil",
-			"Purodha"
+			"Purodha",
+			"Bináris"
 		]
 	},
 	"wikibase-client-desc": "{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
@@ -26,7 +27,7 @@
 	"apihelp-query+pageterms-example-label-en": "{{doc-apihelp-example|query+pageterms}}",
 	"apihelp-query+pageterms-param-terms": "{{doc-apihelp-param|query+pageterms|terms}}",
 	"wikibase-after-page-move": "Message on [[Special:MovePage]] on submit and successfully move, inviting user to update associated Wikibase repository item to maintain language links on the moved page on the client.\n\nParameters:\n* $1 - the link for the associated Wikibase item.",
-	"wikibase-after-page-move-queued": "Message after a successful page deletion, telling the user that the Wikidata item belonging to the page will be automatically updated soon.\n\nParameters:\n* $1 - the link for the associated Wikibase item.",
+	"wikibase-after-page-move-queued": "Message after a successful page move, telling the user that the Wikidata item belonging to the page will be automatically updated soon.\n\nParameters:\n* $1 - the link for the associated Wikibase item.",
 	"wikibase-after-page-delete": "Message after a successful page deletion, inviting the user to remove the link to the deleted page from the associated Wikibase repository item.\n\nParameters:\n* $1 - the link for the associated Wikibase item.",
 	"wikibase-after-page-delete-queued": "Parameters:\n* $1 - the link for the associated Wikibase item.",
 	"wikibase-comment-add": "Autocomment message in the client for when an item is created (and then is linked to the client page).",
