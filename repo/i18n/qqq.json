@@ -297,6 +297,8 @@
 	"wikibase-entitieswithoutlabel-invalid-language": "Error message shown when the language code passed in parameter is invalid.\n\nParameters:\n* $1 - language code\nSee also:\n* {{msg-mw|Wikibase-unconnectedpages-invalid-language}}",
 	"wikibase-entitieswithoutlabel-invalid-type": "Parameters:\n* $1 - an invalid entity type. Valid entity types are: item, property and query.",
 	"special-itemswithoutsitelinks": "{{doc-special|ItemsWithoutSitelinks}}\nThis special page returns a list of items without any sitelinks.",
+	"special-itemswithmostsitelinks": "{{doc-special|ItemsWithMostSitelinks}}\nThis special page returns a list of items with the most sitelinks",
+	"wikibase-nsitelinks": "Message to be shown for the link to the sitelinks.\n\nParameters:\n* $1 - the number of sitelinks",
 	"special-entitydata": "{{doc-special|EntityData}}\nThe special page provides a linked data interface and easy way to get the JSON data representation for an entity.",
 	"wikibase-entitydata-not-found": "Error shown when no entity with the given ID could be found (HTTP error 404). Paramters:\n* $1 - the given ID",
 	"wikibase-entitydata-not-acceptable": "Error shown when none of the formats acceptable to the client is suppoerted (HTTP error 406). Parameters:\n* $1 - the list of supported MIME types",

@@ -33,6 +33,7 @@ $specialPageAliases['en'] = array(
 	'EntitiesWithoutLabel' => array( 'EntitiesWithoutLabel' ),
 	'EntitiesWithoutDescription' => array( 'EntitiesWithoutDescription' ),
 	'ItemsWithoutSitelinks' => array( 'ItemsWithoutSitelinks' ),
+	'ItemsWithMostSitelinks' => array( 'ItemsWithMostSitelinks' ),
 	'MyLanguageFallbackChain' => array( 'MyLanguageFallbackChain' ),
 );
 
@@ -324,6 +325,7 @@ $specialPageAliases['nl'] = array(
 	'EntitiesWithoutLabel' => array( 'EntiteitenZonderLabel' ),
 	'EntitiesWithoutDescription' => array( 'EntiteitenZonderBeschrijving' ),
 	'ItemsWithoutSitelinks' => array( 'ItemsZonderSitekoppelingen' ),
+	'ItemsWithMostSitelinks' => array( 'ItemsMeesteSitekoppelingen' ),
 );
 
 /** Polish (polski) */
