@@ -247,6 +247,8 @@
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" is geen geldige taalcode.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" is geen geldig entiteitstype.",
 	"special-itemswithoutsitelinks": "Items zonder sitekoppelingen",
+	"itemsmostsitelinks": "Items met de meeste sitekoppelingen",
+	"wikibase-nsitelinks": "Item heeft $1 {{PLURAL:$1|sitelink|sitelinks}}",
 	"special-entitydata": "Entiteitsgegevens",
 	"wikibase-entitydata-not-found": "Er is geen entiteit gevonden met het ID $1.",
 	"wikibase-entitydata-not-acceptable": "Er is geen overeenkomende indeling gevonden. Ondersteunde MIME-typen: $1",
