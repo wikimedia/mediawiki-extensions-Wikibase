@@ -65,6 +65,7 @@
 	"wikibase-validator-bad-url-scheme": "Toeta URL-i skeem: $1",
 	"wikibase-validator-unknown-unit": "Tundmatu ühik: $1",
 	"wikibase-validator-not-allowed": "Lubamatu väärtus: $1",
+	"wikibase-validator-no-validators": "Keelatud",
 	"datatypes-type-wikibase-item": "Üksus",
 	"datatypes-type-wikibase-property": "Omadus",
 	"datatypes-type-commonsMedia": "Commonsi meediafail",

@@ -4,7 +4,8 @@
 			"DCLXVI",
 			"Mitzev",
 			"Spiritia",
-			"StanProg"
+			"StanProg",
+			"Borislav"
 		]
 	},
 	"wikibase-after-page-move": "Можете да [$1 актуализирате] свързания обект от {{WBREPONAME}} с цел поддръжка на междуезиковите препратки към преместената страница.",
@@ -26,7 +27,8 @@
 	"wikibase-rc-hide-wikidata-hide": "Скриване",
 	"wikibase-rc-hide-wikidata-show": "Показване",
 	"wikibase-rc-show-wikidata-pref": "Показване на {{WBREPONAME}} редакции в последните промени",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} редакция",
+	"wikibase-rc-wikibase-edit-title": "Редакция от {{WBREPONAME}}",
+	"wikibase-replicationnote": "Може да отнеме няколко минути, докато промените се отразят във всички уикита.",
 	"wikibase-watchlist-show-changes-pref": "Показване на {{WBREPONAME}} редакции в списъка за наблюдение",
 	"wikibase-pageinfo-entity-id": "ID на обекта в {{WBREPONAME}}"
 }
