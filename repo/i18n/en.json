@@ -569,7 +569,7 @@
 	"apihelp-wbsetclaimvalue-description": "Sets the value of a Wikibase claim.",
 	"apihelp-wbsetclaimvalue-param-claim": "A GUID identifying the claim",
 	"apihelp-wbsetclaimvalue-param-snaktype": "The type of the snak",
-	"apihelp-wbsetclaimvalue-param-value": "The value to set the datavalue of the the main snak of the claim to",
+	"apihelp-wbsetclaimvalue-param-value": "The value to set the DataValue of the the main snak of the claim to",
 	"apihelp-wbsetclaimvalue-param-summary": "Summary for the edit.\nWill be prepended by an automatically generated comment. The length limit of the\nautocomment together with the summary is 260 characters. Be aware that everything above that\nlimit will be cut off.",
 	"apihelp-wbsetclaimvalue-param-baserevid": "The numeric identifier for the revision to base the modification on.\nThis is used for detecting conflicts during save.",
 	"apihelp-wbsetclaimvalue-param-bot": "Mark this edit as bot\nThis URL flag will only be respected if the user belongs to the group \"bot\".",
