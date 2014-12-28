@@ -52,7 +52,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 			->getMock();
 
 		$userLanguages->expects( $this->any() )
-			->method( 'getExtraUserLanguages' )
+			->method( 'getAllUserLanguages' )
 			->will( $this->returnValue( array( 'de', 'en', 'ru' ) ) );
 
 		return new EntityViewPlaceholderExpander(
@@ -182,7 +182,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( array(), $expander->getExtraUserLanguages() );
 
 		$expander = $this->newExpander( $this->newUser( false ), $entityRevisionLookup, $itemId );
-		$this->assertArrayEquals( array( 'de', 'en', 'ru' ), $expander->getExtraUserLanguages() );
+		$this->assertArrayEquals( array( 'de', 'ru' ), $expander->getExtraUserLanguages() );
 	}
 
 }

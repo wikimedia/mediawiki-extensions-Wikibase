@@ -35,25 +35,18 @@ class UserLanguageLookupTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $babelLanguages
 	 * @param string $userSpecifiedLanguages
 	 * @param string $allExpected
-	 * @param string $expectedWithoutDe
-	 * @param string $expectedWithoutEn
 	 */
 	public function testGetUserLanguages(
 		$usersLanguage,
 		$babelLanguages,
 		$userSpecifiedLanguages,
-		$allExpected,
-		$expectedWithoutDe,
-		$expectedWithoutEn
+		$allExpected
 	) {
 		$message = $usersLanguage . ' with {{#babel:' . $babelLanguages . '}} in assert #';
 
 		$babelLanguages            = $this->split( $babelLanguages );
 		$userSpecifiedLanguages    = $this->split( $userSpecifiedLanguages );
 		$allExpected               = $this->split( $allExpected );
-		$expectedWithoutDe         = $this->split( $expectedWithoutDe );
-		$expectedWithoutEn         = $this->split( $expectedWithoutEn );
-		$hasSpecified              = !empty( $userSpecifiedLanguages );
 
 		$user = new User();
 		// Required to not be anonymous
@@ -66,12 +59,6 @@ class UserLanguageLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $allExpected, array_values(
 			$userLanguageLookup->getAllUserLanguages( $user ) ), $message . '1' );
-		$this->assertEquals( $expectedWithoutDe, array_values(
-			$userLanguageLookup->getExtraUserLanguages( $user, array( 'de' ) ) ), $message . '2' );
-		$this->assertEquals( $expectedWithoutEn, array_values(
-			$userLanguageLookup->getExtraUserLanguages( $user, array( 'en' ) ) ), $message . '3' );
-		$this->assertEquals( $hasSpecified,
-			$userLanguageLookup->hasSpecifiedLanguages( $user ), $message . '4' );
 		$this->assertEquals( $userSpecifiedLanguages,
 			$userLanguageLookup->getUserSpecifiedLanguages( $user ), $message . '5' );
 	}
@@ -82,14 +69,12 @@ class UserLanguageLookupTest extends \PHPUnit_Framework_TestCase {
 			// 2. List of languages from the users babel box (as returned by the Babel extension)
 			// 3. List of usable user specified languages
 			// 4. Expected collection of all languages
-			// 5. Expected extra languages excluding de
-			// 6. Expected extra languages excluding en
-			array( 'de', '',         '',         'de',        '',      'de'    ),
-			array( 'de', 'en',       'en',       'de|en',     'en',    'de'    ),
-			array( 'de', 'de|en|fr', 'de|en|fr', 'de|en|fr',  'en|fr', 'de|fr' ),
-			array( 'en', '',         '',         'en',        'en',    ''      ),
-			array( 'en', 'en',       'en',       'en',        'en',    ''      ),
-			array( 'en', 'de|en|fr', 'de|en|fr', 'en|de|fr',  'en|fr', 'de|fr' ),
+			array( 'de', '',         '',         'de'       ),
+			array( 'de', 'en',       'en',       'de|en'    ),
+			array( 'de', 'de|en|fr', 'de|en|fr', 'de|en|fr' ),
+			array( 'en', '',         '',         'en',      ),
+			array( 'en', 'en',       'en',       'en',      ),
+			array( 'en', 'de|en|fr', 'de|en|fr', 'en|de|fr' ),
 
 			// Codes reported from Babel are getting lower-cased
 			array( 'en', 'nds-NL',   'nds-nl',   'en|nds-nl', 'en|nds-nl', 'nds-nl' ),
