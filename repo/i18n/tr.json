@@ -8,7 +8,8 @@
 			"Sayginer",
 			"Sucsuzz",
 			"Violetanka",
-			"Ozerk"
+			"Ozerk",
+			"Aşilleus"
 		]
 	},
 	"wikibase-desc": "Yapılandırılmış veri deposu",
@@ -23,7 +24,7 @@
 	"wikibase-label-empty": "Henüz bir etiket tanımlanmadı",
 	"wikibase-label-edit-placeholder": "etiket girin",
 	"wikibase-description-edit-placeholder": "açıklama girin",
-	"wikibase-diffview-rank": "sıra",
+	"wikibase-diffview-rank": "rütbe",
 	"wikibase-diffview-label": "etiket",
 	"wikibase-diffview-description": "açıklama",
 	"wikibase-diffview-link": "bağlantılar",

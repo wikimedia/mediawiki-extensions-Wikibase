@@ -65,6 +65,6 @@
 	"wikibase-pageinfo-entity-id-none": "Geen",
 	"wikibase-property-render-error": "Het verwerken van de eigenschap $1 is mislukt: $2",
 	"wikibase-otherprojects": "Andere projecten",
-	"wikibase-otherprojects-beta-message": "Andere projecten-zijbalk",
+	"wikibase-otherprojects-beta-message": "Zijbalk andere projecten",
 	"wikibase-otherprojects-beta-description": "Voegt een \"{{int:wikibase-otherprojects}}\"-sectie toe aan de zijbalk welke toegang biedt tot andere Wikimedia-projecten op basis van gegevens van {{WBREPONAME}}."
 }

@@ -7,6 +7,7 @@
 			"Ex13"
 		]
 	},
+	"tooltip-t-wikibase": "Poveznica na stavku na projektu Wikidata",
 	"wikibase-after-page-move-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.",
 	"wikibase-after-page-delete-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.",
 	"wikibase-comment-sitelink-add": "Dodana jezična poveznica: $1",
