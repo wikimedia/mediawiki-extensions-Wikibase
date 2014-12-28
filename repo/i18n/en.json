@@ -553,7 +553,7 @@
 	"apihelp-wbsetaliases-param-add": "List of aliases to add (can be combined with remove)",
 	"apihelp-wbsetaliases-param-remove": "List of aliases to remove (can be combined with add)",
 	"apihelp-wbsetaliases-param-set": "A list of aliases that will replace the current list (can not be combined with neither add nor remove)",
-	"apihelp-wbsetaliases-param-language": "The language of which to set the aliases",
+	"apihelp-wbsetaliases-param-language": "The language for which to set the aliases",
 	"apihelp-wbsetaliases-example-1": "Set the English aliases for the entity with ID Q1 to Foo and Bar",
 	"apihelp-wbsetaliases-example-2": "Add Foo and Bar to the list of English aliases for the entity with ID Q1",
 	"apihelp-wbsetaliases-example-3": "Remove Foo and Bar from the list of English aliases for the entity with ID Q1",
