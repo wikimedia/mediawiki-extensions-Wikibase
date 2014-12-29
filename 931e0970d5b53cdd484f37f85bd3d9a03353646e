@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_d3814afe",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-12-29T13:32:01Z",
+      "side": 1,
+      "message": "ItemsWithMostSitelinks as special page name?",
+      "revId": "931e0970d5b53cdd484f37f85bd3d9a03353646e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_937bd222",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-12-29T13:32:01Z",
+      "side": 1,
+      "message": "ItemsMetMeesteSitekoppelingen?",
+      "revId": "931e0970d5b53cdd484f37f85bd3d9a03353646e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_b3761638",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-12-29T13:32:01Z",
+      "side": 1,
+      "message": "This requires explicit plural support:\n\n Item has $1 {{PLURAL:$1|sitelink|sitelinks}}",
+      "revId": "931e0970d5b53cdd484f37f85bd3d9a03353646e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_538d3a2d",
+        "filename": "repo/i18n/nl.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-12-29T13:32:01Z",
+      "side": 1,
+      "message": "Needs plural support:\n\n Item heeft $1 {{PLURAL:$1|sitelink|sitelinks}}",
+      "revId": "931e0970d5b53cdd484f37f85bd3d9a03353646e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_73907e46",
+        "filename": "repo/includes/specials/SpecialItemsMostSitelinks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-12-29T13:32:01Z",
+      "side": 1,
+      "message": "Please remove trailing whitespace.",
+      "revId": "931e0970d5b53cdd484f37f85bd3d9a03353646e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
