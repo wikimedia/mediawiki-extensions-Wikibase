@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_c843d413",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 330
+      },
+      "writtenOn": "2014-12-29T20:11:22Z",
+      "side": 1,
+      "message": "See one line above this one. We already have ItemsWithoutSitelinks, you can see https://www.wikidata.org/wiki/Special:ItemsWithoutSitelinks . I based the name on that.",
+      "parentUuid": "0e6cb3ef_d3814afe",
+      "revId": "931e0970d5b53cdd484f37f85bd3d9a03353646e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_937bd222",
         "filename": "repo/Wikibase.i18n.alias.php",
         "patchSetId": 3
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_6852c8e3",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 330
+      },
+      "writtenOn": "2014-12-29T20:11:22Z",
+      "side": 1,
+      "message": "You\u0027re right. fixed.",
+      "parentUuid": "0e6cb3ef_b3761638",
+      "revId": "931e0970d5b53cdd484f37f85bd3d9a03353646e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_538d3a2d",
         "filename": "repo/i18n/nl.json",
         "patchSetId": 3
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_884ddc41",
+        "filename": "repo/i18n/nl.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 330
+      },
+      "writtenOn": "2014-12-29T20:11:22Z",
+      "side": 1,
+      "message": "And fixed here too.",
+      "parentUuid": "0e6cb3ef_538d3a2d",
+      "revId": "931e0970d5b53cdd484f37f85bd3d9a03353646e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_73907e46",
         "filename": "repo/includes/specials/SpecialItemsMostSitelinks.php",
         "patchSetId": 3
@@ -81,6 +135,24 @@
       "writtenOn": "2014-12-29T13:32:01Z",
       "side": 1,
       "message": "Please remove trailing whitespace.",
+      "revId": "931e0970d5b53cdd484f37f85bd3d9a03353646e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_0859cc00",
+        "filename": "repo/includes/specials/SpecialItemsMostSitelinks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 330
+      },
+      "writtenOn": "2014-12-29T20:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_73907e46",
       "revId": "931e0970d5b53cdd484f37f85bd3d9a03353646e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
