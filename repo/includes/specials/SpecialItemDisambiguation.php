@@ -27,7 +27,7 @@ use Wikibase\TermIndex;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class SpecialItemDisambiguation extends SpecialItemResolver {
+class SpecialItemDisambiguation extends SpecialWikibasePage {
 
 	/**
 	 * @var TermIndex
@@ -50,7 +50,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	private $limit;
 
 	/**
-	 * @see SpecialItemResolver::__construct
+	 * @see SpecialWikibasePage::__construct
 	 *
 	 * @since 0.1
 	 */
@@ -82,14 +82,14 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	}
 
 	/**
-	 * @see SpecialItemResolver::execute
+	 * @see SpecialWikibasePage::execute
 	 *
 	 * @since 0.1
+	 *
+	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
-		if ( !parent::execute( $subPage ) ) {
-			return false;
-		}
+		parent::execute( $subPage );
 
 		// Setup
 		$request = $this->getRequest();
@@ -124,8 +124,6 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 				$this->showNothingFound( $languageCode, $label );
 			}
 		}
-
-		return true;
 	}
 
 	/**

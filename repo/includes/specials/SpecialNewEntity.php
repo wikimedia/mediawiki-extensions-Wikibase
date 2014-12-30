@@ -55,8 +55,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	protected $rightsText;
 
 	/**
-	 * @param $name String: name of the special page, as seen in links and URLs
-	 * @param $restriction String: user right required, 'createpage' per default.
+	 * @param string $name Name of the special page, as seen in links and URLs.
+	 * @param string $restriction User right required, 'createpage' per default.
 	 *
 	 * @since 0.1
 	 */
@@ -73,18 +73,14 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
-	 * Main method.
+	 * @see SpecialWikibasePage::execute
 	 *
 	 * @since 0.1
 	 *
 	 * @param string|null $subPage
-	 *
-	 * @return boolean
 	 */
 	public function execute( $subPage ) {
-		if ( !parent::execute( $subPage ) ) {
-			return false;
-		}
+		parent::execute( $subPage );
 
 		$this->checkPermissions();
 		$this->checkBlocked();
@@ -141,8 +137,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		}
 
 		$this->createForm( $this->getLegend(), $this->additionalFormElements() );
-
-		return true;
 	}
 
 	/**

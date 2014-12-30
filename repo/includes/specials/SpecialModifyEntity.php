@@ -60,18 +60,14 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
-	 * Main method
+	 * @see SpecialWikibasePage::execute
 	 *
 	 * @since 0.4
 	 *
-	 * @param string $subPage
-	 *
-	 * @return boolean
+	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
-		if ( !parent::execute( $subPage ) ) {
-			return false;
-		}
+		parent::execute( $subPage );
 
 		$this->checkPermissions();
 		$this->checkBlocked();
@@ -114,8 +110,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 				$this->getOutput()->redirect( $entityUrl );
 			}
 		}
-
-		return true;
 	}
 
 	/**

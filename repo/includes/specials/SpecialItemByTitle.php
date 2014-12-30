@@ -19,7 +19,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class SpecialItemByTitle extends SpecialItemResolver {
+class SpecialItemByTitle extends SpecialWikibasePage {
 
 	/**
 	 * @var EntityTitleLookup
@@ -49,7 +49,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	private $groups;
 
 	/**
-	 * @see SpecialItemResolver::__construct
+	 * @see SpecialWikibasePage::__construct
 	 *
 	 * @since 0.1
 	 */
@@ -105,9 +105,11 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	}
 
 	/**
-	 * @see SpecialItemResolver::execute
+	 * @see SpecialWikibasePage::execute
 	 *
 	 * @since 0.1
+	 *
+	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
 		parent::execute( $subPage );

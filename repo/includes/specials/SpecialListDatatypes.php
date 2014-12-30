@@ -21,6 +21,11 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 		parent::__construct( 'ListDatatypes' );
 	}
 
+	/**
+	 * @see SpecialWikibasePage::execute
+	 *
+	 * @param string|null $subPage
+	 */
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
