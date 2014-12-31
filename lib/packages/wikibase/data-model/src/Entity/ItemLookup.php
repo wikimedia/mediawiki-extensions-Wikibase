@@ -18,6 +18,6 @@ interface ItemLookup {
 	 * @return Item
 	 * @throws ItemNotFoundException
 	 */
-	public function getItemFromId( ItemId $itemId );
+	public function getItemForId( ItemId $itemId );
 
 }

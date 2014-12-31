@@ -18,6 +18,6 @@ interface PropertyLookup {
 	 * @return Property
 	 * @throws PropertyNotFoundException
 	 */
-	public function getPropertyFromId( PropertyId $propertyId );
+	public function getPropertyForId( PropertyId $propertyId );
 
 }
