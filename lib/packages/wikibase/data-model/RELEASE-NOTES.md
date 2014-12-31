@@ -7,7 +7,8 @@
 * Added `SiteLinkList::toArray`
 * Added `SiteLinkList::setSiteLink`
 * Added `SiteLinkList::setNewSiteLink`
-* Added `ItemLoookup` and `PropertyLookup` interfaces and `ItemNotFoundException`
+* Added `ItemLoookup` and `PropertyLookup` interfaces
+* Added `ItemNotFoundException`
 
 ## Version 2.4.1 (2014-11-26)
 
