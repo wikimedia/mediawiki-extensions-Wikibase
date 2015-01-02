@@ -38,6 +38,16 @@ class ClaimHtmlGenerator {
 	private $snakHtmlGenerator;
 
 	/**
+	 * @var string[]
+	 */
+	private $referenceHeadings = array();
+
+	/**
+	 * @var string[]
+	 */
+	private $statementRankText = array();
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param SnakHtmlGenerator $snakHtmlGenerator
 	 */
@@ -88,17 +98,11 @@ class ClaimHtmlGenerator {
 			$rankHtml = $this->templateFactory->render( 'wb-rankselector',
 				'ui-state-disabled',
 				'wb-rankselector-' . $serializedRank,
-				wfMessage( 'wikibase-statementview-rank-' . $serializedRank )->text()
+				'rank',
+				$this->getStatementRankText( $serializedRank )
 			);
 
-			$referenceCount = count( $claim->getReferences() );
-
-			$referencesHeading = wfMessage(
-				'wikibase-ui-pendingquantitycounter-nonpending',
-				wfMessage(
-					'wikibase-statementview-referencesheading-pendingcountersubject'
-				)->numParams( $referenceCount )->text()
-			)->numParams( $referenceCount )->text();
+			$referencesHeading = $this->getReferencesHeading( $claim );
 
 			$referencesHtml = $this->getHtmlForReferences(
 				$claim->getReferences()
@@ -212,6 +216,40 @@ class ClaimHtmlGenerator {
 			'wb-snaklistview',
 			$snaksHtml
 		);
+	}
+
+	/**
+	 * @param Statement $statement
+	 *
+	 * @return string
+	 */
+	private function getReferencesHeading( Statement $statement ) {
+		$referenceCount = count( $statement->getReferences() );
+
+		if ( !array_key_exists( $referenceCount, $this->referenceHeadings ) ) {
+			$this->referenceHeadings[$referenceCount] = wfMessage(
+				'wikibase-ui-pendingquantitycounter-nonpending',
+				wfMessage(
+					'wikibase-statementview-referencesheading-pendingcountersubject'
+				)->numParams( $referenceCount )->text()
+			)->numParams( $referenceCount )->text();
+		}
+
+		return $this->referenceHeadings[$referenceCount];
+	}
+
+	/**
+	 * @param string $serializedRank
+	 *
+	 * @return string
+	 */
+	private function getStatementRankText( $serializedRank ) {
+		if ( !array_key_exists( $serializedRank, $this->statementRankText ) ) {
+			$rankText = wfMessage( 'wikibase-statementview-rank-' . $serializedRank )->text();
+			$this->statementRankText[$serializedRank] = $rankText;
+		}
+
+		return $this->statementRankText[$serializedRank];
 	}
 
 }
