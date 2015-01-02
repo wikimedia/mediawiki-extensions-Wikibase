@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_333435f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-01-02T14:41:00Z",
+      "side": 1,
+      "message": "They were actually added with I6e43504e203686c53a4958d1e2bcc2a88abfe071.",
+      "revId": "3ab080fcf3aa8b62a92be3f37c9435ef51fdaca1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
