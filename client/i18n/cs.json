@@ -50,7 +50,7 @@
 	"wikibase-rc-wikibase-edit-title": "Editace {{grammar:2sg|{{WBREPONAME}}}}",
 	"wikibase-replicationnote": "Vezměte prosím na vědomí, že než se změny projeví na všech wiki, může to trvat pár minut.",
 	"wikibase-watchlist-show-changes-pref": "Zobrazit změny {{grammar:2sg|{{WBREPONAME}}}} ve sledovaných stránkách",
-	"wikibase-error-serialize-error": "Nepodařilo se zaserializovat data",
+	"wikibase-error-serialize-error": "Nepodařilo se zaserializovat data.",
 	"wikibase-error-invalid-entity-id": "Systém zadané ID nezná. Použijte platné ID entity.",
 	"special-unconnectedpages": "Stránky nepropojené s položkou",
 	"wikibase-unconnectedpages-legend": "Nastavení nepropojených stránek",
