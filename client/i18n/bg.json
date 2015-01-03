@@ -13,6 +13,7 @@
 	"wikibase-comment-sitelink-add": "Добавена междуезикова препратка: $1",
 	"wikibase-comment-sitelink-change": "Променена междуезикова препратка: от $1 на $2",
 	"wikibase-comment-sitelink-remove": "Премахната междуезикова препратка: $1",
+	"wikibase-dataitem": "Обект в {{WBREPONAME}}",
 	"wikibase-editlinks": "Редактиране",
 	"wikibase-editlinkstitle": "Редактиране на междуезиковите препратки",
 	"wikibase-linkitem-addlinks": "Добавяне на препратки",
@@ -30,5 +31,6 @@
 	"wikibase-rc-wikibase-edit-title": "Редакция от {{WBREPONAME}}",
 	"wikibase-replicationnote": "Може да отнеме няколко минути, докато промените се отразят във всички уикита.",
 	"wikibase-watchlist-show-changes-pref": "Показване на {{WBREPONAME}} редакции в списъка за наблюдение",
-	"wikibase-pageinfo-entity-id": "ID на обекта в {{WBREPONAME}}"
+	"wikibase-pageinfo-entity-id": "ID на обекта в {{WBREPONAME}}",
+	"wikibase-otherprojects": "Други проекти"
 }
