@@ -40,6 +40,9 @@ class BaseTemplateAfterPortletHandler {
 		$action = $link['action'];
 		$link = Html::element( 'a', $link, $link['text'] );
 
+		unset( $link['action'] );
+		unset( $link['text'] );
+
 		$html = Html::rawElement(
 			'span',
 			array(
