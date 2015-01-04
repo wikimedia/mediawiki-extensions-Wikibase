@@ -20,6 +20,7 @@ class PopulateSitesTable extends Maintenance {
 		$this->mDescription = 'Populate the sites table from another wiki that runs the SiteMatrix extension';
 
 		$this->addOption( 'strip-protocols', "Strip http/https from URLs to make them protocol relative." );
+		$this->addOption( 'force-protocol', "Force a specific protocol for all URLs (like http/https).", false, true );
 		$this->addOption( 'load-from', "Full URL to the API of the wiki to fetch the site info from. "
 				. "Default is https://meta.wikimedia.org/w/api.php", false, true );
 		$this->addOption( 'script-path', 'Script path to use for wikis in the site matrix. '
@@ -37,13 +38,25 @@ class PopulateSitesTable extends Maintenance {
 	}
 
 	public function execute() {
-		$stripProtocols = $this->getOption( 'strip-protocols', false );
+		$stripProtocols = (bool)$this->getOption( 'strip-protocols', false );
+		$forceProtocol = $this->getOption( 'force-protocol', null );
 		$url = $this->getOption( 'load-from', 'https://meta.wikimedia.org/w/api.php' );
 		$scriptPath = $this->getOption( 'script-path', '/w/$1' );
 		$articlePath = $this->getOption( 'article-path', '/wiki/$1' );
 		$expandGroup = !$this->getOption( 'no-expand-group', false );
 		$siteGroup = $this->getOption( 'site-group' );
 		$wikiId = $this->getOption( 'wiki' );
+
+		if ( $stripProtocols && is_string( $forceProtocol ) ) {
+			$this->error( "You can't use both strip-protocols and force-protocol", 1 );
+		}
+
+		$protocol = true;
+		if ( $stripProtocols ) {
+			$protocol = false;
+		} elseif ( is_string( $forceProtocol ) ) {
+			$protocol = $forceProtocol;
+		}
 
 		// @todo make it configurable, such as from a config file.
 		$validGroups = array( 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
@@ -53,7 +66,7 @@ class PopulateSitesTable extends Maintenance {
 			$json = $this->getSiteMatrixData( $url );
 
 			$siteMatrixParser = new SiteMatrixParser( $scriptPath, $articlePath,
-				$stripProtocols, $expandGroup );
+				$protocol, $expandGroup );
 
 			$sites = $siteMatrixParser->sitesFromJson( $json );
 
