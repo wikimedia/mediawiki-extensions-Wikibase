@@ -13,10 +13,14 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider sitesFromJsonProvider
 	 */
-	public function testSitesFromJson( $scriptPath, $articlePath, $expected ) {
+	public function testSitesFromJson( $scriptPath, $articlePath, $protocol, $expected ) {
 		$json = $this->getSiteMatrixJson();
 
-		$siteMatrixParser = new SiteMatrixParser( $scriptPath, $articlePath, true );
+		$siteMatrixParser = new SiteMatrixParser(
+			$scriptPath,
+			$articlePath,
+			$protocol
+		);
 
 		$sites = $siteMatrixParser->sitesFromJson( $json );
 
@@ -31,10 +35,25 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 
 		$data = array();
 
-		$data[] = array(
+		$data['Protocol relative'] = array(
 			'/w/$1',
 			'/wiki/$1',
+			false,
 			$this->getSites( $siteData, '/w/$1', '/wiki/$1' )
+		);
+
+		$data['Keep the protocol'] = array(
+			'/w/$1',
+			'/wiki/$1',
+			true,
+			$this->getSites( $siteData, '/w/$1', '/wiki/$1', 'http:' )
+		);
+
+		$data['Force a protocol'] = array(
+			'/w/$1',
+			'/wiki/$1',
+			'CompuGlobalHyperMegaNet',
+			$this->getSites( $siteData, '/w/$1', '/wiki/$1', 'CompuGlobalHyperMegaNet:' )
 		);
 
 		return $data;
@@ -166,7 +185,7 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 		return $siteData;
 	}
 
-	public function getSites( array $sitesData, $scriptPath, $articlePath ) {
+	public function getSites( array $sitesData, $scriptPath, $articlePath, $protocol = '' ) {
 		$sites = array();
 
 		foreach( $sitesData as $siteData ) {
@@ -180,8 +199,8 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 				'internalid' => null,
 				'data' => array(
 					'paths' => array(
-						'file_path' => '//' . $siteData['url'] . $scriptPath,
-						'page_path' => '//' . $siteData['url'] . $articlePath
+						'file_path' => $protocol . '//' . $siteData['url'] . $scriptPath,
+						'page_path' => $protocol . '//' . $siteData['url'] . $articlePath
 					)
 				),
 				'forward' => false,
