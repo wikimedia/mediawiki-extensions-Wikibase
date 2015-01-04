@@ -291,7 +291,7 @@
 	"wikibase-listdatatypes-wikibase-property-head": "الخاصية",
 	"wikibase-listdatatypes-commonsmedia-head": "الوسائط في كومنز",
 	"wikibase-listdatatypes-globe-coordinate-head": "الإحداثيات على الكرة الأرضية",
-	"wikibase-listdatatypes-quantity-head": "كمي",
+	"wikibase-listdatatypes-quantity-head": "كمية",
 	"wikibase-listdatatypes-monolingualtext-head": "نص بلغة وحيدة",
 	"wikibase-listdatatypes-monolingualtext-body": "حقل بيانات حرفي لا يترجم إلى اللغات الأخرى. يتم تحديد هذا النمط من سطر المحارف  مرة واحدة ويعاد استخدامه في جميع اللغات. مثال نموذجي على استخدامه الأسماء الجغرافية المكتوبة باللغة المحلية أو اسم معرِّف من نوع ما أو صيغة كيميائية أو اسم علمي باللغة اللاتينية.\n* اللغة: قيمة صريحة لتعريف لغة الجزء النصي\n* القيمة: قيمة صريحة لسطر المحارف النوعي لشكل اللغة (اللهجة)",
 	"wikibase-listdatatypes-multilingualtext-head": "نص متعدد اللغات",
