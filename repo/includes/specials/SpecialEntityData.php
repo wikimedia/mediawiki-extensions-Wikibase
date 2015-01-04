@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use HttpError;
+use HttpStatus;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -150,7 +151,31 @@ class SpecialEntityData extends SpecialWikibasePage {
 			return;
 		}
 
-		$this->requestHandler->handleRequest( $subPage, $this->getRequest(), $this->getOutput() );
+		try {
+			$this->requestHandler->handleRequest( $subPage, $this->getRequest(), $this->getOutput() );
+		} catch( HttpError $exception ) {
+			// Something went wrong: Just report the HttpError to the user (but don't let it bubble up
+			// into the log)
+			$this->reportHttpError( $exception );
+		}
+	}
+
+	private function reportHttpError( HttpError $exception ) {
+		$this->getOutput()->disable();
+
+		$httpStatusCode = $exception->getStatusCode();
+		$httpMessage = HttpStatus::getMessage( $httpStatusCode );
+
+		$response = $this->getRequest()->response();
+		$response->header( "Status: $httpStatusCode $httpMessage", true, $httpStatusCode );
+		$response->header( 'Content-type: text/html; charset=utf-8' );
+
+		echo $exception->getHTML();
+
+		wfDebugLog(
+			'SpecialEntityData',
+			'Request failed with http ' . $httpStatusCode . ': ' . $exception->getMessage()
+		);
 	}
 
 	/**
