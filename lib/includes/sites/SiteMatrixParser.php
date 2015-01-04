@@ -25,21 +25,32 @@ class SiteMatrixParser {
 	private $expandGroup;
 
 	/**
-	 * @var string
+	 * @var bool
 	 */
 	private $stripProtocol;
 
 	/**
+	 * @var string|null
+	 */
+	private $forceProtocol;
+
+	/**
 	 * @param string $scriptPath (e.g. '/w/$1')
 	 * @param string $articlePath (e.g. '/wiki/$1')
-	 * @param string $stripProtocol
+	 * @param bool $stripProtocol
+	 * @param string|null $forceProtocol
 	 * @param boolean $expandGroup expands site matrix group codes from wiki to wikipedia
 	 */
-	public function __construct( $scriptPath, $articlePath, $stripProtocol, $expandGroup = true ) {
+	public function __construct( $scriptPath, $articlePath, $stripProtocol, $forceProtocol, $expandGroup = true ) {
 		$this->scriptPath = $scriptPath;
 		$this->articlePath = $articlePath;
 		$this->stripProtocol = $stripProtocol;
+		$this->forceProtocol = $forceProtocol;
 		$this->expandGroup = $expandGroup;
+
+		if ( $this->stripProtocol && $this->forceProtocol !== null ) {
+			throw new MWException( '$stripProtocol and $forceProtocol can not be used together.' );
+		}
 	}
 
 	/**
@@ -150,6 +161,8 @@ class SiteMatrixParser {
 
 		if ( $this->stripProtocol ) {
 			$url = preg_replace( '@^https?:@', '', $url );
+		} elseif ( $this->forceProtocol !== null ) {
+			$url = preg_replace( '@^https?:@', $this->forceProtocol . ':', $url );
 		}
 
 		$site->setFilePath( $url . $this->scriptPath );
