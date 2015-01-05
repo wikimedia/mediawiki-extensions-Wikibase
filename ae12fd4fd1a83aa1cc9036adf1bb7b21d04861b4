@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_1451c911",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-01-05T23:11:58Z",
+      "side": 0,
+      "message": "actually at least MediaWiki coding conventions want us to keep these spaces.",
+      "revId": "ae12fd4fd1a83aa1cc9036adf1bb7b21d04861b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
