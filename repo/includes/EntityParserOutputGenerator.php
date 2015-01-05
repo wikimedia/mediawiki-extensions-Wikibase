@@ -2,7 +2,9 @@
 
 namespace Wikibase;
 
+use LinkBatch;
 use ParserOutput;
+use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -175,8 +177,21 @@ class EntityParserOutputGenerator {
 	 * @param EntityId[] $entityIds
 	 */
 	private function addEntityLinksToParserOutput( ParserOutput $parserOutput, array $entityIds ) {
-		foreach ( $entityIds as $entityId ) {
-			$parserOutput->addLink( $this->entityTitleLookup->getTitleForId( $entityId ) );
+		$linkBatch = new LinkBatch();
+
+		foreach( $entityIds as $entityId ) {
+			$linkBatch->addObj( $this->entityTitleLookup->getTitleForId( $entityId ) );
+		}
+
+		$pages = $linkBatch->doQuery();
+
+		if ( $pages === false ) {
+			return;
+		}
+
+		foreach( $pages as $page ) {
+			$title = Title::makeTitle( $page->page_namespace, $page->page_title );
+			$parserOutput->addLink( $title, $page->page_id );
 		}
 	}
 
