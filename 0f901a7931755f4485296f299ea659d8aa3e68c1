@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_73ab821a",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-01-05T16:11:47Z",
+      "side": 1,
+      "message": "We probably want that one in the exception log.",
+      "revId": "0f901a7931755f4485296f299ea659d8aa3e68c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
