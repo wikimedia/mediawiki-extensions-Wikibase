@@ -6,7 +6,7 @@
 		]
 	},
 	"wikibase-after-page-move-queued": "Bu səhifə ilə əlaqəli olan [$1 {{WBREPONAME}} qeydi] tezliklə avtomatik dəyişdiriləcək.",
-	"wikibase-dataitem": "Verilənlərin elementi",
+	"wikibase-dataitem": "{{WBREPONAME}} elementi",
 	"wikibase-editlinks": "Keçidlərin redaktəsi",
 	"wikibase-editlinkstitle": "Dillərarası keçidləri redaktə et",
 	"wikibase-linkitem-addlinks": "Keçid əlavə et"

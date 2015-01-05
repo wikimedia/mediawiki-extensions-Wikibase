@@ -3,10 +3,14 @@
 		"authors": [
 			"Sahan.ssw",
 			"Singhalawap",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Susith Chandira Gts"
 		]
 	},
 	"wikibase-desc": "ව්‍යූහගත දත්ත කෝෂ්ඨාගාරය",
+	"wikibase-entity-item": "අයිතමය",
+	"wikibase-entity-property": "ගුණාංගය",
+	"wikibase-entity-query": "ප්‍රශ්නය",
 	"wikibase-edit": "සංස්කරණය",
 	"wikibase-save": "සුරකින්න",
 	"wikibase-cancel": "අත් හරින්න",
@@ -118,5 +122,6 @@
 	"wikibase-property-summary-special-create-property": "තනන ලදී [$2] වත්කමක් සමඟ {{PLURAL:$1|value|values}}",
 	"content-model-wikibase-item": "විකිපාදක අයිතමය",
 	"content-model-wikibase-property": "විකිපාදක අයිතිය",
-	"content-model-wikibase-query": "විකිපාදක ප්‍රශ්නය"
+	"content-model-wikibase-query": "විකිපාදක ප්‍රශ්නය",
+	"apihelp-wbsetaliases-param-language": "මෙම අන්වර්ථ නාමය සැකසීම සඳහා භාෂාව"
 }
