@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
+use Wikibase\UnloggedHttpError;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRedirectResolvingDecorator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -136,7 +137,7 @@ class EntityDataRequestHandler {
 	 * @param WebRequest $request
 	 *
 	 * @return bool
-	 * @throws HttpError
+	 * @throws UnloggedHttpError
 	 */
 	public function canHandleRequest( $doc, WebRequest $request ) {
 		if ( $doc === '' || $doc === null ) {
@@ -164,7 +165,7 @@ class EntityDataRequestHandler {
 	 * @note: Instead of an output page, a WebResponse could be sufficient, but
 	 *        redirect logic is currently implemented in OutputPage.
 	 *
-	 * @throws HttpError
+	 * @throws UnloggedHttpError
 	 */
 	public function handleRequest( $doc, WebRequest $request, OutputPage $output ) {
 		$revision = 0;
@@ -181,13 +182,13 @@ class EntityDataRequestHandler {
 		// If there is no ID, fail
 		if ( $id === null || $id === '' ) {
 			//TODO: different error message?
-			throw new \HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
+			throw new UnloggedHttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
 		}
 
 		try {
 			$entityId = $this->entityIdParser->parse( $id );
 		} catch ( EntityIdParsingException $ex ) {
-			throw new \HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
+			throw new UnloggedHttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
 		}
 
 		//XXX: allow for logged in users only?
@@ -232,7 +233,7 @@ class EntityDataRequestHandler {
 	 * @param string $format
 	 *
 	 * @return string
-	 * @throws HttpError code 415 if the format is not supported.
+	 * @throws UnloggedHttpError code 415 if the format is not supported.
 	 *
 	 */
 	public function getCanonicalFormat( $format ) {
@@ -247,7 +248,7 @@ class EntityDataRequestHandler {
 		$canonicalFormat = $this->serializationService->getFormatName( $format );
 
 		if ( $canonicalFormat === null ) {
-			throw new \HttpError( 415, wfMessage( 'wikibase-entitydata-unsupported-format' )->params( $format ) );
+			throw new UnloggedHttpError( 415, wfMessage( 'wikibase-entitydata-unsupported-format' )->params( $format ) );
 		}
 
 		return $canonicalFormat;
@@ -270,14 +271,14 @@ class EntityDataRequestHandler {
 	/**
 	 * Applies HTTP content negotiation.
 	 * If the negotiation is successfull, this method will set the appropriate redirect
-	 * in the OutputPage object and return. Otherwise, an HttpError is thrown.
+	 * in the OutputPage object and return. Otherwise, an UnloggedHttpError is thrown.
 	 *
 	 * @param WebRequest $request
 	 * @param OutputPage $output
 	 * @param EntityId $id The ID of the entity to show
 	 * @param int      $revision The desired revision
 	 *
-	 * @throws HttpError
+	 * @throws UnloggedHttpError
 	 */
 	public function httpContentNegotiation( WebRequest $request, OutputPage $output, EntityId $id, $revision = 0 ) {
 		$headers = $request->getAllHeaders();
@@ -307,7 +308,7 @@ class EntityDataRequestHandler {
 
 		if ( $format === null ) {
 			$mimeTypes = implode( ', ', $this->serializationService->getSupportedMimeTypes() );
-			throw new \HttpError( 406, wfMessage( 'wikibase-entitydata-not-acceptable' )->params( $mimeTypes ) );
+			throw new UnloggedHttpError( 406, wfMessage( 'wikibase-entitydata-not-acceptable' )->params( $mimeTypes ) );
 		}
 
 		$format = $this->getCanonicalFormat( $format );
@@ -325,6 +326,7 @@ class EntityDataRequestHandler {
 	 *
 	 * @return EntityRevision
 	 * @throws HttpError
+	 * @throws UnloggedHttpError
 	 */
 	protected function getEntityRevision( EntityId $id, $revision ) {
 		$prefixedId = $id->getSerialization();
@@ -341,16 +343,16 @@ class EntityDataRequestHandler {
 
 			if ( $entityRevision === null ) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": entity not found: $prefixedId"  );
-				throw new HttpError( 404, wfMessage( 'wikibase-entitydata-not-found' )->params( $prefixedId ) );
+				throw new UnloggedHttpError( 404, wfMessage( 'wikibase-entitydata-not-found' )->params( $prefixedId ) );
 			}
 		} catch ( BadRevisionException $ex ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": could not load revision $revision or $prefixedId: $ex"  );
 			$msg = wfMessage( 'wikibase-entitydata-bad-revision' );
-			throw new HttpError( 404, $msg->params( $prefixedId, $revision ) );
+			throw new UnloggedHttpError( 404, $msg->params( $prefixedId, $revision ) );
 		} catch ( StorageException $ex ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load $prefixedId: $ex (revision $revision)"  );
 			$msg = wfMessage( 'wikibase-entitydata-storage-error' );
-			throw new \HttpError( 500, $msg->params( $prefixedId, $revision ) );
+			throw new HttpError( 500, $msg->params( $prefixedId, $revision ) );
 		}
 
 		return $entityRevision;
@@ -365,7 +367,7 @@ class EntityDataRequestHandler {
 	 * @param EntityId $id The entity ID
 	 * @param int $revision The revision ID (use 0 for the current revision).
 	 *
-	 * @throws HttpError
+	 * @throws UnloggedHttpError
 	 */
 	public function showData( WebRequest $request, OutputPage $output, $format, EntityId $id, $revision ) {
 
