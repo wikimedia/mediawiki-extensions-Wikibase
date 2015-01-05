@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_4d733d14",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-05T11:29:44Z",
+      "side": 1,
+      "message": "The logic below can be replaced with $exception-\u003ereport();",
+      "revId": "2b322ed5db9cd8de811d241694526679fc692d4d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
