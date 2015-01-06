@@ -385,7 +385,7 @@ $.widget( 'ui.suggester', {
 		this._searching = setTimeout( function() {
 			// Only search if the value has changed:
 			if( self._term !== self.element.val() ) {
-				self.search( event )
+				self.search()
 				.done( function() {
 					// Widget might have been destroyed in the meantime.
 					if( self.element.data( self.widgetName ) ) {
@@ -417,7 +417,7 @@ $.widget( 'ui.suggester', {
 		event.preventDefault();
 
 		if( !this.options.menu.element.is( ':visible' ) ) {
-			this.search( event );
+			this.search();
 			return;
 		}
 
@@ -473,14 +473,13 @@ $.widget( 'ui.suggester', {
 	/**
 	 * Performs a search on the current input.
 	 *
-	 * @param {jQuery.Event} event The original event that triggered the search.
 	 * @return {Object} jQuery.Promise
 	 * @return {Function} return.done
 	 * @return {string[]} return.done.suggestions
 	 * @return {Function} return.fail
 	 * @return {string} return.fail.message
 	 */
-	search: function( event ) {
+	search: function() {
 		var self = this,
 			deferred = $.Deferred();
 
