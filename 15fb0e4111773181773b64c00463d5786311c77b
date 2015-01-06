@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee703fc5_82c3e060",
+        "filename": "repo/includes/specials/SpecialItemsMostSitelinks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 330
+      },
+      "writtenOn": "2015-01-06T17:44:08Z",
+      "side": 1,
+      "message": "I was wondering how to do that. Thanks for the pointer, I\u0027ll fix that in the next patchset.",
+      "parentUuid": "0e6cb3ef_712cd7f2",
+      "revId": "15fb0e4111773181773b64c00463d5786311c77b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_d18a83e3",
         "filename": "repo/includes/specials/SpecialItemsMostSitelinks.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-05T22:43:57Z",
       "side": 1,
       "message": "Is it possible to derive the title programmatically? By providing a callback here, or overwriting some method? See below for why that would be useful.",
+      "revId": "15fb0e4111773181773b64c00463d5786311c77b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_a2cb8474",
+        "filename": "repo/includes/specials/SpecialItemsMostSitelinks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 330
+      },
+      "writtenOn": "2015-01-06T17:44:08Z",
+      "side": 1,
+      "message": "I use QueryPage because that includes caching, etc, see: \n\nhttp://git.wikimedia.org/blob/mediawiki%2Fcore.git/19d0011d9c29906102cdfcb65f630d2fe7781f61/includes%2Fspecialpage%2FQueryPage.php#L128\n\nNo clue if that\u0027s possible.",
+      "parentUuid": "0e6cb3ef_d18a83e3",
       "revId": "15fb0e4111773181773b64c00463d5786311c77b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee703fc5_22869419",
+        "filename": "repo/includes/specials/SpecialItemsMostSitelinks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 330
+      },
+      "writtenOn": "2015-01-06T17:44:08Z",
+      "side": 1,
+      "message": "Great. So I can use the EntityTitleLookup service to get the right page title and getEntityNamespace() to get the right namespace. That means I should be able to eliminate the join with the page table. If I eliminate the page join, i no longer need the JOIN with the wb_entity_per_page either.\n\nI\u0027m going to look into this magic EntityTitleLookup services :-)",
+      "parentUuid": "0e6cb3ef_11855bd4",
+      "revId": "15fb0e4111773181773b64c00463d5786311c77b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_91708b07",
         "filename": "repo/includes/specials/SpecialItemsMostSitelinks.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2015-01-05T22:43:57Z",
       "side": 1,
       "message": "There is no index on page_title afaik - the index is on (page_namespace, page_title).\n\nPerhaps it would be better to group by ips_item_id. That would also work without the joins, and it has an index.",
+      "revId": "15fb0e4111773181773b64c00463d5786311c77b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_428b8820",
+        "filename": "repo/includes/specials/SpecialItemsMostSitelinks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 330
+      },
+      "writtenOn": "2015-01-06T17:44:08Z",
+      "side": 1,
+      "message": "With the EntityTitleLookup service this will change too.",
+      "parentUuid": "0e6cb3ef_91708b07",
       "revId": "15fb0e4111773181773b64c00463d5786311c77b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
