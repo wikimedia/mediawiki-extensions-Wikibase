@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\EntityLookup;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Daniel Kinzler
  */
-class LanguageLinkBadgeDisplay {
+class SiteLinkBadgeDisplay {
 
 	/**
 	 * @var EntityLookup

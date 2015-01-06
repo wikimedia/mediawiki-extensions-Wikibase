@@ -18,7 +18,7 @@ use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
-use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\SiteLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 use Wikibase\Client\Store\TitleFactory;
@@ -535,7 +535,7 @@ final class WikibaseClient {
 		if ( $this->langLinkHandler === null ) {
 			$this->langLinkHandler = new LangLinkHandler(
 				$this->getOtherProjectsSidebarGeneratorFactory(),
-				$this->getLanguageLinkBadgeDisplay(),
+				$this->getSiteLinkBadgeDisplay(),
 				$this->settings->getSetting( 'siteGlobalID' ),
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkLookup(),
@@ -549,15 +549,15 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return LanguageLinkBadgeDisplay
+	 * @return SiteLinkBadgeDisplay
 	 */
-	public function getLanguageLinkBadgeDisplay() {
+	public function getSiteLinkBadgeDisplay() {
 		global $wgLang;
 		StubObject::unstub( $wgLang );
 
 		$badgeClassNames = $this->settings->getSetting( 'badgeClassNames' );
 
-		return new LanguageLinkBadgeDisplay(
+		return new SiteLinkBadgeDisplay(
 			$this->getEntityLookup(),
 			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
 			$wgLang
