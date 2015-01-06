@@ -33,6 +33,7 @@
 	"wikibase-watchlist-show-changes-pref": "İzleme listemde {{WBREPONAME}} değişikliklerini göster",
 	"special-unconnectedpages": "Öğelerine bağlanmamış sayfalar",
 	"wikibase-unconnectedpages-legend": "Bağlanmamış sayfa seçenekleri",
+	"wikibase-unconnectedpages-page": "Sonuç listesini şu sayfadan başlat:",
 	"wikibase-unconnectedpages-submit": "Git",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" geçerli bir dil kodu değil.",
 	"wikibase-unconnectedpages-iwdata-label": "Sadece dillerarası bağlantıları olan sayfalar",

@@ -45,7 +45,7 @@
 	"wikibase-parse-error-entity-id": "Die Objektkennung ist ungültig.",
 	"wikibase-parse-error-quantity": "Der Mengenwert ist ungültig.",
 	"wikibase-parse-error-time": "Der Zeitwert ist ungültig.",
-	"wikibase-sitelinks-wikipedia": "Wikipedia-Seiten zu diesem Objekt",
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Sprache",
 	"wikibase-sitelinks-link-columnheading": "Verlinkte Seite",
 	"wikibase-snakview-snaktypeselector-somevalue": "Unbekannter Wert",

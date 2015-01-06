@@ -63,7 +63,7 @@
 	"wikibase-sitelinkgroupview-input-help-message": "Ergänzt einen Websitelink durch die Angabe einer Website und einer Seite dieser Website, bearbeitet oder entfernt vorhandene Websitelinks.",
 	"wikibase-sitelinks-empty": "Noch keine Seite mit diesem Datenobjekt verknüpft.",
 	"wikibase-sitelinks-input-help-message": "Leg eine Verknüpfung zu einer diesem Datenobjekt entsprechenden Seite fest.",
-	"wikibase-sitelinks-special": "Seiten auf anderen Websites, die auf dieses Objekt verweisen",
+	"wikibase-sitelinks-special": "Andere Websites",
 	"wikibase-badgeselector-badge-placeholder-title": "Zum Zuordnen einer Auszeichnung klicken.",
 	"wikibase-remove": "entfernen",
 	"wikibase-move-up": "nach oben verschieben",

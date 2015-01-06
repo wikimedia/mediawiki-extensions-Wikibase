@@ -79,7 +79,7 @@
 	"wikibase-statementview-rank-preferred": "الترتيب المفضل",
 	"wikibase-statementview-rank-normal": "ترتيب طبيعي",
 	"wikibase-statementview-rank-deprecated": "ترتيب قديم",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|مرجع واحد|مرجعان|$1 مراجع|$1 مرجعاً|$1 مرجع}}",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|مرجع واحد|مرجعان|$1 مراجع|$1 مرجعاً|$1 مرجع|0=لا مراجع}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "لم يتم حفظ {{PLURAL:$1|مرجع واحد|مرجعين|$1 مراجع|$1 مرجعاً|$1 مرجع}} بعد",
 	"wikibase-snakview-property-input-placeholder": "خاصية",
 	"wikibase-snakview-unsupportedsnaktype": "سناك من نمط «$1». لا تُدعَم معالجة هذا النوع من السناك بعد.",
