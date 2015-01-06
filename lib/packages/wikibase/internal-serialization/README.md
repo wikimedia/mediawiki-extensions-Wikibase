@@ -1,6 +1,6 @@
 # Wikibase Internal Serialization
 
-Library containing serializers and deserializers for the data access layer of Wikibase Repo.
+Library containing serializers and deserializers for the data access layer of [Wikibase](http://wikiba.se/) Repository.
 
 [![Build Status](https://secure.travis-ci.org/wmde/WikibaseInternalSerialization.png?branch=master)](http://travis-ci.org/wmde/WikibaseInternalSerialization)
 [![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/badges/coverage.png?s=b65f644a99b93ed3aa1a34e45efbccad798d168c)](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/)
@@ -20,11 +20,11 @@ The recommended way to use this library is via [Composer](http://getcomposer.org
 To add this package as a local, per-project dependency to your project, simply add a
 dependency on `wikibase/internal-serialization` to your project's `composer.json` file.
 Here is a minimal example of a `composer.json` file that just defines a dependency on
-version 1.0 of this package:
+version 1.x of this package:
 
     {
         "require": {
-            "wikibase/internal-serialization": "1.0.*"
+            "wikibase/internal-serialization": "1.*"
         }
     }
 
@@ -106,6 +106,10 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ## Release notes
 
+### 1.3.1 (2015-01-06)
+
+* Installation together with DataValues Geo 1.x is now supported
+
 ### 1.3.0 (2014-10-15)
 
 * Added compatibility with DataModel 2.x
@@ -143,7 +147,3 @@ Initial release with these features:
 * [Wikibase DataModel](https://github.com/wmde/WikibaseDataModel)
 * [Wikibase DataModel Serialization](https://github.com/wmde/WikibaseDataModelSerialization) (For the public serialization format)
 * [Ask Serialization](https://github.com/wmde/AskSerialization)
-
-# Bugs on Phabricator
-
-https://phabricator.wikimedia.org/project/view/921/
