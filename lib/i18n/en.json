@@ -40,7 +40,7 @@
 	"wikibase-parse-error-entity-id": "The entity id is malformed.",
 	"wikibase-parse-error-quantity": "The quantity value is malformed.",
 	"wikibase-parse-error-time": "The time value is malformed.",
-	"wikibase-sitelinks-wikipedia": "Wikipedia pages linked to this item",
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Language",
 	"wikibase-sitelinks-link-columnheading": "Linked page",
 	"wikibase-snakview-snaktypeselector-somevalue": "unknown value",
