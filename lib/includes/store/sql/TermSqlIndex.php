@@ -399,14 +399,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @see TermIndex::getTermsOfEntities
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string $entityType
+	 * @param string|null $entityType
 	 * @param string[]|null $termTypes
 	 * @param string[]|null $languageCodes Language codes
 	 *
 	 * @throws \MWException
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $entityIds, $entityType, array $termTypes = null, array $languageCodes = null ) {
+	public function getTermsOfEntities( array $entityIds, $entityType = null, array $termTypes = null, array $languageCodes = null ) {
 		$fields = array(
 			'term_entity_id',
 			'term_entity_type',

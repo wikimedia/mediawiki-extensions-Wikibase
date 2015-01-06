@@ -19,7 +19,7 @@ class EntityTermLookup implements TermLookup {
 	/**
 	 * @var TermIndex
 	 */
-	private $termIndex;
+	protected $termIndex;
 
 	/**
 	 * @param TermIndex $termIndex
@@ -97,7 +97,7 @@ class EntityTermLookup implements TermLookup {
 	 *
 	 * @return string[]
 	 */
-	private function getTermsOfType( EntityId $entityId, $termType, array $languageCodes = null ) {
+	protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes = null ) {
 		$wikibaseTerms = $this->termIndex->getTermsOfEntity( $entityId, array( $termType ), $languageCodes );
 
 		return $this->convertTermsToMap( $wikibaseTerms );
@@ -108,7 +108,7 @@ class EntityTermLookup implements TermLookup {
 	 *
 	 * @return string[] strings keyed by language code
 	 */
-	private function convertTermsToMap( array $wikibaseTerms ) {
+	protected function convertTermsToMap( array $wikibaseTerms ) {
 		$terms = array();
 
 		foreach( $wikibaseTerms as $wikibaseTerm ) {

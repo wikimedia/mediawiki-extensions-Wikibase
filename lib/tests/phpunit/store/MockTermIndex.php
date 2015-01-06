@@ -220,7 +220,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	/**
 	 * @see TermIndex::getTermsOfEntities
 	 */
-	public function getTermsOfEntities( array $entityIds, $entityType, array $termTypes = null, array $languageCodes = null ) {
+	public function getTermsOfEntities( array $entityIds, $entityType = null, array $termTypes = null, array $languageCodes = null ) {
 		$terms = array();
 		foreach ( $entityIds as $id ) {
 			$terms = array_merge( $terms, $this->getTermsOfEntity( $id, $termTypes, $languageCodes ) );
