@@ -105,7 +105,7 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.10.0 (2014-12-19)
+### 0.10.0 (2015-01-06)
 * `$.ui.suggester`: Removed `event` parameter from `search()`.
 
 ### 0.9.1 (2014-12-17)
