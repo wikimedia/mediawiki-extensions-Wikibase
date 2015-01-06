@@ -34,6 +34,7 @@ use Wikibase\Repo\View\EntityViewPlaceholderExpander;
 use Wikibase\Repo\View\TextInjector;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Template\TemplateFactory;
+use Wikibase\Template\TemplateRegistry;
 use WikiPage;
 
 /**
