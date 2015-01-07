@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee703fc5_dbbe9efa",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.variations.Value.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-07T12:38:56Z",
+      "side": 1,
+      "message": "Should this be changed to \"dataType !\u003d\u003d null\"?",
+      "revId": "393c7aa08946f8109976f9c10ac13821a5ab92a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_7b33d2c0",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.variations.Value.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-07T12:38:56Z",
+      "side": 1,
+      "message": "I could not find out what this line does. The option is set to \"null\" now. Was set to \"false\" before. Does this matter?",
+      "revId": "393c7aa08946f8109976f9c10ac13821a5ab92a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
