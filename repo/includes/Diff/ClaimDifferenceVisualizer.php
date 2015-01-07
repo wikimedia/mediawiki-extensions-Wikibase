@@ -12,11 +12,11 @@ use InvalidArgumentException;
 use Message;
 use RuntimeException;
 use ValueFormatters\FormattingException;
-use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\SnakFormatter;
 
@@ -36,7 +36,7 @@ class ClaimDifferenceVisualizer {
 	/**
 	 * @since 0.5
 	 *
-	 * @var ValueFormatter
+	 * @var EntityIdFormatter
 	 */
 	private $propertyIdFormatter;
 
@@ -66,7 +66,7 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param ValueFormatter $propertyIdFormatter Formatter for IDs, must generate HTML.
+	 * @param EntityIdFormatter $propertyIdFormatter Formatter for IDs, must generate HTML.
 	 * @param SnakFormatter $snakDetailsFormatter detailed Formatter for Snaks, must generate HTML.
 	 * @param SnakFormatter $snakBreadCrumbFormatter terse Formatter for Snaks, must generate HTML.
 	 * @param string $languageCode
@@ -74,7 +74,7 @@ class ClaimDifferenceVisualizer {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		ValueFormatter $propertyIdFormatter,
+		EntityIdFormatter $propertyIdFormatter,
 		SnakFormatter $snakDetailsFormatter,
 		SnakFormatter $snakBreadCrumbFormatter,
 		$languageCode
