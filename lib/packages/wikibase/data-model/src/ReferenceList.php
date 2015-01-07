@@ -45,6 +45,7 @@ class ReferenceList extends HashableObjectStorage {
 		}
 	}
 
+	// @codingStandardsIgnoreStart
 	/**
 	 * @since 1.1
 	 *
@@ -53,6 +54,7 @@ class ReferenceList extends HashableObjectStorage {
 	 * @throws InvalidArgumentException
 	 */
 	public function addNewReference( Snak $snak /* Snak, ... */ ) {
+		// @codingStandardsIgnoreEnd
 		$this->addReference( new Reference( new SnakList( func_get_args() ) ) );
 	}
 
