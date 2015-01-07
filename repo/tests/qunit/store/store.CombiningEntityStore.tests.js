@@ -12,7 +12,7 @@
 		assert.ok( entityStore.get, 'Entity store has get() method.' );
 	} );
 
-	QUnit.test( 'get() returns $.Promise', function( assert ) {
+	QUnit.test( 'get() returns a jQuery promise', function( assert ) {
 		var entityStore = new wb.store.CombiningEntityStore( [] ),
 			promise = entityStore.get( 'id' );
 

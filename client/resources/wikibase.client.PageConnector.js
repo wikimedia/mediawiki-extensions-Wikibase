@@ -292,7 +292,7 @@ $.extend( wb.PageConnector.prototype, {
 			toId;
 
 		// XXX: We could get all properties above and then use a more complete
-		// comparison, maybe by abusing $.JSON to get real item sizes. That
+		// comparison, maybe by abusing JSON.stringify to get real item sizes. That
 		// *might* be a better estimate?!
 		if ( firstSiteLinkCount <= secondSiteLinkCount ) {
 			fromId = firstEntity.id;
