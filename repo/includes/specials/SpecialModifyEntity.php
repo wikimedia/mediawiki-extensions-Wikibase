@@ -26,23 +26,19 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * @since 0.5
 	 *
-	 * @var EntityRevision
+	 * @var EntityRevision|null
 	 */
-	protected $entityRevision;
+	protected $entityRevision = null;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var string
 	 */
-	protected $rightsUrl;
+	private $rightsUrl;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var string
 	 */
-	protected $rightsText;
+	private $rightsText;
 
 	/**
 	 * @since 0.4
@@ -85,7 +81,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 		$summary = false;
 		$valid = $this->validateInput();
-		$entity = $this->entityRevision == null ? null : $this->entityRevision->getEntity();
+		$entity = $this->entityRevision === null ? null : $this->entityRevision->getEntity();
 
 		if ( $valid ) {
 			$summary = $this->modifyEntity( $entity );
