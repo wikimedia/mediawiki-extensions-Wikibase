@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee703fc5_7b499269",
+        "filename": "client/includes/hooks/BaseTemplateAfterPortletHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-07T12:15:56Z",
+      "side": 1,
+      "message": "$link is a string and not an array at this point.",
+      "revId": "a15ce159c797cdb19a1b51e3e562abcd0f9054c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
