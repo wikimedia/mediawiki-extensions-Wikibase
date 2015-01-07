@@ -1,5 +1,10 @@
 <?php
 
+if ( defined( 'WIKIBASE_JAVASCRIPT_API_VERSION' ) ) {
+	// Do not initialize more than once.
+	return 1;
+}
+
 define( 'WIKIBASE_JAVASCRIPT_API_VERSION', '1.0.2-dev' );
 
 // Include the composer autoloader if it is present.
