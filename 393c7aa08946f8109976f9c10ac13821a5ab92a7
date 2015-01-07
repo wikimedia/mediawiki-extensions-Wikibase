@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee703fc5_fb6da297",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.variations.Value.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-07T13:09:22Z",
+      "side": 1,
+      "message": "That\u0027s possible and probably better.",
+      "parentUuid": "ee703fc5_dbbe9efa",
+      "revId": "393c7aa08946f8109976f9c10ac13821a5ab92a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee703fc5_7b33d2c0",
         "filename": "lib/resources/jquery.wikibase/snakview/snakview.variations.Value.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-07T12:38:56Z",
       "side": 1,
       "message": "I could not find out what this line does. The option is set to \"null\" now. Was set to \"false\" before. Does this matter?",
+      "revId": "393c7aa08946f8109976f9c10ac13821a5ab92a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_9b06e6d0",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.variations.Value.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-07T13:09:22Z",
+      "side": 1,
+      "message": "This option is gone since ValueView 0.3 oO",
+      "parentUuid": "ee703fc5_7b33d2c0",
       "revId": "393c7aa08946f8109976f9c10ac13821a5ab92a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
