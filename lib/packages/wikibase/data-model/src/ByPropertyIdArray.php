@@ -249,8 +249,8 @@ class ByPropertyIdArray extends \ArrayObject {
 		$propertyIdSerialization = $propertyId->getSerialization();
 
 		$propertyGroup = in_array( $propertyIdSerialization, $this->getPropertyIds() )
-			 ? $this->getByPropertyId( $propertyId )
-			 : array();
+			? $this->getByPropertyId( $propertyId )
+			: array();
 
 		$propertyGroup[] = $object;
 		$this->byId[$propertyIdSerialization] = $propertyGroup;
