@@ -4,6 +4,8 @@ namespace Wikibase\Test\HashArray;
 
 use Hashable;
 use Wikibase\DataModel\HashArray;
+use Wikibase\Test\DataModel\Fixtures\HashArrayElement;
+use Wikibase\Test\DataModel\Fixtures\MutableHashable;
 
 /**
  * @covers Wikibase\DataModel\HashArray
@@ -27,7 +29,7 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 	}
 
 	public function getInstanceClass() {
-		return 'Wikibase\Test\HashArray\HashArrayWithDuplicates';
+		return 'Wikibase\Test\DataModel\Fixtures\HashArrayWithDuplicates';
 	}
 
 	public function elementInstancesProvider() {
@@ -82,7 +84,11 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 
 		$array->removeDuplicates();
 
-		$this->assertEquals( $count - $duplicateCount, count( $array ), 'Count should decrease by the number of duplicates after removing duplicates' );
+		$this->assertEquals(
+			$count - $duplicateCount,
+			count( $array ),
+			'Count should decrease by the number of duplicates after removing duplicates'
+		);
 	}
 
 	/**
@@ -107,7 +113,10 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 
 		$array->addElement( $element );
 
-		$this->assertFalse( $newHash === $array->getHash(), 'Hash should not be the same after adding an existing element again' );
+		$this->assertFalse(
+			$newHash === $array->getHash(),
+			'Hash should not be the same after adding an existing element again'
+		);
 	}
 
 	/**
@@ -133,15 +142,3 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 
 }
 
-class HashArrayWithDuplicates extends HashArray {
-
-	public function getObjectType() {
-		return '\Hashable';
-	}
-
-	public function __construct( $input = null ) {
-		$this->acceptDuplicates = true;
-		parent::__construct( $input );
-	}
-
-}

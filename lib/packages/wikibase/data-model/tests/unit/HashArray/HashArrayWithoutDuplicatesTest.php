@@ -3,6 +3,8 @@
 namespace Wikibase\Test\HashArray;
 
 use Wikibase\DataModel\HashArray;
+use Wikibase\Test\DataModel\Fixtures\HashArrayElement;
+use Wikibase\Test\DataModel\Fixtures\MutableHashable;
 
 /**
  * @covers Wikibase\DataModel\HashArray
@@ -26,7 +28,7 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 	}
 
 	public function getInstanceClass() {
-		return 'Wikibase\Test\HashArray\HashArrayWithoutDuplicates';
+		return 'Wikibase\Test\DataModel\Fixtures\HashArrayWithoutDuplicates';
 	}
 
 	public function elementInstancesProvider() {
@@ -52,13 +54,28 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 			++$elementCount;
 		}
 
-		$this->assertEquals( !$array->hasElement( $element ), $array->addElement( $element ), 'Adding an element should only work if its not already there' );
+		$this->assertEquals(
+			!$array->hasElement( $element ),
+			$array->addElement( $element ),
+			'Adding an element should only work if its not already there'
+		);
 
-		$this->assertEquals( $elementCount, $array->count(), 'Element count should only increase if the element was not there yet' );
+		$this->assertEquals(
+			$elementCount,
+			$array->count(),
+			'Element count should only increase if the element was not there yet'
+		);
 
-		$this->assertFalse( $array->addElement( $element ), 'Adding an already present element should not work' );
+		$this->assertFalse(
+			$array->addElement( $element ),
+			'Adding an already present element should not work'
+		);
 
-		$this->assertEquals( $elementCount, $array->count(), 'Element count should not increase if the element is already there' );
+		$this->assertEquals(
+			$elementCount,
+			$array->count(),
+			'Element count should not increase if the element is already there'
+		);
 	}
 
 	/**
@@ -70,7 +87,11 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 		$count = count( $array );
 		$array->removeDuplicates();
 
-		$this->assertEquals( $count, count( $array ), 'Count should be the same after removeDuplicates since there can be none' );
+		$this->assertCount(
+			$count,
+			$array,
+			'Count should be the same after removeDuplicates since there can be none'
+		);
 	}
 
 	/**
@@ -112,19 +133,6 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 		$array->rebuildIndices();
 
 		$this->assertTrue( $array->indicesAreUpToDate() );
-	}
-
-}
-
-class HashArrayWithoutDuplicates extends HashArray {
-
-	public function getObjectType() {
-		return '\Hashable';
-	}
-
-	public function __construct( $input = null ) {
-		$this->acceptDuplicates = false;
-		parent::__construct( $input );
 	}
 
 }

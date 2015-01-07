@@ -37,7 +37,7 @@ class ReferenceList extends HashableObjectStorage {
 	public function addReference( Reference $reference, $index = null ) {
 		if( !is_null( $index ) && !is_integer( $index ) ) {
 			throw new InvalidArgumentException( '$index must be an integer or null; got ' . gettype( $index ) );
-		} else if ( is_null( $index ) || $index >= count( $this ) ) {
+		} elseif ( is_null( $index ) || $index >= count( $this ) ) {
 			// Append object to the end of the reference list.
 			$this->attach( $reference );
 		} else {
@@ -45,6 +45,7 @@ class ReferenceList extends HashableObjectStorage {
 		}
 	}
 
+	// @codingStandardsIgnoreStart
 	/**
 	 * @since 1.1
 	 *
@@ -53,6 +54,7 @@ class ReferenceList extends HashableObjectStorage {
 	 * @throws InvalidArgumentException
 	 */
 	public function addNewReference( Snak $snak /* Snak, ... */ ) {
+		// @codingStandardsIgnoreEnd
 		$this->addReference( new Reference( new SnakList( func_get_args() ) ) );
 	}
 

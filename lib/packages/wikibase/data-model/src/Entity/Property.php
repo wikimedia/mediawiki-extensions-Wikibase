@@ -67,7 +67,7 @@ class Property extends Entity implements StatementListProvider {
 		if ( $id === null || $id instanceof PropertyId ) {
 			$this->id = $id;
 		}
-		else if ( is_integer( $id ) ) {
+		elseif ( is_integer( $id ) ) {
 			$this->id = PropertyId::newFromNumber( $id );
 		}
 		else {

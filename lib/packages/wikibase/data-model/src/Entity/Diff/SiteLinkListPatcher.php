@@ -43,22 +43,28 @@ class SiteLinkListPatcher {
 
 		foreach ( $patchedData as $siteId => $siteLinkData ) {
 			if ( array_key_exists( 'name', $siteLinkData ) ) {
-				$badges = null;
-
-				if ( array_key_exists( 'badges', $siteLinkData ) ) {
-					$badges = array_map(
-						function( $idSerialization ) {
-							return new ItemId( $idSerialization );
-						},
-						$siteLinkData['badges']
-					);
-				}
-
-				$patchedSiteLinks->addNewSiteLink( $siteId, $siteLinkData['name'], $badges );
+				$patchedSiteLinks->addNewSiteLink(
+					$siteId,
+					$siteLinkData['name'],
+					$this->getBadgesFromSiteLinkData( $siteLinkData )
+				);
 			}
 		}
 
 		return $patchedSiteLinks;
+	}
+
+	private function getBadgesFromSiteLinkData( array $siteLinkData ) {
+		if ( !array_key_exists( 'badges', $siteLinkData ) ) {
+			return null;
+		}
+
+		return array_map(
+			function( $idSerialization ) {
+				return new ItemId( $idSerialization );
+			},
+			$siteLinkData['badges']
+		);
 	}
 
 	private function getSiteLinksInDiffFormat( SiteLinkList $siteLinks ) {

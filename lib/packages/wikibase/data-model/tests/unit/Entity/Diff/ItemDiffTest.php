@@ -231,11 +231,20 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		$argLists['no ops'] = array( array(), true );
 
-		$argLists['label changed'] = array( array( 'label' => new Diff( array( 'x' => new DiffOpAdd( 'foo' ) ) ) ), false );
+		$argLists['label changed'] = array(
+			array( 'label' => new Diff( array( 'x' => new DiffOpAdd( 'foo' ) ) ) ),
+			false
+		);
 
-		$argLists['empty links diff'] = array( array( 'links' => new Diff( array(), true ) ), true );
+		$argLists['empty links diff'] = array(
+			array( 'links' => new Diff( array(), true ) ),
+			true
+		);
 
-		$argLists['non-empty links diff'] = array( array( 'links' => new Diff( array( new DiffOpAdd( 'foo' ) ), true ) ), false );
+		$argLists['non-empty links diff'] = array(
+			array( 'links' => new Diff( array( new DiffOpAdd( 'foo' ) ), true ) ),
+			false
+		);
 
 		return $argLists;
 	}
@@ -259,7 +268,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 	 */
 	public function testAtomicSubstructureWorkaround() {
 		$oldErrorLevel = error_reporting( E_USER_ERROR );
-		
+
 		$atomicListDiff = new DiffOpChange(
 			array( 'a' => 'A', 'b' => 'B' ),
 			array( 'b' => 'B', 'a' => 'A' )
@@ -278,7 +287,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 		$this->assertInstanceOf( 'Diff\Diff', $diff->getDescriptionsDiff() );
 		$this->assertInstanceOf( 'Diff\Diff', $diff->getClaimsDiff() );
 		$this->assertInstanceOf( 'Diff\Diff', $diff->getSiteLinkDiff() );
-		
+
 		error_reporting( $oldErrorLevel );
 	}
 

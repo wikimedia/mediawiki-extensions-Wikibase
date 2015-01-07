@@ -25,6 +25,9 @@
 		"diff/diff": "~1.0",
 		"data-values/data-values": "~0.1|~1.0"
 	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "~2.1"
+	},
 	"autoload": {
 		"files" : [
 			"WikibaseDataModel.php"
@@ -37,5 +40,18 @@
 		"branch-alias": {
 			"dev-master": "2.5.x-dev"
 		}
+	},
+	"scripts": {
+		"test": [
+			"composer validate --no-interaction",
+			"phpunit"
+		],
+		"cs": [
+			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"
+		],
+		"ci": [
+			"composer test",
+			"composer cs"
+		]
 	}
 }

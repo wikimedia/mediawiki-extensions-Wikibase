@@ -44,7 +44,9 @@ class PropertyValueSnakTest extends SnakObjectTest {
 		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
 		$hash = $snak->getHash();
 
+		// @codingStandardsIgnoreStart
 		$expected = sha1( 'C:41:"Wikibase\DataModel\Snak\PropertyValueSnak":53:{a:2:{i:0;i:1;i:1;C:22:"DataValues\StringValue":1:{a}}}' );
+		// @codingStandardsIgnoreEnd
 		$this->assertSame( $expected, $hash );
 	}
 

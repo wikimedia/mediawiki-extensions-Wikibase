@@ -125,7 +125,7 @@ class SnakList extends HashArray implements Snaks {
 		$orderedProperties = array_unique( array_merge( $order, array_keys( $snaksByProperty ) ) );
 
 		foreach( $orderedProperties as $property ){
-			$snaks = $snaksByProperty[ $property ];
+			$snaks = $snaksByProperty[$property];
 			$this->moveSnaksToBottom( $snaks );
 		}
 	}
