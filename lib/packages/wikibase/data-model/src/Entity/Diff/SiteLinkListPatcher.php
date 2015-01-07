@@ -46,7 +46,7 @@ class SiteLinkListPatcher {
 				$patchedSiteLinks->addNewSiteLink(
 					$siteId,
 					$siteLinkData['name'],
-					$this->getBadgesFromDiffArray( $siteLinkData )
+					$this->getBadgesFromSiteLinkData( $siteLinkData )
 				);
 			}
 		}
@@ -54,7 +54,7 @@ class SiteLinkListPatcher {
 		return $patchedSiteLinks;
 	}
 
-	private function getBadgesFromDiffArray( array $siteLinkData ) {
+	private function getBadgesFromSiteLinkData( array $siteLinkData ) {
 		if ( !array_key_exists( 'badges', $siteLinkData ) ) {
 			return null;
 		}
