@@ -115,7 +115,7 @@ class ClaimsView {
 		$propertyHtml = '';
 
 		$propertyId = $claims[0]->getMainSnak()->getPropertyId();
-		$propertyLink = $this->propertyIdFormatter->format( $propertyId );
+		$propertyLink = $this->propertyIdFormatter->formatEntityId( $propertyId );
 
 		// TODO: add link to SpecialPage
 		$htmlForEditSection = $this->sectionEditLinkGenerator->getHtmlForEditSection(

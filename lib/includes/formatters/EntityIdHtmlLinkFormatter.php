@@ -41,7 +41,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 *
 	 * @return string
 	 */
-	protected function formatEntityId( EntityId $entityId ) {
+	public function formatEntityId( EntityId $entityId ) {
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );
 
 		$attributes = array(

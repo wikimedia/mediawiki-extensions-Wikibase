@@ -144,12 +144,10 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	 * @return EntityIdFormatter
 	 */
 	protected function getPropertyIdFormatterMock() {
-		$lookup = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
-			->disableOriginalConstructor()
-			->getMock();
+		$lookup = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
 
 		$lookup->expects( $this->any() )
-			->method( 'format' )
+			->method( 'formatEntityId' )
 			->will( $this->returnCallback( array( $this, 'getLinkForId' ) ) );
 
 		return $lookup;

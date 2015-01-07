@@ -38,7 +38,7 @@ class EntityIdTitleFormatter extends PlainEntityIdFormatter {
 	 *
 	 * @return string
 	 */
-	protected function formatEntityId( EntityId $entityId ) {
+	public function formatEntityId( EntityId $entityId ) {
 		$title = $this->titleLookup->getTitleForId( $entityId );
 		return $title->getFullText();
 	}

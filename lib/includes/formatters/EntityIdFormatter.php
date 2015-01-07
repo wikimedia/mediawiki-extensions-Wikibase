@@ -20,6 +20,6 @@ interface EntityIdFormatter {
 	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	public function format( $value );
+	public function formatEntityId( EntityId $value );
 
 }

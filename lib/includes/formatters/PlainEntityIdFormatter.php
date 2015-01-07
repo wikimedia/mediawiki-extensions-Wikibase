@@ -45,7 +45,7 @@ class PlainEntityIdFormatter extends ValueFormatterBase implements EntityIdForma
 	 *
 	 * @return string
 	 */
-	protected function formatEntityId( EntityId $entityId ) {
+	public function formatEntityId( EntityId $entityId ) {
 		return $entityId->getSerialization();
 	}
 

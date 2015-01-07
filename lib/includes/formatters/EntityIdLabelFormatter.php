@@ -81,7 +81,7 @@ class EntityIdLabelFormatter extends PlainEntityIdFormatter {
 	 * @throws FormattingException
 	 * @return string
 	 */
-	protected function formatEntityId( EntityId $entityId ) {
+	public function formatEntityId( EntityId $entityId ) {
 		$label = null;
 
 		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {

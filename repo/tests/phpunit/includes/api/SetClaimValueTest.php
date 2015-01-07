@@ -9,7 +9,6 @@ use FormatJson;
 use Revision;
 use UsageException;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
@@ -20,6 +19,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
@@ -45,7 +45,7 @@ use WikiPage;
 class SetClaimValueTest extends WikibaseApiTestCase {
 
 	/**
-	 * @var ValueFormatter
+	 * @var EntityIdFormatter
 	 */
 	private $entityIdFormatter = null;
 
@@ -209,7 +209,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 	private function getExpectedSummary( Claim $oldClaim, DataValue $value = null ) {
 		$oldSnak = $oldClaim->getMainSnak();
-		$property = $this->getEntityIdFormatter()->format( $oldSnak->getPropertyId() );
+		$property = $this->getEntityIdFormatter()->formatEntityId( $oldSnak->getPropertyId() );
 
 		//NOTE: new snak is always a PropertyValueSnak
 
@@ -225,7 +225,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 * Returns an EntityIdFormatter like the one that should be used internally for generating
 	 * summaries.
 	 *
-	 * @return ValueFormatter
+	 * @return EntityIdFormatter
 	 */
 	protected function getEntityIdFormatter() {
 		if ( !$this->entityIdFormatter ) {
