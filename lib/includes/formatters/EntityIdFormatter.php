@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib;
 
-use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -17,9 +16,8 @@ interface EntityIdFormatter {
 	 *
 	 * @param EntityId $value
 	 *
-	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	public function format( $value );
+	public function formatEntityId( EntityId $value );
 
 }

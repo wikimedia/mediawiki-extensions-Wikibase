@@ -3,19 +3,19 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
-use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * EscapingValueFormatter wraps another ValueFormatter and
+ * EscapingEntityIdFormatter wraps another EntityIdFormatter and
  * applies a transformation (escaping) to that formatter's output.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class EscapingValueFormatter implements ValueFormatter {
+class EscapingEntityIdFormatter implements EntityIdFormatter {
 
 	/**
-	 * @var ValueFormatter
+	 * @var EntityIdFormatter
 	 */
 	private $formatter;
 
@@ -25,11 +25,11 @@ class EscapingValueFormatter implements ValueFormatter {
 	private $escapeCallback;
 
 	/**
-	 * @param ValueFormatter $formatter
+	 * @param EntityIdFormatter $formatter
 	 * @param callable $escapeCallback A callable taking plain text and returning escaped HTML
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( ValueFormatter $formatter, $escapeCallback ) {
+	public function __construct( EntityIdFormatter $formatter, $escapeCallback ) {
 		if ( !is_callable( $escapeCallback ) ) {
 			throw new InvalidArgumentException( '$escapeCallback must be callable' );
 		}
@@ -39,16 +39,13 @@ class EscapingValueFormatter implements ValueFormatter {
 	}
 
 	/**
-	 * Formats a value.
+	 * Format an EntityId
 	 *
-	 * @since 0.1
-	 *
-	 * @param mixed $value The value to format
-	 *
-	 * @return mixed
+	 * @param EntityId $value
+	 * @return string
 	 */
-	public function format( $value ) {
-		$text = $this->formatter->format( $value );
+	public function formatEntityId( EntityId $value ) {
+		$text = $this->formatter->formatEntityId( $value );
 		$escaped = call_user_func( $this->escapeCallback, $text );
 		return $escaped;
 	}

@@ -61,7 +61,6 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	public function getEntityIdFormater( FormatterOptions $options ) {
 		$labelLookup = $this->labelLookupFactory->getLabelLookup( $options );
 		return new EntityIdHtmlLinkFormatter(
-			$options,
 			$labelLookup,
 			$this->titleLookup,
 			$this->languageNameLookup

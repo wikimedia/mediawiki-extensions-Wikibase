@@ -125,7 +125,7 @@ class StatementGroupListView {
 
 		return $this->templateFactory->render(
 			'wikibase-statementgroupview',
-			$this->propertyIdFormatter->format( $propertyId ),
+			$this->propertyIdFormatter->formatEntityId( $propertyId ),
 			$this->getHtmlForStatementListView( $claims ),
 			$propertyId->getSerialization()
 		);
