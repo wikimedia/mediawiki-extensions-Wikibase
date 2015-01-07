@@ -3,6 +3,8 @@
 namespace Wikibase\Test\HashArray;
 
 use Wikibase\DataModel\HashArray;
+use Wikibase\Test\DataModel\Fixtures\HashArrayElement;
+use Wikibase\Test\DataModel\Fixtures\MutableHashable;
 
 /**
  * @covers Wikibase\DataModel\HashArray
@@ -26,7 +28,7 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 	}
 
 	public function getInstanceClass() {
-		return 'Wikibase\Test\HashArray\HashArrayWithoutDuplicates';
+		return 'Wikibase\Test\DataModel\Fixtures\HashArrayWithoutDuplicates';
 	}
 
 	public function elementInstancesProvider() {
@@ -131,19 +133,6 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 		$array->rebuildIndices();
 
 		$this->assertTrue( $array->indicesAreUpToDate() );
-	}
-
-}
-
-class HashArrayWithoutDuplicates extends HashArray {
-
-	public function getObjectType() {
-		return '\Hashable';
-	}
-
-	public function __construct( $input = null ) {
-		$this->acceptDuplicates = false;
-		parent::__construct( $input );
 	}
 
 }

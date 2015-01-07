@@ -4,6 +4,8 @@ namespace Wikibase\Test\HashArray;
 
 use Hashable;
 use Wikibase\DataModel\HashArray;
+use Wikibase\Test\DataModel\Fixtures\HashArrayElement;
+use Wikibase\Test\DataModel\Fixtures\MutableHashable;
 
 /**
  * @covers Wikibase\DataModel\HashArray
@@ -27,7 +29,7 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 	}
 
 	public function getInstanceClass() {
-		return 'Wikibase\Test\HashArray\HashArrayWithDuplicates';
+		return 'Wikibase\Test\DataModel\Fixtures\HashArrayWithDuplicates';
 	}
 
 	public function elementInstancesProvider() {
@@ -140,15 +142,3 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 
 }
 
-class HashArrayWithDuplicates extends HashArray {
-
-	public function getObjectType() {
-		return '\Hashable';
-	}
-
-	public function __construct( $input = null ) {
-		$this->acceptDuplicates = true;
-		parent::__construct( $input );
-	}
-
-}

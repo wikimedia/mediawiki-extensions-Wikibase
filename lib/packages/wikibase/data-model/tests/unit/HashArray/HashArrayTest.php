@@ -119,12 +119,3 @@ abstract class HashArrayTest extends \PHPUnit_Framework_TestCase {
 
 }
 
-class MutableHashable implements Hashable {
-
-	public $text = '';
-
-	public function getHash() {
-		return sha1( __CLASS__ . $this->text );
-	}
-
-}
