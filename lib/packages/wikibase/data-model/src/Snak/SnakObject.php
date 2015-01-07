@@ -89,7 +89,8 @@ abstract class SnakObject implements Snak {
 			return true;
 		}
 
-		return $target instanceof self
+		return is_object( $target )
+			&& get_called_class() === get_class( $target )
 			&& $this->getHash() === $target->getHash();
 	}
 

@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Snak;
 
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 
 /**
@@ -26,6 +27,14 @@ class PropertySomeValueSnakTest extends SnakObjectTest {
 
 	public function getClass() {
 		return 'Wikibase\DataModel\Snak\PropertySomeValueSnak';
+	}
+
+	public function testEquals_givenOtherSnakImplementation_isNotEqual() {
+		$propertyId = new PropertyId( 'P1' );
+		$someValue = new PropertySomeValueSnak( $propertyId );
+		$noValue = new PropertyNoValueSnak( $propertyId );
+
+		$this->assertFalse( $someValue->equals( $noValue ) );
 	}
 
 	/**
