@@ -231,11 +231,20 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		$argLists['no ops'] = array( array(), true );
 
-		$argLists['label changed'] = array( array( 'label' => new Diff( array( 'x' => new DiffOpAdd( 'foo' ) ) ) ), false );
+		$argLists['label changed'] = array(
+			array( 'label' => new Diff( array( 'x' => new DiffOpAdd( 'foo' ) ) ) ),
+			false
+		);
 
-		$argLists['empty links diff'] = array( array( 'links' => new Diff( array(), true ) ), true );
+		$argLists['empty links diff'] = array(
+			array( 'links' => new Diff( array(), true ) ),
+			true
+		);
 
-		$argLists['non-empty links diff'] = array( array( 'links' => new Diff( array( new DiffOpAdd( 'foo' ) ), true ) ), false );
+		$argLists['non-empty links diff'] = array(
+			array( 'links' => new Diff( array( new DiffOpAdd( 'foo' ) ), true ) ),
+			false
+		);
 
 		return $argLists;
 	}

@@ -39,7 +39,9 @@ class ByPropertyIdGrouper {
 
 		foreach ( $propertyIdProviders as $propertyIdProvider ) {
 			if ( !( $propertyIdProvider instanceof PropertyIdProvider ) ) {
-				throw new InvalidArgumentException( 'Every element in $propertyIdProviders must be an instance of PropertyIdProvider' );
+				throw new InvalidArgumentException(
+					'Every element in $propertyIdProviders must be an instance of PropertyIdProvider'
+				);
 			}
 		}
 	}

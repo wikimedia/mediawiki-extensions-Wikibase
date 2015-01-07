@@ -202,7 +202,8 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param string[]|null $languageCodes Note that an empty array gives descriptions for no languages while a null pointer gives all
+	 * @param string[]|null $languageCodes Note that an empty array gives
+	 * descriptions for no languages while a null pointer gives all
 	 *
 	 * @return string[] Found descriptions in given languages
 	 */
@@ -215,7 +216,8 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param string[]|null $languageCodes Note that an empty array gives labels for no languages while a null pointer gives all
+	 * @param string[]|null $languageCodes Note that an empty array gives
+	 * labels for no languages while a null pointer gives all
 	 *
 	 * @return string[] Found labels in given languages
 	 */

@@ -82,7 +82,11 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 
 		$array->removeDuplicates();
 
-		$this->assertEquals( $count - $duplicateCount, count( $array ), 'Count should decrease by the number of duplicates after removing duplicates' );
+		$this->assertEquals(
+			$count - $duplicateCount,
+			count( $array ),
+			'Count should decrease by the number of duplicates after removing duplicates'
+		);
 	}
 
 	/**
@@ -107,7 +111,10 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 
 		$array->addElement( $element );
 
-		$this->assertFalse( $newHash === $array->getHash(), 'Hash should not be the same after adding an existing element again' );
+		$this->assertFalse(
+			$newHash === $array->getHash(),
+			'Hash should not be the same after adding an existing element again'
+		);
 	}
 
 	/**
