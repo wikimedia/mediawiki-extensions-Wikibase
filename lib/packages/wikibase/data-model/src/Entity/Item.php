@@ -65,7 +65,7 @@ class Item extends Entity implements StatementListProvider {
 		if ( $id === null || $id instanceof ItemId ) {
 			$this->id = $id;
 		}
-		else if ( is_integer( $id ) ) {
+		elseif ( is_integer( $id ) ) {
 			$this->id = ItemId::newFromNumber( $id );
 		}
 		else {

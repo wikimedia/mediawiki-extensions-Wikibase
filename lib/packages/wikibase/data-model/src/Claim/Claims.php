@@ -94,7 +94,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	public function addClaim( Claim $claim, $index = null ) {
 		if ( !is_null( $index ) && !is_integer( $index ) ) {
 			throw new InvalidArgumentException( '$index must be an integer or null; got ' . gettype( $index ) );
-		} else if ( is_null( $index ) || $index >= count( $this ) ) {
+		} elseif ( is_null( $index ) || $index >= count( $this ) ) {
 			$this[] = $claim;
 		} else {
 			$this->insertClaimAtIndex( $claim, $index );
