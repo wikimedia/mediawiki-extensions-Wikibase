@@ -144,7 +144,7 @@ $.widget( 'ui.suggester', {
 	 * the actual search request or by storing a boolean "true" while the actual search request is
 	 * in progress.
 	 * @property {number|boolean} [_searching=false]
-	 * @private
+	 * @protected
 	 */
 	_searching: false,
 
