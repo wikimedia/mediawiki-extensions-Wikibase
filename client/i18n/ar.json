@@ -27,7 +27,7 @@
 	"wikibase-comment-sitelink-add": "وصلة اللغة المُضافة:$1",
 	"wikibase-comment-sitelink-change": "تم تعديل وصلة اللغة من $1 إلى $2",
 	"wikibase-comment-sitelink-remove": "وصلة اللغة المُلغاة:$1",
-	"wikibase-comment-multi": "$1 {{PLURAL:$1|تعديل|تعديلات}}",
+	"wikibase-comment-multi": "{{PLURAL:$1|تعديل|تعديلين|$1 تعديلات|$1 تعديلاً|$1 تعديل}}",
 	"wikibase-dataitem": "عنصر بيانات",
 	"wikibase-editlinks": "عدل الوصلات",
 	"wikibase-editlinkstitle": "تحرير الروابط ما بين اللغات",
@@ -67,5 +67,5 @@
 	"wikibase-pageinfo-entity-id-none": "لا شيء",
 	"wikibase-otherprojects": "مشاريع أخرى",
 	"wikibase-otherprojects-beta-message": "المشاريع الأخرى في الشريط الجانبي",
-	"wikibase-otherprojects-beta-description": "إضافة قسم \"{{int:wikibase-otherprojects}}\" إلى الشريط الجانبي لعرض وصلات لمشاريع ويكيميديا الأخرى استنادا إلى معطيات {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "يضيف قسم \"{{int:wikibase-otherprojects}}\" إلى الشريط الجانبي لعرض وصلات لمشاريع ويكيميديا الأخرى استنادا إلى معطيات {{WBREPONAME}}."
 }
