@@ -40,6 +40,7 @@
     </rule>
 
     <rule ref="Generic.NamingConventions" />
+    <!-- TODO: create variation of this sniff that allows underscores in test methods -->
     <rule ref="Generic.NamingConventions.CamelCapsFunctionName.ScopeNotCamelCaps">
         <severity>0</severity>
     </rule>
