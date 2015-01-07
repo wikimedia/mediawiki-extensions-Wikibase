@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use ValueFormatters\FormatterOptions;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -20,11 +20,10 @@ use Wikibase\Lib\PlainEntityIdFormatter;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PlainEntityIdFormatterTest extends \PHPUnit_Framework_TestCase {
+class PlainEntityIdFormatterTest extends PHPUnit_Framework_TestCase {
 
 	protected function newEntityIdFormatter() {
-		$options = new FormatterOptions();
-		return new PlainEntityIdFormatter( $options );
+		return new PlainEntityIdFormatter();
 	}
 
 	/**
@@ -53,7 +52,7 @@ class PlainEntityIdFormatterTest extends \PHPUnit_Framework_TestCase {
 	public function testParseWithValidArguments( EntityId $entityId, $expectedString ) {
 		$formatter = $this->newEntityIdFormatter();
 
-		$formattingResult = $formatter->format( $entityId );
+		$formattingResult = $formatter->formatEntityId( $entityId );
 
 		$this->assertInternalType( 'string', $formattingResult );
 		$this->assertEquals( $expectedString, $formattingResult );

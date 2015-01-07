@@ -12,6 +12,7 @@ use RuntimeException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 
 /**

@@ -172,10 +172,6 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		// @fixme it is confusing to have so many $langCodes here, coming from
 		// different places and maybe not necessary to be this way.
 
-		$formatterOptions = new FormatterOptions( array(
-			ValueFormatter::OPT_LANG => $this->getLanguage()->getCode()
-		) );
-
 		// @fixme inject this!
 		$labelLookup = new LanguageLabelLookup(
 			new EntityRetrievingTermLookup( $this->entityLookup ),
@@ -183,7 +179,6 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		);
 
 		$linkFormatter = new EntityIdHtmlLinkFormatter(
-			$formatterOptions,
 			$labelLookup,
 			$this->entityTitleLookup,
 			$this->languageNameLookup

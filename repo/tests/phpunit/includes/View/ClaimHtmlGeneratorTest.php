@@ -53,12 +53,10 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	 * @return EntityIdFormatter
 	 */
 	protected function getPropertyIdFormatterMock() {
-		$lookup = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
-			->disableOriginalConstructor()
-			->getMock();
+		$lookup = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
 
 		$lookup->expects( $this->any() )
-			->method( 'format' )
+			->method( 'formatEntityId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				$name = $id->getEntityType() . ':' . $id->getSerialization();
 				$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );

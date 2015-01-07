@@ -29,7 +29,7 @@ class ItemDisambiguationTest extends \PHPUnit_Framework_TestCase {
 		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
 
 		$entityIdFormatter->expects( $this->any() )
-			->method( 'format' )
+			->method( 'formatEntityId' )
 			->will( $this->returnCallback( function( ItemId $itemId ) {
 				return $itemId->getSerialization();
 			} ) );

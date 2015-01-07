@@ -35,6 +35,7 @@ use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\DispatchingValueFormatter;
 use Wikibase\Lib\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Lib\EntityIdLinkFormatter;
+use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\FormatterLabelLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
@@ -638,8 +639,7 @@ class WikibaseRepo {
 	protected function newSummaryFormatter() {
 		global $wgContLang;
 
-		$options = new FormatterOptions();
-		$idFormatter = new EntityIdLinkFormatter( $options, $this->getEntityContentFactory() );
+		$idFormatter = new EntityIdLinkFormatter( $this->getEntityContentFactory() );
 
 		$valueFormatterBuilders = $this->getValueFormatterBuilders();
 
@@ -652,7 +652,7 @@ class WikibaseRepo {
 		$valueFormatterBuilders->setValueFormatter(
 			SnakFormatter::FORMAT_PLAIN,
 			'VT:wikibase-entityid',
-			$idFormatter
+			new EntityIdValueFormatter( $idFormatter )
 		);
 
 		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
@@ -662,6 +662,7 @@ class WikibaseRepo {
 			$valueFormatterBuilders->getValueFormatterBuildersForFormats()
 		);
 
+		$options = new FormatterOptions();
 		$snakFormatter = $snakFormatterFactory->getSnakFormatter(
 			SnakFormatter::FORMAT_PLAIN,
 			$options

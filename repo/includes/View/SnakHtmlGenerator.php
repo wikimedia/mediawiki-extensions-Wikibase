@@ -98,7 +98,7 @@ class SnakHtmlGenerator {
 	 */
 	private function makePropertyLink( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
-		$propertyLink = $this->propertyIdFormatter->format( $propertyId );
+		$propertyLink = $this->propertyIdFormatter->formatEntityId( $propertyId );
 
 		return $propertyLink;
 	}
