@@ -93,7 +93,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {wikibase.datamodel.Claim} claim
-	 * @param {number} index
+	 * @param {number} [index]
 	 * @return {jQuery.Promise}
 	 *         Resolved parameters:
 	 *         - {wikibase.datamodel.Claim} The saved claim
@@ -129,7 +129,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {wikibase.datamodel.Statement} statement
-	 * @param {number} index
+	 * @param {number} [index]
 	 * @return {Object} jQuery.Promise
 	 *         Resolved parameters:
 	 *         - {wikibase.datamodel.Statement} The saved statement
