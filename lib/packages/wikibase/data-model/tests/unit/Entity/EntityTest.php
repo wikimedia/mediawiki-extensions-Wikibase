@@ -252,12 +252,12 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testSetAllAliases( array $aliasGroups ) {
 		$entity = $this->getNewEmpty();
-		$entity->addAliases( 'zh' , array( 'qwertyuiop123' , '321poiuytrewq' ) );
+		$entity->addAliases( 'zh', array( 'qwertyuiop123', '321poiuytrewq' ) );
 
 		$aliasesToSet = array();
 		foreach ( $aliasGroups as $langCode => $aliasGroup ) {
 			foreach ( $aliasGroup as $aliases ) {
-				$aliasesToSet[$langCode]= $aliases;
+				$aliasesToSet[$langCode] = $aliases;
 			}
 		}
 
@@ -281,7 +281,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetAliases() {
 		$entity = $this->getNewEmpty();
-		$aliases =  array( 'a', 'b' );
+		$aliases = array( 'a', 'b' );
 
 		$entity->getFingerprint()->setAliasGroup( 'en', $aliases );
 
@@ -321,7 +321,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 		foreach ( $aliasesLists as $langCode => $aliasesList ) {
 			$aliases = array_shift( $aliasesList );
-			$removedAliases =  array_shift( $aliasesList );
+			$removedAliases = array_shift( $aliasesList );
 
 			$entity->setAliases( $langCode, $aliases );
 			$entity->removeAliases( $langCode, $removedAliases );
@@ -544,15 +544,8 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 			// check the first reference
 			if ( $claim instanceof Statement ) {
-				$references = $claim->getReferences();
-
-				/* @var Reference $ref */
-				foreach ( $references as $ref ) {
-					$refSnaks = $ref->getSnaks();
-
-					foreach ( $refSnaks as $snak ) {
-						$this->assertContains( $snak, $snaks, "reference snak" );
-					}
+				foreach ( $claim->getAllSnaks() as $snak ) {
+					$this->assertContains( $snak, $snaks, "statement snak" );
 				}
 			}
 		}
