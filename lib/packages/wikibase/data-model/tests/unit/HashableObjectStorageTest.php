@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\HashableObjectStorage;
+use Wikibase\Test\DataModel\Fixtures\HashableObject;
 
 /**
  * @covers Wikibase\DataModel\HashableObjectStorage
@@ -130,16 +131,4 @@ class HashableObjectStorageTest extends \PHPUnit_Framework_TestCase {
 
 }
 
-class HashableObject implements \Hashable {
 
-	protected $var;
-
-	public function __construct( $var ) {
-		$this->var = $var;
-	}
-
-	public function getHash() {
-		return sha1( $this->var );
-	}
-
-}
