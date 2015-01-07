@@ -56,7 +56,9 @@ class SiteLink implements Comparable {
 		} elseif ( is_array( $badges ) ) {
 			$badges = new ItemIdSet( $badges );
 		} elseif ( !( $badges instanceof ItemIdSet ) ) {
-			throw new InvalidArgumentException( '$badges must be an instance of ItemIdSet, an array of instances of ItemId, or null' );
+			throw new InvalidArgumentException(
+				'$badges must be an instance of ItemIdSet, an array of instances of ItemId, or null'
+			);
 		}
 
 		$this->badges = $badges;
