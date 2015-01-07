@@ -537,7 +537,7 @@ $.widget( 'ui.tagadata', {
 
 		if(
 			!$tag.hasClass( 'tagadata-choice' )
-			|| !$.contains( this._$tagList.get( 0 ), $tag.get( 0 ) )
+			|| !this._$tagList[0].contains( $tag[0] )
 		) {
 			return false;
 		}
