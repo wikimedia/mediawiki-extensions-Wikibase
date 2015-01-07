@@ -40,6 +40,9 @@
     </rule>
 
     <rule ref="Generic.NamingConventions" />
+    <rule ref="Generic.NamingConventions.CamelCapsFunctionName.ScopeNotCamelCaps">
+        <severity>0</severity>
+    </rule>
 
     <rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />
     <rule ref="Generic.PHP.DeprecatedFunctions" />
@@ -53,6 +56,9 @@
     <rule ref="Generic.WhiteSpace.DisallowSpaceIndent" />
 
     <rule ref="PSR1" />
+    <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+        <severity>0</severity>
+    </rule>
 
     <rule ref="PSR2.Classes.PropertyDeclaration" />
     <rule ref="PSR2.ControlStructures.ElseIfDeclaration" />
