@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee703fc5_3c0d4742",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-01-08T19:21:08Z",
+      "side": 1,
+      "message": "here is where it is assumed. there are other places where this.options.language[0] is used to get the label of the item (e.g. _initLabel above, so i prefer not to remove it)",
+      "revId": "dcd43c6b5d5b5b92e7eeee0b08d0532d69d389d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
