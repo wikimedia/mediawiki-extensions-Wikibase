@@ -4,11 +4,58 @@
  */
 .wikibase-entitytermsview {
 	float: left;
+	margin-bottom: 1em;
+	position: relative;
 	width: 100%;
 }
 
-.wikibase-entitytermsview h2 {
-	width: auto;
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-label .wikibase-entitytermsview-heading-label-id {
+	color: grey;
+	font-size: 0.6em;
+	margin-left: 0.4em;
+}
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-label .wikibase-entitytermsview-heading-label-id:before {
+	/* Prevent id being hidden in ellipsis on very long labels: */
+	content: ' ';
+}
+
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases ul {
+	color: grey;
+	margin: 0;
+	word-wrap: break-word;
+}
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li {
+	display: inline;
+}
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li::before,
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li:before {
+	content: '|';
+	padding: 0 0.4em;
+}
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li:first-child:before {
+	content: '';
+	padding: 0;
+}
+
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-label {
+	max-width: 25em;
+}
+
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-label,
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-description {
+	word-wrap: break-word;
+}
+
+.wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview {
+	margin-top: 2em;
+}
+.wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview-collapsed {
+	display: none;
+}
+
+
+.wikibase-entitytermsview > .wikibase-toolbar-container {
+	line-height: 3;
 }
 
 .wikibase-entitytermsview .wikibase-toolbar-container .wikibase-toolbar-container  {
