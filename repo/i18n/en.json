@@ -125,6 +125,7 @@
 	"wikibase-itembytitle-lookup-page": "Page:",
 	"wikibase-itembytitle-submit": "Search",
 	"wikibase-itembytitle-create": "You can also [{{fullurl:Special:NewItem|site=$1&page=$2}} create an item].",
+	"wikibase-itembytitle-summary": "Special:ItemByTitle is used to find the corresponding item for a given page on a connected site. <br /> The left field, \"Site:\", is where you enter the language and site code. <br /> For the right field, \"Page:\", you must put in the exact title of the page as it appears on the connected site.",
 	"special-gotolinkedpage": "Go to linked page",
 	"wikibase-gotolinkedpage-lookup-fieldset": "Go to linked page by site and item",
 	"wikibase-gotolinkedpage-lookup-site": "Site:",
