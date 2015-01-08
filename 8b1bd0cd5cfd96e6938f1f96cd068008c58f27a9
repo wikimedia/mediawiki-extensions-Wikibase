@@ -16,6 +16,24 @@
       "revId": "8b1bd0cd5cfd96e6938f1f96cd068008c58f27a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_7b218999",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-08T12:01:20Z",
+      "side": 1,
+      "message": "(link: https://www.wikidata.org/wiki/MediaWiki:Gadget-AuthorityControl.js)\n\nI think it would be better to go through all :wikibase-referenceview and get the value from them. Wouldn\u0027t even need to be in the statementview loop.",
+      "parentUuid": "ee703fc5_30625007",
+      "revId": "8b1bd0cd5cfd96e6938f1f96cd068008c58f27a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
