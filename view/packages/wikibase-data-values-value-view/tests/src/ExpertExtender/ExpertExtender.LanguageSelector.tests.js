@@ -17,16 +17,11 @@
 		);
 	}
 
-	testExpertExtenderExtension.constructor(
+	testExpertExtenderExtension.all(
 		ExpertExtender.LanguageSelector,
-		new ExpertExtender.LanguageSelector( new util.MessageProvider(), function() { } )
-	);
-	testExpertExtenderExtension.destroy(
-		ExpertExtender.LanguageSelector,
-		new ExpertExtender.LanguageSelector( new util.MessageProvider(), function() { } )
-	);
-	testExpertExtenderExtension.init(
-		new ExpertExtender.LanguageSelector( new util.MessageProvider(), function() { } )
+		function() {
+			return new ExpertExtender.LanguageSelector( new util.MessageProvider(), function() { } );
+		}
 	);
 
 	QUnit.test( 'value does not change if upstream value changes', function( assert ) {

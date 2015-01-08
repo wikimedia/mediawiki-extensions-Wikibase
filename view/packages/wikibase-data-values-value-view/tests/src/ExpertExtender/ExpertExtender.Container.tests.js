@@ -14,16 +14,11 @@
 		} );
 	}
 
-	testExpertExtenderExtension.constructor(
+	testExpertExtenderExtension.all(
 		ExpertExtender.Container,
-		new ExpertExtender.Container( $( '<div />' ), {} )
-	);
-	testExpertExtenderExtension.destroy(
-		ExpertExtender.Container,
-		new ExpertExtender.Container( $( '<div />' ), {} )
-	);
-	testExpertExtenderExtension.init(
-		new ExpertExtender.Container( $( '<div />' ), {} )
+		function() {
+			return new ExpertExtender.Container( $( '<div />' ), {} );
+		}
 	);
 
 	QUnit.test( 'init calls child', function( assert ) {

@@ -14,16 +14,11 @@
 		} );
 	}
 
-	testExpertExtenderExtension.constructor(
+	testExpertExtenderExtension.all(
 		ExpertExtender.Toggler,
-		new ExpertExtender.Toggler( new util.MessageProvider(), $( '<div />' ) )
-	);
-	testExpertExtenderExtension.destroy(
-		ExpertExtender.Toggler,
-		new ExpertExtender.Toggler( new util.MessageProvider(), $( '<div />' ) )
-	);
-	testExpertExtenderExtension.init(
-		new ExpertExtender.Toggler( new util.MessageProvider(), $( '<div />' ) )
+		function() {
+			return new ExpertExtender.Toggler( new util.MessageProvider(), $( '<div />' ) );
+		}
 	);
 
 } )(
