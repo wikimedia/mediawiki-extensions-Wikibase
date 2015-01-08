@@ -114,7 +114,7 @@ this.config = ( function() {
 			'values/UnknownValue': [
 				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
 			],
-			'values/UnUnserializableValue': [
+			'values/UnDeserializableValue': [
 				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
 			],
 
@@ -201,7 +201,7 @@ this.config = ( function() {
 				'values/TimeValue',
 				'values/QuantityValue',
 				'values/UnknownValue',
-				'values/UnUnserializableValue'
+				'values/UnDeserializableValue'
 			],
 
 			// Shim test modules that external components depend on:
@@ -246,7 +246,7 @@ this.config = ( function() {
 			'tests/src/values/TimeValue.tests',
 			'tests/src/values/QuantityValue.tests',
 			'tests/src/values/UnknownValue.tests',
-			'tests/src/values/UnUnserializableValue.tests',
+			'tests/src/values/UnDeserializableValue.tests',
 
 			'tests/src/valueFormatters/valueFormatters.tests',
 			'tests/src/valueFormatters/ValueFormatterStore.tests',

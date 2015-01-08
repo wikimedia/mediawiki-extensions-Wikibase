@@ -15,7 +15,11 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
-### 0.6.2 (dev)
+### 0.7.0 (dev)
+
+#### Breaking changes
+* Renamed `dataValues.UnUnserializableValue` to `dataValues.UnDeserializableValue`.
+* Changed constructor parameter order of `dataValues.UnDeserializableValue` (formerly `dataValues.UnUnserializableValue`).
 
 #### Enhancements
 * Consolidated code structure, updated and added code documentation to allow generating a proper documentation using JSDuck.

@@ -7,7 +7,7 @@ var PARENT = dv.DataValue;
  * Constructor for creating a data value representing a value which could not have been unserialized
  * for some reason. Holds the serialized value which can not be unserialized as well as an error
  * object describing the reason why the value can not be unserialized properly.
- * @class dataValues.UnUnserializableValue
+ * @class dataValues.UnDeserializableValue
  * @extends dataValues.DataValue
  * @since 0.1
  * @licence GNU GPL v2+
@@ -15,16 +15,16 @@ var PARENT = dv.DataValue;
  *
  * @constructor
  *
+ * @param {string} ofType The data value type the structure should have been unserialized to.
  * @param {Object} unUnserializableStructure Plain object assumingly representing some data value
  *        but the responsible unserializer was not able to unserialize it.
- * @param {string} ofType The data value type the structure should have been unserialized to.
  * @param {Error} unserializeError The error thrown during the attempt to unserialize the given
  *        structure.
  */
-var SELF = dv.UnUnserializableValue = util.inherit(
-	'DvUnUnserializableValue',
+var SELF = dv.UnDeserializableValue = util.inherit(
+	'DvUnDeserializableValue',
 	PARENT,
-	function( unUnserializableStructure, ofType, unserializeError ) {
+	function( ofType, unUnserializableStructure, unserializeError ) {
 		if( !$.isPlainObject( unUnserializableStructure ) ) {
 			throw new Error( 'The un-unserializable structure has to be a plain object' );
 		}
@@ -69,7 +69,7 @@ var SELF = dv.UnUnserializableValue = util.inherit(
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {dataValues.UnUnserializableValue}
+	 * @return {dataValues.UnDeserializableValue}
 	 */
 	getValue: function() {
 		return this;
