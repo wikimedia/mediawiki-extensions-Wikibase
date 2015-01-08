@@ -204,6 +204,8 @@
 	"wikibase-item-summary-wbsetclaim-update-references": "{{PLURAL:$4|Izmenjena referenca|Izmenjeno $4 referenci}} na {{PLURAL:$3|tvrdnju|tvrdnji}}",
 	"wikibase-item-summary-wbsetclaim-update-rank": "Promenjen rang {{PLURAL:$3|tvrdnji|tvrdnjama}}",
 	"wikibase-item-summary-clientsitelink-update": "Stranica premeštena sa [$3] na [$4]",
+	"wikibase-item-summary-wbmergeitems-from": "Spojena stavka iz „$3“",
+	"wikibase-item-summary-wbmergeitems-to": "Spojena stavka u „$3“",
 	"wikibase-property-summary-wbcreate-new": "Napravljeno novo svojstvo",
 	"wikibase-property-summary-wbeditentity-create": "Napravljeno novo svojstvo",
 	"wikibase-property-summary-wbeditentity-update": "Izmenjeno svojstvo",

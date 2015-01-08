@@ -48,7 +48,7 @@
 	"wikibase-parse-error-entity-id": "实体ID格式不正确。",
 	"wikibase-parse-error-quantity": "数值格式不正确。",
 	"wikibase-parse-error-time": "时间值格式不正确。",
-	"wikibase-sitelinks-wikipedia": "链接至该项的维基百科页面",
+	"wikibase-sitelinks-wikipedia": "维基百科",
 	"wikibase-sitelinks-sitename-columnheading": "语言",
 	"wikibase-sitelinks-link-columnheading": "链接的页面",
 	"wikibase-snakview-snaktypeselector-somevalue": "未知值",
