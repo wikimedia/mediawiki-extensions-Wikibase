@@ -427,6 +427,19 @@ final class RepoHooks {
 			'type' => 'api'
 		);
 
+		if( class_exists( 'Babel' ) ) {
+			$preferences['wikibase-entitytermsview-showEntitytermslistview'] = array(
+				'type' => 'toggle',
+				'label-message' => 'wikibase-setting-entitytermsview-showEntitytermslistview',
+				'help-message' => 'wikibase-setting-entitytermsview-showEntitytermslistview-help',
+				'section' => 'rendering/advancedrendering',
+			);
+		} else if( $user->getBoolOption( 'wikibase-entitytermsview-showEntitytermslistview' ) ) {
+			// Clear setting after uninstalling Babel extension.
+			unset( $user->mOptions['wikibase-entitytermsview-showEntitytermslistview'] );
+			$user->saveSettings();
+		}
+
 		wfProfileOut( __METHOD__ );
 		return true;
 	}
