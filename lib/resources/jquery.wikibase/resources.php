@@ -31,7 +31,6 @@ return call_user_func( function() {
 				'wikibase.datamodel.MultiTerm',
 			),
 			'messages' => array(
-				'wikibase-aliases-label',
 				'wikibase-aliases-input-help-message',
 				'wikibase-alias-edit-placeholder',
 			),
@@ -169,8 +168,11 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.entitytermsforlanguagelistview',
+				'mediawiki.user',
 			),
 			'messages' => array(
+				'wikibase-description-empty',
+				'wikibase-label-empty',
 				'wikibase-terms',
 			),
 		),
@@ -188,6 +190,10 @@ return call_user_func( function() {
 				'wikibase.getLanguageNameByCode',
 			),
 			'messages' => array(
+				'wikibase-entitytermsforlanguagelistview-aliases',
+				'wikibase-entitytermsforlanguagelistview-description',
+				'wikibase-entitytermsforlanguagelistview-label',
+				'wikibase-entitytermsforlanguagelistview-language',
 				'wikibase-fingerprintview-input-help-message',
 			),
 		),
@@ -205,6 +211,7 @@ return call_user_func( function() {
 				'jquery.wikibase.labelview',
 				'mediawiki.Title',
 				'wikibase.getLanguageNameByCode',
+				'wikibase.templates',
 			),
 			'messages' => array(
 				'wikibase-fingerprintview-input-help-message',
