@@ -42,10 +42,7 @@
 					'referenceview-snakview'
 				],
 				edittoolbar: [
-					'aliasesview',
 					'statementview',
-					'descriptionview',
-					'labelview',
 					'entitytermsview',
 					'referenceview',
 					'sitelinkgroupview'
@@ -64,13 +61,10 @@
 			var $target = $( event.target ),
 				gravity = 'sw';
 
-			if(
-				$target.data( 'labelview' )
-				|| $target.data( 'descriptionview' )
-				|| $target.data( 'aliasesview' )
-				|| $target.data( 'sitelinkgroupview' )
-			) {
+			if( $target.data( 'sitelinkgroupview' ) ) {
 				gravity = 'nw';
+			} else if( $target.data( 'entitytermsview' ) ) {
+				gravity = 'w';
 			}
 
 			showCopyrightTooltip( $entityview, $( event.target ), gravity );
@@ -141,14 +135,23 @@
 			),
 			dataTypeStore: dataTypeStore
 		} )
-		.on( 'labelviewchange labelviewafterstopediting', function( event ) {
-			var $labelview = $( event.target ),
-				labelview = $labelview.data( 'labelview' ),
-				label = labelview.value().getText();
+		.on( 'entitytermsviewchange entitytermsviewafterstopediting', function( event ) {
+			var $entitytermsview = $( event.target ),
+				entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
-			$( 'title' ).text(
-				mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
-			);
+			$.each( entitytermsview.value(), function() {
+				if( this.language !== mw.config.get( 'wgUserLanguage' ) ) {
+					return true;
+				}
+
+				var label = this.label.getText();
+
+				$( 'title' ).text(
+					mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
+				);
+
+				return false;
+			} );
 		} )
 		.on( view + 'afterstartediting', function() {
 			triggerAnonymousEditWarning( entity.getType() );
