@@ -2,81 +2,8 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-.wikibase-entitytermsforlanguageview-language {
-	width: 25%;
-	word-wrap: break-word;
-	padding-left: 10px;
-	border-left: 1px solid #C9C9C9;
-}
-
-.wikibase-entitytermsforlanguageview-label,
-.wikibase-entitytermsforlanguageview-description,
-.wikibase-entitytermsforlanguageview-aliases {
-	width: 75%;
-	word-wrap: break-word;
-	padding-left: 10px;
-}
-
-.wikibase-entitytermsforlanguageview tr td:first-child + td + td {
-	width: 25%;
-}
-
-.wikibase-entitytermsforlanguageview td {
-	border-top: 1px solid #C9C9C9;
-}
-
-.wikibase-entitytermsforlanguageview td:last-child {
-	padding-left: 10px;
-}
-
-.wikibase-entitytermsforlanguageview-label {
-	padding: 10px;
-}
-
-.wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-label input,
-.wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-description input {
-	font-family: inherit;
-	width: 100%;
-}
-
-.wikibase-entitytermsforlanguageview .wikibase-descriptionview .wikibase-descriptionview-container {
-	padding-left: 0;
-}
-
-.wikibase-entitytermsforlanguageview .wikibase-descriptionview .wikibase-descriptionview-text {
-	line-height: 1.4;
-	padding-right: 0;
-}
-
-.wikibase-entitytermsforlanguageview .wikibase-labelview,
-.wikibase-entitytermsforlanguageview .wikibase-descriptionview,
-.wikibase-entitytermsforlanguageview .wikibase-aliasesview {
-	display: block;
-	float: none;
-	margin-top: 0;
-	padding: 10px;
-	width: auto;
-}
-
-.wikibase-entitytermsforlanguageview .wikibase-aliasesview .wikibase-aliasesview-container {
-	display: inline-block !important;
-	padding-left: 0;
-	padding-right: 0;
-	width: 100%;
-}
-
-.wikibase-entitytermsforlanguageview.wb-edit .wikibase-aliasesview-list {
-	font-size: 84%;
-}
-
-.wikibase-entitytermsforlanguageview.wb-edit .wikibase-aliasesview-list * {
-	font-size: 100%;
-}
-
-.wikibase-entitytermsforlanguageview.wb-edit .wikibase-labelview,
-.wikibase-entitytermsforlanguageview.wb-edit .wikibase-descriptionview,
-.wikibase-entitytermsforlanguageview.wb-edit .wikibase-aliasesview {
-	padding: 9px 8px 9px 7px;
+.wikibase-entitytermsforlanguageview input {
+	background-color: transparent;
 }
 
 .wikibase-entitytermsforlanguageview .wb-error {
