@@ -131,23 +131,8 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
 		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $item->getId() );
 
-		$html = $expander->getHtmlForPlaceholder( 'termbox-toc' );
-		$this->assertInternalType( 'string', $html );
-
 		$html = $expander->getHtmlForPlaceholder( 'termbox', 'Q23' );
 		$this->assertInternalType( 'string', $html );
-	}
-
-	public function testRenderTermBoxTocEntry() {
-		$item = $this->getItem();
-		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
-		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $item->getId() );
-
-		// According to the mock objects, this should generate a term box for
-		// 'de' and 'ru', since 'en' is already covered by the interface language.
-		$html = $expander->renderTermBoxTocEntry( new ItemId( 'Q23' ) );
-		$this->assertNotNull( $html );
-		$this->assertRegExp( '/#wb-terms/', $html );
 	}
 
 	public function testRenderTermBox() {
@@ -159,11 +144,10 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
 		$html = $expander->renderTermBox( new ItemId( 'Q23' ), 0 );
 
+		$this->assertRegExp( '/Moskow/', $html );
+
 		$this->assertRegExp( '/Moskau/', $html );
 		$this->assertRegExp( '/Hauptstadt/', $html );
-
-		$this->assertNotRegExp( '/Moskow/', $html );
-		$this->assertNotRegExp( '/Capitol/', $html );
 	}
 
 	public function testRenderTermBoxForDeleteRevision() {

@@ -2,48 +2,11 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-
-.wikibase-descriptionview {
-	float: left;
-	margin-top: -2px; /* move to top decreasing space between label and description */
-	width: 100%;
-}
-
-div.wikibase-descriptionview.wb-edit {
-	background-color: #D6F3FF;
-}
-div.wikibase-descriptionview.wb-empty {
+.wikibase-descriptionview.wb-empty {
 	background-color: inherit;
 }
 
-.wikibase-descriptionview .wikibase-descriptionview-container {
-	padding-left: 10px;
-	position: relative;
-}
-
-.wikibase-descriptionview.wb-edit .wikibase-descriptionview-container {
-	padding-left: 7px;
-}
-
-.wikibase-descriptionview .wikibase-descriptionview-text {
-	display: block;
-	padding: 0.1em 19em 0.1em 0;
-	line-height: 2; /* force height to be able to align toolbar */
-}
-
-.wikibase-descriptionview .wikibase-descriptionview-text > div {
-	display: inline;
-}
-
 .wikibase-descriptionview input {
-	width: 100%;
-	padding: 0 2px;
-	font-size: 1em; /* prevent IE from automatically resizing the font within the input box */
-}
-
-.wikibase-descriptionview .wikibase-edittoolbar-container {
-	line-height: 2;
-	position: absolute;
-	right: 0;
-	top: 0;
+	font-family: inherit;
+	font-size: inherit;
 }
