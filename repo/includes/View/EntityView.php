@@ -151,9 +151,11 @@ if ( $ ) {
 
 		$entity = $entityRevision->getEntity();
 
-		$html = $this->getHtmlForFingerprint( $entity );
+		$html = $this->getHtmlForFingerprint(
+			$entity,
+			$this->getHtmlForTermBox( $entityRevision )
+		);
 		$html .= $this->getHtmlForToc();
-		$html .= $this->getHtmlForTermBox( $entityRevision );
 
 		wfProfileOut( __METHOD__ );
 		return $html;
@@ -174,11 +176,18 @@ if ( $ ) {
 	 * Builds and returns the HTML for the entity's fingerprint.
 	 *
 	 * @param Entity $entity
+	 * @param string $termBoxHtml
 	 *
 	 * @return string
 	 */
-	private function getHtmlForFingerprint( Entity $entity ) {
-		return $this->fingerprintView->getHtml( $entity->getFingerprint(), $entity->getId(), $this->editable );
+	private function getHtmlForFingerprint( Entity $entity, $termBoxHtml ) {
+		return $this->fingerprintView->getHtml(
+			$entity->getFingerprint(),
+			$entity->getId(),
+			$termBoxHtml,
+			$this->textInjector,
+			$this->editable
+		);
 	}
 
 	/**
@@ -189,18 +198,14 @@ if ( $ ) {
 	private function getHtmlForToc() {
 		$tocSections = $this->getTocSections();
 
-		if ( count( $tocSections ) < 2 ) {
-			// Including the marker for the termbox toc entry, there is fewer
-			// 3 sections. MediaWiki core doesn't show a TOC unless there are
-			// at least 3 sections, so we shouldn't either.
+		if ( count( $tocSections ) < 3 ) {
+			// MediaWiki core doesn't show a TOC unless there are at least 3 sections, so we
+			//shouldn't either.
 			return '';
 		}
 
-		// Placeholder for the TOC entry for the term box (which may or may not be used for a given user).
-		// EntityViewPlaceholderExpander must know about the 'termbox-toc' name.
-		$tocContent = $this->textInjector->newMarker( 'termbox-toc' );
-
-		$i = 1;
+		$tocContent = '';
+		$i = 0;
 
 		foreach ( $tocSections as $id => $message ) {
 			$tocContent .= $this->templateFactory->render( 'wb-entity-toc-section',
