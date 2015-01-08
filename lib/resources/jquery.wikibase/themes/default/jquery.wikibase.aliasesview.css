@@ -16,7 +16,6 @@
 }
 
 .wikibase-aliasesview-label {
-	font-size: 84%; /* using #contentSub font-size */
 	float: left;
 	font-weight: bold;
 	margin-right: 1em;
@@ -45,7 +44,6 @@
 }
 
 .wikibase-aliasesview li {
-	font-size: 84%;
 	float: left;
 	margin: 0.2em 12px 0.2em 0;
 	display: inline;
@@ -67,11 +65,6 @@
 .wikibase-aliasesview .tagadata-choice input {
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
-}
-
-.wikibase-aliasesview.wb-edit {
-	background-color: #D6F3FF;
-	white-space: normal; /* required by FF for not(!) wrapping toolbar when there is only one line of aliases */
 }
 
 .wikibase-aliasesview.wb-edit ul {

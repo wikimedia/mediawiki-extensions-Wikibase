@@ -2,11 +2,14 @@
 
 namespace Wikibase\Repo\View;
 
+use Message;
+use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Template\TemplateFactory;
+use Wikibase\Utils;
 
 /**
  * Generates HTML to display the fingerprint of an entity
@@ -17,6 +20,7 @@ use Wikibase\Template\TemplateFactory;
  *
  * @author Thiemo Mättig
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author H. Snater < mediawiki@snater.com >
  */
 class FingerprintView {
 
@@ -26,7 +30,7 @@ class FingerprintView {
 	private $templateFactory;
 
 	/**
-	 * @var SectionEditLinkGenerator
+	 * @var SectionEditLinkGenerator|null
 	 */
 	private $sectionEditLinkGenerator;
 
@@ -37,12 +41,12 @@ class FingerprintView {
 
 	/**
 	 * @param TemplateFactory $templateFactory
-	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
+	 * @param SectionEditLinkGenerator|null $sectionEditLinkGenerator
 	 * @param string $languageCode
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
-		SectionEditLinkGenerator $sectionEditLinkGenerator,
+		SectionEditLinkGenerator $sectionEditLinkGenerator = null,
 		$languageCode
 	) {
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
@@ -53,108 +57,203 @@ class FingerprintView {
 	/**
 	 * @param Fingerprint $fingerprint the fingerprint to render
 	 * @param EntityId|null $entityId the id of the fingerprint's entity
+	 * @param string $termBoxHtml
+	 * @param TextInjector $textInjector
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	public function getHtml( Fingerprint $fingerprint, EntityId $entityId = null, $editable = true ) {
+	public function getHtml(
+		Fingerprint $fingerprint,
+		EntityId $entityId = null,
+		$termBoxHtml,
+		TextInjector $textInjector,
+		$editable = true
+	) {
 		$labels = $fingerprint->getLabels();
 		$descriptions = $fingerprint->getDescriptions();
 		$aliasGroups = $fingerprint->getAliasGroups();
 
-		$html = '';
-
-		$html .= $this->getHtmlForLabel( $labels, $entityId, $editable );
-		$html .= $this->getHtmlForDescription( $descriptions, $entityId, $editable );
-		$html .= $this->templateFactory->render( 'wb-entity-header-separator' );
-		$html .= $this->getHtmlForAliases( $aliasGroups, $entityId, $editable );
-
-		return $html;
+		return $this->templateFactory->render( 'wikibase-entitytermsview',
+			$labels->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
+			$this->getHtmlForLabel( $labels, $entityId ),
+			$aliasGroups->hasGroupForLanguage( $this->languageCode ) ? '' : 'wb-empty',
+			$this->getHtmlForAliases( $aliasGroups ),
+			$descriptions->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
+			$this->getDescriptionText( $descriptions ),
+			$termBoxHtml,
+			$textInjector->newMarker(
+				'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
+			),
+			$this->getHtmlForEditSection( 'SetLabel', $entityId, $editable )
+		);
 	}
 
 	/**
 	 * @param TermList $labels the list of labels to render
 	 * @param EntityId|null $entityId the id of the fingerprint's entity
-	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	private function getHtmlForLabel( TermList $labels, EntityId $entityId = null, $editable ) {
-		$hasLabel = $labels->hasTermForLanguage( $this->languageCode );
+	private function getHtmlForLabel( TermList $labels, EntityId $entityId = null ) {
 		$id = 'new';
 		$idInParentheses = '';
-		$editSection = $this->templateFactory->render( 'wikibase-toolbar-wrapper',
-			$this->getHtmlForEditSection( 'SetLabel', $entityId, $editable )
-		);
 
-		if ( $entityId !== null ) {
+		if( !is_null( $entityId ) ) {
 			$id = $entityId->getSerialization();
 			$idInParentheses = wfMessage( 'parentheses', $id )->text();
 		}
 
-		if ( $hasLabel ) {
-			return $this->templateFactory->render( 'wikibase-firstHeading',
-				$id,
-				$this->templateFactory->render( 'wikibase-labelview',
-					'',
-					htmlspecialchars( $labels->getByLanguage( $this->languageCode )->getText() ),
-					$idInParentheses,
-					$editSection
-				)
-			);
-		} else {
-			return $this->templateFactory->render( 'wikibase-firstHeading',
-				$id,
-				$this->templateFactory->render( 'wikibase-labelview',
-					'wb-empty',
-					wfMessage( 'wikibase-label-empty' )->escaped(),
-					$idInParentheses,
-					$editSection
-				)
-			);
-		}
+		return $this->templateFactory->render( 'wikibase-entitytermsview-heading-label',
+			$labels->hasTermForLanguage( $this->languageCode )
+				? htmlspecialchars( $labels->getByLanguage( $this->languageCode )->getText() )
+				: wfMessage( 'wikibase-label-empty' )->escaped(),
+			$idInParentheses
+		);
 	}
 
 	/**
 	 * @param TermList $descriptions the list of descriptions to render
-	 * @param EntityId|null $entityId the id of the fingerprint's entity
-	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	private function getHtmlForDescription( TermList $descriptions, EntityId $entityId = null, $editable ) {
-		$hasDescription = $descriptions->hasTermForLanguage( $this->languageCode );
-		$editSection = $this->getHtmlForEditSection( 'SetDescription', $entityId, $editable );
-
-		if ( $hasDescription ) {
-			return $this->templateFactory->render( 'wikibase-descriptionview',
-				'',
-				htmlspecialchars( $descriptions->getByLanguage( $this->languageCode )->getText() ),
-				$editSection
-			);
+	private function getDescriptionText( TermList $descriptions ) {
+		if ( $descriptions->hasTermForLanguage( $this->languageCode ) ) {
+			$text = $descriptions->getByLanguage( $this->languageCode )->getText();
+			return htmlspecialchars( $text );
 		} else {
-			return $this->templateFactory->render( 'wikibase-descriptionview',
-				'wb-empty',
-				wfMessage( 'wikibase-description-empty' )->escaped(),
-				$editSection
-			);
+			return wfMessage( 'wikibase-description-empty' )->escaped();
 		}
 	}
 
 	/**
 	 * @param AliasGroupList $aliasGroups the list of alias groups to render
-	 * @param EntityId|null $entityId the id of the fingerprint's entity
-	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	private function getHtmlForAliases( AliasGroupList $aliasGroups, EntityId $entityId = null, $editable ) {
-		$hasAliases = $aliasGroups->hasGroupForLanguage( $this->languageCode );
-		$editSection = $this->getHtmlForEditSection( 'SetAliases', $entityId, $editable, 'edit' );
-
-		if ( $hasAliases ) {
+	private function getHtmlForAliases( AliasGroupList $aliasGroups ) {
+		if ( $aliasGroups->hasGroupForLanguage( $this->languageCode ) ) {
 			$aliasesHtml = '';
 			$aliases = $aliasGroups->getByLanguage( $this->languageCode )->getAliases();
+			foreach ( $aliases as $alias ) {
+				$aliasesHtml .= $this->templateFactory->render(
+					'wikibase-entitytermsview-aliases-alias',
+					htmlspecialchars( $alias )
+				);
+			}
+
+			return $this->templateFactory->render( 'wikibase-entitytermsview-aliases', $aliasesHtml );
+		} else {
+			return $this->templateFactory->render( 'wikibase-entitytermsview-aliases',
+				wfMessage( 'wikibase-aliases-empty' )->escaped()
+			);
+		}
+	}
+
+	/**
+	 * @param Fingerprint $fingerprint
+	 * @param string[] $languageCodes
+	 * @param Title|null $title
+	 * @param boolean $showEntitytermslistview
+	 *
+	 * @return string
+	 */
+	public function getEntityTermsForLanguageListView(
+		Fingerprint $fingerprint,
+		$languageCodes,
+		Title $title = null,
+		$showEntitytermslistview = false
+	) {
+		wfProfileIn( __METHOD__ );
+
+		$entityTermsForLanguageViewsHtml = '';
+
+		foreach( $languageCodes as $languageCode ) {
+			$entityTermsForLanguageViewsHtml .= $this->getEntityTermsForLanguageView(
+				$fingerprint,
+				$languageCode,
+				$title
+			);
+		}
+
+		$html = $this->templateFactory->render( 'wikibase-entitytermsforlanguagelistview',
+			$this->msg( 'wikibase-entitytermsforlanguagelistview-language' ),
+			$this->msg( 'wikibase-entitytermsforlanguagelistview-label' ),
+			$this->msg( 'wikibase-entitytermsforlanguagelistview-aliases' ),
+			$this->msg( 'wikibase-entitytermsforlanguagelistview-description' ),
+			$entityTermsForLanguageViewsHtml
+		);
+
+		wfProfileOut( __METHOD__ );
+		return $html;
+	}
+
+	/**
+	 * @param Fingerprint $fingerprint
+	 * @param string $languageCode
+	 * @param Title|null $title
+	 *
+	 * @return string
+	 */
+	private function getEntityTermsForLanguageView(
+		Fingerprint $fingerprint,
+		$languageCode,
+		Title $title = null
+	) {
+		$labels = $fingerprint->getLabels();
+		$descriptions = $fingerprint->getDescriptions();
+		$aliasGroups = $fingerprint->getAliasGroups();
+
+		$hasLabel = $labels->hasTermForLanguage( $languageCode );
+		$hasDescription = $descriptions->hasTermForLanguage( $languageCode );
+
+		return $this->templateFactory->render( 'wikibase-entitytermsforlanguageview',
+			$languageCode,
+			$this->templateFactory->render( 'wikibase-entitytermsforlanguageview-language',
+				is_null( $title )
+					? '#'
+					: $title->getLocalURL( array( 'setlang' => $languageCode ) ),
+				htmlspecialchars( Utils::fetchLanguageName( $languageCode ) )
+			),
+			$this->templateFactory->render( 'wikibase-labelview',
+				$hasLabel ? '' : 'wb-empty',
+				htmlspecialchars( $hasLabel
+					? $labels->getByLanguage( $languageCode )->getText()
+					: $this->msg( 'wikibase-label-empty' )->text()
+				),
+				'',
+				''
+			),
+			$this->getAliasesView( $aliasGroups, $languageCode ),
+			$this->templateFactory->render( 'wikibase-descriptionview',
+				$hasDescription ? '' : 'wb-empty',
+				htmlspecialchars( $hasDescription
+					? $descriptions->getByLanguage( $languageCode )->getText()
+					: $this->msg( 'wikibase-description-empty' )->text()
+				),
+				'',
+				''
+			),
+			''
+		);
+	}
+
+	/**
+	 * @param AliasGroupList $aliasGroups
+	 * @param string $languageCode
+	 *
+	 * @return string
+	 */
+	private function getAliasesView( AliasGroupList $aliasGroups, $languageCode ) {
+		if ( !$aliasGroups->hasGroupForLanguage( $languageCode ) ) {
+			return $this->templateFactory->render( 'wikibase-aliasesview',
+				'wb-empty',
+				'',
+				''
+			);
+		} else {
+			$aliasesHtml = '';
+			$aliases = $aliasGroups->getByLanguage( $languageCode )->getAliases();
 			foreach ( $aliases as $alias ) {
 				$aliasesHtml .= $this->templateFactory->render(
 					'wikibase-aliasesview-list-item',
@@ -164,16 +263,8 @@ class FingerprintView {
 
 			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'',
-				wfMessage( 'wikibase-aliases-label' )->escaped(),
 				$aliasesHtml,
-				$editSection
-			);
-		} else {
-			return $this->templateFactory->render( 'wikibase-aliasesview',
-				'wb-empty',
-				wfMessage( 'wikibase-aliases-empty' )->escaped(),
-				'',
-				$editSection
+				''
 			);
 		}
 	}
@@ -186,8 +277,13 @@ class FingerprintView {
 	 *
 	 * @return string
 	 */
-	private function getHtmlForEditSection( $specialPageName, EntityId $entityId = null, $editable, $action = 'edit' ) {
-		if ( $entityId === null || !$editable ) {
+	private function getHtmlForEditSection(
+		$specialPageName,
+		EntityId $entityId = null,
+		$editable,
+		$action = 'edit'
+	) {
+		if ( $entityId === null || !$editable || is_null( $this->sectionEditLinkGenerator ) ) {
 			return '';
 		}
 
@@ -199,4 +295,12 @@ class FingerprintView {
 		);
 	}
 
+	/**
+	 * @param $key
+	 *
+	 * @return Message
+	 */
+	private function msg( $key ) {
+		return wfMessage( $key )->inLanguage( $this->languageCode );
+	}
 }
