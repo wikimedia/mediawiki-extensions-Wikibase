@@ -114,19 +114,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.toolbarcontroller' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.wikibase.toolbarcontroller.js',
-				'jquery.wikibase.toolbarcontroller.definitions.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.addtoolbar',
-				'jquery.wikibase.edittoolbar',
-				'jquery.wikibase.movetoolbar',
-				'jquery.wikibase.removetoolbar',
-			),
-		),
-
 		'jquery.wikibase.toolbaritem' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase.toolbaritem.js',
@@ -141,5 +128,8 @@ return call_user_func( function() {
 
 	);
 
-	return $modules;
+	return array_merge(
+		$modules,
+		include( __DIR__ . '/controller/resources.php' )
+	);
 } );
