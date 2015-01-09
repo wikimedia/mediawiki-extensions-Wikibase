@@ -5,7 +5,8 @@ namespace Wikibase;
 use HashBagOStuff;
 use LoadBalancer;
 use ObjectCache;
-use Site;
+use Wikibase\Client\Usage\NullSubscriptionManager;
+use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\Client\Store\Sql\ConnectionManager;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
@@ -81,6 +82,11 @@ class DirectSqlStore implements ClientStore {
 	private $useLegacyUsageIndex;
 
 	/**
+	 * @var bool
+	 */
+	private $useLegacyChangesSubscription;
+
+	/**
 	 * @var EntityLookup|null
 	 */
 	private $entityRevisionLookup = null;
@@ -121,9 +127,9 @@ class DirectSqlStore implements ClientStore {
 	private $usageLookup = null;
 
 	/**
-	 * @var Site|null
+	 * @var SubscriptionManager|null
 	 */
-	private $site = null;
+	private $subscriptionManager = null;
 
 	/**
 	 * @var string
@@ -153,6 +159,7 @@ class DirectSqlStore implements ClientStore {
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->useLegacyUsageIndex = $settings->getSetting( 'useLegacyUsageIndex' );
+		$this->useLegacyChangesSubscription = $settings->getSetting( 'useLegacyChangesSubscription' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
 	}
 
@@ -162,7 +169,26 @@ class DirectSqlStore implements ClientStore {
 	 * @return SubscriptionManager
 	 */
 	public function getSubscriptionManager() {
-		return new SubscriptionManager();
+		if ( $this->subscriptionManager === null ) {
+			if ( $this->useLegacyChangesSubscription ) {
+				$this->subscriptionManager = new NullSubscriptionManager();
+			} else {
+				$connectionManager = new ConnectionManager( $this->getRepoLoadBalancer() );
+				$this->subscriptionManager = new SqlSubscriptionManager( $connectionManager );
+			}
+		}
+
+		return $this->subscriptionManager;
+	}
+
+	/**
+	 * Returns a LoadBalancer that acts as a factory for connections to the repo wiki's
+	 * database.
+	 *
+	 * @return LoadBalancer
+	 */
+	private function getRepoLoadBalancer() {
+		return wfGetLB( $this->repoWiki );
 	}
 
 	/**
