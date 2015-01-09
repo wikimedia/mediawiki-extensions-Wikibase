@@ -117,6 +117,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.inputautoexpand',
+				'jquery.ui.core',
 				'jquery.ui.TemplatedWidget',
 				'jquery.util.getDirectionality',
 				'wikibase.datamodel.Term',
