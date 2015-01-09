@@ -8,34 +8,31 @@ use Wikibase\DataModel\Entity\EntityId;
  * Service interface for tracking subscriptions of clients to entity
  * change events generated on the repo.
  *
- * @note This is a dummy implementation, it will be replaced by an interface
- * and implementation in a separate component.
- *
  * @see docs/usagetracking.wiki
  *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class SubscriptionManager {
+interface SubscriptionManager {
 
 	/**
-	 * Subscribes the given client to notificatiosn about changes on the specified entities.
+	 * Subscribes the given subscriber to notificatiosn about changes on the specified entities.
 	 *
-	 * @param string $client Global site ID of the client
+	 * @param string $subscriber Global site ID of the subscriber
 	 * @param EntityId[] $entityIds The entities to subscribe to.
+	 *
+	 * @throws UsageTrackerException
 	 */
-	public function subscribe( $client, array $entityIds ) {
-		// NO-OP
-	}
+	public function subscribe( $subscriber, array $entityIds );
 
 	/**
-	 * Unsubscribes the given client from notificatiosn about changes on the specified entities.
+	 * Unsubscribes the given subscriber from notificatiosn about changes on the specified entities.
 	 *
-	 * @param string $client Global site ID of the client
+	 * @param string $subscriber Global site ID of the subscriber
 	 * @param EntityId[] $entityIds The entities to subscribe to.
+	 *
+	 * @throws UsageTrackerException
 	 */
-	public function unsubscribe( $client, array $entities ) {
-		// NO-OP
-	}
+	public function unsubscribe( $subscriber, array $entityIds );
 
 }
