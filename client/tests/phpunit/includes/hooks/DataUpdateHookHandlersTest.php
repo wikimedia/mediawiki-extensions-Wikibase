@@ -3,12 +3,12 @@
 namespace Wikibase\Client\Test\Hooks;
 
 use Parser;
-use ParserOptions;
 use ParserOutput;
-use StripState;
 use Title;
 use Wikibase\Client\Hooks\DataUpdateHookHandlers;
 use Wikibase\Client\Store\UsageUpdater;
+use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
@@ -41,23 +41,56 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @param Title $title
+	 * @param array $expectedUsages
+	 *
 	 * @return UsageUpdater
 	 */
-	private function getUsageUpdater() {
+	private function newUsageUpdater( Title $title, array $expectedUsages  = null ) {
 		$usageUpdater = $this->getMockBuilder( 'Wikibase\Client\Store\UsageUpdater' )
 			->disableOriginalConstructor()
 			->getMock();
 
+		if ( $expectedUsages === null ) {
+			$usageUpdater->expects( $this->never() )
+				->method( 'updateUsageForPage' );
+		} else {
+			$expectedEntityUsageList = $this->makeEntityUsageList( $expectedUsages );
+			$usageUpdater->expects( $this->once() )
+				->method( 'updateUsageForPage' )
+				->with( $title->getArticleID(), $expectedEntityUsageList );
+		}
+
 		return $usageUpdater;
 	}
 
-	private function newDataUpdateHookHandlers( array $settings = array() ) {
+	private function makeEntityUsageList( array $expectedUsages ) {
+		$entityUsageList = array();
+
+		foreach ( $expectedUsages as $aspect => $entityIds ) {
+			foreach ( $entityIds as $id ) {
+				$key = $id->getSerialization() . '#' . $aspect;
+				$entityUsageList[$key] = new EntityUsage( $id, $aspect );
+			}
+		}
+
+		return $entityUsageList;
+	}
+
+	/**
+	 * @param Title $title
+	 * @param array $expectedUsages
+	 * @param array $settings
+	 *
+	 * @return DataUpdateHookHandlers
+	 */
+	private function newDataUpdateHookHandlers( Title $title, array $expectedUsages = null, array $settings = array() ) {
 		$settings = $this->newSettings( $settings );
 
 		$namespaces = $settings->getSetting( 'namespaces' );
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
 
-		$usageUpdater = $this->getUsageUpdater();
+		$usageUpdater = $this->newUsageUpdater( $title, $expectedUsages );
 
 		return new DataUpdateHookHandlers(
 			$namespaceChecker,
@@ -66,32 +99,33 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param bool $expectedDataUpdateCount
+	 * @param array $usages
 	 *
 	 * @return ParserOutput
 	 */
-	private function newParserOutput( $expectedDataUpdateCount ) {
-		$output = $this->getMockBuilder( 'ParserOutput' )
-			->disableOriginalConstructor()
-			->getMock();
+	private function newParserOutput( array $usages = null ) {
+		$output = new ParserOutput();
 
-		$output->expects( $this->exactly( $expectedDataUpdateCount ) )
-			->method( 'addSecondaryDataUpdate' );
+		if ( $usages ) {
+			$acc = new ParserOutputUsageAccumulator( $output );
+
+			foreach ( $usages as $aspect => $entityIds ) {
+				foreach ( $entityIds as $id ) {
+					$acc->addUsage( $id, $aspect );
+				}
+			}
+		}
 
 		return $output;
 	}
 
 	/**
 	 * @param Title $title
-	 * @param bool $expectedDataUpdateCount
 	 *
 	 * @return Parser
 	 */
-	private function newParser( Title $title, $expectedDataUpdateCount ) {
-		$options = new ParserOptions();
-		$output = $this->newParserOutput( $expectedDataUpdateCount );
-
-		$parser = $this->getMockBuilder( 'Parser' )
+	private function newWikiPage( Title $title ) {
+		$parser = $this->getMockBuilder( 'WikiPage' )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -99,15 +133,21 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 			->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );
 
-		$parser->expects( $this->any() )
-			->method( 'getOptions' )
-			->will( $this->returnValue( $options ) );
-
-		$parser->expects( $this->any() )
-			->method( 'getOutput' )
-			->will( $this->returnValue( $output ) );
-
 		return $parser;
+	}
+
+	/**
+	 * @param array $usages
+	 *
+	 * @return Parser
+	 */
+	private function newEditInfo( array $usages = null ) {
+		$output = $this->newParserOutput( $usages );
+
+		$editInfo = new \stdClass();
+		$editInfo->output = $output;
+
+		return $editInfo;
 	}
 
 	public function testNewFromGlobalState() {
@@ -115,11 +155,11 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Client\Hooks\DataUpdateHookHandlers', $handler );
 	}
 
-	public function parserAfterParseProvider() {
+	public function provideDoParserAfterParse() {
 		return array(
 			'usage' => array(
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
-				array( 'sitelinks' => array( new ItemId( 'Q1' ) ) ),
+				array( EntityUsage::SITELINK_USAGE => array( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ) ),
 			),
 
 			'no usage' => array(
@@ -135,16 +175,17 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider parserAfterParseProvider
+	 * @dataProvider provideDoParserAfterParse
 	 */
 	public function testDoParserAfterParse( Title $title, $usage ) {
-		$parser = $this->newParser( $title, $usage === null ? 0 : 1 );
-		$handler = $this->newDataUpdateHookHandlers();
+		$title->resetArticleID( 23 );
 
-		$handler->doParserAfterParse( $parser );
+		$page = $this->newWikiPage( $title );
+		$editInfo = $this->newEditInfo( $usage );
 
-		// Assertions are done by the ParserOutput mock
-		$dataUpdates = $parser->getOutput()->getSecondaryDataUpdates( $title );
+		// Assertions are done by the UsageUpdater mock
+		$handler = $this->newDataUpdateHookHandlers( $title, $usage );
+		$handler->doArticleEditUpdates( $page, $editInfo, true );
 	}
 
 }
