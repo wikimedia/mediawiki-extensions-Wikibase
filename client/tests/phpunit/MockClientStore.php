@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangesTable;
+use Wikibase\Client\Usage\NullSubscriptionManager;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\Client\Usage\SubscriptionManager;
@@ -60,7 +61,7 @@ class MockClientStore implements ClientStore {
 	 * @return SubscriptionManager
 	 */
 	public function getSubscriptionManager() {
-		return new SubscriptionManager();
+		return new NullSubscriptionManager();
 	}
 
 	/**
