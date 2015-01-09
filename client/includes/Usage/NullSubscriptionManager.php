@@ -5,15 +5,12 @@ namespace Wikibase\Client\Usage;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * Service interface for tracking subscriptions of clients to entity
- * change events generated on the repo.
- *
- * @see docs/usagetracking.wiki
+ * No-op implementation of the SubscriptionManager and UsageLookup interfaces.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-interface SubscriptionManager {
+class NullSubscriptionManager implements SubscriptionManager {
 
 	/**
 	 * Subscribes the given subscriber to notificatiosn about changes on the specified entities.
@@ -23,7 +20,9 @@ interface SubscriptionManager {
 	 *
 	 * @throws UsageTrackerException
 	 */
-	public function subscribe( $subscriber, array $entityIds );
+	public function subscribe( $subscriber, array $entityIds ) {
+		// NO-OP
+	}
 
 	/**
 	 * Unsubscribes the given subscriber from notificatiosn about changes on the specified entities.
@@ -33,6 +32,7 @@ interface SubscriptionManager {
 	 *
 	 * @throws UsageTrackerException
 	 */
-	public function unsubscribe( $subscriber, array $entityIds );
-
+	public function unsubscribe( $subscriber, array $entityIds ) {
+		// NO-OP
+	}
 }
