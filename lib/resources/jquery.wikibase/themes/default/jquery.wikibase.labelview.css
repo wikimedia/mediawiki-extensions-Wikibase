@@ -6,7 +6,7 @@
 	background-color: inherit;
 }
 
-.wikibase-labelview input {
+.wikibase-labelview .wikibase-labelview-input {
 	font-family: inherit;
 	font-size: inherit;
 }

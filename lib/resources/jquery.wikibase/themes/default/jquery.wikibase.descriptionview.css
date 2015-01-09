@@ -6,7 +6,7 @@
 	background-color: inherit;
 }
 
-.wikibase-descriptionview input {
+.wikibase-descriptionview .wikibase-descriptionview-input {
 	font-family: inherit;
 	font-size: inherit;
 }
