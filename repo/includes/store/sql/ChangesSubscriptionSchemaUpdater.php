@@ -1,18 +1,18 @@
 <?php
 
-namespace Wikibase\Client\Usage\Sql;
+namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseUpdater;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
- * Schema updater for SqlUsageTracker
+ * Schema updater for the wb_changes_subscription table.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class SqlUsageTrackerSchemaUpdater {
+class ChangesSubscriptionSchemaUpdater {
 
 	/**
 	 * @var DatabaseUpdater
@@ -34,12 +34,12 @@ class SqlUsageTrackerSchemaUpdater {
 	 * @return bool
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $dbUpdater ) {
-		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
+		if ( Wikibaserepo::getDefaultInstance()->getSettings()->getSetting( 'useLegacyChangesSubscription' ) ) {
 			return true;
 		}
 
-		$usageTrackerSchemaUpdater = new self( $dbUpdater );
-		$usageTrackerSchemaUpdater->doSchemaUpdate();
+		$changesSubscriptionSchemaUpdater = new self( $dbUpdater );
+		$changesSubscriptionSchemaUpdater->doSchemaUpdate();
 
 		return true;
 	}
@@ -48,18 +48,18 @@ class SqlUsageTrackerSchemaUpdater {
 	 * Applies any schema updates
 	 */
 	public function doSchemaUpdate() {
-		$table = 'wbc_entity_usage';
+		$table = 'wb_changes_subscription';
 
 		if ( !$this->dbUpdater->tableExists( $table ) ) {
 			$db = $this->dbUpdater->getDB();
-			$script = $this->getUpdateScriptPath( 'entity_usage', $db->getType() );
+			$script = $this->getUpdateScriptPath( 'changes_subscription', $db->getType() );
 			$this->dbUpdater->addExtensionTable( $table, $script );
 
 			// Register function for populating the table.
 			// Note that this must be done with a static function,
 			// for reasons that do not need explaining at this juncture.
 			$this->dbUpdater->addExtensionUpdate( array(
-				array( __CLASS__, 'fillUsageTable' ),
+				array( __CLASS__, 'fillSubscriptionTable' ),
 				$table
 			) );
 		}
@@ -71,11 +71,8 @@ class SqlUsageTrackerSchemaUpdater {
 	 * @param DatabaseUpdater $dbUpdater
 	 * @param string $table
 	 */
-	public static function fillUsageTable( DatabaseUpdater $dbUpdater, $table ) {
-		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
-
-		$primer = new EntityUsageTableBuilder(
-			$idParser,
+	public static function fillSubscriptionTable( DatabaseUpdater $dbUpdater, $table ) {
+		$primer = new ChangesSubscriptionTableBuilder(
 			wfGetLB(), // would be nice to pass in $dbUpdater->getDB().
 			$table,
 			1000
@@ -87,7 +84,7 @@ class SqlUsageTrackerSchemaUpdater {
 		} );
 		$primer->setProgressReporter( $reporter );
 
-		$primer->fillUsageTable();
+		$primer->fillSubscriptionTable();
 	}
 
 	private function getUpdateScriptPath( $name, $type ) {

@@ -3,8 +3,10 @@
 namespace Wikibase;
 
 use LoggedUpdateMaintenance;
-use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
-use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 
@@ -13,19 +15,19 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) 
 require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
- * Maintenance script for populating wbc_entity_usage based on the page_props table.
+ * Maintenance script for populating wb_changes_subscription based on the page_props table.
  *
  * @since 0.4
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class PopulateEntityUsage extends LoggedUpdateMaintenance {
+class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 
 	public function __construct() {
-		$this->mDescription = 'Populate the wbc_entity_usage table based on entries in page_props.';
+		$this->mDescription = 'Populate the wb_changes_subscription table based on entries in page_props.';
 
-		$this->addOption( 'start-page', "The page ID to start from.", false, true );
+		$this->addOption( 'start-item', "The page ID to start from.", false, true );
 
 		parent::__construct();
 
@@ -38,29 +40,35 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 	 * @return boolean
 	 */
 	public function doDBUpdates() {
-		if ( !defined( 'WBC_VERSION' ) ) {
+		if ( !defined( 'WB_VERSION' ) ) {
 			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
 			exit;
 		}
 
-		$startPage = intval( $this->getOption( 'start-page', 0 ) );
+		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		$startItemOption = $this->getOption( 'start-item' );
+
+		$startItem = $startItemOption === null ? null : $idParser->parse( $startItemOption );
+
+		if ( $startItem !== null && !( $startItem instanceof ItemId ) ) {
+			throw new EntityIdParsingException( 'Not an Item ID: ' . $startItemOption );
+		}
 
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
 			array( $this, 'report' )
 		);
 
-		$builder = new EntityUsageTableBuilder(
-			WikibaseClient::getDefaultInstance()->getEntityIdParser(),
+		$builder = new ChangesSubscriptionTableBuilder(
 			wfGetLB(),
-			'wbc_entity_usage',
+			'wb_changes_subscription',
 			$this->mBatchSize
 		);
 
 		$builder->setProgressReporter( $reporter );
 		$builder->setExceptionHandler( new ReportingExceptionHandler( $reporter ) );
 
-		$builder->fillUsageTable( $startPage );
+		$builder->fillSubscriptionTable( $startItem );
 		return true;
 	}
 
@@ -70,7 +78,7 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 	 * @return string
 	 */
 	public function getUpdateKey() {
-		return 'Wikibase\PopulateEntityUsage';
+		return 'Wikibase\PopulateChangesSubscription';
 	}
 
 	/**
@@ -86,5 +94,5 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 
 }
 
-$maintClass = 'Wikibase\PopulateEntityUsage';
+$maintClass = 'Wikibase\PopulateChangesSubscription';
 require_once( RUN_MAINTENANCE_IF_MAIN );
