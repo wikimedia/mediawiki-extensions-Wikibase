@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee703fc5_953ea125",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-01-09T12:30:29Z",
+      "side": 1,
+      "message": "would be nice if this was in core or some place other than lib :)",
+      "revId": "adea5560ff4f36ad7f57fa5a08606dd737a15043",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
