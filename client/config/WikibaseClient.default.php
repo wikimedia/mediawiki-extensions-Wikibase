@@ -48,6 +48,9 @@ return call_user_func( function() {
 		// Enable in case wbc_entity_usage does not exist or is not yet populated.
 		'useLegacyUsageIndex' => false,
 
+		// Enable in case wb_changes_subscription does not exist (on the repo) or is not yet populated.
+		'useLegacyChangesSubscription' => false,
+
 		/**
 		 * @todo this is a bit wikimedia-specific and need to find a better place for this stuff,
 		 * such as mediawiki-config, mediawiki messages for custom orders, or somewhere.
