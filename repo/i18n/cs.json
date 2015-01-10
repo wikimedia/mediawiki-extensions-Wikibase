@@ -57,7 +57,7 @@
 	"wikibase-sitelinkgroupview-input-help-message": "Přidejte odkaz na článek zadáním projektu a stránky v projektu, upravte nebo odstraňte existující odkazy na články.",
 	"wikibase-sitelinks-empty": "Na tuto položku zatím neodkazuje žadná stránka.",
 	"wikibase-sitelinks-input-help-message": "Nastavte odkaz na stránku vztahující se k této položce.",
-	"wikibase-sitelinks-special": "Stránky jiných projektů propojené s touto položkou",
+	"wikibase-sitelinks-special": "Jiné projekty",
 	"wikibase-badgeselector-badge-placeholder-title": "Klikněte pro přizazení odznaku.",
 	"wikibase-remove": "odstranit",
 	"wikibase-move-up": "posunout výše",

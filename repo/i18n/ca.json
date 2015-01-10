@@ -11,11 +11,15 @@
 			"Vogone",
 			"Vriullop",
 			"පසිඳු කාවින්ද",
-			"Fitoschido"
+			"Fitoschido",
+			"Davidpar"
 		]
 	},
 	"wikibase-desc": "Repositori de dades estructurades",
 	"specialpages-group-wikibaserepo": "Dipòsit de Wikibase",
+	"wikibase-entity-item": "element",
+	"wikibase-entity-property": "propietat",
+	"wikibase-entity-query": "consulta",
 	"wikibase-edit": "modifica",
 	"wikibase-save": "desa",
 	"wikibase-cancel": "cancel·la",

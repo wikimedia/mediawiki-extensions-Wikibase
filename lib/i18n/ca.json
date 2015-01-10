@@ -13,7 +13,7 @@
 	"wikibase-lib-desc": "Té la funcionalitat comuna per les extensions de Wikibase i de Wikibase Client",
 	"wikibase-error-autocomplete-response": "El servidor ha respost: $1",
 	"wikibase-error-ui-edit-conflict": "S'ha produït un conflicte d'edició. Si us plau, recarregueu la pàgina i torneu-la a desar.",
-	"wikibase-sitelinks-wikipedia": "Pàgines de la Viquipèdia vinculades a aquest element",
+	"wikibase-sitelinks-wikipedia": "Viquipèdia",
 	"wikibase-sitelinks-sitename-columnheading": "Llengua",
 	"wikibase-sitelinks-link-columnheading": "Pàgina enllaçada",
 	"wikibase-snakview-snaktypeselector-somevalue": "valor desconegut",

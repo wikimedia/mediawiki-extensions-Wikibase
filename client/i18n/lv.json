@@ -8,7 +8,7 @@
 	"wikibase-comment-sitelink-add": "Valodas saite pievienota: $1",
 	"wikibase-comment-sitelink-change": "Valodas saite mainīta no $1 uz $2",
 	"wikibase-comment-sitelink-remove": "Valodas saite noņemta: $1",
-	"wikibase-comment-multi": "$1 {{PLURAL:$1|izmaiņa|izmaiņas}}",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|izmaiņas|izmaiņa|izmaiņas}}",
 	"wikibase-dataitem": "{{WBREPONAME}} ieraksts",
 	"wikibase-editlinks": "Labot saites",
 	"wikibase-editlinkstitle": "Labot starpvalodu saites",
@@ -27,6 +27,6 @@
 	"wikibase-watchlist-show-changes-pref": "Rādīt labojumus Vikidatos uzraugāmo lapu sarakstā",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" nav derīgs valodas kods.",
 	"wikibase-unconnectedpages-iwdata-label": "Tikai lapas ar starpvalodu saitēm",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|starpvalodu saite|starpvalodu saites}} šajā lapā)",
+	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|starpvalodu saites|starpvalodu saite|starpvalodu saites}} šajā lapā)",
 	"wikibase-pageinfo-entity-id": "Wikidata ieraksta ID"
 }
