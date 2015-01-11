@@ -67,7 +67,7 @@
 	"wikibase-undo-firstrev": "لا يمكن التراجع عن إنشاء الصفحة",
 	"wikibase-undo-nocontent": "لا يمكن تحميل محتوى المراجعة $2 للصفحة $1",
 	"wikibase-propertyedittool-counter-pending-tooltip": "لم يتم حفظ {{PLURAL:$1|قيمة واحدة|قيمتين| $1 قيم|$1 قيمة}} بعد",
-	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|مدخلة واحدة|مدخلتان|$1 مدخلات|$1 مدخلة}}",
+	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|لا مدخلات|مدخلة واحدة|مدخلتان|$1 مدخلات|$1 مدخلة}}",
 	"wikibase-disambiguation-title": "توضيح «$1»",
 	"wb-special-newitem-new-item-notification": "تم إنشاء المدخلة الجديدة $1 وتحويلها إلى صفحتها. عودة إلى $2.",
 	"wikibase-aliases-label": "تعرف أيضا باسم:",

@@ -40,7 +40,7 @@
 	"wikibase-parse-error-entity-id": "Üksuse identifikaator on väärdunud.",
 	"wikibase-parse-error-quantity": "Suuruse väärtus on väärdunud.",
 	"wikibase-parse-error-time": "Kellaaja väärtus on väärdunud.",
-	"wikibase-sitelinks-wikipedia": "Sellele üksusele viitavad Vikipeedia-leheküljed",
+	"wikibase-sitelinks-wikipedia": "Vikipeedia",
 	"wikibase-sitelinks-sitename-columnheading": "Keel",
 	"wikibase-sitelinks-link-columnheading": "Lingitud lehekülg",
 	"wikibase-snakview-snaktypeselector-somevalue": "tundmatu väärtus",
