@@ -28,6 +28,8 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 		$this->addOption( 'start-page', "The page ID to start from.", false, true );
 
 		parent::__construct();
+
+		$this->setBatchSize( 1000 );
 	}
 
 	/**
