@@ -62,7 +62,7 @@ class SettingsArray extends \ArrayObject {
 				$logValue = var_export( $value, true );
 			}
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': setting ' . $settingName . 'was given as a closure, resolve it to ' . $logValue );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': setting ' . $settingName . ' was given as a closure, resolve it to ' . $logValue );
 
 			// only eval once, then remember the value
 			$this->setSetting( $settingName, $value );
