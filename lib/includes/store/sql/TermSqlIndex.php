@@ -383,14 +383,17 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntity( EntityId $entityId, array $termTypes = null, array $languageCodes = null ) {
-		$fields = array(
-			'term_language',
-			'term_type',
-			'term_text',
+	public function getTermsOfEntity(
+		EntityId $entityId,
+		array$termTypes = null,
+		array $languageCodes = null
+	) {
+		return $this->getTermsOfEntities(
+			array( $entityId ),
+			$entityId->getEntityType(),
+			$termTypes,
+			$languageCodes
 		);
-
-		return $this->fetchTerms( array( $entityId ), $entityId->getEntityType(), $fields, $termTypes, $languageCodes );
 	}
 
 	/**
@@ -406,14 +409,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @throws \MWException
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $entityIds, $entityType = null, array $termTypes = null, array $languageCodes = null ) {
-		$fields = array(
-			'term_entity_id',
-			'term_entity_type',
-			'term_language',
-			'term_type',
-			'term_text',
-		);
+	public function getTermsOfEntities( array $entityIds, $entityType = null, array $termTypes = null,
+		array $languageCodes = null
+	) {
+		$fields = array_keys( $this->termFieldMap );
 
 		return $this->fetchTerms( $entityIds, $entityType, $fields, $termTypes, $languageCodes );
 	}
