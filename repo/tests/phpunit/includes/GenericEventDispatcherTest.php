@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\util\Test;
+namespace Wikibase\Repo\Tests;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\GenericEventDispatcher;
