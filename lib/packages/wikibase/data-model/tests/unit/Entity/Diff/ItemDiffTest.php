@@ -27,7 +27,7 @@ use Wikibase\DataModel\SiteLink;
  */
 class ItemDiffTest extends EntityDiffOldTest {
 
-	public static function provideApplyData() {
+	public function provideApplyData() {
 		$originalTests = parent::generateApplyData( Item::ENTITY_TYPE );
 		$tests = array();
 

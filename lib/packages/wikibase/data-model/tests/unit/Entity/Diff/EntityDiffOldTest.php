@@ -138,7 +138,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $a->getFingerprint()->equals( $b->getFingerprint() ) );
 	}
 
-	public static function provideConflictDetection() {
+	public function provideConflictDetection() {
 		$cases = array();
 
 		// #0: adding a label where there was none before
