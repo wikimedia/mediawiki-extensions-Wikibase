@@ -6,6 +6,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Settings;
 use Wikibase\Term;
 use Wikibase\TermIndex;
@@ -102,7 +104,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$this->assertInternalType( 'array', $actual );
 		$this->assertCount( 2, $actual );
-		
+
 		/**
 		 * @var Term $term
 		 * @var Term $expected
@@ -339,7 +341,12 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$lookup->saveTermsOfEntity( $item );
 
 		// check that the stored terms are the ones in the modified items
-		$expectedTerms = $lookup->getEntityTerms( $item );
+		$extraFields = array(
+			'entityType' => $item->getType(),
+			'entityId' => $item->getId()->getNumericId()
+		);
+
+		$expectedTerms = $lookup->getEntityTerms( $item, $extraFields );
 		$actualTerms = $lookup->getTermsOfEntity( $item->getId() );
 
 		$missingTerms = array_udiff( $expectedTerms, $actualTerms, 'Wikibase\Term::compare' );

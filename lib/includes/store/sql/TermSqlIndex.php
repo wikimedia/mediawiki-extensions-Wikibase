@@ -14,6 +14,7 @@ use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\Store\LabelConflictFinder;
+use Wikibase\Lib\Store\LegacyWikibaseTermsConverter;
 
 /**
  * Term lookup cache.
@@ -72,6 +73,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		parent::__construct( $wikiDb );
 		$this->stringNormalizer = $stringNormalizer;
 		$this->tableName = 'wb_terms';
+
+		// @fixme inject
+		$this->legacyTermsConverter = new LegacyWikibaseTermsConverter();
 	}
 
 	/**
@@ -186,57 +190,22 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 	/**
 	 * @param EntityDocument $entity
+	 * @param mixed[] $extraFields e.g. for setting entity id and entity type of the Term.
 	 *
 	 * @return Term[]
 	 */
-	public function getEntityTerms( EntityDocument $entity ) {
+	public function getEntityTerms( EntityDocument $entity, array $extraFields = array() ) {
 		// FIXME: OCP violation. No support for new types of entities can be registered
 
 		if ( $entity instanceof FingerprintProvider ) {
-			return $this->getFingerprintTerms( $entity->getFingerprint() );
+			return $this->legacyTermsConverter->getTermsOfFingerprint(
+				$entity->getFingerprint(),
+				$extraFields
+			);
 		}
 
 		return array();
 	}
-
-	private function getFingerprintTerms( Fingerprint $fingerprint ) {
-		$terms = array();
-
-		foreach ( $fingerprint->getDescriptions()->toTextArray() as $languageCode => $description ) {
-			$term = new Term();
-
-			$term->setLanguage( $languageCode );
-			$term->setType( Term::TYPE_DESCRIPTION );
-			$term->setText( $description );
-
-			$terms[] = $term;
-		}
-
-		foreach ( $fingerprint->getLabels()->toTextArray() as $languageCode => $label ) {
-			$term = new Term();
-
-			$term->setLanguage( $languageCode );
-			$term->setType( Term::TYPE_LABEL );
-			$term->setText( $label );
-
-			$terms[] = $term;
-		}
-
-		foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
-			foreach ( $aliasGroup->getAliases() as $alias ) {
-				$term = new Term();
-
-				$term->setLanguage( $aliasGroup->getLanguageCode() );
-				$term->setType( Term::TYPE_ALIAS );
-				$term->setText( $alias );
-
-				$terms[] = $term;
-			}
-		}
-
-		return $terms;
-	}
-
 
 	/**
 	 * Internal callback for deleting a list of terms.
@@ -383,14 +352,17 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntity( EntityId $entityId, array $termTypes = null, array $languageCodes = null ) {
-		$fields = array(
-			'term_language',
-			'term_type',
-			'term_text',
+	public function getTermsOfEntity(
+		EntityId $entityId,
+		array$termTypes = null,
+		array $languageCodes = null
+	) {
+		return $this->getTermsOfEntities(
+			array( $entityId ),
+			$entityId->getEntityType(),
+			$termTypes,
+			$languageCodes
 		);
-
-		return $this->fetchTerms( array( $entityId ), $entityId->getEntityType(), $fields, $termTypes, $languageCodes );
 	}
 
 	/**
@@ -406,14 +378,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @throws \MWException
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $entityIds, $entityType = null, array $termTypes = null, array $languageCodes = null ) {
-		$fields = array(
-			'term_entity_id',
-			'term_entity_type',
-			'term_language',
-			'term_type',
-			'term_text',
-		);
+	public function getTermsOfEntities( array $entityIds, $entityType = null, array $termTypes = null,
+		array $languageCodes = null
+	) {
+		$fields = array_keys( $this->termFieldMap );
 
 		return $this->fetchTerms( $entityIds, $entityType, $fields, $termTypes, $languageCodes );
 	}
