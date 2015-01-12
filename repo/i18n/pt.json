@@ -12,7 +12,8 @@
 			"Vitorvicentevalente",
 			"Vivaelcelta",
 			"He7d3r",
-			"Macofe"
+			"Macofe",
+			"Imperadeiro90"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -56,7 +57,7 @@
 	"wikibase-sitelinkgroupview-input-help-message": "Adicione uma ligação de sítio, especificando um sítio e uma respetiva página, edite ou remova ligações de sítio existentes.",
 	"wikibase-sitelinks-empty": "Nenhuma página está ligada a este item ainda.",
 	"wikibase-sitelinks-input-help-message": "Defina uma ligação para uma página relacionada com este item.",
-	"wikibase-sitelinks-special": "Páginas em outros sítios com ligação a este item",
+	"wikibase-sitelinks-special": "Outros sítios",
 	"wikibase-badgeselector-badge-placeholder-title": "Clique para atribuir um emblema.",
 	"wikibase-remove": "remover",
 	"wikibase-move-up": "mover para cima",

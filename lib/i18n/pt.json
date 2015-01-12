@@ -10,7 +10,8 @@
 			"Vitorvicentevalente",
 			"Waldir",
 			"Sarilho1",
-			"He7d3r"
+			"He7d3r",
+			"Imperadeiro90"
 		]
 	},
 	"wikibase-lib-desc": "Contém funcionalidades comuns para as extensões Wikibase e Wikibase Client",
@@ -48,7 +49,7 @@
 	"wikibase-parse-error-entity-id": "ID de entidade inválido.",
 	"wikibase-parse-error-quantity": "O valor de quantidade é inválido.",
 	"wikibase-parse-error-time": "O valor de tempo é inválido.",
-	"wikibase-sitelinks-wikipedia": "Páginas na Wikipédia com ligação a este item",
+	"wikibase-sitelinks-wikipedia": "Wikipédia",
 	"wikibase-sitelinks-sitename-columnheading": "Língua",
 	"wikibase-sitelinks-link-columnheading": "Página associada",
 	"wikibase-snakview-snaktypeselector-somevalue": "valor desconhecido",

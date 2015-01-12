@@ -127,6 +127,7 @@
 	"wikibase-itembytitle-lookup-page": "Seite:",
 	"wikibase-itembytitle-submit": "Suchen",
 	"wikibase-itembytitle-create": "Du kannst auch [{{fullurl:Special:NewItem|site=$1&page=$2}} ein Datenobjekt erstellen].",
+	"wikibase-itembytitle-summary": "„Spezial:Datenelement nach Name“ wird verwendet, um das dazugehörige Objekt für eine angegebene Seite auf einer verbundenen Website zu finden.<br />Im linken Feld „Website“ kannst du den Sprach- und Websitecode eingeben.<br />Im rechten Feld „Seite“ musst du den genauen Titel der Seite eingeben, wie er auf der verbundenen Website erscheint.",
 	"special-gotolinkedpage": "Gehe zur verlinkten Seite",
 	"wikibase-gotolinkedpage-lookup-fieldset": "Gehe zur verlinkten Seite nach Website und Objekt",
 	"wikibase-gotolinkedpage-lookup-site": "Website:",
