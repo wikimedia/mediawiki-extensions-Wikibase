@@ -102,7 +102,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$this->assertInternalType( 'array', $actual );
 		$this->assertCount( 2, $actual );
-		
+
 		/**
 		 * @var Term $term
 		 * @var Term $expected
@@ -339,7 +339,12 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$lookup->saveTermsOfEntity( $item );
 
 		// check that the stored terms are the ones in the modified items
-		$expectedTerms = $lookup->getEntityTerms( $item );
+		$extraFields = array(
+			'entityType' => $item->getType(),
+			'entityId' => $item->getId()->getNumericId()
+		);
+
+		$expectedTerms = $lookup->getEntityTerms( $item, $extraFields );
 		$actualTerms = $lookup->getTermsOfEntity( $item->getId() );
 
 		$missingTerms = array_udiff( $expectedTerms, $actualTerms, 'Wikibase\Term::compare' );
