@@ -22,7 +22,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class CompositeValidatorTest extends \PHPUnit_Framework_TestCase {
 
-	public static function provideValidate() {
+	public function provideValidate() {
 		$validators = array(
 			new TypeValidator( 'string' ),
 			new StringLengthValidator( 1, 10 ),

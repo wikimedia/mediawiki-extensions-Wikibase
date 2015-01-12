@@ -55,7 +55,7 @@ class DiffChangeTest extends ChangeRowTest {
 		return '\Wikibase\DiffChange';
 	}
 
-	public static function provideNewFromDiff() {
+	public function provideNewFromDiff() {
 		$diffs = TestChanges::getDiffs();
 		$cases = array();
 

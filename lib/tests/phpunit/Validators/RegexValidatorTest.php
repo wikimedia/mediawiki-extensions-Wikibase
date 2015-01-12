@@ -18,7 +18,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class RegexValidatorTest extends \PHPUnit_Framework_TestCase {
 
-	public static function provideValidate() {
+	public function provideValidate() {
 		return array(
 			array( '/^x/', false, 'xyz', true, "match" ),
 			array( '/^x/', false, 'zyx', false, "mismatch" ),

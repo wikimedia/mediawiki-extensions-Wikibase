@@ -26,7 +26,7 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 		$this->assertTrue( in_array( Property::ENTITY_TYPE, $types ), "must contain property type" );
 	}
 
-	public static function provideIsEntityType() {
+	public function provideIsEntityType() {
 		$types = EntityFactory::singleton()->getEntityTypes();
 
 		$tests = array();
@@ -47,7 +47,7 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, EntityFactory::singleton()->isEntityType( $type ) );
 	}
 
-	public static function provideNewEmpty() {
+	public function provideNewEmpty() {
 		return array(
 			array( Item::ENTITY_TYPE, 'Wikibase\DataModel\Entity\Item' ),
 			array( Property::ENTITY_TYPE, 'Wikibase\DataModel\Entity\Property' ),

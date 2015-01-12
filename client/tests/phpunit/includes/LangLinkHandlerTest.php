@@ -171,7 +171,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		return $badgesByPrefix;
 	}
 
-	public static function provideGetEntityLinks() {
+	public function provideGetEntityLinks() {
 		return array(
 			array( // #0
 				'Xoo', // page
@@ -207,7 +207,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $expectedLinks, $links, false, true );
 	}
 
-	public static function provideGetNoExternalLangLinks() {
+	public function provideGetNoExternalLangLinks() {
 		return array(
 			array( // #0
 				array()
@@ -245,7 +245,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $noExternalLangLinks, $nel );
 	}
 
-	public static function provideExcludeRepoLinks() {
+	public function provideExcludeRepoLinks() {
 		return array(
 			array( // #0
 				array(),
@@ -270,7 +270,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public static function provideUseRepoLinks() {
+	public function provideUseRepoLinks() {
 		return array(
 			array( // #0
 				'Foo_sr',
@@ -311,7 +311,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $useRepoLinks, "use repository links" );
 	}
 
-	public static function provideGetEffectiveRepoLinks() {
+	public function provideGetEffectiveRepoLinks() {
 		return array(
 			array( // #0: local overrides remote
 				'Foo_sr', // title
@@ -408,9 +408,8 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		return $flat;
 	}
 
-	public static function provideAddLinksFromRepository() {
-		$cases = self::provideGetEffectiveRepoLinks();
-
+	public function provideAddLinksFromRepository() {
+		$cases = $this->provideGetEffectiveRepoLinks();
 
 		$badges = array(
 			// as defined by getItems()
@@ -424,8 +423,8 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 		foreach ( $cases as $i => $case ) {
 			// convert associative array to list of links
-			$langLinks = self::mapToLinks( $case[1] );
-			$expectedLinks = self::mapToLinks( $case[3] );
+			$langLinks = $this->mapToLinks( $case[1] );
+			$expectedLinks = $this->mapToLinks( $case[3] );
 
 			// expect the expected effective links plus the provided language links
 			$expectedLinks = array_merge( $expectedLinks, $langLinks );
@@ -468,7 +467,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $expectedBadges, $out->getExtensionData( 'wikibase_badges' ), false, true );
 	}
 
-	protected static function mapToLinks( $map ) {
+	protected function mapToLinks( $map ) {
 		$links = array();
 
 		foreach ( $map as $wiki => $page ) {
@@ -479,7 +478,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		return $links;
 	}
 
-	public static function provideFilterRepoLinksByGroup() {
+	public function provideFilterRepoLinksByGroup() {
 		return array(
 			array( // #0: nothing
 				array(), array(), array()
@@ -527,7 +526,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expectedLinks, $actualLinks );
 	}
 
-	public static function provideSuppressRepoLinks() {
+	public function provideSuppressRepoLinks() {
 		return array(
 			array( // #0: nothing
 				array(), array(), array()

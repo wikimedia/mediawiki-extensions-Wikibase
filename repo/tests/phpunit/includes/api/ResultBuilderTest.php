@@ -106,7 +106,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->getResultBuilder( $result );
 	}
 
-	public static function provideBadConstructionData() {
+	public function provideBadConstructionData() {
 		return array(
 			array( null ),
 			array( 1234 ),
@@ -125,7 +125,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( array( 'success' => $expected ),  $result->getData() );
 	}
 
-	public static function provideMarkResultSuccess() {
+	public function provideMarkResultSuccess() {
 		return array( array( true, 1 ), array( 1, 1 ), array( false, 0 ), array( 0, 0 ), array( null, 0 ) );
 	}
 
@@ -139,7 +139,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder->markSuccess( $param );
 	}
 
-	public static function provideMarkResultSuccessExceptions() {
+	public function provideMarkResultSuccessExceptions() {
 		return array( array( 3 ), array( -1 ) );
 	}
 
@@ -661,7 +661,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $result->getData() );
 	}
 
-	public static function provideMissingEntity() {
+	public function provideMissingEntity() {
 		return array(
 			array(
 				array(

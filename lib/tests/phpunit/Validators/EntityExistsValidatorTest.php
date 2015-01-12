@@ -37,7 +37,7 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 		return $entityLookup;
 	}
 
-	public static function provideValidate() {
+	public function provideValidate() {
 		return array(
 			"existing entity" => array( new ItemId( 'Q8' ), null ),
 			"is an item" => array( new ItemId( 'Q8' ), Item::ENTITY_TYPE ),
@@ -55,7 +55,7 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $result->isValid() );
 	}
 
-	public static function provideValidate_failure() {
+	public function provideValidate_failure() {
 		return array(
 			"missing entity" => array( new ItemId( 'Q3' ), null, 'no-such-entity' ),
 			"not an item" => array( new PropertyId( 'P8' ), Item::ENTITY_TYPE, 'bad-entity-type' ),
@@ -81,7 +81,7 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $msg->exists(), $msg );
 	}
 
-	public static function provideValidate_exception() {
+	public function provideValidate_exception() {
 		return array(
 			"Not an EntityId" => array( 'Q3', null ),
 			"Type is not a string" => array( new ItemId( 'Q8' ), array( 'foo' ) ),

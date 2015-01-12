@@ -20,7 +20,7 @@ use Wikibase\SnakFactory;
  */
 class SnakFactoryTest extends \MediaWikiTestCase {
 
-	public static function provideNewSnak() {
+	public function provideNewSnak() {
 		return array(
 			array( 1, 'somevalue', null, null, 'Wikibase\DataModel\Snak\PropertySomeValueSnak', null, null, 'some value' ),
 			array( 1, 'novalue', null, null, 'Wikibase\DataModel\Snak\PropertyNoValueSnak', null, null, 'no value' ),

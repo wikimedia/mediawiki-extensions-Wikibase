@@ -58,7 +58,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		return $uriManager;
 	}
 
-	public static function provideGetExtension() {
+	public function provideGetExtension() {
 		return array(
 			array( 'text', 'txt' ),
 			array( 'rdfxml', 'rdf' ),
@@ -77,7 +77,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public static function provideGetFormatName() {
+	public function provideGetFormatName() {
 		return array(
 			array( 'txt', 'text' ),
 			array( 'text', 'text' ),
@@ -97,7 +97,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public static function provideParseDocName() {
+	public function provideParseDocName() {
 		return array(
 			array( '', array( '', '' ) ),
 			array( 'foo', array( 'foo', '' ) ),
@@ -115,7 +115,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public static function provideGetDocName() {
+	public function provideGetDocName() {
 		return array(
 			array( 'Q12', '', 'Q12' ),
 			array( 'q12', null, 'Q12' ),
@@ -135,7 +135,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public static function provideGetDocTitle() {
+	public function provideGetDocTitle() {
 		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );
 		$base = $title->getPrefixedText();
 
@@ -158,7 +158,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $actual->getPrefixedText() );
 	}
 
-	public static function provideGetDocUrl() {
+	public function provideGetDocUrl() {
 		return array(
 			array( 'Q12', '', 0, '!Q12$!' ),
 			array( 'q12', null, 0, '!Q12$!' ),
@@ -180,7 +180,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$this->assertRegExp( $expectedExp, $actual );
 	}
 
-	public static function provideGetCacheableUrls() {
+	public function provideGetCacheableUrls() {
 		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );
 		$base = $title->getInternalURL();
 

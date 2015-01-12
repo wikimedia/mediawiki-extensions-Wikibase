@@ -17,7 +17,7 @@ use Wikibase\NamespaceChecker;
  */
 class NamespaceCheckerTest extends \MediaWikiTestCase {
 
-	public static function constructorProvider() {
+	public function constructorProvider() {
 		return array(
 			array( array(), array( NS_MAIN ) ),
 			array( array( NS_USER_TALK ), array() )

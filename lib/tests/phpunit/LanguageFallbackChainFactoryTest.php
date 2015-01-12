@@ -66,7 +66,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 		$this->assertChainEquals( $expected, $chain );
 	}
 
-	public static function providerNewFromLanguage() {
+	public function providerNewFromLanguage() {
 		return array(
 			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, array( 'en' ) ),
 			array( 'en', LanguageFallbackChainFactory::FALLBACK_VARIANTS, array() ),

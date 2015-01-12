@@ -134,7 +134,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$this->assertEqualIds( $expected, $actual );
 	}
 
-	public static function listEntitiesProvider() {
+	public function listEntitiesProvider() {
 		$property = Property::newFromType( 'string' );
 		$item = Item::newEmpty();
 

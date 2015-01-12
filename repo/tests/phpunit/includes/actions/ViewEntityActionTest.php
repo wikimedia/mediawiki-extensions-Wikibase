@@ -39,7 +39,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$this->assertInstanceOf( 'Wikibase\ViewEntityAction', $action );
 	}
 
-	public static function provideShow() {
+	public function provideShow() {
 		$cases = array();
 
 		$cases[] = array(

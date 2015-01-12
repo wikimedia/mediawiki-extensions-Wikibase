@@ -16,7 +16,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class NumberRangeValidatorTest extends \PHPUnit_Framework_TestCase {
 
-	public static function provideValidate() {
+	public function provideValidate() {
 		return array(
 			array( 1, 10, 3, true, "normal fit" ),
 			array( 0, 10, 0, true, "0 ok" ),

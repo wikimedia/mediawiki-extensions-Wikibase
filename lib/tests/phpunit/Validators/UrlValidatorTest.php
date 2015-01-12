@@ -19,7 +19,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class UrlValidatorTest extends \PHPUnit_Framework_TestCase {
 
-	public static function provideValidate() {
+	public function provideValidate() {
 		$yes = new RegexValidator( '/.*/', false, 'oops' );
 		$no  = new RegexValidator( '/.*/', true, 'bad-url' );
 

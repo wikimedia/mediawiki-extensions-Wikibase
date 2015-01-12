@@ -98,7 +98,7 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function fetchIdsProvider() {
+	public function fetchIdsProvider() {
 		$property = new PropertyId( 'P5' );
 		$item = new ItemId( 'Q1' );
 		$item2 = new ItemId( 'Q2' );

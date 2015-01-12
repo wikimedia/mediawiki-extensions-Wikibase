@@ -93,7 +93,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 		return $handler->supportsRedirects();
 	}
 
-	public static function provideGetEntityRevision() {
+	public function provideGetEntityRevision() {
 		$cases = array(
 			array( // #0: any revision
 				new ItemId( 'q42' ), EntityRevisionLookup::LATEST_FROM_SLAVE, true,

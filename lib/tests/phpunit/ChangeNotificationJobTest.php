@@ -21,7 +21,7 @@ class ChangeNotificationJobTest extends \MediaWikiTestCase {
 	// TODO: testGetChanges
 	// TODO: testRun
 
-	public static function provideToString() {
+	public function provideToString() {
 		$change1 = ChangesTable::singleton()->newRow( array(
 			'id' => 1,
 			'type' => 'add~item',

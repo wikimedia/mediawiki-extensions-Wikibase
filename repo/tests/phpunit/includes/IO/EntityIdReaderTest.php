@@ -62,7 +62,7 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEqualIds( $expected, $actual );
 	}
 
-	public static function listEntitiesProvider() {
+	public function listEntitiesProvider() {
 		$q1 = new ItemId( 'Q1' );
 		$p2 = new PropertyId( 'P2' );
 		$q3 = new ItemId( 'Q3' );
@@ -96,7 +96,7 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public static function listEntitiesProvider_paging() {
+	public function listEntitiesProvider_paging() {
 		$q1 = new ItemId( 'Q1' );
 		$p2 = new PropertyId( 'P2' );
 		$q3 = new ItemId( 'Q3' );

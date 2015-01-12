@@ -32,7 +32,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		self::$hasSetup = true;
 	}
 
-	public static function provideData() {
+	public function provideData() {
 		return array(
 			// p => params, e => expected
 
@@ -137,7 +137,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		}
 	}
 
-	public static function provideExceptionData() {
+	public function provideExceptionData() {
 		return array(
 			// p => params, e => expected
 

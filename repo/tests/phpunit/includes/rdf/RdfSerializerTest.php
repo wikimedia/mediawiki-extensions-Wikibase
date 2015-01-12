@@ -117,7 +117,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public static function provideGetFormat() {
+	public function provideGetFormat() {
 		return array_map(
 			function ( $format ) {
 				return array( $format );
@@ -179,7 +179,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function provideSerializeRdf() {
+	public function provideSerializeRdf() {
 		$graphs = self::getTestGraphs();
 		$patterns = self::getTestDataPatterns();
 

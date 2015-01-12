@@ -113,7 +113,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		);
 	}
 
-	public static function provideExecute() {
+	public function provideExecute() {
 		$cases = EntityDataTestProvider::provideHandleRequest();
 
 		foreach ( $cases as $n => $case ) {

@@ -18,7 +18,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class StringLengthValidatorTest extends \PHPUnit_Framework_TestCase {
 
-	public static function provideValidate() {
+	public function provideValidate() {
 		return array(
 			array( 1, 10, 'strlen', 'foo', true, "normal fit" ),
 			array( 0, 10, 'strlen', '', true, "empty ok" ),

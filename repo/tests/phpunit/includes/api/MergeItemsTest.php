@@ -122,7 +122,7 @@ class MergeItemsTest extends \PHPUnit_Framework_TestCase {
 		return $result->getData();
 	}
 
-	public static function provideData(){
+	public function provideData() {
 		$testCases = array();
 		$testCases['labelMerge'] = array(
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
@@ -206,7 +206,7 @@ class MergeItemsTest extends \PHPUnit_Framework_TestCase {
 		$this->entityModificationTestHelper->assertRevisionSummary( "/CustomSummary/" , $result['to']['lastrevid'] );
 	}
 
-	public static function provideExceptionParamsData() {
+	public function provideExceptionParamsData() {
 		return array(
 			array( //0 no ids given
 				'p' => array( ),
@@ -256,7 +256,7 @@ class MergeItemsTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public static function provideExceptionConflictsData() {
+	public function provideExceptionConflictsData() {
 		return array(
 			array(
 				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),

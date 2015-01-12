@@ -31,7 +31,7 @@ class UtilsTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public static function providerGetLanguageCodes() {
+	public function providerGetLanguageCodes() {
 		return array(
 			array( 'de' ),
 			array( 'en' ),
@@ -40,7 +40,7 @@ class UtilsTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public static function provideFetchLanguageName() {
+	public function provideFetchLanguageName() {
 		return array(
 			array( // #0
 				'en',

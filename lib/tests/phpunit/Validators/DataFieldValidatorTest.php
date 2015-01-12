@@ -19,7 +19,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class DataFieldValidatorTest extends \PHPUnit_Framework_TestCase {
 
-	public static function provideValidate() {
+	public function provideValidate() {
 		$validator = new StringLengthValidator( 1, 10 );
 
 		return array(
