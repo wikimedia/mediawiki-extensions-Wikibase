@@ -4,6 +4,7 @@ namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\Reporting\ObservableMessageReporter;
 
 /**
  * Schema updater for SqlUsageTracker
@@ -79,6 +80,12 @@ class SqlUsageTrackerSchemaUpdater {
 			$table,
 			1000
 		);
+
+		$reporter = new ObservableMessageReporter();
+		$reporter->registerReporterCallback( function( $msg ) use ( $dbUpdater ) {
+			$dbUpdater->output( "\t$msg\n" );
+		} );
+		$primer->setProgressReporter( $reporter );
 
 		$primer->fillUsageTable();
 	}
