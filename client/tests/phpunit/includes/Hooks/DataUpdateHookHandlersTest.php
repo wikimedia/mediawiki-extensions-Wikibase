@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Test\Hooks;
+namespace Wikibase\Client\Tests\Hooks;
 
 use Parser;
 use ParserOptions;
@@ -144,7 +144,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$handler->doParserAfterParse( $parser );
 
 		// Assertions are done by the ParserOutput mock
-		$dataUpdates = $parser->getOutput()->getSecondaryDataUpdates( $title );
+		$parser->getOutput()->getSecondaryDataUpdates( $title );
 	}
 
 }
