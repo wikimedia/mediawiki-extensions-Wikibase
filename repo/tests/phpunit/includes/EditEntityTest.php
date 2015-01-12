@@ -349,7 +349,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public static function provideAttemptSaveWithLateConflict() {
+	public function provideAttemptSaveWithLateConflict() {
 		return array(
 			array( true, true ),
 			array( false, false ),
@@ -521,7 +521,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function dataAttemptSaveRateLimit() {
+	public function dataAttemptSaveRateLimit() {
 		return array(
 
 			array( // #0: no limits
@@ -667,7 +667,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function provideIsTokenOk() {
+	public function provideIsTokenOk() {
 		return array(
 			array( //0
 				true, // use a newly generated valid token
@@ -711,7 +711,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertNotEquals( $shouldWork, $edit->showErrorPage() );
 	}
 
-	public static function provideAttemptSaveWatch() {
+	public function provideAttemptSaveWatch() {
 		// $watchdefault, $watchcreations, $new, $watched, $watch, $expected
 
 		return array(

@@ -63,7 +63,7 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 		$this->propertyDataTypeLookup->setDataTypeForProperty( $p2, 'alphabetic' );
 	}
 
-	public static function provideValidateClaimSnaks() {
+	public function provideValidateClaimSnaks() {
 		$p1 = new PropertyId( 'p1' ); // numeric
 		$p2 = new PropertyId( 'p2' ); // alphabetic
 
@@ -119,7 +119,7 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedValid, $result->isValid(), $description );
 	}
 
-	public static function provideValidateReferences() {
+	public function provideValidateReferences() {
 		$p1 = new PropertyId( 'p1' ); // numeric
 		$p2 = new PropertyId( 'p2' ); // alphabetic
 
@@ -163,7 +163,7 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 
-	public static function provideValidateReference() {
+	public function provideValidateReference() {
 		$p1 = new PropertyId( 'p1' ); // numeric
 		$p2 = new PropertyId( 'p2' ); // alphabetic
 
@@ -200,7 +200,7 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedValid, $result->isValid(), $description );
 	}
 
-	public static function provideValidate() {
+	public function provideValidate() {
 		$p1 = new PropertyId( 'p1' ); // numeric
 		$p2 = new PropertyId( 'p2' ); // alphabetic
 		$p3 = new PropertyId( 'p3' ); // bad
@@ -248,7 +248,7 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedValid, $result->isValid(), $description );
 	}
 
-	public static function provideValidateDataValue() {
+	public function provideValidateDataValue() {
 		return array(
 			array( new StringValue( '123' ), 'numeric', 'p1', 'valid numeric value', true ),
 			array( new StringValue( '123' ), 'alphabetic', 'p2', 'invalid alphabetic value', false ),

@@ -290,7 +290,7 @@ class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 		$this->testHelper->assertRevisionSummary( '@^/\* *wbmergeitems-from:0\|\|Q1 *\*/ *CustomSummary$@', $toRevId, 'summary for target item' );
 	}
 
-	public static function mergeFailureProvider() {
+	public function mergeFailureProvider() {
 		return array(
 			'missing from' => array( new ItemId( 'Q100' ), new ItemId( 'Q2' ), array(), 'no-such-entity' ),
 			'missing to' => array( new ItemId( 'Q1' ), new ItemId( 'Q200' ), array(), 'no-such-entity' ),
@@ -314,7 +314,7 @@ class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public static function mergeConflictsProvider() {
+	public function mergeConflictsProvider() {
 		return array(
 			array(
 				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),

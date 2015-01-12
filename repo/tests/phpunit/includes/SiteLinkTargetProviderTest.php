@@ -31,7 +31,7 @@ class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public static function provideExpected() {
+	public function provideExpected() {
 		return array(
 			// groupsToGet, specialGroups, siteIdsExpected
 			array( array( 'wikipedia' ), array(), array( 'eswiki', 'dawiki' ) ),

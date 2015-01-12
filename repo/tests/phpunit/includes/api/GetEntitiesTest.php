@@ -136,7 +136,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	 * This method builds an array of test cases using the data provided in the static arrays above
 	 * @return array
 	 */
-	public static function provideData() {
+	public function provideData() {
 		$testCases = array();
 
 		// Test cases for props filter
@@ -410,7 +410,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		);
 	}
 
-	public static function provideExceptionData() {
+	public function provideExceptionData() {
 		//todo more exception checks should be added once Bug:53038 is resolved
 		return array(
 			array( //0 no params

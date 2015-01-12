@@ -39,7 +39,7 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public static function provideLoadChunk() {
+	public function provideLoadChunk() {
 		return array(
 			array( // #0: basic loading
 				10,  // chunkSize

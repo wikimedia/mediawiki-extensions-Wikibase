@@ -74,7 +74,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	 * Provide data for a sequence of requests that will work when run in order
 	 * @return array
 	 */
-	public static function provideData() {
+	public function provideData() {
 		return array(
 			'new item' => array(
 				'p' => array( 'new' => 'item', 'data' => '{}' ),
@@ -388,7 +388,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	 * Provide data for requests that will fail with a set exception, code and message
 	 * @return array
 	 */
-	public static function provideExceptionData() {
+	public function provideExceptionData() {
 		return array(
 			'no entity id given' => array( // no entity id given
 				'p' => array( 'id' => '', 'data' => '{}'),

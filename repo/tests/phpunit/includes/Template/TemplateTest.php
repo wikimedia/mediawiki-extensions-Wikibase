@@ -28,7 +28,7 @@ class TemplateTest extends \MediaWikiTestCase {
 		$this->assertHTMLEquals( $template->text(), '<div>param</div>' );
 	}
 
-	public static function providerText() {
+	public function providerText() {
 		return array(
 			array( '<div>$1</div>' )
 		);

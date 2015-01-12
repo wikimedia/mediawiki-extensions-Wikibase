@@ -70,7 +70,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 		return $service;
 	}
 
-	public static function provideGetSerializedData() {
+	public function provideGetSerializedData() {
 		$cases = EntityDataTestProvider::provideGetSerializedData();
 
 		return $cases;

@@ -191,7 +191,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 	// ==========================================================================================
 
-	public static function provideGetUpdateActions() {
+	public function provideGetUpdateActions() {
 		return array(
 			'empty' => array(
 				array(),
@@ -248,7 +248,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$this->assertEmpty( array_values( $unexpected ), "unexpected actions: " . implode( '|', $unexpected ) );
 	}
 
-	public static function provideGetEditComment() {
+	public function provideGetEditComment() {
 		$changes = TestChanges::getChanges();
 
 		$dummy = \Title::newFromText( "Dummy" );
@@ -503,7 +503,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function provideHandleChange() {
+	public function provideHandleChange() {
 		$changes = TestChanges::getChanges();
 
 		$empty = array(

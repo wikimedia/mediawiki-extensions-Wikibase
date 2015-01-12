@@ -201,7 +201,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public static function provideGetClientStates() {
+	public function provideGetClientStates() {
 		$data = self::getTestData();
 
 		return array(
@@ -257,7 +257,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function provideGetClientCount() {
+	public function provideGetClientCount() {
 		$data = self::getTestData();
 
 		return array(
@@ -276,7 +276,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $stats->getClientCount() );
 	}
 
-	public static function provideGetLockedCount() {
+	public function provideGetLockedCount() {
 		$data = self::getTestData();
 
 		return array(
@@ -295,7 +295,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $stats->getLockedCount() );
 	}
 
-	public static function provideGetMinChangeId() {
+	public function provideGetMinChangeId() {
 		$data = self::getTestData();
 
 		return array(
@@ -314,7 +314,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $stats->getMinChangeId() );
 	}
 
-	public static function provideGetMaxChangeId() {
+	public function provideGetMaxChangeId() {
 		$data = self::getTestData();
 
 		return array(
@@ -333,7 +333,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $stats->getMaxChangeId() );
 	}
 
-	public static function provideGetMinChangeTimestamp() {
+	public function provideGetMinChangeTimestamp() {
 		$data = self::getTestData();
 
 		return array(
@@ -352,7 +352,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $stats->getMinChangeTimestamp() );
 	}
 
-	public static function provideGetMaxChangeTimestamp() {
+	public function provideGetMaxChangeTimestamp() {
 		$data = self::getTestData();
 
 		return array(
@@ -371,7 +371,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $stats->getMaxChangeTimestamp() );
 	}
 
-	public static function provideGetFreshest() {
+	public function provideGetFreshest() {
 		$data = self::getTestData();
 
 		return array(
@@ -390,7 +390,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertStateEquals( $expected, $stats->getFreshest());
 	}
 
-	public static function provideGetStalest() {
+	public function provideGetStalest() {
 		$data = self::getTestData();
 
 		return array(
@@ -409,7 +409,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertStateEquals( $expected, $stats->getStalest());
 	}
 
-	public static function provideGetAverage() {
+	public function provideGetAverage() {
 		$data = self::getTestData();
 
 		return array(
@@ -428,7 +428,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertStateEquals( $expected, $stats->getStalest());
 	}
 
-	public static function provideGetMedian() {
+	public function provideGetMedian() {
 		$data = self::getTestData();
 
 		return array(

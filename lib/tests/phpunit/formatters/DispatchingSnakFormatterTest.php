@@ -37,7 +37,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		new DispatchingSnakFormatter( $format, $formatters );
 	}
 
-	public static function constructorErrorsProvider() {
+	public function constructorErrorsProvider() {
 		$formatter = new MessageSnakFormatter( 'novalue', wfMessage( 'wikibase-snakview-snaktypeselector-novalue' ), SnakFormatter::FORMAT_PLAIN );
 
 		return array(

@@ -32,7 +32,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		self::$hasSetup = true;
 	}
 
-	public static function provideLinkTitles() {
+	public function provideLinkTitles() {
 		return array(
 			array( //0 add nowiki as fromsite
 				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo'),
@@ -85,7 +85,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public static function provideLinkTitleExceptions(){
+	public function provideLinkTitleExceptions() {
 		return array(
 			array( //0 notoken
 				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'AnotherPage' ),

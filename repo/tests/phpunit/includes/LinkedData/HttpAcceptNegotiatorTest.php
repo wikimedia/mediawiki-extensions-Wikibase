@@ -15,7 +15,7 @@ use Wikibase\Repo\LinkedData\HttpAcceptNegotiator;
  */
 class HttpAcceptNegotiatorTest extends \PHPUnit_Framework_TestCase {
 
-	public static function provideGetFirstSupportedValue() {
+	public function provideGetFirstSupportedValue() {
 		return array(
 			array( // #0: empty
 				array( ), // supported
@@ -72,7 +72,7 @@ class HttpAcceptNegotiatorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public static function provideGetBestSupportedKey() {
+	public function provideGetBestSupportedKey() {
 		return array(
 			array( // #0: empty
 				array( ), // supported

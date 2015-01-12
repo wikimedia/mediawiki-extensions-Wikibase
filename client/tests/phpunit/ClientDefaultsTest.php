@@ -15,7 +15,7 @@ use Wikibase\SettingsArray;
  */
 class ClientDefaultsTest extends \MediaWikiTestCase {
 
-	public static function settingsProvider() {
+	public function settingsProvider() {
 		//TODO: repoDatabase
 		//TODO: changesDatabase
 		//TODO: sharedCacheKeyPrefix

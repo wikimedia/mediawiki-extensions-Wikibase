@@ -17,7 +17,7 @@ use Wikibase\Validators\NotEntityIdValidator;
  */
 class NotEntityIdValidatorTest extends \PHPUnit_Framework_TestCase {
 
-	public static function provideValidate() {
+	public function provideValidate() {
 		return array(
 			'empty' => array( '', 'label-no-entityid', null, null ),
 			'silly' => array( 'silly', 'label-no-entityid', null, null ),

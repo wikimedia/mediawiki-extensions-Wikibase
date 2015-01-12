@@ -43,7 +43,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( $expectedType, $obj );
 	}
 
-	public static function provideGetters() {
+	public function provideGetters() {
 		return array(
 			array( 'getSiteLinkLookup', 'Wikibase\Lib\Store\SiteLinkTable' ),
 			array( 'getEntityLookup', 'Wikibase\Lib\Store\EntityLookup' ),

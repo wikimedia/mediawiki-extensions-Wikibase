@@ -668,7 +668,7 @@ class EditEntityActionTest extends ActionTestCase {
 		}
 	}
 
-	public static function provideUndoRevisions() {
+	public function provideUndoRevisions() {
 
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
 
@@ -801,7 +801,7 @@ class EditEntityActionTest extends ActionTestCase {
 		self::resetTestItem( $handle );
 	}
 
-	public static function provideUndoPermissions() {
+	public function provideUndoPermissions() {
 		return array(
 			array( //0
 				'edit',

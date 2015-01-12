@@ -40,7 +40,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
-	public static function provideGetErrorMessage() {
+	public function provideGetErrorMessage() {
 		return array(
 			'simple' => array(
 				Error::newError( 'Bla bla' ),
@@ -70,7 +70,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $params, $message->getParams() );
 	}
 
-	public static function provideGetResultStatus() {
+	public function provideGetResultStatus() {
 		return array(
 			array( Result::newSuccess() ),
 			array( Result::newError( array() ) ),

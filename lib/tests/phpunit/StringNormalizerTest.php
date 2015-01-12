@@ -24,7 +24,7 @@ class StringNormalizerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $normalizer->trimBadChars( $string ) );
 	}
 
-	public static function providerTrimBadChars() {
+	public function providerTrimBadChars() {
 		return array(
 
 			array( // #7: empty
@@ -78,7 +78,7 @@ class StringNormalizerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $normalizer->trimWhitespace( $string ) );
 	}
 
-	public static function providerTrimWhitespace() {
+	public function providerTrimWhitespace() {
 		return array(
 			array( 'foo bar', 'foo bar'), // #0
 			array( ' foo  bar ', 'foo  bar'), // #1
@@ -107,7 +107,7 @@ class StringNormalizerTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function providerCleanupToNFC() {
+	public function providerCleanupToNFC() {
 		return array(
 			array( "\xC3\x85land", 'Åland', true ),
 			array( "A\xCC\x8Aland", 'Åland', true ),
@@ -123,7 +123,7 @@ class StringNormalizerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $dst, $normalizer->trimToNFC( $src ), "String '$src' is not the same as the expected '$dst'" );
 	}
 
-	public static function providerTrimToNFC() {
+	public function providerTrimToNFC() {
 		return array(
 			array( "  \xC3\x85land  øyene  ", 'Åland  øyene' ), // #0
 			array( "  A\xCC\x8Aland  øyene  ", 'Åland  øyene' ), // #1

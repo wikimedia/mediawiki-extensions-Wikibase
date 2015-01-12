@@ -161,7 +161,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( null, $this->repo->getItemIdForLink( 'enwiki', 'Bar' ) );
 	}
 
-	public static function provideGetConflictsForItem() {
+	public function provideGetConflictsForItem() {
 		$cases = array();
 
 		// #0: same link ---------
@@ -219,7 +219,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $expectedConflicts, $conflicts );
 	}
 
-	public static function provideGetLinks() {
+	public function provideGetLinks() {
 		$cases = array();
 
 		$a = Item::newEmpty();
@@ -327,7 +327,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( count( $expectedLinks ), $n );
 	}
 
-	public static function provideGetEntities() {
+	public function provideGetEntities() {
 		return array(
 			array( // #0: empty
 				array(), // ids

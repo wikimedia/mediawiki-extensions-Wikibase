@@ -16,7 +16,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class MembershipValidatorTest extends \PHPUnit_Framework_TestCase {
 
-	public static function provideValidate() {
+	public function provideValidate() {
 		return array(
 			'contained' => array( array( 'apple', 'pear' ), null, 'apple', true ),
 			'not contained' => array( array( 'apple', 'pear' ), null, 'nuts', false ),

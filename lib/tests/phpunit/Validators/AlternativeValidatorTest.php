@@ -20,7 +20,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class AlternativeValidatorTest extends \PHPUnit_Framework_TestCase {
 
-	public static function provideValidate() {
+	public function provideValidate() {
 		$validators = array(
 			new RegexValidator( '/aaa/' ),
 			new RegexValidator( '/bbb/' ),

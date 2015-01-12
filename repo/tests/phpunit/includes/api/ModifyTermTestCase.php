@@ -23,7 +23,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		self::$hasSetup = true;
 	}
 
-	public static function provideData() {
+	public function provideData() {
 		return array(
 			// p => params, e => expected
 
@@ -123,7 +123,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		}
 	}
 
-	public static function provideExceptionData() {
+	public function provideExceptionData() {
 		return array(
 			// p => params, e => expected
 

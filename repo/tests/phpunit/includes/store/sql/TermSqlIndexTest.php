@@ -301,7 +301,7 @@ class TermSqlIndexTest extends TermIndexTest {
 		$this->assertEmpty( $obtainedIDs );
 	}
 
-	public static function provideGetSearchKey() {
+	public function provideGetSearchKey() {
 		return array(
 			array( // #0
 				'foo', // raw

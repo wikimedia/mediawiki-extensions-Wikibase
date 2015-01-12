@@ -126,7 +126,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 		$this->assertEquals( $expected, $result, 'Not the expected result' );
 	}
 
-	public static function providerFormatAutoComment() {
+	public function providerFormatAutoComment() {
 		$p20 = new PropertyId( 'P20' );
 		$q5 = new ItemId( 'Q5' );
 		$q5Value = new EntityIdValue( $q5 );
@@ -161,7 +161,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 		$this->assertEquals( $expected, $result, 'Not the expected result' );
 	}
 
-	public static function providerFormatAutoSummary() {
+	public function providerFormatAutoSummary() {
 		$p20 = new PropertyId( 'P20' );
 		$q5 = new ItemId( 'Q5' );
 		$q5Value = new EntityIdValue( $q5 );
@@ -195,7 +195,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 		$this->assertEquals( $expected, $formatter->formatSummary( $summary ) );
 	}
 
-	public static function provideToStringArgs() {
+	public function provideToStringArgs() {
 		return array(
 			array( array(), array(), '/* foobar:0| */' ),
 			array( array( '' ), array( 'This is a test…' ), '/* foobar:1|| */ This is a test…' ),
@@ -239,7 +239,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 		$this->assertEquals( $expected, $formatter->formatSummary( $summary ) );
 	}
 
-	public static function provideFormatSummary() {
+	public function provideFormatSummary() {
 		return array(
 			array( // #0
 				'summarytest',
@@ -341,7 +341,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 		}
 	}
 
-	public static function providerOnFormat() {
+	public function providerOnFormat() {
 		return array( //@todo: test other types of entities too!
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
