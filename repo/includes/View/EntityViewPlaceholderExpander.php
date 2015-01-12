@@ -192,7 +192,14 @@ class EntityViewPlaceholderExpander {
 					isset( $args[1] ) ? intval( $args[1] ) : 0
 				);
 			case 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class':
-				return $this->user->getOption( 'wikibase-entiytermsview-showEntitytermslistview' )
+				return
+					!$this->user->isAnon()
+						&& $this->user->getBoolOption(
+							'wikibase-entiytermsview-showEntitytermslistview'
+						)
+					|| $this->user->isAnon()
+						&& isset( $_COOKIE['wikibase-entiytermsview-showEntitytermslistview'] )
+						&& $_COOKIE['wikibase-entiytermsview-showEntitytermslistview'] === 'true'
 					? '' : 'wikibase-entitytermsview-entitytermsforlanguagelistview-collapsed';
 
 			default:
