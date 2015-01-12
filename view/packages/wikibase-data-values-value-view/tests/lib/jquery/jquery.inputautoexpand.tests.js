@@ -270,7 +270,7 @@
 		// The following string should be >MAXIMUM_WIDTHpx:
 		$textarea.testInsert( 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO' );
 		currentHeight = Math.ceil( $textarea.height() );
-		currentWidth = Math.ceil( $textarea.width() );
+		currentWidth = Math.ceil( $textarea.outerWidth() );
 
 		assert.ok(
 			currentHeight > previousHeight,

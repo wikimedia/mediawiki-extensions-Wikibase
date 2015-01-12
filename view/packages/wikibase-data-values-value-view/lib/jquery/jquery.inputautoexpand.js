@@ -190,7 +190,7 @@ $.extend( $.AutoExpandInput.prototype, {
 		copySpaceAffectingStyles( this.$input, $rulerX );
 
 		var minWidth = this._getMinWidth(),
-			maxWidth = this._options.maxWidth,
+			maxWidth = this._options.maxWidth - ( this.$input.outerWidth() - this.$input.width() ),
 			comfortZone = this._getComfortZone();
 
 		// Since the minimum width may have been calculated dynamically using the placeholder,
@@ -303,12 +303,7 @@ $.extend( $.AutoExpandInput.prototype, {
 		// bottom.
 		ruler.scrollTop = 9e4;
 
-		var border = parseInt( this.$input.css( 'borderTopWidth' ), 10 )
-			+ parseInt( this.$input.css( 'borderBottomWidth' ), 10 );
-
-		return ( browserSupports0Height )
-			? ruler.scrollTop + border
-			: ruler.scrollTop + border + ruler.clientHeight;
+		return ruler.scrollTop + $rulerY.outerHeight();
 	},
 
 	/**
@@ -320,7 +315,8 @@ $.extend( $.AutoExpandInput.prototype, {
 	_getComfortZone: function() {
 		return ( this._options.comfortZone )
 			? this._options.comfortZone
-			: Math.ceil( this._getWidthFor( ' ' ) * 2 );
+			// IE does not recognize a single space character, using some narrow character instead:
+			: Math.ceil( this._getWidthFor( 'I' ) * 2 );
 	},
 
 	/**
@@ -365,44 +361,6 @@ $.extend( $.AutoExpandInput.prototype, {
 		}
 	}
 } );
-
-/**
- * Whether the user client is capable of setting the textarea height to 0.
- * @property {boolean}
- * @ignore
- */
-var browserSupports0Height;
-
-$( document ).ready( function() {
-	browserSupports0Height = supports0Height();
-} );
-
-/**
- * Tests if the user client is capable of assigning a height of 0 to a textarea. (E.g. Firefox on
- * Mac will always set the minimum height to the text height as long as the textarea is
- * attached to the body element.)
- * @ignore
- *
- * @return {boolean}
- */
-function supports0Height() {
-	var support = true,
-		$t = $( '<textarea/>' );
-
-	$t
-	.attr( 'style', 'height: 0 !important; width: 0 !important; top:-9999px; left: -9999px;' )
-	.text( 'text' )
-	.appendTo( $( 'body' ) );
-
-	// Take rounding (height < 1) into account:
-	if( $t.height() >= 1 ) {
-		support = false;
-	}
-
-	$t.remove();
-
-	return support;
-}
 
 /**
  * Rulers used for measuring the input content.

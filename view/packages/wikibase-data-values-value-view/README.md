@@ -105,6 +105,11 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.10.1 (dev)
+
+#### Bugfixes
+* `$.fn.inputautoexpand`: Fixed height expansion mechanism.
+
 ### 0.10.0 (2015-01-06)
 * `$.ui.suggester`: Removed `event` parameter from `search()`.
 
