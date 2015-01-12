@@ -193,17 +193,22 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		// FIXME: OCP violation. No support for new types of entities can be registered
 
 		if ( $entity instanceof FingerprintProvider ) {
-			return $this->getFingerprintTerms( $entity->getFingerprint() );
+			$extraFields = array(
+				'entityType' => $entity->getType(),
+				'entityId' => $entity->getId()->getNumericId()
+			);
+
+			return $this->getFingerprintTerms( $entity->getFingerprint(), $extraFields );
 		}
 
 		return array();
 	}
 
-	private function getFingerprintTerms( Fingerprint $fingerprint ) {
+	private function getFingerprintTerms( Fingerprint $fingerprint, array $extraFields = array() ) {
 		$terms = array();
 
 		foreach ( $fingerprint->getDescriptions()->toTextArray() as $languageCode => $description ) {
-			$term = new Term();
+			$term = new Term( $extraFields );
 
 			$term->setLanguage( $languageCode );
 			$term->setType( Term::TYPE_DESCRIPTION );
@@ -213,7 +218,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		}
 
 		foreach ( $fingerprint->getLabels()->toTextArray() as $languageCode => $label ) {
-			$term = new Term();
+			$term = new Term( $extraFields );
 
 			$term->setLanguage( $languageCode );
 			$term->setType( Term::TYPE_LABEL );
@@ -224,7 +229,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
 			foreach ( $aliasGroup->getAliases() as $alias ) {
-				$term = new Term();
+				$term = new Term( $extraFields );
 
 				$term->setLanguage( $aliasGroup->getLanguageCode() );
 				$term->setType( Term::TYPE_ALIAS );
@@ -236,7 +241,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		return $terms;
 	}
-
 
 	/**
 	 * Internal callback for deleting a list of terms.
@@ -383,14 +387,17 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntity( EntityId $entityId, array $termTypes = null, array $languageCodes = null ) {
-		$fields = array(
-			'term_language',
-			'term_type',
-			'term_text',
+	public function getTermsOfEntity(
+		EntityId $entityId,
+		array $termTypes = null,
+		array $languageCodes = null
+	) {
+		return $this->getTermsOfEntities(
+			array( $entityId ),
+			$entityId->getEntityType(),
+			$termTypes,
+			$languageCodes
 		);
-
-		return $this->fetchTerms( array( $entityId ), $entityId->getEntityType(), $fields, $termTypes, $languageCodes );
 	}
 
 	/**
@@ -406,14 +413,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @throws \MWException
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $entityIds, $entityType = null, array $termTypes = null, array $languageCodes = null ) {
-		$fields = array(
-			'term_entity_id',
-			'term_entity_type',
-			'term_language',
-			'term_type',
-			'term_text',
-		);
+	public function getTermsOfEntities( array $entityIds, $entityType = null, array $termTypes = null,
+		array $languageCodes = null
+	) {
+		$fields = array_keys( $this->termFieldMap );
 
 		return $this->fetchTerms( $entityIds, $entityType, $fields, $termTypes, $languageCodes );
 	}
