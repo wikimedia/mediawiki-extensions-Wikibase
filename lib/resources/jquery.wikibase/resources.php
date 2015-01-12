@@ -183,12 +183,16 @@ return call_user_func( function() {
 				'themes/default/jquery.wikibase.entitytermsview.css',
 			),
 			'dependencies' => array(
+				'jquery.cookie',
 				'jquery.ui.TemplatedWidget',
+				'jquery.ui.toggler',
 				'jquery.wikibase.entitytermsforlanguagelistview',
+				'mediawiki.api',
 				'mediawiki.user',
 			),
 			'messages' => array(
 				'wikibase-description-empty',
+				'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler',
 				'wikibase-label-empty',
 				'wikibase-terms',
 			),
