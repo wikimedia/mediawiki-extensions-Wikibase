@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 class ClaimGuidParser {
 
 	/**
-	 * @var EntityIdParser $entityIdParser
+	 * @var EntityIdParser
 	 */
 	private $entityIdParser;
 
