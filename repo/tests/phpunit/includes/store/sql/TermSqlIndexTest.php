@@ -2,7 +2,9 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
@@ -358,6 +360,57 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$key = $index->getSearchKey( $raw, $lang );
 		$this->assertEquals( $normalized, $key );
+	}
+
+	/**
+	 * @dataProvider getEntityTermsProvider
+	 */
+	public function testGetEntityTerms( $expectedTerms, EntityDocument $entity ) {
+		$termIndex = $this->getTermIndex();
+		$wikibaseTerms = $termIndex->getEntityTerms( $entity );
+
+		$this->assertEquals( $expectedTerms, $wikibaseTerms );
+	}
+
+	public function getEntityTermsProvider() {
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'kittens!!!:)' );
+		$fingerprint->setDescription( 'es', 'es un gato!' );
+		$fingerprint->setAliasGroup( 'en', array( 'kitten-alias' ) );
+
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q999' ) );
+		$item->setFingerprint( $fingerprint );
+
+		$expectedTerms = array(
+			new Term( array(
+				'entityId' => 999,
+				'entityType' => 'item',
+				'termText' => 'es un gato!',
+				'termLanguage' => 'es',
+				'termType' => 'description'
+			) ),
+			new Term( array(
+				'entityId' => 999,
+				'entityType' => 'item',
+				'termText' => 'kittens!!!:)',
+				'termLanguage' => 'en',
+				'termType' => 'label'
+			) ),
+			new Term( array(
+				'entityId' => 999,
+				'entityType' => 'item',
+				'termText' => 'kitten-alias',
+				'termLanguage' => 'en',
+				'termType' => 'alias'
+			) )
+		);
+
+		return array(
+			array( $expectedTerms, $item ),
+			array( array(), Item::newEmpty() ),
+			array( array(), $this->getMock( 'Wikibase\DataModel\Entity\EntityDocument' ) )
+		);
 	}
 
 }
