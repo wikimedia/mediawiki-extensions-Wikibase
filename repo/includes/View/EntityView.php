@@ -155,7 +155,6 @@ if ( $ ) {
 			$entity,
 			$this->getHtmlForTermBox( $entityRevision )
 		);
-		$html .= $this->getHtmlForToc();
 
 		wfProfileOut( __METHOD__ );
 		return $html;
@@ -188,46 +187,6 @@ if ( $ ) {
 			$this->textInjector,
 			$this->editable
 		);
-	}
-
-	/**
-	 * Builds and returns the HTML for the toc.
-	 *
-	 * @return string
-	 */
-	private function getHtmlForToc() {
-		$tocSections = $this->getTocSections();
-
-		if ( count( $tocSections ) < 3 ) {
-			// MediaWiki core doesn't show a TOC unless there are at least 3 sections, so we
-			//shouldn't either.
-			return '';
-		}
-
-		$tocContent = '';
-		$i = 0;
-
-		foreach ( $tocSections as $id => $message ) {
-			$tocContent .= $this->templateFactory->render( 'wb-entity-toc-section',
-				$i++,
-				$id,
-				wfMessage( $message )->text()
-			);
-		}
-
-		return $this->templateFactory->render( 'wb-entity-toc',
-			wfMessage( 'toc' )->text(),
-			$tocContent
-		);
-	}
-
-	/**
-	 * Returns the sections that should displayed in the toc.
-	 *
-	 * @return string[] array( link target => system message key )
-	 */
-	protected function getTocSections() {
-		return array();
 	}
 
 	/**
