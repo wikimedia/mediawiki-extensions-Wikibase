@@ -11,6 +11,7 @@ use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\NamespaceChecker;
 use Wikibase\Updates\DataUpdateAdapter;
+use WikiPage;
 
 /**
  * Hook handlers for triggering data updates.
@@ -55,25 +56,17 @@ class DataUpdateHookHandlers {
 	}
 
 	/**
-	 * Static handler for the ParserAfterParse hook.
+	 * Static handler for the ArticleEditUpdates hook.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleEditUpdates
 	 *
-	 * @param Parser|null &$parser
-	 * @param string|null &$text
-	 * @param StripState|null $stripState
-	 *
-	 * @return bool
+	 * @param WikiPage $page The WikiPage object managing the edit
+	 * @param object $editInfo The current edit info object.
+	 *        $editInfo->output is an ParserOutput object.
+	 * @param bool $changed False if this is a null edit
 	 */
-	public static function onParserAfterParse(
-		Parser &$parser = null,
-		&$text = null,
-		StripState $stripState = null
-	) {
-		if ( $parser === null || $parser->getOptions()->getInterfaceMessage() ) {
-			return true;
-		}
-
+	public static function onArticleEditUpdates( WikiPage $page, &$editInfo, $changed ) {
 		$handler = self::newFromGlobalState();
-		return $handler->doParserAfterParse( $parser, $text, $stripState );
+		$handler->doArticleEditUpdates( $page, $editInfo, $changed );
 	}
 
 	public function __construct(
@@ -87,37 +80,26 @@ class DataUpdateHookHandlers {
 
 	/**
 	 * Hook runs after internal parsing
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserAfterParse
 	 *
-	 * @param Parser &$parser
-	 * @param string &$text
-	 * @param StripState $stripState
-	 *
-	 * @return bool
+	 * @param WikiPage $page The WikiPage object managing the edit
+	 * @param object $editInfo The current edit info object.
+	 *        $editInfo->output is an ParserOutput object.
+	 * @param bool $changed False if this is a null edit
 	 */
-	public function doParserAfterParse( Parser &$parser ) {
-		$title = $parser->getTitle();
+	public function doArticleEditUpdates( WikiPage $page, &$editInfo, $changed ) {
+		$title = $page->getTitle();
 
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			// shorten out
-			return true;
+			return;
 		}
 
-		$this->registerDataUpdates( $title, $parser->getOutput() );
+		$usageAcc = new ParserOutputUsageAccumulator( $editInfo->output );
 
-		return true;
-	}
-
-	private function registerDataUpdates( Title $title, ParserOutput $parserOutput ) {
-		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
-
-		$update = new DataUpdateAdapter(
-			array( $this->usageUpdater, 'updateUsageForPage' ),
+		$this->usageUpdater->updateUsageForPage(
 			$title->getArticleId(),
 			$usageAcc->getUsages()
 		);
-
-		$parserOutput->addSecondaryDataUpdate( $update );
 	}
 
 }
