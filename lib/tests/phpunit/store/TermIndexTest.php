@@ -11,7 +11,7 @@ use Wikibase\Term;
 use Wikibase\TermIndex;
 
 /**
- * Base class for tests for calsses implementing Wikibase\TermIndex.
+ * Base class for tests for classes implementing Wikibase\TermIndex.
  *
  * @group Wikibase
  *
@@ -102,7 +102,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$this->assertInternalType( 'array', $actual );
 		$this->assertCount( 2, $actual );
-		
+
 		/**
 		 * @var Term $term
 		 * @var Term $expected
