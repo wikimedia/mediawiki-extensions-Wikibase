@@ -144,7 +144,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$graphs['empty'] = self::makeEntityGraph(
 			$entities['empty']->getId(),
 			array(
-				'rdf:type' => $builder->getEntityTypeQName( Item::ENTITY_TYPE ),
+				'rdf:type' => RdfBuilder::NS_ONTOLOGY . ':Item',
 			),
 			array(
 				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
@@ -157,7 +157,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$graphs['terms'] = self::makeEntityGraph(
 			$entities['terms']->getId(),
 			array(
-				'rdf:type' => $builder->getEntityTypeQName( Item::ENTITY_TYPE ),
+				'rdf:type' => RdfBuilder::NS_ONTOLOGY . ':Item',
 				'rdfs:label' => array(
 					new EasyRdf_Literal( 'Berlin', 'en' ),
 					new EasyRdf_Literal( 'Берлин', 'ru' )

@@ -7,7 +7,6 @@ use EasyRdf_Graph;
 use EasyRdf_Literal;
 use EasyRdf_Namespace;
 use SiteList;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -15,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\Store\EntityLookup;
 
@@ -59,7 +59,7 @@ class RdfBuilder {
 	 *
 	 * @var array
 	 */
-	protected $namespaces = array();
+	private $namespaces = array();
 
 	/**
 	 * A list of entities mentioned/touched to or by this builder.
@@ -69,7 +69,7 @@ class RdfBuilder {
 	 *
 	 * @var array
 	 */
-	protected $entitiesResolved = array();
+	private $entitiesResolved = array();
 
 	/**
 	 * @param SiteList $sites
@@ -137,24 +137,24 @@ class RdfBuilder {
 	 * refer to the Wikibase RDF mapping spec.
 	 *
 	 * @param string   $prefix use a self::NS_XXX constant
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 *
 	 * @return string
 	 */
-	public function getEntityQName( $prefix, EntityId $id ) {
-		return $prefix . ':' . ucfirst( $id->getSerialization() );
+	public function getEntityQName( $prefix, EntityId $entityId ) {
+		return $prefix . ':' . ucfirst( $entityId->getSerialization() );
 	}
 
 	/**
 	 * Returns a qname for the given statement using the given prefix.
 	 *
 	 * @param string $prefix use a self::NS_XXX constant, usually self::NS_STATEMENT
-	 * @param Claim $claim
+	 * @param Statement $statement
 	 *
 	 * @return string
 	 */
-	public function getStatementQName( $prefix, Claim $claim ) {
-		return $prefix . ':' . $claim->getGuid();
+	private function getStatementQName( $prefix, Statement $statement ) {
+		return $prefix . ':' . $statement->getGuid();
 	}
 
 	/**
@@ -165,7 +165,7 @@ class RdfBuilder {
 	 *
 	 * @return string
 	 */
-	public function getEntityTypeQName( $type ) {
+	private function getEntityTypeQName( $type ) {
 		//TODO: the list of types is configurable, need to register URIs for extra types!
 
 		return self::NS_ONTOLOGY . ':' . ucfirst( $type );
@@ -174,12 +174,12 @@ class RdfBuilder {
 	/**
 	 * Gets a resource object representing the given entity
 	 *
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 *
 	 * @return EasyRDF_Resource
 	 */
-	public function getEntityResource( EntityId $id ) {
-		$entityQName = $this->getEntityQName( self::NS_ENTITY, $id );
+	private function getEntityResource( EntityId $entityId ) {
+		$entityQName = $this->getEntityQName( self::NS_ENTITY, $entityId );
 		$entityResource = $this->graph->resource( $entityQName );
 		return $entityResource;
 	}
@@ -187,14 +187,12 @@ class RdfBuilder {
 	/**
 	 * Gets a URL of the rdf description of the given entity
 	 *
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 *
 	 * @return string
 	 */
-	public function getDataURL( EntityId $id ) {
-		$base = $this->namespaces[ self::NS_DATA ];
-		$url = $base . ucfirst( $id->getSerialization() );
-		return $url;
+	public function getDataURL( EntityId $entityId ) {
+		return $this->namespaces[self::NS_DATA] . ucfirst( $entityId->getSerialization() );
 	}
 
 	/**
@@ -204,7 +202,7 @@ class RdfBuilder {
 	 *
 	 * @return bool
 	 */
-	protected function isLanguageIncluded( $lang ) {
+	private function isLanguageIncluded( $lang ) {
 		return true; //todo: optional filter
 	}
 
@@ -212,10 +210,10 @@ class RdfBuilder {
 	 * Registers an entity as mentioned. Will be recorded as unresolved
 	 * if it wasn't already marked as resolved.
 	 *
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 */
-	protected function entityMentioned( EntityId $id ) {
-		$prefixedId = $id->getSerialization();
+	private function entityMentioned( EntityId $entityId ) {
+		$prefixedId = $entityId->getSerialization();
 
 		if ( !isset( $this->entitiesResolved[$prefixedId] ) ) {
 			$this->entitiesResolved[$prefixedId] = false;
@@ -225,10 +223,10 @@ class RdfBuilder {
 	/**
 	 * Registers an entity as resolved.
 	 *
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 */
-	protected function entityResolved( EntityId $id ) {
-		$prefixedId = $id->getSerialization();
+	private function entityResolved( EntityId $entityId ) {
+		$prefixedId = $entityId->getSerialization();
 		$this->entitiesResolved[$prefixedId] = true;
 	}
 
@@ -260,7 +258,7 @@ class RdfBuilder {
 	 *
 	 * @param Entity         $entity
 	 */
-	public function addEntityMetaData( Entity $entity ) {
+	private function addEntityMetaData( Entity $entity ) {
 		$entityResource = $this->getEntityResource( $entity->getId() );
 		$entityResource->addResource( 'rdf:type', $this->getEntityTypeQName( $entity->getType() ) );
 		$dataURL = $this->getDataURL( $entity->getId() );
@@ -281,7 +279,7 @@ class RdfBuilder {
 	 *
 	 * @param Entity $entity
 	 */
-	public function addLabels( Entity $entity ) {
+	private function addLabels( Entity $entity ) {
 		$entityResource = $this->getEntityResource( $entity->getId() );
 
 		foreach ( $entity->getLabels() as $languageCode => $labelText ) {
@@ -300,7 +298,7 @@ class RdfBuilder {
 	 *
 	 * @param Entity $entity
 	 */
-	public function addDescriptions( Entity $entity ) {
+	private function addDescriptions( Entity $entity ) {
 		$entityResource = $this->getEntityResource( $entity->getId() );
 
 		foreach ( $entity->getDescriptions() as $languageCode => $description ) {
@@ -317,7 +315,7 @@ class RdfBuilder {
 	 *
 	 * @param Entity $entity
 	 */
-	public function addAliases( Entity $entity ) {
+	private function addAliases( Entity $entity ) {
 		$entityResource = $this->getEntityResource( $entity->getId() );
 
 		foreach ( $entity->getAllAliases() as $languageCode => $aliases ) {
@@ -336,12 +334,10 @@ class RdfBuilder {
 	 *
 	 * @param Item $item
 	 */
-	public function addSiteLinks( Item $item ) {
+	private function addSiteLinks( Item $item ) {
 		$entityResource = $this->getEntityResource( $item->getId() );
 
-		/**
-		 * @var SiteLink $siteLink
-		 */
+		/** @var SiteLink $siteLink */
 		foreach ( $item->getSiteLinkList() as $siteLink ) {
 			$site = $this->sites->getSite( $siteLink->getSiteId() );
 
@@ -363,44 +359,44 @@ class RdfBuilder {
 	}
 
 	/**
-	 * Adds all Claims/Statements from the given entity to the RDF graph.
+	 * Adds all Statements from the given entity to the RDF graph.
 	 *
 	 * @param EntityDocument $entity
 	 */
-	public function addClaims( EntityDocument $entity ) {
-		$id = $entity->getId();
+	private function addStatements( EntityDocument $entity ) {
+		$entityId = $entity->getId();
 
 		if ( $entity instanceof StatementListProvider ) {
 			foreach ( $entity->getStatements() as $statement ) {
-				$this->addClaim( $id, $statement );
+				$this->addStatement( $entityId, $statement );
 			}
 		}
 	}
 
 	/**
-	 * Adds the given Claim from the given Entity to the RDF graph.
+	 * Adds the given Statement from the given Entity to the RDF graph.
 	 *
 	 * @param EntityId $entityId
-	 * @param Claim $claim
+	 * @param Statement $statement
 	 */
-	private function addClaim( EntityId $entityId, Claim $claim ) {
-		$this->addMainSnak( $entityId, $claim );
+	private function addStatement( EntityId $entityId, Statement $statement ) {
+		$this->addMainSnak( $entityId, $statement );
 
 		//TODO: add qualifiers
 		//TODO: add references
 	}
 
 	/**
-	 * Adds the given Claim's main Snak to the RDF graph.
+	 * Adds the given Statement's main Snak to the RDF graph.
 	 *
 	 * @param EntityId $entityId
-	 * @param Claim $claim
+	 * @param Statement $statement
 	 */
-	private function addMainSnak( EntityId $entityId, Claim $claim ) {
-		$snak = $claim->getMainSnak();
+	private function addMainSnak( EntityId $entityId, Statement $statement ) {
+		$snak = $statement->getMainSnak();
 
 		if ( $snak instanceof PropertyValueSnak ) {
-			$this->addPropertyValueSnak( $entityId, $claim, $snak );
+			$this->addPropertyValueSnak( $entityId, $statement, $snak );
 		} else {
 			//TODO: NoValueSnak, SomeValueSnak
 			wfDebug( __METHOD__ . ": Unsupported snak type: " . get_class( $snak ) );
@@ -408,14 +404,14 @@ class RdfBuilder {
 	}
 
 	/**
-	 * Returns a resource representing the given claim.
+	 * Returns a resource representing the given Statement.
 	 *
-	 * @param Claim $claim
+	 * @param Statement $statement
 	 *
 	 * @return EasyRDF_Resource
 	 */
-	public function getStatementResource( Claim $claim ) {
-		$statementQName = $this->getStatementQName( self::NS_STATEMENT, $claim );
+	private function getStatementResource( Statement $statement ) {
+		$statementQName = $this->getStatementQName( self::NS_STATEMENT, $statement );
 		$statementResource = $this->graph->resource( $statementQName, array( self::WIKIBASE_STATEMENT_QNAME ) );
 		return $statementResource;
 	}
@@ -425,32 +421,32 @@ class RdfBuilder {
 	 *
 	 * @param EntityId $entityId
 	 * @param PropertyValueSnak $snak
-	 * @param Claim $claim
+	 * @param Statement $statement
 	 */
-	private function addPropertyValueSnak( EntityId $entityId, Claim $claim, PropertyValueSnak $snak ) {
+	private function addPropertyValueSnak( EntityId $entityId, Statement $statement, PropertyValueSnak $snak ) {
 		$entityResource = $this->getEntityResource( $entityId );
 
-		$propertyId = $claim->getMainSnak()->getPropertyId();
+		$propertyId = $statement->getMainSnak()->getPropertyId();
 		$propertyQName = $this->getEntityQName( self::NS_ENTITY, $propertyId );
 
-		$statementResource = $this->getStatementResource( $claim );
+		$statementResource = $this->getStatementResource( $statement );
 		$entityResource->addResource( $propertyQName, $statementResource );
 
 		$value = $snak->getDataValue();
 
 		$this->entityMentioned( $propertyId );
-		$this->addClaimValue( $claim, $propertyId, $value );
+		$this->addStatementValue( $statement, $propertyId, $value );
 	}
 
 	/**
 	 * Adds the value of the given property to the RDF graph.
 	 *
-	 * @param Claim     $claim
+	 * @param Statement $statement
 	 * @param EntityId  $propertyId
 	 * @param DataValue $value
 	 */
-	public function addClaimValue( Claim $claim, EntityId $propertyId, DataValue $value ) {
-		$statementResource = $this->getStatementResource( $claim );
+	private function addStatementValue( Statement $statement, EntityId $propertyId, DataValue $value ) {
+		$statementResource = $this->getStatementResource( $statement );
 		$propertyValueQName = $this->getEntityQName( self::NS_VALUE, $propertyId );
 
 		$typeId = $value->getType();
@@ -482,10 +478,10 @@ class RdfBuilder {
 		// @todo inject a DispatchingEntityIdParser
 		$idParser = new BasicEntityIdParser();
 
-		foreach ( $this->entitiesResolved as $id => $resolved ) {
+		foreach ( $this->entitiesResolved as $entityId => $resolved ) {
 			if ( !$resolved ) {
-				$id = $idParser->parse( $id );
-				$entity = $entityLookup->getEntity( $id );
+				$entityId = $idParser->parse( $entityId );
+				$entity = $entityLookup->getEntity( $entityId );
 
 				$this->addEntityStub( $entity );
 			}
@@ -508,7 +504,9 @@ class RdfBuilder {
 			$this->addSiteLinks( $entity );
 		}
 
-		//$this->addClaims( $entity ); //TODO: finish this.
+		if ( $entity instanceof EntityDocument ) {
+			//$this->addStatements( $entity ); //TODO: finish this.
+		}
 	}
 
 	/**
@@ -517,7 +515,7 @@ class RdfBuilder {
 	 *
 	 * @param Entity $entity
 	 */
-	public function addEntityStub( Entity $entity ) {
+	private function addEntityStub( Entity $entity ) {
 		$this->addEntityMetaData( $entity );
 		$this->addLabels( $entity );
 		$this->addDescriptions( $entity );
