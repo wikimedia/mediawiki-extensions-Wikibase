@@ -27,7 +27,7 @@
 	"wikibase-rc-hide-wikidata": "$1 на {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Скриване",
 	"wikibase-rc-hide-wikidata-show": "Показване",
-	"wikibase-rc-show-wikidata-pref": "Показване на {{WBREPONAME}} редакции в последните промени",
+	"wikibase-rc-show-wikidata-pref": "Показване на редакции от {{WBREPONAME}} в последните промени",
 	"wikibase-rc-wikibase-edit-title": "Редакция от {{WBREPONAME}}",
 	"wikibase-replicationnote": "Може да отнеме няколко минути, докато промените се отразят във всички уикита.",
 	"wikibase-watchlist-show-changes-pref": "Показване на {{WBREPONAME}} редакции в списъка за наблюдение",
