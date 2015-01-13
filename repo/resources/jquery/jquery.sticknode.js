@@ -19,14 +19,19 @@ var $window = $( window ),
  * clipping.
  *
  * @param {Object} [options]
- *        - {jQuery} $container
- *          Node specifying the bottom boundary for the node the plugin is initialized on. If the
- *          node the plugin is initialized on clips out of the container, it is reset to static
- *          position.
+ * @param {jQuery} [options.$container]
+ *        Node specifying the bottom boundary for the node the plugin is initialized on. If the
+ *        node the plugin is initialized on clips out of the container, it is reset to static
+ *        position.
+ * @param {boolean} [options.autoWidth=false]
+ *        When not fixed, apply "auto" width attribute instead of width computed from the unfixed
+ *        state.
+ * @param {number} [options.zIndex=1]
+ *        Custom z-index attribute.
  * @return {jQuery}
  *
  * @event sticknodeupdate
- *        Triggered when the node the widget is initialized on updates its positioning behaviour.
+ *        Triggered when the node the widget is initialized and updates its positioning behaviour.
  *        - {jQuery.Event}
  */
 $.fn.sticknode = function( options ) {
@@ -84,7 +89,9 @@ var StickyNode = function( $node, options ) {
 	this.$node.data( PLUGIN_NAME, this );
 
 	this._options = $.extend( {
-		$container: null
+		$container: null,
+		autoWidth: false,
+		zIndex: 1
 	}, options );
 
 	this._initialAttributes = {};
@@ -191,6 +198,8 @@ $.extend( StickyNode.prototype, {
 			width: this.$node.css( 'width' )
 		};
 
+		var width = this.$node.width();
+
 		// Cannot fix the clone instead of the original node since the clone does not feature event
 		// bindings.
 		this._$clone = this.$node.clone()
@@ -200,9 +209,20 @@ $.extend( StickyNode.prototype, {
 		this.$node
 		.css( 'left', this._initialAttributes.offset.left + 'px' )
 		.css( 'top', this.$node.outerHeight() - this.$node.outerHeight( true ) )
-		.css( 'width', this.$node.width() )
+		.css( 'width', width )
 		.css( 'position', 'fixed' )
-		.css( 'z-index', '1' );
+		.css( 'z-index', this._options.zIndex );
+
+		if( this._$clone.css( 'display' ) === 'table-header-group' ) {
+			var $original = this._$clone.find( '*' );
+
+			this.$node.find( '*' ).each( function( i ) {
+				var $node = $( this );
+				if( $node.css( 'display' ) === 'table-cell' ) {
+					$node.width( $original.eq( i ).width() + 'px' );
+				}
+			} );
+		}
 	},
 
 	_unfix: function() {
@@ -218,7 +238,7 @@ $.extend( StickyNode.prototype, {
 		this.$node
 		.css( 'left', this._initialAttributes.left )
 		.css( 'top', this._initialAttributes.top )
-		.css( 'width', this._initialAttributes.width )
+		.css( 'width', this._options.autoWidth ? 'auto' : this._initialAttributes.top )
 		.css( 'position', this._initialAttributes.position );
 
 		this._initialAttributes.offset = null;
@@ -275,6 +295,7 @@ $.extend( StickyNode.prototype, {
 		if( this.isFixed() ) {
 			this._unfix();
 			this._fix();
+			this.$node.triggerHandler( PLUGIN_NAME + 'update' );
 		}
 	}
 } );
