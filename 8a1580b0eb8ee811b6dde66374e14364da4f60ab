@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee703fc5_25874768",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-01-13T14:08:39Z",
+      "side": 1,
+      "message": "added a check for null id. not totally sure if id should be required here and then the method fail (e.g. exception) or omit the field?",
+      "parentUuid": "ee703fc5_2f65e641",
+      "revId": "8a1580b0eb8ee811b6dde66374e14364da4f60ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee703fc5_ef5e0e7b",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-13T11:13:28Z",
       "side": 1,
       "message": "I suggest the signature\n\n private function getFingerprintTerms( EntityId $entityId, Fingerprint $fingerprint )\n\nbut that\u0027s a private implementation detail and can be refactored later.",
+      "revId": "8a1580b0eb8ee811b6dde66374e14364da4f60ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_e5a94fdd",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-01-13T14:08:39Z",
+      "side": 1,
+      "message": "not sure that a getFingerprintTerms should know about the EntityId. in this use case, it might make sense though.",
+      "parentUuid": "ee703fc5_ef5e0e7b",
       "revId": "8a1580b0eb8ee811b6dde66374e14364da4f60ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee703fc5_c5de8b70",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-01-13T14:08:39Z",
+      "side": 1,
+      "message": "see below",
+      "parentUuid": "ee703fc5_4f229ab2",
+      "revId": "8a1580b0eb8ee811b6dde66374e14364da4f60ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee703fc5_6f0afe2a",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 8
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ee703fc5_c5976b92",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-01-13T14:08:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee703fc5_6f0afe2a",
+      "revId": "8a1580b0eb8ee811b6dde66374e14364da4f60ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee703fc5_42011107",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 8
@@ -81,6 +153,24 @@
       "writtenOn": "2015-01-13T11:13:28Z",
       "side": 1,
       "message": "I suggest to never fetch the type but pass the $entityType variable here instead. The type is part of the WHERE clause anyway and always the same for all rows in $res.",
+      "revId": "8a1580b0eb8ee811b6dde66374e14364da4f60ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_a5e1172b",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-01-13T14:08:39Z",
+      "side": 1,
+      "message": "buildTermResult is used for other things. will $entityType always be the same for all those other things?\n\nif we want to change this, I prefer it to be in another patch.",
+      "parentUuid": "ee703fc5_42011107",
       "revId": "8a1580b0eb8ee811b6dde66374e14364da4f60ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
