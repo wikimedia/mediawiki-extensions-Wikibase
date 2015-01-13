@@ -28,11 +28,11 @@
 		// On submit, replace human readable value like "English (en)" with actual sitename ("enwiki")
 		$( '#wb-itembytitle-form1' ).submit( function() {
 			var $input = $( '#wb-itembytitle-sitename' );
-			var langID = String( $input.val().replace(/.*\(|\).*/gi,'') );
+			var langID = String( $input.val().replace( /.*\(|\).*/gi, '' ) );
 			if ( wb.sites.getSite( langID ).getId() !== undefined ) {
 				$input.val( wb.sites.getSite( langID ).getId() );
 			}
-		});
+		} );
 	} );
 
 } )( jQuery, mediaWiki, wikibase );

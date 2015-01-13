@@ -58,4 +58,4 @@ MODULE.getStore = function( dataTypeStore ) {
 
 };
 
-} ( wikibase, jQuery.valueview, dataValues ) );
+}( wikibase, jQuery.valueview, dataValues ) );

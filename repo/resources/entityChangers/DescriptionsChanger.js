@@ -71,4 +71,4 @@
 			return deferred.promise();
 		}
 	} );
-} ( wikibase, jQuery ) );
+}( wikibase, jQuery ) );

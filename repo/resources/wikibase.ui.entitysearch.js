@@ -133,7 +133,7 @@
 				|| event.keyCode === $.ui.keyCode.ENTER || event.keyCode === $.ui.keyCode.SPACE
 			) {
 				var entity = $input.data( 'entityselector' ).selectedEntity();
-				if ( entity && entity.url ){
+				if ( entity && entity.url ) {
 					event.preventDefault(); // Prevent default form submit action.
 					window.location.href = entity.url;
 				}

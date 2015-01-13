@@ -30,7 +30,7 @@
 			[ // single-parameter templates
 				'param',
 				'<div></div>',
-				$( '<div/>').append( 'text' ),
+				$( '<div/>' ).append( 'text' ),
 				$( '<tr/>' ),
 				$( '<td/>' ).append( $( '<span/>' ).text( 'text' ) ),
 				'text with&nbsp;spaces'
@@ -38,7 +38,7 @@
 			[ // two-parameter templates
 				[ 'param1', 'param2' ],
 				[ 'param1', $( '<div/>' ) ],
-				[ $( '<div/>' ), $( '<div/>').text( 'param2' ) ]
+				[ $( '<div/>' ), $( '<div/>' ).text( 'param2' ) ]
 			]
 		];
 

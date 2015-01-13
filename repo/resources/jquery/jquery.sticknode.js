@@ -202,7 +202,7 @@ $.extend( StickyNode.prototype, {
 		.css( 'top', this.$node.outerHeight() - this.$node.outerHeight( true ) )
 		.css( 'width', this.$node.width() )
 		.css( 'position', 'fixed' )
-		.css( 'z-index', '1');
+		.css( 'z-index', '1' );
 	},
 
 	_unfix: function() {

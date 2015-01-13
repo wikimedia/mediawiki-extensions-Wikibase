@@ -11,7 +11,9 @@
  * @constructor
  * @since 0.4
  */
-wb.utilities.GuidGenerator = function GuidGenerator(){};
+wb.utilities.GuidGenerator = function GuidGenerator() {
+};
+
 $.extend( wb.utilities.GuidGenerator.prototype, {
 	/**
 	 * Generates and returns a Globally Unique IDentifier.

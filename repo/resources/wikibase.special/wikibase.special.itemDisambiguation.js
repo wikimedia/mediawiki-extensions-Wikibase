@@ -30,9 +30,9 @@
 		// On submit, replace human readable value like "English (en)" with actual language name ("en")
 		$( '#wb-itemdisambiguation-form1' ).submit( function() {
 			var $input = $( '#wb-itemdisambiguation-languagename' );
-			var langID = String( $input.val().replace( /.*\(|\).*/gi,'' ) );
+			var langID = String( $input.val().replace( /.*\(|\).*/gi, '' ) );
 			$input.val( langID );
-		});
+		} );
 	} );
 
 } )( jQuery, mediaWiki, wikibase );

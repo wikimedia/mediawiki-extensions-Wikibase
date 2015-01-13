@@ -166,4 +166,4 @@ $.extend( SELF.prototype, {
 	}
 } );
 
-} ( wikibase, jQuery ) );
+}( wikibase, jQuery ) );

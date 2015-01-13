@@ -332,7 +332,7 @@ $.widget( 'wikibase.linkitem', {
 				name: 'wbclient-linkItem-page',
 				id: 'wbclient-linkItem-page',
 				disabled: 'disabled',
-				'class' : 'wbclient-linkItem-input'
+				'class': 'wbclient-linkItem-input'
 			} )
 			.on( 'eachchange', function () {
 				// Enable the button if the field has a value

@@ -25,7 +25,7 @@
 		var api = {
 			setSitelink: sinon.spy( function() {
 				return $.Deferred().promise();
-			} ),
+			} )
 		};
 		var siteLinksChanger = new SUBJECT(
 			api,
@@ -51,7 +51,7 @@
 						}
 					}
 				} ).promise();
-			} ),
+			} )
 		};
 		var siteLinksChanger = new SUBJECT(
 			api,
@@ -75,7 +75,7 @@
 		var api = {
 			setSitelink: sinon.spy( function() {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
-			} ),
+			} )
 		};
 		var siteLinksChanger = new SUBJECT(
 			api,
