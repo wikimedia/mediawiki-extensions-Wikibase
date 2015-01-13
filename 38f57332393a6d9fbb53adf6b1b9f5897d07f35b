@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ee703fc5_6fa99e77",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-13T10:23:29Z",
+      "side": 1,
+      "message": "I also can\u0027t see why we\u0027d need \"extra fields\".\nAlso - why is this method public at all?",
+      "parentUuid": "ee703fc5_0fe7c210",
+      "revId": "38f57332393a6d9fbb53adf6b1b9f5897d07f35b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee703fc5_afeb36da",
         "filename": "lib/tests/phpunit/store/TermIndexTest.php",
         "patchSetId": 7
@@ -47,6 +65,24 @@
       "writtenOn": "2015-01-13T10:14:23Z",
       "side": 1,
       "message": "This array is irrelevant in this test, as far as I can see.",
+      "revId": "38f57332393a6d9fbb53adf6b1b9f5897d07f35b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_2fdac621",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-13T10:23:29Z",
+      "side": 1,
+      "message": "They put the ID into $expectedTerms, so we assert that $actualTerms has them. But I suppose getEntityTerms should just always do that.",
+      "parentUuid": "ee703fc5_afeb36da",
       "revId": "38f57332393a6d9fbb53adf6b1b9f5897d07f35b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
