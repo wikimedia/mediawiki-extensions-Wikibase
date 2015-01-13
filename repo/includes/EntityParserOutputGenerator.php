@@ -336,7 +336,6 @@ class EntityParserOutputGenerator {
 		// make css available for JavaScript-less browsers
 		$parserOutput->addModuleStyles( array(
 			'wikibase.common',
-			'wikibase.toc',
 			'jquery.ui.core',
 			'jquery.wikibase.statementview',
 			'jquery.wikibase.toolbar',

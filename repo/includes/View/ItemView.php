@@ -89,19 +89,6 @@ class ItemView extends EntityView {
 	}
 
 	/**
-	 * @see EntityView::getTocSections
-	 */
-	protected function getTocSections() {
-		$array = parent::getTocSections();
-		$array['claims'] = 'wikibase-statements';
-		foreach ( $this->siteLinkGroups as $group ) {
-			$id = htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES );
-			$array[$id] = 'wikibase-sitelinks-' . $group;
-		}
-		return $array;
-	}
-
-	/**
 	 * Builds and returns the HTML representing a WikibaseEntity's site-links.
 	 *
 	 * @since 0.1
