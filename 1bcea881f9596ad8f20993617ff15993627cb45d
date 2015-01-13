@@ -16,6 +16,23 @@
       "revId": "1bcea881f9596ad8f20993617ff15993627cb45d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_05e7a310",
+        "filename": "repo/includes/store/sql/ChangesSubscriptionSchemaUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-13T14:26:26Z",
+      "side": 1,
+      "message": "but?",
+      "revId": "1bcea881f9596ad8f20993617ff15993627cb45d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
