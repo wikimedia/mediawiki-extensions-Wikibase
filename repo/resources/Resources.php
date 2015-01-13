@@ -264,11 +264,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.toc' => $moduleTemplate + array(
-			'styles' => array(
-				'themes/default/wikibase.toc.css',
-			),
-		),
 	);
 
 	if ( defined( 'ULS_VERSION' ) ) {
