@@ -36,8 +36,8 @@ class FormatterLabelLookupFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertInstanceOf( 'Wikibase\Lib\Store\LabelLookup', $labelLookup );
 
-		$label = $labelLookup->getLabel( new ItemId( 'Q1' ) );
-		$this->assertEquals( $expectedLabel, $label );
+		$term = $labelLookup->getLabel( new ItemId( 'Q1' ) );
+		$this->assertEquals( $expectedLabel, $term->getText() );
 	}
 
 	public function provideGetLabelLookup() {

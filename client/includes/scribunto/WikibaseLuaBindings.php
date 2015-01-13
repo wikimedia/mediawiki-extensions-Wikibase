@@ -306,7 +306,7 @@ class WikibaseLuaBindings {
 		}
 
 		try {
-			$label = $this->labelLookup->getLabel( $entityId );
+			$term = $this->labelLookup->getLabel( $entityId );
 		} catch ( StorageException $ex ) {
 			return null;
 		} catch ( OutOfBoundsException $ex ) {
@@ -319,7 +319,7 @@ class WikibaseLuaBindings {
 		//       to this usage. We would need to trigger on changes to
 		//       *all* languages to fix that.
 		$this->usageAccumulator->addLabelUsage( $entityId );
-		return $label;
+		return $term->getText();
 	}
 
 	/**

@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\SettingsArray;
@@ -64,7 +65,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnValue( 'LabelString' ) );
+			->will( $this->returnValue( new Term( 'xy', 'LabelString' ) ) );
 
 		return new WikibaseLuaBindings(
 			new BasicEntityIdParser(),

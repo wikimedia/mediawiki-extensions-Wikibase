@@ -7,6 +7,7 @@ use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\LabelLookup;
 
 /**
@@ -82,14 +83,16 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 * @return string
 	 */
 	protected function formatEntityId( EntityId $entityId ) {
-		$label = null;
+		$term = null;
 
 		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
-			$label = $this->lookupEntityLabel( $entityId );
+			$term = $this->lookupEntityLabel( $entityId );
 		}
 
-		// @fixme check if the entity is deleted and format differently?
-		if ( !is_string( $label ) ) {
+		if ( $term ) {
+			$label = $term->getText();
+		} else {
+			// @fixme check if the entity is deleted and format differently?
 			switch ( $this->getOption( self::OPT_LABEL_FALLBACK ) ) {
 				case self::FALLBACK_PREFIXED_ID:
 					$label = $entityId->getSerialization();
@@ -112,13 +115,13 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return string|bool False if no label was found in the language or language fallback chain.
+	 * @return Term|null False if no label was found in the language or language fallback chain.
 	 */
 	protected function lookupEntityLabel( EntityId $entityId ) {
 		try {
 			return $this->labelLookup->getLabel( $entityId );
 		} catch ( OutOfBoundsException $e ) {
-			return false;
+			return null;
 		}
 	}
 
