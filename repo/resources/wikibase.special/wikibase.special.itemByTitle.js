@@ -16,7 +16,7 @@
 
 		// this will build a drop-down for the language selection:
 		var siteList = [];
-		for ( var siteId in wb.sites.getSites() ) {
+		for( var siteId in wb.sites.getSites() ) {
 			var site = wb.sites.getSite( siteId );
 			siteList.push( {
 				'label': site.getName() + ' (' + site.getId() + ')',

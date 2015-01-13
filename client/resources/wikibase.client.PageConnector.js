@@ -117,7 +117,7 @@ $.extend( wb.PageConnector.prototype, {
 	 * @return {object|undefined} Entity as returned by the API
 	 */
 	_extractEntity: function( apiResult ) {
-		for ( var i in apiResult.entities ) {
+		for( var i in apiResult.entities ) {
 			if ( apiResult.entities[ i ].sitelinks ) {
 				return apiResult.entities[ i ];
 			}
@@ -135,7 +135,7 @@ $.extend( wb.PageConnector.prototype, {
 		var siteLinkCount = 0,
 			i;
 
-		for ( i in entity.sitelinks ) {
+		for( i in entity.sitelinks ) {
 			if ( entity.sitelinks[ i ].site ) {
 				siteLinkCount += 1;
 			}

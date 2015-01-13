@@ -90,5 +90,4 @@ $.widget( 'ui.closeable', PARENT, {
 	}
 } );
 
-
 }( jQuery ) );

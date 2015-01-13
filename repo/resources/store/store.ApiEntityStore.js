@@ -100,4 +100,3 @@
 		}
 	} );
 }( wikibase, jQuery ) );
-
