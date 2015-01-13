@@ -7,6 +7,7 @@ use Title;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
@@ -26,7 +27,7 @@ class EntityIdHtmlLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnValue( 'A label' ) );
+			->will( $this->returnValue( new Term( 'xy', 'A label' ) ) );
 
 		return $labelLookup;
 	}

@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\Term;
 
 /**
  * @since 0.5
@@ -20,7 +21,7 @@ interface LabelLookup {
 	 * @param EntityId $entityId
 	 *
 	 * @throws OutOfBoundsException if no such label or entity could be found
-	 * @return string
+	 * @return Term
 	 */
 	public function getLabel( EntityId $entityId );
 

@@ -52,9 +52,9 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		$label = $entityId->getSerialization();
 
 		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
-			$itemLabel = $this->lookupEntityLabel( $entityId );
-			if ( is_string( $itemLabel ) ) {
-				$label = $itemLabel;
+			$term = $this->lookupEntityLabel( $entityId );
+			if ( $term ) {
+				$label = $term->getText();
 			} elseif ( !$title->exists() ) {
 				return $this->getHtmlForNonExistent( $entityId );
 			}

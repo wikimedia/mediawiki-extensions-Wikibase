@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\Term;
 
 /**
  * @since 0.5
@@ -36,10 +37,11 @@ class LanguageLabelLookup implements LabelLookup {
 	 * @param EntityId $entityId
 	 *
 	 * @throws OutOfBoundsException
-	 * @return string
+	 * @return Term
 	 */
 	public function getLabel( EntityId $entityId ) {
-		return $this->termLookup->getLabel( $entityId, $this->languageCode );
+		$text = $this->termLookup->getLabel( $entityId, $this->languageCode );
+		return new Term( $this->languageCode, $text );
 	}
 
 }

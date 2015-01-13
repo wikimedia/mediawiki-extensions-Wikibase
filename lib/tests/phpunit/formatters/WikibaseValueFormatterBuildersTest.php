@@ -17,6 +17,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
@@ -288,7 +289,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnValue( 'Custom LabelLookup' ) );
+			->will( $this->returnValue( new Term( 'xy', 'Custom LabelLookup' ) ) );
 
 		$fallbackFactory = new LanguageFallbackChainFactory();
 		$fallbackChain = $fallbackFactory->newFromLanguage( Language::factory( 'de-ch' ) );
