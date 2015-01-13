@@ -109,6 +109,9 @@ Other methods an Expert needs to provide:
 
 #### Bugfixes
 * `$.fn.inputautoexpand`: Fixed height expansion mechanism.
+* Use `wgULSLanguages` instead of `jQuery.uls.data.languages` for MonolingualTextValue.
+	This reduces the number of available languages, but makes it match the list
+	used by the Wikibase backend validators.
 
 ### 0.10.0 (2015-01-06)
 * `$.ui.suggester`: Removed `event` parameter from `search()`.
