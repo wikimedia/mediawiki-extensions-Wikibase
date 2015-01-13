@@ -84,6 +84,7 @@ return call_user_func( function() {
 				'definitions/edittoolbar/entitytermsview.js',
 			),
 			'dependencies' => array(
+				'jquery.sticknode',
 				'jquery.wikibase.entitytermsview',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.toolbarcontroller',
