@@ -1,0 +1,97 @@
+{
+	// ----
+	// This is a copy of the wikimedia preset so we can disable some of the rules
+
+	"requireCurlyBraces": [
+		"if",
+		"else",
+		"for",
+		"while",
+		"do",
+		"try",
+		"catch"
+	],
+	"requireSpaceBeforeKeywords": true,
+	"requireSpaceBeforeBlockStatements": true,
+	"requireParenthesesAroundIIFE": true,
+	"requireSpacesInConditionalExpression": true,
+	"disallowSpacesInNamedFunctionExpression": {
+		"beforeOpeningRoundBrace": true
+	},
+	"disallowSpacesInFunctionDeclaration": {
+		"beforeOpeningRoundBrace": true
+	},
+	"disallowSpacesInCallExpression": true,
+	"requireBlocksOnNewline": 1,
+	"disallowEmptyBlocks": true,
+	"requireSpacesInsideObjectBrackets": "all",
+	"requireSpacesInsideParentheses": "all",
+	"disallowSpaceAfterObjectKeys": true,
+	"requireSpaceBeforeObjectValues": true,
+	"requireCommaBeforeLineBreak": true,
+	"disallowSpaceAfterPrefixUnaryOperators": true,
+	"disallowSpaceBeforePostfixUnaryOperators": true,
+	"disallowSpaceBeforeBinaryOperators": [
+		","
+	],
+	"requireSpaceBeforeBinaryOperators": true,
+	"requireSpaceAfterBinaryOperators": true,
+	"disallowImplicitTypeConversion": [
+		"binary",
+		"string"
+	],
+	"requireCamelCaseOrUpperCaseIdentifiers": true,
+	"disallowKeywords": [
+		"with"
+	],
+	"disallowMixedSpacesAndTabs": true,
+	"disallowMultipleLineBreaks": true,
+	"disallowOperatorBeforeLineBreak": [
+		"."
+	],
+	"disallowTrailingWhitespace": true,
+	"disallowTrailingComma": true,
+	"disallowKeywordsOnNewLine": [
+		"else",
+		"catch"
+	],
+	"requireLineBreakAfterVariableAssignment": true,
+	"requireLineFeedAtFileEnd": true,
+	"requireCapitalizedConstructors": true,
+	"requireDotNotation": true,
+	"disallowYodaConditions": true,
+	"requireSpaceAfterLineComment": true,
+	"disallowNewlineBeforeBlockStatements": true,
+	"validateQuoteMarks": "'",
+
+	// ----
+	// Rules from wikimedia preset we don't follow
+
+	// "validateIndentation": "\t",
+	// "requireSpaceAfterKeywords": true,
+	// "requireMultipleVarDecl": "onevar",
+	// "disallowDanglingUnderscores": true,
+	// "requireSpacesInsideArrayBrackets": "all",
+
+	// ----
+	// Rules from wikimedia preset that should be enabled after fixing their violation
+
+	// "disallowQuotedKeysInObjects": "allButReserved",
+	// "validateLineBreaks": "LF",
+
+	// ----
+	// Own rules
+
+	"disallowSpaceAfterKeywords": [
+		"catch",
+		"for",
+//		"if",
+		"switch",
+		"while"
+	],
+	"requireSpaceAfterKeywords": [
+		"else"
+	],
+
+	"excludeFiles": [ "node_modules/**", "vendor/**" ]
+}

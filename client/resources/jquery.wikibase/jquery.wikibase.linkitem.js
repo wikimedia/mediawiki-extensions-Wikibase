@@ -161,7 +161,7 @@ $.widget( 'wikibase.linkitem', {
 				title: mw.message( 'wikibase-linkitem-title' ).escaped(),
 				width: 500,
 				resizable: false,
-				position: { my: "top", at: "top+50", of: window },
+				position: { my: 'top', at: 'top+50', of: window },
 				buttons: [ {
 					text: mw.msg( 'wikibase-linkitem-linkpage' ),
 					id: 'wbclient-linkItem-goButton',
@@ -410,7 +410,7 @@ $.widget( 'wikibase.linkitem', {
 
 			// Count site links and abort in case the entity already is linked with a page on this
 			// wiki:
-			for ( i in entity.sitelinks ) {
+			for( i in entity.sitelinks ) {
 				if ( entity.sitelinks[ i ].site ) {
 					siteLinkCount += 1;
 					if ( entity.sitelinks[ i ].site === this.options.globalSiteId ) {
@@ -483,7 +483,7 @@ $.widget( 'wikibase.linkitem', {
 	 *
 	 * @return {jQuery}
 	 */
-	_createSiteLinkTable: function( entity )  {
+	_createSiteLinkTable: function( entity ) {
 		var i, $siteLinks;
 
 		$siteLinks = $( '<div>' )
@@ -500,7 +500,7 @@ $.widget( 'wikibase.linkitem', {
 		.appendTo( $siteLinks.find( 'table' ) );
 
 		// Table body
-		for ( i in entity.sitelinks ) {
+		for( i in entity.sitelinks ) {
 			if ( entity.sitelinks[ i ].site ) {
 				// Show a row for each page that is linked with the current entity
 				$siteLinks

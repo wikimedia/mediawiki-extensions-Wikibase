@@ -1,0 +1,16 @@
+{
+	"name": "Wikibase",
+	"version": "0.0.0",
+	"scripts": {
+		"test": "jscs ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://gerrit.wikimedia.org/r/mediawiki/extensions/Wikibase"
+	},
+	"author": "The Wikidata team",
+	"license": "GPL-2.0+",
+	"devDependencies": {
+		"jscs": ""
+	}
+}
