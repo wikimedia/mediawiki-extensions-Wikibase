@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee703fc5_2f65e641",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-13T11:13:28Z",
+      "side": 1,
+      "message": "Not sure if needed, but I would add a test with an Entity where the id is null.",
+      "revId": "8a1580b0eb8ee811b6dde66374e14364da4f60ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_ef5e0e7b",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-13T11:13:28Z",
+      "side": 1,
+      "message": "I suggest the signature\n\n private function getFingerprintTerms( EntityId $entityId, Fingerprint $fingerprint )\n\nbut that\u0027s a private implementation detail and can be refactored later.",
+      "revId": "8a1580b0eb8ee811b6dde66374e14364da4f60ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_4f229ab2",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-13T11:13:28Z",
+      "side": 1,
+      "message": "Exclude the term_entity_type field, as suggested below.",
+      "revId": "8a1580b0eb8ee811b6dde66374e14364da4f60ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_6f0afe2a",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-13T11:13:28Z",
+      "side": 1,
+      "message": "Now $fields is always the same and does not need to be passed as a parameter.",
+      "revId": "8a1580b0eb8ee811b6dde66374e14364da4f60ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_42011107",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-13T11:13:28Z",
+      "side": 1,
+      "message": "I suggest to never fetch the type but pass the $entityType variable here instead. The type is part of the WHERE clause anyway and always the same for all rows in $res.",
+      "revId": "8a1580b0eb8ee811b6dde66374e14364da4f60ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
