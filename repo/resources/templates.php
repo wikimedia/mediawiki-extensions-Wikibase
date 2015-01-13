@@ -31,24 +31,6 @@ HTML;
 <hr class="wb-hr" />
 HTML;
 
-	$templates['wb-entity-toc'] =
-<<<HTML
-<div id="toc" class="toc wb-toc">
-	<div id="toctitle">
-		<h2>$1</h2>
-	</div>
-	<ul>$2</ul>
-</div>
-HTML;
-
-// $1: Index of the section
-// $2: Target of the link
-// $3: Text of the link
-	$templates['wb-entity-toc-section'] =
-<<<HTML
-<li class="toclevel-1 tocsection-$1"><a href="#$2"><span class="toctext">$3</span></a></li>
-HTML;
-
 // $1: Text of the heading.
 // $2: Optional ID for the heading.
 	$templates['wb-section-heading'] =
