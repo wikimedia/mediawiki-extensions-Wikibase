@@ -209,17 +209,6 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getVersion
-	 *
-	 * @since 0.4
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return get_class( $this ) . '-' . WB_VERSION;
-	}
-
-	/**
 	 * Returns the permissions that are required to perform the operation specified by
 	 * the parameters.
 	 *

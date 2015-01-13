@@ -184,15 +184,4 @@ class ParseValue extends ApiWikibase {
 		);
 	}
 
-	/**
-	 * @see ApiBase::getVersion
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return __CLASS__ . '-0.2';
-	}
-
 }

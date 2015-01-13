@@ -366,11 +366,4 @@ class SearchEntities extends ApiBase {
 		);
 	}
 
-	/**
-	 * @see ApiBase::getVersion
-	 */
-	public function getVersion() {
-		return __CLASS__ . '-' . WB_VERSION;
-	}
-
 }

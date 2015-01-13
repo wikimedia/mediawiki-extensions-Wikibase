@@ -142,17 +142,6 @@ class ApiClientInfo extends ApiQueryBase {
 	}
 
 	/**
-	 * @see ApiBase::getVersion
-	 *
-	 * @since 0.4
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return __CLASS__ . '-' . WBC_VERSION;
-	}
-
-	/**
 	 * @see ApiBase::getDescription
 	 *
 	 * @since 0.4
