@@ -3,12 +3,13 @@
 namespace Wikibase\Test;
 
 use Language;
-use RequestContext;
-use Title;
 use Linker;
+use RequestContext;
+use Revision;
 use SpecialPageFactory;
-use Wikibase\Repo\WikibaseRepo;
+use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
@@ -16,6 +17,7 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\Hook\LinkBeginHookHandler;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 
 /**
@@ -25,12 +27,13 @@ use Wikibase\Store\EntityIdLookup;
  *
  * @group WikibaseRepo
  * @group Wikibase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
+class LinkBeginHookHandlerTest extends \MediaWikiLangTestCase {
 
 	const ITEM_WITH_LABEL = 'Q1';
 	const ITEM_WITHOUT_LABEL = 'Q11';
@@ -173,6 +176,41 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $expected, $html );
 		$this->assertContains( self::ITEM_WITHOUT_LABEL, $customAttribs['title'] );
+	}
+
+	public function testDoOnLinkBegin_smokeTest() {
+		$contextTitle = Title::newFromText( 'Special:Recentchanges' );
+		$context = RequestContext::getMain();
+		$context->setTitle( $contextTitle );
+
+		$item = Item::newEmpty();
+		$item->setLabel( 'en', 'kitten13u255i32u52' );
+
+		$entityStore = WikibaseRepo::getDefaultInstance()->getStore()->getEntityStore();
+		$entityRevision = $entityStore->saveEntity( $item, 'new item', $context->getUser(), EDIT_NEW );
+
+		$revision = Revision::newFromId( $entityRevision->getRevisionId(), Revision::READ_LATEST );
+		$target = $revision->getTitle();
+
+		$this->assertTrue( RequestContext::getMain()->getTitle()->isSpecialPage(),
+			'context title is a special page' );
+
+		$this->assertTrue( $target->exists(), 'target exists' );
+
+		$entityIdLookup = WikibaseRepo::getDefaultInstance()->getEntityIdLookup();
+		$this->assertNotNull( $entityIdLookup->getEntityIdForTitle( $target ), 'entity id exists' );
+
+		$html = $target->getFullText();
+
+		$customAttribs = array();
+		$query = array();
+		$options = array();
+		$ret = null;
+
+		LinkBeginHookHandler::onLinkBegin( $context->getSkin(), $target, $html, $customAttribs,
+			$query, $options, $ret );
+
+		$this->assertContains( 'kitten13u255i32u52', $html );
 	}
 
 	private function getOutputPage( Title $title ) {
