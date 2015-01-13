@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use Language;
 use Status;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
@@ -218,6 +219,10 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'class' => 'wb-input',
 				'lang' => $wgLang->getCode(),
 				'dir' => $wgLang->getDir(),
+				'placeholder' => $this->msg(
+					'wikibase-label-edit-placeholder-language-aware',
+					Language::fetchLanguageName( $wgLang->getCode() )
+				)->text(),
 			)
 		)
 		. Html::element( 'br' )
@@ -239,6 +244,10 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'class' => 'wb-input',
 				'lang' => $wgLang->getCode(),
 				'dir' => $wgLang->getDir(),
+				'placeholder' => $this->msg(
+					'wikibase-description-edit-placeholder-language-aware',
+					Language::fetchLanguageName( $wgLang->getCode() )
+				)->text(),
 			)
 		)
 		. Html::element( 'br' );
