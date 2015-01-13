@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee703fc5_0528032e",
+        "filename": "lib/includes/formatters/EntityIdFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-13T14:21:05Z",
+      "side": 1,
+      "message": "Would be nice to have formatEntityId() here, and make that public in the plain formatter. Otehrwise, the spec here and the one inherited from ValueFormatterBase collide, and the implementation is forced to be a hybrid that can handle both variants.",
+      "revId": "61f9ac113c7918c3e4acac9743deabd1dc81e0f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
