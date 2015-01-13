@@ -4,6 +4,7 @@
  */
 .wikibase-entitytermsforlanguagelistview {
 	border: 1px solid #C9C9C9;
+	border-spacing: 0;
 	display: table;
 	padding-bottom: 1em;
 	table-layout: fixed;
@@ -14,18 +15,13 @@
 	border-color: #2779AA;
 }
 
-.wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-header {
-	display: table-header-group;
-}
-
-.wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-header .wikibase-entitytermsforlanguagelistview-header-row {
-	display: table-row;
+.wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-header tr td {
+	padding: 0;
 }
 
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-header .wikibase-entitytermsforlanguagelistview-header-row .wikibase-entitytermsforlanguagelistview-cell {
 	background-color: #E8E8E8;
 	border-right: 1px solid white;
-	display: table-cell;
 	padding-left: 0.4em;
 	vertical-align: top;
 }
@@ -49,19 +45,10 @@
 	width: 35%;
 }
 
-.wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview {
-	display: table-row-group;
-}
-
-.wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview {
-	display: table-row;
-}
-
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-language,
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-label,
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-aliases,
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-description {
-	display: table-cell;
 	line-height: 136%;
 	overflow: hidden;
 	padding-left: 0.4em;

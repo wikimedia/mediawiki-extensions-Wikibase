@@ -54,11 +54,11 @@
 }
 
 
-.wikibase-entitytermsview > .wikibase-toolbar-container {
-	line-height: 3;
+.wikibase-entitytermsview .wikibase-toolbar-container {
+	width: auto;
 }
 
-.wikibase-entitytermsview .wikibase-toolbar-container .wikibase-toolbar-container  {
+.wikibase-entitytermsview .wikibase-toolbar-container .wikibase-toolbar-container {
 	position: relative;
 }
 
