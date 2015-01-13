@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee703fc5_e4f86c48",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2015-01-13T22:22:03Z",
+      "side": 1,
+      "message": "I guess you\u0027re just being consistent, but this really should be using $this-\u003egetLanguage().",
+      "revId": "0166221a76f04a1e68428f39ebe409ccff59449b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
