@@ -203,6 +203,17 @@ $.extend( StickyNode.prototype, {
 		.css( 'width', this.$node.width() )
 		.css( 'position', 'fixed' )
 		.css( 'z-index', '1');
+
+		if( this._$clone.css( 'display' ) === 'table-header-group' ) {
+			var $original = this._$clone.find( '*' );
+
+			this.$node.find( '*' ).each( function( i ) {
+				var $node = $( this );
+				if( $node.css( 'display' ) === 'table-cell' ) {
+					$node.width( $original.eq( i ).width() + 'px' );
+				}
+			} );
+		}
 	},
 
 	_unfix: function() {
