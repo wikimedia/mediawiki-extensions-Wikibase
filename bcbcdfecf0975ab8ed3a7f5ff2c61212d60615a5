@@ -34,6 +34,24 @@
       "revId": "bcbcdfecf0975ab8ed3a7f5ff2c61212d60615a5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_8091619e",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-01-13T16:10:46Z",
+      "side": 1,
+      "message": "that\u0027s now how we handled ParserAfterParse before. I don\u0027t see reason for passing extra parameters that we don\u0027t need, but don\u0027t care that much.",
+      "parentUuid": "ee703fc5_20a095f0",
+      "revId": "bcbcdfecf0975ab8ed3a7f5ff2c61212d60615a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
