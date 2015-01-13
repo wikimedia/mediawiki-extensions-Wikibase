@@ -196,28 +196,28 @@ HTML;
 
 	$templates['wikibase-entitytermsforlanguagelistview'] =
 <<<HTML
-<div class="wikibase-entitytermsforlanguagelistview">
-	<div class="wikibase-entitytermsforlanguagelistview-header">
-		<div class="wikibase-entitytermsforlanguagelistview-header-row">
-			<div class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-language">$1</div>
-			<div class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-label">$2</div>
-			<div class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-aliases">$3</div>
-			<div class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-description">$4</div>
-		</div>
-	</div>
-	<div class="wikibase-entitytermsforlanguagelistview-listview"><!-- [0,*] wikibase-entitytermsforlanguageview -->$5</div>
-</div>
+<table class="wikibase-entitytermsforlanguagelistview">
+	<thead class="wikibase-entitytermsforlanguagelistview-header">
+		<tr class="wikibase-entitytermsforlanguagelistview-header-row">
+			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-language">$1</td>
+			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-label">$2</td>
+			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-aliases">$3</td>
+			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-description">$4</td>
+		</tr>
+	</thead>
+	<tbody class="wikibase-entitytermsforlanguagelistview-listview"><!-- [0,*] wikibase-entitytermsforlanguageview -->$5</tbody>
+</table>
 HTML;
 
 	$templates['wikibase-entitytermsforlanguageview'] =
 <<<HTML
-<div class="wikibase-entitytermsforlanguageview wikibase-entitytermsforlanguageview-$1" >
-	<div class="wikibase-entitytermsforlanguageview-language"><!-- wikibase-entitytermsforlanguageview-language -->$2</div>
-	<div class="wikibase-entitytermsforlanguageview-label">$3</div>
-	<div class="wikibase-entitytermsforlanguageview-aliases">$4</div>
-	<div class="wikibase-entitytermsforlanguageview-description">$5</div>
-	<!-- ? wikibase-toolbar -->$6
-</div>
+<$1 class="wikibase-entitytermsforlanguageview wikibase-entitytermsforlanguageview-$3" >
+	<$2 class="wikibase-entitytermsforlanguageview-language"><!-- wikibase-entitytermsforlanguageview-language -->$4</$2>
+	<$2 class="wikibase-entitytermsforlanguageview-label">$5</$2>
+	<$2 class="wikibase-entitytermsforlanguageview-aliases">$6</$2>
+	<$2 class="wikibase-entitytermsforlanguageview-description">$7</$2>
+	<!-- ? wikibase-toolbar -->$8
+</$1>
 HTML;
 
 	$templates['wikibase-entitytermsforlanguageview-language'] =

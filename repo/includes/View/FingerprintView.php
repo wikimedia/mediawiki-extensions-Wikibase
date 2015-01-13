@@ -208,6 +208,8 @@ class FingerprintView {
 		$hasDescription = $descriptions->hasTermForLanguage( $languageCode );
 
 		return $this->templateFactory->render( 'wikibase-entitytermsforlanguageview',
+			'tr',
+			'td',
 			$languageCode,
 			$this->templateFactory->render( 'wikibase-entitytermsforlanguageview-language',
 				is_null( $title )
