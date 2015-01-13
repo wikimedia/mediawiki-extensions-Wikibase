@@ -16,6 +16,24 @@
       "revId": "0166221a76f04a1e68428f39ebe409ccff59449b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_876e52c3",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-01-13T22:58:14Z",
+      "side": 1,
+      "message": "Yep, just being consistent, I will let someone else fix that one!",
+      "parentUuid": "ee703fc5_e4f86c48",
+      "revId": "0166221a76f04a1e68428f39ebe409ccff59449b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
