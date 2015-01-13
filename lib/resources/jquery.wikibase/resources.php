@@ -184,7 +184,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.cookie',
-				'jquery.ui.TemplatedWidget',
+				'jquery.ui.closeable',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.toggler',
 				'jquery.wikibase.entitytermsforlanguagelistview',
 				'mediawiki.api',
