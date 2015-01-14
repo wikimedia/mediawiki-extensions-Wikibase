@@ -4,6 +4,7 @@
 
 * Added `TermList::getWithLanguages`
 * Added `AliasGroupList::getWithLanguages`
+* Added `AliasGroupList::toTextArray`
 * Added `SiteLinkList::toArray`
 * Added `SiteLinkList::setSiteLink`
 * Added `SiteLinkList::setNewSiteLink`
