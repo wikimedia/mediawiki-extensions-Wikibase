@@ -142,7 +142,7 @@ class EntityViewFactory {
 		LabelLookup $labelLookup = null,
 		$editable = true
 	 ) {
-		$fingerprintView = $this->newFingerprintView( $languageCode );
+		$entityTermsView = $this->newEntityTermsView( $languageCode );
 		$claimsView = $this->newClaimsView( $languageCode, $fallbackChain, $labelLookup );
 
 		// @fixme all that seems needed in EntityView is language code and dir.
@@ -163,7 +163,7 @@ class EntityViewFactory {
 
 				return new ItemView(
 					$this->templateFactory,
-					$fingerprintView,
+					$entityTermsView,
 					$claimsView,
 					$language,
 					$siteLinksView,
@@ -173,7 +173,7 @@ class EntityViewFactory {
 			case 'property':
 				return new PropertyView(
 					$this->templateFactory,
-					$fingerprintView,
+					$entityTermsView,
 					$claimsView,
 					$this->dataTypeFactory,
 					$language,
@@ -220,10 +220,10 @@ class EntityViewFactory {
 	/**
 	 * @param string $languageCode
 	 *
-	 * @return FingerprintView
+	 * @return EntityTermsView
 	 */
-	private function newFingerprintView( $languageCode ) {
-		return new FingerprintView(
+	private function newEntityTermsView( $languageCode ) {
+		return new EntityTermsView(
 			$this->templateFactory,
 			$this->sectionEditLinkGenerator,
 			$languageCode

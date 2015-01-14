@@ -236,12 +236,12 @@ class EntityViewPlaceholderExpander {
 			return '';
 		}
 
-		$fingerprintView = new FingerprintView(
+		$entityTermsView = new EntityTermsView(
 			$this->templateFactory,
 			null,
 			$this->uiLanguage->getCode()
 		);
-		$html = $fingerprintView->getEntityTermsForLanguageListView(
+		$html = $entityTermsView->getEntityTermsForLanguageListView(
 			$entity->getFingerprint(),
 			$languages,
 			$this->targetPage,
