@@ -54,6 +54,18 @@
 }
 
 
+.wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview-toggler {
+	display: inline;
+}
+
+.wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview-configure {
+	display: inline-block;
+	font-size: 0.7em;
+	margin-left: 0.4em;
+	vertical-align: super;
+}
+
+
 .wikibase-entitytermsview .wikibase-toolbar-container {
 	width: auto;
 }
