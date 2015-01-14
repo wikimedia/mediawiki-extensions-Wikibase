@@ -33,6 +33,40 @@
       "revId": "1bcea881f9596ad8f20993617ff15993627cb45d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_dd3c5bbf",
+        "filename": "repo/includes/store/sql/ChangesSubscriptionSchemaUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-01-14T22:34:40Z",
+      "side": 1,
+      "message": "Is MWException not deprecated? I saw some commits removing it from core",
+      "revId": "1bcea881f9596ad8f20993617ff15993627cb45d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_5d704ba3",
+        "filename": "repo/includes/store/sql/ChangesSubscriptionTableBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-01-14T22:34:40Z",
+      "side": 1,
+      "message": "Builder is not the best name due to the table itself not being build and this not being the builder pattern either",
+      "revId": "1bcea881f9596ad8f20993617ff15993627cb45d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
