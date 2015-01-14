@@ -324,6 +324,12 @@ class AffectedPagesFinder {
 		$usagesPerPage = array();
 		foreach ( $titles as $title ) {
 			$pageId = $title->getArticleID();
+
+			if ( $pageId === 0 ) {
+				wfDebugLog( 'Article ID is 0 (e.g. perhaps a special page).' );
+				continue;
+			}
+
 			$usagesPerPage[$pageId] = new PageEntityUsages( $pageId, $usagesForItem );
 		}
 
