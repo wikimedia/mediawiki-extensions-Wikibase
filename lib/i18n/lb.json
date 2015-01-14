@@ -30,7 +30,7 @@
 	"wikibase-parse-error-entity-id": "Den ID vun der Entitéit ass schlecht formatéiert.",
 	"wikibase-parse-error-quantity": "De Wäert fir d'Quantitéit ass schlecht formatéiert.",
 	"wikibase-parse-error-time": "De Wäert fir d'Zäit ass schlecht formatéiert.",
-	"wikibase-sitelinks-wikipedia": "Wikipediasäiten déi mat dësem Element verlinkt sinn",
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Sprooch",
 	"wikibase-sitelinks-link-columnheading": "Verlinkt Säit",
 	"wikibase-snakview-snaktypeselector-somevalue": "onbekannte Wäert",

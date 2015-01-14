@@ -2,9 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Eitvys200",
-			"Hugo.arg"
+			"Hugo.arg",
+			"Aswanas"
 		]
 	},
+	"wikibase-entity-item": "įrašas",
+	"wikibase-entity-property": "savybė",
+	"wikibase-entity-query": "užklausa",
 	"wikibase-edit": "redaguoti",
 	"wikibase-save": "išsaugoti",
 	"wikibase-cancel": "atšaukti",
@@ -17,6 +21,13 @@
 	"wikibase-label-edit-placeholder": "įvesti žymą",
 	"wikibase-description-empty": "Dar nėra aprašo",
 	"wikibase-description-edit-placeholder": "įvesti aprašą",
+	"wikibase-diffview-reference": "išnaša",
+	"wikibase-diffview-rank": "rangas",
+	"wikibase-diffview-qualifier": "kvalifikatorius",
+	"wikibase-diffview-label": "žymė",
+	"wikibase-diffview-alias": "sinonimai",
+	"wikibase-diffview-description": "aprašas",
+	"wikibase-diffview-link": "nuorodos",
 	"wikibase-sitelink-site-edit-placeholder": "svetainė",
 	"wikibase-sitelink-page-edit-placeholder": "straipsnis",
 	"wikibase-statements": "Faktinė informacija",
@@ -32,5 +43,6 @@
 	"wikibase-entityselector-more": "daugiau",
 	"wikibase-anonymouseditwarning": "Dėmesio: Jūs neprisijungęs.\nJūsų IP adresas bus įrašytas į šio $1 keitimų istoriją.",
 	"wikibase-restrictionedit-tooltip-message": "Puslapis apsaugotas. Keitimai negalimi.",
+	"wikibase-itembytitle-summary": "Ypatingas atvejis:ItemByTitle naudojama surasti atitinkamą elementą tam tikrame puslapyje atverstoje svetainėje. <br /> kairiajame laukelyje, \"Site:\", jūs įvedate kalbos ir svetainės kodą. <br /> dešiniajame laukelyje, \"Page:\", jūs turite įvesti tikslų puslapio pavadinimą, kaip jis atrodo atverstoje svetainėje.",
 	"wikibase-restoreold": "perkrauti"
 }

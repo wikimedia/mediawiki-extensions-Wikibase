@@ -61,7 +61,7 @@
 	"wikibase-sitelinkgroupview-input-help-message": "Добавьте ссылку на сайт, указав сайт и страницу этого сайта, исправьте или удалите существующие ссылки на сайт.",
 	"wikibase-sitelinks-empty": "Ни одна страница ещё не ссылается сюда.",
 	"wikibase-sitelinks-input-help-message": "Поставьте ссылку на страницу, относящуюся к этому элементу.",
-	"wikibase-sitelinks-special": "Страницы других сайтов, ссылающиеся на этот элемент",
+	"wikibase-sitelinks-special": "Другие сайты",
 	"wikibase-badgeselector-badge-placeholder-title": "Щелкните, чтобы назначить значок.",
 	"wikibase-remove": "удалить",
 	"wikibase-move-up": "передвинуть выше",

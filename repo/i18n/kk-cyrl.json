@@ -1,11 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Arystanbek"
+			"Arystanbek",
+			"Нұрлан Рахымжанов"
 		]
 	},
 	"wikibase-desc": "Құрылымданған дерек қоймасы",
 	"specialpages-group-wikibaserepo": "Уикибаза қоймасы",
+	"wikibase-entity-item": "элемент",
+	"wikibase-entity-property": "Сипат",
+	"wikibase-entity-query": "сұрау",
 	"wikibase-edit": "өңдеу",
 	"wikibase-save": "сақтау",
 	"wikibase-cancel": "болдырмау",
@@ -20,6 +24,13 @@
 	"wikibase-description-empty": "Анықталған сипаттамасы жоқ",
 	"wikibase-description-edit-placeholder": "сипаттама енгізу",
 	"wikibase-description-edit-placeholder-language-aware": "$1 тілінде сипаттамасын енгізіңіз",
+	"wikibase-diffview-reference": "дереккөз",
+	"wikibase-diffview-rank": "Рет",
+	"wikibase-diffview-qualifier": "көрсеткіш",
+	"wikibase-diffview-label": "деңгей",
+	"wikibase-diffview-alias": "лақаптар",
+	"wikibase-diffview-description": "сипаттамасы",
+	"wikibase-diffview-link": "сілтемелер",
 	"wikibase-sitelink-site-edit-placeholder": "сайт",
 	"wikibase-sitelink-page-edit-placeholder": "бет",
 	"wikibase-alias-edit-placeholder": "бүркеншік ат енгізу",
@@ -33,7 +44,7 @@
 	"wikibase-move-up": "жоғары жылжыту",
 	"wikibase-move-down": "төмен жылжыту",
 	"wikibase-undo-title": "\"$1\" данасына жасалмаған өңдеме",
-	"wikibase-restore-title": "Бұрыңғы тарихын қалпына келтіру: \"$1\"",
+	"wikibase-restore-title": "Бұрынғы тарихын қалпына келтіру: \"$1\"",
 	"wikibase-undo-revision-error": "Болдырмау орындалмады",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|бір мән|$1 мәндер}} сақталмады",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|енгізілім|енгізілім}}",

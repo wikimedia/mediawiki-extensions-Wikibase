@@ -55,7 +55,7 @@
 	"wikibase-terms": "Muilla kielillä",
 	"wikibase-sitelinks-empty": "Tässä kohteessa ei vielä ole sivua linkitettynä.",
 	"wikibase-sitelinks-input-help-message": "Aseta linkki tähän kohteeseen liittyvälle sivulle.",
-	"wikibase-sitelinks-special": "Tähän kohteeseen linkitetyt muiden sivustojen sivut",
+	"wikibase-sitelinks-special": "Muut sivustot",
 	"wikibase-badgeselector-badge-placeholder-title": "Napsauta lisätäksesi merkin.",
 	"wikibase-remove": "poista",
 	"wikibase-move-up": "siirrä ylös",
@@ -296,6 +296,7 @@
 	"wikibase-property-summary-wbcreate-new": "Luotu uusi ominaisuus",
 	"wikibase-property-summary-wbcreateclaim-create": "Luotu väite",
 	"wikibase-property-summary-wbcreateclaim": "Luotu {{PLURAL:$1|väite|väitteitä}}",
+	"wikibase-property-summary-wbsetreference": "Aseta lähde",
 	"wikibase-property-summary-wbeditentity-create": "Luotu uusi ominaisuus",
 	"wikibase-property-summary-wbeditentity-update": "Ominaisuus muutettu",
 	"wikibase-property-summary-wbeditentity-override": "Ominaisuus korvattu",
@@ -330,5 +331,9 @@
 	"right-item-merge": "Yhdistää kohteita",
 	"right-item-redirect": "Luoda kohdeohjaussivuja",
 	"right-property-term": "Muuttaa ominaisuuksien käsitteitä (nimet, kuvaukset, aliakset)",
-	"right-property-create": "Luoda ominaisuuksia"
+	"right-property-create": "Luoda ominaisuuksia",
+	"apihelp-wbsetdescription-param-language": "Kuvauksen kieli",
+	"apihelp-wbsetlabel-param-language": "Nimen kieli",
+	"apihelp-wbsetlabel-param-value": "Nimen arvo",
+	"apihelp-wbsetsitelink-example-4": "Poistaa saksankielisen sivustolinkin kohteesta"
 }
