@@ -274,8 +274,7 @@ return call_user_func( function() {
 		include( __DIR__ . '/formatters/resources.php' ),
 		include( __DIR__ . '/parsers/resources.php' ),
 		include( __DIR__ . '/jquery/resources.php' ),
-		include( __DIR__ . '/store/resources.php' ),
-		include( __DIR__ . '/utilities/resources.php' )
+		include( __DIR__ . '/store/resources.php' )
 	);
 } );
 // @codeCoverageIgnoreEnd

@@ -85,7 +85,8 @@ return call_user_func( function() {
 		$modules,
 		include( __DIR__ . '/deprecated/resources.php' ),
 		include( __DIR__ . '/jquery.wikibase/resources.php' ),
-		include( __DIR__ . '/jquery.wikibase-shared/resources.php' )
+		include( __DIR__ . '/jquery.wikibase-shared/resources.php' ),
+		include( __DIR__ . '/utilities/resources.php' )
 	);
 
 	if ( defined( 'ULS_VERSION' ) ) {
