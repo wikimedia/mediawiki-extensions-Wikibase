@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee703fc5_5bc9f353",
+        "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-14T14:38:48Z",
+      "side": 1,
+      "message": "null if no label was found.",
+      "revId": "10b4a238ed44b57ecde8a3bb78dff239f210b9ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
