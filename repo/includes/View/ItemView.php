@@ -39,7 +39,7 @@ class ItemView extends EntityView {
 	 * @see EntityView::__construct
 	 *
 	 * @param TemplateFactory $templateFactory
-	 * @param FingerprintView $fingerprintView
+	 * @param EntityTermsView $entityTermsView
 	 * @param StatementGroupListView $statementGroupListView
 	 * @param Language $language
 	 * @param SiteLinksView $siteLinksView
@@ -48,14 +48,14 @@ class ItemView extends EntityView {
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
-		FingerprintView $fingerprintView,
+		EntityTermsView $entityTermsView,
 		StatementGroupListView $statementGroupListView,
 		Language $language,
 		SiteLinksView $siteLinksView,
 		array $siteLinkGroups,
 		$editable = true
 	) {
-		parent::__construct( $templateFactory, $fingerprintView, $language, $editable );
+		parent::__construct( $templateFactory, $entityTermsView, $language, $editable );
 
 		$this->statementGroupListView = $statementGroupListView;
 		$this->siteLinkGroups = $siteLinkGroups;
