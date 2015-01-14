@@ -127,7 +127,7 @@ class Statement extends Claim {
 		return sha1( implode(
 			'|',
 			array(
-				parent::getHash(),
+				sha1( $this->mainSnak->getHash() . $this->qualifiers->getHash() ),
 				$this->rank,
 				$this->references->getValueHash(),
 			)
@@ -143,7 +143,11 @@ class Statement extends Claim {
 	 * @return Snak[]
 	 */
 	public function getAllSnaks() {
-		$snaks = parent::getAllSnaks();
+		$snaks = array( $this->mainSnak );
+
+		foreach( $this->qualifiers as $qualifier ) {
+			$snaks[] = $qualifier;
+		}
 
 		/* @var Reference $reference */
 		foreach( $this->getReferences() as $reference ) {
