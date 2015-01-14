@@ -32,9 +32,9 @@ abstract class EntityView {
 	protected $templateFactory;
 
 	/**
-	 * @var FingerprintView
+	 * @var EntityTermsView
 	 */
-	private $fingerprintView;
+	private $entityTermsView;
 
 	/**
 	 * @var Language
@@ -53,17 +53,17 @@ abstract class EntityView {
 
 	/**
 	 * @param TemplateFactory $templateFactory
-	 * @param FingerprintView $fingerprintView
+	 * @param EntityTermsView $entityTermsView
 	 * @param Language $language
 	 * @param bool $editable
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
-		FingerprintView $fingerprintView,
+		EntityTermsView $entityTermsView,
 		Language $language,
 		$editable = true
 	) {
-		$this->fingerprintView = $fingerprintView;
+		$this->entityTermsView = $entityTermsView;
 		$this->language = $language;
 		$this->editable = $editable;
 
@@ -180,7 +180,7 @@ if ( $ ) {
 	 * @return string
 	 */
 	private function getHtmlForFingerprint( Entity $entity, $termBoxHtml ) {
-		return $this->fingerprintView->getHtml(
+		return $this->entityTermsView->getHtml(
 			$entity->getFingerprint(),
 			$entity->getId(),
 			$termBoxHtml,

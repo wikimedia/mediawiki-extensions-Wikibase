@@ -5,14 +5,14 @@ namespace Wikibase\Test;
 use MessageCache;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Repo\View\FingerprintView;
+use Wikibase\Repo\View\EntityTermsView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\TextInjector;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
 
 /**
- * @covers Wikibase\Repo\View\FingerprintView
+ * @covers Wikibase\Repo\View\EntityTermsView
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -21,7 +21,7 @@ use Wikibase\Template\TemplateRegistry;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Mättig
  */
-class FingerprintViewTest extends \MediaWikiLangTestCase {
+class EntityTermsViewTest extends \MediaWikiLangTestCase {
 
 	protected function setUp() {
 		parent::setUp();
@@ -42,10 +42,10 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 		parent::tearDown();
 	}
 
-	private function getFingerprintView( $languageCode = 'en' ) {
+	private function getEntityTermsView( $languageCode = 'en' ) {
 		$templateFactory = new TemplateFactory( TemplateRegistry::getDefaultInstance() );
 
-		return new FingerprintView(
+		return new EntityTermsView(
 			$templateFactory,
 			new SectionEditLinkGenerator( $templateFactory ),
 			$languageCode
@@ -67,9 +67,9 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 	}
 
 	public function testGetHtml_containsTermsAndAliases() {
-		$fingerprintView = $this->getFingerprintView();
+		$entityTermsView = $this->getEntityTermsView();
 		$fingerprint = $this->getFingerprint();
-		$html = $fingerprintView->getHtml( $fingerprint, null, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
 
 		$this->assertContains( htmlspecialchars( $fingerprint->getLabel( 'en' )->getText() ), $html );
 		$this->assertContains( htmlspecialchars( $fingerprint->getDescription( 'en' )->getText() ), $html );
@@ -92,8 +92,8 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 	 * @dataProvider entityFingerprintProvider
 	 */
 	public function testGetHtml_isEditable( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
-		$fingerprintView = $this->getFingerprintView( $languageCode );
-		$html = $fingerprintView->getHtml( $fingerprint, $entityId, '', new TextInjector() );
+		$entityTermsView = $this->getEntityTermsView( $languageCode );
+		$html = $entityTermsView->getHtml( $fingerprint, $entityId, '', new TextInjector() );
 		$idString = $entityId->getSerialization();
 
 		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetLabel/' . $idString . '/' . $languageCode . '"@', $html );
@@ -103,19 +103,19 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 	 * @dataProvider entityFingerprintProvider
 	 */
 	public function testGetHtml_isNotEditable( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
-		$fingerprintView = $this->getFingerprintView( $languageCode );
-		$html = $fingerprintView->getHtml( $fingerprint, $entityId, '', new TextInjector(), false );
+		$entityTermsView = $this->getEntityTermsView( $languageCode );
+		$html = $entityTermsView->getHtml( $fingerprint, $entityId, '', new TextInjector(), false );
 
 		$this->assertNotContains( '<a ', $html );
 	}
 
 	public function testGetHtml_valuesAreEscaped() {
-		$fingerprintView = $this->getFingerprintView();
+		$entityTermsView = $this->getEntityTermsView();
 		$fingerprint = Fingerprint::newEmpty();
 		$fingerprint->setLabel( 'en', '<a href="#">evil html</a>' );
 		$fingerprint->setDescription( 'en', '<script>alert( "xss" );</script>' );
 		$fingerprint->setAliasGroup( 'en', array( '<b>bold</b>', '<i>italic</i>' ) );
-		$html = $fingerprintView->getHtml( $fingerprint, null, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
 
 		$this->assertContains( 'evil html', $html, 'make sure it works' );
 		$this->assertNotContains( 'href="#"', $html );
@@ -146,15 +146,15 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 	 * @dataProvider emptyFingerprintProvider
 	 */
 	public function testGetHtml_isMarkedAsEmptyValue( Fingerprint $fingerprint ) {
-		$fingerprintView = $this->getFingerprintView();
-		$html = $fingerprintView->getHtml( $fingerprint, null, '', new TextInjector() );
+		$entityTermsView = $this->getEntityTermsView();
+		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
 
 		$this->assertContains( 'wb-empty', $html );
 	}
 
 	public function testGetHtml_isNotMarkedAsEmpty() {
-		$fingerprintView = $this->getFingerprintView();
-		$html = $fingerprintView->getHtml( $this->getFingerprint(), null, '', new TextInjector() );
+		$entityTermsView = $this->getEntityTermsView();
+		$html = $entityTermsView->getHtml( $this->getFingerprint(), null, '', new TextInjector() );
 
 		$this->assertNotContains( 'wb-empty', $html );
 	}
@@ -163,8 +163,8 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 	 * @dataProvider entityFingerprintProvider
 	 */
 	public function testGetHtml_withEntityId( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
-		$fingerprintView = $this->getFingerprintView( $languageCode );
-		$html = $fingerprintView->getHtml( $fingerprint, $entityId, '', new TextInjector() );
+		$entityTermsView = $this->getEntityTermsView( $languageCode );
+		$html = $entityTermsView->getHtml( $fingerprint, $entityId, '', new TextInjector() );
 		$idString = $entityId->getSerialization();
 
 		$this->assertContains( '(' . $idString . ')', $html );
@@ -172,8 +172,8 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 	}
 
 	public function testGetHtml_withoutEntityId() {
-		$fingerprintView = $this->getFingerprintView();
-		$html = $fingerprintView->getHtml( Fingerprint::newEmpty(), null, '', new TextInjector() );
+		$entityTermsView = $this->getEntityTermsView();
+		$html = $entityTermsView->getHtml( Fingerprint::newEmpty(), null, '', new TextInjector() );
 
 		$this->assertNotContains( '(new)', $html );
 		$this->assertNotContains( '<a ', $html );
@@ -183,8 +183,8 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 	 * @dataProvider emptyFingerprintProvider
 	 */
 	public function testGetHtml_containsIsEmptyPlaceholders( Fingerprint $fingerprint, $message ) {
-		$fingerprintView = $this->getFingerprintView();
-		$html = $fingerprintView->getHtml( $fingerprint, null, '', new TextInjector() );
+		$entityTermsView = $this->getEntityTermsView();
+		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
 
 		$this->assertContains( $message, $html );
 		$this->assertContains( 'strong', $html, 'make sure the setUp works' );
