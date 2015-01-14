@@ -3,6 +3,8 @@
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use Title;
+use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\SiteLinkUsageLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -108,7 +110,19 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 
 		$actual = iterator_to_array( $actual );
 		$this->assertCount( 1, $actual );
-		$this->assertEquals( 23, $actual[0] );
+		$this->assertInstanceOf( 'Wikibase\Client\Usage\PageEntityUsages', $actual[0] );
+
+		/** @var PageEntityUsages $pageUsageObject */
+		/** @var EntityUsage[] $usages */
+		$pageUsageObject = reset( $actual );
+		$usages = $pageUsageObject->getUsages();
+
+		$this->assertEquals( 23, $pageUsageObject->getPageId() );
+		$this->assertCount( 1, $usages );
+
+		$usage = reset( $usages );
+		$this->assertEquals( EntityUsage::ALL_USAGE, $usage->getAspect() );
+		$this->assertEquals( $q23, $usage->getEntityId() );
 	}
 
 	public function testGetUnusedEntities() {

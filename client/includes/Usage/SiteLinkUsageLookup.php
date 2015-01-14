@@ -81,8 +81,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 	 * @param string[] $aspects Which aspects to consider (if omitted, all aspects are considered).
 	 * Use the EntityUsage::XXX_USAGE constants to represent aspects.
 	 *
-	 * @return Iterator An iterator over the IDs of pages using any of the given entities.
-	 *         If $aspects is given, only usages of these aspects are included in the result.
+	 * @return Iterator<PageEntityUsages>
 	 * @throws UsageTrackerException
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
@@ -97,7 +96,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 		$numericItemIds = $this->getNumericItemIds( $entityIds );
 		$rows = $this->siteLinkLookup->getLinks( $numericItemIds, array( $this->clientSiteId ) );
 
-		$pageIds = $this->getPageIdsFromSiteLinkRows( $rows );
+		$pageIds = $this->getPageEntityUsagesFromSiteLinkRows( $rows );
 		return new ArrayIterator( $pageIds );
 	}
 
@@ -124,20 +123,29 @@ class SiteLinkUsageLookup implements UsageLookup {
 	/**
 	 * @param array[] $rows Rows as returned by SiteLinkLookup::getLinks
 	 *
-	 * @return int[]
+	 * @return PageEntityUsages[]
 	 */
-	private function getPageIdsFromSiteLinkRows( array $rows ) {
+	private function getPageEntityUsagesFromSiteLinkRows( array $rows ) {
 		$titleFactory = $this->titleFactory;
-		$pageIds = array_map(
+		$pageEntityUsages = array_map(
 			function ( array $row ) use ( $titleFactory ) {
+				// $row = array( $siteId, $pageName, $numericItemId );
+				$itemId = ItemId::newFromNumber( $row[2] );
 				$title = $titleFactory->newFromText( $row[1] );
-				return $title ? $title->getArticleID() : 0;
+
+				if ( !$title ) {
+					return null;
+				}
+
+				// NOTE: since we don't know how the item is used on the linked page, assume "all" usage.
+				$usage = new EntityUsage( $itemId, EntityUsage::ALL_USAGE );
+				return new PageEntityUsages( $title->getArticleID(), array( $usage ) );
 			},
 			$rows
 		);
 
-		array_unique( $pageIds );
-		return $pageIds;
+		$pageEntityUsages = array_filter( $pageEntityUsages );
+		return $pageEntityUsages;
 	}
 
 	/**
