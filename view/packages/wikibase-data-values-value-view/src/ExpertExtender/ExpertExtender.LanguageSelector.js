@@ -1,6 +1,4 @@
-( function( $, uls, ExpertExtender ) {
-
-	// FIXME: uls knows way more languages than \Languages
+( function( $, ExpertExtender, mw ) {
 
 	'use strict';
 
@@ -139,21 +137,22 @@
 	 * @return {Object}
 	 */
 	function getLanguagesMaps( getMsg ) {
+		var languages = mw.config.get( 'wgULSLanguages' );
 		var languagesMap = {};
 		var inverseLanguagesMap = {};
-		if( !uls ) {
+		if( !languages ) {
 			return [];
 		}
 
-		$.each( uls.data.languages, function( key, language ) {
+		$.each( languages, function( key, language ) {
 			var str;
-			if( !language[2] ) {
+			if( !language ) {
 				return;
 			}
-			str = getMsg( [ language[2], key ] );
+			str = getMsg( [ language, key ] );
 			languagesMap[key] = str;
 			inverseLanguagesMap[str] = key;
 		} );
 		return [ languagesMap, inverseLanguagesMap ];
 	}
-} ( jQuery, jQuery.uls, jQuery.valueview.ExpertExtender ) );
+} ( jQuery, jQuery.valueview.ExpertExtender, mediaWiki ) );
