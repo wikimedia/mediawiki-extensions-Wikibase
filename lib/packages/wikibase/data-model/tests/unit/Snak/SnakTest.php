@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\DataModel\Tests\Snak;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;

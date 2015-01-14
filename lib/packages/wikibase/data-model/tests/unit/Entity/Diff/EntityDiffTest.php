@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Entity\Diff;
+namespace Wikibase\DataModel\Tests\Entity\Diff;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
@@ -115,7 +115,7 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 	public function testGetClaimsDiff( EntityDiff $entityDiff ) {
 		$diff = $entityDiff->getClaimsDiff();
 
-		$this->assertInstanceOf( '\Diff\Diff', $diff );
+		$this->assertInstanceOf( 'Diff\Diff', $diff );
 		$this->assertTrue( $diff->isAssociative() );
 
 		foreach ( $diff as $diffOp ) {
@@ -132,7 +132,7 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 	public function testGetDescriptionsDiff( EntityDiff $entityDiff ) {
 		$diff = $entityDiff->getDescriptionsDiff();
 
-		$this->assertInstanceOf( '\Diff\Diff', $diff );
+		$this->assertInstanceOf( 'Diff\Diff', $diff );
 		$this->assertTrue( $diff->isAssociative() );
 	}
 
@@ -142,7 +142,7 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 	public function testGetLabelsDiff( EntityDiff $entityDiff ) {
 		$diff = $entityDiff->getLabelsDiff();
 
-		$this->assertInstanceOf( '\Diff\Diff', $diff );
+		$this->assertInstanceOf( 'Diff\Diff', $diff );
 		$this->assertTrue( $diff->isAssociative() );
 	}
 
@@ -152,7 +152,7 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 	public function testGetAliasesDiff( EntityDiff $entityDiff ) {
 		$diff = $entityDiff->getAliasesDiff();
 
-		$this->assertInstanceOf( '\Diff\Diff', $diff );
+		$this->assertInstanceOf( 'Diff\Diff', $diff );
 		$this->assertTrue( $diff->isAssociative() );
 	}
 

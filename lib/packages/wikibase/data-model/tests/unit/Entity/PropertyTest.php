@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Entity;
+namespace Wikibase\DataModel\Tests\Entity;
 
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Property;

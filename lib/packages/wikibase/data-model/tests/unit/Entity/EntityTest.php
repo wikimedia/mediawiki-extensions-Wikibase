@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Entity;
+namespace Wikibase\DataModel\Tests\Entity;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;

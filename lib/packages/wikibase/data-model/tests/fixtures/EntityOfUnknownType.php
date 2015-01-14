@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\DataModel\Fixtures;
+namespace Wikibase\DataModel\Fixtures;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Test;
+namespace Wikibase\DataModel\Tests;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\ByPropertyIdGrouper;

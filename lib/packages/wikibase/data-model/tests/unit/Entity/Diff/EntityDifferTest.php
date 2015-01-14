@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Test\Entity\Diff;
+namespace Wikibase\DataModel\Tests\Entity\Diff;
 
 use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Test\DataModel\Fixtures\EntityOfUnknownType;
+use Wikibase\DataModel\Fixtures\EntityOfUnknownType;
 
 /**
  * @covers Wikibase\DataModel\Entity\Diff\EntityDiffer
@@ -53,4 +53,3 @@ class EntityDifferTest extends \PHPUnit_Framework_TestCase {
 	}
 
 }
-

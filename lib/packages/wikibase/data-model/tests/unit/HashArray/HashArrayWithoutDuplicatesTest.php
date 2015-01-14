@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Test\HashArray;
+namespace Wikibase\DataModel\Tests\HashArray;
 
+use Wikibase\DataModel\Fixtures\HashArrayElement;
+use Wikibase\DataModel\Fixtures\MutableHashable;
 use Wikibase\DataModel\HashArray;
-use Wikibase\Test\DataModel\Fixtures\HashArrayElement;
-use Wikibase\Test\DataModel\Fixtures\MutableHashable;
 
 /**
  * @covers Wikibase\DataModel\HashArray
@@ -28,7 +28,7 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 	}
 
 	public function getInstanceClass() {
-		return 'Wikibase\Test\DataModel\Fixtures\HashArrayWithoutDuplicates';
+		return 'Wikibase\DataModel\Fixtures\HashArrayWithoutDuplicates';
 	}
 
 	public function elementInstancesProvider() {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Term\Test;
+namespace Wikibase\DataModel\Tests\Term;
 
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;

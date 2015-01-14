@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Test;
+namespace Wikibase\DataModel\Tests;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdSet;

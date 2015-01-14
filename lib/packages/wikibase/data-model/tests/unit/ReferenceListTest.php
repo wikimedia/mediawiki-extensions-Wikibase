@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\DataModel\Tests;
 
 use Hashable;
 use Wikibase\DataModel\Reference;

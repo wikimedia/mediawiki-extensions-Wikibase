@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\DataModel\Tests\Claim;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
