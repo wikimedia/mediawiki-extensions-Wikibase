@@ -8,11 +8,10 @@ use ResultWrapper;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Store\TermBuffer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
+use Wikibase\Store\TermBuffer;
 use Wikibase\Term;
-
 
 /**
  * Hook handlers for triggering prefetching of labels.

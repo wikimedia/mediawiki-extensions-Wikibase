@@ -2,12 +2,9 @@
 
 namespace Wikibase\Repo\UpdateRepo;
 
-use Job;
 use OutOfBoundsException;
 use SiteStore;
 use Title;
-use Wikibase\Summary;
-use Wikibase\SummaryFormatter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -15,6 +12,8 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Job for updating the repo after a page on the client has been deleted.

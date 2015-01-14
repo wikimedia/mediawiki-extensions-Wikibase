@@ -12,8 +12,8 @@ use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
 use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityIdPager;
 

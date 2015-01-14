@@ -5,7 +5,6 @@ namespace Wikibase;
 use FormatJson;
 use ResourceLoaderContext;
 use ResourceLoaderFileModule;
-use ResourceLoaderModule;
 use Wikibase\Template\TemplateRegistry;
 
 /**

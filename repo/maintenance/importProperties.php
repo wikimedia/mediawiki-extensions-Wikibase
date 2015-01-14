@@ -1,8 +1,8 @@
 <?php
 
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Maintenance script for importing properties in Wikidata.

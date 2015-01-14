@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Interactors;
 use User;
 use WebRequest;
 
-
 /**
  * Interactor for checking edit tokens
  *
