@@ -24,7 +24,7 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newSimpleFingerprint() {
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 
 		$fingerprint->setLabel( 'en', 'foo' );
 		$fingerprint->setDescription( 'de', 'bar' );

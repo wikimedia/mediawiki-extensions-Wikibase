@@ -666,7 +666,12 @@ class ItemTest extends EntityTest {
 
 		$statements = new StatementList( array( $statement ) );
 
-		$item = new Item( null, Fingerprint::newEmpty(), null, $statements );
+		$item = new Item(
+			null,
+			new Fingerprint(),
+			null,
+			$statements
+		);
 
 		$this->assertEquals(
 			$statements,
