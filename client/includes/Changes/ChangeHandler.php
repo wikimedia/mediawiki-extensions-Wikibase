@@ -206,8 +206,14 @@ class ChangeHandler {
 		$all = isset( $aspects[EntityUsage::ALL_USAGE] );
 
 		if ( isset( $aspects[EntityUsage::SITELINK_USAGE] ) || $all ) {
-			// Link updates might be optimized to bypass parsing
-			$actions[self::LINKS_UPDATE_ACTION] = true;
+			// @fixme: LinksUpdate doesn't seem to work to refresh site links
+			// when used on it's own with out parsing.
+			// LinksUpdate or our interaction with it should be changed
+			// so that site links can be updated without parse.
+			// For now, we need to still do parse for site link changes.
+			//
+			// $actions[self::LINKS_UPDATE_ACTION] = true;
+			$actions[self::PARSER_PURGE_ACTION] = true;
 		}
 
 		if ( isset( $aspects[EntityUsage::LABEL_USAGE] ) || $all ) {

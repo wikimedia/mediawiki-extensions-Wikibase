@@ -199,8 +199,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			),
 			'sitelink usage' => array( // #1
 				array( EntityUsage::SITELINK_USAGE ),
-				array( ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
-				array( ChangeHandler::PARSER_PURGE_ACTION )
+				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::LINKS_UPDATE_ACTION )
 			),
 			'label usage' => array(
 				array( EntityUsage::LABEL_USAGE ),
@@ -521,15 +521,15 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		);
 
 		$emmyUpdateLinks = array(
-			'purgeParserCache' => array(),
-			'scheduleRefreshLinks' => array( 'Emmy' => true ),
+			'purgeParserCache' => array( 'Emmy' => true ),
+			'scheduleRefreshLinks' => array(),
 			'purgeWebCache' => array( 'Emmy' => true ),
 			'injectRCRecord' => array( 'Emmy' => true ),
 		);
 
 		$emmy2UpdateLinks = array(
-			'purgeParserCache' => array( ),
-			'scheduleRefreshLinks' => array( 'Emmy2' => true ),
+			'purgeParserCache' => array( 'Emmy2' => true ),
+			'scheduleRefreshLinks' => array(),
 			'purgeWebCache' => array( 'Emmy2' => true ),
 			'injectRCRecord' => array( 'Emmy2' => true ),
 		);
@@ -619,8 +619,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 				$changes['change-enwiki-sitelink'],
 				array( 'q100' => array( 'enwiki' => 'Emmy' ), 'q200' => array( 'enwiki' => 'Emmy2' ) ),
 				array(
-					'purgeParserCache' => array(),
-					'scheduleRefreshLinks' => array( 'Emmy' => true, 'Emmy2' => true ),
+					'purgeParserCache' => array( 'Emmy' => true, 'Emmy2' => true ),
+					'scheduleRefreshLinks' => array(),
 					'purgeWebCache' => array( 'Emmy' => true, 'Emmy2' => true ),
 					'injectRCRecord' => array( 'Emmy' => true, 'Emmy2' => true ),
 				)
