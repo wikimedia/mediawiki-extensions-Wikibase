@@ -153,7 +153,7 @@ return call_user_func( function() {
 				'wikibase.templates',
 			),
 			'messages' => array(
-				'wikibase-fingerprintgroupview-input-help-message',
+				'wikibase-entitytermsview-input-help-message',
 				'wikibase-terms',
 			),
 		),
@@ -197,7 +197,7 @@ return call_user_func( function() {
 				'wikibase-entitytermsforlanguagelistview-description',
 				'wikibase-entitytermsforlanguagelistview-label',
 				'wikibase-entitytermsforlanguagelistview-language',
-				'wikibase-fingerprintview-input-help-message',
+				'wikibase-entitytermsforlanguageview-input-help-message',
 			),
 		),
 
@@ -217,7 +217,7 @@ return call_user_func( function() {
 				'wikibase.templates',
 			),
 			'messages' => array(
-				'wikibase-fingerprintview-input-help-message',
+				'wikibase-entitytermsforlanguageview-input-help-message',
 			),
 		),
 
