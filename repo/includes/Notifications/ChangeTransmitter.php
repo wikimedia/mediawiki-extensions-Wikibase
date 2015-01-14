@@ -19,6 +19,8 @@ interface ChangeTransmitter {
 	 *
 	 * @since 0.5
 	 *
+	 * @param Change $change
+	 *
 	 * @throws ChangeTransmitterException
 	 */
 	public function transmitChange( Change $change );
