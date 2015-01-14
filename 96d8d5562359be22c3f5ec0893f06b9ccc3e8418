@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee703fc5_5ba8131d",
+        "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-01-14T15:30:24Z",
+      "side": 1,
+      "message": "why keep the breaks here?",
+      "revId": "96d8d5562359be22c3f5ec0893f06b9ccc3e8418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
