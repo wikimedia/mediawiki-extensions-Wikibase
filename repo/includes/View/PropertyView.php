@@ -29,20 +29,20 @@ class PropertyView extends EntityView {
 
 	/**
 	 * @param TemplateFactory $templateFactory
-	 * @param FingerprintView $fingerprintView
+	 * @param EntityTermsView $entityTermsView
 	 * @param ClaimsView $claimsView
 	 * @param Language $language
 	 * @param bool $editable
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
-		FingerprintView $fingerprintView,
+		EntityTermsView $entityTermsView,
 		ClaimsView $claimsView,
 		DataTypeFactory $dataTypeFactory,
 		Language $language,
 		$editable = true
 	) {
-		parent::__construct( $templateFactory, $fingerprintView, $claimsView, $language, $editable );
+		parent::__construct( $templateFactory, $entityTermsView, $claimsView, $language, $editable );
 
 		$this->dataTypeFactory = $dataTypeFactory;
 	}
