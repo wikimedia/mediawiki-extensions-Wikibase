@@ -16,6 +16,24 @@
       "revId": "ca197737688f8119020efee8575227dd93712066",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_f7d380d5",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-01-14T21:18:13Z",
+      "side": 1,
+      "message": "good idea",
+      "parentUuid": "ae6ac7d6_17cdd434",
+      "revId": "ca197737688f8119020efee8575227dd93712066",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
