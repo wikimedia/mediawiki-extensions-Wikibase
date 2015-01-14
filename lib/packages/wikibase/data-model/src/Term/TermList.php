@@ -109,8 +109,8 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	}
 
 	private function assertIsLanguageCode( $languageCode ) {
-		if ( !is_string( $languageCode ) ) {
-			throw new InvalidArgumentException( '$languageCode must be a string' );
+		if ( !is_string( $languageCode ) || $languageCode === '' ) {
+			throw new InvalidArgumentException( '$languageCode must be a non-empty string' );
 		}
 	}
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Term\Test;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupFallback;
 
@@ -38,24 +39,35 @@ class AliasGroupFallbackTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $source, $group->getSourceLanguageCode() );
 	}
 
-	public function testGivenInvalidActualLanguageCode_constructorThrowsException() {
-		$language = 'en-real';
-		$aliases = array();
-		$actual = null;
-		$source = 'en-source';
-
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$group = new AliasGroupFallback( $language, $aliases, $actual, $source );
+	/**
+	 * @dataProvider invalidLanguageCodeProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidActualLanguageCode_constructorThrowsException( $languageCode ) {
+		new AliasGroupFallback( 'en-real', array(), $languageCode, 'en-source' );
 	}
 
-	public function testGivenInvalidSourceLanguageCode_constructorThrowsException() {
-		$language = 'en-real';
-		$aliases = array();
-		$actual = 'en-actual';
-		$source = 21;
+	public function invalidLanguageCodeProvider() {
+		return array(
+			array( null ),
+			array( 21 ),
+			array( '' ),
+		);
+	}
 
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$group = new AliasGroupFallback( $language, $aliases, $actual, $source );
+	/**
+	 * @dataProvider invalidSourceLanguageCodeProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidSourceLanguageCode_constructorThrowsException( $languageCode ) {
+		new AliasGroupFallback( 'en-real', array(), 'en-actual', $languageCode );
+	}
+
+	public function invalidSourceLanguageCodeProvider() {
+		return array(
+			array( 21 ),
+			array( '' ),
+		);
 	}
 
 	public function testGroupEqualsItself() {

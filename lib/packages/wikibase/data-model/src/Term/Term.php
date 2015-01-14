@@ -32,8 +32,8 @@ class Term implements Comparable {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $languageCode, $text ) {
-		if ( !is_string( $languageCode ) ) {
-			throw new InvalidArgumentException( '$languageCode must be a string' );
+		if ( !is_string( $languageCode ) || $languageCode === '' ) {
+			throw new InvalidArgumentException( '$languageCode must be a non-empty string' );
 		}
 
 		if ( !is_string( $text ) ) {

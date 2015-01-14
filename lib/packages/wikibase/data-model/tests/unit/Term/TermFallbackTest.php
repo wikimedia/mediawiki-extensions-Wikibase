@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Term\Test;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 
@@ -26,14 +27,35 @@ class TermFallbackTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNull( $term->getSourceLanguageCode() );
 	}
 
-	public function testGivenNonStringActualLanguageCode_constructorThrowsException() {
-		$this->setExpectedException( 'InvalidArgumentException' );
-		new TermFallback( 'foor', 'bar', null, 'foos' );
+	/**
+	 * @dataProvider invalidLanguageCodeProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidActualLanguageCode_constructorThrowsException( $languageCode ) {
+		new TermFallback( 'foor', 'bar', $languageCode, 'foos' );
 	}
 
-	public function testGivenNonStringSourceLanguageCode_constructorThrowsException() {
-		$this->setExpectedException( 'InvalidArgumentException' );
-		new TermFallback( 'foor', 'bar', 'fooa', 21 );
+	public function invalidLanguageCodeProvider() {
+		return array(
+			array( null ),
+			array( 21 ),
+			array( '' ),
+		);
+	}
+
+	/**
+	 * @dataProvider invalidSourceLanguageCodeProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidSourceLanguageCode_constructorThrowsException( $languageCode ) {
+		new TermFallback( 'foor', 'bar', 'fooa', $languageCode );
+	}
+
+	public function invalidSourceLanguageCodeProvider() {
+		return array(
+			array( 21 ),
+			array( '' ),
+		);
 	}
 
 	public function testEquality() {

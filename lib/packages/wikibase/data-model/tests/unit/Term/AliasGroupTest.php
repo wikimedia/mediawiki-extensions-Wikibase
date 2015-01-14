@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Term\Test;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Term\AliasGroup;
 
 /**
@@ -88,13 +89,26 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedGroup, $group );
 	}
 
-	public function testGivenInvalidLanguageCode_constructorThrowsException() {
-		$this->setExpectedException( 'InvalidArgumentException' );
-		new AliasGroup( null, array( 'foo' ) );
+	/**
+	 * @dataProvider invalidLanguageCodeProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidLanguageCode_constructorThrowsException( $languageCode ) {
+		new AliasGroup( $languageCode, array( 'foo' ) );
 	}
 
+	public function invalidLanguageCodeProvider() {
+		return array(
+			array( null ),
+			array( 21 ),
+			array( '' ),
+		);
+	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
 	public function testGivenInvalidAlias_constructorThrowsException() {
-		$this->setExpectedException( 'InvalidArgumentException' );
 		new AliasGroup( 'en', array( 21 ) );
 	}
 
