@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\Term;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
@@ -115,11 +116,13 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $enTerm, $list->getByLanguage( 'en' ) );
 	}
 
-	public function testGivenNonString_getByLanguageThrowsException() {
+	/**
+	 * @dataProvider invalidLanguageCodeProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidLanguageCode_getByLanguageThrowsException( $languageCode ) {
 		$list = new TermList();
-
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$list->getByLanguage( null );
+		$list->getByLanguage( $languageCode );
 	}
 
 	public function testGivenNonSetLanguageCode_getByLanguageThrowsException() {
@@ -143,6 +146,23 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertFalse( $list->hasTermForLanguage( 'EN' ) );
 		$this->assertFalse( $list->hasTermForLanguage( ' de ' ) );
+	}
+
+	/**
+	 * @dataProvider invalidLanguageCodeProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidLanguageCode_hasTermForLanguageThrowsException( $languageCode ) {
+		$list = new TermList();
+		$list->hasTermForLanguage( $languageCode );
+	}
+
+	public function invalidLanguageCodeProvider() {
+		return array(
+			array( null ),
+			array( 21 ),
+			array( '' ),
+		);
 	}
 
 	public function testGivenNotSetLanguageCode_removeByLanguageDoesNoOp() {
@@ -170,6 +190,15 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 			array( 'de' => $deTerm ),
 			iterator_to_array( $list )
 		);
+	}
+
+	/**
+	 * @dataProvider invalidLanguageCodeProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidLanguageCode_removeByLanguageThrowsException( $languageCode ) {
+		$list = new TermList();
+		$list->removeByLanguage( $languageCode );
 	}
 
 	public function testGivenTermForNewLanguage_setTermAddsTerm() {

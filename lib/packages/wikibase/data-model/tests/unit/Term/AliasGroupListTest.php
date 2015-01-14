@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\Term;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 
@@ -103,11 +104,13 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $enGroup, $list->getByLanguage( 'en' ) );
 	}
 
-	public function testGivenNonString_getByLanguageThrowsException() {
+	/**
+	 * @dataProvider invalidLanguageCodeProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidLanguageCode_getByLanguageThrowsException( $languageCode ) {
 		$list = new AliasGroupList();
-
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$list->getByLanguage( null );
+		$list->getByLanguage( $languageCode );
 	}
 
 	public function testGivenNonSetLanguageCode_getByLanguageThrowsException() {
@@ -155,6 +158,15 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 		$list->removeByLanguage( 'en' );
 
 		$this->assertEquals( new AliasGroupList(), $list );
+	}
+
+	/**
+	 * @dataProvider invalidLanguageCodeProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidLanguageCode_removeByLanguageThrowsException( $languageCode ) {
+		$list = new AliasGroupList();
+		$list->removeByLanguage( $languageCode );
 	}
 
 	public function testGivenEmptyGroups_constructorRemovesThem() {
@@ -252,6 +264,38 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenMatchingGroup_hasAliasGroupReturnsTrue() {
 		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'kittens' ) ) ) );
 		$this->assertTrue( $list->hasAliasGroup( new AliasGroup( 'en', array( 'kittens' ) ) ) );
+	}
+
+	public function testGivenNonSetLanguageGroup_hasGroupForLanguageReturnsFalse() {
+		$list = new AliasGroupList();
+		$this->assertFalse( $list->hasGroupForLanguage( 'en' ) );
+	}
+
+	/**
+	 * @dataProvider invalidLanguageCodeProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidLanguageCode_hasGroupForLanguageThrowsException( $languageCode ) {
+		$list = new AliasGroupList();
+		$list->hasGroupForLanguage( $languageCode );
+	}
+
+	public function invalidLanguageCodeProvider() {
+		return array(
+			array( null ),
+			array( 21 ),
+			array( '' ),
+		);
+	}
+
+	public function testGivenMismatchingGroup_hasGroupForLanguageReturnsFalse() {
+		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'cats' ) ) ) );
+		$this->assertFalse( $list->hasGroupForLanguage( 'de' ) );
+	}
+
+	public function testGivenMatchingGroup_hasGroupForLanguageReturnsTrue() {
+		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'kittens' ) ) ) );
+		$this->assertTrue( $list->hasGroupForLanguage( 'en' ) );
 	}
 
 	public function testGivenAliasGroupArgs_setGroupTextsSetsAliasGroup() {

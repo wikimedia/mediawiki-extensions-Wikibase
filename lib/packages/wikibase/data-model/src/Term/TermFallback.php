@@ -36,12 +36,14 @@ class TermFallback extends Term {
 	public function __construct( $requestedLanguageCode, $text, $actualLanguageCode, $sourceLanguageCode ) {
 		parent::__construct( $requestedLanguageCode, $text );
 
-		if ( !is_string( $actualLanguageCode ) ) {
-			throw new InvalidArgumentException( '$actualLanguageCode must be a string' );
+		if ( !is_string( $actualLanguageCode ) || $actualLanguageCode === '' ) {
+			throw new InvalidArgumentException( '$actualLanguageCode must be a non-empty string' );
 		}
 
-		if ( $sourceLanguageCode !== null && !is_string( $sourceLanguageCode ) ) {
-			throw new InvalidArgumentException( '$sourceLanguageCode must be a string or null' );
+		if ( !( $sourceLanguageCode === null
+			|| ( is_string( $sourceLanguageCode ) && $sourceLanguageCode !== '' )
+		) ) {
+			throw new InvalidArgumentException( '$sourceLanguageCode must be a non-empty string or null' );
 		}
 
 		$this->actualLanguageCode = $actualLanguageCode;
