@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\EntityIdLabelFormatter;
 
 /**
@@ -100,7 +101,7 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $entityId ) use ( $languageCode ) {
 				if ( $entityId->getSerialization() === 'Q42' && $languageCode === 'es' ) {
-					return 'foo';
+					return new Term( 'es', 'foo' );
 				} else {
 					throw new \OutOfBoundsException( 'Label not found' );
 				}

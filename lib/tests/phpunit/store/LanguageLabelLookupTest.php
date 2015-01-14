@@ -22,9 +22,10 @@ class LanguageLabelLookupTest extends \MediaWikiTestCase {
 		$termLookup = $this->getTermLookup();
 		$labelLookup = new LanguageLabelLookup( $termLookup, 'en' );
 
-		$label = $labelLookup->getLabel( new ItemId( 'Q116' ) );
+		$term = $labelLookup->getLabel( new ItemId( 'Q116' ) );
 
-		$this->assertEquals( 'New York City', $label );
+		$this->assertEquals( 'New York City', $term->getText() );
+		$this->assertEquals( 'en', $term->getLanguageCode() );
 	}
 
 	public function testGetLabel_entityNotFound() {

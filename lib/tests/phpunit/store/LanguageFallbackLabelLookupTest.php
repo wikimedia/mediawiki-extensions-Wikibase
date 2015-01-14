@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
 
@@ -24,8 +25,14 @@ class LanguageFallbackLabelLookupTest extends \MediaWikiTestCase {
 
 		$labelLookup = new LanguageFallbackLabelLookup( $termLookup, $fallbackChain );
 
-		$label = $labelLookup->getLabel( new ItemId( 'Q118' ) );
-		$this->assertEquals( 'fallbackLabel', $label );
+		/** @var TermFallback $term */
+		$term = $labelLookup->getLabel( new ItemId( 'Q118' ) );
+
+		$this->assertInstanceOf( 'Wikibase\DataModel\Term\TermFallback', $term );
+		$this->assertEquals( 'fallbackLabel', $term->getText() );
+		$this->assertEquals( 'zh', $term->getLanguageCode() );
+		$this->assertEquals( 'zh-cn', $term->getActualLanguageCode() );
+		$this->assertEquals( 'zh-xy', $term->getSourceLanguageCode() );
 	}
 
 	public function testGetLabel_entityNotFound() {
@@ -57,9 +64,19 @@ class LanguageFallbackLabelLookupTest extends \MediaWikiTestCase {
 			->method( 'extractPreferredValue' )
 			->will( $this->returnCallback( function( array $fallbackData ) use ( $languageCode ) {
 				if ( $languageCode === 'zh' && array_key_exists( 'zh-cn', $fallbackData ) ) {
-					return array( 'value' => 'fallbackLabel' );
+					return array( 'value' => 'fallbackLabel', 'language' => 'zh-cn', 'source' => 'zh-xy' );
 				} else {
 					return null;
+				}
+			} ) );
+
+		$languageFallbackChain->expects( $this->any() )
+			->method( 'getFetchLanguageCodes' )
+			->will( $this->returnCallback( function() use ( $languageCode ) {
+				if ( $languageCode === 'zh' ) {
+					return array( 'zh', 'zh-cn', 'zh-xy' );
+				} else {
+					return array( $languageCode );
 				}
 			} ) );
 

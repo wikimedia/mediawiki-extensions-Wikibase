@@ -4,6 +4,8 @@ namespace Wikibase\Lib\Store;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
 
 /**
@@ -40,15 +42,24 @@ class LanguageFallbackLabelLookup implements LabelLookup {
 	 * @param EntityId $entityId
 	 *
 	 * @throws OutOfBoundsException
-	 * @return string
+	 * @return Term
 	 */
 	public function getLabel( EntityId $entityId ) {
 		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
 		$labels = $this->termLookup->getLabels( $entityId, $fetchLanguages );
 		$extractedData = $this->languageFallbackChain->extractPreferredValue( $labels );
 
-		if ( $extractedData && isset( $extractedData['value'] ) ) {
-			return $extractedData['value'];
+		if ( $extractedData ) {
+			// $fetchLanguages are in order of preference
+			$requestLanguage = reset( $fetchLanguages );
+
+			// see extractPreferredValue for array keys
+			return new TermFallback(
+				$requestLanguage,
+				$extractedData['value'],
+				$extractedData['language'],
+				$extractedData['source']
+			);
 		}
 
 		throw new OutOfBoundsException( 'Label not found for fallback chain.' );
