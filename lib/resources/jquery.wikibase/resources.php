@@ -172,9 +172,11 @@ return call_user_func( function() {
 				'jquery.ui.toggler',
 				'jquery.wikibase.entitytermsforlanguagelistview',
 				'mediawiki.api',
+				'mediawiki.Title',
 				'mediawiki.user',
 			),
 			'messages' => array(
+				'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link',
 				'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler',
 				'wikibase-terms',
 			),
