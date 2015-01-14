@@ -25,6 +25,8 @@
 	"wikibase-save-inprogress": "Saving…",
 	"wikibase-remove-inprogress": "Removing…",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "In more languages",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link": "https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Wikibase/Configuring_languages",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configure",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Show labels, aliases and descriptions in all my languages on page load",
 	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Personal languages additional to the user interface language may be set using the [[mw:Extension:Babel|Babel extension]] syntax on the user page.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Also known as",
