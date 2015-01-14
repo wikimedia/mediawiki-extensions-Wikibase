@@ -35,36 +35,26 @@ class AliasGroup implements Comparable, Countable {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $languageCode, array $aliases = array() ) {
-		$this->setLanguageCode( $languageCode );
-		$this->setAliases( $aliases );
-	}
-
-	private function setLanguageCode( $languageCode ) {
 		if ( !is_string( $languageCode ) ) {
-			throw new InvalidArgumentException( '$languageCode must be a string; got ' . gettype( $languageCode ) );
+			throw new InvalidArgumentException( '$languageCode must be a string' );
 		}
 
 		$this->languageCode = $languageCode;
-	}
-
-	private function setAliases( array $aliases ) {
-		foreach ( $aliases as $alias ) {
-			if ( !is_string( $alias ) ) {
-				throw new InvalidArgumentException( 'Every element in $aliases must be a string; found ' . gettype( $alias ) );
-			}
-		}
-
 		$this->aliases = array_values(
-			array_filter(
-				array_unique(
-					array_map(
-						'trim',
-						$aliases
+			array_unique(
+				array_map(
+					'trim',
+					array_filter(
+						$aliases,
+						function( $alias ) {
+							if ( !is_string( $alias ) ) {
+								throw new InvalidArgumentException( '$aliases must be an array of strings' );
+							}
+
+							return trim( $alias ) !== '';
+						}
 					)
-				),
-				function( $string ) {
-					return $string !== '';
-				}
+				)
 			)
 		);
 	}
@@ -109,6 +99,7 @@ class AliasGroup implements Comparable, Countable {
 
 	/**
 	 * @see Countable::count
+	 *
 	 * @return int
 	 */
 	public function count() {

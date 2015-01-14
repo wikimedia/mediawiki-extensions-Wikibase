@@ -14,25 +14,34 @@ use InvalidArgumentException;
  */
 class TermFallback extends Term {
 
+	/**
+	 * @var string Actual language of the text.
+	 */
 	private $actualLanguageCode;
+
+	/**
+	 * @var string|null Source language if the text is a transliteration.
+	 */
 	private $sourceLanguageCode;
 
 	/**
-	 * @param string $languageCode
+	 * @param string $requestedLanguageCode Requested language, not necessarily the language of the
+	 * text.
 	 * @param string $text
-	 * @param string $actualLanguageCode fallen back to
-	 * @param string|null $sourceLanguageCode for transliteration
+	 * @param string $actualLanguageCode Actual language of the text.
+	 * @param string|null $sourceLanguageCode Source language if the text is a transliteration.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $languageCode, $text, $actualLanguageCode, $sourceLanguageCode ) {
-		parent::__construct( $languageCode, $text );
+	public function __construct( $requestedLanguageCode, $text, $actualLanguageCode, $sourceLanguageCode ) {
+		parent::__construct( $requestedLanguageCode, $text );
+
 		if ( !is_string( $actualLanguageCode ) ) {
-			throw new InvalidArgumentException( '$actualLanguageCode should be a string' );
+			throw new InvalidArgumentException( '$actualLanguageCode must be a string' );
 		}
 
-		if ( !is_null( $sourceLanguageCode ) && !is_string( $sourceLanguageCode ) ) {
-			throw new InvalidArgumentException( '$sourceLanguageCode should be a string or null' );
+		if ( $sourceLanguageCode !== null && !is_string( $sourceLanguageCode ) ) {
+			throw new InvalidArgumentException( '$sourceLanguageCode must be a string or null' );
 		}
 
 		$this->actualLanguageCode = $actualLanguageCode;
@@ -61,10 +70,14 @@ class TermFallback extends Term {
 	 * @return bool
 	 */
 	public function equals( $target ) {
+		if ( $this === $target ) {
+			return true;
+		}
+
 		return $target instanceof self
 			&& parent::equals( $target )
-			&& $this->actualLanguageCode === $target->getActualLanguageCode()
-			&& $this->sourceLanguageCode === $target->getSourceLanguageCode();
+			&& $this->actualLanguageCode === $target->actualLanguageCode
+			&& $this->sourceLanguageCode === $target->sourceLanguageCode;
 	}
 
 }

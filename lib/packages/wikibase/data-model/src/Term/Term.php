@@ -15,7 +15,14 @@ use InvalidArgumentException;
  */
 class Term implements Comparable {
 
+	/**
+	 * @var string
+	 */
 	private $languageCode;
+
+	/**
+	 * @var string
+	 */
 	private $text;
 
 	/**
@@ -26,11 +33,11 @@ class Term implements Comparable {
 	 */
 	public function __construct( $languageCode, $text ) {
 		if ( !is_string( $languageCode ) ) {
-			throw new InvalidArgumentException( '$languageCode must be a string; got ' . gettype( $languageCode ) );
+			throw new InvalidArgumentException( '$languageCode must be a string' );
 		}
 
 		if ( !is_string( $text ) ) {
-			throw new InvalidArgumentException( '$text must be a string; got ' . gettype( $text ) );
+			throw new InvalidArgumentException( '$text must be a string' );
 		}
 
 		$this->languageCode = $languageCode;
@@ -64,8 +71,8 @@ class Term implements Comparable {
 		}
 
 		return $target instanceof self
-			&& $this->languageCode === $target->getLanguageCode()
-			&& $this->text === $target->getText();
+			&& $this->languageCode === $target->languageCode
+			&& $this->text === $target->text;
 	}
 
 }
