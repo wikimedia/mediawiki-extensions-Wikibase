@@ -16,6 +16,24 @@
       "revId": "61f9ac113c7918c3e4acac9743deabd1dc81e0f8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_753ac834",
+        "filename": "lib/includes/formatters/EntityIdFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-14T08:58:27Z",
+      "side": 1,
+      "message": "See follow-up. This is non-trivial.",
+      "parentUuid": "ee703fc5_0528032e",
+      "revId": "61f9ac113c7918c3e4acac9743deabd1dc81e0f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
