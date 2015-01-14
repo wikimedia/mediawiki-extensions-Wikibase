@@ -104,6 +104,13 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 		$actual = iterator_to_array( $actual );
 		$this->assertEmpty( $actual );
 
+		$actual = $lookup->getPagesUsing( array( $q23 ), array( EntityUsage::OTHER_USAGE ) );
+		$this->assertInstanceOf( 'Iterator', $actual );
+
+		$actual = iterator_to_array( $actual );
+		$usages = $actual[0]->getUsages();
+		$usage = reset( $usages );
+		$this->assertEquals( $q23, $usage->getEntityId() );
 
 		$actual = $lookup->getPagesUsing( array( $q42, $q23, $p11 ) );
 		$this->assertInstanceOf( 'Iterator', $actual );
