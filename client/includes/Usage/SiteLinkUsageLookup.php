@@ -89,10 +89,6 @@ class SiteLinkUsageLookup implements UsageLookup {
 			return new ArrayIterator( array() );
 		}
 
-		if ( $aspects && !in_array( EntityUsage::SITELINK_USAGE, $aspects ) ) {
-			return new ArrayIterator( array() );
-		}
-
 		$numericItemIds = $this->getNumericItemIds( $entityIds );
 		$rows = $this->siteLinkLookup->getLinks( $numericItemIds, array( $this->clientSiteId ) );
 
