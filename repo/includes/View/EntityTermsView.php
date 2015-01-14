@@ -22,7 +22,7 @@ use Wikibase\Utils;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  */
-class FingerprintView {
+class EntityTermsView {
 
 	/**
 	 * @var TemplateFactory
