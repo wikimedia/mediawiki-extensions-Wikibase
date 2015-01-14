@@ -683,7 +683,7 @@ span.wb-itemlink-id { /* item id within a link to an item (especially on special
 
 /********** PROPERTY PAGE **********/
 
-.wb-propertypage .wb-datatype {
+.wb-propertypage .wikibase-propertyview-datatype {
 	background-color: #f8f8f8;
 	border: 1px solid #c9c9c9;
 	border-collapse: separate;
@@ -691,7 +691,7 @@ span.wb-itemlink-id { /* item id within a link to an item (especially on special
 	width: 100%;
 }
 
-.wb-propertypage .wb-datatype-value {
+.wb-propertypage .wikibase-propertyview-datatype-value {
 	font-weight: bold;
 	padding: 10px;
 }
