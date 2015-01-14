@@ -7,7 +7,7 @@
 	 * @class jQuery.valueview.ExpertExtender.LanguageSelector
 	 * @since 0.6
 	 * @licence GNU GPL v2+
-	 * @author Adrian Lang <adrian.lang@wikimedia.de>
+	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 *
 	 * @constructor
 	 *
@@ -24,11 +24,9 @@
 
 		var self = this;
 
-		var maps = getLanguagesMaps( function( params ) {
+		this._languagesMap = getLanguagesMap( function( params ) {
 			return self._messageProvider.getMessage( self._prefix + '-languagetemplate', params );
 		} );
-		this._languagesMap = maps[0];
-		this._inverseLanguagesMap = maps[1];
 	};
 
 	$.extend( ExpertExtender.LanguageSelector.prototype, {
@@ -57,12 +55,6 @@
 		_languagesMap: null,
 
 		/**
-		 * @property {Object}
-		 * @private
-		 */
-		_inverseLanguagesMap: null,
-
-		/**
 		 * @property {jQuery}
 		 * @private
 		 * @readonly
@@ -83,8 +75,8 @@
 		init: function( $extender ) {
 			if( this._languagesMap ) {
 				this.$selector.languagesuggester( {
-					source: $.map( this._languagesMap, function( language ) {
-						return language;
+					source: $.map( this._languagesMap, function( language, code ) {
+						return { code: code, label: language };
 					} ),
 					change: this._onValueChange
 				} );
@@ -102,7 +94,11 @@
 		onInitialShow: function() {
 			var value = this._getUpstreamValue();
 			if( this._languagesMap ) {
-				value = this._languagesMap[ this._getUpstreamValue() ];
+				// Necessary for mapping to the language code if the language is not changed.
+				// FIXME: This is obviously an access violation, and it's probably not a good idea
+				// to track this through the suggester given the current design.
+				this.$selector.data( 'languagesuggester' )._selectedValue = value;
+				value = this._languagesMap[ value ];
 			}
 			this.$selector.val( value );
 		},
@@ -114,7 +110,6 @@
 			this._getUpstreamValue = null;
 			this.$selector = null;
 			this._languagesMap = null;
-			this._inverseLanguagesMap = null;
 			this._messageProvider = null;
 			this._onValueChange = null;
 		},
@@ -125,8 +120,9 @@
 		 * @return {string|null} The current value
 		 */
 		getValue: function() {
-			var key = this.$selector.val();
-			return ( this._inverseLanguagesMap && this._inverseLanguagesMap[key] ) || key;
+			var languageSuggester = this.$selector.data( 'languagesuggester' );
+			var selectedMenuValue = languageSuggester && languageSuggester.getSelectedValue();
+			return selectedMenuValue || this.$selector.val();
 		}
 	} );
 
@@ -136,23 +132,20 @@
 	 * @param {Function} getMsg
 	 * @return {Object}
 	 */
-	function getLanguagesMaps( getMsg ) {
+	function getLanguagesMap( getMsg ) {
 		var languages = mw.config.get( 'wgULSLanguages' );
 		var languagesMap = {};
-		var inverseLanguagesMap = {};
+
 		if( !languages ) {
-			return [];
+			return null;
 		}
 
 		$.each( languages, function( key, language ) {
-			var str;
 			if( !language ) {
 				return;
 			}
-			str = getMsg( [ language, key ] );
-			languagesMap[key] = str;
-			inverseLanguagesMap[str] = key;
+			languagesMap[key] = getMsg( [ language, key ] );
 		} );
-		return [ languagesMap, inverseLanguagesMap ];
+		return languagesMap;
 	}
 } ( jQuery, jQuery.valueview.ExpertExtender, mediaWiki ) );
