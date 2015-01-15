@@ -50,6 +50,7 @@ class ReferenceList extends HashableObjectStorage {
 	 * @since 1.1
 	 *
 	 * @param Snak $snak
+	 * @param Snak [$snak2, ...]
 	 *
 	 * @throws InvalidArgumentException
 	 */

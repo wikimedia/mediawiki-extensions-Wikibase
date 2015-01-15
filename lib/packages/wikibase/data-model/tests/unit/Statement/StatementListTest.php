@@ -248,6 +248,13 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testCanConstructWithStatement() {
+		$statement = new Statement( new Claim( $this->newSnak( 42, 'foo' ) ) );
+		$list = new StatementList( $statement );
+
+		$this->assertSame( 1, $list->count() );
+	}
+
 	public function testCanConstructWithClaimsObjectContainingOnlyStatements() {
 		$statementArray = array(
 			$this->getStatementWithSnak( 1, 'foo' ),
