@@ -29,10 +29,18 @@ class ItemDisambiguationTest extends \PHPUnit_Framework_TestCase {
 	 * @return ItemDisambiguation
 	 */
 	private function newItemDisambiguation( $searchLanguageCode, $userLanguageCode ) {
+		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
+
+		$entityIdFormatter->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnCallback( function( ItemId $itemId ) {
+				return $itemId->getSerialization();
+			} ) );
+
 		return new ItemDisambiguation(
 			$searchLanguageCode,
 			$userLanguageCode,
-			new EntityIdFormatter( new FormatterOptions() )
+			$entityIdFormatter
 		);
 	}
 
