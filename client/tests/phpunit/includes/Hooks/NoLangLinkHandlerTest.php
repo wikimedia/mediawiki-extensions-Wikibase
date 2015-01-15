@@ -35,13 +35,23 @@ class NoLangLinkHandlerTest extends \PHPUnit_Framework_TestCase {
 		$parser = new Parser();
 		$parser->startExternalParse( null, new ParserOptions(), Parser::OT_HTML );
 
-		$handler->doHandle( $parser, 'en', 'fr' );
+		$handler->doHandle( $parser, array( 'en', 'fr' ) );
 		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parser->getOutput() );
 		$this->assertEquals( array( 'en', 'fr' ), $actual );
 
-		$handler->doHandle( $parser, '*', 'zh' );
+		$handler->doHandle( $parser, array( '*', 'zh' ) );
 		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parser->getOutput() );
 		$this->assertEquals( array( 'en', 'fr', '*', 'zh' ), $actual );
+	}
+
+	public function testHandle() {
+		$parser = new Parser();
+		$parser->startExternalParse( null, new ParserOptions(), Parser::OT_HTML );
+
+		NoLangLinkHandler::handle( $parser, '*' );
+		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parser->getOutput() );
+
+		$this->assertEquals( array( '*' ), $actual );
 	}
 
 }
