@@ -43,6 +43,7 @@
 	"wikibase-terms": "En altres llengües",
 	"wikibase-sitelinks-empty": "Encara no hi ha enllaços del lloc per aquest element.",
 	"wikibase-sitelinks-input-help-message": "Definiu un enllaç a una pàgina relacionada amb aquest element.",
+	"wikibase-sitelinks-special": "Altres llocs",
 	"wikibase-remove": "suprimeix",
 	"wikibase-undo-title": "S'està desfent l'edició de \"$1\"",
 	"wikibase-restore-title": "S'està recuperant la revisió antiga de \"$1\"",
