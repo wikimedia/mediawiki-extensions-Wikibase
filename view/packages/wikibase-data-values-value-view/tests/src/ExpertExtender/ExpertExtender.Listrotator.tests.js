@@ -14,11 +14,12 @@
 		} );
 	}
 
-	function getInstance() {
-		return new ExpertExtender.Listrotator( '', [ { value: 'value', label: 'label' } ] );
-	}
-
-	testExpertExtenderExtension.all( ExpertExtender.Listrotator, getInstance );
+	testExpertExtenderExtension.all(
+		ExpertExtender.Listrotator,
+		function() {
+			return new ExpertExtender.Listrotator( '', [ { value: 'value', label: 'label' } ] );
+		}
+	);
 
 	QUnit.test( 'supports custom values', function( assert ) {
 		var getUpstreamValue = function() {

@@ -40,8 +40,8 @@
 
 		init: function( getInstance ) {
 			QUnit.test( 'init appends an element', function( assert ) {
-				var instance = getInstance();
-				var $extender = $( '<div />' );
+				var instance = getInstance(),
+					$extender = $( '<div />' );
 
 				instance.init( $extender );
 
