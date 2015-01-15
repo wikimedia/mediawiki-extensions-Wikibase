@@ -13,8 +13,8 @@
 * Added `ItemNotFoundException`
 * Empty strings are now detected as invalid language codes in the term classes
 * `Item` constructor parameters for site links and statements are optional now
-* `Fingerprint` constructor can be empty
-* The `StatementList` constructor now accepts any number of `Statement` parameters
+* Made the `Fingerprint` constructor parameters optional
+* The `StatementList` constructor now accepts `Statement` objects in variable-lenght argument list format
 
 ## Version 2.4.1 (2014-11-26)
 
