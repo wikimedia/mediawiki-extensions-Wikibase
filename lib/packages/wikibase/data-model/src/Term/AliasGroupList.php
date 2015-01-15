@@ -198,4 +198,21 @@ class AliasGroupList implements Countable, IteratorAggregate {
 		$this->setGroup( new AliasGroup( $languageCode, $aliases ) );
 	}
 
+	/**
+	 * Returns an array with language codes as keys the aliases as array values.
+	 *
+	 * @since 2.5
+	 *
+	 * @return array[]
+	 */
+	public function toTextArray() {
+		$array = array();
+
+		foreach ( $this->groups as $group ) {
+			$array[$group->getLanguageCode()] = $group->getAliases();
+		}
+
+		return $array;
+	}
+
 }
