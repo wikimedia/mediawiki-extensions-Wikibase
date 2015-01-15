@@ -26,6 +26,7 @@ class ItemIdSet implements IteratorAggregate, Countable, Comparable {
 
 	/**
 	 * @param ItemId[] $ids
+	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $ids = array() ) {
@@ -40,6 +41,7 @@ class ItemIdSet implements IteratorAggregate, Countable, Comparable {
 
 	/**
 	 * @see Countable::count
+	 *
 	 * @return int
 	 */
 	public function count() {
@@ -48,10 +50,27 @@ class ItemIdSet implements IteratorAggregate, Countable, Comparable {
 
 	/**
 	 * @see IteratorAggregate::getIterator
+	 *
 	 * @return Traversable
 	 */
 	public function getIterator() {
 		return new \ArrayIterator( $this->ids );
+	}
+
+	/**
+	 * @since 2.5
+	 *
+	 * @return string[]
+	 */
+	public function getSerializations() {
+		return array_values(
+			array_map(
+				function( ItemId $id ) {
+					return $id->getSerialization();
+				},
+				$this->ids
+			)
+		);
 	}
 
 	/**

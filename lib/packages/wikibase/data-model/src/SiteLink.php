@@ -18,10 +18,18 @@ use Wikibase\DataModel\Entity\ItemIdSet;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Michał Łazowik
+ * @author Thiemo Mättig
  */
 class SiteLink implements Comparable {
 
+	/**
+	 * @var string
+	 */
 	private $siteId;
+
+	/**
+	 * @var string
+	 */
 	private $pageName;
 
 	/**
@@ -50,6 +58,11 @@ class SiteLink implements Comparable {
 		$this->setBadges( $badges );
 	}
 
+	/**
+	 * @param ItemIdSet|ItemId[]|null $badges
+	 *
+	 * @throws InvalidArgumentException
+	 */
 	private function setBadges( $badges ) {
 		if ( $badges === null ) {
 			$badges = new ItemIdSet();

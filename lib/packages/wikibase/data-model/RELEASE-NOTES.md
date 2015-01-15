@@ -8,7 +8,8 @@
 * Added `SiteLinkList::toArray`
 * Added `SiteLinkList::setSiteLink`
 * Added `SiteLinkList::setNewSiteLink`
-* Added `ItemLoookup` and `PropertyLookup` interfaces
+* Added `ItemIdSet::getSerializations`
+* Added `ItemLookup` and `PropertyLookup` interfaces
 * Added `ItemNotFoundException`
 * Empty strings are now detected as invalid language codes in the term classes
 * `Item` constructor parameters for site links and statements are optional now
