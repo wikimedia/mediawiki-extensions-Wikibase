@@ -33,8 +33,13 @@ class NoLangLinkHandler {
 	 * @return string
 	 */
 	public static function handle( &$parser ) {
+		$langs = func_get_args();
+
+		// Remove the first member, which is the parser.
+		array_shift( $langs );
+
 		$handler = self::newFromGlobalState();
-		$handler->doHandle( $parser );
+		$handler->doHandle( $parser, $langs );
 	}
 
 	private static function newFromGlobalState() {
@@ -64,8 +69,8 @@ class NoLangLinkHandler {
 	 */
 	public static function getNoExternalLangLinks( ParserOutput $out ) {
 		$property = $out->getProperty( 'noexternallanglinks' );
-		$nel = is_string( $property ) ? unserialize( $property ) : array();
-		return $nel;
+
+		return is_string( $property ) ? unserialize( $property ) : array();
 	}
 
 	/**
@@ -87,24 +92,20 @@ class NoLangLinkHandler {
 	 * @since 0.5
 	 *
 	 * @param \Parser &$parser
+	 * @param string[] $langs
 	 *
 	 * @return string
 	 */
-	public function doHandle( &$parser ) {
-
+	public function doHandle( &$parser, array $langs ) {
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $parser->getTitle()->getNamespace() ) ) {
 			// shorten out
 			return '';
 		}
 
-		$langs = func_get_args();
-		// Remove the first member, which is the parser.
-		array_shift( $langs );
-
 		$output = $parser->getOutput();
-
 		$nel = array_merge( self::getNoExternalLangLinks( $output ), $langs );
-		$this->setNoExternalLangLinks( $output, $nel );
+
+		self::setNoExternalLangLinks( $output, $nel );
 
 		return '';
 	}
