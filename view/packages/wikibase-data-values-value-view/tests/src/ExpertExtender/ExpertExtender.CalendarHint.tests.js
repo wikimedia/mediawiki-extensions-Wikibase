@@ -23,16 +23,11 @@
 		} );
 	}
 
-	testExpertExtenderExtension.constructor(
+	testExpertExtenderExtension.all(
 		ExpertExtender.CalendarHint,
-		new ExpertExtender.CalendarHint()
-	);
-	testExpertExtenderExtension.destroy(
-		ExpertExtender.CalendarHint,
-		new ExpertExtender.CalendarHint()
-	);
-	testExpertExtenderExtension.init(
-		new ExpertExtender.CalendarHint()
+		function() {
+			return new ExpertExtender.CalendarHint();
+		}
 	);
 
 	QUnit.test( 'calendarhint is hidden if it should not be shown', function( assert ) {

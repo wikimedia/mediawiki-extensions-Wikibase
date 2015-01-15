@@ -14,16 +14,11 @@
 		} );
 	}
 
-	testExpertExtenderExtension.constructor(
+	testExpertExtenderExtension.all(
 		ExpertExtender.Preview,
-		new ExpertExtender.Preview( null )
-	);
-	testExpertExtenderExtension.destroy(
-		ExpertExtender.Preview,
-		new ExpertExtender.Preview( null )
-	);
-	testExpertExtenderExtension.init(
-		new ExpertExtender.Preview( null )
+		function() {
+			return new ExpertExtender.Preview( null );
+		}
 	);
 
 } )(
