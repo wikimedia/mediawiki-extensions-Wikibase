@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_e0fbb3b8",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-15T18:41:06Z",
+      "side": 1,
+      "message": "NS_SPECIAL is -1, so this should be $pageId \u003c\u003d 0, right?",
+      "revId": "dd368495b0e55ae4af983b70bd428c5e60d638c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_8028b733",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-15T18:41:06Z",
+      "side": 1,
+      "message": "why not \u003c\u003d 0?",
+      "revId": "dd368495b0e55ae4af983b70bd428c5e60d638c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
