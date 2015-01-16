@@ -155,7 +155,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Client\Hooks\DataUpdateHookHandlers', $handler );
 	}
 
-	public function provideDoParserAfterParse() {
+	public function provideDoArticleEditUpdates() {
 		return array(
 			'usage' => array(
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
@@ -175,9 +175,9 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideDoParserAfterParse
+	 * @dataProvider provideDoArticleEditUpdates
 	 */
-	public function testDoParserAfterParse( Title $title, $usage ) {
+	public function testDoArticleEditUpdates( Title $title, $usage ) {
 		$title->resetArticleID( 23 );
 
 		$page = $this->newWikiPage( $title );
@@ -186,6 +186,15 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandlers( $title, $usage );
 		$handler->doArticleEditUpdates( $page, $editInfo, true );
+	}
+
+	public function testDoArticleDeleteComplete() {
+		$title = Title::makeTitle( NS_MAIN, 'Oxygen' );
+		$title->resetArticleID( 23 );
+
+		// Assertions are done by the UsageUpdater mock
+		$handler = $this->newDataUpdateHookHandlers( $title, array() );
+		$handler->doArticleDeleteComplete( $title->getNamespace(), $title->getArticleID() );
 	}
 
 }
