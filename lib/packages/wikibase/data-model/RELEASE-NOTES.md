@@ -14,7 +14,7 @@
 * Empty strings are now detected as invalid language codes in the term classes
 * Made the `Item` constructor parameters optional
 * Made the `Fingerprint` constructor parameters optional
-* Made the `Property` constructor parameter for fingerprint optional
+* Made the `Property` constructors fingerprint parameter optional
 * Deprecated `Item::newEmpty` in favour of `new Item()`
 * Deprecated `Fingerprint::newEmpty` in favour of `new Fingerprint()`
 * The `StatementList` constructor now accepts `Statement` objects in variable-lenght argument list format
