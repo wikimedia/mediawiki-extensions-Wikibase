@@ -38,18 +38,18 @@ class Property extends Entity implements StatementListProvider {
 	 * @since 1.0
 	 *
 	 * @param PropertyId|null $id
-	 * @param Fingerprint $fingerprint
+	 * @param Fingerprint|null $fingerprint
 	 * @param string $dataTypeId
 	 * @param StatementList|null $statements Since 1.1
 	 */
 	public function __construct(
 		PropertyId $id = null,
-		Fingerprint $fingerprint,
+		Fingerprint $fingerprint = null,
 		$dataTypeId,
 		StatementList $statements = null
 	) {
 		$this->id = $id;
-		$this->fingerprint = $fingerprint;
+		$this->fingerprint = $fingerprint ?: new Fingerprint();
 		$this->setDataTypeId( $dataTypeId );
 		$this->statements = $statements ?: new StatementList();
 	}
@@ -127,11 +127,7 @@ class Property extends Entity implements StatementListProvider {
 	 * @return Property
 	 */
 	public static function newFromType( $dataTypeId ) {
-		return new self(
-			null,
-			new Fingerprint(),
-			$dataTypeId
-		);
+		return new self( null, null, $dataTypeId );
 	}
 
 	/**
