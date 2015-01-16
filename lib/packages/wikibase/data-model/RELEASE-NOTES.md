@@ -15,6 +15,7 @@
 * Made the `Item` constructor parameters optional
 * Made the `Fingerprint` constructor parameters optional
 * Deprecated `Item::newEmpty` in favour of `new Item()`
+* Deprecated `Fingerprint::newEmpty` in favour of `new Fingerprint()`
 * The `StatementList` constructor now accepts `Statement` objects in variable-lenght argument list format
 
 ## Version 2.4.1 (2014-11-26)
