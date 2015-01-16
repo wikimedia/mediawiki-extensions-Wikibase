@@ -89,23 +89,19 @@ class EntityIdLabelFormatter extends PlainEntityIdFormatter {
 			$term = $this->lookupEntityLabel( $entityId );
 		}
 
-		if ( $term ) {
-			$label = $term->getText();
-		} else {
-			// @fixme check if the entity is deleted and format differently?
-			switch ( $this->getOption( self::OPT_LABEL_FALLBACK ) ) {
-				case self::FALLBACK_PREFIXED_ID:
-					$label = $entityId->getSerialization();
-					break;
-				case self::FALLBACK_EMPTY_STRING:
-					$label = '';
-					break;
-				default:
-					throw new FormattingException( 'No label found for ' . $entityId );
-			}
+		if ( $term !== null ) {
+			return $term->getText();
 		}
 
-		return $label;
+		// @fixme check if the entity is deleted and format differently?
+		switch ( $this->getOption( self::OPT_LABEL_FALLBACK ) ) {
+			case self::FALLBACK_PREFIXED_ID:
+				return $entityId->getSerialization();
+			case self::FALLBACK_EMPTY_STRING:
+				return '';
+			default:
+				throw new FormattingException( 'No label found for ' . $entityId );
+		}
 	}
 
 	/**
@@ -115,7 +111,7 @@ class EntityIdLabelFormatter extends PlainEntityIdFormatter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return Term|null False if no label was found in the language or language fallback chain.
+	 * @return Term|null Null if no label was found in the language or language fallback chain.
 	 */
 	protected function lookupEntityLabel( EntityId $entityId ) {
 		try {
