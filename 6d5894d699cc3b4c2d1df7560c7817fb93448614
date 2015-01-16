@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_89853b5d",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-16T16:33:38Z",
+      "side": 1,
+      "message": "Please extract this into a private method",
+      "revId": "6d5894d699cc3b4c2d1df7560c7817fb93448614",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
