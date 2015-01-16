@@ -113,7 +113,7 @@ class ItemDiffer implements EntityDifferStrategy {
 	 */
 	public function getConstructionDiff( EntityDocument $entity ) {
 		$this->assertIsItem( $entity );
-		return $this->diffEntities( Item::newEmpty(), $entity );
+		return $this->diffEntities( new Item(), $entity );
 	}
 
 	/**
@@ -124,7 +124,7 @@ class ItemDiffer implements EntityDifferStrategy {
 	 */
 	public function getDestructionDiff( EntityDocument $entity ) {
 		$this->assertIsItem( $entity );
-		return $this->diffEntities( $entity, Item::newEmpty() );
+		return $this->diffEntities( $entity, new Item() );
 	}
 
 }

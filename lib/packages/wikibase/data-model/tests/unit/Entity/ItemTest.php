@@ -24,7 +24,6 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * @covers Wikibase\DataModel\Entity\Item
@@ -112,7 +111,7 @@ class ItemTest extends EntityTest {
 	 * @return Item
 	 */
 	protected function getNewEmpty() {
-		return Item::newEmpty();
+		return new Item();
 	}
 
 	public function testGetId() {
@@ -134,13 +133,13 @@ class ItemTest extends EntityTest {
 	public function itemProvider() {
 		$items = array();
 
-		$items[] = Item::newEmpty();
+		$items[] = new Item();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->setDescription( 'en', 'foo' );
 		$items[] = $item;
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->setDescription( 'en', 'foo' );
 		$item->setDescription( 'de', 'foo' );
 		$item->setLabel( 'en', 'foo' );
@@ -440,7 +439,7 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testGetSiteLinkWithNonSetSiteId() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 		$item->getSiteLinkList()->getBySiteId( 'enwiki' );
@@ -450,7 +449,7 @@ class ItemTest extends EntityTest {
 	 * @dataProvider simpleSiteLinkProvider
 	 */
 	public function testAddSiteLink( SiteLink $siteLink ) {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$item->getSiteLinkList()->addSiteLink( $siteLink );
 
@@ -507,7 +506,7 @@ class ItemTest extends EntityTest {
 	 */
 	public function testGetSiteLinks() {
 		$siteLinks = func_get_args();
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		foreach ( $siteLinks as $siteLink ) {
 			$item->getSiteLinkList()->addSiteLink( $siteLink );
@@ -539,7 +538,7 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testHasLinkToSiteForFalse() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'ENWIKI', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
 
 		$this->assertFalse( $item->getSiteLinkList()->hasLinkWithSiteId( 'enwiki' ) );
@@ -548,7 +547,7 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testHasLinkToSiteForTrue() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'enwiki', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
 		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'dewiki', 'Wikidata' ) );
 		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'foo bar', 'Wikidata' ) );
@@ -562,7 +561,7 @@ class ItemTest extends EntityTest {
 		/** @var Snak $snak */
 		$snak = $this->getMock( 'Wikibase\DataModel\Snak\Snak' );
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$statement = $item->newClaim( $snak );
 
 		$this->assertInstanceOf( 'Wikibase\DataModel\Statement\Statement', $statement );
@@ -570,7 +569,7 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testSetClaims() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$statement0 = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$statement0->setGuid( 'TEST$NVS42' );
@@ -589,11 +588,12 @@ class ItemTest extends EntityTest {
 
 
 	public function testEmptyItemReturnsEmptySiteLinkList() {
-		$this->assertTrue( Item::newEmpty()->getSiteLinkList()->isEmpty() );
+		$item = new Item();
+		$this->assertTrue( $item->getSiteLinkList()->isEmpty() );
 	}
 
 	public function testAddSiteLinkOverridesOldLinks() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'kittens', 'foo' ) );
 
@@ -604,37 +604,38 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testEmptyItemIsEmpty() {
-		$this->assertTrue( Item::newEmpty()->isEmpty() );
+		$item = new Item();
+		$this->assertTrue( $item->isEmpty() );
 	}
 
 	public function testItemWithIdIsEmpty() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->setId( 1337 );
 		$this->assertTrue( $item->isEmpty() );
 	}
 
 	public function testItemWithStuffIsNotEmpty() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getFingerprint()->setAliasGroup( 'en', array( 'foo' ) );
 		$this->assertFalse( $item->isEmpty() );
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'en', 'o_O' );
 		$this->assertFalse( $item->isEmpty() );
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->addClaim( $this->newStatement() );
 		$this->assertFalse( $item->isEmpty() );
 	}
 
 	public function testItemWithSitelinksHasSitelinks() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'en', 'foo' );
 		$this->assertFalse( $item->getSiteLinkList()->isEmpty() );
 	}
 
 	public function testItemWithoutSitelinksHasNoSitelinks() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$this->assertTrue( $item->getSiteLinkList()->isEmpty() );
 	}
 
@@ -645,7 +646,7 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testClearRemovesAllButId() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$item->setId( 42 );
 		$item->getFingerprint()->setLabel( 'en', 'foo' );
@@ -660,18 +661,22 @@ class ItemTest extends EntityTest {
 		$this->assertTrue( $item->getStatements()->isEmpty() );
 	}
 
+	public function testEmptyConstructor() {
+		$item = new Item();
+
+		$this->assertNull( $item->getId() );
+		$this->assertTrue( $item->getFingerprint()->isEmpty() );
+		$this->assertTrue( $item->getSiteLinkList()->isEmpty() );
+		$this->assertTrue( $item->getStatements()->isEmpty() );
+	}
+
 	public function testCanConstructWithStatementList() {
 		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$statement->setGuid( 'meh' );
 
 		$statements = new StatementList( array( $statement ) );
 
-		$item = new Item(
-			null,
-			new Fingerprint(),
-			null,
-			$statements
-		);
+		$item = new Item( null, null, null, $statements );
 
 		$this->assertEquals(
 			$statements,
@@ -680,7 +685,7 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testSetStatements() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
 		$item->setStatements( new StatementList() );
@@ -688,17 +693,17 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testGetStatementsReturnsCorrectTypeAfterClear() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->clear();
 
 		$this->assertTrue( $item->getStatements()->isEmpty() );
 	}
 
 	public function equalsProvider() {
-		$firstItem = Item::newEmpty();
+		$firstItem = new Item();
 		$firstItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
-		$secondItem = Item::newEmpty();
+		$secondItem = new Item();
 		$secondItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
 		$secondItemWithId = unserialize( serialize( $secondItem ) );
@@ -708,7 +713,7 @@ class ItemTest extends EntityTest {
 		$differentId->setId( 43 );
 
 		return array(
-			array( Item::newEmpty(), Item::newEmpty() ),
+			array( new Item(), new Item() ),
 			array( $firstItem, $secondItem ),
 			array( $secondItem, $secondItemWithId ),
 			array( $secondItemWithId, $differentId ),
@@ -724,7 +729,7 @@ class ItemTest extends EntityTest {
 	}
 
 	private function getBaseItem() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$item->setId( 42 );
 		$item->getFingerprint()->setLabel( 'en', 'Same' );
@@ -757,7 +762,7 @@ class ItemTest extends EntityTest {
 		$item = $this->getBaseItem();
 
 		return array(
-			'empty' => array( $item, Item::newEmpty() ),
+			'empty' => array( $item, new Item() ),
 			'label' => array( $item, $differentLabel ),
 			'description' => array( $item, $differentDescription ),
 			'alias' => array( $item, $differentAlias ),

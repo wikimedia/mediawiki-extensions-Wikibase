@@ -12,8 +12,9 @@
 * Added `ItemLookup` and `PropertyLookup` interfaces
 * Added `ItemNotFoundException`
 * Empty strings are now detected as invalid language codes in the term classes
-* `Item` constructor parameters for site links and statements are optional now
+* Made the `Item` constructor parameters optional
 * Made the `Fingerprint` constructor parameters optional
+* Deprecated `Item::newEmpty` in favour of `new Item()`
 * The `StatementList` constructor now accepts `Statement` objects in variable-lenght argument list format
 
 ## Version 2.4.1 (2014-11-26)

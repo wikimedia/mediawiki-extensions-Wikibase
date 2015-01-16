@@ -19,19 +19,15 @@ use Wikibase\DataModel\Entity\Property;
  */
 abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 
-	private static function newEntity ( $entityType ) {
+	private static function newEntity( $entityType ) {
 		switch ( $entityType ) {
 			case Item::ENTITY_TYPE:
-				$entity = Item::newEmpty();
-				break;
+				return new Item();
 			case Property::ENTITY_TYPE:
-				$entity = Property::newFromType( 'string' );
-				break;
+				return Property::newFromType( 'string' );
 			default:
 				throw new \RuntimeException( "unknown entity type: $entityType" );
 		}
-
-		return $entity;
 	}
 
 	public static function generateApplyData( $entityType ) {

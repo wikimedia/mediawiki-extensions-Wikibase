@@ -37,7 +37,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 		 */
 
 		// add link ------------------------------
-		$a = Item::newEmpty();
+		$a = new Item();
 		$a->getSiteLinkList()->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -63,7 +63,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 		$tests[] = array( $a, $b );
 
 		// add badges
-		$a = Item::newEmpty();
+		$a = new Item();
 		$a->getSiteLinkList()->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -74,7 +74,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			)
 		);
 
-		$b = Item::newEmpty();
+		$b = new Item();
 		$b->getSiteLinkList()->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -89,7 +89,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 		$tests[] = array( $a, $b );
 
 		// remove badges
-		$a = Item::newEmpty();
+		$a = new Item();
 		$a->getSiteLinkList()->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -101,7 +101,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			)
 		);
 
-		$b = Item::newEmpty();
+		$b = new Item();
 		$b->getSiteLinkList()->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -113,7 +113,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 		);
 
 		// modify badges
-		$a = Item::newEmpty();
+		$a = new Item();
 		$a->getSiteLinkList()->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -125,7 +125,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			)
 		);
 
-		$b = Item::newEmpty();
+		$b = new Item();
 		$b->getSiteLinkList()->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -140,7 +140,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 		$tests[] = array( $a, $b );
 
 		// remove link
-		$a = Item::newEmpty();
+		$a = new Item();
 		$a->getSiteLinkList()->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -166,7 +166,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 		$tests[] = array( $a, $b );
 
 		// change link
-		$a = Item::newEmpty();
+		$a = new Item();
 		$a->getSiteLinkList()->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -178,7 +178,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			)
 		);
 
-		$b = Item::newEmpty();
+		$b = new Item();
 		$b->getSiteLinkList()->addSiteLink(
 			new SiteLink(
 				'enwiki',

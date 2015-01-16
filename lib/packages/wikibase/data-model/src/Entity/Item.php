@@ -41,18 +41,18 @@ class Item extends Entity implements StatementListProvider {
 	 * @since 1.0
 	 *
 	 * @param ItemId|null $id
-	 * @param Fingerprint $fingerprint
+	 * @param Fingerprint|null $fingerprint
 	 * @param SiteLinkList|null $siteLinks
 	 * @param StatementList|null $statements
 	 */
 	public function __construct(
 		ItemId $id = null,
-		Fingerprint $fingerprint,
+		Fingerprint $fingerprint = null,
 		SiteLinkList $siteLinks = null,
 		StatementList $statements = null
 	) {
 		$this->id = $id;
-		$this->fingerprint = $fingerprint;
+		$this->fingerprint = $fingerprint ?: new Fingerprint();
 		$this->siteLinks = $siteLinks ?: new SiteLinkList();
 		$this->statements = $statements ?: new StatementList();
 	}
@@ -181,12 +181,12 @@ class Item extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @since 0.1
+	 * @deprecated since 2.5, use new Item() instead.
 	 *
 	 * @return Item
 	 */
 	public static function newEmpty() {
-		return new self( null, Fingerprint::newEmpty() );
+		return new self();
 	}
 
 	/**

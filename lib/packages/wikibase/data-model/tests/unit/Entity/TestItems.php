@@ -20,27 +20,27 @@ final class TestItems {
 	public static function getItems() {
 		$items = array();
 
-		$items[] = Item::newEmpty();
+		$items[] = new Item();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$item->setDescription( 'en', 'foo' );
 		$item->setLabel( 'en', 'bar' );
 
 		$items[] = $item;
 
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$item->addAliases( 'en', array( 'foobar', 'baz' ) );
 
 		$items[] = $item;
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'enwiki', 'spam' ) );
 
 		$items[] = $item;
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'enwiki', 'spamz' ) );
 		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'dewiki', 'foobar' ) );
 
