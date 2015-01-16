@@ -5,8 +5,11 @@ namespace Wikibase\Lib;
 use Html;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Utils;
 
 /**
  * Formats entity IDs by generating an HTML link to the corresponding page title.
@@ -44,30 +47,64 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	protected function formatEntityId( EntityId $entityId ) {
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );
 
-		$attributes = array(
-			'title' => $title->getPrefixedText(),
-			'href' => $title->getLocalURL()
-		);
-
-		$label = $entityId->getSerialization();
-
 		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
 			$term = $this->lookupEntityLabel( $entityId );
+
 			if ( $term ) {
-				$label = $term->getText();
+				return $this->getHtmlForTerm( $title->getLocalURL(), $term, $title->getPrefixedText() );
 			} elseif ( !$title->exists() ) {
 				return $this->getHtmlForNonExistent( $entityId );
 			}
 		}
 
+		$attributes = array(
+			'title' => $title->getPrefixedText(),
+			'href' => $title->getLocalURL()
+		);
+
+		$html = Html::element( 'a', $attributes, $entityId->getSerialization() );
+
+		return $html;
+	}
+
+	/**
+	 * @param string $targetUrl
+	 * @param Term $term
+	 * @param string $titleText
+	 *
+	 * @return string HTML
+	 */
+	private function getHtmlForTerm( $targetUrl, Term $term, $titleText = '' ) {
+		$label = $term->getText();
+		$fallbackIndicatorHtml = '';
+
+		$attributes = array(
+			'title' => $titleText,
+			'href' => $targetUrl
+		);
+
+		if ( $term instanceof TermFallback ) {
+			$fallbackIndicatorHtml = $this->getHtmlForFallbackIndicator( $term );
+
+			if ( $term->getActualLanguageCode() !== $term->getLanguageCode() ) {
+				$attributes['lang'] = $term->getActualLanguageCode();
+				//TODO: mark as rtl/ltr if appropriate.
+			}
+		}
+
 		$html = Html::element( 'a', $attributes, $label );
+
+		if ( $fallbackIndicatorHtml !== '' ) {
+			$html .= $fallbackIndicatorHtml;
+		}
+
 		return $html;
 	}
 
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getHtmlForNonExistent( EntityId $entityId ) {
 		$attributes = array( 'class' => 'wb-entity-undefinedinfo' );
@@ -82,4 +119,55 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		return $entityId->getSerialization() . $separator . $undefinedInfo;
 	}
 
+	private function getLanguageName( $languageCode, $inLanguage ) {
+		//TODO: inject language name lookup!
+		return Utils::fetchLanguageName( $languageCode, $inLanguage );
+	}
+
+	private function getHtmlForFallbackIndicator( TermFallback $term ) {
+		$requestedLanguage = $term->getLanguageCode();
+		$actualLanguage = $term->getActualLanguageCode();
+		$sourceLanguage = $term->getSourceLanguageCode();
+
+		$actualLanguage = ( $actualLanguage === null ? $requestedLanguage : $actualLanguage );
+		$sourceLanguage = ( $sourceLanguage === null ? $actualLanguage : $sourceLanguage );
+
+		if ( $actualLanguage === $requestedLanguage && $sourceLanguage === $requestedLanguage ) {
+			// no fallback
+			return '';
+		}
+
+		$name = $this->getLanguageName( $sourceLanguage, $term->getLanguageCode() );
+
+		$classes = array( 'wb-language-fallback-indicator' );
+
+		if ( $actualLanguage !== $sourceLanguage ) {
+			$classes[] = 'wb-language-fallback-transliteration';
+
+			$msg = wfMessage(
+				'wikibase-language-fallback-transliteration-hint',
+				$name,
+				$this->getLanguageName( $actualLanguage, $term->getLanguageCode() )
+			);
+
+			$name = $msg->text();
+		}
+
+		if ( $actualLanguage !== $requestedLanguage
+				&& $this->getBaseLanguage( $actualLanguage ) === $this->getBaseLanguage( $requestedLanguage )
+		) {
+			$classes[] = 'wb-language-fallback-variant';
+		}
+
+		$attributes = array(
+			'class' => implode( ' ', $classes )
+		);
+
+		$html = Html::element( 'sup', $attributes, $name );
+		return $html;
+	}
+
+	private function getBaseLanguage( $languageCode ) {
+		return preg_replace( '/-.*/', '', $languageCode );
+	}
 }

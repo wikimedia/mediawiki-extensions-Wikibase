@@ -8,8 +8,11 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Utils;
 
 /**
  * @covers Wikibase\Lib\EntityIdHtmlLinkFormatter
@@ -23,15 +26,23 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  */
 class EntityIdHtmlLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 
-	private function getLabelLookup() {
+	/**
+	 * @param Term $term
+	 *
+	 * @return LabelLookup
+	 */
+	private function getLabelLookup( Term $term = null ) {
 		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnValue( new Term( 'xy', 'A label' ) ) );
+			->will( $this->returnValue( $term ?: new Term( 'xy', 'A label' ) ) );
 
 		return $labelLookup;
 	}
 
+	/**
+	 * @return LabelLookup
+	 */
 	private function getLabelLookupNoLabel() {
 		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
 		$labelLookup->expects( $this->any() )
@@ -118,6 +129,74 @@ class EntityIdHtmlLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$entityTitleLookup = $this->newEntityTitleLookup( $exists );
+
+		$entityIdHtmlLinkFormatter = new EntityIdHtmlLinkFormatter( $options, $labelLookup, $entityTitleLookup );
+		$result = $entityIdHtmlLinkFormatter->format( new ItemId( 'Q42' ) );
+
+		$this->assertRegExp( $expectedRegex, $result );
+	}
+
+	public function formatProvider_fallback() {
+		$deTerm = new Term( 'de', 'Kätzchen' );
+		$deTermFallback = new TermFallback( 'de', 'Kätzchen', 'de', 'de' );
+		$deAtTerm = new TermFallback( 'de-at', 'Kätzchen', 'de', 'de' );
+		$atDeTerm = new TermFallback( 'de', 'Kätzchen', 'de-at', 'de-at' );
+		$deChTerm = new TermFallback( 'de-ch', 'Frass', 'de-ch', 'de' );
+		$enGbEnCaTerm = new TermFallback( 'en-gb', 'Kitten', 'en', 'en-ca' );
+		$deEnTerm = new TermFallback( 'de', 'Kitten', 'en', 'en' );
+
+		$translitDeCh = wfMessage( 'wikibase-language-fallback-transliteration-hint', 'Deutsch', 'Schweizer Hochdeutsch' )->text();
+		$translitEnCa = wfMessage( 'wikibase-language-fallback-transliteration-hint', 'Canadian English', 'English' )->text();
+
+		$englishInGerman = Utils::fetchLanguageName( 'en', 'de' );
+
+		return array(
+			'plain term' => array(
+				'expectedRegex'	=> '@>Kätzchen<@',
+				'term'	=> $deTerm,
+			),
+			'plain fallabck term' => array(
+				'expectedRegex'	=> '@>Kätzchen<@',
+				'term'	=> $deTermFallback,
+			),
+			'fallback to base' => array(
+				'expectedRegex'	=> '@ lang="de">Kätzchen</a><sup class="wb-language-fallback-indicator wb-language-fallback-variant">Deutsch</sup>@',
+				'term'	=> $deAtTerm,
+			),
+			'fallback to variant' => array(
+				'expectedRegex'	=> '@ lang="de-at">Kätzchen</a><sup class="wb-language-fallback-indicator wb-language-fallback-variant">Österreichisches Deutsch</sup>@',
+				'term'	=> $atDeTerm,
+			),
+			'transliteration to requested language' => array(
+				'expectedRegex'	=> '@>Frass</a><sup class="wb-language-fallback-indicator wb-language-fallback-transliteration">'
+					. preg_quote( $translitDeCh, '@' )
+					. '</sup>@',
+				'term'	=> $deChTerm,
+			),
+			'transliteration to other variant' => array(
+				'expectedRegex'	=> '@ lang="en">Kitten</a><sup class="wb-language-fallback-indicator wb-language-fallback-transliteration wb-language-fallback-variant">'
+					. preg_quote( $translitEnCa, '@' )
+					. '</sup>@',
+				'term'	=> $enGbEnCaTerm,
+			),
+			'fallback to alternative language' => array(
+				'expectedRegex'	=> '@ lang="en">Kitten</a><sup class="wb-language-fallback-indicator">' . $englishInGerman . '</sup>@',
+				'term'	=> $deEnTerm,
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider formatProvider_fallback
+	 *
+	 * @param string $expectedRegex
+	 * @param TermFallback $term
+	 */
+	public function testFormat_fallback( $expectedRegex, $term ) {
+		$options = new FormatterOptions( array( EntityIdHtmlLinkFormatter::OPT_LOOKUP_LABEL => true ) );
+
+		$labelLookup = $this->getLabelLookup( $term );
+		$entityTitleLookup = $this->newEntityTitleLookup( true );
 
 		$entityIdHtmlLinkFormatter = new EntityIdHtmlLinkFormatter( $options, $labelLookup, $entityTitleLookup );
 		$result = $entityIdHtmlLinkFormatter->format( new ItemId( 'Q42' ) );

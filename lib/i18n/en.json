@@ -20,6 +20,7 @@
 	"wikibase-error-autocomplete-response": "Server responded: $1",
 	"wikibase-error-ui-no-external-page": "The specified article could not be found on the corresponding site.",
 	"wikibase-error-ui-edit-conflict": "There is an edit conflict. Please reload and save again.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (transliterated)",
 	"wikibase-quantitydetails-amount": "Amount",
 	"wikibase-quantitydetails-upperbound": "Upper bound",
 	"wikibase-quantitydetails-lowerbound": "Lower bound",

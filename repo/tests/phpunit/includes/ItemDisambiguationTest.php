@@ -2,12 +2,11 @@
 
 namespace Wikibase\Test;
 
+use MediaWikiTestCase;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Lib\EntityIdFormatter;
-use MediaWikiTestCase;
 
 /**
  * @covers Wikibase\ItemDisambiguation
