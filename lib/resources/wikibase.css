@@ -192,6 +192,14 @@ table.wb-terms {
 	background: #F0F0F0;
 }
 
+.wb-language-fallback-indicator:before {
+	content: " [";
+}
+
+.wb-language-fallback-indicator:after {
+	content: "]";
+}
+
 /********** /TERMS **********/
 
 
