@@ -2,14 +2,16 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * @covers Wikibase\DataModel\Entity\Property
@@ -43,6 +45,36 @@ class PropertyTest extends EntityTest {
 	 */
 	protected function getNewEmpty() {
 		return Property::newFromType( 'string' );
+	}
+
+	public function testConstructorWithAllParameters() {
+		$property = new Property(
+			new PropertyId( 'P42' ),
+			new Fingerprint(),
+			'string',
+			new StatementList()
+		);
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $property );
+		$this->assertEquals( new PropertyId( 'P42' ), $property->getId() );
+		$this->assertEquals( new Fingerprint(), $property->getFingerprint() );
+		$this->assertEquals( 'string', $property->getDataTypeId() );
+		$this->assertEquals( new StatementList(), $property->getStatements() );
+	}
+
+	public function testConstructorWithMinimalParameters() {
+		$property = new Property( null, null, '' );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $property );
+		$this->assertNull( $property->getId() );
+		$this->assertEquals( new Fingerprint(), $property->getFingerprint() );
+		$this->assertEquals( '', $property->getDataTypeId() );
+		$this->assertEquals( new StatementList(), $property->getStatements() );
+	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidType_ConstructorThrowsException() {
+		new Property( null, null, null );
 	}
 
 	public function testNewFromType() {
@@ -211,7 +243,6 @@ class PropertyTest extends EntityTest {
 	}
 
 	public function testNewClaimReturnsStatementWithProvidedMainSnak() {
-		/** @var Snak $snak */
 		$snak = $this->getMock( 'Wikibase\DataModel\Snak\Snak' );
 
 		$property = Property::newFromType( 'string' );
