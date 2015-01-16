@@ -16,6 +16,24 @@
       "revId": "96d8d5562359be22c3f5ec0893f06b9ccc3e8418",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_49b0833e",
+        "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-01-16T16:25:09Z",
+      "side": 1,
+      "message": "ehm... \"just to be sure\"?\n\nGood catch",
+      "parentUuid": "ee703fc5_5ba8131d",
+      "revId": "96d8d5562359be22c3f5ec0893f06b9ccc3e8418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
