@@ -39,7 +39,7 @@
 	"wikibase-parse-error-entity-id": "Назнаката на предметот е неправилно срочена.",
 	"wikibase-parse-error-quantity": "Вредноста за количина е неправилно срочена.",
 	"wikibase-parse-error-time": "Вредноста за време е неправилно срочена.",
-	"wikibase-sitelinks-wikipedia": "Страници на Википедија сврзани со предметот",
+	"wikibase-sitelinks-wikipedia": "Википедија",
 	"wikibase-sitelinks-sitename-columnheading": "Јазик",
 	"wikibase-sitelinks-link-columnheading": "Сврзана страница",
 	"wikibase-snakview-snaktypeselector-somevalue": "непозната вредност",

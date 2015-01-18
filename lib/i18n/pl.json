@@ -45,7 +45,7 @@
 	"wikibase-parse-error-entity-id": "Identyfikator encji ma nieprawidłowy format.",
 	"wikibase-parse-error-quantity": "Wartość ma nieprawidłowy format.",
 	"wikibase-parse-error-time": "Wartość czasu ma nieprawidłowy format.",
-	"wikibase-sitelinks-wikipedia": "Strony Wikipedii powiązane z tym elementem",
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Język",
 	"wikibase-sitelinks-link-columnheading": "Powiązana strona",
 	"wikibase-snakview-snaktypeselector-somevalue": "nieznana wartość",

@@ -41,7 +41,7 @@
 	"wikibase-parse-error-entity-id": "מזהה הישות אינו תקין.",
 	"wikibase-parse-error-quantity": "ערך הכמות אינו תקין.",
 	"wikibase-parse-error-time": "ערך הזמן אינו תקין.",
-	"wikibase-sitelinks-wikipedia": "דפי ויקיפדיה שמקושרים לפריט הזה",
+	"wikibase-sitelinks-wikipedia": "ויקיפדיה",
 	"wikibase-sitelinks-sitename-columnheading": "שפה",
 	"wikibase-sitelinks-link-columnheading": "דף מקושר",
 	"wikibase-snakview-snaktypeselector-somevalue": "ערך בלתי־ידוע",

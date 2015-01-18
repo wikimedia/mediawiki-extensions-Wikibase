@@ -56,7 +56,7 @@
 	"wikibase-sitelinkgroupview-input-help-message": "Dodaj link do strony, określając stronę i podstronę, edytując lub usuwając istniejące linki.",
 	"wikibase-sitelinks-empty": "Brak strony powiązanej z tym elementem.",
 	"wikibase-sitelinks-input-help-message": "Podaj link do strony związanej z tym elementem.",
-	"wikibase-sitelinks-special": "Strony innych projektów powiązane z tym elementem",
+	"wikibase-sitelinks-special": "Inne projekty",
 	"wikibase-badgeselector-badge-placeholder-title": "Kliknij, aby przypisać ikonę.",
 	"wikibase-remove": "usuń",
 	"wikibase-move-up": "przenieś w górę",
