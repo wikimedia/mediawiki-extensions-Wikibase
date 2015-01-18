@@ -120,7 +120,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	public function testCreateRedirect_success( EntityId $fromId, EntityId $toId ) {
 		$interactor = $this->newInteractor();
 
-		$interactor->createRedirect( $fromId, $toId );
+		$interactor->createRedirect( $fromId, $toId, false );
 
 		try {
 			$this->repo->getEntity( $fromId );
@@ -149,7 +149,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 		$interactor = $this->newInteractor();
 
 		try {
-			$interactor->createRedirect( $fromId, $toId );
+			$interactor->createRedirect( $fromId, $toId, false );
 			$this->fail( 'createRedirect not fail with error ' . $expectedCode . ' as expected!' );
 		} catch ( RedirectCreationException $ex ) {
 			$this->assertEquals( $expectedCode, $ex->getErrorCode() );

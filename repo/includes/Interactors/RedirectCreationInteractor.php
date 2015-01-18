@@ -76,6 +76,7 @@ class RedirectCreationInteractor {
 	 * must exist and be empty (or be a redirect already).
 	 * @param EntityId $toId The ID of the entity the redirect should point to. The Entity must
 	 * exist and must not be a redirect.
+	 * @param bool $bot Whether the edit should be marked as bot
 	 *
 	 * @return EntityRedirect
 	 *
@@ -83,7 +84,7 @@ class RedirectCreationInteractor {
 	 * RedirectCreationException::getErrorCode() to get further information about the cause of
 	 * the failure. An explanation of the error codes can be obtained from getErrorCodeInfo().
 	 */
-	public function createRedirect( EntityId $fromId, EntityId $toId ) {
+	public function createRedirect( EntityId $fromId, EntityId $toId, $bot ) {
 		wfProfileIn( __METHOD__ );
 
 		$this->checkCompatible( $fromId, $toId );
@@ -96,7 +97,7 @@ class RedirectCreationInteractor {
 		$summary->addAutoCommentArgs( $fromId, $toId );
 
 		$redirect = new EntityRedirect( $fromId, $toId );
-		$this->saveRedirect( $redirect, $summary );
+		$this->saveRedirect( $redirect, $summary, $bot );
 
 		wfProfileOut( __METHOD__ );
 
@@ -211,16 +212,21 @@ class RedirectCreationInteractor {
 	/**
 	 * @param EntityRedirect $redirect
 	 * @param Summary $summary
+	 * @param bool $bot Whether the edit should be marked as bot
 	 *
 	 * @throws RedirectCreationException
 	 */
-	private function saveRedirect( EntityRedirect $redirect, Summary $summary ) {
+	private function saveRedirect( EntityRedirect $redirect, Summary $summary, $bot ) {
+		$flags = EDIT_UPDATE;
+		if ( $bot ) {
+			$flags = $flags | EDIT_FORCE_BOT;
+		}
 		try {
 			$this->entityStore->saveRedirect(
 				$redirect,
 				$this->summaryFormatter->formatSummary( $summary ),
 				$this->user,
-				EDIT_UPDATE
+				$flags
 			);
 		} catch ( StorageException $ex ) {
 			throw new RedirectCreationException( $ex->getMessage(), 'cant-redirect', $ex );
