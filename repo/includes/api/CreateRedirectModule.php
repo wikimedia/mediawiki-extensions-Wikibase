@@ -78,12 +78,13 @@ class CreateRedirectModule extends ApiBase {
 		wfProfileIn( __METHOD__ );
 
 		$params = $this->extractRequestParams();
+		$bot = $this->getUser()->isAllowed( 'bot' ) && $params['bot'];
 
 		try {
 			$fromId = $this->idParser->parse( $params['from'] );
 			$toId = $this->idParser->parse( $params['to'] );
 
-			$this->createRedirect( $fromId, $toId, $this->getResult() );
+			$this->createRedirect( $fromId, $toId, $bot, $this->getResult() );
 		} catch ( EntityIdParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-entity-id' );
 		} catch ( RedirectCreationException $ex ) {
@@ -96,12 +97,13 @@ class CreateRedirectModule extends ApiBase {
 	/**
 	 * @param EntityId $fromId
 	 * @param EntityId $toId
+	 * @param bool $bot Whether the edit should be marked as bot
 	 * @param ApiResult $result The result object to report the result to.
 	 *
 	 * @throws RedirectCreationException
 	 */
-	private function createRedirect( EntityId $fromId, EntityId $toId, ApiResult $result ) {
-		$this->interactor->createRedirect( $fromId, $toId );
+	private function createRedirect( EntityId $fromId, EntityId $toId, $bot, ApiResult $result ) {
+		$this->interactor->createRedirect( $fromId, $toId, $bot );
 
 		$result->addValue( null, 'success', 1 );
 		$result->addValue( null, 'redirect', $toId->getSerialization() );
