@@ -16,9 +16,9 @@ return call_user_func( function() {
 
 	$modules = array(
 
-		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.claimgrouplistview-claimlistview' => $moduleTemplate + array(
+		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.claimgrouplistview-statementlistview' => $moduleTemplate + array(
 			'scripts' => array(
-				'definitions/addtoolbar/claimgrouplistview-claimlistview.js',
+				'definitions/addtoolbar/claimgrouplistview-statementlistview.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.addtoolbar',
@@ -27,13 +27,13 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.claimlistview-statementview' => $moduleTemplate + array(
+		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementlistview-statementview' => $moduleTemplate + array(
 			'scripts' => array(
-				'definitions/addtoolbar/claimlistview-statementview.js',
+				'definitions/addtoolbar/statementlistview-statementview.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.addtoolbar',
-				'jquery.wikibase.claimlistview',
+				'jquery.wikibase.statementlistview',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.templates',
 			),
