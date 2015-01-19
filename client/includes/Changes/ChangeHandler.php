@@ -86,7 +86,7 @@ class ChangeHandler {
 	/**
 	 * @param AffectedPagesFinder $affectedPagesFinder
 	 * @param TitleFactory $titleFactory
-	 * @param PageUpdater $pageUpdater
+	 * @param PageUpdater $updater
 	 * @param ChangeListTransformer $changeListTransformer
 	 * @param string $localSiteId
 	 * @param bool $injectRecentChanges
@@ -96,7 +96,7 @@ class ChangeHandler {
 	public function __construct(
 		AffectedPagesFinder $affectedPagesFinder,
 		TitleFactory $titleFactory,
-		PageUpdater $pageUpdater,
+		PageUpdater $updater,
 		ChangeListTransformer $changeListTransformer,
 		$localSiteId,
 		$injectRecentChanges = true
@@ -106,12 +106,12 @@ class ChangeHandler {
 		}
 
 		if ( !is_bool( $injectRecentChanges ) ) {
-			throw new InvalidArgumentException( '$injectRC must be a bool' );
+			throw new InvalidArgumentException( '$injectRecentChanges must be a bool' );
 		}
 
 		$this->affectedPagesFinder = $affectedPagesFinder;
 		$this->titleFactory = $titleFactory;
-		$this->updater = $pageUpdater;
+		$this->updater = $updater;
 		$this->changeListTransformer = $changeListTransformer;
 		$this->localSiteId = $localSiteId;
 		$this->injectRecentChanges = $injectRecentChanges;
@@ -162,7 +162,7 @@ class ChangeHandler {
 
 		$changeId = $this->getChangeIdForLog( $change );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$changeId"
-			. " (" . $change->getType() . ")" );
+			. ' (' . $change->getType() . ')' );
 
 		$usagesPerPage = $this->affectedPagesFinder->getAffectedUsagesByPage( $change );
 
@@ -173,7 +173,7 @@ class ChangeHandler {
 			return false;
 		}
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": updating " . count( $usagesPerPage )
+		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating ' . count( $usagesPerPage )
 			. " page(s) for change #$changeId." );
 
 		$actionBuckets = array();
