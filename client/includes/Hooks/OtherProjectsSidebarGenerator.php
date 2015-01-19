@@ -56,7 +56,7 @@ class OtherProjectsSidebarGenerator {
 	/**
 	 * @param Title $title
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	public function buildProjectLinkSidebar( Title $title ) {
 		return $this->buildSidebarFromSiteLinks( $this->getSiteLinks( $title ) );
@@ -65,7 +65,7 @@ class OtherProjectsSidebarGenerator {
 	/**
 	 * @param SiteLink[] $siteLinks
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	private function buildSidebarFromSiteLinks( array $siteLinks ) {
 		$result = array();
@@ -85,6 +85,11 @@ class OtherProjectsSidebarGenerator {
 		return $result;
 	}
 
+	/**
+	 * @param Title $title
+	 *
+	 * @return SiteLink[]
+	 */
 	private function getSiteLinks( Title $title ) {
 		$siteLink = new SiteLink( $this->localSiteId, $title->getFullText() );
 		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
@@ -96,6 +101,12 @@ class OtherProjectsSidebarGenerator {
 		return $this->siteLinkLookup->getSiteLinksForItem( $itemId );
 	}
 
+	/**
+	 * @param SiteLink $siteLink
+	 * @param Site $site
+	 *
+	 * @return string[]
+	 */
 	private function buildSidebarLink( SiteLink $siteLink, Site $site ) {
 		$node = array(
 			'msg' => 'wikibase-otherprojects-' . $site->getGroup(),
@@ -110,4 +121,5 @@ class OtherProjectsSidebarGenerator {
 
 		return $node;
 	}
+
 }

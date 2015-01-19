@@ -26,17 +26,17 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * Contains pieces of the sub-page name of this special page if a subpage was called.
 	 * E.g. array( 'a', 'b' ) in case of 'Special:NewEntity/a/b'
-	 * @var string[]
+	 * @var string[]|null
 	 */
 	protected $parts = null;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	protected $label = null;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	protected $description = null;
 

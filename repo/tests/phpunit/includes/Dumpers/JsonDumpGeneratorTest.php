@@ -31,12 +31,12 @@ use Wikibase\Repo\Store\EntityIdPager;
 class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var SerializerFactory
+	 * @var SerializerFactory|null
 	 */
 	public $serializerFactory = null;
 
 	/**
-	 * @var SerializationOptions
+	 * @var SerializationOptions|null
 	 */
 	public $serializationOptions = null;
 

@@ -49,7 +49,7 @@ class SidebarHookHandlers {
 	private $otherProjectsLinksDefault;
 
 	/**
-	 * @var SidebarHookHandlers
+	 * @var SidebarHookHandlers|null
 	 */
 	private static $instance = null;
 

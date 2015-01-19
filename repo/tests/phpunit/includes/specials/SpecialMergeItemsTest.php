@@ -33,17 +33,17 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 	/**
-	 * @var MockRepository
+	 * @var MockRepository|null
 	 */
 	private $repo = null;
 
 	/**
-	 * @var User
+	 * @var User|null
 	 */
 	private $user = null;
 
 	/**
-	 * @var EntityModificationTestHelper
+	 * @var EntityModificationTestHelper|null
 	 */
 	private $entityModificationTestHelper = null;
 

@@ -7,6 +7,7 @@ use ParserOutput;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
@@ -72,6 +73,11 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$this->langLinkHandler = $this->getLangLinkHandler( array() );
 	}
 
+	/**
+	 * @param string[] $otherProjects
+	 *
+	 * @return LangLinkHandler
+	 */
 	private function getLangLinkHandler( array $otherProjects ) {
 		$this->mockRepo = new MockRepository();
 
@@ -93,6 +99,11 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @param string[] $otherProjects
+	 *
+	 * @return OtherProjectsSidebarGeneratorFactory
+	 */
 	private function getOtherProjectsSidebarGeneratorFactory( array $otherProjects ) {
 		$otherProjectsSidebarGenerator = $this->getOtherProjectsSidebarGenerator( $otherProjects );
 
@@ -110,7 +121,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param array $otherProjects
+	 * @param string[] $otherProjects
 	 *
 	 * @return OtherProjectsSidebarGenerator
 	 */

@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use Status;
 use Title;
 use User;
-use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
@@ -96,9 +96,8 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider runProvider
-	 *
-	 * @param bool $expected
-	 * @param bool $titleExists
+	 * @param string $expected
+	 * @param string $normalizedPageName
 	 * @param string $oldTitle
 	 */
 	public function testRun( $expected, $normalizedPageName, $oldTitle ) {
@@ -147,4 +146,5 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 			array( new ItemId( 'Q42' ) )
 		);
 	}
+
 }

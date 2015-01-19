@@ -62,17 +62,17 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 	);
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private static $itemId = null;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private static $badgeId = null;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private static $redirectId = null;
 

@@ -31,12 +31,12 @@ class importProperties extends Maintenance {
 	protected $only = 0;
 
 	/**
-	 * @var User
+	 * @var User|null
 	 */
 	protected $user = null;
 
 	/**
-	 * @var EntityStore
+	 * @var EntityStore|null
 	 */
 	protected $store = null;
 

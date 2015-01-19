@@ -36,7 +36,7 @@ class LineReader implements Iterator, Disposable {
 	protected $autoDispose;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	protected $current = null;
 
