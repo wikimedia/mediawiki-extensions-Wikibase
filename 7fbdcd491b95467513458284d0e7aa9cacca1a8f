@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_3c7bfebe",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T19:59:55Z",
+      "side": 1,
+      "message": "String concatenation with .\u003d is equivalent and simpler.",
+      "revId": "7fbdcd491b95467513458284d0e7aa9cacca1a8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_5ca91220",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T19:59:55Z",
+      "side": 1,
+      "message": "This comparison is wrong for certain combinations. You can\u0027t say that de-at is a \"variant\" of de-ch.\n\nIt\u0027s also ignoring the direction.\n\nAlso this class gets added in cases where requested and actual are the same and source is different. Worth a test, btw.",
+      "revId": "7fbdcd491b95467513458284d0e7aa9cacca1a8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_7cb2d693",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T19:59:55Z",
+      "side": 1,
+      "message": "This sounds like it\u0027s an icon, but it\u0027s the actual language. What about wb-fallback-language?",
+      "revId": "7fbdcd491b95467513458284d0e7aa9cacca1a8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_5c5fd244",
+        "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T19:59:55Z",
+      "side": 1,
+      "message": "$term ?: new Term( ... )\n\nOne of the few possibilities where this syntax is really, really nice.",
+      "revId": "7fbdcd491b95467513458284d0e7aa9cacca1a8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_1c595a5d",
+        "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T19:59:55Z",
+      "side": 1,
+      "message": "Add new TermFallback( \u0027de\u0027, \u0027Foo\u0027, \u0027de\u0027, \u0027de-ch\u0027 ); and check that it does _not_ set the variant class.",
+      "revId": "7fbdcd491b95467513458284d0e7aa9cacca1a8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
