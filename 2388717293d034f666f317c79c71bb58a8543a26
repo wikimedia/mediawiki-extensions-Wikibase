@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_fcf7c654",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T19:43:34Z",
+      "side": 1,
+      "message": "We had the exact same discussion just a few days ago and I undid half of the stuff I originally did in this patch because of it. I will not touch this an other time. Look how this method is used. Look where it lives. It\u0027s just convenient to be able to call $this-\u003eentityExists( $entityDocument-\u003egetId() ) and get a useful false instead of a runtime error that need to be try-catched or checked before calling the method with not-null-if\u0027s all over the place. This is not Java, this is PHP.",
+      "parentUuid": "ae6ac7d6_e13ac3e3",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_813f47d3",
         "filename": "repo/includes/api/ApiWikibase.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-19T17:32:33Z",
       "side": 1,
       "message": "You don\u0027t think the required permissions may depend on the actual request? Ever?",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_9ca00a40",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T19:43:34Z",
+      "side": 1,
+      "message": "I don\u0027t really know what you are talking about. The unclear, basically undocumented \"$params\" array that can contain anything? How is that useful? I assume it was not used either because how unclear it is or because it is just not needed.",
+      "parentUuid": "ae6ac7d6_813f47d3",
       "revId": "2388717293d034f666f317c79c71bb58a8543a26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_bcb86e75",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T19:43:34Z",
+      "side": 1,
+      "message": "The old code returned false for negative numbers, which was wrong. It\u0027s not the job of this code here to tell if negative numbers are valid.\n\nOn second look this method is completely redundant and wrong (in both the old and the new implementation) and can just die. I will rework this.",
+      "parentUuid": "ae6ac7d6_6126b3cb",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_81166759",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 4
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_bceaae71",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T19:43:34Z",
+      "side": 1,
+      "message": "I\u0027d prefer \u0027item\u0027 here, as I did in the previous patch set. Also this is not touched and unrelated to this patch.",
+      "parentUuid": "ae6ac7d6_81166759",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_610d5341",
         "filename": "repo/includes/api/ModifyTerm.php",
         "patchSetId": 4
@@ -81,6 +153,24 @@
       "writtenOn": "2015-01-19T17:32:33Z",
       "side": 1,
       "message": "Did you verify that a permission that has no entry in wgGrouPermissions is assumed to be granted, rather than denied?",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_1cde3adf",
+        "filename": "repo/includes/api/ModifyTerm.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T19:43:34Z",
+      "side": 1,
+      "message": "This is irrelevant at this point. Both is better than the hard coded instanceof checks.",
+      "parentUuid": "ae6ac7d6_610d5341",
       "revId": "2388717293d034f666f317c79c71bb58a8543a26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
