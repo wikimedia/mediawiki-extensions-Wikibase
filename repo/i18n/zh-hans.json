@@ -419,6 +419,8 @@
 	"apihelp-wbgetentities-example-4": "获取ID为Q42的实体，带英语中所有可用的属性",
 	"apihelp-wbgetentities-example-6": "获取ID为Q42的实体，显示所有可用语言的所有标签",
 	"apihelp-wbgetentities-example-7": "获取ID为P17和P3的实体，只显示数据类型",
+	"apihelp-wbgetentities-example-8": "获取ID为Q42的实体，显示英语的所有别名",
+	"apihelp-wbgetentities-example-9": "获取ID为Q1和Q42的实体，显示英语、德语和法语的描述",
 	"apihelp-wbgetentities-example-12": "获取项Q42的网站链接",
 	"apihelp-wbmergeitems-description": "合并重复项。",
 	"apihelp-wbmergeitems-param-fromid": "要合并自的ID",
