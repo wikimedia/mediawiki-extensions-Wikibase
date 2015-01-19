@@ -2,15 +2,14 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Parser;
-use ParserOutput;
-use StripState;
+use Content;
+use ManualLogEntry;
 use Title;
+use User;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\NamespaceChecker;
-use Wikibase\Updates\DataUpdateAdapter;
 use WikiPage;
 
 /**
@@ -58,6 +57,7 @@ class DataUpdateHookHandlers {
 	/**
 	 * Static handler for the ArticleEditUpdates hook.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleEditUpdates
+	 * @see doArticleEditUpdates
 	 *
 	 * @param WikiPage $page The WikiPage object managing the edit
 	 * @param object $editInfo The current edit info object.
@@ -67,6 +67,34 @@ class DataUpdateHookHandlers {
 	public static function onArticleEditUpdates( WikiPage $page, &$editInfo, $changed ) {
 		$handler = self::newFromGlobalState();
 		$handler->doArticleEditUpdates( $page, $editInfo, $changed );
+	}
+
+	/**
+	 * Static handler for ArticleDeleteComplete
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
+	 * @see doArticleDeleteComplete
+	 *
+	 * @param WikiPage $article
+	 * @param User $user
+	 * @param string $reason
+	 * @param int $id id of the article that was deleted
+	 * @param Content $content
+	 * @param ManualLogEntry $logEntry
+	 *
+	 * @return bool
+	 */
+	public static function onArticleDeleteComplete(
+		WikiPage &$article,
+		User &$user,
+		$reason,
+		$id,
+		Content $content,
+		ManualLogEntry $logEntry
+	) {
+		$title = $article->getTitle();
+
+		$handler = self::newFromGlobalState();
+		$handler->doArticleDeleteComplete( $title->getNamespace(), $id );
 	}
 
 	public function __construct(
@@ -79,7 +107,7 @@ class DataUpdateHookHandlers {
 	}
 
 	/**
-	 * Hook runs after internal parsing
+	 * Hook run after a new revision was stored
 	 *
 	 * @param WikiPage $page The WikiPage object managing the edit
 	 * @param object $editInfo The current edit info object.
@@ -99,6 +127,24 @@ class DataUpdateHookHandlers {
 		$this->usageUpdater->updateUsageForPage(
 			$title->getArticleId(),
 			$usageAcc->getUsages()
+		);
+	}
+
+	/**
+	 * Hook run after a page was deleted.
+	 *
+	 * @param int $namespaceId
+	 * @param int $pageId
+	 */
+	public function doArticleDeleteComplete( $namespace, $pageId ) {
+		if ( !$this->namespaceChecker->isWikibaseEnabled( $namespace ) ) {
+			// shorten out
+			return;
+		}
+
+		$this->usageUpdater->updateUsageForPage(
+			$pageId,
+			array()
 		);
 	}
 
