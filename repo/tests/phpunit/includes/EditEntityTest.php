@@ -17,7 +17,6 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntity;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 
