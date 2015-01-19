@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_dc05227e",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T18:50:06Z",
+      "side": 1,
+      "message": "I have no idea, and this patch actually tries to go a first step in a direction that does not need the two separated.",
+      "parentUuid": "ae6ac7d6_dc00c206",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_9c0a4a23",
         "filename": "repo/includes/Template/TemplateFactory.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-19T17:44:43Z",
       "side": 1,
       "message": "Defaultign to global state access in the constructor is evil. Dependency injection should be forced when possible.",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_bc006e6e",
+        "filename": "repo/includes/Template/TemplateFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T18:50:06Z",
+      "side": 1,
+      "message": "I consider repeating that global state all over the code base much worse.",
+      "parentUuid": "ae6ac7d6_9c0a4a23",
       "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_7ce3b6d4",
+        "filename": "repo/includes/Template/TemplateRegistry.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T18:50:06Z",
+      "side": 1,
+      "message": "Because static first.",
+      "parentUuid": "ae6ac7d6_3c0f7e35",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_1c163a4e",
         "filename": "repo/includes/Template/TemplateRegistry.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2015-01-19T17:44:43Z",
       "side": 1,
       "message": "this should check the type of  $snippet",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_3ccd3e63",
+        "filename": "repo/includes/Template/TemplateRegistry.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T18:50:06Z",
+      "side": 1,
+      "message": "It could, but why? It\u0027s converted to a string anyway. Note that a) This is legacy code that was just moved here. b) An error check here would only be triggered if something horribly is going on on templates.php, but who should do that and how? c) This is going to be replaced with an other templating system anyway.",
+      "parentUuid": "ae6ac7d6_1c163a4e",
       "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_bcd94e2e",
+        "filename": "repo/tests/phpunit/includes/ItemDisambiguationTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T18:50:06Z",
+      "side": 1,
+      "message": "It feels like I explained this a hundred times. See the commit message in I8fa5b47.",
+      "parentUuid": "ae6ac7d6_bc494e6c",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_5c3a72c1",
         "filename": "repo/tests/phpunit/includes/Template/TemplateRegistryTest.php",
         "patchSetId": 3
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_3cc69e4f",
+        "filename": "repo/tests/phpunit/includes/Template/TemplateRegistryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T18:50:06Z",
+      "side": 1,
+      "message": "I did not wrote this code.",
+      "parentUuid": "ae6ac7d6_5c3a72c1",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_bc706ea4",
         "filename": "repo/tests/phpunit/includes/Template/TemplateRegistryTest.php",
         "patchSetId": 3
@@ -132,6 +240,24 @@
       "writtenOn": "2015-01-19T17:44:43Z",
       "side": 1,
       "message": "no provider needed for a single case, unless more are expected to be added later. Can\u0027t think of how that would make sense in this case.",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_5cc3523d",
+        "filename": "repo/tests/phpunit/includes/Template/TemplateRegistryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-19T18:50:06Z",
+      "side": 1,
+      "message": "I did not wrote this code.",
+      "parentUuid": "ae6ac7d6_bc706ea4",
       "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
