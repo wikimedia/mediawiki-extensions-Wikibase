@@ -56,18 +56,18 @@ HTML;
 <h2 class="wb-section-heading" dir="auto" id="$2">$1</h2>
 HTML;
 
-	$templates['wb-claimgrouplistview'] =
+	$templates['wikibase-statementgrouplistview'] =
 <<<HTML
-<div class="wb-claimgrouplistview">
-	<div class="wb-claimlists">$1<!-- [0,*] wb-claimlist--></div>
-	$2<!-- {1} wb-toolbar -->
+<div class="wikibase-statementgrouplistview">
+	<div class="wikibase-statementgrouplistview-listview"><!-- [0,*] wikibase-statementlistview -->$1</div>
+	<!-- [0,1] wikibase-toolbar -->$2
 </div>
 HTML;
 
-	$templates['wb-claimgrouplistview-groupname'] =
+	$templates['wikibase-statementgrouplistview-groupname'] =
 <<<HTML
-<div class="wb-claimgrouplistview-groupname">
-	<div class="wb-claim-name" dir="auto">$1</div>
+<div class="wikibase-statementgrouplistview-groupname">
+	<div class="wikibase-statementgrouplistview-groupname-name" dir="auto">$1</div>
 </div>
 HTML;
 

@@ -16,13 +16,13 @@ return call_user_func( function() {
 
 	$modules = array(
 
-		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.claimgrouplistview-statementlistview' => $moduleTemplate + array(
+		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementgrouplistview-statementlistview' => $moduleTemplate + array(
 			'scripts' => array(
-				'definitions/addtoolbar/claimgrouplistview-statementlistview.js',
+				'definitions/addtoolbar/statementgrouplistview-statementlistview.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.addtoolbar',
-				'jquery.wikibase.claimgrouplistview',
+				'jquery.wikibase.statementgrouplistview',
 				'jquery.wikibase.toolbarcontroller',
 			),
 		),

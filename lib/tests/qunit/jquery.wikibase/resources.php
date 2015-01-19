@@ -49,12 +49,12 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.claimgrouplistview.tests' => $moduleBase + array(
+		'jquery.wikibase.statementgrouplistview.tests' => $moduleBase + array(
 			'scripts' => array(
-				'jquery.wikibase.claimgrouplistview.tests.js',
+				'jquery.wikibase.statementgrouplistview.tests.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.claimgrouplistview',
+				'jquery.wikibase.statementgrouplistview',
 				'wikibase.datamodel'
 			),
 		),
