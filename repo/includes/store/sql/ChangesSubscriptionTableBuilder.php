@@ -6,7 +6,6 @@ use DatabaseBase;
 use InvalidArgumentException;
 use LoadBalancer;
 use ResultWrapper;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
