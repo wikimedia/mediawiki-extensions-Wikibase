@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Store\Sql;
 
-use Language;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DirectSqlStore;

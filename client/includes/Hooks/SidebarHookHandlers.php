@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Action;
 use OutputPage;
 use ParserOutput;
 use Skin;
