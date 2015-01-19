@@ -40,12 +40,12 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.claimgrouplabelscroll.tests' => $moduleBase + array(
+		'jquery.wikibase.statementgrouplabelscroll.tests' => $moduleBase + array(
 			'scripts' => array(
-				'jquery.wikibase.claimgrouplabelscroll.tests.js',
+				'jquery.wikibase.statementgrouplabelscroll.tests.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.claimgrouplabelscroll',
+				'jquery.wikibase.statementgrouplabelscroll',
 			),
 		),
 

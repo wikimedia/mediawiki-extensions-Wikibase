@@ -51,9 +51,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.claimgrouplabelscroll' => $moduleTemplate + array(
+		'jquery.wikibase.statementgrouplabelscroll' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase.claimgrouplabelscroll.js',
+				'jquery.wikibase.statementgrouplabelscroll.js',
 			),
 			'dependencies' => array(
 				'jquery.ui.position',
@@ -216,7 +216,7 @@ return call_user_func( function() {
 				'jquery.wikibase.itemview.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.claimgrouplabelscroll',
+				'jquery.wikibase.statementgrouplabelscroll',
 				'jquery.wikibase.statementgrouplistview',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.sitelinkgrouplistview',
@@ -275,7 +275,7 @@ return call_user_func( function() {
 				'jquery.wikibase.propertyview.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.claimgrouplabelscroll',
+				'jquery.wikibase.statementgrouplabelscroll',
 				'jquery.wikibase.statementgrouplistview',
 				'jquery.wikibase.entityview',
 			),
