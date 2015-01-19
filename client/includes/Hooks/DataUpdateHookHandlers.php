@@ -4,7 +4,6 @@ namespace Wikibase\Client\Hooks;
 
 use Content;
 use ManualLogEntry;
-use Title;
 use User;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
