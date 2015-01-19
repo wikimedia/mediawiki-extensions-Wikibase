@@ -61,9 +61,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.claimgrouplistview' => $moduleTemplate + array(
+		'jquery.wikibase.statementgrouplistview' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase.claimgrouplistview.js',
+				'jquery.wikibase.statementgrouplistview.js',
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
@@ -217,7 +217,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.claimgrouplabelscroll',
-				'jquery.wikibase.claimgrouplistview',
+				'jquery.wikibase.statementgrouplistview',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.sitelinkgrouplistview',
 				'wikibase.sites',
@@ -276,7 +276,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.claimgrouplabelscroll',
-				'jquery.wikibase.claimgrouplistview',
+				'jquery.wikibase.statementgrouplistview',
 				'jquery.wikibase.entityview',
 			),
 		),
