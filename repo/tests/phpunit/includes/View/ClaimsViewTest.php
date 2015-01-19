@@ -15,13 +15,13 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Repo\View\ClaimHtmlGenerator;
-use Wikibase\Repo\View\ClaimsView;
+use Wikibase\Repo\View\StatementGroupListView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
 
 /**
- * @covers Wikibase\Repo\View\ClaimsView
+ * @covers Wikibase\Repo\View\StatementGroupListView
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -30,7 +30,7 @@ use Wikibase\Template\TemplateRegistry;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ClaimsViewTest extends \MediaWikiLangTestCase {
+class StatementGroupListViewTest extends \MediaWikiLangTestCase {
 
 	protected function setUp() {
 		parent::setUp();
@@ -47,9 +47,9 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		$propertyIdFormatter = $this->getPropertyIdFormatterMock();
 		$link = $this->getLinkForId( $propertyId );
 
-		$claimsView = $this->newClaimsView( $propertyIdFormatter );
+		$statementGroupListView = $this->newStatementGroupListView( $propertyIdFormatter );
 
-		$html = $claimsView->getHtml( $claims );
+		$html = $statementGroupListView->getHtml( $claims );
 
 		foreach ( $claims as $claim ) {
 			$this->assertContains( $claim->getGuid(), $html );
@@ -104,11 +104,11 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	/**
 	 * @param EntityIdFormatter $propertyIdFormatter
 	 *
-	 * @return ClaimsView
+	 * @return StatementGroupListView
 	 */
-	private function newClaimsView( EntityIdFormatter $propertyIdFormatter ) {
+	private function newStatementGroupListView( EntityIdFormatter $propertyIdFormatter ) {
 		$templateFactory = new TemplateFactory( TemplateRegistry::getDefaultInstance() );
-		return new ClaimsView(
+		return new StatementGroupListView(
 			$templateFactory,
 			$propertyIdFormatter,
 			new SectionEditLinkGenerator( $templateFactory ),

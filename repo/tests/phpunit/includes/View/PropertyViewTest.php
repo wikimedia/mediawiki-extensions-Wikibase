@@ -82,7 +82,7 @@ class PropertyViewTest extends EntityViewTest {
 			$this->getMockBuilder( 'Wikibase\Repo\View\FingerprintView' )
 				->disableOriginalConstructor()
 				->getMock(),
-			$this->getMockBuilder( 'Wikibase\Repo\View\ClaimsView' )
+			$this->getMockBuilder( 'Wikibase\Repo\View\StatementGroupListView' )
 				->disableOriginalConstructor()
 				->getMock(),
 			$this->getDataTypeFactory(),

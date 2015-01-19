@@ -21,6 +21,11 @@ use Wikibase\Template\TemplateFactory;
 class ItemView extends EntityView {
 
 	/**
+	 * @var StatementGroupListView
+	 */
+	private $statementGroupListView;
+
+	/**
 	 * @var string[]
 	 */
 	private $siteLinkGroups;
@@ -35,7 +40,7 @@ class ItemView extends EntityView {
 	 *
 	 * @param TemplateFactory $templateFactory
 	 * @param FingerprintView $fingerprintView
-	 * @param ClaimsView $claimsView
+	 * @param StatementGroupListView $statementGroupListView
 	 * @param Language $language
 	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
@@ -44,14 +49,15 @@ class ItemView extends EntityView {
 	public function __construct(
 		TemplateFactory $templateFactory,
 		FingerprintView $fingerprintView,
-		ClaimsView $claimsView,
+		StatementGroupListView $statementGroupListView,
 		Language $language,
 		SiteLinksView $siteLinksView,
 		array $siteLinkGroups,
 		$editable = true
 	) {
-		parent::__construct( $templateFactory, $fingerprintView, $claimsView, $language, $editable );
+		parent::__construct( $templateFactory, $fingerprintView, $language, $editable );
 
+		$this->statementGroupListView = $statementGroupListView;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->siteLinksView = $siteLinksView;
 	}
@@ -67,7 +73,7 @@ class ItemView extends EntityView {
 		}
 
 		$html = parent::getMainHtml( $entityRevision );
-		$html .= $this->claimsView->getHtml(
+		$html .= $this->statementGroupListView->getHtml(
 			$item->getStatements()->toArray()
 		);
 

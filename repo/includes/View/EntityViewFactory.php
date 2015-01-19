@@ -143,7 +143,11 @@ class EntityViewFactory {
 		$editable = true
 	 ) {
 		$fingerprintView = $this->newFingerprintView( $languageCode );
-		$claimsView = $this->newClaimsView( $languageCode, $fallbackChain, $labelLookup );
+		$statementGroupListView = $this->newStatementGroupListView(
+			$languageCode,
+			$fallbackChain,
+			$labelLookup
+		);
 
 		// @fixme all that seems needed in EntityView is language code and dir.
 		$language = Language::factory( $languageCode );
@@ -164,7 +168,7 @@ class EntityViewFactory {
 				return new ItemView(
 					$this->templateFactory,
 					$fingerprintView,
-					$claimsView,
+					$statementGroupListView,
 					$language,
 					$siteLinksView,
 					$this->siteLinkGroups,
@@ -174,7 +178,7 @@ class EntityViewFactory {
 				return new PropertyView(
 					$this->templateFactory,
 					$fingerprintView,
-					$claimsView,
+					$statementGroupListView,
 					$this->dataTypeFactory,
 					$language,
 					$editable
@@ -189,9 +193,9 @@ class EntityViewFactory {
 	 * @param LanguageFallbackChain|null $fallbackChain
 	 * @param LabelLookup|null $labelLookup
 	 *
-	 * @return ClaimsView
+	 * @return StatementGroupListView
 	 */
-	private function newClaimsView(
+	private function newStatementGroupListView(
 		$languageCode,
 		LanguageFallbackChain $fallbackChain = null,
 		LabelLookup $labelLookup = null
@@ -209,7 +213,7 @@ class EntityViewFactory {
 			$snakHtmlGenerator
 		);
 
-		return new ClaimsView(
+		return new StatementGroupListView(
 			$this->templateFactory,
 			$propertyIdFormatter,
 			$this->sectionEditLinkGenerator,

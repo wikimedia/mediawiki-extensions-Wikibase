@@ -15,7 +15,7 @@ use Wikibase\Template\TemplateFactory;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Daniel Kinzler
  */
-class ClaimsView {
+class StatementGroupListView {
 
 	/**
 	 * @var TemplateFactory
