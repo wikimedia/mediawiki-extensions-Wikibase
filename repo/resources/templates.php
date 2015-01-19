@@ -71,13 +71,13 @@ HTML;
 </div>
 HTML;
 
-	$templates['wb-claimlistview'] =
+	$templates['wikibase-statementlistview'] =
 <<<HTML
-<div class="wb-claimlistview">
-	<div class="wb-claims" id="$3">
-		$1 <!-- [0,*] wb-claim|wb-statement -->
+<div class="wikibase-statementlistview">
+	<div class="wikibase-statementlistview-listview" id="$3">
+		<!-- [0,*] wikibase-statementview -->$1
 	</div>
-	$2 <!-- [0,*] wb-toolbar -->
+	<!-- [0,1] wikibase-toolbar -->$2
 </div>
 HTML;
 

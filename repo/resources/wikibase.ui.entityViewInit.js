@@ -35,8 +35,8 @@
 		var toolbarControllerConfig = {
 			toolbars: {
 				addtoolbar: [
-					'claimgrouplistview-claimlistview',
-					'claimlistview-statementview',
+					'claimgrouplistview-statementlistview',
+					'statementlistview-statementview',
 					'statementview-snakview',
 					'statementview-referenceview',
 					'referenceview-snakview'

@@ -68,15 +68,15 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
-				'jquery.wikibase.claimlistview',
+				'jquery.wikibase.statementlistview',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel',
 			),
 		),
 
-		'jquery.wikibase.claimlistview' => $moduleTemplate + array(
+		'jquery.wikibase.statementlistview' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase.claimlistview.js',
+				'jquery.wikibase.statementlistview.js',
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
