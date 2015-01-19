@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_4147ef22",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-01-19T14:55:12Z",
+      "side": 1,
+      "message": "The argument $user is not declared nor used in that function. Remove?",
+      "revId": "6f3f9b6198b8b1be02acdbf07e0a94819aa74bec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
