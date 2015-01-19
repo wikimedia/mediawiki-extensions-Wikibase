@@ -72,7 +72,7 @@ class StatementGroupListView {
 			$claimsHtml .= $this->getHtmlForClaimGroup( $claims );
 		}
 
-		$statementgrouplistviewHtml = $this->templateFactory->render(
+		$html = $this->templateFactory->render(
 			'wikibase-statementgrouplistview',
 			$claimsHtml,
 			''
@@ -80,12 +80,7 @@ class StatementGroupListView {
 
 		// TODO: Add link to SpecialPage that allows adding a new claim.
 		$sectionHeading = $this->getHtmlForSectionHeading( 'wikibase-statements' );
-		// FIXME: statementgrouplistview should be the topmost claims related template
-		$html = $this->templateFactory->render( 'wikibase-statementlistview',
-			$statementgrouplistviewHtml,
-			'',
-			''
-		);
+
 		return $sectionHeading . $html;
 	}
 
