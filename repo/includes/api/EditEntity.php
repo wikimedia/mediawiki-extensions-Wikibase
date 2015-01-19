@@ -247,8 +247,8 @@ class EditEntity extends ModifyEntity {
 		}
 
 		if ( array_key_exists( 'sitelinks', $data ) ) {
-			if ( $entity->getType() !== Item::ENTITY_TYPE ) {
-				$this->dieError( "Non Items can not have sitelinks", 'not-recognized' );
+			if ( !( $entity instanceof Item) ) {
+				$this->dieError( 'Non Items can not have sitelinks', 'not-recognized' );
 			}
 
 			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $entity ) );
@@ -394,7 +394,7 @@ class EditEntity extends ModifyEntity {
 	 * @since 0.4
 	 *
 	 * @param array $siteLinks
-	 * @param Item $entity
+	 * @param Item $item
 	 *
 	 * @return ChangeOp[]
 	 */
@@ -402,7 +402,7 @@ class EditEntity extends ModifyEntity {
 		$siteLinksChangeOps = array();
 
 		if ( !is_array( $siteLinks ) ) {
-			$this->dieError( "List of sitelinks must be an array", 'not-recognized-array' );
+			$this->dieError( 'List of sitelinks must be an array', 'not-recognized-array' );
 		}
 
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
