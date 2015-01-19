@@ -150,8 +150,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 	 * @return ItemHandler
 	 */
 	protected function getHandler( SettingsArray $settings = null ) {
-		$repo = $this->getRepo( $settings );
-		return $repo->newItemHandler();
+		return $this->getWikibaseRepo( $settings )->newItemHandler();
 	}
 
 }
