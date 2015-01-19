@@ -37,11 +37,6 @@ abstract class EntityView {
 	private $fingerprintView;
 
 	/**
-	 * @var ClaimsView
-	 */
-	protected $claimsView;
-
-	/**
 	 * @var Language
 	 */
 	protected $language;
@@ -59,19 +54,16 @@ abstract class EntityView {
 	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param FingerprintView $fingerprintView
-	 * @param ClaimsView $claimsView
 	 * @param Language $language
 	 * @param bool $editable
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		FingerprintView $fingerprintView,
-		ClaimsView $claimsView,
 		Language $language,
-		$editable  = true
+		$editable = true
 	) {
 		$this->fingerprintView = $fingerprintView;
-		$this->claimsView = $claimsView;
 		$this->language = $language;
 		$this->editable = $editable;
 
