@@ -151,7 +151,7 @@ return call_user_func( function() {
 				'jquery.wikibase.itemview',
 				'jquery.wikibase.propertyview',
 				'jquery.wikibase.toolbarcontroller',
-				'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.claimgrouplistview-statementlistview',
+				'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementgrouplistview-statementlistview',
 				'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementlistview-statementview',
 				'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.referenceview-snakview',
 				'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementview-referenceview',

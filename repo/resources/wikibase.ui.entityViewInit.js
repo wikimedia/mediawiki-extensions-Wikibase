@@ -34,7 +34,7 @@
 		// be initialized:
 		var toolbarControllerConfig = {
 			addtoolbar: [
-				'claimgrouplistview-statementlistview',
+				'statementgrouplistview-statementlistview',
 				'statementlistview-statementview',
 				'statementview-snakview',
 				'statementview-referenceview',
