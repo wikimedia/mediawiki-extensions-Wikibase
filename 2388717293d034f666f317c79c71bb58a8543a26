@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_e13ac3e3",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-19T17:32:33Z",
+      "side": 1,
+      "message": "Why should null be allowed here? Passing null here seems like a programming error, and should result in a fatal. \n\nFail fast and safe, being tollerant about bullshit values just gets the programm into a wacky state.",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_813f47d3",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-19T17:32:33Z",
+      "side": 1,
+      "message": "You don\u0027t think the required permissions may depend on the actual request? Ever?",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_6126b3cb",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-19T17:32:33Z",
+      "side": 1,
+      "message": "The check should be (int)$params[\u0027baserevid\u0027] \u003e 0.\nThe proposed code would go wrong for $params[\u0027baserevid\u0027] \u003d \"x\" and for $params[\u0027baserevid\u0027] \u003d -23.",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_81166759",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-19T17:32:33Z",
+      "side": 1,
+      "message": "I\u0027d prefer Property::ENTITY_TYPE here.",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_610d5341",
+        "filename": "repo/includes/api/ModifyTerm.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-19T17:32:33Z",
+      "side": 1,
+      "message": "Did you verify that a permission that has no entry in wgGrouPermissions is assumed to be granted, rather than denied?",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
