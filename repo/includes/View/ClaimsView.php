@@ -77,7 +77,11 @@ class ClaimsView {
 		// TODO: Add link to SpecialPage that allows adding a new claim.
 		$sectionHeading = $this->getHtmlForSectionHeading( 'wikibase-statements' );
 		// FIXME: claimgrouplistview should be the topmost claims related template
-		$html = $this->templateFactory->render( 'wb-claimlistview', $claimgrouplistviewHtml, '', '' );
+		$html = $this->templateFactory->render( 'wikibase-statementlistview',
+			$claimgrouplistviewHtml,
+			'',
+			''
+		);
 		return $sectionHeading . $html;
 	}
 
@@ -150,7 +154,7 @@ class ClaimsView {
 			)
 		);
 
-		return $this->templateFactory->render( 'wb-claimlistview',
+		return $this->templateFactory->render( 'wikibase-statementlistview',
 			$propertyHtml,
 			$this->templateFactory->render(
 				'wb-claimgrouplistview-groupname',
