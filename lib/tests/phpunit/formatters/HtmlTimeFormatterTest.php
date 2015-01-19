@@ -56,7 +56,7 @@ class HtmlTimeFormatterTest extends \PHPUnit_Framework_TestCase {
 					TimeValue::PRECISION_DAY,
 					TimeFormatter::CALENDAR_JULIAN ),
 				new FormatterOptions(),
-				'/^MOCKDATE <sup class="wb-calendar-name">Julian<\/sup>$/'
+				'/^MOCKDATE<sup class="wb-calendar-name">Julian<\/sup>$/'
 			),
 			'a month in 1920' => array(
 				new TimeValue( '+1920-05-01T00:00:00Z',
@@ -72,7 +72,7 @@ class HtmlTimeFormatterTest extends \PHPUnit_Framework_TestCase {
 					TimeValue::PRECISION_DAY,
 					TimeFormatter::CALENDAR_GREGORIAN ),
 				new FormatterOptions(),
-				'/^MOCKDATE <sup class="wb-calendar-name">Gregorian<\/sup>$/'
+				'/^MOCKDATE<sup class="wb-calendar-name">Gregorian<\/sup>$/'
 			),
 			'a julian day in 1520' => array(
 				new TimeValue( '+1520-05-01T00:00:00Z',
@@ -80,7 +80,7 @@ class HtmlTimeFormatterTest extends \PHPUnit_Framework_TestCase {
 					TimeValue::PRECISION_DAY,
 					TimeFormatter::CALENDAR_JULIAN ),
 				new FormatterOptions(),
-				'/^MOCKDATE <sup class="wb-calendar-name">Julian<\/sup>$/'
+				'/^MOCKDATE<sup class="wb-calendar-name">Julian<\/sup>$/'
 			),
 			'a julian day in 1980' => array(
 				new TimeValue( '+1980-05-01T00:00:00Z',
@@ -88,7 +88,7 @@ class HtmlTimeFormatterTest extends \PHPUnit_Framework_TestCase {
 					TimeValue::PRECISION_DAY,
 					TimeFormatter::CALENDAR_JULIAN ),
 				new FormatterOptions(),
-				'/^MOCKDATE <sup class="wb-calendar-name">Julian<\/sup>$/'
+				'/^MOCKDATE<sup class="wb-calendar-name">Julian<\/sup>$/'
 			),
 			'2014-10-10' => array(
 				new TimeValue( '+2014-10-10T00:00:00Z',
