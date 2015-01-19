@@ -2,8 +2,7 @@
 
 namespace Wikibase\Repo\Store\SQL;
 
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
@@ -86,18 +85,18 @@ class ItemsPerSiteBuilder {
 	 *
 	 * @since 0.5
 	 *
-	 * @param EntityId[] $entityIds
+	 * @param ItemId[] $itemIds
 	 *
 	 * @return int
 	 */
-	private function rebuildSiteLinks( array $entityIds ) {
+	private function rebuildSiteLinks( array $itemIds ) {
 		$c = 0;
-		foreach ( $entityIds as $entityId ) {
-			if ( !$entityId->getEntityType() === Item::ENTITY_TYPE ) {
+		foreach ( $itemIds as $itemId ) {
+			if ( !( $itemId instanceof ItemId ) ) {
 				// Just in case someone is using a EntityIdPager which doesn't filter non-Items
 				continue;
 			}
-			$item = $this->entityLookup->getEntity( $entityId );
+			$item = $this->entityLookup->getEntity( $itemId );
 
 			if ( !$item ) {
 				continue;
