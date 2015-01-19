@@ -95,7 +95,7 @@ class MockRepository implements
 	/**
 	 * @see EntityLookup::getEntity
 	 *
-	 * @param EntityID $entityId
+	 * @param EntityId $entityId
 	 *
 	 * @return EntityDocument|null
 	 *
@@ -111,7 +111,7 @@ class MockRepository implements
 	 * @since 0.4
 	 * @see EntityRevisionLookup::getEntityRevision
 	 *
-	 * @param EntityID $entityId
+	 * @param EntityId $entityId
 	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
 	 *
 	 * @throws StorageException
@@ -160,7 +160,7 @@ class MockRepository implements
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityID $entityId
+	 * @param EntityId $entityId
 	 *
 	 * @return bool
 	 */
@@ -478,7 +478,7 @@ class MockRepository implements
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityID[] $entityIds
+	 * @param EntityId[] $entityIds
 	 *
 	 * @return Entity|null[]
 	 */
@@ -578,7 +578,7 @@ class MockRepository implements
 	/**
 	 * @see EntityRevisionLookup::getLatestRevisionId
 	 *
-	 * @param EntityID $entityId
+	 * @param EntityId $entityId
 	 * @param string $mode
 	 *
 	 * @return int|false

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\Validators;
 
-use DataValues\StringValue;
 use Wikibase\Validators\AlternativeValidator;
 use Wikibase\Validators\RegexValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;

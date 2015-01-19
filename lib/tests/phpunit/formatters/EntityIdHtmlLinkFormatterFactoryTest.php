@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Test;
 
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\StringFormatter;
 use Wikibase\Lib\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 
