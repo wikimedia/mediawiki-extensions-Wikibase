@@ -63,7 +63,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @see getEntityId()
 	 *
-	 * @var EntityId[] map of id-strings to EntityId objects: id-string => EntityId
+	 * @var EntityId[]|null map of id-strings to EntityId objects: id-string => EntityId
 	 */
 	private $entityIds = null;
 
@@ -75,7 +75,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @see EntityInfoBuilder::getEntityInfo()
 	 *
-	 * @var array[] map of id-strings to entity-record arrays:
+	 * @var array[]|null map of id-strings to entity-record arrays:
 	 *      id-string => record
 	 */
 	private $entityInfo = null;
@@ -98,7 +98,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * Initialized lazily by getPageInfoIdsByType().
 	 *
-	 * @var array[] map of entity type to maps of id-strings to numeric ids:
+	 * @var array[]|null map of entity type to maps of id-strings to numeric ids:
 	 *      type => id-string => id-int
 	 */
 	private $pageInfoByType = null;
@@ -109,7 +109,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * Initialized lazily by resolveRedirects().
 	 *
-	 * @var string[] map of id-string to EntityId objects:
+	 * @var string[]|null map of id-string to EntityId objects:
 	 *      id-string => EntityId
 	 */
 	private $redirects = null;

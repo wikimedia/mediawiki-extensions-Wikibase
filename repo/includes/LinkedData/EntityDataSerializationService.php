@@ -41,7 +41,7 @@ class EntityDataSerializationService {
 	/**
 	 * White list of supported formats.
 	 *
-	 * @var array
+	 * @var array|null
 	 */
 	private $formatWhiteList = null;
 
@@ -62,17 +62,17 @@ class EntityDataSerializationService {
 	);
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $rdfBaseURI = null;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $rdfDataURI = null;
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityLookup|null
 	 */
 	private $entityLookup = null;
 

@@ -15,7 +15,7 @@ use Wikibase\SettingsArray;
 class OtherProjectsSidebarGeneratorFactory {
 
 	/**
-	 * @var OtherProjectsSidebarGenerator
+	 * @var OtherProjectsSidebarGenerator|null
 	 */
 	private $otherProjectsSidebarGenerator = null;
 

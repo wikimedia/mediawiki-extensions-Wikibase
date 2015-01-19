@@ -28,17 +28,17 @@ use Wikibase\EntityFactory;
 class SerializerFactory {
 
 	/**
-	 * @var EntityFactory
+	 * @var EntityFactory|null
 	 */
 	public $entityFactory = null;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteStore|null
 	 */
 	public $siteStore = null;
 
 	/**
-	 * @var PropertyDataTypeLookup
+	 * @var PropertyDataTypeLookup|null
 	 */
 	protected $dataTypeLookup = null;
 

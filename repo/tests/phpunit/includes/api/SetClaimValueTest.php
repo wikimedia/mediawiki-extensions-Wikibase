@@ -45,12 +45,12 @@ use WikiPage;
 class SetClaimValueTest extends WikibaseApiTestCase {
 
 	/**
-	 * @var ValueFormatter
+	 * @var ValueFormatter|null
 	 */
 	private $entityIdFormatter = null;
 
 	/**
-	 * @var ValueFormatter
+	 * @var ValueFormatter|null
 	 */
 	private $propertyValueFormatter = null;
 

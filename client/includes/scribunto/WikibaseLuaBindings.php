@@ -89,7 +89,7 @@ class WikibaseLuaBindings {
 	private $usageAccumulator;
 
 	/**
-	 * @var SerializationOptions
+	 * @var SerializationOptions|null
 	 */
 	private $serializationOptions = null;
 

@@ -54,47 +54,47 @@ class EditEntity {
 	/**
 	 * The modified entity we are trying to save
 	 *
-	 * @var Entity
+	 * @var Entity|null
 	 */
 	protected $newEntity = null;
 
 	/**
-	 * @var EntityRevision
+	 * @var EntityRevision|null
 	 */
 	protected $baseRev = null;
 
 	/**
-	 * @var int
+	 * @var int|null
 	 */
 	protected $baseRevId = null;
 
 	/**
-	 * @var EntityRevision
+	 * @var EntityRevision|null
 	 */
 	protected $latestRev = null;
 
 	/**
-	 * @var int
+	 * @var int|null
 	 */
 	protected $latestRevId = null;
 
 	/**
-	 * @var Status
+	 * @var Status|null
 	 */
 	protected $status = null;
 
 	/**
-	 * @var User
+	 * @var User|null
 	 */
 	protected $user = null;
 
 	/**
-	 * @var Title
+	 * @var Title|null
 	 */
 	protected $title = null;
 
 	/**
-	 * @var IContextSource
+	 * @var IContextSource|null
 	 */
 	protected $context = null;
 

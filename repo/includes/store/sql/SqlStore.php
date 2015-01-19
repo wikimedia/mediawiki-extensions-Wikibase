@@ -43,37 +43,37 @@ use WikiPage;
 class SqlStore implements Store {
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var EntityRevisionLookup|null
 	 */
 	private $entityRevisionLookup = null;
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var EntityRevisionLookup|null
 	 */
 	private $rawEntityRevisionLookup = null;
 
 	/**
-	 * @var EntityStore
+	 * @var EntityStore|null
 	 */
 	private $entityStore = null;
 
 	/**
-	 * @var DispatchingEntityStoreWatcher
+	 * @var DispatchingEntityStoreWatcher|null
 	 */
 	private $entityStoreWatcher = null;
 
 	/**
-	 * @var EntityInfoBuilderFactory
+	 * @var EntityInfoBuilderFactory|null
 	 */
 	private $entityInfoBuilderFactory = null;
 
 	/**
-	 * @var PropertyInfoTable
+	 * @var PropertyInfoTable|null
 	 */
 	private $propertyInfoTable = null;
 
 	/**
-	 * @var ChangesTable
+	 * @var ChangesTable|null
 	 */
 	private $changesTable = null;
 
@@ -83,7 +83,7 @@ class SqlStore implements Store {
 	private $changesDatabase;
 
 	/**
-	 * @var TermIndex
+	 * @var TermIndex|null
 	 */
 	private $termIndex = null;
 
@@ -119,6 +119,7 @@ class SqlStore implements Store {
 
 	/**
 	 * @param EntityContentDataCodec $contentCodec
+	 * @param EntityIdParser $entityIdParser
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,

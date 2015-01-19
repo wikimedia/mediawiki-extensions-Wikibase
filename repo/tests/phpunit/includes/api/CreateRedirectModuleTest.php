@@ -35,7 +35,7 @@ use Wikibase\Test\MockRepository;
 class CreateRedirectModuleTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var MockRepository
+	 * @var MockRepository|null
 	 */
 	private $repo = null;
 
