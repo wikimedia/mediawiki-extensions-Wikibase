@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_3cc21989",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T17:42:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae6ac7d6_1c7635a0",
+      "revId": "cbaa8d94791954ed08f97d7052d37bc9d0c9c4f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_5c44ad4a",
         "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-20T15:03:36Z",
       "side": 1,
       "message": "At least move the calls to Utils::fetchLanguageName to a private method.",
+      "revId": "cbaa8d94791954ed08f97d7052d37bc9d0c9c4f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_5cbfcdf6",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T17:42:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae6ac7d6_5c44ad4a",
       "revId": "cbaa8d94791954ed08f97d7052d37bc9d0c9c4f0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
