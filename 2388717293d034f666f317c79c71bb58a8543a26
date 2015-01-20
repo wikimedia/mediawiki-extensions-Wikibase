@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_5cba6d1f",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T15:17:38Z",
+      "side": 1,
+      "message": "It\u0027s even more convenient to be able to just call $this-\u003eentityExists( $entity ). What was the problem with that?",
+      "parentUuid": "ae6ac7d6_fcf7c654",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_813f47d3",
         "filename": "repo/includes/api/ApiWikibase.php",
         "patchSetId": 4
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_1c8cf588",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T15:17:38Z",
+      "side": 1,
+      "message": "It\u0027s just the request parameters. E.g. EditEntity may require an extra permission if the \"clear\" flag is set.\n\nBut you are right, it\u0027s unused, so we might as well remove it. It just felt right to defined the required permission as a function of the request parameters.",
+      "parentUuid": "ae6ac7d6_9ca00a40",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_6126b3cb",
         "filename": "repo/includes/api/ApiWikibase.php",
         "patchSetId": 4
@@ -101,6 +137,24 @@
       "side": 1,
       "message": "The old code returned false for negative numbers, which was wrong. It\u0027s not the job of this code here to tell if negative numbers are valid.\n\nOn second look this method is completely redundant and wrong (in both the old and the new implementation) and can just die. I will rework this.",
       "parentUuid": "ae6ac7d6_6126b3cb",
+      "revId": "2388717293d034f666f317c79c71bb58a8543a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_7c9ad1be",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T15:17:38Z",
+      "side": 1,
+      "message": "Input validation *is* the job of the code that provides request parameters to the business logic code...",
+      "parentUuid": "ae6ac7d6_bcb86e75",
       "revId": "2388717293d034f666f317c79c71bb58a8543a26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
