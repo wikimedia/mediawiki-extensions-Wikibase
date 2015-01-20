@@ -62,7 +62,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 
 		$dateTime = $this->dateTimeFormatter->format( $value );
 		$calendarName = $this->formatOptionalCalendarName( $value );
-		return $dateTime . ( $calendarName ? " <sup class=\"wb-calendar-name\">$calendarName</sup>" : '' );
+		return $dateTime . ( $calendarName ? "<sup class=\"wb-calendar-name\">$calendarName</sup>" : '' );
 	}
 
 	/**
