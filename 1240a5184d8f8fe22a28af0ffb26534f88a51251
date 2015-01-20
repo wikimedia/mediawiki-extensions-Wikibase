@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_fc7021a5",
+        "filename": "repo/includes/Template/TemplateFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T15:10:22Z",
+      "side": 1,
+      "message": "This does not remove access to global state from any code path, it just hides it.\nHaving explicit access to global state across the codebase is bad. Having hidden access to global state across the codebase isn\u0027t better. \n\nThe points in the code that were calling TemplateRegistry::getDefaultInstance are points where injection of *something* is needed *somehow*. I do not see how this patch makes it easier to introduce that injection.",
+      "parentUuid": "ae6ac7d6_bc006e6e",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_3c0f7e35",
         "filename": "repo/includes/Template/TemplateRegistry.php",
         "patchSetId": 3
@@ -142,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_dc6f5dbf",
+        "filename": "repo/includes/Template/TemplateRegistry.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T15:10:22Z",
+      "side": 1,
+      "message": "The idea was that it should not be possible to supply broken values to the constructor which may cause problems later. But you are right, it\u0027s converted to string anyway, so not much harm done.",
+      "parentUuid": "ae6ac7d6_3ccd3e63",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_fc2fc683",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 3
@@ -194,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_9c61e5d2",
+        "filename": "repo/tests/phpunit/includes/ItemDisambiguationTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T15:10:22Z",
+      "side": 1,
+      "message": "There you claim that PHPStorm removes top level classes from use statements. That\u0027s not true - works fine for me in PhpStorm 8 at least. \n\nAlso, the fact that we do this wrong in many places isn\u0027t a good argument for doing it wrong in more places.\n\nI don\u0027t care much, it\u0027s just one more random change unrelated to the objective of this change that adds to my confusion.",
+      "parentUuid": "ae6ac7d6_bcd94e2e",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_5c3a72c1",
         "filename": "repo/tests/phpunit/includes/Template/TemplateRegistryTest.php",
         "patchSetId": 3
@@ -229,6 +283,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_fc9fc1b7",
+        "filename": "repo/tests/phpunit/includes/Template/TemplateRegistryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T15:10:22Z",
+      "side": 1,
+      "message": "Just pointing out another way to make the code simpler.",
+      "parentUuid": "ae6ac7d6_3cc69e4f",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_bc706ea4",
         "filename": "repo/tests/phpunit/includes/Template/TemplateRegistryTest.php",
         "patchSetId": 3
@@ -258,6 +330,24 @@
       "side": 1,
       "message": "I did not wrote this code.",
       "parentUuid": "ae6ac7d6_bc706ea4",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_5c5b4d26",
+        "filename": "repo/tests/phpunit/includes/Template/TemplateRegistryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T15:10:22Z",
+      "side": 1,
+      "message": "Just pointing out another way to make the code simpler.",
+      "parentUuid": "ae6ac7d6_5cc3523d",
       "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
