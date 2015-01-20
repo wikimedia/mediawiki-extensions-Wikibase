@@ -3,17 +3,14 @@
 namespace Wikibase\Test;
 
 use Language;
-use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\View\EntityViewPlaceholderExpander;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\EntityViewPlaceholderExpander
@@ -29,10 +26,14 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param User $user
-	 * @param EntityLookup $entityLookup
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param ItemId $itemId
+	 *
+	 * @return EntityViewPlaceholderExpander
 	 */
 	private function newExpander( User $user, EntityRevisionLookup $entityRevisionLookup, ItemId $itemId ) {
+		$templateFactory = TemplateFactory::getDefaultInstance();
+
 		$title = $this->getMockBuilder( 'Title')
 			->disableOriginalConstructor()
 			->getMock();
@@ -42,19 +43,17 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		$idParser = $this->getMockBuilder( 'Wikibase\DataModel\Entity\EntityIdParser' )
 			->disableOriginalConstructor()
 			->getMock();
-
 		$idParser->expects( $this->any() )
 			->method( 'parse' )
 			->will( $this->returnValue( $itemId ) );
 
 		$userLanguages = $this->getMock( 'Wikibase\Lib\UserLanguageLookup' );
-
 		$userLanguages->expects( $this->any() )
 			->method( 'getAllUserLanguages' )
 			->will( $this->returnValue( array( 'de', 'en', 'ru' ) ) );
 
 		return new EntityViewPlaceholderExpander(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			$title,
 			$user,
 			$language,

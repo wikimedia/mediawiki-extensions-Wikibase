@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\SectionEditLinkGenerator
@@ -122,6 +121,9 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 	}
 
 	private function newSectionEditLinkGenerator() {
-		return new SectionEditLinkGenerator( new TemplateFactory( TemplateRegistry::getDefaultInstance() ) );
+		$templateFactory = TemplateFactory::getDefaultInstance();
+
+		return new SectionEditLinkGenerator( $templateFactory );
 	}
+
 }

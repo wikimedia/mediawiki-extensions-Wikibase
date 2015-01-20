@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use MediaWikiSite;
-use MediaWikiTestCase;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -13,7 +12,6 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SiteLinksView;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\SiteLinksView
@@ -188,9 +186,10 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	 * @return SiteLinksView
 	 */
 	private function getSiteLinksView() {
+		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		return new SiteLinksView(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			$this->newSiteList(),
 			$this->getSectionEditLinkGeneratorMock(),
 			$this->getEntityLookupMock(),
