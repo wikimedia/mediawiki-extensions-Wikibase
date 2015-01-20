@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 2.5.0 (dev)
+## Version 2.5.0 (2014-01-20)
 
 * Added `TermList::getWithLanguages`
 * Added `AliasGroupList::getWithLanguages`
@@ -17,7 +17,8 @@
 * Made the `Property` constructors fingerprint parameter optional
 * Deprecated `Item::newEmpty` in favour of `new Item()`
 * Deprecated `Fingerprint::newEmpty` in favour of `new Fingerprint()`
-* The `StatementList` constructor now accepts `Statement` objects in variable-lenght argument list format
+* The `StatementList` constructor now accepts `Statement` objects in variable-length argument list format
+* Added PHPCS support
 
 ## Version 2.4.1 (2014-11-26)
 
