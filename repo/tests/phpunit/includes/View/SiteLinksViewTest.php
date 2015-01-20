@@ -11,8 +11,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SiteLinksView;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\View\SiteLinksView
@@ -187,9 +186,10 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	 * @return SiteLinksView
 	 */
 	private function getSiteLinksView() {
+		$templateFactory = WikibaseRepo::getDefaultInstance()->getTemplateFactory();
 
 		return new SiteLinksView(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			$this->newSiteList(),
 			$this->getSectionEditLinkGeneratorMock(),
 			$this->getEntityLookupMock(),
