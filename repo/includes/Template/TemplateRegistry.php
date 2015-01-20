@@ -12,32 +12,39 @@ namespace Wikibase\Template;
  *
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
+ * @author Thiemo Mättig
  */
 class TemplateRegistry {
-
-	/**
-	 * @var array
-	 */
-	private $templates;
 
 	/**
 	 * @var TemplateRegistry
 	 */
 	private static $instance;
 
+	/**
+	 * @var string[]
+	 */
+	private $templates = array();
 
 	public static function getDefaultInstance() {
 		if ( self::$instance === null ) {
-			self::$instance = new self();
-			self::$instance->addTemplates( include( __DIR__ . '/../../resources/templates.php' ) );
+			self::$instance = new self( include( __DIR__ . '/../../resources/templates.php' ) );
 		}
+
 		return self::$instance;
+	}
+
+	/**
+	 * @param string[] $templates
+	 */
+	function __construct( array $templates = array() ) {
+		$this->addTemplates( $templates );
 	}
 
 	/**
 	 * Gets the array containing all templates.
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	public function getTemplates() {
 		return $this->templates;
@@ -47,6 +54,7 @@ class TemplateRegistry {
 	 * Gets a specific template.
 	 *
 	 * @param string $key
+	 *
 	 * @return string
 	 */
 	public function getTemplate( $key ) {
@@ -56,9 +64,9 @@ class TemplateRegistry {
 	/**
 	 * Adds multiple templates to the store.
 	 *
-	 * @param array $templates
+	 * @param string[] $templates
 	 */
-	public function addTemplates( $templates ) {
+	public function addTemplates( array $templates ) {
 		foreach ( $templates as $key => $snippet ) {
 			$this->addTemplate( $key, $snippet );
 		}
