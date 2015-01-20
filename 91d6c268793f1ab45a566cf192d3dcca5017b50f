@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_07010271",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-01-20T19:58:20Z",
+      "side": 1,
+      "message": "Needs production config change before deployment. I heard such things should be be mentioned in the commit message with DEPLOY, see https://www.mediawiki.org/wiki/Wikidata_deployment .",
+      "revId": "91d6c268793f1ab45a566cf192d3dcca5017b50f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_0717c2a9",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-01-20T19:58:20Z",
+      "side": 1,
+      "message": "Same.",
+      "revId": "91d6c268793f1ab45a566cf192d3dcca5017b50f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
