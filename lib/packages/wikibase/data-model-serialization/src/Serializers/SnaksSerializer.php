@@ -73,7 +73,7 @@ class SnaksSerializer implements DispatchableSerializer {
 		 * @var Snak $snak
 		 */
 		foreach( $snaks as $snak ) {
-			$serialization[$snak->getPropertyId()->getPrefixedId()][] = $this->snakSerializer->serialize( $snak );
+			$serialization[$snak->getPropertyId()->getSerialization()][] = $this->snakSerializer->serialize( $snak );
 		}
 
 		if ( $this->useObjectsForMaps ) {
