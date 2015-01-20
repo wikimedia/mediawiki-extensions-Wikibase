@@ -32,9 +32,9 @@ $( document ).ready( function() {
  * The toggler hides a references subject node an toggles its visibility whenever clicking the
  * element the toggler is initialized on. The toggler considers the subject's current "display"
  * style, so if it is set to "none", it is considered invisible initially.
- * (uses `jQuery.animateWithEvent`)
  * @class jQuery.ui.toggler
  * @extends jQuery.Widget
+ * @uses jQuery.animateWithEvent
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner < danweetz@web.de >
@@ -49,13 +49,14 @@ $( document ).ready( function() {
  * @event animation
  * Triggered at the beginning of toggler animations.
  * @param {jQuery.AnimationEvent} event
+ * @param {Object} params
+ * @param {boolean} params.visible Whether the subject is toggled to be visible.
  */
 $.widget( 'ui.toggler', {
 
 	/**
 	 * @see jQuery.Widget.options
 	 * @protected
-	 * @readonly
 	 */
 	options: {
 		$subject: null
@@ -99,25 +100,25 @@ $.widget( 'ui.toggler', {
 		.addClass( this.widgetBaseClass + ' ' + this.widgetBaseClass + '-toggle '
 			+ 'ui-state-default' );
 
-		if( this.element[0].nodeName === 'A' ) {
-			this.element.attr( 'href', 'javascript:void(0);' );
-		}
-
 		this.$toggleIcon = $( '<span/>' )
 		.addClass( this.widgetBaseClass + '-icon ui-icon' );
 
 		this.element
 		.on( 'click.' + this.widgetName, function( event ) {
+			event.preventDefault();
+
 			if( !self.element.hasClass( 'ui-state-disabled' ) ) {
 				// Change toggle icon to reflect current state of toggle subject visibility:
-				self._reflectVisibilityOnToggleIcon( true );
+				var visible = self._reflectVisibilityOnToggleIcon( true );
 
 				self.options.$subject.stop().animateWithEvent(
 					'togglerstatetransition',
 					'slideToggle',
 					self.options,
 					function( animationEvent ) {
-						self._trigger( 'animation', animationEvent );
+						self._trigger( 'animation', animationEvent, {
+							visible: visible
+						} );
 					}
 				);
 			}
@@ -147,9 +148,10 @@ $.widget( 'ui.toggler', {
 
 	/**
 	 * Reflects the toggler's subject visibility in the toggler's icon.
-	 * @protected
+	 * @private
 	 *
 	 * @param {boolean} [inverted]
+	 * @return {boolean} Whether the subject is toggled to be visible.
 	 */
 	_reflectVisibilityOnToggleIcon: function( inverted ) {
 		var iconClass = 'ui-icon-triangle-1-',
@@ -172,24 +174,16 @@ $.widget( 'ui.toggler', {
 
 		this.element[ visible ? 'removeClass' : 'addClass' ](
 			this.widgetBaseClass + '-toggle-collapsed' );
+
+		return visible;
 	},
 
 	/**
-	 * @see jQuery.Widget.disable
-	 * @protected
+	 * Refreshes the toggler's state.
 	 */
-	disable: function() {
-		this.element.addClass( 'ui-state-disabled' );
-	},
-
-	/**
-	 * @see jQuery.Widget.enable
-	 * @protected
-	 */
-	enable: function() {
-		this.element.removeClass( 'ui-state-disabled' );
+	refresh: function() {
+		this._reflectVisibilityOnToggleIcon();
 	}
-
 } );
 
 } )( jQuery );

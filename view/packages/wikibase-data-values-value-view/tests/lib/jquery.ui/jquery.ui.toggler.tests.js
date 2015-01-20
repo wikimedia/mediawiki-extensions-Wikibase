@@ -2,14 +2,11 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-
 ( function( $, QUnit ) {
 	'use strict';
 
 	/**
-	 * Factory for creating an toggler widget suitable for testing.
-	 *
-	 * @param {Object} options
+	 * @param {Object} [options={}]
 	 * @return {jQuery.ui.toggler}
 	 */
 	var newTestToggler = function( options ) {
@@ -19,7 +16,7 @@
 			.text( 'test' )
 			.appendTo( 'body' );
 
-		options = $.extend( { $subject: $defaultDiv }, options );
+		options = $.extend( { $subject: $defaultDiv }, options || {} );
 
 		var $div = $( '<div/>' )
 			.addClass( 'test_toggler' )
@@ -29,7 +26,7 @@
 		return $div.data( 'toggler' );
 	};
 
-	QUnit.module( 'jquery.ui.toggler', QUnit.newMwEnvironment( {
+	QUnit.module( 'jquery.ui.toggler', {
 		teardown: function() {
 			$( '.test_toggler' ).each( function( i, node ) {
 				if( $( node ).data( 'toggler' ) ) {
@@ -39,7 +36,7 @@
 			} );
 			$( '.test_toggler-subject' ).remove();
 		}
-	} ) );
+	} );
 
 	QUnit.test( 'Initialization and destruction', 3, function( assert ) {
 		var toggler = newTestToggler();

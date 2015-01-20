@@ -13,6 +13,7 @@
 }
 .ui-toggler .ui-toggler-icon,
 .ui-toggler .ui-toggler-label {
+	cursor: pointer;
 	display: inline-block;
 	vertical-align: middle;
 }
