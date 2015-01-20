@@ -175,7 +175,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	/**
 	 * @since 2.5
 	 *
-	 * @return SiteLink[]
+	 * @return SiteLink[] Array indexed by site id.
 	 */
 	public function toArray() {
 		return $this->siteLinks;
