@@ -247,7 +247,7 @@ $.extend( $.AutoExpandInput.prototype, {
 	 */
 	_getWidthFor: function( text ) {
 		$rulerX.html( escaped( text ) );
-		return $rulerX.width();
+		return Math.ceil( $rulerX.width() );
 	},
 
 	/**
@@ -267,7 +267,7 @@ $.extend( $.AutoExpandInput.prototype, {
 			return 0;
 		}
 		// Don't need comfort zone in this case, just some sane space:
-		return Math.ceil( this._getWidthFor( this.$input.attr( 'placeholder' ) + ' ' ) );
+		return this._getWidthFor( this.$input.attr( 'placeholder' ) + '0' );
 	},
 
 	/**
@@ -315,8 +315,8 @@ $.extend( $.AutoExpandInput.prototype, {
 	_getComfortZone: function() {
 		return ( this._options.comfortZone )
 			? this._options.comfortZone
-			// IE does not recognize a single space character, using some narrow character instead:
-			: Math.ceil( this._getWidthFor( 'I' ) * 2 );
+			// IE does not recognize space characters, using 2ch CSS units instead:
+			: this._getWidthFor( '00' );
 	},
 
 	/**
