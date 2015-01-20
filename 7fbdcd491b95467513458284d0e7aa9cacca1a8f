@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_f9d9132d",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T09:55:01Z",
+      "side": 1,
+      "message": "it\u0027s only equivalent if you add a \u0027 \u0027 too, and then the resulting string starts with a \u0027 \u0027. Ugly.",
+      "parentUuid": "ae6ac7d6_3c7bfebe",
+      "revId": "7fbdcd491b95467513458284d0e7aa9cacca1a8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_5ca91220",
         "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-19T19:59:55Z",
       "side": 1,
       "message": "This comparison is wrong for certain combinations. You can\u0027t say that de-at is a \"variant\" of de-ch.\n\nIt\u0027s also ignoring the direction.\n\nAlso this class gets added in cases where requested and actual are the same and source is different. Worth a test, btw.",
+      "revId": "7fbdcd491b95467513458284d0e7aa9cacca1a8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_d9e8cfb1",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T09:55:01Z",
+      "side": 1,
+      "message": "Please give an example of when it is wrong. Note that we will only get here if the respective fallback was already applied.\n\nIt\u0027s intentionally ignoring the direction. It doesn\u0027t matter whether you fall back from en to en-gb, or from en-gb to en. It\u0027s a variant fallback that people may often wish to hide.\n\nYou are right though that it should not get added when they are the same. Will fix that.",
+      "parentUuid": "ae6ac7d6_5ca91220",
       "revId": "7fbdcd491b95467513458284d0e7aa9cacca1a8f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_1906478a",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T09:55:01Z",
+      "side": 1,
+      "message": "I really don\u0027t care what we call this. Though I don\u0027t understand how \"indicator\" implies \"icon\".",
+      "parentUuid": "ae6ac7d6_7cb2d693",
+      "revId": "7fbdcd491b95467513458284d0e7aa9cacca1a8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_5c5fd244",
         "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_394d4be1",
+        "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T09:55:01Z",
+      "side": 1,
+      "message": "true...",
+      "parentUuid": "ae6ac7d6_5c5fd244",
+      "revId": "7fbdcd491b95467513458284d0e7aa9cacca1a8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_1c595a5d",
         "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2015-01-19T19:59:55Z",
       "side": 1,
       "message": "Add new TermFallback( \u0027de\u0027, \u0027Foo\u0027, \u0027de\u0027, \u0027de-ch\u0027 ); and check that it does _not_ set the variant class.",
+      "revId": "7fbdcd491b95467513458284d0e7aa9cacca1a8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_594a7fc9",
+        "filename": "lib/tests/phpunit/formatters/EntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T09:55:01Z",
+      "side": 1,
+      "message": "right",
+      "parentUuid": "ae6ac7d6_1c595a5d",
       "revId": "7fbdcd491b95467513458284d0e7aa9cacca1a8f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
