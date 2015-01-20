@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_7c6411e2",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-20T15:13:32Z",
+      "side": 1,
+      "message": "Don\u0027t need to be closures, could be plain strings.",
+      "revId": "76a87f67c1d3cc0b1b7ad9cf61e8da82af40f5d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_3c5e9918",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-20T15:13:32Z",
+      "side": 1,
+      "message": "I\u0027d prefer using the second argument instead of `this`. Also, I thought of these template short cuts as protected.",
+      "revId": "76a87f67c1d3cc0b1b7ad9cf61e8da82af40f5d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_dcae7de4",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-20T15:13:32Z",
+      "side": 1,
+      "message": "Why are aliases special-cased?",
+      "revId": "76a87f67c1d3cc0b1b7ad9cf61e8da82af40f5d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_3cbd3917",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-20T15:13:32Z",
+      "side": 1,
+      "message": "Invert condition for less indentation :)",
+      "revId": "76a87f67c1d3cc0b1b7ad9cf61e8da82af40f5d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
