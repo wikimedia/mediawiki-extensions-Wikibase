@@ -15,10 +15,9 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Repo\View\ClaimHtmlGenerator;
-use Wikibase\Repo\View\StatementGroupListView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
+use Wikibase\Repo\View\StatementGroupListView;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\View\StatementGroupListView
@@ -107,7 +106,8 @@ class StatementGroupListViewTest extends \MediaWikiLangTestCase {
 	 * @return StatementGroupListView
 	 */
 	private function newStatementGroupListView( EntityIdFormatter $propertyIdFormatter ) {
-		$templateFactory = new TemplateFactory( TemplateRegistry::getDefaultInstance() );
+		$templateFactory = WikibaseRepo::getDefaultInstance()->getTemplateFactory();
+
 		return new StatementGroupListView(
 			$templateFactory,
 			$propertyIdFormatter,

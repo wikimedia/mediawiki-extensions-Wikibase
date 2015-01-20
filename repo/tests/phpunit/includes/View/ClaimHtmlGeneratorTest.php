@@ -16,8 +16,7 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\ClaimHtmlGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\ClaimHtmlGenerator
@@ -80,9 +79,7 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		Claim $claim,
 		$patterns
 	) {
-		$templateFactory = new TemplateFactory(
-			TemplateRegistry::getDefaultInstance()
-		);
+		$templateFactory = WikibaseRepo::getDefaultInstance()->getTemplateFactory();
 
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$templateFactory,

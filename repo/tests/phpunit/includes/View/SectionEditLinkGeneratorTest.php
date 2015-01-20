@@ -3,8 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\View\SectionEditLinkGenerator
@@ -122,6 +121,9 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 	}
 
 	private function newSectionEditLinkGenerator() {
-		return new SectionEditLinkGenerator( new TemplateFactory( TemplateRegistry::getDefaultInstance() ) );
+		$templateFactory = WikibaseRepo::getDefaultInstance()->getTemplateFactory();
+
+		return new SectionEditLinkGenerator( $templateFactory );
 	}
+
 }

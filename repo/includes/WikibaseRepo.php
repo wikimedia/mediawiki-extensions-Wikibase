@@ -1005,14 +1005,13 @@ class WikibaseRepo {
 	 * @return EntityParserOutputGeneratorFactory
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
-
 		$entityViewFactory = new EntityViewFactory(
 			$this->getEntityIdHtmlLinkFormatter(),
 			$this->getSnakFormatterFactory(),
 			$this->getEntityLookup(),
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$this->getTemplateFactory(),
 			$this->getSettings()->getSetting( 'siteLinkGroups' ),
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' ),
 			$this->getSettings()->getSetting( 'badgeItems' )
@@ -1026,6 +1025,13 @@ class WikibaseRepo {
 			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
 			$this->getLanguageFallbackChainFactory()
 		);
+	}
+
+	/**
+	 * @return TemplateFactory
+	 */
+	public function getTemplateFactory() {
+		return new TemplateFactory( TemplateRegistry::getDefaultInstance() );
 	}
 
 }

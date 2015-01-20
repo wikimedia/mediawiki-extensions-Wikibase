@@ -15,7 +15,6 @@ use Wikibase\Template\TemplateRegistry;
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
  */
-
 class TemplateModule extends ResourceLoaderFileModule {
 
 	/**

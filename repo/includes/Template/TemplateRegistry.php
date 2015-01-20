@@ -37,7 +37,7 @@ class TemplateRegistry {
 	/**
 	 * @param string[] $templates
 	 */
-	function __construct( array $templates = array() ) {
+	public function __construct( array $templates = array() ) {
 		$this->addTemplates( $templates );
 	}
 
