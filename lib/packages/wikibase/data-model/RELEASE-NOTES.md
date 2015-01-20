@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 3.0.0 (dev)
+
+* Empty strings are now detected as invalid in the `SiteLink` constructor
+
 ## Version 2.5.0 (2014-01-20)
 
 * Added `ItemLookup` and `PropertyLookup` interfaces

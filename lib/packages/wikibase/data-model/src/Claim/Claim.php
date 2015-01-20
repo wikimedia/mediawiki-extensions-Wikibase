@@ -164,7 +164,7 @@ class Claim implements Hashable, Comparable, PropertyIdProvider {
 	 */
 	public function setGuid( $guid ) {
 		if ( !is_string( $guid ) && $guid !== null ) {
-			throw new InvalidArgumentException( '$guid must be a string or null; got ' . gettype( $guid ) );
+			throw new InvalidArgumentException( '$guid must be a string or null' );
 		}
 
 		$this->guid = $guid;
