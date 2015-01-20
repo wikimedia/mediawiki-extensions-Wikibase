@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 2.5.0 (2014-01-16)
+## Version 2.5.0 (2014-01-20)
 
 * Added `TermList::getWithLanguages`
 * Added `AliasGroupList::getWithLanguages`
