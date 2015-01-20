@@ -34,10 +34,10 @@
 	} );
 
 	QUnit.test( 'destroy calls extensions', function( assert ) {
-		var destroy = sinon.spy();
-		var expertExtender = new ExpertExtender( $( '<input/>' ), [ {
-			destroy: destroy
-		} ] );
+		var destroy = sinon.spy(),
+			expertExtender = new ExpertExtender( $( '<input/>' ), [ {
+				destroy: destroy
+			} ] );
 
 		expertExtender.destroy();
 
@@ -45,13 +45,15 @@
 	} );
 
 	QUnit.asyncTest( 'init calls extensions', function( assert ) {
-		var $input = $( '<input/>' ).appendTo( 'body' );
-		var init = sinon.spy();
-		var onInitialShow = sinon.spy();
-		var draw = sinon.spy();
-		var expertExtender = new ExpertExtender( $input, [ {
-			init: init, onInitialShow: onInitialShow, draw: draw
-		} ] );
+		var $input = $( '<input/>' ).appendTo( 'body' ),
+			init = sinon.spy(),
+			onInitialShow = sinon.spy(),
+			draw = sinon.spy(),
+			expertExtender = new ExpertExtender( $input, [ {
+				init: init,
+				onInitialShow: onInitialShow,
+				draw: draw
+			} ] );
 
 		$input.focus();
 		expertExtender.init();
