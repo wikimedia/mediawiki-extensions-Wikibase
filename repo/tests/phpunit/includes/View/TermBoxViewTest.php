@@ -3,12 +3,10 @@
 namespace Wikibase\Test;
 
 use Language;
-use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\View\TermBoxView;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\TermBoxView
@@ -23,8 +21,8 @@ use Wikibase\Template\TemplateRegistry;
 class TermBoxViewTest extends \PHPUnit_Framework_TestCase {
 
 	public function testRenderTermBox() {
+		$templateFactory = TemplateFactory::getDefaultInstance();
 		$language = Language::factory( 'qqx' ); // so we can look for message keys in the output
-		$templateFactory = new TemplateFactory( TemplateRegistry::getDefaultInstance() );
 		$view = new TermBoxView( $templateFactory, $language );
 
 		$title = $this->getMockBuilder( 'Title' )
