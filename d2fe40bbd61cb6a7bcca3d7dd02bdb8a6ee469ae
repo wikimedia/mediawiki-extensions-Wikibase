@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_bca949de",
+        "filename": "repo/includes/Template/TemplateRegistry.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-20T15:11:53Z",
+      "side": 1,
+      "message": "Could this just be moved to WikibaseFRepo::getTemplateRegistry()?",
+      "revId": "d2fe40bbd61cb6a7bcca3d7dd02bdb8a6ee469ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
