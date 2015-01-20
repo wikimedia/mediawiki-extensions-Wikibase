@@ -34,8 +34,6 @@ use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\View\EntityViewPlaceholderExpander;
 use Wikibase\Repo\View\TextInjector;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 use WikiPage;
 
 /**
@@ -1001,15 +999,16 @@ final class RepoHooks {
 		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
 
 		if ( !empty( $placeholders ) ) {
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$injector = new TextInjector( $placeholders );
 			$userLanguageLookup = new BabelUserLanguageLookup();
 			$expander = new EntityViewPlaceholderExpander(
-				new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+				$wikibaseRepo->getTemplateFactory(),
 				$out->getTitle(),
 				$out->getUser(),
 				$out->getLanguage(),
-				WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-				WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup(),
+				$wikibaseRepo->getEntityIdParser(),
+				$wikibaseRepo->getEntityRevisionLookup(),
 				$userLanguageLookup
 			);
 

@@ -6,8 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\View\ItemView;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\View\ItemView
@@ -48,8 +47,9 @@ class ItemViewTest extends EntityViewTest {
 	}
 
 	public function provideTestGetHtml() {
+		$templateFactory = WikibaseRepo::getDefaultInstance()->getTemplateFactory();
 		$itemView = new ItemView(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			$this->getMockBuilder( 'Wikibase\Repo\View\FingerprintView' )
 				->disableOriginalConstructor()
 				->getMock(),
@@ -73,4 +73,5 @@ class ItemViewTest extends EntityViewTest {
 			)
 		);
 	}
+
 }
