@@ -8,7 +8,7 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Snak\TypedSnak;
 
 /**
- * @since 1.0
+ * Package private
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

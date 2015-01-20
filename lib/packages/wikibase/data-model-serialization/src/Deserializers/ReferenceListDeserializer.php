@@ -7,7 +7,7 @@ use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\ReferenceList;
 
 /**
- * @since 0.1
+ * Package private
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon

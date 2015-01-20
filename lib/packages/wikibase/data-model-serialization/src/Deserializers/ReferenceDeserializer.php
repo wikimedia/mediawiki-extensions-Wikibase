@@ -9,7 +9,7 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Reference;
 
 /**
- * @since 0.1
+ * Package private
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon

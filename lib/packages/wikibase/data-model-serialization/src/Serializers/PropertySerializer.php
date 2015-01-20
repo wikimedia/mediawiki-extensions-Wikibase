@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Property;
 
 /**
- * @since 0.1
+ * Package private
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon

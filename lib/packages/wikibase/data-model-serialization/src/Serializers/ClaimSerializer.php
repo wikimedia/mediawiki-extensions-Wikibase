@@ -12,7 +12,7 @@ use Wikibase\DataModel\Snak\Snaks;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @since 0.1
+ * Package private
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon

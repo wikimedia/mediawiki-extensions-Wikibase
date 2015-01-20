@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * @since 0.1
+ * Package private
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
