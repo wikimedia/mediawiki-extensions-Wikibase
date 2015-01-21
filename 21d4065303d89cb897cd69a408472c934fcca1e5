@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_bf21369c",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T10:38:54Z",
+      "side": 1,
+      "message": "I personally prefer \u003d\u003d\u003d 0 or for actual bool conversions Bool().",
+      "revId": "21d4065303d89cb897cd69a408472c934fcca1e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
