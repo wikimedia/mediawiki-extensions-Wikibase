@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdSet;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -16,6 +17,7 @@ use Wikibase\DataModel\SiteLink;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Michał Łazowik
+ * @author Thiemo Mättig
  */
 class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 
@@ -43,22 +45,21 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider stuffThatIsNotStringProvider
+	 * @dataProvider invalidStringIdentifierProvider
+	 * @expectedException InvalidArgumentException
 	 */
 	public function testCannotConstructWithNonStringSiteId( $invalidSiteId ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
 		new SiteLink( $invalidSiteId, 'Wikidata' );
 	}
 
-	public function stuffThatIsNotStringProvider() {
-		$argLists = array();
-
-		$argLists[] = array( 42 );
-		$argLists[] = array( true );
-		$argLists[] = array( array() );
-		$argLists[] = array( null );
-
-		return $argLists;
+	public function invalidStringIdentifierProvider() {
+		return array(
+			array( null ),
+			array( true ),
+			array( 42 ),
+			array( '' ),
+			array( array() ),
+		);
 	}
 
 	/**
@@ -80,10 +81,10 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider stuffThatIsNotStringProvider
+	 * @dataProvider invalidStringIdentifierProvider
+	 * @expectedException InvalidArgumentException
 	 */
 	public function testCannotConstructWithNonStringPageName( $invalidPageName ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
 		new SiteLink( 'enwiki', $invalidPageName );
 	}
 
@@ -131,58 +132,30 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		$argLists[] = array( $badges, $expected );
 
-
-		return $argLists;
-	}
-
-	/**
-	 * @dataProvider stuffThatIsNotArrayProvider
-	 */
-	public function testCannotConstructWithNonArrayBadges( $invalidBadges ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
-		new SiteLink( 'enwiki', 'Wikidata', $invalidBadges );
-	}
-
-	public function stuffThatIsNotArrayProvider() {
-		$argLists = array();
-
-		$argLists[] = array( 42 );
-		$argLists[] = array( true );
-		$argLists[] = array( 'nyan nyan' );
-
 		return $argLists;
 	}
 
 	/**
 	 * @dataProvider invalidBadgesProvider
+	 * @expectedException InvalidArgumentException
 	 */
 	public function testCannotConstructWithInvalidBadges( $invalidBadges ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
 		new SiteLink( 'enwiki', 'Wikidata', $invalidBadges );
 	}
 
 	public function invalidBadgesProvider() {
-		$argLists = array();
-
-		// non ItemIds
-		$argLists[] = array( array(
-			'nyan',
-			42
-		) );
-		$argLists[] = array( array(
-			'nyan',
-			array()
-		) );
-		$argLists[] = array( array(
-			new PropertyId( 'P2' ),
-			new ItemId( 'Q149' )
-		) );
-		$argLists[] = array( array(
-			new PropertyId( 'P2' ),
-			new PropertyId( 'P3' )
-		) );
-
-		return $argLists;
+		return array(
+			// Stuff that's not an array
+			array( true ),
+			array( 42 ),
+			array( 'nyan nyan' ),
+			// Arrays with stuff that's not even an object
+			array( array( 'nyan', 42 ) ),
+			array( array( 'nyan', array() ) ),
+			// Arrays with Entities that aren't Items
+			array( array( new PropertyId( 'P2' ), new ItemId( 'Q149' ) ) ),
+			array( array( new PropertyId( 'P2' ), new PropertyId( 'P3' ) ) ),
+		);
 	}
 
 	/**

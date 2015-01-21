@@ -45,12 +45,12 @@ class SiteLink implements Comparable {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $siteId, $pageName, $badges = null ) {
-		if ( !is_string( $siteId ) ) {
-			throw new InvalidArgumentException( '$siteId must be a string; got ' . gettype( $siteId ) );
+		if ( !is_string( $siteId ) || $siteId === '' ) {
+			throw new InvalidArgumentException( '$siteId must be a non-empty string' );
 		}
 
-		if ( !is_string( $pageName ) ) {
-			throw new InvalidArgumentException( '$pageName must be a string; got ' . gettype( $pageName ) );
+		if ( !is_string( $pageName ) || $pageName === '' ) {
+			throw new InvalidArgumentException( '$pageName must be a non-empty string' );
 		}
 
 		$this->siteId = $siteId;

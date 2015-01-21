@@ -29,11 +29,11 @@ class ClaimGuid implements Comparable {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $entityId, $guid ) {
-		if( !$entityId instanceof EntityId ){
+		if ( !$entityId instanceof EntityId ) {
 			throw new InvalidArgumentException( '$entityId must be an instance of EntityId' );
 		}
-		if( !is_string( $guid ) ){
-			throw new InvalidArgumentException( '$guid must be a string; got ' . gettype( $guid ) );
+		if ( !is_string( $guid ) ) {
+			throw new InvalidArgumentException( '$guid must be a string' );
 		}
 
 		$this->serialization = $entityId->getSerialization() . self::SEPARATOR . $guid;
