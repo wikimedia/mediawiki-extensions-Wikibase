@@ -23,6 +23,7 @@ use ValueValidators\Result;
 use Wikibase\Content\DeferredCopyEntityHolder;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
+use Wikibase\DataModel\Entity\Diff\EntityPatcher;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\StatementListProvider;
@@ -579,7 +580,10 @@ abstract class EntityContent extends AbstractContent {
 			$entityAfterPatch = $this->getEntity()->copy();
 		}
 
-		$entityAfterPatch->patch( $patch->getEntityDiff() );
+		// FIXME: this should either be done in the derivatives, or the patcher
+		// should be injected, so the application can add support for additional entity types.
+		$patcher = new EntityPatcher();
+		$patcher->patchEntity( $entityAfterPatch, $patch->getEntityDiff() );
 
 		$redirAfterPatch = $this->getPatchedRedirect( $patch->getRedirectDiff() );
 
