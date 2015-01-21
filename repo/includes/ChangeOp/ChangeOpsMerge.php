@@ -246,11 +246,10 @@ class ChangeOpsMerge {
 	private function findEquivalentClaim( $fromStatement ) {
 		$fromHash = $this->getClaimHash( $fromStatement );
 
-		/** @var $claim Claim */
-		foreach ( $this->toItem->getClaims() as $claim ) {
-			$toHash = $this->getClaimHash( $claim );
+		foreach ( $this->toItem->getStatements() as $statement ) {
+			$toHash = $this->getClaimHash( $statement );
 			if ( $toHash === $fromHash ) {
-				return $claim;
+				return $statement;
 			}
 		}
 		return false;
