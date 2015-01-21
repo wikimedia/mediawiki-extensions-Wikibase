@@ -81,13 +81,7 @@ class SpecialNewItem extends SpecialNewEntity {
 				return $status;
 			}
 
-			$link = new SiteLink( $site->getGlobalId(), $page );
-			$ret = $item->addSiteLink( $link );
-
-			if ( $ret === false ) {
-				$status->error( 'wikibase-newitem-add-sitelink-failed' );
-				return $status;
-			}
+			$item->getSiteLinkList()->addNewSiteLink( $site->getGlobalId(), $page );
 		}
 
 		return $status;
