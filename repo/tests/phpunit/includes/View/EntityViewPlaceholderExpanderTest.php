@@ -144,7 +144,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		$this->assertRegExp( '/#wb-terms/', $html );
 	}
 
-	public function renderTermBox() {
+	public function testRenderTermBox() {
 		$item = $this->getItem();
 		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
 		$expander = $this->newExpander( $this->newUser( false ), $entityRevisionLookup, $item->getId() );
