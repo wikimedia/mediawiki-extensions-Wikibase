@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_9cb24091",
+        "filename": "lib/resources/jquery.wikibase/toolbar/controller/definitions/edittoolbar/entitytermsview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T09:54:25Z",
+      "side": 1,
+      "message": "entiy",
+      "revId": "d3119b45bba7afd7664b0352999ae1ce5d703e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_7c82ccaa",
+        "filename": "repo/includes/View/EntityViewPlaceholderExpander.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T09:54:25Z",
+      "side": 1,
+      "message": "entiy; is there no test for this? :D",
+      "revId": "d3119b45bba7afd7664b0352999ae1ce5d703e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_fcbd7c64",
+        "filename": "repo/includes/View/EntityViewPlaceholderExpander.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T09:54:25Z",
+      "side": 1,
+      "message": "entiy",
+      "revId": "d3119b45bba7afd7664b0352999ae1ce5d703e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_5caca832",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T09:54:25Z",
+      "side": 1,
+      "message": "Invert condition for less indentation.",
+      "revId": "d3119b45bba7afd7664b0352999ae1ce5d703e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
