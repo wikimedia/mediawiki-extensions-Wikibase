@@ -291,6 +291,16 @@ div .wb-snak-value span.error.wb-format-error {
 	float: right;
 }
 
+/***** ENTITY ID VALUES *****/
+
+.wb-language-fallback-indicator {
+	font-style: italic;
+	margin-left: 0.5em;
+	line-height: 1;
+}
+
+/***** /ENTITY ID VALUES *****/
+
 /***** TIME VALUES *****/
 
 .wb-calendar-name {
