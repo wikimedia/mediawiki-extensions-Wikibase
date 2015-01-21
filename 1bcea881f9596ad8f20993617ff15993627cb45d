@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_5fd7bac4",
+        "filename": "repo/includes/store/sql/ChangesSubscriptionSchemaUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-21T14:49:09Z",
+      "side": 1,
+      "message": "LoadBalancer is a factory for Database(Base).\n\nIt\u0027s generally considered evil to hold a reference to a database connection in a member, because database connections get re-used by the load balancer for accessing other databases on the same server.\n\nIn order to get a database connection (DatabaseBase instance), the table builder gets a LoadBalancer.\n\nWe *could* pass the actual DB connection here, since this only happens during schema update. It just feels wrong to pass the DB connection to the constructor.",
+      "parentUuid": "ae6ac7d6_bfbdb6d3",
+      "revId": "1bcea881f9596ad8f20993617ff15993627cb45d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_dd3c5bbf",
         "filename": "repo/includes/store/sql/ChangesSubscriptionSchemaUpdater.php",
         "patchSetId": 4
