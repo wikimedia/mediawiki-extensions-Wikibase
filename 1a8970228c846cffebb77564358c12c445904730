@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_3c59b45d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T10:32:59Z",
+      "side": 1,
+      "message": "I\u0027d suggest moving this selection to a private method.",
+      "revId": "1a8970228c846cffebb77564358c12c445904730",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_5c10285b",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T10:32:59Z",
+      "side": 1,
+      "message": "I\u0027d like to see an explaining comment mentioning the IE versions this quirk appears in.",
+      "revId": "1a8970228c846cffebb77564358c12c445904730",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
