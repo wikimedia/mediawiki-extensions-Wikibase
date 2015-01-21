@@ -159,7 +159,7 @@ class ChangeOpsMerge {
 		$this->generateDescriptionsChangeOps();
 		$this->generateAliasesChangeOps();
 		$this->generateSitelinksChangeOps();
-		$this->generateClaimsChangeOps();
+		$this->generateStatementChangeOps();
 	}
 
 	private function generateLabelsChangeOps() {
@@ -216,22 +216,22 @@ class ChangeOpsMerge {
 		}
 	}
 
-	private function generateClaimsChangeOps() {
-		foreach ( $this->fromItem->getClaims() as $fromClaim ) {
-			$this->fromChangeOps->add( $this->getClaimChangeOpFactory()->newRemoveClaimOp( $fromClaim->getGuid() ) );
+	private function generateStatementChangeOps() {
+		foreach ( $this->fromItem->getStatements()->toArray() as $fromStatement ) {
+			$this->fromChangeOps->add( $this->getClaimChangeOpFactory()->newRemoveClaimOp( $fromStatement->getGuid() ) );
 
-			$toClaim = clone $fromClaim;
-			$toClaim->setGuid( null );
-			$toMergeToClaim = false;
+			$toStatement = clone $fromStatement;
+			$toStatement->setGuid( null );
+			$toMergeToStatement = false;
 
-			if ( $toClaim instanceof Statement ) {
-				$toMergeToClaim = $this->findEquivalentClaim( $toClaim );
+			if ( $toStatement instanceof Statement ) {
+				$toMergeToStatement = $this->findEquivalentClaim( $toStatement );
 			}
 
-			if ( $toMergeToClaim ) {
-				$this->generateReferencesChangeOps( $toClaim, $toMergeToClaim );
+			if ( $toMergeToStatement ) {
+				$this->generateReferencesChangeOps( $toStatement, $toMergeToStatement );
 			} else {
-				$this->toChangeOps->add( $this->getClaimChangeOpFactory()->newSetClaimOp( $toClaim ) );
+				$this->toChangeOps->add( $this->getClaimChangeOpFactory()->newSetClaimOp( $toStatement ) );
 			}
 		}
 	}
@@ -246,11 +246,10 @@ class ChangeOpsMerge {
 	private function findEquivalentClaim( $fromStatement ) {
 		$fromHash = $this->getClaimHash( $fromStatement );
 
-		/** @var $claim Claim */
-		foreach ( $this->toItem->getClaims() as $claim ) {
-			$toHash = $this->getClaimHash( $claim );
+		foreach ( $this->toItem->getStatements() as $statement ) {
+			$toHash = $this->getClaimHash( $statement );
 			if ( $toHash === $fromHash ) {
-				return $claim;
+				return $statement;
 			}
 		}
 		return false;
