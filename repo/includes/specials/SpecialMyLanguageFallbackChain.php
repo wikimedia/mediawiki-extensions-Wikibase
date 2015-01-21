@@ -44,7 +44,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	 * @return string
 	 */
 	protected function getGroupName() {
-		return 'wikibaserepo';
+		return 'wikibase';
 	}
 
 	/**

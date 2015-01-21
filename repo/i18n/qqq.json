@@ -39,7 +39,6 @@
 		]
 	},
 	"wikibase-desc": "{{desc|name=Wikibase|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
-	"specialpages-group-wikibaserepo": "{{doc-special-group|that=are related to the Wikibase (repository) extension|like=[[Special:NewItem]], [[Special:NewProperty]], [[Special:ItemByTitle]], [[Special:ItemDisambiguation]], [[Special:ItemsWithoutSitelinks]], [[Special:SetLabel]], [[Special:SetDescription]], [[Special:SetAliases]], [[Special:EntitiesWithoutLabel]], [[Special:EntityData]], [[Special:ListDatatypes]], [[Special:DispatchStats]]}}\nSee example: [[d:Special:SpecialPages#mw-specialpagesgroup-wikibaserepo|d:Special:SpecialPages]]",
 	"wikibase-entity-item": "How we refer to entities of type item. See also Wikidata's glossary on [[d:Wikidata:Glossary#item|item]].\n{{Identical|Item}}",
 	"wikibase-entity-property": "How we refer to entities of type property. See also Wikidatas glossary on [[d:Wikidata:Glossary#entity|entity]].\n{{Identical|Property}}",
 	"wikibase-entity-query": "How we refer to entities of type query. See also Wikidatas glossary on [[d:Wikidata:Glossary#entity|entity]].\n{{Identical|Query}}",
