@@ -51,6 +51,23 @@
       "revId": "91d6c268793f1ab45a566cf192d3dcca5017b50f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_7f55de51",
+        "filename": "repo/includes/store/sql/ChangesSubscriptionTableBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-01-21T15:14:40Z",
+      "side": 1,
+      "message": "For better batching, this could in a later patch be moved out of the foreach.",
+      "revId": "91d6c268793f1ab45a566cf192d3dcca5017b50f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
