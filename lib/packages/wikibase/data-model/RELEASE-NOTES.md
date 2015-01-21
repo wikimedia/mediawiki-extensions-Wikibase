@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 3.0.0 (dev)
+## Version 2.6.0 (dev)
 
 * Empty strings are now detected as invalid in the `SiteLink` constructor
 
