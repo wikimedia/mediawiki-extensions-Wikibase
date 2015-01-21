@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_df918afc",
+        "filename": "repo/includes/store/sql/ChangesSubscriptionSchemaUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T15:10:43Z",
+      "side": 1,
+      "message": "Sounds to me like wrapping the DatabaseBase in a new LoadBalancer instance is the less wrong thing to do.",
+      "parentUuid": "ae6ac7d6_5fd7bac4",
+      "revId": "1bcea881f9596ad8f20993617ff15993627cb45d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_dd3c5bbf",
         "filename": "repo/includes/store/sql/ChangesSubscriptionSchemaUpdater.php",
         "patchSetId": 4
