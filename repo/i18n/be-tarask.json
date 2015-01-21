@@ -2,11 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Renessaince",
-			"Wizardist"
+			"Wizardist",
+			"Red Winged Duck"
 		]
 	},
 	"wikibase-desc": "Сховішча структураваных зьвестак",
 	"specialpages-group-wikibaserepo": "Рэпазыторый Вікізьвестак",
+	"wikibase-entity-item": "аб’ект",
+	"wikibase-entity-property": "уласьцівасьць",
+	"wikibase-entity-query": "запыт",
 	"wikibase-edit": "рэдагаваць",
 	"wikibase-save": "захаваць",
 	"wikibase-cancel": "скасаваць",
@@ -19,6 +23,13 @@
 	"wikibase-label-edit-placeholder": "увядзіце метку",
 	"wikibase-description-empty": "Апісаньне пакуль ня вызначанае",
 	"wikibase-description-edit-placeholder": "увядзіце апісаньне",
+	"wikibase-diffview-reference": "крыніца",
+	"wikibase-diffview-rank": "ранг",
+	"wikibase-diffview-qualifier": "кваліфікатар",
+	"wikibase-diffview-label": "метка",
+	"wikibase-diffview-alias": "сынонімы",
+	"wikibase-diffview-description": "апісаньне",
+	"wikibase-diffview-link": "спасылкі",
 	"wikibase-sitelink-site-edit-placeholder": "праект",
 	"wikibase-sitelink-page-edit-placeholder": "старонка",
 	"wikibase-alias-edit-placeholder": "увядзіце сынонім",
@@ -28,6 +39,7 @@
 	"wikibase-terms": "На іншых мовах",
 	"wikibase-sitelinks-empty": "Ніводная старонка сайту дагэтуль не спасылаецца на аб’ект.",
 	"wikibase-sitelinks-input-help-message": "Дадайце спасылку на старонку, датычную аб’екту.",
+	"wikibase-sitelinks-special": "Іншыя сайты",
 	"wikibase-remove": "выдаліць",
 	"wikibase-move-up": "перасунуць вышэй",
 	"wikibase-move-down": "перасунуць ніжэй",
@@ -43,7 +55,6 @@
 	"wikibase-undo-nocontent": "Немагчыма загрузіць зьмест вэрсіі $2 старонкі $1",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Адно значэньне яшчэ не захаванае|$1 значэньні яшчэ не захаваныя|$1 значэньняў яшчэ не захавана}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|запіс|запісы|запісаў}}",
-	"wikibase-sitelinksedittool-full": "Спасылкі на старонкі ёсьць ужо для ўсіх вядомых сайтаў.",
 	"wikibase-disambiguation-title": "Неадназначнасьць для «$1»",
 	"wb-special-newitem-new-item-notification": "Новы прадмет «$1» створаны і перанакіроўвае на ўласную старонку. Вярнуцца — $2.",
 	"wikibase-aliases-label": "Таксама вядома як:",

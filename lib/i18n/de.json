@@ -25,6 +25,7 @@
 	"wikibase-error-autocomplete-response": "Serverantwort: $1",
 	"wikibase-error-ui-no-external-page": "Der angegebene Artikel konnte nicht auf der zugehörigen Website gefunden werden.",
 	"wikibase-error-ui-edit-conflict": "Es gab einen Bearbeitungskonflikt. Bitte lade und speichere die Seite erneut.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (transkribiert)",
 	"wikibase-quantitydetails-amount": "Menge",
 	"wikibase-quantitydetails-upperbound": "Obergrenze",
 	"wikibase-quantitydetails-lowerbound": "Untergrenze",

@@ -45,7 +45,7 @@
 	"wikibase-parse-error-entity-id": "ID entity nemá správný formát.",
 	"wikibase-parse-error-quantity": "Množství nemá správný formát.",
 	"wikibase-parse-error-time": "Časový údaj nemá správný formát.",
-	"wikibase-sitelinks-wikipedia": "Stránky Wikipedie propojené s touto položkou",
+	"wikibase-sitelinks-wikipedia": "Wikipedie",
 	"wikibase-sitelinks-sitename-columnheading": "Jazyk",
 	"wikibase-sitelinks-link-columnheading": "Propojená stránka",
 	"wikibase-snakview-snaktypeselector-somevalue": "neznámá hodnota",

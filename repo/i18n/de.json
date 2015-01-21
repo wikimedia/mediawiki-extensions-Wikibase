@@ -388,5 +388,9 @@
 	"right-property-term": "Bezeichner (Bezeichnungen, Beschreibungen und Aliasse) von Eigenschaften ändern",
 	"right-property-create": "Eigenschaften erstellen",
 	"wikibase-entity-not-viewable-title": "Inhaltstypfehler: Inhalt kann nicht angezeigt werden",
-	"wikibase-entity-not-viewable": "Der angegebene Inhalt des Typs „$1“ ist kein Objekt und kann von Wikibase nicht angezeigt werden."
+	"wikibase-entity-not-viewable": "Der angegebene Inhalt des Typs „$1“ ist kein Objekt und kann von Wikibase nicht angezeigt werden.",
+	"apihelp-wbsetdescription-param-language": "Sprache der Beschreibung",
+	"apihelp-wbsetlabel-param-language": "Sprache der Bezeichnung",
+	"apihelp-wbsetlabel-param-value": "Der Wert der Bezeichnung",
+	"apihelp-wbsetreference-example-1": "Erstellt eine neue Referenz für die Behauptung mit der GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF"
 }

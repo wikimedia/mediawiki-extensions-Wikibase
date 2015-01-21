@@ -132,6 +132,7 @@
 	"wikibase-itemdisambiguation-create": "Możesz [{{fullurl:Special:NewItem|label=$1}} utworzyć taki element].",
 	"wikibase-itemdisambiguation-invalid-langcode": "Przepraszamy ale podany kod języka nie został rozpoznany przez system. Proszę użyć prawidłowego kodu języka, np. „pl”.",
 	"wikibase-itemdisambiguation-description": "Wartości używane do wyszukiwania powinny stanowić pełny tekst wpisu. Jako język podaje się jego kod identyfikujący, na przykład „pl”.",
+	"wikibase-itemdisambiguation-summary": "Wyszukaj wszystkie elementy o dokładnie tej samej etykiecie.",
 	"special-newproperty": "Utwórz nową właściwość",
 	"wikibase-newproperty-summary": "Upewnij się czy dana właściwość już istnieje!<br />Dla wszystkich nowych właściwości powinno się utworzyć [[Help:Label|etykietę]] oraz [[Help:Description|opis]], a dodatkowo także określić typ danych.",
 	"wikibase-newproperty-fieldset": "Utwórz nową właściwość",
