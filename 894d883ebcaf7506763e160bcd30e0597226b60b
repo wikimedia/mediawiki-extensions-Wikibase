@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_48ff07a8",
+        "filename": "repo/includes/specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-01-21T00:51:38Z",
+      "side": 0,
+      "message": "I think this message is unused now and should be removed",
+      "revId": "894d883ebcaf7506763e160bcd30e0597226b60b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
