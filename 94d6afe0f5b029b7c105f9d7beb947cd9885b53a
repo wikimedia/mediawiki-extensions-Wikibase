@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_92e1c9fd",
+        "filename": "client/includes/Usage/SubscriptionManager.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-01-21T19:57:47Z",
+      "side": 1,
+      "message": "notifications",
+      "revId": "94d6afe0f5b029b7c105f9d7beb947cd9885b53a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
