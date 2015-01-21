@@ -19,6 +19,7 @@ use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -563,10 +564,10 @@ class EditEntity extends ModifyEntity {
 	 * @since 0.4
 	 *
 	 * @param mixed $data
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param int $revId
 	 */
-	protected function validateDataProperties( $data, Entity $entity, $revId = 0 ) {
+	private function validateDataProperties( $data, EntityDocument $entity, $revId = 0 ) {
 		$entityId = $entity->getId();
 		$title = $entityId === null ? null : $this->getTitleLookup()->getTitleForId( $entityId );
 
@@ -702,7 +703,7 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	private function checkEntityType( $data, Entity $entity ) {
+	private function checkEntityType( $data, EntityDocument $entity ) {
 		if ( isset( $data['type'] )
 			&& $entity->getType() !== $data['type'] ) {
 			$this->dieError(
