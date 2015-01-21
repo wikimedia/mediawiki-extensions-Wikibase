@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_1f52a26a",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-21T14:49:16Z",
+      "side": 1,
+      "message": "will do",
+      "parentUuid": "ae6ac7d6_07010271",
+      "revId": "91d6c268793f1ab45a566cf192d3dcca5017b50f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_0717c2a9",
         "filename": "repo/config/Wikibase.default.php",
         "patchSetId": 5
