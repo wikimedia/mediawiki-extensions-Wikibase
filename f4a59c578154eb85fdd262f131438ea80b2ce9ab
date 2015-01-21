@@ -69,6 +69,40 @@
       "revId": "f4a59c578154eb85fdd262f131438ea80b2ce9ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_7f407ea8",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T14:23:45Z",
+      "side": 1,
+      "message": "use $requestedLanguage",
+      "revId": "f4a59c578154eb85fdd262f131438ea80b2ce9ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_1f4dc2e0",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T14:23:45Z",
+      "side": 1,
+      "message": "use $requestedLanguage",
+      "revId": "f4a59c578154eb85fdd262f131438ea80b2ce9ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
