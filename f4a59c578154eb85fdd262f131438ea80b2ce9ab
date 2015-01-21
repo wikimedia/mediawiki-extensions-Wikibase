@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_bf9a9664",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-21T14:11:16Z",
+      "side": 1,
+      "message": "Because Lydia said so :)",
+      "parentUuid": "ae6ac7d6_df8c2a3d",
+      "revId": "f4a59c578154eb85fdd262f131438ea80b2ce9ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_ff900e48",
         "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-21T14:07:21Z",
       "side": 1,
       "message": "Could pass in $attributes instead of $titleText and $targetUrl.",
+      "revId": "f4a59c578154eb85fdd262f131438ea80b2ce9ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_dfb2eae3",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-01-21T14:11:16Z",
+      "side": 1,
+      "message": "Yes, but I like my function signatures narrow and explicit :)\nAlso, it\u0027s not a given that the attributes should be the same for the \"Term\" case and the \"ID\" case.",
+      "parentUuid": "ae6ac7d6_ff900e48",
       "revId": "f4a59c578154eb85fdd262f131438ea80b2ce9ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
