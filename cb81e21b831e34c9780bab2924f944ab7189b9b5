@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_df4e6a9b",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2015-01-21T15:48:21Z",
+      "side": 1,
+      "message": "The title must have i18n.",
+      "revId": "cb81e21b831e34c9780bab2924f944ab7189b9b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
