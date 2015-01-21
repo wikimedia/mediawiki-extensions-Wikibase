@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_dffbca0f",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T10:36:20Z",
+      "side": 1,
+      "message": "entiy. Is there a task for drop-down edit buttons? If so, please link :)",
+      "revId": "7fea85e7602d71eed37077124f582c33b716e180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_ff000e06",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T10:36:20Z",
+      "side": 1,
+      "message": "guard with null check?",
+      "revId": "7fea85e7602d71eed37077124f582c33b716e180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_9f055216",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T10:36:20Z",
+      "side": 1,
+      "message": "entiy",
+      "revId": "7fea85e7602d71eed37077124f582c33b716e180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_bf0a9622",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T10:36:20Z",
+      "side": 1,
+      "message": "entiy",
+      "revId": "7fea85e7602d71eed37077124f582c33b716e180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_5f0fba33",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T10:36:20Z",
+      "side": 1,
+      "message": "entiy",
+      "revId": "7fea85e7602d71eed37077124f582c33b716e180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_7f0cfe3d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T10:36:20Z",
+      "side": 1,
+      "message": "entiy",
+      "revId": "7fea85e7602d71eed37077124f582c33b716e180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_1f19427e",
+        "filename": "lib/resources/jquery.wikibase/toolbar/controller/definitions/edittoolbar/entitytermsview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T10:36:20Z",
+      "side": 1,
+      "message": "entiy",
+      "revId": "7fea85e7602d71eed37077124f582c33b716e180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_3f16864e",
+        "filename": "repo/includes/View/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T10:36:20Z",
+      "side": 1,
+      "message": "entiy",
+      "revId": "7fea85e7602d71eed37077124f582c33b716e180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_df22eaa1",
+        "filename": "repo/includes/View/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T10:36:20Z",
+      "side": 1,
+      "message": "entiy",
+      "revId": "7fea85e7602d71eed37077124f582c33b716e180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
