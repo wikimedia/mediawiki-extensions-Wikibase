@@ -81,6 +81,7 @@ class Fingerprint implements Comparable {
 	 *
 	 * @return Term
 	 * @throws OutOfBoundsException
+	 * @throws InvalidArgumentException
 	 */
 	public function getLabel( $languageCode ) {
 		return $this->labels->getByLanguage( $languageCode );
@@ -134,6 +135,7 @@ class Fingerprint implements Comparable {
 	 *
 	 * @return Term
 	 * @throws OutOfBoundsException
+	 * @throws InvalidArgumentException
 	 */
 	public function getDescription( $languageCode ) {
 		return $this->descriptions->getByLanguage( $languageCode );
@@ -187,6 +189,7 @@ class Fingerprint implements Comparable {
 	 *
 	 * @return AliasGroup
 	 * @throws OutOfBoundsException
+	 * @throws InvalidArgumentException
 	 */
 	public function getAliasGroup( $languageCode ) {
 		return $this->aliasGroups->getByLanguage( $languageCode );
