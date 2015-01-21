@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_bfbdb6d3",
+        "filename": "repo/includes/store/sql/ChangesSubscriptionSchemaUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T13:32:58Z",
+      "side": 1,
+      "message": "Is there any way wfGetLB() could reference another db than $dbUpdater-\u003egetDB()? I would have thought there is a reason db update jobs get the context passed in. Why does the EntityUsageTableBuilder need a LoadBalancer instance? Why do LoadBalancer and DatabaseBase not implement a common interface?",
+      "parentUuid": "ae6ac7d6_2cb20793",
+      "revId": "1bcea881f9596ad8f20993617ff15993627cb45d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_dd3c5bbf",
         "filename": "repo/includes/store/sql/ChangesSubscriptionSchemaUpdater.php",
         "patchSetId": 4
