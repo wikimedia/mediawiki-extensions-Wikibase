@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Term;
 
 use Comparable;
 use InvalidArgumentException;
+use OutOfBoundsException;
 
 /**
  * @since 0.7.3
@@ -77,7 +78,9 @@ class Fingerprint implements Comparable {
 	 * @since 0.7.4
 	 *
 	 * @param string $languageCode
+	 *
 	 * @return Term
+	 * @throws OutOfBoundsException
 	 */
 	public function getLabel( $languageCode ) {
 		return $this->labels->getByLanguage( $languageCode );
@@ -128,7 +131,9 @@ class Fingerprint implements Comparable {
 	 * @since 0.7.4
 	 *
 	 * @param string $languageCode
+	 *
 	 * @return Term
+	 * @throws OutOfBoundsException
 	 */
 	public function getDescription( $languageCode ) {
 		return $this->descriptions->getByLanguage( $languageCode );
@@ -179,7 +184,9 @@ class Fingerprint implements Comparable {
 	 * @since 0.7.4
 	 *
 	 * @param string $languageCode
+	 *
 	 * @return AliasGroup
+	 * @throws OutOfBoundsException
 	 */
 	public function getAliasGroup( $languageCode ) {
 		return $this->aliasGroups->getByLanguage( $languageCode );
