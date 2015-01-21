@@ -11,7 +11,11 @@
 .ui-listrotator .ui-listrotator-label {
 	background: none;
 	border: none;
+	cursor: pointer;
 	text-decoration: inherit;
+}
+.ui-listrotator .ui-listrotator-label.ui-state-disabled {
+	cursor: default;
 }
 
 .ui-listrotator .ui-state-active .ui-listrotator-label {

@@ -343,9 +343,9 @@ $.widget( 'ui.listrotator', {
 	 */
 	_createSection: function( classSuffix, clickCallback ) {
 		return $( '<a/>' )
-		.attr( 'href', 'javascript:void(0);' )
 		.addClass( this.widgetBaseClass + '-' + classSuffix )
 		.on( 'click.' + this.widgetBaseClass, function( event ) {
+			event.preventDefault();
 			if( !$( this ).hasClass( 'ui-state-disabled' ) ) {
 				clickCallback( event );
 			}
@@ -382,9 +382,9 @@ $.widget( 'ui.listrotator', {
 		return $( '<li/>' )
 			.append(
 				$( '<a/>' )
-				.attr( 'href', 'javascript:void(0);')
 				.text( item.label )
 				.on( 'click', function( event ) {
+					event.preventDefault();
 					event.stopPropagation();
 					self._trigger( 'selected', null, [ self.value( item.value ) ] );
 					self.$menu.hide();

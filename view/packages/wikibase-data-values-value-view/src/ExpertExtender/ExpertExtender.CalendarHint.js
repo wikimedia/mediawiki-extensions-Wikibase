@@ -75,8 +75,8 @@
 				.append(
 					$( '<a/>' )
 					.addClass( this._prefix + '-switch ui-state-default' )
-					.attr( 'href', 'javascript:void(0);' )
 					.on( 'click', function( event ) {
+						event.preventDefault();
 						self._setUpstreamCalendar( self._otherCalendar );
 					} )
 				)
