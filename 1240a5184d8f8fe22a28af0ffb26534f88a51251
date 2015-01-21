@@ -248,6 +248,24 @@
     },
     {
       "key": {
+        "uuid": "ae6ac7d6_fcefbc80",
+        "filename": "repo/tests/phpunit/includes/ItemDisambiguationTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-21T09:44:17Z",
+      "side": 1,
+      "message": "I care about this, and I think it is wrong. I want to see as much of the external dependencies as possible in the use section.",
+      "parentUuid": "ae6ac7d6_bcd94e2e",
+      "revId": "1240a5184d8f8fe22a28af0ffb26534f88a51251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_5c3a72c1",
         "filename": "repo/tests/phpunit/includes/Template/TemplateRegistryTest.php",
         "patchSetId": 3
