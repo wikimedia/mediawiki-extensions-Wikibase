@@ -106,7 +106,6 @@
 	"wikibase-newitem-site": "Сайт першай злучанай старонкі",
 	"wikibase-newitem-page": "Назва першай злучанай старонкі",
 	"wikibase-newitem-no-external-page": "Пазначаная старонка на адпаведным сайце ня знойдзеная.",
-	"wikibase-newitem-add-sitelink-failed": "Не ўдалося захаваць спасылку на сайт.",
 	"wikibase-newitem-not-recognized-siteid": "Пададзены ідэнтыфікатар сайта не распазнаны.",
 	"wikibase-newentity-label": "Метка:",
 	"wikibase-newentity-description": "Апісаньне:",

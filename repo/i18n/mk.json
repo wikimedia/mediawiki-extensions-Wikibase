@@ -135,7 +135,6 @@
 	"wikibase-newitem-site": "Вики на првата сврзана страница",
 	"wikibase-newitem-page": "Име на првата врзана страница",
 	"wikibase-newitem-no-external-page": "Укажаната страница не е најдена на соодветното вики.",
-	"wikibase-newitem-add-sitelink-failed": "Не можев да го зачувам викито.",
 	"wikibase-newitem-not-recognized-siteid": "Не можев да ја препознаам укажаната назнака на викито.",
 	"wikibase-newentity-label": "Натпис:",
 	"wikibase-newentity-description": "Опис:",

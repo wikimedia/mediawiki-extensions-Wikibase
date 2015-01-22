@@ -146,7 +146,6 @@
 	"wikibase-newitem-site": "Sítio da primeira página ligada",
 	"wikibase-newitem-page": "Nome da primeira página ligada",
 	"wikibase-newitem-no-external-page": "A página especificada não pôde ser encontrada no sítio correspondente.",
-	"wikibase-newitem-add-sitelink-failed": "A ligação ao sítio não pôde ser guardada.",
 	"wikibase-newitem-not-recognized-siteid": "O identificador do sítio fornecido não foi reconhecido.",
 	"wikibase-newentity-label": "Rótulo:",
 	"wikibase-newentity-description": "Descrição:",

@@ -17,6 +17,7 @@
 	"wikibase-error-autocomplete-response": "Äntwert vum Server: $1",
 	"wikibase-error-ui-no-external-page": "De spezifizéierten Artikel konnt op dem korrespondéierte Site net fonnt ginn.",
 	"wikibase-error-ui-edit-conflict": "Et gëtt en Editiounskonflikt. Luet d'Säit nees a späichert nach eng Kéier.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (iwwerholl)",
 	"wikibase-quantitydetails-unit": "Eenheet",
 	"wikibase-timedetails-time": "Zäit",
 	"wikibase-timedetails-timezone": "Zäitzon",

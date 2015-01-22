@@ -144,7 +144,6 @@
 	"wikibase-newitem-site": "Położenie pierwszej linkowanej strony",
 	"wikibase-newitem-page": "Nazwa pierwszej linkowanej strony",
 	"wikibase-newitem-no-external-page": "Nie udało się odnaleźć wskazanej artykułu w odpowiadającym projekcie.",
-	"wikibase-newitem-add-sitelink-failed": "Nie można zapisać odnośnika.",
 	"wikibase-newitem-not-recognized-siteid": "Otrzymany identyfikator witryny nie został rozpoznany.",
 	"wikibase-newentity-label": "Etykieta:",
 	"wikibase-newentity-description": "Opis:",

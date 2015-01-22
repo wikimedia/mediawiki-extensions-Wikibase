@@ -7,7 +7,8 @@
 			"Siebrand",
 			"Southparkfan",
 			"Sjoerddebruin",
-			"Macofe"
+			"Macofe",
+			"Robin0van0der0vliet"
 		]
 	},
 	"wikibase-lib-desc": "Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client",
@@ -25,6 +26,7 @@
 	"wikibase-error-autocomplete-response": "Antwoord van server: $1",
 	"wikibase-error-ui-no-external-page": "De opgegeven pagina kon niet worden gevonden op de overeenkomende site.",
 	"wikibase-error-ui-edit-conflict": "Er is een bewerkingsconflict opgetreden. Laad de pagina opnieuw en sla uw wijzigingen opnieuw op.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (getranslitereerd)",
 	"wikibase-quantitydetails-amount": "Hoeveelheid",
 	"wikibase-quantitydetails-upperbound": "Bovengrens",
 	"wikibase-quantitydetails-lowerbound": "Ondergrens",

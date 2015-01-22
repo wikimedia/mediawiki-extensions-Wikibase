@@ -19,6 +19,7 @@
 	"wikibase-error-autocomplete-response": "'U server ave resposte: $1",
 	"wikibase-error-ui-no-external-page": "'A vôsce specificate non ge pò essere acchiate sus a 'u site corrispondende.",
 	"wikibase-error-ui-edit-conflict": "Stè 'nu conflitte de versione. Pe piacere recareche e reggistre arrete.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (translitterate)",
 	"wikibase-quantitydetails-amount": "'Mborte",
 	"wikibase-quantitydetails-upperbound": "Limite superiore",
 	"wikibase-quantitydetails-lowerbound": "Limite 'nferiore",

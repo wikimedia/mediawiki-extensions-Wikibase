@@ -141,7 +141,6 @@
 	"wikibase-newitem-site": "Sivusto ensimmäisenä linkitettävälle sivulle",
 	"wikibase-newitem-page": "Nimi ensimmäisenä linkitettävälle sivulle",
 	"wikibase-newitem-no-external-page": "Määritettyä sivua ei löytynyt vastaavalta sivustolta.",
-	"wikibase-newitem-add-sitelink-failed": "Sivuston linkkiä ei voitu tallentaa.",
 	"wikibase-newitem-not-recognized-siteid": "Annettua sivustotunnusta ei tunnistettu.",
 	"wikibase-newentity-label": "Nimi",
 	"wikibase-newentity-description": "Kuvaus",

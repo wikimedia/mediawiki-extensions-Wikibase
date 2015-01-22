@@ -146,7 +146,6 @@
 	"wikibase-newitem-site": "Projekt první propojené položky",
 	"wikibase-newitem-page": "Jméno první odkazované stránky",
 	"wikibase-newitem-no-external-page": "Taková stránka nebyla na příslušném webu nalezena.",
-	"wikibase-newitem-add-sitelink-failed": "Odkaz nemohl být uložen.",
 	"wikibase-newitem-not-recognized-siteid": "Zadaný identifikátor projektu nebyl rozpoznán.",
 	"wikibase-newentity-label": "Štítek:",
 	"wikibase-newentity-description": "Popis:",
