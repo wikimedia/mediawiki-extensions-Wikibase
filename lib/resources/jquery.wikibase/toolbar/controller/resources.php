@@ -16,9 +16,9 @@ return call_user_func( function() {
 
 	$modules = array(
 
-		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementgrouplistview-statementlistview' => $moduleTemplate + array(
+		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementgrouplistview-statementgroupview' => $moduleTemplate + array(
 			'scripts' => array(
-				'definitions/addtoolbar/statementgrouplistview-statementlistview.js',
+				'definitions/addtoolbar/statementgrouplistview-statementgroupview.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.addtoolbar',
