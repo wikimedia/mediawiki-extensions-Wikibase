@@ -85,12 +85,19 @@
 			if( languages !== null ) {
 				this._labels = {};
 				$.each( languages, function( i, code ) {
-					self._labels[code] = self._messageProvider.getMessage(
-						self._prefix + '-languagetemplate',
+					self._labels[code] = self._getMessage(
+						'languagetemplate',
 						[ self._languages.getName( code ), code ]
 					);
-				};
+				} );
 			}
+		},
+
+		/**
+		 * @private
+		 */
+		_getMessage: function( code, params ) {
+			return this._messageProvider.getMessage( this._prefix + '-' + code, params );
 		},
 
 		/**
@@ -112,7 +119,7 @@
 				this.$selector.on( 'eachchange', this._onValueChange );
 			}
 			$extender
-				.append( $( '<span />' ).text( this._messageProvider.getMessage( this._prefix + '-label' ) ) )
+				.append( $( '<span />' ).text( this._getMessage( 'label' ) ) )
 				.append( this.$selector );
 		},
 
