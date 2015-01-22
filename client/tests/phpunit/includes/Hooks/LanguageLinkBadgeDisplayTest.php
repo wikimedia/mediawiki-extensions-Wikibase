@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
-use FauxRequest;
 use Language;
 use OutputPage;
 use ParserOutput;

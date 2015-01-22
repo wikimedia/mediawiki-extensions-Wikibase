@@ -98,7 +98,7 @@ class PageTerms extends ApiQueryBase {
 	}
 
 	/**
-	 * @param EntityID[] $entityIds
+	 * @param EntityId[] $entityIds
 	 * @param string[]|null $termTypes
 	 * @param string[]|null $languageCodes
 	 *

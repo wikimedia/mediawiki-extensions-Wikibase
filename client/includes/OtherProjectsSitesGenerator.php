@@ -3,7 +3,6 @@
 namespace Wikibase\Client;
 
 use Site;
-use SiteList;
 use SiteStore;
 
 /**
@@ -112,4 +111,5 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 	private function getLocalSite() {
 		return $this->siteStore->getSite( $this->localSiteId );
 	}
+
 }
