@@ -28,8 +28,6 @@
 		this._onValueChange = onValueChange;
 
 		this.$selector = $( '<input />' );
-
-		this._initLabels();
 	};
 
 	$.extend( ExpertExtender.LanguageSelector.prototype, {
@@ -101,6 +99,8 @@
 		 * @param {jQuery} $extender
 		 */
 		init: function( $extender ) {
+			this._initLabels();
+
 			if( this._labels ) {
 				this.$selector.languagesuggester( {
 					source: $.map( this._labels, function( label, code ) {
