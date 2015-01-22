@@ -79,6 +79,7 @@ function expertProxy( fnName ) {
  *        in the meantime.
  * @param {Object|null} [mediaWiki=null]
  *        `mediaWiki` JavaScript object that may be used when in MediaWiki environment.
+ * @param {util.ContentLanguages|null} [contentLanguages=null]
  */
 /**
  * @event change
@@ -181,7 +182,8 @@ $.widget( 'valueview.valueview', PARENT, {
 		language: null,
 		autoStartEditing: false,
 		parseDelay: 300,
-		mediaWiki: null
+		mediaWiki: null,
+		contentLanguages: null
 	},
 
 	/**
@@ -551,7 +553,8 @@ $.widget( 'valueview.valueview', PARENT, {
 				this.viewState(),
 				this.viewNotifier(),
 				{
-					mediaWiki: this.options.mediaWiki
+					mediaWiki: this.options.mediaWiki,
+					contentLanguages: this.options.contentLanguages
 				}
 			);
 			this._expert.init();
