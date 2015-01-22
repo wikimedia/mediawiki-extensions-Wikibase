@@ -52,7 +52,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	 * @return Item
 	 */
 	protected function createEntity() {
-		return Item::newEmpty();
+		return new Item();
 	}
 
 	/**
