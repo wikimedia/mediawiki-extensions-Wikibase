@@ -1,0 +1,23 @@
+/**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+
+.wikibase-statementgroupview {
+	float: left;
+	margin-bottom: 1em;
+	position: relative;
+	width: 100%;
+}
+
+.wikibase-statementgroupview .wikibase-statementgroupview-property {
+	border: 1px solid #C9C9C9;
+	border-right: 0;
+}
+.wikibase-statementgroupview.wb-new .wikibase-statementgroupview-property {
+	display: none;
+}
+
+.wikibase-statementgroupview .wikibase-statementlistview {
+	float: left;
+}

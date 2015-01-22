@@ -68,9 +68,27 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
-				'jquery.wikibase.statementlistview',
+				'jquery.wikibase.statementgroupview',
 				'jquery.wikibase.listview',
-				'wikibase.datamodel',
+				'wikibase.datamodel.Item',
+				'wikibase.datamodel.StatementGroupSet',
+			),
+		),
+
+		'jquery.wikibase.statementgroupview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase.statementgroupview.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.TemplatedWidget',
+				'jquery.ui.widget',
+				'jquery.wikibase.listview',
+				'jquery.wikibase.statementlistview',
+				'wikibase.datamodel.Item',
+				'wikibase.datamodel.Property',
+				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.StatementList',
+				'wikibase.utilities',
 			),
 		),
 
@@ -83,9 +101,7 @@ return call_user_func( function() {
 				'jquery.ui.widget',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.statementview',
-				'wikibase.datamodel',
-				'wikibase.templates',
-				'wikibase.utilities',
+				'wikibase.datamodel.StatementList',
 				'wikibase.utilities.ClaimGuidGenerator',
 			),
 			'messages' => array(
