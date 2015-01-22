@@ -55,7 +55,7 @@ HTML;
 <<<HTML
 <h2 class="wb-section-heading" dir="auto" id="$2">$1</h2>
 HTML;
-
+/*
 	$templates['wikibase-statementgrouplistview'] =
 <<<HTML
 <div class="wikibase-statementgrouplistview">
@@ -63,18 +63,35 @@ HTML;
 	<!-- [0,1] wikibase-toolbar -->$2
 </div>
 HTML;
+*/
 
+	$templates['wikibase-statementgrouplistview'] =
+<<<HTML
+<div class="wikibase-statementgrouplistview"><!-- wikibase-listview -->$1</div>
+HTML;
+
+/*
 	$templates['wikibase-statementgrouplistview-groupname'] =
 <<<HTML
 <div class="wikibase-statementgrouplistview-groupname">
 	<div class="wikibase-statementgrouplistview-groupname-name" dir="auto">$1</div>
 </div>
 HTML;
+*/
+	$templates['wikibase-statementgroupview'] =
+<<<HTML
+<div class="wikibase-statementgroupview" id="$3">
+	<div class="wikibase-statementgroupview-property">
+		<div class="wikibase-statementgroupview-property-label" dir="auto">$1</div>
+	</div>
+	<!-- wikibase-statementlistview -->$2
+</div>
+HTML;
 
 	$templates['wikibase-statementlistview'] =
 <<<HTML
 <div class="wikibase-statementlistview">
-	<div class="wikibase-statementlistview-listview" id="$3">
+	<div class="wikibase-statementlistview-listview">
 		<!-- [0,*] wikibase-statementview -->$1
 	</div>
 	<!-- [0,1] wikibase-toolbar -->$2
