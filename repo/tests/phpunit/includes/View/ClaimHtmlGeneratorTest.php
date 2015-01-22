@@ -53,17 +53,6 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param EntityId $id
-	 * @return string
-	 */
-	public function getLinkForId( EntityId $id ) {
-		$name = $id->getEntityType() . ':' . $id->getSerialization();
-		$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
-
-		return Html::element( 'a', array( 'href' => $url ), $name );
-	}
-
-	/**
 	 * @return EntityIdFormatter
 	 */
 	protected function getPropertyIdFormatterMock() {
@@ -73,7 +62,11 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$lookup->expects( $this->any() )
 			->method( 'format' )
-			->will( $this->returnCallback( array( $this, 'getLinkForId' ) ) );
+			->will( $this->returnCallback( function( EntityId $id ) {
+				$name = $id->getEntityType() . ':' . $id->getSerialization();
+				$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
+				return Html::element( 'a', array( 'href' => $url ), $name );
+			} ) );
 
 		return $lookup;
 	}
