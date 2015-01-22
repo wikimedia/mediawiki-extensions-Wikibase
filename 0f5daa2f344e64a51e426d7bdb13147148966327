@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_ebfb700f",
+        "filename": "client/tests/phpunit/includes/hooks/DataUpdateHookHandlersTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-01-22T21:13:15Z",
+      "side": 1,
+      "message": "Not the most clear test code like this",
+      "revId": "0f5daa2f344e64a51e426d7bdb13147148966327",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
