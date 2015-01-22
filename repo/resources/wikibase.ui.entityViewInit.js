@@ -117,7 +117,8 @@
 				repoApi,
 				revisionStore,
 				entity
-			);
+			),
+			contentLanguages = new wikibase.WikibaseContentLanguages();
 
 		var view = entity.getType() + 'view';
 
@@ -135,7 +136,8 @@
 				getFormatterStore( repoApi, dataTypeStore ),
 				getParserStore( repoApi ),
 				mw.config.get( 'wgUserLanguage' ),
-				mw
+				mw,
+				contentLanguages
 			),
 			dataTypeStore: dataTypeStore
 		} )
