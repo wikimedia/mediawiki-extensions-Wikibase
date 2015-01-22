@@ -187,13 +187,13 @@ class MockRepository implements
 		$conflicts = array();
 
 		foreach ( array_keys( $this->entities ) as $idString ) {
-			$entityId = $this->parseId( $idString );
+			$itemId = $this->parseId( $idString );
 
-			if ( $entityId->getEntityType() !== Item::ENTITY_TYPE ) {
+			if ( !( $itemId instanceof ItemId ) ) {
 				continue;
 			}
 
-			$oldLinks = $this->getLinks( array( $entityId->getNumericId() ) );
+			$oldLinks = $this->getLinks( array( $itemId->getNumericId() ) );
 
 			foreach ( $oldLinks as $link ) {
 				list( $wiki, $page, $numericId ) = $link;
@@ -416,18 +416,18 @@ class MockRepository implements
 		$links = array();
 
 		foreach ( array_keys( $this->entities ) as $idString ) {
-			$entityId = $this->parseId( $idString );
+			$itemId = $this->parseId( $idString );
 
-			if ( $entityId->getEntityType() !== Item::ENTITY_TYPE ) {
+			if ( !( $itemId instanceof ItemId ) ) {
 				continue;
 			}
 
-			if ( !empty( $numericIds ) && !in_array( $entityId->getNumericId(), $numericIds ) ) {
+			if ( !empty( $numericIds ) && !in_array( $itemId->getNumericId(), $numericIds ) ) {
 				continue;
 			}
 
 			/** @var Item $item */
-			$item = $this->getEntity( $entityId );
+			$item = $this->getEntity( $itemId );
 
 			/** @var SiteLink $siteLink */
 			foreach ( $item->getSiteLinkList() as $siteLink ) {
@@ -522,24 +522,24 @@ class MockRepository implements
 	 */
 	public function getPropertyByLabel( $propertyLabel, $languageCode ) {
 		foreach ( array_keys( $this->entities ) as $idString ) {
-			$entityId = $this->parseId( $idString );
+			$propertyId = $this->parseId( $idString );
 
-			if ( $entityId->getEntityType() !== 'property' ) {
+			if ( !( $propertyId instanceof PropertyId ) ) {
 				continue;
 			}
 
-			$entity = $this->getEntity( $entityId );
+			$property = $this->getEntity( $propertyId );
 
-			if ( !( $entity instanceof FingerprintProvider ) ) {
+			if ( !( $property instanceof FingerprintProvider ) ) {
 				continue;
 			}
 
-			$labels = $entity->getFingerprint()->getLabels();
+			$labels = $property->getFingerprint()->getLabels();
 
 			if ( $labels->hasTermForLanguage( $languageCode )
 				&& $labels->getByLanguage( $languageCode )->getText() === $propertyLabel
 			) {
-				return $entity;
+				return $property;
 			}
 		}
 
@@ -650,7 +650,7 @@ class MockRepository implements
 	 * @return int The revision id created by storing the redirect
 	 */
 	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevisionId = false ) {
-		if ( $redirect->getEntityId()->getEntityType() !== Item::ENTITY_TYPE ) {
+		if ( !( $redirect->getEntityId() instanceof ItemId ) ) {
 			throw new StorageException( 'Entity type does not support redirects: ' . $redirect->getEntityId()->getEntityType() );
 		}
 
