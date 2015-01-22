@@ -169,7 +169,7 @@ class ItemContent extends EntityContent {
 	 * @return ItemContent
 	 */
 	public static function newEmpty() {
-		return new static( new EntityInstanceHolder( Item::newEmpty() ) );
+		return new static( new EntityInstanceHolder( new Item() ) );
 	}
 
 	/**

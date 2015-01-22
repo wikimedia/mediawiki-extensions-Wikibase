@@ -174,7 +174,7 @@ class ItemHandler extends EntityHandler {
 	 * @return EntityContent
 	 */
 	public function makeEmptyEntity() {
-		return Item::newEmpty();
+		return new Item();
 	}
 
 	/**
