@@ -113,9 +113,5 @@ return call_user_func( function() {
 		),
 	);
 
-	if ( defined( 'ULS_VERSION' ) ) {
-		$modules['jquery.valueview.ExpertExtender.LanguageSelector']['dependencies'][] = 'ext.uls.languagenames';
-	}
-
 	return $modules;
 } );

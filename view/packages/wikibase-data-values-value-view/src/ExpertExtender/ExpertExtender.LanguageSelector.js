@@ -1,4 +1,4 @@
-( function( $, ExpertExtender, mw ) {
+( function( $, ExpertExtender ) {
 
 	'use strict';
 
@@ -11,22 +11,25 @@
 	 *
 	 * @constructor
 	 *
+	 * @param {util.ContentLanguages} languages
 	 * @param {util.MessageProvider} messageProvider
 	 * @param {Function} getUpstreamValue
 	 * @param {Function} onValueChange
 	 */
-	ExpertExtender.LanguageSelector = function( messageProvider, getUpstreamValue, onValueChange ) {
+	ExpertExtender.LanguageSelector = function(
+		languages,
+		messageProvider,
+		getUpstreamValue,
+		onValueChange
+	) {
+		this._languages = languages;
 		this._messageProvider = messageProvider;
 		this._getUpstreamValue = getUpstreamValue;
 		this._onValueChange = onValueChange;
 
 		this.$selector = $( '<input />' );
 
-		var self = this;
-
-		this._languagesMap = getLanguagesMap( function( params ) {
-			return self._messageProvider.getMessage( self._prefix + '-languagetemplate', params );
-		} );
+		this._initLabels();
 	};
 
 	$.extend( ExpertExtender.LanguageSelector.prototype, {
@@ -49,10 +52,16 @@
 		_onValueChange: null,
 
 		/**
+		 * @property {util.ContentLanguages}
+		 * @private
+		 */
+		_languages: null,
+
+		/**
 		 * @property {Object}
 		 * @private
 		 */
-		_languagesMap: null,
+		_labels: null,
 
 		/**
 		 * @property {jQuery}
@@ -68,15 +77,34 @@
 		_prefix: 'valueview-expertextender-languageselector',
 
 		/**
+		 * @private
+		 */
+		_initLabels: function() {
+			var languages = this._languages.getAll();
+
+			var self = this;
+
+			if( languages !== null ) {
+				this._labels = {};
+				$.each( languages, function( i, code ) {
+					self._labels[code] = self._messageProvider.getMessage(
+						self._prefix + '-languagetemplate',
+						[ self._languages.getName( code ), code ]
+					);
+				};
+			}
+		},
+
+		/**
 		 * Callback for the `init` `ExpertExtender` event.
 		 *
 		 * @param {jQuery} $extender
 		 */
 		init: function( $extender ) {
-			if( this._languagesMap ) {
+			if( this._labels ) {
 				this.$selector.languagesuggester( {
-					source: $.map( this._languagesMap, function( language, code ) {
-						return { code: code, label: language };
+					source: $.map( this._labels, function( label, code ) {
+						return { code: code, label: label };
 					} ),
 					change: this._onValueChange
 				} );
@@ -93,12 +121,12 @@
 		 */
 		onInitialShow: function() {
 			var value = this._getUpstreamValue();
-			if( this._languagesMap ) {
+			if( this._labels ) {
 				// Necessary for mapping to the language code if the language is not changed.
 				// FIXME: This is obviously an access violation, and it's probably not a good idea
 				// to track this through the suggester given the current design.
 				this.$selector.data( 'languagesuggester' )._selectedValue = value;
-				value = this._languagesMap[ value ];
+				value = this._labels[ value ];
 			}
 			this.$selector.val( value );
 		},
@@ -109,7 +137,8 @@
 		destroy: function() {
 			this._getUpstreamValue = null;
 			this.$selector = null;
-			this._languagesMap = null;
+			this._languages = null;
+			this._labels = null;
 			this._messageProvider = null;
 			this._onValueChange = null;
 		},
@@ -126,26 +155,4 @@
 		}
 	} );
 
-	/**
-	 * @ignore
-	 *
-	 * @param {Function} getMsg
-	 * @return {Object}
-	 */
-	function getLanguagesMap( getMsg ) {
-		var languages = mw.config.get( 'wgULSLanguages' );
-		var languagesMap = {};
-
-		if( !languages ) {
-			return null;
-		}
-
-		$.each( languages, function( key, language ) {
-			if( !language ) {
-				return;
-			}
-			languagesMap[key] = getMsg( [ language, key ] );
-		} );
-		return languagesMap;
-	}
-} ( jQuery, jQuery.valueview.ExpertExtender, mediaWiki ) );
+} ( jQuery, jQuery.valueview.ExpertExtender ) );
