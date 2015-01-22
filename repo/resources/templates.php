@@ -58,23 +58,23 @@ HTML;
 
 	$templates['wikibase-statementgrouplistview'] =
 <<<HTML
-<div class="wikibase-statementgrouplistview">
-	<div class="wikibase-statementgrouplistview-listview"><!-- [0,*] wikibase-statementlistview -->$1</div>
-	<!-- [0,1] wikibase-toolbar -->$2
-</div>
+<div class="wikibase-statementgrouplistview"><!-- wikibase-listview -->$1</div>
 HTML;
 
-	$templates['wikibase-statementgrouplistview-groupname'] =
+	$templates['wikibase-statementgroupview'] =
 <<<HTML
-<div class="wikibase-statementgrouplistview-groupname">
-	<div class="wikibase-statementgrouplistview-groupname-name" dir="auto">$1</div>
+<div class="wikibase-statementgroupview" id="$3">
+	<div class="wikibase-statementgroupview-property">
+		<div class="wikibase-statementgroupview-property-label" dir="auto">$1</div>
+	</div>
+	<!-- wikibase-statementlistview -->$2
 </div>
 HTML;
 
 	$templates['wikibase-statementlistview'] =
 <<<HTML
 <div class="wikibase-statementlistview">
-	<div class="wikibase-statementlistview-listview" id="$3">
+	<div class="wikibase-statementlistview-listview">
 		<!-- [0,*] wikibase-statementview -->$1
 	</div>
 	<!-- [0,1] wikibase-toolbar -->$2

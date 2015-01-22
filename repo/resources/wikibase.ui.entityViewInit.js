@@ -35,7 +35,7 @@
 		var toolbarControllerConfig = {
 			toolbars: {
 				addtoolbar: [
-					'statementgrouplistview-statementlistview',
+					'statementgrouplistview-statementgroupview',
 					'statementlistview-statementview',
 					'statementview-snakview',
 					'statementview-referenceview',
