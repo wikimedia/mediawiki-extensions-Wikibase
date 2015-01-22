@@ -6,7 +6,7 @@ namespace Wikibase\DataModel\Entity;
  * Minimal interface for all objects that represent an entity.
  * All entities have an EntityId and an entity type.
  *
- * @since 0.8.2
+ * @since 0.8.2, modified in 3.0
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -30,5 +30,18 @@ interface EntityDocument {
 	 * @return string
 	 */
 	public function getType();
+
+	/**
+	 * Sets the id of the entity. If the id is not of the correct type,
+	 * an exception will be thrown. A specific derivative of EntityId is
+	 * always supported.
+	 *
+	 * @since 3.0
+	 *
+	 * @param EntityId $id
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	public function setId( $id );
 
 }
