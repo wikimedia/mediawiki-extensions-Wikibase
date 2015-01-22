@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
 class NullSubscriptionManager implements SubscriptionManager {
 
 	/**
-	 * Subscribes the given subscriber to notificatiosn about changes on the specified entities.
+	 * Subscribes the given subscriber to notifications about changes on the specified entities.
 	 *
 	 * @param string $subscriber Global site ID of the subscriber
 	 * @param EntityId[] $entityIds The entities to subscribe to.
@@ -25,7 +25,7 @@ class NullSubscriptionManager implements SubscriptionManager {
 	}
 
 	/**
-	 * Unsubscribes the given subscriber from notificatiosn about changes on the specified entities.
+	 * Unsubscribes the given subscriber from notifications about changes on the specified entities.
 	 *
 	 * @param string $subscriber Global site ID of the subscriber
 	 * @param EntityId[] $entityIds The entities to subscribe to.
