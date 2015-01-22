@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Test;
 use Language;
 use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;

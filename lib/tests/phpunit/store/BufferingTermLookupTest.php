@@ -59,7 +59,7 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 
 		$termIndex->expects( $this->exactly( $getTermsOfEntityCalls ) )
 			->method( 'getTermsOfEntity' )
-			->will( $this->returnCallback( function( EntityID $id, $termTypes, $languages = null ) use ( $terms ) {
+			->will( $this->returnCallback( function( EntityId $id, $termTypes, $languages = null ) use ( $terms ) {
 				if ( $languages !== null ) {
 					$terms = array_intersect_key( $terms, array_flip( $languages ) );
 				}
