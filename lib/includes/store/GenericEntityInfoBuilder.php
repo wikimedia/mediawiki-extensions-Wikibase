@@ -7,6 +7,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * EntityInfoBuilder based on an EntityLookup.
@@ -168,31 +172,44 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 
 			if ( !$entity ) {
 				// hack: fake an empty entity, so the field get initialized
-				$entity = Item::newEmpty();
+				$entity = new Item();
 			}
 
-			if ( $types === null || in_array( 'label', $types ) ) {
-				$this->injectLabels( $entityRecord, $entity, $languages );
-			}
-
-			if ( $types === null || in_array( 'description', $types ) ) {
-				$this->injectDescriptions( $entityRecord, $entity, $languages );
-			}
-
-			if ( $types === null || in_array( 'alias', $types ) ) {
-				$this->injectAliases( $entityRecord, $entity, $languages );
+			// FIXME: OCP violation
+			// This code does not allow extensions that define new entity types with
+			// new types of terms to register appropriate support for those here.
+			if ( $entity instanceof FingerprintProvider ) {
+				$this->injectFingerprint( $types, $entityRecord, $entity->getFingerprint(), $languages );
 			}
 		}
 	}
 
-	private function injectLabels( array &$entityRecord, Entity $entity, $languages ) {
-		$labels = $entity->getLabels( $languages );
+	private function injectFingerprint( $types, array &$entityRecord, Fingerprint $fingerprint, $languages ) {
+		if ( $types === null || in_array( 'label', $types ) ) {
+			$this->injectLabels(
+				$entityRecord,
+				$fingerprint->getLabels()->getWithLanguages( $languages )
+			);
+		}
 
+		if ( $types === null || in_array( 'description', $types ) ) {
+			$this->injectDescriptions(
+				$entityRecord,
+				$fingerprint->getDescriptions()->getWithLanguages( $languages )
+			);
+		}
+
+		if ( $types === null || in_array( 'alias', $types ) ) {
+			$this->injectAliases( $entityRecord, $fingerprint->getAliasGroups(), $languages );
+		}
+	}
+
+	private function injectLabels( array &$entityRecord, TermList $labels ) {
 		if ( !isset( $entityRecord['labels'] ) ) {
 			$entityRecord['labels'] = array();
 		}
 
-		foreach ( $labels as $lang => $text ) {
+		foreach ( $labels->toTextArray() as $lang => $text ) {
 			$entityRecord['labels'][$lang] = array(
 				'language' => $lang,
 				'value' => $text,
@@ -200,14 +217,12 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		}
 	}
 
-	private function injectDescriptions( array &$entityRecord, Entity $entity, $languages ) {
-		$descriptions = $entity->getDescriptions( $languages );
-
+	private function injectDescriptions( array &$entityRecord, TermList $descriptions ) {
 		if ( !isset( $entityRecord['descriptions'] ) ) {
 			$entityRecord['descriptions'] = array();
 		}
 
-		foreach ( $descriptions as $lang => $text ) {
+		foreach ( $descriptions->toTextArray() as $lang => $text ) {
 			$entityRecord['descriptions'][$lang] = array(
 				'language' => $lang,
 				'value' => $text,
@@ -215,9 +230,9 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		}
 	}
 
-	private function injectAliases( array &$entityRecord, Entity $entity, $languages ) {
+	private function injectAliases( array &$entityRecord, AliasGroupList $aliasGroups, $languages ) {
 		if ( $languages === null ) {
-			$languages = array_keys( $entity->getAllAliases() );
+			$languages = array_keys( $aliasGroups->toArray() );
 		}
 
 		if ( !isset( $entityRecord['aliases'] ) ) {
@@ -225,10 +240,9 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		}
 
 		foreach ( $languages as $lang ) {
-			$aliases = $entity->getAliases( $lang );
 			$entityRecord['aliases'][$lang] = array();
 
-			foreach ( $aliases as $text ) {
+			foreach ( $aliasGroups->getByLanguage( $lang )->getAliases() as $text ) {
 				$entityRecord['aliases'][$lang][] = array( // note: append
 					'language' => $lang,
 					'value' => $text,
