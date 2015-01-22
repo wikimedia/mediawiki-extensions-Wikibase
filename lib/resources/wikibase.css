@@ -211,11 +211,10 @@ div.wikibase-statementview textarea {
 	float: left;
 	width: 100%;
 	border: 1px solid #C9C9C9;
-	margin-bottom: 1em; /* gap between sections */
 }
 
 /* Container for the section title */
-.wikibase-statementgrouplistview .wikibase-statementgrouplistview-groupname {
+.wikibase-statementgrouplistview .wikibase-statementgroupview-property {
 	width: 15em;
 	background: #E8E8E8;
 	position: absolute;
@@ -229,7 +228,7 @@ div.wikibase-statementview textarea {
 }
 
 /* The actual section title (the linked property name) */
-.wikibase-statementgrouplistview .wikibase-statementgrouplistview-groupname .wikibase-statementgrouplistview-groupname-name {
+.wikibase-statementgrouplistview .wikibase-statementgroupview-property .wikibase-statementgroupview-property-label {
 	float: left;
 	word-wrap: break-word;
 	padding: 10px;
@@ -251,6 +250,14 @@ div.wikibase-statementview-mainsnak {
 
 div.wikibase-statementview-mainsnak .wb-snak-property-container {
 	display: none;
+}
+.wikibase-statementview.wb-new .wikibase-statementview-mainsnak .wb-snak-property-container {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -15em;
+	width: 15em;
+	display: block;
 }
 
 div.wb-snak {
@@ -317,12 +324,12 @@ div .wb-snak-value span.error.wb-format-error {
 	display: none;
 }
 
-.wikibase-statementgrouplistview .wikibase-statementgrouplistview-groupname.wb-edit,
+.wikibase-statementgrouplistview .wikibase-statementgroupview-property.wb-edit,
 .wikibase-statementlistview-listview .wb-edit .wb-snak-property-container {
 	background-color: #C0DAE5;
 }
 
-.wikibase-statementgrouplistview .wikibase-statementgrouplistview-groupname.wb-error,
+.wikibase-statementgrouplistview .wikibase-statementgroupview-property.wb-error,
 .wb-error div.wb-claim-new .wb-snak-property-container {
 	background-color: #E5C8B5;
 }
@@ -353,15 +360,6 @@ div .wb-snak-value span.error.wb-format-error {
 
 .wikibase-statementgrouplistview .wb-new .wikibase-statementview-mainsnak {
 	margin: 0 18em 0 15em;
-}
-
-.wikibase-statementgrouplistview .wikibase-statementlistview.wb-new .wb-snak-property-container {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: -15em;
-	width: 15em;
-	display: block;
 }
 
 .wikibase-statementgrouplistview .wb-new .wb-snak-property {

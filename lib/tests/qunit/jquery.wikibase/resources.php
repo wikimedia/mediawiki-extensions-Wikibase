@@ -55,7 +55,40 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.statementgrouplistview',
-				'wikibase.datamodel'
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.StatementGroupSet',
+				'wikibase.datamodel.StatementList',
+			),
+		),
+
+		'jquery.wikibase.statementgroupview.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.wikibase.statementgroupview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.statementgroupview',
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.PropertySomeValueSnak',
+				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.StatementList',
+			),
+		),
+
+		'jquery.wikibase.statementlistview.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.wikibase.statementlistview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.statementlistview',
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementList',
 			),
 		),
 

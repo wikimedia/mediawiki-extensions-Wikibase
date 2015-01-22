@@ -69,13 +69,12 @@ class StatementGroupListView {
 
 		$claimsHtml = '';
 		foreach ( $claimsByProperty as $claims ) {
-			$claimsHtml .= $this->getHtmlForClaimGroup( $claims );
+			$claimsHtml .= $this->getHtmlForStatementGroupView( $claims );
 		}
 
 		$html = $this->templateFactory->render(
 			'wikibase-statementgrouplistview',
-			$claimsHtml,
-			''
+			$this->templateFactory->render( 'wb-listview', $claimsHtml )
 		);
 
 		// TODO: Add link to SpecialPage that allows adding a new claim.
@@ -118,33 +117,43 @@ class StatementGroupListView {
 	}
 
 	/**
-	 * Returns the HTML for a group of claims.
-	 *
 	 * @param Claim[] $claims
 	 * @return string
 	 */
-	private function getHtmlForClaimGroup( array $claims ) {
-		$propertyHtml = '';
-
+	private function getHtmlForStatementGroupView( array $claims ) {
 		$propertyId = $claims[0]->getMainSnak()->getPropertyId();
-		$propertyLink = $this->propertyIdFormatter->format( $propertyId );
+
+		return $this->templateFactory->render(
+			'wikibase-statementgroupview',
+			$this->propertyIdFormatter->format( $propertyId ),
+			$this->getHtmlForStatementListView( $claims ),
+			$propertyId->getSerialization()
+		);
+	}
+
+	/**
+	 * @param Claim[] $claims
+	 * @return string
+	 */
+	private function getHtmlForStatementListView( array $claims ) {
+		$statementViewsHtml = '';
 
 		// TODO: add link to SpecialPage
-		$htmlForEditSection = $this->sectionEditLinkGenerator->getHtmlForEditSection(
+		$editToolbarHtml = $this->sectionEditLinkGenerator->getHtmlForEditSection(
 			'',
 			array(),
 			'edit',
 			wfMessage( 'wikibase-edit' )
 		);
 
-		foreach ( $claims as $claim ) {
-			$propertyHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
+		foreach( $claims as $claim ) {
+			$statementViewsHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 				$claim,
-				$htmlForEditSection
+				$editToolbarHtml
 			);
 		}
 
-		$toolbarHtml = $this->templateFactory->render( 'wikibase-toolbar-wrapper',
+		$addToolbarHtml = $this->templateFactory->render( 'wikibase-toolbar-wrapper',
 			$this->sectionEditLinkGenerator->getSingleButtonToolbarHtml(
 				'',
 				array(),
@@ -154,12 +163,8 @@ class StatementGroupListView {
 		);
 
 		return $this->templateFactory->render( 'wikibase-statementlistview',
-			$propertyHtml,
-			$this->templateFactory->render(
-				'wikibase-statementgrouplistview-groupname',
-				$propertyLink
-			) . $toolbarHtml,
-			$propertyId->getSerialization()
+			$statementViewsHtml,
+			$addToolbarHtml
 		);
 	}
 
