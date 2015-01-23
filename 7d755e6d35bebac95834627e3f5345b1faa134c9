@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_01356542",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-23T15:00:01Z",
+      "side": 1,
+      "message": "return this._languageMap \u0026\u0026 this._languageMap[code];\n\n... but that\u0027s a question of personal style, I think.",
+      "revId": "7d755e6d35bebac95834627e3f5345b1faa134c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
