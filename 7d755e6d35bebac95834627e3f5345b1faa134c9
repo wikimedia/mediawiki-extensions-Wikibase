@@ -16,6 +16,24 @@
       "revId": "7d755e6d35bebac95834627e3f5345b1faa134c9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_21242907",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-23T15:04:07Z",
+      "side": 1,
+      "message": "I\u0027d usually do that, too, but I explicitly want to return null, since that\u0027s what the interface demands, not undefined or false or empty string.",
+      "parentUuid": "ae6ac7d6_01356542",
+      "revId": "7d755e6d35bebac95834627e3f5345b1faa134c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
