@@ -122,7 +122,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "אתר:",
 	"wikibase-gotolinkedpage-lookup-item": "מזהה פריט:",
 	"wikibase-gotolinkedpage-submit": "מעבר",
-	"wikibase-gotolinkedpage-summary": "הדף המיוחד Special:GoToLinkedPage משמש למציאת אתר לפריט של דף מחובר.<br /> בשדה הימני, \"אתר:\", יש לזין את קודם השפה ואת הקוד של האתר.<br /> השדה השמאלי \">\") צרי לרשום את הפריט שחיפשת.",
+	"wikibase-gotolinkedpage-summary": "הדף המיוחד Special:GoToLinkedPage משמש למציאת אתר לפריט של דף מחובר.<br /> בשדה הימני, \"אתר:\", יש לזין את קודם השפה ואת הקוד של האתר.<br /> השדה השמאלי \"מזהה פריט\" צריך לרשום את הפריט שחיפשת.",
 	"special-itemdisambiguation": "הבהרת פירוש של פריט",
 	"wikibase-itemdisambiguation-lookup-fieldset": "חיפוש פריטים לפי שפה ותווית",
 	"wikibase-itemdisambiguation-lookup-language": "שפה:",

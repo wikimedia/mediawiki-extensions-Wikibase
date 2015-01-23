@@ -21,6 +21,7 @@
 	"wikibase-error-autocomplete-response": "השרת ענה: $1",
 	"wikibase-error-ui-no-external-page": "הערך שהוזן לא נמצא באתר המתאים.",
 	"wikibase-error-ui-edit-conflict": "אירעה התנגשות עריכה. נא לרענן את הדף ולשמור מחדש.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (מתועתק)",
 	"wikibase-quantitydetails-amount": "כמות",
 	"wikibase-quantitydetails-upperbound": "גבול עליון",
 	"wikibase-quantitydetails-lowerbound": "גבול תחתון",
