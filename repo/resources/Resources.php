@@ -187,7 +187,6 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'pagetitle',
-				'wikibase-statements',
 				'wikibase-copyrighttooltip-acknowledge',
 				'wikibase-anonymouseditwarning',
 				'wikibase-entity-item',
