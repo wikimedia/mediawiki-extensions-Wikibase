@@ -58,6 +58,38 @@
 		assert.equal( languageSelector.getValue(), 'en' );
 	} );
 
+	QUnit.test( 'returns correct value after initialization', function( assert ) {
+		var languageSelector = new ExpertExtender.LanguageSelector(
+			{
+				getAll: function() { return [ 'en' ]; },
+				getName: function( code ) { return code; }
+			},
+			new util.MessageProvider( {
+				messageGetter: function( key ) {
+					return arguments.length > 1
+						? Array.prototype.slice.call( arguments, 1 ).join( ' ' )
+						: key;
+				}
+			} ),
+			function() {
+				return 'en';
+			}
+		);
+		var $extender = $( '<div />' );
+
+		languageSelector.init( $extender );
+
+		if( languageSelector.onInitialShow ) {
+			languageSelector.onInitialShow();
+		}
+
+		if( languageSelector.draw ) {
+			languageSelector.draw();
+		}
+
+		assert.equal( languageSelector.getValue(), 'en' );
+	} );
+
 } )(
 	jQuery,
 	jQuery.valueview.ExpertExtender,
