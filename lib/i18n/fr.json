@@ -16,7 +16,8 @@
 			"Tititou36",
 			"Wyz",
 			"Scoopfinder",
-			"Macofe"
+			"Macofe",
+			"Benjozork"
 		]
 	},
 	"wikibase-lib-desc": "Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client",
@@ -34,6 +35,7 @@
 	"wikibase-error-autocomplete-response": "Le serveur a répondu&nbsp;: $1",
 	"wikibase-error-ui-no-external-page": "L'article spécifié est introuvable sur le site correspondant.",
 	"wikibase-error-ui-edit-conflict": "Il y a conflit d’édition. Rechargez la page et enregistrez de nouveau.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (translittéré)",
 	"wikibase-quantitydetails-amount": "Montant",
 	"wikibase-quantitydetails-upperbound": "Limite supérieure",
 	"wikibase-quantitydetails-lowerbound": "Limite inférieure",

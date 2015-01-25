@@ -30,7 +30,8 @@
 			"SnowedEarth",
 			"Verdy p",
 			"Elodark",
-			"Macofe"
+			"Macofe",
+			"Benjozork"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -143,6 +144,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Site :",
 	"wikibase-gotolinkedpage-lookup-item": "Id de l’élément :",
 	"wikibase-gotolinkedpage-submit": "Aller",
+	"wikibase-gotolinkedpage-summary": "Spécial:GoToLinkedPage est utilisé pour trouver le site pour un article sur un appareil raccordé page.<br /> Le champ de gauche, \"Site:\", est l'endroit où vous entrez dans la langue et le code du site.<br /> Pour le champ de droite, \"id de l'Élément:\", vous devez mettre l'id de l'élément que vous recherchez.",
 	"special-itemdisambiguation": "Homonymie d’éléments",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Rechercher des éléments par langue et libellé",
 	"wikibase-itemdisambiguation-lookup-language": "Langue&nbsp;:",
@@ -153,6 +155,7 @@
 	"wikibase-itemdisambiguation-create": "Vous pouvez [{{fullurl:Special:NewItem|label=$1}} créer l’élément].",
 	"wikibase-itemdisambiguation-invalid-langcode": "Désolé, le code de langue que vous avez fourni n’est pas connu du système. Veuillez utiliser un code valide, comme « fr ».",
 	"wikibase-itemdisambiguation-description": "Les valeurs utilisées pour la recherche doivent être le texte entier. La langue est un identifiant, comme «&nbsp;en&nbsp;».",
+	"wikibase-itemdisambiguation-summary": "Rechercher tous les éléments avec la même étiquette.",
 	"special-newproperty": "Créer une nouvelle propriété",
 	"wikibase-newproperty-summary": "Assurez-vous que [[Special:PropertyDisambiguation|la propriété n’existe pas déjà]] !<br />Vous devriez créer un [[Help:Label|libellé]] et une [[Help:Description|description]] pour toutes les nouvelles propriétés, ainsi qu’un type de propriété valide.",
 	"wikibase-newproperty-fieldset": "Créer une nouvelle propriété",
@@ -164,7 +167,6 @@
 	"wikibase-newitem-site": "Site de la première page liée",
 	"wikibase-newitem-page": "Nom de la première page liée",
 	"wikibase-newitem-no-external-page": "La page spécifiée est introuvable sur le site correspondant.",
-	"wikibase-newitem-add-sitelink-failed": "Le lien du site n’a pas pu être enregistré.",
 	"wikibase-newitem-not-recognized-siteid": "L’identifiant de site fourni n’a pas été reconnu.",
 	"wikibase-newentity-label": "Libellé&nbsp;:",
 	"wikibase-newentity-description": "Description&nbsp;:",

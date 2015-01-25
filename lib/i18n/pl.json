@@ -7,7 +7,8 @@
 			"Lazowik",
 			"Maćko",
 			"Rzuwig",
-			"WTM"
+			"WTM",
+			"Debeet"
 		]
 	},
 	"wikibase-lib-desc": "Zawiera wspólne funkcje dla rozszerzeń Wikibase i Wikibase Client",
@@ -25,6 +26,7 @@
 	"wikibase-error-autocomplete-response": "Serwer odpowiedział: $1",
 	"wikibase-error-ui-no-external-page": "Nie można odnaleźć artykułu na odpowiadającej witrynie.",
 	"wikibase-error-ui-edit-conflict": "Wystąpił konflikt edycji. Załaduj raz jeszcze i zapisz.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (transliterowane)",
 	"wikibase-quantitydetails-amount": "Liczność",
 	"wikibase-quantitydetails-upperbound": "Górna granica",
 	"wikibase-quantitydetails-lowerbound": "Dolna granica",

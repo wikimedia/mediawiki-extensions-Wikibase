@@ -6,7 +6,8 @@
 			"Hede2000",
 			"HenrikKbh",
 			"Poul G",
-			"Steenth"
+			"Steenth",
+			"Peter Alberti"
 		]
 	},
 	"wikibase-client-desc": "Klient til Wikibase-udvidelsen",
@@ -43,9 +44,12 @@
 	"wikibase-linkitem-success-link": "Siderne er blevet linket. Du kan finde det emne, der indeholder links, i vores [$1 centrale datadepot].",
 	"wikibase-property-notfound": "Egenskaben $1 ikke fundet.",
 	"wikibase-rc-hide-wikidata": "$1 Wikidata",
+	"wikibase-rc-hide-wikidata-hide": "Skjul",
+	"wikibase-rc-hide-wikidata-show": "Vis",
 	"wikibase-rc-show-wikidata-pref": "Vis redigeringer af Wikidata i seneste ændringer",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Dette er en redigering af Wikidata",
+	"wikibase-replicationnote": "Vær opmærksom på, at der kan gå flere minutter før ændringerne er synlige på alle wikier.",
 	"wikibase-watchlist-show-changes-pref": "Vis redigeringer af Wikidata på din overvågningsliste",
 	"wikibase-error-serialize-error": "Serialisering af data mislykkkedes",
 	"wikibase-error-invalid-entity-id": "Den indtastede ID er ukendt i systemet. Anvend venligst en gyldig ID.",
