@@ -69,10 +69,10 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->langLinkHandler = $this->getLangLinkHandler( array() );
+		$this->langLinkHandler = $this->getLangLinkHandler();
 	}
 
-	private function getLangLinkHandler( array $otherProjects ) {
+	private function getLangLinkHandler( array $otherProjects = array() ) {
 		$this->mockRepo = new MockRepository();
 
 		foreach ( $this->getItems() as $item ) {
@@ -460,7 +460,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 		$out = $this->makeParserOutput( $langLinks, $noExternalLangLinks );
 
-		$langLinkHandler = $this->getLangLinkHandler( array() );
+		$langLinkHandler = $this->getLangLinkHandler();
 		$langLinkHandler->addLinksFromRepository( $title, $out );
 
 		$this->assertArrayEquals( $expectedLinks, $out->getLanguageLinks(), false, false );
@@ -602,7 +602,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateItemIdProperty() {
-		$langLinkHandler = $this->getLangLinkHandler( array() );
+		$langLinkHandler = $this->getLangLinkHandler();
 
 		$parserOutput = new ParserOutput();
 
@@ -627,7 +627,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateItemIdPropertyForUnconnectedPage() {
-		$langLinkHandler = $this->getLangLinkHandler( array() );
+		$langLinkHandler = $this->getLangLinkHandler();
 
 		$parserOutput = new ParserOutput();
 
