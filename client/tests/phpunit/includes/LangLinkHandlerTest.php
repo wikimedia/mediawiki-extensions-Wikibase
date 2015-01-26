@@ -68,7 +68,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->langLinkHandler = $this->getLangLinkHandler( array() );
+		$this->langLinkHandler = $this->getLangLinkHandler();
 	}
 
 	/**
@@ -76,7 +76,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @return LangLinkHandler
 	 */
-	private function getLangLinkHandler( array $otherProjects ) {
+	private function getLangLinkHandler( array $otherProjects = array() ) {
 		$this->mockRepo = new MockRepository();
 
 		foreach ( $this->getItems() as $item ) {
@@ -469,8 +469,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 		$out = $this->makeParserOutput( $langLinks, $noExternalLangLinks );
 
-		$langLinkHandler = $this->getLangLinkHandler( array() );
-		$langLinkHandler->addLinksFromRepository( $title, $out );
+		$this->langLinkHandler->addLinksFromRepository( $title, $out );
 
 		$this->assertArrayEquals( $expectedLinks, $out->getLanguageLinks(), false, false );
 		$this->assertArrayEquals( $expectedBadges, $out->getExtensionData( 'wikibase_badges' ), false, true );
@@ -611,14 +610,12 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateItemIdProperty() {
-		$langLinkHandler = $this->getLangLinkHandler( array() );
-
 		$parserOutput = new ParserOutput();
 
 		$titleText = 'Foo sr';
 		$title = Title::newFromText( $titleText );
 
-		$langLinkHandler->updateItemIdProperty( $title, $parserOutput );
+		$this->langLinkHandler->updateItemIdProperty( $title, $parserOutput );
 		$property = $parserOutput->getProperty( 'wikibase_item' );
 
 		$itemId = $this->mockRepo->getItemIdForLink( 'srwiki', $titleText );
@@ -636,14 +633,12 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateItemIdPropertyForUnconnectedPage() {
-		$langLinkHandler = $this->getLangLinkHandler( array() );
-
 		$parserOutput = new ParserOutput();
 
 		$titleText = 'Foo xx';
 		$title = Title::newFromText( $titleText );
 
-		$langLinkHandler->updateItemIdProperty( $title, $parserOutput );
+		$this->langLinkHandler->updateItemIdProperty( $title, $parserOutput );
 		$property = $parserOutput->getProperty( 'wikibase_item' );
 
 		$this->assertEquals( false, $property );
