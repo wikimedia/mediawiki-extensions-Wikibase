@@ -6,7 +6,6 @@ use Html;
 use Status;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\SiteLink;
 
 /**
  * Page for creating new Wikibase items.
