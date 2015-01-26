@@ -59,7 +59,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$propertyIdFormatterMock,
 			new PropertySomeValueSnak( 42 ),
 			array(
-				'snak variation css' => '/wb-snakview-variation-somevalue/',
+				'snak variation css' => '/wikibase-snakview-variation-somevalue/',
 				'formatted snak' => '/a snak!/'
 			)
 		);
@@ -69,7 +69,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$propertyIdFormatterMock,
 			new PropertySomeValueSnak( 42 ),
 			array(
-				'snak variation css' => '/wb-snakview-variation-somevalue/',
+				'snak variation css' => '/wikibase-snakview-variation-somevalue/',
 				'formatted snak' => '/a snak!/s'
 			)
 		);
@@ -79,7 +79,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$propertyIdFormatterMock,
 			new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
 			array(
-				'snak variation css' => '/wb-snakview-variation-value/',
+				'snak variation css' => '/wikibase-snakview-variation-value/',
 				'formatted snak' => '/a snak!/s'
 			)
 		);
