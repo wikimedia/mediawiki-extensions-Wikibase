@@ -117,11 +117,11 @@ HTML;
 </div>
 HTML;
 
-	$templates['wb-referenceview'] =
+	$templates['wikibase-referenceview'] =
 <<<HTML
-<div class="wb-referenceview $1">
-	<div class="wb-referenceview-heading"></div>
-	<div class="wb-referenceview-listview">$2<!-- [0,*] wikibase-snaklistview --></div>
+<div class="wikibase-referenceview $1">
+	<div class="wikibase-referenceview-heading"></div>
+	<div class="wikibase-referenceview-listview">$2<!-- [0,*] wikibase-snaklistview --></div>
 </div>
 HTML;
 
