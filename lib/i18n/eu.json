@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Subi"
 		]
 	},
+	"wikibase-language-fallback-transliteration-hint": "$1 (transliteratuta)",
 	"wikibase-tooltip-error-details": "Xehetasunak"
 }

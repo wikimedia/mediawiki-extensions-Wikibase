@@ -8,7 +8,7 @@
 		]
 	},
 	"wikibase-client-desc": "Клијент за проширење Викибаза",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}} клијент",
+	"specialpages-group-wikibaseclient": "Клијент Википодатака",
 	"tooltip-t-wikibase": "Веза ка ставки на Википодацима",
 	"wikibase-after-page-move": "Можете такође [$1 ажурирати] придружене ставке на Википодацима ради одржавања језичких веза на премештеној страници.",
 	"wikibase-after-page-move-queued": "[$1 Ставка Википодатака] повезана са овом страницом ће се ускоро аутоматски ажурирати.",
@@ -46,7 +46,7 @@
 	"wikibase-rc-hide-wikidata-show": "Прикажи",
 	"wikibase-rc-show-wikidata-pref": "Прикажи измене на Википодацима у скорашњим изменама",
 	"wikibase-rc-wikibase-edit-letter": "д",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} измена",
+	"wikibase-rc-wikibase-edit-title": "Измена на Википодацима",
 	"wikibase-replicationnote": "Имајте на уму да је потребно и до неколико минута да промене постану видљиве на свим викијима.",
 	"wikibase-watchlist-show-changes-pref": "Прикажи измене на Википодацима у списку надгледања",
 	"wikibase-error-serialize-error": "Неуспешна серијализација података",

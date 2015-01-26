@@ -25,6 +25,7 @@
 	"wikibase-error-autocomplete-response": "Odpověď serveru: $1",
 	"wikibase-error-ui-no-external-page": "Takový článek nebyl na příslušném webu nalezen.",
 	"wikibase-error-ui-edit-conflict": "Nastal editační konflikt. Prosím obnovte stránku a uložte ji znovu.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (transliterováno)",
 	"wikibase-quantitydetails-amount": "Množství",
 	"wikibase-quantitydetails-upperbound": "Horní mez",
 	"wikibase-quantitydetails-lowerbound": "Dolní mez",
