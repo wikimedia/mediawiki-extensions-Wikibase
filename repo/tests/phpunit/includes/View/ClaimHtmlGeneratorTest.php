@@ -114,7 +114,7 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$propertyIdFormatterMock,
 			new Claim( new PropertySomeValueSnak( 42 ) ),
 			array(
-				'snak variation css' => '/wb-snakview-variation-somevalue/',
+				'snak variation css' => '/wikibase-snakview-variation-somevalue/',
 				'formatted snak' => '/a snak!/'
 			)
 		);
@@ -129,7 +129,7 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 				) )
 			),
 			array(
-				'snak variation css' => '/wb-snakview-variation-somevalue/',
+				'snak variation css' => '/wikibase-snakview-variation-somevalue/',
 				'formatted snak' => '/a snak!.*a snak!/s'
 			)
 		);
@@ -147,7 +147,7 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 				) ) ) ) )
 			),
 			array(
-				'snak variation css' => '/wb-snakview-variation-value/',
+				'snak variation css' => '/wikibase-snakview-variation-value/',
 				'formatted snak' => '/a snak!.*a snak!/s'
 			)
 		);

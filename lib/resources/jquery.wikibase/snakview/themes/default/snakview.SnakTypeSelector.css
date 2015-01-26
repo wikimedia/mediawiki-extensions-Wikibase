@@ -1,4 +1,4 @@
-.wb-snak-typeselector .wb-snaktypeselector {
+.wikibase-snakview-typeselector .wikibase-snaktypeselector {
 	border: none;
 }
 
@@ -17,7 +17,7 @@
 	background-image: url(images/ui-icon_snaktypeselector_666666.png);
 }
 
-.wb-snaktypeselector-menu {
+.wikibase-snaktypeselector-menu {
 	position: absolute;
 	z-index: 2; /* Monobook #content has 2 */
 }

@@ -248,10 +248,10 @@ div.wikibase-statementview-mainsnak {
 	word-wrap: break-word;
 }
 
-div.wikibase-statementview-mainsnak .wb-snak-property-container {
+div.wikibase-statementview-mainsnak .wikibase-snakview-property-container {
 	display: none;
 }
-.wikibase-statementview.wb-new .wikibase-statementview-mainsnak .wb-snak-property-container {
+.wikibase-statementview.wb-new .wikibase-statementview-mainsnak .wikibase-snakview-property-container {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -260,16 +260,16 @@ div.wikibase-statementview-mainsnak .wb-snak-property-container {
 	display: block;
 }
 
-div.wb-snak {
+div.wikibase-snakview {
 	padding: 10px;
 }
 
-div.wb-snak .wb-snak-value-container {
+div.wikibase-snakview .wikibase-snakview-value-container {
 	margin-left: 16px;
 	min-height: .8em; /* reduces jumping when clicking edit */
 }
 
-div .wb-snak-value span.error.wb-format-error {
+div .wikibase-snakview-value span.error.wb-format-error {
 	display: block;
 	color: red;
 	font-size: inherit;
@@ -325,12 +325,12 @@ div .wb-snak-value span.error.wb-format-error {
 }
 
 .wikibase-statementgrouplistview .wikibase-statementgroupview-property.wb-edit,
-.wikibase-statementlistview-listview .wb-edit .wb-snak-property-container {
+.wikibase-statementlistview-listview .wb-edit .wikibase-snakview-property-container {
 	background-color: #C0DAE5;
 }
 
 .wikibase-statementgrouplistview .wikibase-statementgroupview-property.wb-error,
-.wb-error div.wb-claim-new .wb-snak-property-container {
+.wb-error div.wb-claim-new .wikibase-snakview-property-container {
 	background-color: #E5C8B5;
 }
 
@@ -362,50 +362,50 @@ div .wb-snak-value span.error.wb-format-error {
 	margin: 0 18em 0 15em;
 }
 
-.wikibase-statementgrouplistview .wb-new .wb-snak-property {
+.wikibase-statementgrouplistview .wb-new .wikibase-snakview-property {
 	padding: 10px;
 }
 
-.wikibase-statementgrouplistview .wb-new .wb-snak-property input {
+.wikibase-statementgrouplistview .wb-new .wikibase-snakview-property input {
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-.wikibase-statementgrouplistview .wb-new .wb-snak-value {
+.wikibase-statementgrouplistview .wb-new .wikibase-snakview-value {
 	min-height: 1.5em;
 	max-width: 32em;
 }
 
-.wb-snak-typeselector {
+.wikibase-snakview-typeselector {
 	position: absolute;
 	left: 10px;
 	width: 16px;
 	cursor: pointer;
 }
 
-.wb-snakview-unsupportedsnaktype,
-.wb-snakview-variation-valuesnak-unsupporteddatavalue,
-.wb-snakview-variation-valuesnak-datavaluetypemismatch,
-.wb-snakview-variation-valuesnak-nonewvaluefordeletedproperty,
-.wb-snakview-variation-somevaluesnak,
-.wb-snakview-variation-novaluesnak {
+.wikibase-snakview-unsupportedsnaktype,
+.wikibase-snakview-variation-valuesnak-unsupporteddatavalue,
+.wikibase-snakview-variation-valuesnak-datavaluetypemismatch,
+.wikibase-snakview-variation-valuesnak-nonewvaluefordeletedproperty,
+.wikibase-snakview-variation-somevaluesnak,
+.wikibase-snakview-variation-novaluesnak {
 	color: #565656;
 	font-style: italic;
 	line-height: 1.2;
 }
 
-.wb-snakview-variation-valuesnak-datavaluetypemismatch,
-.wb-snakview-variation-valuesnak-nonewvaluefordeletedproperty {
+.wikibase-snakview-variation-valuesnak-datavaluetypemismatch,
+.wikibase-snakview-variation-valuesnak-nonewvaluefordeletedproperty {
 	color: red;
 }
-.wb-snakview-variation-valuesnak-datavaluetypemismatch-message div {
+.wikibase-snakview-variation-valuesnak-datavaluetypemismatch-message div {
 	font-size: 84%;
 	margin-top: 0.4em;
 }
 
-.wb-snakview-variation-valuesnak textarea {
+.wikibase-snakview-variation-valuesnak textarea {
 	width: 100%;
 }
 
@@ -427,45 +427,45 @@ div .wb-snak-value span.error.wb-format-error {
 	border-color: #C0DAE5;
 }
 
-.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wb-snak-property {
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-property {
 	width: 12em;
 	position: absolute;
 	font-size: 90%;
 }
 
-.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wb-snak-property input {
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-property input {
 	width: 100%;
 	font-size: 100%;
 	top: 0;
 	position: absolute;
 }
 
-.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wb-snak-value-container {
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-value-container {
 	margin-left: 12em;
 	position: relative;
 }
 
-.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wb-snak-value-container .wb-snak-value {
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value {
 	margin-left: 16px;
 	margin-right: 18em;
 	word-wrap: break-word;
 }
 
-.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wb-snak-value-container .wb-snak-value .valueview-value {
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value .valueview-value {
 	font-size: 90%;
 }
 
-.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wb-snak-value-container .wb-snak-typeselector {
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-typeselector {
 	left: 0;
 }
 
-.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wb-snak-value-container .wb-snak-value .valueview-value textarea {
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value .valueview-value textarea {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wb-snakview {
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview {
 	position: relative;
 	min-height: 1.8em;
 	padding-top: 4px;
@@ -473,7 +473,7 @@ div .wb-snak-value span.error.wb-format-error {
 }
 
 /* "remove" link at each reference's snak */
-.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wb-snakview > .wikibase-toolbar-container {
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview > .wikibase-toolbar-container {
 	top: 5px;
 }
 
@@ -579,45 +579,45 @@ div .wb-snak-value span.error.wb-format-error {
 	border-color: #C0DAE5;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wb-snak-property {
+.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-property {
 	width: 12em;
 	position: absolute;
 	font-size: 90%;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wb-snak-property input {
+.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-property input {
 	width: 100%;
 	font-size: 100%;
 	top: 0;
 	position: absolute;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wb-snak-value-container {
+.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container {
 	margin-left: 12em;
 	position: relative;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wb-snak-value-container .wb-snak-value {
+.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value {
 	margin-left: 16px;
 	margin-right: 18em;
 	word-wrap: break-word;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wb-snak-value-container .wb-snak-value .valueview-value {
+.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value .valueview-value {
 	font-size: 90%;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wb-snak-value-container .wb-snak-typeselector {
+.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-typeselector {
 	left: 0;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wb-snak-value-container .wb-snak-value .valueview-value textarea {
+.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value .valueview-value textarea {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wb-snakview {
+.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview {
 	position: relative;
 	min-height: 1.8em;
 	padding-top: 4px;
@@ -635,7 +635,7 @@ div .wb-snak-value span.error.wb-format-error {
 }
 
 /* "remove" link at each reference's snak */
-.wb-referenceview .wikibase-snaklistview-listview .wb-snakview > .wb-removetoolbar {
+.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview > .wb-removetoolbar {
 	position: absolute;
 	top: 5px;
 	right: 0;
