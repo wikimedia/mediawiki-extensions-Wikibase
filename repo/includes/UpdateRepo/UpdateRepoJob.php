@@ -54,12 +54,14 @@ abstract class UpdateRepoJob extends Job {
 	protected $entityPermissionChecker;
 
 	/**
-	 * @param string $command job command
-	 * @param Title $title Ignored
-	 * @param array $params
+	 * @see Job::__construct
+	 *
+	 * @param string $command
+	 * @param Title $title
+	 * @param array|bool $params
 	 */
-	public function __construct( $name, Title $title, array $params ) {
-		parent::__construct( $name, $title, $params );
+	public function __construct( $command, Title $title, $params = false ) {
+		parent::__construct( $command, $title, $params );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initRepoJobServices(

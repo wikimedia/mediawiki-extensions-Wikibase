@@ -39,9 +39,10 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	 * @note: the constructor's signature is dictated by Job::factory, so we'll have to
 	 *           live with it even though it's rather ugly for our use case.
 	 *
-	 * @see Job::factory.
+	 * @see Job::factory
+	 * @see UpdateRepoJob::__construct
 	 *
-	 * @param Title $title Ignored
+	 * @param Title $title
 	 * @param array|bool $params
 	 */
 	public function __construct( Title $title, $params = false ) {
