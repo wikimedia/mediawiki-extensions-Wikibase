@@ -115,7 +115,7 @@ class SiteLinksView {
 		}
 
 		return $this->templateFactory->render( 'wikibase-sitelinkgrouplistview',
-			$this->templateFactory->render( 'wb-listview', $html )
+			$this->templateFactory->render( 'wikibase-listview', $html )
 		);
 	}
 

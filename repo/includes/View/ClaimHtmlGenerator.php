@@ -163,7 +163,7 @@ class ClaimHtmlGenerator {
 
 	private function wrapInListview( $listviewContent ) {
 		if( $listviewContent !== '' ) {
-			return $this->templateFactory->render( 'wb-listview', $listviewContent );
+			return $this->templateFactory->render( 'wikibase-listview', $listviewContent );
 		} else {
 			return '';
 		}
