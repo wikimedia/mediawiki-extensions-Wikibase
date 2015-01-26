@@ -35,12 +35,17 @@ class EraParserTest extends StringValueParserTest {
 	}
 
 	/**
+	 * @see ValueParserTestBase::requireDataValue
+	 *
 	 * @return bool
 	 */
 	protected function requireDataValue() {
 		return false;
 	}
 
+	/**
+	 * @see ValueParserTestBase::validInputProvider
+	 */
 	public function validInputProvider() {
 		return array(
 			array( '+100', array( '+', '100' ) ),
@@ -70,6 +75,9 @@ class EraParserTest extends StringValueParserTest {
 		);
 	}
 
+	/**
+	 * @see StringValueParserTest::invalidInputProvider
+	 */
 	public function invalidInputProvider() {
 		return array(
 			array( '-100BC' ),
