@@ -5,10 +5,10 @@ namespace Wikibase;
 use LoggedUpdateMaintenance;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
+use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
+use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -16,8 +16,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
  * Maintenance script for populating wb_changes_subscription based on the page_props table.
- *
- * @since 0.4
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -37,7 +35,8 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 	/**
 	 * @see LoggedUpdateMaintenance::doDBUpdates
 	 *
-	 * @return boolean
+	 * @throws EntityIdParsingException
+	 * @return bool
 	 */
 	public function doDBUpdates() {
 		if ( !defined( 'WB_VERSION' ) ) {
@@ -83,8 +82,6 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 
 	/**
 	 * Outputs a message vis the output() method.
-	 *
-	 * @since 0.4
 	 *
 	 * @param $msg
 	 */

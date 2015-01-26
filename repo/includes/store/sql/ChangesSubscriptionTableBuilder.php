@@ -6,7 +6,6 @@ use DatabaseBase;
 use InvalidArgumentException;
 use LoadBalancer;
 use ResultWrapper;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
@@ -107,7 +106,8 @@ class ChangesSubscriptionTableBuilder {
 			$count = $this->processSubscriptionBatch( $continuation );
 
 			if ( $count > 0 ) {
-				$this->progressReporter->reportMessage( "Populating subscription table: inserted $count subscriptions, continuing at item #{$continuation[0]}." );
+				$this->progressReporter->reportMessage( 'Populating subscription table: '
+					. "inserted $count subscriptions, continuing at item #{$continuation[0]}." );
 			} else {
 				break;
 			}

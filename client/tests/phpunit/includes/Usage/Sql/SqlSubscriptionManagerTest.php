@@ -1,12 +1,10 @@
 <?php
+
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use Wikibase\Client\Store\Sql\ConnectionManager;
-use Wikibase\Client\Tests\Usage\UsageLookupContractTester;
-use Wikibase\Client\Tests\Usage\SubscriptionManagerContractTester;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
@@ -23,18 +21,15 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class SqlSubscriptionManagerTest extends \MediaWikiTestCase {
 
-	/**
-	 * @var UsageLookupContractTester
-	 */
-	private $lookupTester;
-
 	protected function setUp() {
-		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyChangesSubscription' ) ) {
-			$this->markTestSkipped( 'Skipping test for SqlSubscriptionManager, because the useLegacyChangesSubscription option is set.' );
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->markTestSkipped( 'Skipping test for SqlSubscriptionManager, '
+				. 'because the repo-side table wb_changes_subscription is not available.' );
 		}
 
-		if ( !defined( 'WB_VERSION' ) ) {
-			$this->markTestSkipped( 'Skipping test for SqlSubscriptionManager, because the repo-side table wb_changes_subscription is not available.' );
+		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyChangesSubscription' ) ) {
+			$this->markTestSkipped( 'Skipping test for SqlSubscriptionManager, '
+				. 'because the useLegacyChangesSubscription option is set.' );
 		}
 
 		$this->tablesUsed[] = 'wb_changes_subscription';
@@ -42,6 +37,9 @@ class SqlSubscriptionManagerTest extends \MediaWikiTestCase {
 		parent::setUp();
 	}
 
+	/**
+	 * @return SqlSubscriptionManager
+	 */
 	private function getSubscriptionManager() {
 		return new SqlSubscriptionManager(
 			new ConnectionManager( wfGetLB() )
