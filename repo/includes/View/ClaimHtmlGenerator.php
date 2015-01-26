@@ -212,7 +212,7 @@ class ClaimHtmlGenerator {
 		}
 
 		return $this->templateFactory->render(
-			'wb-snaklistview',
+			'wikibase-snaklistview',
 			$snaksHtml
 		);
 	}
