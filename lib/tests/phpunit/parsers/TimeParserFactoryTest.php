@@ -92,6 +92,14 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 				array( '+0000000000000000-00-20T00:00:00Z' ),
 			'-10100-02-29' =>
 				array( '-10100-02-29T00:00:00Z' ),
+			'+2015-01-00T00:00:00Z' =>
+				array( '+2015-01-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
+			'+2015-00-00T00:00:00Z' =>
+				array( '+2015-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
+			'2015-01-00' =>
+				array( '+2015-01-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
+			'2015-00-00' =>
+				array( '+2015-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 
 			/**
 			 * @see Wikibase\Lib\Parsers\MWTimeIsoParser

@@ -37,8 +37,6 @@ class MWTimeIsoParserTest extends StringValueParserTest {
 
 	/**
 	 * @see ValueParserTestBase::validInputProvider
-	 *
-	 * @return array
 	 */
 	public function validInputProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
@@ -165,6 +163,9 @@ class MWTimeIsoParserTest extends StringValueParserTest {
 		return $argLists;
 	}
 
+	/**
+	 * @see StringValueParserTest::invalidInputProvider
+	 */
 	public function invalidInputProvider() {
 		$argLists = parent::invalidInputProvider();
 

@@ -42,8 +42,6 @@ class EntityIdValueParserTest extends StringValueParserTest {
 
 	/**
 	 * @see ValueParserTestBase::parseProvider
-	 *
-	 * @return array
 	 */
 	public function validInputProvider() {
 		$argLists = array();
@@ -60,6 +58,9 @@ class EntityIdValueParserTest extends StringValueParserTest {
 		return array_merge( $argLists );
 	}
 
+	/**
+	 * @see StringValueParserTest::invalidInputProvider
+	 */
 	public function invalidInputProvider() {
 		$argLists = parent::invalidInputProvider();
 
