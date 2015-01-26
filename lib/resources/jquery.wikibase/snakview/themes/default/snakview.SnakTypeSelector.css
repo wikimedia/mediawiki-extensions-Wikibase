@@ -21,3 +21,7 @@
 	position: absolute;
 	z-index: 2; /* Monobook #content has 2 */
 }
+
+.wb-snaktypeselector-menu li a {
+	cursor: pointer;
+}
