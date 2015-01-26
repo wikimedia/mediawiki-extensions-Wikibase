@@ -104,12 +104,12 @@ HTML;
 	<div class="wikibase-statementview-rankselector">$2</div>
 	<div class="wikibase-statementview-mainsnak-container">
 		<div class="wikibase-statementview-mainsnak" dir="auto"><!-- wb-snak -->$3</div>
-		<div class="wikibase-statementview-qualifiers"><!-- wb-listview -->$4</div>
+		<div class="wikibase-statementview-qualifiers"><!-- wikibase-listview -->$4</div>
 	</div>
 	<!-- wikibase-toolbar -->$5
 	<div class="wikibase-statementview-references-container">
 		<div class="wikibase-statementview-references-heading">$6</div>
-		<div class="wikibase-statementview-references"><!-- wb-listview -->$7</div>
+		<div class="wikibase-statementview-references"><!-- wikibase-listview -->$7</div>
 	</div>
 </div>
 HTML;
@@ -130,15 +130,15 @@ HTML;
 HTML;
 
 
-	$templates['wb-listview'] =
+	$templates['wikibase-listview'] =
 <<<HTML
-<div class="wb-listview">$1</div>
+<div class="wikibase-listview">$1</div>
 HTML;
 
 	$templates['wb-snaklistview'] =
 <<<HTML
 <div class="wb-snaklistview">
-	<div class="wb-snaklistview-listview">$1<!-- wb-listview --></div>
+	<div class="wb-snaklistview-listview"><!-- wikibase-listview -->$1</div>
 </div>
 HTML;
 
@@ -231,7 +231,7 @@ HTML;
 
 	$templates['wikibase-sitelinkgrouplistview'] =
 <<<HTML
-<div class="wikibase-sitelinkgrouplistview"><!-- wb-listview -->$1</div>
+<div class="wikibase-sitelinkgrouplistview"><!-- wikibase-listview -->$1</div>
 HTML;
 
 	$templates['wikibase-sitelinkgroupview'] =
