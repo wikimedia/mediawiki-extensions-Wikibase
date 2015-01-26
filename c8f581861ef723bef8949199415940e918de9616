@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_42dd9146",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-01-26T18:19:55Z",
+      "side": 1,
+      "message": "Is that sufficient?: https://github.com/wmde/WikibaseDataModel/pull/350\n\nI think once that is done the conditions function can be simplified to just testing $sourceLanguage for null.",
+      "revId": "c8f581861ef723bef8949199415940e918de9616",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
