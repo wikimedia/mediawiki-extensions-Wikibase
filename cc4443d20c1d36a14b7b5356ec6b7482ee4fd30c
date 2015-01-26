@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_a7711f0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-01-26T10:36:40Z",
+      "side": 1,
+      "message": "I guess you meant \"Bug: T58090\".",
+      "revId": "cc4443d20c1d36a14b7b5356ec6b7482ee4fd30c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
