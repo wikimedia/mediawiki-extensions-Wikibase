@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_3ddafc78",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-01-26T19:30:43Z",
+      "side": 1,
+      "message": "#mw-specialpagesgroup-wikibase instead of #mw-specialpagesgroup-wikibaserepo",
+      "revId": "31ee4e8dd96604a0d6063e51d52b662d235f1e55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
