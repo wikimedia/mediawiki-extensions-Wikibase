@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_023f9923",
+        "filename": "repo/tests/phpunit/includes/ItemDisambiguationTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-01-26T18:02:54Z",
+      "side": 1,
+      "message": "huh? Why?",
+      "revId": "4fc1486c3f542d11da182850cf84b41073b9fad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
