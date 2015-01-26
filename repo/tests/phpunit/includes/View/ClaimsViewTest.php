@@ -64,7 +64,7 @@ class StatementGroupListViewTest extends \MediaWikiLangTestCase {
 	 * @return Claim[]
 	 */
 	private function makeClaims( PropertyId $propertyId ) {
-		$claims = array(
+		return array(
 			$this->makeClaim( new PropertyNoValueSnak(
 				$propertyId
 			) ),
@@ -88,8 +88,6 @@ class StatementGroupListViewTest extends \MediaWikiLangTestCase {
 				new EntityIdValue( new ItemId( 'Q555' ) )
 			) ),
 		);
-
-		return $claims;
 	}
 
 	/**
@@ -138,7 +136,7 @@ class StatementGroupListViewTest extends \MediaWikiLangTestCase {
 
 		$claimHtmlGenerator->expects( $this->any() )
 			->method( 'getHtmlForClaim' )
-			->will( $this->returnCallback( function( Claim $claim, $htmlForEditSection ) {
+			->will( $this->returnCallback( function( Claim $claim, $editSectionHtml = null ) {
 				return $claim->getGuid();
 			} ) );
 
