@@ -15,19 +15,13 @@ use ValueParsers\StringValueParser;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Thiemo Mättig
  *
  * @todo move me to DataValues-time
  */
 class TimeParser extends StringValueParser {
 
 	const FORMAT_NAME = 'time';
-
-	public function __construct( ParserOptions $options = null ) {
-		if( is_null( $options ) ) {
-			$options = new ParserOptions();
-		}
-		parent::__construct( $options );
-	}
 
 	/**
 	 * Parses the provided string and returns the result.

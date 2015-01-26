@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Parsers\Test;
 use DataValues\TimeValue;
 use ValueFormatters\TimeFormatter;
 use ValueParsers\Test\StringValueParserTest;
-use Wikibase\Lib\Parsers\MWTimeIsoParser;
 
 /**
  * @covers Wikibase\Lib\Parsers\TimeParser
@@ -17,18 +16,13 @@ use Wikibase\Lib\Parsers\MWTimeIsoParser;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Thiemo Mättig
  */
 class TimeParserTest extends StringValueParserTest {
 
 	/**
-	 * @return MWTimeIsoParser
-	 */
-	protected function getInstance() {
-		$class = $this->getParserClass();
-		return new $class( $this->newParserOptions() );
-	}
-
-	/**
+	 * @see ValueParserTestBase::getParserClass
+	 *
 	 * @return string
 	 */
 	protected function getParserClass() {
@@ -44,8 +38,10 @@ class TimeParserTest extends StringValueParserTest {
 		$argLists = array();
 
 		$valid = array(
-
-			//Wikibase\Lib\YearTimeParser
+			/**
+			 * @see Wikibase\Lib\Parsers\YearTimeParser
+			 * @see Wikibase\Lib\Parsers\Test\YearTimeParserTest
+			 */
 			'1999' =>
 				array( '+0000000000001999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'2000' =>
@@ -71,7 +67,10 @@ class TimeParserTest extends StringValueParserTest {
 			'1,11,111 BC' =>
 				array( '-0000000000111111-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 
-			//Wikibase\Lib\YearMonthTimeParser
+			/**
+			 * @see Wikibase\Lib\Parsers\YearMonthTimeParser
+			 * @see Wikibase\Lib\Parsers\Test\YearMonthTimeParserTest
+			 */
 			'1 1999' =>
 				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeFormatter::CALENDAR_GREGORIAN ),
 			'March 1999' =>
@@ -79,13 +78,29 @@ class TimeParserTest extends StringValueParserTest {
 			'1999 March' =>
 				array( '+0000000000001999-03-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeFormatter::CALENDAR_GREGORIAN ),
 
-			//ValueParsers\TimeParser
+			/**
+			 * @see ValueParsers\TimeParser
+			 * @see ValueParsers\Test\TimeParserTest
+			 */
 			'+0000000000000000-01-01T00:00:00Z (Gregorian)' =>
 				array( '+0000000000000000-01-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'+0-00-20T00:00:00Z' =>
 				array( '+0000000000000000-00-20T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'-10100-02-29' =>
+				array( '-0000000000010100-02-29T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'+2015-01-00T00:00:00Z' =>
+				array( '+0000000000002015-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeFormatter::CALENDAR_GREGORIAN ),
+			'+2015-00-00T00:00:00Z' =>
+				array( '+0000000000002015-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
+			'2015-01-00' =>
+				array( '+0000000000002015-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeFormatter::CALENDAR_GREGORIAN ),
+			'2015-00-00' =>
+				array( '+0000000000002015-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 
-			//Wikibase\Lib\ParsersMwTimeIsoParser
+			/**
+			 * @see Wikibase\Lib\Parsers\MwTimeIsoParser
+			 * @see Wikibase\Lib\Parsers\Test\MWTimeIsoParserTest
+			 */
 			'13 billion years CE' =>
 				array( '+0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeFormatter::CALENDAR_GREGORIAN ),
 			'13,000 million years CE' =>
@@ -95,7 +110,10 @@ class TimeParserTest extends StringValueParserTest {
 			'1980s' =>
 				array( '+0000000000001980-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeFormatter::CALENDAR_GREGORIAN ),
 
-			//Wikibase\Lib\DateTimeParser
+			/**
+			 * @see Wikibase\Lib\Parsers\DateTimeParser
+			 * @see Wikibase\Lib\Parsers\Test\DateTimeParserTest
+			 */
 			'10/10/10' =>
 				array( '+0000000000000010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1 July 2013' =>
@@ -110,8 +128,6 @@ class TimeParserTest extends StringValueParserTest {
 				array( '+0000000000002013-07-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'-1 Jul 2013' =>
 				array( '-0000000000002013-07-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
-			'-10100-02-29' =>
-				array( '-0000000000010100-03-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'-1.11.111' =>
 				array( '-0000000000000111-11-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1.11.111 BC' =>

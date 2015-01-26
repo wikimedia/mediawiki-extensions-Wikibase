@@ -34,15 +34,6 @@ class EntityIdValueParserTest extends StringValueParserTest {
 	}
 
 	/**
-	 * @see ValueParserTestBase::newParserOptions
-	 *
-	 * @return ParserOptions
-	 */
-	protected function newParserOptions() {
-		return new ParserOptions();
-	}
-
-	/**
 	 * @see ValueParserTestBase::parseProvider
 	 *
 	 * @return array
