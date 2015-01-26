@@ -74,7 +74,7 @@ class StatementGroupListView {
 
 		$html = $this->templateFactory->render(
 			'wikibase-statementgrouplistview',
-			$this->templateFactory->render( 'wb-listview', $claimsHtml )
+			$this->templateFactory->render( 'wikibase-listview', $claimsHtml )
 		);
 
 		// TODO: Add link to SpecialPage that allows adding a new claim.
