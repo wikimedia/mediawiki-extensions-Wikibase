@@ -401,7 +401,6 @@ return call_user_func( function() {
 				'jquery.wikibase.snaklistview.js',
 			),
 			'dependencies' => array(
-				'jquery.NativeEventHandler',
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
 				'jquery.wikibase.listview',
