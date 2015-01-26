@@ -268,7 +268,6 @@ return call_user_func( function() {
 				'jquery.wikibase.listview.ListItemAdapter.js',
 			),
 			'dependencies' => array(
-				'jquery.NativeEventHandler',
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
 			),
