@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_e2d700f1",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-27T13:47:53Z",
+      "side": 1,
+      "message": "true!",
+      "revId": "4a85ffec6501fcbb4a84146f78efcfaa78b3e098",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
