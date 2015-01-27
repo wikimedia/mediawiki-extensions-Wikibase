@@ -35,4 +35,5 @@ class NullSubscriptionManager implements SubscriptionManager {
 	public function unsubscribe( $subscriber, array $entityIds ) {
 		// NO-OP
 	}
+
 }

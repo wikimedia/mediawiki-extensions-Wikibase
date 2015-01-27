@@ -106,7 +106,8 @@ class ChangesSubscriptionTableBuilder {
 			$count = $this->processSubscriptionBatch( $continuation );
 
 			if ( $count > 0 ) {
-				$this->progressReporter->reportMessage( "Populating subscription table: inserted $count subscriptions, continuing at item #{$continuation[0]}." );
+				$this->progressReporter->reportMessage( 'Populating subscription table: '
+					. "inserted $count subscriptions, continuing at item #{$continuation[0]}." );
 			} else {
 				break;
 			}

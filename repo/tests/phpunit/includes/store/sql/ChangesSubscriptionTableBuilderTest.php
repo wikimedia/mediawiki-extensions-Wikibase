@@ -26,7 +26,8 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 
 	public function setUp() {
 		if ( WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useLegacyChangesSubscription' ) ) {
-			$this->markTestSkipped( 'Skipping test for ChangesSubscriptionTableBuilder, because the useLegacyChangesSubscription option is set.' );
+			$this->markTestSkipped( 'Skipping test for ChangesSubscriptionTableBuilder, '
+				. 'because the useLegacyChangesSubscription option is set.' );
 		}
 
 		$this->tablesUsed[] = self::TABLE_NAME;
@@ -35,6 +36,11 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 		parent::setUp();
 	}
 
+	/**
+	 * @param int $batchSize
+	 *
+	 * @return ChangesSubscriptionTableBuilder
+	 */
 	private function getChangesSubscriptionTableBuilder( $batchSize = 10 ) {
 		$loadBalancer = wfGetLB();
 

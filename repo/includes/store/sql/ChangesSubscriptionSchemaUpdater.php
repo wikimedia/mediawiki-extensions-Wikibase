@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseUpdater;
+use MWException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -87,6 +88,13 @@ class ChangesSubscriptionSchemaUpdater {
 		$primer->fillSubscriptionTable();
 	}
 
+	/**
+	 * @param string $name
+	 * @param string $type
+	 *
+	 * @throws MWException
+	 * @return string
+	 */
 	private function getUpdateScriptPath( $name, $type ) {
 		$extensions = array(
 			'.sql',
@@ -101,7 +109,7 @@ class ChangesSubscriptionSchemaUpdater {
 			}
 		}
 
-		throw new \MWException( "Could not find schema update script '$name'." );
+		throw new MWException( "Could not find schema update script '$name'." );
 	}
 
 }
