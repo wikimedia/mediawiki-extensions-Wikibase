@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Tests\Term;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupFallback;
 
 /**
  * @covers Wikibase\DataModel\Term\AliasGroup
@@ -57,6 +58,12 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertFalse( $group->equals( new AliasGroup( 'en', array( 'foo', 'baz', 'bar' ) ) ) );
 		$this->assertFalse( $group->equals( new AliasGroup( 'en', array( 'baz', 'bar', 'foo' ) ) ) );
+	}
+
+	public function testGivenSimilarFallbackObject_equalsReturnsFalse() {
+		$aliasGroup = new AliasGroup( 'de' );
+		$aliasGroupFallback = new AliasGroupFallback( 'de', array(), 'en', null );
+		$this->assertFalse( $aliasGroup->equals( $aliasGroupFallback ) );
 	}
 
 	public function testDuplicatesAreRemoved() {
