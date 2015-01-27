@@ -39,22 +39,22 @@ class DumpJson extends Maintenance {
 	/**
 	 * @var EntityLookup
 	 */
-	public $entityLookup;
+	private $entityLookup;
 
 	/**
 	 * @var Serializer
 	 */
-	public $entitySerializer;
+	private $entitySerializer;
 
 	/**
 	 * @var EntityPerPage
 	 */
-	public $entityPerPage;
+	private $entityPerPage;
 
 	/**
 	 * @var bool|resource
 	 */
-	public $logFileHandle = false;
+	private $logFileHandle = false;
 
 	public function __construct() {
 		parent::__construct();
@@ -72,7 +72,7 @@ class DumpJson extends Maintenance {
 		$this->addOption( 'snippet', "Output a JSON snippet without square brackets at the start and end. Allows output to be combined more freely.", false, false );
 	}
 
-	public function initServices() {
+	private function initServices() {
 		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 		$serializerOptions = new SerializationOptions();
 
@@ -100,7 +100,7 @@ class DumpJson extends Maintenance {
 	 *
 	 * @param string $message
 	 */
-	public function logMessage( $message ) {
+	private function logMessage( $message ) {
 		if ( $this->logFileHandle ) {
 			fwrite( $this->logFileHandle, "$message\n" );
 			fflush( $this->logFileHandle );
@@ -116,7 +116,7 @@ class DumpJson extends Maintenance {
 	 *
 	 * @throws \MWException
 	 */
-	protected function openLogFile( $file ) {
+	private function openLogFile( $file ) {
 		$this->closeLogFile();
 
 		if ( $file === '-' ) {
@@ -134,7 +134,7 @@ class DumpJson extends Maintenance {
 	/**
 	 * Closes any currently open file opened with openLogFile().
 	 */
-	protected function closeLogFile() {
+	private function closeLogFile() {
 		if ( $this->logFileHandle
 			&& $this->logFileHandle !== STDERR
 			&& $this->logFileHandle !== STDOUT ) {
@@ -218,7 +218,7 @@ class DumpJson extends Maintenance {
 	 *
 	 * @return EntityIdPager a stream of EntityId objects
 	 */
-	public function makeIdStream( $entityType = null, ExceptionHandler $exceptionReporter = null ) {
+	private function makeIdStream( $entityType = null, ExceptionHandler $exceptionReporter = null ) {
 		$listFile = $this->getOption( 'list-file' );
 
 		if ( $listFile !== null ) {
@@ -235,7 +235,7 @@ class DumpJson extends Maintenance {
 	 *
 	 * @return EntityIdPager
 	 */
-	protected function makeIdQueryStream( $entityType ) {
+	private function makeIdQueryStream( $entityType ) {
 		$stream = new EntityPerPageIdPager( $this->entityPerPage, $entityType );
 		return $stream;
 	}
@@ -247,7 +247,7 @@ class DumpJson extends Maintenance {
 	 * @throws MWException
 	 * @return EntityIdPager
 	 */
-	protected function makeIdFileStream( $listFile, ExceptionHandler $exceptionReporter = null ) {
+	private function makeIdFileStream( $listFile, ExceptionHandler $exceptionReporter = null ) {
 		$input = fopen( $listFile, 'r' );
 
 		if ( !$input ) {

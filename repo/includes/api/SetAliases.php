@@ -32,7 +32,7 @@ class SetAliases extends ModifyEntity {
 	/**
 	 * @var FingerprintChangeOpFactory
 	 */
-	protected $termChangeOpFactory;
+	private $termChangeOpFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -149,7 +149,7 @@ class SetAliases extends ModifyEntity {
 	 * @param array $params
 	 * @return ChangeOpAliases
 	 */
-	protected function getChangeOps( array $params ) {
+	private function getChangeOps( array $params ) {
 		wfProfileIn( __METHOD__ );
 		$changeOps = array();
 		$language = $params['language'];

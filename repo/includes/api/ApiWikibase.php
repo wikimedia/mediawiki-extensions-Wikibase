@@ -306,7 +306,7 @@ abstract class ApiWikibase extends ApiBase {
 	 *
 	 * @param Status $status The status to report
 	 */
-	protected function handleSaveStatus( Status $status ) {
+	private function handleSaveStatus( Status $status ) {
 		$value = $status->getValue();
 		$errorCode = null;
 
