@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_6288d0ec",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementgrouplistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-27T14:14:13Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be `_statementGroupSetToStatementLists` or shorter `_groupSetToLists`?",
+      "revId": "1ca09620c95a517818aa78d58fbbbadb3a88065d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
