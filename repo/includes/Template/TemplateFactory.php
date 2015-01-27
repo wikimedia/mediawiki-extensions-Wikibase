@@ -23,10 +23,18 @@ class TemplateFactory {
 	/**
 	 * @param string $key
 	 * @param array $params
+	 *
 	 * @return Template
 	 */
 	public function get( $key, array $params ) {
 		return new Template( $this->templateRegistry, $key, $params );
+	}
+
+	/**
+	 * @return string[] Array containing all raw template strings.
+	 */
+	public function getTemplates() {
+		return $this->templateRegistry->getTemplates();
 	}
 
 	/**

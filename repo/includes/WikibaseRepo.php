@@ -1031,7 +1031,9 @@ class WikibaseRepo {
 	 * @return TemplateFactory
 	 */
 	public function getTemplateFactory() {
-		return new TemplateFactory( TemplateRegistry::getDefaultInstance() );
+		return new TemplateFactory(
+			new TemplateRegistry( include( __DIR__ . '/../resources/templates.php' ) )
+		);
 	}
 
 }

@@ -17,22 +17,9 @@ namespace Wikibase\Template;
 class TemplateRegistry {
 
 	/**
-	 * @var TemplateRegistry
-	 */
-	private static $instance;
-
-	/**
 	 * @var string[]
 	 */
 	private $templates = array();
-
-	public static function getDefaultInstance() {
-		if ( self::$instance === null ) {
-			self::$instance = new self( include( __DIR__ . '/../../resources/templates.php' ) );
-		}
-
-		return self::$instance;
-	}
 
 	/**
 	 * @param string[] $templates
@@ -42,9 +29,7 @@ class TemplateRegistry {
 	}
 
 	/**
-	 * Gets the array containing all templates.
-	 *
-	 * @return string[]
+	 * @return string[] Array containing all raw template strings.
 	 */
 	public function getTemplates() {
 		return $this->templates;
