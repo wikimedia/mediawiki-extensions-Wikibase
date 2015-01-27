@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_62ad3080",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-27T13:41:52Z",
+      "side": 1,
+      "message": "\"option is\".",
+      "revId": "67e20891809220a86dd56a37e5ad490b5fb76547",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_42c26c3a",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-27T13:41:52Z",
+      "side": 1,
+      "message": "true!",
+      "revId": "67e20891809220a86dd56a37e5ad490b5fb76547",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
