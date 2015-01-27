@@ -11,7 +11,6 @@
 		]
 	},
 	"wikibase-client-desc": "Klient til Wikibase-udvidelsen",
-	"specialpages-group-wikibaseclient": "Wikidata-klient",
 	"tooltip-t-wikibase": "Link til tilknyttet emne i Wikidata",
 	"wikibase-after-page-move": "Du kan også [$1 opdatere] det tilknyttede Wikidata-emne for at bevare sproghenvisninger på den flyttede side.",
 	"wikibase-after-page-move-queued": "[$1 Wikidataemnet] tilknyttet denne side vil snart blive opdateret automatisk.",

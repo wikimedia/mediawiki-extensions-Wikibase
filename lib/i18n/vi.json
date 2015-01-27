@@ -8,6 +8,7 @@
 		]
 	},
 	"wikibase-lib-desc": "Các chức năng chung của các phần mở rộng Wikibase và Trình khách Wikibase",
+	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Khoản mục đã xóa",
 	"wikibase-deletedentity-property": "Thuộc tính đã xóa",
 	"wikibase-deletedentity-query": "Truy vấn đã xóa",

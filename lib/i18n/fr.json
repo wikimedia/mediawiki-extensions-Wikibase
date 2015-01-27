@@ -17,10 +17,12 @@
 			"Wyz",
 			"Scoopfinder",
 			"Macofe",
-			"Benjozork"
+			"Benjozork",
+			"Weft"
 		]
 	},
 	"wikibase-lib-desc": "Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client",
+	"specialpages-group-wikibase": "Référentiel Wikibase",
 	"wikibase-deletedentity-item": "Élément supprimé",
 	"wikibase-deletedentity-property": "Propriété supprimée",
 	"wikibase-deletedentity-query": "Requête supprimée",
@@ -56,7 +58,7 @@
 	"wikibase-parse-error-entity-id": "L’id de l’entité n’a pas le bon format.",
 	"wikibase-parse-error-quantity": "La valeur de la quantité n’a pas le bon format.",
 	"wikibase-parse-error-time": "La valeur temporelle n’a pas le bon format.",
-	"wikibase-sitelinks-wikipedia": "Pages de Wikipédia liées à cet élément",
+	"wikibase-sitelinks-wikipedia": "Wikipédia",
 	"wikibase-sitelinks-sitename-columnheading": "Langue",
 	"wikibase-sitelinks-link-columnheading": "Page liée",
 	"wikibase-snakview-snaktypeselector-somevalue": "valeur inconnue",

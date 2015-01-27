@@ -6,6 +6,7 @@
 		]
 	},
 	"wikibase-lib-desc": "Sisaldab tarkvaralisade Wikibase ja Wikibase Client ühiseid funktsioone.",
+	"specialpages-group-wikibase": "Vikibaas",
 	"wikibase-deletedentity-item": "Kustutatud üksus",
 	"wikibase-deletedentity-property": "Kustutatud omadus",
 	"wikibase-deletedentity-query": "Kustutatud päring",

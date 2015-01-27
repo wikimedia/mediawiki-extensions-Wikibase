@@ -12,6 +12,7 @@
 		]
 	},
 	"wikibase-lib-desc": "Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client",
+	"specialpages-group-wikibase": "Wikibaserepository",
 	"wikibase-deletedentity-item": "Verwijderd item",
 	"wikibase-deletedentity-property": "Verwijderde eigenschap",
 	"wikibase-deletedentity-query": "Verwijderde zoekopdracht",

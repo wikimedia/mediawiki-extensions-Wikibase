@@ -8,6 +8,7 @@
 		]
 	},
 	"wikibase-lib-desc": "Enhavas komunajn funckiojn por Vikidatumaj kaj por la Vikidatuma klienta etendaĵo",
+	"specialpages-group-wikibase": "Deponejo Vikibazo",
 	"wikibase-deletedentity-item": "Forigita ero",
 	"wikibase-error-unexpected": "Eraro: $1.",
 	"wikibase-error-save-generic": "Eraro okazis dum konservado, sekve viaj ŝanĝoj ne estis konservitaj",

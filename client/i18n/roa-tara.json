@@ -5,7 +5,6 @@
 		]
 	},
 	"wikibase-client-desc": "Cliende pe l'estenzione Uicchibase",
-	"specialpages-group-wikibaseclient": "cliende {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Appuende a 'a vôsce de l'archivije date collegate",
 	"wikibase-comment-update": "Vôsce de {{WBREPONAME}} cangiate",
 	"wikibase-comment-sitelink-add": "Collegamende d'a lènghe aggiunde: $1",

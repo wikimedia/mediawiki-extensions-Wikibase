@@ -11,7 +11,6 @@
 		]
 	},
 	"wikibase-client-desc": "Wikibase-laajennuksen asiakasohjelma",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}}-asiakasohjelma",
 	"tooltip-t-wikibase": "Linkki yhdistettyyn keskustietovaraston kohteeseen",
 	"wikibase-after-page-move": "Voit myös [$1 päivittää] sivuun liittyvän {{WBREPONAME}}-kohteen säilyttääksesi kielilinkit siirretyllä sivulla.",
 	"wikibase-after-page-move-queued": "Tähän sivuun liitetty [$1 {{WBREPONAME}}-kohde] päivitetään pian automaattisesti.",
@@ -51,7 +50,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-muokkaus",
 	"wikibase-replicationnote": "Huomaa, että voi kestää useita minuutteja ennen kuin muutokset näkyvät kaikissa wikeissä.",
-	"wikibase-watchlist-show-changes-pref": "Näytä {{WBREPONAME}}-muokkaukset tarkkailulistallasi",
+	"wikibase-watchlist-show-changes-pref": "Näytä {{WBREPONAME}}-muokkaukset tarkkailulistalla",
 	"wikibase-error-serialize-error": "Tietojen sarjoittaminen epäonnistui.",
 	"wikibase-error-invalid-entity-id": "Antamasi tunniste on järjestelmälle tuntematon. Käytä kelvollista tunnistetta.",
 	"special-unconnectedpages": "Sivut, joita ei ole liitetty kohteisiin",
