@@ -215,7 +215,7 @@ div.wikibase-statementview textarea {
 }
 
 /* Container for the section title */
-.wb-claimgrouplistview .wb-claimgrouplistview-groupname {
+.wikibase-statementgrouplistview .wikibase-statementgrouplistview-groupname {
 	width: 15em;
 	background: #E8E8E8;
 	position: absolute;
@@ -229,7 +229,7 @@ div.wikibase-statementview textarea {
 }
 
 /* The actual section title (the linked property name) */
-.wb-claimgrouplistview .wb-claimgrouplistview-groupname .wb-claim-name {
+.wikibase-statementgrouplistview .wikibase-statementgrouplistview-groupname .wikibase-statementgrouplistview-groupname-name {
 	float: left;
 	word-wrap: break-word;
 	padding: 10px;
@@ -313,26 +313,26 @@ div .wb-snak-value span.error.wb-format-error {
 
 /***** EDIT/NEW CLAIM *****/
 
-.wb-claimgrouplistview .wb-new > .wb-addtoolbar {
+.wikibase-statementgrouplistview .wb-new > .wb-addtoolbar {
 	display: none;
 }
 
-.wikibase-statementlistview-listview .wb-claimgrouplistview-groupname.wb-edit,
+.wikibase-statementlistview-listview .wikibase-statementgrouplistview-groupname.wb-edit,
 .wikibase-statementlistview-listview .wb-edit .wb-snak-property-container {
 	background-color: #C0DAE5;
 }
 
-.wikibase-statementlistview-listview .wb-claimgrouplistview-groupname.wb-error,
+.wikibase-statementlistview-listview .wikibase-statementgrouplistview-groupname.wb-error,
 .wb-error div.wb-claim-new .wb-snak-property-container {
 	background-color: #E5C8B5;
 }
 
-.wb-claimgrouplistview .wikibase-statementview.wb-edit,
-.wb-claimgrouplistview .wikibase-statementview.wb-edit .wb-claim {
+.wikibase-statementgrouplistview .wikibase-statementview.wb-edit,
+.wikibase-statementgrouplistview .wikibase-statementview.wb-edit .wb-claim {
 	background-color: #D6F3FF;
 }
-.wb-claimgrouplistview .wikibase-statementview.wb-error,
-.wb-claimgrouplistview .wikibase-statementview.wb-error .wb-claim {
+.wikibase-statementgrouplistview .wikibase-statementview.wb-error,
+.wikibase-statementgrouplistview .wikibase-statementview.wb-error .wb-claim {
 	background-color: #FFDFC9;
 }
 
@@ -341,21 +341,21 @@ div .wb-snak-value span.error.wb-format-error {
 	border: none;
 }
 
-.wb-claimgrouplistview .wikibase-statementlistview.wb-new .wikibase-statementview {
+.wikibase-statementgrouplistview .wikibase-statementlistview.wb-new .wikibase-statementview {
 	border: 1px solid #C9C9C9;
 	width: 100%;
 	margin-bottom: 1em;
 }
 
-.wb-claimgrouplistview .wikibase-statementview.wb-new {
+.wikibase-statementgrouplistview .wikibase-statementview.wb-new {
 	padding-bottom: 0;
 }
 
-.wb-claimgrouplistview .wb-new .wikibase-statementview-mainsnak {
+.wikibase-statementgrouplistview .wb-new .wikibase-statementview-mainsnak {
 	margin: 0 18em 0 15em;
 }
 
-.wb-claimgrouplistview .wikibase-statementlistview.wb-new .wb-snak-property-container {
+.wikibase-statementgrouplistview .wikibase-statementlistview.wb-new .wb-snak-property-container {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -364,18 +364,18 @@ div .wb-snak-value span.error.wb-format-error {
 	display: block;
 }
 
-.wb-claimgrouplistview .wb-new .wb-snak-property {
+.wikibase-statementgrouplistview .wb-new .wb-snak-property {
 	padding: 10px;
 }
 
-.wb-claimgrouplistview .wb-new .wb-snak-property input {
+.wikibase-statementgrouplistview .wb-new .wb-snak-property input {
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-.wb-claimgrouplistview .wb-new .wb-snak-value {
+.wikibase-statementgrouplistview .wb-new .wb-snak-value {
 	min-height: 1.5em;
 	max-width: 32em;
 }
@@ -488,7 +488,7 @@ div .wb-snak-value span.error.wb-format-error {
 
 /***** /QUALIFIERS *****/
 
-.wb-claimgrouplistview > .wikibase-toolbar-container {
+.wikibase-statementgrouplistview > .wikibase-toolbar-container {
 	float: right;
 	position: static;
 }
