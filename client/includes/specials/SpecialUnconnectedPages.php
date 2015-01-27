@@ -59,7 +59,7 @@ class SpecialUnconnectedPages extends SpecialPage {
 	 * @return string
 	 */
 	protected function getGroupName() {
-		return 'wikibaseclient';
+		return 'wikibase';
 	}
 
 	/**
