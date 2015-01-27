@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Tests\Term;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermFallback;
 
 /**
  * @covers Wikibase\DataModel\Term\Term
@@ -61,6 +62,12 @@ class TermTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $term->equals( new Term( 'foo', 'spam' ) ) );
 		$this->assertFalse( $term->equals( new Term( 'spam', 'bar' ) ) );
 		$this->assertFalse( $term->equals( new Term( 'spam', 'spam' ) ) );
+	}
+
+	public function testGivenSimilarFallbackObject_equalsReturnsFalse() {
+		$term = new Term( 'de', 'foo' );
+		$termFallback = new TermFallback( 'de', 'foo', 'en', null );
+		$this->assertFalse( $term->equals( $termFallback ) );
 	}
 
 }

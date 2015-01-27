@@ -70,7 +70,8 @@ class Term implements Comparable {
 			return true;
 		}
 
-		return $target instanceof self
+		return is_object( $target )
+			&& get_called_class() === get_class( $target )
 			&& $this->languageCode === $target->languageCode
 			&& $this->text === $target->text;
 	}
