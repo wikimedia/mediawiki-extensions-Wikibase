@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_22b41833",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementgrouplistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-27T12:04:16Z",
+      "side": 1,
+      "message": "Is this order (handle \u0027value\u0027 option, call parent, handle \u0027disabled\u0027 option) intended? Just asking.",
+      "revId": "499fc991692bb8314e49b6f699bf2e7f34729ae8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_c2743c99",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementlistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-27T12:04:16Z",
+      "side": 1,
+      "message": "Could that be return \"!!this.listview().items()\"? Just curious.",
+      "revId": "499fc991692bb8314e49b6f699bf2e7f34729ae8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
