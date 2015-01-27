@@ -10,6 +10,7 @@
 	$( function() {
 		var $form = $( '#searchform ' ),
 			$input = $( '#searchInput' ),
+			// Both inputs must be named "search" to support Firefox' smart keyword feature (T60467)
 			$hiddenInput = $( '<input type="hidden" name="search"/>' );
 
 		/**
@@ -76,9 +77,8 @@
 			customItems: [searchContaining]
 		} );
 
-		$input
-		.removeAttr( 'name' )
-		.after( $hiddenInput );
+		// Must be placed in that order to support Firefox' smart keyword feature (T60467)
+		$input.before( $hiddenInput );
 
 		$input
 		.one( 'focus', function( event ) {
