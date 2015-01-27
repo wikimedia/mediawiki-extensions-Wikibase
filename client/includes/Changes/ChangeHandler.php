@@ -343,8 +343,6 @@ class ChangeHandler {
 	/**
 	 * Constructs RC attributes for the given change
 	 *
-	 * @since 0.4
-	 *
 	 * @param EntityChange $change The Change that caused the update
 	 *
 	 * @return array[]|bool an array of RC attributes,

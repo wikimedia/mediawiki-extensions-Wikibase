@@ -29,22 +29,16 @@ use Wikibase\Repo\Content\EntityContentDiff;
 class EntityDiffVisualizer {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var IContextSource
 	 */
 	private $context;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var ClaimDiffer|null
 	 */
 	private $claimDiffer;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var ClaimDifferenceVisualizer|null
 	 */
 	private $claimDiffVisualizer;

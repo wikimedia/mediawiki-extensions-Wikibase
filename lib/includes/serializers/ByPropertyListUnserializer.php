@@ -18,8 +18,6 @@ use OutOfBoundsException;
 class ByPropertyListUnserializer implements Unserializer {
 
 	/**
-	 * @since 0.2
-	 *
 	 * @var Serializer
 	 */
 	private $elementUnserializer;

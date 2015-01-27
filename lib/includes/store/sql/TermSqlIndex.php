@@ -656,8 +656,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @since 0.2
-	 *
 	 * @param DatabaseBase $db
 	 * @param Term[] $terms
 	 * @param string|null $termType

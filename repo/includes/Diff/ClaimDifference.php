@@ -17,29 +17,21 @@ use Diff\DiffOp\DiffOpChange;
 class ClaimDifference implements Comparable {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var Diff|null
 	 */
 	private $referenceChanges;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var DiffOpChange|null
 	 */
 	private $mainSnakChange;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var DiffOpChange|null
 	 */
 	private $rankChange;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var Diff|null
 	 */
 	private $qualifierChanges;

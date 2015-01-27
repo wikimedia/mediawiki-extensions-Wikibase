@@ -22,8 +22,6 @@ class RecentChangesFilterOptions {
 	/**
 	 * Is Wikibase recent changes feature disabled?
 	 *
-	 * @since 0.4
-	 *
 	 * @return bool
 	 */
 	private function isDisabled() {
@@ -41,8 +39,6 @@ class RecentChangesFilterOptions {
 	/**
 	 * Is hidewikidata filter selected?
 	 *
-	 * @since 0.4
-	 *
 	 * @return bool
 	 */
 	private function hideWikibase() {
@@ -57,8 +53,6 @@ class RecentChangesFilterOptions {
 	 * Is the enhanced changes format used?
 	 *
 	 * @note this is temporary and we will support enhanced changes in the near future
-	 *
-	 * @since 0.4
 	 *
 	 * @return bool
 	 */

@@ -32,8 +32,6 @@ use Wikibase\Store\EntityIdLookup;
 class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityPermissionChecker {
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var string[] Entity type ID to content model ID mapping.
 	 */
 	private $entityContentModels;

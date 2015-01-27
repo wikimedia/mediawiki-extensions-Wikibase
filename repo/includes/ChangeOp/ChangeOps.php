@@ -18,8 +18,6 @@ use Wikibase\Summary;
 class ChangeOps implements ChangeOp {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var ChangeOp[]
 	 */
 	private $changeOps = array();

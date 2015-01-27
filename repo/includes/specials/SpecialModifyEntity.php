@@ -149,8 +149,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * Building the HTML form for modifying an entity.
 	 *
-	 * @since 0.5
-	 *
 	 * @param Entity $entity
 	 */
 	private function setForm( Entity $entity = null ) {

@@ -13,8 +13,6 @@ namespace Wikibase;
 class ExceptionWithCode extends \Exception {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
 	private $stringCode;

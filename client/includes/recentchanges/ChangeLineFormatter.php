@@ -296,8 +296,6 @@ class ChangeLineFormatter {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param string $userName
 	 *
 	 * @return string[]

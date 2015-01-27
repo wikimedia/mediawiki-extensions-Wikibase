@@ -90,8 +90,6 @@ class RemoveReferences extends ModifyClaim {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param string $claimGuid
 	 * @param string[] $referenceHashes
 	 *

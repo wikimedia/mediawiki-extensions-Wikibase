@@ -37,15 +37,11 @@ class DiffView extends ContextSource {
 	private $siteStore;
 
 	/**
-	 * @since 0.1
-	 *
 	 * @var string[]
 	 */
 	private $path;
 
 	/**
-	 * @since 0.1
-	 *
 	 * @var Diff
 	 */
 	private $diff;
@@ -105,8 +101,6 @@ class DiffView extends ContextSource {
 	/**
 	 * Does the actual work.
 	 *
-	 * @since 0.1
-	 *
 	 * @param string[] $path
 	 * @param DiffOp $op
 	 *
@@ -147,8 +141,6 @@ class DiffView extends ContextSource {
 
 	/**
 	 * Generates HTML for an change diffOp
-	 *
-	 * @since 0.4
 	 *
 	 * @param string|null $oldValue
 	 * @param string|null $newValue
@@ -280,8 +272,6 @@ class DiffView extends ContextSource {
 
 	/**
 	 * Generates HTML for the header of the diff operation
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $name
 	 *

@@ -239,8 +239,6 @@ class SummaryFormatter {
 	/**
 	 * Merge the total summary
 	 *
-	 * @since 0.5
-	 *
 	 * @param string $comment autocomment part, will be placed in a block comment
 	 * @param string $summary human readable string to be appended after the autocomment part
 	 * @param int $length max length of the string

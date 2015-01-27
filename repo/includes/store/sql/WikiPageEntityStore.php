@@ -196,8 +196,6 @@ class WikiPageEntityStore implements EntityStore {
 	 *
 	 * @see WikiPage::doEditContent
 	 *
-	 * @since 0.5
-	 *
 	 * @param EntityContent $entityContent the entity to save.
 	 * @param string $summary
 	 * @param null|User $user

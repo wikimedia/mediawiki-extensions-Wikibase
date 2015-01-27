@@ -20,13 +20,11 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 
 	/**
 	 * @var LanguageFallbackChain
-	 * @since 0.4
 	 */
 	private $chain;
 
 	/**
 	 * @var LanguageFallbackChainFactory
-	 * @since 0.4
 	 */
 	private $factory;
 

@@ -113,8 +113,6 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param Claims $claims
 	 * @param Summary|null $summary
 	 *

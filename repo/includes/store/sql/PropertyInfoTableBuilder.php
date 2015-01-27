@@ -261,8 +261,6 @@ class PropertyInfoTableBuilder {
 	 *
 	 * @throws RuntimeException
 	 *
-	 * @since 0.4
-	 *
 	 * @param PropertyId $id the Property to process
 	 */
 	private function updatePropertyInfo( PropertyId $id ) {

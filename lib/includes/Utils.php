@@ -66,8 +66,6 @@ final class Utils {
 	/**
 	 * Check the given PID to see if it is alive
 	 *
-	 * @since 0.3
-	 *
 	 * @param int $pid the process identifier to check
 	 *
 	 * @return boolean true if the process exist
@@ -150,8 +148,6 @@ final class Utils {
 
 	/**
 	 * Generate a name and path for a file to store some kind of state in.
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $module used as a basis for the file name.
 	 * @param string $suffix suffix, including file extension, appended without a separator.

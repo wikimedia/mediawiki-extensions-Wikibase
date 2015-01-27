@@ -29,15 +29,11 @@ class SnakHtmlGenerator {
 	private $templateFactory;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var SnakFormatter
 	 */
 	private $snakFormatter;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var EntityIdFormatter
 	 */
 	private $propertyIdFormatter;

@@ -21,22 +21,16 @@ use Wikibase\Validators\TermValidatorFactory;
 class ChangeOpDescription extends ChangeOpBase {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
 	private $languageCode;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string|null
 	 */
 	private $description;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var TermValidatorFactory
 	 */
 	private $termValidatorFactory;

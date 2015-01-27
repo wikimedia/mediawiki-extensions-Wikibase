@@ -43,8 +43,6 @@ class SpecialUnconnectedPages extends SpecialPage {
 	/**
 	 * Set to 'only' if the search should only include pages with inter wiki links
 	 *
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
 	private $iwData = '';

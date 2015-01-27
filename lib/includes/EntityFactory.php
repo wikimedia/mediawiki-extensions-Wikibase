@@ -86,8 +86,6 @@ class EntityFactory {
 	/**
 	 * Returns the class implementing the given entity type.
 	 *
-	 * @since 0.5
-	 *
 	 * @param string $type
 	 *
 	 * @throws OutOfBoundsException

@@ -86,8 +86,6 @@ class RemoveQualifiers extends ModifyClaim {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param string $claimGuid
 	 * @param string[] $qualifierHashes
 	 *

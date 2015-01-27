@@ -174,8 +174,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * Checks if the language code is valid.
 	 *
-	 * @since 0.4
-	 *
 	 * @param $languageCode string the language code
 	 *
 	 * @return bool

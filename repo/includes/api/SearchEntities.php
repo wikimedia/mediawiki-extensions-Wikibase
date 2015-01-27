@@ -106,8 +106,6 @@ class SearchEntities extends ApiBase {
 	 * If there are not enough exact matches, the list of returned entries will be additionally
 	 * filled with prefixed matches.
 	 *
-	 * @since 0.4
-	 *
 	 * @param array $params
 	 *
 	 * @return array[]

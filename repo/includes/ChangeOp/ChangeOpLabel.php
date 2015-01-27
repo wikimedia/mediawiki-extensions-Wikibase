@@ -21,22 +21,16 @@ use Wikibase\Validators\TermValidatorFactory;
 class ChangeOpLabel extends ChangeOpBase {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
 	private $languageCode;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string|null
 	 */
 	private $label;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var TermValidatorFactory
 	 */
 	private $termValidatorFactory;

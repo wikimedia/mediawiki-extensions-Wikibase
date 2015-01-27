@@ -191,8 +191,6 @@ class WikibaseLuaBindings {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param EntityDocument $entityObject
 	 * @param bool $lowerCaseIds Whether to also use lower case ids
 	 *

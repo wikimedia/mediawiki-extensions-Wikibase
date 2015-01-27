@@ -34,29 +34,21 @@ use Wikibase\Lib\SnakFormatter;
 class ClaimDifferenceVisualizer {
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var ValueFormatter
 	 */
 	private $propertyIdFormatter;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var SnakFormatter
 	 */
 	private $snakDetailsFormatter;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var SnakFormatter
 	 */
 	private $snakBreadCrumbFormatter;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var string
 	 */
 	private $languageCode;

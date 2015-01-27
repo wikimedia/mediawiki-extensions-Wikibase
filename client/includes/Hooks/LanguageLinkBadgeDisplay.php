@@ -159,8 +159,6 @@ class LanguageLinkBadgeDisplay {
 	/**
 	 * Returns the label for the given badge.
 	 *
-	 * @since 0.5
-	 *
 	 * @param ItemId $badge
 	 *
 	 * @return string|null

@@ -24,8 +24,6 @@ use Wikibase\EntityFactory;
 class ItemSerializer extends EntitySerializer implements Unserializer {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var SiteStore
 	 */
 	private $siteStore;

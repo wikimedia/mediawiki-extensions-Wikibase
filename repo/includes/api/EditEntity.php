@@ -45,15 +45,11 @@ use Wikibase\Utils;
 class EditEntity extends ModifyEntity {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string[]
 	 */
 	private $validLanguageCodes;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var EntityRevisionLookup
 	 */
 	private $entityRevisionLookup;
@@ -265,7 +261,6 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @since 0.4
 	 * @param array $labels
 	 * @return ChangeOp[]
 	 */
@@ -295,7 +290,6 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @since 0.4
 	 * @param array $descriptions
 	 * @return ChangeOp[]
 	 */
@@ -325,7 +319,6 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @since 0.4
 	 * @param array $aliases
 	 * @return ChangeOp[]
 	 */
@@ -392,8 +385,6 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param array $siteLinks
 	 * @param Item $item
 	 *
@@ -456,8 +447,6 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param array $claims
 	 * @return ChangeOp[]
 	 */
@@ -561,8 +550,6 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param mixed $data
 	 * @param EntityDocument $entity
 	 * @param int $revId

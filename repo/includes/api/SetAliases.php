@@ -144,8 +144,6 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param array $params
 	 * @return ChangeOpAliases
 	 */

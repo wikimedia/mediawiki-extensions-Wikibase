@@ -20,29 +20,21 @@ use Wikibase\Validators\TermValidatorFactory;
 class ChangeOpAliases extends ChangeOpBase {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
 	private $languageCode;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string[]
 	 */
 	private $aliases;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var array
 	 */
 	private $action;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var TermValidatorFactory
 	 */
 	private $termValidatorFactory;

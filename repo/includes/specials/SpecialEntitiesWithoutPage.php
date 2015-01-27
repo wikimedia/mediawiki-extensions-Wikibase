@@ -92,8 +92,6 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	/**
 	 * Prepare the arguments
 	 *
-	 * @since 0.4
-	 *
 	 * @param string $subPage
 	 */
 	private function prepareArguments( $subPage ) {
@@ -128,8 +126,6 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 
 	/**
 	 * Build the HTML form
-	 *
-	 * @since 0.4
 	 */
 	private function setForm() {
 		$typeSelect = new XmlSelect( 'type', 'wb-entitieswithoutpage-type', $this->type );
