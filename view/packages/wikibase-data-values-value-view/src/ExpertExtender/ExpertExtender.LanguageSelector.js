@@ -11,18 +11,18 @@
 	 *
 	 * @constructor
 	 *
-	 * @param {util.ContentLanguages} languages
+	 * @param {util.ContentLanguages} contentLanguages
 	 * @param {util.MessageProvider} messageProvider
 	 * @param {Function} getUpstreamValue
 	 * @param {Function} onValueChange
 	 */
 	ExpertExtender.LanguageSelector = function(
-		languages,
+		contentLanguages,
 		messageProvider,
 		getUpstreamValue,
 		onValueChange
 	) {
-		this._languages = languages;
+		this._contentLanguages = contentLanguages;
 		this._messageProvider = messageProvider;
 		this._getUpstreamValue = getUpstreamValue;
 		this._onValueChange = onValueChange;
@@ -53,7 +53,7 @@
 		 * @property {util.ContentLanguages}
 		 * @private
 		 */
-		_languages: null,
+		_contentLanguages: null,
 
 		/**
 		 * @property {Object}
@@ -78,7 +78,7 @@
 		 * @private
 		 */
 		_initLabels: function() {
-			var languages = this._languages.getAll();
+			var languages = this._contentLanguages.getAll();
 
 			var self = this;
 
@@ -87,7 +87,7 @@
 				$.each( languages, function( i, code ) {
 					self._labels[code] = self._getMessage(
 						'languagetemplate',
-						[ self._languages.getName( code ), code ]
+						[ self._contentLanguages.getName( code ), code ]
 					);
 				} );
 			}
@@ -144,7 +144,7 @@
 		destroy: function() {
 			this._getUpstreamValue = null;
 			this.$selector = null;
-			this._languages = null;
+			this._contentLanguages = null;
 			this._labels = null;
 			this._messageProvider = null;
 			this._onValueChange = null;
