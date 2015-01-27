@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_1f2a8b8f",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementgrouplistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-27T10:03:44Z",
+      "side": 1,
+      "message": "Does not work, since TemplatedWidget throws an error if a shortcut can not be found.",
+      "revId": "634292a0507802929b774505eec139f96fcd171a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
