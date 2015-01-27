@@ -3,12 +3,10 @@
 namespace Wikibase\Test;
 
 use Language;
-use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\View\EntityViewPlaceholderExpander;
@@ -29,8 +27,10 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param User $user
-	 * @param EntityLookup $entityLookup
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param ItemId $itemId
+	 *
+	 * @return EntityViewPlaceholderExpander
 	 */
 	private function newExpander( User $user, EntityRevisionLookup $entityRevisionLookup, ItemId $itemId ) {
 		$title = $this->getMockBuilder( 'Title')
@@ -108,13 +108,20 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		return $item;
 	}
 
-	private function newUser( $isAnon ) {
-		$user = $this->getMockBuilder( '\User' )
+	/**
+	 * @param bool $isAnon
+	 *
+	 * @return User
+	 */
+	private function newUser( $isAnon = false ) {
+		$user = $this->getMockBuilder( 'User' )
 			->disableOriginalConstructor()
 			->getMock();
 		$user->expects( $this->any() )
 			->method( 'isAnon' )
 			->will( $this->returnValue( $isAnon ) );
+
+		/** @var User $user */
 		$user->setName( 'EntityViewPlaceholderExpanderTest-DummyUser' );
 
 		return $user;
@@ -123,7 +130,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 	public function testGetHtmlForPlaceholder() {
 		$item = $this->getItem();
 		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
-		$expander = $this->newExpander( $this->newUser( false ), $entityRevisionLookup, $item->getId() );
+		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $item->getId() );
 
 		$html = $expander->getHtmlForPlaceholder( 'termbox-toc' );
 		$this->assertInternalType( 'string', $html );
@@ -135,7 +142,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 	public function testRenderTermBoxTocEntry() {
 		$item = $this->getItem();
 		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
-		$expander = $this->newExpander( $this->newUser( false ), $entityRevisionLookup, $item->getId() );
+		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $item->getId() );
 
 		// According to the mock objects, this should generate a term box for
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
@@ -147,7 +154,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 	public function testRenderTermBox() {
 		$item = $this->getItem();
 		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
-		$expander = $this->newExpander( $this->newUser( false ), $entityRevisionLookup, $item->getId() );
+		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $item->getId() );
 
 		// According to the mock objects, this should generate a term box for
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
@@ -165,7 +172,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		$itemId = $item->getId();
 		$entityRevisionLookup = $this->getExceptionThrowingEntityRevisionLookup();
 
-		$expander = $this->newExpander( $this->newUser( false ), $entityRevisionLookup, $itemId );
+		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $itemId );
 
 		$html = $expander->renderTermBox( $itemId, 1 );
 		$this->assertEquals( '', $html );
@@ -179,7 +186,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		$expander = $this->newExpander( $this->newUser( true ), $entityRevisionLookup, $itemId );
 		$this->assertArrayEquals( array(), $expander->getExtraUserLanguages() );
 
-		$expander = $this->newExpander( $this->newUser( false ), $entityRevisionLookup, $itemId );
+		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $itemId );
 		$this->assertArrayEquals( array( 'de', 'ru' ), $expander->getExtraUserLanguages() );
 	}
 
