@@ -23,6 +23,11 @@ use Wikibase\Template\TemplateFactory;
 class PropertyView extends EntityView {
 
 	/**
+	 * @var StatementGroupListView
+	 */
+	private $statementGroupListView;
+
+	/**
 	 * @var DataTypeFactory
 	 */
 	private $dataTypeFactory;
@@ -30,20 +35,21 @@ class PropertyView extends EntityView {
 	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param FingerprintView $fingerprintView
-	 * @param ClaimsView $claimsView
+	 * @param StatementGroupListView $statementGroupListView
 	 * @param Language $language
 	 * @param bool $editable
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		FingerprintView $fingerprintView,
-		ClaimsView $claimsView,
+		StatementGroupListView $statementGroupListView,
 		DataTypeFactory $dataTypeFactory,
 		Language $language,
 		$editable = true
 	) {
-		parent::__construct( $templateFactory, $fingerprintView, $claimsView, $language, $editable );
+		parent::__construct( $templateFactory, $fingerprintView, $language, $editable );
 
+		$this->statementGroupListView = $statementGroupListView;
 		$this->dataTypeFactory = $dataTypeFactory;
 	}
 
@@ -62,7 +68,7 @@ class PropertyView extends EntityView {
 		$html = parent::getMainHtml( $entityRevision );
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
-		$html .= $this->claimsView->getHtml(
+		$html .= $this->statementGroupListView->getHtml(
 			$property->getStatements()->toArray()
 		);
 
