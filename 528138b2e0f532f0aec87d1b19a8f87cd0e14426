@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e7fc396_b9f41b52",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-01-27T21:37:49Z",
+      "side": 1,
+      "message": "There are new lines in here, those wont work as expected with single quotes",
+      "revId": "528138b2e0f532f0aec87d1b19a8f87cd0e14426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
