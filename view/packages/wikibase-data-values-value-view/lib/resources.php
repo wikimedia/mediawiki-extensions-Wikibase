@@ -205,6 +205,15 @@ return call_user_func( function() {
 		),
 
 
+		'util.ContentLanguages' => $moduleTemplate + array(
+			'scripts' => array(
+				'util/util.ContentLanguages.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+			)
+		),
+
 		'util.Extendable' => $moduleTemplate + array(
 			'scripts' => array(
 				'util/util.Extendable.js',

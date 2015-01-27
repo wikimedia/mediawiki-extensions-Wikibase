@@ -15,12 +15,17 @@
 
 		var self = this;
 
-		this._languageSelector = new LanguageSelector( this._messageProvider, function() {
-			var value = self.viewState().value();
-			return value && value.getLanguageCode();
-		}, function() {
-			self._viewNotifier.notify( 'change' );
-		} );
+		this._languageSelector = new LanguageSelector(
+			this._options.contentLanguages,
+			this._messageProvider,
+			function() {
+				var value = self.viewState().value();
+				return value && value.getLanguageCode();
+			},
+			function() {
+				self._viewNotifier.notify( 'change' );
+			}
+		);
 
 		var inputExtender = new vv.ExpertExtender(
 			this.$input,
