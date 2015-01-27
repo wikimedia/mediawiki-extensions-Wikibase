@@ -2,9 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Deserializers\Deserializer;
 use PHPUnit_Framework_Assert as Assert;
+use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -16,12 +19,24 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class EntityModificationTestHelper {
 
+	/**
+	 * @var EntityIdParser
+	 */
 	private $idParser;
 
+	/**
+	 * @var Serializer
+	 */
 	private $serializer;
 
+	/**
+	 * @var Deserializer
+	 */
 	private $deserializer;
 
+	/**
+	 * @var MockRepository
+	 */
 	private $repository;
 
 	public function __construct() {

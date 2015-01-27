@@ -30,12 +30,12 @@ use Wikibase\Test\MockRepository;
 class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var MockRepository
+	 * @var MockRepository|null
 	 */
 	private $repo = null;
 
 	/**
-	 * @var EntityModificationTestHelper
+	 * @var EntityModificationTestHelper|null
 	 */
 	private $testHelper = null;
 

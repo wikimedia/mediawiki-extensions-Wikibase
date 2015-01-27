@@ -58,6 +58,11 @@ class StatementGroupListViewTest extends \MediaWikiLangTestCase {
 		$this->assertContains( $link, $html );
 	}
 
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return Claim[]
+	 */
 	private function makeClaims( PropertyId $propertyId ) {
 		$claims = array(
 			$this->makeClaim( new PropertyNoValueSnak(
@@ -87,6 +92,12 @@ class StatementGroupListViewTest extends \MediaWikiLangTestCase {
 		return $claims;
 	}
 
+	/**
+	 * @param Snak $mainSnak
+	 * @param string|null $guid
+	 *
+	 * @return Claim
+	 */
 	private function makeClaim( Snak $mainSnak, $guid = null ) {
 		static $guidCounter = 0;
 

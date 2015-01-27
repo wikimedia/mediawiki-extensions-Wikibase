@@ -39,7 +39,7 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 	/**
 	 * Maps properties to info arrays
 	 *
-	 * @var array[]
+	 * @var array[]|null
 	 */
 	protected $propertyInfo = null;
 

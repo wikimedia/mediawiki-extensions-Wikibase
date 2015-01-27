@@ -28,7 +28,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialEntityData extends SpecialWikibasePage {
 
 	/**
-	 * @var EntityDataRequestHandler
+	 * @var EntityDataRequestHandler|null
 	 */
 	protected $requestHandler = null;
 

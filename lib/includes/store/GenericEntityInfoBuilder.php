@@ -32,7 +32,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	 *
 	 * @see EntityInfoBuilder::getEntityInfo()
 	 *
-	 * @var array[] map of id-strings to entity record arrays:
+	 * @var array[]|null map of id-strings to entity record arrays:
 	 *      id-string => entity-record
 	 */
 	private $entityInfo = null;
@@ -53,7 +53,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	 *
 	 * Initialized lazily by resolveRedirects().
 	 *
-	 * @var string[] map of id-strings to EntityId objects:
+	 * @var string[]|null map of id-strings to EntityId objects:
 	 *      id-string => EntityId
 	 */
 	private $redirects = null;

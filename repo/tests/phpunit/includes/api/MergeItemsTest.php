@@ -29,17 +29,17 @@ use Wikibase\Test\MockRepository;
 class MergeItemsTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var MockRepository
+	 * @var MockRepository|null
 	 */
 	private $repo = null;
 
 	/**
-	 * @var EntityModificationTestHelper
+	 * @var EntityModificationTestHelper|null
 	 */
 	private $entityModificationTestHelper = null;
 
 	/**
-	 * @var ApiModuleTestHelper
+	 * @var ApiModuleTestHelper|null
 	 */
 	private $apiModuleTestHelper = null;
 

@@ -132,7 +132,7 @@ class DataUpdateHookHandlers {
 	/**
 	 * Hook run after a page was deleted.
 	 *
-	 * @param int $namespaceId
+	 * @param int $namespace
 	 * @param int $pageId
 	 */
 	public function doArticleDeleteComplete( $namespace, $pageId ) {

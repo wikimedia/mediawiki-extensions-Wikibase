@@ -29,7 +29,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	/**
 	 * The type used
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	private $type = null;
 
