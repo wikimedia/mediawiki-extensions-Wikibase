@@ -258,14 +258,18 @@
 			return;
 		}
 
-		var $message = $( '<span><p>' + copyRightMessageHtml + '</p></span>' ),
+		var $message = $( '<span><p>' + copyRightMessageHtml + '</p></span>' )
+				.addClass( 'wikibase-copyrightnotification-container' ),
 			$hideMessage = $( '<a/>', {
 				text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
 			} ).appendTo( $message ),
 			editableTemplatedWidget = $origin.data( 'EditableTemplatedWidget' );
 
 		// TODO: Use notification system for copyright messages on all widgets.
-		if( editableTemplatedWidget ) {
+		if(
+			editableTemplatedWidget
+			&& !( editableTemplatedWidget instanceof $.wikibase.statementview )
+		) {
 			editableTemplatedWidget.notification( $message, 'wb-edit' );
 
 			$hideMessage.on( 'click', function( event ) {
