@@ -16,6 +16,24 @@
       "revId": "4fc1486c3f542d11da182850cf84b41073b9fad1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_ff055717",
+        "filename": "repo/tests/phpunit/includes/ItemDisambiguationTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-27T10:41:22Z",
+      "side": 1,
+      "message": "Why do I have the feeling I explained that a hundred times? See I8fa5b47.",
+      "parentUuid": "ae6ac7d6_023f9923",
+      "revId": "4fc1486c3f542d11da182850cf84b41073b9fad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
