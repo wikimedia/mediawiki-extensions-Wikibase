@@ -205,7 +205,7 @@ div.wikibase-statementview textarea {
 }
 
 /* Section of claims referring to one property */
-.wikibase-statementlistview-listview .wikibase-statementlistview {
+.wikibase-statementgrouplistview .wikibase-statementlistview {
 	position: relative;
 	background-color: #FFF;
 	float: left;
@@ -317,12 +317,12 @@ div .wb-snak-value span.error.wb-format-error {
 	display: none;
 }
 
-.wikibase-statementlistview-listview .wikibase-statementgrouplistview-groupname.wb-edit,
+.wikibase-statementgrouplistview .wikibase-statementgrouplistview-groupname.wb-edit,
 .wikibase-statementlistview-listview .wb-edit .wb-snak-property-container {
 	background-color: #C0DAE5;
 }
 
-.wikibase-statementlistview-listview .wikibase-statementgrouplistview-groupname.wb-error,
+.wikibase-statementgrouplistview .wikibase-statementgrouplistview-groupname.wb-error,
 .wb-error div.wb-claim-new .wb-snak-property-container {
 	background-color: #E5C8B5;
 }
