@@ -5,7 +5,7 @@ namespace Wikibase;
 use FormatJson;
 use ResourceLoaderContext;
 use ResourceLoaderFileModule;
-use Wikibase\Template\TemplateRegistry;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Injects templates into JavaScript.
@@ -15,7 +15,6 @@ use Wikibase\Template\TemplateRegistry;
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
  */
-
 class TemplateModule extends ResourceLoaderFileModule {
 
 	/**
@@ -26,9 +25,8 @@ class TemplateModule extends ResourceLoaderFileModule {
 	 * @return string
 	 */
 	public function getScript( ResourceLoaderContext $context ) {
-		// register HTML templates
-		$templateRegistry = TemplateRegistry::getDefaultInstance();
-		$templatesJson = FormatJson::encode( $templateRegistry->getTemplates() );
+		$templateFactory = WikibaseRepo::getDefaultInstance()->getTemplateFactory();
+		$templatesJson = FormatJson::encode( $templateFactory->getTemplates() );
 
 		// template store JavaScript initialisation
 		$script = <<<EOT
