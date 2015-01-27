@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_e24dc0e1",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-27T13:54:18Z",
+      "side": 1,
+      "message": "You are removing a feature here, but this is not described in the commit message. Was this feature unused?",
+      "revId": "fdc895f180d6e874ad8e672980f5127492532fe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
