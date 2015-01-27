@@ -308,6 +308,7 @@ return call_user_func( function() {
 
 	return array_merge(
 		$modules,
+		include( __DIR__ . '/snakview/resources.php' ),
 		include( __DIR__ . '/toolbar/resources.php' )
 	);
 
