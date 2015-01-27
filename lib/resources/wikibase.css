@@ -205,7 +205,7 @@ div.wikibase-statementview textarea {
 }
 
 /* Section of claims referring to one property */
-.wb-claims .wb-claimlistview {
+.wikibase-statementlistview-listview .wikibase-statementlistview {
 	position: relative;
 	background-color: #FFF;
 	float: left;
@@ -269,7 +269,7 @@ div .wb-snak-value span.error.wb-format-error {
 	font-style: italic;
 }
 
-.wb-claimlistview > .wikibase-toolbar-wrapper {
+.wikibase-statementlistview > .wikibase-toolbar-wrapper {
 	background-color: #F8F8F8;
 	display: block;
 	float: left;
@@ -277,15 +277,15 @@ div .wb-snak-value span.error.wb-format-error {
 	width: 100%;
 }
 
-.wb-claimlistview > .wikibase-toolbar-wrapper {
+.wikibase-statementlistview > .wikibase-toolbar-wrapper {
 	border-top: 1px dashed #AAA;
 }
 
-.wb-claimlistview.wb-new > .wikibase-toolbar-wrapper {
+.wikibase-statementlistview.wb-new > .wikibase-toolbar-wrapper {
 	border-top: 0;
 }
 
-.wb-claimlistview > .wikibase-toolbar-wrapper .wikibase-toolbar-container {
+.wikibase-statementlistview > .wikibase-toolbar-wrapper .wikibase-toolbar-container {
 	position: static;
 	line-height: 3em;
 	float: right;
@@ -317,12 +317,12 @@ div .wb-snak-value span.error.wb-format-error {
 	display: none;
 }
 
-.wb-claims .wb-claimgrouplistview-groupname.wb-edit,
-.wb-claims .wb-edit .wb-snak-property-container {
+.wikibase-statementlistview-listview .wb-claimgrouplistview-groupname.wb-edit,
+.wikibase-statementlistview-listview .wb-edit .wb-snak-property-container {
 	background-color: #C0DAE5;
 }
 
-.wb-claims .wb-claimgrouplistview-groupname.wb-error,
+.wikibase-statementlistview-listview .wb-claimgrouplistview-groupname.wb-error,
 .wb-error div.wb-claim-new .wb-snak-property-container {
 	background-color: #E5C8B5;
 }
@@ -336,12 +336,12 @@ div .wb-snak-value span.error.wb-format-error {
 	background-color: #FFDFC9;
 }
 
-.wb-claimlistview.wb-new {
+.wikibase-statementlistview.wb-new {
 	margin-bottom: 0;
 	border: none;
 }
 
-.wb-claimgrouplistview .wb-claimlistview.wb-new .wikibase-statementview {
+.wb-claimgrouplistview .wikibase-statementlistview.wb-new .wikibase-statementview {
 	border: 1px solid #C9C9C9;
 	width: 100%;
 	margin-bottom: 1em;
@@ -355,7 +355,7 @@ div .wb-snak-value span.error.wb-format-error {
 	margin: 0 18em 0 15em;
 }
 
-.wb-claimgrouplistview .wb-claimlistview.wb-new .wb-snak-property-container {
+.wb-claimgrouplistview .wikibase-statementlistview.wb-new .wb-snak-property-container {
 	position: absolute;
 	top: 0;
 	bottom: 0;
