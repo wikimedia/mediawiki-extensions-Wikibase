@@ -32,6 +32,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.PropertyValueSnak',
 				'wikibase.datamodel.Term',
 				'wikibase.datamodel.TermMap',
+				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.SnakSerializer',
 				'wikibase.store.FetchedContent',
 			),
