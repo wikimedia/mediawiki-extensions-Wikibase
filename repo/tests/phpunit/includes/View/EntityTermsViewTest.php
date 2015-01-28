@@ -9,7 +9,6 @@ use Wikibase\Repo\View\EntityTermsView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\TextInjector;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\EntityTermsView
@@ -43,7 +42,7 @@ class EntityTermsViewTest extends \MediaWikiLangTestCase {
 	}
 
 	private function getEntityTermsView( $languageCode = 'en' ) {
-		$templateFactory = new TemplateFactory( TemplateRegistry::getDefaultInstance() );
+		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		return new EntityTermsView(
 			$templateFactory,
