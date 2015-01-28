@@ -42,6 +42,7 @@ return call_user_func( function() {
 				'jquery.wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css',
 				'jquery.wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
 				'jquery.wikibase/themes/default/jquery.wikibase.sitelinkview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.statementgroupview.css',
 			)
 		),
 
