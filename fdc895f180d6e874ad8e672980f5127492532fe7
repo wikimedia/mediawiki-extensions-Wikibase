@@ -16,6 +16,24 @@
       "revId": "fdc895f180d6e874ad8e672980f5127492532fe7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e7fc396_05cfdc83",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-01-28T10:36:50Z",
+      "side": 1,
+      "message": "See first bullet point in the commit message. It was not unused but is changed where it was used along. Reduces complexity by limiting snaklistview to only handle SnakList objects (SnakList may be empty). Else, an empty SnakList would always need to be mapped to \"null\" and vice versa.",
+      "parentUuid": "ae6ac7d6_e24dc0e1",
+      "revId": "fdc895f180d6e874ad8e672980f5127492532fe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
