@@ -66,6 +66,10 @@ are also triggered down the document */
 	background-color: #FFDFC9;
 }
 
+.wikibase-copyrightnotification-container a {
+	cursor: pointer;
+}
+
 
 /********** BASIC LAYOUT **********/
 
