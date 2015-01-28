@@ -109,6 +109,9 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 
 ### 1.3.0 (dev)
 
+* `FingerprintSerializer` now supports serializing `AliasGroupFallback`s and `TermFallback`s
+* `EntityDeserializer` now fails if the given serialization contains a term or alias that was either
+  the result of a fallback or transliteration
 * Added `newTypedSnakSerializer` to `SerializerFactory`
 
 ### 1.2.0 (2014-10-15)

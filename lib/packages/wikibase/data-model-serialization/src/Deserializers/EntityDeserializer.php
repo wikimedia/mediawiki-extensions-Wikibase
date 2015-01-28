@@ -100,7 +100,7 @@ abstract class EntityDeserializer extends TypedObjectDeserializer {
 	private function deserializeValuePerLanguageSerialization( array $serialization ) {
 		$array = array();
 
-		foreach( $serialization as $requestedLanguage => $valueSerialization ) {
+		foreach ( $serialization as $requestedLanguage => $valueSerialization ) {
 			$this->assertIsValidValueSerialization( $valueSerialization, $requestedLanguage );
 			$array[$valueSerialization['language']] = $valueSerialization['value'];
 		}
@@ -114,12 +114,12 @@ abstract class EntityDeserializer extends TypedObjectDeserializer {
 		}
 		$this->assertAttributeIsArray( $serialization, 'aliases' );
 
-		foreach( $serialization['aliases'] as $requestedLanguage => $aliasesPerLanguageSerialization ) {
+		foreach ( $serialization['aliases'] as $requestedLanguage => $aliasesPerLanguageSerialization ) {
 			if ( !is_array( $aliasesPerLanguageSerialization ) ) {
 				throw new DeserializationException( "Aliases attribute should be an array of array" );
 			}
 
-			foreach( $aliasesPerLanguageSerialization as $aliasSerialization ) {
+			foreach ( $aliasesPerLanguageSerialization as $aliasSerialization ) {
 				$this->assertIsValidValueSerialization( $aliasSerialization, $requestedLanguage );
 				$entity->addAliases( $aliasSerialization['language'], array( $aliasSerialization['value'] ) );
 			}
@@ -165,4 +165,5 @@ abstract class EntityDeserializer extends TypedObjectDeserializer {
 		$statements = new StatementList( iterator_to_array( $claims ) );
 		$entity->setStatements( $statements );
 	}
+
 }

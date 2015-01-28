@@ -63,7 +63,7 @@ class FingerprintSerializer {
 	private function serializeValuePerTermList( TermList $list ) {
 		$serialization = array();
 
-		foreach( $list as $term ) {
+		foreach ( $list as $term ) {
 			$this->serializeTerm( $term, $serialization );
 		}
 
@@ -95,7 +95,7 @@ class FingerprintSerializer {
 	private function serializeAliasGroupList( AliasGroupList $aliases ) {
 		$serialization = array();
 
-		foreach( $aliases as $aliasGroup ) {
+		foreach ( $aliases as $aliasGroup ) {
 			$this->serializeAliasGroup( $aliasGroup, $serialization );
 		}
 
@@ -107,12 +107,12 @@ class FingerprintSerializer {
 
 	private function serializeAliasGroup( AliasGroup $aliasGroup, array &$serialization ) {
 		$language = $aliasGroup->getLanguageCode();
-		foreach( $aliasGroup->getAliases() as $value ) {
+		foreach ( $aliasGroup->getAliases() as $value ) {
 			$result = array(
 				'language' => $language,
 				'value' => $value
 			);
-			if ($aliasGroup instanceof AliasGroupFallback) {
+			if ( $aliasGroup instanceof AliasGroupFallback ) {
 				$result['language'] = $aliasGroup->getActualLanguageCode();
 				$result['source'] = $aliasGroup->getSourceLanguageCode();
 			}
