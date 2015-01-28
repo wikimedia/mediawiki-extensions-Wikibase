@@ -3,6 +3,12 @@
 namespace Wikibase\DataModel\Serializers;
 
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupFallback;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermFallback;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * Package private
@@ -43,55 +49,75 @@ class FingerprintSerializer {
 	}
 
 	public function addLabelsToSerialization( Entity $entity, array &$serialization ) {
-		$labels = $entity->getLabels();
+		$labels = $entity->getFingerprint()->getLabels();
 
-		$serialization['labels'] = $this->serializeValuePerLanguageArray( $labels );
+		$serialization['labels'] = $this->serializeValuePerTermList( $labels );
 	}
 
 	public function addDescriptionsToSerialization( Entity $entity, array &$serialization ) {
-		$descriptions = $entity->getDescriptions();
+		$descriptions = $entity->getFingerprint()->getDescriptions();
 
-		$serialization['descriptions'] = $this->serializeValuePerLanguageArray( $descriptions );
+		$serialization['descriptions'] = $this->serializeValuePerTermList( $descriptions );
 	}
 
-	private function serializeValuePerLanguageArray( array $array ) {
+	private function serializeValuePerTermList( TermList $list ) {
 		$serialization = array();
 
-		foreach( $array as $language => $value ) {
-			$serialization[$language] = array(
-				'language' => $language,
-				'value' => $value
-			);
+		foreach( $list as $term ) {
+			$this->serializeTerm( $term, $serialization );
 		}
 
 		if ( $this->useObjectsForMaps ) {
 			$serialization = (object)$serialization;
 		}
 		return $serialization;
+	}
+
+	private function serializeTerm( Term $term, array &$serialization ) {
+		$language = $term->getLanguageCode();
+		$result = array(
+			'language' => $language,
+			'value' => $term->getText(),
+		);
+		if ( $term instanceof TermFallback ) {
+			$result['language'] = $term->getActualLanguageCode();
+			$result['source'] = $term->getSourceLanguageCode();
+		}
+		$serialization[$language] = $result;
 	}
 
 	public function addAliasesToSerialization( Entity $entity, array &$serialization ) {
-		$aliases = $entity->getAllAliases();
+		$aliases = $entity->getFingerprint()->getAliasGroups();
 
-		$serialization['aliases'] = $this->serializeValuesPerLanguageArray( $aliases );
+		$serialization['aliases'] = $this->serializeAliasGroupList( $aliases );
 	}
 
-	private function serializeValuesPerLanguageArray( $array ) {
+	private function serializeAliasGroupList( AliasGroupList $aliases ) {
 		$serialization = array();
 
-		foreach( $array as $language => $values ) {
-			foreach( $values as $value ) {
-				$serialization[$language][] = array(
-					'language' => $language,
-					'value' => $value
-				);
-			}
+		foreach( $aliases as $aliasGroup ) {
+			$this->serializeAliasGroup( $aliasGroup, $serialization );
 		}
 
 		if ( $this->useObjectsForMaps ) {
 			$serialization = (object)$serialization;
 		}
 		return $serialization;
+	}
+
+	private function serializeAliasGroup( AliasGroup $aliasGroup, array &$serialization ) {
+		$language = $aliasGroup->getLanguageCode();
+		foreach( $aliasGroup->getAliases() as $value ) {
+			$result = array(
+				'language' => $language,
+				'value' => $value
+			);
+			if ($aliasGroup instanceof AliasGroupFallback) {
+				$result['language'] = $aliasGroup->getActualLanguageCode();
+				$result['source'] = $aliasGroup->getSourceLanguageCode();
+			}
+			$serialization[$language][] = $result;
+		}
 	}
 
 }
