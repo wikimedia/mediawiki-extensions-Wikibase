@@ -24,20 +24,20 @@ require_once $basePath . '/maintenance/Maintenance.php';
 
 class importInterlang extends Maintenance {
 
-	protected $verbose = false;
-	protected $ignore_errors = false;
-	protected $skip = 0;
-	protected $only = 0;
+	private $verbose = false;
+	private $ignore_errors = false;
+	private $skip = 0;
+	private $only = 0;
 
 	/**
 	 * @var User|null
 	 */
-	protected $user = null;
+	private $user = null;
 
 	/**
 	 * @var EntityStore|null
 	 */
-	protected $store = null;
+	private $store = null;
 
 	public function __construct() {
 		$this->mDescription = "Import interlanguage links in Wikidata.\n\nThe links may be created by extractInterlang.sql";
@@ -134,7 +134,7 @@ class importInterlang extends Maintenance {
 	 *
 	 * @return bool true if the item was created, false otherwise
 	 */
-	protected function createItem( $links ) {
+	private function createItem( $links ) {
 		$item = Item::newEmpty();
 
 		foreach ( $links as $lang => $title ) {
@@ -162,7 +162,7 @@ class importInterlang extends Maintenance {
 	 * @see importInterlang::doPrint()
 	 * @see Maintenance::output()
 	 */
-	protected function maybePrint( $a ) {
+	private function maybePrint( $a ) {
 		if( $this->verbose ) {
 			$this->doPrint( $a );
 		}
@@ -173,7 +173,7 @@ class importInterlang extends Maintenance {
 	 *
 	 * @see Maintenance::output()
 	 */
-	protected function doPrint( $a ) {
+	private function doPrint( $a ) {
 		if( is_null( $a ) ) {
 			$a = 'null';
 		} elseif( is_bool( $a ) ) {

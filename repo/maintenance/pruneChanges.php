@@ -19,17 +19,17 @@ class PruneChanges extends Maintenance {
 	/**
 	 * @var int the minimum number of seconds to keep changes for.
 	 */
-	protected $keepSeconds = 0;
+	private $keepSeconds = 0;
 
 	/**
 	 * @var int the minimum number of seconds after dispatching to keep changes for.
 	 */
-	protected $graceSeconds = 0;
+	private $graceSeconds = 0;
 
 	/**
 	 * @var bool whether the dispatch time should be ignored
 	 */
-	protected $ignoreDispatch = false;
+	private $ignoreDispatch = false;
 
 	public function __construct() {
 		parent::__construct();
@@ -98,7 +98,7 @@ class PruneChanges extends Maintenance {
 	 *
 	 * @return int timstamp up to which changes can be pruned (as unix period)
 	 */
-	protected function getCutoffTimestamp() {
+	private function getCutoffTimestamp() {
 		$until = time() - $this->keepSeconds;
 
 		if ( !$this->ignoreDispatch ) {
@@ -130,7 +130,7 @@ class PruneChanges extends Maintenance {
 	 *
 	 * @return int the number of changes deleted.
 	 */
-	public function pruneChanges( $until ) {
+	private function pruneChanges( $until ) {
 		$dbw = wfGetDB( DB_MASTER );
 
 		$dbw->delete(

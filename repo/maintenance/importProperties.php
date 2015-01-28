@@ -25,20 +25,20 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) 
 require_once $basePath . '/maintenance/Maintenance.php';
 
 class importProperties extends Maintenance {
-	protected $verbose = false;
-	protected $ignore_errors = false;
-	protected $skip = 0;
-	protected $only = 0;
+	private $verbose = false;
+	private $ignore_errors = false;
+	private $skip = 0;
+	private $only = 0;
 
 	/**
 	 * @var User|null
 	 */
-	protected $user = null;
+	private $user = null;
 
 	/**
 	 * @var EntityStore|null
 	 */
-	protected $store = null;
+	private $store = null;
 
 	public function __construct() {
 		$this->mDescription = "Import properties in Wikidata.";
@@ -130,7 +130,7 @@ class importProperties extends Maintenance {
 	 *
 	 * @return bool true if the item was created, false otherwise
 	 */
-	protected function createProperty( $data ) {
+	private function createProperty( $data ) {
 		$property = Property::newFromType( 'wikibase-item' );
 
 		foreach ( $data as $lang => $title ) {
@@ -154,7 +154,7 @@ class importProperties extends Maintenance {
 	 * @see importInterlang::doPrint()
 	 * @see Maintenance::output()
 	 */
-	protected function maybePrint( $a ) {
+	private function maybePrint( $a ) {
 		if( $this->verbose ) {
 			$this->doPrint( $a );
 		}
@@ -165,7 +165,7 @@ class importProperties extends Maintenance {
 	 *
 	 * @see Maintenance::output()
 	 */
-	protected function doPrint( $a ) {
+	private function doPrint( $a ) {
 		if( is_null( $a ) ) {
 			$a = 'null';
 		} elseif( is_bool( $a ) ) {
