@@ -83,7 +83,6 @@ use Wikibase\Store\TermBuffer;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
@@ -1012,14 +1011,14 @@ class WikibaseRepo {
 	 * @return EntityParserOutputGeneratorFactory
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
-
+		$templateFactory = TemplateFactory::getDefaultInstance();
 		$entityViewFactory = new EntityViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			$this->getSnakFormatterFactory(),
 			$this->getEntityLookup(),
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			new LanguageNameLookup(),
 			$this->getSettings()->getSetting( 'siteLinkGroups' ),
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' ),

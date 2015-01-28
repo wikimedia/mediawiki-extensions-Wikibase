@@ -5,13 +5,27 @@ namespace Wikibase\Template;
 /**
  * @license GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
+ * @author Thiemo Mättig
  */
 class TemplateFactory {
+
+	/**
+	 * @var TemplateFactory
+	 */
+	private static $instance;
 
 	/**
 	 * @var TemplateRegistry
 	 */
 	private $templateRegistry;
+
+	public static function getDefaultInstance() {
+		if ( self::$instance === null ) {
+			self::$instance = new self( TemplateRegistry::getDefaultInstance() );
+		}
+
+		return self::$instance;
+	}
 
 	/**
 	 * @param TemplateRegistry $templateRegistry

@@ -8,7 +8,6 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers \Wikibase\Repo\View\EntityViewFactory
@@ -73,13 +72,15 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getEntityViewFactory() {
+		$templateFactory = TemplateFactory::getDefaultInstance();
+
 		return new EntityViewFactory(
 			$this->getEntityIdFormatterFactory(),
 			$this->getSnakFormatterFactory(),
 			$this->getMock( 'Wikibase\Lib\Store\EntityLookup' ),
 			$this->getSiteStore(),
 			$this->getMock( 'DataTypes\DataTypeFactory' ),
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' ),
 			array(),
 			array(),

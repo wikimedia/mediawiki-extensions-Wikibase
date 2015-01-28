@@ -3,15 +3,12 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
-use SpecialPage;
-use SpecialPageFactory;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\View\ToolbarEditSectionGenerator;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\ToolbarEditSectionGeneratorTest
@@ -114,10 +111,10 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 			->will( $this->returnCallback( function( $specialPage, $params = array() ) {
 				return 'Special:' . $specialPage . '/' . implode( '/', $params );
 			} ) );
-		return new ToolbarEditSectionGenerator(
-			$specialPageLinker,
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() )
-		);
+
+		$templateFactory = TemplateFactory::getDefaultInstance();
+
+		return new ToolbarEditSectionGenerator( $specialPageLinker, $templateFactory );
 	}
 
 }

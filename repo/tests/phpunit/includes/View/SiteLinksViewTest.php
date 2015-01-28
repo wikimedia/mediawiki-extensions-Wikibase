@@ -14,7 +14,6 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Repo\View\EditSectionGenerator;
 use Wikibase\Repo\View\SiteLinksView;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\SiteLinksView
@@ -161,9 +160,10 @@ class SiteLinksViewTest extends \MediaWikiTestCase {
 	 * @return SiteLinksView
 	 */
 	private function getSiteLinksView() {
+		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		return new SiteLinksView(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			$this->newSiteList(),
 			$this->getEditSectionGeneratorMock(),
 			$this->getEntityLookupMock(),
