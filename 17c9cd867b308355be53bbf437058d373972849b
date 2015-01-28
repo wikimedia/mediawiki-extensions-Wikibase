@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e7fc396_e5466026",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-01-28T09:44:15Z",
+      "side": 0,
+      "message": "Always false.",
+      "revId": "17c9cd867b308355be53bbf437058d373972849b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
