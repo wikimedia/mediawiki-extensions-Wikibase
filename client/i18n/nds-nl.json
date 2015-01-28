@@ -5,7 +5,8 @@
 		]
 	},
 	"wikibase-client-desc": "Kliënt veur de Wikibase-uutbreiding",
-	"specialpages-group-wikibaseclient": "Wikidata-kliënt",
+	"wikibase-after-page-move-queued": "t [$1 {{WBREPONAME}}-objekt] dat an disse zied ekoppeld is zal voorttemee automaties bie-ewörken wörden.",
+	"wikibase-after-page-delete-queued": "t [$1 {{WBREPONAME}}-objekt] dat an disse zied ekoppeld is zal voorttemee automaties bie-ewörken wörden.",
 	"wikibase-comment-linked": "Der is n Wikidata-onderwarp ekoppeld an disse zied.",
 	"wikibase-comment-update": "Wikidata-onderwarp bie-ewörken",
 	"wikibase-comment-sitelink-add": "Taalverwiezing derbie ezet: $1",
