@@ -35,8 +35,16 @@ class TemplateFactory {
 	}
 
 	/**
+	 * @return string[] Array containing all raw template strings.
+	 */
+	public function getTemplates() {
+		return $this->templateRegistry->getTemplates();
+	}
+
+	/**
 	 * @param string $key
 	 * @param array $params
+	 *
 	 * @return Template
 	 */
 	public function get( $key, array $params ) {
