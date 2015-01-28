@@ -202,13 +202,9 @@ class SetReference extends ModifyClaim {
 	}
 
 	/**
-	 * @see \ApiBase::getAllowedParams
-	 *
-	 * @since 0.3
-	 *
-	 * @return array
+	 * @see ApiBase::getAllowedParams
 	 */
-	public function getAllowedParams() {
+	protected function getAllowedParams() {
 		return array_merge(
 			array(
 				'statement' => array(

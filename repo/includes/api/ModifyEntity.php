@@ -415,14 +415,26 @@ abstract class ModifyEntity extends ApiWikibase {
 	}
 
 	/**
+	 * @see ApiBase::getAllowedParams
+	 */
+	protected function getAllowedParams() {
+		return array_merge(
+			parent::getAllowedParams(),
+			$this->getAllowedParamsForId(),
+			$this->getAllowedParamsForSiteLink(),
+			$this->getAllowedParamsForEntity()
+		);
+	}
+
+	/**
 	 * Get allowed params for the identification of the entity
 	 * Lookup through an id is common for all entities
 	 *
 	 * @since 0.1
 	 *
-	 * @return array the allowed params
+	 * @return array
 	 */
-	public function getAllowedParamsForId() {
+	protected function getAllowedParamsForId() {
 		return array(
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'string',
@@ -436,9 +448,9 @@ abstract class ModifyEntity extends ApiWikibase {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array the allowed params
+	 * @return array
 	 */
-	public function getAllowedParamsForSiteLink() {
+	protected function getAllowedParamsForSiteLink() {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 		return array(
 			'site' => array(
@@ -455,9 +467,9 @@ abstract class ModifyEntity extends ApiWikibase {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array the allowed params
+	 * @return array
 	 */
-	public function getAllowedParamsForEntity() {
+	protected function getAllowedParamsForEntity() {
 		return array(
 			'baserevid' => array(
 				ApiBase::PARAM_TYPE => 'integer',
@@ -469,4 +481,5 @@ abstract class ModifyEntity extends ApiWikibase {
 			'bot' => false,
 		);
 	}
+
 }

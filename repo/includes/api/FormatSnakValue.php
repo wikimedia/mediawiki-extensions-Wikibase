@@ -165,12 +165,8 @@ class FormatSnakValue extends ApiWikibase {
 
 	/**
 	 * @see ApiBase::getAllowedParams
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
 	 */
-	public function getAllowedParams() {
+	protected function getAllowedParams() {
 		return array(
 			'generate' => array(
 				ApiBase::PARAM_TYPE => array(

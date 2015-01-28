@@ -93,9 +93,9 @@ abstract class ModifyClaim extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::getAllowedParams
+	 * @see ApiBase::getAllowedParams
 	 */
-	public function getAllowedParams() {
+	protected function getAllowedParams() {
 		return array_merge(
 			parent::getAllowedParams(),
 			array(
@@ -108,4 +108,5 @@ abstract class ModifyClaim extends ApiWikibase {
 			)
 		);
 	}
+
 }

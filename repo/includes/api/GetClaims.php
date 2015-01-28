@@ -196,12 +196,8 @@ class GetClaims extends ApiWikibase {
 
 	/**
 	 * @see ApiBase::getAllowedParams
-	 *
-	 * @since 0.3
-	 *
-	 * @return array
 	 */
-	public function getAllowedParams() {
+	protected function getAllowedParams() {
 		return array(
 			'entity' => array(
 				ApiBase::PARAM_TYPE => 'string',

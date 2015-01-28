@@ -153,13 +153,9 @@ class CreateRedirectModule extends ApiBase {
 	}
 
 	/**
-	 * Returns an array of allowed parameters (parameter name) => (default
-	 * value) or (parameter name) => (array with PARAM_* constants as keys)
-	 * Don't call this function directly: use getFinalParams() to allow
-	 * hooks to modify parameters as needed.
-	 * @return array|bool
+	 * @see ApiBase::getAllowedParams
 	 */
-	public function getAllowedParams() {
+	protected function getAllowedParams() {
 		return array(
 			'from' => array(
 				ApiBase::PARAM_TYPE => 'string',

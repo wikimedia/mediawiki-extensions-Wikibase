@@ -110,9 +110,9 @@ class CreateClaim extends ModifyClaim {
 	}
 
 	/**
-	 * @see \ApiBase::getAllowedParams
+	 * @see ApiBase::getAllowedParams
 	 */
-	public function getAllowedParams() {
+	protected function getAllowedParams() {
 		return array_merge(
 			array(
 				'entity' => array(
