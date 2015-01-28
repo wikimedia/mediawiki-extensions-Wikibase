@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e7fc396_8aef7b82",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialItemsMostSitelinksTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2015-01-28T07:06:22Z",
+      "side": 1,
+      "message": "This test appears to be failing.",
+      "revId": "f0ef076061c0d16e186fe555766ebc68a6e1455d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
