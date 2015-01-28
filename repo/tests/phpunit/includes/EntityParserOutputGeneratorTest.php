@@ -18,7 +18,6 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\ValuesFinder;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\EntityParserOutputGenerator
@@ -109,6 +108,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	private function newEntityParserOutputGenerator() {
+		$templateFactory = TemplateFactory::getDefaultInstance();
+
 		return new EntityParserOutputGenerator(
 			$this->getEntityViewFactory(),
 			$this->getConfigBuilderMock(),
@@ -117,7 +118,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			new SqlEntityInfoBuilderFactory(),
 			$this->newLanguageFallbackChain(),
 			'en',
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() )
+			$templateFactory
 		);
 	}
 
@@ -222,4 +223,5 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	private function getParserOptions() {
 		return new ParserOptions( null, Language::factory( 'en' ) );
 	}
+
 }
