@@ -21,7 +21,9 @@ class TemplateFactory {
 
 	public static function getDefaultInstance() {
 		if ( self::$instance === null ) {
-			self::$instance = new self( TemplateRegistry::getDefaultInstance() );
+			self::$instance = new self(
+				new TemplateRegistry( include( __DIR__ . '/../../resources/templates.php' ) )
+			);
 		}
 
 		return self::$instance;
