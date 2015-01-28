@@ -9,7 +9,6 @@ use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\TextInjector;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\FingerprintView
@@ -43,7 +42,7 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 	}
 
 	private function getFingerprintView( $languageCode = 'en' ) {
-		$templateFactory = new TemplateFactory( TemplateRegistry::getDefaultInstance() );
+		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		return new FingerprintView(
 			$templateFactory,
