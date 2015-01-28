@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\View\PropertyView;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\PropertyView
@@ -77,8 +76,9 @@ class PropertyViewTest extends EntityViewTest {
 	}
 
 	public function provideTestGetHtml() {
+		$templateFactory = TemplateFactory::getDefaultInstance();
 		$propertyView = new PropertyView(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			$this->getMockBuilder( 'Wikibase\Repo\View\EntityTermsView' )
 				->disableOriginalConstructor()
 				->getMock(),
@@ -115,4 +115,5 @@ class PropertyViewTest extends EntityViewTest {
 
 		return $dataTypeFactory;
 	}
+
 }
