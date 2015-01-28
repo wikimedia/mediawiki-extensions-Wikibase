@@ -105,8 +105,12 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.12.0 (?)
-* Introduced utils.ContentLanguages, made ExpertExtender.LanguageSelector use that instead of ULS
+### 0.12.0 (2015-01-27)
+* Removed internal dependency on Universal Language Selector (ULS)
+* Introduced `utils.ContentLanguages`
+
+#### Breaking changes
+* `ExpertExtender.LanguageSelector` constructor requires `utils.ContentLanguages` now
 
 ### 0.11.0 (2015-01-21)
 * `jQuery.ui.toggler`: Added parameter to `animation` event determining whether the toggler's subject will be visible or hidden.
