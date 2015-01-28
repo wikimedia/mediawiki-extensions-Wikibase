@@ -125,7 +125,7 @@ HTML;
 <<<HTML
 <div class="wb-referenceview $1">
 	<div class="wb-referenceview-heading"></div>
-	<div class="wb-referenceview-listview">$2<!-- [0,*] wb-snaklistview --></div>
+	<div class="wb-referenceview-listview">$2<!-- [0,*] wikibase-snaklistview --></div>
 </div>
 HTML;
 
@@ -135,10 +135,10 @@ HTML;
 <div class="wikibase-listview">$1</div>
 HTML;
 
-	$templates['wb-snaklistview'] =
+	$templates['wikibase-snaklistview'] =
 <<<HTML
-<div class="wb-snaklistview">
-	<div class="wb-snaklistview-listview"><!-- wikibase-listview -->$1</div>
+<div class="wikibase-snaklistview">
+	<div class="wikibase-snaklistview-listview"><!-- wikibase-listview -->$1</div>
 </div>
 HTML;
 
