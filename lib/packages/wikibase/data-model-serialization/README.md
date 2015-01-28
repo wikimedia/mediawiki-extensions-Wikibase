@@ -107,7 +107,7 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 
 ## Release notes
 
-### 1.3.0 (dev)
+### 1.3.0 (2015-01-28)
 
 * `FingerprintSerializer` now supports serializing `AliasGroupFallback`s and `TermFallback`s
 * `EntityDeserializer` now fails if the given serialization contains a term or alias that was either
