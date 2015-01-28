@@ -49,8 +49,6 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 		return $this->id;
 	}
 
-	public abstract function setId( $id );
-
 	/**
 	 * Sets the value for the label in a certain value.
 	 *
