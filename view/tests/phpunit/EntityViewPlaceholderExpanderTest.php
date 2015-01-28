@@ -14,7 +14,6 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\View\EntityViewPlaceholderExpander;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\EntityViewPlaceholderExpander
@@ -40,6 +39,8 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 	 * @return EntityViewPlaceholderExpander
 	 */
 	private function newExpander( User $user, EntityRevisionLookup $entityRevisionLookup, ItemId $itemId ) {
+		$templateFactory = TemplateFactory::getDefaultInstance();
+
 		$title = $this->getMockBuilder( 'Title')
 			->disableOriginalConstructor()
 			->getMock();
@@ -49,19 +50,17 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 		$idParser = $this->getMockBuilder( 'Wikibase\DataModel\Entity\EntityIdParser' )
 			->disableOriginalConstructor()
 			->getMock();
-
 		$idParser->expects( $this->any() )
 			->method( 'parse' )
 			->will( $this->returnValue( $itemId ) );
 
 		$userLanguages = $this->getMock( 'Wikibase\Lib\UserLanguageLookup' );
-
 		$userLanguages->expects( $this->any() )
 			->method( 'getAllUserLanguages' )
 			->will( $this->returnValue( array( 'de', 'en', 'ru' ) ) );
 
 		return new EntityViewPlaceholderExpander(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			$title,
 			$user,
 			$language,

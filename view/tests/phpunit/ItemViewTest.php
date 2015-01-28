@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\View\ItemView;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\ItemView
@@ -50,8 +49,9 @@ class ItemViewTest extends EntityViewTest {
 	}
 
 	public function provideTestGetHtml() {
+		$templateFactory = TemplateFactory::getDefaultInstance();
 		$itemView = new ItemView(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			$this->getMockBuilder( 'Wikibase\View\EntityTermsView' )
 				->disableOriginalConstructor()
 				->getMock(),

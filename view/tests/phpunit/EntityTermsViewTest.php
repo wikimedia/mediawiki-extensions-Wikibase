@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 use Wikibase\View\TextInjector;
 
 /**
@@ -48,7 +47,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	}
 
 	private function getEntityTermsView( $languageCode = 'en', $called = null ) {
-		$templateFactory = new TemplateFactory( TemplateRegistry::getDefaultInstance() );
+		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		if ( $called === null ) {
 			$called = $this->any();

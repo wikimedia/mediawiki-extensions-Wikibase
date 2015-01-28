@@ -33,7 +33,6 @@ use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityViewPlaceholderExpander;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 use Wikibase\View\TextInjector;
 use WikiPage;
 
@@ -945,10 +944,11 @@ final class RepoHooks {
 
 		if ( !empty( $placeholders ) ) {
 			$injector = new TextInjector( $placeholders );
+			$templateFactory = TemplateFactory::getDefaultInstance();
 			$userLanguageLookup = new BabelUserLanguageLookup();
 			$termsLanguages = WikibaseRepo::getDefaultInstance()->getTermsLanguages();
 			$expander = new EntityViewPlaceholderExpander(
-				new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+				$templateFactory,
 				$out->getTitle(),
 				$out->getUser(),
 				$out->getLanguage(),

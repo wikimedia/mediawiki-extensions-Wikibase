@@ -14,7 +14,6 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\SiteLinksView;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\SiteLinksView
@@ -30,7 +29,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class SiteLinksViewTest extends \MediaWikiTestCase {
+class SiteLinksViewTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider getHtmlProvider
@@ -160,9 +159,10 @@ class SiteLinksViewTest extends \MediaWikiTestCase {
 	 * @return SiteLinksView
 	 */
 	private function getSiteLinksView() {
+		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		return new SiteLinksView(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			$this->newSiteList(),
 			$this->getEditSectionGeneratorMock(),
 			$this->getEntityLookupMock(),

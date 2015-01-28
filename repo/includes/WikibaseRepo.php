@@ -88,7 +88,6 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
 use Wikibase\ValuesFinder;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -1015,8 +1014,7 @@ class WikibaseRepo {
 	 * @return EntityParserOutputGeneratorFactory
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
-		$templateFactory = new TemplateFactory( TemplateRegistry::getDefaultInstance() );
-
+		$templateFactory = TemplateFactory::getDefaultInstance();
 		$entityViewFactory = new EntityViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
