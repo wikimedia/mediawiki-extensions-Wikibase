@@ -33,7 +33,7 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 	/**
 	 * @see LoggedUpdateMaintenance::doDBUpdates
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function doDBUpdates() {
 		if ( !defined( 'WB_VERSION' ) ) {
@@ -78,7 +78,7 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 	 *
 	 * @since 0.4
 	 *
-	 * @param $msg
+	 * @param string $msg
 	 */
 	public function report( $msg ) {
 		$this->output( "$msg\n" );

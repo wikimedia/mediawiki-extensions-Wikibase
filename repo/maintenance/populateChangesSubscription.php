@@ -83,7 +83,7 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 	/**
 	 * Outputs a message vis the output() method.
 	 *
-	 * @param $msg
+	 * @param string $msg
 	 */
 	public function report( $msg ) {
 		$this->output( "$msg\n" );

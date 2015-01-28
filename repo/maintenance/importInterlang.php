@@ -24,20 +24,35 @@ require_once $basePath . '/maintenance/Maintenance.php';
 
 class importInterlang extends Maintenance {
 
+	/**
+	 * @var bool
+	 */
 	private $verbose = false;
+
+	/**
+	 * @var bool
+	 */
 	private $ignore_errors = false;
+
+	/**
+	 * @var int
+	 */
 	private $skip = 0;
+
+	/**
+	 * @var int
+	 */
 	private $only = 0;
 
 	/**
-	 * @var User|null
+	 * @var User
 	 */
-	private $user = null;
+	private $user;
 
 	/**
-	 * @var EntityStore|null
+	 * @var EntityStore
 	 */
-	private $store = null;
+	private $store;
 
 	public function __construct() {
 		$this->mDescription = "Import interlanguage links in Wikidata.\n\nThe links may be created by extractInterlang.sql";
@@ -130,11 +145,12 @@ class importInterlang extends Maintenance {
 	}
 
 	/**
-	 * @param Array $links An associative array of interlanguage links, mapping site IDs to page titles on that site.
+	 * @param string[] $links Associative array of interlanguage links, mapping language codes to
+	 * page titles on that site.
 	 *
 	 * @return bool true if the item was created, false otherwise
 	 */
-	private function createItem( $links ) {
+	private function createItem( array $links ) {
 		$item = Item::newEmpty();
 
 		foreach ( $links as $lang => $title ) {
