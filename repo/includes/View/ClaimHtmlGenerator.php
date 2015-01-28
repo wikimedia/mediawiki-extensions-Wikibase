@@ -190,8 +190,8 @@ class ClaimHtmlGenerator {
 			);
 		}
 
-		return $this->templateFactory->render( 'wb-referenceview',
-			'wb-referenceview-' . $reference->getHash(),
+		return $this->templateFactory->render( 'wikibase-referenceview',
+			'wikibase-referenceview-' . $reference->getHash(),
 			$snaklistviewsHtml
 		);
 	}

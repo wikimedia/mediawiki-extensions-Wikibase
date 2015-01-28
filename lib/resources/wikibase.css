@@ -539,7 +539,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	clear: both;
 }
 
-.wb-referenceview {
+.wikibase-referenceview {
 	position: relative;
 	background: #F8F8F8;
 	overflow: hidden;
@@ -547,81 +547,81 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	min-height: 3.2em;
 }
 
-.wb-referenceview .wb-referenceview-heading {
+.wikibase-referenceview .wikibase-referenceview-heading {
 	min-height: 1.5em;
 	padding: 5px;
 	background-color: #F0F0F0;
 }
 
-.wb-referenceview .wb-referenceview-heading .wikibase-toolbar-container {
+.wikibase-referenceview .wikibase-referenceview-heading .wikibase-toolbar-container {
 	top: 5px;
 }
 
-.wb-referenceview.wb-edit {
+.wikibase-referenceview.wb-edit {
 	background-color: #D6F3FF;
 }
 
-.wb-referenceview.wb-edit > .wb-referenceview-heading {
+.wikibase-referenceview.wb-edit > .wikibase-referenceview-heading {
 	background-color: #C0DAE5;
 }
 
-.wb-referenceview.wb-error {
+.wikibase-referenceview.wb-error {
 	background-color: #FFDFC9;
 }
 
-.wb-referenceview.wb-error > .wb-referenceview-heading {
+.wikibase-referenceview.wb-error > .wikibase-referenceview-heading {
 	background-color: #E5C8B5;
 }
 
-.wb-referenceview .wikibase-snaklistview {
+.wikibase-referenceview .wikibase-snaklistview {
 	border-top: 1px dotted #D8D8D8;
 }
-.wb-referenceview .wikibase-snaklistview:nth-child(2) {
+.wikibase-referenceview .wikibase-snaklistview:nth-child(2) {
 	border-top: none;
 }
-.wb-referenceview.wb-edit .wikibase-snaklistview {
+.wikibase-referenceview.wb-edit .wikibase-snaklistview {
 	border-color: #C0DAE5;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-property {
+.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview-property {
 	width: 12em;
 	position: absolute;
 	font-size: 90%;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-property input {
+.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview-property input {
 	width: 100%;
 	font-size: 100%;
 	top: 0;
 	position: absolute;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container {
+.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container {
 	margin-left: 12em;
 	position: relative;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value {
+.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value {
 	margin-left: 16px;
 	margin-right: 18em;
 	word-wrap: break-word;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value .valueview-value {
+.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value .valueview-value {
 	font-size: 90%;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-typeselector {
+.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-typeselector {
 	left: 0;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value .valueview-value textarea {
+.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value .valueview-value textarea {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview {
+.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview {
 	position: relative;
 	min-height: 1.8em;
 	padding-top: 4px;
@@ -629,24 +629,24 @@ div .wikibase-snakview-value span.error.wb-format-error {
 }
 
 /* a reference's "edit" toolbar */
-.wb-referenceview .wb-edittoolbar {
+.wikibase-referenceview .wb-edittoolbar {
 	position: absolute;
 	right: 0;
 	top: 0;
 }
-.wb-referenceview .wikibase-toolbar-container {
+.wikibase-referenceview .wikibase-toolbar-container {
 	top: 5px;
 }
 
 /* "remove" link at each reference's snak */
-.wb-referenceview .wikibase-snaklistview-listview .wikibase-snakview > .wb-removetoolbar {
+.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview > .wb-removetoolbar {
 	position: absolute;
 	top: 5px;
 	right: 0;
 }
 
 /* "add" link in one reference's snak list */
-.wb-referenceview > .wikibase-addtoolbar-container {
+.wikibase-referenceview > .wikibase-addtoolbar-container {
 	float: right;
 	margin-bottom: 1em;
 	position: static;
