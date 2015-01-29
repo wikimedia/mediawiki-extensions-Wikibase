@@ -3,36 +3,29 @@
 namespace Wikibase\View\Template\Test;
 
 use Wikibase\View\Template\Template;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\Template\Template
- * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
+ * @author Thiemo Mättig
  */
 class TemplateTest extends \MediaWikiTestCase {
 
-	/**
-	 * @group WikibaseLib
-	 * @dataProvider providerText
-	 */
-	public function testText( $html ) {
-		$registry = new TemplateRegistry();
-		$registry->addTemplate( 'tmpl1', $html );
+	public function testRender() {
+		$template = new Template( 'tmpl1', '<a>$1</a>', array( 'A' ) );
 
-		$template = new Template( $registry, 'tmpl1', array( 'param' ) );
-		$this->assertHTMLEquals( $template->text(), '<div>param</div>' );
+		$this->assertSame( '<a>A</a>', $template->render() );
 	}
 
-	public function providerText() {
-		return array(
-			array( '<div>$1</div>' )
-		);
+	public function testGivenTemplateSyntax_renderDoesNotExpandTemplates() {
+		$template = new Template( 'tmpl1', '{{$1}}', array( 'A' ) );
+
+		$this->assertSame( '{{A}}', $template->render() );
 	}
 
 }
