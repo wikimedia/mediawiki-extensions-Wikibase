@@ -16,6 +16,24 @@
       "revId": "c8f581861ef723bef8949199415940e918de9616",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e7fc396_62b47be5",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-29T13:02:35Z",
+      "side": 0,
+      "message": "As mentioned in the commit message, getActualLanguageCode can never return null.",
+      "parentUuid": "8e7fc396_2244431c",
+      "revId": "c8f581861ef723bef8949199415940e918de9616",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
