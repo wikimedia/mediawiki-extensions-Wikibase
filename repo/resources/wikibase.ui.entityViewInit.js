@@ -8,22 +8,45 @@
 	'use strict';
 
 	mw.hook( 'wikipage.content' ).add( function() {
-		var $entityview = $( '.wikibase-entityview' );
 
-		if( mw.config.get( 'wbEntity' ) !== null ) {
-			initToolbarController( $entityview );
-
-			var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
-
-			entityInitializer.getEntity().done( function( entity ) {
-				createEntityDom( entity, $entityview.first() );
-				evaluateRestrictions();
-
-				// Remove loading spinner after JavaScript has kicked in:
-				$entityview.removeClass( 'loading' );
-				$( '.wb-entity-spinner' ).remove();
-			} );
+		if( mw.config.get( 'wbEntity' ) === null ) {
+			return;
 		}
+
+		var $entityview = $( '.wikibase-entityview' );
+		var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
+
+		initToolbarController( $entityview );
+
+		entityInitializer.getEntity().done( function( entity ) {
+			createEntityView( entity, $entityview.first() );
+
+			$entityview.on( 'entityviewafterstartediting', function() {
+				triggerAnonymousEditWarning( entity.getType() );
+			} );
+
+			evaluateRestrictions();
+
+			// Remove loading spinner after JavaScript has kicked in:
+			$entityview.removeClass( 'loading' );
+			$( '.wb-entity-spinner' ).remove();
+		} );
+
+		$entityview.on( 'entityviewafterstopediting', function( event, dropValue ) {
+			updateWatchLink( dropValue );
+		} );
+
+		$entityview.on( 'labelviewchange labelviewafterstopediting', function( event ) {
+			var $labelview = $( event.target ),
+				labelview = $labelview.data( 'labelview' ),
+				label = labelview.value().getText();
+
+			$( 'title' ).text(
+				mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
+			);
+		} );
+
+		attachCopyrightTooltip( $entityview );
 	} );
 
 	/**
@@ -58,9 +81,14 @@
 			}
 		};
 
-		$entityview
-		.toolbarcontroller( toolbarControllerConfig )
-		.on( 'edittoolbarafterstartediting', function( event ) {
+		$entityview.toolbarcontroller( toolbarControllerConfig );
+	}
+
+	/**
+	 * @param {jQuery} $entityview
+	 */
+	function attachCopyrightTooltip( $entityview ) {
+		$entityview.on( 'edittoolbarafterstartediting', function( event ) {
 			var $target = $( event.target ),
 				gravity = 'sw';
 
@@ -73,7 +101,7 @@
 				gravity = 'nw';
 			}
 
-			showCopyrightTooltip( $entityview, $( event.target ), gravity );
+			showCopyrightTooltip( $entityview, $target, gravity );
 		} );
 	}
 
@@ -107,7 +135,7 @@
 	 *
 	 * @throws {Error} if no widget to render the entity exists.
 	 */
-	function createEntityDom( entity, $entityview ) {
+	function createEntityView( entity, $entityview ) {
 		var repoConfig = mw.config.get( 'wbRepo' );
 		var mwApi = wb.api.getLocationAgnosticMwApi( repoConfig.url + repoConfig.scriptPath + '/api.php' );
 		var repoApi = new wb.api.RepoApi( mwApi ),
@@ -125,7 +153,7 @@
 			throw new Error( 'View for entity type ' + entity.getType() + ' does not exist' );
 		}
 
-		$entityview[entity.getType() + 'view']( {
+		$entityview[ view ]( {
 			value: entity,
 			languages: getUserLanguages(),
 			entityChangersFactory: entityChangersFactory,
@@ -138,21 +166,6 @@
 				mw
 			),
 			dataTypeStore: dataTypeStore
-		} )
-		.on( 'labelviewchange labelviewafterstopediting', function( event ) {
-			var $labelview = $( event.target ),
-				labelview = $labelview.data( 'labelview' ),
-				label = labelview.value().getText();
-
-			$( 'title' ).text(
-				mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
-			);
-		} )
-		.on( 'entityviewafterstartediting', function() {
-			triggerAnonymousEditWarning( entity.getType() );
-		} )
-		.on( 'entityviewafterstopediting', function( event, dropValue ) {
-			updateWatchLink( dropValue );
 		} );
 	}
 
