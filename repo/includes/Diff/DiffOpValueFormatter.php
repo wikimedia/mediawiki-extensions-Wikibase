@@ -41,14 +41,14 @@ class DiffOpValueFormatter {
 	 *
 	 * @param string $oldName HTML of old name
 	 * @param string $newName HTML of new name
-	 * @param string|string[]|null $oldValues HTML of old value(s)
-	 * @param string|string[]|null $newValues HTML of new value(s)
+	 * @param string|string[]|null $oldValuesHtml HTML of old value(s)
+	 * @param string|string[]|null $newValuesHtml HTML of new value(s)
 	 */
-	public function __construct( $oldName, $newName, $oldValues, $newValues ) {
+	public function __construct( $oldName, $newName, $oldValuesHtml, $newValuesHtml ) {
 		$this->oldName = $oldName;
 		$this->newName = $newName;
-		$this->oldValues = is_string( $oldValues ) ? array( $oldValues ) : $oldValues;
-		$this->newValues = is_string( $newValues ) ? array( $newValues ) : $newValues;
+		$this->oldValues = is_string( $oldValuesHtml ) ? array( $oldValuesHtml ) : $oldValuesHtml;
+		$this->newValues = is_string( $newValuesHtml ) ? array( $newValuesHtml ) : $newValuesHtml;
 	}
 
 	/**
