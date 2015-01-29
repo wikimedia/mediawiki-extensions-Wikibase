@@ -1,4 +1,4 @@
-( function( $, ExpertExtender ) {
+( function( $, ExpertExtender, PrefixingMessageProvider ) {
 
 	'use strict';
 
@@ -23,7 +23,10 @@
 		onValueChange
 	) {
 		this._contentLanguages = contentLanguages;
-		this._messageProvider = messageProvider;
+		this._messageProvider = new PrefixingMessageProvider(
+			this._prefix + '-',
+			messageProvider
+		);
 		this._getUpstreamValue = getUpstreamValue;
 		this._onValueChange = onValueChange;
 
@@ -85,23 +88,12 @@
 			if( languages !== null ) {
 				this._labels = {};
 				$.each( languages, function( i, code ) {
-					self._labels[code] = self._getMessage(
+					self._labels[code] = self._messageProvider.getMessage(
 						'languagetemplate',
 						[ self._contentLanguages.getName( code ), code ]
 					);
 				} );
 			}
-		},
-
-		/**
-		 * @private
-		 *
-		 * @param {string} languageCode
-		 * @param {string[]} params
-		 * @return {string}
-		 */
-		_getMessage: function( languageCode, params ) {
-			return this._messageProvider.getMessage( this._prefix + '-' + languageCode, params );
 		},
 
 		/**
@@ -123,7 +115,7 @@
 				this.$selector.on( 'eachchange', this._onValueChange );
 			}
 			$extender
-				.append( $( '<span />' ).text( this._getMessage( 'label' ) ) )
+				.append( $( '<span />' ).text( this._messageProvider.getMessage( 'label' ) ) )
 				.append( this.$selector );
 		},
 
@@ -166,4 +158,4 @@
 		}
 	} );
 
-} ( jQuery, jQuery.valueview.ExpertExtender ) );
+} ( jQuery, jQuery.valueview.ExpertExtender, util.PrefixingMessageProvider ) );

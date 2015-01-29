@@ -17,7 +17,9 @@
 	testExpertExtenderExtension.all(
 		ExpertExtender.Preview,
 		function() {
-			return new ExpertExtender.Preview( null );
+			return new ExpertExtender.Preview( null, {
+				getMessage: function() { }
+			} );
 		}
 	);
 

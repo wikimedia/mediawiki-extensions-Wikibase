@@ -35,7 +35,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'util.MessageProvider',
+				'util.CombiningMessageProvider',
+				'util.HashMessageProvider',
 				'util.Notifier',
 				'util.Extendable'
 			),

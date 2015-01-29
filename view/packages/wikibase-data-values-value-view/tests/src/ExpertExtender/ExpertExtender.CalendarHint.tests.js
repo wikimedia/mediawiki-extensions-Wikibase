@@ -8,7 +8,7 @@
 	ExpertExtender,
 	testExpertExtenderExtension,
 	Time,
-	MessageProvider,
+	HashMessageProvider,
 	sinon,
 	QUnit,
 	CompletenessTest
@@ -32,11 +32,9 @@
 
 	QUnit.test( 'calendarhint is hidden if it should not be shown', function( assert ) {
 		var calendarHint = new ExpertExtender.CalendarHint(
-			new MessageProvider( {
-				defaultMessages: {
-					'valueview-expertextender-calendarhint-gregorian': 'MSG1',
-					'valueview-expertextender-calendarhint-switch-julian': 'MSG2'
-				}
+			new HashMessageProvider( {
+				'valueview-expertextender-calendarhint-gregorian': 'MSG1',
+				'valueview-expertextender-calendarhint-switch-julian': 'MSG2'
 			} ),
 			function() {
 				return new time.Time( '2014-01-01' );
@@ -55,11 +53,9 @@
 
 	QUnit.test( 'calendarhint is visible if it should be shown', function( assert ) {
 		var calendarHint = new ExpertExtender.CalendarHint(
-			new MessageProvider( {
-				defaultMessages: {
-					'valueview-expertextender-calendarhint-gregorian': 'MSG1',
-					'valueview-expertextender-calendarhint-switch-julian': 'MSG2'
-				}
+			new HashMessageProvider( {
+				'valueview-expertextender-calendarhint-gregorian': 'MSG1',
+				'valueview-expertextender-calendarhint-switch-julian': 'MSG2'
 			} ),
 			function() {
 				return new Time( '1901-01-01' );
@@ -80,11 +76,9 @@
 		var setSpy = sinon.spy();
 		var timeValue = new Time( '1901-01-01' );
 		var calendarHint = new ExpertExtender.CalendarHint(
-			new MessageProvider( {
-				defaultMessages: {
-					'valueview-expertextender-calendarhint-gregorian': 'MSG1',
-					'valueview-expertextender-calendarhint-switch-julian': 'MSG2'
-				}
+			new HashMessageProvider( {
+				'valueview-expertextender-calendarhint-gregorian': 'MSG1',
+				'valueview-expertextender-calendarhint-switch-julian': 'MSG2'
 			} ),
 			function() {
 				return timeValue;
@@ -110,13 +104,11 @@
 		var setSpy = sinon.spy();
 		var timeValue = new Time( '1901-01-01' );
 		var calendarHint = new ExpertExtender.CalendarHint(
-			new MessageProvider( {
-				defaultMessages: {
-					'valueview-expertextender-calendarhint-gregorian': 'MSG1',
-					'valueview-expertextender-calendarhint-julian': 'MSG2',
-					'valueview-expertextender-calendarhint-switch-julian': 'MSG3',
-					'valueview-expertextender-calendarhint-switch-gregorian': 'MSG4'
-				}
+			new HashMessageProvider( {
+				'valueview-expertextender-calendarhint-gregorian': 'MSG1',
+				'valueview-expertextender-calendarhint-julian': 'MSG2',
+				'valueview-expertextender-calendarhint-switch-julian': 'MSG3',
+				'valueview-expertextender-calendarhint-switch-gregorian': 'MSG4'
 			} ),
 			function() {
 				return timeValue;
@@ -155,7 +147,7 @@
 	jQuery.valueview.ExpertExtender,
 	jQuery.valueview.tests.testExpertExtenderExtension,
 	time.Time,
-	util.MessageProvider,
+	util.HashMessageProvider,
 	sinon,
 	QUnit,
 	CompletenessTest

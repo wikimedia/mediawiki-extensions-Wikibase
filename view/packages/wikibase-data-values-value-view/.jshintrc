@@ -27,17 +27,25 @@
 	"browser": true,
 
 	// Globals
-	"predef": [
-		"CompletenessTest",
-		"dataValues",
-		"globeCoordinate",
-		"jQuery",
-		"mediaWiki",
-		"QUnit",
-		"sinon",
-		"time",
-		"util",
-		"valueFormatters",
-		"valueParsers"
-	]
+	"globals": {
+		"CompletenessTest": false,
+		"dataValues": false,
+		"globeCoordinate": false,
+		"jQuery": false,
+		"QUnit": false,
+		"sinon": false,
+		"time": false,
+		"util": false,
+		"valueFormatters": false,
+		"valueParsers": false
+	},
+
+	"overrides": {
+		"lib/jquery.ui/jquery.ui.listrotator.js": {
+			"globals": {
+				"mediaWiki": false
+			}
+		}
+	}
+
 }

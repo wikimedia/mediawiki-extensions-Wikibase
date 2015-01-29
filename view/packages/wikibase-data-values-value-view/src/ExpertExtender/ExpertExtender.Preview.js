@@ -1,4 +1,4 @@
-( function( $, ExpertExtender, mw, MessageProvider ) {
+( function( $, ExpertExtender, PrefixingMessageProvider ) {
 	'use strict';
 
 	/**
@@ -11,17 +11,15 @@
 	 * @constructor
 	 *
 	 * @param {Function} getUpstreamValue A getter for the current formatted upstream value
+	 * @param {util.MessageProvider} messageProvider
 	 */
-	ExpertExtender.Preview = function( getUpstreamValue ) {
+	ExpertExtender.Preview = function( getUpstreamValue, messageProvider ) {
 		this._getUpstreamValue = getUpstreamValue;
 
-		var messageProvider = null;
-		if( mw && mw.msg ) {
-			messageProvider = new MessageProvider( {
-				messageGetter: mw.msg,
-				prefix: 'valueview-preview-'
-			} );
-		}
+		var messageProvider = new PrefixingMessageProvider(
+			'valueview-preview-',
+			messageProvider
+		);
 
 		var $preview = $( '<div/>' ).preview( {
 			messageProvider: messageProvider
@@ -87,4 +85,4 @@
 			}
 		}
 	} );
-} ( jQuery, jQuery.valueview.ExpertExtender, mediaWiki, util.MessageProvider ) );
+} ( jQuery, jQuery.valueview.ExpertExtender, util.PrefixingMessageProvider ) );

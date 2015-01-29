@@ -20,9 +20,12 @@
 
 		var self = this;
 
-		this.preview = new vv.ExpertExtender.Preview( function() {
-			return self.viewState().getFormattedValue();
-		} );
+		this.preview = new vv.ExpertExtender.Preview(
+			function() {
+				return self.viewState().getFormattedValue();
+			},
+			this._messageProvider
+		);
 
 		var precisionMsgKey = 'valueview-expert-timeinput-precision';
 		var $precisionContainer = $( '<div/>' )
