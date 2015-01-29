@@ -339,6 +339,7 @@ return call_user_func( function() {
 				'jquery.util.EventSingletonManager',
 				'jquery.wikibase.sitelinklistview',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
+				'wikibase.buildErrorOutput',
 				'wikibase.sites',
 				'wikibase.utilities',
 			),
