@@ -105,9 +105,6 @@ class DispatchChanges extends \Maintenance {
 	 */
 	protected $verbose;
 
-	/**
-	 * Constructor.
-	 */
 	public function __construct() {
 		parent::__construct();
 

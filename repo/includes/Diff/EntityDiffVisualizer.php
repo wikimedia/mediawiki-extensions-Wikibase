@@ -59,14 +59,14 @@ class EntityDiffVisualizer {
 	private $entityRevisionLookup;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param IContextSource $contextSource
 	 * @param ClaimDiffer $claimDiffer
 	 * @param ClaimDifferenceVisualizer $claimDiffView
 	 * @param SiteStore $siteStore
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 */
 	public function __construct( IContextSource $contextSource,
 		ClaimDiffer $claimDiffer,

@@ -57,8 +57,6 @@ class DiffView extends ContextSource {
 	private $entityRevisionLookup;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param string[] $path

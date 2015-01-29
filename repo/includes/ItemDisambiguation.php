@@ -35,8 +35,6 @@ class ItemDisambiguation {
 	private $linkFormatter;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.5
 	 *
 	 * @param string $searchLangCode The language the search was performed for.
