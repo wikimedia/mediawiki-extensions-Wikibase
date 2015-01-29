@@ -10,7 +10,6 @@ use Wikibase\View\Module\TemplateModule;
  * @covers Wikibase\View\Module\TemplateModule
  *
  * @uses Wikibase\View\Template\TemplateFactory
- * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView

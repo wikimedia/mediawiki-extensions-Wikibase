@@ -50,7 +50,6 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @uses Wikibase\View\Template\Template
 	 * @uses Wikibase\View\Template\TemplateFactory
-	 * @uses Wikibase\View\Template\TemplateRegistry
 	 */
 	public function testGetHtmlForStatement(
 		SnakHtmlGenerator $snakHtmlGenerator,

@@ -25,7 +25,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\View\\StatementSectionsView' => __DIR__ . '/src/StatementSectionsView.php',
 	'Wikibase\\View\\Template\\Template' => __DIR__ . '/src/Template/Template.php',
 	'Wikibase\\View\\Template\\TemplateFactory' => __DIR__ . '/src/Template/TemplateFactory.php',
-	'Wikibase\\View\\Template\\TemplateRegistry' => __DIR__ . '/src/Template/TemplateRegistry.php',
 	'Wikibase\\View\\TermsListView' => __DIR__ . '/src/TermsListView.php',
 	'Wikibase\\View\\Tests\\EntityViewTestCase' => __DIR__ . '/tests/phpunit/EntityViewTestCase.php',
 	'Wikibase\\View\\ToolbarEditSectionGenerator' => __DIR__ . '/src/ToolbarEditSectionGenerator.php',

@@ -15,39 +15,36 @@ class TemplateFactory {
 	private static $instance;
 
 	/**
-	 * @var TemplateRegistry
+	 * @var string[]
 	 */
-	private $templateRegistry;
+	private $templates = [];
 
 	public static function getDefaultInstance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self(
-				new TemplateRegistry( include __DIR__ . '/../../resources/templates.php' )
+				include __DIR__ . '/../../resources/templates.php'
 			);
 		}
 
 		return self::$instance;
 	}
 
-	public function __construct( TemplateRegistry $templateRegistry ) {
-		$this->templateRegistry = $templateRegistry;
+	/**
+	 * @param string[] $templates
+	 */
+	public function __construct( array $templates ) {
+		foreach ( $templates as $key => $template ) {
+			$this->templates[$key] = str_replace( "\t", '',
+				preg_replace( '/<!--.*-->/Us', '', $template )
+			);
+		}
 	}
 
 	/**
 	 * @return string[] Array containing all raw template strings.
 	 */
 	public function getTemplates() {
-		return $this->templateRegistry->getTemplates();
-	}
-
-	/**
-	 * @param string $key
-	 * @param array $params
-	 *
-	 * @return Template
-	 */
-	public function get( $key, array $params ) {
-		return new Template( $this->templateRegistry, $key, $params );
+		return $this->templates;
 	}
 
 	/**
@@ -57,7 +54,7 @@ class TemplateFactory {
 	 * be sure to escape your params before using this function!
 	 *
 	 * @param string $key template key
-	 * Varargs: normal template parameters
+	 * @param string [$param,...]
 	 *
 	 * @return string
 	 */
@@ -69,7 +66,11 @@ class TemplateFactory {
 			$params = $params[0];
 		}
 
-		$template = $this->get( $key, $params );
+		$template = new Template(
+			$key,
+			array_key_exists( $key, $this->templates ) ? $this->templates[$key] : null,
+			$params
+		);
 
 		return $template->render();
 	}
