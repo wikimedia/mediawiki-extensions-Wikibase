@@ -8,7 +8,7 @@ use InvalidArgumentException;
  * Minimal interface for all objects that represent an entity.
  * All entities have an EntityId and an entity type.
  *
- * @since 0.8.2
+ * @since 0.8.2, modified in 3.0
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
