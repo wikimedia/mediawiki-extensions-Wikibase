@@ -75,7 +75,6 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 * @return string HTML
 	 */
 	private function getHtmlForTerm( $targetUrl, Term $term, $titleText = '' ) {
-		$label = $term->getText();
 		$fallbackIndicatorHtml = '';
 
 		$attributes = array(
@@ -92,13 +91,9 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 			}
 		}
 
-		$html = Html::element( 'a', $attributes, $label );
+		$html = Html::element( 'a', $attributes, $term->getText() );
 
-		if ( $fallbackIndicatorHtml !== '' ) {
-			$html .= $fallbackIndicatorHtml;
-		}
-
-		return $html;
+		return $html . $fallbackIndicatorHtml;
 	}
 
 	/**
@@ -119,6 +114,12 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		return $entityId->getSerialization() . $separator . $undefinedInfo;
 	}
 
+	/**
+	 * @param string $languageCode
+	 * @param string $inLanguage
+	 *
+	 * @return string
+	 */
 	private function getLanguageName( $languageCode, $inLanguage ) {
 		//TODO: inject language name lookup!
 		return Utils::fetchLanguageName( $languageCode, $inLanguage );
@@ -130,8 +131,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		$sourceLanguage = $term->getSourceLanguageCode();
 
 		// FIXME: TermFallback should either return equal values or null
-		$actualLanguage = ( $actualLanguage === null ? $requestedLanguage : $actualLanguage );
-		$sourceLanguage = ( $sourceLanguage === null ? $actualLanguage : $sourceLanguage );
+		$sourceLanguage = $sourceLanguage === null ? $actualLanguage : $sourceLanguage;
 
 		$isInRequestedLanguage = $actualLanguage === $requestedLanguage;
 		$isInSourceLanguage = $actualLanguage === $sourceLanguage;
@@ -142,40 +142,43 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		}
 
 		$sourceLanguageName = $this->getLanguageName( $sourceLanguage, $requestedLanguage );
-		$requestedLanguageName = $this->getLanguageName( $actualLanguage, $requestedLanguage );
+		$actualLanguageName = $this->getLanguageName( $actualLanguage, $requestedLanguage );
 
 		// Generate indicator text
 		if ( $isInSourceLanguage ) {
 			$text = $sourceLanguageName;
 		} else {
-			$msg = wfMessage(
+			$text = wfMessage(
 				'wikibase-language-fallback-transliteration-hint',
 				$sourceLanguageName,
-				$requestedLanguageName
-			);
-			$text = $msg->text();
+				$actualLanguageName
+			)->text();
 		}
 
 		// Generate HTML class names
-		$classes = array( 'wb-language-fallback-indicator' );
+		$classes = 'wb-language-fallback-indicator';
 		if ( !$isInSourceLanguage ) {
-			$classes[] = 'wb-language-fallback-transliteration';
+			$classes .= ' wb-language-fallback-transliteration';
 		}
 		if ( !$isInRequestedLanguage
 				&& $this->getBaseLanguage( $actualLanguage ) === $this->getBaseLanguage( $requestedLanguage )
 		) {
-			$classes[] = 'wb-language-fallback-variant';
+			$classes .= ' wb-language-fallback-variant';
 		}
 
-		$attributes = array(
-			'class' => implode( ' ', $classes )
-		);
+		$attributes = array( 'class' => $classes );
 
 		$html = Html::element( 'sup', $attributes, $text );
 		return $html;
 	}
 
+	/**
+	 * @param string $languageCode
+	 *
+	 * @return string
+	 */
 	private function getBaseLanguage( $languageCode ) {
 		return preg_replace( '/-.*/', '', $languageCode );
 	}
+
 }
