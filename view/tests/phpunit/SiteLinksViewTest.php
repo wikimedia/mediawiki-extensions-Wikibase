@@ -15,14 +15,12 @@ use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\SiteLinksView;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\SiteLinksView
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory
- * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView
@@ -126,7 +124,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 	 * @return SiteLinksView
 	 */
 	private function newInstance() {
-		$templateFactory = new TemplateFactory( new TemplateRegistry( array(
+		$templateFactory = new TemplateFactory( [
 			'wb-section-heading' => '<h2 id="$2" class="$3">$1</h2>',
 			'wikibase-sitelinkgrouplistview' => '$1',
 			'wikibase-listview' => '$1',
@@ -136,7 +134,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			'wikibase-sitelinkview-pagename' => '<PAGE href="$1" lang="$4" dir="$5">$2</PAGE>$3',
 			'wikibase-badgeselector' => '$1',
 			'wb-badge' => '<BADGE class="$1" id="$3">$2</BADGE>',
-		) ) );
+		] );
 
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->any() )

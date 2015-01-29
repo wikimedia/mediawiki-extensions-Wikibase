@@ -4,13 +4,11 @@ namespace Wikibase\View\Tests\Template;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\Template\TemplateFactory
  *
  * @uses Wikibase\View\Template\Template
- * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView
@@ -21,26 +19,38 @@ use Wikibase\View\Template\TemplateRegistry;
 class TemplateFactoryTest extends PHPUnit_Framework_TestCase {
 
 	private function newInstance() {
-		return new TemplateFactory( new TemplateRegistry( array(
-			'basic' => '$1',
-		) ) );
+		return new TemplateFactory( [ 'basic' => '$1' ] );
 	}
 
 	public function testGetDefaultInstance() {
 		$instance = TemplateFactory::getDefaultInstance();
+
 		$this->assertInstanceOf( TemplateFactory::class, $instance );
+		$this->assertNotEmpty( $instance->getTemplates() );
+	}
+
+	public function testRemovesTabs() {
+		$factory = new TemplateFactory( [ 'tmpl1' => "no\ttabs" ] );
+
+		$this->assertSame( 'notabs', $factory->render( 'tmpl1' ) );
+	}
+
+	public function testRemovesComments() {
+		$factory = new TemplateFactory( [
+			'tmpl1' => "no<!--[if IE]>IE<![endif]-->comments<!-- <div>\n</div> -->",
+		] );
+
+		$this->assertSame( 'nocomments', $factory->render( 'tmpl1' ) );
 	}
 
 	public function testGetTemplates() {
 		$templates = $this->newInstance()->getTemplates();
-		$this->assertSame( array( 'basic' => '$1' ), $templates );
+		$this->assertSame( [ 'basic' => '$1' ], $templates );
 	}
 
-	public function testGet() {
-		$template = $this->newInstance()->get( 'basic', array( '<PARAM>' ) );
-		$this->assertSame( 'basic', $template->getKey() );
-		$this->assertSame( array( '<PARAM>' ), $template->getParams() );
-		$this->assertSame( '<PARAM>', $template->plain() );
+	public function testGivenUnknownTemplate_renderReturnsPlaceholder() {
+		$rendered = $this->newInstance()->render( 'unknown' );
+		$this->assertSame( '<unknown>', $rendered );
 	}
 
 	/**
@@ -52,12 +62,12 @@ class TemplateFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function renderParamsProvider() {
-		return array(
-			array( '<PARAM>', '<PARAM>' ),
-			array( array(), '$1' ),
-			array( array( '<PARAM>' ), '<PARAM>' ),
-			array( array( '<PARAM>', 'ignored' ), '<PARAM>' ),
-		);
+		return [
+			'Single parameter' => [ '<PARAM>', '<PARAM>' ],
+			'Missing parameter' => [ [ ], '$1' ],
+			'Parameter array' => [ [ '<PARAM>' ], '<PARAM>' ],
+			'To many parameters' => [ [ '<PARAM>', 'ignored' ], '<PARAM>' ],
+		];
 	}
 
 }

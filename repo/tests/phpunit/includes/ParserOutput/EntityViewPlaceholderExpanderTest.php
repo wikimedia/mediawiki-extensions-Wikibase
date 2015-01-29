@@ -19,7 +19,6 @@ use Wikibase\View\Template\TemplateFactory;
  * @uses Wikibase\View\TermsListView
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory
- * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  *

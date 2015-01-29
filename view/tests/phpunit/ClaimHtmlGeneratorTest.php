@@ -51,7 +51,6 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @uses Wikibase\View\Template\Template
 	 * @uses Wikibase\View\Template\TemplateFactory
-	 * @uses Wikibase\View\Template\TemplateRegistry
 	 */
 	public function testGetHtmlForClaim(
 		SnakHtmlGenerator $snakHtmlGenerator,

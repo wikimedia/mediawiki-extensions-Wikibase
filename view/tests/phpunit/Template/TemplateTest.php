@@ -4,12 +4,9 @@ namespace Wikibase\View\Tests\Template;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\View\Template\Template;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\Template\Template
- *
- * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView
@@ -20,18 +17,27 @@ use Wikibase\View\Template\TemplateRegistry;
  */
 class TemplateTest extends PHPUnit_Framework_TestCase {
 
-	public function testRender() {
-		$instance = new Template( new TemplateRegistry( array( 'empty' => '' ) ), 'empty' );
+	public function testGivenEmptyTemplate_renderReturnsPlaceholder() {
+		$instance = new Template( 'empty', '' );
+
 		$rendered = $instance->render();
-		$this->assertSame( '', $rendered );
+		$this->assertSame( '<empty>', $rendered );
+	}
+
+	public function testGivenHtml_renderDoesNotEscapeHtml() {
+		$template = new Template( 'tmpl1', '<a>$1</a>', [ '<PARAM>' ] );
+
+		$this->assertSame( '<a><PARAM></a>', $template->render() );
+	}
+
+	public function testGivenTemplateSyntax_renderDoesNotExpandTemplates() {
+		$template = new Template( 'tmpl1', '{{$1}}', [ '<PARAM>' ] );
+
+		$this->assertSame( '{{<PARAM>}}', $template->render() );
 	}
 
 	public function testText() {
-		$registry = new TemplateRegistry( array(
-			'tmpl1' => '<div>$1</div>',
-		) );
-
-		$template = new Template( $registry, 'tmpl1', array( 'param' ) );
+		$template = new Template( 'tmpl1', '<div>$1</div>', [ 'param' ] );
 		$this->assertSame( '<div>param</div>', $template->text() );
 	}
 

@@ -14,37 +14,26 @@ use Message;
  *
  * @license GPL-2.0+
  * @author H. Snater <mediawiki@snater.com>
+ * @author Thiemo Mättig
  */
 class Template extends Message {
-
-	protected $templateRegistry;
 
 	/**
 	 * important! note that the Template class does not escape anything.
 	 * be sure to escape your params before using this class!
 	 *
-	 * @param TemplateRegistry $templateRegistry
 	 * @param string|string[] $key message key, or array of message keys to try
 	 *          and use the first non-empty message for
+	 * @param string|null $template A raw, non-empty template string or null, if a template with
+	 *  that name could not be found.
 	 * @param array $params Array message parameters
 	 */
-	public function __construct( TemplateRegistry $templateRegistry, $key, array $params = array() ) {
-		$this->templateRegistry = $templateRegistry;
+	public function __construct( $key, $template, array $params = [] ) {
 		parent::__construct( $key, $params );
-	}
 
-	/**
-	 * Fetch a template from the template store.
-	 *
-	 * @see Message.fetchMessage
-	 *
-	 * @return string template
-	 */
-	protected function fetchMessage() {
-		if ( !isset( $this->message ) ) {
-			$this->message = $this->templateRegistry->getTemplate( $this->key );
+		if ( is_string( $template ) && $template !== '' ) {
+			$this->message = $template;
 		}
-		return $this->message;
 	}
 
 	/**

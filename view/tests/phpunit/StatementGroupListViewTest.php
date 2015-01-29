@@ -17,14 +17,12 @@ use Wikibase\View\ClaimHtmlGenerator;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\StatementGroupListView
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory
- * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView
@@ -107,12 +105,12 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 	 * @return StatementGroupListView
 	 */
 	private function newStatementGroupListView( EntityIdFormatter $propertyIdFormatter ) {
-		$templateFactory = new TemplateFactory( new TemplateRegistry( array(
+		$templateFactory = new TemplateFactory( [
 			'wikibase-statementgrouplistview' => '<SGLIST>$1</SGLIST>',
 			'wikibase-listview' => '<LIST>$1</LIST>',
 			'wikibase-statementgroupview' => '<SGROUP id="$3"><PROPERTY>$1</PROPERTY>$2</SGROUP>',
 			'wikibase-statementlistview' => '<SLIST>$1<TOOLBAR>$2</TOOLBAR></SLIST>',
-		) ) );
+		] );
 
 		return new StatementGroupListView(
 			$templateFactory,
