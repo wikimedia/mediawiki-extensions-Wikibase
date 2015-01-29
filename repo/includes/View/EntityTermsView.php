@@ -85,7 +85,7 @@ class EntityTermsView {
 			$textInjector->newMarker(
 				'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
 			),
-			$this->getHtmlForEditSection( 'SetLabel', $entityId, $editable )
+			$this->getHtmlForEditSection( 'SetLabelDescriptionAliases', $entityId, $editable )
 		);
 	}
 
