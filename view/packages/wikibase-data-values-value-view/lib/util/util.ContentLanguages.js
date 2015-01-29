@@ -1,13 +1,15 @@
 
 this.util = this.util || {};
 
-( function( util, $ ) {
+( function( util ) {
 	'use strict';
 
 	/**
-	 * A service storing informations about the languages available for the content
+	 * A service storing information about the languages available for the content.
+	 * Uses `util.inherit`.
 	 * @class util.ContentLanguages
 	 * @abstract
+	 * @uses util
 	 * @licence GNU GPL v2+
 	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 *
@@ -18,22 +20,21 @@ this.util = this.util || {};
 
 	util.ContentLanguages.prototype = {
 		/**
-		 * Get all registered language codes
-		 *
-		 * Returns null if no information about accepted languages is known.
+		 * Returns all registered language codes or `null` if no information about accepted
+		 * languages is registered.
 		 *
 		 * @return {string[]|null}
 		 */
 		getAll: util.abstractMember,
 
 		/**
-		 * Get a name for a given language code
+		 * Returns a name for a specific language code. Preferably, the name should be in a language
+		 * the user understands (i. e. the UI language). Fall-backs are allowed, though. Returns
+		 * `null` if the language code is not registered.
 		 *
-		 * Preferebly, this should be in a language the user understands (i. e. the UI language).
-		 * Fallbacks are allowed, though. Returns null if the language code is not known.
-		 *
+		 * @param {string} languageCode
 		 * @return {string|null}
 		 */
 		getName: util.abstractMember
 	};
-}( util, jQuery ) );
+}( util ) );
