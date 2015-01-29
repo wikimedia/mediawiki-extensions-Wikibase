@@ -107,23 +107,32 @@ class ClaimDifferenceVisualizer {
 
 		if ( $claimDifference->getMainSnakChange() !== null ) {
 			$html .= $this->visualizeMainSnakChange( $claimDifference->getMainSnakChange() );
+			$oldMainSnak = $claimDifference->getMainSnakChange()->getOldValue();
+		} else {
+			$oldMainSnak = null;
 		}
 
 		if ( $claimDifference->getRankChange() !== null ) {
-			$html .= $this->visualizeRankChange( $claimDifference->getRankChange(), $baseClaim );
+			$html .= $this->visualizeRankChange(
+				$claimDifference->getRankChange(),
+				$oldMainSnak,
+				$baseClaim->getMainSnak()
+			);
 		}
 
 		if ( $claimDifference->getQualifierChanges() !== null ) {
 			$html .= $this->visualizeQualifierChanges(
 				$claimDifference->getQualifierChanges(),
-				$baseClaim
+				$oldMainSnak,
+				$baseClaim->getMainSnak()
 			);
 		}
 
 		if ( $claimDifference->getReferenceChanges() !== null ) {
 			$html .= $this->visualizeSnakListChanges(
 				$claimDifference->getReferenceChanges(),
-				$baseClaim,
+				$oldMainSnak,
+				$baseClaim->getMainSnak(),
 				wfMessage( 'wikibase-diffview-reference' )->inLanguage( $this->languageCode )
 			);
 		}
@@ -197,14 +206,22 @@ class ClaimDifferenceVisualizer {
 	 * @since 0.4
 	 *
 	 * @param DiffOpChange $rankChange
-	 * @param Claim $claim the claim, as context for display
+	 * @param Snak|null $oldMainSnak
+	 * @param Snak|null $newMainSnak
 	 *
 	 * @return string
 	 */
-	protected function visualizeRankChange( DiffOpChange $rankChange, Claim $claim ) {
-		$claimMainSnak = $claim->getMainSnak();
-		$claimHeader = $this->getSnakValueHeader( $claimMainSnak );
-
+	protected function visualizeRankChange( DiffOpChange $rankChange, Snak $oldMainSnak = null, Snak $newMainSnak = null ) {
+		if ( $rankChange instanceof DiffOpAdd && $newMainSnak ) {
+			$claimHeader = $this->getSnakValueHeader( $newMainSnak );
+		} else if ( $rankChange instanceof DiffOpRemove && $oldMainSnak ) {
+			$claimHeader = $this->getSnakValueHeader( $oldMainSnak );
+		} else if ( $rankChange instanceof DiffOpChange ) {
+			// FIXME: Should show different headers for left and right side of the diff
+			$claimHeader = $this->getSnakValueHeader( $newMainSnak );
+		} else {
+			$claimHeader = $this->getSnakValueHeader( $newMainSnak ?: $oldMainSnak );
+		}
 		$valueFormatter = new DiffOpValueFormatter(
 			$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->languageCode )->parse(),
 			$this->getRankHtml( $rankChange->getOldValue() ),
@@ -320,11 +337,11 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Snak $snak
+	 * @param Snak|null $snak
 	 *
 	 * @return string HTML
 	 */
-	protected function getSnakValueHeader( Snak $snak ) {
+	protected function getSnakValueHeader( Snak $snak = null ) {
 		$headerText = $this->getSnakLabelHeader( $snak );
 
 		try {
@@ -343,17 +360,23 @@ class ClaimDifferenceVisualizer {
 	 * @since 0.4
 	 *
 	 * @param Diff $changes
-	 * @param Claim $claim
+	 * @param Snak|null $oldMainSnak
+	 * @param Snak|null $newMainSnak
 	 * @param Message $breadCrumb
 	 *
 	 * @return string
 	 * @throws RuntimeException
 	 */
-	protected function visualizeSnakListChanges( Diff $changes, Claim $claim, Message $breadCrumb ) {
+	protected function visualizeSnakListChanges( Diff $changes, Snak $oldMainSnak = null, Snak $newMainSnak = null, Message $breadCrumb ) {
 		$html = '';
 
-		$claimMainSnak = $claim->getMainSnak();
-		$claimHeader = $this->getSnakValueHeader( $claimMainSnak );
+		$oldClaimHeader = $this->getSnakValueHeader( $oldMainSnak );
+		$newClaimHeader = $this->getSnakValueHeader( $newMainSnak );
+		if ( $oldMainSnak === null ) {
+			$oldClaimHeader = $newClaimHeader;
+		} else if ( $newMainSnak === null ) {
+			$newClaimHeader = $oldClaimHeader;
+		}
 
 		$newVal = null;
 		$oldVal = null;
@@ -361,11 +384,15 @@ class ClaimDifferenceVisualizer {
 		foreach( $changes as $change ) {
 			if ( $change instanceof DiffOpAdd ) {
 				$newVal = $this->getSnakListValues( $change->getNewValue()->getSnaks() );
+				$claimHeader = $newClaimHeader;
 			} else if ( $change instanceof DiffOpRemove ) {
 				$oldVal = $this->getSnakListValues( $change->getOldValue()->getSnaks() );
+				$claimHeader = $oldClaimHeader;
 			} else if ( $change instanceof DiffOpChange ) {
 				$oldVal = $this->getSnakListValues( $change->getOldValue()->getSnaks() );
 				$newVal = $this->getSnakListValues( $change->getNewValue()->getSnaks() );
+				// FIXME: Should show different headers for left and right side of the diff
+				$claimHeader = $newClaimHeader;
 			} else {
 				throw new RuntimeException( 'Diff operation of unknown type.' );
 			}
@@ -389,17 +416,24 @@ class ClaimDifferenceVisualizer {
 	 * @since 0.4
 	 *
 	 * @param Diff $changes
-	 * @param Claim $claim
+	 * @param Snak|null $oldMainSnak
+	 * @param Snak|null $newMainSnak
 	 *
 	 * @return string
 	 * @throws RuntimeException
 	 */
-	protected function visualizeQualifierChanges( Diff $changes, Claim $claim ) {
+	protected function visualizeQualifierChanges( Diff $changes, Snak $oldMainSnak = null, Snak $newMainSnak = null ) {
 		$html = '';
 		$colon = wfMessage( 'colon-separator' )->inLanguage( $this->languageCode )->escaped();
 
-		$claimMainSnak = $claim->getMainSnak();
-		$claimHeader = $this->getSnakValueHeader( $claimMainSnak );
+		$oldClaimHeader = $this->getSnakValueHeader( $oldMainSnak );
+		$newClaimHeader = $this->getSnakValueHeader( $newMainSnak );
+		if ( $oldMainSnak === null ) {
+			$oldClaimHeader = $newClaimHeader;
+		} else if ( $newMainSnak === null ) {
+			$newClaimHeader = $oldClaimHeader;
+		}
+
 		$newVal = $oldVal = null;
 
 		foreach( $changes as $change ) {
@@ -408,11 +442,13 @@ class ClaimDifferenceVisualizer {
 					$this->formatPropertyId( $change->getNewValue()->getPropertyId() ) .
 					$colon .
 					$this->formatSnakDetails( $change->getNewValue() );
+				$claimHeader = $newClaimHeader;
 			} else if ( $change instanceof DiffOpRemove ) {
 				$oldVal =
 					$this->formatPropertyId( $change->getOldValue()->getPropertyId() ) .
 					$colon .
 					$this->formatSnakDetails( $change->getOldValue() );
+				$claimHeader = $oldClaimHeader;
 			} else if ( $change instanceof DiffOpChange ) {
 				$oldVal =
 					$this->formatPropertyId( $change->getOldValue()->getPropertyId() ) .
@@ -422,6 +458,8 @@ class ClaimDifferenceVisualizer {
 					$this->formatPropertyId( $change->getNewValue()->getPropertyId() ) .
 					$colon .
 					$this->formatSnakDetails( $change->getNewValue() );
+				// FIXME: Should show different headers for left and right side of the diff
+				$claimHeader = $newClaimHeader;
 			} else {
 				throw new RuntimeException( 'Diff operation of unknown type.' );
 			}
