@@ -11,14 +11,12 @@ use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\StatementSectionsView
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory
- * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView
@@ -30,9 +28,9 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	private function newInstance( array $statementLists = [] ) {
-		$templateFactory = new TemplateFactory( new TemplateRegistry( [
+		$templateFactory = new TemplateFactory( [
 			'wb-section-heading' => '<HEADING id="$2" class="$3">$1</HEADING>',
-		] ) );
+		] );
 
 		$statementGrouper = $this->getMock( StatementGrouper::class );
 		$statementGrouper->method( 'groupStatements' )

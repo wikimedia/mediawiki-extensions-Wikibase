@@ -25,7 +25,6 @@ use Wikibase\View\StatementSectionsView;
 use Wikibase\View\ViewFactory;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\ViewFactory
@@ -42,7 +41,6 @@ use Wikibase\View\Template\TemplateRegistry;
  * @uses Wikibase\View\StatementSectionsView
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory
- * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView
@@ -59,7 +57,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		EntityIdFormatterFactory $htmlFactory = null,
 		EntityIdFormatterFactory $plainFactory = null
 	) {
-		$templateFactory = new TemplateFactory( new TemplateRegistry( [] ) );
+		$templateFactory = new TemplateFactory( [] );
 
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )

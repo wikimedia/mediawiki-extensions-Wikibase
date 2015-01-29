@@ -3,13 +3,11 @@
 namespace Wikibase\View\Tests\Template;
 
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\Template\TemplateFactory
  *
  * @uses Wikibase\View\Template\Template
- * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView
@@ -20,14 +18,30 @@ use Wikibase\View\Template\TemplateRegistry;
 class TemplateFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	private function newInstance() {
-		return new TemplateFactory( new TemplateRegistry( [
+		return new TemplateFactory( [
 			'basic' => '$1',
-		] ) );
+		] );
 	}
 
 	public function testGetDefaultInstance() {
 		$instance = TemplateFactory::getDefaultInstance();
+
 		$this->assertInstanceOf( TemplateFactory::class, $instance );
+		$this->assertNotEmpty( $instance->getTemplates() );
+	}
+
+	public function testRemovesTabs() {
+		$factory = new TemplateFactory( [ 'tmpl1' => "no\ttabs" ] );
+
+		$this->assertSame( 'notabs', $factory->render( 'tmpl1' ) );
+	}
+
+	public function testRemovesComments() {
+		$factory = new TemplateFactory( [
+			'tmpl1' => "no<!--[if IE]>IE<![endif]-->comments<!-- <div>\n</div> -->",
+		] );
+
+		$this->assertSame( 'nocomments', $factory->render( 'tmpl1' ) );
 	}
 
 	public function testGetTemplates() {
@@ -35,11 +49,9 @@ class TemplateFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( [ 'basic' => '$1' ], $templates );
 	}
 
-	public function testGet() {
-		$template = $this->newInstance()->get( 'basic', [ '<PARAM>' ] );
-		$this->assertSame( 'basic', $template->getKey() );
-		$this->assertSame( [ '<PARAM>' ], $template->getParams() );
-		$this->assertSame( '<PARAM>', $template->plain() );
+	public function testGivenUnknownTemplate_renderReturnsPlaceholder() {
+		$rendered = $this->newInstance()->render( 'unknown' );
+		$this->assertSame( '<unknown>', $rendered );
 	}
 
 	/**
@@ -52,10 +64,10 @@ class TemplateFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function renderParamsProvider() {
 		return [
-			[ '<PARAM>', '<PARAM>' ],
-			[ [], '$1' ],
-			[ [ '<PARAM>' ], '<PARAM>' ],
-			[ [ '<PARAM>', 'ignored' ], '<PARAM>' ],
+			'Single parameter' => [ '<PARAM>', '<PARAM>' ],
+			'Missing parameter' => [ [], '$1' ],
+			'Parameter array' => [ [ '<PARAM>' ], '<PARAM>' ],
+			'To many parameters' => [ [ '<PARAM>', 'ignored' ], '<PARAM>' ],
 		];
 	}
 

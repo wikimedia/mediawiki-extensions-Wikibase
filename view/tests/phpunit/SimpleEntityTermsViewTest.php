@@ -22,7 +22,6 @@ use Wikibase\View\TermsListView;
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory
- * @uses Wikibase\View\Template\TemplateRegistry
  * @uses Wikibase\View\TermsListView
  *
  * @group Wikibase
