@@ -104,9 +104,6 @@ return call_user_func( function() {
 				'wikibase.datamodel.StatementList',
 				'wikibase.utilities.ClaimGuidGenerator',
 			),
-			'messages' => array(
-				'wikibase-entity-property',
-			),
 		),
 
 		'jquery.wikibase.descriptionview' => $moduleTemplate + array(
