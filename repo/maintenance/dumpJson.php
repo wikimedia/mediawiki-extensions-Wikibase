@@ -100,7 +100,7 @@ class DumpJson extends Maintenance {
 	 *
 	 * @param string $message
 	 */
-	private function logMessage( $message ) {
+	public function logMessage( $message ) {
 		if ( $this->logFileHandle ) {
 			fwrite( $this->logFileHandle, "$message\n" );
 			fflush( $this->logFileHandle );
