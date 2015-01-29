@@ -27,16 +27,29 @@
 	"browser": true,
 
 	// Globals
-	"predef": [
-		"jQuery",
-		"QUnit",
-		"mediaWiki",
-		"wikibase",
-		"dataValues",
-		"dataTypes",
-		"sinon",
-		"util",
-		"valueFormatters",
-		"valueParsers"
-	]
+	"globals": {
+		"jQuery": false,
+		"mediaWiki": false,
+		"wikibase": true,
+		"dataValues": false,
+		"dataTypes": false,
+		"util": false,
+		"valueFormatters": false,
+		"valueParsers": false
+	},
+
+	"overrides": {
+		"*/tests/qunit/**/*.tests.js": {
+			"globals": {
+				"sinon": false,
+				"QUnit": false
+			}
+		},
+		"lib/tests/qunit/data/testrunner.js": {
+			"globals": {
+				"QUnit": false
+			}
+		}
+
+	}
 }
