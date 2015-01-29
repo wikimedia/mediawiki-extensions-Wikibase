@@ -97,7 +97,7 @@ class EntityTermsViewTest extends \MediaWikiLangTestCase {
 		$html = $entityTermsView->getHtml( $fingerprint, $entityId, '', new TextInjector() );
 		$idString = $entityId->getSerialization();
 
-		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetLabel/' . $idString . '/' . $languageCode . '"@', $html );
+		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetLabelDescriptionAliases/' . $idString . '/' . $languageCode . '"@', $html );
 	}
 
 	/**
