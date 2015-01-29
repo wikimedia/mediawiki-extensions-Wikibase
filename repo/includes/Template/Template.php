@@ -14,43 +14,33 @@ use Message;
  *
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
+ * @author Thiemo Mättig
  */
 class Template extends Message {
-
-	protected $templateRegistry;
 
 	/**
 	 * important! note that the Template class does not escape anything.
 	 * be sure to escape your params before using this class!
 	 *
-	 * @param TemplateRegistry $templateRegistry
-	 * @param $key: message key, or array of message keys to try
-	 *          and use the first non-empty message for
-	 * @param $params Array message parameters
+	 * @param string|string[] $key Message key or array of message keys to try and use the first
+	 * non-empty message for.
+	 * @param string|null $template A raw, non-empty template string or null, if a template with
+	 * that name could not be found.
+	 * @param array $params Message parameters.
 	 */
-	public function __construct( TemplateRegistry $templateRegistry, $key, $params = array() ) {
-		$this->templateRegistry = $templateRegistry;
+	public function __construct( $key, $template, $params = array() ) {
 		parent::__construct( $key, $params );
-	}
 
-	/**
-	 * Fetch a template from the template store.
-	 * @see \Message.fetchMessage()
-	 *
-	 * @return string template
-	 */
-	protected function fetchMessage() {
-		if ( !isset( $this->message ) ) {
-			$this->message = $this->templateRegistry->getTemplate( $this->key );
+		if ( is_string( $template ) && $template !== '' ) {
+			$this->message = $template;
 		}
-		return $this->message;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function render() {
-		// Use plain() to prevent replacing {{...}}:
+		// Use plain() to prevent replacing {{...}}
 		return $this->plain();
 	}
 
