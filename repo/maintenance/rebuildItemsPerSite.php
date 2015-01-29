@@ -33,8 +33,6 @@ class RebuildItemsPerSite extends Maintenance {
 
 	/**
 	 * @see Maintenance::execute
-	 *
-	 * @return boolean
 	 */
 	public function execute() {
 		if ( !defined( 'WB_VERSION' ) ) {
@@ -65,8 +63,6 @@ class RebuildItemsPerSite extends Maintenance {
 
 		// Now <s>kill</s> fix the table
 		$builder->rebuild( $stream );
-
-		return true;
 	}
 
 	/**
@@ -74,7 +70,7 @@ class RebuildItemsPerSite extends Maintenance {
 	 *
 	 * @since 0.4
 	 *
-	 * @param $msg
+	 * @param string $msg
 	 */
 	public function report( $msg ) {
 		$this->output( "$msg\n" );

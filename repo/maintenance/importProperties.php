@@ -25,20 +25,36 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) 
 require_once $basePath . '/maintenance/Maintenance.php';
 
 class importProperties extends Maintenance {
+
+	/**
+	 * @var bool
+	 */
 	private $verbose = false;
+
+	/**
+	 * @var bool
+	 */
 	private $ignore_errors = false;
+
+	/**
+	 * @var int
+	 */
 	private $skip = 0;
+
+	/**
+	 * @var int
+	 */
 	private $only = 0;
 
 	/**
-	 * @var User|null
+	 * @var User
 	 */
-	private $user = null;
+	private $user;
 
 	/**
-	 * @var EntityStore|null
+	 * @var EntityStore
 	 */
-	private $store = null;
+	private $store;
 
 	public function __construct() {
 		$this->mDescription = "Import properties in Wikidata.";
@@ -126,11 +142,12 @@ class importProperties extends Maintenance {
 	}
 
 	/**
-	 * @param Array $data An associative array of interlanguage links, mapping site IDs to page titles on that site.
+	 * @param string[] $data Associative array of interlanguage links, mapping language codes to
+	 * page titles on that site.
 	 *
 	 * @return bool true if the item was created, false otherwise
 	 */
-	private function createProperty( $data ) {
+	private function createProperty( array $data ) {
 		$property = Property::newFromType( 'wikibase-item' );
 
 		foreach ( $data as $lang => $title ) {

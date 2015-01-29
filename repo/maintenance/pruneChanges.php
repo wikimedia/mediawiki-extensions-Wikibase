@@ -96,7 +96,7 @@ class PruneChanges extends Maintenance {
 	/**
 	 * Calculates the timestamp up to which changes can be pruned.
 	 *
-	 * @return int timstamp up to which changes can be pruned (as unix period)
+	 * @return int Timestamp up to which changes can be pruned (as Unix period).
 	 */
 	private function getCutoffTimestamp() {
 		$until = time() - $this->keepSeconds;
@@ -126,7 +126,7 @@ class PruneChanges extends Maintenance {
 	/**
 	 * Prunes all changes older than $until from the changes table.
 	 *
-	 * @param $until
+	 * @param int $until
 	 *
 	 * @return int the number of changes deleted.
 	 */
