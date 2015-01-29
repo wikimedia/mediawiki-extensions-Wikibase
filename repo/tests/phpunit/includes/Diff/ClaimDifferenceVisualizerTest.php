@@ -46,11 +46,8 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 		return $instance;
 	}
 
-	public function newEntityIdLabelFormatter(){
-		$instance = $this
-			->getMockBuilder( 'Wikibase\Lib\EntityIdLabelFormatter' )
-			->disableOriginalConstructor()
-			->getMock();
+	public function newEntityIdFormatter(){
+		$instance = $this->getMock( 'ValueFormatters\ValueFormatter' );
 
 		$instance->expects( $this->any() )
 			->method( 'format' )
@@ -61,7 +58,7 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 
 	public function newClaimDifferenceVisualizer(){
 		return new ClaimDifferenceVisualizer(
-			$this->newEntityIdLabelFormatter(),
+			$this->newEntityIdFormatter(),
 			$this->newSnakFormatter(),
 			$this->newSnakFormatter(),
 			'en'
@@ -76,7 +73,7 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 	public function testConstructionWithBadDetailsFormatter(){
 		$this->setExpectedException( 'InvalidArgumentException' );
 		new ClaimDifferenceVisualizer(
-			$this->newEntityIdLabelFormatter(),
+			$this->newEntityIdFormatter(),
 			$this->newSnakFormatter( 'qwertyuiop' ),
 			$this->newSnakFormatter(),
 			'en'
@@ -86,7 +83,7 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 	public function testConstructionWithBadTerseFormatter(){
 		$this->setExpectedException( 'InvalidArgumentException' );
 		new ClaimDifferenceVisualizer(
-			$this->newEntityIdLabelFormatter(),
+			$this->newEntityIdFormatter(),
 			$this->newSnakFormatter(),
 			$this->newSnakFormatter( 'qwertyuiop' ),
 			'en'
