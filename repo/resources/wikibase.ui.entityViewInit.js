@@ -162,12 +162,12 @@
 	function getUserLanguages() {
 		var userLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
 			isUlsDefined = mw.uls && $.uls && $.uls.data,
-			languages = [];
+			languages;
 
 		if( !userLanguages.length && isUlsDefined ) {
 			languages = mw.uls.getFrequentLanguageList().slice( 1, 4 );
 		} else {
-			languages = $.merge( [], userLanguages );
+			languages = userLanguages.slice();
 			languages.splice( $.inArray( mw.config.get( 'wgUserLanguage' ), userLanguages ), 1 );
 		}
 
