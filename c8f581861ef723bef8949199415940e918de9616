@@ -16,6 +16,23 @@
       "revId": "c8f581861ef723bef8949199415940e918de9616",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e7fc396_e2b96b2a",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-29T11:43:40Z",
+      "side": 1,
+      "message": "Requested \u003d actual? The variable name is wrong, but the logic is correct, luckily.",
+      "revId": "c8f581861ef723bef8949199415940e918de9616",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
