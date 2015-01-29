@@ -15,42 +15,61 @@ class TemplateFactory {
 	private static $instance;
 
 	/**
-	 * @var TemplateRegistry
+	 * @var string[]
 	 */
-	private $templateRegistry;
+	private $templates = array();
 
 	public static function getDefaultInstance() {
 		if ( self::$instance === null ) {
-			self::$instance = new self(
-				new TemplateRegistry( include( __DIR__ . '/../../resources/templates.php' ) )
-			);
+			self::$instance = new self( include( __DIR__ . '/../../resources/templates.php' ) );
 		}
 
 		return self::$instance;
 	}
 
 	/**
-	 * @param TemplateRegistry $templateRegistry
+	 * @param string[] $templates
 	 */
-	public function __construct( TemplateRegistry $templateRegistry ) {
-		$this->templateRegistry = $templateRegistry;
+	public function __construct( array $templates = array() ) {
+		$this->addTemplates( $templates );
+	}
+
+	/**
+	 * Adds multiple raw template strings to the internal store.
+	 *
+	 * @param string[] $templates
+	 */
+	public function addTemplates( array $templates ) {
+		foreach ( $templates as $key => $template ) {
+			$this->addTemplate( $key, $template );
+		}
+	}
+
+	/**
+	 * Adds a single raw template string to the internal store.
+	 *
+	 * @param string $key
+	 * @param string $template
+	 */
+	public function addTemplate( $key, $template ) {
+		$this->templates[$key] = str_replace( "\t", '', $template );
 	}
 
 	/**
 	 * @return string[] Array containing all raw template strings.
 	 */
 	public function getTemplates() {
-		return $this->templateRegistry->getTemplates();
+		return $this->templates;
 	}
 
 	/**
 	 * @param string $key
-	 * @param array $params
 	 *
-	 * @return Template
+	 * @return string|null A specific raw template string or null, if a template with that name
+	 * could not be found.
 	 */
-	public function get( $key, array $params ) {
-		return new Template( $this->templateRegistry, $key, $params );
+	public function getTemplate( $key ) {
+		return array_key_exists( $key, $this->templates ) ? $this->templates[$key] : null;
 	}
 
 	/**
@@ -74,7 +93,7 @@ class TemplateFactory {
 			$params = $params[0];
 		}
 
-		$template = $this->get( $key, $params );
+		$template = new Template( $key, $this->getTemplate( $key ), $params );
 
 		return $template->render();
 	}
