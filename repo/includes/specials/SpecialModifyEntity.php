@@ -151,7 +151,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @param Entity $entity
 	 */
-	private function setForm( Entity $entity = null ) {
+	protected function setForm( Entity $entity = null ) {
 		$this->addCopyrightText();
 
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
