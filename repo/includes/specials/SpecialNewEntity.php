@@ -41,6 +41,11 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	protected $description = null;
 
 	/**
+	 * @var Language
+	 */
+	private $contentLanguage = null;
+
+	/**
 	 * @var SummaryFormatter
 	 */
 	protected $summaryFormatter;
@@ -92,6 +97,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
 		$out = $this->getOutput();
 
+		$uiLanguageCode = $this->getLanguage()->getCode();
+
 		if ( $this->getRequest()->wasPosted()
 			&&  $this->getUser()->matchEditToken( $this->getRequest()->getVal( 'token' ) ) ) {
 
@@ -102,7 +109,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
 				if ( $status->isGood() ) {
 					$summary = new Summary( 'wbeditentity', 'create' );
-					$summary->setLanguage( $this->getLanguage()->getCode() );
+					$summary->setLanguage( $uiLanguageCode );
 					$summary->addAutoSummaryArgs( $this->label, $this->description );
 
 					$status = $this->saveEntity(
@@ -148,6 +155,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	protected function prepareArguments() {
 		$this->label = $this->getRequest()->getVal( 'label', isset( $this->parts[0] ) ? $this->parts[0] : '' );
 		$this->description = $this->getRequest()->getVal( 'description', isset( $this->parts[1] ) ? $this->parts[1] : '' );
+		$this->contentLanguage = Language::factory( $this->getRequest()->getVal( 'lang', $this->getLanguage()->getCode() ) );
 		return true;
 	}
 
@@ -182,12 +190,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @return Status
 	 */
 	protected function modifyEntity( Entity &$entity ) {
-		$lang = $this->getLanguage()->getCode();
+		$contentLanguageCode = $this->contentLanguage->getCode();
 		if ( $this->label !== '' ) {
-			$entity->setLabel( $lang, $this->label );
+			$entity->setLabel( $contentLanguageCode, $this->label );
 		}
 		if ( $this->description !== '' ) {
-			$entity->setDescription( $lang, $this->description );
+			$entity->setDescription( $contentLanguageCode, $this->description );
 		}
 		return \Status::newGood();
 	}
@@ -201,7 +209,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 */
 	protected function additionalFormElements() {
 		global $wgLang;
-		return Html::element(
+		return
+		Html::hidden(
+			'lang',
+			$this->contentLanguage->getCode()
+		)
+		. Html::element(
 			'label',
 			array(
 				'for' => 'wb-newentity-label',
@@ -217,11 +230,11 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'id' => 'wb-newentity-label',
 				'size' => 12,
 				'class' => 'wb-input',
-				'lang' => $wgLang->getCode(),
-				'dir' => $wgLang->getDir(),
+				'lang' => $this->contentLanguage->getCode(),
+				'dir' => $this->contentLanguage->getDir(),
 				'placeholder' => $this->msg(
 					'wikibase-label-edit-placeholder-language-aware',
-					Language::fetchLanguageName( $wgLang->getCode() )
+					Language::fetchLanguageName( $this->contentLanguage->getCode() )
 				)->text(),
 			)
 		)
@@ -242,11 +255,11 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'id' => 'wb-newentity-description',
 				'size' => 36,
 				'class' => 'wb-input',
-				'lang' => $wgLang->getCode(),
-				'dir' => $wgLang->getDir(),
+				'lang' => $this->contentLanguage->getCode(),
+				'dir' => $this->contentLanguage->getDir(),
 				'placeholder' => $this->msg(
 					'wikibase-description-edit-placeholder-language-aware',
-					Language::fetchLanguageName( $wgLang->getCode() )
+					Language::fetchLanguageName( $this->contentLanguage->getCode() )
 				)->text(),
 			)
 		)
