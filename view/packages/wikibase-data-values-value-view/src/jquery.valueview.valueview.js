@@ -35,18 +35,19 @@ function expertProxy( fnName ) {
  *
  * @constructor
  *
- * @param {jQuery.valueview.ExpertStore} expertStore
+ * @param {Object} options
+ * @param {jQuery.valueview.ExpertStore} options.expertStore
  *        Used to determine an `Expert` depending on the data value type or the data type the
  *        `valueview` should handle. The `valueview` will be able to handle all data value types and
  *        data types the given store has `Experts` registered for.
- * @param {valueParsers.ValueParserStore} parserStore
+ * @param {valueParsers.ValueParserStore} options.parserStore
  *        Store providing the parsers values may be parsed with.
- * @param {valueFormatters.ValueFormatterStore} formatterStore
+ * @param {valueFormatters.ValueFormatterStore} options.formatterStore
  *        Store providing the formatters values may be formatted with.
- * @param {string} language
+ * @param {string} options.language
  *        Language code of the language the `valueview` shall interact with parsers and
  *        formatters.
- * @param {string|null} [dataTypeId=null]
+ * @param {string|null} [options.dataTypeId=null]
  *        If set, an expert (`jQuery.valueview.Expert`), a parser (`valueParsers.ValueParser`) and a
  *        formatter (`valueFormatters.ValueFormatter`) will be determined from the provided
  *        factories according to the specified data type id.
@@ -55,7 +56,7 @@ function expertProxy( fnName ) {
  *        widget's current definition will be displayed.
  *        If the `dataTypeId` option is `null`, expert, parser and formatter will be determined
  *        using the `dataValueType` option.
- * @param {string|null} [dataValueType=null]
+ * @param {string|null} [options.dataValueType=null]
  *        If set while the `dataTypeId` option is `null`, a parser (`valueParsers.ValueParser`) and
  *        a formatter (`valueFormatters.ValueFormatter`) will be determined from the provided
  *        factories according to the specified data value type.
@@ -66,20 +67,21 @@ function expertProxy( fnName ) {
  *        and formatter will be determined using the widget's current value.
  *        Consequently, if the value itself is `null`, the widget will not be able to offer any
  *        input for new values.
- * @param {dataValues.DataValue|null} [value=null]
+ * @param {dataValues.DataValue|null} [options.value=null]
  *        The data value this view should represent initially.
  *        If omitted, an empty view will be served, ready to take some input by the user. The value
  *        can also be overwritten later, by using the `value()` function.
- * @param {boolean} [autoStartEditing=true]
+ * @param {boolean} [options.autoStartEditing=true]
  *        Whether or not view should go into edit mode by its own upon initialization if its initial
  *        value is empty.
- * @param {number} [parseDelay=300]
+ * @param {number} [options.parseDelay=300]
  *        Time milliseconds that the parser should wait before parsing. A delay is useful to limit
  *        the number of API request that are outdated when returning because the input has changed
  *        in the meantime.
- * @param {Object|null} [mediaWiki=null]
+ * @param {Object|null} [options.mediaWiki=null]
  *        `mediaWiki` JavaScript object that may be used when in MediaWiki environment.
- * @param {util.ContentLanguages|null} [contentLanguages=null]
+ * @param {util.ContentLanguages|null} [options.contentLanguages=null]
+ *        Enables `Expert`s to provide language selection (i. e. the `MonolingualText` `Expert`).
  */
 /**
  * @event change

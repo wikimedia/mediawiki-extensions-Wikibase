@@ -95,9 +95,13 @@
 
 		/**
 		 * @private
+		 *
+		 * @param {string} languageCode
+		 * @param {string[]} params
+		 * @return {string}
 		 */
-		_getMessage: function( code, params ) {
-			return this._messageProvider.getMessage( this._prefix + '-' + code, params );
+		_getMessage: function( languageCode, params ) {
+			return this._messageProvider.getMessage( this._prefix + '-' + languageCode, params );
 		},
 
 		/**

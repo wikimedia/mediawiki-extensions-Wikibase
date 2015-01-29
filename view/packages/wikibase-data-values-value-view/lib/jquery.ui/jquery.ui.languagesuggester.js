@@ -14,7 +14,7 @@ var PARENT = $.ui.suggester;
  */
 $.widget( 'ui.languagesuggester', PARENT, {
 	/**
-	 * @property {mixed}
+	 * @property {*}
 	 * @protected
 	 */
 	_selectedValue: null,
@@ -77,7 +77,7 @@ $.widget( 'ui.languagesuggester', PARENT, {
 	 * Instantiates a menu item instance from a suggestion.
 	 * @protected
 	 *
-	 * @param {object} suggestion
+	 * @param {Object} suggestion
 	 * @param {string} requestTerm
 	 * @return {jQuery.ui.ooMenu.Item}
 	 */
@@ -99,7 +99,7 @@ $.widget( 'ui.languagesuggester', PARENT, {
 	},
 
 	/**
-	 * @return {mixed}
+	 * @return {*}
 	 */
 	getSelectedValue: function() {
 		return this._selectedValue;
