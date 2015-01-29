@@ -15,7 +15,6 @@ use Wikibase\View\TextInjector;
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory
- * @uses Wikibase\View\Template\TemplateRegistry
  * @uses Wikibase\View\TextInjector
  *
  * @group Database

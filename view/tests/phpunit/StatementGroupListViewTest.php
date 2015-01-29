@@ -44,7 +44,6 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	 * @uses Wikibase\View\EditSectionGenerator
 	 * @uses Wikibase\View\Template\Template
 	 * @uses Wikibase\View\Template\TemplateFactory
-	 * @uses Wikibase\View\Template\TemplateRegistry
 	 */
 	public function testGetHtml() {
 		$propertyId = new PropertyId( 'P77' );
