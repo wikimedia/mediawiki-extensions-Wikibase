@@ -21,9 +21,7 @@
 		entityInitializer.getEntity().done( function( entity ) {
 			createEntityView( entity, $entityview.first() );
 
-			$entityview.on( 'entityviewafterstartediting', function() {
-				triggerAnonymousEditWarning( entity.getType() );
-			} )
+			attachAnonymousEditWarningTrigger( $entityview, entity.getType() );
 
 			evaluateRestrictions();
 
@@ -188,22 +186,26 @@
 	}
 
 	/**
-	 * @param {boolean} dropValue
+	 * Update the state of the watch link if the user has watchdefault enabled.
 	 */
-	function updateWatchLink( dropValue ) {
+	function attachWatchLinkUpdater( $entityview ) {
 		var update = mw.page && mw.page.watch ? mw.page.watch.updateWatchLink : null;
 
-		if( dropValue || !update || !mw.user.options.get( 'watchdefault' ) ) {
+		if( !update || !mw.user.options.get( 'watchdefault' ) ) {
 			return;
 		}
 
-		// All four supported skins are using the same ID, the other selectors
-		// in mediawiki.page.watch.ajax.js are undocumented and probably legacy stuff
-		var $link = $( '#ca-watch a' );
+		function updateWatchLink() {
+			// All four supported skins are using the same ID, the other selectors
+			// in mediawiki.page.watch.ajax.js are undocumented and probably legacy stuff
+			var $link = $( '#ca-watch a' );
 
-		// Skip if page is already watched and there is no "watch this page" link
-		// Note: The exposed function fails for empty jQuery collections
-		if( $link.length ) {
+			// Skip if page is already watched and there is no "watch this page" link
+			// Note: The exposed function fails for empty jQuery collections
+			if( !$link.length ) {
+				return;
+			}
+
 			update( $link, 'watch', 'loading' );
 
 			var api = new mw.Api(),
@@ -222,22 +224,36 @@
 				update( $link, 'watch' );
 			} );
 		}
+
+		$entityview.on( 'entityviewafterstopediting', function( event, dropValue ) {
+			if( !dropValue) ) {
+				updateWatchLink();
+			}
+		} )
 	}
 
 	/**
+	 * @param {jQuery.wikibase.entityview} $entityview
 	 * @param {string} entityType
 	 */
-	function triggerAnonymousEditWarning( entityType ) {
-		if(
-			mw.user && mw.user.isAnon()
-				&& $.find( '.mw-notification-content' ).length === 0
+	function attachAnonymousEditWarningTrigger( $entityview, entityType ) {
+		if( !mw.user || !mw.user.isAnon() ) {
+			return;
+		}
+
+		$entityview.on( 'entityviewafterstartediting', function() {
+			if(
+				$.find( '.mw-notification-content' ).length === 0
 				&& !$.cookie( 'wikibase-no-anonymouseditwarning' )
-		) {
-			mw.notify(
-				mw.msg( 'wikibase-anonymouseditwarning',
-					mw.msg( 'wikibase-entity-' + entityType )
-				)
-			);
+			) {
+				mw.notify(
+					mw.msg( 'wikibase-anonymouseditwarning',
+						mw.msg( 'wikibase-entity-' + entityType )
+					)
+				);
+			}
+		} );
+
 		}
 	}
 
