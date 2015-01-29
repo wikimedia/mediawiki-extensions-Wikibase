@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Xabier Armendaritz"
+			"Xabier Armendaritz",
+			"Subi"
 		]
 	},
+	"wikibase-linkitem-input-site": "Hizkuntza:",
+	"wikibase-rc-hide-wikidata-hide": "Ezkutatu",
+	"wikibase-rc-hide-wikidata-show": "Erakutsi",
 	"wikibase-rc-wikibase-edit-title": "Aldaketa hau Wikidatan egin da"
 }

@@ -6,5 +6,11 @@
 		]
 	},
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliteratuta)",
+	"wikibase-timedetails-timezone": "Ordu-eremua",
+	"wikibase-timedetails-calendar": "Egutegia",
+	"wikibase-globedetails-longitude": "Longitudea",
+	"wikibase-globedetails-latitude": "Latitudea",
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
+	"wikibase-sitelinks-sitename-columnheading": "Hizkuntza",
 	"wikibase-tooltip-error-details": "Xehetasunak"
 }

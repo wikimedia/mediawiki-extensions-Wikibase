@@ -4,17 +4,22 @@
 			"An13sa",
 			"Joxemai",
 			"Xabier Armendaritz",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Subi"
 		]
 	},
 	"wikibase-edit": "aldatu",
 	"wikibase-save": "gorde",
 	"wikibase-cancel": "utzi",
 	"wikibase-add": "gehitu",
+	"wikibase-save-inprogress": "Gordetzen...",
+	"wikibase-remove-inprogress": "Ezabatzen...",
+	"wikibase-terms": "Beste hizkuntzetan",
 	"wikibase-remove": "kendu",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|iturri|iturri}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Iturri bat ez da|$1 iturri ez dira}} gorde oraindik",
 	"wikibase-snakview-property-input-placeholder": "ezaugarri",
+	"wikibase-entityselector-more": "gehiago",
 	"wikibase-itembytitle-lookup-page": "Orria:",
 	"wikibase-itembytitle-submit": "Bilatu",
 	"wikibase-itemdisambiguation-lookup-language": "Hizkuntza:",
@@ -22,5 +27,6 @@
 	"wikibase-newentity-submit": "Sortu",
 	"wikibase-setlabel-label": "Etiketa:",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-restoreold": "leheneratu"
+	"wikibase-restoreold": "leheneratu",
+	"apihelp-wbsetdescription-param-language": "Deskribapenaren hizkuntza"
 }

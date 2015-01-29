@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Casual",
-			"CoderSI"
+			"CoderSI",
+			"Sociologist"
 		]
 	},
 	"wikibase-edit": "tahrirlash",
 	"wikibase-save": "saqlash",
-	"wikibase-cancel": "voz kechish",
+	"wikibase-cancel": "bekor qilish",
 	"wikibase-sitelink-page-edit-placeholder": "maqola",
 	"wikibase-remove": "oʻchirish",
 	"wikibase-itembytitle-lookup-page": "Sahifa:",
