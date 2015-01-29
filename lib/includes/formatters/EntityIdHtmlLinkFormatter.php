@@ -129,31 +129,39 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		$actualLanguage = $term->getActualLanguageCode();
 		$sourceLanguage = $term->getSourceLanguageCode();
 
+		// FIXME: TermFallback should either return equal values or null
 		$actualLanguage = ( $actualLanguage === null ? $requestedLanguage : $actualLanguage );
 		$sourceLanguage = ( $sourceLanguage === null ? $actualLanguage : $sourceLanguage );
 
-		if ( $actualLanguage === $requestedLanguage && $sourceLanguage === $requestedLanguage ) {
-			// no fallback
+		$isInRequestedLanguage = $actualLanguage === $requestedLanguage;
+		$isInSourceLanguage = $actualLanguage === $sourceLanguage;
+
+		if ( $isInRequestedLanguage && $isInSourceLanguage ) {
+			// This is neither a fallback nor a transliteration
 			return '';
 		}
 
-		$name = $this->getLanguageName( $sourceLanguage, $term->getLanguageCode() );
+		$sourceLanguageName = $this->getLanguageName( $sourceLanguage, $requestedLanguage );
+		$requestedLanguageName = $this->getLanguageName( $actualLanguage, $requestedLanguage );
 
-		$classes = array( 'wb-language-fallback-indicator' );
-
-		if ( $actualLanguage !== $sourceLanguage ) {
-			$classes[] = 'wb-language-fallback-transliteration';
-
+		// Generate indicator text
+		if ( $isInSourceLanguage ) {
+			$text = $sourceLanguageName;
+		} else {
 			$msg = wfMessage(
 				'wikibase-language-fallback-transliteration-hint',
-				$name,
-				$this->getLanguageName( $actualLanguage, $term->getLanguageCode() )
+				$sourceLanguageName,
+				$requestedLanguageName
 			);
-
-			$name = $msg->text();
+			$text = $msg->text();
 		}
 
-		if ( $actualLanguage !== $requestedLanguage
+		// Generate HTML class names
+		$classes = array( 'wb-language-fallback-indicator' );
+		if ( !$isInSourceLanguage ) {
+			$classes[] = 'wb-language-fallback-transliteration';
+		}
+		if ( !$isInRequestedLanguage
 				&& $this->getBaseLanguage( $actualLanguage ) === $this->getBaseLanguage( $requestedLanguage )
 		) {
 			$classes[] = 'wb-language-fallback-variant';
@@ -163,7 +171,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 			'class' => implode( ' ', $classes )
 		);
 
-		$html = Html::element( 'sup', $attributes, $name );
+		$html = Html::element( 'sup', $attributes, $text );
 		return $html;
 	}
 
