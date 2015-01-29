@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e7fc396_c4279cb0",
+        "filename": "repo/includes/Diff/ClaimDifferenceVisualizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-29T15:21:43Z",
+      "side": 1,
+      "message": "A rank change can\u0027t be of these types. Everything here (except the else) is dead code.",
+      "revId": "4486bd3e2f9fff74b3600fda76b1b00eefe8f379",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e7fc396_641c886b",
+        "filename": "repo/includes/Diff/ClaimDifferenceVisualizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-29T15:21:43Z",
+      "side": 1,
+      "message": "This line needs a null check now.",
+      "revId": "4486bd3e2f9fff74b3600fda76b1b00eefe8f379",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e7fc396_8421a49c",
+        "filename": "repo/includes/Diff/ClaimDifferenceVisualizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-29T15:21:43Z",
+      "side": 1,
+      "message": "Either add the mentioned null check or rearange these lines, see my follow-up.",
+      "revId": "4486bd3e2f9fff74b3600fda76b1b00eefe8f379",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e7fc396_243690e5",
+        "filename": "repo/includes/Diff/ClaimDifferenceVisualizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-29T15:21:43Z",
+      "side": 1,
+      "message": "Either add the mentioned null check or rearange these lines, see my follow-up.",
+      "revId": "4486bd3e2f9fff74b3600fda76b1b00eefe8f379",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
