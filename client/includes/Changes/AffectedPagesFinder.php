@@ -270,7 +270,12 @@ class AffectedPagesFinder {
 
 		/** @var PageEntityUsages $pageEntityUsages */
 		foreach ( $usages as $pageEntityUsages ) {
-			$title = $this->titleFactory->newFromID( $pageEntityUsages->getPageId() );
+			try {
+				$title = $this->titleFactory->newFromID( $pageEntityUsages->getPageId() );
+			} catch ( StorageException $ex ) {
+				// page not found, skip
+				continue;
+			}
 
 			if ( $this->checkPageExistence && !$title->exists() ) {
 				continue;
