@@ -38,8 +38,6 @@ class DiffOpValueFormatter {
 	protected $newValues;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param string $name HTML of name

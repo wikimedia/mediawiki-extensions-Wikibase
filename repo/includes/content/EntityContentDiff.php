@@ -26,8 +26,6 @@ class EntityContentDiff extends Diff {
 	private $redirectDiff;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param EntityDiff $entityDiff
 	 * @param Diff $redirectDiff
 	 */

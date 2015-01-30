@@ -26,8 +26,6 @@ class DataTypeSelector {
 	protected $languageCode;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param DataType[] $dataTypes

@@ -18,8 +18,6 @@ class ExceptionWithCode extends \Exception {
 	private $stringCode;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param string $message

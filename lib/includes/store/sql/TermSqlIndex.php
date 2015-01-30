@@ -61,8 +61,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	);
 
 	/**
-	 * Constructor.
-	 *
 	 * @since    0.4
 	 *
 	 * @param StringNormalizer $stringNormalizer

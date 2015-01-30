@@ -25,8 +25,6 @@ class LanguageWithConversion {
 	protected $translatePool = array();
 
 	/**
-	 * Constructor.
-	 *
 	 * @param null|Language $language
 	 * @param string $languageCode
 	 * @param null|Language $sourceLanguage

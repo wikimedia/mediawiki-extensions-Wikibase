@@ -51,8 +51,6 @@ class TermSearchKeyBuilder {
 	protected $batchSize = 100;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param TermSqlIndex $table
