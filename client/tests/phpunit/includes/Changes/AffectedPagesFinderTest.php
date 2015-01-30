@@ -8,10 +8,12 @@ use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
+use Wikibase\Client\Usage\SiteLinkUsageLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\ItemChange;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Test\TestChanges;
 
@@ -69,6 +71,19 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			->method( 'getPagesUsing' )
 			->will( $this->returnValue( new ArrayIterator( $usage ) ) );
 
+		$affectedPagesFinder = new AffectedPagesFinder(
+			$usageLookup,
+			$this->getNamespaceChecker(),
+			$this->getTitleFactory(),
+			'enwiki',
+			'en',
+			false
+		);
+
+		return $affectedPagesFinder;
+	}
+
+	private function getNamespaceChecker() {
 		$namespaceChecker = $this->getMockBuilder( 'Wikibase\NamespaceChecker' )
 			->disableOriginalConstructor()->getMock();
 
@@ -76,18 +91,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			->method( 'isWikibaseEnabled' )
 			->will( $this->returnValue( true ) );
 
-		$titleFactory = $this->getTitleFactory();
-
-		$affectedPagesFinder = new AffectedPagesFinder(
-			$usageLookup,
-			$namespaceChecker,
-			$titleFactory,
-			'enwiki',
-			'en',
-			false
-		);
-
-		return $affectedPagesFinder;
+		return $namespaceChecker;
 	}
 
 	public function getChangedAspectsProvider() {
@@ -408,6 +412,49 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$actual = $referencedPagesFinder->getAffectedUsagesByPage( $change );
 
 		$this->assertPageEntityUsages( $expected, $actual );
+	}
+
+	public function testGetAffectedUsagesByPage_withDeletedPage() {
+		$pageTitle = 'RandomKitten-2x5jsg8j3bvmpm4!5';
+
+		$affectedPagesFinder = new AffectedPagesFinder(
+			$this->getSiteLinkUsageLookup( $pageTitle ),
+			$this->getNamespaceChecker(),
+			new TitleFactory(),
+			'enwiki',
+			'en',
+			false
+		);
+
+		$itemId = new ItemId( 'Q1' );
+
+		$changeFactory = TestChanges::getEntityChangeFactory();
+
+		$change = $changeFactory->newFromUpdate(
+			ItemChange::UPDATE,
+			$this->getItemWithSiteLinks( $itemId, array( 'enwiki' => $pageTitle ) ),
+			$this->getEmptyItem( $itemId )
+		);
+
+		$usages = $affectedPagesFinder->getAffectedUsagesByPage( $change );
+	}
+
+	private function getSiteLinkUsageLookup( $pageTitle ) {
+		$siteLinkLookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
+
+		$siteLinkLookup->expects( $this->any() )
+			->method( 'getItemIdForLink' )
+			->will( $this->returnValue( new ItemId( 'Q1' ) ) );
+
+		$siteLinkLookup->expects( $this->any() )
+			->method( 'getLinks' )
+			->will( $this->returnValue( array(
+				array( 'enwiki', $pageTitle, 1 )
+			) ) );
+
+		$titleFactory = new TitleFactory();
+
+		return new SiteLinkUsageLookup( 'enwiki', $siteLinkLookup, $titleFactory );
 	}
 
 	/**

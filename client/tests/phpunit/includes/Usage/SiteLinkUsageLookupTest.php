@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use Title;
+use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\SiteLinkUsageLookup;
@@ -50,10 +51,19 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 	 * @note Assumptions: page titles are the same as page IDs.
 	 *
 	 * @param SiteLinkLookup $siteLinks
+	 * @param TitleFactory $titleFactory
 	 *
 	 * @return SiteLinkUsageLookup
 	 */
-	private function getUsageLookup( SiteLinkLookup $siteLinks ) {
+	private function getUsageLookup( SiteLinkLookup $siteLinks, TitleFactory $titleFactory ) {
+		return new SiteLinkUsageLookup(
+			'testwiki',
+			$siteLinks,
+			$titleFactory
+		);
+	}
+
+	private function getTitleFactory() {
 		$titleFactory = $this->getMock( 'Wikibase\Client\Store\TitleFactory' );
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromText' )
@@ -64,20 +74,16 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 				return $title;
 			} ) );
 
-		return new SiteLinkUsageLookup(
-			'testwiki',
-			$siteLinks,
-			$titleFactory
-		);
+		return $titleFactory;
 	}
-
 
 	public function testGetUsagesForPage() {
 		$links = $this->getSiteLinkLookup( array(
 			'23' => new ItemId( 'Q23' ),
 		) );
 
-		$lookup = $this->getUsageLookup( $links );
+		$titleFactory = $this->getTitleFactory();
+		$lookup = $this->getUsageLookup( $links, $titleFactory );
 
 		$actual = $lookup->getUsagesForPage( 42 );
 		$this->assertEmpty( $actual );
@@ -96,7 +102,8 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 			'23' => $q23,
 		) );
 
-		$lookup = $this->getUsageLookup( $links );
+		$titleFactory = $this->getTitleFactory();
+		$lookup = $this->getUsageLookup( $links, $titleFactory );
 
 		$actual = $lookup->getPagesUsing( array( $q42, $p11 ) );
 		$this->assertInstanceOf( 'Iterator', $actual );
@@ -141,7 +148,8 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 			'23' => $q23,
 		) );
 
-		$lookup = $this->getUsageLookup( $links );
+		$titleFactory = $this->getTitleFactory();
+		$lookup = $this->getUsageLookup( $links, $titleFactory );
 
 		$actual = $lookup->getUnusedEntities( array() );
 		$this->assertEmpty( $actual );
@@ -156,6 +164,23 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 		$actual = $lookup->getUnusedEntities( array( $q23, $p11 ) );
 		$this->assertCount( 1, $actual );
 		$this->assertEquals( $p11, $actual[0] );
+	}
+
+	public function testGetPagesUsing_withDeletePage() {
+		$itemId = new ItemId( 'Q23' );
+
+		$links = $this->getSiteLinkLookup(
+			array(
+				'randomkitten2u8!kgxhkl4v3' => $itemId
+			)
+		);
+
+		$titleFactory = new TitleFactory();
+		$lookup = $this->getUsageLookup( $links, $titleFactory );
+
+		$usages = $lookup->getPagesUsing( array( $itemId ), array() );
+
+		$this->assertInstanceOf( 'Iterator', $usages );
 	}
 
 }

@@ -329,6 +329,14 @@ class AffectedPagesFinder {
 		$usagesPerPage = array();
 		foreach ( $titles as $title ) {
 			$pageId = $title->getArticleID();
+
+			if ( $pageId === 0 ) {
+				wfDebugLog( 'WikibaseChangeNotification', __METHOD__ . ': Article ID for '
+					. $title->getFullText() . ' is 0.' );
+
+				continue;
+			}
+
 			$usagesPerPage[$pageId] = new PageEntityUsages( $pageId, $usagesForItem );
 		}
 

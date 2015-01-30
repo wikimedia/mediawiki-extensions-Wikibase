@@ -135,7 +135,16 @@ class SiteLinkUsageLookup implements UsageLookup {
 
 				// NOTE: since we don't know how the item is used on the linked page, assume "all" usage.
 				$usage = new EntityUsage( $itemId, EntityUsage::ALL_USAGE );
-				return new PageEntityUsages( $title->getArticleID(), array( $usage ) );
+				$pageId = $title->getArticleID();
+
+				if ( $pageId === 0 ) {
+					wfDebugLog( 'WikibaseChangeNotification', __METHOD__ . ': Article ID for '
+						. $title->getFullText() . ' is 0.' );
+
+					return null;
+				}
+
+				return new PageEntityUsages( $pageId, array( $usage ) );
 			},
 			$rows
 		);
