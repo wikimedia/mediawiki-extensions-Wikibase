@@ -435,7 +435,7 @@
 	"apihelp-wbremoveclaims-example-1": "移除带GUID“Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N”的声称",
 	"apihelp-wbremovequalifiers-description": "从一个声称中移除一个限定符。",
 	"apihelp-wbremovequalifiers-example-1": "从带GUID“Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F”的声称中移除带哈希值“1eb8793c002b1d9820c833d234a1b54c8e94187e”的限定符",
-	"apihelp-wbremovereferences-example-1": "从带“Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F”的GUID的声称中移除带哈希值“455481eeac76e6a8af71a6b493c073d54788e7e9”的参考资料",
+	"apihelp-wbremovereferences-example-1": "从GUID为“Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F”的声称中移除哈希值为“455481eeac76e6a8af71a6b493c073d54788e7e9”的参考资料",
 	"apihelp-wbsearchentities-description": "搜索实体。",
 	"apihelp-wbsearchentities-param-search": "搜索此文本。",
 	"apihelp-wbsearchentities-param-language": "在此语言搜索。",
