@@ -16,6 +16,24 @@
       "revId": "cc1cec41c3f50d1f223e79fcaa2318079a478196",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e7fc396_e7589d5b",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-30T12:20:21Z",
+      "side": 1,
+      "message": "I agree, but it seems PHPStorm does have a different opinion. Not worth an other patch set, in my opinion.",
+      "parentUuid": "8e7fc396_07627906",
+      "revId": "cc1cec41c3f50d1f223e79fcaa2318079a478196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
