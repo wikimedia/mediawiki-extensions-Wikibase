@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e7fc396_ab15889e",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-01-30T12:33:20Z",
+      "side": 1,
+      "message": "Object.keys is not available in IE8, but we still want to support it.\n\nreturn this._languageMap\n\t? $.map( this._languageMap, function( val, key ) { return key; } )\n\t: null;",
+      "revId": "87e3f7f80727b7fdec491f56403ce2b086c07f1f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
