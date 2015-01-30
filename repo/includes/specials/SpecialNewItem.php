@@ -35,14 +35,12 @@ class SpecialNewItem extends SpecialNewEntity {
 
 	/**
 	 * @see SpecialNewEntity::prepareArguments
-	 *
-	 * @return boolean
 	 */
 	protected function prepareArguments() {
 		parent::prepareArguments();
+
 		$this->site = $this->getRequest()->getVal( 'site', null );
 		$this->page = $this->getRequest()->getVal( 'page', null );
-		return true;
 	}
 
 	/**
@@ -62,13 +60,10 @@ class SpecialNewItem extends SpecialNewEntity {
 	 * @return Status
 	 */
 	protected function modifyEntity( Entity &$item ) {
-		/* @var Item $item */
-
 		$status = parent::modifyEntity( $item );
 
-		if ( $this->site !== null && $this->page !== null ) {
+		if ( $item instanceof Item && $this->site !== null && $this->page !== null ) {
 			$site = $this->siteStore->getSite( $this->site );
-
 			if ( $site === null ) {
 				$status->error( 'wikibase-newitem-not-recognized-siteid' );
 				return $status;
@@ -116,7 +111,6 @@ class SpecialNewItem extends SpecialNewEntity {
 				'readonly' => 'readonly'
 			)
 		)
-		. Html::element( 'br' )
 		. Html::element(
 			'label',
 			array(
@@ -135,8 +129,7 @@ class SpecialNewItem extends SpecialNewEntity {
 				'class' => 'wb-input',
 				'readonly' => 'readonly'
 			)
-		)
-		. Html::element( 'br' );
+		);
 	}
 
 	/**

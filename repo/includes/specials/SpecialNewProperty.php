@@ -33,12 +33,15 @@ class SpecialNewProperty extends SpecialNewEntity {
 	}
 
 	/**
-	 * @see SpecialNewEntity::prepareArguments()
+	 * @see SpecialNewEntity::prepareArguments
 	 */
 	protected function prepareArguments() {
 		parent::prepareArguments();
-		$this->dataType = $this->getRequest()->getVal( 'datatype', isset( $this->parts[2] ) ? $this->parts[2] : '' );
-		return true;
+
+		$this->dataType = $this->getRequest()->getVal(
+			'datatype',
+			isset( $this->parts[2] ) ? $this->parts[2] : ''
+		);
 	}
 
 	/**
@@ -57,19 +60,16 @@ class SpecialNewProperty extends SpecialNewEntity {
 	}
 
 	/**
-	 * @see SpecialNewEntity::modifyEntity()
+	 * @see SpecialNewEntity::modifyEntity
 	 *
 	 * @param Entity $property
 	 *
 	 * @return Status
 	 */
 	protected function modifyEntity( Entity &$property ) {
-		/**
-		 * @var Property $property
-		 */
 		$status = parent::modifyEntity( $property );
 
-		if ( $this->dataType !== '' ) {
+		if ( $property instanceof Property && $this->dataType !== '' ) {
 			if ( $this->dataTypeExists() ) {
 				$property->setDataTypeId( $this->dataType );
 			}
@@ -103,8 +103,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 				),
 				$this->msg( 'wikibase-newproperty-datatype' )->text()
 			)
-			. $selector->getHtml( 'wb-newproperty-datatype' )
-			. Html::element( 'br' );
+			. $selector->getHtml( 'wb-newproperty-datatype' );
 	}
 
 	/**
