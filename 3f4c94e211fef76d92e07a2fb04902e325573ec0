@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_8a753795",
+        "filename": "lib/includes/store/CachingEntityRevisionLookup.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-01-31T15:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae6ac7d6_7cf5f1c6",
+      "revId": "3f4c94e211fef76d92e07a2fb04902e325573ec0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae6ac7d6_bc0b89d8",
         "filename": "lib/includes/store/CachingEntityRevisionLookup.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-20T17:29:08Z",
       "side": 1,
       "message": "please split inner loop into a separate method.",
+      "revId": "3f4c94e211fef76d92e07a2fb04902e325573ec0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_aabcb31b",
+        "filename": "lib/includes/store/CachingEntityRevisionLookup.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-01-31T15:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae6ac7d6_bc0b89d8",
       "revId": "3f4c94e211fef76d92e07a2fb04902e325573ec0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
