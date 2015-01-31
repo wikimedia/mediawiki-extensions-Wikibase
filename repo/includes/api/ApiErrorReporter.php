@@ -101,9 +101,12 @@ class ApiErrorReporter {
 		$result = $this->apiModule->getResult();
 		$moduleName = $this->apiModule->getModuleName();
 
-		$result->disableSizeCheck();
-		$result->addValue( array( 'warnings', $moduleName ), $key, $warningData );
-		$result->enableSizeCheck();
+		$result->addValue(
+			array( 'warnings', $moduleName ),
+			$key,
+			$warningData,
+			ApiResult::NO_SIZE_CHECK
+		);
 	}
 
 	/**
