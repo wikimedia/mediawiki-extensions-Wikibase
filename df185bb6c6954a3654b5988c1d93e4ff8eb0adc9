@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0f7db917",
+        "filename": "lib/resources/jquery.wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-01-31T11:09:25Z",
+      "side": 1,
+      "message": "AFAIS this could have been removed",
+      "revId": "df185bb6c6954a3654b5988c1d93e4ff8eb0adc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
