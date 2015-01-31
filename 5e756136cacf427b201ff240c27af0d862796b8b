@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cff4a153",
+        "filename": "repo/includes/specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-01-31T13:01:16Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we rather throw an exception if this is not the case? Doesn\u0027t seem like something we would want to silently  ignore (and yes, I realize this check is mostly for type hinting)",
+      "revId": "5e756136cacf427b201ff240c27af0d862796b8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6f91cdfa",
+        "filename": "repo/includes/specials/SpecialNewProperty.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-01-31T13:01:16Z",
+      "side": 1,
+      "message": "Same as the NewItem page: Rather throw an exception?",
+      "revId": "5e756136cacf427b201ff240c27af0d862796b8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
