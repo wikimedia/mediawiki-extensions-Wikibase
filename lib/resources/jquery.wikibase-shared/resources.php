@@ -38,7 +38,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.tipsy',
 				'jquery.ui.widget',
-				'wikibase.utilities',
+				'wikibase.buildErrorOutput',
 			),
 		),
 

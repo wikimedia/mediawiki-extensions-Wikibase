@@ -58,6 +58,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.buildErrorOutput' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.buildErrorOutput.js',
+			),
+			'dependencies' => array(
+				'wikibase',
+				'jquery.ui.toggler'
+			),
+			'messages' => array(
+				'wikibase-tooltip-error-details',
+			),
+		),
+
 		'wikibase.Site' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.Site.js',
