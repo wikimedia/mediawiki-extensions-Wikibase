@@ -188,7 +188,9 @@ abstract class UpdateRepoJob extends Job {
 	}
 
 	/**
-	 * @return bool
+	 * @param string $name
+	 *
+	 * @return User|bool
 	 */
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );
@@ -204,9 +206,7 @@ abstract class UpdateRepoJob extends Job {
 	}
 
 	/**
-	 * Run the job
-	 *
-	 * @return boolean success
+	 * @return bool success
 	 */
 	public function run() {
 		wfProfileIn( __METHOD__ );
