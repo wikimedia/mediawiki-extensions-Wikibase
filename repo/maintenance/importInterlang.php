@@ -32,7 +32,7 @@ class importInterlang extends Maintenance {
 	/**
 	 * @var bool
 	 */
-	private $ignore_errors = false;
+	private $ignoreErrors = false;
 
 	/**
 	 * @var int
@@ -59,7 +59,7 @@ class importInterlang extends Maintenance {
 
 		$this->addOption( 'skip', "Skip number of entries in the import file" );
 		$this->addOption( 'only', "Only import the specific entry from the import file" );
-		$this->addOption( 'verbose', "Print activity " );
+		$this->addOption( 'verbose', "Print activity" );
 		$this->addOption( 'ignore-errors', "Continue after errors" );
 		$this->addArg( 'lang', "The source wiki's language code (e.g. `en`)", true );
 		$this->addArg( 'filename', "File with interlanguage links", true );
@@ -79,13 +79,13 @@ class importInterlang extends Maintenance {
 		$this->store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$this->verbose = (bool)$this->getOption( 'verbose' );
-		$this->ignore_errors = (bool)$this->getOption( 'ignore-errors' );
+		$this->ignoreErrors = (bool)$this->getOption( 'ignore-errors' );
 		$this->skip = (int)$this->getOption( 'skip' );
 		$this->only = (int)$this->getOption( 'only' );
-		$lang = $this->getArg( 0 );
+		$languageCode = $this->getArg( 0 );
 		$filename = $this->getArg( 1 );
 
-		$file = fopen( $filename, "r" );
+		$file = fopen( $filename, 'r' );
 
 		if ( !$file ) {
 			$this->doPrint( "ERROR: failed to open `$filename`" );
@@ -95,15 +95,15 @@ class importInterlang extends Maintenance {
 		fgets( $file ); // We don't need the first line with column names.
 
 		$current = null;
-		$current_links = array();
+		$currentLinks = array();
 		$count = 0;
 		$ok = true;
-		while( $link = fgetcsv( $file, 0, "\t" ) ) {
-			if( $link[0] !== $current ) {
-				if ( !empty( $current_links ) ) {
-					$ok = $this->createItem( $current_links );
+		while ( $link = fgetcsv( $file, 0, "\t" ) ) {
+			if ( $link[0] !== $current ) {
+				if ( !empty( $currentLinks ) ) {
+					$ok = $this->createItem( $currentLinks );
 
-					if ( !$ok && !$this->ignore_errors ) {
+					if ( !$ok && !$this->ignoreErrors ) {
 						break;
 					}
 				}
@@ -113,7 +113,7 @@ class importInterlang extends Maintenance {
 					continue;
 				}
 				if ( ( $this->only !== 0 ) && ( $this->only !== $count ) ) {
-					if ($this->only < $count) {
+					if ( $this->only < $count ) {
 						break;
 					}
 					continue;
@@ -121,52 +121,50 @@ class importInterlang extends Maintenance {
 
 				$current = $link[0];
 				$this->maybePrint( "Processing `$current`" );
-
-				$current_links = array(
-					$lang => $current
-				);
+				$currentLinks = array( $languageCode => $current );
 			}
 
-			$current_links[ $link[1] ] = $link[2];
+			$currentLinks[$link[1]] = $link[2];
 		}
 
-		if ( !$ok && !$this->ignore_errors ) {
-			$this->doPrint( "Aborted!" );
+		if ( !$ok && !$this->ignoreErrors ) {
+			$this->doPrint( 'Aborted!' );
 			return;
 		}
 
-		if ( !empty( $current_links ) ) {
-			$ok = $this->createItem( $current_links );
+		if ( !empty( $currentLinks ) ) {
+			$ok = $this->createItem( $currentLinks );
 		}
 
 		if ( $ok ) {
-			$this->maybePrint( "Done." );
+			$this->maybePrint( 'Done.' );
 		}
 	}
 
 	/**
-	 * @param string[] $links Associative array of interlanguage links, mapping language codes to
+	 * @param string[] $titles Associative array of interlanguage links, mapping language codes to
 	 * page titles on that site.
 	 *
 	 * @return bool true if the item was created, false otherwise
 	 */
-	private function createItem( array $links ) {
+	private function createItem( array $titles ) {
 		$item = Item::newEmpty();
+		$fingerprint = $item->getFingerprint();
+		$siteLinks = $item->getSiteLinkList();
 
-		foreach ( $links as $lang => $title ) {
-			$name = strtr( $title, "_", " " );
-			$label = preg_replace( '/ *\(.*\)$/u', '', $name );
+		foreach ( $titles as $languageCode => $title ) {
+			$pageName = str_replace( '_', ' ', $title );
+			$label = preg_replace( '/\s*\(.*\)$/u', '', $pageName );
 
-			$item->getFingerprint()->setLabel( $lang, $label );
-			$item->getSiteLinkList()->addNewSiteLink( $lang . 'wiki',  $name );
+			$fingerprint->setLabel( $languageCode, $label );
+			$siteLinks->addNewSiteLink( $languageCode . 'wiki', $pageName );
 		}
 
 		try {
 			$this->store->saveEntity( $item, 'imported', $this->user, EDIT_NEW );
-
 			return true;
 		} catch ( Exception $ex ) {
-			$this->doPrint( "ERROR: " . strtr( $ex->getMessage(), "\n", " " ) );
+			$this->doPrint( 'ERROR: ' . str_replace( "\n", ' ', $ex->getMessage() ) );
 		}
 
 		return false;
@@ -175,11 +173,10 @@ class importInterlang extends Maintenance {
 	/**
 	 * Print a scalar, array or object if --verbose option is set.
 	 *
-	 * @see importInterlang::doPrint()
-	 * @see Maintenance::output()
+	 * @see doPrint
 	 */
 	private function maybePrint( $a ) {
-		if( $this->verbose ) {
+		if ( $this->verbose ) {
 			$this->doPrint( $a );
 		}
 	}
@@ -187,14 +184,14 @@ class importInterlang extends Maintenance {
 	/**
 	 * Output a scalar, array or object to the default channel
 	 *
-	 * @see Maintenance::output()
+	 * @see Maintenance::output
 	 */
 	private function doPrint( $a ) {
-		if( is_null( $a ) ) {
+		if ( is_null( $a ) ) {
 			$a = 'null';
-		} elseif( is_bool( $a ) ) {
-			$a = ( $a? "true\n": "false\n" );
-		} elseif( !is_scalar( $a ) ) {
+		} elseif ( is_bool( $a ) ) {
+			$a = $a ? "true\n": "false\n";
+		} elseif ( !is_scalar( $a ) ) {
 			$a = print_r( $a, true );
 		}
 
