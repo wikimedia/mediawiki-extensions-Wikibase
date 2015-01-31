@@ -129,7 +129,7 @@
 			throw new Error( 'View for entity type ' + entity.getType() + ' does not exist' );
 		}
 
-		$entityview[entity.getType() + 'view']( {
+		$entityview[view]( {
 			value: entity,
 			languages: getUserLanguages(),
 			entityChangersFactory: entityChangersFactory,
@@ -152,10 +152,10 @@
 				mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
 			);
 		} )
-		.on( 'entityviewafterstartediting', function() {
+		.on( view + 'afterstartediting', function() {
 			triggerAnonymousEditWarning( entity.getType() );
 		} )
-		.on( 'entityviewafterstopediting', function( event, dropValue ) {
+		.on( view + 'afterstopediting', function( event, dropValue ) {
 			updateWatchLink( dropValue );
 		} );
 	}
