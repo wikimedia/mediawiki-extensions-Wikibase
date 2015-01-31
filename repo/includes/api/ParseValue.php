@@ -149,12 +149,8 @@ class ParseValue extends ApiWikibase {
 
 	/**
 	 * @see ApiBase::getAllowedParams
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
 	 */
-	public function getAllowedParams() {
+	protected function getAllowedParams() {
 		return array(
 			'parser' => array(
 				ApiBase::PARAM_TYPE => $this->getFactory()->getParserIds(),

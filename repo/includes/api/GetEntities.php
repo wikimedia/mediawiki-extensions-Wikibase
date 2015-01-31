@@ -289,9 +289,9 @@ class GetEntities extends ApiWikibase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams()
+	 * @see ApiBase::getAllowedParams
 	 */
-	public function getAllowedParams() {
+	protected function getAllowedParams() {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 		return array_merge( parent::getAllowedParams(), array(
 			'ids' => array(

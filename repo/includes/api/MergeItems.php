@@ -182,7 +182,7 @@ class MergeItems extends ApiBase {
 	/**
 	 * @see ApiBase::getAllowedParams
 	 */
-	public function getAllowedParams() {
+	protected function getAllowedParams() {
 		return array(
 			'fromid' => array(
 				ApiBase::PARAM_TYPE => 'string',

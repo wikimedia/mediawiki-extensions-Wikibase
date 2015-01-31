@@ -66,14 +66,11 @@ abstract class ModifyTerm extends ModifyEntity {
 	}
 
 	/**
-	 * @see \ApiBase::getAllowedParams()
+	 * @see ModifyEntity::getAllowedParams
 	 */
-	public function getAllowedParams() {
+	protected function getAllowedParams() {
 		return array_merge(
 			parent::getAllowedParams(),
-			parent::getAllowedParamsForId(),
-			parent::getAllowedParamsForSiteLink(),
-			parent::getAllowedParamsForEntity(),
 			array(
 				'language' => array(
 					ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
@@ -85,4 +82,5 @@ abstract class ModifyTerm extends ModifyEntity {
 			)
 		);
 	}
+
 }

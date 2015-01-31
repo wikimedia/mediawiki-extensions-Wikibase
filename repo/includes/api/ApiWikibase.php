@@ -173,14 +173,6 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams()
-	 */
-	public function getAllowedParams() {
-		return array(
-		);
-	}
-
-	/**
 	 * @see ApiBase::needsToken()
 	 */
 	public function needsToken() {

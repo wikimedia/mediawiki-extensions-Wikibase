@@ -94,12 +94,8 @@ class ApiClientInfo extends ApiQueryBase {
 
 	/**
 	 * @see ApiBase::getAllowedParams
-	 *
-	 * @since 0.4
-	 *
-	 * @return array
 	 */
-	public function getAllowedParams() {
+	protected function getAllowedParams() {
 		return array(
 			'prop' => array(
 				ApiBase::PARAM_DFLT => 'url',

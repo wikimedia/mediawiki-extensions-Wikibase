@@ -185,14 +185,11 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams()
+	 * @see ModifyEntity::getAllowedParams
 	 */
-	public function getAllowedParams() {
+	protected function getAllowedParams() {
 		return array_merge(
 			parent::getAllowedParams(),
-			parent::getAllowedParamsForId(),
-			parent::getAllowedParamsForSiteLink(),
-			parent::getAllowedParamsForEntity(),
 			array(
 				'add' => array(
 					ApiBase::PARAM_TYPE => 'string',

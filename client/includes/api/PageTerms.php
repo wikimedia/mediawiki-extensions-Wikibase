@@ -229,7 +229,10 @@ class PageTerms extends ApiQueryBase {
 		return $fit;
 	}
 
-	public function getAllowedParams() {
+	/**
+	 * @see ApiBase::getAllowedParams
+	 */
+	protected function getAllowedParams() {
 		return array(
 			'continue' => array(
 				ApiBase::PARAM_HELP_MSG => 'api-help-param-continue',
