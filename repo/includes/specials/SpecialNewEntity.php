@@ -153,10 +153,18 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @since 0.1
 	 */
 	protected function prepareArguments() {
-		$this->label = $this->getRequest()->getVal( 'label', isset( $this->parts[0] ) ? $this->parts[0] : '' );
-		$this->description = $this->getRequest()->getVal( 'description', isset( $this->parts[1] ) ? $this->parts[1] : '' );
-		$this->contentLanguage = Language::factory( $this->getRequest()->getVal( 'lang', $this->getLanguage()->getCode() ) );
-		return true;
+		$this->label = $this->getRequest()->getVal(
+			'label',
+			isset( $this->parts[0] ) ? $this->parts[0] : ''
+		);
+		$this->description = $this->getRequest()->getVal(
+			'description',
+			isset( $this->parts[1] ) ? $this->parts[1] : ''
+		);
+		$this->contentLanguage = Language::factory( $this->getRequest()->getVal(
+			'lang',
+			$this->getLanguage()->getCode()
+		) );
 	}
 
 	/**
@@ -208,9 +216,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @return string Formatted HTML for inclusion in the form
 	 */
 	protected function additionalFormElements() {
-		global $wgLang;
-		return
-		Html::hidden(
+		return Html::hidden(
 			'lang',
 			$this->contentLanguage->getCode()
 		)
@@ -238,7 +244,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				)->text(),
 			)
 		)
-		. Html::element( 'br' )
 		. Html::element(
 			'label',
 			array(
@@ -262,8 +267,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 					Language::fetchLanguageName( $this->contentLanguage->getCode() )
 				)->text(),
 			)
-		)
-		. Html::element( 'br' );
+		);
 	}
 
 	/**
