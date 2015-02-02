@@ -14,24 +14,44 @@ use LoadBalancer;
 class ConnectionManager {
 
 	/**
-	 * @param LoadBalancer $loadBalancer
+	 * @var LoadBalancer
 	 */
-	public function __construct( LoadBalancer $loadBalancer ) {
+	private $loadBalancer;
+
+	/**
+	 * @var string
+	 */
+	private $wikiId;
+
+	/**
+	 * @param LoadBalancer $loadBalancer
+	 * @param string|null $wikiId Optional, defaults to current wiki.
+	 */
+	public function __construct( LoadBalancer $loadBalancer, $wikiId = null ) {
 		$this->loadBalancer = $loadBalancer;
+		$this->wikiId = $wikiId;
 	}
 
 	/**
 	 * @return IDatabase
 	 */
 	public function getReadConnection() {
-		return $this->loadBalancer->getConnection( DB_READ );
+		if ( $this->wikiId === null ) {
+			return $this->loadBalancer->getConnection( DB_READ );
+		}
+
+		return $this->loadBalancer->getConnection( DB_READ, array(), $this->wikiId );
 	}
 
 	/**
 	 * @return IDatabase
 	 */
 	private function getWriteConnection() {
-		return $this->loadBalancer->getConnection( DB_WRITE );
+		if ( $this->wikiId === null ) {
+			return $this->loadBalancer->getConnection( DB_WRITE );
+		}
+
+		return $this->loadBalancer->getConnection( DB_WRITE, array(), $this->wikiId );
 	}
 
 	/**
