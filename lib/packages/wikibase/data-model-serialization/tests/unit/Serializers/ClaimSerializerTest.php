@@ -120,7 +120,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 		);
 
 		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setRank( Claim::RANK_PREFERRED );
+		$claim->setRank( Statement::RANK_PREFERRED );
 		$serializations[] = array(
 			array(
 				'mainsnak' => array(
@@ -134,7 +134,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 		);
 
 		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setRank( Claim::RANK_DEPRECATED );
+		$claim->setRank( Statement::RANK_DEPRECATED );
 		$serializations[] = array(
 			array(
 				'mainsnak' => array(
@@ -252,4 +252,5 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			$claimSerializer->serialize( $claim )
 		);
 	}
+
 }

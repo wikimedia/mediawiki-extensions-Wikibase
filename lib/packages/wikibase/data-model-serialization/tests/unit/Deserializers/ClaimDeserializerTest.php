@@ -135,7 +135,7 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 		);
 
 		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setRank( Claim::RANK_PREFERRED );
+		$claim->setRank( Statement::RANK_PREFERRED );
 		$serializations[] = array(
 			$claim,
 			array(
@@ -149,7 +149,7 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 		);
 
 		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setRank( Claim::RANK_NORMAL );
+		$claim->setRank( Statement::RANK_NORMAL );
 		$serializations[] = array(
 			$claim,
 			array(
@@ -163,7 +163,7 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 		);
 
 		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setRank( Claim::RANK_DEPRECATED );
+		$claim->setRank( Statement::RANK_DEPRECATED );
 		$serializations[] = array(
 			$claim,
 			array(
