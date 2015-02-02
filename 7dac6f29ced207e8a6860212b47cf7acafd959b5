@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_46d4f2be",
+        "filename": "client/includes/store/sql/ConnectionManager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-02T21:36:22Z",
+      "side": 1,
+      "message": "string|null",
+      "revId": "7dac6f29ced207e8a6860212b47cf7acafd959b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_064fdac1",
+        "filename": "client/includes/store/sql/ConnectionManager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-02T21:36:22Z",
+      "side": 1,
+      "message": "actually this is the DB name, not the id as in site global id",
+      "revId": "7dac6f29ced207e8a6860212b47cf7acafd959b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
