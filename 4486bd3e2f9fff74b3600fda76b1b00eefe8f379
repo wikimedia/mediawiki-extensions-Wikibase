@@ -19,6 +19,58 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_88677a22",
+        "filename": "repo/includes/Diff/ClaimDifferenceVisualizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-02T18:41:51Z",
+      "side": 1,
+      "message": "Indeed, ranks cannot be added or removed. If they are, somethign is very wrong indeed.",
+      "parentUuid": "8e7fc396_c4279cb0",
+      "revId": "4486bd3e2f9fff74b3600fda76b1b00eefe8f379",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a8535642",
+        "filename": "repo/includes/Diff/ClaimDifferenceVisualizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-02T18:41:51Z",
+      "side": 1,
+      "message": "How does null make sense here? Whn does it happen, and how is it expected to behave?",
+      "revId": "4486bd3e2f9fff74b3600fda76b1b00eefe8f379",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c85b3256",
+        "filename": "repo/includes/Diff/ClaimDifferenceVisualizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-02T18:41:51Z",
+      "side": 1,
+      "message": "Is $snak \u003d null ok here?",
+      "revId": "4486bd3e2f9fff74b3600fda76b1b00eefe8f379",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e7fc396_641c886b",
         "filename": "repo/includes/Diff/ClaimDifferenceVisualizer.php",
         "patchSetId": 2
