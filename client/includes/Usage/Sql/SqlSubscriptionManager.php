@@ -125,17 +125,20 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 * @return string[] Entity ID strings from $subscriptions which $subscriber is already subscribed to.
 	 */
 	private function querySubscriptions( DatabaseBase $db, $subscriber, array $subscriptions ) {
-		$rows = $db->select(
-			'wb_changes_subscription',
-			'cs_entity_id',
-			array(
-				'cs_subscriber_id' => $subscriber,
-				'cs_entity_id' => $subscriptions,
-			),
-			__METHOD__
-		);
+		if ( $subscriptions ) {
+			$rows = $db->select(
+				'wb_changes_subscription',
+				'cs_entity_id',
+				array(
+					'cs_subscriber_id' => $subscriber,
+					'cs_entity_id' => $subscriptions,
+				),
+				__METHOD__
+			);
 
-		$subscriptions = $this->extractField( $rows, 'cs_entity_id' );
+			$subscriptions = $this->extractField( $rows, 'cs_entity_id' );
+		}
+
 		return $subscriptions;
 	}
 
@@ -165,14 +168,16 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 * @param string[] $subscriptions
 	 */
 	private function deleteSubscriptions( DatabaseBase $db, $subscriber, array $subscriptions ) {
-		$db->delete(
-			'wb_changes_subscription',
-			array(
-				'cs_subscriber_id' => $subscriber,
-				'cs_entity_id' => $subscriptions,
-			),
-			__METHOD__
-		);
+		if ( $subscriptions ) {
+			$db->delete(
+				'wb_changes_subscription',
+				array(
+					'cs_subscriber_id' => $subscriber,
+					'cs_entity_id' => $subscriptions,
+				),
+				__METHOD__
+			);
+		}
 	}
 
 	/**
