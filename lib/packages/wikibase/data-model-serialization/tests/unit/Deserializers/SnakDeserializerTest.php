@@ -191,7 +191,6 @@ class SnakDeserializerTest extends DeserializerBaseTest {
 		$snak = $this->buildDeserializer()->deserialize( $serialization );
 
 		$expectedValue = new UnDeserializableValue( 1337, 'string', 'omg, an error!' );
-		$snakValue = $snak->getDataValue();
 
 		$this->assertTrue( $snak->getDataValue()->equals( $expectedValue ) );
 	}
