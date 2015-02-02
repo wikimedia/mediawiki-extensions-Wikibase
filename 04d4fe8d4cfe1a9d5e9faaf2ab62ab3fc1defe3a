@@ -16,6 +16,57 @@
       "revId": "04d4fe8d4cfe1a9d5e9faaf2ab62ab3fc1defe3a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_77b8c374",
+        "filename": "datatypes/i18n/de.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-02T10:07:23Z",
+      "side": 1,
+      "message": "Not sure if it is ok to simply copy the author list from the original files. I think it\u0027s better to start with empty lists in all the new datatypes i18n files.",
+      "revId": "04d4fe8d4cfe1a9d5e9faaf2ab62ab3fc1defe3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_97bd5f66",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-02T10:07:23Z",
+      "side": 1,
+      "message": "Are you sure it should be like this? Is this an add-hoc solution that is going to change once this is a composer based dependency? Please mark it with a FIXME or similar, if this is the case.",
+      "revId": "04d4fe8d4cfe1a9d5e9faaf2ab62ab3fc1defe3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b78e5bd4",
+        "filename": "phpunit.xml.dist",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-02T10:07:23Z",
+      "side": 1,
+      "message": "This directory doesn\u0027t and will probably never exist.",
+      "revId": "04d4fe8d4cfe1a9d5e9faaf2ab62ab3fc1defe3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
