@@ -42,14 +42,20 @@ class LegacyPropertyDeserializer implements Deserializer {
 		}
 
 		$this->serialization = $serialization;
-		$this->property = Property::newFromType( $this->getDataTypeId() );
-
-		$this->setPropertyId();
-		$this->addFingerprint();
+		$this->property = new Property(
+			$this->getPropertyId(),
+			$this->getFingerprint(),
+			$this->getDataTypeId()
+		);
 
 		return $this->property;
 	}
 
+	/**
+	 * @throws MissingAttributeException
+	 * @throws InvalidAttributeException
+	 * @return string
+	 */
 	private function getDataTypeId() {
 		if ( !array_key_exists( 'datatype', $this->serialization ) ) {
 			throw new MissingAttributeException( 'datatype' );
@@ -66,32 +72,26 @@ class LegacyPropertyDeserializer implements Deserializer {
 		return $this->serialization['datatype'];
 	}
 
-	private function setPropertyId() {
-		if ( array_key_exists( 'entity', $this->serialization ) ) {
-			$this->property->setId( $this->getPropertyId() );
-		}
-	}
-
 	/**
-	 * @return PropertyId
 	 * @throws InvalidAttributeException
+	 * @return PropertyId|null
 	 */
 	private function getPropertyId() {
-		$id = $this->idDeserializer->deserialize( $this->serialization['entity'] );
+		if ( array_key_exists( 'entity', $this->serialization ) ) {
+			$id = $this->idDeserializer->deserialize( $this->serialization['entity'] );
 
-		if ( !( $id instanceof PropertyId ) ) {
-			throw new InvalidAttributeException(
-				'entity',
-				$this->serialization['entity'],
-				'Properties should have a property id'
-			);
+			if ( !( $id instanceof PropertyId ) ) {
+				throw new InvalidAttributeException(
+					'entity',
+					$this->serialization['entity'],
+					'Properties should have a property id'
+				);
+			}
+
+			return $id;
 		}
 
-		return $id;
-	}
-
-	private function addFingerprint() {
-		$this->property->setFingerprint( $this->getFingerprint() );
+		return null;
 	}
 
 	/**
