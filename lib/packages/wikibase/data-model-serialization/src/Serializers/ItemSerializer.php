@@ -7,7 +7,6 @@ use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 
 /**
@@ -82,20 +81,20 @@ class ItemSerializer implements DispatchableSerializer {
 		return $this->getSerialized( $object );
 	}
 
-	private function getSerialized( Entity $entity ) {
+	private function getSerialized( Item $item ) {
 		$serialization = array(
-			'type' => $entity->getType()
+			'type' => $item->getType()
 		);
 
-		$this->fingerprintSerializer->addBasicsToSerialization( $entity, $serialization );
-		$this->addClaimsToSerialization( $entity, $serialization );
-		$this->addSiteLinksToSerialization( $entity, $serialization );
+		$this->fingerprintSerializer->addBasicsToSerialization( $item, $serialization );
+		$this->addClaimsToSerialization( $item, $serialization );
+		$this->addSiteLinksToSerialization( $item, $serialization );
 
 		return $serialization;
 	}
 
-	private function addClaimsToSerialization( Entity $entity, array &$serialization ) {
-		$claims = new Claims( $entity->getClaims() );
+	private function addClaimsToSerialization( Item $item, array &$serialization ) {
+		$claims = new Claims( $item->getClaims() );
 
 		$serialization['claims'] = $this->claimsSerializer->serialize( $claims );
 	}
