@@ -23,7 +23,7 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testEntitySerializerConstruction() {
-		$this->factory->newEntitySerializer()->serialize( Item::newEmpty() );
+		$this->factory->newEntitySerializer()->serialize( new Item() );
 
 		$this->assertTrue(
 			true,
