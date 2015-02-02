@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Toliño"
+			"Toliño",
+			"Chairego apc"
 		]
 	},
 	"wikibase-lib-desc": "Contén funcionalidades comúns para as extensións Wikibase e Wikibase Client",
-	"specialpages-group-wikibase": "Repositorio de Wikibase",
+	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Elemento borrado",
 	"wikibase-deletedentity-property": "Propiedade borrada",
 	"wikibase-deletedentity-query": "Pescuda borrada",

@@ -7,6 +7,7 @@
 		]
 	},
 	"wikibase-lib-desc": "ვიკიბაზისა და ვიკიბაზის კლიენტის გაფართოებების საერთო ფუნქციები",
+	"specialpages-group-wikibase": "ვიკიბაზის რეპოზიტორია",
 	"wikibase-deletedentity-item": "წაშლილი ელემენტი",
 	"wikibase-error-unexpected": "შეცდომა: $1.",
 	"wikibase-error-save-generic": "შენახვის მცდელობისას მოხდა შეცდომა, ამიტომ თქვენი ცვლილებები ვერ შესრულდება.",
@@ -19,7 +20,7 @@
 	"wikibase-error-autocomplete-response": "სერვერის პასუხი: $1",
 	"wikibase-error-ui-no-external-page": "შესაბამის საიტზე მითითებული სტატიის მოძებნა ვერ მოხერხდა.",
 	"wikibase-error-ui-edit-conflict": "რედაქტირების კონფლიქტი. გადატვირთეთ და თავიდან შეინახეთ.",
-	"wikibase-sitelinks-wikipedia": "ამ ელემენტთან დაკავშირებული ვიკიპედიის გვერდები",
+	"wikibase-sitelinks-wikipedia": "ვიკიპედია",
 	"wikibase-sitelinks-sitename-columnheading": "ენა",
 	"wikibase-sitelinks-link-columnheading": "დაკავშირებული გვერდი",
 	"wikibase-snakview-snaktypeselector-somevalue": "უცნობი მნიშვნელობა",

@@ -7,7 +7,6 @@
 		]
 	},
 	"wikibase-desc": "სტრუქტურირებული მონაცემების საცავი",
-	"specialpages-group-wikibaserepo": "ვიკიბაზის რეპოზიტორია",
 	"wikibase-entity-item": "ელემენტი",
 	"wikibase-entity-property": "თვისება",
 	"wikibase-entity-query": "მოთხოვნა",
@@ -38,6 +37,7 @@
 	"wikibase-terms": "სხვა ენებზე",
 	"wikibase-sitelinks-empty": "საიტის არცერთ გვერდს არ აქვს აქ ბმული.",
 	"wikibase-sitelinks-input-help-message": "ამ ელემენტთან დაკავშირებულ გვერდზე ბმულის დაყენება.",
+	"wikibase-sitelinks-special": "სხვა საიტები",
 	"wikibase-remove": "წაშლა",
 	"wikibase-move-up": "ზემოთ გადატანა",
 	"wikibase-move-down": "ქვემოთ გადატანა",
@@ -99,7 +99,6 @@
 	"wikibase-newitem-site": "პირველი დაკავშირებული გვერდის საიტი",
 	"wikibase-newitem-page": "პირველი დაკავშირებული გვერდის სახელი",
 	"wikibase-newitem-no-external-page": "შესაბამის საიტზე მითითებული გვერდის მოძებნა ვერ მოხერხდა.",
-	"wikibase-newitem-add-sitelink-failed": "საიტის ბმულის შენახვა ვერ ხერხდება.",
 	"wikibase-newitem-not-recognized-siteid": "საიტის წარმოდგენილი იდენტიფიკატორი ამოუცნობია.",
 	"wikibase-newentity-label": "სახელი:",
 	"wikibase-newentity-description": "აღწერა:",

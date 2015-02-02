@@ -13,6 +13,7 @@
 		]
 	},
 	"wikibase-lib-desc": "Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.",
+	"specialpages-group-wikibase": "Repositorio de Wikibase",
 	"wikibase-deletedentity-item": "Elemento borrado",
 	"wikibase-deletedentity-property": "Propiedad borrada",
 	"wikibase-deletedentity-query": "Búsqueda borrada",
@@ -38,7 +39,7 @@
 	"wikibase-globedetails-latitude": "Latitud",
 	"wikibase-globedetails-precision": "Precisión",
 	"wikibase-globedetails-globe": "Globo",
-	"wikibase-sitelinks-wikipedia": "Páginas de Wikipedia enlazadas con este elemento",
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Idioma",
 	"wikibase-sitelinks-link-columnheading": "Página enlazada",
 	"wikibase-snakview-snaktypeselector-somevalue": "valor desconocido",

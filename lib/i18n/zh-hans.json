@@ -14,7 +14,7 @@
 		]
 	},
 	"wikibase-lib-desc": "储存维基库及其客户端的共同功能",
-	"specialpages-group-wikibase": "维基数据库存储库",
+	"specialpages-group-wikibase": "维基数据库",
 	"wikibase-deletedentity-item": "删除项",
 	"wikibase-deletedentity-property": "删除属性",
 	"wikibase-deletedentity-query": "删除查询",
