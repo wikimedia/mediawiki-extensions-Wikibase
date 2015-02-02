@@ -80,20 +80,28 @@ class UsageUpdater {
 		$added = array_diff_key( $currentlyUsedEntities, $previouslyUsedEntities );
 		$removed = array_diff_key( $previouslyUsedEntities, $currentlyUsedEntities );
 
-		if ( empty( $added ) && empty( $removed ) ) {
-			return;
+		// Subscribe to anything that was added
+		if ( !empty( $added ) ) {
+			$this->subscriptionManager->subscribe( $this->clientId, $added );
 		}
 
-		$unused =  $this->usageLookup->getUnusedEntities( $removed );
+		$this->unsubscribeUnused( $removed );
+	}
 
-		if ( empty( $added ) && empty( $unused ) ) {
-			return;
+	/**
+	 * Unsubscribe from anything that was removed and is otherwise unused.
+	 *
+	 * @param EntityId[] $removedIds
+	 */
+	private function unsubscribeUnused( array $removedIds ) {
+		if ( !empty( $removedIds ) ) {
+			$unusedIds =  $this->usageLookup->getUnusedEntities( $removedIds );
+
+			if ( !empty( $unusedIds ) ) {
+				// Unsubscribe from anything that was removed and is otherwise unused.
+				$this->subscriptionManager->unsubscribe( $this->clientId, $unusedIds );
+			}
 		}
-
-		// Subscribe to anything that was added, unsubscribe from anything
-		// that was removed and is otherwise unused.
-		$this->subscriptionManager->subscribe( $this->clientId, $added );
-		$this->subscriptionManager->unsubscribe( $this->clientId, $unused );
 	}
 
 	/**
