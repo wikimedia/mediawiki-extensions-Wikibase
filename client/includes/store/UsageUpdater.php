@@ -90,28 +90,16 @@ class UsageUpdater {
 			return;
 		}
 
+		echo "added\n";
+		var_export( $added );
+
+		echo "unused\n";
+		var_export( $unused );
+
 		// Subscribe to anything that was added, unsubscribe from anything
 		// that was removed and is otherwise unused.
 		$this->subscriptionManager->subscribe( $this->clientId, $added );
 		$this->subscriptionManager->unsubscribe( $this->clientId, $unused );
-	}
-
-	/**
-	 * Re-indexes the given list of EntityUsages so that each EntityUsage can be found by using its
-	 * string representation as a key.
-	 *
-	 * @param EntityUsage[] $usages
-	 * @return EntityUsage[]
-	 */
-	private function reindexEntityUsages( array $usages ) {
-		$reindexed = array();
-
-		foreach ( $usages as $usage ) {
-			$key = $usage->getIdentityString();
-			$reindexed[$key] = $usage;
-		}
-
-		return $reindexed;
 	}
 
 	/**
