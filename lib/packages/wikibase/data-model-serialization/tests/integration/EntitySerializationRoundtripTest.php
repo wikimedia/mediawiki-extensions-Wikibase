@@ -38,34 +38,33 @@ class EntitySerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	public function entityProvider() {
 		$entities = array();
 
-		$entity = Item::newEmpty();
-		$entity->setId( new ItemId( 'Q42' ) );
+		$entity = new Item( new ItemId( 'Q42' ) );
 		$entities[] = array( $entity );
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->setLabels( array(
 			'en' => 'Nyan Cat',
 			'fr' => 'Nyan Cat'
 		) );
 		$entities[] = array( $entity );
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->setDescriptions( array(
 			'en' => 'A Nyan Cat',
 			'fr' => 'A Nyan Cat'
 		) );
 		$entities[] = array( $entity );
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->setAliases( 'en', array( 'Cat', 'My cat' ) );
 		$entity->setAliases( 'fr', array( 'Cat' ) );
 		$entities[] = array( $entity );
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'guid' );
 		$entities[] = array( $entity );
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
 		$entities[] = array( $item );
 
@@ -73,4 +72,5 @@ class EntitySerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 		return $entities;
 	}
+
 }

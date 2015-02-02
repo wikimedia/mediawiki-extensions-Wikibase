@@ -71,8 +71,7 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 	}
 
 	public function deserializationProvider() {
-		$property = Property::newEmpty();
-		$property->setDataTypeId( 'string' );
+		$property = Property::newFromType( 'string' );
 
 		$provider = array(
 			array(
@@ -84,7 +83,7 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 			),
 		);
 
-		$property = Property::newEmpty();
+		$property = Property::newFromType( '' );
 		$property->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
 		$provider[] = array(
 			$property,
@@ -108,4 +107,5 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 
 		return $provider;
 	}
+
 }

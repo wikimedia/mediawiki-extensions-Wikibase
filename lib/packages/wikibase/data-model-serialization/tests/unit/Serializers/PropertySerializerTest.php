@@ -62,14 +62,13 @@ class PropertySerializerTest extends SerializerBaseTest {
 				array()
 			),
 			array(
-				Item::newEmpty()
+				new Item()
 			),
 		);
 	}
 
 	public function serializationProvider() {
-		$property = Property::newEmpty();
-		$property->setDataTypeId( 'string' );
+		$property = Property::newFromType( 'string' );
 
 		$provider = array(
 			array(
@@ -85,7 +84,7 @@ class PropertySerializerTest extends SerializerBaseTest {
 			),
 		);
 
-		$property = Property::newEmpty();
+		$property = Property::newFromType( '' );
 		$property->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
 		$provider[] = array(
 			array(

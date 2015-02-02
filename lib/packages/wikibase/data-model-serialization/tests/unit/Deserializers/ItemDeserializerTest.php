@@ -61,14 +61,14 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 	public function deserializationProvider() {
 		$provider = array(
 			array(
-				Item::newEmpty(),
+				new Item(),
 				array(
 					'type' => 'item'
 				)
 			),
 		);
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
 		$provider[] = array(
 			$item,
@@ -86,4 +86,5 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 
 		return $provider;
 	}
+
 }
