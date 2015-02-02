@@ -98,8 +98,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 	 */
 	protected function newEntityContent( Entity $entity = null ) {
 		if ( !$entity ) {
-			$entity = Item::newEmpty();
-			$entity->setId( new ItemId( 'Q42' ) );
+			$entity = new Item( new ItemId( 'Q42' ) );
 		}
 
 		return $this->getHandler()->makeEntityContent( new EntityInstanceHolder( $entity ) );
@@ -139,9 +138,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 			$id = new ItemId( 'Q7' );
 		}
 
-		$item = Item::newEmpty();
-		$item->setId( $id );
-		return $item;
+		return new Item( $id );
 	}
 
 	/**

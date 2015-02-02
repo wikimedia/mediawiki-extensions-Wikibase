@@ -137,8 +137,7 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	}
 
 	private function getReferencedItem() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q55' ) );
+		$item = new Item( new ItemId( 'Q55' ) );
 		$item->setLabel( 'en', 'Vanilla' );
 
 		return $item;

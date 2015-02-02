@@ -44,8 +44,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	private function getItems() {
 		$items = array();
 
-		$item = Item::newEmpty();
-		$item->setId( 1 );
+		$item = new Item( new ItemId( 'Q1' ) );
 		$item->setLabel( 'en', 'Foo' );
 		$links = $item->getSiteLinkList();
 		$links->addNewSiteLink( 'dewiki', 'Foo de' );
@@ -55,8 +54,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$links->addNewSiteLink( 'enwiktionary', 'Foo en word' );
 		$items[] = $item;
 
-		$item = Item::newEmpty();
-		$item->setId( 2 );
+		$item = new Item( new ItemId( 'Q2' ) );
 		$item->setLabel( 'en', 'Talk:Foo' );
 		$links = $item->getSiteLinkList();
 		$links->addNewSiteLink( 'dewiki', 'Talk:Foo de' );

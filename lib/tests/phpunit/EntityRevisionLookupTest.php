@@ -29,8 +29,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	protected function getTestRevisions() {
 		$entities = array();
 
-		$item = Item::newEmpty();
-		$item->setId( 42 );
+		$item = new Item( new ItemId( 'Q42' ) );
 
 		$entities[11] = new EntityRevision( $item, 11, '20130101001100' );
 
@@ -222,4 +221,3 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	}
 
 }
-

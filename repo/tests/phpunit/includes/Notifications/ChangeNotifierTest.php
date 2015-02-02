@@ -46,8 +46,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	 * @return EntityContent
 	 */
 	private function makeItemContent( ItemId $id ) {
-		$item = Item::newEmpty();
-		$item->setId( $id );
+		$item = new Item( $id );
 
 		$content = ItemContent::newFromItem( $item );
 		return $content;

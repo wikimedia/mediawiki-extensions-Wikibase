@@ -42,18 +42,15 @@ class ItemDisambiguationTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getHTMLProvider() {
-		$one = Item::newEmpty();
-		$one->setId( new ItemId( 'Q1' ) );
+		$one = new Item( new ItemId( 'Q1' ) );
 		$one->setLabel( 'en', 'one' );
 		$one->setLabel( 'de', 'eins' );
 		$one->setDescription( 'en', 'number' );
 		$one->setDescription( 'de', 'Zahl' );
 
-		$oneone = Item::newEmpty();
-		$oneone->setId( new ItemId( 'Q11' ) );
+		$oneone = new Item( new ItemId( 'Q11' ) );
 		$oneone->setLabel( 'en', 'oneone' );
 		$oneone->setLabel( 'de', 'einseins' );
-
 
 		$cases = array();
 		$matchers = array();

@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Term;
 use Wikibase\TermSearchKeyBuilder;
@@ -51,8 +52,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 		}
 
 		// make term in item
-		$item = Item::newEmpty();
-		$item->setId( 42 );
+		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( $languageCode, $termText );
 
 		// save term

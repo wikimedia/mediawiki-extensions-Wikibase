@@ -75,8 +75,7 @@ class ChangeOpClaimRemoveTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newItemWithClaim( $itemIdString, $snak ) {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( $itemIdString ) );
+		$item = new Item( new ItemId( $itemIdString ) );
 
 		$item->getStatements()->addNewStatement(
 			$snak,

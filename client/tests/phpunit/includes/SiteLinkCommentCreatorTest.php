@@ -65,10 +65,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	protected function getNewItem() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'q1' ) );
-
-		return $item;
+		return new Item( new ItemId( 'Q1' ) );
 	}
 
 	protected function getConnectDiff() {

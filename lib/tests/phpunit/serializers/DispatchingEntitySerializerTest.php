@@ -64,8 +64,7 @@ class DispatchingEntitySerializerTest extends EntitySerializerBaseTest {
 	 * @return Entity
 	 */
 	protected function getItemInstance() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q17' ) );
+		$item = new Item( new ItemId( 'Q17' ) );
 		$item->getSiteLinkList()->addNewSiteLink( 'test', 'Foo' );
 
 		return $item;
@@ -80,4 +79,5 @@ class DispatchingEntitySerializerTest extends EntitySerializerBaseTest {
 
 		return $property;
 	}
+
 }

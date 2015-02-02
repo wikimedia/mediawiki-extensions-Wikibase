@@ -121,8 +121,7 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testQualifiersAndSnaksOrder() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q1' ) );
+		$item = new Item( new ItemId( 'Q1' ) );
 		$this->addStatementsWithQualifiersAndReferences( $item );
 
 		$legacySerializer = $this->getLegacySerializer( $item );
@@ -160,22 +159,18 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$property->setId( new PropertyId( 'P999999999999' ) );
 		$entities[] = $property;
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q1' ) );
+		$item = new Item( new ItemId( 'Q1' ) );
 		$entities[] = $item;
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q2' ) );
+		$item = new Item( new ItemId( 'Q2' ) );
 		$this->addFingerprint( $item );
 		$entities[] = $item;
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q3' ) );
+		$item = new Item( new ItemId( 'Q3' ) );
 		$this->addSiteLinks( $item );
 		$entities[] = $item;
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q4' ) );
+		$item = new Item( new ItemId( 'Q4' ) );
 		$this->addStatementsWithoutQualifiers( $item );
 		$this->addStatementsWithQualifiers( $item );
 		$this->addStatementsWithRanks( $item );

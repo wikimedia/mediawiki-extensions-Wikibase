@@ -30,29 +30,25 @@ class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 	private function getItems() {
 		$items = array();
 
-		$item = Item::newEmpty();
-		$item->setId( 1 );
+		$item = new Item( new ItemId( 'Q1' ) );
 		$links = $item->getSiteLinkList();
 		$links->addNewSiteLink( 'dewiki', 'Georg Friedrich Haendel' );
 		$links->addNewSiteLink( 'nlwiki', 'Georg Friedrich Haendel' );
 		$links->addNewSiteLink( 'enwiki', 'George Frideric Handel', array( new ItemId( 'Q3' ), new ItemId( 'Q2' ) ) );
 		$items[] = $item;
 
-		$item = Item::newEmpty();
-		$item->setId( 2 );
+		$item = new Item( new ItemId( 'Q21' ) );
 		$links = $item->getSiteLinkList();
 		$links->addNewSiteLink( 'dewiki', 'Benutzer:Testbenutzer' );
 		$links->addNewSiteLink( 'enwiki', 'User:Testuser', array( new ItemId( 'Q3' ), new ItemId( 'Q4' ) ) );
 		$items[] = $item;
 
-		$item = Item::newEmpty();
-		$item->setId( 3 );
+		$item = new Item( new ItemId( 'Q3' ) );
 		$item->setLabel( 'en', 'Good article' );
 		$item->setLabel( 'de', 'Lesenswerter Artikel' );
 		$items[] = $item;
 
-		$item = Item::newEmpty();
-		$item->setId( 4 );
+		$item = new Item( new ItemId( 'Q4' ) );
 		$item->setLabel( 'en', 'Featured article' );
 		$item->setLabel( 'de', 'Exzellenter Artikel' );
 		$items[] = $item;

@@ -77,11 +77,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function newFromUpdateProvider() {
-		$item1 = Item::newEmpty();
-		$item1->setId( new ItemId( 'Q1' ) );
-
-		$item2 = Item::newEmpty();
-		$item2->setId( new ItemId( 'Q2' ) );
+		$item1 = new Item( new ItemId( 'Q1' ) );
+		$item2 = new Item( new ItemId( 'Q2' ) );
 
 		$prop1 = Property::newFromType( 'string' );
 		$prop1->setId( new PropertyId( 'P1' ) );

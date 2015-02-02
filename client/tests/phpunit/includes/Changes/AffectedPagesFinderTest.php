@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\ItemChange;
-use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Test\TestChanges;
 
@@ -463,10 +462,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	 * @return Item
 	 */
 	private function getEmptyItem( ItemId $id ) {
-		$item = Item::newEmpty();
-		$item->setId( $id );
-
-		return $item->copy();
+		return new Item( $id );
 	}
 
 	/**

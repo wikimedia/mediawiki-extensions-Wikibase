@@ -40,8 +40,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	public function getHtmlProvider() {
 		$testCases = array();
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q1' ) );
+		$item = new Item( new ItemId( 'Q1' ) );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'test' );
 
 		$testCases[] = array(
@@ -78,8 +77,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			)
 		);
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q1' ) );
+		$item = new Item( new ItemId( 'Q1' ) );
 		$item->getSiteLinkList()->addNewSiteLink( 'specialwiki', 'test' );
 
 		$testCases[] = array(
@@ -94,8 +92,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			)
 		);
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q1' ) );
+		$item = new Item( new ItemId( 'Q1' ) );
 		$item->addSiteLink( new SiteLink( 'enwiki', 'en test', array( new ItemId( 'Q42' ) ) ) );
 		$item->addSiteLink( new SiteLink( 'dewiki', 'de test', array( new ItemId( 'Q42' ), new ItemId( 'Q12' ) ) ) );
 
@@ -146,8 +143,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getEmptyHtmlProvider() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q1' ) );
+		$item = new Item( new ItemId( 'Q1' ) );
 
 		$testCases = array();
 

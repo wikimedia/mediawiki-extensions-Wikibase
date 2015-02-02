@@ -73,8 +73,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->clear();
 
-		$item = Item::newEmpty();
-		$item->setId( 42 );
+		$item = new Item( new ItemId( 'Q42' ) );
 
 		$item->setLabel( $languageCode, $termText );
 
@@ -159,8 +158,7 @@ class TermSqlIndexTest extends TermIndexTest {
 		$termIndex = $this->getTermIndex();
 		$termIndex->clear();
 
-		$item = Item::newEmpty();
-		$item->setId( 42 );
+		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setFingerprint( $fingerprint );
 
 		$termIndex->saveTermsOfEntity( $item );
@@ -195,16 +193,14 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->clear();
 
-		$item1 = Item::newEmpty();
-		$item1->setId( 42 );
+		$item1 = new Item( new ItemId( 'Q42' ) );
 
 		$item1->setLabel( $languageCode, $termText );
 		$item1->getSiteLinkList()->addNewSiteLink( 'enwiki', 'A' );
 
 		$termIndex->saveTermsOfEntity( $item1 );
 
-		$item2 = Item::newEmpty();
-		$item2->setId( 23 );
+		$item2 = new Item( new ItemId( 'Q23' ) );
 
 		$item2->setLabel( $languageCode, $termText );
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'B' );
@@ -214,8 +210,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->saveTermsOfEntity( $item2 );
 
-		$item3 = Item::newEmpty();
-		$item3->setId( 108 );
+		$item3 = new Item( new ItemId( 'Q108' ) );
 
 		$item3->setLabel( $languageCode, $termText );
 		$item3->getSiteLinkList()->addNewSiteLink( 'hrwiki', 'C' );
@@ -253,8 +248,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->clear();
 
-		$item1 = Item::newEmpty();
-		$item1->setId( 42 );
+		$item1 = new Item( new ItemId( 'Q42' ) );
 
 		$item1->setLabel( $languageCode, $termText );
 
@@ -282,8 +276,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->clear();
 
-		$item1 = Item::newEmpty();
-		$item1->setId( 42 );
+		$item1 = new Item( new ItemId( 'Q42' ) );
 
 		$item1->setLabel( $languageCode, $termText );
 
@@ -378,8 +371,7 @@ class TermSqlIndexTest extends TermIndexTest {
 		$fingerprint->setDescription( 'es', 'es un gato!' );
 		$fingerprint->setAliasGroup( 'en', array( 'kitten-alias' ) );
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q999' ) );
+		$item = new Item( new ItemId( 'Q999' ) );
 		$item->setFingerprint( $fingerprint );
 
 		$expectedTerms = array(

@@ -35,9 +35,7 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 	 * @return Item
 	 */
 	private function getTestItem() {
-		$item = Item::newEmpty();
-		$item->setId( $this->getTestItemId() );
-		return $item;
+		return new Item( $this->getTestItemId() );
 	}
 
 	/**

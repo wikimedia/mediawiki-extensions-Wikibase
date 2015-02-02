@@ -146,8 +146,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddEntityRevision() {
 		$result = $this->getDefaultResult();
 		$props = array( 'info' );
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q123098' ) );
+		$item = new Item( new ItemId( 'Q123098' ) );
 
 		//Basic
 		$item->setLabel( 'de', 'foo' );
@@ -302,8 +301,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testAddEntityRevisionKey() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q11' ) );
+		$item = new Item( new ItemId( 'Q11' ) );
 
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 
@@ -325,8 +323,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testAddEntityRevisionWithSiteLinksFilter() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q123099' ) );
+		$item = new Item( new ItemId( 'Q123099' ) );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin' );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 		$entityRevision = new EntityRevision( $item );
@@ -363,8 +360,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddEntityRevisionInIndexedModeWithSiteLinksFilter() {
 		$indexedMode = true;
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q123100' ) );
+		$item = new Item( new ItemId( 'Q123100' ) );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin' );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 		$entityRevision = new EntityRevision( $item );

@@ -150,8 +150,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$otherUser = $this->getUser( 'EditEntityTestUser2' );
 
 		/* @var Item $item */
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q17' ) );
+		$item = new Item( new ItemId( 'Q17' ) );
 		$item->setLabel('en', 'foo' );
 		$repo->putEntity( $item, 10, 0, $user );
 

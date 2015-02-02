@@ -63,11 +63,9 @@ class EntityContentDataCodecTest extends \MediaWikiTestCase {
 	}
 
 	public function entityProvider() {
-		$empty = Item::newEmpty();
-		$empty->setId( new ItemId( 'Q1' ) );
+		$empty = new Item( new ItemId( 'Q1' ) );
 
-		$simple = Item::newEmpty();
-		$simple->setId( new ItemId( 'Q1' ) );
+		$simple = new Item( new ItemId( 'Q1' ) );
 		$simple->setLabel( 'en', 'Test' );
 
 		return array(

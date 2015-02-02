@@ -100,8 +100,7 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	 * @return Entity
 	 */
 	protected function provideNewEntity() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q23' ) );
+		$item = new Item( new ItemId( 'Q23' ) );
 		$item->setDescription( 'en', 'DUPE' );
 		$item->setDescription( 'fr', 'DUPE' );
 

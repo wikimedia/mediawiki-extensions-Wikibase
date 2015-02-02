@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Language;
-use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\View\TermBoxView;
@@ -31,8 +30,7 @@ class TermBoxViewTest extends \PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$entity = Item::newEmpty();
-		$entity->setId( new ItemId( 'Q23' ) );
+		$entity = new Item( new ItemId( 'Q23' ) );
 
 		$fingerprint = $entity->getFingerprint();
 		$fingerprint->setLabel( 'en', 'Moskow' );

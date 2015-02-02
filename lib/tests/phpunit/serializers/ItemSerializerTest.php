@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use SiteSQLStore;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -51,9 +52,7 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 	 * @return Item
 	 */
 	protected function getEntityInstance() {
-		$item = Item::newEmpty();
-		$item->setId( 42 );
-		return $item;
+		return new Item( new ItemId( 'Q42' ) );
 	}
 
 	/**

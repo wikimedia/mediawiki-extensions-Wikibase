@@ -97,8 +97,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 	}
 
 	private function getItem() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q23' ) );
+		$item = new Item( new ItemId( 'Q23' ) );
 
 		$item->setLabel( 'en', 'Moskow' );
 		$item->setLabel( 'de', 'Moskau' );

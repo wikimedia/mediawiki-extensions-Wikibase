@@ -24,8 +24,7 @@ class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$q10 = new ItemId( 'Q10' );
 		$q11 = new ItemId( 'Q11' );
 
-		$item10 = Item::newEmpty();
-		$item10->setId( $q10 );
+		$item10 = new Item( $q10 );
 		$item10->setLabel( 'en', 'ten' );
 
 		$repo = new MockRepository();

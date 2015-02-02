@@ -61,8 +61,7 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 		$statement3->setGuid( 'Q42$3' );
 		$statement3->setRank( Statement::RANK_DEPRECATED );
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q42' ) );
+		$item = new Item( new ItemId( 'Q42' ) );
 		$item->getStatements()->addStatement( $statement1 );
 		$item->getStatements()->addStatement( $statement2 );
 		$item->getStatements()->addStatement( $statement3 );

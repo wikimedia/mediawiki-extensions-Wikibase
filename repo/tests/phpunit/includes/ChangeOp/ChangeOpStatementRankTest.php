@@ -24,8 +24,7 @@ use Wikibase\Lib\ClaimGuidGenerator;
 class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
-		$item = Item::newEmpty();
-		$item->setId( 42 );
+		$item = new Item( new ItemId( 'Q42' ) );
 
 		$guidGenerator = new ClaimGuidGenerator();
 		$validClaimGuid = $guidGenerator->newGuid( $item->getId() );
@@ -80,8 +79,7 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newItemWithClaim( $itemIdString, $mainSnak ) {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( $itemIdString ) );
+		$item = new Item( new ItemId( $itemIdString ) );
 
 		$item->getStatements()->addNewStatement(
 			$mainSnak,

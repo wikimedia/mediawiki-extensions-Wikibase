@@ -221,10 +221,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	protected function getItem() {
-		$itemId = new ItemId( 'Q666' );
-
-		$item = Item::newEmpty();
-		$item->setId( $itemId );
+		$item = new Item( new ItemId( 'Q666' ) );
 		$item->setLabel( 'en', 'Beer' );
 		$item->setDescription( 'en', 'yummy beverage' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Beer' );

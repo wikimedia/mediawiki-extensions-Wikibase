@@ -100,8 +100,7 @@ final class TestChanges {
 			$changes['property-set-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 
 			// -----
-			$old = Item::newEmpty();
-			$old->setId( new ItemId( 'q100' ) );
+			$old = new Item( new ItemId( 'Q100' ) );
 
 			/* @var Item $new */
 			$new = $old->copy();

@@ -75,8 +75,7 @@ class ParserAfterParseHookHandlerTest extends \MediaWikiTestCase {
 	}
 
 	private function getBadgeItem() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q17' ) );
+		$item = new Item( new ItemId( 'Q17' ) );
 		$item->setLabel( 'de', 'exzellent' );
 		$item->setLabel( 'en', 'featured' );
 
@@ -90,8 +89,7 @@ class ParserAfterParseHookHandlerTest extends \MediaWikiTestCase {
 	 * @return Item
 	 */
 	private function newItem( ItemId $id, $links ) {
-		$item = Item::newEmpty();
-		$item->setId( $id );
+		$item = new Item( $id );
 
 		foreach ( $links as $link ) {
 			$item->addSiteLink( $link );

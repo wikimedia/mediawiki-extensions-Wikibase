@@ -24,8 +24,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
 class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 
 	private function getEntityLookup() {
-		$q8 = Item::newEmpty();
-		$q8->setId( 8 );
+		$q8 = new Item( new ItemId( 'Q8' ) );
 
 		$p8 = Property::newFromType( 'string' );
 		$p8->setId( 8 );
