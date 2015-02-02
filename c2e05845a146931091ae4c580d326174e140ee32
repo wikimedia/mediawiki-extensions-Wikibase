@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_17caaf4a",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-02T08:55:08Z",
+      "side": 1,
+      "message": "I tried \"self::SITELINK_USAGE \u003d\u003e true\", but this looks like the bool values do have a meaning. But the values are meaningless. Therefor the null\u0027s.\n\nDidn\u0027t think of \"self::SITELINK_USAGE \u003d\u003e self::SITELINK_USAGE\". Looks equally weird to me. Would like to keep the nulls. Will describe in the comment.",
+      "parentUuid": "6e7c4fa4_4f15f19b",
+      "revId": "c2e05845a146931091ae4c580d326174e140ee32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ef295de3",
         "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-31T11:56:13Z",
       "side": 1,
       "message": "This seems a little weird... why not rather use array values like $bins[$aspect][] \u003d $idString; ?",
+      "revId": "c2e05845a146931091ae4c580d326174e140ee32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7700c36d",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-02T08:55:08Z",
+      "side": 1,
+      "message": "Good question. It was like this before, I think because the method was originally used for two different purposes. I didn\u0027t touched this aspect. But I will now.",
+      "parentUuid": "6e7c4fa4_ef295de3",
       "revId": "c2e05845a146931091ae4c580d326174e140ee32",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
