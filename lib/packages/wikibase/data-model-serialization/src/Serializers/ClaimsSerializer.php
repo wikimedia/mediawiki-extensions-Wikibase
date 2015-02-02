@@ -73,7 +73,7 @@ class ClaimsSerializer implements DispatchableSerializer {
 		 * @var Claim $claim
 		 */
 		foreach( $claims as $claim ) {
-			$serialization[$claim->getMainSnak()->getPropertyId()->getPrefixedId()][] = $this->claimSerializer->serialize( $claim );
+			$serialization[$claim->getMainSnak()->getPropertyId()->getSerialization()][] = $this->claimSerializer->serialize( $claim );
 		}
 
 		if ( $this->useObjectsForMaps ) {
