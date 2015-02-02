@@ -7,7 +7,6 @@ use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Property;
 
 /**
@@ -30,6 +29,7 @@ class PropertySerializer implements DispatchableSerializer {
 	private $claimsSerializer;
 
 	/**
+	 * @param FingerprintSerializer $fingerprintSerializer
 	 * @param Serializer $claimsSerializer
 	 */
 	public function __construct( FingerprintSerializer $fingerprintSerializer, Serializer $claimsSerializer ) {
@@ -79,7 +79,7 @@ class PropertySerializer implements DispatchableSerializer {
 		return $serialization;
 	}
 
-	private function addClaimsToSerialization( Entity $entity, array &$serialization ) {
+	private function addClaimsToSerialization( Property $entity, array &$serialization ) {
 		$claims = new Claims( $entity->getStatements() );
 
 		$serialization['claims'] = $this->claimsSerializer->serialize( $claims );
