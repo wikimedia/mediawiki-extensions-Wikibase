@@ -173,7 +173,10 @@ class DirectSqlStore implements ClientStore {
 			if ( $this->useLegacyChangesSubscription ) {
 				$this->subscriptionManager = new NullSubscriptionManager();
 			} else {
-				$connectionManager = new ConnectionManager( $this->getRepoLoadBalancer() );
+				$connectionManager = new ConnectionManager(
+					$this->getRepoLoadBalancer(),
+					$this->repoWiki
+				);
 				$this->subscriptionManager = new SqlSubscriptionManager( $connectionManager );
 			}
 		}
