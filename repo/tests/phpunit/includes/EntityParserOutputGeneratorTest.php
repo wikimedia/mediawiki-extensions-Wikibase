@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
-use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\ValuesFinder;
 
@@ -80,8 +79,7 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 	public function testTitleText_ItemHasNolabel() {
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q7799929' ) );
+		$item = new Item( new ItemId( 'Q7799929' ) );
 		$item->setDescription( 'en', 'a kitten' );
 
 		$timestamp = wfTimestamp( TS_MW );
@@ -131,8 +129,7 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newItem() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q7799929' ) );
+		$item = new Item( new ItemId( 'Q7799929' ) );
 
 		$item->setLabel( 'en', 'kitten item' );
 

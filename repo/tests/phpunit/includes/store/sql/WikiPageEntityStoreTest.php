@@ -161,8 +161,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$firstItem = Item::newEmpty();
 		$firstItem->setLabel( 'en', 'one' );
 
-		$secondItem = Item::newEmpty();
-		$secondItem->setId( 768476834 );
+		$secondItem = new Item( new ItemId( 'Q768476834' ) );
 		$secondItem->setLabel( 'en', 'Bwahahaha' );
 		$secondItem->setLabel( 'de', 'Kähähähä' );
 

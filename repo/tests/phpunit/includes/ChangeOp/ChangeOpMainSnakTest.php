@@ -140,8 +140,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$claimGuid = $claim->getGuid();
 
 		// apply change to the wrong item
-		$wrongItem = Item::newEmpty();
-		$wrongItem->setId( new ItemId( "Q888" ) );
+		$wrongItem = new Item( new ItemId( 'Q888' ) );
 		$newSnak =  $this->makeSnak( 'P12', 'newww' );
 		$args['wrong entity'] = array ( $wrongItem, $this->newChangeOpMainSnak( $claimGuid, $newSnak ) );
 
@@ -180,8 +179,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function makeNewItemWithClaim( $itemIdString, $snak ) {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( $itemIdString ) );
+		$item = new Item( new ItemId( $itemIdString ) );
 
 		$item->getStatements()->addNewStatement(
 			$snak,
@@ -241,8 +239,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 			$this->mockProvider->getMockSnakValidator()
 		);
 
-		$entity = Item::newEmpty();
-		$entity->setId( $entityId );
+		$entity = new Item( $entityId );
 
 		$result = $changeOpMainSnak->validate( $entity );
 		$this->assertFalse( $result->isValid(), 'isValid()' );

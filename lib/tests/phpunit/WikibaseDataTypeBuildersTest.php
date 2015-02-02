@@ -35,8 +35,7 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 	protected function newTypeFactory() {
 		$entityIdParser = new BasicEntityIdParser();
 
-		$q8 = Item::newEmpty();
-		$q8->setId( new ItemId( 'Q8' ) );
+		$q8 = new Item( new ItemId( 'Q8' ) );
 
 		$p8 = Property::newFromType( 'string' );
 		$p8->setId( new PropertyId( 'P8' ) );

@@ -24,8 +24,7 @@ use Wikibase\Template\TemplateRegistry;
 class ItemViewTest extends EntityViewTest {
 
 	protected function makeEntity( EntityId $id, array $statements = array() ) {
-		$item = Item::newEmpty();
-		$item->setId( $id );
+		$item = new Item( $id );
 		$item->setLabel( 'en', "label:$id" );
 		$item->setDescription( 'en', "description:$id" );
 
@@ -73,4 +72,5 @@ class ItemViewTest extends EntityViewTest {
 			)
 		);
 	}
+
 }

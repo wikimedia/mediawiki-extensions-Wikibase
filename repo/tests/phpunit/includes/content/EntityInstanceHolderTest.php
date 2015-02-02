@@ -24,8 +24,7 @@ class EntityInstanceHolderTest extends \PHPUnit_Framework_TestCase {
 	 * @return Entity
 	 */
 	private function newEntity() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q17' ) );
+		$item = new Item( new ItemId( 'Q17' ) );
 		$item->setLabel( 'en', 'Foo' );
 
 		return $item;

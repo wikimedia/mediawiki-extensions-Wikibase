@@ -34,8 +34,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	 * @return Entity[]
 	 */
 	protected function getKnownEntities() {
-		$q1 = Item::newEmpty();
-		$q1->setId( new ItemId( 'Q1' ) );
+		$q1 = new Item( new ItemId( 'Q1' ) );
 		$q1->setLabel( 'en', 'label:Q1/en' );
 		$q1->setLabel( 'de', 'label:Q1/de' );
 		$q1->setDescription( 'en', 'description:Q1/en' );
@@ -43,8 +42,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$q1->addAliases( 'en', array( 'alias:Q1/en#1' ) );
 		$q1->addAliases( 'de', array( 'alias:Q1/de#1', 'alias:Q1/de#2' ) );
 
-		$q2 = Item::newEmpty();
-		$q2->setId( new ItemId( 'Q2' ) );
+		$q2 = new Item( new ItemId( 'Q2' ) );
 		$q2->setLabel( 'en', 'label:Q2/en' );
 		$q2->setLabel( 'de', 'label:Q2/de' );
 		$q2->addAliases( 'en', array( 'alias:Q2/en#1' ) );

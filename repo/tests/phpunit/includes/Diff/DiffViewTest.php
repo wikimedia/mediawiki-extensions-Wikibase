@@ -94,8 +94,7 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 	private function getBadgeItem() {
 		global $wgLang;
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q123' ) );
+		$item = new Item( new ItemId( 'Q123' ) );
 		$item->getFingerprint()->setLabel( $wgLang->getCode(), 'nyan article' );
 		return $item;
 	}

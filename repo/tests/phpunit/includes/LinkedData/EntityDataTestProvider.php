@@ -21,8 +21,7 @@ class EntityDataTestProvider {
 	 * @return EntityRevision[]
 	 */
 	public static function getEntityRevisions() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q42' ) );
+		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( 'en', 'Raarrr!' );
 
 		$itemRev = new EntityRevision( $item, 4242, '20131211100908' );

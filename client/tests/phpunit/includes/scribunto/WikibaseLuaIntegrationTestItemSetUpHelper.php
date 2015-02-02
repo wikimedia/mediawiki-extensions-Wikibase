@@ -115,8 +115,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	 * @return Item
 	 */
 	private function createTestItem( ItemId $id, array $labels, array $claims = null, array $siteLinks = null ) {
-		$item = Item::newEmpty();
-		$item->setId( $id );
+		$item = new Item( $id );
 		$item->setLabels( $labels );
 
 		if ( is_array( $siteLinks ) ) {

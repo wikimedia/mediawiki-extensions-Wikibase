@@ -49,8 +49,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidArgumentProvider() {
-		$item = Item::newEmpty();
-		$item->setId( 42 );
+		$item = new Item( new ItemId( 'Q42' ) );
 
 		$guidGenerator = new ClaimGuidGenerator();
 		$validClaimGuid = $guidGenerator->newGuid( $item->getId() );
@@ -240,8 +239,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newItemWithClaim( $snak ) {
-		$item = Item::newEmpty();
-		$item->setId( 123 );
+		$item = new Item( new ItemId( 'Q123' ) );
 
 		$item->getStatements()->addNewStatement(
 			$snak,
@@ -257,8 +255,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$p11 = new PropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 
-		$item = Item::newEmpty();
-		$item->setId( $q17 );
+		$item = new Item( $q17 );
 		$claimGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
 		$badGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
 
@@ -306,8 +303,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$p11 = new PropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 
-		$item = Item::newEmpty();
-		$item->setId( $q17 );
+		$item = new Item( $q17 );
 		$claimGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old reference" ) );

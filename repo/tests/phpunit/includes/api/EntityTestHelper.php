@@ -515,17 +515,14 @@ class EntityTestHelper {
 	private static function fillTestEntities() {
 		$entities = array();
 
-		$entities['Q1'] = Item::newEmpty();
-		$entities['Q1']->setId( ItemId::newFromNumber( 1 ) );
+		$entities['Q1'] = new Item( new ItemId( 'Q1' ) );
 
-		$entities['Q2'] = Item::newEmpty();
-		$entities['Q2']->setId( ItemId::newFromNumber( 2 ) );
+		$entities['Q2'] = new Item( new ItemId( 'Q2' ) );
 
 		$entities['P1'] = Property::newFromType( 'string' );
 		$entities['P1']->setId( PropertyId::newFromNumber( 1 ) );
 
-		$entities['Q3'] = Item::newEmpty();
-		$entities['Q3']->setId( ItemId::newFromNumber( 3 ) );
+		$entities['Q3'] = new Item( new ItemId( 'Q3' ) );
 		$entities['Q3']->setFingerprint(
 			new Fingerprint(
 				new TermList(
@@ -566,8 +563,7 @@ class EntityTestHelper {
 		$claim->setGuid( 'Q3$E9DC0EA4-D0A0-429B-8F4D-048F2B5C9F73' );
 		$entities['Q3']->addClaim( $claim );
 
-		$entities['Q4'] = Item::newEmpty();
-		$entities['Q4']->setId( ItemId::newFromNumber( 4 ) );
+		$entities['Q4'] = new Item( new ItemId( 'Q4' ) );
 		$entities['Q4']->setFingerprint(
 			new Fingerprint(
 				new TermList(
@@ -600,8 +596,7 @@ class EntityTestHelper {
 		$entities['Q4']->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'London' );
 		$entities['Q4']->getSiteLinkList()->addNewSiteLink( 'nnwiki', 'London' );
 
-		$entities['Q5'] = Item::newEmpty();
-		$entities['Q5']->setId( ItemId::newFromNumber( 5 ) );
+		$entities['Q5'] = new Item( new ItemId( 'Q5' ) );
 		$entities['Q5']->setFingerprint(
 			new Fingerprint(
 				new TermList(
@@ -636,8 +631,7 @@ class EntityTestHelper {
 		$entities['Q5']->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'Oslo' );
 		$entities['Q5']->getSiteLinkList()->addNewSiteLink( 'nnwiki', 'Oslo' );
 
-		$entities['Q6'] = Item::newEmpty();
-		$entities['Q6']->setId( ItemId::newFromNumber( 6 ) );
+		$entities['Q6'] = new Item( new ItemId( 'Q6' ) );
 		$entities['Q6']->setFingerprint(
 			new Fingerprint(
 				new TermList(
@@ -667,8 +661,7 @@ class EntityTestHelper {
 		$entities['Q6']->addSiteLink( new SiteLink( 'enwiki', 'Episkopi Cantonment' ) );
 		$entities['Q6']->addSiteLink( new SiteLink( 'nlwiki', 'Episkopi Cantonment' ) );
 
-		$entities['Q7'] = Item::newEmpty();
-		$entities['Q7']->setId( ItemId::newFromNumber( 7 ) );
+		$entities['Q7'] = new Item( new ItemId( 'Q7' ) );
 		$entities['Q7']->setFingerprint(
 			new Fingerprint(
 				new TermList(
@@ -686,8 +679,7 @@ class EntityTestHelper {
 			)
 		);
 
-		$entities['Q8'] = Item::newEmpty();
-		$entities['Q8']->setId( ItemId::newFromNumber( 8 ) );
+		$entities['Q8'] = new Item( new ItemId( 'Q8' ) );
 		$entities['Q8']->setFingerprint(
 			new Fingerprint(
 				new TermList(

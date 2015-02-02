@@ -49,9 +49,7 @@ class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		if ( $id->getSerialization() == 'Q10' ) {
-			$item = Item::newEmpty();
-			$item->setId( $id );
-			return $item;
+			return new Item( $id );
 		}
 
 		return null;

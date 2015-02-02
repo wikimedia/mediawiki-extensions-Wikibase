@@ -10,6 +10,7 @@ use Wikibase\Api\ClaimModificationHelper;
 use Wikibase\Api\CreateClaim;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Localizer\DispatchingExceptionLocalizer;
@@ -69,8 +70,7 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 	public function testGetClaimFromEntity() {
 		$claimModificationHelper = $this->getNewInstance();
 
-		$item = Item::newEmpty();
-		$item->setId( 42 );
+		$item = new Item( new ItemId( 'Q42' ) );
 
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$statement = new Statement( new Claim( $snak ) );

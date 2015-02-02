@@ -39,8 +39,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$p23 = new PropertyId( 'p23' );
 		$p42 = new PropertyId( 'p42' );
 
-		$item = Item::newEmpty();
-		$item->setId( $q23 );
+		$item = new Item( $q23 );
 		$this->repo->putEntity( $item );
 
 		$prop = Property::newFromType( 'string' );
@@ -165,43 +164,36 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$cases = array();
 
 		// #0: same link ---------
-		$a = Item::newEmpty();
-		$a->setId( 1 );
+		$a = new Item( new ItemId( 'Q1' ) );
 		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 		$a->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Foo' );
 
-		$b = Item::newEmpty();
-		$b->setId( 2 );
+		$b = new Item( new ItemId( 'Q2' ) );
 		$b->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 		$b->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Bar' );
 
 		$cases[] = array( $a, $b, array( array( 'enwiki', 'Foo', 1 ) ) );
 
 		// #1: same site ---------
-		$a = Item::newEmpty();
-		$a->setId( 1 );
+		$a = new Item( new ItemId( 'Q1' ) );
 		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
-		$b = Item::newEmpty();
-		$b->setId( 2 );
+		$b = new Item( new ItemId( 'Q2' ) );
 		$b->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Bar' );
 
 		$cases[] = array( $a, $b, array() );
 
 		// #2: same page ---------
-		$a = Item::newEmpty();
-		$a->setId( 1 );
+		$a = new Item( new ItemId( 'Q1' ) );
 		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
-		$b = Item::newEmpty();
-		$b->setId( 2 );
+		$b = new Item( new ItemId( 'Q2' ) );
 		$b->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Foo' );
 
 		$cases[] = array( $a, $b, array() );
 
 		// #3: same item ---------
-		$a = Item::newEmpty();
-		$a->setId( 1 );
+		$a = new Item( new ItemId( 'Q1' ) );
 		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		$cases[] = array( $a, $a, array() );
@@ -222,13 +214,11 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	public function provideGetLinks() {
 		$cases = array();
 
-		$a = Item::newEmpty();
-		$a->setId( 1 );
+		$a = new Item( new ItemId( 'Q1' ) );
 		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 		$a->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Bar' );
 
-		$b = Item::newEmpty();
-		$b->setId( 2 );
+		$b = new Item( new ItemId( 'Q2' ) );
 		$b->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Bar' );
 		$b->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Xoo' );
 
@@ -364,16 +354,13 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	protected function setupGetEntities() {
-		$one = Item::newEmpty();
-		$one->setId( 1 );
+		$one = new Item( new ItemId( 'Q1' ) );
 		$one->setLabel( 'en', 'one' );
 
-		$two = Item::newEmpty();
-		$two->setId( 2 );
+		$two = new Item( new ItemId( 'Q2' ) );
 		$two->setLabel( 'en', 'two' );
 
-		$three = Item::newEmpty();
-		$three->setId( 3 );
+		$three = new Item( new ItemId( 'Q3' ) );
 		$three->setLabel( 'en', 'three' );
 		$three->setLabel( 'de', 'drei' );
 		$three->setDescription( 'en', 'the third' );
@@ -461,8 +448,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetSiteLinksForItem() {
-		$one = Item::newEmpty();
-		$one->setId( 1 );
+		$one = new Item( new ItemId( 'Q1' ) );
 
 		$one->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Xoo' );
 		$one->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
@@ -486,22 +472,18 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$item = Item::newEmpty();
 		$item->setLabel( 'en', 'one' );
 
-		$secondItem = Item::newEmpty();
-		$secondItem->setId( 1 );
+		$secondItem = new Item( new ItemId( 'Q1' ) );
 		$secondItem->setLabel( 'en', 'one' );
 		$secondItem->setLabel( 'it', 'uno' );
 
-		$thirdItem = Item::newEmpty();
-		$thirdItem->setId( 1 );
+		$thirdItem = new Item( new ItemId( 'Q1' ) );
 		$thirdItem->setLabel( 'en', 'one' );
 
-		$fourthItem = Item::newEmpty();
-		$fourthItem->setId( 123 );
+		$fourthItem = new Item( new ItemId( 'Q123' ) );
 		$fourthItem->setLabel( 'en', 'one two three' );
 		$fourthItem->setLabel( 'de', 'eins zwei drei' );
 
-		$fifthItem = Item::newEmpty();
-		$fifthItem->setId( 1 );
+		$fifthItem = new Item( new ItemId( 'Q1' ) );
 		$fifthItem->setLabel( 'en', 'one' );
 		$fifthItem->setLabel( 'de', 'eins' );
 
@@ -638,9 +620,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testDeleteEntity( ) {
-		$q23 = new ItemId( 'q23' );
-		$item = Item::newEmpty();
-		$item->setId( $q23 );
+		$item = new Item( new ItemId( 'Q23' ) );
 		$this->repo->putEntity( $item );
 
 		$this->repo->deleteEntity( $item->getId(), 'testing', $GLOBALS['wgUser'] );

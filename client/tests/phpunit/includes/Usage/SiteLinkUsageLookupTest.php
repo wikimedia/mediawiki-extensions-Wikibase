@@ -35,8 +35,7 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 		$repo = new MockRepository();
 
 		foreach ( $links as $name => $itemId ) {
-			$item = Item::newEmpty();
-			$item->setId( $itemId );
+			$item = new Item( $itemId );
 			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'testwiki', "$name" ) );
 			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'badwiki', "$name" ) );
 			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'sadwiki', "42" ) );

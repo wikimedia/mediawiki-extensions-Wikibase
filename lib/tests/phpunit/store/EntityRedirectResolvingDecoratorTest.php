@@ -50,10 +50,7 @@ class EntityRedirectResolvingDecoratorTest extends \PHPUnit_Framework_TestCase {
 			throw new UnresolvedRedirectException( new ItemId( 'Q10' ) );
 		}
 
-		$item = Item::newEmpty();
-		$item->setId( $id );
-
-		return new EntityRevision( $item, 777 );
+		return new EntityRevision( new Item( $id ), 777 );
 	}
 
 	private function getEntityRevisionLookup() {
@@ -146,6 +143,5 @@ class EntityRedirectResolvingDecoratorTest extends \PHPUnit_Framework_TestCase {
 		$decorator = new EntityRedirectResolvingDecorator( $target );
 		$decorator->getPropertyIdsForLabels( array( 'foo' ) );
 	}
-
 
 }

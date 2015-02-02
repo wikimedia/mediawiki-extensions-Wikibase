@@ -87,8 +87,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$repo = new MockRepository();
 
 		// entity 1, revision 11
-		$entity1 = Item::newEmpty();
-		$entity1->setId( new ItemId( 'q1' ) );
+		$entity1 = new Item( new ItemId( 'Q1' ) );
 		$entity1->setLabel( 'en', 'one' );
 		$repo->putEntity( $entity1, 11 );
 
@@ -105,8 +104,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$repo->putEntity( $entity1, 1111 );
 
 		// entity 2, revision 21
-		$entity1 = Item::newEmpty();
-		$entity1->setId( new ItemId( 'q2' ) );
+		$entity1 = new Item( new ItemId( 'Q2' ) );
 		$entity1->setLabel( 'en', 'two' );
 		$repo->putEntity( $entity1, 21 );
 
@@ -128,8 +126,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideHandleChanges() {
-		$empty = Item::newEmpty();
-		$empty->setId( new ItemId( 'q55668877' ) );
+		$empty = new Item( new ItemId( 'Q55668877' ) );
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
 		$itemCreation = $changeFactory->newFromUpdate( EntityChange::ADD, null, $empty );
@@ -475,8 +472,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	private function updateMockRepo( MockRepository $mockRepository, array $pageNamesPerItemId ) {
 		foreach ( $pageNamesPerItemId as $idString => $pageNames ) {
 			if ( is_array( $pageNames ) ) {
-				$item = Item::newEmpty();
-				$item->setId( new ItemId( $idString ) );
+				$item = new Item( new ItemId( $idString ) );
 
 				foreach ( $pageNames as $siteId => $pageName ) {
 					if ( !is_string( $siteId ) ) {

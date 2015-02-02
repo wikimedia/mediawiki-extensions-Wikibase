@@ -94,8 +94,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideTestApply() {
-		$itemEmpty = Item::newEmpty();
-		$itemEmpty->setId( new ItemId( 'Q888' ) );
+		$itemEmpty = new Item( new ItemId( 'Q888' ) );
 
 		$item777 = $this->makeNewItemWithStatement( 'Q777', new PropertyNoValueSnak( 45 ) );
 		$item666 = $this->makeNewItemWithStatement( 'Q666', new PropertySomeValueSnak( 44 ) );
@@ -240,8 +239,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function applyInvalidThrowsExceptionProvider() {
-		$itemEmpty = Item::newEmpty();
-		$itemEmpty->setId( new ItemId( 'Q888' ) );
+		$itemEmpty = new Item( new ItemId( 'Q888' ) );
 
 		$item777 = $this->makeNewItemWithStatement( 'Q777', new PropertyNoValueSnak( 45 ) );
 		$item666 = $this->makeNewItemWithStatement( 'Q666', new PropertySomeValueSnak( 44 ) );
@@ -296,8 +294,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$newStatement->setMainSnak( $newSnak );
 
 		// apply change to the wrong item
-		$wrongItem = Item::newEmpty();
-		$wrongItem->setId( new ItemId( "Q888" ) );
+		$wrongItem = new Item( new ItemId( 'Q888' ) );
 		$args['wrong entity'] = array( $wrongItem, $this->newChangeOpClaim( $newStatement ) );
 
 		// update an existing claim with wrong main snak property
@@ -327,8 +324,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 * @return Item
 	 */
 	private function makeNewItemWithStatement( $idString, Snak $mainSnak ) {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( $idString ) );
+		$item = new Item( new ItemId( $idString ) );
 
 		$this->addStatementsToItem( $item, $mainSnak );
 
@@ -411,8 +407,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	public function testValidate( ItemId $itemId, Statement $statement ) {
 		$changeOpClaim = $this->newChangeOpClaim( $statement, 0 );
 
-		$item = Item::newEmpty();
-		$item->setId( $itemId );
+		$item = new Item( $itemId );
 
 		$result = $changeOpClaim->validate( $item );
 		$this->assertFalse( $result->isValid(), 'isValid()' );

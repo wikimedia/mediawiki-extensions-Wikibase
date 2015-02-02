@@ -49,8 +49,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 * @return Item
 	 */
 	private function makeItemWithLabel( $id, $label ) {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( $id ) );
+		$item = new Item( new ItemId( $id ) );
 
 		$item->setLabel( 'en', $label );
 
@@ -64,8 +63,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 * @return Item
 	 */
 	private function makeItemWithDescription( $id, $label ) {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( $id ) );
+		$item = new Item( new ItemId( $id ) );
 
 		$item->setDescription( 'en', $label );
 

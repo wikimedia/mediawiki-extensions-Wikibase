@@ -30,8 +30,7 @@ class SiteLinkUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testValidateEntity() {
-		$goodEntity = Item::newEmpty();
-		$goodEntity->setId( new ItemId( 'Q5' ) );
+		$goodEntity = new Item( new ItemId( 'Q5' ) );
 		$goodEntity->getSiteLinkList()->addNewSiteLink( 'testwiki', 'Foo' );
 
 		$siteLinkLookup = $this->getMockSiteLinkLookup();
@@ -44,8 +43,7 @@ class SiteLinkUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testValidateEntity_conflict() {
-		$badEntity = Item::newEmpty();
-		$badEntity->setId( new ItemId( 'Q7' ) );
+		$badEntity = new Item( new ItemId( 'Q7' ) );
 		$badEntity->getSiteLinkList()->addNewSiteLink( 'testwiki', 'DUPE' );
 
 		$siteLinkLookup = $this->getMockSiteLinkLookup();

@@ -175,8 +175,7 @@ class EntityChangeTest extends DiffChangeTest {
 
 	public function testSetRevisionInfo() {
 		$id = new ItemId( 'Q7' );
-		$item = Item::newEmpty();
-		$item->setId( $id );
+		$item = new Item( $id );
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
 		$entityChange = $changeFactory->newForEntity( EntityChange::UPDATE, $id );

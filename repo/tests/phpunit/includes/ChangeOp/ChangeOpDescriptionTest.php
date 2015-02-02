@@ -100,8 +100,7 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 	 * @return Entity
 	 */
 	protected function provideNewEntity() {
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q23' ) );
+		$item = new Item( new ItemId( 'Q23' ) );
 		$item->setLabel( 'en', 'DUPE' );
 		$item->setLabel( 'fr', 'DUPE' );
 
@@ -140,4 +139,5 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $summaryExpectedAction, $summary->getActionName() );
 		$this->assertEquals( $summaryExpectedLanguage, $summary->getLanguageCode() );
 	}
+
 }

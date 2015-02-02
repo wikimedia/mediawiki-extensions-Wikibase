@@ -45,8 +45,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		$repo = new MockRepository();
 
 		// entity 1, revision 11
-		$entity1 = Item::newEmpty();
-		$entity1->setId( new ItemId( 'q1' ) );
+		$entity1 = new Item( new ItemId( 'Q1' ) );
 		$entity1->setLabel( 'en', 'one' );
 		$repo->putEntity( $entity1, 11 );
 
@@ -63,8 +62,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		$repo->putEntity( $entity1, 1111 );
 
 		// entity 2, revision 21
-		$entity1 = Item::newEmpty();
-		$entity1->setId( new ItemId( 'q2' ) );
+		$entity1 = new Item( new ItemId( 'Q2' ) );
 		$entity1->setLabel( 'en', 'two' );
 		$repo->putEntity( $entity1, 21 );
 

@@ -128,9 +128,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newItemWithId( $idString ) {
-		$item = Item::newEmpty();
-		$item->setId( new Itemid( $idString ) );
-		return $item;
+		return new Item( new Itemid( $idString ) );
 	}
 
 	/**

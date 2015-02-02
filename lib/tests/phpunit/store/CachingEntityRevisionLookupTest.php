@@ -48,8 +48,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$mock = new MockRepository();
 
 		$id = new ItemId( 'Q123' );
-		$item = Item::newEmpty();
-		$item->setId( $id );
+		$item = new Item( $id );
 
 		$mock->putEntity( $item, 11 );
 
@@ -84,8 +83,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$mock = new MockRepository();
 
 		$id = new ItemId( 'Q123' );
-		$item = Item::newEmpty();
-		$item->setId( $id );
+		$item = new Item( $id );
 
 		$mock->putEntity( $item, 11 );
 
@@ -120,8 +118,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$mock = new MockRepository();
 
 		$id = new ItemId( 'Q123' );
-		$item = Item::newEmpty();
-		$item->setId( $id );
+		$item = new Item( $id );
 
 		$mock->putEntity( $item, 11 );
 
@@ -149,8 +146,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$mock = new MockRepository();
 
 		$id = new ItemId( 'Q123' );
-		$item = Item::newEmpty();
-		$item->setId( $id );
+		$item = new Item( $id );
 
 		$mock->putEntity( $item, 11 );
 
@@ -181,8 +177,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$mock = new MockRepository();
 
 		$id = new ItemId( 'Q123' );
-		$item = Item::newEmpty();
-		$item->setId( $id );
+		$item = new Item( $id );
 
 		$mock->putEntity( $item, 11 );
 
