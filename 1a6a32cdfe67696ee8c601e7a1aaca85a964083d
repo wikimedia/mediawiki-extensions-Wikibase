@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_292ae7d7",
+        "filename": "repo/tests/phpunit/includes/store/sql/TermSearchKeyBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-02T22:32:52Z",
+      "side": 1,
+      "message": "missing use for ItemId",
+      "revId": "1a6a32cdfe67696ee8c601e7a1aaca85a964083d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
