@@ -8,7 +8,6 @@ use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use LogicException;
 use MWException;
-use Site;
 use SiteList;
 use Title;
 use UsageException;
@@ -23,6 +22,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -31,7 +31,8 @@ use Wikibase\Summary;
 use Wikibase\Utils;
 
 /**
- * Derived class for API modules modifying a single entity identified by id xor a combination of site and page title.
+ * Derived class for API modules modifying a single entity identified by id xor a combination of
+ * site and page title.
  *
  * @since 0.1
  *
@@ -50,11 +51,6 @@ class EditEntity extends ModifyEntity {
 	private $validLanguageCodes;
 
 	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityRevisionLookup;
-
-	/**
 	 * @var FingerprintChangeOpFactory
 	 */
 	private $termChangeOpFactory;
@@ -70,11 +66,11 @@ class EditEntity extends ModifyEntity {
 	private $siteLinkChangeOpFactory;
 
 	/**
+	 * @see ModifyEntity::__construct
+	 *
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
-	 *
-	 * @see ApiBase::__construct
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
@@ -100,7 +96,8 @@ class EditEntity extends ModifyEntity {
 
 		if ( !$this->entityExists( $entity ) ) {
 			$permissions[] = 'createpage';
-			if ( $entity->getType() === 'property'  ) {
+
+			if ( $entity instanceof Property ) {
 				$permissions[] = 'property-create';
 			}
 		}
@@ -109,13 +106,13 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
+	 * @see ModifyEntity::createEntity
+	 *
 	 * @param array $params
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
 	 * @return Entity
-	 *
-	 * @see ModifyEntity::createEntity
 	 */
 	protected function createEntity( array $params ) {
 		$type = $params['new'];
@@ -124,7 +121,7 @@ class EditEntity extends ModifyEntity {
 
 		try {
 			return $entityFactory->newEmpty( $type );
-		} catch ( InvalidArgumentException $e ) {
+		} catch ( InvalidArgumentException $ex ) {
 			$this->dieError( "No such entity type: '$type'", 'no-such-entity-type' );
 		}
 
@@ -141,7 +138,7 @@ class EditEntity extends ModifyEntity {
 		$hasSiteLinkPart = isset( $params['site'] ) || isset( $params['title'] );
 
 		if ( !( $hasId XOR $hasSiteLink XOR $hasNew ) ) {
-			$this->dieError( 'Either provide the item "id" or pairs of "site" and "title" or a "new" type for an entity' , 'param-missing' );
+			$this->dieError( 'Either provide the item "id" or pairs of "site" and "title" or a "new" type for an entity', 'param-missing' );
 		}
 		if ( $hasId && $hasSiteLink ) {
 			$this->dieError( "Parameter 'id' and 'site', 'title' combination are not allowed to be both set in the same request", 'param-illegal' );
@@ -165,13 +162,13 @@ class EditEntity extends ModifyEntity {
 		$exists = $this->entityExists( $entity );
 
 		if ( $params['clear'] ) {
-			if( $params['baserevid'] && $exists ) {
+			if ( $params['baserevid'] && $exists ) {
 				$latestRevision = $revisionLookup->getLatestRevisionId(
 					$entity->getId(),
 					EntityRevisionLookup::LATEST_FROM_MASTER
 				);
 
-				if( !$baseRevId === $latestRevision ) {
+				if ( !$baseRevId === $latestRevision ) {
 					wfProfileOut( __METHOD__ );
 					$this->dieError(
 						'Tried to clear entity using baserevid of entity not equal to current revision',
@@ -183,7 +180,7 @@ class EditEntity extends ModifyEntity {
 		}
 
 		// if we create a new property, make sure we set the datatype
-		if( !$exists && $entity instanceof Property ){
+		if ( !$exists && $entity instanceof Property ) {
 			if ( !isset( $data['datatype'] ) ) {
 				wfProfileOut( __METHOD__ );
 				$this->dieError( 'No datatype given', 'param-illegal' );
@@ -205,9 +202,10 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @param array $params
+	 *
 	 * @return Summary
 	 */
-	private function getSummary( $params ) {
+	private function getSummary( array $params ) {
 		//TODO: Construct a nice and meaningful summary from the changes that get applied!
 		//      Perhaps that could be based on the resulting diff?]
 		$summary = $this->createSummary( $params );
@@ -221,11 +219,11 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @param array $data
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return ChangeOps
 	 */
-	private function getChangeOps( array $data, Entity $entity ) {
+	private function getChangeOps( array $data, EntityDocument $entity ) {
 		$changeOps = new ChangeOps();
 
 		//FIXME: Use a ChangeOpBuilder so we can batch fingerprint ops etc,
@@ -251,7 +249,7 @@ class EditEntity extends ModifyEntity {
 			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $entity ) );
 		}
 
-		if( array_key_exists( 'claims', $data ) ) {
+		if ( array_key_exists( 'claims', $data ) ) {
 			$changeOps->add(
 				$this->getClaimsChangeOps( $data['claims'] )
 			);
@@ -261,10 +259,11 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $labels
+	 * @param array[] $labels
+	 *
 	 * @return ChangeOp[]
 	 */
-	private function getLabelChangeOps( $labels  ) {
+	private function getLabelChangeOps( $labels ) {
 		$labelChangeOps = array();
 
 		if ( !is_array( $labels ) ) {
@@ -290,7 +289,8 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $descriptions
+	 * @param array[] $descriptions
+	 *
 	 * @return ChangeOp[]
 	 */
 	private function getDescriptionChangeOps( $descriptions ) {
@@ -319,7 +319,8 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $aliases
+	 * @param array[] $aliases
+	 *
 	 * @return ChangeOp[]
 	 */
 	private function getAliasesChangeOps( $aliases ) {
@@ -334,17 +335,18 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $aliases
-	 * @return array
+	 * @param array[] $aliases
+	 *
+	 * @return array[]
 	 */
 	private function getIndexedAliases( array $aliases ) {
 		$indexedAliases = array();
 
 		foreach ( $aliases as $langCode => $arg ) {
 			if ( intval( $langCode ) ) {
-				$indexedAliases[] = ( array_values($arg) === $arg ) ? $arg : array( $arg );
+				$indexedAliases[] = ( array_values( $arg ) === $arg ) ? $arg : array( $arg );
 			} else {
-				$indexedAliases[$langCode] = ( array_values($arg) === $arg ) ? $arg : array( $arg );
+				$indexedAliases[$langCode] = ( array_values( $arg ) === $arg ) ? $arg : array( $arg );
 			}
 		}
 
@@ -352,7 +354,8 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $indexedAliases
+	 * @param array[] $indexedAliases
+	 *
 	 * @return ChangeOp[]
 	 */
 	private function getIndexedAliasesChangeOps( array $indexedAliases ) {
@@ -385,7 +388,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $siteLinks
+	 * @param array[] $siteLinks
 	 * @param Item $item
 	 *
 	 * @return ChangeOp[]
@@ -403,16 +406,14 @@ class EditEntity extends ModifyEntity {
 			$this->checkSiteLinks( $arg, $siteId, $sites );
 			$globalSiteId = $arg['site'];
 
+			if ( !$sites->hasSite( $globalSiteId ) ) {
+				$this->dieError( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
+			}
+
+			$linkSite = $sites->getSite( $globalSiteId );
 			$shouldRemove = array_key_exists( 'remove', $arg )
 				|| ( !isset( $arg['title'] ) && !isset( $arg['badges'] ) )
 				|| ( isset( $arg['title'] ) && $arg['title'] === '' );
-
-			if ( $sites->hasSite( $globalSiteId ) ) {
-				$linkSite = $sites->getSite( $globalSiteId );
-			} else {
-				$this->dieError( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
-			}
-			/** @var Site $linkSite */
 
 			if ( $shouldRemove ) {
 				$siteLinksChangeOps[] = $this->siteLinkChangeOpFactory->newRemoveSiteLinkOp( $globalSiteId );
@@ -434,7 +435,7 @@ class EditEntity extends ModifyEntity {
 				} else {
 					$linkPage = null;
 
-					if ( !$item->hasLinkToSite( $globalSiteId ) ) {
+					if ( !$item->getSiteLinkList()->hasLinkWithSiteId( $globalSiteId ) ) {
 						$this->dieMessage( 'no-such-sitelink', $globalSiteId );
 					}
 				}
@@ -448,6 +449,7 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @param array $claims
+	 *
 	 * @return ChangeOp[]
 	 */
 	private function getClaimsChangeOps( $claims ) {
@@ -457,8 +459,8 @@ class EditEntity extends ModifyEntity {
 		$changeOps = array();
 
 		//check if the array is associative or in arrays by property
-		if( array_keys( $claims ) !== range( 0, count( $claims ) - 1 ) ){
-			foreach( $claims as $subClaims ){
+		if ( array_keys( $claims ) !== range( 0, count( $claims ) - 1 ) ) {
+			foreach ( $claims as $subClaims ) {
 				$changeOps = array_merge( $changeOps,
 					$this->getRemoveClaimsChangeOps( $subClaims ),
 					$this->getModifyClaimsChangeOps( $subClaims ) );
@@ -477,14 +479,14 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getModifyClaimsChangeOps( $claims ){
+	private function getModifyClaimsChangeOps( array $claims ) {
 		$opsToReturn = array();
 
 		$serializerFactory = new SerializerFactory();
 		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Claim\Claim' );
 
 		foreach ( $claims as $claimArray ) {
-			if( !array_key_exists( 'remove', $claimArray ) ){
+			if ( !array_key_exists( 'remove', $claimArray ) ) {
 				try {
 					$claim = $unserializer->newFromSerialization( $claimArray );
 
@@ -510,11 +512,11 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getRemoveClaimsChangeOps( $claims ) {
+	private function getRemoveClaimsChangeOps( array $claims ) {
 		$opsToReturn = array();
 		foreach ( $claims as $claimArray ) {
-			if( array_key_exists( 'remove', $claimArray ) ){
-				if( array_key_exists( 'id', $claimArray ) ){
+			if ( array_key_exists( 'remove', $claimArray ) ) {
+				if ( array_key_exists( 'id', $claimArray ) ) {
 					$opsToReturn[] = $this->claimChangeOpFactory->newRemoveClaimOp( $claimArray['id'] );
 				} else {
 					$this->dieError( 'Cannot remove a claim with no GUID', 'invalid-claim' );
@@ -528,21 +530,27 @@ class EditEntity extends ModifyEntity {
 	 * @param Entity $entity
 	 */
 	private function buildResult( Entity $entity ) {
-		$this->getResultBuilder()->addLabels( $entity->getLabels(), 'entity' );
-		$this->getResultBuilder()->addDescriptions( $entity->getDescriptions(), 'entity' );
-		$this->getResultBuilder()->addAliases( $entity->getAllAliases(), 'entity' );
+		$builder = $this->getResultBuilder();
 
-		if ( $entity instanceof Item ) {
-			$this->getResultBuilder()->addSiteLinks( $entity->getSiteLinks(), 'entity' );
+		if ( $entity instanceof FingerprintProvider ) {
+			$fingerprint = $entity->getFingerprint();
+
+			$builder->addLabels( $fingerprint->getLabels()->toTextArray(), 'entity' );
+			$builder->addDescriptions( $fingerprint->getDescriptions()->toTextArray(), 'entity' );
+			$builder->addAliases( $fingerprint->getAliasGroups()->toTextArray(), 'entity' );
 		}
 
-		$this->getResultBuilder()->addClaims( $entity->getClaims(), 'entity' );
+		if ( $entity instanceof Item ) {
+			$builder->addSiteLinks( $entity->getSiteLinks(), 'entity' );
+		}
+
+		$builder->addClaims( $entity->getClaims(), 'entity' );
 	}
 
 	/**
 	 * @param array $params
 	 */
-	private function validateDataParameter( $params ) {
+	private function validateDataParameter( array $params ) {
 		if ( !isset( $params['data'] ) ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieError( 'No data to operate upon', 'no-data' );
@@ -552,9 +560,9 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @param mixed $data
 	 * @param EntityDocument $entity
-	 * @param int $revId
+	 * @param int $revisionId
 	 */
-	private function validateDataProperties( $data, EntityDocument $entity, $revId = 0 ) {
+	private function validateDataProperties( $data, EntityDocument $entity, $revisionId = 0 ) {
 		$entityId = $entity->getId();
 		$title = $entityId === null ? null : $this->getTitleLookup()->getTitleForId( $entityId );
 
@@ -585,17 +593,17 @@ class EditEntity extends ModifyEntity {
 		$this->checkPageIdProp( $data, $title );
 		$this->checkNamespaceProp( $data, $title );
 		$this->checkTitleProp( $data, $title );
-		$this->checkRevisionProp( $data, $revId );
+		$this->checkRevisionProp( $data, $revisionId );
 	}
 
 	/**
-	 * @param array $data
+	 * @param mixed $data
 	 * @param array $allowedProps
 	 */
 	private function checkValidJson( $data, array $allowedProps ) {
 		if ( is_null( $data ) ) {
 			$this->dieError( 'Invalid json: The supplied JSON structure could not be parsed or '
-				. 'recreated as a valid structure' , 'invalid-json' );
+				. 'recreated as a valid structure', 'invalid-json' );
 		}
 
 		// NOTE: json_decode will decode any JS literal or structure, not just objects!
@@ -618,9 +626,10 @@ class EditEntity extends ModifyEntity {
 	 * @param array $data
 	 * @param Title|null $title
 	 */
-	private function checkPageIdProp( $data, $title ) {
+	private function checkPageIdProp( array $data, Title $title = null ) {
 		if ( isset( $data['pageid'] )
-			&& ( is_object( $title ) ? $title->getArticleID() !== $data['pageid'] : true ) ) {
+			&& ( $title === null || $title->getArticleID() !== $data['pageid'] )
+		) {
 			$this->dieError(
 				'Illegal field used in call, "pageid", must either be correct or not given',
 				'param-illegal'
@@ -632,10 +641,11 @@ class EditEntity extends ModifyEntity {
 	 * @param array $data
 	 * @param Title|null $title
 	 */
-	private function checkNamespaceProp( $data, $title ) {
+	private function checkNamespaceProp( array $data, Title $title = null ) {
 		// not completely convinced that we can use title to get the namespace in this case
 		if ( isset( $data['ns'] )
-			&& ( is_object( $title ) ? $title->getNamespace() !== $data['ns'] : true ) ) {
+			&& ( $title === null || $title->getNamespace() !== $data['ns'] )
+		) {
 			$this->dieError(
 				'Illegal field used in call: "namespace", must either be correct or not given',
 				'param-illegal'
@@ -647,9 +657,10 @@ class EditEntity extends ModifyEntity {
 	 * @param array $data
 	 * @param Title|null $title
 	 */
-	private function checkTitleProp( $data, $title ) {
+	private function checkTitleProp( array $data, Title $title = null ) {
 		if ( isset( $data['title'] )
-			&& ( is_object( $title ) ? $title->getPrefixedText() !== $data['title'] : true ) ) {
+			&& ( $title === null || $title->getPrefixedText() !== $data['title'] )
+		) {
 			$this->dieError(
 				'Illegal field used in call: "title", must either be correct or not given',
 				'param-illegal'
@@ -661,9 +672,10 @@ class EditEntity extends ModifyEntity {
 	 * @param array $data
 	 * @param int|null $revisionId
 	 */
-	private function checkRevisionProp( $data, $revisionId ) {
+	private function checkRevisionProp( array $data, $revisionId ) {
 		if ( isset( $data['lastrevid'] )
-			&& ( is_int( $revisionId ) ? $revisionId !== $data['lastrevid'] : true ) ) {
+			&& ( !is_int( $revisionId ) || $revisionId !== $data['lastrevid'] )
+		) {
 			$this->dieError(
 				'Illegal field used in call: "lastrevid", must either be correct or not given',
 				'param-illegal'
@@ -671,7 +683,11 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	private function checkEntityId( $data, EntityId $entityId = null ) {
+	/**
+	 * @param array $data
+	 * @param EntityId|null $entityId
+	 */
+	private function checkEntityId( array $data, EntityId $entityId = null ) {
 		if ( isset( $data['id'] ) ) {
 			if ( !$entityId ) {
 				$this->dieError(
@@ -681,7 +697,7 @@ class EditEntity extends ModifyEntity {
 			}
 
 			$dataId = $this->getIdParser()->parse( $data['id'] );
-			if( !$entityId->equals( $dataId ) ) {
+			if ( !$entityId->equals( $dataId ) ) {
 				$this->dieError(
 					'Invalid field used in call: "id", must match id parameter',
 					'param-invalid'
@@ -690,9 +706,14 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	private function checkEntityType( $data, EntityDocument $entity ) {
+	/**
+	 * @param array $data
+	 * @param EntityDocument $entity
+	 */
+	private function checkEntityType( array $data, EntityDocument $entity ) {
 		if ( isset( $data['type'] )
-			&& $entity->getType() !== $data['type'] ) {
+			&& $entity->getType() !== $data['type']
+		) {
 			$this->dieError(
 				'Invalid field used in call: "type", must match type associated with id',
 				'param-invalid'
@@ -722,9 +743,9 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiBase:getExamplesMessages()
+	 * @see ApiBase:getExamplesMessages
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	protected function getExamplesMessages() {
 		return array(
@@ -756,13 +777,14 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * Check some of the supplied data for multilang arg
+	 *
 	 * @param array $arg The argument array to verify
 	 * @param string $langCode The language code used in the value part
 	 */
 	private function validateMultilangArgs( $arg, $langCode ) {
 		if ( !is_array( $arg ) ) {
 			$this->dieError(
-				"An array was expected, but not found in the json for the langCode {$langCode}" ,
+				"An array was expected, but not found in the json for the langCode {$langCode}",
 				'not-recognized-array' );
 		}
 
@@ -774,7 +796,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( !is_string( $arg['language'] ) ) {
 			$this->dieError(
-				"A string was expected, but not found in the json for the langCode {$langCode} and argument 'language'" ,
+				"A string was expected, but not found in the json for the langCode {$langCode} and argument 'language'",
 				'not-recognized-string' );
 		}
 		if ( !is_numeric( $langCode ) ) {
@@ -791,7 +813,7 @@ class EditEntity extends ModifyEntity {
 		}
 		if ( !array_key_exists( 'remove', $arg ) && !is_string( $arg['value'] ) ) {
 			$this->dieError(
-				"A string was expected, but not found in the json for the langCode {$langCode} and argument 'value'" ,
+				"A string was expected, but not found in the json for the langCode {$langCode} and argument 'value'",
 				'not-recognized-string' );
 		}
 	}
@@ -805,10 +827,10 @@ class EditEntity extends ModifyEntity {
 	 */
 	private function checkSiteLinks( $arg, $siteCode, SiteList &$sites = null ) {
 		if ( !is_array( $arg ) ) {
-			$this->dieError( 'An array was expected, but not found' , 'not-recognized-array' );
+			$this->dieError( 'An array was expected, but not found', 'not-recognized-array' );
 		}
 		if ( !is_string( $arg['site'] ) ) {
-			$this->dieError( 'A string was expected, but not found' , 'not-recognized-string' );
+			$this->dieError( 'A string was expected, but not found', 'not-recognized-string' );
 		}
 		if ( !is_numeric( $siteCode ) ) {
 			if ( $siteCode !== $arg['site'] ) {
@@ -819,15 +841,15 @@ class EditEntity extends ModifyEntity {
 			$this->dieError( "unknown site: {$arg['site']}", 'not-recognized-site' );
 		}
 		if ( isset( $arg['title'] ) && !is_string( $arg['title'] ) ) {
-			$this->dieError( 'A string was expected, but not found' , 'not-recognized-string' );
+			$this->dieError( 'A string was expected, but not found', 'not-recognized-string' );
 		}
 		if ( isset( $arg['badges'] ) ) {
 			if ( !is_array( $arg['badges'] ) ) {
-				$this->dieError( 'Badges: an array was expected, but not found' , 'not-recognized-array' );
+				$this->dieError( 'Badges: an array was expected, but not found', 'not-recognized-array' );
 			} else {
 				foreach ( $arg['badges'] as $badge ) {
 					if ( !is_string( $badge ) ) {
-						$this->dieError( 'Badges: a string was expected, but not found' , 'not-recognized-string' );
+						$this->dieError( 'Badges: a string was expected, but not found', 'not-recognized-string' );
 					}
 				}
 			}
