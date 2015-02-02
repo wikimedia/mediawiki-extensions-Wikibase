@@ -97,24 +97,6 @@ class UsageUpdater {
 	}
 
 	/**
-	 * Re-indexes the given list of EntityUsages so that each EntityUsage can be found by using its
-	 * string representation as a key.
-	 *
-	 * @param EntityUsage[] $usages
-	 * @return EntityUsage[]
-	 */
-	private function reindexEntityUsages( array $usages ) {
-		$reindexed = array();
-
-		foreach ( $usages as $usage ) {
-			$key = $usage->getIdentityString();
-			$reindexed[$key] = $usage;
-		}
-
-		return $reindexed;
-	}
-
-	/**
 	 * @param EntityUsage[] $entityUsages
 	 *
 	 * @return EntityId[]
