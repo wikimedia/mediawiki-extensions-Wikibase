@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c879f22b",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-02T18:16:53Z",
+      "side": 1,
+      "message": "Eeek, please no calls in array keys. It\u0027S hard to read, and sucks for line-by-line debugging.",
+      "revId": "e759ec41197f5af8ea8c6505a8061a12dc8804fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c8a81277",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-02T18:16:53Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure there was a reason for the third param... Maybe it was lost again during refactoring?...",
+      "revId": "e759ec41197f5af8ea8c6505a8061a12dc8804fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e8eaae9b",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-02T18:16:53Z",
+      "side": 1,
+      "message": "\"symbolic\" is relevant here, it may not be the *actual* database name. In a wiki farm, it would refer to a key in the LBMulti setup.",
+      "revId": "e759ec41197f5af8ea8c6505a8061a12dc8804fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
