@@ -1,4 +1,4 @@
-( function( wb, util, dv, $ ) {
+( function( wb, util, dv ) {
 	'use strict';
 
 var MODULE = wb.serialization,
@@ -45,4 +45,4 @@ MODULE.SnakDeserializer = util.inherit( 'WbSnakDeserializer', PARENT, {
 	}
 } );
 
-}( wikibase, util, dataValues, jQuery ) );
+}( wikibase, util, dataValues ) );
