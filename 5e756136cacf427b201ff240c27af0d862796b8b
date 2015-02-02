@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_f7f3739a",
+        "filename": "repo/includes/specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-02T09:02:30Z",
+      "side": 1,
+      "message": "You are right, I\u0027m changing semantics here. The old implementation crashed when calling ...-\u003egetSiteLinkList() on a non-Item. Will add an exception.",
+      "parentUuid": "6e7c4fa4_cff4a153",
+      "revId": "5e756136cacf427b201ff240c27af0d862796b8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_6f91cdfa",
         "filename": "repo/includes/specials/SpecialNewProperty.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-31T13:01:16Z",
       "side": 1,
       "message": "Same as the NewItem page: Rather throw an exception?",
+      "revId": "5e756136cacf427b201ff240c27af0d862796b8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_17f14f92",
+        "filename": "repo/includes/specials/SpecialNewProperty.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-02T09:02:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_6f91cdfa",
       "revId": "5e756136cacf427b201ff240c27af0d862796b8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
