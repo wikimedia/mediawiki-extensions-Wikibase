@@ -7,6 +7,9 @@ use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 
@@ -49,42 +52,44 @@ class LegacyItemDeserializer implements Deserializer {
 		}
 
 		$this->serialization = $serialization;
-		$this->item = Item::newEmpty();
-
-		$this->setId();
-		$this->addSiteLinks();
-		$this->addStatements();
-		$this->addFingerprint();
+		$this->item = new Item(
+			$this->getItemId(),
+			$this->getFingerprint(),
+			$this->getSiteLinkList(),
+			$this->getStatementList()
+		);
 
 		return $this->item;
 	}
 
-	private function setId() {
+	/**
+	 * @return ItemId|null
+	 */
+	private function getItemId() {
 		if ( array_key_exists( 'entity', $this->serialization ) ) {
-			$this->item->setId( $this->idDeserializer->deserialize( $this->serialization['entity'] ) );
+			return $this->idDeserializer->deserialize( $this->serialization['entity'] );
 		}
+
+		return null;
 	}
 
-	private function addSiteLinks() {
-		foreach ( $this->getSiteLinks() as $siteLink ) {
-			$this->item->addSiteLink( $siteLink );
-		}
-	}
-
-	private function getSiteLinks() {
+	/**
+	 * @return SiteLinkList|null
+	 */
+	private function getSiteLinkList() {
 		if ( array_key_exists( 'links', $this->serialization ) ) {
 			return $this->siteLinkListDeserializer->deserialize( $this->serialization['links'] );
 		}
 
-		return array();
+		return null;
 	}
 
-	private function addStatements() {
+	/**
+	 * @return StatementList
+	 */
+	private function getStatementList() {
 		$this->normalizeLegacyClaimKeys();
-		$this->item->setStatements( $this->buildStatementList() );
-	}
 
-	private function buildStatementList() {
 		$statementList = new StatementList();
 
 		foreach ( $this->getArrayFromKey( 'claims' ) as $claimSerialization ) {
@@ -95,6 +100,11 @@ class LegacyItemDeserializer implements Deserializer {
 		return $statementList;
 	}
 
+	/**
+	 * @param array $claimSerialization
+	 *
+	 * @return Statement
+	 */
 	private function getStatement( array $claimSerialization ) {
 		$statementSerialization = $this->normalizeStatementSerialization( $claimSerialization );
 
@@ -116,7 +126,7 @@ class LegacyItemDeserializer implements Deserializer {
 		}
 	}
 
-	private function normalizeStatementSerialization( $claimSerialization ) {
+	private function normalizeStatementSerialization( array $claimSerialization ) {
 		$statementSerialization = $this->normalizeStatementRankKey( $claimSerialization );
 		$statementSerialization = $this->normalizeReferencesKey( $statementSerialization );
 
@@ -157,10 +167,6 @@ class LegacyItemDeserializer implements Deserializer {
 				'The ' . $key . ' key should point to an array'
 			);
 		}
-	}
-
-	private function addFingerprint() {
-		$this->item->setFingerprint( $this->getFingerprint() );
 	}
 
 	/**
