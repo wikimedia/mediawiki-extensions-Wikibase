@@ -13,7 +13,7 @@ use Wikibase\Client\Usage\UsageTrackerException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * SubascriptionManager implementation backed by an SQL table.
+ * SubscriptionManager implementation backed by an SQL table.
  *
  * @see docs/usagetracking.wiki
  *
