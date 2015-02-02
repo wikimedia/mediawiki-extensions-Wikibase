@@ -61,7 +61,7 @@ class ItemSerializerTest extends SerializerBaseTest {
 	public function serializableProvider() {
 		return array(
 			array(
-				Item::newEmpty()
+				new Item()
 			),
 		);
 	}
@@ -75,7 +75,7 @@ class ItemSerializerTest extends SerializerBaseTest {
 				array()
 			),
 			array(
-				Property::newEmpty()
+				Property::newFromType( '' )
 			),
 		);
 	}
@@ -91,11 +91,11 @@ class ItemSerializerTest extends SerializerBaseTest {
 					'sitelinks' => array(),
 					'claims' => array(),
 				),
-				Item::newEmpty()
+				new Item()
 			),
 		);
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
 		$provider[] = array(
 			array(
@@ -120,7 +120,7 @@ class ItemSerializerTest extends SerializerBaseTest {
 			$entity
 		);
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
 		$provider[] = array(
 			array(
@@ -164,7 +164,7 @@ class ItemSerializerTest extends SerializerBaseTest {
 
 		$serializer = new ItemSerializer( $fingerprintSerializer, $claimsSerializerMock, $siteLinkSerializerMock, true );
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
 
 		$sitelinks = new stdClass();

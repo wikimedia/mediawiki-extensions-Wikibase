@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Term\AliasGroupFallback;
 use Wikibase\DataModel\Term\TermFallback;
@@ -41,7 +40,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 	public function serializableProvider() {
 		return array(
 			array(
-				Item::newEmpty()
+				new Item()
 			),
 		);
 	}
@@ -72,11 +71,10 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 				'claims' => array(),
 				'sitelinks' => array(),
 			),
-			Item::newEmpty()
+			new Item()
 		);
 
-		$entity = Item::newEmpty();
-		$entity->setId( new ItemId( 'Q42' ) );
+		$entity = new Item( new ItemId( 'Q42' ) );
 		$argumentLists['id on item'] = array(
 			array(
 				'type' => 'item',
@@ -90,7 +88,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 			$entity
 		);
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->setLabels( array(
 			'en' => 'Nyan Cat',
 			'fr' => 'Nyan Cat'
@@ -116,7 +114,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 			$entity
 		);
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->getFingerprint()->getLabels()->setTerm(
 			new TermFallback( 'de-formal', 'Nyan Cat', 'de', null )
 		);
@@ -138,7 +136,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 			$entity
 		);
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->getFingerprint()->getLabels()->setTerm(
 			new TermFallback( 'zh-cn', 'Nyan Cat', 'zh-cn', 'zh-tw' )
 		);
@@ -160,7 +158,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 			$entity
 		);
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->setDescriptions( array(
 			'en' => 'A Nyan Cat',
 			'fr' => 'A Nyan Cat'
@@ -186,7 +184,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 			$entity
 		);
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->getFingerprint()->getDescriptions()->setTerm(
 			new TermFallback( 'de-formal', 'A Nyan Cat', 'de', null )
 		);
@@ -208,7 +206,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 			$entity
 		);
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->getFingerprint()->getDescriptions()->setTerm(
 			new TermFallback( 'zh-cn', 'A Nyan Cat', 'zh-cn', 'zh-tw' )
 		);
@@ -230,7 +228,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 			$entity
 		);
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->setAliases( 'en', array( 'Cat', 'My cat' ) );
 		$entity->setAliases( 'fr', array( 'Cat' ) );
 		$argumentLists['aliases on item'] = array(
@@ -262,7 +260,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 			$entity
 		);
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->getFingerprint()->getAliasGroups()->setGroup(
 			new AliasGroupFallback( 'de-formal', array( 'Cat' ), 'de', null )
 		);
@@ -286,7 +284,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 			$entity
 		);
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->getFingerprint()->getAliasGroups()->setGroup(
 			new AliasGroupFallback( 'zh-cn', array( 'Cat' ), 'zh-cn', 'zh-tw' )
 		);
@@ -316,7 +314,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 	public function testDescriptionWithOptionObjectsForMaps() {
 		$entitySerializer = new FingerprintSerializer( true );
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->setDescriptions( array(
 			'en' => 'A Nyan Cat',
 		) );
@@ -336,7 +334,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 	public function testAliasesWithOptionObjectsForMaps() {
 		$entitySerializer = new FingerprintSerializer( true );
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->setAliases( 'fr', array( 'Cat' ) );
 
 		$result = array();

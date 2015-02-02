@@ -34,7 +34,7 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewEntitySerializer() {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newEntitySerializer(),
-			Item::newEmpty()
+			new Item()
 		);
 
 		$this->assertSerializesWithoutException(

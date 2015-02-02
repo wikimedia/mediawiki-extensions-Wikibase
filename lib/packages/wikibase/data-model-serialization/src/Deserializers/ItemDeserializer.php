@@ -35,7 +35,7 @@ class ItemDeserializer extends EntityDeserializer {
 	}
 
 	protected function getPartiallyDeserialized( array $serialization ) {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$this->setSiteLinksFromSerialization( $item->getSiteLinkList(), $serialization );
 
