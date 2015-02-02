@@ -63,6 +63,7 @@ class LegacyStatementDeserializer implements Deserializer {
 	}
 
 	private function newStatement() {
+		/** @var Claim $claim */
 		$claim = $this->claimDeserializer->deserialize( $this->serialization );
 
 		$statement = $this->newStatementFromClaim( $claim );
