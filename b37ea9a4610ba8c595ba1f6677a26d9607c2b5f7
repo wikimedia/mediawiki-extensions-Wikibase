@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_08712a0b",
+        "filename": "client/includes/UpdateRepo/UpdateRepo.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-02T18:28:17Z",
+      "side": 1,
+      "message": "I see +1, not +2",
+      "revId": "b37ea9a4610ba8c595ba1f6677a26d9607c2b5f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
