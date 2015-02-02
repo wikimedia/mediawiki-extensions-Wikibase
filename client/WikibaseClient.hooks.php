@@ -76,18 +76,9 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function registerUnitTests( array &$files ) {
+	public static function registerUnitTests( array &$paths ) {
 		// @codeCoverageIgnoreStart
-		$directoryIterator = new RecursiveDirectoryIterator( __DIR__ . '/tests/phpunit/' );
-
-		/**
-		 * @var SplFileInfo $fileInfo
-		 */
-		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
-			if ( substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
-				$files[] = $fileInfo->getPathname();
-			}
-		}
+		$paths[] = __DIR__ . '/tests/phpunit/';
 
 		return true;
 		// @codeCoverageIgnoreEnd
