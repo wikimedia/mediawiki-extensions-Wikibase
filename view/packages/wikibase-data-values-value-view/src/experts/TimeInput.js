@@ -190,7 +190,7 @@
 	 * @ignore
 	 *
 	 * @param {string} calendarname
-	 * @return {time.Time}
+	 * @return {string}
 	 */
 	function calendarNameToUri( calendarname ) {
 		return new Time( { calendarname: calendarname, precision: 0, year: 0 } ).calendarURI();
