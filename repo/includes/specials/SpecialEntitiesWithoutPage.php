@@ -34,13 +34,6 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	private $type = null;
 
 	/**
-	 * Map entity types to objects representing the corresponding entity
-	 *
-	 * @var array
-	 */
-	private $possibleTypes;
-
-	/**
 	 * @var string
 	 */
 	private $termType;
@@ -114,11 +107,10 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		}
 
 		$this->type = $request->getText( 'type', $this->type );
-		$this->possibleTypes = $this->entityFactory->getEntityTypes();
 		if ( $this->type === '' ) {
 			$this->type = null;
 		}
-		if ( $this->type !== null && !in_array( $this->type, $this->possibleTypes ) ) {
+		if ( $this->type !== null && !$this->entityFactory->isEntityType( $this->type ) ) {
 			$this->showErrorHTML( $this->msg( 'wikibase-entitieswithoutlabel-invalid-type', $this->type )->parse() );
 			$this->type = null;
 		}
@@ -130,7 +122,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	private function setForm() {
 		$typeSelect = new XmlSelect( 'type', 'wb-entitieswithoutpage-type', $this->type );
 		$typeSelect->addOption( $this->msg( 'wikibase-entitieswithoutlabel-label-alltypes' )->text(), '' );
-		foreach( $this->possibleTypes as $type ) {
+		foreach ( $this->entityFactory->getEntityTypes() as $type ) {
 			// Messages: wikibase-entity-item, wikibase-entity-property, wikibase-entity-query
 			$typeSelect->addOption( $this->msg( 'wikibase-entity-' . $type )->text(), $type );
 		}
