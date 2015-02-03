@@ -84,17 +84,15 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 * @return bool
 	 */
 	private function calendarNameNeeded( TimeValue $value ) {
-		preg_match( '/^[+-](\d+)-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/',
-			$value->getTime(), $matches );
-		$year = intval( $matches[1] );
-		$calendar = $this->getCalendarKey( $value->getCalendarModel() );
+		preg_match( '/^[-+]\d+/', $value->getTime(), $matches );
+		$year = intval( $matches[0] );
 
 		// This is how the original JavaScript UI decided this:
 		// year <= 1581 && calendar === 'Gregorian' ||
 		// year > 1581 && year < 1930 ||
 		// year >= 1930 && calendar === 'Julian'
 		return $value->getPrecision() >= TimeValue::PRECISION_DAY && (
-			$year <= 1581 || $calendar !== 'gregorian'
+			$year <= 1581 || $value->getCalendarModel() !== TimeFormatter::CALENDAR_GREGORIAN
 		);
 	}
 
@@ -115,9 +113,10 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 */
 	private function getCalendarKey( $uri ) {
 		$calendars = array(
-		TimeFormatter::CALENDAR_GREGORIAN => 'gregorian',
+			TimeFormatter::CALENDAR_GREGORIAN => 'gregorian',
 			TimeFormatter::CALENDAR_JULIAN => 'julian',
 		);
+
 		return array_key_exists( $uri, $calendars ) ? $calendars[$uri] : '';
 	}
 
