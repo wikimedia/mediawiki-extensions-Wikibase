@@ -29,26 +29,21 @@ class ParseExceptionLocalizer implements ExceptionLocalizer {
 			throw new InvalidArgumentException( '$exception is not a ParseException' );
 		}
 
-		$baseKey = 'wikibase-parse-error';
-		$params = array();
 		$msg = null;
 
-		// Messages that can be used here:
-		// * wikibase-parse-error
-		// * wikibase-parse-error-coordinate
-		// * wikibase-parse-error-entity-id
-		// * wikibase-parse-error-quantity
-		// * wikibase-parse-error-time
+		/** @var ParseException $exception */
 		$expectedFormat = $exception->getExpectedFormat();
-		if( $expectedFormat !== null ) {
-			$msg = new Message( $baseKey . '-' . $expectedFormat, $params );
-			if( !$msg->exists() ) {
-				$msg = null;
-			}
+		if ( $expectedFormat !== null ) {
+			// Messages:
+			// wikibase-parse-error-coordinate
+			// wikibase-parse-error-entity-id
+			// wikibase-parse-error-quantity
+			// wikibase-parse-error-time
+			$msg = new Message( 'wikibase-parse-error-' . $expectedFormat );
 		}
 
-		if( $msg === null ) {
-			$msg = new Message( $baseKey, $params );
+		if ( !( $msg instanceof Message ) || !$msg->exists() ) {
+			$msg = new Message( 'wikibase-parse-error' );
 		}
 
 		return $msg;
@@ -64,4 +59,5 @@ class ParseExceptionLocalizer implements ExceptionLocalizer {
 	public function hasExceptionMessage( Exception $exception ) {
 		return $exception instanceof ParseException;
 	}
+
 }
