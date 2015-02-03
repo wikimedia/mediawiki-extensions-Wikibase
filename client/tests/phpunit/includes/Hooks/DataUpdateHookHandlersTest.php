@@ -9,6 +9,7 @@ use Wikibase\Client\Hooks\DataUpdateHookHandlers;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
@@ -42,11 +43,11 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param Title $title
-	 * @param array $expectedUsages
+	 * @param array[]|null $expectedUsages
 	 *
 	 * @return UsageUpdater
 	 */
-	private function newUsageUpdater( Title $title, array $expectedUsages  = null ) {
+	private function newUsageUpdater( Title $title, array $expectedUsages = null ) {
 		$usageUpdater = $this->getMockBuilder( 'Wikibase\Client\Store\UsageUpdater' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -64,9 +65,15 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		return $usageUpdater;
 	}
 
+	/**
+	 * @param array[] $expectedUsages
+	 *
+	 * @return EntityUsage[]
+	 */
 	private function makeEntityUsageList( array $expectedUsages ) {
 		$entityUsageList = array();
 
+		/** @var EntityId[] $entityIds */
 		foreach ( $expectedUsages as $aspect => $entityIds ) {
 			foreach ( $entityIds as $id ) {
 				$key = $id->getSerialization() . '#' . $aspect;
@@ -79,7 +86,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param Title $title
-	 * @param array $expectedUsages
+	 * @param array[]|null $expectedUsages
 	 * @param array $settings
 	 *
 	 * @return DataUpdateHookHandlers
@@ -99,7 +106,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param array $usages
+	 * @param array[]|null $usages
 	 *
 	 * @return ParserOutput
 	 */
@@ -137,7 +144,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param array $usages
+	 * @param array[]|null $usages
 	 *
 	 * @return Parser
 	 */
@@ -176,6 +183,8 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideDoArticleEditUpdates
+	 * @param Title $title
+	 * @param array[]|null $usage
 	 */
 	public function testDoArticleEditUpdates( Title $title, $usage ) {
 		$title->resetArticleID( 23 );

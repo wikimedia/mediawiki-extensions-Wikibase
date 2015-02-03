@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use Site;
 use SiteList;
 use Status;
 use Wikibase\DataModel\Entity\Item;
@@ -71,11 +72,13 @@ class LinkTitles extends ApiWikibase {
 		// Sites are already tested through allowed params ;)
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
+		/** @var Site $fromSite */
 		list( $fromSite, $fromPage ) = $this->getSiteAndNormalizedPageName(
 			$sites,
 			$params['fromsite'],
 			$params['fromtitle']
 		);
+		/** @var Site $toSite */
 		list( $toSite, $toPage ) = $this->getSiteAndNormalizedPageName(
 			$sites,
 			$params['tosite'],
@@ -153,6 +156,8 @@ class LinkTitles extends ApiWikibase {
 	 * @param SiteList $sites
 	 * @param string $site
 	 * @param string $pageTitle
+	 *
+	 * @return array( Site $site, string $pageName )
 	 */
 	private function getSiteAndNormalizedPageName( SiteList $sites, $site, $pageTitle ) {
 		$siteObj = $sites->getSite( $site );
