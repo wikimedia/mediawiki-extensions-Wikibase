@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\ItemChange;
-use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Test\TestChanges;
 
@@ -437,6 +436,8 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		);
 
 		$usages = $affectedPagesFinder->getAffectedUsagesByPage( $change );
+
+		$this->assertEmpty( $usages );
 	}
 
 	private function getSiteLinkUsageLookup( $pageTitle ) {
