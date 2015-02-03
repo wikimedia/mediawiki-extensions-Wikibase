@@ -66,12 +66,11 @@ class EntityViewFactory {
 	private $specialSiteLinkGroups;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $badgeItems;
 
 	/**
-	 *
 	 * @var TemplateFactory
 	 */
 	private $templateFactory;
@@ -83,6 +82,9 @@ class EntityViewFactory {
 	 * @param SiteStore $siteStore
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory
+	 * @param string[] $siteLinkGroups
+	 * @param string[] $specialSiteLinkGroups
+	 * @param string[] $badgeItems
 	 */
 	public function __construct(
 		EntityIdFormatterFactory $idFormatterFactory,
@@ -113,6 +115,8 @@ class EntityViewFactory {
 
 	/**
 	 * @param string $format
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	private function checkOutputFormat( $format ) {
 		if ( $format !== SnakFormatter::FORMAT_HTML

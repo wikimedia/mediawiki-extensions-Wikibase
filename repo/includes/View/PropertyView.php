@@ -36,6 +36,7 @@ class PropertyView extends EntityView {
 	 * @param TemplateFactory $templateFactory
 	 * @param FingerprintView $fingerprintView
 	 * @param StatementGroupListView $statementGroupListView
+	 * @param DataTypeFactory $dataTypeFactory
 	 * @param Language $language
 	 * @param bool $editable
 	 */

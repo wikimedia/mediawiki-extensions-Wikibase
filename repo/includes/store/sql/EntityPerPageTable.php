@@ -35,6 +35,7 @@ class EntityPerPageTable implements EntityPerPage {
 	private $useRedirectTargetColumn;
 
 	/**
+	 * @param EntityIdParser $entityIdParser
 	 * @param bool $useRedirectTargetColumn
 	 *
 	 * @throws InvalidArgumentException

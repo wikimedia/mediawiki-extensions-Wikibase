@@ -534,6 +534,8 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @param TermLookup $termLookup
+	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	public function getValueFormatterBuildersForTermLookup( TermLookup $termLookup ) {
