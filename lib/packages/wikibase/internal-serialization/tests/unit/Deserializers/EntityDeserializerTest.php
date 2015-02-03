@@ -4,6 +4,7 @@ namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
+use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\Deserializers\EntityDeserializer;
 
 /**
@@ -37,7 +38,13 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getStubCurrentDeserializer() {
-		$currentDeserializer = $this->getMock( 'Deserializers\Deserializer' );
+		$currentDeserializer = $this->getMock( 'Deserializers\DispatchableDeserializer' );
+
+		$currentDeserializer->expects( $this->any() )
+			->method( 'isDeserializerFor' )
+			->will( $this->returnCallback( function( $serialization ) {
+				return array_key_exists( 'id', $serialization );
+			} ) );
 
 		$currentDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
@@ -57,7 +64,7 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getThrowingDeserializer() {
-		$currentDeserializer = $this->getMock( 'Deserializers\Deserializer' );
+		$currentDeserializer = $this->getMock( 'Deserializers\DispatchableDeserializer' );
 
 		$currentDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
