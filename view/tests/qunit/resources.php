@@ -15,6 +15,15 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'wikibase.view.ViewFactory.tests' => $moduleBase + array(
+			'scripts' => array(
+				'ViewFactory.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.view.ViewFactory',
+			),
+		),
+
 	);
 
 	return $modules;

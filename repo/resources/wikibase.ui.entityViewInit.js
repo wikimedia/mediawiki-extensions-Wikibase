@@ -79,12 +79,12 @@
 
 	/**
 	 * Builds an entity store.
-	 * @todo Move to a top-level factory or application scope
 	 *
 	 * @param {wikibase.api.RepoApi} repoApi
+	 * @param {string} language The language code of the ui language
 	 * @return {wikibase.store.CombiningEntityStore}
 	 */
-	function buildEntityStore( repoApi ) {
+	function buildEntityStore( repoApi, language ) {
 		// Deserializer for fetched content whose content is a wb.datamodel.Entity:
 		var fetchedEntityDeserializer = new wb.store.FetchedContentUnserializer(
 				new wb.serialization.EntityDeserializer()
@@ -95,10 +95,9 @@
 			new wb.store.ApiEntityStore(
 				repoApi,
 				fetchedEntityDeserializer,
-				[ mw.config.get( 'wgUserLanguage' ) ]
+				[ language ]
 			)
 		] );
-
 	}
 
 	/**
@@ -111,55 +110,34 @@
 		var repoConfig = mw.config.get( 'wbRepo' );
 		var mwApi = wb.api.getLocationAgnosticMwApi( repoConfig.url + repoConfig.scriptPath + '/api.php' );
 		var repoApi = new wb.api.RepoApi( mwApi ),
-			entityStore = buildEntityStore( repoApi ),
+			userLanguages = getUserLanguages(),
+			entityStore = buildEntityStore( repoApi, userLanguages[0] ),
 			revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
 			entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
 				repoApi,
 				revisionStore,
 				entity
 			),
-			contentLanguages = new wikibase.WikibaseContentLanguages();
-
-		var view = entity.getType() + 'view';
-
-		if( !$.wikibase[view] ) {
-			throw new Error( 'View for entity type ' + entity.getType() + ' does not exist' );
-		}
-
-		$entityview[view]( {
-			value: entity,
-			languages: getUserLanguages(),
-			entityChangersFactory: entityChangersFactory,
-			entityStore: entityStore,
-			valueViewBuilder: new wb.ValueViewBuilder(
+			contentLanguages = new wikibase.WikibaseContentLanguages(),
+			viewFactory = new wikibase.view.ViewFactory(
+				contentLanguages,
+				dataTypeStore,
+				entityChangersFactory,
+				entityStore,
 				getExpertsStore( dataTypeStore ),
 				getFormatterStore( repoApi, dataTypeStore ),
-				getParserStore( repoApi ),
-				mw.config.get( 'wgUserLanguage' ),
 				{
 					getMessage: function( key, params ) {
 						return mw.msg.apply( mw, [ key ].concat( params ) );
 					}
 				},
-				contentLanguages
-			),
-			dataTypeStore: dataTypeStore
-		} )
-		.on( 'labelviewchange labelviewafterstopediting', function( event ) {
-			var $labelview = $( event.target ),
-				labelview = $labelview.data( 'labelview' ),
-				label = labelview.value().getText();
-
-			$( 'title' ).text(
-				mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
+				getParserStore( repoApi ),
+				userLanguages
 			);
-		} )
-		.on( view + 'afterstartediting', function() {
-			triggerAnonymousEditWarning( entity.getType() );
-		} )
-		.on( view + 'afterstopediting', function( event, dropValue ) {
-			updateWatchLink( dropValue );
-		} );
+
+		var entityView = viewFactory.getEntityView( entity, $entityview );
+
+		return entityView.widgetName;
 	}
 
 	/**

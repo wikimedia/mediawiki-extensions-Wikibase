@@ -148,8 +148,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'mediawiki.user',
 				'mw.config.values.wbRepo',
-				'jquery.wikibase.itemview',
-				'jquery.wikibase.propertyview',
 				'jquery.wikibase.toolbarcontroller',
 				'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementgrouplistview-statementgroupview',
 				'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementlistview-statementview',
@@ -183,7 +181,7 @@ return call_user_func( function() {
 				'wikibase.store.CombiningEntityStore',
 				'wikibase.store.FetchedContentUnserializer',
 				'wikibase.store.MwConfigEntityStore',
-				'wikibase.ValueViewBuilder',
+				'wikibase.view.ViewFactory',
 				'wikibase.WikibaseContentLanguages'
 			),
 			'messages' => array(
