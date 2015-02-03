@@ -93,7 +93,7 @@ class ParserOutputJsConfigBuilder {
 	 * able to pick which information is actually needed in which context. E.g. we are skipping the
 	 * actual revision ID here, and thereby avoiding any database access.
 	 *
-	 * @param array $entities A list of entity records from EntityInfoBuilder::getEntityInfo
+	 * @param array $entityInfoRecords A list of entity records from EntityInfoBuilder::getEntityInfo
 	 *
 	 * @return array A list of revision records
 	 */

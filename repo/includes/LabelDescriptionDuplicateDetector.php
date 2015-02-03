@@ -126,7 +126,7 @@ class LabelDescriptionDuplicateDetector {
 
 	/**
 	 * @param Term[] $terms
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 *
 	 * @return Term[]
 	 */
@@ -138,4 +138,5 @@ class LabelDescriptionDuplicateDetector {
 			}
 		);
 	}
+
 }

@@ -61,6 +61,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	 * @param ItemId $id
 	 * @param ItemId $target
 	 *
+	 * @throws RuntimeException
 	 * @return EntityContent
 	 */
 	protected function makeItemRedirectContent( ItemId $id, ItemId $target ) {

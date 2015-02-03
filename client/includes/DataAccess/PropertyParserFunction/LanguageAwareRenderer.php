@@ -54,6 +54,7 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 
 	/**
 	 * @param Language $language
+	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param SnakFormatter $snakFormatter
 	 * @param UsageAccumulator $usageAcc
