@@ -1,104 +1,104 @@
 # ValueView
 
-ValueView introduces the <code>jQuery.valueview</code> widget which may be used to display and edit data values (DataValue objects defined in the DataValues library and supported via the DataValuesJavaScript package). The valueview widget and its resources may be extended to support custom custom data value implementations.
+ValueView introduces the <code>jQuery.valueview</code> widget which may be used to display and edit data values (`DataValue` objects defined in the [DataValues](https://github.com/DataValues/DataValues) library and supported via the [DataValuesJavaScript](https://github.com/wmde/DataValuesJavascript) package). The `jQuery.valueview` widget and its resources may be extended to support custom `DataValue` implementations.
 
 ## Components
 
-### jQuery.valueview (jQuery.valueview.valueview)
+### jQuery.valueview
 
-<code>jQuery.valueview.valueview</code> may be used to display and edit data values. It can be instantiated via the widget's bridge <code>jQuery.valueview</code>.
+`jQuery.valueview` may be used to display and edit data values. While the widget's original constructor is located at `jQuery.valueview.valueview`, the widget should be instantiated via its bridge `jQuery.valueview`.
 
 ### jQuery.valueview.Expert
 
-Experts are widgets that deal with editing data values. An expert provides the functionality to edit a specific data value type or data values suitable for a certain data type. <code>jQuery.valueview.Expert</code> is the base constructor for such experts.
+`jQuery.valueview.Expert`s are widgets that deal with editing `DataValue`s. An `Expert` provides the functionality to edit a specific `DataValue` (e.g. `StringValue`) or a `DataValue` suitable for a certain `DataType` (e.g. the `url` `DataType` which uses the `StringValue` for representation; see also [DataTypes](https://github.com/wmde/DataTypes) library). `jQuery.valueview.Expert` is the base constructor for such `Expert`s.
+
+### jQuery.valueview.ExpertExtender
+
+`jQuery.valueview.ExpertExtender` may be used to provide additional information and/or input elements while interacting with the `Expert`. The `ExpertExtender` may, for example, be used to provide a preview of how the parsed value will be displayed after saving (see `jQuery.ExpertExtender.Preview`). Options provided by the `ValueParser` corresponding to the `DataValue` being edited may be set using `jQuery.valueview.ExpertExtender.*` input elements added to the `ExpertExtender` instance.
 
 ### jQuery.valueview.ExpertStore
 
-Experts are managed by <code>jQuery.valueview.ExpertStore</code> instance which provides its experts to <code>jQuery.valueview</code>.
+`Expert`s are managed by `jQuery.valueview.ExpertStore` instance which provides its `Expert`s to `jQuery.valueview`.
 
 ### jQuery.valueview.ViewState
 
-<code>jQuery.valueview.ViewState</code> links experts and <code>jQuery.valueview</code> in form of a facade that allows experts to observe certain aspects of <code>jQuery.valueview</code>.
+`jQuery.valueview.ViewState` acts as a *Facade* linking `Expert`s and `jQuery.valueview`. `ViewState` allows `Expert`s to observe certain aspects of `jQuery.valueview` and enables `Expert`s to update the linked `jQuery.valueview` instance.
 
 ## Usage
 
-The following assumes you also have ```data-values/data-types```,  ```data-values/data-values``` and ```data-values/javascript``` installed.
+For the usage examples, it is assumed the following packages are installed:
+* [DataValues](https://github.com/DataValues/DataValues)
+* [DataValuesJavaScript](https://github.com/wmde/DataValuesJavascript)
+* [DataTypes](https://github.com/wmde/DataTypes)
 
-When using <code>jQuery.valueview</code> for handling a data value of some sort, a <code>jQuery.valueview.ExpertStore</code> with knowledge about an expert dedicated to the used data value type is required and can be set up as follows:
+When using `jQuery.valueview` for handling a `DataValue`, a `jQuery.valueview.ExpertStore` with knowledge about an `Expert` dedicated to the `DataValue`'s type is required and can be set up as follows:
 
 ```javascript
-var dv = dataValues;
-var vv = jQuery.valueview;
-var dt = dataTypes;
-var experts = new vv.ExpertStore();
+var dv = dataValues,
+	vv = jQuery.valueview,
+	dt = dataTypes,
+	experts = new vv.ExpertStore();
 
 var stringValue = new dv.StringValue( 'foo' );
 
-// Consider this a data value using the "string" data value type internally:
+// Consider this a DataType using the StringValue DataValue internally:
 var urlDataType = new dt.DataType( 'url', dv.StringValue.TYPE );
 
 experts.registerDataValueExpert( vv.experts.StringValue, dv.StringValue.TYPE );
 
 console.log(
-  experts.getExpert( stringValue.getType() ) === experts.getExpert( urlDataType.getDataValueType(), urlDataType.getId() )
+	experts.getExpert( stringValue.getType() )
+		=== experts.getExpert( urlDataType.getDataValueType(), urlDataType.getId() )
 );
-// true because "url" data type's data value type is "string"; The string expert will be used as fallback.
+// true because "url" DataType's DataValue type is "string"; The "string" DataValue's Expert will be
+// used as fall-back.
+
 ```
 
-The <code>jQuery.valueview.ExpertStore</code> can now be injected into a new <code>jQuery.valueview</code> which will then be able to edit string data values.
+Now, the `jQuery.valueview.ExpertStore` can be injected into a new `jQuery.valueview` instance enabling it to edit "string" `DataValue`s.
 
 ```javascript
 var $subject = $( '<div/>' ).appendTo( $( 'body' ).empty() );
 
-// In addition to the expert factory, value parser and value formatter factories need to be provided. The feature the same mechanisms than the expert factory. For this example, we just initialize them with the string parser/formatter as default parser/formatter.
-var parsers = new valueParsers.ValueParserStore( valueParsers.StringParser );
-var formatters = new valueFormatters.ValueFormatterStore( valueFormatters.StringFormatter );
+// In addition to the Expert store, ValueParser and ValueFormatter stores need to be provided. These
+// feature the same mechanisms as the Expert store. For this example, we just initialize them with
+// the "string" Parser/Formatter as default Parser/Formatter.
+var parsers = new valueParsers.ValueParserStore( valueParsers.StringParser ),
+	formatters = new valueFormatters.ValueFormatterStore( valueFormatters.StringFormatter );
 
 $subject.valueview( {
   expertStore: experts,
   parserStore: parsers,
   formatterStore: formatters,
+  language: 'en', // language code transmitted to Parser and Formatter
   value: new dv.StringValue( 'text' )
 } );
 
 var valueView = $subject.data( 'valueview' );
 ```
 
-Having created a <code>jQuery.valueview</code> displaying *text*, <code>valueView.\<memberFn\></code>
-will now allow invoking member functions. For example:
-* Emptying the view: <code>valueView.value( null );</code>
-* Allowing the user to edit the value: <code>valueView.startEditing();</code>
-* Stopping the user from editing the value: <code>valueView.stopEditing();</code>
-* Returning the current value: <code>valueView.value();</code>
+Having created a `jQuery.valueview` displaying *text*, the widget's member functions may be used for interaction, for example:
+* Emptying the view: `valueView.value( null );`
+* Allowing the user to edit the value: `valueView.startEditing();`
+* Stopping the user from editing the value: `valueView.stopEditing();`
+* Returning the current value: `valueView.value();`
 
-Setting the view to a data value it cannot handle because of lacking a suitable expert will result in a proper error notification being displayed. Calling <code>.value()</code> will still return the value but the user can neither see nor edit the value.
-
-## Running as MediaWiki extension
-
-<code>mediaWiki.ext.valueView</code> may be used to initialize ValueView as MediaWiki extension. Loading <code>mediaWiki.ext.valueView</code> will initialize and fill a <code>jQuery.valueview.ExpertStore</code> which is issued to <code>jQuery.valueview</code> as default expert provider. Consequently, no custom experts for basic data values and data types need to be registered and <code>jQuery.valueview</code> may be used without passing a custom <code>jQuery.ExpertStore</code>.
+Setting a `jQuery.valueview` instance's value to a `DataValue` it cannot handle because no suitable `Expert` can be determined from the `ExpertStore` will result in an error notification being displayed. Calling `.value()` will still return the value but the user can neither see nor edit the value.
 
 ## Architecture
 
-ValueView depends heavily on formatters and parsers. Formatters are used for converting
-dataValues.DataValue instances to DOM elements, and parsers are used for converting
-plain strings to dataValues.DataValue instances.
-
-Experts are only used for editing values. They are constructed when starting edit mode,
-and destroyed after leaving edit mode. Experts have the following lifecycle:
-
-* `\_init()`: Load parsed, formatted and raw (text) values from the ValueView (via ViewState)
-	and initialize DOM
+`jQuery.valueview` heavily depends on `ValueFormatter`s and `ValueParser`s defined via the [DataValuesJavaScript](https://github.com/wmde/DataValuesJavascript) library. `ValueFormatter`s are used to convert `DataValue` instances to DOM elements, and `ValueParser`s are used to convert plain strings (which may be accompanied by some options) to `DataValue` instances.
+Since `Expert`s only are used for editing values, they are constructed when starting edit mode and destroyed after leaving edit mode. `Expert`s have the following lifecycle:
+* `_init()`: Load parsed, formatted and raw (text) values from the `jQuery.valueview` instance linked via `jQuery.valueview.ViewState` and initialize DOM.
 * Edit loop
 	* (User edits)
-	* Expert calls `viewNotifier.notify( 'change' )` and triggers parsing and formatting
-	* `rawValue()`: Return the current raw (text) value
-	* (optional) `preview.showSpinner()`: Replace preview with a spinner
-	* `draw()`: (Re-)draw non-editable parts of the expert using the (new) parsed and formatted value
-		from the ValueView (via ViewState)
-* `destroy()`: Destroy DOM
+	* `Expert` calls `viewNotifier.notify( 'change' )` and triggers parsing and formatting.
+	* `rawValue()`: Return the current raw (text) value.
+	* (optional) `preview.showSpinner()`: Replace preview with a loading spinner.
+	* `draw()`: (Re-)draw non-editable parts of the `Expert` using the (new) parsed and formatted value 		from the `jQuery.valueview` instance (via `jQuery.valueview.ViewState`)
+* `destroy()`: Destroy DOM.
 
-Other methods an Expert needs to provide:
-
+Other methods an `Expert` needs to provide:
 * `valueCharacteristics()`
 * `focus()`
 * `blur()`
