@@ -62,36 +62,39 @@ TEXT;
 		}
 	}
 
+	/**
+	 * @return array[]|bool The 'interwikimap' sub-array or false on failure.
+	 */
 	protected function fetchLinks() {
-		$params = array(
+		$url = wfArrayToCgi( array(
 			'action' => 'query',
 			'meta' => 'siteinfo',
 			'siprop' => 'interwikimap',
 			'sifilteriw' => 'local',
 			'format' => 'json'
-		);
+		) );
 
 		if ( !empty( $this->source ) ) {
-			try {
-				$baseUrl = rtrim( $this->source, '?' ) . '?';
-			} catch( Exception $e ) {
-				$this->error( "Error: Invalid api source" );
-			}
+			$url = rtrim( $this->source, '?' ) . '?' . $url;
 		}
-
-		$url = $baseUrl . wfArrayToCgi( $params );
 
 		$json = Http::get( $url );
 		$data = FormatJson::decode( $json, true );
 
-		if ( $data ) {
+		if ( is_array( $data ) ) {
 			return $data['query']['interwikimap'];
 		} else {
 			return false;
 		}
 	}
 
-	protected function doPopulate( $data, $force ) {
+	/**
+	 * @param array[] $data
+	 * @param bool $force
+	 *
+	 * @return bool
+	 */
+	protected function doPopulate( array $data, $force ) {
 		$dbw = wfGetDB( DB_MASTER );
 
 		if ( !$force ) {
