@@ -103,12 +103,12 @@
 
 	/**
 	 * Builds an entity store.
-	 * @todo Move to a top-level factory or application scope
 	 *
 	 * @param {wikibase.api.RepoApi} repoApi
+	 * @param {string} language The language code of the ui language
 	 * @return {wikibase.store.CombiningEntityStore}
 	 */
-	function buildEntityStore( repoApi ) {
+	function buildEntityStore( repoApi, language ) {
 		// Deserializer for fetched content whose content is a wb.datamodel.Entity:
 		var fetchedEntityDeserializer = new wb.store.FetchedContentUnserializer(
 				new wb.serialization.EntityDeserializer()
@@ -119,10 +119,9 @@
 			new wb.store.ApiEntityStore(
 				repoApi,
 				fetchedEntityDeserializer,
-				[ mw.config.get( 'wgUserLanguage' ) ]
+				[ language ]
 			)
 		] );
-
 	}
 
 	/**
@@ -136,40 +135,32 @@
 		var repoConfig = mw.config.get( 'wbRepo' );
 		var mwApi = wb.api.getLocationAgnosticMwApi( repoConfig.url + repoConfig.scriptPath + '/api.php' );
 		var repoApi = new wb.api.RepoApi( mwApi ),
-			entityStore = buildEntityStore( repoApi ),
+			userLanguages = getUserLanguages(),
+			entityStore = buildEntityStore( repoApi, userLanguages[0] ),
 			revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
 			entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
 				repoApi,
 				revisionStore,
 				entity
-			);
-
-		var viewName = entity.getType() + 'view';
-
-		if( !$.wikibase[ viewName ] ) {
-			throw new Error( 'View for entity type ' + entity.getType() + ' does not exist' );
-		}
-
-		$entityview[ viewName ]( {
-			value: entity,
-			languages: getUserLanguages(),
-			entityChangersFactory: entityChangersFactory,
-			entityStore: entityStore,
-			valueViewBuilder: new wb.ValueViewBuilder(
+			),
+			viewFactory = new wikibase.view.ViewFactory(
+				dataTypeStore,
+				entityChangersFactory,
+				entityStore,
 				getExpertsStore( dataTypeStore ),
 				getFormatterStore( repoApi, dataTypeStore ),
-				getParserStore( repoApi ),
-				mw.config.get( 'wgUserLanguage' ),
 				{
 					getMessage: function( key, params ) {
 						return mw.msg.apply( mw, [ key ].concat( params ) );
 					}
-				}
-			),
-			dataTypeStore: dataTypeStore
-		} );
+				},
+				getParserStore( repoApi ),
+				userLanguages
+			);
 
-		return viewName;
+		var entityView = viewFactory.getEntityView( entity, $entityview );
+
+		return entityView.widgetName;
 	}
 
 	/**
