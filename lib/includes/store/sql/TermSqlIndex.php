@@ -520,7 +520,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string|null $entityType
 	 * @param array $options
 	 *
-	 * @return array
+	 * @return Term[]
 	 */
 	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() ) {
 		if ( empty( $terms ) ) {
@@ -764,7 +764,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @param Iterator|array $obtainedTerms PHP fails for not having a common iterator/array thing :<0
 	 *
-	 * @return array
+	 * @return Term[]
 	 */
 	protected function buildTermResult( $obtainedTerms ) {
 		wfProfileIn( __METHOD__ );

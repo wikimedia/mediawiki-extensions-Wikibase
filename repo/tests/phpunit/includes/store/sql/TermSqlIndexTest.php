@@ -153,6 +153,10 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	/**
 	 * @dataProvider getMatchingTermsOptionsProvider
+	 * @param Fingerprint $fingerprint
+	 * @param Term[] $queryTerms
+	 * @param array $options
+	 * @param Term[] $expected
 	 */
 	public function testGetMatchingTerms_options( Fingerprint $fingerprint, array $queryTerms, array $options, array $expected ) {
 		$termIndex = $this->getTermIndex();

@@ -84,6 +84,7 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 		}
 
 		$currentLanguageCode = $this->getLocalSite()->getLanguageCode();
+		/** @var Site $site */
 		foreach ( $siteGroupList as $site ) {
 			if ( $site->getLanguageCode() === $currentLanguageCode ) {
 				return $site;
