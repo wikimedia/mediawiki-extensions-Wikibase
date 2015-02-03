@@ -23,8 +23,8 @@ class MessageExceptionLocalizer implements ExceptionLocalizer {
 	 * @throws InvalidArgumentException
 	 */
 	public function getExceptionMessage( Exception $exception ) {
-		if ( !$this->hasExceptionMessage( $exception ) ) {
-			throw new InvalidArgumentException( '$exception is not a MessageException.' );
+		if ( !( $exception instanceof MessageException ) ) {
+			throw new InvalidArgumentException( '$exception must be a MessageException' );
 		}
 
 		$key = $exception->getKey();
@@ -44,4 +44,5 @@ class MessageExceptionLocalizer implements ExceptionLocalizer {
 	public function hasExceptionMessage( Exception $exception ) {
 		return $exception instanceof MessageException;
 	}
+
 }

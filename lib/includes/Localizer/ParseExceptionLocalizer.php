@@ -25,8 +25,8 @@ class ParseExceptionLocalizer implements ExceptionLocalizer {
 	 * @throws InvalidArgumentException
 	 */
 	public function getExceptionMessage( Exception $exception ) {
-		if ( !$this->hasExceptionMessage( $exception ) ) {
-			throw new InvalidArgumentException( '$exception is not a ParseException' );
+		if ( !( $exception instanceof ParseException ) ) {
+			throw new InvalidArgumentException( '$exception must be a ParseException' );
 		}
 
 		$baseKey = 'wikibase-parse-error';
@@ -64,4 +64,5 @@ class ParseExceptionLocalizer implements ExceptionLocalizer {
 	public function hasExceptionMessage( Exception $exception ) {
 		return $exception instanceof ParseException;
 	}
+
 }
