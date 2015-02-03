@@ -5,7 +5,6 @@ namespace Wikibase\Lib;
 use DataValues\TimeValue;
 use InvalidArgumentException;
 use Language;
-use Message;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
@@ -16,8 +15,14 @@ use ValueFormatters\ValueFormatterBase;
  *
  * @license GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
+ * @author Thiemo Mättig
  */
 class HtmlTimeFormatter extends ValueFormatterBase {
+
+	private static $calendarKeys = array(
+		TimeFormatter::CALENDAR_GREGORIAN => 'gregorian',
+		TimeFormatter::CALENDAR_JULIAN => 'julian',
+	);
 
 	/**
 	 * @var Language
@@ -52,7 +57,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 *
 	 * @param TimeValue $value The time to format
 	 *
-	 * @return string
+	 * @return string HTML
 	 * @throws InvalidArgumentException
 	 */
 	public function format( $value ) {
@@ -60,22 +65,15 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 			throw new InvalidArgumentException( 'Data value type mismatch. Expected a TimeValue.' );
 		}
 
-		$dateTime = $this->dateTimeFormatter->format( $value );
-		$calendarName = $this->formatOptionalCalendarName( $value );
-		return $dateTime . ( $calendarName ? "<sup class=\"wb-calendar-name\">$calendarName</sup>" : '' );
-	}
+		$formatted = $this->dateTimeFormatter->format( $value );
 
-	/**
-	 * Display the calendar being used if the date lies within a time frame when
-	 * multiple calendars have been in use or if the time value features a calendar that
-	 * is uncommon for the specified time.
-	 *
-	 * @param TimeValue $value
-	 *
-	 * @return string
-	 */
-	private function formatOptionalCalendarName( TimeValue $value ) {
-		return $this->calendarNameNeeded( $value ) ? $this->formatCalendarName( $value ) : '';
+		if ( $this->calendarNameNeeded( $value ) ) {
+			$formatted .= '<sup class="wb-calendar-name">'
+				. $this->formatCalendarName( $value->getCalendarModel() )
+				. '</sup>';
+		}
+
+		return $formatted;
 	}
 
 	/**
@@ -97,38 +95,21 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	}
 
 	/**
-	 * @param TimeValue $value
+	 * @param string $calendarModel
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	private function formatCalendarName( TimeValue $value ) {
-		$calendarKey = $this->getCalendarKey( $value->getCalendarModel() );
-		return $this->getMessage( 'valueview-expert-timevalue-calendar-' . $calendarKey );
-	}
+	private function formatCalendarName( $calendarModel ) {
+		if ( array_key_exists( $calendarModel, self::$calendarKeys ) ) {
+			$key = 'valueview-expert-timevalue-calendar-' . self::$calendarKeys[$calendarModel];
+			$msg = wfMessage( $key )->inLanguage( $this->language );
 
-	/**
-	 * @param string $uri
-	 *
-	 * @return string
-	 */
-	private function getCalendarKey( $uri ) {
-		$calendars = array(
-			TimeFormatter::CALENDAR_GREGORIAN => 'gregorian',
-			TimeFormatter::CALENDAR_JULIAN => 'julian',
-		);
+			if ( !$msg->exists() ) {
+				return htmlspecialchars( $msg->text() );
+			}
+		}
 
-		return array_key_exists( $uri, $calendars ) ? $calendars[$uri] : '';
-	}
-
-	/**
-	 * @param string $key
-	 *
-	 * @return string
-	 */
-	private function getMessage( $key ) {
-		$message = new Message( $key );
-		$message->inLanguage( $this->language );
-		return $message->text();
+		return htmlspecialchars( $calendarModel );
 	}
 
 }
