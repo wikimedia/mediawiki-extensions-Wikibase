@@ -3,6 +3,7 @@
 ## Version 2.6.0 (dev)
 
 * Empty strings are now detected as invalid in the `SiteLink` constructor
+* Fixed `EntityIdValue::unserialize` accidentally returning itself
 
 ## Version 2.5.0 (2014-01-20)
 
