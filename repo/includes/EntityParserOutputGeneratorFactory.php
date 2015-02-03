@@ -68,12 +68,12 @@ class EntityParserOutputGeneratorFactory {
 	/**
 	 * Creates an EntityParserOutputGenerator to create the ParserOutput for the entity
 	 *
-	 * @param ParserOptions|null $options
+	 * @param ParserOptions $options
 	 *
 	 * @return EntityParserOutputGenerator
 	 */
-	public function getEntityParserOutputGenerator( ParserOptions $options = null ) {
-		$languageCode = $this->getLanguageCode( $options );
+	public function getEntityParserOutputGenerator( ParserOptions $options ) {
+		$languageCode = $options->getUserLang();
 
 		return new EntityParserOutputGenerator(
 			$this->entityViewFactory,
@@ -97,23 +97,6 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityTitleLookup,
 			$this->makeJsConfigSerializationOptions( $languageCode )
 		);
-	}
-
-	/**
-	 * @param ParserOptions|null $options
-	 *
-	 * @return string
-	 */
-	private function getLanguageCode( ParserOptions $options = null ) {
-		// NOTE: Parser Options language overrides context language!
-		if ( $options !== null ) {
-			return $options->getUserLang();
-		}
-
-		// @todo do we still need to fallback to context here?
-		// if needed, then maybe inject some 'default' in the constructor.
-		$context = RequestContext::getMain();
-		return $context->getLanguage()->getCode();
 	}
 
 	/**
