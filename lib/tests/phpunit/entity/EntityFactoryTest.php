@@ -18,20 +18,22 @@ use Wikibase\EntityFactory;
  */
 class EntityFactoryTest extends \MediaWikiTestCase {
 
-	public function testGetEntityTypes() {
-		$types = EntityFactory::singleton()->getEntityTypes();
-		$this->assertInternalType( 'array', $types );
+	private function getEntityFactory() {
+		return EntityFactory::singleton();
+	}
 
+	public function testGetEntityTypes() {
+		$types = $this->getEntityFactory()->getEntityTypes();
+
+		$this->assertInternalType( 'array', $types );
 		$this->assertTrue( in_array( Item::ENTITY_TYPE, $types ), "must contain item type" );
 		$this->assertTrue( in_array( Property::ENTITY_TYPE, $types ), "must contain property type" );
 	}
 
 	public function provideIsEntityType() {
-		$types = EntityFactory::singleton()->getEntityTypes();
-
 		$tests = array();
 
-		foreach ( $types as $type ) {
+		foreach ( $this->getEntityFactory()->getEntityTypes() as $type ) {
 			$tests[] = array ( $type, true );
 		}
 
@@ -42,9 +44,13 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideIsEntityType
+	 * @param string $type
+	 * @param bool $expected
 	 */
 	public function testIsEntityType( $type, $expected ) {
-		$this->assertEquals( $expected, EntityFactory::singleton()->isEntityType( $type ) );
+		$entityFactory = $this->getEntityFactory();
+
+		$this->assertEquals( $expected, $entityFactory->isEntityType( $type ) );
 	}
 
 	public function provideNewEmpty() {
@@ -58,7 +64,7 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider provideNewEmpty
 	 */
 	public function testNewEmpty( $type, $class ) {
-		$entity = EntityFactory::singleton()->newEmpty( $type );
+		$entity = $this->getEntityFactory()->newEmpty( $type );
 
 		$this->assertInstanceOf( $class, $entity );
 		$this->assertTrue( $entity->isEmpty(), "should be empty" );

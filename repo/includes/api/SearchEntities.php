@@ -7,7 +7,6 @@ use ApiMain;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Term;
@@ -323,6 +322,8 @@ class SearchEntities extends ApiBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
+		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+
 		return array(
 			'search' => array(
 				ApiBase::PARAM_TYPE => 'string',
@@ -333,7 +334,7 @@ class SearchEntities extends ApiBase {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'type' => array(
-				ApiBase::PARAM_TYPE => EntityFactory::singleton()->getEntityTypes(),
+				ApiBase::PARAM_TYPE => $entityFactory->getEntityTypes(),
 				ApiBase::PARAM_DFLT => 'item',
 			),
 			'limit' => array(

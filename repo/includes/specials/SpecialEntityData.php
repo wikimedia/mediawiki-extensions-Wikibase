@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Specials;
 
 use HttpError;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
@@ -83,7 +82,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$serializerFactory = new SerializerFactory(
 			$serializationOptions,
 			$wikibaseRepo->getPropertyDataTypeLookup(),
-			EntityFactory::singleton()
+			$wikibaseRepo->getEntityFactory()
 		);
 
 		$serializationService = new EntityDataSerializationService(
