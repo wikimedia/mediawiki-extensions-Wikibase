@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_cc1c9c7f",
+        "filename": "client/tests/phpunit/includes/UsageUpdaterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T15:06:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_188093f8",
+      "revId": "abb2c99c2fac31ba8529c2b48eb0755424d19571",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_387d4f18",
         "filename": "lib/tests/phpunit/store/MockTermIndex.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-03T10:29:43Z",
       "side": 1,
       "message": "Rather use [] for optional params.",
+      "revId": "abb2c99c2fac31ba8529c2b48eb0755424d19571",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ac1b6081",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T15:06:12Z",
+      "side": 1,
+      "message": "We do this in JS but not in PHP because optional parameters are already marked as such in the parameter list below.",
+      "parentUuid": "6e7c4fa4_387d4f18",
       "revId": "abb2c99c2fac31ba8529c2b48eb0755424d19571",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_af0a7222",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T15:06:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_d879bb2b",
+      "revId": "abb2c99c2fac31ba8529c2b48eb0755424d19571",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_f876f738",
         "filename": "repo/includes/api/LinkTitles.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-02-03T10:29:43Z",
       "side": 1,
       "message": "Could you add a hint what type of array that is?",
+      "revId": "abb2c99c2fac31ba8529c2b48eb0755424d19571",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ef270ab0",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T15:06:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_f876f738",
       "revId": "abb2c99c2fac31ba8529c2b48eb0755424d19571",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
