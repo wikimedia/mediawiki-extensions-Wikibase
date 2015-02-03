@@ -19,6 +19,17 @@ return call_user_func( function() {
 				'namespace.js'
 			),
 		),
+		'wikibase.view.ViewFactory' => $moduleTemplate + array(
+			'scripts' => array(
+				'ViewFactory.js'
+			),
+			'dependencies' => array(
+				'jquery.wikibase.itemview',
+				'jquery.wikibase.propertyview',
+				'wikibase.view.__namespace',
+				'wikibase.ValueViewBuilder'
+			)
+		),
 	);
 
 	return $modules;
