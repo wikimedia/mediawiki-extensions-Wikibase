@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ccc33c09",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.SnakTypeSelector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-03T14:41:50Z",
+      "side": 1,
+      "message": "You have to take the value into account, i. e. `option( \u0027disabled\u0027, false )` works, too.",
+      "revId": "7cf114d7a0a94817f7603b40275fc617719b8393",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
