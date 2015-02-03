@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_12d2b42c",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-03T02:16:25Z",
+      "side": 1,
+      "message": "can we have a shorter name?  maybe SetEntityTerms?",
+      "revId": "3b45cdde30b585543337c328ee26666453c26eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
