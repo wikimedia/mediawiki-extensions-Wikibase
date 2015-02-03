@@ -71,6 +71,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 * is uncommon for the specified time.
 	 *
 	 * @param TimeValue $value
+	 *
 	 * @return string
 	 */
 	private function formatOptionalCalendarName( TimeValue $value ) {
@@ -79,19 +80,20 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 
 	/**
 	 * @param TimeValue $value
+	 *
 	 * @return bool
 	 */
 	private function calendarNameNeeded( TimeValue $value ) {
-		preg_match( '/^[+-](\d+)-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/',
-			$value->getTime(), $matches );
-		$year = intval( $matches[1] );
-		$calendar = $this->getCalendarKey( $value->getCalendarModel() );
+		preg_match( '/^[-+]\d+/', $value->getTime(), $matches );
+		$year = intval( $matches[0] );
 
-		return $value->getPrecision() > 10 && ( $year <= 1581 || $calendar !== 'gregorian' );
+		return $value->getPrecision() >= TimeValue::PRECISION_DAY && ( $year <= 1581
+			|| $value->getCalendarModel() !== TimeFormatter::CALENDAR_GREGORIAN );
 	}
 
 	/**
 	 * @param TimeValue $value
+	 *
 	 * @return string
 	 */
 	private function formatCalendarName( TimeValue $value ) {
@@ -101,18 +103,21 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 
 	/**
 	 * @param string $uri
+	 *
 	 * @return string
 	 */
 	private function getCalendarKey( $uri ) {
 		$calendars = array(
-		TimeFormatter::CALENDAR_GREGORIAN => 'gregorian',
+			TimeFormatter::CALENDAR_GREGORIAN => 'gregorian',
 			TimeFormatter::CALENDAR_JULIAN => 'julian',
 		);
-		return $calendars[ $uri ];
+
+		return isset( $calendars[$uri] ) ? $calendars[$uri] : '';
 	}
 
 	/**
 	 * @param string $key
+	 *
 	 * @return string
 	 */
 	private function getMessage( $key ) {
@@ -120,4 +125,5 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 		$message->inLanguage( $this->language );
 		return $message->text();
 	}
+
 }

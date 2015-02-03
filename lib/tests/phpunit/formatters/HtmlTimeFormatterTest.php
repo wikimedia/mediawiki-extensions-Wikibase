@@ -114,6 +114,23 @@ class HtmlTimeFormatterTest extends \PHPUnit_Framework_TestCase {
 				new FormatterOptions(),
 				'/^MOCKDATE$/'
 			),
+			'negative' => array(
+				new TimeValue( '-1-01-01T00:00:00Z',
+					0, 0, 0,
+					TimeValue::PRECISION_DAY,
+					TimeFormatter::CALENDAR_GREGORIAN ),
+				new FormatterOptions(),
+				'/^MOCKDATE<sup class="wb-calendar-name">Gregorian<\/sup>$/'
+			),
+			'32-bit integer overflow' => array(
+				new TimeValue( '-2147483649-01-01T00:00:00Z',
+					0, 0, 0,
+					TimeValue::PRECISION_DAY,
+					TimeFormatter::CALENDAR_GREGORIAN ),
+				new FormatterOptions(),
+				'/^MOCKDATE<sup class="wb-calendar-name">Gregorian<\/sup>$/'
+			),
 		);
 	}
+
 }
