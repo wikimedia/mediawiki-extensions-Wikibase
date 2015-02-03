@@ -62,24 +62,23 @@
 		} ) );
 	} );
 
-	QUnit.test( 'initValueView passes mw', function( assert ) {
+	QUnit.test( 'initValueView passes messageProvider', function( assert ) {
 		var vvAndDom = getValueViewAndDom(),
-			valueView = vvAndDom.vv,
 			$dom = vvAndDom.$dom,
-			mw = {};
+			messageProvider = {};
 
 		var valueViewBuilder = new wb.ValueViewBuilder(
 			null,
 			null,
 			null,
 			null,
-			mw
+			messageProvider
 		);
 
 		valueViewBuilder.initValueView( $dom );
 
-		sinon.assert.calledWith( valueView.option, sinon.match( {
-			mediaWiki: mw
+		sinon.assert.calledWith( $dom.valueview, sinon.match( {
+			messageProvider: messageProvider
 		} ) );
 	} );
 
