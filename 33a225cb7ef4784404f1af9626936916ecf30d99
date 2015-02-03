@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6f821aab",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T16:57:45Z",
+      "side": 1,
+      "message": "Add @private?",
+      "revId": "33a225cb7ef4784404f1af9626936916ecf30d99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cf91eefc",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T16:57:45Z",
+      "side": 1,
+      "message": "Now this will fail when this._languageMap is undefined. Did you removed this on purpose?",
+      "revId": "33a225cb7ef4784404f1af9626936916ecf30d99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
