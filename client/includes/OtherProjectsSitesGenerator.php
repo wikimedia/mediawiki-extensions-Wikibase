@@ -33,7 +33,7 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 
 	/**
 	 * @param SiteStore $siteStore
-	 * @param string localSiteId
+	 * @param string $localSiteId
 	 * @param string[] $specialSiteGroups
 	 */
 	public function __construct( SiteStore $siteStore, $localSiteId, array $specialSiteGroups ) {

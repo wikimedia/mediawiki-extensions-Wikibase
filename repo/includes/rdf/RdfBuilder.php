@@ -6,6 +6,7 @@ use DataValues\DataValue;
 use EasyRdf_Graph;
 use EasyRdf_Literal;
 use EasyRdf_Namespace;
+use EasyRdf_Resource;
 use SiteList;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;

@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
-use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\ValuesFinder;
 

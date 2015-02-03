@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Wikibase\ChangesTable;
 use Wikibase\Client\Usage\NullSubscriptionManager;
-use Wikibase\Store\EntityIdLookup;
 use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;

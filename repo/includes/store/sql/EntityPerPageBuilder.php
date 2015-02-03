@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store\SQL;
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Reporting\MessageReporter;

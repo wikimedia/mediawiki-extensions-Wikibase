@@ -66,7 +66,7 @@ class PropertyClaimsRendererFactory {
 	/**
 	 * @param Parser $parser
 	 *
-	 * @return Renderer
+	 * @return PropertyClaimsRenderer
 	 */
 	public function newRendererFromParser( Parser $parser ) {
 		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );

@@ -31,17 +31,17 @@ class ItemContent extends EntityContent {
 	const STATUS_LINKSTUB = 60;
 
 	/**
-	 * @var Item
+	 * @var EntityHolder|null
 	 */
-	private $item;
+	private $itemHolder;
 
 	/**
-	 * @var EntityRedirect
+	 * @var EntityRedirect|null
 	 */
 	private $redirect;
 
 	/**
-	 * @var Title
+	 * @var Title|null
 	 */
 	private $redirectTitle;
 
