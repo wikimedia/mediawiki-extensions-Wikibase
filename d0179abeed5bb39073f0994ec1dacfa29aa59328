@@ -16,6 +16,24 @@
       "revId": "d0179abeed5bb39073f0994ec1dacfa29aa59328",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0cee14b2",
+        "filename": "repo/tests/phpunit/includes/store/sql/DispatchStatsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-03T14:31:03Z",
+      "side": 1,
+      "message": "but $expected[\u0027chd_seen\u0027] isset\n\ne.g.\n\narray (\n  \u0027chd_site\u0027 \u003d\u003e \u0027dewiki\u0027,\n  \u0027chd_seen\u0027 \u003d\u003e 2,\n  \u0027chd_touched\u0027 \u003d\u003e \u002720130303000220\u0027,\n  \u0027chd_untouched\u0027 \u003d\u003e 100,\n  \u0027chd_pending\u0027 \u003d\u003e 1,\n  \u0027chd_lag\u0027 \u003d\u003e 60,\n)\n\ndo you want to also fix this?",
+      "parentUuid": "6e7c4fa4_8cfa2472",
+      "revId": "d0179abeed5bb39073f0994ec1dacfa29aa59328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
