@@ -16,6 +16,24 @@
       "revId": "6a996eec284f47f86498ee456d7723ecd82c53c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0c52946a",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T14:39:43Z",
+      "side": 1,
+      "message": "Sorry? We do this in all resource files. I\u0027m removing the meaningless end tag only. It\u0027s not needed, just as the closing ?\u003e is not needed.",
+      "parentUuid": "6e7c4fa4_ec69581e",
+      "revId": "6a996eec284f47f86498ee456d7723ecd82c53c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
