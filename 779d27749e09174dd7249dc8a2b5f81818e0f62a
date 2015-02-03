@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2cf5104d",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T14:48:22Z",
+      "side": 1,
+      "message": "I find this a bit odd. I would do if( dropValue ) { return; }, just as it was before, and inline the updateWatchLink() call. But that\u0027s more a matter of taste.",
+      "revId": "779d27749e09174dd7249dc8a2b5f81818e0f62a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
