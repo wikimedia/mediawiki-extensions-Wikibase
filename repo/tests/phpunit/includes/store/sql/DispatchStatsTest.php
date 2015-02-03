@@ -234,26 +234,26 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$this->assertInternalType( 'object', $actual );
 
 		if ( isset( $expected['site'] ) ) {
-			$this->assertEquals( $expected['site'], $actual>chd_site, 'site' );
+			$this->assertEquals( $expected['site'], $actual->chd_site, 'site' );
 			$suffix = "/" . $expected['site'];
 		} else {
 			$suffix = '';
 		}
 
 		if ( isset( $expected['seen'] ) ) {
-			$this->assertEquals( $expected['seen'], $actual>chd_seen, "seen/$suffix" );
+			$this->assertEquals( $expected['seen'], $actual->chd_seen, "seen/$suffix" );
 		}
 
 		if ( isset( $expected['touched'] ) ) {
-			$this->assertEquals( $expected['touched'], $actual>chd_touched, "touched/$suffix" );
+			$this->assertEquals( $expected['touched'], $actual->chd_touched, "touched/$suffix" );
 		}
 
 		if ( isset( $expected['lag'] ) ) {
-			$this->assertEquals( $expected['lag'], $actual>chd_untouched, "lag/$suffix" );
+			$this->assertEquals( $expected['lag'], $actual->chd_untouched, "lag/$suffix" );
 		}
 
 		if ( isset( $expected['dist'] ) ) {
-			$this->assertEquals( $expected['dist'], $actual>chd_pending, "dist/$suffix" );
+			$this->assertEquals( $expected['dist'], $actual->chd_pending, "dist/$suffix" );
 		}
 	}
 
