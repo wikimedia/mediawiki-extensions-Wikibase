@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
-use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataAccess\PropertyParserFunction\VariantsAwareRenderer;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -17,26 +16,6 @@ use Wikibase\DataModel\Entity\ItemId;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
-
-	/**
-	 * @return UsageAccumulator
-	 */
-	private function getUsageAccumulator() {
-		$mock = $this->getMockBuilder( 'Wikibase\Client\Usage\UsageAccumulator' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$mock->expects( $this->any() )
-			->method( 'addLabelUsage' );
-
-		$mock->expects( $this->never() )
-			->method( 'addAllUsage' );
-
-		$mock->expects( $this->never() )
-			->method( 'addSiteLinksUsage' );
-
-		return $mock;
-	}
 
 	/**
 	 * @dataProvider renderProvider
@@ -57,8 +36,6 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		$rendererFactory->expects( $this->any() )
 			->method( 'getLanguageAwareRendererFromCode' )
 			->will( $this->returnValue( $languageRenderer ) );
-
-		$usageAccumulator = $this->getUsageAccumulator();
 
 		$languageRenderers = array();
 
