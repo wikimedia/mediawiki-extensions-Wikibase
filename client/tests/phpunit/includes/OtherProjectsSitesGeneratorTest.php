@@ -37,7 +37,6 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function otherProjectSitesProvider() {
-		$siteStore = $this->getSiteStoreMock();
 		$tests = array();
 
 		$tests['Same language'] = array(
