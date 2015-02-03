@@ -24,16 +24,14 @@ final class LibHooks {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string[] $files
+	 * @param string[] &$paths
 	 *
 	 * @return bool
 	 */
 	public static function registerPhpUnitTests( array &$paths ) {
-		// @codeCoverageIgnoreStart
 		$paths[] = __DIR__ . '/tests/phpunit/';
 
 		return true;
-		// @codeCoverageIgnoreEnd
 	}
 
 	/**
