@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_4fd2be2d",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T15:58:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_c879f22b",
+      "revId": "e759ec41197f5af8ea8c6505a8061a12dc8804fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_c8a81277",
         "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6fcf7a83",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T15:58:45Z",
+      "side": 1,
+      "message": "The array had string keys at some point but doesn\u0027t have any more.",
+      "parentUuid": "6e7c4fa4_c8a81277",
+      "revId": "e759ec41197f5af8ea8c6505a8061a12dc8804fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_e8eaae9b",
         "filename": "client/includes/store/sql/DirectSqlStore.php",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2015-02-02T18:16:53Z",
       "side": 1,
       "message": "\"symbolic\" is relevant here, it may not be the *actual* database name. In a wiki farm, it would refer to a key in the LBMulti setup.",
+      "revId": "e759ec41197f5af8ea8c6505a8061a12dc8804fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_afbd92d3",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T15:58:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_e8eaae9b",
       "revId": "e759ec41197f5af8ea8c6505a8061a12dc8804fc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
