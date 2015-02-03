@@ -72,16 +72,14 @@ final class ClientHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $files
+	 * @param string[] &$paths
 	 *
 	 * @return bool
 	 */
 	public static function registerUnitTests( array &$paths ) {
-		// @codeCoverageIgnoreStart
 		$paths[] = __DIR__ . '/tests/phpunit/';
 
 		return true;
-		// @codeCoverageIgnoreEnd
 	}
 
 	/**
