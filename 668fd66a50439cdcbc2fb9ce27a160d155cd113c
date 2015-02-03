@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_72276860",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-03T02:03:49Z",
+      "side": 1,
+      "message": "just a nitpick... these are no longer files. In core, the variable is named \u0026$paths and think that would be nicer here with this change.",
+      "revId": "668fd66a50439cdcbc2fb9ce27a160d155cd113c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_121cf417",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-03T02:03:49Z",
+      "side": 1,
+      "message": "\u0026$paths and $paths, instead of $files",
+      "revId": "668fd66a50439cdcbc2fb9ce27a160d155cd113c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_72e68815",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-03T02:03:49Z",
+      "side": 1,
+      "message": "I would rename the variable to \u0026$paths / $paths[]",
+      "revId": "668fd66a50439cdcbc2fb9ce27a160d155cd113c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
