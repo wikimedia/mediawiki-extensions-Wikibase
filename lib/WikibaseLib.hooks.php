@@ -26,20 +26,11 @@ final class LibHooks {
 	 *
 	 * @param string[] $files
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
-	public static function registerPhpUnitTests( array &$files ) {
+	public static function registerPhpUnitTests( array &$paths ) {
 		// @codeCoverageIgnoreStart
-		$directoryIterator = new RecursiveDirectoryIterator( __DIR__ . '/tests/phpunit/' );
-
-		/**
-		 * @var SplFileInfo $fileInfo
-		 */
-		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
-			if ( substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
-				$files[] = $fileInfo->getPathname();
-			}
-		}
+		$paths[] = __DIR__ . '/tests/phpunit/';
 
 		return true;
 		// @codeCoverageIgnoreEnd
