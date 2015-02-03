@@ -15,11 +15,12 @@ use Wikibase\Repo\EntitySearchTextGenerator;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
 class EntitySearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	public function generateProvider() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$item->getFingerprint()->setLabel( 'en', 'Test' );
 		$item->getFingerprint()->setLabel( 'de', 'Testen' );
@@ -45,9 +46,8 @@ class EntitySearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider generateProvider
-	 *
 	 * @param EntityDocument $entity
-	 * @param array $patterns
+	 * @param string[] $patterns
 	 */
 	public function testGenerate( EntityDocument $entity, array $patterns ) {
 		$generator = new EntitySearchTextGenerator();
@@ -60,8 +60,27 @@ class EntitySearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenEntityWithoutFingerprint_emptyStringIsReturned() {
 		$generator = new EntitySearchTextGenerator();
-		$entityDocument = $this->getMock( 'Wikibase\DataModel\Entity\EntityDocument' );
-		$this->assertSame( '', $generator->generate( $entityDocument ) );
+		$entity = $this->getMock( 'Wikibase\DataModel\Entity\EntityDocument' );
+		$text = $generator->generate( $entity );
+
+		$this->assertSame( '', $text );
+	}
+
+	public function testGivenEmptyEntity_newlineIsReturned() {
+		$generator = new EntitySearchTextGenerator();
+		$item = new Item();
+		$text = $generator->generate( $item );
+
+		$this->assertSame( "\n", $text );
+	}
+
+	public function testGivenUntrimmedLabel_generateDoesNotTrim() {
+		$item = new Item();
+		$item->getFingerprint()->setLabel( 'en', ' untrimmed label ' );
+		$generator = new EntitySearchTextGenerator();
+		$text = $generator->generate( $item );
+
+		$this->assertSame( " untrimmed label \n", $text );
 	}
 
 }

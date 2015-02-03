@@ -13,11 +13,12 @@ use Wikibase\Repo\ItemSearchTextGenerator;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
 class ItemSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	public function generateProvider() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$item->setLabel( 'en', 'Test' );
 		$item->setLabel( 'de', 'Testen' );
@@ -47,9 +48,8 @@ class ItemSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider generateProvider
-	 *
 	 * @param Item $item
-	 * @param array $patterns
+	 * @param string[] $patterns
 	 */
 	public function testGenerate( Item $item, array $patterns ) {
 		$generator = new ItemSearchTextGenerator();
@@ -58,6 +58,24 @@ class ItemSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 		foreach ( $patterns as $pattern ) {
 			$this->assertRegExp( $pattern . 'm', $text );
 		}
+	}
+
+	public function testGivenEmptyItem_newlineIsReturned() {
+		$generator = new ItemSearchTextGenerator();
+		$item = new Item();
+		$text = $generator->generate( $item );
+
+		$this->assertSame( "\n", $text );
+	}
+
+	public function testGivenUntrimmedPageName_generateDoesNotTrim() {
+		$item = new Item();
+		$item->getFingerprint()->setLabel( 'en', ' untrimmed label ' );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', ' untrimmed pageName ' );
+		$generator = new ItemSearchTextGenerator();
+		$text = $generator->generate( $item );
+
+		$this->assertSame( " untrimmed label \n\n untrimmed pageName ", $text );
 	}
 
 }
