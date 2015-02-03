@@ -18,6 +18,7 @@ use Wikibase\Lib\TimeDetailsFormatter;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 
@@ -38,19 +39,24 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array(
-				new TimeValue( '+00000002001-01-01T00:00:00Z', 60, 0, 1, 10, TimeFormatter::CALENDAR_GREGORIAN ),
+				new TimeValue( '+2001-01-01T00:00:00Z', 60, 0, 1, 10, TimeFormatter::CALENDAR_GREGORIAN ),
 				$options,
 				'@' . implode( '.*',
 					array(
 						'<h4[^<>]*>[^<>]*2001[^<>]*</h4>',
-						'<td[^<>]*>[^<>]*\+00000002001-01-01T00:00:00Z[^<>]*</td>',
-						'<td[^<>]*>[^<>]*60[^<>]*</td>',
-						'<td[^<>]*>[^<>]*.*Q1985727[^<>]*</td>',
-						'<td[^<>]*>[^<>]*10[^<>]*</td>',
-						'<td[^<>]*>[^<>]*0[^<>]*</td>',
-						'<td[^<>]*>[^<>]*1[^<>]*</td>',
+						'<td[^<>]*>\+0*2001-01-01T00:00:00Z</td>',
+						'<td[^<>]*>60</td>',
+						'<td[^<>]*>Gregorian</td>',
+						'<td[^<>]*>10</td>',
+						'<td[^<>]*>0</td>',
+						'<td[^<>]*>1</td>',
 					)
 				) . '@s'
+			),
+			array(
+				new TimeValue( '+2001-01-01T00:00:00Z', 60, 0, 1, 10, 'Stardate' ),
+				$options,
+				'@.*<td[^<>]*>Stardate</td>.*@s'
 			),
 		);
 	}
@@ -62,4 +68,5 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$formatter->format( $value );
 	}
+
 }

@@ -21,15 +21,17 @@ use ValueFormatters\ValueFormatterBase;
  */
 class TimeDetailsFormatter extends ValueFormatterBase {
 
+	const OPT_CALENDARNAMES = 'calendars';
+
 	/**
 	 * @var MwTimeIsoFormatter
 	 */
-	protected $isoTimeFormatter;
+	private $isoTimeFormatter;
 
 	/**
 	 * @var TimeFormatter
 	 */
-	protected $timeFormatter;
+	private $timeFormatter;
 
 	/**
 	 * @param FormatterOptions $options
@@ -45,6 +47,11 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		}
 
 		$this->timeFormatter = new TimeFormatter( $options );
+
+		$this->defaultOption( self::OPT_CALENDARNAMES, array(
+			TimeFormatter::CALENDAR_GREGORIAN => 'Gregorian',
+			TimeFormatter::CALENDAR_JULIAN => 'Julian',
+		) );
 	}
 
 	/**
@@ -63,6 +70,12 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 			throw new InvalidArgumentException( 'Data value type mismatch. Expected an TimeValue.' );
 		}
 
+		$calendarModel = $value->getCalendarModel();
+		$calendarNames = $this->getOption( self::OPT_CALENDARNAMES );
+		if ( array_key_exists( $calendarModel, $calendarNames ) ) {
+			$calendarModel = $calendarNames[$calendarModel];
+		}
+
 		$html = '';
 		$html .= Html::element( 'h4',
 			array( 'class' => 'wb-details wb-time-details wb-time-rendered' ),
@@ -77,7 +90,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		$html .= $this->renderLabelValuePair( 'timezone',
 			htmlspecialchars( $value->getTimezone() ) );
 		$html .= $this->renderLabelValuePair( 'calendar',
-			htmlspecialchars( $value->getCalendarModel() ) );
+			htmlspecialchars( $calendarModel ) );
 		$html .= $this->renderLabelValuePair( 'precision',
 			htmlspecialchars( $value->getPrecision() ) );
 
@@ -95,7 +108,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @return string HTML for the label/value pair
 	 */
-	protected function renderLabelValuePair( $fieldName, $valueHtml ) {
+	private function renderLabelValuePair( $fieldName, $valueHtml ) {
 		$html = Html::openElement( 'tr' );
 
 		$html .= Html::element( 'th', array( 'class' => 'wb-time-' . $fieldName ),
@@ -112,7 +125,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @return Message
 	 */
-	protected function getFieldLabel( $fieldName ) {
+	private function getFieldLabel( $fieldName ) {
 		$lang = $this->getOption( ValueFormatter::OPT_LANG );
 
 		// Messages: wb-timedetails-amount, wb-timedetails-upperbound,
