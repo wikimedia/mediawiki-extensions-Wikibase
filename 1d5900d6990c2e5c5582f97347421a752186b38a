@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0cc0542e",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T14:16:57Z",
+      "side": 1,
+      "message": "Looks like these coverage tags can go away now, the remaining code is very easy to test.",
+      "revId": "1d5900d6990c2e5c5582f97347421a752186b38a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6cc3083e",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T14:16:57Z",
+      "side": 1,
+      "message": "Looks like these coverage tags can go away now, the remaining code is very easy to test.",
+      "revId": "1d5900d6990c2e5c5582f97347421a752186b38a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ccb25ce4",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-03T14:16:57Z",
+      "side": 1,
+      "message": "Looks like these coverage tags can go away now, the remaining code is very easy to test.",
+      "revId": "1d5900d6990c2e5c5582f97347421a752186b38a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
