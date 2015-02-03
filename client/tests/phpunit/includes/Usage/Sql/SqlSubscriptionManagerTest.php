@@ -71,6 +71,7 @@ class SqlSubscriptionManagerTest extends \MediaWikiTestCase {
 
 		$manager->unsubscribe( 'enwiki', array( $q11, $q22 ) );
 		$manager->unsubscribe( 'dewiki', array( $q22 ) );
+		$manager->unsubscribe( 'dewiki', array() );
 
 		$this->assertEquals(
 			array(
