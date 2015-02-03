@@ -160,7 +160,11 @@
 				getFormatterStore( repoApi, dataTypeStore ),
 				getParserStore( repoApi ),
 				mw.config.get( 'wgUserLanguage' ),
-				mw
+				{
+					getMessage: function( key, params ) {
+						return mw.msg.apply( mw, [ key ].concat( params ) );
+					}
+				}
 			),
 			dataTypeStore: dataTypeStore
 		} );

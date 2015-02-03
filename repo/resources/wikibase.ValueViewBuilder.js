@@ -12,19 +12,18 @@
 	 * @param {valueFormatters.ValueFormatterStore} formatterStore
 	 * @param {valueParsers.ValueParserStore} parserStore
 	 * @param {string} language
-	 * @param {Object} mediaWiki
+	 * @param {util.MessageProvider} messageProvider
 	 */
 	var SELF = wb.ValueViewBuilder = function(
-		expertStore, formatterStore, parserStore, language, mediaWiki
+		expertStore, formatterStore, parserStore, language, messageProvider
 	) {
 		this._baseOptions = {
 			expertStore: expertStore,
 			formatterStore: formatterStore,
 			parserStore: parserStore,
-			language: language
+			language: language,
+			messageProvider: messageProvider
 		};
-
-		this._mw = mediaWiki;
 	};
 
 	$.extend( SELF.prototype, {
@@ -32,11 +31,6 @@
 		 * @type {Object}
 		 */
 		_baseOptions: null,
-
-		/**
-		 * @type {Object}
-		 */
-		_mw: null,
 
 		/**
 		 * @param {jQuery} $valueViewDom
@@ -53,10 +47,6 @@
 			// initializing this over and over again and doing the checks.
 			$valueViewDom.valueview( valueViewOptions );
 			valueView = $valueViewDom.data( 'valueview' );
-
-			// Setting this option must be delayed, otherwise the deep copy call
-			// $.extend( true, ... ) in _createWidget() will clone the full mw object.
-			valueView.option( { mediaWiki: this._mw } );
 
 			return valueView;
 		},
