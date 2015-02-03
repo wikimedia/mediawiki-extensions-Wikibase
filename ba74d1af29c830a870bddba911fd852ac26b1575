@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d851bb66",
+        "filename": "repo/maintenance/createBlacklistedItems.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-03T11:29:40Z",
+      "side": 1,
+      "message": "This wont work, the above ids are numeric",
+      "revId": "ba74d1af29c830a870bddba911fd852ac26b1575",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
