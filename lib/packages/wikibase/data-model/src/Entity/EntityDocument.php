@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataModel\Entity;
 
+use InvalidArgumentException;
+
 /**
  * Minimal interface for all objects that represent an entity.
  * All entities have an EntityId and an entity type.
@@ -32,15 +34,11 @@ interface EntityDocument {
 	public function getType();
 
 	/**
-	 * Sets the id of the entity. If the id is not of the correct type,
-	 * an exception will be thrown. A specific derivative of EntityId is
-	 * always supported.
+	 * Sets the id of the entity. A specific derivative of EntityId is always supported.
 	 *
 	 * @since 3.0
 	 *
-	 * @param EntityId $id
-	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException if the id is not of the correct type.
 	 */
 	public function setId( $id );
 
