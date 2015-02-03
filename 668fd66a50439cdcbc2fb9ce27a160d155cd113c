@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_9816e3ab",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-03T11:14:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_72276860",
+      "revId": "668fd66a50439cdcbc2fb9ce27a160d155cd113c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_121cf417",
         "filename": "lib/WikibaseLib.hooks.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_58104bad",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-03T11:14:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_121cf417",
+      "revId": "668fd66a50439cdcbc2fb9ce27a160d155cd113c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_72e68815",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2015-02-03T02:03:49Z",
       "side": 1,
       "message": "I would rename the variable to \u0026$paths / $paths[]",
+      "revId": "668fd66a50439cdcbc2fb9ce27a160d155cd113c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7815079c",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-03T11:14:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_72e68815",
       "revId": "668fd66a50439cdcbc2fb9ce27a160d155cd113c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
