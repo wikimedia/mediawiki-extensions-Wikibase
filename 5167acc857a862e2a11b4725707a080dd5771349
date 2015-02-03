@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_77599a00",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-03T00:32:55Z",
+      "side": 1,
+      "message": "why did you move this out of the if, if we just throw it away anyway?",
+      "revId": "5167acc857a862e2a11b4725707a080dd5771349",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d7150eeb",
+        "filename": "repo/tests/phpunit/includes/store/sql/TermSqlIndexTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-03T00:32:55Z",
+      "side": 1,
+      "message": "I guess it would be nice to have more than one entity here at least (multiple types would be nice).",
+      "revId": "5167acc857a862e2a11b4725707a080dd5771349",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
