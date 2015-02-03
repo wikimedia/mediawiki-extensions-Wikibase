@@ -25,17 +25,16 @@ var SELF = wb.datamodel.Group = function WbDataModelGroup(
 ) {
 	if( key === undefined ) {
 		throw new Error( 'Key may not be undefined' );
-	} else if( !$.isFunction( GroupableCollectionConstructor ) ) {
+	}
+	if( !$.isFunction( GroupableCollectionConstructor ) ) {
 		throw new Error( 'Item container constructor needs to be a Function' );
-	} else if(
-		!( new GroupableCollectionConstructor() ) instanceof wb.datamodel.GroupableCollection
-	) {
+	}
+	if( !( new GroupableCollectionConstructor() ) instanceof wb.datamodel.GroupableCollection ) {
 		throw new Error( 'Item container constructor needs to implement GroupableCollection' );
-	} else if(
-		!$.isFunction(
-			GroupableCollectionConstructor.prototype[groupableCollectionGetKeysFunctionName]
-		)
-	) {
+	}
+	if( !$.isFunction(
+		GroupableCollectionConstructor.prototype[groupableCollectionGetKeysFunctionName]
+	) ) {
 		throw new Error( 'Missing ' + GroupableCollectionConstructor + '() in container item '
 			+ 'prototype to receive the item key from' );
 	}
