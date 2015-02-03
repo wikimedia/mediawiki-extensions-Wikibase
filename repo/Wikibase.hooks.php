@@ -549,33 +549,6 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Handles a rebuild request by rebuilding all secondary storage of the repository.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/WikibaseRebuildData
-	 *
-	 * @since 0.1
-	 *
-	 * @param callable $reportMessage Takes a string parameter and echos it.
-	 *
-	 * @return bool
-	 */
-	public static function onWikibaseRebuildData( $reportMessage ) {
-		wfProfileIn( __METHOD__ );
-
-		$store = WikibaseRepo::getDefaultInstance()->getStore();
-
-		$reportMessage(
-			'Starting rebuild of the Wikibase repository ' . get_class( $store ) . ' store...'
-		);
-
-		$store->rebuild();
-
-		$reportMessage( "done!\n" );
-
-		wfProfileOut( __METHOD__ );
-		return true;
-	}
-
-	/**
 	 * Reorder the groups for the special pages
 	 *
 	 * @since 0.4

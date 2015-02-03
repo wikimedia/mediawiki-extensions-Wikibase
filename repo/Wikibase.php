@@ -183,7 +183,6 @@ call_user_func( function() {
 	$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\RepoHooks::onFormat', array( CONTENT_MODEL_WIKIBASE_ITEM, "wikibase-item" ) );
 	$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\RepoHooks::onFormat', array( CONTENT_MODEL_WIKIBASE_PROPERTY, "wikibase-property" ) );
 	$wgHooks['PageHistoryLineEnding'][]					= 'Wikibase\RepoHooks::onPageHistoryLineEnding';
-	$wgHooks['WikibaseRebuildData'][] 					= 'Wikibase\RepoHooks::onWikibaseRebuildData';
 	$wgHooks['WikibaseDeleteData'][] 					= 'Wikibase\RepoHooks::onWikibaseDeleteData';
 	$wgHooks['ApiCheckCanExecute'][] 					= 'Wikibase\RepoHooks::onApiCheckCanExecute';
 	$wgHooks['SetupAfterCache'][] 						= 'Wikibase\RepoHooks::onSetupAfterCache';

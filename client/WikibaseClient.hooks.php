@@ -22,7 +22,6 @@ use SplFileInfo;
 use Title;
 use UnexpectedValueException;
 use User;
-use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\ChangesPageWikibaseFilterHandler;
@@ -119,40 +118,6 @@ final class ClientHooks {
 			__METHOD__
 		);
 
-		$reportMessage( "done!\n" );
-
-		wfProfileOut( __METHOD__ );
-		return true;
-	}
-
-	/**
-	 * Rebuilds all the data stored on the repository.
-	 * This hook will probably be called manually when the
-	 * rebuildAllData script is run on the client.
-	 *
-	 * @since 0.2
-	 *
-	 * @param callable $reportMessage // takes a string parameter and echos it
-	 *
-	 * @return bool
-	 */
-	public static function onWikibaseRebuildData( $reportMessage ) {
-		wfProfileIn( __METHOD__ );
-
-		$store = WikibaseClient::getDefaultInstance()->getStore();
-		$reportMessage( "Rebuilding all data in the " . get_class( $store )
-			. " store on the client..." );
-		$store->rebuild();
-
-		$changesTable = new ChangesTable();
-		$changes = $changesTable->select(
-			null,
-			array(),
-			array(),
-			__METHOD__
-		);
-
-		ChangeHandler::singleton()->handleChanges( iterator_to_array( $changes ) );
 		$reportMessage( "done!\n" );
 
 		wfProfileOut( __METHOD__ );
