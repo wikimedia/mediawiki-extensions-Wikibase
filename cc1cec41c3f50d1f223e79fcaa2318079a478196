@@ -34,6 +34,24 @@
       "revId": "cc1cec41c3f50d1f223e79fcaa2318079a478196",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7de65915",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-03T08:07:14Z",
+      "side": 1,
+      "message": "Considering that we sometimes submit changes that do barely more than improving these kind of things, I don\u0027t think we should merge a change worsening them.",
+      "parentUuid": "8e7fc396_e7589d5b",
+      "revId": "cc1cec41c3f50d1f223e79fcaa2318079a478196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
