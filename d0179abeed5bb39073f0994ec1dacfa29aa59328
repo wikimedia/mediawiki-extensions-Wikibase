@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8cfa2472",
+        "filename": "repo/tests/phpunit/includes/store/sql/DispatchStatsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-03T14:27:54Z",
+      "side": 1,
+      "message": "looks like \u0027seen\u0027 is not seen / set so we never hit this code.",
+      "revId": "d0179abeed5bb39073f0994ec1dacfa29aa59328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
