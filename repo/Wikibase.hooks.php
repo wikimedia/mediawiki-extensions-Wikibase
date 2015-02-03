@@ -158,16 +158,14 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param array &$files
+	 * @param array &$paths
 	 *
 	 * @return bool
 	 */
 	public static function registerUnitTests( array &$paths ) {
-		// @codeCoverageIgnoreStart
 		$paths[] = __DIR__ . '/tests/phpunit/';
 
 		return true;
-		// @codeCoverageIgnoreEnd
 	}
 
 	/**

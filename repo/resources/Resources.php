@@ -289,4 +289,3 @@ return call_user_func( function() {
 		include( __DIR__ . '/store/resources.php' )
 	);
 } );
-// @codeCoverageIgnoreEnd
