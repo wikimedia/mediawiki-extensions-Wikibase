@@ -61,6 +61,7 @@ class SiteLinksView {
 	private $languageCode;
 
 	/**
+	 * @param TemplateFactory $templateFactory
 	 * @param SiteList $sites
 	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
 	 * @param EntityLookup $entityLookup

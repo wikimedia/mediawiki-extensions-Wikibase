@@ -796,7 +796,7 @@ class EditEntity {
 	}
 
 	/**
-	 * EntityDocument $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return IContextSource
 	 */
@@ -954,4 +954,5 @@ class EditEntity {
 
 		$this->entityStore->updateWatchlist( $user, $this->getEntityId(), $watch );
 	}
+
 }

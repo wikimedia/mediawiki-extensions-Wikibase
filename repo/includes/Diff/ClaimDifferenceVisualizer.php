@@ -257,7 +257,7 @@ class ClaimDifferenceVisualizer {
 	}
 
 	/**
-	 * @param EntityId
+	 * @param EntityId $entityId
 	 *
 	 * @return string HTML
 	 */

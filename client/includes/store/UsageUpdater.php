@@ -61,7 +61,7 @@ class UsageUpdater {
 	 * any subscriptions based on that usage.
 	 *
 	 * @param int $pageId The ID of the page the entities are used on.
-	 * @param array $usages A list of EntityUsage objects.
+	 * @param EntityUsage[] $usages A list of EntityUsage objects.
 	 * See docs/usagetracking.wiki for details.
 	 *
 	 * @throws InvalidArgumentException

@@ -72,8 +72,8 @@ use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
 use Wikibase\SqlStore;
-use Wikibase\Store;
 use Wikibase\Store\BufferingTermLookup;
+use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\Store\TermBuffer;
 use Wikibase\StringNormalizer;
@@ -534,6 +534,8 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @param TermLookup $termLookup
+	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	public function getValueFormatterBuildersForTermLookup( TermLookup $termLookup ) {

@@ -132,6 +132,11 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	}
 
 	/**
+	 * @param string $label
+	 * @param string|null $languageCode
+	 * @param string|null $entityType
+	 * @param bool $fuzzySearch
+	 *
 	 * @return EntityId[]
 	 */
 	public function getEntityIdsForLabel( $label, $languageCode = null, $entityType = null,

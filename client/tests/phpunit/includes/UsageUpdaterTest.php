@@ -7,6 +7,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -49,6 +50,8 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param EntityId[]|null $unusedEntities
+	 *
 	 * @return UsageLookup
 	 */
 	private function getUsageLookup( array $unusedEntities = null ) {
@@ -67,6 +70,10 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param string $wiki
+	 * @param EntityId[]$subscribe
+	 * @param EntityId[]$unsubscribe
+	 *
 	 * @return SubscriptionManager
 	 */
 	private function getSubscriptionManager( $wiki, $subscribe, $unsubscribe ) {
@@ -100,6 +107,11 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param EntityUsage[] $oldUsage
+	 * @param EntityId[]|null $unusedEntities
+	 * @param EntityId[] $subscribe
+	 * @param EntityId[] $unsubscribe
+	 *
 	 * @return UsageUpdater
 	 */
 	private function getUsageUpdater( $oldUsage, $unusedEntities, array $subscribe, array $unsubscribe ) {
@@ -158,6 +170,11 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider updateUsageForPageProvider
+	 * @param EntityUsage[] $oldUsage
+	 * @param EntityUsage[] $newUsage
+	 * @param EntityId[]|null $unusedEntities
+	 * @param EntityId[] $subscribe
+	 * @param EntityId[] $unsubscribe
 	 */
 	public function testUpdateUsageForPage( $oldUsage, $newUsage, $unusedEntities, $subscribe, $unsubscribe ) {
 		$updater = $this->getUsageUpdater( $oldUsage, $unusedEntities, $subscribe, $unsubscribe );

@@ -38,6 +38,7 @@ class ItemHandler extends EntityHandler {
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
+	 * @param EntityIdParser $entityIdParser
 	 * @param SiteLinkCache $siteLinkStore
 	 * @param callable|null $legacyExportFormatDetector
 	 */

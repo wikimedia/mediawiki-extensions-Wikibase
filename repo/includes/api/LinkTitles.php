@@ -153,6 +153,8 @@ class LinkTitles extends ApiWikibase {
 	 * @param SiteList $sites
 	 * @param string $site
 	 * @param string $pageTitle
+	 *
+	 * @return array
 	 */
 	private function getSiteAndNormalizedPageName( SiteList $sites, $site, $pageTitle ) {
 		$siteObj = $sites->getSite( $site );
