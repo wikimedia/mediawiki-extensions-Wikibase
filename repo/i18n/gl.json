@@ -3,7 +3,8 @@
 		"authors": [
 			"Toliño",
 			"Vivaelcelta",
-			"아라"
+			"아라",
+			"Elisardojm"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estruturados",
@@ -37,11 +38,11 @@
 	"wikibase-sitelink-site-edit-placeholder": "sitio",
 	"wikibase-sitelink-page-edit-placeholder": "páxina",
 	"wikibase-alias-edit-placeholder": "escriba un pseudónimo",
-	"wikibase-label-input-help-message": "Introduza o título deste conxunto de datos en $1.",
-	"wikibase-description-input-help-message": "Introduza unha breve descrición en $1.",
+	"wikibase-label-input-help-message": "Introduza a etiqueta desta entidade en $1.",
+	"wikibase-description-input-help-message": "Introduza unha breve descrición para esta entidade en $1.",
 	"wikibase-statements": "Afirmacións",
 	"wikibase-terms": "Noutras linguas",
-	"wikibase-sitelinks-empty": "Ningunha páxina do sitio ten ligazóns cara a este elemento.",
+	"wikibase-sitelinks-empty": "Ningunha páxina está ligada aínda cara a este elemento.",
 	"wikibase-sitelinks-input-help-message": "Defina unha ligazón cara a unha páxina relacionada co elemento.",
 	"wikibase-sitelinks-special": "Outros sitios",
 	"wikibase-remove": "eliminar",
@@ -53,7 +54,7 @@
 	"wikibase-omitted-undo-ops": "{{PLURAL:$1|Omitiuse $1 cambio|Omitíronse $1 cambios}} porque {{PLURAL:$1|o valor respectivo cambiou|os valores respectivos cambiaron}} desde entón.",
 	"wikibase-empty-undo": "Non hai nada que se poida desfacer.",
 	"wikibase-undo-revision-error": "Erro ao desfacer",
-	"wikibase-undo-samerev": "Non se pode desfacer. A revisión que se vai desfacer é a mesma que vai quedar.",
+	"wikibase-undo-samerev": "Deben especificarse dúas revisións diferentes para desfacer unha edición.",
 	"wikibase-undo-badpage": "Revisión incorrecta: A revisión $2 non pertence a \"[[$1]]\".",
 	"wikibase-undo-firstrev": "Non se pode desfacer a primeira edición dunha páxina",
 	"wikibase-undo-nocontent": "Non se pode cargar o contido da revisión $2 da páxina \"$1\"",
@@ -62,7 +63,7 @@
 	"wikibase-disambiguation-title": "Homónimos de \"$1\"",
 	"wb-special-newitem-new-item-notification": "Creouse o novo elemento $1, que redirixe cara á súa páxina. Volver a $2.",
 	"wikibase-aliases-label": "Tamén coñecido como:",
-	"wikibase-aliases-input-help-message": "En caso de que exista máis dun nome para denominar este conxunto de datos, pode escribir pseudónimos e sinónimos, de xeito que se poida atopar a partir destes nomes alternativos.",
+	"wikibase-aliases-input-help-message": "Para que esta entidade sexa máis doada de atopar, pode introducir nomes alternativos.",
 	"wikibase-aliases-empty": "Non hai ningún pseudónimo definido.",
 	"wikibase-propertypage-datatype": "Tipo de datos",
 	"wikibase-claimview-snak-tooltip": "Insira un valor correspondente á propiedade chamada \"$1\". Se a propiedade non ten ningún valor designado ou non se coñece o valor real, pode elixir a alternativa de especificar un valor personalizado premendo na icona que está ao carón da caixa de entrada.",

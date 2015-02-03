@@ -11,6 +11,7 @@
 		]
 	},
 	"wikibase-lib-desc": "Общие функции расширений Wikibase и Wikibase Client",
+	"specialpages-group-wikibase": "Вики-база",
 	"wikibase-deletedentity-item": "Удалённый элемент",
 	"wikibase-deletedentity-property": "Удалённое свойство",
 	"wikibase-deletedentity-query": "Удалённый запрос",
