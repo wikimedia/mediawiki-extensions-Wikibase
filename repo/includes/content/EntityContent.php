@@ -47,6 +47,14 @@ use WikiPage;
 abstract class EntityContent extends AbstractContent {
 
 	/**
+	 * Added to parser options for EntityContent.
+	 *
+	 * Bump the version when making incompatible changes
+	 * to parser output.
+	 */
+	const PARSER_VERSION = 1;
+
+	/**
 	 * For use in the wb-status page property to indicate that the entity has no special
 	 * status, to indicate. STATUS_NONE will not be recorded in the database.
 	 *
@@ -203,8 +211,6 @@ abstract class EntityContent extends AbstractContent {
 
 	/**
 	 * Returns a ParserOutput object containing the HTML.
-	 * The actual work of generating a ParserOutput object is done by calling
-	 * EntityView::getParserOutput().
 	 *
 	 * @note: this calls ParserOutput::recordOption( 'userlang' ) to split the cache
 	 * by user language.
@@ -227,6 +233,10 @@ abstract class EntityContent extends AbstractContent {
 		if ( $this->isRedirect() ) {
 			return $this->getParserOutputForRedirect( $generateHtml );
 		} else {
+			if ( $options === null ) {
+				$options = $this->getContentHandler()->makeParserOptions( 'canonical' );
+			}
+
 			return $this->getParserOutputFromEntityView( $title, $revisionId, $options, $generateHtml );
 		}
 	}
@@ -268,7 +278,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @param Title $title
 	 * @param int|null $revisionId
-	 * @param ParserOptions|null $options
+	 * @param ParserOptions $options
 	 * @param bool $generateHtml
 	 *
 	 * @return ParserOutput
@@ -276,7 +286,7 @@ abstract class EntityContent extends AbstractContent {
 	protected function getParserOutputFromEntityView(
 		Title $title,
 		$revisionId = null,
-		ParserOptions $options = null,
+		ParserOptions $options,
 		$generateHtml = true
 	) {
 		// @todo: move this to the ContentHandler
@@ -294,6 +304,9 @@ abstract class EntityContent extends AbstractContent {
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
 		$output->recordOption( 'userlang' );
+
+		// bump PARSER VERSION when making breaking changes to parser output (e.g. entity view).
+		$options->addExtraKey( 'wb' . self::PARSER_VERSION );
 
 		// register page properties
 		$this->applyEntityPageProperties( $output );
