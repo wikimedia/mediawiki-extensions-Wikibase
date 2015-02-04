@@ -86,15 +86,15 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		// TODO: Provide "nice" rendering of precision, etc.
 		$html .= $this->renderLabelValuePair(
 			'precision',
-			$this->getPrecisionHtml( $value->getPrecision() )
+			$this->getAmountAndPrecisionHtml( $value->getPrecision() )
 		);
 		$html .= $this->renderLabelValuePair(
 			'before',
-			htmlspecialchars( $value->getBefore() )
+			$this->getAmountAndPrecisionHtml( $value->getPrecision(), $value->getBefore() )
 		);
 		$html .= $this->renderLabelValuePair(
 			'after',
-			htmlspecialchars( $value->getAfter() )
+			$this->getAmountAndPrecisionHtml( $value->getPrecision(), $value->getAfter() )
 		);
 
 		$html .= Html::closeElement( 'table' );
@@ -108,6 +108,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 * @return string HTML
 	 */
 	private function getTimezoneHtml( $timezone ) {
+		// Actual MINUS SIGN (U+2212) instead of HYPHEN-MINUS (U+002D)
 		$sign = $timezone < 0 ? "\xE2\x88\x92" : '+';
 		$hour = floor( abs( $timezone ) / 60 );
 		$minute = abs( $timezone ) - $hour * 60;
@@ -130,16 +131,12 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 
 	/**
 	 * @param int $precision
+	 * @param int $amount
 	 *
 	 * @return string HTML
 	 */
-	private function getPrecisionHtml( $precision ) {
-		if ( $precision > TimeValue::PRECISION_SECOND ) {
-			return htmlspecialchars( $precision );
-		}
-
+	private function getAmountAndPrecisionHtml( $precision, $amount = 1 ) {
 		$key = 'years';
-		$amount = 1;
 
 		switch ( $precision ) {
 			case TimeValue::PRECISION_MONTH: $key = 'months'; break;
@@ -150,7 +147,13 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		}
 
 		if ( $precision < TimeValue::PRECISION_YEAR ) {
-			$amount = pow( 10, TimeValue::PRECISION_YEAR - $precision );
+			// PRECISION_10a becomes 10 years, PRECISION_100a becomes 100 years, and so on.
+			$precisionInYears = pow( 10, TimeValue::PRECISION_YEAR - $precision );
+			$amount *= $precisionInYears;
+		} elseif ( $precision > TimeValue::PRECISION_SECOND ) {
+			// Sub-second precisions become 0.1 second, 0.01 second, and so on.
+			$precisionInSeconds = pow( 10, $precision - TimeValue::PRECISION_SECOND );
+			$amount /= $precisionInSeconds;
 		}
 
 		$lang = $this->getOption( ValueFormatter::OPT_LANG );
