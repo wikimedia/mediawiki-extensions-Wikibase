@@ -16,6 +16,24 @@
       "revId": "7cf114d7a0a94817f7603b40275fc617719b8393",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5c07d51f",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.SnakTypeSelector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-04T16:55:18Z",
+      "side": 1,
+      "message": "But this does make this a -1, doesn\u0027t it?",
+      "parentUuid": "6e7c4fa4_ccc33c09",
+      "revId": "7cf114d7a0a94817f7603b40275fc617719b8393",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
