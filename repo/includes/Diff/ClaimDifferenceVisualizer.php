@@ -7,18 +7,11 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Exception;
-use InvalidArgumentException;
 use Message;
 use RuntimeException;
-use ValueFormatters\FormattingException;
-use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\ClaimSerializer;
-use Wikibase\Lib\SnakFormatter;
 
 /**
  * Class for generating HTML for Claim Diffs.
@@ -30,23 +23,14 @@ use Wikibase\Lib\SnakFormatter;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Adam Shorland
  * @author Daniel Kinzler
+ * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 class ClaimDifferenceVisualizer {
 
 	/**
-	 * @var ValueFormatter
+	 * @var DifferencesSnakVisualizer
 	 */
-	private $propertyIdFormatter;
-
-	/**
-	 * @var SnakFormatter
-	 */
-	private $snakDetailsFormatter;
-
-	/**
-	 * @var SnakFormatter
-	 */
-	private $snakBreadCrumbFormatter;
+	private $snakVisualizer;
 
 	/**
 	 * @var string
@@ -56,38 +40,14 @@ class ClaimDifferenceVisualizer {
 	/**
 	 * @since 0.4
 	 *
-	 * @param ValueFormatter $propertyIdFormatter Formatter for IDs, must generate HTML.
-	 * @param SnakFormatter $snakDetailsFormatter detailed Formatter for Snaks, must generate HTML.
-	 * @param SnakFormatter $snakBreadCrumbFormatter terse Formatter for Snaks, must generate HTML.
+	 * @param DifferencesSnakVisualizer $snakVisualizer
 	 * @param string $languageCode
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		ValueFormatter $propertyIdFormatter,
-		SnakFormatter $snakDetailsFormatter,
-		SnakFormatter $snakBreadCrumbFormatter,
+		DifferencesSnakVisualizer $snakVisualizer,
 		$languageCode
 	) {
-		if ( $snakDetailsFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
-			&& $snakDetailsFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_DIFF
-		) {
-			throw new InvalidArgumentException(
-				'Expected $snakDetailsFormatter to generate html, not '
-				. $snakDetailsFormatter->getFormat() );
-		}
-
-		if ( $snakBreadCrumbFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
-			&& $snakBreadCrumbFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_DIFF
-		) {
-			throw new InvalidArgumentException(
-				'Expected $snakBreadCrumbFormatter to generate html, not '
-				. $snakBreadCrumbFormatter->getFormat() );
-		}
-
-		$this->propertyIdFormatter = $propertyIdFormatter;
-		$this->snakDetailsFormatter = $snakDetailsFormatter;
-		$this->snakBreadCrumbFormatter = $snakBreadCrumbFormatter;
+		$this->snakVisualizer = $snakVisualizer;
 		$this->languageCode = $languageCode;
 	}
 
@@ -96,7 +56,7 @@ class ClaimDifferenceVisualizer {
 	 * @since 0.4
 	 *
 	 * @param ClaimDifference $claimDifference
-	 * @param Claim $baseClaim
+	 * @param Claim $baseClaim The new claim, if it exists; otherwise, the old claim
 	 *
 	 * @return string
 	 */
@@ -168,22 +128,22 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @return string
 	 */
-	protected function visualizeMainSnakChange( DiffOpChange $mainSnakChange ) {
+	private function visualizeMainSnakChange( DiffOpChange $mainSnakChange ) {
 		$oldSnak = $mainSnakChange->getOldValue();
 		$newSnak = $mainSnakChange->getNewValue();
 
 		if ( $newSnak === null ) {
-			$headerHtml = $this->getSnakLabelHeader( $oldSnak );
+			$headerHtml = $this->snakVisualizer->getSnakLabelHeader( $oldSnak );
 		} else {
-			$headerHtml = $this->getSnakLabelHeader( $newSnak );
+			$headerHtml = $this->snakVisualizer->getSnakLabelHeader( $newSnak );
 		}
 
 		$valueFormatter = new DiffOpValueFormatter(
 			// todo: should show specific headers for each column
 			$headerHtml,
 			// TODO: How to highlight the actual changes inside the snak?
-			$this->formatSnakDetails( $oldSnak ),
-			$this->formatSnakDetails( $newSnak )
+			$this->snakVisualizer->formatSnakDetails( $oldSnak ),
+			$this->snakVisualizer->formatSnakDetails( $newSnak )
 		);
 
 		return $valueFormatter->generateHtml();
@@ -199,9 +159,9 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @return string
 	 */
-	protected function visualizeRankChange( DiffOpChange $rankChange, Claim $claim ) {
+	private function visualizeRankChange( DiffOpChange $rankChange, Claim $claim ) {
 		$claimMainSnak = $claim->getMainSnak();
-		$claimHeader = $this->getSnakValueHeader( $claimMainSnak );
+		$claimHeader = $this->snakVisualizer->getSnakValueHeader( $claimMainSnak );
 
 		$valueFormatter = new DiffOpValueFormatter(
 			$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->languageCode )->parse(),
@@ -217,7 +177,7 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @return null|String HTML
 	 */
-	protected function getRankHtml( $rank ) {
+	private function getRankHtml( $rank ) {
 		if ( $rank === null ) {
 			return null;
 		}
@@ -233,109 +193,6 @@ class ClaimDifferenceVisualizer {
 	}
 
 	/**
-	 * @param Snak|null $snak
-	 *
-	 * @return string HTML
-	 */
-	protected function formatSnakDetails( Snak $snak = null ) {
-		if ( $snak === null ) {
-			return null;
-		}
-
-		try {
-			return $this->snakDetailsFormatter->formatSnak( $snak );
-		} catch ( Exception $ex ) {
-			// @fixme maybe there is a way we can render something more useful
-			// we are getting multiple types of exceptions and should handle
-			// consistent (and shared code) with what we do in SnakHtmlGenerator.
-			$messageText = wfMessage( 'wikibase-snakformat-invalid-value' )
-				->inLanguage( $this->languageCode )
-				->parse();
-
-			return $messageText;
-		}
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 *
-	 * @return string HTML
-	 */
-	protected function formatPropertyId( EntityId $entityId ) {
-		try {
-			return $this->propertyIdFormatter->format( $entityId );
-		} catch ( FormattingException $ex ) {
-			return $entityId->getSerialization(); // XXX: or include the error message?
-		}
-	}
-
-	/**
-	 * Get formatted values of SnakList in an array
-	 *
-	 * @since 0.4
-	 *
-	 * @param SnakList $snakList
-	 *
-	 * @return string[] A list if HTML strings
-	 */
-	 protected function getSnakListValues( SnakList $snakList ) {
-		$values = array();
-		$colon = wfMessage( 'colon-separator' )->inLanguage( $this->languageCode )->escaped();
-
-		foreach ( $snakList as $snak ) {
-			/** @var $snak Snak */
-			$values[] =
-				$this->formatPropertyId( $snak->getPropertyId() ) .
-				$colon.
-				$this->formatSnakDetails( $snak );
-		}
-
-		return $values;
-	}
-
-	/**
-	 * Get formatted header for a snak, including the snak's property label, but not the snak's value.
-	 *
-	 * @since 0.4
-	 *
-	 * @param Snak|null $snak
-	 *
-	 * @return string HTML
-	 */
-	protected function getSnakLabelHeader( Snak $snak = null ) {
-		$headerText = wfMessage( 'wikibase-entity-property' )->inLanguage( $this->languageCode )->parse();
-
-		if ( $snak !== null ) {
-			$propertyId = $snak->getPropertyId();
-			$headerText .= ' / ' . $this->formatPropertyId( $propertyId );
-		}
-
-		return $headerText;
-	}
-
-	/**
-	 * Get formatted header for a snak, including the snak's property label and value.
-	 *
-	 * @since 0.4
-	 *
-	 * @param Snak $snak
-	 *
-	 * @return string HTML
-	 */
-	protected function getSnakValueHeader( Snak $snak ) {
-		$headerText = $this->getSnakLabelHeader( $snak );
-
-		try {
-			$headerText .= wfMessage( 'colon-separator' )->inLanguage( $this->languageCode )->escaped()
-				. $this->snakBreadCrumbFormatter->formatSnak( $snak );
-		} catch ( Exception $ex ) {
-			// just ignore it
-		}
-
-		return $headerText;
-	}
-
-	/**
 	 * Get Html for snaklist changes
 	 *
 	 * @since 0.4
@@ -347,25 +204,25 @@ class ClaimDifferenceVisualizer {
 	 * @return string
 	 * @throws RuntimeException
 	 */
-	protected function visualizeSnakListChanges( Diff $changes, Claim $claim, Message $breadCrumb ) {
+	private function visualizeSnakListChanges( Diff $changes, Claim $claim, Message $breadCrumb ) {
 		$html = '';
 
 		$claimMainSnak = $claim->getMainSnak();
-		$claimHeader = $this->getSnakValueHeader( $claimMainSnak );
+		$claimHeader = $this->snakVisualizer->getSnakValueHeader( $claimMainSnak );
 
-		$newVal = null;
-		$oldVal = null;
-
-		foreach( $changes as $change ) {
-			if ( $change instanceof DiffOpAdd ) {
-				$newVal = $this->getSnakListValues( $change->getNewValue()->getSnaks() );
-			} else if ( $change instanceof DiffOpRemove ) {
-				$oldVal = $this->getSnakListValues( $change->getOldValue()->getSnaks() );
-			} else if ( $change instanceof DiffOpChange ) {
-				$oldVal = $this->getSnakListValues( $change->getOldValue()->getSnaks() );
-				$newVal = $this->getSnakListValues( $change->getNewValue()->getSnaks() );
-			} else {
-				throw new RuntimeException( 'Diff operation of unknown type.' );
+		foreach ( $changes as $change ) {
+			$newVal = $oldVal = null;
+			if ( $change instanceof DiffOpAdd || $change instanceof DiffOpChange ) {
+				$newVal = $this->mapSnakList(
+					$change->getNewValue()->getSnaks(),
+					array( $this->snakVisualizer, 'formatSnak' )
+				);
+			}
+			if ( $change instanceof DiffOpRemove || $change instanceof DiffOpChange ) {
+				$oldVal = $this->mapSnakList(
+					$change->getOldValue()->getSnaks(),
+					array( $this->snakVisualizer, 'formatSnak' )
+				);
 			}
 
 			$valueFormatter = new DiffOpValueFormatter(
@@ -374,11 +231,26 @@ class ClaimDifferenceVisualizer {
 				$newVal
 			);
 
-			$oldVal = $newVal = null;
 			$html .= $valueFormatter->generateHtml();
 		}
 
 		return $html;
+	}
+
+	/**
+	 * Map SnakList
+	 *
+	 * @param SnakList $snakList
+	 * @param callable $mapper
+	 *
+	 * @return mixed[]
+	 */
+	private function mapSnakList( SnakList $snakList, $mapper ) {
+		$ret = array();
+		foreach ( $snakList as $snak ) {
+			$ret[] = $mapper( $snak );
+		}
+		return $ret;
 	}
 
 	/**
@@ -392,34 +264,21 @@ class ClaimDifferenceVisualizer {
 	 * @return string
 	 * @throws RuntimeException
 	 */
-	protected function visualizeQualifierChanges( Diff $changes, Claim $claim ) {
+	private function visualizeQualifierChanges( Diff $changes, Claim $claim ) {
 		$html = '';
-		$colon = wfMessage( 'colon-separator' )->inLanguage( $this->languageCode )->escaped();
 
 		$claimMainSnak = $claim->getMainSnak();
-		$claimHeader = $this->getSnakValueHeader( $claimMainSnak );
+		$claimHeader = $this->snakVisualizer->getSnakValueHeader( $claimMainSnak );
 		$newVal = $oldVal = null;
 
-		foreach( $changes as $change ) {
+		foreach ( $changes as $change ) {
 			if ( $change instanceof DiffOpAdd ) {
-				$newVal =
-					$this->formatPropertyId( $change->getNewValue()->getPropertyId() ) .
-					$colon .
-					$this->formatSnakDetails( $change->getNewValue() );
-			} else if ( $change instanceof DiffOpRemove ) {
-				$oldVal =
-					$this->formatPropertyId( $change->getOldValue()->getPropertyId() ) .
-					$colon .
-					$this->formatSnakDetails( $change->getOldValue() );
-			} else if ( $change instanceof DiffOpChange ) {
-				$oldVal =
-					$this->formatPropertyId( $change->getOldValue()->getPropertyId() ) .
-					$colon .
-					$this->formatSnakDetails( $change->getOldValue() );
-				$newVal =
-					$this->formatPropertyId( $change->getNewValue()->getPropertyId() ) .
-					$colon .
-					$this->formatSnakDetails( $change->getNewValue() );
+				$newVal = $this->snakVisualizer->formatSnak( $change->getNewValue() );
+			} elseif ( $change instanceof DiffOpRemove ) {
+				$oldVal = $this->snakVisualizer->formatSnak( $change->getOldValue() );
+			} elseif ( $change instanceof DiffOpChange ) {
+				$oldVal = $this->snakVisualizer->formatSnak( $change->getOldValue() );
+				$newVal = $this->snakVisualizer->formatSnak( $change->getNewValue() );
 			} else {
 				throw new RuntimeException( 'Diff operation of unknown type.' );
 			}
