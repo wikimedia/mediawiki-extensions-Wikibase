@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fc9fc1b7",
+        "filename": "repo/includes/Diff/DifferencesSnakVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-04T13:55:45Z",
+      "side": 1,
+      "message": "space",
+      "revId": "0fed06b4cd0f9f9c8ed36e9cc27c92b45c0e8308",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
