@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f97033a5",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-04T08:48:09Z",
+      "side": 1,
+      "message": "statementview can try to create a snakview with `null` as `value`.",
+      "revId": "cbb952b7024c5e982b040d62ef6c623df8967e96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_19764fa0",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-04T08:48:09Z",
+      "side": 1,
+      "message": "Error message does not match documentation.",
+      "revId": "cbb952b7024c5e982b040d62ef6c623df8967e96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
