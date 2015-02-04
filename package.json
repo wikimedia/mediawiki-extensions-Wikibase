@@ -2,7 +2,7 @@
 	"name": "Wikibase",
 	"version": "0.0.0",
 	"scripts": {
-		"test": "jscs ."
+		"test": "jshint . && jscs ."
 	},
 	"repository": {
 		"type": "git",
@@ -11,6 +11,7 @@
 	"author": "The Wikidata team",
 	"license": "GPL-2.0+",
 	"devDependencies": {
-		"jscs": ""
+		"jscs": "",
+		"jshint": ""
 	}
 }
