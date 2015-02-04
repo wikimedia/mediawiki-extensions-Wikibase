@@ -24,23 +24,23 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider quantityFormatProvider
+	 * @param TimeValue $value
+	 * @param string $pattern
 	 */
-	public function testFormat( $value, $options, $pattern ) {
-		$formatter = new TimeDetailsFormatter( $options );
+	public function testFormat( TimeValue $value, $pattern ) {
+		$formatter = new TimeDetailsFormatter( new FormatterOptions() );
 
 		$html = $formatter->format( $value );
 		$this->assertRegExp( $pattern, $html );
 	}
 
 	public function quantityFormatProvider() {
-		$options = new FormatterOptions( array(
-			ValueFormatter::OPT_LANG => 'en'
-		) );
+		$gregorian = TimeFormatter::CALENDAR_GREGORIAN;
+		$day = TimeValue::PRECISION_DAY;
 
 		return array(
 			array(
-				new TimeValue( '+2001-01-01T00:00:00Z', 60, 0, 1, 10, TimeFormatter::CALENDAR_GREGORIAN ),
-				$options,
+				new TimeValue( '+2001-01-01T00:00:00Z', 60, 0, 1, TimeValue::PRECISION_MONTH, $gregorian ),
 				'@' . implode( '.*',
 					array(
 						'<h4[^<>]*>[^<>]*2001[^<>]*</h4>',
@@ -54,13 +54,11 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 				) . '@s'
 			),
 			array(
-				new TimeValue( '+2001-01-01T00:00:00Z', 60, 0, 1, 10, 'Stardate' ),
-				$options,
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, 'Stardate' ),
 				'@.*<td class="wb-time-calendar">Stardate</td>.*@s'
 			),
 			array(
-				new TimeValue( '+2001-01-01T00:00:00Z', -179, 0, 1, 10, TimeFormatter::CALENDAR_GREGORIAN ),
-				$options,
+				new TimeValue( '+2001-01-01T00:00:00Z', -179, 0, 0, $day, $gregorian ),
 				'@.*<td class="wb-time-timezone">\xE2\x88\x9202:59</td>.*@s'
 			),
 		);

@@ -28,12 +28,10 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	private $language;
 
 	/**
-	 * @param FormatterOptions $options
+	 * @param FormatterOptions|null $options
 	 */
-	public function __construct( FormatterOptions $options ) {
-		$this->options = $options;
-
-		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
+	public function __construct( FormatterOptions $options = null ) {
+		parent::__construct( $options );
 
 		$this->language = Language::factory(
 			$this->options->getOption( ValueFormatter::OPT_LANG )

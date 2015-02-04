@@ -24,34 +24,27 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	const OPT_CALENDARNAMES = 'calendars';
 
 	/**
-	 * @var MwTimeIsoFormatter
-	 */
-	private $isoTimeFormatter;
-
-	/**
 	 * @var TimeFormatter
 	 */
 	private $timeFormatter;
 
 	/**
-	 * @param FormatterOptions $options
+	 * @param FormatterOptions|null $options
 	 */
-	public function __construct( FormatterOptions $options ) {
+	public function __construct( FormatterOptions $options = null ) {
 		parent::__construct( $options );
 
-		if ( $options->hasOption( TimeFormatter::OPT_TIME_ISO_FORMATTER ) ) {
-			$this->isoTimeFormatter = $options->getOption( TimeFormatter::OPT_TIME_ISO_FORMATTER );
-		} else {
-			$this->isoTimeFormatter = new MwTimeIsoFormatter( $options );
-			$options->setOption( TimeFormatter::OPT_TIME_ISO_FORMATTER, $this->isoTimeFormatter );
-		}
-
-		$this->timeFormatter = new TimeFormatter( $options );
+		$this->defaultOption(
+			TimeFormatter::OPT_TIME_ISO_FORMATTER,
+			new MwTimeIsoFormatter( $this->options )
+		);
 
 		$this->defaultOption( self::OPT_CALENDARNAMES, array(
 			TimeFormatter::CALENDAR_GREGORIAN => 'Gregorian',
 			TimeFormatter::CALENDAR_JULIAN => 'Julian',
 		) );
+
+		$this->timeFormatter = new TimeFormatter( $this->options );
 	}
 
 	/**
@@ -70,34 +63,39 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 			throw new InvalidArgumentException( 'Data value type mismatch. Expected an TimeValue.' );
 		}
 
-		$calendarModel = $value->getCalendarModel();
-		$calendarNames = $this->getOption( self::OPT_CALENDARNAMES );
-		if ( array_key_exists( $calendarModel, $calendarNames ) ) {
-			$calendarModel = $calendarNames[$calendarModel];
-		}
-
 		$html = '';
-		$html .= Html::element( 'h4',
+		$html .= Html::element(
+			'h4',
 			array( 'class' => 'wb-details wb-time-details wb-time-rendered' ),
 			$this->timeFormatter->format( $value )
 		);
+		$html .= Html::openElement( 'table', array( 'class' => 'wb-details wb-time-details' ) );
 
-		$html .= Html::openElement( 'table',
-			array( 'class' => 'wb-details wb-time-details' ) );
-		$html .= $this->renderLabelValuePair( 'isotime', htmlspecialchars( $value->getTime() ) );
-
-		//TODO: provide "nice" rendering of timezone, calendar, precision, etc.
+		$html .= $this->renderLabelValuePair(
+			'isotime',
+			htmlspecialchars( $value->getTime() )
+		);
 		$html .= $this->renderLabelValuePair(
 			'timezone',
-			$this->formatTimezone( $value->getTimezone() )
+			$this->getTimezoneHtml( $value->getTimezone() )
 		);
-		$html .= $this->renderLabelValuePair( 'calendar',
-			htmlspecialchars( $calendarModel ) );
-		$html .= $this->renderLabelValuePair( 'precision',
-			htmlspecialchars( $value->getPrecision() ) );
-
-		$html .= $this->renderLabelValuePair( 'before', htmlspecialchars( $value->getBefore() ) );
-		$html .= $this->renderLabelValuePair( 'after', htmlspecialchars( $value->getAfter() ) );
+		$html .= $this->renderLabelValuePair(
+			'calendar',
+			$this->getCalendarModelHtml( $value->getCalendarModel() )
+		);
+		// TODO: Provide "nice" rendering of precision, etc.
+		$html .= $this->renderLabelValuePair(
+			'precision',
+			htmlspecialchars( $value->getPrecision() )
+		);
+		$html .= $this->renderLabelValuePair(
+			'before',
+			htmlspecialchars( $value->getBefore() )
+		);
+		$html .= $this->renderLabelValuePair(
+			'after',
+			htmlspecialchars( $value->getAfter() )
+		);
 
 		$html .= Html::closeElement( 'table' );
 
@@ -109,11 +107,25 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @return string
 	 */
-	private function formatTimezone( $timezone ) {
+	private function getTimezoneHtml( $timezone ) {
 		$sign = $timezone < 0 ? "\xE2\x88\x92" : '+';
 		$hour = floor( abs( $timezone ) / 60 );
 		$minute = abs( $timezone ) - $hour * 60;
 		return sprintf( '%s%02d:%02d', $sign, $hour, $minute );
+	}
+
+	/**
+	 * @param string $calendarModel
+	 *
+	 * @return string
+	 */
+	private function getCalendarModelHtml( $calendarModel ) {
+		$calendarNames = $this->getOption( self::OPT_CALENDARNAMES );
+		if ( array_key_exists( $calendarModel, $calendarNames ) ) {
+			$calendarModel = $calendarNames[$calendarModel];
+		}
+
+		return htmlspecialchars( $calendarModel );
 	}
 
 	/**
