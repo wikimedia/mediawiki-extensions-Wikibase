@@ -86,15 +86,15 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		// TODO: Provide "nice" rendering of precision, etc.
 		$html .= $this->renderLabelValuePair(
 			'precision',
-			$this->getPrecisionHtml( $value->getPrecision() )
+			$this->getAmountAndPrecisionHtml( $value->getPrecision() )
 		);
 		$html .= $this->renderLabelValuePair(
 			'before',
-			htmlspecialchars( $value->getBefore() )
+			$this->getAmountAndPrecisionHtml( $value->getPrecision(), $value->getBefore() )
 		);
 		$html .= $this->renderLabelValuePair(
 			'after',
-			htmlspecialchars( $value->getAfter() )
+			$this->getAmountAndPrecisionHtml( $value->getPrecision(), $value->getAfter() )
 		);
 
 		$html .= Html::closeElement( 'table' );
@@ -130,16 +130,12 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 
 	/**
 	 * @param int $precision
+	 * @param int $amount
 	 *
 	 * @return string HTML
 	 */
-	private function getPrecisionHtml( $precision ) {
-		if ( $precision > TimeValue::PRECISION_SECOND ) {
-			return htmlspecialchars( $precision );
-		}
-
+	private function getAmountAndPrecisionHtml( $precision, $amount = 1 ) {
 		$key = 'years';
-		$amount = 1;
 
 		switch ( $precision ) {
 			case TimeValue::PRECISION_MONTH: $key = 'months'; break;
@@ -150,7 +146,9 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		}
 
 		if ( $precision < TimeValue::PRECISION_YEAR ) {
-			$amount = pow( 10, TimeValue::PRECISION_YEAR - $precision );
+			$amount *= pow( 10, TimeValue::PRECISION_YEAR - $precision );
+		} elseif ( $precision > TimeValue::PRECISION_SECOND ) {
+			$amount /= pow( 10, $precision - TimeValue::PRECISION_SECOND );
 		}
 
 		$lang = $this->getOption( ValueFormatter::OPT_LANG );

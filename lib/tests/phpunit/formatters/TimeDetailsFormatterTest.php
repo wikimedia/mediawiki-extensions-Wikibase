@@ -50,8 +50,8 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 						'<td[^<>]*>\+01:00</td>',
 						'<td[^<>]*>Gregorian</td>',
 						'<td[^<>]*>\(months: 1\)</td>',
-						'<td[^<>]*>0</td>',
-						'<td[^<>]*>1</td>',
+						'<td[^<>]*>\(months: 0\)</td>',
+						'<td[^<>]*>\(months: 1\)</td>',
 					)
 				) . '@s'
 			),
@@ -74,6 +74,18 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 			array(
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 				'@.*<td[^<>]*precision">\(years: 1000000000\)</td>.*@s'
+			),
+			array(
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 2, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				'@.*<td[^<>]*before">\(years: 2\)</td>.*@s'
+			),
+			array(
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 5, TimeValue::PRECISION_10a, $gregorian ),
+				'@.*<td[^<>]*after">\(years: 50\)</td>.*@s'
+			),
+			array(
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 125, $day, $gregorian ),
+				'@.*<td[^<>]*after">\(days: 125\)</td>.*@s'
 			),
 		);
 	}
