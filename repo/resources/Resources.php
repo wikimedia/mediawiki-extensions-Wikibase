@@ -183,7 +183,8 @@ return call_user_func( function() {
 				'wikibase.store.CombiningEntityStore',
 				'wikibase.store.FetchedContentUnserializer',
 				'wikibase.store.MwConfigEntityStore',
-				'wikibase.ValueViewBuilder'
+				'wikibase.ValueViewBuilder',
+				'wikibase.WikibaseContentLanguages'
 			),
 			'messages' => array(
 				'pagetitle',
@@ -266,6 +267,17 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.WikibaseContentLanguages' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.WikibaseContentLanguages.js',
+			),
+			'dependencies' => array(
+				'util.ContentLanguages',
+				'util.inherit',
+				'wikibase',
+			),
+		),
+
 		'wikibase.toc' => $moduleTemplate + array(
 			'styles' => array(
 				'themes/default/wikibase.toc.css',
@@ -277,6 +289,7 @@ return call_user_func( function() {
 		$modules['wikibase.getLanguageNameByCode']['dependencies'][] = 'ext.uls.mediawiki';
 		$modules['wikibase.special.itemDisambiguation']['dependencies'][] = 'ext.uls.mediawiki';
 		$modules['wikibase.special.entitiesWithout']['dependencies'][] = 'ext.uls.mediawiki';
+		$modules['wikibase.WikibaseContentLanguages']['dependencies'][] = 'ext.uls.languagenames';
 	}
 
 	return array_merge(
