@@ -7,6 +7,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use MediaWikiTestCase;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
@@ -14,9 +15,9 @@ use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\Diff\ClaimDifference;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
 
@@ -30,71 +31,57 @@ use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
+class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 
-	public function newSnakFormatter( $format = SnakFormatter::FORMAT_HTML ){
-		$instance = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
-		$instance->expects( $this->any() )
-			->method( 'getFormat' )
-			->will( $this->returnValue( $format ) );
-		$instance->expects( $this->any() )
-			->method( 'canFormatSnak' )
-			->will( $this->returnValue( true ) );
-		$instance->expects( $this->any() )
-			->method( 'formatSnak' )
-			->will( $this->returnValue( '<i>SNAK</i>' ) );
-		return $instance;
-	}
-
-	public function newEntityIdLabelFormatter(){
-		$instance = $this
-			->getMockBuilder( 'Wikibase\Lib\EntityIdLabelFormatter' )
+	public function newDifferencesSnakVisualizer() {
+		$instance = $this->getMockBuilder( 'Wikibase\Repo\Diff\DifferencesSnakVisualizer' )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$instance->expects( $this->any() )
-			->method( 'format' )
-			->will( $this->returnValue( '<a>PID</a>' ) );
+			->method( 'getPropertyAndDetailedValue' )
+			->will( $this->returnCallback( function( PropertyValueSnak $snak ) {
+				return $snak->getPropertyId()->getSerialization() . ': ' . $snak->getDataValue()->getValue()
+					. ' (DETAILED)';
+			} ) );
+
+		$instance->expects( $this->any() )
+			->method( 'getDetailedValue' )
+			->will( $this->returnCallback( function( PropertyValueSnak $snak = null ) {
+				return $snak === null ? null : $snak->getDataValue()->getValue() . ' (DETAILED)';
+			} ) );
+
+		$instance->expects( $this->any() )
+			->method( 'getPropertyHeader' )
+			->will( $this->returnCallback( function( Snak $snak ) {
+				return 'property / ' . $snak->getPropertyId()->getSerialization();
+			} ) );
+
+
+		$instance->expects( $this->any() )
+			->method( 'getPropertyAndValueHeader' )
+			->will( $this->returnCallback( function( PropertyValueSnak $snak ) {
+				return 'property / ' . $snak->getPropertyId()->getSerialization() . ': ' .
+					$snak->getDataValue()->getValue();
+			} ) );
 
 		return $instance;
 	}
 
-	public function newClaimDifferenceVisualizer(){
+	public function newClaimDifferenceVisualizer() {
 		return new ClaimDifferenceVisualizer(
-			$this->newEntityIdLabelFormatter(),
-			$this->newSnakFormatter(),
-			$this->newSnakFormatter(),
+			$this->newDifferencesSnakVisualizer(),
 			'en'
 		);
 	}
 
-	public function testConstruction(){
+	public function testConstruction() {
 		$instance = $this->newClaimDifferenceVisualizer();
 		$this->assertInstanceOf( 'Wikibase\Repo\Diff\ClaimDifferenceVisualizer', $instance );
 	}
 
-	public function testConstructionWithBadDetailsFormatter(){
-		$this->setExpectedException( 'InvalidArgumentException' );
-		new ClaimDifferenceVisualizer(
-			$this->newEntityIdLabelFormatter(),
-			$this->newSnakFormatter( 'qwertyuiop' ),
-			$this->newSnakFormatter(),
-			'en'
-		);
-	}
-
-	public function testConstructionWithBadTerseFormatter(){
-		$this->setExpectedException( 'InvalidArgumentException' );
-		new ClaimDifferenceVisualizer(
-			$this->newEntityIdLabelFormatter(),
-			$this->newSnakFormatter(),
-			$this->newSnakFormatter( 'qwertyuiop' ),
-			'en'
-		);
-	}
-
 	//TODO come up with a better way of testing this.... EWW at all the html...
-	public function provideDifferenceAndClaim(){
+	public function provideDifferenceAndClaim() {
 		return array(
 			//0 no change
 			array(
@@ -111,24 +98,24 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 					)
 				),
 				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
-				'<tr><td colspan="2" class="diff-lineno">property / <a>PID</a></td><td colspan="2" class="diff-lineno">property / <a>PID</a></td></tr>'.
+				'<tr><td colspan="2" class="diff-lineno">property / P1</td><td colspan="2" class="diff-lineno">property / P1</td></tr>'.
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
-				'<div><del class="diffchange diffchange-inline"><span><i>SNAK</i></span></del></div></td>'.
+				'<div><del class="diffchange diffchange-inline"><span>bar (DETAILED)</span></del></div></td>'.
 				'<td class="diff-marker">+</td><td class="diff-addedline">'.
-				'<div><ins class="diffchange diffchange-inline"><span><i>SNAK</i></span></ins></div></td></tr>'
+				'<div><ins class="diffchange diffchange-inline"><span>foo (DETAILED)</span></ins></div></td></tr>'
 			),
 			//2 +qualifiers
 			array(
 				new ClaimDifference(
 					null,
 					new Diff( array(
-						new DiffOpAdd( new PropertySomeValueSnak( 44 ) ),
+						new DiffOpAdd( new PropertyValueSnak( 44, new StringValue( 'v' ) ) ),
 					) )
 				),
 				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
-				'<tr><td colspan="2" class="diff-lineno"></td><td colspan="2" class="diff-lineno">property / <a>PID</a>: <i>SNAK</i> / qualifier</td></tr>'.
+				'<tr><td colspan="2" class="diff-lineno"></td><td colspan="2" class="diff-lineno">property / P1: foo / qualifier</td></tr>'.
 				'<tr><td colspan="2">&nbsp;</td><td class="diff-marker">+</td><td class="diff-addedline">'.
-				'<div><ins class="diffchange diffchange-inline"><span><a>PID</a>: <i>SNAK</i></span></ins></div></td></tr>'
+				'<div><ins class="diffchange diffchange-inline"><span>P44: v (DETAILED)</span></ins></div></td></tr>'
 			),
 			//3 +references
 			array(
@@ -136,13 +123,13 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 					null,
 					null,
 					new Diff( array(
-						new DiffOpRemove( new Reference( new SnakList( array( new PropertyNoValueSnak( 50 ) ) ) ) ),
+						new DiffOpRemove( new Reference( new SnakList( array( new PropertyValueSnak( 50, new StringValue( 'v' ) ) ) ) ) ),
 					) )
 				),
 				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
-				'<tr><td colspan="2" class="diff-lineno">property / <a>PID</a>: <i>SNAK</i> / reference</td><td colspan="2" class="diff-lineno"></td></tr>'.
+				'<tr><td colspan="2" class="diff-lineno">property / P1: foo / reference</td><td colspan="2" class="diff-lineno"></td></tr>'.
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
-				'<div><del class="diffchange diffchange-inline"><span><a>PID</a>: <i>SNAK</i></span></del></div></td><td colspan="2">&nbsp;</td></tr>'
+				'<div><del class="diffchange diffchange-inline"><span>P50: v (DETAILED)</span></del></div></td><td colspan="2">&nbsp;</td></tr>'
 			),
 			//4 ranks
 			array(
@@ -153,7 +140,7 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 					new DiffOpChange( Statement::RANK_NORMAL, Statement::RANK_PREFERRED )
 				),
 				new Statement( new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ) ),
-				'<tr><td colspan="2" class="diff-lineno">property / <a>PID</a>: <i>SNAK</i> / rank</td><td colspan="2" class="diff-lineno">property / <a>PID</a>: <i>SNAK</i> / rank</td></tr>'.
+				'<tr><td colspan="2" class="diff-lineno">property / P1: foo / rank</td><td colspan="2" class="diff-lineno">property / P1: foo / rank</td></tr>'.
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
 				'<div><del class="diffchange diffchange-inline"><span>Normal rank</span></del></div></td>'.
 				'<td class="diff-marker">+</td><td class="diff-addedline">'.
@@ -175,33 +162,33 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 		$expect =
 			// main snak
 			'<tr><td colspan="2" class="diff-lineno"></td>'.
-			'<td colspan="2" class="diff-lineno">property / <a>PID</a></td></tr>'.
+			'<td colspan="2" class="diff-lineno">property / P12</td></tr>'.
 			'<tr><td colspan="2">&nbsp;</td><td class="diff-marker">+</td><td class="diff-addedline">'.
-			'<div><ins class="diffchange diffchange-inline"><span><i>SNAK</i></span></ins></div></td></tr>'.
+			'<div><ins class="diffchange diffchange-inline"><span>foo (DETAILED)</span></ins></div></td></tr>'.
 
 			// rank
 			'<tr><td colspan="2" class="diff-lineno"></td>'.
-			'<td colspan="2" class="diff-lineno">property / <a>PID</a>: <i>SNAK</i> / rank</td></tr>'.
+			'<td colspan="2" class="diff-lineno">property / P12: foo / rank</td></tr>'.
 			'<tr><td colspan="2">&nbsp;</td><td class="diff-marker">+</td><td class="diff-addedline">'.
 			'<div><ins class="diffchange diffchange-inline"><span>Normal rank</span></ins></div></td></tr>'.
 
 			// qualifier
 			'<tr><td colspan="2" class="diff-lineno"></td>'.
-			'<td colspan="2" class="diff-lineno">property / <a>PID</a>: <i>SNAK</i> / qualifier</td></tr>'.
+			'<td colspan="2" class="diff-lineno">property / P12: foo / qualifier</td></tr>'.
 			'<tr><td colspan="2">&nbsp;</td><td class="diff-marker">+</td><td class="diff-addedline">'.
-			'<div><ins class="diffchange diffchange-inline"><span><a>PID</a>: <i>SNAK</i></span></ins></div></td></tr>'.
+			'<div><ins class="diffchange diffchange-inline"><span>P50: v (DETAILED)</span></ins></div></td></tr>'.
 
 			// reference
 			'<tr><td colspan="2" class="diff-lineno"></td>'.
-			'<td colspan="2" class="diff-lineno">property / <a>PID</a>: <i>SNAK</i> / reference</td></tr>'.
+			'<td colspan="2" class="diff-lineno">property / P12: foo / reference</td></tr>'.
 			'<tr><td colspan="2">&nbsp;</td><td class="diff-marker">+</td><td class="diff-addedline">'.
-			'<div><ins class="diffchange diffchange-inline"><span><a>PID</a>: <i>SNAK</i></span></ins></div></td></tr>';
+			'<div><ins class="diffchange diffchange-inline"><span>P44: referencevalue (DETAILED)</span></ins></div></td></tr>';
 
 		$visualizer = $this->newClaimDifferenceVisualizer();
 		$claim = new Statement(
 			new Claim(
 				new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'foo' ) ),
-				new SnakList( array( new PropertyNoValueSnak( 50 ) ) )
+				new SnakList( array( new PropertyValueSnak( 50, new StringValue( 'v' ) ) ) )
 			),
 			new ReferenceList( array(
 				new Reference(
@@ -216,38 +203,38 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 	public function testVisualizeRemovedClaim(){
 		$expect =
 			// main snak
-			'<tr><td colspan="2" class="diff-lineno">property / <a>PID</a></td>'.
+			'<tr><td colspan="2" class="diff-lineno">property / P12</td>'.
 			'<td colspan="2" class="diff-lineno"></td></tr>'.
 			'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
-			'<div><del class="diffchange diffchange-inline"><span><i>SNAK</i></span></del></div>'.
+			'<div><del class="diffchange diffchange-inline"><span>foo (DETAILED)</span></del></div>'.
 			'</td><td colspan="2">&nbsp;</td></tr>'.
 
 			// rank
-			'<tr><td colspan="2" class="diff-lineno">property / <a>PID</a>: <i>SNAK</i> / rank</td>'.
+			'<tr><td colspan="2" class="diff-lineno">property / P12: foo / rank</td>'.
 			'<td colspan="2" class="diff-lineno"></td></tr>'.
 			'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
 			'<div><del class="diffchange diffchange-inline"><span>Normal rank</span></del></div>'
 			.'</td><td colspan="2">&nbsp;</td></tr>'.
 
 			// qualifier
-			'<tr><td colspan="2" class="diff-lineno">property / <a>PID</a>: <i>SNAK</i> / qualifier</td>'.
+			'<tr><td colspan="2" class="diff-lineno">property / P12: foo / qualifier</td>'.
 			'<td colspan="2" class="diff-lineno"></td></tr>'.
 			'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
-			'<div><del class="diffchange diffchange-inline"><span><a>PID</a>: <i>SNAK</i></span></del></div>'.
+			'<div><del class="diffchange diffchange-inline"><span>P50: v (DETAILED)</span></del></div>'.
 			'</td><td colspan="2">&nbsp;</td></tr>'.
 
 			// reference
-			'<tr><td colspan="2" class="diff-lineno">property / <a>PID</a>: <i>SNAK</i> / reference</td>'.
+			'<tr><td colspan="2" class="diff-lineno">property / P12: foo / reference</td>'.
 			'<td colspan="2" class="diff-lineno"></td></tr>'.
 			'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
-			'<div><del class="diffchange diffchange-inline"><span><a>PID</a>: <i>SNAK</i></span></del></div>'.
+			'<div><del class="diffchange diffchange-inline"><span>P44: referencevalue (DETAILED)</span></del></div>'.
 			'</td><td colspan="2">&nbsp;</td></tr>';
 
 		$visualizer = $this->newClaimDifferenceVisualizer();
 		$claim = new Statement(
 			new Claim(
 				new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'foo' ) ),
-				new SnakList( array( new PropertyNoValueSnak( 50 ) ) )
+				new SnakList( array( new PropertyValueSnak( 50, new StringValue( 'v' ) ) ) )
 			),
 			new ReferenceList( array(
 				new Reference(
