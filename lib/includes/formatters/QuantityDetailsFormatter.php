@@ -106,8 +106,11 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	protected function getFieldLabel( $fieldName ) {
 		$lang = $this->getOption( ValueFormatter::OPT_LANG );
 
-		// Messages: wb-quantitydetails-amount, wb-quantitydetails-upperbound,
-		// wb-quantitydetails-lowerbound, wb-quantitydetails-unit
+		// Messages:
+		// wikibase-quantitydetails-amount
+		// wikibase-quantitydetails-upperbound
+		// wikibase-quantitydetails-lowerbound
+		// wikibase-quantitydetails-unit
 		$key = 'wikibase-quantitydetails-' . strtolower( $fieldName );
 		$msg = wfMessage( $key )->inLanguage( $lang );
 

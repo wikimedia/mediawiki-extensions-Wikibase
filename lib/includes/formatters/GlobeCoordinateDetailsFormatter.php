@@ -107,8 +107,11 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 	protected function getFieldLabel( $fieldName ) {
 		$lang = $this->getOption( ValueFormatter::OPT_LANG );
 
-		// Messages: wb-globedetails-amount, wb-globedetails-upperbound,
-		// wb-globedetails-lowerbound, wb-globedetails-unit
+		// Messages:
+		// wikibase-globedetails-latitude
+		// wikibase-globedetails-longitude
+		// wikibase-globedetails-precision
+		// wikibase-globedetails-globe
 		$key = 'wikibase-globedetails-' . strtolower( $fieldName );
 		$msg = wfMessage( $key )->inLanguage( $lang );
 

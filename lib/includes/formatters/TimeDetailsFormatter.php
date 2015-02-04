@@ -115,8 +115,13 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	protected function getFieldLabel( $fieldName ) {
 		$lang = $this->getOption( ValueFormatter::OPT_LANG );
 
-		// Messages: wb-timedetails-amount, wb-timedetails-upperbound,
-		// wb-timedetails-lowerbound, wb-timedetails-unit
+		// Messages:
+		// wikibase-timedetails-isotime
+		// wikibase-timedetails-timezone
+		// wikibase-timedetails-calendar
+		// wikibase-timedetails-precision
+		// wikibase-timedetails-before
+		// wikibase-timedetails-after
 		$key = 'wikibase-timedetails-' . strtolower( $fieldName );
 		$msg = wfMessage( $key )->inLanguage( $lang );
 
