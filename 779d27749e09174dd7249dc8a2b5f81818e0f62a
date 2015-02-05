@@ -16,6 +16,23 @@
       "revId": "779d27749e09174dd7249dc8a2b5f81818e0f62a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f8bd8464",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-05T12:56:50Z",
+      "side": 1,
+      "message": "Would prefer \"attachAnonymousEditWarningHandler\".",
+      "revId": "779d27749e09174dd7249dc8a2b5f81818e0f62a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
