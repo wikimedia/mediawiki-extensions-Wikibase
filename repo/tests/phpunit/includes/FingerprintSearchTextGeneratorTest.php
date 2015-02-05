@@ -57,12 +57,12 @@ class FingerprintSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testGivenEmptyEntity_newlineIsReturned() {
+	public function testGivenEmptyEntity_emptyStringIsReturned() {
 		$generator = new FingerprintSearchTextGenerator();
 		$fingerprint = new Fingerprint();
 		$text = $generator->generate( $fingerprint );
 
-		$this->assertSame( "\n", $text );
+		$this->assertSame( '', $text );
 	}
 
 	public function testGivenUntrimmedLabel_generateDoesNotTrim() {
@@ -71,7 +71,7 @@ class FingerprintSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$generator = new FingerprintSearchTextGenerator();
 		$text = $generator->generate( $fingerprint );
 
-		$this->assertSame( " untrimmed label \n", $text );
+		$this->assertSame( " untrimmed label ", $text );
 	}
 
 }
