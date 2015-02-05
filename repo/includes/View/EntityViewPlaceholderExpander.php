@@ -191,35 +191,14 @@ class EntityViewPlaceholderExpander {
 					$entityId,
 					isset( $args[1] ) ? intval( $args[1] ) : 0
 				);
-
-			case 'termbox-toc':
-				return $this->renderTermBoxTocEntry();
+			case 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class':
+				return $this->user->getOption( 'wikibase-entitytermsview-showEntitytermslistview' )
+					? '' : 'wikibase-entitytermsview-entitytermsforlanguagelistview-collapsed';
 
 			default:
 				wfWarn( "Unknown placeholder: $name" );
 				return '(((' . htmlspecialchars( $name ) . ')))';
 		}
-	}
-
-	/**
-	 * Generates HTML to be injected into the TOC as a link to the term box.
-	 *
-	 * @return string HTML
-	 */
-	public function renderTermBoxTocEntry() {
-		$languages = $this->getExtraUserLanguages();
-
-		if ( !$languages ) {
-			return '';
-		}
-
-		$html = $this->templateFactory->render( 'wb-entity-toc-section',
-			0, // section number, not really used, it seems
-			'wb-terms',
-			wfMessage( 'wikibase-terms' )->inLanguage( $this->uiLanguage )->text()
-		);
-
-		return $html;
 	}
 
 	/**
@@ -232,11 +211,10 @@ class EntityViewPlaceholderExpander {
 	 * @return string HTML
 	 */
 	public function renderTermBox( EntityId $entityId, $revisionId ) {
-		$languages = $this->getExtraUserLanguages();
-
-		if ( !$languages ) {
-			return '';
-		}
+		$languages = array_merge(
+			array( $this->uiLanguage->getCode() ),
+			$this->getExtraUserLanguages()
+		);
 
 		try {
 			// we may want to cache this...
@@ -251,8 +229,17 @@ class EntityViewPlaceholderExpander {
 			return '';
 		}
 
-		$termBoxView = new TermBoxView( $this->templateFactory, $this->uiLanguage );
-		$html = $termBoxView->renderTermBox( $this->targetPage, $entity->getFingerprint(), $languages );
+		$fingerprintView = new FingerprintView(
+			$this->templateFactory,
+			null,
+			$this->uiLanguage->getCode()
+		);
+		$html = $fingerprintView->getEntityTermsForLanguageListView(
+			$entity->getFingerprint(),
+			$languages,
+			$this->targetPage,
+			$this->user->getOption( 'wikibase-entitytermsvi-showEntitytermslistview' )
+		);
 
 		return $html;
 	}

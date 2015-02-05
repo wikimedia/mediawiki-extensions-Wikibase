@@ -89,7 +89,6 @@ h2.wb-section-heading {
 
 .wikibase-entityview input {
 	/* prevent browsers from applying their default styles */
-	padding: 0 2px;
 	border: 1px solid #AAA;
 	border-radius: 0;
 	box-sizing: border-box;
@@ -152,51 +151,7 @@ h2.wb-section-heading {
 	font-style: italic;
 }
 
-.wikibase-entityview .wikibase-movetoolbar-container {
-	right: 10px;
-	width: auto;
-}
-
-ul.tagadata {
-	padding: 0;
-}
-
-li.tagadata-choice-modified .tagadata-label-text {
-	/* highlight new tags since initialization */
-	text-decoration: underline;
-}
-
 /********** /BASIC LAYOUT **********/
-
-
-/********** TERMS **********/
-
-h2.wb-terms-heading {
-    float: left;
-    width: 100%;
-    margin-top: 0.6em;
-    margin-bottom: 0.2em;
-    padding-left: 10px;
-    border-bottom: none;
-}
-
-table.wb-terms {
-    border-spacing: 0;
-    width: 100%;
-    border-bottom: 1px solid #C9C9C9;
-    clear: both;
-    border-right: 1px solid #C9C9C9;
-}
-
-.wb-terms tr td {
-	background: #F8F8F8;
-}
-
-.wb-terms tbody:nth-child(even) td {
-	background: #F0F0F0;
-}
-
-/********** /TERMS **********/
 
 
 /********** CLAIMS **********/
