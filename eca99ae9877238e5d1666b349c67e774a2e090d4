@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7b196e26",
+        "filename": "repo/includes/ItemSearchTextGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-05T14:20:19Z",
+      "side": 1,
+      "message": "Didn\u0027t trim before. Also, if trimming would be desired, I\u0027d rather use a map-implode approach as before.",
+      "revId": "eca99ae9877238e5d1666b349c67e774a2e090d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
