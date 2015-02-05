@@ -70,11 +70,17 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 * @param array|Traversable|null $input
 	 * @param int $flags
 	 * @param string $iterator_class
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $input = null, $flags = 0, $iterator_class = 'ArrayIterator' ) {
 		parent::__construct( array(), $flags, $iterator_class );
 
 		if ( $input !== null ) {
+			if ( !is_array( $input ) && !( $input instanceof Traversable ) ) {
+				throw new InvalidArgumentException( '$input must be an array or Traversable' );
+			}
+
 			foreach ( $input as $offset => $value ) {
 				$this->offsetSet( $offset, $value );
 			}

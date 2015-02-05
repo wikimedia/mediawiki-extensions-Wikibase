@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Tests\Snak;
 
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -26,6 +27,7 @@ use Wikibase\DataModel\Tests\HashArray\HashArrayTest;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Adam Shorland
+ * @author Thiemo Mättig
  */
 class SnakListTest extends HashArrayTest {
 
@@ -67,6 +69,29 @@ class SnakListTest extends HashArrayTest {
 				new PropertyNoValueSnak( $id9001 ),
 				new PropertyValueSnak( $id42, new StringValue( 'a' ) ),
 			) ),
+		);
+	}
+
+	/**
+	 * @dataProvider invalidConstructorArgumentsProvider
+	 * @param mixed $input
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidConstructorArguments_constructorThrowsException( $input ) {
+		new SnakList( $input );
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$id1 = new PropertyId( 'P1' );
+
+		return array(
+			array( false ),
+			array( 1 ),
+			array( 0.1 ),
+			array( 'string' ),
+			array( $id1 ),
+			array( new PropertyNoValueSnak( $id1 ) ),
+			array( new PropertyValueSnak( $id1, new StringValue( 'a' ) ) ),
 		);
 	}
 
@@ -223,11 +248,12 @@ class SnakListTest extends HashArrayTest {
 
 		$arguments = array();
 
-		foreach( $rawArguments as $rawArgument ) {
-			if( !array_key_exists( 2, $rawArgument ) ){
-				$rawArgument[2] = array();
-			}
-			$arguments[] = array( new $class( $rawArgument[0] ), new $class( $rawArgument[1] ), $rawArgument[2] );
+		foreach ( $rawArguments as $rawArgument ) {
+			$arguments[] = array(
+				new $class( $rawArgument[0] ),
+				new $class( $rawArgument[1] ),
+				array_key_exists( 2, $rawArgument ) ? $rawArgument[2] : array()
+			);
 		}
 
 		return $arguments;
@@ -237,7 +263,7 @@ class SnakListTest extends HashArrayTest {
 	 * @dataProvider orderByPropertyProvider
 	 * @param SnakList $snakList
 	 * @param SnakList $expected
-	 * @param array $order
+	 * @param string[] $order
 	 */
 	public function testOrderByProperty( SnakList $snakList, SnakList $expected, $order = array() ) {
 		$initialSnakList = new SnakList( array_values( iterator_to_array( $snakList ) ) );
@@ -250,7 +276,7 @@ class SnakListTest extends HashArrayTest {
 
 		$this->assertEquals( $expected, $orderedSnakList );
 
-		if( $orderedSnakList->equals( $initialSnakList ) ) {
+		if ( $orderedSnakList->equals( $initialSnakList ) ) {
 			$this->assertTrue( $initialSnakList->getHash() === $snakList->getHash() );
 		} else {
 			$this->assertFalse( $initialSnakList->getHash() === $snakList->getHash() );
