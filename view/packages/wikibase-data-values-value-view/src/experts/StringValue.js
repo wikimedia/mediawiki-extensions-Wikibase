@@ -74,7 +74,7 @@
 			this._resizeInput();
 
 			// disable/enable input box
-			this.$input.prop('disabled', this.viewState().isDisabled() );
+			this.$input.prop( 'disabled', this.viewState().isDisabled() );
 
 			PARENT.prototype.draw.call( this );
 
@@ -88,7 +88,7 @@
 		_resizeInput: function() {
 			this.$input.inputautoexpand( {
 				expandWidth: false, // TODO: make this optional on valueview level
-				expandHeight:true,
+				expandHeight: true,
 				suppressNewLine: true // TODO: make this optional/leave it to parser options
 			} );
 		},

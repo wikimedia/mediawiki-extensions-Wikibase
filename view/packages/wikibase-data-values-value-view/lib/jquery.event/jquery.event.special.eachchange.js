@@ -51,7 +51,7 @@
 				eventNameString = assignNamespace( inputEvent, eventId );
 
 			if( !eventData ) {
-				eventData = { handlers:[], prevVal: getValue( $elem ) };
+				eventData = { handlers: [], prevVal: getValue( $elem ) };
 				$( document ).on( eventNameString, function( event ) {
 					eventData = $.data( $elem[0], eventId );
 					eventData.prevVal = getValue( $elem );

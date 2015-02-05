@@ -100,4 +100,3 @@ jQuery.fn.animateWithEvent = ( function( $ ) {
 	};
 
 }( jQuery ) );
-

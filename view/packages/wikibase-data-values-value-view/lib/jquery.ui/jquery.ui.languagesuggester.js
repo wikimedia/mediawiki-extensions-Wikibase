@@ -24,9 +24,8 @@ $.widget( 'ui.languagesuggester', PARENT, {
 	 * @protected
 	 */
 	_initMenu: function( ooMenu ) {
-		var self = this, retVal;
-
-		retVal = PARENT.prototype._initMenu.apply( this, arguments );
+		var self = this,
+			retVal = PARENT.prototype._initMenu.apply( this, arguments );
 
 		$( retVal )
 		.on( 'selected.languagesuggester', function( event, item ) {
@@ -52,7 +51,7 @@ $.widget( 'ui.languagesuggester', PARENT, {
 				function( item ) { return item.code.toLowerCase() === term.toLowerCase(); },
 				function( item ) { return subCodeMatcher.test( item.code ); },
 				function( item ) { return prefixMatcher.test( item.label ); },
-				function( item ) { return prefixMatcher.test( item.code ); },
+				function( item ) { return prefixMatcher.test( item.code ); }
 			];
 
 		deferred.resolve( $.grep( source, function( item ) {

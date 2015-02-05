@@ -45,21 +45,21 @@
 		 *
 		 * @param {jQuery} $extender
 		 */
-		init: function( $extender ){
+		init: function( $extender ) {
 			$extender.append( this._preview.element );
 		},
 
 		/**
 		 * Callback for the draw ExpertExtender event
 		 */
-		draw: function( ){
+		draw: function() {
 			this.update( this._getUpstreamValue() );
 		},
 
 		/**
 		 * Callback for the `destroy` `ExpertExtender` event.
 		 */
-		destroy: function( ){
+		destroy: function() {
 			this._preview.destroy();
 			this._preview.element.remove();
 
@@ -72,7 +72,7 @@
 		 *
 		 * @param {string} value HTML to show
 		 */
-		update: function( value ){
+		update: function( value ) {
 			this._preview.update( value );
 		},
 
@@ -85,4 +85,4 @@
 			}
 		}
 	} );
-} ( jQuery, jQuery.valueview.ExpertExtender, util.PrefixingMessageProvider ) );
+}( jQuery, jQuery.valueview.ExpertExtender, util.PrefixingMessageProvider ) );

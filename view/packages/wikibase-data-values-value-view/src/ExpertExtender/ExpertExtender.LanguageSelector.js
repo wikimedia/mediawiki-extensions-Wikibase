@@ -158,4 +158,4 @@
 		}
 	} );
 
-} ( jQuery, jQuery.valueview.ExpertExtender, util.PrefixingMessageProvider ) );
+}( jQuery, jQuery.valueview.ExpertExtender, util.PrefixingMessageProvider ) );

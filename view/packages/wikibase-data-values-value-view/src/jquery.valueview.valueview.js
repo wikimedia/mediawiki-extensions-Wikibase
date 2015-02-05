@@ -696,17 +696,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	 */
 	blur: expertProxy( 'blur' ),
 
-// TODO: Implement the following for introducing validation feature.
-//	/**
-//	 * Returns a $.Deferred resolving as soon as the validation for the current value is done.
-//	 * This is necessary since validation might need API request and is happening whenever the
-//	 * user types something in edit mode. By the point this function is called, the validation
-//	 * might not be done.
-//	 *
-//	 * @return $.Deferred
-//	 */
-//	validatedValue: function() {},
-
 	/**
 	 * Will take the current raw value of the `valueview`'s `Expert` and parse and format it using
 	 * the `valueParserProvider` and `valueFormatterProvider` injected via the options.
@@ -782,7 +771,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		if( rawValue === null || rawValue instanceof dv.DataValue ) {
 			this.__lastUpdateValue = undefined;
 			self._trigger( 'afterparse' );
-			deferred.resolve(rawValue);
+			deferred.resolve( rawValue );
 			return deferred.promise();
 		}
 
@@ -832,7 +821,7 @@ $.widget( 'valueview.valueview', PARENT, {
 				.always( function() {
 					self._trigger( 'afterparse' );
 				} );
-		} , this.options.parseDelay );
+		}, this.options.parseDelay );
 
 		return deferred.promise();
 	},

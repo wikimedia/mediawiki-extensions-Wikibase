@@ -99,8 +99,7 @@ jQuery.valueview = jQuery.valueview || {};
 
 		if( !valueViewNotifier ) {
 			valueViewNotifier = util.Notifier();
-		}
-		else if( !( valueViewNotifier instanceof util.Notifier ) ) {
+		} else if( !( valueViewNotifier instanceof util.Notifier ) ) {
 			throw new Error( 'No Notifier object was provided to the valueview expert' );
 		}
 
@@ -193,7 +192,7 @@ jQuery.valueview = jQuery.valueview || {};
 		/**
 		 * @param {Object} extension
 		 */
-		addExtension: function( extension ){
+		addExtension: function( extension ) {
 			this._extendable.addExtension( extension );
 		},
 

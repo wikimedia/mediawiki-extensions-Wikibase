@@ -174,7 +174,7 @@ $.widget( 'ui.inputextender', {
 				clearTimeout( self._animationTimeout );
 				self._animationTimeout = setTimeout( function() {
 					self.showExtension();
-				}, 250 ); //TODO: Fixed values can't be changed nor turned off
+				}, 250 ); // TODO: Fixed values can't be changed nor turned off
 			}
 		} )
 		.on( 'blur.' + this.widgetName, function( event ) {
@@ -185,13 +185,12 @@ $.widget( 'ui.inputextender', {
 			clearTimeout( self._animationTimeout );
 			self._animationTimeout = setTimeout( function() {
 				self.hideExtension();
-			}, 250 ); //TODO: Fixed values can't be changed nor turned off
+			}, 250 ); // TODO: Fixed values can't be changed nor turned off
 		} )
 		.on( 'keydown.' + this.widgetName, function( event ) {
 			if( event.keyCode === $.ui.keyCode.ESCAPE ) {
 				self.hideExtension();
-			}
-			else if(
+			} else if(
 				self.extensionIsVisible()
 				&& event.keyCode === $.ui.keyCode.TAB && !event.shiftKey
 			) {
@@ -394,7 +393,7 @@ $.widget( 'ui.inputextender', {
 			'extensionexpansion',
 			'fadeIn',
 			{
-				duration: 150, //TODO: Fixed values can't be changed nor turned off
+				duration: 150, // TODO: Fixed values can't be changed nor turned off
 				complete: function() {
 					if( $.isFunction( callback ) ) {
 						callback();
@@ -421,7 +420,7 @@ $.widget( 'ui.inputextender', {
 			'extensionremoval',
 			'fadeOut',
 			{
-				duration: 150, //TODO: Fixed values can't be changed nor turned off
+				duration: 150, // TODO: Fixed values can't be changed nor turned off
 				complete: function() {
 					inputExtendersWithVisibleExtension.remove( self );
 					if( $.isFunction( callback ) ) {
@@ -513,8 +512,7 @@ $.widget( 'ui.inputextender', {
 					event.preventDefault();
 					// Tab back to the input element:
 					self.element.focus();
-				}
-				else if( $focusable.last().is( event.target ) && !event.shiftKey ) {
+				} else if( $focusable.last().is( event.target ) && !event.shiftKey ) {
 					event.preventDefault();
 					// Tabbing forward out of the extension: Focus the next focusable element
 					// after the input element.

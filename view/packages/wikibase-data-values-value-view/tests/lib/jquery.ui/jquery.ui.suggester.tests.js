@@ -24,7 +24,7 @@
 		}, options || {} );
 
 		return $( '<input/>' )
-			.addClass( 'test_suggester')
+			.addClass( 'test_suggester' )
 			.appendTo( 'body' )
 			.suggester( options );
 	};

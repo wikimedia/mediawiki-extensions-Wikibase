@@ -165,4 +165,3 @@
 	} );
 
 }( jQuery, QUnit, jQuery.AnimationEvent, jQuery.PurposedCallbacks ) );
-

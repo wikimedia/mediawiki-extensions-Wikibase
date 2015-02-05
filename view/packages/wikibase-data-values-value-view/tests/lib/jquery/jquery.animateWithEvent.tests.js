@@ -13,7 +13,7 @@
 		var specialStartCallbackDone = 0;
 
 		QUnit.stop();
-		$( '<div/>').animateWithEvent(
+		$( '<div/>' ).animateWithEvent(
 			'fooeventpurpose',
 			'fadeOut',
 			{
@@ -43,7 +43,7 @@
 	} );
 
 	QUnit.test( 'special start callback', function( assert ) {
-		var $elem = $( '<div/>');
+		var $elem = $( '<div/>' );
 
 		QUnit.stop();
 
@@ -68,7 +68,7 @@
 	} );
 
 	QUnit.test( 'options.start callback', 2, function( assert ) {
-		var $elem = $( '<div/>');
+		var $elem = $( '<div/>' );
 		var animationEventsAnimation;
 
 		QUnit.stop();
@@ -99,7 +99,7 @@
 	} );
 
 	QUnit.test( 'On jQuery set of multiple elements', function( assert ) {
-		var $elems = $( '<div/>' ).add( $( '<span/> ') ).add( $( '<div/> ') );
+		var $elems = $( '<div/>' ).add( $( '<span/> ' ) ).add( $( '<div/> ' ) );
 		var $confirmedElems = $();
 		var animationEventInstances = [];
 
@@ -136,7 +136,7 @@
 	QUnit.test( 'Error cases', function( assert ) {
 		assert.throws(
 			function() {
-				$( '<div/>').animateWithEvent(
+				$( '<div/>' ).animateWithEvent(
 					'fooeventpurpose',
 					'fooAnimateFunction'
 				);
@@ -146,14 +146,14 @@
 
 		assert.throws(
 			function() {
-				$( '<div/>').animateWithEvent();
+				$( '<div/>' ).animateWithEvent();
 			},
 			'Throws error if called without parameters. At least event purpose has to be given.'
 		);
 	} );
 
 	QUnit.test( 'Two arguments are sufficient', 2, function( assert ) {
-		var $node = $( '<div/>');
+		var $node = $( '<div/>' );
 
 		QUnit.stop();
 
@@ -169,7 +169,7 @@
 			);
 		} );
 
-		$node = $( '<div/>');
+		$node = $( '<div/>' );
 
 		QUnit.stop();
 
@@ -186,4 +186,3 @@
 	} );
 
 }( jQuery, QUnit ) );
-

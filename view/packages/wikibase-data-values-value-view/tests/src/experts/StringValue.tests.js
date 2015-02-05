@@ -10,7 +10,7 @@
 	QUnit.module( 'jquery.valueview.experts.StringValue' );
 
 	testExpert( {
-		expertConstructor: valueview.experts.StringValue,
+		expertConstructor: valueview.experts.StringValue
 	} );
 
 }( QUnit, jQuery.valueview ) );

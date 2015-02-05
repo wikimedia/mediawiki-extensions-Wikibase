@@ -117,7 +117,7 @@ $.widget( 'ui.listrotator', {
 		},
 		animation: {
 			margins: ['-15px', '15px'],
-			duration: 150 //TODO: Fixed values can't be changed nor turned off
+			duration: 150 // TODO: Fixed values can't be changed nor turned off
 		},
 		deferInit: false,
 		messages: {
