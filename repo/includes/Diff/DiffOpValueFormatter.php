@@ -21,33 +21,42 @@ class DiffOpValueFormatter {
 	 *
 	 * @var string
 	 */
-	protected $name;
+	private $oldName;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @var string|string[]|null
+	 * @var string
 	 */
-	protected $oldValues;
+	private $newName;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @var string|string[]|null
+	 * @var string[]|null
 	 */
-	protected $newValues;
+	private $oldValues;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @param string $name HTML of name
+	 * @var string[]|null
+	 */
+	private $newValues;
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param string $oldName HTML of old name
+	 * @param string $newName HTML of new name
 	 * @param string|string[]|null $oldValues HTML of old value(s)
 	 * @param string|string[]|null $newValues HTML of new value(s)
 	 */
-	public function __construct( $name, $oldValues, $newValues ) {
-		$this->name = $name;
-		$this->oldValues = $oldValues;
-		$this->newValues = $newValues;
+	public function __construct( $oldName, $newName, $oldValues, $newValues ) {
+		$this->oldName = $oldName;
+		$this->newName = $newName;
+		$this->oldValues = is_string( $oldValues ) ? array( $oldValues ) : $oldValues;
+		$this->newValues = is_string( $newValues ) ? array( $newValues ) : $newValues;
 	}
 
 	/**
@@ -57,9 +66,9 @@ class DiffOpValueFormatter {
 	 *
 	 * @return string HTML
 	 */
-	protected function generateHeaderHtml() {
-		$oldHeader = is_array( $this->oldValues ) || is_string( $this->oldValues ) ? $this->name : '';
-		$newHeader = is_array( $this->newValues ) || is_string( $this->newValues ) ? $this->name : '';
+	private function generateHeaderHtml() {
+		$oldHeader = is_array( $this->oldValues ) ? $this->oldName : '';
+		$newHeader = is_array( $this->newValues ) ? $this->newName : '';
 
 		$html = Html::openElement( 'tr' );
 		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $oldHeader );
@@ -76,7 +85,7 @@ class DiffOpValueFormatter {
 	 *
 	 * @return string HTML
 	 */
-	protected function generateChangeOpHtml() {
+	private function generateChangeOpHtml() {
 		$html = Html::openElement( 'tr' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
@@ -100,7 +109,7 @@ class DiffOpValueFormatter {
 	 *
 	 * @return string HTML
 	 */
-	protected function generateAddOpHtml() {
+	private function generateAddOpHtml() {
 		$html = Html::openElement( 'tr' );
 		$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
@@ -122,7 +131,7 @@ class DiffOpValueFormatter {
 	 *
 	 * @return string HTML
 	 */
-	protected function generateRemoveOpHtml() {
+	private function generateRemoveOpHtml() {
 		$html = Html::openElement( 'tr' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
@@ -140,14 +149,13 @@ class DiffOpValueFormatter {
 	 *
 	 * @since 0.4
 	 *
-	 * @param string|string[] $values HTML
+	 * @param string[] $values HTML
 	 *
 	 * @return string HTML
 	 */
-	protected function generateValueHtml( $values ) {
-		$values = (array)$values;
-
+	private function generateValueHtml( $values ) {
 		$html = '';
+
 		foreach ( $values as $value ) {
 			if ( $html !== '' ) {
 				$html .= Html::rawElement( 'br', array(), '' );
@@ -166,18 +174,13 @@ class DiffOpValueFormatter {
 	 * @return string HTML
 	 */
 	public function generateHtml() {
-		$html = '';
+		$html = $this->generateHeaderHtml();
 
-		if ( is_string( $this->name ) ) {
-			$html .= $this->generateHeaderHtml();
-		}
-
-		if ( is_array( $this->oldValues ) && is_array( $this->newValues )
-			|| is_string( $this->oldValues ) && is_string( $this->newValues ) ) {
+		if ( $this->oldValues !== null && $this->newValues !== null ) {
 			$html .= $this->generateChangeOpHtml();
-		} else if ( is_array( $this->newValues ) || is_string( $this->newValues ) ) {
+		} elseif ( $this->newValues !== null ) {
 			$html .= $this->generateAddOpHtml();
-		} else if ( is_array( $this->oldValues ) || is_string( $this->oldValues ) ) {
+		} elseif ( $this->oldValues !== null ) {
 			$html .= $this->generateRemoveOpHtml();
 		}
 

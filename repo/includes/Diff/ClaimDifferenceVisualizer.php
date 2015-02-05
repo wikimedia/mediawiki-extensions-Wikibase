@@ -62,27 +62,29 @@ class ClaimDifferenceVisualizer {
 	 * @return string
 	 */
 	public function visualizeClaimChange( ClaimDifference $claimDifference, Claim $baseClaim ) {
-		$oldMainSnak = null;
+		$newestMainSnak = $baseClaim->getMainSnak();
+		$oldestMainSnak = $newestMainSnak;
 		$html = '';
 
-		if ( $claimDifference->getMainSnakChange() !== null ) {
-			$html .= $this->visualizeMainSnakChange( $claimDifference->getMainSnakChange() );
-			$oldMainSnak = $claimDifference->getMainSnakChange()->getOldValue();
+		$mainSnakChange = $claimDifference->getMainSnakChange();
+		if ( $mainSnakChange !== null ) {
+			$oldestMainSnak = $mainSnakChange->getOldValue() ?: $newestMainSnak;
+			$html .= $this->visualizeMainSnakChange( $mainSnakChange, $oldestMainSnak, $newestMainSnak );
 		}
 
 		if ( $claimDifference->getRankChange() !== null ) {
 			$html .= $this->visualizeRankChange(
 				$claimDifference->getRankChange(),
-				$oldMainSnak,
-				$baseClaim->getMainSnak()
+				$oldestMainSnak,
+				$newestMainSnak
 			);
 		}
 
 		if ( $claimDifference->getQualifierChanges() !== null ) {
 			$html .= $this->visualizeQualifierChanges(
 				$claimDifference->getQualifierChanges(),
-				$oldMainSnak,
-				$baseClaim->getMainSnak()
+				$oldestMainSnak,
+				$newestMainSnak
 			);
 		}
 
@@ -90,8 +92,8 @@ class ClaimDifferenceVisualizer {
 			$html .= $this->visualizeSnakListChanges(
 				$claimDifference->getReferenceChanges(),
 				wfMessage( 'wikibase-diffview-reference' )->inLanguage( $this->languageCode ),
-				$oldMainSnak,
-				$baseClaim->getMainSnak()
+				$oldestMainSnak,
+				$newestMainSnak
 			);
 		}
 
@@ -134,22 +136,22 @@ class ClaimDifferenceVisualizer {
 	 * @since 0.4
 	 *
 	 * @param DiffOpChange $mainSnakChange
+	 * @param Snak $oldestMainSnak The old main snak, if present; otherwise, the new main snak
+	 * @param Snak $newestMainSnak The new main snak, if present; otherwise, the old main snak
 	 *
 	 * @return string
 	 */
-	private function visualizeMainSnakChange( DiffOpChange $mainSnakChange ) {
-		$oldSnak = $mainSnakChange->getOldValue();
-		$newSnak = $mainSnakChange->getNewValue();
-
-		// Does not need to show different headers for left and right side, since the property cannot change
-		$headerHtml = $this->snakVisualizer->getPropertyHeader( $newSnak ?: $oldSnak );
-
+	private function visualizeMainSnakChange(
+		DiffOpChange $mainSnakChange,
+		Snak $oldestMainSnak,
+		Snak $newestMainSnak
+	) {
 		$valueFormatter = new DiffOpValueFormatter(
-			// todo: should show specific headers for each column
-			$headerHtml,
+			$this->snakVisualizer->getPropertyHeader( $oldestMainSnak ),
+			$this->snakVisualizer->getPropertyHeader( $newestMainSnak ),
 			// TODO: How to highlight the actual changes inside the snak?
-			$this->snakVisualizer->getDetailedValue( $oldSnak ),
-			$this->snakVisualizer->getDetailedValue( $newSnak )
+			$this->snakVisualizer->getDetailedValue( $mainSnakChange->getOldValue() ),
+			$this->snakVisualizer->getDetailedValue( $mainSnakChange->getNewValue() )
 		);
 
 		return $valueFormatter->generateHtml();
@@ -161,17 +163,21 @@ class ClaimDifferenceVisualizer {
 	 * @since 0.4
 	 *
 	 * @param DiffOpChange $rankChange
-	 * @param Snak|null $oldMainSnak
-	 * @param Snak|null $newMainSnak
+	 * @param Snak $oldestMainSnak The old main snak, if present; otherwise, the new main snak
+	 * @param Snak $newestMainSnak The new main snak, if present; otherwise, the old main snak
 	 *
 	 * @return string
 	 */
-	private function visualizeRankChange( DiffOpChange $rankChange, Snak $oldMainSnak = null, Snak $newMainSnak = null ) {
-		// FIXME: Should show different headers for left and right side of the diff
-		$claimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $newMainSnak ?: $oldMainSnak );
-
+	private function visualizeRankChange(
+		DiffOpChange $rankChange,
+		Snak $oldestMainSnak,
+		Snak $newestMainSnak
+	) {
 		$valueFormatter = new DiffOpValueFormatter(
-			$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->languageCode )->parse(),
+			$this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak ) . ' / ' .
+				wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->languageCode )->parse(),
+			$this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak ) . ' / ' .
+				wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->languageCode )->parse(),
 			$this->getRankHtml( $rankChange->getOldValue() ),
 			$this->getRankHtml( $rankChange->getNewValue() )
 		);
@@ -206,38 +212,43 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @param Diff $changes
 	 * @param Message $breadCrumb
-	 * @param Snak|null $oldMainSnak
-	 * @param Snak|null $newMainSnak
+	 * @param Snak $oldestMainSnak The old main snak, if present; otherwise, the new main snak
+	 * @param Snak $newestMainSnak The new main snak, if present; otherwise, the old main snak
 	 *
 	 * @return string
 	 * @throws RuntimeException
 	 */
-	private function visualizeSnakListChanges( Diff $changes, Message $breadCrumb, Snak $oldMainSnak = null, Snak $newMainSnak = null ) {
+	private function visualizeSnakListChanges(
+		Diff $changes,
+		Message $breadCrumb,
+		Snak $oldestMainSnak,
+		Snak $newestMainSnak
+	) {
 		$html = '';
 
-		$oldClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $oldMainSnak ?: $newMainSnak );
-		$newClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $newMainSnak ?: $oldMainSnak );
+		$oldClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak ) . ' / ' .
+			$breadCrumb->parse();
+		$newClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak ) . ' / ' .
+			$breadCrumb->parse();
 
 		foreach ( $changes as $change ) {
 			$newVal = $oldVal = null;
-			// FIXME: Should show different headers for left and right side of the diff for DiffOpChanges
 			if ( $change instanceof DiffOpAdd || $change instanceof DiffOpChange ) {
 				$newVal = $this->mapSnakList(
 					$change->getNewValue()->getSnaks(),
 					array( $this->snakVisualizer, 'getPropertyAndDetailedValue' )
 				);
-				$claimHeader = $newClaimHeader;
 			}
 			if ( $change instanceof DiffOpRemove || $change instanceof DiffOpChange ) {
 				$oldVal = $this->mapSnakList(
 					$change->getOldValue()->getSnaks(),
 					array( $this->snakVisualizer, 'getPropertyAndDetailedValue' )
 				);
-				$claimHeader = $oldClaimHeader;
 			}
 
 			$valueFormatter = new DiffOpValueFormatter(
-				$claimHeader . ' / ' . $breadCrumb->parse(),
+				$oldClaimHeader,
+				$newClaimHeader,
 				$oldVal,
 				$newVal
 			);
@@ -270,35 +281,37 @@ class ClaimDifferenceVisualizer {
 	 * @since 0.4
 	 *
 	 * @param Diff $changes
-	 * @param Snak|null $oldMainSnak
-	 * @param Snak|null $newMainSnak
+	 * @param Snak $oldestMainSnak The old main snak, if present; otherwise, the new main snak
+	 * @param Snak $newestMainSnak The new main snak, if present; otherwise, the old main snak
 	 *
 	 * @return string
 	 * @throws RuntimeException
 	 */
-	private function visualizeQualifierChanges( Diff $changes, Snak $oldMainSnak = null, Snak $newMainSnak = null ) {
+	private function visualizeQualifierChanges(
+		Diff $changes,
+		Snak $oldestMainSnak,
+		Snak $newestMainSnak
+	) {
 		$html = '';
 
-		$oldClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $oldMainSnak ?: $newMainSnak );
-		$newClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $newMainSnak ?: $oldMainSnak );
-
-		$newVal = $oldVal = null;
+		$oldClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak ) . ' / ' .
+			wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->languageCode )->parse();
+		$newClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak ) . ' / ' .
+			wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->languageCode )->parse();
 
 		foreach ( $changes as $change ) {
 			$newVal = $oldVal = null;
 
-			// FIXME: Should show different headers for left and right side of the diff for DiffOpChanges
 			if ( $change instanceof DiffOpAdd || $change instanceof DiffOpChange ) {
 				$newVal = $this->snakVisualizer->getPropertyAndDetailedValue( $change->getNewValue() );
-				$claimHeader = $newClaimHeader;
 			}
 			if ( $change instanceof DiffOpRemove || $change instanceof DiffOpChange ) {
 				$oldVal = $this->snakVisualizer->getPropertyAndDetailedValue( $change->getOldValue() );
-				$claimHeader = $oldClaimHeader;
 			}
 
 			$valueFormatter = new DiffOpValueFormatter(
-					$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->languageCode )->parse(),
+					$oldClaimHeader,
+					$newClaimHeader,
 					$oldVal,
 					$newVal
 			);
