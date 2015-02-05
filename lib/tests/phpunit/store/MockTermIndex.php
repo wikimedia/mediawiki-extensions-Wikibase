@@ -329,26 +329,6 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	}
 
 	/**
-	 * @param Term[] $conflicts
-	 * @param EntityId $excludeId
-	 *
-	 * @return Term[]
-	 */
-	private function filterConflictsByEntity( array $conflicts, EntityId $excludeId ) {
-		$filtered = array();
-
-		foreach ( $conflicts as $key => $term ) {
-			$entityId = $term->getEntityId();
-
-			if ( $entityId === null || !$excludeId->equals( $entityId ) ) {
-				$filtered[$key] = $term;
-			}
-		}
-
-		return $filtered;
-	}
-
-	/**
 	 * @param Term $term
 	 * @param Term[] $templates
 	 *
