@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_583d98b7",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 18
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-05T12:11:26Z",
+      "side": 1,
+      "message": "Should be passed as an option.",
+      "revId": "167661355bcae1095bc441750783604165053388",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5836f8e5",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 18
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-05T12:11:26Z",
+      "side": 1,
+      "message": "use `toggleClass`.",
+      "revId": "167661355bcae1095bc441750783604165053388",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7833b4f3",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 18
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-05T12:11:26Z",
+      "side": 1,
+      "message": "use `toggleClass`.",
+      "revId": "167661355bcae1095bc441750783604165053388",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
