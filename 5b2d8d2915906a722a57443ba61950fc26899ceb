@@ -16,6 +16,24 @@
       "revId": "5b2d8d2915906a722a57443ba61950fc26899ceb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dbbe82d1",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-05T14:27:32Z",
+      "side": 1,
+      "message": "In my understanding, square brackets are representing that the value may be omitted (undefined).",
+      "parentUuid": "6e7c4fa4_f834a448",
+      "revId": "5b2d8d2915906a722a57443ba61950fc26899ceb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
