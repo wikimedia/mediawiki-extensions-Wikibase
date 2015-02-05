@@ -130,9 +130,7 @@ class TermSqlIndexTest extends TermIndexTest {
 			new AliasGroupList()
 		);
 
-		$label = new Term( array( 'termType' => Term::TYPE_LABEL ) );
 		$labelFooEn = new Term( array( 'termLanguage' => 'en', 'termType' => Term::TYPE_LABEL, 'termText' => 'Foo' ) );
-		$labelFuhDe = new Term( array( 'termLanguage' => 'de', 'termType' => Term::TYPE_LABEL, 'termText' => 'Fuh' ) );
 		$descriptionBarEn = new Term( array( 'termLanguage' => 'en', 'termType' => Term::TYPE_DESCRIPTION, 'termText' => 'Bar' ) );
 
 		return array(
