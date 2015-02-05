@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_5bd2722d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-05T14:27:49Z",
+      "side": 1,
+      "message": "I see. It\u0027s probably okay here to do it like that.",
+      "parentUuid": "6e7c4fa4_bbe62612",
+      "revId": "07d350eac9dbfa011a728c3cc1a3c75a78294b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_581cb818",
         "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.descriptionview.css",
         "patchSetId": 15
