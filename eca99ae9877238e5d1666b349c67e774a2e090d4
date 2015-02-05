@@ -16,6 +16,24 @@
       "revId": "eca99ae9877238e5d1666b349c67e774a2e090d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f65a75f8",
+        "filename": "repo/includes/ItemSearchTextGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-05T16:59:18Z",
+      "side": 1,
+      "message": "I wonder why you think this is crucial. Whitespace in search text is ignored anyway. However, I removed the trim for now and will do this in an other patch.",
+      "parentUuid": "6e7c4fa4_7b196e26",
+      "revId": "eca99ae9877238e5d1666b349c67e774a2e090d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
