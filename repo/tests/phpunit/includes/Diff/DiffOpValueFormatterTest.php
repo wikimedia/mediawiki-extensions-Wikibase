@@ -25,7 +25,7 @@ class DiffOpValueFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @param $pattern
 	 */
 	public function testGenerateHtml( $name, $oldValues, $newValues, $pattern ) {
-		$formatter = new DiffOpValueFormatter( $name, $oldValues, $newValues );
+		$formatter = new DiffOpValueFormatter( $name, $name, $oldValues, $newValues );
 
 		$html = $formatter->generateHtml();
 		$this->assertRegExp( $pattern, $html );
