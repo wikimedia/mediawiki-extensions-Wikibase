@@ -660,17 +660,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string|null $entityType
 	 * @param array $options
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	private function termsToConditions( DatabaseBase $db, array $terms, $termType, $entityType, array $options = array() ) {
 		wfProfileIn( __METHOD__ );
 
 		$conditions = array();
 
-		/**
-		 * @var Term $term
-		 */
-		foreach ( $terms as $index => $term ) {
+		foreach ( $terms as $term ) {
 			$termConditions = $this->termMatchConditions( $db, $term, $termType, $entityType, $options );
 			$conditions[] = '(' . implode( ' AND ', $termConditions ) . ')';
 		}

@@ -2,18 +2,19 @@
 
 namespace Wikibase\Client\Hooks;
 
-use JobQueueGroup;
-use User;
-use Title;
-use WikiPage;
 use Content;
+use JobQueueGroup;
 use ManualLogEntry;
-use Wikibase\Client\WikibaseClient;
-use Wikibase\NamespaceChecker;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use MWException;
+use Title;
+use User;
 use Wikibase\Client\UpdateRepo\UpdateRepo;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\NamespaceChecker;
+use WikiPage;
 
 /**
  * This class has a static interface for use with MediaWiki's hook mechanism; the static
@@ -278,4 +279,5 @@ class UpdateRepoHookHandlers {
 
 		return true;
 	}
+
 }

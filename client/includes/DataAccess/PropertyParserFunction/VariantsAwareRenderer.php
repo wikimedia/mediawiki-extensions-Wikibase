@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\PropertyParserFunction;
 
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**

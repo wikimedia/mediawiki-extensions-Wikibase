@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Parser;
 use ParserOutput;
 use Wikibase\Client\WikibaseClient;
 

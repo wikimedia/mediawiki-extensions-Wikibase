@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Store;
 
+use Wikibase\DataModel\Entity\EntityId;
+
 /**
  * A cursor for paging through EntityIds.
  *
@@ -28,4 +30,5 @@ interface EntityIdPager {
 	 * be empty if there are no more entities to list from the given offset.
 	 */
 	public function fetchIds( $limit );
+
 }
