@@ -40,7 +40,6 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param HashArray $array
 	 */
 	public function testAddElement( HashArray $array ) {
@@ -80,7 +79,6 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param HashArray $array
 	 */
 	public function testRemoveDuplicates( HashArray $array ) {
@@ -96,7 +94,6 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param HashArray $array
 	 */
 	public function testGetHash( HashArray $array ) {
@@ -116,7 +113,6 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param HashArray $array
 	 */
 	public function testIndicesAreUpToDate( HashArray $array ) {

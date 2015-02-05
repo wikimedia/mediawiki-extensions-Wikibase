@@ -43,7 +43,6 @@ abstract class HashArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param HashArray $array
 	 */
 	public function testHasElement( HashArray $array ) {
@@ -65,7 +64,6 @@ abstract class HashArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param HashArray $array
 	 */
 	public function testRemoveElement( HashArray $array ) {
@@ -100,7 +98,6 @@ abstract class HashArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param HashArray $array
 	 */
 	public function testEquals( HashArray $array ) {
@@ -108,6 +105,11 @@ abstract class HashArrayTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $array->equals( 42 ) );
 	}
 
+	/**
+	 * @param array $elements
+	 *
+	 * @return array[]
+	 */
 	protected function arrayWrap( array $elements ) {
 		return array_map(
 			function ( $element ) {
@@ -118,4 +120,3 @@ abstract class HashArrayTest extends \PHPUnit_Framework_TestCase {
 	}
 
 }
-

@@ -116,7 +116,8 @@ class SnakList extends HashArray implements Snaks {
 
 	/**
 	 * Orders the snaks in the list grouping them by property.
-	 * @param $order array of serliazed propertyIds to order by.
+	 *
+	 * @param string[] $order List of serliazed property ids to order by.
 	 *
 	 * @since 0.5
 	 */
@@ -124,7 +125,7 @@ class SnakList extends HashArray implements Snaks {
 		$snaksByProperty = $this->getSnaksByProperty();
 		$orderedProperties = array_unique( array_merge( $order, array_keys( $snaksByProperty ) ) );
 
-		foreach( $orderedProperties as $property ){
+		foreach ( $orderedProperties as $property ) {
 			$snaks = $snaksByProperty[$property];
 			$this->moveSnaksToBottom( $snaks );
 		}
