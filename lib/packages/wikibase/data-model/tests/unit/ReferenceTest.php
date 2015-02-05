@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Tests;
 
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -254,9 +255,29 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGivenInvalidArgument_constructorThrowsException() {
-		$this->setExpectedException( 'InvalidArgumentException' );
-		new Reference( new PropertyNoValueSnak( 1 ) );
+	/**
+	 * @dataProvider invalidConstructorArgumentsProvider
+	 * @param mixed $snaks
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidConstructorArguments_constructorThrowsException( $snaks ) {
+		new Reference( $snaks );
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$id1 = new PropertyId( 'P1' );
+
+		return array(
+			array( false ),
+			array( 1 ),
+			array( 0.1 ),
+			array( 'string' ),
+			array( $id1 ),
+			array( new PropertyNoValueSnak( $id1 ) ),
+			array( new PropertyValueSnak( $id1, new StringValue( 'a' ) ) ),
+			array( array( new SnakList() ) ),
+			array( new Reference() ),
+		);
 	}
 
 }
