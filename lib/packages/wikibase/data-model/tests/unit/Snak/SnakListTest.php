@@ -30,15 +30,12 @@ use Wikibase\DataModel\Tests\HashArray\HashArrayTest;
 class SnakListTest extends HashArrayTest {
 
 	/**
-	 * @see GenericArrayObjectTest::getInstanceClass
+	 * @see HashArrayTest::getInstanceClass
 	 */
 	public function getInstanceClass() {
 		return 'Wikibase\DataModel\Snak\SnakList';
 	}
 
-	/**
-	 * @see GenericArrayObjectTest::elementInstancesProvider
-	 */
 	public function elementInstancesProvider() {
 		$id42 = new PropertyId( 'P42' );
 
@@ -75,7 +72,6 @@ class SnakListTest extends HashArrayTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param SnakList $array
 	 */
 	public function testHasSnak( SnakList $array ) {
@@ -95,7 +91,6 @@ class SnakListTest extends HashArrayTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param SnakList $array
 	 */
 	public function testRemoveSnak( SnakList $array ) {
@@ -128,7 +123,6 @@ class SnakListTest extends HashArrayTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param SnakList $array
 	 */
 	public function testAddSnak( SnakList $array ) {
@@ -241,7 +235,6 @@ class SnakListTest extends HashArrayTest {
 
 	/**
 	 * @dataProvider orderByPropertyProvider
-	 *
 	 * @param SnakList $snakList
 	 * @param SnakList $expected
 	 * @param array $order
