@@ -2,37 +2,25 @@
 
 namespace Wikibase\Repo;
 
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\FingerprintProvider;
 
 /**
- * FIXME: OCP violation. Extensions that add new types of entities with
- * new types of terms cannot register proper support.
- *
  * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
-class EntitySearchTextGenerator {
+class FingerprintSearchTextGenerator {
 
 	/**
-	 * @param EntityDocument $entity
+	 * @param Fingerprint $fingerprint
 	 *
 	 * @return string
 	 */
-	public function generate( EntityDocument $entity ) {
-		if ( $entity instanceof FingerprintProvider ) {
-			return $this->getTextForFingerprint( $entity->getFingerprint() );
-		}
-
-		return '';
-	}
-
-	private function getTextForFingerprint( Fingerprint $fingerprint ) {
+	public function generate( Fingerprint $fingerprint ) {
 		$text = $this->getArrayAsText( $fingerprint->getLabels()->toTextArray() );
 
 		$text .= "\n" . $this->getArrayAsText( $fingerprint->getDescriptions()->toTextArray() );
@@ -47,7 +35,7 @@ class EntitySearchTextGenerator {
 	 *
 	 * @return string
 	 */
-	protected function getArrayAsText( array $elements ) {
+	private function getArrayAsText( array $elements ) {
 		return implode( "\n", $elements );
 	}
 
@@ -56,7 +44,7 @@ class EntitySearchTextGenerator {
 	 *
 	 * @return string
 	 */
-	protected function getAllAliasesText( AliasGroupList $aliasGroups ) {
+	private function getAllAliasesText( AliasGroupList $aliasGroups ) {
 		$text = '';
 
 		/** @var AliasGroup $aliasGroup */

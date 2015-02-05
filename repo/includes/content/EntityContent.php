@@ -30,7 +30,7 @@ use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
-use Wikibase\Repo\EntitySearchTextGenerator;
+use Wikibase\Repo\FingerprintSearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Validators\EntityValidator;
 use WikiPage;
@@ -325,8 +325,8 @@ abstract class EntityContent extends AbstractContent {
 		}
 
 		wfProfileIn( __METHOD__ );
-		$searchTextGenerator = new EntitySearchTextGenerator();
-		$text = $searchTextGenerator->generate( $this->getEntity() );
+		$searchTextGenerator = new FingerprintSearchTextGenerator();
+		$text = $searchTextGenerator->generate( $this->getEntity()->getFingerprint() );
 
 		if ( !wfRunHooks( 'WikibaseTextForSearchIndex', array( $this, &$text ) ) ) {
 			return '';
