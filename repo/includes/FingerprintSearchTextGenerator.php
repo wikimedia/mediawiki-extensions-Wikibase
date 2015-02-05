@@ -3,7 +3,6 @@
 namespace Wikibase\Repo;
 
 use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
@@ -21,38 +20,16 @@ class FingerprintSearchTextGenerator {
 	 * @return string
 	 */
 	public function generate( Fingerprint $fingerprint ) {
-		$text = $this->getArrayAsText( $fingerprint->getLabels()->toTextArray() );
+		$text = implode( "\n", $fingerprint->getLabels()->toTextArray() );
 
-		$text .= "\n" . $this->getArrayAsText( $fingerprint->getDescriptions()->toTextArray() );
-
-		$text .= $this->getAllAliasesText( $fingerprint->getAliasGroups() );
-
-		return $text;
-	}
-
-	/**
-	 * @param string[] $elements
-	 *
-	 * @return string
-	 */
-	private function getArrayAsText( array $elements ) {
-		return implode( "\n", $elements );
-	}
-
-	/**
-	 * @param AliasGroupList $aliasGroups
-	 *
-	 * @return string
-	 */
-	private function getAllAliasesText( AliasGroupList $aliasGroups ) {
-		$text = '';
+		$text .= "\n" . implode( "\n", $fingerprint->getDescriptions()->toTextArray() );
 
 		/** @var AliasGroup $aliasGroup */
-		foreach ( $aliasGroups as $aliasGroup ) {
+		foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
 			$text .= "\n" . implode( "\n", $aliasGroup->getAliases() );
 		}
 
-		return $text;
+		return trim( $text, "\n" );
 	}
 
 }

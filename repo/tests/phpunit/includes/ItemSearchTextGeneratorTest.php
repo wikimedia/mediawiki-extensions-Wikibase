@@ -60,12 +60,12 @@ class ItemSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testGivenEmptyItem_newlineIsReturned() {
+	public function testGivenEmptyItem_emptyStringIsReturned() {
 		$generator = new ItemSearchTextGenerator();
 		$item = new Item();
 		$text = $generator->generate( $item );
 
-		$this->assertSame( "\n", $text );
+		$this->assertSame( '', $text );
 	}
 
 	public function testGivenUntrimmedPageName_generateDoesNotTrim() {
@@ -75,7 +75,7 @@ class ItemSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$generator = new ItemSearchTextGenerator();
 		$text = $generator->generate( $item );
 
-		$this->assertSame( " untrimmed label \n\n untrimmed pageName ", $text );
+		$this->assertSame( " untrimmed label \n untrimmed pageName ", $text );
 	}
 
 }
