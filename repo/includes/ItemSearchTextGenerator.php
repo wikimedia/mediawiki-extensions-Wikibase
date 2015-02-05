@@ -26,7 +26,7 @@ class ItemSearchTextGenerator {
 			$text .= "\n" . $siteLink->getPageName();
 		}
 
-		return $text;
+		return trim( $text, "\n" );
 	}
 
 }
