@@ -61,6 +61,7 @@ return call_user_func( function() {
 				'jquery.event.special.eachchange',
 				'jquery.ui.languagesuggester',
 				'jquery.valueview.ExpertExtender',
+				'util.PrefixingMessageProvider',
 			),
 			'messages' => array(
 				'valueview-expertextender-languageselector-languagetemplate',
@@ -88,7 +89,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.preview',
 				'jquery.valueview.ExpertExtender',
-				'util.MessageProvider',
+				'util.PrefixingMessageProvider',
 			),
 			'messages' => array(
 				'valueview-preview-label',

@@ -17,6 +17,14 @@
 		);
 	}
 
+	var messageProvider = {
+		getMessage: function( key, params ) {
+			return params && params.length > 0
+				? params.join( ' ' )
+				: key;
+		}
+	};
+
 	testExpertExtenderExtension.all(
 		ExpertExtender.LanguageSelector,
 		function() {
@@ -24,7 +32,7 @@
 				{
 					getAll: function() { return null; }
 				},
-				new util.MessageProvider(),
+				messageProvider,
 				function() { }
 			);
 		}
@@ -36,13 +44,7 @@
 			{
 				getAll: function() { return null; }
 			},
-			new util.MessageProvider( {
-				messageGetter: function( key ) {
-					return arguments.length > 1
-						? Array.prototype.slice.call( arguments, 1 ).join( ' ' )
-						: key;
-				}
-			} ),
+			messageProvider,
 			function() {
 				return upstreamValue;
 			}
@@ -76,13 +78,7 @@
 				getAll: function() { return [ 'en' ]; },
 				getName: function( code ) { return code; }
 			},
-			new util.MessageProvider( {
-				messageGetter: function( key ) {
-					return arguments.length > 1
-						? Array.prototype.slice.call( arguments, 1 ).join( ' ' )
-						: key;
-				}
-			} ),
+			messageProvider,
 			function() {
 				return 'en';
 			}

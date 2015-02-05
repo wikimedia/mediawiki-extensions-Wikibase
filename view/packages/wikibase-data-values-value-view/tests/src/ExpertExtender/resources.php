@@ -34,7 +34,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.valueview.ExpertExtender.CalendarHint',
 				'jquery.valueview.test.testExpertExtenderExtension',
-				'util.MessageProvider',
+				'util.HashMessageProvider',
 				'time.js'
 			),
 		),
@@ -85,7 +85,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.valueview.ExpertExtender.Toggler',
-				'jquery.valueview.test.testExpertExtenderExtension'
+				'jquery.valueview.test.testExpertExtenderExtension',
+				'util.HashMessageProvider'
 			),
 		),
 

@@ -17,7 +17,7 @@
 	testExpertExtenderExtension.all(
 		ExpertExtender.Toggler,
 		function() {
-			return new ExpertExtender.Toggler( new util.MessageProvider(), $( '<div />' ) );
+			return new ExpertExtender.Toggler( new util.HashMessageProvider( {} ), $( '<div />' ) );
 		}
 	);
 

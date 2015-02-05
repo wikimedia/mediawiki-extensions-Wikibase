@@ -1,4 +1,4 @@
-( function( $ ) {
+( function( $, util ) {
 	'use strict';
 
 /**
@@ -44,12 +44,24 @@ $.widget( 'ui.preview', {
 	$value: null,
 
 	/**
+	 * @property {util.MessageProvider}
+	 * @private
+	 */
+	_messageProvider: null,
+
+	/**
 	 * @see jQuery.Widget._create
 	 * @protected
 	 */
 	_create: function() {
+		var hashBasedMessageProvider = new util.HashMessageProvider( this.options.messages );
 		if( this.options.messageProvider ) {
-			this.options.messageProvider.setDefaultMessages( this.options.messages );
+			this._messageProvider = new util.CombiningMessageProvider(
+				this.options.messageProvider,
+				hashBasedMessageProvider
+			);
+		} else {
+			this._messageProvider = hashBasedMessageProvider;
 		}
 
 		this.element
@@ -57,7 +69,7 @@ $.widget( 'ui.preview', {
 		.append(
 			$( '<div/>' )
 			.addClass( this.widgetBaseClass + '-label' )
-			.text( this._getMessage( 'label' ) )
+			.text( this._messageProvider.getMessage( 'label' ) )
 		);
 
 		this.$value = $( '<div/>' )
@@ -95,7 +107,7 @@ $.widget( 'ui.preview', {
 		if( value === null ) {
 			this.$value
 			.addClass( this.widgetBaseClass + '-novalue' )
-			.text( this._getMessage( 'novalue' ) );
+			.text( this._messageProvider.getMessage( 'novalue' ) );
 		} else {
 			this.$value
 			.removeClass( this.widgetBaseClass + '-novalue' )
@@ -108,22 +120,8 @@ $.widget( 'ui.preview', {
 	 */
 	showSpinner: function() {
 		this.$value.empty().append( $( '<span/>' ).addClass( 'small-spinner' ) );
-	},
-
-	/**
-	 * Either retrieves a message from the message provider (if set) or returns the default
-	 * message.
-	 * @protected
-	 *
-	 * @param {string} key
-	 * @return {string|null}
-	 */
-	_getMessage: function( key ) {
-		return this.options.messageProvider
-			? this.options.messageProvider.getMessage( key )
-			: this.options.messages[key];
 	}
 
 } );
 
-} )( jQuery );
+} )( jQuery, util );

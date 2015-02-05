@@ -90,6 +90,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 * @throws {Error} if `viewPortNode` is not or does not feature a proper DOM node.
 	 * @throws {Error} relatedViewState is not a `jQuery.valueview.ViewState` instance.
 	 * @throws {Error} if `valueViewNotifier` is not an `util.Notifier` instance.
+	 * @throws {Error} if neither `messages` nor `messageProvider` is given.
 	 */
 	vv.Expert = function( viewPortNode, relatedViewState, valueViewNotifier, options ) {
 		if( !( relatedViewState instanceof vv.ViewState ) ) {
@@ -120,12 +121,18 @@ jQuery.valueview = jQuery.valueview || {};
 
 		this._options = $.extend( ( !this._options ) ? {} : this._options, options || {} );
 
-		var defaultMessages = this._options.messages || {},
-			msgGetter = this._options.mediaWiki ? this._options.mediaWiki.msg : null;
-		this._messageProvider = new util.MessageProvider( {
-			defaultMessage: defaultMessages,
-			messageGetter: msgGetter
-		} );
+		if( this._options.messages ) {
+			this._messageProvider = new util.HashMessageProvider( this._options.messages );
+		}
+		if( this._options.messageProvider ) {
+			this._messageProvider = new util.CombiningMessageProvider(
+				this._options.messageProvider,
+				this._messageProvider
+			);
+		}
+		if( !this._messageProvider ) {
+			throw new Error( 'No message provider and no messages were provided to the valueview expert' );
+		}
 
 		this._extendable = new util.Extendable();
 	};
@@ -171,7 +178,7 @@ jQuery.valueview = jQuery.valueview || {};
 		_options: null,
 
 		/**
-		 * Message provider used to fetch messages from mediaWiki, if available.
+		 * Message provider used to fetch messages
 		 * @property {util.MessageProvider}
 		 * @protected
 		 */

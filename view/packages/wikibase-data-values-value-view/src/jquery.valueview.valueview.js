@@ -78,8 +78,8 @@ function expertProxy( fnName ) {
  *        Time milliseconds that the parser should wait before parsing. A delay is useful to limit
  *        the number of API request that are outdated when returning because the input has changed
  *        in the meantime.
- * @param {Object|null} [options.mediaWiki=null]
- *        `mediaWiki` JavaScript object that may be used when in MediaWiki environment.
+ * @param {util.MessageProvider|null} [options.messageProvider=null]
+ *        Allows to customize the messages used by `ValueView`, `Expert`s and used widgets.
  * @param {util.ContentLanguages|null} [options.contentLanguages=null]
  *        Enables `Expert`s to provide language selection (i. e. the `MonolingualText` `Expert`).
  */
@@ -184,7 +184,6 @@ $.widget( 'valueview.valueview', PARENT, {
 		language: null,
 		autoStartEditing: false,
 		parseDelay: 300,
-		mediaWiki: null,
 		contentLanguages: null
 	},
 
@@ -555,8 +554,8 @@ $.widget( 'valueview.valueview', PARENT, {
 				this.viewState(),
 				this.viewNotifier(),
 				{
-					mediaWiki: this.options.mediaWiki,
-					contentLanguages: this.options.contentLanguages
+					contentLanguages: this.options.contentLanguages,
+					messageProvider: this.options.messageProvider
 				}
 			);
 			this._expert.init();

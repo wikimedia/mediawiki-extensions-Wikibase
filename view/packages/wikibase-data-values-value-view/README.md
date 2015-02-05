@@ -105,6 +105,15 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
+### 0.13.0 (dev)
+
+* Turned `util.MessageProvider` into an interface
+* Introduced several implementations of `util.MessageProvider`
+ * `util.HashMessageProvider`
+ * `util.CombiningMessageProvider`
+ * `util.PrefixingMessageProvider`
+* Replaced the `mw` option to `valueview` with a `messageProvider` option
+
 ### 0.12.0 (2015-01-27)
 * Removed internal dependency on Universal Language Selector (ULS)
 * Introduced `utils.ContentLanguages`

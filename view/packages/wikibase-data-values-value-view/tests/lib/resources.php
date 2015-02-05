@@ -178,13 +178,13 @@ return call_user_func( function() {
 			),
 		),
 
-		'util.MessageProvider.tests' => $moduleTemplate + array(
+		'util.HashMessageProvider.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'util/util.MessageProvider.tests.js',
+				'util/util.HashMessageProvider.tests.js',
 			),
 			'dependencies' => array(
 				'test.sinonjs',
-				'util.MessageProvider',
+				'util.HashMessageProvider',
 			),
 		),
 
