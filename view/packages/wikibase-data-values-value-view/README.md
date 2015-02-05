@@ -105,8 +105,7 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
-### 0.13.0 (dev)
-
+### 0.13.0 (2015-02-05)
 * Turned `util.MessageProvider` into an interface
 * Introduced several implementations of `util.MessageProvider`
  * `util.HashMessageProvider`
