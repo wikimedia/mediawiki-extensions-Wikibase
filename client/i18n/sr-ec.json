@@ -58,7 +58,7 @@
 	"wikibase-unconnectedpages-page-warning": "Наслов странице не може се користи за упит и биће игнорисан.",
 	"wikibase-unconnectedpages-iwdata-label": "Само странице са међујезичким везама",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|међујезичка веза|међујезичких веза}} на страници)",
-	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} број ставке",
+	"wikibase-pageinfo-entity-id": "ИД ставке на Википодацима",
 	"wikibase-pageinfo-entity-id-none": "Нема",
 	"wikibase-otherprojects": "Остали пројекти"
 }
