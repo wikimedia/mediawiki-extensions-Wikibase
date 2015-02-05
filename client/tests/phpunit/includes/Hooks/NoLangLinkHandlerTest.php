@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Hooks;
 use Parser;
 use ParserOptions;
 use ParserOutput;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
 
@@ -19,6 +20,33 @@ use Wikibase\NoLangLinkHandler;
  * @author Daniel Kinzler
  */
 class NoLangLinkHandlerTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @var int[]
+	 */
+	private $excludeNamespaces;
+
+	/**
+	 * @var int[]
+	 */
+	private $namespacesToInclude;
+
+	protected function setUp() {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+		$this->excludeNamespaces = $settings->getSetting( 'excludeNamespaces' );
+		$this->namespacesToInclude = $settings->getSetting( 'namespaces' );
+
+		$settings->setSetting( 'excludeNamespaces', array() );
+		$settings->setSetting( 'namespaces', array() );
+	}
+
+	protected function tearDown() {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+		$settings->setSetting( 'excludeNamespaces', $this->excludeNamespaces );
+		$settings->setSetting( 'namespaces', $this->namespacesToInclude );
+	}
 
 	public function testGetSetNoExternalLangLinks() {
 		$pout = new ParserOutput();
