@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Store\Sql;
 
+use DatabaseBase;
 use IDatabase;
 use LoadBalancer;
 
@@ -33,7 +34,7 @@ class ConnectionManager {
 	}
 
 	/**
-	 * @return IDatabase
+	 * @return DatabaseBase
 	 */
 	public function getReadConnection() {
 		if ( $this->dbName === null ) {
@@ -44,7 +45,7 @@ class ConnectionManager {
 	}
 
 	/**
-	 * @return IDatabase
+	 * @return DatabaseBase
 	 */
 	private function getWriteConnection() {
 		if ( $this->dbName === null ) {
@@ -55,7 +56,7 @@ class ConnectionManager {
 	}
 
 	/**
-	 * @param IDatabase $db
+	 * @param DatabaseBase $db
 	 */
 	public function releaseConnection( IDatabase $db ) {
 		$this->loadBalancer->reuseConnection( $db );
@@ -64,7 +65,7 @@ class ConnectionManager {
 	/**
 	 * @param string $fname
 	 *
-	 * @return IDatabase
+	 * @return DatabaseBase
 	 */
 	public function beginAtomicSection( $fname ) {
 		$db = $this->getWriteConnection();
@@ -73,10 +74,8 @@ class ConnectionManager {
 	}
 
 	/**
-	 * @param IDatabase $db
+	 * @param DatabaseBase $db
 	 * @param string $fname
-	 *
-	 * @return IDatabase
 	 */
 	public function commitAtomicSection( IDatabase $db, $fname ) {
 		$db->endAtomic( $fname );
@@ -84,10 +83,8 @@ class ConnectionManager {
 	}
 
 	/**
-	 * @param IDatabase $db
+	 * @param DatabaseBase $db
 	 * @param string $fname
-	 *
-	 * @return IDatabase
 	 */
 	public function rollbackAtomicSection( IDatabase $db, $fname ) {
 		//FIXME: there does not seem to be a clean way to roll back an atomic section?!

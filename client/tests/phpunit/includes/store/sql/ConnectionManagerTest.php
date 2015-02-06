@@ -19,7 +19,6 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 	private function getConnectionMock() {
 		$connection = $this->getMockBuilder( 'IDatabase' )
 			->setMethods( array( 'startAtomic', 'endAtomic', 'rollback' ) )
-			->disableOriginalConstructor()
 			->getMock();
 
 		return $connection;
@@ -72,7 +71,6 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 
 		$connection->expects( $this->once() )
 			->method( 'startAtomic' )
-			->withAnyParameters()
 			->will( $this->returnValue( null ) );
 
 		$manager = new ConnectionManager( $lb );
@@ -90,7 +88,6 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 
 		$connection->expects( $this->once() )
 			->method( 'endAtomic' )
-			->withAnyParameters()
 			->will( $this->returnValue( null ) );
 
 		$manager = new ConnectionManager( $lb );
@@ -108,7 +105,6 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 
 		$connection->expects( $this->once() )
 			->method( 'rollback' )
-			->withAnyParameters()
 			->will( $this->returnValue( null ) );
 
 		$manager = new ConnectionManager( $lb );
