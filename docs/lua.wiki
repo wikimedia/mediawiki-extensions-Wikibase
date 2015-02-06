@@ -31,6 +31,30 @@ An example call might look like this:
 mw.wikibase.sitelink( 'Q42' ) -- Returns the given items page title in the current Wiki as a string, like "Berlin".
 </source>
 
+=== mw.wikibase.renderSnak ===
+<code>wikibase.renderSnak( snakSerialization )</code><br>
+Renders a serialized Snak to text. This is useful for displaying References or Qualifiers.
+
+An example call might look like this:
+<source lang="lua">
+local entity = mw.wikibase.getEntityObject( 'Q32487' )
+local snak = entity['claims']['P342'][1]['qualifiers']['P342'][1]
+
+mw.wikibase.renderSnak( snak ) -- Returns the given Snak formatted as wiki text.
+</source>
+
+=== mw.wikibase.renderSnaks ===
+<code>wikibase.renderSnaks( snaksSerialization )</code><br>
+Renders a list of serialized Snaks to text. This is useful for displaying References or Qualifiers.
+
+An example call might look like this:
+<source lang="lua">
+local entity = mw.wikibase.getEntityObject( 'Q32487' )
+local snaks = entity['claims']['P342'][1]['qualifiers']
+
+mw.wikibase.renderSnaks( snaks ) -- Returns the given Snaks formatted as wiki text.
+</source>
+
 === mw.wikibase.getEntity ===
 <code>wikibase.getEntity()</code><br>
 Gets entity data of the Wikidata item connected with the current page. The returned object will have a legacy format, where tables are 0-based rather than 1-based. Also they will hold claims with both upper an lower case property ids (lower key property ids are deprecated).
