@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b0a63ca6",
+        "filename": "view/WikibaseView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-06T15:44:48Z",
+      "side": 1,
+      "message": "Why are you doing it like this? I like the if-defined-return approach we are using in all other components more.",
+      "revId": "7ecf0b3e499bce75bc18af552b10d6fb0b59d15d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b0eb9c9f",
+        "filename": "view/resources.test.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-06T15:44:48Z",
+      "side": 1,
+      "message": "I miss a newline here.",
+      "revId": "7ecf0b3e499bce75bc18af552b10d6fb0b59d15d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_90eea0b0",
+        "filename": "view/resources/namespace.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-06T15:44:48Z",
+      "side": 1,
+      "message": "Didn\u0027t we discussed a naming scheme for such files that includes 2 underscores?",
+      "revId": "7ecf0b3e499bce75bc18af552b10d6fb0b59d15d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_70df4411",
+        "filename": "view/tests/qunit/resources.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-06T15:44:48Z",
+      "side": 1,
+      "message": "No \"vendor vs. extensions\" support as in all other components?",
+      "revId": "7ecf0b3e499bce75bc18af552b10d6fb0b59d15d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
