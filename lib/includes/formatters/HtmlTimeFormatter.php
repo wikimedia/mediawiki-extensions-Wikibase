@@ -71,6 +71,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 * is uncommon for the specified time.
 	 *
 	 * @param TimeValue $value
+	 *
 	 * @return string
 	 */
 	private function formatOptionalCalendarName( TimeValue $value ) {
@@ -79,6 +80,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 
 	/**
 	 * @param TimeValue $value
+	 *
 	 * @return bool
 	 */
 	private function calendarNameNeeded( TimeValue $value ) {
@@ -87,11 +89,18 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 		$year = intval( $matches[1] );
 		$calendar = $this->getCalendarKey( $value->getCalendarModel() );
 
-		return $value->getPrecision() > 10 && ( $year <= 1581 || $calendar !== 'gregorian' );
+		// This is how the original JavaScript UI decided this:
+		// year <= 1581 && calendar === 'Gregorian' ||
+		// year > 1581 && year < 1930 ||
+		// year >= 1930 && calendar === 'Julian'
+		return $value->getPrecision() >= TimeValue::PRECISION_DAY && (
+			$year <= 1581 || $calendar !== 'gregorian'
+		);
 	}
 
 	/**
 	 * @param TimeValue $value
+	 *
 	 * @return string
 	 */
 	private function formatCalendarName( TimeValue $value ) {
@@ -101,6 +110,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 
 	/**
 	 * @param string $uri
+	 *
 	 * @return string
 	 */
 	private function getCalendarKey( $uri ) {
@@ -113,6 +123,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 
 	/**
 	 * @param string $key
+	 *
 	 * @return string
 	 */
 	private function getMessage( $key ) {
@@ -120,4 +131,5 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 		$message->inLanguage( $this->language );
 		return $message->text();
 	}
+
 }
