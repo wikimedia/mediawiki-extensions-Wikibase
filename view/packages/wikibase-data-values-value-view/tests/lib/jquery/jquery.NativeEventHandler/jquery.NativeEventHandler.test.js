@@ -289,7 +289,7 @@ return function( testDefinition ) {
 
 		assert.throws(
 			function() {
-				$.NativeEventHandler( 'foo', { natively: $.noop, 'foo': 'test' } );
+				$.NativeEventHandler( 'foo', { natively: $.noop, foo: 'test' } );
 			},
 			'Can\'t create handler with unknown key in 2nd parameter'
 		);

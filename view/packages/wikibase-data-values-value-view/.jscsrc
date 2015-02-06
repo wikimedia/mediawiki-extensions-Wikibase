@@ -26,6 +26,7 @@
 	"disallowEmptyBlocks": true,
 	"requireSpacesInsideObjectBrackets": "all",
 	"requireSpacesInsideParentheses": "all",
+	"disallowQuotedKeysInObjects": "allButReserved",
 	"disallowSpaceAfterObjectKeys": true,
 	"requireSpaceBeforeObjectValues": true,
 	"requireCommaBeforeLineBreak": true,
@@ -73,11 +74,6 @@
 	// "requireMultipleVarDecl": "onevar",
 	// "disallowDanglingUnderscores": true,
 	// "requireSpacesInsideArrayBrackets": "all",
-
-	// ----
-	// Rules from wikimedia preset that should be enabled after fixing their violation
-
-	// "disallowQuotedKeysInObjects": "allButReserved",
 
 	// ----
 	// Own rules

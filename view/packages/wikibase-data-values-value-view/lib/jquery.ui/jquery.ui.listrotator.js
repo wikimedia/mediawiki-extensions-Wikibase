@@ -121,7 +121,7 @@ $.widget( 'ui.listrotator', {
 		},
 		deferInit: false,
 		messages: {
-			'auto': mwMsgOrString( 'valueview-listrotator-auto', 'auto' )
+			auto: mwMsgOrString( 'valueview-listrotator-auto', 'auto' )
 		},
 		isRtl: function() {
 			return $( 'body' ).hasClass( 'rtl' );

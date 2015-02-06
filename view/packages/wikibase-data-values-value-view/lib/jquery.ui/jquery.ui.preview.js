@@ -30,8 +30,8 @@ $.widget( 'ui.preview', {
 	options: {
 		$input: null,
 		messages: {
-			'label': 'will be displayed as:',
-			'novalue': 'no valid value recognized'
+			label: 'will be displayed as:',
+			novalue: 'no valid value recognized'
 		},
 		messageProvider: null
 	},

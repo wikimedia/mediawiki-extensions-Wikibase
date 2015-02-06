@@ -21,10 +21,10 @@
 	 */
 	function generateInputElement( attributes ) {
 		return $( '<input/>', $.extend( {
-			'class': 'test_eachchange',
-			'type': 'text',
-			'name': 'test',
-			'value': ''
+			class: 'test_eachchange',
+			type: 'text',
+			name: 'test',
+			value: ''
 		}, attributes || {} ) );
 	}
 
@@ -79,7 +79,7 @@
 	);
 
 	QUnit.test( 'Triggering on a single input element', 2, function( assert ) {
-		var $subject = generateInputElement( { 'value': 'a' } );
+		var $subject = generateInputElement( { value: 'a' } );
 
 		$subject.on( 'eachchange', iIncr );
 
