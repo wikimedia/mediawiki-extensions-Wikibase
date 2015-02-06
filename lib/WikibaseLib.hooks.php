@@ -2,10 +2,6 @@
 
 namespace Wikibase;
 
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use SplFileInfo;
-
 /**
  * File defining the hook handlers for the WikibaseLib extension.
  *
@@ -52,4 +48,5 @@ final class LibHooks {
 
 		return true;
 	}
+
 }
