@@ -8,7 +8,6 @@ use ParserOptions;
 use Scribunto;
 use Scribunto_LuaWikibaseLibrary;
 use Title;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * @covers Scribunto_LuaWikibaseLibrary
@@ -105,6 +104,42 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$entityId = $luaWikibaseLibrary->getEntityId( 'CanHazKitten123' );
 		$this->assertEquals( array( null ), $entityId );
+	}
+
+	public function testRenderSnak() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32487', false );
+
+		$snak = $entityArr[0]['claims']['P342'][1]['qualifiers']['P342'][1];
+		$this->assertSame(
+			array( 'A qualifier Snak' ),
+			$luaWikibaseLibrary->renderSnak( $snak )
+		);
+	}
+
+	public function testRenderSnak_invalidSerialization() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+
+		$this->setExpectedException( 'ScribuntoException' );
+		$luaWikibaseLibrary->renderSnak( array( 'a' => 'b' ) );
+	}
+
+	public function testRenderSnaks() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32487', false );
+
+		$snaks = $entityArr[0]['claims']['P342'][1]['qualifiers'];
+		$this->assertSame(
+			array( 'A qualifier Snak, Moar qualifiers' ),
+			$luaWikibaseLibrary->renderSnaks( $snaks )
+		);
+	}
+
+	public function testRenderSnaks_invalidSerialization() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+
+		$this->setExpectedException( 'ScribuntoException' );
+		$luaWikibaseLibrary->renderSnaks( array( 'a' => 'b' ) );
 	}
 
 	private function newScribuntoLuaWikibaseLibrary() {

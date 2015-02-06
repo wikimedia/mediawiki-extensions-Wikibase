@@ -36,6 +36,20 @@ local function testGetEntityObjectForeignLabel()
 	return mw.wikibase.getEntityObject( 'Q199024' ):getLabel( 'de' )
 end
 
+local function testRenderSnak()
+	local entity = mw.wikibase.getEntityObject( 'Q32487' )
+	local snak = entity['claims']['P342'][1]['qualifiers']['P342'][1]
+
+	return mw.wikibase.renderSnak( snak )
+end
+
+local function testRenderSnaks()
+	local entity = mw.wikibase.getEntityObject( 'Q32487' )
+	local snaks = entity['claims']['P342'][1]['qualifiers']
+
+	return mw.wikibase.renderSnaks( snaks )
+end
+
 local tests = {
 	-- Integration tests
 
@@ -80,7 +94,21 @@ local tests = {
 	{ name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
 	  args = { 'Q32488' },
 	  expect = { nil }
-	}
+	},
+	{ name = 'mw.wikibase.renderSnak', func = testRenderSnak, type='ToString',
+	  expect = { 'A qualifier Snak' }
+	},
+	{ name = 'mw.wikibase.renderSnak - (must be table)', func = mw.wikibase.renderSnak,
+	  args = { 'meep' },
+	  expect = 'snakSerialization must be a table, string given'
+	},
+	{ name = 'mw.wikibase.renderSnaks', func = testRenderSnaks, type='ToString',
+	  expect = { 'A qualifier Snak, Moar qualifiers' }
+	},
+	{ name = 'mw.wikibase.renderSnaks - (must be table)', func = mw.wikibase.renderSnaks,
+	  args = { 'meep' },
+	  expect = 'snaksSerialization must be a table, string given'
+	},
 }
 
 return testframework.getTestProvider( tests )

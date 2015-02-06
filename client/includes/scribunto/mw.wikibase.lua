@@ -105,6 +105,29 @@ function wikibase.setupInterface()
 		return php.getSiteLinkPageName( id )
 	end
 
+
+	-- Render a Snak from its serialization
+	--
+	-- @param snakSerialization
+	wikibase.renderSnak = function( snakSerialization )
+		if type( snakSerialization ) ~= 'table' then
+			error( 'snakSerialization must be a table, ' .. type( snakSerialization ) .. ' given', 2 )
+		end
+
+		return php.renderSnak( snakSerialization )
+	end
+
+	-- Render a list of Snaks from their serialization
+	--
+	-- @param snakSerialization
+	wikibase.renderSnaks = function( snaksSerialization )
+		if type( snaksSerialization ) ~= 'table' then
+			error( 'snaksSerialization must be a table, ' .. type( snaksSerialization ) .. ' given', 2 )
+		end
+
+		return php.renderSnaks( snaksSerialization )
+	end
+
 	mw = mw or {}
 	mw.wikibase = wikibase
 	package.loaded['mw.wikibase'] = wikibase
