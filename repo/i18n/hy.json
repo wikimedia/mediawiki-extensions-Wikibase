@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Arman musikyan"
+			"Arman musikyan",
+			"GrigorGB"
 		]
 	},
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Այլ լեզուներով",
+	"wikibase-entitytermsforlanguagelistview-aliases": "Նաև հայտնի որպես",
+	"wikibase-entitytermsforlanguagelistview-description": "Նկարագրություն",
+	"wikibase-entitytermsforlanguagelistview-language": "Լեզու",
 	"wikibase-entityselector-more": "Ավելին"
 }

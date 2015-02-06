@@ -13,7 +13,6 @@
 		]
 	},
 	"wikibase-desc": "Yapılandırılmış veri deposu",
-	"specialpages-group-wikibaserepo": "Wikibase veri deposu",
 	"wikibase-entity-query": "sorgu",
 	"wikibase-edit": "değiştir",
 	"wikibase-save": "kaydet",
@@ -21,6 +20,7 @@
 	"wikibase-add": "ekle",
 	"wikibase-save-inprogress": "Kaydediliyor...",
 	"wikibase-remove-inprogress": "Kaldırılıyor...",
+	"wikibase-entitytermsforlanguagelistview-language": "Dil",
 	"wikibase-label-empty": "Henüz bir etiket tanımlanmadı",
 	"wikibase-label-edit-placeholder": "etiket girin",
 	"wikibase-description-edit-placeholder": "açıklama girin",
