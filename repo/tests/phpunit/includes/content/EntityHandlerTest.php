@@ -447,4 +447,13 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testMakeParserOptions() {
+		$handler = $this->getHandler();
+
+		$options = $handler->makeParserOptions( 'canonical' );
+		$hash = $options->optionsHash( array( 'userlang' ) );
+
+		$this->assertRegExp( '/wb\d+/', $hash, 'contains Wikibase version' );
+	}
+
 }

@@ -203,8 +203,6 @@ abstract class EntityContent extends AbstractContent {
 
 	/**
 	 * Returns a ParserOutput object containing the HTML.
-	 * The actual work of generating a ParserOutput object is done by calling
-	 * EntityView::getParserOutput().
 	 *
 	 * @note: this calls ParserOutput::recordOption( 'userlang' ) to split the cache
 	 * by user language.
@@ -227,6 +225,10 @@ abstract class EntityContent extends AbstractContent {
 		if ( $this->isRedirect() ) {
 			return $this->getParserOutputForRedirect( $generateHtml );
 		} else {
+			if ( $options === null ) {
+				$options = $this->getContentHandler()->makeParserOptions( 'canonical' );
+			}
+
 			return $this->getParserOutputFromEntityView( $title, $revisionId, $options, $generateHtml );
 		}
 	}
@@ -268,7 +270,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @param Title $title
 	 * @param int|null $revisionId
-	 * @param ParserOptions|null $options
+	 * @param ParserOptions $options
 	 * @param bool $generateHtml
 	 *
 	 * @return ParserOutput
@@ -276,7 +278,7 @@ abstract class EntityContent extends AbstractContent {
 	protected function getParserOutputFromEntityView(
 		Title $title,
 		$revisionId = null,
-		ParserOptions $options = null,
+		ParserOptions $options,
 		$generateHtml = true
 	) {
 		// @todo: move this to the ContentHandler

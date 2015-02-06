@@ -44,6 +44,14 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
 abstract class EntityHandler extends ContentHandler {
 
 	/**
+	 * Added to parser options for EntityContent.
+	 *
+	 * Bump the version when making incompatible changes
+	 * to parser output.
+	 */
+	const PARSER_VERSION = 1;
+
+	/**
 	 * @var EntityPerPage
 	 */
 	private $entityPerPage;
@@ -277,6 +285,10 @@ abstract class EntityHandler extends ContentHandler {
 		// The html representation of entities depends on the user language, so we
 		// have to call ParserOptions::getUserLangObj to split the cache by user language.
 		$options->getUserLangObj();
+
+		// bump PARSER VERSION when making breaking changes to parser output (e.g. entity view).
+		$options->addExtraKey( 'wb' . self::PARSER_VERSION );
+
 		return $options;
 	}
 
