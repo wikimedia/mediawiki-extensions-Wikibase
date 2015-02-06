@@ -94,8 +94,6 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideTestApply() {
-		$itemEmpty = new Item( new ItemId( 'Q888' ) );
-
 		$item777 = $this->makeNewItemWithStatement( 'Q777', new PropertyNoValueSnak( 45 ) );
 		$item666 = $this->makeNewItemWithStatement( 'Q666', new PropertySomeValueSnak( 44 ) );
 
