@@ -16,6 +16,24 @@
       "revId": "13aae4fec1e0d654dd29a4b36202cd8f859f8f1c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9019c080",
+        "filename": "client/includes/scribunto/EntityAccessor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-06T14:15:53Z",
+      "side": 1,
+      "message": "This has the name of what we expose to Lua... think it\u0027s kind of nice to have that named somewhat consistent.",
+      "parentUuid": "6e7c4fa4_d00f3832",
+      "revId": "13aae4fec1e0d654dd29a4b36202cd8f859f8f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
