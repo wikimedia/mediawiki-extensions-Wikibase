@@ -3,8 +3,14 @@
 namespace Wikibase\Client\Tests\Scribunto;
 
 if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
-	// This needs Scribunto
-	class Scribunto_LuaWikibaseLibraryTestCase{}
+	abstract class Scribunto_LuaWikibaseLibraryTestCase extends \MediaWikiTestCase {
+
+		protected function setUp() {
+			$this->markTestSkipped( 'Scribunto is not available' );
+		}
+
+	}
+
 	return;
 }
 
