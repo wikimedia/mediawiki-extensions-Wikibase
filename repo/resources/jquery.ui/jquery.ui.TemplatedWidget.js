@@ -52,6 +52,10 @@
 	 *        - {jQuery.Event}
 	 *        - {boolean} Whether widget has been dis- oder enabled.
 	 *
+	 * @event init
+	 *        Triggered after the widget is fully initialized. (`jQuery.Widget` native "create"
+	 *        event is triggered after the DOM is ready and template short-cuts are assigned.)
+	 *        - {jQuery.Event}
 	 */
 	$.widget( 'ui.TemplatedWidget', PARENT, {
 		/**
@@ -82,6 +86,15 @@
 			this._createTemplateShortCuts();
 
 			PARENT.prototype._create.apply( this );
+		},
+
+		/**
+		 * @see jQuery.Widget._init
+		 * @protected
+		 */
+		_init: function() {
+			PARENT.prototype._init.call( this );
+			this._trigger( 'init' );
 		},
 
 		_applyTemplate: function() {
