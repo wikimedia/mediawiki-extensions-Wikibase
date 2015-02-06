@@ -110,19 +110,6 @@ class WikibaseLuaBindings {
 	}
 
 	/**
-	 * Get global site ID (e.g. "enwiki")
-	 * This is basically a helper function.
-	 * I can see this becoming part of mw.site in the Scribunto extension.
-	 *
-	 * @since 0.5
-	 *
-	 * @return string
-	 */
-	public function getGlobalSiteId() {
-		return $this->siteId;
-	}
-
-	/**
 	 * @param string $setting
 	 *
 	 * @return mixed

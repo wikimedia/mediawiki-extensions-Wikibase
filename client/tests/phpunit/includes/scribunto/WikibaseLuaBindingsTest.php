@@ -90,12 +90,6 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( null, $itemId );
 	}
 
-	public function testGetGlobalSiteId() {
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings();
-
-		$this->assertEquals( 'enwiki', $wikibaseLuaBindings->getGlobalSiteId() );
-	}
-
 	public function getLabelProvider() {
 		return array(
 			array( 'LabelString', 'Q123' ),

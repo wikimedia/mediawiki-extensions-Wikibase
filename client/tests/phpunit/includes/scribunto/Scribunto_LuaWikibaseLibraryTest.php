@@ -107,14 +107,6 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertEquals( array( null ), $entityId );
 	}
 
-	public function testGetGlobalSiteId() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$expected = array(
-			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' )
-		);
-		$this->assertEquals( $expected, $luaWikibaseLibrary->getGlobalSiteId() );
-	}
-
 	private function newScribuntoLuaWikibaseLibrary() {
 		$title =  Title::newFromText( 'Whatever' );
 		$parser = new Parser();
