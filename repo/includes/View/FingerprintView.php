@@ -96,7 +96,6 @@ class FingerprintView {
 	 * @return string
 	 */
 	private function getHtmlForLabel( TermList $labels, EntityId $entityId = null ) {
-		$id = 'new';
 		$idInParentheses = '';
 
 		if( !is_null( $entityId ) ) {
