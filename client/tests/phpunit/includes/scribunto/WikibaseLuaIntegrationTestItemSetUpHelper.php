@@ -10,8 +10,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\SnakFactory;
 use Wikibase\Test\MockClientStore;
@@ -58,6 +60,25 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 
 		$statement1 = $this->getTestStatement( $stringSnak );
 		$statement1->setRank( Statement::RANK_PREFERRED );
+
+		$qualifierSnak1 = $this->getTestSnak(
+			new PropertyId( 'P342' ),
+			new StringValue( 'A qualifier Snak')
+		);
+		$qualifierSnak2 = $this->getTestSnak(
+			new PropertyId( 'P342' ),
+			new StringValue( 'Moar qualifiers')
+		);
+		$referenceSnak = $this->getTestSnak(
+			new PropertyId( 'P342' ),
+			new StringValue( 'A reference')
+		);
+
+		$statement1->setQualifiers(
+			new SnakList( array( $qualifierSnak1, $qualifierSnak2 ) )
+		);
+
+		$statement1->addNewReference( $referenceSnak );
 
 		$stringProperty->getStatements()->addStatement( $statement1 );
 		$this->mockRepository->putEntity( $stringProperty );
