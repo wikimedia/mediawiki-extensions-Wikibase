@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Scribunto;
 
-use Language;
 use Wikibase\Client\Scribunto\WikibaseLuaBindings;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
@@ -12,7 +11,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\SettingsArray;
 use Wikibase\Test\MockRepository;
@@ -44,7 +42,6 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		EntityLookup $entityLookup = null,
 		UsageAccumulator $usageAccumulator = null
 	) {
-		$language = new Language( "en" );
 
 		$siteLinkTable = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkTable' )
 			->disableOriginalConstructor()
@@ -57,11 +54,6 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 				} )
 			);
 
-		$propertyDataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
-		$propertyDataTypeLookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'structured-cat' ) );
-
 		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
@@ -71,13 +63,9 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			new BasicEntityIdParser(),
 			$entityLookup ?: new MockRepository(),
 			$siteLinkTable,
-			new LanguageFallbackChainFactory(),
-			$language, // language
 			new SettingsArray(),
-			$propertyDataTypeLookup,
 			$labelLookup,
 			$usageAccumulator ? $usageAccumulator : new HashUsageAccumulator(),
-			array( 'de', 'en', 'es', 'ja' ),
 			"enwiki" // siteId
 		);
 	}
@@ -86,47 +74,6 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$usage = new EntityUsage( $entityId, $aspect );
 		$key = $usage->getIdentityString();
 		return isset( $actualUsages[$key] );
-	}
-
-	/**
-	 * @dataProvider getEntityProvider
-	 */
-	public function testGetEntity( array $expected, Item $item, EntityLookup $entityLookup ) {
-		$prefixedId = $item->getId()->getSerialization();
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( $entityLookup );
-
-		$entityArr = $wikibaseLuaBindings->getEntity( $prefixedId );
-		$actual = is_array( $entityArr ) ? array_keys( $entityArr ) : array();
-		$this->assertEquals( $expected, $actual );
-	}
-
-	public function testGetEntity_usage() {
-		$item = $this->getItem();
-		$itemId = $item->getId();
-
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
-
-		$usages = new HashUsageAccumulator();
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( $entityLookup, $usages );
-
-		$wikibaseLuaBindings->getEntity( $itemId->getSerialization() );
-		$this->assertTrue( $this->hasUsage( $usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE ), 'all usage' );
-	}
-
-	public function getEntityProvider() {
-		$item = $this->getItem();
-
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
-
-		$item2 = $item->newEmpty();
-		$item2->setId( new ItemId( 'Q9999' ) );
-
-		return array(
-			array( array( 'id', 'type', 'descriptions', 'labels', 'sitelinks', 'schemaVersion' ), $item, $entityLookup ),
-			array( array(), $item2, $entityLookup )
-		);
 	}
 
 	public function testGetEntityId() {
@@ -229,42 +176,4 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 
 		return $item;
 	}
-
-	/**
-	 * @dataProvider provideZeroIndexedArray
-	 */
-	public function testZeroIndexArray ( array $array, array $expected ) {
-		$this->getWikibaseLuaBindings()->renumber( $array );
-
-		$this->assertSame( $expected, $array );
-	}
-
-	public function provideZeroIndexedArray() {
-		return array(
-			array(
-				array( 'nyancat' => array( 0 => 'nyan', 1 => 'cat' ) ),
-				array( 'nyancat' => array( 1 => 'nyan', 2 => 'cat' ) )
-			),
-			array(
-				array( array( 'a', 'b' ) ),
-				array( array( 1 => 'a', 2 => 'b' ) )
-			),
-			array(
-				// Nested arrays
-				array( array( 'a', 'b', array( 'c', 'd' ) ) ),
-				array( array( 1 => 'a', 2 => 'b', 3 => array( 1 => 'c', 2 => 'd' ) ) )
-			),
-			array(
-				// Already 1-based
-				array( array( 1 => 'a', 4 => 'c', 3 => 'b' ) ),
-				array( array( 1 => 'a', 4 => 'c', 3 => 'b' ) )
-			),
-			array(
-				// Associative array
-				array( array( 'foo' => 'bar', 1337 => 'Wikidata' ) ),
-				array( array( 'foo' => 'bar', 1337 => 'Wikidata' ) )
-			),
-		);
-	}
-
 }
