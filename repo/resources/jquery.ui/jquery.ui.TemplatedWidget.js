@@ -8,8 +8,8 @@
 	var PARENT =  $.Widget;
 
 	/**
-	 * Base prototype for all widgets which use the mw.wbTemplate templating system to create a basic
-	 * DOM structure for internal usage.
+	 * Base prototype for all widgets which use the mw.wbTemplate templating system to create a
+	 * basic DOM structure for internal usage.
 	 *
 	 * @constructor
 	 * @abstract
@@ -52,6 +52,11 @@
 	 *        - {jQuery.Event}
 	 *        - {boolean} Whether widget has been dis- oder enabled.
 	 *
+	 * @event init
+	 *        Triggered after the widget is fully initialized. (`jQuery.Widget` native "create"
+	 *        event is triggered after the template DOM is ready and template short-cuts are
+	 *        assigned.)
+	 *        - {jQuery.Event}
 	 */
 	$.widget( 'ui.TemplatedWidget', PARENT, {
 		/**
@@ -71,6 +76,12 @@
 		} ),
 
 		/**
+		 * Creates the DOM structure according to the template and assigns the template short-cuts.
+		 * Consequently, when overriding `_create` in inheriting widgets, calling the parent's
+		 * `_create` should be the first action in the overridden `_create`, as that ensures the
+		 * basic template DOM is created and template short-cuts can be used. The function should
+		 * be overridden only to perform DOM manipulation/creation while initializing should be
+		 * performed in `_init`.
 		 * @see jQuery.Widget._create
 		 */
 		_create: function() {
@@ -82,6 +93,18 @@
 			this._createTemplateShortCuts();
 
 			PARENT.prototype._create.apply( this );
+		},
+
+		/**
+		 * Initializes any additional widget logic (i.e. child widgets, event handlers). DOM
+		 * creation/manipulation is supposed to be performed in `_create` which is run before
+		 * `_init`.
+		 * @see jQuery.Widget._init
+		 * @protected
+		 */
+		_init: function() {
+			PARENT.prototype._init.call( this );
+			this._trigger( 'init' );
 		},
 
 		_applyTemplate: function() {
