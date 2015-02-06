@@ -1,76 +1,62 @@
-/**
- * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- */
 ( function( $ ) {
 	'use strict';
 
 	var PARENT =  $.Widget;
 
 	/**
-	 * Base prototype for all widgets which use the mw.wbTemplate templating system to create a
-	 * basic DOM structure for internal usage.
-	 *
-	 * @constructor
+	 * Base prototype for all widgets using the `mw.wbTemplate` templating system.
+	 * Uses `jQuery.fn.applyTemplate`.
+	 * @see mediaWiki.WbTemplate
+	 * @class jQuery.ui.TemplatedWidget
 	 * @abstract
 	 * @extends jQuery.Widget
+	 * @uses jQuery.fn
 	 * @since 0.4
+	 * @licence GNU GPL v2+
+	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
-	 * @option template {string} Name of a template to use rather than the default. Of course, the
-	 *         given template has to be fully compatible to the default one. This means that should
-	 *         have all required template parameters and classes used to identify certain nodes.
-	 *         The template should have a structure with a single root node which will then be
-	 *         replaced by the Widget's subject node.
+	 * @constructor
 	 *
-	 * @option templateParams {Array} Parameters given to the template on its initial construction.
-	 *         A parameter can be what is compatible with wm.wbTemplate but can also be a function
-	 *         which will be executed in the widget's context and provide the parameter's value by
-	 *         its return value.
-	 *
-	 * @option templateShortCuts {Object} A map pointing from the name of a field of the Widget
-	 *         object which should act as a short cut to a node within the widget's template. The
-	 *         location of the target node has to be given as a valid jQuery query expression. e.g.
-	 *         'li.example-class > .foo'.
-	 *         When setting this as option at Widget initialization, this should match the selectors
-	 *         of a custom template. The used fields should stick to what is defined in the widget's
-	 *         default options definition.
-	 *
-	 * @option [encapsulate=false] {boolean} Whether non-native `jQuery.Widget` events shall be
-	 *         triggered on the widget's node only and not bubble up the DOM tree (using
-	 *         `jQuery.triggerHandler()` instead of `jQuery.trigger()`).
-	 *
-	 * NOTE: the template options have been fields in the prototype before. It makes kind of sense
-	 *       to make them available in the options though. An issue with having 'templateShortCuts'
-	 *       as a field was that inheritance would not be possible with the jQuery Widget system
-	 *       since only options will get a true copy by $.widget while other objects will be
-	 *       modified on the base prototype. Our workaround for this only worked for one level of
-	 *       inheritance (doing the copy manually in the prototype's constructor, can't define the
-	 *       constructor of the new prototype created by jQuery.widget() though).
-	 *
+	 * @param {Object} options
+	 * @param {string} options.template
+	 *        Name of a template to use. The template should feature a single root node which will
+	 *        be replaced by the widget's subject node.
+	 * @param {*[]} [options.templateParams]
+	 *        Parameters injected into the template on its initial construction. A parameter can be
+	 *        what is compatible with `mw.wbTemplate` but can also be a function which will be
+	 *        executed in the widget's context and provide the parameter's value by its return
+	 *        value.
+	 * @param {Object} [options.templateShortCuts]
+	 *        A map pointing from a short-cut name to a node within the widget's template. The map
+	 *        is used during the widget creation process to automatically add members to the widget
+	 *        object that may be accessed during the widget's life time.
+	 *        The location of the target node has to be given as a valid jQuery query expression,
+	 *        i.e. `{ $foo: li.example-class > .foo }` results in being able to access the selected
+	 *        node using `this.$foo` within the widget instance.
+	 * @param {boolean} [options.encapsulate=false]
+	 *        Whether non-native `jQuery.Widget` events shall be triggered on the widget's node only
+	 *        and not bubble up the DOM tree (using `jQuery.triggerHandler()` instead of
+	 *        `jQuery.trigger()`).
+	 */
+	/**
 	 * @event disable
-	 *        Triggered whenever the widget is disabled (after disabled state has been set).
-	 *        - {jQuery.Event}
-	 *        - {boolean} Whether widget has been dis- oder enabled.
-	 *
+	 * Triggered whenever the widget is disabled (after disabled state has been set).
+	 * @param {jQuery.Event}
+	 * @param {boolean} Whether widget has been dis- oder enabled.
+	 */
+	/**
 	 * @event init
-	 *        Triggered after the widget is fully initialized. (`jQuery.Widget` native "create"
-	 *        event is triggered after the template DOM is ready and template short-cuts are
-	 *        assigned.)
-	 *        - {jQuery.Event}
+	 * Triggered after the widget is fully initialized. (`jQuery.Widget` native "create" event is
+	 * triggered after the template DOM is ready and template short-cuts are assigned.)
+	 * @param {jQuery.Event}
 	 */
 	$.widget( 'ui.TemplatedWidget', PARENT, {
 		/**
-		 * Default options
 		 * @see jQuery.Widget.options
 		 */
 		options: $.extend( true, {}, PARENT.prototype.options, {
 			template: null,
 			templateParams: [],
-			/**
-			 * @example { '$value': '.valueview-value', '$preview': '.ui-preview' }
-			 * @descr this.$preview will hold the DOM node (wrapped inside a jQuery object) which
-			 *        matches above expression.
-			 */
 			templateShortCuts: {},
 			encapsulate: false
 		} ),
@@ -83,8 +69,15 @@
 		 * be overridden only to perform DOM manipulation/creation while initializing should be
 		 * performed in `_init`.
 		 * @see jQuery.Widget._create
+		 * @protected
+		 *
+		 * @throws {Error} if `template` option is not specified.
 		 */
 		_create: function() {
+			if( !this.options.template ) {
+				throw new Error( 'template needs to be specified' );
+			}
+
 			// FIXME: Find sane way to detect that template is applied already.
 			if( this.element.contents().length === 0 ) {
 				this._applyTemplate();
@@ -109,6 +102,10 @@
 			this._trigger( 'init' );
 		},
 
+		/**
+		 * @see jQuery.fn.applyTemplate
+		 * @private
+		 */
 		_applyTemplate: function() {
 			var templateParams = [],
 				self = this;
@@ -128,10 +125,11 @@
 		},
 
 		/**
-		 * Creates the short cuts to DOM nodes within the template's DOM structure as specified in
-		 * this.options.templateShortCuts.
+		 * Creates the short-cuts to DOM nodes within the template's DOM structure as specified in
+		 * the `templateShortCuts` option.
+		 * @private
 		 *
-		 * @since 0.4
+		 * @throws {Error} if no DOM node is found using a specified selector.
 		 */
 		_createTemplateShortCuts: function() {
 			var shortCuts = this.options.templateShortCuts,
@@ -141,8 +139,8 @@
 				shortCutSelector = shortCuts[ shortCut ];
 				$shortCutTarget = this.element.find( shortCutSelector );
 				if( $shortCutTarget.length < 1 ) {
-					throw new Error( 'Template "' + this.option( 'template' ) + '" has no DOM node' +
-						' selectable via the jQuery expression "' + shortCutSelector + '"'  );
+					throw new Error( 'Template "' + this.option( 'template' ) + '" has no DOM node '
+						+ ' selectable via the jQuery expression "' + shortCutSelector + '"' );
 				}
 				this[ shortCut ] = $shortCutTarget;
 
@@ -165,6 +163,14 @@
 
 		/**
 		 * @see jQuery.Widget._setOption
+		 * @protected
+		 *
+		 * @param {string} key
+		 * @param {*} value
+		 * @return {jQuery.Widget}
+		 *
+		 * @throws {Error} when trying to set `template`, `templateParams` or `templateShortCuts`
+		 *         option.
 		 */
 		_setOption: function( key, value ) {
 			switch( key ) {
