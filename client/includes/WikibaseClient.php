@@ -27,6 +27,7 @@ use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataAccess\PropertyParserFunction\SnaksFinder;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -35,7 +36,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DirectSqlStore;
 use Wikibase\EntityFactory;
-use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -620,24 +621,31 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return DeserializerFactory
+	 * @return InternalDeserializerFactory
 	 */
-	protected function getInternalDeserializerFactory() {
-		return new DeserializerFactory(
-			new DataValueDeserializer( array(
-				'boolean' => 'DataValues\BooleanValue',
-				'number' => 'DataValues\NumberValue',
-				'string' => 'DataValues\StringValue',
-				'unknown' => 'DataValues\UnknownValue',
-				'globecoordinate' => 'DataValues\Geo\Values\GlobeCoordinateValue',
-				'monolingualtext' => 'DataValues\MonolingualTextValue',
-				'multilingualtext' => 'DataValues\MultilingualTextValue',
-				'quantity' => 'DataValues\QuantityValue',
-				'time' => 'DataValues\TimeValue',
-				'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
-			) ),
+	private function getInternalDeserializerFactory() {
+		return new InternalDeserializerFactory(
+			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
 		);
+	}
+
+	/**
+	 * @return DataValueDeserializer
+	 */
+	private function getDataValueDeserializer() {
+		return new DataValueDeserializer( array(
+			'boolean' => 'DataValues\BooleanValue',
+			'number' => 'DataValues\NumberValue',
+			'string' => 'DataValues\StringValue',
+			'unknown' => 'DataValues\UnknownValue',
+			'globecoordinate' => 'DataValues\Geo\Values\GlobeCoordinateValue',
+			'monolingualtext' => 'DataValues\MonolingualTextValue',
+			'multilingualtext' => 'DataValues\MultilingualTextValue',
+			'quantity' => 'DataValues\QuantityValue',
+			'time' => 'DataValues\TimeValue',
+			'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
+		) );
 	}
 
 	/**
@@ -763,4 +771,13 @@ final class WikibaseClient {
 		);
 	}
 
+	/**
+	 * @return DeserializerFactory
+	 */
+	public function getDeserializerFactory() {
+		return new DeserializerFactory(
+			$this->getDataValueDeserializer(),
+			$this->getEntityIdParser()
+		);
+	}
 }
