@@ -7,6 +7,7 @@ use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\Serializer;
@@ -24,6 +25,7 @@ use Wikibase\Lib\Store\EntityLookup;
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  */
 class EntityAccessor {
+
 	/**
 	 * @var EntityIdParser
 	 */
@@ -45,14 +47,14 @@ class EntityAccessor {
 	private $serializationOptions = null;
 
 	/**
-	 * @var LanguageFallbackChainFactory
+	 * @var PropertyDataTypeLookup
 	 */
-	private $fallbackChainFactory;
+	private $dataTypeLookup;
 
 	/**
-	 * @var string[]
+	 * @var LanguageFallbackChain
 	 */
-	private $languageCodes;
+	private $fallbackChain;
 
 	/**
 	 * @var Language
@@ -60,35 +62,35 @@ class EntityAccessor {
 	private $language;
 
 	/**
-	 * @var PropertyDataTypeLookup
+	 * @var string[]
 	 */
-	private $dataTypeLookup;
+	private $languageCodes;
 
 	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityLookup $entityLookup
 	 * @param UsageAccumulator $usageAccumulator
-	 * @param LanguageFallbackChainFactory $fallbackChainFactory
-	 * @param string[] $languageCodes
-	 * @param Language $language
 	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 * @param LanguageFallbackChain $fallbackChain
+	 * @param Language $language
+	 * @param string[] $languageCodes
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,
 		UsageAccumulator $usageAccumulator,
-		LanguageFallbackChainFactory $fallbackChainFactory,
-		array $languageCodes,
+		PropertyDataTypeLookup $dataTypeLookup,
+		LanguageFallbackChain $fallbackChain,
 		Language $language,
-		PropertyDataTypeLookup $dataTypeLookup
+		array $languageCodes
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityLookup = $entityLookup;
 		$this->usageAccumulator = $usageAccumulator;
-		$this->fallbackChainFactory = $fallbackChainFactory;
-		$this->languageCodes = $languageCodes;
-		$this->language = $language;
 		$this->dataTypeLookup = $dataTypeLookup;
+		$this->fallbackChain = $fallbackChain;
+		$this->language = $language;
+		$this->languageCodes = $languageCodes;
 	}
 
 	/**
@@ -194,12 +196,7 @@ class EntityAccessor {
 		// See mw.wikibase.lua. This is the only way to inject values into mw.wikibase.label( ),
 		// so any customized Lua modules can access labels of another entity written in another variant,
 		// unless we give them the ability to getEntity() any entity by specifying its ID, not just self.
-		$chain = $this->fallbackChainFactory->newFromLanguage(
-			$this->language,
-			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
-		);
-
-		$languages = $this->languageCodes + array( $this->language->getCode() => $chain );
+		$languages = $this->languageCodes + array( $this->language->getCode() => $this->fallbackChain );
 
 		// SerializationOptions accepts mixed types of keys happily.
 		$options->setLanguages( $languages );
