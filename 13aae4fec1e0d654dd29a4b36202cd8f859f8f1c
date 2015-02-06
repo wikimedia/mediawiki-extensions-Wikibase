@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_7b472551",
+        "filename": "client/includes/scribunto/EntityAccessor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-06T17:26:27Z",
+      "side": 1,
+      "message": "Done in https://gerrit.wikimedia.org/r/189029",
+      "parentUuid": "6e7c4fa4_90d780f2",
+      "revId": "13aae4fec1e0d654dd29a4b36202cd8f859f8f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d00f3832",
         "filename": "client/includes/scribunto/EntityAccessor.php",
         "patchSetId": 2
