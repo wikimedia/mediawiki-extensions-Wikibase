@@ -32,7 +32,7 @@ use WikiPage;
  */
 class ActionTestCase extends \MediaWikiTestCase {
 
-	protected $permissionsChanged = false;
+	private $permissionsChanged = false;
 
 	/**
 	 * The language to set as the user language.
@@ -86,17 +86,17 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$wgUser->removeGroup( "dummy" );
 	}
 
-	protected static function shouldTestRedirects() {
+	protected function shouldTestRedirects() {
 		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
 		return $handler->supportsRedirects();
 	}
 
 	/**
-	 * @var array List of Entity or EntityRedirect objects, with logical handles as keys.
+	 * @var Entity[]|EntityRedirect[] List of Entity or EntityRedirect objects, with logical handles as keys.
 	 */
 	private static $testItems = array();
 
-	protected static function makeTestItemData() {
+	private function makeTestItemData() {
 		$items = array();
 
 		$item = Item::newEmpty();
@@ -129,7 +129,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$item->setLabel( 'en', 'Oslo' );
 		$items['Oslo'][] = $item;
 
-		if ( self::shouldTestRedirects() ) {
+		if ( $this->shouldTestRedirects() ) {
 			$item = Item::newEmpty();
 			$item->setLabel( 'de', 'Berlin' );
 			$items['Berlin2'][] = $item;
@@ -260,15 +260,15 @@ class ActionTestCase extends \MediaWikiTestCase {
 	/**
 	 * Creates the test items defined by makeTestItemData() in the database.
 	 */
-	public static function initTestItems() {
+	private function initTestItems() {
 		if ( self::$testItems ) {
 			return;
 		}
 
-		$itemData = self::makeTestItemData();
+		$itemData = $this->makeTestItemData();
 
 		foreach ( $itemData as $handle => $revisions ) {
-			$item = self::createTestContent( $handle, $revisions );
+			$item = $this->createTestContent( $handle, $revisions );
 			self::$testItems[$handle] = $item;
 		}
 	}
@@ -283,7 +283,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @throws MWException
 	 * @throws RuntimeException
 	 */
-	private static function createTestContent( $handle, array $revisions ) { //@todo: provide this for all kinds of entities.
+	private function createTestContent( $handle, array $revisions ) { //@todo: provide this for all kinds of entities.
 		global $wgUser;
 
 		/** @var EntityRevision $rev */
@@ -293,7 +293,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		/** @var Entity|string $item */
 		foreach ( $revisions as $item ) {
 			$flags = ( $id !== null ) ? EDIT_UPDATE : EDIT_NEW;
-			$result = self::createTestContentRevision( $item, $id, $wgUser, $flags );
+			$result = $this->createTestContentRevision( $item, $id, $wgUser, $flags );
 
 			if ( $result instanceof EntityRedirect ) {
 				$id = $result->getEntityId();
@@ -315,7 +315,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 *
 	 * @return Entity|EntityRedirect
 	 */
-	private static function createTestContentRevision( $item, $id, User $user, $flags ) {
+	private function createTestContentRevision( $item, $id, User $user, $flags ) {
 		if ( $flags == EDIT_NEW ) {
 			$comment = "Creating test item";
 		} else {
@@ -329,19 +329,19 @@ class ActionTestCase extends \MediaWikiTestCase {
 				throw new RuntimeException( 'Can\'t create a redirect as the first revision of a test entity page.' );
 			}
 
-			$result = self::createTestRedirect( $id, $item, $comment, $user, $flags );
+			$result = $this->createTestRedirect( $id, $item, $comment, $user, $flags );
 		} else {
 			if ( $id ) {
 				$item->setId( $id );
 			}
 
-			$result = self::createTestItem( $item, $comment, $user, $flags );
+			$result = $this->createTestItem( $item, $comment, $user, $flags );
 		}
 
 		return $result;
 	}
 
-	private static function createTestItem( Item $item, $comment, $user, $flags ) {
+	private function createTestItem( Item $item, $comment, $user, $flags ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		$rev = $store->saveEntity( $item, $comment, $user, $flags );
 
@@ -362,19 +362,8 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @return EntityRedirect
 	 * @throws RuntimeException
 	 */
-	private static function createTestRedirect( EntityId $entityId, $targetHandle, $comment, $user, $flags ) {
-		if ( !isset( self::$testItems[ $targetHandle ] ) ) {
-			throw new RuntimeException( 'Unknown redirect target handle ' . $targetHandle );
-		}
-
-		$target = self::$testItems[ $targetHandle ];
-
-		if ( $target instanceof EntityRedirect ) {
-			$targetId = $target->getEntityId();
-		} else {
-			$targetId = $target->getId();
-		}
-
+	private function createTestRedirect( EntityId $entityId, $targetHandle, $comment, $user, $flags ) {
+		$targetId = $this->getTestItemId( $targetHandle );
 		$redirect = new EntityRedirect( $entityId, $targetId );
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
@@ -392,12 +381,12 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 *
 	 * @param String $handle
 	 */
-	public static function resetTestItem( $handle ) {
+	protected function resetTestItem( $handle ) {
 		if ( isset( self::$testItems[ $handle ] ) ) {
 			$item = self::$testItems[ $handle ];
 
 			// check current data
-			$page = static::getTestItemPage( $handle );
+			$page = $this->getTestItemPage( $handle );
 			if ( $page->getLatest() == $item->revid ) {
 				return; // revid didn't change
 			}
@@ -407,10 +396,10 @@ class ActionTestCase extends \MediaWikiTestCase {
 		}
 
 		// re-create item
-		$itemData = self::makeTestItemData();
+		$itemData = $this->makeTestItemData();
 		$revisions = $itemData[ $handle ];
 
-		$item = self::createTestContent( $handle, $revisions );
+		$item = $this->createTestContent( $handle, $revisions );
 		self::$testItems[ $handle ] = $item;
 	}
 
@@ -420,8 +409,8 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @param String $handle
 	 * @return Item
 	 */
-	public static function loadTestItem( $handle ) {
-		$page = static::getTestItemPage( $handle );
+	protected function loadTestItem( $handle ) {
+		$page = $this->getTestItemPage( $handle );
 		/** @var ItemContent $content */
 		$content = $page->getContent();
 
@@ -429,49 +418,24 @@ class ActionTestCase extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * Returns a well known test item for the given $handle, creating it in the database first if necessary.
-	 *
-	 * @param String $handle the test item's handle
-	 *
-	 * @return Item the item
-	 * @throws Exception if the handle is not known
-	 */
-	public static function getTestItem( $handle ) {
-		self::initTestItems();
-
-		if ( !isset( self::$testItems[$handle] ) ) {
-			throw new Exception( "unknown test item: $handle" );
-		}
-
-		if ( !( self::$testItems[$handle] instanceof Item ) ) {
-			throw new Exception( "not an item: $handle" );
-		}
-
-		return self::$testItems[$handle];
-	}
-
-	/**
-	 * Returns the ID of a well known test item for the given $handle,
-	 * creating it in the database first if necessary.
+	 * Returns the ID of a well known test item for the given $handle.
 	 *
 	 * @param String $handle the test item's handle
 	 *
 	 * @return EntityId the item's ID
 	 * @throws Exception if the handle is not known
 	 */
-	public static function getTestItemId( $handle ) {
-		self::initTestItems();
-
+	private function getTestItemId( $handle ) {
 		if ( !isset( self::$testItems[$handle] ) ) {
-			throw new Exception( "unknown test item: $handle" );
+			throw new Exception( "Unknown test item $handle" );
 		}
 
-		if ( self::$testItems[$handle] instanceof EntityRedirect ) {
-			$redirect = self::$testItems[$handle];
-			return $redirect->getEntityId();
+		$item = self::$testItems[$handle];
+
+		if ( $item instanceof EntityRedirect ) {
+			return $item->getEntityId();
 		} else {
-			$entity = self::$testItems[$handle];
-			return $entity->getId();
+			return $item->getId();
 		}
 	}
 
@@ -483,8 +447,10 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @return WikiPage the item's page
 	 * @throws Exception if the handle is not known
 	 */
-	public static function getTestItemPage( $handle ) {
-		$itemId = self::getTestItemId( $handle );
+	protected function getTestItemPage( $handle ) {
+		$this->initTestItems();
+
+		$itemId = $this->getTestItemId( $handle );
 		$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $itemId );
 
 		$page = WikiPage::factory( $title );
