@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Test\MockRepository;
 
@@ -51,10 +51,10 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 			new BasicEntityIdParser(),
 			$entityLookup ?: new MockRepository(),
 			$usageAccumulator ? $usageAccumulator : new HashUsageAccumulator(),
-			new LanguageFallbackChainFactory(),
-			array( 'de', 'en', 'es', 'ja' ),
+			$propertyDataTypeLookup,
+			new LanguageFallbackChain( array() ),
 			$language,
-			$propertyDataTypeLookup
+			array( 'de', 'en', 'es', 'ja' )
 		);
 	}
 

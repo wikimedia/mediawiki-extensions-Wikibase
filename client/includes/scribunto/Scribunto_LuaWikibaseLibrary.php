@@ -5,6 +5,7 @@ use Wikibase\Client\Scribunto\WikibaseLuaBindings;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
@@ -30,6 +31,16 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @var EntityAccessor
 	 */
 	private $entityAccessor;
+
+	/**
+	 * @var ParserOutputUsageAccumulator|null
+	 */
+	private $usageAccumulator = null;
+
+	/**
+	 * @var LanguageFallbackChain|null
+	 */
+	private $fallbackChain = null;
 
 	private function getLuaBindings() {
 		if ( !$this->luaBindings ) {
@@ -57,32 +68,24 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private function newEntityAccessor() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-
 		return new EntityAccessor(
 			$wikibaseClient->getEntityIdParser(),
-			$entityLookup,
-			new ParserOutputUsageAccumulator( $this->getParser()->getOutput() ),
-			$wikibaseClient->getLanguageFallbackChainFactory(),
-			Utils::getLanguageCodes(),
+			$wikibaseClient->getStore()->getEntityLookup(),
+			$this->getUsageAccumulator(),
+			$wikibaseClient->getPropertyDataTypeLookup(),
+			$this->getLanguageFallbackChain(),
 			$this->getLanguage(),
-			$wikibaseClient->getPropertyDataTypeLookup()
+			Utils::getLanguageCodes()
 		);
 	}
 
 	private function newLuaBindings() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-
-		$fallbackChain = $wikibaseClient->getLanguageFallbackChainFactory()->newFromLanguage(
-			$this->getLanguage(),
-			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
-		);
 
 		$labelLookup = new LanguageFallbackLabelLookup(
 			new EntityRetrievingTermLookup( $entityLookup ),
-			$fallbackChain
+			$this->getLanguageFallbackChain()
 		);
 
 		return new WikibaseLuaBindings(
@@ -91,9 +94,37 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
 			$wikibaseClient->getSettings(),
 			$labelLookup,
-			new ParserOutputUsageAccumulator( $this->getParser()->getOutput() ),
+			$this->getUsageAccumulator(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
+	}
+
+	/**
+	 * @return LanguageFallbackChain
+	 */
+	private function getLanguageFallbackChain() {
+		if ( $this->fallbackChain === null ) {
+			$fallbackChainFactory = WikibaseClient::getDefaultInstance()->getLanguageFallbackChainFactory();
+
+			$this->fallbackChain = $fallbackChainFactory->newFromLanguage(
+				$this->getLanguage(),
+				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
+			);
+		}
+
+		return $this->fallbackChain;
+	}
+
+	/**
+	 * @return ParserOutputUsageAccumulator
+	 */
+	private function getUsageAccumulator() {
+		if ( $this->usageAccumulator === null ) {
+			$parserOutput = $this->getParser()->getOutput();
+			$this->usageAccumulator = new ParserOutputUsageAccumulator( $parserOutput );
+		}
+
+		return $this->usageAccumulator;
 	}
 
 	/**
