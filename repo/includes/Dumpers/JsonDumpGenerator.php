@@ -118,7 +118,7 @@ class JsonDumpGenerator {
 	 */
 	public function setBatchSize( $batchSize ) {
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
-			throw new InvalidArgumentException( '$batchSize must be a positive integer.' );
+			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 
 		$this->batchSize = $batchSize;

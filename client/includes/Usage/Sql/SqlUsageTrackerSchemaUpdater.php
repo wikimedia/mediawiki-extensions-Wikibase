@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
+use MWException;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 
@@ -104,7 +105,7 @@ class SqlUsageTrackerSchemaUpdater {
 			}
 		}
 
-		throw new \MWException( "Could not find schema update script '$name'." );
+		throw new MWException( "Could not find schema update script '$name'" );
 	}
 
 }
