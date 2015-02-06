@@ -189,7 +189,7 @@ $.widget( 'ui.suggester', {
 		this.option( 'menu', null );
 
 		// About to remove the last suggester instance on the page:
-		if ( $( ':' + this.widgetBaseClass ).length === 1 ) {
+		if( $( ':' + this.widgetBaseClass ).length === 1 ) {
 			$( window ).off( '.' + this.widgetBaseClass );
 		}
 
@@ -597,7 +597,7 @@ $.widget( 'ui.suggester', {
 	 * @return {string} return.fail.message
 	 */
 	_getSuggestions: function( term ) {
-		if ( typeof this.options.source === 'function' ) {
+		if( typeof this.options.source === 'function' ) {
 			return this.options.source( term );
 		}
 

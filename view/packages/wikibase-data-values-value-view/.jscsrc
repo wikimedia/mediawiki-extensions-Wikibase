@@ -85,7 +85,7 @@
 	"disallowSpaceAfterKeywords": [
 		"catch",
 		"for",
-//		"if",
+		"if",
 		"switch",
 		"while"
 	],

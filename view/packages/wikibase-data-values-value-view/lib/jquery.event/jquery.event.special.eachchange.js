@@ -208,7 +208,7 @@
 	function getInputEvent() {
 		// IE (at least <= version 9) does not trigger input event when pressing backspace
 		// (version <= 8 does not support input event at all anyway)
-		if ( $.client.profile().name === 'msie' && $.client.profile().versionNumber >= 9 ) {
+		if( $.client.profile().name === 'msie' && $.client.profile().versionNumber >= 9 ) {
 			return 'input keyup';
 		}
 

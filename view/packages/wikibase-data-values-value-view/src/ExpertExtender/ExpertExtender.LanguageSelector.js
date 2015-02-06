@@ -1,5 +1,4 @@
 ( function( $, ExpertExtender, PrefixingMessageProvider ) {
-
 	'use strict';
 
 	/**
