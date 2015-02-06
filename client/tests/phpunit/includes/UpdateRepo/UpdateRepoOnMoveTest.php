@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\UpdateRepo;
 
+use JobQueueGroup;
 use JobSpecification;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
 use Wikibase\DataModel\Entity\ItemId;
@@ -47,7 +48,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return UpdateRepoOnMove
 	 */
-	private function getNewLocal() {
+	private function getNewUpdateRepoOnMove() {
 		static $updateRepo = null;
 
 		if ( !$updateRepo ) {
@@ -71,9 +72,9 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Get a JobQueueGroup mock for the use in UpdateRepo::injectJob.
 	 *
-	 * @return object
+	 * @return JobQueueGroup
 	 */
-	protected function getJobQueueGroupMock() {
+	private function getJobQueueGroupMock() {
 		$jobQueueGroupMock = $this->getMockBuilder( '\JobQueueGroup' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -106,7 +107,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testUserIsValidOnRepo() {
-		$updateRepo = $this->getNewLocal();
+		$updateRepo = $this->getNewUpdateRepoOnMove();
 
 		$this->assertFalse( $updateRepo->userIsValidOnRepo() );
 	}
@@ -114,9 +115,9 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Verify a created job
 	 *
-	 * @param Job $job
+	 * @param JobSpecification $job
 	 */
-	public function verifyJob( JobSpecification $job ) {
+	private function verifyJob( JobSpecification $job ) {
 		$itemId = new ItemId( 'Q123' );
 
 		$moveData = $this->getFakeMoveData();
@@ -132,7 +133,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testInjectJob() {
-		$updateRepo = $this->getNewLocal();
+		$updateRepo = $this->getNewUpdateRepoOnMove();
 
 		$jobQueueGroupMock = $this->getJobQueueGroupMock( true );
 
