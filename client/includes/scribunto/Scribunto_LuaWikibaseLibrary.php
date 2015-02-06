@@ -1,7 +1,11 @@
 <?php
 
+use Deserializers\Exceptions\DeserializationException;
+use ValueFormatters\FormatterOptions;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Client\Scribunto\EntityAccessor;
 use Wikibase\Client\Scribunto\WikibaseLuaBindings;
+use Wikibase\Client\Scribunto\SnakRenderer;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -28,7 +32,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private $luaBindings;
 
 	/**
-	 * @var EntityAccessor
+	 * @var EntityAccessor|null
 	 */
 	private $entityAccessor;
 
@@ -41,6 +45,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @var LanguageFallbackChain|null
 	 */
 	private $fallbackChain = null;
+
+	/**
+	 * @var SnakRenderer|null
+	 */
+	private $snakRenderer;
 
 	private function getLuaBindings() {
 		if ( !$this->luaBindings ) {
@@ -58,6 +67,17 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return $this->entityAccessor;
 	}
 
+	private function getSnakRenderer() {
+		if ( !$this->snakRenderer ) {
+			$this->snakRenderer = $this->newSnakRenderer();
+		}
+
+		return $this->snakRenderer;
+	}
+
+	/**
+	 * @return Language
+	 */
 	private function getLanguage() {
 		// For the language we need $wgContLang, not parser target language or anything else.
 		// See Scribunto_LuaLanguageLibrary::getContLangCode().
@@ -76,6 +96,27 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$this->getLanguageFallbackChain(),
 			$this->getLanguage(),
 			Utils::getLanguageCodes()
+		);
+	}
+
+	private function newSnakRenderer() {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
+		$formatterOptions = new FormatterOptions( array( "language" => $this->getLanguage() ) );
+
+		$snakFormatter = $wikibaseClient->getSnakFormatterFactory()->getSnakFormatter(
+			SnakFormatter::FORMAT_WIKI, $formatterOptions
+		);
+
+		$snakDeserializer = $wikibaseClient->getDeserializerFactory()->newSnakDeserializer();
+		$snaksDeserializer = $wikibaseClient->getDeserializerFactory()->newSnaksDeserializer();
+
+		return new SnakRenderer(
+			$snakFormatter,
+			$snakDeserializer,
+			$this->getLanguage(),
+			$snaksDeserializer,
+			$this->getUsageAccumulator()
 		);
 	}
 
@@ -139,6 +180,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getLabel' => array( $this, 'getLabel' ),
 			'getEntity' => array( $this, 'getEntity' ),
 			'getSetting' => array( $this, 'getSetting' ),
+			'renderSnak' => array( $this, 'renderSnak' ),
+			'renderSnaks' => array( $this, 'renderSnaks' ),
 			'getEntityId' => array( $this, 'getEntityId' ),
 			'getSiteLinkPageName' => array( $this, 'getSiteLinkPageName' ),
 		);
@@ -149,7 +192,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getEntity in Scribunto_LuaWikibaseLibraryImplementation
+	 * Wrapper for getEntity in EntityAccessor
 	 *
 	 * @since 0.5
 	 *
@@ -228,5 +271,45 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getSiteLinkPageName( $prefixedEntityId ) {
 		$this->checkType( 'getSiteLinkPageName', 1, $prefixedEntityId, 'string' );
 		return array( $this->getLuaBindings()->getSiteLinkPageName( $prefixedEntityId ) );
+	}
+
+	/**
+	 * Wrapper for renderSnak in SnakRenderer
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $snakSerialization
+	 *
+	 * @throws ScribuntoException
+	 * @return string[]
+	 */
+	public function renderSnak( $snakSerialization ) {
+		$this->checkType( 'renderSnak', 1, $snakSerialization, 'table' );
+		try {
+			$ret = array( $this->getSnakRenderer()->renderSnak( $snakSerialization ) );
+			return $ret;
+		} catch ( DeserializationException $e ) {
+			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
+		}
+	}
+
+	/**
+	 * Wrapper for renderSnaks in SnakRenderer
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $snaksSerialization
+	 *
+	 * @throws ScribuntoException
+	 * @return string[]
+	 */
+	public function renderSnaks( $snaksSerialization ) {
+		$this->checkType( 'renderSnaks', 1, $snaksSerialization, 'table' );
+		try {
+			$ret = array( $this->getSnakRenderer()->renderSnaks( $snaksSerialization ) );
+			return $ret;
+		} catch ( DeserializationException $e ) {
+			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
+		}
 	}
 }
