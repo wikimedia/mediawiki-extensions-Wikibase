@@ -16,7 +16,6 @@
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
-	"specialpages-group-wikibaserepo": "Wikibase 儲存庫",
 	"wikibase-entity-item": "項目",
 	"wikibase-entity-property": "屬性",
 	"wikibase-entity-query": "查詢",
@@ -28,6 +27,7 @@
 	"wikibase-addreference": "新增參考文獻",
 	"wikibase-save-inprogress": "儲存中...",
 	"wikibase-remove-inprogress": "移除中...",
+	"wikibase-entitytermsforlanguagelistview-language": "語言",
 	"wikibase-label-empty": "尚未定義標籤",
 	"wikibase-label-edit-placeholder": "輸入標籤",
 	"wikibase-label-edit-placeholder-language-aware": "使用 $1 輸入標籤",
@@ -144,7 +144,6 @@
 	"wikibase-newitem-site": "第一個連結頁面的網站",
 	"wikibase-newitem-page": "第一個連結頁面的名稱",
 	"wikibase-newitem-no-external-page": "在對應網站無法找到指定頁面。",
-	"wikibase-newitem-add-sitelink-failed": "無法儲存該網站連結。",
 	"wikibase-newitem-not-recognized-siteid": "提供的網站 ID 無法辨識。",
 	"wikibase-newentity-label": "標籤：",
 	"wikibase-newentity-description": "描述：",
