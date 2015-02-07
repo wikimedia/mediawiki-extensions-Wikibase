@@ -83,8 +83,12 @@ h2.wb-section-heading {
 	margin-bottom: 0.2em;
 	margin-top: 1em;
 	padding-left: 10px;
-	border-bottom: none;
 	width: 100%;
+}
+
+/* Remove line under the heading */
+h2.wb-section-heading:after {
+	display: none;
 }
 
 .wikibase-entityview input {
@@ -626,7 +630,11 @@ h2.wb-sitelinks-heading {
 	margin-top: 2em;
 	margin-bottom: 0.2em;
 	padding-left: 10px;
-	border-bottom: none;
+}
+
+/* Remove line under the heading */
+h2.wb-sitelinks-heading:after {
+	display: none;
 }
 
 .wb-section-heading .sitelinklistview-counter {
