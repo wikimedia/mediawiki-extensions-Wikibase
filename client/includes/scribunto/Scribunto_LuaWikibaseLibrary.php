@@ -110,7 +110,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getSetting' => array( $this, 'getSetting' ),
 			'getEntityId' => array( $this, 'getEntityId' ),
 			'getSiteLinkPageName' => array( $this, 'getSiteLinkPageName' ),
-			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' )
 		);
 
 		return $this->getEngine()->registerInterface(
@@ -156,17 +155,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getEntityId( $pageTitle = null ) {
 		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
 		return array( $this->getLuaBindings()->getEntityId( $pageTitle ) );
-	}
-
-	/**
-	 * Wrapper for getGlobalSiteId in Scribunto_LuaWikibaseLibraryImplementation
-	 *
-	 * @since 0.5
-	 *
-	 * @return string[]
-	 */
-	public function getGlobalSiteId() {
-		return array( $this->getLuaBindings()->getGlobalSiteId() );
 	}
 
 	/**
