@@ -101,7 +101,7 @@ class EntityAccessor {
 	 *
 	 * @param array &$entityArr
 	 */
-	public function renumber( array &$entityArr ) {
+	private function renumber( array &$entityArr ) {
 		foreach( $entityArr as &$value ) {
 			if ( !is_array( $value ) ) {
 				continue;

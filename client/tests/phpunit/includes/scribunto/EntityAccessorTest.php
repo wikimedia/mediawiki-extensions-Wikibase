@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Scribunto;
 
 use Language;
+use ReflectionMethod;
 use Wikibase\Client\Scribunto\EntityAccessor;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
@@ -127,7 +128,9 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideZeroIndexedArray
 	 */
 	public function testZeroIndexArray ( array $array, array $expected ) {
-		$this->getEntityAccessor()->renumber( $array );
+		$renumber = new ReflectionMethod( 'Wikibase\Client\Scribunto\EntityAccessor', 'renumber' );
+		$renumber->setAccessible( true );
+		$renumber->invokeArgs( $this->getEntityAccessor(), array( &$array ) );
 
 		$this->assertSame( $expected, $array );
 	}
