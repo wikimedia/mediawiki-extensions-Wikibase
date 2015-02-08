@@ -2,23 +2,10 @@
 
 namespace Wikibase\Client\Tests\Scribunto;
 
-use Language;
 use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
-use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\Client\Usage\HashUsageAccumulator;
-use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Client\Scribunto\WikibaseLuaEntityBindings
@@ -32,105 +19,37 @@ use Wikibase\Test\MockRepository;
  */
 class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 
-	public function testConstructor() {
-		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings();
+	/**
+	 * @return WikibaseLuaEntityBindings
+	 */
+	private function getWikibaseLuaEntityBindings() {
+		$entityStatementsRenderer = $this->getMockBuilder( 'Wikibase\DataAccess\EntityStatementsRenderer' )
+			->disableOriginalConstructor()
+			->getMock();
 
-		$this->assertInstanceOf(
-			'Wikibase\Client\Scribunto\WikibaseLuaEntityBindings',
-			$wikibaseLuaEntityBindings
-		);
-	}
-
-	private function getWikibaseLuaEntityBindings(
-		EntityLookup $entityLookup = null,
-		UsageAccumulator $usageAccumulator = null
-	) {
-		$language = new Language( 'en' );
+		$entityStatementsRenderer->expects( $this->any() )
+				->method( 'render' )
+				->with( new ItemId( 'Q12' ), 'some label', array( Statement::RANK_DEPRECATED ) )
+				->will( $this->returnValue( 'Kittens > Cats' ) );
 
 		return new WikibaseLuaEntityBindings(
-			$this->getSnakFormatter(),
-			$entityLookup ?: new MockRepository(),
-			$usageAccumulator ?: new HashUsageAccumulator(),
-			'enwiki',
-			$language,
-			new BasicEntityIdParser()
+			$entityStatementsRenderer,
+			new BasicEntityIdParser(),
+			'enwiki'
 		);
 	}
 
-	/**
-	 * @return Item
-	 */
-	private function getItem() {
-		$propertyId = new PropertyId( 'P123456' );
-		$snak = new PropertyValueSnak( $propertyId, new EntityIdValue( new ItemId( 'Q11' ) ));
-		$statement = new Statement( new Claim( $snak ) );
-		$statement->setGuid( 'gsdfgsadg' );
-
-		$item = new Item();
-		$item->addClaim( $statement );
-
-		return $item;
-	}
-
-	/**
-	 * @param EntityDocument|null $entity
-	 *
-	 * @return EntityLookup
-	 */
-	private function getEntityLookup( EntityDocument $entity = null ) {
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
-
-		$entityLookup->expects( $this->any() )->method( 'getEntity' )
-			->will( $this->returnValue( $entity ) );
-
-		return $entityLookup;
-	}
-
-	/**
-	 * @return SnakFormatter
-	 */
-	private function getSnakFormatter() {
-		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
-
-		$snakFormatter->expects( $this->any() )->method( 'formatSnak' )
-			->will( $this->returnValue( 'Snak snak snak' ) );
-
-		return $snakFormatter;
-	}
-
-
 	public function testFormatPropertyValues() {
-		$item = $this->getItem();
+		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings();
 
-		$entityLookup = $this->getEntityLookup( $item );
-		$usageAccumulator = new HashUsageAccumulator();
-		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings( $entityLookup, $usageAccumulator );
-
-		$ret = $wikibaseLuaEntityBindings->formatPropertyValues( 'Q1', 'P123456' );
-
-		$this->assertSame( 'Snak snak snak', $ret );
-
-		$expectedUsage = new EntityUsage( new ItemId( 'Q11' ), EntityUsage::LABEL_USAGE );
-		$usages = $usageAccumulator->getUsages();
-		$this->assertArrayHasKey( $expectedUsage->getIdentityString(), $usages );
-	}
-
-	public function testFormatPropertyValuesNoProperty() {
-		$entityLookup = $this->getEntityLookup( new Item() );
-
-		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings( $entityLookup );
-		$ret = $wikibaseLuaEntityBindings->formatPropertyValues( 'Q2', 'P123456' );
-
-		$this->assertSame( '', $ret );
-	}
-
-	public function testFormatPropertyValuesNoEntity() {
-		$entityLookup = $this->getEntityLookup();
-
-		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings( $entityLookup );
-		$ret = $wikibaseLuaEntityBindings->formatPropertyValues( 'Q3', 'P123456' );
-
-		$this->assertSame( '', $ret );
+		$this->assertEquals(
+			'Kittens > Cats',
+			$wikibaseLuaEntityBindings->formatPropertyValues(
+				'Q12',
+				'some label',
+				array( Statement::RANK_DEPRECATED )
+			)
+		);
 	}
 
 	public function testGetGlobalSiteId() {

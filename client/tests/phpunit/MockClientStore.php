@@ -27,6 +27,18 @@ use Wikibase\TermIndex;
 class MockClientStore implements ClientStore {
 
 	/**
+	 * @var string|null
+	 */
+	private $languageCode;
+
+	/**
+	 * @param string|null $languageCode
+	 */
+	public function __construct( $languageCode = null ) {
+		$this->languageCode = $languageCode;
+	}
+
+	/**
 	 * @var MockRepository|null
 	 */
 	private static $mockRepository = null;
@@ -69,7 +81,10 @@ class MockClientStore implements ClientStore {
 	 * @return PropertyLabelResolver
 	 */
 	public function getPropertyLabelResolver() {
-		// FIXME: Incomplete
+		return new MockPropertyLabelResolver(
+			$this->languageCode ?: 'en',
+			$this->getMockRepository()
+		);
 	}
 
 	/**
@@ -111,6 +126,9 @@ class MockClientStore implements ClientStore {
 	public function rebuild() {
 	}
 
+	/**
+	 * @return MockRepository
+	 */
 	private function getMockRepository() {
 		if ( self::$mockRepository === null ) {
 			self::$mockRepository = new MockRepository();

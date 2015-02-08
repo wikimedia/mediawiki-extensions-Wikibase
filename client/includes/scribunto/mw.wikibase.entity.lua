@@ -116,21 +116,25 @@ end
 
 -- Get the formatted value of the claims with the given property id
 --
--- @param propertyId
+-- @param propertyLabelOrId
 -- @param acceptableRanks
-methodtable.formatPropertyValues = function( entity, propertyId, acceptableRanks )
+methodtable.formatPropertyValues = function( entity, propertyLabelOrId, acceptableRanks )
 	acceptableRanks = acceptableRanks or nil
 
 	local formatted = php.formatPropertyValues(
 		entity.id,
-		propertyId,
+		propertyLabelOrId,
 		acceptableRanks
 	)
 
-	local label = mw.wikibase.label( propertyId )
+	local label = nil
+	if propertyLabelOrId:match( '^P%d+$' ) then
+		label = mw.wikibase.label( propertyLabelOrId )
+	end
+
 	if label == nil then
 		-- Make the label fallback on the entity id for convenience/ consistency
-		label = entity.id
+		label = propertyLabelOrId
 	end
 
 	return {
