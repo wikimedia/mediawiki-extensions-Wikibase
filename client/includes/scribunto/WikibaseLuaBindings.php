@@ -122,7 +122,7 @@ class WikibaseLuaBindings {
 	 * @param string $prefixedEntityId
 	 *
 	 * @since 0.5
-	 * @return string Empty string if entity couldn't be found/ no label present
+	 * @return string|null Null if entity couldn't be found/ no label present
 	 */
 	public function getLabel( $prefixedEntityId ) {
 		try {
@@ -152,7 +152,7 @@ class WikibaseLuaBindings {
 	 * @param string $prefixedEntityId
 	 *
 	 * @since 0.5
-	 * @return string Empty string if entity couldn't be found/ no sitelink present
+	 * @return string|null Null if entity couldn't be found/ no label present
 	 */
 	public function getSiteLinkPageName( $prefixedEntityId ) {
 		try {
