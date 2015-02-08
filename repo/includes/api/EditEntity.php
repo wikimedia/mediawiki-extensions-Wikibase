@@ -23,7 +23,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -117,7 +116,7 @@ class EditEntity extends ModifyEntity {
 	protected function createEntity( array $params ) {
 		$type = $params['new'];
 		$this->flags |= EDIT_NEW;
-		$entityFactory = EntityFactory::singleton();
+		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 
 		try {
 			return $entityFactory->newEmpty( $type );
