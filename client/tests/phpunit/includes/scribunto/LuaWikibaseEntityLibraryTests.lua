@@ -92,6 +92,12 @@ local function integrationTestFormatPropertyValues( ranks )
 	return entity:formatPropertyValues( propertyId, ranks )
 end
 
+local function integrationTestFormatPropertyValuesByLabel()
+	local entity = mw.wikibase.getEntityObject()
+
+	return entity:formatPropertyValues( 'LuaTestStringProperty' )
+end
+
 local function integrationTestFormatPropertyValuesProperty()
 	local entity = mw.wikibase.getEntityObject( 'P342' )
 
@@ -187,6 +193,9 @@ local tests = {
 	{ name = 'mw.wikibase.entity.formatPropertyValues integration 3', func = integrationTestFormatPropertyValues,
 	  args = { { mw.wikibase.entity.claimRanks.RANK_TRUTH } },
 	  expect = { { label = 'LuaTestStringProperty', value = '' } }
+	},
+	{ name = 'mw.wikibase.entity.formatPropertyValues integration 4', func = integrationTestFormatPropertyValuesByLabel,
+	  expect = { { label = 'LuaTestStringProperty', value = 'Lua :)' } }
 	},
 	{ name = 'mw.wikibase.entity.formatPropertyValues integration property', func = integrationTestFormatPropertyValuesProperty,
 	  expect = { { label = 'LuaTestStringProperty', value = 'Lua :)' } }

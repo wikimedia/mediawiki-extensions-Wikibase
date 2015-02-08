@@ -5,20 +5,12 @@ namespace Wikibase\DataAccess\PropertyParserFunction;
 use InvalidArgumentException;
 use Language;
 use Status;
-use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataAccess\PropertyIdResolver;
+use Wikibase\DataAccess\EntityStatementsRenderer;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
-use Wikibase\Lib\SnakFormatter;
 
 /**
  * PropertyClaimsRenderer of the {{#property}} parser function.
- *
- * @fixme see what code can be shared with Lua handling code.
  *
  * @since 0.5
  *
@@ -27,6 +19,7 @@ use Wikibase\Lib\SnakFormatter;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
 class LanguageAwareRenderer implements PropertyClaimsRenderer {
 
@@ -35,42 +28,21 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 	 */
 	private $language;
 
-	private $propertyIdResolver;
-
 	/**
-	 * @var SnaksFinder
+	 * @var EntityStatementsRenderer
 	 */
-	private $snaksFinder;
-
-	/**
-	 * @var SnakFormatter
-	 */
-	private $snakFormatter;
-
-	/**
-	 * @var UsageAccumulator
-	 */
-	private $usageAccumulator;
+	private $entityStatementsRenderer;
 
 	/**
 	 * @param Language $language
-	 * @param PropertyIdResolver $propertyIdResolver
-	 * @param SnaksFinder $snaksFinder
-	 * @param SnakFormatter $snakFormatter
-	 * @param UsageAccumulator $usageAcc
+	 * @param EntityStatementsRenderer $entityStatementsRenderer
 	 */
 	public function __construct(
 		Language $language,
-		PropertyIdResolver $propertyIdResolver,
-		SnaksFinder $snaksFinder,
-		SnakFormatter $snakFormatter,
-		UsageAccumulator $usageAcc
+		EntityStatementsRenderer $entityStatementsRenderer
 	) {
 		$this->language = $language;
-		$this->propertyIdResolver = $propertyIdResolver;
-		$this->snaksFinder = $snaksFinder;
-		$this->snakFormatter = $snakFormatter;
-		$this->usageAccumulator = $usageAcc;
+		$this->entityStatementsRenderer = $entityStatementsRenderer;
 	}
 
 	/**
@@ -81,13 +53,9 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 	 */
 	public function render( EntityId $entityId, $propertyLabelOrId ) {
 		try {
-			// @todo have the $propertyId resolved before passing into here
-			$propertyId = $this->propertyIdResolver->resolvePropertyId(
-				$propertyLabelOrId,
-				$this->language->getCode()
+			$status = Status::newGood(
+				$this->entityStatementsRenderer->render( $entityId, $propertyLabelOrId )
 			);
-
-			$status = $this->renderWithStatus( $entityId, $propertyId );
 		} catch ( PropertyLabelNotResolvedException $ex ) {
 			// @fixme use ExceptionLocalizer
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
@@ -115,73 +83,6 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 			$propertyLabel,
 			$message
 		);
-	}
-
-	/**
-	 * @param Snak[] $snaks
-	 *
-	 * @return string wikitext
-	 */
-	private function formatSnaks( array $snaks ) {
-		$formattedValues = array();
-
-		foreach ( $snaks as $snak ) {
-			$formattedValues[] = $this->snakFormatter->formatSnak( $snak );
-		}
-
-		return $this->language->commaList( $formattedValues );
-	}
-
-	/**
-	 * @todo Share code with WikibaseLuaEntityBindings::trackUsage
-	 * @param Snak[] $snaks
-	 */
-	private function trackUsage( array $snaks ) {
-		// Note: we track any EntityIdValue as a label usage.
-		// This is making assumptions about what the respective formatter actually does.
-		// Ideally, the formatter itself would perform the tracking, but that seems nasty to model.
-
-		foreach ( $snaks as $snak ) {
-			if ( !( $snak instanceof PropertyValueSnak) ) {
-				continue;
-			}
-
-			$value = $snak->getDataValue();
-
-			if ( $value instanceof EntityIdValue ) {
-				$this->usageAccumulator->addLabelUsage( $value->getEntityId() );
-			}
-		}
-	}
-
-	/**
-	 * @todo Share code with WikibaseLuaEntityBindings.
-	 *
-	 * @param EntityId $entityId
-	 * @param PropertyId $propertyId
-	 *
-	 * @return Status a status object wrapping a wikitext string
-	 */
-	private function renderWithStatus( EntityId $entityId, PropertyId $propertyId ) {
-		wfProfileIn( __METHOD__ );
-
-		$snaks = $this->snaksFinder->findSnaks(
-			$entityId,
-			$propertyId,
-			$this->language->getCode()
-		);
-
-		if ( !$snaks ) {
-			return Status::newGood( '' );
-		}
-
-		$this->trackUsage( $snaks );
-
-		$text = $this->formatSnaks( $snaks );
-		$status = Status::newGood( $text );
-
-		wfProfileOut( __METHOD__ );
-		return $status;
 	}
 
 }

@@ -8,6 +8,8 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataAccess\PropertyIdResolver;
+use Wikibase\DataAccess\EntityStatementsRenderer;
+use Wikibase\DataAccess\SnaksFinder;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
@@ -87,12 +89,17 @@ class PropertyClaimsRendererFactory {
 	 * @return LanguageAwareRenderer
 	 */
 	private function newLanguageAwareRenderer( Language $language, UsageAccumulator $usageAccumulator ) {
-		return new LanguageAwareRenderer(
+		$entityStatementsRenderer = new EntityStatementsRenderer(
 			$language,
 			$this->propertyIdResolver,
 			$this->snaksFinder,
 			$this->newSnakFormatterForLanguage( $language ),
 			$usageAccumulator
+		);
+
+		return new LanguageAwareRenderer(
+			$language,
+			$entityStatementsRenderer
 		);
 	}
 
