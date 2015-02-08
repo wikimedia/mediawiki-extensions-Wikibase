@@ -2,53 +2,23 @@
 
 namespace Wikibase\Client\Scribunto;
 
-use Language;
-use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataAccess\EntityStatementsRenderer;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\StatementListProvider;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
 class WikibaseLuaEntityBindings {
 
 	/**
-	 * @var SnakFormatter
+	 * @var EntityStatementsRenderer
 	 */
-	private $snakFormatter;
-
-	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
-
-	/**
-	 * @var UsageAccumulator
-	 */
-	private $usageAccumulator;
-
-	/**
-	 * @var string
-	 */
-	private $siteId;
-
-	/**
-	 * @var Language
-	 */
-	private $language;
+	private $entityStatementsRenderer;
 
 	/**
 	 * @var EntityIdParser
@@ -56,135 +26,43 @@ class WikibaseLuaEntityBindings {
 	private $entityIdParser;
 
 	/**
-	 * @var EntityDocument[]
+	 * @var string
 	 */
-	private $entities = array();
+	private $siteId;
 
 	/**
-	 * @param SnakFormatter $snakFormatter
-	 * @param EntityLookup $entityLookup
-	 * @param UsageAccumulator $usageAccumulator
-	 * @param string $siteId
-	 * @param Language $language
+	 * @param EntityStatementsRenderer $entityStatementsRenderer
 	 * @param EntityIdParser $entityIdParser
+	 * @param string $siteId
 	 */
 	public function __construct(
-		SnakFormatter $snakFormatter,
-		EntityLookup $entityLookup,
-		UsageAccumulator $usageAccumulator,
-		$siteId,
-		Language $language,
-		EntityIdParser $entityIdParser
+		EntityStatementsRenderer $entityStatementsRenderer,
+		EntityIdParser $entityIdParser,
+		$siteId
 	) {
-		$this->snakFormatter = $snakFormatter;
-		$this->entityLookup = $entityLookup;
-		$this->usageAccumulator = $usageAccumulator;
-		$this->siteId = $siteId;
-		$this->language = $language;
+		$this->entityStatementsRenderer = $entityStatementsRenderer;
 		$this->entityIdParser = $entityIdParser;
+		$this->siteId = $siteId;
 	}
 
 	/**
-	 * Render the main Snaks belonging to a Statement (which is identified by a PropertyId).
+	 * Render the main Snaks belonging to a Statement (which is identified by a PropertyId
+	 * or the label of a Property).
 	 *
 	 * @since 0.5
-	 * @todo Share code with LanguageAwareRenderer.
 	 *
 	 * @param string $entityId
-	 * @param string $propertyId
+	 * @param string $propertyLabelOrId
 	 * @param int[]|null $acceptableRanks
 	 *
-	 * @return string
-	 */
-	public function formatPropertyValues( $entityId, $propertyId, array $acceptableRanks = null ) {
-		$propertyId = new PropertyId( $propertyId );
-
-		$entity = $this->getEntity( $this->entityIdParser->parse( $entityId ) );
-
-		if ( !( $entity instanceof StatementListProvider ) ) {
-			return '';
-		}
-
-		$statements = $entity->getStatements()->getWithPropertyId( $propertyId );
-
-		if ( $acceptableRanks === null ) {
-			// We only want the best claims over here, so that we only show the most
-			// relevant information.
-			$statements = $statements->getBestStatements();
-		} else {
-			// ... unless the user passed in a table of acceptable ranks
-			$statements = $statements->getWithRank( $acceptableRanks );
-		}
-
-		$snakList = $statements->getMainSnaks();
-
-		$this->trackUsage( $snakList );
-		return $this->formatSnakList( $snakList );
-	}
-
-	/**
-	 * Get the entity for the given EntityId (cached within the class).
-	 * This *might* be redundant with caching in EntityLookup, but we
-	 * don't want to rely on that (per Daniel).
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return EntityDocument|null
-	 */
-	private function getEntity( EntityId $entityId ) {
-		if ( !isset( $this->entities[ $entityId->getSerialization() ] ) ) {
-			$this->entities[ $entityId->getSerialization() ] =
-				$this->entityLookup->getEntity( $entityId );
-		}
-
-		return $this->entities[ $entityId->getSerialization() ];
-	}
-
-	/**
-	 * @param Snak[] $snaks
+	 * @throws PropertyLabelNotResolvedException
 	 *
 	 * @return string
 	 */
-	private function formatSnakList( array $snaks ) {
-		$formattedValues = $this->formatSnaks( $snaks );
-		return $this->language->commaList( $formattedValues );
-	}
+	public function formatPropertyValues( $entityId, $propertyLabelOrId, array $acceptableRanks = null ) {
+		$entityId = $this->entityIdParser->parse( $entityId );
 
-	/**
-	 * @param Snak[] $snaks
-	 *
-	 * @return string[]
-	 */
-	private function formatSnaks( array $snaks ) {
-		$formattedValues = array();
-
-		foreach ( $snaks as $snak ) {
-			$formattedValues[] = $this->snakFormatter->formatSnak( $snak );
-		}
-
-		return $formattedValues;
-	}
-
-	/**
-	 * @todo Share code with LanguageAwareRenderer::trackUsage
-	 * @param Snak[] $snaks
-	 */
-	private function trackUsage( array $snaks ) {
-		// Note: we track any EntityIdValue as a label usage.
-		// This is making assumptions about what the respective formatter actually does.
-		// Ideally, the formatter itself would perform the tracking, but that seems nasty to model.
-
-		foreach ( $snaks as $snak ) {
-			if ( !( $snak instanceof PropertyValueSnak ) ) {
-				continue;
-			}
-
-			$value = $snak->getDataValue();
-
-			if ( $value instanceof EntityIdValue ) {
-				$this->usageAccumulator->addLabelUsage( $value->getEntityId() );
-			}
-		}
+		return $this->entityStatementsRenderer->render( $entityId, $propertyLabelOrId, $acceptableRanks );
 	}
 
 	/**
