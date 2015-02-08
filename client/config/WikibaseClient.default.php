@@ -45,6 +45,10 @@ return call_user_func( function() {
 		'badgeClassNames' => array(),
 		// Allow accessing data from other items in the parser functions and via Lua
 		'allowArbitraryDataAccess' => true,
+		// Allow accessing data in the user's language rather than the content language
+		// in the parser functions and via Lua.
+		// Allows users to split the ParserCache by user language.
+		'allowDataAccessInUserLanguage' => true,
 		// Enable in case wbc_entity_usage does not exist or is not yet populated.
 		'useLegacyUsageIndex' => false,
 

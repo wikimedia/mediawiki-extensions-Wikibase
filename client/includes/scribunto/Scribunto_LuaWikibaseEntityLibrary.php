@@ -72,7 +72,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getGlobalSiteId in Scribunto_LuaWikibaseLibraryImplementation
+	 * Wrapper for getGlobalSiteId in WikibaseLuaEntityBindings
 	 *
 	 * @since 0.5
 	 *
