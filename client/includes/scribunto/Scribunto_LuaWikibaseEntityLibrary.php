@@ -61,6 +61,9 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @return array
 	 */
 	public function register() {
+		// These functions will be exposed to the Lua module.
+		// They are member functions on a Lua table which is private to the module, thus
+		// these can't be called from user code, unless explicitly exposed in Lua.
 		$lib = array(
 			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' ),
 			'formatPropertyValues' => array( $this, 'formatPropertyValues' ),
@@ -72,7 +75,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getGlobalSiteId in Scribunto_LuaWikibaseLibraryImplementation
+	 * Wrapper for getGlobalSiteId in WikibaseLuaEntityBindings
 	 *
 	 * @since 0.5
 	 *
