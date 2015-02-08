@@ -55,7 +55,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 		$store = $wikibaseClient->getStore();
 
 		if ( ! $store instanceof MockClientStore ) {
-			$store = new MockClientStore();
+			$store = new MockClientStore( 'de' );
 			$wikibaseClient->overrideStore( $store );
 		}
 
