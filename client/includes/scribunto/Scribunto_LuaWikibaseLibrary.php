@@ -135,6 +135,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getSettings(),
 			$labelLookup,
 			$this->getUsageAccumulator(),
+			$this->getParserOptions(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
@@ -182,6 +183,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'renderSnak' => array( $this, 'renderSnak' ),
 			'renderSnaks' => array( $this, 'renderSnaks' ),
 			'getEntityId' => array( $this, 'getEntityId' ),
+			'getUserLang' => array( $this, 'getUserLang' ),
 			'getSiteLinkPageName' => array( $this, 'getSiteLinkPageName' ),
 		);
 
@@ -217,7 +219,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getEntityId in Scribunto_LuaWikibaseLibraryImplementation
+	 * Wrapper for getEntityId in WikibaseLuaBindings
 	 *
 	 * @since 0.5
 	 *
@@ -231,7 +233,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getSetting in Scribunto_LuaWikibaseLibraryImplementation
+	 * Wrapper for getSetting in WikibaseLuaBindings
 	 *
 	 * @since 0.5
 	 *
@@ -259,7 +261,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getSiteLinkPageName in Scribunto_LuaWikibaseLibraryImplementation
+	 * Wrapper for getSiteLinkPageName in WikibaseLuaBindings
 	 *
 	 * @since 0.5
 	 *
@@ -310,5 +312,17 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
 		}
+	}
+
+	/**
+	 * Wrapper for getUserLang in WikibaseLuaBindings
+	 * Side effect: Splits the parser cache by user language!
+	 *
+	 * @since 0.5
+	 *
+	 * @return string[]
+	 */
+	public function getUserLang() {
+		return array( $this->getLuaBindings()->getUserLang() );
 	}
 }
