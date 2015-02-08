@@ -8,7 +8,6 @@ use ParserOptions;
 use Scribunto;
 use Scribunto_LuaWikibaseLibrary;
 use Title;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * @covers Scribunto_LuaWikibaseLibrary
@@ -107,10 +106,39 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertEquals( array( null ), $entityId );
 	}
 
-	private function newScribuntoLuaWikibaseLibrary() {
+	public function testGetUserLang() {
+		$parserOptions = new ParserOptions();
+		$parserOptions->setUserLang( Language::factory( 'ru' ) );
+
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $parserOptions );
+
+		$self = $this;  // PHP 5.3 ...
+		$cacheSplit = false;
+		$parserOptions->registerWatcher(
+			function( $optionName ) use ( $self, &$cacheSplit ) {
+				$self->assertSame( 'userlang', $optionName );
+				$cacheSplit = true;
+			}
+		);
+
+		$userLang = $luaWikibaseLibrary->getUserLang();
+		$this->assertSame( array( 'ru' ), $userLang );
+		$this->assertTrue( $cacheSplit );
+	}
+
+	/**
+	 * @param ParserOptions|null $parserOptions
+	 * @return Scribunto_LuaWikibaseLibrary
+	 */
+	private function newScribuntoLuaWikibaseLibrary( ParserOptions $parserOptions = null ) {
 		$title =  Title::newFromText( 'Whatever' );
+
 		$parser = new Parser();
-		$parser->startExternalParse( $title, new ParserOptions(), Parser::OT_HTML );
+		$parser->startExternalParse(
+			$title,
+			$parserOptions ?: new ParserOptions(),
+			Parser::OT_HTML
+		);
 
 		$engine = Scribunto::newDefaultEngine( array(
 			'parser' => $parser,

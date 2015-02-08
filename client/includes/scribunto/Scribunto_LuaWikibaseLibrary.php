@@ -94,6 +94,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getSettings(),
 			$labelLookup,
 			$this->getUsageAccumulator(),
+			$this->getParserOptions(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
@@ -139,6 +140,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getEntity' => array( $this, 'getEntity' ),
 			'getSetting' => array( $this, 'getSetting' ),
 			'getEntityId' => array( $this, 'getEntityId' ),
+			'getUserLang' => array( $this, 'getUserLang' ),
 			'getSiteLinkPageName' => array( $this, 'getSiteLinkPageName' ),
 		);
 
@@ -148,7 +150,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getEntity in Scribunto_LuaWikibaseLibraryImplementation
+	 * Wrapper for getEntity in WikibaseLuaBindings
 	 *
 	 * @since 0.5
 	 *
@@ -174,7 +176,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getEntityId in Scribunto_LuaWikibaseLibraryImplementation
+	 * Wrapper for getEntityId in WikibaseLuaBindings
 	 *
 	 * @since 0.5
 	 *
@@ -188,7 +190,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getSetting in Scribunto_LuaWikibaseLibraryImplementation
+	 * Wrapper for getSetting in WikibaseLuaBindings
 	 *
 	 * @since 0.5
 	 *
@@ -216,7 +218,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getSiteLinkPageName in Scribunto_LuaWikibaseLibraryImplementation
+	 * Wrapper for getSiteLinkPageName in WikibaseLuaBindings
 	 *
 	 * @since 0.5
 	 *
@@ -227,5 +229,17 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getSiteLinkPageName( $prefixedEntityId ) {
 		$this->checkType( 'getSiteLinkPageName', 1, $prefixedEntityId, 'string' );
 		return array( $this->getLuaBindings()->getSiteLinkPageName( $prefixedEntityId ) );
+	}
+
+	/**
+	 * Wrapper for getUserLang in WikibaseLuaBindings
+	 * Side effect: Splits the parser cache by user language!
+	 *
+	 * @since 0.5
+	 *
+	 * @return string[]
+	 */
+	public function getUserLang() {
+		return array( $this->getLuaBindings()->getUserLang() );
 	}
 }
