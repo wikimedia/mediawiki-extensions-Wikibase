@@ -25,7 +25,8 @@
 			"Mcervera",
 			"Macofe",
 			"Mor",
-			"Jonathan rrr"
+			"Jonathan rrr",
+			"JasterTDC"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -40,6 +41,10 @@
 	"wikibase-addreference": "añadir referencia",
 	"wikibase-save-inprogress": "Guardando...",
 	"wikibase-remove-inprogress": "Eliminando...",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "En más idiomas",
+	"wikibase-entitytermsforlanguagelistview-description": "Descripción",
+	"wikibase-entitytermsforlanguagelistview-label": "Etiqueta",
+	"wikibase-entitytermsforlanguagelistview-language": "Idioma",
 	"wikibase-label-empty": "No se ha definido ninguna etiqueta todavía.",
 	"wikibase-label-edit-placeholder": "introducir la etiqueta",
 	"wikibase-label-edit-placeholder-language-aware": "escribe una etiqueta en $1",

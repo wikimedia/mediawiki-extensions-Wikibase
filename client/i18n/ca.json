@@ -16,7 +16,6 @@
 		]
 	},
 	"wikibase-client-desc": "Client per l'extensió Wikibase",
-	"specialpages-group-wikibaseclient": "Client de {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Enllaç a l'element del repositori de dades connectades",
 	"wikibase-after-page-move": "També podeu [$1 actualitzar] l'element associat de Wikidata per tal de mantenir els enllaços d'idioma a la pàgina que s'ha desplaçat.",
 	"wikibase-after-page-move-queued": "L'[$1 element de Wikidata] associat amb aquesta pàgina s'actualitzarà automàticament aviat.",
@@ -30,7 +29,7 @@
 	"wikibase-comment-sitelink-change": "Enllaç de llengua canviat de $1 a $2",
 	"wikibase-comment-sitelink-remove": "Tret enllaç de llengua: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|canvi|canvis}}",
-	"wikibase-dataitem": "Element de dades",
+	"wikibase-dataitem": "Element a {{WBREPONAME}}",
 	"wikibase-editlinks": "Modifica els enllaços",
 	"wikibase-editlinkstitle": "Modifica enllaços interlingües",
 	"wikibase-linkitem-addlinks": "Afegeix enllaços",

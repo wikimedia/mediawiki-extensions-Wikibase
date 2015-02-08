@@ -6,11 +6,11 @@
 			"Vogone",
 			"Whym",
 			"Zolo",
-			"아라"
+			"아라",
+			"Los688"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
-	"specialpages-group-wikibaserepo": "ウィキベース・リポジトリ",
 	"wikibase-entity-item": "項目",
 	"wikibase-entity-property": "プロパティ",
 	"wikibase-entity-query": "クエリ",
@@ -22,6 +22,9 @@
 	"wikibase-addreference": "出典を追加",
 	"wikibase-save-inprogress": "保存中…",
 	"wikibase-remove-inprogress": "除去中…",
+	"wikibase-entitytermsforlanguagelistview-description": "説明",
+	"wikibase-entitytermsforlanguagelistview-label": "ラベル",
+	"wikibase-entitytermsforlanguagelistview-language": "言語",
 	"wikibase-label-empty": "ラベルはまだ設定されていません",
 	"wikibase-label-edit-placeholder": "ラベルを入力",
 	"wikibase-label-edit-placeholder-language-aware": "ラベルを $1 で入力",
@@ -132,7 +135,6 @@
 	"wikibase-newitem-site": "最初にリンクされたページのサイト",
 	"wikibase-newitem-page": "最初にリンクされたページの名前",
 	"wikibase-newitem-no-external-page": "指定したページは、対応するサイト内で見つかりませんでした。",
-	"wikibase-newitem-add-sitelink-failed": "サイトリンクを保存できませんでした。",
 	"wikibase-newitem-not-recognized-siteid": "指定したサイト識別子を認識できませんでした。",
 	"wikibase-newentity-label": "ラベル:",
 	"wikibase-newentity-description": "説明:",

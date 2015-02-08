@@ -9,11 +9,12 @@
 			"Savh",
 			"Vivaelcelta",
 			"Mcervera",
-			"Macofe"
+			"Macofe",
+			"JasterTDC"
 		]
 	},
 	"wikibase-lib-desc": "Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.",
-	"specialpages-group-wikibase": "Repositorio de Wikibase",
+	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Elemento borrado",
 	"wikibase-deletedentity-property": "Propiedad borrada",
 	"wikibase-deletedentity-query": "Búsqueda borrada",

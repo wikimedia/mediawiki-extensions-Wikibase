@@ -3,10 +3,12 @@
 		"authors": [
 			"Beta16",
 			"Raoli",
-			"Macofe"
+			"Macofe",
+			"FRacco"
 		]
 	},
 	"wikibase-lib-desc": "Contiene le funzionalità comuni per le estensioni Wikibase e Wikibase Client.",
+	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Elemento cancellato",
 	"wikibase-deletedentity-property": "Proprietà cancellata",
 	"wikibase-deletedentity-query": "Interrogazione cancellata",
@@ -41,7 +43,7 @@
 	"wikibase-parse-error-entity-id": "L'ID dell'entità non è corretto.",
 	"wikibase-parse-error-quantity": "Il valore della quantità non è corretto.",
 	"wikibase-parse-error-time": "Il valore temporale non è corretto.",
-	"wikibase-sitelinks-wikipedia": "Pagine di Wikipedia collegate a questo elemento",
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Lingua",
 	"wikibase-sitelinks-link-columnheading": "Pagina collegata",
 	"wikibase-snakview-snaktypeselector-somevalue": "valore sconosciuto",
