@@ -1,24 +1,28 @@
 <?php
 
 use ValueFormatters\FormatterOptions;
+use Wikibase\DataAccess\EntityStatementsRenderer;
+use Wikibase\DataAccess\PropertyIdResolver;
+use Wikibase\DataAccess\SnaksFinder;
 use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\PropertyLabelNotResolvedException;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
 
 class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 
 	/**
-	 * @var WikibaseLuaEntityBindings
+	 * @var WikibaseLuaEntityBindings|null
 	 */
 	private $wbLibrary;
 
@@ -43,13 +47,26 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			SnakFormatter::FORMAT_WIKI, $formatterOptions
 		);
 
-		return new WikibaseLuaEntityBindings(
-			$snakFormatter,
-			$wikibaseClient->getStore()->getEntityLookup(),
-			new ParserOutputUsageAccumulator( $this->getParser()->getOutput() ),
-			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' ),
+		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
+
+		$propertyIdResolver = new PropertyIdResolver(
+			$entityLookup,
+			$wikibaseClient->getStore()->getPropertyLabelResolver()
+		);
+
+		$entityStatementsRenderer = new EntityStatementsRenderer(
 			$wgContLang,
-			$wikibaseClient->getEntityIdParser()
+			$propertyIdResolver,
+			new SnaksFinder(),
+			$snakFormatter,
+			new ParserOutputUsageAccumulator( $this->getParser()->getOutput() ),
+			$entityLookup
+		);
+
+		return new WikibaseLuaEntityBindings(
+			$entityStatementsRenderer,
+			$wikibaseClient->getEntityIdParser(),
+			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
 
@@ -83,28 +100,37 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Render the main Snaks belonging to a Claim (which is identified by a PropertyId).
+	 * Render the main Snaks belonging to a Statement (which is identified by a PropertyId
+	 * or the label of a Property).
 	 *
 	 * @since 0.5
 	 *
 	 * @param string $entityId
-	 * @param string $propertyId
+	 * @param string $propertyLabelOrId
 	 * @param int[]|null $acceptableRanks
 	 *
 	 * @throws ScribuntoException
 	 * @return string[]
 	 */
-	public function formatPropertyValues( $entityId, $propertyId, array $acceptableRanks = null ) {
+	public function formatPropertyValues( $entityId, $propertyLabelOrId, array $acceptableRanks = null ) {
 		$this->checkType( 'formatPropertyValues', 0, $entityId, 'string' );
 		// Use 1 as index for the property id, as the first parameter comes from
 		// internals of mw.wikibase.entity (an index of 2 might confuse users
 		// as they only gave one parameter themselves)
-		$this->checkType( 'formatPropertyValues', 1, $propertyId, 'string' );
+		$this->checkType( 'formatPropertyValues', 1, $propertyLabelOrId, 'string' );
 		$this->checkTypeOptional( 'formatPropertyValues', 2, $acceptableRanks, 'table', null );
 		try {
-			return array( $this->getImplementation()->formatPropertyValues( $entityId, $propertyId, $acceptableRanks ) );
+			return array(
+				$this->getImplementation()->formatPropertyValues(
+					$entityId,
+					$propertyLabelOrId,
+					$acceptableRanks
+				)
+			);
 		} catch ( InvalidArgumentException $e ) {
 			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
+		} catch ( PropertyLabelNotResolvedException $e ) {
+			return array( '' );
 		}
 	}
 
