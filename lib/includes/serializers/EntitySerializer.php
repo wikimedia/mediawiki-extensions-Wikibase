@@ -190,9 +190,9 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 	 * @throws InvalidArgumentException
 	 */
 	public function newFromSerialization( array $data ) {
-		$validTypes = $this->entityFactory->getEntityTypes();
-
-		if ( !array_key_exists( 'type', $data ) || !in_array( $data['type'], $validTypes ) ) {
+		if ( !array_key_exists( 'type', $data )
+			|| !$this->entityFactory->isEntityType( $data['type'] )
+		) {
 			throw new InvalidArgumentException( 'Invalid entity serialization' );
 		}
 
