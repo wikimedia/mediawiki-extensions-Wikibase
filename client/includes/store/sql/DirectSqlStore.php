@@ -255,7 +255,8 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getSiteLinkLookup() {
 		if ( $this->siteLinkTable === null ) {
-			$this->siteLinkTable = new SiteLinkTable( 'wb_items_per_site', true, $this->repoWiki );
+			$connectionManager = new ConnectionManager( $this->getRepoLoadBalancer(), $this->repoWiki );
+			$this->siteLinkTable = new SiteLinkTable( $connectionManager, 'wb_items_per_site', true );
 		}
 
 		return $this->siteLinkTable;

@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\Store\Sql\ConnectionManager;
 
 /**
  * @covers Wikibase\Lib\Store\SiteLinkTable
@@ -33,7 +34,8 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local site link table." );
 		}
 
-		$this->siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
+		$connectionManager = new ConnectionManager( wfGetLB() );
+		$this->siteLinkTable = new SiteLinkTable( $connectionManager, 'wb_items_per_site', false );
 	}
 
 	public function itemProvider() {

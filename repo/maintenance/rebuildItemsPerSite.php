@@ -8,6 +8,7 @@ use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
 use Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store\Sql\ConnectionManager;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -47,7 +48,8 @@ class RebuildItemsPerSite extends Maintenance {
 			array( $this, 'report' )
 		);
 
-		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
+		$connectionManager = new ConnectionManager( wfGetLB() );
+		$siteLinkTable = new SiteLinkTable( $connectionManager, 'wb_items_per_site', false );
 		// Use an uncached EntityLookup here to avoid memory leaks
 		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );
 		$builder = new ItemsPerSiteBuilder(

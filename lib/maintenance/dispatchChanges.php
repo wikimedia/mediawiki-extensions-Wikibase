@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\Store\Sql\ConnectionManager;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -878,7 +879,8 @@ class DispatchChanges extends \Maintenance {
 
 		// find all sitelinks from those items to $siteID
 		// TODO: allow mock SiteLinkTable for testing!
-		$table = new SiteLinkTable( 'wb_items_per_site', true, $this->repoDB );
+		$connectionManager = new ConnectionManager( wfGetLB( $this->repoDB ), $this->repoDB );
+		$table = new SiteLinkTable( $connectionManager, 'wb_items_per_site', true );
 		$links = $table->getLinks( array_keys( $itemSet ), array( $siteID ) );
 
 		//XXX: Once we later have a client side usage tracking table, we need to also

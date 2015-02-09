@@ -30,6 +30,7 @@ use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\SQL\EntityPerPageTable;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store\Sql\ConnectionManager;
 use WikiPage;
 
 /**
@@ -470,7 +471,8 @@ class SqlStore implements Store {
 	 * @return SiteLinkCache
 	 */
 	public function newSiteLinkCache() {
-		return new SiteLinkTable( 'wb_items_per_site', false );
+		$connectionManager = new ConnectionManager( wfGetLB() );
+		return new SiteLinkTable( $connectionManager, 'wb_items_per_site', false );
 	}
 
 	/**

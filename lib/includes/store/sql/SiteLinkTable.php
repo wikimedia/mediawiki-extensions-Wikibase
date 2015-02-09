@@ -7,6 +7,7 @@ use MWException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Store\Sql\ConnectionManager;
 
 /**
  * Represents a lookup database table for sitelinks.
@@ -18,7 +19,12 @@ use Wikibase\DataModel\SiteLink;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
+class SiteLinkTable implements SiteLinkCache {
+
+	/**
+	 * @var ConnectionManager
+	 */
+	private $connectionManager;
 
 	/**
 	 * @since 0.1
@@ -37,27 +43,23 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	/**
 	 * @since 0.1
 	 *
+	 * @param ConnectionManager $connectionManager
 	 * @param string $table The table to use for the sitelinks
 	 * @param bool $readonly Whether the table can be modified.
-	 * @param string|bool $wiki The wiki's database to connect to.
-	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws MWException
 	 */
-	public function __construct( $table, $readonly, $wiki = false ) {
+	public function __construct( ConnectionManager $connectionManager, $table, $readonly ) {
 		if ( !is_string( $table ) ) {
 			throw new MWException( '$table must be a string.' );
 		}
 		if ( !is_bool( $readonly ) ) {
 			throw new MWException( '$readonly must be boolean.' );
 		}
-		if ( !is_string( $wiki ) && $wiki !== false ) {
-			throw new MWException( '$wiki must be a string or false.' );
-		}
 
+		$this->connectionManager = $connectionManager;
 		$this->table = $table;
 		$this->readonly = $readonly;
-		$this->wiki = $wiki;
 	}
 
 	/**
@@ -108,7 +110,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		}
 
 		$ok = true;
-		$dbw = $this->getConnection( DB_MASTER );
+		$dbw = $this->connectionManager->beginAtomicSection( __METHOD__ );
 
 		//TODO: consider doing delete and insert in the same callback, so they share a transaction.
 
@@ -122,7 +124,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			$ok = $dbw->deadlockLoop( array( $this, 'insertLinksInternal' ), $item, $linksToInsert, $dbw );
 		}
 
-		$this->releaseConnection( $dbw );
+		$this->connectionManager->commitAtomicSection( $dbw, __METHOD__ );
 		wfProfileOut( __METHOD__ );
 
 		return $ok;
@@ -226,7 +228,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			throw new MWException( 'Cannot write when in readonly mode' );
 		}
 
-		$dbw = $this->getConnection( DB_MASTER );
+		$dbw = $this->connectionManager->beginAtomicSection( __METHOD__ );
 
 		$ok = $dbw->delete(
 			$this->table,
@@ -234,7 +236,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			__METHOD__
 		);
 
-		$this->releaseConnection( $dbw );
+		$this->connectionManager->commitAtomicSection( $dbw, __METHOD__ );
 		return $ok;
 	}
 
@@ -252,7 +254,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		// We store page titles with spaces instead of underscores
 		$pageTitle = str_replace( '_', ' ', $pageTitle );
 
-		$db = $this->getConnection( DB_SLAVE );
+		$db = $this->connectionManager->getReadConnection();
 
 		$result = $db->selectRow(
 			$this->table,
@@ -263,7 +265,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			)
 		);
 
-		$this->releaseConnection( $db );
+		$this->connectionManager->releaseConnection( $db );
 		return $result === false ? null : ItemId::newFromNumber( (int)$result->ips_item_id );
 	}
 
@@ -302,7 +304,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		if ( $db ) {
 			$dbr = $db;
 		} else {
-			$dbr = $this->getConnection( DB_SLAVE );
+			$dbr = $this->connectionManager->getReadConnection();
 		}
 
 		$anyOfTheLinks = '';
@@ -346,7 +348,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		}
 
 		if ( !$db ) {
-			$this->releaseConnection( $dbr );
+			$this->connectionManager->releaseConnection( $dbr );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -366,11 +368,11 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			throw new MWException( 'Cannot write when in readonly mode' );
 		}
 
-		$dbw = $this->getConnection( DB_MASTER );
+		$dbw = $this->connectionManager->beginAtomicSection( __METHOD__ );
 
 		$ok = $dbw->delete( $this->table, '*', __METHOD__ );
 
-		$this->releaseConnection( $dbw );
+		$this->connectionManager->commitAtomicSection( $dbw, __METHOD__ );
 		return $ok;
 	}
 
@@ -384,7 +386,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @return int
 	 */
 	public function countLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() ) {
-		$dbr = $this->getConnection( DB_SLAVE );
+		$dbr = $this->connectionManager->getReadConnection();
 
 		$conditions = array();
 
@@ -407,7 +409,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			__METHOD__
 		)->rowcount;
 
-		$this->releaseConnection( $dbr );
+		$this->connectionManager->releaseConnection( $dbr );
 		return $res;
 	}
 
@@ -422,7 +424,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @note The arrays returned by this method do not contain badges!
 	 */
 	public function getLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() ) {
-		$dbr = $this->getConnection( DB_SLAVE );
+		$dbr = $this->connectionManager->getReadConnection();
 
 		$conditions = array();
 
@@ -459,7 +461,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			);
 		}
 
-		$this->releaseConnection( $dbr );
+		$this->connectionManager->releaseConnection( $dbr );
 		return $siteLinks;
 	}
 
@@ -474,7 +476,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	public function getSiteLinksForItem( ItemId $itemId ) {
 		$numericId = $itemId->getNumericId();
 
-		$dbr = $this->getConnection( DB_SLAVE );
+		$dbr = $this->connectionManager->getReadConnection();
 
 		$rows = $dbr->select(
 			$this->table,
@@ -493,7 +495,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			$siteLinks[] = new SiteLink( $row->ips_site_id, $row->ips_site_page );
 		}
 
-		$this->releaseConnection( $dbr );
+		$this->connectionManager->releaseConnection( $dbr );
 
 		return $siteLinks;
 	}
