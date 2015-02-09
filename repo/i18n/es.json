@@ -42,6 +42,7 @@
 	"wikibase-save-inprogress": "Guardando...",
 	"wikibase-remove-inprogress": "Eliminando...",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "En más idiomas",
+	"wikibase-entitytermsforlanguagelistview-aliases": "También conocido como",
 	"wikibase-entitytermsforlanguagelistview-description": "Descripción",
 	"wikibase-entitytermsforlanguagelistview-label": "Etiqueta",
 	"wikibase-entitytermsforlanguagelistview-language": "Idioma",
