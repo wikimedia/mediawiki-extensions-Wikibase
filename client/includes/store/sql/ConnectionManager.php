@@ -10,6 +10,18 @@ use LoadBalancer;
 /**
  * Database connection manager.
  *
+ * This manages access to master and slave databases. It also manages state that indicates whether
+ * the slave databases are possibly outdated after a write operation, and thus the master database
+ * should be used for subsequent read operations.
+ *
+ * @note: Services that access overlapping sets of database tables, or interact with logically
+ * related sets of data in the database, should share a ConnectionManager. Services accessing
+ * unrelated sets of information may prefer to not share a ConnectionManager, so they can still
+ * perform read operations against slave databases after a (unrelated, per the assumption) write
+ * operation to the master database. Generally, sharing a ConnectionManager improves consistency
+ * (by avoiding race conditions due to replication lag), but can reduce performance (by directing
+ * more read operations to the master database server).
+ *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
@@ -28,6 +40,11 @@ class ConnectionManager {
 	private $dbName;
 
 	/**
+	 * @var bool If true, getReadConnection() will also return a DB_MASTER connection.
+	 */
+	private $forceMaster = false;
+
+	/**
 	 * @param LoadBalancer $loadBalancer
 	 * @param string|false $dbName Optional, defaults to current wiki.
 	 *        This follows the convention for database names used by $loadBalancer.
@@ -42,17 +59,35 @@ class ConnectionManager {
 	}
 
 	/**
-	 * @return DatabaseBase
+	 * Forces all future calls to getReadConnection() to return a connection to the master DB.
+	 * Use this before performing read operations that are critical for a future update.
+	 * Calling beginAtomicSection() implies a call to forceMaster().
 	 */
-	public function getReadConnection() {
-		return $this->loadBalancer->getConnection( DB_READ, array(), $this->dbName );
+	public function forceMaster() {
+		$this->forceMaster = true;
 	}
 
 	/**
+	 * Returns a database connection for reading.
+	 *
+	 * @note: If forceMaster() or beginAtomicSection() were previously called on this
+	 * ConnectionManager instance, this method will return a connection to the master database,
+	 * to avoid inconsistencies.
+	 *
+	 * @return DatabaseBase
+	 */
+	public function getReadConnection() {
+		$dbIndex = $this->forceMaster ? DB_MASTER : DB_SLAVE;
+		return $this->loadBalancer->getConnection( $dbIndex, array(), $this->dbName );
+	}
+
+	/**
+	 * Returns a connection to the master DB, for updating.
+	 *
 	 * @return DatabaseBase
 	 */
 	private function getWriteConnection() {
-		return $this->loadBalancer->getConnection( DB_WRITE, array(), $this->dbName );
+		return $this->loadBalancer->getConnection( DB_MASTER, array(), $this->dbName );
 	}
 
 	/**
@@ -63,11 +98,20 @@ class ConnectionManager {
 	}
 
 	/**
+	 * Begins an atomic section and returns a database connection to the master DB, for updating.
+	 *
+	 * @note: This causes all future calls to getReadConnection() to return a connection
+	 * to the master DB, even after commitAtomicSection() or rollbackAtomicSection() have
+	 * been called.
+	 *
 	 * @param string $fname
 	 *
 	 * @return DatabaseBase
 	 */
 	public function beginAtomicSection( $fname ) {
+		// Once we have written to master, do not read from slave.
+		$this->forceMaster();
+
 		$db = $this->getWriteConnection();
 		$db->startAtomic( $fname );
 		return $db;
