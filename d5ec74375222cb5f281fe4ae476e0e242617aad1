@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e6bdcc17",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-09T17:03:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_463920ca",
+      "revId": "d5ec74375222cb5f281fe4ae476e0e242617aad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_266504de",
         "filename": "repo/maintenance/pruneChanges.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-09T16:50:41Z",
       "side": 1,
       "message": "getChangeTimeLimit or getMaxChangeTime or something?",
+      "revId": "d5ec74375222cb5f281fe4ae476e0e242617aad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_06b9e828",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-09T17:03:54Z",
+      "side": 1,
+      "message": "renamed to limitCutoffTimestamp",
+      "parentUuid": "6e7c4fa4_266504de",
       "revId": "d5ec74375222cb5f281fe4ae476e0e242617aad1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
