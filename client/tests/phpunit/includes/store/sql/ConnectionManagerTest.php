@@ -38,13 +38,27 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 
 		$lb->expects( $this->once() )
 			->method( 'getConnection' )
-			->with( DB_READ )
+			->with( DB_SLAVE )
 			->will( $this->returnValue( $connection ) );
 
 		$manager = new ConnectionManager( $lb );
 		$actual = $manager->getReadConnection();
 
 		$this->assertSame( $connection, $actual );
+	}
+
+	public function testForceMaster() {
+		$connection = $this->getConnectionMock();
+		$lb = $this->getLoadBalancerMock();
+
+		$lb->expects( $this->once() )
+			->method( 'getConnection' )
+			->with( DB_MASTER )
+			->will( $this->returnValue( $connection ) );
+
+		$manager = new ConnectionManager( $lb );
+		$manager->forceMaster();
+		$manager->getReadConnection();
 	}
 
 	public function testReleaseConnection() {
@@ -64,9 +78,9 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 		$connection = $this->getConnectionMock();
 		$lb = $this->getLoadBalancerMock( );
 
-		$lb->expects( $this->once() )
+		$lb->expects( $this->exactly( 2 ) )
 			->method( 'getConnection' )
-			->with( DB_WRITE )
+			->with( DB_MASTER )
 			->will( $this->returnValue( $connection ) );
 
 		$connection->expects( $this->once() )
@@ -75,6 +89,10 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 
 		$manager = new ConnectionManager( $lb );
 		$manager->beginAtomicSection( 'TEST' );
+
+		// Should also ask for a DB_MASTER connection.
+		// This is asserted by the $lb mock.
+		$manager->getReadConnection();
 	}
 
 	public function testCommitAtomicSection() {

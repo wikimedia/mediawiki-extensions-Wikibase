@@ -28,6 +28,11 @@ class ConnectionManager {
 	private $dbName;
 
 	/**
+	 * @var bool If true, getReadConnection() will also return a DB_MASTER connection.
+	 */
+	private $forceMaster = false;
+
+	/**
 	 * @param LoadBalancer $loadBalancer
 	 * @param string|false $dbName Optional, defaults to current wiki.
 	 *        This follows the convention for database names used by $loadBalancer.
@@ -42,17 +47,35 @@ class ConnectionManager {
 	}
 
 	/**
-	 * @return DatabaseBase
+	 * Forces all future calls to getReadConnection() to return a connection to the master DB.
+	 * Use this before performing read operations that are critical for a future update.
+	 * Calling beginAtomicSection() implies a call to forceMaster().
 	 */
-	public function getReadConnection() {
-		return $this->loadBalancer->getConnection( DB_READ, array(), $this->dbName );
+	public function forceMaster() {
+		$this->forceMaster = true;
 	}
 
 	/**
+	 * Returns a database connection for reading.
+	 *
+	 * @note: If forceMaster() or beginAtomicSection() were previously called on this
+	 * ConnectionManager instance, this method will return a connection to the master database,
+	 * to avoid inconsistencies.
+	 *
+	 * @return DatabaseBase
+	 */
+	public function getReadConnection() {
+		$dbIndex = $this->forceMaster ? DB_MASTER : DB_SLAVE;
+		return $this->loadBalancer->getConnection( $dbIndex, array(), $this->dbName );
+	}
+
+	/**
+	 * Returns a connection to the master DB, for updating.
+	 *
 	 * @return DatabaseBase
 	 */
 	private function getWriteConnection() {
-		return $this->loadBalancer->getConnection( DB_WRITE, array(), $this->dbName );
+		return $this->loadBalancer->getConnection( DB_MASTER, array(), $this->dbName );
 	}
 
 	/**
@@ -63,11 +86,20 @@ class ConnectionManager {
 	}
 
 	/**
+	 * Begins an atomic section and returns a database connection to the master DB, for updating.
+	 *
+	 * @note: This causes all future calls to getReadConnection() to return a connection
+	 * to the master DB, even after commitAtomicSection() or rollbackAtomicSection() have
+	 * been called.
+	 *
 	 * @param string $fname
 	 *
 	 * @return DatabaseBase
 	 */
 	public function beginAtomicSection( $fname ) {
+		// Once we have written to master, do not read from slave.
+		$this->forceMaster();
+
 		$db = $this->getWriteConnection();
 		$db->startAtomic( $fname );
 		return $db;
