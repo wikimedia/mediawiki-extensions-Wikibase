@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use HashBagOStuff;
-use LoadBalancer;
 use ObjectCache;
 use Wikibase\Client\Store\Sql\ConnectionManager;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
@@ -55,6 +54,16 @@ class DirectSqlStore implements ClientStore {
 	 * @var string|bool The symbolic database name of the repo wiki or false for the local wiki.
 	 */
 	private $repoWiki;
+
+	/**
+	 * @var ConnectionManager|null
+	 */
+	private $repoConnectionManager = null;
+
+	/**
+	 * @var ConnectionManager|null
+	 */
+	private $localConnectionManager = null;
 
 	/**
 	 * @var string
@@ -174,10 +183,7 @@ class DirectSqlStore implements ClientStore {
 			if ( $this->useLegacyChangesSubscription ) {
 				$this->subscriptionManager = new NullSubscriptionManager();
 			} else {
-				$connectionManager = new ConnectionManager(
-					$this->getRepoLoadBalancer(),
-					$this->repoWiki
-				);
+				$connectionManager = $this->getRepoConnectionManager();
 				$this->subscriptionManager = new SqlSubscriptionManager( $connectionManager );
 			}
 		}
@@ -189,20 +195,28 @@ class DirectSqlStore implements ClientStore {
 	 * Returns a LoadBalancer that acts as a factory for connections to the repo wiki's
 	 * database.
 	 *
-	 * @return LoadBalancer
+	 * @return ConnectionManager
 	 */
-	private function getRepoLoadBalancer() {
-		return wfGetLB( $this->repoWiki );
+	private function getRepoConnectionManager() {
+		if ( $this->repoConnectionManager === null ) {
+			$this->repoConnectionManager = new ConnectionManager( wfGetLB( $this->repoWiki ), $this->repoWiki );
+		}
+
+		return $this->repoConnectionManager;
 	}
 
 	/**
 	 * Returns a LoadBalancer that acts as a factory for connections to the local (client) wiki's
 	 * database.
 	 *
-	 * @return LoadBalancer
+	 * @return ConnectionManager
 	 */
-	private function getLocalLoadBalancer() {
-		return wfGetLB();
+	private function getLocalConnectionManager() {
+		if ( $this->localConnectionManager === null ) {
+			$this->localConnectionManager = new ConnectionManager( wfGetLB() );
+		}
+
+		return $this->localConnectionManager;
 	}
 
 	/**
@@ -240,7 +254,7 @@ class DirectSqlStore implements ClientStore {
 			if ( $this->useLegacyUsageIndex ) {
 				$this->usageTracker = new NullUsageTracker();
 			} else {
-				$connectionManager = new ConnectionManager( $this->getLocalLoadBalancer() );
+				$connectionManager = $this->getLocalConnectionManager();
 				$this->usageTracker = new SqlUsageTracker( $this->entityIdParser, $connectionManager );
 			}
 		}
