@@ -31,6 +31,11 @@ class PruneChanges extends Maintenance {
 	 */
 	private $ignoreDispatch = false;
 
+	/**
+	 * @var int The amount of rows to delete at once.
+	 */
+	private $pruneLimit = 0;
+
 	public function __construct() {
 		parent::__construct();
 		$this->mDescription = "Prune the Wikibase changes table to a maximum number of entries";
@@ -40,6 +45,8 @@ class PruneChanges extends Maintenance {
 		$this->addOption( 'keep-hours', 'Keep changes at least N hours.', false, true, 'h' );
 		$this->addOption( 'keep-minutes', 'Keep changes at least N minutes.', false, true, 'm' );
 		$this->addOption( 'grace-minutes', 'Keep changes at least N more minutes after they have been dispatched.', false, true, 'g' );
+
+		$this->addOption( 'limit', 'Only prune up to N rows at once.', false, true, 'l' );
 
 		$this->addOption( 'force', 'Run regardless of whether the PID file says it is running already.',
 						 false, false, 'f' );
@@ -83,7 +90,10 @@ class PruneChanges extends Maintenance {
 			$this->graceSeconds = 1 * 60 * 60;
 		}
 
+		$this->pruneLimit = intval( $this->getOption( 'limit', 25000 ) );
+
 		$until = $this->getCutoffTimestamp();
+		$until = $this->limitDeletions( $until );
 		$this->output( date( 'H:i:s' ) . " pruning entries older than "
 			. wfTimestamp( TS_ISO_8601, $until ) . "\n" );
 
@@ -102,8 +112,8 @@ class PruneChanges extends Maintenance {
 		$until = time() - $this->keepSeconds;
 
 		if ( !$this->ignoreDispatch ) {
-			$dbw = wfGetDB( DB_MASTER );
-			$row = $dbw->selectRow(
+			$dbr = wfGetDB( DB_SLAVE );
+			$row = $dbr->selectRow(
 				array ( 'wb_changes_dispatch', 'wb_changes' ),
 				'min(change_time) as timestamp',
 				array(
@@ -124,6 +134,27 @@ class PruneChanges extends Maintenance {
 	}
 
 	/**
+	 * @param int $until
+	 *
+	 * @return int
+	 */
+	private function limitDeletions( $until ) {
+		$dbr = wfGetDB( DB_SLAVE );
+		$changeTime = $dbr->selectField(
+			'wb_changes',
+			'change_time',
+			array( 'change_time < ' . $dbr->addQuotes( wfTimestamp( TS_MW, $until ) ) ),
+			__METHOD__,
+			array(
+				'OFFSET' => $this->pruneLimit,
+				'ORDER BY' => 'change_time ASC',
+			)
+		);
+
+		return $changeTime ? intval( $changeTime ) : $until;
+	}
+
+	/**
 	 * Prunes all changes older than $until from the changes table.
 	 *
 	 * @param int $until
@@ -135,7 +166,7 @@ class PruneChanges extends Maintenance {
 
 		$dbw->delete(
 			'wb_changes',
-			array( "change_time < " . $dbw->addQuotes( wfTimestamp( TS_MW, $until ) ) ),
+			array( 'change_time < ' . $dbw->addQuotes( wfTimestamp( TS_MW, $until ) ) ),
 			__METHOD__
 		);
 
