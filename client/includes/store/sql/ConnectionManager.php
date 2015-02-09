@@ -4,6 +4,7 @@ namespace Wikibase\Client\Store\Sql;
 
 use DatabaseBase;
 use IDatabase;
+use InvalidArgumentException;
 use LoadBalancer;
 
 /**
@@ -20,15 +21,22 @@ class ConnectionManager {
 	private $loadBalancer;
 
 	/**
-	 * @var string|null
+	 * The symbolic name of the target database, or false for the local wiki's database.
+	 *
+	 * @var string|false
 	 */
 	private $dbName;
 
 	/**
 	 * @param LoadBalancer $loadBalancer
-	 * @param string|null $dbName Optional, defaults to current wiki.
+	 * @param string|false $dbName Optional, defaults to current wiki.
+	 *        This follows the convention for database names used by $loadBalancer.
 	 */
-	public function __construct( LoadBalancer $loadBalancer, $dbName = null ) {
+	public function __construct( LoadBalancer $loadBalancer, $dbName = false ) {
+		if ( !is_string( $dbName ) && $dbName !== false ) {
+			throw new InvalidArgumentException( '$dbName must be a string, or false.' );
+		}
+
 		$this->loadBalancer = $loadBalancer;
 		$this->dbName = $dbName;
 	}
@@ -37,10 +45,6 @@ class ConnectionManager {
 	 * @return DatabaseBase
 	 */
 	public function getReadConnection() {
-		if ( $this->dbName === null ) {
-			return $this->loadBalancer->getConnection( DB_READ );
-		}
-
 		return $this->loadBalancer->getConnection( DB_READ, array(), $this->dbName );
 	}
 
@@ -48,10 +52,6 @@ class ConnectionManager {
 	 * @return DatabaseBase
 	 */
 	private function getWriteConnection() {
-		if ( $this->dbName === null ) {
-			return $this->loadBalancer->getConnection( DB_WRITE );
-		}
-
 		return $this->loadBalancer->getConnection( DB_WRITE, array(), $this->dbName );
 	}
 
