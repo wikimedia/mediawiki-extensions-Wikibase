@@ -1,8 +1,8 @@
 <?php
 
-namespace Wikibase\Client\Tests\Store\Sql;
+namespace Wikibase\Tests\Store\Sql;
 
-use Wikibase\Client\Store\Sql\ConnectionManager;
+use Wikibase\Store\Sql\ConnectionManager;
 
 /**
  * @covers Wikibase\Client\Store\Sql\ConnectionManager
@@ -41,7 +41,7 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 			->with( DB_SLAVE )
 			->will( $this->returnValue( $connection ) );
 
-		$manager = new ConnectionManager( $lb );
+		$manager = new \Wikibase\Store\Sql\ConnectionManager( $lb );
 		$actual = $manager->getReadConnection();
 
 		$this->assertSame( $connection, $actual );
@@ -56,7 +56,7 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 			->with( DB_MASTER )
 			->will( $this->returnValue( $connection ) );
 
-		$manager = new ConnectionManager( $lb );
+		$manager = new \Wikibase\Store\Sql\ConnectionManager( $lb );
 		$manager->forceMaster();
 		$manager->getReadConnection();
 	}
@@ -70,7 +70,7 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 			->with( $connection )
 			->will( $this->returnValue( null ) );
 
-		$manager = new ConnectionManager( $lb );
+		$manager = new \Wikibase\Store\Sql\ConnectionManager( $lb );
 		$manager->releaseConnection( $connection );
 	}
 
@@ -108,7 +108,7 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 			->method( 'endAtomic' )
 			->will( $this->returnValue( null ) );
 
-		$manager = new ConnectionManager( $lb );
+		$manager = new \Wikibase\Store\Sql\ConnectionManager( $lb );
 		$manager->commitAtomicSection( $connection, 'TEST' );
 	}
 
@@ -125,7 +125,7 @@ class ConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 			->method( 'rollback' )
 			->will( $this->returnValue( null ) );
 
-		$manager = new ConnectionManager( $lb );
+		$manager = new \Wikibase\Store\Sql\ConnectionManager( $lb );
 		$manager->rollbackAtomicSection( $connection, 'TEST' );
 	}
 

@@ -7,7 +7,7 @@ use DBError;
 use Exception;
 use InvalidArgumentException;
 use ResultWrapper;
-use Wikibase\Client\Store\Sql\ConnectionManager;
+use Wikibase\Store\Sql\ConnectionManager;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageTrackerException;
 use Wikibase\DataModel\Entity\EntityId;
@@ -23,7 +23,7 @@ use Wikibase\DataModel\Entity\EntityId;
 class SqlSubscriptionManager implements SubscriptionManager {
 
 	/**
-	 * @var ConnectionManager
+	 * @var \Wikibase\Store\Sql\ConnectionManager
 	 */
 	private $connectionManager;
 

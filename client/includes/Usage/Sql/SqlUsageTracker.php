@@ -8,7 +8,7 @@ use DBError;
 use Exception;
 use InvalidArgumentException;
 use Iterator;
-use Wikibase\Client\Store\Sql\ConnectionManager;
+use Wikibase\Store\Sql\ConnectionManager;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;
@@ -31,7 +31,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	private $idParser;
 
 	/**
-	 * @var ConnectionManager
+	 * @var \Wikibase\Store\Sql\ConnectionManager
 	 */
 	private $connectionManager;
 

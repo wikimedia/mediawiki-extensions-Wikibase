@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Store\Sql;
+namespace Wikibase\Store\Sql;
 
 use DatabaseBase;
 use IDatabase;

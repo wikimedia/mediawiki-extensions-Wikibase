@@ -5,7 +5,7 @@ namespace Wikibase;
 use HashBagOStuff;
 use LoadBalancer;
 use ObjectCache;
-use Wikibase\Client\Store\Sql\ConnectionManager;
+use Wikibase\Store\Sql\ConnectionManager;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\NullSubscriptionManager;
