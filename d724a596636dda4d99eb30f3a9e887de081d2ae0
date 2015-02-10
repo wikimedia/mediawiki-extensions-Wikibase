@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_75a87b1d",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-10T16:39:50Z",
+      "side": 1,
+      "message": "Why would you need that information twice? Just because of duplication on the other page?",
+      "parentUuid": "6e7c4fa4_1a9054f0",
+      "revId": "d724a596636dda4d99eb30f3a9e887de081d2ae0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_9ab30496",
         "filename": "repo/includes/specials/SpecialModifyEntity.php",
         "patchSetId": 6
