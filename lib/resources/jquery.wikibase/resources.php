@@ -262,7 +262,7 @@ return call_user_func( function() {
 				'themes/default/jquery.wikibase.labelview.css',
 			),
 			'dependencies' => array(
-				'jquery.ui.TemplatedWidget',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.getDirectionality',
 				'wikibase.datamodel.Term',
 				'wikibase.getLanguageNameByCode',
