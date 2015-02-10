@@ -250,6 +250,7 @@ return call_user_func( function() {
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.sitelinkgrouplistview',
 				'wikibase.sites',
+				'wikibase.utilities.ClaimGuidGenerator',
 			),
 		),
 
@@ -306,6 +307,7 @@ return call_user_func( function() {
 				'jquery.wikibase.statementgrouplabelscroll',
 				'jquery.wikibase.statementgrouplistview',
 				'jquery.wikibase.entityview',
+				'wikibase.utilities.ClaimGuidGenerator',
 			),
 		),
 
