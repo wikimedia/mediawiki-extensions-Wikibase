@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_7c49488f",
+        "filename": "repo/includes/Diff/DifferencesSnakVisualizer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-10T08:57:14Z",
+      "side": 1,
+      "message": "This is no diff class and no diff or differences visualizer. It is a helper for difference visualizers that visualizes snaks.",
+      "parentUuid": "6e7c4fa4_2d28932e",
+      "revId": "dc52a01803cbac07ab8ad18239609e7b89301604",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_cd1c7f1b",
         "filename": "repo/includes/Diff/DifferencesSnakVisualizer.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-06T10:38:40Z",
       "side": 1,
       "message": "Why do you parse this? -\u003eescaped() should be good enough",
+      "revId": "dc52a01803cbac07ab8ad18239609e7b89301604",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3c63d00b",
+        "filename": "repo/includes/Diff/DifferencesSnakVisualizer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-10T08:57:14Z",
+      "side": 1,
+      "message": "Copy and paste from ClaimDifferenceVisualizer::getSnakLabelHeader. escaped seems to me to be enough, too, though.",
+      "parentUuid": "6e7c4fa4_cd1c7f1b",
       "revId": "dc52a01803cbac07ab8ad18239609e7b89301604",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
