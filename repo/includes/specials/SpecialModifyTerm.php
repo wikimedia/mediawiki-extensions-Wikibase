@@ -208,8 +208,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				'id' => 'wb-modifyterm-value',
 				'size' => 50
 			)
-		)
-		. Html::element( 'br' );
+		);
 
 		$languageName = Language::fetchLanguageName( $this->languageCode, $this->getLanguage()->getCode() );
 
@@ -238,6 +237,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()
 			)
 			. parent::getFormElements( $entity )
+			. Html::element( 'br' )
 			. Html::element(
 				'label',
 				array(

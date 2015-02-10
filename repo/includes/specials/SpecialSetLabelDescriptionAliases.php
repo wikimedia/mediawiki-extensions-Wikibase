@@ -189,6 +189,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				$this->msg( 'wikibase-setlabeldescriptionaliases-intro' )->parse()
 			)
 			. parent::getFormElements( $entity )
+			. Html::element( 'br' )
 			. Html::element(
 				'label',
 				array(
@@ -229,8 +230,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				'id' => 'wikibase-setlabeldescriptionaliases-' . $name,
 				'size' => 50
 			)
-		)
-		. Html::element( 'br' );
+		);
 	}
 
 	/**

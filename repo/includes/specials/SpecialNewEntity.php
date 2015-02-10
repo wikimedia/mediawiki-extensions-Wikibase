@@ -244,6 +244,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				)->text(),
 			)
 		)
+		. Html::element( 'br' )
 		. Html::element(
 			'label',
 			array(
@@ -306,6 +307,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 					$this->getUser()->getEditToken()
 				)
 				. $additionalHtml
+				. Html::element( 'br' )
 				. Html::input(
 					'submit',
 					$this->msg( 'wikibase-newentity-submit' )->text(),

@@ -100,6 +100,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 		$selector = new DataTypeSelector( $dataTypeFactory->getTypes(), $this->getLanguage()->getCode() );
 
 		return parent::additionalFormElements()
+			. Html::element( 'br' )
 			. Html::element(
 				'label',
 				array(

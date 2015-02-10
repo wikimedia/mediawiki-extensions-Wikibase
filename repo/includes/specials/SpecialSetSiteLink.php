@@ -206,7 +206,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		if ( empty( $this->badges ) ) {
 			$this->badges = $this->site === null ? array() : $this->getBadges( $entity, $this->site );
 		}
-		$pageinput = Html::element(
+		$pageinput = Html::element( 'br' )
+			. Html::element(
 				'label',
 				array(
 					'for' => 'wb-setsitelink-page',
@@ -267,6 +268,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				$intro
 			)
 			. parent::getFormElements( $entity )
+			. Html::element( 'br' )
 			. Html::element(
 				'label',
 				array(
@@ -284,7 +286,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 					'id' => 'wb-setsitelink-site'
 				)
 			)
-			. Html::element( 'br' )
 			. $pageinput;
 		}
 	}
