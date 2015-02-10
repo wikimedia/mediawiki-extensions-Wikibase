@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8640935c",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-10T02:19:36Z",
+      "side": 1,
+      "message": "perhaps EntityStatementsRenderer could have or be an interface, in addition to the implementation.\n\nthe implementations of \"PropertyClaimsRenderer\" (terrible name) could instead implement this and we can get rid of the PropertyClaimsRenderer interface which otherwise becomes redundant.",
+      "revId": "8aee233aa90aca7a49b01f0f8dd1e11c65cce001",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
