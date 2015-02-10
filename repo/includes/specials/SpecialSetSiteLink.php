@@ -226,8 +226,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			);
 
 		if ( !empty( $this->badgeItems ) ) {
-			$pageinput .= Html::element( 'br' )
-			. Html::element(
+			$pageinput .= Html::element(
 				'label',
 				array(
 					'class' => 'wb-label'
@@ -284,7 +283,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 					'id' => 'wb-setsitelink-site'
 				)
 			)
-			. Html::element( 'br' )
 			. $pageinput;
 		}
 	}

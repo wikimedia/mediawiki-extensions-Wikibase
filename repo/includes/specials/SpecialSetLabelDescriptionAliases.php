@@ -204,8 +204,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				'id' => 'wikibase-setlabeldescriptionaliases-' . $name,
 				'size' => 50
 			)
-		)
-		. Html::element( 'br' );
+		);
 	}
 
 	/**
@@ -215,8 +214,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @return string
 	 */
 	private function getLabel( $name ) {
-		return Html::element( 'br' )
-		. Html::element(
+		return Html::element(
 			$name,
 			array(
 				'for' => 'wikibase-setlabeldescriptionaliases-' . $name,

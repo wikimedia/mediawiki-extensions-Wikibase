@@ -294,7 +294,6 @@ class SpecialMergeItems extends SpecialWikibasePage {
 				'id' => 'wb-mergeitems-fromid'
 			)
 		)
-		. Html::element( 'br' )
 		. Html::element(
 			'label',
 			array(
@@ -311,8 +310,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 				'class' => 'wb-input',
 				'id' => 'wb-mergeitems-toid'
 			)
-		)
-		. Html::element( 'br' );
+		);
 		// TODO: Selector for ignoreconflicts
 	}
 
