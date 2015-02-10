@@ -91,7 +91,7 @@ class DifferencesSnakVisualizer {
 			// consistent (and shared code) with what we do in SnakHtmlGenerator.
 			$messageText = wfMessage( 'wikibase-snakformat-invalid-value' )
 				->inLanguage( $this->languageCode )
-				->parse();
+				->escaped();
 
 			return $messageText;
 		}
@@ -120,7 +120,7 @@ class DifferencesSnakVisualizer {
 	 * @return string HTML
 	 */
 	public function getPropertyHeader( Snak $snak = null ) {
-		$headerText = wfMessage( 'wikibase-entity-property' )->inLanguage( $this->languageCode )->parse();
+		$headerText = wfMessage( 'wikibase-entity-property' )->inLanguage( $this->languageCode )->escaped();
 
 		if ( $snak !== null ) {
 			$propertyId = $snak->getPropertyId();
