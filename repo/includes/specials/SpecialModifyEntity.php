@@ -190,7 +190,8 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 		// Form body
 		$this->getOutput()->addHTML(
-			Html::input(
+			Html::element( 'br' )
+			. Html::input(
 				'wikibase-' . strtolower( $this->getName() ) . '-submit',
 				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-submit' )->text(),
 				'submit',
@@ -234,8 +235,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 				'class' => 'wb-input',
 				'id' => $id
 			)
-		)
-		. Html::element( 'br' );
+		);
 	}
 
 	/**
