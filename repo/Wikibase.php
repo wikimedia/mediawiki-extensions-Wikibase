@@ -64,7 +64,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles, $wgMessagesDirs;
-	global $wgAPIModules, $wgSpecialPages, $wgHooks;
+	global $wgAPIModules, $wgSpecialPages, $wgHooks, $wgAvailableRights;
 	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
 
 	$wgExtensionCredits['wikibase'][] = array(
@@ -89,6 +89,12 @@ call_user_func( function() {
 	$wgGroupPermissions['*']['item-merge']			= true;
 	$wgGroupPermissions['*']['item-redirect']		= true;
 	$wgGroupPermissions['*']['property-create']		= true;
+
+	$wgAvailableRights[] = 'item-term';
+	$wgAvailableRights[] = 'property-term';
+	$wgAvailableRights[] = 'item-merge';
+	$wgAvailableRights[] = 'item-redirect';
+	$wgAvailableRights[] = 'property-create';
 
 	// i18n
 	$wgMessagesDirs['Wikibase']                         = __DIR__ . '/i18n';
