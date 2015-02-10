@@ -118,9 +118,7 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	}
 
 	private function getMainItem() {
-		$item = Item::newEmpty();
-		$itemId = new ItemId( 'Q5881' );
-		$item->setId( $itemId );
+		$item = new Item( new ItemId( 'Q5881' ) );
 		$item->setLabel( 'en', 'Cake' );
 
 		$snak = new PropertyValueSnak(
