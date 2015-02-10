@@ -146,7 +146,8 @@ class ChangeOpTestMockProvider {
 	public function getMockSnakValidator() {
 		return new SnakValidator(
 			$this->getMockPropertyDataTypeLookup(),
-			$this->getMockDataTypeFactory()
+			$this->getMockDataTypeFactory(),
+			$this->getMockDataTypeValidatorFactory()
 		);
 	}
 
@@ -167,22 +168,12 @@ class ChangeOpTestMockProvider {
 
 	/**
 	 * Returns a mock MockDataTypeFactory that will return the same DataType for
-	 * any type id; The ValueValidators of that DataType will accept any
-	 * StringValue, unless the string is "INVALID".
+	 * any type id.
 	 *
 	 * @return DataTypeFactory
 	 */
 	public function getMockDataTypeFactory() {
-		// consider "INVALID" to be invalid
-		$topValidator = new DataValueValidator(
-			new CompositeValidator( array(
-				new TypeValidator( 'string' ),
-				new RegexValidator( '/INVALID/', true ),
-			), true )
-		);
-
-		$validators = array( new TypeValidator( 'DataValues\DataValue' ), $topValidator );
-		$stringType = new DataType( 'string', 'string', $validators );
+		$stringType = new DataType( 'string', 'string', array() );
 
 		$types = array(
 			'string' => $stringType
@@ -199,6 +190,33 @@ class ChangeOpTestMockProvider {
 				}
 
 				return $types[$id];
+			} ) );
+
+		return $mock;
+	}
+
+	/**
+	 * Returns a mock DataTypeValidatorFactory that returns validators which will accept any
+	 * StringValue, unless the string is "INVALID".
+	 *
+	 * @return DataTypeValidatorFactory
+	 */
+	public function getMockDataTypeValidatorFactory() {
+		// consider "INVALID" to be invalid
+		$topValidator = new DataValueValidator(
+			new CompositeValidator( array(
+				new TypeValidator( 'string' ),
+				new RegexValidator( '/INVALID/', true ),
+			), true )
+		);
+
+		$validators = array( new TypeValidator( 'DataValues\DataValue' ), $topValidator );
+
+		$mock = $this->getMock( 'Wikibase\Repo\DataTypeValidatorFactory' );
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'getValidators' )
+			->will( PHPUnit_Framework_TestCase::returnCallback( function( $id ) use ( $validators ) {
+				return $validators;
 			} ) );
 
 		return $mock;
