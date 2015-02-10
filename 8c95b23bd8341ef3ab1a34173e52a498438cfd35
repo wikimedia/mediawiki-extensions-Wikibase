@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ff30eae6",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-10T09:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_7cce2833",
+      "revId": "8c95b23bd8341ef3ab1a34173e52a498438cfd35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_bceb6076",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-10T08:34:32Z",
       "side": 1,
       "message": "Please pass this as a configuration option.",
+      "revId": "8c95b23bd8341ef3ab1a34173e52a498438cfd35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7f6b7ab5",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-10T09:14:27Z",
+      "side": 1,
+      "message": "The whole function _createEntitytermsforlanguagelistviewToggler is very MediaWiki specific and is just a work-around imposed by Product Management. (I would very much prefer implementing a sane method to specify user languages in the front-end.) Not sure whether we should make that work-around \"public\" by adding an option.",
+      "parentUuid": "6e7c4fa4_bceb6076",
       "revId": "8c95b23bd8341ef3ab1a34173e52a498438cfd35",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
