@@ -36,14 +36,17 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 final class TestChanges {
 
 	protected static function getItem() {
-		$item = Item::newEmpty();
-		$item->getFingerprint()->setLabel( 'en', 'Venezuela' );
-		$item->getFingerprint()->setDescription( 'en', 'a country' );
-		$item->getFingerprint()->setAliasGroup( 'en', array( 'Bolivarian Republic of Venezuela' ) );
+		$item = new Item();
 
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Venezuela' );
-		$item->getSiteLinkList()->addNewSiteLink( 'jawiki', 'ベネズエラ' );
-		$item->getSiteLinkList()->addNewSiteLink( 'cawiki', 'Veneçuela' );
+		$fingerprint = $item->getFingerprint();
+		$fingerprint->setLabel( 'en', 'Venezuela' );
+		$fingerprint->setDescription( 'en', 'a country' );
+		$fingerprint->setAliasGroup( 'en', array( 'Bolivarian Republic of Venezuela' ) );
+
+		$siteLinks = $item->getSiteLinkList();
+		$siteLinks->addNewSiteLink( 'enwiki', 'Venezuela' );
+		$siteLinks->addNewSiteLink( 'jawiki', 'ベネズエラ' );
+		$siteLinks->addNewSiteLink( 'cawiki', 'Veneçuela' );
 
 		return $item;
 	}
