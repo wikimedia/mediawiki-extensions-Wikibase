@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess\PropertyParserFunction;
 
 use OutOfBoundsException;
+use Wikibase\DataAccess\EntityStatementsRenderer;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -16,7 +17,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
  */
-class VariantsAwareRenderer implements PropertyClaimsRenderer {
+class VariantsAwareRenderer implements EntityStatementsRenderer {
 
 	/**
 	 * @param string[]
@@ -43,7 +44,7 @@ class VariantsAwareRenderer implements PropertyClaimsRenderer {
 	 *
 	 * @return string
 	 */
-	public function render( EntityId $entityId, $propertyLabelOrId ) {
+	public function render( EntityId $entityId, $propertyLabelOrId, $acceptableRanks = null ) {
 		$renderedVariantsArray = $this->buildRenderedVariantsArray( $entityId, $propertyLabelOrId );
 
 		return $this->processRenderedArray( $renderedVariantsArray );

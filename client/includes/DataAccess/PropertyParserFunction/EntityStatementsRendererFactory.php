@@ -8,7 +8,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataAccess\PropertyIdResolver;
-use Wikibase\DataAccess\EntityStatementsRenderer;
+use Wikibase\DataAccess\EntityStatementsBasicRenderer;
 use Wikibase\DataAccess\SnaksFinder;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
@@ -20,7 +20,7 @@ use Wikibase\Lib\SnakFormatter;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class PropertyClaimsRendererFactory {
+class EntityStatementsRendererFactory {
 
 	/**
 	 * @var PropertyIdResolver
@@ -68,7 +68,7 @@ class PropertyClaimsRendererFactory {
 	/**
 	 * @param Parser $parser
 	 *
-	 * @return PropertyClaimsRenderer
+	 * @return EntityStatementsRenderer
 	 */
 	public function newRendererFromParser( Parser $parser ) {
 		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
@@ -89,7 +89,7 @@ class PropertyClaimsRendererFactory {
 	 * @return LanguageAwareRenderer
 	 */
 	private function newLanguageAwareRenderer( Language $language, UsageAccumulator $usageAccumulator ) {
-		$entityStatementsRenderer = new EntityStatementsRenderer(
+		$entityStatementsRenderer = new EntityStatementsBasicRenderer(
 			$language,
 			$this->propertyIdResolver,
 			$this->snaksFinder,

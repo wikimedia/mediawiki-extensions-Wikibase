@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 
 /**
- * PropertyClaimsRenderer of the {{#property}} parser function.
+ * EntityStatementsRenderer for the {{#property}} parser function.
  *
  * @since 0.5
  *
@@ -21,7 +21,7 @@ use Wikibase\Lib\PropertyLabelNotResolvedException;
  * @author Liangent < liangent@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class LanguageAwareRenderer implements PropertyClaimsRenderer {
+class LanguageAwareRenderer implements EntityStatementsRenderer {
 
 	/**
 	 * @var Language
@@ -51,10 +51,10 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 	 *
 	 * @return string
 	 */
-	public function render( EntityId $entityId, $propertyLabelOrId ) {
+	public function render( EntityId $entityId, $propertyLabelOrId, $acceptableRanks = null ) {
 		try {
 			$status = Status::newGood(
-				$this->entityStatementsRenderer->render( $entityId, $propertyLabelOrId )
+				$this->entityStatementsRenderer->render( $entityId, $propertyLabelOrId, $acceptableRanks )
 			);
 		} catch ( PropertyLabelNotResolvedException $ex ) {
 			// @fixme use ExceptionLocalizer

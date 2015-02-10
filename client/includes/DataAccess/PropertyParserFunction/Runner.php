@@ -23,7 +23,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 class Runner {
 
 	/**
-	 * @var PropertyClaimsRendererFactory
+	 * @var EntityStatementsRendererFactory
 	 */
 	private $rendererFactory;
 
@@ -38,12 +38,12 @@ class Runner {
 	private $siteId;
 
 	/**
-	 * @param PropertyCLaimsRendererFactory $rendererFactory
+	 * @param EntityStatementsRendererFactory $rendererFactory
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param string $siteId
 	 */
 	public function __construct(
-		PropertyClaimsRendererFactory $rendererFactory,
+		EntityStatementsRendererFactory $rendererFactory,
 		SiteLinkLookup $siteLinkLookup,
 		$siteId
 	) {
