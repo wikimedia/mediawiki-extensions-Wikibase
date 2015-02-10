@@ -51,6 +51,24 @@
       "revId": "1f3331d81d71c4db29d739612032d19498b826f9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5f255ebb",
+        "filename": "client/includes/store/sql/ConnectionManager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-10T11:19:35Z",
+      "side": 1,
+      "message": "No, calling code should be able to force master connections for write access. Say you have a service for reading, and one for writing. In some situation, you need to read so you know what to write. To do this consistently, you have to read from the master. But the read service doesn\u0027t know when it should read from the master DB, it just calls getReadConnection(). So the calling code should be able to call forceMaster() first.",
+      "parentUuid": "6e7c4fa4_3fff4233",
+      "revId": "1f3331d81d71c4db29d739612032d19498b826f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
