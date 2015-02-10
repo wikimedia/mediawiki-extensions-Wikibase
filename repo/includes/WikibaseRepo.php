@@ -211,12 +211,7 @@ class WikibaseRepo {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
-			$builders = new WikibaseDataTypeBuilders(
-				$this->getEntityLookup(),
-				$this->getEntityIdParser(),
-				$urlSchemes
-			);
+			$builders = new WikibaseDataTypeBuilders();
 
 			$typeBuilderSpecs = array_intersect_key(
 				$builders->getDataTypeBuilders(),
@@ -424,7 +419,8 @@ class WikibaseRepo {
 	public function getSnakValidator() {
 		return new SnakValidator(
 			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory()
+			$this->getDataTypeFactory(),
+			$this->getDataTypeValidatorFactory()
 		);
 	}
 
@@ -1027,6 +1023,18 @@ class WikibaseRepo {
 			$this->getEntityIdParser(),
 			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
 			$this->getLanguageFallbackChainFactory()
+		);
+	}
+
+	private function getDataTypeValidatorFactory() {
+		$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
+
+		return new DataTypeValidatorFactory(
+			new ValidatorBuilders(
+				$this->getEntityLookup(),
+				$this->getEntityIdParser(),
+				$urlSchemes
+			)
 		);
 	}
 
