@@ -79,12 +79,11 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 		);
 	}
 
-	private function fingerprintCaseToEntityCase( $fingerprintCase, $id ) {
+	private function fingerprintCaseToEntityCase( array $fingerprintCase, ItemId $id ) {
 		$fingerprint = reset( $fingerprintCase );
 
-		$item = Item::newEmpty();
+		$item = new Item( $id );
 		$item->setFingerprint( $fingerprint );
-		$item->setId( $id );
 
 		$entityCase = $fingerprintCase;
 		$entityCase[0] = $item;
@@ -107,7 +106,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 
 		// check validation without entity id
 		$cases["no id"] = array(
-			Item::newEmpty(),
+			new Item(),
 		);
 
 		return $cases;
@@ -115,7 +114,6 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 
 	/**
 	 * @dataProvider validEntityProvider
-	 *
 	 * @param Entity $entity
 	 */
 	public function testValidateEntity( Entity $entity ) {
@@ -129,10 +127,9 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 
 	/**
 	 * @dataProvider validFingerprintProvider
-	 *
 	 * @param Fingerprint $fingerprint
 	 * @param EntityId $entityId
-	 * @param array $languageCodes
+	 * @param array|null $languageCodes
 	 */
 	public function testValidateFingerprint(
 		Fingerprint $fingerprint,
@@ -173,7 +170,6 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 
 	/**
 	 * @dataProvider invalidEntityProvider
-	 *
 	 * @param Entity $entity
 	 * @param string|null $error
 	 */
@@ -191,7 +187,6 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 
 	/**
 	 * @dataProvider invalidFingerprintProvider
-	 *
 	 * @param Fingerprint $fingerprint
 	 * @param string|null $error
 	 */
