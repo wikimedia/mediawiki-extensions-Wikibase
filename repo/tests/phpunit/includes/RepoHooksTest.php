@@ -3,6 +3,8 @@
 namespace Wikibase\Tests;
 
 use ConfigFactory;
+use Exception;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
 use WikiImporter;
 
@@ -18,6 +20,20 @@ use WikiImporter;
  * @author Daniel Kinzler
  */
 class RepoHooksTest extends \MediaWikiTestCase {
+
+	private $saveAllowImport = false;
+
+	public function setup() {
+		parent::setup();
+
+		$this->saveAllowImport = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'allowEntityImport' );
+	}
+
+	public function tearDown() {
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'allowEntityImport', $this->saveAllowImport );
+
+		parent::tearDown();
+	}
 
 	public function revisionInfoProvider() {
 		return array(
@@ -90,6 +106,8 @@ class RepoHooksTest extends \MediaWikiTestCase {
   </page>
  </mediawiki>
 XML
+				,
+				false
 			),
 			'item' => array( <<<XML
 <mediawiki>
@@ -110,21 +128,47 @@ XML
  </mediawiki>
 XML
 				,
+				false,
 				'MWException'
+			),
+			'item (allow)' => array( <<<XML
+<mediawiki>
+  <siteinfo>
+    <sitename>TestWiki</sitename>
+    <case>first-letter</case>
+  </siteinfo>
+  <page>
+    <title>Q123</title><ns>1234</ns>
+    <revision>
+      <contributor><username>Tester</username><id>0</id></contributor>
+      <comment>Test</comment>
+      <text>{ "id":"Q123" }</text>
+      <model>wikibase-item</model>
+      <format>application/json</format>
+    </revision>
+  </page>
+ </mediawiki>
+XML
+			,
+				true
 			),
 		);
 	}
 
 	/**
 	 * @dataProvider importProvider
-	 * @param $xml
-	 * @param null $expectedException
+	 *
+	 * @param string $xml
+	 * @param bool $allowImport
+	 * @param Exception|null $expectedException
 	 */
-	public function testImportHandleRevisionXMLTag_hook( $xml, $expectedException = null ) {
+	public function testImportHandleRevisionXMLTag_hook( $xml, $allowImport, $expectedException = null ) {
 		// WikiImporter tried to register this protocol every time, so unregister first to avoid errors.
 		wfSuppressWarnings();
 		stream_wrapper_unregister( 'uploadsource' );
 		wfRestoreWarnings();
+
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'allowEntityImport', $allowImport );
 
 		$source = $this->getMockImportStream( $xml );
 		$importer = new WikiImporter( $source, ConfigFactory::getDefaultInstance()->makeConfig( 'main' ) );
