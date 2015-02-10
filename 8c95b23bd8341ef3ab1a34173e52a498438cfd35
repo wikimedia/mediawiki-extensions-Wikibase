@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7cce2833",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-10T08:34:32Z",
+      "side": 1,
+      "message": "Please use `toggleClass`.",
+      "revId": "8c95b23bd8341ef3ab1a34173e52a498438cfd35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bceb6076",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-10T08:34:32Z",
+      "side": 1,
+      "message": "Please pass this as a configuration option.",
+      "revId": "8c95b23bd8341ef3ab1a34173e52a498438cfd35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
