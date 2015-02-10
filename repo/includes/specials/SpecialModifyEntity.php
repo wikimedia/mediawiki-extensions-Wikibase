@@ -235,8 +235,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 				'class' => 'wb-input',
 				'id' => $id
 			)
-		)
-		. Html::element( 'br' );
+		);
 	}
 
 	/**

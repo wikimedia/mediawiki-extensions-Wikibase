@@ -170,7 +170,9 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 					$this->languageCode
 				)
 				. $this->getLabeledInputField( 'label', $this->label )
+				. Html::element( 'br' )
 				. $this->getLabeledInputField( 'description', $this->description )
+				. Html::element( 'br' )
 				. $this->getLabeledInputField( 'aliases', implode( '|', $this->aliases ) );
 		} else {
 			$intro = $this->msg( 'wikibase-setlabeldescriptionaliases-intro' );
@@ -178,6 +180,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$languageCode = $this->languageCode ? : $this->getLanguage()->getCode();
 
 			$html = parent::getFormElements( $entity )
+				. Html::element( 'br' )
 				. Html::label(
 					$this->msg( 'wikibase-modifyterm-language' )->text(),
 					$fieldId,
@@ -201,7 +204,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			array(),
 			$intro->parse()
 		)
-		. $html;
+		. $html
+		. Html::element( 'br' );
 	}
 
 	/**
