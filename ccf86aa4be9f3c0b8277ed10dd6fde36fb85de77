@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_d5170fa7",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-10T16:12:43Z",
+      "side": 1,
+      "message": "The function will be exposed as a member function on a lua metatable which is private to our module.",
+      "parentUuid": "6e7c4fa4_f5048b82",
+      "revId": "ccf86aa4be9f3c0b8277ed10dd6fde36fb85de77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d5014f72",
         "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2015-02-10T16:07:48Z",
       "side": 1,
       "message": "The whole kitchen sink?... \nIf we want to minimize dependencies, we should just inject what we need, that is, the user language.",
+      "revId": "ccf86aa4be9f3c0b8277ed10dd6fde36fb85de77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_552bffda",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-10T16:12:43Z",
+      "side": 1,
+      "message": "Yeah :/ But once one calls getUserLang the parser cache will be split up (and also we want to make our Lua module able to split up the cache over here).",
+      "parentUuid": "6e7c4fa4_d5014f72",
       "revId": "ccf86aa4be9f3c0b8277ed10dd6fde36fb85de77",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
