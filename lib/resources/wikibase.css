@@ -261,7 +261,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 .wb-language-fallback-indicator {
 	font-style: italic;
-	margin-left: 0.5em;
+	margin: 0 0.5em;
 	line-height: 1;
 }
 
