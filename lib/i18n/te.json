@@ -4,9 +4,16 @@
 			"Veeven"
 		]
 	},
-	"wikibase-diffview-alias": "మారుపేర్లు",
-	"wikibase-diffview-description": "వివరణ",
-	"wikibase-diffview-link": "లంకెలు",
+	"wikibase-timedetails-time": "సమయం",
+	"wikibase-timedetails-timezone": "కాలమండలం",
+	"wikibase-timedetails-calendar": "క్యాలెండర్",
+	"wikibase-timedetails-before": "ముందు",
+	"wikibase-timedetails-after": "తర్వాత",
+	"wikibase-globedetails-longitude": "రేఖాంశం",
+	"wikibase-globedetails-latitude": "అక్షాంశం",
+	"wikibase-sitelinks-wikipedia": "వికీపీడియా",
 	"wikibase-sitelinks-sitename-columnheading": "భాష",
-	"wikibase-tooltip-error-details": "వివరాలు"
+	"wikibase-tooltip-error-details": "వివరాలు",
+	"datatypes-type-wikibase-item": "అంశం",
+	"datatypes-type-wikibase-property": "లక్షణం"
 }

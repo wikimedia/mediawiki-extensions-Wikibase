@@ -8,7 +8,7 @@
 	},
 	"wikibase-comment-sitelink-add": "భాష లంకెను చేర్చారు: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|మార్పు|మార్పులు}}",
-	"wikibase-dataitem": "దత్తాంశం(వికీడేటా)",
+	"wikibase-dataitem": "{{WBREPONAME}} అంశం",
 	"wikibase-editlinks": "లంకెలను మార్చు",
 	"wikibase-editlinkstitle": "భాషాలింకులను మార్చు",
 	"wikibase-linkitem-addlinks": "లంకెలను చేర్చండి",
@@ -16,10 +16,14 @@
 	"wikibase-linkitem-input-site": "భాష:",
 	"wikibase-linkitem-input-page": "పేజీ:",
 	"wikibase-linkitem-confirmitem-button": "నిర్థారించండి",
-	"wikibase-rc-hide-wikidata": "వికీడాటాను $1",
-	"wikibase-rc-show-wikidata-pref": "వికీడేటా మార్పులను ఇటీవలి మార్పులలో చూపించు",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "దాచు",
+	"wikibase-rc-hide-wikidata-show": "చూపించు",
+	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} మార్పులను ఇటీవలి మార్పులలో చూపించు",
 	"wikibase-rc-wikibase-edit-letter": "ద",
-	"wikibase-rc-wikibase-edit-title": "వికీడేటా సవరణ",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} సవరణ",
 	"wikibase-unconnectedpages-submit": "వెళ్ళు",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\" అనేది సరైన భాషా సంకేతం కాదు."
+	"wikibase-unconnectedpages-invalid-language": "\"$1\" అనేది సరైన భాషా సంకేతం కాదు.",
+	"wikibase-pageinfo-entity-id-none": "ఏమీలేదు",
+	"wikibase-otherprojects": "ఇతర ప్రాజెక్టులు"
 }

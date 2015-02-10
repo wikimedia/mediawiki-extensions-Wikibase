@@ -55,7 +55,7 @@
 	"wikibase-alias-edit-placeholder": "podaj alternatywną nazwę",
 	"wikibase-label-input-help-message": "Podaj etykietę tej encji w języku: $1.",
 	"wikibase-description-input-help-message": "Podaj krótki opis tej encji w języku: $1.",
-	"wikibase-fingerprintview-input-help-message": "Wpisz etykietę tej encji, krótki opis i aliasy w $1.",
+	"wikibase-entitytermsforlanguageview-input-help-message": "Wpisz etykietę tej encji, krótki opis i aliasy w $1.",
 	"wikibase-statements": "Deklaracje",
 	"wikibase-terms": "W innych językach",
 	"wikibase-sitelinkgroupview-input-help-message": "Dodaj link do strony, określając stronę i podstronę, edytując lub usuwając istniejące linki.",

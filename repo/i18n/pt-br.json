@@ -10,11 +10,11 @@
 			"Jefersonmoraes",
 			"He7d3r",
 			"Luckas",
-			"Mordecool"
+			"Mordecool",
+			"Fasouzafreitas"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
-	"specialpages-group-wikibaserepo": "Repositório Wikibase",
 	"wikibase-entity-item": "item",
 	"wikibase-entity-property": "propriedade",
 	"wikibase-entity-query": "consulta",
@@ -26,6 +26,11 @@
 	"wikibase-addreference": "adicionar fonte",
 	"wikibase-save-inprogress": "Salvando...",
 	"wikibase-remove-inprogress": "Removendo...",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Em mais idiomas",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configurar",
+	"wikibase-entitytermsforlanguagelistview-aliases": "Também conhecido como",
+	"wikibase-entitytermsforlanguagelistview-label": "Rótulo",
+	"wikibase-entitytermsforlanguagelistview-language": "Idioma",
 	"wikibase-label-empty": "Rótulo ainda não definido",
 	"wikibase-label-edit-placeholder": "insira um rótulo",
 	"wikibase-description-empty": "Descrição ainda não definida",
