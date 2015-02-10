@@ -79,7 +79,7 @@ class PropertyViewTest extends EntityViewTest {
 	public function provideTestGetHtml() {
 		$propertyView = new PropertyView(
 			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
-			$this->getMockBuilder( 'Wikibase\Repo\View\FingerprintView' )
+			$this->getMockBuilder( 'Wikibase\Repo\View\EntityTermsView' )
 				->disableOriginalConstructor()
 				->getMock(),
 			$this->getMockBuilder( 'Wikibase\Repo\View\StatementGroupListView' )

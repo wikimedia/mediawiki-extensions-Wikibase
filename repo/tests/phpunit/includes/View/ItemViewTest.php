@@ -49,7 +49,7 @@ class ItemViewTest extends EntityViewTest {
 	public function provideTestGetHtml() {
 		$itemView = new ItemView(
 			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
-			$this->getMockBuilder( 'Wikibase\Repo\View\FingerprintView' )
+			$this->getMockBuilder( 'Wikibase\Repo\View\EntityTermsView' )
 				->disableOriginalConstructor()
 				->getMock(),
 			$this->getMockBuilder( 'Wikibase\Repo\View\StatementGroupListView' )
