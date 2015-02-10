@@ -131,6 +131,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 					$intro->parse()
 				)
 				. parent::getFormElements( $entity )
+				. Html::element( 'br' )
 				. Html::label(
 					$this->msg( 'wikibase-modifyterm-language' )->text(),
 					$fieldId,
@@ -146,7 +147,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 						'class' => 'wb-input',
 						'id' => $fieldId,
 					)
-				);
+				)
+				. Html::element( 'br' );
 		}
 
 		$html .= $this->getLabeledInputField( 'label', $this->label )
@@ -186,7 +188,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				'class' => 'wb-input',
 				'id' => $fieldId,
 			)
-		);
+		)
+		. Html::element( 'br' );
 	}
 
 	/**
