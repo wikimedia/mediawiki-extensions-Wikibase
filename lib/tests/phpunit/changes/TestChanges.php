@@ -6,7 +6,6 @@ use Wikibase\Change;
 use Wikibase\ChangeRow;
 use Wikibase\ChangesTable;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -15,6 +14,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\DiffChange;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
@@ -300,19 +300,16 @@ final class TestChanges {
 	public static function getEntities() {
 		$entityList = array();
 
+		/** @var FingerprintProvider[] $entities */
 		$entities = array(
-			Item::newEmpty(),
-			Property::newFromType( 'string' ),
+			new Item( new ItemId( 'Q112' ) ),
+			new Property( new PropertyId( 'P112' ), null, 'string' ),
 		);
 
-		/**
-		 * @var Entity $entity
-		 */
-		foreach( $entities as $entity ) {
+		foreach ( $entities as $entity ) {
 			$entityList[] = $entity;
 
-			$entity->setId( 112 );
-			$entity->setLabel( 'ja', '\u30d3\u30fc\u30eb' );
+			$entity->getFingerprint()->setLabel( 'ja', '\u30d3\u30fc\u30eb' );
 
 			$entityList[] = $entity;
 		}
