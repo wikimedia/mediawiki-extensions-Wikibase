@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1a9054f0",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-10T15:19:35Z",
+      "side": 1,
+      "message": "\"Several aliases are separated by a pipe (|) character.\" missing, see the aliases message above.",
+      "revId": "d724a596636dda4d99eb30f3a9e887de081d2ae0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9ab30496",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-10T15:19:35Z",
+      "side": 1,
+      "message": "Why? This is not used outside this class.",
+      "revId": "d724a596636dda4d99eb30f3a9e887de081d2ae0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3543e344",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-10T15:19:35Z",
+      "side": 1,
+      "message": "I\u0027m not sure if it\u0027s a good idea to use a Fingerprint object. Fingerprint stores many languages, this special page needs only one. Just store label and description as a string and the aliases as an array of strings. I think this will simplify a lot of code below. But can be done in a later patch.",
+      "revId": "d724a596636dda4d99eb30f3a9e887de081d2ae0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ba4cc0a0",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-10T15:19:35Z",
+      "side": 1,
+      "message": "Unused.",
+      "revId": "d724a596636dda4d99eb30f3a9e887de081d2ae0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_da1dfc79",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-10T15:19:35Z",
+      "side": 1,
+      "message": "Inconsistent spacing due to copy-paste, also in some other lines below.",
+      "revId": "d724a596636dda4d99eb30f3a9e887de081d2ae0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3a067024",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-10T15:19:35Z",
+      "side": 1,
+      "message": "This can\u0027t be false here, there is a method called on this object just a few lines above. That would fail but doesn\u0027t.",
+      "revId": "d724a596636dda4d99eb30f3a9e887de081d2ae0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b5205397",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-10T15:19:35Z",
+      "side": 1,
+      "message": "The amount of copy-paste in SpecialModifyTerm and SpecialSetLabelDescriptionAliases suggests a common abstract base class or a common service. Not sure if this is a good idea, just a suggestion.",
+      "revId": "d724a596636dda4d99eb30f3a9e887de081d2ae0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_75963b99",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-10T15:19:35Z",
+      "side": 1,
+      "message": "The string \"0\" should be a valid label. Same below.",
+      "revId": "d724a596636dda4d99eb30f3a9e887de081d2ae0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_35be83fb",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-10T15:19:35Z",
+      "side": 1,
+      "message": "Having an unlabeled input field is ok for the other special pages because there is only 1 field. But these 3 need labels.",
+      "revId": "d724a596636dda4d99eb30f3a9e887de081d2ae0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_35b9a329",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-10T15:19:35Z",
+      "side": 1,
+      "message": "The string \"0\" should be a valid label. Same below.",
+      "revId": "d724a596636dda4d99eb30f3a9e887de081d2ae0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_75607bcc",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-10T15:19:35Z",
+      "side": 1,
+      "message": "Is it intended that this deletes labels, descriptions and aliases if the field is empty?",
+      "revId": "d724a596636dda4d99eb30f3a9e887de081d2ae0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
