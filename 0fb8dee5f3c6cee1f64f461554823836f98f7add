@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1a5294e2",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-10T12:30:34Z",
+      "side": 1,
+      "message": "I\u0027d expect single quotes.",
+      "revId": "0fb8dee5f3c6cee1f64f461554823836f98f7add",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3a4d1040",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-10T12:30:34Z",
+      "side": 1,
+      "message": "Store iterator_to_array return value instead of calling it twice.",
+      "revId": "0fb8dee5f3c6cee1f64f461554823836f98f7add",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ba5840fe",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-10T12:30:34Z",
+      "side": 1,
+      "message": "Whole method could be replaced with array_map.",
+      "revId": "0fb8dee5f3c6cee1f64f461554823836f98f7add",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
