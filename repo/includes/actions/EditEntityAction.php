@@ -22,6 +22,7 @@ use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
+use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizer;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -74,9 +75,12 @@ abstract class EditEntityAction extends ViewEntityAction {
 			$this->getContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			new ClaimDifferenceVisualizer(
-				$propertyIdFormatter,
-				$snakDetailsFormatter,
-				$snakBreadCrumbFormatter,
+				new DifferencesSnakVisualizer(
+					$propertyIdFormatter,
+					$snakDetailsFormatter,
+					$snakBreadCrumbFormatter,
+					$languageCode
+				),
 				$languageCode
 			),
 			$wikibaseRepo->getSiteStore(),
