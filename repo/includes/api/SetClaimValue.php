@@ -21,7 +21,7 @@ class SetClaimValue extends ModifyClaim {
 	/**
 	 * @var ClaimChangeOpFactory
 	 */
-	protected $claimChangeOpFactory;
+	private $claimChangeOpFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -73,11 +73,9 @@ class SetClaimValue extends ModifyClaim {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param array $params
 	 */
-	protected function validateParameters( array $params ) {
+	private function validateParameters( array $params ) {
 		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['claim'] ) ) ) {
 			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
 		}

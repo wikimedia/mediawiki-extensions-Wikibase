@@ -24,7 +24,7 @@ class SetDescription extends ModifyTerm {
 	/**
 	 * @var FingerprintChangeOpFactory
 	 */
-	protected $termChangeOpFactory;
+	private $termChangeOpFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -58,12 +58,11 @@ class SetDescription extends ModifyTerm {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param array $params
+	 *
 	 * @return ChangeOpDescription
 	 */
-	protected function getChangeOp( array $params ) {
+	private function getChangeOp( array $params ) {
 		wfProfileIn( __METHOD__ );
 		$description = "";
 		$language = $params['language'];

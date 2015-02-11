@@ -29,7 +29,7 @@ class SetReference extends ModifyClaim {
 	/**
 	 * @var StatementChangeOpFactory
 	 */
-	protected $statementChangeOpFactory;
+	private $statementChangeOpFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -96,35 +96,29 @@ class SetReference extends ModifyClaim {
 
 	/**
 	 * Check the provided parameters
-	 *
-	 * @since 0.4
 	 */
-	protected function validateParameters( array $params ) {
+	private function validateParameters( array $params ) {
 		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['statement'] ) ) ) {
 			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
 		}
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param Statement $claim
 	 * @param string $referenceHash
 	 */
-	protected function validateReferenceHash( Statement $claim, $referenceHash ) {
+	private function validateReferenceHash( Statement $claim, $referenceHash ) {
 		if ( !$claim->getReferences()->hasReferenceHash( $referenceHash ) ) {
 			$this->dieError( "Claim does not have a reference with the given hash" , 'no-such-reference' );
 		}
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param string $arrayParam
 	 *
 	 * @return array
 	 */
-	protected function getArrayFromParam( $arrayParam ) {
+	private function getArrayFromParam( $arrayParam ) {
 		$rawArray = FormatJson::decode( $arrayParam, true );
 
 		if ( !is_array( $rawArray ) || !count( $rawArray ) ) {
@@ -135,8 +129,6 @@ class SetReference extends ModifyClaim {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @param array $rawSnaks array of snaks
 	 * @param array $snakOrder array of property ids the snaks are supposed to be ordered by.
 	 *
@@ -144,7 +136,7 @@ class SetReference extends ModifyClaim {
 	 *
 	 * @return SnakList
 	 */
-	protected function getSnaks( array $rawSnaks, array $snakOrder = array() ) {
+	private function getSnaks( array $rawSnaks, array $snakOrder = array() ) {
 		$snaks = new SnakList();
 
 		$serializerFactory = new SerializerFactory();
@@ -185,13 +177,11 @@ class SetReference extends ModifyClaim {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param Reference $reference
 	 *
 	 * @return ChangeOpReference
 	 */
-	protected function getChangeOp( Reference $reference ) {
+	private function getChangeOp( Reference $reference ) {
 		$params = $this->extractRequestParams();
 
 		$claimGuid = $params['statement'];
