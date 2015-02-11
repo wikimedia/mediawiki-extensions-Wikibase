@@ -30,13 +30,6 @@ use Wikibase\DataModel\Term\TermList;
 abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * Returns several more or less complex claims
-	 *
-	 * @return Claim[]
-	 */
-	public abstract function makeClaims();
-
-	/**
 	 * @since 0.1
 	 *
 	 * @return Entity
