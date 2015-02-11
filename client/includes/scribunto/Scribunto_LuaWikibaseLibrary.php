@@ -9,7 +9,6 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
-use Wikibase\Utils;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
@@ -75,7 +74,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getPropertyDataTypeLookup(),
 			$this->getLanguageFallbackChain(),
 			$this->getLanguage(),
-			Utils::getLanguageCodes()
+			$wikibaseClient->getTermsLanguages()
 		);
 	}
 

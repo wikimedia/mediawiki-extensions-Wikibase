@@ -25,12 +25,19 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$termsLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
+		$termsLanguages->expects( $this->any() )
+			->method( 'getLanguages' )
+			->will( $this->returnValue( array( 'acceptedlanguage' ) ) );
+
 		return new SpecialEntitiesWithoutPage(
 			'EntitiesWithoutLabel',
 			Term::TYPE_LABEL,
 			'wikibase-entitieswithoutlabel-legend',
 			$wikibaseRepo->getStore()->newEntityPerPage(),
-			$wikibaseRepo->getEntityFactory()
+			$wikibaseRepo->getEntityFactory(),
+			$termsLanguages
 		);
 	}
 
@@ -56,8 +63,8 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 
-		list( $output, ) = $this->executeSpecialPage( 'en' );
-		$this->assertContains( 'value="en"', $output );
+		list( $output, ) = $this->executeSpecialPage( 'acceptedlanguage' );
+		$this->assertContains( 'value="acceptedlanguage"', $output );
 	}
 
 }

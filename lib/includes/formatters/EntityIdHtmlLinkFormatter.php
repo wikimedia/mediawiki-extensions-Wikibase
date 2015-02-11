@@ -9,7 +9,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LabelLookup;
-use Wikibase\Utils;
 
 /**
  * Formats entity IDs by generating an HTML link to the corresponding page title.
@@ -23,6 +22,11 @@ use Wikibase\Utils;
 class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	/**
+	 * @var ContentLanguages
+	 */
+	private $termsLanguages;
+
+	/**
 	 * @var EntityTitleLookup
 	 */
 	protected $entityTitleLookup;
@@ -30,11 +34,13 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	public function __construct(
 		FormatterOptions $options,
 		LabelLookup $labelLookup,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleLookup $entityTitleLookup,
+		ContentLanguages $termsLanguages
 	) {
 		parent::__construct( $options, $labelLookup );
 
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->termsLanguages = $termsLanguages;
 	}
 
 	/**
@@ -121,8 +127,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 * @return string
 	 */
 	private function getLanguageName( $languageCode, $inLanguage ) {
-		//TODO: inject language name lookup!
-		return Utils::fetchLanguageName( $languageCode, $inLanguage );
+		return $this->termsLanguages->getName( $languageCode, $inLanguage );
 	}
 
 	private function getHtmlForFallbackIndicator( TermFallback $term ) {

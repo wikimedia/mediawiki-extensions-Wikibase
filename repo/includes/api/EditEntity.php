@@ -27,7 +27,6 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
-use Wikibase\Utils;
 
 /**
  * Derived class for API modules modifying a single entity identified by id xor a combination of
@@ -74,7 +73,7 @@ class EditEntity extends ModifyEntity {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$this->validLanguageCodes = array_flip( Utils::getLanguageCodes() );
+		$this->validLanguageCodes = WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages();
 
 		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
@@ -805,7 +804,9 @@ class EditEntity extends ModifyEntity {
 					'inconsistent-language' );
 			}
 		}
-		if ( isset( $this->validLanguageCodes ) && !array_key_exists( $arg['language'], $this->validLanguageCodes ) ) {
+
+		// FIXME ContentLanguages should have a method hasLanguage
+		if ( isset( $this->validLanguageCodes ) && !in_array( $arg['language'], $this->validLanguageCodes ) ) {
 			$this->dieError(
 				"unknown language: {$arg['language']}",
 				'not-recognized-language' );

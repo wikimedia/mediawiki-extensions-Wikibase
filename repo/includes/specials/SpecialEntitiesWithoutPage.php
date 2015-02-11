@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Wikibase\EntityFactory;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\Store\EntityPerPage;
-use Wikibase\Utils;
 use XmlSelect;
 
 /**
@@ -53,8 +53,18 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 */
 	private $entityFactory;
 
-	public function __construct( $name,  $termType, $legendMsg,
-		EntityPerPage $entityPerPage, EntityFactory $entityFactory
+	/**
+	 * @var ContentLanguages
+	 */
+	private $termsLanguages;
+
+	public function __construct(
+		$name,
+		$termType,
+		$legendMsg,
+		EntityPerPage $entityPerPage,
+		EntityFactory $entityFactory,
+		ContentLanguages $termsLanguages
 	) {
 		parent::__construct( $name );
 
@@ -62,6 +72,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$this->legendMsg = $legendMsg;
 		$this->entityPerPage = $entityPerPage;
 		$this->entityFactory = $entityFactory;
+		$this->termsLanguages = $termsLanguages;
 	}
 
 	/**
@@ -101,7 +112,8 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		}
 
 		$this->language = $request->getText( 'language', $this->language );
-		if ( $this->language !== '' && !in_array( $this->language, Utils::getLanguageCodes() ) ) {
+		// FIXME: ContentLanguages should have a hasLanguage method
+		if ( $this->language !== '' && !in_array( $this->language, $this->termsLanguages->getLanguages() ) ) {
 			$this->showErrorHTML( $this->msg( 'wikibase-entitieswithoutlabel-invalid-language', $this->language )->parse() );
 			$this->language = '';
 		}

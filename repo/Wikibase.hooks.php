@@ -1009,7 +1009,8 @@ final class RepoHooks {
 				$out->getLanguage(),
 				WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 				WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup(),
-				$userLanguageLookup
+				$userLanguageLookup,
+				WikibaseRepo::getDefaultInstance()->getTermsLanguages()
 			);
 
 			$html = $injector->inject( $html, array( $expander, 'getHtmlForPlaceholder' ) );
