@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fa246fc2",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinkview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-11T13:45:22Z",
+      "side": 1,
+      "message": "Please add a FIXME or something similar, describing that this is a workaround and what it does.",
+      "revId": "003645430119f33812b29f6f117b741176c0d318",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
