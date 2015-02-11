@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6db0a2d8",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-11T22:12:59Z",
+      "side": 1,
+      "message": "Please add a comment explaining this.",
+      "parentUuid": "6e7c4fa4_d5170fa7",
+      "revId": "ccf86aa4be9f3c0b8277ed10dd6fde36fb85de77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d5014f72",
         "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
         "patchSetId": 2
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "Yeah :/ But once one calls getUserLang the parser cache will be split up (and also we want to make our Lua module able to split up the cache over here).",
       "parentUuid": "6e7c4fa4_d5014f72",
+      "revId": "ccf86aa4be9f3c0b8277ed10dd6fde36fb85de77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4dada67f",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-11T22:12:59Z",
+      "side": 1,
+      "message": "Oh, I see - you want to defer that call, because it has side effects.\nPlease document this somewhere where anyone who would want to change this would see!",
+      "parentUuid": "6e7c4fa4_552bffda",
       "revId": "ccf86aa4be9f3c0b8277ed10dd6fde36fb85de77",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
