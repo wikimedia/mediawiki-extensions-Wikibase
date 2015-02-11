@@ -44,13 +44,13 @@ abstract class ModifyTerm extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 * @see ApiWikibase::getRequiredPermissions
 	 *
 	 * @param Entity $entity
 	 * @param array $params
 	 *
-	 * @throws \InvalidArgumentException
-	 * @return array|\Status
+	 * @throws InvalidArgumentException
+	 * @return string[]
 	 */
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
