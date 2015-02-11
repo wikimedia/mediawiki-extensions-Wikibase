@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\EntityPatcher;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Fixtures\EntityOfUnknownType;
 
 /**
@@ -32,8 +33,7 @@ class EntityPatcherTest extends \PHPUnit_Framework_TestCase {
 	public function itemProvider() {
 		$argLists = array();
 
-		$nonEmptyItem = new Item();
-		$nonEmptyItem->setId( 2 );
+		$nonEmptyItem = new Item( new ItemId( 'Q2' ) );
 
 		$argLists[] = array( new Item() );
 		$argLists[] = array( $nonEmptyItem );
