@@ -46,7 +46,17 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
 		$urlSchemes = array( 'http', 'https', 'ftp', 'mailto' );
 
-		$builders = new ValidatorBuilders( $entityLookup, $entityIdParser, $urlSchemes );
+		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
+		$contentLanguages->expects( $this->any() )
+			->method( 'getLanguages' )
+			->will( $this->returnValue( array( 'contentlanguage' ) ) );
+
+		$builders = new ValidatorBuilders(
+			$entityLookup,
+			$entityIdParser,
+			$urlSchemes,
+			$contentLanguages
+		);
 		$validatorFactory = new BuilderBasedDataTypeValidatorFactory( $builders );
 
 		return $validatorFactory;
@@ -178,8 +188,8 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'quantity', QuantityValue::newFromNumber( '-11.234', '1', '-10', '-12' ), true, 'decimal strings' ),
 
 			//monolingual text
-			array( 'monolingualtext', new MonolingualTextValue( 'en', 'text' ), true, 'Simple value' ),
-			array( 'monolingualtext', new MonolingualTextValue( 'grrr', 'text' ), false, 'Not a valid language' ),
+			array( 'monolingualtext', new MonolingualTextValue( 'contentlanguage', 'text' ), true, 'Simple value' ),
+			array( 'monolingualtext', new MonolingualTextValue( 'en', 'text' ), false, 'Not a valid language' ),
 		);
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {

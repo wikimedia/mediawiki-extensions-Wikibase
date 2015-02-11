@@ -7,8 +7,8 @@ use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Utils;
 use Wikibase\Validators\AlternativeValidator;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataFieldValidator;
@@ -49,15 +49,24 @@ class ValidatorBuilders {
 	private $urlSchemes;
 
 	/**
+	 *
+	 * @var ContentLanguages
+	 */
+	private $contentLanguages;
+
+	/**
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
+	 * @param ContentLanguages $contentLanguages
 	 */
 	public function __construct(
 		EntityLookup $lookup,
 		EntityIdParser $idParser,
-		array $urlSchemes
+		array $urlSchemes,
+		ContentLanguages $contentLanguages
 	) {
+		$this->contentLanguages = $contentLanguages;
 		$this->entityIdParser = $idParser;
 		$this->entityLookup = $lookup;
 		$this->urlSchemes = $urlSchemes;
@@ -182,7 +191,7 @@ class ValidatorBuilders {
 
 		$validators[] = new DataFieldValidator(
 			'language',
-			new MembershipValidator( Utils::getLanguageCodes() )
+			new MembershipValidator( $this->contentLanguages->getLanguages() )
 		);
 
 		$topValidator = new DataValueValidator(

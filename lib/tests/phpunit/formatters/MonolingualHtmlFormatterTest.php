@@ -24,7 +24,12 @@ class MonolingualHtmlFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider monolingualHtmlFormatProvider
 	 */
 	public function testFormat( $value, $options, $pattern, $not = '' ) {
-		$formatter = new MonolingualHtmlFormatter( $options );
+		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
+		$contentLanguages->expects( $this->any() )
+			->method( 'getName' )
+			->will( $this->returnValue( 'Deutsch' ));
+
+		$formatter = new MonolingualHtmlFormatter( $options, $contentLanguages );
 
 		$text = $formatter->format( $value );
 
@@ -43,7 +48,7 @@ class MonolingualHtmlFormatterTest extends \PHPUnit_Framework_TestCase {
 			'formatting' => array(
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
 				$options,
-				'@^<span lang="de".*?>Hallo Welt<\/span>.*\((German|Deutsch)\).*$@'
+				'@^<span lang="de".*?>Hallo Welt<\/span>.*\Deutsch.*$@'
 			),
 			'html/wikitext escaping' => array(
 				new MonolingualTextValue( 'de', '[[Hallo&Welt]]' ),
