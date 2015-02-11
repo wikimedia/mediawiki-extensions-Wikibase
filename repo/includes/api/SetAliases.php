@@ -47,13 +47,13 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 * @see ApiWikibase::getRequiredPermissions
 	 *
 	 * @param Entity $entity
 	 * @param array $params
 	 *
-	 * @throws \InvalidArgumentException
-	 * @return array|\Status
+	 * @throws InvalidArgumentException
+	 * @return string[]
 	 */
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
@@ -69,7 +69,7 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::validateParameters()
+	 * @see ModifyEntity::validateParameters
 	 */
 	protected function validateParameters( array $params ) {
 		parent::validateParameters( $params );
@@ -80,14 +80,14 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiModifyEntity::createEntity()
+	 * @see ModifyEntity::createEntity
 	 */
 	protected function createEntity( array $params ) {
 		$this->dieError( 'Could not find an existing entity' , 'no-such-entity' );
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
+	 * @see ModifyEntity::modifyEntity
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
 		wfProfileIn( __METHOD__ );
