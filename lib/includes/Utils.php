@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Language;
+use MWException;
 
 /**
  * Utility functions for Wikibase.
@@ -23,13 +24,18 @@ final class Utils {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array
+	 * @throws MWException if the list can not be obtained.
+	 * @return string[]
 	 */
 	public static function getLanguageCodes() {
 		static $languageCodes = null;
 
-		if ( is_null( $languageCodes ) ) {
+		if ( $languageCodes === null ) {
 			$languageCodes = array_keys( Language::fetchLanguageNames() );
+
+			if ( empty( $languageCodes ) ) {
+				throw new MWException( 'List of language names is empty' );
+			}
 		}
 
 		return $languageCodes;
