@@ -103,7 +103,7 @@ class EntityViewPlaceholderExpander {
 	/**
 	 * Returns a list of languages desired by the user in addition to the current interface language.
 	 *
-	 * @see UserLanguages
+	 * @see UserLanguageLookup
 	 *
 	 * @return string[]
 	 */
@@ -211,7 +211,7 @@ class EntityViewPlaceholderExpander {
 	/**
 	 * Generates HTML of the term box, to be injected into the entity page.
 	 *
-	 * @param Entityid $entityId
+	 * @param EntityId $entityId
 	 * @param int $revisionId
 	 *
 	 * @throws InvalidArgumentException
@@ -245,7 +245,7 @@ class EntityViewPlaceholderExpander {
 			$entity->getFingerprint(),
 			$languages,
 			$this->targetPage,
-			$this->user->getOption( 'wikibase-entitytermsvi-showEntitytermslistview' )
+			$this->user->getOption( 'wikibase-entitytermsview-showEntitytermslistview' )
 		);
 
 		return $html;
