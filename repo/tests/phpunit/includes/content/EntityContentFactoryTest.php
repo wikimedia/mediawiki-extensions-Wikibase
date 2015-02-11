@@ -220,7 +220,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	public function testGetPermissionStatusForEntity( $action, $permissions, $id, $expectations ) {
 		global $wgUser;
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 
 		if ( $id ) {
 			// "exists"
@@ -258,7 +258,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	public function newFromEntityProvider() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$property = Property::newFromType( 'string' );
 
 		return array(

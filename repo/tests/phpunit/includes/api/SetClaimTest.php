@@ -129,7 +129,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$statements = $this->getStatements();
 
 		foreach ( $statements as $statement ) {
-			$item = Item::newEmpty();
+			$item = new Item();
 			$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
 			$itemId = $item->getId();
 
@@ -166,7 +166,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	public function getInvalidCases() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
 		$q17 = $item->getId();
 
@@ -174,7 +174,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$store->saveEntity( $property, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
 		$p11 = $property->getId();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
 		$qx = $item->getId();
 		$store->deleteEntity( $qx, 'setclaimtest', $GLOBALS['wgUser'] );
@@ -247,7 +247,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	public function testSetClaimAtIndex() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
 		$itemId = $item->getId();
@@ -394,7 +394,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		// Initialize item content with empty claims:
-		$item = Item::newEmpty();
+		$item = new Item();
 		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
 
 		// Generate a single claim:
@@ -425,7 +425,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$property = $store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
 
 		// create item
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item = $store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
 
 		// add a claim

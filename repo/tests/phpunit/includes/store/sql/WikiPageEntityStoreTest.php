@@ -86,7 +86,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getSimpleEntities() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->setLabel( 'en', 'Item' );
 		$item->setDescription( 'en', 'Item description' );
 
@@ -158,7 +158,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideSaveEntityError() {
-		$firstItem = Item::newEmpty();
+		$firstItem = new Item();
 		$firstItem->setLabel( 'en', 'one' );
 
 		$secondItem = new Item( new ItemId( 'Q768476834' ) );
@@ -191,7 +191,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// setup target item
-		$one = Item::newEmpty();
+		$one = new Item();
 		$one->setLabel( 'en', 'one' );
 		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
 
@@ -237,7 +237,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$store->registerWatcher( $watcher );
 
 		// create one
-		$one = Item::newEmpty();
+		$one = new Item();
 		$one->setLabel( 'en', 'one' );
 
 		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
@@ -304,7 +304,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$anonUser = User::newFromId(0);
 		$anonUser->setName( '127.0.0.1' );
 		$user = User::newFromName( "EditEntityTestUser" );
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		// check for default values, last revision by anon --------------------
 		$item->setLabel( 'en', "Test Anon default" );
@@ -364,7 +364,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 			$user->addToDatabase();
 		}
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$store->saveEntity( $item, 'testing', $user, EDIT_NEW );
 
 		$itemId = $item->getId();
@@ -377,7 +377,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	protected function newEntity() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		return $item;
 	}
 

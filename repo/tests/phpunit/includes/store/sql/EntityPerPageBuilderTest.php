@@ -107,7 +107,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		foreach( $labels as $label ) {
-			$item = Item::newEmpty();
+			$item = new Item();
 			$item->setLabel( 'en', $prefix . $label );
 			$rev = $store->saveEntity( $item, "added an item", $user, EDIT_NEW );
 			$items[] = $rev->getEntity();
@@ -115,7 +115,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 
 		if ( $this->itemSupportsRedirect() ) {
 			// add another berlin (so we have a valid id), then turn it into a redirect
-			$item = Item::newEmpty();
+			$item = new Item();
 			$item->setLabel( 'en', $prefix . 'Berlin2' );
 			$rev = $store->saveEntity( $item, "added an item", $user, EDIT_NEW );
 			$items[] = $rev->getEntity();

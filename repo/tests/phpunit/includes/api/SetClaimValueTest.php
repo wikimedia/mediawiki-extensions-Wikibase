@@ -89,7 +89,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 * @return Entity[]
 	 */
 	protected function getEntities( EntityId $propertyId ) {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		return array(
 			$this->addStatementsAndSave( $item, $propertyId ),

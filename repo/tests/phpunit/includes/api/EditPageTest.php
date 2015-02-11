@@ -32,7 +32,7 @@ class EditPageTest extends WikibaseApiTestCase {
 	public function testEditItemDirectly() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$item = Item::newEmpty(); //@todo: do this with all kinds of entities.
+		$item = new Item(); //@todo: do this with all kinds of entities.
 		$item->setLabel( "en", "EditPageTest" );
 		$store->saveEntity( $item, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
 

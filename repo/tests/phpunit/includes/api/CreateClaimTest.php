@@ -28,7 +28,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 	protected static function getNewItemAndProperty() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$store->saveEntity( $item, 'test', $GLOBALS['wgUser'], EDIT_NEW );
 
 		$property = Property::newFromType( 'commonsMedia' );

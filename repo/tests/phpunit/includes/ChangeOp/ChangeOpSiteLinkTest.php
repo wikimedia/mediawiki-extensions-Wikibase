@@ -69,7 +69,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			$plSiteLink
 		);
 
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		foreach ( $existingSiteLinks as $siteLink ) {
 			$item->addSiteLink( $siteLink );
@@ -160,7 +160,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			$plSiteLink
 		);
 
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		foreach ( $existingSiteLinks as $siteLink ) {
 			$item->addSiteLink( $siteLink );
@@ -191,7 +191,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	public function summaryTestProvider() {
 		$this->applySettings();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 		$item->getSiteLinkList()->addNewSiteLink( 'ruwiki', 'Берлин', array( new ItemId( 'Q42' ) ) );
 

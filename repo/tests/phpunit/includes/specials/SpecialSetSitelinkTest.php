@@ -109,11 +109,11 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 	private function createItems() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$badge = Item::newEmpty();
+		$badge = new Item();
 		$badge->setLabel( 'en', 'Good article' );
 		$store->saveEntity( $badge, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->addSiteLink( new SiteLink( 'dewiki', 'Wikidata', array( $badge->getId() ) ) );
 		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 

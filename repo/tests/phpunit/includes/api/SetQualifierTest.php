@@ -90,7 +90,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		if ( !$item ) {
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-			$newItem = Item::newEmpty();
+			$newItem = new Item();
 			$store->saveEntity( $newItem, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 			$prop = Property::newFromType( 'string' );

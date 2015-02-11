@@ -49,8 +49,8 @@ class MergeChangeOpsFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewMergeOps() {
-		$fromItem = Item::newEmpty();
-		$toItem = Item::newEmpty();
+		$fromItem = new Item();
+		$toItem = new Item();
 
 		$op = $this->newChangeOpFactory()->newMergeOps( $fromItem, $toItem );
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOpsMerge', $op );

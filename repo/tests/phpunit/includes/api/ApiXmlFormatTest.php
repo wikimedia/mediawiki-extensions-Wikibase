@@ -158,7 +158,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$entityRevision = $store->saveEntity( $property, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
 		$propertyId = $entityRevision->getEntity()->getId();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$entityRevision = $store->saveEntity( $item, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
 		$item = $entityRevision->getEntity();
 

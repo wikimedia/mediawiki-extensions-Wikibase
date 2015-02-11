@@ -41,11 +41,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			return $entities;
 		}
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entities['empty'] = $entity;
 
 
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entities['terms'] = $entity;
 		$entity->setFingerprint( self::newTestFingerprint() );
 

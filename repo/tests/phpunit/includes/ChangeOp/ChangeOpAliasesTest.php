@@ -125,22 +125,22 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 	 * @param ChangeOpAliases $changeOpAliases
 	 */
 	public function testValidate( ChangeOpAliases $changeOpAliases ) {
-		$entity = Item::newEmpty();
+		$entity = new Item();
 
 		$result = $changeOpAliases->validate( $entity );
 		$this->assertFalse( $result->isValid() );
 	}
 
 	public function testValidateLeavesEntityUntouched() {
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$validatorFactory = $this->getTermValidatorFactory();
 		$changeOpAliases = new ChangeOpAliases( 'de', array( 'test' ), 'set', $validatorFactory );
 		$changeOpAliases->validate( $entity );
-		$this->assertTrue( $entity->equals( Item::newEmpty() ) );
+		$this->assertTrue( $entity->equals( new Item() ) );
 	}
 
 	public function testApplyWithInvalidAction() {
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$validatorFactory = $this->getTermValidatorFactory();
 
 		$changeOpAliases = new ChangeOpAliases( 'en', array( 'test' ), 'invalidAction', $validatorFactory );

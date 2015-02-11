@@ -148,7 +148,7 @@ class importInterlang extends Maintenance {
 	 * @return bool true if the item was created, false otherwise
 	 */
 	private function createItem( array $titles ) {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$fingerprint = $item->getFingerprint();
 		$siteLinks = $item->getSiteLinkList();
 

@@ -35,7 +35,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 		$argLists[] = array( new Reference() );
 		$argLists[] = array( new Claim( new PropertyNoValueSnak( 42 ) ) );
 
-		$argLists[] = array( Item::newEmpty(), new SerializationOptions() );
+		$argLists[] = array( new Item(), new SerializationOptions() );
 
 		return $argLists;
 	}

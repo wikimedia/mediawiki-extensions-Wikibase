@@ -56,7 +56,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetEntity() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->setLabel( 'en', 'foo' );
 
 		// set up a data Item
@@ -94,7 +94,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetEntityRevision() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->setLabel( 'en', 'foo' );
 
 		// set up a data Item
@@ -136,7 +136,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetItemIdForLink() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		// test item lookup
@@ -469,7 +469,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function provideSaveEntity() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->setLabel( 'en', 'one' );
 
 		$secondItem = new Item( new ItemId( 'Q1' ) );
@@ -638,7 +638,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	public function testUpdateWatchlist() {
 		$user = User::newFromName( "WikiPageEntityStoreTestUser2" );
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$this->repo->saveEntity( $item, 'testing', $user, EDIT_NEW );
 		$itemId = $item->getId();
 
@@ -654,7 +654,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$user2 = User::newFromName( "WikiPageEntityStoreTestUserWasLastToEdit2" );
 
 		// initial revision
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->setLabel( 'en', 'one' );
 		$rev1 = $this->repo->saveEntity( $item, 'testing 1', $user1, EDIT_NEW );
 		$itemId = $item->getId();
