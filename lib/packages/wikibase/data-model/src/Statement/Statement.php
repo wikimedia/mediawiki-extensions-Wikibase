@@ -47,7 +47,9 @@ class Statement extends Claim {
 	 * @param ReferenceList|null $references
 	 */
 	public function __construct( Claim $claim, ReferenceList $references = null ) {
-		$this->setClaim( $claim );
+		$this->mainSnak = $claim->getMainSnak();
+		$this->qualifiers = $claim->getQualifiers();
+		$this->guid = $claim->getGuid();
 		$this->references = $references ?: new ReferenceList();
 	}
 
@@ -178,26 +180,6 @@ class Statement extends Claim {
 			&& $this->claimFieldsEqual( $target )
 			&& $this->rank === $target->getRank()
 			&& $this->references->equals( $target->references );
-	}
-
-	/**
-	 * @since 1.1
-	 *
-	 * @param Claim $claim
-	 */
-	public function setClaim( Claim $claim ) {
-		$this->mainSnak = $claim->getMainSnak();
-		$this->qualifiers = $claim->getQualifiers();
-		$this->guid = $claim->getGuid();
-	}
-
-	/**
-	 * @since 1.0
-	 *
-	 * @return Claim
-	 */
-	public function getClaim() {
-		return $this;
 	}
 
 }
