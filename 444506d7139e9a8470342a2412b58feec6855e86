@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_050c6c44",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-11T16:23:30Z",
+      "side": 1,
+      "message": "I\u0027m afraid the default is null and not an empty string.\n\nAlso, why does this load the label from the internal fingerprint if it\u0027s *NOT* an empty string? It was checking for false before, now it does an inverted check for true. Confusing. Oddly this doesn\u0027t cause an issue when playing around with the special page. It seems this code doesn\u0027t do anything and can be removed (as I did in my follow-up).",
+      "revId": "444506d7139e9a8470342a2412b58feec6855e86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a019e67f",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-11T16:23:30Z",
+      "side": 1,
+      "message": "I favor \"!\u003d\u003d null\" over \"is_null\", but that\u0027s a matter of taste.",
+      "revId": "444506d7139e9a8470342a2412b58feec6855e86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
