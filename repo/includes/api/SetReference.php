@@ -230,9 +230,7 @@ class SetReference extends ModifyClaim {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages()
-	 *
-	 * @return array
+	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
 		return array(
@@ -244,4 +242,5 @@ class SetReference extends ModifyClaim {
 				=> 'apihelp-wbsetreference-example-3',
 		);
 	}
+
 }
