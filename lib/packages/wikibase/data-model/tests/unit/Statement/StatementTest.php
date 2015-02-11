@@ -331,41 +331,6 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $statement->equals( $differentStatement ) );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testSetClaim( Statement $statement ) {
-		$mainSnak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
-		$qualifiers = new SnakList( array( new PropertyNoValueSnak( 23 ) ) );
-		$claim = new Claim( $mainSnak, $qualifiers );
-
-		$statement->setClaim( $claim );
-
-		$this->assertEquals( $mainSnak, $statement->getClaim()->getMainSnak() );
-		$this->assertEquals( $mainSnak, $statement->getMainSnak() );
-		$this->assertEquals( $qualifiers, $statement->getClaim()->getQualifiers() );
-		$this->assertEquals( $qualifiers, $statement->getQualifiers() );
-	}
-
-	public function testGetClaim() {
-		$qualifiers = new SnakList( array( new PropertyNoValueSnak( 23 ) ) );
-
-		$statement = new Statement(
-			new Claim( new PropertyNoValueSnak( 42 ), $qualifiers ),
-			new ReferenceList( array(
-				new PropertyNoValueSnak( 1337 ),
-			) )
-		);
-		$statement->setGuid( '~=[,,_,,]:3' );
-
-		$claim = $statement->getClaim();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claim', $claim );
-
-		$this->assertEquals( '~=[,,_,,]:3', $claim->getGuid() );
-		$this->assertEquals( new PropertyNoValueSnak( 42 ), $claim->getMainSnak() );
-		$this->assertSame( $qualifiers, $claim->getQualifiers() );
-	}
-
 	public function testEquals() {
 		$statement = $this->newStatement();
 		$target = $this->newStatement();
@@ -384,7 +349,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$statement = $this->newStatement();
 
 		$statementWithoutQualifiers = $this->newStatement();
-		$statementWithoutQualifiers->getClaim()->setQualifiers( new SnakList() );
+		$statementWithoutQualifiers->setQualifiers( new SnakList() );
 
 		$statementWithoutReferences = $this->newStatement();
 		$statementWithoutReferences->setReferences( new ReferenceList() );
@@ -393,9 +358,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$statementWithPreferredRank->setRank( Statement::RANK_PREFERRED );
 
 		$statementMainSnakNotEqual = $this->newStatement();
-		$statementMainSnakNotEqual->setClaim(
-			new Claim( new PropertyNoValueSnak( 9000 ) )
-		);
+		$statementMainSnakNotEqual->setMainSnak( new PropertyNoValueSnak( 9000 ) );
 
 		return array(
 			array( $statement, $statementWithoutQualifiers, 'qualifiers not equal' ),
