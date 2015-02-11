@@ -29,17 +29,17 @@ class FormatSnakValue extends ApiWikibase {
 	/**
 	 * @var null|OutputFormatValueFormatterFactory
 	 */
-	protected $formatterFactory = null;
+	private $formatterFactory = null;
 
 	/**
 	 * @var null|DataValueFactory
 	 */
-	protected $valueFactory = null;
+	private $valueFactory = null;
 
 	/**
 	 * @return OutputFormatValueFormatterFactory
 	 */
-	protected function getFormatterFactory() {
+	private function getFormatterFactory() {
 		if ( $this->formatterFactory === null ) {
 			$this->formatterFactory = WikibaseRepo::getDefaultInstance()->getValueFormatterFactory();
 		}
@@ -50,7 +50,7 @@ class FormatSnakValue extends ApiWikibase {
 	/**
 	 * @return DataValueFactory
 	 */
-	protected function getValueFactory() {
+	private function getValueFactory() {
 		if ( $this->valueFactory === null ) {
 			$this->valueFactory = WikibaseRepo::getDefaultInstance()->getDataValueFactory();
 		}
@@ -105,15 +105,13 @@ class FormatSnakValue extends ApiWikibase {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @param string $json A JSON-encoded DataValue
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
 	 * @return DataValue
 	 */
-	protected function decodeDataValue( $json ) {
+	private function decodeDataValue( $json ) {
 		$data = \FormatJson::decode( $json, true );
 
 		if ( !is_array( $data ) ) {
@@ -131,13 +129,11 @@ class FormatSnakValue extends ApiWikibase {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @param string $optionsParam
 	 *
 	 * @return FormatterOptions
 	 */
-	protected function getOptionsObject( $optionsParam ) {
+	private function getOptionsObject( $optionsParam ) {
 		$formatterOptions = new FormatterOptions();
 		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->getLanguage()->getCode() );
 
@@ -156,9 +152,10 @@ class FormatSnakValue extends ApiWikibase {
 	 * Returns the data type ID specified by the parameters.
 	 *
 	 * @param array $params
+	 *
 	 * @return string|null
 	 */
-	protected function getDataTypeId( array $params ) {
+	private function getDataTypeId( array $params ) {
 		//TODO: could be looked up based on a property ID
 		return $params['datatype'];
 	}

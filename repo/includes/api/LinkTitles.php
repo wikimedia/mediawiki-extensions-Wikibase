@@ -31,11 +31,9 @@ class LinkTitles extends ApiWikibase {
 	private $siteLinkTargetProvider;
 
 	/**
-	 * @since 0.5
-	 *
-	 * @var array
+	 * @var string[]
 	 */
-	protected $siteLinkGroups;
+	private $siteLinkGroups;
 
 	/**
 	 * @param ApiMain $mainModule

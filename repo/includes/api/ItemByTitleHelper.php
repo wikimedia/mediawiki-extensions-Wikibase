@@ -19,25 +19,26 @@ use Wikibase\StringNormalizer;
  * @author Adam Shorland
  */
 class ItemByTitleHelper {
+
 	/**
 	 * @var ResultBuilder
 	 */
-	protected $resultBuilder;
+	private $resultBuilder;
 
 	/**
 	 * @var SiteLinkCache
 	 */
-	protected $siteLinkCache;
+	private $siteLinkCache;
 
 	/**
 	 * @var SiteStore
 	 */
-	protected $siteStore;
+	private $siteStore;
 
 	/**
 	 * @var StringNormalizer
 	 */
-	protected $stringNormalizer;
+	private $stringNormalizer;
 
 	/**
 	 * @param ResultBuilder $resultBuilder
