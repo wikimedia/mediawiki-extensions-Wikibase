@@ -22,7 +22,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @author Daniel Kinzler
  * @author H. Snater < mediawiki@snater.com >
  */
-class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparable {
+class Claims extends ArrayObject implements Hashable, Comparable {
 
 	/**
 	 * @see GenericArrayObject::__construct
@@ -82,8 +82,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::addClaim
-	 *
 	 * @since 0.1
 	 *
 	 * @param Claim $claim
@@ -122,8 +120,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::hasClaim
-	 *
 	 * @since 0.1
 	 *
 	 * @param Claim $claim
@@ -142,8 +138,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::indexOf
-	 *
 	 * @since 0.5
 	 *
 	 * @param Claim $claim
@@ -168,8 +162,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::removeClaim
-	 *
 	 * @since 0.1
 	 *
 	 * @param Claim $claim
@@ -189,8 +181,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::hasClaimWithGuid
-	 *
 	 * @since 0.3
 	 *
 	 * @param string $claimGuid
@@ -202,8 +192,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::removeClaimWithGuid
-	 *
 	 * @since 0.3
 	 *
 	 * @param string $claimGuid
@@ -215,8 +203,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::getClaimWithGuid
-	 *
 	 * @since 0.3
 	 *
 	 * @param string $claimGuid

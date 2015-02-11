@@ -354,8 +354,6 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	}
 
 	/**
-	 * @see ClaimListAccess::addClaim
-	 *
 	 * @since 0.3
 	 * @deprecated since 1.0
 	 *
