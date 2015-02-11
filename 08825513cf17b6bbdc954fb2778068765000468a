@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_40625238",
+        "filename": "repo/includes/Diff/ClaimDifferenceVisualizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-02-11T17:28:59Z",
+      "side": 1,
+      "message": "According to the interface this does not accept null, which seems can happen here. Same for the other two changed calls to this method below.",
+      "revId": "08825513cf17b6bbdc954fb2778068765000468a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
