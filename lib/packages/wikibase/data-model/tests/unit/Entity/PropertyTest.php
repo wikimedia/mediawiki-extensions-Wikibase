@@ -28,15 +28,6 @@ use Wikibase\DataModel\Term\Fingerprint;
 class PropertyTest extends EntityTest {
 
 	/**
-	 * Returns no claims
-	 *
-	 * @return Claim[]
-	 */
-	public function makeClaims() {
-		return array();
-	}
-
-	/**
 	 * @see EntityTest::getNewEmpty
 	 *
 	 * @since 0.1
