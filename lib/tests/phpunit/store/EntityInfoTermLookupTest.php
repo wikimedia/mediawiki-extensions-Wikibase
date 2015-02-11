@@ -41,7 +41,8 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 		return array(
 			array(
 				array( 'en' => 'New York City', 'es' => 'Nueva York' ),
-				new ItemId( 'Q116' )
+				new ItemId( 'Q116' ),
+				array( 'en', 'es' )
 			),
 			array(
 				array( 'es' => 'Nueva York' ),
@@ -50,7 +51,8 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 			),
 			array(
 				array( 'de' => 'Berlin' ),
-				new ItemId( 'Q117' )
+				new ItemId( 'Q117' ),
+				array( 'de' )
 			)
 		);
 	}
@@ -58,7 +60,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getLabelsProvider
 	 */
-	public function testGetLabels( $expected, EntityId $entityId, $languages = null ) {
+	public function testGetLabels( $expected, EntityId $entityId, $languages ) {
 		$termLookup = $this->getEntityInfoTermLookup();
 
 		$labels = $termLookup->getLabels( $entityId, $languages );
@@ -69,7 +71,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 		$termLookup = $this->getEntityInfoTermLookup();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
-		$termLookup->getLabels( new ItemId( 'Q90000' ) );
+		$termLookup->getLabels( new ItemId( 'Q90000' ), array( 'x' ) );
 	}
 
 	public function testGetDescription() {
@@ -102,7 +104,8 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
 					'en' => 'largest city in New York and the United States of America',
 				),
-				new ItemId( 'Q116' )
+				new ItemId( 'Q116' ),
+				array( 'de', 'en' )
 			),
 			array(
 				array(
@@ -113,7 +116,8 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 			),
 			array(
 				array(),
-				new ItemId( 'Q117' )
+				new ItemId( 'Q117' ),
+				array()
 			)
 		);
 	}
@@ -121,7 +125,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getDescriptionsProvider
 	 */
-	public function testGetDescriptions( $expected, EntityId $entityId, $languages = null ) {
+	public function testGetDescriptions( $expected, EntityId $entityId, $languages ) {
 		$termLookup = $this->getEntityInfoTermLookup();
 
 		$descriptions = $termLookup->getDescriptions( $entityId, $languages );
@@ -132,7 +136,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 		$termLookup = $this->getEntityInfoTermLookup();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
-		$termLookup->getDescriptions( new ItemId( 'Q90000' ) );
+		$termLookup->getDescriptions( new ItemId( 'Q90000' ), array( 'x' ) );
 	}
 
 	private function getEntityInfoTermLookup() {

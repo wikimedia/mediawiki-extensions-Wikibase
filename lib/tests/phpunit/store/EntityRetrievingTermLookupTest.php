@@ -40,7 +40,8 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				array( 'en' => 'New York City', 'es' => 'Nueva York' ),
-				new ItemId( 'Q116' )
+				new ItemId( 'Q116' ),
+				array( 'en', 'es' )
 			),
 			array(
 				array( 'es' => 'Nueva York' ),
@@ -49,7 +50,8 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 			),
 			array(
 				array( 'de' => 'Berlin' ),
-				new ItemId( 'Q117' )
+				new ItemId( 'Q117' ),
+				array( 'de' )
 			)
 		);
 	}
@@ -57,7 +59,7 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getLabelsProvider
 	 */
-	public function testGetLabels( array $expected, ItemId $itemId, array $languageCodes = null ) {
+	public function testGetLabels( array $expected, ItemId $itemId, array $languageCodes ) {
 		$termLookup = $this->getEntityTermLookup();
 
 		$labels = $termLookup->getLabels( $itemId, $languageCodes );
@@ -88,7 +90,8 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
 					'en' => 'largest city in New York and the United States of America',
 				),
-				new ItemId( 'Q116' )
+				new ItemId( 'Q116' ),
+				array( 'de', 'en' )
 			),
 			array(
 				array(
@@ -99,7 +102,8 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 			),
 			array(
 				array(),
-				new ItemId( 'Q117' )
+				new ItemId( 'Q117' ),
+				array()
 			)
 		);
 	}
@@ -107,7 +111,7 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getDescriptionsProvider
 	 */
-	public function testGetDescriptions( array $expected, ItemId $itemId, array $languageCodes = null ) {
+	public function testGetDescriptions( array $expected, ItemId $itemId, array $languageCodes ) {
 		$termLookup = $this->getEntityTermLookup();
 
 		$descriptions = $termLookup->getDescriptions( $itemId, $languageCodes );

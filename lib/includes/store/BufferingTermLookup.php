@@ -8,7 +8,6 @@ use Wikibase\Lib\Store\EntityTermLookupBase;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Term;
 use Wikibase\TermIndex;
-use Wikibase\Utils;
 
 /**
  * @since 0.5
@@ -77,28 +76,24 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 	/**
 	 * @param EntityId $entityId
 	 * @param string $termType
-	 * @param string[]|null $languageCodes The languages to get terms for; null means all languages.
+	 * @param string[] $languageCodes The languages to get terms for
 	 *
 	 * @return string[]
 	 */
-	protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes = null ) {
+	protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes ) {
 		$terms = $this->getBufferedTerms( $entityId, $termType, $languageCodes );
-		$bufferedKeys = $this->getBufferKeys( array( $entityId ), array( $termType ), array_keys( $terms ) );
 
-		if ( $languageCodes !== null ) {
-			$languageCodes = array_diff( $languageCodes, array_keys( $terms ) );
-		}
+		$languageCodes = array_diff( $languageCodes, array_keys( $terms ) );
+		if ( !empty( $languageCodes ) ) {
+			$bufferedKeys = $this->getBufferKeys( array( $entityId ), array( $termType ), array_keys( $terms ) );
 
-		if ( $languageCodes === null || !empty( $languageCodes ) ) {
 			$fetchedTerms = $this->termIndex->getTermsOfEntity( $entityId, array( $termType ), $languageCodes );
 			$fetchedKeys = $this->setBufferedTermObjects( $fetchedTerms );
 
 			$terms = array_merge( $terms, $this->convertTermsToMap( $fetchedTerms ) );
 			$bufferedKeys = array_merge( $bufferedKeys, $fetchedKeys );
 
-			if ( !empty( $languageCodes ) ) {
-				$this->setUndefinedTerms( array( $entityId ), array( $termType ), $languageCodes, $bufferedKeys );
-			}
+			$this->setUndefinedTerms( array( $entityId ), array( $termType ), $languageCodes, $bufferedKeys );
 		}
 
 		$terms = $this->stripUndefinedTerms( $terms );
@@ -159,16 +154,13 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 	/**
 	 * @param EntityId $entityId
 	 * @param string $termType
-	 * @param string[]|null $languageCodes The language codes to try; null means all languages.
+	 * @param string[] $languageCodes The language codes to try
 	 *
 	 * @return string[] The terms found in the buffer, keyed by language code. Note that this
 	 *         may include negative cache values, that is, some language codes may may to false.
 	 *         Use stripUndefinedTerms() to remove these.
 	 */
-	private function getBufferedTerms( EntityId $entityId, $termType, $languageCodes = null ) {
-		if ( $languageCodes === null ) {
-			$languageCodes = Utils::getLanguageCodes();
-		}
+	private function getBufferedTerms( EntityId $entityId, $termType, array $languageCodes ) {
 
 		$terms = array();
 		foreach ( $languageCodes as $lang ) {
