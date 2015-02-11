@@ -210,7 +210,7 @@ abstract class ApiWikibase extends ApiBase {
 	 * @param Entity $entity The entity to check permissions for
 	 * @param array $params Arguments for the module, describing the operation to be performed
 	 *
-	 * @return array A list of permissions
+	 * @return string[] A list of permissions
 	 */
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = array();
