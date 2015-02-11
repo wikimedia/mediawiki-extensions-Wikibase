@@ -17,6 +17,7 @@
 	"wikibase-addreference": "pievienot atsauci",
 	"wikibase-save-inprogress": "Saglabā...",
 	"wikibase-remove-inprogress": "Dzēš...",
+	"wikibase-entitytermsforlanguagelistview-language": "Valoda",
 	"wikibase-label-empty": "Nosaukums vēl nav norādīts",
 	"wikibase-label-edit-placeholder": "ievadiet nosaukumu",
 	"wikibase-description-empty": "Apraksts nav vēl norādīts",

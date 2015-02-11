@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Arman musikyan",
-			"GrigorGB"
+			"GrigorGB",
+			"Աշոտ1997"
 		]
 	},
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Այլ լեզուներով",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Կարգավորել",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Նաև հայտնի որպես",
 	"wikibase-entitytermsforlanguagelistview-description": "Նկարագրություն",
 	"wikibase-entitytermsforlanguagelistview-language": "Լեզու",
