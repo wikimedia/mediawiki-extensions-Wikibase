@@ -29,7 +29,6 @@ use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
@@ -55,6 +54,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\TermLookup;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -81,7 +81,6 @@ use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
-use Wikibase\Utils;
 use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
@@ -547,6 +546,7 @@ class WikibaseRepo {
 			$wgContLang,
 			new FormatterLabelLookupFactory( $termLookup ),
 			$this->getMonolingualTextLanguages(),
+			$this->getTermsLanguages(),
 			$this->getEntityTitleLookup()
 		);
 	}
@@ -696,7 +696,7 @@ class WikibaseRepo {
 		$constraints = $this->settings->getSetting( 'multilang-limits' );
 		$maxLength = $constraints['length'];
 
-		$languages = Utils::getLanguageCodes();
+		$languages = $this->getTermsLanguages()->getLanguages();
 
 		return new TermValidatorFactory(
 			$maxLength,
@@ -1002,7 +1002,8 @@ class WikibaseRepo {
 	private function getEntityIdHtmlLinkFormatter() {
 		return new EntityIdHtmlLinkFormatterFactory(
 			new FormatterLabelLookupFactory( $this->getTermLookup() ),
-			$this->getEntityTitleLookup()
+			$this->getEntityTitleLookup(),
+			$this->getTermsLanguages()
 		);
 	}
 
@@ -1018,6 +1019,7 @@ class WikibaseRepo {
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
 			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$this->getTermsLanguages(),
 			$this->getSettings()->getSetting( 'siteLinkGroups' ),
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' ),
 			$this->getSettings()->getSetting( 'badgeItems' )
@@ -1052,4 +1054,14 @@ class WikibaseRepo {
 		}
 		return $this->monolingualTextLanguages;
 	}
+
+	/**
+	 * Get a ContentLanguages object holding the languages available for labels, descriptions and aliases.
+	 *
+	 * @return ContentLanguages
+	 */
+	public function getTermsLanguages() {
+		return new WikibaseContentLanguages();
+	}
+
 }

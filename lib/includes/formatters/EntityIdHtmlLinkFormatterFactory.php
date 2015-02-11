@@ -23,11 +23,21 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	private $titleLookup;
 
 	/**
+	 * @var ContentLanguages
+	 */
+	private $termsLanguages;
+
+	/**
 	 * @param FormatterLabelLookupFactory $labelLookupFactory
 	 * @param EntityTitleLookup $titleLookup
 	 */
-	public function __construct( FormatterLabelLookupFactory $labelLookupFactory, EntityTitleLookup $titleLookup ) {
+	public function __construct(
+		FormatterLabelLookupFactory $labelLookupFactory,
+		EntityTitleLookup $titleLookup,
+		ContentLanguages $termsLanguages
+	) {
 		$this->labelLookupFactory = $labelLookupFactory;
+		$this->termsLanguages = $termsLanguages;
 		$this->titleLookup = $titleLookup;
 	}
 
@@ -49,7 +59,12 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	 */
 	public function getEntityIdFormater( FormatterOptions $options ) {
 		$labelLookup = $this->labelLookupFactory->getLabelLookup( $options );
-		return new EntityIdHtmlLinkFormatter( $options, $labelLookup, $this->titleLookup );
+		return new EntityIdHtmlLinkFormatter(
+			$options,
+			$labelLookup,
+			$this->titleLookup,
+			$this->termsLanguages
+		);
 	}
 
 }

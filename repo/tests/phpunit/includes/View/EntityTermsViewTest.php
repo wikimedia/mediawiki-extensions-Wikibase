@@ -48,6 +48,7 @@ class EntityTermsViewTest extends \MediaWikiLangTestCase {
 		return new EntityTermsView(
 			$templateFactory,
 			new SectionEditLinkGenerator( $templateFactory ),
+			$this->getMock( 'Wikibase\Lib\ContentLanguages' ),
 			$languageCode
 		);
 	}

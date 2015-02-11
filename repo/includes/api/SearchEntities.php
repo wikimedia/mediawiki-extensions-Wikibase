@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Term;
-use Wikibase\Utils;
 
 /**
  * API module to search for Wikibase entities.
@@ -330,7 +329,7 @@ class SearchEntities extends ApiBase {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'language' => array(
-				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
+				ApiBase::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'type' => array(

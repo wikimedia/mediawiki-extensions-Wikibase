@@ -50,6 +50,13 @@ class WikibaseValueFormatterBuilders {
 	private $monolingualTextLanguages;
 
 	/**
+	 * The languages available for terms
+	 *
+	 * @var ContentLanguages
+	 */
+	private $termsLanguages;
+
+	/**
 	 * This determines which value is formatted how by providing a formatter mapping
 	 * for each format.
 	 *
@@ -121,11 +128,13 @@ class WikibaseValueFormatterBuilders {
 		Language $defaultLanguage,
 		FormatterLabelLookupFactory $labelLookupFactory,
 		ContentLanguages $monolingualTextLanguages,
+		ContentLanguages $termsLanguages,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelLookupFactory = $labelLookupFactory;
 		$this->monolingualTextLanguages = $monolingualTextLanguages;
+		$this->termsLanguages = $termsLanguages;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
@@ -543,7 +552,12 @@ class WikibaseValueFormatterBuilders {
 			);
 		}
 
-		return new EntityIdHtmlLinkFormatter( $options, $labelLookup, $this->entityTitleLookup );
+		return new EntityIdHtmlLinkFormatter(
+			$options,
+			$labelLookup,
+			$this->entityTitleLookup,
+			$this->termsLanguages
+		);
 	}
 
 	/**

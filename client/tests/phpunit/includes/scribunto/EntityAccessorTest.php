@@ -54,6 +54,11 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
 		);
 
+		$termsLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
+		$termsLanguages->expects( $this->any() )
+			->method( 'getLanguages' )
+			->will( $this->returnValue( array( 'de', 'en', 'es', 'ja' ) ) );
+
 		return new EntityAccessor(
 			new BasicEntityIdParser(),
 			$entityLookup ?: new MockRepository(),
@@ -61,7 +66,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 			$propertyDataTypeLookup,
 			$fallbackChain,
 			$language,
-			array( 'de', 'en', 'es', 'ja' )
+			$termsLanguages
 		);
 	}
 

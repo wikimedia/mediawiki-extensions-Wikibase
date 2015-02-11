@@ -9,6 +9,7 @@ use SiteStore;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdFormatterFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
@@ -76,12 +77,18 @@ class EntityViewFactory {
 	private $templateFactory;
 
 	/**
+	 * @var ContentLanguages
+	 */
+	private $termsLanguages;
+
+	/**
 	 * @param EntityIdFormatterFactory $idFormatterFactory
 	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
 	 * @param EntityLookup $entityLookup
 	 * @param SiteStore $siteStore
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory
+	 * @param ContentLanguages $termsLanguages
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
@@ -93,6 +100,7 @@ class EntityViewFactory {
 		SiteStore $siteStore,
 		DataTypeFactory $dataTypeFactory,
 		TemplateFactory $templateFactory,
+		ContentLanguages $termsLanguages,
 		array $siteLinkGroups,
 		array $specialSiteLinkGroups,
 		array $badgeItems
@@ -111,6 +119,7 @@ class EntityViewFactory {
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator(
 			$this->templateFactory
 		);
+		$this->termsLanguages = $termsLanguages;
 	}
 
 	/**
@@ -234,6 +243,7 @@ class EntityViewFactory {
 		return new EntityTermsView(
 			$this->templateFactory,
 			$this->sectionEditLinkGenerator,
+			$this->termsLanguages,
 			$languageCode
 		);
 	}
