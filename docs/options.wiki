@@ -62,7 +62,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;useRedirectTargetColumn: Whether to use the epp_redirect_target column in the wb_entity_per_page table for detecting redirects. True per default, can be set to false in an environment where the necessary database update can't be deployed right away. To set up the table manually, run repo/sql/AddEppRedirectTarget.sql to create it, then use repo/maintenance/rebuildEntityPerPage.php to rebuild the table if neccessary.
 ;internalEntitySerializerClass: The class name of a serializer that is to be used when serializing entities for storage. Defaults to null, causing the default entity serializer from the SerializerFactory to be used. Should be set to Wikibase\Lib\Serializers\LegacyInternalEntitySerializer for compatibility with client wikis that run older code.
 ;transformLegacyFormatOnExport: Whether entity revisions stored in a legacy format should be converted on the fly while exporting. Enabled per default, if internalEntitySerializerClass is not set, and disable by default if internalEntitySerializerClass is set.  Must be disabled if internalEntitySerializerClass is set to the legacy serializer.
-;useLegacyChangesSubscription: whether the sitelinks table should be used to emulate notification subscriptions. Should be set to true if the approproate database schema change has not been deployed yet.
+;useLegacyChangesSubscription: whether the sitelinks table should be used to emulate notification subscriptions. Should be set to true if the appropriate database schema change has not been deployed yet.
+;allowEntityImport: allow importing entities via Special:Import and importDump.php. Per default, imports are forbidden, since entities defined in another wiki would have or use IDs that conflict with entities defined locally.
 
 == Client Settings ==
 

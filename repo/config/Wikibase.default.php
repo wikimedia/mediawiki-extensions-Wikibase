@@ -104,6 +104,8 @@ return call_user_func( function() {
 
 		// Enable in case wb_changes_subscription does not exist or is not yet populated.
 		'useLegacyChangesSubscription' => false,
+
+		'allowEntityImport' => false,
 	);
 
 	return $defaults;
