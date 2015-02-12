@@ -69,6 +69,24 @@
       "revId": "5e6cb62fa8b6407554a06e668376b1dcff6f61e4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fb0b0324",
+        "filename": "lib/tests/phpunit/formatters/TimeDetailsFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T22:35:08Z",
+      "side": 1,
+      "message": "You are right of course. I guess I was a bit distracted today...",
+      "parentUuid": "6e7c4fa4_41500e37",
+      "revId": "5e6cb62fa8b6407554a06e668376b1dcff6f61e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
