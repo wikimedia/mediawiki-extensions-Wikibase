@@ -48,12 +48,16 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 						'<h4[^<>]*>[^<>]*2001[^<>]*</h4>',
 						'<td[^<>]*>\+0*2001-01-01T00:00:00Z</td>',
 						'<td[^<>]*>\+01:00</td>',
-						'<td[^<>]*>Gregorian</td>',
+						'<td[^<>]*>\(valueview-expert-timevalue-calendar-gregorian\)</td>',
 						'<td[^<>]*>\(months: 1\)</td>',
 						'<td[^<>]*>\(months: 0\)</td>',
 						'<td[^<>]*>\(months: 1\)</td>',
 					)
 				) . '@s'
+			),
+			array(
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, TimeFormatter::CALENDAR_JULIAN ),
+				'@.*<td[^<>]*calendar">\(valueview-expert-timevalue-calendar-julian\)</td>.*@s'
 			),
 			array(
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, 'Stardate' ),
