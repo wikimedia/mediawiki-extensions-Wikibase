@@ -89,7 +89,7 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 
 		$diffs[] = new EntityDiff( $diffOps );
 
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'EntityDiffTest$foo' );
 
 		$statementListDiffer = new StatementListDiffer();

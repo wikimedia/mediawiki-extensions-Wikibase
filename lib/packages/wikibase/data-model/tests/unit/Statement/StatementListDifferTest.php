@@ -43,7 +43,7 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getNewStatement( $guid, $hash ) {
-		$statement = new Statement( new Claim( new PropertyValueSnak( 1, new StringValue( $hash ) ) ) );
+		$statement = new Statement( new PropertyValueSnak( 1, new StringValue( $hash ) ) );
 		$statement->setGuid( $guid );
 		return $statement;
 	}
