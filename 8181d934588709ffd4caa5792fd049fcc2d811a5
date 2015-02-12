@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_21fcf2d4",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T13:22:07Z",
+      "side": 1,
+      "message": "never mind, just realized this is a message key. sorry.",
+      "parentUuid": "6e7c4fa4_a15a4220",
+      "revId": "8181d934588709ffd4caa5792fd049fcc2d811a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_61a42a05",
         "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
         "patchSetId": 1
@@ -30,6 +48,23 @@
       "writtenOn": "2015-02-12T13:06:41Z",
       "side": 1,
       "message": "So, any unknown precision will be handled as \"years\"? That seems very odd. I think an unknown precision should be represented as \"precision 123\", or as the plain number.",
+      "revId": "8181d934588709ffd4caa5792fd049fcc2d811a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c1e2de2d",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T13:22:07Z",
+      "side": 1,
+      "message": "\u0027months\u0027, etc, without any prefix, are valid message keys? I can\u0027t find them. Where are they defined?",
       "revId": "8181d934588709ffd4caa5792fd049fcc2d811a5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
