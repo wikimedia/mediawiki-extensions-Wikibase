@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e10cba47",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-12T15:49:54Z",
+      "side": 1,
+      "message": "3 * 1000 \u003d 3000, but yes.",
+      "parentUuid": "6e7c4fa4_c19bbebf",
+      "revId": "bb880e6402a394cb94458909eb6114eb04c2304b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_61f2ea04",
         "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-12T13:19:22Z",
       "side": 1,
       "message": "( $precision \u003e TimeValue::PRECISION_SECOND )  should never ever be true, right? Maybe we should just throw an exception then.\n\nAgain, please add a comment that this is about sub-second precision. Took me a few minutes to figure that out.",
+      "revId": "bb880e6402a394cb94458909eb6114eb04c2304b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0407841d",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-12T15:49:54Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s a good idea to hard-code the range of allowed precisions over and over again. This implementation is unbound and supports future precisions. This is clearly a bad idea in code that affects what\u0027s in the database (we don\u0027t know if 15 will mean \"1/10 of a second\" in the future, even if this is a very obvious assumption), but this is a formatter, not storage related.",
+      "parentUuid": "6e7c4fa4_61f2ea04",
       "revId": "bb880e6402a394cb94458909eb6114eb04c2304b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
