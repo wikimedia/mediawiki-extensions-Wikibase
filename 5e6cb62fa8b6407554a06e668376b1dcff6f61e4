@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_0173f6e6",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-12T15:35:26Z",
+      "side": 1,
+      "message": "The \"fullwidth forms\" Unicode block is unrelated. Who told you you should use this?\n\nThe plus is a plus. It doesn\u0027t have multiple meanings.\n\nThe dash we are used to because of our ancient keyboard layouts is a \"hyphen-minus\". You can think of it as a placeholder character for many other characters. The actual minus sign is U+2212. This applies to all languages and does not need translation.",
+      "parentUuid": "6e7c4fa4_61750a92",
+      "revId": "5e6cb62fa8b6407554a06e668376b1dcff6f61e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_016c56cb",
         "filename": "lib/tests/phpunit/formatters/TimeDetailsFormatterTest.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-12T12:57:47Z",
       "side": 1,
       "message": "Please add tests for negative offset, and non-zero minutes.",
+      "revId": "5e6cb62fa8b6407554a06e668376b1dcff6f61e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_41500e37",
+        "filename": "lib/tests/phpunit/formatters/TimeDetailsFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-12T15:35:26Z",
+      "side": 1,
+      "message": "Both is already there, see below.",
+      "parentUuid": "6e7c4fa4_016c56cb",
       "revId": "5e6cb62fa8b6407554a06e668376b1dcff6f61e4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
