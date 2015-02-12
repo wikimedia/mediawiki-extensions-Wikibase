@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_61750a92",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T12:57:47Z",
+      "side": 1,
+      "message": "A simple hyphen isn\u0027t good enough? maybe the + should be U+FF0B then?",
+      "revId": "5e6cb62fa8b6407554a06e668376b1dcff6f61e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_016c56cb",
+        "filename": "lib/tests/phpunit/formatters/TimeDetailsFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T12:57:47Z",
+      "side": 1,
+      "message": "Please add tests for negative offset, and non-zero minutes.",
+      "revId": "5e6cb62fa8b6407554a06e668376b1dcff6f61e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
