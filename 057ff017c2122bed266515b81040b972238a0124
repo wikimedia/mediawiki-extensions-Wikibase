@@ -16,6 +16,24 @@
       "revId": "057ff017c2122bed266515b81040b972238a0124",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8125c605",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-12T14:55:09Z",
+      "side": 1,
+      "message": "As I said in the commit message I\u0027m not introducing this, this patch (and the following) only moves existing code around.",
+      "parentUuid": "6e7c4fa4_015536fd",
+      "revId": "057ff017c2122bed266515b81040b972238a0124",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
