@@ -14,7 +14,6 @@
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد ويكيبيس",
-	"specialpages-group-wikibaseclient": "عميل {{WBREPONAME}}",
 	"tooltip-t-wikibase": "الربط بعنصر مرتبط في مستودع البيانات",
 	"wikibase-after-page-move": "يمكنك أيضا [$1 تحديث] بند ويكي بيانات المرتبط بها للحفاظ على روابط اللغة ضمن الصفحة المنقولة.",
 	"wikibase-after-page-move-queued": "[$1 عنصر ويكي بيانات] المرتبط بهذه الصفحة سيُحدّث قريبًا تلقائيًا.",
@@ -27,7 +26,7 @@
 	"wikibase-comment-sitelink-add": "وصلة اللغة المُضافة:$1",
 	"wikibase-comment-sitelink-change": "تم تعديل وصلة اللغة من $1 إلى $2",
 	"wikibase-comment-sitelink-remove": "وصلة اللغة المُلغاة:$1",
-	"wikibase-comment-multi": "{{PLURAL:$1|تعديل|تعديلين|$1 تعديلات|$1 تعديلاً|$1 تعديل}}",
+	"wikibase-comment-multi": "{{PLURAL:$1|لا تعديلات|تعديل|تعديلين|$1 تعديلات|$1 تعديلاً|$1 تعديل}}",
 	"wikibase-dataitem": "عنصر بيانات",
 	"wikibase-editlinks": "عدل الوصلات",
 	"wikibase-editlinkstitle": "تحرير الروابط ما بين اللغات",

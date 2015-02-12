@@ -420,6 +420,7 @@
 	"apihelp-wbeditentity-example-7": "设置nb的描述，如果已存在，覆盖已有的",
 	"apihelp-wbformatvalue-description": "格式数据值。",
 	"apihelp-wbformatvalue-example-1": "格式化简单字符串值。",
+	"apihelp-wbformatvalue-example-2": "在HTML中格式化一个字符串值作为URL。",
 	"apihelp-wbgetclaims-description": "获取Wikibase声称。",
 	"apihelp-wbgetclaims-param-ungroupedlist": "不要由属性ID聚合snaks",
 	"apihelp-wbgetclaims-example-1": "获取ID为Q42的项的声称",

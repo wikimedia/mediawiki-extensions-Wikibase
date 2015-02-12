@@ -21,6 +21,7 @@
 	"wikibase-save-inprogress": "Gardando...",
 	"wikibase-remove-inprogress": "Eliminando...",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Noutras linguas",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configurar",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Mostrar etiquetas, alias e descricións en todas as miñas linguas ao cargar a páxina.",
 	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Pódense establecer outras linguas persoais distintas da da interfaz de usuario empregando a sintaxe [[mw:Extension:Babel|Babel extension]] na páxina de usuario.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Tamén coñecido como",
