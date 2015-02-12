@@ -16,6 +16,24 @@
       "revId": "08825513cf17b6bbdc954fb2778068765000468a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fe71ba0b",
+        "filename": "repo/includes/Diff/ClaimDifferenceVisualizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-12T08:57:47Z",
+      "side": 1,
+      "message": "Done in the rank changes follow-up.",
+      "parentUuid": "6e7c4fa4_40625238",
+      "revId": "08825513cf17b6bbdc954fb2778068765000468a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
