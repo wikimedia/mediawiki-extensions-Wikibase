@@ -57,13 +57,13 @@ class PropertyPatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testStatementsArePatched() {
-		$s1337 = new Statement( new Claim( new PropertyNoValueSnak( 1337 ) ) );
+		$s1337 = new Statement( new PropertyNoValueSnak( 1337 ) );
 		$s1337->setGuid( 's1337' );
 
-		$s23 = new Statement( new Claim( new PropertyNoValueSnak( 23 ) ) );
+		$s23 = new Statement( new PropertyNoValueSnak( 23 ) );
 		$s23->setGuid( 's23' );
 
-		$s42 = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$s42 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$s42->setGuid( 's42' );
 
 		$patch = new EntityDiff( array(

@@ -34,31 +34,31 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenTwoIdenticalLists_diffIsEmpty() {
-		$statements = new StatementList( array(
+		$statements = new StatementList(
 			$this->getNewStatement( 'zero', 'first' ),
-			$this->getNewStatement( 'one', 'second' ),
-		) );
+			$this->getNewStatement( 'one', 'second' )
+		);
 
 		$this->assertResultsInDiff( $statements, $statements, new Diff() );
 	}
 
 	private function getNewStatement( $guid, $hash ) {
-		$statement = new Statement( new Claim( new PropertyValueSnak( 1, new StringValue( $hash ) ) ) );
+		$statement = new Statement( new PropertyValueSnak( 1, new StringValue( $hash ) ) );
 		$statement->setGuid( $guid );
 		return $statement;
 	}
 
 	public function testGivenToListWithExtraStatement_additionOperationInDiff() {
-		$fromStatements = new StatementList( array(
+		$fromStatements = new StatementList(
 			$this->getNewStatement( 'zero', 'first' ),
-			$this->getNewStatement( 'one', 'second' ),
-		) );
+			$this->getNewStatement( 'one', 'second' )
+		);
 
-		$toStatements = new StatementList( array(
+		$toStatements = new StatementList(
 			$this->getNewStatement( 'zero', 'first' ),
 			$this->getNewStatement( 'two', 'third' ),
-			$this->getNewStatement( 'one', 'second' ),
-		) );
+			$this->getNewStatement( 'one', 'second' )
+		);
 
 		$diff = new Diff( array(
 			'two' => new DiffOpAdd( $this->getNewStatement( 'two', 'third' ) ),
@@ -68,15 +68,15 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenToListWithLessStatements_removalOperationsInDiff() {
-		$fromStatements = new StatementList( array(
+		$fromStatements = new StatementList(
 			$this->getNewStatement( 'zero', 'first' ),
 			$this->getNewStatement( 'one', 'second' ),
-			$this->getNewStatement( 'two', 'third' ),
-		) );
+			$this->getNewStatement( 'two', 'third' )
+		);
 
-		$toStatements = new StatementList( array(
-			$this->getNewStatement( 'one', 'second' ),
-		) );
+		$toStatements = new StatementList(
+			$this->getNewStatement( 'one', 'second' )
+		);
 
 		$diff = new Diff( array(
 			'zero' => new DiffOpRemove( $this->getNewStatement( 'zero', 'first' ) ),
@@ -87,17 +87,17 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenListWithChangedStatements_changeOperationsInDiff() {
-		$fromStatements = new StatementList( array(
+		$fromStatements = new StatementList(
 			$this->getNewStatement( 'zero', 'first' ),
 			$this->getNewStatement( 'one', 'second' ),
-			$this->getNewStatement( 'two', 'third' ),
-		) );
+			$this->getNewStatement( 'two', 'third' )
+		);
 
-		$toStatements = new StatementList( array(
+		$toStatements = new StatementList(
 			$this->getNewStatement( 'zero', 'FIRST' ),
 			$this->getNewStatement( 'one', 'second' ),
-			$this->getNewStatement( 'two', 'THIRD' ),
-		) );
+			$this->getNewStatement( 'two', 'THIRD' )
+		);
 
 		$diff = new Diff( array(
 			'zero' => new DiffOpChange(

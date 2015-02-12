@@ -240,7 +240,7 @@ class Property extends Entity implements StatementListProvider {
 	 * @return Statement
 	 */
 	public function newClaim( Snak $mainSnak ) {
-		return new Statement( new Claim( $mainSnak ) );
+		return new Statement( $mainSnak );
 	}
 
 	/**
