@@ -21,8 +21,6 @@ use ValueFormatters\ValueFormatterBase;
  */
 class TimeDetailsFormatter extends ValueFormatterBase {
 
-	const OPT_CALENDARNAMES = 'calendars';
-
 	/**
 	 * @var TimeFormatter
 	 */
@@ -38,11 +36,6 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 			TimeFormatter::OPT_TIME_ISO_FORMATTER,
 			new MwTimeIsoFormatter( $this->options )
 		);
-
-		$this->defaultOption( self::OPT_CALENDARNAMES, array(
-			TimeFormatter::CALENDAR_GREGORIAN => 'Gregorian',
-			TimeFormatter::CALENDAR_JULIAN => 'Julian',
-		) );
 
 		$this->timeFormatter = new TimeFormatter( $this->options );
 	}
@@ -121,12 +114,20 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 * @return string HTML
 	 */
 	private function getCalendarModelHtml( $calendarModel ) {
-		$calendarNames = $this->getOption( self::OPT_CALENDARNAMES );
-		if ( array_key_exists( $calendarModel, $calendarNames ) ) {
-			$calendarModel = $calendarNames[$calendarModel];
+		switch ( $calendarModel ) {
+			case TimeFormatter::CALENDAR_GREGORIAN:
+				$key = 'valueview-expert-timevalue-calendar-gregorian';
+				break;
+			case TimeFormatter::CALENDAR_JULIAN:
+				$key = 'valueview-expert-timevalue-calendar-julian';
+				break;
+			default:
+				return htmlspecialchars( $calendarModel );
 		}
 
-		return htmlspecialchars( $calendarModel );
+		$lang = $this->getOption( ValueFormatter::OPT_LANG );
+		$msg = wfMessage( $key )->inLanguage( $lang );
+		return $msg->text();
 	}
 
 	/**
