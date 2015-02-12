@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_61698a1c",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-12T14:59:34Z",
+      "side": 1,
+      "message": "That\u0027s what already happens. You missed the if above.\n\nAlso there are no unknown precisions because you can\u0027t construct a TimeValue with an unknown precision.",
+      "parentUuid": "6e7c4fa4_61a42a05",
+      "revId": "8181d934588709ffd4caa5792fd049fcc2d811a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_c1e2de2d",
         "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2015-02-12T13:22:07Z",
       "side": 1,
       "message": "\u0027months\u0027, etc, without any prefix, are valid message keys? I can\u0027t find them. Where are they defined?",
+      "revId": "8181d934588709ffd4caa5792fd049fcc2d811a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2163923c",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-12T14:59:34Z",
+      "side": 1,
+      "message": "As I said in the commit message, \"This uses existing messages from core.\"",
+      "parentUuid": "6e7c4fa4_c1e2de2d",
       "revId": "8181d934588709ffd4caa5792fd049fcc2d811a5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
