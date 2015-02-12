@@ -58,7 +58,7 @@ class TermFallback extends Term {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
 	public function getSourceLanguageCode() {
 		return $this->sourceLanguageCode;

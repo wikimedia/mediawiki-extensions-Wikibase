@@ -56,7 +56,6 @@ class EntityIdValue extends DataValueObject {
 	 * @param string $value
 	 *
 	 * @throws IllegalValueException
-	 * @return EntityIdValue
 	 */
 	public function unserialize( $value ) {
 		list( $entityType, $numericId ) = json_decode( $value );
@@ -67,7 +66,7 @@ class EntityIdValue extends DataValueObject {
 			throw new IllegalValueException( 'Invalid EntityIdValue serialization.' );
 		}
 
-		return $this->__construct( $entityId );
+		$this->__construct( $entityId );
 	}
 
 	/**
@@ -97,7 +96,7 @@ class EntityIdValue extends DataValueObject {
 	 *
 	 * @since 0.5
 	 *
-	 * @return EntityId
+	 * @return EntityIdValue
 	 */
 	public function getValue() {
 		return $this;

@@ -345,7 +345,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 *
 	 * @since 0.1
 	 *
-	 * @return static
+	 * @return self
 	 */
 	public function copy() {
 		return unserialize( serialize( $this ) );
