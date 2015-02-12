@@ -5,13 +5,13 @@ namespace Wikibase\DataModel\Tests\Claim;
 use InvalidArgumentException;
 use ReflectionClass;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\ClaimList;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * @covers Wikibase\DataModel\Claim\Claims
@@ -54,16 +54,16 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testArrayObjectNotConstructedFromObject() {
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( 1 ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( 2 ) );
+		$statement1 = $this->makeStatement( new PropertyNoValueSnak( 1 ) );
+		$statement2 = $this->makeStatement( new PropertyNoValueSnak( 2 ) );
 
-		$claimList = new ClaimList();
-		$claimList->addClaim( $claim1 );
+		$statementList = new StatementList();
+		$statementList->addStatement( $statement1 );
 
-		$claims = new Claims( $claimList );
+		$claims = new Claims( $statementList );
 		// According to the documentation append() "cannot be called when the ArrayObject was
 		// constructed from an object." This test makes sure it was not constructed from an object.
-		$claims->append( $claim2 );
+		$claims->append( $statement2 );
 
 		$this->assertSame( 2, $claims->count() );
 	}
