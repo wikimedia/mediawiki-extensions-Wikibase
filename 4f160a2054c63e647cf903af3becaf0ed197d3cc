@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9bbe8f12",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T22:39:31Z",
+      "side": 1,
+      "message": "if we return html, shouldn\u0027t we call parser() instead of text()?",
+      "revId": "4f160a2054c63e647cf903af3becaf0ed197d3cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
