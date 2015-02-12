@@ -87,8 +87,10 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		$html .= $this->renderLabelValuePair( 'isotime', htmlspecialchars( $value->getTime() ) );
 
 		//TODO: provide "nice" rendering of timezone, calendar, precision, etc.
-		$html .= $this->renderLabelValuePair( 'timezone',
-			htmlspecialchars( $value->getTimezone() ) );
+		$html .= $this->renderLabelValuePair(
+			'timezone',
+			$this->formatTimezone( $value->getTimezone() )
+		);
 		$html .= $this->renderLabelValuePair( 'calendar',
 			htmlspecialchars( $calendarModel ) );
 		$html .= $this->renderLabelValuePair( 'precision',
@@ -100,6 +102,18 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		$html .= Html::closeElement( 'table' );
 
 		return $html;
+	}
+
+	/**
+	 * @param int $timezone
+	 *
+	 * @return string
+	 */
+	private function formatTimezone( $timezone ) {
+		$sign = $timezone < 0 ? "\xE2\x88\x92" : '+';
+		$hour = floor( abs( $timezone ) / 60 );
+		$minute = abs( $timezone ) - $hour * 60;
+		return sprintf( '%s%02d:%02d', $sign, $hour, $minute );
 	}
 
 	/**

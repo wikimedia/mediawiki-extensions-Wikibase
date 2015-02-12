@@ -45,7 +45,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 					array(
 						'<h4[^<>]*>[^<>]*2001[^<>]*</h4>',
 						'<td[^<>]*>\+0*2001-01-01T00:00:00Z</td>',
-						'<td[^<>]*>60</td>',
+						'<td[^<>]*>\+01:00</td>',
 						'<td[^<>]*>Gregorian</td>',
 						'<td[^<>]*>10</td>',
 						'<td[^<>]*>0</td>',
@@ -56,7 +56,12 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 			array(
 				new TimeValue( '+2001-01-01T00:00:00Z', 60, 0, 1, 10, 'Stardate' ),
 				$options,
-				'@.*<td[^<>]*>Stardate</td>.*@s'
+				'@.*<td class="wb-time-calendar">Stardate</td>.*@s'
+			),
+			array(
+				new TimeValue( '+2001-01-01T00:00:00Z', -179, 0, 1, 10, TimeFormatter::CALENDAR_GREGORIAN ),
+				$options,
+				'@.*<td class="wb-time-timezone">\xE2\x88\x9202:59</td>.*@s'
 			),
 		);
 	}
