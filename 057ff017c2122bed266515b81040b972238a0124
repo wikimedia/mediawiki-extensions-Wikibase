@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_015536fd",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T12:53:18Z",
+      "side": 1,
+      "message": "Hard coded calendar names seem a bit pointless. \nWhy not just use i18n message? \nIf you want to avoid the depednency on MediaWiki, you can introduce a CalendarLocalizer interface.",
+      "revId": "057ff017c2122bed266515b81040b972238a0124",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
