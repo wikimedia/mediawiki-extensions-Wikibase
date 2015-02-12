@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_79eb8477",
+        "filename": "client/includes/store/sql/ConnectionManager.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-12T12:07:54Z",
+      "side": 1,
+      "message": "Why \"also\"?",
+      "revId": "d17398df4a81bf7b0a228471a5071aabdf900084",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d9f3b867",
+        "filename": "client/includes/store/sql/ConnectionManager.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-12T12:07:54Z",
+      "side": 1,
+      "message": "Why does this need to be a public method? Users can simply call getWriteConnection and use that for reading.",
+      "revId": "d17398df4a81bf7b0a228471a5071aabdf900084",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
