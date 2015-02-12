@@ -427,10 +427,10 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	 * Returns a new instance only containing the best claims (these are the highest
 	 * ranked claims, but never deprecated ones). This implementation ignores the properties
 	 * so you probably want to call Claims::getClaimsForProperty first or use
-	 * ClaimList::getBestClaims instead.
+	 * StatementList::getBestStatementPerProperty instead.
 	 *
 	 * @see Claims::getClaimsForProperty
-	 * @see ClaimList::getBestClaimPerProperty
+	 * @see StatementList::getBestStatementPerProperty
 	 *
 	 * @since 0.7
 	 *
