@@ -674,7 +674,7 @@ class ItemTest extends EntityTest {
 		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$statement->setGuid( 'meh' );
 
-		$statements = new StatementList( array( $statement ) );
+		$statements = new StatementList( $statement );
 
 		$item = new Item( null, null, null, $statements );
 

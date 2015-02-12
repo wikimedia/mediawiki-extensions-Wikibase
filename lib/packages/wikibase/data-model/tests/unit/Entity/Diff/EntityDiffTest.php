@@ -94,7 +94,7 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 
 		$statementListDiffer = new StatementListDiffer();
 		$diffOps['claim'] = $statementListDiffer->getDiff(
-			new StatementList( array( $statement ) ),
+			new StatementList( $statement ),
 			new StatementList()
 		);
 
