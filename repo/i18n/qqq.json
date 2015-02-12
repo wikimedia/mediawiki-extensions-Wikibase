@@ -601,6 +601,7 @@
 	"apihelp-wbsetclaim-param-bot": "{{doc-apihelp-param|wbsetclaim|bot}}",
 	"apihelp-wbsetclaim-example-1": "{{doc-apihelp-example|wbsetclaim}}",
 	"apihelp-wbsetclaim-example-2": "{{doc-apihelp-example|wbsetclaim}}",
+	"apihelp-wbsetclaim-example-3": "{{doc-apihelp-example|wbsetclaim}}",
 	"apihelp-wbsetclaimvalue-description": "{{doc-apihelp-description|wbsetclaimvalue}}",
 	"apihelp-wbsetclaimvalue-param-claim": "{{doc-apihelp-param|wbsetclaimvalue|claim}}",
 	"apihelp-wbsetclaimvalue-param-snaktype": "{{doc-apihelp-param|wbsetclaimvalue|snaktype}}",
