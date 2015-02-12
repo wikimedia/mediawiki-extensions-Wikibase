@@ -83,14 +83,12 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 	//TODO come up with a better way of testing this.... EWW at all the html...
 	public function provideDifferenceAndClaim() {
 		return array(
-			//0 no change
-			array(
+			'no change' => array(
 				new ClaimDifference(),
 				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				''
 			),
-			//1 mainsnak
-			array(
+			'mainsnak' => array(
 				new ClaimDifference(
 					new DiffOpChange(
 						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'bar' ) ),
@@ -104,8 +102,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				'<td class="diff-marker">+</td><td class="diff-addedline">'.
 				'<div><ins class="diffchange diffchange-inline"><span>foo (DETAILED)</span></ins></div></td></tr>'
 			),
-			//2 +qualifiers
-			array(
+			'+qualifiers' => array(
 				new ClaimDifference(
 					null,
 					new Diff( array(
@@ -117,7 +114,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				'<tr><td colspan="2">&nbsp;</td><td class="diff-marker">+</td><td class="diff-addedline">'.
 				'<div><ins class="diffchange diffchange-inline"><span>P44: v (DETAILED)</span></ins></div></td></tr>'
 			),
-			//3 +references
+			'+references' =>
 			array(
 				new ClaimDifference(
 					null,
@@ -131,8 +128,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
 				'<div><del class="diffchange diffchange-inline"><span>P50: v (DETAILED)</span></del></div></td><td colspan="2">&nbsp;</td></tr>'
 			),
-			//4 ranks
-			array(
+			'ranks' => array(
 				new ClaimDifference(
 					null,
 					null,
@@ -145,6 +141,73 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				'<div><del class="diffchange diffchange-inline"><span>Normal rank</span></del></div></td>'.
 				'<td class="diff-marker">+</td><td class="diff-addedline">'.
 				'<div><ins class="diffchange diffchange-inline"><span>Preferred rank</span></ins></div></td></tr>'
+			),
+			'mainsnak and qualifiers' => array(
+				new ClaimDifference(
+					new DiffOpChange(
+						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
+						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) )
+					),
+					new Diff( array(
+						new DiffOpAdd(
+							new PropertyValueSnak( 44, new StringValue( 'newqualifiervalue' ) )
+						),
+						new DiffOpRemove(
+							new PropertyValueSnak( 44, new StringValue( 'oldqualifiervalue' ) )
+						)
+					) )
+				),
+				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
+				// mainsnak change
+				'<tr><td colspan="2" class="diff-lineno">property / P1</td><td colspan="2" class="diff-lineno">property / P1</td></tr>'.
+				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
+				'<div><del class="diffchange diffchange-inline"><span>oldmainsnakvalue (DETAILED)</span></del></div></td>'.
+				'<td class="diff-marker">+</td><td class="diff-addedline">'.
+				'<div><ins class="diffchange diffchange-inline"><span>newmainsnakvalue (DETAILED)</span></ins></div></td></tr>'.
+				// added qualifier
+				'<tr><td colspan="2" class="diff-lineno"></td><td colspan="2" class="diff-lineno">property / P1: newmainsnakvalue / qualifier</td></tr>'.
+				'<tr><td colspan="2">&nbsp;</td>'.
+				'<td class="diff-marker">+</td><td class="diff-addedline">'.
+				'<div><ins class="diffchange diffchange-inline"><span>P44: newqualifiervalue (DETAILED)</span></ins></div></td></tr>'.
+				// removed qualifier
+				'<tr><td colspan="2" class="diff-lineno">property / P1: oldmainsnakvalue / qualifier</td><td colspan="2" class="diff-lineno"></td></tr>'.
+				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
+				'<div><del class="diffchange diffchange-inline"><span>P44: oldqualifiervalue (DETAILED)</span></del></div></td>'.
+				'<td colspan="2">&nbsp;</td></tr>'
+			),
+			'mainsnak and references' => array(
+				new ClaimDifference(
+					new DiffOpChange(
+						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
+						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) )
+					),
+					null,
+					new Diff( array(
+						new DiffOpAdd( new Reference( new SnakList( array(
+							new PropertyValueSnak( 44, new StringValue( 'newreferencevalue' ) )
+						) ) ) ),
+						new DiffOpRemove( new Reference( new SnakList( array(
+							new PropertyValueSnak( 44, new StringValue( 'oldreferencevalue' ) )
+						) ) ) )
+					) )
+				),
+				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
+				// mainsnak change
+				'<tr><td colspan="2" class="diff-lineno">property / P1</td><td colspan="2" class="diff-lineno">property / P1</td></tr>'.
+				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
+				'<div><del class="diffchange diffchange-inline"><span>oldmainsnakvalue (DETAILED)</span></del></div></td>'.
+				'<td class="diff-marker">+</td><td class="diff-addedline">'.
+				'<div><ins class="diffchange diffchange-inline"><span>newmainsnakvalue (DETAILED)</span></ins></div></td></tr>'.
+				// added qualifier
+				'<tr><td colspan="2" class="diff-lineno"></td><td colspan="2" class="diff-lineno">property / P1: newmainsnakvalue / reference</td></tr>'.
+				'<tr><td colspan="2">&nbsp;</td>'.
+				'<td class="diff-marker">+</td><td class="diff-addedline">'.
+				'<div><ins class="diffchange diffchange-inline"><span>P44: newreferencevalue (DETAILED)</span></ins></div></td></tr>'.
+				// removed qualifier
+				'<tr><td colspan="2" class="diff-lineno">property / P1: oldmainsnakvalue / reference</td><td colspan="2" class="diff-lineno"></td></tr>'.
+				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
+				'<div><del class="diffchange diffchange-inline"><span>P44: oldreferencevalue (DETAILED)</span></del></div></td>'.
+				'<td colspan="2">&nbsp;</td></tr>'
 			),
 		);
 	}
