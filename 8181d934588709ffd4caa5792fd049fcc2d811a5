@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_5531a855",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T20:45:35Z",
+      "side": 1,
+      "message": "No, but this stiff comes from the database or dumps. The version that processes the data may be older than the version that created and wrote the data. But yes, I did miss the initial if-clause.",
+      "parentUuid": "6e7c4fa4_61698a1c",
+      "revId": "8181d934588709ffd4caa5792fd049fcc2d811a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_c1e2de2d",
         "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "As I said in the commit message, \"This uses existing messages from core.\"",
       "parentUuid": "6e7c4fa4_c1e2de2d",
+      "revId": "8181d934588709ffd4caa5792fd049fcc2d811a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_95ef40ad",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T20:45:35Z",
+      "side": 1,
+      "message": "And I didn\u0027t find them, because I looked in languages/messages, not the new languages/i18n/. Silly me.",
+      "parentUuid": "6e7c4fa4_2163923c",
       "revId": "8181d934588709ffd4caa5792fd049fcc2d811a5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
