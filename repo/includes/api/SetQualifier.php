@@ -171,13 +171,12 @@ class SetQualifier extends ModifyClaim {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages()
-	 *
-	 * @return array
+	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
 		return array(
 			'action=wbsetqualifier&claim=Q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&property=P1&value=GdyjxP8I6XB3&snaktype=value&token=foobar' => 'apihelp-wbsetqualifier-example-1',
 		);
 	}
+
 }

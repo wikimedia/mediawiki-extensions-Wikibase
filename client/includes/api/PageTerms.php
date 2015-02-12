@@ -245,6 +245,9 @@ class PageTerms extends ApiQueryBase {
 		);
 	}
 
+	/**
+	 * @see ApiBase::getExamplesMessages
+	 */
 	protected function getExamplesMessages() {
 		return array(
 			'action=query&prop=pageterms&titles=London'

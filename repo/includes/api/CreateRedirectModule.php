@@ -175,9 +175,7 @@ class CreateRedirectModule extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages()
-	 *
-	 * @return array
+	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
 		return array(

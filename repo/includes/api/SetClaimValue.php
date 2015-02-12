@@ -107,13 +107,12 @@ class SetClaimValue extends ModifyClaim {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages()
-	 *
-	 * @return array
+	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
 		return array(
 			'action=wbsetclaimvalue&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&snaktype=value&value={"entity-type":"item","numeric-id":1}&token=foobar&baserevid=7201010' => 'apihelp-wbsetclaimvalue-example-1',
 		);
 	}
+
 }

@@ -743,8 +743,6 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @see ApiBase:getExamplesMessages
-	 *
-	 * @return string[]
 	 */
 	protected function getExamplesMessages() {
 		return array(

@@ -194,9 +194,7 @@ class FormatSnakValue extends ApiWikibase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages()
-	 *
-	 * @return array
+	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
 		$query = "action=" . $this->getModuleName() ;
