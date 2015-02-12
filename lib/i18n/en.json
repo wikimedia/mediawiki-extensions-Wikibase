@@ -27,7 +27,7 @@
 	"wikibase-quantitydetails-lowerbound": "Lower bound",
 	"wikibase-quantitydetails-unit": "Unit",
 	"wikibase-timedetails-time": "Time",
-	"wikibase-timedetails-isotime": "ISO timestamp",
+	"wikibase-timedetails-isotime": "Timestamp",
 	"wikibase-timedetails-timezone": "Timezone",
 	"wikibase-timedetails-calendar": "Calendar",
 	"wikibase-timedetails-precision": "Precision",
