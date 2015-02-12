@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_b5f4bc51",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-12T21:04:38Z",
+      "side": 1,
+      "message": "Whats a stiff? ;-)\n\nI\u0027m removing the restriction in a later patch because I think it doesn\u0027t help if this formatter code fails for unknown precisions. I extrapolate unknown precisions (sub-seconds in one direction, gazillions of years in the other). Displaying the number instead can be extremely confusing.\n\nHowever, as said, not relevant because TimeValue guards against this.",
+      "parentUuid": "6e7c4fa4_5531a855",
+      "revId": "8181d934588709ffd4caa5792fd049fcc2d811a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_c1e2de2d",
         "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
         "patchSetId": 1
