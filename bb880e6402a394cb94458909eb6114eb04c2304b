@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c19bbebf",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T13:19:22Z",
+      "side": 1,
+      "message": "Ok, so, if $amount is 3, and precision is 6, the amount would be set to 1000 (years). Ok, but please add a comment.",
+      "revId": "bb880e6402a394cb94458909eb6114eb04c2304b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_61f2ea04",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T13:19:22Z",
+      "side": 1,
+      "message": "( $precision \u003e TimeValue::PRECISION_SECOND )  should never ever be true, right? Maybe we should just throw an exception then.\n\nAgain, please add a comment that this is about sub-second precision. Took me a few minutes to figure that out.",
+      "revId": "bb880e6402a394cb94458909eb6114eb04c2304b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
