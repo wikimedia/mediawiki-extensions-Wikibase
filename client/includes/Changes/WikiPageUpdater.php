@@ -65,7 +65,6 @@ class WikiPageUpdater implements PageUpdater {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling refresh links for "
 				. $title->getText() );
 
-			//XXX: use RefreshLinksJob2 ?!
 			$job = new RefreshLinksJob(
 				$title,
 				Job::newRootJobParams( //XXX: the right thing?
