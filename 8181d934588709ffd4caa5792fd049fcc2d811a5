@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a15a4220",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T13:06:41Z",
+      "side": 1,
+      "message": "Why hardcode this to english? How could we localize this? Perhaps we need a DatePrecisionLocalizer interface?\n\nDon\u0027t we already have localization for this, for use in the UI widget?",
+      "revId": "8181d934588709ffd4caa5792fd049fcc2d811a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_61a42a05",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-12T13:06:41Z",
+      "side": 1,
+      "message": "So, any unknown precision will be handled as \"years\"? That seems very odd. I think an unknown precision should be represented as \"precision 123\", or as the plain number.",
+      "revId": "8181d934588709ffd4caa5792fd049fcc2d811a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
