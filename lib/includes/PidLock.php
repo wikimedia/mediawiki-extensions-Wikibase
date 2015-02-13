@@ -3,7 +3,7 @@
 namespace Wikibase\Lib;
 
 /**
- * Utility class for pid-locking.
+ * Utility class for process identifier (PID) locking.
  *
  * @since 0.5
  *
@@ -13,6 +13,7 @@ namespace Wikibase\Lib;
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Marius Hoch < hoo@online.de >
+ * @author Thiemo Mättig
  */
 class PidLock {
 
@@ -28,88 +29,82 @@ class PidLock {
 
 	/**
 	 * @param string $module used as a basis for the file name.
-	 * @param string $wikiId the wiki's id, used for per-wiki file names. Defaults to wfWikiID().
+	 * @param string|null $wikiId the wiki's id, used for per-wiki file names. Defaults to wfWikiID().
 	 */
-	public function __construct( $module, $wikiId ) {
+	public function __construct( $module, $wikiId = null ) {
 		$this->module = $module;
 		$this->wikiId = $wikiId;
 	}
 
 	/**
-	 * Check the given PID to see if it is alive
+	 * Check the given process identifier to see if it is alive.
 	 *
 	 * @param int $pid the process identifier to check
 	 *
-	 * @return boolean true if the process exist
+	 * @return bool true if the process exist
 	 */
-	private function isPidAlive( $pid ) {
+	private function isAlive( $pid ) {
 		// Are we anything but Windows, i.e. some kind of Unix?
 		if ( strtoupper( substr( PHP_OS, 0, 3 ) ) !== 'WIN' ) {
 			return !!posix_getsid( $pid );
 		}
-		// Welcome to Redmond
-		else {
-			$processes = explode( "\n", shell_exec( "tasklist.exe" ) );
-			if ( $processes !== false && count( $processes ) > 0 ) {
-				foreach( $processes as $process ) {
-					if( strlen( $process ) > 0
-						&& ( strpos( "Image Name", $process ) === 0
-						|| strpos( "===", $process ) === 0 ) ) {
-						continue;
-					}
-					$matches = false;
-					preg_match( "/^(\D*)(\d+).*$/", $process, $matches );
-					$processid = 0;
-					if ( $matches !== false && count ($matches) > 1 ) {
-						$processid = $matches[ 2 ];
-					}
-					if ( $processid === $pid ) {
-						return true;
-					}
+
+		$processes = explode( "\n", shell_exec( 'tasklist.exe' ) );
+		if ( is_array( $processes ) ) {
+			foreach ( $processes as $process ) {
+				if ( strpos( 'Image Name', $process ) === 0 || strpos( '===', $process ) === 0 ) {
+					continue;
+				}
+
+				if ( preg_match( '/\d+/', $process, $matches )
+					&& intval( $pid ) === intval( $matches[0] )
+				) {
+					return true;
 				}
 			}
 		}
+
 		return false;
 	}
 
 	/**
-	 * Tries to allocate a PID based lock for the process, to avoid running more than one
-	 * instance.
+	 * Tries to allocate a process identifier based lock for the process, to avoid running more than
+	 * one instance.
 	 *
-	 * Note that this method creates the file $pidfile if necessary.
+	 * Note that this method creates the file if necessary.
 	 *
 	 * @since 0.5
 	 *
-	 * @param boolean $force make the function skip the test and always grab the lock
+	 * @param bool $force make the function skip the test and always grab the lock
 	 *
-	 * @return boolean true if we got the lock, i.e. if no instance is already running,
+	 * @return bool true if we got the lock, i.e. if no instance is already running,
 	 *         or $force was set.
 	 */
-	public function getPidLock( $force = false ) {
-		$pidfile = $this->getStateFile();
+	public function getLock( $force = false ) {
+		$file = $this->getStateFile();
 
 		if ( $force !== true ) {
 			// check if the process still exist and is alive
 			// XXX: there's a race condition here.
-			if ( file_exists( $pidfile ) ) {
-				$pid = file_get_contents( $pidfile );
-				if ( self::isPidAlive( $pid ) === true ) {
+			if ( file_exists( $file ) ) {
+				$pid = file_get_contents( $file );
+				if ( $this->isAlive( $pid ) === true ) {
 					return false;
 				}
 			}
 		}
 
-		file_put_contents( $pidfile, getmypid() );
+		file_put_contents( $file, getmypid() );
 
 		return true;
 	}
 
 	/**
-	 * Remove the pid lock. Assumes that we hold it.
+	 * Remove the process identifier lock. Assumes that we hold it.
 	 *
 	 * @return bool Success
 	 */
-	public function removePidLock() {
+	public function removeLock() {
 		return unlink( $this->getStateFile() );
 	}
 
@@ -119,29 +114,20 @@ class PidLock {
 	 * @return string File path
 	 */
 	private function getStateFile() {
-		$wikiId = $this->wikiId;
-		if ( $wikiId === null ) {
-			$wikiId = wfWikiID();
-		}
+		$fileName = preg_replace('/[^a-z\d]/i', '', $this->module ) . '_'
+			. preg_replace('/[^a-z\d]/i', '', $this->wikiId ?: wfWikiID() ) . '.pid';
 
-		// Build the filename
-		$pidfileName = preg_replace('/[^a-z0-9]/i', '', $this->module ) . '_'
-				. preg_replace('/[^a-z0-9]/i', '', $wikiId ) . '.pid';
-
-		$pidfile = '/var/run/' . $pidfileName;
+		// Directory /var/run/ with system specific separators
+		$dir = DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'run' . DIRECTORY_SEPARATOR;
+		$file = $dir . $fileName;
 
 		// Let's see if we can write to the file in /var/run
-		if ( is_writable( $pidfile )
-			|| ( is_dir( dirname( $pidfile ) )
-				&& ( is_writable( dirname( $pidfile ) ) ) ) ) {
-			$pidfile = '/var/run/' . $pidfileName;
-		} else {
+		if ( !is_writable( $file ) && ( !is_dir( $dir ) || !is_writable( $dir ) ) ) {
 			// else use the temporary directory
-			$temp = str_replace( '\\', '/', sys_get_temp_dir() );
-			$pidfile = $temp . '/' . $pidfileName;
+			$file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $fileName;
 		}
 
-		return $pidfile;
+		return $file;
 	}
 
 }
