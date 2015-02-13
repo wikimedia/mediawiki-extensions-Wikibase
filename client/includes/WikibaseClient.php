@@ -49,6 +49,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\TermLookup;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -474,10 +475,7 @@ final class WikibaseClient {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	private function newSnakFormatterFactory() {
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
-			$this->contentLanguage,
-			new FormatterLabelLookupFactory( $this->getTermLookup() )
-		);
+		$valueFormatterBuilders = $this->newWikibaseValueFormatterBuilders();
 
 		$builders = new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
@@ -506,12 +504,16 @@ final class WikibaseClient {
 	 * @return OutputFormatValueFormatterFactory
 	 */
 	private function newValueFormatterFactory() {
-		$builders = new WikibaseValueFormatterBuilders(
-			$this->contentLanguage,
-			new FormatterLabelLookupFactory( $this->getTermLookup() )
-		);
-
+		$builders = $this->newWikibaseValueFormatterBuilders();
 		return new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
+	}
+
+	private function newWikibaseValueFormatterBuilders() {
+		return new WikibaseValueFormatterBuilders(
+			$this->contentLanguage,
+			new FormatterLabelLookupFactory( $this->getTermLookup() ),
+			new WikibaseContentLanguages()
+		);
 	}
 
 	/**

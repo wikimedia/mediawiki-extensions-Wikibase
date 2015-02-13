@@ -29,6 +29,7 @@ use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
@@ -176,6 +177,11 @@ class WikibaseRepo {
 	 * @var TermLookup
 	 */
 	private $termLookup;
+
+	/**
+	 * @var ContentLanguages
+	 */
+	private $monolingualTextLanguages = null;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -540,6 +546,7 @@ class WikibaseRepo {
 		return new WikibaseValueFormatterBuilders(
 			$wgContLang,
 			new FormatterLabelLookupFactory( $termLookup ),
+			$this->getMonolingualTextLanguages(),
 			$this->getEntityTitleLookup()
 		);
 	}
@@ -1033,9 +1040,16 @@ class WikibaseRepo {
 			new ValidatorBuilders(
 				$this->getEntityLookup(),
 				$this->getEntityIdParser(),
-				$urlSchemes
+				$urlSchemes,
+				$this->getMonolingualTextLanguages()
 			)
 		);
 	}
 
+	private function getMonolingualTextLanguages() {
+		if( $this->monolingualTextLanguages === null ) {
+			$this->monolingualTextLanguages = new WikibaseContentLanguages();
+		}
+		return $this->monolingualTextLanguages;
+	}
 }
