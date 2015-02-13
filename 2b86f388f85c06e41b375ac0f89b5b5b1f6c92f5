@@ -16,6 +16,24 @@
       "revId": "2b86f388f85c06e41b375ac0f89b5b5b1f6c92f5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_80f4d751",
+        "filename": "lib/includes/WikibaseContentLanguages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-13T15:46:55Z",
+      "side": 1,
+      "message": "If you look at my other patch I just uploaded: I\u0027m currently working on killing Utils, so that will happen, yes.",
+      "parentUuid": "6e7c4fa4_e0e58ba0",
+      "revId": "2b86f388f85c06e41b375ac0f89b5b5b1f6c92f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
