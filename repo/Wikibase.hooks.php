@@ -1002,6 +1002,7 @@ final class RepoHooks {
 		if ( !empty( $placeholders ) ) {
 			$injector = new TextInjector( $placeholders );
 			$userLanguageLookup = new BabelUserLanguageLookup();
+			$termsLanguages = WikibaseRepo::getDefaultInstance()->getTermsLanguages();
 			$expander = new EntityViewPlaceholderExpander(
 				new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
 				$out->getTitle(),
@@ -1015,8 +1016,14 @@ final class RepoHooks {
 
 			$html = $injector->inject( $html, array( $expander, 'getHtmlForPlaceholder' ) );
 
-			$out->addJsConfigVars( 'wbUserSpecifiedLanguages',
-				$userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ) );
+			$out->addJsConfigVars(
+				'wbUserSpecifiedLanguages',
+				// All user-specified languages, that are valid term languages
+				array_intersect(
+					$userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
+					$termsLanguages->getLanguages()
+				)
+			);
 		}
 
 		return true;
