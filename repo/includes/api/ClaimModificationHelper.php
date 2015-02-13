@@ -39,25 +39,19 @@ use Wikibase\Summary;
 class ClaimModificationHelper {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var SnakConstructionService
 	 */
-	protected $snakConstructionService;
+	private $snakConstructionService;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var EntityIdParser
 	 */
-	protected $entityIdParser;
+	private $entityIdParser;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var ClaimGuidValidator
 	 */
-	protected $claimGuidValidator;
+	private $claimGuidValidator;
 
 	/**
 	 * @since 0.4

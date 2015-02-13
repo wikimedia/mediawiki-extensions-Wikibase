@@ -30,27 +30,27 @@ class ResultBuilder {
 	/**
 	 * @var ApiResult
 	 */
-	protected $result;
+	private $result;
 
 	/**
 	 * @var int
 	 */
-	protected $missingEntityCounter;
+	private $missingEntityCounter;
 
 	/**
 	 * @var SerializerFactory
 	 */
-	protected $serializerFactory;
+	private $serializerFactory;
 
 	/**
 	 * @var EntityTitleLookup
 	 */
-	protected $entityTitleLookup;
+	private $entityTitleLookup;
 
 	/**
 	 * @var SerializationOptions
 	 */
-	protected $options;
+	private $options;
 
 	/**
 	 * @param ApiResult $result

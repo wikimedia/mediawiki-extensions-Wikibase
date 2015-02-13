@@ -35,12 +35,12 @@ class SearchEntities extends ApiBase {
 	/**
 	 * @var EntityTitleLookup
 	 */
-	protected $titleLookup;
+	private $titleLookup;
 
 	/**
 	 * @var EntityIdParser
 	 */
-	protected $idParser;
+	private $idParser;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -61,8 +61,6 @@ class SearchEntities extends ApiBase {
 	 * Get the entities corresponding to the provided language and term pair.
 	 * Term means it is either a label or an alias.
 	 *
-	 * @since 0.2
-	 *
 	 * @param string $term
 	 * @param string|null $entityType
 	 * @param string $language
@@ -71,7 +69,7 @@ class SearchEntities extends ApiBase {
 	 *
 	 * @return EntityId[]
 	 */
-	protected function searchEntities( $term, $entityType, $language, $limit, $prefixSearch ) {
+	private function searchEntities( $term, $entityType, $language, $limit, $prefixSearch ) {
 		wfProfileIn( __METHOD__ );
 
 		$ids = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->getMatchingIDs(

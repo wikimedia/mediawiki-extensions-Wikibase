@@ -25,14 +25,12 @@ class ParseValue extends ApiWikibase {
 	/**
 	 * @var null|ValueParserFactory
 	 */
-	protected $factory = null;
+	private $factory = null;
 
 	/**
-	 * @since 0.1
-	 *
 	 * @return ValueParserFactory
 	 */
-	protected function getFactory() {
+	private function getFactory() {
 		if ( $this->factory === null ) {
 			$this->factory = new ValueParserFactory( $GLOBALS['wgValueParsers'] );
 		}
@@ -101,7 +99,7 @@ class ParseValue extends ApiWikibase {
 		return $result;
 	}
 
-	protected function addParseErrorToResult( &$result, ParseException $parseError ) {
+	private function addParseErrorToResult( &$result, ParseException $parseError ) {
 		$result['error'] = get_class( $parseError );
 
 		$result['error-info'] = $parseError->getMessage();
@@ -122,13 +120,11 @@ class ParseValue extends ApiWikibase {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @param string $optionsParam
 	 *
 	 * @return ParserOptions
 	 */
-	protected function getOptionsObject( $optionsParam ) {
+	private function getOptionsObject( $optionsParam ) {
 		$parserOptions = new ParserOptions();
 		$parserOptions->setOption( ValueParser::OPT_LANG, $this->getLanguage()->getCode() );
 
