@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_40531f43",
+        "filename": "lib/includes/PidLock.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-13T16:17:35Z",
+      "side": 1,
+      "message": "string|null",
+      "revId": "acf54e9dd03a043494bab3c6f482a911092c8eee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a0ad5330",
+        "filename": "lib/includes/PidLock.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-13T16:17:35Z",
+      "side": 1,
+      "message": "What the ...? ;-)",
+      "revId": "acf54e9dd03a043494bab3c6f482a911092c8eee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a02a338d",
+        "filename": "lib/includes/PidLock.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-13T16:17:35Z",
+      "side": 1,
+      "message": "count check is superfluous.",
+      "revId": "acf54e9dd03a043494bab3c6f482a911092c8eee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c025efbd",
+        "filename": "lib/includes/PidLock.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-13T16:17:35Z",
+      "side": 1,
+      "message": "strlen check is superfluous.",
+      "revId": "acf54e9dd03a043494bab3c6f482a911092c8eee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_60341bf2",
+        "filename": "lib/includes/PidLock.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-13T16:17:35Z",
+      "side": 1,
+      "message": "This is horrible to read. See my follow-up.",
+      "revId": "acf54e9dd03a043494bab3c6f482a911092c8eee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e0b34b94",
+        "filename": "lib/includes/PidLock.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-13T16:17:35Z",
+      "side": 1,
+      "message": "self:: is wrong, please use $this-\u003e.",
+      "revId": "acf54e9dd03a043494bab3c6f482a911092c8eee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4096bff4",
+        "filename": "lib/includes/PidLock.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-13T16:17:35Z",
+      "side": 1,
+      "message": "Was called \"makeStateFilename\" before. Why \"file\" and not \"getStateFileName\"?",
+      "revId": "acf54e9dd03a043494bab3c6f482a911092c8eee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a086b3bc",
+        "filename": "lib/includes/PidLock.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-13T16:17:35Z",
+      "side": 1,
+      "message": "Odd casing in some variable names. $pidFile and $pidFileName.",
+      "revId": "acf54e9dd03a043494bab3c6f482a911092c8eee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_60865bae",
+        "filename": "lib/includes/PidLock.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-13T16:17:35Z",
+      "side": 1,
+      "message": "This line is pointless, the variable already contains exactly that.",
+      "revId": "acf54e9dd03a043494bab3c6f482a911092c8eee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_20baa36d",
+        "filename": "lib/includes/PidLock.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-13T16:17:35Z",
+      "side": 1,
+      "message": "Ouch. That slash replacement code is broken. Why is this here? For Windows machines? Why? the sys call is expected to return the system specific slashes, why try to \"fix\" it?",
+      "revId": "acf54e9dd03a043494bab3c6f482a911092c8eee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
