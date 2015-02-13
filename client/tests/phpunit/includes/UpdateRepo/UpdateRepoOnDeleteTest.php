@@ -2,9 +2,10 @@
 
 namespace Wikibase\Client\Tests\UpdateRepo;
 
+use JobQueueGroup;
+use JobSpecification;
 use Title;
 use User;
-use JobSpecification;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -25,7 +26,7 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return array
 	 */
-	protected function getFakeData() {
+	private function getFakeData() {
 		$entityId = new ItemId( 'Q123' );
 
 		$siteLinkLookupMock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
@@ -69,9 +70,9 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Get a JobQueueGroup mock for the use in UpdateRepo::injectJob.
 	 *
-	 * @return object
+	 * @return JobQueueGroup
 	 */
-	protected function getJobQueueGroupMock() {
+	private function getJobQueueGroupMock() {
 		$jobQueueGroupMock = $this->getMockBuilder( '\JobQueueGroup' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -108,7 +109,7 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Verify a created job
 	 *
-	 * @param Job $job
+	 * @param JobSpecification $job
 	 */
 	public function verifyJob( JobSpecification $job ) {
 		$itemId = new ItemId( 'Q123' );
@@ -131,4 +132,5 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 
 		$updateRepo->injectJob( $jobQueueGroupMock );
 	}
+
 }
