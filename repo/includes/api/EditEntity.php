@@ -25,6 +25,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -44,9 +45,9 @@ use Wikibase\Summary;
 class EditEntity extends ModifyEntity {
 
 	/**
-	 * @var string[]
+	 * @var ContentLanguages
 	 */
-	private $validLanguageCodes;
+	private $termsLanguages;
 
 	/**
 	 * @var FingerprintChangeOpFactory
@@ -73,7 +74,7 @@ class EditEntity extends ModifyEntity {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$this->validLanguageCodes = WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages();
+		$this->termsLanguages = WikibaseRepo::getDefaultInstance()->getTermsLanguages();
 
 		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
@@ -803,8 +804,7 @@ class EditEntity extends ModifyEntity {
 			}
 		}
 
-		// FIXME ContentLanguages should have a method hasLanguage
-		if ( isset( $this->validLanguageCodes ) && !in_array( $arg['language'], $this->validLanguageCodes ) ) {
+		if ( !$this->termsLanguages->hasLanguage( $arg['language'] ) ) {
 			$this->dieError(
 				"unknown language: {$arg['language']}",
 				'not-recognized-language' );
