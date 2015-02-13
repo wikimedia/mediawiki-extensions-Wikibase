@@ -18,28 +18,6 @@ use Wikibase\Utils;
  */
 class UtilsTest extends \MediaWikiTestCase {
 
-	/**
-	 * @group WikibaseUtils
-	 * @dataProvider providerGetLanguageCodes
-	 */
-	public function testGetLanguageCodes( $lang ) {
-		$result = Utils::getLanguageCodes();
-		$this->assertContains(
-			$lang,
-			$result,
-			"The language code {$lang} could not be found in the returned result"
-		);
-	}
-
-	public function providerGetLanguageCodes() {
-		return array(
-			array( 'de' ),
-			array( 'en' ),
-			array( 'no' ),
-			array( 'nn' ),
-		);
-	}
-
 	public function provideFetchLanguageName() {
 		return array(
 			array( // #0
