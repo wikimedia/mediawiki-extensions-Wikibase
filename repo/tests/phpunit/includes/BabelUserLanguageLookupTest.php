@@ -65,10 +65,10 @@ class BabelUserLanguageLookupTest extends \PHPUnit_Framework_TestCase {
 
 	public function userLanguagesProvider() {
 		return array(
-			// 1. Language from the users settings
-			// 2. List of languages from the users babel box (as returned by the Babel extension)
-			// 3. List of usable user specified languages
-			// 4. Expected collection of all languages
+			// 0. Language from the users settings
+			// 1. List of languages from the users babel box (as returned by the Babel extension)
+			// 2. List of usable user specified languages
+			// 3. Expected collection of all languages
 			array( 'de', '',         '',         'de'       ),
 			array( 'de', 'en',       'en',       'de|en'    ),
 			array( 'de', 'de|en|fr', 'de|en|fr', 'de|en|fr' ),
@@ -77,9 +77,9 @@ class BabelUserLanguageLookupTest extends \PHPUnit_Framework_TestCase {
 			array( 'en', 'de|en|fr', 'de|en|fr', 'en|de|fr' ),
 
 			// Codes reported from Babel are getting lower-cased
-			array( 'en', 'nds-NL',   'nds-nl',   'en|nds-nl', 'en|nds-nl', 'nds-nl' ),
+			array( 'en', 'nds-NL',   'nds-nl',   'en|nds-nl' ),
 
-			// Invalid codes (codes we don't support) returned by Babel get removed
+			// Whatever we get from Babel will be retained
 			array( 'en', 'invalid-language-code', '', 'en', 'en', '' ),
 		);
 	}

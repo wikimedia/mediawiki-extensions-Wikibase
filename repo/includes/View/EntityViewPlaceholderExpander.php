@@ -87,7 +87,7 @@ class EntityViewPlaceholderExpander {
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param UserLanguageLookup $userLanguageLookup
-	 * @param ContentLanguages $termLanguages
+	 * @param ContentLanguages $termsLanguages
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -124,10 +124,12 @@ class EntityViewPlaceholderExpander {
 			} else {
 				// ignore current interface language
 				$skip = array( $this->uiLanguage->getCode() );
-				$this->extraLanguages = array_diff(
+				$langs = array_diff(
 					$this->userLanguageLookup->getAllUserLanguages( $this->user ),
 					$skip
 				);
+				// Make sure we only report actual term languages
+				$this->extraLanguages = array_intersect( $langs, $this->termsLanguages->getLanguages() );
 			}
 		}
 
