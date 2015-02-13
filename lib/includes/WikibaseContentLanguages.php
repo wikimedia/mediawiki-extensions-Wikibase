@@ -2,12 +2,14 @@
 
 namespace Wikibase\Lib;
 
+use Language;
 use Wikibase\Utils;
 
 /**
  * Provide languages supported as content language based on Wikibase\Utils
  *
  * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Marius Hoch < hoo@online.de >
  */
 class WikibaseContentLanguages implements ContentLanguages {
 
@@ -15,7 +17,8 @@ class WikibaseContentLanguages implements ContentLanguages {
 	 * @return string[] Array of language codes supported as content language
 	 */
 	public function getLanguages() {
-		return Utils::getLanguageCodes();
+		$languageCodes = array_keys( Language::fetchLanguageNames() );
+		return $languageCodes;
 	}
 
 	/**
