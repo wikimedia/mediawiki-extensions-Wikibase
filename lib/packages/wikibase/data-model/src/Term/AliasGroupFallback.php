@@ -61,7 +61,7 @@ class AliasGroupFallback extends AliasGroup {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
 	public function getSourceLanguageCode() {
 		return $this->sourceLanguageCode;

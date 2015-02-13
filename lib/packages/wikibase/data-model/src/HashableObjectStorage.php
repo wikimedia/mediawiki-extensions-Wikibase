@@ -19,8 +19,6 @@ use Wikibase\DataModel\Internal\MapValueHasher;
 class HashableObjectStorage extends \SplObjectStorage implements \Comparable {
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.2
 	 *
 	 * @param array $objects
