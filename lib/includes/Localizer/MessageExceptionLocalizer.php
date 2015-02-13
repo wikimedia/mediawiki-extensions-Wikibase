@@ -27,6 +27,7 @@ class MessageExceptionLocalizer implements ExceptionLocalizer {
 			throw new InvalidArgumentException( '$exception is not a MessageException.' );
 		}
 
+		/** @var MessageException $exception */
 		$key = $exception->getKey();
 		$params = $exception->getParams();
 		$msg = wfMessage( $key )->params( $params );
@@ -44,4 +45,5 @@ class MessageExceptionLocalizer implements ExceptionLocalizer {
 	public function hasExceptionMessage( Exception $exception ) {
 		return $exception instanceof MessageException;
 	}
+
 }
