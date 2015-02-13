@@ -65,7 +65,7 @@ class PruneChanges extends Maintenance {
 		$force = $this->getOption( 'force', false );
 		$pidLock = new PidLock( 'WBpruneChanges', wfWikiID() );
 
-		if ( !$pidLock->getPidLock( $force ) ) {
+		if ( !$pidLock->getLock( $force ) ) {
 			$this->output( date( 'H:i:s' ) . " already running, exiting\n" );
 			exit( 5 );
 		}
@@ -100,7 +100,7 @@ class PruneChanges extends Maintenance {
 		$deleted = $this->pruneChanges( $until );
 		$this->output( date( 'H:i:s' ) . " $deleted rows pruned.\n" );
 
-		$pidLock->removePidLock(); // delete lockfile on normal exit
+		$pidLock->removeLock(); // delete lockfile on normal exit
 	}
 
 	/**
