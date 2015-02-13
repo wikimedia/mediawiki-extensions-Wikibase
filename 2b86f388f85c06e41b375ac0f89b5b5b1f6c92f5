@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e0e58ba0",
+        "filename": "lib/includes/WikibaseContentLanguages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-13T15:42:09Z",
+      "side": 1,
+      "message": "Uh, that\u0027s not a nice implementation. Linear runtime over an 300 elements array. Can be constant with array_key_exists but, obviously, needs something that\u0027s not the current Utils implementation.\n\nI suggest to copy-paste the implementation here and drop the Utils dependency completely.",
+      "revId": "2b86f388f85c06e41b375ac0f89b5b5b1f6c92f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
