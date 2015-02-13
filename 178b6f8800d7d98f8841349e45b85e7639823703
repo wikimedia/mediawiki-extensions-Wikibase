@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2035c3a3",
+        "filename": "lib/includes/store/EntityRetrievingTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-13T14:12:16Z",
+      "side": 1,
+      "message": "could be removed",
+      "revId": "178b6f8800d7d98f8841349e45b85e7639823703",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_80be17f9",
+        "filename": "lib/includes/store/EntityRetrievingTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-13T14:12:16Z",
+      "side": 1,
+      "message": "could be removed",
+      "revId": "178b6f8800d7d98f8841349e45b85e7639823703",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
