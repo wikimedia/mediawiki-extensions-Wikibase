@@ -99,7 +99,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	private function makeTestItemData() {
 		$items = array();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->setLabel( 'de', 'Berlin' );
 		$item->setDescription( 'de', 'Stadt in Deutschland' );
 		$items['Berlin'][] = $item;
@@ -115,7 +115,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$items['Berlin'][] = $item;
 
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->setLabel( 'en', 'London' );
 		$items['London'][] = $item;
 
@@ -124,13 +124,13 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$items['London'][] = $item;
 
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->setLabel( 'de', 'Oslo' );
 		$item->setLabel( 'en', 'Oslo' );
 		$items['Oslo'][] = $item;
 
 		if ( $this->shouldTestRedirects() ) {
-			$item = Item::newEmpty();
+			$item = new Item();
 			$item->setLabel( 'de', 'Berlin' );
 			$items['Berlin2'][] = $item;
 

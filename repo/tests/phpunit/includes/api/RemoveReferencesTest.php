@@ -74,7 +74,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 
 	public function testRequests() {
 		foreach ( $this->statementProvider() as $statement ) {
-			$item = Item::newEmpty();
+			$item = new Item();
 
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );

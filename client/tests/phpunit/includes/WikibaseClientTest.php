@@ -182,7 +182,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityContentDataCodec', $codec );
 
 		$this->setExpectedException( 'RuntimeException' );
-		$codec->encodeEntity( Item::newEmpty(), CONTENT_FORMAT_JSON );
+		$codec->encodeEntity( new Item(), CONTENT_FORMAT_JSON );
 	}
 
 	public function testGetInternalEntityDeserializer() {

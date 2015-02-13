@@ -49,15 +49,15 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$berlinData = EntityTestHelper::getEntityOutput( 'Berlin' );
 			self::$idMap['%BerlinP56%'] = $berlinData['claims'][$p56][0]['id'];
 
-			$badge = Item::newEmpty();
+			$badge = new Item();
 			$store->saveEntity( $badge, 'EditEntityTestQ42', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%Q42%'] = $badge->getId()->getSerialization();
 
-			$badge = Item::newEmpty();
+			$badge = new Item();
 			$store->saveEntity( $badge, 'EditEntityTestQ149', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%Q149%'] = $badge->getId()->getSerialization();
 
-			$badge = Item::newEmpty();
+			$badge = new Item();
 			$store->saveEntity( $badge, 'EditEntityTestQ32', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
 

@@ -85,7 +85,7 @@ class GetClaimsTest extends \ApiTestCase {
 
 		$propertyId = $property->getId();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$this->addStatements( $item, $propertyId );
 		$this->save( $item );
 
@@ -221,7 +221,7 @@ class GetClaimsTest extends \ApiTestCase {
 	 */
 	public function testGetInvalidIds( $entity, $property ) {
 		if ( !$entity ) {
-			$item = Item::newEmpty();
+			$item = new Item();
 			$this->addStatements( $item, new PropertyId( 'P13' ) );
 
 			$this->save( $item );

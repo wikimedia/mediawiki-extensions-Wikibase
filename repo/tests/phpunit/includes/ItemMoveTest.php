@@ -60,7 +60,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$this->entityRevision = $store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		$id = $this->entityRevision->getEntity()->getId();

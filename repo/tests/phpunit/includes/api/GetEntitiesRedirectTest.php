@@ -24,7 +24,7 @@ use Wikibase\Repo\WikibaseRepo;
 class GetEntitiesRedirectTest extends \ApiTestCase {
 
 	private function createEntity( $label ) {
-		$entity = Item::newEmpty();
+		$entity = new Item();
 		$entity->setLabel( 'en', $label );
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();

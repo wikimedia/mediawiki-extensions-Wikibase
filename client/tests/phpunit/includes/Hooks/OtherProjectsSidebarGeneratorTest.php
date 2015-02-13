@@ -26,7 +26,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	 * @dataProvider projectLinkSidebarProvider
 	 */
 	public function testBuildProjectLinkSidebar( array $siteIdsToOutput, array $result ) {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
 		$item->addSiteLink( new SiteLink( 'enwiktionary', 'Nyan Cat' ) );
 

@@ -134,7 +134,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $expectedDescription
 	 */
 	public function testApply( $changeOps, $language, $expectedLabel, $expectedDescription ) {
-		$entity = Item::newEmpty();
+		$entity = new Item();
 
 		$changeOps->apply( $entity );
 		$this->assertEquals( $expectedLabel, $entity->getLabel( $language ) );
@@ -142,7 +142,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testValidate() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$guid = 'guid';
 		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), new StringValue( 'INVALID' ) );
@@ -167,7 +167,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testValidate_() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$changeOp = $this->getMockBuilder( '\Wikibase\ChangeOp\ChangeOp' )
 			->disableOriginalConstructor()

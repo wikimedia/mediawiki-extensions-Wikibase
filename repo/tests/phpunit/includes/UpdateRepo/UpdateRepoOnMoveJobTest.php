@@ -106,7 +106,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		// Needed as UpdateRepoOnMoveJob instantiates a User object
 		$user->addToDatabase();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Old page name', array( new ItemId( 'Q42' ) ) );
 
 		$store = new MockRepository();

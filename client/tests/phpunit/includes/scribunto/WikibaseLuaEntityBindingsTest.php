@@ -66,7 +66,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 		$statement = new Statement( new Claim( $snak ) );
 		$statement->setGuid( 'gsdfgsadg' );
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->addClaim( $statement );
 
 		return $item;
@@ -116,7 +116,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFormatPropertyValuesNoProperty() {
-		$entityLookup = $this->getEntityLookup( Item::newEmpty() );
+		$entityLookup = $this->getEntityLookup( new Item() );
 
 		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings( $entityLookup );
 		$ret = $wikibaseLuaEntityBindings->formatPropertyValues( 'Q2', 'P123456' );

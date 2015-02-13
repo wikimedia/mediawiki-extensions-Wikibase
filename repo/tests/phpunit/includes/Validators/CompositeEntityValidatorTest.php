@@ -46,7 +46,7 @@ class CompositeEntityValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validEntityProvider
 	 */
 	public function testValidateEntity( $validators, $expected ) {
-		$entity = Item::newEmpty();
+		$entity = new Item();
 
 		$validator = new CompositeEntityValidator( $validators );
 		$result = $validator->validateEntity( $entity );

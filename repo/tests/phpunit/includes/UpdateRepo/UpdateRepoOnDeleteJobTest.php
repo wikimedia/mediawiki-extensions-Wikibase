@@ -106,7 +106,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	 * @param string $oldTitle
 	 */
 	public function testRun( $expected, $titleExists, $oldTitle ) {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Delete me', array( new ItemId( 'Q42' ) ) );
 
 		$store = new MockRepository();

@@ -22,7 +22,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	 * @return string
 	 */
 	private function createNewItem() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		// add data and check if it is shown in the form
 		$item->setLabel( 'de', 'foo' );
 		$item->setDescription( 'de', 'foo' );

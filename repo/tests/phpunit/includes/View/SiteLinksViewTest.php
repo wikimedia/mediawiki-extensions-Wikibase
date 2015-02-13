@@ -167,7 +167,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			false,
 		);
 
-		$newItem = Item::newEmpty();
+		$newItem = new Item();
 
 		// item with no id, as happens with new items
 		$testCases[] = array(
@@ -251,7 +251,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getEntity' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === 'Q42' ) {
-					$item = Item::newEmpty();
+					$item = new Item();
 					$item->setLabel( 'en', 'Featured article' );
 					return $item;
 				}

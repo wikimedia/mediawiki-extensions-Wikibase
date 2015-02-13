@@ -67,7 +67,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	public function testRequests() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		$statement = new Statement( new Claim( new PropertyNoValueSnak( self::$propertyIds[0] ) ) );
@@ -135,7 +135,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	public function testRequestWithInvalidProperty() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		// Create a statement to act upon:
@@ -157,7 +157,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	public function testSettingIndex() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$item = Item::newEmpty();
+		$item = new Item();
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		// Create a statement to act upon:

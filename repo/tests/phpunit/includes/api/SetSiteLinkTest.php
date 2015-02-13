@@ -145,15 +145,15 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 			$this->initTestEntities( array( 'StringProp', 'Leipzig', 'Berlin' ) );
 
-			$badge = Item::newEmpty();
+			$badge = new Item();
 			$store->saveEntity( $badge, 'SetSiteLinkTestGA', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$gaItemId = $badge->getId();
 
-			$badge = Item::newEmpty();
+			$badge = new Item();
 			$store->saveEntity( $badge, 'SetSiteLinkTestFA', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$faItemId = $badge->getId();
 
-			$badge = Item::newEmpty();
+			$badge = new Item();
 			$store->saveEntity( $badge, 'SetSiteLinkTestOther', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$otherItemId = $badge->getId();
 

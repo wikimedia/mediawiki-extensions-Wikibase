@@ -136,7 +136,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 
 	public function listEntitiesProvider() {
 		$property = Property::newFromType( 'string' );
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		return array(
 			'empty' => array(
@@ -155,7 +155,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetPageIdForEntityId() {
-		$entity = Item::newEmpty();
+		$entity = new Item();
 
 		$epp = $this->newEntityPerPageTable( array( $entity ) );
 		$entityId = $entity->getId();
@@ -172,8 +172,8 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 			$this->markTestSkipped( 'Redirects not supported' );
 		}
 
-		$entity = Item::newEmpty();
-		$entity2 = Item::newEmpty();
+		$entity = new Item();
+		$entity2 = new Item();
 
 		$epp = $this->newEntityPerPageTable( array( $entity, $entity2 ) );
 		$redirectId = $entity->getId();

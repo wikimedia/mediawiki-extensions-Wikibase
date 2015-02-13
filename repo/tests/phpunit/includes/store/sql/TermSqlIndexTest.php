@@ -402,7 +402,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		return array(
 			array( $expectedTerms, $item ),
-			array( array(), Item::newEmpty() ),
+			array( array(), new Item() ),
 			array( array(), $this->getMock( 'Wikibase\DataModel\Entity\EntityDocument' ) )
 		);
 	}

@@ -75,7 +75,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		foreach ( $this->statementProvider() as $statement ) {
-			$item = Item::newEmpty();
+			$item = new Item();
 
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
