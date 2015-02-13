@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use InvalidArgumentException;
+use Status;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOps;
@@ -13,7 +14,6 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Utils;
 
 /**
  * API module to set the aliases for a Wikibase entity.
@@ -47,13 +47,13 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 * @see ModifyEntity::getRequiredPermissions()
 	 *
 	 * @param Entity $entity
 	 * @param array $params
 	 *
 	 * @throws \InvalidArgumentException
-	 * @return array|\Status
+	 * @return array|Status
 	 */
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
@@ -69,7 +69,7 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::validateParameters()
+	 * @see ModifyEntity::validateParameters()
 	 */
 	protected function validateParameters( array $params ) {
 		parent::validateParameters( $params );
@@ -87,7 +87,7 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
+	 * @see ModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
 		wfProfileIn( __METHOD__ );
@@ -204,7 +204,7 @@ class SetAliases extends ModifyEntity {
 					ApiBase::PARAM_ISMULTI => true,
 				),
 				'language' => array(
-					ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
+					ApiBase::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
 					ApiBase::PARAM_REQUIRED => true,
 				),
 			)

@@ -8,8 +8,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Utils;
 
 /**
  * Generates HTML to display the fingerprint of an entity
@@ -40,18 +40,26 @@ class EntityTermsView {
 	private $languageCode;
 
 	/**
+	 * @var ContentLanguages
+	 */
+	private $termsLanguages;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param SectionEditLinkGenerator|null $sectionEditLinkGenerator
+	 * @param ContentLanguages $termsLanguages
 	 * @param string $languageCode
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		SectionEditLinkGenerator $sectionEditLinkGenerator = null,
+		ContentLanguages $termsLanguages,
 		$languageCode
 	) {
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->languageCode = $languageCode;
 		$this->templateFactory = $templateFactory;
+		$this->termsLanguages = $termsLanguages;
 	}
 
 	/**
@@ -151,7 +159,7 @@ class EntityTermsView {
 
 	/**
 	 * @param Fingerprint $fingerprint
-	 * @param string[] $languageCodes
+	 * @param string[] $languageCodes The languages the user requested to be shown
 	 * @param Title|null $title
 	 * @param boolean $showEntitytermslistview
 	 *
@@ -214,7 +222,7 @@ class EntityTermsView {
 				is_null( $title )
 					? '#'
 					: $title->getLocalURL( array( 'setlang' => $languageCode ) ),
-				htmlspecialchars( Utils::fetchLanguageName( $languageCode ) )
+				htmlspecialchars( $this->termsLanguages->getName( $languageCode, $this->languageCode ) )
 			),
 			$this->templateFactory->render( 'wikibase-labelview',
 				$hasLabel ? '' : 'wb-empty',

@@ -512,7 +512,8 @@ final class WikibaseClient {
 		return new WikibaseValueFormatterBuilders(
 			$this->contentLanguage,
 			new FormatterLabelLookupFactory( $this->getTermLookup() ),
-			new WikibaseContentLanguages()
+			new WikibaseContentLanguages(),
+			$this->getTermsLanguages()
 		);
 	}
 
@@ -763,6 +764,15 @@ final class WikibaseClient {
 			$siteId,
 			$this->settings->getSetting( 'injectRecentChanges' )
 		);
+	}
+
+	/**
+	 * Get a ContentLanguages object holding the languages available for labels, descriptions and aliases.
+	 *
+	 * @return ContentLanguages
+	 */
+	public function getTermsLanguages() {
+		return new WikibaseContentLanguages();
 	}
 
 }

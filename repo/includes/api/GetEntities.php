@@ -14,7 +14,6 @@ use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
-use Wikibase\Utils;
 
 /**
  * API module to get the data for one or more Wikibase entities.
@@ -315,7 +314,7 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'languages' => array(
-				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
+				ApiBase::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'languagefallback' => array(

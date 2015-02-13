@@ -60,7 +60,8 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 			$language,
 			$idParser,
 			$entityRevisionLookup,
-			$userLanguages
+			$userLanguages,
+			$this->getMock( 'Wikibase\Lib\ContentLanguages' )
 		);
 	}
 

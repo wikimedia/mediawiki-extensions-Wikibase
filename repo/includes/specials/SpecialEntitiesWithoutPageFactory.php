@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Wikibase\EntityFactory;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Term;
@@ -22,7 +23,8 @@ class SpecialEntitiesWithoutPageFactory {
 
 		return new self(
 			$wikibaseRepo->getStore()->newEntityPerPage(),
-			$wikibaseRepo->getEntityFactory()
+			$wikibaseRepo->getEntityFactory(),
+			$wikibaseRepo->getTermsLanguages()
 		);
 	}
 
@@ -44,9 +46,19 @@ class SpecialEntitiesWithoutPageFactory {
 	 */
 	private $entityFactory;
 
-	public function __construct( EntityPerPage $entityPerPage, EntityFactory $entityFactory ) {
+	/**
+	 * @var ContentLanguages
+	 */
+	private $termsLanguages;
+
+	public function __construct(
+		EntityPerPage $entityPerPage,
+		EntityFactory $entityFactory,
+		ContentLanguages $termsLanguages
+	) {
 		$this->entityPerPage = $entityPerPage;
 		$this->entityFactory = $entityFactory;
+		$this->termsLanguages = $termsLanguages;
 	}
 
 	/**
@@ -60,7 +72,8 @@ class SpecialEntitiesWithoutPageFactory {
 			Term::TYPE_LABEL,
 			'wikibase-entitieswithoutlabel-legend',
 			$this->entityPerPage,
-			$this->entityFactory
+			$this->entityFactory,
+			$this->termsLanguages
 		);
 	}
 
@@ -75,7 +88,8 @@ class SpecialEntitiesWithoutPageFactory {
 			Term::TYPE_DESCRIPTION,
 			'wikibase-entitieswithoutdescription-legend',
 			$this->entityPerPage,
-			$this->entityFactory
+			$this->entityFactory,
+			$this->termsLanguages
 		);
 	}
 

@@ -100,13 +100,18 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		return $repo;
 	}
 
+	private function getTermsLanguages() {
+		return $this->getMock( 'Wikibase\Lib\ContentLanguages' );
+	}
+
 	protected function newSpecialPage() {
 		$page = new SpecialItemDisambiguation();
 
 		$page->initServices(
 			$this->getTermIndex(),
 			$this->getEntityLookup(),
-			$this->getEntityTitleLookup()
+			$this->getEntityTitleLookup(),
+			$this->getTermsLanguages()
 		);
 
 		return $page;
