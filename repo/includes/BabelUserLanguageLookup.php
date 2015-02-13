@@ -3,7 +3,6 @@
 namespace Wikibase\Repo;
 
 use User;
-use Wikibase\Utils;
 use Wikibase\Lib\UserLanguageLookup;
 
 /**
@@ -51,6 +50,7 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 	/**
 	 * Returns a list of languages the user specified in addition to the non-optional interface
 	 * language.
+	 * Note: This can contain language codes not actually valid to MediaWiki or valid at all.
 	 *
 	 * @param User $user The current user.
 	 *
@@ -66,10 +66,6 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 		// that for regions.
 		$languages = array_map( 'strtolower', $languages );
 
-		$supportedLanguages = Utils::getLanguageCodes();
-		$languages = array_intersect( $languages, $supportedLanguages );
-		$languages = array_values( $languages ); // Reindex
-
 		return $languages;
 	}
 
@@ -78,6 +74,7 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 	 * preference, duplicates stripped:
 	 * 1. The interface language from the user's settings
 	 * 2. All languages in the user's Babel box
+	 * Note: This can contain language codes not actually valid to MediaWiki or valid at all.
 	 *
 	 * @param User $user The current user.
 	 *
