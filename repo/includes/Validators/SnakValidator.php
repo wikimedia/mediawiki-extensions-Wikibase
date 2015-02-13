@@ -17,6 +17,7 @@ use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\DataTypeValidatorFactory;
 
 /**
  * Class SnakValidator for validating Snaks.
@@ -29,21 +30,28 @@ use Wikibase\DataModel\Statement\Statement;
 class SnakValidator implements ValueValidator {
 
 	/**
+	 * @var DataTypeFactory
+	 */
+	private $dataTypeFactory;
+
+	/**
 	 * @var PropertyDataTypeLookup
 	 */
 	private $propertyDataTypeLookup;
 
 	/**
-	 * @var DataTypeFactory
+	 * @var DataTypeValidatorFactory
 	 */
-	private $dataTypeFactory;
+	private $validatorFactory;
 
 	public function __construct(
 		PropertyDataTypeLookup $propertyDataTypeLookup,
-		DataTypeFactory $dataTypeFactory
+		DataTypeFactory $dataTypeFactory,
+		DataTypeValidatorFactory $validatorFactory
 	) {
-		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
+		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->validatorFactory = $validatorFactory;
 	}
 
 	/**
@@ -174,7 +182,7 @@ class SnakValidator implements ValueValidator {
 	 * @return Result
 	 */
 	public function validateDataValue( DataValue $dataValue, $dataTypeId ) {
-		$dataType = $this->dataTypeFactory->getType( $dataTypeId );
+		$dataValueType = $this->dataTypeFactory->getType( $dataTypeId )->getDataValueType();
 
 		if ( $dataValue instanceof UnDeserializableValue ) {
 			$result = Result::newError( array(
@@ -185,22 +193,21 @@ class SnakValidator implements ValueValidator {
 					array( $dataValue->getReason() )
 				),
 			) );
-		} elseif ( $dataType->getDataValueType() != $dataValue->getType() ) {
+		} elseif ( $dataValueType != $dataValue->getType() ) {
 			$result = Result::newError( array(
 				Error::newError(
-					'Bad value type: ' . $dataValue->getType() . ', expected ' . $dataType->getDataValueType(),
+					'Bad value type: ' . $dataValue->getType() . ', expected ' . $dataValueType,
 					null,
 					'bad-value-type',
-					array( $dataValue->getType(), $dataType->getDataValueType() )
+					array( $dataValue->getType(), $dataValueType )
 				),
 			) );
 		} else {
 			$result = Result::newSuccess();
 		}
 
-		//XXX: Perhaps DataType should have a validate() method (even implement ValueValidator)
-		//     At least, DataType should expose only one validator, which would be a CompositeValidator
-		foreach ( $dataType->getValidators() as $validator ) {
+		//XXX: DataTypeValidatorFactory should expose only one validator, which would be a CompositeValidator
+		foreach ( $this->validatorFactory->getValidators( $dataTypeId ) as $validator ) {
 			$subResult = $validator->validate( $dataValue );
 
 			//XXX: Some validators should be fatal and cause us to abort the loop.

@@ -8,6 +8,7 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
@@ -20,6 +21,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Validators\SnakValidator;
 
 /**
@@ -32,7 +34,7 @@ use Wikibase\Validators\SnakValidator;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
+class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var DataTypeFactory
@@ -44,6 +46,11 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 	 */
 	protected $propertyDataTypeLookup;
 
+	/**
+	 * @var DataTypeValidatorFactory
+	 */
+	private $validatorFactory;
+
 	protected function setUp() {
 		parent::setUp();
 
@@ -52,8 +59,8 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 		$lengthValidator = new TestValidator( '/^.{1,10}$/' );
 
 		$this->dataTypeFactory = new DataTypeFactory();
-		$this->dataTypeFactory->registerDataType( new DataType( 'numeric', 'string', array( $numericValidator, $lengthValidator ) ) );
-		$this->dataTypeFactory->registerDataType( new DataType( 'alphabetic', 'string', array( $alphabeticValidator, $lengthValidator ) ) );
+		$this->dataTypeFactory->registerDataType( new DataType( 'numeric', 'string', array() ) );
+		$this->dataTypeFactory->registerDataType( new DataType( 'alphabetic', 'string', array() ) );
 
 		$p1 = new PropertyId( 'p1' );
 		$p2 = new PropertyId( 'p2' );
@@ -61,6 +68,13 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 		$this->propertyDataTypeLookup = new InMemoryDataTypeLookup();
 		$this->propertyDataTypeLookup->setDataTypeForProperty( $p1, 'numeric' );
 		$this->propertyDataTypeLookup->setDataTypeForProperty( $p2, 'alphabetic' );
+
+		$this->validatorFactory = $this->getMock( 'Wikibase\Repo\DataTypeValidatorFactory' );
+		$this->validatorFactory->expects( $this->any() )
+			->method( 'getValidators' )
+			->will( $this->returnCallback( function( $dataTypeId ) use( $numericValidator, $alphabeticValidator, $lengthValidator ) {
+					return array( $dataTypeId === 'numeric' ? $numericValidator : $alphabeticValidator, $lengthValidator );
+				} ) );
 	}
 
 	public function provideValidateClaimSnaks() {
@@ -112,7 +126,7 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideValidateClaimSnaks
 	 */
 	public function testValidateClaimSnaks( Claim $claim, $description, $expectedValid = true ) {
-		$validator = new SnakValidator( $this->propertyDataTypeLookup, $this->dataTypeFactory );
+		$validator = $this->getSnakValidator();
 
 		$result = $validator->validateClaimSnaks( $claim );
 
@@ -155,7 +169,7 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideValidateReferences
 	 */
 	public function testValidateReferences( ReferenceList $references, $description, $expectedValid = true ) {
-		$validator = new SnakValidator( $this->propertyDataTypeLookup, $this->dataTypeFactory );
+		$validator = $this->getSnakValidator();
 
 		$result = $validator->validateReferences( $references );
 
@@ -189,11 +203,17 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 		return $cases;
 	}
 
+	private function getSnakValidator() {
+		return new SnakValidator(
+			$this->propertyDataTypeLookup, $this->dataTypeFactory, $this->validatorFactory
+		);
+	}
+
 	/**
 	 * @dataProvider provideValidateReference
 	 */
 	public function testValidateReference( Reference $reference, $description, $expectedValid = true ) {
-		$validator = new SnakValidator( $this->propertyDataTypeLookup, $this->dataTypeFactory );
+		$validator = $this->getSnakValidator();
 
 		$result = $validator->validateReference( $reference );
 
@@ -241,7 +261,7 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideValidate
 	 */
 	public function testValidate( Snak $snak, $description, $expectedValid = true ) {
-		$validator = new SnakValidator( $this->propertyDataTypeLookup, $this->dataTypeFactory );
+		$validator = $this->getSnakValidator();
 
 		$result = $validator->validate( $snak );
 
@@ -264,7 +284,7 @@ class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideValidateDataValue
 	 */
 	public function testValidateDataValue( DataValue $dataValue, $dataTypeId, $propertyName, $description, $expectedValid = true ) {
-		$validator = new SnakValidator( $this->propertyDataTypeLookup, $this->dataTypeFactory );
+		$validator = $this->getSnakValidator();
 
 		$result = $validator->validateDataValue( $dataValue, $dataTypeId, $propertyName );
 
