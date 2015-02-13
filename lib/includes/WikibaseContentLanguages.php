@@ -8,6 +8,7 @@ use Wikibase\Utils;
  * Provide languages supported as content language based on Wikibase\Utils
  *
  * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Marius Hoch < hoo@online.de >
  */
 class WikibaseContentLanguages implements ContentLanguages {
 
@@ -16,6 +17,13 @@ class WikibaseContentLanguages implements ContentLanguages {
 	 */
 	public function getLanguages() {
 		return Utils::getLanguageCodes();
+	}
+
+	/**
+	 * @return string $languageCode
+	 */
+	public function hasLanguage( $languageCode ) {
+		return in_array( $languageCode, $this->getLanguages() );
 	}
 
 	/**
