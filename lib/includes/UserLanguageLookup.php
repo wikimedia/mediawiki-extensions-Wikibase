@@ -19,6 +19,7 @@ interface UserLanguageLookup {
 	/**
 	 * Returns a list of languages the user specified in addition to the non-optional interface
 	 * language.
+	 * Note: This can contain language codes not actually valid to MediaWiki or valid at all.
 	 *
 	 * @param User $user The current user.
 	 *
@@ -28,6 +29,7 @@ interface UserLanguageLookup {
 
 	/**
 	 * Collects all languages from all user settings we can reach at this point.
+	 * Note: This can contain language codes not actually valid to MediaWiki or valid at all.
 	 *
 	 * @param User $user The current user.
 	 *
