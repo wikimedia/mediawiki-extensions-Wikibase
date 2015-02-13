@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Maintenance;
+use Wikibase\Lib\PidLock;
 
 /**
  * Prune the Wikibase changes table to a maximum number of entries.
@@ -62,9 +63,9 @@ class PruneChanges extends Maintenance {
 		}
 
 		$force = $this->getOption( 'force', false );
-		$pidfile = Utils::makePidFilename( 'WBpruneChanges', wfWikiID() );
+		$pidLock = new PidLock( 'WBpruneChanges', wfWikiID() );
 
-		if ( !Utils::getPidLock( $pidfile, $force ) ) {
+		if ( !$pidLock->getPidLock( $force ) ) {
 			$this->output( date( 'H:i:s' ) . " already running, exiting\n" );
 			exit( 5 );
 		}
@@ -99,7 +100,7 @@ class PruneChanges extends Maintenance {
 		$deleted = $this->pruneChanges( $until );
 		$this->output( date( 'H:i:s' ) . " $deleted rows pruned.\n" );
 
-		unlink( $pidfile ); // delete lockfile on normal exit
+		$pidLock->removePidLock(); // delete lockfile on normal exit
 	}
 
 	/**
