@@ -406,6 +406,7 @@
 	"apihelp-wbcreateclaim-description": "创建Wikibase声称。",
 	"apihelp-wbcreateclaim-param-entity": "您正在加入声称的实体的ID",
 	"apihelp-wbcreateclaim-param-property": "snaks属性的ID",
+	"apihelp-wbcreateclaim-param-value": "当创建带有值的snak的声称时snak的值",
 	"apihelp-wbcreateclaim-param-snaktype": "snak类型",
 	"apihelp-wbcreateredirect-description": "创建实体重定向。",
 	"apihelp-wbcreateredirect-param-from": "要创建重定向的实体ID",

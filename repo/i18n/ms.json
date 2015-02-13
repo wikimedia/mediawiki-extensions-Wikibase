@@ -20,6 +20,7 @@
 	"wikibase-remove-inprogress": "Membuang…",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Dalam bahasa lain",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Konfigurasi",
+	"wikibase-setting-entitytermsview-showEntitytermslistview": "Paparkan label, alias dan keterangan dalam semua bahasa saya sebaik laman dimuatkan",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Juga dikenali sebagai",
 	"wikibase-entitytermsforlanguagelistview-description": "Keterangan",
 	"wikibase-entitytermsforlanguagelistview-label": "Label",

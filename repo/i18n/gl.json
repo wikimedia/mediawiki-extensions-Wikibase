@@ -230,7 +230,7 @@
 	"wikibase-restoreold": "restaurar",
 	"wikibase-restore-summary": "Restauro a revisión $1 feita por [[Special:Contributions/$2|$2]]",
 	"wikibase-no-direct-editing": "A edición directa está desactivada no espazo de nomes \"$1\"",
-	"wikibase-noentity": "O conxunto de datos non existe. Pode\n<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} procurar nos rexistros relacionados]</span> para descubrir onde foi parar.",
+	"wikibase-noentity": "Esta entidade non existe. Pode\n[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} procurar nos rexistros relacionados] para descubrir onde foi parar.",
 	"wikibase-noentity-createone": "Tamén pode [[$1|crear un novo]].",
 	"wikibase-item-summary-wbsetitem": "Creo un elemento novo",
 	"wikibase-item-summary-wbcreate-new": "Creo un elemento novo",

@@ -6,6 +6,7 @@
 		]
 	},
 	"wikibase-deletedentity-item": "چی پاکسا بیه",
+	"wikibase-deletedentity-query": "پرس و جور پاکسا بیه",
 	"wikibase-error-unexpected": "خطا:$1.",
 	"wikibase-quantitydetails-amount": "انازه",
 	"wikibase-timedetails-time": "گات",
@@ -23,5 +24,6 @@
 	"wikibase-tooltip-error-details": "جزئیات",
 	"wikibase-validator-invalid": "انازه نادیار",
 	"wikibase-validator-bad-type": "$2 وه جا $1",
+	"datatypes-type-wikibase-item": "قلم",
 	"datatypes-type-commonsMedia": "فایل پرنمون رسانه"
 }
