@@ -387,7 +387,7 @@ abstract class ApiWikibase extends ApiBase {
 		}
 
 		if ( $summary instanceof Summary ) {
-			$summary = $this->formatSummary( $summary );
+			$summary = $this->summaryFormatter->formatSummary( $summary );
 		}
 
 		$params = $this->extractRequestParams();
@@ -449,16 +449,6 @@ abstract class ApiWikibase extends ApiBase {
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 
 		return $baseRevisionId;
-	}
-
-	/**
-	 * @param Summary $summary
-	 *
-	 * @return string
-	 */
-	protected function formatSummary( Summary $summary ) {
-		$formatter = $this->summaryFormatter;
-		return $formatter->formatSummary( $summary );
 	}
 
 	/**
