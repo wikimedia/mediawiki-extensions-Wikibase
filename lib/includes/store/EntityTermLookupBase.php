@@ -39,11 +39,11 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @see TermLookup::getLabels
 	 *
 	 * @param EntityId $entityId
-	 * @param string[]|null $languageCodes The languages to get terms for; null means all languages.
+	 * @param string[] $languageCodes The languages to get terms for
 	 *
 	 * @return string[]
 	 */
-	public function getLabels( EntityId $entityId, array $languageCodes = null ) {
+	public function getLabels( EntityId $entityId, array $languageCodes ) {
 		return $this->getTermsOfType( $entityId, 'label', $languageCodes );
 	}
 
@@ -70,22 +70,22 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @see TermLookup::getDescriptions
 	 *
 	 * @param EntityId $entityId
-	 * @param string[]|null $languageCodes The languages to get terms for; null means all languages.
+	 * @param string[] $languageCodes The languages to get terms for
 	 *
 	 * @return string[]
 	 */
-	public function getDescriptions( EntityId $entityId, array $languageCodes = null ) {
+	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
 		return $this->getTermsOfType( $entityId, 'description', $languageCodes );
 	}
 
 	/**
 	 * @param EntityId $entityId
 	 * @param string $termType
-	 * @param string[]|null $languageCodes The languages to get terms for; null means all languages.
+	 * @param string[] $languageCodes The languages to get terms for
 	 *
 	 * @return string[]
 	 */
-	abstract protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes = null );
+	abstract protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes );
 
 	/**
 	 * @param Term[] $wikibaseTerms

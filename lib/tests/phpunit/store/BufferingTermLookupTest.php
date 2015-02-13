@@ -59,22 +59,14 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 
 		$termIndex->expects( $this->exactly( $getTermsOfEntityCalls ) )
 			->method( 'getTermsOfEntity' )
-			->will( $this->returnCallback( function( EntityId $id, $termTypes, $languages = null ) use ( $terms ) {
-				if ( $languages !== null ) {
-					$terms = array_intersect_key( $terms, array_flip( $languages ) );
-				}
-
-				return $terms;
+			->will( $this->returnCallback( function( EntityId $id, $termTypes, $languages ) use ( $terms ) {
+				return array_intersect_key( $terms, array_flip( $languages ) );
 			} ) );
 
 		$termIndex->expects( $this->exactly( $getTermsOfEntitiesCalls ) )
 			->method( 'getTermsOfEntities' )
-			->will( $this->returnCallback( function( array $entityIds, $entityType, array $termTypes = null, array $languageCodes = null ) use ( $terms ) {
-				if ( $languageCodes !== null ) {
-					$terms = array_intersect_key( $terms, array_flip( $languageCodes ) );
-				}
-
-				return $terms;
+			->will( $this->returnCallback( function( array $entityIds, array $termTypes, array $languageCodes ) use ( $terms ) {
+				return array_intersect_key( $terms, array_flip( $languageCodes ) );
 			} ) );
 
 		return $termIndex;
@@ -94,7 +86,7 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 
 		// This should trigger a call to getTermsOfEntity
 		$expected = array( 'de' => 'Wien', 'en' => 'Vienna', 'fr' => 'Vienne' );
-		$this->assertEquals( $expected, $lookup->getLabels( $q116, null ) );
+		$this->assertEquals( $expected, $lookup->getLabels( $q116, array( 'de', 'en', 'fr' ) ) );
 
 		// This should trigger no more calls, since all languages are in the buffer now.
 		$expected = array( 'de' => 'Wien', 'fr' => 'Vienne' );

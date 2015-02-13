@@ -33,7 +33,7 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 		return array(
 			'all languages' => array(
 				$q116,
-				null,
+				array( 'en', 'es' ),
 				array(
 					'en' => 'New York City',
 					'es' => 'Nueva York'
@@ -86,7 +86,7 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 		return array(
 			'all languages' => array(
 				$q116,
-				null,
+				array( 'de', 'en' ),
 				array(
 					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
 					'en' => 'largest city in New York and the United States of America',

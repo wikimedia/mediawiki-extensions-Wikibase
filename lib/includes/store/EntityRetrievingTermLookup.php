@@ -49,12 +49,12 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @see TermLookup::getLabels()
 	 *
 	 * @param EntityId $entityId
-	 * @param string[]|null $languages
+	 * @param string[] $languages
 	 *
 	 * @throws OutOfBoundsException if the entity does not exist
 	 * @return string[]
 	 */
-	public function getLabels( EntityId $entityId, array $languages = null ) {
+	public function getLabels( EntityId $entityId, array $languages ) {
 		$labels = $this->getFingerprint( $entityId )->getLabels()->toTextArray();
 
 		if ( $languages !== null ) {
@@ -81,12 +81,12 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @see TermLookup::getDescriptions()
 	 *
 	 * @param EntityId $entityId
-	 * @param string[]|null $languages
+	 * @param string[] $languages
 	 *
 	 * @throws OutOfBoundsException if the entity does not exist
 	 * @return string[]
 	 */
-	public function getDescriptions( EntityId $entityId, array $languages = null ) {
+	public function getDescriptions( EntityId $entityId, array $languages ) {
 		$descriptions = $this->getFingerprint( $entityId )->getDescriptions()->toTextArray();
 
 		if ( $languages !== null ) {
