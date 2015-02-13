@@ -57,11 +57,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 	public function getLabels( EntityId $entityId, array $languages ) {
 		$labels = $this->getFingerprint( $entityId )->getLabels()->toTextArray();
 
-		if ( $languages !== null ) {
-			$labels = array_intersect_key( $labels, array_flip( $languages ) );
-		}
-
-		return $labels;
+		return array_intersect_key( $labels, array_flip( $languages ) );
 	}
 
 	/**
@@ -89,11 +85,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 	public function getDescriptions( EntityId $entityId, array $languages ) {
 		$descriptions = $this->getFingerprint( $entityId )->getDescriptions()->toTextArray();
 
-		if ( $languages !== null ) {
-			$descriptions = array_intersect_key( $descriptions, array_flip( $languages ) );
-		}
-
-		return $descriptions;
+		return array_intersect_key( $descriptions, array_flip( $languages ) );
 	}
 
 	/**
