@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_631745f3",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-13T16:46:51Z",
+      "side": 1,
+      "message": "I still think these comparisons are inverted.\n1. Load the posted form value.\n2. If it\u0027s set, ignore it and load the original value instead.\nUh? I will amend this patch, ok?",
+      "revId": "7ae6a14f57cb1171959ba329c4d6411e0ee85744",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
