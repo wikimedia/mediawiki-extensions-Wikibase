@@ -24,7 +24,7 @@ class SetLabel extends ModifyTerm {
 	/**
 	 * @var FingerprintChangeOpFactory
 	 */
-	protected $termChangeOpFactory;
+	private $termChangeOpFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -58,12 +58,11 @@ class SetLabel extends ModifyTerm {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param array $params
+	 *
 	 * @return ChangeOpLabel
 	 */
-	protected function getChangeOp( array $params ) {
+	private function getChangeOp( array $params ) {
 		wfProfileIn( __METHOD__ );
 		$label = "";
 		$language = $params['language'];

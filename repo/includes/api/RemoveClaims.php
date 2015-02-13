@@ -27,7 +27,7 @@ class RemoveClaims extends ModifyClaim {
 	/**
 	 * @var ClaimChangeOpFactory
 	 */
-	protected $claimChangeOpFactory;
+	private $claimChangeOpFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -77,13 +77,11 @@ class RemoveClaims extends ModifyClaim {
 	/**
 	 * Validates the parameters and returns the EntityId to act upon on success
 	 *
-	 * @since 0.4
-	 *
 	 * @param array $params
 	 *
 	 * @return EntityId
 	 */
-	protected function getEntityId( array $params ) {
+	private function getEntityId( array $params ) {
 		$entityId = null;
 
 		foreach ( $params['claim'] as $guid ) {
@@ -110,12 +108,10 @@ class RemoveClaims extends ModifyClaim {
 	/**
 	 * Checks whether the claims can be found
 	 *
-	 * @since 0.4
-	 *
 	 * @param Entity $entity
 	 * @param array $guids
 	 */
-	protected function checkClaims( Entity $entity, array $guids ) {
+	private function checkClaims( Entity $entity, array $guids ) {
 		$claims = new Claims( $entity->getClaims() );
 
 		foreach ( $guids as $guid) {
@@ -126,13 +122,11 @@ class RemoveClaims extends ModifyClaim {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param array $params
 	 *
 	 * @return ChangeOp[]
 	 */
-	protected function getChangeOps( array $params ) {
+	private function getChangeOps( array $params ) {
 		$changeOps = array();
 
 		foreach ( $params['claim'] as $guid ) {

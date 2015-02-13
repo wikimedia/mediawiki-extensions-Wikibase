@@ -36,7 +36,7 @@ class SetClaim extends ModifyClaim {
 	/**
 	 * @var ClaimChangeOpFactory
 	 */
-	protected $claimChangeOpFactory;
+	private $claimChangeOpFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -94,7 +94,7 @@ class SetClaim extends ModifyClaim {
 	 *
 	 * @todo this summary builder is ugly and summary stuff needs to be refactored
 	 */
-	protected function getSummary( array $params, Claim $claim, Entity $entity ){
+	private function getSummary( array $params, Claim $claim, Entity $entity ){
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
@@ -112,8 +112,6 @@ class SetClaim extends ModifyClaim {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param array $params
 	 *
 	 * @throws IllegalValueException
@@ -121,7 +119,7 @@ class SetClaim extends ModifyClaim {
 	 * @throws LogicException
 	 * @return Claim
 	 */
-	protected function getClaimFromParams( array $params ) {
+	private function getClaimFromParams( array $params ) {
 		$serializerFactory = new SerializerFactory();
 		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Claim\Claim' );
 

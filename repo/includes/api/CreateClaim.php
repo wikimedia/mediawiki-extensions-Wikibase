@@ -25,7 +25,7 @@ class CreateClaim extends ModifyClaim {
 	/**
 	 * @var ClaimChangeOpFactory
 	 */
-	protected $claimChangeOpFactory;
+	private $claimChangeOpFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -86,11 +86,9 @@ class CreateClaim extends ModifyClaim {
 	 * Checks if the required parameters are set and the ones that make no sense given the
 	 * snaktype value are not set.
 	 *
-	 * @since 0.2
-	 *
 	 * @params array $params
 	 */
-	protected function validateParameters( array $params ) {
+	private function validateParameters( array $params ) {
 		if ( $params['snaktype'] == 'value' XOR isset( $params['value'] ) ) {
 			if ( $params['snaktype'] == 'value' ) {
 				$this->dieError( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'param-missing' );
