@@ -83,19 +83,26 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			$this->languageCode = null;
 		}
 
-		if ( $this->languageCode !== null && !$this->isValidLanguageCode( $this->languageCode ) ) {
+		$this->checkSubPageLanguage();
+
+		// Value
+		$this->value = $this->getPostedValue();
+		if ( $this->value === null ) {
+			$this->value = $request->getVal( 'value' );
+		}
+	}
+
+	/**
+	 * Check the language given as sup page argument.
+	 */
+	private function checkSubPageLanguage() {
+		if ( $this->languageCode !== null && !$this->termsLanguages->hasLanguage( $this->languageCode ) ) {
 			$errorMessage = $this->msg(
 				'wikibase-wikibaserepopage-invalid-langcode',
 				$this->languageCode
 			)->parse();
 
 			$this->showErrorHTML( $errorMessage );
-		}
-
-		// Value
-		$this->value = $this->getPostedValue();
-		if ( $this->value === null ) {
-			$this->value = $request->getVal( 'value' );
 		}
 	}
 
@@ -175,18 +182,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		if ( !$this->getUser()->isAllowed( $restriction ) ) {
 			throw new PermissionsError( $restriction );
 		}
-	}
-
-	/**
-	 * Check if the language code is valid for terms.
-	 *
-	 * @param $languageCode string the language code
-	 *
-	 * @return bool
-	 */
-	private function isValidLanguageCode( $languageCode ) {
-		// FIXME ContentLanguages should have a hasLanguage method
-		return $languageCode !== null && in_array( $languageCode, $this->termsLanguages->getLanguages() );
 	}
 
 	/**

@@ -3,8 +3,6 @@
 namespace Wikibase;
 
 use Language;
-use MWException;
-
 /**
  * Utility functions for Wikibase.
  *
@@ -17,29 +15,6 @@ use MWException;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 final class Utils {
-
-	/**
-	 * Returns a list of language codes that Wikibase supports,
-	 * ie the languages that a label or description can be in.
-	 *
-	 * @since 0.1
-	 *
-	 * @throws MWException if the list can not be obtained.
-	 * @return string[]
-	 */
-	public static function getLanguageCodes() {
-		static $languageCodes = null;
-
-		if ( $languageCodes === null ) {
-			$languageCodes = array_keys( Language::fetchLanguageNames() );
-
-			if ( empty( $languageCodes ) ) {
-				throw new MWException( 'List of language names is empty' );
-			}
-		}
-
-		return $languageCodes;
-	}
 
 	/**
 	 * @see Language::fetchLanguageName()

@@ -2,20 +2,48 @@
 
 namespace Wikibase\Lib;
 
+use Language;
 use Wikibase\Utils;
 
 /**
  * Provide languages supported as content language based on Wikibase\Utils
  *
  * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Marius Hoch < hoo@online.de >
  */
 class WikibaseContentLanguages implements ContentLanguages {
+
+	/**
+	 * @var array|null
+	 */
+	private $languageMap;
 
 	/**
 	 * @return string[] Array of language codes supported as content language
 	 */
 	public function getLanguages() {
-		return Utils::getLanguageCodes();
+		$languageCodes = array_keys( $this->getLanguageMap() );
+		return $languageCodes;
+	}
+
+	/**
+	 * @param string $languageCode
+	 *
+	 * @return bool
+	 */
+	public function hasLanguage( $languageCode ) {
+		return array_key_exists( $languageCode, $this->getLanguageMap() );
+	}
+
+	/**
+	 * @return string[] Language code => language name
+	 */
+	private function getLanguageMap() {
+		if ( !$this->languageMap ) {
+			$this->languageMap = Language::fetchLanguageNames();
+		}
+
+		return $this->languageMap;
 	}
 
 	/**
