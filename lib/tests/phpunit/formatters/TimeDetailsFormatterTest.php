@@ -28,7 +28,9 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $pattern
 	 */
 	public function testFormat( TimeValue $value, $pattern ) {
-		$formatter = new TimeDetailsFormatter( new FormatterOptions() );
+		$formatter = new TimeDetailsFormatter( new FormatterOptions( array(
+			ValueFormatter::OPT_LANG => 'qqx',
+		) ) );
 
 		$html = $formatter->format( $value );
 		$this->assertRegExp( $pattern, $html );
@@ -47,7 +49,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 						'<td[^<>]*>\+0*2001-01-01T00:00:00Z</td>',
 						'<td[^<>]*>\+01:00</td>',
 						'<td[^<>]*>Gregorian</td>',
-						'<td[^<>]*>10</td>',
+						'<td[^<>]*>\(months: 1\)</td>',
 						'<td[^<>]*>0</td>',
 						'<td[^<>]*>1</td>',
 					)
@@ -55,11 +57,23 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 			),
 			array(
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, 'Stardate' ),
-				'@.*<td class="wb-time-calendar">Stardate</td>.*@s'
+				'@.*<td[^<>]*calendar">Stardate</td>.*@s'
 			),
 			array(
 				new TimeValue( '+2001-01-01T00:00:00Z', -179, 0, 0, $day, $gregorian ),
-				'@.*<td class="wb-time-timezone">\xE2\x88\x9202:59</td>.*@s'
+				'@.*<td[^<>]*timezone">\xE2\x88\x9202:59</td>.*@s'
+			),
+			array(
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_SECOND, $gregorian ),
+				'@.*<td[^<>]*precision">\(seconds: 1\)</td>.*@s'
+			),
+			array(
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
+				'@.*<td[^<>]*precision">\(years: 10\)</td>.*@s'
+			),
+			array(
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
+				'@.*<td[^<>]*precision">\(years: 1000000000\)</td>.*@s'
 			),
 		);
 	}
