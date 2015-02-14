@@ -6,7 +6,8 @@ use Html;
 use InvalidArgumentException;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -24,9 +25,9 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	private $siteStore;
 
 	/**
-	 * @var SiteLinkLookup
+	 * @var RedirectResolvingEntityLookup
 	 */
-	private $siteLinkLookup;
+	private $entityLookup;
 
 	/**
 	 * @see SpecialWikibasePage::__construct
@@ -36,7 +37,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 
 		$this->initServices(
 			WikibaseRepo::getDefaultInstance()->getSiteStore(),
-			WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache()
+			WikibaseRepo::getDefaultInstance()->getEntityLookup()
 		);
 	}
 
@@ -45,14 +46,14 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 * May be used to inject mock services for testing.
 	 *
 	 * @param SiteStore $siteStore
-	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param RedirectResolvingEntityLookup $entityLookup
 	 */
 	public function initServices(
 		SiteStore $siteStore,
-		SiteLinkLookup $siteLinkLookup
+		RedirectResolvingEntityLookup $entityLookup
 	) {
 		$this->siteStore = $siteStore;
-		$this->siteLinkLookup = $siteLinkLookup;
+		$this->entityLookup = $entityLookup;
 	}
 
 	/**
@@ -70,23 +71,23 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		} catch ( InvalidArgumentException $ex ) {
 			$itemId = null;
 			$itemString = '';
-                }
+		}
 
 		return array( $site, $itemId, $itemString );
 	}
 
 	/**
 	 * @param string $site
-	 * @param ItemId $itemId
+	 * @param ItemId|null $itemId
 	 * @return string|null the URL to redirect to or null if the sitelink does not exist
 	 */
-	protected function getTargetUrl( $site, $itemId ) {
+	protected function getTargetUrl( $site, ItemId $itemId = null ) {
 		if ( $site === '' || $itemId === null ) {
 			return null;
 		}
 		$site = $this->stringNormalizer->trimToNFC( $site );
 
-		if ( !$this->siteStore->getSite( $site ) ) {
+		if ( $this->getPageName( $site, $itemId ) === null ) {
 			// HACK: If the site ID isn't known, add "wiki" to it; this allows the wikipedia
 			// subdomains to be used to refer to wikipedias, instead of requiring their
 			// full global id to be used.
@@ -96,14 +97,36 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 			$site .= 'wiki';
 		}
 
-		$links = $this->siteLinkLookup->getLinks( array( $itemId->getNumericId() ), array( $site ) );
+		$pageName = $this->getPageName( $site, $itemId );
 
-		if ( isset( $links[0] ) ) {
-			list( , $pageName, ) = $links[0];
+		if ( $pageName !== null ) {
 			$siteObj = $this->siteStore->getSite( $site );
-			$url = $siteObj->getPageUrl( $pageName );
-			return $url;
+
+			return $siteObj->getPageUrl( $pageName );
 		}
+
+		return null;
+	}
+
+	/**
+	 * @param string $site
+	 * @param ItemId|null $itemId
+	 *
+	 * @return string|null
+	 */
+	private function getPageName( $site, ItemId $itemId ) {
+		/* @var $item Item */
+		$item = $this->entityLookup->getEntity( $itemId );
+		if ( !$item ) {
+			return null;
+		}
+
+		$siteLinkList = $item->getSiteLinkList();
+
+		if ( $siteLinkList->hasLinkWithSiteId( $site ) ) {
+			return $siteLinkList->getBySiteId( $site )->getPageName();
+		}
+
 		return null;
 	}
 
