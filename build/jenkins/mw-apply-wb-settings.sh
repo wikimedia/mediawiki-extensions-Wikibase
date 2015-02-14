@@ -56,6 +56,7 @@ function apply_common_settings {
   echo '$wgDevelopmentWarnings = true;' >> LocalSettings.php
   echo '$wgLanguageCode = "'$LANG'";' >> LocalSettings.php
   echo '$wgDebugLogFile = "mw-debug.log";' >> LocalSettings.php
+  echo 'require_once __DIR__ . "/extensions/cldr/cldr.php";' >> LocalSettings.php
 }
 
 function apply_experimental_settings {
