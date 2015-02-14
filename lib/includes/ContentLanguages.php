@@ -22,16 +22,4 @@ interface ContentLanguages {
 	 */
 	public function hasLanguage( $languageCode );
 
-	/**
-	 * Get the name of the language specified by $languageCode. The name should be in the language
-	 * specified by $inLanguage, but it might be in any other language. If null is given as $inLanguage,
-	 * $languageCode is used, i. e. the service tries to give the autonym of the language.
-	 *
-	 * @param string $languageCode
-	 * @param string|null $inLanguage
-	 *
-	 * @return string
-	 */
-	public function getName( $languageCode, $inLanguage = null );
-
 }

@@ -14,7 +14,6 @@ use Wikibase\LanguageFallbackChainFactory;
  *
  * @group Wikibase
  * @group WikibaseLib
- * @group WikibaseUtils
  *
  * @licence GNU GPL v2+
  * @author Liangent

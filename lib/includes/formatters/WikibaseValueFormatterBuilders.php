@@ -43,18 +43,9 @@ class WikibaseValueFormatterBuilders {
 	private $entityTitleLookup;
 
 	/**
-	 * The languages available for MonolingualTextValues
-	 *
-	 * @var ContentLanguages
+	 * @var LanguageNameLookup
 	 */
-	private $monolingualTextLanguages;
-
-	/**
-	 * The languages available for terms
-	 *
-	 * @var ContentLanguages
-	 */
-	private $termsLanguages;
+	private $languageNameLookup;
 
 	/**
 	 * This determines which value is formatted how by providing a formatter mapping
@@ -124,17 +115,21 @@ class WikibaseValueFormatterBuilders {
 		),
 	);
 
+	/**
+	 * @param Language $defaultLanguage
+	 * @param FormatterLabelLookupFactory $labelLookupFactory
+	 * @param LanguageNameLookup $languageNameLookup
+	 * @param EntityTitleLookup|null $entityTitleLookup
+	 */
 	public function __construct(
 		Language $defaultLanguage,
 		FormatterLabelLookupFactory $labelLookupFactory,
-		ContentLanguages $monolingualTextLanguages,
-		ContentLanguages $termsLanguages,
+		LanguageNameLookup $languageNameLookup,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelLookupFactory = $labelLookupFactory;
-		$this->monolingualTextLanguages = $monolingualTextLanguages;
-		$this->termsLanguages = $termsLanguages;
+		$this->languageNameLookup = $languageNameLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
@@ -556,7 +551,7 @@ class WikibaseValueFormatterBuilders {
 			$options,
 			$labelLookup,
 			$this->entityTitleLookup,
-			$this->termsLanguages
+			$this->languageNameLookup
 		);
 	}
 
@@ -614,7 +609,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return MonolingualHtmlFormatter
 	 */
 	private function newMonolingualHtmlFormatter( FormatterOptions $options ) {
-		return new MonolingualHtmlFormatter( $options, $this->monolingualTextLanguages );
+		return new MonolingualHtmlFormatter( $options, $this->languageNameLookup );
 	}
 
 	/**

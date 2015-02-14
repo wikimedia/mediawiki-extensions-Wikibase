@@ -7,6 +7,7 @@ use ResourceLoaderModule;
 use Site;
 use SiteSQLStore;
 use Xml;
+use Wikibase\Lib\LanguageNameLookup;
 
 /**
  *
@@ -70,6 +71,7 @@ class SitesModule extends ResourceLoaderModule {
 
 		$groups = $this->getSiteLinkGroups();
 		$specialGroups = $this->getSpecialSiteLinkGroups();
+		$languageNameLookup = new LanguageNameLookup();
 
 		/**
 		 * @var MediaWikiSite $site
@@ -88,7 +90,7 @@ class SitesModule extends ResourceLoaderModule {
 				$languageName = $languageNameMsg->exists() ? $languageNameMsg->parse() : $site->getGlobalId();
 				$groupName = 'special';
 			} else {
-				$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
+				$languageName = $languageNameLookup->getName( $site->getLanguageCode() );
 				$groupName = $group;
 			}
 			$globalId = $site->getGlobalId();

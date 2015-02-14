@@ -3,10 +3,9 @@
 namespace Wikibase\Lib;
 
 use Language;
-use Wikibase\Utils;
 
 /**
- * Provide languages supported as content language based on Wikibase\Utils
+ * Provide languages supported as content languages based on MediaWiki's Language class.
  *
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  * @author Marius Hoch < hoo@online.de >
@@ -41,20 +40,6 @@ class WikibaseContentLanguages implements ContentLanguages {
 		}
 
 		return $this->languageMap;
-	}
-
-	/**
-	 * Get the name of the language specified by $languageCode. The name should be in the language
-	 * specified by $inLanguage, but it might be in any other language. If null is given as $inLanguage,
-	 * $languageCode is used, i. e. the service tries to give the autonym of the language.
-	 *
-	 * @param string $languageCode
-	 * @param string|null $inLanguage
-	 *
-	 * @return string
-	 */
-	public function getName( $languageCode, $inLanguage = null ) {
-		return Utils::fetchLanguageName( $languageCode, $inLanguage );
 	}
 
 }

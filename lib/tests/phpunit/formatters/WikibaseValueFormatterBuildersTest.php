@@ -73,16 +73,15 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 				);
 			} ) );
 
-		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
-		$contentLanguages->expects( $this->any() )
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnValue( 'Deutsch' ));
 
 		return new WikibaseValueFormatterBuilders(
 			Language::factory( 'en' ),
 			new FormatterLabelLookupFactory( $termLookup ),
-			$contentLanguages,
-			$contentLanguages,
+			$languageNameLookup,
 			$entityTitleLookup
 		);
 	}

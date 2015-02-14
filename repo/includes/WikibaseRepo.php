@@ -37,6 +37,7 @@ use Wikibase\Lib\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\FormatterLabelLookupFactory;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Localizer\DispatchingExceptionLocalizer;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\Localizer\GenericExceptionLocalizer;
@@ -173,12 +174,12 @@ class WikibaseRepo {
 	private $entityNamespaceLookup = null;
 
 	/**
-	 * @var TermLookup
+	 * @var TermLookup|null
 	 */
 	private $termLookup;
 
 	/**
-	 * @var ContentLanguages
+	 * @var ContentLanguages|null
 	 */
 	private $monolingualTextLanguages = null;
 
@@ -545,8 +546,7 @@ class WikibaseRepo {
 		return new WikibaseValueFormatterBuilders(
 			$wgContLang,
 			new FormatterLabelLookupFactory( $termLookup ),
-			$this->getMonolingualTextLanguages(),
-			$this->getTermsLanguages(),
+			new LanguageNameLookup(),
 			$this->getEntityTitleLookup()
 		);
 	}
@@ -1003,7 +1003,7 @@ class WikibaseRepo {
 		return new EntityIdHtmlLinkFormatterFactory(
 			new FormatterLabelLookupFactory( $this->getTermLookup() ),
 			$this->getEntityTitleLookup(),
-			$this->getTermsLanguages()
+			new LanguageNameLookup()
 		);
 	}
 
@@ -1019,7 +1019,7 @@ class WikibaseRepo {
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
 			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
-			$this->getTermsLanguages(),
+			new LanguageNameLookup(),
 			$this->getSettings()->getSetting( 'siteLinkGroups' ),
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' ),
 			$this->getSettings()->getSetting( 'badgeItems' )

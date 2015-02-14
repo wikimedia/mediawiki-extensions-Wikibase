@@ -205,10 +205,15 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Client\Hooks\ParserFunctionRegistrant', $registrant );
 	}
 
-    public function testGetPropertyParserFunctionRunner() {
-        $runner = $this->getWikibaseClient()->getPropertyParserFunctionRunner();
-        $this->assertInstanceOf( 'Wikibase\DataAccess\PropertyParserFunction\Runner', $runner );
-    }
+	public function testGetPropertyParserFunctionRunner() {
+		$runner = $this->getWikibaseClient()->getPropertyParserFunctionRunner();
+		$this->assertInstanceOf( 'Wikibase\DataAccess\PropertyParserFunction\Runner', $runner );
+	}
+
+	public function testGetTermsLanguages() {
+		$langs = $this->getWikibaseClient()->getTermsLanguages();
+		$this->assertInstanceOf( 'Wikibase\Lib\ContentLanguages', $langs );
+	}
 
 	/**
 	 * @return WikibaseClient

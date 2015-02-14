@@ -41,6 +41,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\FormatterLabelLookupFactory;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
@@ -512,8 +513,7 @@ final class WikibaseClient {
 		return new WikibaseValueFormatterBuilders(
 			$this->contentLanguage,
 			new FormatterLabelLookupFactory( $this->getTermLookup() ),
-			new WikibaseContentLanguages(),
-			$this->getTermsLanguages()
+			new LanguageNameLookup()
 		);
 	}
 

@@ -11,8 +11,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\Utils;
 
 /**
  * Creates views for lists of site links.
@@ -46,6 +46,11 @@ class SiteLinksView {
 	private $entityLookup;
 
 	/**
+	 * @var LanguageNameLookup
+	 */
+	private $languageNameLookup;
+
+	/**
 	 * @var string[]
 	 */
 	private $badgeItems;
@@ -65,6 +70,7 @@ class SiteLinksView {
 	 * @param SiteList $sites
 	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
 	 * @param EntityLookup $entityLookup
+	 * @param LanguageNameLookup $languageNameLookup
 	 * @param string[] $badgeItems
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string $languageCode
@@ -74,6 +80,7 @@ class SiteLinksView {
 		SiteList $sites,
 		SectionEditLinkGenerator $sectionEditLinkGenerator,
 		EntityLookup $entityLookup,
+		LanguageNameLookup $languageNameLookup,
 		array $badgeItems,
 		array $specialSiteLinkGroups,
 		$languageCode
@@ -85,6 +92,7 @@ class SiteLinksView {
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->languageCode = $languageCode;
 		$this->templateFactory = $templateFactory;
+		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
@@ -257,7 +265,7 @@ class SiteLinksView {
 			$siteName = $siteNameMsg->exists() ? $siteNameMsg->parse() : $siteId;
 		} else {
 			// TODO: get an actual site name rather then just the language
-			$siteName = htmlspecialchars( Utils::fetchLanguageName( $languageCode ) );
+			$siteName = htmlspecialchars( $this->languageNameLookup->getName( $languageCode ) );
 		}
 
 		// TODO: for non-JS, also set the dir attribute on the link cell;

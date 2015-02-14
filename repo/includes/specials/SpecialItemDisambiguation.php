@@ -8,7 +8,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
@@ -46,9 +46,9 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	private $entityTitleLookup;
 
 	/**
-	 * @var ContentLanguages
+	 * @var LanguageNameLookup
 	 */
-	private $termLanguages;
+	private $languageNameLookup;
 
 	/**
 	 * @var int
@@ -67,7 +67,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex(),
 			WikibaseRepo::getDefaultInstance()->getEntityLookup(),
 			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
-			WikibaseRepo::getDefaultInstance()->getTermsLanguages()
+			new LanguageNameLookup()
 		);
 
 		//@todo: make this configurable
@@ -82,12 +82,12 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		TermIndex $termIndex,
 		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
-		ContentLanguages $termsLanguages
+		LanguageNameLookup $languageNameLookup
 	) {
 		$this->termIndex = $termIndex;
 		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->termLanguages = $termsLanguages;
+		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
@@ -186,7 +186,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$formatterOptions,
 			$labelLookup,
 			$this->entityTitleLookup,
-			$this->termLanguages
+			$this->languageNameLookup
 		);
 
 		$disambiguationList = new ItemDisambiguation(
