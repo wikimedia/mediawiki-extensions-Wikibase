@@ -10,6 +10,7 @@ use Status;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -760,4 +761,20 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $repo->isWatching( $user, $item->getId() ), "watched" );
 	}
 
+	public function testIsNew() {
+		$repo = $this->getMockRepository();
+		$titleLookup = $this->getEntityTitleLookup();
+		$item = new Item();
+
+		$edit = $this->makeEditEntity( $repo, $item, $titleLookup );
+		$this->assertTrue( $edit->isNew(), 'New entity: No id' );
+
+		$repo->assignFreshId( $item );
+		$edit = $this->makeEditEntity( $repo, $item, $titleLookup );
+		$this->assertTrue( $edit->isNew(), "New entity: Has an id, but doesn't exist, yet" );
+
+		$repo->saveEntity( $item, 'testIsNew', $this->getUser( 'EditEntityTestUser1' ) );
+		$edit = $this->makeEditEntity( $repo, $item, $titleLookup );
+		$this->assertFalse( $edit->isNew(), "Entity exists" );
+	}
 }

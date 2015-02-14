@@ -283,19 +283,21 @@ class EditEntity {
 	/**
 	 * Returns the latest revision ID.
 	 *
-	 * @return int
+	 * @return int 0 if the entity doesn't exist
 	 */
 	public function getLatestRevisionId() {
-		if ( $this->isNew() ) {
+		if ( $this->newEntity->getId() === null ) {
 			return 0;
 		}
 
 		wfProfileIn( __METHOD__ );
-		if ( $this->latestRevId === null ) {
+		// Don't do negative caching: We call this to see whether the entity yet exists
+		// before creating.
+		if ( $this->latestRevId === null || $this->latestRevId === 0 ) {
 			if ( $this->latestRev !== null ) {
 				$this->latestRevId = $this->latestRev->getRevisionId();
 			} else {
-				$this->latestRevId = $this->entityRevisionLookup->getLatestRevisionId(
+				$this->latestRevId = (int)$this->entityRevisionLookup->getLatestRevisionId(
 					$this->getEntityId(),
 					EntityRevisionLookup::LATEST_FROM_MASTER
 				);
@@ -316,10 +318,10 @@ class EditEntity {
 	}
 
 	/**
-	 * Returns whether the new content is new, that is, does not have an ID yet and thus no title, page or revisions.
+	 * Returns whether the new content is new: No title, page or revisions (but maybe an Id).
 	 */
 	public function isNew() {
-		return $this->newEntity->getId() === null;
+		return $this->newEntity->getId() === null || $this->getLatestRevisionId() === 0;
 	}
 
 	/**
