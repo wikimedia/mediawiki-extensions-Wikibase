@@ -2,6 +2,7 @@
 
 namespace Wikibase\Tests;
 
+use ImportStringSource;
 use ConfigFactory;
 use Exception;
 use Wikibase\Repo\WikibaseRepo;
@@ -60,30 +61,6 @@ class RepoHooksTest extends \MediaWikiTestCase {
 
 		RepoHooks::onImportHandleRevisionXMLTag( $importer, array(), $revisionInfo );
 		$this->assertTrue( true ); // make PHPUnit happy
-	}
-
-	private function getMockImportStream( $xml ) {
-		$source = $this->getMockBuilder( 'ImportStreamSource' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$atEnd = new \stdClass();
-		$atEnd->atEnd = false;
-
-		$source->expects( $this->any() )
-			->method( 'atEnd' )
-			->will( $this->returnCallback( function() use ( $atEnd ) {
-				return $atEnd->atEnd;
-			} ) );
-
-		$source->expects( $this->any() )
-			->method( 'readChunk' )
-			->will( $this->returnCallback( function() use ( $atEnd, $xml ) {
-				$atEnd->atEnd = true;
-				return $xml;
-			} ) );
-
-		return $source;
 	}
 
 	public function importProvider() {
@@ -170,12 +147,13 @@ XML
 
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'allowEntityImport', $allowImport );
 
-		$source = $this->getMockImportStream( $xml );
+		$source = new ImportStringSource( $xml );
 		$importer = new WikiImporter( $source, ConfigFactory::getDefaultInstance()->makeConfig( 'main' ) );
 
 		$importer->setNoticeCallback( function() {
 			// Do nothing for now. Could collect and compare notices.
 		} );
+		$importer->setPageOutCallback( function() {} );
 
 		if ( $expectedException !== null ) {
 			$this->setExpectedException( $expectedException );
