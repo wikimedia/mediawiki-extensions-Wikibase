@@ -2,10 +2,12 @@
 
 namespace Wikibase\Test;
 
-use FauxResponse;
 use Site;
 use SiteStore;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
 
 /**
@@ -18,27 +20,30 @@ use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
  *
  * @licence GNU GPL v2+
  * @author Jan Zerebecki
+ * @author Marius Hoch < hoo@online.de >
  */
 class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 
 	/**
-	 * @return SiteLinkLookup
+	 * @return RedirectResolvingEntityLookup
 	 */
-	private function getMockSiteLinkLookup() {
-		$mock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
+	private function getMockRepository() {
+		static $entityLookup = null;
 
-		$mock->expects( $this->any() )
-			->method( 'getLinks' )
-			->will( $this->returnCallback( function( $itemIds, $siteIds ) {
-				$result = array( array( '', 'TestPageName' ) );
-				if ( $siteIds === array( 'dewiki' ) && $itemIds === array( 23 ) ) {
-					return $result;
-				} else {
-					return null;
-				}
-			} ) );
+		if ( !$entityLookup ) {
+			$mockRepo = new MockRepository();
+			$item = new Item( new ItemId( 'Q23' ) );
+			$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'TestPageName' );
 
-		return $mock;
+			$mockRepo->putEntity( $item );
+
+			$entityRedirect = new EntityRedirect( new ItemId( 'Q24' ), new ItemId( 'Q23' ) );
+			$mockRepo->putRedirect( $entityRedirect );
+
+			$entityLookup = new RedirectResolvingEntityLookup( $mockRepo );
+		}
+
+		return $entityLookup;
 	}
 
 	/**
@@ -71,7 +76,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 
 		$page->initServices(
 			$this->getMockSiteStore(),
-			$this->getMockSiteLinkLookup()
+			$this->getMockRepository()
 		);
 
 		return $page;
@@ -126,6 +131,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	public function requestWithRedirectProvider() {
 		$cases = array();
 		$cases['found'] = array( 'dewiki/Q23', 'http://dewiki.com/TestPageName' );
+		$cases['foundEntityRedirect'] = array( 'dewiki/Q24', 'http://dewiki.com/TestPageName' );
 		$cases['foundWithSiteIdHack'] = array( 'de/Q23', 'http://dewiki.com/TestPageName' );
 		return $cases;
 	}
