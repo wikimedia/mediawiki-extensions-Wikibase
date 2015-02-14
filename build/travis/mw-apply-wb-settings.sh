@@ -10,6 +10,7 @@ function apply_client_settings {
   echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' >> LocalSettings.php
   echo 'require_once __DIR__ . "/extensions/Wikibase/client/ExampleSettings.php";' >> LocalSettings.php
   echo '$wgWBClientSettings["siteGlobalID"] = "enwiki";' >> LocalSettings.php
+  echo 'require_once __DIR__ . "/extensions/Scribunto/Scribunto.php";' >> LocalSettings.php
 }
 
 function apply_repo_settings {
@@ -27,7 +28,7 @@ function apply_common_settings {
   echo '$wgLanguageCode = "'$LANG'";' >> LocalSettings.php
   echo '$wgDebugLogFile = "mw-debug.log";' >> LocalSettings.php
   echo "define( 'WB_EXPERIMENTAL_FEATURES', 1 );" >> LocalSettings.php
-  echo 'require_once __DIR__ . "/extensions/Scribunto/Scribunto.php";' >> LocalSettings.php
+  echo 'require_once __DIR__ . "/extensions/cldr/cldr.php";' >> LocalSettings.php
 }
 
 apply_common_settings
