@@ -73,7 +73,7 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiModifyEntity::modifyEntity()
+	 * @see ModifyEntity::modifyEntity
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
 		wfProfileIn( __METHOD__ );
