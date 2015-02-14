@@ -22,25 +22,31 @@ use Wikibase\Lib\Store\LabelLookup;
 class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	/**
-	 * @var ContentLanguages
+	 * @var LanguageNameLookup
 	 */
-	private $termsLanguages;
+	private $languageNameLookup;
 
 	/**
 	 * @var EntityTitleLookup
 	 */
 	protected $entityTitleLookup;
 
+	/**
+	 * @param FormatterOptions $options
+	 * @param LabelLookup $labelLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param LanguageNameLookup $languageNameLookup
+	 */
 	public function __construct(
 		FormatterOptions $options,
 		LabelLookup $labelLookup,
 		EntityTitleLookup $entityTitleLookup,
-		ContentLanguages $termsLanguages
+		LanguageNameLookup $languageNameLookup
 	) {
 		parent::__construct( $options, $labelLookup );
 
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->termsLanguages = $termsLanguages;
+		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
@@ -127,7 +133,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 * @return string
 	 */
 	private function getLanguageName( $languageCode, $inLanguage ) {
-		return $this->termsLanguages->getName( $languageCode, $inLanguage );
+		return $this->languageNameLookup->getName( $languageCode, $inLanguage );
 	}
 
 	private function getHtmlForFallbackIndicator( TermFallback $term ) {

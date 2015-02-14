@@ -34,7 +34,7 @@ class EntityIdHtmlLinkFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new EntityIdHtmlLinkFormatterFactory(
 			$labelLookupFactory,
 			$titleLookup,
-			$this->getMock( 'Wikibase\Lib\ContentLanguages' )
+			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' )
 		);
 	}
 

@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SiteLinksView;
@@ -189,6 +190,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			$this->newSiteList(),
 			$this->getSectionEditLinkGeneratorMock(),
 			$this->getEntityLookupMock(),
+			new LanguageNameLookup(),
 			array(
 				'Q42' => 'wb-badge-featuredarticle',
 				'Q12' => 'wb-badge-goodarticle'

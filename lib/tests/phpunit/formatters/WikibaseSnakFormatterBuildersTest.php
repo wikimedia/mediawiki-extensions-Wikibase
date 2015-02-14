@@ -67,8 +67,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$lang,
 			new FormatterLabelLookupFactory( $termLookup ),
-			$this->getMock( 'Wikibase\Lib\ContentLanguages' ),
-			$this->getMock( 'Wikibase\Lib\ContentLanguages' )
+			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' )
 		);
 
 		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup, $typeFactory );

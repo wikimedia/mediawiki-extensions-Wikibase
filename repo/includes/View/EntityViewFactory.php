@@ -9,7 +9,7 @@ use SiteStore;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdFormatterFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
@@ -77,9 +77,9 @@ class EntityViewFactory {
 	private $templateFactory;
 
 	/**
-	 * @var ContentLanguages
+	 * @var LanguageNameLookup
 	 */
-	private $termsLanguages;
+	private $languageNameLookup;
 
 	/**
 	 * @param EntityIdFormatterFactory $idFormatterFactory
@@ -88,7 +88,7 @@ class EntityViewFactory {
 	 * @param SiteStore $siteStore
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory
-	 * @param ContentLanguages $termsLanguages
+	 * @param LanguageNameLookup $languageNameLookup
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
@@ -100,7 +100,7 @@ class EntityViewFactory {
 		SiteStore $siteStore,
 		DataTypeFactory $dataTypeFactory,
 		TemplateFactory $templateFactory,
-		ContentLanguages $termsLanguages,
+		LanguageNameLookup $languageNameLookup,
 		array $siteLinkGroups,
 		array $specialSiteLinkGroups,
 		array $badgeItems
@@ -119,7 +119,7 @@ class EntityViewFactory {
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator(
 			$this->templateFactory
 		);
-		$this->termsLanguages = $termsLanguages;
+		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
@@ -173,6 +173,7 @@ class EntityViewFactory {
 					$this->siteStore->getSites(),
 					$this->sectionEditLinkGenerator,
 					$this->entityLookup,
+					$this->languageNameLookup,
 					$this->badgeItems,
 					$this->specialSiteLinkGroups,
 					$language->getCode()
@@ -243,7 +244,7 @@ class EntityViewFactory {
 		return new EntityTermsView(
 			$this->templateFactory,
 			$this->sectionEditLinkGenerator,
-			$this->termsLanguages,
+			$this->languageNameLookup,
 			$languageCode
 		);
 	}

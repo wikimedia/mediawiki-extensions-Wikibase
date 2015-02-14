@@ -59,7 +59,7 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 			$this->getSiteStore(),
 			$this->getMock( 'DataTypes\DataTypeFactory' ),
 			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
-			$this->getMock( 'Wikibase\Lib\ContentLanguages' ),
+			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' ),
 			array(),
 			array(),
 			array()

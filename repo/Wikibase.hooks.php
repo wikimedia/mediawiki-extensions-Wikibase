@@ -25,6 +25,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
@@ -1011,7 +1012,8 @@ final class RepoHooks {
 				WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 				WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup(),
 				$userLanguageLookup,
-				WikibaseRepo::getDefaultInstance()->getTermsLanguages()
+				WikibaseRepo::getDefaultInstance()->getTermsLanguages(),
+				new LanguageNameLookup()
 			);
 
 			$html = $injector->inject( $html, array( $expander, 'getHtmlForPlaceholder' ) );
