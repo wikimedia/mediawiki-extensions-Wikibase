@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_12881875",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-14T04:08:32Z",
+      "side": 1,
+      "message": "Done, changed default to false.",
+      "parentUuid": "6e7c4fa4_35ea039d",
+      "revId": "ccf86aa4be9f3c0b8277ed10dd6fde36fb85de77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_f5048b82",
         "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
         "patchSetId": 2
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_b2960496",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-14T04:08:32Z",
+      "side": 1,
+      "message": "Done: Useful as that\u0027s as reoccurring question. Also in Scribunto_LuaWikibaseEntityLibrary",
+      "parentUuid": "6e7c4fa4_6db0a2d8",
+      "revId": "ccf86aa4be9f3c0b8277ed10dd6fde36fb85de77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d5014f72",
         "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
         "patchSetId": 2
@@ -119,6 +155,24 @@
       "side": 1,
       "message": "Oh, I see - you want to defer that call, because it has side effects.\nPlease document this somewhere where anyone who would want to change this would see!",
       "parentUuid": "6e7c4fa4_552bffda",
+      "revId": "ccf86aa4be9f3c0b8277ed10dd6fde36fb85de77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d2814050",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-14T04:08:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_4dada67f",
       "revId": "ccf86aa4be9f3c0b8277ed10dd6fde36fb85de77",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
