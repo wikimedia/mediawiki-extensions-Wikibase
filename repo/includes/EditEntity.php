@@ -74,9 +74,9 @@ class EditEntity {
 	protected $latestRev = null;
 
 	/**
-	 * @var int|null
+	 * @var int
 	 */
-	protected $latestRevId = null;
+	protected $latestRevId = 0;
 
 	/**
 	 * @var Status|null
@@ -246,7 +246,7 @@ class EditEntity {
 	 * @return Title|null
 	 */
 	public function getTitle() {
-		if ( $this->isNew() ) {
+		if ( $this->newEntity->getId() === null ) {
 			return null;
 		}
 
@@ -263,7 +263,7 @@ class EditEntity {
 	 * @return EntityRevision|null
 	 */
 	public function getLatestRevision() {
-		if ( $this->isNew() ) {
+		if ( $this->newEntity->getId() === null ) {
 			return null;
 		}
 
@@ -281,18 +281,21 @@ class EditEntity {
 	/**
 	 * Returns the latest revision ID.
 	 *
-	 * @return int
+	 * @return int 0 if the entity doesn't exist
 	 */
 	public function getLatestRevisionId() {
-		if ( $this->isNew() ) {
+		if ( $this->newEntity->getId() === null ) {
 			return 0;
 		}
 
-		if ( $this->latestRevId === null ) {
+		wfProfileIn( __METHOD__ );
+		// Don't do negative caching: We call this to see whether the entity yet exists
+		// before creating.
+		if ( $this->latestRevId === 0 ) {
 			if ( $this->latestRev !== null ) {
 				$this->latestRevId = $this->latestRev->getRevisionId();
 			} else {
-				$this->latestRevId = $this->entityRevisionLookup->getLatestRevisionId(
+				$this->latestRevId = (int)$this->entityRevisionLookup->getLatestRevisionId(
 					$this->getEntityId(),
 					EntityRevisionLookup::LATEST_FROM_MASTER
 				);
@@ -312,10 +315,14 @@ class EditEntity {
 	}
 
 	/**
-	 * Returns whether the new content is new, that is, does not have an ID yet and thus no title, page or revisions.
+	 * Is the entity new?
+	 * An entity is new in case it either doesn't have an id or the Title belonging
+	 * to it doesn't (yet) exist.
+	 *
+	 * @return bool
 	 */
-	public function isNew() {
-		return $this->newEntity->getId() === null;
+	private function isNew() {
+		return $this->newEntity->getId() === null || $this->getLatestRevisionId() === 0;
 	}
 
 	/**
@@ -454,7 +461,7 @@ class EditEntity {
 			return false;
 		}
 
-		if ( !is_int( $this->getBaseRevisionId() ) || $this->getBaseRevisionId() == $this->getLatestRevisionId() ) {
+		if ( $this->getBaseRevisionId() == $this->getLatestRevisionId() ) {
 			return false;
 		}
 
@@ -768,7 +775,7 @@ class EditEntity {
 	 * @return IContextSource
 	 */
 	private function getContextForEditFilter( EntityDocument $entity ) {
-		if ( !$this->isNew() ) {
+		if ( $this->getTitle() ) {
 			$context = clone $this->context;
 			$title = $this->getTitle();
 		} else {
