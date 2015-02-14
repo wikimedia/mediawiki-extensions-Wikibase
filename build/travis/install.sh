@@ -21,7 +21,10 @@ php maintenance/install.php --dbtype $DBTYPE --dbuser root --dbname its_a_mw --d
 
 cd extensions
 
-git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Scribunto.git --depth 1
+if [ "$WB" != "repo" ]; then
+	git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Scribunto.git --depth 1
+fi
+git clone https://gerrit.wikimedia.org/r/mediawiki/extensions/cldr --depth 1
 
 cp -r $originalDirectory Wikibase
 
