@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Template\TemplateFactory;
 
 /**
@@ -40,26 +40,26 @@ class EntityTermsView {
 	private $languageCode;
 
 	/**
-	 * @var ContentLanguages
+	 * @var LanguageNameLookup
 	 */
-	private $termsLanguages;
+	private $languageNameLookup;
 
 	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param SectionEditLinkGenerator|null $sectionEditLinkGenerator
-	 * @param ContentLanguages $termsLanguages
+	 * @param LanguageNameLookup $languageNameLookup
 	 * @param string $languageCode
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		SectionEditLinkGenerator $sectionEditLinkGenerator = null,
-		ContentLanguages $termsLanguages,
+		LanguageNameLookup $languageNameLookup,
 		$languageCode
 	) {
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->languageCode = $languageCode;
 		$this->templateFactory = $templateFactory;
-		$this->termsLanguages = $termsLanguages;
+		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
@@ -222,7 +222,7 @@ class EntityTermsView {
 				is_null( $title )
 					? '#'
 					: $title->getLocalURL( array( 'setlang' => $languageCode ) ),
-				htmlspecialchars( $this->termsLanguages->getName( $languageCode, $this->languageCode ) )
+				htmlspecialchars( $this->languageNameLookup->getName( $languageCode, $this->languageCode ) )
 			),
 			$this->templateFactory->render( 'wikibase-labelview',
 				$hasLabel ? '' : 'wb-empty',

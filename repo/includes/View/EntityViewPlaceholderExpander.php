@@ -11,6 +11,7 @@ use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\UserLanguageLookup;
@@ -80,6 +81,11 @@ class EntityViewPlaceholderExpander {
 	private $termsLanguages;
 
 	/**
+	 * @var LanguageNameLookup
+	 */
+	private $languageNameLookup;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param Title $targetPage the page for which this expander is supposed to handle expansion.
 	 * @param User $user the current user
@@ -88,6 +94,7 @@ class EntityViewPlaceholderExpander {
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param UserLanguageLookup $userLanguageLookup
 	 * @param ContentLanguages $termsLanguages
+	 * @param LanguageNameLookup $languageNameLookup
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -97,7 +104,8 @@ class EntityViewPlaceholderExpander {
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		UserLanguageLookup $userLanguageLookup,
-		ContentLanguages $termsLanguages
+		ContentLanguages $termsLanguages,
+		LanguageNameLookup $languageNameLookup
 	) {
 		$this->targetPage = $targetPage;
 		$this->user = $user;
@@ -107,6 +115,7 @@ class EntityViewPlaceholderExpander {
 		$this->userLanguageLookup = $userLanguageLookup;
 		$this->templateFactory = $templateFactory;
 		$this->termsLanguages = $termsLanguages;
+		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
@@ -250,7 +259,7 @@ class EntityViewPlaceholderExpander {
 		$entityTermsView = new EntityTermsView(
 			$this->templateFactory,
 			null,
-			$this->termsLanguages,
+			$this->languageNameLookup,
 			$this->uiLanguage->getCode()
 		);
 		$html = $entityTermsView->getEntityTermsForLanguageListView(

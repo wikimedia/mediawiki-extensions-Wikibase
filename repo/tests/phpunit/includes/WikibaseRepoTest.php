@@ -253,4 +253,9 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertSame( $service, $repo->getTermLookup(), 'TermBuffer and TermLookup should be the same object' );
 	}
 
+	public function testGetTermsLanguages() {
+		$service = $this->getWikibaseRepo()->getTermsLanguages();
+		$this->assertInstanceOf( 'Wikibase\Lib\ContentLanguages', $service );
+	}
+
 }

@@ -122,8 +122,8 @@ class EntityIdHtmlLinkFormatterTest extends PHPUnit_Framework_TestCase {
 
 		$entityTitleLookup = $this->newEntityTitleLookup( $exists );
 
-		$termsLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
-		$termsLanguages->expects( $this->any() )
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnCallback( function( $languageCode ) {
 				$names = array(
@@ -140,7 +140,7 @@ class EntityIdHtmlLinkFormatterTest extends PHPUnit_Framework_TestCase {
 			$options,
 			$labelLookup,
 			$entityTitleLookup,
-			$termsLanguages
+			$languageNameLookup
 		);
 
 		return $entityIdHtmlLinkFormatter;

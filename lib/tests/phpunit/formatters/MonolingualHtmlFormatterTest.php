@@ -24,7 +24,7 @@ class MonolingualHtmlFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider monolingualHtmlFormatProvider
 	 */
 	public function testFormat( $value, $options, $pattern, $not = '' ) {
-		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
+		$contentLanguages = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
 		$contentLanguages->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnValue( 'Deutsch' ));

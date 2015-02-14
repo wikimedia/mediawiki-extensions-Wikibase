@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
-use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\LanguageNameLookup;
 
 /**
  * @since 0.5
@@ -18,17 +18,17 @@ use Wikibase\Lib\ContentLanguages;
 class MonolingualHtmlFormatter extends ValueFormatterBase {
 
 	/**
-	 * @var ContentLanguages $contentLanguages
+	 * @var LanguageNameLookup
 	 */
-	private $contentLanguages;
+	private $languageNameLookup;
 
 	/**
 	 * @param FormatterOptions $options
-	 * @param ContentLanguages $contentLanguages
+	 * @param LanguageNameLookup $languageNameLookup
 	 */
-	public function __construct( FormatterOptions $options, ContentLanguages $contentLanguages ) {
+	public function __construct( FormatterOptions $options, LanguageNameLookup $languageNameLookup ) {
 		parent::__construct( $options );
-		$this->contentLanguages = $contentLanguages;
+		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
@@ -43,7 +43,7 @@ class MonolingualHtmlFormatter extends ValueFormatterBase {
 
 		$text = $value->getText();
 		$languageCode = $value->getLanguageCode();
-		$languageName = $this->contentLanguages->getName( $languageCode, $userLanguage );
+		$languageName = $this->languageNameLookup->getName( $languageCode, $userLanguage );
 
 		$msg = wfMessage( 'wikibase-monolingualtext' )->params(
 			wfEscapeWikiText( $text ),
