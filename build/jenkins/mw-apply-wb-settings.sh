@@ -23,7 +23,6 @@ function apply_client_settings {
   echo '$wgEnableWikibaseClient = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseRepo = false;' >> LocalSettings.php
   echo '$wmgUseWikibaseClient = true;' >> LocalSettings.php
-  echo 'require_once __DIR__ . "/extensions/Scribunto/Scribunto.php";' >> LocalSettings.php
   if [ $BUILD = true ]
   then
     echo 'require_once __DIR__ . "/extensions/Wikidata/Wikidata.php";' >> LocalSettings.php
@@ -78,5 +77,3 @@ then
 else
   usage
 fi
-
-echo '?>' >> LocalSettings.php
