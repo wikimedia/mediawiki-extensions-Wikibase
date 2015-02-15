@@ -15,6 +15,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Marius Hoch < hoo@online.de >
  */
 class OtherProjectsSidebarGenerator {
 
@@ -56,7 +57,7 @@ class OtherProjectsSidebarGenerator {
 	/**
 	 * @param Title $title
 	 *
-	 * @return array[]
+	 * @return array[] array of arrays of link attributes, sorted by site group id
 	 */
 	public function buildProjectLinkSidebar( Title $title ) {
 		return $this->buildSidebarFromSiteLinks( $this->getSiteLinks( $title ) );
@@ -65,7 +66,7 @@ class OtherProjectsSidebarGenerator {
 	/**
 	 * @param SiteLink[] $siteLinks
 	 *
-	 * @return array[]
+	 * @return array[] array of arrays of link attributes, sorted by site group id
 	 */
 	private function buildSidebarFromSiteLinks( array $siteLinks ) {
 		$result = array();
@@ -79,7 +80,30 @@ class OtherProjectsSidebarGenerator {
 				continue;
 			}
 
-			$result[] = $this->buildSidebarLink( $siteLink, $site );
+			if ( !isset( $result[$site->getGroup()] ) ) {
+				$result[$site->getGroup()] = array();
+			}
+
+			// Index by site group and global id
+			$result[$site->getGroup()][$site->getGlobalId()] = $this->buildSidebarLink( $siteLink, $site );
+		}
+
+		return $this->sortAndFlattenSidebar( $result );
+	}
+
+	/**
+	 * @param array[]
+	 *
+	 * @return array[] array of arrays of link attributes, sorted by site group id
+	 */
+	private function sortAndFlattenSidebar( array $links ) {
+		$result = array();
+
+		ksort( $links ); // Sort by group id
+
+		foreach( $links as $linksPerGroup ) {
+			ksort( $linksPerGroup ); // Sort individual arrays by global site id
+			$result = array_merge( $result, array_values( $linksPerGroup ) );
 		}
 
 		return $result;

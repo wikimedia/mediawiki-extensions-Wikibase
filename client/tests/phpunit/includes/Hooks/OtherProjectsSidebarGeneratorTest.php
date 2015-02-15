@@ -3,10 +3,12 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use Title;
+use SiteStore;
+use MediaWikiSite;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
-use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Test\MockSiteStore;
 
 /**
@@ -19,6 +21,7 @@ use Wikibase\Test\MockSiteStore;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Marius Hoch < hoo@online.de >
  */
 class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 
@@ -26,19 +29,10 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	 * @dataProvider projectLinkSidebarProvider
 	 */
 	public function testBuildProjectLinkSidebar( array $siteIdsToOutput, array $result ) {
-		$item = new Item();
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
-		$item->addSiteLink( new SiteLink( 'enwiktionary', 'Nyan Cat' ) );
-
-		$mockRepo = new MockRepository();
-		$mockRepo->putEntity( $item );
-
-		$siteStore = MockSiteStore::newFromTestSites();
-
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
-			$mockRepo,
-			$siteStore,
+			$this->getSiteLinkLookup(),
+			$this->getSiteStore(),
 			$siteIdsToOutput
 		);
 
@@ -49,6 +43,25 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function projectLinkSidebarProvider() {
+		$wiktionaryLink = array(
+			'msg' => 'wikibase-otherprojects-wiktionary',
+			'class' => 'wb-otherproject-link wb-otherproject-wiktionary',
+			'href' => 'https://en.wiktionary.org/wiki/Nyan_Cat',
+			'hreflang' => 'en'
+		);
+		$wikiquoteLink = array(
+			'msg' => 'wikibase-otherprojects-wikiquote',
+			'class' => 'wb-otherproject-link wb-otherproject-wikiquote',
+			'href' => 'https://en.wikiquote.org/wiki/Nyan_Cat',
+			'hreflang' => 'en'
+		);
+		$wikipediaLink = array(
+			'msg' => 'wikibase-otherprojects-wikipedia',
+			'class' => 'wb-otherproject-link wb-otherproject-wikipedia',
+			'href' => 'https://en.wikipedia.org/wiki/Nyan_Cat',
+			'hreflang' => 'en'
+		);
+
 		return array(
 			array(
 				array(),
@@ -60,16 +73,52 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			),
 			array(
 				array( 'enwiktionary' ),
-				array(
-					array(
-						'msg' => 'wikibase-otherprojects-wiktionary',
-						'class' => 'wb-otherproject-link wb-otherproject-wiktionary',
-						'href' => 'https://en.wiktionary.org/wiki/Nyan_Cat',
-						'hreflang' => 'en'
-					)
-				)
+				array( $wiktionaryLink )
+			),
+			array(
+				// Make sure results are sorted alphabetically by their group names
+				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
+				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink )
 			)
 		);
 	}
 
+	/**
+	 * @return SiteStore
+	 */
+	private function getSiteStore() {
+		$siteStore = MockSiteStore::newFromTestSites();
+
+		$site = new MediaWikiSite();
+		$site->setGlobalId( 'enwikiquote' );
+		$site->setGroup( 'wikiquote' );
+		$site->setLanguageCode( 'en' );
+		$site->setPath( MediaWikiSite::PATH_PAGE, "https://en.wikiquote.org/wiki/$1" );
+		$siteStore->saveSite( $site );
+
+		return $siteStore;
+	}
+
+	/**
+	 * @return SiteLinkLookup
+	 */
+	private function getSiteLinkLookup( ) {
+		$Q123 = new ItemId( 'Q123' );
+
+		$lookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
+		$lookup->expects( $this->any() )
+				->method( 'getEntityIdForSiteLink' )
+				->will( $this->returnValue( $Q123 ) );
+
+		$lookup->expects( $this->any() )
+			->method( 'getSiteLinksForItem' )
+			->with( $Q123 )
+			->will( $this->returnValue( array(
+				new SiteLink( 'enwikiquote', 'Nyan Cat' ),
+				new SiteLink( 'enwiki', 'Nyan Cat' ),
+				new SiteLink( 'enwiktionary', 'Nyan Cat' )
+			) ) );
+
+		return $lookup;
+	}
 }
