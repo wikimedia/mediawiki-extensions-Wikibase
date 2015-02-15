@@ -56,7 +56,7 @@ class OtherProjectsSidebarGenerator {
 	/**
 	 * @param Title $title
 	 *
-	 * @return array[]
+	 * @return array[] array of arrays of link attributes, sorted by site group id
 	 */
 	public function buildProjectLinkSidebar( Title $title ) {
 		return $this->buildSidebarFromSiteLinks( $this->getSiteLinks( $title ) );
@@ -65,7 +65,7 @@ class OtherProjectsSidebarGenerator {
 	/**
 	 * @param SiteLink[] $siteLinks
 	 *
-	 * @return array[]
+	 * @return array[] array of arrays of link attributes, sorted by site group id
 	 */
 	private function buildSidebarFromSiteLinks( array $siteLinks ) {
 		$result = array();
@@ -79,10 +79,13 @@ class OtherProjectsSidebarGenerator {
 				continue;
 			}
 
-			$result[] = $this->buildSidebarLink( $siteLink, $site );
+			// Index by site group and global id (just to make sure this will for
+			// multiple sites in the same group)
+			$result[$site->getGroup() . $site->getGlobalId()] = $this->buildSidebarLink( $siteLink, $site );
 		}
 
-		return $result;
+		ksort( $result );
+		return array_values( $result );
 	}
 
 	/**
