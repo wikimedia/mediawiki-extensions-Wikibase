@@ -410,7 +410,7 @@ final class ClientHooks {
 		$beforePageDisplayHandler = new BeforePageDisplayHandler( $namespaceChecker );
 
 		$actionName = Action::getActionName( $skin->getContext() );
-		$beforePageDisplayHandler->addModules( $out, $skin, $actionName );
+		$beforePageDisplayHandler->addModules( $out, $actionName );
 
 		wfProfileOut( __METHOD__ );
 
