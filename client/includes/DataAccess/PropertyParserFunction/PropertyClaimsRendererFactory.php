@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess\PropertyParserFunction;
 
 use Language;
 use Parser;
+use Wikibase\DataAccess\SnaksFinder;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;

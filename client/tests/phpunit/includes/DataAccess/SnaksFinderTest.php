@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
+namespace Wikibase\Client\Tests\DataAccess;
 
 use DataValues\StringValue;
-use Wikibase\DataAccess\PropertyParserFunction\SnaksFinder;
+use Wikibase\DataAccess\SnaksFinder;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\DataAccess\PropertyParserFunction\SnaksFinder
+ * @covers Wikibase\DataAccess\SnaksFinder
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -24,6 +24,7 @@ use Wikibase\Test\MockRepository;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
 class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 
@@ -79,10 +80,10 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider findSnaksProvider
 	 */
-	public function testFindSnaks( array $expected, ItemId $itemId, PropertyId $propertyId ) {
+	public function testFindSnaks( array $expected, ItemId $itemId, PropertyId $propertyId, $acceptableRanks = null ) {
 		$snaksFinder = $this->getSnaksFinder();
 
-		$snakList = $snaksFinder->findSnaks( $itemId, $propertyId, 'en' );
+		$snakList = $snaksFinder->findSnaks( $itemId, $propertyId, $acceptableRanks );
 		$this->assertEquals( $expected, $snakList );
 	}
 
@@ -91,14 +92,21 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 
 		$propertyId = new PropertyId( 'P1337' );
 
-		$snaks = array(
+		$snaksNormal = array(
 			new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
 			new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
 		);
+		$snakDeprecated = array( new PropertyValueSnak( $propertyId, new StringValue( 'three kittens!!!' ) ) );
 
 		return array(
-			array( $snaks, $itemId, new PropertyId( 'P1337' ) ),
-			array( array(), $itemId, new PropertyId( 'P90001' ) )
+			array( $snaksNormal, $itemId, new PropertyId( 'P1337' ) ),
+			array( array(), $itemId, new PropertyId( 'P90001' ) ),
+			array(
+				$snakDeprecated,
+				$itemId,
+				new PropertyId( 'P1337' ),
+				array( Statement::RANK_DEPRECATED )
+			),
 		);
 	}
 
