@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_58fb0aba",
+        "filename": "client/includes/store/sql/ConsistentReadConnectionManager.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T09:13:24Z",
+      "side": 1,
+      "message": "I\u0027m still not sure why this needs to be public. It is not and should not be used, in my opinion.",
+      "revId": "1500fe4469e3183526aefbeeb49af8b8f2858c28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
