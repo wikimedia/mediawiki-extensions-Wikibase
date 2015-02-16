@@ -16,6 +16,24 @@
       "revId": "07246768d558750e56e73efda0930c5d95ee4075",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_58646aae",
+        "filename": "repo/includes/Localizer/ChangeOpValidationExceptionLocalizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T09:04:59Z",
+      "side": 1,
+      "message": "What the ...? Fixed in I06afe51.",
+      "parentUuid": "6e7c4fa4_e39cb514",
+      "revId": "07246768d558750e56e73efda0930c5d95ee4075",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
