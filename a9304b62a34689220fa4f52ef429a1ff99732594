@@ -16,6 +16,24 @@
       "revId": "a9304b62a34689220fa4f52ef429a1ff99732594",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bbf818e3",
+        "filename": "client/includes/Hooks/BaseTemplateAfterPortletHandler.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-16T13:30:03Z",
+      "side": 1,
+      "message": "Should probably be turned into an actual hook handler (with a static entry point for MediaWiki)",
+      "parentUuid": "6e7c4fa4_78d36630",
+      "revId": "a9304b62a34689220fa4f52ef429a1ff99732594",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
