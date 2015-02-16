@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ce3d102b",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-16T21:50:11Z",
+      "side": 1,
+      "message": "This patch would be a good opportunity to extract the handler code for the sidebar stuff into a separate hook handler class.",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8ef0788f",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-16T21:50:11Z",
+      "side": 1,
+      "message": "!empty( $languageUrls ) already covers $languageUrls !\u003d\u003d false",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ee656c42",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-16T21:50:11Z",
+      "side": 1,
+      "message": "Entity which $title we\u0027re linked to",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
