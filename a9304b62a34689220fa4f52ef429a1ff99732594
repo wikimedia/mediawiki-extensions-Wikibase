@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_78d36630",
+        "filename": "client/includes/Hooks/BaseTemplateAfterPortletHandler.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T10:00:34Z",
+      "side": 1,
+      "message": "This is a very pointless class now, isn\u0027t it? Can be tackled in an other patch, obviously.",
+      "revId": "a9304b62a34689220fa4f52ef429a1ff99732594",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
