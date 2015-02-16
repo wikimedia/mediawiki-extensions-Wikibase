@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_5b9f8462",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-16T14:32:11Z",
+      "side": 1,
+      "message": "No, this is actually intended, as the itemId doesn\u0027t change: We\u0027ll only load the entity once and check it. That saves us from loading all sites.",
+      "parentUuid": "6e7c4fa4_3bf648c3",
+      "revId": "711196b2da87bf8e3d4b4820ac989a2673feeb71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_bbe258fe",
         "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-16T14:27:54Z",
       "side": 1,
       "message": "Can\u0027t be null.",
+      "revId": "711196b2da87bf8e3d4b4820ac989a2673feeb71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fb8d3037",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-16T14:32:11Z",
+      "side": 1,
+      "message": "True",
+      "parentUuid": "6e7c4fa4_bbe258fe",
       "revId": "711196b2da87bf8e3d4b4820ac989a2673feeb71",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
