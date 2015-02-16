@@ -24,9 +24,7 @@ interface TermLookup {
 	 * @param string $languageCode
 	 *
 	 * @throws OutOfBoundsException for label or entity not found
-	 *
 	 * @return string
-	 * @throws OutOfBoundsException if no such label was found
 	 */
 	public function getLabel( EntityId $entityId, $languageCode );
 

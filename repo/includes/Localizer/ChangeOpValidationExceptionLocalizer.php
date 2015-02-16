@@ -37,7 +37,6 @@ class ChangeOpValidationExceptionLocalizer implements ExceptionLocalizer {
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Message
-	 * @throws InvalidArgumentException
 	 */
 	public function getExceptionMessage( Exception $exception ) {
 		if ( !$this->hasExceptionMessage( $exception ) ) {
