@@ -36,6 +36,10 @@
  * @param {wikibase.entityChangers.EntityChangersFactory} options.entityChangersFactory
  *        Required to store the `Reference`s gathered from the `referenceview`s aggregated by the
  *        `statementview`.
+ * @param {wikibase.entityChangers.ReferencesChanger} [options.referencesChanger]
+ *        Required if `Statement` `Reference`s should not be saved along with each `Statement` but
+ *        are supposed to be saved individually (e.g. by applying individual edit toolbars to the
+ *        `referenceview`s).
  * @param {dataTypes.DataTypeStore} options.dataTypeStore
  *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
  *        object when interacting on a "value" `Variation`.
@@ -84,6 +88,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 		entityStore: null,
 		valueViewBuilder: null,
 		entityChangersFactory: null,
+		referencesChanger: null,
 		dataTypeStore: null
 	},
 
@@ -189,10 +194,11 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 								property: !!( value || propertyId )
 							}
 						},
-						dataTypeStore: self.option( 'dataTypeStore' ),
-						entityStore: self.option( 'entityStore' ),
-						valueViewBuilder: self.option( 'valueViewBuilder' ),
-						entityChangersFactory: self.option( 'entityChangersFactory' ),
+						dataTypeStore: self.options.dataTypeStore,
+						entityStore: self.options.entityStore,
+						valueViewBuilder: self.options.valueViewBuilder,
+						entityChangersFactory: self.options.entityChangersFactory,
+						referencesChanger: self.options.referencesChanger,
 						claimsChanger: self._claimsChanger,
 						guidGenerator: self.options.claimGuidGenerator
 					};
