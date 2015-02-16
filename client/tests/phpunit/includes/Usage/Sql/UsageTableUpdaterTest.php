@@ -114,7 +114,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	private function getUsageTableUpdater( $batchSize = 1000 ) {
-		return new UsageTableUpdater( wfGetDB( DB_WRITE ), 'wbc_entity_usage', $batchSize );
+		return new UsageTableUpdater( wfGetDB( DB_MASTER ), 'wbc_entity_usage', $batchSize );
 	}
 
 	public function testUpdateUsage() {
@@ -204,7 +204,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	 * @param array[] $rows
 	 */
 	private function assertUsageTableContains( array $rows ) {
-		$db = wfGetDB( DB_READ );
+		$db = wfGetDB( DB_SLAVE );
 
 		foreach ( $rows as $row ) {
 			$this->assertTrue( $this->rowExists( $db, $row ), print_r( $row, true ) );
@@ -215,7 +215,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	 * @param array[] $rows
 	 */
 	private function assertUsageTableDoesNotContain( array $rows ) {
-		$db = wfGetDB( DB_READ );
+		$db = wfGetDB( DB_SLAVE );
 
 		foreach ( $rows as $row ) {
 			$name = preg_replace( '/[\r\n]/m', ' ', print_r( $row, true ) );
