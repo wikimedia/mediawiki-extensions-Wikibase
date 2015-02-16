@@ -42,17 +42,17 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				}
 
 				$referenceview
-					.removetoolbar( {
-						$container: $container
-					} )
-					.on( 'removetoolbarremove.removetoolbar', function( event ) {
-						var $suspectedReferenceview = $( event.target );
+				.removetoolbar( {
+					$container: $container
+				} )
+				.on( 'removetoolbarremove.removetoolbar', function( event ) {
+					var $suspectedReferenceview = $( event.target );
 
-						if( $suspectedReferenceview[0] === $referenceview[0] ) {
-							statementview.$references.children( ':wikibase-listview' )
-								.data( 'listview' ).removeItem( $referenceview );
-						}
-					} );
+					if( $suspectedReferenceview[0] === $referenceview[0] ) {
+						statementview.$references.children( ':wikibase-listview' )
+							.data( 'listview' ).removeItem( $referenceview );
+					}
+				} );
 			} );
 		},
 		'statementviewafterstopediting referenceviewdestroy': function( event, toolbarcontroller ) {
