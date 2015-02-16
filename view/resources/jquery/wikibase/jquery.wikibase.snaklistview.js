@@ -319,7 +319,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * committed).
 	 *
 	 * @param {wikibase.datamodel.SnakList} [snakList]
-	 * @return {wikibase.datamodel.SnakList|null|undefined}
+	 * @return {wikibase.datamodel.SnakList|undefined}
 	 */
 	value: function( snakList ) {
 		if( snakList !== undefined ) {

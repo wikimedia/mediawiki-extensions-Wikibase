@@ -78,11 +78,11 @@
 				edittoolbar: [
 					'statementview',
 					'entitytermsview',
-					'referenceview',
 					'sitelinkgroupview'
 				],
 				removetoolbar: [
 					'statementview-snakview',
+					'statementview-referenceview',
 					'referenceview-snakview',
 					'sitelinkgroupview-sitelinkview'
 				]
