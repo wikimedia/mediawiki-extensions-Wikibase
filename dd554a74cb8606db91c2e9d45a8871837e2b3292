@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2e7b6424",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-16T17:44:32Z",
+      "side": 1,
+      "message": "The type hint should be against EntityLookup I think. \"RedirectResolvingEntityLookup\" is the name of a concrete implementation, which should only be used in factories.",
+      "revId": "dd554a74cb8606db91c2e9d45a8871837e2b3292",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4ea58099",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-16T17:44:32Z",
+      "side": 1,
+      "message": "If we type hint against EntityLookup, UnresolvedRedirectException should be handled by this special page (probably not here but somewhere close to the UI).",
+      "revId": "dd554a74cb8606db91c2e9d45a8871837e2b3292",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
