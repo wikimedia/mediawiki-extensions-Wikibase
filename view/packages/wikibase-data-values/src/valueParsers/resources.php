@@ -49,11 +49,9 @@ return call_user_func( function() {
 				'parsers/IntParser.js',
 				'parsers/NullParser.js',
 				'parsers/StringParser.js',
-				'parsers/TimeParser.js',
 			),
 			'dependencies' => array(
 				'dataValues.values',
-				'time.js', // required by TimeParser
 				'util.inherit',
 				'valueParsers.ValueParser',
 			),

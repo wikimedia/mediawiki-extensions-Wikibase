@@ -34,23 +34,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'time.js' => $moduleTemplate + array(
-			'scripts' => array(
-				'time/time.js',
-				'time/time.Time.js',
-				'time/time.Parser.js',
-			),
-		),
-
-		'time.js.validTimeDefinitions' => $moduleTemplate + array(
-			'scripts' => array(
-				'../tests/lib/time/time.validTimeDefinitions.js',
-			),
-			'dependencies' => array(
-				'time.js',
-			),
-		),
-
 		'util.inherit' => $moduleTemplate + array(
 			'scripts' => array(
 				'util/util.inherit.js',

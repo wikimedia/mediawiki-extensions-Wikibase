@@ -18,7 +18,6 @@ this.config = ( function() {
 			'util': 'lib/util',
 
 			'globeCoordinate': 'lib/globeCoordinate',
-			'time': 'lib/time',
 
 			'dataValues': 'src',
 			'values': 'src/values',
@@ -58,18 +57,6 @@ this.config = ( function() {
 				deps: ['globeCoordinate/globeCoordinate']
 			},
 
-			'time/time': {
-				exports: 'time'
-			},
-			'time/time.Parser': {
-				exports: 'time.Parser',
-				deps: ['time/time']
-			},
-			'time/time.Time': {
-				exports: 'time.Time',
-				deps: ['time/time', 'jquery', 'time/time.Parser']
-			},
-
 			'dataValues/dataValues': {
 				exports: 'dataValues'
 			},
@@ -105,8 +92,7 @@ this.config = ( function() {
 				'dataValues/dataValues',
 				'jquery',
 				'dataValues/DataValue',
-				'util/util.inherit',
-				'time/time.Parser', 'time/time.Time'
+				'util/util.inherit'
 			],
 			'values/QuantityValue': [
 				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
@@ -177,14 +163,6 @@ this.config = ( function() {
 				'parsers/ValueParser',
 				'values/StringValue'
 			],
-			'parsers/TimeParser': [
-				'valueParsers/valueParsers',
-				'dataValues/dataValues',
-				'util/util.inherit',
-				'jquery',
-				'parsers/ValueParser',
-				'values/TimeValue'
-			],
 			'parsers/ValueParser': ['valueParsers/valueParsers', 'util/util.inherit', 'jquery'],
 
 			// TODO: These tests should not require any specific DataValue constructor but rather
@@ -226,14 +204,6 @@ this.config = ( function() {
 			'tests/lib/globeCoordinate/globeCoordinate.Formatter.tests',
 			'tests/lib/globeCoordinate/globeCoordinate.GlobeCoordinate.tests',
 
-			'tests/lib/time/time.Parser.tests',
-			'tests/lib/time/time.Time.knowsPrecision.tests',
-			'tests/lib/time/time.Time.maxPrecision.tests',
-			'tests/lib/time/time.Time.minPrecision.tests',
-			'tests/lib/time/time.Time.newFromIso8601.tests',
-			'tests/lib/time/time.Time.tests',
-			'tests/lib/time/time.Time.validate.tests',
-
 			'tests/src/dataValues.tests',
 
 			'tests/src/values/BoolValue.tests',
@@ -258,8 +228,7 @@ this.config = ( function() {
 			'tests/src/valueParsers/ValueParserStore.tests',
 
 			'tests/src/valueParsers/parsers/NullParser.tests',
-			'tests/src/valueParsers/parsers/StringParser.tests',
-			'tests/src/valueParsers/parsers/TimeParser.tests'
+			'tests/src/valueParsers/parsers/StringParser.tests'
 		]
 	};
 
