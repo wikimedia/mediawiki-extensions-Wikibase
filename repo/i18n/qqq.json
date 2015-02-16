@@ -462,7 +462,7 @@
 	"apihelp-wbavailablebadges-example-1": "{{doc-apihelp-example|wbavailablebadges}}",
 	"apihelp-wbcreateclaim-description": "{{doc-apihelp-description|wbcreateclaim}}",
 	"apihelp-wbcreateclaim-param-entity": "{{doc-apihelp-param|wbcreateclaim|entity}}",
-	"apihelp-wbcreateclaim-param-property": "{{doc-apihelp-param|wbcreateclaim|property}}",
+	"apihelp-wbcreateclaim-param-property": "To learn what \"snaks\" are, see [[wikidata:Wikidata:Glossary#Snak|Wikidata glossary]].\n----\n{{doc-apihelp-param|wbcreateclaim|property}}",
 	"apihelp-wbcreateclaim-param-value": "{{doc-apihelp-param|wbcreateclaim|value}}",
 	"apihelp-wbcreateclaim-param-snaktype": "{{doc-apihelp-param|wbcreateclaim|snaktype}}",
 	"apihelp-wbcreateclaim-example-1": "{{doc-apihelp-example|wbcreateclaim}}",

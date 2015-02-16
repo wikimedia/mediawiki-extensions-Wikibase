@@ -17,11 +17,11 @@
 			"Умар",
 			"Meshkov.a",
 			"Striking Blue",
-			"Oashnic"
+			"Oashnic",
+			"Batumski brodyaga"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
-	"specialpages-group-wikibaserepo": "Репозиторий Викибазы",
 	"wikibase-entity-item": "элемент",
 	"wikibase-entity-property": "свойство",
 	"wikibase-entity-query": "запрос",
@@ -33,6 +33,7 @@
 	"wikibase-addreference": "добавить сноску",
 	"wikibase-save-inprogress": "Сохранение…",
 	"wikibase-remove-inprogress": "Удаление…",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Настроить",
 	"wikibase-label-empty": "Метка (название) отсутствует.",
 	"wikibase-label-edit-placeholder": "введите название",
 	"wikibase-label-edit-placeholder-language-aware": "введите метку ($1)",
@@ -54,8 +55,8 @@
 	"wikibase-alias-edit-placeholder": "введите доп. название (синоним)",
 	"wikibase-label-input-help-message": "Введите название для этой сущности на следующем языке: $1.",
 	"wikibase-description-input-help-message": "Введите краткое описание для этой сущности на следующем языке: $1.",
-	"wikibase-fingerprintgroupview-input-help-message": "Введите метку этой сущности, краткое описание и альтернативные названия для каждого языка.",
-	"wikibase-fingerprintview-input-help-message": "Введите метку сущности, краткое описание и альтернативные названия в $1.",
+	"wikibase-entitytermsview-input-help-message": "Введите метку этой сущности, краткое описание и альтернативные названия для каждого языка.",
+	"wikibase-entitytermsforlanguageview-input-help-message": "Введите метку сущности, краткое описание и альтернативные названия в $1.",
 	"wikibase-statements": "Утверждения",
 	"wikibase-terms": "На других языках",
 	"wikibase-sitelinkgroupview-input-help-message": "Добавьте ссылку на сайт, указав сайт и страницу этого сайта, исправьте или удалите существующие ссылки на сайт.",

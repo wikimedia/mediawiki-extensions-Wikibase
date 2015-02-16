@@ -36,8 +36,13 @@
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}}ни $1",
 	"wikibase-rc-hide-wikidata-hide": "джашыр",
 	"wikibase-rc-hide-wikidata-show": "кёргюз",
-	"wikibase-rc-show-wikidata-pref": "Викибилгилени тюрлениулерин джангы тюрлениулени тизмесинде кёргюз",
-	"wikibase-rc-wikibase-edit-letter": "вб",
-	"wikibase-rc-wikibase-edit-title": "Викибилги бла байламлы тюрлениу",
-	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}'деги тюрлениулени кёздеги тизмеде кёргюз"
+	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}}ни тюрлениулерин джангы тюрлениулени тизмесинде кёргюз",
+	"wikibase-rc-wikibase-edit-letter": "д",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} бла байламлы тюрлениу",
+	"wikibase-replicationnote": "Эс бёлюгюз, тюрлениуле бютеу вики-проектледе да кёрюннгюнчю талай минут ётерге боллукъду",
+	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}'деги тюрлениулени кёздеги тизмеде кёргюз",
+	"wikibase-unconnectedpages-submit": "Хайыр­ландыр",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}'де элементни идентификатору",
+	"wikibase-pageinfo-entity-id-none": "джокъду",
+	"wikibase-otherprojects": "Башха проектледе"
 }

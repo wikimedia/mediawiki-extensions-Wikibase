@@ -4,12 +4,16 @@
 			"George Animal"
 		]
 	},
+	"wikibase-entity-item": "obje",
 	"wikibase-edit": "biguherîne",
 	"wikibase-save": "tomar bike",
 	"wikibase-cancel": "betal bike",
 	"wikibase-add": "lê zêde bike",
 	"wikibase-save-inprogress": "Tê tomarkirin...",
 	"wikibase-remove-inprogress": "Tê jêbirin...",
+	"wikibase-entitytermsforlanguagelistview-aliases": "Herwiha tê nasîn wek",
+	"wikibase-entitytermsforlanguagelistview-description": "Danasîn",
+	"wikibase-entitytermsforlanguagelistview-language": "Ziman",
 	"wikibase-description-edit-placeholder": "danasînekê binivîse",
 	"wikibase-sitelink-page-edit-placeholder": "gotar",
 	"wikibase-description-input-help-message": "Danasîneka kurt têkeve $1",

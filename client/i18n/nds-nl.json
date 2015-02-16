@@ -5,6 +5,7 @@
 		]
 	},
 	"wikibase-client-desc": "Kliënt veur de Wikibase-uutbreiding",
+	"tooltip-t-wikibase": "Verwiezing naor t objekt in t gegevensarchief",
 	"wikibase-after-page-move-queued": "t [$1 {{WBREPONAME}}-objekt] dat an disse zied ekoppeld is zal voorttemee automaties bie-ewörken wörden.",
 	"wikibase-after-page-delete-queued": "t [$1 {{WBREPONAME}}-objekt] dat an disse zied ekoppeld is zal voorttemee automaties bie-ewörken wörden.",
 	"wikibase-comment-linked": "Der is n Wikidata-onderwarp ekoppeld an disse zied.",

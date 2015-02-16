@@ -7,7 +7,6 @@
 		]
 	},
 	"wikibase-desc": "Складиште структуираних података",
-	"specialpages-group-wikibaserepo": "Складиште Википодатака",
 	"wikibase-entity-item": "ставка",
 	"wikibase-entity-property": "својство",
 	"wikibase-entity-query": "упит",
@@ -169,7 +168,7 @@
 	"wikibase-item-summary-wbeditentity": "Направљена нова ставка",
 	"wikibase-item-summary-wbeditentity-create": "Направљена нова ставка",
 	"wikibase-item-summary-wbeditentity-update": "Измењена ставка",
-	"wikibase-item-summary-wbeditentity-override": "Преклопљена ставка",
+	"wikibase-item-summary-wbeditentity-override": "Преснимљена ставка",
 	"wikibase-item-summary-wbsetreference": "Унета референца",
 	"wikibase-item-summary-wbsetreference-add": "Додата референца за тврдњу",
 	"wikibase-item-summary-wbsetreference-set": "Промењена референца за тврдњу:",

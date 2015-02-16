@@ -5,7 +5,6 @@
 		]
 	},
 	"wikibase-desc": "Skladište struktuiranih podataka",
-	"specialpages-group-wikibaserepo": "Skladište Vikipodataka",
 	"wikibase-entity-item": "stavka",
 	"wikibase-entity-property": "svojstvo",
 	"wikibase-entity-query": "upit",
@@ -169,7 +168,7 @@
 	"wikibase-item-summary-wbeditentity": "Napravljena nova stavka",
 	"wikibase-item-summary-wbeditentity-create": "Napravljena nova stavka",
 	"wikibase-item-summary-wbeditentity-update": "Izmenjena stavka",
-	"wikibase-item-summary-wbeditentity-override": "Preklopljena stavka",
+	"wikibase-item-summary-wbeditentity-override": "Presnimljena stavka",
 	"wikibase-item-summary-wbsetreference": "Uneta referenca",
 	"wikibase-item-summary-wbsetreference-add": "Dodata referenca za tvrdnju",
 	"wikibase-item-summary-wbsetreference-set": "Promenjena referenca za tvrdnju:",

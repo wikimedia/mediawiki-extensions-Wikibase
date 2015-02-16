@@ -43,6 +43,7 @@
 	"wikibase-remove-inprogress": "Eliminando...",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "En más idiomas",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configurar",
+	"wikibase-setting-entitytermsview-showEntitytermslistview": "Mostrar etiquetas, alias y descripciones en todos mis idiomas al cargar la página",
 	"wikibase-entitytermsforlanguagelistview-aliases": "También conocido como",
 	"wikibase-entitytermsforlanguagelistview-description": "Descripción",
 	"wikibase-entitytermsforlanguagelistview-label": "Etiqueta",

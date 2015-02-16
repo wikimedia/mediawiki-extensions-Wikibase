@@ -4,8 +4,8 @@
 			"Ahmed-Najib-Biabani-Ibrahimkhel"
 		]
 	},
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}} پېرن",
 	"wikibase-after-page-move-queued": "د [$1 ويکيډاټا توکی] چې همدې مخ سره اړونده و هغه به په اتوماتيکه توگه ډېر ژر هممهاله شي.",
+	"wikibase-dataitem": "{{WBREPONAME}} توکی",
 	"wikibase-rc-hide-wikidata-hide": "پټول",
 	"wikibase-rc-hide-wikidata-show": "ښکاره کول",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} سمون"
