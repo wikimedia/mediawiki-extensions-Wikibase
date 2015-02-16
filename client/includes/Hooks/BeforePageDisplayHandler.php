@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Hooks;
 
 use OutputPage;
-use Skin;
 use Title;
 use User;
 use Wikibase\NamespaceChecker;
@@ -32,12 +31,11 @@ class BeforePageDisplayHandler {
 	 * @note in php5, $out is by passed by reference (by default, so &$out is not needed)
 	 *
 	 * @param OutputPage $out
-	 * @param Skin $skin
 	 * @param string $actionName
 	 *
 	 * @return bool
 	 */
-	public function addModules( OutputPage $out, Skin $skin, $actionName ) {
+	public function addModules( OutputPage $out, $actionName ) {
 		$title = $out->getTitle();
 
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
@@ -45,7 +43,7 @@ class BeforePageDisplayHandler {
 		}
 
 		$this->addStyleModules( $out, $title, $actionName );
-		$this->addJsModules( $out, $skin, $title, $actionName );
+		$this->addJsModules( $out, $title, $actionName );
 
 		return true;
 	}
@@ -64,8 +62,8 @@ class BeforePageDisplayHandler {
 		}
 	}
 
-	private function addJsModules( OutputPage $out, Skin $skin, Title $title, $actionName ) {
-		$user = $skin->getContext()->getUser();
+	private function addJsModules( OutputPage $out, Title $title, $actionName ) {
+		$user = $out->getUser();
 
 		if ( $this->hasLinkItemWidget( $user, $out, $title, $actionName ) ) {
 			// Add the JavaScript which lazy-loads the link item widget
