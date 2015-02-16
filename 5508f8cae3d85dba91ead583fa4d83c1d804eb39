@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dbd2b45c",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T13:53:31Z",
+      "side": 1,
+      "message": "I think you should initialize this with 0 now. And set the type to int.",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3b52c8e2",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T13:53:31Z",
+      "side": 1,
+      "message": "I think you have to change this accordingly. Otherwise a call of this method will also call getLatestRevisionId and will need twice the runtime for no benefit.",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9b43dc14",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T13:53:31Z",
+      "side": 1,
+      "message": "I think you have to change this accordingly. Otherwise a call of this method will also call getLatestRevisionId and will need twice the runtime for no benefit.",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3bc3a88d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T13:53:31Z",
+      "side": 1,
+      "message": "Initialize with 0 (see above) and remove the null check. The null check is not needed (as the comment says).",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bbcfb8b4",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T13:53:31Z",
+      "side": 1,
+      "message": "So you are casting false to 0 here? Ok.",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fbd53048",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T13:53:31Z",
+      "side": 1,
+      "message": "This sentence is hard to understand now. Was better before, in my opinion.",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1b382c9a",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T13:53:31Z",
+      "side": 1,
+      "message": "This totally should be private, by the way. It\u0027s not used outside this class.",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fb5bf0fa",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T13:53:31Z",
+      "side": 1,
+      "message": "This !is_int check is obsolete now, as far as I can see. Please double-check.",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bb0c98f1",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T13:53:31Z",
+      "side": 1,
+      "message": "I think this can be optimized in a nice way. Don\u0027t call isNew but instead: Check the id. If it\u0027s not null, try to ask for the title. If no title could be found, you know the entity does not exist. This way you are saving an EntityRevisionLookup call.\n\nNot 100% sure this is correct, but I think it is.",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
