@@ -162,6 +162,7 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarcontroller.definitions.edittoolbar.statementview',
 				'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview-snakview',
 				'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.sitelinkgroupview-sitelinkview',
+				'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.statementview-referenceview',
 				'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.statementview-snakview',
 				'jquery.wikibase.wbtooltip',
 				'jquery.cookie',
