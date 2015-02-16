@@ -26,7 +26,7 @@ use Wikibase\ClientStore;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
-use Wikibase\DataAccess\PropertyParserFunction\SnaksFinder;
+use Wikibase\DataAccess\SnaksFinder;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
