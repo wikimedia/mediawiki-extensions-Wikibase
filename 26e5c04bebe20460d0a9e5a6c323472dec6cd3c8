@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bb233853",
+        "filename": "client/includes/Hooks/OtherProjectsSidebarGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T14:04:57Z",
+      "side": 1,
+      "message": "This will not work if there is a group \"a\" and a group \"ab\". What you need here is an \"order by column A, then order by column B\", which is much easier to do in SQL. So I suggest to add a proper \u0027ORDER BY\u0027 option to SiteLinkTable::getSiteLinksForItem and not try do do it in PHP.",
+      "revId": "26e5c04bebe20460d0a9e5a6c323472dec6cd3c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
