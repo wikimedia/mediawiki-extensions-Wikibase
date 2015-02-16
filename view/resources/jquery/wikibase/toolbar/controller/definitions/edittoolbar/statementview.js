@@ -106,6 +106,10 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				return;
 			}
 
+			if( !statementview.$references.is( ':visible' ) ) {
+				statementview.$refsHeading.find( 'a' ).click();
+			}
+
 			statementview.focus();
 		}
 	}
