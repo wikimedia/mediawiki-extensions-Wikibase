@@ -27,6 +27,10 @@ var PARENT = $.wikibase.entityview;
  * @param {dataTypes.DataTypeStore} options.dataTypeStore
  *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
  *        object when interacting on a "value" `Variation`.
+ * @param {wikibase.entityChangers.ReferencesChanger} [options.referencesChanger]
+ *        Required if `Statement` `Reference`s should not be saved along with each `Statement` but
+ *        are supposed to be saved individually (e.g. by applying individual edit toolbars to the
+ *        `referenceview`s).
  */
 $.widget( 'wikibase.itemview', PARENT, {
 	/**
@@ -36,7 +40,8 @@ $.widget( 'wikibase.itemview', PARENT, {
 	options: {
 		entityStore: null,
 		valueViewBuilder: null,
-		dataTypeStore: null
+		dataTypeStore: null,
+		referencesChanger: null
 	},
 
 	/**
@@ -88,7 +93,8 @@ $.widget( 'wikibase.itemview', PARENT, {
 			entityType: this.options.value.getType(),
 			entityStore: this.options.entityStore,
 			valueViewBuilder: this.options.valueViewBuilder,
-			entityChangersFactory: this.options.entityChangersFactory
+			entityChangersFactory: this.options.entityChangersFactory,
+			referencesChanger: this.options.referencesChanger
 		} )
 		.statementgrouplabelscroll();
 
