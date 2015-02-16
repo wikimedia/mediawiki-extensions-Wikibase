@@ -5,7 +5,7 @@ namespace Wikibase;
 use HashBagOStuff;
 use LoadBalancer;
 use ObjectCache;
-use Wikibase\Client\Store\Sql\ConnectionManager;
+use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\NullSubscriptionManager;
@@ -174,7 +174,7 @@ class DirectSqlStore implements ClientStore {
 			if ( $this->useLegacyChangesSubscription ) {
 				$this->subscriptionManager = new NullSubscriptionManager();
 			} else {
-				$connectionManager = new ConnectionManager(
+				$connectionManager = new ConsistentReadConnectionManager(
 					$this->getRepoLoadBalancer(),
 					$this->repoWiki
 				);
@@ -240,7 +240,7 @@ class DirectSqlStore implements ClientStore {
 			if ( $this->useLegacyUsageIndex ) {
 				$this->usageTracker = new NullUsageTracker();
 			} else {
-				$connectionManager = new ConnectionManager( $this->getLocalLoadBalancer() );
+				$connectionManager = new ConsistentReadConnectionManager( $this->getLocalLoadBalancer() );
 				$this->usageTracker = new SqlUsageTracker( $this->entityIdParser, $connectionManager );
 			}
 		}
