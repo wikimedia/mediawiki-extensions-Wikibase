@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e7c4fa4_3bd88821",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T14:55:18Z",
+      "side": 1,
+      "message": "This replaces an \"does the site exist?\" call with a completely different \"does the page exist on this site?\" call. As already said I don\u0027t think this is a good idea. I\u0027m not sure what the performance impact of this change is.",
+      "revId": "711196b2da87bf8e3d4b4820ac989a2673feeb71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_3bf648c3",
         "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
         "patchSetId": 1
@@ -31,6 +48,24 @@
       "side": 1,
       "message": "No, this is actually intended, as the itemId doesn\u0027t change: We\u0027ll only load the entity once and check it. That saves us from loading all sites.",
       "parentUuid": "6e7c4fa4_3bf648c3",
+      "revId": "711196b2da87bf8e3d4b4820ac989a2673feeb71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dbe714de",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-16T14:55:18Z",
+      "side": 1,
+      "message": "Oh, the $site parameter changes, so this is a different call. Ok then.",
+      "parentUuid": "6e7c4fa4_5b9f8462",
       "revId": "711196b2da87bf8e3d4b4820ac989a2673feeb71",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
