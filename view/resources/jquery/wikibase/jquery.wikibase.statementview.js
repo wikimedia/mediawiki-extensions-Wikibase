@@ -42,9 +42,14 @@
  * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
  *        Required by the `snakview` interfacing a `snakview` "value" `Variation` to
  *        `jQuery.valueview`.
- * @param {wikibase.entityChangers.EntityChangersFactory} options.entityChangersFactory
+ * @param {wikibase.entityChangers.EntityChangersFactory} [options.entityChangersFactory]
  *        Required to store the `Reference`s gathered from the `referenceview`s aggregated by the
- *        `statementview`.
+ *        `statementview`. If omitted, it is assumed that `Reference`s are updated (saved) along
+ *        with the `Statement`s main `Snak`.
+ * @param {wikibase.entityChangers.ReferencesChanger} [options.referencesChanger]
+ *        Required if the `Statement`'s `Reference`s should not be saved along with the `Statement`
+ *        but are supposed to be saved individually (e.g. by applying individual edit toolbars
+ *        to the `referenceview`s).
  * @param {dataTypes.DataTypeStore} options.dataTypeStore
  *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
  *        object when interacting on a "value" `Variation`.
@@ -102,6 +107,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		claimsChanger: null,
 		dataTypeStore: null,
 		entityChangersFactory: null,
+		referencesChanger: null,
 		predefined: {
 			mainSnak: false
 		},
@@ -117,6 +123,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 */
 	_rankSelector: null,
 
+	// TODO: Remove short-cut to reference as reference needs to be kept up to date on re-rendering
+	// the listview widget; Implement referencelistview.
 	/**
 	 * Shortcut to the `listview` managing the `referenceview`s.
 	 * @property {jQuery.wikibase.listview}
@@ -132,12 +140,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_qualifiers: null,
 
 	/**
-	 * @property {wikibase.entityChangers.ReferencesChanger}
-	 * @private
-	 */
-	_referencesChanger: null,
-
-	/**
 	 * @inheritdoc
 	 * @protected
 	 *
@@ -148,7 +150,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 			!this.options.entityStore
 			|| !this.options.valueViewBuilder
 			|| !this.options.claimsChanger
-			|| !this.options.entityChangersFactory
 			|| !this.options.dataTypeStore
 			|| !this.options.guidGenerator
 		) {
@@ -156,8 +157,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 		}
 
 		PARENT.prototype._create.call( this );
-
-		this._referencesChanger = this.options.entityChangersFactory.getReferencesChanger();
 
 		this.draw();
 	},
@@ -219,7 +218,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 			dataTypeStore: this.options.dataTypeStore,
 			entityStore: this.options.entityStore,
 			valueViewBuilder: this.options.valueViewBuilder,
-			encapsulatedBy: ':' + this.widgetFullName.toLowerCase()
+			encapsulatedBy: ':' + this.widgetFullName.toLowerCase(),
+			referencesChanger: this.options.referencesChanger
 		} );
 	},
 
@@ -300,15 +300,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @private
 	 *
-	 * @param {wikibase.datamodel.Statement} [statement]
+	 * @param {wikibase.datamodel.Reference[]} [references]
 	 */
-	_createReferences: function( statement ) {
-		if( !statement ) {
-			return;
-		}
-
-		var self = this,
-			references = statement.getReferences();
+	_createReferencesListview: function( references ) {
+		var self = this;
 
 		var $listview = this.$references.children();
 		if( !$listview.length ) {
@@ -323,26 +318,29 @@ $.widget( 'wikibase.statementview', PARENT, {
 				newItemOptionsFn: function( value ) {
 					return {
 						value: value || null,
-						statementGuid: self.options.value.getClaim().getGuid(),
+						statementGuid: self.options.value
+							? self.options.value.getClaim().getGuid()
+							: null,
 						dataTypeStore: self.options.dataTypeStore,
 						entityStore: self.options.entityStore,
-						valueViewBuilder: self.options.valueViewBuilder,
-						referencesChanger: self._referencesChanger
+						valueViewBuilder: self.options.valueViewBuilder
 					};
 				}
 			} ),
-			value: references.toArray()
+			value: references
 		} );
 
 		this._referencesListview = $listview.data( 'listview' );
 
-		var lia = this._referencesListview.listItemAdapter();
+		var lia = this._referencesListview.listItemAdapter(),
+			prefix = $.wikibase.referenceview.prototype.widgetEventPrefix;
 
 		$listview
 		.on( 'listviewitemadded listviewitemremoved', function( event, value, $li ) {
 			if( event.target === $listview[0] ) {
 				self._drawReferencesCounter();
 			}
+			self._trigger( 'change' );
 		} )
 		.on( 'listviewenternewitem', function( event, $newLi ) {
 			if( event.target !== $listview[0] ) {
@@ -373,6 +371,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 					}
 				} );
 			}
+		} )
+		.on( prefix + 'change.' + this.widgetName, function( event ) {
+			event.stopPropagation();
+			self._trigger( 'change' );
 		} );
 
 		// Collapse references if there is at least one.
@@ -435,6 +437,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		this.$mainSnak.off( '.' + this.widgetName );
 
 		this._destroyQualifiersListView();
+		this._destroyReferencesListview();
 
 		PARENT.prototype.destroy.call( this );
 	},
@@ -449,6 +452,19 @@ $.widget( 'wikibase.statementview', PARENT, {
 				.off( '.' + this.widgetName )
 				.empty();
 			this._qualifiers = null;
+		}
+	},
+
+	/**
+	 * @private
+	 */
+	_destroyReferencesListview: function() {
+		if( this._referencesListview ) {
+			this._referencesListview.destroy();
+			this.$references
+				.off( '.' + this.widgetName )
+				.empty();
+			this._referencesListview = null;
 		}
 	},
 
@@ -477,7 +493,12 @@ $.widget( 'wikibase.statementview', PARENT, {
 					: new wb.datamodel.SnakList()
 			);
 		}
-		this._createReferences( this.options.value );
+
+		if( this.isInEditMode() || this.options.value ) {
+			this._createReferencesListview(
+				this.options.value ? this.options.value.getReferences().toArray() : []
+			);
+		}
 
 		return $.Deferred().resolve().promise();
 	},
@@ -501,6 +522,19 @@ $.widget( 'wikibase.statementview', PARENT, {
 			}
 
 			if( !qualifiers.equals( this.options.value.getClaim().getQualifiers() ) ) {
+				return false;
+			}
+
+			var currentReferences = new wb.datamodel.ReferenceList();
+
+			$.each( this._referencesListview.value(), function() {
+				var reference = this.value();
+				if( reference ) {
+					currentReferences.addItem( this.value() );
+				}
+			} );
+
+			if( !currentReferences.equals( this.options.value.getReferences() ) ) {
 				return false;
 			}
 		}
@@ -579,13 +613,21 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * Removes a `referenceview` from the view's list of `referenceview`s.
 	 *
 	 * @param {jQuery.wikibase.referenceview} referenceview
+	 *
+	 * @throws {Error} if `entityChangersFactory` option providing a
+	 *         `wikibase.entityChangers.ReferencesChanger` is not set.
 	 */
 	remove: function( referenceview ) {
 		var self = this;
 
+		if( !this.options.entityChangersFactory ) {
+			throw new Error( 'entityChangersFactory option needs to be set in order to save '
+				+ 'References separately' );
+		}
+
 		referenceview.disable();
 
-		this._referencesChanger.removeReference(
+		this.options.entityChangersFactory.getReferencesChanger().removeReference(
 			this.value().getClaim().getGuid(),
 			referenceview.value()
 		)
@@ -614,8 +656,13 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @private
 	 */
 	_drawReferencesCounter: function() {
-		var numberOfValues = this._referencesListview.nonEmptyItems().length,
+		var numberOfValues = 0,
+			numberOfPendingValues = 0;
+
+		if( this._referencesListview ) {
+			numberOfValues = this._referencesListview.nonEmptyItems().length;
 			numberOfPendingValues = this._referencesListview.items().length - numberOfValues;
+		}
 
 		// build a nice counter, displaying fixed and pending values:
 		var $counterMsg = wb.utilities.ui.buildPendingCounter(
@@ -639,11 +686,22 @@ $.widget( 'wikibase.statementview', PARENT, {
 			PARENT.prototype.startEditing.call( self ).done( function() {
 				self._rankSelector.startEditing();
 
+				var i;
+
 				if( self._qualifiers ) {
 					var snaklistviews = self._qualifiers.value();
 					if( snaklistviews.length ) {
-						for( var i = 0; i < snaklistviews.length; i++ ) {
+						for( i = 0; i < snaklistviews.length; i++ ) {
 							snaklistviews[i].startEditing();
+						}
+					}
+				}
+
+				if( self._referencesListview ) {
+					var referenceviews = self._referencesListview.value();
+					if( referenceviews.length ) {
+						for( i = 0; i < referenceviews.length; i++ ) {
+							referenceviews[i].startEditing();
 						}
 					}
 				}
@@ -667,7 +725,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 			this.$mainSnak.data( 'snakview' ).stopEditing( dropValue );
 		}
 		this._stopEditingQualifiers( dropValue );
+		this._stopEditingReferences( dropValue );
 		this._rankSelector.stopEditing( dropValue );
+
+		this._drawReferencesCounter();
 
 		return PARENT.prototype._afterStopEditing.call( this, dropValue );
 	},
@@ -707,6 +768,44 @@ $.widget( 'wikibase.statementview', PARENT, {
 		if( qualifiers.length > 0 ) {
 			// Refill the qualifier listview with the initial (or new initial) qualifiers:
 			this._createQualifiersListview( qualifiers );
+		}
+	},
+
+	/**
+	 * @private
+	 *
+	 * @param {boolean} [dropValue=false]
+	 */
+	_stopEditingReferences: function( dropValue ) {
+		var referenceviews,
+			i;
+
+		if( this._referencesListview ) {
+			var $referenceviews = this._referencesListview.items();
+			referenceviews = this._referencesListview.value();
+
+			if( referenceviews.length ) {
+				for( i = 0; i < referenceviews.length; i++ ) {
+					referenceviews[i].stopEditing( dropValue );
+
+					if( dropValue
+						&& !referenceviews[i].value()
+						&& $.inArray( referenceviews[i], $referenceviews ) !== -1
+					) {
+						this._referencesListview.removeItem( referenceviews[i].element );
+					}
+				}
+			}
+		}
+
+		this._destroyReferencesListview();
+
+		var references = this.options.value ? this.options.value.getReferences().toArray() : [];
+
+		if( references.length > 0 ) {
+			this._createReferencesListview( references );
+			this.$references.show();
+			this.$refsHeading.find( 'a' ).data( 'toggler' ).refresh();
 		}
 	},
 
@@ -793,6 +892,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 				this._qualifiers.option( key, value );
 			}
 			this._rankSelector.option( key, value );
+
+			if( !this.options.referencesChanger && this._referencesListview ) {
+				this._referencesListview.option( key, value );
+			}
 		}
 
 		return response;

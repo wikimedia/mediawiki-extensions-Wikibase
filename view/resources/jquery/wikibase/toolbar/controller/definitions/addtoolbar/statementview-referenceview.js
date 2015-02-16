@@ -9,25 +9,40 @@
  */
 $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 	id: 'statementview-referenceview',
-	selector: '.wikibase-statementview-references',
+	selector: ':' + $.wikibase.statementview.prototype.namespace
+		+ '-' + $.wikibase.statementview.prototype.widgetName,
 	events: {
-		listviewcreate: function( event, toolbarController ) {
-			var $listview = $( event.target ),
-				listview = $listview.data( 'listview' ),
-				lia = listview.listItemAdapter(),
-				$node = $listview.parent();
+		'statementviewafterstartediting listviewcreate': function( event, toolbarcontroller ) {
+			var $statementview,
+				statementview,
+				$listview;
 
-			if( !$node.hasClass( 'wikibase-statementview-references' ) ) {
-				return;
+			if( event.type.indexOf( 'statementview' ) === 0 ) {
+				$statementview = $( event.target );
+				statementview = $statementview.data( 'statementview' );
+				$listview = statementview.$references.children( ':wikibase-listview' );
+			} else {
+				$listview = $( event.target );
+				$statementview = $listview.closest( ':wikibase-statementview' );
+				statementview = $statementview.data( 'statementview' );
+
+				if( !statementview.isInEditMode()
+					|| $listview.parent()[0] !== statementview.$references
+				) {
+					return;
+				}
 			}
 
-			$node
+			var listview = $listview.data( 'listview' ),
+				lia = listview.listItemAdapter();
+
+			statementview.$references
 			.addtoolbar( {
-				$container: $( '<div/>' ).appendTo( $node ),
+				$container: $( '<div/>' ).appendTo( statementview.$references ),
 				label: mw.msg( 'wikibase-addreference' )
 			} )
-			.on( 'addtoolbaradd.addtoolbar', function( e ) {
-				if( e.target !== $node.get( 0 ) ) {
+			.on( 'addtoolbaradd.addtoolbar', function( event ) {
+				if( event.target !== statementview.$references[0] ) {
 					return;
 				}
 
@@ -39,42 +54,49 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				// Re-focus "add" button after having added or having cancelled adding a reference:
 				var eventName = lia.prefixedEvent( 'afterstopediting.addtoolbar' );
 				$listview.one( eventName, function( event ) {
-					$node.data( 'addtoolbar' ).focus();
+					statementview.$references.data( 'addtoolbar' ).focus();
 				} );
-
-				toolbarController.registerEventHandler(
-					event.data.toolbar.type,
-					event.data.toolbar.id,
-					'listviewdestroy',
-					function( event, toolbarController ) {
-						var $listview = $( event.target ),
-							$node = $listview.parent();
-
-						if( !$node.hasClass( '.wikibase-statementview-references' ) ) {
-							return;
-						}
-
-						toolbarController.destroyToolbar( $node.data( 'addtoolbar' ) );
-						$node.off( 'addtoolbar' );
-					}
-				);
 			} );
+		},
+		'statementviewafterstopediting listviewdestroy': function( event, toolbarcontroller ) {
+			var $statementview,
+				statementview;
 
-			toolbarController.registerEventHandler(
-				event.data.toolbar.type,
-				event.data.toolbar.id,
-				'listviewdisable',
-				function( event ) {
-					if( event.target !== $listview.get( 0 ) ) {
-						return;
-					}
-					$node.data( 'addtoolbar' )[
-						listview.option( 'disabled' )
-							? 'disable'
-							: 'enable'
-					]();
+			if( event.type.indexOf( 'statementview' ) === 0 ) {
+				$statementview = $( event.target );
+				statementview = $statementview.data( 'statementview' );
+			} else {
+				var $listview = $( event.target );
+				$statementview = $listview.closest( ':wikibase-statementview' );
+				statementview = $statementview.data( 'statementview' );
+
+				if( $listview.parent()[0] !== statementview.$references ) {
+					return;
 				}
-			);
+			}
+
+			var addtoolbar = statementview.$references.data( 'addtoolbar' );
+
+			if( addtoolbar ) {
+				toolbarcontroller.destroyToolbar( addtoolbar );
+			}
+			statementview.$references.off( '.addtoolbar' );
+		},
+		listviewdisable: function( event ) {
+			var $listview = $( event.target ),
+				$statementview = $listview.closest( ':wikibase-statementview' ),
+				statementview = $statementview.data( 'statementview' );
+
+			if( $listview.parent()[0] !== statementview.$references[0] ) {
+				return;
+			}
+
+			var listview = $listview.data( 'listview' ),
+				addtoolbar = statementview.$references.data( 'addtoolbar' );
+
+			if( addtoolbar ) {
+				addtoolbar.option( 'disabled', listview.option( 'disabled' ) );
+			}
 		}
 	}
 } );
