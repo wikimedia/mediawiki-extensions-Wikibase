@@ -1,6 +1,8 @@
 ( function ( $ ) {
 'use strict';
 
+$.util = $.util || {};
+
 /**
  * Returns the directionality of a language by querying the Universal Language Selector. If ULS is
  * not available the HTML element's `dir` attribute is evaluated. If that is unset, `auto` is
