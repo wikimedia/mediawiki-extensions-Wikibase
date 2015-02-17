@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Lib\Store\WikiPageEntityLookup
+ * @covers Wikibase\Lib\Store\WikipageEntityRevisionLookup
  *
  * @group Database
  * @group Wikibase
