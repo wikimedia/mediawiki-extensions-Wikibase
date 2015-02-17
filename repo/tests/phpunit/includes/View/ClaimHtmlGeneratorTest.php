@@ -72,6 +72,10 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @uses Wikibase\Repo\View\SnakHtmlGenerator
+	 * @uses Wikibase\Template\Template
+	 * @uses Wikibase\Template\TemplateFactory
+	 * @uses Wikibase\Template\TemplateRegistry
 	 * @dataProvider getHtmlForClaimProvider
 	 */
 	public function testGetHtmlForClaim(
