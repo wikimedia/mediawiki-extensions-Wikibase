@@ -18,6 +18,11 @@ use Wikibase\Template\TemplateRegistry;
 /**
  * @covers Wikibase\Repo\View\EntityViewPlaceholderExpander
  *
+ * @uses Wikibase\Repo\View\EntityTermsView
+ * @uses Wikibase\Template\Template
+ * @uses Wikibase\Template\TemplateFactory
+ * @uses Wikibase\Template\TemplateRegistry
+ *
  * @group Wikibase
  * @group WikibaseRepo
  * @group EntityView
