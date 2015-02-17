@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Lib\Store\WikiPageEntityLookup
+ * @covers Wikibase\Lib\Store\WikiPageEntityRevisionLookup
  *
  * @group Database
  * @group Wikibase
@@ -22,7 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikipageEntityRevisionLookupTest extends EntityRevisionLookupTest {
+class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 	/**
 	 * @var EntityRevision[]

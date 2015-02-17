@@ -16,7 +16,7 @@ use Wikibase\Repo\Specials\SpecialListDatatypes;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class SpecialListDataTypesTest extends SpecialPageTestBase {
+class SpecialListDatatypesTest extends SpecialPageTestBase {
 
 	protected function setUp() {
 		parent::setUp();

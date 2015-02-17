@@ -8,7 +8,7 @@ use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Notifications\DatabaseChangeNotificationChannel
+ * @covers Wikibase\Repo\Notifications\DatabaseChangeTransmitter
  *
  * @group Database
  *
