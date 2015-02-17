@@ -72,25 +72,28 @@ class ClaimDifferenceVisualizer {
 			$html .= $this->visualizeMainSnakChange( $mainSnakChange, $oldestMainSnak, $newestMainSnak );
 		}
 
-		if ( $claimDifference->getRankChange() !== null ) {
+		$rankChange = $claimDifference->getRankChange();
+		if ( $rankChange !== null ) {
 			$html .= $this->visualizeRankChange(
-				$claimDifference->getRankChange(),
+				$rankChange,
 				$oldestMainSnak,
 				$newestMainSnak
 			);
 		}
 
-		if ( $claimDifference->getQualifierChanges() !== null ) {
+		$qualifierChanges = $claimDifference->getQualifierChanges();
+		if ( $qualifierChanges !== null ) {
 			$html .= $this->visualizeQualifierChanges(
-				$claimDifference->getQualifierChanges(),
+				$qualifierChanges,
 				$oldestMainSnak,
 				$newestMainSnak
 			);
 		}
 
-		if ( $claimDifference->getReferenceChanges() !== null ) {
+		$referenceChanges = $claimDifference->getReferenceChanges();
+		if ( $referenceChanges !== null ) {
 			$html .= $this->visualizeSnakListChanges(
-				$claimDifference->getReferenceChanges(),
+				$referenceChanges,
 				wfMessage( 'wikibase-diffview-reference' )->inLanguage( $this->languageCode ),
 				$oldestMainSnak,
 				$newestMainSnak
