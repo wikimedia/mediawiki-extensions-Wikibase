@@ -108,7 +108,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 		TimeFormatter::CALENDAR_GREGORIAN => 'gregorian',
 			TimeFormatter::CALENDAR_JULIAN => 'julian',
 		);
-		return $calendars[ $uri ];
+		return array_key_exists( $uri, $calendars ) ? $calendars[$uri] : '';
 	}
 
 	/**
