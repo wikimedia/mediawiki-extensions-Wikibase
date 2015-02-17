@@ -334,8 +334,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$expectedTerms = $lookup->getEntityTerms( $item );
 		$actualTerms = $lookup->getTermsOfEntity( $item->getId() );
 
-		$missingTerms = array_udiff( $expectedTerms, $actualTerms, 'Wikibase\Term::compare' );
-		$extraTerms =   array_udiff( $actualTerms, $expectedTerms, 'Wikibase\Term::compare' );
+		$missingTerms = array_udiff( $expectedTerms, $actualTerms, 'Wikibase\Term::notEquals' );
+		$extraTerms = array_udiff( $actualTerms, $expectedTerms, 'Wikibase\Term::notEquals' );
 
 		$this->assertEmpty( $missingTerms, 'Missing terms' );
 		$this->assertEmpty( $extraTerms, 'Extra terms' );

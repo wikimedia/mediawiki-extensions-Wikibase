@@ -100,8 +100,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$newTerms = $this->getEntityTerms( $entity );
 		$oldTerms = $this->getTermsOfEntity( $entity->getId() );
 
-		$termsToInsert = array_udiff( $newTerms, $oldTerms, 'Wikibase\Term::compare' );
-		$termsToDelete = array_udiff( $oldTerms, $newTerms, 'Wikibase\Term::compare' );
+		$termsToInsert = array_udiff( $newTerms, $oldTerms, 'Wikibase\Term::notEquals' );
+		$termsToDelete = array_udiff( $oldTerms, $newTerms, 'Wikibase\Term::notEquals' );
 
 		if ( !$termsToInsert && !$termsToDelete ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': terms did not change, returning.' );
