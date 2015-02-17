@@ -27,19 +27,9 @@ class Term {
 	const TYPE_DESCRIPTION = 'description';
 
 	/**
-	 * @since 0.2
-	 *
 	 * @var array
 	 */
-	protected $fields = array();
-
-	protected static $fieldNames = array(
-		'entityType',
-		'entityId',
-		'termType',
-		'termLanguage',
-		'termText',
-	);
+	private $fields = array();
 
 	/**
 	 * @since 0.2
@@ -145,13 +135,11 @@ class Term {
 	}
 
 	/**
-	 * @since 0.2
-	 *
 	 * @param string $entityType
 	 *
 	 * @throws MWException
 	 */
-	public function setEntityType( $entityType ) {
+	private function setEntityType( $entityType ) {
 		if ( !is_string( $entityType ) ) {
 			throw new MWException( 'Entity type code can only be a string' );
 		}
@@ -169,14 +157,11 @@ class Term {
 	}
 
 	/**
-	 * @since 0.2
-	 * @deprecated Please avoid using this.
-	 *
 	 * @param int $id
 	 *
 	 * @throws MWException
 	 */
-	public function setNumericId( $id ) {
+	private function setNumericId( $id ) {
 		if ( !is_int( $id ) ) {
 			throw new MWException( 'Numeric ID can only be an integer' );
 		}
@@ -202,64 +187,6 @@ class Term {
 		}
 
 		return null;
-	}
-
-	/**
-	 * Returns true if this Term object is equals to $that. This Term object is considered
-	 * equal to $that if $that is also an instance of Term, and $that->fields contains the
-	 * same values for the same fields as $this->fields.
-	 *
-	 * @param mixed $that The object to check for equality.
-	 *
-	 * @return bool If $that is equal to this Term object.
-	 */
-	public function equals( $that ) {
-		if ( $this === $that ) {
-			return true;
-		} else if ( !( $that instanceof self ) ) {
-			return false;
-		} else {
-			if ( count( $this->fields ) != count( $that->fields ) ) {
-				return false;
-			}
-
-			foreach ( $this->fields as $k => $v ) {
-				if ( !isset( $that->fields[$k] ) || $that->fields[$k] !== $v ) {
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * Imposes an canonical but arbitrary order on Term objects.
-	 * Useful for sorting lists of terms for comparison.
-	 *
-	 * @param Term $a
-	 * @param Term $b
-	 *
-	 * @return int Returns 1 if $a is greater than $b, -1 if $b is greater than $a, and 0 otherwise.
-	 */
-	public static function compare( Term $a, Term $b ) {
-		foreach ( self::$fieldNames as $n ) {
-			if ( !isset( $a->fields[$n] ) ) {
-				if ( isset( $b->fields[$n] ) ) {
-					return -1;
-				}
-			} elseif ( !isset( $b->fields[$n] ) ) {
-				if ( isset( $a->fields[$n] ) ) {
-					return 1;
-				}
-			} elseif ( $a->fields[$n] > $b->fields[$n] ) {
-				return 1;
-			} elseif ( $a->fields[$n] < $b->fields[$n] ) {
-				return -1;
-			}
-		}
-
-		return 0;
 	}
 
 }
