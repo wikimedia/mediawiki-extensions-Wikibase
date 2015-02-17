@@ -75,7 +75,7 @@ class TermTest extends \MediaWikiTestCase {
 		$this->assertEquals( 'Foo', $term->getText(), "original must stay the same when clone is modified" );
 
 		$clone = clone $term;
-		$this->assertTrue( $term->equals( $clone ), "clone must be equal to original" );
+		$this->assertEquals( $term, $clone, "clone must be equal to original" );
 	}
 
 	public function provideCompare() {
@@ -110,16 +110,26 @@ class TermTest extends \MediaWikiTestCase {
 			false
 		);
 
-		$other = clone $term;
-		$other->setNumericId( 11 );
+		$other = new Term( array(
+			'entityType' => 'property',
+			'entityId' => 11,
+			'termType' => Term::TYPE_LABEL,
+			'termLanguage' => 'en',
+			'termText' => 'foo',
+		) );
 		$tests[] = array( // #3
 			$term,
 			$other,
 			false
 		);
 
-		$other = clone $term;
-		$other->setEntityType( 'property' );
+		$other = new Term( array(
+			'entityType' => 'property',
+			'entityId' => 23,
+			'termType' => Term::TYPE_LABEL,
+			'termLanguage' => 'en',
+			'termText' => 'foo',
+		) );
 		$tests[] = array( // #4
 			$term,
 			$other,
@@ -160,42 +170,6 @@ class TermTest extends \MediaWikiTestCase {
 			//NOTE: we don't know or care whether this is larger or smaller
 			$this->assertNotEquals( 0, $ab, "Comparison of unequal terms is expected to not return 0" );
 			$this->assertEquals( -$ab, $ba, "Comparing A to B should return the inverse of comparing B to A" );
-		}
-	}
-
-	public function provideEquals() {
-		$tests = array(
-			array( // #0
-				new Term(),
-				null,
-				false
-			),
-
-			array( // #1
-				new Term(),
-				false,
-				false
-			),
-
-			array( // #2
-				new Term(),
-				"",
-				false
-			),
-		);
-
-		return array_merge( $tests, self::provideCompare() );
-	}
-
-	/**
-	 * @dataProvider provideEquals
-	 * @depends testClone
-	 */
-	public function testEquals( Term $a, $b, $equal ) {
-		$this->assertEquals( $equal, $a->equals( $b ) );
-
-		if ( $b instanceof Term ) {
-			$this->assertEquals( $equal, $b->equals( $a ) );
 		}
 	}
 
