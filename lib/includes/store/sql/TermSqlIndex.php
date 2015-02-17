@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\LegacyIdInterpreter;
+use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\Store\LabelConflictFinder;
@@ -91,7 +92,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @param EntityDocument $entity
 	 *
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function saveTermsOfEntity( EntityDocument $entity ) {
 		wfProfileIn( __METHOD__ );
@@ -140,7 +141,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param Term[] $terms
 	 * @param DatabaseBase $dbw
 	 *
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function insertTermsInternal( EntityDocument $entity, $terms, DatabaseBase $dbw ) {
 		wfProfileIn( __METHOD__ );
@@ -230,6 +231,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$terms[] = $term;
 		}
 
+		/** @var AliasGroup $aliasGroup */
 		foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
 			foreach ( $aliasGroup->getAliases() as $alias ) {
 				$term = new Term( $extraFields );
@@ -257,7 +259,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param Term[] $terms
 	 * @param DatabaseBase $dbw
 	 *
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function deleteTermsInternal( EntityId $entityId, $terms, DatabaseBase $dbw ) {
 		wfProfileIn( __METHOD__ );
@@ -353,7 +355,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function deleteTermsOfEntity( EntityId $entityId ) {
 		wfProfileIn( __METHOD__ );
@@ -428,7 +430,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string[]|null $languageCodes
 	 *
 	 * @throws MWException
-	 * @return array
+	 * @return Term[]
 	 */
 	private function fetchTerms(
 		array $entityIds,
@@ -500,7 +502,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * Returns the Database connection to wich to write.
+	 * Returns the Database connection to which to write.
 	 *
 	 * @since 0.4
 	 *
@@ -515,14 +517,19 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @since 0.2
 	 *
-	 * @param array $terms
+	 * @param Term[] $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
 	 * @param array $options
 	 *
 	 * @return Term[]
 	 */
-	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() ) {
+	public function getMatchingTerms(
+		array $terms,
+		$termType = null,
+		$entityType = null,
+		array $options = array()
+	) {
 		if ( empty( $terms ) ) {
 			return array();
 		}
@@ -564,7 +571,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @since 0.4
 	 *
-	 * @param array $terms
+	 * @param Term[] $terms
 	 * @param string $entityType
 	 * @param array $options There is an implicit LIMIT of 5000 items in this implementation
 	 *
@@ -662,7 +669,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return string[]
 	 */
-	private function termsToConditions( DatabaseBase $db, array $terms, $termType, $entityType, array $options = array() ) {
+	private function termsToConditions(
+		DatabaseBase $db,
+		array $terms,
+		$termType,
+		$entityType,
+		array $options = array()
+	) {
 		wfProfileIn( __METHOD__ );
 
 		$conditions = array();
@@ -688,7 +701,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return array
 	 */
-	protected function termMatchConditions( DatabaseBase $db, Term $term, $termType, $entityType, array $options = array() ) {
+	protected function termMatchConditions(
+		DatabaseBase $db,
+		Term $term,
+		$termType,
+		$entityType,
+		array $options = array()
+	) {
 		wfProfileIn( __METHOD__ );
 
 		$options = array_merge(
@@ -797,7 +816,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @since 0.2
 	 *
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function clear() {
 		$dbw = $this->getConnection( DB_MASTER );
@@ -860,7 +879,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @throws InvalidArgumentException
 	 * @return Term[]
 	 */
-	public function getLabelWithDescriptionConflicts( $entityType, array $labels, array $descriptions ) {
+	public function getLabelWithDescriptionConflicts(
+		$entityType,
+		array $labels,
+		array $descriptions
+	) {
 		$labels = array_intersect_key( $labels, $descriptions );
 		$descriptions = array_intersect_key( $descriptions, $labels );
 
