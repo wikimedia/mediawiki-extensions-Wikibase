@@ -84,13 +84,13 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenEmptyArray_emptyItemIsReturned() {
 		$this->assertEquals(
-			Item::newEmpty(),
+			new Item(),
 			$this->deserializer->deserialize( array() )
 		);
 	}
 
 	public function testGivenLinks_itemHasSiteLinks() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$item->addSiteLink( new SiteLink( 'foo', 'bar' ) );
 		$item->addSiteLink( new SiteLink( 'baz', 'bah' ) );
@@ -126,7 +126,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenStatement_itemHasStatement() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$item->addClaim( $this->newStatement() );
 
@@ -157,7 +157,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenStatementWithLegacyKey_itemHasStatement() {
-		$item = Item::newEmpty();
+		$item = new Item();
 
 		$item->addClaim( $this->newStatement() );
 
