@@ -2,17 +2,22 @@
 
 namespace Wikibase\Test;
 
+use MediaWikiLangTestCase;
 use MessageCache;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\View\EntityTermsView;
-use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\TextInjector;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\EntityTermsView
+ *
+ * @uses Wikibase\Repo\View\TextInjector
+ * @uses Wikibase\Template\Template
+ * @uses Wikibase\Template\TemplateFactory
+ * @uses Wikibase\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -21,7 +26,7 @@ use Wikibase\Template\TemplateRegistry;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Mättig
  */
-class EntityTermsViewTest extends \MediaWikiLangTestCase {
+class EntityTermsViewTest extends MediaWikiLangTestCase {
 
 	protected function setUp() {
 		parent::setUp();
@@ -42,12 +47,24 @@ class EntityTermsViewTest extends \MediaWikiLangTestCase {
 		parent::tearDown();
 	}
 
-	private function getEntityTermsView( $languageCode = 'en' ) {
+	private function getEntityTermsView( $languageCode = 'en', $called = null ) {
 		$templateFactory = new TemplateFactory( TemplateRegistry::getDefaultInstance() );
+
+		if ( $called === null ) {
+			$called = $this->any();
+		}
+
+		$sectionEditLinkGenerator = $this->getMockBuilder( 'Wikibase\Repo\View\SectionEditLinkGenerator' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$sectionEditLinkGenerator->expects( $called )
+			->method( 'getHtmlForEditSection' )
+			->will( $this->returnValue( '~EDITSECTION~' ) );
 
 		return new EntityTermsView(
 			$templateFactory,
-			new SectionEditLinkGenerator( $templateFactory ),
+			$sectionEditLinkGenerator,
 			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' ),
 			$languageCode
 		);
@@ -93,21 +110,20 @@ class EntityTermsViewTest extends \MediaWikiLangTestCase {
 	 * @dataProvider entityFingerprintProvider
 	 */
 	public function testGetHtml_isEditable( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
-		$entityTermsView = $this->getEntityTermsView( $languageCode );
+		$entityTermsView = $this->getEntityTermsView( $languageCode, $this->once() );
 		$html = $entityTermsView->getHtml( $fingerprint, $entityId, '', new TextInjector() );
-		$idString = $entityId->getSerialization();
 
-		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetLabel/' . $idString . '/' . $languageCode . '"@', $html );
+		$this->assertContains( '~EDITSECTION~', $html );
 	}
 
 	/**
 	 * @dataProvider entityFingerprintProvider
 	 */
 	public function testGetHtml_isNotEditable( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
-		$entityTermsView = $this->getEntityTermsView( $languageCode );
+		$entityTermsView = $this->getEntityTermsView( $languageCode, $this->never() );
 		$html = $entityTermsView->getHtml( $fingerprint, $entityId, '', new TextInjector(), false );
 
-		$this->assertNotContains( '<a ', $html );
+		$this->assertNotContains( '~EDITSECTION~', $html );
 	}
 
 	public function testGetHtml_valuesAreEscaped() {
@@ -164,12 +180,12 @@ class EntityTermsViewTest extends \MediaWikiLangTestCase {
 	 * @dataProvider entityFingerprintProvider
 	 */
 	public function testGetHtml_withEntityId( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
-		$entityTermsView = $this->getEntityTermsView( $languageCode );
+		$entityTermsView = $this->getEntityTermsView( $languageCode, $this->once() );
 		$html = $entityTermsView->getHtml( $fingerprint, $entityId, '', new TextInjector() );
 		$idString = $entityId->getSerialization();
 
 		$this->assertContains( '(' . $idString . ')', $html );
-		$this->assertContains( '<a ', $html );
+		$this->assertContains( '~EDITSECTION~', $html );
 	}
 
 	public function testGetHtml_withoutEntityId() {

@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 
 use MediaWikiSite;
+use MediaWikiTestCase;
+use PHPUnit_Framework_TestCase;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -18,6 +20,10 @@ use Wikibase\Template\TemplateRegistry;
 /**
  * @covers Wikibase\Repo\View\SiteLinksView
  *
+ * @uses Wikibase\Template\Template
+ * @uses Wikibase\Template\TemplateFactory
+ * @uses Wikibase\Template\TemplateRegistry
+ *
  * @group Wikibase
  * @group WikibaseRepo
  *
@@ -25,7 +31,7 @@ use Wikibase\Template\TemplateRegistry;
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
+class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider getHtmlProvider
@@ -35,7 +41,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
 		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
-		\MediaWikiTestCase::assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
+		MediaWikiTestCase::assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
 	}
 
 	public function getHtmlProvider() {

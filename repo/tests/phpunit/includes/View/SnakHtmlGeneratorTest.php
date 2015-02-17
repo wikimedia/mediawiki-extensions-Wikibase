@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Html;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -17,13 +18,17 @@ use Wikibase\Template\TemplateRegistry;
 /**
  * @covers Wikibase\Repo\View\SnakHtmlGenerator
  *
+ * @uses Wikibase\Template\Template
+ * @uses Wikibase\Template\TemplateFactory
+ * @uses Wikibase\Template\TemplateRegistry
+ *
  * @group Wikibase
  * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
+class SnakHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider getSnakHtmlProvider
