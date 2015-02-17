@@ -10,6 +10,22 @@ use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
 
 /**
+ * @covers \Wikibase\Repo\View\EntityViewFactory
+ *
+ * @uses Wikibase\Repo\View\ClaimHtmlGenerator
+ * @uses Wikibase\Repo\View\EntityTermsView
+ * @uses Wikibase\Repo\View\EntityView
+ * @uses Wikibase\Repo\View\ItemView
+ * @uses Wikibase\Repo\View\PropertyView
+ * @uses Wikibase\Repo\View\SectionEditLinkGenerator
+ * @uses Wikibase\Repo\View\SiteLinksView
+ * @uses Wikibase\Repo\View\StatementGroupListView
+ * @uses Wikibase\Repo\View\SnakHtmlGenerator
+ * @uses Wikibase\Repo\View\TextInjector
+ * @uses Wikibase\Template\Template
+ * @uses Wikibase\Template\TemplateFactory
+ * @uses Wikibase\Template\TemplateRegistry
+ *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

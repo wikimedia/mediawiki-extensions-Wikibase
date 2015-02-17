@@ -2,12 +2,18 @@
 
 namespace Wikibase\Test;
 
+use MediaWikiLangTestCase;
+use SpecialPage;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\SectionEditLinkGenerator
+ *
+ * @uses Wikibase\Template\Template
+ * @uses Wikibase\Template\TemplateFactory
+ * @uses Wikibase\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -18,8 +24,16 @@ use Wikibase\Template\TemplateRegistry;
  * @author Daniel Kinzler
  * @author Adrian Lang
  */
-class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
+class SectionEditLinkGeneratorTest extends MediaWikiLangTestCase {
 
+	protected function setUp() {
+		// Override wgSpecialPages since the SpecialPageFactory would otherwise run huge amounts of repo code
+		$this->setMwGlobals( 'wgSpecialPages', array(
+			'Version' => new SpecialPage( 'Version' ),
+			'SetLabel' => new SpecialPage( 'SetLabel')
+		) );
+		parent::setUp();
+	}
 	/**
 	 * @dataProvider getHtmlForEditSectionProvider
 	 */
