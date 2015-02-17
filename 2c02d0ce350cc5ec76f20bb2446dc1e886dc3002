@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_344deec7",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-17T20:45:38Z",
+      "side": 1,
+      "message": "Is the code reuse via inheritance really needed here? Deriving from SpecialModifyEntity kinda makes your class instant legacy code, even if you don\u0027t do anything wrong.",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_545aea85",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-17T20:45:38Z",
+      "side": 1,
+      "message": "why protected?",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7457e65b",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-17T20:45:38Z",
+      "side": 1,
+      "message": "$fingerprint",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1483129d",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-17T20:45:38Z",
+      "side": 1,
+      "message": "The two if blocks right below this seem misplaced in this method. The HTML building part itself could also be split, though you are somewhat restricted in how you do this due to the base class (see my topmost comment). Also, this type hints against a deprecated class, which yet again is caused by the base class and cannot be avoided if you derive from it.",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_54642a11",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-17T20:45:38Z",
+      "side": 1,
+      "message": "Why this fallback? This page is only for those types of entities that have a fingerprint no?",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b4d01ecd",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-17T20:45:38Z",
+      "side": 1,
+      "message": "I think you can do -\u003egetVal( \u0027label\u0027, \u0027\u0027 );\n\nSo you only need to check against empty string below",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f4bf765a",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-17T20:45:38Z",
+      "side": 1,
+      "message": "$labelText \u003d $fingerprint-\u003ehasLabel( $langCode ) ? $fingerprint-\u003egetLabel()-\u003egetText() : \u0027\u0027;\n\nGeneral rule: do not use exceptions for expected conditions in your application",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1431d200",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-17T20:45:38Z",
+      "side": 1,
+      "message": "$descriptionInput \u003d $this-\u003egetDescriptionInput();\n\nWith the appropriate parameters of course. Which might be none if you put this HTML building stuff into its own class (which then also does not need to derive from SpecialModifyEntity). Splitting the method is the first step though.",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f4ca161d",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-17T20:45:38Z",
+      "side": 1,
+      "message": "if you factor out the predicate to it\u0027s own method and name it well, the readability of this code will go up a lot",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5412ea64",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-17T20:45:38Z",
+      "side": 1,
+      "message": "If you also move out the body of the if-else, you can have a structure like\n\nif ( $this-\u003esomeConditionIsSatisfied() ) {\n    return $this-\u003egetHtmlFoo();\n}\n\nreturn $this-\u003egetHtmlBar();",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
