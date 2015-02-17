@@ -16,6 +16,24 @@
       "revId": "faba90adf4609e5105848bc836b86d7b1ce3a77e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_34764e02",
+        "filename": "repo/tests/phpunit/includes/store/sql/TermSqlIndexTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-17T20:24:59Z",
+      "side": 1,
+      "message": "This is not \"documentation only\". Eviiiiiiil Thiemo!\n\nI do smell a data provider abuse issue here",
+      "parentUuid": "6e7c4fa4_eb6eb5fd",
+      "revId": "faba90adf4609e5105848bc836b86d7b1ce3a77e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
