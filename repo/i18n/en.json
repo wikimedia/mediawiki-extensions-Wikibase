@@ -139,7 +139,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Site:",
 	"wikibase-gotolinkedpage-lookup-item": "Item id:",
 	"wikibase-gotolinkedpage-submit": "Go",
-	"wikibase-gotolinkedpage-summary": "Special:GoToLinkedPage is used to find the site for an item on a connected page.<br /> The left field, \"Site:\", is where you enter the language and site code.<br />  For the right field, \"Item id:\", you must put in the item id you are looking for.",
+	"wikibase-gotolinkedpage-summary": "Special:GoToLinkedPage is used to find the page for an item on a connected site.<br /> The left field, \"Site:\", is where you enter the language and site code.<br />  For the right field, \"Item id:\", you must put in the item id you are looking for.",
 	"special-itemdisambiguation": "Item disambiguation",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Search for items by language and label",
 	"wikibase-itemdisambiguation-lookup-language": "Language:",
