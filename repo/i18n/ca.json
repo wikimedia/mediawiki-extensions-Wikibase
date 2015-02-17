@@ -12,7 +12,8 @@
 			"Vriullop",
 			"පසිඳු කාවින්ද",
 			"Fitoschido",
-			"Davidpar"
+			"Davidpar",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Repositori de dades estructurades",
@@ -27,6 +28,11 @@
 	"wikibase-addreference": "afegiu una referència",
 	"wikibase-save-inprogress": "S'està desant…",
 	"wikibase-remove-inprogress": "S'està suprimint…",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "En més idiomes",
+	"wikibase-entitytermsforlanguagelistview-aliases": "També conegut com",
+	"wikibase-entitytermsforlanguagelistview-description": "Descripció",
+	"wikibase-entitytermsforlanguagelistview-label": "Etiqueta",
+	"wikibase-entitytermsforlanguagelistview-language": "Llengua",
 	"wikibase-label-empty": "Encara no s'ha definit cap etiqueta.",
 	"wikibase-label-edit-placeholder": "introduïu una etiqueta",
 	"wikibase-label-edit-placeholder-language-aware": "introduïu una etiqueta en $1",

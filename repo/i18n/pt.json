@@ -128,7 +128,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Sítio:",
 	"wikibase-gotolinkedpage-lookup-item": "ID do item:",
 	"wikibase-gotolinkedpage-submit": "Ir",
-	"wikibase-gotolinkedpage-summary": "Special:GoToLinkedPage é uma página especial utilizada para localizar o sítio para um item numa página interligada.<br /> O campo da esquerda, \"Sítio:\", é onde insere o idioma e o código do sítio.<br /> Para o campo da direita, \"ID do item:\", deve colocar o identificador do item de que está à procura.",
+	"wikibase-gotolinkedpage-summary": "Special:GoToLinkedPage é utilizada para localizar a página de um item num sítio interligado.<br /> O campo da esquerda, \"Sítio:\", é onde insere o idioma e o código do sítio.<br /> Para o campo da direita, \"ID do item:\", deve colocar o identificador do item de que está à procura.",
 	"special-itemdisambiguation": "Desambiguação de item",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Pesquisar itens por idioma e rótulo",
 	"wikibase-itemdisambiguation-lookup-language": "Idioma:",

@@ -140,7 +140,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Website:",
 	"wikibase-gotolinkedpage-lookup-item": "Objektkennung:",
 	"wikibase-gotolinkedpage-submit": "Los",
-	"wikibase-gotolinkedpage-summary": "„Spezial:Gehe zur verlinkten Seite“ wird verwendet, um die Website nach einem Objekt auf einer verbundenen Seite zu durchsuchen.<br />Beim linken Feld „Website:“ kannst du den Sprach- und Websitecode eingeben.<br />Im rechten Feld „Objektkennung:“ musst du die Objektkennung eingeben, nach der du suchst.",
+	"wikibase-gotolinkedpage-summary": "„Spezial:Gehe zur verlinkten Seite“ wird verwendet, um die Seite nach einem Objekt auf einer verbundenen Website zu durchsuchen.<br />Beim linken Feld „Website:“ kannst du den Sprach- und Websitecode eingeben.<br />Im rechten Feld „Objektkennung:“ musst du die Objektkennung eingeben, nach der du suchst.",
 	"special-itemdisambiguation": "Objekt-Begriffsklärung",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Suche Datenobjekte nach Sprache und Bezeichnung",
 	"wikibase-itemdisambiguation-lookup-language": "Sprache:",
