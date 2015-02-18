@@ -2,13 +2,15 @@
 
 namespace Wikibase\Test;
 
+use PHPUnit_Framework_TestCase;
+use ValueValidators\Error;
+use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Validators\EntityConstraintProvider;
+use Wikibase\InternalSerialization\DeserializerFactory;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpsMerge
@@ -20,7 +22,7 @@ use Wikibase\Validators\EntityConstraintProvider;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpsMergeTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var ChangeOpTestMockProvider
@@ -43,15 +45,28 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		Item $toItem,
 		array $ignoreConflicts = array()
 	) {
-		$duplicateDetector = $this->mockProvider->getMockLabelDescriptionDuplicateDetector();
-		$linkCache = $this->mockProvider->getMockSitelinkCache();
+		// A validator which makes sure that no site link is for page 'DUPE'
+		$siteLinkUniquenessValidator = $this->getMock( 'Wikibase\Validators\EntityValidator' );
+		$siteLinkUniquenessValidator->expects( $this->any() )
+			->method( 'validateEntity' )
+			->will( $this->returnCallback( function( Item $item ) {
+					$siteLinks = $item->getSiteLinkList();
+					foreach ( $siteLinks as $siteLink ) {
+						if ( $siteLink->getPageName() === 'DUPE' ) {
+							return Result::newError( array( Error::newError( 'SiteLink conflict' ) ) );
+						}
+					}
+					return Result::newSuccess();
+				} ) );
 
-		$constraintProvider = new EntityConstraintProvider(
-			$duplicateDetector,
-			$linkCache
-		);
+		$constraintProvider = $this->getMockBuilder( 'Wikibase\Validators\EntityConstraintProvider' )
+			->disableOriginalConstructor()
+			->getMock();
+		$constraintProvider->expects( $this->any() )
+			->method( 'getUpdateValidators' )
+			->will( $this->returnValue( array( $siteLinkUniquenessValidator ) ) );
 
-		$changeOpFactoryProvider =  new ChangeOpFactoryProvider(
+		$changeOpFactoryProvider = new ChangeOpFactoryProvider(
 			$constraintProvider,
 			$this->mockProvider->getMockGuidGenerator(),
 			$this->mockProvider->getMockGuidValidator(),
@@ -121,14 +136,14 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	 * @return Item
 	 */
 	private function getItem( $id, array $data = array() ) {
-		$deserializer = WikibaseRepo::getDefaultInstance()->getInternalEntityDeserializer();
+		$deserializer = $this->getEntityDeserializer();
 		$item = $deserializer->deserialize( $data );
 		$item->setId( new ItemId( $id ) );
 		return $item;
 	}
 
 	private function newItemWithId( $idString ) {
-		return new Item( new Itemid( $idString ) );
+		return new Item( new ItemId( $idString ) );
 	}
 
 	/**
@@ -138,13 +153,9 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$from = $this->getItem( 'Q111', $fromData );
 		$to = $this->getItem( 'Q222', $toData );
 
-		$changeOps = $this->makeChangeOpsMerge(
-			$from,
-			$to,
-			$ignoreConflicts
-		);
+		$changeOps = $this->makeChangeOpsMerge(	$from, $to, $ignoreConflicts );
 
-		$deserializer = WikibaseRepo::getDefaultInstance()->getInternalEntityDeserializer();
+		$deserializer = $this->getEntityDeserializer();
 
 		$this->assertTrue( $from->equals( $deserializer->deserialize( $fromData ) ), 'FromItem was not filled correctly' );
 		$this->assertTrue( $to->equals( $deserializer->deserialize( $toData ) ), 'ToItem was not filled correctly' );
@@ -219,13 +230,13 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 			array( 'aliases' => array( 'en' => array( 'foo', 'bar' ) ) ),
 			array(),
 			array(),
-			array( 'aliases' => array( 'en' =>  array( 'foo', 'bar' ) ) ),
+			array( 'aliases' => array( 'en' => array( 'foo', 'bar' ) ) ),
 		);
 		$testCases['duplicateAliasMerge'] = array(
 			array( 'aliases' => array( 'en' => array( 'foo', 'bar' ) ) ),
 			array( 'aliases' => array( 'en' => array( 'foo', 'bar', 'baz' ) ) ),
 			array(),
-			array( 'aliases' => array( 'en' =>  array( 'foo', 'bar', 'baz' ) ) ),
+			array( 'aliases' => array( 'en' => array( 'foo', 'bar', 'baz' ) ) ),
 		);
 		$testCases['linkMerge'] = array(
 			array( 'links' => array( 'enwiki' => array( 'name' => 'foo', 'badges' => array() ) ) ),
@@ -291,13 +302,13 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$testCases['itemMerge'] = array(
 			array(
 				'label' => array( 'en' => 'foo', 'pt' => 'ptfoo' ),
-				'description' => array( 'en' => 'foo', 'pl' => 'pldesc'  ),
+				'description' => array( 'en' => 'foo', 'pl' => 'pldesc' ),
 				'aliases' => array( 'en' => array( 'foo', 'bar' ), 'de' => array( 'defoo', 'debar' ) ),
 				'links' => array( 'dewiki' => array( 'name' => 'foo', 'badges' => array() ) ),
 				'claims' => array(
 					array(
 						'm' => array( 'novalue', 88 ),
-						'q' => array( array(  'novalue', 88  ) ),
+						'q' => array( array( 'novalue', 88 ) ),
 						'g' => 'Q111$D8404CDA-25E4-4334-AF88-A3290BCD9C0F',
 						'refs' => array(),
 						'rank' => Statement::RANK_NORMAL,
@@ -307,14 +318,14 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 			array(),
 			array(),
 			array(
-				'label' => array( 'en' => 'foo', 'pt' => 'ptfoo'  ),
+				'label' => array( 'en' => 'foo', 'pt' => 'ptfoo' ),
 				'description' => array( 'en' => 'foo', 'pl' => 'pldesc' ),
 				'aliases' => array( 'en' => array( 'foo', 'bar' ), 'de' => array( 'defoo', 'debar' ) ),
 				'links' => array( 'dewiki' => array( 'name' => 'foo', 'badges' => array() ) ),
 				'claims' => array(
 					array(
 						'm' => array( 'novalue', 88 ),
-						'q' => array( array(  'novalue', 88  ) ),
+						'q' => array( array( 'novalue', 88 ) ),
 						'g' => 'Q111$D8404CDA-25E4-4334-AF88-A3290BCD9C0F',
 						'refs' => array(),
 						'rank' => Statement::RANK_NORMAL,
@@ -325,7 +336,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$testCases['ignoreConflictItemMerge'] = array(
 			array(
 				'label' => array( 'en' => 'foo', 'pt' => 'ptfoo' ),
-				'description' => array( 'en' => 'foo', 'pl' => 'pldesc'  ),
+				'description' => array( 'en' => 'foo', 'pl' => 'pldesc' ),
 				'aliases' => array( 'en' => array( 'foo', 'bar' ), 'de' => array( 'defoo', 'debar' ) ),
 				'links' => array(
 					'dewiki' => array( 'name' => 'foo', 'badges' => array() ),
@@ -334,7 +345,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 				'claims' => array(
 					array(
 						'm' => array( 'novalue', 88 ),
-						'q' => array( array(  'novalue', 88  ) ),
+						'q' => array( array( 'novalue', 88 ) ),
 						'g' => 'Q111$D8404CDA-25E4-4334-AF88-A3290BCD9C0F',
 						'refs' => array(),
 						'rank' => Statement::RANK_NORMAL,
@@ -347,12 +358,12 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 				'links' => array( 'plwiki' => array( 'name' => 'toLink', 'badges' => array() ) ),
 			),
 			array(
-				'label' => array( ),
+				'label' => array(),
 				'description' => array( 'pl' => 'pldesc' ),
 				'links' => array( 'plwiki' => array( 'name' => 'bar', 'badges' => array() ) ),
 			),
 			array(
-				'label' => array( 'en' => 'toLabel', 'pt' => 'ptfoo'  ),
+				'label' => array( 'en' => 'toLabel', 'pt' => 'ptfoo' ),
 				'description' => array( 'en' => 'foo', 'pl' => 'toLabel' ),
 				'aliases' => array( 'en' => array( 'foo', 'bar' ), 'de' => array( 'defoo', 'debar' ) ),
 				'links' => array(
@@ -362,7 +373,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 				'claims' => array(
 					array(
 						'm' => array( 'novalue', 88 ),
-						'q' => array( array(  'novalue', 88  ) ),
+						'q' => array( array( 'novalue', 88 ) ),
 						'g' => 'Q111$D8404CDA-25E4-4334-AF88-A3290BCD9C0F',
 						'refs' => array(),
 						'rank' => Statement::RANK_NORMAL,
@@ -400,13 +411,19 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$to->getSiteLinkList()->addNewSiteLink( 'eewiki', 'BLOOP' );
 
 		$changeOps = $this->makeChangeOpsMerge(
-			$from,
-			$to,
-			array( 'sitelink' )
+			$from, $to, array( 'sitelink' )
 		);
 
 		$changeOps->apply();
 		$this->assertTrue( true ); // no exception thrown
+	}
+
+	private function getEntityDeserializer() {
+		$deserializerFactory = new DeserializerFactory(
+			$this->getMock( 'Deserializers\Deserializer' ),
+			$this->getMock( 'Wikibase\DataModel\Entity\EntityIdParser' )
+		);
+		return $deserializerFactory->newEntityDeserializer();
 	}
 
 }

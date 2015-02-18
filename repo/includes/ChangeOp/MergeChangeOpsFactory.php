@@ -20,6 +20,11 @@ class MergeChangeOpsFactory {
 	private $constraintProvider;
 
 	/**
+	 * @var ChangeOpFactoryProvider
+	 */
+	private $factoryProvider;
+
+	/**
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ChangeOpFactoryProvider $factoryProvider
 	 */
