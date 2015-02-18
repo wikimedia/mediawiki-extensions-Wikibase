@@ -2,11 +2,11 @@
 
 namespace Wikibase\Test;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Validators\EntityConstraintProvider;
 
 /**
  * @covers Wikibase\ChangeOp\MergeChangeOpsFactory
@@ -18,7 +18,7 @@ use Wikibase\Validators\EntityConstraintProvider;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MergeChangeOpsFactoryTest extends \PHPUnit_Framework_TestCase {
+class MergeChangeOpsFactoryTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @return MergeChangeOpsFactory
@@ -28,10 +28,9 @@ class MergeChangeOpsFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$toItemId = new ItemId( 'Q3' );
 
-		$constraintProvider = new EntityConstraintProvider(
-			$mockProvider->getMockLabelDescriptionDuplicateDetector(),
-			$mockProvider->getMockSitelinkCache()
-		);
+		$constraintProvider = $this->getMockBuilder( 'Wikibase\Validators\EntityConstraintProvider' )
+			->disableOriginalConstructor()
+			->getMock();
 
 		$changeOpFactoryProvider = new ChangeOpFactoryProvider(
 			$constraintProvider,
