@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\EntityLookup;
  * @author Thomas Pellissier Tanon
  * @author Daniel Kinzler
  */
-class RdfSerializer {
+class RdfSerializer implements RdfProducer {
 
 	/**
 	 * @var string
@@ -41,6 +41,11 @@ class RdfSerializer {
 	private $sites;
 
 	/**
+	 * @var String
+	 */
+	private $flavor;
+
+	/**
 	 * @var EntityLookup
 	 */
 	private $entityLookup;
@@ -51,19 +56,22 @@ class RdfSerializer {
 	 * @param string $dataUri
 	 * @param SiteList $sites;
 	 * @param EntityLookup $entityLookup
+	 * @param integer flavor
 	 */
 	public function __construct(
 		EasyRdf_Format $format,
 		$baseUri,
 		$dataUri,
 		SiteList $sites,
-		EntityLookup $entityLookup
+		EntityLookup $entityLookup,
+		$flavor
 	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
 		$this->format = $format;
 		$this->sites = $sites;
 		$this->entityLookup = $entityLookup;
+		$this->flavor = $flavor;
 	}
 
 	/**
@@ -103,7 +111,9 @@ class RdfSerializer {
 		$builder = new RdfBuilder(
 			$this->sites,
 			$this->baseUri,
-			$this->dataUri
+			$this->dataUri,
+			$this->entityLookup,
+			$this->flavor
 		);
 
 		return $builder;
@@ -131,6 +141,18 @@ class RdfSerializer {
 
 		$graph = $builder->getGraph();
 		return $graph;
+	}
+
+	/**
+	 * Create dump header for RDF dump
+	 * @return string
+	 */
+	public function dumpHeader( ) {
+		$builder = $this->newRdfBuilder();
+
+		$builder->addDumpHeader();
+
+		return $this->serializeRdf( $builder->getGraph() );
 	}
 
 	/**
