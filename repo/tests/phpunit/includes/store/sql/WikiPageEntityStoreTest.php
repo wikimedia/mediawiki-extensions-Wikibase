@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use ContentHandler;
+use PHPUnit_Framework_TestCase;
 use Revision;
 use Status;
 use User;
@@ -16,7 +16,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -35,7 +34,7 @@ use Wikibase\SqlIdGenerator;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
+class WikiPageEntityStoreTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var EntityIdParser
@@ -54,7 +53,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 	 * @return array array( EntityStore, EntityLookup )
 	 */
 	protected function createStoreAndLookup() {
-		// make sure the term index is empty to avoid conlficts.
+		// make sure the term index is empty to avoid conflicts.
 		WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->clear();
 
 		//NOTE: we want to test integration of WikiPageEntityRevisionLookup and WikiPageEntityStore here!
@@ -210,18 +209,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags, $baseRevId );
 	}
 
-	private function itemSupportsRedirects() {
-		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-		return $handler->supportsRedirects();
-	}
-
 	public function testSaveRedirect() {
-		if ( !$this->itemSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			$this->markTestSkipped( 'Redirects not yet supported.' );
-		}
-
 		/* @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
@@ -586,11 +574,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$targetId = $epp->getRedirectForEntityId( $entityId );
 
-		if ( $expected === true ) {
-			$this->assertNotNull( $targetId );
-		} else {
-			$this->assertEquals( $expected, $targetId );
-		}
+		$this->assertEquals( $expected, $targetId );
 	}
 
 }
