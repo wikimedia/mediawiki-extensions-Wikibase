@@ -36,12 +36,12 @@ class WikiPageEntityStore implements EntityStore {
 	/**
 	 * @var EntityContentFactory
 	 */
-	protected $contentFactory;
+	private $contentFactory;
 
 	/**
 	 * @var IdGenerator
 	 */
-	protected $idGenerator;
+	private $idGenerator;
 
 	/**
 	 * @param EntityContentFactory $contentFactory
@@ -261,7 +261,7 @@ class WikiPageEntityStore implements EntityStore {
 	 *
 	 * @return Title|null
 	 */
-	public function getTitleForEntity( EntityId $entityId ) {
+	private function getTitleForEntity( EntityId $entityId ) {
 		$title = $this->contentFactory->getTitleForId( $entityId );
 		return $title;
 	}
