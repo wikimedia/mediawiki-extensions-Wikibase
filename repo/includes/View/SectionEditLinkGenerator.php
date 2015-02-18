@@ -129,17 +129,19 @@ class SectionEditLinkGenerator {
 	 * @return string
 	 */
 	private function getToolbarButton( $cssClassSuffix, $buttonLabel, $editUrl = null ) {
-		if ( $editUrl !== null ) {
-			return $this->templateFactory->render( 'wikibase-toolbar-bracketed',
-				$this->templateFactory->render( 'wikibase-toolbar-button',
-					'wikibase-toolbar-button-' . $cssClassSuffix,
-					$editUrl,
-					$buttonLabel
-				)
-			);
+		if ( $editUrl === null ) {
+			return '';
 		}
 
-		return '';
+		return $this->templateFactory->render(
+			'wikibase-toolbar-bracketed',
+			$this->templateFactory->render(
+				'wikibase-toolbar-button',
+				'wikibase-toolbar-button-' . $cssClassSuffix,
+				$editUrl,
+				$buttonLabel
+			)
+		);
 	}
 
 }
