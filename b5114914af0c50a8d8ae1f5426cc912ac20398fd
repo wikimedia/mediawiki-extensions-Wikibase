@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_02c66b1a",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T15:22:11Z",
+      "side": 1,
+      "message": "I think this is the odd place of this patch. Three possibilities how the label lookup can work, two are still options but the third is not. Hm...",
+      "revId": "b5114914af0c50a8d8ae1f5426cc912ac20398fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
