@@ -19,6 +19,7 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\RdfSerializer;
+use Wikibase\RdfProducer;
 
 /**
  * Service for serializing entity data.
@@ -346,11 +347,12 @@ class EntityDataSerializationService {
 	 *
 	 * @param string $format The name (mime type of file extension) of the format to use
 	 * @param EntityRevision $entityRevision The entity
+	 * @param string $flavor The type of the output provided by serializer
 	 *
 	 * @return array tuple of ( $data, $contentType )
 	 * @throws MWException if the format is not supported
 	 */
-	public function getSerializedData( $format, EntityRevision $entityRevision ) {
+	public function getSerializedData( $format, EntityRevision $entityRevision, $flavor = null ) {
 
 		//TODO: handle IfModifiedSince!
 
@@ -363,7 +365,7 @@ class EntityDataSerializationService {
 		$serializer = $this->createApiSerializer( $formatName );
 
 		if ( !$serializer ) {
-			$serializer = $this->createRdfSerializer( $formatName );
+			$serializer = $this->createRdfSerializer( $formatName, $flavor );
 		}
 
 		if ( !$serializer ) {
@@ -472,15 +474,35 @@ class EntityDataSerializationService {
 	}
 
 	/**
+	 * Get the producer setting for current data format
+	 * @param string $flavorName
+	 * @return integer
+	 */
+	private function getFlavor( $flavorName ) {
+		switch( $flavorName ) {
+			case 'simple':
+				return RdfProducer::PRODUCE_BEST_STATEMENTS | RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_VERSION_INFO;
+			case 'full':
+				return RdfProducer::PRODUCE_ALL;
+			case 'dump':
+				return RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_BEST_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES | RdfProducer::PRODUCE_SITELINKS;
+			case 'long':
+				return RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES | RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_VERSION_INFO;
+		}
+		return RdfProducer::PRODUCE_SITELINKS;
+	}
+
+	/**
 	 * Creates an Rdf Serializer that can generate the given output format.
 	 *
-	 * @param String $format The desired serialization format,
-	 *   as a format name understood by ApiBase or EasyRdf_Format
+	 * @param String $format The desired serialization format, as a format name understood by ApiBase or EasyRdf_Format
+	 * @param String $dataFormat The type of the output data, as understood by RdfSerializer
+	 * @param String $flavor Flavor name
 	 *
 	 * @return RdfSerializer|null A suitable result printer, or null
 	 *   if the given format is not supported.
 	 */
-	public function createRdfSerializer( $format ) {
+	public function createRdfSerializer( $format, $flavor = null ) {
 		//MediaWiki formats
 		$rdfFormat = RdfSerializer::getFormat( $format );
 
@@ -493,7 +515,8 @@ class EntityDataSerializationService {
 			$this->rdfBaseURI,
 			$this->rdfDataURI,
 			$this->sites,
-			$this->entityLookup
+			$this->entityLookup,
+			$this->getFlavor( $flavor )
 		);
 
 		return $serializer;
