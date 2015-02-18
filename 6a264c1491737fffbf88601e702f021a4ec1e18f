@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_843ccbbc",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T09:01:09Z",
+      "side": 1,
+      "message": "We can\u0027t, this is used in client (yay). What we could attempt is to move this into core in a sane(tm) way.",
+      "revId": "6a264c1491737fffbf88601e702f021a4ec1e18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_649c0fb9",
+        "filename": "lib/tests/phpunit/SitesModuleWorkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T09:01:09Z",
+      "side": 1,
+      "message": "No need for qualified class names here. Also, if this is just the class better put that up into the class header above.",
+      "revId": "6a264c1491737fffbf88601e702f021a4ec1e18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_448f9378",
+        "filename": "lib/tests/phpunit/SitesModuleWorkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T09:01:09Z",
+      "side": 1,
+      "message": "We decided to follow the phpunit convention for naming dataProviders a while back: Provider shouldn\u0027t be used as a prefix... so rather getScriptProvider or so",
+      "revId": "6a264c1491737fffbf88601e702f021a4ec1e18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e4efbf19",
+        "filename": "lib/tests/phpunit/SitesModuleWorkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T09:01:09Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "6a264c1491737fffbf88601e702f021a4ec1e18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_04f51bea",
+        "filename": "lib/tests/phpunit/SitesModuleWorkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T09:01:09Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "6a264c1491737fffbf88601e702f021a4ec1e18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
