@@ -15,6 +15,16 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EntityRevision;
 use Wikibase\RdfBuilder;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\RdfProducer;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\SnakFactory;
+use Wikibase\DataModel\Entity\PropertyId;
+use DataValues\DataValueFactory;
+use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\DataModel\Entity\Property;
+use DataValues\TimeValue;
 
 /**
  * @covers Wikibase\RdfBuilder
@@ -44,13 +54,43 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$entity = new Item();
 		$entities['empty'] = $entity;
 
-
+		// test labels & descriptions
 		$entity = new Item();
 		$entities['terms'] = $entity;
 		$entity->setFingerprint( self::newTestFingerprint() );
 
-		// TODO: test links
-		// TODO: test data values
+		// test links
+		$entity = new Item();
+		$entities['links'] = $entity;
+		$link = new SiteLink('enwiki', 'San Francisco');
+		$entity->addSiteLink($link);
+		$link = new SiteLink('ruwiki', 'Сан Франциско');
+		$entity->addSiteLink($link);
+
+		// TODO: test simple claims
+		$snakFactory = new SnakFactory();
+		$dataFactory = new DataValueFactory();
+		$guidGen = new ClaimGuidGenerator();
+		$fakeId = ItemId::newFromNumber(42);
+		$entity = new Item();
+		$entities['claims'] = $entity;
+		// Entity-type
+		foreach(self::getSnaks() as $snakData) {
+			list($propId, $type, $dataType, $data) = $snakData;
+			if( $dataType ) {
+				$value = $dataFactory->newDataValue( $dataType, $data );
+			} else {
+				$value = null;
+			}
+			$mainSnak = $snakFactory->newSnak( PropertyId::newFromNumber( $propId ), $type, $value );
+			$claim = new Claim( $mainSnak );
+			$claim->setGuid( $guidGen->newGuid( $fakeId ) );
+			$entity->addClaim( new Statement( $claim ) );
+		}
+
+		// TODO: test full claims
+		// TODO: test references
+		// TODO: test composite values
 
 		$i = 1;
 
@@ -62,6 +102,24 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		}
 
 		return $entities;
+	}
+
+	/**
+	 * Get test snaks
+	 * @return array
+	 */
+	private static function getSnaks() {
+		return array(
+				// property, type, valuetype, data
+				array(2, 'value', 'wikibase-entityid', array('entity-type' => 'item', 'numeric-id' => 42)),
+				array(3, 'value', 'string', 'Universe.svg'),
+				//array(4, 'value', 'string', 'Universe.svg'),
+				array(5, 'value', 'monolingualtext', array('language' => 'ru', 'text' => 'привет')),
+				array(6, 'value', 'quantity', array('amount' => 19.768, "unit" => "1", "upperBound" => 19.769, "lowerBound" => 19.767)),
+				array(7, 'value', 'string', 'simplestring'),
+				array(8, 'value', 'time', array( 'time' => "-00000000200-00-00T00:00:00Z", 'timezone' => 0, 'before' => 0, 'after' => 0, 'precision' => TimeValue::PRECISION_YEAR, 'calendarmodel' => 'http://calendar.acme.test/' )),
+				array(9, 'value', 'string', 'http://url.acme.test/'),
+		);
 	}
 
 	private static function newTestFingerprint() {
@@ -120,6 +178,17 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 				$resource->add( $prop, $val );
 			}
+		}
+	}
+
+	private static function addToSitelink( EasyRdf_Graph $graph, $sitelink, $properties) {
+		$res = $graph->resource( $sitelink );
+
+		foreach($properties as $prop => $val) {
+			if ( is_string( $val ) ) {
+				$val = $graph->resource( $val );
+			}
+			$res->add( $prop, $val );
 		}
 	}
 
@@ -189,10 +258,117 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			)
 		);
 
-		// TODO: test links
+		// test links
+		$graphs['links'] = self::makeEntityGraph(
+			$entities['links']->getId(),
+			array(
+				'rdf:type' => RdfBuilder::NS_ONTOLOGY . ':Item',
+
+			),
+			array(
+				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
+				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['links']->getId() ),
+				'schema:version' => new EasyRdf_Literal( 23, null, 'xsd:integer' ),
+				'schema:dateModified' => new EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
+			)
+		);
+		self::addToSitelink($graphs['links'], 'http://enwiki.acme.test/San%20Francisco', array(
+				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Article',
+				RdfBuilder::NS_SCHEMA_ORG . ':inLanguage' => new EasyRdf_Literal( 'en' ),
+				RdfBuilder::NS_SCHEMA_ORG . ':about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['links']->getId() ),
+		));
+		self::addToSitelink($graphs['links'], 'http://ruwiki.acme.test/%D0%A1%D0%B0%D0%BD%20%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%81%D0%BA%D0%BE', array(
+				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Article',
+				RdfBuilder::NS_SCHEMA_ORG . ':inLanguage' => new EasyRdf_Literal( 'ru' ),
+				RdfBuilder::NS_SCHEMA_ORG . ':about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['links']->getId() ),
+		));
+
+		// test claims
+		$graphs['claims'] = self::makeEntityGraph(
+				$entities['claims']->getId(),
+				array(
+						'rdf:type' => RdfBuilder::NS_ONTOLOGY . ':Item',
+						RdfBuilder::NS_DIRECT_CLAIM . ":P2" => $builder->getEntityQName( RdfBuilder::NS_ENTITY, ItemId::newFromNumber( 42 ) ),
+						RdfBuilder::NS_DIRECT_CLAIM . ":P3" => RdfBuilder::COMMONS_URI . "Universe.svg",
+						RdfBuilder::NS_DIRECT_CLAIM . ":P5" => new \EasyRdf_Literal('привет', 'ru'),
+						RdfBuilder::NS_DIRECT_CLAIM . ":P6" => new \EasyRdf_Literal_Decimal(19.768),
+						RdfBuilder::NS_DIRECT_CLAIM . ":P7" => new \EasyRdf_Literal('simplestring'),
+						RdfBuilder::NS_DIRECT_CLAIM . ":P8" => new \EasyRdf_Literal_DateTime('-00000000200-00-00T00:00:00Z'),
+						RdfBuilder::NS_DIRECT_CLAIM . ":P9" => 'http://url.acme.test/',
+				),
+				array(
+						'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
+						'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['claims']->getId() ),
+						'schema:version' => new EasyRdf_Literal( 23, null, 'xsd:integer' ),
+						'schema:dateModified' => new EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
+				)
+		);
+
 		// TODO: test data values
 
 		return $graphs;
+	}
+
+	/**
+	 * Get site list
+	 * @return \SiteList
+	 */
+	public static function getSiteList() {
+		$list = new SiteList();
+
+		$wiki = new \Site();
+		$wiki->setGlobalId('enwiki');
+		$wiki->setLanguageCode( 'en' );
+		$wiki->setLinkPath('http://enwiki.acme.test/$1');
+		$list['enwiki'] = $wiki;
+
+		$wiki = new \Site();
+		$wiki->setGlobalId('ruwiki');
+		$wiki->setLanguageCode( 'ru' );
+		$wiki->setLinkPath('http://ruwiki.acme.test/$1');
+		$list['ruwiki'] = $wiki;
+
+		return $list;
+	}
+
+	/**
+	 * Define a set of fake properties
+	 * @return array
+	 */
+	private static function getTestProperties() {
+		return array(
+				array(2, 'wikibase-entityid'),
+				array(3, 'commonsMedia'),
+				array(4, 'globecoordinate'),
+				array(5, 'monolingualtext'),
+				array(6, 'quantity'),
+				array(7, 'string'),
+				array(8, 'time'),
+				array(9, 'url'),
+		);
+	}
+
+	/**
+	 * Construct mock repository
+	 * @return \Wikibase\Test\MockRepository
+	 */
+	public static function getMockRepository() {
+		static $repo;
+
+		if( !empty($repo) ) {
+			return $repo;
+		}
+
+		$repo = new MockRepository();
+
+		foreach(self::getTestProperties() as $prop) {
+			list($id, $type) = $prop;
+			$fingerprint = Fingerprint::newEmpty();
+			$fingerprint->setLabel( 'en', "P$id" );
+			$entity = new Property( PropertyId::newFromNumber($id), $fingerprint, $type );
+			$repo->putEntity( $entity );
+		}
+		return $repo;
 	}
 
 	/**
@@ -200,9 +376,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	private static function newRdfBuilder() {
 		return new RdfBuilder(
-			new SiteList(),
+			self::getSiteList(),
 			self::URI_BASE,
-			self::URI_DATA
+			self::URI_DATA,
+			self::getMockRepository(),
+			RdfProducer::PRODUCE_ALL
 		);
 	}
 
@@ -238,7 +416,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder->addEntity( $entityRevision->getEntity() );
 		$builder->addEntityRevisionInfo( $entityRevision->getEntity()->getId(), $entityRevision->getRevisionId(), $entityRevision->getTimestamp() );
 		$graph = $builder->getGraph();
-
+//var_dump($graph->resources());
 		foreach ( $expectedGraph->resources() as $rc ) {
 			$props = $expectedGraph->properties( $rc );
 
@@ -267,6 +445,9 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	public static function rdf2string( $obj ) {
 		if ( $obj instanceof EasyRdf_Resource ) {
 			return '<' . $obj->getUri() . '>';
+		} elseif ( $obj instanceof \EasyRdf_Literal_DateTime ) {
+			$value = $obj->toRdfPhp();
+			return $value['value'] . '^^' . $value['type'];
 		} elseif ( $obj instanceof EasyRdf_Literal ) {
 			$value = $obj->getValue();
 
