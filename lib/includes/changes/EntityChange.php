@@ -145,7 +145,7 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @param string
+	 * @param string|null $comment
 	 *
 	 * @return string
 	 */

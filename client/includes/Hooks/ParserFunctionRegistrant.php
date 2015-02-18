@@ -8,12 +8,12 @@ use Wikibase\DataAccess\PropertyParserFunction\Runner;
 class ParserFunctionRegistrant {
 
 	/**
-	 * @param boolean - setting to enable use of property parser function
+	 * @var bool Setting to enable use of property parser function.
 	 */
 	private $allowDataTransclusion;
 
 	/**
-	 * @param boolean $allowDataTransclusion
+	 * @param bool $allowDataTransclusion
 	 */
 	public function __construct( $allowDataTransclusion ) {
 		$this->allowDataTransclusion = $allowDataTransclusion;
@@ -36,7 +36,7 @@ class ParserFunctionRegistrant {
 	}
 
 	private function registerPropertyParserFunction( Parser $parser ) {
-		if( !$this->allowDataTransclusion ) {
+		if ( !$this->allowDataTransclusion ) {
 			return;
 		}
 
@@ -46,6 +46,6 @@ class ParserFunctionRegistrant {
 				return Runner::render( $parser, $propertyLabel );
 			}
 		);
-
 	}
+
 }

@@ -78,8 +78,7 @@ class GenericEventDispatcher {
 	 *
 	 * @param string $event the name of the event, that is,
 	 *        the name of the method to call on the watchers.
-	 *
-	 * @param * any extra parameters are passed to the watcher method.
+	 * @param [$arg,...] Any extra parameters are passed to the watcher method.
 	 *
 	 * @throws InvalidArgumentException
 	 */

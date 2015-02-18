@@ -115,7 +115,7 @@ class ChangeLineFormatter {
 	/**
 	 * @fixme use shared bits of formatting from ChangesList and OldChangesList
 	 *
-	 * @param array
+	 * @param string[] $links
 	 *
 	 * @return string
 	 */
@@ -133,7 +133,7 @@ class ChangeLineFormatter {
 	/**
 	 * @fixme use shared bits of formatting from ChangesList and OldChangesList
 	 *
-	 * @param array
+	 * @param string[] $links
 	 *
 	 * @return string
 	 */

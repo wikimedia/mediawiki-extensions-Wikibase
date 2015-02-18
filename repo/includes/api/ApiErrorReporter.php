@@ -185,7 +185,7 @@ class ApiErrorReporter {
 	 * Aborts the request with an error message derived from the error code.
 	 *
 	 * @param string $errorCode A code identifying the error.
-	 * @param string ... Parameters for the Message.
+	 * @param string [$param,...] Parameters for the Message.
 	 *
 	 * @throws LogicException
 	 */
