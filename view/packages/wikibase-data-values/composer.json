@@ -30,7 +30,7 @@
 	},
 	"autoload": {
 		"files" : [
-			"DataValuesJavascript.php"
+			"DataValuesJavaScript.php"
 		]
 	}
 }
