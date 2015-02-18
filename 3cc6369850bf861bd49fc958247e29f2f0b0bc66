@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_3d2e2a8a",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T15:39:24Z",
+      "side": 0,
+      "message": "Is being loaded anyway, so superfluous",
+      "parentUuid": "6e7c4fa4_bd1a3a6d",
+      "revId": "3cc6369850bf861bd49fc958247e29f2f0b0bc66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_6205df15",
         "filename": "build/jenkins/mw-apply-wb-settings.sh",
         "patchSetId": 6
