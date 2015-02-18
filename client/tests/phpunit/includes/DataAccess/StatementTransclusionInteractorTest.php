@@ -2,15 +2,14 @@
 
 namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
+use DataValues\StringValue;
 use Language;
 use PHPUnit_Framework_TestCase;
-use DataValues\StringValue;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\SnaksFinder;
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -44,10 +43,19 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 
 		$mock->expects( $this->any() )
-			->method( 'addLabelUsage' )
+			->method( 'addLabelUsageForSnaks' )
 			->will( $this->returnCallback(
-				function ( EntityId $id ) use ( &$usages ) {
-					$usages[] = new EntityUsage( $id, EntityUsage::LABEL_USAGE );
+				function ( array $snaks ) use ( &$usages ) {
+					/** @var PropertyValueSnak[] $snaks */
+					foreach ( $snaks as $snak ) {
+						$value = $snak->getDataValue();
+						if ( $value instanceof EntityIdValue ) {
+							$usages[] = new EntityUsage(
+								$value->getEntityId(),
+								EntityUsage::LABEL_USAGE
+							);
+						}
+					}
 				}
 			) );
 
@@ -64,7 +72,6 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param string $languageCode
-	 * @param array &$usages
 	 *
 	 * @return StatementTransclusionInteractor
 	 */
