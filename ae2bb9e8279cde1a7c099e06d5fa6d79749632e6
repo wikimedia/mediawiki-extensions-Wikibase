@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1d032e12",
+        "filename": "build/travis/install.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T15:38:03Z",
+      "side": 1,
+      "message": "Change #4: Limit Scribunto to client",
+      "revId": "ae2bb9e8279cde1a7c099e06d5fa6d79749632e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fd2432af",
+        "filename": "build/travis/install.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T15:38:03Z",
+      "side": 1,
+      "message": "Change #1: CLDR",
+      "revId": "ae2bb9e8279cde1a7c099e06d5fa6d79749632e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7d110256",
+        "filename": "build/travis/mw-apply-wb-settings.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T15:38:03Z",
+      "side": 1,
+      "message": "Change #4: Limit Scribunto to client",
+      "revId": "ae2bb9e8279cde1a7c099e06d5fa6d79749632e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9d0e5e35",
+        "filename": "build/travis/mw-apply-wb-settings.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T15:38:03Z",
+      "side": 1,
+      "message": "Change #1: CLDR",
+      "revId": "ae2bb9e8279cde1a7c099e06d5fa6d79749632e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

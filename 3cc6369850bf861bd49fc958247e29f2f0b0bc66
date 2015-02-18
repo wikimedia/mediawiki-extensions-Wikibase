@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bd1a3a6d",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T15:38:03Z",
+      "side": 0,
+      "message": "Change #3: No Scribunto on Jenkins",
+      "revId": "3cc6369850bf861bd49fc958247e29f2f0b0bc66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6205df15",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T15:38:03Z",
+      "side": 0,
+      "message": "Change #2: Drop superfluous ?\u003e",
+      "revId": "3cc6369850bf861bd49fc958247e29f2f0b0bc66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
