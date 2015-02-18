@@ -346,11 +346,12 @@ class EntityDataSerializationService {
 	 *
 	 * @param string $format The name (mime type of file extension) of the format to use
 	 * @param EntityRevision $entityRevision The entity
+	 * @param string $dataFormat The type of the output provided by serializer
 	 *
 	 * @return array tuple of ( $data, $contentType )
 	 * @throws MWException if the format is not supported
 	 */
-	public function getSerializedData( $format, EntityRevision $entityRevision ) {
+	public function getSerializedData( $format, EntityRevision $entityRevision, $dataFormat = null ) {
 
 		//TODO: handle IfModifiedSince!
 
@@ -363,7 +364,7 @@ class EntityDataSerializationService {
 		$serializer = $this->createApiSerializer( $formatName );
 
 		if ( !$serializer ) {
-			$serializer = $this->createRdfSerializer( $formatName );
+			$serializer = $this->createRdfSerializer( $formatName, $dataFormat );
 		}
 
 		if ( !$serializer ) {
@@ -476,11 +477,12 @@ class EntityDataSerializationService {
 	 *
 	 * @param String $format The desired serialization format,
 	 *   as a format name understood by ApiBase or EasyRdf_Format
+	 * @param String $dataFormat The type of the output data, as understood by RdfSerializer
 	 *
 	 * @return RdfSerializer|null A suitable result printer, or null
 	 *   if the given format is not supported.
 	 */
-	public function createRdfSerializer( $format ) {
+	public function createRdfSerializer( $format, $dataFormat = null ) {
 		//MediaWiki formats
 		$rdfFormat = RdfSerializer::getFormat( $format );
 
@@ -493,7 +495,8 @@ class EntityDataSerializationService {
 			$this->rdfBaseURI,
 			$this->rdfDataURI,
 			$this->sites,
-			$this->entityLookup
+			$this->entityLookup,
+			$dataFormat
 		);
 
 		return $serializer;
