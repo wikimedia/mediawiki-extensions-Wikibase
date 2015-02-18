@@ -2,13 +2,15 @@
 
 namespace Wikibase\Test;
 
+use PHPUnit_Framework_TestCase;
+use ValueValidators\Error;
+use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Validators\EntityConstraintProvider;
+use Wikibase\InternalSerialization\DeserializerFactory;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpsMerge
@@ -20,7 +22,7 @@ use Wikibase\Validators\EntityConstraintProvider;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpsMergeTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var ChangeOpTestMockProvider
@@ -43,15 +45,28 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		Item $toItem,
 		array $ignoreConflicts = array()
 	) {
-		$duplicateDetector = $this->mockProvider->getMockLabelDescriptionDuplicateDetector();
-		$linkCache = $this->mockProvider->getMockSitelinkCache();
+		// A validator which makes sure that no site link is for page 'DUPE'
+		$siteLinkUniquenessValidator = $this->getMock( 'Wikibase\Validators\EntityValidator' );
+		$siteLinkUniquenessValidator->expects( $this->any() )
+			->method( 'validateEntity' )
+			->will( $this->returnCallback( function( Item $item ) {
+					$siteLinks = $item->getSiteLinkList();
+					foreach ( $siteLinks as $siteLink ) {
+						if ( $siteLink->getPageName() === 'DUPE' ) {
+							return Result::newError( array( Error::newError( 'SiteLink conflict' ) ) );
+						}
+					}
+					return Result::newSuccess();
+				} ) );
 
-		$constraintProvider = new EntityConstraintProvider(
-			$duplicateDetector,
-			$linkCache
-		);
+		$constraintProvider = $this->getMockBuilder( 'Wikibase\Validators\EntityConstraintProvider' )
+			->disableOriginalConstructor()
+			->getMock();
+		$constraintProvider->expects( $this->any() )
+			->method( 'getUpdateValidators' )
+			->will( $this->returnValue( array( $siteLinkUniquenessValidator ) ) );
 
-		$changeOpFactoryProvider =  new ChangeOpFactoryProvider(
+		$changeOpFactoryProvider = new ChangeOpFactoryProvider(
 			$constraintProvider,
 			$this->mockProvider->getMockGuidGenerator(),
 			$this->mockProvider->getMockGuidValidator(),
@@ -121,7 +136,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	 * @return Item
 	 */
 	private function getItem( $id, array $data = array() ) {
-		$deserializer = WikibaseRepo::getDefaultInstance()->getInternalEntityDeserializer();
+		$deserializer = $this->getEntityDeserializer();
 		$item = $deserializer->deserialize( $data );
 		$item->setId( new ItemId( $id ) );
 		return $item;
@@ -144,7 +159,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 			$ignoreConflicts
 		);
 
-		$deserializer = WikibaseRepo::getDefaultInstance()->getInternalEntityDeserializer();
+		$deserializer = $this->getEntityDeserializer();
 
 		$this->assertTrue( $from->equals( $deserializer->deserialize( $fromData ) ), 'FromItem was not filled correctly' );
 		$this->assertTrue( $to->equals( $deserializer->deserialize( $toData ) ), 'ToItem was not filled correctly' );
@@ -407,6 +422,14 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOps->apply();
 		$this->assertTrue( true ); // no exception thrown
+	}
+
+	private function getEntityDeserializer() {
+		$deserializerFactory = new DeserializerFactory(
+			$this->getMock( 'Deserializers\Deserializer' ),
+			$this->getMock( 'Wikibase\DataModel\Entity\EntityIdParser' )
+		);
+		return $deserializerFactory->newEntityDeserializer();
 	}
 
 }
