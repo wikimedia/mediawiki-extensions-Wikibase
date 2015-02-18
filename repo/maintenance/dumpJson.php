@@ -19,43 +19,53 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 use Wikibase\Repo\Store\EntityIdPager;
-use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Dumpers\RdfDumpGenerator;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
- * Maintenance script for generating a JSON dump of entities in the repository.
+ * Maintenance script for generating a dump of entities in the repository.
  *
  * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class DumpJson extends Maintenance {
+class DumpScript extends Maintenance {
 
 	/**
 	 * @var EntityLookup
 	 */
-	private $entityLookup;
+	public $entityLookup;
 
 	/**
 	 * @var Serializer
 	 */
-	private $entitySerializer;
+	public $entitySerializer;
 
 	/**
 	 * @var EntityPerPage
 	 */
-	private $entityPerPage;
+	public $entityPerPage;
 
 	/**
-	 * @var resource|bool
+	 * @var bool|resource
 	 */
-	private $logFileHandle = false;
+	public $logFileHandle = false;
+
+	/**
+	 * Supported dump formats:
+	 * format => factory function for dumper
+	 * @var array
+	 */
+	protected static $dumpFormats = array(
+		'json' => 'createJsonDumper',
+		'ttl' => 'createRdfDumper',
+	);
 
 	public function __construct() {
 		parent::__construct();
@@ -71,27 +81,46 @@ class DumpJson extends Maintenance {
 		$this->addOption( 'log', "Log file (default is stderr). Will be appended.", false, true );
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
 		$this->addOption( 'snippet', "Output a JSON snippet without square brackets at the start and end. Allows output to be combined more freely.", false, false );
+		$this->addOption( 'format', "Set the dump format.", false, true );
 	}
 
-	private function initServices() {
-		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+	public function initServices() {
+		$this->wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$entityFactory = $this->wikibaseRepo->getEntityFactory();
 		$serializerOptions = new SerializationOptions();
 
 		$serializerFactory = new SerializerFactory(
 			$serializerOptions,
-			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
+			$this->wikibaseRepo->getPropertyDataTypeLookup(),
 			$entityFactory
 		);
 
 		$this->entitySerializer = new DispatchingEntitySerializer( $serializerFactory, $serializerOptions );
-
 		//TODO: allow injection for unit tests
-		$this->entityPerPage = WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage();
+		$this->entityPerPage = $this->wikibaseRepo->getStore()->newEntityPerPage();
 
 		// Use an uncached EntityRevisionLookup here to avoid leaking memory (we only need every entity once)
-		$revisionLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup( 'uncached' );
+		$this->revisionLookup = $this->wikibaseRepo->getStore()->getEntityRevisionLookup( 'uncached' );
 		// This is not purposefully not resolving redirects, as we don't want them in the dump
-		$this->entityLookup = new RevisionBasedEntityLookup( $revisionLookup );
+		$this->entityLookup = new RevisionBasedEntityLookup( $this->revisionLookup );
+	}
+
+	protected function createRdfDumper( $output ) {
+		$entitySerializer = new RdfSerializer( RdfSerializer::getFormat('ttl'),
+				$GLOBALS['wgCanonicalServer']."/entity/",
+				$GLOBALS['wgCanonicalServer']."/Special:EntityData/",
+				$this->wikibaseRepo->getSiteStore()->getSites(), $this->entityLookup,
+				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
+					RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES |
+					RdfProducer::PRODUCE_SITELINKS
+			);
+		return new RdfDumpGenerator( $output, $this->revisionLookup, $entitySerializer );
+	}
+
+	protected function createJsonDumper( $output ) {
+		$dumper = new JsonDumpGenerator( $output, $this->entityLookup, $this->entitySerializer );
+		$dumper->setUseSnippets( (bool)$this->getOption( 'snippet', false ) );
+		return $dumper;
 	}
 
 	/**
@@ -113,11 +142,11 @@ class DumpJson extends Maintenance {
 	/**
 	 * Opens the given file for use by logMessage().
 	 *
-	 * @param string $file
+	 * @param $file
 	 *
-	 * @throws MWException
+	 * @throws \MWException
 	 */
-	private function openLogFile( $file ) {
+	protected function openLogFile( $file ) {
 		$this->closeLogFile();
 
 		if ( $file === '-' ) {
@@ -128,18 +157,18 @@ class DumpJson extends Maintenance {
 		$this->logFileHandle = fopen( $file, 'a' );
 
 		if ( !$this->logFileHandle ) {
-			throw new MWException( 'Failed to open log file: ' . $file );
+			throw new \MWException( 'Failed to open log file: ' . $file );
 		}
 	}
 
 	/**
 	 * Closes any currently open file opened with openLogFile().
 	 */
-	private function closeLogFile() {
+	protected function closeLogFile() {
 		if ( $this->logFileHandle
 			&& $this->logFileHandle !== STDERR
-			&& $this->logFileHandle !== STDOUT
-		) {
+			&& $this->logFileHandle !== STDOUT ) {
+
 			fclose( $this->logFileHandle );
 		}
 
@@ -157,7 +186,6 @@ class DumpJson extends Maintenance {
 		$shardingFactor = (int)$this->getOption( 'sharding-factor', 1 );
 		$shard = (int)$this->getOption( 'shard', 0 );
 		$batchSize = (int)$this->getOption( 'batch-size', 100 );
-		$snippets = (bool)$this->getOption( 'snippet', false );
 
 		//TODO: Allow injection of an OutputStream for logging
 		$this->openLogFile( $this->getOption( 'log', 'php://stderr' ) );
@@ -171,7 +199,7 @@ class DumpJson extends Maintenance {
 		$output = fopen( $outFile, 'w' ); //TODO: Allow injection of an OutputStream
 
 		if ( !$output ) {
-			throw new MWException( 'Failed to open ' . $outFile . '!' );
+			throw new \MWException( 'Failed to open ' . $outFile . '!' );
 		}
 
 		if ( $this->hasOption( 'list-file' ) ) {
@@ -186,7 +214,12 @@ class DumpJson extends Maintenance {
 			$this->logMessage( "Dumping shard $shard/$shardingFactor" );
 		}
 
-		$dumper = new JsonDumpGenerator( $output, $this->entityLookup, $this->entitySerializer );
+		$dumpFormat = $this->getOption('format', 'json');
+		if ( empty( self::$dumpFormats[$dumpFormat] ) ) {
+			throw new \MWException("Unknown dump format: $dumpFormat");
+		}
+		$dumperName = self::$dumpFormats[$dumpFormat];
+		$dumper = $this->$dumperName( $output );
 
 		$progressReporter = new ObservableMessageReporter();
 		$progressReporter->registerReporterCallback( array( $this, 'logMessage' ) );
@@ -200,7 +233,6 @@ class DumpJson extends Maintenance {
 		$dumper->setShardingFilter( $shardingFactor, $shard );
 		$dumper->setEntityTypeFilter( $entityType );
 		$dumper->setBatchSize( $batchSize );
-		$dumper->setUseSnippets( $snippets );
 
 		$idStream = $this->makeIdStream( $entityType, $exceptionReporter );
 		$dumper->generateDump( $idStream );
@@ -214,12 +246,12 @@ class DumpJson extends Maintenance {
 	}
 
 	/**
-	 * @param string|null $entityType
+	 * @param null|string $entityType
 	 * @param ExceptionHandler $exceptionReporter
 	 *
 	 * @return EntityIdPager a stream of EntityId objects
 	 */
-	private function makeIdStream( $entityType, ExceptionHandler $exceptionReporter ) {
+	public function makeIdStream( $entityType = null, ExceptionHandler $exceptionReporter = null ) {
 		$listFile = $this->getOption( 'list-file' );
 
 		if ( $listFile !== null ) {
@@ -232,27 +264,27 @@ class DumpJson extends Maintenance {
 	}
 
 	/**
-	 * @param string|null $entityType
+	 * @param $entityType
 	 *
 	 * @return EntityIdPager
 	 */
-	private function makeIdQueryStream( $entityType ) {
+	protected function makeIdQueryStream( $entityType ) {
 		$stream = new EntityPerPageIdPager( $this->entityPerPage, $entityType );
 		return $stream;
 	}
 
 	/**
-	 * @param string $listFile
+	 * @param $listFile
 	 * @param ExceptionHandler $exceptionReporter
 	 *
 	 * @throws MWException
 	 * @return EntityIdPager
 	 */
-	private function makeIdFileStream( $listFile, ExceptionHandler $exceptionReporter ) {
+	protected function makeIdFileStream( $listFile, ExceptionHandler $exceptionReporter = null ) {
 		$input = fopen( $listFile, 'r' );
 
 		if ( !$input ) {
-			throw new MWException( "Failed to open ID file: $input" );
+			throw new \MWException( "Failed to open ID file: $input" );
 		}
 
 		$stream = new EntityIdReader( new LineReader( $input ), new BasicEntityIdParser() );
@@ -262,5 +294,5 @@ class DumpJson extends Maintenance {
 	}
 }
 
-$maintClass = 'Wikibase\DumpJson';
+$maintClass = 'Wikibase\DumpScript';
 require_once( RUN_MAINTENANCE_IF_MAIN );
