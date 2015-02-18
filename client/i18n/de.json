@@ -7,7 +7,6 @@
 		]
 	},
 	"wikibase-client-desc": "Stellt einen Client für die Erweiterung Wikibase bereit",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}}-Client",
 	"tooltip-t-wikibase": "Link zum verbundenen Datenrepositoriumsobjekt",
 	"wikibase-after-page-move": "Du kannst auch das zugeordnete {{WBREPONAME}}-Element [$1 aktualisieren], um Sprachlinks von verschobenen Seiten zu verwalten.",
 	"wikibase-after-page-move-queued": "Das mit dieser Seite verbundene [$1 {{WBREPONAME}}-Objekt] wird bald automatisch aktualisiert werden.",
@@ -49,6 +48,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-Bearbeitung",
 	"wikibase-replicationnote": "Bitte bedenke, dass es einige Minuten dauern kann, bis die Änderungen auf allen Wikis sichtbar sind.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-Bearbeitungen in der Beobachtungsliste anzeigen",
+	"wikibase-error-deserialize-error": "Daten konnten nicht deserialisiert werden.",
 	"wikibase-error-serialize-error": "Die Daten konnten nicht serialisiert werden",
 	"wikibase-error-invalid-entity-id": "Die eingegebene Kennung ist für das System unbekannt. Bitte verwende eine gültige Objektkennung.",
 	"special-unconnectedpages": "Seiten, die nicht mit Objekten verbunden sind",
