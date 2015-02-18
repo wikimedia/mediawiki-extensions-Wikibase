@@ -78,7 +78,7 @@ class StringNormalizer {
 	}
 
 	/**
-	 * Trim initial and trailing whitespace and control chars, and optionally compress internal ones.
+	 * Trim initial and trailing whitespace and control chars, and compress some internal control chars.
 	 *
 	 * @param string $inputString The actual string to process.
 	 *
@@ -96,11 +96,11 @@ class StringNormalizer {
 	}
 
 	/**
-	 * Normalize string into NFC by using the cleanup metod from UtfNormal.
+	 * Normalize string into NFC by using the cleanup method from UtfNormal.
 	 *
 	 * @param string $inputString The actual string to process.
 	 *
-	 * @return string where whitespace possibly are removed.
+	 * @return string
 	 */
 	public function cleanupToNFC( $inputString ) {
 		$cleaned = $inputString;
