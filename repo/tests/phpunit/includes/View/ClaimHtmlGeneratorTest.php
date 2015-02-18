@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Html;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
@@ -13,7 +14,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\ClaimHtmlGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Template\TemplateFactory;
@@ -22,8 +22,7 @@ use Wikibase\Template\TemplateRegistry;
 /**
  * @covers Wikibase\Repo\View\ClaimHtmlGenerator
  *
- * @todo more specific tests for all parts of claim html formatting,
- * and use mock SnakHtmlGenerator
+ * @todo more specific tests for all parts of claim html formatting
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -33,23 +32,21 @@ use Wikibase\Template\TemplateRegistry;
  * @author Daniel Kinzler
  * @author H. Snater < mediawiki@snater.com >
  */
-class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
+class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return SnakFormatter
+	 * @return SnakHtmlGenerator
 	 */
-	protected function getSnakFormatterMock() {
-		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+	protected function getSnakHtmlGeneratorMock() {
+		$snakHtmlGenerator = $this->getMockBuilder( 'Wikibase\Repo\View\SnakHtmlGenerator' )
+			->disableOriginalConstructor()
+			->getMock();
 
-		$snakFormatter->expects( $this->any() )
-			->method( 'formatSnak' )
-			->will( $this->returnValue( 'a snak!' ) );
+		$snakHtmlGenerator->expects( $this->any() )
+			->method( 'getSnakHtml' )
+			->will( $this->returnValue( 'SNAK HTML' ) );
 
-		$snakFormatter->expects( $this->any() )
-			->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
-
-		return $snakFormatter;
+		return $snakHtmlGenerator;
 	}
 
 	/**
@@ -75,19 +72,12 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getHtmlForClaimProvider
 	 */
 	public function testGetHtmlForClaim(
-		SnakFormatter $snakFormatter,
-		EntityIdFormatter $propertyIdFormatter,
+		SnakHtmlGenerator $snakHtmlGenerator,
 		Claim $claim,
 		$patterns
 	) {
 		$templateFactory = new TemplateFactory(
 			TemplateRegistry::getDefaultInstance()
-		);
-
-		$snakHtmlGenerator = new SnakHtmlGenerator(
-			$templateFactory,
-			$snakFormatter,
-			$propertyIdFormatter
 		);
 
 		$claimHtmlGenerator = new ClaimHtmlGenerator(
@@ -103,25 +93,20 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getHtmlForClaimProvider() {
-		$snakFormatter = $this->getSnakFormatterMock();
-
-		$propertyIdFormatterMock = $this->getPropertyIdFormatterMock();
+		$snakHtmlGenerator = $this->getSnakHtmlGeneratorMock();
 
 		$testCases = array();
 
 		$testCases[] = array(
-			$snakFormatter,
-			$propertyIdFormatterMock,
+			$snakHtmlGenerator,
 			new Claim( new PropertySomeValueSnak( 42 ) ),
 			array(
-				'snak variation css' => '/wikibase-snakview-variation-somevalue/',
-				'formatted snak' => '/a snak!/'
+				'snak html' => '/SNAK HTML/',
 			)
 		);
 
 		$testCases[] = array(
-			$snakFormatter,
-			$propertyIdFormatterMock,
+			$snakHtmlGenerator,
 			new Claim(
 				new PropertySomeValueSnak( 42 ),
 				new SnakList( array(
@@ -129,14 +114,12 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 				) )
 			),
 			array(
-				'snak variation css' => '/wikibase-snakview-variation-somevalue/',
-				'formatted snak' => '/a snak!.*a snak!/s'
+				'snak html' => '/SNAK HTML.*SNAK HTML/s',
 			)
 		);
 
 		$testCases[] = array(
-			$snakFormatter,
-			$propertyIdFormatterMock,
+			$snakHtmlGenerator,
 			new Statement(
 				new Claim(
 					new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
@@ -147,8 +130,7 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 				) ) ) ) )
 			),
 			array(
-				'snak variation css' => '/wikibase-snakview-variation-value/',
-				'formatted snak' => '/a snak!.*a snak!/s'
+				'snak html' => '/SNAK HTML.*SNAK HTML/s',
 			)
 		);
 
