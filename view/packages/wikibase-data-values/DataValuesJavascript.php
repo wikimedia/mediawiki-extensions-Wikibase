@@ -16,7 +16,7 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 
 $GLOBALS['wgExtensionCredits']['datavalues'][] = array(
 	'path' => __DIR__,
-	'name' => 'DataValues Javascript',
+	'name' => 'DataValues JavaScript',
 	'version' => DATA_VALUES_JAVASCRIPT_VERSION,
 	'author' => array(
 		'[https://www.mediawiki.org/wiki/User:Danwe Daniel Werner]',
