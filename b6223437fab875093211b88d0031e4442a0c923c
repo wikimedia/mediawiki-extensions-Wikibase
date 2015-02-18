@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a7aa2967",
+        "filename": "repo/tests/phpunit/includes/View/EntityTermsViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T11:32:11Z",
+      "side": 1,
+      "message": "could have a type hint",
+      "revId": "b6223437fab875093211b88d0031e4442a0c923c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
