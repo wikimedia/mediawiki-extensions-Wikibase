@@ -92,10 +92,8 @@ class ClaimDifferenceVisualizer {
 
 		$referenceChanges = $claimDifference->getReferenceChanges();
 		if ( $referenceChanges !== null ) {
-			$msg = wfMessage( 'wikibase-diffview-reference' )->inLanguage( $this->languageCode );
 			$html .= $this->visualizeSnakListChanges(
 				$referenceChanges,
-				$msg,
 				$oldestMainSnak,
 				$newestMainSnak
 			);
@@ -178,11 +176,11 @@ class ClaimDifferenceVisualizer {
 		Snak $newestMainSnak
 	) {
 		$msg = wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->languageCode );
+		$header = $msg->parse();
+
 		$valueFormatter = new DiffOpValueFormatter(
-			$this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak ) . ' / ' .
-				$msg->parse(),
-			$this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak ) . ' / ' .
-				$msg->parse(),
+			$this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak ) . ' / ' . $header,
+			$this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak ) . ' / ' . $header,
 			$this->getRankHtml( $rankChange->getOldValue() ),
 			$this->getRankHtml( $rankChange->getNewValue() )
 		);
@@ -204,8 +202,10 @@ class ClaimDifferenceVisualizer {
 			$rank = ClaimSerializer::serializeRank( $rank );
 		}
 
-		// Messages: wikibase-diffview-rank-preferred, wikibase-diffview-rank-normal,
+		// Messages:
 		// wikibase-diffview-rank-deprecated
+		// wikibase-diffview-rank-normal
+		// wikibase-diffview-rank-preferred
 		$msg = wfMessage( 'wikibase-diffview-rank-' . $rank )->inLanguage( $this->languageCode );
 		return $msg->parse();
 	}
@@ -225,16 +225,18 @@ class ClaimDifferenceVisualizer {
 	 */
 	private function visualizeSnakListChanges(
 		Diff $changes,
-		Message $breadCrumb,
 		Snak $oldestMainSnak,
 		Snak $newestMainSnak
 	) {
 		$html = '';
 
-		$oldClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak ) . ' / ' .
-			$breadCrumb->parse();
-		$newClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak ) . ' / ' .
-			$breadCrumb->parse();
+		$msg = wfMessage( 'wikibase-diffview-reference' )->inLanguage( $this->languageCode );
+		$header = $msg->parse();
+
+		$oldClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak )
+			. ' / ' . $header;
+		$newClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak )
+			. ' / ' . $header;
 
 		foreach ( $changes as $change ) {
 			$newVal = $oldVal = null;
@@ -300,10 +302,12 @@ class ClaimDifferenceVisualizer {
 		$html = '';
 
 		$msg = wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->languageCode );
-		$oldClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak ) . ' / ' .
-			$msg->parse();
-		$newClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak ) . ' / ' .
-			$msg->parse();
+		$header = $msg->parse();
+
+		$oldClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak )
+			. ' / ' . $header;
+		$newClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak )
+			. ' / ' . $header;
 
 		foreach ( $changes as $change ) {
 			$newVal = $oldVal = null;
