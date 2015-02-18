@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_22512712",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-18T13:03:04Z",
+      "side": 1,
+      "message": "Is this necessary with Ifdeef34e371925c446123c97e8d10f20b15cc654? Normal extension jobs automatically require their dependencies.",
+      "revId": "39461e7602a2bb923da06a3fa40db47c021e80c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_622b9f78",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-18T13:03:04Z",
+      "side": 1,
+      "message": "Is that a space or a newline?",
+      "revId": "39461e7602a2bb923da06a3fa40db47c021e80c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
