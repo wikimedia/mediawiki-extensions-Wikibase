@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0203cb7a",
+        "filename": "lib/includes/StringNormalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T14:59:55Z",
+      "side": 1,
+      "message": "Cc is a very specific list of 65 characters, nut just \"some\". ;-)\nhttp://www.fileformat.info/info/unicode/category/Cc/list.htm",
+      "revId": "b1ae69548b5014c7b5f5930301ec87436fc88bb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
