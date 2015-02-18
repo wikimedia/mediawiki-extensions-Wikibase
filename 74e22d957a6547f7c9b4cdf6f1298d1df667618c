@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_873ccdbc",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-18T10:55:54Z",
+      "side": 1,
+      "message": "Could you add parentheses so I can understand this conditional?",
+      "revId": "74e22d957a6547f7c9b4cdf6f1298d1df667618c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
