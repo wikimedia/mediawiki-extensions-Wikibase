@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_9d63bed8",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T16:02:48Z",
+      "side": 1,
+      "message": "Because we have two classes with the same name if we don\u0027t do that.",
+      "parentUuid": "6e7c4fa4_62f07fc4",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_22f5a7ea",
         "filename": "client/includes/scribunto/SnakRenderer.php",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-18T13:58:27Z",
       "side": 1,
       "message": "Sounds like it would render Snak objects: Better: SnakSerializationRenderer, LuaSnakRenderer, ...",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9dc73e99",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T16:02:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_22f5a7ea",
       "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_1da7ae0a",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T16:02:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_c2a71307",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_42e9c30e",
         "filename": "client/includes/scribunto/SnakRenderer.php",
         "patchSetId": 10
@@ -64,6 +118,24 @@
       "writtenOn": "2015-02-18T13:58:27Z",
       "side": 1,
       "message": "what\u0027s the expected structure?",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dd57f6cb",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T16:02:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_42e9c30e",
       "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ddacd6ed",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T16:02:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_62e63f41",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_82b59b31",
         "filename": "client/includes/scribunto/SnakRenderer.php",
         "patchSetId": 10
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_9db2de45",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T16:02:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_82b59b31",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_22a7e70a",
         "filename": "client/includes/scribunto/SnakRenderer.php",
         "patchSetId": 10
@@ -115,6 +223,24 @@
       "writtenOn": "2015-02-18T14:19:33Z",
       "side": 1,
       "message": "count() may have linear runtime, if you are unlucky. If you don\u0027t care about the actual number then don\u0027t count. empty() should be avoided in general but is perfect in exactly this case.",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9d997ec9",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T16:02:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_22a7e70a",
       "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -149,6 +275,24 @@
       "writtenOn": "2015-02-18T14:19:33Z",
       "side": 1,
       "message": "This exact same method does exist in 3 classes now. Why is this not part of the UsageAccumulator? I tried to solve this, see my following patches.",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5d8f6678",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T16:02:48Z",
+      "side": 1,
+      "message": "Ok, will have a look at that :)",
+      "parentUuid": "6e7c4fa4_e2832f55",
       "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
