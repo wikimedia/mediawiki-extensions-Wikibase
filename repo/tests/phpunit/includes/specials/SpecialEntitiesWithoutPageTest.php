@@ -30,6 +30,11 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 		$termsLanguages->expects( $this->any() )
 			->method( 'getLanguages' )
 			->will( $this->returnValue( array( 'acceptedlanguage' ) ) );
+		$termsLanguages->expects( $this->any() )
+			->method( 'hasLanguage' )
+			->will( $this->returnCallback( function( $code) {
+				return $code === 'acceptedlanguage';
+			} ) );
 
 		return new SpecialEntitiesWithoutPage(
 			'EntitiesWithoutLabel',
