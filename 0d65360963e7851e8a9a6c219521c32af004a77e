@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e4ec9f90",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-18T10:50:32Z",
+      "side": 1,
+      "message": "I don\u0027t understand the operator precedence here.",
+      "revId": "0d65360963e7851e8a9a6c219521c32af004a77e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_84d60bc6",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-18T10:50:32Z",
+      "side": 1,
+      "message": "allEmpty cannot be true if snakTypeSelectorIsEmpty is not true",
+      "revId": "0d65360963e7851e8a9a6c219521c32af004a77e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_44dc73e5",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-18T10:50:32Z",
+      "side": 1,
+      "message": "allEmpty cannot be true if snakValueIsEmpty is not true",
+      "revId": "0d65360963e7851e8a9a6c219521c32af004a77e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_04999b22",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-18T10:50:32Z",
+      "side": 1,
+      "message": "This should rather be passed as an option instead of guessed.",
+      "revId": "0d65360963e7851e8a9a6c219521c32af004a77e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_046f5bfb",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-18T10:50:32Z",
+      "side": 1,
+      "message": "It is never called with a string. If that would be a use-case, I would suggest creating an ad-hoc Property instance with just the id set.",
+      "revId": "0d65360963e7851e8a9a6c219521c32af004a77e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
