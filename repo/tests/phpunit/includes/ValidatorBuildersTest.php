@@ -21,9 +21,8 @@ use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\ValidatorBuilders;
 
 /**
- * @covers Wikibase\Lib\ValidatorBuilders
+ * @covers Wikibase\Repo\ValidatorBuilders
  *
- * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseValidators
  *
