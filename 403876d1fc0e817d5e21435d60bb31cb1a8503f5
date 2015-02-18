@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b86808b9",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T16:52:13Z",
+      "side": 1,
+      "message": "To speed review up you could split this obvious fix into a separate patch.",
+      "revId": "403876d1fc0e817d5e21435d60bb31cb1a8503f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
