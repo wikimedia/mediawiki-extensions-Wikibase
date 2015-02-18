@@ -45,7 +45,10 @@ class OtherProjectsSidebarGenerator {
 	 * @param SiteStore $siteStore
 	 * @param string[] $siteIdsToOutput
 	 */
-	public function __construct( $localSiteId, SiteLinkLookup $siteLinkLookup, SiteStore $siteStore,
+	public function __construct(
+		$localSiteId,
+		SiteLinkLookup $siteLinkLookup,
+		SiteStore $siteStore,
 		array $siteIdsToOutput
 	) {
 		$this->localSiteId = $localSiteId;
@@ -57,7 +60,8 @@ class OtherProjectsSidebarGenerator {
 	/**
 	 * @param Title $title
 	 *
-	 * @return array[] array of arrays of link attributes, sorted by site group id
+	 * @return array[] Array of arrays of of attributes describing sidebar links, sorted by the
+	 * site's group and global ids.
 	 */
 	public function buildProjectLinkSidebar( Title $title ) {
 		return $this->buildSidebarFromSiteLinks( $this->getSiteLinks( $title ) );
@@ -66,45 +70,45 @@ class OtherProjectsSidebarGenerator {
 	/**
 	 * @param SiteLink[] $siteLinks
 	 *
-	 * @return array[] array of arrays of link attributes, sorted by site group id
+	 * @return array[] Array of arrays of of attributes describing sidebar links, sorted by the
+	 * site's group and global ids.
 	 */
 	private function buildSidebarFromSiteLinks( array $siteLinks ) {
-		$result = array();
+		$linksByGroup = array();
 
 		foreach ( $siteLinks as $siteLink ) {
 			if ( !in_array( $siteLink->getSiteId(), $this->siteIdsToOutput ) ) {
 				continue;
 			}
+
 			$site = $this->siteStore->getSite( $siteLink->getSiteId() );
-			if ( $site === null ) {
-				continue;
-			}
 
-			if ( !isset( $result[$site->getGroup()] ) ) {
-				$result[$site->getGroup()] = array();
+			if ( $site !== null ) {
+				$group = $site->getGroup();
+				$globalId = $site->getGlobalId();
+				// Index by site group and global id
+				$linksByGroup[$group][$globalId] = $this->buildSidebarLink( $siteLink, $site );
 			}
-
-			// Index by site group and global id
-			$result[$site->getGroup()][$site->getGlobalId()] = $this->buildSidebarLink( $siteLink, $site );
 		}
 
-		return $this->sortAndFlattenSidebar( $result );
+		return $this->sortAndFlattenSidebar( $linksByGroup );
 	}
 
 	/**
 	 * The arrays of link attributes are indexed by site group and by global site id.
 	 * Sort them by both and then return the flattened array.
 	 *
-	 * @param array[]
+	 * @param array[] $linksByGroup
 	 *
-	 * @return array[] array of arrays of link attributes, sorted by site group id
+	 * @return array[] Array of arrays of of attributes describing sidebar links, sorted by the
+	 * site's group and global ids.
 	 */
-	private function sortAndFlattenSidebar( array $links ) {
+	private function sortAndFlattenSidebar( array $linksByGroup ) {
 		$result = array();
 
-		ksort( $links ); // Sort by group id
+		ksort( $linksByGroup ); // Sort by group id
 
-		foreach ( $links as $linksPerGroup ) {
+		foreach ( $linksByGroup as $linksPerGroup ) {
 			ksort( $linksPerGroup ); // Sort individual arrays by global site id
 			$result = array_merge( $result, array_values( $linksPerGroup ) );
 		}
@@ -132,10 +136,10 @@ class OtherProjectsSidebarGenerator {
 	 * @param SiteLink $siteLink
 	 * @param Site $site
 	 *
-	 * @return string[]
+	 * @return string[] Array of attributes describing a sidebar link.
 	 */
 	private function buildSidebarLink( SiteLink $siteLink, Site $site ) {
-		$node = array(
+		$attributes = array(
 			'msg' => 'wikibase-otherprojects-' . $site->getGroup(),
 			'class' => 'wb-otherproject-link wb-otherproject-' . $site->getGroup(),
 			'href' => $site->getPageUrl( $siteLink->getPageName() )
@@ -143,10 +147,10 @@ class OtherProjectsSidebarGenerator {
 
 		$siteLanguageCode = $site->getLanguageCode();
 		if ( $siteLanguageCode !== null ) {
-			$node['hreflang'] = $siteLanguageCode;
+			$attributes['hreflang'] = $siteLanguageCode;
 		}
 
-		return $node;
+		return $attributes;
 	}
 
 }
