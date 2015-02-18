@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\ValuesFinder;
 
 /**
- * @covers Wikibase\ReferencedUrlFinder
+ * @covers Wikibase\ValuesFinder
  *
  * @group Wikibase
  * @group WikibaseLib
