@@ -390,7 +390,7 @@ class EntityDataRequestHandler {
 		}
 
 		list( $data, $contentType ) = $this->serializationService->getSerializedData(
-			$format, $entityRevision
+			$format, $entityRevision, $request->getVal("flavor")
 		);
 
 		$output->disable();
