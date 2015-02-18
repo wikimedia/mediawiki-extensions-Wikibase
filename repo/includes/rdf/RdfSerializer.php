@@ -145,12 +145,13 @@ class RdfSerializer implements RdfProducer {
 
 	/**
 	 * Create dump header for RDF dump
+	 * @param int $ts Timestamp (for testing)
 	 * @return string
 	 */
-	public function dumpHeader( ) {
+	public function dumpHeader( $ts = 0) {
 		$builder = $this->newRdfBuilder();
 
-		$builder->addDumpHeader();
+		$builder->addDumpHeader( $ts );
 
 		return $this->serializeRdf( $builder->getGraph() );
 	}
