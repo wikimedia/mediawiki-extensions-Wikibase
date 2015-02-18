@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_a26d3797",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T14:01:13Z",
+      "side": 1,
+      "message": "No it\u0027s not... will amend",
+      "parentUuid": "6e7c4fa4_22512712",
+      "revId": "39461e7602a2bb923da06a3fa40db47c021e80c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_622b9f78",
         "filename": "build/jenkins/mw-apply-wb-settings.sh",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-18T13:03:04Z",
       "side": 1,
       "message": "Is that a space or a newline?",
+      "revId": "39461e7602a2bb923da06a3fa40db47c021e80c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_82703b70",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T14:01:13Z",
+      "side": 1,
+      "message": "newline",
+      "parentUuid": "6e7c4fa4_622b9f78",
       "revId": "39461e7602a2bb923da06a3fa40db47c021e80c2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
