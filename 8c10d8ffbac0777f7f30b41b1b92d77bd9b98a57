@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_84e04b25",
+        "filename": "repo/tests/phpunit/includes/store/WikiPageEntityRevisionLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-18T09:06:28Z",
+      "side": 1,
+      "message": "Why did you lower case the p?",
+      "revId": "8c10d8ffbac0777f7f30b41b1b92d77bd9b98a57",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
