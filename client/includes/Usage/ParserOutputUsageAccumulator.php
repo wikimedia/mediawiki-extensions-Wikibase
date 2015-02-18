@@ -4,6 +4,9 @@ namespace Wikibase\Client\Usage;
 
 use ParserOutput;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * This implementation of the UsageAccumulator interface acts as a wrapper around
@@ -48,6 +51,23 @@ class ParserOutputUsageAccumulator implements UsageAccumulator {
 	public function getUsages() {
 		$usages = $this->parserOutput->getExtensionData( 'wikibase-entity-usage' );
 		return $usages === null ? array() : $usages;
+	}
+
+	/**
+	 * @see UsageAccumulator::addLabelUsageForSnaks
+	 *
+	 * @param Snak[] $snaks
+	 */
+	public function addLabelUsageForSnaks( array $snaks ) {
+		foreach ( $snaks as $snak ) {
+			if ( $snak instanceof PropertyValueSnak ) {
+				$value = $snak->getDataValue();
+
+				if ( $value instanceof EntityIdValue ) {
+					$this->addLabelUsage( $value->getEntityId() );
+				}
+			}
+		}
 	}
 
 	/**
