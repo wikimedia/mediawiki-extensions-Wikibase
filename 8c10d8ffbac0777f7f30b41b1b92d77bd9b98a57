@@ -16,6 +16,23 @@
       "revId": "8c10d8ffbac0777f7f30b41b1b92d77bd9b98a57",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_27505960",
+        "filename": "repo/tests/phpunit/includes/store/WikiPageEntityRevisionLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T12:03:22Z",
+      "side": 1,
+      "message": "Because of the lower case p here. Dang. Will fix.",
+      "revId": "8c10d8ffbac0777f7f30b41b1b92d77bd9b98a57",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
