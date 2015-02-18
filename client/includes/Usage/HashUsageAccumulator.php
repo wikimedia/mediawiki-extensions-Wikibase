@@ -3,9 +3,6 @@
 namespace Wikibase\Client\Usage;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Snak\Snak;
 
 /**
  * This implementation of the UsageAccumulator interface simply wraps
@@ -14,7 +11,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class HashUsageAccumulator implements UsageAccumulator {
+class HashUsageAccumulator extends UsageAccumulator {
 
 	/**
 	 * @var EntityUsage[]
@@ -22,87 +19,22 @@ class HashUsageAccumulator implements UsageAccumulator {
 	private $usages = array();
 
 	/**
-	 * Registers usage of the given aspect of the given entity.
+	 * @see UsageAccumulator::addUsage
 	 *
-	 * @param EntityId $id
-	 * @param string $aspect Use the EntityUsage::XXX_USAGE constants.
+	 * @param EntityUsage $usage
 	 */
-	public function addUsage( EntityId $id, $aspect ) {
-		$usage = new EntityUsage( $id, $aspect );
-
+	public function addUsage( EntityUsage $usage ) {
 		$key = $usage->getIdentityString();
 		$this->usages[$key] = $usage;
 	}
 
 	/**
-	 * @see UsageAccumulator::getUsage()
+	 * @see UsageAccumulator::getUsage
 	 *
 	 * @return EntityUsage[]
 	 */
 	public function getUsages() {
 		return $this->usages;
-	}
-
-	/**
-	 * @see UsageAccumulator::addLabelUsage
-	 *
-	 * @param EntityId $id
-	 */
-	public function addLabelUsage( EntityId $id ) {
-		$this->addUsage( $id, EntityUsage::LABEL_USAGE );
-	}
-
-	/**
-	 * @see UsageAccumulator::addLabelUsageForSnaks
-	 *
-	 * @param Snak[] $snaks
-	 */
-	public function addLabelUsageForSnaks( array $snaks ) {
-		foreach ( $snaks as $snak ) {
-			if ( $snak instanceof PropertyValueSnak ) {
-				$value = $snak->getDataValue();
-
-				if ( $value instanceof EntityIdValue ) {
-					$this->addLabelUsage( $value->getEntityId() );
-				}
-			}
-		}
-	}
-
-	/**
-	 * @see UsageAccumulator::addTitleUsage
-	 *
-	 * @param EntityId $id
-	 */
-	public function addTitleUsage( EntityId $id ) {
-		$this->addUsage( $id, EntityUsage::TITLE_USAGE );
-	}
-
-	/**
-	 * @see UsageAccumulator::addSitelinksUsage
-	 *
-	 * @param EntityId $id
-	 */
-	public function addSiteLinksUsage( EntityId $id ) {
-		$this->addUsage( $id, EntityUsage::SITELINK_USAGE );
-	}
-
-	/**
-	 * @see UsageAccumulator::addOtherUsage
-	 *
-	 * @param EntityId $id
-	 */
-	public function addOtherUsage( EntityId $id ) {
-		$this->addUsage( $id, EntityUsage::OTHER_USAGE );
-	}
-
-	/**
-	 * @see UsageAccumulator::addAllUsage
-	 *
-	 * @param EntityId $id
-	 */
-	public function addAllUsage( EntityId $id ) {
-		$this->addUsage( $id, EntityUsage::ALL_USAGE );
 	}
 
 }
