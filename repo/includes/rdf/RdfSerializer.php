@@ -41,6 +41,11 @@ class RdfSerializer {
 	private $sites;
 
 	/**
+	 * @var String
+	 */
+	private $flavor;
+
+	/**
 	 * @var EntityLookup
 	 */
 	private $entityLookup;
@@ -51,19 +56,22 @@ class RdfSerializer {
 	 * @param string $dataUri
 	 * @param SiteList $sites;
 	 * @param EntityLookup $entityLookup
+	 * @param string flavor
 	 */
 	public function __construct(
 		EasyRdf_Format $format,
 		$baseUri,
 		$dataUri,
 		SiteList $sites,
-		EntityLookup $entityLookup
+		EntityLookup $entityLookup,
+		$flavor
 	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
 		$this->format = $format;
 		$this->sites = $sites;
 		$this->entityLookup = $entityLookup;
+		$this->flavor = $flavor;
 	}
 
 	/**
@@ -103,7 +111,9 @@ class RdfSerializer {
 		$builder = new RdfBuilder(
 			$this->sites,
 			$this->baseUri,
-			$this->dataUri
+			$this->dataUri,
+			$this->entityLookup,
+			$this->flavor
 		);
 
 		return $builder;
