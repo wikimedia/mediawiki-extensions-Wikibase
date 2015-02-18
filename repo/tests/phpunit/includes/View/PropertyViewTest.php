@@ -15,6 +15,7 @@ use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\PropertyView
+ * @covers Wikibase\Repo\View\EntityView
  *
  * @group Wikibase
  * @group WikibasePropertyView

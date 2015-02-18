@@ -10,6 +10,8 @@ use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
 
 /**
+ * @covers \Wikibase\Repo\View\EntityViewFactory
+ *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
