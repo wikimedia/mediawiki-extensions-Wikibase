@@ -153,7 +153,7 @@ class EntityViewPlaceholderExpander {
 	 * the meaning of each placeholder name, as used by EntityView.
 	 *
 	 * @param string $name the name (or kind) of placeholder; determines how the expansion is done.
-	 * @param mixed ... additional arguments associated with the placeholder
+	 * @param mixed [$arg,...] Additional arguments associated with the placeholder.
 	 *
 	 * @return string HTML to be substituted for the placeholder in the output.
 	 */
