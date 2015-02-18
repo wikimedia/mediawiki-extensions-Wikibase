@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d8d14459",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T17:05:04Z",
+      "side": 1,
+      "message": "All this sounds like it could be split into three or more patches. Not sure if it\u0027s worth the trouble, but would make reviewing this much easier.",
+      "revId": "63b1dc59ba30a99f88c20e266b427923cbb63edd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
