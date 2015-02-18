@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_22f5a7ea",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-18T13:58:27Z",
+      "side": 1,
+      "message": "Sounds like it would render Snak objects: Better: SnakSerializationRenderer, LuaSnakRenderer, ...",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_42e9c30e",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-18T13:58:27Z",
+      "side": 1,
+      "message": "what\u0027s the expected structure?",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_62e63f41",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-18T13:58:27Z",
+      "side": 1,
+      "message": "wikitext",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_82e35b31",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-18T13:58:27Z",
+      "side": 1,
+      "message": "commaList should be accessible directly from Lua.",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_025d0bf0",
+        "filename": "client/tests/phpunit/includes/scribunto/SnakRendererTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-18T13:58:27Z",
+      "side": 1,
+      "message": "The order is not guaranteed!",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
