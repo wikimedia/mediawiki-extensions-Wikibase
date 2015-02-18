@@ -173,6 +173,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 				array('Q2', 'Q2_labels'),
 				array('Q3', 'Q3_links'),
 				array('Q4', 'Q4_claims'),
+				array('Q5', 'Q5_badges'),
 				array('Q6', 'Q6_qualifiers'),
 				array('Q7', 'Q7_references'),
 		);

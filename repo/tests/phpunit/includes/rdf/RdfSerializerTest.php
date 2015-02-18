@@ -44,6 +44,16 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @var RdfBuilderTest
+	 */
+	private $rdfTest;
+
+	public function setUp() {
+		parent::setUp();
+		$this->rdfTest = new RdfBuilderTest();
+	}
+
+	/**
 	 * @return EntityRevision[]
 	 */
 	private function getTestEntityRevisions() {
@@ -168,72 +178,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	 * @return EasyRdf_Graph[]
 	 */
 	private function getTestGraphs() {
-		static $graphs = array();
-
-		if ( !empty( $graphs ) ) {
-			return $graphs;
-		}
-
-		$builder = self::newRdfBuilder( 'rdf' ); //XXX: ugh, dummy object
-
-		foreach ( $builder->getNamespaces() as $gname => $uri ) {
-			EasyRdf_Namespace::set( $gname, $uri );
-		}
-
-		$entities = self::getTestEntities();
-
-		$graphs['empty'] = self::makeEntityGraph(
-			$entities['empty']->getId(),
-			array(
-				'rdf:type' => RdfBuilder::NS_ONTOLOGY . ':Item',
-			),
-			array(
-				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
-				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['empty']->getId() ),
-				'schema:version' => new EasyRdf_Literal( 23, null, 'xsd:integer' ),
-				'schema:dateModified' => new EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
-			)
-		);
-
-		$graphs['terms'] = self::makeEntityGraph(
-			$entities['terms']->getId(),
-			array(
-				'rdf:type' => RdfBuilder::NS_ONTOLOGY . ':Item',
-				'rdfs:label' => array(
-					new EasyRdf_Literal( 'Berlin', 'en' ),
-					new EasyRdf_Literal( 'Берлин', 'ru' )
-				),
-				'skos:prefLabel' => array(
-					new EasyRdf_Literal( 'Berlin', 'en' ),
-					new EasyRdf_Literal( 'Берлин', 'ru' )
-				),
-				'schema:name' => array(
-					new EasyRdf_Literal( 'Berlin', 'en' ),
-					new EasyRdf_Literal( 'Берлин', 'ru' )
-				),
-				'schema:description' => array(
-					new EasyRdf_Literal( 'German city', 'en' ),
-					new EasyRdf_Literal( 'столица и одновременно земля Германии', 'ru' )
-				),
-				'skos:altLabel' => array(
-					new EasyRdf_Literal( 'Berlin, Germany', 'en' ),
-					new EasyRdf_Literal( 'Land Berlin', 'en' ),
-					new EasyRdf_Literal( 'Berlin', 'ru' )
-				),
-			),
-
-			array(
-				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
-				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['terms']->getId() ),
-				'schema:version' => new EasyRdf_Literal( 23, null, 'xsd:integer' ),
-				'schema:dateModified' => new EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
-			)
-		);
-
-		// TODO: test links
-		// TODO: test data values
-
-		return $graphs;
+		return $this->rdfTest->getTestGraphs();
 	}
 
 	private function getTestDataPatterns() {
