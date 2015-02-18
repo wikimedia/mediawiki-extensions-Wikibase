@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e7c4fa4_62f07fc4",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T14:19:33Z",
+      "side": 1,
+      "message": "This change seems somehow unrelated. Why is this required?",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_22f5a7ea",
         "filename": "client/includes/scribunto/SnakRenderer.php",
         "patchSetId": 10
@@ -13,6 +30,23 @@
       "writtenOn": "2015-02-18T13:58:27Z",
       "side": 1,
       "message": "Sounds like it would render Snak objects: Better: SnakSerializationRenderer, LuaSnakRenderer, ...",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c2a71307",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T14:19:33Z",
+      "side": 1,
+      "message": "Newline missing.",
       "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +87,40 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_82b59b31",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T14:19:33Z",
+      "side": 1,
+      "message": "Copy-paste doc, not correct.",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_22a7e70a",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T14:19:33Z",
+      "side": 1,
+      "message": "count() may have linear runtime, if you are unlucky. If you don\u0027t care about the actual number then don\u0027t count. empty() should be avoided in general but is perfect in exactly this case.",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_82e35b31",
         "filename": "client/includes/scribunto/SnakRenderer.php",
         "patchSetId": 10
@@ -64,6 +132,23 @@
       "writtenOn": "2015-02-18T13:58:27Z",
       "side": 1,
       "message": "commaList should be accessible directly from Lua.",
+      "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e2832f55",
+        "filename": "client/includes/scribunto/SnakRenderer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T14:19:33Z",
+      "side": 1,
+      "message": "This exact same method does exist in 3 classes now. Why is this not part of the UsageAccumulator? I tried to solve this, see my following patches.",
       "revId": "664976d237f268f0d926bfc2cb47b1d97153794a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
