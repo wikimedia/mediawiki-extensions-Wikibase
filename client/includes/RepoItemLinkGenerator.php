@@ -61,12 +61,12 @@ class RepoItemLinkGenerator {
 	 * @param Title $title
 	 * @param string $action
 	 * @param bool $isAnon
-	 * @param array|null $noExternalLangLinks
+	 * @param string[]|null $noExternalLangLinks
 	 * @param string|null $prefixedId
 	 *
 	 * @return string[]|null
 	 */
-	public function getLink( Title $title, $action, $isAnon, $noExternalLangLinks, $prefixedId ) {
+	public function getLink( Title $title, $action, $isAnon, array $noExternalLangLinks = null, $prefixedId ) {
 		$editLink = null;
 
 		if ( $this->canHaveLink( $title, $action, $noExternalLangLinks ) ) {
@@ -88,11 +88,11 @@ class RepoItemLinkGenerator {
 	/**
 	 * @param Title $title
 	 * @param string $action
-	 * @param mixed $noExternalLangLinks
+	 * @param string[]|null $noExternalLangLinks
 	 *
 	 * @return bool
 	 */
-	private function canHaveLink( Title $title, $action, $noExternalLangLinks ) {
+	private function canHaveLink( Title $title, $action, array $noExternalLangLinks = null ) {
 		if ( $action !== 'view' ) {
 			return false;
 		}
@@ -109,16 +109,12 @@ class RepoItemLinkGenerator {
 	}
 
 	/**
-	 * @param mixed
+	 * @param string[]|null $noExternalLangLinks
 	 *
 	 * @return bool
 	 */
-	private function isSuppressed( $noExternalLangLinks ) {
-		if ( $noExternalLangLinks === null || !in_array( '*', $noExternalLangLinks ) ) {
-			return false;
-		}
-
-		return true;
+	private function isSuppressed( array $noExternalLangLinks = null ) {
+		return $noExternalLangLinks !== null && in_array( '*', $noExternalLangLinks );
 	}
 
 	/**
