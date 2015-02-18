@@ -70,8 +70,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory( $typeMap ),
-			new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ) ),
-			$this->newEntityPerPageTable()
+			new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ) )
 		);
 
 		return array( $store, $lookup );

@@ -44,23 +44,15 @@ class WikiPageEntityStore implements EntityStore {
 	protected $idGenerator;
 
 	/**
-	 * @var EntityPerPage
-	 */
-	protected $entityPerPage;
-
-	/**
 	 * @param EntityContentFactory $contentFactory
 	 * @param IdGenerator $idGenerator
-	 * @param EntityPerPage $entityPerPage
 	 */
 	public function __construct(
 		EntityContentFactory $contentFactory,
-		IdGenerator $idGenerator,
-		EntityPerPage $entityPerPage
+		IdGenerator $idGenerator
 	) {
 		$this->contentFactory = $contentFactory;
 		$this->idGenerator = $idGenerator;
-		$this->entityPerPage = $entityPerPage;
 
 		$this->dispatcher = new GenericEventDispatcher( 'Wikibase\Lib\Store\EntityStoreWatcher' );
 	}
