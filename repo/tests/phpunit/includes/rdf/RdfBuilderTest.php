@@ -202,7 +202,9 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		return new RdfBuilder(
 			new SiteList(),
 			self::URI_BASE,
-			self::URI_DATA
+			self::URI_DATA,
+			null,
+			'full'
 		);
 	}
 
