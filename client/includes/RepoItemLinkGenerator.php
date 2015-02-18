@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client;
 
-use Title;
 use Html;
+use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\NamespaceChecker;
@@ -71,12 +71,12 @@ class RepoItemLinkGenerator {
 	 * @param Title $title
 	 * @param string $action
 	 * @param bool $hasLangLinks
-	 * @param array|null $noExternalLangLinks
+	 * @param string[]|null $noExternalLangLinks
 	 * @param string|null $prefixedId
 	 *
 	 * @return string|null HTML or null for no link
 	 */
-	public function getLink( Title $title, $action, $hasLangLinks, $noExternalLangLinks, $prefixedId ) {
+	public function getLink( Title $title, $action, $hasLangLinks, array $noExternalLangLinks = null, $prefixedId ) {
 		$entityId = null;
 		if ( is_string( $prefixedId ) ) {
 			$entityId = $this->entityIdParser->parse( $prefixedId );
@@ -96,11 +96,11 @@ class RepoItemLinkGenerator {
 	/**
 	 * @param Title $title
 	 * @param string $action
-	 * @param mixed $noExternalLangLinks
+	 * @param string[]|null $noExternalLangLinks
 	 *
 	 * @return bool
 	 */
-	private function canHaveLink( Title $title, $action, $noExternalLangLinks ) {
+	private function canHaveLink( Title $title, $action, array $noExternalLangLinks = null ) {
 		if ( $action !== 'view' ) {
 			return false;
 		}
@@ -116,11 +116,11 @@ class RepoItemLinkGenerator {
 	}
 
 	/**
-	 * @param null|array $noExternalLangLinks
+	 * @param string[]|null $noExternalLangLinks
 	 *
 	 * @return bool
 	 */
-	private function isSuppressed( $noExternalLangLinks ) {
+	private function isSuppressed( array $noExternalLangLinks = null ) {
 		return $noExternalLangLinks !== null && in_array( '*', $noExternalLangLinks );
 	}
 
