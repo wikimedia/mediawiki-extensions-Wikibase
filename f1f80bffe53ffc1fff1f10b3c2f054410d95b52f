@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dd74d6ce",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T16:46:04Z",
+      "side": 1,
+      "message": "I prefer languageCode.",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_223da7db",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T16:46:04Z",
+      "side": 1,
+      "message": "The oder of these parameters is a bit odd. I would try, for example, to group all language/message related parameters together. But that\u0027s more a matter of taste.",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bd99da23",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T16:46:04Z",
+      "side": 1,
+      "message": "One could argue that this parameter should be in the method, not in the constructor.",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7d87c2ba",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T16:46:04Z",
+      "side": 1,
+      "message": "One could argue that this parameter should be in the method, not in the constructor.",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_02518b3a",
+        "filename": "view/resources/resources.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T16:46:04Z",
+      "side": 1,
+      "message": "Oh. I finally understood the advantage of the underscore naming scheme. The namespace initialization is guaranteed to be first if stuff is ordered alphabetically.",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a2abf718",
+        "filename": "view/tests/qunit/ViewFactory.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-18T16:46:04Z",
+      "side": 1,
+      "message": "fooView? What happens if you just inline the empty object everywhere? I think this would be better in terms of readability.",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
