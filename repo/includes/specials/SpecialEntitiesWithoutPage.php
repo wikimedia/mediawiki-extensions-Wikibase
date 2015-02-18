@@ -112,8 +112,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		}
 
 		$this->language = $request->getText( 'language', $this->language );
-		// FIXME: ContentLanguages should have a hasLanguage method
-		if ( $this->language !== '' && !in_array( $this->language, $this->termsLanguages->getLanguages() ) ) {
+		if ( $this->language !== '' && !$this->termsLanguages->hasLanguage( $this->language ) ) {
 			$this->showErrorHTML( $this->msg( 'wikibase-entitieswithoutlabel-invalid-language', $this->language )->parse() );
 			$this->language = '';
 		}
