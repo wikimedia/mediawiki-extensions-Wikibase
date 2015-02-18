@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Usage;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * Interface for objects accumulating usage tracking information for a given page.
@@ -13,11 +14,19 @@ use Wikibase\DataModel\Entity\EntityId;
 interface UsageAccumulator {
 
 	/**
-	 * Registers the usage an entity's label (in the local content language).
+	 * Registers the usage of an entity's label (in the local content language).
 	 *
 	 * @param EntityId $id
 	 */
 	public function addLabelUsage( EntityId $id );
+
+	/**
+	 * Registers the usage of entity's labels (in the local content language), if the provided
+	 * snaks are PropertyValueSnaks that contain EntityIdValues.
+	 *
+	 * @param Snak[] $snaks
+	 */
+	public function addLabelUsageForSnaks( array $snaks );
 
 	/**
 	 * Registers the usage of an entity's local page title, e.g. to refer to

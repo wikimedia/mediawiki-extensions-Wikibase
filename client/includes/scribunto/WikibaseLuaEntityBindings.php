@@ -166,25 +166,13 @@ class WikibaseLuaEntityBindings {
 	}
 
 	/**
-	 * @todo Share code with LanguageAwareRenderer::trackUsage
 	 * @param Snak[] $snaks
 	 */
 	private function trackUsage( array $snaks ) {
 		// Note: we track any EntityIdValue as a label usage.
 		// This is making assumptions about what the respective formatter actually does.
 		// Ideally, the formatter itself would perform the tracking, but that seems nasty to model.
-
-		foreach ( $snaks as $snak ) {
-			if ( !( $snak instanceof PropertyValueSnak ) ) {
-				continue;
-			}
-
-			$value = $snak->getDataValue();
-
-			if ( $value instanceof EntityIdValue ) {
-				$this->usageAccumulator->addLabelUsage( $value->getEntityId() );
-			}
-		}
+		$this->usageAccumulator->addLabelUsageForSnaks( $snaks );
 	}
 
 	/**
