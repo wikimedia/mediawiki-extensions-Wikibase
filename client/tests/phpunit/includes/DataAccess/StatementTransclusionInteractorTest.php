@@ -2,15 +2,14 @@
 
 namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
+use DataValues\StringValue;
 use Language;
 use PHPUnit_Framework_TestCase;
-use DataValues\StringValue;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataAccess\StatementTransclusionInteractor;
+use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\SnaksFinder;
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -34,41 +33,17 @@ use Wikibase\Lib\SnakFormatter;
 class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @param array $usages
-	 *
-	 * @return UsageAccumulator
-	 */
-	private function getUsageAccumulator( array &$usages ) {
-		$mock = $this->getMockBuilder( 'Wikibase\Client\Usage\UsageAccumulator' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$mock->expects( $this->any() )
-			->method( 'addLabelUsage' )
-			->will( $this->returnCallback(
-				function ( EntityId $id ) use ( &$usages ) {
-					$usages[] = new EntityUsage( $id, EntityUsage::LABEL_USAGE );
-				}
-			) );
-
-		$mock->expects( $this->never() )
-			->method( 'addAllUsage' );
-
-		$mock->expects( $this->never() )
-			->method( 'addSiteLinksUsage' );
-
-		return $mock;
-	}
-
-	/**
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param string $languageCode
-	 * @param array &$usages
 	 *
 	 * @return StatementTransclusionInteractor
 	 */
-	private function getInteractor( PropertyIdResolver $propertyIdResolver, SnaksFinder $snaksFinder, $languageCode ) {
+	private function getInteractor(
+		PropertyIdResolver $propertyIdResolver,
+		SnaksFinder $snaksFinder,
+		$languageCode
+	) {
 		$targetLanguage = Language::factory( $languageCode );
 
 		return new StatementTransclusionInteractor(
@@ -87,7 +62,6 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 			'Q42$2' => new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
 		);
 
-		$usages = array();
 		$renderer = $this->getInteractor(
 			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder( $snaks ),
@@ -95,14 +69,13 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$q42 = new ItemId( 'Q42' );
-		$result = $renderer->render( $q42, $this->getUsageAccumulator( $usages ) , 'p1337' );
+		$result = $renderer->render( $q42, new HashUsageAccumulator(), 'p1337' );
 
 		$expected = 'a kitten!, two kittens!!';
 		$this->assertEquals( $expected, $result );
 	}
 
 	public function testRender_PropertyLabelNotResolvedException() {
-		$usages = array();
 		$renderer = $this->getInteractor(
 			$this->getPropertyIdResolverForPropertyNotFound(),
 			$this->getSnaksFinder( array() ),
@@ -110,7 +83,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$this->setExpectedException( 'Wikibase\Lib\PropertyLabelNotResolvedException' );
-		$renderer->render( new ItemId( 'Q42' ), $this->getUsageAccumulator( $usages ), 'blah' );
+		$renderer->render( new ItemId( 'Q42' ), new HashUsageAccumulator(), 'blah' );
 	}
 
 	public function testRender_trackUsage() {
@@ -122,18 +95,18 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 			'Q42$23' => new PropertyValueSnak( $propertyId, new EntityIdValue( $q23 ) )
 		);
 
-		$usages = array();
+		$accumulator = new HashUsageAccumulator();
 		$renderer = $this->getInteractor( $this->getPropertyIdResolver(), $this->getSnaksFinder( $snaks ), 'en' );
 
 		$q42 = new ItemId( 'Q42' );
-		$renderer->render( $q42, $this->getUsageAccumulator( $usages ), 'p1337' );
+		$renderer->render( $q42, $accumulator, 'p1337' );
 
 		$expectedUsage = array(
 			new EntityUsage( $q22, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q23, EntityUsage::LABEL_USAGE ),
 		);
 
-		$this->assertSameUsages( $expectedUsage, $usages );
+		$this->assertSameUsages( $expectedUsage, $accumulator->getUsages() );
 	}
 
 	/**

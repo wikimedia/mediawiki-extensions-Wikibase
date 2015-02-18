@@ -1,10 +1,14 @@
 <?php
+
 namespace Wikibase\Client\Usage\Tests;
 
 use PHPUnit_Framework_Assert as Assert;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
  * Contract tester for implementations of the UsageAccumulator interface
@@ -30,11 +34,19 @@ class UsageAccumulatorContractTester  {
 	public function testAddGetUsage() {
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
+		$q4 = new ItemId( 'Q4' );
 
+		// FIXME: Split into separate tests.
+		// FIXME: Why is OTHER_USAGE missing?
 		$this->usageAccumulator->addSiteLinksUsage( $q2 );
 		$this->usageAccumulator->addLabelUsage( $q2 );
 		$this->usageAccumulator->addTitleUsage( $q2 );
 		$this->usageAccumulator->addAllUsage( $q3 );
+
+		// Testing convenience methods
+		$this->usageAccumulator->addLabelUsageForSnaks( array(
+			new PropertyValueSnak( new PropertyId( 'P4' ), new EntityIdValue( $q4 ) ),
+		) );
 
 		$usage = $this->usageAccumulator->getUsages();
 
@@ -43,6 +55,7 @@ class UsageAccumulatorContractTester  {
 			new EntityUsage( $q2, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q2, EntityUsage::TITLE_USAGE ),
 			new EntityUsage( $q3, EntityUsage::ALL_USAGE ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
 		);
 
 		$this->assertSameUsages( $expected, $usage );
