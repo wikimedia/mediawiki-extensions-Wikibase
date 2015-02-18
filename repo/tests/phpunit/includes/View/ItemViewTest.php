@@ -11,6 +11,7 @@ use Wikibase\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\Repo\View\ItemView
+ * @covers Wikibase\Repo\View\EntityView
  *
  * @group Wikibase
  * @group WikibaseItemView

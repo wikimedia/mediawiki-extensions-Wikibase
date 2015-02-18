@@ -20,7 +20,7 @@ use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
 
 /**
- * @covers Wikibase\ClaimHtmlGenerator
+ * @covers Wikibase\Repo\View\ClaimHtmlGenerator
  *
  * @todo more specific tests for all parts of claim html formatting,
  * and use mock SnakHtmlGenerator

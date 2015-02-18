@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use MediaWikiLangTestCase;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
@@ -18,7 +19,7 @@ use Wikibase\Template\TemplateRegistry;
  * @author Daniel Kinzler
  * @author Adrian Lang
  */
-class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
+class SectionEditLinkGeneratorTest extends MediaWikiLangTestCase {
 
 	/**
 	 * @dataProvider getHtmlForEditSectionProvider
