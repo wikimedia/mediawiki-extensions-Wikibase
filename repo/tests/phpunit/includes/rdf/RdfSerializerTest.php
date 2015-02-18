@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use EasyRdf_Graph;
 use SiteList;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
 use Wikibase\RdfSerializer;
 
@@ -31,6 +30,16 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	);
 
 	/**
+	 * @var RdfBuilderTest
+	 */
+	private $rdfTest;
+
+	public function setUp() {
+		parent::setUp();
+		$this->rdfTest = new RdfBuilderTest();
+	}
+
+	/**
 	 * @return EntityRevision[]
 	 */
 	private function getTestEntityRevisions() {
@@ -48,14 +57,14 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	 * @return Entity[]
 	 */
 	private function getTestEntities() {
-		return RdfBuilderTest::getTestEntities();
+		return $this->rdfTest->getTestEntities();
 	}
 
 	/**
 	 * @return EasyRdf_Graph[]
 	 */
 	private function getTestGraphs() {
-		return RdfBuilderTest::getTestGraphs();
+		return $this->rdfTest->getTestGraphs();
 	}
 
 	private function getTestDataPatterns() {
@@ -101,7 +110,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 
 	private function newRdfSerializer( $formatName ) {
 		$format = RdfSerializer::getFormat( $formatName );
-		$mockRepo = new MockRepository();
+		$mockRepo = RdfBuilderTest::getMockRepository();
 
 		foreach( $this->getTestEntities() as $entity ) {
 			$mockRepo->putEntity( $entity );
@@ -111,8 +120,9 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			$format,
 			RdfBuilderTest::URI_BASE,
 			RdfBuilderTest::URI_DATA,
-			new SiteList(),
-			$mockRepo
+			RdfBuilderTest::getSiteList(),
+			$mockRepo,
+			RdfSerializer::PRODUCE_ALL
 		);
 	}
 
@@ -135,6 +145,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideBuildGraphForEntityRevision() {
+		$this->rdfTest = new RdfBuilderTest();
 		$entityRevs = $this->getTestEntityRevisions();
 		$graphs = $this->getTestGraphs();
 
@@ -179,6 +190,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideSerializeRdf() {
+		$this->rdfTest = new RdfBuilderTest();
 		$graphs = $this->getTestGraphs();
 		$patterns = $this->getTestDataPatterns();
 
@@ -218,6 +230,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideSerializeEntityRevision() {
+		$this->rdfTest = new RdfBuilderTest();
 		$entityRevs = $this->getTestEntityRevisions();
 		$patterns = $this->getTestDataPatterns();
 
