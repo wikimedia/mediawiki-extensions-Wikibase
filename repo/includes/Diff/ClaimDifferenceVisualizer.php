@@ -92,9 +92,10 @@ class ClaimDifferenceVisualizer {
 
 		$referenceChanges = $claimDifference->getReferenceChanges();
 		if ( $referenceChanges !== null ) {
+			$msg = wfMessage( 'wikibase-diffview-reference' )->inLanguage( $this->languageCode );
 			$html .= $this->visualizeSnakListChanges(
 				$referenceChanges,
-				wfMessage( 'wikibase-diffview-reference' )->inLanguage( $this->languageCode ),
+				$msg,
 				$oldestMainSnak,
 				$newestMainSnak
 			);
@@ -176,11 +177,12 @@ class ClaimDifferenceVisualizer {
 		Snak $oldestMainSnak,
 		Snak $newestMainSnak
 	) {
+		$msg = wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->languageCode );
 		$valueFormatter = new DiffOpValueFormatter(
 			$this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak ) . ' / ' .
-				wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->languageCode )->parse(),
+				$msg->parse(),
 			$this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak ) . ' / ' .
-				wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->languageCode )->parse(),
+				$msg->parse(),
 			$this->getRankHtml( $rankChange->getOldValue() ),
 			$this->getRankHtml( $rankChange->getNewValue() )
 		);
@@ -204,8 +206,8 @@ class ClaimDifferenceVisualizer {
 
 		// Messages: wikibase-diffview-rank-preferred, wikibase-diffview-rank-normal,
 		// wikibase-diffview-rank-deprecated
-		$msg = wfMessage( 'wikibase-diffview-rank-' . $rank );
-		return $msg->inLanguage( $this->languageCode )->parse();
+		$msg = wfMessage( 'wikibase-diffview-rank-' . $rank )->inLanguage( $this->languageCode );
+		return $msg->parse();
 	}
 
 	/**
@@ -297,10 +299,11 @@ class ClaimDifferenceVisualizer {
 	) {
 		$html = '';
 
+		$msg = wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->languageCode );
 		$oldClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak ) . ' / ' .
-			wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->languageCode )->parse();
+			$msg->parse();
 		$newClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak ) . ' / ' .
-			wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->languageCode )->parse();
+			$msg->parse();
 
 		foreach ( $changes as $change ) {
 			$newVal = $oldVal = null;
