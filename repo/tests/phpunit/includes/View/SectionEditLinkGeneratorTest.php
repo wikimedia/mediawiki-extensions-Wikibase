@@ -2,7 +2,9 @@
 
 namespace Wikibase\Test;
 
-use MediaWikiLangTestCase;
+use MediaWikiTestCase;
+use SpecialPage;
+use SpecialPageFactory;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
@@ -19,8 +21,38 @@ use Wikibase\Template\TemplateRegistry;
  * @author Daniel Kinzler
  * @author Adrian Lang
  */
-class SectionEditLinkGeneratorTest extends MediaWikiLangTestCase {
+class SectionEditLinkGeneratorTest extends MediaWikiTestCase {
 
+	protected function setUp() {
+		// Make sure wgSpecialPages has the special pages this tests use
+		$this->setMwGlobals(
+			'wgSpecialPages',
+			array(
+				'Version' => new SpecialPage( 'Version' ),
+				'SetLabel' => new SpecialPage( 'SetLabel' ),
+				'FooBar' => new SpecialPage( 'FooBar' )
+			)
+		);
+
+		SpecialPageFactory::resetList();
+		$doubleLanguage = $this->getMock( 'Language', array( 'getSpecialPageAliases' ) );
+		$doubleLanguage->mCode = 'en';
+		$doubleLanguage->expects( $this->any() )
+			->method( 'getSpecialPageAliases' )
+			->will( $this->returnValue(
+				array(
+					'Version' => array( 'Version' ),
+					'SetLabel' => array( 'SetLabel' ),
+					'FooBar' => array( 'FooBar' ),
+				)
+			) );
+
+		$this->setMwGlobals(
+			'wgContLang',
+			$doubleLanguage
+		);
+		parent::setUp();
+	}
 	/**
 	 * @dataProvider getHtmlForEditSectionProvider
 	 */
@@ -91,6 +123,14 @@ class SectionEditLinkGeneratorTest extends MediaWikiLangTestCase {
 					'attributes' => array( 'href' => 'regexp:+\bSpecial:SetLabel/Q1/de$+' )
 				),
 				'SetLabel',
+				array( 'Q1', 'de' ),
+			),
+			array(
+				array(
+					'tag' => 'a',
+					'attributes' => array( 'href' => 'regexp:+\bSpecial:FooBar/Q1/de$+' )
+				),
+				'FooBar',
 				array( 'Q1', 'de' ),
 			)
 		);
