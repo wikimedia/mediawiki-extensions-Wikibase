@@ -34,6 +34,24 @@
       "revId": "be1e3a4c314af12f248bcfbde53820afd92559e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bf2c64f3",
+        "filename": "repo/includes/specials/SpecialWikibasePage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-02-19T18:31:17Z",
+      "side": 1,
+      "message": "Set to protected by Thiemo Mättig with Iff0728ccaef50ec41dd7a58a431aee6ceec2a493.",
+      "parentUuid": "0e6cb3ef_c39f9c61",
+      "revId": "be1e3a4c314af12f248bcfbde53820afd92559e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
