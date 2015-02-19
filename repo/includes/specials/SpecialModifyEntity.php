@@ -116,20 +116,17 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @param string $subPage
 	 */
 	protected function prepareArguments( $subPage ) {
-		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
+		$parts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
 
-		// Get id
-		$rawId = $this->getRequest()->getVal( 'id', isset( $parts[0] ) ? $parts[0] : null );
+		$idString = $this->getRequest()->getVal( 'id', isset( $parts[0] ) ? $parts[0] : null );
 
-		if ( !$rawId ) {
+		if ( !$idString ) {
 			return;
 		}
 
-		$id = $this->parseEntityId( $rawId );
-
-		$this->entityRevision = $this->loadEntity( $id );
+		$entityId = $this->parseEntityId( $idString );
+		$this->entityRevision = $this->loadEntity( $entityId );
 	}
-
 
 	/**
 	 * @todo could factor this out into a special page form builder and renderer
@@ -142,7 +139,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		);
 
 		$html = $copyrightView->getHtml( $this->getLanguage() );
-
 		$this->getOutput()->addHTML( $html );
 	}
 
@@ -220,16 +216,15 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @param Entity $entity
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	protected function getFormElements( Entity $entity = null ) {
-		return Html::element(
-			'label',
-			array(
-				'for' => 'wb-modifyentity-id',
-				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-modifyentity-id' )->text()
+		$id = 'wb-modifyentity-id';
+
+		return Html::label(
+			$this->msg( 'wikibase-modifyentity-id' )->text(),
+			$id,
+			array( 'class' => 'wb-label' )
 		)
 		. Html::input(
 			'id',
@@ -237,7 +232,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			'text',
 			array(
 				'class' => 'wb-input',
-				'id' => 'wb-modifyentity-id'
+				'id' => $id
 			)
 		)
 		. Html::element( 'br' );
@@ -266,13 +261,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * continue by calling modifyEntity().
 	 */
 	protected function validateInput() {
-		$request = $this->getRequest();
-
-		if ( $this->entityRevision === null || !$request->wasPosted() ) {
-			return false;
-		}
-
-		return true;
+		return $this->entityRevision !== null && $this->getRequest()->wasPosted();
 	}
 
 	/**
