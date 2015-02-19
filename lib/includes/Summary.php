@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use Language;
 use LogicException;
 
 /**
@@ -18,17 +17,17 @@ use LogicException;
 class Summary {
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	protected $moduleName;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	protected $actionName;
 
 	/**
-	 * @var Language
+	 * @var string|null
 	 */
 	protected $language;
 
@@ -55,22 +54,24 @@ class Summary {
 	const USE_ALL = 6;
 
 	/**
-	 * Constructs a new Summary
-	 *
 	 * @since 0.4
 	 *
-	 * @param string $moduleName The module part of the auto comment
-	 * @param string $actionName The action part of the auto comment
-	 * @param string $language   The language to use as the second auto comment argument
+	 * @param string|null $moduleName The module part of the auto comment
+	 * @param string|null $actionName The action part of the auto comment
+	 * @param string|null $languageCode The language code to use as the second auto comment argument
 	 * @param array $commentArgs The arguments to the auto comment
 	 * @param array $summaryArgs The arguments to the auto summary
 	 */
-	public function __construct( $moduleName = null, $actionName = null, $language = null,
-		$commentArgs = array(), $summaryArgs = array()
+	public function __construct(
+		$moduleName = null,
+		$actionName = null,
+		$languageCode = null,
+		$commentArgs = array(),
+		$summaryArgs = array()
 	) {
 		$this->moduleName = $moduleName;
 		$this->actionName = $actionName;
-		$this->language = $language === null ? null : (string)$language;
+		$this->language = $languageCode === null ? null : (string)$languageCode;
 		$this->commentArgs = $commentArgs;
 		$this->summaryArgs = $summaryArgs;
 	}
@@ -80,7 +81,7 @@ class Summary {
 	 *
 	 * @since 0.4
 	 *
-	 * @param string $summary edit summary provided by the user
+	 * @param string|null $summary edit summary provided by the user
 	 */
 	public function setUserSummary( $summary = null ) {
 		$this->userSummary = $summary === null ? null : (string)$summary;
@@ -91,10 +92,10 @@ class Summary {
 	 *
 	 * @since 0.4
 	 *
-	 * @param string $lang the language code
+	 * @param string|null $languageCode
 	 */
-	public function setLanguage( $lang = null ) {
-		$this->language = $lang === null ? null : (string)$lang;
+	public function setLanguage( $languageCode = null ) {
+		$this->language = $languageCode === null ? null : (string)$languageCode;
 	}
 
 	/**
@@ -113,7 +114,7 @@ class Summary {
 	 *
 	 * @since 0.4
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function getModuleName() {
 		return $this->moduleName;
@@ -124,7 +125,7 @@ class Summary {
 	 *
 	 * @since 0.4
 	 *
-	 * @param string $name
+	 * @param string|null $name
 	 */
 	public function setAction( $name ) {
 		$this->actionName = $name === null ? null : (string)$name;
