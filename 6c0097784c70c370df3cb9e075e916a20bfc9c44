@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7c5a5a54",
+        "filename": "repo/tests/phpunit/includes/Notifications/ChangeNotifierTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T17:01:52Z",
+      "side": 1,
+      "message": "that was much more readable before :)",
+      "revId": "6c0097784c70c370df3cb9e075e916a20bfc9c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
