@@ -19,32 +19,32 @@ class Summary {
 	/**
 	 * @var string|null
 	 */
-	protected $moduleName;
+	private $moduleName;
 
 	/**
 	 * @var string|null
 	 */
-	protected $actionName;
+	private $actionName;
 
 	/**
 	 * @var string|null
 	 */
-	protected $language;
+	private $languageCode;
 
 	/**
 	 * @var array
 	 */
-	protected $commentArgs;
+	private $commentArgs;
 
 	/**
 	 * @var array
 	 */
-	protected $summaryArgs;
+	private $summaryArgs;
 
 	/**
 	 * @var string
 	 */
-	protected $userSummary;
+	private $userSummary;
 
 	/**
 	 * Indicates a specific type of formatting
@@ -71,7 +71,7 @@ class Summary {
 	) {
 		$this->moduleName = $moduleName;
 		$this->actionName = $actionName;
-		$this->language = $languageCode === null ? null : (string)$languageCode;
+		$this->languageCode = $languageCode === null ? null : (string)$languageCode;
 		$this->commentArgs = $commentArgs;
 		$this->summaryArgs = $summaryArgs;
 	}
@@ -95,7 +95,7 @@ class Summary {
 	 * @param string|null $languageCode
 	 */
 	public function setLanguage( $languageCode = null ) {
-		$this->language = $languageCode === null ? null : (string)$languageCode;
+		$this->languageCode = $languageCode === null ? null : (string)$languageCode;
 	}
 
 	/**
@@ -161,7 +161,7 @@ class Summary {
 	 * @return string|null
 	 */
 	public function getLanguageCode() {
-		return $this->language;
+		return $this->languageCode;
 	}
 
 	/**
