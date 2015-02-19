@@ -117,7 +117,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$instance = clone $baseInstance;
 
 		$instance->setReferences( new ReferenceList( array(
-			new Reference( new SnakList(
+			new Reference( array(
 				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) )
 			) )
 		) ) );
@@ -145,14 +145,13 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testSetReferences( Statement $statement ) {
 		$references = new ReferenceList( array(
-			new Reference( new SnakList(
+			new Reference( array(
 				new PropertyValueSnak(
 					new PropertyId( 'P1' ),
 					new StringValue( 'a' )
 				)
 			) )
 		) );
-
 
 		$statement->setReferences( $references );
 
