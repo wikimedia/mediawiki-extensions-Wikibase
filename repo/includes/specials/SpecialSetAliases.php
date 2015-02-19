@@ -58,7 +58,8 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 * @return Summary
 	 */
 	protected function setValue( $entity, $languageCode, $value ) {
-		$summary = $this->getSummary( 'wbsetaliases' );
+		$summary = new Summary( 'wbsetaliases' );
+
 		if ( $value === '' ) {
 			$changeOp = $this->termChangeOpFactory->newRemoveAliasesOp( $languageCode, $entity->getAliases( $languageCode ) );
 		} else {

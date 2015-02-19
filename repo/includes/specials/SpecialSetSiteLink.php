@@ -451,7 +451,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			return $status;
 		}
 
-		$summary = $this->getSummary( 'wbsetsitelink' );
+		$summary = new Summary( 'wbsetsitelink' );
 
 		if ( $pageName === '' ) {
 			$pageName = null;

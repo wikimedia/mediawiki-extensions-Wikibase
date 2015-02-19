@@ -59,7 +59,7 @@ class SpecialSetLabel extends SpecialModifyTerm {
 	 */
 	protected function setValue( $entity, $languageCode, $value ) {
 		$value = $value === '' ? null : $value;
-		$summary = $this->getSummary( 'wbsetlabel' );
+		$summary = new Summary( 'wbsetlabel' );
 
 		if ( $value === null ) {
 			$changeOp = $this->termChangeOpFactory->newRemoveLabelOp( $languageCode );

@@ -239,17 +239,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
-	 * Returns the summary for the given module.
-	 *
-	 * @param string|null $module
-	 *
-	 * @return Summary
-	 */
-	protected function getSummary( $module = null ) {
-		return new Summary( $module );
-	}
-
-	/**
 	 * Validates form input.
 	 *
 	 * The default implementation just checks whether a target entity was specified via a POST request.
