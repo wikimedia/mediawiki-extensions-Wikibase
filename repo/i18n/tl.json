@@ -3,7 +3,8 @@
 		"authors": [
 			"AnakngAraw",
 			"Jewel457",
-			"Sky Harbor"
+			"Sky Harbor",
+			"Leeheonjin"
 		]
 	},
 	"wikibase-desc": "Repositoryo ng datong may kayarian",
@@ -13,6 +14,8 @@
 	"wikibase-add": "idagdag",
 	"wikibase-save-inprogress": "Sinasagip...",
 	"wikibase-remove-inprogress": "Tinatanggal...",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Sa marami pang mga wika",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Isaayos/Kumpigurahin",
 	"wikibase-label-edit-placeholder": "ipasok ang katatakan",
 	"wikibase-description-edit-placeholder": "ipasok ang paglalarawan",
 	"wikibase-sitelink-site-edit-placeholder": "pook",
@@ -33,7 +36,6 @@
 	"wikibase-undo-badpage": "Masamang rebisyon: Ang rebisyong $2 ay hindi kaanib sa [[$1]].",
 	"wikibase-undo-firstrev": "Hindi maaaring hindi maisagawa ang paglikha ng pahina",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Isang halaga|$1 mga halaga}} ang hindi pa nasasagip",
-	"wikibase-sitelinksedittool-full": "Ang mga kawing sa mga pahina ay nakatakda na para sa lahat ng nakikilalang mga pook.",
 	"wikibase-disambiguation-title": "Paglilinaw para sa \"$1\"",
 	"wb-special-newitem-new-item-notification": "Nilikha ang bagong bagay na $1 at muling pinapunta sa pahina nito. Bumalik sa $2.",
 	"wikibase-aliases-label": "Nakikilala rin bilang:",

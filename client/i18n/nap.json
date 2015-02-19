@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"C.R."
+		]
+	},
+	"tooltip-t-wikibase": "Cullegamento d' 'o link a n'elemento 'e ll'archivio 'e date",
+	"wikibase-comment-update": "Elemento {{WBREPONAME}} cagnato",
+	"wikibase-dataitem": "Elemento {{WBREPONAME}}",
+	"wikibase-editlinks": "Cagna 'e cullegamiente",
+	"wikibase-editlinkstitle": "Càgna 'e cullegamente nterlenguistece",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Fà veré",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} cagnato"
+}

@@ -5,5 +5,11 @@
 			"C.R."
 		]
 	},
+	"wikibase-edit": "càgna",
+	"wikibase-add": "azzecca",
+	"wikibase-statements": "Dichiaraziune",
+	"wikibase-sitelinks-special": "Ati site",
+	"wikibase-aliases-empty": "Nun se trovano ll'aliasse. Nun se so' definite.",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|riferimento|riferimente}}",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 è nu redirect."
 }

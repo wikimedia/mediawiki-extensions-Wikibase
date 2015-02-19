@@ -321,18 +321,18 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	margin: 0 18em 0 15em;
 }
 
-.wikibase-statementgrouplistview .wb-new .wikibase-snakview-property {
+.wikibase-statementgrouplistview .wb-new .wikibase-statementview-mainsnak .wikibase-snakview-property {
 	padding: 10px;
 }
 
-.wikibase-statementgrouplistview .wb-new .wikibase-snakview-property input {
+.wikibase-statementgrouplistview .wb-new .wikibase-statementview-mainsnak .wikibase-snakview-property input {
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-.wikibase-statementgrouplistview .wb-new .wikibase-snakview-value {
+.wikibase-statementgrouplistview .wb-new .wikibase-statementview-mainsnak .wikibase-snakview-value {
 	min-height: 1.5em;
 	max-width: 32em;
 }
