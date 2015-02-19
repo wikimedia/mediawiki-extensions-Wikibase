@@ -19,6 +19,41 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_42453a46",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-19T07:33:39Z",
+      "side": 1,
+      "message": "Agree.",
+      "parentUuid": "6e7c4fa4_dd74d6ce",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c2514a12",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-19T07:33:39Z",
+      "side": 1,
+      "message": "We use \"licence\". :) And please add @since 0.5 below @licence.",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_223da7db",
         "filename": "view/resources/ViewFactory.js",
         "patchSetId": 5
@@ -36,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_22511e12",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-19T07:33:39Z",
+      "side": 1,
+      "message": "Agree. Should be some more documentation as well. (Most may just be copied from statementlistview or somewhere else.) And please add @constructor between @author and @param.",
+      "parentUuid": "6e7c4fa4_223da7db",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_bd99da23",
         "filename": "view/resources/ViewFactory.js",
         "patchSetId": 5
@@ -47,6 +100,23 @@
       "writtenOn": "2015-02-18T16:46:04Z",
       "side": 1,
       "message": "One could argue that this parameter should be in the method, not in the constructor.",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e256c608",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-19T07:33:39Z",
+      "side": 1,
+      "message": "Please add documentation to the private functions as well. Without any documentation, they will not show up at all in the generated documentation. Parameters and return values should always be documented anyhow.",
       "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -81,6 +151,23 @@
       "writtenOn": "2015-02-18T16:46:04Z",
       "side": 1,
       "message": "Oh. I finally understood the advantage of the underscore naming scheme. The namespace initialization is guaranteed to be first if stuff is ordered alphabetically.",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_02a2e2f9",
+        "filename": "view/tests/qunit/ViewFactory.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-19T07:33:39Z",
+      "side": 1,
+      "message": "Reminds me of a general question as QUnit.newEnvironment() is not required to be specified: Should it actually be specified, even if the MediaWiki environment is not actually accessed? The ViewFactory is independent from MediaWiki, no?",
       "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
