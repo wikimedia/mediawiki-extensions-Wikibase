@@ -131,7 +131,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * @todo could factor this out into a special page form builder and renderer
 	 */
-	protected function addCopyrightText() {
+	private function addCopyrightText() {
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
 			$this->rightsUrl,
