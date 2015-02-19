@@ -106,9 +106,11 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 			return $time;
 		}
 
+		// Actual MINUS SIGN (U+2212) instead of HYPHEN-MINUS (U+002D)
+		$sign = $matches[1] !== '+' ? "\xE2\x88\x92" : '+';
 		// Warning, never cast the year to integer to not run into 32-bit integer overflows!
 		$year = ltrim( $matches[2], '0' );
-		return $matches[1] . str_pad( $year, 4, '0', STR_PAD_LEFT ) . $matches[3];
+		return $sign . str_pad( $year, 4, '0', STR_PAD_LEFT ) . $matches[3];
 	}
 
 	/**
