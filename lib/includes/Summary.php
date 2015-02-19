@@ -2,8 +2,6 @@
 
 namespace Wikibase;
 
-use LogicException;
-
 /**
  * A Summary object can be used to build complex, translatable summaries.
  *
@@ -227,14 +225,6 @@ class Summary {
 	 */
 	public function getAutoSummaryArgs() {
 		return $this->summaryArgs;
-	}
-
-	/**
-	 * @deprecated Use SummaryFormatter instead
-	 * @throws LogicException
-	 */
-	public function toString() {
-		throw new LogicException( 'toString() is no longer supported, use SummaryFormatter instead' );
 	}
 
 }
