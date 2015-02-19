@@ -154,7 +154,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$user = $this->makeUser( 'ChangeNotifierTestUser' );
 		$user->setId( 17 );
 
-		$timestamp = '20140523' . '174822';
+		$timestamp = '20140523174822';
 		$content = $this->makeItemContent( new ItemId( 'Q12' ) );
 		$revisionId = 12345;
 
@@ -162,13 +162,13 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageUndeleted( $revision );
+		$fields = $change->getFields();
 
 		$this->assertFields(
 			array(
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
 				'revision_id' => $revisionId,
-				'time' => $timestamp,
 				'type' => 'wikibase-item~restore',
 				'info' => array(
 					'metadata' => array(
@@ -177,7 +177,12 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 					)
 				)
 			),
-			$change->getFields()
+			$fields
+		);
+
+		$this->assertTrue(
+			wfTimestamp() - $fields['time'] < 10,
+			"Page undeletions should use the current timestamp, not the one from the revision"
 		);
 	}
 
