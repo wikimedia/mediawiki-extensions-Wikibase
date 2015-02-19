@@ -86,8 +86,10 @@ class ChangeNotifier {
 		}
 
 		$change = $this->changeFactory->newFromUpdate( EntityChange::RESTORE, null, $content->getEntity() );
-
 		$change->setRevisionInfo( $revision );
+		// We don't want the change entries of newly undeleted pages to have
+		// the timestamp of the original change.
+		$change->setTimestamp( wfTimestampNow() );
 
 		$user = User::newFromId( $revision->getUser() );
 		$change->setMetadataFromUser( $user );
