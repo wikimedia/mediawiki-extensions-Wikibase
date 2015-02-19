@@ -370,7 +370,17 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onRecentChangeSave( RecentChange $recentChange ) {
-		if ( $recentChange->getAttribute( 'rc_log_type' ) === null ) {
+		$logType = $recentChange->getAttribute( 'rc_log_type' );
+		$logAction = $recentChange->getAttribute( 'rc_log_action' );
+		$revId = $recentChange->getAttribute( 'rc_this_oldid' );
+
+		if ( $revId <= 0 ) {
+			// If we don't have a revision ID, we have no chance to find the right change to update.
+			// NOTE: As of February 2015, RC entries for undeletion have rc_this_oldid = 0.
+			return true;
+		}
+
+		if ( $logType === null || ( $logType === 'delete' && $logAction === 'restore' ) ) {
 			$changesTable = ChangesTable::singleton();
 
 			$slave = $changesTable->getReadDb();
@@ -379,7 +389,7 @@ final class RepoHooks {
 			/** @var EntityChange $change */
 			$change = $changesTable->selectRow(
 				null,
-				array( 'revision_id' => $recentChange->getAttribute( 'rc_this_oldid' ) )
+				array( 'revision_id' => $revId )
 			);
 
 			$changesTable->setReadDb( $slave );

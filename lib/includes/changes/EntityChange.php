@@ -188,6 +188,7 @@ class EntityChange extends DiffChange {
 			'page_id' => $rc->getAttribute( 'rc_cur_id' ),
 			'rev_id' => $rc->getAttribute( 'rc_this_oldid' ),
 			'parent_id' => $rc->getAttribute( 'rc_last_oldid' ),
+			'time' => $rc->getAttribute( 'rc_timestamp' ),
 			'comment' => '',
 		) );
 	}
