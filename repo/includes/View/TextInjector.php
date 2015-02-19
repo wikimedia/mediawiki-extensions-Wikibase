@@ -47,8 +47,8 @@ class TextInjector {
 	 * Associates a new marker with the given parameters, and returns it.
 	 * All parameters passed to this function will be associated with the marker.
 	 *
-	 * @param $name
-	 * @param ...
+	 * @param string $name
+	 * @param string [$arg,...]
 	 *
 	 * @return string
 	 */
@@ -94,4 +94,5 @@ class TextInjector {
 		$html = str_replace( $search, $replace, $html );
 		return $html;
 	}
+
 }

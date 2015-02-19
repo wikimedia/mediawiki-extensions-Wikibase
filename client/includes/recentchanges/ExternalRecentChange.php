@@ -35,7 +35,7 @@ class ExternalRecentChange {
 	/**
 	 * Builds the attribute array for saving into recentchanges table
 	 *
-	 * @param array @attribs
+	 * @param array $attribs
 	 * @param Title $title
 	 */
 	private function buildAttributes( array $attribs, Title $title ) {

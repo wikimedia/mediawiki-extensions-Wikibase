@@ -17,7 +17,7 @@ use SiteStore;
 class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 
 	/**
-	 * @param SiteStore
+	 * @var SiteStore
 	 */
 	private $siteStore;
 
