@@ -31,19 +31,19 @@ $.extend( SELF.prototype, {
 	 * @type {string[]|null}
 	 * @private
 	 */
-	_languageNames: null,
+	_languageCodes: null,
 
 	/**
 	 * @inheritdoc
 	 */
 	getAll: function() {
-		// Cache language names
-		if( !this._languageNames && this._languageMap ) {
-			this._languageNames = $.map( this._languageMap, function( val, key ) {
+		// Cache language codes
+		if( !this._languageCodes && this._languageMap ) {
+			this._languageCodes = $.map( this._languageMap, function( val, key ) {
 				return key;
 			} );
 		}
-		return this._languageNames;
+		return this._languageCodes;
 	},
 
 	/**
