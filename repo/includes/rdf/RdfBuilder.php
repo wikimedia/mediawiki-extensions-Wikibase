@@ -47,11 +47,17 @@ class RdfBuilder {
 	const SKOS_URI = 'http://www.w3.org/2004/02/skos/core#';
 	const SCHEMA_ORG_URI = 'http://schema.org/';
 	const CC_URI = 'http://creativecommons.org/ns#';
+
 	const WIKIBASE_STATEMENT_QNAME = 'wikibase:Statement';
 	const WIKIBASE_REFERENCE_QNAME = 'wikibase:Reference';
+	const WIKIBASE_VALUE_QNAME = 'wikibase:Value';
+	const WIKIBASE_RANK_QNAME = 'wikibase:Rank';
+	const WIKIBASE_UNKNOWN_QNAME = "wikibase:Unknown";
+	const WIKIBASE_NOVALUE_QNAME = "wikibase:Novalue";
+
+
 	const PROV_QNAME = 'prov:wasDerivedFrom';
-	const UNKNOWN = "unknown";
-	const NOVALUE = "novalue";
+
 	const COMMONS_URI = 'http://commons.wikimedia.org/wiki/File:';
 	const GEO_URI = 'http://www.opengis.net/ont/geosparql#';
 	const PROV_URI = 'http://www.w3.org/ns/prov#';
@@ -90,13 +96,21 @@ class RdfBuilder {
 	 * @var String
 	 */
 	private $dataFormat;
+
 	const PRODUCE_BEST_STATEMENTS = 1;
-	const PRODUCE_ALL_STATEMENTS = 2;
-	const PRODUCE_QUALIFIERS = 4;
-	const PRODUCE_REFERENCES = 8;
-	const PRODUCE_SITELINKS = 16;
-	const PRODUCE_PROPERTIES = 32;
+	const PRODUCE_ALL_STATEMENTS  = 2;
+	const PRODUCE_QUALIFIERS      = 4;
+	const PRODUCE_REFERENCES      = 8;
+	const PRODUCE_SITELINKS       = 16;
+	const PRODUCE_PROPERTIES      = 32;
+	const PRODUCE_FULL_VALUES     = 64;
+
 	const PRODUCE_ALL = 0xFF;
+
+	/**
+	 * What the serializer would produce?
+	 * @var integer
+	 */
 	private $produceWhat;
 
 	/**
@@ -512,7 +526,7 @@ class RdfBuilder {
 		$entityResource = $this->getEntityResource( $entityId );
 
 		if ( $shortForm ) {
-			$this->addSnak( $entityResource, $snak, self::NS_DIRECT_CLAIM );
+			$this->addSnak( $entityResource, $snak, self::NS_DIRECT_CLAIM, true); // simple value here
 		} else {
 			$propertyQName = $this->getEntityQName( self::NS_ENTITY, $snak->getPropertyId() );
 			$statementResource = $this->getStatementResource( $statement );
@@ -521,6 +535,7 @@ class RdfBuilder {
 			if ( $this->shouldProduce( self::PRODUCE_PROPERTIES ) ) {
 				$this->entityMentioned( $snak->getPropertyId() );
 			}
+			$statementResource->addLiteral( self::WIKIBASE_RANK_QNAME, $statement->getRank() );
 		}
 	}
 
@@ -562,22 +577,45 @@ class RdfBuilder {
 	 * @param string $claimType
 	 *        	Type of the claim for which we're using the snak
 	 */
-	private function addSnak( EasyRdf_Resource $target, SnakObject $snak, $claimType ) {
+	private function addSnak( EasyRdf_Resource $target, SnakObject $snak, $claimType, $simpleValue = false ) {
 		$propertyId = $snak->getPropertyId();
 		switch ( $snak->getType() ) {
 			case 'value' :
-				$this->addStatementValue( $target, $propertyId, $snak->getDataValue(), $claimType );
+				$this->addStatementValue( $target, $propertyId, $snak->getDataValue(), $claimType, $simpleValue );
 				break;
 			case 'somevalue' :
 				$propertyValueQName = $this->getEntityQName( $claimType, $propertyId );
-				$unknown = $this->getEntityTypeQName( self::UNKNOWN );
-				$target->addResource( $propertyValueQName, $unknown );
+				$target->addResource( $propertyValueQName, self::WIKIBASE_UNKNOWN_QNAME );
 				break;
 			case 'novalue' :
 				$propertyValueQName = $this->getEntityQName( $claimType, $propertyId );
-				$unknown = $this->getEntityTypeQName( self::NOVALUE );
-				$target->addResource( $propertyValueQName, $unknown );
+				$target->addResource( $propertyValueQName, self::WIKIBASE_NOVALUE_QNAME );
 				break;
+		}
+	}
+
+	/**
+	 * Created full data value
+	 * @param \EasyRdf_Resource $target Place to attach the value
+	 * @param string $propertyValueQName Relationship name
+	 * @param DataValue $value
+	 * @param array $props List of properties
+	 */
+	private function addExpandedValue( \EasyRdf_Resource $target, $propertyValueQName, DataValue $value, array $props) {
+		$node = $this->graph->newBNode( array( self::WIKIBASE_VALUE_QNAME ) );
+		$target->addResource( $propertyValueQName."-value", $node);
+		foreach( $props as $prop => $type ) {
+			$getter = "get" . ucfirst( $prop );
+			$data = $value->$getter();
+			if ( $type == 'xsd:dateTime' && $data == 0 ) {
+				continue;
+			}
+			if ( $type == 'url' ) {
+				$node->addResource( $this->getEntityTypeQName( $prop ), $data );
+				continue;
+			}
+			$node->addLiteral( $this->getEntityTypeQName( $prop ),
+					new \EasyRdf_Literal( $data, null, $type ) );
 		}
 	}
 
@@ -590,7 +628,7 @@ class RdfBuilder {
 	 * @param string $claimType
 	 *        	Type of the claim for which we're using the snak
 	 */
-	private function addStatementValue( EasyRdf_Resource $target, EntityId $propertyId, DataValue $value, $claimType ) {
+	private function addStatementValue( EasyRdf_Resource $target, EntityId $propertyId, DataValue $value, $claimType, $simpleValue = false ) {
 		$propertyValueQName = $this->getEntityQName( $claimType, $propertyId );
 
 		$property = $this->entityLookup->getEntity( $propertyId );
@@ -619,12 +657,40 @@ class RdfBuilder {
 				break;
 			case 'time' :
 				$target->addLiteral( $propertyValueQName, new \EasyRdf_Literal_DateTime( $value->getTime() ) );
+				if ( !$simpleValue  && $this->shouldProduce( self::PRODUCE_FULL_VALUES ) ) {
+					$this->addExpandedValue( $target, $propertyValueQName, $value,
+							array( 'time' => 'xsd:dateTime',
+									'before' => 'xsd:dateTime',
+									'after'=> 'xsd:dateTime',
+									'precision' => 'xsd:integer',
+									'timezone' => 'xsd:integer',
+								)
+					);
+				}
 				break;
 			case 'quantity' :
 				$target->addLiteral( $propertyValueQName, new \EasyRdf_Literal_Decimal( $value->getAmount() ) );
+				if ( !$simpleValue  && $this->shouldProduce( self::PRODUCE_FULL_VALUES ) ) {
+					$this->addExpandedValue( $target, $propertyValueQName, $value,
+							array( 'amount' => 'xsd:decimal',
+									'upperBound' => 'xsd:decimal',
+									'lowerBound' => 'xsd:decimal',
+									'unit' => null,
+								)
+					);
+				}
 				break;
 			case 'globecoordinate' :
 				$target->addLiteral( $propertyValueQName, new EasyRdf_Literal( "Point({$value->getLatitude()} {$value->getLongitude()})", null, self::NS_GEO . ":wktLiteral" ) );
+				if ( !$simpleValue  && $this->shouldProduce( self::PRODUCE_FULL_VALUES ) ) {
+					$this->addExpandedValue( $target, $propertyValueQName, $value,
+							array( 'latitude' => 'xsd:decimal',
+									'longitude' => 'xsd:decimal',
+									'precision' => 'xsd:decimal',
+									'globe' => 'url',
+								)
+					);
+				}
 				break;
 			default :
 				wfDebug( __METHOD__ . ": Unsupported data type: $typeId\n" );
