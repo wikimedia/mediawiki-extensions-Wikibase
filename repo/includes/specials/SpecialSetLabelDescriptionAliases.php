@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Language;
+use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
@@ -244,7 +245,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @param string $languageCode
+	 * @param string|null $languageCode
 	 *
 	 * @return bool
 	 */
@@ -257,52 +258,25 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 *
 	 * @param Entity $entity
 	 *
-	 * @return Summary[]|bool
+	 * @return Summary|bool
 	 */
 	protected function modifyEntity( Entity $entity ) {
-		$fingerprint = $entity->getFingerprint();
-		$changeOpFactory = $this->changeOpFactory;
-		$changeOps = array();
+		$changeOps = $this->getChangeOps( $entity->getFingerprint() );
 
-		if ( $this->label !== '' ) {
-			$changeOps[] = $changeOpFactory->newSetLabelOp(
-				$this->languageCode,
-				$this->label
-			);
-		} elseif ( $fingerprint->hasLabel( $this->languageCode ) ) {
-			$changeOps[] = $changeOpFactory->newRemoveLabelOp(
-				$this->languageCode
-			);
+		if ( empty( $changeOps ) ) {
+			// FIXME: Localize!
+			$this->showErrorHTML( 'Nothing changed.' );
+			return false;
 		}
 
-		if ( $this->description !== '' ) {
-			$changeOps[] = $changeOpFactory->newSetDescriptionOp(
-				$this->languageCode,
-				$this->description
-			);
-		} elseif ( $fingerprint->hasDescription( $this->languageCode ) ) {
-			$changeOps[] = $changeOpFactory->newRemoveDescriptionOp(
-				$this->languageCode
-			);
-		}
-
-		if ( !empty( $this->aliases ) ) {
-			$changeOps[] = $changeOpFactory->newSetAliasesOp(
-				$this->languageCode,
-				$this->aliases
-			);
-		} elseif ( $fingerprint->hasAliasGroup( $this->languageCode ) ) {
-			$changeOps[] = $changeOpFactory->newRemoveAliasesOp(
-				$this->languageCode,
-				$fingerprint->getAliasGroup( $this->languageCode )->getAliases()
-			);
-		}
-
+		$summary = false;
 		$success = true;
 
-		foreach ( $changeOps as $changeOp ) {
+		foreach ( $changeOps as $module => $changeOp ) {
+			$summary = new Summary( $module );
+
 			try {
-				$this->applyChangeOp( $changeOp, $entity );
+				$this->applyChangeOp( $changeOp, $entity, $summary );
 			} catch ( ChangeOpException $ex ) {
 				$this->showErrorHTML( $ex->getMessage() );
 				$success = false;
@@ -313,7 +287,70 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			return false;
 		}
 
-		return $this->getSummary( 'wbeditentity' );
+		if ( count( $changeOps ) > 1 ) {
+			$summary = $this->getSummaryForLabelDescriptionAliases();
+		}
+
+		return $summary;
+	}
+
+	/**
+	 * @param Fingerprint $fingerprint
+	 *
+	 * @return ChangeOp[]
+	 */
+	private function getChangeOps( Fingerprint $fingerprint ) {
+		$changeOpFactory = $this->changeOpFactory;
+		$changeOps = array();
+
+		if ( $this->label !== '' ) {
+			$changeOps['wbsetlabel'] = $changeOpFactory->newSetLabelOp(
+				$this->languageCode,
+				$this->label
+			);
+		} elseif ( $fingerprint->hasLabel( $this->languageCode ) ) {
+			$changeOps['wbsetlabel'] = $changeOpFactory->newRemoveLabelOp(
+				$this->languageCode
+			);
+		}
+
+		if ( $this->description !== '' ) {
+			$changeOps['wbsetdescription'] = $changeOpFactory->newSetDescriptionOp(
+				$this->languageCode,
+				$this->description
+			);
+		} elseif ( $fingerprint->hasDescription( $this->languageCode ) ) {
+			$changeOps['wbsetdescription'] = $changeOpFactory->newRemoveDescriptionOp(
+				$this->languageCode
+			);
+		}
+
+		if ( !empty( $this->aliases ) ) {
+			$changeOps['wbsetaliases'] = $changeOpFactory->newSetAliasesOp(
+				$this->languageCode,
+				$this->aliases
+			);
+		} elseif ( $fingerprint->hasAliasGroup( $this->languageCode ) ) {
+			$changeOps['wbsetaliases'] = $changeOpFactory->newRemoveAliasesOp(
+				$this->languageCode,
+				$fingerprint->getAliasGroup( $this->languageCode )->getAliases()
+			);
+		}
+
+		return $changeOps;
+	}
+
+	/**
+	 * @return Summary
+	 */
+	private function getSummaryForLabelDescriptionAliases() {
+		// FIXME: Use the existing messages if only 1 of the 3 fields changed.
+		// FIXME: Introduce more specific messages if only 2 of the 3 fields changed.
+		$summary = new Summary( 'wbsetlabeldescriptionaliases' );
+		$summary->addAutoSummaryArgs( $this->label, $this->description, $this->aliases );
+
+		$summary->setLanguage( $this->languageCode );
+		return $summary;
 	}
 
 }
