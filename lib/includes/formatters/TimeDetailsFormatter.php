@@ -66,7 +66,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 
 		$html .= $this->renderLabelValuePair(
 			'isotime',
-			htmlspecialchars( $value->getTime() )
+			$this->getTimeHtml( $value->getTime() )
 		);
 		$html .= $this->renderLabelValuePair(
 			'timezone',
@@ -93,6 +93,15 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		$html .= Html::closeElement( 'table' );
 
 		return $html;
+	}
+
+	/**
+	 * @param string $time
+	 *
+	 * @return string HTML
+	 */
+	private function getTimeHtml( $time ) {
+		return preg_replace( '/(?<=\d)Z$/i', '', $time );
 	}
 
 	/**
