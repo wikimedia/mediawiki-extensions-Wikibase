@@ -96,12 +96,19 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	}
 
 	/**
-	 * @param string $time
+	 * @param string $t^ime
 	 *
 	 * @return string HTML
 	 */
 	private function getTimeHtml( $time ) {
-		return preg_replace( '/(?<=\d)Z$/i', '', $time );
+		// Loose check if the "ISO" string contains at least year, month, day and hour.
+		if ( !preg_match( '/^([-+])(\d+)(-\d+-\d+T\d+(?::\d+)*?)Z$/i', $time, $matches ) ) {
+			return $time;
+		}
+
+		// Warning, never cast the year to integer to not run into 32-bit integer overflows!
+		$year = ltrim( $matches[2], '0' );
+		return $matches[1] . str_pad( $year, 4, '0', STR_PAD_LEFT ) . $matches[3];
 	}
 
 	/**

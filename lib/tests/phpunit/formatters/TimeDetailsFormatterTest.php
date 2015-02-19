@@ -57,11 +57,11 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 			),
 			array(
 				new TimeValue( '+999-01-01T00:00:00Z', 0, 0, 0, $day, $gregorian ),
-				'@.*<td[^<>]*isotime">\+999-01-01T00:00:00</td>.*@s'
+				'@.*<td[^<>]*isotime">\+0999-01-01T00:00:00</td>.*@s'
 			),
 			array(
-				new TimeValue( '+099999-01-01T00:00:00Z', 0, 0, 0, $day, $gregorian ),
-				'@.*<td[^<>]*isotime">\+099999-01-01T00:00:00</td>.*@s'
+				new TimeValue( '-099999-01-01T00:00:00Z', 0, 0, 0, $day, $gregorian ),
+				'@.*<td[^<>]*isotime">-99999-01-01T00:00:00</td>.*@s'
 			),
 			array(
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, TimeFormatter::CALENDAR_JULIAN ),
