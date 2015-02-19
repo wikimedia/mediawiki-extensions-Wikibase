@@ -86,6 +86,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 	}
 
 	protected function setUp() {
+		parent::setUp();
 		self::doMock();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
@@ -97,7 +98,6 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 		);
 
 		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
-		parent::setUp();
 	}
 
 	protected function tearDown() {
