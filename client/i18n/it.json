@@ -12,7 +12,6 @@
 		]
 	},
 	"wikibase-client-desc": "Client per l'estensione Wikibase",
-	"specialpages-group-wikibaseclient": "Client {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Collegamento all'elemento connesso dell'archivio dati",
 	"wikibase-after-page-move": "Puoi anche [$1 aggiornare] l'elemento associato su {{WBREPONAME}} per trasferire gli interlink sulla nuova pagina.",
 	"wikibase-after-page-move-queued": "L'[$1 elemento {{WBREPONAME}}] associato a questa pagina sarà presto aggiornato automaticamente.",
@@ -50,6 +49,7 @@
 	"wikibase-rc-show-wikidata-pref": "Mostra le modifiche di {{WBREPONAME}} nelle ultime modifiche",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Questa è una modifica su {{WBREPONAME}}",
+	"wikibase-replicationnote": "Potrebbero essere necessari diversi minuti prima che le modifiche siano visibili su tutti i wiki",
 	"wikibase-watchlist-show-changes-pref": "Mostra le modifiche su {{WBREPONAME}} nella tua lista degli osservati speciali",
 	"wikibase-error-serialize-error": "Impossibile serializzare i dati",
 	"wikibase-error-invalid-entity-id": "L'ID specificato è sconosciuto al sistema. Utilizza un ID di entità valido.",

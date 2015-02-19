@@ -7,9 +7,12 @@
 	},
 	"wikibase-edit": "càgna",
 	"wikibase-add": "azzecca",
+	"wikibase-label-empty": "Nisciuna etichetta definita ancora",
+	"wikibase-description-empty": "Nisciuna descrizione definita ancora",
 	"wikibase-statements": "Dichiaraziune",
 	"wikibase-sitelinks-special": "Ati site",
 	"wikibase-aliases-empty": "Nun se trovano ll'aliasse. Nun se so' definite.",
+	"wikibase-statementview-rank-normal": "Classificato normale",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|riferimento|riferimente}}",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 è nu redirect."
 }

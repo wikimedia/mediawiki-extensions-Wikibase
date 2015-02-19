@@ -14,7 +14,6 @@
 		]
 	},
 	"wikibase-client-desc": "Klient rozszerzenia Wikibase",
-	"specialpages-group-wikibaseclient": "Klient Wikidanych",
 	"tooltip-t-wikibase": "Link do powiązanego elementu w repozytorium danych",
 	"wikibase-after-page-move": "Możesz także [$1 zaktualizować] powiązany element Wikidanych w celu zachowania linków do innych wersji językowych na przeniesionej stronie.",
 	"wikibase-after-page-move-queued": "Powiązany z tą stroną [$1 element Wikidanych] zostanie wkrótce automatycznie zaktualizowany.",
@@ -52,7 +51,9 @@
 	"wikibase-rc-show-wikidata-pref": "Pokazuj edycje w Wikidanych w ostatnich zmianach",
 	"wikibase-rc-wikibase-edit-letter": "d",
 	"wikibase-rc-wikibase-edit-title": "Edycja w Wikidanych",
+	"wikibase-replicationnote": "Zwróć uwagę, że może upłynąć kilka minut, zanim zmiany staną się widoczne na wszystkich wiki",
 	"wikibase-watchlist-show-changes-pref": "Pokazuj edycje w Wikidanych na liście obserwowanych",
+	"wikibase-error-deserialize-error": "Nieudana serializacja danych.",
 	"wikibase-error-serialize-error": "Nieudana serializacja danych.",
 	"wikibase-error-invalid-entity-id": "Wprowadzony identyfikator jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.",
 	"special-unconnectedpages": "Niepowiązane strony",

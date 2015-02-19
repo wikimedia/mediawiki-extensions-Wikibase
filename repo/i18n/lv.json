@@ -36,6 +36,7 @@
 	"wikibase-description-input-help-message": "Ievadiet īsu $1 aprakstu.",
 	"wikibase-statements": "Apgalvojumi",
 	"wikibase-terms": "Citās valodās",
+	"wikibase-sitelinks-special": "Citas vietnes",
 	"wikibase-remove": "dzēst",
 	"wikibase-undo-title": "Atceļ \"$1\" labojumu",
 	"wikibase-partial-undo": "Labojumu daļēji var atcelt.",

@@ -3,11 +3,11 @@
 		"authors": [
 			"V.narsikar",
 			"Ydyashad",
-			"संतोष दहिवळ"
+			"संतोष दहिवळ",
+			"BPositive"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस विस्तारकाचा ग्राहक",
-	"specialpages-group-wikibaseclient": "विकिडाटा ग्राहक",
 	"tooltip-t-wikibase": "माहिती भांडारात जोडलेल्या कलमाचा दुवा",
 	"wikibase-after-page-move": "आपण,स्थानांतरीत केलेल्या पानाशी असलेले भाषेचे दुवे राखण्यास, याचेशी संलग्न विकिडाटा कलमही [$1 अद्यतन] करु शकता.",
 	"wikibase-after-page-move-queued": "या पानाशी जुळलेले [$1 विकिडाटा कलम] हे आपोआप स्वयंचलितरित्या अद्यतन होईल.",
@@ -45,6 +45,7 @@
 	"wikibase-rc-show-wikidata-pref": "विकिडाटा संपादने अलीकडील बदल मध्ये दाखवा",
 	"wikibase-rc-wikibase-edit-letter": "डा",
 	"wikibase-rc-wikibase-edit-title": "विकिडाटाचे संपादन",
+	"wikibase-replicationnote": "कृपया याची नोंद घ्या कि सर्व विकिंवर हे बदल दिसण्यासाठी अनेक मिनीटे लागू शकतील.",
 	"wikibase-watchlist-show-changes-pref": "आपल्या पहाऱ्याच्या यादीत विकिडाटा संपादने दाखवा",
 	"wikibase-error-serialize-error": "कलमांची मालिका लावण्यात अयशस्वी.",
 	"wikibase-error-invalid-entity-id": "आपण टाकलेली ओळखण प्रणालीसाठी अनोळखी आहे. कृपया वैध व अस्तित्वात असलेली ओळखण टाका.",
@@ -58,5 +59,6 @@
 	"wikibase-unconnectedpages-format-row": "(या पानावरील {{PLURAL:$1|आंतरभाषिक दुवा|आंतरभाषिक दुवे}} $1)",
 	"wikibase-pageinfo-entity-id": "विकिडाटा कलमाची ओळखण",
 	"wikibase-pageinfo-entity-id-none": "काहीही नाही",
-	"wikibase-property-render-error": "$1 गुणधर्म देण्यास अयशस्वी:$2"
+	"wikibase-property-render-error": "$1 गुणधर्म देण्यास अयशस्वी:$2",
+	"wikibase-otherprojects": "इतर प्रकल्प"
 }

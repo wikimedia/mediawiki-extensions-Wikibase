@@ -124,7 +124,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Projekt:",
 	"wikibase-gotolinkedpage-lookup-item": "ID položky:",
 	"wikibase-gotolinkedpage-submit": "Jít",
-	"wikibase-gotolinkedpage-summary": "Stránka „Speciální:Přejít na propojenou stránku“ se používá pro přechod na stránku webu propojenou s položkou.<br /> Do levého pole „Projekt:“ vložte kód jazyka a projektu. <br /> Do pravého pole „ID položky:“ vložte identifikátor hledané položky.",
+	"wikibase-gotolinkedpage-summary": "Speciální stránka „Přejít na propojenou stránku“ se používá pro přechod na stránku webu propojenou s položkou.<br /> Do levého pole „Projekt:“ vložte kód jazyka a projektu. <br /> Do pravého pole „ID položky:“ vložte identifikátor hledané položky.",
 	"special-itemdisambiguation": "Položka rozcestníku",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Hledat položky podle jazyka a štítku",
 	"wikibase-itemdisambiguation-lookup-language": "Jazyk:",

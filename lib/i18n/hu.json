@@ -4,13 +4,11 @@
 			"Tgr",
 			"JulesWinnfield-hu",
 			"Tacsipacsi",
-			"Grin"
+			"Grin",
+			"Dj"
 		]
 	},
 	"wikibase-lib-desc": "A Wikibase és a Wikibase kliens kiterjesztések közös funkcióit tartalmazza",
-	"wikibase-entity-item": "tétel",
-	"wikibase-entity-property": "tulajdonság",
-	"wikibase-entity-query": "lekérdezés",
 	"wikibase-error-save-generic": "Hiba lépett fel a mentés közben, ezért a változtatásaidat nem sikerült átvezetni.",
 	"wikibase-error-remove-generic": "Hiba lépett fel a törlés közben, ezért a változtatásaidat nem sikerült befejezni.",
 	"wikibase-error-save-connection": "Kapcsolódási hiba lépett fel a mentés közben, ezért a változtatásaidat nem sikerült befejezni. Ellenőrizd az internetkapcsolatodat.",
@@ -21,10 +19,8 @@
 	"wikibase-error-autocomplete-response": "A szerver válasza: $1",
 	"wikibase-error-ui-no-external-page": "A megadott cikk nem található a megadott wikin.",
 	"wikibase-error-ui-edit-conflict": "Szerkesztési ütközés történt. Kérlek, töltsd újra a lapot, és mentsd el újra.",
-	"wikibase-replicationnote": "A változtatás néhány percen belül minden wikin látható lesz.",
-	"wikibase-sitelinks-wikipedia": "Kapcsolt Wikipédia-lapok",
+	"wikibase-sitelinks-wikipedia": "Wikipédia",
 	"wikibase-sitelinks-sitename-columnheading": "Nyelv",
-	"wikibase-sitelinks-siteid-columnheading": "Kód",
 	"wikibase-sitelinks-link-columnheading": "Kapcsolt oldal",
 	"wikibase-snakview-snaktypeselector-somevalue": "ismeretlen érték",
 	"wikibase-snakview-snaktypeselector-novalue": "nincs érték",

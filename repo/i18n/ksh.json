@@ -31,6 +31,7 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|Endraach|Endrääsch|Endraach}}",
 	"wikibase-aliases-label": "Och bekannd als:",
 	"wikibase-propertypage-datatype": "Daate-Zoot",
+	"wikibase-statementview-rank-normal": "Et nommahle Jeweesch",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|Verbendong|Verbendonge|Verbendong}}",
 	"wikibase-snakview-property-input-placeholder": "Eijeschaff",
 	"wikibase-snakview-variations-somevalue-label": "ene onbekannte Wäät",

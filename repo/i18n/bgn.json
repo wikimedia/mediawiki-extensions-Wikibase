@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Baloch Afghanistan"
+		]
+	},
+	"wikibase-edit": "ایڈیٹ",
+	"wikibase-add": "اڈ کورتین",
+	"wikibase-label-empty": "تا انون نامی تئریپ نه بوته.",
+	"wikibase-description-empty": "تا انون شرح تئریپ نه بوته.",
+	"wikibase-statements": "اظهارهان",
+	"wikibase-sitelinks-special": "دیگرین سایٹ ئان",
+	"wikibase-aliases-empty": "هیچ نامی تئریپ نه بوته.",
+	"wikibase-statementview-rank-normal": "نورمالین رتبه",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|منشا|منشائان}}"
+}

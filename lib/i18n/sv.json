@@ -8,6 +8,7 @@
 		]
 	},
 	"wikibase-lib-desc": "Håller gemensamma funktioner för Wikibase- och Wikibase Client-tilläggen.",
+	"specialpages-group-wikibase": "Wikibase-databas",
 	"wikibase-deletedentity-item": "Raderat objekt",
 	"wikibase-deletedentity-property": "Raderad egenskap",
 	"wikibase-deletedentity-query": "Raderad fråga",
@@ -42,7 +43,7 @@
 	"wikibase-parse-error-entity-id": "Entitets-id:et är felformaterat.",
 	"wikibase-parse-error-quantity": "Kvantitetsvärdet är felformaterat.",
 	"wikibase-parse-error-time": "Tidsvärdet är felformaterat.",
-	"wikibase-sitelinks-wikipedia": "Wikipedia-sidor som är länkade till detta objekt",
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Språk",
 	"wikibase-sitelinks-link-columnheading": "Länkad sida",
 	"wikibase-snakview-snaktypeselector-somevalue": "okänt värde",

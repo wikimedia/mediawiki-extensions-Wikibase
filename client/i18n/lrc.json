@@ -5,10 +5,12 @@
 			"Mogoeilor"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} قلم آلشت بی",
 	"wikibase-comment-sitelink-add": "هوم پیوند زون اضاف بیه:$1",
 	"wikibase-comment-sitelink-change": "هوم پیوند زون د $1 تا $2 آلشت بی",
 	"wikibase-comment-sitelink-remove": "هوم پیوند زون ورداشته بیه:$1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|آلشت|آلشتیا}}",
+	"wikibase-dataitem": "{{WBREPONAME}} قلم",
 	"wikibase-editlinks": "ویرایشت هوم پیوندیا",
 	"wikibase-editlinkstitle": "ویرایشت هوم پیوندیا مین زونی",
 	"wikibase-linkitem-addlinks": "اضاف کردن هوم پیوندیا",

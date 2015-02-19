@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Baloch Afghanistan"
+		]
+	},
+	"tooltip-t-wikibase": "لینک بئ آیتم متوصل بئ مخزن دیتا",
+	"wikibase-comment-update": "{{WBREPONAME}} آیتم ٹگل داته بوت",
+	"wikibase-dataitem": "{{WBREPONAME}} ئی آیتم",
+	"wikibase-editlinks": "لینک ئانی ایڈیٹ کورتین",
+	"wikibase-editlinkstitle": "میان ویکی ئین لینکانی ایڈیٹ کورتین",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "چیهر داتین",
+	"wikibase-rc-hide-wikidata-show": "نشان داتین",
+	"wikibase-rc-wikibase-edit-letter": "د",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ئی ایڈیٹ",
+	"wikibase-otherprojects": "دیگرین پروژه هان"
+}

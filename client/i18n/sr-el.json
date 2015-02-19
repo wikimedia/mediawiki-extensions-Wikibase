@@ -5,10 +5,10 @@
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Vikibaza",
-	"specialpages-group-wikibaseclient": "Klijent Vikipodataka",
 	"tooltip-t-wikibase": "Veza ka stavki na Vikipodacima",
 	"wikibase-after-page-move-queued": "[$1 Stavka Vikipodataka] povezana sa ovom stranicom će se uskoro automatski ažurirati.",
 	"wikibase-after-page-delete-queued": "[$1 Stavka Vikipodataka] povezana sa ovom stranicom će se uskoro automatski ažurirati.",
+	"wikibase-comment-update": "Izmenjena stavka na Vikipodacima",
 	"wikibase-comment-sitelink-add": "Dodata veza za jezik: $1",
 	"wikibase-comment-sitelink-change": "Veza na jeziku promenjena sa $1 na $2",
 	"wikibase-comment-sitelink-remove": "Uklonjena veza za jezik: $1",

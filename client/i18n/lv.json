@@ -5,6 +5,7 @@
 			"Papuass"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} vienums izmainīts",
 	"wikibase-comment-sitelink-add": "Valodas saite pievienota: $1",
 	"wikibase-comment-sitelink-change": "Valodas saite mainīta no $1 uz $2",
 	"wikibase-comment-sitelink-remove": "Valodas saite noņemta: $1",

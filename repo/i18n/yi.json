@@ -6,7 +6,6 @@
 		]
 	},
 	"wikibase-desc": "סטרוקטורירטער דאטן רעפאזיטאריום",
-	"specialpages-group-wikibaserepo": "וויקיבאזע רעפאזיטאריום",
 	"wikibase-entity-item": "דאטנאביעקט",
 	"wikibase-entity-property": "אייגנשאפֿט",
 	"wikibase-entity-query": "פֿראגע",
@@ -40,6 +39,7 @@
 	"wikibase-terms": "אין אַנדערע שפראַכן",
 	"wikibase-sitelinks-empty": "קיין בלאט איז נאך נישט פארלינקט מיט דעם דאטנאביעקט.",
 	"wikibase-sitelinks-input-help-message": "שטעלן א לינק צו א בלאט פֿארבונדן מיט דעם דאטנאביעקט.",
+	"wikibase-sitelinks-special": "אנדערע וועבזייטלעך",
 	"wikibase-remove": "אַראָפּנעמען",
 	"wikibase-move-up": "אַרויפֿרוקן",
 	"wikibase-move-down": "אַראָפרוקן",
@@ -60,6 +60,7 @@
 	"wikibase-aliases-input-help-message": "כדי צו מאכן גרינדער טרעפן די וועזנהייט, קענט איר איינגעבן אלטערנאטיווע נעמען.",
 	"wikibase-aliases-empty": "קיין אליאסן נישט דעפֿינירט.",
 	"wikibase-propertypage-datatype": "דאטן טיפ",
+	"wikibase-statementview-rank-normal": "נארמאלער ראנג",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|רעפערענץ|רעפערענצן}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|איין רעפערענץ|$1 רעפערענצן}} נאך נישט אפגעהיטן",
 	"wikibase-snakview-property-input-placeholder": "אייגנשאפֿט",

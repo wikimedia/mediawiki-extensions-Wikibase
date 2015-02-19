@@ -10,7 +10,9 @@
 	"wikibase-editlinks": "Cagna 'e cullegamiente",
 	"wikibase-editlinkstitle": "Càgna 'e cullegamente nterlenguistece",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Annascunne",
 	"wikibase-rc-hide-wikidata-show": "Fà veré",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} cagnato"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} cagnato",
+	"wikibase-otherprojects": "Ati pruggette"
 }

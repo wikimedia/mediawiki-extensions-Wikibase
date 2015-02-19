@@ -28,11 +28,12 @@
 	"wikibase-linkitem-input-page": "Sigg:",
 	"wikibase-linkitem-confirmitem-button": "Lohß jonn!",
 	"wikibase-linkitem-not-loggedin-title": "Do moß enjelogg sin",
-	"wikibase-rc-hide-wikidata": "$1 Wikidata",
-	"wikibase-rc-hide-wikidata-hide": "Verschteihsche",
-	"wikibase-rc-hide-wikidata-show": "Zeisch",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "ußblände",
+	"wikibase-rc-hide-wikidata-show": "anzeije",
 	"wikibase-rc-show-wikidata-pref": "Donn Änderonge aan Wikidata en de „{{int:recentchanges}}“ zeije",
 	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Änderong övernumme vun {{WBREPONAME}}",
 	"wikibase-unconnectedpages-format-row": "(Mer {{PLURAL:$1|han eine Lenk|han $1 Lenks|hann_er kein Lenks}} op ander Schprohche en dä Sigg)",
 	"wikibase-otherprojects": "Ander Projäkter"
 }

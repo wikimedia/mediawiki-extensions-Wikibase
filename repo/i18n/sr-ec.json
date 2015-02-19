@@ -38,6 +38,7 @@
 	"wikibase-terms": "На другим језицима",
 	"wikibase-sitelinks-empty": "Ниједна страница није повезана са овом ставком.",
 	"wikibase-sitelinks-input-help-message": "Поставите везу према страници која се односи на ову ставку.",
+	"wikibase-sitelinks-special": "Други сајтови",
 	"wikibase-remove": "уклони",
 	"wikibase-undo-title": "Поништавање измене за „$1“",
 	"wikibase-restore-title": "Враћање старије верзије за „$1“",

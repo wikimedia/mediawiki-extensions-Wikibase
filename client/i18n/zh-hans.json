@@ -20,7 +20,6 @@
 		]
 	},
 	"wikibase-client-desc": "维基数据库扩展程序的客户端",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}}客户端",
 	"tooltip-t-wikibase": "查看连接的数据存储库项",
 	"apihelp-query+pageterms-description": "通过相关的数据项获取与页面相关的术语。",
 	"apihelp-query+pageterms-example-simple": "获取与页面“伦敦”相关的所有术语，在用户语言中。",
@@ -66,6 +65,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}编辑",
 	"wikibase-replicationnote": "该更改可能需要几分钟才能在所有的维基项目上显示，请谅解。",
 	"wikibase-watchlist-show-changes-pref": "在你的监视列表中显示{{WBREPONAME}}编辑",
+	"wikibase-error-deserialize-error": "并行化数据失败。",
 	"wikibase-error-serialize-error": "无法序列化数据。",
 	"wikibase-error-invalid-entity-id": "输入的ID在系统中是未知的。请使用一个有效的实体ID。",
 	"special-unconnectedpages": "未连接至项的页面",
