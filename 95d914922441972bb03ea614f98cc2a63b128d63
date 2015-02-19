@@ -1,0 +1,310 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8dcaa3a1",
+        "filename": "repo/includes/Dumpers/DumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "Code sharing via subclassing as an antipattern.\nPerhaps use composition instead, creating a \"DumpHelper\" class.\nThis is not a huge problem, but something to cosnider.",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_adc75f98",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "$entityRevisionLookup",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6dbdc7fc",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "This is a bit odd... why does it *have* to? Does this class not function properly if it doesn\u0027t? Why not?\n\nIn my mind, this class should not know or care. The code that constructs the class gets to decide whether redirects are resolved or not.",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0d3693b0",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "But we need all the prefixes to be output the first time around, right?",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2d3b4f99",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "What\u0027s the difference between the format, and the dataFormat?\nAlso, no validation?",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cd3bbb95",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "\"somevalue\". This states that there *is* a value, we just don\u0027t know what it is. That\u0027s different from \"unknown\". We don\u0027t have \"unknown\" in our data model.",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0d5d33f0",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "Careful with the URI - we want the URI of the *file*, not the file description page. \nI think we should use this base URI for the actual file: http://commons.wikimedia.org/wiki/Special:FilePath/",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ad467f23",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "This is PHP, it\u0027s not going to be fast even if you use a bitmap :)\nJust use a (flipped) array, with string flags as keys. Easier to read, debug, and maintain. Then you can use isset( $this-\u003eprocude[\u0027qualifiers\u0027] ) to check.",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8d494338",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "This kind of processing belongs into the request handler. It\u0027s API logic, not \"business\" logic.\n\nAlso, this is not a format. We could call this \"flavor\", or \"mapping\", or \"level\", or...",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cd52dbdd",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "why \"name\" if it returns a URL? or is it a URI?",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ed5797cb",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "what happened here?",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8d706370",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "why wrap the line?",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ad6d1f97",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "...why?",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6d1147fb",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "Should be an elseif. Also, no reason to re-implement the loop. Just replace the full list with the filtered list in the PRODUCE_BEST_STATEMENTS case.\n\nAlso, four levels of nesting seem bad. The check for ( $entity instanceof StatementListProvider ) should probably be a guard statement, simply shorting out early in the method if it\u0027s not a StatementListProvider.",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cddf3b3e",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "Nested loops should be pulled out into private methods to reduce code path complexity.",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_edbb17dc",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "Thes if-then-else things all over the place seem bad. It seems better to use the strategy pattern for this: the RDFBuilder should use a MainSnakRdfBuilder, a StatementRdfBuilder, etc - and depending on the model, a different instance of these would be used.",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8dd4e318",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "A big switch with hard coded cases is bad for this, use a registry. basically, we\u0027d want a DataValueRdfBuilder that is a registry for other DataValueRdfBuilders, one for each type.",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_add19f27",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T11:40:39Z",
+      "side": 1,
+      "message": "o_O",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
