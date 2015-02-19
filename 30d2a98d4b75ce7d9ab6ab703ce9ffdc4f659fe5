@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dff36099",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-19T18:24:08Z",
+      "side": 1,
+      "message": "Is this relevant to this patch? This field is not used anywhere as far as I can tell. Or is it?",
+      "revId": "30d2a98d4b75ce7d9ab6ab703ce9ffdc4f659fe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fff89c7b",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-19T18:24:08Z",
+      "side": 1,
+      "message": "This is the heart of this patch. Ok.",
+      "revId": "30d2a98d4b75ce7d9ab6ab703ce9ffdc4f659fe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bff6a48a",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-19T18:24:08Z",
+      "side": 1,
+      "message": "What is this additional check about? Does this mean this is now tracking restore actions that were not tracked before?",
+      "revId": "30d2a98d4b75ce7d9ab6ab703ce9ffdc4f659fe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
