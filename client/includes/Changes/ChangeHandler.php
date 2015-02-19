@@ -207,6 +207,10 @@ class ChangeHandler {
 
 		if ( isset( $aspects[EntityUsage::SITELINK_USAGE] ) || $all ) {
 			$actions[self::LINKS_UPDATE_ACTION] = true;
+
+			// TODO: introduce an update action that updates just the metadata
+			// in the cached ParserOutput, without re-parsing the page!
+			$actions[self::PARSER_PURGE_ACTION] = true;
 		}
 
 		if ( isset( $aspects[EntityUsage::LABEL_USAGE] ) || $all ) {
