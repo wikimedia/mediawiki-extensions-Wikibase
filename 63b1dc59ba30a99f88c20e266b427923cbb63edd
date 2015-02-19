@@ -16,6 +16,23 @@
       "revId": "63b1dc59ba30a99f88c20e266b427923cbb63edd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e898e56e",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-19T14:41:20Z",
+      "side": 1,
+      "message": "What I meant is: I\u0027d like parentheses, because I don\u0027t know out of my head how these operators bind.",
+      "revId": "63b1dc59ba30a99f88c20e266b427923cbb63edd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
