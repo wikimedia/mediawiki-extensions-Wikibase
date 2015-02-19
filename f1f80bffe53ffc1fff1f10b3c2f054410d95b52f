@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_82ca72a1",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-19T08:25:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_42453a46",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_c2514a12",
         "filename": "view/resources/ViewFactory.js",
         "patchSetId": 5
@@ -48,6 +66,24 @@
       "writtenOn": "2015-02-19T07:33:39Z",
       "side": 1,
       "message": "We use \"licence\". :) And please add @since 0.5 below @licence.",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e240060c",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-19T08:25:19Z",
+      "side": 1,
+      "message": "We do? Ok. As for the since tag, WikibaseVIew has no release yet, and I suppose the first would be 1.0.",
+      "parentUuid": "6e7c4fa4_c2514a12",
       "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -89,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_424f7a39",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-19T08:25:19Z",
+      "side": 1,
+      "message": "Currently it\u0027s just alphabetically. I\u0027m open for better ways, though :)",
+      "parentUuid": "6e7c4fa4_22511e12",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_bd99da23",
         "filename": "view/resources/ViewFactory.js",
         "patchSetId": 5
@@ -106,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_82f7d2cf",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-19T08:25:19Z",
+      "side": 1,
+      "message": "I added that as a todo because I\u0027d like to see how this class evolves before doing that. I\u0027m not against the change, though.",
+      "parentUuid": "6e7c4fa4_bd99da23",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_e256c608",
         "filename": "view/resources/ViewFactory.js",
         "patchSetId": 5
@@ -117,6 +189,24 @@
       "writtenOn": "2015-02-19T07:33:39Z",
       "side": 1,
       "message": "Please add documentation to the private functions as well. Without any documentation, they will not show up at all in the generated documentation. Parameters and return values should always be documented anyhow.",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a2f44ecb",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-19T08:25:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_e256c608",
       "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -174,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_022bc22f",
+        "filename": "view/tests/qunit/ViewFactory.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-19T08:25:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_02a2e2f9",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_a2abf718",
         "filename": "view/tests/qunit/ViewFactory.tests.js",
         "patchSetId": 5
@@ -185,6 +293,24 @@
       "writtenOn": "2015-02-18T16:46:04Z",
       "side": 1,
       "message": "fooView? What happens if you just inline the empty object everywhere? I think this would be better in terms of readability.",
+      "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_22303e99",
+        "filename": "view/tests/qunit/ViewFactory.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-19T08:25:19Z",
+      "side": 1,
+      "message": "That wouldn\u0027t work with strictEqual.",
+      "parentUuid": "6e7c4fa4_a2abf718",
       "revId": "f1f80bffe53ffc1fff1f10b3c2f054410d95b52f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
