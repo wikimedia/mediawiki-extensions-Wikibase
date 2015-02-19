@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ad98bf7b",
+        "filename": "repo/includes/Dumpers/DumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-19T12:02:32Z",
+      "side": 1,
+      "message": "I\u0027m sorry, why code sharing via inheritance is antipattern? That\u0027s pretty much what inheritance was invented for.",
+      "parentUuid": "6e7c4fa4_8dcaa3a1",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_adc75f98",
         "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
         "patchSetId": 1
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_2d94af41",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-19T12:02:32Z",
+      "side": 1,
+      "message": "I have no idea, this code was here in json dump. I can remove it, but I have no idea if it\u0027s right or not.",
+      "parentUuid": "6e7c4fa4_6dbdc7fc",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0d3693b0",
         "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
         "patchSetId": 1
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_cd841b12",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-19T12:02:32Z",
+      "side": 1,
+      "message": "Right, cleanPrefixes will take care of it. It outputs each prefix only once.",
+      "parentUuid": "6e7c4fa4_0d3693b0",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_2d3b4f99",
         "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
         "patchSetId": 1
@@ -81,6 +135,24 @@
       "writtenOn": "2015-02-19T11:40:39Z",
       "side": 1,
       "message": "What\u0027s the difference between the format, and the dataFormat?\nAlso, no validation?",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8d82a300",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-19T12:02:32Z",
+      "side": 1,
+      "message": "format is like rdf, ttl, json, etc.\ndataFormat is specific type of rdf - like only simple values, or all values, or also with precision, etc.\n\nSuggestions about better name for the parameter welcome.\n\nNo validation since RdfBuilder controls parameters, but we could throw an exception there if we encounter unknown format.",
+      "parentUuid": "6e7c4fa4_2d3b4f99",
       "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +210,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6d75c72b",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-19T12:02:32Z",
+      "side": 1,
+      "message": "It\u0027s bitmap not because it is going to be fast, but because set of orthogonal options are best expressed as bitmap. Array is much less convenient since PRODUCE_ALL is very hard to express.",
+      "parentUuid": "6e7c4fa4_ad467f23",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_8d494338",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 1
@@ -149,6 +239,24 @@
       "writtenOn": "2015-02-19T11:40:39Z",
       "side": 1,
       "message": "This kind of processing belongs into the request handler. It\u0027s API logic, not \"business\" logic.\n\nAlso, this is not a format. We could call this \"flavor\", or \"mapping\", or \"level\", or...",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cd93bb50",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-19T12:02:32Z",
+      "side": 1,
+      "message": "We can rename it to flavor. As for being API logic - where you want it to be, which class?",
+      "parentUuid": "6e7c4fa4_8d494338",
       "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -172,6 +280,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ad9e7f56",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-19T12:02:32Z",
+      "side": 1,
+      "message": "Will rename to getCommonsURI",
+      "parentUuid": "6e7c4fa4_cd52dbdd",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ed5797cb",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 1
@@ -183,6 +309,24 @@
       "writtenOn": "2015-02-19T11:40:39Z",
       "side": 1,
       "message": "what happened here?",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4da7aba4",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-19T12:02:32Z",
+      "side": 1,
+      "message": "Broken Eclipse code formatter happened :)",
+      "parentUuid": "6e7c4fa4_ed5797cb",
       "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -240,6 +384,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6da4e79e",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-19T12:02:32Z",
+      "side": 1,
+      "message": "It\u0027s not elseif - there are formats that output both.",
+      "parentUuid": "6e7c4fa4_6d1147fb",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_cddf3b3e",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 1
@@ -251,6 +413,24 @@
       "writtenOn": "2015-02-19T11:40:39Z",
       "side": 1,
       "message": "Nested loops should be pulled out into private methods to reduce code path complexity.",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0db533cb",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-19T12:02:32Z",
+      "side": 1,
+      "message": "why? having method for just iterating over references doesn\u0027t seem useful - this is the only place where we do it, so it would just make code harder to read.",
+      "parentUuid": "6e7c4fa4_cddf3b3e",
       "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -274,6 +454,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_2dba6fbc",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-19T12:02:32Z",
+      "side": 1,
+      "message": "I don\u0027t think it makes sense to create separate classes just for one if. It makes the code hard to follow.",
+      "parentUuid": "6e7c4fa4_edbb17dc",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_8dd4e318",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 1
@@ -285,6 +483,24 @@
       "writtenOn": "2015-02-19T11:40:39Z",
       "side": 1,
       "message": "A big switch with hard coded cases is bad for this, use a registry. basically, we\u0027d want a DataValueRdfBuilder that is a registry for other DataValueRdfBuilders, one for each type.",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_adc51f42",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-19T12:02:32Z",
+      "side": 1,
+      "message": "Again, I think creating a dozen classes for a simple switch makes code very hard to follow. This is a classic case for a switch, and the code for most options is literally one line. Having one-liner classes is not a good idea, IMO.",
+      "parentUuid": "6e7c4fa4_8dd4e318",
       "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
