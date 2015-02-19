@@ -190,8 +190,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			),
 			'sitelink usage' => array( // #1
 				array( EntityUsage::SITELINK_USAGE ),
-				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
-				array( ChangeHandler::LINKS_UPDATE_ACTION )
+				array( ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::PARSER_PURGE_ACTION )
 			),
 			'label usage' => array(
 				array( EntityUsage::LABEL_USAGE ),
@@ -211,12 +211,12 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			'all usage' => array(
 				array( EntityUsage::ALL_USAGE ),
 				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
-				array( ChangeHandler::LINKS_UPDATE_ACTION )
+				array()
 			),
-			'sitelink and other usage (no redundant links update)' => array(
+			'sitelink and other usage (does links update)' => array(
 				array( EntityUsage::SITELINK_USAGE, EntityUsage::OTHER_USAGE ),
-				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
-				array( ChangeHandler::LINKS_UPDATE_ACTION )
+				array( ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array()
 			),
 		);
 	}
@@ -511,15 +511,22 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		);
 
 		$emmyUpdateLinks = array(
-			'purgeParserCache' => array( 'Emmy' => true ),
-			'scheduleRefreshLinks' => array(),
+			'purgeParserCache' => array(),
+			'scheduleRefreshLinks' => array( 'Emmy' => true ),
 			'purgeWebCache' => array( 'Emmy' => true ),
 			'injectRCRecord' => array( 'Emmy' => true ),
 		);
 
 		$emmy2UpdateLinks = array(
+			'purgeParserCache' => array(),
+			'scheduleRefreshLinks' => array( 'Emmy2' => true ),
+			'purgeWebCache' => array( 'Emmy2' => true ),
+			'injectRCRecord' => array( 'Emmy2' => true ),
+		);
+
+		$emmy2UpdateAll = array(
 			'purgeParserCache' => array( 'Emmy2' => true ),
-			'scheduleRefreshLinks' => array(),
+			'scheduleRefreshLinks' => array( 'Emmy2' => true ),
 			'purgeWebCache' => array( 'Emmy2' => true ),
 			'injectRCRecord' => array( 'Emmy2' => true ),
 		);
@@ -554,7 +561,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			array( // #5
 				$changes['item-deletion-linked'],
 				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
-				$emmy2PurgeParser
+				$emmy2UpdateAll
 			),
 
 			array( // #6
@@ -609,8 +616,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 				$changes['change-enwiki-sitelink'],
 				array( 'q100' => array( 'enwiki' => 'Emmy' ), 'q200' => array( 'enwiki' => 'Emmy2' ) ),
 				array(
-					'purgeParserCache' => array( 'Emmy' => true, 'Emmy2' => true ),
-					'scheduleRefreshLinks' => array(),
+					'purgeParserCache' => array(),
+					'scheduleRefreshLinks' => array( 'Emmy' => true, 'Emmy2' => true ),
 					'purgeWebCache' => array( 'Emmy' => true, 'Emmy2' => true ),
 					'injectRCRecord' => array( 'Emmy' => true, 'Emmy2' => true ),
 				)
