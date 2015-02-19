@@ -343,6 +343,7 @@
 	"wikibase-item-summary-wbsetaliases-add-remove": "Added and removed [$2] {{PLURAL:$1|alias|aliases}}",
 	"wikibase-item-summary-wbsetaliases-add": "Added [$2] {{PLURAL:$1|alias|aliases}}",
 	"wikibase-item-summary-wbsetaliases-remove": "Removed [$2] {{PLURAL:$1|alias|aliases}}",
+	"wikibase-item-summary-wbsetlabeldescriptionaliases": "Changed [$2] label, description and aliases",
 	"wikibase-item-summary-wbsetsitelink-add": "Added link to [$2]",
 	"wikibase-item-summary-wbsetsitelink-add-both": "Added link with badges to [$2]",
 	"wikibase-item-summary-wbsetsitelink-set": "Changed link to [$2]",
