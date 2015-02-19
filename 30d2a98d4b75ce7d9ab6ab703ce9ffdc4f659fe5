@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ab118258",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T21:36:53Z",
+      "side": 1,
+      "message": "This is the actual reason for this patch. It makes sure that the change\u0027s timestamt is consistent with the RC entry. This is particularly important in case of undeletion.\n\nThe field is written to the database, and used by the change dispatcher and the prune Changes script. If the timestamps are off, the results are rather strange: suddenly, clients can *seem* to be lagged by years...",
+      "parentUuid": "6e7c4fa4_dff36099",
+      "revId": "30d2a98d4b75ce7d9ab6ab703ce9ffdc4f659fe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_fff89c7b",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_2b2572a9",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T21:36:53Z",
+      "side": 1,
+      "message": "Not really. The purpose of the patch is to make sure that the timestamps for change entries that represent undeletion are adjusted to the timestamp of the RC entry.",
+      "parentUuid": "6e7c4fa4_fff89c7b",
+      "revId": "30d2a98d4b75ce7d9ab6ab703ce9ffdc4f659fe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_bff6a48a",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2015-02-19T18:24:08Z",
       "side": 1,
       "message": "What is this additional check about? Does this mean this is now tracking restore actions that were not tracked before?",
+      "revId": "30d2a98d4b75ce7d9ab6ab703ce9ffdc4f659fe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8b2b6677",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-19T21:36:53Z",
+      "side": 1,
+      "message": "We tracked them, but didn\u0027t adjust them to the RC entry. Change entries are created by other hooks, and adjusted to match the RC entry in this hook, because earlier, we have no access to the RC entry.\n\nSadly, even with this patch, we still can\u0027t, because RC entries for undeletions have no revid set, so we can\u0027t find the correct change entry...",
+      "parentUuid": "6e7c4fa4_bff6a48a",
       "revId": "30d2a98d4b75ce7d9ab6ab703ce9ffdc4f659fe5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
