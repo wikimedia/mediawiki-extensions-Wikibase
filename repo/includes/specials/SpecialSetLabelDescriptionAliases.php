@@ -3,10 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
-use InvalidArgumentException;
 use Language;
-use OutOfBoundsException;
-use PermissionsError;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
@@ -25,25 +22,14 @@ use Wikibase\Summary;
  * @since 0.5
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
- * @author Bene* < benestar.wikimedia@googlemail.com >
+ * @author Thiemo Mättig
  */
 class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 
 	/**
 	 * @var FingerprintChangeOpFactory
 	 */
-	protected $fingerprintChangeOpFactory;
-
-	/**
-	 * The language label, description and aliases are set in.
-	 * @var string
-	 */
-	private $languageCode;
-
-	/**
-	 * @var Fingerprint
-	 */
-	private $labelDescriptionAliases;
+	private $changeOpFactory;
 
 	/**
 	 * @var ContentLanguages
@@ -51,323 +37,274 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	private $termsLanguages;
 
 	/**
-	 * @since 0.5
+	 * @var string
 	 */
+	private $languageCode;
+
+	/**
+	 * @var string
+	 */
+	private $label = '';
+
+	/**
+	 * @var string
+	 */
+	private $description = '';
+
+	/**
+	 * @var string[]
+	 */
+	private $aliases = array();
+
 	public function __construct() {
 		parent::__construct( 'SetLabelDescriptionAliases', 'edit' );
 
-		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
-		$this->fingerprintChangeOpFactory
-			= $changeOpFactoryProvider->getFingerprintChangeOpFactory();
-		$this->termsLanguages = WikibaseRepo::getDefaultInstance()->getTermsLanguages();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$this->changeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()
+			->getFingerprintChangeOpFactory();
+		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
 	}
 
 	/**
 	 * @see SpecialModifyEntity::validateInput
-	 * @since 0.5
 	 *
 	 * @return bool
 	 */
 	protected function validateInput() {
-		if (
-			!parent::validateInput()
-			|| !$this->isValidLanguageCode( $this->languageCode )
-			|| !$this->entityRevision
-		) {
-			return false;
-		}
-
-		try {
-			$this->checkTermChangePermissions( $this->entityRevision->getEntity() );
-		} catch ( PermissionsError $e ) {
-			$this->showErrorHTML( $this->msg( 'permissionserrors' ) . ': ' . $e->permission );
-			return false;
-		}
-
-		$entity = $this->entityRevision->getEntity();
-		return $entity instanceof FingerprintProvider;
+		return parent::validateInput()
+			&& $this->entityRevision->getEntity() instanceof FingerprintProvider
+			&& $this->isValidLanguageCode( $this->languageCode )
+			&& $this->isAllowedToChangeTerms( $this->entityRevision->getEntity() );
 	}
 
 	/**
 	 * @param Entity $entity
 	 *
-	 * @throws PermissionsError
-	 * @throws InvalidArgumentException
+	 * @return bool
 	 */
-	private function checkTermChangePermissions( Entity $entity ) {
-		if ( $entity instanceof Item ) {
-			$type = 'item';
-		} else if ( $entity instanceof Property ) {
-			$type = 'property';
-		} else {
-			throw new InvalidArgumentException( 'Unexpected Entity type when checking special page term change permissions' );
+	private function isAllowedToChangeTerms( Entity $entity ) {
+		$action = $entity->getType() . '-term';
+
+		if ( !$this->getUser()->isAllowed( $action ) ) {
+			$this->showErrorHTML( $this->msg( 'permissionserrors' ) . ': ' . $action );
+			return false;
 		}
-		$restriction = $type . '-term';
-		if ( !$this->getUser()->isAllowed( $restriction ) ) {
-			throw new PermissionsError( $restriction );
-		}
+
+		return true;
 	}
 
 	/**
-	 * @see SpecialModifyEntity::getFormElements()
-	 * @since 0.5
+	 * @see SpecialModifyEntity::getFormElements
 	 *
 	 * @param Entity $entity
-	 * @return string
+	 *
+	 * @return string HTML
 	 */
 	protected function getFormElements( Entity $entity = null ) {
-		if ( $this->languageCode === null ) {
-			$this->languageCode = $this->getLanguage()->getCode();
-		}
-		if ( $this->labelDescriptionAliases === null ) {
-			$this->labelDescriptionAliases = $entity instanceof FingerprintProvider
-				? $entity->getFingerprint()
-				: new Fingerprint();
-		}
+		if ( $entity !== null && $this->languageCode !== null ) {
+			$languageName = Language::fetchLanguageName(
+				$this->languageCode, $this->getLanguage()->getCode()
+			);
+			$intro = $this->msg(
+				'wikibase-setlabeldescriptionaliases-introfull',
+				$this->getEntityTitle( $entity->getId() )->getPrefixedText(),
+				$languageName
+			);
 
-		$labelText = $this->getRequest()->getVal( 'label' );
-		if ( $labelText === null || $labelText === '' ) {
-			try {
-				$labelText = $this->labelDescriptionAliases
-					->getLabel( $this->languageCode )
-					->getText();
-			} catch ( OutOfBoundsException $e ) {
-				$labelText = '';
-			}
-		}
-
-		$labelInput = $this->getTextInput( 'label', $labelText );
-
-		$descriptionText = $this->getRequest()->getVal( 'description' );
-		if ( $descriptionText === null || $descriptionText === '' ) {
-			try {
-				$descriptionText = $this->labelDescriptionAliases
-					->getDescription( $this->languageCode )
-					->getText();
-			} catch ( OutOfBoundsException $e ) {
-				$descriptionText = '';
-			}
-		}
-
-		$descriptionInput = $this->getTextInput( 'description', $descriptionText );
-
-		$aliasesText = $this->getRequest()->getVal( 'aliases' );
-		if ( $aliasesText === null || $aliasesText === '' ) {
-			try {
-				$aliasGroup = $this->labelDescriptionAliases->getAliasGroup( $this->languageCode );
-				$aliasesText = implode( '|', $aliasGroup->getAliases() );
-			} catch ( OutOfBoundsException $e ) {
-				$aliasesText = '';
-			}
-		}
-
-		$aliasesInput = $this->getTextInput( 'aliases', $aliasesText );
-
-		$languageName = Language::fetchLanguageName(
-			$this->languageCode, $this->getLanguage()->getCode()
-		);
-
-		if ( $entity !== null && $this->languageCode !== null && $languageName !== '' ) {
-			return Html::rawElement(
-				'p',
-				array(),
-				$this->msg(
-					'wikibase-setlabeldescriptionaliases-introfull',
-					$this->getEntityTitle( $entity->getId() )->getPrefixedText(),
-					$languageName
-				)->parse()
-			)
-			. Html::input( 'language', $this->languageCode, 'hidden' )
-			. Html::input( 'id', $entity->getId()->getSerialization(), 'hidden' )
-			. $this->getLabel( 'label' ) . $labelInput
-			. $this->getLabel( 'description' ) . $descriptionInput
-			. $this->getLabel( 'aliases' ) . $aliasesInput;
-		} else {
-			return Html::rawElement(
-				'p',
-				array(),
-				$this->msg( 'wikibase-setlabeldescriptionaliases-intro' )->parse()
-			)
-			. parent::getFormElements( $entity )
-			. Html::element(
-				'label',
-				array(
-					'for' => 'wikibase-setlabeldescriptionaliases-language',
-					'class' => 'wb-label'
-				),
-				$this->msg( 'wikibase-modifyterm-language' )->text()
-			)
-			. Html::input(
-				'language',
-				$this->languageCode,
-				'text',
-				array(
-					'class' => 'wb-input',
-					'id' => 'wikibase-setlabeldescriptionaliases-language'
+			$html = Html::rawElement(
+					'p',
+					array(),
+					$intro->parse()
 				)
-			)
-			. $this->getLabel( 'label' ) . $labelInput
-			. $this->getLabel( 'description' ) . $descriptionInput
-			. $this->getLabel( 'aliases' ) . $aliasesInput;
+				. Html::hidden(
+					'language',
+					$this->languageCode
+				)
+				. Html::hidden(
+					'id',
+					$entity->getId()->getSerialization()
+				);
+		} else {
+			$intro = $this->msg( 'wikibase-setlabeldescriptionaliases-intro' );
+			$fieldId = 'wikibase-setlabeldescriptionaliases-language';
+			$languageCode = $this->languageCode ? : $this->getLanguage()->getCode();
+
+			$html = Html::rawElement(
+					'p',
+					array(),
+					$intro->parse()
+				)
+				. parent::getFormElements( $entity )
+				. Html::label(
+					$this->msg( 'wikibase-modifyterm-language' )->text(),
+					$fieldId,
+					array(
+						'class' => 'wb-label',
+					)
+				)
+				. Html::input(
+					'language',
+					$languageCode,
+					'text',
+					array(
+						'class' => 'wb-input',
+						'id' => $fieldId,
+					)
+				);
 		}
+
+		$html .= $this->getLabeledInputField( 'label', $this->label )
+			. $this->getLabeledInputField( 'description', $this->description )
+			. $this->getLabeledInputField( 'aliases', implode( '|', $this->aliases ) );
+
+		return $html;
 	}
 
 	/**
-	 * Returns HTML text input element for a specific term (label, description, aliases).
+	 * Returns an HTML label and text input element for a specific term.
 	 *
-	 * @param string $name
+	 * @param string $termType Either 'label', 'description' or 'aliases'.
 	 * @param string $value Text to fill the input element with
-	 * @return string
+	 *
+	 * @return string HTML
 	 */
-	private function getTextInput( $name, $value ) {
-		return Html::input(
-			$name,
+	private function getLabeledInputField( $termType, $value ) {
+		$fieldId = 'wikibase-setlabeldescriptionaliases-' . $termType;
+
+		// Messages:
+		// wikibase-setlabeldescriptionaliases-label-label
+		// wikibase-setlabeldescriptionaliases-description-label
+		// wikibase-setlabeldescriptionaliases-aliases-label
+		return Html::label(
+			$this->msg( $fieldId . '-label' )->text(),
+			$fieldId,
+			array(
+				'class' => 'wb-label',
+			)
+		)
+		. Html::input(
+			$termType,
 			$value,
 			'text',
 			array(
 				'class' => 'wb-input',
-				'id' => 'wikibase-setlabeldescriptionaliases-' . $name,
-				'size' => 50
+				'id' => $fieldId,
+				'size' => 50,
 			)
-		)
-		. Html::element( 'br' );
-	}
-
-	/**
-	 * Returns a HTML label element for a specific term (label, description, aliases).
-	 *
-	 * @param string $name
-	 * @return string
-	 */
-	private function getLabel( $name ) {
-		return Html::element( 'br' )
-		. Html::element(
-			$name,
-			array(
-				'for' => 'wikibase-setlabeldescriptionaliases-' . $name,
-				'class' => 'wb-label'
-			),
-			// Messages:
-			// wikibase-setlabeldescriptionaliases-label-label
-			// wikibase-setlabeldescriptionaliases-description-label
-			// wikibase-setlabeldescriptionaliases-aliases-label
-			$this->msg( 'wikibase-setlabeldescriptionaliases-' . $name . '-label' )->text()
 		);
 	}
 
 	/**
-	 * @see SpecialModifyEntity::prepareArguments()
-	 * @since 0.5
+	 * @see SpecialModifyEntity::prepareArguments
 	 *
 	 * @param string $subPage
 	 */
 	protected function prepareArguments( $subPage ) {
-		parent::prepareArguments( $subPage );
-
 		$request = $this->getRequest();
-		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
+		$parts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
 
 		$this->languageCode = $request->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
+		$this->label = $request->getVal( 'label', '' );
+		$this->description = $request->getVal( 'description', '' );
+		$aliasesText = $request->getVal( 'aliases', '' );
+		$this->aliases = $aliasesText === '' ? array() : explode( '|', $aliasesText );
+
+		// Parse the 'id' parameter and throw an exception if the entity can not be loaded
+		parent::prepareArguments( $subPage );
 
 		if ( $this->languageCode === '' ) {
+			$this->languageCode = $this->getLanguage()->getCode();
+		} elseif ( !$this->isValidLanguageCode( $this->languageCode ) ) {
+			$msg = $this->msg( 'wikibase-wikibaserepopage-invalid-langcode', $this->languageCode );
+			$this->showErrorHTML( $msg->parse() );
 			$this->languageCode = null;
 		}
 
-		if ( $this->languageCode !== null && !$this->isValidLanguageCode( $this->languageCode ) ) {
-			$errorMessage = $this->msg(
-				'wikibase-wikibaserepopage-invalid-langcode',
-				$this->languageCode
-			)->parse();
+		if ( $this->languageCode !== null
+			&& $this->entityRevision !== null
+			&& $this->entityRevision->getEntity() instanceof FingerprintProvider
+		) {
+			$fingerprint = $this->entityRevision->getEntity()->getFingerprint();
 
-			$this->showErrorHTML( $errorMessage );
-		}
-
-		$this->labelDescriptionAliases = null;
-		if ( $this->entityRevision !== null ) {
-			$entity = $this->entityRevision->getEntity();
-			if ( $entity instanceof FingerprintProvider ) {
-				$this->labelDescriptionAliases = $entity->getFingerprint();
+			// FIXME: Currently this special page can not be used to unset the label.
+			if ( $this->label === '' && $fingerprint->hasLabel( $this->languageCode ) ) {
+				$this->label = $fingerprint->getLabel( $this->languageCode )->getText();
 			}
-		}
 
-		if ( $this->labelDescriptionAliases === null ) {
-			$this->labelDescriptionAliases = new Fingerprint();
-		}
+			// FIXME: Currently this special page can not be used to unset the description.
+			if ( $this->description === '' && $fingerprint->hasDescription( $this->languageCode ) ) {
+				$this->description = $fingerprint->getDescription( $this->languageCode )->getText();
+			}
 
-		if ( $this->languageCode !== null && $request->getVal( 'label', '' ) !== '' ) {
-			$this->labelDescriptionAliases->setLabel(
-				$this->languageCode,
-				$request->getVal( 'label' )
-			);
-		}
-
-		if ( $this->languageCode !== null && $request->getVal( 'description', '' ) !== '' ) {
-			$this->labelDescriptionAliases->setDescription(
-				$this->languageCode,
-				$request->getVal( 'description' )
-			);
-		}
-
-		if ( $this->languageCode !== null && $request->getVal( 'aliases', '' ) !== '' ) {
-			$this->labelDescriptionAliases->setAliasGroup(
-				$this->languageCode,
-				explode( '|', $request->getVal( 'aliases' ) )
-			);
+			// FIXME: Currently this special page can not be used to empty the aliases.
+			if ( empty( $this->aliases ) && $fingerprint->hasAliasGroup( $this->languageCode ) ) {
+				$this->aliases = $fingerprint->getAliasGroup( $this->languageCode )->getAliases();
+			}
 		}
 	}
 
 	/**
-	 * Checks if the language code is valid.
-	 *
-	 * @param $languageCode string the language code
+	 * @param string $languageCode
 	 *
 	 * @return bool
 	 */
 	private function isValidLanguageCode( $languageCode ) {
-		return $languageCode !== null
-			&& $this->termsLanguages->hasLanguage( $languageCode );
+		return $languageCode !== null && $this->termsLanguages->hasLanguage( $languageCode );
 	}
 
 	/**
-	 * @see SpecialModifyEntity::modifyEntity()
+	 * @see SpecialModifyEntity::modifyEntity
 	 *
 	 * @param Entity $entity
+	 *
 	 * @return Summary[]|bool
 	 */
 	protected function modifyEntity( Entity $entity ) {
-		if ( $this->labelDescriptionAliases === null ) {
-			return false;
+		$fingerprint = $entity->getFingerprint();
+		$changeOpFactory = $this->changeOpFactory;
+		$changeOps = array();
+
+		if ( $this->label !== '' ) {
+			$changeOps[] = $changeOpFactory->newSetLabelOp(
+				$this->languageCode,
+				$this->label
+			);
+		} elseif ( $fingerprint->hasLabel( $this->languageCode ) ) {
+			$changeOps[] = $changeOpFactory->newRemoveLabelOp(
+				$this->languageCode
+			);
 		}
 
-		$labelChangeOp = $this->fingerprintChangeOpFactory->newSetLabelOp(
-			$this->languageCode,
-			$this->labelDescriptionAliases->getLabel( $this->languageCode )->getText()
-		);
-		$descriptionChangeOp = $this->fingerprintChangeOpFactory->newSetDescriptionOp(
-			$this->languageCode,
-			$this->labelDescriptionAliases->getDescription( $this->languageCode )->getText()
-		);
-
-		try {
-			$aliases = $this->labelDescriptionAliases
-				->getAliasGroup( $this->languageCode )
-				->getAliases();
-		} catch ( OutOfBoundsException $e ) {
-			$aliases = array();
+		if ( $this->description !== '' ) {
+			$changeOps[] = $changeOpFactory->newSetDescriptionOp(
+				$this->languageCode,
+				$this->description
+			);
+		} elseif ( $fingerprint->hasDescription( $this->languageCode ) ) {
+			$changeOps[] = $changeOpFactory->newRemoveDescriptionOp(
+				$this->languageCode
+			);
 		}
 
-		$aliasesChangeOp = $this->fingerprintChangeOpFactory->newSetAliasesOp(
-			$this->languageCode,
-			$aliases
-		);
+		if ( !empty( $this->aliases ) ) {
+			$changeOps[] = $changeOpFactory->newSetAliasesOp(
+				$this->languageCode,
+				$this->aliases
+			);
+		} elseif ( $fingerprint->hasAliasGroup( $this->languageCode ) ) {
+			$changeOps[] = $changeOpFactory->newRemoveAliasesOp(
+				$this->languageCode,
+				$fingerprint->getAliasGroup( $this->languageCode )->getAliases()
+			);
+		}
 
 		$success = true;
 
-		foreach ( array( $labelChangeOp, $descriptionChangeOp, $aliasesChangeOp ) as $changeOp ) {
+		foreach ( $changeOps as $changeOp ) {
 			try {
 				$this->applyChangeOp( $changeOp, $entity );
-			} catch ( ChangeOpException $e ) {
-				$this->showErrorHTML( $e->getMessage() );
+			} catch ( ChangeOpException $ex ) {
+				$this->showErrorHTML( $ex->getMessage() );
 				$success = false;
 			}
 		}
