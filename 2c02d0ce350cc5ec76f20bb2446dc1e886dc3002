@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e8d0e5cd",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-19T15:01:35Z",
+      "side": 1,
+      "message": "Working on that, see my follow-ups.",
+      "parentUuid": "6e7c4fa4_344deec7",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_545aea85",
         "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-17T20:45:38Z",
       "side": 1,
       "message": "why protected?",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0819a1db",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-19T15:01:35Z",
+      "side": 1,
+      "message": "Fixed in my follow-up.",
+      "parentUuid": "6e7c4fa4_545aea85",
       "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_281eddc4",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-19T15:01:35Z",
+      "side": 1,
+      "message": "Fixed in my follow-up.",
+      "parentUuid": "6e7c4fa4_7457e65b",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_1483129d",
         "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
         "patchSetId": 15
@@ -64,6 +118,24 @@
       "writtenOn": "2015-02-17T20:45:38Z",
       "side": 1,
       "message": "The two if blocks right below this seem misplaced in this method. The HTML building part itself could also be split, though you are somewhat restricted in how you do this due to the base class (see my topmost comment). Also, this type hints against a deprecated class, which yet again is caused by the base class and cannot be avoided if you derive from it.",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_482239fd",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-19T15:01:35Z",
+      "side": 1,
+      "message": "Mostly fixed in my follow-up.\n\nThe Entity type hints are really not easy to avoid because pretty much all base classes and services type hint against it.",
+      "parentUuid": "6e7c4fa4_1483129d",
       "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_681ff5ba",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-19T15:01:35Z",
+      "side": 1,
+      "message": "Fixed in my follow-up.",
+      "parentUuid": "6e7c4fa4_54642a11",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b4d01ecd",
         "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
         "patchSetId": 15
@@ -98,6 +188,24 @@
       "writtenOn": "2015-02-17T20:45:38Z",
       "side": 1,
       "message": "I think you can do -\u003egetVal( \u0027label\u0027, \u0027\u0027 );\n\nSo you only need to check against empty string below",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0880c1c3",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-19T15:01:35Z",
+      "side": 1,
+      "message": "Fixed in my follow-up.",
+      "parentUuid": "6e7c4fa4_b4d01ecd",
       "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_28857dd4",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-19T15:01:35Z",
+      "side": 1,
+      "message": "Fixed in my follow-up.",
+      "parentUuid": "6e7c4fa4_f4bf765a",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_1431d200",
         "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
         "patchSetId": 15
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_885a9183",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-19T15:01:35Z",
+      "side": 1,
+      "message": "Three methods for three elements? Seriously? This would introduce a hell lot of code duplication.",
+      "parentUuid": "6e7c4fa4_1431d200",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_f4ca161d",
         "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
         "patchSetId": 15
@@ -149,6 +293,24 @@
       "writtenOn": "2015-02-17T20:45:38Z",
       "side": 1,
       "message": "if you factor out the predicate to it\u0027s own method and name it well, the readability of this code will go up a lot",
+      "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4850f960",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-19T15:01:35Z",
+      "side": 1,
+      "message": "Fixed in my follow-up.",
+      "parentUuid": "6e7c4fa4_f4ca161d",
       "revId": "2c02d0ce350cc5ec76f20bb2446dc1e886dc3002",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
