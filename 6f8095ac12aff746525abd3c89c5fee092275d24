@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_886611e9",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-02-19T14:06:05Z",
+      "side": 1,
+      "message": "Cute and very php.",
+      "revId": "6f8095ac12aff746525abd3c89c5fee092275d24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6859352c",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-02-19T14:06:05Z",
+      "side": 1,
+      "message": "Would \"$prefix:${ref-\u003egetHash()}\" be more clear?",
+      "revId": "6f8095ac12aff746525abd3c89c5fee092275d24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0889a179",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-02-19T14:06:05Z",
+      "side": 1,
+      "message": "These changes seems redundant.",
+      "revId": "6f8095ac12aff746525abd3c89c5fee092275d24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
