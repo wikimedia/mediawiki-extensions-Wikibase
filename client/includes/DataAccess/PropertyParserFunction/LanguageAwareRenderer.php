@@ -7,6 +7,7 @@ use Language;
 use Status;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataAccess\PropertyIdResolver;
+use Wikibase\DataAccess\SnaksFinder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;

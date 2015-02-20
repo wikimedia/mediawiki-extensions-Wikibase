@@ -126,7 +126,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function getSnaksFinder() {
 		$snakListFinder = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\SnaksFinder'
+				'Wikibase\DataAccess\SnaksFinder'
 			)
 			->disableOriginalConstructor()
 			->getMock();
