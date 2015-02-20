@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_aca677a6",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-20T12:05:24Z",
+      "side": 1,
+      "message": "These constants should be defined here in RdfBuilder. RdfBuilder defines which flags exist for \"procude\", the serializer provides the flags. That also avoids a circular dependency between builder and serializer.",
+      "revId": "897f80bd9b039f7888310c08f28500b084f3e1c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6cb4dfcf",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-20T12:05:24Z",
+      "side": 1,
+      "message": "I\u0027d still like to avoid these \"mode\" switches all over the code. Needs more though though, probably fine for now.",
+      "revId": "897f80bd9b039f7888310c08f28500b084f3e1c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
