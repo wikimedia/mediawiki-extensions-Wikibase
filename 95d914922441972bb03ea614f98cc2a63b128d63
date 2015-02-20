@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ec3eafb4",
+        "filename": "repo/includes/Dumpers/DumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-20T11:34:26Z",
+      "side": 1,
+      "message": "See https://en.wikipedia.org/wiki/Composition_over_inheritance \n\nOne reason is that with composition you can mix and match, while with inheritance you can only inherit from one class - if you want to re-use from multiple classes, you lose.\n\nAnother reason is that people often forget that \"protected\" things are part of a module\u0027s public interface, because of subclassing. Compatibility is often broken without notice (I had this happen to me with standard Java libs).\n\nBut I don\u0027t mean \"never ever use inheritance\". Just also consider composition as an alternative. We generally favor composition in Wikibase, and it proved to usually be a good choice. Here\u0027s some good thoughts: https://programmers.stackexchange.com/questions/65179/where-does-this-concept-of-favor-composition-over-inheritance-come-from",
+      "parentUuid": "6e7c4fa4_ad98bf7b",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_adc75f98",
         "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
         "patchSetId": 1
@@ -89,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_4c6d63c6",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-20T11:34:26Z",
+      "side": 1,
+      "message": "then it was probably me who put this in in the first place :) Should look into that.",
+      "parentUuid": "6e7c4fa4_2d94af41",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0d3693b0",
         "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
         "patchSetId": 1
@@ -118,6 +154,24 @@
       "side": 1,
       "message": "Right, cleanPrefixes will take care of it. It outputs each prefix only once.",
       "parentUuid": "6e7c4fa4_0d3693b0",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0c63ebd9",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-20T11:34:26Z",
+      "side": 1,
+      "message": "As discussed, it would be nice if we could output all prefixes at once, at the top. This would also work for XML, while this here would not.",
+      "parentUuid": "6e7c4fa4_cd841b12",
       "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -222,6 +276,24 @@
       "side": 1,
       "message": "It\u0027s bitmap not because it is going to be fast, but because set of orthogonal options are best expressed as bitmap. Array is much less convenient since PRODUCE_ALL is very hard to express.",
       "parentUuid": "6e7c4fa4_ad467f23",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6ca13ff4",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-20T11:34:26Z",
+      "side": 1,
+      "message": "PRODUCE_ALL could just be a list. But I see your point.",
+      "parentUuid": "6e7c4fa4_6d75c72b",
       "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -402,6 +474,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ecb46f35",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-20T11:34:26Z",
+      "side": 1,
+      "message": "both best and all? \"all\" already covers \"best\", no? If we output both, wouldn\u0027t statements be repeated?\n\nHm, wait - \"best\" uses \"short\" form, but \"all\" uses \"long\" form? Why are these options tied together?",
+      "parentUuid": "6e7c4fa4_6da4e79e",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_cddf3b3e",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 1
@@ -431,6 +521,24 @@
       "side": 1,
       "message": "why? having method for just iterating over references doesn\u0027t seem useful - this is the only place where we do it, so it would just make code harder to read.",
       "parentUuid": "6e7c4fa4_cddf3b3e",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6c885f76",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-20T11:34:26Z",
+      "side": 1,
+      "message": "Just a general rule of thumb to improve readability and testability: Keep functions short (max 1 screen), keep nesting low (max 2 levels), avoid nested loops (unless they have complex interactions).",
+      "parentUuid": "6e7c4fa4_0db533cb",
       "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -472,6 +580,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_cc8e537c",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-20T11:34:26Z",
+      "side": 1,
+      "message": "I strongly disagree here. It makes it harder to follow the implementation, but makes it easier to grasp the intent. It also makes the code a lot easier to extend, and test, and allows new types to be registered without modifying code. We *definitly* want to have a registry for this - just like we have registries for formatters, parsers, validators, etc for each value type. Ideally, there would be no code in Wikibase that knows a fixed list of value types.",
+      "parentUuid": "6e7c4fa4_2dba6fbc",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_8dd4e318",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 1
@@ -501,6 +627,24 @@
       "side": 1,
       "message": "Again, I think creating a dozen classes for a simple switch makes code very hard to follow. This is a classic case for a switch, and the code for most options is literally one line. Having one-liner classes is not a good idea, IMO.",
       "parentUuid": "6e7c4fa4_8dd4e318",
+      "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2ccca7bf",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-20T11:34:26Z",
+      "side": 1,
+      "message": "Big switches, combined with if/then/else, means a lot of possible code pathes. Each code path needs a test case - not fun. Having more independent modules that can be tested separately reduces complexity. \n\nAlso, again, we are aiming to allow additional value types to be registered via a bit of configuration. This is important for use cases like MediaInfo for commons.",
+      "parentUuid": "6e7c4fa4_adc51f42",
       "revId": "95d914922441972bb03ea614f98cc2a63b128d63",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
