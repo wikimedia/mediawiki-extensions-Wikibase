@@ -1,4 +1,4 @@
-Wikibase Client provides a Lua Scribunto interface that, if activated, can be used to access data from the Wikibase repository.
+Wikibase Client provides a Lua [[mw:Scribunto|Scribunto]] interface that, if activated, can be used to access data from the Wikibase repository.
 
 == mw.wikibase ==
 In <code>mw.wikibase</code> general Lua functionality for working with Wikibase data can be found.
@@ -10,7 +10,7 @@ Gets a [[#mw.wikibase.entity|mw.wikibase.entity]] table with data of the Wikibas
 
 An example call might look like this:
 <source lang="lua">
-mw.wikibase.getEntityObject( 'Q42' ) -- Returns a [[#mw.wikibase.entity|mw.wikibase.entity]] table for the Item with the id Q42
+mw.wikibase.getEntityObject( 'Q42' ) -- Returns a mw.wikibase.entity table for the Item with the id Q42
 </source>
 
 === mw.wikibase.label ===
@@ -79,7 +79,7 @@ entity:getLabel( 'de' ) -- Returns a string, like "Berlin"
 === mw.wikibase.entity:getSitelink ===
 <code>entity:getSitelink()</code><br>
 <code>entity:getSitelink( globalSiteId )</code><br>
-Get the title the entity is linked with in the current Wiki. If <code>globalSiteId</code> is given, the title the item is linked with in the given Wiki will be returned.
+Get the title with which the entity is linked in the current Wiki. If <code>globalSiteId</code> is given, the title the item is linked with in the given Wiki will be returned.
 
 An example call might look like this:
 <source lang="lua">
