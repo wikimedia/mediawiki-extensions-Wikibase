@@ -3,6 +3,8 @@
 ## Version 2.6.0 (dev)
 
 * Empty strings are now detected as invalid in the `SiteLink` constructor
+* Fixed `SnakList` constructor silently ignoring non-iterable inputs
+* Fixed `AliasGroup::equals` and `Term::equals` returning true for fallback objects
 * Fixed `EntityIdValue::unserialize` accidentally returning itself
 
 ## Version 2.5.0 (2014-01-20)
