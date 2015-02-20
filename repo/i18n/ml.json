@@ -67,6 +67,7 @@
 	"wikibase-aliases-input-help-message": "ഈ ഡേറ്റാ ഗണം ഒന്നിലധികം പേരുകളിൽ അറിയപ്പെടുന്നുണ്ടെങ്കിൽ, താങ്കൾക്കവ ഇവിടെ പര്യായങ്ങളായോ അപരനാമങ്ങളായോ ചേർക്കാവുന്നതാണ്, അങ്ങനെ ചെയ്യുമ്പോൾ അവയുടെ ഇതരനാമങ്ങൾ ഉപയോഗിച്ചും അവ കണ്ടെത്താനാവും.",
 	"wikibase-aliases-empty": "അപരനാമങ്ങളൊന്നും കണ്ടെത്താനായില്ല.",
 	"wikibase-propertypage-datatype": "ഡേറ്റാ തരം",
+	"wikibase-statementview-rank-normal": "സാധാരണ റാങ്ക്",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|സ്രോതസ്സ്|സ്രോതസ്സുകൾ}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|ഒരു സ്രോതസ്സ്|$1 സ്രോതസ്സുകൾ}} ഇതുവരെ സേവ് ചെയ്യപ്പെട്ടിട്ടില്ല.",
 	"wikibase-snakview-property-input-placeholder": "ഗുണഗണങ്ങൾ",

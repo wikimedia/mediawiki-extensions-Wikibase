@@ -6,6 +6,8 @@
 			"Դավիթ Սարոյան"
 		]
 	},
+	"tooltip-t-wikibase": "Հղում տվյալների աղբյուրի համապատասխան գրառմանը",
+	"wikibase-dataitem": "{{WBREPONAME}} միույթ",
 	"wikibase-editlinks": "Փոխել հղումները",
 	"wikibase-editlinkstitle": "Խմբագրել միջլեզվային հղումները",
 	"wikibase-linkitem-addlinks": "Ստեղծել հղումը",
@@ -20,6 +22,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Դուք պետք է մուտք գործեք համակարգ",
 	"wikibase-linkitem-success-link": "Էջերը հաջողությամբ կապված են: Հղումները պարունակող տարրը գտնվում է մեր [$1 տվյալների կենտրոնական շտեմարանում]:",
 	"wikibase-property-notfound": "$1 հատկանիշը չի գտնվել:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Թաքցնել",
 	"wikibase-rc-hide-wikidata-show": "Ցուցադրել",
 	"wikibase-rc-show-wikidata-pref": "Վերջին փոփոխություններում ցույց տալ {{grammar:genitive|{{WBREPONAME}}}} խմբագրումները",

@@ -16,7 +16,6 @@
 		]
 	},
 	"wikibase-client-desc": "Wikibase 擴充套件客戶端",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}} 客戶端",
 	"tooltip-t-wikibase": "連結至已連接的資料儲存庫項目",
 	"wikibase-after-page-move": "您可以 [$1 更新] 與已移動頁面關聯的 {{WBREPONAME}} 項目，來維護語言連結。",
 	"wikibase-after-page-move-queued": "與此頁面關聯的 [$1 {{WBREPONAME}} 項目] 將會於稍後自動更新。",
@@ -52,7 +51,7 @@
 	"wikibase-rc-hide-wikidata-hide": "隱藏",
 	"wikibase-rc-hide-wikidata-show": "顯示",
 	"wikibase-rc-show-wikidata-pref": "顯示 {{WBREPONAME}} 的編輯於近期變更中",
-	"wikibase-rc-wikibase-edit-letter": "編",
+	"wikibase-rc-wikibase-edit-letter": "数",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} 編輯",
 	"wikibase-replicationnote": "請注意，此動作的變更需要花費數分鐘方可於所有 Wiki 檢視。",
 	"wikibase-watchlist-show-changes-pref": "顯示 {{WBREPONAME}} 編輯於您的監視清單中",

@@ -3,13 +3,18 @@
 		"authors": [
 			"Arman musikyan",
 			"GrigorGB",
-			"Աշոտ1997"
+			"Աշոտ1997",
+			"Xelgen"
 		]
 	},
+	"wikibase-edit": "խմբագրել",
+	"wikibase-add": "ավելացնել",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Այլ լեզուներով",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Կարգավորել",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Նաև հայտնի որպես",
 	"wikibase-entitytermsforlanguagelistview-description": "Նկարագրություն",
 	"wikibase-entitytermsforlanguagelistview-language": "Լեզու",
+	"wikibase-statements": "Պնդումներ",
+	"wikibase-sitelinks-special": "Այլ կայքեր",
 	"wikibase-entityselector-more": "Ավելին"
 }

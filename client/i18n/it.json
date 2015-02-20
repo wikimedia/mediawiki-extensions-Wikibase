@@ -8,7 +8,8 @@
 			"Maria victoria",
 			"Raoli",
 			"Sannita",
-			"Nemo bis"
+			"Nemo bis",
+			"FRacco"
 		]
 	},
 	"wikibase-client-desc": "Client per l'estensione Wikibase",
@@ -48,7 +49,7 @@
 	"wikibase-rc-hide-wikidata-show": "Mostra",
 	"wikibase-rc-show-wikidata-pref": "Mostra le modifiche di {{WBREPONAME}} nelle ultime modifiche",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Questa è una modifica su {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-title": "Modifica effettuata su {{WBREPONAME}}",
 	"wikibase-replicationnote": "Potrebbero essere necessari diversi minuti prima che le modifiche siano visibili su tutti i wiki",
 	"wikibase-watchlist-show-changes-pref": "Mostra le modifiche su {{WBREPONAME}} nella tua lista degli osservati speciali",
 	"wikibase-error-serialize-error": "Impossibile serializzare i dati",

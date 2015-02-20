@@ -5,6 +5,7 @@
 			"Mogoeilor"
 		]
 	},
+	"tooltip-t-wikibase": "هوم پیوند د اماییه جا رسینه یا",
 	"wikibase-comment-update": "{{WBREPONAME}} قلم آلشت بی",
 	"wikibase-comment-sitelink-add": "هوم پیوند زون اضاف بیه:$1",
 	"wikibase-comment-sitelink-change": "هوم پیوند زون د $1 تا $2 آلشت بی",

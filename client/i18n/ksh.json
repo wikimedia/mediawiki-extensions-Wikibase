@@ -5,6 +5,7 @@
 		]
 	},
 	"wikibase-client-desc": "Mäd en Aanwendong vun däm Projrammzohsaz „Wikibase“ müjjelesch.",
+	"tooltip-t-wikibase": "Di Saach en {{GRAMMAR: Dative |{{udfirst:{{WBREPONAME}}}}}}",
 	"wikibase-after-page-move": "Mer kann och dä zohjehüüreje Endraach op {{WBREPONAME}} [$1 aanpaße], öm de Lengks op Schprohche vun ömjenannte Sigge aschuur ze hallde.",
 	"wikibase-comment-remove": "Dä verbonge Endraach op {{WBREPONAME}} wood fottjeschmeße. Alle Lengks op ander Schprohche woodte fottjenumme.",
 	"wikibase-comment-linked": "Ene Wikidata-Endraach wood met heh dä Sigg verbonge.",
@@ -15,6 +16,7 @@
 	"wikibase-comment-sitelink-change": "Dä Lengk [[$1]] ob en ander Schprohch es op [[$2]] verändert woode.",
 	"wikibase-comment-sitelink-remove": "Dä Lengk [[$1]] ob en ander Schprohch es eruß jenomme woode.",
 	"wikibase-comment-multi": "{{PLURAL:$1|Ein Änderong|$1 Änderonge|Kein Änderong}}",
+	"wikibase-dataitem": "En {{GRAMMAR: Dative |{{udfirst:{{WBREPONAME}}}}}}",
 	"wikibase-editlinks": "Lengks ändere",
 	"wikibase-editlinkstitle": "Donn de Lenks zwesche der Schprohche aanbränge udder aanpaße",
 	"wikibase-linkitem-addlinks": "Lengks derbei donn",

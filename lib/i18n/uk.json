@@ -12,6 +12,7 @@
 		]
 	},
 	"wikibase-lib-desc": "Загальні функції розширень Wikibase і Wikibase Client",
+	"specialpages-group-wikibase": "Сховище вікібази",
 	"wikibase-deletedentity-item": "Вилучений елемент",
 	"wikibase-deletedentity-property": "Вилучена властивість",
 	"wikibase-deletedentity-query": "Вилучений запит",
@@ -46,7 +47,7 @@
 	"wikibase-parse-error-entity-id": "Ідентифікатор сутності має неправильний формат.",
 	"wikibase-parse-error-quantity": "Значення кількості має неправильний формат.",
 	"wikibase-parse-error-time": "Значення часу має неправильний формат.",
-	"wikibase-sitelinks-wikipedia": "Сторінки Вікіпедії, що посилаються на цей елемент",
+	"wikibase-sitelinks-wikipedia": "Вікіпедія",
 	"wikibase-sitelinks-sitename-columnheading": "Мова",
 	"wikibase-sitelinks-link-columnheading": "Пов'язана сторінка",
 	"wikibase-snakview-snaktypeselector-somevalue": "невідоме значення",

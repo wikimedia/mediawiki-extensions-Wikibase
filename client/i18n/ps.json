@@ -5,8 +5,14 @@
 		]
 	},
 	"wikibase-after-page-move-queued": "د [$1 ويکيډاټا توکی] چې همدې مخ سره اړونده و هغه به په اتوماتيکه توگه ډېر ژر هممهاله شي.",
+	"wikibase-comment-update": "{{WBREPONAME}} توکی بدل شو",
 	"wikibase-dataitem": "{{WBREPONAME}} توکی",
+	"wikibase-editlinks": "تړنې سمول",
+	"wikibase-editlinkstitle": "د ژبو خپلمنځي تړنې سمول",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "پټول",
 	"wikibase-rc-hide-wikidata-show": "ښکاره کول",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} سمون"
+	"wikibase-rc-wikibase-edit-letter": "اومتوک",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} سمون",
+	"wikibase-otherprojects": "نورې پروژې"
 }
