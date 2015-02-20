@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRedirect;
 
 /**
@@ -133,6 +134,55 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertNotNull( $propRev, "Entity " . $propId );
 		$this->assertInstanceOf( '\Wikibase\EntityRevision', $propRev, "Entity " . $propId );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $propRev->getEntity(), "Entity " . $propId );
+	}
+
+	public function testGetEntityRevisions() {
+		$item1 = new Item( new ItemId( 'Q1' ) );
+		$item1->setLabel( 'en', 'foo' );
+		$item1Revision = new EntityRevision( $item1, 23, '20130101000000' );
+
+		$item2 = new Item( new ItemId( 'Q2' ) );
+		$item2->setLabel( 'en', 'bar' );
+		$item2Revision = new EntityRevision( $item2, 24, '20140101000000' );
+
+		$this->repo->putEntity(
+			$item1Revision->getEntity(),
+			$item1Revision->getRevisionId(),
+			$item1Revision->getTimestamp()
+		);
+		$this->repo->putEntity(
+			$item2Revision->getEntity(),
+			$item2Revision->getRevisionId(),
+			$item2Revision->getTimestamp()
+		);
+
+		$redirect = new EntityRedirect( new ItemId( 'Q3' ), new ItemId( 'Q1' ) );
+		$this->repo->putRedirect( $redirect );
+
+		// Get only an item
+		$result = $this->repo->getEntityRevisions( array( $item1->getId() ) );
+		$this->assertEquals( $item1Revision, $result['Q1'] );
+
+		// Get only a redirect
+		$result= $this->repo->getEntityRevisions( array( $redirect->getEntityId() ) );
+		$this->assertSame( array( 'Q3' => $redirect ), $result );
+
+		// Get a property that doesn't exist
+		$result = $this->repo->getEntityRevisions( array( new PropertyId( 'P123' ) ) );
+		$this->assertSame( array( 'P123' => null ), $result );
+
+		// Get various things
+		$result = $this->repo->getEntityRevisions( array(
+			 new PropertyId( 'P123' ),
+			$item1->getId(),
+			$redirect->getEntityId(),
+			$item2->getId()
+		) );
+
+		$this->assertEquals(
+			array( 'P123' => null, 'Q1' => $item1Revision, 'Q3' => $redirect, 'Q2' => $item2Revision ),
+			$result
+		);
 	}
 
 	public function testGetItemIdForLink() {

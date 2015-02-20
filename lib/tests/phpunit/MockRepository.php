@@ -23,6 +23,7 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityRevisionBatchLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -41,6 +42,7 @@ class MockRepository implements
 	EntityInfoBuilderFactory,
 	EntityLookup,
 	EntityRevisionLookup,
+	EntityRevisionBatchLookup,
 	EntityStore,
 	PropertyDataTypeLookup,
 	SiteLinkLookup
@@ -153,6 +155,35 @@ class MockRepository implements
 		);
 
 		return $revision;
+	}
+
+	/**
+	 * @since 0.5
+	 * @see EntityRevisionBatchLookup::getEntityRevisions
+	 *
+	 * @param EntityId[] $entityIds
+	 *
+	 * @throws InvalidArgumentException
+	 * @throws StorageException
+	 * @return array entity id serialization -> EntityRevision|EntityRedirect|null
+	 */
+	public function getEntityRevisions( array $entityIds ) {
+		$entityRevisions = array();
+
+		foreach ( $entityIds as $entityId ) {
+			if ( !$entityId instanceof EntityId ) {
+				throw new InvalidArgumentException( '$entityIds needs to be an array of EntityIds' );
+			}
+
+			$key = $entityId->getSerialization();
+			if ( !isset( $this->redirects[$key] ) ) {
+				$entityRevisions[$key] = $this->getEntityRevision( $entityId );
+			} else {
+				$entityRevisions[$key] = $this->redirects[$key];
+			}
+		}
+
+		return $entityRevisions;
 	}
 
 	/**
