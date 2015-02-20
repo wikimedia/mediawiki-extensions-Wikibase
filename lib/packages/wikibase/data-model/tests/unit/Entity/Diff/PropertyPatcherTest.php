@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Tests\Entity\Diff;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\PropertyPatcher;
 use Wikibase\DataModel\Entity\Item;
