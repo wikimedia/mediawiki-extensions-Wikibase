@@ -8,7 +8,6 @@ use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
 use Traversable;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
