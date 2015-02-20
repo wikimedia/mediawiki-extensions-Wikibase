@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c94725be",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T09:41:51Z",
+      "side": 1,
+      "message": "I think this should be moved to either the implementation and/ or the interface.",
+      "revId": "8c5bb7f3e7b03637e2a2bfdf9632a8fc390b72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
