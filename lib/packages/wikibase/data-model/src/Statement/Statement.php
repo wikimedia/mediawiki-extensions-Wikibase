@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Statement;
 use Comparable;
 use Hashable;
 use InvalidArgumentException;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\PropertyIdProvider;
 use Wikibase\DataModel\Reference;
@@ -34,9 +33,6 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 	const RANK_PREFERRED = 2;
 	const RANK_NORMAL = 1;
 	const RANK_DEPRECATED = 0;
-
-	/** @deprecated since 2.0 */
-	const RANK_TRUTH = 3;
 
 	/**
 	 * @var string|null

@@ -13,9 +13,9 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * A statement (identified using it's GUID) can only be added once.
+ * A claim (identified using it's GUID) can only be added once.
  *
- * @deprecated since 1.0 - use StatementList and associated classes instead
+ * @deprecated since 1.0, use StatementList and associated classes instead.
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -29,7 +29,7 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	 *
 	 * @since 0.3
 	 *
-	 * @param Statement[]|Traversable|null $input
+	 * @param Claim[]|Traversable|null $input
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -41,8 +41,8 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 				throw new InvalidArgumentException( '$input must be an array or an instance of Traversable' );
 			}
 
-			foreach ( $input as $statement ) {
-				$this[] = $statement;
+			foreach ( $input as $claim ) {
+				$this[] = $claim;
 			}
 		}
 	}
@@ -63,13 +63,13 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	}
 
 	/**
-	 * @param Statement $statement
+	 * @param Claim $claim
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	private function getClaimKey( Statement $statement ) {
-		$guid = $statement->getGuid();
+	private function getClaimKey( Claim $claim ) {
+		$guid = $claim->getGuid();
 
 		if ( $guid === null ) {
 			throw new InvalidArgumentException( 'Can\'t handle claims with no GUID set!' );
@@ -82,37 +82,37 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	/**
 	 * @since 0.1
 	 *
-	 * @param Statement $statement
+	 * @param Claim $claim
 	 * @param int|null $index
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addClaim( Statement $statement, $index = null ) {
+	public function addClaim( Claim $claim, $index = null ) {
 		if ( !is_null( $index ) && !is_integer( $index ) ) {
 			throw new InvalidArgumentException( '$index must be an integer or null; got ' . gettype( $index ) );
 		} elseif ( is_null( $index ) || $index >= count( $this ) ) {
-			$this[] = $statement;
+			$this[] = $claim;
 		} else {
-			$this->insertClaimAtIndex( $statement, $index );
+			$this->insertClaimAtIndex( $claim, $index );
 		}
 	}
 
 	/**
-	 * @param Statement $statement
+	 * @param Claim $claim
 	 * @param int $index
 	 */
-	private function insertClaimAtIndex( Statement $statement, $index ) {
+	private function insertClaimAtIndex( Claim $claim, $index ) {
 		// Determine the claims to shift and remove them from the array:
-		$statementsToShift = array_slice( (array)$this, $index );
+		$claimsToShift = array_slice( (array)$this, $index );
 
-		foreach ( $statementsToShift as $object ) {
+		foreach ( $claimsToShift as $object ) {
 			$this->offsetUnset( $this->getClaimKey( $object ) );
 		}
 
-		// Append the new statement and re-append the previously removed claims:
-		$this[] = $statement;
+		// Append the new claim and re-append the previously removed claims:
+		$this[] = $claim;
 
-		foreach ( $statementsToShift as $object ) {
+		foreach ( $claimsToShift as $object ) {
 			$this[] = $object;
 		}
 	}
@@ -120,12 +120,12 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	/**
 	 * @since 0.1
 	 *
-	 * @param Statement $statement
+	 * @param Claim $claim
 	 *
 	 * @return bool
 	 */
-	public function hasClaim( Statement $statement ) {
-		$guid = $statement->getGuid();
+	public function hasClaim( Claim $claim ) {
+		$guid = $claim->getGuid();
 
 		if ( $guid === null ) {
 			return false;
@@ -138,19 +138,19 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	/**
 	 * @since 0.5
 	 *
-	 * @param Statement $statement
+	 * @param Claim $claim
 	 *
 	 * @return int|bool
 	 */
-	public function indexOf( Statement $statement ) {
-		$guid = $statement->getGuid();
+	public function indexOf( Claim $claim ) {
+		$guid = $claim->getGuid();
 		$index = 0;
 
 		/**
-		 * @var Statement $statementObject
+		 * @var Claim $claimObject
 		 */
-		foreach ( $this as $statementObject ) {
-			if ( $statementObject->getGuid() === $guid ) {
+		foreach ( $this as $claimObject ) {
+			if ( $claimObject->getGuid() === $guid ) {
 				return $index;
 			}
 			$index++;
@@ -162,10 +162,10 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	/**
 	 * @since 0.1
 	 *
-	 * @param Statement $statement
+	 * @param Claim $claim
 	 */
-	public function removeClaim( Statement $statement ) {
-		$guid = $statement->getGuid();
+	public function removeClaim( Claim $claim ) {
+		$guid = $claim->getGuid();
 
 		if ( $guid === null ) {
 			return;
@@ -181,35 +181,35 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	/**
 	 * @since 0.3
 	 *
-	 * @param string $statementGuid
+	 * @param string $claimGuid
 	 *
 	 * @return bool
 	 */
-	public function hasClaimWithGuid( $statementGuid ) {
-		return $this->offsetExists( $statementGuid );
+	public function hasClaimWithGuid( $claimGuid ) {
+		return $this->offsetExists( $claimGuid );
 	}
 
 	/**
 	 * @since 0.3
 	 *
-	 * @param string $statementGuid
+	 * @param string $claimGuid
 	 */
-	public function removeClaimWithGuid( $statementGuid ) {
-		if ( $this->offsetExists( $statementGuid ) ) {
-			$this->offsetUnset( $statementGuid );
+	public function removeClaimWithGuid( $claimGuid ) {
+		if ( $this->offsetExists( $claimGuid ) ) {
+			$this->offsetUnset( $claimGuid );
 		}
 	}
 
 	/**
 	 * @since 0.3
 	 *
-	 * @param string $statementGuid
+	 * @param string $claimGuid
 	 *
-	 * @return Statement|null
+	 * @return Claim|null
 	 */
-	public function getClaimWithGuid( $statementGuid ) {
-		if ( $this->offsetExists( $statementGuid ) ) {
-			return $this->offsetGet( $statementGuid );
+	public function getClaimWithGuid( $claimGuid ) {
+		if ( $this->offsetExists( $claimGuid ) ) {
+			return $this->offsetGet( $claimGuid );
 		} else {
 			return null;
 		}
@@ -234,7 +234,7 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	 *
 	 * @param string $guid
 	 *
-	 * @return Statement
+	 * @return Claim
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -247,26 +247,26 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	 * @see ArrayAccess::offsetSet
 	 *
 	 * @param string $guid
-	 * @param Statement $statement
+	 * @param Claim $claim
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function offsetSet( $guid, $statement ) {
-		if ( !( $statement instanceof Statement ) ) {
-			throw new InvalidArgumentException( '$statement must be an instance of Claim' );
+	public function offsetSet( $guid, $claim ) {
+		if ( !( $claim instanceof Claim ) ) {
+			throw new InvalidArgumentException( '$claim must be an instance of Claim' );
 		}
 
-		$statementKey = $this->getClaimKey( $statement );
+		$claimKey = $this->getClaimKey( $claim );
 
 		if ( $guid !== null ) {
 			$guidKey = $this->getGuidKey( $guid );
 
-			if ( $guidKey !== $statementKey ) {
+			if ( $guidKey !== $claimKey ) {
 				throw new InvalidArgumentException( 'The key must be the claim\'s GUID.' );
 			}
 		}
 
-		parent::offsetSet( $statementKey, $statement );
+		parent::offsetSet( $claimKey, $claim );
 	}
 
 	/**
@@ -280,15 +280,15 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	}
 
 	/**
-	 * Get array of Statement guids
+	 * Get array of Claim guids
 	 *
 	 * @since 0.4
 	 *
 	 * @return string[]
 	 */
 	public function getGuids() {
-		return array_map( function ( Statement $statement ) {
-			return $statement->getGuid();
+		return array_map( function ( Claim $claim ) {
+			return $claim->getGuid();
 		}, iterator_to_array( $this ) );
 	}
 
@@ -321,17 +321,17 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	public function getMainSnaks() {
 		$snaks = array();
 
-		/* @var Statement $statement */
-		foreach ( $this as $statement ) {
-			$guid = $statement->getGuid();
-			$snaks[$guid] = $statement->getMainSnak();
+		/* @var Claim $claim */
+		foreach ( $this as $claim ) {
+			$guid = $claim->getGuid();
+			$snaks[$guid] = $claim->getMainSnak();
 		}
 
 		return $snaks;
 	}
 
 	/**
-	 * Returns a map from GUIDs to statement hashes.
+	 * Returns a map from GUIDs to claim hashes.
 	 *
 	 * @since 0.4
 	 *
@@ -340,10 +340,10 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	public function getHashes() {
 		$snaks = array();
 
-		/* @var Statement $statement */
-		foreach ( $this as $statement ) {
-			$guid = $statement->getGuid();
-			$snaks[$guid] = $statement->getHash();
+		/* @var Claim $claim */
+		foreach ( $this as $claim ) {
+			$guid = $claim->getGuid();
+			$snaks[$guid] = $claim->getHash();
 		}
 
 		return $snaks;
@@ -361,9 +361,9 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	public function getHash() {
 		$hash = sha1( '' );
 
-		/* @var Statement $statement */
-		foreach ( $this as $statement ) {
-			$hash = sha1( $hash . $statement->getHash() );
+		/* @var Claim $claim */
+		foreach ( $this as $claim ) {
+			$hash = sha1( $hash . $claim->getHash() );
 		}
 
 		return $hash;
@@ -386,16 +386,16 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	 * @return Claims
 	 */
 	public function getByRank( $rank ) {
-		$statements = new self();
+		$claims = new self();
 
-		/* @var Statement $statement */
-		foreach ( $this as $statement ) {
-			if ( $statement->getRank() === $rank ) {
-				$statements[] = $statement;
+		/* @var Claim $claim */
+		foreach ( $this as $claim ) {
+			if ( $claim->getRank() === $rank ) {
+				$claims[] = $claim;
 			}
 		}
 
-		return $statements;
+		return $claims;
 	}
 
 	/**
@@ -409,16 +409,16 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	 */
 	public function getByRanks( array $ranks ) {
 		$ranks = array_flip( $ranks );
-		$statements = new self();
+		$claims = new self();
 
-		/* @var Statement $statement */
-		foreach ( $this as $statement ) {
-			if ( isset( $ranks[$statement->getRank()] ) ) {
-				$statements[] = $statement;
+		/* @var Claim $claim */
+		foreach ( $this as $claim ) {
+			if ( isset( $ranks[$claim->getRank()] ) ) {
+				$claims[] = $claim;
 			}
 		}
 
-		return $statements;
+		return $claims;
 	}
 
 	/**
@@ -438,11 +438,11 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 		$rank = Statement::RANK_PREFERRED;
 
 		do {
-			$statements = $this->getByRank( $rank );
+			$claims = $this->getByRank( $rank );
 			$rank--;
-		} while ( $statements->isEmpty() && $rank > Statement::RANK_DEPRECATED );
+		} while ( $claims->isEmpty() && $rank > Statement::RANK_DEPRECATED );
 
-		return $statements;
+		return $claims;
 	}
 
 	/**
@@ -465,8 +465,8 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 			return false;
 		}
 
-		foreach ( $this as $statement ) {
-			if ( !$target->hasExactClaim( $statement ) ) {
+		foreach ( $this as $claim ) {
+			if ( !$target->hasExactClaim( $claim ) ) {
 				return false;
 			}
 		}
@@ -474,9 +474,9 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 		return true;
 	}
 
-	private function hasExactClaim( Statement $statement ) {
-		return $this->hasClaim( $statement )
-			&& $this->getClaimWithGuid( $statement->getGuid() )->equals( $statement );
+	private function hasExactClaim( Claim $claim ) {
+		return $this->hasClaim( $claim )
+			&& $this->getClaimWithGuid( $claim->getGuid() )->equals( $claim );
 	}
 
 }

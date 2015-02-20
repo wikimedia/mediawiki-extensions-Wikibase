@@ -46,9 +46,9 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetAndGetMainSnak() {
-		$snak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
-		$statement = new Statement( $snak );
-		$this->assertSame( $snak, $statement->getMainSnak() );
+		$mainSnak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
+		$statement = new Statement( $mainSnak );
+		$this->assertSame( $mainSnak, $statement->getMainSnak() );
 	}
 
 	public function testSetAndGetQualifiers() {

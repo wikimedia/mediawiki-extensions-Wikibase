@@ -8,7 +8,6 @@ use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -416,31 +415,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'boolean', $has );
 
 		$this->assertEquals( count( $entity->getClaims() ) !== 0, $has );
-	}
-
-	/**
-	 * Tests Entity::newClaim
-	 *
-	 * @dataProvider instanceProvider
-	 *
-	 * @param Entity $entity
-	 */
-	public function testNewClaim( Entity $entity ) {
-		if ( $entity->getId() === null ) {
-			$entity->setId( 50 );
-		}
-
-		$snak = new PropertyNoValueSnak( 42 );
-		$claim = new Statement( $snak );
-		$claim->setGuid( 'q42$foobarbaz' );
-
-		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claim', $claim );
-
-		$this->assertTrue( $snak->equals( $claim->getMainSnak() ) );
-
-		$guid = $claim->getGuid();
-
-		$this->assertInternalType( 'string', $guid );
 	}
 
 	public function diffProvider() {
