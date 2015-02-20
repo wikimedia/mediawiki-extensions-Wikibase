@@ -9,7 +9,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
+ * @covers Wikibase\DataModel\Entity\DispatchingEntityIdParser
  * @covers Wikibase\DataModel\Entity\EntityIdParser
+ *
+ * @uses Wikibase\DataModel\Entity\BasicEntityIdParser
  *
  * @group Wikibase
  * @group WikibaseDataModel
@@ -17,18 +20,23 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityIdParserTest extends \PHPUnit_Framework_TestCase {
+class DispatchingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
+
+	private function getBasicParser() {
+		return new DispatchingEntityIdParser( BasicEntityIdParser::getBuilders() );
+	}
 
 	/**
-	 * @dataProvider idProvider
+	 * @dataProvider entityIdProvider
 	 */
 	public function testCanParseEntityId( EntityId $expected ) {
-		$actual = $this->newParser()->parse( $expected->getSerialization() );
+		$parser = $this->getBasicParser();
+		$actual = $parser->parse( $expected->getSerialization() );
 
 		$this->assertEquals( $actual, $expected );
 	}
 
-	public function idProvider() {
+	public function entityIdProvider() {
 		return array(
 			array( new ItemId( 'q42' ) ),
 			array( new ItemId( 'Q1337' ) ),
@@ -37,16 +45,13 @@ class EntityIdParserTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	protected function newParser() {
-		return new DispatchingEntityIdParser( BasicEntityIdParser::getBuilders() );
-	}
-
 	/**
 	 * @dataProvider invalidIdSerializationProvider
+	 * @expectedException \Wikibase\DataModel\Entity\EntityIdParsingException
 	 */
-	public function testCannotParserInvalidId( $invalidIdSerialization ) {
-		$this->setExpectedException( 'Wikibase\DataModel\Entity\EntityIdParsingException' );
-		$this->newParser()->parse( $invalidIdSerialization );
+	public function testCannotParseInvalidId( $invalidIdSerialization ) {
+		$parser = $this->getBasicParser();
+		$parser->parse( $invalidIdSerialization );
 	}
 
 	public function invalidIdSerializationProvider() {
