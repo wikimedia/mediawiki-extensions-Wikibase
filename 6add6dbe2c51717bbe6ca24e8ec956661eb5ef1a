@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_8c2ffb39",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "Should be done in a follow-up",
+      "parentUuid": "6e7c4fa4_ce3d102b",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_8ef0788f",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-16T21:50:11Z",
       "side": 1,
       "message": "!empty( $languageUrls ) already covers $languageUrls !\u003d\u003d false",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2c202746",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "true... but this is more explicit",
+      "parentUuid": "6e7c4fa4_8ef0788f",
       "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ccf973c2",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_18033c12",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_783830d0",
         "filename": "client/includes/Hooks/BaseTemplateAfterPortletHandler.php",
         "patchSetId": 9
@@ -64,6 +118,24 @@
       "writtenOn": "2015-02-18T17:06:44Z",
       "side": 1,
       "message": "This class is now rather pointless",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_acfc37b3",
+        "filename": "client/includes/Hooks/BaseTemplateAfterPortletHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "Yeah, should be followed-up",
+      "parentUuid": "6e7c4fa4_783830d0",
       "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ec378fde",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "Done, moved both into this function",
+      "parentUuid": "6e7c4fa4_f8ef6019",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_9863ccd8",
         "filename": "client/includes/RepoItemLinkGenerator.php",
         "patchSetId": 9
@@ -98,6 +188,24 @@
       "writtenOn": "2015-02-18T17:06:44Z",
       "side": 1,
       "message": "So, for {{#noexternallanglinks|*}}, we return null here, but we no longer suppress the portlet...",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0c6d2b95",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "Addressed that by only forcing the p-lang section to appear if the external links aren\u0027t suppressed",
+      "parentUuid": "6e7c4fa4_9863ccd8",
       "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_4cac83eb",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_18a7bc0a",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b8a7a807",
         "filename": "client/includes/RepoItemLinkGenerator.php",
         "patchSetId": 9
@@ -132,6 +258,24 @@
       "writtenOn": "2015-02-18T17:06:44Z",
       "side": 1,
       "message": "HTML",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8ca61b0c",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_b8a7a807",
       "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -173,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_0cb20b47",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_38bb9824",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d8838455",
         "filename": "client/includes/RepoItemLinkGenerator.php",
         "patchSetId": 9
@@ -184,6 +346,24 @@
       "writtenOn": "2015-02-18T17:06:44Z",
       "side": 1,
       "message": "HTML",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cc58932b",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_d8838455",
       "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -207,6 +387,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6c4b7f63",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_188edc82",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b87ec865",
         "filename": "client/includes/RepoItemLinkGenerator.php",
         "patchSetId": 9
@@ -224,6 +422,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_0c3c4bba",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_b87ec865",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b8cc88c1",
         "filename": "client/tests/phpunit/includes/RepoItemLinkGeneratorTest.php",
         "patchSetId": 9
@@ -235,6 +451,24 @@
       "writtenOn": "2015-02-18T17:06:44Z",
       "side": 1,
       "message": "\u0027hasLangLinks\u0027 \u003d\u003e false",
+      "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6c037fc2",
+        "filename": "client/tests/phpunit/includes/RepoItemLinkGeneratorTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-20T11:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_b8cc88c1",
       "revId": "6add6dbe2c51717bbe6ca24e8ec956661eb5ef1a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
