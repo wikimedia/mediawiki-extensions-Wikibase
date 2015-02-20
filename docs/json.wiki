@@ -36,8 +36,8 @@ Clients should be ready to process any of the forms given above.
   "aliases": {}
   "claims": {},
   "sitelinks": {},
-  "_revision_": 67872331,
-  "_modified_": "2013-09-01T12:05:48Z"
+  "lastrevid": 195301613,
+  "modified": "2015-02-10T12:42:02Z"
 }
 </syntaxhighlight>
 
@@ -50,15 +50,15 @@ The JSON representation consists of the following fields in the top level struct
 * '''aliases''': Contains aliases in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
 * '''claims''': Contains any number of claims or statements, groups by property. See [[#Claims and Statements|Claims and Statements]] below.
 * '''sitelinks''': Contains site links to pages on different sites describing the item, see ''[[#Site Links|Site Links]]'' below.
-* '''_revision_: The JSON document's version (this is a MediaWiki revision ID).
-* '''_modified_: The JSON document's publication date (this is a MediaWiki revision timestamp).
+* '''lastrevid''': The JSON document's version (this is a MediaWiki revision ID).
+* '''modified''': The JSON document's publication date (this is a MediaWiki revision timestamp).
 
 API modules currently handle the revision and date modified slightly differently using the fields below.
 
 <syntaxhighlight lang="javascript">
 {
-  "lastrevid": 67872331,
-  "modified": "2013-09-01T12:05:48Z"
+  "lastrevid": 195301613,
+  "modified": "2015-02-10T12:42:02Z"
 }
 </syntaxhighlight>
 
@@ -67,7 +67,7 @@ API modules also often return extra information related to the entity and the wi
 <syntaxhighlight lang="javascript">
 {
   "title": "Q60",
-  "pageid": 175,
+  "pageid": 186,
   "ns": 0
 }
 </syntaxhighlight>
@@ -93,7 +93,7 @@ API modules also often return extra information related to the entity and the wi
   "descriptions": {
     "en": {
       "language": "en",
-      "value": "city in New York, United States of America"
+      "value": "largest city in New York and the United States of America"
     },
     "it": {
       "language": "it",
@@ -124,6 +124,14 @@ API modules also often return extra information related to the entity and the wi
         "language": "fr",
         "value": "The City"
       },
+      {
+        "language": "fr",
+        "value": "City of New York"
+      },
+      {
+        "language": "fr",
+        "value": "La grosse pomme"
+      }
     ]
   }
 }
@@ -143,32 +151,36 @@ while for labels and descriptions the record is associated directly with the lan
 <syntaxhighlight lang="javascript">
 {
   "sitelinks": {
-    "arwiki": {
-      "site": "arwiki",
-      "title": "\u0646\u064a\u0648\u064a\u0648\u0631\u0643 (\u0645\u062f\u064a\u0646\u0629)"
+    "afwiki": {
+      "site": "afwiki",
+      "title": "New York Stad",
+      "badges": []
     },
     "frwiki": {
       "site": "frwiki",
-      "title": "New York"
+      "title": New York City",
+      "badges": []
     },
     "nlwiki": {
       "site": "nlwiki",
       "title": "New York City",
-      "url": "//nl.wikipedia.org/wiki/New_York_City"
+      "badges": [
+        "Q17437796"
+      ]
     },
     "enwiki": {
       "site": "enwiki",
-      "title": "New York City"
-      "url": "https://en.wikipedia.org/wiki/New_York_City"
-      "badges": [ "Q16465" ]
+      "title": "New York City",
+      "badges": []
     },
     "dewiki": {
       "site": "dewiki",
-      "title": "New York City"
-      "url": "https://de.wikipedia.org/wiki/New_York_City"
-      "badges": [ "Q16465" ]
+      "title": "New York City",
+      "badges": [
+        "Q17437798"
+      ]
     }
-  },
+  }
 }
 </syntaxhighlight>
 
@@ -186,7 +198,7 @@ Site links are given as records for each site identifier. Each such record conta
   "claims": {
     "P17": [
       {
-        "id": "Q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB",
+        "id": "q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB",
         "mainsnak": {},
         "type": "statement",
         "rank": "normal",
@@ -229,6 +241,7 @@ A Claim record uses the following fields:
         "mainsnak": {
           "snaktype": "value",
           "property": "P17",
+          "datatype": "wikibase-item",
           "datavalue": {
             "value": {
               "entity-type": "item",
@@ -250,6 +263,7 @@ A Claim record uses the following fields:
         "mainsnak": {
           "snaktype": "value",
           "property": "P356",
+          "datatype": "string",
           "datavalue": {
             "value": "SomePicture.jpg",
             "type": "string"
@@ -267,8 +281,8 @@ A Snak is represented by providing the following fields:
 
 * '''snaktype''': The type of the snak. Currently, this is one of ''value'', ''somevalue'' or ''novalue''.
 * '''property''': The ID of the property this Snak is about.
-* '''''datavalue''''': If the snaktype is ''value'', there is a ''datavalue'' field that contains the actual value the Snak associates with the Property. See [[#Data Values|Data Values]] below.
-* '''''datatype''''': In the future, the ''datatype'' field will indicate how the value of the Snak can be interpreted. Currently, this information has to be obtained by looking up the datatype associated with the Snak's property.
+* '''datatype''': The ''datatype'' field indicates how the value of the Snak can be interpreted. The datatypes could be any other of the datatypes listed on [[Special:ListDatatypes|Special:ListDatatypes]].
+* '''datavalue''': If the snaktype is ''value'', there is a ''datavalue'' field that contains the actual value the Snak associates with the Property. See [[#Data Values|Data Values]] below.
 
 ==== Data Values ====
 
@@ -280,7 +294,6 @@ A Snak is represented by providing the following fields:
             },
             "type": "wikibase-entityid"
           }
-
 
           "datavalue": {
             "value": "SomePicture.jpg",
@@ -324,7 +337,7 @@ by a map structure containing two fields:
 * ''entity-type'': defines the type of the entity, such as ''item'' or ''property''.
 * ''numeric-id'': the is the actual ID number.
 
-'''''WARNING:''''' ''wikibase-entityid' may in the future change to be represented as a single
+'''''WARNING:''''' ''wikibase-entityid'' may in the future change to be represented as a single
 string literal, or may even be dropped in favor of using the ''string'' value type to reference entities.
 
 '''''NOTE:''''' There is currently no reliable mechanism for clients to generate a prefixed ID or a
@@ -402,6 +415,7 @@ Time values are given as a map with the following fields:
               "hash": "sssde3541cc531fa54adcaffebde6bef28g6hgjd",
               "snaktype": "value",
               "property": "P580",
+              "datatype": "time",
               "datavalue": {
                 "value": {
                   "time": "+00000001994-01-01T00:00:00Z",
@@ -420,6 +434,7 @@ Time values are given as a map with the following fields:
               "hash": "f803e3541cc531fa54n7a9ffebde6bef28d87ddv",
               "snaktype": "value",
               "property": "P582",
+              "datatype": "time",
               "datavalue": {
                 "value": {
                   "time": "+00000002001-12-31T00:00:00Z",
@@ -446,32 +461,50 @@ resulting in a map which associates property IDs with one list of snaks each.
 <syntaxhighlight lang="javascript">
 {
         "references": [
-          {
-            "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
-            "snaks": {
-              "P143": [
-                {
-                  "snaktype": "value",
-                  "property": "P143",
-                  "datavalue": {
-                    "value": {
-                      "entity-type": "item",
-                      "numeric-id": 206855
-                    },
-                    "type": "wikibase-entityid"
-                  }
-                }
-              ]
+            {
+                "hash": "7eb64cf9621d34c54fd4bd040ed4b61a88c4a1a0",
+                "snaks": {
+                    "P143": [
+                        {
+                            "snaktype": "value",
+                            "property": "P143",
+                            "datatype": "wikibase-item",
+                            "datavalue": {
+                                "value": {
+                                    "entity-type": "item",
+                                    "numeric-id": 328
+                                },
+                                "type": "wikibase-entityid"
+                            }
+                        }
+                    ],
+                    "P854": [
+                        {
+                            "snaktype": "value",
+                            "property": "P854",
+                            "datatype": "url",
+                            "datavalue": {
+                                "value": "http: //www.nytimes.com/2002/01/02/opinion/the-bloomberg-era-begins.html",
+                                "type": "string"
+                            }
+                        }
+                    ]
+                },
+                "snaks-order": [
+                    "P143",
+                    "P854"
+                ]
             }
-          }
-        ]
+          ]
+        }
+      ]
 }
 </syntaxhighlight>
 
 References provide provenance/authority information for individual claims. Each reference
 is a set of Snaks structured in a similar way to how qualifiers are represented: Snaks about the same
 property are grouped together in a list and made accessible by putting all these lists into a map,
-using the property IDs as keys.
+using the property IDs as keys. By ''snaks-order'' the order of those snaks is shown by their property IDs.
 
 == Example ==
 
@@ -479,424 +512,310 @@ Below is an example of a complete entity represented in JSON.
 
 <syntaxhighlight lang="javascript">
 {
-  "id": "Q60",
-  "type": "item",
-  "labels": {
-    "en": {
-      "language": "en",
-      "value": "New York City"
-    },
-    "ar": {
-      "language": "ar",
-      "value": "\u0645\u062f\u064a\u0646\u0629 \u0646\u064a\u0648 \u064a\u0648\u0631\u0643"
-    },
-    "fr": {
-      "language": "fr",
-      "value": "New York"
-    },
-    "it": {
-      "language": "it",
-      "value": "New York"
-    },
-    "pl": {
-      "language": "pl",
-      "value": "Nowy Jork"
-    },
-    "de": {
-      "language": "de",
-      "value": "New York City"
-    },
-    "nl": {
-      "language": "nl",
-      "value": "New York City"
-    },
-    "zh": {
-      "language": "zh",
-      "value": "\u7ebd\u7ea6"
-    },
-    "zh-classical": {
-      "language": "zh-classical",
-      "value": "\u7d10\u7d04\u5e02"
-    },
-    "zh-yue": {
-      "language": "zh-yue",
-      "value": "\u7d10\u7d04\u5e02"
-    }
-  },
-  "descriptions": {
-    "en": {
-      "language": "en",
-      "value": "city in New York, United States of America"
-    },
-    "it": {
-      "language": "it",
-      "value": "citt\u00e0 degli Stati Uniti d'America"
-    },
-    "pl": {
-      "language": "pl",
-      "value": "miasto w Stanach Zjednoczonych"
-    },
-    "fr": {
-      "language": "fr",
-      "value": "ville des \u00c9tats-Unis"
-    },
-    "de": {
-      "language": "de",
-      "value": "Metropole an der Ostk\u00fcste der Vereinigten Staaten"
-    },
-    "nl": {
-      "language": "nl",
-      "value": "stad aan de oostkust van de Verenigde Staten"
-    },
-    "es": {
-      "language": "es",
-      "value": "ciudad de Estados Unidos"
-    },
-    "ko": {
-      "language": "ko",
-      "value": "\ubbf8\uad6d \ub274\uc695 \uc8fc\uc758 \ub3c4\uc2dc"
-    },
-    "nb": {
-      "language": "nb",
-      "value": "by i USA"
-    },
-    "zh-hans": {
-      "language": "zh-hans",
-      "value": "\u7f8e\u56fd\u7ebd\u7ea6\u5dde\u7684\u57ce\u5e02"
-    },
-  },
-  "aliases": {
-    "en": [
-      {
-        "language": "en",
-        "value": "NYC"
-      },
-      {
-        "language": "en",
-        "value": "New York"
-      },
-      {
-        "language": "en",
-        "value": "City of New York"
-      },
-      {
-        "language": "en",
-        "value": "New York, New York"
-      },
-      {
-        "language": "en",
-        "value": "The Big Apple"
-      },
-      {
-        "language": "en",
-        "value": "Gotham"
-      }
-    ],
-    "fr": [
-      {
-        "language": "fr",
-        "value": "New York City"
-      },
-      {
-        "language": "fr",
-        "value": "NYC"
-      },
-      { 
-        "language": "fr",
-        "value": "The City"
-      },
-      {
-        "language": "fr",
-        "value": "City of New York"
-      },
-      {
-        "language": "fr",
-        "value": "The Big Apple"
-      }
-    ],
-    "it": [
-      {
-        "language": "it",
-        "value": "New York City"
-      },
-      {
-        "language": "it",
-        "value": "The City of New York"
-      },
-      {
-        "language": "it",
-        "value": "La grande mela"
-      },
-      {
-        "language": "it",
-        "value": "NYC"
-      },
-      {
-        "language": "it",
-        "value": "NY"
-      }
-    ],
-    "de": [
-      {
-        "language": "de",
-        "value": "City of New York"
-      },
-      {
-        "language": "de",
-        "value": "The Big Apple"
-      },
-      {
-        "language": "de",
-        "value": "NYC"
-      },
-      {
-        "language": "de",
-        "value": "New York"
-      }
-    ],
-    "nl": [
-      {
-        "language": "nl",
-        "value": "New York"
-      }
-    ],
-    "zh": [
-      {
-        "language": "zh",
-        "value": "\u7ebd\u7ea6\u5e02"
-      }
-    ],
-    "zh-hk": [
-      {
-        "language": "zh-hk",
-        "value": "\u7d10\u7d04\u5e02"
-      }
-    ],
-    "zh-tw": [
-      {
-        "language": "zh-tw",
-        "value": "\u7d10\u7d04\u5e02"
-      }
-    ],
-    "zh-mo": [
-      {
-        "language": "zh-mo",
-        "value": "\u7d10\u7d04\u5e02"
-      }
-    ]
-  },
-  "sitelinks": {
-    "arwiki": {
-      "site": "arwiki",
-      "title": "\u0646\u064a\u0648\u064a\u0648\u0631\u0643 (\u0645\u062f\u064a\u0646\u0629)"
-    },
-    "frwiki": {
-      "site": "frwiki",
-      "title": "New York"
-    },
-    "nlwiki": {
-      "site": "nlwiki",
-      "title": "New York City"
-    },
-    "enwiki": {
-      "site": "enwiki",
-      "title": "New York City"
-    },
-    "dewiki": {
-      "site": "dewiki",
-      "title": "New York City"
-    }
-  },
-  "claims": {
-    "P17": [
-      {
-        "id": "Q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB",
-        "mainsnak": {
-          "snaktype": "value",
-          "property": "P17",
-          "datavalue": {
-            "value": {
-              "entity-type": "item",
-              "numeric-id": 30
+    "pageid": 186,
+    "ns": 0,
+    "title": "Q60",
+    "lastrevid": 195301613,
+    "modified": "2015-02-10T12: 42: 02Z",
+    "id": "Q60",
+    "type": "item",
+    "aliases": {
+        "en": [
+            {
+                "language": "en",
+                "value": "NYC"
             },
-            "type": "wikibase-entityid"
-          }
-        },
-        "type": "statement",
-        "rank": "normal",
-        "references": [
-          {
-            "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
-            "snaks": {
-              "P143": [
-                {
-                  "snaktype": "value",
-                  "property": "P143",
-                  "datavalue": {
-                    "value": {
-                      "entity-type": "item",
-                      "numeric-id": 206855
-                    },
-                    "type": "wikibase-entityid"
-                  }
-                }
-              ]
+            {
+                "language": "en",
+                "value": "NewYork"
+            },
+            {
+                "language": "en",
+                "value": "CiudadAvenger"
             }
-          }
+        ],
+        "fr": [
+            {
+                "language": "fr",
+                "value": "NewYorkCity"
+            },
+            {
+                "language": "fr",
+                "value": "Lagrossepomme"
+            }
         ]
-      }
-    ],
-    "P107": [
-      {
-        "id": "Q60$4B2F299A-F5BB-4268-AD25-4F19B350CEB7",
-        "mainsnak": {
-          "snaktype": "value",
-          "property": "P107",
-          "datavalue": {
-            "value": {
-              "entity-type": "item",
-              "numeric-id": 618123
+    },
+    "labels": {
+        "en": {
+            "language": "en",
+            "value": "NewYorkCity"
+        },
+        "ar": {
+            "language": "ar",
+            "value": "\u0645\u062f\u064a\u0646\u0629\u0646\u064a\u0648\u064a\u0648\u0631\u0643"
+        },
+        "ps": {
+            "language": "ps",
+            "value": "\u0646\u064a\u0648\u064a\u0627\u0631\u06a9"
+        }
+    },
+    "descriptions": {
+        "en": {
+            "language": "en",
+            "value": "largestcityinNewYorkandtheUnitedStatesofAmerica"
+        },
+        "it": {
+            "language": "it",
+            "value": "citt\u00e0degliStatiUnitid'America"
+        },
+        "ro": {
+            "language": "ro",
+            "value": "ora\u015fulcelmaimaredinSUA"
+        }
+    },
+    "claims": {
+        "P1151": [
+            {
+                "id": "Q60$6f832804-4c3f-6185-38bd-ca00b8517765",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P1151",
+                    "datatype": "wikibase-item",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "numeric-id": 6342720
+                        },
+                        "type": "wikibase-entityid"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            }
+        ],
+        "P31": [
+            {
+                "id": "Q60$a6df8e3e-4de0-19ec-9c5a-97a431aa21b2",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P31",
+                    "datatype": "wikibase-item",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "numeric-id": 200250
+                        },
+                        "type": "wikibase-entityid"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
             },
-            "type": "wikibase-entityid"
-          }
-        },
-        "type": "statement",
-        "rank": "normal",
-        "references": [
-          {
-            "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
-            "snaks": {
-              "P143": [
-                {
-                  "snaktype": "value",
-                  "property": "P143",
-                  "datavalue": {
-                    "value": {
-                      "entity-type": "item",
-                      "numeric-id": 206855
-                    },
-                    "type": "wikibase-entityid"
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    ],
-    "P6": [
-      {
-        "id": "Q60$a465c511-47bf-a90a-b527-aac32e185260",
-        "mainsnak": {
-          "snaktype": "value",
-          "property": "P6",
-          "datavalue": {
-            "value": {
-              "entity-type": "item",
-              "numeric-id": 212648
+            {
+                "id": "Q60$0407a9dd-4766-0fd8-33b9-fe5efdc16fc3",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P31",
+                    "datatype": "wikibase-item",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "numeric-id": 2264924
+                        },
+                        "type": "wikibase-entityid"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
             },
-            "type": "wikibase-entityid"
-          }
-        },
-        "qualifiers": {
-          "P580": [
             {
-              "hash": "rrrrww541cc531fa54adcaffebde6bef28d7uu7f",
-              "snaktype": "value",
-              "property": "P580",
-              "datavalue": {
-                "value": {
-                  "time": "+00000001994-01-01T00:00:00Z",
-                  "timezone": 0,
-                  "before": 0,
-                  "after": 0,
-                  "precision": 11,
-                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                "id": "Q60$b3b6a43c-410d-3042-9bb4-f8a8fb111dc5",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P31",
+                    "datatype": "wikibase-item",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "numeric-id": 515
+                        },
+                        "type": "wikibase-entityid"
+                    }
                 },
-                "type": "time"
-              }
+                "type": "statement",
+                "rank": "normal"
             }
-          ],
-          "P582": [
+        ],
+        "P6": [
             {
-              "hash": "qwerqwrqwrqwq1fa54adcaffebde6bef28d87d32",
-              "snaktype": "value",
-              "property": "P582",
-              "datavalue": {
-                "value": {
-                  "time": "+00000002001-12-31T00:00:00Z",
-                  "timezone": 0,
-                  "before": 0,
-                  "after": 0,
-                  "precision": 11,
-                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                "id": "Q60$5cc8fc79-4807-9800-dbea-fe9c20ab273b",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P6",
+                    "datatype": "wikibase-item",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "numeric-id": 4911497
+                        },
+                        "type": "wikibase-entityid"
+                    }
                 },
-                "type": "time"
-              }
-            }
-          ]
-        },
-        "type": "statement",
-        "rank": "normal"
-      },
-      {
-        "id": "Q60$b6d61f0b-408c-68e4-2dd4-b7f31c938f3d",
-        "mainsnak": {
-          "snaktype": "value",
-          "property": "P6",
-          "datavalue": {
-            "value": {
-              "entity-type": "item",
-              "numeric-id": 467133
+                "qualifiers": {
+                    "P580": [
+                        {
+                            "hash": "c53f3ca845b789e543ed45e3e1ecd1dd950e30dc",
+                            "snaktype": "value",
+                            "property": "P580",
+                            "datatype": "time",
+                            "datavalue": {
+                                "value": {
+                                    "time": "+00000002014-01-01T00: 00: 00Z",
+                                    "timezone": 0,
+                                    "before": 0,
+                                    "after": 0,
+                                    "precision": 11,
+                                    "calendarmodel": "http: //www.wikidata.org/entity/Q1985727"
+                                },
+                                "type": "time"
+                            }
+                        }
+                    ]
+                },
+                "qualifiers-order": [
+                    "P580"
+                ],
+                "type": "statement",
+                "rank": "preferred"
             },
-            "type": "wikibase-entityid"
-          }
-        },
-        "qualifiers": {
-          "P580": [
             {
-              "hash": "d103e3541cc531fa54adcaffebdeqweqweqeqweq",
-              "snaktype": "value",
-              "property": "P580",
-              "datavalue": {
-                "value": {
-                  "time": "+00000001990-01-01T00:00:00Z",
-                  "timezone": 0,
-                  "before": 0,
-                  "after": 0,
-                  "precision": 11,
-                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                "id": "q60$cad4e313-4b5e-e089-08b9-3b1c7998e762",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P6",
+                    "datatype": "wikibase-item",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "numeric-id": 607
+                        },
+                        "type": "wikibase-entityid"
+                    }
                 },
-                "type": "time"
-              }
-            }
-          ],
-          "P582": [
-            {
-              "hash": "d103e3541ccasdasdsadasdasdas6bef28d87d32",
-              "snaktype": "value",
-              "property": "P582",
-              "datavalue": {
-                "value": {
-                  "time": "+00000001993-12-31T00:00:00Z",
-                  "timezone": 0,
-                  "before": 0,
-                  "after": 0,
-                  "precision": 11,
-                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                "qualifiers": {
+                    "P580": [
+                        {
+                            "hash": "47c515b79f80e24e03375b327f2ac85184765d5b",
+                            "snaktype": "value",
+                            "property": "P580",
+                            "datatype": "time",
+                            "datavalue": {
+                                "value": {
+                                    "time": "+00000002002-01-01T00: 00: 00Z",
+                                    "timezone": 0,
+                                    "before": 0,
+                                    "after": 0,
+                                    "precision": 11,
+                                    "calendarmodel": "http: //www.wikidata.org/entity/Q1985727"
+                                },
+                                "type": "time"
+                            }
+                        }
+                    ],
+                    "P582": [
+                        {
+                            "hash": "1f463f78538c49ef6adf3a9b18e211af7195240a",
+                            "snaktype": "value",
+                            "property": "P582",
+                            "datatype": "time",
+                            "datavalue": {
+                                "value": {
+                                    "time": "+00000002013-12-31T00: 00: 00Z",
+                                    "timezone": 0,
+                                    "before": 0,
+                                    "after": 0,
+                                    "precision": 11,
+                                    "calendarmodel": "http: //www.wikidata.org/entity/Q1985727"
+                                },
+                                "type": "time"
+                            }
+                        }
+                    ]
                 },
-                "type": "time"
-              }
+                "qualifiers-order": [
+                    "P580",
+                    "P582"
+                ],
+                "type": "statement",
+                "rank": "normal",
+                "references": [
+                    {
+                        "hash": "296f900f120f258966df31e807218eac10cdd4e7",
+                        "snaks": {
+                            "P357": [
+                                {
+                                    "snaktype": "value",
+                                    "property": "P357",
+                                    "datatype": "string",
+                                    "datavalue": {
+                                        "value": "TheBloombergEraBegins",
+                                        "type": "string"
+                                    }
+                                }
+                            ],
+                            "P123": [
+                                {
+                                    "snaktype": "value",
+                                    "property": "P123",
+                                    "datatype": "wikibase-item",
+                                    "datavalue": {
+                                        "value": {
+                                            "entity-type": "item",
+                                            "numeric-id": 9684
+                                        },
+                                        "type": "wikibase-entityid"
+                                    }
+                                }
+                            ],
+                            "P854": [
+                                {
+                                    "snaktype": "value",
+                                    "property": "P854",
+                                    "datatype": "url",
+                                    "datavalue": {
+                                        "value": "http: //www.nytimes.com/2002/01/02/opinion/the-bloomberg-era-begins.html",
+                                        "type": "string"
+                                    }
+                                }
+                            ]
+                        },
+                        "snaks-order": [
+                            "P357",
+                            "P123",
+                            "P854"
+                        ]
+                    }
+                ]
             }
-          ]
+    },
+    "sitelinks": {
+        "afwiki": {
+            "site": "afwiki",
+            "title": "NewYorkStad",
+            "badges": []
         },
-        "type": "statement",
-        "rank": "normal"
-      }
-    ]
-  },
-  "_revision_": 67872331,
-  "_modified_": "2013-09-01T12:05:48Z"
+        "idwiki": {
+            "site": "idwiki",
+            "title": "KotaNewYork",
+            "badges": [
+                "Q17437798"
+            ]
+        },
+        "zuwiki": {
+            "site": "zuwiki",
+            "title": "NewYork(idolobha)",
+            "badges": []
+        }
+    }
 }
 </syntaxhighlight>
-
