@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d2e82ea5",
+        "filename": "client/includes/DataAccess/SnaksFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-20T17:32:38Z",
+      "side": 1,
+      "message": "seems to me like this should be the caller\u0027s responsibility. Why would a snak finder have to look up the entity?",
+      "revId": "3945a233581d3bbd28a0e0f0a036ccd99d697515",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_72311a56",
+        "filename": "client/includes/DataAccess/SnaksFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-20T17:32:38Z",
+      "side": 1,
+      "message": "All three private methods are on-liners. What\u0027s the point? Why not just inline them?",
+      "revId": "3945a233581d3bbd28a0e0f0a036ccd99d697515",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
