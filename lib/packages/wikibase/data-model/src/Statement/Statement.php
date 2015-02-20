@@ -32,6 +32,29 @@ class Statement extends Claim {
 	const RANK_DEPRECATED = 0;
 
 	/**
+	 * @since 0.2
+	 *
+	 * @var string|null
+	 */
+	private $guid = null;
+
+	/**
+	 * @since 0.1
+	 *
+	 * @var Snak
+	 */
+	private $mainSnak;
+
+	/**
+	 * The property value snaks making up the qualifiers for this statement.
+	 *
+	 * @since 0.1
+	 *
+	 * @var Snaks
+	 */
+	private $qualifiers;
+
+	/**
 	 * @var ReferenceList
 	 */
 	private $references;
@@ -56,6 +79,78 @@ class Statement extends Claim {
 		$this->mainSnak = $mainSnak;
 		$this->qualifiers = $qualifiers ?: new SnakList();
 		$this->references = $references ?: new ReferenceList();
+	}
+
+	/**
+	 * Returns the GUID of this statement.
+	 *
+	 * @since 0.2
+	 *
+	 * @return string|null
+	 */
+	public function getGuid() {
+		return $this->guid;
+	}
+
+	/**
+	 * Sets the GUID of this statement.
+	 *
+	 * @since 0.2
+	 *
+	 * @param string|null $guid
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function setGuid( $guid ) {
+		if ( !is_string( $guid ) && $guid !== null ) {
+			throw new InvalidArgumentException( '$guid must be a string or null' );
+		}
+
+		$this->guid = $guid;
+	}
+
+	/**
+	 * Returns the main value snak of this statement.
+	 *
+	 * @since 0.1
+	 *
+	 * @return Snak
+	 */
+	public function getMainSnak() {
+		return $this->mainSnak;
+	}
+
+	/**
+	 * Sets the main value snak of this statement.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Snak $mainSnak
+	 */
+	public function setMainSnak( Snak $mainSnak ) {
+		$this->mainSnak = $mainSnak;
+	}
+
+	/**
+	 * Returns the property value snaks making up the qualifiers for this statement.
+	 *
+	 * @since 0.1
+	 *
+	 * @return Snaks
+	 */
+	public function getQualifiers() {
+		return $this->qualifiers;
+	}
+
+	/**
+	 * Sets the property value snaks making up the qualifiers for this statement.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Snaks $propertySnaks
+	 */
+	public function setQualifiers( Snaks $propertySnaks ) {
+		$this->qualifiers = $propertySnaks;
 	}
 
 	/**
@@ -114,8 +209,6 @@ class Statement extends Claim {
 	}
 
 	/**
-	 * @see Claim::getRank
-	 *
 	 * @since 0.1
 	 *
 	 * @return integer
@@ -143,8 +236,6 @@ class Statement extends Claim {
 	}
 
 	/**
-	 * @see Claim::getAllSnaks.
-	 *
 	 * In addition to the Snaks returned by Claim::getAllSnaks(), this also includes all
 	 * snaks from any References in this Statement.
 	 *
