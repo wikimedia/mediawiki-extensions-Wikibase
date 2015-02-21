@@ -7,12 +7,10 @@ use Wikibase\DataAccess\SnaksFinder;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\StatementListProvider;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\DataAccess\SnaksFinder
@@ -28,19 +26,18 @@ use Wikibase\Test\MockRepository;
  */
 class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 
-	private function getSnaksFinder() {
-		$entityLookup = $this->getEntityLookup();
+	/**
+	 * @dataProvider findSnaksProvider
+	 */
+	public function testFindSnaks( array $expected, StatementListProvider $statementListProvider, PropertyId $propertyId, $acceptableRanks = null ) {
+		$snaksFinder = new SnaksFinder();
 
-		return new SnaksFinder( $entityLookup );
+		$snakList = $snaksFinder->findSnaks( $statementListProvider, $propertyId, $acceptableRanks );
+		$this->assertEquals( $expected, $snakList );
 	}
 
-	/**
-	 * @return EntityLookup
-	 */
-	private function getEntityLookup() {
+	public function findSnaksProvider() {
 		$propertyId = new PropertyId( 'P1337' );
-
-		$mockRepository = new MockRepository();
 
 		$statement1 = new Statement( new Claim( new PropertyValueSnak(
 			$propertyId,
@@ -67,31 +64,6 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 		$item->getStatements()->addStatement( $statement2 );
 		$item->getStatements()->addStatement( $statement3 );
 
-		$property = Property::newFromType( 'string' );
-		$property->setId( $propertyId );
-		$property->getFingerprint()->setLabel( 'en', 'a kitten!' );
-
-		$mockRepository->putEntity( $item );
-		$mockRepository->putEntity( $property );
-
-		return $mockRepository;
-	}
-
-	/**
-	 * @dataProvider findSnaksProvider
-	 */
-	public function testFindSnaks( array $expected, ItemId $itemId, PropertyId $propertyId, $acceptableRanks = null ) {
-		$snaksFinder = $this->getSnaksFinder();
-
-		$snakList = $snaksFinder->findSnaks( $itemId, $propertyId, $acceptableRanks );
-		$this->assertEquals( $expected, $snakList );
-	}
-
-	public function findSnaksProvider() {
-		$itemId = new ItemId( 'Q42' );
-
-		$propertyId = new PropertyId( 'P1337' );
-
 		$snaksNormal = array(
 			new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
 			new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
@@ -99,11 +71,11 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 		$snakDeprecated = array( new PropertyValueSnak( $propertyId, new StringValue( 'three kittens!!!' ) ) );
 
 		return array(
-			array( $snaksNormal, $itemId, new PropertyId( 'P1337' ) ),
-			array( array(), $itemId, new PropertyId( 'P90001' ) ),
+			array( $snaksNormal, $item, new PropertyId( 'P1337' ) ),
+			array( array(), $item, new PropertyId( 'P90001' ) ),
 			array(
 				$snakDeprecated,
-				$itemId,
+				$item,
 				new PropertyId( 'P1337' ),
 				array( Statement::RANK_DEPRECATED )
 			),

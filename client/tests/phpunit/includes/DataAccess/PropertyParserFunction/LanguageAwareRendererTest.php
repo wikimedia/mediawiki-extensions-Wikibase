@@ -75,7 +75,8 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			$propertyIdResolver,
 			$snaksFinder,
 			$this->getSnakFormatter(),
-			$this->getUsageAccumulator( $usages )
+			$this->getUsageAccumulator( $usages ),
+			$this->getEntityLookup()
 		);
 	}
 
@@ -210,6 +211,17 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return $propertyIdResolver;
+	}
+
+	private function getEntityLookup() {
+		$lookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
+		$lookup->expects( $this->any() )
+			->method( 'getEntity' )
+			->will( $this->returnValue(
+				$this->getMock( 'Wikibase\DataModel\StatementListProvider' )
+			) );
+
+		return $lookup;
 	}
 
 	/***

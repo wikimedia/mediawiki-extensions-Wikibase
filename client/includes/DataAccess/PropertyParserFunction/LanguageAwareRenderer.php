@@ -13,8 +13,10 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * PropertyClaimsRenderer of the {{#property}} parser function.
@@ -54,24 +56,32 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 	private $usageAccumulator;
 
 	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
 	 * @param Language $language
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param SnakFormatter $snakFormatter
 	 * @param UsageAccumulator $usageAcc
+	 * @param EntityLookup $entityLookup
 	 */
 	public function __construct(
 		Language $language,
 		PropertyIdResolver $propertyIdResolver,
 		SnaksFinder $snaksFinder,
 		SnakFormatter $snakFormatter,
-		UsageAccumulator $usageAcc
+		UsageAccumulator $usageAcc,
+		EntityLookup $entityLookup
 	) {
 		$this->language = $language;
 		$this->propertyIdResolver = $propertyIdResolver;
 		$this->snaksFinder = $snaksFinder;
 		$this->snakFormatter = $snakFormatter;
 		$this->usageAccumulator = $usageAcc;
+		$this->entityLookup = $entityLookup;
 	}
 
 	/**
@@ -166,8 +176,14 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 	private function renderWithStatus( EntityId $entityId, PropertyId $propertyId ) {
 		wfProfileIn( __METHOD__ );
 
+		$entity = $this->entityLookup->getEntity( $entityId );
+
+		if ( !$entity instanceof StatementListProvider ) {
+			return Status::newGood( '' );
+		}
+
 		$snaks = $this->snaksFinder->findSnaks(
-			$entityId,
+			$entity,
 			$propertyId,
 			$this->language->getCode()
 		);

@@ -12,6 +12,7 @@ use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * @since 0.5
@@ -47,21 +48,29 @@ class PropertyClaimsRendererFactory {
 	private $languageAwareRenderers = array();
 
 	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
+	 * @param EntityLookup $entityLookup
 	 */
 	public function __construct(
 		PropertyIdResolver $propertyIdResolver,
 		SnaksFinder $snaksFinder,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		OutputFormatSnakFormatterFactory $snakFormatterFactory
+		OutputFormatSnakFormatterFactory $snakFormatterFactory,
+		EntityLookup $entityLookup
 	) {
 		$this->propertyIdResolver = $propertyIdResolver;
 		$this->snaksFinder = $snaksFinder;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
+		$this->entityLookup = $entityLookup;
 	}
 
 	/**
@@ -93,7 +102,8 @@ class PropertyClaimsRendererFactory {
 			$this->propertyIdResolver,
 			$this->snaksFinder,
 			$this->newSnakFormatterForLanguage( $language ),
-			$usageAccumulator
+			$usageAccumulator,
+			$this->entityLookup
 		);
 	}
 
