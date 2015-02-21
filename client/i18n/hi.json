@@ -8,7 +8,7 @@
 		]
 	},
 	"wikibase-client-desc": "विकिबेस एक्सटेंशन के लिए क्लाइन्ट",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}} क्लाइंट",
+	"tooltip-t-wikibase": "सम्बद्ध डाटा भण्डार प्रविष्टि की कड़ी",
 	"wikibase-after-page-move": "स्थान्तरित पृष्ठ पर भाषा कड़ियो को बनाए रखने के लिए आप सम्बन्धित विकिडेटा आइटम का भी [$1 अद्यतन] कर सकते हैं।",
 	"wikibase-after-page-move-queued": "इस पृष्ठ से जुड़ा [$1 {{WBREPONAME}} वस्तु] जल्द ही स्वतः अद्यतनीत किया जायेगा।",
 	"wikibase-comment-add": "{{WBREPONAME}} वस्तु बनाया गया है।",
@@ -21,6 +21,7 @@
 	"wikibase-comment-sitelink-change": "भाषा कड़ी $1 से $2 में बदल दी गई",
 	"wikibase-comment-sitelink-remove": "भाषा कड़ी हटा दी: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|परिवर्तन}}",
+	"wikibase-dataitem": "{{WBREPONAME}} प्रविष्टि",
 	"wikibase-editlinks": "कड़ी संपादित करें",
 	"wikibase-editlinkstitle": "अन्तरभाषा कड़ी संपादित करें",
 	"wikibase-linkitem-addlinks": "कड़ी जोड़ें",
@@ -38,8 +39,12 @@
 	"wikibase-linkitem-not-loggedin": "इस सुविधा के उपयोग के लिए आपका इस विकि और [$1 केन्द्रीय डेटा रिपोज़िटरी] पर लॉग इन होना आवश्यक है।",
 	"wikibase-linkitem-success-link": "पृष्ठ सफलतापूर्वक जुड़ गया है। आप कड़ियाँ युक्त आइटम को हमारी [$1 केन्द्रीय डेटा रिपोज़िटरी] में पा सकते हैं।",
 	"wikibase-rc-hide-wikidata": "विकिडेटा $1",
+	"wikibase-rc-hide-wikidata-hide": "छुपाएँ",
+	"wikibase-rc-hide-wikidata-show": "दिखाएँ",
 	"wikibase-rc-show-wikidata-pref": "विकिडेटा संपादनो को हाल के परिवर्तनों में दिखाएँ",
+	"wikibase-rc-wikibase-edit-letter": "डा",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} परिवर्तन्",
 	"wikibase-unconnectedpages-submit": "जाएँ",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\" एक मान्य भाषा कोड नहीं है।"
+	"wikibase-unconnectedpages-invalid-language": "\"$1\" एक मान्य भाषा कोड नहीं है।",
+	"wikibase-otherprojects": "अन्य परियोजनाएँ"
 }

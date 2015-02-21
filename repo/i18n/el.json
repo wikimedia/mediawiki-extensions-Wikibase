@@ -10,7 +10,6 @@
 		]
 	},
 	"wikibase-desc": "Αποθετήριο δομημένων δεδομένων",
-	"specialpages-group-wikibaserepo": "Wikibase αποθετήριο",
 	"wikibase-entity-item": "αντικείμενο",
 	"wikibase-entity-property": "ιδιότητα",
 	"wikibase-entity-query": "ερώτημα",
@@ -45,7 +44,7 @@
 	"wikibase-terms": "Σε άλλες γλώσσες",
 	"wikibase-sitelinks-empty": "Καμία σύνδεση τοποθεσίας για αυτό το στοιχείο ακόμα.",
 	"wikibase-sitelinks-input-help-message": "Ορίστε μια σύνδεση σε μια σελίδα που σχετίζεται με αυτό το αντικείμενο.",
-	"wikibase-sitelinks-special": "Συνδεδεμένες σελίδες σε άλλους ιστότοπους",
+	"wikibase-sitelinks-special": "Άλλοι ιστότοποι",
 	"wikibase-remove": "αφαίρεση",
 	"wikibase-move-up": "Μετακίνηση επάνω",
 	"wikibase-move-down": "Μετακίνηση κάτω",

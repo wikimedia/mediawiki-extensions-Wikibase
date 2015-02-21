@@ -7,7 +7,6 @@
 		]
 	},
 	"wikibase-client-desc": "Client fir d'Wikibase Erweiderung",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}}-Client",
 	"wikibase-after-page-move": "Dir kënnt och dat associéiert {{WBREPONAME}}-Element [$1 aktualiséiere] fir d'Interwikilinken op der geréckelter Säit bäizebehalen.",
 	"wikibase-after-page-move-queued": "D'[$1 {{WBREPONAME}}-Element] dat mat dëser Säit associéiert ass gëtt geschwënn automatesch aktualiséiert.",
 	"wikibase-comment-add": "Ee {{WBREPONAME}}-Element gouf ugeluecht.",
@@ -43,6 +42,7 @@
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}}-Ännerungen an de rezenten Ännerunge weisen",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-Ännerung",
+	"wikibase-replicationnote": "Denkt w.e.g. dorun datt et e puer Minutten dauere ka bis d'Ännerungen op alle Wikien ze gesi sinn.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-Ännerungen an Ärer Iwwerwaachungslëscht weisen",
 	"wikibase-error-invalid-entity-id": "D'ID déi Dir aginn hutt ass am System net bekannt. Benotzt w.e.g. en valabel ID.",
 	"special-unconnectedpages": "Säiten déi net mat Elementer verbonne sinn",
@@ -54,5 +54,6 @@
 	"wikibase-unconnectedpages-iwdata-label": "Nëmme Säite mat Linke mat anere Sproochen",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|Link mat enger anerer Sprooch|Linke mat anere Sproochen}} op der Säit)",
 	"wikibase-pageinfo-entity-id": "ID vum {{WBREPONAME}}-Element",
-	"wikibase-pageinfo-entity-id-none": "Keng"
+	"wikibase-pageinfo-entity-id-none": "Keng",
+	"wikibase-otherprojects": "Aner Projeten"
 }

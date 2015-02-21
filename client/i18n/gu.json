@@ -2,15 +2,19 @@
 	"@metadata": {
 		"authors": [
 			"Ashok modhvadia",
-			"KartikMistry"
+			"KartikMistry",
+			"Vyom"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} વસ્તુ",
+	"wikibase-editlinks": "કડીઓમાં ફેરફાર કરો",
+	"wikibase-editlinkstitle": "આંતરવિકિ ભાષાઓની કડીમાં ફેરફાર કરો",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "છુપાવો",
 	"wikibase-rc-hide-wikidata-show": "દર્શાવો",
 	"wikibase-rc-wikibase-edit-letter": "ડેટા",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} સંપાદન",
 	"wikibase-unconnectedpages-submit": "જાઓ",
-	"wikibase-pageinfo-entity-id-none": "કંઇ નહિં"
+	"wikibase-pageinfo-entity-id-none": "કંઇ નહિં",
+	"wikibase-otherprojects": "અન્ય પ્રકલ્પ"
 }
