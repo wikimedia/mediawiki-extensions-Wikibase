@@ -25,7 +25,7 @@
 	"wikibase-comment-linked": "Un elemento {{WBREPONAME}} se ha vinculado a esta página.",
 	"wikibase-comment-unlink": "Esta página ha sido desvinculados del elemento {{WBREPONAME}}. Los enlaces de los idiomas han sido eliminados.",
 	"wikibase-comment-restore": "No se han borrado los artículos {{WBREPONAME}} asociados. Enlaces de idioma enlaces restaurado.",
-	"wikibase-comment-update": "Elemento de {{WBREPONAME}} cambiado",
+	"wikibase-comment-update": "Se cambió elemento de {{WBREPONAME}}",
 	"wikibase-comment-sitelink-add": "Se ha añadido un enlace de idioma: $1",
 	"wikibase-comment-sitelink-change": "Se ha cambiado el enlace de idioma de $1 a $2",
 	"wikibase-comment-sitelink-remove": "Se ha eliminado el enlace de idioma: $1",

@@ -7,7 +7,7 @@
 		]
 	},
 	"wikibase-client-desc": "Stellt einen Client für die Erweiterung Wikibase bereit",
-	"tooltip-t-wikibase": "Link zum verbundenen Datenrepositoriumsobjekt",
+	"tooltip-t-wikibase": "Link zum verbundenen Objekt im Datenrepositorium",
 	"wikibase-after-page-move": "Du kannst auch das zugeordnete {{WBREPONAME}}-Element [$1 aktualisieren], um Sprachlinks von verschobenen Seiten zu verwalten.",
 	"wikibase-after-page-move-queued": "Das mit dieser Seite verbundene [$1 {{WBREPONAME}}-Objekt] wird bald automatisch aktualisiert werden.",
 	"wikibase-after-page-delete": "Du kannst auch den Link zu dieser Seite aus dem dazugehörigen [$1 {{WBREPONAME}}-Objekt] entfernen, um Sprachlinks zu verwalten.",

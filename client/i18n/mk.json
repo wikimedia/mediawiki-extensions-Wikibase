@@ -5,7 +5,6 @@
 		]
 	},
 	"wikibase-client-desc": "Клиент за додатокот „Викибаза“",
-	"specialpages-group-wikibaseclient": "Клиент на {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Врска до сврзан предмет во податотечното складиште",
 	"apihelp-query+pageterms-description": "Дај поими поврзани со дадена страница преку поврзан податочнен предмет.",
 	"apihelp-query+pageterms-example-simple": "Дај ги сите поими поврзани со страницата „Лондон“, во корисничката страница.",
@@ -51,6 +50,7 @@
 	"wikibase-rc-wikibase-edit-title": "Уредување на {{WBREPONAME}}",
 	"wikibase-replicationnote": "Имајте предвид дека се потребни неколку минути за промените да станат видливи на сите викија",
 	"wikibase-watchlist-show-changes-pref": "Прикажи уредувања на {{WBREPONAME}} во набљудуваните",
+	"wikibase-error-deserialize-error": "Не успеав да ги децентрализирам податоците",
 	"wikibase-error-serialize-error": "Не успеав да ги серијализирам податоците",
 	"wikibase-error-invalid-entity-id": "Назнаката не му е позната на системот. Внесете важечка назнака.",
 	"special-unconnectedpages": "Страници што не се врзани со предмети",

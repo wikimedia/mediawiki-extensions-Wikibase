@@ -5,6 +5,7 @@
 		]
 	},
 	"wikibase-after-page-move": "T'inkisqa {{WBREPONAME}} qallawatapas [$1 musuqchaytam] atinki astasqa p'anqapi rimay t'inkikunata hat'allinaykipaq.",
+	"wikibase-after-page-move-queued": "Kay p'anqawan t'inkisqa [$1 {{WBREPONAME}} qallawaqa] utqaylla musuqchasqam kanqa.",
 	"wikibase-dataitem": "{{WBREPONAME}} willa qallawa",
 	"wikibase-editlinks": "T'inkikunata llamk'apuy",
 	"wikibase-editlinkstitle": "Wikipura t'inkikunata llamk'apuy",
@@ -25,6 +26,7 @@
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} llamk'apusqakunata rikuchiy ñaqha hukchasqakunapi",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} llamk'apusqa",
+	"wikibase-replicationnote": "Ama qunqaychu, huk minutukunam unayanqaman hukchasqaykikuna tukuy wikikunapi rikunalla kanankama.",
 	"wikibase-unconnectedpages-submit": "Riy",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} qallawa ID",
 	"wikibase-pageinfo-entity-id-none": "Mana mayqinpas",

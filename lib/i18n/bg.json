@@ -1,12 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Spiritia"
+			"Spiritia",
+			"DCLXVI"
 		]
 	},
-	"wikibase-entity-item": "обект",
-	"wikibase-entity-property": "свойство",
-	"wikibase-entity-query": "заявка",
 	"wikibase-error-unexpected": "Възникна неочаквана грешка.",
 	"wikibase-error-save-generic": "Промените не могат да бъдат завършени, поради възникнала грешка при опита за съхраняване.",
 	"wikibase-error-remove-generic": "Промените не могат да бъдат завършени, поради възникнала грешка при опита за изтриване.",
@@ -17,14 +15,9 @@
 	"wikibase-error-autocomplete-connection": "Възникна проблем със заявката към API интерфейса на Уикипедия. Опитайте по-късно.",
 	"wikibase-error-autocomplete-response": "Отговор на сървъра: $1",
 	"wikibase-error-ui-no-external-page": "Посочената статия не беше намерена в съответния сайт.",
-	"wikibase-error-ui-cant-edit": "Нямате права да извършите това действие.",
-	"wikibase-error-ui-no-permissions": "Нямате необходимите права да извършите това действие.",
-	"wikibase-error-ui-link-exists": "Свързването с тази страница е невъзможно. С нея вече е свързан друг обект от Уикиданни.",
-	"wikibase-error-ui-session-failure": "Сесията ви е изтекла. Влезте отново в системата.",
 	"wikibase-error-ui-edit-conflict": "Настъпил е конфликт на редакции. Презаредете и съхранете отново.",
-	"wikibase-replicationnote": "Може да отнеме няколко минути, докато промените се отразят във всички уикита.",
+	"wikibase-sitelinks-wikipedia": "Уикипедия",
 	"wikibase-sitelinks-sitename-columnheading": "Език",
-	"wikibase-sitelinks-siteid-columnheading": "Езиков код",
 	"wikibase-sitelinks-link-columnheading": "Свързана статия",
 	"wikibase-snakview-snaktypeselector-somevalue": "неразпозната стойност",
 	"wikibase-tooltip-error-details": "Подробности",

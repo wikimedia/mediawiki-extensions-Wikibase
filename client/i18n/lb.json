@@ -7,6 +7,7 @@
 		]
 	},
 	"wikibase-client-desc": "Client fir d'Wikibase Erweiderung",
+	"tooltip-t-wikibase": "Link op dat Element aus der Datebank mat deem et verbonn ass",
 	"wikibase-after-page-move": "Dir kënnt och dat associéiert {{WBREPONAME}}-Element [$1 aktualiséiere] fir d'Interwikilinken op der geréckelter Säit bäizebehalen.",
 	"wikibase-after-page-move-queued": "D'[$1 {{WBREPONAME}}-Element] dat mat dëser Säit associéiert ass gëtt geschwënn automatesch aktualiséiert.",
 	"wikibase-comment-add": "Ee {{WBREPONAME}}-Element gouf ugeluecht.",

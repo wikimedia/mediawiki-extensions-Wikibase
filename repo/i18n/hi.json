@@ -15,6 +15,7 @@
 	"wikibase-addreference": "स्रोत जोड़ें",
 	"wikibase-save-inprogress": "सहेजा जा रहा है…",
 	"wikibase-remove-inprogress": "हटाया जा रहा है…",
+	"wikibase-label-empty": "कोई लेबल परिभाषित नहीं",
 	"wikibase-description-empty": "कोई विवरण परिभाषित नहीं",
 	"wikibase-description-edit-placeholder": "विवरण दर्ज करें",
 	"wikibase-sitelink-site-edit-placeholder": "साइट",

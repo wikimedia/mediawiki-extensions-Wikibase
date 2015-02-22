@@ -3,7 +3,8 @@
 		"authors": [
 			"Spiritia",
 			"පසිඳු කාවින්ද",
-			"Borislav"
+			"Borislav",
+			"DCLXVI"
 		]
 	},
 	"wikibase-desc": "Хранилище на структурирани данни",
@@ -24,6 +25,7 @@
 	"wikibase-description-input-help-message": "Въведете кратко описание на $1.",
 	"wikibase-terms": "На други езици",
 	"wikibase-sitelinks-empty": "За този обект все още липсват междуезикови препратки.",
+	"wikibase-sitelinks-special": "Други сайтове",
 	"wikibase-remove": "премахване",
 	"wikibase-restore-title": "Възстановяване на стара версия на \"$1\"",
 	"wikibase-aliases-label": "Среща се и като:",

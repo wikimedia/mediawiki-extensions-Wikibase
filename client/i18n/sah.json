@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"HalanTul"
+		]
+	},
+	"tooltip-t-wikibase": "Репозиторийга сигэнии",
+	"wikibase-comment-update": "{{WBREPONAME}} уларыйда",
+	"wikibase-dataitem": "{{WBREPONAME}} кэрискэ",
+	"wikibase-editlinks": "Сигэни уларыт",
+	"wikibase-editlinkstitle": "Омук тылынан сигэлэри уларытыы",
+	"wikibase-rc-wikibase-edit-letter": "д",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}: уларыт"
+}
