@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4ba780ba",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-22T00:52:15Z",
+      "side": 1,
+      "message": "That is a long list of dependencies :)",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
