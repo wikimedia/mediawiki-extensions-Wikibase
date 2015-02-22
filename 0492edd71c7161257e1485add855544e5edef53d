@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6b935c5b",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-22T01:05:55Z",
+      "side": 1,
+      "message": "the body here could be in a $this-\u003eaddStatementQualifiers()",
+      "revId": "0492edd71c7161257e1485add855544e5edef53d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0b84280e",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-22T01:05:55Z",
+      "side": 1,
+      "message": "addStatementReferences",
+      "revId": "0492edd71c7161257e1485add855544e5edef53d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cb8150fe",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-22T01:05:55Z",
+      "side": 1,
+      "message": "$isTruthy",
+      "revId": "0492edd71c7161257e1485add855544e5edef53d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_eb7e8c13",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-22T01:05:55Z",
+      "side": 1,
+      "message": "true )",
+      "revId": "0492edd71c7161257e1485add855544e5edef53d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8b77d835",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-22T01:05:55Z",
+      "side": 1,
+      "message": "The body of this else could also go into its own method",
+      "revId": "0492edd71c7161257e1485add855544e5edef53d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4b8d402d",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-22T01:05:55Z",
+      "side": 1,
+      "message": "This seems to be unused. In any case, this is a OCP violation.\n\nhttps://en.wikipedia.org/wiki/Open/closed_principle\n\nWhat you probably want to do here is to employ something akin to the Strategy Pattern\n\nhttps://en.wikipedia.org/wiki/Strategy_pattern\n\nYou can have a DataValueRdfSerializer (I did not look at the context here too much, so the name might be bad) interface, with\n\n* void addValue()\n* bool canAddValue()\n\nThen you can have a service that gets an array of implementations, and loops over them to determine which one to use. This RdfBuilder then simply needs this service.\n\nThat will also help cut down the size and responsibility of this class.",
+      "revId": "0492edd71c7161257e1485add855544e5edef53d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
