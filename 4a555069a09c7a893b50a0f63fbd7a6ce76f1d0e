@@ -86,6 +86,24 @@
       "revId": "4a555069a09c7a893b50a0f63fbd7a6ce76f1d0e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ec821997",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-23T23:26:45Z",
+      "side": 1,
+      "message": "I agree about keeping a dumpJson.php wrapper... would be nice for the dump creation process. I guess \"createDump\" or \"dumpEntities\" could be good names?!",
+      "parentUuid": "6e7c4fa4_ecde99de",
+      "revId": "4a555069a09c7a893b50a0f63fbd7a6ce76f1d0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
