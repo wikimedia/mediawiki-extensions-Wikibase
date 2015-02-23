@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e7c4fa4_2c001138",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-23T23:21:31Z",
+      "side": 1,
+      "message": "really? :) maybe some of this is cut and paste, but think a bit of this is new.",
+      "revId": "4a555069a09c7a893b50a0f63fbd7a6ce76f1d0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ecf5394e",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-23T23:21:31Z",
+      "side": 1,
+      "message": "if you want to be added here, think it\u0027s appropriate",
+      "revId": "4a555069a09c7a893b50a0f63fbd7a6ce76f1d0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_cc6b9d14",
         "filename": "repo/maintenance/dumpJson.php",
         "patchSetId": 18
