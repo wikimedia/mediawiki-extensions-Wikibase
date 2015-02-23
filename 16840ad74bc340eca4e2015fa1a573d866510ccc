@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2bca3ba3",
+        "filename": "lib/includes/formatters/EntityIdValueFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T19:39:22Z",
+      "side": 1,
+      "message": "blank line please",
+      "revId": "16840ad74bc340eca4e2015fa1a573d866510ccc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ebbf63f5",
+        "filename": "lib/includes/formatters/EscapingEntityIdFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T19:39:22Z",
+      "side": 1,
+      "message": "Please add parameter documentation. In particular, the expected signature of the callable must be documented.",
+      "revId": "16840ad74bc340eca4e2015fa1a573d866510ccc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ebebe39e",
+        "filename": "repo/includes/Diff/DifferencesSnakVisualizer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T19:39:22Z",
+      "side": 1,
+      "message": "Please restore the error handling here. If some entity ID cannot be rendered (e.g. because looking up the label triggers a database error, or whatever), we want to still be able to display the diff.",
+      "revId": "16840ad74bc340eca4e2015fa1a573d866510ccc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
