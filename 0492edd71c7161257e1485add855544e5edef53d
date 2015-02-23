@@ -101,6 +101,24 @@
       "revId": "0492edd71c7161257e1485add855544e5edef53d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_172bea78",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T11:38:18Z",
+      "side": 1,
+      "message": "I agree that we want to use a registry for (sub)graph builders for DataValues (I woulnd\u0027t call thouse \"serializers\" though, that would be very misleading; They correspond to RdfBuilder, not RdfSerializer). \n\nI would also like using the strategy pattern for truthy mode, but the different output modes are nut mutually exclusive, so it\u0027s not trivial.\n\nThat being said: I think factoring out the handing for the different value types  (or data types) can be split out in a follow-up. Adding them here is find for now. Get gets us moving forward without being blocked on refactoring, and allows us to explore which abstractions we actually need.",
+      "parentUuid": "6e7c4fa4_4b8d402d",
+      "revId": "0492edd71c7161257e1485add855544e5edef53d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
