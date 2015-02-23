@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c6acde9f",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T20:46:51Z",
+      "side": 1,
+      "message": "I had to stare at this for 5 minutes to understand it. Still makes my head buzz. So, how about this?\n\n  $value \u003d preg_replace( \u0027/\\d+(\\d{4})/\u0027, \u0027$1\u0027, $value );",
+      "revId": "227b0e3db2c10bce00daf72c7150abaf6c1dd37c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
