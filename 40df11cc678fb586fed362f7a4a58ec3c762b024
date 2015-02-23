@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_204c9a42",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T18:05:46Z",
+      "side": 1,
+      "message": "Better, but clunky. Thinking about it, it seems like what this thing does is implement a transclusion mechanism. It transcludes data values on a wikipage, tracks usage, and handled errors. StatementTransclusionInteractor? StatementTranscluder?",
+      "parentUuid": "6e7c4fa4_9ab5df7a",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_17a44a9d",
         "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
         "patchSetId": 5
@@ -195,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_a01f4a5d",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T18:05:46Z",
+      "side": 1,
+      "message": "We could just wrap it on our end for the moment. But not in this patch, I guess.",
+      "parentUuid": "6e7c4fa4_5a8427b4",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_97affa77",
         "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
         "patchSetId": 5
@@ -224,6 +260,24 @@
       "side": 1,
       "message": "Could be done in a follow-up",
       "parentUuid": "6e7c4fa4_97affa77",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8051ee12",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T18:05:46Z",
+      "side": 1,
+      "message": "sure",
+      "parentUuid": "6e7c4fa4_1aa1cf35",
       "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -265,6 +319,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_c07286ab",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T18:05:46Z",
+      "side": 1,
+      "message": "Filing silently isn\u0027t fool proof.\nI think an empty string is fine e.g. if there is no statement for the requested property. But if the entity isn\u0027t there, or the property doesn\u0027t even exist, then it\u0027s good to indicate this to the caller. Returning nil sounds good, or a formatted error string (if there\u0027s a convention for this in Scribunto modules). An exception may be too harsh in case an entity got deleted.",
+      "parentUuid": "6e7c4fa4_ba50db37",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d7e012ca",
         "filename": "client/includes/scribunto/mw.wikibase.entity.lua",
         "patchSetId": 5
@@ -294,6 +366,24 @@
       "side": 1,
       "message": "true... we could defer loading this using a stub metatable as well, I\u0027m just not sure that\u0027s worth it. Also it\u0027s unrelated here, could be followed-up",
       "parentUuid": "6e7c4fa4_d7e012ca",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_80680eb9",
+        "filename": "client/includes/scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T18:05:46Z",
+      "side": 1,
+      "message": "yea, just made me wonder",
+      "parentUuid": "6e7c4fa4_daf11767",
       "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
