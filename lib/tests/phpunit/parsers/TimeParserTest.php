@@ -95,7 +95,7 @@ class TimeParserTest extends StringValueParserTest {
 			'1980s' =>
 				array( '+0000000000001980-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeFormatter::CALENDAR_GREGORIAN ),
 
-			//Wikibase\Lib\DateTimeParser
+			// Wikibase\Lib\PhpDateTimeParser
 			'10/10/10' =>
 				array( '+0000000000000010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1 July 2013' =>

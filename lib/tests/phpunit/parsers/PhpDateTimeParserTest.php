@@ -5,11 +5,11 @@ namespace Wikibase\Lib\Parsers\Test;
 use DataValues\TimeValue;
 use ValueFormatters\TimeFormatter;
 use ValueParsers\Test\StringValueParserTest;
-use Wikibase\Lib\Parsers\DateTimeParser;
 use Wikibase\Lib\Parsers\EraParser;
+use Wikibase\Lib\Parsers\PhpDateTimeParser;
 
 /**
- * @covers Wikibase\Lib\Parsers\DateTimeParser
+ * @covers Wikibase\Lib\Parsers\PhpDateTimeParser
  *
  * @group ValueParsers
  * @group WikibaseLib
@@ -20,10 +20,10 @@ use Wikibase\Lib\Parsers\EraParser;
  * @author Adam Shorland
  * @author Thiemo Mättig
  */
-class DateTimeParserTest extends StringValueParserTest {
+class PhpDateTimeParserTest extends StringValueParserTest {
 
 	/**
-	 * @return DateTimeParser
+	 * @return PhpDateTimeParser
 	 */
 	protected function getInstance() {
 		$class = $this->getParserClass();
@@ -60,7 +60,7 @@ class DateTimeParserTest extends StringValueParserTest {
 	 * @return string
 	 */
 	protected function getParserClass() {
-		return 'Wikibase\Lib\Parsers\DateTimeParser';
+		return 'Wikibase\Lib\Parsers\PhpDateTimeParser';
 	}
 
 	/**
@@ -212,6 +212,7 @@ class DateTimeParserTest extends StringValueParserTest {
 			'10...10...2010',
 			'2015-00-00',
 			'00000002015-00-00',
+			// FIXME: Should also fail for '92015-00-00'!
 			'Jann 2014',
 			'1980x',
 			'1980s', // supported by MWTimeIsoParser
