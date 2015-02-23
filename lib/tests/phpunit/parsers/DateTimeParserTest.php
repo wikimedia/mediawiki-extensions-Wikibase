@@ -151,6 +151,8 @@ class DateTimeParserTest extends StringValueParserTest {
 				array( '-0000000000010100-03-01T00:00:00Z' ),
 
 			// Years with leading zeros
+			'009-08-07' =>
+				array( '+0000000000000009-08-07T00:00:00Z' ),
 			'4th July 00000002015' =>
 				array( '+0000000000002015-07-04T00:00:00Z' ),
 			'00000002015-07-04' =>
