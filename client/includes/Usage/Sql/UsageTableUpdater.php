@@ -221,12 +221,7 @@ class UsageTableUpdater {
 		$c = 0;
 
 		foreach ( $batches as $rows ) {
-			$this->connection->insert(
-				$this->tableName,
-				$rows,
-				__METHOD__
-			);
-
+			$this->connection->insert( $this->tableName, $rows, __METHOD__, array( 'IGNORE' ) );
 			$c += $this->connection->affectedRows();
 		}
 
