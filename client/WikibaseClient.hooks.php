@@ -443,29 +443,36 @@ final class ClientHooks {
 
 		$siteGroup = $wikibaseClient->getLangLinkSiteGroup();
 
+		$languageUrls = $template->get( 'language_urls' );
+		$hasLangLinks = $languageUrls !== false && !empty( $languageUrls );
+
 		$langLinkGenerator = new RepoItemLinkGenerator(
 			WikibaseClient::getDefaultInstance()->getNamespaceChecker(),
 			$repoLinker,
 			$entityIdParser,
-			$siteGroup
+			$siteGroup,
+			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
 
 		$action = Action::getActionName( $skin->getContext() );
 
-		$isAnon = ! $skin->getContext()->getUser()->isLoggedIn();
 		$noExternalLangLinks = $skin->getOutput()->getProperty( 'noexternallanglinks' );
 		$prefixedId = $skin->getOutput()->getProperty( 'wikibase_item' );
 
-		$editLink = $langLinkGenerator->getLink( $title, $action, $isAnon, $noExternalLangLinks, $prefixedId );
+		$editLink = $langLinkGenerator->getLink( $title, $action, $hasLangLinks, $noExternalLangLinks, $prefixedId );
 
 		// there will be no link in some situations, like add links widget disabled
 		if ( $editLink ) {
 			$template->set( 'wbeditlanglinks', $editLink );
 		}
 
-		// needed to have "Other languages" section display, so we can add "add links"
-		// by default, the css then hides it if the widget is not enabled for a page or user
-		if ( $template->get( 'language_urls' ) === false && $title->exists() ) {
+		// Needed to have "Other languages" section display, so we can add "add links".
+		// Only force the section to display if we are going to actually add such a link:
+		// Where external langlinks aren't suppressed and where action == 'view'.
+		if ( $languageUrls === false && $title->exists()
+			&& ( $noExternalLangLinks === null || !in_array( '*', $noExternalLangLinks ) )
+			&& $action === 'view'
+		) {
 			$template->set( 'language_urls', array() );
 		}
 
@@ -703,7 +710,7 @@ final class ClientHooks {
 	 */
 	public static function onBaseTemplateAfterPortlet( BaseTemplate $skinTemplate, $name, &$html ) {
 		$handler = new BaseTemplateAfterPortletHandler();
-		$link = $handler->makeEditLink( $skinTemplate, $name );
+		$link = $handler->getEditLink( $skinTemplate, $name );
 
 		if ( $link ) {
 			$html .= $link;

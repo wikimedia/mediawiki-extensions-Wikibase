@@ -42,6 +42,7 @@
 	"wikibase-dataitem": "Toolbox link text for link to connected Wikibase data item\n{{Identical|Item}}",
 	"wikibase-editlinks": "[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]\n\tThis is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.\n{{Identical|Edit link}}",
 	"wikibase-editlinkstitle": "This is the '''tooltip''' text on a link in the sidebar that opens a wizard to edit interlanguage links.\n\nThe link text is {{msg-mw|Wikibase-editlinks}}.",
+	"wikibase-addlinkstitle": "This is the '''tooltip''' text on a link in the sidebar that opens a wizard to edit interlanguage links.\n\nThe link text is {{msg-mw|Wikibase-linkitem-addlinks}}.",
 	"wikibase-linkitem-addlinks": "Link in the sidebar asking to add language links and link the current page with pages on other sites. Only visible in case the current page has no langlinks.\n{{Identical|Add link}}",
 	"wikibase-linkitem-alreadylinked": "Tells that the page which the user wanted to link with the current one is already attached to an item on the central data repository. That item already links to an article on this site while items can only have one page per site attached.\n\nParameters:\n* $1 - a link to the item\n* $2 - the name of the page in the current wiki the item already links to",
 	"wikibase-linkitem-close": "Button text asking to close the current dialog and to reload the page.",
