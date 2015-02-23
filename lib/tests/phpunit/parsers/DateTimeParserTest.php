@@ -194,8 +194,11 @@ class DateTimeParserTest extends StringValueParserTest {
 			// These are just wrong!
 			'June June June',
 			'111 111 111',
+			'101st July 2015',
+			'2015-07-101',
 			'10  .10  .2010',
 			'10...10...2010',
+			'2015-00-00',
 			'Jann 2014',
 			'1980x',
 			'1980s', // supported by MWTimeIsoParser
