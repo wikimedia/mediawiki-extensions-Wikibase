@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_4c61cdfe",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-23T23:32:05Z",
+      "side": 1,
+      "message": "that\u0027s copy-paste :) I\u0027m not sure btw why we need @author - git has all metadata about authorship.",
+      "parentUuid": "6e7c4fa4_2c001138",
+      "revId": "4a555069a09c7a893b50a0f63fbd7a6ce76f1d0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ecf5394e",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 18
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "I agree about keeping a dumpJson.php wrapper... would be nice for the dump creation process. I guess \"createDump\" or \"dumpEntities\" could be good names?!",
       "parentUuid": "6e7c4fa4_ecde99de",
+      "revId": "4a555069a09c7a893b50a0f63fbd7a6ce76f1d0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2c2b3194",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-23T23:32:05Z",
+      "side": 1,
+      "message": "ok, I\u0027ll make it a wrapper to renamed thing.",
+      "parentUuid": "6e7c4fa4_ec821997",
       "revId": "4a555069a09c7a893b50a0f63fbd7a6ce76f1d0e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
