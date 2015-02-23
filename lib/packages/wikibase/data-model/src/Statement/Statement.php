@@ -32,27 +32,21 @@ class Statement extends Claim {
 	const RANK_DEPRECATED = 0;
 
 	/**
-	 * @since 0.2
-	 *
 	 * @var string|null
 	 */
-	private $guid = null;
+	protected $guid = null;
 
 	/**
-	 * @since 0.1
-	 *
 	 * @var Snak
 	 */
-	private $mainSnak;
+	protected $mainSnak;
 
 	/**
 	 * The property value snaks making up the qualifiers for this statement.
 	 *
-	 * @since 0.1
-	 *
 	 * @var Snaks
 	 */
-	private $qualifiers;
+	protected $qualifiers;
 
 	/**
 	 * @var ReferenceList
