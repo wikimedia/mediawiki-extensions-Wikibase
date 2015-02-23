@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a65c42f5",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T20:33:44Z",
+      "side": 1,
+      "message": "Uh, where did htmlspecialchars go? What if $time is \u003cscript\u003edoEvil()\u003c/script\u003e?\nEven if TimeValue guards against this at the moment. Please *always* escape when you go from \"raw value\" to \"this is html\".",
+      "revId": "2d4d77128040ae2aeea1e193cea7fb5f18d515ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
