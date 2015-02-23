@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ec07791e",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-23T23:45:37Z",
+      "side": 1,
+      "message": "I somewhat agree and really don\u0027t care for @author myself, but it\u0027s what we do in wikibase. \n\nSuppose it gives a hint who to ask about a particular class if one has a question etc.",
+      "parentUuid": "6e7c4fa4_4c61cdfe",
+      "revId": "4a555069a09c7a893b50a0f63fbd7a6ce76f1d0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ecf5394e",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 18
