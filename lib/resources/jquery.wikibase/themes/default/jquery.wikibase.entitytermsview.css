@@ -37,10 +37,6 @@
 	padding: 0;
 }
 
-.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-label {
-	max-width: 25em;
-}
-
 .wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-label,
 .wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-description {
 	word-wrap: break-word;
