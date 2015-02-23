@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0be97fa6",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsview.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-23T19:40:24Z",
+      "side": 1,
+      "message": "This is not enough if the button labels are translated. German for example needs at least 7em.",
+      "revId": "a38f06cbbe37bc2e768895d9f090fe10ee03d123",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4b4217b2",
+        "filename": "lib/resources/jquery.wikibase/toolbar/themes/default/jquery.wikibase.edittoolbar.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-23T19:40:24Z",
+      "side": 1,
+      "message": "This creates a white box in the sitelinks header.",
+      "revId": "a38f06cbbe37bc2e768895d9f090fe10ee03d123",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
