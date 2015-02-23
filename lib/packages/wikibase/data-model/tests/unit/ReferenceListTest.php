@@ -3,6 +3,8 @@
 namespace Wikibase\DataModel\Tests;
 
 use Hashable;
+use InvalidArgumentException;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -17,6 +19,7 @@ use Wikibase\DataModel\Snak\SnakList;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
@@ -43,6 +46,33 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 			null,
 			array(),
 			$this->getElementInstances(),
+		);
+	}
+
+	/**
+	 * @dataProvider invalidConstructorArgumentsProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidConstructorArguments_constructorThrowsException( $input ) {
+		new ReferenceList( $input );
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$id1 = new PropertyId( 'P1' );
+
+		return array(
+			// TODO: Disallow array( null ),
+			array( false ),
+			array( 1 ),
+			array( 0.1 ),
+			array( 'string' ),
+			array( $id1 ),
+			array( new PropertyNoValueSnak( $id1 ) ),
+			array( new Reference() ),
+			array( new SnakList( array( new PropertyNoValueSnak( $id1 ) ) ) ),
+			array( array( new PropertyNoValueSnak( $id1 ) ) ),
+			array( array( new ReferenceList() ) ),
+			array( array( new SnakList() ) ),
 		);
 	}
 

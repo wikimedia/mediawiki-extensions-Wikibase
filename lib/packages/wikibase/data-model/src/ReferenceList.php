@@ -4,6 +4,7 @@ namespace Wikibase\DataModel;
 
 use Hashable;
 use InvalidArgumentException;
+use Traversable;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 
@@ -21,8 +22,32 @@ use Wikibase\DataModel\Snak\SnakList;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
+ * @author Thiemo Mättig
  */
 class ReferenceList extends HashableObjectStorage {
+
+	/**
+	 * @param Reference[]|Traversable|null $references
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function __construct( $references = null ) {
+		if ( $references === null ) {
+			return;
+		}
+
+		if ( !is_array( $references ) && !( $references instanceof Traversable ) ) {
+			throw new InvalidArgumentException( '$references must be an array or an instance of Traversable' );
+		}
+
+		foreach ( $references as $reference ) {
+			if ( !( $reference instanceof Reference ) ) {
+				throw new InvalidArgumentException( 'Every element in $references must be an instance of Reference' );
+			}
+
+			$this->addReference( $reference );
+		}
+	}
 
 	/**
 	 * Adds the provided reference to the list.
