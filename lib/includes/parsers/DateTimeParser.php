@@ -141,25 +141,22 @@ class DateTimeParser extends StringValueParser {
 	 * @return string
 	 */
 	private function getValueWithFixedYearLengths( $value ) {
-		if ( preg_match( '/^(\d+)(\D)(\d+)(\D)(\d+)$/', $value, $dateParts ) ) {
-			if ( $dateParts[1] > 31 && $dateParts[5] <= 31 ) {
-				// the year looks like it is at the front
-				if ( strlen( $dateParts[1] ) < 4 ) {
-					$value = str_pad( $dateParts[1], 4, '0', STR_PAD_LEFT )
-						. $dateParts[2] . $dateParts[3] . $dateParts[4] . $dateParts[5];
+		if ( preg_match( '/^(\d+)(\D)(\d+)(\D)(\d+)$/', $value, $parts ) ) {
+			// Any number longer than 2 characters or bigger than 31 must be the year
+			if ( ( strlen( $parts[1] ) > 2 || $parts[1] > 31 ) && $parts[5] <= 31 ) {
+				if ( strlen( $parts[1] ) < 4 ) {
+					return str_pad( $parts[1], 4, '0', STR_PAD_LEFT )
+						. $parts[2] . $parts[3] . $parts[4] . $parts[5];
 				}
-			} else {
-				// presume the year is at the back
-				if ( strlen( $dateParts[5] ) < 4 ) {
-					$value = $dateParts[1] . $dateParts[2] . $dateParts[3] . $dateParts[4]
-						. str_pad( $dateParts[5], 4, '0', STR_PAD_LEFT );
-				}
+			} elseif ( strlen( $parts[5] ) < 4 ) {
+				// Otherwise assume the last number is the year
+				return $parts[1] . $parts[2] . $parts[3] . $parts[4]
+					. str_pad( $parts[5], 4, '0', STR_PAD_LEFT );
 			}
-		} else {
-			if ( preg_match( '/^(.*\D)(\d{1,3})$/', $value, $matches ) ) {
-				$value = $matches[1] . str_pad( $matches[2], 4, '0', STR_PAD_LEFT );
-			}
+		} elseif ( preg_match( '/^(.*\D)(\d{1,3})$/', $value, $matches ) ) {
+			return $matches[1] . str_pad( $matches[2], 4, '0', STR_PAD_LEFT );
 		}
+
 		return $value;
 	}
 
