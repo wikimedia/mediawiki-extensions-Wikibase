@@ -16,6 +16,143 @@
       "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f7d42eef",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T12:46:41Z",
+      "side": 1,
+      "message": "Indeed",
+      "parentUuid": "6e7c4fa4_4bdb0025",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d792524e",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T12:46:41Z",
+      "side": 1,
+      "message": "Passing the accumulator here means the renderer instance cannot be used for multiple entities. This doesn\u0027t feel right for a service. I\u0027d prefer for the accumulator to be an (optional) argument to the relevant methods. Or even leave it to the caller to also invoke trackUsage().",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_97893a29",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T12:46:41Z",
+      "side": 1,
+      "message": "Looking up the entity should not be the responsibility of a renderer. Maybe if we look at this as an interactor (user input -\u003e user output) it does make sense. In that case, I recommend to rename the class.\n\nHowever, there should be a way to control how missing entities are handled. Just returning an empty string seems problematic to me.",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_17a44a9d",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T12:46:41Z",
+      "side": 1,
+      "message": "Again, it feels odd to make the *renderer* responsible for the lookup. The name and class-level description does not imply this. Can\u0027t think of a better term than \"interactor\" right now...",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f7774e34",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T12:46:41Z",
+      "side": 1,
+      "message": "If that\u0027s all we need the Language for, perhaps there should be a ListFormatter interface that we could use instead.",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_97affa77",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T12:46:41Z",
+      "side": 1,
+      "message": "Perhaps use the \"setServices\" approach to make this nicer for testing",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_37c86659",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T12:46:41Z",
+      "side": 1,
+      "message": "Why?! Shouldn\u0027t this trigger an error? Or at least \u003cspan class\u003d\"error\"\u003e?",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d7e012ca",
+        "filename": "client/includes/scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T12:46:41Z",
+      "side": 1,
+      "message": "IN a lot of cases we don\u0027t even need this...",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
