@@ -46,6 +46,10 @@ div#content .wikibase-entitytermsview .wikibase-entitytermsview-heading h1.wikib
 	word-wrap: break-word;
 }
 
+.wikibase-entitytermsview .wikibase-edittoolbar-container {
+	background: #fff;
+}
+
 .wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview {
 	margin-top: 1em;
 }
