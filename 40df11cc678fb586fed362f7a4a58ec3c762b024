@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_faf5f34d",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-23T16:15:07Z",
+      "side": 1,
+      "message": "That\u0027s a problem the whole namespace has...",
+      "parentUuid": "6e7c4fa4_f7d42eef",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d792524e",
         "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
         "patchSetId": 5
@@ -48,6 +66,24 @@
       "writtenOn": "2015-02-23T12:46:41Z",
       "side": 1,
       "message": "Passing the accumulator here means the renderer instance cannot be used for multiple entities. This doesn\u0027t feel right for a service. I\u0027d prefer for the accumulator to be an (optional) argument to the relevant methods. Or even leave it to the caller to also invoke trackUsage().",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_baba1b6b",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-23T16:15:07Z",
+      "side": 1,
+      "message": "Yeah, will do that",
+      "parentUuid": "6e7c4fa4_d792524e",
       "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_9ab5df7a",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-23T16:15:07Z",
+      "side": 1,
+      "message": "EntityStatementsRenderInteractor (or something along these lines) will fit better",
+      "parentUuid": "6e7c4fa4_97893a29",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_17a44a9d",
         "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
         "patchSetId": 5
@@ -82,6 +136,24 @@
       "writtenOn": "2015-02-23T12:46:41Z",
       "side": 1,
       "message": "Again, it feels odd to make the *renderer* responsible for the lookup. The name and class-level description does not imply this. Can\u0027t think of a better term than \"interactor\" right now...",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3aae0b2c",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-23T16:15:07Z",
+      "side": 1,
+      "message": "as above",
+      "parentUuid": "6e7c4fa4_17a44a9d",
       "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_5a8427b4",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-23T16:15:07Z",
+      "side": 1,
+      "message": "Yeah, that would be nice... splitting up the whole Language object mess would be awesoem",
+      "parentUuid": "6e7c4fa4_f7774e34",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_97affa77",
         "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
         "patchSetId": 5
@@ -116,6 +206,24 @@
       "writtenOn": "2015-02-23T12:46:41Z",
       "side": 1,
       "message": "Perhaps use the \"setServices\" approach to make this nicer for testing",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1aa1cf35",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-23T16:15:07Z",
+      "side": 1,
+      "message": "Could be done in a follow-up",
+      "parentUuid": "6e7c4fa4_97affa77",
       "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -139,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ba50db37",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-23T16:15:07Z",
+      "side": 1,
+      "message": "Mh... that\u0027s a good question, actually...\n\nWhat we could do is either have the whole function (in Lua) return nil instead of a table or just smash an error in the user\u0027s face. Right now I\u0027m failing as graceful as possible, as I want this function very fool proof, but we can change that.\n\nBtw: \u0027\u0027 is true in Lua (unlike PHP)",
+      "parentUuid": "6e7c4fa4_37c86659",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d7e012ca",
         "filename": "client/includes/scribunto/mw.wikibase.entity.lua",
         "patchSetId": 5
@@ -150,6 +276,24 @@
       "writtenOn": "2015-02-23T12:46:41Z",
       "side": 1,
       "message": "IN a lot of cases we don\u0027t even need this...",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_daf11767",
+        "filename": "client/includes/scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-23T16:15:07Z",
+      "side": 1,
+      "message": "true... we could defer loading this using a stub metatable as well, I\u0027m just not sure that\u0027s worth it. Also it\u0027s unrelated here, could be followed-up",
+      "parentUuid": "6e7c4fa4_d7e012ca",
       "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
