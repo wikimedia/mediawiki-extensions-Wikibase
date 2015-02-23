@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7cc56463",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-02-23T02:44:52Z",
+      "side": 1,
+      "message": "please use explicit checks\n\n$entity \u003d\u003d\u003d false \n\nor \n\n$entity \u003d\u003d\u003d null",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
