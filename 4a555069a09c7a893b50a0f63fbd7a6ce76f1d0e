@@ -34,6 +34,24 @@
       "revId": "4a555069a09c7a893b50a0f63fbd7a6ce76f1d0e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ecde99de",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T23:15:38Z",
+      "side": 1,
+      "message": "dumpJson.php could stay around for a while as a thin wrapper.",
+      "parentUuid": "6e7c4fa4_cc6b9d14",
+      "revId": "4a555069a09c7a893b50a0f63fbd7a6ce76f1d0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
