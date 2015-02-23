@@ -236,7 +236,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	protected function showStatusErrorsPage( $title, Status $status ) {
 		$this->getOutput()->prepareErrorPage( $this->msg( $title ), $this->msg( 'errorpagetitle' ) );
 
-		$this->getOutput()->addWikiText( $status->getMessage() );
+		$this->getOutput()->addWikiText( $status->getMessage()->text() );
 
 		$this->getOutput()->returnToMain();
 	}
