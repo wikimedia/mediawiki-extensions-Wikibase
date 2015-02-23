@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_eb5be324",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-23T19:11:40Z",
+      "side": 1,
+      "message": "could be dropped",
+      "revId": "ee962b87ae7ae5e9dc87290bddaf1136c4d3e7b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ab72cba9",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-23T19:11:40Z",
+      "side": 1,
+      "message": "Now it\u0027s Wikibase specific, please remove that comment",
+      "revId": "ee962b87ae7ae5e9dc87290bddaf1136c4d3e7b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2b66bbea",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-23T19:11:40Z",
+      "side": 1,
+      "message": "Maybe you also want to change the name of the function now that it\u0027s undo-specific?",
+      "revId": "ee962b87ae7ae5e9dc87290bddaf1136c4d3e7b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
