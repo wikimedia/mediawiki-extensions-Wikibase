@@ -141,20 +141,16 @@ class DateTimeParser extends StringValueParser {
 	 * @return string
 	 */
 	private function getValueWithFixedYearLengths( $value ) {
-		if ( preg_match( '/^(\d+)(\D)(\d+)(\D)(\d+)$/', $value, $parts ) ) {
-			// Any number longer than 2 characters or bigger than 31 must be the year
-			if ( ( strlen( $parts[1] ) > 2 || $parts[1] > 31 ) && $parts[5] <= 31 ) {
-				if ( strlen( $parts[1] ) < 4 ) {
-					return str_pad( $parts[1], 4, '0', STR_PAD_LEFT )
-						. $parts[2] . $parts[3] . $parts[4] . $parts[5];
-				}
-			} elseif ( strlen( $parts[5] ) < 4 ) {
-				// Otherwise assume the last number is the year
-				return $parts[1] . $parts[2] . $parts[3] . $parts[4]
-					. str_pad( $parts[5], 4, '0', STR_PAD_LEFT );
-			}
-		} elseif ( preg_match( '/^(.*\D)(\d{1,3})$/', $value, $matches ) ) {
-			return $matches[1] . str_pad( $matches[2], 4, '0', STR_PAD_LEFT );
+		// Any number longer than 2 digits or bigger than 31 must be the year. Otherwise assume the
+		// last number is the year.
+		if ( preg_match(
+			'/(?<!\d)(?:\d{3,}|3[2-9]|[4-9]\d|\d{1,2}$)(?!\d)/',
+			$value,
+			$matches,
+			PREG_OFFSET_CAPTURE
+		) ) {
+			$year = str_pad( $matches[0][0], 4, '0', STR_PAD_LEFT );
+			return substr_replace( $value, $year, $matches[0][1], strlen( $matches[0][0] ) );
 		}
 
 		return $value;
