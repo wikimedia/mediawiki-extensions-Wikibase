@@ -34,6 +34,160 @@
       "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_17144a43",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T11:49:55Z",
+      "side": 1,
+      "message": "I think a direct check of !$x is fine if $x is known to be an object (or null or false). !$x can behave very strangely with strings, and should be avoided when $x may be a scalar. For arrays, I\u0027d prefer empty( $x ), or an explicit check against null or false.\n\nIn the current context, !$entity seems fine to me. It\u0027s also robust against confusion about false or null being used to represent \"nothing\".",
+      "parentUuid": "6e7c4fa4_3cb5ac78",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d777b299",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T11:49:55Z",
+      "side": 1,
+      "message": "The body of this loop should be in a private function, for readability.",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_573c02bb",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T11:49:55Z",
+      "side": 1,
+      "message": "annoying, I know...",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7751fe0f",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T11:49:55Z",
+      "side": 1,
+      "message": "Please avoid static methods. They generally do more harm then good.\n(we adopted this policy after I originally wrote this test)",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_97561a08",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T11:49:55Z",
+      "side": 1,
+      "message": "Please use an actual PropertyId instead of an int here, for clarity.",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_17420a3f",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T11:49:55Z",
+      "side": 1,
+      "message": "missing spaces after/before ()",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f7442e4d",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T11:49:55Z",
+      "side": 1,
+      "message": "missing space before )",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b77236aa",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T11:49:55Z",
+      "side": 1,
+      "message": "spaces",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_77681eb8",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T11:49:55Z",
+      "side": 1,
+      "message": "This method was big, and now is huge. Would be more readable to declare the nested structures elsewhere.",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
