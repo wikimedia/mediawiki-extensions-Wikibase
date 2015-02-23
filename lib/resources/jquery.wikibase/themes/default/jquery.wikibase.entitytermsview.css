@@ -19,6 +19,12 @@
 	content: ' ';
 }
 
+div#content .wikibase-entitytermsview .wikibase-entitytermsview-heading h1.wikibase-entitytermsview-heading-label,
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases,
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-description {
+	padding: 0 7em 0 0;
+}
+
 .wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases ul {
 	color: grey;
 	margin: 0;
