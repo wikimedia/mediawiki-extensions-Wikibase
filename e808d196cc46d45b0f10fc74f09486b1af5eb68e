@@ -106,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_c0028675",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-23T18:29:28Z",
+      "side": 1,
+      "message": "Well, that\u0027d require me to rewrite a lot of test infrastructure. Which can be done but I\u0027d rather concentrate on getting RDF dumps going first. Then again, given how many tests I need to add, I may end up doing that anyway...",
+      "parentUuid": "6e7c4fa4_7751fe0f",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_97561a08",
         "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
         "patchSetId": 17
@@ -117,6 +135,24 @@
       "writtenOn": "2015-02-23T11:49:55Z",
       "side": 1,
       "message": "Please use an actual PropertyId instead of an int here, for clarity.",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_00ecfeb6",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-23T18:29:28Z",
+      "side": 1,
+      "message": "but numeric-id is not PropertyId, it\u0027s actually int",
+      "parentUuid": "6e7c4fa4_97561a08",
       "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -151,6 +187,24 @@
       "writtenOn": "2015-02-23T11:49:55Z",
       "side": 1,
       "message": "missing space before )",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_004b9ecd",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-23T18:29:28Z",
+      "side": 1,
+      "message": "thanks, I\u0027ll fix all those spaces.",
+      "parentUuid": "6e7c4fa4_f7442e4d",
       "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
