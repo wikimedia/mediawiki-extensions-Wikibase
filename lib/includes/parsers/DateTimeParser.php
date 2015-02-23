@@ -72,7 +72,7 @@ class DateTimeParser extends StringValueParser {
 				$year = $matches[0][0];
 
 				// PHP's DateTime/strtotime parsing can't handle larger than 4 digit years!
-				if ( strlen( $year > 4 ) ) {
+				if ( strlen( $year ) > 4 ) {
 					$value = substr_replace( $value, substr( $year, -4 ), $matches[0][1],
 						strlen( $year ) );
 				}
