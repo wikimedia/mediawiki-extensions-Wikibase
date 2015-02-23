@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_208a5ac0",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-23T18:51:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_7db0fd88",
+      "revId": "9ba0ce5edd6ea5c056a6ca2fe859ba6654c56e11",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_9db5d97a",
         "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_008dded7",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-23T18:51:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_9db5d97a",
+      "revId": "9ba0ce5edd6ea5c056a6ca2fe859ba6654c56e11",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_3d7da5b0",
         "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2015-02-23T17:32:25Z",
       "side": 1,
       "message": "use parse() to get HTML. Or document that this message contains raw HTML. But we really want to get away from raw HTML messages.\n\nAlternatively, escape what $message-\u003etext() or $message-\u003eraw() return.",
+      "revId": "9ba0ce5edd6ea5c056a6ca2fe859ba6654c56e11",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6084d2b4",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-23T18:51:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_3d7da5b0",
       "revId": "9ba0ce5edd6ea5c056a6ca2fe859ba6654c56e11",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
