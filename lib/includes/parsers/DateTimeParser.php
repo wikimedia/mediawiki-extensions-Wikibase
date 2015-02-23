@@ -71,9 +71,10 @@ class DateTimeParser extends StringValueParser {
 
 			// PHP's DateTime object also can't handle larger than 4 digit years,
 			// e.g. 1 June 202020
-			if ( preg_match( '/^(.*\D)?(\d{5,})(.*)$/', $value, $matches ) ) {
-				$value = $matches[1] . substr( $matches[2], -4 ) . $matches[3];
-				$largeYear = $matches[2];
+			if ( preg_match( '/\d{5,}/', $value, $matches, PREG_OFFSET_CAPTURE ) ) {
+				$largeYear = $matches[0][0];
+				$value = substr_replace( $value, substr( $largeYear, -4 ), $matches[0][1],
+					strlen( $largeYear ) );
 			}
 
 			$this->validateDateTimeInput( $value );
