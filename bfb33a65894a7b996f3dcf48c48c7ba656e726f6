@@ -1,0 +1,412 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f7074e1e",
+        "filename": "lib/includes/store/EntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "missing a blank line here",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5a1bc71f",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "I don\u0027t think we actually need it in this class at all.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dadb577a",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "validate?",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1ae6af3f",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "missing import",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9ad15f5a",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "could just return EntityRevision|EntityRedirect. Would make the code simpler here and inside loadEntity(). It\u0027s not very pretty either way, anyway.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5ac74799",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "If this fallback logic really needed? If yes, it should be documented. It should also be clear whether this is something the interface guarantees. Does the caller need this guarantee?",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ba5c5bf5",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "Class in array indexes make things hard to read. Please use $key \u003d $entityId-\u003egetSerialization().\n\nAlso, isset( $rows[$entityId-\u003egetSerialization()] ) is false if $rows[$entityId-\u003egetSerialization()] \u003d\u003d null, so the second check should not be needed.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9a0e3fe7",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "If you re-keys $entityIds to have serialized ids as keys, you can just do an array_diff_key instead of this loop.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_da6117a5",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "!empty, for clarity",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9ae4ff0b",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "some fields are listed here, some are added later. why?",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fa65f3ab",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "Please describe keys and values",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7a84830f",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "bail out immediately if $entityIds is empty",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9abb9fdd",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "we *could* just use page_title... but we decided not to rely on that, right?",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7ab6c3f7",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "this is only needed for the revision timestamp?",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3ad4cb16",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "This should never happen. If it does, something is really wrong - $db-\u003eignoreErrors should not be set here. Spacial code for handing that case would need to be added everywhere we do queries. that isn\u0027t the case, and shouldn\u0027t be. This is what exceptions are for.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dadef743",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "Please move teh row juggeling to a separate method.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7adfa33f",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "please use $rowKey and $resultKey. Best init them directly next to each other, so their difference and relationship becomes clear.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fa773334",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "The current implementation fails if $entityIds is empty, for two reasons: $where is uninitialized, and even if it was empty, the result would be no where condition, cause *all* rows to be matched.\n\nif $entityIds is empty, this method should return 0 (aka false), matching nothing.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ba8e9b31",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "Sigh, we have to get rid of this stupid table. page_props should do. \nAnyway - this might be faster if it could be grouped. You would have something like \n\n  WHERE ( epp_entity_type \u003d \"item\" AND epp_entity_id IN ( 2, 3, 4, 5 ) )\n  OR ( epp_entity_type \u003d \"property\" AND epp_entity_id IN ( 6, 7, 8 ) )\n\nThis is also more compact and may prevent issues with the size of the query string, if the id list is long (default batch size for the dumper s is 1000, right?)",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1a11cffb",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "why? what\u0027s the point?\nAlso, use the serialized id as the key, for convenience. Or full type+id.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_da92774e",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "no need for the wrapper array, see comment on code that calls this.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3aa12b91",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionBatchLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "We should wrap this in a BlobStore service that can be injected. In core, ideally.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1aa46f9d",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "Is this needed? I don\u0027t think it makes sense to add this in this patch.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9aaf1f78",
+        "filename": "repo/tests/phpunit/includes/store/WikiPageEntityRevisionBatchLookupTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-23T15:38:56Z",
+      "side": 1,
+      "message": "Please use a provider to cover the various cases.",
+      "revId": "bfb33a65894a7b996f3dcf48c48c7ba656e726f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
