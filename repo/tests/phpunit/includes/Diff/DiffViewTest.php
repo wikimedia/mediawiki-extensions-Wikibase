@@ -138,4 +138,22 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 		$this->assertRegExp( $pattern, $html, 'Diff table content line' );
 	}
 
+	public function testGivenInvalidBadgeId_getHtmlDoesNotThrowException() {
+		$path = array(
+			wfMessage( 'wikibase-diffview-link' )->text(),
+			'enwiki',
+			'badges'
+		);
+		$diff = new Diff( array( new DiffOpAdd( 'invalidBadgeId' ) ) );
+
+		$siteStore = new MockSiteStore();
+		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$entityRevisionLookup = new MockRepository();
+		$diffView = new DiffView( $path, $diff, $siteStore, $entityTitleLookup, $entityRevisionLookup );
+
+		$html = $diffView->getHtml();
+
+		$this->assertContains( 'invalidBadgeId', $html );
+	}
+
 }
