@@ -16,7 +16,8 @@ use InvalidArgumentException;
 class Term implements Comparable {
 
 	/**
-	 * @var string
+	 * @var string Language code identifying the language of the text, but note that there is
+	 * nothing this class can do to enforce this convention.
 	 */
 	private $languageCode;
 
@@ -26,7 +27,7 @@ class Term implements Comparable {
 	private $text;
 
 	/**
-	 * @param string $languageCode
+	 * @param string $languageCode Language of the text.
 	 * @param string $text
 	 *
 	 * @throws InvalidArgumentException
