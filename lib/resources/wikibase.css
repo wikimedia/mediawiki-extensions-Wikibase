@@ -101,6 +101,10 @@ h2.wb-section-heading {
 	font-family: inherit;
 }
 
+div#content .wikibase-entitytermsview .wikibase-entitytermsview-heading h1.wikibase-entitytermsview-heading-label {
+	margin: 0 7em 0 0;
+}
+
 /* horizontal rule below the description */
 .wb-hr {
 	float: left;
