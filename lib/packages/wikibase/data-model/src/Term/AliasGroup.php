@@ -19,7 +19,8 @@ use InvalidArgumentException;
 class AliasGroup implements Comparable, Countable {
 
 	/**
-	 * @var string
+	 * @var string Language code identifying the language of the aliases, but note that there is
+	 * nothing this class can do to enforce this convention.
 	 */
 	private $languageCode;
 
@@ -29,7 +30,7 @@ class AliasGroup implements Comparable, Countable {
 	private $aliases;
 
 	/**
-	 * @param string $languageCode
+	 * @param string $languageCode Language of the aliases.
 	 * @param string[] $aliases
 	 *
 	 * @throws InvalidArgumentException

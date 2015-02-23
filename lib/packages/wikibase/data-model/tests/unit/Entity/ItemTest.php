@@ -546,8 +546,7 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testItemWithIdIsEmpty() {
-		$item = new Item();
-		$item->setId( 1337 );
+		$item = new Item( new ItemId( 'Q1337' ) );
 		$this->assertTrue( $item->isEmpty() );
 	}
 
@@ -583,9 +582,7 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testClearRemovesAllButId() {
-		$item = new Item();
-
-		$item->setId( 42 );
+		$item = new Item( new ItemId( 'Q42' ) );
 		$item->getFingerprint()->setLabel( 'en', 'foo' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 		$item->addClaim( $this->newStatement() );
@@ -666,9 +663,7 @@ class ItemTest extends EntityTest {
 	}
 
 	private function getBaseItem() {
-		$item = new Item();
-
-		$item->setId( 42 );
+		$item = new Item( new ItemId( 'Q42' ) );
 		$item->getFingerprint()->setLabel( 'en', 'Same' );
 		$item->getFingerprint()->setDescription( 'en', 'Same' );
 		$item->getFingerprint()->setAliasGroup( 'en', array( 'Same' ) );

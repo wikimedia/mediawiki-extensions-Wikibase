@@ -18,6 +18,7 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 	'version' => WIKIBASE_DATAMODEL_VERSION,
 	'author' => array(
 		'[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]',
+		'Thiemo Mättig',
 	),
 	'url' => 'https://github.com/wmde/WikibaseDataModel',
 	'description' => 'The canonical PHP implementation of the Data Model at the heart of the Wikibase software.',

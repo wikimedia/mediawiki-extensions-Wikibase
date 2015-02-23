@@ -64,7 +64,8 @@ via TravisCI, as a TravisCI configuration file is also provided in the root dire
 ### Development
 
 Wikibase DataModel has been written by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw)
-as [Wikimedia Germany](https://wikimedia.de) employee for the [Wikidata project](https://wikidata.org/).
+and Thiemo Mättig as [Wikimedia Germany](https://wikimedia.de) employees for the [Wikidata project]
+(https://wikidata.org/).
 
 Contributions where also made by [several other people]
 (https://www.ohloh.net/p/wikibasedatamodel/contributors?sort=commits).

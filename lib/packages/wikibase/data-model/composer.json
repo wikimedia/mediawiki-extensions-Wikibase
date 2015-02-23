@@ -13,8 +13,10 @@
 		{
 			"name": "Jeroen De Dauw",
 			"email": "jeroendedauw@gmail.com",
-			"homepage": "http://jeroendedauw.com",
-			"role": "Developer"
+			"homepage": "http://jeroendedauw.com"
+		},
+		{
+			"name": "Thiemo Mättig"
 		}
 	],
 	"support": {
@@ -42,16 +44,16 @@
 		}
 	},
 	"scripts": {
+		"ci": [
+			"composer test",
+			"composer cs"
+		],
 		"test": [
 			"composer validate --no-interaction",
 			"phpunit"
 		],
 		"cs": [
-			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"
-		],
-		"ci": [
-			"composer test",
-			"composer cs"
+			"phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"
 		]
 	}
 }
