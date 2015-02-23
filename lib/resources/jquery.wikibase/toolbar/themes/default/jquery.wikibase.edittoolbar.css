@@ -5,3 +5,7 @@
 .wikibase-edittoolbar-container > .wikibase-toolbar {
 	padding-left: 0;
 }
+
+.wikibase-edittoolbar-container {
+	background: #fff;
+}
