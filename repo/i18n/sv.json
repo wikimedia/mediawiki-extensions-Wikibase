@@ -170,6 +170,8 @@
 	"wikibase-setaliases-label": "Alias:",
 	"wikibase-setaliases-submit": "Ange alias",
 	"wikibase-setaliases-warning-remove": "Vill du verkligen ta bort alla alias för [[$1]]?",
+	"wikibase-setlabeldescriptionaliases-label-label": "Etikett:",
+	"wikibase-setlabeldescriptionaliases-description-label": "Beskrivning:",
 	"special-setsitelink": "Ange en webbplatslänk",
 	"wikibase-setsitelink-introfull": "Du anger webbplatslänken på $2 för [[$1]].",
 	"wikibase-setsitelink-intro": "Detta formulär tillåter dig att ange webbplatslänken för ett objekt. Du behöver ange ID:et för objektet (t.ex. Q23), ett webbplats-ID (t.ex. \"svwiki\") och den önskade länken.",

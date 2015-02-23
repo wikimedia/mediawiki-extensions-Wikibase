@@ -25,6 +25,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}-Datenobjekt",
 	"wikibase-editlinks": "Links bearbeiten",
 	"wikibase-editlinkstitle": "Links auf Artikel in anderen Sprachen bearbeiten",
+	"wikibase-addlinkstitle": "Interlanguagelinks hinzufügen",
 	"wikibase-linkitem-addlinks": "Links hinzufügen",
 	"wikibase-linkitem-alreadylinked": "Die Seite, die du verlinken willst, ist bereits einem [$1 Objekt] in unserem zentralen Datenrepositorium zugeordnet, das auf $2 auf dieser Website verlinkt. Es kann nur eine Seite pro Website einem Objekt zugeordnet werden. Bitte wähle eine andere Seite, die verlinkt werden soll.",
 	"wikibase-linkitem-close": "Dialog schließen und Seite neu laden",

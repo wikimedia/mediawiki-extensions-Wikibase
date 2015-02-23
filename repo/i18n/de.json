@@ -80,7 +80,7 @@
 	"wikibase-partial-undo": "Die Bearbeitung kann teilweise rückgängig gemacht werden.",
 	"wikibase-omitted-undo-ops": "{{PLURAL:$1|Eine Änderung konnte|$1 Änderungen konnten}} nicht rückgängig gemacht werden, da {{PLURAL:$1|der Wert|die Werte}} zwischenzeitlich geändert {{PLURAL:$1|wurde|wurden}}.",
 	"wikibase-empty-undo": "Es gibt nichts, das hier rückgängig gemacht werden kann.",
-	"wikibase-undo-revision-error": "Das Rückgängigmachen ist fehlgeschlagen.",
+	"wikibase-undo-revision-error": "Rückgängig machen fehlgeschlagen",
 	"wikibase-undo-samerev": "Es müssen zwei verschiedene Versionen angegeben werden, um eine Bearbeitung rückgängig zu machen.",
 	"wikibase-undo-badpage": "Die Versionsnummer ist falsch: Die Version $2 gehört nicht zur Seite [[$1]].",
 	"wikibase-undo-firstrev": "Das Erstellen einer Seite kann nicht rückgängig gemacht werden.",

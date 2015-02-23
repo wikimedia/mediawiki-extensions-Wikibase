@@ -14,6 +14,7 @@
 		]
 	},
 	"wikibase-lib-desc": "Wikibase 與 Wikibase 客戶端擴充套件所共用的功能",
+	"specialpages-group-wikibase": "Wikibase 儲存庫",
 	"wikibase-deletedentity-item": "已刪除項目",
 	"wikibase-deletedentity-property": "已刪除屬性",
 	"wikibase-deletedentity-query": "已刪除查詢",
@@ -48,7 +49,7 @@
 	"wikibase-parse-error-entity-id": "實體 id 格式不正確。",
 	"wikibase-parse-error-quantity": "數量格式不正確。",
 	"wikibase-parse-error-time": "時間格式不正確。",
-	"wikibase-sitelinks-wikipedia": "連至此項目的維基百科頁面",
+	"wikibase-sitelinks-wikipedia": "維基百科",
 	"wikibase-sitelinks-sitename-columnheading": "語言",
 	"wikibase-sitelinks-link-columnheading": "已連結的頁面",
 	"wikibase-snakview-snaktypeselector-somevalue": "未知數值",

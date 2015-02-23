@@ -9,6 +9,8 @@
 	"wikibase-dataitem": "{{WBREPONAME}} кэрискэ",
 	"wikibase-editlinks": "Сигэни уларыт",
 	"wikibase-editlinkstitle": "Омук тылынан сигэлэри уларытыы",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Көрдөр",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}: уларыт"
 }

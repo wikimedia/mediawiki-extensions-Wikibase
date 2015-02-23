@@ -174,6 +174,7 @@
 	"wikibase-setaliases-label": "כינויים:",
 	"wikibase-setaliases-submit": "קביעת כינויים",
 	"wikibase-setaliases-warning-remove": "האם באמת להסיר את כל הכינוייים מ־[[$1]]?",
+	"special-setlabeldescriptionaliases": "הגדרת תווית, תיאור וכינויים",
 	"special-setsitelink": "הגדרת קישור אתר",
 	"wikibase-setsitelink-introfull": "כאן מגדירים את קישור האתר של $2 עבור [[$1]].",
 	"wikibase-setsitelink-intro": "הטופס הזה מאפשר לך לקבוע את כתובת האתר עבור פריט. יש לספק את המזהה של הפריט (למשל Q23), את מזהה האתר (למשל \"enwiki\") ואת כתובת האתר שיש להגדיר.",

@@ -32,7 +32,8 @@
 			"Elodark",
 			"Macofe",
 			"Benjozork",
-			"Weft"
+			"Weft",
+			"Brenloch56"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -197,6 +198,7 @@
 	"wikibase-setaliases-label": "Alias:",
 	"wikibase-setaliases-submit": "Fixer les alias",
 	"wikibase-setaliases-warning-remove": "Voulez-vous vraiment supprimer tous les alias de [[$1]] ?",
+	"wikibase-setlabeldescriptionaliases-description-label": "Description:",
 	"special-setsitelink": "Définir un lien de site",
 	"wikibase-setsitelink-introfull": "Vous êtes en train de définir le lien de site $2 pour [[$1]].",
 	"wikibase-setsitelink-intro": "Ce formulaire vous permet de définir le lien de site d’un élément. Vous devez fournir l’identifiant de l’élément (par ex. « Q23 »), un identifiant de site (par ex. « enwiki ») et le lien de site à définir.",
