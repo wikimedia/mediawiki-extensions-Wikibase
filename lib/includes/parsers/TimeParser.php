@@ -66,7 +66,7 @@ class TimeParser extends StringValueParser {
 			$this->getOptions()
 		);
 		$parsers[] = new MWTimeIsoParser( $this->getOptions() );
-		$parsers[] = new DateTimeParser(
+		$parsers[] = new PhpDateTimeParser(
 			$eraParser,
 			$this->getOptions()
 		);
