@@ -11,6 +11,7 @@
 		]
 	},
 	"wikibase-lib-desc": "위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 기능을 얻습니다",
+	"specialpages-group-wikibase": "위키베이스 저장소",
 	"wikibase-deletedentity-item": "삭제된 항목",
 	"wikibase-deletedentity-property": "삭제된 속성",
 	"wikibase-deletedentity-query": "삭제된 쿼리",
@@ -45,7 +46,7 @@
 	"wikibase-parse-error-entity-id": "개체 id가 잘못된 형식입니다.",
 	"wikibase-parse-error-quantity": "양 값이 잘못된 형식입니다.",
 	"wikibase-parse-error-time": "시간 값이 잘못된 형식입니다.",
-	"wikibase-sitelinks-wikipedia": "이 항목을 가리키는 위키백과 문서",
+	"wikibase-sitelinks-wikipedia": "위키백과",
 	"wikibase-sitelinks-sitename-columnheading": "언어",
 	"wikibase-sitelinks-link-columnheading": "링크된 문서",
 	"wikibase-snakview-snaktypeselector-somevalue": "알 수 없는 값",

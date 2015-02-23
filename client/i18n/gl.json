@@ -5,7 +5,6 @@
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensión Wikibase",
-	"specialpages-group-wikibaseclient": "Cliente de {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Ligazón ao elemento conectado no repositorio de datos",
 	"wikibase-after-page-move": "Tamén pode [$1 actualizar] o elemento asociado de {{WBREPONAME}} para manter as ligazóns lingüísticas na páxina trasladada.",
 	"wikibase-after-page-move-queued": "O [$1 elemento de {{WBREPONAME}}] asociado a esta páxina ha actualizarse automaticamente axiña.",
@@ -43,6 +42,7 @@
 	"wikibase-rc-show-wikidata-pref": "Mostrar as modificacións de {{WBREPONAME}} nos cambios recentes",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Edición de {{WBREPONAME}}",
+	"wikibase-replicationnote": "Teña en conta que pode levar varios minutos que as modificacións sexan visibles en todos os wikis.",
 	"wikibase-watchlist-show-changes-pref": "Mostrar as modificacións de {{WBREPONAME}} na súa lista de vixilancia",
 	"wikibase-error-serialize-error": "Erro ao seriar os datos",
 	"wikibase-error-invalid-entity-id": "O sistema descoñece o ID inserido. Utilice un identificador de entidade válido.",

@@ -24,7 +24,7 @@
 	"wikibase-comment-linked": "已連結 {{WBREPONAME}} 項目至此頁面。",
 	"wikibase-comment-unlink": "此頁面已解除來自 {{WBREPONAME}} 項目的連結，語言連結已移除。",
 	"wikibase-comment-restore": "已取消刪除關聯的 {{WBREPONAME}} 項目，語言連結已還原。",
-	"wikibase-comment-update": "已更改 {{WBREPONAME}} 項目",
+	"wikibase-comment-update": "已變更 {{WBREPONAME}} 項目",
 	"wikibase-comment-sitelink-add": "已新增語言連結：$1",
 	"wikibase-comment-sitelink-change": "已更改語言連結從 $1 成 $2",
 	"wikibase-comment-sitelink-remove": "已刪除語言連結：$1",

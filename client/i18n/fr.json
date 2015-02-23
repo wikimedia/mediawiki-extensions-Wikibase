@@ -12,11 +12,11 @@
 			"Orlodrim",
 			"Peter17",
 			"Sherbrooke",
-			"Wyz"
+			"Wyz",
+			"Brenloch56"
 		]
 	},
 	"wikibase-client-desc": "Client pour l’extension Wikibase",
-	"specialpages-group-wikibaseclient": "Client {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Lien vers l’élément de référentiel des données connectées",
 	"wikibase-after-page-move": "Vous pouvez aussi [$1 mettre à jour] l’élément {{WBREPONAME}} associé pour conserver les liens de langue sur la page déplacée.",
 	"wikibase-after-page-move-queued": "L’[$1 élément {{WBREPONAME}}] associé avec cette page sera bientôt mis à jour automatiquement.",
@@ -33,6 +33,7 @@
 	"wikibase-dataitem": "Élément {{WBREPONAME}}",
 	"wikibase-editlinks": "Modifier les liens",
 	"wikibase-editlinkstitle": "Modifier les liens interlangue",
+	"wikibase-addlinkstitle": "Ajoutez les liens interlangues",
 	"wikibase-linkitem-addlinks": "Ajouter des liens",
 	"wikibase-linkitem-alreadylinked": "La page à laquelle vous voulez vous lier est déjà attachée à un [$1 élément] du dépôt de données central qui se lie à $2 sur ce site. Les éléments ne peuvent avoir qu’une page attachée par site. Veuillez choisir une autre page pour vous lier avec.",
 	"wikibase-linkitem-close": "Fermer la boîte de dialogue et recharger la page",
@@ -54,6 +55,7 @@
 	"wikibase-rc-show-wikidata-pref": "Afficher les modifications de {{WBREPONAME}} dans les modifications récentes",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Modification de {{WBREPONAME}}.",
+	"wikibase-replicationnote": "Veuillez noter que cela peut prendre plusieurs minutes avant que les modifications soient visibles sur tous les wikis.",
 	"wikibase-watchlist-show-changes-pref": "Voir les modifications de {{WBREPONAME}} dans votre liste de suivi",
 	"wikibase-error-serialize-error": "Échec à la sérialisation des données",
 	"wikibase-error-invalid-entity-id": "L’ID saisi est inconnu du système. Veuillez utiliser un ID d’entité valide.",
