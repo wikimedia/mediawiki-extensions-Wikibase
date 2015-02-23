@@ -228,15 +228,16 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $title Message key for page title
 	 * @param Status $status The status to report.
+	 * @param string $key Message key of the error message to be shown in the error page's <h1>
+	 * element. Defaults to 'wikibase-undo-revision-error'.
 	 *
 	 * @todo: would be handy to have this in OutputPage
 	 */
-	protected function showStatusErrorsPage( $title, Status $status ) {
-		$this->getOutput()->prepareErrorPage( $this->msg( $title ), $this->msg( 'errorpagetitle' ) );
+	protected function showStatusErrorsPage( Status $status, $key = 'wikibase-undo-revision-error' ) {
+		$this->getOutput()->prepareErrorPage( $this->msg( $key ), $this->msg( 'errorpagetitle' ) );
 
-		$this->getOutput()->addWikiText( $status->getMessage() );
+		$this->getOutput()->addWikiText( $status->getMessage()->text() );
 
 		$this->getOutput()->returnToMain();
 	}
@@ -267,7 +268,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$revisions = $this->loadRevisions();
 		if ( !$revisions->isOK() ) {
-			$this->showStatusErrorsPage( 'wikibase-undo-revision-error', $revisions ); //TODO: define message
+			$this->showStatusErrorsPage( $revisions );
 			return;
 		}
 
