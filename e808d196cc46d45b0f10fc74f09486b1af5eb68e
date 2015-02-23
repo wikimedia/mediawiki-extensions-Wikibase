@@ -16,6 +16,24 @@
       "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3cb5ac78",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-02-23T06:12:42Z",
+      "side": 1,
+      "message": "Why? Does it matter if it\u0027s null or false? Is there a semantical difference between them?",
+      "parentUuid": "6e7c4fa4_7cc56463",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
