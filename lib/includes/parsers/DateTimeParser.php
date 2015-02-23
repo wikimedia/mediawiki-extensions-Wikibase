@@ -58,8 +58,7 @@ class DateTimeParser extends StringValueParser {
 		$calendarModelParser = new CalendarModelParser();
 		$options = $this->getOptions();
 
-		// Place to put large years when they are found
-		$largeYear = null;
+		$year = null;
 
 		try {
 			list( $sign, $value ) = $this->eraParser->parse( $value );
@@ -69,22 +68,29 @@ class DateTimeParser extends StringValueParser {
 			$value = $this->getValueWithFixedSeparators( $value );
 			$value = $this->getValueWithFixedYearLengths( $value );
 
-			// PHP's DateTime object also can't handle larger than 4 digit years,
-			// e.g. 1 June 202020
-			if ( preg_match( '/\d{5,}/', $value, $matches, PREG_OFFSET_CAPTURE ) ) {
-				$largeYear = $matches[0][0];
-				$value = substr_replace( $value, substr( $largeYear, -4 ), $matches[0][1],
-					strlen( $largeYear ) );
+			if ( preg_match( '/\d{3,}/', $value, $matches, PREG_OFFSET_CAPTURE ) ) {
+				$year = $matches[0][0];
+
+				// PHP's DateTime/strtotime parsing can't handle larger than 4 digit years!
+				if ( strlen( $year > 4 ) ) {
+					$value = substr_replace( $value, substr( $year, -4 ), $matches[0][1],
+						strlen( $year ) );
+				}
 			}
 
 			$this->validateDateTimeInput( $value );
 
 			// Parse using the DateTime object (this will allow us to format the date in a nicer way)
 			$dateTime = new DateTime( $value );
-			if ( $largeYear === null ) {
-				$timeString = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
+
+			if ( $year !== null && strlen( $year ) > 4 ) {
+				$timeString = $sign . $year . $dateTime->format( '-m-d\TH:i:s\Z' );
 			} else {
-				$timeString = $sign . $largeYear . $dateTime->format( '-m-d\TH:i:s\Z' );
+				$timeString = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
+
+				if ( $year !== null && strpos( $timeString, $year ) === false ) {
+					throw new ParseException( $value . ' is not a valid date.' );
+				}
 			}
 
 			// Pass the reformatted string into a base parser that parses this +/-Y-m-d\TH:i:s\Z format with a precision
