@@ -211,6 +211,7 @@ class DateTimeParserTest extends StringValueParserTest {
 			'10  .10  .2010',
 			'10...10...2010',
 			'2015-00-00',
+			'00000002015-00-00',
 			'Jann 2014',
 			'1980x',
 			'1980s', // supported by MWTimeIsoParser
