@@ -9,7 +9,6 @@ use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
-use Wikibase\SummaryFormatter;
 
 /**
  * Page for creating new Wikibase entities.
@@ -33,12 +32,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * @var string|null
 	 */
-	protected $label = null;
+	private $label = null;
 
 	/**
 	 * @var string|null
 	 */
-	protected $description = null;
+	private $description = null;
 
 	/**
 	 * @var Language
@@ -46,19 +45,14 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	private $contentLanguage = null;
 
 	/**
-	 * @var SummaryFormatter
+	 * @var string
 	 */
-	protected $summaryFormatter;
+	private $rightsUrl;
 
 	/**
 	 * @var string
 	 */
-	protected $rightsUrl;
-
-	/**
-	 * @var string
-	 */
-	protected $rightsText;
+	private $rightsText;
 
 	/**
 	 * @param string $name Name of the special page, as seen in links and URLs.
@@ -180,8 +174,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
-	 * Create entity
-	 *
 	 * @since 0.1
 	 *
 	 * @return Entity Created entity of correct subtype
@@ -273,12 +265,10 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * Building the HTML form for creating a new item.
 	 *
-	 * @since 0.1
-	 *
 	 * @param string|null $legend initial value for the label input box
 	 * @param string $additionalHtml initial value for the description input box
 	 */
-	public function createForm( $legend = null, $additionalHtml = '' ) {
+	private function createForm( $legend = null, $additionalHtml = '' ) {
 		$this->addCopyrightText();
 
 		$this->getOutput()->addHTML(
@@ -323,7 +313,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * @todo could factor this out into a special page form builder and renderer
 	 */
-	protected function addCopyrightText() {
+	private function addCopyrightText() {
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
 			$this->rightsUrl,
@@ -336,8 +326,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
-	 * Get legend
-	 *
 	 * @since 0.1
 	 *
 	 * @return string Legend for the fieldset
