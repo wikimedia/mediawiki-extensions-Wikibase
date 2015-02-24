@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b936a04d",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entityview.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T14:39:15Z",
+      "side": 1,
+      "message": "Please add a comment explaining where this number comes from. Is there an other with of 37% somewhere?",
+      "revId": "e2822cc2b704c70db6d28032199bffb02f9b3173",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_59374c4a",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entityview.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T14:39:15Z",
+      "side": 1,
+      "message": "Please add a comment explaining where this number comes from. Is there a similar min-width somewhere?",
+      "revId": "e2822cc2b704c70db6d28032199bffb02f9b3173",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
