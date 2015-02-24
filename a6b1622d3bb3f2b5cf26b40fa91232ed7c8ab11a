@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_36ccdf64",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-24T11:05:29Z",
+      "side": 1,
+      "message": "Using plain mocks here is scary. It only works \"accidentally\", because provideData is using the old style scary data structures to represent claims. If we use new-style serialization to represent our test data, this will fail hard.\nCould be avoided by constructing Statement objects directly.",
+      "revId": "a6b1622d3bb3f2b5cf26b40fa91232ed7c8ab11a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
