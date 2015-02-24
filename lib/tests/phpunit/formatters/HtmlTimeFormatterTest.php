@@ -130,6 +130,22 @@ class HtmlTimeFormatterTest extends \PHPUnit_Framework_TestCase {
 				new FormatterOptions(),
 				'/^MOCKDATE<sup class="wb-calendar-name">Gregorian<\/sup>$/'
 			),
+			'unknown calendar model' => array(
+				new TimeValue( '+2100-01-01T00:00:00Z',
+					0, 0, 0,
+					TimeValue::PRECISION_DAY,
+					'Stardate' ),
+				new FormatterOptions(),
+				'/^MOCKDATE<sup class="wb-calendar-name">Stardate<\/sup>$/'
+			),
+			'HTML entities' => array(
+				new TimeValue( '+2100-01-01T00:00:00Z',
+					0, 0, 0,
+					TimeValue::PRECISION_DAY,
+					'<a>injection</a>' ),
+				new FormatterOptions(),
+				'/^MOCKDATE<sup class="wb-calendar-name">&lt;a&gt;injection&lt;\/a&gt;<\/sup>$/'
+			),
 		);
 	}
 
