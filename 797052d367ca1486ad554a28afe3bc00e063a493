@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_563b9b96",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T10:10:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_66094adf",
+      "revId": "797052d367ca1486ad554a28afe3bc00e063a493",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_c6085edf",
         "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_f6bc2703",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T10:10:06Z",
+      "side": 1,
+      "message": "It\u0027s impossible to have escapable characters in this string. It\u0027s impossible to test. But technically, yes, should be escaped at this point.",
+      "parentUuid": "6e7c4fa4_c6085edf",
+      "revId": "797052d367ca1486ad554a28afe3bc00e063a493",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_860ee6e6",
         "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2015-02-23T20:36:02Z",
       "side": 1,
       "message": "escape!",
+      "revId": "797052d367ca1486ad554a28afe3bc00e063a493",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9635b3a5",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T10:10:06Z",
+      "side": 1,
+      "message": "As above.",
+      "parentUuid": "6e7c4fa4_860ee6e6",
       "revId": "797052d367ca1486ad554a28afe3bc00e063a493",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
