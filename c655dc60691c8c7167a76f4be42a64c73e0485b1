@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_16a1a390",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T11:13:53Z",
+      "side": 1,
+      "message": "Hey, who put that exclamation mark here? ;-)",
+      "revId": "c655dc60691c8c7167a76f4be42a64c73e0485b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
