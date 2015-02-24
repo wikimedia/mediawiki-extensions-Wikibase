@@ -7,13 +7,13 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use IContextSource;
 use Language;
+use MediaWikiTestCase;
 use Site;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizer;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Diff\EntityDiffVisualizer
@@ -24,7 +24,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityDiffVisualizerTest extends \MediaWikiTestCase {
+class EntityDiffVisualizerTest extends MediaWikiTestCase {
 
 
 	public function diffProvider() {
@@ -120,16 +120,14 @@ class EntityDiffVisualizerTest extends \MediaWikiTestCase {
 	protected function getVisualizer() {
 		$enwiki = new Site();
 		$enwiki->setGlobalId( 'enwiki' );
-		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		$entityRevisionLookup = new MockRepository();
+
 
 		return new EntityDiffVisualizer(
 			$this->getMockContext(),
 			$this->getMockClaimDiffer(),
 			$this->getMockClaimDiffVisualizer(),
 			new MockSiteStore( array( $enwiki ) ),
-			$entityTitleLookup,
-			$entityRevisionLookup
+			$this->getMock( 'Wikibase\Lib\EntityIdFormatter' )
 		);
 	}
 
