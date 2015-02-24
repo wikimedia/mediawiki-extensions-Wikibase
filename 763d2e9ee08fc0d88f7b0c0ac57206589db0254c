@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_56515b0f",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsview.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-24T09:03:01Z",
+      "side": 1,
+      "message": "for this, suppose we can keep them (without div#content) here and add the div#content rule for label additionally to wikibase.css?",
+      "revId": "763d2e9ee08fc0d88f7b0c0ac57206589db0254c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
