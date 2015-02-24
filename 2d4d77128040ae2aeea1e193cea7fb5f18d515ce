@@ -16,6 +16,24 @@
       "revId": "2d4d77128040ae2aeea1e193cea7fb5f18d515ce",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_56b07b88",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T12:00:26Z",
+      "side": 1,
+      "message": "It\u0027s impossible to have escapable characters in this string and impossible to test (well, could use a mock to inject HTML). You are right, escaping should be here just in case.",
+      "parentUuid": "6e7c4fa4_a65c42f5",
+      "revId": "2d4d77128040ae2aeea1e193cea7fb5f18d515ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
