@@ -34,6 +34,24 @@
       "revId": "bfae8c0345312bb1140fb611ae55a2a18d0f0c41",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_39ccd064",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T14:17:46Z",
+      "side": 1,
+      "message": "I have never seen this, neither in PHP nor in JavaScript. How is \"_\" better than \"val\"? I really don\u0027t see an advantage. I consider being consistent across a code base more important.",
+      "parentUuid": "6e7c4fa4_7608172b",
+      "revId": "bfae8c0345312bb1140fb611ae55a2a18d0f0c41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
