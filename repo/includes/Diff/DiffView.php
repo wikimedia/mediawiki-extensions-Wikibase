@@ -10,6 +10,7 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Html;
 use IContextSource;
+use InvalidArgumentException;
 use MWException;
 use SiteStore;
 use Wikibase\DataModel\Entity\EntityId;
@@ -224,22 +225,28 @@ class DiffView extends ContextSource {
 	}
 
 	/**
-	 * @param string $badgeId
+	 * @param string $idString
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	private function getBadgeLinkElement( $badgeId ) {
+	private function getBadgeLinkElement( $idString ) {
 		try {
-			$title = $this->entityTitleLookup->getTitleForId( new ItemId( $badgeId ) );
-		} catch ( MWException $ex ) {
-			wfWarn( "Couldn't get Title for badge $badgeId" );
-			return $badgeId;
+			$itemId = new ItemId( $idString );
+		} catch ( InvalidArgumentException $ex ) {
+			return $idString;
+		}
+
+		try {
+			$title = $this->entityTitleLookup->getTitleForId( $itemId );
+		} catch ( MwException $ex ) {
+			wfWarn( "Couldn't get Title for badge $idString" );
+			return $idString;
 		}
 
 		return Html::element( 'a', array(
 			'href' => $title->getLinkURL(),
 			'dir' => 'auto',
-		), $this->getLabelForBadge( new ItemId( $badgeId ) ) );
+		), $this->getLabelForBadge( $itemId ) );
 	}
 
 	/**
