@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d64fabbf",
+        "filename": "repo/includes/ChangeOp/MergeChangeOpsFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-24T11:49:47Z",
+      "side": 1,
+      "message": "This should be called ChangeOpsMergeFactory...",
+      "revId": "adaea329106a031e5ae40d3664805a111b3df430",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
