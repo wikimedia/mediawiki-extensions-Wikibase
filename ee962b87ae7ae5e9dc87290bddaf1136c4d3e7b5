@@ -104,6 +104,23 @@
       "revId": "ee962b87ae7ae5e9dc87290bddaf1136c4d3e7b5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d6a00b9d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-24T10:22:35Z",
+      "side": 1,
+      "message": "I\u0027d prefer not to have a default value. You could maybe add a shortcut method passing the key?",
+      "revId": "ee962b87ae7ae5e9dc87290bddaf1136c4d3e7b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
