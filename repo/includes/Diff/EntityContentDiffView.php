@@ -17,8 +17,10 @@ use Revision;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\EntityContent;
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EscapingEntityIdFormatter;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\LanguageLabelLookup;
@@ -103,8 +105,11 @@ class EntityContentDiffView extends DifferenceEngine {
 				$langCode
 			),
 			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->getEntityRevisionLookup()
+			new EntityIdHtmlLinkFormatter(
+				$labelLookup,
+				$wikibaseRepo->getEntityTitleLookup(),
+				new LanguageNameLookup()
+			)
 		);
 	}
 
