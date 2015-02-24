@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b6846fd9",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T11:39:11Z",
+      "side": 1,
+      "message": "Still missing the htmlspecialchars, see Iac99793. ;-)",
+      "revId": "ba50d6f8dff2ef8a4eb493426cdcef036858642e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_36705f05",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T11:39:11Z",
+      "side": 1,
+      "message": "Is there a guarantee this formatter returns HTML?",
+      "revId": "ba50d6f8dff2ef8a4eb493426cdcef036858642e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_76d017cc",
+        "filename": "repo/tests/phpunit/includes/Diff/DiffViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T11:39:11Z",
+      "side": 1,
+      "message": "Spaces missing.",
+      "revId": "ba50d6f8dff2ef8a4eb493426cdcef036858642e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_16d9a3f7",
+        "filename": "repo/tests/phpunit/includes/Diff/DiffViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T11:39:11Z",
+      "side": 1,
+      "message": "Spaces missing.",
+      "revId": "ba50d6f8dff2ef8a4eb493426cdcef036858642e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
