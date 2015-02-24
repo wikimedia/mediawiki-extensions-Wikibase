@@ -105,6 +105,18 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		return $entityLookup;
 	}
 
+	/**
+	 * @return EntityRevisionLookup
+	 */
+	private function getNullReturningEntityRevisionLookup() {
+		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
+		$entityLookup->expects( $this->any() )
+			->method( 'getEntityRevision' )
+			->will( $this->returnValue( null ) );
+
+		return $entityLookup;
+	}
+
 	private function getItem() {
 		$item = new Item( new ItemId( 'Q23' ) );
 
@@ -163,6 +175,17 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		$item = $this->getItem();
 		$itemId = $item->getId();
 		$entityRevisionLookup = $this->getExceptionThrowingEntityRevisionLookup();
+
+		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $itemId );
+
+		$html = $expander->renderTermBox( $itemId, 1 );
+		$this->assertEquals( '', $html );
+	}
+
+	public function testRenderTermBoxForNonEntityRevision() {
+		$item = $this->getItem();
+		$itemId = $item->getId();
+		$entityRevisionLookup = $this->getNullReturningEntityRevisionLookup();
 
 		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $itemId );
 
