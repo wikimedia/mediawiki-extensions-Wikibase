@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_038ac3bf",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsview.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-24T07:53:39Z",
+      "side": 1,
+      "message": "Please do not use a selector referencing nodes parent to .wikibase-entitytermsview in this file. This file should contain only default styles for the entitytermsview widget. (Although the contents of this file are far from being properly organized yet.) There should be additional css files per skin. For now, \"global\" styles (specifying native skin nodes) may be put into wikibase.css or you could strip off \"div#content\".",
+      "revId": "25e7b17a0591e9445cc944857b8707d04660d1f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
