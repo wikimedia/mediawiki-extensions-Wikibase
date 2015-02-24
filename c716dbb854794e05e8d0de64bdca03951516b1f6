@@ -16,6 +16,24 @@
       "revId": "c716dbb854794e05e8d0de64bdca03951516b1f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_392930e1",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-24T15:54:28Z",
+      "side": 1,
+      "message": "this is needed, because without div#content vector css overrides the h1 styling, so depends on external knowledge and goes here.\n\nthat said, I have discovered if I don\u0027t explicitly put \"h1\" in the css rule (and don\u0027t have div#content) then it works and can go in the jquery theme css file instead of here.",
+      "parentUuid": "6e7c4fa4_79fd6868",
+      "revId": "c716dbb854794e05e8d0de64bdca03951516b1f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
