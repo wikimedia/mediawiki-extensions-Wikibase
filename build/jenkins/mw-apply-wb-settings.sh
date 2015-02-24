@@ -77,3 +77,5 @@ then
 else
   usage
 fi
+
+echo '?>' >> LocalSettings.php
