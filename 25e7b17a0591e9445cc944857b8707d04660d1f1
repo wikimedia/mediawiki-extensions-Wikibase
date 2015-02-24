@@ -16,6 +16,24 @@
       "revId": "25e7b17a0591e9445cc944857b8707d04660d1f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b629cf86",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsview.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-24T09:00:24Z",
+      "side": 1,
+      "message": "div#content is necessary, else it appears that vector css takes priority, setting padding to 0.\n\ndiv#content h1,\n\tdiv#content h2,\n\tdiv#content #firstHeading {\n\t  font-family: \"Linux Libertine\", Georgia, Times, serif;\n\t  line-height: 1.3;\n\t  margin-bottom: 0.25em;\n\t  padding: 0;\n\t}\n\nI can move this to wikibase.css for now, and agree about having addition per skin css.",
+      "parentUuid": "6e7c4fa4_038ac3bf",
+      "revId": "25e7b17a0591e9445cc944857b8707d04660d1f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
