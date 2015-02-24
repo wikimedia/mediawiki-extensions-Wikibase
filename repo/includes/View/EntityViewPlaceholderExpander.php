@@ -252,7 +252,7 @@ class EntityViewPlaceholderExpander {
 		}
 
 		if ( !$entityRev ) {
-			// Could not load entity revision, $revisionId might be a non-entity revision
+			// Could not load entity revision, entity might not exist for $entityId.
 			return '';
 		}
 
