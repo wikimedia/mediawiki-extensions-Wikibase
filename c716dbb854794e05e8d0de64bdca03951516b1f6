@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_79fd6868",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T14:27:58Z",
+      "side": 1,
+      "message": "This looks like dead code. The selector in the other file already does the exact same. Why the duplication?",
+      "revId": "c716dbb854794e05e8d0de64bdca03951516b1f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
