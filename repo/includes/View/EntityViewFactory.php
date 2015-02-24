@@ -141,8 +141,8 @@ class EntityViewFactory {
 	 *
 	 * @param string $entityType
 	 * @param string $languageCode
+	 * @param LabelLookup $labelLookup
 	 * @param LanguageFallbackChain|null $fallbackChain
-	 * @param LabelLookup|null $labelLookup
 	 * @param bool $editable
 	 *
 	 * @throws InvalidArgumentException
@@ -151,8 +151,8 @@ class EntityViewFactory {
 	public function newEntityView(
 		$entityType,
 		$languageCode,
+		LabelLookup $labelLookup,
 		LanguageFallbackChain $fallbackChain = null,
-		LabelLookup $labelLookup = null,
 		$editable = true
 	 ) {
 		$entityTermsView = $this->newEntityTermsView( $languageCode );
@@ -205,16 +205,16 @@ class EntityViewFactory {
 	/**
 	 * @param string $languageCode
 	 * @param LanguageFallbackChain|null $fallbackChain
-	 * @param LabelLookup|null $labelLookup
+	 * @param LabelLookup $labelLookup
 	 *
 	 * @return StatementGroupListView
 	 */
 	private function newStatementGroupListView(
 		$languageCode,
 		LanguageFallbackChain $fallbackChain = null,
-		LabelLookup $labelLookup = null
+		LabelLookup $labelLookup
 	) {
-		$propertyIdFormatter = $this->getPropertyIdFormatter( $languageCode, $fallbackChain, $labelLookup );
+		$propertyIdFormatter = $this->getPropertyIdFormatter( $labelLookup );
 
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->templateFactory,
@@ -296,22 +296,12 @@ class EntityViewFactory {
 	}
 
 	/**
-	 * @param string $languageCode
-	 * @param LanguageFallbackChain|null $languageFallbackChain
-	 * @param LabelLookup|null $labelLookup
+	 * @param LabelLookup $labelLookup
 	 *
 	 * @return EntityIdFormatter
 	 */
-	private function getPropertyIdFormatter(
-		$languageCode,
-		LanguageFallbackChain $languageFallbackChain = null,
-		LabelLookup $labelLookup = null
-	) {
-		$formatterOptions = $this->getFormatterOptions( $languageCode, $languageFallbackChain, $labelLookup );
-
-		return $this->idFormatterFactory->getEntityIdFormater(
-			$formatterOptions
-		);
+	private function getPropertyIdFormatter( LabelLookup $labelLookup ) {
+		return $this->idFormatterFactory->getEntityIdFormater( $labelLookup );
 	}
 
 }
