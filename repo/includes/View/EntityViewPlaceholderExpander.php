@@ -241,15 +241,17 @@ class EntityViewPlaceholderExpander {
 		try {
 			// we may want to cache this...
 			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId );
-			$entity = $entityRev->getEntity();
 		} catch ( StorageException $ex ) {
-			// could not load entity, might be a deleted revision
+			// Could not load entity revision, $revisionId might be a deleted revision
 			return '';
 		}
 
-		if ( !$entity ) {
+		if ( !$entityRev ) {
+			// Could not load entity revision, $revisionId might be a non-entity revision
 			return '';
 		}
+
+		$entity = $entityRev->getEntity();
 
 		$termBoxView = new TermBoxView( $this->templateFactory, $this->uiLanguage );
 		$html = $termBoxView->renderTermBox( $this->targetPage, $entity->getFingerprint(), $languages );
