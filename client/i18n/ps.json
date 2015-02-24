@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ahmed-Najib-Biabani-Ibrahimkhel"
+			"Ahmed-Najib-Biabani-Ibrahimkhel",
+			"عثمان خان شاہ"
 		]
 	},
+	"tooltip-t-wikibase": "نورو ژبو کې تړل",
 	"wikibase-after-page-move-queued": "د [$1 {{WBREPONAME}} توکی] چې دې مخ سره تړل شوی هغه به په اتوماتيکه توگه ډېر ژر هممهاله شي.",
 	"wikibase-after-page-delete-queued": "د [$1 {{WBREPONAME}} توکی] چې دې مخ سره تړل شوی هغه به په اتوماتيکه توگه ډېر ژر هممهاله شي.",
 	"wikibase-comment-update": "{{WBREPONAME}} توکی بدل شو",

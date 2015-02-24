@@ -7,6 +7,7 @@
 	"wikibase-error-unexpected": "Flater $1.",
 	"wikibase-globedetails-longitude": "Lingtegraad",
 	"wikibase-globedetails-latitude": "Breedtegraad",
+	"wikibase-sitelinks-wikipedia": "Wikipedy",
 	"wikibase-sitelinks-sitename-columnheading": "Taal",
 	"datatypes-type-wikibase-property": "Eigenskip"
 }

@@ -16,7 +16,7 @@
 	"wikibase-comment-linked": "Аб’ект Вікізьвестак быў злучаны з гэтай старонкай.",
 	"wikibase-comment-unlink": "Гэтая старонка была адлучаная ад аб’екта Вікізьвестак. Моўныя спасылкі выдаленыя.",
 	"wikibase-comment-restore": "Выдаленьне злучанага аб’екта Вікізьвестак скасавана. Моўныя спасылкі адноўленыя.",
-	"wikibase-comment-update": "Зьменены аб’ект Вікізьвестак",
+	"wikibase-comment-update": "Зьменены аб’ект {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-comment-sitelink-add": "Дададзеная моўная спасылка: $1",
 	"wikibase-comment-sitelink-change": "Моўная спасылка зьмененая з $1 на $2",
 	"wikibase-comment-sitelink-remove": "Моўная спасылка выдаленая: $1",

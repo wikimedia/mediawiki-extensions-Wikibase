@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robin0van0der0vliet"
+		]
+	},
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-show": "Toean",
+	"wikibase-rc-wikibase-edit-letter": "D"
+}

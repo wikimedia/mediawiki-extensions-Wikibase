@@ -27,6 +27,7 @@
 	"wikibase-dataitem": "Предмет на {{WBREPONAME}}",
 	"wikibase-editlinks": "Уреди врски",
 	"wikibase-editlinkstitle": "Уредување на меѓујазични врски",
+	"wikibase-addlinkstitle": "Додај меѓујазични врски",
 	"wikibase-linkitem-addlinks": "Додај врски",
 	"wikibase-linkitem-alreadylinked": "Страницата што сакате да ја сврзете е веќе поврзана со [$1 единица] во централното складиште, што води до $2 на ова вики. Единиците можат да имаат само една сврзана страница по мреж. место. Изберете друга страница за сврзување.",
 	"wikibase-linkitem-close": "Затвори го дијалогов и превчитај",

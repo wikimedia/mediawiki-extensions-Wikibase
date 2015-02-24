@@ -17,7 +17,6 @@
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
-	"specialpages-group-wikibaseclient": "Cliente de {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Ligação para o item de repositório de dados conectado",
 	"wikibase-after-page-move": "Também pode [$1 actualizar] o item {{WBREPONAME}} associado para manter as ligações de idioma na página movida.",
 	"wikibase-after-page-move-queued": "O [$1 item {{WBREPONAME}}] associado a esta página será atualizado automaticamente em breve.",
@@ -35,6 +34,7 @@
 	"wikibase-dataitem": "Item no {{WBREPONAME}}",
 	"wikibase-editlinks": "Editar ligações",
 	"wikibase-editlinkstitle": "Editar ligações interlínguas",
+	"wikibase-addlinkstitle": "Adicionar ligações interlínguas",
 	"wikibase-linkitem-addlinks": "Adicionar ligações",
 	"wikibase-linkitem-alreadylinked": "A página que pretende ligar já está vinculado a um  [$1 item] no repositório central de dados, o qual está ligado a $2 neste sítio. Os itens só podem possuir uma página por cada sítio anexado. Por favor, escolha uma página diferente para vincular.",
 	"wikibase-linkitem-close": "Fechar caixa de diálogo e recarregar a página",

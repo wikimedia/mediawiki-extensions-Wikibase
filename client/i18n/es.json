@@ -31,7 +31,7 @@
 	"wikibase-comment-sitelink-remove": "Se ha eliminado el enlace de idioma: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|cambio|cambios}}",
 	"wikibase-dataitem": "Elemento de {{WBREPONAME}}",
-	"wikibase-editlinks": "Editar los enlaces",
+	"wikibase-editlinks": "Editar enlaces",
 	"wikibase-editlinkstitle": "Editar enlaces interlingüísticos",
 	"wikibase-linkitem-addlinks": "Añadir enlace",
 	"wikibase-linkitem-alreadylinked": "La página que quieres enlazar con esta, ya está enlazada a un [$1 elemento] en el repositorio de datos central que une a $2 en este sitio. Los elementos sólo pueden tener una sola página por sitio enlazado. Por favor, elige una página diferente para enlazarlo.",

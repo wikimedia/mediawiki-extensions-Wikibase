@@ -42,6 +42,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}项",
 	"wikibase-editlinks": "编辑链接",
 	"wikibase-editlinkstitle": "编辑跨语言链接",
+	"wikibase-addlinkstitle": "添加跨语言链接",
 	"wikibase-linkitem-addlinks": "添加链接",
 	"wikibase-linkitem-alreadylinked": "你想要链接的页面已经连接至中央数据存储库中[$1 项]，它链接至本网站的“$2”。项只能在每个网站连接一个页面。请选择其他页面链接。",
 	"wikibase-linkitem-close": "关闭对话框并刷新该页面",

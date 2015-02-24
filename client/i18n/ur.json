@@ -2,12 +2,22 @@
 	"@metadata": {
 		"authors": [
 			"Noor2020",
-			"Obaid Raza"
+			"Obaid Raza",
+			"عثمان خان شاہ"
 		]
 	},
+	"tooltip-t-wikibase": "متعلقہ ڈیٹا سے منسلک کریں",
+	"wikibase-comment-update": "{{WBREPONAME}} مواد تبدیل کیا گیا",
+	"wikibase-dataitem": "{{WBREPONAME}} مواد",
+	"wikibase-editlinks": "روابط میں ترمیم کریں",
+	"wikibase-editlinkstitle": "بین الزبان روابط میں ترمیم",
 	"wikibase-linkitem-input-site": "زبان:",
 	"wikibase-linkitem-input-page": "صفحہ:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "چھپائیں",
+	"wikibase-rc-hide-wikidata-show": "دکھائیں",
 	"wikibase-rc-wikibase-edit-letter": "ڈی",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ترمیم",
-	"wikibase-unconnectedpages-page": "نتائج فہرست اس صفحہ سے شروع کریں:"
+	"wikibase-unconnectedpages-page": "نتائج فہرست اس صفحہ سے شروع کریں:",
+	"wikibase-otherprojects": "دیگر منصوبے"
 }

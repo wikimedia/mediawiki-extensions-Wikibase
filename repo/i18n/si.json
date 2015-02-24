@@ -4,7 +4,8 @@
 			"Sahan.ssw",
 			"Singhalawap",
 			"පසිඳු කාවින්ද",
-			"Susith Chandira Gts"
+			"Susith Chandira Gts",
+			"Sandaru"
 		]
 	},
 	"wikibase-desc": "ව්‍යූහගත දත්ත කෝෂ්ඨාගාරය",
@@ -69,6 +70,8 @@
 	"wikibase-setlabel-introfull": "ඔබ විසින් $2 හී [[$1]] සඳහා ලේබලය සකසමින්.",
 	"wikibase-setlabel-label": "ලේබලය:",
 	"wikibase-setlabel-submit": "ලේබලය සකසන්න",
+	"wikibase-setlabeldescriptionaliases-description-label": "විස්තරය:",
+	"wikibase-setlabeldescriptionaliases-aliases-label": "අන්වර්ථ නාම:",
 	"wikibase-modifyentity-id": "හැඳුනුම:",
 	"wikibase-modifyterm-language": "භාෂාව:",
 	"special-listdatatypes": "ලබාගත හැකි සියලුම දත්තවර්ගවල ලැයිස්තුව",
