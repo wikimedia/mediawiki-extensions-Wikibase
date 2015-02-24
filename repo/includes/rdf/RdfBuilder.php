@@ -67,6 +67,7 @@ class RdfBuilder {
 	const WIKIBASE_RANK_NORMAL = 'wikibase:NormalRank';
 	const WIKIBASE_RANK_PREFERRED = 'wikibase:PreferredRank';
 	const WIKIBASE_RANK_DEPRECATED = 'wikibase:DeprecatedRank';
+	const WIKIBASE_BADGE_QNAME = 'wikibase:Badge';
 
 	const PROV_QNAME = 'prov:wasDerivedFrom';
 
@@ -433,9 +434,12 @@ class RdfBuilder {
 			$pageRecourse->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ':Article' );
 			$pageRecourse->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
 			$pageRecourse->addLiteral( self::NS_SCHEMA_ORG . ':inLanguage', $languageCode );
+
+			foreach ( $siteLink->getBadges() as $badge ) {
+				$pageRecourse->addResource( self::WIKIBASE_BADGE_QNAME, $this->getEntityQName( self::NS_ENTITY, $badge ) );
+			}
 		}
 
-		// TODO: implement badges export
 	}
 
 	/**

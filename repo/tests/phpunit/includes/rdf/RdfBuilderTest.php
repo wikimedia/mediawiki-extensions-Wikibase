@@ -80,7 +80,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		// test links
 		$entity = new Item();
 		$entities['links'] = $entity;
-		$link = new SiteLink('enwiki', 'San Francisco');
+		$link = new SiteLink('enwiki', 'San Francisco', array( ItemId::newFromNumber( 42 ) ) );
 		$entity->addSiteLink($link);
 		$link = new SiteLink('ruwiki', 'Сан Франциско');
 		$entity->addSiteLink($link);
@@ -349,6 +349,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Article',
 			RdfBuilder::NS_SCHEMA_ORG . ':inLanguage' => new EasyRdf_Literal( 'en' ),
 			RdfBuilder::NS_SCHEMA_ORG . ':about' => $this->builder->getEntityQName( RdfBuilder::NS_ENTITY, $this->entities[$name]->getId() ),
+			RdfBuilder::WIKIBASE_BADGE_QNAME => $this->builder->getEntityQName( RdfBuilder::NS_ENTITY, ItemId::newFromNumber( 42 ) )
 		));
 		self::addToSitelink( $graph, 'http://ruwiki.acme.test/%D0%A1%D0%B0%D0%BD%20%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%81%D0%BA%D0%BE', array(
 			'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Article',
