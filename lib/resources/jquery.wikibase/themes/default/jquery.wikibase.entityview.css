@@ -14,5 +14,7 @@
 }
 
 .wikibase-entityview .wikibase-entityview-main {
+	width: 63%;
 	margin: 0 2em 2em 0;
+	min-width: 59em;
 }
