@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_560e3b92",
+        "filename": "repo/includes/View/EntityViewPlaceholderExpander.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-24T11:27:04Z",
+      "side": 1,
+      "message": "documentation of EntityRevisionLookup says:\n\nreturns \"null if there is no such entity\" (and code looks like it does this)\n\nThis might mean that the entire entity deleted, so I would say \"deleted entity\" in addition or instead of \"non-entity\".",
+      "revId": "03792b101481431e41cd7ea78f7ed712241f7bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
