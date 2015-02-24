@@ -103,11 +103,44 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFormatError() {
-		$formatter = new TimeDetailsFormatter( new FormatterOptions() );
+		$formatter = new TimeDetailsFormatter();
 		$value = new NumberValue( 23 );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$formatter->format( $value );
+	}
+
+	public function testGivenInvalidTimeValue_formatDoesNotAllowHtmlInjection() {
+		$formatter = new TimeDetailsFormatter();
+
+		$value = $this->getMockBuilder( 'DataValues\TimeValue' )
+			->disableOriginalConstructor()
+			->getMock();
+		$value->expects( $this->any() )
+			->method( 'getTime' )
+			->will( $this->returnValue( '<a>injection</a>' ) );
+		$value->expects( $this->any() )
+			->method( 'getCalendarModel' )
+			->will( $this->returnValue( '<a>injection</a>' ) );
+		$value->expects( $this->any() )
+			->method( 'getBefore' )
+			->will( $this->returnValue( '<a>injection</a>' ) );
+		$value->expects( $this->any() )
+			->method( 'getAfter' )
+			->will( $this->returnValue( '<a>injection</a>' ) );
+		$value->expects( $this->any() )
+			->method( 'getPrecision' )
+			->will( $this->returnValue( '<a>injection</a>' ) );
+		$value->expects( $this->any() )
+			->method( 'getTimezone' )
+			->will( $this->returnValue( '<a>injection</a>' ) );
+
+		$html = $formatter->format( $value );
+		$this->assertContains( 'injection', $html, 'Should be in the output' );
+		$this->assertNotContains( '<a>', $html, 'Should not be unescaped' );
+		$this->assertContains( '&lt;', $html, 'Should be escaped' );
+		// FIXME
+		$this->assertNotContains( '&amp;', $html, 'Should not be double escape' );
 	}
 
 }
