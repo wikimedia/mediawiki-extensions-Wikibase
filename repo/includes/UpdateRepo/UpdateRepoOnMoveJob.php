@@ -31,6 +31,11 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	private $siteStore;
 
 	/**
+	 * @var string|bool|null
+	 */
+	private $normalizedPageName = null;
+
+	/**
 	 * Constructs a UpdateRepoOnMoveJob propagating a page move to the repo
 	 *
 	 * @note: This is for use by Job::factory, don't call it directly;
@@ -115,6 +120,27 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	}
 
 	/**
+	 * @return string|bool False in case the normalization failed
+	 */
+	private function getNormalizedPageName() {
+		if ( $this->normalizedPageName === null ) {
+			$params = $this->getParams();
+			$newPage = $params['newTitle'];
+			$siteId = $params['siteId'];
+
+			$site = $this->siteStore->getSite( $siteId );
+			$this->normalizedPageName = $site->normalizePageName( $newPage );
+
+			if ( $this->normalizedPageName === false ) {
+				wfDebugLog( 'UpdateRepo', "OnMove: Normalizing the page name $newPage on $siteId failed" );
+			}
+
+		}
+
+		return $this->normalizedPageName;
+	}
+
+	/**
 	 * Whether the propagated update is valid (and thus should be applied)
 	 *
 	 * @param Item $item
@@ -126,7 +152,6 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		$params = $this->getParams();
 		$siteId = $params['siteId'];
 		$oldPage = $params['oldTitle'];
-		$newPage = $params['newTitle'];
 
 		$oldSiteLink = $this->getSiteLink( $item, $siteId );
 		if ( !$oldSiteLink || $oldSiteLink->getPageName() !== $oldPage ) {
@@ -136,10 +161,8 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 			return false;
 		}
 
-		$site = $this->siteStore->getSite( $siteId );
-		// Normalize the name again, just in case the page has been updated in the mean time
-		if ( !$site || !$site->normalizePageName( $newPage ) ) {
-			wfDebugLog( 'UpdateRepo', "OnMove: Normalizing the page name $newPage on $siteId failed" );
+		// Normalize the name, just in case the page has been updated in the mean time
+		if ( $this->getNormalizedPageName() === false ) {
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
@@ -157,14 +180,12 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	protected function applyChanges( Item $item ) {
 		$params = $this->getParams();
 		$siteId = $params['siteId'];
-		$newPage = $params['newTitle'];
 
 		$oldSiteLink = $this->getSiteLink( $item, $siteId );
 
-		$site = $this->siteStore->getSite( $siteId );
 		$siteLink = new SiteLink(
 			$siteId,
-			$site->normalizePageName( $newPage ),
+			$this->getNormalizedPageName(),
 			$oldSiteLink->getBadges() // Keep badges
 		);
 

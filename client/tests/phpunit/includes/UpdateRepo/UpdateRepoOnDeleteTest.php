@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\UpdateRepo;
 
 use Title;
 use User;
+use JobSpecification;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -68,20 +69,32 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Get a JobQueueGroup mock for the use in UpdateRepo::injectJob.
 	 *
-	 * @param \Job $expectedJob The job that is expected to be pushed
-	 * @param bool $success Whether the push will succeed
-	 *
 	 * @return object
 	 */
-	protected function getJobQueueGroupMock( $expectedJob, $success ) {
+	protected function getJobQueueGroupMock() {
 		$jobQueueGroupMock = $this->getMockBuilder( '\JobQueueGroup' )
 			->disableOriginalConstructor()
 			->getMock();
 
+		$self = $this; // PHP 5.3 compat
 		$jobQueueGroupMock->expects( $this->once() )
 			->method( 'push' )
-			->will( $this->returnValue( $success ) )
-			->with( $this->equalTo( $expectedJob ) );
+			->will(
+				$this->returnCallback( function( JobSpecification $job ) use( $self ) {
+					$self->verifyJob( $job );
+				} )
+			);
+
+		// Use JobQueueRedis over here, as mocking abstract classes sucks
+		// and it doesn't matter anyway
+		$jobQueue = $this->getMockBuilder( '\JobQueueRedis' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$jobQueueGroupMock->expects( $this->once() )
+			->method( 'get' )
+			->with( $this->equalTo( 'UpdateRepoOnDelete' ) )
+			->will( $this->returnValue( $jobQueue ) );
 
 		return $jobQueueGroupMock;
 	}
@@ -93,11 +106,11 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Create a new job and verify the set params
+	 * Verify a created job
+	 *
+	 * @param Job $job
 	 */
-	public function testCreateJob() {
-		$updateRepo = $this->getNewUpdateRepoOnDelete();
-		$job = $updateRepo->createJob();
+	public function verifyJob( JobSpecification $job ) {
 		$itemId = new ItemId( 'Q123' );
 
 		$data = $this->getFakeData();
@@ -113,9 +126,8 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 
 	public function testInjectJob() {
 		$updateRepo = $this->getNewUpdateRepoOnDelete();
-		$job = $updateRepo->createJob();
 
-		$jobQueueGroupMock = $this->getJobQueueGroupMock( $job, true );
+		$jobQueueGroupMock = $this->getJobQueueGroupMock( true );
 
 		$updateRepo->injectJob( $jobQueueGroupMock );
 	}
