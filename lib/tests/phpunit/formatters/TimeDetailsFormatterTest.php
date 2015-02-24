@@ -28,9 +28,10 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $pattern
 	 */
 	public function testFormat( TimeValue $value, $pattern ) {
-		$formatter = new TimeDetailsFormatter( new FormatterOptions( array(
+		$options = new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => 'qqx',
-		) ) );
+		) );
+		$formatter = new TimeDetailsFormatter( $options );
 
 		$html = $formatter->format( $value );
 		$this->assertRegExp( $pattern, $html );
