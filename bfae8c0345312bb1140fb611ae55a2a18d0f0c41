@@ -16,6 +16,24 @@
       "revId": "bfae8c0345312bb1140fb611ae55a2a18d0f0c41",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7608172b",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-24T08:46:54Z",
+      "side": 1,
+      "message": "Underscore is frequently used in functional and functional-inspired programming as a marker for an ignored value, see for example https://stackoverflow.com/questions/8000903 for Scala, https://en.wikibooks.org/wiki/Haskell/Pattern_matching for Haskell, https://doc.rust-lang.org/book/match.html for Rust, etc.",
+      "parentUuid": "6e7c4fa4_0b75ff2b",
+      "revId": "bfae8c0345312bb1140fb611ae55a2a18d0f0c41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
