@@ -34,6 +34,24 @@
       "revId": "03792b101481431e41cd7ea78f7ed712241f7bbf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_165a0385",
+        "filename": "repo/includes/View/EntityViewPlaceholderExpander.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-02-24T11:34:11Z",
+      "side": 1,
+      "message": "agree and WikiPageEntityRevisionLookup is a bit difficult to understand. no surprise there was a bug.",
+      "parentUuid": "6e7c4fa4_b66b0f15",
+      "revId": "03792b101481431e41cd7ea78f7ed712241f7bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
