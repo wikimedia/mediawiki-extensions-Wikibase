@@ -16,6 +16,24 @@
       "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_83425361",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-24T08:28:37Z",
+      "side": 1,
+      "message": "It is. Do you have a suggestion how to mitigate this? I tried out passing in a ValueViewBuilder instead of constructing it in this class. Five of these eight dependencies are only used for constructing the ValueViewBuilder. However, I would like to use the messageProvider in the EntityViews as well, so that\u0027s one less we could remove when passing ValueViewBuilder. If we would have an ExpertFactory, contentLanguages could be a dependency of that factory, instead of being passed to the ValueViewBuilder. That would mean we could replace expertStore and contentLanguages with expertFactory.\n\nAny general ideas how to approach such situations?",
+      "parentUuid": "6e7c4fa4_4ba780ba",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
