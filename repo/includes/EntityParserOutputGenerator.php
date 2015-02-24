@@ -318,8 +318,8 @@ class EntityParserOutputGenerator {
 		$entityView = $this->entityViewFactory->newEntityView(
 			$entityRevision->getEntity()->getType(),
 			$this->languageCode,
-			$this->languageFallbackChain,
 			$labelLookup,
+			$this->languageFallbackChain,
 			$editable
 		);
 

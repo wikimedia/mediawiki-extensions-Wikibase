@@ -28,8 +28,8 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 		$entityView = $entityViewFactory->newEntityView(
 			$entityType,
 			'de',
-			$languageFallback,
-			$this->getMock( 'Wikibase\Lib\Store\LabelLookup' )
+			$this->getMock( 'Wikibase\Lib\Store\LabelLookup' ),
+			$languageFallback
 		);
 
 		$this->assertInstanceOf( $expectedClass, $entityView );
@@ -49,7 +49,8 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$entityViewFactory->newEntityView(
 			'kittens',
-			'de'
+			'de',
+			$this->getMock( 'Wikibase\Lib\Store\LabelLookup' )
 		);
 	}
 

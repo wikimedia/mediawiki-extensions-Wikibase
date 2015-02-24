@@ -1000,9 +1000,8 @@ class WikibaseRepo {
 		return $this->entityNamespaceLookup;
 	}
 
-	private function getEntityIdHtmlLinkFormatter() {
+	private function getEntityIdHtmlLinkFormatterFactory() {
 		return new EntityIdHtmlLinkFormatterFactory(
-			new FormatterLabelLookupFactory( $this->getTermLookup() ),
 			$this->getEntityTitleLookup(),
 			new LanguageNameLookup()
 		);
@@ -1014,7 +1013,7 @@ class WikibaseRepo {
 	public function getEntityParserOutputGeneratorFactory() {
 
 		$entityViewFactory = new EntityViewFactory(
-			$this->getEntityIdHtmlLinkFormatter(),
+			$this->getEntityIdHtmlLinkFormatterFactory(),
 			$this->getSnakFormatterFactory(),
 			$this->getEntityLookup(),
 			$this->getSiteStore(),
