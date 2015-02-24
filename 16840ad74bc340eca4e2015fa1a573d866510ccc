@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6314d751",
+        "filename": "lib/includes/formatters/EntityIdValueFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-24T08:42:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_2bca3ba3",
+      "revId": "16840ad74bc340eca4e2015fa1a573d866510ccc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ebbf63f5",
         "filename": "lib/includes/formatters/EscapingEntityIdFormatter.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_8319f38a",
+        "filename": "lib/includes/formatters/EscapingEntityIdFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-24T08:42:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_ebbf63f5",
+      "revId": "16840ad74bc340eca4e2015fa1a573d866510ccc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ebebe39e",
         "filename": "repo/includes/Diff/DifferencesSnakVisualizer.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2015-02-23T19:39:22Z",
       "side": 1,
       "message": "Please restore the error handling here. If some entity ID cannot be rendered (e.g. because looking up the label triggers a database error, or whatever), we want to still be able to display the diff.",
+      "revId": "16840ad74bc340eca4e2015fa1a573d866510ccc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_430f5b3a",
+        "filename": "repo/includes/Diff/DifferencesSnakVisualizer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-24T08:42:10Z",
+      "side": 1,
+      "message": "The error handling only handled FormattingExceptions, which can\u0027t occur anymore when formatting an EntityId. If you want generic error handling somewhere, that\u0027s a different (and new) thing.",
+      "parentUuid": "6e7c4fa4_ebebe39e",
       "revId": "16840ad74bc340eca4e2015fa1a573d866510ccc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
