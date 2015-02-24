@@ -33,7 +33,7 @@ class MergeChangeOpsFactoryTest extends \PHPUnit_Framework_TestCase {
 			$mockProvider->getMockSitelinkCache()
 		);
 
-		$changeOpFactoryProvider =  new ChangeOpFactoryProvider(
+		$changeOpFactoryProvider = new ChangeOpFactoryProvider(
 			$constraintProvider,
 			$mockProvider->getMockGuidGenerator(),
 			$mockProvider->getMockGuidValidator(),
