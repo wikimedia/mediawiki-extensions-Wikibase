@@ -52,6 +52,24 @@
       "revId": "03792b101481431e41cd7ea78f7ed712241f7bbf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_769ed70b",
+        "filename": "repo/includes/View/EntityViewPlaceholderExpander.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-24T11:53:30Z",
+      "side": 1,
+      "message": "This is exactly the intended behavior. Note that revision deletion is *very* rare. Generally, if the revision doesn\u0027t exist, this means the revision id was *wrong*. As oppose to the case of a deleted entity still being referenced, which happens frequently and in the course of normal operation.",
+      "parentUuid": "6e7c4fa4_b66b0f15",
+      "revId": "03792b101481431e41cd7ea78f7ed712241f7bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
