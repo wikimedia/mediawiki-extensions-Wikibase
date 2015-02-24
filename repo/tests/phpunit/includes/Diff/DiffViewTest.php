@@ -6,10 +6,10 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Diff\DiffView;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Diff\DiffView
@@ -20,13 +20,10 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
-class DiffViewTest extends \PHPUnit_Framework_TestCase {
+class DiffViewTest extends PHPUnit_Framework_TestCase {
 
 	public function diffOpProvider() {
 		$linkPath = wfMessage( 'wikibase-diffview-link' )->text();
-		$itemId = new ItemId( 'Q123' );
-		$itemTitle = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $itemId );
-		$itemLink = $itemTitle->getLinkURL();
 
 		return array(
 			'Empty' => array(
@@ -65,17 +62,11 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 				$linkPath . '/enwiki'
 			),
 			'Badge is linked correctly' => array(
-				'@<a\b[^>]* href="' . preg_quote( $itemLink, '@' ) . '"@',
+				'@FORMATTED BADGE ID@',
 				null,
 				'Q123',
 				$linkPath . '/enwiki/badges'
-			),
-			'Badge has label' => array(
-				'@<a\b[^>]*>nyan article</a>@',
-				null,
-				'Q123',
-				$linkPath . '/enwiki/badges'
-			),
+			)
 		);
 	}
 
@@ -91,12 +82,21 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 		return $diffOps;
 	}
 
-	private function getBadgeItem() {
-		global $wgLang;
+	private function getDiffView( $path, $diff ) {
+		$siteStore = MockSiteStore::newFromTestSites();
+		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
+		$entityIdFormatter->expects( $this->any() )
+			->method( 'formatEntityId' )
+			->will( $this->returnValue( 'FORMATTED BADGE ID' ) );
 
-		$item = new Item( new ItemId( 'Q123' ) );
-		$item->getFingerprint()->setLabel( $wgLang->getCode(), 'nyan article' );
-		return $item;
+		$diffView = new DiffView(
+			$path,
+			$diff,
+			$siteStore,
+			$entityIdFormatter
+		);
+
+		return $diffView;
 	}
 
 	/**
@@ -112,11 +112,8 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 			$path = preg_split( '@\s*/\s*@', $path );
 		}
 		$diff = new Diff( $this->getDiffOps( $oldValue, $newValue ) );
-		$siteStore = MockSiteStore::newFromTestSites();
-		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		$mockRepository = new MockRepository();
-		$mockRepository->putEntity( $this->getBadgeItem() );
-		$diffView = new DiffView( $path, $diff, $siteStore, $entityTitleLookup, $mockRepository );
+
+		$diffView = $this->getDiffView($path, $diff);
 
 		$html = $diffView->getHtml();
 
@@ -146,10 +143,7 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 		);
 		$diff = new Diff( array( new DiffOpAdd( 'invalidBadgeId' ) ) );
 
-		$siteStore = new MockSiteStore();
-		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		$entityRevisionLookup = new MockRepository();
-		$diffView = new DiffView( $path, $diff, $siteStore, $entityTitleLookup, $entityRevisionLookup );
+		$diffView = $this->getDiffView($path, $diff);
 
 		$html = $diffView->getHtml();
 
