@@ -16,6 +16,24 @@
       "revId": "227b0e3db2c10bce00daf72c7150abaf6c1dd37c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7657b7cd",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-02-24T10:20:20Z",
+      "side": 1,
+      "message": "I don\u0027t like running the regex engine again if everything needed is already known. Why start a second search?\n\nFound two simpler ways, will use the later:\n\n $value \u003d preg_replace( \u0027/\\d+(?\u003d\\d{4})/\u0027, \u0027\u0027, $value );\n $value \u003d substr_replace( $value, \u0027\u0027, $matches[0][1], strlen( $largeYear ) - 4 );",
+      "parentUuid": "6e7c4fa4_c6acde9f",
+      "revId": "227b0e3db2c10bce00daf72c7150abaf6c1dd37c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
