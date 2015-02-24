@@ -15,8 +15,6 @@ use MWException;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * Class for generating views of DiffOp objects.
@@ -225,7 +223,7 @@ class DiffView extends ContextSource {
 		try {
 			$itemId = new ItemId( $idString );
 		} catch ( InvalidArgumentException $ex ) {
-			return $idString;
+			return htmlspecialchars( $idString );
 		}
 
 		return $this->entityIdFormatter->formatEntityId( $itemId );
