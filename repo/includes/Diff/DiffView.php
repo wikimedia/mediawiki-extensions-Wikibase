@@ -233,46 +233,43 @@ class DiffView extends ContextSource {
 		try {
 			$itemId = new ItemId( $idString );
 		} catch ( InvalidArgumentException $ex ) {
-			return $idString;
+			return htmlspecialchars( $idString );
 		}
 
 		try {
 			$title = $this->entityTitleLookup->getTitleForId( $itemId );
 		} catch ( MwException $ex ) {
 			wfWarn( "Couldn't get Title for badge $idString" );
-			return $idString;
+			return htmlspecialchars( $idString );
 		}
 
 		return Html::element( 'a', array(
 			'href' => $title->getLinkURL(),
 			'dir' => 'auto',
-		), $this->getLabelForBadge( $itemId ) );
+		), $this->getLabel( $itemId ) );
 	}
 
 	/**
-	 * Returns the title for the given badge id.
 	 * @todo use TermLookup when we have one
 	 * @todo this is copied from SpecialSetSiteLink
 	 *
-	 * @param EntityId $badgeId
+	 * @param EntityId $entityId
 	 *
-	 * @return string
+	 * @return string Label in the current context's language.
 	 */
-	private function getLabelForBadge( EntityId $badgeId ) {
-		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $badgeId );
+	private function getLabel( EntityId $entityId ) {
+		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
 
-		if ( $entityRevision === null ) {
-			return $badgeId->getSerialization();
+		if ( $entityRevision !== null ) {
+			$labels = $entityRevision->getEntity()->getFingerprint()->getLabels();
+			$languageCode = $this->getLanguage()->getCode();
+
+			if ( $labels->hasTermForLanguage( $languageCode ) ) {
+				return $labels->getByLanguage( $languageCode )->getText();
+			}
 		}
 
-		$languageCode = $this->getLanguage()->getCode();
-		$labels = $entityRevision->getEntity()->getFingerprint()->getLabels();
-
-		if ( $labels->hasTermForLanguage( $languageCode ) ) {
-			return $labels->getByLanguage( $languageCode )->getText();
-		} else {
-			return $badgeId->getSerialization();
-		}
+		return $entityId->getSerialization();
 	}
 
 	/**

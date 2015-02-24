@@ -138,13 +138,17 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 		$this->assertRegExp( $pattern, $html, 'Diff table content line' );
 	}
 
-	public function testGivenInvalidBadgeId_getHtmlDoesNotThrowException() {
+	/**
+	 * @dataProvider invalidBadgeIdProvider
+	 * @param string $badgeId
+	 */
+	public function testGivenInvalidBadgeId_getHtmlDoesNotThrowException( $badgeId ) {
 		$path = array(
 			wfMessage( 'wikibase-diffview-link' )->text(),
 			'enwiki',
 			'badges'
 		);
-		$diff = new Diff( array( new DiffOpAdd( 'invalidBadgeId' ) ) );
+		$diff = new Diff( array( new DiffOpAdd( $badgeId ) ) );
 
 		$siteStore = new MockSiteStore();
 		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
@@ -153,7 +157,14 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 
 		$html = $diffView->getHtml();
 
-		$this->assertContains( 'invalidBadgeId', $html );
+		$this->assertContains( htmlspecialchars( $badgeId ), $html );
+	}
+
+	public function invalidBadgeIdProvider() {
+		return array(
+			array( 'invalidBadgeId' ),
+			array( '<a>injection</a>' ),
+		);
 	}
 
 }
