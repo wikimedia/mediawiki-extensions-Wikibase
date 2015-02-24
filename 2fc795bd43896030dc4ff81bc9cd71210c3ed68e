@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_efb76633",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-24T18:19:15Z",
+      "side": 1,
+      "message": "This formatter MUST return HTML. Otherwise, we have an injection vector (via setting a batch label to something evil). We currently have no way to assert this, so this should at least be documented.",
+      "revId": "2fc795bd43896030dc4ff81bc9cd71210c3ed68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8f883277",
+        "filename": "repo/includes/Diff/EntityContentDiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-24T18:19:15Z",
+      "side": 1,
+      "message": "shouldn\u0027t this also come from $wikibaseRepo? Otehrwise we\u0027ll have to hunt down 100 places where LanguageNameLookup is instantiated, when it needs constructor params.",
+      "revId": "2fc795bd43896030dc4ff81bc9cd71210c3ed68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ef8e867b",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-24T18:19:15Z",
+      "side": 1,
+      "message": "as before",
+      "revId": "2fc795bd43896030dc4ff81bc9cd71210c3ed68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
