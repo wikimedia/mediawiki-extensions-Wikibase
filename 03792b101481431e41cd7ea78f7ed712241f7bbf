@@ -70,6 +70,24 @@
       "revId": "03792b101481431e41cd7ea78f7ed712241f7bbf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_96ba936b",
+        "filename": "repo/includes/View/EntityViewPlaceholderExpander.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-24T11:54:28Z",
+      "side": 1,
+      "message": "An exception would also be thrown if a revision was requested and found, but did not belong to the item in question (or to no item at all, but a talk page or something).",
+      "parentUuid": "6e7c4fa4_769ed70b",
+      "revId": "03792b101481431e41cd7ea78f7ed712241f7bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
