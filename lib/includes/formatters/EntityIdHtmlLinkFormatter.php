@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use Html;
-use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
@@ -32,18 +31,16 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	protected $entityTitleLookup;
 
 	/**
-	 * @param FormatterOptions $options
 	 * @param LabelLookup $labelLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 */
 	public function __construct(
-		FormatterOptions $options,
 		LabelLookup $labelLookup,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageNameLookup $languageNameLookup
 	) {
-		parent::__construct( $options, $labelLookup );
+		parent::__construct( $labelLookup );
 
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->languageNameLookup = $languageNameLookup;
@@ -56,17 +53,15 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 *
 	 * @return string
 	 */
-	protected function formatEntityId( EntityId $entityId ) {
+	public function formatEntityId( EntityId $entityId ) {
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );
 
-		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
-			$term = $this->lookupEntityLabel( $entityId );
+		$term = $this->lookupEntityLabel( $entityId );
 
-			if ( $term ) {
-				return $this->getHtmlForTerm( $title->getLocalURL(), $term, $title->getPrefixedText() );
-			} elseif ( !$title->exists() ) {
-				return $this->getHtmlForNonExistent( $entityId );
-			}
+		if ( $term ) {
+			return $this->getHtmlForTerm( $title->getLocalURL(), $term, $title->getPrefixedText() );
+		} elseif ( !$title->exists() ) {
+			return $this->getHtmlForNonExistent( $entityId );
 		}
 
 		$attributes = array(

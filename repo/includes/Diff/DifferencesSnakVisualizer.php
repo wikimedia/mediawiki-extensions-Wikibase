@@ -4,10 +4,9 @@ namespace Wikibase\Repo\Diff;
 
 use Exception;
 use InvalidArgumentException;
-use ValueFormatters\FormattingException;
-use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -23,7 +22,7 @@ class DifferencesSnakVisualizer {
 	private $languageCode;
 
 	/**
-	 * @var ValueFormatter
+	 * @var EntityIdFormatter
 	 */
 	private $propertyIdFormatter;
 
@@ -38,7 +37,7 @@ class DifferencesSnakVisualizer {
 	private $snakDetailsFormatter;
 
 	/**
-	 * @param ValueFormatter $propertyIdFormatter Formatter for IDs, must generate HTML.
+	 * @param EntityIdFormatter $propertyIdFormatter Formatter for IDs, must generate HTML.
 	 * @param SnakFormatter $snakDetailsFormatter detailed Formatter for Snaks, must generate HTML.
 	 * @param SnakFormatter $snakBreadCrumbFormatter terse Formatter for Snaks, must generate HTML.
 	 * @param string $languageCode
@@ -46,7 +45,7 @@ class DifferencesSnakVisualizer {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		ValueFormatter $propertyIdFormatter,
+		EntityIdFormatter $propertyIdFormatter,
 		SnakFormatter $snakDetailsFormatter,
 		SnakFormatter $snakBreadCrumbFormatter,
 		$languageCode
@@ -103,11 +102,7 @@ class DifferencesSnakVisualizer {
 	 * @return string HTML
 	 */
 	private function formatPropertyId( EntityId $entityId ) {
-		try {
-			return $this->propertyIdFormatter->format( $entityId );
-		} catch ( FormattingException $ex ) {
-			return $entityId->getSerialization(); // XXX: or include the error message?
-		}
+		return $this->propertyIdFormatter->formatEntityId( $entityId );
 	}
 
 	/**

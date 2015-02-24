@@ -83,9 +83,7 @@ class EntityViewFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getEntityIdFormatterFactory() {
-		$entityIdFormatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
-			->disableOriginalConstructor()
-			->getMock();
+		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
 
 		$formatterFactory = $this->getMock( 'Wikibase\Lib\EntityIdFormatterFactory' );
 		$formatterFactory->expects( $this->any() )

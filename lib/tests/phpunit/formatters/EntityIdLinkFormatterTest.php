@@ -3,10 +3,10 @@
 namespace Wikibase\Test;
 
 use LogicException;
+use PHPUnit_Framework_TestCase;
 use Title;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -25,9 +25,9 @@ use Wikibase\Lib\EntityIdLinkFormatter;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityIdLinkFormatterTest extends \PHPUnit_Framework_TestCase {
+class EntityIdLinkFormatterTest extends PHPUnit_Framework_TestCase {
 
-	public function provideFormat() {
+	public function formatEntityIdProvider() {
 		return array(
 			'ItemId' => array(
 				new ItemId( 'Q23' ),
@@ -37,24 +37,16 @@ class EntityIdLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 				new PropertyId( 'P23' ),
 				'[[PROPERTY-TEST--P23]]'
 			),
-			'EntityId' => array(
-				new ItemId( 'q23' ),
-				'[[ITEM-TEST--Q23]]'
-			),
-			'EntityIdValue' => array(
-				new EntityIdValue( new ItemId( "Q23" ) ),
-				'[[ITEM-TEST--Q23]]'
-			),
 		);
 	}
 
 	/**
-	 * @dataProvider provideFormat
+	 * @dataProvider formatEntityIdProvider
 	 */
-	public function testFormat( $id, $expected ) {
+	public function testFormatEntityId( EntityId $id, $expected ) {
 		$formatter = $this->newEntityIdLinkFormatter();
 
-		$actual = $formatter->format( $id );
+		$actual = $formatter->formatEntityId( $id );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -75,7 +67,7 @@ class EntityIdLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
 			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
 
-		$formatter = new EntityIdLinkFormatter( $options, $titleLookup );
+		$formatter = new EntityIdLinkFormatter( $titleLookup );
 		return $formatter;
 	}
 

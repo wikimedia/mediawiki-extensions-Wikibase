@@ -526,7 +526,9 @@ class WikibaseValueFormatterBuilders {
 	 */
 	private function newEntityIdFormatter( FormatterOptions $options ) {
 		$labelLookup = $this->labelLookupFactory->getLabelLookup( $options );
-		return new EntityIdLabelFormatter( $options, $labelLookup );
+		return new EntityIdValueFormatter(
+			new EntityIdLabelFormatter( $labelLookup )
+		);
 	}
 
 	/**
@@ -538,20 +540,20 @@ class WikibaseValueFormatterBuilders {
 	 * @return EntityIdHtmlLinkFormatter
 	 */
 	private function newEntityIdHtmlFormatter( FormatterOptions $options ) {
-		$labelLookup = $this->labelLookupFactory->getLabelLookup( $options );
-
 		if ( !$this->entityTitleLookup ) {
 			return new EscapingValueFormatter(
-				new EntityIdLabelFormatter( $options, $labelLookup ),
+				$this->newEntityIdFormatter( $options ),
 				'htmlspecialchars'
 			);
 		}
 
-		return new EntityIdHtmlLinkFormatter(
-			$options,
-			$labelLookup,
-			$this->entityTitleLookup,
-			$this->languageNameLookup
+		$labelLookup = $this->labelLookupFactory->getLabelLookup( $options );
+		return new EntityIdValueFormatter(
+			new EntityIdHtmlLinkFormatter(
+				$labelLookup,
+				$this->entityTitleLookup,
+				$this->languageNameLookup
+			)
 		);
 	}
 

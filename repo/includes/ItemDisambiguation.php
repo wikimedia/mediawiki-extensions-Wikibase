@@ -76,7 +76,7 @@ class ItemDisambiguation {
 		$userLang = $this->userLangCode;
 		$searchLang = $this->searchLangCode;
 
-		$result = $this->linkFormatter->format( $item->getId() );
+		$result = $this->linkFormatter->formatEntityId( $item->getId() );
 
 		// Display the label in the searched language in case it is different than in
 		// the user language.
