@@ -13,8 +13,8 @@ use IContextSource;
 use InvalidArgumentException;
 use MWException;
 use SiteStore;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
@@ -48,14 +48,9 @@ class DiffView extends ContextSource {
 	private $diff;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityIdFormatter
 	 */
-	private $entityTitleLookup;
-
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityRevisionLookup;
+	private $entityIdFormatter;
 
 	/**
 	 * @since 0.1
@@ -63,23 +58,20 @@ class DiffView extends ContextSource {
 	 * @param string[] $path
 	 * @param Diff $diff
 	 * @param SiteStore $siteStore
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityIdFormatter $entityIdFormatter that must return only HTML! otherwise injections might be possible
 	 * @param IContextSource|null $contextSource
 	 */
 	public function __construct(
 		array $path,
 		Diff $diff,
 		SiteStore $siteStore,
-		EntityTitleLookup $entityTitleLookup,
-		EntityRevisionLookup $entityRevisionLookup,
+		EntityIdFormatter $entityIdFormatter,
 		IContextSource $contextSource = null
 	) {
 		$this->path = $path;
 		$this->diff = $diff;
+		$this->entityIdFormatter = $entityIdFormatter;
 		$this->siteStore = $siteStore;
-		$this->entityTitleLookup = $entityTitleLookup;
-		$this->entityRevisionLookup = $entityRevisionLookup;
 
 		if ( !is_null( $contextSource ) ) {
 			$this->setContext( $contextSource );
@@ -236,43 +228,7 @@ class DiffView extends ContextSource {
 			return $idString;
 		}
 
-		try {
-			$title = $this->entityTitleLookup->getTitleForId( $itemId );
-		} catch ( MwException $ex ) {
-			wfWarn( "Couldn't get Title for badge $idString" );
-			return $idString;
-		}
-
-		return Html::element( 'a', array(
-			'href' => $title->getLinkURL(),
-			'dir' => 'auto',
-		), $this->getLabelForBadge( $itemId ) );
-	}
-
-	/**
-	 * Returns the title for the given badge id.
-	 * @todo use TermLookup when we have one
-	 * @todo this is copied from SpecialSetSiteLink
-	 *
-	 * @param EntityId $badgeId
-	 *
-	 * @return string
-	 */
-	private function getLabelForBadge( EntityId $badgeId ) {
-		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $badgeId );
-
-		if ( $entityRevision === null ) {
-			return $badgeId->getSerialization();
-		}
-
-		$languageCode = $this->getLanguage()->getCode();
-		$labels = $entityRevision->getEntity()->getFingerprint()->getLabels();
-
-		if ( $labels->hasTermForLanguage( $languageCode ) ) {
-			return $labels->getByLanguage( $languageCode )->getText();
-		} else {
-			return $badgeId->getSerialization();
-		}
+		return $this->entityIdFormatter->formatEntityId( $itemId );
 	}
 
 	/**
