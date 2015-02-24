@@ -4,7 +4,6 @@
  */
 .wikibase-sitelinkgrouplistview {
 	float: left;
-	width: 65em;
 }
 
 @media screen and ( min-width: 1570px ) {

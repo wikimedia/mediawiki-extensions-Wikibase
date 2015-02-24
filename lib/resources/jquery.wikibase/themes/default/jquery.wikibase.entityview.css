@@ -15,4 +15,9 @@
 
 .wikibase-entityview .wikibase-entityview-main {
 	margin: 0 2em 2em 0;
+	width: 100%;
+}
+
+.wikibase-statementgrouplistview.wikibase-toolbar-item {
+	min-width: 65em;
 }
