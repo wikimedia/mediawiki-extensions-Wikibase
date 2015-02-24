@@ -4,7 +4,6 @@ namespace Wikibase\Lib;
 
 use DataValues\TimeValue;
 use InvalidArgumentException;
-use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
@@ -20,14 +19,9 @@ use ValueFormatters\ValueFormatterBase;
 class HtmlTimeFormatter extends ValueFormatterBase {
 
 	private static $calendarKeys = array(
-		TimeFormatter::CALENDAR_GREGORIAN => 'gregorian',
-		TimeFormatter::CALENDAR_JULIAN => 'julian',
+		TimeFormatter::CALENDAR_GREGORIAN => 'valueview-expert-timevalue-calendar-gregorian',
+		TimeFormatter::CALENDAR_JULIAN => 'valueview-expert-timevalue-calendar-julian',
 	);
-
-	/**
-	 * @var Language
-	 */
-	private $language;
 
 	/**
 	 * @var ValueFormatter
@@ -39,15 +33,9 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 * @param ValueFormatter $dateTimeFormatter
 	 */
 	public function __construct( FormatterOptions $options, ValueFormatter $dateTimeFormatter ) {
+		parent::__construct( $options );
+
 		$this->dateTimeFormatter = $dateTimeFormatter;
-
-		$this->options = $options;
-
-		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
-
-		$this->language = Language::factory(
-			$this->options->getOption( ValueFormatter::OPT_LANG )
-		);
 	}
 
 	/**
@@ -101,8 +89,9 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 */
 	private function formatCalendarName( $calendarModel ) {
 		if ( array_key_exists( $calendarModel, self::$calendarKeys ) ) {
-			$key = 'valueview-expert-timevalue-calendar-' . self::$calendarKeys[$calendarModel];
-			$msg = wfMessage( $key )->inLanguage( $this->language );
+			$key = self::$calendarKeys[$calendarModel];
+			$lang = $this->getOption( ValueFormatter::OPT_LANG );
+			$msg = wfMessage( $key )->inLanguage( $lang );
 
 			if ( $msg->exists() ) {
 				return htmlspecialchars( $msg->text() );
