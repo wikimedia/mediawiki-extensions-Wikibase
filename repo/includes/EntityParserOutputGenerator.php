@@ -326,6 +326,17 @@ class EntityParserOutputGenerator {
 		$html = $entityView->getHtml( $entityRevision );
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
+
+		// Force parser cache split by whether edit links are show.
+		// MediaWiki core has the ability to split on editsection, but does not trigger it
+		// automatically when $parserOptions->getEditSection() is called. Presumably this
+		// is because core uses <mw:editsection> tags that are substituted by ParserOutput::getText
+		// using the info from ParserOutput::getEditSectionTokens.
+		$parserOutput->recordOption( 'editsection' );
+
+		// Since the output depends on the user language, we must make sure
+		// ParserCache::getKey() includes it in the cache key.
+		$parserOutput->recordOption( 'userlang' );
 	}
 
 	/**
