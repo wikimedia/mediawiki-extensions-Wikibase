@@ -74,6 +74,14 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 			array_keys( $parserOutput->getImages() ),
 			'images'
 		);
+
+		$expectedUsedOptions = array( 'userlang', 'editsection' );
+		$actualOptions = $parserOutput->getUsedOptions();
+		$missingOptions = array_diff( $expectedUsedOptions, $actualOptions );
+		$this->assertEmpty(
+			$missingOptions,
+			'Missing cache-split flags: ' . join( '|', $missingOptions ) . '. Options: ' . join( '|', $actualOptions )
+		);
 	}
 
 	public function testTitleText_ItemHasNolabel() {
