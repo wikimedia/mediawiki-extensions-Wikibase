@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d6ab226b",
+        "filename": "docs/json.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-25T11:11:29Z",
+      "side": 1,
+      "message": "where did the spaces come from, they shouldn\u0027t be here.",
+      "revId": "3e0b294bb2f98b7d8ade1345bccdd722d3ee65cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f6ae5e7b",
+        "filename": "docs/json.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-25T11:11:29Z",
+      "side": 1,
+      "message": "spaces again",
+      "revId": "3e0b294bb2f98b7d8ade1345bccdd722d3ee65cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b6c46645",
+        "filename": "docs/json.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-25T11:11:29Z",
+      "side": 1,
+      "message": "Trailing space.\nMaybe use an example with two or three entries, to make this obvious.",
+      "revId": "3e0b294bb2f98b7d8ade1345bccdd722d3ee65cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_96c92a60",
+        "filename": "docs/json.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-25T11:11:29Z",
+      "side": 1,
+      "message": "Please reduce the example to something smaller. Every structure should be in there one or twice, but more is not needed.",
+      "revId": "3e0b294bb2f98b7d8ade1345bccdd722d3ee65cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
