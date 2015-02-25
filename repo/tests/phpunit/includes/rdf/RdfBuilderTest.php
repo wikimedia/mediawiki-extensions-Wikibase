@@ -583,8 +583,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$claim4 = $graph->resource( RdfBuilder::NS_STATEMENT . ":TEST-Statement-4-8749fa158a249e1befa6ed077f648c56197a2b2d" );
 		$claim4->addResource(
 			$this->builder->getEntityQName( RdfBuilder::NS_VALUE, PropertyId::newFromNumber( 4 ) ) . "-value",
-			'_:genid1' );
-		$value = $graph->resource( '_:genid1' );
+			RdfBuilder::NS_VALUE . ':a490f3ae6258459a479723fa2f0d8141' );
+		$value = $graph->resource( RdfBuilder::NS_VALUE . ':a490f3ae6258459a479723fa2f0d8141' );
 		$this->addProperties( $graph, $value, array(
 			'rdf:type' => RdfBuilder::WIKIBASE_VALUE_QNAME,
 			RdfBuilder::NS_ONTOLOGY . ":Latitude" => 12.345,
@@ -594,8 +594,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$claim6 = $graph->resource( RdfBuilder::NS_STATEMENT . ":TEST-Statement-6-9ae284048af6d9ab0f2815ef104216cb8b22e8bc" );
 		$claim6->addResource(
 			$this->builder->getEntityQName( RdfBuilder::NS_VALUE, PropertyId::newFromNumber( 6 ) ) . "-value",
-			'_:genid2' );
-		$value = $graph->resource( '_:genid2' );
+			RdfBuilder::NS_VALUE . ':1e09d673624819aacd170165aae555a1'  );
+		$value = $graph->resource( RdfBuilder::NS_VALUE . ':1e09d673624819aacd170165aae555a1'  );
 		$this->addProperties( $graph, $value, array(
 			'rdf:type' => RdfBuilder::WIKIBASE_VALUE_QNAME,
 			RdfBuilder::NS_ONTOLOGY . ":Amount" => 19.768,
@@ -607,8 +607,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$claim8 = $graph->resource( RdfBuilder::NS_STATEMENT . ":TEST-Statement-8-5dd0f6624a7545401bc306a068ac1bbe8148bfac" );
 		$claim8->addResource(
 			$this->builder->getEntityQName( RdfBuilder::NS_VALUE, PropertyId::newFromNumber( 8 ) ) . "-value",
-			'_:genid3' );
-		$value = $graph->resource( '_:genid3' );
+			RdfBuilder::NS_VALUE . ':c7499b57a1a474e6a89f4c3b42ca01e7'  );
+		$value = $graph->resource( RdfBuilder::NS_VALUE . ':c7499b57a1a474e6a89f4c3b42ca01e7'  );
 		$this->addProperties( $graph, $value, array(
 			'rdf:type' => RdfBuilder::WIKIBASE_VALUE_QNAME,
 			RdfBuilder::NS_ONTOLOGY . ":Time" => new \EasyRdf_Literal_DateTime('-00000000200-00-00T00:00:00Z'),

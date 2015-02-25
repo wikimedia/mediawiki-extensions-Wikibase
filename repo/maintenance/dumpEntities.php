@@ -112,7 +112,7 @@ class DumpScript extends Maintenance {
 				$this->wikibaseRepo->getSiteStore()->getSites(), $this->entityLookup,
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
 					RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES |
-					RdfProducer::PRODUCE_SITELINKS
+					RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES
 			);
 		return new RdfDumpGenerator( $output, $this->revisionLookup, $entitySerializer );
 	}

@@ -585,7 +585,7 @@ class RdfBuilder {
 	 * @param array $props List of properties
 	 */
 	private function addExpandedValue( \EasyRdf_Resource $target, $propertyValueQName, DataValue $value, array $props) {
-		$node = $this->graph->newBNode( array( self::WIKIBASE_VALUE_QNAME ) );
+		$node = $this->graph->resource( self::NS_VALUE . ":" . $value->getHash(), self::WIKIBASE_VALUE_QNAME );
 		$target->addResource( $propertyValueQName."-value", $node);
 		foreach( $props as $prop => $type ) {
 			$getter = "get" . ucfirst( $prop );
