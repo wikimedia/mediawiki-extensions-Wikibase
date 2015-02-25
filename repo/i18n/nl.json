@@ -241,7 +241,7 @@
 	"wikibase-entitydata-text": "Deze pagina biedt een koppelingsinterface naar entiteitswaarden. Geef het entiteits-ID op in de URL via de subpagina-opmaak.",
 	"special-mylanguagefallbackchain": "Terugvalketen voor mijn taal",
 	"wikibase-mylanguagefallbackchain-text": "De gebruiker terugvalketen voor talen die gebruikt word voor het weergeven van entiteitlabels wordt hieronder weergegeven.",
-	"wikibase-mylanguagefallbackchain-babel": "U kunt bewerken voor <nowiki>{{#babel: }}</nowiki> toe te voegen aan {{GENDER:$1|uw}} [[Special:MyPage|gebruikerspagina]].",
+	"wikibase-mylanguagefallbackchain-babel": "U kunt deze bewerken door <nowiki>{{#babel: }}</nowiki> toe te voegen aan {{GENDER:$1|uw}} [[Special:MyPage|gebruikerspagina]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, omgezet van $3 - $4",
 	"wikibase-api-no-such-sitelink": "Een dergelijke sitekoppeling kon niet gevonden worden.",
 	"wikibase-self-conflict-patched": "Uw bewerking is samengevoegd met de laatste versie, en daarbij zijn enige tussentijdse wijzigingen overschreven.",

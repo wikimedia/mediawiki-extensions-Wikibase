@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Умар"
+			"Умар",
+			"Fitoschido"
 		]
 	},
 	"wikibase-lib-desc": "Wikibase а Wikibase Client а массо функцеш",
@@ -28,7 +29,7 @@
 	"wikibase-globedetails-precision": "Билгала",
 	"wikibase-globedetails-globe": "Глобус",
 	"wikibase-parse-error": "Нийса доцу маьӀна.",
-	"wikibase-sitelinks-wikipedia": "ХӀокху элементах тесна йолу агӀонаш",
+	"wikibase-sitelinks-wikipedia": "Википеди",
 	"wikibase-sitelinks-sitename-columnheading": "Мотт",
 	"wikibase-sitelinks-link-columnheading": "Вовшахтесна йолу агӀонаш",
 	"wikibase-snakview-snaktypeselector-somevalue": "маьӀна хууш дац",

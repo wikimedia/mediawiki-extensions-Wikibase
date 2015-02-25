@@ -38,6 +38,7 @@
 	"wikibase-linkitem-success-link": "Le pàgine a son ëstàit lijà për da bin. A peul trové l'element ch'a conten le liure an nòstr [$1 depòsit sentral dij dàit].",
 	"wikibase-property-notfound": "Propietà $1 nen trovà.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Stërmé",
 	"wikibase-rc-hide-wikidata-show": "Smon-e",
 	"wikibase-rc-show-wikidata-pref": "Smon-e le modìfiche ëd Wikidata ant j'ùltime modìfiche",
 	"wikibase-rc-wikibase-edit-letter": "D",
@@ -56,5 +57,6 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|liura|liure}} antërlenga ant la pàgina)",
 	"wikibase-pageinfo-entity-id": "ID ëd l'element Wikidata",
 	"wikibase-pageinfo-entity-id-none": "Gnun",
-	"wikibase-property-render-error": "Faliment ant ël rendiment ëd la propietà $1: $2"
+	"wikibase-property-render-error": "Faliment ant ël rendiment ëd la propietà $1: $2",
+	"wikibase-otherprojects": "Àutri proget"
 }

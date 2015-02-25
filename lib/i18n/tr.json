@@ -3,13 +3,14 @@
 		"authors": [
 			"Incelemeelemani",
 			"Rapsar",
-			"Violetanka"
+			"Violetanka",
+			"Fitoschido"
 		]
 	},
+	"specialpages-group-wikibase": "Wikibase veri deposu",
 	"wikibase-error-unexpected": "Hata: $1.",
-	"wikibase-sitelinks-wikipedia": "Bu ögeye bağlı Vikipedi sayfaları",
+	"wikibase-sitelinks-wikipedia": "Vikipedi",
 	"wikibase-sitelinks-sitename-columnheading": "Dil",
-	"wikibase-sitelinks-siteid-columnheading": "Kod",
 	"wikibase-sitelinks-link-columnheading": "Bağlantılı madde",
 	"wikibase-validator-no-such-entity": "$1 bulunamadı",
 	"wikibase-validator-no-such-property": "$1 özelliği bulunamadı"

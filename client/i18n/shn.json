@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saimawnkham"
+		]
+	},
+	"tooltip-t-wikibase": "လိင်ႉၸူး မီႇၵီး ယွင်ၶေႃႈမုၼ်း ဢၼ်ၵွင်ႉသိုပ်ႇဝႆႉ",
+	"wikibase-comment-update": "{{WBREPONAME}} ၸိူဝ်းပႃးၼႂ်းမၼ်း လႅၵ်ႈလၢႆႈၵႂႃႇယဝ်ႉ",
+	"wikibase-dataitem": "{{WBREPONAME}} မီႇၵီး",
+	"wikibase-editlinks": "မႄးထတ်းႁဵင်းၵွင်ႉ",
+	"wikibase-editlinkstitle": "မႄးထတ်းႁဵင်းၵွင်ႉ interlanguage",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "သိူင်ႇ",
+	"wikibase-rc-hide-wikidata-show": "ၼႄ",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} မႄးထတ်း",
+	"wikibase-otherprojects": "ၼႃႈၵၢၼ်တၢင်ႇဢၼ်ႇ"
+}

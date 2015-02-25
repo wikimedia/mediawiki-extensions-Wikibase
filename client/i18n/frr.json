@@ -5,7 +5,6 @@
 		]
 	},
 	"wikibase-client-desc": "Wikibase-client",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}}-client",
 	"tooltip-t-wikibase": "Ferwisang tu det objekt uun't dootenarchiif",
 	"wikibase-after-page-move": "Dü skulst uk det {{WBREPONAME}}-element [$1 aktualisiare], am spriaklinks faan fersköwen sidjen üüb a leetst stant tu hualen.",
 	"wikibase-after-page-move-queued": "Det mä detdiar sidj ferbünjen [$1 {{WBREPONAME}}-objekt] woort bal automaatisk aktualisiaret.",
@@ -22,6 +21,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}-dootenobjekt",
 	"wikibase-editlinks": "Ferwisangen bewerke",
 	"wikibase-editlinkstitle": "Ferwisangen üüb ööder spriaken bewerke",
+	"wikibase-addlinkstitle": "Nei ferwisangen tu ööder spriaken maage",
 	"wikibase-linkitem-addlinks": "Nei ferwisangen",
 	"wikibase-linkitem-alreadylinked": "Det sidj, diar dü üüb ferwise wulst, as al mä det [$1 objekt] ferbünjen, an det ferwiset üüb $2. Diar koon man ian sidj faan en wiki-projekt mä en objekt ferbünjen wurd. Gung tu en ööder sidj, huar dü üüb ferwise wel.",
 	"wikibase-linkitem-close": "Sacht maage an det sidj nei loose",
@@ -43,7 +43,9 @@
 	"wikibase-rc-show-wikidata-pref": "Wise {{WBREPONAME}}-feranrangen uun a „leetst feranrangen“",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Bewerket faan {{WBREPONAME}}",
+	"wikibase-replicationnote": "Seenk diaram, dat diar hög minüüten fergung kön, iar dü det feranrang aueraal schochst.",
 	"wikibase-watchlist-show-changes-pref": "Wise {{WBREPONAME}}-feranrangen bi jo sidjen, diar dü uun't uug behual wel.",
+	"wikibase-error-deserialize-error": "A dooten küd ei de-serialisiaret wurd.",
 	"wikibase-error-serialize-error": "A dooten küd ei serialisiaret wurd",
 	"wikibase-error-invalid-entity-id": "Detdiar käännumer (ID) as ei bekäänd. Brük en ööder ID.",
 	"special-unconnectedpages": "Sidjen, diar ei mä objekten ferbünjen san",
@@ -57,5 +59,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-käännumer (ID)",
 	"wikibase-pageinfo-entity-id-none": "Nian",
 	"wikibase-property-render-error": "Eegenskap „$1“ küd ei ferwerket wurd: $2",
-	"wikibase-otherprojects": "Ööder projekten"
+	"wikibase-otherprojects": "Ööder projekten",
+	"wikibase-otherprojects-beta-message": "Sidjenliist faan ööder projekten",
+	"wikibase-otherprojects-beta-description": "Diar komt en kirew „{{int:wikibase-otherprojects}}“ tu det sidjenliist mä ferwisangen tu Wikimedia-projekten mä {{WBREPONAME}}-dooten."
 }

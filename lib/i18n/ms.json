@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Anakmalaysia",
-			"Shirayuki"
+			"Shirayuki",
+			"Fitoschido"
 		]
 	},
 	"wikibase-lib-desc": "Memegang kefungsian sepunya untuk sambungan Wikibase dan Wikibase Client",
+	"specialpages-group-wikibase": "Repositori Wikibase",
 	"wikibase-deletedentity-item": "Perkara yang terhapus",
 	"wikibase-deletedentity-property": "Sifat yang terhapus",
 	"wikibase-deletedentity-query": "Pertanyaan yang terhapus",
@@ -20,7 +22,7 @@
 	"wikibase-error-autocomplete-response": "Pelayan membalas: $1",
 	"wikibase-error-ui-no-external-page": "Rencana yang dinyatakan tidak dapat dijumpai di halaman yang berpadanan.",
 	"wikibase-error-ui-edit-conflict": "Terdapat percanggahan suntingan. Sila muat semula dan simpan semula.",
-	"wikibase-sitelinks-wikipedia": "Halaman Wikipedia yang berpaut dengan perkara ini",
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Bahasa",
 	"wikibase-sitelinks-link-columnheading": "Halaman terpaut",
 	"wikibase-snakview-snaktypeselector-somevalue": "nilai tidak diketahui",

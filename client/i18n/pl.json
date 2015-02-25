@@ -30,6 +30,7 @@
 	"wikibase-dataitem": "Element Wikidanych",
 	"wikibase-editlinks": "Edytuj linki",
 	"wikibase-editlinkstitle": "Edytuj linki wersji językowych",
+	"wikibase-addlinkstitle": "Dodaj linki wersji językowych",
 	"wikibase-linkitem-addlinks": "Dodaj linki",
 	"wikibase-linkitem-alreadylinked": "Wybrana strona jest już wykorzystywana w naszym centralnym repozytorium danych przez [$1 element], który odsyła do strony $2 tutaj. Każdy element może być powiązany tylko z jedną stroną w witrynie. Wybierz, proszę, inną stronę.",
 	"wikibase-linkitem-close": "Zamknij okno i odśwież stronę",

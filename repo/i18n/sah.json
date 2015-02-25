@@ -5,5 +5,8 @@
 		]
 	},
 	"wikibase-edit": "уларыт",
-	"wikibase-add": "эп"
+	"wikibase-add": "эп",
+	"wikibase-sitelinks-special": "Атын сирдэр",
+	"wikibase-aliases-empty": "Атын аат көстүбэтэ.",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ылыллыбыт сир}}"
 }
