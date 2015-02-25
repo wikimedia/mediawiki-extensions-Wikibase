@@ -5,14 +5,14 @@ namespace Wikibase\Test;
 use DataValues\DataValue;
 use DataValues\DecimalValue;
 use Language;
+use PHPUnit_Framework_TestCase;
 use Site;
 use SiteStore;
-use Title;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 
 /**
@@ -25,7 +25,7 @@ use Wikibase\Repo\Localizer\MessageParameterFormatter;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MessageParameterFormatterTest extends \PHPUnit_Framework_TestCase {
+class MessageParameterFormatterTest extends PHPUnit_Framework_TestCase {
 
 	public function formatProvider() {
 		$decimal = new DecimalValue( '+123.456' );
@@ -38,7 +38,7 @@ class MessageParameterFormatterTest extends \PHPUnit_Framework_TestCase {
 			'float en' => array( 123.456, 'en', '123.456' ),
 			'float de' => array( 123.456, 'de', '123,456' ),
 			'DecimalValue en' => array( $decimal, 'en', 'DataValues\DecimalValue:+123.456' ),
-			'EntityId' => array( $entityId, 'en', '[[Q123|Q123]]' ),
+			'EntityId' => array( $entityId, 'en', '[[ENTITYID]]' ),
 			'SiteLink' => array( $siteLink, 'en', '[http://acme.com/Foo acme:Foo]' ),
 			'list of floats' => array( array( 1.2, 0.5 ), 'en', '1.2, 0.5' ),
 		);
@@ -50,7 +50,7 @@ class MessageParameterFormatterTest extends \PHPUnit_Framework_TestCase {
 	public function testFormat( $param, $lang, $expected ) {
 		$formatter = new MessageParameterFormatter(
 			$this->getMockValueFormatter(),
-			$this->getMockTitleLookup(),
+			$this->getMockIdFormatter(),
 			$this->getMockSitesTable(),
 			Language::factory( $lang )
 		);
@@ -79,15 +79,15 @@ class MessageParameterFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityIdFormatter
 	 */
-	private function getMockTitleLookup() {
-		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+	private function getMockIdFormatter() {
+		$mock = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
 		$mock->expects( $this->any() )
-			->method( 'getTitleForId' )
+			->method( 'formatEntityId' )
 			->will( $this->returnCallback(
 				function ( EntityId $id ) {
-					return Title::makeTitle( NS_MAIN, $id->getSerialization() );
+					return '[[ENTITYID]]';
 				}
 			) );
 
