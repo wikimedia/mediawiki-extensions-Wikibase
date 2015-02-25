@@ -65,6 +65,9 @@ call_user_func( function() {
 
 	// these are the site_group codes as listed in the sites table
 	$wgWBRepoSettings['specialSiteLinkGroups'] = array( 'commons', 'wikidata' );
+
+	// use wikimedia commons as the default file repo site:
+	$wgWBRepoSettings['commonsSiteId'] = 'commonswiki';
 } );
 
 /*
