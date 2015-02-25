@@ -114,7 +114,7 @@ entity:formatPropertyValues( 'father' )
 entity:formatPropertyValues( 'P42', { mw.wikibase.entity.claimRanks.RANK_NORMAL } )
 </source>
 
-<code>value</code> is an empty string ('') if there's no statement with the given property on the entity. <code>value</code> will be nil if the given property doesn't exist.
+<code>value</code> is an empty string (<nowiki>''</nowiki>) if there's no statement with the given property on the entity. <code>value</code> will be nil if the given property doesn't exist.
 
 === mw.wikibase.entity.claimRanks ===
 The <code>mw.wikibase.entity.claimRanks</code> table contains a map of all available claim ranks.

@@ -89,7 +89,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
 	  args = { 'Q32487' },
-	  expect = { 'WikibaseClientLuaTest' }
+	  expect = { 'WikibaseClientDataAccessTest' }
 	},
 	{ name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
 	  args = { 'Q32488' },
