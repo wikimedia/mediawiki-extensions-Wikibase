@@ -9,6 +9,9 @@ use Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
+use Wikibase\Repo\WikibaseRepo as WikibaseRepo;
+use SiteSQLStore;
+
 /**
  * Formats a StringValue as an HTML link.
  *
@@ -57,8 +60,13 @@ class CommonsLinkFormatter implements ValueFormatter {
 			return htmlspecialchars( $fileName );
 		}
 
+		// Construct URL of the image in the selected commons wiki.
+		$commonsSiteId = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'commonsSiteId' );
+		$commonsSitePaths = SiteSQLStore::newInstance()->getSite( $commonsSiteId )->getAllPaths();
+		$href = str_replace('$1', 'File:'.$title->getPartialURL(),  $commonsSitePaths['page_path']);
+
 		$attributes = array_merge( $this->attributes, array(
-			'href' => '//commons.wikimedia.org/wiki/File:' . $title->getPartialURL()
+			'href' => $href
 		) );
 		$html = Html::element( 'a', $attributes, $title->getText() );
 

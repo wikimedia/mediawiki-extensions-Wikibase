@@ -48,6 +48,8 @@ class RepoAccessModule extends ResourceLoaderModule {
 			);
 		}
 
+		$wbRepo['commonsSiteId'] = $settings->getSetting( 'commonsSiteId' );
+
 		return Xml::encodeJsCall( 'mediaWiki.config.set', array( 'wbRepo', $wbRepo ) );
 	}
 }
