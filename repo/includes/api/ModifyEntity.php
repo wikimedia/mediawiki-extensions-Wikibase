@@ -315,8 +315,6 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @since 0.1
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
-
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 		$this->flags = 0;
@@ -346,7 +344,6 @@ abstract class ModifyEntity extends ApiWikibase {
 		$status = $this->checkPermissions( $entity, $user, $params );
 
 		if ( !$status->isOK() ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieError( 'You do not have sufficient permissions', 'permissiondenied' );
 		}
 
@@ -355,7 +352,6 @@ abstract class ModifyEntity extends ApiWikibase {
 		if ( !$summary ) {
 			//XXX: This could rather be used for "silent" failure, i.e. in cases where
 			//     there was simply nothing to do.
-			wfProfileOut( __METHOD__ );
 			$this->dieError( 'Attempted modification of the item failed', 'failed-modify' );
 		}
 
@@ -374,8 +370,6 @@ abstract class ModifyEntity extends ApiWikibase {
 		);
 
 		$this->addToOutput( $entity, $status );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**

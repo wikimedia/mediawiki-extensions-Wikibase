@@ -171,8 +171,6 @@ class EntityTermsView {
 		Title $title = null,
 		$showEntitytermslistview = false
 	) {
-		wfProfileIn( __METHOD__ );
-
 		$entityTermsForLanguageViewsHtml = '';
 
 		foreach( $languageCodes as $languageCode ) {
@@ -183,16 +181,13 @@ class EntityTermsView {
 			);
 		}
 
-		$html = $this->templateFactory->render( 'wikibase-entitytermsforlanguagelistview',
+		return $this->templateFactory->render( 'wikibase-entitytermsforlanguagelistview',
 			$this->msg( 'wikibase-entitytermsforlanguagelistview-language' ),
 			$this->msg( 'wikibase-entitytermsforlanguagelistview-label' ),
 			$this->msg( 'wikibase-entitytermsforlanguagelistview-aliases' ),
 			$this->msg( 'wikibase-entitytermsforlanguagelistview-description' ),
 			$entityTermsForLanguageViewsHtml
 		);
-
-		wfProfileOut( __METHOD__ );
-		return $html;
 	}
 
 	/**

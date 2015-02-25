@@ -61,7 +61,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return EntityRevision|null
 	 */
 	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
-		wfProfileIn( __METHOD__ );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up entity ' . $entityId
 			. " (revision $revisionId)." );
 
@@ -83,7 +82,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 
 			if ( $redirect !== null ) {
 				// TODO: Optionally follow redirects. Doesn't make sense if a revision ID is given.
-				wfProfileOut( __METHOD__ );
 				throw new UnresolvedRedirectException( $redirect->getTargetId() );
 			}
 
@@ -106,7 +104,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			throw new BadRevisionException( "No such revision found for $entityId: $revisionId" );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $entityRevision;
 	}
 
@@ -190,7 +187,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return object|null a raw database row object, or null if no such entity revision exists.
 	 */
 	private function selectRevisionRow( EntityId $entityId, $revisionId, $connType ) {
-		wfProfileIn( __METHOD__ );
 		$db = $this->getConnection( $connType );
 
 		$where = array();
@@ -243,7 +239,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			$row = null;
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $row;
 	}
 
@@ -259,7 +254,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return object|null a raw database row object, or null if no such entity revision exists.
 	 */
 	protected function selectPageLatest( EntityId $entityId, $connType = DB_SLAVE ) {
-		wfProfileIn( __METHOD__ );
 		$db = $this->getConnection( $connType );
 
 		$tables = array(
@@ -285,8 +279,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			// this can only happen if the DB is set to ignore errors, which shouldn't be the case...
 			$error = $db->lastError();
 			$errno = $db->lastErrno();
-
-			wfProfileOut( __METHOD__ );
 			throw new DBQueryError( $db, $error, $errno, '', __METHOD__ );
 		}
 
@@ -296,7 +288,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			$row = null;
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $row;
 	}
 
@@ -324,8 +315,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * with either $entityRevision or $entityRedirect or both being null (but not both being non-null).
 	 */
 	private function loadEntity( $row ) {
-		wfProfileIn( __METHOD__ );
-
 		$blob = $this->loadEntityBlob( $row );
 		$entity = $this->contentCodec->decodeEntity( $blob, $row->rev_content_format );
 
@@ -345,7 +334,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			$result = array( null, $redirect );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $result;
 	}
 
@@ -363,7 +351,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return string The blob
 	 */
 	private function loadEntityBlob( $row ) {
-		wfProfileIn( __METHOD__ );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': Calling getRevisionText() on revision '
 			. $row->rev_id );
 
@@ -371,8 +358,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		//      cause any problems, since getRevisionText should only look at the old_flags
 		//      and old_text fields. But be aware.
 		$blob = Revision::getRevisionText( $row, 'old_', $this->wiki );
-
-		wfProfileOut( __METHOD__ );
 
 		if ( $blob === false ) {
 			wfWarn( 'Unable to load raw content blob for revision ' . $row->rev_id );

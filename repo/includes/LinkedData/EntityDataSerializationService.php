@@ -513,8 +513,6 @@ class EntityDataSerializationService {
 	 * @return ApiResult
 	 */
 	protected function generateApiResult( EntityRevision $entityRevision, ApiFormatBase $printer ) {
-		wfProfileIn( __METHOD__ );
-
 		$entityKey = 'entity'; //XXX: perhaps better: $entity->getType();
 
 		$res = $printer->getResult();
@@ -544,7 +542,6 @@ class EntityDataSerializationService {
 		);
 		$resultBuilder->addEntityRevision( null, $entityRevision, $options );
 
-		wfProfileOut( __METHOD__ );
 		return $res;
 	}
 

@@ -89,8 +89,6 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onWikibaseDeleteData( $reportMessage ) {
-		wfProfileIn( __METHOD__ );
-
 		$store = WikibaseClient::getDefaultInstance()->getStore();
 
 		$reportMessage( "Deleting data from the " . get_class( $store ) . " store..." );
@@ -107,7 +105,6 @@ final class ClientHooks {
 
 		$reportMessage( "done!\n" );
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -123,8 +120,6 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onWikibaseRebuildData( $reportMessage ) {
-		wfProfileIn( __METHOD__ );
-
 		$store = WikibaseClient::getDefaultInstance()->getStore();
 		$reportMessage( "Rebuilding all data in the " . get_class( $store )
 			. " store on the client..." );
@@ -141,7 +136,6 @@ final class ClientHooks {
 		ChangeHandler::singleton()->handleChanges( iterator_to_array( $changes ) );
 		$reportMessage( "done!\n" );
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -218,15 +212,12 @@ final class ClientHooks {
 	public static function onSpecialRecentChangesQuery( array &$conds, array &$tables,
 		array &$join_conds, FormOptions $opts, array &$query_options, array &$fields
 	) {
-		wfProfileIn( __METHOD__ );
-
 		$rcFilterOpts = new RecentChangesFilterOptions( $opts );
 
 		if ( $rcFilterOpts->showWikibaseEdits() === false ) {
 			$conds[] = 'rc_type != ' . RC_EXTERNAL;
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -245,8 +236,6 @@ final class ClientHooks {
 	 */
 	public static function onOldChangesListRecentChangesLine( ChangesList &$changesList, &$s,
 		RecentChange $rc, &$classes = array() ) {
-
-		wfProfileIn( __METHOD__ );
 
 		$type = $rc->getAttribute( 'rc_type' );
 
@@ -283,7 +272,6 @@ final class ClientHooks {
 		// OutputPage will ignore multiple calls
 		$changesList->getOutput()->addModuleStyles( 'wikibase.client.changeslist.css' );
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -404,15 +392,11 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
-		wfProfileIn( __METHOD__ );
-
 		$namespaceChecker = WikibaseClient::getDefaultInstance()->getNamespaceChecker();
 		$beforePageDisplayHandler = new BeforePageDisplayHandler( $namespaceChecker );
 
 		$actionName = Action::getActionName( $skin->getContext() );
 		$beforePageDisplayHandler->addModules( $out, $actionName );
-
-		wfProfileOut( __METHOD__ );
 
 		return true;
 	}
@@ -435,8 +419,6 @@ final class ClientHooks {
 			// shorten out
 			return true;
 		}
-
-		wfProfileIn( __METHOD__ );
 
 		$repoLinker = $wikibaseClient->newRepoLinker();
 		$entityIdParser = $wikibaseClient->getEntityIdParser();
@@ -476,7 +458,6 @@ final class ClientHooks {
 			$template->set( 'language_urls', array() );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 

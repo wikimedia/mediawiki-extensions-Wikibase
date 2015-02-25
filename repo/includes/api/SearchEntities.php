@@ -69,9 +69,7 @@ class SearchEntities extends ApiBase {
 	 * @return EntityId[]
 	 */
 	private function searchEntities( $term, $entityType, $language, $limit, $prefixSearch ) {
-		wfProfileIn( __METHOD__ );
-
-		$ids = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->getMatchingIDs(
+		return WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->getMatchingIDs(
 			array(
 				new Term( array(
 					'termType' 		=> Term::TYPE_LABEL,
@@ -91,9 +89,6 @@ class SearchEntities extends ApiBase {
 				'LIMIT' => $limit,
 			)
 		);
-
-		wfProfileOut( __METHOD__ );
-		return $ids;
 	}
 
 	/**
@@ -107,8 +102,6 @@ class SearchEntities extends ApiBase {
 	 * @return array[]
 	 */
 	private function getSearchEntries( array $params ) {
-		wfProfileIn( __METHOD__ );
-
 		$ids = array();
 		$required = $params['continue'] + $params['limit'] + 1;
 
@@ -124,10 +117,7 @@ class SearchEntities extends ApiBase {
 		);
 		$ids = array_unique( $ids );
 
-		$entries = $this->getEntries( $ids, $params['search'], $params['language'] );
-
-		wfProfileOut( __METHOD__ );
-		return $entries;
+		return $this->getEntries( $ids, $params['search'], $params['language'] );
 	}
 
 	/**
@@ -258,8 +248,6 @@ class SearchEntities extends ApiBase {
 	 * @see ApiBase::execute()
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
-
 		$params = $this->extractRequestParams();
 
 		$entries = $this->getSearchEntries( $params );
@@ -311,8 +299,6 @@ class SearchEntities extends ApiBase {
 			'success',
 			(int)true
 		);
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**

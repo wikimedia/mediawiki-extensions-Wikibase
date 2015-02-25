@@ -45,8 +45,6 @@ class RemoveReferences extends ModifyClaim {
 	 * @since 0.3
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
-
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
@@ -76,8 +74,6 @@ class RemoveReferences extends ModifyClaim {
 
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**

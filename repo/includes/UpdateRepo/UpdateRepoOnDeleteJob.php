@@ -120,7 +120,6 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 	 * @return bool
 	 */
 	protected function verifyValid( Item $item ) {
-		wfProfileIn( __METHOD__ );
 		$params = $this->getParams();
 		$siteId = $params['siteId'];
 		$page = $params['title'];
@@ -129,7 +128,6 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		if ( !$siteLink || $siteLink->getPageName() !== $page ) {
 			// Probably something changed since the job has been inserted
 			wfDebugLog( 'UpdateRepo', "OnDelete: The site link to " . $siteId . " is no longer $page" );
-			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
@@ -139,7 +137,6 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		$exists = $site->normalizePageName( $page );
 		if ( $exists !== false ) {
 			wfDebugLog( 'UpdateRepo', "OnDelete: $page on $siteId exists" );
-			wfProfileOut( __METHOD__ );
 			return false;
 		}
 

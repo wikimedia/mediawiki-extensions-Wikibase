@@ -47,8 +47,6 @@ class RemoveClaims extends ModifyClaim {
 	 * @since 0.3
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
-
 		$params = $this->extractRequestParams();
 		$entityId = $this->getEntityId( $params );
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -70,8 +68,6 @@ class RemoveClaims extends ModifyClaim {
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
 		$this->getResultBuilder()->setList( null, 'claims', $params['claim'], 'claim' );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**

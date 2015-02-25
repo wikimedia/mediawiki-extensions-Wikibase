@@ -182,8 +182,6 @@ abstract class UpdateRepoJob extends Job {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": attemptSave for " . $item->getId()->getSerialization() . " failed: " . $status->getMessage()->text() );
 		}
 
-		wfProfileOut( __METHOD__ );
-
 		return $status->isOK();
 	}
 
@@ -198,7 +196,6 @@ abstract class UpdateRepoJob extends Job {
 			// This should never happen as we check with CentralAuth
 			// that the user actually does exist
 			wfLogWarning( "User $name doesn't exist while CentralAuth pretends it does" );
-			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
@@ -209,7 +206,6 @@ abstract class UpdateRepoJob extends Job {
 	 * @return bool success
 	 */
 	public function run() {
-		wfProfileIn( __METHOD__ );
 		$params = $this->getParams();
 
 		$user = $this->getUser( $params['user'] );
@@ -223,7 +219,6 @@ abstract class UpdateRepoJob extends Job {
 			$this->saveChanges( $item, $user );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 

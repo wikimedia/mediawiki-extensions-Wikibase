@@ -258,12 +258,8 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 	 * @return Status a status object representing the check's result.
 	 */
 	protected function getPermissionStatus( User $user, $permission, Title $entityPage, $quick = '' ) {
-		wfProfileIn( __METHOD__ );
 		$errors = $entityPage->getUserPermissionsErrors( $permission, $user, $quick !== 'quick' );
-		$status = $this->getStatusForPermissionErrors( $errors );
-
-		wfProfileOut( __METHOD__ );
-		return $status;
+		return $this->getStatusForPermissionErrors( $errors );
 	}
 
 	/**
@@ -279,7 +275,6 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 			$status->setResult( false );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $status;
 	}
 
@@ -296,13 +291,8 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 	 * @todo Move to a separate service (merge into WikiPageEntityStore?)
 	 */
 	public function getPermissionStatusForEntityId( User $user, $permission, EntityId $entityId, $quick = '' ) {
-		wfProfileIn( __METHOD__ );
-
 		$title = $this->getTitleForId( $entityId );
-		$status = $this->getPermissionStatus( $user, $permission, $title, $quick );
-
-		wfProfileOut( __METHOD__ );
-		return $status;
+		return $this->getPermissionStatus( $user, $permission, $title, $quick );
 	}
 
 	/**
@@ -318,15 +308,10 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 	 * @todo Move to a separate service (merge into WikiPageEntityStore?)
 	 */
 	public function getPermissionStatusForEntityType( User $user, $permission, $entityType, $quick = '' ) {
-		wfProfileIn( __METHOD__ );
-
 		$ns = $this->getNamespaceForType( $entityType );
 		$dummyTitle = Title::makeTitleSafe( $ns, '/' );
 
-		$status = $this->getPermissionStatus( $user, $permission, $dummyTitle, $quick );
-
-		wfProfileOut( __METHOD__ );
-		return $status;
+		return $this->getPermissionStatus( $user, $permission, $dummyTitle, $quick );
 	}
 
 	/**

@@ -51,20 +51,16 @@ class SectionEditLinkGenerator {
 		Message $message,
 		$enabled = true
 	) {
-		wfProfileIn( __METHOD__ );
 
 		$editUrl = $enabled ? $this->getEditUrl( $specialPageName, $specialPageUrlParams ) : null;
 		$toolbarButton = $this->getToolbarButton( $cssClassSuffix, $message->text(), $editUrl );
 
-		$html = $this->templateFactory->render( 'wikibase-toolbar-container',
+		return $this->templateFactory->render( 'wikibase-toolbar-container',
 			$this->templateFactory->render( 'wikibase-toolbar',
 				'',
 				$toolbarButton
 			)
 		);
-
-		wfProfileOut( __METHOD__ );
-		return $html;
 	}
 
 	/**
@@ -88,18 +84,13 @@ class SectionEditLinkGenerator {
 		Message $message,
 		$enabled = true
 	) {
-		wfProfileIn( __METHOD__ );
-
 		$editUrl = $enabled ? $this->getEditUrl( $specialPageName, $specialPageUrlParams ) : null;
 		$toolbarButton = $this->getToolbarButton( $cssClassSuffix, $message->text(), $editUrl );
 
-		$html = $this->templateFactory->render(
+		return $this->templateFactory->render(
 			'wikibase-toolbar-container',
 			$toolbarButton
 		);
-
-		wfProfileOut( __METHOD__ );
-		return $html;
 	}
 
 	/**

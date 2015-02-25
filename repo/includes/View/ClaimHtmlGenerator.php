@@ -70,8 +70,6 @@ class ClaimHtmlGenerator {
 	 * @return string
 	 */
 	public function getHtmlForClaim( Claim $claim, $editSectionHtml = null ) {
-		wfProfileIn( __METHOD__ );
-
 		$mainSnakHtml = $this->snakHtmlGenerator->getSnakHtml(
 			$claim->getMainSnak(),
 			false
@@ -103,7 +101,7 @@ class ClaimHtmlGenerator {
 			$referencesHtml = '';
 		}
 
-		$claimHtml = $this->templateFactory->render(
+		return $this->templateFactory->render(
 			'wikibase-statementview',
 			$claim->getGuid(),
 			$rankHtml,
@@ -113,10 +111,6 @@ class ClaimHtmlGenerator {
 			$referencesHeading,
 			$referencesHtml
 		);
-
-
-		wfProfileOut( __METHOD__ );
-		return $claimHtml;
 	}
 
 	/**

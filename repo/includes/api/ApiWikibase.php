@@ -340,8 +340,6 @@ abstract class ApiWikibase extends ApiBase {
 	 * @throws UsageException If $status->isOK() returns false.
 	 */
 	private function handleStatus( Status $status, $errorCode, array $extradata = array(), $httpRespCode = 0 ) {
-		wfProfileIn( __METHOD__ );
-
 		if ( $status->isGood() ) {
 			return;
 		} elseif ( $status->isOK() ) {
@@ -350,8 +348,6 @@ abstract class ApiWikibase extends ApiBase {
 			$this->errorReporter->reportStatusWarnings( $status );
 			$this->errorReporter->dieStatus( $status, $errorCode, $httpRespCode, $extradata );
 		}
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**

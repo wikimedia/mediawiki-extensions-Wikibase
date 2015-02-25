@@ -60,8 +60,6 @@ class LinkTitles extends ApiWikibase {
 	 * @since 0.1
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
-
 		$lookup = $this->getEntityRevisionLookup();
 
 		$params = $this->extractRequestParams();
@@ -135,19 +133,16 @@ class LinkTitles extends ApiWikibase {
 		// we can be sure that $fromId and $toId are not null here
 		elseif ( $fromId->equals( $toId ) ) {
 			// no-op
-			wfProfileOut( __METHOD__ );
 			$this->dieError( 'Common item detected, sitelinks are both on the same item', 'common-item' );
 		}
 		else {
 			// dissimilar items
-			wfProfileOut( __METHOD__ );
 			$this->dieError( 'No common item detected, unable to link titles' , 'no-common-item' );
 		}
 
 		$this->getResultBuilder()->addSiteLinks( $return, 'entity' );
 		$status = $this->getAttemptSaveStatus( $item, $summary, $flags );
 		$this->buildResult( $item, $status );
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**

@@ -85,8 +85,6 @@ class RedirectCreationInteractor {
 	 * the failure. An explanation of the error codes can be obtained from getErrorCodeInfo().
 	 */
 	public function createRedirect( EntityId $fromId, EntityId $toId, $bot ) {
-		wfProfileIn( __METHOD__ );
-
 		$this->checkCompatible( $fromId, $toId );
 		$this->checkPermissions( $fromId );
 
@@ -98,8 +96,6 @@ class RedirectCreationInteractor {
 
 		$redirect = new EntityRedirect( $fromId, $toId );
 		$this->saveRedirect( $redirect, $summary, $bot );
-
-		wfProfileOut( __METHOD__ );
 
 		return $redirect;
 	}

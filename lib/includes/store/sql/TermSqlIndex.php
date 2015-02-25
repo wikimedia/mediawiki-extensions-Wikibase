@@ -94,8 +94,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return boolean Success indicator
 	 */
 	public function saveTermsOfEntity( EntityDocument $entity ) {
-		wfProfileIn( __METHOD__ );
-
 		//First check whether there's anything to update
 		$newTerms = $this->getEntityTerms( $entity );
 		$oldTerms = $this->getTermsOfEntity( $entity->getId() );
@@ -105,7 +103,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		if ( !$termsToInsert && !$termsToDelete ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': terms did not change, returning.' );
-			wfProfileOut( __METHOD__ );
 			return true;
 		}
 
@@ -123,7 +120,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		}
 
 		$this->releaseConnection( $dbw );
-		wfProfileOut( __METHOD__ );
 
 		return $ok;
 	}
@@ -143,8 +139,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return boolean Success indicator
 	 */
 	public function insertTermsInternal( EntityDocument $entity, $terms, DatabaseBase $dbw ) {
-		wfProfileIn( __METHOD__ );
-
 		$entityIdentifiers = array(
 			// FIXME: this will fail for IDs that do not have a numeric form
 			'term_entity_id' => $entity->getId()->getNumericId(),
@@ -176,8 +170,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				break;
 			}
 		}
-
-		wfProfileOut( __METHOD__ );
 
 		return $success;
 	}
@@ -260,8 +252,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return boolean Success indicator
 	 */
 	public function deleteTermsInternal( EntityId $entityId, $terms, DatabaseBase $dbw ) {
-		wfProfileIn( __METHOD__ );
-
 		//TODO: Make getTermsOfEntity() collect term_row_id values, so we can use them here.
 		//      That would allow us to do the deletion in a single query, based on a set of ids.
 
@@ -293,8 +283,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				break;
 			}
 		}
-
-		wfProfileOut( __METHOD__ );
 
 		return $success;
 	}
@@ -356,8 +344,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return boolean Success indicator
 	 */
 	public function deleteTermsOfEntity( EntityId $entityId ) {
-		wfProfileIn( __METHOD__ );
-
 		$dbw = $this->getConnection( DB_MASTER );
 
 		$success = $dbw->delete(
@@ -373,7 +359,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		// for other entities, without any way to remove them from the database.
 		// We probably want some extra handling here.
 
-		wfProfileOut( __METHOD__ );
 		return $success;
 	}
 
@@ -442,8 +427,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			return array();
 		}
 
-		wfProfileIn( __METHOD__ );
-
 		$entityType = null;
 		$numericIds = array();
 
@@ -482,8 +465,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$terms = $this->buildTermResult( $res );
 
 		$this->releaseConnection( $dbr );
-
-		wfProfileOut( __METHOD__ );
 
 		return $terms;
 	}
@@ -527,8 +508,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			return array();
 		}
 
-		wfProfileIn( __METHOD__ );
-
 		$dbr = $this->getReadDb();
 
 		$termConditions = $this->termsToConditions( $dbr, $terms, $termType, $entityType, $options );
@@ -554,8 +533,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$this->releaseConnection( $dbr );
 
-		wfProfileOut( __METHOD__ );
-
 		return $terms;
 	}
 
@@ -574,8 +551,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		if ( empty( $terms ) ) {
 			return array();
 		}
-
-		wfProfileIn( __METHOD__ );
 
 		// this is the maximum limit of search results
 		// TODO this should not be hardcoded
@@ -648,8 +623,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$result[] = LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
 		}
 
-		wfProfileOut( __METHOD__ );
-
 		return $result;
 	}
 
@@ -663,16 +636,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return string[]
 	 */
 	private function termsToConditions( DatabaseBase $db, array $terms, $termType, $entityType, array $options = array() ) {
-		wfProfileIn( __METHOD__ );
-
 		$conditions = array();
 
 		foreach ( $terms as $term ) {
 			$termConditions = $this->termMatchConditions( $db, $term, $termType, $entityType, $options );
 			$conditions[] = '(' . implode( ' AND ', $termConditions ) . ')';
 		}
-
-		wfProfileOut( __METHOD__ );
 
 		return $conditions;
 	}
@@ -689,8 +658,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return array
 	 */
 	protected function termMatchConditions( DatabaseBase $db, Term $term, $termType, $entityType, array $options = array() ) {
-		wfProfileIn( __METHOD__ );
-
 		$options = array_merge(
 			array(
 				'caseSensitive' => true,
@@ -748,8 +715,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
-
 		return $conditions;
 	}
 
@@ -764,8 +729,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return Term[]
 	 */
 	protected function buildTermResult( $obtainedTerms ) {
-		wfProfileIn( __METHOD__ );
-
 		$matchingTerms = array();
 
 		foreach ( $obtainedTerms as $obtainedTerm ) {
@@ -786,8 +749,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 			$matchingTerms[] = new Term( $matchingTerm );
 		}
-
-		wfProfileOut( __METHOD__ );
 
 		return $matchingTerms;
 	}
@@ -829,7 +790,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			return array();
 		}
 
-		wfProfileIn( __METHOD__ );
 		$templates = $this->makeQueryTerms( $labels, Term::TYPE_LABEL );
 
 		$labelConflicts = $this->getMatchingTerms(
@@ -841,7 +801,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			)
 		);
 
-		wfProfileOut( __METHOD__ );
 		return $labelConflicts;
 	}
 
@@ -868,15 +827,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			return array();
 		}
 
-		wfProfileIn( __METHOD__ );
-
 		$dbr = $this->getReadDb();
 
 		// FIXME: MySQL doesn't support self-joins on temporary tables,
 		//        so skip this check during unit tests on MySQL!
 		if ( defined( 'MW_PHPUNIT_TEST' ) && $dbr->getType() === 'mysql' ) {
 			$this->releaseConnection( $dbr );
-			wfProfileOut( __METHOD__ );
 			return array();
 		}
 
@@ -921,7 +877,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$this->releaseConnection( $dbr );
 
-		wfProfileOut( __METHOD__ );
 		return $conflicts;
 	}
 

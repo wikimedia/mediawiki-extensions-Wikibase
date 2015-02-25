@@ -74,11 +74,9 @@ class GetEntities extends ApiWikibase {
 	 * @see ApiBase::execute()
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
 		$params = $this->extractRequestParams();
 
 		if ( !isset( $params['ids'] ) && ( empty( $params['sites'] ) || empty( $params['titles'] ) ) ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieError(
 				'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages',
 				'param-missing'
@@ -100,8 +98,6 @@ class GetEntities extends ApiWikibase {
 		}
 
 		$this->getResultBuilder()->markSuccess( 1 );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -129,7 +125,6 @@ class GetEntities extends ApiWikibase {
 				try {
 					$ids[] = $this->getIdParser()->parse( $id );
 				} catch( EntityIdParsingException $e ) {
-					wfProfileOut( __METHOD__ );
 					$this->dieError( "Invalid id: $id", 'no-such-entity' );
 				}
 			}
@@ -237,8 +232,6 @@ class GetEntities extends ApiWikibase {
 	 * @param array $params
 	 */
 	private function handleEntity( $key, EntityRevision $entityRevision = null, array $params = array() ) {
-		wfProfileIn( __METHOD__ );
-
 		if ( $entityRevision === null ) {
 			$this->getResultBuilder()->addMissingEntity( $key, array( 'id' => $key ) );
 		} else {
@@ -248,8 +241,6 @@ class GetEntities extends ApiWikibase {
 
 			$this->getResultBuilder()->addEntityRevision( $key, $entityRevision, $options, $props, $siteFilterIds );
 		}
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**

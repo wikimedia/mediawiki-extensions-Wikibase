@@ -39,7 +39,6 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	 * @return Result
 	 */
 	public function validateEntity( Entity $entity ) {
-		wfProfileIn( __METHOD__ );
 		$dbw = wfGetDB( DB_MASTER );
 
 		$conflicts = $this->siteLinkLookup->getConflictsForItem( $entity, $dbw );
@@ -50,14 +49,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 			$errors[] = $this->getConflictError( $conflict );
 		}
 
-		if ( empty( $errors ) ) {
-			$result = Result::newSuccess();
-		} else {
-			$result = Result::newError( $errors );
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $result;
+		return empty( $errors ) ? Result::newSuccess() : Result::newError( $errors );
 	}
 
 	/**

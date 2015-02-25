@@ -45,8 +45,6 @@ class InterwikiSorter {
 	 * @return array
 	 */
 	public function sortLinks( array $links ) {
-		wfProfileIn( __METHOD__ );
-
 		// Prepare the sorting array.
 		$this->sortOrder = $this->buildSortOrder(
 			$this->sort,
@@ -66,7 +64,6 @@ class InterwikiSorter {
 			$links[$k] = implode( ':', $langLink );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $links;
 	}
 

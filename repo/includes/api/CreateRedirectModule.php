@@ -75,8 +75,6 @@ class CreateRedirectModule extends ApiBase {
 	 * @see ApiBase::execute()
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
-
 		$params = $this->extractRequestParams();
 		$bot = $this->getUser()->isAllowed( 'bot' ) && $params['bot'];
 
@@ -90,8 +88,6 @@ class CreateRedirectModule extends ApiBase {
 		} catch ( RedirectCreationException $ex ) {
 			$this->handleRedirectCreationException( $ex );
 		}
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**

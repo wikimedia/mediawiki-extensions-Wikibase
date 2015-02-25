@@ -151,8 +151,6 @@ class EditEntity extends ModifyEntity {
 	 * @see ModifyEntity::modifyEntity
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
-		wfProfileIn( __METHOD__ );
-
 		$this->validateDataParameter( $params );
 		$data = json_decode( $params['data'], true );
 		$this->validateDataProperties( $data, $entity, $baseRevId );
@@ -168,7 +166,6 @@ class EditEntity extends ModifyEntity {
 				);
 
 				if ( !$baseRevId === $latestRevision ) {
-					wfProfileOut( __METHOD__ );
 					$this->dieError(
 						'Tried to clear entity using baserevid of entity not equal to current revision',
 						'editconflict'
@@ -181,7 +178,6 @@ class EditEntity extends ModifyEntity {
 		// if we create a new property, make sure we set the datatype
 		if ( !$exists && $entity instanceof Property ) {
 			if ( !isset( $data['datatype'] ) ) {
-				wfProfileOut( __METHOD__ );
 				$this->dieError( 'No datatype given', 'param-illegal' );
 			} else {
 				$entity->setDataTypeId( $data['datatype'] );
@@ -193,10 +189,7 @@ class EditEntity extends ModifyEntity {
 		$this->applyChangeOp( $changeOps, $entity );
 
 		$this->buildResult( $entity );
-		$summary = $this->getSummary( $params );
-
-		wfProfileOut( __METHOD__ );
-		return $summary;
+		return $this->getSummary( $params );
 	}
 
 	/**
@@ -551,7 +544,6 @@ class EditEntity extends ModifyEntity {
 	 */
 	private function validateDataParameter( array $params ) {
 		if ( !isset( $params['data'] ) ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieError( 'No data to operate upon', 'no-data' );
 		}
 	}

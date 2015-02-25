@@ -147,17 +147,12 @@ if ( $ ) {
 	 * @return string
 	 */
 	protected function getMainHtml( EntityRevision $entityRevision ) {
-		wfProfileIn( __METHOD__ );
-
 		$entity = $entityRevision->getEntity();
 
-		$html = $this->getHtmlForFingerprint(
+		return $this->getHtmlForFingerprint(
 			$entity,
 			$this->getHtmlForTermBox( $entityRevision )
 		);
-
-		wfProfileOut( __METHOD__ );
-		return $html;
 	}
 
 	/**

@@ -58,8 +58,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	 * @throws DBError
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
-		wfProfileIn( __METHOD__ );
-
 		$dbw = $this->getConnection( DB_SLAVE );
 
 		$res = $dbw->selectField(
@@ -81,7 +79,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $info;
 	}
 
@@ -115,7 +112,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	 * @throws DBError
 	 */
 	public function getAllPropertyInfo() {
-		wfProfileIn( __METHOD__ );
 		$dbw = $this->getConnection( DB_SLAVE );
 
 		$res = $dbw->select(
@@ -141,7 +137,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 
 		$this->releaseConnection( $dbw );
 
-		wfProfileOut( __METHOD__ );
 		return $infos;
 	}
 
@@ -163,8 +158,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
 		}
 
-		wfProfileIn( __METHOD__ );
-
 		$type = $info[ PropertyInfoStore::KEY_DATA_TYPE ];
 		$json = json_encode( $info );
 
@@ -182,8 +175,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 		);
 
 		$this->releaseConnection( $dbw );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -200,7 +191,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 			throw new DBError( 'Cannot write when in readonly mode' );
 		}
 
-		wfProfileIn( __METHOD__ );
 		$dbw = $this->getConnection( DB_MASTER );
 
 		$dbw->delete(
@@ -212,7 +202,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 		$c = $dbw->affectedRows();
 		$this->releaseConnection( $dbw );
 
-		wfProfileOut( __METHOD__ );
 		return $c > 0;
 	}
 

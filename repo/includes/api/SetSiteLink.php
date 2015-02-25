@@ -76,10 +76,7 @@ class SetSiteLink extends ModifyEntity {
 	 * @see ModifyEntity::modifyEntity
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
-		wfProfileIn( __METHOD__ );
-
 		if ( !( $entity instanceof Item ) ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieError( "The given entity is not an item", "not-item" );
 		}
 
@@ -104,12 +101,10 @@ class SetSiteLink extends ModifyEntity {
 				$link = $item->getSiteLink( $linksite );
 				$this->getResultBuilder()->addSiteLinks( array( $link ), 'entity', array( 'url' ) );
 			} else {
-				wfProfileOut( __METHOD__ );
 				$this->dieMessage( 'no-such-sitelink', $params['linktitle'] );
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $summary;
 	}
 
@@ -119,10 +114,8 @@ class SetSiteLink extends ModifyEntity {
 	 * @return ChangeOpSiteLink
 	 */
 	private function getChangeOp( array $params ) {
-		wfProfileIn( __METHOD__ );
 		if ( $this->shouldRemove( $params ) ) {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
-			wfProfileOut( __METHOD__ );
 			return $this->siteLinkChangeOpFactory->newRemoveSiteLinkOp( $linksite );
 		} else {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
@@ -130,7 +123,6 @@ class SetSiteLink extends ModifyEntity {
 			$site = $sites->getSite( $linksite );
 
 			if ( $site === false ) {
-				wfProfileOut( __METHOD__ );
 				$this->dieError( 'The supplied site identifier was not recognized' , 'not-recognized-siteid' );
 			}
 
@@ -138,7 +130,6 @@ class SetSiteLink extends ModifyEntity {
 				$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $params['linktitle'] ) );
 
 				if ( $page === false ) {
-					wfProfileOut( __METHOD__ );
 					$this->dieMessage( 'no-external-page', $linksite, $params['linktitle'] );
 				}
 			} else {
@@ -149,7 +140,6 @@ class SetSiteLink extends ModifyEntity {
 				? $this->parseSiteLinkBadges( $params['badges'] )
 				: null;
 
-			wfProfileOut( __METHOD__ );
 			return $this->siteLinkChangeOpFactory->newSetSiteLinkOp( $linksite, $page, $badges );
 		}
 	}

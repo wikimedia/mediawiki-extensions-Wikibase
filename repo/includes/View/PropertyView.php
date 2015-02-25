@@ -58,8 +58,6 @@ class PropertyView extends EntityView {
 	 * @see EntityView::getMainHtml
 	 */
 	public function getMainHtml( EntityRevision $entityRevision ) {
-		wfProfileIn( __METHOD__ );
-
 		$property = $entityRevision->getEntity();
 
 		if ( !( $property instanceof Property ) ) {
@@ -79,7 +77,6 @@ class PropertyView extends EntityView {
 			$html .= "\n" . $footer->parse();
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $html;
 	}
 

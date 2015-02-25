@@ -186,8 +186,6 @@ class SubmitEntityAction extends EditEntityAction {
 	 * @return Status a status object representing the check's result.
 	 */
 	private function getPermissionStatus( $permission, Title $title, $quick = '' ) {
-		wfProfileIn( __METHOD__ );
-
 		//XXX: would be nice to be able to pass the $short flag too,
 		//     as used by getUserPermissionsErrorsInternal. But Title doesn't expose that.
 		$errors = $title->getUserPermissionsErrors( $permission, $this->getUser(), $quick !== 'quick' );
@@ -198,7 +196,6 @@ class SubmitEntityAction extends EditEntityAction {
 			$status->setResult( false );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $status;
 	}
 

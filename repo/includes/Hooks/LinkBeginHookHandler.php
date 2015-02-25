@@ -169,12 +169,9 @@ class LinkBeginHookHandler {
 			return;
 		}
 
-		wfProfileIn( __METHOD__ );
-
 		$entityId = $this->entityIdLookup->getEntityIdForTitle( $target );
 
 		if ( !$entityId ) {
-			wfProfileOut( __METHOD__ );
 			return;
 		}
 
@@ -190,7 +187,6 @@ class LinkBeginHookHandler {
 			$descriptions = $this->termLookup->getDescriptions( $entityId, $this->languageFallback->getFetchLanguageCodes() );
 		} catch ( StorageException $ex ) {
 			// This shouldn't happen if $target->exists() return true!
-			wfProfileOut( __METHOD__ );
 			return;
 		}
 
@@ -207,8 +203,6 @@ class LinkBeginHookHandler {
 
 		// add wikibase styles in all cases, so we can format the link properly:
 		$out->addModuleStyles( array( 'wikibase.common' ) );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	private function getPreferredTerm( $termsByLanguage ) {

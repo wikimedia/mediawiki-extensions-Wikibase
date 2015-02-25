@@ -38,7 +38,6 @@ class ChangeNotificationJob extends Job {
 	 */
 	public static function newFromChanges( array $changes, $repo = '', $params = false ) {
 		static $dummyTitle = null;
-		wfProfileIn( __METHOD__ );
 
 		// Note: we don't really care about the title and will use a dummy
 		if ( $dummyTitle === null ) {
@@ -61,10 +60,7 @@ class ChangeNotificationJob extends Job {
 		$params['repo'] = $repo;
 		$params['changeIds'] = $changeIds;
 
-		$job = new ChangeNotificationJob( $dummyTitle, $params );
-
-		wfProfileOut( __METHOD__ );
-		return $job;
+		return new ChangeNotificationJob( $dummyTitle, $params );
 	}
 
 	/**

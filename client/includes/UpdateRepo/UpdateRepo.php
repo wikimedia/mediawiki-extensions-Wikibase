@@ -132,15 +132,11 @@ abstract class UpdateRepo {
 	 * @param JobQueueGroup $jobQueueGroup
 	 */
 	public function injectJob( JobQueueGroup $jobQueueGroup ) {
-		wfProfileIn( __METHOD__ );
-
 		$job = $this->createJob( $jobQueueGroup );
 
 		wfProfileIn( __METHOD__ . '#push' );
 		$jobQueueGroup->push( $job );
 		wfProfileOut( __METHOD__ . '#push' );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -151,21 +147,15 @@ abstract class UpdateRepo {
 	 * @return IJobSpecification
 	 */
 	private function createJob( JobQueueGroup $jobQueueGroup ) {
-		wfProfileIn( __METHOD__ );
-
 		$params = $this->getJobParameters();
 		if ( $this->delayJobs( $jobQueueGroup ) ) {
 			$params['jobReleaseTimestamp'] = time() + $this->getJobDelay();
 		}
 
-		$job = new JobSpecification(
+		return new JobSpecification(
 			$this->getJobName(),
 			$params
 		);
-
-		wfProfileOut( __METHOD__ );
-
-		return $job;
 	}
 
 	/**

@@ -59,15 +59,12 @@ class Runner {
 	 * @return string Wikitext
 	 */
 	public function runPropertyParserFunction( Parser $parser, $propertyLabelOrId ) {
-		wfProfileIn( __METHOD__ );
-
 		// @todo use id provided as argument, if arbitrary access allowed,
 		// which means property ids might also be allowed here.
 		$entityId = $this->getItemIdForConnectedPage( $parser );
 
 		// @todo handle when site link is not there, such as site link / entity has been deleted...
 		if ( $entityId === null ) {
-			wfProfileOut( __METHOD__ );
 			return '';
 		}
 
@@ -79,7 +76,6 @@ class Runner {
 		$usageAcc = new ParserOutputUsageAccumulator( $parser->getOutput() );
 		$usageAcc->addOtherUsage( $entityId );
 
-		wfProfileOut( __METHOD__ );
 		return $result;
 	}
 
@@ -120,13 +116,7 @@ class Runner {
 	 * @return array
 	 */
 	public static function render( Parser $parser, $propertyLabelOrId ) {
-		wfProfileIn( __METHOD__ );
-
 		$runner = WikibaseClient::getDefaultInstance()->getPropertyParserFunctionRunner();
-		$result = $runner->runPropertyParserFunction( $parser, $propertyLabelOrId );
-
-		wfProfileOut( __METHOD__ );
-		return $result;
+		return $runner->runPropertyParserFunction( $parser, $propertyLabelOrId );
 	}
-
 }

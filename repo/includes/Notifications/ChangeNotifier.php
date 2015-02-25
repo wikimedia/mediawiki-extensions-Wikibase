@@ -47,8 +47,6 @@ class ChangeNotifier {
 	 * @return EntityChange|null
 	 */
 	public function notifyOnPageDeleted( EntityContent $content, User $user, $timestamp ) {
-		wfProfileIn( __METHOD__ );
-
 		if ( $content->isRedirect() ) {
 			// TODO: notify the client about changes to redirects!
 			return null;
@@ -62,7 +60,6 @@ class ChangeNotifier {
 
 		$this->changeTransmitter->transmitChange( $change );
 
-		wfProfileOut( __METHOD__ );
 		return $change;
 	}
 
@@ -75,8 +72,6 @@ class ChangeNotifier {
 	 * @return EntityChange|null
 	 */
 	public function notifyOnPageUndeleted( Revision $revision ) {
-		wfProfileIn( __METHOD__ );
-
 		/** @var EntityContent $content */
 		$content = $revision->getContent();
 
@@ -96,7 +91,6 @@ class ChangeNotifier {
 
 		$this->changeTransmitter->transmitChange( $change );
 
-		wfProfileOut( __METHOD__ );
 		return $change;
 	}
 
@@ -112,8 +106,6 @@ class ChangeNotifier {
 	 * @return EntityChange|null
 	 */
 	public function notifyOnPageCreated( Revision $revision ) {
-		wfProfileIn( __METHOD__ );
-
 		/** @var EntityContent $content */
 		$content = $revision->getContent();
 
@@ -130,7 +122,6 @@ class ChangeNotifier {
 		// FIXME: RepoHooks::onRecentChangeSave currently adds to the change later!
 		$this->changeTransmitter->transmitChange( $change );
 
-		wfProfileOut( __METHOD__ );
 		return $change;
 	}
 
@@ -147,8 +138,6 @@ class ChangeNotifier {
 	 * @return EntityChange|null
 	 */
 	public function notifyOnPageModified( Revision $current, Revision $parent ) {
-		wfProfileIn( __METHOD__ );
-
 		if ( $current->getParentId() !== $parent->getId() ) {
 			throw new InvalidArgumentException( '$parent->getId() must be the same as $current->getParentId()!' );
 		}
@@ -165,7 +154,6 @@ class ChangeNotifier {
 		// FIXME: RepoHooks::onRecentChangeSave currently adds to the change later!
 		$this->changeTransmitter->transmitChange( $change );
 
-		wfProfileOut( __METHOD__ );
 		return $change;
 	}
 

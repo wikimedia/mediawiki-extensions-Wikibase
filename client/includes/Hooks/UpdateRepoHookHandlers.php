@@ -72,7 +72,6 @@ class UpdateRepoHookHandlers {
 
 		if ( !$jobQueueGroup ) {
 			wfLogWarning( "Failed to acquire a JobQueueGroup for $repoDB" );
-			wfProfileOut( __METHOD__ );
 			return true;
 		}
 

@@ -326,7 +326,6 @@ abstract class EntityContent extends AbstractContent {
 			return '';
 		}
 
-		wfProfileIn( __METHOD__ );
 		$searchTextGenerator = new EntitySearchTextGenerator();
 		$text = $searchTextGenerator->generate( $this->getEntity() );
 
@@ -334,7 +333,6 @@ abstract class EntityContent extends AbstractContent {
 			return '';
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $text;
 	}
 
@@ -359,8 +357,6 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getRedirectText();
 		}
 
-		wfProfileIn( __METHOD__ );
-
 		//XXX: $ignore contains knowledge about the Entity's internal representation.
 		//     This list should therefore rather be maintained in the Entity class.
 		static $ignore = array(
@@ -376,10 +372,7 @@ abstract class EntityContent extends AbstractContent {
 
 		$values = self::collectValues( $data, $ignore );
 
-		$text = implode( "\n", $values );
-
-		wfProfileOut( __METHOD__ );
-		return $text;
+		return implode( "\n", $values );
 	}
 
 	/**
@@ -687,8 +680,6 @@ abstract class EntityContent extends AbstractContent {
 	 * @return Status
 	 */
 	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
-		wfProfileIn( __METHOD__ );
-
 		// Chain to parent
 		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
 
@@ -701,7 +692,6 @@ abstract class EntityContent extends AbstractContent {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $status;
 	}
 

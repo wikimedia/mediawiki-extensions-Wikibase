@@ -41,8 +41,6 @@ class SetClaimValue extends ModifyClaim {
 	 * @since 0.3
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
-
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
@@ -68,8 +66,6 @@ class SetClaimValue extends ModifyClaim {
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
 		$this->getResultBuilder()->addClaim( $claim );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**

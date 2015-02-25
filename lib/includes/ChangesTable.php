@@ -148,9 +148,7 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 	 * @return Change[]
 	 */
 	public function loadChunk( $start, $size ) {
-		wfProfileIn( __METHOD__ );
-
-		$changes = $this->selectObjects(
+		return $this->selectObjects(
 			null,
 			array(
 				'id >= ' . intval( $start )
@@ -161,9 +159,6 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 			),
 			__METHOD__
 		);
-
-		wfProfileOut( __METHOD__ );
-		return $changes;
 	}
 
 	/**

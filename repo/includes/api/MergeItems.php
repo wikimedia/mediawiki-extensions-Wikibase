@@ -111,8 +111,6 @@ class MergeItems extends ApiBase {
 	 * @see ApiBase::execute()
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
-
 		$params = $this->extractRequestParams();
 
 		try {
@@ -132,8 +130,6 @@ class MergeItems extends ApiBase {
 		} catch ( ItemMergeException $ex ) {
 			$this->handleItemMergeException( $ex );
 		}
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**

@@ -267,7 +267,6 @@ class EditEntity {
 			return null;
 		}
 
-		wfProfileIn( __METHOD__ );
 		if ( $this->latestRev === null ) {
 			//NOTE: it's important to remember this, if someone calls clear() on $this->getPage(), this should NOT change!
 			$this->latestRev = $this->entityRevisionLookup->getEntityRevision(
@@ -276,7 +275,6 @@ class EditEntity {
 			);
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $this->latestRev;
 	}
 
@@ -290,7 +288,6 @@ class EditEntity {
 			return 0;
 		}
 
-		wfProfileIn( __METHOD__ );
 		if ( $this->latestRevId === null ) {
 			if ( $this->latestRev !== null ) {
 				$this->latestRevId = $this->latestRev->getRevisionId();
@@ -302,7 +299,6 @@ class EditEntity {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $this->latestRevId;
 	}
 
@@ -346,13 +342,10 @@ class EditEntity {
 	 * @throws MWException
 	 */
 	public function getBaseRevision() {
-		wfProfileIn( __METHOD__ );
-
 		if ( $this->baseRev === null ) {
 			$baseRevId = $this->getBaseRevisionId();
 
 			if ( $baseRevId === false ) {
-				wfProfileOut( __METHOD__ );
 				return null;
 			} else if ( $baseRevId === $this->getLatestRevisionId() ) {
 				$this->baseRev = $this->getLatestRevision();
@@ -365,14 +358,12 @@ class EditEntity {
 				$this->baseRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $baseRevId );
 
 				if ( $this->baseRev === null ) {
-					wfProfileOut( __METHOD__ );
 					throw new MWException( 'Base revision ID not found: rev ' . $baseRevId
 						. ' of ' . $entityId->getSerialization() );
 				}
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $this->baseRev;
 	}
 
@@ -459,19 +450,14 @@ class EditEntity {
 	 * @return bool
 	 */
 	public function hasEditConflict() {
-		wfProfileIn( __METHOD__ );
-
 		if ( $this->isNew() || !$this->doesCheckForEditConflicts() ) {
-			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
 		if ( !is_int( $this->getBaseRevisionId() ) || $this->getBaseRevisionId() == $this->getLatestRevisionId() ) {
-			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -577,8 +563,6 @@ class EditEntity {
 	 * Use addRequiredPermission() to check more permissions.
 	 */
 	public function checkEditPermissions() {
-		wfProfileIn( __METHOD__ );
-
 		foreach ( $this->requiredPermissions as $action ) {
 			$permissionStatus = $this->permissionChecker->getPermissionStatusForEntity(
 				$this->user,
@@ -592,16 +576,12 @@ class EditEntity {
 				$this->status->fatal( 'no-permission' );
 			}
 		}
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
 	 * Checks if rate limits have been exceeded.
 	 */
 	public function checkRateLimits() {
-		wfProfileIn( __METHOD__ );
-
 		$exceeded = false;
 
 		if ( $this->getUser()->pingLimiter( 'edit' ) ) {
@@ -614,8 +594,6 @@ class EditEntity {
 			$this->errorType |= self::RATE_LIMIT;
 			$this->status->fatal( 'actionthrottledtext' );
 		}
-
-		wfProfileOut( __METHOD__ );
 	}
 
 
@@ -661,8 +639,6 @@ class EditEntity {
 	 * @see    WikiPage::doEditContent
 	 */
 	public function attemptSave( $summary, $flags, $token, $watch = null ) {
-		wfProfileIn( __METHOD__ );
-
 		if ( wfReadOnly() ) {
 			throw new ReadOnlyError();
 		}
@@ -681,8 +657,6 @@ class EditEntity {
 			$this->errorType |= self::TOKEN_ERROR;
 			$this->status->fatal( 'sessionfailure' );
 			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
-
-			wfProfileOut( __METHOD__ );
 			return $this->status;
 		}
 
@@ -692,8 +666,6 @@ class EditEntity {
 
 		if ( !$this->status->isOK() ) {
 			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
-
-			wfProfileOut( __METHOD__ );
 			return $this->status;
 		}
 
@@ -711,8 +683,6 @@ class EditEntity {
 
 		if ( !$this->status->isOK() ) {
 			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
-
-			wfProfileOut( __METHOD__ );
 			return $this->status;
 		}
 
@@ -720,8 +690,6 @@ class EditEntity {
 
 		if ( !$this->status->isOK() ) {
 			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
-
-			wfProfileOut( __METHOD__ );
 			return $this->status;
 		}
 
@@ -757,7 +725,6 @@ class EditEntity {
 			$this->status->setResult( false, $value );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $this->status;
 	}
 
@@ -862,11 +829,9 @@ class EditEntity {
 	 * @return bool true if an error page was shown, false if there were no errors to show.
 	 */
 	public function showErrorPage( $titleMessage = null ) {
-		wfProfileIn( __METHOD__ );
 		$out = $this->context->getOutput();
 
 		if ( $this->status === null || $this->status->isOK() ) {
-			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
@@ -882,7 +847,6 @@ class EditEntity {
 			$out->returnToMain( '', $this->getTitle() );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -892,11 +856,9 @@ class EditEntity {
 	 * @return bool true if any message was shown, false if there were no errors to show.
 	 */
 	protected function showStatus( ) {
-		wfProfileIn( __METHOD__ );
 		$out = $this->context->getOutput();
 
 		if ( $this->status === null || $this->status->isGood() ) {
-			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
@@ -904,7 +866,6 @@ class EditEntity {
 
 		$out->addHTML( Html::rawElement( 'div', array( 'class' => 'error' ), $text ) );
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 

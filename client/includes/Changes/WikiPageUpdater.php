@@ -84,8 +84,6 @@ class WikiPageUpdater implements PageUpdater {
 	 * @param array $attribs
 	 */
 	public function injectRCRecords( array $titles, array $attribs ) {
-		wfProfileIn( __METHOD__ );
-
 		foreach ( $titles as $title ) {
 			if ( !$title->exists() ) {
 				continue;
@@ -96,8 +94,5 @@ class WikiPageUpdater implements PageUpdater {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
 			$rc->save();
 		}
-
-		wfProfileOut( __METHOD__ );
 	}
-
 }

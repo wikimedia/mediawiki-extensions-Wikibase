@@ -236,8 +236,6 @@ class EntityParserOutputGenerator {
 	 * @return EntityInfo
 	 */
 	private function getEntityInfo( array $entityIds ) {
-		wfProfileIn( __METHOD__ );
-
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
 
 		$entityInfoBuilder->resolveRedirects();
@@ -251,10 +249,7 @@ class EntityParserOutputGenerator {
 		$entityInfoBuilder->collectDataTypes();
 		$entityInfoBuilder->retainEntityInfo( $entityIds );
 
-		$entityInfo = $entityInfoBuilder->getEntityInfo();
-
-		wfProfileOut( __METHOD__ );
-		return $entityInfo;
+		return $entityInfoBuilder->getEntityInfo();
 	}
 
 	/**

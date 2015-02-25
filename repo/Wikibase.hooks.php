@@ -80,14 +80,12 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onSetupAfterCache() {
-		wfProfileIn( __METHOD__ );
 		global $wgNamespaceContentModels;
 
 		$namespaces = WikibaseRepo::getDefaultInstance()->
 			getSettings()->getSetting( 'entityNamespaces' );
 
 		if ( empty( $namespaces ) ) {
-			wfProfileOut( __METHOD__ );
 			throw new MWException( 'Wikibase: Incomplete configuration: '
 				. '$wgWBRepoSettings["entityNamespaces"] has to be set to an '
 				. 'array mapping content model IDs to namespace IDs. '
@@ -100,7 +98,6 @@ final class RepoHooks {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -201,15 +198,12 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onNamespaceIsMovable( $ns, &$movable ) {
-		wfProfileIn( __METHOD__ );
-
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		if ( $entityNamespaceLookup->isEntityNamespace( $ns ) ) {
 			$movable = false;
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -227,8 +221,6 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
-		wfProfileIn( __METHOD__ );
-
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		if ( $entityContentFactory->isEntityContentModel( $article->getContent()->getModel() ) ) {
@@ -244,7 +236,6 @@ final class RepoHooks {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -292,13 +283,10 @@ final class RepoHooks {
 	public static function onArticleDeleteComplete( WikiPage $wikiPage, User $user, $reason, $id,
 		Content $content = null, LogEntryBase $logEntry = null
 	) {
-		wfProfileIn( __METHOD__ );
-
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		// Bail out if we are not looking at an entity
 		if ( !$content || !$entityContentFactory->isEntityContentModel( $content->getModel() ) ) {
-			wfProfileOut( __METHOD__ );
 			return true;
 		}
 
@@ -311,7 +299,6 @@ final class RepoHooks {
 		$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
 		$notifier->notifyOnPageDeleted( $content, $user, $logEntry->getTimestamp() );
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -327,13 +314,10 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onArticleUndelete( Title $title, $created, $comment ) {
-		wfProfileIn( __METHOD__ );
-
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		// Bail out if we are not looking at an entity
 		if ( !$entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
-			wfProfileOut( __METHOD__ );
 			return true;
 		}
 
@@ -342,7 +326,6 @@ final class RepoHooks {
 		$content = $revision ? $revision->getContent() : null;
 
 		if ( !( $content instanceof EntityContent ) ) {
-			wfProfileOut( __METHOD__ );
 			return true;
 		}
 
@@ -355,7 +338,6 @@ final class RepoHooks {
 		$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
 		$notifier->notifyOnPageUndeleted( $revision );
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -419,8 +401,6 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
-		wfProfileIn( __METHOD__ );
-
 		$preferences['wb-acknowledgedcopyrightversion'] = array(
 			'type' => 'api'
 		);
@@ -438,7 +418,6 @@ final class RepoHooks {
 			$user->saveSettings();
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -451,13 +430,10 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onUserGetDefaultOptions( array &$defaultOptions ) {
-		wfProfileIn( __METHOD__ );
-
 		// pre-select default language in the list of fallback languages
 		$defaultLang = $defaultOptions['language'];
 		$defaultOptions[ 'wb-languages-' . $defaultLang ] = 1;
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -475,8 +451,6 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onPageHistoryLineEnding( HistoryPager $history, &$row, &$s, array &$classes  ) {
-		wfProfileIn( __METHOD__ );
-
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		$article = $history->getArticle();
@@ -499,7 +473,6 @@ final class RepoHooks {
 			$s .= " " . $history->msg( 'parentheses' )->rawParams( $link )->escaped();
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -515,8 +488,6 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onPageTabs( SkinTemplate &$skinTemplate, array &$links ) {
-		wfProfileIn( __METHOD__ );
-
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		$title = $skinTemplate->getTitle();
@@ -555,7 +526,6 @@ final class RepoHooks {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -570,8 +540,6 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onWikibaseRebuildData( $reportMessage ) {
-		wfProfileIn( __METHOD__ );
-
 		$store = WikibaseRepo::getDefaultInstance()->getStore();
 
 		$reportMessage(
@@ -582,7 +550,6 @@ final class RepoHooks {
 
 		$reportMessage( "done!\n" );
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -612,8 +579,6 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onWikibaseDeleteData( $reportMessage ) {
-		wfProfileIn( __METHOD__ );
-
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		$reportMessage( 'Deleting data from changes table...' );
@@ -653,7 +618,6 @@ final class RepoHooks {
 
 		$reportMessage( "done!\n" );
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -739,8 +703,6 @@ final class RepoHooks {
 	 * @return bool true to continue execution, false to abort and with $message as an error message.
 	 */
 	public static function onApiCheckCanExecute( ApiBase $module, User $user, &$message ) {
-		wfProfileIn( __METHOD__ );
-
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		if ( $module instanceof ApiEditPage ) {
@@ -758,7 +720,6 @@ final class RepoHooks {
 
 					// allow undo
 					if ( $params['undo'] > 0 ) {
-						wfProfileOut( __METHOD__ );
 						return true;
 					}
 
@@ -768,13 +729,11 @@ final class RepoHooks {
 						$pageObj->getTitle()->getNsText()
 					);
 
-					wfProfileOut( __METHOD__ );
 					return false;
 				}
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -801,8 +760,6 @@ final class RepoHooks {
 	public static function onShowSearchHit( SpecialSearch $searchPage, SearchResult $result, $terms,
 		&$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related, &$html
 	) {
-		wfProfileIn( __METHOD__ );
-
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		$title = $result->getTitle();
@@ -828,7 +785,6 @@ final class RepoHooks {
 			$extract = ''; // TODO: set this to something useful.
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 

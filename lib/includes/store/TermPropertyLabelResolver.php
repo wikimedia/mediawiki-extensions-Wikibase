@@ -105,14 +105,10 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 			return $this->propertiesByLabel;
 		}
 
-		wfProfileIn( __METHOD__ );
-
 		$cached = $this->getCachedLabelMap( $recache );
 
 		if ( $cached !== false && $cached !== null ) {
 			$this->propertiesByLabel = $cached;
-
-			wfProfileOut( __METHOD__ );
 			return $this->propertiesByLabel;
 		}
 
@@ -120,15 +116,11 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 		$this->cache->set( $this->cacheKey, $this->propertiesByLabel, $this->cacheDuration );
 
-		wfProfileOut( __METHOD__ );
-
 		return $this->propertiesByLabel;
 
 	}
 
 	protected function loadProperties() {
-		wfProfileIn( __METHOD__ );
-
 		$termTemplate = new Term( array(
 			'termType' => 'label',
 			'termLanguage' => $this->languageCode,
@@ -152,8 +144,6 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 			$label = $term->getText();
 			$propertiesByLabel[$label] = $term->getEntityId();
 		}
-
-		wfProfileOut( __METHOD__ );
 
 		return $propertiesByLabel;
 	}

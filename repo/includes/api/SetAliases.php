@@ -90,8 +90,6 @@ class SetAliases extends ModifyEntity {
 	 * @see ModifyEntity::modifyEntity
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
-		wfProfileIn( __METHOD__ );
-
 		$summary = $this->createSummary( $params );
 		$language = $params['language'];
 
@@ -119,7 +117,6 @@ class SetAliases extends ModifyEntity {
 			$this->getResultBuilder()->addAliases( array( $language => $aliases ), 'entity' );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $summary;
 	}
 
@@ -148,7 +145,6 @@ class SetAliases extends ModifyEntity {
 	 * @return ChangeOpAliases
 	 */
 	private function getChangeOps( array $params ) {
-		wfProfileIn( __METHOD__ );
 		$changeOps = array();
 		$language = $params['language'];
 
@@ -180,7 +176,6 @@ class SetAliases extends ModifyEntity {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $changeOps;
 	}
 

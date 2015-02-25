@@ -125,12 +125,9 @@ class ChangeHandler {
 	 * @param Change[] $changes
 	 */
 	public function handleChanges( array $changes ) {
-		wfProfileIn( __METHOD__ );
-
 		$changes = $this->changeListTransformer->transformChangeList( $changes );
 
 		if ( !wfRunHooks( 'WikibaseHandleChanges', array( $changes ) ) ) {
-			wfProfileOut( __METHOD__ );
 			return;
 		}
 
@@ -141,8 +138,6 @@ class ChangeHandler {
 
 			$this->handleChange( $change );
 		}
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -158,8 +153,6 @@ class ChangeHandler {
 	 * @return bool
 	 */
 	public function handleChange( Change $change ) {
-		wfProfileIn( __METHOD__ );
-
 		$changeId = $this->getChangeIdForLog( $change );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$changeId"
 			. ' (' . $change->getType() . ')' );
@@ -169,7 +162,6 @@ class ChangeHandler {
 		if ( empty( $usagesPerPage ) ) {
 			// nothing to do
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": No pages to update for change #$changeId." );
-			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
@@ -188,7 +180,6 @@ class ChangeHandler {
 			$this->applyUpdateAction( $action, $bucket, $change );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -198,8 +189,6 @@ class ChangeHandler {
 	 * @return string[] A list of actions, as defined by the self::XXXX_ACTION constants.
 	 */
 	public function getUpdateActions( $aspects ) {
-		wfProfileIn( __METHOD__ );
-
 		$actions = array();
 		$aspects = array_flip( $aspects );
 
@@ -253,8 +242,6 @@ class ChangeHandler {
 	 * @param EntityChange $change
 	 */
 	private function applyUpdateAction( $action, array $pageIds, EntityChange $change ) {
-		wfProfileIn( __METHOD__ );
-
 		$titlesToUpdate = $this->getTitlesForPageIds( $pageIds );
 
 		switch ( $action ) {
@@ -287,8 +274,6 @@ class ChangeHandler {
 			//TODO: handling for self::HISTORY_ENTRY_ACTION goes here.
 			//      should probably be $this->updater->injectHistoryRecords() or some such.
 		}
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -341,12 +326,9 @@ class ChangeHandler {
 	 *         or false if the change does not provide edit meta data
 	 */
 	private function getRCAttributes( EntityChange $change ) {
-		wfProfileIn( __METHOD__ );
-
 		$rcinfo = $change->getMetadata();
 
 		if ( !is_array( $rcinfo ) ) {
-			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
@@ -370,12 +352,9 @@ class ChangeHandler {
 
 		$rcinfo = array_merge( $fields, $rcinfo );
 
-		$params = array(
+		return array(
 			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
 		);
-
-		wfProfileOut( __METHOD__ );
-		return $params;
 	}
 
 	/**

@@ -128,8 +128,6 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageWithConversion[]
 	 */
 	public function buildFromLanguage( $language, $mode, &$chain = array(), &$fetched = array() ) {
-		wfProfileIn( __METHOD__ );
-
 		if ( is_string( $language ) ) {
 			$languageCode = $language;
 		} else {
@@ -191,7 +189,6 @@ class LanguageFallbackChainFactory {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $chain;
 	}
 
@@ -227,20 +224,14 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromUserAndLanguageCode( User $user, $languageCode ) {
-		wfProfileIn( __METHOD__ );
-
 		if ( !class_exists( 'Babel' ) || $user->isAnon() ) {
-			$cached =  $this->newFromLanguageCode( $languageCode, self::FALLBACK_ALL );
-			wfProfileOut( __METHOD__ );
-			return $cached;
+			return $this->newFromLanguageCode( $languageCode, self::FALLBACK_ALL );
 		}
 
 		$languageCode = LanguageWithConversion::validateLanguageCode( $languageCode );
 
 		if ( isset( $this->userLanguageCache[$user->getName()][$languageCode] ) ) {
-			$cached = $this->userLanguageCache[$user->getName()][$languageCode];
-			wfProfileOut( __METHOD__ );
-			return $cached;
+			return $this->userLanguageCache[$user->getName()][$languageCode];
 		}
 
 		$babel = $this->getBabel( $languageCode, $user );
@@ -250,7 +241,6 @@ class LanguageFallbackChainFactory {
 
 		$this->userLanguageCache[$user->getName()][$languageCode] = $languageFallbackChain;
 
-		wfProfileOut( __METHOD__ );
 		return $languageFallbackChain;
 	}
 
@@ -303,8 +293,6 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageWithConversion[]
 	 */
 	public function buildFromBabel( array $babel ) {
-		wfProfileIn( __METHOD__ );
-
 		$chain = array();
 		$fetched = array();
 
@@ -336,7 +324,6 @@ class LanguageFallbackChainFactory {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $chain;
 	}
 

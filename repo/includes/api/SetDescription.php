@@ -42,7 +42,6 @@ class SetDescription extends ModifyTerm {
 	 * @see ModifyEntity::modifyEntity
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
-		wfProfileIn( __METHOD__ );
 		$summary = $this->createSummary( $params );
 		$language = $params['language'];
 
@@ -53,7 +52,6 @@ class SetDescription extends ModifyTerm {
 
 		$this->getResultBuilder()->addDescriptions( $descriptions, 'entity' );
 
-		wfProfileOut( __METHOD__ );
 		return $summary;
 	}
 
@@ -63,7 +61,6 @@ class SetDescription extends ModifyTerm {
 	 * @return ChangeOpDescription
 	 */
 	private function getChangeOp( array $params ) {
-		wfProfileIn( __METHOD__ );
 		$description = "";
 		$language = $params['language'];
 
@@ -77,7 +74,6 @@ class SetDescription extends ModifyTerm {
 			$op = $this->termChangeOpFactory->newSetDescriptionOp( $language, $description );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $op;
 	}
 

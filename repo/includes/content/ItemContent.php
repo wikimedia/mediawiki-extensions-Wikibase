@@ -155,12 +155,7 @@ class ItemContent extends EntityContent {
 			throw new LogicException( 'Neither redirect nor item found in ItemContent!' );
 		}
 
-		wfProfileIn( __METHOD__ );
-
-		$item = $this->itemHolder->getEntity( 'Wikibase\DataModel\Entity\Item' );
-
-		wfProfileOut( __METHOD__ );
-		return $item;
+		return $this->itemHolder->getEntity( 'Wikibase\DataModel\Entity\Item' );
 	}
 
 	/**
@@ -199,8 +194,6 @@ class ItemContent extends EntityContent {
 			return '';
 		}
 
-		wfProfileIn( __METHOD__ );
-
 		// TODO: refactor ItemSearchTextGenerator to share an interface with EntitySearchTextGenerator,
 		// so we don't have to re-implement getTextForSearchIndex() here.
 		$searchTextGenerator = new ItemSearchTextGenerator();
@@ -210,7 +203,6 @@ class ItemContent extends EntityContent {
 			return '';
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $text;
 	}
 

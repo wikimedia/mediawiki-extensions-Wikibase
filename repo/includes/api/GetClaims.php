@@ -58,8 +58,6 @@ class GetClaims extends ApiWikibase {
 	 * @since 0.3
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
-
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
@@ -84,8 +82,6 @@ class GetClaims extends ApiWikibase {
 
 		$claims = $this->getClaims( $entity, $claimGuid );
 		$this->getResultBuilder()->addClaims( $claims, null );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	private function validateParameters( array $params ) {

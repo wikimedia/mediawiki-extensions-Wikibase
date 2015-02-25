@@ -92,8 +92,6 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @return boolean Success indicator
 	 */
 	public function saveLinksOfItem( Item $item ) {
-		wfProfileIn( __METHOD__ );
-
 		//First check whether there's anything to update
 		$newLinks = $item->getSiteLinks();
 		$oldLinks = $this->getSiteLinksForItem( $item->getId() );
@@ -103,7 +101,6 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 
 		if ( !$linksToInsert && !$linksToDelete ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": links did not change, returning." );
-			wfProfileOut( __METHOD__ );
 			return true;
 		}
 
@@ -123,7 +120,6 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		}
 
 		$this->releaseConnection( $dbw );
-		wfProfileOut( __METHOD__ );
 
 		return $ok;
 	}
@@ -143,8 +139,6 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @return boolean Success indicator
 	 */
 	public function insertLinksInternal( Item $item, $links, DatabaseBase $dbw ) {
-		wfProfileIn( __METHOD__ );
-
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting links for ' . $item->getId()->getSerialization() );
 
 		$success = true;
@@ -164,7 +158,6 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $success;
 	}
 
@@ -184,8 +177,6 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @return boolean Success indicator
 	 */
 	public function deleteLinksInternal( Item $item, $links, DatabaseBase $dbw ) {
-		wfProfileIn( __METHOD__ );
-
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': deleting links for ' . $item->getId()->getSerialization() );
 
 		//TODO: We can do this in a single query by collecting all the site IDs into a set.
@@ -206,7 +197,6 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $success;
 	}
 
@@ -290,12 +280,9 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @return array[]
 	 */
 	public function getConflictsForItem( Item $item, DatabaseBase $db = null ) {
-		wfProfileIn( __METHOD__ );
-
 		$links = $item->getSiteLinks();
 
 		if ( $links === array() ) {
-			wfProfileOut( __METHOD__ );
 			return array();
 		}
 
@@ -349,7 +336,6 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			$this->releaseConnection( $dbr );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $conflicts;
 	}
 

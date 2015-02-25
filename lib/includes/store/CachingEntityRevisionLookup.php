@@ -101,7 +101,6 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @return EntityRevision|null
 	 */
 	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
-		wfProfileIn( __METHOD__ );
 		$key = $this->getCacheKey( $entityId );
 
 		if ( $revisionId === 0 ) {
@@ -132,7 +131,6 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 			$entityRevision = $this->fetchEntityRevision( $entityId, $revisionId );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $entityRevision;
 	}
 
@@ -146,8 +144,6 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @return EntityRevision|null
 	 */
 	private function fetchEntityRevision( EntityId $entityId, $revisionId ) {
-		wfProfileIn( __METHOD__ );
-
 		$key = $this->getCacheKey( $entityId );
 		$entityRevision = $this->lookup->getEntityRevision( $entityId, $revisionId );
 
@@ -159,7 +155,6 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $entityRevision;
 	}
 

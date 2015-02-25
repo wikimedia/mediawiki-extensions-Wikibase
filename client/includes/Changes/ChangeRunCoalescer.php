@@ -62,7 +62,6 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 * @return Change[]
 	 */
 	public function transformChangeList( array $changes ) {
-		wfProfileIn( __METHOD__ );
 		$coalesced = array();
 
 		$changesByEntity = $this->groupChangesByEntity( $changes );
@@ -76,7 +75,6 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		wfDebugLog( __CLASS__, __METHOD__ . ': coalesced '
 			. count( $changes ) . ' into ' . count( $coalesced ) . ' changes' );
 
-		wfProfileOut( __METHOD__ );
 		return $coalesced;
 	}
 
@@ -89,7 +87,6 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 *         entity ID is the list of changes performed on that entity.
 	 */
 	private function groupChangesByEntity( array $changes ) {
-		wfProfileIn( __METHOD__ );
 		$groups = array();
 
 		foreach ( $changes as $change ) {
@@ -102,7 +99,6 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 			$groups[$id][] = $change;
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $groups;
 	}
 
@@ -125,8 +121,6 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		} elseif ( count( $changes ) === 1 )  {
 			return reset( $changes );
 		}
-
-		wfProfileIn( __METHOD__ );
 
 		// we now assume that we have a list if EntityChanges,
 		// all done by the same user on the same entity.
@@ -198,7 +192,6 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		$info['changes'] = $changes;
 		$change->setField( 'info', $info );
 
-		wfProfileOut( __METHOD__ );
 		return $change;
 	}
 
@@ -215,8 +208,6 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 * @return EntityChange[] grouped changes
 	 */
 	private function coalesceRuns( array $changes ) {
-		wfProfileIn( __METHOD__ );
-
 		$coalesced = array();
 
 		$currentRun = array();
@@ -287,7 +278,6 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $coalesced;
 	}
 

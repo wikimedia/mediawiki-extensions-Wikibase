@@ -126,8 +126,6 @@ class ParserAfterParseHookHandler {
 			return true;
 		}
 
-		wfProfileIn( __METHOD__ );
-
 		// @todo split up the multiple responsibilities here and in lang link handler
 
 		$parserOutput = $parser->getOutput();
@@ -151,7 +149,6 @@ class ParserAfterParseHookHandler {
 			$parserOutput->setLanguageLinks( $sortedLinks );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 

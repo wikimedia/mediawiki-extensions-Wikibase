@@ -315,8 +315,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			return;
 		}
 
-		wfProfileIn( __METHOD__ );
-
 		//NOTE: we make one DB query per entity type, so we can take advantage of the
 		//      database index on the term_entity_type field.
 		foreach ( array_keys( $this->numericIdsByType ) as $type ) {
@@ -330,8 +328,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		foreach ( $termTypes as $type ) {
 			$this->setDefaultValue( self::$termTypeFields[$type], array() );
 		}
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -342,8 +338,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param string[]|null $languages
 	 */
 	private function collectTermsForEntities( $entityType, array $termTypes = null, array $languages = null ) {
-		wfProfileIn( __METHOD__ );
-
 		$entityIds = $this->numericIdsByType[$entityType];
 
 		$where = array(
@@ -371,8 +365,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->injectTerms( $res );
 
 		$this->releaseConnection( $dbw );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -454,8 +446,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	public function collectDataTypes() {
 		//TODO: use PropertyDataTypeLookup service to make use of caching!
 
-		wfProfileIn( __METHOD__ );
-
 		if ( empty( $this->numericIdsByType[Property::ENTITY_TYPE] ) ) {
 			// there are no Property entities, so there is nothing to do.
 			return;
@@ -478,8 +468,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		} );
 
 		$this->releaseConnection( $dbw );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -508,12 +496,9 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @see EntityInfoBuilder::removeMissing
 	 */
 	public function removeMissing( $redirects = 'keep-redirects' ) {
-		wfProfileIn( __METHOD__ );
-
 		$missingIds = $this->getMissingIds( $redirects !== 'keep-redirects' );
 
 		$this->unsetEntityInfo( $missingIds );
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -546,8 +531,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		if ( isset( $this->pageInfoByType[$entityType] ) ) {
 			return $this->pageInfoByType[$entityType];
 		}
-
-		wfProfileIn( __METHOD__ );
 
 		$entityIds = $this->numericIdsByType[$entityType];
 
@@ -586,8 +569,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		}
 
 		$this->releaseConnection( $dbw );
-
-		wfProfileOut( __METHOD__ );
 
 		return $this->pageInfoByType[$entityType];
 	}

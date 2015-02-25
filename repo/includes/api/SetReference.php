@@ -49,8 +49,6 @@ class SetReference extends ModifyClaim {
 	 * @since 0.3
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
-
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
@@ -90,8 +88,6 @@ class SetReference extends ModifyClaim {
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
 		$this->getResultBuilder()->addReference( $newReference );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**

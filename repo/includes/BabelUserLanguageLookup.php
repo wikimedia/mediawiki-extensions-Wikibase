@@ -81,8 +81,6 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 	 * @return string[] List of all the user's language codes.
 	 */
 	public function getAllUserLanguages( User $user ) {
-		wfProfileIn( __METHOD__ );
-
 		$languages = array();
 
 		// Start with the user's UI language
@@ -97,7 +95,6 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 			$languages = array_unique( $languages );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $languages;
 	}
 

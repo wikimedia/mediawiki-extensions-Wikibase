@@ -42,7 +42,6 @@ class SetLabel extends ModifyTerm {
 	 * @see ModifyEntity::modifyEntity
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
-		wfProfileIn( __METHOD__ );
 		$summary = $this->createSummary( $params );
 		$language = $params['language'];
 
@@ -53,7 +52,6 @@ class SetLabel extends ModifyTerm {
 
 		$this->getResultBuilder()->addLabels( $labels, 'entity' );
 
-		wfProfileOut( __METHOD__ );
 		return $summary;
 	}
 
@@ -63,7 +61,6 @@ class SetLabel extends ModifyTerm {
 	 * @return ChangeOpLabel
 	 */
 	private function getChangeOp( array $params ) {
-		wfProfileIn( __METHOD__ );
 		$label = "";
 		$language = $params['language'];
 
@@ -77,7 +74,6 @@ class SetLabel extends ModifyTerm {
 			$op = $this->termChangeOpFactory->newSetLabelOp( $language, $label );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $op;
 	}
 

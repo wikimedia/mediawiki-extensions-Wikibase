@@ -45,8 +45,6 @@ class CreateClaim extends ModifyClaim {
 	 * @since 0.2
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
-
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
@@ -78,8 +76,6 @@ class CreateClaim extends ModifyClaim {
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
 		$this->getResultBuilder()->addClaim( $claim );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
