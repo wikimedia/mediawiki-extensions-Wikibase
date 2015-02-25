@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_a14ade28",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-25T16:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_baba1b6b",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_97893a29",
         "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
         "patchSetId": 5
@@ -143,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_c1459a19",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-25T16:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_204c9a42",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_17a44a9d",
         "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
         "patchSetId": 5
@@ -172,6 +208,24 @@
       "side": 1,
       "message": "as above",
       "parentUuid": "6e7c4fa4_17a44a9d",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_615046d9",
+        "filename": "client/includes/DataAccess/EntityStatementsRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-25T16:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_3aae0b2c",
       "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -331,6 +385,24 @@
       "side": 1,
       "message": "Filing silently isn\u0027t fool proof.\nI think an empty string is fine e.g. if there is no statement for the requested property. But if the entity isn\u0027t there, or the property doesn\u0027t even exist, then it\u0027s good to indicate this to the caller. Returning nil sounds good, or a formatted error string (if there\u0027s a convention for this in Scribunto modules). An exception may be too harsh in case an entity got deleted.",
       "parentUuid": "6e7c4fa4_ba50db37",
+      "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_81a32296",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-02-25T16:32:43Z",
+      "side": 1,
+      "message": "Changed to return nil as value in this case.",
+      "parentUuid": "6e7c4fa4_c07286ab",
       "revId": "40df11cc678fb586fed362f7a4a58ec3c762b024",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
