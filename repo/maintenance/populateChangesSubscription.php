@@ -15,7 +15,7 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) 
 require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
- * Maintenance script for populating wb_changes_subscription based on the page_props table.
+ * Maintenance script for populating wb_changes_subscription based on the wb_items_per_site table.
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -23,7 +23,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 
 	public function __construct() {
-		$this->mDescription = 'Populate the wb_changes_subscription table based on entries in page_props.';
+		$this->mDescription = 'Populate the wb_changes_subscription table based on entries in wb_items_per_site.';
 
 		$this->addOption( 'start-item', "The page ID to start from.", false, true );
 
