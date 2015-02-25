@@ -64,10 +64,12 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		);
 	}
 
-	public function testFormatPropertyValuesInvalidPropertyId() {
-		$this->setExpectedException( 'ScribuntoException' );
+	public function testFormatPropertyValues_noPropertyId() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$luaWikibaseLibrary->formatPropertyValues( 'Q1', '$invalidEntityId€', array() );
+		$this->assertSame(
+			array( '' ),
+			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'father', array() )
+		);
 	}
 
 	private function newScribuntoLuaWikibaseLibrary() {

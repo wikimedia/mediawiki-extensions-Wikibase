@@ -11,8 +11,6 @@ use Wikibase\PropertyLabelResolver;
 /**
  * Resolves the PropertyId for the input, which might be a property label or prefixed id.
  *
- * @fixme see what code can be shared with Lua handling code.
- *
  * @since 0.5
  *
  * @licence GNU GPL v2+
@@ -23,10 +21,20 @@ use Wikibase\PropertyLabelResolver;
  */
 class PropertyIdResolver {
 
+	/**
+	 * @var EntityLookup
+	 */
 	private $entityLookup;
 
+	/**
+	 * @var PropertyLabelResolver
+	 */
 	private $propertyLabelResolver;
 
+	/**
+	 * @param EntityLookup $entityLookup
+	 * @param PropertyLabelResolver $propertyLabelResolver
+	 */
 	public function __construct(
 		EntityLookup $entityLookup,
 		PropertyLabelResolver $propertyLabelResolver
