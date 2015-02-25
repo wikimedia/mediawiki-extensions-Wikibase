@@ -2,7 +2,9 @@
 
 namespace Wikibase;
 
+use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use LinkBatch;
+use ParserOptions;
 use ParserOutput;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -99,18 +101,31 @@ class EntityParserOutputGenerator {
 	 *
 	 * @since 0.5
 	 *
+	 * @note: the new ParserOutput will be registered as a watcher with $options by
+	 *        calling $options->registerWatcher( array( $parserOutput, 'recordOption' ) ).
+	 *
 	 * @param EntityRevision $entityRevision
-	 * @param bool $editable
+	 * @param ParserOptions $options
 	 * @param bool $generateHtml
 	 *
 	 * @return ParserOutput
 	 */
 	public function getParserOutput(
 		EntityRevision $entityRevision,
-		$editable = true,
+		ParserOptions $options,
 		$generateHtml = true
 	) {
 		$parserOutput = new ParserOutput();
+		$options->registerWatcher( array( $parserOutput, 'recordOption' ) );
+
+		// @note: SIDE EFFECT: the call to $options->getUserLang() effectively splits
+		// the parser cache. It gets reported to the ParserOutput which is registered
+		// as a watcher to $options above.
+		if ( $options->getUserLang() !== $this->languageCode ) {
+			// The language requested by $parserOptions is different from what
+			// this generator was configured for. This indicates an inconsistency.
+			throw new InvalidArgumentException( 'Unexpected user language in ParserOptions' );
+		}
 
 		$entity = $entityRevision->getEntity();
 
@@ -120,6 +135,8 @@ class EntityParserOutputGenerator {
 		else {
 			$snaks = array();
 		}
+
+		$editable = $options->getEditSection();
 
 		$usedEntityIds = $this->referencedEntitiesFinder->findSnakLinks( $snaks );
 		$entityInfo = $this->getEntityInfo( $usedEntityIds );
