@@ -48,15 +48,6 @@ function apply_repo_settings {
   fi
 }
 
-function apply_common_settings {
-  echo 'error_reporting(E_ALL| E_STRICT);' >> LocalSettings.php
-  echo 'ini_set("display_errors", 1);' >> LocalSettings.php
-  echo '$wgShowExceptionDetails = true;' >> LocalSettings.php
-  echo '$wgDevelopmentWarnings = true;' >> LocalSettings.php
-  echo '$wgLanguageCode = "'$LANG'";' >> LocalSettings.php
-  echo '$wgDebugLogFile = "mw-debug.log";' >> LocalSettings.php
-}
-
 function apply_experimental_settings {
   echo "define( 'WB_EXPERIMENTAL_FEATURES', $EXPERIMENTAL );" >> LocalSettings.php
 }
@@ -65,7 +56,6 @@ cd $WORKSPACE
 
 echo '<?php' >> LocalSettings.php
 
-apply_common_settings
 apply_experimental_settings
 
 if [ "$REPO" = "repo" ]
