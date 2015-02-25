@@ -2,9 +2,10 @@
 
 namespace Wikibase;
 
-use Language;
+use Html;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\LanguageNameLookup;
 
 /**
  * Class representing the disambiguation of a list of WikibaseItems.
@@ -20,14 +21,19 @@ use Wikibase\Lib\EntityIdFormatter;
 class ItemDisambiguation {
 
 	/**
-	 * @var string
+	 * @var LanguageNameLookup
 	 */
-	protected $searchLangCode;
+	private $languageNameLookup;
 
 	/**
 	 * @var string
 	 */
-	protected $userLangCode;
+	private $searchLangCode;
+
+	/**
+	 * @var string
+	 */
+	private $userLangCode;
 
 	/**
 	 * @var EntityIdFormatter
@@ -39,13 +45,20 @@ class ItemDisambiguation {
 	 *
 	 * @param string $searchLangCode The language the search was performed for.
 	 * @param string $userLangCode The user's interface language.
+	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityIdFormatter $linkFormatter A formatter for generating HTML links for a given EntityId.
 	 */
-	public function __construct( $searchLangCode, $userLangCode, EntityIdFormatter $linkFormatter ) {
+	public function __construct(
+		$searchLangCode,
+		$userLangCode,
+		LanguageNameLookup $languageNameLookup,
+		EntityIdFormatter $linkFormatter
+	) {
 		$this->searchLangCode = $searchLangCode;
 		$this->userLangCode = $userLangCode;
 
 		$this->linkFormatter = $linkFormatter;
+		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
@@ -87,7 +100,7 @@ class ItemDisambiguation {
 
 		$result .= $this->getDescriptionHtml( $item, $userLang );
 
-		$result = \Html::rawElement( 'li', array( 'class' => 'wikibase-disambiguation' ), $result );
+		$result = Html::rawElement( 'li', array( 'class' => 'wikibase-disambiguation' ), $result );
 
 		return $result;
 	}
@@ -104,7 +117,7 @@ class ItemDisambiguation {
 	private function getLabelHtml( Item $item, $language ) {
 		$label = $item->getLabel( $language );
 
-		$labelElement = \Html::element(
+		$labelElement = Html::element(
 			'span',
 			array( 'class' => 'wb-itemlink-query-lang', 'lang' => $language ),
 			$label
@@ -112,7 +125,7 @@ class ItemDisambiguation {
 
 		$msg = wfMessage( 'wikibase-itemlink-userlang-wrapper' )
 			->rawParams(
-				\Language::fetchLanguageName( $language, $this->userLangCode ),
+				$this->languageNameLookup->getName( $language, $this->userLangCode ),
 				$labelElement
 			);
 
@@ -143,7 +156,7 @@ class ItemDisambiguation {
 
 			$html = $userLabel ? ' ' . $idLabel : '';
 		} else {
-			$descriptionElement = \Html::element(
+			$descriptionElement = Html::element(
 				'span',
 				array( 'class' => 'wb-itemlink-description' ),
 				$description
