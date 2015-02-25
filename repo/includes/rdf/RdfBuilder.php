@@ -348,8 +348,9 @@ class RdfBuilder {
 		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
 		$dataResource->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
 
-		if( $this->shouldProduce( RdfProducer::PRODUCE_VERSION_INFO ) ) { //FIXME: why should this be optional?
-			$dataResource->addResource( self::NS_CC . ':license', self::LICENSE ); //FIXME: the license should always be included.
+		if( $this->shouldProduce( RdfProducer::PRODUCE_VERSION_INFO ) ) {
+			// Dumps don't need version/license info for each entity, since it is included in the dump header
+			$dataResource->addResource( self::NS_CC . ':license', self::LICENSE );
 			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
 		}
 
@@ -524,9 +525,11 @@ class RdfBuilder {
 			}
 
 			$rank = $statement->getRank();
-			if( !empty( self::$rankMap[$rank] ) ) { //FIXME: use isset instead of empty.
+			if( isset( self::$rankMap[$rank] ) ) {
 				$statementResource->addResource( self::WIKIBASE_RANK_QNAME, self::$rankMap[$rank] );
-			} //FIXME: else wfLogWarning
+			} else {
+				wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );
+			}
 		}
 	}
 
@@ -590,9 +593,9 @@ class RdfBuilder {
 	 * @param DataValue $value
 	 * @param array $props List of properties
 	 */
-	private function addExpandedValue( EasyRdf_Resource $target, $propertyValueQName, DataValue $value, array $props ) {
-		$node = $this->graph->newBNode( array( self::WIKIBASE_VALUE_QNAME ) ); //TODO: avoid bnode, use a hash based qname, like WDT does
-		$target->addResource( $propertyValueQName."-value", $node );
+	private function addExpandedValue( EasyRdf_Resource $target, $propertyValueQName, DataValue $value, array $props) {
+		$node = $this->graph->resource( self::NS_VALUE . ":" . $value->getHash(), self::WIKIBASE_VALUE_QNAME );
+		$target->addResource( $propertyValueQName."-value", $node);
 		foreach( $props as $prop => $type ) {
 			$getter = "get" . ucfirst( $prop );
 			$data = $value->$getter();
