@@ -2,9 +2,12 @@
 
 namespace Wikibase\Test;
 
+use MediaWikiTestCase;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemDisambiguation;
+use Wikibase\Lib\LanguageNameLookup;
 
 /**
  * @covers Wikibase\ItemDisambiguation
@@ -17,7 +20,7 @@ use Wikibase\ItemDisambiguation;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ItemDisambiguationTest extends \PHPUnit_Framework_TestCase {
+class ItemDisambiguationTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param string $searchLanguageCode
@@ -37,6 +40,7 @@ class ItemDisambiguationTest extends \PHPUnit_Framework_TestCase {
 		return new ItemDisambiguation(
 			$searchLanguageCode,
 			$userLanguageCode,
+			new LanguageNameLookup(),
 			$entityIdFormatter
 		);
 	}
@@ -123,7 +127,7 @@ class ItemDisambiguationTest extends \PHPUnit_Framework_TestCase {
 		$html = $disambig->getHTML( $items );
 
 		foreach ( $matchers as $key => $matcher ) {
-			\MediaWikiTestCase::assertTag( $matcher, $html, "Failed to match HTML output with tag '{$key}'" );
+			MediaWikiTestCase::assertTag( $matcher, $html, "Failed to match HTML output with tag '{$key}'" );
 		}
 	}
 

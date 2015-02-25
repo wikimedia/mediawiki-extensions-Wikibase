@@ -4,12 +4,10 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Language;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -187,6 +185,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		$disambiguationList = new ItemDisambiguation(
 			$languageCode,
 			$this->getContext()->getLanguage()->getCode(),
+			$this->languageNameLookup,
 			$linkFormatter
 		);
 
