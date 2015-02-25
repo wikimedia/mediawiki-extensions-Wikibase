@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c156fa5e",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-25T16:56:55Z",
+      "side": 1,
+      "message": "It\u0027s kind of strange that a Renderer would use an Interactor. Intuition tells me that it should be the other way around. This \"renderer\" is really also an interactor or handler...\n\nAll it does is turning exceptions into a status. I think this class should be folded into the Interactor, or into the hook (or parser function) handler that calls it.",
+      "revId": "dd4e34d38fab662730951abc5d0346e32b88e478",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
