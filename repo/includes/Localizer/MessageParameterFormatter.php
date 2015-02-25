@@ -10,8 +10,8 @@ use ValueFormatters\NumberLocalizer;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\MediaWikiNumberLocalizer;
-use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * ValueFormatter for formatting objects that may be encountered in
@@ -28,9 +28,9 @@ class MessageParameterFormatter implements ValueFormatter {
 	private $dataValueFormatter;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityIdFormatter
 	 */
-	private $entityTitleLookup;
+	private $entityIdFormatter;
 
 	/**
 	 * @var SiteStore
@@ -49,18 +49,18 @@ class MessageParameterFormatter implements ValueFormatter {
 
 	/**
 	 * @param ValueFormatter $dataValueFormatter A formatter for turning DataValues into wikitext.
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityIdFormatter $entityIdFormatter An entity id formatter returning wikitext.
 	 * @param SiteStore $sites
 	 * @param Language $language
 	 */
 	public function __construct(
 		ValueFormatter $dataValueFormatter,
-		EntityTitleLookup $entityTitleLookup,
+		EntityIdFormatter $entityIdFormatter,
 		SiteStore $sites,
 		Language $language
 	) {
 		$this->dataValueFormatter = $dataValueFormatter;
-		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityIdFormatter = $entityIdFormatter;
 		$this->sites = $sites;
 		$this->language = $language;
 
@@ -129,13 +129,7 @@ class MessageParameterFormatter implements ValueFormatter {
 	 * @return string The formatted ID (as a wikitext link).
 	 */
 	private function formatEntityId( EntityId $entityId ) {
-		// @todo: this should use TitleValue + MediaWikiPageLinkRenderer!
-		$title = $this->entityTitleLookup->getTitleForId( $entityId );
-
-		$target = $title->getFullText();
-		$text = wfEscapeWikiText( $entityId->getSerialization() );
-
-		return "[[$target|$text]]";
+		return $this->entityIdFormatter->formatEntityId( $entityId );
 	}
 
 	/**
