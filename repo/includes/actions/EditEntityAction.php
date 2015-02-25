@@ -235,13 +235,13 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $title Message key for page title
 	 * @param Status $status The status to report.
-	 *
-	 * @todo: would be handy to have this in OutputPage
 	 */
-	protected function showStatusErrorsPage( $title, Status $status ) {
-		$this->getOutput()->prepareErrorPage( $this->msg( $title ), $this->msg( 'errorpagetitle' ) );
+	protected function showUndoErrorPage( Status $status ) {
+		$this->getOutput()->prepareErrorPage(
+			$this->msg( 'wikibase-undo-revision-error' ),
+			$this->msg( 'errorpagetitle' )
+		);
 
 		$this->getOutput()->addWikiText( $status->getMessage()->text() );
 
@@ -274,7 +274,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$revisions = $this->loadRevisions();
 		if ( !$revisions->isOK() ) {
-			$this->showStatusErrorsPage( 'wikibase-undo-revision-error', $revisions ); //TODO: define message
+			$this->showUndoErrorPage( $revisions );
 			return;
 		}
 

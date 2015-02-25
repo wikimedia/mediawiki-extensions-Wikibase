@@ -75,7 +75,7 @@ class SubmitEntityAction extends EditEntityAction {
 
 		$revisions = $this->loadRevisions();
 		if ( !$revisions->isOK() ) {
-			$this->showStatusErrorsPage( 'wikibase-undo-revision-error', $revisions );
+			$this->showUndoErrorPage( $revisions );
 			return;
 		}
 
@@ -129,7 +129,7 @@ class SubmitEntityAction extends EditEntityAction {
 		if ( $status->isOK() ) {
 			$this->getOutput()->redirect( $title->getFullUrl() );
 		} else {
-			$this->showStatusErrorsPage( 'wikibase-undo-title', $status );
+			$this->showUndoErrorPage( $status );
 		}
 	}
 
