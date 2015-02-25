@@ -103,11 +103,16 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	protected function newSpecialPage() {
 		$page = new SpecialItemDisambiguation();
 
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->any() )
+			->method( 'getName' )
+			->will( $this->returnValue( 'LANGUAGE NAME' ) );
+
 		$page->initServices(
 			$this->getTermIndex(),
 			$this->getEntityLookup(),
 			$this->getEntityTitleLookup(),
-			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' )
+			$languageNameLookup
 		);
 
 		return $page;
