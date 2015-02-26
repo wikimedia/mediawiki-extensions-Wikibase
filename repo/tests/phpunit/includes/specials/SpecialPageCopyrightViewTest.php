@@ -10,11 +10,13 @@ use Wikibase\Repo\Specials\SpecialPageCopyrightView;
  * @covers Wikibase\Repo\Specials\SpecialPageCopyrightView
  *
  * @group Wikibase
+ * @group WikibaseRepo
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SpecialPageCopyrightViewTest extends \PHPUnit_Framework_TestCase {
+class SpecialPageCopyrightViewTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider getHtmlProvider
