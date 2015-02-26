@@ -9,6 +9,10 @@ use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 /**
  * @covers Wikibase\Lib\Store\EntityRetrievingTermLookup
  *
+ * @group Wikibase
+ * @group WikibaseLib
+ * @group WikibaseStore
+ *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler

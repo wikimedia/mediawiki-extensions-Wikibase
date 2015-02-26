@@ -13,6 +13,10 @@ use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 /**
  * @covers Wikibase\Lib\Store\EntityInfo
  *
+ * @group Wikibase
+ * @group WikibaseLib
+ * @group WikibaseStore
+ *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */

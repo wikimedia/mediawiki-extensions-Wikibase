@@ -8,6 +8,10 @@ use Wikibase\Lib\Store\EntityTermLookup;
 /**
  * @covers Wikibase\Lib\Store\EntityTermLookup
  *
+ * @group Wikibase
+ * @group WikibaseLib
+ * @group WikibaseStore
+ *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
