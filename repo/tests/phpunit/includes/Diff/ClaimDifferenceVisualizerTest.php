@@ -27,6 +27,7 @@ use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseClaim
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
