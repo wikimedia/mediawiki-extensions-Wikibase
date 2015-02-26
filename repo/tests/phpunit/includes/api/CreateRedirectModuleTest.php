@@ -28,11 +28,12 @@ use Wikibase\Test\MockRepository;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class CreateRedirectModuleTest extends \PHPUnit_Framework_TestCase {
+class CreateRedirectModuleTest extends \MediaWikiTestCase {
 
 	/**
 	 * @var MockRepository|null

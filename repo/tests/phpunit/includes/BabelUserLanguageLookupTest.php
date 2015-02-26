@@ -10,11 +10,12 @@ use User;
  * @group Wikibase
  * @group WikibaseRepo
  * @group EntityView
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
-class BabelUserLanguageLookupTest extends \PHPUnit_Framework_TestCase {
+class BabelUserLanguageLookupTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $subject

@@ -11,6 +11,7 @@ use Wikibase\SettingsArray;
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseRepoTest
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

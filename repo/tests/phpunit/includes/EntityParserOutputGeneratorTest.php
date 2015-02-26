@@ -20,11 +20,12 @@ use Wikibase\ValuesFinder;
  *
  * @group Wikibase
  * @group WikibaseRepo
+ * @group Database
  *
  * @license GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
+class EntityParserOutputGeneratorTest extends \MediaWikiTestCase {
 
 	private static $html = '<html>Nyan data!!!</html>';
 	private static $placeholders = array( 'key' => 'value' );

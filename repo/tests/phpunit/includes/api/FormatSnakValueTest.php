@@ -17,7 +17,7 @@ use Wikibase\Lib\SnakFormatter;
  * @group WikibaseAPI
  * @group WikibaseRepo
  * @group FormatSnakValueAPI
- *
+ * @group Database
  * @group medium
  *
  * @licence GNU GPL v2+

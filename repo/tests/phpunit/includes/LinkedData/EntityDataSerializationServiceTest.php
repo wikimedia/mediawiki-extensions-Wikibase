@@ -16,11 +16,12 @@ use Wikibase\Repo\LinkedData\EntityDataSerializationService;
  * @group Wikibase
  * @group WikibaseEntityData
  * @group WikibaseRepo
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
+class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
