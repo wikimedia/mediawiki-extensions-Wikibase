@@ -8,6 +8,14 @@ use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
+ * @covers Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases
+ *
+ * @group Wikibase
+ * @group WikibaseRepo
+ * @group SpecialPage
+ * @group WikibaseSpecialPage
+ * @group Database
+ *
  * @since 0.5
  *
  * @licence GNU GPL v2+

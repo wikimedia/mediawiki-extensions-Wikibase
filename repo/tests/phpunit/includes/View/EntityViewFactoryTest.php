@@ -27,6 +27,9 @@ use Wikibase\Template\TemplateRegistry;
  * @uses Wikibase\Template\TemplateFactory
  * @uses Wikibase\Template\TemplateRegistry
  *
+ * @group Wikibase
+ * @group WikibaseRepo
+ *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

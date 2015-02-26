@@ -9,6 +9,8 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @covers Wikibase\EntityParserOutputGeneratorFactory
  *
+ * @group Wikibase
+ * @group WikibaseRepo
  * @group Database
  *
  * @licence GNU GPL v2+
