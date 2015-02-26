@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_db949ded",
+        "filename": "docs/json.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-26T18:01:43Z",
+      "side": 1,
+      "message": "where did the spaces go?...",
+      "revId": "9c2c5174ea9d6ff7b6a9f5cfd6a82535751c86d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
