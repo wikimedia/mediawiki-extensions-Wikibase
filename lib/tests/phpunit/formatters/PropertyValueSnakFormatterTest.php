@@ -24,11 +24,12 @@ use Wikibase\Lib\UnDeserializableValueFormatter;
  * @group DataValueExtensions
  * @group WikibaseLib
  * @group Wikibase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
+class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider constructorErrorsProvider
