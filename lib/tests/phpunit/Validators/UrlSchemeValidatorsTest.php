@@ -14,11 +14,12 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseValidators
+ * @group Database
  *
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */
-class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
+class UrlSchemeValidatorsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider validUrlProvider
