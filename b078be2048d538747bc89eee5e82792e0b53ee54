@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_05b875e0",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-26T08:06:50Z",
+      "side": 1,
+      "message": "This is quite specific on MonolingualTextValue and I am sure updating the documentation will be forgotten if there happen to be any changes. Maybe something like \"[...] for limiting the list of available languages for particular `jQuery.valueview.Expert` instances like the `Expert` responsible for `MonoLingualTextValue`s.",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_652fe93a",
         "filename": "view/resources/ViewFactory.js",
         "patchSetId": 6
