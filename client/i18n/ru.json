@@ -11,11 +11,11 @@
 			"Putnik",
 			"Soul Train",
 			"Александр Сигачёв",
-			"Умар"
+			"Умар",
+			"Dicto23456"
 		]
 	},
 	"wikibase-client-desc": "Клиент для расширения Wikibase",
-	"specialpages-group-wikibaseclient": "Клиент {{grammar:genitive|{{WBREPONAME}}}}",
 	"tooltip-t-wikibase": "Ссылка на связанный элемент репозитория данных",
 	"wikibase-after-page-move": "Чтобы исправить на переименованной странице языковые ссылки, вы можете также [$1  обновить] связанный элемент {{grammar:genitive|{{WBREPONAME}}}}.",
 	"wikibase-after-page-move-queued": "Связанный с этой страницей [$1 элемент {{grammar:genitive|{{WBREPONAME}}}}] вскоре будет автоматически обновлён.",
@@ -32,6 +32,7 @@
 	"wikibase-dataitem": "Элемент {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Править ссылки",
 	"wikibase-editlinkstitle": "Править межъязыковые ссылки",
+	"wikibase-addlinkstitle": "Добавить интервики-ссылки",
 	"wikibase-linkitem-addlinks": "Добавить ссылки",
 	"wikibase-linkitem-alreadylinked": "Cтранице, c которую вы хотели установить связь, уже прикреплена к [$1 элементу] в центральном хранилище данных, который ссылается на $2 на этом сайте. Элементы могут иметь только по одной прикреплённой странице с каждого сайта. Пожалуйста, выберите другую страницу для установления связи.",
 	"wikibase-linkitem-close": "Закрыть диалог и перезагрузить страницу",
@@ -53,6 +54,7 @@
 	"wikibase-rc-show-wikidata-pref": "Показать изменения {{grammar:genitive|{{WBREPONAME}}}} в списке свежих правок",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "Правка {{grammar:genitive|{{WBREPONAME}}}}",
+	"wikibase-replicationnote": "Пожалуйста, обратите внимание, что может пройти несколько минут, пока изменения станут видны во всех вики-проектах",
 	"wikibase-watchlist-show-changes-pref": "Показать изменения в {{grammar:genitive|{{WBREPONAME}}}} в списке наблюдения",
 	"wikibase-error-serialize-error": "Не удалось сериализовать данные.",
 	"wikibase-error-invalid-entity-id": "Введённый идентификатор не известен системе. Используйте один из действующих идентификаторов сущностей.",

@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Nullzero"
+			"Nullzero",
+			"Horus"
 		]
 	},
 	"wikibase-editlinks": "แก้ไขลิงก์ข้ามภาษา",
+	"wikibase-editlinkstitle": "แก้ไขลิงก์ระหว่างภาษา",
 	"wikibase-linkitem-addlinks": "เพิ่มลิงก์ข้ามภาษา",
+	"wikibase-rc-hide-wikidata-show": "แสดง",
 	"wikibase-rc-wikibase-edit-letter": "ด",
-	"wikibase-rc-wikibase-edit-title": "การแก้ไขจากวิกิสนเทศ"
+	"wikibase-rc-wikibase-edit-title": "การแก้ไข {{WBREPONAME}}"
 }

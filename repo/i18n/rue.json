@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Tkalyn"
+			"Tkalyn",
+			"Dicto23456"
 		]
 	},
 	"wikibase-edit": "едітовати",
+	"wikibase-add": "додати",
 	"wikibase-sitelink-page-edit-placeholder": "сторінка",
 	"wikibase-terms": "Іншыма языками",
 	"wikibase-itembytitle-lookup-page": "Сторінка:",

@@ -71,7 +71,7 @@
 	"wikibase-statementview-rank-preferred": "Προτιμώμενη βαθμίδα",
 	"wikibase-statementview-rank-normal": "Κανονική βαθμίδα",
 	"wikibase-statementview-rank-deprecated": "Παρωχημένη κατάταξη",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|πηγή|πηγές}}",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|παραπομπή|παραπομπές}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|μία πηγή|$1 πηγές}} δεν έχουν ακόμη αποθηκευτεί",
 	"wikibase-snakview-property-input-placeholder": "ιδιότητα",
 	"wikibase-snakview-choosesnaktype": "Επιλέξτε έναν τύπο τιμών.",

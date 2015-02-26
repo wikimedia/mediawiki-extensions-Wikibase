@@ -5,7 +5,6 @@
 		]
 	},
 	"wikibase-client-desc": "Vikibaasi-lisa klient",
-	"specialpages-group-wikibaseclient": "Vikiandmete klient",
 	"tooltip-t-wikibase": "Link andmehoidla seonduva üksuse juurde",
 	"wikibase-after-page-move": "Võid [$1 värskendada] ka vastavat Vikiandmete üksust, et teisaldatud lehekülje keelelingid jääksid töökorda.",
 	"wikibase-after-page-move-queued": "Selle leheküljega seotud [$1 Vikiandmete üksus] uuendatakse peagi automaatselt.",
@@ -24,6 +23,7 @@
 	"wikibase-dataitem": "Andmeüksus",
 	"wikibase-editlinks": "Redigeeri linke",
 	"wikibase-editlinkstitle": "Redigeeri keeltevahelisi linke",
+	"wikibase-addlinkstitle": "Lisa keeltevahelised lingid",
 	"wikibase-linkitem-addlinks": "Lisa lingid",
 	"wikibase-linkitem-alreadylinked": "Lehekülg, mida proovisid linkida on juba seotud keskse andmehoidla [$1 üksusega] ja viitab siin võrgukohas leheküljele $2. Üksusega saab siduda igast võrgukohast vaid ühe lehekülje. Palun vali muu lehekülg, millele linkida.",
 	"wikibase-linkitem-close": "Sule dialoogikast ja laadi lehekülg uuesti",

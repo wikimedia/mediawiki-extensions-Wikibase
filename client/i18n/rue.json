@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Tkalyn"
+			"Tkalyn",
+			"Dicto23456"
 		]
 	},
 	"wikibase-editlinks": "Едітовати одказы",
@@ -16,5 +17,7 @@
 	"wikibase-linkitem-confirmitem-button": "Підтвердити",
 	"wikibase-linkitem-success-link": "Сторінкы ся успішно звязали. Елемент з тыми одказами найдете в [$1 централнім усховищі даных].",
 	"wikibase-rc-hide-wikidata-hide": "Сховати",
-	"wikibase-rc-hide-wikidata-show": "Вказати"
+	"wikibase-rc-hide-wikidata-show": "Вказати",
+	"wikibase-replicationnote": "Усвідомте собі, же може то тырвати дакілько минут, покы зміны набудуть чінности на вшыткых вікі.",
+	"wikibase-otherprojects": "Іншы проєкты"
 }
