@@ -15,11 +15,12 @@ use Wikibase\Lib\SnakFormatter;
  * @group DataValueExtensions
  * @group WikibaseLib
  * @group Wikibase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MessageSnakFormatterTest extends \PHPUnit_Framework_TestCase {
+class MessageSnakFormatterTest extends \MediaWikiTestCase {
 
 	public function testFormatSnak() {
 		//TODO: Find a better message for testing, one that actually contains wikitext.

@@ -14,11 +14,12 @@ use Wikibase\Lib\CommonsLinkFormatter;
  * @group DataValueExtensions
  * @group WikibaseLib
  * @group Wikibase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Adrian Lang
  */
-class CommonsLinkFormatterTest extends \PHPUnit_Framework_TestCase {
+class CommonsLinkFormatterTest extends \MediaWikiTestCase {
 
 	public function commonsLinkFormatProvider() {
 		$options = new FormatterOptions();
