@@ -19,6 +19,7 @@ use Wikibase\Lib\Localizer\ParseExceptionLocalizer;
  * @group Wikibase
  * @group WikibaseValidators
  * @group WikibaseAPI
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

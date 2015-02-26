@@ -3,8 +3,6 @@
 namespace Wikibase\Test;
 
 use MediaWikiSite;
-use MediaWikiTestCase;
-use PHPUnit_Framework_TestCase;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -26,12 +24,13 @@ use Wikibase\Template\TemplateRegistry;
  *
  * @group Wikibase
  * @group WikibaseRepo
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
+class SiteLinksViewTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider getHtmlProvider

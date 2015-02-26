@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test;
 
-use MediaWikiTestCase;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemDisambiguation;
@@ -16,11 +14,12 @@ use Wikibase\Lib\LanguageNameLookup;
  * @group WikibaseRepo
  * @group SpecialPage
  * @group WikibaseSpecialPage
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ItemDisambiguationTest extends PHPUnit_Framework_TestCase {
+class ItemDisambiguationTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $searchLanguageCode

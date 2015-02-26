@@ -12,11 +12,12 @@ use Wikibase\OutputPageJsConfigBuilder;
  *
  * @group WikibaseRepo
  * @group Wikibase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class OutputPageJsConfigBuilderTest extends \PHPUnit_Framework_TestCase {
+class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider buildProvider

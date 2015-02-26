@@ -11,6 +11,7 @@ use Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain;
  * @group WikibaseRepo
  * @group SpecialPage
  * @group WikibaseSpecialPage
+ * @group Database
  *
  * @licence GNU GPL v2+
  */
