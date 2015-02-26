@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0022a34f",
+        "filename": "lib/includes/formatters/CommonsLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-26T11:59:05Z",
+      "side": 1,
+      "message": "Global state is evil! Please inject exactly the information you need via the FormatterOptions (in this case, you need the Site object).\n\nAccessing the settings and the global Sites instance should be doen further up the stack, ideally in the app level factory (WikibaseRepo). The info would need to be handed down via WikibaseValueFormatterBuilders, which doesn\u0027t make this very easy at the moment. You\u0027d need to introduce a newCommonsLinkFormatter method, similar to the  newHtmlTimeFormatter method.\n\nHm, the class should really be renamed to MediaLinkFormatter, then.",
+      "revId": "e0e0057d0be715dbaf5f6265b42cabe69cf116d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e0e9a7e1",
+        "filename": "lib/includes/formatters/CommonsLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-26T11:59:05Z",
+      "side": 1,
+      "message": "getSite( $commonsSiteId ) will return null if the site isn\u0027t known, which causes a fatal error here.",
+      "revId": "e0e0057d0be715dbaf5f6265b42cabe69cf116d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c01fcb0b",
+        "filename": "lib/includes/formatters/CommonsLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-26T11:59:05Z",
+      "side": 1,
+      "message": "Can\u0027t you use Site::getPageUrl() for this?",
+      "revId": "e0e0057d0be715dbaf5f6265b42cabe69cf116d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_60def745",
+        "filename": "repo/config/Wikibase.example.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-02-26T11:59:05Z",
+      "side": 1,
+      "message": "Please add this to Wikibase.default.php instead. No need to have it in the examples.\n\nAlso, this means that we now *require* an entry called commonswiki to be present in the sites table. That\u0027s a new requirement, and not trivial to meet for a new installation. The code that gets the Site record should probably fall back to hard coded info if no site info is set for commonswiki.",
+      "revId": "e0e0057d0be715dbaf5f6265b42cabe69cf116d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
