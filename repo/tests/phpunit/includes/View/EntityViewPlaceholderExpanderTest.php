@@ -27,6 +27,7 @@ use Wikibase\Template\TemplateRegistry;
  * @group Wikibase
  * @group WikibaseRepo
  * @group EntityView
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
