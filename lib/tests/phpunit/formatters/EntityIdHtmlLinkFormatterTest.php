@@ -19,11 +19,12 @@ use Wikibase\Lib\Store\LabelLookup;
  * @group ValueFormatters
  * @group WikibaseLib
  * @group Wikibase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class EntityIdHtmlLinkFormatterTest extends PHPUnit_Framework_TestCase {
+class EntityIdHtmlLinkFormatterTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param Term $term

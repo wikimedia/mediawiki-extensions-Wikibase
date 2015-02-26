@@ -36,6 +36,7 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
  * @group DataValueExtensions
  * @group WikibaseLib
  * @group Wikibase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
