@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e7c4fa4_a510a1f8",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-26T07:55:36Z",
+      "side": 1,
+      "message": "While there is no \"official\" release, there is \"common agreement\" we are (still) working on 0.5. The release schema is kind of ridiculous at the moment; However, placing an @since would allow to easily search-and-replace the tag\u0027s value as soon as this constructor moves to a dedicated View component.",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_652fe93a",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-26T07:55:36Z",
+      "side": 1,
+      "message": "Please do not put TODOs in the constructor/function-level documentation. The documentation here should be \"end-user\" only. (I admit that being a personal perception.) Maybe put it inline into the constructor? I never got accustomed to TODOs containing the word \"maybe\"... ;)",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_4ba780ba",
         "filename": "view/resources/ViewFactory.js",
         "patchSetId": 6
@@ -31,6 +65,142 @@
       "side": 1,
       "message": "It is. Do you have a suggestion how to mitigate this? I tried out passing in a ValueViewBuilder instead of constructing it in this class. Five of these eight dependencies are only used for constructing the ValueViewBuilder. However, I would like to use the messageProvider in the EntityViews as well, so that\u0027s one less we could remove when passing ValueViewBuilder. If we would have an ExpertFactory, contentLanguages could be a dependency of that factory, instead of being passed to the ValueViewBuilder. That would mean we could replace expertStore and contentLanguages with expertFactory.\n\nAny general ideas how to approach such situations?",
       "parentUuid": "6e7c4fa4_4ba780ba",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_05e155fa",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-26T07:55:36Z",
+      "side": 1,
+      "message": "Did not notice the alphabetic ordering at first glimpse. My concern is that we will break every use of that factory as soon as we insert another parameter as to the alphabetical ordering. If there is no agreement on how to order the parameters as well as we should not waste time on figuring that out, I propose putting all the parameters into a single object that is passed as parameter -- just like the widgets do it.",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c5eefdea",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-26T07:55:36Z",
+      "side": 1,
+      "message": "I guess the return value can be specified more specifically as {jQuery.wikibase.entityview}.",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e5e9b9e1",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-26T07:55:36Z",
+      "side": 1,
+      "message": "@private",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_85f485ba",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-26T07:55:36Z",
+      "side": 1,
+      "message": "@private",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_25e49109",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-26T07:55:36Z",
+      "side": 1,
+      "message": "@throws",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c5f83dc2",
+        "filename": "view/tests/qunit/ViewFactory.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-26T07:55:36Z",
+      "side": 1,
+      "message": "Is there a reason why QUnit and sinon are not passed in?",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a5f981c2",
+        "filename": "view/tests/qunit/ViewFactory.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-26T07:55:36Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be better to use an actual jQuery object as specified in the parameter documentation?",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_85fec5a9",
+        "filename": "view/tests/qunit/ViewFactory.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-02-26T07:55:36Z",
+      "side": 1,
+      "message": "ValueViewBuilder should explicitly be specified in the Resource Loader module dependecies.",
       "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
