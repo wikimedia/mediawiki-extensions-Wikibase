@@ -52,6 +52,24 @@
       "revId": "bfae8c0345312bb1140fb611ae55a2a18d0f0c41",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c55b5d87",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-02-26T09:34:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_39ccd064",
+      "revId": "bfae8c0345312bb1140fb611ae55a2a18d0f0c41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
