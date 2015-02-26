@@ -16,11 +16,12 @@ use Wikibase\Validators\EntityConstraintProvider;
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpsMergeTest extends \MediaWikiTestCase {
 
 	/**
 	 * @var ChangeOpTestMockProvider

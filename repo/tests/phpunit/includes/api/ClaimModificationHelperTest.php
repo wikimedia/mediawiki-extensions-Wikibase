@@ -22,11 +22,12 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseAPI
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
+class ClaimModificationHelperTest extends \MediaWikiTestCase {
 
 	public function testValidGetEntityIdFromString() {
 		$validEntityIdString = 'q55';
