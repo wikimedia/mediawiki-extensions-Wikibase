@@ -4,6 +4,7 @@ namespace Wikibase\Client\Scribunto;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
+use ParserOptions;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -48,11 +49,6 @@ class WikibaseLuaBindings {
 	private $settings;
 
 	/**
-	 * @var string
-	 */
-	private $siteId;
-
-	/**
 	 * @var LabelLookup
 	 */
 	private $labelLookup;
@@ -63,12 +59,23 @@ class WikibaseLuaBindings {
 	private $usageAccumulator;
 
 	/**
+	 * @var ParserOptions
+	 */
+	private $parserOptions;
+
+	/**
+	 * @var string
+	 */
+	private $siteId;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityLookup $entityLookup
 	 * @param SiteLinkLookup $siteLinkTable
 	 * @param SettingsArray $settings
 	 * @param LabelLookup $labelLookup
 	 * @param UsageAccumulator $usageAccumulator
+	 * @param ParserOptions $parserOptions
 	 * @param string $siteId
 	 */
 	public function __construct(
@@ -78,6 +85,7 @@ class WikibaseLuaBindings {
 		SettingsArray $settings,
 		LabelLookup $labelLookup,
 		UsageAccumulator $usageAccumulator,
+		ParserOptions $parserOptions,
 		$siteId
 	) {
 		$this->entityIdParser = $entityIdParser;
@@ -85,8 +93,9 @@ class WikibaseLuaBindings {
 		$this->siteLinkTable = $siteLinkTable;
 		$this->settings = $settings;
 		$this->labelLookup = $labelLookup;
-		$this->siteId = $siteId;
 		$this->usageAccumulator = $usageAccumulator;
+		$this->parserOptions = $parserOptions;
+		$this->siteId = $siteId;
 	}
 
 	/**
@@ -171,4 +180,17 @@ class WikibaseLuaBindings {
 		return $item->getSiteLinkList()->getBySiteId( $this->siteId )->getPageName();
 	}
 
+	/**
+	 * Get the user's language.
+	 * Side effect: Splits the parser cache by user language!
+	 *
+	 * @since 0.5
+	 *
+	 * @return string Language code
+	 */
+	public function getUserLang() {
+		// Note: We can't just inject the user language, as getting it from ParserOptions
+		// already splits the cache (which also is an intended side effect here).
+		return $this->parserOptions->getUserLang();
+	}
 }
