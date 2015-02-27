@@ -30,7 +30,7 @@
 	"wikibase-error-ui-no-external-page": "No se encontró el artículo especificado en el sitio correspondiente.",
 	"wikibase-error-ui-edit-conflict": "Hay un conflicto de edición. Por favor, vuelve a cargar y guarda de nuevo.",
 	"wikibase-timedetails-time": "Tiempo",
-	"wikibase-timedetails-isotime": "Fecha y hora en formato ISO",
+	"wikibase-timedetails-isotime": "Fecha y hora",
 	"wikibase-timedetails-timezone": "Huso horario",
 	"wikibase-timedetails-calendar": "Calendario",
 	"wikibase-timedetails-precision": "Precisión",

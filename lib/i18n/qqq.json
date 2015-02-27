@@ -36,7 +36,7 @@
 	"wikibase-quantitydetails-lowerbound": "Label used for the \"lower bound\" field of a quantity value when showing a detailed representation of the quantity, e.g. in a diff.",
 	"wikibase-quantitydetails-unit": "Label used for the \"unit\" field of a quantity value when showing a detailed representation of the quantity, e.g. in a diff.\n{{Identical|Unit}}",
 	"wikibase-timedetails-time": "Label used for the rendered version of a time value when showing a detailed representation of the time, e.g. in a diff.\n{{Identical|Time}}",
-	"wikibase-timedetails-isotime": "Label used for the \"isotime\" field of a time value when showing a detailed representation of the time, e.g. in a diff.",
+	"wikibase-timedetails-isotime": "Label used for the \"isotime\" field of a time value when showing a detailed representation of the time, e.g. in a diff.\n{{Identical|Timestamp}}",
 	"wikibase-timedetails-timezone": "Label used for the \"timezone\" field of a time value when showing a detailed representation of the time, e.g. in a diff.\n{{Identical|Time zone}}",
 	"wikibase-timedetails-calendar": "Label used for the \"calendar\" field of a time value when showing a detailed representation of the time, e.g. in a diff.\n{{Identical|Calendar}}",
 	"wikibase-timedetails-precision": "Label used for the \"precision\" field of a time value when showing a detailed representation of the time, e.g. in a diff.\n{{Identical|Precision}}",

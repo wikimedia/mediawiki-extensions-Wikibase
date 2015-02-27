@@ -18,6 +18,7 @@
 	"wikibase-error-autocomplete-response": "সার্ভারের প্রতিক্রিয়া: $1",
 	"wikibase-error-ui-no-external-page": "উল্লেখিত নিবন্ধ সংশ্লিষ্ট সাইটে খুঁজে পাওয়া যায়নি।",
 	"wikibase-error-ui-edit-conflict": "এখানে একটি সম্পাদনা দ্বন্দ্ব হয়েছে। দয়া করে পুনঃলোড করুন এবং আবার সংরক্ষণ করুন।",
+	"wikibase-timedetails-isotime": "সময়বার্তা",
 	"wikibase-sitelinks-wikipedia": "উইকিপিডিয়া",
 	"wikibase-sitelinks-sitename-columnheading": "ভাষা",
 	"wikibase-sitelinks-link-columnheading": "সংযুক্ত পাতা",
