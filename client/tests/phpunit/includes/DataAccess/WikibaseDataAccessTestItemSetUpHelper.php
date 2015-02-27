@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\Scribunto;
+namespace Wikibase\Client\Tests\DataAccess;
 
 use DataValues\DataValue;
 use DataValues\StringValue;
@@ -10,14 +10,12 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\SnakFactory;
 use Wikibase\Test\MockClientStore;
-use Wikibase\Test\MockRepository;
 
 /**
  * Helper class for Lua integration tests.
@@ -25,16 +23,15 @@ use Wikibase\Test\MockRepository;
  * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class WikibaseLuaIntegrationTestItemSetUpHelper {
+class WikibaseDataAccessTestItemSetUpHelper {
 
 	/**
 	 * @var MockRepository
 	 */
 	protected $mockRepository;
 
-	public function __construct() {
-		$clientStore = new MockClientStore( 'de' );
-		$this->mockRepository = $clientStore->getEntityLookup();
+	public function __construct( MockClientStore $mockClientStore ) {
+		$this->mockRepository = $mockClientStore->getEntityLookup();
 	}
 
 	/**
@@ -43,7 +40,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	public function setUp() {
 		$siteLink = new SiteLink(
 			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' ),
-			'WikibaseClientLuaTest'
+			'WikibaseClientDataAccessTest'
 		);
 
 		if ( $this->mockRepository->getEntityIdForSiteLink( $siteLink ) ) {
@@ -85,7 +82,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 
 		$stringSnak2 = $this->getTestSnak(
 			$stringProperty->getId(),
-			new StringValue( 'This is clearly superior to the parser function' )
+			new StringValue( 'Lua is clearly superior to the parser function' )
 		);
 
 		$statement2 = $this->getTestStatement( $stringSnak2 );

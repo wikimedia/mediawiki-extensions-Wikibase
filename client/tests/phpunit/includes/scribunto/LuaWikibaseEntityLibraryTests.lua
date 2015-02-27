@@ -180,7 +180,7 @@ local tests = {
 	  expect = { 'Test all the code paths' }
 	},
 	{ name = 'mw.wikibase.entity.getSitelink integration 1', func = integrationTestGetSitelink, type='ToString',
-	  expect = { 'WikibaseClientLuaTest' }
+	  expect = { 'WikibaseClientDataAccessTest' }
 	},
 	{ name = 'mw.wikibase.entity.getSitelink integration 2', func = integrationTestGetSitelink, type='ToString',
 	  args = { 'fooSiteId' },
@@ -194,7 +194,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.entity.formatPropertyValues integration 2', func = integrationTestFormatPropertyValues,
 	  args = { { mw.wikibase.entity.claimRanks.RANK_PREFERRED, mw.wikibase.entity.claimRanks.RANK_NORMAL } },
-	  expect = { { label = 'LuaTestStringProperty', value = 'Lua :), This is clearly superior to the parser function' } }
+	  expect = { { label = 'LuaTestStringProperty', value = 'Lua :), Lua is clearly superior to the parser function' } }
 	},
 	{ name = 'mw.wikibase.entity.formatPropertyValues integration 3', func = integrationTestFormatPropertyValues,
 	  args = { { mw.wikibase.entity.claimRanks.RANK_TRUTH } },

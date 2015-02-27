@@ -17,6 +17,7 @@ if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
 use Language;
 use Title;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Test\MockClientStore;
 
 /**
@@ -69,6 +70,9 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 			'allowArbitraryDataAccess',
 			static::allowArbitraryDataAccess()
 		);
+
+		$testHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
+		$testHelper->setUp();
 	}
 
 	/**
@@ -80,13 +84,6 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 	 */
 	public static function suite( $className ) {
 		self::doMock();
-
-		static $setUp = false;
-		if ( !$setUp ) {
-			$testHelper = new WikibaseLuaIntegrationTestItemSetUpHelper();
-			$testHelper->setUp();
-			$setUp = true;
-		}
 
 		return parent::suite( $className );
 	}
@@ -123,7 +120,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 	 * @return Title
 	 */
 	protected function getTestTitle() {
-		return Title::newFromText( 'WikibaseClientLuaTest' );
+		return Title::newFromText( 'WikibaseClientDataAccessTest' );
 	}
 
 }
