@@ -5,13 +5,14 @@
 			"عثمان خان شاہ"
 		]
 	},
-	"tooltip-t-wikibase": "نورو ژبو کې تړل",
+	"tooltip-t-wikibase": "د نښلېدلي اومتوک زېرمتون توکي سره تړنه",
 	"wikibase-after-page-move-queued": "د [$1 {{WBREPONAME}} توکی] چې دې مخ سره تړل شوی هغه به په اتوماتيکه توگه ډېر ژر هممهاله شي.",
 	"wikibase-after-page-delete-queued": "د [$1 {{WBREPONAME}} توکی] چې دې مخ سره تړل شوی هغه به په اتوماتيکه توگه ډېر ژر هممهاله شي.",
 	"wikibase-comment-update": "{{WBREPONAME}} توکی بدل شو",
 	"wikibase-dataitem": "{{WBREPONAME}} توکی",
 	"wikibase-editlinks": "تړنې سمول",
 	"wikibase-editlinkstitle": "د ژبو خپلمنځي تړنې سمول",
+	"wikibase-addlinkstitle": "د ژبو خپلمنځي تړنې ورگډول",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "پټول",
 	"wikibase-rc-hide-wikidata-show": "ښکاره کول",
