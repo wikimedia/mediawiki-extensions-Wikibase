@@ -106,7 +106,8 @@ class DumpScript extends Maintenance {
 	}
 
 	private function createRdfDumper( $output ) {
-		$entitySerializer = new RdfSerializer( RdfSerializer::getFormat('ttl'),
+		\EasyRdf_Format::registerSerialiser('rdr', '\\Wikibase\\RdrSerializer');
+		$entitySerializer = new RdfSerializer( RdfSerializer::getFormat('rdr'),
 				$GLOBALS['wgCanonicalServer']."/entity/",
 				$GLOBALS['wgCanonicalServer']."/Special:EntityData/",
 				$this->wikibaseRepo->getSiteStore()->getSites(), $this->entityLookup,
