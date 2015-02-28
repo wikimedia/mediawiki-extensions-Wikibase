@@ -1,0 +1,27 @@
+@prefix entity: <http://acme.test/> .
+@prefix wikibase: <http://www.wikidata.org/ontology-0.0.1#> .
+@prefix data: <http://data.acme.test/> .
+@prefix schema: <http://schema.org/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+entity:Q3 a wikibase:Item .
+
+data:Q3 
+ a schema:Dataset ;
+ schema:about entity:Q3 ;
+ cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+ schema:softwareVersion "0.0.1" ;
+ schema:version 42 ;
+ schema:dateModified "2014-11-04T03:11:05Z"^^xsd:dateTime .
+
+<http://enwiki.acme.test/San%20Francisco> 
+ a schema:Article ;
+ schema:about entity:Q3 ;
+ schema:inLanguage "en" .
+
+<http://ruwiki.acme.test/%D0%A1%D0%B0%D0%BD%20%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%81%D0%BA%D0%BE> 
+ a schema:Article ;
+ schema:about entity:Q3 ;
+ schema:inLanguage "ru" .
+

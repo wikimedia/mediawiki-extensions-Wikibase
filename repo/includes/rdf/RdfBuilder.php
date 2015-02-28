@@ -606,6 +606,28 @@ class RdfBuilder {
 		}
 	}
 
+	private static $propTypes = array();
+
+	/**
+	 * Fetch the data type for property
+	 * @param EntityId $propertyId
+	 * @param string $typeId
+	 * @return string
+	 */
+	private function getDataType(EntityId $propertyId, $typeId) {
+		$id = $propertyId->getPrefixedId();
+		if( !isset(self::$propTypes[$id]) ) {
+			$property = $this->entityLookup->getEntity( $propertyId ); //FIXME: use PropertyDataTypeLookup!
+			if( empty($property) ) {
+				$dataType = $typeId;
+			} else {
+				$dataType = $property->getDataTypeId();
+			}
+			self::$propTypes[$id] = $dataType;
+		}
+		return self::$propTypes[$id];
+	}
+
 	/**
 	 * Adds the value of the given property to the RDF graph.
 	 *
@@ -621,10 +643,8 @@ class RdfBuilder {
 
 		$typeId = $value->getType();
 		if( $typeId == 'string' ) {
-			// Only strings have different types now, so we can save time but not asking
-			// for any other types
-			$property = $this->entityLookup->getEntity( $propertyId ); //FIXME: use PropertyDataTypeLookup!
-			$dataType = $property->getDataTypeId();
+			// only strings now have several data types
+			$dataType = $this->getDataType( $propertyId, $typeId );
 		} else {
 			$dataType = $typeId;
 		}
