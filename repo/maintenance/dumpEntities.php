@@ -199,6 +199,7 @@ abstract class DumpScript extends Maintenance {
 		$dumper->setShardingFilter( $shardingFactor, $shard );
 		$dumper->setEntityTypeFilter( $entityType );
 		$dumper->setBatchSize( $batchSize );
+		$dumper->setLimit( $limit );
 
 		$idStream = $this->makeIdStream( $entityType, $exceptionReporter );
 		$dumper->generateDump( $idStream );
