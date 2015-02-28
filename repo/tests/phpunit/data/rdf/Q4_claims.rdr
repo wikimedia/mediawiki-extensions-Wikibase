@@ -1,0 +1,78 @@
+@prefix entity: <http://acme.test/> .
+@prefix wikibase: <http://www.wikidata.org/ontology-0.0.1#> .
+@prefix wdt: <http://acme.test/assert/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix v: <http://acme.test/value/> .
+@prefix data: <http://data.acme.test/> .
+@prefix schema: <http://schema.org/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+
+entity:Q4 
+ a wikibase:Item ;
+ wdt:P2 entity:Q42 ;
+ wdt:P3 <http://commons.wikimedia.org/wiki/Special:FilePath/Universe.svg>, wikibase:Novalue ;
+ wdt:P4 "Point(12.345 67.89)"^^geo:wktLiteral ;
+ wdt:P5 "превед"@ru, wikibase:Somevalue ;
+ wdt:P6 19.768 ;
+ wdt:P7 "simplestring" ;
+ wdt:P8 "-0200-01-01T00:00:00Z"^^xsd:dateTime ;
+ wdt:P9 <http://url.acme.test/> .
+
+
+<<entity:Q4 v:P2 entity:Q42 >>
+ wikibase:Rank wikibase:PreferredRank .
+
+<<entity:Q4 v:P2 entity:Q666 >>
+ wikibase:Rank wikibase:NormalRank .
+
+<<entity:Q4 v:P3 <http://commons.wikimedia.org/wiki/Special:FilePath/Universe.svg> >>
+ wikibase:Rank wikibase:NormalRank .
+
+<<entity:Q4 v:P3 wikibase:Novalue >>
+ wikibase:Rank wikibase:NormalRank .
+
+<<entity:Q4 v:P4 "Point(12.345 67.89)"^^geo:wktLiteral >>
+ wikibase:Latitude 12.345 ;
+ wikibase:Longitude 67.89 ;
+ wikibase:Precision 0.01 ;
+ wikibase:Globe <http://www.wikidata.org/entity/Q2> ;
+ wikibase:Rank wikibase:NormalRank .
+
+<<entity:Q4 v:P5 "превед"@ru >>
+ wikibase:Rank wikibase:NormalRank .
+
+<<entity:Q4 v:P5 wikibase:Somevalue >>
+ wikibase:Rank wikibase:NormalRank .
+
+<<entity:Q4 v:P5 "бред"@ru >>
+ wikibase:Rank wikibase:DeprecatedRank .
+
+<<entity:Q4 v:P6 19.768 >>
+ wikibase:Amount 19.768 ;
+ wikibase:UpperBound 19.769 ;
+ wikibase:LowerBound 19.767 ;
+ wikibase:Unit "1" ;
+ wikibase:Rank wikibase:NormalRank .
+
+<<entity:Q4 v:P7 "simplestring" >>
+ wikibase:Rank wikibase:NormalRank .
+
+<<entity:Q4 v:P8 "-0200-01-01T00:00:00Z"^^xsd:dateTime >>
+ wikibase:Time "-0200-01-01T00:00:00Z"^^xsd:dateTime ;
+ wikibase:Precision 9 ;
+ wikibase:Timezone 0 ;
+ wikibase:CalendarModel <http://calendar.acme.test/> ;
+ wikibase:Rank wikibase:NormalRank .
+
+<<entity:Q4 v:P9 <http://url.acme.test/> >>
+ wikibase:Rank wikibase:NormalRank .
+
+data:Q4 
+ a schema:Dataset ;
+ schema:about entity:Q4 ;
+ cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+ schema:softwareVersion "0.0.1" ;
+ schema:version 42 ;
+ schema:dateModified "2014-11-04T03:11:05Z"^^xsd:dateTime .
+
