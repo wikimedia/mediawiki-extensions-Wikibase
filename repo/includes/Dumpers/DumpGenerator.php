@@ -60,6 +60,12 @@ abstract class DumpGenerator {
 	protected $entityType;
 
 	/**
+	 * Entity count limit
+	 * @var int
+	 */
+	protected $limit = 0;
+
+	/**
 	 * @param resource $out
 	 *
 	 * @throws InvalidArgumentException
@@ -90,6 +96,10 @@ abstract class DumpGenerator {
 		}
 
 		$this->batchSize = $batchSize;
+	}
+
+	public function setLimit( $limit ) {
+		$this->limit = (int)$limit;
 	}
 
 	/**
@@ -243,6 +253,9 @@ abstract class DumpGenerator {
 			$this->dumpEntities( $ids, $dumpCount );
 
 			$this->progressReporter->reportMessage( 'Processed ' . $dumpCount . ' entities.' );
+			if( $this->limit && $dumpCount >= $this->limit ) {
+				return;
+			}
 		}
 		;
 
@@ -271,6 +284,9 @@ abstract class DumpGenerator {
 				$this->postEntityDump( $dumpCount );
 
 				$dumpCount ++;
+				if( $this->limit && $dumpCount >= $this->limit ) {
+					return;
+				}
 			} catch ( StorageException $ex ) {
 				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump ' . $entityId );
 			}

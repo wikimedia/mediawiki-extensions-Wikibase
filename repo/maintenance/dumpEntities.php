@@ -65,6 +65,9 @@ class DumpScript extends Maintenance {
 	private static $dumpFormats = array(
 		'json' => 'createJsonDumper',
 		'ttl' => 'createRdfDumper',
+		'rdr' => 'createRdfDumper',
+		'n3'  => 'createRdfDumper',
+		'nt'  => 'createRdfDumper',
 	);
 
 	public function __construct() {
@@ -82,6 +85,7 @@ class DumpScript extends Maintenance {
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
 		$this->addOption( 'snippet', "Output a JSON snippet without square brackets at the start and end. Allows output to be combined more freely.", false, false );
 		$this->addOption( 'format', "Set the dump format.", false, true );
+		$this->addOption( 'limit', "Limit how many entities are dumped.", false, true );
 	}
 
 	private function initServices() {
@@ -105,8 +109,13 @@ class DumpScript extends Maintenance {
 		$this->entityLookup = new RevisionBasedEntityLookup( $this->revisionLookup );
 	}
 
-	private function createRdfDumper( $output ) {
-		$entitySerializer = new RdfSerializer( RdfSerializer::getFormat('ttl'),
+	private function createRdfDumper( $output, $format ) {
+		\EasyRdf_Format::registerSerialiser('rdr', '\\Wikibase\\RdrSerializer');
+		$rdfFormat = RdfSerializer::getFormat( $format );
+		if( !$rdfFormat ) {
+			throw new \MWException( "Unknown format: $format" );
+		}
+		$entitySerializer = new RdfSerializer( $rdfFormat,
 				$GLOBALS['wgCanonicalServer']."/entity/",
 				$GLOBALS['wgCanonicalServer']."/Special:EntityData/",
 				$this->wikibaseRepo->getSiteStore()->getSites(), $this->entityLookup,
@@ -186,6 +195,7 @@ class DumpScript extends Maintenance {
 		$shardingFactor = (int)$this->getOption( 'sharding-factor', 1 );
 		$shard = (int)$this->getOption( 'shard', 0 );
 		$batchSize = (int)$this->getOption( 'batch-size', 100 );
+		$limit = (int)$this->getOption( 'limit', 0 );
 
 		//TODO: Allow injection of an OutputStream for logging
 		$this->openLogFile( $this->getOption( 'log', 'php://stderr' ) );
@@ -219,7 +229,7 @@ class DumpScript extends Maintenance {
 			throw new \MWException("Unknown dump format: $dumpFormat");
 		}
 		$dumperName = self::$dumpFormats[$dumpFormat];
-		$dumper = $this->$dumperName( $output );
+		$dumper = $this->$dumperName( $output, $dumpFormat );
 
 		$progressReporter = new ObservableMessageReporter();
 		$progressReporter->registerReporterCallback( array( $this, 'logMessage' ) );
@@ -233,6 +243,7 @@ class DumpScript extends Maintenance {
 		$dumper->setShardingFilter( $shardingFactor, $shard );
 		$dumper->setEntityTypeFilter( $entityType );
 		$dumper->setBatchSize( $batchSize );
+		$dumper->setLimit( $limit );
 
 		$idStream = $this->makeIdStream( $entityType, $exceptionReporter );
 		$dumper->generateDump( $idStream );
