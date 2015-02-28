@@ -3,6 +3,7 @@
 ## Version 2.6.0 (dev)
 
 * Empty strings are now detected as invalid in the `SiteLink` constructor
+* The `ReferenceList` constructor now throws an `InvalidArgumentException` when getting a non-iterable input
 * The `SnakList` constructor now throws an `InvalidArgumentException` when getting a non-iterable input
 * The `AliasGroup::equals` and `Term::equals` methods no longer incorrectly return true for fallback objects
 
