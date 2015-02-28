@@ -608,6 +608,28 @@ class RdfBuilder {
 		}
 	}
 
+	private static $propTypes = array();
+
+	/**
+	 * Fetch the data type for property
+	 * @param EntityId $propertyId
+	 * @param string $typeId
+	 * @return string
+	 */
+	private function getDataType(EntityId $propertyId, $typeId) {
+		$id = $propertyId->getPrefixedId();
+		if( !isset(self::$propTypes[$id]) ) {
+			$property = $this->entityLookup->getEntity( $propertyId ); //FIXME: use PropertyDataTypeLookup!
+			if( empty($property) ) {
+				$dataType = $typeId;
+			} else {
+				$dataType = $property->getDataTypeId();
+			}
+			self::$propTypes[$id] = $dataType;
+		}
+		return self::$propTypes[$id];
+	}
+
 	/**
 	 * Adds the value of the given property to the RDF graph.
 	 *
@@ -621,9 +643,13 @@ class RdfBuilder {
 			DataValue $value, $propertyNamespace, $simpleValue = false ) {
 		$propertyValueQName = $this->getEntityQName( $propertyNamespace, $propertyId );
 
-		$property = $this->entityLookup->getEntity( $propertyId ); //FIXME: use PropertyDataTypeLookup!
-		$dataType = $property->getDataTypeId();
 		$typeId = $value->getType();
+		if( $typeId == 'string' ) {
+			// only strings now have several data types
+			$dataType = $this->getDataType( $propertyId, $typeId );
+		} else {
+			$dataType = $typeId;
+		}
 
 		//FIXME: use a proper registry / dispatching builder
 		$typeId = "addStatementFor".preg_replace( '/[^\w]/', '', ucwords( $typeId ) );

@@ -146,6 +146,7 @@ class RdfDumpGenerator extends DumpGenerator {
 			EntityLookup $entityLookup,
 			EntityRevisionLookup $entityRevisionLookup
 	) {
+		\EasyRdf_Format::registerSerialiser('rdr', '\\Wikibase\\RdrSerializer');
 		$rdfFormat = RdfSerializer::getFormat( $format );
 		if( !$rdfFormat ) {
 			throw new \MWException( "Unknown format: $format" );

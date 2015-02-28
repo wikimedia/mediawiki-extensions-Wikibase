@@ -1,0 +1,57 @@
+@prefix entity: <http://acme.test/> .
+@prefix wikibase: <http://www.wikidata.org/ontology-0.0.1#> .
+@prefix wdt: <http://acme.test/assert/> .
+@prefix v: <http://acme.test/value/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix ref: <http://acme.test/reference/> .
+@prefix data: <http://data.acme.test/> .
+@prefix schema: <http://schema.org/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+
+entity:Q7 
+ a wikibase:Item ;
+ wdt:P7 "string", "string2" .
+
+
+<<entity:Q7 v:P7 "string" >>
+ wikibase:Rank wikibase:NormalRank ;
+ prov:wasDerivedFrom ref:a9059ae62c138ba7535ece019f82fb2e1fb44d13 .
+
+<<entity:Q7 v:P7 "string2" >>
+ wikibase:Rank wikibase:NormalRank ;
+ prov:wasDerivedFrom ref:a9059ae62c138ba7535ece019f82fb2e1fb44d13 .
+
+data:Q7 
+ a schema:Dataset ;
+ schema:about entity:Q7 ;
+ cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+ schema:softwareVersion "0.0.1" ;
+ schema:version 42 ;
+ schema:dateModified "2014-11-04T03:11:05Z"^^xsd:dateTime .
+
+ref:a9059ae62c138ba7535ece019f82fb2e1fb44d13 
+ a wikibase:Reference ;
+ v:P2 entity:Q42, entity:Q666 ;
+ v:P3 <http://commons.wikimedia.org/wiki/Special:FilePath/Universe.svg>, wikibase:Novalue ;
+ v:P5 "превед"@ru, wikibase:Somevalue, "бред"@ru ;
+ v:P7 "simplestring" ;
+ v:P9 <http://url.acme.test/> .
+
+<<ref:a9059ae62c138ba7535ece019f82fb2e1fb44d13 v:P4 "Point(12.345 67.89)"^^geo:wktLiteral >>
+ wikibase:Latitude 12.345 ;
+ wikibase:Longitude 67.89 ;
+ wikibase:Precision 0 ;
+ wikibase:Globe <http://www.wikidata.org/entity/Q2> .
+<<ref:a9059ae62c138ba7535ece019f82fb2e1fb44d13 v:P6 19.768 >>
+ wikibase:Amount 19.768 ;
+ wikibase:UpperBound 19.769 ;
+ wikibase:LowerBound 19.767 ;
+ wikibase:Unit "1" .
+<<ref:a9059ae62c138ba7535ece019f82fb2e1fb44d13 v:P8 "-00000000200-00-00T00:00:00Z"^^xsd:dateTime >>
+ wikibase:Time "-00000000200-00-00T00:00:00Z"^^xsd:dateTime ;
+ wikibase:Precision 9 ;
+ wikibase:Timezone 0 ;
+ wikibase:CalendarModel <http://calendar.acme.test/> .
+
