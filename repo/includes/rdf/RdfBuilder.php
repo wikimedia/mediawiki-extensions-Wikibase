@@ -610,9 +610,13 @@ class RdfBuilder {
 	private function addStatementValue( EasyRdf_Resource $target, EntityId $propertyId, DataValue $value, $claimType, $simpleValue = false ) {
 		$propertyValueQName = $this->getEntityQName( $claimType, $propertyId );
 
-		$property = $this->entityLookup->getEntity( $propertyId );
-		$dataType = $property->getDataTypeId();
 		$typeId = $value->getType();
+		$property = $this->entityLookup->getEntity( $propertyId );
+		if( empty($property) ) {
+			$dataType = $typeId;
+		} else {
+			$dataType = $property->getDataTypeId();
+		}
 		$typeId = "addStatementFor".preg_replace( '/[^\w]/', '', ucwords( $typeId ) );
 		if( !is_callable( array($this, $typeId ) ) ) {
 			wfDebug( __METHOD__ . ": Unsupported data type: $typeId\n" );
@@ -638,7 +642,7 @@ class RdfBuilder {
 		$entityQName = $this->getEntityQName( self::NS_ENTITY, $entityId );
 		$entityResource = $this->graph->resource( $entityQName );
 		$target->addResource( $propertyValueQName, $entityResource );
-		$this->entityMentioned( $entityId );
+		// TODO: should we do this? $this->entityMentioned( $entityId );
 	}
 
 	/**

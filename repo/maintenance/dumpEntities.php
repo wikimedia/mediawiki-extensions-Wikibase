@@ -65,6 +65,9 @@ class DumpScript extends Maintenance {
 	private static $dumpFormats = array(
 		'json' => 'createJsonDumper',
 		'ttl' => 'createRdfDumper',
+		'rdr' => 'createRdfDumper',
+		'n3'  => 'createRdfDumper',
+		'nt'  => 'createRdfDumper',
 	);
 
 	public function __construct() {
@@ -105,8 +108,13 @@ class DumpScript extends Maintenance {
 		$this->entityLookup = new RevisionBasedEntityLookup( $this->revisionLookup );
 	}
 
-	private function createRdfDumper( $output ) {
-		$entitySerializer = new RdfSerializer( RdfSerializer::getFormat('ttl'),
+	private function createRdfDumper( $output, $format ) {
+		\EasyRdf_Format::registerSerialiser('rdr', '\\Wikibase\\RdrSerializer');
+		$rdfFormat = RdfSerializer::getFormat( $format );
+		if( !$rdfFormat ) {
+			throw new \MWException( "Unknown format: $format" );
+		}
+		$entitySerializer = new RdfSerializer( $rdfFormat,
 				$GLOBALS['wgCanonicalServer']."/entity/",
 				$GLOBALS['wgCanonicalServer']."/Special:EntityData/",
 				$this->wikibaseRepo->getSiteStore()->getSites(), $this->entityLookup,
@@ -219,7 +227,7 @@ class DumpScript extends Maintenance {
 			throw new \MWException("Unknown dump format: $dumpFormat");
 		}
 		$dumperName = self::$dumpFormats[$dumpFormat];
-		$dumper = $this->$dumperName( $output );
+		$dumper = $this->$dumperName( $output, $dumpFormat );
 
 		$progressReporter = new ObservableMessageReporter();
 		$progressReporter->registerReporterCallback( array( $this, 'logMessage' ) );
