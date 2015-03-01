@@ -8,5 +8,8 @@
 	"wikibase-add": "d'zufiesche",
 	"wikibase-label-empty": "Noch kä B'zaischnung oagewwe",
 	"wikibase-description-empty": "S'hodd noch kä Bschraiwung",
-	"wikibase-statements": "Aussaache"
+	"wikibase-statements": "Aussaache",
+	"wikibase-sitelinks-special": "Onnare Saide",
+	"wikibase-statementview-rank-normal": "Noamala Rong",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|Änzlnochwees}}"
 }

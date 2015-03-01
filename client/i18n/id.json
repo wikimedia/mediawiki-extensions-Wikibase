@@ -66,7 +66,7 @@
 	"wikibase-pageinfo-entity-id": "ID item {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Tidak ada",
 	"wikibase-property-render-error": "Gagal merender properti $1: $2",
-	"wikibase-otherprojects": "Proyek lainnya",
+	"wikibase-otherprojects": "Proyek lain",
 	"wikibase-otherprojects-beta-message": "Proyek lain menu samping",
 	"wikibase-otherprojects-beta-description": "Tambahkan bagian \"{{int:wikibase-otherprojects}}\" ke menu samping untuk pranala ke proyek lain Wikimedia berdasarkan data dari {{WBREPONAME}}."
 }

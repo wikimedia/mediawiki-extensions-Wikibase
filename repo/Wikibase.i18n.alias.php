@@ -120,6 +120,7 @@ $specialPageAliases['de'] = array(
 	'SetLabel' => array( 'Bezeichnung_festlegen' ),
 	'SetDescription' => array( 'Beschreibung_festlegen' ),
 	'SetAliases' => array( 'Aliasse_festlegen' ),
+	'SetLabelDescriptionAliases' => array( 'Bezeichnung_Beschreibung_oder_Aliasse_festlegen' ),
 	'SetSiteLink' => array( 'Websitelink_festlegen' ),
 	'MergeItems' => array( 'Objekte_zusammenführen' ),
 	'EntitiesWithoutLabel' => array( 'Objekte_ohne_Bezeichnung' ),

@@ -1,12 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"VASANTH S.N."
+			"VASANTH S.N.",
+			"Omshivaprakash"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} ವಸ್ತು ಬದಲಾಗಿದೆ",
+	"wikibase-dataitem": "{{WBREPONAME}} ವಸ್ತು",
+	"wikibase-editlinks": "ಕೊಂಡಿಗಳನ್ನು ಸಂಪಾದಿಸಿ",
 	"wikibase-linkitem-confirmitem-button": "ಧೃಡಪಡಿಸು",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ಅಡಗಿಸು",
 	"wikibase-rc-hide-wikidata-show": "ತೋರಿಸು",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ಸಂಪಾದನೆ",
 	"wikibase-unconnectedpages-submit": "ಹೋಗು",
-	"wikibase-pageinfo-entity-id-none": "ಯಾವುದೂ ಇಲ್ಲ"
+	"wikibase-pageinfo-entity-id-none": "ಯಾವುದೂ ಇಲ್ಲ",
+	"wikibase-otherprojects": "ಇತರೆ ಯೋಜನೆಗಳು"
 }

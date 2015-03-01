@@ -5,7 +5,6 @@
 		]
 	},
 	"wikibase-client-desc": "Klien untuak ekstensi Wikibase",
-	"specialpages-group-wikibaseclient": "Klien Wikidata",
 	"wikibase-after-page-move": "Sanak paralu juo [$1 mampabarui item] nan tapauik di Wikidata dalam hal interwiki sangkek mamindahan laman.",
 	"wikibase-after-page-move-queued": "[$1 Item Wikidata] nan takaik ka laman ko akan sacaro otomatih dipabarui sacapeknyo.",
 	"wikibase-comment-remove": "Item Wikidata takait dihapuih. Interwiki hilang.",
@@ -47,5 +46,6 @@
 	"wikibase-unconnectedpages-iwdata-label": "Hanyo laman nan ado interwiki",
 	"wikibase-unconnectedpages-format-row": "($1 interwiki pado laman)",
 	"wikibase-pageinfo-entity-id": "ID Item Wikidata",
-	"wikibase-pageinfo-entity-id-none": "Indak ado"
+	"wikibase-pageinfo-entity-id-none": "Indak ado",
+	"wikibase-otherprojects": "Proyek lain"
 }
