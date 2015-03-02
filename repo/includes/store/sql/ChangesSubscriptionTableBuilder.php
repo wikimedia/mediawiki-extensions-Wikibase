@@ -191,7 +191,7 @@ class ChangesSubscriptionTableBuilder {
 			__METHOD__,
 			array(
 				'LIMIT' => $this->batchSize,
-				'ORDER BY ips_item_id, ips_site_id'
+				'ORDER BY' => 'ips_item_id, ips_site_id'
 			)
 		);
 
