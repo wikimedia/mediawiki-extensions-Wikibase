@@ -11,10 +11,10 @@
 		]
 	},
 	"wikibase-client-desc": "Client voor de uitbreiding Wikibase",
-	"specialpages-group-wikibaseclient": "Client voor {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Koppeling naar item in verbonden gegevensrepository",
 	"wikibase-after-page-move": "U kunt ook het gekoppelde item van {{WBREPONAME}} [$1 bijwerken] om de taalkoppelingen op de hernoemde pagina te kunnen beheren.",
 	"wikibase-after-page-move-queued": "Het aan deze pagina gekoppelde [$1 item van {{WBREPONAME}}] wordt binnenkort automatisch bijgewerkt.",
+	"wikibase-after-page-delete-queued": "Het aan deze pagina gekoppelde [$1 item van {{WBREPONAME}}] wordt binnenkort automatisch bijgewerkt.",
 	"wikibase-comment-add": "Item van {{WBREPONAME}} aangemaakt.",
 	"wikibase-comment-remove": "Het gekoppelde item van {{WBREPONAME}} is verwijderd. De taalkoppelingen zijn verwijderd.",
 	"wikibase-comment-linked": "Er is een item van {{WBREPONAME}} gekoppeld aan deze pagina.",

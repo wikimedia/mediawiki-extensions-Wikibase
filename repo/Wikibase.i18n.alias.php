@@ -280,6 +280,7 @@ $specialPageAliases['mk'] = array(
 	'SetLabel' => array( 'ЗадајНатпис' ),
 	'SetDescription' => array( 'ЗадајОпис' ),
 	'SetAliases' => array( 'ЗадајАлијаси' ),
+	'SetLabelDescriptionAliases' => array( 'ЗадајАлијасиОписНатпис' ),
 	'SetSiteLink' => array( 'ЗадајВикиврска' ),
 	'MergeItems' => array( 'СпојПредмети' ),
 	'EntitiesWithoutLabel' => array( 'ЕдинициБезНатпис' ),

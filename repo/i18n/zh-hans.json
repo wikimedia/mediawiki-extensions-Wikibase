@@ -506,6 +506,7 @@
 	"apihelp-wbsetlabel-description": "为单一Wikibase实体设置一个标签。",
 	"apihelp-wbsetlabel-param-language": "标签语言",
 	"apihelp-wbsetlabel-param-value": "标签值",
+	"apihelp-wbsetqualifier-example-1": "设置属性P1指定声称的限定符为字符串值GdyjxP8I6XB3",
 	"apihelp-wbsetreference-param-snaks-order": "snak的方向。逗号分隔的属性ID列表",
 	"apihelp-wbsetsitelink-description": "将wiki上的一个条目与一个Wikibase项结合，或移除一个已结合的条目。",
 	"apihelp-wbsetsitelink-param-id": "用于实体的标识符，包括前缀。\n同时使用“id”或“site”和“title”。",

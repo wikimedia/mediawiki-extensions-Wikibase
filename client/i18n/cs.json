@@ -8,7 +8,6 @@
 		]
 	},
 	"wikibase-client-desc": "Klient pro rozšíření Wikibase",
-	"specialpages-group-wikibaseclient": "Klient {{grammar:2sg|{{WBREPONAME}}}}",
 	"tooltip-t-wikibase": "Odkaz na propojenou položku datového úložiště",
 	"wikibase-after-page-move": "Můžete také [$1 aktualizovat] související položku {{grammar:2sg|{{WBREPONAME}}}}, aby na přesunuté stránce zůstaly odkazy na další jazyky.",
 	"wikibase-after-page-move-queued": "Související [$1 položka {{grammar:2sg|{{WBREPONAME}}}}] bude zanedlouho automaticky aktualizována.",
@@ -27,6 +26,7 @@
 	"wikibase-dataitem": "Položka {{grammar:2sg|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Upravit odkazy",
 	"wikibase-editlinkstitle": "Editovat mezijazykové odkazy",
+	"wikibase-addlinkstitle": "Přidat mezijazykové odkazy",
 	"wikibase-linkitem-addlinks": "Přidat odkazy",
 	"wikibase-linkitem-alreadylinked": "Stránka, kterou chcete propojit, je již v ústředním úložišti propojená s [$1 položkou], která odkazuje na $2 na tomto serveru. Položky smí mít pro každý server jen jeden odkaz. Prosím, zvolte jinou stránku.",
 	"wikibase-linkitem-close": "Zavřít dialog a obnovit stránku",
@@ -50,6 +50,7 @@
 	"wikibase-rc-wikibase-edit-title": "Editace {{grammar:2sg|{{WBREPONAME}}}}",
 	"wikibase-replicationnote": "Vezměte prosím na vědomí, že než se změny projeví na všech wiki, může to trvat pár minut.",
 	"wikibase-watchlist-show-changes-pref": "Zobrazit změny {{grammar:2sg|{{WBREPONAME}}}} ve sledovaných stránkách",
+	"wikibase-error-deserialize-error": "Nepodařilo se deserializovat data.",
 	"wikibase-error-serialize-error": "Nepodařilo se zaserializovat data.",
 	"wikibase-error-invalid-entity-id": "Systém zadané ID nezná. Použijte platné ID entity.",
 	"special-unconnectedpages": "Stránky nepropojené s položkou",
