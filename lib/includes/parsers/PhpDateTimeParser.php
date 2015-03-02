@@ -89,15 +89,17 @@ class PhpDateTimeParser extends StringValueParser {
 			// Parse using the DateTime object (this will allow us to format the date in a nicer way)
 			$dateTime = new DateTime( $value );
 
+			// Fail if the DateTime object does calculations like changing 2015-00-00 to 2014-12-30.
+			if ( $year !== null
+				&& $dateTime->format( 'Y' ) !== str_pad( substr( $year, -4 ), 4, '0', STR_PAD_LEFT )
+			) {
+				throw new ParseException( $value . ' is not a valid date.' );
+			}
+
 			if ( $year !== null && strlen( $year ) > 4 ) {
-				// TODO: Fail if $dateTime->format( 'Y' ) !== substr( $year, -4 )
 				$timeString = $sign . $year . $dateTime->format( '-m-d\TH:i:s\Z' );
 			} else {
 				$timeString = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
-
-				if ( $year !== null && strpos( $timeString, $year ) === false ) {
-					throw new ParseException( $value . ' is not a valid date.' );
-				}
 			}
 
 			// Pass the reformatted string into a base parser that parses this +/-Y-m-d\TH:i:s\Z format with a precision
