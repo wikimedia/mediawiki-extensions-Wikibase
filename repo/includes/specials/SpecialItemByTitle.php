@@ -242,12 +242,12 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		);
 
 		if ( $siteExists && isset( $page ) ) {
+			$createLink = $this->getTitleFor( 'NewItem' );
 			$this->getOutput()->addHTML(
 				Html::openElement( 'div' )
 				. $this->msg( 'wikibase-itembytitle-create' )
 					->params(
-						wfUrlencode( $siteId ?: '' ),
-						wfUrlencode( $page ?: '' )
+						$createLink->getFullURL( array( 'site' => ( $siteId ?: '' ), 'page' => ( $page ?: '' ) ) )
 					)
 					->parse()
 				. Html::closeElement( 'div' )
