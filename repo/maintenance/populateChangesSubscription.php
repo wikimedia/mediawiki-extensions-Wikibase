@@ -40,8 +40,7 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 	 */
 	public function doDBUpdates() {
 		if ( !defined( 'WB_VERSION' ) ) {
-			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
-			exit;
+			$this->error( "You need to have Wikibase enabled in order to use this maintenance script!", 1 );
 		}
 
 		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
