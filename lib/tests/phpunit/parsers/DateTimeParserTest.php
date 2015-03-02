@@ -18,6 +18,7 @@ use Wikibase\Lib\Parsers\MWTimeIsoParser;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Thiemo Mättig
  */
 class DateTimeParserTest extends StringValueParserTest {
 
@@ -146,6 +147,16 @@ class DateTimeParserTest extends StringValueParserTest {
 				array( '+7214614279199781-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'-10100-02-29' =>
 				array( '-0000000000010100-03-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+
+			// Years with leading zeros
+			'4th July 00000002015' =>
+				array( '+0000000000002015-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'00000002015-07-04' =>
+				array( '+0000000000002015-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'4th July 00000092015' =>
+				array( '+0000000000092015-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'00000092015-07-04' =>
+				array( '+0000000000092015-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 
 			//Testing Leap Year stuff
 			'10000-02-29' =>
