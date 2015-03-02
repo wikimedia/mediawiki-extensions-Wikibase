@@ -52,6 +52,24 @@
       "revId": "00448c2e23c8f44ce351e599a0db131c2f3067fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_20046819",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-02T16:12:42Z",
+      "side": 1,
+      "message": "That\u0027s not \"strange\", that\u0027s exactly what happened before I started working on this class. Didn\u0027t we discussed this just a few days ago and had an agreement that this class should never fail hard with exceptions? If the value can be formatted, format if. If it can\u0027t, just show it as it is.",
+      "parentUuid": "6e7c4fa4_00c12c82",
+      "revId": "00448c2e23c8f44ce351e599a0db131c2f3067fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
