@@ -84,7 +84,7 @@
 		 */
 		draw: function() {
 			var value = this._getUpstreamValue();
-			if( !value ) {
+			if( value === undefined || value === null ) {
 				return;
 			}
 
@@ -132,4 +132,4 @@
 		}
 	} );
 
-} ( jQuery, jQuery.valueview.ExpertExtender ) );
+}( jQuery, jQuery.valueview.ExpertExtender ) );

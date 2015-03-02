@@ -105,6 +105,11 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
+### 0.13.1 (dev)
+
+#### Bugfixes ####
+* `jQuery.valueview.ExpertExtender.Listrotator` redraws on 0 value now.
+
 ### 0.13.0 (2015-02-05)
 * Turned `util.MessageProvider` into an interface
 * Introduced several implementations of `util.MessageProvider`
