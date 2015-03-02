@@ -172,6 +172,26 @@ class PhpDateTimeParserTest extends StringValueParserTest {
 			'00000092015-07-04' =>
 				array( '+0000000000092015-07-04T00:00:00Z' ),
 
+			// Hour, minute and second precision
+			'4th July 2015 12:00' =>
+				array( '+0000000000002015-07-04T12:00:00Z', 0, 0, 0, TimeValue::PRECISION_HOUR ),
+			'2015-07-04 12:00' =>
+				array( '+0000000000002015-07-04T12:00:00Z', 0, 0, 0, TimeValue::PRECISION_HOUR ),
+			'2015-07-04 12:30' =>
+				array( '+0000000000002015-07-04T12:30:00Z', 0, 0, 0, TimeValue::PRECISION_MINUTE ),
+			'2015-07-04 12:30:29' =>
+				array( '+0000000000002015-07-04T12:30:29Z', 0, 0, 0, TimeValue::PRECISION_SECOND ),
+			'15.07.04 23:59' =>
+				array( '+0000000000000004-07-15T23:59:00Z', 0, 0, 0, TimeValue::PRECISION_MINUTE ),
+			'15.07.04 00:01' =>
+				array( '+0000000000000004-07-15T00:01:00Z', 0, 0, 0, TimeValue::PRECISION_MINUTE ),
+			'15-07-01 12:37:00' =>
+				array( '+0000000000000001-07-15T12:37:00Z', 0, 0, 0, TimeValue::PRECISION_MINUTE ),
+			'4th July 15 12:00' =>
+				array( '+0000000000000015-07-04T12:00:00Z', 0, 0, 0, TimeValue::PRECISION_HOUR ),
+			'July 4th 15 12:00' =>
+				array( '+0000000000000015-07-04T12:00:00Z', 0, 0, 0, TimeValue::PRECISION_HOUR ),
+
 			// Testing leap year stuff
 			'10000-02-29' =>
 				array( '+0000000000010000-02-29T00:00:00Z' ),
@@ -216,7 +236,6 @@ class PhpDateTimeParserTest extends StringValueParserTest {
 			'2015-00-00',
 			'00000000099-00-00',
 			'00000002015-00-00',
-			'15-07-01 12:37:00',
 			'92015-00-00',
 			'Jann 2014',
 			'1980x',
