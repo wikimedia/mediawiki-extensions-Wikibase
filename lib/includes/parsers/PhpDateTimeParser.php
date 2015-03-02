@@ -61,28 +61,13 @@ class PhpDateTimeParser extends StringValueParser {
 		$calendarModelParser = new CalendarModelParser();
 		$options = $this->getOptions();
 
-		$year = null;
-
 		try {
 			list( $sign, $value ) = $this->eraParser->parse( $value );
 
 			$value = trim( $value );
 			$value = $this->monthUnlocalizer->unlocalize( $value );
 			$value = $this->getValueWithFixedSeparators( $value );
-			$value = $this->getValueWithFixedYearLengths( $value );
-
-			if ( preg_match( '/\d{3,}/', $value, $matches, PREG_OFFSET_CAPTURE ) ) {
-				$year = $matches[0][0];
-
-				// PHP's DateTime/strtotime parsing can't handle larger than 4 digit years!
-				if ( strlen( $year ) > 4 ) {
-					// Remove all but the last 4 digits from the year found in the string.
-					$value = substr_replace( $value, '', $matches[0][1], strlen( $year ) - 4 );
-				}
-
-				// Trim leading zeros but keep at least 4 digits
-				$year = preg_replace( '/^0+(?=\d{4})/', '', $year );
-			}
+			$year = $this->fetchAndNormalizeYear( $value );
 
 			$this->validateDateTimeInput( $value );
 
@@ -142,27 +127,37 @@ class PhpDateTimeParser extends StringValueParser {
 	}
 
 	/**
-	 * PHP's DateTime object also can't handle smaller than 4 digit years
-	 * e.g. instead of 12 it needs 0012 etc.
+	 * @param string &$value A time value string, possibly containing a year. If found, the year in
+	 * the string will be cut and padded to exactly 4 digits.
 	 *
-	 * @param string $value
-	 *
-	 * @return string
+	 * @return string|null The full year, if found, not cut but padded to at least 4 digits.
 	 */
-	private function getValueWithFixedYearLengths( $value ) {
+	private function fetchAndNormalizeYear( &$value ) {
 		// Any number longer than 2 digits or bigger than 31 must be the year. Otherwise assume the
-		// last 2-digit number is the year.
-		if ( preg_match(
-			'/(?<!\d)(?:\d{3,}|3[2-9]|[4-9]\d|\d{1,2}$)(?!\d)/',
+		// number at the end of the string is the year.
+		if ( !preg_match(
+			'/(?<!\d)(?:'           //can not be prepended by a digit
+				. '\d{3,}|'         //any number with more than 2 digits, or
+				. '3[2-9]|[4-9]\d|' //any number larger than 31, or
+				. '\d+$'            //any number at the end of the string
+				. ')(?!\d)/',       //can not be followed by a digit
 			$value,
 			$matches,
 			PREG_OFFSET_CAPTURE
 		) ) {
-			$year = str_pad( $matches[0][0], 4, '0', STR_PAD_LEFT );
-			return substr_replace( $value, $year, $matches[0][1], strlen( $matches[0][0] ) );
+			return null;
 		}
 
-		return $value;
+		$year = $matches[0][0];
+		// Trim irrelevant leading zeros.
+		$year = ltrim( $year, '0' );
+		// Pad to at least 4 digits.
+		$year = str_pad( $year, 4, '0', STR_PAD_LEFT );
+
+		// Manipulate the value to have an exactly 4-digit year. Crucial for PHP's DateTime object.
+		$value = substr_replace( $value, substr( $year, -4 ), $matches[0][1], strlen( $matches[0][0] ) );
+
+		return $year;
 	}
 
 }

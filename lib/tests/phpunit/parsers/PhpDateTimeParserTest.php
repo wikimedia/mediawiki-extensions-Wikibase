@@ -216,6 +216,7 @@ class PhpDateTimeParserTest extends StringValueParserTest {
 			'2015-00-00',
 			'00000000099-00-00',
 			'00000002015-00-00',
+			'15-07-01 12:37:00',
 			'92015-00-00',
 			'Jann 2014',
 			'1980x',
