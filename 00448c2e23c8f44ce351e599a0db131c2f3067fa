@@ -16,6 +16,24 @@
       "revId": "00448c2e23c8f44ce351e599a0db131c2f3067fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_25d1dafb",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-02T10:41:33Z",
+      "side": 1,
+      "message": "The mock injects non-integers here. The if is a fail safe, otherwise the code below would do very odd things.\n\nThis method is used to format the precision (e.g. \"1 year\" with the default $amount of 1) as well as the before and after values (e.g. \"2 years\" with an $amount of 2).\n\nIf $amount is the default value, skip it and output only the $precision. Otherwise output only the $amount. This is the old behavior of the formatter before I introduced this method.",
+      "parentUuid": "6e7c4fa4_bb1f620c",
+      "revId": "00448c2e23c8f44ce351e599a0db131c2f3067fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
