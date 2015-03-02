@@ -242,13 +242,13 @@ HTML;
 <li class="wikibase-sitelinkview wikibase-sitelinkview-$1" data-wb-siteid="$1">
 	<span class="wikibase-sitelinkview-siteid-container">
 		<span class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-$1" title="$5">$4</span>
-	</span><span class="wikibase-sitelinkview-link wikibase-sitelinkview-link-$1" lang="$2" dir="$3"><!-- wikibase-sitelinkview-pagename -->$6</span>
+	</span><span class="wikibase-sitelinkview-link wikibase-sitelinkview-link-$1" lang="$2"><!-- wikibase-sitelinkview-pagename -->$6</span>
 </li>
 HTML;
 
 	$templates['wikibase-sitelinkview-pagename'] =
 <<<HTML
-<span class="wikibase-sitelinkview-page"><a href="$1" hreflang="$4">$2</a></span>$3
+<span class="wikibase-sitelinkview-page" dir="$5"><a href="$1" hreflang="$4">$2</a></span>$3
 HTML;
 
 	$templates['wikibase-sitelinkview-unknown'] =
