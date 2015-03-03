@@ -56,17 +56,23 @@
 			} ] );
 
 		$input.focus();
+
+		// inputextender immediately extends if $input has focus
 		expertExtender.init();
 
 		window.setTimeout( function() {
-			sinon.assert.calledOnce( init );
-			sinon.assert.calledOnce( onInitialShow );
-			sinon.assert.calledOnce( draw );
+			if( !init.called && 'hidden' in document && document.hidden ) {
+				assert.ok( true, 'Could not test since browser window is not focused' );
+			} else {
+				sinon.assert.calledOnce( init );
+				sinon.assert.calledOnce( onInitialShow );
+				sinon.assert.calledOnce( draw );
+			}
 
 			$input.remove();
 
 			QUnit.start();
-		}, 200 );
+		}, 0 );
 	} );
 
 } )( jQuery, jQuery.valueview.ExpertExtender, sinon, QUnit, CompletenessTest );
