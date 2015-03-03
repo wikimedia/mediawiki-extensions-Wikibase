@@ -43,7 +43,7 @@ class DataUpdateAdapter extends DataUpdate {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $doUpdateFunction ) {
+	public function __construct( $doUpdateFunction /*...*/ ) {
 		if ( !is_callable( $doUpdateFunction ) ) {
 			throw new InvalidArgumentException( '$doUpdateFunction must be callable' );
 		}

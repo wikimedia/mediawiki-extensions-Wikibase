@@ -189,7 +189,7 @@ class ApiErrorReporter {
 	 *
 	 * @throws LogicException
 	 */
-	public function dieMessage( $errorCode ) {
+	public function dieMessage( $errorCode /*...*/ ) {
 		$messageName = "wikibase-api-$errorCode";
 		$params = func_get_args();
 		array_shift( $params );

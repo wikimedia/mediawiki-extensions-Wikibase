@@ -326,7 +326,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param array $response
 	 * @param string [$path,...] path elements (optional)
 	 */
-	public function assertResultHasKeyInPath( $response ) {
+	public function assertResultHasKeyInPath( $response /*...*/ ) {
 		$path = func_get_args();
 		array_shift( $path );
 

@@ -157,7 +157,7 @@ class EntityViewPlaceholderExpander {
 	 *
 	 * @return string HTML to be substituted for the placeholder in the output.
 	 */
-	public function getHtmlForPlaceholder( $name ) {
+	public function getHtmlForPlaceholder( $name /*...*/ ) {
 		$args = func_get_args();
 		$name = array_shift( $args );
 
