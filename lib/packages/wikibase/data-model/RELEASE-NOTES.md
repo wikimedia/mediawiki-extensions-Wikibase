@@ -2,6 +2,7 @@
 
 ## Version 3.0.0 (dev)
 
+* `ReferenceList::addNewReference` and `Statement::addNewReference` support an array of Snaks now
 * The concept of `Claim` is no longer modelled
 	* The `Claim` class itself has been removed, though `Claim` is now a temporary alias for `Statement`
 	* `Claim::RANK_TRUTH` have been removed

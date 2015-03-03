@@ -151,11 +151,26 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testAddNewReference( Statement $statement ) {
+	public function testAddNewReferenceWithVariableArgumentsSyntax( Statement $statement ) {
 		$snak1 = new PropertyNoValueSnak( 256 );
 		$snak2 = new PropertySomeValueSnak( 42 );
 		$statement->addNewReference( $snak1, $snak2 );
-		$this->assertTrue( $statement->getReferences()->hasReference( new Reference( array( $snak1, $snak2 ) ) ) );
+
+		$expectedSnaks = array( $snak1, $snak2 );
+		$this->assertTrue( $statement->getReferences()->hasReference( new Reference( $expectedSnaks ) ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testAddNewReferenceWithAnArrayOfSnaks( Statement $statement ) {
+		$snaks = array(
+			new PropertyNoValueSnak( 256 ),
+			new PropertySomeValueSnak( 42 ),
+		);
+		$statement->addNewReference( $snaks );
+
+		$this->assertTrue( $statement->getReferences()->hasReference( new Reference( $snaks ) ) );
 	}
 
 	/**

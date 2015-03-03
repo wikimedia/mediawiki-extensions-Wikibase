@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
@@ -311,20 +310,26 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenMultipleSnaks_addNewReferenceAddsThem() {
 		$references = new ReferenceList();
+		$snak1 = new PropertyNoValueSnak( 1 );
+		$snak2 = new PropertyNoValueSnak( 3 );
+		$snak3 = new PropertyNoValueSnak( 2 );
 
-		$references->addNewReference(
+		$references->addNewReference( $snak1, $snak2, $snak3 );
+
+		$expectedSnaks = array( $snak1, $snak2, $snak3 );
+		$this->assertTrue( $references->hasReference( new Reference( $expectedSnaks ) ) );
+	}
+
+	public function testGivenAnArrayOfSnaks_addNewReferenceAddsThem() {
+		$references = new ReferenceList();
+		$snaks = array(
 			new PropertyNoValueSnak( 1 ),
 			new PropertyNoValueSnak( 3 ),
 			new PropertyNoValueSnak( 2 )
 		);
 
-		$expectedSnaks = array(
-			new PropertyNoValueSnak( 1 ),
-			new PropertyNoValueSnak( 3 ),
-			new PropertyNoValueSnak( 2 )
-		);
-
-		$this->assertTrue( $references->hasReference( new Reference( new SnakList( $expectedSnaks ) ) ) );
+		$references->addNewReference( $snaks );
+		$this->assertTrue( $references->hasReference( new Reference( $snaks ) ) );
 	}
 
 	public function testGivenNoneSnak_addNewReferenceThrowsException() {
