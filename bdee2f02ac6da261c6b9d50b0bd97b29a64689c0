@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_df5c6a20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-03T10:39:18Z",
+      "side": 1,
+      "message": "reigged? never heard of that :)",
+      "revId": "bdee2f02ac6da261c6b9d50b0bd97b29a64689c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
