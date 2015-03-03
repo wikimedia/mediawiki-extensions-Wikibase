@@ -25,7 +25,7 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 	public function __construct() {
 		$this->mDescription = 'Populate the wb_changes_subscription table based on entries in wb_items_per_site.';
 
-		$this->addOption( 'start-item', "The page ID to start from.", false, true );
+		$this->addOption( 'start-item', "The item ID to start from.", false, true );
 
 		parent::__construct();
 

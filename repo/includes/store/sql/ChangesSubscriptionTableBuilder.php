@@ -95,7 +95,7 @@ class ChangesSubscriptionTableBuilder {
 	}
 
 	/**
-	 * Fill the subscription table with rows based on entries in page_props.
+	 * Fill the subscription table with rows based on entries in wb_items_per_site.
 	 *
 	 * @param ItemId $startItem The item to start with.
 	 */
