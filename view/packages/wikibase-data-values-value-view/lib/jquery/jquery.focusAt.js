@@ -56,11 +56,9 @@ jQuery.fn.focusAt = ( function( $ ) {
 
 		if( typeof position === 'number' ) {
 			return calculateAbsolutePosition( position, textLength );
-		}
-		else if( position === 'end' ) {
+		} else if( position === 'end' ) {
 			return textLength; // behind last character
-		}
-		else if ( position === 'start' ) {
+		} else if( position === 'start' ) {
 			return 0;
 		}
 		throw new Error( 'Focus Position has to be a number or string "start" or "end"' );

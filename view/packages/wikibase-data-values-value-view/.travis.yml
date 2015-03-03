@@ -3,10 +3,13 @@ language: php
 php:
 - 5.3
 
-env:
-- RUNJOB=jshint
+install:
+  - npm install -g jshint
+  - npm install -g jscs
 
-script: bash ./build/travis/script.sh
+script:
+  - jshint .
+  - jscs .
 
 notifications:
   irc:

@@ -194,7 +194,7 @@
 		vvInst.disable();
 
 		assert.ok( vvInst.isDisabled() );
-		assert.ok( vvInst.option( 'disabled') );
+		assert.ok( vvInst.option( 'disabled' ) );
 	} );
 
 	QUnit.test( 'enable', function( assert ) {
@@ -203,7 +203,7 @@
 		vvInst.enable();
 
 		assert.ok( !vvInst.isDisabled() );
-		assert.ok( !vvInst.option( 'disabled') );
+		assert.ok( !vvInst.option( 'disabled' ) );
 	} );
 
 } )( jQuery, jQuery.valueview, dataValues, valueFormatters, valueParsers, sinon, QUnit, CompletenessTest );

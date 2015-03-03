@@ -97,4 +97,4 @@
 			} );
 		}
 	} );
-} ( jQuery, util.Extendable, jQuery.valueview ) );
+}( jQuery, util.Extendable, jQuery.valueview ) );

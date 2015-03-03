@@ -1,5 +1,4 @@
 ( function( $, ExpertExtender, PrefixingMessageProvider ) {
-
 	'use strict';
 
 	/**
@@ -158,4 +157,4 @@
 		}
 	} );
 
-} ( jQuery, jQuery.valueview.ExpertExtender, util.PrefixingMessageProvider ) );
+}( jQuery, jQuery.valueview.ExpertExtender, util.PrefixingMessageProvider ) );

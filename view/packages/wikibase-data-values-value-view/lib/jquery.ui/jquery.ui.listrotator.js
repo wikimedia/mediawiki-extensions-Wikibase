@@ -117,11 +117,11 @@ $.widget( 'ui.listrotator', {
 		},
 		animation: {
 			margins: ['-15px', '15px'],
-			duration: 150 //TODO: Fixed values can't be changed nor turned off
+			duration: 150 // TODO: Fixed values can't be changed nor turned off
 		},
 		deferInit: false,
 		messages: {
-			'auto': mwMsgOrString( 'valueview-listrotator-auto', 'auto' )
+			auto: mwMsgOrString( 'valueview-listrotator-auto', 'auto' )
 		},
 		isRtl: function() {
 			return $( 'body' ).hasClass( 'rtl' );
@@ -187,11 +187,11 @@ $.widget( 'ui.listrotator', {
 			iconClasses = ['ui-icon ui-icon-triangle-1-w', 'ui-icon ui-icon-triangle-1-e'];
 
 		// Flip triangle arrows in rtl context:
-		if ( this._isRtl() ) {
+		if( this._isRtl() ) {
 			iconClasses.reverse();
 		}
 
-		if ( this.options.values.length === 0 ) {
+		if( this.options.values.length === 0 ) {
 			throw new Error( 'List of values required to initialize list rotator.' );
 		}
 
@@ -210,7 +210,7 @@ $.widget( 'ui.listrotator', {
 
 		// Construct the basic sections:
 		this.$curr = this._createSection( 'curr', function( event ) {
-			if ( !self.$menu.is( ':visible' ) ) {
+			if( !self.$menu.is( ':visible' ) ) {
 				self._showMenu();
 			} else {
 				self._hideMenu();
@@ -282,7 +282,7 @@ $.widget( 'ui.listrotator', {
 		$.Widget.prototype.destroy.call( this );
 
 		// Remove event attached to the html node if no instances of the widget exist anymore:
-		if ( $( ':' + this.widgetBaseClass ).length === 0 ) {
+		if( $( ':' + this.widgetBaseClass ).length === 0 ) {
 			$( 'html' ).off( '.' + this.widgetBaseClass );
 		}
 	},
@@ -406,7 +406,7 @@ $.widget( 'ui.listrotator', {
 	 */
 	value: function( value ) {
 		// Get the current value:
-		if ( value === undefined || value === this.$curr.data( 'value' ) ) {
+		if( value === undefined || value === this.$curr.data( 'value' ) ) {
 			return this.$curr.data( 'value' );
 		}
 
@@ -418,7 +418,7 @@ $.widget( 'ui.listrotator', {
 
 		// Retrieve the index of the new value within the list of predefined values:
 		$.each( values, function( i, v ) {
-			if ( value === v.value ) {
+			if( value === v.value ) {
 				index = i;
 				return false;
 			}
@@ -430,14 +430,14 @@ $.widget( 'ui.listrotator', {
 		.children( '.' + this.widgetBaseClass + '-label' )
 		.text( values[index].label );
 
-		if ( index > 0 ) {
+		if( index > 0 ) {
 			this.$prev
 			.data( 'value', values[index - 1].value )
 			.children( '.' + this.widgetBaseClass + '-label' )
 			.text( values[index - 1].label );
 		}
 
-		if ( index < values.length - 1 ) {
+		if( index < values.length - 1 ) {
 			this.$next
 			.data( 'value', values[index + 1].value )
 			.children( '.' + this.widgetBaseClass + '-label' )
@@ -540,7 +540,7 @@ $.widget( 'ui.listrotator', {
 			margins.reverse();
 		}
 
-		if ( this._isRtl() ) {
+		if( this._isRtl() ) {
 			margins.reverse();
 		}
 

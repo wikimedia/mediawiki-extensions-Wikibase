@@ -196,7 +196,7 @@ $.widget( 'ui.ooMenu', {
 			self.deactivate();
 		} )
 		.on( 'mousedown.ooMenu', function( e ) {
-			if ( !( e.which !== 1 || e.altKey || e.ctrlKey || e.shiftKey || e.metaKey ) ) {
+			if( !( e.which !== 1 || e.altKey || e.ctrlKey || e.shiftKey || e.metaKey ) ) {
 				self.select( e );
 			}
 		} );

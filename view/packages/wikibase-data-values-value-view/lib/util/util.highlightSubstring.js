@@ -39,7 +39,7 @@ util.highlightSubstring = function( substring, string, options ) {
 	var escapedSubstring = escapeRegex( substring );
 
 	var regExpString = options.withinString
-		? '((?:(?!' + escapedSubstring +').)*?)(' + escapedSubstring + ')(.*)'
+		? '((?:(?!' + escapedSubstring + ').)*?)(' + escapedSubstring + ')(.*)'
 		: '^()(' + escapedSubstring + ')(.*)$';
 
 	var indexOfSubstring = string.indexOf( substring );

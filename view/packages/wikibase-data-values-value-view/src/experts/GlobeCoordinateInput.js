@@ -44,7 +44,10 @@
 				return getPrecisionSetting( value ) || {
 					custom: true,
 					value: value,
-					label: self._messageProvider.getMessage('valueview-expert-globecoordinateinput-customprecision', [ Formatter.PRECISIONTEXT( value ) ] )
+					label: self._messageProvider.getMessage(
+						'valueview-expert-globecoordinateinput-customprecision',
+						[ Formatter.PRECISIONTEXT( value ) ]
+					)
 				};
 			}
 		);

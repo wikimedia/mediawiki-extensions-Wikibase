@@ -7,8 +7,8 @@
 	'use strict';
 
 	var messages = {
-		'messageProviderTestMessage1': 'message1',
-		'messageProviderTestMessage2': 'message2'
+		messageProviderTestMessage1: 'message1',
+		messageProviderTestMessage2: 'message2'
 	};
 
 	QUnit.module( 'util.HashMessageProvider' );

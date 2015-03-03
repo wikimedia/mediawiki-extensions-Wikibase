@@ -10,7 +10,7 @@
 	QUnit.module( 'jquery.valueview.experts.TimeInput' );
 
 	testExpert( {
-		expertConstructor: valueview.experts.TimeInput,
+		expertConstructor: valueview.experts.TimeInput
 	} );
 
 }( QUnit, jQuery.valueview ) );

@@ -22,4 +22,3 @@
 	} );
 
 }( QUnit, jQuery.valueview ) );
-

@@ -78,4 +78,4 @@
 			}
 		}
 	} );
-} ( jQuery, jQuery.valueview.ExpertExtender ) );
+}( jQuery, jQuery.valueview.ExpertExtender ) );

@@ -258,7 +258,7 @@
 		}
 
 		var remainingInactiveExtenders = inactiveExtenders.slice();
-		var testSubject = remainingInactiveExtenders.splice( 0,1 )[0];
+		var testSubject = remainingInactiveExtenders.splice( 0, 1 )[0];
 
 		return showAndHideExtensionAgain( testSubject, hideControl.promise(), {
 			afterCallingShowExtension: function( instance ) {

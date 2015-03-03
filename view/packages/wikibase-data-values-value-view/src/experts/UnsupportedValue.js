@@ -56,7 +56,7 @@
 			} else if( value || this.viewState().option( 'dataValueType' ) ) {
 				var dataValueType = ( value )
 					? value.getType()
-					: this.viewState().option( 'dataValueType');
+					: this.viewState().option( 'dataValueType' );
 				unsupportedMsg = this._messageProvider.getMessage(
 					'valueview-expert-unsupportedvalue-unsupporteddatavalue',
 					[ dataValueType ]

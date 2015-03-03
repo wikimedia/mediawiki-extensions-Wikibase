@@ -41,7 +41,7 @@
 			},
 			null
 		);
-		var $extender = $( '<div />' ).appendTo( 'body') ;
+		var $extender = $( '<div />' ).appendTo( 'body' ) ;
 
 		calendarHint.init( $extender );
 		calendarHint.draw();
@@ -62,7 +62,7 @@
 			},
 			null
 		);
-		var $extender = $( '<div />' ).appendTo( 'body') ;
+		var $extender = $( '<div />' ).appendTo( 'body' ) ;
 
 		calendarHint.init( $extender );
 		calendarHint.draw();
@@ -85,7 +85,7 @@
 			},
 			setSpy
 		);
-		var $extender = $( '<div />' ).appendTo( 'body') ;
+		var $extender = $( '<div />' ).appendTo( 'body' ) ;
 
 		assert.equal( timeValue.calendar(), 'Gregorian' );
 
@@ -115,7 +115,7 @@
 			},
 			setSpy
 		);
-		var $extender = $( '<div />' ).appendTo( 'body') ;
+		var $extender = $( '<div />' ).appendTo( 'body' ) ;
 
 		calendarHint.init( $extender );
 		calendarHint.draw();

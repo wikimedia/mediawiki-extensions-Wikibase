@@ -29,9 +29,9 @@ jQuery.util.adaptlettercase = ( function( $ ) {
 			return destination;
 		}
 
-		if ( method === 'all' ) {
+		if( method === 'all' ) {
 			return source.substr( 0, destination.length );
-		} else if ( method === 'first' ) {
+		} else if( method === 'first' ) {
 			return source.substr( 0, 1 ) + destination.substr( 1 );
 		} else {
 			return destination;
