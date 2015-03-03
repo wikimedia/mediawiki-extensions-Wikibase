@@ -57,20 +57,20 @@ $.extend( SELF.prototype, {
 	 * Returns the sitelinks revision id.
 	 */
 	getSitelinksRevision: function( lang ) {
-		if( this._revisions.sitelinksRevision[lang] === undefined ) {
-			return this._revisions.baseRevision;
+		if( Object.prototype.hasOwnProperty.call( this._revisions.sitelinksRevision, lang ) ) {
+			return this._revisions.sitelinksRevision[lang];
 		}
-		return this._revisions.sitelinksRevision[lang];
+		return this._revisions.baseRevision;
 	},
 
 	/**
 	 * Returns the claim revision id.
 	 */
 	getClaimRevision: function( claimGuid ) {
-		if( this._revisions.claimRevisions[claimGuid] === undefined ) {
-			return this._revisions.baseRevision;
+		if( Object.prototype.hasOwnProperty.call( this._revisions.claimRevisions, claimGuid ) ) {
+			return this._revisions.claimRevisions[claimGuid];
 		}
-		return this._revisions.claimRevisions[claimGuid];
+		return this._revisions.baseRevision;
 	},
 
 	/**
