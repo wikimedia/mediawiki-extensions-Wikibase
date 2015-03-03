@@ -23,11 +23,12 @@ class MonolingualHtmlFormatter extends ValueFormatterBase {
 	private $languageNameLookup;
 
 	/**
-	 * @param FormatterOptions $options
+	 * @param FormatterOptions|null $options
 	 * @param LanguageNameLookup $languageNameLookup
 	 */
-	public function __construct( FormatterOptions $options, LanguageNameLookup $languageNameLookup ) {
+	public function __construct( FormatterOptions $options = null, LanguageNameLookup $languageNameLookup ) {
 		parent::__construct( $options );
+
 		$this->languageNameLookup = $languageNameLookup;
 	}
 
