@@ -53,7 +53,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof TimeValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an TimeValue.' );
+			throw new InvalidArgumentException( 'Data value type mismatch. Expected a TimeValue.' );
 		}
 
 		$html = '';
@@ -76,7 +76,6 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 			'calendar',
 			$this->getCalendarModelHtml( $value->getCalendarModel() )
 		);
-		// TODO: Provide "nice" rendering of precision, etc.
 		$html .= $this->getFieldHtml(
 			'precision',
 			$this->getAmountAndPrecisionHtml( $value->getPrecision() )
