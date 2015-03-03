@@ -52,7 +52,7 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof GlobeCoordinateValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an GlobeCoordinateValue.' );
+			throw new InvalidArgumentException( 'Data value type mismatch. Expected a GlobeCoordinateValue.' );
 		}
 
 		$html = '';

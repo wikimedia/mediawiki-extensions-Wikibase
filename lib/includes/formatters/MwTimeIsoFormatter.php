@@ -33,9 +33,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	public function __construct( FormatterOptions $options = null ) {
 		parent::__construct( $options );
 
-		$this->language = Language::factory(
-			$this->options->getOption( ValueFormatter::OPT_LANG )
-		);
+		$this->language = Language::factory( $this->getOption( ValueFormatter::OPT_LANG ) );
 	}
 
 	/**
@@ -43,7 +41,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof TimeValue ) ) {
-			throw new InvalidArgumentException( 'Value is not a TimeValue.' );
+			throw new InvalidArgumentException( 'Data value type mismatch. Expected a TimeValue.' );
 		}
 
 		return $this->formatTimeValue( $value );

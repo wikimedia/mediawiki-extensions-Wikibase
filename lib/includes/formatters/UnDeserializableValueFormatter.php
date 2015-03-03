@@ -23,13 +23,9 @@ class UnDeserializableValueFormatter extends ValueFormatterBase {
 	 * @param FormatterOptions|null $options
 	 */
 	public function __construct( FormatterOptions $options = null ) {
-		$this->options = $options ?: new FormatterOptions();
+		parent::__construct( $options );
 
-		$this->options->defaultOption( self::OPT_LANG, 'en' );
-		$this->options->defaultOption(
-			self::MESSAGE,
-			new Message( 'wikibase-undeserializable-value' )
-		);
+		$this->defaultOption( self::MESSAGE, new Message( 'wikibase-undeserializable-value' ) );
 	}
 
 	/**
