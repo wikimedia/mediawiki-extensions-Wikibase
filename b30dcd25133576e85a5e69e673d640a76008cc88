@@ -16,6 +16,24 @@
       "revId": "b30dcd25133576e85a5e69e673d640a76008cc88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1f5bc289",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entityview.css",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-03T13:21:01Z",
+      "side": 1,
+      "message": "I would prefer not to have a min-width but if statementgrouplistview is too narrow, text wraps and becomes difficult to edit.\n\nhttp://snag.gy/DQOfE.jpg\n\nhttp://snag.gy/6qSaI.jpg\n\n65em appears to work ok, maybe 55em also...\n\nwhat do you suggest?",
+      "parentUuid": "6e7c4fa4_9f67d249",
+      "revId": "b30dcd25133576e85a5e69e673d640a76008cc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
