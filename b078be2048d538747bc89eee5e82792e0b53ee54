@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_64b10b8c",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-03T11:25:52Z",
+      "side": 1,
+      "message": "This constructor already is in a dedicated View component :) I\u0027ll add the annotation, though.",
+      "parentUuid": "6e7c4fa4_a510a1f8",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_05b875e0",
         "filename": "view/resources/ViewFactory.js",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_1f3982d3",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-03T11:25:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_05b875e0",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_652fe93a",
         "filename": "view/resources/ViewFactory.js",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2015-02-26T07:55:36Z",
       "side": 1,
       "message": "Please do not put TODOs in the constructor/function-level documentation. The documentation here should be \"end-user\" only. (I admit that being a personal perception.) Maybe put it inline into the constructor? I never got accustomed to TODOs containing the word \"maybe\"... ;)",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_df2eaa88",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-03T11:25:52Z",
+      "side": 1,
+      "message": "I\u0027ll move the second one to phabricator, and the first inline.",
+      "parentUuid": "6e7c4fa4_652fe93a",
       "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_3f3b1ec5",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-03T11:25:52Z",
+      "side": 1,
+      "message": "It\u0027s IMHO correct to break every use of the factory when the factory gets another dependency. Using an amorphous object just hides the strong dependency relation.",
+      "parentUuid": "6e7c4fa4_05e155fa",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_c5eefdea",
         "filename": "view/resources/ViewFactory.js",
         "patchSetId": 6
@@ -116,6 +188,24 @@
       "writtenOn": "2015-02-26T07:55:36Z",
       "side": 1,
       "message": "I guess the return value can be specified more specifically as {jQuery.wikibase.entityview}.",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9f7352af",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-03T11:25:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_c5eefdea",
       "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -139,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_bf764e9d",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-03T11:25:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_e5e9b9e1",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_85f485ba",
         "filename": "view/resources/ViewFactory.js",
         "patchSetId": 6
@@ -150,6 +258,24 @@
       "writtenOn": "2015-02-26T07:55:36Z",
       "side": 1,
       "message": "@private",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5fa85ad7",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-03T11:25:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_85f485ba",
       "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -173,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_7fabd6d3",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-03T11:25:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_25e49109",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_c5f83dc2",
         "filename": "view/tests/qunit/ViewFactory.tests.js",
         "patchSetId": 6
@@ -184,6 +328,24 @@
       "writtenOn": "2015-02-26T07:55:36Z",
       "side": 1,
       "message": "Is there a reason why QUnit and sinon are not passed in?",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1fb6623c",
+        "filename": "view/tests/qunit/ViewFactory.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-03T11:25:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_c5f83dc2",
       "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -207,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ff61269e",
+        "filename": "view/tests/qunit/ViewFactory.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-03T11:25:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_a5f981c2",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_85fec5a9",
         "filename": "view/tests/qunit/ViewFactory.tests.js",
         "patchSetId": 6
@@ -218,6 +398,24 @@
       "writtenOn": "2015-02-26T07:55:36Z",
       "side": 1,
       "message": "ValueViewBuilder should explicitly be specified in the Resource Loader module dependecies.",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9f89127c",
+        "filename": "view/tests/qunit/ViewFactory.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-03T11:25:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_85fec5a9",
       "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
