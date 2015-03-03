@@ -16,6 +16,24 @@
       "revId": "022e22cc8d7e890ec83f5363beb2adf70a5158aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0801453c",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-03T20:12:58Z",
+      "side": 1,
+      "message": "I know. Why should it be forbidden to reorder the aliases? Special:SetAliases allows that, too.\n\nFunny but not related: The diff says nothing changed. Which is kind of true. Well...",
+      "parentUuid": "6e7c4fa4_655584fb",
+      "revId": "022e22cc8d7e890ec83f5363beb2adf70a5158aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
