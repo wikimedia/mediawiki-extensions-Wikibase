@@ -11,6 +11,10 @@ use Wikibase\TermIndex;
 /**
  * @covers Wikibase\Store\BufferingTermLookup
  *
+ * @group Wikibase
+ * @group WikibaseLib
+ * @group WikibaseStore
+ *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
