@@ -11,7 +11,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/wikibase/data-model/v/unstable.svg)](//packagist.org/packages/wikibase/data-model)
 
 **Wikibase DataModel** is the canonical PHP implementation of the
-[Data Model](https://meta.wikimedia.org/wiki/Wikidata/Data_model)
+[Data Model](https://www.mediawiki.org/wiki/Wikibase/DataModel)
 at the heart of the [Wikibase software](http://wikiba.se/).
 
 It is primarily used by the Wikibase MediaWiki extensions, though
