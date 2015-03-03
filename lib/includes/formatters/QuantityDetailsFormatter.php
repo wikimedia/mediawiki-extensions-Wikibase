@@ -33,13 +33,13 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	protected $quantityFormatter;
 
 	/**
-	 * @param FormatterOptions $options
+	 * @param FormatterOptions|null $options
 	 */
-	public function __construct( FormatterOptions $options ) {
+	public function __construct( FormatterOptions $options = null ) {
 		parent::__construct( $options );
 
-		$this->decimalFormatter = new DecimalFormatter( $options );
-		$this->quantityFormatter = new QuantityFormatter( $this->decimalFormatter, $options );
+		$this->decimalFormatter = new DecimalFormatter( $this->options );
+		$this->quantityFormatter = new QuantityFormatter( $this->decimalFormatter, $this->options );
 	}
 
 	/**
@@ -55,7 +55,7 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof QuantityValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an QuantityValue.' );
+			throw new InvalidArgumentException( 'Data value type mismatch. Expected a QuantityValue.' );
 		}
 
 		$html = '';
