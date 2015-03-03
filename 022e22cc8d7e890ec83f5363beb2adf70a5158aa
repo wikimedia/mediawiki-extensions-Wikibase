@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_655584fb",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-03T17:52:59Z",
+      "side": 1,
+      "message": "this considers the order of aliases",
+      "revId": "022e22cc8d7e890ec83f5363beb2adf70a5158aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
