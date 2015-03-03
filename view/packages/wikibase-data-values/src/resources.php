@@ -51,35 +51,20 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
+				'dataValues.TimeValue',
 				'globeCoordinate.js', // required by GlobeCoordinateValue
-				'time.js', // required by TimeValue
 				'util.inherit',
 			),
 		),
 
-		'mw.ext.dataValues' => $moduleTemplate + array(
+		'dataValues.TimeValue' => $moduleTemplate + array(
 			'scripts' => array(
-				'mw.ext.dataValues.js',
+				'values/TimeValue.js',
 			),
 			'dependencies' => array(
-				// load all values. TODO: this is bad but the system is not as advanced as ValueView yet.
-				'dataValues.values',
-				'time.js',
+				'dataValues.DataValue',
+				'util.inherit',
 			),
-			'messages' => array(
-				'jan', 'january',
-				'feb', 'february',
-				'mar', 'march',
-				'apr', 'april',
-				'may', 'may_long',
-				'jun', 'june',
-				'jul', 'july',
-				'aug', 'august',
-				'sep', 'september',
-				'oct', 'october',
-				'nov', 'november',
-				'dec', 'december',
-			)
 		),
 
 	);
