@@ -16,6 +16,24 @@
       "revId": "944b96b05c79d8ceb8ac617b989e58e7195e1056",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ff128657",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-03T10:36:53Z",
+      "side": 1,
+      "message": "gah. every fucking time.",
+      "parentUuid": "6e7c4fa4_86e3149b",
+      "revId": "944b96b05c79d8ceb8ac617b989e58e7195e1056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
