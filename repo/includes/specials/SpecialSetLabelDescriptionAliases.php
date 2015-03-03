@@ -334,10 +334,14 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		$changeOps = array();
 
 		if ( $this->label !== '' ) {
-			$changeOps['wbsetlabel'] = $changeOpFactory->newSetLabelOp(
-				$this->languageCode,
-				$this->label
-			);
+			if ( !$fingerprint->hasLabel( $this->languageCode )
+				|| $fingerprint->getLabel( $this->languageCode )->getText() !== $this->label
+			) {
+				$changeOps['wbsetlabel'] = $changeOpFactory->newSetLabelOp(
+					$this->languageCode,
+					$this->label
+				);
+			}
 		} elseif ( $fingerprint->hasLabel( $this->languageCode ) ) {
 			$changeOps['wbsetlabel'] = $changeOpFactory->newRemoveLabelOp(
 				$this->languageCode
@@ -345,10 +349,14 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		}
 
 		if ( $this->description !== '' ) {
-			$changeOps['wbsetdescription'] = $changeOpFactory->newSetDescriptionOp(
-				$this->languageCode,
-				$this->description
-			);
+			if ( !$fingerprint->hasDescription( $this->languageCode )
+				|| $fingerprint->getDescription( $this->languageCode )->getText() !== $this->description
+			) {
+				$changeOps['wbsetdescription'] = $changeOpFactory->newSetDescriptionOp(
+					$this->languageCode,
+					$this->description
+				);
+			}
 		} elseif ( $fingerprint->hasDescription( $this->languageCode ) ) {
 			$changeOps['wbsetdescription'] = $changeOpFactory->newRemoveDescriptionOp(
 				$this->languageCode
@@ -356,10 +364,14 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		}
 
 		if ( !empty( $this->aliases ) ) {
-			$changeOps['wbsetaliases'] = $changeOpFactory->newSetAliasesOp(
-				$this->languageCode,
-				$this->aliases
-			);
+			if ( !$fingerprint->hasAliasGroup( $this->languageCode )
+				|| $fingerprint->getAliasGroup( $this->languageCode )->getAliases() !== $this->aliases
+			) {
+				$changeOps['wbsetaliases'] = $changeOpFactory->newSetAliasesOp(
+					$this->languageCode,
+					$this->aliases
+				);
+			}
 		} elseif ( $fingerprint->hasAliasGroup( $this->languageCode ) ) {
 			$changeOps['wbsetaliases'] = $changeOpFactory->newRemoveAliasesOp(
 				$this->languageCode,
@@ -374,7 +386,6 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @return Summary
 	 */
 	private function getSummaryForLabelDescriptionAliases() {
-		// FIXME: Use the existing messages if only 1 of the 3 fields changed.
 		// FIXME: Introduce more specific messages if only 2 of the 3 fields changed.
 		$summary = new Summary( 'wbsetlabeldescriptionaliases' );
 		$summary->addAutoSummaryArgs( $this->label, $this->description, $this->aliases );
