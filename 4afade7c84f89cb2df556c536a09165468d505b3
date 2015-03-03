@@ -16,6 +16,24 @@
       "revId": "4afade7c84f89cb2df556c536a09165468d505b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5f55b9fa",
+        "filename": "repo/resources/wikibase.RevisionStore.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2015-03-03T14:35:01Z",
+      "side": 1,
+      "message": "When this._revisions.sitelinksRevision contains a property named \"hasOwnProperty\" and lang \u003d \"hasOwnProperty\" then\n\n Object.prototype.hasOwnProperty.call( this._revisions.sitelinksRevision, lang ) \u003d\u003d true\n\nbut\n\n  this._revisions.sitelinksRevision.hasOwnProperty( lang )\n\nfails with this._revisions.sitelinksRevision.hasOwnProperty is not a function.",
+      "parentUuid": "2e9df725_aa46ef52",
+      "revId": "4afade7c84f89cb2df556c536a09165468d505b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
