@@ -52,7 +52,7 @@ class TextInjector {
 	 *
 	 * @return string
 	 */
-	public function newMarker( $name /* ... */ ) {
+	public function newMarker( $name /*...*/ ) {
 		$marker = '$' . $this->uniqPrefix . '#' . ++$this->markerIndex . '$';
 		$args = func_get_args();
 

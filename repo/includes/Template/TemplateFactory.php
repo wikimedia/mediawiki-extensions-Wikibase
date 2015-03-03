@@ -42,7 +42,7 @@ class TemplateFactory {
 	 *
 	 * @return string
 	 */
-	public function render( $key /* ... */ ) {
+	public function render( $key /*...*/ ) {
 		$params = func_get_args();
 		array_shift( $params );
 

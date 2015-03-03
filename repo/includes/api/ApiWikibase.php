@@ -516,7 +516,7 @@ abstract class ApiWikibase extends ApiBase {
 	 * @param string $errorCode A code identifying the error.
 	 * @param string [$param,...] Parameters for the Message.
 	 */
-	protected function dieMessage( $errorCode ) {
+	protected function dieMessage( $errorCode /*...*/ ) {
 		call_user_func_array( array( $this->errorReporter, 'dieMessage' ), func_get_args() );
 	}
 

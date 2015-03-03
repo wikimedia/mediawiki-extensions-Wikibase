@@ -34,7 +34,7 @@ class NoLangLinkHandler {
 	 *
 	 * @return string
 	 */
-	public static function handle( &$parser ) {
+	public static function handle( &$parser /*...*/ ) {
 		$langs = func_get_args();
 
 		// Remove the first member, which is the parser.

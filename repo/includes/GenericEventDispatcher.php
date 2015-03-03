@@ -82,7 +82,7 @@ class GenericEventDispatcher {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function dispatch( $event ) {
+	public function dispatch( $event /*...*/ ) {
 		if ( !is_string( $event ) ) {
 			throw new InvalidArgumentException( '$event must be a string' );
 		}
