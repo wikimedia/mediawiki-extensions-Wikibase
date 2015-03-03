@@ -20,20 +20,12 @@ class UnDeserializableValueFormatter extends ValueFormatterBase {
 	const MESSAGE = 'message';
 
 	/**
-	 * @param FormatterOptions $options
+	 * @param FormatterOptions|null $options
 	 */
-	public function __construct( FormatterOptions $options ) {
-		$this->options = $options;
+	public function __construct( FormatterOptions $options = null ) {
+		parent::__construct( $options );
 
-		$this->options->defaultOption(
-			self::OPT_LANG,
-			'en'
-		);
-
-		$this->options->defaultOption(
-			self::MESSAGE,
-			new Message( 'wikibase-undeserializable-value' )
-		);
+		$this->defaultOption( self::MESSAGE, new Message( 'wikibase-undeserializable-value' ) );
 	}
 
 	/**
