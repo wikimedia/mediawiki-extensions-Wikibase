@@ -43,6 +43,23 @@ define( [
 					precision: 9
 				}]
 			];
+		},
+
+		/**
+		 * Tests if the equals method is able to return false.
+		 *
+		 * @since 0.7
+		 *
+		 * @param {QUnit} assert
+		 */
+		testNotEquals: function( assert ) {
+			var timeValue1 = new dv.TimeValue( '2015-12-30T00:00:00Z' ),
+				timeValue2 = new dv.TimeValue( '2015-12-31T00:00:00Z' );
+
+			assert.ok(
+				!timeValue1.equals( timeValue2 ),
+				'instances encapsulating different values are not equal'
+			);
 		}
 
 	} );

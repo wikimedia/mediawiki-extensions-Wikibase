@@ -175,8 +175,8 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( iso8601
 	 * @inheritdoc
 	 */
 	equals: function( value ) {
-		if( value instanceof SELF ) {
-			return true;
+		if( !( value instanceof SELF ) ) {
+			return false;
 		}
 
 		var valueJSON = value.toJSON(),
