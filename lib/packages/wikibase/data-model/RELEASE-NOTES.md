@@ -2,10 +2,13 @@
 
 ## Version 3.0.0 (dev)
 
-* `Statement` no longer takes a `Claim` in its constructor
-* `Statement::setClaim` and `Statement::getClaim` have been removed
-* Removed `ClaimList`
-* Removed `ClaimListAccess`
+* The concept of `Claim` is no longer modelled
+	* The `Claim` class itself has been removed, though `Claim` is now a temporary alias for `Statement`
+	* `Claim::RANK_TRUTH` have been removed
+	* `Statement` no longer takes a `Claim` in its constructor
+	* `Statement::setClaim` and `Statement::getClaim` have been removed
+	* Removed `ClaimList`
+	* Removed `ClaimListAccess`
 
 ## Version 2.6.0 (dev)
 

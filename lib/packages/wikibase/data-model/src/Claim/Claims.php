@@ -15,7 +15,7 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * A claim (identified using it's GUID) can only be added once.
  *
- * @deprecated since 1.0
+ * @deprecated since 1.0, use StatementList and associated classes instead.
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -63,8 +63,6 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	}
 
 	/**
-	 * @param Claim $claim
-	 *
 	 * @param Claim $claim
 	 *
 	 * @throws InvalidArgumentException
@@ -437,7 +435,7 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	 * @return Claims
 	 */
 	public function getBestClaims() {
-		$rank = Claim::RANK_TRUTH;
+		$rank = Statement::RANK_PREFERRED;
 
 		do {
 			$claims = $this->getByRank( $rank );

@@ -565,12 +565,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 				Statement::RANK_PREFERRED,
 				new Claims( array( $s2 ) ),
 			),
-			// s2 has RANK_PREFERRED, so doesn't match RANK_TRUTH
-			array(
-				new Claims( array( $s2 ) ),
-				Claim::RANK_TRUTH,
-				new Claims(),
-			),
 			// s2 and s3 have RANK_PREFERRED, so return them
 			array(
 				new Claims( array( $s2, $s1, $s3 ) ),
@@ -672,18 +666,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 		$claims = new Claims( array( $s3, $s1, $s2 ) );
 		$expected = new Claims( array( $s2, $s3 ) );
-		$this->assertEquals( $claims->getBestClaims(), $expected );
-	}
-
-	public function testGetBestClaimsReturnsTruthRanks() {
-		$s1 = new Claim( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
-		$s1->setGuid( 'kittens' );
-
-		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) );
-		$s2->setRank( Statement::RANK_NORMAL );
-
-		$claims = new Claims( array( $s1, $s2 ) );
-		$expected = new Claims( array( $s1 ) );
 		$this->assertEquals( $claims->getBestClaims(), $expected );
 	}
 

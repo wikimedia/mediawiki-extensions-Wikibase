@@ -19,3 +19,6 @@ if ( defined( 'MEDIAWIKI' ) ) {
 		require_once __DIR__ . '/WikibaseDataModel.mw.php';
 	} );
 }
+
+// Aliases introduced in 3.0.0
+class_alias( 'Wikibase\DataModel\Statement\Statement', 'Wikibase\DataModel\Claim\Claim' );
