@@ -151,7 +151,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 				'@.*<td[^<>]*precision">\(seconds: 1\)</td>.*@s'
 			),
 			'10 years precision' => array(
-				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR10, $gregorian ),
 				'@.*<td[^<>]*precision">\(years: 10\)</td>.*@s'
 			),
 			'Max. precision' => array(
@@ -163,7 +163,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 				'@.*<td[^<>]*before">\(years: 2\)</td>.*@s'
 			),
 			'After in years' => array(
-				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 5, TimeValue::PRECISION_10a, $gregorian ),
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 5, TimeValue::PRECISION_YEAR10, $gregorian ),
 				'@.*<td[^<>]*after">\(years: 50\)</td>.*@s'
 			),
 			'After in days' => array(

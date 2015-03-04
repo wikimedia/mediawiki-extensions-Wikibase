@@ -218,45 +218,45 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		$func = 'round';
 
 		switch ( $precision ) {
-			case TimeValue::PRECISION_Ga:
+			case TimeValue::PRECISION_YEAR1G:
 				$msg = 'Gannum';
 				$shift = 1e+9;
 				break;
-			case TimeValue::PRECISION_100Ma:
+			case TimeValue::PRECISION_YEAR100M:
 				$msg = 'Mannum';
 				$shift = 1e+8;
 				$unshift = 1e+2;
 				break;
-			case TimeValue::PRECISION_10Ma:
+			case TimeValue::PRECISION_YEAR10M:
 				$msg = 'Mannum';
 				$shift = 1e+7;
 				$unshift = 1e+1;
 				break;
-			case TimeValue::PRECISION_Ma:
+			case TimeValue::PRECISION_YEAR1M:
 				$msg = 'Mannum';
 				$shift = 1e+6;
 				break;
-			case TimeValue::PRECISION_100ka:
+			case TimeValue::PRECISION_YEAR100K:
 				$msg = 'annum';
 				$shift = 1e+5;
 				$unshift = 1e+5;
 				break;
-			case TimeValue::PRECISION_10ka:
+			case TimeValue::PRECISION_YEAR10K:
 				$msg = 'annum';
 				$shift = 1e+4;
 				$unshift = 1e+4;
 				break;
-			case TimeValue::PRECISION_ka:
+			case TimeValue::PRECISION_YEAR1K:
 				$msg = 'millennium';
 				$func = 'ceil';
 				$shift = 1e+3;
 				break;
-			case TimeValue::PRECISION_100a:
+			case TimeValue::PRECISION_YEAR100:
 				$msg = 'century';
 				$func = 'ceil';
 				$shift = 1e+2;
 				break;
-			case TimeValue::PRECISION_10a:
+			case TimeValue::PRECISION_YEAR10:
 				$msg = '10annum';
 				$func = 'floor';
 				$shift = 1e+1;
