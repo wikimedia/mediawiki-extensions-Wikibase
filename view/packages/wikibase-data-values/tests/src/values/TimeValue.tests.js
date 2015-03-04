@@ -36,6 +36,19 @@ define( [
 		getConstructorArguments: function() {
 			return [
 				['+0000000000001942-04-01T00:00:00Z'],
+
+				// Optional parts
+				['+0000000000001942-04-01T00:00:00'],
+				['+0000000000001942-04-01T00:00'],
+				['+0000000000001942-04-01T'],
+				['0000000000001942-04-01T'],
+				['1942-04-01T'],
+
+				// Minimal and maximal length
+				['+1-1-1T1:1:1Z'],
+				['+9999999999999999-12-31T23:59:59Z'],
+
+				// Options
 				['+0000000000001400-01-01T00:00:00Z', {
 					calendarModel: 'http://www.wikidata.org/entity/Q1985786'
 				} ],
@@ -43,6 +56,46 @@ define( [
 					precision: 9
 				}]
 			];
+		},
+
+		/**
+		 * Tests if the constructor fails as expected for invalid and unsupported timestamp values.
+		 *
+		 * @since 0.7
+		 *
+		 * @param {QUnit} assert
+		 */
+		testConstructorThrowsException: function( assert ) {
+			var invalidTimestamps = [
+				// Non-strings
+				undefined,
+				null,
+				1,
+				0.1,
+
+				// The "T" is required
+				'',
+				'1',
+				'1942-04-01',
+				'+0000000000002015-01-01 01:01:01Z',
+
+				// Unsupported time zones
+				'+0000000000002015-01-01T01:01:01A',
+				'+0000000000002015-01-01T01:01:01+0000',
+				'+0000000000002015-01-01T01:01:01+00:00'
+			];
+			var i, invalidTimestamp;
+
+			for ( i = 0; i < invalidTimestamps.length; i++ ) {
+				invalidTimestamp = invalidTimestamps[i];
+
+				assert.throws(
+					function() {
+						dv.TimeValue( invalidTimestamp );
+					},
+					'"' + invalidTimestamp + '" is not a valid TimeValue timestamp'
+				);
+			}
 		},
 
 		/**
