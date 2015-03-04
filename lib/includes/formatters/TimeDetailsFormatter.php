@@ -171,7 +171,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		}
 
 		if ( $precision < TimeValue::PRECISION_YEAR ) {
-			// PRECISION_10a becomes 10 years, PRECISION_100a becomes 100 years, and so on.
+			// PRECISION_YEAR10 becomes 10 years, PRECISION_YEAR100 becomes 100 years, and so on.
 			$precisionInYears = pow( 10, TimeValue::PRECISION_YEAR - $precision );
 			$amount *= $precisionInYears;
 		} elseif ( $precision > TimeValue::PRECISION_SECOND ) {

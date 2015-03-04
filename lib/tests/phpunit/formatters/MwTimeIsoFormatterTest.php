@@ -79,133 +79,133 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 
 			// Rounding for decades is different from rounding for centuries
 			array(
-				'+1982-01-01T01:01:01Z', TimeValue::PRECISION_10a,
+				'+1982-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10,
 				'1980s',
 			),
 			array(
-				'+1988-01-01T01:01:01Z', TimeValue::PRECISION_10a,
+				'+1988-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10,
 				'1980s',
 			),
 			array(
-				'-1982-01-01T01:01:01Z', TimeValue::PRECISION_10a,
+				'-1982-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10,
 				'1980s BCE',
 			),
 			array(
-				'-1988-01-01T01:01:01Z', TimeValue::PRECISION_10a,
+				'-1988-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10,
 				'1980s BCE',
 			),
 
 			array(
-				'+1822-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'+1822-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100,
 				'19. century',
 			),
 			array(
-				'+1822-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'+1822-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100,
 				'19. century',
 			),
 			array(
-				'-1888-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'-1888-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100,
 				'19. century BCE',
 			),
 			array(
-				'-1888-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'-1888-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100,
 				'19. century BCE',
 			),
 
 			array(
-				'+1222-01-01T01:01:01Z', TimeValue::PRECISION_ka,
+				'+1222-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1K,
 				'2. millennium',
 			),
 			array(
-				'+1888-01-01T01:01:01Z', TimeValue::PRECISION_ka,
+				'+1888-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1K,
 				'2. millennium',
 			),
 			array(
-				'-1222-01-01T01:01:01Z', TimeValue::PRECISION_ka,
+				'-1222-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1K,
 				'2. millennium BCE',
 			),
 
 			// So what about the "Millenium Disagreement"?
 			array(
-				'+1600-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'+1600-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100,
 				'16. century',
 			),
 			array(
-				'+2000-01-01T01:01:01Z', TimeValue::PRECISION_ka,
+				'+2000-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1K,
 				'2. millennium',
 			),
 
 			// Positive dates, stepping through precisions
 			array(
-				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_10a,
+				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10,
 				'12345678910s',
 			),
 			array(
-				'+12345678919-01-01T01:01:01Z', TimeValue::PRECISION_10a,
+				'+12345678919-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10,
 				'12345678910s',
 			),
 			array(
-				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100,
 				'123456790. century',
 			),
 			array(
-				'+12345678992-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'+12345678992-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100,
 				'123456790. century',
 			),
 			array(
-				'+12345678112-01-01T01:01:01Z', TimeValue::PRECISION_ka,
+				'+12345678112-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1K,
 				'12345679. millennium',
 			),
 			array(
-				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_ka,
+				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1K,
 				'12345679. millennium',
 			),
 			array(
-				'+12345671912-01-01T01:01:01Z', TimeValue::PRECISION_10ka,
+				'+12345671912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10K,
 				'12345670000 years CE',
 			),
 			array(
-				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_10ka,
+				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10K,
 				'12345680000 years CE',
 			),
 			array(
-				'+12345618912-01-01T01:01:01Z', TimeValue::PRECISION_100ka,
+				'+12345618912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100K,
 				'12345600000 years CE',
 			),
 			array(
-				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_100ka,
+				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100K,
 				'12345700000 years CE',
 			),
 			array(
-				'+12345178912-01-01T01:01:01Z', TimeValue::PRECISION_Ma,
+				'+12345178912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1M,
 				'12345 million years CE',
 			),
 			array(
-				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_Ma,
+				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1M,
 				'12346 million years CE',
 			),
 			array(
-				'+12341678912-01-01T01:01:01Z', TimeValue::PRECISION_10Ma,
+				'+12341678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10M,
 				'12340 million years CE',
 			),
 			array(
-				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_10Ma,
+				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10M,
 				'12350 million years CE',
 			),
 			array(
-				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_100Ma,
+				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100M,
 				'12300 million years CE',
 			),
 			array(
-				'+12375678912-01-01T01:01:01Z', TimeValue::PRECISION_100Ma,
+				'+12375678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100M,
 				'12400 million years CE',
 			),
 			array(
-				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
+				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1G,
 				'12 billion years CE',
 			),
 			array(
-				'+12545678912-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
+				'+12545678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1G,
 				'13 billion years CE',
 			),
 
@@ -253,75 +253,75 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 
 			// Negative dates, stepping through precisions
 			array(
-				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_10a,
+				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10,
 				'12345678910s BCE',
 			),
 			array(
-				'-12345678919-01-01T01:01:01Z', TimeValue::PRECISION_10a,
+				'-12345678919-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10,
 				'12345678910s BCE',
 			),
 			array(
-				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100,
 				'123456790. century BCE',
 			),
 			array(
-				'-12345678992-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'-12345678992-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100,
 				'123456790. century BCE',
 			),
 			array(
-				'-12345678112-01-01T01:01:01Z', TimeValue::PRECISION_ka,
+				'-12345678112-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1K,
 				'12345679. millennium BCE',
 			),
 			array(
-				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_ka,
+				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1K,
 				'12345679. millennium BCE',
 			),
 			array(
-				'-12345671912-01-01T01:01:01Z', TimeValue::PRECISION_10ka,
+				'-12345671912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10K,
 				'12345670000 years BCE',
 			),
 			array(
-				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_10ka,
+				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10K,
 				'12345680000 years BCE',
 			),
 			array(
-				'-12345618912-01-01T01:01:01Z', TimeValue::PRECISION_100ka,
+				'-12345618912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100K,
 				'12345600000 years BCE',
 			),
 			array(
-				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_100ka,
+				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100K,
 				'12345700000 years BCE',
 			),
 			array(
-				'-12345178912-01-01T01:01:01Z', TimeValue::PRECISION_Ma,
+				'-12345178912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1M,
 				'12345 million years BCE',
 			),
 			array(
-				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_Ma,
+				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1M,
 				'12346 million years BCE',
 			),
 			array(
-				'-12341678912-01-01T01:01:01Z', TimeValue::PRECISION_10Ma,
+				'-12341678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10M,
 				'12340 million years BCE',
 			),
 			array(
-				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_10Ma,
+				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR10M,
 				'12350 million years BCE',
 			),
 			array(
-				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_100Ma,
+				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100M,
 				'12300 million years BCE',
 			),
 			array(
-				'-12375678912-01-01T01:01:01Z', TimeValue::PRECISION_100Ma,
+				'-12375678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR100M,
 				'12400 million years BCE',
 			),
 			array(
-				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
+				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1G,
 				'12 billion years BCE',
 			),
 			array(
-				'-12545678912-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
+				'-12545678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1G,
 				'13 billion years BCE',
 			),
 
@@ -378,15 +378,15 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 
 			// centuries and millenia start with 1, so we can format "low" years just fine
 			array(
-				'+100-00-00T00:00:06Z', TimeValue::PRECISION_ka,
+				'+100-00-00T00:00:06Z', TimeValue::PRECISION_YEAR1K,
 				'1. millennium'
 			),
 			array(
-				'-100-00-00T00:00:06Z', TimeValue::PRECISION_ka,
+				'-100-00-00T00:00:06Z', TimeValue::PRECISION_YEAR1K,
 				'1. millennium BCE'
 			),
 			array(
-				'+10-00-00T00:00:07Z', TimeValue::PRECISION_100a,
+				'+10-00-00T00:00:07Z', TimeValue::PRECISION_YEAR100,
 				'1. century'
 			),
 
@@ -402,77 +402,77 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 
 			// Precision to low, falling back to year
 			array(
-				'-1-00-00T00:00:00Z', TimeValue::PRECISION_Ga,
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G,
 				'1 BCE',
 			),
 			array(
-				'-1-00-00T00:00:00Z', TimeValue::PRECISION_100Ma,
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100M,
 				'1 BCE',
 			),
 			array(
-				'-1-00-00T00:00:00Z', TimeValue::PRECISION_10Ma,
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10M,
 				'1 BCE',
 			),
 			array(
-				'-1-00-00T00:00:00Z', TimeValue::PRECISION_Ma,
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M,
 				'1 BCE',
 			),
 			array(
-				'-1-00-00T00:00:00Z', TimeValue::PRECISION_100ka,
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100K,
 				'1 BCE',
 			),
 			array(
-				'-1-00-00T00:00:00Z', TimeValue::PRECISION_10ka,
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10K,
 				'1 BCE',
 			),
 			array(
-				'-1-00-00T00:00:00Z', TimeValue::PRECISION_ka,
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1K,
 				'1. millennium BCE',
 			),
 			array(
-				'-1-00-00T00:00:00Z', TimeValue::PRECISION_100a,
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100,
 				'1. century BCE',
 			),
 			array(
-				'-1-00-00T00:00:00Z', TimeValue::PRECISION_10a,
+				'-1-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10,
 				'1 BCE',
 			),
 
 			// Better than the raw ISO string
 			array(
-				'-00000000000-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
+				'-00000000000-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1G,
 				'0',
 			),
 			array(
-				'-0-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
+				'-0-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1G,
 				'0',
 			),
 			array(
-				'+100000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga,
+				'+100000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G,
 				'100000000',
 			),
 			array(
-				'+10000000-00-00T00:00:01Z', TimeValue::PRECISION_100Ma,
+				'+10000000-00-00T00:00:01Z', TimeValue::PRECISION_YEAR100M,
 				'10000000',
 			),
 			array(
-				'+1000000-00-00T00:00:02Z', TimeValue::PRECISION_10Ma,
+				'+1000000-00-00T00:00:02Z', TimeValue::PRECISION_YEAR10M,
 				'1000000',
 			),
 			array(
-				'+100000-00-00T00:00:03Z', TimeValue::PRECISION_Ma,
+				'+100000-00-00T00:00:03Z', TimeValue::PRECISION_YEAR1M,
 				'100000',
 			),
 			array(
-				'+10000-00-00T00:00:04Z', TimeValue::PRECISION_100ka,
+				'+10000-00-00T00:00:04Z', TimeValue::PRECISION_YEAR100K,
 				'10000',
 			),
 			array(
-				'+1000-00-00T00:00:05Z', TimeValue::PRECISION_10ka,
+				'+1000-00-00T00:00:05Z', TimeValue::PRECISION_YEAR10K,
 				'1000',
 			),
 			array(
-				'+1-00-00T00:00:08Z', TimeValue::PRECISION_10a,
+				'+1-00-00T00:00:08Z', TimeValue::PRECISION_YEAR10,
 				'1',
 			),
 			array(

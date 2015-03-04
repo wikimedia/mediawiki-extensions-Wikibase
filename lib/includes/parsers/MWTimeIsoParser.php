@@ -33,23 +33,23 @@ class MWTimeIsoParser extends StringValueParser {
 	 *      parsed with the given message keys
 	 */
 	private static $precisionMsgKeys = array(
-		TimeValue::PRECISION_Ga => array(
+		TimeValue::PRECISION_YEAR1G => array(
 			'wikibase-time-precision-Gannum',
 			'wikibase-time-precision-BCE-Gannum',
 		),
-		TimeValue::PRECISION_Ma => array(
+		TimeValue::PRECISION_YEAR1M => array(
 			'wikibase-time-precision-Mannum',
 			'wikibase-time-precision-BCE-Mannum',
 		),
-		TimeValue::PRECISION_ka => array(
+		TimeValue::PRECISION_YEAR1K => array(
 			'wikibase-time-precision-millennium',
 			'wikibase-time-precision-BCE-millennium',
 		),
-		TimeValue::PRECISION_100a => array(
+		TimeValue::PRECISION_YEAR100 => array(
 			'wikibase-time-precision-century',
 			'wikibase-time-precision-BCE-century',
 		),
-		TimeValue::PRECISION_10a => array(
+		TimeValue::PRECISION_YEAR10 => array(
 			'wikibase-time-precision-annum',
 			'wikibase-time-precision-BCE-annum',
 			'wikibase-time-precision-10annum',
@@ -58,11 +58,11 @@ class MWTimeIsoParser extends StringValueParser {
 	);
 
 	private static $paddedZeros = array(
-		TimeValue::PRECISION_Ga => 9,
-		TimeValue::PRECISION_Ma => 6,
-		TimeValue::PRECISION_ka => 3,
-		TimeValue::PRECISION_100a => 2,
-		TimeValue::PRECISION_10a => 0
+		TimeValue::PRECISION_YEAR1G => 9,
+		TimeValue::PRECISION_YEAR1M => 6,
+		TimeValue::PRECISION_YEAR1K => 3,
+		TimeValue::PRECISION_YEAR100 => 2,
+		TimeValue::PRECISION_YEAR10 => 0
 	);
 
 	/**
