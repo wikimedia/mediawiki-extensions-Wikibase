@@ -133,7 +133,3 @@ entity:formatPropertyValues( 'P5', { mw.wikibase.entity.claimRanks.RANK_NORMAL }
  -- Return all claims with id P123 (as the table passed contains all possible claim ranks)
 entity:formatPropertyValues( 'P123', mw.wikibase.entity.claimRanks )
 </source>
-
-=== mw.wikibase.entity.create ===
-<code>mw.wikibase.entity.create( data )</code><br>
-Creates a new <code>mw.wikibase.entity</code> object for the given entity data table. This function is only used for internal calls in the current state of the Lua integration.
