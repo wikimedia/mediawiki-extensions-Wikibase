@@ -17,7 +17,7 @@ var PARENT = dv.DataValue;
  * @param {Object} [options]
  * @param {string} [options.calendarModel=dataValues.TimeValue.CALENDARS.GREGORIAN.uri]
  *        Wikidata URL of the calendar model.
- * @param {number} [options.precision=dataValues.TimeValue.PRECISION.DAY]
+ * @param {number} [options.precision=dataValues.TimeValue.PRECISIONS.DAY]
  * @param {number} [options.before=0]
  * @param {number} [options.after=0]
  * @param {number} [options.timezone=0]
