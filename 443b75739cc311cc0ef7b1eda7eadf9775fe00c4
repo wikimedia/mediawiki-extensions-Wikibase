@@ -16,6 +16,24 @@
       "revId": "443b75739cc311cc0ef7b1eda7eadf9775fe00c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_616a4fec",
+        "filename": "repo/resources/templates.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-04T18:01:04Z",
+      "side": 1,
+      "message": "If it is guaranteed that the order changing won\u0027t fall into cache trap (updated JS but outdated template, that from what I know it is guaranteed by appended version of on bundled JS but can not guarantee that by myself) I would gladly do that by my own but I was thinking better to defer that cleanup to another change.",
+      "parentUuid": "6e7c4fa4_a1a707a3",
+      "revId": "443b75739cc311cc0ef7b1eda7eadf9775fe00c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
