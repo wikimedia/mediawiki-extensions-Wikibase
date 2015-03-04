@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a1a707a3",
+        "filename": "repo/resources/templates.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-03-04T17:36:25Z",
+      "side": 1,
+      "message": "Should the calls to this not be updated to no longer pass in the now unused argument?",
+      "revId": "443b75739cc311cc0ef7b1eda7eadf9775fe00c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
