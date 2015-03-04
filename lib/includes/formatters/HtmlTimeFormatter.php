@@ -5,7 +5,6 @@ namespace Wikibase\Lib;
 use DataValues\TimeValue;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
@@ -20,8 +19,8 @@ use ValueFormatters\ValueFormatterBase;
 class HtmlTimeFormatter extends ValueFormatterBase {
 
 	private static $calendarKeys = array(
-		TimeFormatter::CALENDAR_GREGORIAN => 'valueview-expert-timevalue-calendar-gregorian',
-		TimeFormatter::CALENDAR_JULIAN => 'valueview-expert-timevalue-calendar-julian',
+		TimeValue::CALENDAR_GREGORIAN => 'valueview-expert-timevalue-calendar-gregorian',
+		TimeValue::CALENDAR_JULIAN => 'valueview-expert-timevalue-calendar-julian',
 	);
 
 	/**
@@ -114,7 +113,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	private function getDefaultCalendar( $year ) {
 		// The Gregorian calendar was introduced in October 1582,
 		// so we'll default to Julian for all years before 1583.
-		return $year <= 1582 ? TimeFormatter::CALENDAR_JULIAN : TimeFormatter::CALENDAR_GREGORIAN;
+		return $year <= 1582 ? TimeValue::CALENDAR_JULIAN : TimeValue::CALENDAR_GREGORIAN;
 	}
 
 	/**

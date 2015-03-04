@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\TimeValue;
-use ValueFormatters\TimeFormatter;
 use Wikibase\Lib\MwTimeIsoFormatter;
 use Wikibase\Lib\Parsers\TimeParserFactory;
 
@@ -22,24 +21,25 @@ class TimeFormatterParserRoundtripTest extends \MediaWikiTestCase {
 			array( '+0000001987654321-12-31T00:00:00Z', TimeValue::PRECISION_DAY ),
 			array( '+0000001987654321-12-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
 			array( '+0000001987654321-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
-			array( '+0000001987654320-00-00T00:00:00Z', TimeValue::PRECISION_10a ),
-			array( '+0000001987654300-00-00T00:00:00Z', TimeValue::PRECISION_100a ),
-			array( '+0000001987654000-00-00T00:00:00Z', TimeValue::PRECISION_ka ),
-			array( '+0000001987650000-00-00T00:00:00Z', TimeValue::PRECISION_10ka ),
-			array( '+0000001987600000-00-00T00:00:00Z', TimeValue::PRECISION_100ka ),
-			array( '+0000001987000000-00-00T00:00:00Z', TimeValue::PRECISION_Ma ),
-			array( '+0000001980000000-00-00T00:00:00Z', TimeValue::PRECISION_10Ma ),
-			array( '+0000001900000000-00-00T00:00:00Z', TimeValue::PRECISION_100Ma ),
-			array( '+0000001000000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga ),
+			array( '+0000001987654320-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10 ),
+			array( '+0000001987654300-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100 ),
+			array( '+0000001987654000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1K ),
+			array( '+0000001987650000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10K ),
+			array( '+0000001987600000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100K ),
+			array( '+0000001987000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M ),
+			array( '+0000001980000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10M ),
+			array( '+0000001900000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100M ),
+			array( '+0000001000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G ),
 		);
 	}
 
 	public function timeValueProvider() {
+		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
 		$cases = array();
 
 		foreach ( $this->isoTimestampProvider() as $case ) {
 			$cases[] = array(
-				new TimeValue( $case[0], 0, 0, 0, $case[1], TimeFormatter::CALENDAR_GREGORIAN )
+				new TimeValue( $case[0], 0, 0, 0, $case[1], $gregorian )
 			);
 		}
 

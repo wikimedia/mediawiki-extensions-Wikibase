@@ -6,7 +6,6 @@ use DataValues\TimeValue;
 use Html;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
@@ -140,10 +139,10 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 */
 	private function getCalendarModelHtml( $calendarModel ) {
 		switch ( $calendarModel ) {
-			case TimeFormatter::CALENDAR_GREGORIAN:
+			case TimeValue::CALENDAR_GREGORIAN:
 				$key = 'valueview-expert-timevalue-calendar-gregorian';
 				break;
-			case TimeFormatter::CALENDAR_JULIAN:
+			case TimeValue::CALENDAR_JULIAN:
 				$key = 'valueview-expert-timevalue-calendar-julian';
 				break;
 			default:
@@ -181,7 +180,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		}
 
 		if ( $precision < TimeValue::PRECISION_YEAR ) {
-			// PRECISION_10a becomes 10 years, PRECISION_100a becomes 100 years, and so on.
+			// PRECISION_YEAR10 becomes 10 years, PRECISION_YEAR100 becomes 100 years, and so on.
 			$precisionInYears = pow( 10, TimeValue::PRECISION_YEAR - $precision );
 			$amount *= $precisionInYears;
 		} elseif ( $precision > TimeValue::PRECISION_SECOND ) {
