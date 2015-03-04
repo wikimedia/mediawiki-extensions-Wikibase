@@ -101,8 +101,7 @@ class ItemView extends EntityView {
 		return $this->siteLinksView->getHtml(
 			$item->getSiteLinks(),
 			$item->getId(),
-			$this->siteLinkGroups,
-			$this->editable
+			$this->siteLinkGroups
 		);
 	}
 
