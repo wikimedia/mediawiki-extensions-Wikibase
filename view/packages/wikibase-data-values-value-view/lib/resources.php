@@ -60,12 +60,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.NativeEventHandler' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery/jquery.NativeEventHandler.js',
-			),
-		),
-
 		'jquery.PurposedCallbacks' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.PurposedCallbacks.js',

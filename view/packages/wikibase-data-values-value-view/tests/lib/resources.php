@@ -18,17 +18,6 @@ return call_user_func( function() {
 
 	return array(
 
-		'jquery.NativeEventHandler.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery/jquery.NativeEventHandler/jquery.NativeEventHandler.test.js',
-				'jquery/jquery.NativeEventHandler/jquery.NativeEventHandler.test.testDefinition.js',
-				'jquery/jquery.NativeEventHandler/jquery.NativeEventHandler.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.NativeEventHandler',
-			),
-		),
-
 		'jquery.animateWithEvent.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.animateWithEvent.tests.js',
