@@ -178,7 +178,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 
 			'14th century' => array(
 				'+1300-00-00T00:00:00Z',
-				TimeValue::PRECISION_100a,
+				TimeValue::PRECISION_YEAR100,
 				$julian,
 				'/^MOCKDATE$/'
 			),
