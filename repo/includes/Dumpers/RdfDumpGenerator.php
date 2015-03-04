@@ -69,6 +69,8 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @return string
 	 */
 	protected function cleanupPrefixes( $data ) {
+		// for now for performance reasons
+		return $data;
 		$thisVar = $this; /* hack because php 5.3 closures don't support $this */
 		return preg_replace_callback( '/@prefix .+?\n/', function ( $matches ) use ($thisVar) {
 			if ( !empty( $thisVar->prefixes[$matches[0]] ) ) {

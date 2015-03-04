@@ -108,7 +108,7 @@ class RdfSerializer implements RdfProducer {
 	public function newRdfBuilder() {
 		//TODO: language filter
 
-		$builder = new RdfBuilder(
+		$builder = new RdfFastBuilder(
 			$this->sites,
 			$this->baseUri,
 			$this->dataUri,
@@ -152,7 +152,9 @@ class RdfSerializer implements RdfProducer {
 
 		$builder->addDumpHeader();
 
-		return $this->serializeRdf( $builder->getGraph() );
+		return $builder->getPrefixText()."\n".$builder->getText();
+
+		// return $this->serializeRdf( $builder->getGraph() );
 	}
 
 	/**
@@ -177,9 +179,21 @@ class RdfSerializer implements RdfProducer {
 	 * @return string
 	 */
 	public function serializeEntityRevision( EntityRevision $entityRevision ) {
-		$graph = $this->buildGraphForEntityRevision( $entityRevision );
-		$data = $this->serializeRdf( $graph );
-		return $data;
+		$builder = $this->newRdfBuilder();
+
+		$builder->addEntityRevisionInfo(
+				$entityRevision->getEntity()->getId(),
+				$entityRevision->getRevisionId(),
+				$entityRevision->getTimestamp()
+		);
+
+		$builder->addEntity( $entityRevision->getEntity() );
+
+		return $builder->getText();
+
+// 		$graph = $this->buildGraphForEntityRevision( $entityRevision );
+// 		$data = $this->serializeRdf( $graph );
+// 		return $data;
 	}
 
 	/**
