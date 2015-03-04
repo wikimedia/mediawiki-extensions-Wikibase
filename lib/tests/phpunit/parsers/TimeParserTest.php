@@ -67,7 +67,7 @@ class TimeParserTest extends StringValueParserTest {
 			'1 1999 BC' =>
 				array( '-0000000000011999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1,000,000 BC' =>
-				array( '-0000000001000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '-0000000001000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR1M , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1,11,111 BC' =>
 				array( '-0000000000111111-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 
@@ -87,13 +87,13 @@ class TimeParserTest extends StringValueParserTest {
 
 			//Wikibase\Lib\ParsersMwTimeIsoParser
 			'13 billion years CE' =>
-				array( '+0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '+0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR1G , TimeFormatter::CALENDAR_GREGORIAN ),
 			'13,000 million years CE' =>
-				array( '+0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '+0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR1G , TimeFormatter::CALENDAR_GREGORIAN ),
 			'13,000 million years BCE' =>
-				array( '-0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '-0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR1G , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1980s' =>
-				array( '+0000000000001980-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '+0000000000001980-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR10 , TimeFormatter::CALENDAR_GREGORIAN ),
 
 			//Wikibase\Lib\DateTimeParser
 			'10/10/10' =>

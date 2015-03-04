@@ -235,7 +235,7 @@ class ValidatorBuilders {
 
 		$precisionValidators = array();
 		$precisionValidators[] = new TypeValidator( 'integer' );
-		$precisionValidators[] = new NumberRangeValidator( TimeValue::PRECISION_Ga, $maxPrecision );
+		$precisionValidators[] = new NumberRangeValidator( TimeValue::PRECISION_YEAR1G, $maxPrecision );
 
 		$validators[] = new DataFieldValidator(
 			'precision',

@@ -81,11 +81,11 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 				'@.*<td[^<>]*precision">\(seconds: 1\)</td>.*@s'
 			),
 			array(
-				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR10, $gregorian ),
 				'@.*<td[^<>]*precision">\(years: 10\)</td>.*@s'
 			),
 			array(
-				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR1G, $gregorian ),
 				'@.*<td[^<>]*precision">\(years: 1000000000\)</td>.*@s'
 			),
 			array(
@@ -93,7 +93,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 				'@.*<td[^<>]*before">\(years: 2\)</td>.*@s'
 			),
 			array(
-				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 5, TimeValue::PRECISION_10a, $gregorian ),
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 5, TimeValue::PRECISION_YEAR10, $gregorian ),
 				'@.*<td[^<>]*after">\(years: 50\)</td>.*@s'
 			),
 			array(
