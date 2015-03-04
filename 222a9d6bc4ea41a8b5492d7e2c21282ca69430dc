@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_21945738",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-04T17:35:50Z",
+      "side": 1,
+      "message": "I\u0027m confused - shouldn\u0027t this be checking if the ID is set?",
+      "revId": "222a9d6bc4ea41a8b5492d7e2c21282ca69430dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
