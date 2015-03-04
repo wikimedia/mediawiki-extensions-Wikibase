@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e882c400",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-04T08:29:36Z",
+      "side": 1,
+      "message": "I think it would make more sense to just make a lot of things private: All the draw* methods (not draw() itself), updateVariation, and I guess some more.",
+      "revId": "859d1baf32051be8121c648be5afecad56ee84b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e89ba476",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-04T08:29:36Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be snaklistview?",
+      "revId": "859d1baf32051be8121c648be5afecad56ee84b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_88923055",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-04T08:29:36Z",
+      "side": 1,
+      "message": "Could also just be ›{boolean} [options.renderProperty]‹.",
+      "revId": "859d1baf32051be8121c648be5afecad56ee84b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0897004c",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-04T08:29:36Z",
+      "side": 1,
+      "message": "previously",
+      "revId": "859d1baf32051be8121c648be5afecad56ee84b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_688f942f",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-04T08:29:36Z",
+      "side": 1,
+      "message": "Could be simplified to `propertyIsEmpty \u0026\u0026 ( !this._isEncapsulated() || ( snakTypeSelectorIsEmpty \u0026\u0026 snakValueIsEmpty ) )`",
+      "revId": "859d1baf32051be8121c648be5afecad56ee84b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
