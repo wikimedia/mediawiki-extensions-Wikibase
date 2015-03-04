@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_81068b87",
+        "filename": "view/resources/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-03-04T17:38:57Z",
+      "side": 1,
+      "message": "I agree with Henning, though with one addition: @since tags only make sense for things that are package public. I\u0027m guessing this ViewFactory is meant to be package public, so probably no problem here.",
+      "parentUuid": "6e7c4fa4_64b10b8c",
+      "revId": "b078be2048d538747bc89eee5e82792e0b53ee54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_05b875e0",
         "filename": "view/resources/ViewFactory.js",
         "patchSetId": 6
