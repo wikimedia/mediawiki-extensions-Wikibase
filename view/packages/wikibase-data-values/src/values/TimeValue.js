@@ -10,6 +10,7 @@ var PARENT = dv.DataValue;
  * @since 0.1
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
+ * @author Thiemo Mättig
  *
  * @constructor
  *
@@ -28,8 +29,10 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 	this._time = {};
 
 	try {
-		var matches = /^([+-]?\d+)-(\d+)-(\d+)T(\d{2}):(\d{2}):(\d{2})Z$/.exec( timestamp );
-		this._time.year = parseInt( matches[1], 10 );
+		var matches = /^([-+]?\d+)-(\d+)-(\d+)T(\d{2}):(\d{2}):(\d{2})Z$/.exec( timestamp );
+
+		// Strip additional leading zeros from the year, but keep 4 digits.
+		this._time.year = matches[1].replace( /\b0+(?=\d{4})/, '' );
 		this._time.month = parseInt( matches[2], 10 );
 		this._time.day = parseInt( matches[3], 10 );
 		this._time.hour = parseInt( matches[4], 10 );
@@ -105,7 +108,7 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 	 * @return {string}
 	 */
 	getSortKey: function() {
-		return this._getTimestamp();
+		return this._getTimestamp( true );
 	},
 
 	/**
@@ -120,7 +123,7 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 	/**
 	 * @since 0.7
 	 *
-	 * @return {number}
+	 * @return {string}
 	 */
 	getYear: function() {
 		return this._time.year;
@@ -193,14 +196,16 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 	},
 
 	/**
-	 * Returns a YMD-ordered timestamp string resembling ISO 8601.
 	 * @private
 	 *
-	 * @return {string}
+	 * @param {bool} [padYear=false] True if the year should be padded to the maximum length of 16
+	 * digits, false for the default padding to 4 digits.
+	 *
+	 * @return {string} A YMD-ordered timestamp string resembling ISO 8601.
 	 */
-	_getTimestamp: function() {
-		return ( ( this._time.year < 0 ) ? '-' : '+' )
-			+ pad( this._time.year, 11 ) + '-'
+	_getTimestamp: function( padYear ) {
+		return ( this._time.year.charAt( 0 ) === '-' ? '-' : '+' )
+			+ pad( this._time.year, padYear ? 16 : 4 ) + '-'
 			+ pad( this._time.month, 2 ) + '-'
 			+ pad( this._time.day, 2 ) + 'T'
 			+ pad( this._time.hour, 2 ) + ':'
@@ -328,12 +333,18 @@ SELF.getPrecisionById = function( id ) {
 /**
  * @ignore
  *
- * @param {number} number
+ * @param {number|string} number
  * @param {number} digits
  * @return {string}
  */
 function pad( number, digits ) {
-	number = String( Math.abs( number ) );
+	if( typeof number !== 'string' ) {
+		number = String( number );
+	}
+
+	// Strip sign characters.
+	number = number.replace( /^[-+]/, '' );
+
 	if ( number.length >= digits ) {
 		return number;
 	}
