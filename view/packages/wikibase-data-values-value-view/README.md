@@ -105,8 +105,9 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
-### 0.14.4 (2015-06-08)
+### 0.14.4 (2015-06-10)
 * Added expert for `UnDeserializableValue`s.
+* Updated DataValues JavaScript dependency to version 0.7.
 
 ### 0.14.3 (2015-04-02)
 * Fix premature afterparse handling (e.g. save) of parsed values.

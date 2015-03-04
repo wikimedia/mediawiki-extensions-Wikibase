@@ -53,9 +53,9 @@ return call_user_func( function() {
 				'TimeInput.tests.js',
 			),
 			'dependencies' => array(
+				'dataValues.TimeValue',
 				'jquery.valueview.experts.TimeInput',
 				'jquery.valueview.tests.testExpert',
-				'time.js',
 			),
 		),
 

@@ -32,10 +32,10 @@ return call_user_func( function() {
 				'ExpertExtender.CalendarHint.tests.js',
 			),
 			'dependencies' => array(
+				'dataValues.TimeValue',
 				'jquery.valueview.ExpertExtender.CalendarHint',
 				'jquery.valueview.test.testExpertExtenderExtension',
 				'util.HashMessageProvider',
-				'time.js'
 			),
 		),
 
