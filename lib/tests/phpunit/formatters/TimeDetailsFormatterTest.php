@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Test;
 use DataValues\NumberValue;
 use DataValues\TimeValue;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\TimeDetailsFormatter;
 
@@ -101,7 +100,8 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function quantityFormatProvider() {
-		$gregorian = TimeFormatter::CALENDAR_GREGORIAN;
+		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
+		$julian = 'http://www.wikidata.org/entity/Q1985786';
 		$day = TimeValue::PRECISION_DAY;
 
 		return array(
@@ -136,7 +136,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 				'@.*<td[^<>]*isotime">\+99999-01-01T00:00:00</td>.*@s'
 			),
 			'Julian' => array(
-				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, TimeFormatter::CALENDAR_JULIAN ),
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, $julian ),
 				'@.*<td[^<>]*calendar">\(valueview-expert-timevalue-calendar-julian\)</td>.*@s'
 			),
 			'Non-standard calendar model' => array(
@@ -152,11 +152,11 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 				'@.*<td[^<>]*precision">\(seconds: 1\)</td>.*@s'
 			),
 			'10 years precision' => array(
-				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR10, $gregorian ),
 				'@.*<td[^<>]*precision">\(years: 10\)</td>.*@s'
 			),
 			'Max. precision' => array(
-				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR1G, $gregorian ),
 				'@.*<td[^<>]*precision">\(years: 1000000000\)</td>.*@s'
 			),
 			'Before' => array(
@@ -164,7 +164,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 				'@.*<td[^<>]*before">\(years: 2\)</td>.*@s'
 			),
 			'After in years' => array(
-				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 5, TimeValue::PRECISION_10a, $gregorian ),
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 5, TimeValue::PRECISION_YEAR10, $gregorian ),
 				'@.*<td[^<>]*after">\(years: 50\)</td>.*@s'
 			),
 			'After in days' => array(

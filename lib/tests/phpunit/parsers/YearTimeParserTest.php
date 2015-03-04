@@ -73,11 +73,11 @@ class YearTimeParserTest extends StringValueParserTest {
 			'2010' =>
 				array( '+2010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'2000000' =>
-				array( '+2000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
+				array( '+2000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR1M, $gregorian ),
 			'2000000000' =>
-				array( '+2000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
+				array( '+2000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR1G, $gregorian ),
 			'2000020000' =>
-				array( '+2000020000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10ka, $gregorian ),
+				array( '+2000020000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR10K, $gregorian ),
 			'2000001' =>
 				array( '+2000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'02000001' =>
@@ -87,9 +87,9 @@ class YearTimeParserTest extends StringValueParserTest {
 			'000000001' =>
 				array( '+0001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
 			'-1000000' =>
-				array( '-1000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
+				array( '-1000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR1M, $julian ),
 			'-1 000 000' =>
-				array( '-1000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
+				array( '-1000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR1M, $julian ),
 			// Digit grouping in the Indian numbering system
 			'-1,99,999' =>
 				array( '-199999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),

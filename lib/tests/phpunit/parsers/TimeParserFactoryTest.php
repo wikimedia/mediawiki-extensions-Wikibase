@@ -69,7 +69,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			'1 1999 BC' =>
 				array( '-11999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
 			'1,000,000 BC' =>
-				array( '-1000000-00-00T00:00:00Z', TimeValue::PRECISION_Ma, $julian ),
+				array( '-1000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M, $julian ),
 
 			/**
 			 * @see Wikibase\Lib\Parsers\YearMonthTimeParser
@@ -106,13 +106,13 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			 * @see Wikibase\Lib\Parsers\Test\MWTimeIsoParserTest
 			 */
 			'13 billion years CE' =>
-				array( '+13000000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga ),
+				array( '+13000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G ),
 			'13,000 million years CE' =>
-				array( '+13000000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga ),
+				array( '+13000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G ),
 			'13,000 million years BCE' =>
-				array( '-13000000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga, $julian ),
+				array( '-13000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G, $julian ),
 			'1980s' =>
-				array( '+1980-00-00T00:00:00Z', TimeValue::PRECISION_10a ),
+				array( '+1980-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10 ),
 
 			/**
 			 * @see ValueParsers\PhpDateTimeParser
