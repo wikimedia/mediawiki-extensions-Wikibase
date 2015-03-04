@@ -81,7 +81,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 #### Bugfixes
 
 * Fixed definitions of ResourceLoader test modules.
-* Accept ISO8601-formatted timestamps with zeroes as months and days
+* Accept timestamp strings with zeroes as months and days
 * Always return a string in time.writeYear and time.writeDay
 
 ### 0.3.1 (2014-02-03)
