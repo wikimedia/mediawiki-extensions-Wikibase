@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use ParserOptions;
+use Language;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\InMemoryDataTypeLookup;
@@ -38,7 +39,7 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$timestamp = wfTimestamp( TS_MW );
 		$revision = new EntityRevision( $item, 13044, $timestamp );
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision, new ParserOptions() );
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision, $this->getParserOptions() );
 
 		$this->assertEquals(
 			self::$html,
@@ -94,7 +95,7 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$timestamp = wfTimestamp( TS_MW );
 		$revision = new EntityRevision( $item, 13045, $timestamp );
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision, new ParserOptions() );
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision, $this->getParserOptions() );
 
 		$this->assertEquals(
 			'Q7799929',
@@ -213,4 +214,7 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 		return new ValuesFinder( $dataTypeLookup );
 	}
 
+	private function getParserOptions() {
+		return new ParserOptions( null, Language::factory( 'en' ) );
+	}
 }
