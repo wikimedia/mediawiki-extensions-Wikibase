@@ -15,6 +15,7 @@ use Wikibase\NamespaceChecker;
  * @group WikibaseClient
  * @group RepoItemLinkGenerator
  * @group Wikibase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

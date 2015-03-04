@@ -20,6 +20,7 @@ use Wikibase\Test\MockRepository;
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseUsageTracking
+ * @group Database
  *
  * @license GPL 2+
  * @author Daniel Kinzler

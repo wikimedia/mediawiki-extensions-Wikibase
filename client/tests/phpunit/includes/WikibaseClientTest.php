@@ -16,6 +16,7 @@ use Wikibase\Test\MockSiteStore;
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseClientTest
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
