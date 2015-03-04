@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_218697e0",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-03-04T17:44:25Z",
+      "side": 1,
+      "message": "It improves readability of the code by making more clear what is expected",
+      "parentUuid": "6e7c4fa4_3cb5ac78",
+      "revId": "e808d196cc46d45b0f10fc74f09486b1af5eb68e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d777b299",
         "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
         "patchSetId": 17
