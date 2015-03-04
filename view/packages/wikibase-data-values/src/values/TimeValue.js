@@ -290,13 +290,13 @@ SELF.getCalendarModelKeyByUri = function( uri ) {
  * @since 0.7
  */
 SELF.PRECISIONS = [
-	{ id: 'GY', text: 'billion years' },
-	{ id: 'MY100', text: 'hundred million years' },
-	{ id: 'MY10', text: 'ten million years' },
-	{ id: 'MY', text: 'million years' },
-	{ id: 'KY100', text: '100,000 years' },
-	{ id: 'KY10', text: '10,000 years' },
-	{ id: 'KY', text: 'millenium' },
+	{ id: 'YEAR1G', text: 'billion years' },
+	{ id: 'YEAR100M', text: 'hundred million years' },
+	{ id: 'YEAR10M', text: 'ten million years' },
+	{ id: 'YEAR1M', text: 'million years' },
+	{ id: 'YEAR100K', text: '100,000 years' },
+	{ id: 'YEAR10K', text: '10,000 years' },
+	{ id: 'YEAR1K', text: 'millenium' },
 	{ id: 'YEAR100', text: 'century' },
 	{ id: 'YEAR10', text: 'decade' },
 	{ id: 'YEAR', text: 'year' },
