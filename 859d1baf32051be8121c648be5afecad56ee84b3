@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_4b1e5263",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-03-04T10:25:14Z",
+      "side": 1,
+      "message": "Been unsure about that. Imagining using a snakview on its own, I think their public scope may be useful...",
+      "parentUuid": "6e7c4fa4_e882c400",
+      "revId": "859d1baf32051be8121c648be5afecad56ee84b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_e89ba476",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snaklistview.js",
         "patchSetId": 15
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_cb57c2f7",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-03-04T10:25:14Z",
+      "side": 1,
+      "message": "Actually, I do not think that is needed here at all.",
+      "parentUuid": "6e7c4fa4_e89ba476",
+      "revId": "859d1baf32051be8121c648be5afecad56ee84b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_88923055",
         "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
         "patchSetId": 15
@@ -47,6 +83,24 @@
       "writtenOn": "2015-03-04T08:29:36Z",
       "side": 1,
       "message": "Could also just be ›{boolean} [options.renderProperty]‹.",
+      "revId": "859d1baf32051be8121c648be5afecad56ee84b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cbb6e238",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-03-04T10:25:14Z",
+      "side": 1,
+      "message": "Hm, not sure, could do that as well... the _isEncapsulated() check would need to be done in each the caller then.",
+      "parentUuid": "6e7c4fa4_88923055",
       "revId": "859d1baf32051be8121c648be5afecad56ee84b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -81,6 +135,24 @@
       "writtenOn": "2015-03-04T08:29:36Z",
       "side": 1,
       "message": "Could be simplified to `propertyIsEmpty \u0026\u0026 ( !this._isEncapsulated() || ( snakTypeSelectorIsEmpty \u0026\u0026 snakValueIsEmpty ) )`",
+      "revId": "859d1baf32051be8121c648be5afecad56ee84b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2b6996bb",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-03-04T10:25:14Z",
+      "side": 1,
+      "message": "The line would grow to long and would require wrapping. But I think that check is not needed like that at all.",
+      "parentUuid": "6e7c4fa4_688f942f",
       "revId": "859d1baf32051be8121c648be5afecad56ee84b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
