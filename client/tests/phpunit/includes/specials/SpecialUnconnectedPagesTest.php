@@ -15,6 +15,7 @@ use Wikibase\Test\SpecialPageTestBase;
  * @group WikibaseSpecialPage
  * @group WikibaseSpecialUnconnectedPages
  * @group Wikibase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >

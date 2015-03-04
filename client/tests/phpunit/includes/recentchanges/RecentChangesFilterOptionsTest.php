@@ -13,6 +13,7 @@ use Wikibase\Client\WikibaseClient;
  * @group WikibaseClient
  * @group Test
  * @group Wikibase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
