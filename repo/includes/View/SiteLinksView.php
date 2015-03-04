@@ -10,8 +10,8 @@ use SiteList;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Template\TemplateFactory;
 
 /**
@@ -151,7 +151,7 @@ class SiteLinksView {
 				)
 			),
 			htmlspecialchars( $group ),
-			$this->getHtmlForEditSection( $itemId, '', 'edit', $editable )
+			$this->getHtmlForEditSection( $itemId, 'edit', $editable )
 		);
 	}
 
@@ -313,21 +313,15 @@ class SiteLinksView {
 
 	/**
 	 * @param ItemId|null $itemId
-	 * @param string $subPage defaults to ''
 	 * @param string $action defaults to 'edit'
 	 * @param bool $enabled defaults to true
 	 *
 	 * @return string
 	 */
-	private function getHtmlForEditSection( $itemId, $subPage = '', $action = 'edit', $enabled = true ) {
+	private function getHtmlForEditSection( $itemId, $action = 'edit', $enabled = true ) {
 		$specialPageUrlParams = array();
-
 		if ( $itemId !== null ) {
 			$specialPageUrlParams[] = $itemId->getSerialization();
-
-			if ( $subPage !== '' ) {
-				$specialPageUrlParams[] = $subPage;
-			}
 		}
 
 		return $this->sectionEditLinkGenerator->getHtmlForEditSection(
