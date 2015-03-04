@@ -223,14 +223,26 @@ abstract class EntityContent extends AbstractContent {
 		$generateHtml = true
 	) {
 		if ( $this->isRedirect() ) {
-			return $this->getParserOutputForRedirect( $generateHtml );
+			$output = $this->getParserOutputForRedirect( $generateHtml );
 		} else {
 			if ( $options === null ) {
 				$options = $this->getContentHandler()->makeParserOptions( 'canonical' );
 			}
 
-			return $this->getParserOutputFromEntityView( $title, $revisionId, $options, $generateHtml );
+			$output = $this->getParserOutputFromEntityView( $title, $revisionId, $options, $generateHtml );
 		}
+
+		$restrictions = $title->getRestrictions( 'edit' );
+
+		if ( in_array( 'sysop', $restrictions ) ) {
+			$link = \Linker::linkKnown(
+				\Title::newFromText( 'Wikidata:Protection policy' ),
+				''
+			);
+			$output->setIndicator( 'editprotected', $link );
+		}
+
+		return $output;
 	}
 
 	/**

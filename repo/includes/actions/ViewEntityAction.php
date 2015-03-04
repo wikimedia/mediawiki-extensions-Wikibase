@@ -63,6 +63,7 @@ abstract class ViewEntityAction extends ViewAction {
 
 		// NOTE: page-wide property, independent of user permissions
 		$outputPage->addJsConfigVars( 'wbIsEditView', $editable );
+		$outputPage->addModuleStyles( 'wikibase.protection' );
 
 		$user = $this->getUser();
 		$parserOptions = $this->page->makeParserOptions( $user );

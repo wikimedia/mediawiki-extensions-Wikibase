@@ -1,0 +1,9 @@
+#mw-indicator-editprotected a {
+	background: url('padlock-silver.png') no-repeat;
+	width: 20px;
+	height: 20px;
+	float: left;
+	position: absolute;
+	right: 12px;
+	display: block !important;
+}

@@ -117,6 +117,12 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.protection' => $moduleTemplate + array(
+			'styles' => array(
+				'wikibase.protection.css'
+			),
+		),
+
 		'wikibase.RevisionStore' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.RevisionStore.js',
