@@ -241,7 +241,7 @@ class RdfBuilder {
 	 * @return string
 	 */
 	private function getCommonsURI( $file ) {
-		return self::COMMONS_URI . $file;
+		return self::COMMONS_URI . rawurlencode( $file );
 	}
 
 	/**
@@ -326,8 +326,8 @@ class RdfBuilder {
 		$dataResource = $this->graph->resource( $dataURL );
 
 		$timestamp = wfTimestamp( TS_ISO_8601, $timestamp );
-		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':version', new EasyRdf_Literal( $revision, null, 'xsd:integer' ) );
-		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified', new EasyRdf_Literal( $timestamp, null, 'xsd:dateTime' ) );
+		$this->graph->addLiteral( $dataResource, self::NS_SCHEMA_ORG . ':version', new EasyRdf_Literal( $revision, null, 'xsd:integer' ) );
+		$this->graph->addLiteral( $dataResource, self::NS_SCHEMA_ORG . ':dateModified', new EasyRdf_Literal( $timestamp, null, 'xsd:dateTime' ) );
 		// TODO: versioned data URI, current-version-of
 	}
 
@@ -338,15 +338,15 @@ class RdfBuilder {
 	 */
 	private function addEntityMetaData( Entity $entity ) {
 		$entityResource = $this->getEntityResource( $entity->getId() );
-		$entityResource->addResource( 'rdf:type', $this->getEntityTypeQName( $entity->getType() ) );
+		$this->graph->addResource( $entityResource, 'rdf:type', $this->getEntityTypeQName( $entity->getType() ) );
 		$dataURL = $this->getDataURL( $entity->getId() );
 
 		$dataResource = $this->graph->resource( $dataURL );
-		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
-		$dataResource->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
+		$this->graph->addResource( $dataResource, 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
+		$this->graph->addResource( $dataResource, self::NS_SCHEMA_ORG . ':about', $entityResource );
 		if($this->shouldProduce( RdfSerializer::PRODUCE_VERSION_INFO ) ) {
-			$dataResource->addResource( self::NS_CC . ':license', self::LICENSE );
-			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
+			$this->graph->addLiteral( $dataResource, self::NS_CC . ':license', self::LICENSE );
+			$this->graph->addLiteral( $dataResource, self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
 		}
 
 		// TODO: add support for property date types to RDF output
@@ -367,9 +367,9 @@ class RdfBuilder {
 				continue;
 			}
 
-			$entityResource->addLiteral( 'rdfs:label', $labelText, $languageCode );
-			$entityResource->addLiteral( self::NS_SKOS . ':prefLabel', $labelText, $languageCode );
-			$entityResource->addLiteral( self::NS_SCHEMA_ORG . ':name', $labelText, $languageCode );
+			$this->graph->addLiteral( $entityResource, 'rdfs:label', $labelText, $languageCode );
+			$this->graph->addLiteral( $entityResource, self::NS_SKOS . ':prefLabel', $labelText, $languageCode );
+			$this->graph->addLiteral( $entityResource, self::NS_SCHEMA_ORG . ':name', $labelText, $languageCode );
 		}
 	}
 
@@ -386,7 +386,7 @@ class RdfBuilder {
 				continue;
 			}
 
-			$entityResource->addLiteral( self::NS_SCHEMA_ORG . ':description', $description, $languageCode );
+			$this->graph->addLiteral( $entityResource, self::NS_SCHEMA_ORG . ':description', $description, $languageCode );
 		}
 	}
 
@@ -404,7 +404,7 @@ class RdfBuilder {
 			}
 
 			foreach ( $aliases as $alias ) {
-				$entityResource->addLiteral( self::NS_SKOS . ':altLabel', $alias, $languageCode );
+				$this->graph->addLiteral( $entityResource, self::NS_SKOS . ':altLabel', $alias, $languageCode );
 			}
 		}
 	}
@@ -429,14 +429,14 @@ class RdfBuilder {
 			// XXX: ideally, we'd use https if the target site supports it.
 			$baseUrl = $site->getPageUrl( $siteLink->getPageName() );
 			$url = wfExpandUrl( $baseUrl, PROTO_HTTP );
-			$pageRecourse = $this->graph->resource( $url );
+			$pageResourse = $this->graph->resource( $url );
 
-			$pageRecourse->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ':Article' );
-			$pageRecourse->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
-			$pageRecourse->addLiteral( self::NS_SCHEMA_ORG . ':inLanguage', $languageCode );
+			$this->graph->addResource( $pageResourse, 'rdf:type', self::NS_SCHEMA_ORG . ':Article' );
+			$this->graph->addResource( $pageResourse, self::NS_SCHEMA_ORG . ':about', $entityResource );
+			$this->graph->addLiteral( $pageResourse, self::NS_SCHEMA_ORG . ':inLanguage', $languageCode );
 
 			foreach ( $siteLink->getBadges() as $badge ) {
-				$pageRecourse->addResource( self::WIKIBASE_BADGE_QNAME, $this->getEntityQName( self::NS_ENTITY, $badge ) );
+				$this->graph->addResource( $pageResourse, self::WIKIBASE_BADGE_QNAME, $this->getEntityQName( self::NS_ENTITY, $badge ) );
 			}
 		}
 
@@ -488,7 +488,7 @@ class RdfBuilder {
 			$statementResource = $this->getStatementResource( $statement );
 			foreach ( $statement->getReferences() as $ref ) {
 				$refResource = $this->getReferenceResource( $ref );
-				$statementResource->addResource( self::PROV_QNAME, $refResource );
+				$this->graph->addResource( $statementResource, self::PROV_QNAME, $refResource );
 				foreach ( $ref->getSnaks() as $refSnak ) {
 					$this->addSnak( $refResource, $refSnak, self::NS_VALUE );
 				}
@@ -513,7 +513,7 @@ class RdfBuilder {
 		} else {
 			$propertyQName = $this->getEntityQName( self::NS_ENTITY, $snak->getPropertyId() );
 			$statementResource = $this->getStatementResource( $statement );
-			$entityResource->addResource( $propertyQName, $statementResource );
+			$this->graph->addResource( $entityResource, $propertyQName, $statementResource );
 			$this->addSnak( $statementResource, $snak, self::NS_VALUE );
 			if ( $this->shouldProduce( RdfSerializer::PRODUCE_PROPERTIES ) ) {
 				$this->entityMentioned( $snak->getPropertyId() );
@@ -521,7 +521,7 @@ class RdfBuilder {
 			$rank = $statement->getRank();
 			if( !empty(self::$rank_map[$rank]) ) {
 				// TODO: think if we need to record normal rank. It would be more compact if we didn't.
-				$statementResource->addResource( self::WIKIBASE_RANK_QNAME,  self::$rank_map[$rank] );
+				$this->graph->addResource( $statementResource, self::WIKIBASE_RANK_QNAME,  self::$rank_map[$rank] );
 			}
 		}
 	}
@@ -569,11 +569,11 @@ class RdfBuilder {
 				break;
 			case 'somevalue' :
 				$propertyValueQName = $this->getEntityQName( $claimType, $propertyId );
-				$target->addResource( $propertyValueQName, self::WIKIBASE_SOMEVALUE_QNAME );
+				$this->graph->addResource( $target, $propertyValueQName, self::WIKIBASE_SOMEVALUE_QNAME );
 				break;
 			case 'novalue' :
 				$propertyValueQName = $this->getEntityQName( $claimType, $propertyId );
-				$target->addResource( $propertyValueQName, self::WIKIBASE_NOVALUE_QNAME );
+				$this->graph->addResource( $target, $propertyValueQName, self::WIKIBASE_NOVALUE_QNAME );
 				break;
 		}
 	}
@@ -587,19 +587,23 @@ class RdfBuilder {
 	 */
 	private function addExpandedValue( \EasyRdf_Resource $target, $propertyValueQName, DataValue $value, array $props) {
 		$node = $this->graph->resource( self::NS_VALUE . ":" . $value->getHash(), self::WIKIBASE_VALUE_QNAME );
-		$target->addResource( $propertyValueQName."-value", $node);
+		$this->graph->addResource( $target, $propertyValueQName."-value", $node);
 		foreach( $props as $prop => $type ) {
 			$getter = "get" . ucfirst( $prop );
 			$data = $value->$getter();
 			if ( $type == 'url' ) {
-				$node->addResource( $this->getEntityTypeQName( $prop ), $data );
+				$this->graph->addResource( $node, $this->getEntityTypeQName( $prop ), $data );
 				continue;
 			}
-			$node->addLiteral( $this->getEntityTypeQName( $prop ),
+			$this->graph->addLiteral( $node, $this->getEntityTypeQName( $prop ),
 					new \EasyRdf_Literal( $data, null, $type ) );
 		}
 	}
 
+	/**
+	 * Property types local cache
+	 * @var array
+	 */
 	private static $propTypes = array();
 
 	/**
@@ -634,7 +638,7 @@ class RdfBuilder {
 		$propertyValueQName = $this->getEntityQName( $claimType, $propertyId );
 
 		$typeId = $value->getType();
-		$dataType = $this->getDataType($propertyId, $typeId);
+		$dataType = $this->getDataType( $propertyId, $typeId );
 
 		$typeId = "addStatementFor".preg_replace( '/[^\w]/', '', ucwords( $typeId ) );
 		if( !is_callable( array($this, $typeId ) ) ) {
@@ -660,7 +664,7 @@ class RdfBuilder {
 		$entityId = $value->getValue()->getEntityId();
 		$entityQName = $this->getEntityQName( self::NS_ENTITY, $entityId );
 		$entityResource = $this->graph->resource( $entityQName );
-		$target->addResource( $propertyValueQName, $entityResource );
+		$this->graph->addResource( $target, $propertyValueQName, $entityResource );
 		// TODO: should we do this? $this->entityMentioned( $entityId );
 	}
 
@@ -676,11 +680,11 @@ class RdfBuilder {
 	private function addStatementForString(EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			StringValue $value, $simpleValue = false ) {
 		if ( $dataType == 'commonsMedia' ) {
-			$target->addResource( $propertyValueQName, $this->getCommonsURI( $value->getValue() ) );
+			$this->graph->addResource($target, $propertyValueQName, $this->getCommonsURI( $value->getValue() ) );
 		} elseif ( $dataType == 'url' ) {
-			$target->addResource( $propertyValueQName, $value->getValue() );
+			$this->graph->addResource($target, $propertyValueQName, $value->getValue() );
 		} else {
-			$target->addLiteral( $propertyValueQName, new EasyRdf_Literal( $value->getValue() ) );
+			$this->graph->addLiteral($target, $propertyValueQName, new EasyRdf_Literal( $value->getValue() ) );
 		}
 	}
 
@@ -695,7 +699,7 @@ class RdfBuilder {
 	 */
 	private function addStatementForMonolingualtext(EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			MonolingualTextValue $value, $simpleValue = false ) {
-		$target->addLiteral( $propertyValueQName, $value->getText(), $value->getLanguageCode() );
+		$this->graph->addLiteral( $target, $propertyValueQName, $value->getText(), $value->getLanguageCode() );
 	}
 
 	/**
@@ -710,7 +714,7 @@ class RdfBuilder {
 	private function addStatementForTime(EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			TimeValue $value, $simpleValue = false ) {
 		// TODO: we may want to deal with Julian dates here?
-		$target->addLiteral( $propertyValueQName, new \EasyRdf_Literal_DateTime( $value->getTime() ) );
+		$this->graph->addLiteral( $target, $propertyValueQName, new \EasyRdf_Literal_DateTime( $value->getTime() ) );
 		if ( !$simpleValue  && $this->shouldProduce( RdfSerializer::PRODUCE_FULL_VALUES ) ) {
 			$this->addExpandedValue( $target, $propertyValueQName, $value,
 					array(  'time' => 'xsd:dateTime',
@@ -737,7 +741,7 @@ class RdfBuilder {
 	 */
 	private function addStatementForQuantity(EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			QuantityValue $value, $simpleValue = false ) {
-		$target->addLiteral( $propertyValueQName, new \EasyRdf_Literal_Decimal( $value->getAmount() ) );
+		$this->graph->addLiteral( $target, $propertyValueQName, new \EasyRdf_Literal_Decimal( $value->getAmount() ) );
 		if ( !$simpleValue  && $this->shouldProduce( RdfSerializer::PRODUCE_FULL_VALUES ) ) {
 			$this->addExpandedValue( $target, $propertyValueQName, $value,
 					array(  'amount' => 'xsd:decimal',
@@ -760,7 +764,7 @@ class RdfBuilder {
 	 */
 	private function addStatementForGlobecoordinate(EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			GlobeCoordinateValue $value, $simpleValue = false ) {
-		$target->addLiteral( $propertyValueQName, new EasyRdf_Literal( "Point({$value->getLatitude()} {$value->getLongitude()})", null, self::NS_GEO . ":wktLiteral" ) );
+		$this->graph->addLiteral( $target, $propertyValueQName, new EasyRdf_Literal( "Point({$value->getLatitude()} {$value->getLongitude()})", null, self::NS_GEO . ":wktLiteral" ) );
 		if ( !$simpleValue  && $this->shouldProduce( RdfSerializer::PRODUCE_FULL_VALUES ) ) {
 			$this->addExpandedValue( $target, $propertyValueQName, $value,
 					array(  'latitude' => 'xsd:decimal',
@@ -834,9 +838,9 @@ class RdfBuilder {
 	public function addDumpHeader() {
 		// TODO: this should point to "this document"
 		$dataResource = $this->graph->resource( $this->getEntityTypeQName('Dump') );
-		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
-		$dataResource->addResource( self::NS_CC . ':license', self::LICENSE );
-		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
-		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified', new EasyRdf_Literal( gmdate('Y-m-d\TH:i:s\Z'), null, 'xsd:dateTime' ) );
+		$this->graph->addResource( $dataResource, 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
+		$this->graph->addResource( $dataResource, self::NS_CC . ':license', self::LICENSE );
+		$this->graph->addLiteral( $dataResource, self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
+		$this->graph->addLiteral( $dataResource, self::NS_SCHEMA_ORG . ':dateModified', new EasyRdf_Literal( gmdate('Y-m-d\TH:i:s\Z'), null, 'xsd:dateTime' ) );
 	}
 }
