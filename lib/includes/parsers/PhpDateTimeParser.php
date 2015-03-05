@@ -50,15 +50,15 @@ class PhpDateTimeParser extends StringValueParser {
 	private $eraParser;
 
 	/**
-	 * @param EraParser $eraParser
+	 * @param EraParser|null $eraParser
 	 * @param ParserOptions|null $options
 	 */
-	public function __construct( EraParser $eraParser, ParserOptions $options = null ) {
+	public function __construct( EraParser $eraParser = null, ParserOptions $options = null ) {
 		parent::__construct( $options );
 
 		$languageCode = $this->getOption( ValueParser::OPT_LANG );
 		$this->monthUnlocalizer = new MonthNameUnlocalizer( $languageCode );
-		$this->eraParser = $eraParser;
+		$this->eraParser = $eraParser ?: new EraParser( $this->options );
 	}
 
 	/**
@@ -72,9 +72,6 @@ class PhpDateTimeParser extends StringValueParser {
 	 */
 	protected function stringParse( $value ) {
 		$rawValue = $value;
-
-		$calendarModelParser = new CalendarModelParser();
-		$options = $this->getOptions();
 
 		try {
 			list( $sign, $value ) = $this->eraParser->parse( $value );
@@ -101,7 +98,10 @@ class PhpDateTimeParser extends StringValueParser {
 			}
 
 			// Pass the reformatted string into a base parser that parses this +/-Y-m-d\TH:i:s\Z format with a precision
-			$valueParser = new IsoTimestampParser( $calendarModelParser, $options );
+			$valueParser = new IsoTimestampParser(
+				new CalendarModelParser( $this->options ),
+				$this->options
+			);
 			return $valueParser->parse( $timeString );
 		} catch ( Exception $exception ) {
 			throw new ParseException( $exception->getMessage(), $rawValue, self::FORMAT_NAME );
