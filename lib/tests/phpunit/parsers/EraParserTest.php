@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Parsers\Test;
 
 use ValueParsers\Test\StringValueParserTest;
+use Wikibase\Lib\Parsers\EraParser;
 
 /**
  * @covers Wikibase\Lib\Parsers\EraParser
@@ -18,10 +19,19 @@ use ValueParsers\Test\StringValueParserTest;
 class EraParserTest extends StringValueParserTest {
 
 	/**
-	 * @return string
+	 * @deprecated since 0.3, just use getInstance.
 	 */
 	protected function getParserClass() {
-		return 'Wikibase\Lib\Parsers\EraParser';
+		throw new \LogicException( 'Should not be called, use getInstance' );
+	}
+
+	/**
+	 * @see ValueParserTestBase::getInstance
+	 *
+	 * @return EraParser
+	 */
+	protected function getInstance() {
+		return new EraParser();
 	}
 
 	/**

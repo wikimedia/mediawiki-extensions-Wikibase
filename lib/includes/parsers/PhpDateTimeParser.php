@@ -48,10 +48,14 @@ class PhpDateTimeParser extends StringValueParser {
 	 */
 	private $eraParser;
 
+	/**
+	 * @param EraParser $eraParser
+	 * @param ParserOptions|null $options
+	 */
 	public function __construct( EraParser $eraParser, ParserOptions $options = null ) {
 		parent::__construct( $options );
 
-		$languageCode = $options->getOption( ValueParser::OPT_LANG );
+		$languageCode = $this->getOption( ValueParser::OPT_LANG );
 		$this->monthUnlocalizer = new MonthNameUnlocalizer( $languageCode );
 		$this->eraParser = $eraParser;
 	}
