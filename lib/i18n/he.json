@@ -3,7 +3,8 @@
 		"authors": [
 			"Amire80",
 			"Yona b",
-			"Guycn2"
+			"Guycn2",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "הפעולות המשותפות להרחבות Wikibase ו־Wikibase Client",
@@ -28,7 +29,7 @@
 	"wikibase-quantitydetails-lowerbound": "גבול תחתון",
 	"wikibase-quantitydetails-unit": "יחידה",
 	"wikibase-timedetails-time": "זמן",
-	"wikibase-timedetails-isotime": "חותם זמן של ISO",
+	"wikibase-timedetails-isotime": "חותם זמן",
 	"wikibase-timedetails-timezone": "אזור זמן",
 	"wikibase-timedetails-calendar": "לוח שנה",
 	"wikibase-timedetails-precision": "דיוק",

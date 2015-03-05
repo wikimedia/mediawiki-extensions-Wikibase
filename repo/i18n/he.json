@@ -132,7 +132,7 @@
 	"wikibase-gotolinkedpage-summary": "הדף המיוחד Special:GoToLinkedPage משמש למציאת דף לפריט באתר המחובר.<br /> בשדה הימני, \"אתר:\", יש לזין את קודם השפה ואת הקוד של האתר.<br /> השדה השמאלי \"מזהה פריט\" צריך לרשום את הפריט שחיפשת.",
 	"special-itemdisambiguation": "הבהרת פירוש של פריט",
 	"wikibase-itemdisambiguation-lookup-fieldset": "חיפוש פריטים לפי שפה ותווית",
-	"wikibase-itemdisambiguation-lookup-language": "שפה:",
+	"wikibase-itemdisambiguation-lookup-language": "קוד שפה:",
 	"wikibase-itemdisambiguation-lookup-label": "תווית:",
 	"wikibase-itemdisambiguation-submit": "חיפוש",
 	"wikibase-itemdisambiguation-nothing-found": "מצטערים, לא נמצא שום פריט עם התווית הזאת.",

@@ -5,7 +5,7 @@
 		]
 	},
 	"wikibase-client-desc": "Biðlari fyrir Wikibase viðbótina",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}} biðlari",
+	"tooltip-t-wikibase": "Tengill á tengdan hlut í gagnagrunni",
 	"wikibase-after-page-move": "Þú mátt einnig [$1 uppfæra] viðeigandi {{WBREPONAME}} hlut til að viðhalda tungumálatenglum á færðu síðunni.",
 	"wikibase-after-page-move-queued": "[$1 {{WBREPONAME}} hluturinn] sem tengist þessari síðu verður fljótlega uppfærður sjálfvirkt.",
 	"wikibase-comment-add": "{{WBREPONAME}} hlutur hefur verið búinn til.",
@@ -21,6 +21,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} hlutur",
 	"wikibase-editlinks": "Breyta tenglum",
 	"wikibase-editlinkstitle": "Breyta tungumálatenglum",
+	"wikibase-addlinkstitle": "Bæta við tungumálatenglum",
 	"wikibase-linkitem-addlinks": "Bæta við tenglum",
 	"wikibase-linkitem-alreadylinked": "Síðan sem þú vildir tengja við er þegar tengd við [$1 hlut] á miðlægum gagnagrunni sem tengir á $2 á þessari síðu. Hlutir geta eingöngu haft eina síðu per vefsvæði. Vinsamlegast veldu aðra síðu til að tengja við.",
 	"wikibase-linkitem-close": "Loka glugganum og endurhlaða síðunni",
@@ -42,6 +43,7 @@
 	"wikibase-rc-show-wikidata-pref": "Sýna {{WBREPONAME}} breytingar í nýjustu breytingum",
 	"wikibase-rc-wikibase-edit-letter": "E",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} breyting",
+	"wikibase-replicationnote": "Athugaðu að það tekur nokkrar mínútur þangað til breytingarnar eru sýnilegar á öllum wiki verkefnum.",
 	"wikibase-watchlist-show-changes-pref": "Sýna {{WBREPONAME}} breytingar í vaktlistanum þínum",
 	"wikibase-error-invalid-entity-id": "Tilgreint auðkenni þekkist ekki. Vinsamlegast notaðu gilt auðkenni einingarinnar.",
 	"special-unconnectedpages": "Síður sem tengjast ekki hlutum",
@@ -56,5 +58,6 @@
 	"wikibase-pageinfo-entity-id-none": "Enginn",
 	"wikibase-property-render-error": "Mistókst að ganga frá eiginleikanum $1: $2",
 	"wikibase-otherprojects": "Önnur verkefni",
-	"wikibase-otherprojects-beta-message": "Hliðarstika annara verkefna"
+	"wikibase-otherprojects-beta-message": "Hliðarstika annara verkefna",
+	"wikibase-otherprojects-beta-description": "Bætir við \"{{int:wikibase-otherprojects}}\" fyrirsögn í hliðarstikuna með tenglum á önnur Wikimedia verkefni, byggt á gögnum {{WBREPONAME}}."
 }

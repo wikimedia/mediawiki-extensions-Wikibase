@@ -21,6 +21,7 @@
 	"wikibase-language-fallback-transliteration-hint": "$1 (iwwerholl)",
 	"wikibase-quantitydetails-unit": "Eenheet",
 	"wikibase-timedetails-time": "Zäit",
+	"wikibase-timedetails-isotime": "Zäitstempel",
 	"wikibase-timedetails-timezone": "Zäitzon",
 	"wikibase-timedetails-calendar": "Kalenner",
 	"wikibase-timedetails-precision": "Präzisioun",

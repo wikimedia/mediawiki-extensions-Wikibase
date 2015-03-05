@@ -3,7 +3,8 @@
 		"authors": [
 			"Danmichaelo",
 			"Event",
-			"Jeblad"
+			"Jeblad",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Felles funksjonalitet for Wikibase, det strukturerte datalageret",
@@ -27,7 +28,7 @@
 	"wikibase-quantitydetails-lowerbound": "Nedre grense",
 	"wikibase-quantitydetails-unit": "Enhet",
 	"wikibase-timedetails-time": "Tid",
-	"wikibase-timedetails-isotime": "ISO-tidsmerke",
+	"wikibase-timedetails-isotime": "Tidsstempel",
 	"wikibase-timedetails-timezone": "Tidssone",
 	"wikibase-timedetails-calendar": "Kalender",
 	"wikibase-timedetails-precision": "Presisjon",

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bjankuloski06"
+			"Bjankuloski06",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Содржи почести функции за додатоците Викибаза и Клиент на Викибазата.",
@@ -26,7 +27,7 @@
 	"wikibase-quantitydetails-lowerbound": "Долна граница",
 	"wikibase-quantitydetails-unit": "Единица",
 	"wikibase-timedetails-time": "Време",
-	"wikibase-timedetails-isotime": "Време и датум во ISO",
+	"wikibase-timedetails-isotime": "Време и датум",
 	"wikibase-timedetails-timezone": "Часовен појас:",
 	"wikibase-timedetails-calendar": "Календар",
 	"wikibase-timedetails-precision": "Уточнетост:",

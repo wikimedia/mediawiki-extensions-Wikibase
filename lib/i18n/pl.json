@@ -8,7 +8,8 @@
 			"Maćko",
 			"Rzuwig",
 			"WTM",
-			"Debeet"
+			"Debeet",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Zawiera wspólne funkcje dla rozszerzeń Wikibase i Wikibase Client",
@@ -33,7 +34,7 @@
 	"wikibase-quantitydetails-lowerbound": "Dolna granica",
 	"wikibase-quantitydetails-unit": "Jednostka",
 	"wikibase-timedetails-time": "Czas",
-	"wikibase-timedetails-isotime": "Sygnatura czasowa ISO",
+	"wikibase-timedetails-isotime": "Sygnatura czasowa",
 	"wikibase-timedetails-timezone": "Strefa czasowa",
 	"wikibase-timedetails-calendar": "Kalendarz",
 	"wikibase-timedetails-precision": "Precyzja",

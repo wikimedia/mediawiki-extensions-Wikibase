@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Pippinu"
+			"Pippinu",
+			"Gmelfi"
 		]
 	},
 	"wikibase-desc": "Dipòsitu di dati strutturati",
@@ -70,7 +71,7 @@
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Un valuri|$1 valuri}} ancora senza {{PLURAL:$1|sarvatu|sarvati}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|vuci}}",
 	"wikibase-disambiguation-title": "Disambiguazzioni pi' \"$1\"",
-	"wb-special-newitem-new-item-notification": "Lu suggettu novu $1 fu' crïatu e rimannatu â so pàggina. Torna a' $2.",
+	"wb-special-newitem-new-item-notification": "Lu suggettu novu $1 fu' criatu e rimannatu â so pàggina. Torna a' $2.",
 	"wikibase-aliases-label": "Macari canusciutu comu:",
 	"wikibase-aliases-input-help-message": "Pi' fari st'entità cchiu' fàcili a' truvàri, poi agghiùnciri autri nomi.",
 	"wikibase-aliases-empty": "Nuddu alias difinutu.",
@@ -194,7 +195,7 @@
 	"wikibase-mergeitems-fromid": "L'ID chi' s'havi a' jùnciri",
 	"wikibase-mergeitems-toid": "L'ID chi' ricevi la juntura",
 	"wikibase-mergeitems-submit": "Junci li suggetti",
-	"wikibase-mergeitems-success": "$1 fu' junciutu bonu nta $3.",
+	"wikibase-mergeitems-success": "$1 fu junciutu bonu nta $3.",
 	"wikibase-itemmerge-missing-parameter": "Campi nicissarî nun cumpleti.",
 	"wikibase-itemmerge-not-item": "L'entità spicificata nun è un suggettu.",
 	"wikibase-itemmerge-failed-save": "Lu sarvamentu di lu suggettu nun riniscìu.",
@@ -267,11 +268,11 @@
 	"wikibase-noentity": "St'entità nun esisti. Poi [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} circari ntê riggistri apprupiati] pi' capiri unni annàu a' finiri.",
 	"wikibase-noentity-createone": "Nni poi puru [[$1|crïari una nova]].",
 	"wikibase-special-mergeitems-error-prefix": "Nun si pòttiru jùnciri li suggetti. Mmattìu lu siguenti erruri:",
-	"wikibase-item-summary-wbsetitem": "Crïatu nu suggettu novu",
-	"wikibase-item-summary-wbcreate-new": "Crïatu nu suggettu novu",
+	"wikibase-item-summary-wbsetitem": "Criatu nu suggettu novu",
+	"wikibase-item-summary-wbcreate-new": "Criatu nu suggettu novu",
 	"wikibase-item-summary-wbcreateredirect": "Fattu rimannu a' $4",
-	"wikibase-item-summary-wbeditentity": "Crïatu nu suggettu novu",
-	"wikibase-item-summary-wbeditentity-create": "Crïatu nu suggettu novu",
+	"wikibase-item-summary-wbeditentity": "Criatu nu suggettu novu",
+	"wikibase-item-summary-wbeditentity-create": "Criatu nu suggettu novu",
 	"wikibase-item-summary-wbeditentity-update": "Canciatu nu suggettu",
 	"wikibase-item-summary-wbeditentity-override": "Suprascrittu nu suggettu",
 	"wikibase-item-summary-wbsetreference": "Mpustatu nu rifirimentu",
@@ -293,7 +294,7 @@
 	"wikibase-item-summary-wbsetsitelink-set-badges": "Canciati li distintivi di [$2]",
 	"wikibase-item-summary-wbsetsitelink-set-both": "Canciatu lu culligamentu e li distintivi di [$2]",
 	"wikibase-item-summary-wbsetsitelink-remove": "Livatu lu culligamentu a' [$2]",
-	"wikibase-item-summary-wblinktitles-create": "Crïatu di stu suggettu pi' culligari pàggini",
+	"wikibase-item-summary-wblinktitles-create": "Criatu di stu suggettu pi' culligari pàggini",
 	"wikibase-item-summary-wblinktitles-connect": "Agghiunciutu un culligamentu di lingua pi' culligari pàggini",
 	"wikibase-item-summary-wbcreateclaim-value": "{{PLURAL:$1|Crïata n'affirmazzioni|Crïati affirmazzioni}}",
 	"wikibase-item-summary-wbcreateclaim-novalue": "{{PLURAL:$1|Crïata n'affirmazzioni|Crïati affirmazzioni}}",
@@ -301,7 +302,7 @@
 	"wikibase-item-summary-wbcreateclaim": "{{PLURAL:$1|Crïata n'affirmazzioni|Crïati affirmazzioni}}",
 	"wikibase-item-summary-wbsetclaimvalue": "{{PLURAL:$1|Mpustatu lu valuri di n'affirmazzioni|Mpustati li valuri di cchiu' affirmazzioni}}",
 	"wikibase-item-summary-wbremoveclaims": "{{PLURAL:$1|Livata n'affirmazzioni|Livati affirmazzioni}}",
-	"wikibase-item-summary-special-create-item": "Crïatu nu suggettu [$2] cu' {{PLURAL:$1|valuri}}",
+	"wikibase-item-summary-special-create-item": "Criatu nu suggettu [$2] cu' {{PLURAL:$1|valuri}}",
 	"wikibase-item-summary-wbcreateclaim-create": "Crïata n'affirmazzioni",
 	"wikibase-item-summary-wbremoveclaims-remove": "{{PLURAL:$1|Livata n'affirmazzioni|Livati affirmazzioni}}",
 	"wikibase-item-summary-wbsetclaim-update": "{{PLURAL:$3|Canciata n'affirmazzioni|Canciati affirmazzioni}}",

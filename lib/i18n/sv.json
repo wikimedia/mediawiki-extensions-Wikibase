@@ -4,7 +4,8 @@
 			"Ainali",
 			"Jopparn",
 			"Lokal Profil",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Håller gemensamma funktioner för Wikibase- och Wikibase Client-tilläggen.",
@@ -28,7 +29,7 @@
 	"wikibase-quantitydetails-lowerbound": "Undre gräns",
 	"wikibase-quantitydetails-unit": "Enhet",
 	"wikibase-timedetails-time": "Tid",
-	"wikibase-timedetails-isotime": "ISO-tidsstämpel",
+	"wikibase-timedetails-isotime": "Tidsstämpel",
 	"wikibase-timedetails-timezone": "Tidszon",
 	"wikibase-timedetails-calendar": "Kalender",
 	"wikibase-timedetails-precision": "Precision",

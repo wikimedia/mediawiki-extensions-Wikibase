@@ -9,7 +9,8 @@
 			"Tarawneh",
 			"سامي الرحيلي",
 			"Abanima",
-			"Fitoschido"
+			"Fitoschido",
+			"Macofe"
 		]
 	},
 	"specialpages-group-wikibase": "مستودع قاعدة ويكي",
@@ -32,7 +33,7 @@
 	"wikibase-quantitydetails-lowerbound": "الحد الأدنى",
 	"wikibase-quantitydetails-unit": "وحدة",
 	"wikibase-timedetails-time": "زمن",
-	"wikibase-timedetails-isotime": "الطابع الزمني ISO",
+	"wikibase-timedetails-isotime": "طابع زمني",
 	"wikibase-timedetails-timezone": "المنطقة الزمنية",
 	"wikibase-timedetails-calendar": "التقويم",
 	"wikibase-timedetails-precision": "الدقة",

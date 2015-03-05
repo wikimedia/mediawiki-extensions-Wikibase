@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Joetaras"
+			"Joetaras",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Tìne le funzionalità comune pe Uicchibase e le estenziune d'u Client de UicchiBase",
@@ -26,7 +27,7 @@
 	"wikibase-quantitydetails-lowerbound": "Limite 'nferiore",
 	"wikibase-quantitydetails-unit": "Aunità",
 	"wikibase-timedetails-time": "Orarie",
-	"wikibase-timedetails-isotime": "Orarie ISO",
+	"wikibase-timedetails-isotime": "Orarie de stambe",
 	"wikibase-timedetails-timezone": "Orarie d'a zone",
 	"wikibase-timedetails-calendar": "Calendarije",
 	"wikibase-timedetails-precision": "Precisione",

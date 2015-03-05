@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Toliño",
-			"Chairego apc"
+			"Chairego apc",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Contén funcionalidades comúns para as extensións Wikibase e Wikibase Client",
@@ -27,7 +28,7 @@
 	"wikibase-quantitydetails-lowerbound": "Límite inferior",
 	"wikibase-quantitydetails-unit": "Unidade",
 	"wikibase-timedetails-time": "Hora",
-	"wikibase-timedetails-isotime": "Data e hora ISO",
+	"wikibase-timedetails-isotime": "Data e hora",
 	"wikibase-timedetails-timezone": "Fuso horario",
 	"wikibase-timedetails-calendar": "Calendario",
 	"wikibase-timedetails-precision": "Precisión",

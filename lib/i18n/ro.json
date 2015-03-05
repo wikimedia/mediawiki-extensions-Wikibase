@@ -3,7 +3,8 @@
 		"authors": [
 			"Minisarm",
 			"Stelistcristi",
-			"Rsocol"
+			"Rsocol",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Grupează funcționalități comune pentru extensiile Wikibase și Client Wikibase",
@@ -27,7 +28,7 @@
 	"wikibase-quantitydetails-lowerbound": "Limită inferioară",
 	"wikibase-quantitydetails-unit": "Unitate",
 	"wikibase-timedetails-time": "Timp",
-	"wikibase-timedetails-isotime": "Datare ISO",
+	"wikibase-timedetails-isotime": "Data și ora",
 	"wikibase-timedetails-timezone": "Fus orar",
 	"wikibase-timedetails-calendar": "Calendar",
 	"wikibase-timedetails-precision": "Precizie",

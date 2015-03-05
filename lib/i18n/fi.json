@@ -7,10 +7,12 @@
 			"Nike",
 			"Stryn",
 			"VezonThunder",
-			"Pxos"
+			"Pxos",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Sisältää Wikibase- ja Wikibase Client -laajennuksille yhteistä toiminnallisuutta",
+	"specialpages-group-wikibase": "Wikibase-säilö",
 	"wikibase-deletedentity-item": "Kohde poistettu",
 	"wikibase-deletedentity-property": "Ominaisuus poistettu",
 	"wikibase-deletedentity-query": "Kysely poistettu",
@@ -30,7 +32,7 @@
 	"wikibase-quantitydetails-lowerbound": "Alaraja",
 	"wikibase-quantitydetails-unit": "Yksikkö",
 	"wikibase-timedetails-time": "Aika",
-	"wikibase-timedetails-isotime": "ISO-aikaleima",
+	"wikibase-timedetails-isotime": "Aikaleima",
 	"wikibase-timedetails-timezone": "Aikavyöhyke",
 	"wikibase-timedetails-calendar": "Kalenteri",
 	"wikibase-timedetails-precision": "Tarkkuus",

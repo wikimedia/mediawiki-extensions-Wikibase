@@ -8,7 +8,8 @@
 			"Steve.rusyn",
 			"SteveR",
 			"Ата",
-			"Piramidion"
+			"Piramidion",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Загальні функції розширень Wikibase і Wikibase Client",
@@ -32,7 +33,7 @@
 	"wikibase-quantitydetails-lowerbound": "Нижня межа",
 	"wikibase-quantitydetails-unit": "Одиниця",
 	"wikibase-timedetails-time": "Час",
-	"wikibase-timedetails-isotime": "ISO позначка часу",
+	"wikibase-timedetails-isotime": "Часова позначка",
 	"wikibase-timedetails-timezone": "Часовий пояс",
 	"wikibase-timedetails-calendar": "Календар",
 	"wikibase-timedetails-precision": "Точність",

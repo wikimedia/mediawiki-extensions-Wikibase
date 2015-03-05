@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Умар",
-			"Fitoschido"
+			"Fitoschido",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Wikibase а Wikibase Client а массо функцеш",
@@ -18,7 +19,7 @@
 	"wikibase-error-ui-no-external-page": "Кара цайо оцу сайтан чохь иштта цӀе йолу агӀо.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (транслитераци)",
 	"wikibase-timedetails-time": "Хан",
-	"wikibase-timedetails-isotime": "Хан билгал яр ISO-форматехь",
+	"wikibase-timedetails-isotime": "Терахь/хан",
 	"wikibase-timedetails-timezone": "Сахьтан аса",
 	"wikibase-timedetails-calendar": "Календарь",
 	"wikibase-timedetails-precision": "Билгала",

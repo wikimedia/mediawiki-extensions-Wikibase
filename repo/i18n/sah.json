@@ -6,6 +6,8 @@
 	},
 	"wikibase-edit": "уларыт",
 	"wikibase-add": "эп",
+	"wikibase-label-empty": "Бэлиэтэ суох эбит.",
+	"wikibase-description-empty": "Бу туһунан сиһилии сурулла илик эбит",
 	"wikibase-sitelinks-special": "Атын сирдэр",
 	"wikibase-aliases-empty": "Атын аат көстүбэтэ.",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ылыллыбыт сир}}"

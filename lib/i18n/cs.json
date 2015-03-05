@@ -7,7 +7,8 @@
 			"Mormegil",
 			"Vks",
 			"Matěj Suchánek",
-			"DobyvatelCZ"
+			"DobyvatelCZ",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Obsahuje společné funkce pro rozšíření Wikibase a Klient Wikibase",
@@ -32,7 +33,7 @@
 	"wikibase-quantitydetails-lowerbound": "Dolní mez",
 	"wikibase-quantitydetails-unit": "Jednotka",
 	"wikibase-timedetails-time": "Čas",
-	"wikibase-timedetails-isotime": "ISO časová značka",
+	"wikibase-timedetails-isotime": "Časová značka",
 	"wikibase-timedetails-timezone": "Časové pásmo",
 	"wikibase-timedetails-calendar": "Kalendář",
 	"wikibase-timedetails-precision": "Přesnost",

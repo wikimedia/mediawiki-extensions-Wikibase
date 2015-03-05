@@ -4,7 +4,8 @@
 			"Jeblad",
 			"Njardarlogar",
 			"Roarjo",
-			"Fitoschido"
+			"Fitoschido",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Har felles funksjonalitet for Wikibase- og Wikibase Client-utvidingane",
@@ -28,7 +29,7 @@
 	"wikibase-quantitydetails-lowerbound": "Nedre grense",
 	"wikibase-quantitydetails-unit": "Eining",
 	"wikibase-timedetails-time": "Tid",
-	"wikibase-timedetails-isotime": "ISO tidsmerke",
+	"wikibase-timedetails-isotime": "Tidsmerke",
 	"wikibase-timedetails-timezone": "Tidssone",
 	"wikibase-timedetails-calendar": "Kalender",
 	"wikibase-timedetails-precision": "Presisjon",

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Xuacu",
-			"Fitoschido"
+			"Fitoschido",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Contién les funciones comúnes pa les estensiones Wikibase y Wikibase Client.",
@@ -26,7 +27,7 @@
 	"wikibase-quantitydetails-lowerbound": "Mínimu",
 	"wikibase-quantitydetails-unit": "Unidá",
 	"wikibase-timedetails-time": "Hora",
-	"wikibase-timedetails-isotime": "Marca de tiempu ISO",
+	"wikibase-timedetails-isotime": "Marca d'hora",
 	"wikibase-timedetails-timezone": "Estaya horaria",
 	"wikibase-timedetails-calendar": "Calendariu",
 	"wikibase-timedetails-precision": "Precisión",
