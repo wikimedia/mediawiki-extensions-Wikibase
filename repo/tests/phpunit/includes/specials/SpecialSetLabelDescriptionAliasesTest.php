@@ -2,10 +2,17 @@
 
 namespace Wikibase\Test;
 
+use ValueValidators\Result;
+use Wikibase\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\EntityContent;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Specials\SpecialWikibaseRepoPage;
+use Wikibase\Validators\TermValidatorFactory;
+use Wikibase\Validators\UniquenessViolation;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases
@@ -21,8 +28,12 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
+ * @author Daniel Kinzler
  */
-class SpecialSetLabelDescriptionAliasesTest extends SpecialPageTestBase {
+class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestBase {
+
+	protected $languageCodes = array( 'en', 'de', 'de-ch', 'ii', 'zh' );
+
 
 	/**
 	 * @see SpecialPageTestBase::newSpecialPage()
@@ -30,7 +41,123 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialPageTestBase {
 	 * @return SpecialSetLabelDescriptionAliases
 	 */
 	protected function newSpecialPage() {
-		return new SpecialSetLabelDescriptionAliases();
+		$page = new SpecialSetLabelDescriptionAliases();
+
+		$this->setMockServices( $page );
+
+		return $page;
+	}
+
+	/**
+	 * @param SpecialSetLabelDescriptionAliases $page
+	 */
+	protected function setMockServices( SpecialWikibaseRepoPage $page ) {
+		$page->setServices(
+			$this->getSummaryFormatter(),
+			$this->getEntityRevisionLookup(),
+			$this->getEntityTitleLookup(),
+			$this->getEntityStore(),
+			$this->getEntityPermissionChecker(),
+			$this->getSiteStore(),
+			$this->getFingerprintChangeOpsFactory(),
+			$this->getContentLanguages()
+		);
+	}
+
+	/**
+	 * @return FingerprintChangeOpFactory
+	 */
+	private function getFingerprintChangeOpsFactory() {
+		$maxLength = 32;
+		
+		return new FingerprintChangeOpFactory(
+			new TermValidatorFactory(
+				$maxLength,
+				$this->languageCodes,
+				$this->getIdParser(),
+				$this->getLabelDescriptionDuplicateDetector(),
+				$this->mockRepository
+			)
+		);
+	}
+
+	/**
+	 * @return LabelDescriptionDuplicateDetector
+	 */
+	private function getLabelDescriptionDuplicateDetector() {
+		$detector = $this->getMockBuilder( 'Wikibase\LabelDescriptionDuplicateDetector' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$self = $this; // yay PHP 5.3
+		$detector->expects( $this->any() )
+			->method( 'detectTermConflicts' )
+			->will( $this->returnCallback( function(
+				$entityType,
+				array $labels,
+				array $descriptions = null,
+				EntityId $ignoreEntityId = null
+			) use ( $self ) {
+				$errors = array();
+
+				$errors = array_merge( $errors, $self->detectDupes( $labels ) );
+				$errors = array_merge( $errors, $self->detectDupes( $descriptions ) );
+
+				$result = empty( $errors ) ? Result::newSuccess() : Result::newError( $errors );
+				return $result;
+			} ) );
+
+		return $detector;
+	}
+
+	/**
+	 * Mock duplicate detection: the term "DUPE" is considered a duplicate.
+	 *
+	 * @param string[] $terms
+	 *
+	 * @return array
+	 */
+	public function detectDupes( $terms ) {
+		$errors = array();
+
+		foreach ( $terms as $languageCode => $term ) {
+			if ( $term === 'DUPE' ) {
+				$q666 = new ItemId( 'Q666' );
+
+				$errors[] =  new UniquenessViolation(
+					$q666,
+					'found conflicting terms',
+					'test-conflict',
+					array(
+						$term,
+						$languageCode,
+						$q666,
+					)
+				);
+			}
+		}
+
+		return $errors;
+	}
+
+	/**
+	 * @return ContentLanguages
+	 */
+	private function getContentLanguages() {
+		$languages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
+
+		$languages->expects( $this->any() )
+			->method( 'getLanguages' )
+			->will( $this->returnValue( $this->languageCodes ) );
+
+		$languageCodes = $this->languageCodes; // for PHP 5.3
+		$languages->expects( $this->any() )
+			->method( 'hasLanguage' )
+			->will( $this->returnCallback( function( $code ) use ( $languageCodes ) {
+				return in_array( $code, $languageCodes );
+			} ) );
+
+		return $languages;
 	}
 
 	/**
@@ -44,8 +171,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialPageTestBase {
 		$item->setAliases( 'de', array( 'foo' ) );
 
 		// save the item
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW | EntityContent::EDIT_IGNORE_CONSTRAINTS );
+		$this->mockRepository->putEntity( $item );
 
 		// return the id
 		return $item->getId()->getSerialization();
