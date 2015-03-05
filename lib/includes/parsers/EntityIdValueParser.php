@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use ValueParsers\ParseException;
-use ValueParsers\ParserOptions;
 use ValueParsers\StringValueParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -30,9 +29,10 @@ class EntityIdValueParser extends StringValueParser {
 
 	/**
 	 * @param EntityIdParser $parser
-	 * @param ParserOptions $options
 	 */
-	public function __construct( EntityIdParser $parser, ParserOptions $options ) {
+	public function __construct( EntityIdParser $parser ) {
+		parent::__construct();
+
 		$this->parser = $parser;
 	}
 

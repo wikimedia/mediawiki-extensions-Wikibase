@@ -114,8 +114,7 @@ call_user_func( function() {
 		//TODO: make ID builders configurable.
 		$builders = \Wikibase\DataModel\Entity\BasicEntityIdParser::getBuilders();
 		return new \Wikibase\Lib\EntityIdValueParser(
-			new \Wikibase\DataModel\Entity\DispatchingEntityIdParser( $builders, $options ),
-			$options
+			new \Wikibase\DataModel\Entity\DispatchingEntityIdParser( $builders, $options )
 		);
 	};
 

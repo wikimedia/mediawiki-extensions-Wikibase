@@ -21,18 +21,19 @@ use Wikibase\Lib\Parsers\MWTimeIsoParser;
 class MWTimeIsoParserTest extends StringValueParserTest {
 
 	/**
-	 * @return MWTimeIsoParser
+	 * @deprecated since 0.3, just use getInstance.
 	 */
-	protected function getInstance() {
-		$class = $this->getParserClass();
-		return new $class( $this->newParserOptions() );
+	protected function getParserClass() {
+		throw new \LogicException( 'Should not be called, use getInstance' );
 	}
 
 	/**
-	 * @return string
+	 * @see ValueParserTestBase::getInstance
+	 *
+	 * @return MWTimeIsoParser
 	 */
-	protected function getParserClass() {
-		return 'Wikibase\Lib\Parsers\MWTimeIsoParser';
+	protected function getInstance() {
+		return new MWTimeIsoParser();
 	}
 
 	/**

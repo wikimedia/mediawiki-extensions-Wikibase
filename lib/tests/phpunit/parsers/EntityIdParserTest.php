@@ -2,9 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
-use ValueParsers\ParserOptions;
 use ValueParsers\Test\StringValueParserTest;
-use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -26,20 +24,19 @@ use Wikibase\Lib\EntityIdValueParser;
 class EntityIdValueParserTest extends StringValueParserTest {
 
 	/**
-	 * @return ValueParser
+	 * @deprecated since 0.3, just use getInstance.
 	 */
-	protected function getInstance() {
-		$class = $this->getParserClass();
-		return new $class( new BasicEntityIdParser(), $this->newParserOptions() );
+	protected function getParserClass() {
+		throw new \LogicException( 'Should not be called, use getInstance' );
 	}
 
 	/**
-	 * @see ValueParserTestBase::newParserOptions
+	 * @see ValueParserTestBase::getInstance
 	 *
-	 * @return ParserOptions
+	 * @return EntityIdValueParser
 	 */
-	protected function newParserOptions() {
-		return new ParserOptions();
+	protected function getInstance() {
+		return new EntityIdValueParser( new BasicEntityIdParser() );
 	}
 
 	/**
@@ -50,15 +47,13 @@ class EntityIdValueParserTest extends StringValueParserTest {
 	public function validInputProvider() {
 		$argLists = array();
 
-		$parser = new EntityIdValueParser( new BasicEntityIdParser(), $this->newParserOptions() );
-
 		$valid = array(
 			'q1' => new EntityIdValue( new ItemId( 'q1' ) ),
 			'p1' => new EntityIdValue( new PropertyId( 'p1' ) ),
 		);
 
 		foreach ( $valid as $value => $expected ) {
-			$argLists[] = array( $value, $expected, $parser );
+			$argLists[] = array( $value, $expected );
 		}
 
 		return array_merge( $argLists );
@@ -84,15 +79,6 @@ class EntityIdValueParserTest extends StringValueParserTest {
 		}
 
 		return $argLists;
-	}
-
-	/**
-	 * @see ValueParserTestBase::getParserClass
-	 *
-	 * @return string
-	 */
-	protected function getParserClass() {
-		return 'Wikibase\Lib\EntityIdValueParser';
 	}
 
 }
