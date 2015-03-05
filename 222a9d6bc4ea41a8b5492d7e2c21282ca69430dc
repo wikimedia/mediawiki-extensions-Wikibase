@@ -16,6 +16,24 @@
       "revId": "222a9d6bc4ea41a8b5492d7e2c21282ca69430dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bb488fd0",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-05T15:40:10Z",
+      "side": 1,
+      "message": "This checks for the 2nd step. The id is part of the 1st step and already checked above (parent::validateInput checks if entityRevision !\u003d\u003d null).",
+      "parentUuid": "6e7c4fa4_21945738",
+      "revId": "222a9d6bc4ea41a8b5492d7e2c21282ca69430dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
