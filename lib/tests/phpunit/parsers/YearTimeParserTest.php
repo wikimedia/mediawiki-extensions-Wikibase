@@ -6,7 +6,7 @@ use DataValues\TimeValue;
 use ValueFormatters\TimeFormatter;
 use ValueParsers\Test\StringValueParserTest;
 use Wikibase\Lib\Parsers\EraParser;
-use Wikibase\Lib\Parsers\MWTimeIsoParser;
+use Wikibase\Lib\Parsers\YearTimeParser;
 
 /**
  * @covers Wikibase\Lib\Parsers\YearTimeParser
@@ -22,11 +22,19 @@ use Wikibase\Lib\Parsers\MWTimeIsoParser;
 class YearTimeParserTest extends StringValueParserTest {
 
 	/**
-	 * @return MWTimeIsoParser
+	 * @deprecated since 0.3, just use getInstance.
+	 */
+	protected function getParserClass() {
+		throw new \LogicException( 'Should not be called, use getInstance' );
+	}
+
+	/**
+	 * @see ValueParserTestBase::getInstance
+	 *
+	 * @return YearTimeParser
 	 */
 	protected function getInstance() {
-		$class = $this->getParserClass();
-		return new $class( $this->getMockEraParser(), $this->newParserOptions() );
+		return new YearTimeParser( $this->getMockEraParser() );
 	}
 
 	private function getMockEraParser() {
@@ -48,13 +56,6 @@ class YearTimeParserTest extends StringValueParserTest {
 				}
 			) );
 		return $mock;
-	}
-
-	/**
-	 * @return string
-	 */
-	protected function getParserClass() {
-		return 'Wikibase\Lib\Parsers\YearTimeParser';
 	}
 
 	/**
@@ -144,7 +145,8 @@ class YearTimeParserTest extends StringValueParserTest {
 	 * @expectedExceptionMessage Failed to parse year
 	 */
 	public function testParseExceptionMessage() {
-		$this->getInstance()->parse( 'ju5t 1nval1d' );
+		$parser = $this->getInstance();
+		$parser->parse( 'ju5t 1nval1d' );
 	}
 
 }
