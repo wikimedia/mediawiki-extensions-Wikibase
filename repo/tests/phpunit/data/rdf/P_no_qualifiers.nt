@@ -1,0 +1,10 @@
+
+<http://acme.test/Q6> <http://acme.test/P7> <http://acme.test/statement/TEST-Qualifiers> .
+<http://acme.test/Q6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.wikidata.org/ontology-0.0.1#Item> .
+<http://acme.test/statement/TEST-Qualifiers> <http://acme.test/value/P7> "string" .
+<http://acme.test/statement/TEST-Qualifiers> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.wikidata.org/ontology-0.0.1#Statement> .
+<http://acme.test/statement/TEST-Qualifiers> <http://www.wikidata.org/ontology-0.0.1#Rank> <http://www.wikidata.org/ontology-0.0.1#NormalRank> .
+<http://data.acme.test/Q6> <http://schema.org/about> <http://acme.test/Q6> .
+<http://data.acme.test/Q6> <http://schema.org/dateModified> "2013-10-04T03:31:05Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://data.acme.test/Q6> <http://schema.org/version> "42"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://data.acme.test/Q6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Dataset> .
