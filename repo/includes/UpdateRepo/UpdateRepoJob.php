@@ -132,16 +132,20 @@ abstract class UpdateRepoJob extends Job {
 		} catch ( StorageException $ex ) {
 			wfDebugLog(
 				'UpdateRepo',
-				__FUNCTION__ . ": EntityRevision not found for " . $itemId->getSerialization()
+				__FUNCTION__ . ": EntityRevision couldn't be loaded for " . $itemId->getSerialization() . ": " . $ex->getMessage()
 			);
 
-			$entityRevision = null;
+			return null;
 		}
 
 		if ( $entityRevision ) {
 			return $entityRevision->getEntity();
 		}
 
+		wfDebugLog(
+			'UpdateRepo',
+			__FUNCTION__ . ": EntityRevision not found for " . $itemId->getSerialization()
+		);
 		return null;
 	}
 
@@ -155,6 +159,7 @@ abstract class UpdateRepoJob extends Job {
 	 */
 	private function saveChanges( Item $item, User $user ) {
 		$summary = $this->getSummary();
+		$itemId = $item->getId();
 
 		$editEntity = new EditEntity(
 			$this->entityTitleLookup,
@@ -173,11 +178,11 @@ abstract class UpdateRepoJob extends Job {
 			EDIT_UPDATE,
 			false,
 			// Don't (un)watch any pages here, as the user didn't explicitly kick this off
-			$this->entityStore->isWatching( $user, $item->getid() )
+			$this->entityStore->isWatching( $user, $itemId )
 		);
 
 		if ( !$status->isOK() ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": attemptSave for " . $item->getId()->getSerialization() . " failed: " . $status->getMessage()->text() );
+			wfDebugLog( 'UpdateRepo', __FUNCTION__ . ": attemptSave for " . $itemId->getSerialization() . " failed: " . $status->getMessage()->text() );
 		}
 
 		wfProfileOut( __METHOD__ );
