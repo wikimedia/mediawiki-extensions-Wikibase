@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
@@ -141,41 +142,73 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( true );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param ReferenceList $array
-	 */
-	public function testAddReference( ReferenceList $array ) {
-		// Append object to the end:
-		$elementCount = count( $array );
+	public function testAddReferenceOnEmptyList() {
+		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
 
-		$elements = $this->getElementInstances();
-		$element = array_shift( $elements );
-		$array->addReference( $element );
+		$references = new ReferenceList();
+		$references->addReference( $reference );
 
-		$this->assertEquals( ++$elementCount, count( $array ) );
+		$this->assertCount( 1, $references );
 
-		// Insert object at the beginning:
-		$elements = $this->getElementInstances();
-		$element = array_shift( $elements );
-		$array->addReference( $element, 0 );
+		$expectedList = new ReferenceList( array( $reference ) );
+		$this->assertSameReferenceOrder( $expectedList, $references );
+	}
 
-		$array->rewind();
+	private function assertSameReferenceOrder( ReferenceList $expectedList, ReferenceList $references ) {
+		$this->assertEquals(
+			iterator_to_array( $expectedList ),
+			iterator_to_array( $references )
+		);
+	}
 
-		$this->assertEquals( ++$elementCount, count( $array ) );
-		$this->assertEquals( $array->current(), $element, 'Inserted object at the beginning' );
+	public function testAddReferenceOnNonEmptyList() {
+		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
+		$reference3 = new Reference( array( new PropertyNoValueSnak( 3 ) ) );
 
-		// Insert object at another index:
-		$elements = $this->getElementInstances();
-		$element = array_shift( $elements );
-		$array->addReference( $element, 1 );
+		$references = new ReferenceList( array( $reference1, $reference2 ) );
+		$references->addReference( $reference3 );
 
-		$array->rewind();
-		$array->next();
+		$this->assertCount( 3, $references );
 
-		$this->assertEquals( ++$elementCount, count( $array ) );
-		$this->assertEquals( $array->current(), $element, 'Inserted object at index 1' );
+		$expectedList = new ReferenceList( array( $reference1, $reference2, $reference3 ) );
+		$this->assertSameReferenceOrder( $expectedList, $references );
+	}
+
+	public function testAddReferenceAtIndexZero() {
+		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
+		$reference3 = new Reference( array( new PropertyNoValueSnak( 3 ) ) );
+
+		$references = new ReferenceList( array( $reference1, $reference2 ) );
+		$references->addReference( $reference3, 0 );
+
+		$expectedList = new ReferenceList( array( $reference3, $reference1, $reference2 ) );
+		$this->assertSameReferenceOrder( $expectedList, $references );
+	}
+
+	public function testGivenEmptyReference_addReferenceDoesNotAdd() {
+		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
+		$emptyReference = new Reference( array() );
+
+		$references = new ReferenceList( array( $reference1, $reference2 ) );
+		$references->addReference( $emptyReference );
+
+		$expectedList = new ReferenceList( array( $reference1, $reference2 ) );
+		$this->assertSameReferenceOrder( $expectedList, $references );
+	}
+
+	public function testGivenEmptyReferenceAndIndex_addReferenceDoesNotAdd() {
+		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
+		$emptyReference = new Reference( array() );
+
+		$references = new ReferenceList( array( $reference1, $reference2 ) );
+		$references->addReference( $emptyReference, 0 );
+
+		$expectedList = new ReferenceList( array( $reference1, $reference2 ) );
+		$this->assertSameReferenceOrder( $expectedList, $references );
 	}
 
 	/**

@@ -70,6 +70,17 @@ class ReferenceList extends HashableObjectStorage {
 		}
 	}
 
+	/**
+	 * @see SplObjectStorage::attach
+	 * @param Reference $reference
+	 * @param mixed $data
+	 */
+	public function attach( $reference, $data = null ) {
+		if ( !$reference->isEmpty() ) {
+			parent::attach( $reference, $data );
+		}
+	}
+
 	// @codingStandardsIgnoreStart
 	/**
 	 * @since 1.1
