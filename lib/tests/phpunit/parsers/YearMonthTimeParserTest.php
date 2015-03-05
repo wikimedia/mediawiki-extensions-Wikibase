@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Parsers\Test;
 use DataValues\TimeValue;
 use ValueFormatters\TimeFormatter;
 use ValueParsers\Test\StringValueParserTest;
-use Wikibase\Lib\Parsers\MWTimeIsoParser;
+use Wikibase\Lib\Parsers\YearMonthTimeParser;
 
 /**
  * @covers \Wikibase\Lib\Parsers\YearMonthTimeParser
@@ -21,18 +21,19 @@ use Wikibase\Lib\Parsers\MWTimeIsoParser;
 class YearMonthTimeParserTest extends StringValueParserTest {
 
 	/**
-	 * @return MWTimeIsoParser
-	 */
-	protected function getInstance() {
-		$class = $this->getParserClass();
-		return new $class( $this->newParserOptions() );
-	}
-
-	/**
-	 * @return string
+	 * @deprecated since 0.3, just use getInstance.
 	 */
 	protected function getParserClass() {
 		return 'Wikibase\Lib\Parsers\YearMonthTimeParser';
+	}
+
+	/**
+	 * @see ValueParserTestBase::getInstance
+	 *
+	 * @return YearMonthTimeParser
+	 */
+	protected function getInstance() {
+		return new YearMonthTimeParser();
 	}
 
 	/**

@@ -23,11 +23,19 @@ use Wikibase\Lib\Parsers\EraParser;
 class DateTimeParserTest extends StringValueParserTest {
 
 	/**
+	 * @deprecated since 0.3, just use getInstance.
+	 */
+	protected function getParserClass() {
+		return 'Wikibase\Lib\Parsers\DateTimeParser';
+	}
+
+	/**
+	 * @see ValueParserTestBase::getInstance
+	 *
 	 * @return DateTimeParser
 	 */
 	protected function getInstance() {
-		$class = $this->getParserClass();
-		return new $class( $this->getEraParser(), $this->newParserOptions() );
+		return new DateTimeParser( $this->getEraParser() );
 	}
 
 	/**
@@ -52,15 +60,6 @@ class DateTimeParserTest extends StringValueParserTest {
 				}
 			) );
 		return $mock;
-	}
-
-	/**
-	 * @see ValueParserTestBase::getParserClass
-	 *
-	 * @return string
-	 */
-	protected function getParserClass() {
-		return 'Wikibase\Lib\Parsers\DateTimeParser';
 	}
 
 	/**
