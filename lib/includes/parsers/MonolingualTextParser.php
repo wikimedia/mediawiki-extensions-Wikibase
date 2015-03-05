@@ -31,11 +31,11 @@ class MonolingualTextParser extends StringValueParser {
 	 * @return MonolingualTextValue
 	 */
 	protected function stringParse( $value ) {
-		if ( !$this->getOptions()->hasOption( 'valuelang' ) ) {
+		if ( !$this->options->hasOption( 'valuelang' ) ) {
 			throw new ParseException( 'Cannot construct a MonolingualTextValue without a language code.' );
 		}
 
-		$lang = $this->getOptions()->getOption( 'valuelang' );
+		$lang = $this->getOption( 'valuelang' );
 
 		try {
 			return new MonolingualTextValue( trim( $lang ), trim( $value ) );
