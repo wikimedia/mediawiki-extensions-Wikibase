@@ -7,6 +7,7 @@ use EasyRdf_Graph;
 use EasyRdf_Literal;
 use EasyRdf_Namespace;
 use EasyRdf_Resource;
+use EasyRdf_Format;
 use SiteList;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -28,6 +29,10 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\Snaks;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 
 /**
  * @covers Wikibase\RdfBuilder
@@ -58,6 +63,220 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 * @var string
 	 */
 	private $refHash;
+
+	private static $entitySerializer;
+	private static $codec;
+
+	/**
+	 * Initialize repository data
+	 */
+	public static function initRepoData()
+	{
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$entityFactory = $wikibaseRepo->getEntityFactory();
+		$serializerOptions = new SerializationOptions();
+		$wikibaseRepo->getSettings()->setSetting( 'internalEntitySerializerClass', null );
+		$wikibaseRepo->getSettings()->setSetting( 'useRedirectTargetColumn', true );
+
+
+		$serializerFactory = new SerializerFactory(
+				$serializerOptions,
+				self::getMockRepository(),
+				$entityFactory
+		);
+
+		self::$entitySerializer = new DispatchingEntitySerializer( $serializerFactory, $serializerOptions );
+		self::$codec = $wikibaseRepo->getEntityContentDataCodec();
+	}
+
+	/**
+	 * Define a set of fake properties
+	 * @return array
+	 */
+	private static function getTestProperties() {
+		return array(
+				array(2, 'wikibase-entityid'),
+				array(3, 'commonsMedia'),
+				array(4, 'globecoordinate'),
+				array(5, 'monolingualtext'),
+				array(6, 'quantity'),
+				array(7, 'string'),
+				array(8, 'time'),
+				array(9, 'url'),
+		);
+	}
+
+	/**
+	 * Construct mock repository
+	 * @return \Wikibase\Test\MockRepository
+	 */
+	public static function getMockRepository() {
+		static $repo;
+
+		if ( !empty($repo) ) {
+			return $repo;
+		}
+
+		$repo = new MockRepository();
+
+		foreach( self::getTestProperties() as $prop ) {
+			list($id, $type) = $prop;
+			$fingerprint = Fingerprint::newEmpty();
+			$fingerprint->setLabel( 'en', "Property$id" );
+			$entity = new Property( PropertyId::newFromNumber($id), $fingerprint, $type );
+			$repo->putEntity( $entity );
+		}
+		return $repo;
+	}
+
+	/**
+	 * @return RdfBuilder
+	 */
+	private static function newRdfBuilder($produce = RdfProducer::PRODUCE_ALL) {
+		return new RdfBuilder(
+			self::getSiteList(),
+			self::URI_BASE,
+			self::URI_DATA,
+			self::getMockRepository(),
+			$produce
+		);
+	}
+
+	/**
+	 * Get site list
+	 * @return \SiteList
+	 */
+	public static function getSiteList() {
+		$list = new SiteList();
+
+		$wiki = new \Site();
+		$wiki->setGlobalId( 'enwiki' );
+		$wiki->setLanguageCode( 'en' );
+		$wiki->setLinkPath( 'http://enwiki.acme.test/$1' );
+		$list['enwiki'] = $wiki;
+
+		$wiki = new \Site();
+		$wiki->setGlobalId( 'ruwiki' );
+		$wiki->setLanguageCode( 'ru' );
+		$wiki->setLinkPath( 'http://ruwiki.acme.test/$1' );
+		$list['ruwiki'] = $wiki;
+
+		return $list;
+	}
+
+	/**
+	 * Load entity from JSON
+	 * @param string $entityId
+	 * @return Entity
+	 */
+	public function getEntityData( $entityId )
+	{
+		return self::$codec->decodeEntity(
+			file_get_contents(__DIR__ . "/../../data/rdf/$entityId.json"), CONTENT_FORMAT_JSON );
+	}
+
+	/**
+	 * Load serialized ntriples
+	 * @param string $testName
+	 * @return array
+	 */
+	public function getSerializedData( $testName )
+	{
+		$filename = __DIR__ . "/../../data/rdf/$testName.nt";
+		if ( !file_exists( $filename ) )
+		{
+			return array ();
+		}
+		$data = file_get_contents( $filename );
+		$data = explode( "\n", $data );
+		sort( $data );
+		return $data;
+	}
+
+	public function getRdfTests() {
+		$rdfTests = array(
+				array('Q1', 'simple'),
+				array('Q2', 'labels'),
+				array('Q3', 'links'),
+				array('Q4', 'claims'),
+				array('Q6', 'qualifiers'),
+				array('Q7', 'references'),
+		);
+
+		self::initRepoData();
+		$testData = array();
+		foreach ( $rdfTests as $test ) {
+			$testData[] = array (
+					$this->getEntityData( $test[0] ),
+					$this->getSerializedData( $test[1] ),
+					$test[1]
+			);
+		}
+		return $testData;
+	}
+
+	/**
+	 * Extract text test data from RDF builder
+	 * @param RdfBuilder $builder
+	 * @return multitype:
+	 */
+	private function getDataFromBuilder( RdfBuilder $builder ) {
+		$graph = $builder->getGraph();
+		$format = EasyRdf_Format::getFormat( "ntriples" );
+		$serialiser = $format->newSerialiser();
+		$data = $serialiser->serialise( $graph, "ntriples" );
+		$dataSplit = explode( "\n", $data );
+		sort( $dataSplit );
+		return $dataSplit;
+	}
+
+	/**
+	 * @dataProvider getRdfTests
+	 */
+	public function testRdfBuild( Entity $entity, array $correctData, $testName ) {
+		$builder = self::newRdfBuilder();
+		$builder->addEntity( $entity );
+		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2014-11-04T03:11:05Z" );
+		$this->assertEquals( $correctData, $this->getDataFromBuilder( $builder ),
+				"Data differs for test $testName" );
+	}
+
+	public function getProduceOptions() {
+		$produceTests = array(
+			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, 'P_all_statements' ),
+			array( 'Q4', RdfProducer::PRODUCE_TRUTHY_STATEMENTS, 'P_truthy_statements' ),
+			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, 'P_no_qualifiers' ),
+			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, 'P_qualifiers' ),
+			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , 'P_no_refs' ),
+			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, 'P_refs' ),
+			array( 'Q3', RdfProducer::PRODUCE_SITELINKS, 'P_sitelinks' ),
+			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, 'P_props' ),
+			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, 'P_values' ),
+			array( 'Q1', RdfProducer::PRODUCE_VERSION_INFO, 'P_info' ),
+		);
+
+		self::initRepoData();
+		$testData = array();
+		foreach($produceTests as $test) {
+			$testData[] = array( $this->getEntityData($test[0]), $test[1], $this->getSerializedData($test[2]), $test[2] );
+		}
+		return $testData;
+
+	}
+
+	/**
+	 * @dataProvider getProduceOptions
+	 */
+	public function testRdfOptions( Entity $entity, $produceOption, array $correctData, $dataName ) {
+		$builder = self::newRdfBuilder( $produceOption );
+		$builder->addEntity( $entity );
+		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2013-10-04T03:31:05Z" );
+		$data = $this->getDataFromBuilder( $builder );
+		$this->assertEquals( $correctData, $data, "Data in test $dataName does not match" );
+	}
+
+
+/**** all the following will get removed once we're done with the merge ****/
 
 	/**
 	 * @return Entity[]
@@ -648,80 +867,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		return $graphs;
 	}
 
-	/**
-	 * Get site list
-	 * @return \SiteList
-	 */
-	public static function getSiteList() {
-		$list = new SiteList();
-
-		$wiki = new \Site();
-		$wiki->setGlobalId( 'enwiki' );
-		$wiki->setLanguageCode( 'en' );
-		$wiki->setLinkPath( 'http://enwiki.acme.test/$1' );
-		$list['enwiki'] = $wiki;
-
-		$wiki = new \Site();
-		$wiki->setGlobalId( 'ruwiki' );
-		$wiki->setLanguageCode( 'ru' );
-		$wiki->setLinkPath( 'http://ruwiki.acme.test/$1' );
-		$list['ruwiki'] = $wiki;
-
-		return $list;
-	}
-
-	/**
-	 * Define a set of fake properties
-	 * @return array
-	 */
-	private static function getTestProperties() {
-		return array(
-				array(2, 'wikibase-entityid'),
-				array(3, 'commonsMedia'),
-				array(4, 'globecoordinate'),
-				array(5, 'monolingualtext'),
-				array(6, 'quantity'),
-				array(7, 'string'),
-				array(8, 'time'),
-				array(9, 'url'),
-		);
-	}
-
-	/**
-	 * Construct mock repository
-	 * @return \Wikibase\Test\MockRepository
-	 */
-	public static function getMockRepository() {
-		static $repo;
-
-		if ( !empty($repo) ) {
-			return $repo;
-		}
-
-		$repo = new MockRepository();
-
-		foreach( self::getTestProperties() as $prop ) {
-			list($id, $type) = $prop;
-			$fingerprint = Fingerprint::newEmpty();
-			$fingerprint->setLabel( 'en', "Property$id" );
-			$entity = new Property( PropertyId::newFromNumber($id), $fingerprint, $type );
-			$repo->putEntity( $entity );
-		}
-		return $repo;
-	}
-
-	/**
-	 * @return RdfBuilder
-	 */
-	private static function newRdfBuilder() {
-		return new RdfBuilder(
-			self::getSiteList(),
-			self::URI_BASE,
-			self::URI_DATA,
-			self::getMockRepository(),
-			RdfProducer::PRODUCE_ALL
-		);
-	}
 
 	public function provideAddEntity() {
 		$entities = $this->getTestEntities();
@@ -746,10 +891,18 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		return $cases;
 	}
 
+	private function dumpJson( Entity $entity ) {
+		$filename = $entity->getId()->getSerialization().".json";
+		$data = self::$entitySerializer->getSerialized( $entity );
+		$json = json_encode ($data, JSON_PRETTY_PRINT);
+		file_put_contents($filename, $json);
+	}
+
 	/**
 	 * @dataProvider provideAddEntity
 	 */
-	public function testAddEntity( EntityRevision $entityRevision, EasyRdf_Graph $expectedGraph ) {
+	public function disabled_testAddEntity( EntityRevision $entityRevision, EasyRdf_Graph $expectedGraph ) {
+		//$this->dumpJson( $entityRevision->getEntity() );
 		$builder = self::newRdfBuilder();
 
 		$builder->addEntity( $entityRevision->getEntity() );

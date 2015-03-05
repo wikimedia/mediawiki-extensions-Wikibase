@@ -1,0 +1,19 @@
+
+<http://acme.test/Q2> <http://schema.org/description> "German city"@en .
+<http://acme.test/Q2> <http://schema.org/description> "\u00D1\u0081\u00D1\u0082\u00D0\u00BE\u00D0\u00BB\u00D0\u00B8\u00D1\u0086\u00D0\u00B0 \u00D0\u00B8 \u00D0\u00BE\u00D0\u00B4\u00D0\u00BD\u00D0\u00BE\u00D0\u00B2\u00D1\u0080\u00D0\u00B5\u00D0\u00BC\u00D0\u00B5\u00D0\u00BD\u00D0\u00BD\u00D0\u00BE \u00D0\u00B7\u00D0\u00B5\u00D0\u00BC\u00D0\u00BB\u00D1\u008F \u00D0\u0093\u00D0\u00B5\u00D1\u0080\u00D0\u00BC\u00D0\u00B0\u00D0\u00BD\u00D0\u00B8\u00D0\u00B8"@ru .
+<http://acme.test/Q2> <http://schema.org/name> "Berlin"@en .
+<http://acme.test/Q2> <http://schema.org/name> "\u00D0\u0091\u00D0\u00B5\u00D1\u0080\u00D0\u00BB\u00D0\u00B8\u00D0\u00BD"@ru .
+<http://acme.test/Q2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.wikidata.org/ontology-0.0.1#Item> .
+<http://acme.test/Q2> <http://www.w3.org/2000/01/rdf-schema#label> "Berlin"@en .
+<http://acme.test/Q2> <http://www.w3.org/2000/01/rdf-schema#label> "\u00D0\u0091\u00D0\u00B5\u00D1\u0080\u00D0\u00BB\u00D0\u00B8\u00D0\u00BD"@ru .
+<http://acme.test/Q2> <http://www.w3.org/2004/02/skos/core#altLabel> "Berlin"@ru .
+<http://acme.test/Q2> <http://www.w3.org/2004/02/skos/core#altLabel> "Berlin, Germany"@en .
+<http://acme.test/Q2> <http://www.w3.org/2004/02/skos/core#altLabel> "Land Berlin"@en .
+<http://acme.test/Q2> <http://www.w3.org/2004/02/skos/core#prefLabel> "Berlin"@en .
+<http://acme.test/Q2> <http://www.w3.org/2004/02/skos/core#prefLabel> "\u00D0\u0091\u00D0\u00B5\u00D1\u0080\u00D0\u00BB\u00D0\u00B8\u00D0\u00BD"@ru .
+<http://data.acme.test/Q2> <http://creativecommons.org/ns#license> <http://creativecommons.org/publicdomain/zero/1.0/> .
+<http://data.acme.test/Q2> <http://schema.org/about> <http://acme.test/Q2> .
+<http://data.acme.test/Q2> <http://schema.org/dateModified> "2014-11-04T03:11:05Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://data.acme.test/Q2> <http://schema.org/softwareVersion> "0.0.1" .
+<http://data.acme.test/Q2> <http://schema.org/version> "42"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://data.acme.test/Q2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Dataset> .
