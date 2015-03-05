@@ -30,9 +30,11 @@ class EntityIdValueParser extends StringValueParser {
 
 	/**
 	 * @param EntityIdParser $parser
-	 * @param ParserOptions $options
+	 * @param ParserOptions|null $options Currently unused.
 	 */
-	public function __construct( EntityIdParser $parser, ParserOptions $options ) {
+	public function __construct( EntityIdParser $parser, ParserOptions $options = null ) {
+		parent::__construct( $options );
+
 		$this->parser = $parser;
 	}
 
