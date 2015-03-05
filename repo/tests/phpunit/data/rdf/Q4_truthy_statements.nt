@@ -1,0 +1,16 @@
+
+<http://acme.test/Q4> <http://acme.test/assert/P2> <http://acme.test/Q42> .
+<http://acme.test/Q4> <http://acme.test/assert/P3> <http://commons.wikimedia.org/wiki/Special:FilePath/Universe.svg> .
+<http://acme.test/Q4> <http://acme.test/assert/P3> <http://www.wikidata.org/ontology-0.0.1#Novalue> .
+<http://acme.test/Q4> <http://acme.test/assert/P4> "Point(12.345 67.89)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+<http://acme.test/Q4> <http://acme.test/assert/P5> "\u00D0\u00BF\u00D1\u0080\u00D0\u00B5\u00D0\u00B2\u00D0\u00B5\u00D0\u00B4"@ru .
+<http://acme.test/Q4> <http://acme.test/assert/P5> <http://www.wikidata.org/ontology-0.0.1#Somevalue> .
+<http://acme.test/Q4> <http://acme.test/assert/P6> "+19.768000000000000682121026329696178436279296875"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<http://acme.test/Q4> <http://acme.test/assert/P7> "simplestring" .
+<http://acme.test/Q4> <http://acme.test/assert/P8> "-00000000200-00-00T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://acme.test/Q4> <http://acme.test/assert/P9> <http://url.acme.test/> .
+<http://acme.test/Q4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.wikidata.org/ontology-0.0.1#Item> .
+<http://data.acme.test/Q4> <http://schema.org/about> <http://acme.test/Q4> .
+<http://data.acme.test/Q4> <http://schema.org/dateModified> "2013-10-04T03:31:05Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://data.acme.test/Q4> <http://schema.org/version> "42"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://data.acme.test/Q4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Dataset> .

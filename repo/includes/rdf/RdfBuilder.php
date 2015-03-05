@@ -811,14 +811,15 @@ class RdfBuilder {
 
 	/**
 	 * Create header structure for the dump
+	 * @param int $ts Timestamp (for testing)
 	 */
-	public function addDumpHeader() {
+	public function addDumpHeader( $ts = 0 ) {
 		// TODO: this should point to "this document"
 		$dataResource = $this->graph->resource( $this->getEntityTypeQName('Dump') );
 		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
 		$dataResource->addResource( self::NS_CC . ':license', self::LICENSE );
 		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
 		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified',
-				new EasyRdf_Literal( gmdate('Y-m-d\TH:i:s\Z'), null, 'xsd:dateTime' ) );
+				new EasyRdf_Literal( wfTimestamp(TS_ISO_8601, $ts), null, 'xsd:dateTime' ) );
 	}
 }
