@@ -2,6 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner < daniel.werner at wikimedia.de >
+ * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 
 ( function( $, mw, wb, dataTypeStore, getExpertsStore, getFormatterStore, getParserStore ) {
@@ -15,44 +16,48 @@
 
 		var $entityview = $( '.wikibase-entityview' );
 		var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
+		var canEdit = !mw.config.get( 'wbUserIsBlocked' ) && mw.config.get( 'wbUserCanEdit' );
 
-		initToolbarController( $entityview );
+		if( canEdit ) {
+			initToolbarController( $entityview );
+		}
 
 		entityInitializer.getEntity().done( function( entity ) {
 			var viewName = createEntityView( entity, $entityview.first() );
 
-			attachAnonymousEditWarningTrigger( $entityview, viewName, entity.getType() );
-
-			attachWatchLinkUpdater( $entityview, viewName );
-
-			evaluateRestrictions();
+			if( canEdit ) {
+				attachAnonymousEditWarningTrigger( $entityview, viewName, entity.getType() );
+				attachWatchLinkUpdater( $entityview, viewName );
+			}
 
 			// Remove loading spinner after JavaScript has kicked in:
 			$entityview.removeClass( 'loading' );
 			$( '.wb-entity-spinner' ).remove();
 		} );
 
-		$entityview
-		.on( 'entitytermsviewchange entitytermsviewafterstopediting', function( event ) {
-			var $entitytermsview = $( event.target ),
-				entitytermsview = $entitytermsview.data( 'entitytermsview' );
+		if( canEdit ) {
+			$entityview
+			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function( event ) {
+				var $entitytermsview = $( event.target ),
+					entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
-			$.each( entitytermsview.value(), function() {
-				if( this.language !== mw.config.get( 'wgUserLanguage' ) ) {
-					return true;
-				}
+				$.each( entitytermsview.value(), function() {
+					if( this.language !== mw.config.get( 'wgUserLanguage' ) ) {
+						return true;
+					}
 
-				var label = this.label.getText();
+					var label = this.label.getText();
 
-				$( 'title' ).text(
-					mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
-				);
+					$( 'title' ).text(
+						mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
+					);
 
-				return false;
+					return false;
+				} );
 			} );
-		} );
 
-		attachCopyrightTooltip( $entityview );
+			attachCopyrightTooltip( $entityview );
+		}
 	} );
 
 	/**
@@ -384,29 +389,6 @@
 				$entityview.off( '.wbCopyRightTooltip' );
 			}
 		);
-	}
-
-	function evaluateRestrictions() {
-		if( mw.config.get( 'wbUserIsBlocked' ) ) {
-			restrict( 'blockeduser' );
-		} else if( !mw.config.get( 'wbUserCanEdit' ) ) {
-			restrict( 'restrictionedit' );
-		}
-	}
-
-	/**
-	 * @param {string} key
-	 */
-	function restrict( key ) {
-		$( ':wikibase-toolbarbutton' ).each( function() {
-			var toolbarButton = $( this ).data( 'toolbarbutton' );
-			toolbarButton.disable();
-
-			toolbarButton.element.wbtooltip( {
-				content: mw.message( 'wikibase-' + key + '-tooltip-message' ).escaped(),
-				gravity: 'nw'
-			} );
-		} );
 	}
 
 } )(

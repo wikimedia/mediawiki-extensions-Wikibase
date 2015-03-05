@@ -42,11 +42,6 @@ abstract class EntityView {
 	protected $language;
 
 	/**
-	 * @var bool
-	 */
-	private $editable;
-
-	/**
 	 * @var TextInjector
 	 */
 	private $textInjector;
@@ -55,17 +50,14 @@ abstract class EntityView {
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityTermsView $entityTermsView
 	 * @param Language $language
-	 * @param bool $editable
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
-		Language $language,
-		$editable = true
+		Language $language
 	) {
 		$this->entityTermsView = $entityTermsView;
 		$this->language = $language;
-		$this->editable = $editable;
 
 		$this->textInjector = new TextInjector();
 		$this->templateFactory = $templateFactory;
@@ -109,9 +101,7 @@ abstract class EntityView {
 			$this->getSideHtml( $entityRevision )
 		);
 
-		if ( $this->editable ) {
-			$html .= $this->getLoadingSpinnerInlineScript();
-		}
+		$html .= $this->getLoadingSpinnerInlineScript();
 
 		return $html;
 	}
