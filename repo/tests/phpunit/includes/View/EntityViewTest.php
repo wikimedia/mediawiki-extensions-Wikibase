@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use MediaWikiLangTestCase;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Statement\Statement;
@@ -19,7 +20,7 @@ use Wikibase\Repo\View\EntityView;
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Kinzler
  */
-abstract class EntityViewTest extends \MediaWikiLangTestCase {
+abstract class EntityViewTest extends MediaWikiLangTestCase {
 
 	/**
 	 * @param EntityId $id
@@ -61,11 +62,9 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 	public function testGetHtml(
 		EntityView $view,
 		EntityRevision $entityRevision,
-		array $entityInfo,
-		$editable,
 		$regexp
 	) {
-		$output = $view->getHtml( $entityRevision, $entityInfo, $editable );
+		$output = $view->getHtml( $entityRevision );
 		$this->assertRegexp( $regexp, $output );
 
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();

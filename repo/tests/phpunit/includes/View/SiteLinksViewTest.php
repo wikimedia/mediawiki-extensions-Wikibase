@@ -36,10 +36,10 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getHtmlProvider
 	 */
-	public function testGetHtml( Item $item, array $groups, $editable, $expectedValue ) {
+	public function testGetHtml( Item $item, array $groups, $expectedValue ) {
 		$siteLinksView = $this->getSiteLinksView();
 
-		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
+		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups );
 		$this->assertInternalType( 'string', $value );
 		MediaWikiTestCase::assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
 	}
@@ -53,24 +53,6 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 		$testCases[] = array(
 			$item,
 			array( 'wikipedia' ),
-			false,
-			array(
-				'tag' => 'div',
-				'attributes' => array(
-					'data-wb-sitelinks-group' => 'wikipedia'
-				),
-				'descendant' => array(
-					'tag' => 'span',
-					'class' => 'wikibase-sitelinkview-link-enwiki',
-					'content' => 'test'
-				)
-			)
-		);
-
-		$testCases[] = array(
-			$item,
-			array( 'wikipedia' ),
-			true,
 			array(
 				'tag' => 'div',
 				'attributes' => array(
@@ -90,7 +72,6 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 		$testCases[] = array(
 			$item,
 			array( 'special' ),
-			true,
 			array(
 				'tag' => 'div',
 				'attributes' => array(
@@ -106,7 +87,6 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 		$testCases[] = array(
 			$item,
 			array( 'wikipedia' ),
-			true,
 			array(
 				'tag' => 'div',
 				'descendant' => array(
@@ -122,7 +102,6 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 		$testCases[] = array(
 			$item,
 			array( 'wikipedia' ),
-			true,
 			array(
 				'tag' => 'div',
 				'descendant' => array(
@@ -141,10 +120,10 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getEmptyHtmlProvider
 	 */
-	public function testGetEmptyHtml( Item $item, array $groups, $editable ) {
+	public function testGetEmptyHtml( Item $item, array $groups ) {
 		$siteLinksView = $this->getSiteLinksView();
 
-		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
+		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups );
 		$this->assertInternalType( 'string', $value );
 		$this->assertEquals( '', $value );
 	}
@@ -157,21 +136,14 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 		$testCases[] = array(
 			$item,
 			array(),
-			true,
 		);
 
-		$testCases[] = array(
-			$item,
-			array(),
-			false,
-		);
-
+		$item = $item->copy();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'test' );
 
 		$testCases[] = array(
 			$item,
-			array(),
-			false,
+			array()
 		);
 
 		$newItem = new Item();
@@ -179,8 +151,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 		// item with no id, as happens with new items
 		$testCases[] = array(
 			$newItem,
-			array(),
-			true
+			array()
 		);
 
 		return $testCases;
