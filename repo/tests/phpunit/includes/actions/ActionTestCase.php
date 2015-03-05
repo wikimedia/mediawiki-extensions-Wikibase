@@ -53,7 +53,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 			'wgUser' => $user,
 			'wgLang' => Language::factory( $this->languageCode ),
 			'wgRequest' => new FauxRequest(),
-			'wgGroupPermissions' => $GLOBALS['wgGroupPermissions'], // todo: use standard permissions
+			'wgGroupPermissions' => array( '*' => array( 'edit' => true, 'read' => true ) )
 		) );
 
 		ApiQueryInfo::resetTokenCache();

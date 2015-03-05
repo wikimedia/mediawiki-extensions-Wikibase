@@ -541,7 +541,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 					)
 				),
 				array( // groups:
-					'sysop' // assume sysop has the noratelimit permission, as per default
+					'sysop' // sysop has the noratelimit permission set in the test case
 				),
 				array(  // edits:
 					array( 'item' => 'foo', 'label' => 'foo', 'ok' => true ),
@@ -628,6 +628,14 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->setMwGlobals(
 			'wgRateLimits',
 			$limits
+		);
+
+		$this->setMwGlobals(
+			'wgGroupPermissions',
+			array(
+				'*' => array( 'edit' => true ),
+				'sysop' => array( 'noratelimit' => true )
+			)
 		);
 
 		// make sure we have a fresh, working cache

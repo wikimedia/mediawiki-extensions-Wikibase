@@ -30,6 +30,8 @@ class SpecialNewItemTest extends SpecialPageTestBase {
 		//TODO: Verify that more of the output is correct.
 		//TODO: Verify that item creation works via a faux post request
 
+		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'createpage' => true ) ) );
+
 		$matchers['label'] = array(
 			'tag' => 'input',
 			'attributes' => array(
