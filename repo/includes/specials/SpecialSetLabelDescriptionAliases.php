@@ -4,13 +4,19 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Language;
+use SiteStore;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Special page for setting label, description and aliases of a Wikibase Entity that features a
@@ -56,9 +62,58 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		parent::__construct( 'SetLabelDescriptionAliases', 'edit' );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$this->changeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()
-			->getFingerprintChangeOpFactory();
-		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
+
+		$this->setAdditionalServices(
+			$wikibaseRepo->getChangeOpFactoryProvider()
+				->getFingerprintChangeOpFactory(),
+			$wikibaseRepo->getTermsLanguages()
+		);
+	}
+
+	/**
+	 * Override services (for testing).
+	 *
+	 * @param SummaryFormatter $summaryFormatter
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityStore $entityStore
+	 * @param EntityPermissionChecker $permissionChecker
+	 * @param SiteStore $siteStore
+	 * @param FingerprintChangeOpFactory $changeOpFactory
+	 * @param ContentLanguages $termsLanguages
+	 */
+	public function setServices(
+		SummaryFormatter $summaryFormatter,
+		EntityRevisionLookup $entityRevisionLookup,
+		EntityTitleLookup $entityTitleLookup,
+		EntityStore $entityStore,
+		EntityPermissionChecker $permissionChecker,
+		SiteStore $siteStore,
+		FingerprintChangeOpFactory $changeOpFactory,
+		ContentLanguages $termsLanguages
+	) {
+		self::setSpecialWikibaseRepoPageServices(
+			$summaryFormatter,
+			$entityRevisionLookup,
+			$entityTitleLookup,
+			$entityStore,
+			$permissionChecker,
+			$siteStore
+		);
+
+		$this->setAdditionalServices( $changeOpFactory, $termsLanguages );
+	}
+
+	/**
+	 * @param FingerprintChangeOpFactory $changeOpFactory
+	 * @param ContentLanguages $termsLanguages
+	 */
+	private function setAdditionalServices(
+		FingerprintChangeOpFactory $changeOpFactory,
+		ContentLanguages $termsLanguages
+	) {
+		$this->changeOpFactory = $changeOpFactory;
+		$this->termsLanguages = $termsLanguages;
 	}
 
 	/**
