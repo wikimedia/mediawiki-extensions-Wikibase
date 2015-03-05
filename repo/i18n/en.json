@@ -111,8 +111,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "I accept these terms for my future edits. Do not show this message again.",
 	"wikibase-entityselector-more": "more",
 	"wikibase-anonymouseditwarning": "Warning: You are not logged in.\nYour IP address will be recorded in the edit history of this entity.",
-	"wikibase-restrictionedit-tooltip-message": "This page is protected. Editing is not allowed.",
-	"wikibase-blockeduser-tooltip-message": "You do not have permission to edit because your username or IP address has been blocked.",
 	"wikibase-move-error": "You cannot move pages that are in a data namespace, and you cannot move pages into it.",
 	"wikibase-validator-sitelink-conflict": "The link $1 is already used by item $2. You may remove it from $2 if it does not belong there or merge the items if they are about the exact same topic.",
 	"wikibase-validator-label-conflict": "Property $3 already has label \"$1\" associated with language code $2.",

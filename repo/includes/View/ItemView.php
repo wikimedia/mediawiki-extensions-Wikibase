@@ -44,7 +44,6 @@ class ItemView extends EntityView {
 	 * @param Language $language
 	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
-	 * @param bool $editable
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -52,10 +51,9 @@ class ItemView extends EntityView {
 		StatementGroupListView $statementGroupListView,
 		Language $language,
 		SiteLinksView $siteLinksView,
-		array $siteLinkGroups,
-		$editable = true
+		array $siteLinkGroups
 	) {
-		parent::__construct( $templateFactory, $entityTermsView, $language, $editable );
+		parent::__construct( $templateFactory, $entityTermsView, $language );
 
 		$this->statementGroupListView = $statementGroupListView;
 		$this->siteLinkGroups = $siteLinkGroups;
