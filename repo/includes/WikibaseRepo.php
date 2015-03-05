@@ -32,6 +32,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DispatchingValueFormatter;
 use Wikibase\Lib\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Lib\EntityIdLinkFormatter;

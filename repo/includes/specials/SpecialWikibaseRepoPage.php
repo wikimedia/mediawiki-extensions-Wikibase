@@ -73,7 +73,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		parent::__construct( $title, $restriction );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$this->setServices(
+		$this->setSpecialWikibaseRepoPageServices(
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
@@ -83,7 +83,17 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		);
 	}
 
-	public function setServices(
+	/**
+	 * Override services (for testing).
+	 *
+	 * @param SummaryFormatter $summaryFormatter
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityStore $entityStore
+	 * @param EntityPermissionChecker $permissionChecker
+	 * @param SiteStore $siteStore
+	 */
+	public function setSpecialWikibaseRepoPageServices(
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
