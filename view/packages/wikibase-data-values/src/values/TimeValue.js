@@ -15,7 +15,7 @@ var PARENT = dv.DataValue;
  *
  * @param {string} iso8601
  * @param {Object} [options]
- * @param {string} [options.calendarModel=dataValues.TimeValue.CALENDARS.GREGORIAN.uri]
+ * @param {string} [options.calendarModel=dataValues.TimeValue.CALENDARS.GREGORIAN]
  *        Wikidata URL of the calendar model.
  * @param {number} [options.precision=dataValues.TimeValue.PRECISIONS.DAY]
  * @param {number} [options.before=0]
@@ -40,7 +40,7 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( iso8601
 	}
 
 	this._options = {
-		calendarModel: SELF.CALENDARS.GREGORIAN.uri,
+		calendarModel: SELF.CALENDARS.GREGORIAN,
 		precision: SELF.getPrecisionById( 'DAY' ),
 		before: 0,
 		after: 0,
@@ -74,7 +74,7 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( iso8601
 	 * @throws {Error} if a value to set is not specified properly.
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'calendarModel' && SELF.getCalendarModelTextByUri( value ) === null ) {
+		if( key === 'calendarModel' && !SELF.getCalendarModelKeyByUri( value ) ) {
 			throw new Error( 'Setting ' + key + ': No valid calendar model URI provided' );
 		}
 		if( $.inArray( key, ['precision', 'before', 'after', 'timezone'] ) !== -1
@@ -250,41 +250,37 @@ SELF.TYPE = 'time';
 
 // TODO: Inject configurations...
 /**
- * Calendar configuration.
+ * Known calendar model URIs.
  * @property {Object}
  * @static
  * @since 0.7
  */
 SELF.CALENDARS = {
-	GREGORIAN: {
-		text: 'Gregorian',
-		uri: 'http://www.wikidata.org/entity/Q1985727'
-	},
-	JULIAN: {
-		text: 'Julian',
-		uri: 'http://www.wikidata.org/entity/Q1985786'
-	}
+	GREGORIAN: 'http://www.wikidata.org/entity/Q1985727',
+	JULIAN: 'http://www.wikidata.org/entity/Q1985786'
 };
 
 /**
- * Retrieves a calendar model text by its URI.
+ * Retrieves a lower-cased calendar model key string, e.g. "gregorian", by its URI.
  * @static
  * @since 0.7
  *
  * @param {string} uri
  * @return {string|null}
  */
-SELF.getCalendarModelTextByUri = function( uri ) {
-	var text = null;
+SELF.getCalendarModelKeyByUri = function( uri ) {
+	var key = null;
 
-	$.each( SELF.CALENDARS, function( id, calendar ) {
-		if( calendar.uri === uri ) {
-			text = calendar.text;
+	$.each( SELF.CALENDARS, function( knownKey, knownUri ) {
+		if ( uri === knownUri ) {
+			key = knownKey.toLowerCase();
+			return false;
 		}
-		return text === null;
+
+		return true;
 	} );
 
-	return text;
+	return key;
 };
 
 /**
