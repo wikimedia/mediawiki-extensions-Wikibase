@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_1b7f4365",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-05T13:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_b34936d5",
+      "revId": "7a5b152ec2d02d079555487fa06fa4441c2f67c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_731b9ed4",
         "filename": "client/i18n/en.json",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_3b847f5e",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-05T13:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_731b9ed4",
+      "revId": "7a5b152ec2d02d079555487fa06fa4441c2f67c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_0648e930",
         "filename": "client/includes/api/ApiClientInfo.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2014-12-25T03:44:53Z",
       "side": 1,
       "message": "must not include \"api.php?\"",
+      "revId": "7a5b152ec2d02d079555487fa06fa4441c2f67c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_db98ebc6",
+        "filename": "client/includes/api/ApiClientInfo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-05T13:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_0648e930",
       "revId": "7a5b152ec2d02d079555487fa06fa4441c2f67c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
