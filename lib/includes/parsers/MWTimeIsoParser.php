@@ -78,16 +78,13 @@ class MWTimeIsoParser extends StringValueParser {
 	 * @see StringValueParser::__construct
 	 */
 	public function __construct( ParserOptions $options = null ) {
-		if( is_null( $options ) ) {
-			$options = new ParserOptions();
-		}
-
 		parent::__construct( $options );
-		$this->lang = Language::factory( $this->getOptions()->getOption( ValueParser::OPT_LANG ) );
+
+		$this->lang = Language::factory( $this->getOption( ValueParser::OPT_LANG ) );
 
 		$this->timeValueTimeParser = new \ValueParsers\TimeParser(
-			new CalendarModelParser(),
-			$this->getOptions()
+			new CalendarModelParser( $this->options ),
+			$this->options
 		);
 	}
 
