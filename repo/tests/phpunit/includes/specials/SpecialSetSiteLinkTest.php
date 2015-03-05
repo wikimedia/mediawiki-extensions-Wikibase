@@ -88,6 +88,8 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	protected function setUp() {
 		parent::setUp();
 
+		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true ) ) );
+
 		if ( !self::$badgeId ) {
 			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
 			$sitesTable->clear();

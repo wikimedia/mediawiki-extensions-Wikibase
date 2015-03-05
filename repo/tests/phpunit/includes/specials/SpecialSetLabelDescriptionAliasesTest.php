@@ -54,6 +54,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialPageTestBase {
 	public function testExecute() {
 		$id = $this->createNewItem();
 
+		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true ) ) );
+
 		$this->newSpecialPage();
 
 		$matchers['id'] = array(
