@@ -280,4 +280,18 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testIsEmpty() {
+		$emptyReference = new Reference();
+		$this->assertTrue( $emptyReference->isEmpty() );
+
+		$referenceWithSnak = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$this->assertFalse( $referenceWithSnak->isEmpty() );
+
+		$referenceWithSnaks = new Reference( array(
+			new PropertyNoValueSnak( 1 ),
+			new PropertyNoValueSnak( 2 )
+		) );
+		$this->assertFalse( $referenceWithSnaks->isEmpty() );
+	}
+
 }

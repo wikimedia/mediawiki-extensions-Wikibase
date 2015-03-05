@@ -68,6 +68,15 @@ class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 	}
 
 	/**
+	 * @since 2.6
+	 *
+	 * @return bool
+	 */
+	public function isEmpty() {
+		return $this->snaks->isEmpty();
+	}
+
+	/**
 	 * @see Hashable::getHash
 	 *
 	 * @since 0.1
