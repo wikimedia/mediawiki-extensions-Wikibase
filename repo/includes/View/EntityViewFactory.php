@@ -181,8 +181,7 @@ class EntityViewFactory {
 					$statementGroupListView,
 					$language,
 					$siteLinksView,
-					$this->siteLinkGroups,
-					$editable
+					$this->siteLinkGroups
 				);
 			case 'property':
 				return new PropertyView(
@@ -190,8 +189,7 @@ class EntityViewFactory {
 					$entityTermsView,
 					$statementGroupListView,
 					$this->dataTypeFactory,
-					$language,
-					$editable
+					$language
 				);
 		}
 

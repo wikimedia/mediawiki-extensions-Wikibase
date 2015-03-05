@@ -38,17 +38,15 @@ class PropertyView extends EntityView {
 	 * @param StatementGroupListView $statementGroupListView
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param Language $language
-	 * @param bool $editable
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
 		StatementGroupListView $statementGroupListView,
 		DataTypeFactory $dataTypeFactory,
-		Language $language,
-		$editable = true
+		Language $language
 	) {
-		parent::__construct( $templateFactory, $entityTermsView, $language, $editable );
+		parent::__construct( $templateFactory, $entityTermsView, $language );
 
 		$this->statementGroupListView = $statementGroupListView;
 		$this->dataTypeFactory = $dataTypeFactory;
