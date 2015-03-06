@@ -3,9 +3,9 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 .wikibase-entityview {
-	width: 100%;
-	float: left; /* float left to let widget container float right next to it */
 	clear: both; /* wrap around success message */
+	float: left; /* float left to let widget container float right next to it */
+	width: 100%;
 }
 
 .wikibase-entityview > * {
@@ -15,4 +15,5 @@
 
 .wikibase-entityview .wikibase-entityview-main {
 	margin: 0 2em 2em 0;
+	width: 100%; /* required because it's a floating block element now */
 }
