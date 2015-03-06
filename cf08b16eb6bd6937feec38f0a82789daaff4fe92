@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5286f5e1",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-06T13:22:52Z",
+      "side": 1,
+      "message": "Typo.\n\nAlso I find the name very odd. Is that the number 1 or a lower case L? Please use a word to describe the example.",
+      "revId": "cf08b16eb6bd6937feec38f0a82789daaff4fe92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_728bf1e8",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-06T13:22:52Z",
+      "side": 1,
+      "message": "\"Property\" may be confused, why not keep \"Wikibase property\"?",
+      "revId": "cf08b16eb6bd6937feec38f0a82789daaff4fe92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
