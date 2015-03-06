@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d2ec45bb",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.labelview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-06T12:59:54Z",
+      "side": 1,
+      "message": "What \"action\"?",
+      "revId": "e87b56628f1afaee73299b689a9f31da925ef27f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
