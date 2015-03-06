@@ -23,11 +23,16 @@ use Wikibase\Lib\TimeDetailsFormatter;
 class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @param string $time
-	 *
 	 * @return TimeValue
 	 */
-	private function getTimeValue( $time = '<a>injection</a>' ) {
+	private function getTimeValue(
+		$time = '<a>time</a>',
+		$timezone = '<a>timezone</a>',
+		$before = '<a>before</a>',
+		$after = '<a>after</a>',
+		$precision = '<a>precision</a>',
+		$calendarModel = '<a>calendarmodel</a>'
+	) {
 		$value = $this->getMockBuilder( 'DataValues\TimeValue' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -36,20 +41,20 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getTime' )
 			->will( $this->returnValue( $time ) );
 		$value->expects( $this->any() )
-			->method( 'getCalendarModel' )
-			->will( $this->returnValue( '<a>injection</a>' ) );
+			->method( 'getTimezone' )
+			->will( $this->returnValue( $timezone ) );
 		$value->expects( $this->any() )
 			->method( 'getBefore' )
-			->will( $this->returnValue( '<a>injection</a>' ) );
+			->will( $this->returnValue( $before ) );
 		$value->expects( $this->any() )
 			->method( 'getAfter' )
-			->will( $this->returnValue( '<a>injection</a>' ) );
+			->will( $this->returnValue( $after ) );
 		$value->expects( $this->any() )
 			->method( 'getPrecision' )
-			->will( $this->returnValue( '<a>injection</a>' ) );
+			->will( $this->returnValue( $precision ) );
 		$value->expects( $this->any() )
-			->method( 'getTimezone' )
-			->will( $this->returnValue( '<a>injection</a>' ) );
+			->method( 'getCalendarModel' )
+			->will( $this->returnValue( $calendarModel ) );
 
 		return $value;
 	}
@@ -150,16 +155,54 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 		$formatter->format( $value );
 	}
 
+	public function testGivenInvalidTimeValue_formatDoesNotThrowException() {
+		$formatter = new TimeDetailsFormatter();
+		$value = $this->getTimeValue();
+
+		$html = $formatter->format( $value );
+		$this->assertInternalType( 'string', $html );
+	}
+
 	public function testGivenInvalidTimeValue_formatDoesNotAllowHtmlInjection() {
 		$formatter = new TimeDetailsFormatter();
 		$value = $this->getTimeValue();
 
 		$html = $formatter->format( $value );
-		$this->assertContains( 'injection', $html, 'Should be in the output' );
-		$this->assertEquals( 6, substr_count( $html, 'injection' ) );
 		$this->assertNotContains( '<a>', $html, 'Should not be unescaped' );
 		$this->assertContains( '&lt;', $html, 'Should be escaped' );
 		$this->assertNotContains( '&amp;', $html, 'Should not be double escape' );
+	}
+
+	public function testGivenInvalidTimeValue_formatEchoesTimeValueFields() {
+		$formatter = new TimeDetailsFormatter();
+		$value = $this->getTimeValue();
+
+		$html = $formatter->format( $value );
+		$this->assertContains( '>&lt;a&gt;time&lt;/a&gt;<', $html );
+		$this->assertContains( '>&lt;a&gt;timezone&lt;/a&gt;<', $html );
+		$this->assertContains( '>&lt;a&gt;before&lt;/a&gt;<', $html );
+		$this->assertContains( '>&lt;a&gt;after&lt;/a&gt;<', $html );
+		$this->assertContains( '>&lt;a&gt;precision&lt;/a&gt;<', $html );
+		$this->assertContains( '>&lt;a&gt;calendarmodel&lt;/a&gt;<', $html );
+	}
+
+	public function testGivenValidTimeValueWithInvalidPrecision_formatEchoesTimeValueFields() {
+		$formatter = new TimeDetailsFormatter();
+		$value = $this->getTimeValue( '+2001-01-01T00:00:00Z', 0, 1, 1, 'precision' );
+
+		$html = $formatter->format( $value );
+		$this->assertEquals( 1, substr_count( $html, '>precision<' ), 'precision' );
+		$this->assertEquals( 2, substr_count( $html, '>1<' ), 'before' );
+	}
+
+	public function testGivenValidTimeValueWithInvalidBeforeAndAfter_formatEchoesTimeValueFields() {
+		$formatter = new TimeDetailsFormatter();
+		$value = $this->getTimeValue( '+2001-01-01T00:00:00Z', 0, 'before', 'after', TimeValue::PRECISION_DAY );
+
+		$html = $formatter->format( $value );
+		$this->assertEquals( 1, substr_count( $html, '>11<' ), 'precision' );
+		$this->assertEquals( 1, substr_count( $html, '>before<' ), 'before' );
+		$this->assertEquals( 1, substr_count( $html, '>after<' ), 'after' );
 	}
 
 }
