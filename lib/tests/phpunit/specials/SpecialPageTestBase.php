@@ -86,6 +86,11 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 			$context->setUser( $user );
 		}
 
+		if ( $request->wasPosted() && !$request->getCheck( 'wpEditToken' ) ) {
+			// If we are trying to edit and no token is set, supply one.
+			$request->setVal( 'wpEditToken', $context->getUser()->getEditToken() );
+		}
+
 		$out = new OutputPage( $context );
 		$context->setOutput( $out );
 
