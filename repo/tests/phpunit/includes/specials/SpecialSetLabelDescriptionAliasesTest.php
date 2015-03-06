@@ -162,6 +162,31 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		return $languages;
 	}
 
+	/**
+	 * @param string[] $labels
+	 * @param string[] $descriptions
+	 * @param string[][] $aliases
+	 *
+	 * @return Fingerprint
+	 */
+	private function makeFingerprint( array $labels, array $descriptions, array $aliases ) {
+		$fingerprint = new Fingerprint();
+
+		foreach ( $labels as $lang => $text ) {
+			$fingerprint->setLabel( $lang, $text );
+		}
+
+		foreach ( $descriptions as $lang => $text ) {
+			$fingerprint->setDescription( $lang, $text );
+		}
+
+		foreach ( $aliases as $lang => $texts ) {
+			$fingerprint->setAliasGroup( $lang, $texts );
+		}
+
+		return $fingerprint;
+	}
+
 	public function provideExecute() {
 		$formMatchers['id'] = array(
 			'tag' => 'input',
@@ -230,8 +255,11 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$withLanguageMatchers['language']['attributes']['value'] = 'de';
 		$withLanguageMatchers['label']['attributes']['value'] = 'foo';
 
-		$fooFingerprint = new Fingerprint();
-		$fooFingerprint->setLabel( 'de', 'foo' );
+		$fooFingerprint = $this->makeFingerprint(
+			array( 'de' => 'foo' ),
+			array(),
+			array()
+		);
 
 		return array(
 			'no input' => array(
@@ -265,6 +293,55 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$withLanguageMatchers,
 				null
 			),
+
+			'add label' => array(
+				$fooFingerprint,
+				'$id',
+				new \FauxRequest( array( 'language' => 'en', 'label' => 'FOO' ), true ),
+				array(),
+				$this->makeFingerprint(
+					array( 'de' => 'foo', 'en' => 'FOO' ),
+					array(),
+					array()
+				),
+			),
+
+			'replace label' => array(
+				$fooFingerprint,
+				'$id',
+				new \FauxRequest( array( 'language' => 'de', 'label' => 'FOO' ), true ),
+				array(),
+				$this->makeFingerprint(
+					array( 'de' => 'FOO' ),
+					array(),
+					array()
+				),
+			),
+
+			'add description, keep label' => array(
+				$fooFingerprint,
+				'$id',
+				new \FauxRequest( array( 'language' => 'de', 'description' => 'Lorem Ipsum' ), true ),
+				array(),
+				$this->makeFingerprint(
+					array( 'de' => 'foo' ),
+					array( 'de' => 'Lorem Ipsum' ),
+					array()
+				),
+			),
+
+			'set aliases' => array(
+				$fooFingerprint,
+				'$id',
+				new \FauxRequest( array( 'language' => 'de', 'aliases' => 'foo|bar' ), true ),
+				array(),
+				$this->makeFingerprint(
+					array( 'de' => 'foo' ),
+					array(),
+					array( 'de' => array( 'foo', 'bar' ) )
+				),
+			),
+
 		);
 	}
 
@@ -281,13 +358,18 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->newSpecialPage();
 
 		$subpage = str_replace( '$id', $id->getSerialization(), $subpage );
-		list( $output, ) = $this->executeSpecialPage( $subpage, $request );
+		list( $output, $response ) = $this->executeSpecialPage( $subpage, $request );
+
+		$redirect = ( $response instanceof \FauxResponse ) ? $response->getHeader( 'Location' ) : null;
 
 		foreach( $tagMatchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to assert output: $key" );
 		}
 
 		if ( $expectedFingerprint ) {
+			//TODO: look for an error message in $output
+			$this->assertNotEmpty( $redirect, 'expected redirect after successful edit' );
+
 			$actualEntity = $this->mockRepository->getEntity( $id );
 			$actualFingerprint = $actualEntity->getFingerprint();
 
