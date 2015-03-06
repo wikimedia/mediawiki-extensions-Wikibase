@@ -59,6 +59,28 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 			throw new InvalidArgumentException( 'Data value type mismatch. Expected a TimeValue.' );
 		}
 
+		$timeHtml = $this->getTimeHtml( $value->getTime() );
+
+		$timeZone = $value->getTimezone();
+		$timeZoneHtml = is_int( $timeZone )
+			? $this->getTimeZoneHtml( $timeZone )
+			: htmlspecialchars( $timeZone );
+
+		$calendarHtml = $this->getCalendarModelHtml( $value->getCalendarModel() );
+
+		$precision = $value->getPrecision();
+		$before = $value->getBefore();
+		$after = $value->getAfter();
+		if ( is_int( $precision ) && is_int( $before ) && is_int( $after ) ) {
+			$precisionHtml = $this->getAmountAndPrecisionHtml( $precision );
+			$beforeHtml = $this->getAmountAndPrecisionHtml( $precision, $before );
+			$afterHtml = $this->getAmountAndPrecisionHtml( $precision, $after );
+		} else {
+			$precisionHtml = htmlspecialchars( $precision );
+			$beforeHtml = htmlspecialchars( $value->getBefore() );
+			$afterHtml = htmlspecialchars( $value->getAfter() );
+		}
+
 		$html = '';
 		$html .= Html::rawElement(
 			'h4',
@@ -67,30 +89,12 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		);
 		$html .= Html::openElement( 'table', array( 'class' => 'wb-details wb-time-details' ) );
 
-		$html .= $this->getFieldHtml(
-			'isotime',
-			$this->getTimeHtml( $value->getTime() )
-		);
-		$html .= $this->getFieldHtml(
-			'timezone',
-			$this->getTimezoneHtml( $value->getTimezone() )
-		);
-		$html .= $this->getFieldHtml(
-			'calendar',
-			$this->getCalendarModelHtml( $value->getCalendarModel() )
-		);
-		$html .= $this->getFieldHtml(
-			'precision',
-			$this->getAmountAndPrecisionHtml( $value->getPrecision() )
-		);
-		$html .= $this->getFieldHtml(
-			'before',
-			$this->getAmountAndPrecisionHtml( $value->getPrecision(), $value->getBefore() )
-		);
-		$html .= $this->getFieldHtml(
-			'after',
-			$this->getAmountAndPrecisionHtml( $value->getPrecision(), $value->getAfter() )
-		);
+		$html .= $this->getFieldHtml( 'isotime', $timeHtml );
+		$html .= $this->getFieldHtml( 'timezone', $timeZoneHtml );
+		$html .= $this->getFieldHtml( 'calendar', $calendarHtml );
+		$html .= $this->getFieldHtml( 'precision', $precisionHtml );
+		$html .= $this->getFieldHtml( 'before', $beforeHtml );
+		$html .= $this->getFieldHtml( 'after', $afterHtml );
 
 		$html .= Html::closeElement( 'table' );
 
@@ -121,7 +125,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @return string HTML
 	 */
-	private function getTimezoneHtml( $timezone ) {
+	private function getTimeZoneHtml( $timezone ) {
 		// Actual MINUS SIGN (U+2212) instead of HYPHEN-MINUS (U+002D)
 		$sign = $timezone < 0 ? "\xE2\x88\x92" : '+';
 		$hour = floor( abs( $timezone ) / 60 );
