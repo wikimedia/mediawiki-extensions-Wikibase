@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_72fe9168",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-06T12:52:29Z",
+      "side": 1,
+      "message": "Is entityStub guaranteed to be an object at this point? It doesn\u0027t look like it is to me. Please add\n\n if( !entityStub || !self._selectedEntity || entityStub.id !\u003d\u003d self._selectedEntity.id ) {",
+      "revId": "5c7014adfc94722ae9e3c74a8c4c120159e36e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
