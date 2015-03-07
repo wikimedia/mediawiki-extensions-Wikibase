@@ -10,7 +10,7 @@
 	* Removed `ClaimList`
 	* Removed `ClaimListAccess`
 
-## Version 2.6.0 (dev)
+## Version 2.6.0 (2015-03-08)
 
 * Added `Reference::isEmpty`
 * Empty strings are now detected as invalid in the `SiteLink` constructor
