@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:acme="http://acme.test/">
+	<rdf:Description rdf:about="http://foobar.test/Bananas">
+		<acme:has rdf:resource="acme:Vitamin-A"/>
+		<acme:has>Vitamin A</acme:has>
+		<acme:weight>5</acme:weight>
+	</rdf:Description>
+</rdf:RDF>
