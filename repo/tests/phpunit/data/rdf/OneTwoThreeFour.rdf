@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:acme="http://acme.test/">
+	<rdf:Description rdf:about="http://acme.test/ONE">
+		<acme:number>1</acme:number>
+	</rdf:Description>
+	<rdf:Description rdf:about="http://acme.test/TWO">
+		<acme:number>2</acme:number>
+	</rdf:Description>
+	<rdf:Description rdf:about="http://acme.test/THREE">
+		<acme:number>3</acme:number>
+	</rdf:Description>
+	<rdf:Description rdf:about="http://acme.test/FOUR">
+		<acme:number>4</acme:number>
+	</rdf:Description>
+</rdf:RDF>
