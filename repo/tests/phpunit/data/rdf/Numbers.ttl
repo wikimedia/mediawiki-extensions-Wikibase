@@ -1,0 +1,7 @@
+@prefix acme : <http://acme.test/> .
+@prefix xsd : <http://www.w3.org/2001/XMLSchema#> .
+
+acme:Bongos acme:stock "5"^^xsd:integer,
+		"7"^^xsd:integer .
+
+acme:Tablas acme:stock "6"^^xsd:integer .
