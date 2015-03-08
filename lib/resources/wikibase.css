@@ -174,15 +174,12 @@ div.wikibase-statementview textarea {
 
 /* Container for the section title */
 .wikibase-statementgrouplistview .wikibase-statementgroupview-property {
-	width: 15em;
 	background: #E8E8E8;
-	position: absolute;
-	top: 0;
-	bottom: 0;
 	overflow-x: hidden;
 	/* In rare cases, the title might be too long, since we need to position absolute, we cannot
 	have the container height adjusted. */
 	overflow-y: auto;
+	width: 100%;
 	z-index: 1; /* should overlay borders of claim containers etc. */
 }
 
@@ -201,7 +198,7 @@ div.wikibase-statementview {
 /* Container for the claim contents */
 div.wikibase-statementview-mainsnak {
 	position: relative;
-	margin-left: 15em;
+	margin-left: 2em;
 	margin-right: 18em;
 	max-width: 32em;
 	word-wrap: break-word;
@@ -215,7 +212,8 @@ div.wikibase-statementview-mainsnak .wikibase-snakview-property-container {
 	top: 0;
 	bottom: 0;
 	left: -15em;
-	width: 15em;
+	padding-left: 3em;
+	width: 12em;
 	display: block;
 }
 
@@ -377,7 +375,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 /***** QUALIFIERS *****/
 
 .wikibase-statementview-qualifiers {
-	padding-left: 17em;
+	padding-left: 3em;
 }
 
 .wikibase-statementview-qualifiers .wikibase-snaklistview:first-child {
@@ -474,8 +472,8 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 .wikibase-statementview .wikibase-statementview-rankselector {
 	position: absolute;
-	margin-left: 15.2em;
-	margin-top: 1em;
+	margin-left: 1.2em;
+	margin-top: .8em;
 	z-index: 1;
 }
 
@@ -494,7 +492,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 }
 
 .wikibase-statementview-references-heading, .wikibase-statementview-references {
-	padding-left: 17em;
+	padding-left: 3em;
 	clear: both;
 }
 
@@ -697,3 +695,40 @@ table.diff table.wb-details td {
 	border: none;
 }
 /***** /DIFF VIEW *****/
+
+/***** LARGE SCREENS *****/
+
+@media screen and ( min-width: 982px ) {
+	.wikibase-statementgrouplistview .wikibase-statementgroupview-property {
+		position: absolute;
+		bottom: 0;
+		top: 0;
+		width: 15em;
+	}
+
+	div.wikibase-statementview-mainsnak {
+		margin-left: 15em;
+	}
+
+	.wikibase-statementview .wikibase-statementview-rankselector {
+		margin-left: 15.2em;
+		margin-top: 1em;
+	}
+
+	.wikibase-statementview-qualifiers {
+		padding-left: 17em;
+	}
+
+	.wikibase-statementview-references-heading, .wikibase-statementview-references {
+		padding-left: 17em;
+	}
+
+	.wikibase-statementview.wb-new .wikibase-statementview-mainsnak .wikibase-snakview-property-container {
+		left: -15em;
+		padding-left: 0;
+		width: 15em;
+	}
+
+}
+
+/***** /LARGE SCREENS *****/
