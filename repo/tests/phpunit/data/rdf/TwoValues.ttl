@@ -1,0 +1,5 @@
+@prefix acme : <http://acme.test/> .
+
+<http://foobar.test/Bananas> <http://foobar.test/verb/has> acme:Vitamin-A,
+		"Vitamin A" ;
+	<http://foobar.test/verb/weight> "5" .
