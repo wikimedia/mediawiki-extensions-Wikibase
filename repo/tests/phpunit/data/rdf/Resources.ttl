@@ -1,0 +1,4 @@
+@prefix acme : <http://acme.test/> .
+
+acme:Bongos acme:sounds acme:Bing,
+		<http://foobar.test/sound/Bang> .
