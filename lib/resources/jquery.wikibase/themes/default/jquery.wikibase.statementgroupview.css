@@ -12,7 +12,14 @@
 
 .wikibase-statementgroupview .wikibase-statementgroupview-property {
 	border: 1px solid #C9C9C9;
-	border-right: 0;
+	border-bottom: 0;
+}
+
+@media screen and ( min-width: 982px ) {
+	.wikibase-statementgroupview .wikibase-statementgroupview-property {
+		border-right: 0;
+		border-bottom: 1px solid #C9C9C9;
+	}
 }
 .wikibase-statementgroupview.wb-new .wikibase-statementgroupview-property {
 	display: none;
