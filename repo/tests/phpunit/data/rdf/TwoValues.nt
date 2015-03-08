@@ -1,0 +1,3 @@
+<http://foobar.test/Bananas> <http://acme.test/has> <http://acme.test/Vitamin-A> .
+<http://foobar.test/Bananas> <http://acme.test/has> "Vitamin A" .
+<http://foobar.test/Bananas> <http://acme.test/weight> "5" .

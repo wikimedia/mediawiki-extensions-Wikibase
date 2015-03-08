@@ -1,0 +1,9 @@
+@prefix acme : <http://acme.test/> .
+
+acme:ONE acme:number "1" .
+
+acme:TWO acme:number "2" .
+
+acme:THREE acme:number "3" .
+
+acme:FOUR acme:number "4" .
