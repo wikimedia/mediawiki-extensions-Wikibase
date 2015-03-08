@@ -1,0 +1,11 @@
+@prefix exterms : <http://www.example.org/terms/> .
+@prefix exstaff : <http://www.example.org/staffid/> .
+@prefix ex : <http://example.org/packages/vocab#> .
+
+exstaff:Sue exterms:publication _:genid1 .
+
+_:genid1 exterms:title "Antology of Time" .
+
+exstaff:Jack exterms:publication _:genid2 .
+
+_:genid2 exterms:title "Anthony of Time" .
