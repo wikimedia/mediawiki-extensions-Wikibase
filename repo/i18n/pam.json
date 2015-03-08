@@ -8,5 +8,9 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Alilan (i-konpigura)",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Awsan da muring",
 	"wikibase-entitytermsforlanguagelistview-description": "Deskripsyun",
-	"wikibase-entitytermsforlanguagelistview-language": "Amanu/Pamyalita"
+	"wikibase-entitytermsforlanguagelistview-language": "Amanu/Pamyalita",
+	"wikibase-itemdisambiguation-lookup-language": "Amanu-kodigu (language code)",
+	"wikibase-setlabeldescriptionaliases-description-label": "Pamilarawan (deskripsyun)",
+	"wikibase-modifyterm-language": "Amanu-kodigu (language code)",
+	"wikibase-entitieswithoutlabel-label-language": "Amanu-kodigu (language code)"
 }

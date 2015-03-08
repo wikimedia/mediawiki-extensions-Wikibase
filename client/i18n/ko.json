@@ -11,7 +11,6 @@
 		]
 	},
 	"wikibase-client-desc": "위키베이스 확장 기능을 위한 클라이언트",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}} 클라이언트",
 	"tooltip-t-wikibase": "데이터 저장소에 연결된 항목을 가리키는 링크",
 	"wikibase-after-page-move": "또한 옮긴 문서에 언어 링크를 유지하기 위해 관련된 {{WBREPONAME}} 항목을 [$1 업데이트]할 수 있습니다.",
 	"wikibase-after-page-move-queued": "이 문서와 연결된 [$1 {{WBREPONAME}} 항목]은 곧 자동으로 갱신됩니다.",

@@ -4,6 +4,9 @@
 			"Si Gam Acèh"
 		]
 	},
+	"wikibase-edit": "andam",
+	"wikibase-add": "tamah",
+	"wikibase-sitelinks-special": "Situs la'én",
 	"wikibase-itembytitle-submit": "Mita",
 	"wikibase-itemdisambiguation-submit": "Mita"
 }

@@ -12,11 +12,11 @@
 			"Rtemis",
 			"ZxxZxxZ",
 			"درفش کاویانی",
-			"Alirezaaa"
+			"Alirezaaa",
+			"Mjbmr"
 		]
 	},
 	"wikibase-client-desc": "کارخواه برای افزونهٔ ویکی‌بیس",
-	"specialpages-group-wikibaseclient": "سرویس گیرنده {{WBREPONAME}}",
 	"tooltip-t-wikibase": "پیوند به آیتم متصل به مخزن داده",
 	"wikibase-after-page-move": "شما ممکن است در عین حال بخواهید آیتم وابستهٔ {{WBREPONAME}} را نیز به [$1 روزرسانی] کنید، تا پیوند به صفحه منتقل شده باقی بماند.",
 	"wikibase-after-page-move-queued": "[$1 آیتم {{WBREPONAME}}] مرتبط با این صفحه  به صورت خودکار به‌زودی به‌روز خواهد شد.",
@@ -51,11 +51,11 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "پنهان کردن",
 	"wikibase-rc-hide-wikidata-show": "نمایش",
-	"wikibase-rc-show-wikidata-pref": "نمایش {{WBREPONAME}} ویرایش‌ها در تغییرات اخیر",
+	"wikibase-rc-show-wikidata-pref": "نمایش ویرایش‌های {{WBREPONAME}} در تغییرات اخیر",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "ویرایش {{WBREPONAME}}",
 	"wikibase-replicationnote": "لطفاً توجه کنید چند دقیقه زمان لازم است تا تغییرات در همهٔ ویکی‌ها قابل مشاهده باشد.",
-	"wikibase-watchlist-show-changes-pref": "نمایش {{WBREPONAME}} ویرایش‌ها در فهرست پیگیری‌های شما",
+	"wikibase-watchlist-show-changes-pref": "نمایش ویرایش‌های {{WBREPONAME}} در فهرست پیگیری‌های شما",
 	"wikibase-error-serialize-error": "مرتب کردن داده انجام نشد.",
 	"wikibase-error-invalid-entity-id": "شناسهٔ واردشده برای سامانه ناشناخته است.لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.",
 	"special-unconnectedpages": "صفحه‌های متصل‌نشده به آیتم‌ها",

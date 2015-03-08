@@ -25,14 +25,14 @@
 	"wikibase-itembytitle-lookup-site": "وېبځی:",
 	"wikibase-itembytitle-lookup-page": "مخ:",
 	"wikibase-itembytitle-submit": "پلټل",
-	"wikibase-itemdisambiguation-lookup-language": "ژبه:",
+	"wikibase-itemdisambiguation-lookup-language": "د ژبې کوډ:",
 	"wikibase-itemdisambiguation-submit": "پلټل",
 	"wikibase-newentity-description": "څرگندونه:",
 	"wikibase-newentity-submit": "جوړول",
 	"wikibase-setlabeldescriptionaliases-description-label": "څرگندونه:",
 	"wikibase-modifyentity-id": "پېژند:",
-	"wikibase-modifyterm-language": "ژبه:",
-	"wikibase-entitieswithoutlabel-label-language": "ژبه:",
+	"wikibase-modifyterm-language": "د ژبې کوډ:",
+	"wikibase-entitieswithoutlabel-label-language": "د ژبې کوډ:",
 	"wikibase-entitieswithoutlabel-submit": "موندل",
 	"wikibase-restoreold": "بيازېرمل"
 }

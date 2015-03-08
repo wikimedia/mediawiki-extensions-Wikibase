@@ -7,9 +7,9 @@
 		]
 	},
 	"wikibase-client-desc": "ვიკიბაზის გაფართოების კლიენტი",
-	"specialpages-group-wikibaseclient": "ვიკიმონაცემების კლიენტი",
 	"wikibase-after-page-move": "გადარქმეულ გვერდზე ენის ბმულების გასასწორებლად, თქვენ აგრეთვე შეგიძლიათ [$1 განაახლოთ] ვიკიმონაცემების დაკავშირებული ელემენტი.",
 	"wikibase-after-page-move-queued": "ამ გვერდთან დაკავშირებული [$1 ვიკიმონაცემების ელემენტი] მალე ავტომატურად განახლდება.",
+	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}}-ის ელემენტი] დაკავშირებული ამ გვერდთან სწრაფად განახლდება ავტომატურად.",
 	"wikibase-comment-remove": "ვიკიმონაცემების დაკავშირებული ელემენტი წაშლილია. ენის ბმულები წაშლია.",
 	"wikibase-comment-linked": "ვიკიმონაცემების ელემენტი დაკავშირებული იყო ამ გვერდთან.",
 	"wikibase-comment-unlink": "ამ გვერდის კავშირი ვიკიმონაცემების ელემენტთან გაწყვეტილია. ენის ბმულები წაშლილია.",
@@ -43,6 +43,7 @@
 	"wikibase-rc-show-wikidata-pref": "ბოლო ცვლილებების სიაში {{grammar:genitive|{{WBREPONAME}}}} რედაქტირებების ჩვენება",
 	"wikibase-rc-wikibase-edit-letter": "ვ",
 	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} რედაქტირება",
+	"wikibase-replicationnote": "გთხოვთ, მიაქციოთ ყურადღება, რომ შეიძლება გავიდეს რამდენიმე წუთი, სანამ ცვლილებები ხილული გახდება ყველა ვიკი-პროექტში",
 	"wikibase-watchlist-show-changes-pref": "თქვენი კონტროლის სიაში {{grammar:genitive|{{WBREPONAME}}}} რედაქტირებების ჩვენება",
 	"wikibase-error-invalid-entity-id": "მითითებული ID სისტემისთვის უცნობია. გთხოვთ, გამოიყენოთ მოქმედი ID.",
 	"special-unconnectedpages": "ელემენტებთან დაუკავშირებელი გვერდები",

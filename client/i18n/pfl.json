@@ -4,13 +4,15 @@
 			"Manuae"
 		]
 	},
+	"tooltip-t-wikibase": "Ling'g uffs Objeggd vum Daadeb'helda",
 	"wikibase-comment-update": "S'{{WBREPONAME}}-Elemend hoddsisch g'ännad",
 	"wikibase-dataitem": "{{WBREPONAME}}-Oidraach",
 	"wikibase-editlinks": "Oan Ling'gs schaffe",
 	"wikibase-editlinkstitle": "Oan Ling'gs uff Adiggl in oannare Schbroche schaffe",
-	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "Vaschdeggle",
 	"wikibase-rc-hide-wikidata-show": "Zaische",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Schaffe oam {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Schaffe oam {{WBREPONAME}}",
+	"wikibase-otherprojects": "Onnare Brojegd"
 }
