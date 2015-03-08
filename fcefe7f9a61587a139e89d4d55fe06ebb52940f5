@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bdc71115",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.statementgroupview.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-08T20:02:38Z",
+      "side": 1,
+      "message": "these rules might belong, at least for now, in wikibase.css instead of here...",
+      "revId": "fcefe7f9a61587a139e89d4d55fe06ebb52940f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
