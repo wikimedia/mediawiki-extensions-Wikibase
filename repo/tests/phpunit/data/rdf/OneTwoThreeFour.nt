@@ -1,0 +1,4 @@
+<http://acme.test/ONE> <http://acme.test/number> "1" .
+<http://acme.test/TWO> <http://acme.test/number> "2" .
+<http://acme.test/THREE> <http://acme.test/number> "3" .
+<http://acme.test/FOUR> <http://acme.test/number> "4" .
