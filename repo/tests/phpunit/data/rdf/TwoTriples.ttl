@@ -1,0 +1,6 @@
+@prefix acme : <http://acme.test/> .
+@prefix xsd : <http://www.w3.org/2001/XMLSchema#> .
+
+<http://foobar.test/Bananas> a <http://foobar.test/Fruit> .
+
+acme:Nuts <http://foobar.test/verb/weight> "5"^^xsd:Number .
