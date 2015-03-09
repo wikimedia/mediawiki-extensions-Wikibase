@@ -103,7 +103,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		foreach ( $snaks as $snak ) {
 			$statement = unserialize( serialize( $statement ) );
-			$statement->getReferences()->addReference( new Reference( new SnakList( $snak ) ) );
+			$statement->getReferences()->addReference( new Reference( new SnakList( array( $snak ) ) ) );
 			$statement->setRank( $ranks[array_rand( $ranks )] );
 			$statements[] = $statement;
 		}
