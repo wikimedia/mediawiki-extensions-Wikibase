@@ -79,7 +79,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param ReferenceList $array
 	 */
 	public function testHasReferenceBeforeRemoveButNotAfter( ReferenceList $array ) {
@@ -115,7 +114,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param ReferenceList $array
 	 */
 	public function testRemoveReference( ReferenceList $array ) {
@@ -213,7 +211,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param ReferenceList $array
 	 */
 	public function testIndexOf( ReferenceList $array ) {
@@ -227,7 +224,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param ReferenceList $array
 	 */
 	public function testEquals( ReferenceList $array ) {
@@ -237,7 +233,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param ReferenceList $array
 	 */
 	public function testGetHashReturnsString( ReferenceList $array ) {
@@ -246,7 +241,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param ReferenceList $array
 	 */
 	public function testGetHashValueIsTheSameForClone( ReferenceList $array ) {

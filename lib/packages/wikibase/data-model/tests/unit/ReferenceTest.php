@@ -81,7 +81,6 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider snakListProvider
-	 *
 	 * @param Snaks $snaks
 	 */
 	public function testConstructor( Snaks $snaks ) {
@@ -257,7 +256,6 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorArgumentsProvider
-	 * @param mixed $snaks
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidConstructorArguments_constructorThrowsException( $snaks ) {

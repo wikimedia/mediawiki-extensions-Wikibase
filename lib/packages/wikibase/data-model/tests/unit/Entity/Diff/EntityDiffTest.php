@@ -51,9 +51,8 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider isEmptyProvider
-	 *
-	 * @param array $diffOps
-	 * @param boolean $isEmpty
+	 * @param Diff[] $diffOps
+	 * @param bool $isEmpty
 	 */
 	public function testIsEmpty( array $diffOps, $isEmpty ) {
 		$diff = new EntityDiff( $diffOps );

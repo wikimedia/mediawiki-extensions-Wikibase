@@ -117,7 +117,6 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider listProvider
-	 * @param Snak[] $objects
 	 */
 	public function testGetIds( array $objects ) {
 		$indexedArray = new ByPropertyIdArray( $objects );
@@ -140,7 +139,6 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider listProvider
-	 * @param array $objects
 	 */
 	public function testGetById( array $objects ) {
 		$indexedArray = new ByPropertyIdArray( $objects );
@@ -172,7 +170,6 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider listProvider
-	 * @param array $objects
 	 */
 	public function testRemoveObject( array $objects ) {
 		$lastIndex = count( $objects ) - 1;
@@ -222,7 +219,6 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider listProvider
-	 * @param array $objects
 	 */
 	public function testGetFlatArrayIndexOfObject( array $objects ) {
 		$indexedArray = new ByPropertyIdArray( $objects );
@@ -242,7 +238,6 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider listProvider
-	 * @param array $objects
 	 */
 	public function testToFlatArray( array $objects ) {
 		$indexedArray = new ByPropertyIdArray( $objects );
@@ -308,10 +303,10 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider moveProvider
-	 * @param array $objectsSource
+	 * @param object[] $objectsSource
 	 * @param object $object
 	 * @param int $toIndex
-	 * @param array $objectsDestination
+	 * @param object[] $objectsDestination
 	 */
 	public function testMoveObjectToIndex(
 		array $objectsSource,
@@ -387,10 +382,10 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider addProvider
-	 * @param array $objectsSource
+	 * @param object[] $objectsSource
 	 * @param object $object
-	 * @param int $index
-	 * @param array $objectsDestination
+	 * @param int|null $index
+	 * @param object[] $objectsDestination
 	 */
 	public function testAddObjectAtIndex(
 		array $objectsSource,
