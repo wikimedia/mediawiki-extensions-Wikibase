@@ -163,6 +163,10 @@ div.wikibase-statementview textarea {
 	box-sizing: border-box;
 }
 
+.wikibase-statementgrouplistview {
+	max-width: 65em;
+}
+
 /* Section of claims referring to one property */
 .wikibase-statementgrouplistview .wikibase-statementlistview {
 	position: relative;
