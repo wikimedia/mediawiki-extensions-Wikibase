@@ -238,7 +238,7 @@ class Item extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 1.0, use getStatements instead
+	 * @deprecated since 1.0, use getStatements()->addStatement() instead.
 	 *
 	 * @param Claim $statement This needs to be a Statement as of 1.0
 	 *
@@ -273,7 +273,7 @@ class Item extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 1.0, use getStatements instead
+	 * @deprecated since 1.0, use getStatements()->toArray() instead.
 	 *
 	 * @return Statement[]
 	 */
@@ -291,7 +291,7 @@ class Item extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 1.0, use getStatements instead
+	 * @deprecated since 1.0, use getStatements()->isEmpty() instead.
 	 *
 	 * @return bool
 	 */
