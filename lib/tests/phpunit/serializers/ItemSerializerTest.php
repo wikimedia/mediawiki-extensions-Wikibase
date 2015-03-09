@@ -39,11 +39,15 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 	}
 
 	/**
+	 * @see SerializerBaseTest::getInstance
+	 *
 	 * @return ItemSerializer
 	 */
 	protected function getInstance() {
-		$class = $this->getClass();
-		return new $class( new ClaimSerializer( new SnakSerializer() ), SiteSQLStore::newInstance() );
+		return new ItemSerializer(
+			new ClaimSerializer( new SnakSerializer() ),
+			SiteSQLStore::newInstance()
+		);
 	}
 
 	/**

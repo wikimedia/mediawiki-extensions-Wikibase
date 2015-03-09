@@ -32,6 +32,8 @@ class SnakSerializerTest extends SerializerBaseTest {
 	}
 
 	/**
+	 * @see SerializerBaseTest::getInstance
+	 *
 	 * @return SnakSerializer
 	 */
 	protected function getInstance() {
@@ -40,8 +42,7 @@ class SnakSerializerTest extends SerializerBaseTest {
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( array( $this, 'getDataTypeIdForProperty' ) ) );
 
-		$class = $this->getClass();
-		return new $class( $dataTypeLookup );
+		return new SnakSerializer( $dataTypeLookup );
 	}
 
 	public function getDataTypeIdForProperty( PropertyId $propertyId ) {

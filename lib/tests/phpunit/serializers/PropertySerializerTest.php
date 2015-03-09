@@ -29,11 +29,12 @@ class PropertySerializerTest extends EntitySerializerBaseTest {
 	}
 
 	/**
+	 * @see SerializerBaseTest::getInstance
+	 *
 	 * @return PropertySerializer
 	 */
 	protected function getInstance() {
-		$class = $this->getClass();
-		return new $class( new ClaimSerializer( new SnakSerializer() ) );
+		return new PropertySerializer( new ClaimSerializer( new SnakSerializer() ) );
 	}
 
 	/**
