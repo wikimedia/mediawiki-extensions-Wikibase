@@ -44,14 +44,14 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 		$options->setIndexTags( false );
 		$options->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/removed" );
 		$siteLinks = array(
-				new SiteLink( "enwiki", "", array( new ItemId( "Q42" ) ) ),
-				new SiteLink( "dewiki", "", array() ),
-				new SiteLink( "itwiki", "" ),
+				new SiteLink( 'enwiki', 'A', array( new ItemId( 'Q42' ) ) ),
+				new SiteLink( 'dewiki', 'A', array() ),
+				new SiteLink( 'itwiki', 'A' ),
 		);
 		$expectedSerialization = array(
-				"enwiki" => array( "site" => "enwiki", "title" => "", "removed" => "" ),
-				"dewiki" => array( "site" => "dewiki", "title" => "", "removed" => "" ),
-				"itwiki" => array( "site" => "itwiki", "title" => "", "removed" => "" ),
+				'enwiki' => array( 'site' => 'enwiki', 'title' => 'A', 'removed' => '' ),
+				'dewiki' => array( 'site' => 'dewiki', 'title' => 'A', 'removed' => '' ),
+				'itwiki' => array( 'site' => 'itwiki', 'title' => 'A', 'removed' => '' ),
 		);
 		$validArgs[] = array( $siteLinks, $options, $expectedSerialization );
 
