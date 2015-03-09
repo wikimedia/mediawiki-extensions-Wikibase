@@ -5,10 +5,16 @@
 			"Malafaya"
 		]
 	},
+	"wikibase-comment-update": "Din ela {{WBREPONAME}} pevotükon",
+	"wikibase-dataitem": "Din ela {{WBREPONAME}}",
 	"wikibase-editlinks": "Redakön yümis",
 	"wikibase-editlinkstitle": "Redakön yümis bevüpükik",
 	"wikibase-linkitem-addlinks": "Läükön yümis",
 	"wikibase-linkitem-input-site": "Pük:",
 	"wikibase-linkitem-input-page": "Pad:",
-	"wikibase-rc-hide-wikidata": "$1 eli Wikidata"
+	"wikibase-rc-hide-wikidata": "$1 eli {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Klänedön",
+	"wikibase-rc-hide-wikidata-show": "Jonön",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Redakam su {{WBREPONAME}}"
 }

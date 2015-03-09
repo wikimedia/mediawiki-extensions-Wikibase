@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bachounda"
+		]
+	},
+	"tooltip-t-wikibase": "الوصل بعنصر مرتبط في غاراج المعلومات",
+	"wikibase-comment-update": "تبديل عنصر {{WBREPONAME}}",
+	"wikibase-dataitem": "عنصر بيانات",
+	"wikibase-editlinks": "تبديل الوصيله",
+	"wikibase-editlinkstitle": "تبديلت الوصيلات ما بين اللوغات",
+	"wikibase-rc-wikibase-edit-letter": "د",
+	"wikibase-rc-wikibase-edit-title": "تبدبل {{WBREPONAME}}"
+}

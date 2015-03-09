@@ -6,7 +6,6 @@
 		]
 	},
 	"wikibase-client-desc": "Trình khách của phần mở rộng Wikibase",
-	"specialpages-group-wikibaseclient": "Trình khách {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Liên kết đến khoản mục kết nối trong kho dữ liệu",
 	"wikibase-after-page-move": "Bạn cũng có thể [$1 cập nhật] khoản mục {{WBREPONAME}} liên kết để duy trì các liên kết ngôn ngữ trên trang được di chuyển.",
 	"wikibase-after-page-move-queued": "Chẳng bao lâu [$1 khoản mục {{WBREPONAME}}] ứng với trang này sẽ được tự động cập nhật.",
@@ -25,6 +24,7 @@
 	"wikibase-dataitem": "Khoản mục {{WBREPONAME}}",
 	"wikibase-editlinks": "Sửa liên kết",
 	"wikibase-editlinkstitle": "Sửa liên kết giữa ngôn ngữ",
+	"wikibase-addlinkstitle": "Thêm liên kết giữa ngôn ngữ",
 	"wikibase-linkitem-addlinks": "Thêm liên kết",
 	"wikibase-linkitem-alreadylinked": "Bạn không thể đặt liên kết đến trang được chọn vì nó đã được liên kết đến một [$1 khoản mục] trong kho dữ liệu chung, và khoản mục đó đã liên kết đến $2 tại dịch vụ này. Các khoản mục chỉ có thể có liên kết đến mỗi dịch vụ một trang. Xin vui lòng chọn một trang khác để liên kết.",
 	"wikibase-linkitem-close": "Đóng hộp thoại và tải lại trang",
@@ -48,6 +48,7 @@
 	"wikibase-rc-wikibase-edit-title": "Sửa đổi trên {{WBREPONAME}}",
 	"wikibase-replicationnote": "Xin lưu ý, có thể phải chờ vài phút để cho các wiki trình bày được các thay đổi",
 	"wikibase-watchlist-show-changes-pref": "Hiện các sửa đổi trên {{WBREPONAME}} trong danh sách theo dõi của bạn",
+	"wikibase-error-deserialize-error": "Thất bại khi giải tuần tự hóa dữ liệu.",
 	"wikibase-error-serialize-error": "Thất bại khi tuần tự hóa dữ liệu",
 	"wikibase-error-invalid-entity-id": "ID nhập vào không có trên hệ thống. Xin vui lòng sử dụng ID đã được cấp.",
 	"special-unconnectedpages": "Trang không kết nối với khoản mục",
