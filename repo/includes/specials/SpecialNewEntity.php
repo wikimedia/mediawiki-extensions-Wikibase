@@ -226,7 +226,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 			'text',
 			array(
 				'id' => 'wb-newentity-label',
-				'size' => 12,
 				'class' => 'wb-input',
 				'lang' => $this->contentLanguage->getCode(),
 				'dir' => $this->contentLanguage->getDir(),
@@ -250,7 +249,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 			'text',
 			array(
 				'id' => 'wb-newentity-description',
-				'size' => 36,
 				'class' => 'wb-input',
 				'lang' => $this->contentLanguage->getCode(),
 				'dir' => $this->contentLanguage->getDir(),

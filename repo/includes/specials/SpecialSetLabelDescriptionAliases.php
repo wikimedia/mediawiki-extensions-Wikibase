@@ -185,7 +185,6 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			array(
 				'class' => 'wb-input',
 				'id' => $fieldId,
-				'size' => 50,
 			)
 		);
 	}

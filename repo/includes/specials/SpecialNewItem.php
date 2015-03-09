@@ -112,7 +112,6 @@ class SpecialNewItem extends SpecialNewEntity {
 			'text',
 			array(
 				'id' => 'wb-newitem-site',
-				'size' => 12,
 				'class' => 'wb-input',
 				'readonly' => 'readonly'
 			)
@@ -131,7 +130,6 @@ class SpecialNewItem extends SpecialNewEntity {
 			'text',
 			array(
 				'id' => 'wb-newitem-page',
-				'size' => 12,
 				'class' => 'wb-input',
 				'readonly' => 'readonly'
 			)
