@@ -34,6 +34,24 @@
       "revId": "5c7014adfc94722ae9e3c74a8c4c120159e36e30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_42d13526",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-09T15:21:36Z",
+      "side": 1,
+      "message": "The _select call below accepts falsy values. But you are right, I re-read getEntityStub and it looks fine.",
+      "parentUuid": "6e7c4fa4_4f35ded6",
+      "revId": "5c7014adfc94722ae9e3c74a8c4c120159e36e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
