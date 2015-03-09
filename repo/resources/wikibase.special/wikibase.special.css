@@ -24,8 +24,10 @@
 }
 
 .wb-input, .wb-select {
+	box-sizing: border-box;
 	margin-bottom: 1em;
-	width: 25em;
+	max-width: 65em; /* similar to .wikibase-entityview */
+	width: 100%;
 }
 
 .wb-button {
