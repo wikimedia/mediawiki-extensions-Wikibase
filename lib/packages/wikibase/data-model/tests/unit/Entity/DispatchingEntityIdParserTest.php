@@ -10,8 +10,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @covers Wikibase\DataModel\Entity\DispatchingEntityIdParser
- * @covers Wikibase\DataModel\Entity\EntityIdParser
- *
  * @uses Wikibase\DataModel\Entity\BasicEntityIdParser
  *
  * @group Wikibase
@@ -19,6 +17,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class DispatchingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 
@@ -29,28 +28,29 @@ class DispatchingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider entityIdProvider
 	 */
-	public function testCanParseEntityId( EntityId $expected ) {
+	public function testCanParseEntityId( $idString, EntityId $expected ) {
 		$parser = $this->getBasicParser();
-		$actual = $parser->parse( $expected->getSerialization() );
+		$actual = $parser->parse( $idString );
 
 		$this->assertEquals( $actual, $expected );
 	}
 
 	public function entityIdProvider() {
 		return array(
-			array( new ItemId( 'q42' ) ),
-			array( new ItemId( 'Q1337' ) ),
-			array( new PropertyId( 'p1' ) ),
-			array( new PropertyId( 'P100000' ) ),
+			array( 'q42', new ItemId( 'q42' ) ),
+			array( 'Q1337', new ItemId( 'Q1337' ) ),
+			array( 'p1', new PropertyId( 'p1' ) ),
+			array( 'P100000', new PropertyId( 'P100000' ) ),
 		);
 	}
 
 	/**
 	 * @dataProvider invalidIdSerializationProvider
-	 * @expectedException \Wikibase\DataModel\Entity\EntityIdParsingException
 	 */
 	public function testCannotParseInvalidId( $invalidIdSerialization ) {
 		$parser = $this->getBasicParser();
+
+		$this->setExpectedException( 'Wikibase\DataModel\Entity\EntityIdParsingException' );
 		$parser->parse( $invalidIdSerialization );
 	}
 
@@ -64,6 +64,13 @@ class DispatchingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 			array( 'q0' ),
 			array( '1p' ),
 		);
+	}
+
+	public function testCannotParseWithoutBuilders() {
+		$parser = new DispatchingEntityIdParser( array() );
+
+		$this->setExpectedException( 'Wikibase\DataModel\Entity\EntityIdParsingException' );
+		$parser->parse( 'Q1' );
 	}
 
 }

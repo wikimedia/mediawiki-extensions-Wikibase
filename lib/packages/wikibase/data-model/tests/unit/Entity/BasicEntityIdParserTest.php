@@ -9,33 +9,55 @@ use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @covers Wikibase\DataModel\Entity\BasicEntityIdParser
- * @covers Wikibase\DataModel\Entity\DispatchingEntityIdParser
+ * @uses Wikibase\DataModel\Entity\DispatchingEntityIdParser
  *
  * @group Wikibase
  * @group WikibaseDataModel
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class BasicEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider idProvider
+	 * @dataProvider entityIdProvider
 	 */
-	public function testCanParseEntityId( EntityId $expected ) {
+	public function testCanParseEntityId( $idString, EntityId $expected ) {
 		$parser = new BasicEntityIdParser();
-
-		$actual = $parser->parse( $expected->getSerialization() );
+		$actual = $parser->parse( $idString );
 
 		$this->assertEquals( $actual, $expected );
 	}
 
-	public function idProvider() {
+	public function entityIdProvider() {
 		return array(
-			array( new ItemId( 'q42' ) ),
-			array( new ItemId( 'Q1337' ) ),
-			array( new PropertyId( 'p1' ) ),
-			array( new PropertyId( 'P100000' ) ),
+			array( 'q42', new ItemId( 'q42' ) ),
+			array( 'Q1337', new ItemId( 'Q1337' ) ),
+			array( 'p1', new PropertyId( 'p1' ) ),
+			array( 'P100000', new PropertyId( 'P100000' ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider invalidIdSerializationProvider
+	 */
+	public function testCannotParseInvalidId( $invalidIdSerialization ) {
+		$parser = new BasicEntityIdParser();
+
+		$this->setExpectedException( 'Wikibase\DataModel\Entity\EntityIdParsingException' );
+		$parser->parse( $invalidIdSerialization );
+	}
+
+	public function invalidIdSerializationProvider() {
+		return array(
+			array( 'FOO' ),
+			array( null ),
+			array( 42 ),
+			array( array() ),
+			array( '' ),
+			array( 'q0' ),
+			array( '1p' ),
 		);
 	}
 
