@@ -16,6 +16,24 @@
       "revId": "e87b56628f1afaee73299b689a9f31da925ef27f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_25be83fb",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.labelview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2015-03-09T16:29:26Z",
+      "side": 1,
+      "message": "Right, should be \"acting\".",
+      "parentUuid": "6e7c4fa4_d2ec45bb",
+      "revId": "e87b56628f1afaee73299b689a9f31da925ef27f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
