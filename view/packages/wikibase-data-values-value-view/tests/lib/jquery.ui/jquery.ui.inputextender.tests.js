@@ -9,9 +9,6 @@
 
 	// TODO: Tests for hideWhenInputEmptyOption
 
-	var BROWSER_FOCUS_NOTE = '(An error at this stage might also occur if you removed the focus ' +
-		'from the browser window.)';
-
 	/**
 	 * Factory for creating an input extender widget suitable for testing.
 	 *
@@ -121,11 +118,13 @@
 	QUnit.test( 'Initialization on focused input', function( assert ) {
 		var $input = $( '<input/>' ).appendTo( $( 'body' ) ).focus();
 		var extender = newTestInputextender( $input );
+		var isOk = extender.extensionIsActive();
 
-		assert.ok(
-			extender.extensionIsActive(),
-			'Extension active initially because input has focus. ' + BROWSER_FOCUS_NOTE
-		);
+		if( !isOk && 'hidden' in document && document.hidden ) {
+			assert.ok( true, 'Could not test since browser window is not focused' );
+		} else {
+			assert.ok( isOk, 'Extension active initially because input has focus.' );
+		}
 	} );
 
 	QUnit.test( 'Destruction', 2, function( assert ) {
