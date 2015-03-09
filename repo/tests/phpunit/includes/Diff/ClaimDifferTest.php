@@ -3,12 +3,13 @@
 namespace Wikibase\Test;
 
 use Diff\Comparer\ComparableComparer;
+use Diff\Differ\OrderedListDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Diff\Differ\OrderedListDiffer;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -61,7 +62,7 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 			)
 		);
 
-		$references = new ReferenceList( array( new PropertyNoValueSnak( 2 ) ) );
+		$references = new ReferenceList( array( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) ) );
 		$withReferences = clone $noValueForP42;
 		$withReferences->setReferences( $references );
 
