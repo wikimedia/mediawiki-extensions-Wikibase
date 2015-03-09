@@ -60,7 +60,6 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider constructorProvider
-	 *
 	 * @param Snak $mainSnak
 	 * @param Snaks|null $qualifiers
 	 */
@@ -183,7 +182,6 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param Claim $claim
 	 */
 	public function testGetAllSnaks( Claim $claim ) {
