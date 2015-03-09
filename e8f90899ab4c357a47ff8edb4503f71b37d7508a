@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e08ab96d",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-09T18:03:25Z",
+      "side": 1,
+      "message": "Direct output may not be what we want since we do not always process entities in order in which we want to see them in the final output. See the note at the end also.",
+      "revId": "e8f90899ab4c357a47ff8edb4503f71b37d7508a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e04dd976",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-09T18:03:25Z",
+      "side": 1,
+      "message": "Why not use rawurlencode? It probably will be faster.",
+      "revId": "e8f90899ab4c357a47ff8edb4503f71b37d7508a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0046d554",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-09T18:03:25Z",
+      "side": 1,
+      "message": "Do we need to support bnodes? We won\u0027t be using them (code that uses them will be eliminated) and in general from what RDF folks say it\u0027s a big PITA.",
+      "revId": "e8f90899ab4c357a47ff8edb4503f71b37d7508a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a0fb61dd",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-09T18:03:25Z",
+      "side": 1,
+      "message": "I think \\n is escaped differently in Turtle (at least easyrdf does it differenly, using three quotes \"\"\"). Also, why not use addcslashes?",
+      "revId": "e8f90899ab4c357a47ff8edb4503f71b37d7508a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_803c2590",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-09T18:03:25Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we have escaping as separate function?",
+      "revId": "e8f90899ab4c357a47ff8edb4503f71b37d7508a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_40b28d49",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-09T18:03:25Z",
+      "side": 1,
+      "message": "This form may not be always what we want, since same entity may have predicates coming from different functions, sometimes out of order, sometimes intermixing predicates pertaining to different entities (such as generating statements may produce predicates for main entity, statement, reference and a bunch of values).",
+      "revId": "e8f90899ab4c357a47ff8edb4503f71b37d7508a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
