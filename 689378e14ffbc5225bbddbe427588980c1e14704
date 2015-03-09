@@ -16,6 +16,24 @@
       "revId": "689378e14ffbc5225bbddbe427588980c1e14704",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_42c7f59a",
+        "filename": "repo/tests/phpunit/includes/Diff/ClaimDifferTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-09T14:52:53Z",
+      "side": 1,
+      "message": "Sure, but I wanted a minimal diff in this patch.",
+      "parentUuid": "6e7c4fa4_426375da",
+      "revId": "689378e14ffbc5225bbddbe427588980c1e14704",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
