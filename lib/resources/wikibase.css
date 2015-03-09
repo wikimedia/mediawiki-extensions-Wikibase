@@ -228,6 +228,10 @@ div.wikibase-snakview .wikibase-snakview-value-container {
 	min-height: .8em; /* reduces jumping when clicking edit */
 }
 
+.wikibase-snakview-value {
+	min-width: 5em;
+}
+
 div .wikibase-snakview-value span.error.wb-format-error {
 	display: block;
 	color: red;
