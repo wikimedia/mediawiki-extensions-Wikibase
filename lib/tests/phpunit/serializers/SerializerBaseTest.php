@@ -25,13 +25,6 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 	/**
 	 * @since 0.2
 	 *
-	 * @return string
-	 */
-	protected abstract function getClass();
-
-	/**
-	 * @since 0.2
-	 *
 	 * @return array
 	 */
 	public abstract function validProvider();
@@ -41,10 +34,7 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 	 *
 	 * @return SerializerObject
 	 */
-	protected function getInstance() {
-		$class = $this->getClass();
-		return new $class();
-	}
+	protected abstract function getInstance();
 
 	/**
 	 * @dataProvider validProvider

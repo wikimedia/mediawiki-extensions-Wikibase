@@ -30,15 +30,6 @@ use Wikibase\Lib\Serializers\SnakSerializer;
 class ItemSerializerTest extends EntitySerializerBaseTest {
 
 	/**
-	 * @see SerializerBaseTest::getClass
-	 *
-	 * @return string
-	 */
-	protected function getClass() {
-		return 'Wikibase\Lib\Serializers\ItemSerializer';
-	}
-
-	/**
 	 * @see SerializerBaseTest::getInstance
 	 *
 	 * @return ItemSerializer

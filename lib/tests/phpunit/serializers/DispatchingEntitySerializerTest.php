@@ -23,15 +23,6 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 class DispatchingEntitySerializerTest extends EntitySerializerBaseTest {
 
 	/**
-	 * @see SerializerBaseTest::getClass
-	 *
-	 * @return string
-	 */
-	protected function getClass() {
-		return '\Wikibase\Lib\Serializers\DispatchingEntitySerializer';
-	}
-
-	/**
 	 * @see SerializerBaseTest::getInstance
 	 *
 	 * @return DispatchingEntitySerializer

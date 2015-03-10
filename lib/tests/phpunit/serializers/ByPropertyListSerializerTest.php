@@ -25,15 +25,6 @@ use Wikibase\Lib\Serializers\SnakSerializer;
 class ByPropertyListSerializerTest extends SerializerBaseTest {
 
 	/**
-	 * @see SerializerBaseTest::getClass
-	 *
-	 * @return string
-	 */
-	protected function getClass() {
-		return '\Wikibase\Lib\Serializers\ByPropertyListSerializer';
-	}
-
-	/**
 	 * @see SerializerBaseTest::getInstance
 	 *
 	 * @return ByPropertyListSerializer

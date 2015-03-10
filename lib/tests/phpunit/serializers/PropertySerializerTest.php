@@ -20,15 +20,6 @@ use Wikibase\Lib\Serializers\SnakSerializer;
 class PropertySerializerTest extends EntitySerializerBaseTest {
 
 	/**
-	 * @see SerializerBaseTest::getClass
-	 *
-	 * @return string
-	 */
-	protected function getClass() {
-		return '\Wikibase\Lib\Serializers\PropertySerializer';
-	}
-
-	/**
 	 * @see SerializerBaseTest::getInstance
 	 *
 	 * @return PropertySerializer
