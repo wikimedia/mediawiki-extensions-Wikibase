@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ad2591be",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "This isn\u0027t needed for the actual tests, is it?",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6da2193d",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "//MINOR: avoid static  members/state if not ABSOLUTELY needed. Re-using these instances here seems to cause more complexity than do good.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0d67e523",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "//TODO: could have all these in a JSON file.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ed75c9c9",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "//TODO: give a list of JSON files to initialize from.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ad77d1ce",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "TestSites::getSiteList()",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4d84fda3",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "I see no reason for a separate data dir, just put the files in the same dir as the test class.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0d4e059c",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "I see no reason for a separate data dir, just put the files in the same dir as the test class.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_edb62985",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "//MINOR: $testName doesn\u0027t need to be a parameter, just use it as the array key for $testData.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4d5b9d57",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the file names of the nt files say which item they apply to?",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cdb1ed8e",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "//MINOR: $dataName doesn\u0027t need to be a parameter, just use it as the array key for $testData.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6d58d959",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "The message is redundant.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0db84573",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "I\u0027m confused - when exactly? If the data driven tests above cover everything covered below, why not just remove it right here and now?",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0d35a5f3",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "should not be here.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2d3ae1e4",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T15:03:45Z",
+      "side": 1,
+      "message": "should not be here.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
