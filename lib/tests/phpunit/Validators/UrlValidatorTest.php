@@ -14,10 +14,11 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseValidators
+ * @group Database
  *
  * @author Daniel Kinzler
  */
-class UrlValidatorTest extends \PHPUnit_Framework_TestCase {
+class UrlValidatorTest extends \MediaWikiTestCase {
 
 	public function provideValidate() {
 		$yes = new RegexValidator( '/.*/', false, 'oops' );

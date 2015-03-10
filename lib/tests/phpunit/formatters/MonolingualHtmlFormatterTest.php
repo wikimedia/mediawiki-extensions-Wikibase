@@ -14,11 +14,12 @@ use Wikibase\Formatters\MonolingualHtmlFormatter;
  * @group DataValueExtensions
  * @group WikibaseLib
  * @group Wikibase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MonolingualHtmlFormatterTest extends \PHPUnit_Framework_TestCase {
+class MonolingualHtmlFormatterTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider monolingualHtmlFormatProvider
