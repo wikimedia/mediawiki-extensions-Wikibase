@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_8e61ab03",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T20:10:51Z",
+      "side": 1,
+      "message": "not in yet, see I34d5991c",
+      "parentUuid": "6e7c4fa4_eed13fd1",
+      "revId": "c82f76a575a4a90767a50bcf7a05a23e838c3877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_cecc833b",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 1
@@ -64,6 +82,24 @@
       "writtenOn": "2015-03-10T20:00:24Z",
       "side": 1,
       "message": "That\u0027s messy since \"1\" is not an url. \u003c1\u003e is an url. We are operating under assumption that properties have types, but if it\u0027s typed it can\u0027t be both URL and \"1\". We need to clean it up.",
+      "revId": "c82f76a575a4a90767a50bcf7a05a23e838c3877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ce15634f",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-10T20:10:51Z",
+      "side": 1,
+      "message": "\"1\" would be a special shorthand that stands for https://www.wikidata.org/wiki/Q199. May need to be configurable though, since people might want it to mean https://www.wikidata.org/wiki/Q118084 or http://qudt.org/vocab/unit#Unitless",
+      "parentUuid": "6e7c4fa4_2eef3784",
       "revId": "c82f76a575a4a90767a50bcf7a05a23e838c3877",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
