@@ -6,6 +6,8 @@ namespace Wikibase;
  * RDF producer options
  */
 interface RdfProducer {
+
+	//FIXME: documentation needed
 	const PRODUCE_TRUTHY_STATEMENTS = 1;
 	const PRODUCE_ALL_STATEMENTS    = 2;
 	const PRODUCE_QUALIFIERS        = 4;
