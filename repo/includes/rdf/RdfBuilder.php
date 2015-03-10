@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\Snak\SnakObject;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\Store\EntityLookup;
@@ -70,7 +70,7 @@ class RdfBuilder {
 
 	const PROV_QNAME = 'prov:wasDerivedFrom';
 
-	const COMMONS_URI = 'http://commons.wikimedia.org/wiki/Special:FilePath/';
+	const COMMONS_URI = 'http://commons.wikimedia.org/wiki/Special:FilePath/'; //FIXME: get from config
 	const GEO_URI = 'http://www.opengis.net/ont/geosparql#';
 	const PROV_URI = 'http://www.w3.org/ns/prov#';
 	// TODO: make the license settable
@@ -138,7 +138,7 @@ class RdfBuilder {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
 		$this->entityLookup = $entityLookup;
-		$this->produceWhat = $flavor;
+		$this->produceWhat = $flavor; //FIXME: use strategy and/or decorator pattern instead!
 
 		$this->namespaces = array (
 				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-" . self::FORMAT_VERSION . "#",
@@ -212,7 +212,7 @@ class RdfBuilder {
 	 * Returns a qname for the given reference using the given prefix.
 	 *
 	 * @param string $prefix use a self::NS_* constant, usually self::NS_REFERENCE
-	 * @param Reference $statement
+	 * @param Reference $ref
 	 *
 	 * @return string
 	 */
@@ -251,7 +251,7 @@ class RdfBuilder {
 	 * @return boolean
 	 */
 	private function shouldProduce( $what ) {
-		return ($this->produceWhat & $what) != 0;
+		return ( $this->produceWhat & $what ) != 0;
 	}
 
 	/**
@@ -346,8 +346,9 @@ class RdfBuilder {
 		$dataResource = $this->graph->resource( $dataURL );
 		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
 		$dataResource->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
-		if($this->shouldProduce( RdfSerializer::PRODUCE_VERSION_INFO ) ) {
-			$dataResource->addResource( self::NS_CC . ':license', self::LICENSE );
+
+		if( $this->shouldProduce( RdfProducer::PRODUCE_VERSION_INFO ) ) { //FIXME: why should this be optional?
+			$dataResource->addResource( self::NS_CC . ':license', self::LICENSE ); //FIXME: the license should always be included.
 			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
 		}
 
@@ -451,13 +452,13 @@ class RdfBuilder {
 
 		if ( $entity instanceof StatementListProvider ) {
 			$statementList = $entity->getStatements();
-			if ( $this->shouldProduce( RdfSerializer::PRODUCE_TRUTHY_STATEMENTS ) ) {
+			if ( $this->shouldProduce( RdfProducer::PRODUCE_TRUTHY_STATEMENTS ) ) {
 				foreach ( $statementList->getBestStatementPerProperty() as $statement ) {
 					$this->addMainSnak( $entityId, $statement, true );
 				}
 			}
 
-			if ( $this->shouldProduce( RdfSerializer::PRODUCE_ALL_STATEMENTS ) ) {
+			if ( $this->shouldProduce( RdfProducer::PRODUCE_ALL_STATEMENTS ) ) {
 				foreach ( $statementList as $statement ) {
 					$this->addStatement( $entityId, $statement );
 				}
@@ -470,12 +471,11 @@ class RdfBuilder {
 	 *
 	 * @param EntityId $entityId
 	 * @param Statement $statement
-	 * @param boolean Is this producing "truthy" or full-form statement?
 	 */
 	private function addStatement( EntityId $entityId, Statement $statement ) {
 		$this->addMainSnak( $entityId, $statement, false );
 
-		if ( $this->shouldProduce( RdfSerializer::PRODUCE_QUALIFIERS ) ) {
+		if ( $this->shouldProduce( RdfProducer::PRODUCE_QUALIFIERS ) ) {
 			// this assumes statement was added by addMainSnak
 			$statementResource = $this->getStatementResource( $statement );
 			foreach ( $statement->getQualifiers() as $q ) {
@@ -483,9 +483,9 @@ class RdfBuilder {
 			}
 		}
 
-		if ( $this->shouldProduce( RdfSerializer::PRODUCE_REFERENCES ) ) {
+		if ( $this->shouldProduce( RdfProducer::PRODUCE_REFERENCES ) ) {
 			$statementResource = $this->getStatementResource( $statement );
-			foreach ( $statement->getReferences() as $ref ) {
+			foreach ( $statement->getReferences() as $ref ) { //FIXME: split body into separate method
 				$refResource = $this->getReferenceResource( $ref );
 				$statementResource->addResource( self::PROV_QNAME, $refResource );
 				foreach ( $ref->getSnaks() as $refSnak ) {
@@ -500,27 +500,29 @@ class RdfBuilder {
 	 *
 	 * @param EntityId $entityId
 	 * @param Statement $statement
-	 * @param boolean Is this producing "truthy" or full-form statement?
+	 * @param boolean $truthy Is this producing "truthy" or full-form statement?
 	 */
 	private function addMainSnak( EntityId $entityId, Statement $statement, $truthy ) {
 		$snak = $statement->getMainSnak();
 
 		$entityResource = $this->getEntityResource( $entityId );
 
-		if ( $truthy ) {
+		if ( $truthy ) { //FIXME: have a separate method for each mode.
 			$this->addSnak( $entityResource, $snak, self::NS_DIRECT_CLAIM, true ); // simple value here
 		} else {
 			$propertyQName = $this->getEntityQName( self::NS_ENTITY, $snak->getPropertyId() );
 			$statementResource = $this->getStatementResource( $statement );
 			$entityResource->addResource( $propertyQName, $statementResource );
 			$this->addSnak( $statementResource, $snak, self::NS_VALUE );
-			if ( $this->shouldProduce( RdfSerializer::PRODUCE_PROPERTIES ) ) {
+
+			if ( $this->shouldProduce( RdfProducer::PRODUCE_PROPERTIES ) ) { //FIXME: get rid of PRODUCE_PROPERTIES, add an option to resolveMentionedEntities instead.
 				$this->entityMentioned( $snak->getPropertyId() );
 			}
+
 			$rank = $statement->getRank();
-			if( !empty(self::$rankMap[$rank]) ) {
+			if( !empty( self::$rankMap[$rank] ) ) { //FIXME: use isset instead of empty.
 				$statementResource->addResource( self::WIKIBASE_RANK_QNAME, self::$rankMap[$rank] );
-			}
+			} //FIXME: else wfLogWarning
 		}
 	}
 
@@ -553,24 +555,25 @@ class RdfBuilder {
 	}
 
 	/**
-	 * Adds the given SnakObject to the RDF graph.
+	 * Adds the given Snak to the RDF graph.
 	 *
 	 * @param EasyRdf_Resource $target Target node to which we're attaching the snak
-	 * @param SnakObject $snak Snak object
-	 * @param string $claimType Type of the claim for which we're using the snak
+	 * @param Snak $snak Snak object
+	 * @param string $propertyNamespace The property namespace for this snak
+	 * @param bool $simpleValue
 	 */
-	private function addSnak( EasyRdf_Resource $target, SnakObject $snak, $claimType, $simpleValue = false ) {
+	private function addSnak( EasyRdf_Resource $target, Snak $snak, $propertyNamespace, $simpleValue = false ) {
 		$propertyId = $snak->getPropertyId();
 		switch ( $snak->getType() ) {
 			case 'value' :
-				$this->addStatementValue( $target, $propertyId, $snak->getDataValue(), $claimType, $simpleValue );
+				$this->addStatementValue( $target, $propertyId, $snak->getDataValue(), $propertyNamespace, $simpleValue );
 				break;
 			case 'somevalue' :
-				$propertyValueQName = $this->getEntityQName( $claimType, $propertyId );
+				$propertyValueQName = $this->getEntityQName( $propertyNamespace, $propertyId );
 				$target->addResource( $propertyValueQName, self::WIKIBASE_SOMEVALUE_QNAME );
 				break;
 			case 'novalue' :
-				$propertyValueQName = $this->getEntityQName( $claimType, $propertyId );
+				$propertyValueQName = $this->getEntityQName( $propertyNamespace, $propertyId );
 				$target->addResource( $propertyValueQName, self::WIKIBASE_NOVALUE_QNAME );
 				break;
 		}
@@ -578,44 +581,48 @@ class RdfBuilder {
 
 	/**
 	 * Created full data value
-	 * @param \EasyRdf_Resource $target Place to attach the value
+	 * @param EasyRdf_Resource $target Place to attach the value
 	 * @param string $propertyValueQName Relationship name
 	 * @param DataValue $value
 	 * @param array $props List of properties
 	 */
-	private function addExpandedValue( EasyRdf_Resource $target, $propertyValueQName, DataValue $value, array $props) {
-		$node = $this->graph->newBNode( array( self::WIKIBASE_VALUE_QNAME ) );
-		$target->addResource( $propertyValueQName."-value", $node);
+	private function addExpandedValue( EasyRdf_Resource $target, $propertyValueQName, DataValue $value, array $props ) {
+		$node = $this->graph->newBNode( array( self::WIKIBASE_VALUE_QNAME ) ); //TODO: avoid bnode, use a hash based qname, like WDT does
+		$target->addResource( $propertyValueQName."-value", $node );
 		foreach( $props as $prop => $type ) {
 			$getter = "get" . ucfirst( $prop );
 			$data = $value->$getter();
-			if ( $type == 'url' ) {
+			if ( $type == 'url' ) { //FIXME: use the logic from addStatementValue recursively here.
 				$node->addResource( $this->getEntityTypeQName( $prop ), $data );
 				continue;
 			}
 			$node->addLiteral( $this->getEntityTypeQName( $prop ),
-					new \EasyRdf_Literal( $data, null, $type ) );
+					new \EasyRdf_Literal( $data, null, $type ) ); //FIXME: what happens is $data is not scalar? Avoid hard crash.
 		}
 	}
 
 	/**
 	 * Adds the value of the given property to the RDF graph.
 	 *
-	 * @param Statement $statement
+	 * @param EasyRdf_Resource $target
 	 * @param EntityId $propertyId
 	 * @param DataValue $value
-	 * @param string $claimType Type of the claim for which we're using the snak
+	 * @param string $propertyNamespace The property namespace for this snak
+	 * @param bool $simpleValue
 	 */
 	private function addStatementValue( EasyRdf_Resource $target, EntityId $propertyId,
-			DataValue $value, $claimType, $simpleValue = false ) {
-		$propertyValueQName = $this->getEntityQName( $claimType, $propertyId );
+			DataValue $value, $propertyNamespace, $simpleValue = false ) {
+		$propertyValueQName = $this->getEntityQName( $propertyNamespace, $propertyId );
 
-		$property = $this->entityLookup->getEntity( $propertyId );
+		$property = $this->entityLookup->getEntity( $propertyId ); //FIXME: use PropertyDataTypeLookup!
 		$dataType = $property->getDataTypeId();
 		$typeId = $value->getType();
+
+		//FIXME: use a proper registry / dispatching builder
 		$typeId = "addStatementFor".preg_replace( '/[^\w]/', '', ucwords( $typeId ) );
-		if( !is_callable( array($this, $typeId ) ) ) {
-			wfDebug( __METHOD__ . ": Unsupported data type: $typeId\n" );
+
+		if( !is_callable( array( $this, $typeId ) ) ) {
+			wfLogWarning( __METHOD__ . ": Unsupported data type: $typeId" );
 		} else {
 			$this->$typeId( $target, $propertyValueQName, $dataType, $value, $simpleValue );
 		}
@@ -626,11 +633,11 @@ class RdfBuilder {
 	/**
 	 * Adds specific value
 	 *
-	 * @param Statement $statement
+	 * @param EasyRdf_Resource $target
 	 * @param string $propertyValueQName Property name
 	 * @param string $dataType Property data type
 	 * @param EntityIdValue $value
-	 * @param string $claimType Type of the claim for which we're using the snak
+	 * @param bool $simpleValue
 	 */
 	private function addStatementForWikibaseEntityid( EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			EntityIdValue $value, $simpleValue = false ) {
@@ -644,11 +651,11 @@ class RdfBuilder {
 	/**
 	 * Adds specific value
 	 *
-	 * @param Statement $statement
+	 * @param EasyRdf_Resource $target
 	 * @param string $propertyValueQName Property name
 	 * @param string $dataType Property data type
 	 * @param StringValue $value
-	 * @param string $claimType Type of the claim for which we're using the snak
+	 * @param bool $simpleValue
 	 */
 	private function addStatementForString( EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			StringValue $value, $simpleValue = false ) {
@@ -664,11 +671,11 @@ class RdfBuilder {
 	/**
 	 * Adds specific value
 	 *
-	 * @param Statement $statement
+	 * @param EasyRdf_Resource $target
 	 * @param string $propertyValueQName Property name
 	 * @param string $dataType Property data type
 	 * @param MonolingualTextValue $value
-	 * @param string $claimType Type of the claim for which we're using the snak
+	 * @param bool $simpleValue
 	 */
 	private function addStatementForMonolingualtext( EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			MonolingualTextValue $value, $simpleValue = false ) {
@@ -678,19 +685,19 @@ class RdfBuilder {
 	/**
 	 * Adds specific value
 	 *
-	 * @param Statement $statement
+	 * @param EasyRdf_Resource $target
 	 * @param string $propertyValueQName Property name
 	 * @param string $dataType Property data type
 	 * @param TimeValue $value
-	 * @param string $claimType Type of the claim for which we're using the snak
+	 * @param bool $simpleValue
 	 */
 	private function addStatementForTime( EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			TimeValue $value, $simpleValue = false ) {
-		// TODO: we may want to deal with Julian dates here?
+		// TODO: we may want to deal with Julian dates here? //FIXME: EasyRdf_Literal_DateTime may fail hard on non-iso dates! Needs error handling / fallback.
 		$target->addLiteral( $propertyValueQName, new \EasyRdf_Literal_DateTime( $value->getTime() ) );
-		if ( !$simpleValue && $this->shouldProduce( RdfSerializer::PRODUCE_FULL_VALUES ) ) {
+		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) { //FIXME: register separate generators for different output flavors.
 			$this->addExpandedValue( $target, $propertyValueQName, $value,
-					array(  'time' => 'xsd:dateTime',
+					array(  'time' => 'xsd:dateTime', //FIXME: only true for gregorian!
 							// TODO: eventually use identifier here
 							'precision' => 'xsd:integer',
 							'timezone' => 'xsd:integer',
@@ -706,21 +713,21 @@ class RdfBuilder {
 	/**
 	 * Adds specific value
 	 *
-	 * @param Statement $statement
+	 * @param EasyRdf_Resource $target
 	 * @param string $propertyValueQName Property name
 	 * @param string $dataType Property data type
 	 * @param QuantityValue $value
-	 * @param string $claimType Type of the claim for which we're using the snak
+	 * @param bool $simpleValue
 	 */
 	private function addStatementForQuantity( EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			QuantityValue $value, $simpleValue = false ) {
 		$target->addLiteral( $propertyValueQName, new \EasyRdf_Literal_Decimal( $value->getAmount() ) );
-		if ( !$simpleValue && $this->shouldProduce( RdfSerializer::PRODUCE_FULL_VALUES ) ) {
+		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) {
 			$this->addExpandedValue( $target, $propertyValueQName, $value,
 					array(  'amount' => 'xsd:decimal',
 							'upperBound' => 'xsd:decimal',
 							'lowerBound' => 'xsd:decimal',
-							'unit' => null,
+							'unit' => null, //FIXME: it's a URI (or "1"), should be of type url!
 						)
 			);
 		}
@@ -729,11 +736,11 @@ class RdfBuilder {
 	/**
 	 * Adds specific value
 	 *
-	 * @param Statement $statement
+	 * @param EasyRdf_Resource $target
 	 * @param string $propertyValueQName Property name
 	 * @param string $dataType Property data type
 	 * @param GlobeCoordinateValue $value
-	 * @param string $claimType Type of the claim for which we're using the snak
+	 * @param bool $simpleValue
 	 */
 	private function addStatementForGlobecoordinate( EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			GlobeCoordinateValue $value, $simpleValue = false ) {
@@ -741,7 +748,7 @@ class RdfBuilder {
 		$target->addLiteral( $propertyValueQName,
 				new EasyRdf_Literal( "Point({$value->getLatitude()} {$value->getLongitude()})",
 									null, self::NS_GEO . ":wktLiteral" ) );
-		if ( !$simpleValue && $this->shouldProduce( RdfSerializer::PRODUCE_FULL_VALUES ) ) {
+		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) {
 			$this->addExpandedValue( $target, $propertyValueQName, $value,
 					array(  'latitude' => 'xsd:decimal',
 							'longitude' => 'xsd:decimal',
@@ -759,7 +766,7 @@ class RdfBuilder {
 	 *
 	 * @param EntityLookup $entityLookup
 	 */
-	public function resolvedMentionedEntities( EntityLookup $entityLookup ) {
+	public function resolvedMentionedEntities( EntityLookup $entityLookup ) { //FIXME: needs test
 		// @todo inject a DispatchingEntityIdParser
 		$idParser = new BasicEntityIdParser();
 
@@ -787,12 +794,12 @@ class RdfBuilder {
 		$this->addDescriptions( $entity );
 		$this->addAliases( $entity );
 
-		if ( $this->shouldProduce( RdfSerializer::PRODUCE_SITELINKS ) && $entity instanceof Item ) {
+		if ( $this->shouldProduce( RdfProducer::PRODUCE_SITELINKS ) && $entity instanceof Item ) {
 			$this->addSiteLinks( $entity );
 		}
 
-		if ( $this->shouldProduce( RdfSerializer::PRODUCE_ALL_STATEMENTS
-				| RdfSerializer::PRODUCE_TRUTHY_STATEMENTS ) && $entity instanceof EntityDocument ) {
+		if ( $this->shouldProduce( RdfProducer::PRODUCE_ALL_STATEMENTS
+				| RdfProducer::PRODUCE_TRUTHY_STATEMENTS ) && $entity instanceof EntityDocument ) {
 			$this->addStatements( $entity );
 		}
 	}
@@ -814,11 +821,11 @@ class RdfBuilder {
 	 */
 	public function addDumpHeader() {
 		// TODO: this should point to "this document"
-		$dataResource = $this->graph->resource( $this->getEntityTypeQName('Dump') );
+		$dataResource = $this->graph->resource( $this->getEntityTypeQName( 'Dump' ) );
 		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
 		$dataResource->addResource( self::NS_CC . ':license', self::LICENSE );
 		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
 		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified',
-				new EasyRdf_Literal( gmdate('Y-m-d\TH:i:s\Z'), null, 'xsd:dateTime' ) );
+				new EasyRdf_Literal( gmdate( 'Y-m-d\TH:i:s\Z' ), null, 'xsd:dateTime' ) );
 	}
 }
