@@ -105,9 +105,13 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
-### 0.13.1 (dev)
+### 0.14.0 (dev)
 
-#### Bugfixes ####
+### Breaking changes
+
+* Removed `jQuery.NativeEventHandler`.
+
+#### Bugfixes
 * `jQuery.valueview.ExpertExtender.Listrotator` redraws on 0 value now.
 
 ### 0.13.0 (2015-02-05)
