@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\Api;
 
-use PHPUnit_Framework_TestCase;
 use ApiBase;
 use ApiMain;
 use FauxRequest;
@@ -13,13 +12,14 @@ use ReflectionMethod;
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseAPI
+ * @group Database
  *
  * @group medium
  *
  * @licence GNU GPL v2+
  * @author Lucie-Aimée Kaffee
  */
-class ApiConventionsTest extends PHPUnit_Framework_TestCase {
+class ApiConventionsTest extends \MediaWikiTestCase {
 
 	public function wikibaseApiModuleProvider() {
 		$argList = array();

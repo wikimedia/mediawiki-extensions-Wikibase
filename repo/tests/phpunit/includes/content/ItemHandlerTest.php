@@ -21,6 +21,7 @@ use Wikibase\SettingsArray;
  * @group WikibaseItem
  * @group WikibaseEntity
  * @group WikibaseEntityHandler
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

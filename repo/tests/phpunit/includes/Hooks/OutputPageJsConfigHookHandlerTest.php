@@ -16,11 +16,12 @@ use Wikibase\Settings;
  *
  * @group WikibaseRepo
  * @group Wikibase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
+class OutputPageJsConfigHookHandlerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider handleProvider
