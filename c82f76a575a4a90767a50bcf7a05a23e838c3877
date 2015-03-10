@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_eed13fd1",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T20:00:24Z",
+      "side": 1,
+      "message": "Any suggestions where to find it?",
+      "revId": "c82f76a575a4a90767a50bcf7a05a23e838c3877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cecc833b",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T20:00:24Z",
+      "side": 1,
+      "message": "This is covered in a later patch.",
+      "revId": "c82f76a575a4a90767a50bcf7a05a23e838c3877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8e844bb7",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T20:00:24Z",
+      "side": 1,
+      "message": "We assume it is compatible with EasyRdf\u0027s literal (which also accepts dates, stringable objects, etc.) but if it\u0027s not we\u0027re in trouble. Since we write property list, the idea is to avoid properties which are not serializable. But we can add logging there with simple check.",
+      "revId": "c82f76a575a4a90767a50bcf7a05a23e838c3877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2eef3784",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T20:00:24Z",
+      "side": 1,
+      "message": "That\u0027s messy since \"1\" is not an url. \u003c1\u003e is an url. We are operating under assumption that properties have types, but if it\u0027s typed it can\u0027t be both URL and \"1\". We need to clean it up.",
+      "revId": "c82f76a575a4a90767a50bcf7a05a23e838c3877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
