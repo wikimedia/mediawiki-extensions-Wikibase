@@ -62,9 +62,8 @@ class ClaimListAccessTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider claimTestProvider
-	 *
 	 * @param ClaimListAccess $list
-	 * @param array $claims
+	 * @param Claim[] $claims
 	 */
 	public function testAllOfTheStuff( ClaimListAccess $list, array $claims ) {
 		foreach ( $claims as $claim ) {

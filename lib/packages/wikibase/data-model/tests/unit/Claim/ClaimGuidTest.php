@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Tests\Claim;
 
 use Exception;
 use Wikibase\DataModel\Claim\ClaimGuid;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -20,12 +21,11 @@ class ClaimGuidTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideConstructionData
-	 *
-	 * @param $entityId
-	 * @param $guid
-	 * @param $expected
+	 * @param EntityId $entityId
+	 * @param string $guid
+	 * @param string $expected
 	 */
-	public function testConstructor( $entityId, $guid, $expected ) {
+	public function testConstructor( EntityId $entityId, $guid, $expected ) {
 		$claimGuid = new ClaimGuid( $entityId, $guid );
 
 		$this->assertEquals( $expected, $claimGuid->getSerialization() );
@@ -56,9 +56,6 @@ class ClaimGuidTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideBadConstruction
-	 *
-	 * @param $entityId
-	 * @param $guid
 	 */
 	public function testBadConstruction( $entityId, $guid ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
@@ -90,10 +87,9 @@ class ClaimGuidTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideClaimGuids
-	 *
 	 * @param ClaimGuid $claimGuid
 	 */
-	public function testEquals( $claimGuid ) {
+	public function testEquals( ClaimGuid $claimGuid ) {
 		$claimGuidCopy = clone $claimGuid;
 		$this->assertTrue( $claimGuid->equals( $claimGuidCopy ) );
 		$this->assertTrue( $claimGuidCopy->equals( $claimGuid ) );
@@ -101,10 +97,9 @@ class ClaimGuidTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideClaimGuids
-	 *
 	 * @param ClaimGuid $claimGuid
 	 */
-	public function testNotEquals( $claimGuid ) {
+	public function testNotEquals( ClaimGuid $claimGuid ) {
 		$notEqualClaimGuid = new ClaimGuid( new ItemId( 'q9999' ), 'someguid' );
 		$this->assertFalse( $claimGuid->equals( $notEqualClaimGuid ) );
 		$this->assertFalse( $notEqualClaimGuid->equals( $claimGuid ) );

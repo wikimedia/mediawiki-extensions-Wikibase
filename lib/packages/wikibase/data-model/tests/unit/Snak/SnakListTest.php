@@ -74,7 +74,6 @@ class SnakListTest extends HashArrayTest {
 
 	/**
 	 * @dataProvider invalidConstructorArgumentsProvider
-	 * @param mixed $input
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidConstructorArguments_constructorThrowsException( $input ) {
