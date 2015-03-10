@@ -4,7 +4,6 @@
 			"Babanwalia"
 		]
 	},
-	"specialpages-group-wikibaserepo": "ਵਿਕੀਬੇਸ ਦਾ ਖ਼ਜ਼ਾਨਾ",
 	"wikibase-edit": "ਸੋਧੋ",
 	"wikibase-save": "ਸਾਂਭੋ",
 	"wikibase-cancel": "ਰੱਦ ਕਰੋ",
@@ -25,11 +24,14 @@
 	"wikibase-description-input-help-message": "$1 ਵਿਚ ਕੋਈ ਛੋਟਾ ਵੇਰਵਾ ਭਰੋ",
 	"wikibase-statements": "ਬਿਆਨ",
 	"wikibase-terms": "ਹੋਰ ਬੋਲੀਆਂ ਵਿਚ",
+	"wikibase-sitelinks-special": "ਹੋਰ ਸਾਈਟਾਂ",
 	"wikibase-badgeselector-badge-placeholder-title": "ਬਿੱਲਾ ਮੁਕੱਰਰ ਕਰਨ ਵਾਸਤੇ ਨੱਪੋ।",
 	"wikibase-remove": "ਹਟਾਓ",
 	"wikibase-move-up": "ਉਤਾਂਹ ਘੱਲੋ",
 	"wikibase-move-down": "ਹੇਠਾਂ ਘੱਲੋ",
 	"wikibase-undo-title": "\"$1\" ਦੀ ਸੋਧ ਨਕਾਰੀ ਜਾ ਰਹੀ ਹੈ",
+	"wikibase-statementview-rank-normal": "ਆਮ ਦਰਜਾ",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ਹਵਾਲਾ|ਹਵਾਲੇ}}",
 	"wikibase-itembytitle-lookup-site": "ਸਾਈਟ:",
 	"wikibase-itembytitle-lookup-page": "ਸਫ਼ਾ:",
 	"wikibase-itembytitle-submit": "ਭਾਲ਼",

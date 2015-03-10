@@ -72,6 +72,6 @@
 	"datatypes-type-wikibase-property": "Prupietà",
 	"datatypes-type-commonsMedia": "File multimidiali supra a' Commons",
 	"version-wikibase": "Wikibase",
-	"wikibase-snakformatter-valuetype-mismatch": "Lu tipu dû valuri \"$1\" nun cumbacia cû chiḍḍu dâ prupietà \"$2\".",
+	"wikibase-snakformatter-valuetype-mismatch": "Lu tipu dû valuri \"$1\" nun cumbacia cû chiddu dâ prupietà \"$2\".",
 	"wikibase-snakformatter-property-not-found": "Prupietà $1 nun truvata, nun si po' ditirminari lu tipu di dati di adupirari"
 }
