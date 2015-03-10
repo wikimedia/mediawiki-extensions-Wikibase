@@ -22,6 +22,7 @@ use Wikibase\SummaryFormatter;
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseSummary
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
