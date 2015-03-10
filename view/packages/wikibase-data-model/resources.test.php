@@ -224,7 +224,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 				'Snak.tests.js',
 			),
 			'dependencies' => array(
-				'mw.ext.dataValues',
+				'dataValues.values',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.PropertySomeValueSnak',
 				'wikibase.datamodel.PropertyValueSnak',
@@ -237,7 +237,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 				'SnakList.tests.js',
 			),
 			'dependencies' => array(
-				'mw.ext.dataValues',
+				'dataValues.values',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.PropertySomeValueSnak',
 				'wikibase.datamodel.PropertyValueSnak',

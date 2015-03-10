@@ -121,7 +121,7 @@ return call_user_func( function() {
 				'EntityId.js',
 			),
 			'dependencies' => array(
-				'mw.ext.dataValues',
+				'dataValues.DataValue',
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 			),
@@ -252,7 +252,7 @@ return call_user_func( function() {
 				'PropertyValueSnak.js',
 			),
 			'dependencies' => array(
-				'mw.ext.dataValues',
+				'dataValues.DataValue',
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Snak',
