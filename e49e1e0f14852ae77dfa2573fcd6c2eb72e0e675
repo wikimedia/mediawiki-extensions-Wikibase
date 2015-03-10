@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_b332d4ed",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T16:55:42Z",
+      "side": 1,
+      "message": "no, this is temporary",
+      "parentUuid": "6e7c4fa4_ad2591be",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_6da2193d",
         "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_f357ec03",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T16:55:42Z",
+      "side": 1,
+      "message": "I was assuming codec doesn\u0027t keep state. Does it?",
+      "parentUuid": "6e7c4fa4_6da2193d",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0d67e523",
         "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2015-03-10T15:03:45Z",
       "side": 1,
       "message": "//TODO: could have all these in a JSON file.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_73b99c28",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T16:55:42Z",
+      "side": 1,
+      "message": "we could, but why? It\u0027s just a simple array, and without it it\u0027d be hard to understand what the properties are and understand the test. it\u0027s not big either.",
+      "parentUuid": "6e7c4fa4_0d67e523",
       "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_93b23847",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T16:55:42Z",
+      "side": 1,
+      "message": "Not sure what you mean here.",
+      "parentUuid": "6e7c4fa4_ad77d1ce",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_4d84fda3",
         "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
         "patchSetId": 2
@@ -98,6 +170,24 @@
       "writtenOn": "2015-03-10T15:03:45Z",
       "side": 1,
       "message": "I see no reason for a separate data dir, just put the files in the same dir as the test class.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_33a48404",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T16:55:42Z",
+      "side": 1,
+      "message": "There are a lot of them, and we already have a data dir.",
+      "parentUuid": "6e7c4fa4_4d84fda3",
       "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +245,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_139f08bb",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T16:55:42Z",
+      "side": 1,
+      "message": "That\u0027s what they are doing. Which names would you prefer?",
+      "parentUuid": "6e7c4fa4_4d5b9d57",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_cdb1ed8e",
         "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
         "patchSetId": 2
@@ -166,6 +274,24 @@
       "writtenOn": "2015-03-10T15:03:45Z",
       "side": 1,
       "message": "//MINOR: $dataName doesn\u0027t need to be a parameter, just use it as the array key for $testData.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b36094cd",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T16:55:42Z",
+      "side": 1,
+      "message": "I don\u0027t think phpunit will report the test name then.",
+      "parentUuid": "6e7c4fa4_cdb1ed8e",
       "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +315,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_b33974cd",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T16:55:42Z",
+      "side": 1,
+      "message": "It\u0027s not - it captures the test name. Otherwise you\u0027d have to navigate the error message which has 2 huge data dumps.",
+      "parentUuid": "6e7c4fa4_6d58d959",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0db84573",
         "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
         "patchSetId": 2
@@ -206,6 +350,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_5346e055",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T16:55:42Z",
+      "side": 1,
+      "message": "When the rest of the patches are merged. I could delete it now but I\u0027d have to keep copy around to deal with the rest of unmerged patches.",
+      "parentUuid": "6e7c4fa4_0db84573",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0d35a5f3",
         "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
         "patchSetId": 2
@@ -217,6 +379,24 @@
       "writtenOn": "2015-03-10T15:03:45Z",
       "side": 1,
       "message": "should not be here.",
+      "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d36990bd",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-10T16:55:42Z",
+      "side": 1,
+      "message": "it\u0027s in \"for deletion\" section.",
+      "parentUuid": "6e7c4fa4_0d35a5f3",
       "revId": "e49e1e0f14852ae77dfa2573fcd6c2eb72e0e675",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
