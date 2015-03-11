@@ -211,7 +211,8 @@ $.extend( StickyNode.prototype, {
 		.css( 'top', this.$node.outerHeight() - this.$node.outerHeight( true ) )
 		.css( 'width', width )
 		.css( 'position', 'fixed' )
-		.css( 'z-index', this._options.zIndex );
+		.css( 'z-index', this._options.zIndex )
+		.addClass( 'wikibase-sticknode-fixed' );
 
 		if( this._$clone.css( 'display' ) === 'table-header-group' ) {
 			var $original = this._$clone.find( '*' );
