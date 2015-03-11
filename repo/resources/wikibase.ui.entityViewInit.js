@@ -201,7 +201,7 @@
 	/**
 	 * Update the state of the watch link if the user has watchdefault enabled.
 	 */
-	function attachWatchLinkUpdater( viewName, $entityview ) {
+	function attachWatchLinkUpdater( $entityview, viewName ) {
 		var update = mw.page && mw.page.watch ? mw.page.watch.updateWatchLink : null;
 
 		if( !update || !mw.user.options.get( 'watchdefault' ) ) {
