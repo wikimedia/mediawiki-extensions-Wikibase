@@ -146,6 +146,7 @@ return call_user_func( function() {
 				'wikibase.ui.entityViewInit.js' // should probably be adjusted for more modularity
 			),
 			'dependencies' => array(
+				'mediawiki.page.watch.ajax',
 				'mediawiki.user',
 				'mw.config.values.wbRepo',
 				'jquery.wikibase.itemview',
