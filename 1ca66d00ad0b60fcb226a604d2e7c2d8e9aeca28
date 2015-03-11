@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e7c4fc96",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-11T17:07:21Z",
+      "side": 1,
+      "message": "Doesn\u0027t canEdit already include isBlocked? If so, that\u0027s weird. O_o",
+      "revId": "1ca66d00ad0b60fcb226a604d2e7c2d8e9aeca28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
