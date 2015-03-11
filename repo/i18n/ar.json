@@ -14,7 +14,8 @@
 			"محمد أحمد عبد الفتاح",
 			"أحمد المحمودي",
 			"Abanima",
-			"Sonic N800"
+			"Sonic N800",
+			"Bibas"
 		]
 	},
 	"wikibase-entity-item": "عنصر",
@@ -52,7 +53,7 @@
 	"wikibase-terms": "بلغات أخرى",
 	"wikibase-sitelinks-empty": "لا ترتبط أي صفحات بهذا العنصر بعد.",
 	"wikibase-sitelinks-input-help-message": "حدد وصلة إلى صفحة تتعلق بهذا العنصر.",
-	"wikibase-sitelinks-special": "صفحات على مواقع أخرى ترتبط بهذا العنصر",
+	"wikibase-sitelinks-special": "مواقع أخرى",
 	"wikibase-remove": "ألغ",
 	"wikibase-move-up": "تحريك للأعلى",
 	"wikibase-move-down": "تحريك للأسفل",

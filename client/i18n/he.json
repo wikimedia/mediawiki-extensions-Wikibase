@@ -17,6 +17,8 @@
 	"apihelp-query+pageterms-example-label-en": "קבלת תוויות וכינויים שמשויעכים לדף 'London', באנגלית.",
 	"apihelp-query+pageterms-param-terms": "איזה סוג של פריטים לקבל, למשל 'label'‏, 'description' או 'alias'.",
 	"apihelp-query+wikibase-description": "קבלת מידע על מאגר הוויקיבייס המשויך.",
+	"apihelp-query+wikibase-example": "קבלת נתיב URL ומידע אחר עבור מאגר ויקיבייס.",
+	"apihelp-query+wikibase-param-prop": "אילו מאפיינים להגדיר:\n;<kbd>url</kbd>: כתובת URL בסיסית, נתיב תסריטים (script path) ונתיב ערכים (article path).",
 	"wikibase-after-page-move": "אפשר גם [$1 לעדכן] את הפריט המשויך ב{{GRAMMAR:תחילית|{{WBREPONAME}}}} כדי לתחזק את קישורי השפה בדף שהועבר.",
 	"wikibase-after-page-move-queued": "[$1 פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}}] שמשויך לדף הזה יעודכן באופן אוטומטי בקרוב.",
 	"wikibase-after-page-delete": "באפשרותך גם להסיר את הקישור אל דף הזה מ[$1 פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}}] המשויך כדי לשמור על קישורי השפה.",
