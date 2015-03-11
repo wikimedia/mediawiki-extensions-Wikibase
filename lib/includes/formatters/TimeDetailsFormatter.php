@@ -44,7 +44,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 			$options->setOption( TimeFormatter::OPT_TIME_ISO_FORMATTER, $this->isoTimeFormatter );
 		}
 
-		$this->timeFormatter = new TimeFormatter( $options );
+		$this->timeFormatter = $this->isoTimeFormatter;
 	}
 
 	/**
