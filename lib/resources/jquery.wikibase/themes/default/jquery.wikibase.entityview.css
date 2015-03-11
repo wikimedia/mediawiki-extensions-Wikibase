@@ -5,15 +5,20 @@
 .wikibase-entityview {
 	clear: both; /* wrap around success message */
 	float: left; /* float left to let widget container float right next to it */
-	width: 100%;
+}
+
+@media screen and ( min-width: 1570px ) {
+	.wikibase-entityview {
+		width: 100%;
+	}
 }
 
 .wikibase-entityview > * {
 	float: left;
-	max-width: 65em;
 }
 
 .wikibase-entityview .wikibase-entityview-main {
 	margin: 0 2em 2em 0;
+	max-width: 65em;
 	width: 100%; /* required because it's a floating block element now */
 }
