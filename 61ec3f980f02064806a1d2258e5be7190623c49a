@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8abc2d1c",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-11T18:14:17Z",
+      "side": 1,
+      "message": "Should declare that this can be null, or the default should be changed to be \"simple\".",
+      "revId": "61ec3f980f02064806a1d2258e5be7190623c49a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4a86156c",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-11T18:14:17Z",
+      "side": 1,
+      "message": "The case of flavorName being null should be handled explicitly. Probably by throwing an exception.",
+      "revId": "61ec3f980f02064806a1d2258e5be7190623c49a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_aa900999",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-11T18:14:17Z",
+      "side": 1,
+      "message": "Should declare that this can be null, or the default should be changed to be \"simple\".",
+      "revId": "61ec3f980f02064806a1d2258e5be7190623c49a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2afcf9d4",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-11T18:14:17Z",
+      "side": 1,
+      "message": "Should indicate which constants to use to provide values for this.",
+      "revId": "61ec3f980f02064806a1d2258e5be7190623c49a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_aae7a93a",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-11T18:14:17Z",
+      "side": 1,
+      "message": "This is never called and has no tests. Please remove it, or add tests for it.",
+      "revId": "61ec3f980f02064806a1d2258e5be7190623c49a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
