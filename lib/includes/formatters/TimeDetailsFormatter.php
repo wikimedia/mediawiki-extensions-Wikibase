@@ -18,11 +18,12 @@ use ValueFormatters\ValueFormatterBase;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class TimeDetailsFormatter extends ValueFormatterBase {
 
 	/**
-	 * @var TimeFormatter
+	 * @var ValueFormatter
 	 */
 	private $timeFormatter;
 
@@ -32,12 +33,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	public function __construct( FormatterOptions $options = null ) {
 		parent::__construct( $options );
 
-		$this->defaultOption(
-			TimeFormatter::OPT_TIME_ISO_FORMATTER,
-			new MwTimeIsoFormatter( $this->options )
-		);
-
-		$this->timeFormatter = new TimeFormatter( $this->options );
+		$this->timeFormatter = new MwTimeIsoFormatter( $this->options );
 	}
 
 	/**
@@ -76,7 +72,6 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 			'calendar',
 			$this->getCalendarModelHtml( $value->getCalendarModel() )
 		);
-		// TODO: Provide "nice" rendering of precision, etc.
 		$html .= $this->renderLabelValuePair(
 			'precision',
 			$this->getAmountAndPrecisionHtml( $value->getPrecision() )
