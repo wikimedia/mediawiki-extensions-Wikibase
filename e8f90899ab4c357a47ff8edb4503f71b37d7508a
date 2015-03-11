@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_11c85b24",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-11T10:46:11Z",
+      "side": 1,
+      "message": "Of course, some kind of output stream object should be injected, see the comment above. Raw \"print\" is just for exploration. \n\nWith buffered output, it would be possible to have a \"stash\" emitter in addition to the \"direct\" emitter, e.g. for collecting triples about statements \"out of band\".",
+      "parentUuid": "6e7c4fa4_73767c3b",
+      "revId": "e8f90899ab4c357a47ff8edb4503f71b37d7508a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_e04dd976",
         "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
         "patchSetId": 5
