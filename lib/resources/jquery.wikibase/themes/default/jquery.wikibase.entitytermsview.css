@@ -65,9 +65,13 @@
 	display: none;
 }
 
-
-.wikibase-entitytermsview .wikibase-toolbar-container {
+.wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-label {
 	width: auto;
+}
+
+.wikibase-entitytermsview-heading .wikibase-toolbar-container {
+	position: static;
+	float: right;
 }
 
 .wikibase-entitytermsview .wikibase-toolbar-container .wikibase-toolbar-container {

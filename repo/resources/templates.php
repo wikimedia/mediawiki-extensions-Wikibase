@@ -157,11 +157,11 @@ HTML;
 <<<HTML
 <div class="wikibase-entitytermsview">
 	<div class="wikibase-entitytermsview-heading">
+		<!-- ? wikibase-toolbar -->$9
 		<h1 class="wikibase-entitytermsview-heading-label $1"><!-- wikibase-entitytermsview-label -->$2</h1>
 		<div class="wikibase-entitytermsview-heading-aliases $3"><!-- wikibase-entitytermsview-aliases -->$4</div>
 		<div class="wikibase-entitytermsview-heading-description $5">$6</div>
 	</div>
-	<!-- ? wikibase-toolbar -->$9
 	<div class="wikibase-entitytermsview-entitytermsforlanguagelistview $8"><!-- wikibase-entitytermsforlanguagelistview -->$7</div>
 </div>
 HTML;
