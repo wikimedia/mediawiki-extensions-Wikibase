@@ -9,6 +9,10 @@
 	width: 100%;
 }
 
+.wikibase-entitytermsview .wikibase-entitytermsview-heading h1.wikibase-entitytermsview-heading-label {
+	padding-right: 11em;
+}
+
 .wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-label .wikibase-entitytermsview-heading-label-id {
 	color: grey;
 	font-size: 0.6em;
@@ -63,11 +67,6 @@
 }
 .wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview-configure-hidden {
 	display: none;
-}
-
-
-.wikibase-entitytermsview .wikibase-toolbar-container {
-	width: auto;
 }
 
 .wikibase-entitytermsview .wikibase-toolbar-container .wikibase-toolbar-container {
