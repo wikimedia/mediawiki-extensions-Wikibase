@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e7c4fa4_0727b9b2",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-11T15:27:30Z",
+      "side": 1,
+      "message": "$entityview, viewName here, ...",
+      "revId": "779d27749e09174dd7249dc8a2b5f81818e0f62a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a71b6572",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-11T15:27:30Z",
+      "side": 1,
+      "message": "viewName, $entityview there. Ouch.",
+      "revId": "779d27749e09174dd7249dc8a2b5f81818e0f62a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_2cf5104d",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 3
