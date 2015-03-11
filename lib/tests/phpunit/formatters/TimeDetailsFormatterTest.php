@@ -5,8 +5,8 @@ namespace Wikibase\Lib\Test;
 use DataValues\NumberValue;
 use DataValues\TimeValue;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
+use ValueParsers\TimeParser;
 use Wikibase\Lib\TimeDetailsFormatter;
 
 /**
@@ -38,7 +38,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function quantityFormatProvider() {
-		$gregorian = TimeFormatter::CALENDAR_GREGORIAN;
+		$gregorian = TimeParser::CALENDAR_GREGORIAN;
 		$day = TimeValue::PRECISION_DAY;
 
 		return array(
@@ -65,7 +65,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 				'@.*<td[^<>]*isotime">\xE2\x88\x9299999-01-01T00:00:00</td>.*@s'
 			),
 			array(
-				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, TimeFormatter::CALENDAR_JULIAN ),
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, TimeParser::CALENDAR_JULIAN ),
 				'@.*<td[^<>]*calendar">\(valueview-expert-timevalue-calendar-julian\)</td>.*@s'
 			),
 			array(

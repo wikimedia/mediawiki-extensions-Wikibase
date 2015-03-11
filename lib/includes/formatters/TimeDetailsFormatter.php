@@ -7,9 +7,9 @@ use Html;
 use InvalidArgumentException;
 use Message;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
+use ValueParsers\TimeParser;
 
 /**
  * Formatter for rendering the details of a TimeValue (most useful for diffs) in HTML.
@@ -134,10 +134,10 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 */
 	private function getCalendarModelHtml( $calendarModel ) {
 		switch ( $calendarModel ) {
-			case TimeFormatter::CALENDAR_GREGORIAN:
+			case TimeParser::CALENDAR_GREGORIAN:
 				$key = 'valueview-expert-timevalue-calendar-gregorian';
 				break;
-			case TimeFormatter::CALENDAR_JULIAN:
+			case TimeParser::CALENDAR_JULIAN:
 				$key = 'valueview-expert-timevalue-calendar-julian';
 				break;
 			default:

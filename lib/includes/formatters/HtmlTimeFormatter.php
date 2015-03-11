@@ -5,9 +5,9 @@ namespace Wikibase\Lib;
 use DataValues\TimeValue;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
+use ValueParsers\TimeParser;
 
 /**
  * @since 0.5
@@ -19,8 +19,8 @@ use ValueFormatters\ValueFormatterBase;
 class HtmlTimeFormatter extends ValueFormatterBase {
 
 	private static $calendarKeys = array(
-		TimeFormatter::CALENDAR_GREGORIAN => 'valueview-expert-timevalue-calendar-gregorian',
-		TimeFormatter::CALENDAR_JULIAN => 'valueview-expert-timevalue-calendar-julian',
+		TimeParser::CALENDAR_GREGORIAN => 'valueview-expert-timevalue-calendar-gregorian',
+		TimeParser::CALENDAR_JULIAN => 'valueview-expert-timevalue-calendar-julian',
 	);
 
 	/**
@@ -78,7 +78,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 		// year > 1581 && year < 1930 ||
 		// year >= 1930 && calendar === 'Julian'
 		return $value->getPrecision() >= TimeValue::PRECISION_DAY && (
-			$year <= 1581 || $value->getCalendarModel() !== TimeFormatter::CALENDAR_GREGORIAN
+			$year <= 1581 || $value->getCalendarModel() !== TimeParser::CALENDAR_GREGORIAN
 		);
 	}
 

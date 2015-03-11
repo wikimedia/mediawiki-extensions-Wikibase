@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\TimeValue;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\TimeFormatter;
 use Wikibase\Lib\MwTimeIsoFormatter;
 use Wikibase\Lib\Parsers\TimeParser;
 
@@ -40,7 +39,7 @@ class TimeFormatterParserRoundtripTest extends \MediaWikiTestCase {
 
 		foreach ( $this->isoTimestampProvider() as $case ) {
 			$cases[] = array(
-				new TimeValue( $case[0], 0, 0, 0, $case[1], TimeFormatter::CALENDAR_GREGORIAN )
+				new TimeValue( $case[0], 0, 0, 0, $case[1], \ValueParsers\TimeParser::CALENDAR_GREGORIAN )
 			);
 		}
 

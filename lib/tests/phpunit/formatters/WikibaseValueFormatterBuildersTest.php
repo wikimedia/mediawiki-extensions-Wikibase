@@ -12,8 +12,8 @@ use MediaWikiTestCase;
 use Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
-use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
+use ValueParsers\TimeParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -194,7 +194,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				new TimeValue( '+1920-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_MONTH,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					TimeParser::CALENDAR_GREGORIAN ),
 				'/^May 1920$/'
 			),
 			'a gregorian day in 1520' => array(
@@ -203,7 +203,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				new TimeValue( '+1520-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					TimeParser::CALENDAR_GREGORIAN ),
 				'/^1 May 1520<sup class="wb-calendar-name">Gregorian<\/sup>$/'
 			),
 			'a julian day in 1980' => array(
@@ -212,7 +212,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				new TimeValue( '+1980-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_JULIAN ),
+					TimeParser::CALENDAR_JULIAN ),
 				'/^1 May 1980<sup class="wb-calendar-name">Julian<\/sup>$/'
 			),
 			'text in english' => array(
