@@ -88,21 +88,6 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 				} )
 			);
 
-		// Use JobQueueRedis over here, as mocking abstract classes sucks
-		// and it doesn't matter anyway
-		$jobQueue = $this->getMockBuilder( '\JobQueueRedis' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$jobQueue->expects( $this->any() )
-			->method( 'delayedJobsEnabled' )
-			->will( $this->returnValue( true ) );
-
-		$jobQueueGroupMock->expects( $this->once() )
-			->method( 'get' )
-			->with( $this->equalTo( 'UpdateRepoOnMove' ) )
-			->will( $this->returnValue( $jobQueue ) );
-
 		return $jobQueueGroupMock;
 	}
 
@@ -135,7 +120,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 	public function testInjectJob() {
 		$updateRepo = $this->getNewUpdateRepoOnMove();
 
-		$jobQueueGroupMock = $this->getJobQueueGroupMock( true );
+		$jobQueueGroupMock = $this->getJobQueueGroupMock();
 
 		$updateRepo->injectJob( $jobQueueGroupMock );
 	}

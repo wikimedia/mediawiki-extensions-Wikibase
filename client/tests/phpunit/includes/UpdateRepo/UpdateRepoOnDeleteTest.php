@@ -86,17 +86,6 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 				} )
 			);
 
-		// Use JobQueueRedis over here, as mocking abstract classes sucks
-		// and it doesn't matter anyway
-		$jobQueue = $this->getMockBuilder( '\JobQueueRedis' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$jobQueueGroupMock->expects( $this->once() )
-			->method( 'get' )
-			->with( $this->equalTo( 'UpdateRepoOnDelete' ) )
-			->will( $this->returnValue( $jobQueue ) );
-
 		return $jobQueueGroupMock;
 	}
 
@@ -128,7 +117,7 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 	public function testInjectJob() {
 		$updateRepo = $this->getNewUpdateRepoOnDelete();
 
-		$jobQueueGroupMock = $this->getJobQueueGroupMock( true );
+		$jobQueueGroupMock = $this->getJobQueueGroupMock();
 
 		$updateRepo->injectJob( $jobQueueGroupMock );
 	}
