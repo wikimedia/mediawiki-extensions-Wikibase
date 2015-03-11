@@ -65,13 +65,13 @@
 	display: none;
 }
 
-
-.wikibase-entitytermsview .wikibase-toolbar-container {
+.wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-label {
 	width: auto;
 }
 
-.wikibase-entitytermsview .wikibase-toolbar-container .wikibase-toolbar-container {
-	position: relative;
+.wikibase-entitytermsview-heading .wikibase-toolbar-container {
+	position: static;
+	float: right;
 }
 
 .wikibase-entitytermsview .wikibase-toolbar {
@@ -80,7 +80,19 @@
 }
 
 .wikibase-entitytermsview .wikibase-entitytermsview-heading-container > .wikibase-toolbar-container {
-	float: right;
 	margin-top: 1.9em;
-	position: static;
+}
+
+.wikibase-entitytermsview-heading .wikibase-toolbar-container .wikibase-toolbar-container {
+	float: left;
+}
+
+.wikibase-entitytermsview-entitytermsforlanguagelistview-toggler.wikibase-sticknode-fixed {
+	background: #fff;
+	width: 100% !important;
+	height: 2em;
+}
+
+.wikibase-entitytermsforlanguagelistview-header.wikibase-sticknode-fixed {
+	top: 2em !important;
 }
