@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_eac4c196",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-11T18:17:40Z",
+      "side": 1,
+      "message": "We\u0027ve decided to keep the default to what it is now until we finish working on the formats and patches. I can fix the phpdoc of course.",
+      "parentUuid": "6e7c4fa4_aa900999",
+      "revId": "61ec3f980f02064806a1d2258e5be7190623c49a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_2afcf9d4",
         "filename": "repo/includes/rdf/RdfSerializer.php",
         "patchSetId": 28
@@ -81,6 +99,24 @@
       "writtenOn": "2015-03-11T18:14:17Z",
       "side": 1,
       "message": "This is never called and has no tests. Please remove it, or add tests for it.",
+      "revId": "61ec3f980f02064806a1d2258e5be7190623c49a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_aabec9f8",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-11T18:17:40Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure it\u0027s called from RdfDumpGenerator, specifically preDump. I\u0027ll look into testing it",
+      "parentUuid": "6e7c4fa4_aae7a93a",
       "revId": "61ec3f980f02064806a1d2258e5be7190623c49a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
