@@ -84,11 +84,11 @@ class MessageSnakFormatterTest extends \MediaWikiTestCase {
 			),
 			array(
 				new PropertySomeValueSnak( $id ),
-				'parse'
+				'<span class="wikibase-snakview-variation-somevaluesnak">parse</span>'
 			),
 			array(
 				new PropertyNoValueSnak( $id ),
-				'parse'
+				'<span class="wikibase-snakview-variation-novaluesnak">parse</span>'
 			),
 		);
 	}
