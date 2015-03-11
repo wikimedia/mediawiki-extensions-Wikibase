@@ -39,13 +39,19 @@ class DispatchingEntityIdParser implements EntityIdParser {
 	public function parse( $idSerialization ) {
 		$this->assertIdIsString( $idSerialization );
 
+		if ( empty( $this->idBuilders ) ) {
+			throw new EntityIdParsingException( 'No id builders are configured' );
+		}
+
 		foreach ( $this->idBuilders as $idPattern => $idBuilder ) {
 			if ( preg_match( $idPattern, $idSerialization ) ) {
 				return $this->buildId( $idBuilder, $idSerialization );
 			}
 		}
 
-		throw $this->newInvalidIdException( $idSerialization );
+		throw new EntityIdParsingException(
+			"The serialization \"$idSerialization\" is not recognized by the configured id builders"
+		);
 	}
 
 	/**
@@ -55,7 +61,7 @@ class DispatchingEntityIdParser implements EntityIdParser {
 	 */
 	private function assertIdIsString( $idSerialization ) {
 		if ( !is_string( $idSerialization ) ) {
-			throw new EntityIdParsingException( '$idSerialization must be a string; got ' . gettype( $idSerialization ) );
+			throw new EntityIdParsingException( '$idSerialization must be a string' );
 		}
 	}
 
@@ -69,21 +75,10 @@ class DispatchingEntityIdParser implements EntityIdParser {
 	private function buildId( $idBuilder, $idSerialization ) {
 		try {
 			return call_user_func( $idBuilder, $idSerialization );
+		} catch ( InvalidArgumentException $ex ) {
+			// Should not happen, but if it does, re-throw the original message
+			throw new EntityIdParsingException( $ex->getMessage() );
 		}
-		catch ( InvalidArgumentException $ex ) {
-			throw $this->newInvalidIdException( $idSerialization );
-		}
-	}
-
-	/**
-	 * @param string $idSerialization
-	 *
-	 * @return EntityIdParsingException
-	 */
-	private function newInvalidIdException( $idSerialization ) {
-		return new EntityIdParsingException(
-			'The provided id serialization "' . $idSerialization . '" is not valid'
-		);
 	}
 
 }
