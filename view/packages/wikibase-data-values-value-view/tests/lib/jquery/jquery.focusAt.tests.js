@@ -128,6 +128,15 @@
 		$( ':focus' ).blur();
 		elem.appendTo( $dom );
 
+		// Check if focussing actually works
+		elem.focus();
+		if( !elem.is( ':focus' ) ) {
+			assert.ok( 'Could not test because focussing does not work.' );
+			return;
+		}
+		elem.blur();
+		assert.ok( !elem.is( ':focus' ) );
+
 		assert.ok(
 			elem.focusAt( 0 ),
 			'Can call focusAt on element in DOM'
@@ -141,11 +150,7 @@
 			);
 		} else {
 			isOk = $( ':focus' ).filter( elem ).length;
-			if( !isOk && 'hidden' in document && document.hidden ) {
-				assert.ok( true, 'Could not test since browser window is not focused' );
-			} else {
-				assert.ok( isOk, 'Focused element has focus set.' );
-			}
+			assert.ok( isOk, 'Focused element has focus set.' );
 		}
 		elem.remove();
 	} );

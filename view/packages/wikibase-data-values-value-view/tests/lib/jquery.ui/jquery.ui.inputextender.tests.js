@@ -117,14 +117,14 @@
 
 	QUnit.test( 'Initialization on focused input', function( assert ) {
 		var $input = $( '<input/>' ).appendTo( $( 'body' ) ).focus();
+		if( !$input.is( ':focus' ) ) {
+			assert.ok( true, 'Could not test since focussing does not work.' );
+			return;
+		}
 		var extender = newTestInputextender( $input );
 		var isOk = extender.extensionIsActive();
 
-		if( !isOk && 'hidden' in document && document.hidden ) {
-			assert.ok( true, 'Could not test since browser window is not focused' );
-		} else {
-			assert.ok( isOk, 'Extension active initially because input has focus.' );
-		}
+		assert.ok( isOk, 'Extension active initially because input has focus.' );
 	} );
 
 	QUnit.test( 'Destruction', 2, function( assert ) {
