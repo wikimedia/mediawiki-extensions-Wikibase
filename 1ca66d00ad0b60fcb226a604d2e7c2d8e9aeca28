@@ -16,6 +16,24 @@
       "revId": "1ca66d00ad0b60fcb226a604d2e7c2d8e9aeca28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_70eadf06",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T10:09:27Z",
+      "side": 1,
+      "message": "Don\u0027t ask me … ask OutputPageJsConfigBuilder::getUserConfigVars. I\u0027ve no clue, but maybe you want to investigate this mess.",
+      "parentUuid": "6e7c4fa4_e7c4fc96",
+      "revId": "1ca66d00ad0b60fcb226a604d2e7c2d8e9aeca28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

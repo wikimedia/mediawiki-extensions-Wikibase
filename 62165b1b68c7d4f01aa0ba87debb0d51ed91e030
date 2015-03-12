@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_b0c7179a",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T10:09:27Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_075498c8",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_c76d4098",
         "filename": "repo/tests/phpunit/includes/View/EntityViewTest.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-11T17:07:21Z",
       "side": 0,
       "message": "Why is $entityInfo removed? This is unrelated, isn\u0027t it?",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5038039b",
+        "filename": "repo/tests/phpunit/includes/View/EntityViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T10:09:27Z",
+      "side": 0,
+      "message": "Yeah, that was just forgotten a year ago.",
+      "parentUuid": "6e7c4fa4_c76d4098",
       "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
