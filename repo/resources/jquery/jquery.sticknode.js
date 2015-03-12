@@ -238,7 +238,7 @@ $.extend( StickyNode.prototype, {
 		this.$node
 		.css( 'left', this._initialAttributes.left )
 		.css( 'top', this._initialAttributes.top )
-		.css( 'width', this._options.autoWidth ? 'auto' : this._initialAttributes.top )
+		.css( 'width', this._options.autoWidth ? 'auto' : this._initialAttributes.width )
 		.css( 'position', this._initialAttributes.position );
 
 		this._initialAttributes.offset = null;
