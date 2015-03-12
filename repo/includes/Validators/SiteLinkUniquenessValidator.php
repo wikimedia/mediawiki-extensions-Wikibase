@@ -41,6 +41,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	public function validateEntity( Entity $entity ) {
 		$dbw = wfGetDB( DB_MASTER );
 
+		// FIXME: LSP violation. Fatal error when non-item is passed
 		$conflicts = $this->siteLinkLookup->getConflictsForItem( $entity, $dbw );
 		$errors = array();
 
