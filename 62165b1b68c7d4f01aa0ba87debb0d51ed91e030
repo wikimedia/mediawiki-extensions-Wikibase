@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_26ed0d23",
+        "filename": "repo/includes/View/EditSectionGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "Yeah, I ended up doing that.",
+      "parentUuid": "6e7c4fa4_9376a538",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_73a8a974",
         "filename": "repo/includes/View/EditSectionGenerator.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-12T13:53:22Z",
       "side": 1,
       "message": "EditLinkGenerator?",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8690a199",
+        "filename": "repo/includes/View/EditSectionGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "Well, actually it\u0027s a class allowed to inject arbitrary HTML at specific places. We use it for injecting our edit toolbars, we could do whatever we want to, though. I\u0027m open about the name, but it\u0027s not about links, so I wouldn\u0027t like that.",
+      "parentUuid": "6e7c4fa4_73a8a974",
       "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_26d42d4b",
+        "filename": "repo/includes/View/EditSectionGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "getAddStatementToGroupEditSection? Seems like a duplication to me (add and edit).",
+      "parentUuid": "6e7c4fa4_139a9566",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_338b111d",
         "filename": "repo/includes/View/EmptyEditSectionGenerator.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2015-03-12T13:53:22Z",
       "side": 1,
       "message": "inline tab.",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_46d92982",
+        "filename": "repo/includes/View/EmptyEditSectionGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_338b111d",
       "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_86be61f9",
+        "filename": "repo/includes/View/EntityTermsView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_f3ab596b",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b3c5e143",
         "filename": "repo/includes/View/StatementGroupListView.php",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2015-03-12T13:53:22Z",
       "side": 1,
       "message": "Three levels of nested function calls? PLease use a local variable for readability and debugger stepping.",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_265aedf9",
+        "filename": "repo/includes/View/StatementGroupListView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_b3c5e143",
       "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_866421b0",
+        "filename": "repo/includes/View/StatementGroupListView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "Yep, Wikibase is on DM 2.5.",
+      "parentUuid": "6e7c4fa4_d3c2dd38",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_33d9d12c",
         "filename": "repo/includes/View/ToolbarEditSectionGenerator.php",
         "patchSetId": 3
@@ -132,6 +258,24 @@
       "writtenOn": "2015-03-12T13:53:22Z",
       "side": 1,
       "message": "That\u0027s kind of odd - why should it not be possible to link to a special page without params?",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2628ad31",
+        "filename": "repo/includes/View/ToolbarEditSectionGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "I just moved this code :-) I figured it was probably due to the special page not being very helpful if it does not have the entity id preloaded. Another way of looking at it could be that you don\u0027t need edit sections if you don\u0027t have an entity id, because nobody\u0027s looking at the HTML anyway, it\u0027s just throwaway stuff. I don\u0027t know, I found it odd, too. I actually think we might pass in the EntityId in the constructor, and if we don\u0027t have one, then we don\u0027t even try to construct a ToolbarEditSectionGenerator, but take an EmptyEditSectionGenerator. I didn\u0027t to change too much at the same time. I could happily live with removing this strange check, though :) I actually simplified it already, because beforehands, some toolbars where not emitted at all, while others where just empty.",
+      "parentUuid": "6e7c4fa4_33d9d12c",
       "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_06e6d113",
+        "filename": "repo/includes/View/ToolbarEditSectionGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "I\u0027d rather pass in a SpecialPageLinker, since this might even be on another wiki. Should be totally flexible. And yeah, testing is horrible :)",
+      "parentUuid": "6e7c4fa4_f3f9197f",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b3cc0168",
         "filename": "repo/tests/phpunit/includes/View/EmptyEditSectionGeneratorTest.php",
         "patchSetId": 3
@@ -166,6 +328,24 @@
       "writtenOn": "2015-03-12T13:53:22Z",
       "side": 1,
       "message": "I don\u0027t think Katie or me should be credited here, the code is all new",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_26be6dd2",
+        "filename": "repo/tests/phpunit/includes/View/EmptyEditSectionGeneratorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_b3cc0168",
       "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_c6ce9986",
+        "filename": "repo/tests/phpunit/includes/View/EmptyEditSectionGeneratorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "Yeah, I hope so, when we have Special:SetStatement :) Actually, this could already be at least two test cases, since the id of the entity to edit is null here, which already is an edge-case.",
+      "parentUuid": "6e7c4fa4_13e855ae",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d3c97d56",
         "filename": "repo/tests/phpunit/includes/View/SiteLinksViewTest.php",
         "patchSetId": 3
@@ -200,6 +398,24 @@
       "writtenOn": "2015-03-12T13:53:22Z",
       "side": 1,
       "message": "could just use an EmptyEditSectionGenerator",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_66a225a6",
+        "filename": "repo/tests/phpunit/includes/View/SiteLinksViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "could, but this way you could assert on the input passed to it. could.",
+      "parentUuid": "6e7c4fa4_d3c97d56",
       "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_86766138",
+        "filename": "repo/tests/phpunit/includes/View/ToolbarEditSectionGeneratorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "a) code\u0027s not new, I just renamed the file\nb) I wrote in ToolbarEditSectionGenerator how I would rather tackle this\nc) This is not only about the name, it\u0027s mainly about getting a URL to the special page",
+      "parentUuid": "6e7c4fa4_d3f09d90",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_13fff563",
         "filename": "repo/tests/phpunit/includes/View/ToolbarEditSectionGeneratorTest.php",
         "patchSetId": 3
@@ -234,6 +468,24 @@
       "writtenOn": "2015-03-12T13:53:22Z",
       "side": 1,
       "message": "Do you expect there to be more test cases in the future? If not, why bother to make a data provider?",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c69bf966",
+        "filename": "repo/tests/phpunit/includes/View/ToolbarEditSectionGeneratorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T15:12:27Z",
+      "side": 1,
+      "message": "Sure, you could leave out the EntityId.",
+      "parentUuid": "6e7c4fa4_13fff563",
       "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
