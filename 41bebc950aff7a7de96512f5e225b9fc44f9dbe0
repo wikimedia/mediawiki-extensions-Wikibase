@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_70cbbf75",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T10:21:14Z",
+      "side": 1,
+      "message": "I don\u0027t really get these two options. Which one do I have to pass to get which behaviour?",
+      "revId": "41bebc950aff7a7de96512f5e225b9fc44f9dbe0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_90f1bbca",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T10:21:14Z",
+      "side": 1,
+      "message": "references",
+      "revId": "41bebc950aff7a7de96512f5e225b9fc44f9dbe0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
