@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9376a538",
+        "filename": "repo/includes/View/EditSectionGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "wow, really? rather seems like you re-did this from scratch...",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_73a8a974",
+        "filename": "repo/includes/View/EditSectionGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "EditLinkGenerator?",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_139a9566",
+        "filename": "repo/includes/View/EditSectionGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "The other method names end in \"EditSection\". This one should too, I think.\n\nActually, I would replace \"EditSection\" with \"EditLink\" everywhere, wven in the class names.",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_338b111d",
+        "filename": "repo/includes/View/EmptyEditSectionGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "inline tab.",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f3ab596b",
+        "filename": "repo/includes/View/EntityTermsView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "This is now specifically for L/D/A edit links. It should be renamed accordingly.",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b3c5e143",
+        "filename": "repo/includes/View/StatementGroupListView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "Three levels of nested function calls? PLease use a local variable for readability and debugger stepping.",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d3c2dd38",
+        "filename": "repo/includes/View/StatementGroupListView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "A bit ugly. Is it still need with the current version of DataModel?",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_33d9d12c",
+        "filename": "repo/includes/View/ToolbarEditSectionGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "That\u0027s kind of odd - why should it not be possible to link to a special page without params?",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f3f9197f",
+        "filename": "repo/includes/View/ToolbarEditSectionGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "Inject a map of canonical to localized special page names here. Avoids global state, makes testing nicer. \n\nYou could even have a public static function in this class to generate that list.",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b3cc0168",
+        "filename": "repo/tests/phpunit/includes/View/EmptyEditSectionGeneratorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "I don\u0027t think Katie or me should be credited here, the code is all new",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_13e855ae",
+        "filename": "repo/tests/phpunit/includes/View/EmptyEditSectionGeneratorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "why bother to make providers if there is just on test case? do you expect there to me more in the future?",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d3c97d56",
+        "filename": "repo/tests/phpunit/includes/View/SiteLinksViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "could just use an EmptyEditSectionGenerator",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d3f09d90",
+        "filename": "repo/tests/phpunit/includes/View/ToolbarEditSectionGeneratorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "All the mess above could be avoided by injecting a mapt of special page names ToolbarEditSectionGeneratorinto",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_13fff563",
+        "filename": "repo/tests/phpunit/includes/View/ToolbarEditSectionGeneratorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T13:53:22Z",
+      "side": 1,
+      "message": "Do you expect there to be more test cases in the future? If not, why bother to make a data provider?",
+      "revId": "62165b1b68c7d4f01aa0ba87debb0d51ed91e030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
