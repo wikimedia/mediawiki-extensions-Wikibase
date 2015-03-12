@@ -294,7 +294,8 @@ class SiteLinksView {
 			htmlspecialchars( $site->getPageUrl( $pageName ) ),
 			htmlspecialchars( $pageName ),
 			$this->getHtmlForBadges( $siteLink ),
-			$site->getLanguageCode()
+			$site->getLanguageCode(),
+			'auto'
 		);
 	}
 
