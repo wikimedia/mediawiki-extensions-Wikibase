@@ -301,7 +301,8 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 					.prepend( mw.wbTemplate( 'wb-badge',
 						data.cssClasses,
 						data.label,
-						itemId
+						itemId,
+						self.options.languageCode
 					) )
 				)
 				.appendTo( $menu );
@@ -370,7 +371,8 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 			mw.wbTemplate( 'wb-badge',
 				badgeId + ' ' + this.options.badges[badgeId],
 				badgeId,
-				badgeId
+				badgeId,
+				this.options.languageCode
 			)
 		);
 	},
@@ -386,7 +388,8 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		var $badge = mw.wbTemplate( 'wb-badge',
 			badgeData.cssClasses,
 			badgeData.label,
-			badgeId
+			badgeId,
+			this.options.languageCode
 		);
 
 		if( $placeholderBadge.length ) {
@@ -403,7 +406,8 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		this.element.append( mw.wbTemplate( 'wb-badge',
 			'empty',
 			this.options.messages['badge-placeholder-title'],
-			''
+			'',
+			this.options.languageCode
 		) );
 	},
 

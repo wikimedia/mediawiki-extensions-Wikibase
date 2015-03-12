@@ -209,7 +209,7 @@ class SiteLinksView {
 	 * @param array[] $siteLinksForTable
 	 * @param bool $isSpecialGroup
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getHtmlForSiteLinks( $siteLinksForTable, $isSpecialGroup ) {
 		$html = '';
@@ -225,7 +225,7 @@ class SiteLinksView {
 	 * @param array $siteLinkForTable
 	 * @param bool $isSpecialGroup
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getHtmlForSiteLink( $siteLinkForTable, $isSpecialGroup ) {
 		/** @var Site $site */
@@ -257,8 +257,8 @@ class SiteLinksView {
 		// and will fail when having too much site links
 		return $this->templateFactory->render( 'wikibase-sitelinkview',
 			htmlspecialchars( $siteId ), // ID used in classes
-			$languageCode,
-			'auto',
+			'', // FIXME: Unused, drop.
+			'', // FIXME: Unused, drop.
 			htmlspecialchars( $siteId ), // displayed site ID
 			$siteName,
 			$this->getHtmlForPage( $siteLink, $site )
@@ -269,7 +269,7 @@ class SiteLinksView {
 	 * @param SiteLink $siteLink
 	 * @param Site $site
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getHtmlForPage( $siteLink, $site ) {
 		$pageName = $siteLink->getPageName();
@@ -277,7 +277,7 @@ class SiteLinksView {
 		return $this->templateFactory->render( 'wikibase-sitelinkview-pagename',
 			htmlspecialchars( $site->getPageUrl( $pageName ) ),
 			htmlspecialchars( $pageName ),
-			$this->getHtmlForBadges( $siteLink ),
+			$this->getHtmlForBadges( $siteLink->getBadges(), $site->getLanguageCode() ),
 			$site->getLanguageCode(),
 			'auto'
 		);
@@ -286,7 +286,7 @@ class SiteLinksView {
 	/**
 	 * @param SiteLink $siteLink
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getHtmlForUnknownSiteLink( $siteLink ) {
 		// FIXME: No need for separate template; Use 'wikibase-sitelinkview' template.
@@ -296,10 +296,16 @@ class SiteLinksView {
 		);
 	}
 
-	private function getHtmlForBadges( SiteLink $siteLink ) {
+	/**
+	 * @param ItemId[] $badges
+	 * @param string $languageCode
+	 *
+	 * @return string HTML
+	 */
+	private function getHtmlForBadges( array $badges, $languageCode ) {
 		$html = '';
 
-		foreach ( $siteLink->getBadges() as $badge ) {
+		foreach ( $badges as $badge ) {
 			$serialization = $badge->getSerialization();
 			$classes = Sanitizer::escapeClass( $serialization );
 			if ( !empty( $this->badgeItems[$serialization] ) ) {
@@ -309,7 +315,8 @@ class SiteLinksView {
 			$html .= $this->templateFactory->render( 'wb-badge',
 				$classes,
 				$this->entityIdFormatter->formatEntityId( $badge ),
-				$badge
+				$badge,
+				$languageCode
 			);
 		}
 
