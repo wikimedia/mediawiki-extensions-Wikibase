@@ -13,7 +13,7 @@ var PARENT = dv.DataValue;
  *
  * @constructor
  *
- * @param {string} iso8601
+ * @param {string} timestamp
  * @param {Object} [options]
  * @param {string} [options.calendarModel=dataValues.TimeValue.CALENDARS.GREGORIAN]
  *        Wikidata URL of the calendar model.
@@ -22,13 +22,13 @@ var PARENT = dv.DataValue;
  * @param {number} [options.after=0]
  * @param {number} [options.timezone=0]
  *
- * @throws {Error} if `iso8601` is not a valid ISO 8601 string.
+ * @throws {Error} if `timestamp` is not a valid YMD-ordered timestamp string resembling ISO 8601.
  */
-var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( iso8601, options ) {
+var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timestamp, options ) {
 	this._time = {};
 
 	try {
-		var matches = /^([+-]?\d+)-(\d+)-(\d+)T(\d{2}):(\d{2}):(\d{2})Z$/.exec( iso8601 );
+		var matches = /^([+-]?\d+)-(\d+)-(\d+)T(\d{2}):(\d{2}):(\d{2})Z$/.exec( timestamp );
 		this._time.year = parseInt( matches[1], 10 );
 		this._time.month = parseInt( matches[2], 10 );
 		this._time.day = parseInt( matches[3], 10 );
@@ -36,7 +36,7 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( iso8601
 		this._time.minute = parseInt( matches[5], 10 );
 		this._time.second = parseInt( matches[6], 10 );
 	} catch( e ) {
-		throw new Error( 'Unable to process supposed ISO8601 string' );
+		throw new Error( 'Unable to process supposed timestamp string' );
 	}
 
 	this._options = {
@@ -105,7 +105,7 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( iso8601
 	 * @return {string}
 	 */
 	getSortKey: function() {
-		return this._getISO8601();
+		return this._getTimestamp();
 	},
 
 	/**
@@ -193,12 +193,12 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( iso8601
 	},
 
 	/**
-	 * Returns date/time as ISO8601 string.
+	 * Returns a YMD-ordered timestamp string resembling ISO 8601.
 	 * @private
 	 *
 	 * @return {string}
 	 */
-	_getISO8601: function() {
+	_getTimestamp: function() {
 		return ( ( this._time.year < 0 ) ? '-' : '+' )
 			+ pad( this._time.year, 11 ) + '-'
 			+ pad( this._time.month, 2 ) + '-'
@@ -219,7 +219,7 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( iso8601
 			before: this._options.before,
 			calendarmodel: this._options.calendarModel,
 			precision: this._options.precision,
-			time: this._getISO8601(),
+			time: this._getTimestamp(),
 			timezone: this._options.timezone
 		};
 	}
