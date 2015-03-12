@@ -33,11 +33,12 @@ class ListSerializerTest extends SerializerBaseTest {
 	}
 
 	/**
+	 * @see SerializerBaseTest::getInstance
+	 *
 	 * @return ListSerializer
 	 */
 	protected function getInstance() {
-		$snakSerializer = new SnakSerializer();
-		return new ListSerializer( 'foo' ,$snakSerializer );
+		return new ListSerializer( 'foo', new SnakSerializer() );
 	}
 
 	/**

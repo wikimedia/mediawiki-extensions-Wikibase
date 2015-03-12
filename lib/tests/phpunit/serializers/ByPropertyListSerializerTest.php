@@ -34,11 +34,12 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 	}
 
 	/**
+	 * @see SerializerBaseTest::getInstance
+	 *
 	 * @return ByPropertyListSerializer
 	 */
 	protected function getInstance() {
-		$snakSerializer = new SnakSerializer();
-		return new ByPropertyListSerializer( 'test', $snakSerializer );
+		return new ByPropertyListSerializer( 'test', new SnakSerializer() );
 	}
 
 	/**

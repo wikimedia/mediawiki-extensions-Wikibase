@@ -34,11 +34,12 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 	}
 
 	/**
+	 * @see SerializerBaseTest::getInstance
+	 *
 	 * @return ReferenceSerializer
 	 */
 	protected function getInstance() {
-		$class = $this->getClass();
-		return new $class( new SnakSerializer() );
+		return new ReferenceSerializer( new SnakSerializer() );
 	}
 
 	/**

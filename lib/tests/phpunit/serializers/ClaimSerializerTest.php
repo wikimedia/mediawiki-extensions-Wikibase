@@ -35,11 +35,12 @@ class ClaimSerializerTest extends SerializerBaseTest {
 	}
 
 	/**
+	 * @see SerializerBaseTest::getInstance
+	 *
 	 * @return ClaimSerializer
 	 */
 	protected function getInstance() {
-		$class = $this->getClass();
-		return new $class( new SnakSerializer() );
+		return new ClaimSerializer( new SnakSerializer() );
 	}
 
 	/**
