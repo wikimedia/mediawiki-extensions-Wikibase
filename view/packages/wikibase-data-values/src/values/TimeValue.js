@@ -303,12 +303,12 @@ SELF.PRECISIONS = [
 	{ id: 'MONTH', text: 'month' },
 	{ id: 'DAY', text: 'day' },
 	{ id: 'HOUR', text: 'hour' },
-	{ id: 'MINUTES', text: 'minute' },
+	{ id: 'MINUTE', text: 'minute' },
 	{ id: 'SECOND', text: 'second' }
 ];
 
 /**
- * Retrieves a precision value by its ID.
+ * Retrieves a numeric precision value by its descriptive string id.
  * @static
  * @since 0.7
  *
@@ -316,11 +316,12 @@ SELF.PRECISIONS = [
  * @return {number|null}
  */
 SELF.getPrecisionById = function( id ) {
-	for( var i = 0; i < SELF.PRECISIONS.length; i++ ) {
+	for( var i = SELF.PRECISIONS.length - 1; i--; ) {
 		if( SELF.PRECISIONS[i].id === id ) {
-			return parseInt( i, 10 );
+			return i;
 		}
 	}
+
 	return null;
 };
 
