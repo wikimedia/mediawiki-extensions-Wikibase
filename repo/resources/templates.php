@@ -241,8 +241,8 @@ HTML;
 <<<HTML
 <li class="wikibase-sitelinkview wikibase-sitelinkview-$1" data-wb-siteid="$1">
 	<span class="wikibase-sitelinkview-siteid-container">
-		<span class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-$1" title="$5">$4</span>
-	</span><span class="wikibase-sitelinkview-link wikibase-sitelinkview-link-$1"><!-- wikibase-sitelinkview-pagename -->$6</span>
+		<span class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-$1" title="$3">$2</span>
+	</span><span class="wikibase-sitelinkview-link wikibase-sitelinkview-link-$1"><!-- wikibase-sitelinkview-pagename -->$4</span>
 </li>
 HTML;
 
