@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_865ae120",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-12T14:50:46Z",
+      "side": 1,
+      "message": "still is somewhat scary, but this is better.  suppose if we resolve T78007 then this is obsolete.",
+      "revId": "ff635e30d1a9459c7656c95a53777b0c254cc6a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
