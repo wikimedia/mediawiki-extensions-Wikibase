@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b3f3a19b",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-12T14:03:05Z",
+      "side": 1,
+      "message": "why use userLanguages[0] instead of wgUserLanguage.  are we sure they are always the same and always what we want, or what is it that we want here? (at least document it)\n\nIt somewhat scares me to rely on array position to get the user language, especially since it comes from wbUserSpecifiedLanguages which is generated in Wikibase.hooks.php in the onOutputPageBeforeHTML hook.",
+      "revId": "34ea79f3f644676c6866ba722426e81593f0273c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
