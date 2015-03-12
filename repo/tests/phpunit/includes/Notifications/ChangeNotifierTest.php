@@ -53,6 +53,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	}
 
 	private function itemSupportsRedirects() {
+		FooBar::fatal();
 		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
 		return $handler->supportsRedirects();
 	}
