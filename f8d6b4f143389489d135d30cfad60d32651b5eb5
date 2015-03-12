@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_73e0a993",
+        "filename": "lib/includes/parsers/EntityIdValueParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T14:24:38Z",
+      "side": 1,
+      "message": "Why is $parser now optional ?!",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_53efad82",
+        "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T14:24:38Z",
+      "side": 1,
+      "message": "why add it here then? where is is still used?",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b3fde13a",
+        "filename": "lib/tests/phpunit/parsers/EntityIdParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T14:24:38Z",
+      "side": 1,
+      "message": "why not just kill this?",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_13e9357b",
+        "filename": "lib/tests/phpunit/parsers/EntityIdParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T14:24:38Z",
+      "side": 1,
+      "message": "Why insist on the empty constructor? The IdParser should be injected.",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_73f74957",
+        "filename": "lib/tests/phpunit/parsers/EraParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T14:24:38Z",
+      "side": 1,
+      "message": "just kill it or throw an exception. Or return an empty string. It\u0027s no longer used, is it?",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
