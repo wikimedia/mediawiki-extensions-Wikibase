@@ -51,8 +51,6 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 				var site = this._getSite();
 				return site ? site.getId() : 'new';
 			},
-			'', // FIXME: Unused, drop.
-			'', // FIXME: Unused, drop.
 			function() {
 				var site = this._getSite();
 				return site ? site.getId() : '';

@@ -252,13 +252,8 @@ class SiteLinksView {
 			$siteName = htmlspecialchars( $this->languageNameLookup->getName( $languageCode ) );
 		}
 
-		// TODO: for non-JS, also set the dir attribute on the link cell;
-		// but do not build language objects for each site since it causes too much load
-		// and will fail when having too much site links
 		return $this->templateFactory->render( 'wikibase-sitelinkview',
 			htmlspecialchars( $siteId ), // ID used in classes
-			'', // FIXME: Unused, drop.
-			'', // FIXME: Unused, drop.
 			htmlspecialchars( $siteId ), // displayed site ID
 			$siteName,
 			$this->getHtmlForPage( $siteLink, $site )
