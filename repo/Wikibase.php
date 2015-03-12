@@ -62,6 +62,14 @@ if ( !defined( 'WBL_VERSION' ) ) {
 	throw new Exception( 'Wikibase depends on the WikibaseLib extension.' );
 }
 
+if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
+	include_once( __DIR__ . '/../view/WikibaseView.php' );
+}
+
+if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
+    throw new Exception( 'Wikibase depends on WikibaseView.' );
+}
+
 call_user_func( function() {
 	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles, $wgMessagesDirs;
 	global $wgAPIModules, $wgSpecialPages, $wgHooks, $wgAvailableRights;
