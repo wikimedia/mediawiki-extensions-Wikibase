@@ -132,4 +132,8 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function testJenkinsDoesNotActuallyRunThis() {
+		$this->assertTrue( false );
+	}
+
 }
