@@ -16,6 +16,24 @@
       "revId": "34ea79f3f644676c6866ba722426e81593f0273c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_665d451a",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-12T14:49:19Z",
+      "side": 1,
+      "message": "getUserLanguage absolutely makes sure that the first value is wgUserLanguage. I think it somewhat makes sense that the most preferred language of the user is the UI language, but I don\u0027t feel strongly about this. I added documentation to getUserLanguages, though.",
+      "parentUuid": "6e7c4fa4_b3f3a19b",
+      "revId": "34ea79f3f644676c6866ba722426e81593f0273c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
