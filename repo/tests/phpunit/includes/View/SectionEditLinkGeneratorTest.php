@@ -162,11 +162,18 @@ class SectionEditLinkGeneratorTest extends MediaWikiTestCase {
 		return array(
 			array( 'SetLabel', array( 'Q1' ), false ),
 			array( 'SetLabel', array(), true ),
-			array( null, array( 'Q1' ), true ),
 		);
 	}
 
 	private function newSectionEditLinkGenerator() {
 		return new SectionEditLinkGenerator( new TemplateFactory( TemplateRegistry::getDefaultInstance() ) );
+	}
+
+	public function testGetEmptyEditSectionContainer() {
+		$generator = $this->newSectionEditLinkGenerator();
+		$this->assertEquals(
+			'<span class="wikibase-toolbar-container"></span>',
+			$generator->getEmptyEditSectionContainer()
+		);
 	}
 }

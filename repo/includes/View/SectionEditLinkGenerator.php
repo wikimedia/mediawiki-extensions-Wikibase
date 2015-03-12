@@ -36,7 +36,7 @@ class SectionEditLinkGenerator {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string|null $specialPageName the special page for the button
+	 * @param string $specialPageName the special page for the button
 	 * @param string[] $specialPageUrlParams Additional URL params for the special page
 	 * @param string $cssClassSuffix Suffix of the css class applied to the toolbar button node
 	 * @param Message $message the message to show on the link
@@ -64,45 +64,27 @@ class SectionEditLinkGenerator {
 	}
 
 	/**
-	 * Returns a toolbar with an "add" link. In JavaScript, an enhanced toolbar will be initialized
-	 * on top of the generated HTML.
-	 *
-	 * @since 0.5
-	 *
-	 * @param string|null $specialPageName the special page for the button
-	 * @param string[] $specialPageUrlParams Additional URL params for the special page
-	 * @param string $cssClassSuffix Suffix of the css class applied to the toolbar button node
-	 * @param Message $message the message to show on the link
-	 * @param bool $enabled can be set to false to display the button disabled
-	 *
+	 * Get an empty edit section container
 	 * @return string
 	 */
-	public function getSingleButtonToolbarHtml(
-		$specialPageName,
-		array $specialPageUrlParams,
-		$cssClassSuffix,
-		Message $message,
-		$enabled = true
-	) {
-		$editUrl = $enabled ? $this->getEditUrl( $specialPageName, $specialPageUrlParams ) : null;
-		$toolbarButton = $this->getToolbarButton( $cssClassSuffix, $message->text(), $editUrl );
+	public function getEmptyEditSectionContainer() {
+		return $this->getEditSectionContainer( '' );
+	}
 
-		return $this->templateFactory->render(
-			'wikibase-toolbar-container',
-			$toolbarButton
-		);
+	private function getEditSectionContainer( $content ) {
+		return $this->templateFactory->render( 'wikibase-toolbar-container', $content );
 	}
 
 	/**
 	 * Get the Url to an edit special page
 	 *
-	 * @param string|null $specialPageName The special page to link to
+	 * @param string $specialPageName The special page to link to
 	 * @param string[] $specialPageUrlParams Additional URL params for the special page
 	 *
 	 * @return string
 	 */
 	private function getEditUrl( $specialPageName, array $specialPageUrlParams ) {
-		if ( $specialPageName === null || empty( $specialPageUrlParams ) ) {
+		if ( empty( $specialPageUrlParams ) ) {
 			return null;
 		}
 

@@ -138,33 +138,22 @@ class StatementGroupListView {
 	private function getHtmlForStatementListView( array $claims ) {
 		$statementViewsHtml = '';
 
-		// TODO: add link to SpecialPage
-		$editToolbarHtml = $this->sectionEditLinkGenerator->getHtmlForEditSection(
-			'',
-			array(),
-			'edit',
-			wfMessage( 'wikibase-edit' )
-		);
+		// This is just an empty toolbar wrapper. It's used as a marker to the JavaScript so that it places
+		// the toolbar at the right position in the DOM. Without this, the JavaScript would just append the
+		// toolbar to the end of the element.
+		// TODO: Create special pages, link to them
+		$toolbarPlaceholderHtml = $this->sectionEditLinkGenerator->getEmptyEditSectionContainer( '' );
 
 		foreach( $claims as $claim ) {
 			$statementViewsHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 				$claim,
-				$editToolbarHtml
+				$toolbarPlaceholderHtml
 			);
 		}
 
-		$addToolbarHtml = $this->templateFactory->render( 'wikibase-toolbar-wrapper',
-			$this->sectionEditLinkGenerator->getSingleButtonToolbarHtml(
-				'',
-				array(),
-				'add',
-				wfMessage( 'wikibase-add' )
-			)
-		);
-
 		return $this->templateFactory->render( 'wikibase-statementlistview',
 			$statementViewsHtml,
-			$addToolbarHtml
+			$toolbarPlaceholderHtml
 		);
 	}
 
