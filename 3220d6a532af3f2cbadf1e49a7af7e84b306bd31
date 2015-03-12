@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a9f32e9b",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-12T17:23:14Z",
+      "side": 1,
+      "message": "it took me a minute to understand the comment.  maybe more clear:\n\n\"Separate the Javascript that is needed for read-only mode from that needed for editing.\"",
+      "revId": "3220d6a532af3f2cbadf1e49a7af7e84b306bd31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
