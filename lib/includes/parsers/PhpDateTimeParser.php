@@ -16,6 +16,15 @@ use ValueParsers\ValueParser;
  * (for example, it pads missing elements with the current date and does actual calculations such as
  * parsing "2015-00-00" as "2014-12-30") this parser should only be used as a fallback.
  *
+ * This class implements heuristics to guess which sequence of digits in the input string
+ * represents the year. The following criteria are used to identify a year:
+ *
+ * - the first number longer than 2 digits or bigger than 59.
+ * - the first number in the string, if it is large than 31.
+ * - the third of three space-separated parts at the beginning of the input, if it is a number.
+ * - the third of three space-separated parts, if it is a number.
+ * - the last number in the string otherwise.
+ *
  * @since 0.5
  *
  * @licence GNU GPL v2+
@@ -125,12 +134,18 @@ class PhpDateTimeParser extends StringValueParser {
 	}
 
 	/**
+	 * Tries to find and pad the sequence of digits in $value that represents the year.
+	 * Refer to the class level documentation for a description of the heuristics used.
+	 *
 	 * @param string &$value A time value string, possibly containing a year. If found, the year in
 	 * the string will be cut and padded to exactly 4 digits.
 	 *
 	 * @return string|null The full year, if found, not cut but padded to at least 4 digits.
 	 */
 	private function fetchAndNormalizeYear( &$value ) {
+		// NOTE: when changing the regex matching below, keep the class level
+		// documentation of the extraction heuristics up to date!
+
 		if ( !preg_match(
 			// Check if the string contains a number longer than 2 digits or bigger than 59.
 			'/(?<!\d)('       //can not be prepended by a digit
@@ -171,6 +186,7 @@ class PhpDateTimeParser extends StringValueParser {
 
 		// Trim irrelevant leading zeros.
 		$year = ltrim( $year, '0' );
+
 		// Pad to at least 4 digits.
 		$year = str_pad( $year, 4, '0', STR_PAD_LEFT );
 
