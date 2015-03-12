@@ -178,7 +178,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 
 		$lang = $this->getOption( ValueFormatter::OPT_LANG );
 		$msg = wfMessage( $key, $amount )->inLanguage( $lang );
-		return $msg->text();
+		return htmlspecialchars( $msg->text() );
 	}
 
 	/**
@@ -192,7 +192,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 
 		$html .= Html::element( 'th', array( 'class' => 'wb-time-' . $fieldName ),
 			$this->getFieldLabel( $fieldName )->text() );
-		$html .= Html::element( 'td', array( 'class' => 'wb-time-' . $fieldName ),
+		$html .= Html::rawElement( 'td', array( 'class' => 'wb-time-' . $fieldName ),
 			$valueHtml );
 
 		$html .= Html::closeElement( 'tr' );
