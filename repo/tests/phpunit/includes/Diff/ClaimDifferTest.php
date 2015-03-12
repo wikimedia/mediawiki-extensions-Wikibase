@@ -111,25 +111,12 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider diffClaimsProvider
-	 *
-	 * @param Claim $oldClaim
-	 * @param Claim $newClaim
-	 * @param ClaimDifference $expected
 	 */
 	public function testDiffClaims( Claim $oldClaim, Claim $newClaim, ClaimDifference $expected ) {
 		$differ = new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) );
 		$actual = $differ->diffClaims( $oldClaim, $newClaim );
 
-		$this->assertInstanceOf( 'Wikibase\Repo\Diff\ClaimDifference', $actual );
-
-		if ( !$expected->equals( $actual ) ) {
-			$this->assertEquals($expected, $actual);
-		}
-
-		$this->assertTrue(
-			$expected->equals( $actual ),
-			'Diffing the claims results in the correct ClaimDifference'
-		);
+		$this->assertTrue( $expected->equals( $actual ) );
 	}
 
 }

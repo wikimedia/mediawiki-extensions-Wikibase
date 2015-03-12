@@ -44,9 +44,12 @@ class ClaimDifference implements Comparable {
 	 * @param Diff|null $referenceChanges
 	 * @param DiffOpChange|null $rankChange
 	 */
-	public function __construct( DiffOpChange $mainSnakChange = null, Diff $qualifierChanges = null,
-								 Diff $referenceChanges = null, DiffOpChange $rankChange = null ) {
-
+	public function __construct(
+		DiffOpChange $mainSnakChange = null,
+		Diff $qualifierChanges = null,
+		Diff $referenceChanges = null,
+		DiffOpChange $rankChange = null
+	) {
 		$this->referenceChanges = $referenceChanges;
 		$this->mainSnakChange = $mainSnakChange;
 		$this->rankChange = $rankChange;
@@ -61,7 +64,7 @@ class ClaimDifference implements Comparable {
 	 * @return Diff
 	 */
 	public function getReferenceChanges() {
-		return $this->referenceChanges === null ? new Diff( array(), false ) : $this->referenceChanges;
+		return $this->referenceChanges ?: new Diff( array(), false );
 	}
 
 	/**
@@ -94,7 +97,7 @@ class ClaimDifference implements Comparable {
 	 * @return Diff
 	 */
 	public function getQualifierChanges() {
-		return $this->qualifierChanges === null ? new Diff( array(), false ) : $this->qualifierChanges;
+		return $this->qualifierChanges ?: new Diff( array(), false );
 	}
 
 	/**
@@ -104,7 +107,7 @@ class ClaimDifference implements Comparable {
 	 *
 	 * @param mixed $target
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $target ) {
 		if ( $target === $this ) {
@@ -115,10 +118,11 @@ class ClaimDifference implements Comparable {
 			return false;
 		}
 
-		return $this->getMainSnakChange() == $target->getMainSnakChange()
-			&& $this->getRankChange() == $target->getRankChange()
-			&& $this->getQualifierChanges() == $target->getQualifierChanges()
-			&& $this->getReferenceChanges() == $target->getReferenceChanges();
+		return $this->mainSnakChange == $target->mainSnakChange
+			&& $this->rankChange == $target->rankChange
+			// FIXME: Use Diff::equals when released.
+			&& $this->getQualifierChanges()->getArrayCopy() == $target->getQualifierChanges()->getArrayCopy()
+			&& $this->getReferenceChanges()->getArrayCopy() == $target->getReferenceChanges()->getArrayCopy();
 	}
 
 	/**
@@ -127,7 +131,7 @@ class ClaimDifference implements Comparable {
 	 *
 	 * @since 0.4
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isAtomic() {
 		$claimChanges = 0;
