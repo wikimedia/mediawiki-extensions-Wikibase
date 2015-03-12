@@ -3,7 +3,7 @@
 namespace Wikibase\Validators;
 
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
  * Validator interface used for validating Entities in a global context.
@@ -24,11 +24,11 @@ interface EntityValidator {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity The entity to validate
+	 * @param EntityDocument $entity The entity to validate
 	 *
 	 * @return Result The validation result. Errors in the Result object
 	 *         will typically be instances of UniquenessViolation.
 	 */
-	public function validateEntity( Entity $entity );
+	public function validateEntity( EntityDocument $entity );
 
 }
