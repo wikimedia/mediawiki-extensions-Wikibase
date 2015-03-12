@@ -145,13 +145,15 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-nothing-found' );
 
 			if ( $languageCode === $this->getLanguage()->getCode() ) {
+				$searchLink = $this->getTitleFor( 'Search' );
 				$this->getOutput()->addWikiMsg(
 					'wikibase-itemdisambiguation-search',
-					urlencode( $label )
+					$searchLink->getFullURL( array( 'search' => $label ) )
 				);
+				$createLink = $this->getTitleFor( 'NewItem' );
 				$this->getOutput()->addWikiMsg(
 					'wikibase-itemdisambiguation-create',
-					urlencode( $label )
+					$createLink->getFullURL( array( 'label' => $label ) )
 				);
 			}
 		} else {
