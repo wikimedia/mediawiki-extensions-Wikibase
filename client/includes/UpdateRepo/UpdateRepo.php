@@ -164,7 +164,7 @@ abstract class UpdateRepo {
 	 * @return bool
 	 */
 	private function delayJobs( JobQueueGroup $jobQueueGroup ) {
-		return $jobQueueGroup->get( $this->getJobName() )->delayedJobsEnabled();
+		return $jobQueueGroup->get( $this->getJobName() )->blahFooBar();
 	}
 
 	/**
