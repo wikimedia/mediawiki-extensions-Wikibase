@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_26fbcd12",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T14:44:39Z",
+      "side": 1,
+      "message": "There is still no documentation what this actually does. \"Extracts a sequence of digits that seems most likely to be the year part of $value, and returns it padded to four digits\" or something...\n\nIdeally, the comment given in the regex would be up here too. This is a nasty heuristic, and we should document how it works, and what the limitations are.",
+      "revId": "fe36bbdea30b64c15ceb41e205cffb3d6eaaa5dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_46004904",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-12T14:44:39Z",
+      "side": 1,
+      "message": "these two lines here are really hard to read, please comment.",
+      "revId": "fe36bbdea30b64c15ceb41e205cffb3d6eaaa5dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
