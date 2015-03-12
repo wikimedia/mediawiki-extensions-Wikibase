@@ -64,7 +64,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			. '<GROUP data="wikipedia" class="">'
 			. '<h3 id="sitelinks-wikipedia">(wikibase-sitelinks-wikipedia)'
 			. '(parentheses: (wikibase-sitelinks-counter: 1, 0, , ))</h3>'
-			. '<LINK id="enwiki" lang="en" title="&lt;LANG&gt;">'
+			. '<LINK id="enwiki" title="&lt;LANG&gt;">'
 			. 'enwiki: <PAGE href="#enwiki" lang="en" dir="auto">Title</PAGE>'
 			. '</LINK>'
 			. '</GROUP>',
@@ -83,7 +83,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			. '<GROUP data="special" class="">'
 			. '<h3 id="sitelinks-special">(wikibase-sitelinks-special)'
 			. '(parentheses: (wikibase-sitelinks-counter: 1, 0, , ))</h3>'
-			. '<LINK id="specialwiki" lang="en" title="(wikibase-sitelinks-sitename-specialwiki)">'
+			. '<LINK id="specialwiki" title="(wikibase-sitelinks-sitename-specialwiki)">'
 			. 'specialwiki: <PAGE href="#specialwiki" lang="en" dir="auto">Title</PAGE>'
 			. '</LINK>'
 			. '</GROUP>',
@@ -132,7 +132,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			'wikibase-listview' => '$1',
 			'wikibase-sitelinkgroupview' => '<GROUP data="$5" class="$7"><h3 id="$1">$2$3</h3>$6$4</GROUP>',
 			'wikibase-sitelinklistview' => '$1',
-			'wikibase-sitelinkview' => '<LINK id="$1" lang="$2" title="$5">$4: $6</LINK>',
+			'wikibase-sitelinkview' => '<LINK id="$1" title="$5">$4: $6</LINK>',
 			'wikibase-sitelinkview-pagename' => '<PAGE href="$1" lang="$4" dir="$5">$2</PAGE>$3',
 			'wikibase-badgeselector' => '$1',
 			'wb-badge' => '<BADGE class="$1" id="$3">$2</BADGE>',

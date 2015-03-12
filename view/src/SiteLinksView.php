@@ -312,8 +312,8 @@ class SiteLinksView {
 		// and will fail when having too much site links
 		return $this->templateFactory->render( 'wikibase-sitelinkview',
 			htmlspecialchars( $siteId ), // ID used in classes
-			$languageCode,
-			'auto',
+			'', // FIXME: Unused, drop.
+			'', // FIXME: Unused, drop.
 			htmlspecialchars( $siteId ), // displayed site ID
 			htmlspecialchars( $siteName ),
 			$this->getHtmlForPage( $siteLink, $site )
