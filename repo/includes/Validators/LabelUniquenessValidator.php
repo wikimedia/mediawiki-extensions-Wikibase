@@ -3,9 +3,10 @@
 namespace Wikibase\Validators;
 
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
@@ -35,19 +36,21 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 	/**
 	 * @see EntityValidator::validate()
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return Result
 	 */
-	public function validateEntity( Entity $entity ) {
-		$labels = $entity->getLabels();
+	public function validateEntity( EntityDocument $entity ) {
+		if ( $entity instanceof FingerprintProvider ) {
+			return $this->duplicateDetector->detectTermConflicts(
+				$entity->getType(),
+				$entity->getFingerprint()->getLabels()->toTextArray(),
+				null,
+				$entity->getId()
+			);
+		}
 
-		return $this->duplicateDetector->detectTermConflicts(
-			$entity->getType(),
-			$labels,
-			null,
-			$entity->getId()
-		);
+		return Result::newSuccess();
 	}
 
 	/**

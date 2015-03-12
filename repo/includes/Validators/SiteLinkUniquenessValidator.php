@@ -4,7 +4,8 @@ namespace Wikibase\Validators;
 
 use ValueValidators\Error;
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -34,19 +35,23 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	/**
 	 * @see EntityValidator::validate()
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return Result
 	 */
-	public function validateEntity( Entity $entity ) {
-		$dbw = wfGetDB( DB_MASTER );
-
-		$conflicts = $this->siteLinkLookup->getConflictsForItem( $entity, $dbw );
+	public function validateEntity( EntityDocument $entity ) {
 		$errors = array();
 
-		/* @var ItemId $ignoreConflictsWith */
-		foreach ( $conflicts as $conflict ) {
-			$errors[] = $this->getConflictError( $conflict );
+		if ( $entity instanceof Item ) {
+			// TODO: do not use global state
+			$db = wfGetDB( DB_MASTER );
+
+			$conflicts = $this->siteLinkLookup->getConflictsForItem( $entity, $db );
+
+			/* @var ItemId $ignoreConflictsWith */
+			foreach ( $conflicts as $conflict ) {
+				$errors[] = $this->getConflictError( $conflict );
+			}
 		}
 
 		return empty( $errors ) ? Result::newSuccess() : Result::newError( $errors );
