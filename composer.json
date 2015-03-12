@@ -43,7 +43,7 @@
 		"wikibase/serialization-javascript": "~2.0",
 
 		"diff/diff": "~1.0",
-		"wikibase/easyrdf_lite": "~0.8.1"
+		"wikibase/easyrdf_lite": "~0.9.0"
 	},
 	"conflict": {
 		"mediawiki/mediawiki": "<1.23"
