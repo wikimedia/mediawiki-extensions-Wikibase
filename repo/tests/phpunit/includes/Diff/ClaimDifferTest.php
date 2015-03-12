@@ -73,7 +73,7 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 				null,
 				null,
 				new Diff( array(
-					new DiffOpAdd( new PropertyNoValueSnak( 2 ) )
+					new DiffOpAdd( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) )
 				), false )
 			)
 		);
@@ -87,7 +87,7 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 					new DiffOpRemove( new PropertyNoValueSnak( 1 ) )
 				), false ),
 				new Diff( array(
-					new DiffOpAdd( new PropertyNoValueSnak( 2 ) )
+					new DiffOpAdd( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) )
 				), false )
 			)
 		);
