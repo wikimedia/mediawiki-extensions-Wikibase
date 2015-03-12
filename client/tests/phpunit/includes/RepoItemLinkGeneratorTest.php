@@ -139,7 +139,7 @@ class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
 		$repoLinker = $this->getRepoLinker();
 		$namespaceChecker = $this->getNamespaceChecker();
 		$entityIdParser = $this->getEntityIdParser();
-
+		Foo::bar();
 		$repoItemLinkGenerator = new RepoItemLinkGenerator(
 			$namespaceChecker,
 			$repoLinker,
