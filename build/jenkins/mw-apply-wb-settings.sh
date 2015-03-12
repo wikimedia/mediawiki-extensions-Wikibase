@@ -34,6 +34,7 @@ function apply_client_settings {
 }
 
 function apply_repo_settings {
+  echo 'if( !$wgResourceLoaderMaxQueryLength ) { $wgResourceLoaderMaxQueryLength = 4096; }' >> LocalSettings.php
   echo '$wgEnableWikibaseRepo = true;' >> LocalSettings.php
   echo '$wgEnableWikibaseClient = false;' >> LocalSettings.php
   echo '$wmgUseWikibaseRepo = true;' >> LocalSettings.php
