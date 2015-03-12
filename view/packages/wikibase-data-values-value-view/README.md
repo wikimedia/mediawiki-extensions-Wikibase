@@ -105,7 +105,7 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
-### 0.14.0 (dev)
+### 0.14.0 (2015-03-12)
 
 ### Breaking changes
 
