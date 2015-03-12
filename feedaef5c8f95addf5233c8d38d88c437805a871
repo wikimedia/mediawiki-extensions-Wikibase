@@ -1,0 +1,344 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3f8bd073",
+        "filename": "repo/includes/rdf/NTriplesRdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "I\u0027m kind of surprised your ok with extending the Turtle one here. Its normal practice in the Java world to frown on extending things that aren\u0027t abstract.  I figured you\u0027d have the same practice.  Its a funny way of thinking, but the mental gymnasics it requires actually helps sometimes.  I\u0027m not sure what the overhead is in PHP though.\n\n\nJust a thought.  Probably a bad one.",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3fd99083",
+        "filename": "repo/includes/rdf/NTriplesRdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "Docs?  s/$s/$s \\/*, $other... *\\// ?",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bf184024",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "This could really use a \"here is how you emit some basic document\" tutorial thing in the docs up there.",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5fa24ca5",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "Might want to note that blank nodes are a reasonably poorly regarded thing.",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5fcb2c75",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "s/Emit/Setup/ ?",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7fc86877",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "I imagine URIs here will have the prefixes checked and resolve.  Maybe s/URI or QName/URI or pre-prefixed URI aka QName/ to highlight that QNames are presumably faster.",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9f1b0421",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "Why not call this method subject?",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7f12a802",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "Call this resourceObject?",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1fd7f429",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "textObject?",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bfe7e00c",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "Probably not a text object, right?",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dfb73cf1",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "Could we use it for dates, like by passing \"1970-0-0\" with the type as xsd:date, for example?",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5fed6cb3",
+        "filename": "repo/includes/rdf/RdfEmitterBase.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "This should have some documentation about _how_ it works.  At first read it looks totally overengineered and then I read how you can call it in a turtle-like way and it made great sense.  So maybe a few sentences here about using states to support this syntax.",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_df0f3c8c",
+        "filename": "repo/includes/rdf/RdfEmitterBase.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "It looks like you keep everything in memory until the call to drain.  Is that true?  I can\u0027t imagine that works for dumps.",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5f79ec28",
+        "filename": "repo/includes/rdf/RdfEmitterBase.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "Silly extra indent :P",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1f00546c",
+        "filename": "repo/includes/rdf/RdfEmitterBase.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "I\u0027m used to putting these at the top because they are what has to be implemented.  Also these all probably deserve docs....",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_df941c3c",
+        "filename": "repo/includes/rdf/RdfEmitterBase.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "Move this into the docs for RdfEmitter.",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dfabbc6b",
+        "filename": "repo/includes/rdf/RdfEmitterBase.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "One more tab?",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9f57845c",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "Why not use the double quotes for this?\n$uri \u003d $this-?quoteURI( $uri );\n$this-\u003eemit( \"@prefix $prefix : $uri\\n\" );\n\nIs easier for me to read.\n\nor maybe\n$this-\u003eemit( \u0027@prefix\u0027, $prefix, \u0027:\u0027, $this-\u003equoteURI( $uri ), \u0027\\n\u0027 );\n?",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3fc8b024",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "Duplicated comment.",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bfd360d6",
+        "filename": "repo/includes/rdf/XmlRdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-12T19:00:17Z",
+      "side": 1,
+      "message": "Lots of code to share!",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
