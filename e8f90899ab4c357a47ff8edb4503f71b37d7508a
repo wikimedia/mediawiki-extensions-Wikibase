@@ -55,6 +55,41 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_51958141",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-12T16:43:47Z",
+      "side": 1,
+      "message": "OTOH we probably want to return string since depending on who calls it it may go to different places. I.e. for dump it handles output by itself.",
+      "parentUuid": "6e7c4fa4_e08ab96d",
+      "revId": "e8f90899ab4c357a47ff8edb4503f71b37d7508a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_517ca11b",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-12T16:43:47Z",
+      "side": 1,
+      "message": "I wonder if we really need to do preg_match each time. It\u0027s pretty expensive.",
+      "revId": "e8f90899ab4c357a47ff8edb4503f71b37d7508a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_e04dd976",
         "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
         "patchSetId": 5
