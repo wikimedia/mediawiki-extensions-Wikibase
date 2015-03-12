@@ -3,9 +3,12 @@
 		"authors": [
 			"Arjunaraoc",
 			"Ravichandra",
-			"Veeven"
+			"Veeven",
+			"రహ్మానుద్దీన్"
 		]
 	},
+	"tooltip-t-wikibase": "ఈ పేజీకి జత చేసి ఉన్న వికీడేటా పేజీకి లంకె",
+	"wikibase-comment-update": "{{WBREPONAME}} మార్చబడింది",
 	"wikibase-comment-sitelink-add": "భాష లంకెను చేర్చారు: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|మార్పు|మార్పులు}}",
 	"wikibase-dataitem": "{{WBREPONAME}} అంశం",

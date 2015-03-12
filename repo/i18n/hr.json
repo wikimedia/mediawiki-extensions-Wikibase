@@ -31,7 +31,7 @@
 	"wikibase-itemdisambiguation-lookup-label": "Oznaka:",
 	"wikibase-itemdisambiguation-submit": "Traži",
 	"wikibase-itemdisambiguation-nothing-found": "Žao nam je, nije nađena tražena međuwikipoveznica.",
-	"wikibase-itemdisambiguation-create": "Možete [{{fullurl:Special:NewItem|label=$1}} stvoriti međuwiki].",
+	"wikibase-itemdisambiguation-create": "Možete [$1 stvoriti međuwiki].",
 	"wikibase-itemdisambiguation-invalid-langcode": "Žao nam je, oznaku jezika koji ste unijeli sustav ne prepoznaje. Molimo rabite valjanu kraticu poput \"hr\".",
 	"wikibase-itemdisambiguation-description": "Vaši unosi trebaju biti tekstualni. Jezik je kratica, poput \"hr\".",
 	"wikibase-newitem-summary": "Svakako provjerite da li [[Special:ItemByTitle|takva stavka već postoji]]!<br/>Ako ste se uključili u projekt nedavno, onda pročitajte Najčešća pitanja po [[Special:MyLanguage/Help:Label|nazivu]] i [[Special:MyLanguage/Help:Description|opisu]].",

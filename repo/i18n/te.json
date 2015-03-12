@@ -3,7 +3,8 @@
 		"authors": [
 			"Chaduvari",
 			"Ravichandra",
-			"Veeven"
+			"Veeven",
+			"రహ్మానుద్దీన్"
 		]
 	},
 	"wikibase-entity-item": "అంశం",
@@ -31,6 +32,7 @@
 	"wikibase-remove": "తొలగించు",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|పద్దు|పద్దులు}}",
 	"wikibase-aliases-empty": "మారుపేర్లేమీ పేర్కొనలేదు.",
+	"wikibase-statementview-rank-normal": "సాధారణ శ్రేణి",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|మూలం|మూలాలు}}",
 	"wikibase-snakview-property-input-placeholder": "లక్షణం",
 	"wikibase-snakview-variations-somevalue-label": "తెలియని విలువ",

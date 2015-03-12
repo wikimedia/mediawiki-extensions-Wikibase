@@ -58,5 +58,6 @@
 	"wikibase-unconnectedpages-format-row": "(на старонцы $1 {{PLURAL:$1|міжмоўная спасылка|міжмоўныя спасылкі|міжмоўных спасылак}})",
 	"wikibase-pageinfo-entity-id": "Ідэнтыфікатар аб’екта ў Вікізьвестках",
 	"wikibase-pageinfo-entity-id-none": "Няма",
-	"wikibase-property-render-error": "Не ўдалося адлюстраваць уласьцівасьць $1: $2"
+	"wikibase-property-render-error": "Не ўдалося адлюстраваць уласьцівасьць $1: $2",
+	"wikibase-otherprojects": "Іншыя праекты"
 }

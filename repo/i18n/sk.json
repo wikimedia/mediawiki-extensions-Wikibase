@@ -33,7 +33,7 @@
 	"special-itembytitle": "Položky podľa názvu",
 	"wikibase-itembytitle-lookup-fieldset": "Vyhľadať položky podľa projektu a názvu",
 	"wikibase-itembytitle-submit": "Hľadať",
-	"wikibase-itembytitle-create": "Tiež môžeš [{{fullurl:Special:NewItem|site=$1&page=$2}} vytvoriť položku].",
+	"wikibase-itembytitle-create": "Tiež môžeš [$1 vytvoriť položku].",
 	"wikibase-itemdisambiguation-lookup-language": "Jazyk:",
 	"wikibase-itemdisambiguation-submit": "Hľadať",
 	"wikibase-itemdisambiguation-description": "Hodnoty použité na vyhľadávanie musia byť kompletné. Identifikátorom je jazyk, napr. „sk“.",

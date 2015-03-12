@@ -102,7 +102,7 @@
 	"wikibase-itemdisambiguation-lookup-label": "Label:",
 	"wikibase-itemdisambiguation-submit": "Cari",
 	"wikibase-itemdisambiguation-nothing-found": "Maaf, item dengan label tersebut tidak ditemukan.",
-	"wikibase-itemdisambiguation-create": "Anda dapat [{{fullurl:Special:NewItem|label=$1}} membuat item ini].",
+	"wikibase-itemdisambiguation-create": "Anda dapat [$1 membuat item ini].",
 	"wikibase-itemdisambiguation-invalid-langcode": "Maaf, kode bahasa yang Anda masukkan tidak dikenal sistem. Gunakan kode yang benar, misalnya \"en\".",
 	"wikibase-itemdisambiguation-description": "Nilai yang digunakan untuk mencari haruslah entri teks lengkap. Bahasa adalah pengidentifikasian, misalnya \"en\".",
 	"special-newproperty": "Buat properti baru",
