@@ -60,7 +60,7 @@
 	"requireCapitalizedConstructors": true,
 	"requireDotNotation": true,
 	"disallowYodaConditions": true,
-	"requireSpaceAfterLineComment": true,
+	"requireSpaceAfterLineComment": false,
 	"disallowNewlineBeforeBlockStatements": true,
 	"validateQuoteMarks": "'",
 
