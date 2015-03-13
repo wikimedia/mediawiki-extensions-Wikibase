@@ -65,6 +65,7 @@ class RdfDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$entities = $jsonTest->makeEntities( $ids );
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityRevisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
+		$propertyLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 
 		$entityLookup->expects( $this->any() )
 		->method( 'getEntity' )
@@ -97,7 +98,8 @@ class RdfDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 				self::URI_DATA,
 				$this->getSiteList(),
 				$entityLookup,
-				$entityRevisionLookup);
+				$entityRevisionLookup,
+				$propertyLookup);
 	}
 
 	public function idProvider() {
