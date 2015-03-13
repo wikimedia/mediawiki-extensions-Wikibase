@@ -225,9 +225,13 @@ class PhpDateTimeParserTest extends StringValueParserTest {
 			'2015-07-101',
 			'10  .10  .2010',
 			'10...10...2010',
+			'00-00-00',
+			'99-00-00',
+			'111-00-00',
 			'2015-00-00',
+			'00000000099-00-00',
 			'00000002015-00-00',
-			// FIXME: Should also fail for '92015-00-00'!
+			'92015-00-00',
 			'Jann 2014',
 			'1980x',
 			'1980s', // supported by MWTimeIsoParser
