@@ -16,6 +16,24 @@
       "revId": "22a726a7df7599a06d489368a5192d9eada2c3c9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f1090835",
+        "filename": "repo/tests/phpunit/includes/Diff/ClaimDifferTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-13T09:24:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_e60f158c",
+      "revId": "22a726a7df7599a06d489368a5192d9eada2c3c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
