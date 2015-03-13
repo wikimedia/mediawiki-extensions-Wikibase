@@ -3,17 +3,17 @@
 namespace Wikibase;
 
 use DataValues\DataValue;
-use EasyRdf_Graph;
-use EasyRdf_Literal;
-use EasyRdf_Namespace;
-use EasyRdf_Resource;
 use SiteList;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\StatementListProvider;
@@ -24,6 +24,7 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\MonolingualTextValue;
 use DataValues\GlobeCoordinateValue;
+use Wikibase\RDF\RdfWriter;
 
 /**
  * RDF mapping for wikibase data model.
@@ -40,7 +41,8 @@ class RdfBuilder {
 	// Change this when changing data format!
 	const FORMAT_VERSION = '0.0.1';
 
-	const ONTOLOGY_BASE_URI = 'http://www.wikidata.org/ontology'; // XXX: Denny made me put the "www" there...
+	//FIXME: this is the wikibase ontology, NOT the wikidata ontology!
+	const ONTOLOGY_BASE_URI = 'http://www.wikidata.org/ontology';
 	const NS_ONTOLOGY = 'wikibase'; // wikibase ontology (shared)
 	const NS_ENTITY = 'entity'; // concept uris
 	const NS_DATA = 'data'; // document uris
@@ -58,19 +60,6 @@ class RdfBuilder {
 	const SCHEMA_ORG_URI = 'http://schema.org/';
 	const CC_URI = 'http://creativecommons.org/ns#';
 
-	const WIKIBASE_STATEMENT_QNAME = 'wikibase:Statement';
-	const WIKIBASE_REFERENCE_QNAME = 'wikibase:Reference';
-	const WIKIBASE_VALUE_QNAME = 'wikibase:Value';
-	const WIKIBASE_RANK_QNAME = 'wikibase:Rank';
-	const WIKIBASE_SOMEVALUE_QNAME = "wikibase:Somevalue";
-	const WIKIBASE_NOVALUE_QNAME = "wikibase:Novalue";
-	const WIKIBASE_RANK_NORMAL = 'wikibase:NormalRank';
-	const WIKIBASE_RANK_PREFERRED = 'wikibase:PreferredRank';
-	const WIKIBASE_RANK_DEPRECATED = 'wikibase:DeprecatedRank';
-	const WIKIBASE_BADGE_QNAME = 'wikibase:Badge';
-
-	const PROV_QNAME = 'prov:wasDerivedFrom';
-
 	const COMMONS_URI = 'http://commons.wikimedia.org/wiki/Special:FilePath/'; //FIXME: get from config
 	const GEO_URI = 'http://www.opengis.net/ont/geosparql#';
 	const PROV_URI = 'http://www.w3.org/ns/prov#';
@@ -78,9 +67,9 @@ class RdfBuilder {
 	const LICENSE = 'http://creativecommons.org/publicdomain/zero/1.0/';
 
 	public static $rankMap = array(
-		Statement::RANK_DEPRECATED => self::WIKIBASE_RANK_DEPRECATED,
-		Statement::RANK_NORMAL => self::WIKIBASE_RANK_NORMAL,
-		Statement::RANK_PREFERRED => self::WIKIBASE_RANK_PREFERRED,
+		Statement::RANK_DEPRECATED => 'DeprecatedRank',
+		Statement::RANK_NORMAL => 'NormalRank',
+		Statement::RANK_PREFERRED => 'PreferredRank',
 	);
 
 	/**
@@ -119,21 +108,53 @@ class RdfBuilder {
 	private $produceWhat;
 
 	/**
+	 * @var RdfWriter
+	 */
+	private $documentWriter;
+
+	/**
+	 * @var RdfWriter
+	 */
+	private $headerWriter;
+
+	/**
+	 * @var RdfWriter
+	 */
+	private $entityWriter;
+
+	/**
+	 * @var RdfWriter
+	 */
+	private $sitelinkWriter;
+
+	/**
+	 * @var RdfWriter
+	 */
+	private $statementWriter;
+
+	/**
+	 * @var RdfWriter
+	 */
+	private $referenceWriter;
+
+	/**
+	 * @var RdfWriter
+	 */
+	private $valueWriter;
+
+	/**
 	 *
 	 * @param SiteList $sites
 	 * @param string $baseUri
 	 * @param string $dataUri
 	 * @param EntityLookup $entityLookup
 	 * @param integer $flavor
-	 * @param EasyRdf_Graph|null $graph
+	 * @param RdfWriter $writer
 	 */
 	public function __construct( SiteList $sites, $baseUri, $dataUri,
-			EntityLookup $entityLookup, $flavor, EasyRdf_Graph $graph = null ) {
-		if ( !$graph ) {
-			$graph = new EasyRdf_Graph();
-		}
+			EntityLookup $entityLookup, $flavor, RdfWriter $writer ) {
 
-		$this->graph = $graph;
+		$this->documentWriter = $writer;
 
 		$this->sites = $sites;
 		$this->baseUri = $baseUri;
@@ -142,6 +163,9 @@ class RdfBuilder {
 		$this->produceWhat = $flavor; //FIXME: use strategy and/or decorator pattern instead!
 
 		$this->namespaces = array (
+				'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
+				'xsd' => 'http://www.w3.org/2001/XMLSchema#',
 				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-" . self::FORMAT_VERSION . "#",
 				self::NS_DIRECT_CLAIM => $this->baseUri . 'assert/',
 				self::NS_VALUE => $this->baseUri . 'value/',
@@ -159,17 +183,24 @@ class RdfBuilder {
 
 		// XXX: Ugh, static. Should go into $this->graph.
 		foreach ( $this->getNamespaces() as $gname => $uri ) {
-			EasyRdf_Namespace::set( $gname, $uri );
+			$this->documentWriter->prefix( $gname, $uri );
 		}
+
+		$this->headerWriter = $this->documentWriter->sub();
+		$this->entityWriter = $this->documentWriter->sub();
+		$this->sitelinkWriter = $this->documentWriter->sub();
+		$this->statementWriter = $this->documentWriter->sub();
+		$this->referenceWriter = $this->documentWriter->sub();
+		$this->valueWriter = $this->documentWriter->sub();
 	}
 
 	/**
-	 * Returns the builder's graph
+	 * Returns the RDF generated by the builder
 	 *
-	 * @return EasyRdf_Graph
+	 * @return string RDF
 	 */
-	public function getGraph() {
-		return $this->graph;
+	public function getRDF() {
+		return $this->documentWriter->drain();
 	}
 
 	/**
@@ -182,56 +213,48 @@ class RdfBuilder {
 	}
 
 	/**
-	 * Returns a qname for the given entity using the given prefix.
-	 * To refer to the entity as such, use self::NS_ENTITY.
-	 * To refer to the description of the entity, use NS_DATA.
-	 * For the different prefixes used for properties in statements,
-	 * refer to the Wikibase RDF mapping spec.
+	 * Returns a local name for the given entity using the given prefix.
 	 *
-	 * @param string $prefix use a self::NS_* constant
 	 * @param EntityId $entityId
 	 *
 	 * @return string
 	 */
-	public function getEntityQName( $prefix, EntityId $entityId ) {
-		return $prefix . ':' . ucfirst( $entityId->getSerialization() );
+	public function getEntityLName( EntityId $entityId ) {
+		return ucfirst( $entityId->getSerialization() );
 	}
 
 	/**
 	 * Returns a qname for the given statement using the given prefix.
 	 *
-	 * @param string $prefix use a self::NS_* constant, usually self::NS_STATEMENT
 	 * @param Statement $statement
 	 *
 	 * @return string
 	 */
-	private function getStatementQName( $prefix, Statement $statement ) {
-		return $prefix . ':' . preg_replace( '/[^\w-]/', '-', $statement->getGuid() );
+	private function getStatementLName( Statement $statement ) {
+		return preg_replace( '/[^\w-]/', '-', $statement->getGuid() );
 	}
 
 	/**
 	 * Returns a qname for the given reference using the given prefix.
 	 *
-	 * @param string $prefix use a self::NS_* constant, usually self::NS_REFERENCE
 	 * @param Reference $ref
 	 *
 	 * @return string
 	 */
-	private function getReferenceQName( $prefix, Reference $ref ) {
-		return $prefix . ':' . $ref->getHash();
+	private function getReferenceLName( Reference $ref ) {
+		return $ref->getHash();
 	}
 
 	/**
-	 * Returns a qname for the given entity type.
-	 * For well known types, these qnames refer to classes from the Wikibase ontology.
+	 * Returns a name for the given entity type.
+	 * For well known types, these names refer to classes from the Wikibase ontology.
 	 *
 	 * @param $type
 	 *
 	 * @return string
 	 */
-	private function getEntityTypeQName( $type ) {
-		// TODO: the list of types is configurable, need to register URIs for extra types!
-		return self::NS_ONTOLOGY . ':' . ucfirst( $type );
+	private function getEntityTypeName( $type ) {
+		return ucfirst( $type );
 	}
 
 	/**
@@ -253,30 +276,6 @@ class RdfBuilder {
 	 */
 	private function shouldProduce( $what ) {
 		return ( $this->produceWhat & $what ) != 0;
-	}
-
-	/**
-	 * Gets a resource object representing the given entity
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return EasyRDF_Resource
-	 */
-	private function getEntityResource( EntityId $entityId ) {
-		$entityQName = $this->getEntityQName( self::NS_ENTITY, $entityId );
-		$entityResource = $this->graph->resource( $entityQName );
-		return $entityResource;
-	}
-
-	/**
-	 * Gets a URL of the rdf description of the given entity
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return string
-	 */
-	public function getDataURL( EntityId $entityId ) {
-		return $this->namespaces[self::NS_DATA] . ucfirst( $entityId->getSerialization() );
 	}
 
 	/**
@@ -323,14 +322,12 @@ class RdfBuilder {
 	 * @param string $timestamp in TS_MW format
 	 */
 	public function addEntityRevisionInfo( EntityId $entityId, $revision, $timestamp ) {
-		$dataURL = $this->getDataURL( $entityId );
-		$dataResource = $this->graph->resource( $dataURL );
-
 		$timestamp = wfTimestamp( TS_ISO_8601, $timestamp );
-		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':version',
-				new EasyRdf_Literal( $revision, null, 'xsd:integer' ) );
-		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified',
-				new EasyRdf_Literal( $timestamp, null, 'xsd:dateTime' ) );
+
+		$this->entityWriter->about( self::NS_DATA, $entityId )
+			->say( self::NS_SCHEMA_ORG, 'version' )->value( $revision, 'xsd', 'integer' )
+			->say( self::NS_SCHEMA_ORG, 'dateModified' )->value( $timestamp, 'xsd', 'dateTime' );
+
 		// TODO: versioned data URI, current-version-of
 	}
 
@@ -340,18 +337,19 @@ class RdfBuilder {
 	 * @param Entity $entity
 	 */
 	private function addEntityMetaData( Entity $entity ) {
-		$entityResource = $this->getEntityResource( $entity->getId() );
-		$entityResource->addResource( 'rdf:type', $this->getEntityTypeQName( $entity->getType() ) );
-		$dataURL = $this->getDataURL( $entity->getId() );
+		$entityLName = $this->getEntityLName( $entity->getId() );
+		$this->entityWriter->about( self::NS_ENTITY, $entityLName )
+			->a( self::NS_ONTOLOGY, $this->getEntityTypeName( $entity->getType() ) );
 
-		$dataResource = $this->graph->resource( $dataURL );
-		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
-		$dataResource->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
+		$this->entityWriter->about( self::NS_DATA, $entity->getId() )
+			->a( self::NS_SCHEMA_ORG, "Dataset" )
+			->say( self::NS_SCHEMA_ORG, 'about' )->is( self::NS_ENTITY, $entityLName );
 
 		if( $this->shouldProduce( RdfProducer::PRODUCE_VERSION_INFO ) ) {
 			// Dumps don't need version/license info for each entity, since it is included in the dump header
-			$dataResource->addResource( self::NS_CC . ':license', self::LICENSE );
-			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
+			$this->entityWriter
+				->say( self::NS_CC, 'license' ) ->is( self::LICENSE ) //FIXME: the license should always be included.
+				->say( self::NS_SCHEMA_ORG, 'softwareVersion' ) ->value( self::FORMAT_VERSION );
 		}
 
 		// TODO: add support for property date types to RDF output
@@ -365,16 +363,19 @@ class RdfBuilder {
 	 * @param Entity $entity
 	 */
 	private function addLabels( Entity $entity ) {
-		$entityResource = $this->getEntityResource( $entity->getId() );
+		$entityLName = $this->getEntityLName( $entity->getId() );
 
 		foreach ( $entity->getLabels() as $languageCode => $labelText ) {
 			if ( !$this->isLanguageIncluded( $languageCode ) ) {
 				continue;
 			}
 
-			$entityResource->addLiteral( 'rdfs:label', $labelText, $languageCode );
-			$entityResource->addLiteral( self::NS_SKOS . ':prefLabel', $labelText, $languageCode );
-			$entityResource->addLiteral( self::NS_SCHEMA_ORG . ':name', $labelText, $languageCode );
+			$this->entityWriter->about( self::NS_ENTITY, $entityLName )
+				->say( 'rdfs', 'label' )->text( $labelText, $languageCode )
+				->say( self::NS_SKOS, 'prefLabel' )->text( $labelText, $languageCode )
+				->say( self::NS_SCHEMA_ORG, 'name' )->text( $labelText, $languageCode );
+
+			//TODO: vocabs to use for labels should be configurable
 		}
 	}
 
@@ -384,14 +385,15 @@ class RdfBuilder {
 	 * @param Entity $entity
 	 */
 	private function addDescriptions( Entity $entity ) {
-		$entityResource = $this->getEntityResource( $entity->getId() );
+		$entityLName = $this->getEntityLName( $entity->getId() );
 
 		foreach ( $entity->getDescriptions() as $languageCode => $description ) {
 			if ( !$this->isLanguageIncluded( $languageCode ) ) {
 				continue;
 			}
 
-			$entityResource->addLiteral( self::NS_SCHEMA_ORG . ':description', $description, $languageCode );
+			$this->entityWriter->about( self::NS_ENTITY, $entityLName )
+				->say( self::NS_SCHEMA_ORG, 'description' )->text( $description, $languageCode );
 		}
 	}
 
@@ -401,7 +403,7 @@ class RdfBuilder {
 	 * @param Entity $entity
 	 */
 	private function addAliases( Entity $entity ) {
-		$entityResource = $this->getEntityResource( $entity->getId() );
+		$entityLName = $this->getEntityLName( $entity->getId() );
 
 		foreach ( $entity->getAllAliases() as $languageCode => $aliases ) {
 			if ( !$this->isLanguageIncluded( $languageCode ) ) {
@@ -409,7 +411,8 @@ class RdfBuilder {
 			}
 
 			foreach ( $aliases as $alias ) {
-				$entityResource->addLiteral( self::NS_SKOS . ':altLabel', $alias, $languageCode );
+				$this->entityWriter->about( self::NS_ENTITY, $entityLName )
+					->say( self::NS_SKOS, 'altLabel' )->text( $alias, $languageCode );
 			}
 		}
 	}
@@ -420,8 +423,9 @@ class RdfBuilder {
 	 * @param Item $item
 	 */
 	private function addSiteLinks( Item $item ) {
-		$entityResource = $this->getEntityResource( $item->getId() );
+		$entityLName = $this->getEntityLName( $item->getId() );
 
+		/** @var SiteLink $siteLink */
 		foreach ( $item->getSiteLinkList() as $siteLink ) {
 			$site = $this->sites->getSite( $siteLink->getSiteId() );
 
@@ -434,14 +438,16 @@ class RdfBuilder {
 			// XXX: ideally, we'd use https if the target site supports it.
 			$baseUrl = $site->getPageUrl( $siteLink->getPageName() );
 			$url = wfExpandUrl( $baseUrl, PROTO_HTTP );
-			$pageRecourse = $this->graph->resource( $url );
 
-			$pageRecourse->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ':Article' );
-			$pageRecourse->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
-			$pageRecourse->addLiteral( self::NS_SCHEMA_ORG . ':inLanguage', $languageCode );
+			$this->sitelinkWriter->about( $url )
+				->a( self::NS_SCHEMA_ORG, 'Article' )
+				->say( self::NS_SCHEMA_ORG, 'about' )->is( self::NS_ENTITY, $entityLName )
+				->say( self::NS_SCHEMA_ORG, 'inLanguage' )->text( $languageCode );
 
 			foreach ( $siteLink->getBadges() as $badge ) {
-				$pageRecourse->addResource( self::WIKIBASE_BADGE_QNAME, $this->getEntityQName( self::NS_ENTITY, $badge ) );
+				$this->sitelinkWriter
+					->say( self::NS_ONTOLOGY, 'Badge' )
+						->is( self::NS_ENTITY, $this->getEntityLName( $badge ) );
 			}
 		}
 
@@ -478,23 +484,31 @@ class RdfBuilder {
 	 * @param Statement $statement
 	 */
 	private function addStatement( EntityId $entityId, Statement $statement ) {
+		$statementLName = $this->getStatementLName( $statement );
+		$this->statementWriter->about( self::NS_STATEMENT, $statementLName )
+			->a( self::NS_ONTOLOGY, 'Statement' );
+
 		$this->addMainSnak( $entityId, $statement, false );
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_QUALIFIERS ) ) {
 			// this assumes statement was added by addMainSnak
-			$statementResource = $this->getStatementResource( $statement );
 			foreach ( $statement->getQualifiers() as $q ) {
-				$this->addSnak( $statementResource, $q, self::NS_QUALIFIER );
+				$this->addSnak( $this->statementWriter, $q, self::NS_QUALIFIER );
 			}
 		}
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_REFERENCES ) ) {
-			$statementResource = $this->getStatementResource( $statement );
 			foreach ( $statement->getReferences() as $ref ) { //FIXME: split body into separate method
-				$refResource = $this->getReferenceResource( $ref );
-				$statementResource->addResource( self::PROV_QNAME, $refResource );
+				//FIXME: the reference mechanism is prone to duplication. De-dupe by hash.
+				$refLName = $this->getReferenceLName( $ref );
+				$this->referenceWriter->about( self::NS_REFERENCE, $refLName )
+					->a( self::NS_ONTOLOGY, 'Reference' );
+
+				$this->statementWriter->about( self::NS_STATEMENT, $statementLName )
+					->say( self::NS_PROV, 'wasDerivedFrom' )->is( self::NS_REFERENCE, $refLName );
+
 				foreach ( $ref->getSnaks() as $refSnak ) {
-					$this->addSnak( $refResource, $refSnak, self::NS_VALUE );
+					$this->addSnak( $this->referenceWriter, $refSnak, self::NS_VALUE );
 				}
 			}
 		}
@@ -510,23 +524,29 @@ class RdfBuilder {
 	private function addMainSnak( EntityId $entityId, Statement $statement, $truthy ) {
 		$snak = $statement->getMainSnak();
 
-		$entityResource = $this->getEntityResource( $entityId );
+		$entityLName = $this->getEntityLName( $entityId );
 
 		if ( $truthy ) { //FIXME: have a separate method for each mode.
-			$this->addSnak( $entityResource, $snak, self::NS_DIRECT_CLAIM, true ); // simple value here
+			$this->entityWriter->about( self::NS_ENTITY, $entityLName );
+			$this->addSnak( $this->entityWriter, $snak, self::NS_DIRECT_CLAIM, true ); // simple value here
 		} else {
-			$propertyQName = $this->getEntityQName( self::NS_ENTITY, $snak->getPropertyId() );
-			$statementResource = $this->getStatementResource( $statement );
-			$entityResource->addResource( $propertyQName, $statementResource );
-			$this->addSnak( $statementResource, $snak, self::NS_VALUE );
+			$propertyLName = $this->getEntityLName( $snak->getPropertyId() );
+			$statementLName = $this->getStatementLName( $statement );
 
-			if ( $this->shouldProduce( RdfProducer::PRODUCE_PROPERTIES ) ) { //FIXME: get rid of PRODUCE_PROPERTIES, add an option to resolveMentionedEntities instead.
+			$this->entityWriter->about( self::NS_ENTITY,  $entityLName )
+				->say( self::NS_ENTITY, $propertyLName )->is( self::NS_STATEMENT, $statementLName );
+
+			$this->statementWriter->about( self::NS_STATEMENT, $statementLName );
+			$this->addSnak( $this->statementWriter, $snak, self::NS_VALUE );
+
+			if ( $this->shouldProduce( RdfProducer::PRODUCE_PROPERTIES ) ) {
 				$this->entityMentioned( $snak->getPropertyId() );
 			}
 
 			$rank = $statement->getRank();
 			if( isset( self::$rankMap[$rank] ) ) {
-				$statementResource->addResource( self::WIKIBASE_RANK_QNAME, self::$rankMap[$rank] );
+				$this->statementWriter->about( self::NS_STATEMENT, $statementLName )
+					->say( self::NS_ONTOLOGY, 'Rank' )->is( self::NS_ONTOLOGY, self::$rankMap[$rank] );
 			} else {
 				wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );
 			}
@@ -534,93 +554,80 @@ class RdfBuilder {
 	}
 
 	/**
-	 * Returns a resource representing the given Statement.
-	 *
-	 * @param Statement $statement
-	 *
-	 * @return EasyRDF_Resource
-	 */
-	private function getStatementResource( Statement $statement ) {
-		$statementQName = $this->getStatementQName( self::NS_STATEMENT, $statement );
-		return $this->graph->resource( $statementQName, array (
-				self::WIKIBASE_STATEMENT_QNAME
-		) );
-	}
-
-	/**
-	 * Returns a resource representing the given Reference.
-	 *
-	 * @param Reference $ref
-	 *
-	 * @return EasyRDF_Resource
-	 */
-	private function getReferenceResource( Reference $ref ) {
-		$refQName = $this->getReferenceQName( self::NS_REFERENCE, $ref );
-		return $this->graph->resource( $refQName, array (
-				self::WIKIBASE_REFERENCE_QNAME
-		) );
-	}
-
-	/**
 	 * Adds the given Snak to the RDF graph.
 	 *
-	 * @param EasyRdf_Resource $target Target node to which we're attaching the snak
+	 * @param RdfWriter $writer The writer to receive the property value (must be primed to expect a predicate).
 	 * @param Snak $snak Snak object
 	 * @param string $propertyNamespace The property namespace for this snak
 	 * @param bool $simpleValue
 	 */
-	private function addSnak( EasyRdf_Resource $target, Snak $snak, $propertyNamespace, $simpleValue = false ) {
+	private function addSnak( RdfWriter $writer, Snak $snak, $propertyNamespace, $simpleValue = false ) {
 		$propertyId = $snak->getPropertyId();
 		switch ( $snak->getType() ) {
 			case 'value' :
-				$this->addStatementValue( $target, $propertyId, $snak->getDataValue(), $propertyNamespace, $simpleValue );
+				/** @var PropertyValueSnak $snak */
+				$this->addStatementValue( $writer, $propertyId, $snak->getDataValue(), $propertyNamespace, $simpleValue );
 				break;
 			case 'somevalue' :
-				$propertyValueQName = $this->getEntityQName( $propertyNamespace, $propertyId );
-				$target->addResource( $propertyValueQName, self::WIKIBASE_SOMEVALUE_QNAME );
+				$propertyValueLName = $this->getEntityLName( $propertyId );
+
+				$writer->say( $propertyNamespace, $propertyValueLName )->is( self::NS_ONTOLOGY, 'Somevalue' );
 				break;
 			case 'novalue' :
-				$propertyValueQName = $this->getEntityQName( $propertyNamespace, $propertyId );
-				$target->addResource( $propertyValueQName, self::WIKIBASE_NOVALUE_QNAME );
+				$propertyValueLName = $this->getEntityLName( $propertyId );
+
+				$writer->say( $propertyNamespace, $propertyValueLName )->is( self::NS_ONTOLOGY, 'Novalue' );
 				break;
+			default:
+				throw new \InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
 		}
 	}
 
 	/**
 	 * Created full data value
-	 * @param EasyRdf_Resource $target Place to attach the value
-	 * @param string $propertyValueQName Relationship name
+	 *
 	 * @param DataValue $value
 	 * @param array $props List of properties
+	 *
+	 * @return string the id of the value node, for use with the self::NS_VALUE namespace.
 	 */
-	private function addExpandedValue( EasyRdf_Resource $target, $propertyValueQName, DataValue $value, array $props) {
-		$node = $this->graph->resource( self::NS_VALUE . ":" . $value->getHash(), self::WIKIBASE_VALUE_QNAME );
-		$target->addResource( $propertyValueQName."-value", $node);
+	private function addExpandedValue( DataValue $value, array $props ) {
+		$valueLName = $value->getHash();
+		$this->valueWriter->about( self::NS_VALUE, $valueLName )->a( self::NS_ONTOLOGY, 'Value' );
+
 		foreach( $props as $prop => $type ) {
+			$propLName = ucfirst( $prop );
 			$getter = "get" . ucfirst( $prop );
 			$data = $value->$getter();
-			if ( $type == 'url' ) { //FIXME: use the logic from addStatementValue recursively here.
-				$node->addResource( $this->getEntityTypeQName( $prop ), $data );
+
+			if ( $type == 'url' ) {
+				$this->valueWriter->about( self::NS_VALUE, $valueLName )
+					->say( self::NS_ONTOLOGY, $propLName )->is( $data );
 				continue;
 			}
-			$node->addLiteral( $this->getEntityTypeQName( $prop ),
-					new \EasyRdf_Literal( $data, null, $type ) ); //FIXME: what happens is $data is not scalar? Avoid hard crash.
+
+			$nsType = $type === null ? null : 'xsd';
+			$this->valueWriter->about( self::NS_VALUE, $valueLName )
+				->say( self::NS_ONTOLOGY, $propLName )->value( $data, $nsType, $type ); //FIXME: what happens is $data is not scalar? Avoid hard crash.
 		}
+
+		return $valueLName;
 	}
 
 	/**
 	 * Adds the value of the given property to the RDF graph.
 	 *
-	 * @param EasyRdf_Resource $target
-	 * @param EntityId $propertyId
+	 * @param RdfWriter $writer The writer to receive the property value (must be primed to expect a predicate).
+	 * @param PropertyId $propertyId
 	 * @param DataValue $value
 	 * @param string $propertyNamespace The property namespace for this snak
 	 * @param bool $simpleValue
 	 */
-	private function addStatementValue( EasyRdf_Resource $target, EntityId $propertyId,
+	private function addStatementValue( RdfWriter $writer, PropertyId $propertyId,
 			DataValue $value, $propertyNamespace, $simpleValue = false ) {
-		$propertyValueQName = $this->getEntityQName( $propertyNamespace, $propertyId );
+		$propertyValueLName = $this->getEntityLName( $propertyId );
 
+		/** @var Property $property */
 		$property = $this->entityLookup->getEntity( $propertyId ); //FIXME: use PropertyDataTypeLookup!
 		$dataType = $property->getDataTypeId();
 		$typeId = $value->getType();
@@ -631,7 +638,9 @@ class RdfBuilder {
 		if( !is_callable( array( $this, $typeId ) ) ) {
 			wfLogWarning( __METHOD__ . ": Unsupported data type: $typeId" );
 		} else {
-			$this->$typeId( $target, $propertyValueQName, $dataType, $value, $simpleValue );
+			//TODO: RdfWriter could support aliases -> instead of passing around $propertyNamespace
+			//      and $propertyValueLName, we could define an alias for that and use e.g. '%property' to refer to them.
+			$this->$typeId( $writer, $propertyNamespace, $propertyValueLName, $dataType, $value, $simpleValue );
 		}
 		// TODO: add special handling like in WDTK?
 		// https://github.com/Wikidata/Wikidata-Toolkit/blob/master/wdtk-rdf/src/main/java/org/wikidata/wdtk/rdf/extensions/SimpleIdExportExtension.java
@@ -640,129 +649,145 @@ class RdfBuilder {
 	/**
 	 * Adds specific value
 	 *
-	 * @param EasyRdf_Resource $target
-	 * @param string $propertyValueQName Property name
+	 * @param RdfWriter $writer The writer to receive the property value (must be primed to expect a predicate).
+	 * @param string $propertyValueNamespace Property value relation namespace
+	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
 	 * @param EntityIdValue $value
 	 * @param bool $simpleValue
 	 */
-	private function addStatementForWikibaseEntityid( EasyRdf_Resource $target, $propertyValueQName, $dataType,
+	private function addStatementForWikibaseEntityid( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
 			EntityIdValue $value, $simpleValue = false ) {
+
 		$entityId = $value->getValue()->getEntityId();
-		$entityQName = $this->getEntityQName( self::NS_ENTITY, $entityId );
-		$entityResource = $this->graph->resource( $entityQName );
-		$target->addResource( $propertyValueQName, $entityResource );
+		$entityLName = $this->getEntityLName( $entityId );
+		$writer->say( $propertyValueNamespace, $propertyValueLName )->is( self::NS_ENTITY, $entityLName );
 		$this->entityMentioned( $entityId );
 	}
 
 	/**
 	 * Adds specific value
 	 *
-	 * @param EasyRdf_Resource $target
-	 * @param string $propertyValueQName Property name
+	 * @param RdfWriter $writer The writer to receive the property value (must be primed to expect a predicate).
+	 * @param string $propertyValueNamespace Property value relation namespace
+	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
 	 * @param StringValue $value
 	 * @param bool $simpleValue
 	 */
-	private function addStatementForString( EasyRdf_Resource $target, $propertyValueQName, $dataType,
+	private function addStatementForString( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
 			StringValue $value, $simpleValue = false ) {
 		if ( $dataType == 'commonsMedia' ) {
-			$target->addResource( $propertyValueQName, $this->getCommonsURI( $value->getValue() ) );
+			$writer->say( $propertyValueNamespace, $propertyValueLName )->is( $this->getCommonsURI( $value->getValue() ) );
 		} elseif ( $dataType == 'url' ) {
-			$target->addResource( $propertyValueQName, $value->getValue() );
+			$writer->say( $propertyValueNamespace, $propertyValueLName )->is( $value->getValue() );
 		} else {
-			$target->addLiteral( $propertyValueQName, new EasyRdf_Literal( $value->getValue() ) );
+			$writer->say( $propertyValueNamespace, $propertyValueLName )->text( $value->getValue() );
 		}
 	}
 
 	/**
 	 * Adds specific value
 	 *
-	 * @param EasyRdf_Resource $target
-	 * @param string $propertyValueQName Property name
+	 * @param RdfWriter $writer The writer to receive the property value (must be primed to expect a predicate).
+	 * @param string $propertyValueNamespace Property value relation namespace
+	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
 	 * @param MonolingualTextValue $value
 	 * @param bool $simpleValue
 	 */
-	private function addStatementForMonolingualtext( EasyRdf_Resource $target, $propertyValueQName, $dataType,
+	private function addStatementForMonolingualtext( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
 			MonolingualTextValue $value, $simpleValue = false ) {
-		$target->addLiteral( $propertyValueQName, $value->getText(), $value->getLanguageCode() );
+		$writer->say( $propertyValueNamespace, $propertyValueLName )->text( $value->getText(), $value->getLanguageCode() );
 	}
 
 	/**
 	 * Adds specific value
 	 *
-	 * @param EasyRdf_Resource $target
-	 * @param string $propertyValueQName Property name
+	 * @param RdfWriter $writer The writer to receive the property value (must be primed to expect a predicate).
+	 * @param string $propertyValueNamespace Property value relation namespace
+	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
 	 * @param TimeValue $value
 	 * @param bool $simpleValue
 	 */
-	private function addStatementForTime( EasyRdf_Resource $target, $propertyValueQName, $dataType,
+	private function addStatementForTime( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
 			TimeValue $value, $simpleValue = false ) {
-		// TODO: we may want to deal with Julian dates here? //FIXME: EasyRdf_Literal_DateTime may fail hard on non-iso dates! Needs error handling / fallback.
-		$target->addLiteral( $propertyValueQName, new \EasyRdf_Literal_DateTime( $value->getTime() ) );
+		// TODO: we may want to deal with Julian dates here? Chinese? Lunar?
+		$timestamp = $value->getTime(); //FIXME: xsd:DateTime is too restrictive! will fail for dates out of the ISO range!
+		$writer->say( $propertyValueNamespace, $propertyValueLName )->value( $timestamp, 'xsd', 'dateTime' );
+
 		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) { //FIXME: register separate generators for different output flavors.
-			$this->addExpandedValue( $target, $propertyValueQName, $value,
-					array(  'time' => 'xsd:dateTime', //FIXME: only true for gregorian!
+
+			$valueLName = $this->addExpandedValue( $value,
+					array(  'time' => 'dateTime', //FIXME: only true for gregorian!
 							// TODO: eventually use identifier here
-							'precision' => 'xsd:integer',
-							'timezone' => 'xsd:integer',
+							'precision' => 'integer',
+							'timezone' => 'integer',
 							'calendarModel' => 'url',
 // TODO: not used currently
-//							'before' => 'xsd:dateTime',
-// 							'after'=> 'xsd:dateTime',
+//							'before' => 'dateTime',
+// 							'after'=> 'dateTime',
 					)
 			);
+
+			$writer->say( $propertyValueNamespace, $propertyValueLName."-value" )->is( self::NS_VALUE, $valueLName );
 		}
 	}
 
 	/**
 	 * Adds specific value
 	 *
-	 * @param EasyRdf_Resource $target
-	 * @param string $propertyValueQName Property name
+	 * @param RdfWriter $writer The writer to receive the property value (must be primed to expect a predicate).
+	 * @param string $propertyValueNamespace Property value relation namespace
+	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
 	 * @param QuantityValue $value
 	 * @param bool $simpleValue
 	 */
-	private function addStatementForQuantity( EasyRdf_Resource $target, $propertyValueQName, $dataType,
+	private function addStatementForQuantity( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
 			QuantityValue $value, $simpleValue = false ) {
-		$target->addLiteral( $propertyValueQName, new \EasyRdf_Literal_Decimal( $value->getAmount() ) );
+		$writer->say( $propertyValueNamespace, $propertyValueLName )->value( $value->getAmount(), 'xsd', 'decimal' );
+
 		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) {
-			$this->addExpandedValue( $target, $propertyValueQName, $value,
-					array(  'amount' => 'xsd:decimal',
-							'upperBound' => 'xsd:decimal',
-							'lowerBound' => 'xsd:decimal',
+			$valueLName = $this->addExpandedValue( $value,
+					array(  'amount' => 'decimal',
+							'upperBound' => 'decimal',
+							'lowerBound' => 'decimal',
 							'unit' => null, //FIXME: it's a URI (or "1"), should be of type url!
 						)
 			);
+
+			$writer->say( $propertyValueNamespace, $propertyValueLName."-value" )->is( self::NS_VALUE, $valueLName );
 		}
 	}
 
 	/**
 	 * Adds specific value
 	 *
-	 * @param EasyRdf_Resource $target
-	 * @param string $propertyValueQName Property name
+	 * @param RdfWriter $writer The writer to receive the property value (must be primed to expect a predicate).
+	 * @param string $propertyValueNamespace Property value relation namespace
+	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
 	 * @param GlobeCoordinateValue $value
 	 * @param bool $simpleValue
 	 */
-	private function addStatementForGlobecoordinate( EasyRdf_Resource $target, $propertyValueQName, $dataType,
+	private function addStatementForGlobecoordinate( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
 			GlobeCoordinateValue $value, $simpleValue = false ) {
 
-		$target->addLiteral( $propertyValueQName,
-				new EasyRdf_Literal( "Point({$value->getLatitude()} {$value->getLongitude()})",
-									null, self::NS_GEO . ":wktLiteral" ) );
+		$point = "Point({$value->getLatitude()} {$value->getLongitude()})";
+		$writer->say( $propertyValueNamespace, $propertyValueLName )->value( $point, self::NS_GEO, "wktLiteral" );
+
 		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) {
-			$this->addExpandedValue( $target, $propertyValueQName, $value,
-					array(  'latitude' => 'xsd:decimal',
-							'longitude' => 'xsd:decimal',
-							'precision' => 'xsd:decimal',
+			$valueLName = $this->addExpandedValue( $value,
+					array(  'latitude' => 'decimal',
+							'longitude' => 'decimal',
+							'precision' => 'decimal',
 							'globe' => 'url',
 						)
 			);
+
+			$writer->say( $propertyValueNamespace, $propertyValueLName . "-value" )->is( self::NS_VALUE, $valueLName );
 		}
 	}
 
@@ -829,11 +854,10 @@ class RdfBuilder {
 	 */
 	public function addDumpHeader( $ts = 0 ) {
 		// TODO: this should point to "this document"
-		$dataResource = $this->graph->resource( $this->getEntityTypeQName( 'Dump' ) );
-		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
-		$dataResource->addResource( self::NS_CC . ':license', self::LICENSE );
-		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
-		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified',
-				new EasyRdf_Literal( wfTimestamp( TS_ISO_8601, $ts ), null, 'xsd:dateTime' ) );
+		$this->documentWriter->about( self::NS_ONTOLOGY, 'Dump' )
+			->a( self::NS_SCHEMA_ORG, "Dataset" )
+			->say( self::NS_CC, 'license' )->is( self::LICENSE )
+			->say( self::NS_SCHEMA_ORG, 'softwareVersion' )->value( self::FORMAT_VERSION )
+			->say( self::NS_SCHEMA_ORG, 'dateModified' )->value( wfTimestamp( TS_ISO_8601, $ts ), 'xsd', 'dateTime'  );
 	}
 }
