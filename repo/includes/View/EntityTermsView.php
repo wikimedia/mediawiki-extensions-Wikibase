@@ -30,7 +30,7 @@ class EntityTermsView {
 	private $templateFactory;
 
 	/**
-	 * @var SectionEditLinkGenerator|null
+	 * @var EditSectionGenerator|null
 	 */
 	private $sectionEditLinkGenerator;
 
@@ -46,13 +46,13 @@ class EntityTermsView {
 
 	/**
 	 * @param TemplateFactory $templateFactory
-	 * @param SectionEditLinkGenerator|null $sectionEditLinkGenerator
+	 * @param EditSectionGenerator|null $sectionEditLinkGenerator
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param string $languageCode
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
-		SectionEditLinkGenerator $sectionEditLinkGenerator = null,
+		EditSectionGenerator $sectionEditLinkGenerator = null,
 		LanguageNameLookup $languageNameLookup,
 		$languageCode
 	) {
@@ -67,7 +67,6 @@ class EntityTermsView {
 	 * @param EntityId|null $entityId the id of the fingerprint's entity
 	 * @param string $termBoxHtml
 	 * @param TextInjector $textInjector
-	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
@@ -75,8 +74,7 @@ class EntityTermsView {
 		Fingerprint $fingerprint,
 		EntityId $entityId = null,
 		$termBoxHtml,
-		TextInjector $textInjector,
-		$editable = true
+		TextInjector $textInjector
 	) {
 		$labels = $fingerprint->getLabels();
 		$descriptions = $fingerprint->getDescriptions();
@@ -93,7 +91,7 @@ class EntityTermsView {
 			$textInjector->newMarker(
 				'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
 			),
-			$this->getHtmlForEditSection( 'SetLabelDescriptionAliases', $entityId, $editable )
+			$this->getHtmlForLabelDescriptionAliasesEditSection( $entityId )
 		);
 	}
 
@@ -274,28 +272,18 @@ class EntityTermsView {
 	}
 
 	/**
-	 * @param string $specialPageName
 	 * @param EntityId|null $entityId
-	 * @param bool $editable
-	 * @param string $action by default 'edit', for aliases this could also be 'add'
 	 *
 	 * @return string
 	 */
-	private function getHtmlForEditSection(
-		$specialPageName,
-		EntityId $entityId = null,
-		$editable,
-		$action = 'edit'
-	) {
-		if ( $entityId === null || !$editable || is_null( $this->sectionEditLinkGenerator ) ) {
+	private function getHtmlForLabelDescriptionAliasesEditSection( EntityId $entityId = null ) {
+		if ( is_null( $this->sectionEditLinkGenerator ) ) {
 			return '';
 		}
 
-		return $this->sectionEditLinkGenerator->getHtmlForEditSection(
-			$specialPageName,
-			array( $entityId->getSerialization(), $this->languageCode ),
-			$action,
-			wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )
+		return $this->sectionEditLinkGenerator->getLabelDescriptionAliasesEditSection(
+			$this->languageCode,
+			$entityId
 		);
 	}
 

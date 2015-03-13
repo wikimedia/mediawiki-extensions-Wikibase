@@ -44,7 +44,7 @@ abstract class EntityView {
 	/**
 	 * @var bool
 	 */
-	protected $editable;
+	private $editable;
 
 	/**
 	 * @var TextInjector
@@ -97,8 +97,6 @@ abstract class EntityView {
 	 */
 	public function getHtml( EntityRevision $entityRevision ) {
 		$entity = $entityRevision->getEntity();
-
-		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 
 		$entityId = $entity->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 
@@ -179,8 +177,7 @@ if ( $ ) {
 			$entity->getFingerprint(),
 			$entity->getId(),
 			$termBoxHtml,
-			$this->textInjector,
-			$this->editable
+			$this->textInjector
 		);
 	}
 

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Repo\View\SectionEditLinkGenerator;
+use Wikibase\Repo\View\EditSectionGenerator;
 use Wikibase\Repo\View\SiteLinksView;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
@@ -194,7 +194,7 @@ class SiteLinksViewTest extends \MediaWikiTestCase {
 		return new SiteLinksView(
 			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
 			$this->newSiteList(),
-			$this->getSectionEditLinkGeneratorMock(),
+			$this->getEditSectionGeneratorMock(),
 			$this->getEntityLookupMock(),
 			new LanguageNameLookup(),
 			array(
@@ -207,28 +207,12 @@ class SiteLinksViewTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return SectionEditLinkGenerator
+	 * @return EditSectionGenerator
 	 */
-	private function getSectionEditLinkGeneratorMock() {
-		$sectionEditLinkGenerator = $this->getMockBuilder( 'Wikibase\Repo\View\SectionEditLinkGenerator' )
-			->disableOriginalConstructor()
-			->getMock();
+	private function getEditSectionGeneratorMock() {
+		$editSectionGenerator = $this->getMock( 'Wikibase\Repo\View\EditSectionGenerator' );
 
-		$sectionEditLinkGenerator->expects( $this->any() )
-			->method( 'getEditUrl' )
-			->will( $this->returnValue( 'editUrl' ) );
-
-		$sectionEditLinkGenerator->expects( $this->any() )
-			->method( 'getHtmlForEditSection' )
-			->will( $this->returnCallback( function( $url, $cssClassSuffix, $msg, $tag, $enabled ) {
-				if ( $enabled ) {
-					return '<a class="wikibase-toolbarbutton-enabled">Edit link</a>';
-				} else {
-					return '<a class="wikibase-toolbarbutton-disabled">Disabled edit link</a>';
-				}
-			} ) );
-
-		return $sectionEditLinkGenerator;
+		return $editSectionGenerator;
 	}
 
 	/**

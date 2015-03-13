@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\View;
 
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Template\TemplateFactory;
 
@@ -28,9 +30,9 @@ class StatementGroupListView {
 	private $propertyIdFormatter;
 
 	/**
-	 * @var SectionEditLinkGenerator
+	 * @var EditSectionGenerator
 	 */
-	private $sectionEditLinkGenerator;
+	private $editSectionGenerator;
 
 	/**
 	 * @var ClaimHtmlGenerator
@@ -40,17 +42,17 @@ class StatementGroupListView {
 	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityIdFormatter $propertyIdFormatter
-	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
+	 * @param EditSectionGenerator $sectionEditLinkGenerator
 	 * @param ClaimHtmlGenerator $claimHtmlGenerator
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityIdFormatter $propertyIdFormatter,
-		SectionEditLinkGenerator $sectionEditLinkGenerator,
+		EditSectionGenerator $sectionEditLinkGenerator,
 		ClaimHtmlGenerator $claimHtmlGenerator
 	) {
 		$this->propertyIdFormatter = $propertyIdFormatter;
-		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
+		$this->editSectionGenerator = $sectionEditLinkGenerator;
 		$this->claimHtmlGenerator = $claimHtmlGenerator;
 		$this->templateFactory = $templateFactory;
 	}
@@ -122,38 +124,37 @@ class StatementGroupListView {
 	 */
 	private function getHtmlForStatementGroupView( array $claims ) {
 		$propertyId = $claims[0]->getMainSnak()->getPropertyId();
+		$addStatementHtml = $this->editSectionGenerator->getAddStatementToGroupSection( $propertyId );
 
 		return $this->templateFactory->render(
 			'wikibase-statementgroupview',
 			$this->propertyIdFormatter->formatEntityId( $propertyId ),
-			$this->getHtmlForStatementListView( $claims ),
+			$this->getHtmlForStatementListView( $claims, $addStatementHtml ),
 			$propertyId->getSerialization()
 		);
 	}
 
 	/**
 	 * @param Claim[] $claims
+	 * @param string $addStatementHtml
 	 * @return string
 	 */
-	private function getHtmlForStatementListView( array $claims ) {
+	private function getHtmlForStatementListView( array $claims, $addStatementHtml ) {
 		$statementViewsHtml = '';
 
-		// This is just an empty toolbar wrapper. It's used as a marker to the JavaScript so that it places
-		// the toolbar at the right position in the DOM. Without this, the JavaScript would just append the
-		// toolbar to the end of the element.
-		// TODO: Create special pages, link to them
-		$toolbarPlaceholderHtml = $this->sectionEditLinkGenerator->getEmptyEditSectionContainer( '' );
 
 		foreach( $claims as $claim ) {
 			$statementViewsHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 				$claim,
-				$toolbarPlaceholderHtml
+				$this->editSectionGenerator->getStatementEditSection(
+					$claim instanceof Statement ? $claim : new Statement( $claim )
+				)
 			);
 		}
 
 		return $this->templateFactory->render( 'wikibase-statementlistview',
 			$statementViewsHtml,
-			$toolbarPlaceholderHtml
+			$addStatementHtml
 		);
 	}
 

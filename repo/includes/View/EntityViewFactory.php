@@ -9,9 +9,9 @@ use SiteStore;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdFormatterFactory;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
@@ -30,11 +30,6 @@ class EntityViewFactory {
 	 * @var OutputFormatSnakFormatterFactory
 	 */
 	private $snakFormatterFactory;
-
-	/**
-	 * @var SectionEditLinkGenerator
-	 */
-	private $sectionEditLinkGenerator;
 
 	/**
 	 * @var EntityIdFormatterFactory
@@ -116,9 +111,6 @@ class EntityViewFactory {
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
 		$this->templateFactory = $templateFactory;
-		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator(
-			$this->templateFactory
-		);
 		$this->languageNameLookup = $languageNameLookup;
 	}
 
@@ -155,11 +147,15 @@ class EntityViewFactory {
 		LanguageFallbackChain $fallbackChain = null,
 		$editable = true
 	 ) {
-		$entityTermsView = $this->newEntityTermsView( $languageCode );
+		$editSectionGenerator = $editable ? new ToolbarEditSectionGenerator(
+			$this->templateFactory
+		) : new EmptyEditSectionGenerator();
+		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
 		$statementGroupListView = $this->newStatementGroupListView(
 			$languageCode,
 			$fallbackChain,
-			$labelLookup
+			$labelLookup,
+			$editSectionGenerator
 		);
 
 		// @fixme all that seems needed in EntityView is language code and dir.
@@ -171,7 +167,7 @@ class EntityViewFactory {
 				$siteLinksView = new SiteLinksView(
 					$this->templateFactory,
 					$this->siteStore->getSites(),
-					$this->sectionEditLinkGenerator,
+					$editSectionGenerator,
 					$this->entityLookup,
 					$this->languageNameLookup,
 					$this->badgeItems,
@@ -206,13 +202,15 @@ class EntityViewFactory {
 	 * @param string $languageCode
 	 * @param LanguageFallbackChain|null $fallbackChain
 	 * @param LabelLookup $labelLookup
+	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return StatementGroupListView
 	 */
 	private function newStatementGroupListView(
 		$languageCode,
 		LanguageFallbackChain $fallbackChain = null,
-		LabelLookup $labelLookup
+		LabelLookup $labelLookup,
+		EditSectionGenerator $editSectionGenerator
 	) {
 		$propertyIdFormatter = $this->getPropertyIdFormatter( $labelLookup );
 
@@ -230,20 +228,21 @@ class EntityViewFactory {
 		return new StatementGroupListView(
 			$this->templateFactory,
 			$propertyIdFormatter,
-			$this->sectionEditLinkGenerator,
+			$editSectionGenerator,
 			$claimHtmlGenerator
 		);
 	}
 
 	/**
 	 * @param string $languageCode
+	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return EntityTermsView
 	 */
-	private function newEntityTermsView( $languageCode ) {
+	private function newEntityTermsView( $languageCode, EditSectionGenerator $editSectionGenerator ) {
 		return new EntityTermsView(
 			$this->templateFactory,
-			$this->sectionEditLinkGenerator,
+			$editSectionGenerator,
 			$this->languageNameLookup,
 			$languageCode
 		);
