@@ -101,8 +101,7 @@ abstract class RdfEmitterBase implements RdfEmitter {
 	 * Emit a document footer. Must be paired with a prior call to start().
 	 */
 	final public function drain() {
-		$this->state( 'document' );
-		//$this->state( 'finish' ); //TODO
+		$this->state( 'drain' );
 
 		$this->flattenBuffer();
 
@@ -110,6 +109,16 @@ abstract class RdfEmitterBase implements RdfEmitter {
 		$this->buffer = array();
 
 		return $rdf;
+	}
+
+	/**
+	 * @see RdfEmitter::reset
+	 *
+	 * @note Does not reset the blank node counter, because it may be shared.
+	 */
+	public function reset() {
+		$this->buffer = array();
+		$this->state = 'start'; //TODO: may depend on role
 	}
 
 	/**
@@ -187,8 +196,8 @@ abstract class RdfEmitterBase implements RdfEmitter {
 				$this->transitionObject();
 				break;
 
-			case 'finish':
-				$this->transitionFinish();
+			case 'drain':
+				$this->transitionDrain();
 				break;
 
 			default:
@@ -207,10 +216,10 @@ abstract class RdfEmitterBase implements RdfEmitter {
 				$this->beginDocument();
 				break;
 
-			case 'object':
+			case 'object': // when injecting a sub-document
 				$this->finishObject( 'last' );
 				$this->finishPredicate( 'last' );
-				$this->finishSubject( 'last' );
+				$this->finishSubject(); //FIXME: might be last, we don't know yet.
 				break;
 
 			default:
@@ -279,9 +288,20 @@ abstract class RdfEmitterBase implements RdfEmitter {
 		}
 	}
 
-	private function transitionFinish() {
+	private function transitionDrain() {
 		switch ( $this->state ) {
+			case 'start':
+				break;
+
 			case 'document':
+				$this->finishDocument();
+				break;
+
+			case 'object':
+
+				$this->finishObject( 'last' );
+				$this->finishPredicate( 'last' );
+				$this->finishSubject( 'last' );
 				$this->finishDocument();
 				break;
 

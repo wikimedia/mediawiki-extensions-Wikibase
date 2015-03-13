@@ -2,6 +2,6 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:acme="http://acme.test/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 	<rdf:Description rdf:about="http://foobar.test/Bananas">
 		<rdf:type rdf:resource="http://foobar.test/Fruit"/>
-		<acme:weight rdf:datatype="xsd:Number">5</acme:weight>
+		<acme:weight rdf:datatype="http://www.w3.org/2001/XMLSchema#Number">5</acme:weight>
 	</rdf:Description>
 </rdf:RDF>

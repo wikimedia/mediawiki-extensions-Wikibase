@@ -2,6 +2,6 @@
 @prefix contact : <http://www.w3.org/2000/10/swap/pim/contact#> .
 
 <http://www.w3.org/People/EM/contact#me> rdf:type contact:Person ;
-	contact:fullName Eric Miller ;
+	contact:fullName "Eric Miller" ;
 	contact:mailbox <mailto:em@w3.org> ;
 	contact:personalTitle "Dr." .

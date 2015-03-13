@@ -26,7 +26,8 @@ class TurtleRdfEmitter extends RdfEmitterBase {
 			return $s;
 		}
 
-		return $this->quoter->quoteResource( $s );
+		//FIXME: nasty hack for little benefit, move shorthand resolution to RdfEmitterBase
+		return call_user_func_array( array( $this->quoter, 'quoteResource' ), func_get_args() );
 	}
 
 	protected function emitPrefix( $prefix, $uri ) {
@@ -102,4 +103,10 @@ class TurtleRdfEmitter extends RdfEmitterBase {
 		return $emitter;
 	}
 
+	/**
+	 * @return string a MIME type
+	 */
+	public function getMimeType() {
+		return 'text/turtle; charset=UTF-8';
+	}
 }

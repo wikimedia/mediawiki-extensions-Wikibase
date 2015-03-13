@@ -29,10 +29,19 @@ class NTriplesRdfEmitter extends RdfEmitterBase {
 		//NOTE: The RDF 1.1 spec of N-Triples allows full UTF-8, so escaping would not be required.
 		//      However, as of 2015, many consumers of N-Triples still expect non-ASCII characters
 		//      to be escaped.
+		//NOTE: if this is changed, getMimeType must be changed accordingly.
 		$this->quoter->setEscapeUnicode( true );
 
 		$this->quoter->registerShorthand( 'a', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' );
 		$this->quoter->registerPrefix( 'rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' );
+	}
+
+	public function reset() {
+		parent::reset();
+
+		$this->quoter = new N3Quoter(); // FIXME: if the quoter was shared, this may cause inconsistencies
+		$this->currentPredicate = null;
+		$this->currentSubject = null;
 	}
 
 	private function quoteResource( $s ) {
@@ -94,6 +103,15 @@ class NTriplesRdfEmitter extends RdfEmitterBase {
 		$emitter = new self( $role, $labeler, $this->quoter );
 
 		return $emitter;
+	}
+
+	/**
+	 * @return string a MIME type
+	 */
+	public function getMimeType() {
+		//NOTE: Add charset=UTF-8 if and when the constructor configures $this->quoter
+		//      to emit utf-8.
+		return 'application/n-triples';
 	}
 
 }

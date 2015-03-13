@@ -56,6 +56,33 @@ abstract class RdfEmitterTestBase extends \PHPUnit_Framework_TestCase{
 	 */
 	protected abstract function newEmitter();
 
+	public function testGetMimeType() {
+		$emitter = $this->newEmitter();
+
+		$this->assertRegExp( '!^[-\w]+/[-+\w]+; charset=UTF-8!', $emitter->getMimeType() );
+	}
+
+	public function testReset() {
+		$emitter = $this->newEmitter();
+
+		$emitter->start();
+		$emitter->about( 'http://foobar.test/Bananas' )
+			->say( 'a' )->is( 'http://foobar.test/Fruit' );
+
+		$emitter->about( 'http://foobar.test/Bahamas' );
+		// emitter left in limbo, expecting a predicate
+
+		$emitter->reset();
+		$this->assertEmpty( $emitter->drain() );
+
+		$emitter->reset();
+		$emitter->start();
+
+		// state should be cleared
+		$emitter->about( 'http://foobar.test/Brahmans' )
+			->say( 'a' )->is( 'http://foobar.test/Fruit' );
+	}
+
 	public function testTwoTriples() {
 		$emitter = $this->newEmitter();
 
@@ -167,7 +194,7 @@ abstract class RdfEmitterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$emitter->about( 'http://www.w3.org/People/EM/contact#me' )
 			->say( 'rdf:type' )->is( 'contact:Person' )
-			->say( 'contact:fullName' )->is( 'Eric Miller' )
+			->say( 'contact:fullName' )->text( 'Eric Miller' )
 			->say( 'contact:mailbox' )->is( 'mailto:em@w3.org' )
 			->say( 'contact:personalTitle' )->text( 'Dr.' );
 

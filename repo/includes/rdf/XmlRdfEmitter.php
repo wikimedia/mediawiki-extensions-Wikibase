@@ -20,6 +20,13 @@ class XmlRdfEmitter extends RdfEmitterBase {
 		$this->namespaces['rdf'] = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 	}
 
+	public function reset() {
+		parent::reset();
+
+		$this->namespaces = array();
+		$this->currentPredicate = null;
+	}
+
 	private function escape( $text ) {
 		return htmlspecialchars( $text, ENT_QUOTES );
 	}
@@ -65,11 +72,15 @@ class XmlRdfEmitter extends RdfEmitterBase {
 	 * prefix().
 	 *
 	 * @param string $name the attribute name (without namespace)
-	 * @param string $target the target (IRI or QName)
+	 * @param string|null $target the target (IRI or QName)
 	 *
 	 * @return string[]
 	 */
 	private function getTargetAttributes( $name, $target ) {
+		if ( $target === null | $target === '' ) {
+			return array();
+		}
+
 		// handle blank
 		if ( strlen( $target ) > 0 && $target[0] === '_' && $target[1] === ':' ) {
 			$name = 'nodeID';
@@ -157,7 +168,7 @@ class XmlRdfEmitter extends RdfEmitterBase {
 	}
 
 	protected function emitText( $text, $language = null ) {
-		$attr = empty( $language ) ? array() : array( 'lang' => $language );
+		$attr = empty( $language ) ? array() : array( 'xml:lang' => $language );
 
 		$this->emit( "\t\t" );
 		$this->tag( $this->currentPredicate, $attr );
@@ -167,7 +178,7 @@ class XmlRdfEmitter extends RdfEmitterBase {
 	}
 
 	public function emitValue( $literal, $type = null ) {
-		$attr = empty( $type ) ? array() : array( 'rdf:datatype' => $type );
+		$attr = $attr = $this->getTargetAttributes( 'datatype', $type );
 
 		$this->emit( "\t\t" );
 		$this->tag( $this->currentPredicate, $attr );
@@ -189,6 +200,13 @@ class XmlRdfEmitter extends RdfEmitterBase {
 		$emitter->namespaces =& $this->namespaces;
 
 		return $emitter;
+	}
+
+	/**
+	 * @return string a MIME type
+	 */
+	public function getMimeType() {
+		return 'application/rdf+xml; charset=UTF-8';
 	}
 
 }

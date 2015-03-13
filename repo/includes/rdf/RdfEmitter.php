@@ -129,4 +129,13 @@ interface RdfEmitter {
 	 */
 	public function sub();
 
+	/**
+	 * Resets any state the emitter may be holding.
+	 */
+	public function reset();
+
+	/**
+	 * @return string a MIME type
+	 */
+	public function getMimeType();
 }

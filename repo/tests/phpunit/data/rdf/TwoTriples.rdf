@@ -4,6 +4,6 @@
 		<rdf:type rdf:resource="http://foobar.test/Fruit"/>
 	</rdf:Description>
 	<rdf:Description rdf:about="http://acme.test/Nuts">
-		<acme:weight rdf:datatype="xsd:Number">5</acme:weight>
+		<acme:weight rdf:datatype="http://www.w3.org/2001/XMLSchema#Number">5</acme:weight>
 	</rdf:Description>
 </rdf:RDF>
