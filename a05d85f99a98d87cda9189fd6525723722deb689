@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5f7b1e24",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-13T23:56:43Z",
+      "side": 1,
+      "message": "Depending on options, we may not need any of these. Shouldn\u0027t we create them on demand?",
+      "revId": "a05d85f99a98d87cda9189fd6525723722deb689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9f98d66e",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-13T23:56:43Z",
+      "side": 1,
+      "message": "I\u0027d like about here, because otherwise it looks like it depends on state of the emitter here, and I\u0027m not sure this is good - what if we move things around, or insert optional things?",
+      "revId": "a05d85f99a98d87cda9189fd6525723722deb689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7f393a3d",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-13T23:56:43Z",
+      "side": 1,
+      "message": "It would be nice if about() would automatically register values and allowed to ask if we\u0027ve seen the value before. This way we can dedupe what we want without having separate structure, just by doing if( $this-\u003ereferenceEmitter-\u003eseen($refQName) { continue; }",
+      "revId": "a05d85f99a98d87cda9189fd6525723722deb689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1fe926a7",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-13T23:56:43Z",
+      "side": 1,
+      "message": "We don\u0027t do bnodes anymore, so new tests would not like this. Should be rewritten as value node.",
+      "revId": "a05d85f99a98d87cda9189fd6525723722deb689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5f3ebe25",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-13T23:56:43Z",
+      "side": 1,
+      "message": "TimeValue promises us to use gregorian for storage. So we can ignore Lunar.",
+      "revId": "a05d85f99a98d87cda9189fd6525723722deb689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3febc2dc",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-13T23:56:43Z",
+      "side": 1,
+      "message": "I\u0027m not sure array_unique should be here. 2 strings in NTriples is not the same as 1 string, it will create 2 data entries instead of 1. So we shoouldn\u0027t eliminate duplicates.",
+      "revId": "a05d85f99a98d87cda9189fd6525723722deb689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1ff046c3",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-13T23:56:43Z",
+      "side": 1,
+      "message": "Same here - cardinality is important, don\u0027t think we should do array_unique.",
+      "revId": "a05d85f99a98d87cda9189fd6525723722deb689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
