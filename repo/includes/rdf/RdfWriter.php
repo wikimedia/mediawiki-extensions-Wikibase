@@ -27,7 +27,7 @@ interface RdfWriter {
 	/**
 	 * @param string|null $label node label, will be generated if not given.
 	 *
-	 * @return string A qname for the blank node.
+	 * @return string A local name for the blank node, for use with the '_' prefix.
 	 */
 	public function blank( $label = null );
 
