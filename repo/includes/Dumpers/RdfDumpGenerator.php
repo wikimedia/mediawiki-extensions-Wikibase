@@ -148,8 +148,8 @@ class RdfDumpGenerator extends DumpGenerator {
 			EntityRevisionLookup $entityRevisionLookup,
 			PropertyDataTypeLookup $propertyLookup
 	) {
-		$rdfFormat = RdfSerializer::getFormat( $format );
-		if ( !$rdfFormat ) {
+		$rdfFormat = RdfSerializer::getRdfWriter( $format );
+		if( !$rdfFormat ) {
 			throw new MWException( "Unknown format: $format" );
 		}
 		$entitySerializer = new RdfSerializer( $rdfFormat,
