@@ -62,13 +62,13 @@ class ItemTest extends EntityTest {
 		$claims[] = new Statement(
 			new Claim( new PropertyNoValueSnak( 42 ), null ),
 			new ReferenceList( array(
-				new Reference( new SnakList( array(
+				new Reference( array(
 					new PropertyNoValueSnak( 24 ),
-					new PropertyValueSnak( 1, new StringValue( 'onoez' ) ) ) )
-				),
-				new Reference( new SnakList( array(
-					new PropertyValueSnak( 1, $id9001 ) ) )
-				)
+					new PropertyValueSnak( 1, new StringValue( 'onoez' ) ),
+				) ),
+				new Reference( array(
+					new PropertyValueSnak( 1, $id9001 ),
+				) )
 			) )
 		);
 

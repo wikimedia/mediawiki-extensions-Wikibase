@@ -146,10 +146,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	public function testSetReferences( Statement $statement ) {
 		$references = new ReferenceList( array(
 			new Reference( array(
-				new PropertyValueSnak(
-					new PropertyId( 'P1' ),
-					new StringValue( 'a' )
-				)
+				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) ),
 			) )
 		) );
 
