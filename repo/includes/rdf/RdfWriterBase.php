@@ -99,7 +99,7 @@ abstract class RdfWriterBase implements RdfWriter {
 		$writer->state = 'document';
 
 		// share registered prefixes
-		$writer->prefixes &= $this->prefixes;
+		$writer->prefixes =& $this->prefixes;
 
 		$this->write( $writer );
 		return $writer;

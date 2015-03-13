@@ -506,7 +506,7 @@ class EntityDataSerializationService {
 	 */
 	public function createRdfSerializer( $format, $flavor = null ) {
 		//MediaWiki formats
-		$rdfFormat = RdfSerializer::getFormat( $format );
+		$rdfFormat = RdfSerializer::getRdfWriter( $format );
 
 		if ( !$rdfFormat ) {
 			return null;
