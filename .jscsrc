@@ -14,7 +14,6 @@
 	// Rules from wikimedia preset that should be enabled after fixing their violation
 
 	"disallowQuotedKeysInObjects": null,
-	"validateLineBreaks": null,
 
 	// ----
 	// Own rules
