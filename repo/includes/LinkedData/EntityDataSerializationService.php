@@ -20,6 +20,7 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\RdfSerializer;
 use Wikibase\RdfProducer;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 
 /**
  * Service for serializing entity data.
@@ -100,6 +101,11 @@ class EntityDataSerializationService {
 	private $serializerFactory;
 
 	/**
+	 * @var PropertyInfoDataTypeLookup
+	 */
+	private $propertyLookup;
+
+	/**
 	 * @var SiteList
 	 */
 	private $sites;
@@ -120,6 +126,7 @@ class EntityDataSerializationService {
 		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
 		SerializerFactory $serializerFactory,
+		PropertyDataTypeLookup $propertyLookup,
 		SiteList $sites
 	) {
 		$this->rdfBaseURI = $rdfBaseURI;
@@ -127,6 +134,7 @@ class EntityDataSerializationService {
 		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->serializerFactory = $serializerFactory;
+		$this->propertyLookup = $propertyLookup;
 		$this->sites = $sites;
 	}
 
