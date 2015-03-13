@@ -39,6 +39,8 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	public function testExecute() {
 		$id = $this->createNewItem();
 
+		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true ) ) );
+
 		$page = $this->newSpecialPage();
 
 		$matchers['id'] = array(

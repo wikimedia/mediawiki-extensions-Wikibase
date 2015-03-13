@@ -29,6 +29,8 @@ class SpecialNewPropertyTest extends SpecialPageTestBase {
 		//TODO: Verify that more of the output is correct.
 		//TODO: Verify that item creation works via a faux post request
 
+		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'property-create' => true ) ) );
+
 		$matchers['label'] = array(
 			'tag' => 'input',
 			'attributes' => array(

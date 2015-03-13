@@ -125,6 +125,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	private function executeSpecialMergeItems( $params, User $user = null ) {
 		if ( !$user ) {
 			$user = $GLOBALS['wgUser'];
+			$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'item-merge' => true, 'edit' => true ) ) );
 		}
 
 		// HACK: we need this in newSpecialPage, but executeSpecialPage doesn't pass the context on.
@@ -380,11 +381,20 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			'fromid' => 'Q1',
 			'toid' => 'Q2'
 		);
+		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array(
+			'item-merge' => $permission !== 'item-merge',
+			'edit' => $permission !== 'edit'
+		) ) );
 
 		$user = User::newFromName( 'UserWithoutPermission-' . $permission );
 
+		if ( $permission === 'item-merge' ) {
+			$this->setExpectedException( 'PermissionsError' );
+		}
 		$html = $this->executeSpecialMergeItems( $params, $user );
-		$this->assertError( 'Wikibase\Repo\Interactors\ItemMergeException:wikibase-itemmerge-permissiondenied', $html );
+		if ( $permission === 'edit' ) {
+			$this->assertError( 'Wikibase\Repo\Interactors\ItemMergeException:wikibase-itemmerge-permissiondenied', $html );
+		}
 	}
 
 }
