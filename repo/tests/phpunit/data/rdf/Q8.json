@@ -1,0 +1,218 @@
+{
+    "id": "Q8",
+    "type": "item",
+    "claims": {
+        "P8": [
+            {
+                "id": "TEST-Dates-8-1",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "-00000000200-00-00T00:00:00Z",
+                            "timezone": 0,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 9,
+                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            },
+            {
+                "id": "TEST-Dates-8-2",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "+00000000200-10-00T00:00:00Z",
+                            "timezone": 60,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 9,
+                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            },
+            {
+                "id": "TEST-Dates-8-3",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "-00200000200-04-31T00:00:00Z",
+                            "timezone": -60,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 9,
+                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            },
+            {
+                "id": "TEST-Dates-8-4",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "+00000000200-02-30T00:00:00Z",
+                            "timezone": 0,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 9,
+                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            },
+            {
+                "id": "TEST-Dates-8-5",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "+00000002014-02-29T00:00:00Z",
+                            "timezone": 0,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 9,
+                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            },
+            {
+                "id": "TEST-Dates-8-6",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "+00000002014-04-31T00:00:00Z",
+                            "timezone": 0,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 9,
+                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            },
+            {
+                "id": "TEST-Dates-8-7",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "+00000002012-02-29T00:00:00Z",
+                            "timezone": 0,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 9,
+                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            },
+            {
+                "id": "TEST-Dates-8-8",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "+00000002012-02-29T00:00:00Z",
+                            "timezone": 0,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 9,
+                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985786"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            },
+            {
+                "id": "TEST-Dates-8-9",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "+00000002012-02-31T00:00:00Z",
+                            "timezone": 0,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 9,
+                            "calendarmodel": "http:\/\/acme.test\/calendar"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            },
+            {
+                "id": "TEST-Dates-8-10",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "+02000000200-10-00T00:00:00Z",
+                            "timezone": 0,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 5,
+                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            }
+        ]
+    }
+}
