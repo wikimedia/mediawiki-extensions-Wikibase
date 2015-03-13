@@ -132,7 +132,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 
 		$builder = self::newRdfBuilder( 'rdf' ); //XXX: ugh, dummy object
 
-		$entityUri = $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entityId );
+		$entityUri = $builder->getEntityQName( $entityId );
 		$dataUri = $builder->getDataURL( $entityId );
 		$entityResource = $graph->resource( $entityUri );
 		$dataResource = $graph->resource( $dataUri );
@@ -189,7 +189,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			),
 			array(
 				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
-				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['empty']->getId() ),
+				'schema:about' => $builder->getEntityQName( $entities['empty']->getId() ),
 				'schema:version' => new EasyRdf_Literal( 23, null, 'xsd:integer' ),
 				'schema:dateModified' => new EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
 			)
@@ -224,7 +224,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 
 			array(
 				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
-				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['terms']->getId() ),
+				'schema:about' => $builder->getEntityQName( $entities['terms']->getId() ),
 				'schema:version' => new EasyRdf_Literal( 23, null, 'xsd:integer' ),
 				'schema:dateModified' => new EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
 			)
