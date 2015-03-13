@@ -2,15 +2,10 @@
 
 namespace Wikibase\Test;
 
-use DateTime;
-use EasyRdf_Graph;
-use EasyRdf_Literal;
-use EasyRdf_Namespace;
-use EasyRdf_Resource;
-use EasyRdf_Format;
 use SiteList;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\RDF\NTriplesRdfWriter;
 use Wikibase\RdfBuilder;
 use Wikibase\RdfProducer;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -33,21 +28,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
-
-	/**
-	 * @var RdfBuilder
-	 */
-	private $builder;
-
-	/**
-	 * @var array
-	 */
-	private $entities;
-
-	/**
-	 * @var string
-	 */
-	private $refHash;
 
 	private $codec;
 
@@ -113,12 +93,14 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 * @return RdfBuilder
 	 */
 	private static function newRdfBuilder( $produce ) {
+		$emitter = new NTriplesRdfWriter();
 		return new RdfBuilder(
 			self::getSiteList(),
 			self::URI_BASE,
 			self::URI_DATA,
 			self::getMockRepository(),
-			$produce
+			$produce,
+			$emitter
 		);
 	}
 
@@ -168,7 +150,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			return array ();
 		}
 		$data = file_get_contents( $filename );
-		$data = explode( "\n", $data );
+		$data = array_unique( explode( "\n", $data ) );
 		sort( $data );
 		return $data;
 	}
@@ -198,14 +180,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * Extract text test data from RDF builder
 	 * @param RdfBuilder $builder
-	 * @return multitype:
+	 * @return string[] ntriples lines
 	 */
 	private function getDataFromBuilder( RdfBuilder $builder ) {
-		$graph = $builder->getGraph();
-		$format = EasyRdf_Format::getFormat( "ntriples" );
-		$serialiser = $format->newSerialiser();
-		$data = $serialiser->serialise( $graph, "ntriples" );
-		$dataSplit = explode( "\n", $data );
+		$data = $builder->getRDF();
+		$dataSplit = array_unique( explode( "\n", $data ) );
 		sort( $dataSplit );
 		return $dataSplit;
 	}
