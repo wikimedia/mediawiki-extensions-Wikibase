@@ -11,6 +11,7 @@ use Wikibase\Lib\TimeDetailsFormatter;
 
 /**
  * @covers Wikibase\Lib\TimeDetailsFormatter
+ * @uses DataValues\TimeValue
  *
  * @group ValueFormatters
  * @group WikibaseLib
@@ -23,15 +24,32 @@ use Wikibase\Lib\TimeDetailsFormatter;
 class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * @param string $formattedHeading
+	 *
+	 * @return TimeDetailsFormatter
+	 */
+	private function getFormatter( $formattedHeading = '' ) {
+		$options = new FormatterOptions();
+		$options->setOption( ValueFormatter::OPT_LANG, 'qqx' );
+
+		$timeFormatter = $this->getMockBuilder( 'ValueFormatters\ValueFormatter' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$timeFormatter->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnValue( $formattedHeading ) );
+
+		return new TimeDetailsFormatter( $options, $timeFormatter );
+	}
+
+	/**
 	 * @dataProvider quantityFormatProvider
 	 * @param TimeValue $value
 	 * @param string $pattern
 	 */
 	public function testFormat( TimeValue $value, $pattern ) {
-		$options = new FormatterOptions( array(
-			ValueFormatter::OPT_LANG => 'qqx',
-		) );
-		$formatter = new TimeDetailsFormatter( $options );
+		$formatter = $this->getFormatter( '<a>HTML</a>' );
 
 		$html = $formatter->format( $value );
 		$this->assertRegExp( $pattern, $html );
@@ -46,7 +64,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 				new TimeValue( '+2001-01-01T00:00:00Z', 60, 0, 1, TimeValue::PRECISION_MONTH, $gregorian ),
 				'@' . implode( '.*',
 					array(
-						'<h4[^<>]*>[^<>]*2001[^<>]*</h4>',
+						'<h4[^<>]*><a>HTML</a></h4>',
 						'<td[^<>]*>\+0*2001-01-01T00:00:00</td>',
 						'<td[^<>]*>\+01:00</td>',
 						'<td[^<>]*>\(valueview-expert-timevalue-calendar-gregorian\)</td>',
@@ -104,7 +122,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFormatError() {
-		$formatter = new TimeDetailsFormatter();
+		$formatter = $this->getFormatter();
 		$value = new NumberValue( 23 );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
@@ -112,7 +130,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenInvalidTimeValue_formatDoesNotAllowHtmlInjection() {
-		$formatter = new TimeDetailsFormatter();
+		$formatter = $this->getFormatter();
 
 		$value = $this->getMockBuilder( 'DataValues\TimeValue' )
 			->disableOriginalConstructor()
