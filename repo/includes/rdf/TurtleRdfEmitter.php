@@ -15,10 +15,10 @@ class TurtleRdfEmitter extends RdfEmitterBase {
 	 */
 	private $quoter;
 
-	public function __construct() {
-		parent::__construct( parent::DOCUMENT_ROLE );
+	public function __construct( $role = parent::DOCUMENT_ROLE, BNodeLabeler $labeler = null, N3Quoter $quoter = null ) {
+		parent::__construct( $role, $labeler );
 
-		$this->quoter = new N3Quoter();
+		$this->quoter = $quoter ?: new N3Quoter();
 	}
 
 	private function quoteResource( $s ) {
@@ -88,6 +88,18 @@ class TurtleRdfEmitter extends RdfEmitterBase {
 		if ( !$last ) {
 			$this->emit( ',', "\n\t\t" );
 		}
+	}
+
+	/**
+	 * @param string $role
+	 * @param BNodeLabeler $labeler
+	 *
+	 * @return RdfEmitterBase
+	 */
+	protected function newSubEmitter( $role, BNodeLabeler $labeler ) {
+		$emitter = new self( $role, $labeler, $this->quoter );
+
+		return $emitter;
 	}
 
 }

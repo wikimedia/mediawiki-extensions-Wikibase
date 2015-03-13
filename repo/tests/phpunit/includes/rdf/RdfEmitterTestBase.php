@@ -220,8 +220,39 @@ abstract class RdfEmitterTestBase extends \PHPUnit_Framework_TestCase{
 		$this->assertOutputLines( 'NumberedBlankNode', $rdf );
 	}
 
+	public function testSubEmitters() {
+		$emitter = $this->newEmitter();
+
+		$emitter->start();
+		$emitter->prefix( 'acme', 'http://acme.test/' );
+
+		$sub1 = $emitter->sub();
+
+		$emitter->about( 'acme:TWO' )
+			->say( 'acme:number' )
+			->value( 2 );
+
+		$sub2 = $emitter->sub();
+
+		$sub1->about( 'acme:ONE' )
+			->say( 'acme:number' )
+			->value( 1 );
+
+		$sub2->about( 'acme:THREE' )
+			->say( 'acme:number' )
+			->value( 3 );
+
+		$emitter->about( 'acme:FOUR' )
+			->say( 'acme:number' )
+			->value( 4 );
+
+		$rdf = $emitter->drain();
+		$this->assertOutputLines( 'OneTwoThreeFour', $rdf );
+	}
+
 	//FIXME: test quoting/escapes!
 	//FIXME: test non-ascii literals!
 	//FIXME: test uerl-encoding
 	//FIXME: test IRIs!
+
 }
