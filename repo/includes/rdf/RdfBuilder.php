@@ -24,6 +24,8 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\MonolingualTextValue;
 use DataValues\GlobeCoordinateValue;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use DataValues\DecimalValue;
 
 /**
  * RDF mapping for wikibase data model.
@@ -108,9 +110,9 @@ class RdfBuilder {
 
 	/**
 	 *
-	 * @var EntityLookup
+	 * @var PropertyDataTypeLookup
 	 */
-	private $entityLookup;
+	private $propertyLookup;
 
 	/**
 	 * What the serializer would produce?
@@ -123,12 +125,12 @@ class RdfBuilder {
 	 * @param SiteList $sites
 	 * @param string $baseUri
 	 * @param string $dataUri
-	 * @param EntityLookup $entityLookup
+	 * @param PropertyDataTypeLookup $propertyLookup
 	 * @param integer $flavor
 	 * @param EasyRdf_Graph|null $graph
 	 */
 	public function __construct( SiteList $sites, $baseUri, $dataUri,
-			EntityLookup $entityLookup, $flavor, EasyRdf_Graph $graph = null ) {
+			PropertyDataTypeLookup $propertyLookup, $flavor, EasyRdf_Graph $graph = null ) {
 		if ( !$graph ) {
 			$graph = new EasyRdf_Graph();
 		}
@@ -138,7 +140,7 @@ class RdfBuilder {
 		$this->sites = $sites;
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
-		$this->entityLookup = $entityLookup;
+		$this->propertyLookup = $propertyLookup;
 		$this->produceWhat = $flavor; //FIXME: use strategy and/or decorator pattern instead!
 
 		$this->namespaces = array (
@@ -621,9 +623,14 @@ class RdfBuilder {
 			DataValue $value, $propertyNamespace, $simpleValue = false ) {
 		$propertyValueQName = $this->getEntityQName( $propertyNamespace, $propertyId );
 
-		$property = $this->entityLookup->getEntity( $propertyId ); //FIXME: use PropertyDataTypeLookup!
-		$dataType = $property->getDataTypeId();
 		$typeId = $value->getType();
+		if( $typeId == 'string' ) {
+			// Only strings have different types now, so we can save time but not asking
+			// for any other types
+			$dataType = $this->propertyLookup->getDataTypeIdForProperty( $propertyId );
+		} else {
+			$dataType = $typeId;
+		}
 
 		//FIXME: use a proper registry / dispatching builder
 		$typeId = "addStatementFor".preg_replace( '/[^\w]/', '', ucwords( $typeId ) );

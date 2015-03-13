@@ -40,6 +40,10 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
 			} ) );
+		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'string' ) );
 
 		$serializerOptions = new SerializationOptions();
 		$serializerFactory = new SerializerFactory( $serializerOptions, $dataTypeLookup );
@@ -50,6 +54,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			$entityLookup,
 			$titleLookup,
 			$serializerFactory,
+			$dataTypeLookup,
 			new SiteList()
 		);
 

@@ -79,6 +79,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$mockRepository,
 			$titleLookup,
 			$serializerFactory,
+			$dataTypeLookup,
 			new SiteList()
 		);
 
