@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ccda2f50",
+        "filename": "lib/includes/parsers/EntityIdValueParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-13T10:54:01Z",
+      "side": 1,
+      "message": "I\u0027m trying to make all constructor parameters in all formatters/parsers optional. Because why not? This class depends on a lot of DataModel classes anyway (see the use section above). Why not have a default?",
+      "parentUuid": "6e7c4fa4_73e0a993",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_53efad82",
         "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-12T14:24:38Z",
       "side": 1,
       "message": "why add it here then? where is is still used?",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2ceba3dc",
+        "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-13T10:54:01Z",
+      "side": 1,
+      "message": "As long as the component containing the base class is not released, yes, then this is still required because it\u0027s abstract in the base class.\n\nI could have waited for review, merge and release of that component, but I wanted to move forward.",
+      "parentUuid": "6e7c4fa4_53efad82",
       "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_4ce61f13",
+        "filename": "lib/tests/phpunit/parsers/EntityIdParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-13T10:54:01Z",
+      "side": 1,
+      "message": "As said before.",
+      "parentUuid": "6e7c4fa4_b3fde13a",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_13e9357b",
         "filename": "lib/tests/phpunit/parsers/EntityIdParserTest.php",
         "patchSetId": 4
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ecf4cbbb",
+        "filename": "lib/tests/phpunit/parsers/EntityIdParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-13T10:54:01Z",
+      "side": 1,
+      "message": "As said before.",
+      "parentUuid": "6e7c4fa4_13e9357b",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_73f74957",
         "filename": "lib/tests/phpunit/parsers/EraParserTest.php",
         "patchSetId": 4
@@ -81,6 +153,24 @@
       "writtenOn": "2015-03-12T14:24:38Z",
       "side": 1,
       "message": "just kill it or throw an exception. Or return an empty string. It\u0027s no longer used, is it?",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0cf027c3",
+        "filename": "lib/tests/phpunit/parsers/EraParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-13T10:54:01Z",
+      "side": 1,
+      "message": "As said before.",
+      "parentUuid": "6e7c4fa4_73f74957",
       "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
