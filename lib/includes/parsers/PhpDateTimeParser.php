@@ -66,8 +66,8 @@ class PhpDateTimeParser extends StringValueParser {
 
 			$value = trim( $value );
 			$value = $this->monthUnlocalizer->unlocalize( $value );
-			$value = $this->getValueWithFixedSeparators( $value );
 			$year = $this->fetchAndNormalizeYear( $value );
+			$value = $this->getValueWithFixedSeparators( $value );
 
 			$this->validateDateTimeInput( $value );
 
@@ -75,9 +75,7 @@ class PhpDateTimeParser extends StringValueParser {
 			$dateTime = new DateTime( $value );
 
 			// Fail if the DateTime object does calculations like changing 2015-00-00 to 2014-12-30.
-			if ( $year !== null
-				&& $dateTime->format( 'Y' ) !== str_pad( substr( $year, -4 ), 4, '0', STR_PAD_LEFT )
-			) {
+			if ( $year !== null && $dateTime->format( 'Y' ) !== substr( $year, -4 ) ) {
 				throw new ParseException( $value . ' is not a valid date.' );
 			}
 
@@ -133,14 +131,33 @@ class PhpDateTimeParser extends StringValueParser {
 	 * @return string|null The full year, if found, not cut but padded to at least 4 digits.
 	 */
 	private function fetchAndNormalizeYear( &$value ) {
-		// Any number longer than 2 digits or bigger than 31 must be the year. Otherwise assume the
-		// number at the end of the string is the year.
 		if ( !preg_match(
-			'/(?<!\d)(?:'           //can not be prepended by a digit
-				. '\d{3,}|'         //any number with more than 2 digits, or
-				. '3[2-9]|[4-9]\d|' //any number larger than 31, or
-				. '\d+$'            //any number at the end of the string
-				. ')(?!\d)/',       //can not be followed by a digit
+			// Check if the string contains a number longer than 2 digits or bigger than 59.
+			'/(?<!\d)('       //can not be prepended by a digit
+				. '\d{3,}|'   //any number longer than 2 digits, or
+				. '[6-9]\d'   //any number bigger than 59
+				. ')(?!\d)/', //can not be followed by a digit
+			$value,
+			$matches,
+			PREG_OFFSET_CAPTURE
+		) && !preg_match(
+			// Check if the first number in the string is bigger than 31.
+			'/^\D*(3[2-9]|[4-9]\d)/',
+			$value,
+			$matches,
+			PREG_OFFSET_CAPTURE
+		) && !preg_match(
+			// Check if the string starts with three space-separated parts or three numbers.
+			'/^(?:'
+				. '\S+\s+\S+\s+|' //e.g. "July<SPACE>4th<SPACE>", or
+				. '\d+\D+\d+\D+'  //e.g. "4.7."
+				. ')(\d+)/',      //followed by a number
+			$value,
+			$matches,
+			PREG_OFFSET_CAPTURE
+		) && !preg_match(
+			// Check if the string ends with a number.
+			'/(\d+)\D*$/',
 			$value,
 			$matches,
 			PREG_OFFSET_CAPTURE
@@ -148,14 +165,17 @@ class PhpDateTimeParser extends StringValueParser {
 			return null;
 		}
 
-		$year = $matches[0][0];
+		$year = $matches[1][0];
+		$index = $matches[1][1];
+		$length = strlen( $year );
+
 		// Trim irrelevant leading zeros.
 		$year = ltrim( $year, '0' );
 		// Pad to at least 4 digits.
 		$year = str_pad( $year, 4, '0', STR_PAD_LEFT );
 
 		// Manipulate the value to have an exactly 4-digit year. Crucial for PHP's DateTime object.
-		$value = substr_replace( $value, substr( $year, -4 ), $matches[0][1], strlen( $matches[0][0] ) );
+		$value = substr_replace( $value, substr( $year, -4 ), $index, $length );
 
 		return $year;
 	}
