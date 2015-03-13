@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_17d27401",
+        "filename": "lib/includes/parsers/EntityIdValueParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-13T14:44:48Z",
+      "side": 1,
+      "message": "We do have 69 instances of \"new BasicEntityIdParser\" in our code base, 14 in lib. Most of them in test, sure, but still. I don\u0027t see why it should be forbidden to have a default. This does not introduce a new dependency.\n\nAnyway, will remove because this is not what this patch is about.",
+      "parentUuid": "6e7c4fa4_ec328b05",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_53efad82",
         "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
         "patchSetId": 4
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Ok, it\u0027s still required because of the base class, but it\u0027s no longer used, and should no longer be used.\n\nIn that case, make it throw an exception. No reason to play nice. Calling this is now a mistake, always.",
       "parentUuid": "6e7c4fa4_2ceba3dc",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_97fd246c",
+        "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-13T14:44:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_0c2ee7a0",
       "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
