@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ec328b05",
+        "filename": "lib/includes/parsers/EntityIdValueParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-13T13:13:34Z",
+      "side": 1,
+      "message": "Because it\u0027s a service. Services should be injected. The fact that you can instantiate it on the fly is an accident, and there is no guarantee it will stay this way.\n\nI don\u0027t see any advantage to having the parameters optional. To the contrary, it\u0027s rather easy to miss something important this way. \n\nParsers are not value objects, they shouldn\u0027t be instantiated on the fly, so convenience is not an issue.",
+      "parentUuid": "6e7c4fa4_ccda2f50",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_53efad82",
         "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
         "patchSetId": 4
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "As long as the component containing the base class is not released, yes, then this is still required because it\u0027s abstract in the base class.\n\nI could have waited for review, merge and release of that component, but I wanted to move forward.",
       "parentUuid": "6e7c4fa4_53efad82",
+      "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0c2ee7a0",
+        "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-13T13:13:34Z",
+      "side": 1,
+      "message": "Ok, it\u0027s still required because of the base class, but it\u0027s no longer used, and should no longer be used.\n\nIn that case, make it throw an exception. No reason to play nice. Calling this is now a mistake, always.",
+      "parentUuid": "6e7c4fa4_2ceba3dc",
       "revId": "f8d6b4f143389489d135d30cfad60d32651b5eb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
