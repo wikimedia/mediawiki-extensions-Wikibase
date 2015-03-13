@@ -76,6 +76,9 @@ class DateTimeParser extends StringValueParser {
 					// Remove all but the last 4 digits from the year found in the string.
 					$value = substr_replace( $value, '', $matches[0][1], strlen( $year ) - 4 );
 				}
+
+				// Trim leading zeros but keep at least 4 digits
+				$year = preg_replace( '/^0+(?=\d{4})/', '', $year );
 			}
 
 			$this->validateDateTimeInput( $value );
