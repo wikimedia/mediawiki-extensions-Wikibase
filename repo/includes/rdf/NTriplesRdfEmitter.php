@@ -20,10 +20,10 @@ class NTriplesRdfEmitter extends RdfEmitterBase {
 
 	private $currentPredicate;
 
-	public function __construct() {
-		parent::__construct( parent::DOCUMENT_ROLE );
+	public function __construct( $role = parent::DOCUMENT_ROLE, BNodeLabeler $labeler = null, N3Quoter $quoter = null ) {
+		parent::__construct( $role, $labeler );
 
-		$this->quoter = new N3Quoter();
+		$this->quoter = $quoter ?: new N3Quoter();
 		$this->quoter->getAllowQNames( 'false' );
 
 		$this->quoter->registerShorthand( 'a', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' );
@@ -74,6 +74,18 @@ class NTriplesRdfEmitter extends RdfEmitterBase {
 
 	protected function finishObject( $last = false ) {
 		$this->emit( ' .', "\n" );
+	}
+
+	/**
+	 * @param string $role
+	 * @param BNodeLabeler $labeler
+	 *
+	 * @return RdfEmitterBase
+	 */
+	protected function newSubEmitter( $role, BNodeLabeler $labeler ) {
+		$emitter = new self( $role, $labeler, $this->quoter );
+
+		return $emitter;
 	}
 
 }

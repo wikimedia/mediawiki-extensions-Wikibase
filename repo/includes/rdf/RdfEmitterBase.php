@@ -22,7 +22,7 @@ abstract class RdfEmitterBase implements RdfEmitter {
 	 */
 	private $state = 'start';
 
-	private $blankNodeCounter = 0; //FIXME: need to share counter between emitters!
+	private $labeler;
 
 	const DOCUMENT_ROLE = 'document';
 
@@ -35,12 +35,35 @@ abstract class RdfEmitterBase implements RdfEmitter {
 	 */
 	private $role;
 
-	function __construct( $role ) {
+	function __construct( $role, BNodeLabeler $labeler = null ) {
 		if ( !is_string( $role ) ) {
 			throw new InvalidArgumentException( '$role must be a string' );
 		}
 
 		$this->role = $role;
+
+		$this->labeler = $labeler?: new BNodeLabeler();
+	}
+
+	/**
+	 * @param string $role
+	 * @param BNodeLabeler $labeler
+	 *
+	 * @return RdfEmitterBase
+	 */
+	abstract protected function newSubEmitter( $role, BNodeLabeler $labeler );
+
+	/**
+	 * @return RdfEmitter
+	 */
+	final public function sub() {
+		$this->state( 'document' );
+
+		$emitter = $this->newSubEmitter( self::DOCUMENT_ROLE, $this->labeler );
+		$emitter->state = 'document';
+
+		$this->emit( $emitter );
+		return $emitter;
 	}
 
 	/**
@@ -61,16 +84,10 @@ abstract class RdfEmitterBase implements RdfEmitter {
 	/**
 	 * @param string|null $label node label, will be generated if not given.
 	 *
-	 * @return mixed A URI container (may just be a string)
+	 * @return string
 	 */
 	final public function blank( $label = null ) {
-		$this->blankNodeCounter ++;
-
-		if ( $label === null ) {
-			$label = 'n' . $this->blankNodeCounter;
-		}
-
-		return '_:' . $label;
+		return $this->labeler->getLabel( $label );
 	}
 
 	/**
@@ -150,7 +167,7 @@ abstract class RdfEmitterBase implements RdfEmitter {
 		return $this;
 	}
 
-	private function state( $newState ) {
+	final protected function state( $newState ) {
 		switch ( $newState ) {
 			case 'document':
 				$this->transitionDocument();
@@ -181,6 +198,9 @@ abstract class RdfEmitterBase implements RdfEmitter {
 
 	private function transitionDocument() {
 		switch ( $this->state ) {
+			case 'document':
+				break;
+
 			case 'start':
 				$this->beginDocument();
 				break;
