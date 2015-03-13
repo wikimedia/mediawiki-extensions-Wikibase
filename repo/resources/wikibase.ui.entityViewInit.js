@@ -310,13 +310,13 @@
 				event.preventDefault();
 				editableTemplatedWidget.notification();
 				if( mw.user.isAnon() ) {
-					$.cookie( cookieKey, copyRightVersion, { 'expires': 365 * 3, 'path': '/' } );
+					$.cookie( cookieKey, copyRightVersion, { expires: 365 * 3, path: '/' } );
 				} else {
 					var api = new mw.Api();
 					api.postWithToken( 'options', {
-						'action': 'options',
-						'optionname': optionsKey,
-						'optionvalue': copyRightVersion
+						action: 'options',
+						optionname: optionsKey,
+						optionvalue: copyRightVersion
 					} );
 				}
 			} );
@@ -348,13 +348,13 @@
 			$messageAnchor.data( 'wbtooltip' ).degrade( true );
 			$( window ).off( '.wbCopyrightTooltip' );
 			if( mw.user.isAnon() ) {
-				$.cookie( cookieKey, copyRightVersion, { 'expires': 365 * 3, 'path': '/' } );
+				$.cookie( cookieKey, copyRightVersion, { expires: 365 * 3, path: '/' } );
 			} else {
 				var api = new mw.Api();
 				api.postWithToken( 'options', {
-					'action': 'options',
-					'optionname': optionsKey,
-					'optionvalue': copyRightVersion
+					action: 'options',
+					optionname: optionsKey,
+					optionvalue: copyRightVersion
 				} );
 			}
 		} );

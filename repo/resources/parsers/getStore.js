@@ -26,10 +26,10 @@ wb.parsers.getStore = function( api ) {
 	// API-based parsers
 	// FIXME: Get this configuration from the backend.
 	var parserIdToDataValueType = {
-		'globecoordinate': dv.GlobeCoordinateValue.TYPE,
-		'monolingualtext': dv.MonolingualTextValue.TYPE,
-		'quantity': dv.QuantityValue.TYPE,
-		'time': dv.TimeValue.TYPE,
+		globecoordinate: dv.GlobeCoordinateValue.TYPE,
+		monolingualtext: dv.MonolingualTextValue.TYPE,
+		quantity: dv.QuantityValue.TYPE,
+		time: dv.TimeValue.TYPE,
 		'wikibase-entityid': wb.datamodel.EntityId.TYPE
 	};
 
