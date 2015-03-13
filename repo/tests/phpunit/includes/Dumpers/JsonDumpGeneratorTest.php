@@ -52,7 +52,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return Entity[]
 	 */
-	protected function makeEntities( array $ids ) {
+	public function makeEntities( array $ids ) {
 		$entities = array();
 
 		foreach ( $ids as $id ) {
@@ -151,7 +151,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return EntityIdPager
 	 */
-	protected function makeIdPager( array $ids, $entityType = null ) {
+	public function makeIdPager( array $ids, $entityType = null ) {
 		$pager = $this->getMock( 'Wikibase\Repo\Store\EntityIdPager' );
 
 		$self = $this;
