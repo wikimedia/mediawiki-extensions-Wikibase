@@ -15,6 +15,7 @@ use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\RdfSerializer;
 use Wikibase\RdfProducer;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 
 /**
  * RdfDumpGenerator generates an RDF dump of a given set of entities, excluding
@@ -134,6 +135,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param SiteList $sites
 	 * @param EntityLookup $entityLookup
 	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param PropertyInfoDataTypeLookup $propertyLookup
 	 * @throws \MWException
 	 * @return RdfDumpGenerator
 	 */
@@ -144,7 +146,8 @@ class RdfDumpGenerator extends DumpGenerator {
 			$dataUri,
 			SiteList $sites,
 			EntityLookup $entityLookup,
-			EntityRevisionLookup $entityRevisionLookup
+			EntityRevisionLookup $entityRevisionLookup,
+			PropertyDataTypeLookup $propertyLookup
 	) {
 		$rdfFormat = RdfSerializer::getFormat( $format );
 		if( !$rdfFormat ) {
@@ -154,6 +157,7 @@ class RdfDumpGenerator extends DumpGenerator {
 				$baseUri,
 				$dataUri,
 				$sites,
+				$propertyLookup,
 				$entityLookup,
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
 				RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES |

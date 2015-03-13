@@ -23,7 +23,8 @@ class DumpRdf extends DumpScript {
 	 			$GLOBALS['wgCanonicalServer']."/entity/",
 	 			$GLOBALS['wgCanonicalServer']."/Special:EntityData/",
 	 			$this->wikibaseRepo->getSiteStore()->getSites(),
-	 			$this->entityLookup, $this->revisionLookup);
+	 			$this->entityLookup, $this->revisionLookup,
+	 			$this->wikibaseRepo->getPropertyDataTypeLookup());
 	}
 }
 

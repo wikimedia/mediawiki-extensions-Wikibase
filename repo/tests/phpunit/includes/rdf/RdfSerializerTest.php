@@ -290,7 +290,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			RdfBuilderTest::URI_BASE,
 			RdfBuilderTest::URI_DATA,
 			RdfBuilderTest::getSiteList(),
-			$mockRepo,
+			$mockRepo, $mockRepo,
 			RdfSerializer::PRODUCE_ALL
 		);
 	}
