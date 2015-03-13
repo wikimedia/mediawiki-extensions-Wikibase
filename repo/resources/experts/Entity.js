@@ -3,8 +3,8 @@
 
 	// temporarily define a hard coded prefix map until we get this from the server
 	var WB_ENTITIES_PREFIXMAP = {
-		'Q': 'item',
-		'P': 'property'
+		Q: 'item',
+		P: 'property'
 	};
 
 	var MODULE = wb.experts,

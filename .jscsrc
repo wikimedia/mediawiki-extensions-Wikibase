@@ -11,11 +11,6 @@
 	"requireSpacesInsideArrayBrackets": null,
 
 	// ----
-	// Rules from wikimedia preset that should be enabled after fixing their violation
-
-	"disallowQuotedKeysInObjects": null,
-
-	// ----
 	// Own rules
 
 	"disallowSpaceAfterKeywords": [

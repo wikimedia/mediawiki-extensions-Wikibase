@@ -37,11 +37,12 @@ MODULE.getStore = function( dataTypeStore ) {
 	// setting, it needs to be checked whether they are actually defined.
 
 	var dataTypeIdToExpertConstructor = {
-		'commonsMedia': vv.experts.CommonsMediaType,
-		'monolingualtext': vv.experts.MonolingualText,
-		'url': vv.experts.StringValue,
+		commonsMedia: vv.experts.CommonsMediaType,
+		monolingualtext: vv.experts.MonolingualText,
+		url: vv.experts.StringValue,
 		'wikibase-item': wb.experts.Item,
 		'wikibase-property': wb.experts.Property
+
 	};
 
 	for( var dataTypeId in dataTypeIdToExpertConstructor ) {

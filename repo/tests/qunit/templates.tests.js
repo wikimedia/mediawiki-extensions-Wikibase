@@ -57,7 +57,7 @@
 				'just plain text': [ 'just plain text' ]
 			},
 			{
-				'$1': [
+				$1: [
 					'param',
 					'&lt;div&gt;&lt;/div&gt;',
 					'<div>text</div>',
@@ -148,7 +148,7 @@
 			},
 			{
 				'<div>$1</div><div>$2</div>': [ '<div>param1</div><div>param2</div>', '<div>param1</div><div><div></div></div>', '<div><div></div></div><div><div>param2</div></div>' ],
-				'$1$2': [ 'param1param2', 'param1<div></div>', '<div></div><div>param2</div>' ]
+				$1$2: [ 'param1param2', 'param1<div></div>', '<div></div><div>param2</div>' ]
 			}
 		];
 
