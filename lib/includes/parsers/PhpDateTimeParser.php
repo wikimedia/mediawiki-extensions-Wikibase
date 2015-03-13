@@ -12,16 +12,19 @@ use ValueParsers\StringValueParser;
 use ValueParsers\ValueParser;
 
 /**
- * Time Parser using the DateTime object
+ * Time parser using PHP's DateTime object. Since the behavior of PHP's parser can be quite odd
+ * (for example, it pads missing elements with the current date and does actual calculations such as
+ * parsing "2015-00-00" as "2014-12-30") this parser should only be used as a fallback.
  *
  * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Thiemo Mättig
  *
  * @todo move me to DataValues-time
  */
-class DateTimeParser extends StringValueParser {
+class PhpDateTimeParser extends StringValueParser {
 
 	const FORMAT_NAME = 'datetime';
 
