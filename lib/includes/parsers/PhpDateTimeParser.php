@@ -144,40 +144,35 @@ class PhpDateTimeParser extends StringValueParser {
 	 * @return string|null The full year, if found, not cut but padded to at least 4 digits.
 	 */
 	private function fetchAndNormalizeYear( &$value ) {
-		// NOTE: when changing the regex matching below, keep the class level
+		// NOTE: When changing the regex matching below, keep the class level
 		// documentation of the extraction heuristics up to date!
-
-		if ( !preg_match(
+		$patterns = array(
 			// Check if the string contains a number longer than 2 digits or bigger than 59.
-			'/(?<!\d)('       //can not be prepended by a digit
-				. '\d{3,}|'   //any number longer than 2 digits, or
-				. '[6-9]\d'   //any number bigger than 59
-				. ')(?!\d)/', //can not be followed by a digit
-			$value,
-			$matches,
-			PREG_OFFSET_CAPTURE
-		) && !preg_match(
+			'/(?<!\d)('           // can not be prepended by a digit
+				. '\d{3,}|'       // any number longer than 2 digits, or
+				. '[6-9]\d'       // any number bigger than 59
+				. ')(?!\d)/',     // can not be followed by a digit
+
 			// Check if the first number in the string is bigger than 31.
 			'/^\D*(3[2-9]|[4-9]\d)/',
-			$value,
-			$matches,
-			PREG_OFFSET_CAPTURE
-		) && !preg_match(
+
 			// Check if the string starts with three space-separated parts or three numbers.
 			'/^(?:'
-				. '\S+\s+\S+\s+|' //e.g. "July<SPACE>4th<SPACE>", or
-				. '\d+\D+\d+\D+'  //e.g. "4.7."
-				. ')(\d+)/',      //followed by a number
-			$value,
-			$matches,
-			PREG_OFFSET_CAPTURE
-		) && !preg_match(
+				. '\S+\s+\S+\s+|' // e.g. "July<SPACE>4th<SPACE>", or
+				. '\d+\D+\d+\D+'  // e.g. "4.7."
+				. ')(\d+)/',      // followed by a number
+
 			// Check if the string ends with a number.
 			'/(\d+)\D*$/',
-			$value,
-			$matches,
-			PREG_OFFSET_CAPTURE
-		) ) {
+		);
+
+		foreach ( $patterns as $pattern ) {
+			if ( preg_match( $pattern, $value, $matches, PREG_OFFSET_CAPTURE ) ) {
+				break;
+			}
+		}
+
+		if ( !isset( $matches ) ) {
 			return null;
 		}
 
