@@ -137,7 +137,7 @@ class RdfSerializer implements RdfProducer {
 
 		$builder->addEntity( $entityRevision->getEntity() );
 
-		$builder->resolvedMentionedEntities( $this->entityLookup ); //TODO: optional
+		$builder->resolveMentionedEntities( $this->entityLookup ); //TODO: optional
 
 		$graph = $builder->getGraph();
 		return $graph;

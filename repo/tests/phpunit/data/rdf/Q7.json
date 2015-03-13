@@ -70,8 +70,7 @@
                                         "value": {
                                             "latitude": 12.345,
                                             "longitude": 67.89,
-                                            "altitude": null,
-                                            "precision": null,
+                                            "precision": 0.1,
                                             "globe": "http:\/\/www.wikidata.org\/entity\/Q2"
                                         },
                                         "type": "globecoordinate"
@@ -147,7 +146,7 @@
                                             "before": 0,
                                             "after": 0,
                                             "precision": 9,
-                                            "calendarmodel": "http:\/\/calendar.acme.test\/"
+                                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
                                         },
                                         "type": "time"
                                     }
@@ -245,8 +244,7 @@
                                         "value": {
                                             "latitude": 12.345,
                                             "longitude": 67.89,
-                                            "altitude": null,
-                                            "precision": null,
+                                            "precision": 0.1,
                                             "globe": "http:\/\/www.wikidata.org\/entity\/Q2"
                                         },
                                         "type": "globecoordinate"
@@ -322,7 +320,7 @@
                                             "before": 0,
                                             "after": 0,
                                             "precision": 9,
-                                            "calendarmodel": "http:\/\/calendar.acme.test\/"
+                                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
                                         },
                                         "type": "time"
                                     }
