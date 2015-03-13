@@ -485,7 +485,7 @@ class EntityDataSerializationService {
 			case 'full':
 				return RdfProducer::PRODUCE_ALL;
 			case 'dump':
-				return RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES | RdfProducer::PRODUCE_SITELINKS;
+				return RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES | RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES;
 			case 'long':
 				return RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES | RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_VERSION_INFO;
 			case null: // No flavor given
