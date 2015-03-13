@@ -79,6 +79,10 @@ class RdfBuilder {
 	// TODO: make the license settable
 	const LICENSE = 'http://creativecommons.org/publicdomain/zero/1.0/';
 
+	// Gregorian calendar link.
+	// I'm not very happy about hardcoding it here but see no better way so far
+	const GREGORIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985727';
+
 	public static $rankMap = array(
 		Statement::RANK_DEPRECATED => self::WIKIBASE_RANK_DEPRECATED,
 		Statement::RANK_NORMAL => self::WIKIBASE_RANK_NORMAL,
@@ -340,23 +344,26 @@ class RdfBuilder {
 	 * Adds meta-information about an entity (such as the ID and type) to the RDF graph.
 	 *
 	 * @param Entity $entity
+	 * @param boolean $produceData Should we also produce Dataset node?
 	 */
-	private function addEntityMetaData( Entity $entity ) {
+	private function addEntityMetaData( Entity $entity, $produceData = true ) {
 		$entityResource = $this->getEntityResource( $entity->getId() );
 		$entityResource->addResource( 'rdf:type', $this->getEntityTypeQName( $entity->getType() ) );
 		$dataURL = $this->getDataURL( $entity->getId() );
 
-		$dataResource = $this->graph->resource( $dataURL );
-		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
-		$dataResource->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
+		if( $produceData ) {
+			$dataResource = $this->graph->resource( $dataURL );
+			$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
+			$dataResource->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
 
-		if( $this->shouldProduce( RdfProducer::PRODUCE_VERSION_INFO ) ) {
-			// Dumps don't need version/license info for each entity, since it is included in the dump header
-			$dataResource->addResource( self::NS_CC . ':license', self::LICENSE );
-			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
+			if( $this->shouldProduce( RdfProducer::PRODUCE_VERSION_INFO ) ) {
+				// Dumps don't need version/license info for each entity, since it is included in the dump header
+				$dataResource->addResource( self::NS_CC . ':license', self::LICENSE );
+				$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
+			}
 		}
 
-		// TODO: add support for property date types to RDF output
+		// TODO: add support for property data types to RDF output
 
 		$this->entityResolved( $entity->getId() );
 	}
@@ -522,7 +529,7 @@ class RdfBuilder {
 			$entityResource->addResource( $propertyQName, $statementResource );
 			$this->addSnak( $statementResource, $snak, self::NS_VALUE );
 
-			if ( $this->shouldProduce( RdfProducer::PRODUCE_PROPERTIES ) ) { //FIXME: get rid of PRODUCE_PROPERTIES, add an option to resolveMentionedEntities instead.
+			if( $this->shouldProduce( RdfProducer::PRODUCE_PROPERTIES) ) {
 				$this->entityMentioned( $snak->getPropertyId() );
 			}
 
@@ -601,12 +608,9 @@ class RdfBuilder {
 		foreach( $props as $prop => $type ) {
 			$getter = "get" . ucfirst( $prop );
 			$data = $value->$getter();
-			if ( $type == 'url' ) { //FIXME: use the logic from addStatementValue recursively here.
-				$node->addResource( $this->getEntityTypeQName( $prop ), $data );
-				continue;
+			if( !is_null( $data ) ) {
+				$this->addValueToNode( $node, $this->getEntityTypeQName( $prop ), $type, $data );
 			}
-			$node->addLiteral( $this->getEntityTypeQName( $prop ),
-					new \EasyRdf_Literal( $data, null, $type ) ); //FIXME: what happens is $data is not scalar? Avoid hard crash.
 		}
 	}
 
@@ -633,12 +637,12 @@ class RdfBuilder {
 		}
 
 		//FIXME: use a proper registry / dispatching builder
-		$typeId = "addStatementFor".preg_replace( '/[^\w]/', '', ucwords( $typeId ) );
+		$typeFunc = "addStatementFor".preg_replace( '/[^\w]/', '', ucwords( $typeId ) );
 
-		if( !is_callable( array( $this, $typeId ) ) ) {
+		if( !is_callable( array( $this, $typeFunc ) ) ) {
 			wfLogWarning( __METHOD__ . ": Unsupported data type: $typeId" );
 		} else {
-			$this->$typeId( $target, $propertyValueQName, $dataType, $value, $simpleValue );
+			$this->$typeFunc( $target, $propertyValueQName, $dataType, $value, $simpleValue );
 		}
 		// TODO: add special handling like in WDTK?
 		// https://github.com/Wikidata/Wikidata-Toolkit/blob/master/wdtk-rdf/src/main/java/org/wikidata/wdtk/rdf/extensions/SimpleIdExportExtension.java
@@ -659,7 +663,9 @@ class RdfBuilder {
 		$entityQName = $this->getEntityQName( self::NS_ENTITY, $entityId );
 		$entityResource = $this->graph->resource( $entityQName );
 		$target->addResource( $propertyValueQName, $entityResource );
-		$this->entityMentioned( $entityId );
+		if( $this->shouldProduce( RdfProducer::PRODUCE_RESOLVED_ENTITIES ) ) {
+			$this->entityMentioned( $entityId );
+		}
 	}
 
 	/**
@@ -674,13 +680,46 @@ class RdfBuilder {
 	private function addStatementForString( EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			StringValue $value, $simpleValue = false ) {
 		if ( $dataType == 'commonsMedia' ) {
-			$target->addResource( $propertyValueQName, $this->getCommonsURI( $value->getValue() ) );
+			$this->addValueToNode( $target, $propertyValueQName, 'url', $this->getCommonsURI( $value->getValue() ) );
 		} elseif ( $dataType == 'url' ) {
-			$target->addResource( $propertyValueQName, $value->getValue() );
+			$this->addValueToNode( $target, $propertyValueQName, 'url', $value->getValue() );
 		} else {
 			$target->addLiteral( $propertyValueQName, new EasyRdf_Literal( $value->getValue() ) );
 		}
 	}
+
+	/**
+	 * Add value to a node
+	 * This function does massaging needed for RDF data types.
+	 *
+	 * @param EasyRdf_Resource $target
+	 * @param string $propertyName
+	 * @param string $type
+	 * @param string $value
+	 */
+	private function addValueToNode( EasyRdf_Resource $target, $propertyName, $type, $value ) {
+		if( $type == 'url' ) {
+			$target->addResource( $propertyName, $value );
+		} elseif( $type == 'xsd:dateTime' ) {
+			$target->addLiteral( $propertyName,
+					new \EasyRdf_Literal_DateTime( $this->cleanupDateValue( $value ) ) );
+		} elseif( $type == 'xsd:decimal' ) {
+			// TODO: handle precision here?
+			if( $value instanceof DecimalValue ) {
+				$value = $value->getValue();
+			}
+			$target->addLiteral( $propertyName, new \EasyRdf_Literal_Decimal( $value ) );
+		} else {
+			if( !is_scalar( $value ) ) {
+				// somehow we got a weird value, better not risk it and bail
+				$vtype = gettype( $value );
+				wfLogWarning( "Bad value passed to addValueToNode for {$target->getUri()}:$propertyName: $vtype" );
+				return;
+			}
+			$target->addLiteral( $propertyName, $value, null, $type );
+		}
+	}
+
 
 	/**
 	 * Adds specific value
@@ -697,6 +736,73 @@ class RdfBuilder {
 	}
 
 	/**
+	 * Clean up Wikidata date value in Gregorian calendar
+	 * - remove + from the start - not all data stores like that
+	 * - validate month and date value
+	 * @param string $dateValue
+	 * @return string Value compatible with xsd:dateTime type
+	 */
+	private function cleanupDateValue( $dateValue ) {
+		list($date, $time) = explode( "T", $dateValue, 2 );
+		if( $date[0] == "-" ) {
+			list($y, $m, $d) = explode( "-", substr( $date, 1 ), 3 );
+			$y = -(int)$y;
+		} else {
+			list($y, $m, $d) = explode( "-", $date, 3 );
+			$y = (int)$y;
+		}
+
+		$m = (int)$m;
+		$d = (int)$d;
+
+		// PHP source docs say PHP gregorian calendar can work down to 4714 BC
+		// for smaller dates, we ignore month/day
+		if( $y <= -4714 ) {
+			$d = $m = 1;
+		}
+
+		if( $m <= 0 ) {
+			$m = 1;
+		}
+		if( $m >= 12 ) {
+			// Why anybody would do something like that? Anyway, better to check.
+			$m = 12;
+		}
+		if( $d <= 0 ) {
+			$d = 1;
+		}
+		// check if the date "looks safe". If not, we do deeper check
+		if( !( $d <= 28 || ( $m != 2 && $d <= 30 ) ) ) {
+			$max = cal_days_in_month( CAL_GREGORIAN, $m, $y );
+			// We just put it as the last day in month, won't bother further
+			if( $d > $max ) {
+				$d = $max;
+			}
+		}
+		// This is a bit weird since xsd:dateTime requires >=4 digit always,
+		// and leading 0 is not allowed for 5 digits
+		// But sprintf counts - as digit
+		// See: http://www.w3.org/TR/xmlschema-2/#dateTime
+		return sprintf( "%s%04d-%02d-%02dT%s", ($y < 0)? "-":"", abs( $y ), $m, $d, $time );
+	}
+
+	/**
+	 * Get literal that reperesent the date in RDF
+	 * If we can convert it to xsd:dateTime, we'll do that.
+	 * Otherwise, we leave it as string
+	 * @param TimeValue $value
+	 * @return EasyRdf_Literal
+	 */
+	private function getDateLiteral( TimeValue $value ) {
+		$calendar = $value->getCalendarModel();
+		if( $calendar == self::GREGORIAN_CALENDAR ) {
+			return new \EasyRdf_Literal_DateTime( $this->cleanupDateValue( $value->getTime() ) );
+		}
+		// TODO: add handling for Julian values
+		return new EasyRdf_Literal( $value->getTime() );
+	}
+
+	/**
 	 * Adds specific value
 	 *
 	 * @param EasyRdf_Resource $target
@@ -707,11 +813,12 @@ class RdfBuilder {
 	 */
 	private function addStatementForTime( EasyRdf_Resource $target, $propertyValueQName, $dataType,
 			TimeValue $value, $simpleValue = false ) {
-		// TODO: we may want to deal with Julian dates here? //FIXME: EasyRdf_Literal_DateTime may fail hard on non-iso dates! Needs error handling / fallback.
-		$target->addLiteral( $propertyValueQName, new \EasyRdf_Literal_DateTime( $value->getTime() ) );
+
+		$target->addLiteral( $propertyValueQName, $this->getDateLiteral( $value ) );
+
 		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) { //FIXME: register separate generators for different output flavors.
 			$this->addExpandedValue( $target, $propertyValueQName, $value,
-					array(  'time' => 'xsd:dateTime', //FIXME: only true for gregorian!
+					array(  'time' => 'string',
 							// TODO: eventually use identifier here
 							'precision' => 'xsd:integer',
 							'timezone' => 'xsd:integer',
@@ -780,7 +887,7 @@ class RdfBuilder {
 	 *
 	 * @param EntityLookup $entityLookup
 	 */
-	public function resolvedMentionedEntities( EntityLookup $entityLookup ) { //FIXME: needs test
+	public function resolveMentionedEntities( EntityLookup $entityLookup ) { //FIXME: needs test
 		// @todo inject a DispatchingEntityIdParser
 		$idParser = new BasicEntityIdParser();
 
@@ -825,7 +932,7 @@ class RdfBuilder {
 	 * @param Entity $entity
 	 */
 	private function addEntityStub( Entity $entity ) {
-		$this->addEntityMetaData( $entity );
+		$this->addEntityMetaData( $entity, false );
 		$this->addLabels( $entity );
 		$this->addDescriptions( $entity );
 	}
