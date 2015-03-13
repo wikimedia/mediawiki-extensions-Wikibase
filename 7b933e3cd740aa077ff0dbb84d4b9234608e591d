@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1180448d",
+        "filename": "lib/includes/parsers/PhpDateTimeParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-13T09:01:20Z",
+      "side": 1,
+      "message": "I tried to not use synonyms in my comments, please use \"bigger\".",
+      "revId": "7b933e3cd740aa077ff0dbb84d4b9234608e591d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1157e42a",
+        "filename": "lib/includes/parsers/PhpDateTimeParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-13T09:01:20Z",
+      "side": 1,
+      "message": "\"the third number in the string.\" That part of the regex uses \\D+ as separator, no spaces.",
+      "revId": "7b933e3cd740aa077ff0dbb84d4b9234608e591d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
