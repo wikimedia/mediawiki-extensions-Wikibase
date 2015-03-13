@@ -107,5 +107,13 @@ interface RdfEmitter {
 	 */
 	public function value( $literal, $type = null );
 
+	/**
+	 * Returns a document-level sub-emitter.
+	 *
+	 * @note: do not call drain() on sub-emitters!
+	 *
+	 * @return RdfEmitter
+	 */
+	public function sub();
 
 }
