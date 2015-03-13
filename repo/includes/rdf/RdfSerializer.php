@@ -2,11 +2,10 @@
 
 namespace Wikibase;
 
-use EasyRdf_Exception;
-use EasyRdf_Format;
-use EasyRdf_Graph;
 use SiteList;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\RDF\RdfWriter;
+use Wikibase\RDF\RdfWriterFactory;
 
 /**
  * RDF serialization for wikibase data model.
@@ -31,9 +30,9 @@ class RdfSerializer implements RdfProducer {
 	private $dataUri;
 
 	/**
-	 * @var EasyRdf_Format
+	 * @var RdfWriter
 	 */
-	private $format;
+	private $emitter;
 
 	/**
 	 * @var SiteList
@@ -51,15 +50,15 @@ class RdfSerializer implements RdfProducer {
 	private $entityLookup;
 
 	/**
-	 * @param EasyRdf_Format $format
+	 * @param RdfWriter $emitter
 	 * @param string $baseUri
 	 * @param string $dataUri
 	 * @param SiteList $sites;
 	 * @param EntityLookup $entityLookup
-	 * @param integer flavor
+	 * @param integer $flavor
 	 */
 	public function __construct(
-		EasyRdf_Format $format,
+		RdfWriter $emitter,
 		$baseUri,
 		$dataUri,
 		SiteList $sites,
@@ -68,32 +67,34 @@ class RdfSerializer implements RdfProducer {
 	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
-		$this->format = $format;
+		$this->emitter = $emitter;
 		$this->sites = $sites;
 		$this->entityLookup = $entityLookup;
 		$this->flavor = $flavor;
 	}
 
 	/**
-	 * Returns an EasyRdf_Format object for the given format name.
-	 * The name may be a MIME type or a file extension (or a format URI
-	 * or canonical name).
+	 * Returns an RdfWriter for the given format name.
+	 * The name may be a MIME type, a file extension,
+	 * or a canonical name.
 	 *
 	 * If no format is found for $name, this method returns null.
 	 *
+	 * @deprecated use a RdfWriterFactory instead
+	 *
 	 * @param string $name the name (file extension, mime type) of the desired format.
 	 *
-	 * @return EasyRdf_Format|null the format object, or null if not found.
+	 * @return RdfWriter|null the format object, or null if not found.
 	 */
-	public static function getFormat( $name ) {
-		try {
-			$format = EasyRdf_Format::getFormat( $name );
-			return $format;
-		} catch ( EasyRdf_Exception $ex ) {
-			// noop
+	public static function getRdfWriter( $name ) {
+		$factory = new RdfWriterFactory();
+		$format = $factory->getFormatName( $name );
+
+		if ( !$format ) {
+			return null;
 		}
 
-		return null;
+		return $factory->getWriter( $format );
 	}
 
 	public function getNamespaces() {
@@ -108,25 +109,29 @@ class RdfSerializer implements RdfProducer {
 	public function newRdfBuilder() {
 		//TODO: language filter
 
+		// reset the emitter's output buffer
+		$this->emitter->reset();
+
 		$builder = new RdfBuilder(
 			$this->sites,
 			$this->baseUri,
 			$this->dataUri,
 			$this->entityLookup,
-			$this->flavor
+			$this->flavor,
+			$this->emitter
 		);
 
 		return $builder;
 	}
 
 	/**
-	 * Generates an RDF graph representing the given entity
+	 * Generates an RDF representing the given entity
 	 *
 	 * @param EntityRevision $entityRevision the entity to output.
 	 *
-	 * @return EasyRdf_Graph
+	 * @return string rdf
 	 */
-	public function buildGraphForEntityRevision( EntityRevision $entityRevision ) {
+	private function buildGraphForEntityRevision( EntityRevision $entityRevision ) {
 		$builder = $this->newRdfBuilder();
 
 		$builder->addEntityRevisionInfo(
@@ -139,34 +144,21 @@ class RdfSerializer implements RdfProducer {
 
 		$builder->resolvedMentionedEntities( $this->entityLookup ); //TODO: optional
 
-		$graph = $builder->getGraph();
-		return $graph;
+		$rdf = $builder->getRDF();
+		return $rdf;
 	}
 
 	/**
 	 * Create dump header for RDF dump
 	 * @param int $ts Timestamp (for testing)
-	 * @return string
+	 * @return string RDF
 	 */
 	public function dumpHeader( $ts = 0) {
 		$builder = $this->newRdfBuilder();
 
 		$builder->addDumpHeader( $ts );
 
-		return $this->serializeRdf( $builder->getGraph() );
-	}
-
-	/**
-	 * Returns the serialized graph
-	 *
-	 * @param EasyRdf_Graph $graph the graph to serialize
-	 *
-	 * @return string
-	 */
-	public function serializeRdf( EasyRdf_Graph $graph ) {
-		$serialiser = $this->format->newSerialiser();
-		$data = $serialiser->serialise( $graph, $this->format->getName() );
-		return $data;
+		return $builder->getRDF();
 	}
 
 	/**
@@ -178,16 +170,14 @@ class RdfSerializer implements RdfProducer {
 	 * @return string
 	 */
 	public function serializeEntityRevision( EntityRevision $entityRevision ) {
-		$graph = $this->buildGraphForEntityRevision( $entityRevision );
-		$data = $this->serializeRdf( $graph );
-		return $data;
+		return $this->buildGraphForEntityRevision( $entityRevision );
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getDefaultMimeType() {
-		return $this->format->getDefaultMimeType();
+		return $this->emitter->getMimeType();
 	}
 
 }
