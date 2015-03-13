@@ -75,7 +75,7 @@
                             "latitude": 12.345,
                             "longitude": 67.89,
                             "altitude": null,
-                            "precision": null,
+                            "precision": 0.01,
                             "globe": "http:\/\/www.wikidata.org\/entity\/Q2"
                         },
                         "type": "globecoordinate"
