@@ -14,8 +14,8 @@ class XmlRdfEmitter extends RdfEmitterBase {
 
 	private $namespaces = array();
 
-	public function __construct() {
-		parent::__construct( parent::DOCUMENT_ROLE );
+	public function __construct( $role = parent::DOCUMENT_ROLE, BNodeLabeler $labeler = null ) {
+		parent::__construct( $role, $labeler );
 
 		$this->namespaces['rdf'] = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 	}
@@ -174,6 +174,21 @@ class XmlRdfEmitter extends RdfEmitterBase {
 		$this->emit( $this->escape( $literal ) );
 		$this->close( $this->currentPredicate );
 		$this->emit( "\n" );
+	}
+
+	/**
+	 * @param string $role
+	 * @param BNodeLabeler $labeler
+	 *
+	 * @return RdfEmitterBase
+	 */
+	protected function newSubEmitter( $role, BNodeLabeler $labeler ) {
+		//FIXME: "first subject" logic is messed up!
+
+		$emitter = new self( $role, $labeler );
+		$emitter->namespaces =& $this->namespaces;
+
+		return $emitter;
 	}
 
 }
