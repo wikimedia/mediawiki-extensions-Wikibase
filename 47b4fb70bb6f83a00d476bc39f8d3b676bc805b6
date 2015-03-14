@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7a42a812",
+        "filename": "repo/includes/rdf/BNodeLabeler.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "I think we removed bnodes so we can ignore them now.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1ac29488",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "Why we need to escape unicode? RDF accepts UTF8.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5ac80caa",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "Why not use addclashes here?",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fa36b8ae",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "we\u0027ll be doing this check literally tens of millions of times. Is it really necessary? Nobody but us uses this class, and suffix is always a fixed string produced by us.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9a5464cb",
+        "filename": "repo/includes/rdf/NTriplesRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "Are any of our consumers among those consumers? It\u0027s 2015 after all :)",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ba57e0cc",
+        "filename": "repo/includes/rdf/NTriplesRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "Given this is private, why not eliminate this function and just call quoter directly?",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3a4c3043",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "We shouldn\u0027t give too many options though. Options mean checks, checks mean performance hit. Since we are providing the data to it, we should choose one true way and always use it.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ba40400b",
+        "filename": "repo/includes/rdf/RdfEmitterBase.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "This function needs better name. The link between \"drain\" and \"document footer\" is not clear at all.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3abd10fe",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "Why would we pass emitter to quoteResource?",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_da33bcbe",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "We\u0027re doing two hops here for every value - quoteResource then $this-\u003equoter-\u003equoteResource. It may be better to call quoter directly.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9a3d448d",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "Do we even need getLiteral? All it does is quoting $text (which we can do directly) and add \"@\" and language to the end. Do we really need separate function to join three strings? Also, it\u0027s not pluggable since we instantiate concrete quoter class in this class, so I don\u0027t see why we need extra hop here.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5a47ac22",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand why this is two strings and not one. Probably needs some explanation somewhere.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1a5134dd",
+        "filename": "repo/includes/rdf/UnicodeEscaper.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "We probably can replace this with something like:\naddcslashes($str, \"\\x0..\\x1F\\\"\\\\\")",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fa5d58f0",
+        "filename": "repo/includes/rdf/XmlRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "We may want to explicitly provide encoding here, otherwise it is using system one, which may be who knows what. Also, something like ENT_SUBSTITUTE may be useful since we may get dirty data potentially, but it\u0027s 5.4+ so not sure if we\u0027re allowed to use it.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_da5adcf8",
+        "filename": "repo/includes/rdf/XmlRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-14T01:48:21Z",
+      "side": 1,
+      "message": "Do we really need to check tag names? We will have millions of tags \u003d\u003e millions of preg_match calls. All of them will be succeeding unless we have bug in other part of our code that somehow produces invalid tags.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
