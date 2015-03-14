@@ -74,8 +74,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Eg godtek desse vilkåra for endringar eg gjer i framtida. Ikkje vis denne meldinga meir.",
 	"wikibase-entityselector-more": "meir",
 	"wikibase-anonymouseditwarning": "'''Åtvaring:''' Du er ikkje innlogga.\nIP-adressa di vert lagra i endringshistorikken til denne eininga.",
-	"wikibase-restrictionedit-tooltip-message": "Denne sida er verna. Endring er ikkje tillate.",
-	"wikibase-blockeduser-tooltip-message": "Du har ikkje løyve til å endra av di brukarnamnet ditt eller IP-adressa di er blokkert",
 	"wikibase-move-error": "Du kan ikkje flytte sider i datanamnerommet, og du kan ikkje flytte sider inn i det.",
 	"wikibase-validator-label-conflict": "Ein annan eigenskap ($3) har alt merkelappen «$1» for språkkoden $2.",
 	"wikibase-validator-label-with-description-conflict": "Eit anna element ($3) har alt merkelappen «$1» og skildringa «$4» for språkkoden $2.",

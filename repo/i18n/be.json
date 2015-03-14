@@ -57,8 +57,6 @@
 	"wikibase-snakview-variations-novalue-label": "значэнне не зададзена",
 	"wikibase-snakview-snaktypeselector-value": "сваё значэнне",
 	"wikibase-entityselector-more": "яшчэ",
-	"wikibase-restrictionedit-tooltip-message": "Гэта старонка пад аховай. Яе праўка не дазволена.",
-	"wikibase-blockeduser-tooltip-message": "Магчымасць праўкі для вас была заблакавана.",
 	"wikibase-move-error": "Вы не можаце пераназываць старонкі, якія знаходзяцца ў прасторы дадзеных, і вы не можаце перамяшчаць старонкі ў яго.",
 	"wikibase-validator-label-conflict": "Назва «$1», звязаная з кодам мовы «$2», ужо прысвоена іншай уласцівасці ($3)",
 	"wikibase-validator-label-with-description-conflict": "Назва «$1» і апісанне «$4», звязаныя з кодам мовы «$2», ужо прысвоены іншаму элементу ($3)",

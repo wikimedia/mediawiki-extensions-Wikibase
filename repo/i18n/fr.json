@@ -130,8 +130,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "J’accepte ces conditions pour mes prochaines modifications. Ne plus afficher ce message.",
 	"wikibase-entityselector-more": "plus",
 	"wikibase-anonymouseditwarning": "Attention: Vous n’êtes pas connecté.\nVotre adresse IP sera enregistrée dans l’historique des modifications de cette entité.",
-	"wikibase-restrictionedit-tooltip-message": "Cette page est protégée. L'édition n'est pas autorisée.",
-	"wikibase-blockeduser-tooltip-message": "Vous n'êtes pas autorisé à modifier, car votre nom d'utilisateur ou adresse IP a été bloqué.",
 	"wikibase-move-error": "Vous ne pouvez pas déplacer des pages situées dans un espace des données, ni déplacer des pages vers cet espace.",
 	"wikibase-validator-sitelink-conflict": "Le lien $1 est déjà utilisé par l’élément $2. Vous pouvez le supprimer de $2 s’il n’a rien à faire là, ou fusionner les éléments s’ils concernent exactement le même sujet.",
 	"wikibase-validator-label-conflict": "La propriété $3 a déjà un libellé « $1 » associé au code de langue $2.",

@@ -58,8 +58,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Менің бұдан кейінгі өңдемелерім үшін бұл шарттармен келісемін. Бұл хабарламаларды қайтадан көрсетпе.",
 	"wikibase-entityselector-more": "толығырақ",
 	"wikibase-anonymouseditwarning": "Ескерту: Сіз жүйеге кірмегенсіз. \nIP-мекенжайыңыз бұл енгізілімнің түзету тарихында жазылып алынады.",
-	"wikibase-restrictionedit-tooltip-message": "Бұл бет құлыпталған. Өңдеуге рұқсатыңыз жоқ.",
-	"wikibase-blockeduser-tooltip-message": "Қатысушы атыңыз не IP мекенжайыңыз бұғатталғандықтан өңдеуге рұқсатыңыз жоқ.",
 	"special-itembytitle": "Түріне қарай элемент",
 	"wikibase-itembytitle-lookup-site": "Сайт:",
 	"wikibase-itembytitle-lookup-page": "Бет:",

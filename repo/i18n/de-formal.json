@@ -10,7 +10,6 @@
 	"wikibase-description-input-help-message": "Geben Sie eine kurze Beschreibung in $1 an.",
 	"wikibase-sitelinks-input-help-message": "Legen Sie eine Verknüpfung zu einer diesem Datenobjekt entsprechenden Seite fest.",
 	"wikibase-aliases-input-help-message": "Sofern dieser Datensatz unter mehr als einem bestimmten Namen bekannt ist, können Sie Aliasse und Synonyme eingeben, damit er auch unter seinen alternativen Namen gefunden werden kann.",
-	"wikibase-blockeduser-tooltip-message": "Sie wurden gesperrt und können daher keine Bearbeitungen machen.",
 	"wikibase-move-error": "Sie können keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Der Sprachcode „$1“ ist unbekannt. Bitte nutzen Sie einen gültige Sprachcode, wie bspw. „de“.",
 	"wikibase-wikibaserepopage-invalid-id": "Die Kennung „$1“ ist unbekannt. Bitte nutzen Sie eine gültige Objektkennung.",

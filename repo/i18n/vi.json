@@ -103,8 +103,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Tôi chấp nhận các điều khoản này đối với các sửa đổi của tôi trong tương lai. Từ nay bỏ qua thông báo này.",
 	"wikibase-entityselector-more": "thêm",
 	"wikibase-anonymouseditwarning": "Cảnh báo: Bạn chưa đăng nhập.\nĐịa chỉ IP của bạn sẽ được ghi lại trong lịch sử sửa đổi của thực thể này.",
-	"wikibase-restrictionedit-tooltip-message": "Trang này bị khóa không cho phép sửa đổi.",
-	"wikibase-blockeduser-tooltip-message": "Bạn không có quyền sửa đổi do tài khoản hoặc địa chỉ IP của bạn đã bị cấm.",
 	"wikibase-move-error": "Không thể di chuyển các trang trong một không gian tên dữ liệu và không thể di chuyển trang khác vào không gian tên này.",
 	"wikibase-validator-sitelink-conflict": "Liên kết $1 đã được sử dụng bởi khoản mục $2. Nếu $2 không nên có liên kết này, hãy loại bỏ nó; nếu $2 và khoản mục này cùng đề tài, hãy hợp nhất các khoản mục.",
 	"wikibase-validator-label-conflict": "Thuộc tính $3 đã có nhãn “$1” ứng với mã ngôn ngữ $2.",

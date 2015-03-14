@@ -32,9 +32,12 @@
 	"wikibase-sitelink-page-edit-placeholder": "straipsnis",
 	"wikibase-statements": "Faktinė informacija",
 	"wikibase-terms": "Kitomis kalbomis",
+	"wikibase-sitelinks-special": "Kiti tinklapiai",
 	"wikibase-remove": "pašalinti",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|įvestis|įvestys|įvesčių}}",
 	"wikibase-aliases-label": "Taip pat žinomas kaip:",
+	"wikibase-aliases-empty": "Sinonimai neapibrėžti.",
+	"wikibase-statementview-rank-normal": "Normalus reitingas",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|šaltinis|šaltiniai|šaltinių}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Vienas šaltinis|$1 šaltiniai}} dar neišsaugoti",
 	"wikibase-snakview-property-input-placeholder": "savybė",
@@ -42,7 +45,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Aš sutinku su šiomis taisyklėmis darydamas keitimus ateityje. Daugiau nerodykite šio pranešimo.",
 	"wikibase-entityselector-more": "daugiau",
 	"wikibase-anonymouseditwarning": "Dėmesio: Jūs neprisijungęs.\nJūsų IP adresas bus įrašytas į šio $1 keitimų istoriją.",
-	"wikibase-restrictionedit-tooltip-message": "Puslapis apsaugotas. Keitimai negalimi.",
 	"wikibase-itembytitle-summary": "Ypatingas atvejis:ItemByTitle naudojama surasti atitinkamą elementą tam tikrame puslapyje atverstoje svetainėje. <br /> kairiajame laukelyje, \"Site:\", jūs įvedate kalbos ir svetainės kodą. <br /> dešiniajame laukelyje, \"Page:\", jūs turite įvesti tikslų puslapio pavadinimą, kaip jis atrodo atverstoje svetainėje.",
 	"wikibase-restoreold": "perkrauti"
 }

@@ -67,8 +67,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Akceptěruju toś te wuměnjenja za swóje pśiduce změny. Njepokaž toś tu powěźeńku hyšći raz.",
 	"wikibase-entityselector-more": "wěcej",
 	"wikibase-anonymouseditwarning": "Warnowanje: Njejsy pśizjawjony. Twója IP-adresa pśewzejo se do wersijoweje historije toś teje entity.",
-	"wikibase-restrictionedit-tooltip-message": "Toś ten bok jo šćitany, wobźěłowanje njejo dowólone.",
-	"wikibase-blockeduser-tooltip-message": "Njamaš pšawo wobźěłaś, dokulaž twójo wužywarske mě abo twója IP-adresa jo se zablokěrowała.",
 	"wikibase-move-error": "Njamóžoš boki pśesunuś, kótarež su w datowem mjenjowem rumje, a njamóžoš boki do njego pśesunuś.",
 	"wikibase-validator-label-conflict": "Druga kakosć ($3) ma južo pomjenjenje \"$1\" z rěcnym kodom $2.",
 	"wikibase-validator-label-with-description-conflict": "Drugi element ($3) ma južo pomjenjenje \"$1\" a wopisanje \"$4\" z rěcnym kodom $2.",

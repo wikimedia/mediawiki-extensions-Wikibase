@@ -72,8 +72,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Aceto sti termini par le me future modifiche. No sta mostrarme da novo sto mesajo.",
 	"wikibase-entityselector-more": "piassè",
 	"wikibase-anonymouseditwarning": "Ocio: no te ghè mia fato el login.\nIn te la cronologia de $1 vegnarà registrà el to indiriso IP.",
-	"wikibase-restrictionedit-tooltip-message": "Sta pagina la xe proteta. No se pol mia modificarla.",
-	"wikibase-blockeduser-tooltip-message": "No te ghè el parmesso de modifica, parché el to nome utente o l'indiriso IP el xe stà blocà.",
 	"wikibase-move-error": "No te pol mia spostar pagine che xe nel namespace dei dati, e no te pol mia spostar pagine su de elo.",
 	"wikibase-validator-label-conflict": "N'altra proprietà ($3) la ga zà l'eticheta \"$1\" asocià col còdese lengua $2",
 	"wikibase-validator-label-with-description-conflict": "N'altro elemento ($3) el ga zà l'eticheta \"$1\" e la descrision \"$4\" asocià col còdese lengua $2",

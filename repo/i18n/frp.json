@@ -40,8 +40,6 @@
 	"wikibase-aliases-empty": "Gins d’aliâs dèfeni.",
 	"wikibase-propertypage-datatype": "Tipo de donâs",
 	"wikibase-snakview-property-input-placeholder": "propriètât",
-	"wikibase-restrictionedit-tooltip-message": "Ceta pâge est protègiêye, lo changement est pas ôtorisâ.",
-	"wikibase-blockeduser-tooltip-message": "Vos éte blocâ en changement.",
 	"wikibase-validator-label-conflict": "N’ôtra propriètât ($3) at ja lo lambél « $1 » associyê u code lengoua $2",
 	"wikibase-validator-label-with-description-conflict": "Un ôtr’èlèment ($3) at ja lo lambél « $1 » et la dèscripcion « $4 » associyês u code lengoua $2",
 	"wikibase-wikibaserepopage-invalid-langcode": "Lo code lengoua « $1 » est encognu. Volyéd empleyér un code lengoua cognu du sistèmo, per ègzemplo « frp ».",

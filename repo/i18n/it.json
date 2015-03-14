@@ -111,8 +111,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Accetto questi termini per le mie future modifiche. Non mostrare di nuovo questo messaggio.",
 	"wikibase-entityselector-more": "altro",
 	"wikibase-anonymouseditwarning": "Attenzione: Accesso non effettuato.\nNella cronologia dell'entità verrà registrato il tuo indirizzo IP.",
-	"wikibase-restrictionedit-tooltip-message": "Questa pagina è protetta, la modifica non è consentita.",
-	"wikibase-blockeduser-tooltip-message": "Non hai il permesso di modifica, perché il tuo nome utente o l'indirizzo IP è stato bloccato.",
 	"wikibase-move-error": "Non è possibile spostare le pagine che sono in un namespace dei dati e non è possibile spostare le pagine in esso.",
 	"wikibase-validator-sitelink-conflict": "Il collegamento $1 è già usato dall'elemento $2. Puoi rimuoverlo da $2 se non coincide, o unire gli elementi se sono sullo stesso argomento esatto.",
 	"wikibase-validator-label-conflict": "La proprietà $3 ha già l'etichetta \"$1\" associata con il codice lingua $2.",

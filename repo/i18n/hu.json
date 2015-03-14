@@ -74,8 +74,6 @@
 	"wikibase-shortcopyrightwarning": "A „$1” gombra kattintással elfogadod a [[$2|felhasználási feltételeket]] és visszavonhatatlan engedélyt adsz szerkesztéseid felhasználására a $3 szerint.",
 	"wikibase-copyrighttooltip-acknowledge": "A további szerkesztéseim során elfogadom a fenti feltételeket. Ez az üzenet ne jelenjen meg újra.",
 	"wikibase-entityselector-more": "több",
-	"wikibase-restrictionedit-tooltip-message": "Ez egy védett lap, nem lehet szerkeszteni.",
-	"wikibase-blockeduser-tooltip-message": "Nincs engedélyed a szerkesztéshez, mert a felhasználóneved vagy IP-címed blokkolva van.",
 	"wikibase-move-error": "Nem lehet lapokat mozgatni egy adatnévtéren belül, vagy abba.",
 	"wikibase-validator-label-conflict": "A(z) $3 tulajdonság már használja a(z) „$1” címkét a(z) $2 kódú nyelven.",
 	"wikibase-validator-label-with-description-conflict": "A(z) $3 elem már használja a(z) „$1” címkét azonos leírással a(z) $2 kódú nyelven.",

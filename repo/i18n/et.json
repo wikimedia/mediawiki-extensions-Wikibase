@@ -99,8 +99,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Nõustun tegema edasisi muudatusi kooskõlas nende tingimustega. Ära seda sõnumit enam näita.",
 	"wikibase-entityselector-more": "veel",
 	"wikibase-anonymouseditwarning": "Hoiatus: Sa pole sisse loginud.\nSinu IP-aadress talletatakse olemi ajaloos.",
-	"wikibase-restrictionedit-tooltip-message": "See lehekülg on kaitstud. Redigeerimine pole lubatud.",
-	"wikibase-blockeduser-tooltip-message": "Sul pole redigeerimisluba, sest su kasutajanimi või IP-aadress on blokeeritud.",
 	"wikibase-move-error": "Andmete nimeruumis olevaid lehekülgi ei saa teisaldada. Samuti ei saa sinna mujalt lehekülgi teisaldada.",
 	"wikibase-validator-sitelink-conflict": "Link $1 on juba kasutuses üksuse $2 juures. Võid lingi üksuse $2 juurest eemaldada, kui see ei kuulu sinna, või liita kaks üksust, kui need on samast asjast.",
 	"wikibase-validator-label-conflict": "Omadusel $3 on juba silt \"$1\", mis on seotud keelekoodiga $2.",

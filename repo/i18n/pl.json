@@ -107,8 +107,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Przyjmuję te warunki dla moich przyszłych edycji. Nie pokazuj więcej tego komunikatu.",
 	"wikibase-entityselector-more": "więcej",
 	"wikibase-anonymouseditwarning": "Ostrzeżenie: Nie jesteś zalogowany.\nW historii edycji tej encji zostanie zapisany Twój adres IP.",
-	"wikibase-restrictionedit-tooltip-message": "Ta strona jest zabezpieczona. Edytowanie nie jest dozwolone.",
-	"wikibase-blockeduser-tooltip-message": "Nie masz uprawnienia do edycji, ponieważ twój login lub adres IP został zablokowany.",
 	"wikibase-move-error": "Nie można przenosić stron, które znajdują się w przestrzeni nazw danych, a także nie można przenosić do niej stron.",
 	"wikibase-validator-sitelink-conflict": "Odnośnik do strony $1 jest już wykorzystywany przez element $2. Możesz usunąć go z $2, jeśli nie jest z nim związany, lub połączyć elementy, jeśli odnoszą się dokładnie do tego samego tematu.",
 	"wikibase-validator-label-conflict": "Właściwość $3 ma już etykietę „$1” powiązaną z językiem o kodzie $2.",

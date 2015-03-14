@@ -94,8 +94,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "今後の編集についてこれらの規約に同意します。次回からこのメッセージを表示しないでください。",
 	"wikibase-entityselector-more": "続き",
 	"wikibase-anonymouseditwarning": "警告: ログインしていません。\n編集すると、IP アドレスがこのエンティティの編集履歴に記録されます。",
-	"wikibase-restrictionedit-tooltip-message": "このページは保護されています。編集は許可されていません。",
-	"wikibase-blockeduser-tooltip-message": "利用者名または IP アドレスがブロックされているため、あなたには編集する権限がありません。",
 	"wikibase-move-error": "データ名前空間内のページは移動できず、データ名前空間内にページを移動させることもできません。",
 	"wikibase-validator-sitelink-conflict": "リンク「$1」は既に項目「$2」で使われています。「$2」で使われているのが誤りならばそこから除去できますし、まったく同じ話題に関するものならば項目を統合することができます。",
 	"wikibase-validator-label-conflict": "言語コード $2 に関連付けられたラベル「$1」を持つプロパティ ($3) が既にあります。",

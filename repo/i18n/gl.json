@@ -95,8 +95,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Acepto estes termos para as miñas futuras edicións. Non quero ver a mensaxe de novo.",
 	"wikibase-entityselector-more": "máis",
 	"wikibase-anonymouseditwarning": "Aviso: Non accedeu ao sistema.\nO seu enderezo IP quedará rexistrado no historial de revisións desta entidade.",
-	"wikibase-restrictionedit-tooltip-message": "Esta páxina está protexida. Non se permite a edición.",
-	"wikibase-blockeduser-tooltip-message": "Non ten os permisos necesarios para editar porque o seu nome de usuario ou enderezo IP está bloqueado.",
 	"wikibase-move-error": "Non pode trasladar as páxinas que se atopan nun espazo de nomes de datos, e tampouco pode mover páxinas a ese espazo de nomes.",
 	"wikibase-validator-label-conflict": "A propiedade $3 xa ten a etiqueta \"$1\" asociada ao código de lingua $2.",
 	"wikibase-validator-label-with-description-conflict": "O elemento $3 xa ten a etiqueta \"$1\" asociada ao código de lingua $2, co mesmo texto de descrición.",

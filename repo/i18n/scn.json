@@ -98,8 +98,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Accettu sti cunnizzioni pî me canciamenti futuri. Nun m'ammustrari cchiu' stu missaggiu.",
 	"wikibase-entityselector-more": "autri cosi",
 	"wikibase-anonymouseditwarning": "Accura: Nun si' trasutu.\nLu to nnirizzu IP sarravi riggistratu ntâ crunuluggìa dî canciamenti di st'entità.",
-	"wikibase-restrictionedit-tooltip-message": "Sta pàggina è prutetta. Lu canciamentu nun è cunsintutu.",
-	"wikibase-blockeduser-tooltip-message": "Nun hai lu pirmissu di fari canciamenti picchì lu to nomu utenti o lu to nnirizzu IP furu bluccati.",
 	"wikibase-move-error": "Nun si ponnu spustari li pàggini chi' sunnu nta nu namespace di dati, e nun si cci ponnu spustari pàggini dintra.",
 	"wikibase-validator-sitelink-conflict": "Lu culligamentu $1 già è adupiratu dû suggettu $2. Lu poi livari di $2 si' nun è ô postu giustu, o puru poi jùnciri li suggetti si' tutti dui sunnu supra ô stissu pricisu argumentu.",
 	"wikibase-validator-label-conflict": "La prupietà $3 già havi l'etichetta \"$1\" assuciata ô còdici di lingua $2.",

@@ -64,8 +64,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Accèpti aquelas condicions per mos modificacions que venon. Afichar pas mai aqueste messatge.",
 	"wikibase-entityselector-more": "mai",
 	"wikibase-anonymouseditwarning": "Atencion: Sètz pas connectat.\nVòstra adreça IP serà enregistrada dins l’istoric de las modificacions d'aquesta entitat.",
-	"wikibase-restrictionedit-tooltip-message": "Aquesta pagina es protegida. L'edicion es pas autorizada.",
-	"wikibase-blockeduser-tooltip-message": "Sètz pas autorizat a modificar, perque vòstre nom d'utilizaire o adreça IP es estat blocat.",
 	"wikibase-validator-label-conflict": "La proprietat $3 a ja un libellat « $1 » associat al còde de lenga $2.",
 	"wikibase-wikibaserepopage-invalid-id": "L’ID « $1 » es desconegut del sistèma. Utilizatz un ID d’entitat valid.",
 	"special-itembytitle": "Element per títol",

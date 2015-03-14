@@ -56,8 +56,6 @@
 	"wikibase-shortcopyrightwarning": "Deur op \"$1\" te kliek stem u tot die [[$2|voorwaardes]] in en gee u onherroeplik toestemming om die bydrae onder die \"$3\" te publiseer.",
 	"wikibase-copyrighttooltip-acknowledge": "Ek aanvaar die voorwaardes vir al my toekomstige wysigings. Moenie die boodskap weer wys nie.",
 	"wikibase-entityselector-more": "meer",
-	"wikibase-restrictionedit-tooltip-message": "Hierdie bladsy is beskerm. Wysigings word nie toegelaat nie.",
-	"wikibase-blockeduser-tooltip-message": "U is geblokkeer en kan nie wysiging maak nie.",
 	"special-itembytitle": "Item volgens naam",
 	"wikibase-itembytitle-lookup-fieldset": "Items soek volgens webwerf en bladsynaam",
 	"wikibase-itembytitle-lookup-site": "Webwerf:",

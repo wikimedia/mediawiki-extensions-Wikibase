@@ -107,8 +107,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Přijímám tyto podmínky pro své budoucí editace. Tuto zprávu už příště nezobrazovat.",
 	"wikibase-entityselector-more": "více",
 	"wikibase-anonymouseditwarning": "Varování: Nejste přihlášen(a).\nVaše IP adresa bude zobrazena v historii této entity.",
-	"wikibase-restrictionedit-tooltip-message": "Tato stránka je zamčena. Úprava není dovolena.",
-	"wikibase-blockeduser-tooltip-message": "Nemáte oprávnění editovat, protože byla zablokována vaše IP adresa či uživatelské jméno.",
 	"wikibase-move-error": "Nemůžete přesouvat stránky v datovém jmenném prostoru, ani nemůžete stránky přesouvat do něj.",
 	"wikibase-validator-sitelink-conflict": "Odkaz na stránku $1 se už používá v položce $2. Pokud do položky $2 nepatří, můžete ho odtamtud odstranit; pokud jsou položky o totožném tématu, můžete je sloučit.",
 	"wikibase-validator-label-conflict": "Štítek „$1“ pro jazykový kód $2 již má vlastnost $3.",

@@ -88,8 +88,6 @@
 	"wikibase-shortcopyrightwarning": "Ao clicar em \"$1\", você concorda com os [[$2|termos de uso]] e irrevogavelmente aceita disponibilizar sua contribuição sob $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Eu aceito estes termos para minhas futuras edições. Não mostre esta mensagem novamente.",
 	"wikibase-entityselector-more": "mais",
-	"wikibase-restrictionedit-tooltip-message": "Esta página está protegida. Não é possível editar.",
-	"wikibase-blockeduser-tooltip-message": "Você não tem permissão para editar porque sua conta de usuário ou endereço IP foi bloqueado.",
 	"wikibase-move-error": "Você não pode mover páginas que estão no espaço nominal de dados nem mover páginas para dentro desse espaço nominal.",
 	"wikibase-validator-label-conflict": "Outra propriedade ($3) já possui o rótulo \"$1\" associado com o código de idioma $2.",
 	"wikibase-validator-label-with-description-conflict": "Outro item ($3) já possui o rótulo \"$1\" e a descrição \"$4\" associados com o código de idioma $2.",
