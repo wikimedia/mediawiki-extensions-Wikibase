@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
@@ -37,8 +36,8 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	public function getElementInstances() {
 		return array(
 			new Reference(),
-			new Reference( new SnakList( array( new PropertyNoValueSnak( 2 ) ) ) ),
-			new Reference( new SnakList( array( new PropertyNoValueSnak( 3 ) ) ) ),
+			new Reference( array( new PropertyNoValueSnak( 2 ) ) ),
+			new Reference( array( new PropertyNoValueSnak( 3 ) ) ),
 		);
 	}
 
@@ -101,7 +100,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenCloneOfReferenceInList_hasReferenceReturnsTrue() {
 		$list = new ReferenceList();
 
-		$reference = new Reference( new SnakList( array( new PropertyNoValueSnak( 42 ) ) ) );
+		$reference = new Reference( array( new PropertyNoValueSnak( 42 ) ) );
 		$sameReference = unserialize( serialize( $reference ) );
 
 		$list->addReference( $reference );
@@ -306,7 +305,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyNoValueSnak( 1 );
 
 		$references->addNewReference( $snak );
-		$this->assertTrue( $references->hasReference( new Reference( new SnakList( array( $snak ) ) ) ) );
+		$this->assertTrue( $references->hasReference( new Reference( array( $snak ) ) ) );
 	}
 
 	public function testGivenMultipleSnaks_addNewReferenceAddsThem() {
@@ -339,14 +338,10 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 		$references->addReference( new Reference() );
 
-		$references->addReference( new Reference(
-			new SnakList(
-				array(
-					new PropertyNoValueSnak( 2 ),
-					new PropertyNoValueSnak( 3 )
-				)
-			)
-		) );
+		$references->addReference( new Reference( array(
+			new PropertyNoValueSnak( 2 ),
+			new PropertyNoValueSnak( 3 ),
+		) ) );
 
 		$serialized = serialize( $references );
 		$this->assertTrue( $references->equals( unserialize( $serialized ) ) );
