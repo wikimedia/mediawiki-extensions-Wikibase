@@ -81,7 +81,6 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider snakListProvider
-	 *
 	 * @param Snaks $snaks
 	 */
 	public function testConstructor( Snaks $snaks ) {
@@ -257,7 +256,6 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorArgumentsProvider
-	 * @param mixed $snaks
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidConstructorArguments_constructorThrowsException( $snaks ) {
@@ -278,6 +276,20 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 			array( array( new SnakList() ) ),
 			array( new Reference() ),
 		);
+	}
+
+	public function testIsEmpty() {
+		$emptyReference = new Reference();
+		$this->assertTrue( $emptyReference->isEmpty() );
+
+		$referenceWithSnak = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$this->assertFalse( $referenceWithSnak->isEmpty() );
+
+		$referenceWithSnaks = new Reference( array(
+			new PropertyNoValueSnak( 1 ),
+			new PropertyNoValueSnak( 2 )
+		) );
+		$this->assertFalse( $referenceWithSnaks->isEmpty() );
 	}
 
 }

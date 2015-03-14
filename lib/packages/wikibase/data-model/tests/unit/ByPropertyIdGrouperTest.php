@@ -50,7 +50,6 @@ class ByPropertyIdGrouperTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideGetPropertyIds
-	 *
 	 * @param PropertyIdProvider[] $propertyIdProviders
 	 * @param PropertyId[] $expectedPropertyIds
 	 */
@@ -82,7 +81,6 @@ class ByPropertyIdGrouperTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideGetByPropertyId
-	 *
 	 * @param PropertyIdProvider[] $propertyIdProviders
 	 * @param string $propertyId
 	 * @param string[] $expectedValues
@@ -120,10 +118,9 @@ class ByPropertyIdGrouperTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideHasPropertyId
-	 *
 	 * @param PropertyIdProvider[] $propertyIdProviders
 	 * @param string $propertyId
-	 * @param boolean $expectedValue
+	 * @param bool $expectedValue
 	 */
 	public function testHasPropertyId( array $propertyIdProviders, $propertyId, $expectedValue ) {
 		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProviders );

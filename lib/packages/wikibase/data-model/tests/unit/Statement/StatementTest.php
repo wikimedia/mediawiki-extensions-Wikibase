@@ -242,7 +242,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 				new PropertyNoValueSnak( 1337 ),
 			) ),
 			new ReferenceList( array(
-				new PropertyNoValueSnak( 1337 ),
+				new Reference( array( new PropertyNoValueSnak( 1337 ) ) ),
 			) )
 		);
 
@@ -294,7 +294,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 			new PropertyNoValueSnak( 42 ),
 			new SnakList( array() ),
 			new ReferenceList( array(
-				new PropertyNoValueSnak( 1337 ),
+				new Reference( array( new PropertyNoValueSnak( 1337 ) ) ),
 			) )
 		);
 
@@ -302,7 +302,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 			new PropertyNoValueSnak( 42 ),
 			new SnakList( array() ),
 			new ReferenceList( array(
-				new PropertyNoValueSnak( 32202 ),
+				new Reference( array( new PropertyNoValueSnak( 32202 ) ) ),
 			) )
 		);
 
@@ -352,7 +352,9 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$statement = new Statement(
 			new PropertyNoValueSnak( 42 ),
 			$qualifiers,
-			new ReferenceList( array( new PropertyNoValueSnak( 1337 ) ) )
+			new ReferenceList( array(
+				new Reference( array( new PropertyNoValueSnak( 1337 ) ) ),
+			) )
 		);
 
 		$statement->setRank( Statement::RANK_NORMAL );

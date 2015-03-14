@@ -99,15 +99,15 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider descriptionProvider
 	 * @param string $languageCode
-	 * @param string $labelText
+	 * @param string $description
 	 * @param string $moarText
 	 */
-	public function testSetDescription( $languageCode, $labelText, $moarText = 'ohi there' ) {
+	public function testSetDescription( $languageCode, $description, $moarText = 'ohi there' ) {
 		$entity = $this->getNewEmpty();
 
-		$entity->setDescription( $languageCode, $labelText );
+		$entity->setDescription( $languageCode, $description );
 
-		$this->assertEquals( $labelText, $entity->getDescription( $languageCode ) );
+		$this->assertEquals( $description, $entity->getDescription( $languageCode ) );
 
 		$entity->setDescription( $languageCode, $moarText );
 
@@ -117,26 +117,26 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider descriptionProvider
 	 * @param string $languageCode
-	 * @param string $labelText
+	 * @param string $description
 	 */
-	public function testGetDescription( $languageCode, $labelText ) {
+	public function testGetDescription( $languageCode, $description ) {
 		$entity = $this->getNewEmpty();
 
 		$this->assertFalse( $entity->getDescription( $languageCode ) );
 
-		$entity->setDescription( $languageCode, $labelText );
+		$entity->setDescription( $languageCode, $description );
 
-		$this->assertEquals( $labelText, $entity->getDescription( $languageCode ) );
+		$this->assertEquals( $description, $entity->getDescription( $languageCode ) );
 	}
 
 	/**
 	 * @dataProvider descriptionProvider
 	 * @param string $languageCode
-	 * @param string $labelText
+	 * @param string $description
 	 */
-	public function testRemoveDescription( $languageCode, $labelText ) {
+	public function testRemoveDescription( $languageCode, $description ) {
 		$entity = $this->getNewEmpty();
-		$entity->setDescription( $languageCode, $labelText );
+		$entity->setDescription( $languageCode, $description );
 		$entity->removeDescription( $languageCode );
 		$this->assertFalse( $entity->getDescription( $languageCode ) );
 	}
@@ -364,7 +364,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param Entity $entity
 	 */
 	public function testCopy( Entity $entity ) {
@@ -391,7 +390,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param Entity $entity
 	 */
 	public function testSerialize( Entity $entity ) {
@@ -407,7 +405,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param Entity $entity
 	 */
 	public function testHasClaims( Entity $entity ) {
@@ -482,7 +479,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider diffProvider
-	 *
 	 * @param Entity $entity0
 	 * @param Entity $entity1
 	 * @param EntityDiff $expected
@@ -499,7 +495,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param Entity $entity
 	 */
 	public function testGetClaims( Entity $entity ) {
@@ -510,7 +505,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
 	 * @param Entity $entity
 	 */
 	public function testGetAllSnaks( Entity $entity ) {
