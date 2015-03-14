@@ -42,7 +42,7 @@
 	"wikibase-linkitem-not-loggedin": "Du skal være logget ind på denne wiki og i det [$1 centrale datadepot] for at bruge denne funktion.",
 	"wikibase-linkitem-success-link": "Siderne er blevet linket. Du kan finde det emne, der indeholder links, i vores [$1 centrale datadepot].",
 	"wikibase-property-notfound": "Egenskaben $1 ikke fundet.",
-	"wikibase-rc-hide-wikidata": "$1 Wikidata",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Skjul",
 	"wikibase-rc-hide-wikidata-show": "Vis",
 	"wikibase-rc-show-wikidata-pref": "Vis redigeringer af Wikidata i seneste ændringer",
