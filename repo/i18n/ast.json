@@ -86,8 +86,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Aceuto estes condiciones pa les mios futures ediciones. Nun volver a amosar esti mensaxe.",
 	"wikibase-entityselector-more": "más",
 	"wikibase-anonymouseditwarning": "Avisu: Nun anició sesión.\nLa direición IP quedará rexistrada nel historial d'ediciones d'esta entidá.",
-	"wikibase-restrictionedit-tooltip-message": "Esta páxina ta protexida. Nun se permite la edición.",
-	"wikibase-blockeduser-tooltip-message": "Nun tien permisu pa editar porque'l so nome d'usuariu o direición IP tan bloquiaos.",
 	"wikibase-move-error": "Nun pues treslladar les páxines que tan nun espaciu de nomes de datos, y nun pues treslladar páxines al mesmu.",
 	"wikibase-validator-sitelink-conflict": "L'elementu $2 yá usa l'enllaz $1. Pues desanicialu de $2 si nun ye d'allí o fusionar los elementos si son exactamente sobro'l mesmu asuntu.",
 	"wikibase-validator-label-conflict": "La propiedá $3 yá tien la etiqueta «$1» asociada col códigu de llingua $2.",

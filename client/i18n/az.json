@@ -7,9 +7,15 @@
 		]
 	},
 	"wikibase-after-page-move-queued": "Bu səhifə ilə əlaqəli olan [$1 {{WBREPONAME}} qeydi] tezliklə avtomatik dəyişdiriləcək.",
+	"wikibase-comment-update": "{{WBREPONAME}} elementi dəyişdirildi",
 	"wikibase-dataitem": "{{WBREPONAME}} elementi",
 	"wikibase-editlinks": "Keçidlərin redaktəsi",
 	"wikibase-editlinkstitle": "Dillərarası keçidləri redaktə et",
 	"wikibase-linkitem-addlinks": "Keçid əlavə et",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} redaktəsi"
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Gizlət",
+	"wikibase-rc-hide-wikidata-show": "Göstər",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} redaktəsi",
+	"wikibase-otherprojects": "Digər layihələr"
 }

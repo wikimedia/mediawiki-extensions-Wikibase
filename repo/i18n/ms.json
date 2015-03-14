@@ -84,8 +84,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Saya menerima syarat-syarat ini untuk suntingan saya yang akan datang. Jangan paparkan pesanan ini lagi.",
 	"wikibase-entityselector-more": "lagi",
 	"wikibase-anonymouseditwarning": "Amnaran: Anda belum log masuk.\nAlamat IP anda akan dicatatkan dalam sejarah suntingan perkara ini.",
-	"wikibase-restrictionedit-tooltip-message": "Halaman ini dilindungi. Dilarang menyunting.",
-	"wikibase-blockeduser-tooltip-message": "Anda tidak dibenarkan untuk menyunting kerana nama pengguna atau alamat IP anda telah disekat.",
 	"wikibase-move-error": "Anda tidak boleh memindahkan halaman-halaman yang terdapat dalam ruang nama data, dan anda tidak boleh memindahkan halaman-halaman ke dalamnya.",
 	"wikibase-validator-label-conflict": "Satu lagi sifat ($3) sudah ada label \"$1\" yang berkaitan dengan kod bahasa $2",
 	"wikibase-validator-label-with-description-conflict": "Satu lagi perkara ($3) sudah ada label \"$1\" dan keterangan \"$4\" yang berkaitan dengan kod bahasa $2",

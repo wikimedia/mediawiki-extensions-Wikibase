@@ -72,8 +72,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Прихватам ове услове за све моје будуће измене. Не приказуј више ову поруку.",
 	"wikibase-entityselector-more": "још",
 	"wikibase-anonymouseditwarning": "Напомена: Нисте пријављени.\nВаша ИП адреса ће бити забележена у историји измена овог ентитета.",
-	"wikibase-restrictionedit-tooltip-message": "Ова страна је заштићена. Уређивање није дозвољено.",
-	"wikibase-blockeduser-tooltip-message": "Немате дозволу да уређујете јер је ваше корисничко име или ИП адреса блокирана.",
 	"wikibase-validator-label-conflict": "Својство $3 већ има назив „$1“ повезан са језичким кодом $2.",
 	"wikibase-validator-label-with-description-conflict": "Ставка $3 већ има назив „$1“ повезан са језичким кодом $2, са истим описом",
 	"wikibase-wikibaserepopage-invalid-langcode": "Језички идентификатор „$1“ је непознат. Молимо користите језичке идентификаторе познате систему, као што је „sr“",

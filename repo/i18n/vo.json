@@ -10,5 +10,7 @@
 	"wikibase-sitelink-page-edit-placeholder": "pad",
 	"wikibase-sitelinks-special": "Bevüresodatopäds votik",
 	"wikibase-itembytitle-lookup-page": "Pad:",
-	"wikibase-itemdisambiguation-lookup-language": "Pük:"
+	"wikibase-itemdisambiguation-lookup-language": "Pükakot:",
+	"wikibase-modifyterm-language": "Pükakot:",
+	"wikibase-entitieswithoutlabel-label-language": "Pükakot:"
 }

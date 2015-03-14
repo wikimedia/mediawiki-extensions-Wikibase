@@ -109,8 +109,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Ik accepteer deze voorwaarden voor mijn toekomstige bewerkingen. Geef dit bericht niet opnieuw weer.",
 	"wikibase-entityselector-more": "meer",
 	"wikibase-anonymouseditwarning": "Waarschuwing: u bent niet aangemeld.\nUw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.",
-	"wikibase-restrictionedit-tooltip-message": "Deze pagina is beveiligd, bewerken is niet toegestaan.",
-	"wikibase-blockeduser-tooltip-message": "U kunt geen bewerkingen uitvoeren omdat uw gebruikersnaam of IP-adres geblokkeerd is.",
 	"wikibase-move-error": "U kunt pagina's in de gegevensnaamruimte niet hernoemen en u kunt er geen pagina naartoe hernoemen.",
 	"wikibase-validator-label-conflict": "Het label \"$1\" is al gekoppeld met taalcode $2 voor een andere eigenschap ($3).",
 	"wikibase-validator-label-with-description-conflict": "Item $3 is al gekoppeld met het label \"$1\", voor de taalcode $2, die dezelfde beschrijving gebruikt.",

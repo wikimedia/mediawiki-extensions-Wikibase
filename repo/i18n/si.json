@@ -40,8 +40,6 @@
 	"wikibase-aliases-empty": "අන්වර්ථ නාම කිසිවක් අර්ථ දක්වා නොමැත.",
 	"wikibase-propertypage-datatype": "දත්ත වර්ගය",
 	"wikibase-snakview-property-input-placeholder": "ගුණාංගය",
-	"wikibase-restrictionedit-tooltip-message": "මෙම පිටුව ආරක්ෂණය කර ඇත. සංස්කරණයට ඉඩ නොදේ.",
-	"wikibase-blockeduser-tooltip-message": "ඔබව සංස්කරණ කිරීමෙන් වලක්වා ඇත.",
 	"special-itembytitle": "ශීර්ෂය අනුව අයිතමය",
 	"wikibase-itembytitle-lookup-fieldset": "අඩවිය සහ ශීර්ෂය අනුව අයිතමයන් සඳහා සොයන්න",
 	"wikibase-itembytitle-lookup-site": "අඩවිය:",

@@ -76,8 +76,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Ech akzeptéieren dës Bedingunge fir meng zukünfteg Ännerungen. Dëse Message net nach eng Kéier weisen.",
 	"wikibase-entityselector-more": "méi",
 	"wikibase-anonymouseditwarning": "Opgepasst: Dir sidd net ageloggt.\nDowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.",
-	"wikibase-restrictionedit-tooltip-message": "Dës Säit ass gespaart. Änneren ass net erlaabt.",
-	"wikibase-blockeduser-tooltip-message": "Dir hutt net d'Recht fir Ännerungen ze maachen, well Äre Benotzernumm oder Är IP-Adress gespaart gouf.",
 	"wikibase-move-error": "Dir kënnt keng Säiten déi an engem Data-Nummraum si réckelen an Dir kënnt och keng Säiten dohi réckelen.",
 	"wikibase-validator-sitelink-conflict": "De Link $1 gëtt scho vum Element $2 benotzt. Dir kënnt e vu(n) $2 ewechhuelen, wann en net do hi gehéiert, oder déi zwee Elementer fusionéieren wa si iwwer genee deeselwechte Sujet sinn.",
 	"wikibase-validator-label-conflict": "D'Eegeschaft $3 huet schonn d'Etikett \"$1\" associéiert mam Sproochcode $2.",

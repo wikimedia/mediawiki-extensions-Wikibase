@@ -59,8 +59,6 @@
 	"wikibase-shortcopyrightwarning": "Kliknuvši \"$1\", pristajete na [[$2|pravila upotrebe]] i trajno pristajete izdati svoj doprinos pod $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Prihvaćam ove uslove za moja buduća uređivanja. Ne pokazujte više ovu poruku.",
 	"wikibase-entityselector-more": "više",
-	"wikibase-restrictionedit-tooltip-message": "Ova stranica je zaštićena. Uređivanje nije dozvoljeno.",
-	"wikibase-blockeduser-tooltip-message": "Vama je blokirano uređivanje.",
 	"wikibase-move-error": "Ne možete premjestiti stranice koje se nalaze u imenskom prostoru podataka niti premjestiti stranice u taj imenski prostor.",
 	"wikibase-validator-label-conflict": "Oznaka \"$1\" je već povezana sa jezičnim kodom $2 kod nekog drugog svojstva ($3).",
 	"wikibase-validator-label-with-description-conflict": "Druga stavka ($3) je već povezana sa oznakom \"$1\" i opisom \"$4\" za jezični kod $2",

@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Eminn"
+			"Eminn",
+			"Dağlı95"
 		]
 	},
-	"wikibase-error-unexpected": "Xəta: $1"
+	"wikibase-error-unexpected": "Xəta: $1",
+	"wikibase-sitelinks-wikipedia": "Vikipediya"
 }

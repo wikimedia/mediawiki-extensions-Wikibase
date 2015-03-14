@@ -92,8 +92,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Jeg godtar vilkårene for mine fremtidige redigeringer. Ikke vis denne meldingen igjen.",
 	"wikibase-entityselector-more": "mer",
 	"wikibase-anonymouseditwarning": "Advarsel: Du er ikke innlogga.\nIP-adressen din vil bli lagret i redigeringshistorikken.",
-	"wikibase-restrictionedit-tooltip-message": "Denne siden er beskyttet, redigering er ikke tillatt.",
-	"wikibase-blockeduser-tooltip-message": "Du har ikke tilgang til å redigere fordi brukernavnet eller IP-adressen din er blokkert.",
 	"wikibase-move-error": "Du kan ikke flytte sider som er i et datanavnerom, og du kan ikke flytte sider inn i ett.",
 	"wikibase-validator-sitelink-conflict": "Lenken $1 er allerede i bruk av elementet $2. Du kan fjerne den fra $2 hvis den ikke hører hjemme der, eller flette elementene hvis de omhandler samme tema.",
 	"wikibase-validator-label-conflict": "Egenskapen $3 har allerede etiketten «$1» knyttet til språkkoden $2.",

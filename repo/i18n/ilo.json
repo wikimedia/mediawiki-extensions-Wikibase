@@ -83,8 +83,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Awatek dagitoy a termino para kadagiti amin a masakbayan nga urnosek. Saanton nga iparang daytoy a mensahe.",
 	"wikibase-entityselector-more": "adu pay",
 	"wikibase-anonymouseditwarning": "Ballaag: Saanka a nakastrek.\nTi IP a pagtaengam ket mairehistonto iti pakasaritaan ti panagurnos iti daytoy nga entidad.",
-	"wikibase-restrictionedit-tooltip-message": "Daytoy a panid ket nasalakniban. Saan a maipalubos ti agurnos.",
-	"wikibase-blockeduser-tooltip-message": "Awan ti pammalubosmo nga agurnos gaputa ti nagan nga agar-aramat wenno IP a pagtaengam ket naserraanen.",
 	"wikibase-move-error": "Saanmo a mabalin nga iyalis dagiti panid nga adda datos a nagan ti lugar, ken saanmo a mabalin ti agiyalis kadagiti panid iti daytoy.",
 	"wikibase-validator-label-conflict": "Adda ti tagikua ti ($3) nga adda etiketana ti \"$1\" a mainaig ti pagsasao a kodigo ti $2.",
 	"wikibase-validator-label-with-description-conflict": "Adda sabali a banag ti ($3) nga adda etiketana ti  \"$1\" ken panagipalpalawag ti \"$4\" a mainaig ti pagsasao a kodigo ti $2.",

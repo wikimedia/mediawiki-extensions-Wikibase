@@ -83,8 +83,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Te pogoje sprejmem za vsa prihodnja urejanja. Tega sporočila ne prikaži več.",
 	"wikibase-entityselector-more": "več",
 	"wikibase-anonymouseditwarning": "Opozorilo: niste prijavljeni.\nV povzetku urejanja tega predmeta bo shranjen vaš IP-naslov.",
-	"wikibase-restrictionedit-tooltip-message": "Ta stran je zaščitena. Urejanje ni dovoljeno.",
-	"wikibase-blockeduser-tooltip-message": "Nimate dovoljenja za urejanje, saj je vaše uporabniško ime ali IP-naslov blokiran.",
 	"wikibase-move-error": "Strani v imenskem prostoru podatkov ne morete prestavljati, prav tako tudi ne morete strani prestavljati vanj.",
 	"special-itembytitle": "Predmet po naslovu",
 	"wikibase-itembytitle-lookup-fieldset": "Iskanje predmetov po spletišču in naslovu",

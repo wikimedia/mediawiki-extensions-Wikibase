@@ -86,8 +86,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Accepto aquestes condicions per a les meves modificacions futures. No tornis a mostrar aquest missatge.",
 	"wikibase-entityselector-more": "més",
 	"wikibase-anonymouseditwarning": "Avís: no heu iniciat la sessió.\nLa vostra adreça IP quedarà registrada en l'historial d'edició d'aquest element.",
-	"wikibase-restrictionedit-tooltip-message": "Aquesta pàgina està protegida. No s'autoritza cap edició.",
-	"wikibase-blockeduser-tooltip-message": "No teniu permís per editar perquè el vostre nom d'usuari o la vostra adreça IP han estat blocats.",
 	"wikibase-move-error": "No podeu desplaçar pàgines de l'espai de noms de dades, i tampoc no podeu desplaçar-hi pàgines.",
 	"wikibase-validator-label-conflict": "Una altra propietat ($3) ja té l'etiqueta \"$1\" associada amb el codi d'idioma $2.",
 	"wikibase-validator-label-with-description-conflict": "Una altre element ($3) ja té l'etiqueta \"$1\" i la descripció \"$4\" associada amb el codi d'idioma $2.",

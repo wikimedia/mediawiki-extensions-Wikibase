@@ -85,8 +85,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "I aceto se condission për mie future modìfiche. Mostré pi nen ës mëssagi.",
 	"wikibase-entityselector-more": "pi",
 	"wikibase-anonymouseditwarning": "Atension: A l'é nen rintrà ant ël sistema.\nSoa adrëssa IP a sarà argistrà ant la stòria dle modìfiche ëd costa entità.",
-	"wikibase-restrictionedit-tooltip-message": "Costa pàgina a l'é protegiùa. As peul pa modifichesse.",
-	"wikibase-blockeduser-tooltip-message": "A l'ha nen ël përmess ëd modifiché përchè sò stranòm o soa adrëssa IP a l'é stàita blocà.",
 	"wikibase-move-error": "A peul pa tramudé dle pàgine che a son ant lë spassi nominal dij dat, e a peul pa tramudé dle pàgine là andrinta.",
 	"wikibase-validator-label-conflict": "N'àutra propietà ($3) a l'ha già na tichëtta «$1» associà al còdes ëd lenga $2.",
 	"wikibase-validator-label-with-description-conflict": "N'àutr element ($3) a l'ha già la tichëtta «$1» e la descrission «$4» associà al còdes ëd lenga $2.",

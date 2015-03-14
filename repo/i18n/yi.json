@@ -78,8 +78,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "איך נעם אָן די דאָזיקע תנאים פאַר מיינע קומעדיקע רעדאַקטירונגען. ווייז נישט מער די דאָזיקע מעלדונג.",
 	"wikibase-entityselector-more": "נאך",
 	"wikibase-anonymouseditwarning": "ווארענונג: איר זענט נישט אריינלאגירט. \nאייער IP־אדרעס וועט ווערן דאקומענטירט אין דעם רעדאקטירן היסטאריע פון דעם אביעקט.",
-	"wikibase-restrictionedit-tooltip-message": "דער בלאט איז געשיצט. מען טאר נישט רעדאקטירן.",
-	"wikibase-blockeduser-tooltip-message": "איר האט נישט קיין דערלויבניש צו רעדאקטירן ווייל אייער באניצער־נאמען אדער IP אדרעס איז געווארן בלאקירט.",
 	"wikibase-validator-label-conflict": "אייגנשאפט $3 האט שוין די באצייכענונג \"$1\" אסאציאירט מיט שפראך קאד $2.",
 	"wikibase-validator-label-with-description-conflict": "דאטנאביעקט $3 האט שויך די באצייכענונג \"$1\" אסאציאירט מיט שפראך קאד $2, וואס ניצט דעם זעלבן באשרײַבונג טעקסט.",
 	"wikibase-wikibaserepopage-invalid-langcode": "דער שפראכקאד \"$1\" איז אומבאקאנט. ביטע ניצט א גילטיקן שפראכקאד, למשל \"yi\".",

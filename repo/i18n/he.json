@@ -105,8 +105,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "קיבלתי את התנאים האלה לכל העריכות העתידיות שלי. אל תראו לי את ההודעה הזאת שוב.",
 	"wikibase-entityselector-more": "עוד",
 	"wikibase-anonymouseditwarning": "אזהרה: לא נכנסת לחשבון.\nכתובת ה־IP שלך תירשם בהיסטוריית העריכות של הישות הזאת.",
-	"wikibase-restrictionedit-tooltip-message": "הדף הזה מוגן. לא ניתן לערוך.",
-	"wikibase-blockeduser-tooltip-message": "אין לך הרשאה לערוך בשל חסימה של שם המשתמש או של כתובת ה־IP שלך.",
 	"wikibase-move-error": "לא ניתן להעביר דפים במרחב נתונים, ולא ניתן להעביר דפים אליו.",
 	"wikibase-validator-sitelink-conflict": "הקישור $1 כבר משמש בפריט $2. אפשר להסיר אותו מהדף $2 אם אינו שייך לשם או אם זה בדיוק אותו הנושא.",
 	"wikibase-validator-label-conflict": "למאפיין $3 כבר יש תווית \"$1\" שמשויכת לקוד השפה $2.",

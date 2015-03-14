@@ -69,8 +69,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Akceptuju tute wuměnjenja za swoje přichodne změny. Njepokazaj tutu zdźělenku hišće raz.",
 	"wikibase-entityselector-more": "wjace",
 	"wikibase-anonymouseditwarning": "Warnowanje: Njejsy přizjewjeny. Twoja IP-adresa so do wersijowych stawiznow tuteje entity přewozmje.",
-	"wikibase-restrictionedit-tooltip-message": "Tuta strona je škitana, wobdźěłowanje njeje dowolene.",
-	"wikibase-blockeduser-tooltip-message": "Nimaš prawo wobdźěłać, dokelž twoje wužiwarske mjeno abo twoja IP-adresa je so zablokowała.",
 	"wikibase-move-error": "Njemóžeš strony přesunyć, kotrež su w datowym mjenowym rumje, a njemóžeš strony do njeho přesunyć.",
 	"wikibase-validator-label-conflict": "Druha kajkosć ($3) ma hižo pomjenowanje \"$1\" z rěčnym kodom $2.",
 	"wikibase-validator-label-with-description-conflict": "Druhi element ($3) ma hižo woznamjenjenje \"$1\" a wopisanje \"$4\" z rěčnym kodom $2.",

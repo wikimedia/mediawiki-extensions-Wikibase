@@ -92,8 +92,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Ég samþykki þessa skilmála fyrir allar breytingar mínar í framtíðinni. Ekki sýna þessi skilaboð aftur.",
 	"wikibase-entityselector-more": "meira",
 	"wikibase-anonymouseditwarning": "Viðvörun: Þú ert ekki innskráð(ur).\nVistfang þitt skráist í breytingaskrá einingarinnar.",
-	"wikibase-restrictionedit-tooltip-message": "Þessi síða er vernduð, breytingar eru óheimilar.",
-	"wikibase-blockeduser-tooltip-message": "Þú hefur ekki leyfi til að breyta því notendanafn þitt eða vistfang hefur verið bannað.",
 	"wikibase-move-error": "Þú getur ekki fært síður sem eru í gagna nafnrými, né fært síður þangað.",
 	"wikibase-validator-sitelink-conflict": "Vefsvæðistengillinn $1 er þegar í notkun í hlut $2. Þú mátt fjarlægja hann úr $2 ef hann á ekki heima þar eða sameina hlutina ef þeir eru um nákvæmlega það sama.",
 	"wikibase-validator-label-conflict": "Eiginleikinn $3 hefur þegar merkimiðann „$1” tengdan við tungumálakóðann $2.",

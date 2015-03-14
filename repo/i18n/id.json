@@ -80,8 +80,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Saya menerima syarat ini untuk selanjutnya. Jangan tampilkan lagi pesan ini.",
 	"wikibase-entityselector-more": "kembangkan",
 	"wikibase-anonymouseditwarning": "Peringatan: Anda belum masuk log.\nAlamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.",
-	"wikibase-restrictionedit-tooltip-message": "Halaman ini dilindungi. Tidak dapat disunting.",
-	"wikibase-blockeduser-tooltip-message": "Anda diblokir dari penyuntingan.",
 	"wikibase-move-error": "Anda tidak dapat memindahkan halaman pada ruang nama data, dan Anda tidak dapat memindahkan halaman ke dalamnya.",
 	"wikibase-validator-label-conflict": "Properti ($3) sudah memiliki label \"$1\" yang terkait dengan kode bahasa $2",
 	"wikibase-validator-label-with-description-conflict": "Item ($3) sudah memiliki label \"$1\" dan deskripsi \"$4\" yang terkait dengan kode bahasa $2",

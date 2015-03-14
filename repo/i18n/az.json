@@ -1,8 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Khan27"
+			"Khan27",
+			"Dağlı95"
 		]
 	},
-	"wikibase-sitelink-page-edit-placeholder": "səhifə"
+	"wikibase-edit": "redaktə",
+	"wikibase-add": "əlavə et",
+	"wikibase-description-empty": "İzahı yoxdur",
+	"wikibase-sitelink-page-edit-placeholder": "səhifə",
+	"wikibase-statements": "İddialar",
+	"wikibase-sitelinks-special": "Digər saytlar",
+	"wikibase-aliases-empty": "Alternativ adlar müəyyən deyil.",
+	"wikibase-statementview-rank-normal": "Normal dərəcə",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|mənbə|mənbələr}}"
 }

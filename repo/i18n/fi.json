@@ -104,8 +104,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Hyväksyn nämä ehdot tulevissa muokkauksissani. Älä näytä tätä viestiä uudelleen.",
 	"wikibase-entityselector-more": "lisää",
 	"wikibase-anonymouseditwarning": "Varoitus: Et ole kirjautunut sisään.\nIP-osoitteesi kirjataan tämän aiheen muokkaushistoriaan.",
-	"wikibase-restrictionedit-tooltip-message": "Tämä sivu on suojattu. Muokkaaminen ei ole sallittua.",
-	"wikibase-blockeduser-tooltip-message": "Sinulla ei ole lupaa muokata, koska käyttäjänimesi tai IP-osoitteesi on estetty.",
 	"wikibase-move-error": "Et voi siirtää sivuja, jotka ovat data-nimiavaruudessa, etkä voi siirtää sivuja siihen.",
 	"wikibase-validator-sitelink-conflict": "Sivustolinkki $1 on jo käytössä kohteessa $2. Voit poistaa sen kohteesta $2, jos se ei kuulu sinne tai yhdistää kohteet, jos ne ovat täsmälleen samasta asiasta.",
 	"wikibase-validator-label-conflict": "Ominaisuus $3 käyttää jo nimeä \"$1\" kielikoodilla $2.",
