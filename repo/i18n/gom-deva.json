@@ -1,9 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Darshan kandolkar"
+			"Darshan kandolkar",
+			"Konknni mogi 24",
+			"Supriya kankumbikar"
 		]
 	},
 	"wikibase-edit": "संस्करण",
-	"wikibase-statementview-rank-normal": "सामान्य क्रम"
+	"wikibase-add": "जोड",
+	"wikibase-description-empty": "आतां मेरेन खंयचेंच वर्णन दिवूंक ना",
+	"wikibase-statements": "विधानां",
+	"wikibase-sitelinks-special": "हेर वेबसायट",
+	"wikibase-statementview-rank-normal": "सामान्य क्रम",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|संदर्भ|संदर्भ}}"
 }

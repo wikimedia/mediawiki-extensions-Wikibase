@@ -2,15 +2,19 @@
 	"@metadata": {
 		"authors": [
 			"Darshan kandolkar",
-			"Santhosh.thottingal"
+			"Santhosh.thottingal",
+			"Konknni mogi 24"
 		]
 	},
 	"tooltip-t-wikibase": "म्हायती भांडारत जोडिल्ल्या कलमाचो नग",
 	"wikibase-comment-update": "{{WBREPONAME}} नग बदल्ला",
+	"wikibase-dataitem": "{{WBREPONAME}}नग",
 	"wikibase-editlinks": "दुवो संस्करण",
 	"wikibase-editlinkstitle": "आंतरभाशीक दुवो संस्करण",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "लिपयात",
 	"wikibase-rc-hide-wikidata-show": "दाखयात",
 	"wikibase-rc-wikibase-edit-letter": "ड",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} संस्करण"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} संस्करण",
+	"wikibase-otherprojects": "हेर प्रकल्प"
 }

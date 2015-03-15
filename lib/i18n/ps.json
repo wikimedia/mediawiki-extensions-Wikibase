@@ -4,7 +4,9 @@
 			"Ahmed-Najib-Biabani-Ibrahimkhel"
 		]
 	},
+	"wikibase-timedetails-isotime": "وخت ټاپه",
 	"wikibase-sitelinks-wikipedia": "ويکيپېډيا",
 	"wikibase-sitelinks-sitename-columnheading": "ژبه",
-	"wikibase-tooltip-error-details": "تفصيلات"
+	"wikibase-tooltip-error-details": "تفصيلات",
+	"datatypes-type-wikibase-item": "توکی"
 }

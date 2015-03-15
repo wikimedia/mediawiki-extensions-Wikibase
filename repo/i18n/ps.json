@@ -4,6 +4,7 @@
 			"Ahmed-Najib-Biabani-Ibrahimkhel"
 		]
 	},
+	"wikibase-entity-item": "توکی",
 	"wikibase-edit": "سمول",
 	"wikibase-save": "خوندي کول",
 	"wikibase-cancel": "ناگارل",
@@ -34,5 +35,6 @@
 	"wikibase-modifyterm-language": "د ژبې کوډ:",
 	"wikibase-entitieswithoutlabel-label-language": "د ژبې کوډ:",
 	"wikibase-entitieswithoutlabel-submit": "موندل",
-	"wikibase-restoreold": "بيازېرمل"
+	"wikibase-restoreold": "بيازېرمل",
+	"wikibase-listdatatypes-wikibase-item-head": "توکی"
 }
