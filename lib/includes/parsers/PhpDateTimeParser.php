@@ -41,7 +41,7 @@ class PhpDateTimeParser extends StringValueParser {
 	/**
 	 * @var MonthNameUnlocalizer
 	 */
-	private $monthUnlocalizer;
+	private $monthNameUnlocalizer;
 
 	/**
 	 * @var EraParser
@@ -51,8 +51,10 @@ class PhpDateTimeParser extends StringValueParser {
 	public function __construct( EraParser $eraParser, ParserOptions $options = null ) {
 		parent::__construct( $options );
 
+		// FIXME: Do proper dependency injection with the basic MonthNameUnlocalizer class.
 		$languageCode = $options->getOption( ValueParser::OPT_LANG );
-		$this->monthUnlocalizer = new MonthNameUnlocalizer( $languageCode );
+		$this->monthNameUnlocalizer = new MwMonthNameUnlocalizer( $languageCode );
+
 		$this->eraParser = $eraParser;
 	}
 
@@ -75,7 +77,7 @@ class PhpDateTimeParser extends StringValueParser {
 			list( $sign, $value ) = $this->eraParser->parse( $value );
 
 			$value = trim( $value );
-			$value = $this->monthUnlocalizer->unlocalize( $value );
+			$value = $this->monthNameUnlocalizer->unlocalize( $value );
 			$year = $this->fetchAndNormalizeYear( $value );
 			$value = $this->getValueWithFixedSeparators( $value );
 
