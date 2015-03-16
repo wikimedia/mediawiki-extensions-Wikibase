@@ -16,6 +16,24 @@
       "revId": "77175c37cebbb817600d5e7bc45a1004640892fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8004eac9",
+        "filename": "repo/resources/wikibase.special/wikibase.special.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-16T17:58:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_12b84224",
+      "revId": "77175c37cebbb817600d5e7bc45a1004640892fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
