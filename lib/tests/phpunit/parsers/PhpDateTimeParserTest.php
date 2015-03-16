@@ -5,7 +5,9 @@ namespace Wikibase\Lib\Parsers\Test;
 use DataValues\TimeValue;
 use ValueParsers\Test\StringValueParserTest;
 use ValueParsers\TimeParser as IsoTimestampParser;
+use ValueParsers\TimeParser;
 use Wikibase\Lib\Parsers\EraParser;
+use Wikibase\Lib\Parsers\MonthNameUnlocalizer;
 use Wikibase\Lib\Parsers\PhpDateTimeParser;
 
 /**
@@ -35,7 +37,11 @@ class PhpDateTimeParserTest extends StringValueParserTest {
 	 * @return PhpDateTimeParser
 	 */
 	protected function getInstance() {
-		return new PhpDateTimeParser( $this->getEraParser() );
+		return new PhpDateTimeParser(
+			$this->getEraParser(),
+			new MonthNameUnlocalizer( array() ),
+			new TimeParser()
+		);
 	}
 
 	/**
@@ -45,6 +51,7 @@ class PhpDateTimeParserTest extends StringValueParserTest {
 		$mock = $this->getMockBuilder( 'Wikibase\Lib\Parsers\EraParser' )
 			->disableOriginalConstructor()
 			->getMock();
+
 		$mock->expects( $this->any() )
 			->method( 'parse' )
 			->with( $this->isType( 'string' ) )
@@ -59,6 +66,7 @@ class PhpDateTimeParserTest extends StringValueParserTest {
 					return array( $sign, $value ) ;
 				}
 			) );
+
 		return $mock;
 	}
 
