@@ -81,7 +81,7 @@
 		// Pre-parse the template inserting strings and placeholder nodes for jQuery objects jQuery
 		// objects will be appended after the template has been parsed to not lose any references:
 		for( i = 0; i < params.length; i++ ) {
-			if( typeof params[i] === 'string' ) {
+			if( typeof params[i] === 'string' || params[i] instanceof String ) {
 				// insert strings into the template directly but have them parsed by the browser
 				// to detect HTML entities properly (e.g. a &nbsp; in Firefox would show up as a
 				// space instead of an entity which would cause an invalid HTML error)
