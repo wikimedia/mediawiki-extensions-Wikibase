@@ -5,6 +5,7 @@ namespace Wikibase\Repo;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\FormatterLabelLookupFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\LabelLookup;
@@ -43,8 +44,8 @@ class WikibaseHtmlSnakFormatterFactory implements HtmlSnakFormatterFactory {
 	) {
 		$formatterOptions = new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => $languageCode,
-			'languages' => $languageFallbackChain,
-			'LabelLookup' => $labelLookup,
+			FormatterLabelLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallbackChain,
+			FormatterLabelLookupFactory::OPT_LABEL_LOOKUP => $labelLookup,
 		) );
 		return $formatterOptions;
 	}

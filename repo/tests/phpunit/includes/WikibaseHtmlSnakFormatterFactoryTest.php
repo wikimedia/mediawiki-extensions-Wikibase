@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\FormatterLabelLookupFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseHtmlSnakFormatterFactory;
 
@@ -35,8 +36,8 @@ class WikibaseHtmlSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 				SnakFormatter::FORMAT_HTML_WIDGET,
 				new FormatterOptions( array(
 					ValueFormatter::OPT_LANG => 'en',
-					'languages' => $languageFallbackChain,
-					'LabelLookup' => $labelLookup
+					FormatterLabelLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallbackChain,
+					FormatterLabelLookupFactory::OPT_LABEL_LOOKUP => $labelLookup
 				) )
 			)
 			->will( $this->returnValue( $snakFormatter ) );

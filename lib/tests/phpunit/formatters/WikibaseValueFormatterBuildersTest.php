@@ -8,7 +8,6 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use Language;
-use MediaWikiTestCase;
 use Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
@@ -319,14 +318,14 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			),
 			'fallback option' => array(
 				new FormatterOptions( array(
-					'languages' => $fallbackChain,
+					FormatterLabelLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $fallbackChain,
 				) ),
 				new ItemId( 'Q5' ),
 				'@>Name für Q5<@'
 			),
 			'LabelLookup option' => array(
 				new FormatterOptions( array(
-					'LabelLookup' => $labelLookup,
+					FormatterLabelLookupFactory::OPT_LABEL_LOOKUP => $labelLookup,
 				) ),
 				new ItemId( 'Q5' ),
 				'@>Custom LabelLookup<@'
@@ -609,16 +608,16 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 
 		if ( $expectedLanguage !== null ) {
 			$lang = $options->getOption( ValueFormatter::OPT_LANG );
-			$this->assertEquals( $expectedLanguage, $lang, 'option: ' . ValueFormatter::OPT_LANG );
+			$this->assertEquals( $expectedLanguage, $lang, 'OPT_LANG' );
 		}
 
 		if ( $expectedFallback !== null ) {
 			/** @var LanguageFallbackChain $languageFallback */
-			$languageFallback = $options->getOption( 'languages' );
+			$languageFallback = $options->getOption( FormatterLabelLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN );
 			$languages = $languageFallback->getFallbackChain();
 			$lang = $languages[0]->getLanguage()->getCode();
 
-			$this->assertEquals( $expectedFallback, $lang, 'option: languages' );
+			$this->assertEquals( $expectedFallback, $lang, 'OPT_LANGUAGE_FALLBACK_CHAIN' );
 		}
 	}
 
@@ -638,12 +637,17 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				'de'  // derived from language code
 			),
 			'language fallback set' => array(
-				new FormatterOptions( array( 'languages' => $languageFallback ) ),
+				new FormatterOptions( array(
+					FormatterLabelLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallback,
+				) ),
 				'en', // default code is taken from the constructor, not the fallback chain
 				'fr'  // as given
 			),
 			'language code and fallback set' => array(
-				new FormatterOptions( array( ValueFormatter::OPT_LANG => 'de', 'languages' => $languageFallback ) ),
+				new FormatterOptions( array(
+					ValueFormatter::OPT_LANG => 'de',
+					FormatterLabelLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallback,
+				) ),
 				'de', // as given
 				'fr'  // as given
 			),
