@@ -5,11 +5,8 @@ namespace Wikibase\Lib\Parsers;
 use DataValues\TimeValue;
 use DateTime;
 use Exception;
-use ValueParsers\CalendarModelParser;
 use ValueParsers\ParseException;
-use ValueParsers\ParserOptions;
 use ValueParsers\StringValueParser;
-use ValueParsers\TimeParser as IsoTimestampParser;
 use ValueParsers\ValueParser;
 
 /**
@@ -33,7 +30,7 @@ use ValueParsers\ValueParser;
  * @author Adam Shorland
  * @author Thiemo Mättig
  *
- * @todo move me to DataValues-time
+ * @todo Move to data-values/time.
  */
 class PhpDateTimeParser extends StringValueParser {
 
@@ -42,23 +39,36 @@ class PhpDateTimeParser extends StringValueParser {
 	/**
 	 * @var MonthNameUnlocalizer
 	 */
-	private $monthUnlocalizer;
+	private $monthNameUnlocalizer;
 
 	/**
-	 * @var EraParser
+	 * @var ValueParser
 	 */
 	private $eraParser;
 
 	/**
-	 * @param EraParser|null $eraParser
-	 * @param ParserOptions|null $options
+	 * @var ValueParser
 	 */
-	public function __construct( EraParser $eraParser = null, ParserOptions $options = null ) {
-		parent::__construct( $options );
+	private $isoTimestampParser;
 
-		$languageCode = $this->getOption( ValueParser::OPT_LANG );
-		$this->monthUnlocalizer = new MonthNameUnlocalizer( $languageCode );
-		$this->eraParser = $eraParser ?: new EraParser( $this->options );
+	/**
+	 * @param MonthNameUnlocalizer $monthNameUnlocalizer Used to translate month names to English,
+	 * the language PHP's DateTime parser understands.
+	 * @param ValueParser $eraParser String parser that detects signs, "BC" suffixes and such and
+	 * returns an array with the detected sign character and the remaining value.
+	 * @param ValueParser $isoTimestampParser String parser that gets a language independend
+	 * YMD-ordered timestamp and returns a TimeValue object. Used for precision detection.
+	 */
+	public function __construct(
+		MonthNameUnlocalizer $monthNameUnlocalizer,
+		ValueParser $eraParser,
+		ValueParser $isoTimestampParser
+	) {
+		parent::__construct();
+
+		$this->monthNameUnlocalizer = $monthNameUnlocalizer;
+		$this->eraParser = $eraParser;
+		$this->isoTimestampParser = $isoTimestampParser;
 	}
 
 	/**
@@ -77,7 +87,7 @@ class PhpDateTimeParser extends StringValueParser {
 			list( $sign, $value ) = $this->eraParser->parse( $value );
 
 			$value = trim( $value );
-			$value = $this->monthUnlocalizer->unlocalize( $value );
+			$value = $this->monthNameUnlocalizer->unlocalize( $value );
 			$year = $this->fetchAndNormalizeYear( $value );
 			$value = $this->getValueWithFixedSeparators( $value );
 
@@ -92,17 +102,13 @@ class PhpDateTimeParser extends StringValueParser {
 			}
 
 			if ( $year !== null && strlen( $year ) > 4 ) {
-				$timeString = $sign . $year . $dateTime->format( '-m-d\TH:i:s\Z' );
+				$timestamp = $sign . $year . $dateTime->format( '-m-d\TH:i:s\Z' );
 			} else {
-				$timeString = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
+				$timestamp = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
 			}
 
 			// Pass the reformatted string into a base parser that parses this +/-Y-m-d\TH:i:s\Z format with a precision
-			$valueParser = new IsoTimestampParser(
-				new CalendarModelParser( $this->options ),
-				$this->options
-			);
-			return $valueParser->parse( $timeString );
+			return $this->isoTimestampParser->parse( $timestamp );
 		} catch ( Exception $exception ) {
 			throw new ParseException( $exception->getMessage(), $rawValue, self::FORMAT_NAME );
 		}
