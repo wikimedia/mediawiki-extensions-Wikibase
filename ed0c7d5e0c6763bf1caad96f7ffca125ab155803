@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_88496c6c",
+        "filename": "repo/tests/phpunit/data/rdf/Triples.ttl",
+        "patchSetId": 26
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:04:14Z",
+      "side": 1,
+      "message": "I don\u0027t think there should be a space there after acme.",
+      "revId": "ed0c7d5e0c6763bf1caad96f7ffca125ab155803",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
