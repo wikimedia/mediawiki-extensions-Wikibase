@@ -29,10 +29,10 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	private $dateTimeFormatter;
 
 	/**
-	 * @param FormatterOptions $options
+	 * @param FormatterOptions|null $options
 	 * @param ValueFormatter $dateTimeFormatter
 	 */
-	public function __construct( FormatterOptions $options, ValueFormatter $dateTimeFormatter ) {
+	public function __construct( FormatterOptions $options = null, ValueFormatter $dateTimeFormatter ) {
 		parent::__construct( $options );
 
 		$this->dateTimeFormatter = $dateTimeFormatter;

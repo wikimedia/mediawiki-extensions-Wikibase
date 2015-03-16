@@ -76,16 +76,16 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	/**
 	 * @param string $format The name of this formatter's output format.
 	 *        Use the FORMAT_XXX constants defined in SnakFormatter.
-	 * @param FormatterOptions $options
+	 * @param FormatterOptions|null $options
 	 * @param TypedValueFormatter $valueFormatter
 	 * @param PropertyDataTypeLookup $typeLookup
 	 * @param DataTypeFactory $dataTypeFactory
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		$format,
-		FormatterOptions $options,
+		FormatterOptions $options = null,
 		TypedValueFormatter $valueFormatter,
 		PropertyDataTypeLookup $typeLookup,
 		DataTypeFactory $dataTypeFactory
@@ -94,21 +94,14 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 			throw new InvalidArgumentException( '$format must be a string' );
 		}
 
-		$options->defaultOption(
-			self::OPT_LANG,
-			'en'
-		);
-
-		$options->defaultOption(
-			self::OPT_ON_ERROR,
-			self::ON_ERROR_WARN
-		);
-
 		$this->format = $format;
-		$this->options = $options;
+		$this->options = $options ?: new FormatterOptions();
 		$this->valueFormatter = $valueFormatter;
 		$this->typeLookup = $typeLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
+
+		$this->options->defaultOption( self::OPT_LANG, 'en' );
+		$this->options->defaultOption( self::OPT_ON_ERROR, self::ON_ERROR_WARN );
 	}
 
 	private function failOnErrors() {

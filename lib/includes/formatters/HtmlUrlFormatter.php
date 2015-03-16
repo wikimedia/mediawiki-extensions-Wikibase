@@ -23,7 +23,10 @@ class HtmlUrlFormatter implements ValueFormatter {
 	 */
 	protected $attributes;
 
-	public function __construct( FormatterOptions $options ) {
+	/**
+	 * @param FormatterOptions|null $options
+	 */
+	public function __construct( FormatterOptions $options = null ) {
 		//TODO: configure from options
 		$this->attributes = array(
 			'rel' => 'nofollow',
