@@ -29,24 +29,22 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	private $dateTimeFormatter;
 
 	/**
-	 * @param FormatterOptions $options
+	 * @param FormatterOptions|null $options
 	 * @param ValueFormatter $dateTimeFormatter
 	 */
-	public function __construct( FormatterOptions $options, ValueFormatter $dateTimeFormatter ) {
+	public function __construct( FormatterOptions $options = null, ValueFormatter $dateTimeFormatter ) {
 		parent::__construct( $options );
 
 		$this->dateTimeFormatter = $dateTimeFormatter;
 	}
 
 	/**
-	 * Format a time data value
-	 *
 	 * @since 0.5
 	 *
-	 * @param TimeValue $value The time to format
+	 * @param TimeValue $value
 	 *
-	 * @return string HTML
 	 * @throws InvalidArgumentException
+	 * @return string HTML
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof TimeValue ) ) {
@@ -70,7 +68,11 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 * @return bool
 	 */
 	private function calendarNameNeeded( TimeValue $value ) {
-		preg_match( '/^[-+]\d+/', $value->getTime(), $matches );
+		// Loose check if the timestamp string starts with a year
+		if ( !preg_match( '/^[-+]?\d+/', $value->getTime(), $matches ) ) {
+			return true;
+		}
+
 		$year = intval( $matches[0] );
 
 		// This is how the original JavaScript UI decided this:
