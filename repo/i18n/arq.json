@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bachounda"
+			"Bachounda",
+			"Oldstoneage"
 		]
 	},
-	"wikibase-edit": "تبديله"
+	"wikibase-edit": "تبديله",
+	"wikibase-add": "زيد"
 }

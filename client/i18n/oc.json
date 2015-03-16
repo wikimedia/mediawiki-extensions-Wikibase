@@ -4,14 +4,20 @@
 			"Cedric31"
 		]
 	},
-	"specialpages-group-wikibaseclient": "Client {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Ligam cap a l’element de referencial de las donadas connectadas",
+	"wikibase-comment-update": "Element {{WBREPONAME}} modificat",
 	"wikibase-dataitem": "Element {{WBREPONAME}}",
 	"wikibase-editlinks": "Modificar los ligams",
+	"wikibase-editlinkstitle": "Modificar los ligams interlenga",
 	"wikibase-linkitem-alreadylinked": "La pagina a la quala vos volètz ligar es ja estacada a un [$1 element] del depaus de donadas central que se liga a $2 sus aqueste site. Los elements pòdon pas aver qu’una pagina estacada per site. Causissètz una autra pagina per vos i ligar.",
 	"wikibase-linkitem-confirmitem-text": "La pagina qu'avètz causida es ja associada a un [$1 element dins nòstre depaus de donadas central]. Confirmatz que {{PLURAL:$2|la pagina afichada çaijós es la|las paginas afichadas çaijós son las}} que volètz ligar amb aquesta pagina.",
 	"wikibase-linkitem-success-link": "Las paginas son estadas ligadas corrèctament. Podètz trobar l’element que conten los ligams dins nòstre [$1 entrepaus central de donadas].",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Amagar",
+	"wikibase-rc-hide-wikidata-show": "Afichar",
 	"wikibase-rc-show-wikidata-pref": "Afichar las modificacions de {{WBREPONAME}} dins los darrièrs cambiaments",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"special-unconnectedpages": "Paginas pas religadas a un element"
+	"wikibase-rc-wikibase-edit-title": "Modificacion de {{WBREPONAME}}.",
+	"special-unconnectedpages": "Paginas pas religadas a un element",
+	"wikibase-otherprojects": "Autres projèctes"
 }
