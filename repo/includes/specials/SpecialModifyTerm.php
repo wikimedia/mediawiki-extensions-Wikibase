@@ -206,7 +206,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			array(
 				'class' => 'wb-input',
 				'id' => 'wb-modifyterm-value',
-				'size' => 50
 			)
 		)
 		. Html::element( 'br' );

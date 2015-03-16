@@ -221,7 +221,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				array(
 					'class' => 'wb-input wb-input-text',
 					'id' => 'wb-setsitelink-page',
-					'size' => 50
 				)
 			);
 
