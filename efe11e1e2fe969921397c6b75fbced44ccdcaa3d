@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7f3611b1",
+        "filename": "repo/includes/UpdateRepo/UpdateRepoJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-16T13:38:43Z",
+      "side": 1,
+      "message": "this is ok, although would prefer to say \"could not\" and avoid using quote marks when not needed within strings like these.",
+      "revId": "efe11e1e2fe969921397c6b75fbced44ccdcaa3d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
