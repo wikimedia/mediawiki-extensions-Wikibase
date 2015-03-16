@@ -1,7 +1,7 @@
 <?php
+
 namespace Wikibase\Lib;
 
-use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LabelLookup;
 
@@ -47,7 +47,7 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	/**
 	 * @see EntityIdFormatterFactory::getEntityIdFormater
 	 *
-	 * @param FormatterOptions $options
+	 * @param LabelLookup $labelLookup
 	 *
 	 * @return EntityIdHtmlLinkFormatter
 	 */
