@@ -1,0 +1,344 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ea47b8bd",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "addcslashes is about 2x faster that str_replace according to my tests.",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2af9304b",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "Why we need this function? It doesn\u0027t do anything more than write, does it?",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_aa9460eb",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "Do we need all these checks?",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6a196888",
+        "filename": "repo/includes/rdf/NTriplesRdfWriter.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "Maybe this should have base empty one in the base class?",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4dce06bb",
+        "filename": "repo/includes/rdf/NTriplesRdfWriter.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "This should be writeSubjectAndPredicate I think.",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2d386ac6",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "we may want also rdfs and schema here.",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4d6a86b2",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "Wouldn\u0027t foreach(func_get_args() as $arg) be simpler?",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8d917efd",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "I\u0027d really like a better name for this.",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ad947aeb",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "I wonder if it\u0027s not faster to merge flattening and joining - meaning, just make flattenBuffer() build and return the joined string instead of making an array just to join and clean it.",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0d856eb1",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "I wonder if we should just have a property with default prefixes instead, which we could copy in.",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ed8912cc",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "Why all those are final?",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cda53645",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "Do we even have booleans? I don\u0027t think we have any boolean values.",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4d48468c",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "Should be \"separator\" :)",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4853541a",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "I think there shouldn\u0027t be a space before : in the prefix. At least all turtle files I\u0027ve seen so far don\u0027t have it.",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_283858c6",
+        "filename": "repo/includes/rdf/UnicodeEscaper.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "This looks overly complex and does 10 checks to encode \\. I\u0027d rather make it a combination of strstr and sprintf or something like that. Not urgent but may improve speed.",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_486a74b2",
+        "filename": "repo/includes/rdf/XmlRdfWriter.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "We use this function exactly once and it\u0027s only doing htmlspecialchars. Maybe just do it directly and save the hop?",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_68fad0db",
+        "filename": "repo/tests/phpunit/data/rdf/Values.ttl",
+        "patchSetId": 25
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "Space before : is not needed IMO.",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6883b057",
+        "filename": "repo/tests/phpunit/data/rdf/Values.ttl",
+        "patchSetId": 25
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "Maybe a space or two would be better here than tab?",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2895b88a",
+        "filename": "repo/tests/phpunit/data/rdf/Values.ttl",
+        "patchSetId": 25
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "I wonder if we can put all values for single predicate on one string. It seems to look nicer.",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a8a228f7",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfWriterTestBase.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:16:30Z",
+      "side": 1,
+      "message": "I\u0027d like some utf-8 thrown in here, like -\u003etext(\u0027Банан\u0027, \u0027ru\u0027)",
+      "revId": "91104670d0dab95e96c291fd60f92cd6a3e12da2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
