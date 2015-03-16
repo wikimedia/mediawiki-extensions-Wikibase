@@ -9,7 +9,7 @@ use ValueFormatters\ValueFormatter;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
-use Wikibase\Lib\Parsers\TimeParser;
+use Wikibase\Lib\Parsers\CompositeValueParser;
 
 /**
  * @covers Wikibase\Lib\MwTimeIsoFormatter
@@ -563,7 +563,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			\ValueParsers\TimeParser::OPT_CALENDAR => $timeValue->getCalendarModel(),
 		) );
 
-		$timeParser = new TimeParser( $options );
+		$timeParser = new CompositeValueParser( $options );
 		$parsedTimeValue = $timeParser->parse( $formattedTime );
 
 		/**

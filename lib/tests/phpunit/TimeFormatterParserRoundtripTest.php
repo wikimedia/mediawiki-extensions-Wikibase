@@ -6,7 +6,7 @@ use DataValues\TimeValue;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
 use Wikibase\Lib\MwTimeIsoFormatter;
-use Wikibase\Lib\Parsers\TimeParser;
+use Wikibase\Lib\Parsers\CompositeValueParser;
 
 /**
  * @group WikibaseLib
@@ -53,7 +53,7 @@ class TimeFormatterParserRoundtripTest extends \MediaWikiTestCase {
 	 */
 	public function testFormatterParserRoundtrip( TimeValue $expected ) {
 		$formatter = new MwTimeIsoFormatter( new FormatterOptions() );
-		$parser = new TimeParser();
+		$parser = new CompositeValueParser();
 
 		$formatted = $formatter->format( $expected );
 		/** @var TimeValue $timeValue */
@@ -92,7 +92,7 @@ class TimeFormatterParserRoundtripTest extends \MediaWikiTestCase {
 	 * @param string $expected
 	 */
 	public function testParserFormatterRoundtrip( $expected ) {
-		$parser = new TimeParser();
+		$parser = new CompositeValueParser();
 		$formatter = new MwTimeIsoFormatter( new FormatterOptions() );
 
 		/** @var TimeValue $timeValue */

@@ -39,21 +39,36 @@ class PhpDateTimeParser extends StringValueParser {
 	const FORMAT_NAME = 'datetime';
 
 	/**
-	 * @var MonthNameUnlocalizer
-	 */
-	private $monthUnlocalizer;
-
-	/**
-	 * @var EraParser
+	 * @var ValueParser
 	 */
 	private $eraParser;
 
-	public function __construct( EraParser $eraParser, ParserOptions $options = null ) {
-		parent::__construct( $options );
+	/**
+	 * @var MonthNameUnlocalizer
+	 */
+	private $monthNameUnlocalizer;
 
-		$languageCode = $options->getOption( ValueParser::OPT_LANG );
-		$this->monthUnlocalizer = new MonthNameUnlocalizer( $languageCode );
+	/**
+	 * @var ValueParser
+	 */
+	private $isoTimestampParser;
+
+	/**
+	 * FIXME DOC!!!!
+	 * @param ValueParser $eraParser !!!
+	 * @param MonthNameUnlocalizer $monthNameUnlocalizer !!!
+	 * @param ValueParser $isoTimestampParser !!!
+	 */
+	public function __construct(
+		ValueParser $eraParser,
+		MonthNameUnlocalizer $monthNameUnlocalizer,
+		ValueParser $isoTimestampParser
+	) {
+		parent::__construct();
+
 		$this->eraParser = $eraParser;
+		$this->monthNameUnlocalizer = $monthNameUnlocalizer;
+		$this->isoTimestampParser = $isoTimestampParser;
 	}
 
 	/**
@@ -68,14 +83,11 @@ class PhpDateTimeParser extends StringValueParser {
 	protected function stringParse( $value ) {
 		$rawValue = $value;
 
-		$calendarModelParser = new CalendarModelParser();
-		$options = $this->getOptions();
-
 		try {
 			list( $sign, $value ) = $this->eraParser->parse( $value );
 
 			$value = trim( $value );
-			$value = $this->monthUnlocalizer->unlocalize( $value );
+			$value = $this->monthNameUnlocalizer->unlocalize( $value );
 			$year = $this->fetchAndNormalizeYear( $value );
 			$value = $this->getValueWithFixedSeparators( $value );
 
@@ -90,14 +102,13 @@ class PhpDateTimeParser extends StringValueParser {
 			}
 
 			if ( $year !== null && strlen( $year ) > 4 ) {
-				$timeString = $sign . $year . $dateTime->format( '-m-d\TH:i:s\Z' );
+				$timestamp = $sign . $year . $dateTime->format( '-m-d\TH:i:s\Z' );
 			} else {
-				$timeString = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
+				$timestamp = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
 			}
 
 			// Pass the reformatted string into a base parser that parses this +/-Y-m-d\TH:i:s\Z format with a precision
-			$valueParser = new \ValueParsers\TimeParser( $calendarModelParser, $options );
-			return $valueParser->parse( $timeString );
+			return $this->isoTimestampParser->parse( $timestamp );
 		} catch ( Exception $exception ) {
 			throw new ParseException( $exception->getMessage(), $rawValue, self::FORMAT_NAME );
 		}

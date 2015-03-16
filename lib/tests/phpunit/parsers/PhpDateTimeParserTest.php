@@ -4,8 +4,11 @@ namespace Wikibase\Lib\Parsers\Test;
 
 use DataValues\TimeValue;
 use ValueFormatters\TimeFormatter;
+use ValueParsers\CalendarModelParser;
 use ValueParsers\Test\StringValueParserTest;
+use ValueParsers\TimeParser;
 use Wikibase\Lib\Parsers\EraParser;
+use Wikibase\Lib\Parsers\MonthNameUnlocalizer;
 use Wikibase\Lib\Parsers\PhpDateTimeParser;
 
 /**
@@ -23,11 +26,23 @@ use Wikibase\Lib\Parsers\PhpDateTimeParser;
 class PhpDateTimeParserTest extends StringValueParserTest {
 
 	/**
+	 * @see ValueParserTestBase::getParserClass
+	 *
+	 * @return string
+	 */
+	protected function getParserClass() {
+		return 'Wikibase\Lib\Parsers\PhpDateTimeParser';
+	}
+
+	/**
 	 * @return PhpDateTimeParser
 	 */
 	protected function getInstance() {
-		$class = $this->getParserClass();
-		return new $class( $this->getEraParser(), $this->newParserOptions() );
+		return new PhpDateTimeParser(
+			$this->getEraParser(),
+			new MonthNameUnlocalizer( array() ),
+			new TimeParser( new CalendarModelParser() )
+		);
 	}
 
 	/**
@@ -52,15 +67,6 @@ class PhpDateTimeParserTest extends StringValueParserTest {
 				}
 			) );
 		return $mock;
-	}
-
-	/**
-	 * @see ValueParserTestBase::getParserClass
-	 *
-	 * @return string
-	 */
-	protected function getParserClass() {
-		return 'Wikibase\Lib\Parsers\PhpDateTimeParser';
 	}
 
 	/**
