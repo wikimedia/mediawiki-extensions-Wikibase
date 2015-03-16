@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ea4c98cd",
+        "filename": "repo/includes/rdf/BNodeLabeler.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "I like to have at least basic support. I\u0027m writing these classes to be used by 3rd parties.",
+      "parentUuid": "6e7c4fa4_7a42a812",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_1ac29488",
         "filename": "repo/includes/rdf/N3Quoter.php",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-14T01:48:21Z",
       "side": 1,
       "message": "Why we need to escape unicode? RDF accepts UTF8.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4acd8c33",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "n-triples does in rdf 1.1 (2014,), but not rdf 1.0.",
+      "parentUuid": "6e7c4fa4_1ac29488",
       "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_cae0bc95",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "could do that. i\u0027m generally wary of such generic functions, since they do not give me control over what gets escaped, and how.",
+      "parentUuid": "6e7c4fa4_5ac80caa",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_fa36b8ae",
         "filename": "repo/includes/rdf/N3Quoter.php",
         "patchSetId": 15
@@ -64,6 +118,24 @@
       "writtenOn": "2015-03-14T01:48:21Z",
       "side": 1,
       "message": "we\u0027ll be doing this check literally tens of millions of times. Is it really necessary? Nobody but us uses this class, and suffix is always a fixed string produced by us.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8aeac471",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "I want others to use this, and I added this check to be able to find mistakes while testing and debugging. But this method is gone in the latest version anyway.",
+      "parentUuid": "6e7c4fa4_fa36b8ae",
       "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_8a9164fd",
+        "filename": "repo/includes/rdf/NTriplesRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "The spec is only from 2014, before that, n-triples was limited to ascii.\nConsumers who want n-triples are probably low-tech, driven by grep, awk, and perl. \nI don\u0027t trust them to support utf8...",
+      "parentUuid": "6e7c4fa4_9a5464cb",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ba57e0cc",
         "filename": "repo/includes/rdf/NTriplesRdfEmitter.php",
         "patchSetId": 15
@@ -98,6 +188,24 @@
       "writtenOn": "2015-03-14T01:48:21Z",
       "side": 1,
       "message": "Given this is private, why not eliminate this function and just call quoter directly?",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0a8554b1",
+        "filename": "repo/includes/rdf/NTriplesRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "this method is gone now.",
+      "parentUuid": "6e7c4fa4_ba57e0cc",
       "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_8a4e449a",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "I tried my hand at this in the latest version, have a look. I reduced the options to giving either two params (namespace and name) or one (a uri).",
+      "parentUuid": "6e7c4fa4_3a4c3043",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ba40400b",
         "filename": "repo/includes/rdf/RdfEmitterBase.php",
         "patchSetId": 15
@@ -132,6 +258,24 @@
       "writtenOn": "2015-03-14T01:48:21Z",
       "side": 1,
       "message": "This function needs better name. The link between \"drain\" and \"document footer\" is not clear at all.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ea56d82c",
+        "filename": "repo/includes/rdf/RdfEmitterBase.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "The documentation here is outdated, will fix.\nThis is basically a buffer flush that finishes the syntax first, and returns the string.\nI didn\u0027t want to call it flush since it returns the value, so drain() seemed appropriate.",
+      "parentUuid": "6e7c4fa4_ba40400b",
       "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6a42c864",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "Because that way, you can inject output from sub-emitters at any point. This is the mechanism I plan to use for anon bnodes and rdr triples.",
+      "parentUuid": "6e7c4fa4_3abd10fe",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_da33bcbe",
         "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
         "patchSetId": 15
@@ -166,6 +328,24 @@
       "writtenOn": "2015-03-14T01:48:21Z",
       "side": 1,
       "message": "We\u0027re doing two hops here for every value - quoteResource then $this-\u003equoter-\u003equoteResource. It may be better to call quoter directly.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ea2d78a4",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "I think function call overhead is a relatively small worry.\nBefore I start to replicate code, I\u0027d like some measurements.",
+      "parentUuid": "6e7c4fa4_da33bcbe",
       "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_4a16ec5b",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "gone in the latest version.",
+      "parentUuid": "6e7c4fa4_9a3d448d",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_5a47ac22",
         "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
         "patchSetId": 15
@@ -200,6 +398,24 @@
       "writtenOn": "2015-03-14T01:48:21Z",
       "side": 1,
       "message": "I\u0027m not sure I understand why this is two strings and not one. Probably needs some explanation somewhere.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ca099c35",
+        "filename": "repo/includes/rdf/TurtleRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "There is no good reason for this. Just that I added the formatting (breaks, indent) later. emit() takes any number of parameters, to avoid the caller having to concatenate strings.",
+      "parentUuid": "6e7c4fa4_5a47ac22",
       "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_8d497e6c",
+        "filename": "repo/includes/rdf/UnicodeEscaper.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "I don\u0027t think so. But it\u0027s worth investigating.",
+      "parentUuid": "6e7c4fa4_1a5134dd",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_fa5d58f0",
         "filename": "repo/includes/rdf/XmlRdfEmitter.php",
         "patchSetId": 15
@@ -240,6 +474,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_cd469654",
+        "filename": "repo/includes/rdf/XmlRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "how does htmlspecialchars() care for the encoding? it only replaces \u003c \u003e \u0026 and the quotes as requested. Unless the system encoding is utf-16 or ebcdic, it should be fine...",
+      "parentUuid": "6e7c4fa4_fa5d58f0",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_da5adcf8",
         "filename": "repo/includes/rdf/XmlRdfEmitter.php",
         "patchSetId": 15
@@ -251,6 +503,24 @@
       "writtenOn": "2015-03-14T01:48:21Z",
       "side": 1,
       "message": "Do we really need to check tag names? We will have millions of tags \u003d\u003e millions of preg_match calls. All of them will be succeeding unless we have bug in other part of our code that somehow produces invalid tags.",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6d6d02c7",
+        "filename": "repo/includes/rdf/XmlRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T21:57:31Z",
+      "side": 1,
+      "message": "Yes, but it sucks to find that bug only after waiting for the dump to complete and then sending it through a validator, right?",
+      "parentUuid": "6e7c4fa4_da5adcf8",
       "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
