@@ -11,6 +11,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdFormatterFactory;
+use Wikibase\Lib\FormatterLabelLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
@@ -266,7 +267,7 @@ class EntityViewFactory {
 		}
 
 		if ( $labelLookup ) {
-			$formatterOptions->setOption( 'LabelLookup', $labelLookup );
+			$formatterOptions->setOption( FormatterLabelLookupFactory::OPT_LABEL_LOOKUP, $labelLookup );
 		}
 
 		return $formatterOptions;

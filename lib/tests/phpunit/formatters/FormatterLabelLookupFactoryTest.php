@@ -79,7 +79,7 @@ class FormatterLabelLookupFactoryTest extends \PHPUnit_Framework_TestCase {
 				$termLookup,
 				new FormatterOptions( array(
 					ValueFormatter::OPT_LANG => 'fr',
-					'languages' => $deChChain,
+					FormatterLabelLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $deChChain,
 				) ),
 				'Kätzchen'
 			),
@@ -87,8 +87,8 @@ class FormatterLabelLookupFactoryTest extends \PHPUnit_Framework_TestCase {
 				$termLookup,
 				new FormatterOptions( array(
 					ValueFormatter::OPT_LANG => 'fr',
-					'languages' => $frChain,
-					'LabelLookup' => $labelLookup
+					FormatterLabelLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $frChain,
+					FormatterLabelLookupFactory::OPT_LABEL_LOOKUP => $labelLookup
 				) ),
 				'Kätzchen'
 			),
@@ -115,12 +115,12 @@ class FormatterLabelLookupFactoryTest extends \PHPUnit_Framework_TestCase {
 			),
 			'bad fallback chain' => array(
 				new FormatterOptions( array(
-					'languages' => array( 'x', 'y', 'z' ),
+					FormatterLabelLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => array( 'x', 'y', 'z' ),
 				) ),
 			),
 			'bad LabelLookup' => array(
 				new FormatterOptions( array(
-					'LabelLookup' => new LanguageFallbackChain( array() )
+					FormatterLabelLookupFactory::OPT_LABEL_LOOKUP => new LanguageFallbackChain( array() )
 				) ),
 			),
 			'no options' => array(
