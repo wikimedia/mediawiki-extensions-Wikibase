@@ -31,35 +31,6 @@ use Wikibase\Template\TemplateRegistry;
  */
 class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 
-	protected function setUp() {
-		// Make sure wgSpecialPages has the special pages this class uses
-		$this->setMwGlobals(
-			'wgSpecialPages',
-			array(
-				'SetSiteLink' => new SpecialPage( 'SetSiteLink' ),
-				'SetLabelDescriptionAliases' => new SpecialPage( 'SetLabelDescriptionAliases' )
-			)
-		);
-
-		SpecialPageFactory::resetList();
-		$doubleLanguage = $this->getMock( 'Language', array( 'getSpecialPageAliases' ) );
-		$doubleLanguage->mCode = 'en';
-		$doubleLanguage->expects( $this->any() )
-			->method( 'getSpecialPageAliases' )
-			->will( $this->returnValue(
-				array(
-					'SetSiteLink' => array( 'SetSiteLink' ),
-					'SetLabelDescriptionAliases' => array( 'SetLabelDescriptionAliases' )
-				)
-			) );
-
-		$this->setMwGlobals(
-			'wgContLang',
-			$doubleLanguage
-		);
-		parent::setUp();
-	}
-
 	/**
 	 * @dataProvider getAddStatementToGroupSectionProvider
 	 */
@@ -137,7 +108,14 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 	}
 
 	private function newToolbarEditSectionGenerator() {
+		$specialPageLinker = $this->getMock( 'Wikibase\View\SpecialPageLinker' );
+		$specialPageLinker->expects( $this->any() )
+			->method( 'getLink' )
+			->will( $this->returnCallback( function( $specialPage, $params = array() ) {
+				return 'Special:' . $specialPage . '/' . implode( '/', $params );
+			} ) );
 		return new ToolbarEditSectionGenerator(
+			$specialPageLinker,
 			new TemplateFactory( TemplateRegistry::getDefaultInstance() )
 		);
 	}
