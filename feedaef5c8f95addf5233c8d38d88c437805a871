@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_cd5d361c",
+        "filename": "repo/includes/rdf/NTriplesRdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T22:06:03Z",
+      "side": 1,
+      "message": "I ditched that since NTriples and Turtle are pretty different. There is a common abstract N3-ish base class now.\n\nUsing subclasssing at all is a bit icky. Will see if I can get rid of it, composition is nicer. But subclassing was the easiest option for prototyping this.",
+      "parentUuid": "6e7c4fa4_3f8bd073",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_3fd99083",
         "filename": "repo/includes/rdf/NTriplesRdfEmitter.php",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ed58322b",
+        "filename": "repo/includes/rdf/NTriplesRdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T22:06:03Z",
+      "side": 1,
+      "message": "Yea. TODO :)",
+      "parentUuid": "6e7c4fa4_3fd99083",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_bf184024",
         "filename": "repo/includes/rdf/RdfEmitter.php",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2015-03-12T19:00:17Z",
       "side": 1,
       "message": "This could really use a \"here is how you emit some basic document\" tutorial thing in the docs up there.",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ada23af7",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T22:06:03Z",
+      "side": 1,
+      "message": "Once I settled on a design. The latest version is already vastly different from this.",
+      "parentUuid": "6e7c4fa4_bf184024",
       "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_2dae2ae3",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T22:06:03Z",
+      "side": 1,
+      "message": "No, it actually outputs @prefix, or the equivalent.",
+      "parentUuid": "6e7c4fa4_5fcb2c75",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_7fc86877",
         "filename": "repo/includes/rdf/RdfEmitter.php",
         "patchSetId": 6
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6dd18257",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T22:06:03Z",
+      "side": 1,
+      "message": "because this is trying to be a fluent interface: about(x)-\u003esay(y)-\u003eis(bla) reads a lot nicer than subject(x)-\u003epredicate(y)-\u003eobject(bla)...",
+      "parentUuid": "6e7c4fa4_9f1b0421",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_7f12a802",
         "filename": "repo/includes/rdf/RdfEmitter.php",
         "patchSetId": 6
@@ -132,6 +222,24 @@
       "writtenOn": "2015-03-12T19:00:17Z",
       "side": 1,
       "message": "Call this resourceObject?",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ad36baad",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T22:06:03Z",
+      "side": 1,
+      "message": "I\u0027m trying to be terse, and make an interface that lets you write php code that looks and reads like turtle. I\u0027m breaking with some php conventions.",
+      "parentUuid": "6e7c4fa4_7f12a802",
       "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -172,6 +280,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_0d47ae23",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T22:06:03Z",
+      "side": 1,
+      "message": "yea :)",
+      "parentUuid": "6e7c4fa4_bfe7e00c",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_dfb73cf1",
         "filename": "repo/includes/rdf/RdfEmitter.php",
         "patchSetId": 6
@@ -189,6 +315,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ed4b522a",
+        "filename": "repo/includes/rdf/RdfEmitter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T22:06:03Z",
+      "side": 1,
+      "message": "For valid ISO dates, as specified by xsd:date. 1970-0-0 is not a valid iso date.",
+      "parentUuid": "6e7c4fa4_dfb73cf1",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_5fed6cb3",
         "filename": "repo/includes/rdf/RdfEmitterBase.php",
         "patchSetId": 6
@@ -200,6 +344,24 @@
       "writtenOn": "2015-03-12T19:00:17Z",
       "side": 1,
       "message": "This should have some documentation about _how_ it works.  At first read it looks totally overengineered and then I read how you can call it in a turtle-like way and it made great sense.  So maybe a few sentences here about using states to support this syntax.",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ad5d5af1",
+        "filename": "repo/includes/rdf/RdfEmitterBase.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T22:06:03Z",
+      "side": 1,
+      "message": "Yea, still prototyping. If this works out, I want it to be a standalone library, with nice docs and examples.",
+      "parentUuid": "6e7c4fa4_5fed6cb3",
       "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -251,6 +413,24 @@
       "writtenOn": "2015-03-12T19:00:17Z",
       "side": 1,
       "message": "I\u0027m used to putting these at the top because they are what has to be implemented.  Also these all probably deserve docs....",
+      "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2d694a89",
+        "filename": "repo/includes/rdf/RdfEmitterBase.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-16T22:06:03Z",
+      "side": 1,
+      "message": "Yes, they definitly do need docs. TBD.",
+      "parentUuid": "6e7c4fa4_1f00546c",
       "revId": "feedaef5c8f95addf5233c8d38d88c437805a871",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
