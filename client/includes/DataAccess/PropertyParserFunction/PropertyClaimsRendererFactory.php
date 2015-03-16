@@ -12,6 +12,7 @@ use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataAccess\SnaksFinder;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
@@ -198,7 +199,7 @@ class PropertyClaimsRendererFactory {
 		);
 
 		$options = new FormatterOptions( array(
-			'languages' => $languageFallbackChain,
+			FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallbackChain,
 			// ...more options... (?)
 		) );
 
