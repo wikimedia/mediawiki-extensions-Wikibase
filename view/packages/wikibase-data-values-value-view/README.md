@@ -105,6 +105,12 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
+### 0.14.1 (2015-03-16)
+
+### Bugfixes
+
+* Make QUnit tests pass in PhantomJS
+
 ### 0.14.0 (2015-03-12)
 
 ### Breaking changes
