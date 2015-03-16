@@ -7,14 +7,26 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 
 /**
- * Represents the difference between two Claim objects.
+ * Represents the difference between two Statement objects.
  *
  * @since 0.4
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Thiemo Mättig
  */
+// FIXME: Contains references and rank? It's a StatementDifference!
 class ClaimDifference implements Comparable {
+
+	/**
+	 * @var DiffOpChange|null
+	 */
+	private $mainSnakChange;
+
+	/**
+	 * @var Diff|null
+	 */
+	private $qualifierChanges;
 
 	/**
 	 * @var Diff|null
@@ -24,17 +36,7 @@ class ClaimDifference implements Comparable {
 	/**
 	 * @var DiffOpChange|null
 	 */
-	private $mainSnakChange;
-
-	/**
-	 * @var DiffOpChange|null
-	 */
 	private $rankChange;
-
-	/**
-	 * @var Diff|null
-	 */
-	private $qualifierChanges;
 
 	/**
 	 * @since 0.4
@@ -50,14 +52,14 @@ class ClaimDifference implements Comparable {
 		Diff $referenceChanges = null,
 		DiffOpChange $rankChange = null
 	) {
-		$this->referenceChanges = $referenceChanges;
 		$this->mainSnakChange = $mainSnakChange;
-		$this->rankChange = $rankChange;
 		$this->qualifierChanges = $qualifierChanges;
+		$this->referenceChanges = $referenceChanges;
+		$this->rankChange = $rankChange;
 	}
 
 	/**
-	 * Returns the reference change.
+	 * Returns the set of reference changes.
 	 *
 	 * @since 0.4
 	 *
@@ -68,7 +70,7 @@ class ClaimDifference implements Comparable {
 	}
 
 	/**
-	 * Returns the mainsnak change.
+	 * Returns the main snak change.
 	 *
 	 * @since 0.4
 	 *
@@ -90,7 +92,7 @@ class ClaimDifference implements Comparable {
 	}
 
 	/**
-	 * Returns the qualifier change.
+	 * Returns the set of qualifier changes.
 	 *
 	 * @since 0.4
 	 *
@@ -119,37 +121,37 @@ class ClaimDifference implements Comparable {
 		}
 
 		return $this->mainSnakChange == $target->mainSnakChange
-			&& $this->rankChange == $target->rankChange
 			// FIXME: Use Diff::equals when released.
 			&& $this->getQualifierChanges()->getArrayCopy() == $target->getQualifierChanges()->getArrayCopy()
-			&& $this->getReferenceChanges()->getArrayCopy() == $target->getReferenceChanges()->getArrayCopy();
+			&& $this->getReferenceChanges()->getArrayCopy() == $target->getReferenceChanges()->getArrayCopy()
+			&& $this->rankChange == $target->rankChange;
 	}
 
 	/**
-	 * Checks whether the ClaimDifference is atomic, which means
-	 * the Claim has only changed either its MainSnak, Qualifiers, References or Rank
+	 * Checks whether the difference represented by this object is atomic, which means
+	 * the Statement has only changed either its main snak, qualifiers, references or rank.
 	 *
 	 * @since 0.4
 	 *
 	 * @return bool
 	 */
 	public function isAtomic() {
-		$claimChanges = 0;
+		$aspects = 0;
 
-		if ( $this->getMainSnakChange() !== null ) {
-			$claimChanges++;
-		}
-		if ( $this->getRankChange() !== null ) {
-			$claimChanges++;
+		if ( $this->mainSnakChange !== null ) {
+			$aspects++;
 		}
 		if ( !$this->getQualifierChanges()->isEmpty() ) {
-			$claimChanges++;
+			$aspects++;
 		}
 		if ( !$this->getReferenceChanges()->isEmpty() ) {
-			$claimChanges++;
+			$aspects++;
+		}
+		if ( $this->rankChange !== null ) {
+			$aspects++;
 		}
 
-		return $claimChanges === 1;
+		return $aspects === 1;
 	}
 
 }
