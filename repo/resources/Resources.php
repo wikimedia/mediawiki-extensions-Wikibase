@@ -176,6 +176,7 @@ return call_user_func( function() {
 				'wikibase.serialization.EntityDeserializer',
 				'wikibase.sites',
 				'wikibase.store.ApiEntityStore',
+				'wikibase.store.CachingEntityStore',
 				'wikibase.store.CombiningEntityStore',
 				'wikibase.store.FetchedContentUnserializer',
 				'wikibase.store.MwConfigEntityStore',
