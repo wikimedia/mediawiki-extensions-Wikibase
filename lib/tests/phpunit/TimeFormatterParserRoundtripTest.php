@@ -3,10 +3,9 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\TimeValue;
-use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
 use Wikibase\Lib\MwTimeIsoFormatter;
-use Wikibase\Lib\Parsers\TimeParser;
+use Wikibase\Lib\Parsers\TimeParserFactory;
 
 /**
  * @group WikibaseLib
@@ -52,8 +51,9 @@ class TimeFormatterParserRoundtripTest extends \MediaWikiTestCase {
 	 * @param TimeValue $expected
 	 */
 	public function testFormatterParserRoundtrip( TimeValue $expected ) {
-		$formatter = new MwTimeIsoFormatter( new FormatterOptions() );
-		$parser = new TimeParser();
+		$formatter = new MwTimeIsoFormatter();
+		$factory = new TimeParserFactory();
+		$parser = $factory->getTimeParser();
 
 		$formatted = $formatter->format( $expected );
 		/** @var TimeValue $timeValue */
@@ -92,8 +92,9 @@ class TimeFormatterParserRoundtripTest extends \MediaWikiTestCase {
 	 * @param string $expected
 	 */
 	public function testParserFormatterRoundtrip( $expected ) {
-		$parser = new TimeParser();
-		$formatter = new MwTimeIsoFormatter( new FormatterOptions() );
+		$factory = new TimeParserFactory();
+		$parser = $factory->getTimeParser();
+		$formatter = new MwTimeIsoFormatter();
 
 		/** @var TimeValue $timeValue */
 		$timeValue = $parser->parse( $expected );
