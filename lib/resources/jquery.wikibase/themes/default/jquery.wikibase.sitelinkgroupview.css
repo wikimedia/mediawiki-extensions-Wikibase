@@ -27,7 +27,6 @@
 
 .wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container {
 	background-color: #FFFFFF;
-	display: table-row;
 }
 
 .wikibase-sitelinkgroupview.wb-edit .wikibase-sitelinkgroupview-heading-container {
@@ -35,14 +34,17 @@
 }
 
 .wikibase-sitelinkgroupview h2 {
-	display: table-cell;
+	display: inline-block;
 	float: none;
+	margin: 0;
+	vertical-align: text-bottom;
 	width: auto;
 }
 
 .wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container > .wikibase-toolbar-container {
-	display: table-cell;
-	position: static;
+	display: inline-block;
 	padding-left: 0.5em;
+	position: static;
+	vertical-align: text-bottom;
 	width: auto;
 }
