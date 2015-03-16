@@ -492,6 +492,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_48059412",
+        "filename": "repo/includes/rdf/XmlRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:02:42Z",
+      "side": 1,
+      "message": "default encoding can be anything, including utf-16 or utf-7... Admittedly, not a common circumstance, but stranger things have happened. Also, it may be something like iso-8859-1 or multibyte encoding, and htmlspecialchars may treat data as that encoding and return \"\" as utf-8 text won\u0027t be valid in that encoding.",
+      "parentUuid": "6e7c4fa4_cd469654",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_da5adcf8",
         "filename": "repo/includes/rdf/XmlRdfEmitter.php",
         "patchSetId": 15
@@ -521,6 +539,24 @@
       "side": 1,
       "message": "Yes, but it sucks to find that bug only after waiting for the dump to complete and then sending it through a validator, right?",
       "parentUuid": "6e7c4fa4_da5adcf8",
+      "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_88fbac10",
+        "filename": "repo/includes/rdf/XmlRdfEmitter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-16T23:02:42Z",
+      "side": 1,
+      "message": "We have tests for that, don\u0027t we :)",
+      "parentUuid": "6e7c4fa4_6d6d02c7",
       "revId": "47b4fb70bb6f83a00d476bc39f8d3b676bc805b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
