@@ -23,17 +23,25 @@ use ValueFormatters\ValueFormatterBase;
 class TimeDetailsFormatter extends ValueFormatterBase {
 
 	/**
-	 * @var ValueFormatter
+	 * @var ValueFormatter A TimeValue formatter that outputs HTML.
 	 */
 	private $timeFormatter;
 
 	/**
 	 * @param FormatterOptions|null $options
+	 * @param ValueFormatter|null $timeFormatter A TimeValue formatter that outputs a single line of
+	 * HTML, suitable for headings.
 	 */
-	public function __construct( FormatterOptions $options = null ) {
+	public function __construct(
+		FormatterOptions $options = null,
+		ValueFormatter $timeFormatter = null
+	) {
 		parent::__construct( $options );
 
-		$this->timeFormatter = new MwTimeIsoFormatter( $this->options );
+		$this->timeFormatter = $timeFormatter ?: new HtmlTimeFormatter(
+			$this->options,
+			new MwTimeIsoFormatter( $this->options )
+		);
 	}
 
 	/**
@@ -53,7 +61,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		}
 
 		$html = '';
-		$html .= Html::element(
+		$html .= Html::rawElement(
 			'h4',
 			array( 'class' => 'wb-details wb-time-details wb-time-rendered' ),
 			$this->timeFormatter->format( $value )
