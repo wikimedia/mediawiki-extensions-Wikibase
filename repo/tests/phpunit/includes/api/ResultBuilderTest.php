@@ -34,8 +34,7 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getDefaultResult( $indexedMode = false ){
-		$apiMain =  $this->getMockBuilder( 'ApiMain' )->disableOriginalConstructor()->getMockForAbstractClass();
-		$result = new ApiResult( $apiMain );
+		$result = new ApiResult( false );
 
 		if ( $indexedMode ) {
 			$result->setRawMode();
@@ -121,7 +120,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->markSuccess( $param );
-		$this->assertEquals( array( 'success' => $expected ),  $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( array( 'success' => $expected ), $data );
 	}
 
 	public function provideMarkResultSuccess() {
@@ -294,7 +298,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addEntityRevision( null, $entityRevision, new SerializationOptions(), $props );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function testAddEntityRevisionKey() {
@@ -309,13 +318,13 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		// automatic key
 		$resultBuilder->addEntityRevision( null, $entityRevision, new SerializationOptions(), $props );
 
-		$data = $result->getData();
+		$data = $result->getResultData();
 		$this->assertArrayHasKey( 'Q11', $data['entities'] );
 
 		// explicit key
 		$resultBuilder->addEntityRevision( 'FOO', $entityRevision, new SerializationOptions(), $props );
 
-		$data = $result->getData();
+		$data = $result->getResultData();
 		$this->assertArrayHasKey( 'FOO', $data['entities'] );
 	}
 
@@ -348,7 +357,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 		) );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	/**
@@ -401,7 +415,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			'_element' => 'entity'
 		) );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => $indexedMode ? 'bc' : 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function testAddBasicEntityInformation() {
@@ -415,7 +434,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addBasicEntityInformation( $entityId, 'entity' );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function testAddLabels(){
@@ -442,7 +466,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addLabels( $labels, $path );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function testAddDescriptions(){
@@ -469,7 +498,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addDescriptions( $descriptions, $path );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function testAddAliases(){
@@ -508,7 +542,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addAliases( $aliases, $path );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function testAddSiteLinks(){
@@ -540,7 +579,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addSiteLinks( $siteLinks, $path );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function testAddClaims(){
@@ -576,7 +620,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addClaims( $claims, $path );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function testAddClaim(){
@@ -602,7 +651,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addClaim( $claim );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function testAddReference(){
@@ -632,7 +686,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addReference( $reference );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	/**
@@ -651,7 +710,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			$resultBuilder->addMissingEntity( $key, $missingDetails );
 		}
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function provideMissingEntity() {
@@ -736,7 +800,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addNormalizedTitle( $from, $to );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function testAddRevisionIdFromStatusToResult() {
@@ -756,7 +825,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addRevisionIdFromStatusToResult( $mockStatus, 'entity' );
 
-		$this->assertEquals( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function provideSetList() {
@@ -804,7 +878,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$builder = $this->getResultBuilder( $result );
 
 		$builder->setList( $path, $name, $values, $tag );
-		$this->assertResultStructure( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => $indexed ? 'bc' : 'all',
+		) );
+		$this->assertResultStructure( $expected, $data );
 	}
 
 	public function provideSetList_InvalidArgument() {
@@ -866,7 +945,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$builder = $this->getResultBuilder( $result );
 
 		$builder->setValue( $path, $name, $value );
-		$this->assertResultStructure( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => $indexed ? 'bc' : 'all',
+		) );
+		$this->assertResultStructure( $expected, $data );
 	}
 
 	public function provideSetValue_InvalidArgument() {
@@ -946,7 +1030,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$builder = $this->getResultBuilder( $result );
 
 		$builder->appendValue( $path, $key, $value, $tag );
-		$this->assertResultStructure( $expected, $result->getData() );
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => $indexed ? 'bc' : 'all',
+		) );
+		$this->assertResultStructure( $expected, $data );
 	}
 
 	public function provideAppendValue_InvalidArgument() {

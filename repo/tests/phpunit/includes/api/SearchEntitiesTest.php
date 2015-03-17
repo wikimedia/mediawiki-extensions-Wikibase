@@ -228,7 +228,11 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$module->execute();
 
 		$result = $module->getResult();
-		return $result->getData();
+		return $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
 	}
 
 	public function provideData() {

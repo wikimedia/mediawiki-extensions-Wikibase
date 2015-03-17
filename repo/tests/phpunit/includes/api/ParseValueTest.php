@@ -84,7 +84,7 @@ class ParseValueTest extends WikibaseApiTestCase {
 					'0/error-info' => '/^.+$/',
 					'0/expected-format' => 'decimal',
 					'0/messages/0/name' => 'wikibase-parse-error',
-					'0/messages/0/html/content' => '/^.+$/',
+					'0/messages/0/html' => '/^.+$/',
 				),
 			),
 
@@ -97,7 +97,7 @@ class ParseValueTest extends WikibaseApiTestCase {
 					'0/error-info' => '/^.+$/',
 					'0/expected-format' => 'decimal',
 					'0/messages/0/name' => 'wikibase-parse-error',
-					'0/messages/0/html/content' => '/^.+$/',
+					'0/messages/0/html' => '/^.+$/',
 				),
 			),
 
