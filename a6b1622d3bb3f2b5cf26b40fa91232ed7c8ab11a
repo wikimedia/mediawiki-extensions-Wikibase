@@ -16,6 +16,24 @@
       "revId": "a6b1622d3bb3f2b5cf26b40fa91232ed7c8ab11a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_81470650",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-17T14:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_36ccdf64",
+      "revId": "a6b1622d3bb3f2b5cf26b40fa91232ed7c8ab11a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
