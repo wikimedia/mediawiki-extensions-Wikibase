@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e7c4fa4_6768ba19",
+        "filename": "lib/includes/formatters/EntityIdLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T18:13:45Z",
+      "side": 1,
+      "message": "EntityIdTitleFormatter itself isn\u0027t used anywhere else, and it\u0027s trivial. \nI propose to merge the two classes.",
+      "revId": "fb60de9acf5ffa5347fc0f57656073154e170c97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_19693089",
         "filename": "lib/includes/formatters/EntityIdLinkFormatter.php",
         "patchSetId": 4
