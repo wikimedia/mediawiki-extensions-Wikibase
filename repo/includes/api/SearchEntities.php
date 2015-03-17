@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use ApiResult;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -229,7 +230,7 @@ class SearchEntities extends ApiBase {
 					if ( preg_match( $aliasPattern, $term->getText() ) ) {
 						if ( !isset( $entry['aliases'] ) ) {
 							$entry['aliases'] = array();
-							$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
+							ApiResult::setIndexedTagName( $entry['aliases'], 'alias' );
 						}
 						$entry['aliases'][] = $term->getText();
 					}
@@ -291,7 +292,7 @@ class SearchEntities extends ApiBase {
 			$entries
 		);
 
-		$this->getResult()->setIndexedTagName_internal( array( 'search' ), 'entity' );
+		$this->getResult()->addIndexedTagName( array( 'search' ), 'entity' );
 
 		// @todo use result builder?
 		$this->getResult()->addValue(
