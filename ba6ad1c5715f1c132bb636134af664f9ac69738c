@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_24572007",
+        "filename": "view/src/SpecialPageLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-03-17T15:50:02Z",
+      "side": 1,
+      "message": "https://www.mediawiki.org/wiki/Wikibase/Coding_conventions#File_level_formatting\n\nFrom 2013, though should still be accurate. You might want to have a look at the JS section and see what the state of that is. Was written by Danwe just before he ran away to Thailand.",
+      "parentUuid": "6e7c4fa4_815e2616",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d99df86a",
         "filename": "view/src/SpecialPageLinker.php",
         "patchSetId": 1
