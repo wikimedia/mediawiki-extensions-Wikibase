@@ -3,9 +3,7 @@
 namespace Wikibase;
 
 use ParserOptions;
-use RequestContext;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -35,11 +33,6 @@ class EntityParserOutputGeneratorFactory {
 	private $entityTitleLookup;
 
 	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser;
-
-	/**
 	 * @var ValuesFinder
 	 */
 	private $valuesFinder;
@@ -53,14 +46,12 @@ class EntityParserOutputGeneratorFactory {
 		EntityViewFactory $entityViewFactory,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
-		EntityIdParser $entityIdParser,
 		ValuesFinder $valuesFinder,
 		LanguageFallbackChainFactory $languageFallbackChainFactory
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->entityIdParser = $entityIdParser;
 		$this->valuesFinder = $valuesFinder;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 	}
@@ -93,8 +84,6 @@ class EntityParserOutputGeneratorFactory {
 	 */
 	private function newParserOutputJsConfigBuilder( $languageCode ) {
 		return new ParserOutputJsConfigBuilder(
-			$this->entityIdParser,
-			$this->entityTitleLookup,
 			$this->makeJsConfigSerializationOptions( $languageCode )
 		);
 	}
