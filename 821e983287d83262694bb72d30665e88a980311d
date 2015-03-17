@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fe845ab7",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T10:41:51Z",
+      "side": 1,
+      "message": "eek.",
+      "revId": "821e983287d83262694bb72d30665e88a980311d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5e9eae0b",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T10:41:51Z",
+      "side": 1,
+      "message": "That documentation is plain wrong, and has been fixed in the new version of TimeValue \u003chttps://github.com/DataValues/Time/blob/master/src/DataValues/TimeValue.php\u003e. YOu have to check the calendar model to know what format the timestamp string is in.\nNo need to handle other dates formats in this patch, but please leve the fixme, and don\u0027t spread the lie. Sorry for the confusion...",
+      "revId": "821e983287d83262694bb72d30665e88a980311d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9ebbe66f",
+        "filename": "repo/includes/rdf/RdfProducer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T10:41:51Z",
+      "side": 1,
+      "message": "Please add blank lines after each constant, and use doxygen comments.",
+      "revId": "821e983287d83262694bb72d30665e88a980311d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1ea7d64e",
+        "filename": "repo/tests/phpunit/data/rdf/Q4.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T10:41:51Z",
+      "side": 1,
+      "message": "null is not a valid literal in turtle, is it? I think this should be rdf:nil.\n\nAlso: where does this even come from? GlobeCoordinateValue doesn\u0027t have an altitude field any more...",
+      "revId": "821e983287d83262694bb72d30665e88a980311d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
