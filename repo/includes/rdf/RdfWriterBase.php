@@ -2,6 +2,7 @@
 
 namespace Wikibase\RDF;
 
+use Closure;
 use InvalidArgumentException;
 use LogicException;
 
@@ -76,6 +77,10 @@ abstract class RdfWriterBase implements RdfWriter {
 	}
 
 	protected function isShorthand( $shorthand ) {
+		if ( !is_string( $shorthand ) ) {
+			return false;
+		}
+
 		return isset( $this->shorthands[$shorthand] );
 	}
 
@@ -106,12 +111,33 @@ abstract class RdfWriterBase implements RdfWriter {
 	}
 
 	/**
+	 * @return RdfStatementWriter
+	 */
+	final public function rdr() {
+		$writer = $this->newSubWriter( self::STATEMENT_ROLE, $this->labeler );
+
+		//FIXME: some implementations may not return an RdfWriterBase here!
+		$writer->state( 'document' );
+
+		// share registered prefixes
+		$writer->prefixes =& $this->prefixes;
+
+		//FIXME: some implementations may need to write a node ref to the buffer here.
+
+		//TODO: for efficiency, allow $writer to be re-used; auto-flush when done.
+		return $writer;
+	}
+
+	/**
 	 * @return string a string corresponding to one of the the XXX_ROLE constants.
 	 */
 	final public function getRole() {
 		return $this->role;
 	}
 
+	/**
+	 * @param string|RdfBuffer|Closure ... any number of output elements to place in the buffer.
+	 */
 	final protected function write() {
 		$numArgs = func_num_args();
 
@@ -330,13 +356,13 @@ abstract class RdfWriterBase implements RdfWriter {
 				break;
 
 			case 'start':
-				$this->beginDocument();
+				$this->beginDocument( $this->role );
 				break;
 
 			case 'object': // when injecting a sub-document
 				$this->finishObject( 'last' );
 				$this->finishPredicate( 'last' );
-				$this->finishSubject();
+				$this->finishSubject( $this->role );
 				break;
 
 			default:
@@ -347,7 +373,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	private function transitionSubject() {
 		switch ( $this->state ) {
 			case 'document':
-				$this->beginSubject();
+				$this->beginSubject( $this->role );
 				break;
 
 			case 'object':
@@ -357,8 +383,8 @@ abstract class RdfWriterBase implements RdfWriter {
 
 				$this->finishObject( 'last' );
 				$this->finishPredicate( 'last' );
-				$this->finishSubject();
-				$this->beginSubject();
+				$this->finishSubject( $this->role );
+				$this->beginSubject( $this->role );
 				break;
 
 			default:
@@ -411,15 +437,15 @@ abstract class RdfWriterBase implements RdfWriter {
 				break;
 
 			case 'document':
-				$this->finishDocument();
+				$this->finishDocument( $this->role );
 				break;
 
 			case 'object':
 
 				$this->finishObject( 'last' );
 				$this->finishPredicate( 'last' );
-				$this->finishSubject();
-				$this->finishDocument();
+				$this->finishSubject( $this->role );
+				$this->finishDocument( $this->role );
 				break;
 
 			default:
@@ -440,10 +466,10 @@ abstract class RdfWriterBase implements RdfWriter {
 
 	protected abstract function writeValue( $literal, $typeBase, $typeLocal = null );
 
-	protected function finishSubject() {
+	protected function finishSubject( $role ) {
 	}
 
-	protected function beginSubject( $first = false ) {
+	protected function beginSubject( $role ) {
 	}
 
 	protected function finishObject( $last = false ) {
@@ -458,10 +484,10 @@ abstract class RdfWriterBase implements RdfWriter {
 	protected function beginObject( $first = false ) {
 	}
 
-	protected function beginDocument() {
+	protected function beginDocument( $role ) {
 	}
 
-	protected function finishDocument() {
+	protected function finishDocument( $role ) {
 	}
 
 	protected function expandSubject( &$base, &$local ) {

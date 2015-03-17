@@ -40,9 +40,9 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 		$path = $this->getExpectedOutputFile( $datasetName );
 
 		// Create test data file if it doesn't exist.
-		if ( !file_exists( $path ) ) {
+		/*if ( !file_exists( $path ) ) {
 			file_put_contents( $path . '.actual', join( "\n", $actual ) );
-		}
+		}*/
 
 		$expected = file( $path );
 
@@ -247,6 +247,46 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'NumberedBlankNode', $rdf );
+	}
+
+	public function testRDR() {
+		// exampel taken from http://www.w3.org/2007/02/turtle/primer/
+
+		$writer = $this->newWriter();
+
+		$writer->start();
+		$writer->prefix( 'acme', 'http://acme.test/terms/' );
+		$writer->prefix( 'publ', 'http://acme.test/publications/' );
+		$writer->prefix( 'prov', 'http://www.w3.org/ns/prov#' );
+
+		// reified statement as subject
+		$writer->about(
+			$writer->rdr()->about( 'acme', 'Bananas' )
+				->say( 'acme', 'taste' )->is( 'acme', 'nice' )
+			)->say( 'prov', 'wasDerivedFrom' )
+				->is( 'publ', 'BananasAreTasty' );
+
+		// reified statement as object
+		$writer->about( 'publ', 'BananasAreNasty' )
+			->say( 'prov', 'Insertion' )->is( $objectStatement = $writer->rdr() );
+
+		// out-of-sequence definition of reified statement
+		$objectStatement->about( 'acme', 'Bananas' )
+			->say( 'acme', 'taste' )->is( 'acme', 'foul' );
+
+		$subjectStatement = $writer->rdr()->about( 'acme', 'Bananas' )
+			->say( 'acme', 'taste' )->is( 'acme', 'nice' );
+
+		// nested RDR
+		$writer->about( 'publ', 'BananasAreTasty' )
+			->say( 'prov', 'Insertion' )->is(
+				$writer->rdr()->about( $subjectStatement )
+					->say( 'prov', 'wasDerivedFrom' )
+						->is( 'publ', 'NomNomBananas' )
+			);
+
+		$rdf = $writer->drain();
+		$this->assertOutputLines( 'RDR', $rdf );
 	}
 
 	//FIXME: test quoting/escapes!

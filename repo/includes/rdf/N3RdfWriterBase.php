@@ -24,22 +24,16 @@ abstract class N3RdfWriterBase extends RdfWriterBase {
 
 	protected function writeRef( $base, $local = null ) {
 		if ( $local === null ) {
-			if( $this->isShorthand( $base) ) {
-				$this->writeShorthand( $base );
+			if ( !is_string( $base ) ) {
+				$this->write( $base ); // callbacks, sub-writers, etc
+			} elseif( $this->isShorthand( $base ) ) {
+				$this->write( $base );
 			} else {
 				$this->writeIRI( $base );
 			}
 		} else {
 			$this->writeQName( $base, $local );
 		}
-	}
-
-	protected function writeShorthand( $shorthand ) {
-		if ( $shorthand === null || $shorthand === '' ) {
-			throw new InvalidArgumentException( '$shorthand must not be empty' );
-		}
-
-		$this->write( $shorthand );
 	}
 
 	protected function writeIRI( $iri ) {
