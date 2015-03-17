@@ -17,29 +17,21 @@ use Html;
 class DiffOpValueFormatter {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
 	private $oldName;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
 	private $newName;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string[]|null
 	 */
 	private $oldValues;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string[]|null
 	 */
 	private $newValues;
@@ -62,8 +54,6 @@ class DiffOpValueFormatter {
 	/**
 	 * Generates HTML for the header of the diff operation
 	 *
-	 * @since 0.4
-	 *
 	 * @return string HTML
 	 */
 	private function generateHeaderHtml() {
@@ -80,8 +70,6 @@ class DiffOpValueFormatter {
 
 	/**
 	 * Generates HTML for an change diffOp
-	 *
-	 * @since 0.4
 	 *
 	 * @return string HTML
 	 */
@@ -105,8 +93,6 @@ class DiffOpValueFormatter {
 	/**
 	 * Generates HTML for an add diffOp
 	 *
-	 * @since 0.4
-	 *
 	 * @return string HTML
 	 */
 	private function generateAddOpHtml() {
@@ -127,8 +113,6 @@ class DiffOpValueFormatter {
 	/**
 	 * Generates HTML for an remove diffOp
 	 *
-	 * @since 0.4
-	 *
 	 * @return string HTML
 	 */
 	private function generateRemoveOpHtml() {
@@ -146,8 +130,6 @@ class DiffOpValueFormatter {
 
 	/**
 	 * Generates HTML from a given value or array of values
-	 *
-	 * @since 0.4
 	 *
 	 * @param string[] $values HTML
 	 *

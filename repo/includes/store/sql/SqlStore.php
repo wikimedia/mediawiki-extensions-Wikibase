@@ -162,8 +162,6 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @return TermIndex
 	 */
 	private function newTermIndex() {

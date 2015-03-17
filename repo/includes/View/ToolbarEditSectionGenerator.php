@@ -65,8 +65,6 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 	 * Returns a toolbar with an edit link. In JavaScript, an enhanced toolbar will be initialized
 	 * on top of the generated HTML.
 	 *
-	 * @since 0.2
-	 *
 	 * @param string $specialPageName the special page for the button
 	 * @param string[] $specialPageUrlParams Additional URL params for the special page
 	 *
