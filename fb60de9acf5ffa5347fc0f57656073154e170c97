@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_19693089",
+        "filename": "lib/includes/formatters/EntityIdLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-03-17T12:53:46Z",
+      "side": 1,
+      "message": "Is this not the wrong way around? [[link target|link text]]?",
+      "revId": "fb60de9acf5ffa5347fc0f57656073154e170c97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
