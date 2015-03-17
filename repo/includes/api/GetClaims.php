@@ -91,8 +91,6 @@ class GetClaims extends ApiWikibase {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @param Entity $entity
 	 * @param null|string $claimGuid
 	 *
@@ -159,9 +157,8 @@ class GetClaims extends ApiWikibase {
 	 * Obtains the id of the entity for which to obtain claims and the claim GUID
 	 * in case it was also provided.
 	 *
-	 * @since 0.3
-	 *
 	 * @param $params
+	 *
 	 * @return array
 	 * First element is a prefixed entity id
 	 * Second element is either null or a claim GUID

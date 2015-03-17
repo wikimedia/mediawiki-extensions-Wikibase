@@ -97,8 +97,6 @@ class EntityAccessor {
 	 * Recursively renumber a serialized array in place, so it is indexed at 1, not 0.
 	 * Just like Lua wants it.
 	 *
-	 * @since 0.5
-	 *
 	 * @param array &$entityArr
 	 */
 	private function renumber( array &$entityArr ) {
