@@ -13,32 +13,11 @@ use InvalidArgumentException;
  */
 class N3Quoter {
 
-	private $badChars = array(
-		"\"",
-		"\\",
-		"\0",
-		"\n",
-		"\r",
-		"\t",
-	);
-
-	private $badCharEscapes = array(
-		'\"',
-		'\\\\',
-		'\0',
-		'\n',
-		'\r',
-		'\t',
-	);
-
 	private $badUriChars = array(
 		"<",
 		">",
 		"\"",
 		" ",
-		"\n",
-		"\r",
-		"\t",
 	);
 
 	private $badUriCharEscapes = array(
@@ -46,9 +25,6 @@ class N3Quoter {
 		'%3E',
 		'%22',
 		'%20',
-		'%0D',
-		'%0A',
-		'%09',
 	);
 
 	/**
@@ -56,24 +32,24 @@ class N3Quoter {
 	 */
 	private $escaper = null;
 
+	private $escapeIRIs = false;
+
 	/**
-	 * @param $escapeUnicode
+	 * @param bool $escapeUnicode
 	 */
 	public function setEscapeUnicode( $escapeUnicode ) {
 		$this->escaper = $escapeUnicode ? new UnicodeEscaper() : null;
 	}
 
-	public function escapeIRI( $uri ) {
+	public function escapeIRI( $iri ) {
 		//FIXME: more robust escaping;
 		//FIXME: apply unicode escaping?!
-		$quoted = str_replace( $this->badUriChars, $this->badUriCharEscapes, $uri );
-
+		$quoted = str_replace( $this->badUriChars, $this->badUriCharEscapes, $iri );
 		return $quoted;
 	}
 
 	public function escapeLiteral( $s ) {
-		//FIXME: more robust escaping
-		$escaped = str_replace( $this->badChars, $this->badCharEscapes, $s );
+		$escaped = addcslashes( $s, "\r\n\t\0\\\"" );
 
 		if ( $this->escaper !== null ) {
 			$escaped = $this->escaper->escapeString( $escaped );
