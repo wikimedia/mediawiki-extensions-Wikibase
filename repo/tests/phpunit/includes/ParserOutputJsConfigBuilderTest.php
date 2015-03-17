@@ -3,11 +3,9 @@
 namespace Wikibase\Test;
 
 use Language;
-use Title;
+use MediaWikiTestCase;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -18,8 +16,6 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Lib\Store\EntityInfo;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\ParserOutputJsConfigBuilder;
 
 /**
@@ -33,22 +29,19 @@ use Wikibase\ParserOutputJsConfigBuilder;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
+class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider buildProvider
 	 */
-	public function testBuild( array $usedEntities, Entity $entity, EntityInfo $entityInfo ) {
+	public function testBuild( Entity $entity ) {
 		$configBuilder = $this->getConfigBuilder( 'en', array( 'de', 'en', 'es', 'fr' ) );
-		$configVars = $configBuilder->build( $entity, $entityInfo );
+		$configVars = $configBuilder->build( $entity );
 
 		$this->assertInternalType( 'array', $configVars );
 
 		$entityId = $entity->getId()->getSerialization();
 		$this->assertEquals( $entityId, $configVars['wbEntityId'], 'wbEntityId' );
-
-		$usedEntitiesVar = json_decode( $configVars['wbUsedEntities'], true );
-		$this->assertEquals( $usedEntities, $usedEntitiesVar, 'wbUsedEntities' );
 
 		$this->assertSerializationEqualsEntity( $entity, json_decode( $configVars['wbEntity'], true ) );
 	}
@@ -66,27 +59,14 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	public function buildProvider() {
 		$entity = $this->getMainItem();
 
-		$referencedItem = $this->getReferencedItem();
-		$entityInfo = $this->getEntityInfo( $referencedItem );
-
-		$usedEntities = array(
-			array(
-				'content' => $this->getEntityInfoContent( $referencedItem ),
-				'title' => 'item:Q55'
-			)
-		);
-
 		return array(
-			array( $usedEntities, $entity, $entityInfo )
+			array( $entity )
 		);
 	}
 
 	private function getConfigBuilder( $languageCode, array $languageCodes ) {
 		$configBuilder = new ParserOutputJsConfigBuilder(
-			new BasicEntityIdParser(),
-			$this->getEntityTitleLookup(),
-			$this->getSerializationOptions( $languageCode, $languageCodes ),
-			$languageCode
+			$this->getSerializationOptions( $languageCode, $languageCodes )
 		);
 
 		return $configBuilder;
@@ -132,53 +112,6 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 		$item->addClaim( $statement );
 
 		return $item;
-	}
-
-	private function getReferencedItem() {
-		$item = new Item( new ItemId( 'Q55' ) );
-		$item->setLabel( 'en', 'Vanilla' );
-
-		return $item;
-	}
-
-	private function getEntityInfo( Entity $entity ) {
-		return new EntityInfo( array(
-			$this->getEntityInfoContent( $entity )
-		) );
-	}
-
-	private function getEntityInfoContent( Entity $entity ) {
-		return array(
-			'id' => $entity->getId()->getSerialization(),
-			'type' => $entity->getType(),
-			'labels' => array(
-				'en' => array(
-					'language' => 'en',
-					'value' => $entity->getLabel( 'en' )
-				)
-			),
-			'descriptions' => $entity->getDescriptions()
-		);
-	}
-
-	/**
-	 * @return EntityTitleLookup
-	 */
-	private function getEntityTitleLookup() {
-		$lookup = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityTitleLookup' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$lookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
-				return Title::makeTitle(
-					NS_MAIN,
-					$id->getEntityType() . ':' . $id->getSerialization()
-				);
-			} ) );
-
-		return $lookup;
 	}
 
 }
