@@ -16,6 +16,24 @@
       "revId": "fb60de9acf5ffa5347fc0f57656073154e170c97",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_61742a97",
+        "filename": "lib/includes/formatters/EntityIdLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-17T14:51:46Z",
+      "side": 1,
+      "message": "The serialization is the link text. `$title` is what the `EntityIdTitleFormatter` returns, which is the return value of `Title::getFullText`. So yeah, counter-intuitive, but correct imho.",
+      "parentUuid": "6e7c4fa4_19693089",
+      "revId": "fb60de9acf5ffa5347fc0f57656073154e170c97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
