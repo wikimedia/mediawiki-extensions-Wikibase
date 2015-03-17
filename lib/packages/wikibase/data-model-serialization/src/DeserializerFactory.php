@@ -67,7 +67,7 @@ class DeserializerFactory {
 		return new SiteLinkDeserializer( $this->newEntityIdDeserializer() );
 	}
 
-	/*
+	/**
 	 * Returns a Deserializer that can deserialize Claims objects.
 	 *
 	 * @return Deserializer
@@ -76,7 +76,7 @@ class DeserializerFactory {
 		return new ClaimsDeserializer( $this->newClaimDeserializer() );
 	}
 
-	/*
+	/**
 	 * Returns a Deserializer that can deserialize Claim objects.
 	 *
 	 * @return DispatchableDeserializer
