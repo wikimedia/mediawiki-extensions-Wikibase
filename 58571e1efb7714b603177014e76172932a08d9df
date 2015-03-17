@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e7a7ea4b",
+        "filename": "lib/includes/parsers/MwMonthNameUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T18:18:39Z",
+      "side": 1,
+      "message": "Subclassing isn\u0027t really needed here. Could just as well be a factory class.  It woudl take a list of (two?) languages (in the constructor, or the factory method), and return a MonthNameUnlocalizer. That would make more sense to me than the magic initialization in the constructor.",
+      "revId": "58571e1efb7714b603177014e76172932a08d9df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c7850eb3",
+        "filename": "lib/includes/parsers/MwMonthNameUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T18:18:39Z",
+      "side": 1,
+      "message": "BASE_LANGUAGE_CODE should be defined in this class, not the parent class.",
+      "revId": "58571e1efb7714b603177014e76172932a08d9df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
