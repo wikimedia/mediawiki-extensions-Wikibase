@@ -291,7 +291,11 @@ class SearchEntities extends ApiBase {
 			$entries
 		);
 
-		$this->getResult()->setIndexedTagName_internal( array( 'search' ), 'entity' );
+		if ( defined( 'ApiResult::META_CONTENT' ) ) {
+			$this->getResult()->defineIndexedTagName( array( 'search' ), 'entity' );
+		} else {
+			$this->getResult()->setIndexedTagName_internal( array( 'search' ), 'entity' );
+		}
 
 		// @todo use result builder?
 		$this->getResult()->addValue(

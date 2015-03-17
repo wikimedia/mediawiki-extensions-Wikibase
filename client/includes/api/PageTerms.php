@@ -218,7 +218,11 @@ class PageTerms extends ApiQueryBase {
 	 * @return bool True if it fits in the result
 	 */
 	private function addTermsForPage( ApiResult $result, $pageId, array $termsByType ) {
-		$result->setIndexedTagName_recursive( $termsByType, 'term' );
+		if ( defined( 'ApiResult::META_CONTENT' ) ) {
+			ApiResult::setIndexedTagNameOnSubarrays( $termsByType, 'term' );
+		} else {
+			$result->setIndexedTagName_recursive( $termsByType, 'term' );
+		}
 
 		$fit = $result->addValue( array( 'query', 'pages', $pageId ), 'terms', $termsByType );
 

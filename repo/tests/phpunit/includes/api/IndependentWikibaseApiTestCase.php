@@ -53,7 +53,16 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 	public function doApiRequest( $params ) {
 		$module = $this->getModule( $params );
 		$module->execute();
-		return $module->getResultData();
+
+		if ( defined( 'ApiResult::META_CONTENT' ) ) {
+			$data = $module->getResult()->getResultData();
+			$data = ApiResult::transformForBC( $data );
+			$data = ApiResult::transformForTypes( $data, array( 'BC' => true ) );
+			$data = ApiResult::removeMetadata( $data );
+		} else {
+			$data = $module->getResultData();
+		}
+		return $data;
 	}
 
 	/**

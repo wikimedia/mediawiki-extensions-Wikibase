@@ -138,7 +138,15 @@ class CreateRedirectModuleTest extends \MediaWikiTestCase {
 		$module->execute();
 		$result = $module->getResult();
 
-		return $result->getData();
+		if ( defined( 'ApiResult::META_CONTENT' ) ) {
+			$data = $result->getResultData();
+			$data = ApiResult::transformForBC( $data );
+			$data = ApiResult::transformForTypes( $data, array( 'BC' => true ) );
+			$data = ApiResult::removeMetadata( $data );
+		} else {
+			$data = $result->getData();
+		}
+		return $data;
 	}
 
 	private function assertSuccess( $result ) {

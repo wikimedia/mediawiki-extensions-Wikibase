@@ -205,7 +205,11 @@ class ResultBuilder {
 		$this->result->addValue( $path, $key, $value );
 
 		if ( $this->result->getIsRawMode() && !is_string( $key ) ) {
-			$this->result->setIndexedTagName_internal( $path, $tag );
+			if ( defined( 'ApiResult::META_CONTENT' ) ) {
+				$this->result->defineIndexedTagName( $path, $tag );
+			} else {
+				$this->result->setIndexedTagName_internal( $path, $tag );
+			}
 		}
 	}
 

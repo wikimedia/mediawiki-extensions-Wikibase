@@ -66,7 +66,11 @@ class ApiClientInfoTest extends \MediaWikiTestCase {
 		$module = $this->getApiModule( $params, $settings );
 		$module->execute();
 
-		$result = $module->getResult()->getData();
+		if ( defined( 'ApiResult::META_CONTENT' ) ) {
+			$result = $module->getResult()->getResultData();
+		} else {
+			$result = $module->getResult()->getData();
+		}
 
 		$this->assertInternalType( 'array', $result, 'top level element is an array' );
 
