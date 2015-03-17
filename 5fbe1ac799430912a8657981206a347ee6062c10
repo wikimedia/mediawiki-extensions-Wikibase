@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_de7f1ea5",
+        "filename": "repo/includes/rdf/RdrSerializer.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T10:50:56Z",
+      "side": 1,
+      "message": "Not be initialized if $statement-\u003eproperties() is empty. This actually happens with the data in my test db:\n\nPHP Notice:  Undefined variable: oStr in /var/www/html/daniel/wikidata/extensions/Wikibase/repo/includes/rdf/RdrSerializer.php on line 47\n\nPHP   9. Wikibase\\RdrSerializer-\u003eserialise() /var/www/html/daniel/wikidata/extensions/Wikibase/repo/includes/rdf/RdfSerializer.php:168\nPHP  10. Wikibase\\RdrSerializer-\u003eserialiseSubjects() /var/www/html/daniel/wikidata/extensions/Wikibase/repo/includes/rdf/RdrSerializer.php:250\nPHP  11. Wikibase\\RdrSerializer-\u003eserialiseProperties() /var/www/html/daniel/wikidata/extensions/Wikibase/repo/includes/rdf/RdrSerializer.php:223\nPHP  12. Wikibase\\RdrSerializer-\u003eserialiseRDR() /var/www/html/daniel/wikidata/extensions/Wikibase/repo/includes/rdf/RdrSerializer.php:163",
+      "revId": "5fbe1ac799430912a8657981206a347ee6062c10",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
