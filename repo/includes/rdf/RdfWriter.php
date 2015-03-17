@@ -101,7 +101,7 @@ interface RdfWriter {
 	 *
 	 * @return RdfWriter $this
 	 */
-	public function say( $base, $local );
+	public function say( $base, $local = null );
 
 	/**
 	 * Produce a resource as the object of a statement.

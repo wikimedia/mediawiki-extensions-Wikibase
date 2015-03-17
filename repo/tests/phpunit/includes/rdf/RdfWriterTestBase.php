@@ -80,6 +80,82 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 		$this->assertOutputLines( 'Triples', $rdf );
 	}
 
+	public function testSub_first() {
+		$writer = $this->newWriter();
+
+		$writer->start();
+		$writer->prefix( 'acme', 'http://acme.test/' );
+
+		// the sub-writer is committed directly
+		$fruit = $writer->sub();
+
+		// interspersed prefix definition
+		$writer->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
+
+		$writer->about( 'acme', 'Nuts' )
+			->say( 'acme', 'weight' )->value( '5.5', 'xsd', 'decimal' )
+			->say( 'acme', 'color' )->value( 'brown' );
+
+		// generate the output for $fruit out of sequence
+		$fruit->about( 'http://foobar.test/Bananas' )
+			->say( 'a' )->is( 'http://foobar.test/Fruit' );
+
+		$rdf = $writer->drain();
+		$this->assertOutputLines( 'Triples', $rdf );
+	}
+
+	public function testSub_after_subject() {
+		$writer = $this->newWriter();
+
+		$writer->start();
+		$writer->prefix( 'acme', 'http://acme.test/' );
+
+		$writer->about( 'http://foobar.test/Bananas' );
+
+		// Create sub-writer between subject and predicate, output should go after.
+		$nuts = $writer->sub();
+		$nuts->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
+		$nuts->about( 'acme', 'Nuts' )
+			->say( 'acme', 'weight' )->value( '5.5', 'xsd', 'decimal' )
+			->say( 'acme', 'color' )->value( 'brown' );
+
+		// continue to talk about bananas using the top level writer
+		$writer->say( 'a' )->is( 'http://foobar.test/Fruit' ); // shorthand name "a"
+
+		// Commit of backlog is triggered here
+		$rdf = $writer->drain();
+		$this->assertOutputLines( 'Triples', $rdf );
+	}
+
+	public function testSub_inline() {
+		$writer = $this->newWriter();
+
+		$writer->start();
+		$writer->prefix( '', 'http://acme.test/' ); // empty prefix
+		$writer->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
+
+		$writer->about( 'http://foobar.test/Bananas' )
+			->a( 'http://foobar.test/Fruit' ) // shorthand function a()
+			->say( '', 'name' ) // empty prefix
+			->text( 'Banana' );
+
+		// Sub-writer generated between objects.
+		$writer->sub()->about( 'http://foobar.test/Apples' )
+			->say( '', 'name' ) // subsequent call to say( '', 'name' ) for a different subject
+			->text( 'Apple' );
+
+		$writer->text( 'Banane', 'de' ); // another object for Bananas
+
+		// Output about apples should show up here
+
+		$writer->about( 'http://foobar.test/Peaches' )
+			->say( '', 'looks' )
+			->text( 'pink' );
+
+		$rdf = $writer->drain();
+		$this->assertOutputLines( 'Predicates', $rdf );
+	}
+
 	public function testPredicates() {
 		$writer = $this->newWriter();
 
@@ -97,6 +173,10 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 		$writer->about( 'http://foobar.test/Apples' )
 			->say( '', 'name' ) // subsequent call to say( '', 'name' ) for a different subject
 				->text( 'Apple' );
+
+		$writer->about( 'http://foobar.test/Peaches' )
+			->say( '', 'looks' )
+				->text( 'pink' );
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'Predicates', $rdf );

@@ -8,4 +8,7 @@
 	<rdf:Description rdf:about="http://foobar.test/Apples">
 		<name>Apple</name>
 	</rdf:Description>
+	<rdf:Description rdf:about="http://foobar.test/Peaches">
+		<looks>pink</looks>
+	</rdf:Description>
 </rdf:RDF>

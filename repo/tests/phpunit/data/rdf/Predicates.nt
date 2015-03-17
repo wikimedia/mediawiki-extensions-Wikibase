@@ -2,3 +2,4 @@
 <http://foobar.test/Bananas> <http://acme.test/name> "Banana" .
 <http://foobar.test/Bananas> <http://acme.test/name> "Banane"@de .
 <http://foobar.test/Apples> <http://acme.test/name> "Apple" .
+<http://foobar.test/Peaches> <http://acme.test/looks> "pink" .
