@@ -36,12 +36,28 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 		parent::writeValue( $value, $typeBase, $typeLocal );
 	}
 
-	protected function beginSubject( $first = false ) {
-		$this->write( "\n" );
+	protected function beginDocument( $role ) {
+		if ( $role === self::STATEMENT_ROLE ) {
+			$this->write( '<< ' );
+		}
 	}
 
-	protected function finishSubject() {
-		$this->write( " .\n" );
+	protected function finishDocument( $role ) {
+		if ( $role === self::STATEMENT_ROLE ) {
+			$this->write( ' >>' );
+		}
+	}
+
+	protected function beginSubject( $role ) {
+		if ( $role !== self::STATEMENT_ROLE ) {
+			$this->write( "\n" ); //TODO: configure wrap & indent by role
+		}
+	}
+
+	protected function finishSubject( $role ) {
+		if ( $role !== self::STATEMENT_ROLE ) {
+			$this->write( " .\n" );
+		}
 	}
 
 	protected function beginPredicate( $first = false ) {
@@ -51,7 +67,8 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 	}
 
 	protected function finishPredicate( $last = false ) {
-		if ( !$last ) {
+		//FIXME: pass $role as an argument, avoid function call!
+		if ( !$last && $this->getRole() !== self::STATEMENT_ROLE ) {
 			$this->write( " ;\n\t" );
 		}
 	}

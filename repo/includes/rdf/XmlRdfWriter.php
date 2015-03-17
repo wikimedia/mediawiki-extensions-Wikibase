@@ -101,7 +101,11 @@ class XmlRdfWriter extends RdfWriterBase {
 	/**
 	 * Emit a document header.
 	 */
-	protected function beginDocument() {
+	protected function beginDocument( $role ) {
+		if ( $role !== self::DOCUMENT_ROLE ) {
+			return;
+		}
+
 		$this->write( '<?xml version="1.0"?>', "\n" );
 
 		// define a callback for generating namespace attributes
@@ -138,16 +142,18 @@ class XmlRdfWriter extends RdfWriterBase {
 	/**
 	 * Emit the root element
 	 */
-	protected function finishSubject() {
+	protected function finishSubject( $role ) {
 		$this->write( "\t" );
 		$this->close( 'rdf', 'Description' );
 		$this->write( "\n" );
 	}
 
-	protected function finishDocument() {
-		// close document element
-		$this->close( 'rdf', 'RDF' );
-		$this->write( "\n" );
+	protected function finishDocument( $role ) {
+		if ( $role === self::DOCUMENT_ROLE ) {
+			// close document element
+			$this->close( 'rdf', 'RDF' );
+			$this->write( "\n" );
+		}
 	}
 
 	protected function writePredicate( $base, $local = null ) {
