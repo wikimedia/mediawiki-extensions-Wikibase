@@ -308,13 +308,11 @@ class ApiErrorReporter {
 
 		$messageData = $this->convertMessageToResult( $message );
 
-		$res = $this->apiModule->getResult();
-
 		$messageList = isset( $data['messages'] ) ? $data['messages'] : array();
-		$res->setIndexedTagName( $messageList, 'message' );
+		ApiResult::setIndexedTagName( $messageList, 'message' );
 
 		$messageList[] = $messageData;
-		$res->setElement( $data, 'messages', $messageList, ApiResult::OVERRIDE );
+		ApiResult::setValue( $data, 'messages', $messageList, ApiResult::OVERRIDE );
 	}
 
 	/**
@@ -365,7 +363,6 @@ class ApiErrorReporter {
 	 */
 	private function convertMessagesToResult( array $messageSpecs ) {
 		$result = array();
-		$res = $this->apiModule->getResult();
 
 		foreach ( $messageSpecs as $message ) {
 			$type = null;
@@ -385,13 +382,13 @@ class ApiErrorReporter {
 			$row = $this->convertMessageToResult( $message );
 
 			if ( $type !== null ) {
-				$res->setElement( $row, 'type', $type );
+				ApiResult::setValue( $row, 'type', $type );
 			}
 
 			$result[] = $row;
 		}
 
-		$res->setIndexedTagName( $result, 'message' );
+		ApiResult::setIndexedTagName( $result, 'message' );
 		return $result;
 	}
 
@@ -433,19 +430,18 @@ class ApiErrorReporter {
 	 * @return array
 	 */
 	private function convertMessageToResult( Message $message ) {
-		$res = $this->apiModule->getResult();
-
 		$name = $message->getKey();
 		$params = $message->getParams();
 
 		$row = array();
-		$res->setElement( $row, 'name', $name );
+		ApiResult::setValue( $row, 'name', $name );
 
-		$res->setElement( $row, 'parameters', $params );
-		$res->setIndexedTagName( $row['parameters'], 'parameter' );
+		ApiResult::setValue( $row, 'parameters', $params );
+		ApiResult::setIndexedTagName( $row['parameters'], 'parameter' );
 
 		$html = $this->forceMessageLanguage( $message, $this->language )->useDatabase( true )->parse();
-		$res->setContent( $row, $html, 'html' );
+		ApiResult::setContentValue( $row, 'html', $html );
+		$row[ApiResult::META_BC_SUBELEMENTS][] = 'html';
 
 		return $row;
 	}
