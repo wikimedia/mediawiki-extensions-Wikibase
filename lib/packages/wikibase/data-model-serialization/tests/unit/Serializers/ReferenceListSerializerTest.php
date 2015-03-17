@@ -5,6 +5,7 @@ namespace Tests\Wikibase\DataModel\Serializers;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Serializers\ReferenceListSerializer;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\DataModel\Serializers\ReferenceListSerializer
@@ -15,16 +16,15 @@ use Wikibase\DataModel\Serializers\ReferenceListSerializer;
 class ReferenceListSerializerTest extends SerializerBaseTest {
 
 	protected function buildSerializer() {
-		$referenceSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$referenceSerializerMock->expects( $this->any() )
+		$referenceSerializerFake = $this->getMock( '\Serializers\Serializer' );
+		$referenceSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
-			->with( $this->equalTo( new Reference() ) )
 			->will( $this->returnValue( array(
 				'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
 				'snaks' => array()
 			) ) );
 
-		return new ReferenceListSerializer( $referenceSerializerMock );
+		return new ReferenceListSerializer( $referenceSerializerFake );
 	}
 
 	public function serializableProvider() {
@@ -65,10 +65,15 @@ class ReferenceListSerializerTest extends SerializerBaseTest {
 					array(
 						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
 						'snaks' => array()
+					),
+					array(
+						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
+						'snaks' => array()
 					)
 				),
 				new ReferenceList( array(
-					new Reference()
+					new Reference( array( new PropertyNoValueSnak( 1 ) ) ),
+					new Reference( array( new PropertyNoValueSnak( 1 ) ) )
 				) )
 			),
 		);

@@ -21,16 +21,16 @@ use Wikibase\DataModel\Statement\Statement;
 class ClaimSerializerTest extends SerializerBaseTest {
 
 	protected function buildSerializer() {
-		$snakSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$snakSerializerMock->expects( $this->any() )
+		$snakSerializerFake = $this->getMock( '\Serializers\Serializer' );
+		$snakSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnValue( array(
 				'snaktype' => 'novalue',
 				'property' => "P42"
 			) ) );
 
-		$snaksSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$snaksSerializerMock->expects( $this->any() )
+		$snaksSerializerFake = $this->getMock( '\Serializers\Serializer' );
+		$snaksSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnValue( array(
 				'P42' => array(
@@ -41,8 +41,8 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				)
 			) ) );
 
-		$referencesSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$referencesSerializerMock->expects( $this->any() )
+		$referencesSerializerFake = $this->getMock( '\Serializers\Serializer' );
+		$referencesSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnValue( array(
 				array(
@@ -51,7 +51,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				)
 			) ) );
 
-		return new ClaimSerializer( $snakSerializerMock, $snaksSerializerMock, $referencesSerializerMock );
+		return new ClaimSerializer( $snakSerializerFake, $snaksSerializerFake, $referencesSerializerFake );
 	}
 
 	public function serializableProvider() {
@@ -190,7 +190,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 
 		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$claim->setReferences( new ReferenceList( array(
-			new Reference()
+			new Reference( array( new PropertyNoValueSnak( 1 ) ) )
 		) ) );
 		$serializations[] = array(
 			array(
