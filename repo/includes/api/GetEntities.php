@@ -100,9 +100,7 @@ class GetEntities extends ApiWikibase {
 		}
 
 		//todo remove once result builder is used... (what exactly does this do....?)
-		if ( $this->getResult()->getIsRawMode() ) {
-			$this->getResult()->setIndexedTagName_internal( array( 'entities' ), 'entity' );
-		}
+		$this->getResult()->addIndexedTagName( array( 'entities' ), 'entity' );
 
 		$this->getResultBuilder()->markSuccess( 1 );
 	}

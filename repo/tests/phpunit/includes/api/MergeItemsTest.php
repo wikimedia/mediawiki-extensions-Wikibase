@@ -120,7 +120,12 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		$module->execute();
 
 		$result = $module->getResult();
-		return $result->getData();
+		$data = $module->getResult()->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		return $data;
 	}
 
 	public function provideData() {

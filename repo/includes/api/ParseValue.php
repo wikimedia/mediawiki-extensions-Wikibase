@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiResult;
 use DataValues\DataValue;
 use LogicException;
 use OutOfBoundsException;
@@ -110,7 +111,7 @@ class ParseValue extends ApiWikibase {
 	}
 
 	private function outputResults( array $results ) {
-		$this->getResult()->setIndexedTagName( $results, 'result' );
+		ApiResult::setIndexedTagName( $results, 'result' );
 
 		$this->getResult()->addValue(
 			null,
