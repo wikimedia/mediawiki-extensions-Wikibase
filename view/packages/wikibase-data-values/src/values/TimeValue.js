@@ -333,7 +333,12 @@ SELF.getPrecisionById = function( id ) {
  * @return {string}
  */
 function pad( number, digits ) {
-	return ( ( 1e12 + Math.abs( number ) ).toString() ).slice( -digits );
+	number = String( Math.abs( number ) );
+	if ( number.length >= digits ) {
+		return number;
+	}
+
+	return new Array( digits - number.length + 1 ).join( '0' ) + number;
 }
 
 dv.registerDataValue( SELF );

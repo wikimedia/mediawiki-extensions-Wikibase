@@ -60,6 +60,38 @@ define( [
 				!timeValue1.equals( timeValue2 ),
 				'instances encapsulating different values are not equal'
 			);
+		},
+
+		/**
+		 * Tests the effect of the private pad() function, relevant in getSortKey() and toJSON().
+		 *
+		 * @since 0.7
+		 *
+		 * @param {QUnit} assert
+		 */
+		testPad: function( assert ) {
+			var testCases = {
+				'-123456789012-00-00T00:00:00Z': '-123456789012-00-00T00:00:00Z',
+				'-12345678901-00-00T00:00:00Z': '-12345678901-00-00T00:00:00Z',
+				'-1-1-1T01:01:01Z': '-00000000001-01-01T01:01:01Z',
+				'1-1-1T01:01:01Z': '+00000000001-01-01T01:01:01Z',
+				'12-00-00T00:00:00Z': '+00000000012-00-00T00:00:00Z',
+				'1234567890-00-00T00:00:00Z': '+01234567890-00-00T00:00:00Z',
+				'12345678901-00-00T00:00:00Z': '+12345678901-00-00T00:00:00Z',
+				'123456789012-00-00T00:00:00Z': '+123456789012-00-00T00:00:00Z',
+				'1234567890123456-00-00T00:00:00Z': '+1234567890123456-00-00T00:00:00Z'
+			};
+
+			for( var iso8601 in testCases ) {
+				var expected = testCases[iso8601],
+					actual = new dv.TimeValue( iso8601 ).getSortKey();
+
+				assert.ok(
+					expected === actual,
+					'Expected getSortKey() to return "' + expected + '", got "' + actual + '"'
+				);
+
+			}
 		}
 
 	} );
