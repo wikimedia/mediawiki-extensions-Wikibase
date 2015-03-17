@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_99a8e08a",
+        "filename": "repo/includes/View/RepoSpecialPageLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-03-17T13:20:12Z",
+      "side": 1,
+      "message": "array $params \u003d array()",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b9a27ca2",
+        "filename": "view/src/SpecialPageLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-03-17T13:20:12Z",
+      "side": 1,
+      "message": "Nitpick mode enabled.\n\nWe normally end comment sentences with dots and stuff. Also, typically one line between the description and @aurthor tag",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d99df86a",
+        "filename": "view/src/SpecialPageLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-03-17T13:20:12Z",
+      "side": 1,
+      "message": "Empty line between { and first comment",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_59b248fa",
+        "filename": "view/src/SpecialPageLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-03-17T13:20:12Z",
+      "side": 1,
+      "message": "array $params \u003d array()",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
