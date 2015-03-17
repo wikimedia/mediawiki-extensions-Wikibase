@@ -90,18 +90,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.store.MwConfigEntityStore' => $moduleTemplate + array(
-			'scripts' => array(
-				'store.MwConfigEntityStore.js',
-			),
-			'dependencies' => array(
-				'json',
-				'wikibase.store',
-				'wikibase.store.EntityStore',
-				'wikibase.store.FetchedContent',
-			),
-		),
-
 	);
 
 	return $modules;

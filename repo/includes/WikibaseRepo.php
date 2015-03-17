@@ -1030,7 +1030,6 @@ class WikibaseRepo {
 			$entityViewFactory,
 			$this->getStore()->getEntityInfoBuilderFactory(),
 			$this->getEntityContentFactory(),
-			$this->getEntityIdParser(),
 			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
 			$this->getLanguageFallbackChainFactory(),
 			$templateFactory
