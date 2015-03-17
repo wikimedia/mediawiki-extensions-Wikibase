@@ -164,6 +164,19 @@ interface RdfWriter {
 	 * @return RdfWriter
 	 */
 	public function sub();
+	
+	/**
+	 * Returns a reifying statement-level writer.
+	 * This is intended for use with about() as a subject, or with is() as the object()
+	 * of a statement, to achieve RDR-style statement reification.
+	 *
+	 * The sub-writer is
+	 *
+	 * @note: do not call drain() on sub-writers!
+	 *
+	 * @return RdfStatementWriter
+	 */
+	public function rdr();
 
 	/**
 	 * Resets any state the writer may be holding.

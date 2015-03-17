@@ -19,7 +19,8 @@ use LogicException;
 abstract class RdfWriterBase implements RdfWriter {
 
 	/**
-	 * @var array An array of strings or RdfWriters.
+	 * Output buffer of this writer. Call drain() to retrieve the value and reset the buffer.
+	 * @var array An array of strings, RdfWriters, or Closures.
 	 */
 	private $buffer = array();
 
@@ -29,6 +30,14 @@ abstract class RdfWriterBase implements RdfWriter {
 	const STATE_PREDICATE = 11;
 	const STATE_OBJECT = 12;
 	const STATE_DRAIN = 100;
+
+	/**
+	 * Items to be added to $this->buffer next time a state() transition allows
+	 * output on the top level of the document, syntactically between complete triples.
+	 *
+	 * @var array An array of strings, RdfWriters, or Closures.
+	 */
+	private $backlog = array();
 
 	/**
 	 * @var string the current state
@@ -144,6 +153,10 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @return bool
 	 */
 	protected function isShorthand( $shorthand ) {
+		if ( !is_string( $shorthand ) ) {
+			return false;
+		}
+
 		return isset( $this->shorthands[$shorthand] );
 	}
 
@@ -171,17 +184,37 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @return RdfWriter
 	 */
 	final public function sub() {
-		//FIXME: don't mess with the state, enqueue the writer to be placed in the buffer
-		// later, on the next transtion to subject|document|drain
-		$this->state( self::STATE_DOCUMENT );
-
 		$writer = $this->newSubWriter( self::DOCUMENT_ROLE, $this->labeler );
-		$writer->state = self::STATE_DOCUMENT;
 
-		// share registered prefixes
-		$writer->prefixes =& $this->prefixes;
+		if ( $writer instanceof RdfWriterBase ) {
+			//FIXME: find a better way than instanceof!
+			$writer->state = 'document';
 
-		$this->write( $writer );
+			// share registered prefixes
+			$writer->prefixes =& $this->prefixes;
+		}
+
+		// Insert the output of $writer at the next position that is syntactically
+		// and structurally between subjects.
+		$this->post( $writer );
+		return $writer;
+	}
+
+	/**
+	 * @return RdfStatementWriter
+	 */
+	final public function rdr() {
+		$writer = $this->newSubWriter( self::STATEMENT_ROLE, $this->labeler );
+
+		if ( $writer instanceof RdfWriterBase ) {
+			//FIXME: find a better way than instanceof!
+			$writer->state( 'document' );
+
+			// share registered prefixes
+			$writer->prefixes =& $this->prefixes;
+		}
+
+		//TODO: for efficiency, allow $writer to be re-used; auto-flush when done.
 		return $writer;
 	}
 
@@ -205,6 +238,35 @@ abstract class RdfWriterBase implements RdfWriter {
 	final protected function write() {
 		foreach ( func_get_args() as $arg ) {
 			$this->buffer[] = $arg;
+		}
+	}
+
+	/**
+	 * Posts output to the backlog, to be committed to the buffer by a call to commitBacklog().
+	 * commitBacklog() is called when state allows, that is between subjects, after finishSubject()
+	 * and before finishDocument().
+	 *
+	 * @param string|RdfBuffer|Closure ... any number of output elements to place in the backlog.
+	 */
+	final protected function post() {
+		if ( $this->state === 'start' || $this->state === 'document' || $this->state === 'drain' ) {
+			// If the state allows, write directly to $this->buffer
+			$buffer = &$this->buffer;
+		} else {
+			$buffer = &$this->backlog;
+		}
+
+		$numArgs = func_num_args();
+
+		for ( $i = 0; $i < $numArgs; $i++ ) {
+			$s = func_get_arg( $i );
+			$buffer[] = $s;
+		}
+	}
+
+	private function commitBacklog() {
+		foreach ( $this->backlog as $item ) {
+			$this->buffer[] = $item;
 		}
 	}
 
@@ -509,13 +571,14 @@ abstract class RdfWriterBase implements RdfWriter {
 				break;
 
 			case self::STATE_START:
-				$this->beginDocument();
+				$this->beginDocument( $this->role );
 				break;
 
 			case self::STATE_OBJECT: // when injecting a sub-document
 				$this->finishObject( 'last' );
 				$this->finishPredicate( 'last' );
-				$this->finishSubject();
+				$this->finishSubject( $this->role );
+				$this->commitBacklog();
 				break;
 
 			default:
@@ -526,7 +589,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	private function transitionSubject() {
 		switch ( $this->state ) {
 			case self::STATE_DOCUMENT:
-				$this->beginSubject();
+				$this->beginSubject( $this->role );
 				break;
 
 			case self::STATE_OBJECT:
@@ -536,8 +599,9 @@ abstract class RdfWriterBase implements RdfWriter {
 
 				$this->finishObject( 'last' );
 				$this->finishPredicate( 'last' );
-				$this->finishSubject();
-				$this->beginSubject();
+				$this->finishSubject( $this->role );
+				$this->commitBacklog();
+				$this->beginSubject( $this->role );
 				break;
 
 			default:
@@ -586,19 +650,25 @@ abstract class RdfWriterBase implements RdfWriter {
 
 	private function transitionDrain() {
 		switch ( $this->state ) {
+			case self::STATE_DRAIN:
+				break;
+
 			case self::STATE_START:
+				$this->commitBacklog();
 				break;
 
 			case self::STATE_DOCUMENT:
-				$this->finishDocument();
+				$this->commitBacklog();
+				$this->finishDocument( $this->role );
 				break;
 
 			case self::STATE_OBJECT:
 
 				$this->finishObject( 'last' );
 				$this->finishPredicate( 'last' );
-				$this->finishSubject();
-				$this->finishDocument();
+				$this->finishSubject( $this->role );
+				$this->commitBacklog();
+				$this->finishDocument( $this->role );
 				break;
 
 			default:
@@ -675,31 +745,33 @@ abstract class RdfWriterBase implements RdfWriter {
 	/**
 	 * May be implemented to generate any output that may be needed at the beginning of a
 	 * document.
+	 *
+	 * @param string $role the writer's role, see the XXX_ROLE constants.
 	 */
-	protected function beginDocument() {
+	protected function beginDocument( $role ) {
 	}
 
 	/**
 	 * May be implemented to generate any output that may be needed at the end of a
 	 * document (e.g. this would generate "</rdf:RDF>" for RDF/XML).
 	 */
-	protected function finishDocument() {
+	protected function finishDocument( $role ) {
 	}
 
 	/**
 	 * May be implemented to generate any output that may be needed at the beginning of a
 	 * sequence of statements about a subject.
 	 *
-	 * @param bool $first Whether this is the first statement in the document.
+	 * @param string $role the writer's role, see the XXX_ROLE constants.
 	 */
-	protected function beginSubject( $first = false ) {
+	protected function beginSubject( $role ) {
 	}
 
 	/**
 	 * May be implemented to generate any output that may be needed at the end of a
 	 * sequence of statements about a single subject (e.g. this would generate "." for Turtle).
 	 */
-	protected function finishSubject() {
+	protected function finishSubject( $role ) {
 	}
 
 	/**

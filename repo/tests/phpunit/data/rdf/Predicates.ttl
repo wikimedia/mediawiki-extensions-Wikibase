@@ -6,3 +6,5 @@
 		"Banane"@de .
 
 <http://foobar.test/Apples> :name "Apple" .
+
+<http://foobar.test/Peaches> :looks "pink" .
