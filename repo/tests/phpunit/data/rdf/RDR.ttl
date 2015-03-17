@@ -1,0 +1,9 @@
+@prefix acme : <http://acme.test/terms/> .
+@prefix publ : <http://acme.test/publications/> .
+@prefix prov : <http://www.w3.org/ns/prov#> .
+
+<< acme:Bananas acme:taste acme:nice >> prov:wasDerivedFrom publ:BananasAreTasty .
+
+publ:BananasAreNasty prov:Insertion << acme:Bananas acme:taste acme:foul >> .
+
+publ:BananasAreTasty prov:Insertion << << acme:Bananas acme:taste acme:nice >> prov:wasDerivedFrom publ:NomNomBananas >> .
