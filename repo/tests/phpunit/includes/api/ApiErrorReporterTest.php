@@ -315,7 +315,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 
 		$reporter->reportStatusWarnings( $status );
 
-		$result = $api->getResult()->getData();
+		$result = $api->getResult()->getResultData();
 
 		foreach ( $expectedDataFields as $path => $value ) {
 			$path = explode( '/', $path );

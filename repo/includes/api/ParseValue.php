@@ -110,7 +110,7 @@ class ParseValue extends ApiWikibase {
 	}
 
 	private function outputResults( array $results ) {
-		$this->getResult()->setIndexedTagName( $results, 'result' );
+		ApiResult::setIndexedTagName( $results, 'result' );
 
 		$this->getResult()->addValue(
 			null,

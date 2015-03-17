@@ -94,9 +94,7 @@ class SiteLinkSerializer extends SerializerObject {
 					$siteLink->getBadges()
 				);
 
-				if ( $this->options->shouldIndexTags() ) {
-					$this->setIndexedTagName( $badges, 'badge' );
-				}
+				$this->setIndexedTagName( $badges, 'badge' );
 
 				$response['badges'] = $badges;
 			}
@@ -113,9 +111,7 @@ class SiteLinkSerializer extends SerializerObject {
 			}
 		}
 
-		if ( $this->options->shouldIndexTags() ) {
-			$this->setIndexedTagName( $serialization, 'sitelink' );
-		}
+		$this->setIndexedTagName( $serialization, 'sitelink' );
 
 		return $serialization;
 	}

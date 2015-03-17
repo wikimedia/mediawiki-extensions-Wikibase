@@ -58,9 +58,7 @@ abstract class SerializerObject implements Serializer {
 	 * @param string $tag
 	 */
 	protected function setIndexedTagName( array &$array, $tag ) {
-		if ( $this->options->shouldIndexTags() ) {
-			$array['_element'] = $tag;
-		}
+		ApiResult::setIndexedTagName( $array, $tag );
 	}
 
 	/**
