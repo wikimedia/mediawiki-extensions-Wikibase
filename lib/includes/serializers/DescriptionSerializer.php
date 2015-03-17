@@ -60,9 +60,7 @@ class DescriptionSerializer extends SerializerObject implements Unserializer {
 
 		$value = $this->multilingualSerializer->serializeMultilingualValues( $descriptions );
 
-		if ( $this->options->shouldIndexTags() ) {
-			$this->setIndexedTagName( $value, 'description' );
-		}
+		$this->setIndexedTagName( $value, 'description' );
 
 		return $value;
 	}

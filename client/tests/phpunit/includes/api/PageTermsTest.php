@@ -237,7 +237,12 @@ class PageTermsTest extends \MediaWikiTestCase {
 		$module->execute();
 
 		$result = $module->getResult();
-		return $result->getData();
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		return $data;
 	}
 
 	public function pageTermsProvider() {

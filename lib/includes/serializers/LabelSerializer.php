@@ -60,9 +60,7 @@ class LabelSerializer extends SerializerObject implements Unserializer {
 
 		$value = $this->multilingualSerializer->serializeMultilingualValues( $labels );
 
-		if ( $this->options->shouldIndexTags() ) {
-			$this->setIndexedTagName( $value, 'label' );
-		}
+		$this->setIndexedTagName( $value, 'label' );
 
 		return $value;
 	}

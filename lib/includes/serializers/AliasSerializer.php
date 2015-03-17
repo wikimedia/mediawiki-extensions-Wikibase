@@ -65,9 +65,7 @@ class AliasSerializer extends SerializerObject implements Unserializer {
 			}
 		}
 
-		if ( $this->options->shouldIndexTags() ) {
-			$this->setIndexedTagName( $value, 'alias' );
-		}
+		$this->setIndexedTagName( $value, 'alias' );
 
 		return $value;
 	}
