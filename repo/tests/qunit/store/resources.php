@@ -17,6 +17,16 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'wikibase.store.CachingEntityStore.tests' => $moduleBase + array(
+			'scripts' => array(
+				'store.CachingEntityStore.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.store.CachingEntityStore',
+				'wikibase.store.EntityStore',
+			),
+		),
+
 		'wikibase.store.CombiningEntityStore.tests' => $moduleBase + array(
 			'scripts' => array(
 				'store.CombiningEntityStore.tests.js',
