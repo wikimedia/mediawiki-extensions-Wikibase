@@ -19,6 +19,57 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_67dbda54",
+        "filename": "repo/includes/View/ToolbarEditSectionGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T18:04:16Z",
+      "side": 1,
+      "message": "should have separate parameters for /subpage/style and ?key\u003dvalue\u0026style params.",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a7f012c5",
+        "filename": "repo/tests/phpunit/includes/View/RepoSpecialPageLinkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T18:04:16Z",
+      "side": 1,
+      "message": "YOu *could* use use a well known special page name and set the language to \u0027en\u0027...",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_07b9c6e5",
+        "filename": "repo/tests/phpunit/includes/View/RepoSpecialPageLinkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T18:04:16Z",
+      "side": 1,
+      "message": "The regex should be ^anchored$. And parameter handling should be tested.",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b9a27ca2",
         "filename": "view/src/SpecialPageLinker.php",
         "patchSetId": 1
@@ -83,6 +134,40 @@
       "writtenOn": "2015-03-17T13:20:12Z",
       "side": 1,
       "message": "Empty line between { and first comment",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_877ab61d",
+        "filename": "view/src/SpecialPageLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T18:04:16Z",
+      "side": 1,
+      "message": "Not sure we really need an interface - SpecialPages are specific to MediaWiki, and MediaWiki only has one way to link to them. What different implementations could there be?...",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_67a99a8c",
+        "filename": "view/src/SpecialPageLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-17T18:04:16Z",
+      "side": 1,
+      "message": "This needs to document how the parameters are handled. Do they use subpage syntax, or URL parameter syntax? We probably need both. At least if this is supposed to be generic.",
       "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
