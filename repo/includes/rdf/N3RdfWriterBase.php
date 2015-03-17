@@ -16,10 +16,29 @@ abstract class N3RdfWriterBase extends RdfWriterBase {
 	 */
 	protected $quoter;
 
+	/**
+	 * @var bool
+	 */
+	private $trustIRIs = true;
+
 	public function __construct( $role = parent::DOCUMENT_ROLE, BNodeLabeler $labeler = null, N3Quoter $quoter = null ) {
 		parent::__construct( $role, $labeler );
 
 		$this->quoter = $quoter ?: new N3Quoter();
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getTrustIRIs() {
+		return $this->trustIRIs;
+	}
+
+	/**
+	 * @param boolean $trustIRIs
+	 */
+	public function setTrustIRIs( $trustIRIs ) {
+		$this->trustIRIs = $trustIRIs;
 	}
 
 	protected function writeRef( $base, $local = null ) {
@@ -51,7 +70,10 @@ abstract class N3RdfWriterBase extends RdfWriterBase {
 			throw new InvalidArgumentException( '$iri must be an absolute iri: ' . $iri );
 		}
 
-		$iri = $this->quoter->escapeIRI( $iri );
+		if ( !$this->trustIRIs ) {
+			$iri = $this->quoter->escapeIRI( $iri );
+		}
+
 		$this->write( '<', $iri, '>' );
 	}
 

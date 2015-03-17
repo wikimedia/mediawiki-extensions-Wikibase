@@ -22,10 +22,17 @@ abstract class RdfWriterBase implements RdfWriter {
 	 */
 	private $buffer = array();
 
+	const STATE_START = 0;
+	const STATE_DOCUMENT = 5;
+	const STATE_SUBJECT = 10;
+	const STATE_PREDICATE = 11;
+	const STATE_OBJECT = 12;
+	const STATE_DRAIN = 100;
+
 	/**
 	 * @var string the current state
 	 */
-	private $state = 'start';
+	private $state = self::STATE_START;
 
 	/**
 	 * Shorthands that can be used in place of IRIs, e.g. ("a" to mean rdf:type).
@@ -161,10 +168,10 @@ abstract class RdfWriterBase implements RdfWriter {
 	final public function sub() {
 		//FIXME: don't mess with the state, enqueue the writer to be placed in the buffer
 		// later, on the next transtion to subject|document|drain
-		$this->state( 'document' );
+		$this->state( self::STATE_DOCUMENT );
 
 		$writer = $this->newSubWriter( self::DOCUMENT_ROLE, $this->labeler );
-		$writer->state = 'document';
+		$writer->state = self::STATE_DOCUMENT;
 
 		// share registered prefixes
 		$writer->prefixes =& $this->prefixes;
@@ -191,11 +198,8 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @param string $s...
 	 */
 	final protected function write() {
-		$numArgs = func_num_args();
-
-		for ( $i = 0; $i < $numArgs; $i++ ) {
-			$s = func_get_arg( $i );
-			$this->buffer[] = $s;
+		foreach ( func_get_args() as $arg ) {
+			$this->buffer[] = $arg;
 		}
 	}
 
@@ -249,7 +253,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @see RdfWriter::start()
 	 */
 	final public function start() {
-		$this->state( 'document' );
+		$this->state( self::STATE_DOCUMENT );
 	}
 
 	/**
@@ -275,7 +279,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 */
 	public function reset() {
 		$this->buffer = array();
-		$this->state = 'start'; //TODO: may depend on role
+		$this->state = self::STATE_START; //TODO: may depend on role
 
 		$this->currentSubject = array( null, null );
 		$this->currentPredicate = array( null, null );
@@ -308,7 +312,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @param string $uri
 	 */
 	final public function prefix( $prefix, $uri ) {
-		$this->state( 'document' );
+		$this->state( self::STATE_DOCUMENT );
 
 		$this->registerPrefix( $prefix, $uri );
 		$this->writePrefix( $prefix, $uri );
@@ -329,7 +333,7 @@ abstract class RdfWriterBase implements RdfWriter {
 			return $this; // redundant about() call
 		}
 
-		$this->state( 'subject' );
+		$this->state( self::STATE_SUBJECT );
 
 		$this->currentSubject[0] = $base;
 		$this->currentSubject[1] = $local;
@@ -370,7 +374,7 @@ abstract class RdfWriterBase implements RdfWriter {
 			return $this; // redundant about() call
 		}
 
-		$this->state( 'predicate' );
+		$this->state( self::STATE_PREDICATE );
 
 		$this->currentPredicate[0] = $base;
 		$this->currentPredicate[1] = $local;
@@ -388,7 +392,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @return RdfWriter $this
 	 */
 	final public function is( $base, $local = null ) {
-		$this->state( 'object' );
+		$this->state( self::STATE_OBJECT );
 
 		$this->expandResource( $base, $local );
 		$this->writeResource( $base, $local );
@@ -404,7 +408,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @return $this
 	 */
 	final public function text( $text, $language = null ) {
-		$this->state( 'object' );
+		$this->state( self::STATE_OBJECT );
 
 		$this->writeText( $text, $language );
 		return $this;
@@ -422,7 +426,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @return $this
 	 */
 	final public function value( $value, $typeBase = null, $typeLocal = null ) {
-		$this->state( 'object' );
+		$this->state( self::STATE_OBJECT );
 
 		if ( $typeBase === null && !is_string( $value ) ) {
 			$vtype = gettype( $value );
@@ -463,19 +467,19 @@ abstract class RdfWriterBase implements RdfWriter {
 	 */
 	final protected function state( $newState ) {
 		switch ( $newState ) {
-			case 'document':
+			case self::STATE_DOCUMENT:
 				$this->transitionDocument();
 				break;
 
-			case 'subject':
+			case self::STATE_SUBJECT:
 				$this->transitionSubject();
 				break;
 
-			case 'predicate':
+			case self::STATE_PREDICATE:
 				$this->transitionPredicate();
 				break;
 
-			case 'object':
+			case self::STATE_OBJECT:
 				$this->transitionObject();
 				break;
 
@@ -492,33 +496,33 @@ abstract class RdfWriterBase implements RdfWriter {
 
 	private function transitionDocument() {
 		switch ( $this->state ) {
-			case 'document':
+			case self::STATE_DOCUMENT:
 				break;
 
-			case 'start':
+			case self::STATE_START:
 				$this->beginDocument();
 				break;
 
-			case 'object': // when injecting a sub-document
+			case self::STATE_OBJECT: // when injecting a sub-document
 				$this->finishObject( 'last' );
 				$this->finishPredicate( 'last' );
 				$this->finishSubject();
 				break;
 
 			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'document'  );
+				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_DOCUMENT  );
 		}
 	}
 
 	private function transitionSubject() {
 		switch ( $this->state ) {
-			case 'document':
+			case self::STATE_DOCUMENT:
 				$this->beginSubject();
 				break;
 
-			case 'object':
+			case self::STATE_OBJECT:
 				if ( $this->role !== self::DOCUMENT_ROLE ) {
-					throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'subject' );
+					throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_SUBJECT );
 				}
 
 				$this->finishObject( 'last' );
@@ -528,19 +532,19 @@ abstract class RdfWriterBase implements RdfWriter {
 				break;
 
 			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'subject' );
+				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_SUBJECT );
 		}
 	}
 
 	private function transitionPredicate() {
 		switch ( $this->state ) {
-			case 'subject':
+			case self::STATE_SUBJECT:
 				$this->beginPredicate( 'first' );
 				break;
 
-			case 'object':
+			case self::STATE_OBJECT:
 				if ( $this->role === self::STATEMENT_ROLE ) {
-					throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'subject' );
+					throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_PREDICATE );
 				}
 
 				$this->finishObject( 'last' );
@@ -549,38 +553,38 @@ abstract class RdfWriterBase implements RdfWriter {
 				break;
 
 			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'predicate' );
+				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_PREDICATE );
 
 		}
 	}
 
 	private function transitionObject() {
 		switch ( $this->state ) {
-			case 'predicate':
+			case self::STATE_PREDICATE:
 				$this->beginObject( 'first' );
 				break;
 
-			case 'object':
+			case self::STATE_OBJECT:
 				$this->finishObject();
 				$this->beginObject();
 				break;
 
 			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'object' );
+				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_OBJECT );
 
 		}
 	}
 
 	private function transitionDrain() {
 		switch ( $this->state ) {
-			case 'start':
+			case self::STATE_START:
 				break;
 
-			case 'document':
+			case self::STATE_DOCUMENT:
 				$this->finishDocument();
 				break;
 
-			case 'object':
+			case self::STATE_OBJECT:
 
 				$this->finishObject( 'last' );
 				$this->finishPredicate( 'last' );
@@ -589,7 +593,7 @@ abstract class RdfWriterBase implements RdfWriter {
 				break;
 
 			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'object' );
+				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_OBJECT );
 
 		}
 	}
