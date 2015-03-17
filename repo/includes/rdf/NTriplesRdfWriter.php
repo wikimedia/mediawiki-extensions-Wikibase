@@ -89,6 +89,12 @@ class NTriplesRdfWriter extends N3RdfWriterBase {
 	protected function newSubWriter( $role, BNodeLabeler $labeler ) {
 		$writer = new self( $role, $labeler, $this->quoter );
 
+		if ( $role === self::STATEMENT_ROLE ) {
+			// Create a expanding writer with two writer streams, one for direct statements
+			// and one for reified statements.
+			$writer = new RdrExpandingWriter( $writer, $writer->sub() );
+		}
+
 		return $writer;
 	}
 
