@@ -55,6 +55,13 @@ class RdfSerializer implements RdfProducer {
 	 * @var PropertyDataTypeLookup
 	 */
 	private $propertyLookup;
+
+	/**
+	 * Hash to store seen references/values for deduplication
+	 * @var BagOStuff
+	 */
+	private $dedupBag;
+
 	/**
 	 * @param EasyRdf_Format $format
 	 * @param string $baseUri
@@ -71,7 +78,8 @@ class RdfSerializer implements RdfProducer {
 		SiteList $sites,
 		PropertyDataTypeLookup $propertyLookup,
 		EntityLookup $entityLookup,
-		$flavor
+		$flavor,
+		\BagOStuff $dedupBag = null
 	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
@@ -80,6 +88,7 @@ class RdfSerializer implements RdfProducer {
 		$this->entityLookup = $entityLookup;
 		$this->propertyLookup = $propertyLookup;
 		$this->flavor = $flavor;
+		$this->dedupBag = $dedupBag;
 	}
 
 	/**
@@ -121,7 +130,8 @@ class RdfSerializer implements RdfProducer {
 			$this->baseUri,
 			$this->dataUri,
 			$this->propertyLookup,
-			$this->flavor
+			$this->flavor,
+			$this->dedupBag
 		);
 
 		return $builder;
