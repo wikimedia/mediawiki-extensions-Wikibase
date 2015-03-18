@@ -48,8 +48,6 @@ call_user_func( function() {
 	// Tell MediaWIki to search the item namespace
 	$wgNamespacesToBeSearchedDefault[WB_NS_ITEM] = true;
 
-	$wgGroupPermissions['wbeditor']['item-set'] = true;
-
 	$wgWBRepoSettings['normalizeItemByTitlePageNames'] = true;
 
 	// the special group includes all the sites in the specialSiteLinkGroups,
