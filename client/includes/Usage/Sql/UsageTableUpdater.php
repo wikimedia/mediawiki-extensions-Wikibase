@@ -160,7 +160,6 @@ class UsageTableUpdater {
 				'eu_page_id' => (int)$pageId,
 				'eu_aspect' => $usage->getAspect(),
 				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
-				'eu_entity_type' => $usage->getEntityId()->getEntityType(),
 			);
 		}
 

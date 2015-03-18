@@ -69,6 +69,9 @@ class SqlUsageTrackerSchemaUpdater {
 
 			$script = $this->getUpdateScriptPath( 'entity_usage-add-touched', $db->getType() );
 			$this->dbUpdater->addExtensionField( $table, 'eu_touched', $script );
+
+			$script = $this->getUpdateScriptPath( 'entity_usage-drop-entity_type', $db->getType() );
+			$this->dbUpdater->dropExtensionField( $table, 'eu_entity_type', $script );
 		}
 	}
 
