@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_2a7e02e2",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-18T11:09:41Z",
+      "side": 1,
+      "message": "Yeah, that makes sense... done.",
+      "parentUuid": "6e7c4fa4_dbd2b45c",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_3b52c8e2",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-16T13:53:31Z",
       "side": 1,
       "message": "I think you have to change this accordingly. Otherwise a call of this method will also call getLatestRevisionId and will need twice the runtime for no benefit.",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_aa71b20c",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-18T11:09:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_3b52c8e2",
       "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ca6c2e34",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-18T11:09:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_9b43dc14",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_3bc3a88d",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-02-16T13:53:31Z",
       "side": 1,
       "message": "Initialize with 0 (see above) and remove the null check. The null check is not needed (as the comment says).",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6a7b9aeb",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-18T11:09:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_3bc3a88d",
       "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ea5eca7a",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-18T11:09:41Z",
+      "side": 1,
+      "message": "Yeah, that was the easiest I could come up with.",
+      "parentUuid": "6e7c4fa4_bbcfb8b4",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_fbd53048",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2015-02-16T13:53:31Z",
       "side": 1,
       "message": "This sentence is hard to understand now. Was better before, in my opinion.",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8adcf6e6",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-18T11:09:41Z",
+      "side": 1,
+      "message": "Yeah, but the old one is no longer correct... tried to improve on this.",
+      "parentUuid": "6e7c4fa4_fbd53048",
       "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6ae15a96",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-18T11:09:41Z",
+      "side": 1,
+      "message": "I use it in the tests... changed to private and making use of ReflectionMethod there.",
+      "parentUuid": "6e7c4fa4_1b382c9a",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_fb5bf0fa",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 1
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_8aa15638",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-18T11:09:41Z",
+      "side": 1,
+      "message": "Indeed no longer needed (unless a caller calls this class with an invalid base revision, but I doubt that). Removed.",
+      "parentUuid": "6e7c4fa4_fb5bf0fa",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_bb0c98f1",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 1
@@ -149,6 +293,24 @@
       "writtenOn": "2015-02-16T13:53:31Z",
       "side": 1,
       "message": "I think this can be optimized in a nice way. Don\u0027t call isNew but instead: Check the id. If it\u0027s not null, try to ask for the title. If no title could be found, you know the entity does not exist. This way you are saving an EntityRevisionLookup call.\n\nNot 100% sure this is correct, but I think it is.",
+      "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ca766ed3",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-18T11:09:41Z",
+      "side": 1,
+      "message": "Yeah, that should be good enough... point of this method is mostly to get a title that represents the (possibly new) entity for EditFilters... so in case we don\u0027t have an id yet, we just create a fake title below. Changed.",
+      "parentUuid": "6e7c4fa4_bb0c98f1",
       "revId": "5508f8cae3d85dba91ead583fa4d83c1d804eb39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
