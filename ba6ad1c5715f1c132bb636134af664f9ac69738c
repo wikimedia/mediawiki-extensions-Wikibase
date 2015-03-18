@@ -157,6 +157,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_a06eb391",
+        "filename": "view/src/SpecialPageLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-03-18T14:49:15Z",
+      "side": 1,
+      "message": "This interface seems to be introduced to manage dependencies better and decrease coupling, including static binding. Makes sense to me.",
+      "parentUuid": "6e7c4fa4_877ab61d",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_67a99a8c",
         "filename": "view/src/SpecialPageLinker.php",
         "patchSetId": 1
