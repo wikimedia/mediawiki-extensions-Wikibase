@@ -16,6 +16,24 @@
       "revId": "475ef0cae07a39705b643dbd375211ccb83f79c9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_395bbefe",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-18T16:29:50Z",
+      "side": 1,
+      "message": "i would have done that except that it will cause extra conflict for henning\u0027s patch that is in review. probably could be done in that patch.",
+      "parentUuid": "6e7c4fa4_b9e10e2b",
+      "revId": "475ef0cae07a39705b643dbd375211ccb83f79c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
