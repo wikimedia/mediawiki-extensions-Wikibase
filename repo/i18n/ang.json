@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gott wisst"
+		]
+	},
+	"wikibase-edit": "adihtan",
+	"wikibase-add": "besettan",
+	"wikibase-description-empty": "Nǣnig gemearcung nis gīet gemearcod.",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|fruma|frumena}}"
+}

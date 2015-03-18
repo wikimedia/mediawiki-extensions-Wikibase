@@ -10,6 +10,7 @@
 	"wikibase-dataitem": "عنصر بيانات",
 	"wikibase-editlinks": "تبديل الوصيله",
 	"wikibase-editlinkstitle": "تبديلت الوصيلات ما بين اللوغات",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-show": "ورّي",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "تبدبل {{WBREPONAME}}"

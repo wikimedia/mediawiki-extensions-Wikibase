@@ -5,6 +5,9 @@
 			"Psneog"
 		]
 	},
+	"wikibase-add": "যোগ কৰক",
+	"wikibase-sitelinks-special": "আন চাইটসমূহ",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|টা তথ্যসূত্ৰ}}",
 	"wikibase-itemdisambiguation-submit": "সন্ধান কৰক",
 	"wikibase-listdatatypes-globe-coordinate-head": "ভৌগোলিক স্থানাংক"
 }

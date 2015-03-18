@@ -4,8 +4,10 @@
 			"Gitartha.bordoloi"
 		]
 	},
+	"tooltip-t-wikibase": "সংযোজিত তথ্যভঁৰালৰ আইটেমলৈ লিংক",
 	"wikibase-after-page-move-queued": "এই পৃষ্ঠাৰ লগত সংযুক্ত [$1 ৱিকিডে'টা ভুক্তি] সোনকালেই স্বয়ংক্ৰিয়ভাৱে নবীকৰণ কৰা হ'ব।",
-	"wikibase-dataitem": "ৱিকিডে'টা পৃষ্ঠা",
+	"wikibase-dataitem": "{{WBREPONAME}} আইটেম",
+	"wikibase-editlinks": "আন্তঃৱিকি লিংক সম্পাদনা কৰক",
 	"wikibase-linkitem-title": "পৃষ্ঠাৰ লগত সংযোগ",
 	"wikibase-linkitem-linkpage": "পৃষ্ঠাৰ লগত সংযোগ কৰক",
 	"wikibase-linkitem-selectlink": "অনুগ্ৰহ কৰি এই পৃষ্ঠাৰ লগত সংযোগ কৰিবলৈ এটা ছাইট আৰু নিৰ্দিষ্ট পৃষ্ঠা বাছনি কৰক।",
@@ -15,10 +17,11 @@
 	"wikibase-linkitem-confirmitem-button": "নিশ্চিত কৰক",
 	"wikibase-linkitem-not-loggedin-title": "আপুনি প্ৰৱেশ কৰিব লাগিব",
 	"wikibase-linkitem-not-loggedin": "এই সুবিধা ব্যৱহাৰ কৰিবলৈ আপুনি এই ৱিকি আৰু [$1 কেন্দ্ৰীয় তথ্য ভঁৰাল]ত লগ্‌ ইন কৰিব লাগিব।",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "লুকুৱাওক",
 	"wikibase-rc-hide-wikidata-show": "দেখুৱাওক",
 	"wikibase-rc-wikibase-edit-letter": "ড",
-	"wikibase-rc-wikibase-edit-title": "ৱিকিডে'টা সম্পাদনা",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} সম্পাদনা",
 	"wikibase-unconnectedpages-submit": "যাওক",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" কোনো বৈধ ভাষা ক'ড নহয়।"
 }
