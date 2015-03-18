@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7ed7dcf2",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-18T15:52:18Z",
+      "side": 1,
+      "message": "woah, whitespace ;)",
+      "revId": "23c29dd60b36ad7ebf1afbbe521fc97956529330",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7eeefcb2",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-18T15:52:18Z",
+      "side": 1,
+      "message": "probably want \"Introductory text\" instead of \"Intro text\", as think we generally prefer to spell these words out fully.\n\nand do you mean \"description\"? and maybe \"that the description is to be set in.\"\n\nand also I think we put punctuation after \"links to the entity.\"",
+      "revId": "23c29dd60b36ad7ebf1afbbe521fc97956529330",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
