@@ -84,6 +84,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
 			} ) );
 
+		$propertyLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
+
 		$serializerOptions = new SerializationOptions();
 		$serializerFactory = new SerializerFactory( $serializerOptions, $dataTypeLookup );
 
@@ -93,6 +95,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$entityLookup,
 			$titleLookup,
 			$serializerFactory,
+			$propertyLookup,
 			new SiteList()
 		);
 

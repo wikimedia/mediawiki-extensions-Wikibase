@@ -7,6 +7,7 @@ use EasyRdf_Format;
 use EasyRdf_Graph;
 use SiteList;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 
 /**
  * RDF serialization for wikibase data model.
@@ -51,11 +52,16 @@ class RdfSerializer implements RdfProducer {
 	private $entityLookup;
 
 	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $propertyLookup;
+	/**
 	 * @param EasyRdf_Format $format
 	 * @param string $baseUri
 	 * @param string $dataUri
 	 * @param SiteList $sites;
 	 * @param EntityLookup $entityLookup
+	 * @param PropertyDataTypeLookup $propertyLookup
 	 * @param integer flavor
 	 */
 	public function __construct(
@@ -63,6 +69,7 @@ class RdfSerializer implements RdfProducer {
 		$baseUri,
 		$dataUri,
 		SiteList $sites,
+		PropertyDataTypeLookup $propertyLookup,
 		EntityLookup $entityLookup,
 		$flavor
 	) {
@@ -71,6 +78,7 @@ class RdfSerializer implements RdfProducer {
 		$this->format = $format;
 		$this->sites = $sites;
 		$this->entityLookup = $entityLookup;
+		$this->propertyLookup = $propertyLookup;
 		$this->flavor = $flavor;
 	}
 
@@ -112,7 +120,7 @@ class RdfSerializer implements RdfProducer {
 			$this->sites,
 			$this->baseUri,
 			$this->dataUri,
-			$this->entityLookup,
+			$this->propertyLookup,
 			$this->flavor
 		);
 
