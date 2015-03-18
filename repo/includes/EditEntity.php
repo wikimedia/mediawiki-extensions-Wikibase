@@ -259,16 +259,17 @@ class EditEntity {
 	 * @return EntityRevision|null
 	 */
 	public function getLatestRevision() {
-		if ( $this->newEntity->getId() === null ) {
-			return null;
-		}
-
 		if ( $this->latestRev === null ) {
-			//NOTE: it's important to remember this, if someone calls clear() on $this->getPage(), this should NOT change!
-			$this->latestRev = $this->entityRevisionLookup->getEntityRevision(
-				$this->getEntityId(),
-				EntityRevisionLookup::LATEST_FROM_MASTER
-			);
+			$id = $this->newEntity->getId();
+
+			if ( $id !== null ) {
+				// NOTE: It's important to remember this, if someone calls clear() on
+				// $this->getPage(), this should NOT change!
+				$this->latestRev = $this->entityRevisionLookup->getEntityRevision(
+					$id,
+					EntityRevisionLookup::LATEST_FROM_MASTER
+				);
+			}
 		}
 
 		return $this->latestRev;
@@ -280,18 +281,16 @@ class EditEntity {
 	 * @return int 0 if the entity doesn't exist
 	 */
 	public function getLatestRevisionId() {
-		if ( $this->newEntity->getId() === null ) {
-			return 0;
-		}
-
 		// Don't do negative caching: We call this to see whether the entity yet exists
 		// before creating.
 		if ( $this->latestRevId === 0 ) {
+			$id = $this->newEntity->getId();
+
 			if ( $this->latestRev !== null ) {
 				$this->latestRevId = $this->latestRev->getRevisionId();
-			} else {
+			} elseif ( $id !== null ) {
 				$this->latestRevId = (int)$this->entityRevisionLookup->getLatestRevisionId(
-					$this->getEntityId(),
+					$id,
 					EntityRevisionLookup::LATEST_FROM_MASTER
 				);
 			}
@@ -452,15 +451,9 @@ class EditEntity {
 	 * @return bool
 	 */
 	public function hasEditConflict() {
-		if ( $this->isNew() || !$this->doesCheckForEditConflicts() ) {
-			return false;
-		}
-
-		if ( $this->getBaseRevisionId() == $this->getLatestRevisionId() ) {
-			return false;
-		}
-
-		return true;
+		return $this->doesCheckForEditConflicts()
+			&& !$this->isNew()
+			&& $this->getBaseRevisionId() !== $this->getLatestRevisionId();
 	}
 
 	/**
@@ -581,15 +574,9 @@ class EditEntity {
 	 * Checks if rate limits have been exceeded.
 	 */
 	public function checkRateLimits() {
-		$exceeded = false;
-
-		if ( $this->getUser()->pingLimiter( 'edit' ) ) {
-			$exceeded = true;
-		} else if ( $this->isNew() && $this->getUser()->pingLimiter( 'create' ) ) {
-			$exceeded = true;
-		}
-
-		if ( $exceeded ) {
+		if ( $this->user->pingLimiter( 'edit' )
+			|| ( $this->isNew() && $this->user->pingLimiter( 'create' ) )
+		) {
 			$this->errorType |= self::RATE_LIMIT;
 			$this->status->fatal( 'actionthrottledtext' );
 		}
@@ -880,13 +867,10 @@ class EditEntity {
 	 * @return bool
 	 */
 	protected function getWatchDefault() {
-		$user = $this->getUser();
-
-		if ( $user->getOption( 'watchdefault' ) ) {
-			// Watch all edits
-			return true;
-		} elseif ( $user->getOption( 'watchcreations' ) && $this->isNew() ) {
-			// Watch creations
+		// User wants to watch all edits or all creations.
+		if ( $this->user->getOption( 'watchdefault' )
+			|| ( $this->user->getOption( 'watchcreations' ) && $this->isNew() )
+		) {
 			return true;
 		}
 
