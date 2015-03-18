@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9963f2a6",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-18T16:33:02Z",
+      "side": 1,
+      "message": "i would omit this, at least for now and from this patch.\n\nthis message was added for https://phabricator.wikimedia.org/T50601 which is something customized and used on-wiki",
+      "revId": "ab0dada22f457c7f8ffa2626d225a3eeeb8852d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
