@@ -16,6 +16,24 @@
       "revId": "a51a02193ca1dc3c5b8e082bae7d55426d80cdff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_591a3ad1",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-18T16:52:52Z",
+      "side": 1,
+      "message": "Accidentally forgot this when playing around with alignment. Will remove.",
+      "parentUuid": "6e7c4fa4_5e8f8026",
+      "revId": "a51a02193ca1dc3c5b8e082bae7d55426d80cdff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
