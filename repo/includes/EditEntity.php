@@ -39,69 +39,69 @@ class EditEntity {
 	/**
 	 * @var EntityRevisionLookup
 	 */
-	protected $entityRevisionLookup;
+	private $entityRevisionLookup;
 
 	/**
 	 * @var EntityTitleLookup
 	 */
-	protected $titleLookup;
+	private $titleLookup;
 
 	/**
 	 * @var EntityStore
 	 */
-	protected $entityStore;
+	private $entityStore;
 
 	/**
 	 * The modified entity we are trying to save
 	 *
 	 * @var Entity|null
 	 */
-	protected $newEntity = null;
+	private $newEntity = null;
 
 	/**
 	 * @var EntityRevision|null
 	 */
-	protected $baseRev = null;
+	private $baseRev = null;
 
 	/**
 	 * @var int|null
 	 */
-	protected $baseRevId = null;
+	private $baseRevId = null;
 
 	/**
 	 * @var EntityRevision|null
 	 */
-	protected $latestRev = null;
+	private $latestRev = null;
 
 	/**
 	 * @var int
 	 */
-	protected $latestRevId = 0;
+	private $latestRevId = 0;
 
 	/**
 	 * @var Status|null
 	 */
-	protected $status = null;
+	private $status = null;
 
 	/**
 	 * @var User|null
 	 */
-	protected $user = null;
+	private $user = null;
 
 	/**
 	 * @var Title|null
 	 */
-	protected $title = null;
+	private $title = null;
 
 	/**
 	 * @var RequestContext|DerivativeContext
 	 */
-	protected $context;
+	private $context;
 
 	/**
 	 * @var int Bit field for error types, using the EditEntity::XXX_ERROR constants.
 	 */
-	protected $errorType = 0;
+	private $errorType = 0;
 
 	/**
 	 * indicates a permission error
@@ -146,11 +146,9 @@ class EditEntity {
 	const ANY_ERROR = 0xFFFFFFFF;
 
 	/**
-	 * @since 0.1
-	 *
 	 * @var string[]
 	 */
-	protected $requiredPermissions = array(
+	private $requiredPermissions = array(
 		'edit',
 	);
 
@@ -531,7 +529,7 @@ class EditEntity {
 	 *
 	 * @return bool
 	 */
-	protected function userWasLastToEdit( User $user = null, EntityId $entityId = null, $lastRevId = false ) {
+	private function userWasLastToEdit( User $user = null, EntityId $entityId = null, $lastRevId = false ) {
 		if ( $user === null || $entityId === null || $lastRevId === false ) {
 			return false;
 		}
@@ -720,7 +718,7 @@ class EditEntity {
 	 *
 	 * @todo: move the implementation elsewhere, it depends on WikiPage.
 	 */
-	protected function runEditFilterHooks( $summary ) {
+	private function runEditFilterHooks( $summary ) {
 		if ( !Hooks::isRegistered( 'EditFilterMergedContent' ) ) {
 			return;
 		}
@@ -780,7 +778,7 @@ class EditEntity {
 		return $context;
 	}
 
-	protected function applyPreSaveChecks() {
+	private function applyPreSaveChecks() {
 		if ( $this->hasEditConflict() ) {
 			if ( !$this->fixEditConflict() ) {
 				$this->status->fatal( 'edit-conflict' );
@@ -842,7 +840,7 @@ class EditEntity {
 	 *
 	 * @return bool true if any message was shown, false if there were no errors to show.
 	 */
-	protected function showStatus( ) {
+	private function showStatus( ) {
 		if ( $this->status === null || $this->status->isGood() ) {
 			return false;
 		}
@@ -866,7 +864,7 @@ class EditEntity {
 	 *
 	 * @return bool
 	 */
-	protected function getWatchDefault() {
+	private function getWatchDefault() {
 		// User wants to watch all edits or all creations.
 		if ( $this->user->getOption( 'watchdefault' )
 			|| ( $this->user->getOption( 'watchcreations' ) && $this->isNew() )
