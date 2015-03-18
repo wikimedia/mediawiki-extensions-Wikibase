@@ -96,7 +96,7 @@ class EditEntity {
 	/**
 	 * @var RequestContext|DerivativeContext
 	 */
-	protected $context = null;
+	protected $context;
 
 	/**
 	 * @var int Bit field for error types, using the EditEntity::XXX_ERROR constants.
@@ -233,7 +233,7 @@ class EditEntity {
 	 * @return EntityId
 	 */
 	public function getEntityId() {
-		return $this->getNewEntity()->getId();
+		return $this->newEntity->getId();
 	}
 
 	/**
@@ -242,12 +242,12 @@ class EditEntity {
 	 * @return Title|null
 	 */
 	public function getTitle() {
-		if ( $this->newEntity->getId() === null ) {
-			return null;
-		}
-
 		if ( $this->title === null ) {
-			$this->title = $this->titleLookup->getTitleForId( $this->getEntityId() );
+			$id = $this->newEntity->getId();
+
+			if ( $id !== null ) {
+				$this->title = $this->titleLookup->getTitleForId( $id );
+			}
 		}
 
 		return $this->title;
@@ -356,12 +356,12 @@ class EditEntity {
 					$baseRevId = EntityRevisionLookup::LATEST_FROM_MASTER;
 				}
 
-				$entityId = $this->getEntityId();
-				$this->baseRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $baseRevId );
+				$id = $this->newEntity->getId();
+				$this->baseRev = $this->entityRevisionLookup->getEntityRevision( $id, $baseRevId );
 
 				if ( $this->baseRev === null ) {
 					throw new MWException( 'Base revision ID not found: rev ' . $baseRevId
-						. ' of ' . $entityId->getSerialization() );
+						. ' of ' . $id->getSerialization() );
 				}
 			}
 		}
@@ -431,7 +431,7 @@ class EditEntity {
 	 * @return bool true if this EditEntity encountered any of the error types in $errorType, false otherwise.
 	 */
 	public function hasError( $errorType = self::ANY_ERROR ) {
-		return ( $this->errorType & $errorType ) > 0;
+		return ( $this->errorType & $errorType ) === $errorType;
 	}
 
 	/**
@@ -473,10 +473,9 @@ class EditEntity {
 	public function fixEditConflict() {
 		$baseRev = $this->getBaseRevision();
 		$latestRev = $this->getLatestRevision();
-		$newEntity = $this->getNewEntity();
 
 		if ( !$latestRev ) {
-			wfLogWarning( 'Failed to load latest revision of entity ' . $this->getEntityId() . '! '
+			wfLogWarning( 'Failed to load latest revision of entity ' . $this->newEntity->getId() . '! '
 				. 'This may indicate entries missing from thw wb_entities_per_page table.' );
 			return false;
 		}
@@ -485,7 +484,7 @@ class EditEntity {
 		// NOTE: will fail if $baseRev or $base are null, which they may be if
 		// this gets called at an inappropriate time. The data flow in this class
 		// should be improved.
-		$patch = $baseRev->getEntity()->getDiff( $newEntity ); // diff from base to new
+		$patch = $baseRev->getEntity()->getDiff( $this->newEntity ); // diff from base to new
 
 		if ( $patch->isEmpty() ) {
 			// we didn't technically fix anything, but if there is nothing to change,
@@ -505,7 +504,7 @@ class EditEntity {
 
 		if ( $conflicts > 0 ) {
 			// patch doesn't apply cleanly
-			if ( $this->userWasLastToEdit( $this->getUser(), $this->getEntityId(), $this->getBaseRevisionId() ) ) {
+			if ( $this->userWasLastToEdit( $this->user, $this->newEntity->getId(), $this->getBaseRevisionId() ) ) {
 				// it's a self-conflict
 				if ( $cleanPatch->count() === 0 ) {
 					// patch collapsed, possibly because of diff operation change from base to latest
@@ -604,8 +603,8 @@ class EditEntity {
 	 * @return bool true if the token is valid
 	 */
 	public function isTokenOK( $token ) {
-		$tokenOk = $this->getUser()->matchEditToken( $token );
-		$tokenOkExceptSuffix = $this->getUser()->matchEditTokenNoSuffix( $token );
+		$tokenOk = $this->user->matchEditToken( $token );
+		$tokenOkExceptSuffix = $this->user->matchEditTokenNoSuffix( $token );
 
 		if ( !$tokenOk ) {
 			if ( $tokenOkExceptSuffix ) {
@@ -696,7 +695,7 @@ class EditEntity {
 			$entityRevision = $this->entityStore->saveEntity(
 				$this->newEntity,
 				$summary,
-				$this->getUser(),
+				$this->user,
 				$flags | EDIT_AUTOSUMMARY,
 				$this->doesCheckForEditConflicts() ? $this->getLatestRevisionId() : false
 			);
@@ -748,7 +747,7 @@ class EditEntity {
 		$context = $this->getContextForEditFilter( $this->newEntity );
 
 		if ( !wfRunHooks( 'EditFilterMergedContent',
-			array( $context, $entityContent, &$filterStatus, $summary, $this->getUser(), false ) ) ) {
+			array( $context, $entityContent, &$filterStatus, $summary, $this->user, false ) ) ) {
 
 			# Error messages etc. were handled inside the hook.
 			$filterStatus->setResult( false, $filterStatus->getValue() );
@@ -767,9 +766,10 @@ class EditEntity {
 	 * @return IContextSource
 	 */
 	private function getContextForEditFilter( EntityDocument $entity ) {
-		if ( $this->getTitle() ) {
+		$title = $this->getTitle();
+
+		if ( $title !== null ) {
 			$context = clone $this->context;
-			$title = $this->getTitle();
 		} else {
 			$context = $this->context;
 			$entityType = $entity->getType();
@@ -856,12 +856,11 @@ class EditEntity {
 	 * @return bool true if any message was shown, false if there were no errors to show.
 	 */
 	protected function showStatus( ) {
-		$out = $this->context->getOutput();
-
 		if ( $this->status === null || $this->status->isGood() ) {
 			return false;
 		}
 
+		$out = $this->context->getOutput();
 		$text = $this->status->getHTML();
 
 		$out->addHTML( Html::rawElement( 'div', array( 'class' => 'error' ), $text ) );
@@ -892,7 +891,7 @@ class EditEntity {
 		}
 
 		// keep current state
-		return !$this->isNew() && $this->entityStore->isWatching( $user, $this->getEntityId() );
+		return !$this->isNew() && $this->entityStore->isWatching( $this->user, $this->newEntity->getId() );
 	}
 
 	/**
@@ -906,14 +905,11 @@ class EditEntity {
 	 * @throws MWException
 	 */
 	public function updateWatchlist( $watch ) {
-		$user = $this->getUser();
-		$title = $this->getTitle();
-
-		if ( !$title ) {
-			throw new MWException( "Title not yet known!" );
+		if ( $this->getTitle() === null ) {
+			throw new MWException( 'Title not yet known!' );
 		}
 
-		$this->entityStore->updateWatchlist( $user, $this->getEntityId(), $watch );
+		$this->entityStore->updateWatchlist( $this->user, $this->newEntity->getId(), $watch );
 	}
 
 }
