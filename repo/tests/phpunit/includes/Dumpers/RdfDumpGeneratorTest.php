@@ -8,6 +8,7 @@ use Wikibase\RdfSerializer;
 use Wikibase\RdfProducer;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\EntityRevision;
+use Wikibase\Test\RdfBuilderTest;
 
 /**
  * @covers Wikibase\Dumpers\RdfDumpGenerator
@@ -52,31 +53,20 @@ class RdfDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param EntityId[] $ids
-	 * @param EntityId[] $missingIds
-	 * @param EntityId[] $redirectedIds
+	 * @param Entity[] $entities
 	 *
 	 * @return JsonDumpGenerator
 	 */
-	protected function newDumpGenerator( array $ids = array(), array $missingIds = array(), array $redirectedIds = array() ) {
+	protected function newDumpGenerator( array $entities = array() ) {
 		$out = fopen( 'php://output', 'w' );
 
-		$jsonTest = new JsonDumpGeneratorTest();
-		$entities = $jsonTest->makeEntities( $ids );
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityRevisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
 		$propertyLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 
 		$entityLookup->expects( $this->any() )
 		->method( 'getEntity' )
-		->will( $this->returnCallback( function( EntityId $id ) use ( $entities, $missingIds, $redirectedIds ) {
-			if ( in_array( $id, $missingIds ) ) {
-				return null;
-			}
-			if ( in_array( $id, $redirectedIds ) ) {
-				throw new UnresolvedRedirectException( new ItemId( 'Q123' ) );
-			}
-
+		->will( $this->returnCallback( function( EntityId $id ) use ( $entities ) {
 			$key = $id->getSerialization();
 			return $entities[$key];
 		} ) );
@@ -142,7 +132,9 @@ class RdfDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider idProvider
 	 */
 	public function testGenerateDump( array $ids, $dumpname ) {
-		$dumper = $this->newDumpGenerator( $ids );
+		$jsonTest = new JsonDumpGeneratorTest();
+		$entities = $jsonTest->makeEntities( $ids );
+		$dumper = $this->newDumpGenerator( $entities );
 		$dumper->setTimestamp(1000000);
 		$jsonTest = new JsonDumpGeneratorTest();
 		$pager = $jsonTest->makeIdPager( $ids );
@@ -153,6 +145,33 @@ class RdfDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$dump = $this->normalizeData($dump);
 		$this->assertEquals($this->getSerializedData($dumpname), $dump);
 
+	}
+
+	public function loadDataProvider() {
+		return array(
+				'references' => array( array( new ItemId( 'Q7' ), new ItemId( 'Q9' ) ), 'refs' ),
+		);
+	}
+
+	/**
+	 * @dataProvider loadDataProvider
+	 */
+	public function testReferenceDedup( array $ids, $dumpname ) {
+		$rdfTest = new RdfBuilderTest();
+		foreach( $ids as $id ) {
+			$id = $id->getSerialization();
+			$entities[$id] = $rdfTest->getEntityData( $id );
+		}
+		$dumper = $this->newDumpGenerator( $entities );
+		$dumper->setTimestamp(1000000);
+		$jsonTest = new JsonDumpGeneratorTest();
+		$pager = $jsonTest->makeIdPager( $ids );
+
+		ob_start();
+		$dumper->generateDump( $pager );
+		$dump = ob_get_clean();
+		$dump = $this->normalizeData($dump);
+		$this->assertEquals($this->getSerializedData($dumpname), $dump);
 	}
 
 }
