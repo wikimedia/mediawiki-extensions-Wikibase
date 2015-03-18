@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2d7e1ce2",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-18T14:54:26Z",
+      "side": 1,
+      "message": "Random wfProfileIn looks like a mistake. Fixed in my follow-up.",
+      "revId": "ad7a597f097c488511cbfd2968fe9de4597e5099",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_60689b84",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-18T14:54:26Z",
+      "side": 1,
+      "message": "Double-checked, I think this change is correct. A check for \"false\" is included in the doesCheckForEditConflictscall above and a check for \"null\" and \"true\" is in getBaseRevisionId. So this can\u0027t be anything but an integer at this point.",
+      "revId": "ad7a597f097c488511cbfd2968fe9de4597e5099",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c0172ff2",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-18T14:54:26Z",
+      "side": 1,
+      "message": "Readability of this code is not nice now. I tried to change it in my follow-ups.",
+      "revId": "ad7a597f097c488511cbfd2968fe9de4597e5099",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
