@@ -8,6 +8,7 @@ use EasyRdf_Literal;
 use EasyRdf_Namespace;
 use EasyRdf_Resource;
 use SiteList;
+use BagOStuff;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -125,6 +126,12 @@ class RdfBuilder {
 	private $produceWhat;
 
 	/**
+	 * Hash to store seen references/values for deduplication
+	 * @var BagOStuff
+	 */
+	private $dedupBag;
+
+	/**
 	 *
 	 * @param SiteList $sites
 	 * @param string $baseUri
@@ -134,12 +141,11 @@ class RdfBuilder {
 	 * @param EasyRdf_Graph|null $graph
 	 */
 	public function __construct( SiteList $sites, $baseUri, $dataUri,
-			PropertyDataTypeLookup $propertyLookup, $flavor, EasyRdf_Graph $graph = null ) {
-		if ( !$graph ) {
-			$graph = new EasyRdf_Graph();
-		}
-
-		$this->graph = $graph;
+			PropertyDataTypeLookup $propertyLookup, $flavor,
+			BagOStuff $dedupBag = null
+	) {
+		$this->graph = new EasyRdf_Graph();
+		$this->dedupBag = $dedupBag;
 
 		$this->sites = $sites;
 		$this->baseUri = $baseUri;
@@ -481,6 +487,25 @@ class RdfBuilder {
 	}
 
 	/**
+	 * Did we already see this value? If yes, we may need to skip it
+	 * @param \Hashable $value
+	 * @param string $namespace
+	 * @return boolean
+	 */
+	private function alreadySeen( \Hashable $value, $namespace ) {
+		if( !$this->dedupBag ) {
+			return false;
+		}
+		$hash = $value->getHash();
+		$key = $namespace . substr($hash, 0, 5);
+		if( $this->dedupBag->get( $key ) !== $hash ) {
+			$this->dedupBag->set( $key, $hash );
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Adds the given Statement from the given Entity to the RDF graph.
 	 *
 	 * @param EntityId $entityId
@@ -500,8 +525,12 @@ class RdfBuilder {
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_REFERENCES ) ) {
 			$statementResource = $this->getStatementResource( $statement );
 			foreach ( $statement->getReferences() as $ref ) { //FIXME: split body into separate method
-				$refResource = $this->getReferenceResource( $ref );
-				$statementResource->addResource( self::PROV_QNAME, $refResource );
+				$refQName = $this->getReferenceQName( self::NS_REFERENCE, $ref );
+				$statementResource->addResource( self::PROV_QNAME, $refQName );
+				if( $this->alreadySeen( $ref, 'R' ) ) {
+					continue;
+				}
+				$refResource = $this->graph->resource( $refQName, array ( self::WIKIBASE_REFERENCE_QNAME ) );
 				foreach ( $ref->getSnaks() as $refSnak ) {
 					$this->addSnak( $refResource, $refSnak, self::NS_VALUE );
 				}
@@ -557,20 +586,6 @@ class RdfBuilder {
 	}
 
 	/**
-	 * Returns a resource representing the given Reference.
-	 *
-	 * @param Reference $ref
-	 *
-	 * @return EasyRDF_Resource
-	 */
-	private function getReferenceResource( Reference $ref ) {
-		$refQName = $this->getReferenceQName( self::NS_REFERENCE, $ref );
-		return $this->graph->resource( $refQName, array (
-				self::WIKIBASE_REFERENCE_QNAME
-		) );
-	}
-
-	/**
 	 * Adds the given Snak to the RDF graph.
 	 *
 	 * @param EasyRdf_Resource $target Target node to which we're attaching the snak
@@ -603,8 +618,12 @@ class RdfBuilder {
 	 * @param array $props List of properties
 	 */
 	private function addExpandedValue( EasyRdf_Resource $target, $propertyValueQName, DataValue $value, array $props) {
-		$node = $this->graph->resource( self::NS_VALUE . ":" . $value->getHash(), self::WIKIBASE_VALUE_QNAME );
-		$target->addResource( $propertyValueQName."-value", $node);
+		$vname = self::NS_VALUE . ":" . $value->getHash();
+		$target->addResource( $propertyValueQName."-value", $vname );
+		if( $this->alreadySeen( $value, 'V' ) ) {
+			return;
+		}
+		$node = $this->graph->resource( $vname, self::WIKIBASE_VALUE_QNAME );
 		foreach( $props as $prop => $type ) {
 			$getter = "get" . ucfirst( $prop );
 			$data = $value->$getter();
