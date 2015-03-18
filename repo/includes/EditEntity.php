@@ -33,6 +33,7 @@ use WikiPage;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class EditEntity {
 
@@ -148,9 +149,7 @@ class EditEntity {
 	/**
 	 * @var string[]
 	 */
-	private $requiredPermissions = array(
-		'edit',
-	);
+	private $requiredPermissions = array( 'edit' );
 
 	/**
 	 * @since 0.1
@@ -226,20 +225,11 @@ class EditEntity {
 	}
 
 	/**
-	 * Returns the ID of the entity that is being edited.
-	 *
-	 * @return EntityId
-	 */
-	public function getEntityId() {
-		return $this->newEntity->getId();
-	}
-
-	/**
 	 * Returns the Title of the page holding the entity that is being edited.
 	 *
 	 * @return Title|null
 	 */
-	public function getTitle() {
+	private function getTitle() {
 		if ( $this->title === null ) {
 			$id = $this->newEntity->getId();
 
@@ -278,7 +268,7 @@ class EditEntity {
 	 *
 	 * @return int 0 if the entity doesn't exist
 	 */
-	public function getLatestRevisionId() {
+	private function getLatestRevisionId() {
 		// Don't do negative caching: We call this to see whether the entity yet exists
 		// before creating.
 		if ( $this->latestRevId === 0 ) {
@@ -295,15 +285,6 @@ class EditEntity {
 		}
 
 		return $this->latestRevId;
-	}
-
-	/**
-	 * Returns the user who performs the edit.
-	 *
-	 * @return User
-	 */
-	public function getUser() {
-		return $this->user;
 	}
 
 	/**
@@ -324,7 +305,7 @@ class EditEntity {
 	 *
 	 * @return int|bool
 	 */
-	public function getBaseRevisionId() {
+	private function getBaseRevisionId() {
 		if ( $this->baseRevId === null || $this->baseRevId === true ) {
 			$this->baseRevId = $this->getLatestRevisionId();
 		}
@@ -340,7 +321,7 @@ class EditEntity {
 	 * @return EntityRevision|null
 	 * @throws MWException
 	 */
-	public function getBaseRevision() {
+	private function getBaseRevision() {
 		if ( $this->baseRev === null ) {
 			$baseRevId = $this->getBaseRevisionId();
 
@@ -379,7 +360,7 @@ class EditEntity {
 	 *
 	 * @since 0.1
 	 *
-	 * @return null|Status
+	 * @return Status|null
 	 */
 	public function getStatus() {
 		return $this->status;
@@ -393,28 +374,7 @@ class EditEntity {
 	 * @return bool false if attemptSave() failed, true otherwise
 	 */
 	public function isSuccess() {
-		if ( $this->errorType > 0 ) {
-			return false;
-		}
-
-		return $this->status->isOK();
-	}
-
-	/**
-	 * Returns the revision created by attemptSave(), if it was successful.
-	 * If attemptSave() has not yet been called or failed, null is returned.
-	 *
-	 * @since 0.3
-	 *
-	 * @return EntityRevision|null
-	 */
-	public function getNewRevision() {
-		if ( $this->errorType > 0 || !$this->status || !$this->status->isOK() ) {
-			return null;
-		}
-
-		$value = $this->status->getValue();
-		return isset( $value['revision'] ) ? $value['revision'] : null;
+		return $this->errorType === 0 && $this->status->isOK();
 	}
 
 	/**
@@ -429,17 +389,6 @@ class EditEntity {
 	 */
 	public function hasError( $errorType = self::ANY_ERROR ) {
 		return ( $this->errorType & $errorType ) !== 0;
-	}
-
-	/**
-	 * Returns a bitfield indicating errors encountered while saving.
-	 *
-	 * @since 0.4
-	 *
-	 * @return int $errorType bit field using the EditEntity::XXX_ERROR constants.
-	 */
-	public function getErrors() {
-		return $this->errorType;
 	}
 
 	/**
@@ -539,7 +488,7 @@ class EditEntity {
 
 	/**
 	 * Adds another permission (action) to be checked by checkEditPermissions().
-	 * Per default, the 'edit' permission (and if needed, the 'create' permission) is checked.
+	 * Per default, the 'edit' permission is checked.
 	 *
 	 * @param string $permission
 	 */
@@ -549,7 +498,7 @@ class EditEntity {
 
 	/**
 	 * Checks the necessary permissions to perform this edit.
-	 * Per default, the 'edit' permission (and if needed, the 'create' permission) is checked.
+	 * Per default, the 'edit' permission is checked.
 	 * Use addRequiredPermission() to check more permissions.
 	 */
 	public function checkEditPermissions() {
@@ -571,7 +520,7 @@ class EditEntity {
 	/**
 	 * Checks if rate limits have been exceeded.
 	 */
-	public function checkRateLimits() {
+	private function checkRateLimits() {
 		if ( $this->user->pingLimiter( 'edit' )
 			|| ( $this->isNew() && $this->user->pingLimiter( 'create' ) )
 		) {
@@ -886,7 +835,7 @@ class EditEntity {
 	 *
 	 * @throws MWException
 	 */
-	public function updateWatchlist( $watch ) {
+	private function updateWatchlist( $watch ) {
 		if ( $this->getTitle() === null ) {
 			throw new MWException( 'Title not yet known!' );
 		}
