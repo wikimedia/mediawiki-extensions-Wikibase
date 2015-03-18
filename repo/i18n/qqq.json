@@ -210,6 +210,8 @@
 	"wikibase-setaliases-label": "Label for the input field to type the aliases to set the entity to.\n{{Identical|Alias}}",
 	"wikibase-setaliases-submit": "Label for the button that activates the action.",
 	"wikibase-setaliases-warning-remove": "A warning message to ask the user if he wants to remove all aliases.\n\nParameters:\n* $1 - the id that links to the entity",
+	"special-setlabeldescriptionaliases": "{{doc-special|Special:SetLabelDescriptionAliases}}\nThe special page allows the user to set label, description and aliases for an entity.",	
+	"wikibase-setlabeldescriptionaliases-introfull": "Intro text when a label, description and aliases are to be set. Parameters:\n* $1 - the ID that links to the entity\n* $2 - the translated language name (possibly autonym) the discription is to be set in",
 	"wikibase-setlabeldescriptionaliases-label-label": "{{Identical|Label}}",
 	"wikibase-setlabeldescriptionaliases-description-label": "{{Identical|Description}}",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "{{Identical|Alias}}",
