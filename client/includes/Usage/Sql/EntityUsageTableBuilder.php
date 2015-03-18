@@ -168,7 +168,6 @@ class EntityUsageTableBuilder {
 				array(
 					'eu_page_id' => (int)$pageId,
 					'eu_aspect' => EntityUsage::ALL_USAGE,
-					'eu_entity_type' => $entityId->getEntityType(),
 					'eu_entity_id' => $entityId->getSerialization()
 				),
 				__METHOD__,
