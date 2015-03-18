@@ -161,7 +161,8 @@ class RdfDumpGenerator extends DumpGenerator {
 				$entityLookup,
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
 				RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES |
-				RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES
+				RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES,
+				new \HashBagOStuff()
 		);
 		return new RdfDumpGenerator( $output, $entityRevisionLookup, $entitySerializer );
 	}
