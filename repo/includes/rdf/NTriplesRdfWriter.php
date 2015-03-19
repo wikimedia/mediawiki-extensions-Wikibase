@@ -77,7 +77,7 @@ class NTriplesRdfWriter extends N3RdfWriterBase {
 	}
 
 	protected function finishObject( $last = false ) {
-		$this->write( ' .', "\n" );
+		$this->write( " .\n" );
 	}
 
 	/**

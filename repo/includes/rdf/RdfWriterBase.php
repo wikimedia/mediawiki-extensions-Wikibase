@@ -112,13 +112,8 @@ abstract class RdfWriterBase implements RdfWriter {
 		return $this->role;
 	}
 
-	final protected function write() {
-		$numArgs = func_num_args();
-
-		for ( $i = 0; $i < $numArgs; $i++ ) {
-			$s = func_get_arg( $i );
-			$this->buffer[] = $s;
-		}
+	final protected function write( $w ) {
+		$this->buffer[] = $w;
 	}
 
 	protected function expandShorthand( &$base, &$local ) {
@@ -296,136 +291,77 @@ abstract class RdfWriterBase implements RdfWriter {
 	}
 
 	final protected function state( $newState ) {
-		switch ( $newState ) {
-			case 'document':
-				$this->transitionDocument();
-				break;
-
-			case 'subject':
-				$this->transitionSubject();
-				break;
-
-			case 'predicate':
-				$this->transitionPredicate();
-				break;
-
-			case 'object':
-				$this->transitionObject();
-				break;
-
-			case 'drain':
-				$this->transitionDrain();
-				break;
-
-			default:
-				throw new \InvalidArgumentException( 'invalid $newState: ' . $newState );
+		$fname = "transition{$this->state}{$newState}";
+		if( !is_callable( array( $this, $fname ) ) ) {
+			throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . $newState  );
 		}
-
+		$this->$fname();
 		$this->state = $newState;
 	}
 
-	private function transitionDocument() {
-		switch ( $this->state ) {
-			case 'document':
-				break;
-
-			case 'start':
-				$this->beginDocument();
-				break;
-
-			case 'object': // when injecting a sub-document
-				$this->finishObject( 'last' );
-				$this->finishPredicate( 'last' );
-				$this->finishSubject();
-				break;
-
-			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'document'  );
-		}
+	private function transitionDocumentDocument() {
 	}
 
-	private function transitionSubject() {
-		switch ( $this->state ) {
-			case 'document':
-				$this->beginSubject();
-				break;
-
-			case 'object':
-				if ( $this->role !== self::DOCUMENT_ROLE ) {
-					throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'subject' );
-				}
-
-				$this->finishObject( 'last' );
-				$this->finishPredicate( 'last' );
-				$this->finishSubject();
-				$this->beginSubject();
-				break;
-
-			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'subject' );
-		}
+	private function transitionStartDocument() {
+		$this->beginDocument();
 	}
 
-	private function transitionPredicate() {
-		switch ( $this->state ) {
-			case 'subject':
-				$this->beginPredicate( 'first' );
-				break;
-
-			case 'object':
-				if ( $this->role === self::STATEMENT_ROLE ) {
-					throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'subject' );
-				}
-
-				$this->finishObject( 'last' );
-				$this->finishPredicate();
-				$this->beginPredicate();
-				break;
-
-			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'predicate' );
-
-		}
+	private function transitionObjectDocument() {
+		$this->finishObject( 'last' );
+		$this->finishPredicate( 'last' );
+		$this->finishSubject();
 	}
 
-	private function transitionObject() {
-		switch ( $this->state ) {
-			case 'predicate':
-				$this->beginObject( 'first' );
-				break;
-
-			case 'object':
-				$this->finishObject();
-				$this->beginObject();
-				break;
-
-			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'object' );
-
-		}
+	private function transitionDocumentSubject() {
+		$this->beginSubject();
 	}
 
-	private function transitionDrain() {
-		switch ( $this->state ) {
-			case 'start':
-				break;
-
-			case 'document':
-				$this->finishDocument();
-				break;
-
-			case 'object':
-
-				$this->finishObject( 'last' );
-				$this->finishPredicate( 'last' );
-				$this->finishSubject();
-				$this->finishDocument();
-				break;
-
-			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'object' );
-
+	private function transitionObjectSubject() {
+		if ( $this->role !== self::DOCUMENT_ROLE ) {
+			throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'subject' );
 		}
+
+		$this->finishObject( 'last' );
+		$this->finishPredicate( 'last' );
+		$this->finishSubject();
+		$this->beginSubject();
+	}
+
+	private function transitionSubjectPredicate() {
+		$this->beginPredicate( 'first' );
+	}
+
+	private function transitionObjectPredicate() {
+		if ( $this->role === self::STATEMENT_ROLE ) {
+			throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . 'subject' );
+		}
+
+		$this->finishObject( 'last' );
+		$this->finishPredicate();
+		$this->beginPredicate();
+	}
+
+	private function transitionPredicateObject() {
+		$this->beginObject( 'first' );
+	}
+
+	private function transitionObjectObject() {
+		$this->finishObject();
+		$this->beginObject();
+	}
+
+	private function transitionStartDrain() {
+	}
+
+	private function transitionDocumentDrain() {
+		$this->finishDocument();
+	}
+
+	private function transitionObjectDrain() {
+		$this->finishObject( 'last' );
+		$this->finishPredicate( 'last' );
+		$this->finishSubject();
+		$this->finishDocument();
 	}
 
 	protected abstract function writePrefix( $prefix, $uri );
