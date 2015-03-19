@@ -76,8 +76,24 @@ class NTriplesRdfWriter extends N3RdfWriterBase {
 		parent::writeValue( $value, $typeBase, $typeLocal );
 	}
 
-	protected function finishObject( $last = false ) {
-		$this->write( ' .', "\n" );
+	protected function transitionObjectSubject() {
+		$this->write( " .\n" );
+	}
+
+	protected function transitionObjectDocument() {
+		$this->write( " .\n" );
+	}
+
+	protected function transitionObjectPredicate() {
+		$this->write( " .\n" );
+	}
+
+	protected function transitionObjectObject() {
+		$this->write( " .\n" );
+	}
+
+	protected function transitionObjectDrain() {
+		$this->write( " .\n" );
 	}
 
 	/**
