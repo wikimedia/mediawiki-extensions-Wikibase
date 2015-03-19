@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ceaf5077",
+        "filename": "repo/resources/wikibase.special/wikibase.special.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-19T17:33:16Z",
+      "side": 1,
+      "message": "Sorry, my previous comment was confusing. The whole block can go away now. Forms are block elements and span the available with anyway.",
+      "revId": "c995ac51a42c6def73f45e20fcf0e2aa79c27fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
