@@ -11,6 +11,7 @@ use Wikibase\Lib\EntityIdValueParser;
 
 /**
  * @covers Wikibase\Lib\EntityIdValueParser
+ * @uses Wikibase\DataModel\Entity\BasicEntityIdParser
  *
  * @group ValueParsers
  * @group WikibaseLib
