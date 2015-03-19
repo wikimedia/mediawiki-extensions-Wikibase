@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e9e48b0c",
+        "filename": "repo/resources/store/store.ApiEntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-19T07:59:34Z",
+      "side": 1,
+      "message": "Dunno, I just moved it. It\u0027s probably referring to the bad state error handling currently is in in a lot of JS code. Although this particular module seems to do the right thing.",
+      "parentUuid": "6e7c4fa4_590ec8e9",
+      "revId": "831c34d760ee2a2a5f8057361d4a54fa7c76be3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_f9f474cd",
         "filename": "repo/resources/store/store.CachingEntityStore.js",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_a9e6930f",
+        "filename": "repo/resources/store/store.CachingEntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-19T07:59:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_f9f474cd",
+      "revId": "831c34d760ee2a2a5f8057361d4a54fa7c76be3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_59256855",
         "filename": "repo/resources/store/store.CachingEntityStore.js",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2015-03-17T13:02:27Z",
       "side": 1,
       "message": "Why is it initialized as null here and set to {} in the constructor? Could you not just init to {} and not have the assignment in the constructor?",
+      "revId": "831c34d760ee2a2a5f8057361d4a54fa7c76be3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c9e18ffc",
+        "filename": "repo/resources/store/store.CachingEntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-19T07:59:34Z",
+      "side": 1,
+      "message": "Nope, the prototype is not cloned. This would lead to all instances sharing the same object.",
+      "parentUuid": "6e7c4fa4_59256855",
       "revId": "831c34d760ee2a2a5f8057361d4a54fa7c76be3c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
