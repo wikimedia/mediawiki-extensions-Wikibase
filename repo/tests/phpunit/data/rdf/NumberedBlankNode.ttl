@@ -1,6 +1,6 @@
-@prefix exterms : <http://www.example.org/terms/> .
-@prefix exstaff : <http://www.example.org/staffid/> .
-@prefix ex : <http://example.org/packages/vocab#> .
+@prefix exterms: <http://www.example.org/terms/> .
+@prefix exstaff: <http://www.example.org/staffid/> .
+@prefix ex: <http://example.org/packages/vocab#> .
 
 exstaff:Sue exterms:publication _:genid1 .
 

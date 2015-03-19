@@ -24,18 +24,17 @@ class N3Quoter {
 	}
 
 	public function escapeIRI( $iri ) {
-		$quoted = strtr( $iri, array(
-			' ' => '%20',
-			'"' => '%22',
-			'<' => '%3C',
-			'>' => '%3E',
+		//FIXME: apply unicode escaping?!
+		return strtr( $iri, array(
+				' ' => '%20',
+				'"' => '%22',
+				'<' => '%3C',
+				'>' => '%3E',
 		) );
-
-		return $quoted;
 	}
 
 	public function escapeLiteral( $s ) {
-		$escaped = addcslashes( $s, "\r\n\t\0\\\"" );
+		$escaped = addcslashes( $s, "\x0..\x1F\"\\" );
 
 		if ( $this->escaper !== null ) {
 			$escaped = $this->escaper->escapeString( $escaped );

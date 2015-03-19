@@ -18,6 +18,14 @@ class NTriplesRdfWriter extends N3RdfWriterBase {
 		//      to be escaped.
 		//NOTE: if this is changed, getMimeType must be changed accordingly.
 		$this->quoter->setEscapeUnicode( true );
+
+		$this->transitionTable[self::STATE_OBJECT] = array(
+				self::STATE_DOCUMENT => " .\n",
+				self::STATE_SUBJECT => " .\n",
+				self::STATE_PREDICATE => " .\n",
+				self::STATE_OBJECT => " .\n",
+				self::STATE_DRAIN => " .\n",
+		);
 	}
 
 	protected function writePrefix( $prefix, $uri ) {
@@ -74,10 +82,6 @@ class NTriplesRdfWriter extends N3RdfWriterBase {
 		$this->write( ' ' );
 
 		parent::writeValue( $value, $typeBase, $typeLocal );
-	}
-
-	protected function finishObject( $last = false ) {
-		$this->write( ' .', "\n" );
 	}
 
 	/**
