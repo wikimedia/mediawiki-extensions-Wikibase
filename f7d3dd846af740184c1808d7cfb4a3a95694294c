@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ae48d48c",
+        "filename": "repo/tests/phpunit/data/rdf/Q8.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-19T17:46:38Z",
+      "side": 1,
+      "message": "Would be nice to have tests for different values of the \"unused\" fields to, to make sure they get transferred correctly, aren\u0027t swapped, etc.",
+      "revId": "f7d3dd846af740184c1808d7cfb4a3a95694294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ce7430cf",
+        "filename": "repo/tests/phpunit/data/rdf/Q8.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-19T17:46:38Z",
+      "side": 1,
+      "message": "Perhaps also test a very high positive date.",
+      "revId": "f7d3dd846af740184c1808d7cfb4a3a95694294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0eeea886",
+        "filename": "repo/tests/phpunit/data/rdf/Q8.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-19T17:46:38Z",
+      "side": 1,
+      "message": "how is this different from TEST-Dates-8-7?",
+      "revId": "f7d3dd846af740184c1808d7cfb4a3a95694294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ee91ecfb",
+        "filename": "repo/tests/phpunit/data/rdf/Q8.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-19T17:46:38Z",
+      "side": 1,
+      "message": "All tests use precision 9. We should cover more.",
+      "revId": "f7d3dd846af740184c1808d7cfb4a3a95694294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_eeb80c76",
+        "filename": "repo/tests/phpunit/data/rdf/Q8.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-19T17:46:38Z",
+      "side": 1,
+      "message": "Try to use something completely different here, to make sure we don\u0027t choke if the date is \"xyzzy bizzy\" or something.",
+      "revId": "f7d3dd846af740184c1808d7cfb4a3a95694294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
