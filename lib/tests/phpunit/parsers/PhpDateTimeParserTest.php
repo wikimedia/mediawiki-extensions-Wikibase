@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Parsers\Test;
 
 use DataValues\TimeValue;
-use ValueFormatters\TimeFormatter;
 use ValueParsers\Test\StringValueParserTest;
+use ValueParsers\TimeParser;
 use Wikibase\Lib\Parsers\EraParser;
 use Wikibase\Lib\Parsers\PhpDateTimeParser;
 
@@ -224,7 +224,7 @@ class PhpDateTimeParserTest extends StringValueParserTest {
 				array_key_exists( 2, $args ) ? $args[2] : 0,
 				array_key_exists( 3, $args ) ? $args[3] : 0,
 				array_key_exists( 4, $args ) ? $args[4] : TimeValue::PRECISION_DAY,
-				array_key_exists( 5, $args ) ? $args[5] : TimeFormatter::CALENDAR_GREGORIAN
+				array_key_exists( 5, $args ) ? $args[5] : TimeParser::CALENDAR_GREGORIAN
 			);
 			$argList[] = array( (string)$value, $expected );
 		}
