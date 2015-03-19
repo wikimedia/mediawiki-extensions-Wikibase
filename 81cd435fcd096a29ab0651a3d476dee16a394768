@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6905db15",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-03-19T11:18:04Z",
+      "side": 1,
+      "message": "You can do the above as follows:\n\n$itemWithLabelAndAlias-\u003egetFingerprint()-\u003esetLabel( \u0027en\u0027, \u0027bar\u0027 );\n$itemWithLabelAndAlias-\u003egetFingerprint()-\u003esetAliasGroup( \u0027en\u0027, array( \u0027foo\u0027 ) );\n\nThen the code does not bind directly to Fingerprint, TermList, Term, AliasGroupList and AliasGroup.",
+      "revId": "81cd435fcd096a29ab0651a3d476dee16a394768",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
