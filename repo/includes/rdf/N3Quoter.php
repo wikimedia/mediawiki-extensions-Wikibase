@@ -11,44 +11,6 @@ namespace Wikibase\RDF;
  */
 class N3Quoter {
 
-	private $badChars = array(
-		"\"",
-		"\\",
-		"\0",
-		"\n",
-		"\r",
-		"\t",
-	);
-
-	private $badCharEscapes = array(
-		'\"',
-		'\\\\',
-		'\0',
-		'\n',
-		'\r',
-		'\t',
-	);
-
-	private $badUriChars = array(
-		"<",
-		">",
-		"\"",
-		" ",
-		"\n",
-		"\r",
-		"\t",
-	);
-
-	private $badUriCharEscapes = array(
-		'%3C',
-		'%3E',
-		'%22',
-		'%20',
-		'%0D',
-		'%0A',
-		'%09',
-	);
-
 	/**
 	 * @var UnicodeEscaper
 	 */
@@ -61,17 +23,20 @@ class N3Quoter {
 		$this->escaper = $escapeUnicode ? new UnicodeEscaper() : null;
 	}
 
-	public function escapeIRI( $uri ) {
+	public function escapeIRI( $iri ) {
 		//FIXME: more robust escaping;
 		//FIXME: apply unicode escaping?!
-		$quoted = str_replace( $this->badUriChars, $this->badUriCharEscapes, $uri );
-
-		return $quoted;
+		return strtr( $iri, array(
+				' ' => '%20',
+				'"' => '%22',
+				'<' => '%3C',
+				'>' => '%3E',
+		) );
 	}
 
 	public function escapeLiteral( $s ) {
 		//FIXME: more robust escaping
-		$escaped = str_replace( $this->badChars, $this->badCharEscapes, $s );
+		$escaped = addcslashes( $s, "\x0..\x1F\"\\" );
 
 		if ( $this->escaper !== null ) {
 			$escaped = $this->escaper->escapeString( $escaped );
