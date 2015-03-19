@@ -31,19 +31,18 @@ Changes result in updates to pages that use the respective entity based on the a
 
 This way, editing statements will not cause pages that just show the entities label to be purged.
 
-The database table for tracking client side usage is called wbc_entityusage, and can be thought of as a links table, just like templatelinks or imagelinks. It has the following fields:
+The database table for tracking client side usage is called wbc_entity_usage, and can be thought of
+as a links table, just like templatelinks or imagelinks. It has the following fields:
 
-  eu_entity_type    VARBINARY(32)  -- the type of the entity being used
-  eu_entity_id      VARBINARY(255) -- the ID of the entity being used
-  eu_aspect         BINARY(1)      -- the aspect of the entity (as a one letter code).
-  eu_page_id        INT            -- the ID of the page using the entity
-  eu_page_namespace INT            -- the namespace of the page using the entity
+  eu_entity_id      VARBINARY(255) NOT NULL  -- the ID of the entity being used
+  eu_aspect         VARBINARY(37) NOT NULL   -- the aspect of the entity. See EntityUsage::XXX_USAGE for possible values.
+  eu_page_id        INT NOT NULL             -- the ID of the page that uses the entities.
+  eu_touched        BINARY(14) NOT NULL DEFAULT '' -- timestamp corresponding to page.page_touched
 
 The following indexes are provided for efficient access:
 
-  PRIMARY KEY ( eu_entity_id, eu_aspect, eu_page_id )    -- record one usage per page per aspect of an entity
-  INDEX ( eu_page_id, eu_entity_id )                     -- look up (and especially, delete) usage entris by page id
-  INDEX ( eu_entity_type, eu_page_namespace ) -- look up usage by entity type (filter by namespace)
+  UNIQUE INDEX ( eu_entity_id, eu_aspect, eu_page_id )  -- record one usage per page per aspect of an entity
+  INDEX ( eu_page_id, eu_entity_id )  -- look up (and especially, delete) usage entries by page id
 
 NOTE: when tracking usage of entities from multiple repos, we either need distinct ID prefixes,
 or one table per repo, or both. An additional eu_entity_repo column would introduce a huge
@@ -52,17 +51,19 @@ amount of redundant data, and would not play well with indexes.
 
 == Repo side usage tracking ==
 
-Each repo tracks which client uses which entity. This is done in the table wb_entities_per_client, which has the following structure:
+Each repo tracks which client uses which entity. This is done in the table wb_changes_subscription,
+which has the following structure:
 
-  epc_entity_type   VARBINARY(32)  -- the type of the entity being used
-  epc_entity_id     VARBINARY(255) -- the ID of the entity being used
-  epc_site_id       VARBINARY(48)  -- the ID of the client site using the entity
+  cs_row_id         BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  cs_entity_id      VARBINARY(255) NOT NULL,  -- the ID of the entity subscribed to
+  cs_subscriber_id  VARBINARY(255) NOT NULL   -- the ID of the subscriber (e.g. a domain name or database name)
 
 The following indexes are provided for efficient access:
 
-  PRIMARY KEY ( epc_entity_id, epc_site_id )  -- record each entity/client pair only once
-  INDEX ( epc_site_id, epc_entity_type ) -- look up usage by site (filter by type)
+  UNIQUE INDEX ( cs_entity_id, cs_subscriber_id )  -- look up a subscription, or all subscribers of an entity
+  INDEX ( cs_subscriber_id )  -- look up all subscriptions of a subscriber
 
-This table is updated whenever the client side tracking table is updated. To do this, the client wiki must, whenever a page is edited, determine which entities are used (in order to record this in the local tracking table), but in addition to this, detect whether
-     an entity that wasn't used previously anywhere on the wiki is now used by the edited page, or whether the edit removed the last
-     usage of any of the entities previously used on the page.
+This table is updated whenever the client side tracking table is updated. To do this, the client wiki must,
+whenever a page is edited, determine which entities are used (in order to record this in the local tracking table),
+but in addition to this, detect whether an entity that wasn't used previously anywhere on the wiki is now used by
+the edited page, or whether the edit removed the last usage of any of the entities previously used on the page.
