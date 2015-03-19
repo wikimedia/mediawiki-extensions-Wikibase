@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_f149d16a",
+        "filename": "repo/tests/phpunit/data/rdf/Q8.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-19T17:56:47Z",
+      "side": 1,
+      "message": "Different calendar",
+      "parentUuid": "6e7c4fa4_0eeea886",
+      "revId": "f7d3dd846af740184c1808d7cfb4a3a95694294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ee91ecfb",
         "filename": "repo/tests/phpunit/data/rdf/Q8.json",
         "patchSetId": 14
@@ -81,6 +99,24 @@
       "writtenOn": "2015-03-19T17:46:38Z",
       "side": 1,
       "message": "Try to use something completely different here, to make sure we don\u0027t choke if the date is \"xyzzy bizzy\" or something.",
+      "revId": "f7d3dd846af740184c1808d7cfb4a3a95694294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d1561509",
+        "filename": "repo/tests/phpunit/data/rdf/Q8.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-19T17:56:47Z",
+      "side": 1,
+      "message": "We do. Unserializer will not accept any date that doesn\u0027t fit the regexp.",
+      "parentUuid": "6e7c4fa4_eeb80c76",
       "revId": "f7d3dd846af740184c1808d7cfb4a3a95694294c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
