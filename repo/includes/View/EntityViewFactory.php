@@ -148,6 +148,7 @@ class EntityViewFactory {
 		$editable = true
 	 ) {
 		$editSectionGenerator = $editable ? new ToolbarEditSectionGenerator(
+			new RepoSpecialPageLinker(),
 			$this->templateFactory
 		) : new EmptyEditSectionGenerator();
 		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );

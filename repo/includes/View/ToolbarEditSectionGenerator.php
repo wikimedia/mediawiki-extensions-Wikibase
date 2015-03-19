@@ -2,12 +2,11 @@
 
 namespace Wikibase\Repo\View;
 
-use Message;
-use SpecialPage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Template\TemplateFactory;
+use Wikibase\View\SpecialPageLinker;
 
 /**
  * Generates HTML for a section edit link
@@ -23,15 +22,22 @@ use Wikibase\Template\TemplateFactory;
 class ToolbarEditSectionGenerator implements EditSectionGenerator {
 
 	/**
+	 * @var SpecialPageLinker
+	 */
+	private $specialPageLinker;
+
+	/**
 	 * @var TemplateFactory
 	 */
 	private $templateFactory;
 
 	/**
+	 * @param SpecialPageLinker $specialPageLinker
 	 * @param TemplateFactory $templateFactory
 	 */
-	public function __construct( TemplateFactory $templateFactory ) {
+	public function __construct( SpecialPageLinker $specialPageLinker, TemplateFactory $templateFactory ) {
 		$this->templateFactory = $templateFactory;
+		$this->specialPageLinker = $specialPageLinker;
 	}
 
 	public function getSiteLinksEditSection( EntityId $entityId = null ) {
@@ -100,10 +106,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 			return null;
 		}
 
-		$subPage = implode( '/', array_map( 'wfUrlencode', $specialPageUrlParams ) );
-		$specialPageTitle = SpecialPage::getTitleFor( $specialPageName, $subPage );
-
-		return $specialPageTitle->getLocalURL();
+		return $this->specialPageLinker->getLink( $specialPageName, $specialPageUrlParams );
 	}
 
 	/**
