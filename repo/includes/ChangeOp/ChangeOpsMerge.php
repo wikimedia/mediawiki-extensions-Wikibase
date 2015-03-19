@@ -165,7 +165,7 @@ class ChangeOpsMerge {
 	private function generateLabelsChangeOps() {
 		foreach ( $this->fromItem->getLabels() as $langCode => $label ) {
 			$toLabel = $this->toItem->getLabel( $langCode );
-			if ( $toLabel === false || $toLabel === $label ) {
+			if ( $toLabel === false || strcasecmp( $toLabel, $label ) == 0 ) {
 				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveLabelOp( $langCode ) );
 				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newSetLabelOp( $langCode, $label ) );
 			} else {
