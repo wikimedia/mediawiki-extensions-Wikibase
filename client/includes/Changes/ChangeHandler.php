@@ -334,7 +334,7 @@ class ChangeHandler {
 
 		//@todo: add getFields() to the interface, or provide getters!
 		$fields = $change->getFields();
-		$fields['entity_type'] = $change->getEntityType();
+		$fields['entity_type'] = $change->getEntityId()->getEntityType();
 
 		if ( $change instanceof ItemChange ) {
 			$rcinfo['comment'] = $this->getEditComment( $change );
