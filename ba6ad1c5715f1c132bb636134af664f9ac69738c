@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e90ecbe7",
+        "filename": "repo/includes/View/ToolbarEditSectionGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-19T07:53:51Z",
+      "side": 1,
+      "message": "We don\u0027t currently use the latter. But yeah, probably makes sense.",
+      "parentUuid": "6e7c4fa4_67dbda54",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_a7f012c5",
         "filename": "repo/tests/phpunit/includes/View/RepoSpecialPageLinkerTest.php",
         "patchSetId": 1
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_a9f0d3d6",
+        "filename": "repo/tests/phpunit/includes/View/RepoSpecialPageLinkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-19T07:53:51Z",
+      "side": 1,
+      "message": "Yeah, you\u0027re right. It\u0027s actually part of the contract of this class to able to link to the special pages included in repo.",
+      "parentUuid": "6e7c4fa4_a7f012c5",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_07b9c6e5",
         "filename": "repo/tests/phpunit/includes/View/RepoSpecialPageLinkerTest.php",
         "patchSetId": 1
@@ -64,6 +100,24 @@
       "writtenOn": "2015-03-17T18:04:16Z",
       "side": 1,
       "message": "The regex should be ^anchored$. And parameter handling should be tested.",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_49ffbfa7",
+        "filename": "repo/tests/phpunit/includes/View/RepoSpecialPageLinkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-19T07:53:51Z",
+      "side": 1,
+      "message": "Added parameter handling tests. Anchoring doesn\u0027t work, though, since the URL might be arbitrarily prefixed",
+      "parentUuid": "6e7c4fa4_07b9c6e5",
       "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -175,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_0929c735",
+        "filename": "view/src/SpecialPageLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-19T07:53:51Z",
+      "side": 1,
+      "message": "First of all, you could want to link to special pages of another MediaWiki installation. Second, as Jeroen wrote, does this decouple dependencies. That way, ToolbarEditSectionGenerator can be in WikibaseView, since the repo-specific part is in the SpecialPageLinker implementation.",
+      "parentUuid": "6e7c4fa4_a06eb391",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_67a99a8c",
         "filename": "view/src/SpecialPageLinker.php",
         "patchSetId": 1
@@ -192,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e9256b57",
+        "filename": "view/src/SpecialPageLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-19T07:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_67a99a8c",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_59b248fa",
         "filename": "view/src/SpecialPageLinker.php",
         "patchSetId": 1
@@ -203,6 +293,24 @@
       "writtenOn": "2015-03-17T13:20:12Z",
       "side": 1,
       "message": "array $params \u003d array()",
+      "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c922ef4f",
+        "filename": "view/src/SpecialPageLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-19T07:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_59b248fa",
       "revId": "ba6ad1c5715f1c132bb636134af664f9ac69738c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
