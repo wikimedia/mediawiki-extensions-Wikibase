@@ -63,15 +63,13 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$this->setAdditionalServices(
-			$wikibaseRepo->getChangeOpFactoryProvider()
-				->getFingerprintChangeOpFactory(),
-			$wikibaseRepo->getTermsLanguages()
-		);
+		$this->changeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()
+			->getFingerprintChangeOpFactory();
+		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
 	}
 
 	/**
-	 * Override services (for testing).
+	 * @see SpecialWikibaseRepoPage::setSpecialWikibaseRepoPageServices
 	 *
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
@@ -92,7 +90,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		FingerprintChangeOpFactory $changeOpFactory,
 		ContentLanguages $termsLanguages
 	) {
-		self::setSpecialWikibaseRepoPageServices(
+		$this->setSpecialWikibaseRepoPageServices(
 			$summaryFormatter,
 			$entityRevisionLookup,
 			$entityTitleLookup,
@@ -101,17 +99,6 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$siteStore
 		);
 
-		$this->setAdditionalServices( $changeOpFactory, $termsLanguages );
-	}
-
-	/**
-	 * @param FingerprintChangeOpFactory $changeOpFactory
-	 * @param ContentLanguages $termsLanguages
-	 */
-	private function setAdditionalServices(
-		FingerprintChangeOpFactory $changeOpFactory,
-		ContentLanguages $termsLanguages
-	) {
 		$this->changeOpFactory = $changeOpFactory;
 		$this->termsLanguages = $termsLanguages;
 	}
