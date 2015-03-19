@@ -44,12 +44,12 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	}
 
 	/**
-	 * Call $page->setSpecialWikibaseRepoPageServices with the default mock services.
+	 * Call $page->setServices with the default mock services.
 	 *
 	 * @param SpecialWikibaseRepoPage $page
 	 */
 	protected function setMockServices( SpecialWikibaseRepoPage $page ) {
-		$page->setSpecialWikibaseRepoPageServices(
+		$page->setServices(
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup(),
 			$this->getEntityTitleLookup(),
@@ -190,4 +190,5 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	protected function getIdParser() {
 		return new BasicEntityIdParser();
 	}
+
 }
