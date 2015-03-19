@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3bf88845",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-19T16:23:43Z",
+      "side": 1,
+      "message": "wbc_entity_usage :)",
+      "revId": "07f5e9300e54c193b23f2e433b0c18be6ac79e64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7bfe0037",
+        "filename": "client/sql/entity_usage-alter-aspect-varbinary-37.sql",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-19T16:23:43Z",
+      "side": 1,
+      "message": "of :) and \"inclusion\"",
+      "revId": "07f5e9300e54c193b23f2e433b0c18be6ac79e64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
