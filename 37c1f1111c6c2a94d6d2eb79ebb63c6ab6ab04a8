@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_78292699",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsview.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-19T15:22:45Z",
+      "side": 1,
+      "message": "not sure I touched that in this patch? ok with me to remove but prefer in another patch.",
+      "parentUuid": "6e7c4fa4_78c846aa",
+      "revId": "37c1f1111c6c2a94d6d2eb79ebb63c6ab6ab04a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d8d15a59",
         "filename": "lib/resources/jquery.wikibase/toolbar/controller/definitions/edittoolbar/entitytermsview.js",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-19T13:44:48Z",
       "side": 1,
       "message": "-1, please do not select based on that class name, instead replace children() with find().",
+      "revId": "37c1f1111c6c2a94d6d2eb79ebb63c6ab6ab04a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_982442c2",
+        "filename": "lib/resources/jquery.wikibase/toolbar/controller/definitions/edittoolbar/entitytermsview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-19T15:22:45Z",
+      "side": 1,
+      "message": "yeah, figured that out. (and thanks for the hint)",
+      "parentUuid": "6e7c4fa4_d8d15a59",
       "revId": "37c1f1111c6c2a94d6d2eb79ebb63c6ab6ab04a8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
