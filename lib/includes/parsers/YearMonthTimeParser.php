@@ -8,6 +8,7 @@ use ValueParsers\CalendarModelParser;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\StringValueParser;
+use ValueParsers\TimeParser as IsoTimestampParser;
 use ValueParsers\ValueParser;
 
 /**
@@ -138,7 +139,7 @@ class YearMonthTimeParser extends StringValueParser {
 	 * @return TimeValue
 	 */
 	private function getTimeFromYearMonth( $year, $month ) {
-		$timeParser = new \ValueParsers\TimeParser( new CalendarModelParser(), $this->getOptions() );
+		$timeParser = new IsoTimestampParser( new CalendarModelParser(), $this->getOptions() );
 		return $timeParser->parse( sprintf( '+%d-%02d-00T00:00:00Z', $year, $month ) );
 	}
 

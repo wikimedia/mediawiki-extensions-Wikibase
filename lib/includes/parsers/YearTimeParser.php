@@ -8,6 +8,7 @@ use ValueParsers\CalendarModelParser;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\StringValueParser;
+use ValueParsers\TimeParser as IsoTimestampParser;
 use ValueParsers\ValueParser;
 
 /**
@@ -33,9 +34,9 @@ class YearTimeParser extends StringValueParser {
 	private $lang;
 
 	/**
-	 * @var \ValueParsers\TimeParser
+	 * @var IsoTimestampParser
 	 */
-	private $timeValueTimeParser;
+	private $isoTimestampParser;
 
 	/**
 	 * @param ValueParser $eraParser
@@ -48,7 +49,7 @@ class YearTimeParser extends StringValueParser {
 		parent::__construct( $options );
 		$this->lang = Language::factory( $this->getOptions()->getOption( ValueParser::OPT_LANG ) );
 
-		$this->timeValueTimeParser = new \ValueParsers\TimeParser(
+		$this->isoTimestampParser = new IsoTimestampParser(
 			new CalendarModelParser(),
 			$this->getOptions()
 		);
@@ -86,7 +87,7 @@ class YearTimeParser extends StringValueParser {
 			throw new ParseException( 'Failed to parse year', $value, self::FORMAT_NAME );
 		}
 
-		return $this->timeValueTimeParser->parse( $sign . $year . '-00-00T00:00:00Z' );
+		return $this->isoTimestampParser->parse( $sign . $year . '-00-00T00:00:00Z' );
 	}
 
 }
