@@ -3,10 +3,12 @@
 namespace ValueFormatters\Test;
 
 use DataValues\TimeValue;
+use MediaWikiTestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueParsers\ParserOptions;
+use ValueParsers\TimeParser as IsoTimestampParser;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
 use Wikibase\Lib\Parsers\TimeParser;
@@ -24,7 +26,7 @@ use Wikibase\Lib\Parsers\TimeParser;
  * @author Adam Shorland
  * @author Thiemo Mättig
  */
-class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
+class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 
 	/**
 	 * Returns an array of test parameters.
@@ -559,8 +561,8 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 	private function assertCanRoundTrip( $formattedTime, TimeValue $timeValue, $languageCode ) {
 		$options = new ParserOptions( array(
 			ValueParser::OPT_LANG => $languageCode,
-			\ValueParsers\TimeParser::OPT_PRECISION => $timeValue->getPrecision(),
-			\ValueParsers\TimeParser::OPT_CALENDAR => $timeValue->getCalendarModel(),
+			IsoTimestampParser::OPT_PRECISION => $timeValue->getPrecision(),
+			IsoTimestampParser::OPT_CALENDAR => $timeValue->getCalendarModel(),
 		) );
 
 		$timeParser = new TimeParser( $options );
