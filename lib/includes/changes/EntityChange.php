@@ -66,14 +66,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getEntityType() {
-		$id = $this->getEntityId();
-		return $id->getEntityType();
-	}
-
-	/**
 	 * @return EntityId
 	 */
 	public function getEntityId() {
