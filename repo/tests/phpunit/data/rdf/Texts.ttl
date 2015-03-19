@@ -1,4 +1,4 @@
-@prefix acme : <http://acme.test/> .
+@prefix acme: <http://acme.test/> .
 
 acme:Bongos acme:sounds "Bom"@de,
 		"Bam"@en .

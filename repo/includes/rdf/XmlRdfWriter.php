@@ -14,6 +14,15 @@ class XmlRdfWriter extends RdfWriterBase {
 
 	public function __construct( $role = parent::DOCUMENT_ROLE, BNodeLabeler $labeler = null ) {
 		parent::__construct( $role, $labeler );
+		$self = $this;
+		$this->transitionTable[self::STATE_START][self::STATE_DOCUMENT] = array($this, 'beginDocument');
+		$this->transitionTable[self::STATE_DOCUMENT][self::STATE_DRAIN] = array($this, 'finishDocument');
+		$this->transitionTable[self::STATE_OBJECT][self::STATE_DRAIN] = function() use($self) {
+			$self->finishSubject();
+			$self->finishDocument();
+		};
+		$this->transitionTable[self::STATE_OBJECT][self::STATE_DOCUMENT] = array($this, 'finishSubject');
+		$this->transitionTable[self::STATE_OBJECT][self::STATE_SUBJECT] = array($this, 'finishSubject');
 	}
 
 	private function escape( $text ) {
@@ -38,7 +47,7 @@ class XmlRdfWriter extends RdfWriterBase {
 
 	private function tag( $ns, $name, $attributes = array(), $content = null ) {
 		$sep = $ns === '' ? '' : ':';
-		$this->write( '<', $ns, $sep, $name );
+		$this->write( '<' . $ns . $sep . $name );
 
 		foreach ( $attributes as $attr => $value ) {
 			if ( is_int( $attr ) ) {
@@ -47,7 +56,7 @@ class XmlRdfWriter extends RdfWriterBase {
 				continue;
 			}
 
-			$this->write( ' ', $attr, '=', '"', $this->escape( $value ), '"' );
+			$this->write( " $attr=\"{$this->escape( $value )}\"" );
 		}
 
 		if ( $content === null ) {
@@ -55,15 +64,14 @@ class XmlRdfWriter extends RdfWriterBase {
 		} elseif ( $content === '' ) {
 			$this->write( '/>' );
 		} else {
-			$this->write( '>' );
-			$this->write( $content );
+			$this->write( '>' . $content );
 			$this->close( $ns, $name );
 		}
 	}
 
 	private function close( $ns, $name ) {
 		$sep = $ns === '' ? '' : ':';
-		$this->write( '</', $ns, $sep, $name, '>' );
+		$this->write( '</' . $ns . $sep . $name . '>' );
 	}
 
 	/**
@@ -103,7 +111,7 @@ class XmlRdfWriter extends RdfWriterBase {
 	 * Emit a document header.
 	 */
 	protected function beginDocument() {
-		$this->write( '<?xml version="1.0"?>', "\n" );
+		$this->write( "<?xml version=\"1.0\"?>\n" );
 
 		// define a callback for generating namespace attributes
 		$self = $this;
@@ -200,5 +208,6 @@ class XmlRdfWriter extends RdfWriterBase {
 	public function getMimeType() {
 		return 'application/rdf+xml; charset=UTF-8';
 	}
+
 
 }

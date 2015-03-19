@@ -1,4 +1,4 @@
-@prefix acme : <http://acme.test/> .
+@prefix acme: <http://acme.test/> .
 
 <http://foobar.test/Bananas> acme:multi "A",
 		"B",
