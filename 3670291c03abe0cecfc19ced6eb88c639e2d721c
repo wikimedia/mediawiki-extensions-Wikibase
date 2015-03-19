@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5b75442b",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-19T16:05:17Z",
+      "side": 1,
+      "message": "Whats wrong with rawurlencode?",
+      "revId": "3670291c03abe0cecfc19ced6eb88c639e2d721c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bb86d816",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-19T16:05:17Z",
+      "side": 1,
+      "message": "Unused. Why is this here?",
+      "revId": "3670291c03abe0cecfc19ced6eb88c639e2d721c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_db98746f",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-19T16:05:17Z",
+      "side": 1,
+      "message": "I find this suspicious. Why is this needed?",
+      "revId": "3670291c03abe0cecfc19ced6eb88c639e2d721c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
