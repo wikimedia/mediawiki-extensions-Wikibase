@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7b628007",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-19T16:35:21Z",
+      "side": 1,
+      "message": "You call this \"data\" above but \"badgeData\" here. Would prefer \"data\".",
+      "revId": "7bec3424b4d13c0d4e89c4f1a4e0b3895d17e0cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
