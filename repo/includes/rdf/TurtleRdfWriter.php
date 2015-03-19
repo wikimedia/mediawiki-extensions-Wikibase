@@ -15,58 +15,41 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 	}
 
 	protected function writePrefix( $prefix, $uri ) {
-		$seperator = $prefix === '' ? ': ' : ' : ';
-		$this->write( '@prefix ', $prefix, $seperator, '<', $this->quoter->escapeIRI( $uri ), "> .\n" );
+		$this->write( "@prefix $prefix: <{$this->quoter->escapeIRI( $uri )}> .\n" );
 	}
 
 	protected function writeSubject( $base, $local = null ) {
-		$this->writeRef( $base, $local );
+		if( $local !== null ) {
+			$this->write( "$base:$local" );
+		} else {
+			$this->writeIRI( $base );
+		}
 	}
 
 	protected function writePredicate( $base, $local = null ) {
-		$this->writeRef( $base, $local );
+		if( $base === 'a' ) {
+			$this->write( 'a' );
+			return;
+		}
+		if( $local !== null ) {
+			$this->write( "$base:$local" );
+		} else {
+			$this->writeIRI( $base );
+		}
 	}
 
 	protected function writeResource( $base, $local = null ) {
-		$this->writeRef( $base, $local );
-	}
-
-	protected function writeValue( $value, $typeBase = null, $typeLocal = null ) {
-		//TODO: shorthand form for xsd:integer|decimal|double|boolean
-		parent::writeValue( $value, $typeBase, $typeLocal );
-	}
-
-	protected function beginSubject( $first = false ) {
-		$this->write( "\n" );
-	}
-
-	protected function finishSubject() {
-		$this->write( " .\n" );
-	}
-
-	protected function beginPredicate( $first = false ) {
-		if ( $first ) {
-			$this->write( ' ' );
+		if( $local !== null) {
+			$this->write( "$base:$local" );
+		} else {
+			$this->writeIRI( $base );
 		}
 	}
 
-	protected function finishPredicate( $last = false ) {
-		if ( !$last ) {
-			$this->write( " ;\n\t" );
-		}
-	}
-
-	protected function beginObject( $first = false ) {
-		if ( $first ) {
-			$this->write( ' ' );
-		}
-	}
-
-	protected function finishObject( $last = false ) {
-		if ( !$last ) {
-			$this->write( ",\n\t\t" );
-		}
-	}
+// 	protected function writeValue( $value, $typeBase = null, $typeLocal = null  ) {
+// 		//TODO: shorthand form for xsd:integer|decimal|double|boolean
+// 		parent::writeValue( $value, $typeBase, $typeLocal );
+// 	}
 
 	/**
 	 * @param string $role
@@ -85,6 +68,37 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 	 */
 	public function getMimeType() {
 		return 'text/turtle; charset=UTF-8';
+	}
+
+	protected function transitionObjectDocument() {
+		$this->write( " .\n" );
+	}
+	protected function transitionObjectSubject() {
+		$this->write( " .\n\n" );
+	}
+	protected function transitionObjectPredicate() {
+		$this->write( " ;\n\t" );
+	}
+	protected function transitionObjectObject() {
+		$this->write( ",\n\t\t" );
+	}
+
+	protected function transitionObjectDrain() {
+		$this->write( " .\n" );
+	}
+
+	protected function transitionDocumentSubject() {
+		$this->write( "\n" );
+	}
+
+
+	protected function transitionSubjectPredicate() {
+		$this->write( ' ' );
+	}
+
+
+	protected function transitionPredicateObject() {
+		$this->write( ' ' );
 	}
 
 }
