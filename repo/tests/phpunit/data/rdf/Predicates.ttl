@@ -1,5 +1,5 @@
 @prefix : <http://acme.test/> .
-@prefix xsd : <http://www.w3.org/2001/XMLSchema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://foobar.test/Bananas> a <http://foobar.test/Fruit> ;
 	:name "Banana",
