@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1bd82c7e",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-19T15:45:19Z",
+      "side": 1,
+      "message": "Should rather be \u003d\u003d\u003d 0",
+      "revId": "7e8d6cae6ceba42c85baed148e440b00407beb9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
