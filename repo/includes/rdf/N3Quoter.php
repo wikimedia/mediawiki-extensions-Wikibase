@@ -73,7 +73,7 @@ class N3Quoter {
 
 	public function escapeLiteral( $s ) {
 		//FIXME: more robust escaping
-		$escaped = str_replace( $this->badChars, $this->badCharEscapes, $s );
+		$escaped = addcslashes( $s, "\x0..\x1F\"\\" );
 
 		if ( $this->escaper !== null ) {
 			$escaped = $this->escaper->escapeString( $escaped );
