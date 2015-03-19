@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bbb818e3",
+        "filename": "repo/resources/wikibase.special/wikibase.special.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-19T15:58:17Z",
+      "side": 1,
+      "message": "Simply remove the float. Having this floating in the first place doesn\u0027t make much sense to me.",
+      "revId": "19d8ebd4ee7238aec8bb4fdb3cd6ec078c8f22a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
