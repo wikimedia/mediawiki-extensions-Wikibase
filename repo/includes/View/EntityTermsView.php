@@ -83,10 +83,10 @@ class EntityTermsView {
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
 			$labels->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
 			$this->getHtmlForLabel( $labels, $entityId ),
-			$aliasGroups->hasGroupForLanguage( $this->languageCode ) ? '' : 'wb-empty',
-			$this->getHtmlForAliases( $aliasGroups ),
 			$descriptions->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
 			$this->getDescriptionText( $descriptions ),
+			$aliasGroups->hasGroupForLanguage( $this->languageCode ) ? '' : 'wb-empty',
+			$this->getHtmlForAliases( $aliasGroups ),
 			$termBoxHtml,
 			$textInjector->newMarker(
 				'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
@@ -182,8 +182,8 @@ class EntityTermsView {
 		return $this->templateFactory->render( 'wikibase-entitytermsforlanguagelistview',
 			$this->msg( 'wikibase-entitytermsforlanguagelistview-language' ),
 			$this->msg( 'wikibase-entitytermsforlanguagelistview-label' ),
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-aliases' ),
 			$this->msg( 'wikibase-entitytermsforlanguagelistview-description' ),
+			$this->msg( 'wikibase-entitytermsforlanguagelistview-aliases' ),
 			$entityTermsForLanguageViewsHtml
 		);
 	}
@@ -226,7 +226,6 @@ class EntityTermsView {
 				'',
 				''
 			),
-			$this->getAliasesView( $aliasGroups, $languageCode ),
 			$this->templateFactory->render( 'wikibase-descriptionview',
 				$hasDescription ? '' : 'wb-empty',
 				htmlspecialchars( $hasDescription
@@ -236,6 +235,7 @@ class EntityTermsView {
 				'',
 				''
 			),
+			$this->getAliasesView( $aliasGroups, $languageCode ),
 			''
 		);
 	}
