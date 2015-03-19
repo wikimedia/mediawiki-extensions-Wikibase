@@ -112,13 +112,50 @@ abstract class RdfWriterBase implements RdfWriter {
 		return $this->role;
 	}
 
-	final protected function write() {
-		$numArgs = func_num_args();
-
-		for ( $i = 0; $i < $numArgs; $i++ ) {
-			$s = func_get_arg( $i );
-			$this->buffer[] = $s;
+	final protected function write($a1, $a2 = null, $a3 = null, $a4 = null, $a5 = null) {
+		if(!is_object($a1)) {
+			$all = $a1.$a2.$a3.$a4.$a5;
+			$last = count($this->buffer)-1;
+			if($last >= 0 && is_string($this->buffer[$last])) {
+				$this->buffer[$last] .= $all;
+			} else {
+				$this->buffer[] = $all;
+			}
+		} else {
+			$this->buffer[] = $a1;
 		}
+
+// 		$this->buffer[] = $a1;
+// 		if(!is_null($a2)) {
+// 			$this->buffer[] = $a2;
+// 		} else {
+// 			return;
+// 		}
+// 		if(!is_null($a3)) {
+// 			$this->buffer[] = $a3;
+// 		} else {
+// 			return;
+// 		}
+// 		if(!is_null($a4)) {
+// 			$this->buffer[] = $a4;
+// 		} else {
+// 			return;
+// 		}
+// 		if(!is_null($a5)) {
+// 			$this->buffer[] = $a5;
+// 		} else {
+// 			return;
+// 		}
+// 		if(!is_null($a6)) {
+// 			$this->buffer[] = $a6;
+// 		} else {
+// 			return;
+// 		}
+// 		$numArgs = func_num_args();
+// 		for ( $i = 0; $i < $numArgs; $i++ ) {
+// 			$s = func_get_arg( $i );
+// 			$this->buffer[] = $s;
+// 		}
 	}
 
 	protected function expandShorthand( &$base, &$local ) {
@@ -294,6 +331,14 @@ abstract class RdfWriterBase implements RdfWriter {
 		$this->writeValue( $value, $typeBase, $typeLocal );
 		return $this;
 	}
+
+	protected $stateTable = array(
+			'document' => array(),
+			'subject' => array(),
+			'predicate' => array(),
+			'object' => array(),
+			'drain' => array(),
+	);
 
 	final protected function state( $newState ) {
 		switch ( $newState ) {
