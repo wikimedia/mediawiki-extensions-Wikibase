@@ -5,6 +5,7 @@ namespace Wikibase\Client\Changes;
 use Exception;
 use MWException;
 use Wikibase\Change;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -65,8 +66,9 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		$coalesced = array();
 
 		$changesByEntity = $this->groupChangesByEntity( $changes );
+		/** @var EntityChange[] $entityChanges */
 		foreach ( $changesByEntity as $entityChanges ) {
-			$entityChanges = $this->coalesceRuns( $entityChanges );
+			$entityChanges = $this->coalesceRuns( $entityChanges[0]->getEntityId(), $entityChanges );
 			$coalesced = array_merge( $coalesced, $entityChanges );
 		}
 
@@ -110,15 +112,14 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 * If $changes is empty, this method returns null. If $changes contains exactly one change,
 	 * that change is returned. Otherwise, a combined change is returned.
 	 *
+	 * @param EntityId $entityId
 	 * @param EntityChange[] $changes The changes to combine.
 	 *
 	 * @throws MWException
 	 * @return Change a combined change representing the activity from all the original changes.
 	 */
-	private function mergeChanges( array $changes ) {
-		if ( empty( $changes ) ) {
-			return null;
-		} elseif ( count( $changes ) === 1 ) {
+	private function mergeChanges( EntityId $entityId, array $changes ) {
+		if ( count( $changes ) === 1 ) {
 			return reset( $changes );
 		}
 
@@ -146,8 +147,6 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		$lastmeta = $last->getMetadata();
 		$firstmeta = $first->getMetadata();
 
-		$entityId = $first->getEntityId();
-
 		$parentRevId = $firstmeta['parent_id'];
 		$latestRevId = $lastmeta['rev_id'];
 
@@ -171,7 +170,6 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 			array(
 				'revision_id' => $last->getField( 'revision_id' ),
 				'user_id' => $last->getField( 'user_id' ),
-				'object_id' => $last->getField( 'object_id' ),
 				'time' => $last->getField( 'time' ),
 			)
 		);
@@ -197,22 +195,22 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 
 	/**
 	 * Coalesce consecutive changes by the same user to the same entity into one.
+	 *
 	 * A run of changes may be broken if the action performed changes (e.g. deletion
 	 * instead of update) or if a sitelink pointing to the local wiki was modified.
 	 *
 	 * Some types of actions, like deletion, will break runs.
-	 * Interleaved changes to different items will break runs.
 	 *
+	 * @param EntityId $entityId
 	 * @param EntityChange[] $changes
 	 *
-	 * @return EntityChange[] grouped changes
+	 * @return Change[] grouped changes
 	 */
-	private function coalesceRuns( array $changes ) {
+	private function coalesceRuns( EntityId $entityId, array $changes ) {
 		$coalesced = array();
 
 		$currentRun = array();
 		$currentUser = null;
-		$currentEntity = null;
 		$currentAction = null;
 		$breakNext = false;
 
@@ -221,12 +219,10 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 				$action = $change->getAction();
 				$meta = $change->getMetadata();
 				$user = $meta['user_text'];
-				$entityId = $change->getEntityId()->__toString();
 
 				$break = $breakNext
 					|| $currentAction !== $action
-					|| $currentUser !== $user
-					|| $currentEntity !== $entityId;
+					|| $currentUser !== $user;
 
 				$breakNext = false;
 
@@ -242,7 +238,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 				if ( $break ) {
 					if ( !empty( $currentRun ) ) {
 						try {
-							$coalesced[] = $this->mergeChanges( $currentRun );
+							$coalesced[] = $this->mergeChanges( $entityId, $currentRun );
 						} catch ( MWException $ex ) {
 							// Something went wrong while trying to merge the changes.
 							// Just keep the original run.
@@ -253,7 +249,6 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 
 					$currentRun = array();
 					$currentUser = $user;
-					$currentEntity = $entityId;
 					$currentAction = $action === EntityChange::ADD ? EntityChange::UPDATE : $action;
 				}
 
@@ -266,7 +261,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 
 		if ( !empty( $currentRun ) ) {
 			try {
-				$coalesced[] = $this->mergeChanges( $currentRun );
+				$coalesced[] = $this->mergeChanges( $entityId, $currentRun );
 			} catch ( MWException $ex ) {
 				// Something went wrong while trying to merge the changes.
 				// Just keep the original run.
