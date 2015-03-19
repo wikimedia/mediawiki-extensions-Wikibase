@@ -227,13 +227,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @param EntityId $id
-	 */
-	public function setEntityId( EntityId $id ) {
-		$this->setField( 'object_id', $id->getSerialization() );
-	}
-
-	/**
 	 * @param int $userId
 	 *
 	 * @todo Merge into future setUserInfo.
