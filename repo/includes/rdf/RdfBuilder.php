@@ -345,8 +345,6 @@ class RdfBuilder {
 	 */
 	private function addEntityMetaData( Entity $entity, $produceData = true ) {
 		$entityLName = $this->getEntityLName( $entity->getId() );
-		$this->entityWriter->about( self::NS_ENTITY, $entityLName )
-			->a( self::NS_ONTOLOGY, $this->getEntityTypeName( $entity->getType() ) );
 
 		if( $produceData ) {
 			$this->entityWriter->about( self::NS_DATA, $entity->getId() )
@@ -360,6 +358,9 @@ class RdfBuilder {
 					->say( self::NS_SCHEMA_ORG, 'softwareVersion' )->value( self::FORMAT_VERSION );
 			}
 		}
+
+		$this->entityWriter->about( self::NS_ENTITY, $entityLName )
+			->a( self::NS_ONTOLOGY, $this->getEntityTypeName( $entity->getType() ) );
 
 		// TODO: add support for property data types to RDF output
 
@@ -445,8 +446,13 @@ class RdfBuilder {
 			}
 
 			// XXX: ideally, we'd use https if the target site supports it.
-			$baseUrl = $site->getPageUrl( $siteLink->getPageName() );
-			$url = wfExpandUrl( $baseUrl, PROTO_HTTP );
+			$baseUrl = str_replace( '$1', rawurlencode($siteLink->getPageName()), $site->getLinkPath() );
+			// $site->getPageUrl( $siteLink->getPageName() );
+			if( !parse_url( $baseUrl, PHP_URL_SCHEME ) ) {
+				$url = "http:".$baseUrl;
+			} else {
+				$url = $baseUrl;
+			}
 
 			$this->sitelinkWriter->about( $url )
 				->a( self::NS_SCHEMA_ORG, 'Article' )
@@ -526,7 +532,7 @@ class RdfBuilder {
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_REFERENCES ) ) {
 			foreach ( $statement->getReferences() as $ref ) { //FIXME: split body into separate method
-				$hash = $ref->getHash();
+				$hash = $ref->getSnaks()->getHash();
 				$refLName = $hash;
 				$this->statementWriter->about( self::NS_STATEMENT, $statementLName )
 					->say( self::NS_PROV, 'wasDerivedFrom' )->is( self::NS_REFERENCE, $refLName );
