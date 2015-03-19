@@ -199,14 +199,11 @@ abstract class RdfWriterBase implements RdfWriter {
 	}
 
 	/**
-	 * Appends any parameters to the output buffer.
-	 *
-	 * @param string [$text,...]
+	 * Appends string to the output buffer.
+	 * @param string $w
 	 */
-	final protected function write() {
-		foreach ( func_get_args() as $arg ) {
-			$this->buffer[] = $arg;
-		}
+	final protected function write( $w ) {
+		$this->buffer[] = $w;
 	}
 
 	/**
@@ -270,7 +267,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @return string RDF
 	 */
 	final public function drain() {
-		$this->state( 'drain' );
+		$this->state( self::STATE_DRAIN );
 
 		$this->flattenBuffer();
 
@@ -465,6 +462,31 @@ abstract class RdfWriterBase implements RdfWriter {
 		return $this;
 	}
 
+	protected $transitionTable = array(
+			self::STATE_START => array(
+					self::STATE_DOCUMENT => true,
+					self::STATE_DRAIN => true,
+			),
+			self::STATE_DOCUMENT => array(
+					self::STATE_DOCUMENT => true,
+					self::STATE_SUBJECT => true,
+					self::STATE_DRAIN => true,
+			),
+			self::STATE_SUBJECT => array(
+					self::STATE_PREDICATE => true,
+			),
+			self::STATE_PREDICATE => array(
+					self::STATE_OBJECT => true,
+			),
+			self::STATE_OBJECT => array(
+					self::STATE_DOCUMENT => true,
+					self::STATE_SUBJECT => true,
+					self::STATE_PREDICATE => true,
+					self::STATE_OBJECT => true,
+					self::STATE_DRAIN => true,
+			),
+	);
+
 	/**
 	 * Perform a state transition. Writer states roughly correspond to states in a naive
 	 * regular parser for the respective syntax. State transitions may generate output,
@@ -476,136 +498,19 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @throws InvalidArgumentException
 	 */
 	final protected function state( $newState ) {
-		switch ( $newState ) {
-			case self::STATE_DOCUMENT:
-				$this->transitionDocument();
-				break;
-
-			case self::STATE_SUBJECT:
-				$this->transitionSubject();
-				break;
-
-			case self::STATE_PREDICATE:
-				$this->transitionPredicate();
-				break;
-
-			case self::STATE_OBJECT:
-				$this->transitionObject();
-				break;
-
-			case 'drain':
-				$this->transitionDrain();
-				break;
-
-			default:
-				throw new InvalidArgumentException( 'invalid $newState: ' . $newState );
-		}
+		if( !isset( $this->transitionTable[$this->state][$newState] ) ) {
+ 			throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . $newState  );
+ 		}
+ 		$action = $this->transitionTable[$this->state][$newState];
+ 		if( $action !== true ) {
+ 			if( is_string( $action ) ) {
+ 				$this->write( $action );
+ 			} else {
+ 				$action();
+ 			}
+ 		}
 
 		$this->state = $newState;
-	}
-
-	private function transitionDocument() {
-		switch ( $this->state ) {
-			case self::STATE_DOCUMENT:
-				break;
-
-			case self::STATE_START:
-				$this->beginDocument();
-				break;
-
-			case self::STATE_OBJECT: // when injecting a sub-document
-				$this->finishObject( 'last' );
-				$this->finishPredicate( 'last' );
-				$this->finishSubject();
-				break;
-
-			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_DOCUMENT );
-		}
-	}
-
-	private function transitionSubject() {
-		switch ( $this->state ) {
-			case self::STATE_DOCUMENT:
-				$this->beginSubject();
-				break;
-
-			case self::STATE_OBJECT:
-				if ( $this->role !== self::SUBDOCUMENT_ROLE && $this->role !== self::DOCUMENT_ROLE ) {
-					throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_SUBJECT );
-				}
-
-				$this->finishObject( 'last' );
-				$this->finishPredicate( 'last' );
-				$this->finishSubject();
-				$this->beginSubject();
-				break;
-
-			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_SUBJECT );
-		}
-	}
-
-	private function transitionPredicate() {
-		switch ( $this->state ) {
-			case self::STATE_SUBJECT:
-				$this->beginPredicate( 'first' );
-				break;
-
-			case self::STATE_OBJECT:
-				if ( $this->role === self::STATEMENT_ROLE ) {
-					throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_PREDICATE );
-				}
-
-				$this->finishObject( 'last' );
-				$this->finishPredicate();
-				$this->beginPredicate();
-				break;
-
-			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_PREDICATE );
-
-		}
-	}
-
-	private function transitionObject() {
-		switch ( $this->state ) {
-			case self::STATE_PREDICATE:
-				$this->beginObject( 'first' );
-				break;
-
-			case self::STATE_OBJECT:
-				$this->finishObject();
-				$this->beginObject();
-				break;
-
-			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_OBJECT );
-
-		}
-	}
-
-	private function transitionDrain() {
-		switch ( $this->state ) {
-			case self::STATE_START:
-				break;
-
-			case self::STATE_DOCUMENT:
-				$this->finishDocument();
-				break;
-
-			case self::STATE_OBJECT:
-
-				$this->finishObject( 'last' );
-				$this->finishPredicate( 'last' );
-				$this->finishSubject();
-				$this->finishDocument();
-				break;
-
-			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_OBJECT );
-
-		}
 	}
 
 	/**
