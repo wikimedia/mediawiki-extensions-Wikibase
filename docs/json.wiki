@@ -384,7 +384,7 @@ URL from the information in the data value.
 
 Time values are given as a map with the following fields:
 
-* '''time''': Date and time in ISO notation, including. E.g. ''"+00000001994-01-01T00:00:00Z"''. ''Note:'' the format and interpretation of this string may vary based on the calendar model. Currently, only julian and gregorian dates are supported, which use the ISO format.
+* '''time''': Date and time in a notation resembling ISO 8601 for Julian and Gregorian, including. E.g. ''"+00000001994-01-01T00:00:00Z"''. ''Note:'' the format and interpretation of this string may vary based on the calendar model. Currently, only Julian and Gregorian dates are supported; a significantly different format would be required for other calendars if they are supported in the future.
 * '''timezone''': The time zone offset against UTC, in minutes. May be given as an integer or string literal.
 * '''calendarmodel''': A URI of a calendar model, such as ''gregorian'' or ''julian''. Typically given as the URI of a data item on the repository
 * '''precision''': To what unit is the given date/time significant? Given as an integer indicating one of the following units:
