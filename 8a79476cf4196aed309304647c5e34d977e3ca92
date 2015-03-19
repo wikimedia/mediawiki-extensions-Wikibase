@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fb4e909a",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-19T16:32:31Z",
+      "side": 1,
+      "message": "are we sure that $entityChanges[0] is always set?\n\nwould prefer we check to be sure.",
+      "revId": "8a79476cf4196aed309304647c5e34d977e3ca92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
