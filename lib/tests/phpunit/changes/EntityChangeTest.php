@@ -207,17 +207,6 @@ class EntityChangeTest extends DiffChangeTest {
 		$this->assertEquals( 7, $change->getField( 'user_id' ), 7 );
 	}
 
-	public function testSetEntityId() {
-		$q7 = new ItemId( 'Q7' );
-		$q8 = new ItemId( 'Q8' );
-
-		$changeFactory = TestChanges::getEntityChangeFactory();
-		$change = $changeFactory->newForEntity( EntityChange::UPDATE, $q7 );
-
-		$change->setEntityId( $q8 );
-		$this->assertEquals( strtolower( $q8->getSerialization() ), $change->getObjectId() );
-	}
-
 	public function testSetTimestamp() {
 		$q7 = new ItemId( 'Q7' );
 
