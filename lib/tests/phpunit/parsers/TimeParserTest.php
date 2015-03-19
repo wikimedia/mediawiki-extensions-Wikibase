@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Parsers\Test;
 
 use DataValues\TimeValue;
 use ValueParsers\Test\StringValueParserTest;
-use ValueParsers\TimeParser;
-use Wikibase\Lib\Parsers\MWTimeIsoParser;
+use ValueParsers\TimeParser as IsoTimestampParser;
+use Wikibase\Lib\Parsers\TimeParser;
 
 /**
  * @covers Wikibase\Lib\Parsers\TimeParser
@@ -21,18 +21,19 @@ use Wikibase\Lib\Parsers\MWTimeIsoParser;
 class TimeParserTest extends StringValueParserTest {
 
 	/**
-	 * @return MWTimeIsoParser
+	 * @deprecated since 0.3, just use getInstance.
 	 */
-	protected function getInstance() {
-		$class = $this->getParserClass();
-		return new $class( $this->newParserOptions() );
+	protected function getParserClass() {
+		throw new \LogicException( 'Should not be called, use getInstance' );
 	}
 
 	/**
-	 * @return string
+	 * @see ValueParserTestBase::getInstance
+	 *
+	 * @return TimeParser
 	 */
-	protected function getParserClass() {
-		return 'Wikibase\Lib\Parsers\TimeParser';
+	protected function getInstance() {
+		return new TimeParser();
 	}
 
 	/**
@@ -47,77 +48,77 @@ class TimeParserTest extends StringValueParserTest {
 
 			//Wikibase\Lib\YearTimeParser
 			'1999' =>
-				array( '+0000000000001999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'2000' =>
-				array( '+0000000000002000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000002000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'2010' =>
-				array( '+0000000000002010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000002010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1980 ' =>
-				array( '+0000000000001980-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001980-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1' =>
-				array( '+0000000000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'-1000000001' =>
-				array( '-0000001000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000001000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'+1000000001' =>
-				array( '+0000001000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000001000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1BC' =>
-				array( '-0000000000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1CE' =>
-				array( '+0000000000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1 1999 BC' =>
-				array( '-0000000000011999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000011999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1,000,000 BC' =>
-				array( '-0000000001000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1,11,111 BC' =>
-				array( '-0000000000111111-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000111111-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, IsoTimestampParser::CALENDAR_GREGORIAN ),
 
 			//Wikibase\Lib\YearMonthTimeParser
 			'1 1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'March 1999' =>
-				array( '+0000000000001999-03-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-03-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1999 March' =>
-				array( '+0000000000001999-03-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-03-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, IsoTimestampParser::CALENDAR_GREGORIAN ),
 
 			//ValueParsers\TimeParser
 			'+0000000000000000-01-01T00:00:00Z (Gregorian)' =>
-				array( '+0000000000000000-01-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000000-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'+0-00-20T00:00:00Z' =>
-				array( '+0000000000000000-00-20T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000000-00-20T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 
 			//Wikibase\Lib\ParsersMwTimeIsoParser
 			'13 billion years CE' =>
-				array( '+0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000013000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'13,000 million years CE' =>
-				array( '+0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000013000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'13,000 million years BCE' =>
-				array( '-0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000013000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1980s' =>
-				array( '+0000000000001980-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001980-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, IsoTimestampParser::CALENDAR_GREGORIAN ),
 
 			// Wikibase\Lib\PhpDateTimeParser
 			'10/10/10' =>
-				array( '+0000000000000010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000010-10-10T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1 July 2013' =>
-				array( '+0000000000002013-07-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000002013-07-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1 Jul 2013' =>
-				array( '+0000000000002013-07-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000002013-07-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1 Jul 2013 BC' =>
-				array( '-0000000000002013-07-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000002013-07-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1 Jul 2013CE' =>
-				array( '+0000000000002013-07-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000002013-07-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'+1 Jul 2013' =>
-				array( '+0000000000002013-07-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000002013-07-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'-1 Jul 2013' =>
-				array( '-0000000000002013-07-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000002013-07-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'-10100-02-29' =>
-				array( '-0000000000010100-03-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000010100-03-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'-1.11.111' =>
-				array( '-0000000000000111-11-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000000111-11-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1.11.111 BC' =>
-				array( '-0000000000000111-11-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000000111-11-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 			'1 11 111 BC' =>
-				array( '-0000000000000111-11-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000000111-11-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, IsoTimestampParser::CALENDAR_GREGORIAN ),
 		);
 
 		foreach ( $valid as $value => $expected ) {
