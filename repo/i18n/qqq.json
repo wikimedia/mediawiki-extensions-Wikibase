@@ -512,7 +512,7 @@
 	"apihelp-wbgetclaims-param-claim": "{{doc-apihelp-param|wbgetclaims|claim}}",
 	"apihelp-wbgetclaims-param-rank": "{{doc-apihelp-param|wbgetclaims|rank}}",
 	"apihelp-wbgetclaims-param-props": "{{doc-apihelp-param|wbgetclaims|props}}",
-	"apihelp-wbgetclaims-param-ungroupedlist":"{{doc-apihelp-param|wbgetclaims|ungroupedlist}}",
+	"apihelp-wbgetclaims-param-ungroupedlist": "{{doc-apihelp-param|wbgetclaims|ungroupedlist}}",
 	"apihelp-wbgetclaims-example-1": "{{doc-apihelp-example|wbgetclaims}}",
 	"apihelp-wbgetclaims-example-2": "{{doc-apihelp-example|wbgetclaims}}",
 	"apihelp-wbgetclaims-example-3": "{{doc-apihelp-example|wbgetclaims}}",

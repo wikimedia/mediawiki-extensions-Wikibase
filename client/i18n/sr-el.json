@@ -25,6 +25,7 @@
 	"wikibase-linkitem-selectlink": "Izaberite sajt i stranicu sa kojom želite da povežete ovu stranicu.",
 	"wikibase-linkitem-input-site": "Jezik:",
 	"wikibase-linkitem-input-page": "Stranica:",
+	"wikibase-linkitem-confirmitem-text": "Stranica koju ste izabrali je već pridružena [$1 stavci na našoj centralnoj bazi podataka]. Molimo vas potvrdite da {{PLURAL:$2|je stranica|su stranice}} ispod {{PLURAL:$2|prikazana|prikazane}} {{PLURAL:$2|ona koju|one koje}} želite da povežete sa ovom stranicom.",
 	"wikibase-linkitem-confirmitem-button": "Potvrdi",
 	"wikibase-linkitem-not-loggedin-title": "Morate biti prijavljeni",
 	"wikibase-linkitem-not-loggedin": "Morate biti prijavljeni na ovom viki-sajtu i na [$1 glavnom skladištu podataka] kako biste koristili ovu mogućnost.",

@@ -4,10 +4,10 @@
 			"Arystanbek"
 		]
 	},
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}} тұтынушы",
 	"tooltip-t-wikibase": "Сілтеме дерек қойма данасымен байланысқан",
 	"wikibase-after-page-move": "Жылжытылған беттің тіл сілтемесін түзету үшін {{WBREPONAME}}-ке байланысқан элементті [$1 жаңартсаңыз] болады.",
 	"wikibase-after-page-move-queued": "[$1 {{WBREPONAME}} данасы] бұл бетке байланысқан біраздан кейін автоматты жаңартылады.",
+	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}} данасы] бұл бетке байланысқан біраздан кейін автоматты жаңартылады.",
 	"wikibase-comment-add": "{{WBREPONAME}} данасы құрылды.",
 	"wikibase-comment-remove": "Байланысқан {{WBREPONAME}} данасын жойды. Тіл сілтемелерін алып тастады.",
 	"wikibase-comment-linked": "{{WBREPONAME}} данасы бұл бетке сілтенді.",
@@ -21,6 +21,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} данасы",
 	"wikibase-editlinks": "Сілтемелерді өңдеу",
 	"wikibase-editlinkstitle": "Тіларалық сілтемелерді өңдеу",
+	"wikibase-addlinkstitle": "Тіларалық сілтемелерді қосу",
 	"wikibase-linkitem-addlinks": "Сілтемелер қосу",
 	"wikibase-linkitem-close": "Диалогты жабу және бетті қайта жүктеу",
 	"wikibase-linkitem-failure": "Белгісіз қателік орын алды осы бетті қайтадан сілтетіп көру.",
@@ -50,5 +51,7 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|тіларалықсілтеме|тіларалықсілтеме}} бетінде)",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} данасы ID",
 	"wikibase-pageinfo-entity-id-none": "Ешқандай",
-	"wikibase-otherprojects": "Басқа жобалар"
+	"wikibase-otherprojects": "Басқа жобалар",
+	"wikibase-otherprojects-beta-message": "Басқа жобалар бүйірлік тақтасы",
+	"wikibase-otherprojects-beta-description": "Бүйірлік тақтаға «{{int:wikibase-otherprojects}}» бөлімін қосу, ол {{WBREPONAME}} деректеріне негізделген Уикимедиа жобаларының сілтемелерін береді."
 }

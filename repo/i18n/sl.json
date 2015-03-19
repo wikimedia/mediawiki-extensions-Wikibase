@@ -92,7 +92,7 @@
 	"wikibase-itembytitle-create": "Predmet lahko tudi [$1 ustvarite].",
 	"special-itemdisambiguation": "Razločitev predmetov",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Iskanje predmetov po jeziku in oznaki",
-	"wikibase-itemdisambiguation-lookup-language": "Jezik:",
+	"wikibase-itemdisambiguation-lookup-language": "Koda jezika:",
 	"wikibase-itemdisambiguation-lookup-label": "Oznaka:",
 	"wikibase-itemdisambiguation-submit": "Išči",
 	"wikibase-itemdisambiguation-nothing-found": "Za to oznako žal ni mogoče najti nobenega predmeta.",
@@ -107,6 +107,6 @@
 	"wikibase-setlabel-submit": "Določite oznako",
 	"wikibase-setdescription-label": "Opis:",
 	"wikibase-setdescription-submit": "Določite opis",
-	"wikibase-modifyterm-language": "Jezik:",
-	"wikibase-entitieswithoutlabel-label-language": "Jezik:"
+	"wikibase-modifyterm-language": "Koda jezika:",
+	"wikibase-entitieswithoutlabel-label-language": "Koda jezika:"
 }
