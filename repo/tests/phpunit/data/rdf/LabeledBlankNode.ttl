@@ -1,5 +1,5 @@
-@prefix exterms : <http://www.example.org/terms/> .
-@prefix exstaff : <http://www.example.org/staffid/> .
+@prefix exterms: <http://www.example.org/terms/> .
+@prefix exstaff: <http://www.example.org/staffid/> .
 
 exstaff:85740 exterms:address _:johnaddress .
 

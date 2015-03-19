@@ -12,61 +12,54 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 
 	public function __construct( $role = parent::DOCUMENT_ROLE, BNodeLabeler $labeler = null, N3Quoter $quoter = null ) {
 		parent::__construct( $role, $labeler, $quoter );
+		$this->transitionTable[self::STATE_OBJECT] = array(
+			self::STATE_DOCUMENT => " .\n",
+			self::STATE_SUBJECT => " .\n\n",
+			self::STATE_PREDICATE => " ;\n\t",
+			self::STATE_OBJECT => " ,\n\t\t",
+			self::STATE_DRAIN => " .\n",
+		);
+		$this->transitionTable[self::STATE_DOCUMENT][self::STATE_SUBJECT] = "\n";
+		$this->transitionTable[self::STATE_SUBJECT][self::STATE_PREDICATE] = " ";
+		$this->transitionTable[self::STATE_PREDICATE][self::STATE_OBJECT] = " ";
 	}
 
 	protected function writePrefix( $prefix, $uri ) {
-		$seperator = $prefix === '' ? ': ' : ' : ';
-		$this->write( '@prefix ', $prefix, $seperator, '<', $this->quoter->escapeIRI( $uri ), "> .\n" );
+		$this->write( "@prefix $prefix: <" . $this->quoter->escapeIRI( $uri ) . "> .\n" );
 	}
 
 	protected function writeSubject( $base, $local = null ) {
-		$this->writeRef( $base, $local );
+		if( $local !== null ) {
+			$this->write( "$base:$local" );
+		} else {
+			$this->writeIRI( $base );
+		}
 	}
 
 	protected function writePredicate( $base, $local = null ) {
-		$this->writeRef( $base, $local );
+		if( $base === 'a' ) {
+			$this->write( 'a' );
+			return;
+		}
+		if( $local !== null ) {
+			$this->write( "$base:$local" );
+		} else {
+			$this->writeIRI( $base );
+		}
 	}
 
 	protected function writeResource( $base, $local = null ) {
-		$this->writeRef( $base, $local );
-	}
-
-	protected function writeValue( $value, $typeBase = null, $typeLocal = null ) {
-		//TODO: shorthand form for xsd:integer|decimal|double|boolean
-		parent::writeValue( $value, $typeBase, $typeLocal );
-	}
-
-	protected function beginSubject( $first = false ) {
-		$this->write( "\n" );
-	}
-
-	protected function finishSubject() {
-		$this->write( " .\n" );
-	}
-
-	protected function beginPredicate( $first = false ) {
-		if ( $first ) {
-			$this->write( ' ' );
+		if( $local !== null) {
+			$this->write( "$base:$local" );
+		} else {
+			$this->writeIRI( $base );
 		}
 	}
 
-	protected function finishPredicate( $last = false ) {
-		if ( !$last ) {
-			$this->write( " ;\n\t" );
-		}
-	}
-
-	protected function beginObject( $first = false ) {
-		if ( $first ) {
-			$this->write( ' ' );
-		}
-	}
-
-	protected function finishObject( $last = false ) {
-		if ( !$last ) {
-			$this->write( ",\n\t\t" );
-		}
-	}
+// 	protected function writeValue( $value, $typeBase = null, $typeLocal = null  ) {
+// 		//TODO: shorthand form for xsd:integer|decimal|double|boolean
+// 		parent::writeValue( $value, $typeBase, $typeLocal );
+// 	}
 
 	/**
 	 * @param string $role
@@ -86,5 +79,7 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 	public function getMimeType() {
 		return 'text/turtle; charset=UTF-8';
 	}
+
+
 
 }
