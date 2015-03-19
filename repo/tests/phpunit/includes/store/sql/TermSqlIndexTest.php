@@ -56,10 +56,6 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	/**
 	 * @dataProvider termProvider
-	 * @param $languageCode
-	 * @param $termText
-	 * @param $searchText
-	 * @param boolean $matches
 	 */
 	public function testGetMatchingTerms2( $languageCode, $termText, $searchText, $matches ) {
 		$withoutTermSearchKey = WikibaseRepo::getDefaultInstance()->
@@ -70,11 +66,9 @@ class TermSqlIndexTest extends TermIndexTest {
 		}
 
 		$termIndex = $this->getTermIndex();
-
 		$termIndex->clear();
 
 		$item = new Item( new ItemId( 'Q42' ) );
-
 		$item->setLabel( $languageCode, $termText );
 
 		$termIndex->saveTermsOfEntity( $item );
@@ -181,10 +175,6 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	/**
 	 * @dataProvider termProvider
-	 * @param $languageCode
-	 * @param $termText
-	 * @param $searchText
-	 * @param boolean $matches
 	 */
 	public function testGetMatchingTermsWeights( $languageCode, $termText, $searchText, $matches ) {
 		$termIndex = $this->getTermIndex();
@@ -196,14 +186,12 @@ class TermSqlIndexTest extends TermIndexTest {
 		$termIndex->clear();
 
 		$item1 = new Item( new ItemId( 'Q42' ) );
-
 		$item1->setLabel( $languageCode, $termText );
 		$item1->getSiteLinkList()->addNewSiteLink( 'enwiki', 'A' );
 
 		$termIndex->saveTermsOfEntity( $item1 );
 
 		$item2 = new Item( new ItemId( 'Q23' ) );
-
 		$item2->setLabel( $languageCode, $termText );
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'B' );
 		$item2->getSiteLinkList()->addNewSiteLink( 'dewiki', 'B' );
@@ -213,7 +201,6 @@ class TermSqlIndexTest extends TermIndexTest {
 		$termIndex->saveTermsOfEntity( $item2 );
 
 		$item3 = new Item( new ItemId( 'Q108' ) );
-
 		$item3->setLabel( $languageCode, $termText );
 		$item3->getSiteLinkList()->addNewSiteLink( 'hrwiki', 'C' );
 		$item3->getSiteLinkList()->addNewSiteLink( 'uzwiki', 'C' );
@@ -240,18 +227,12 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	/**
 	 * @dataProvider termProvider
-	 * @param $languageCode
-	 * @param $termText
-	 * @param $searchText
-	 * @param boolean $matches
 	 */
 	public function testPrefixSearch( $languageCode, $termText, $searchText, $matches ) {
 		$termIndex = $this->getTermIndex();
-
 		$termIndex->clear();
 
 		$item1 = new Item( new ItemId( 'Q42' ) );
-
 		$item1->setLabel( $languageCode, $termText );
 
 		$termIndex->saveTermsOfEntity( $item1 );
@@ -273,13 +254,11 @@ class TermSqlIndexTest extends TermIndexTest {
 	/**
 	 * @dataProvider termProvider
 	 */
-	public function testPrefixSearchQuoting( $languageCode, $termText ) {
+	public function testPrefixSearchQuoting( $languageCode, $termText, $searchText, $matches ) {
 		$termIndex = $this->getTermIndex();
-
 		$termIndex->clear();
 
 		$item1 = new Item( new ItemId( 'Q42' ) );
-
 		$item1->setLabel( $languageCode, $termText );
 
 		$termIndex->saveTermsOfEntity( $item1 );
