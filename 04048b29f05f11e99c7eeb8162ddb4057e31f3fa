@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ae5e9479",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-19T17:41:02Z",
+      "side": 1,
+      "message": "You can\u0027t change the method signature when overriding the method.\nThat\u0027s what the method in the parent class was called setSpecialWikibaseRepoPageServices.",
+      "revId": "04048b29f05f11e99c7eeb8162ddb4057e31f3fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
