@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ce08b02d",
+        "filename": "lib/tests/phpunit/specials/SpecialPageTestBase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-19T16:38:58Z",
+      "side": 1,
+      "message": "How do you know \"POST vs. GET\" means \"edit vs. read\"?",
+      "revId": "b1950ca0e7b0432b9534b5a8d4e3eb2420e49343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5b054415",
+        "filename": "lib/tests/phpunit/specials/SpecialPageTestBase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-19T16:38:58Z",
+      "side": 1,
+      "message": "User can be null, can\u0027t it?",
+      "revId": "b1950ca0e7b0432b9534b5a8d4e3eb2420e49343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
