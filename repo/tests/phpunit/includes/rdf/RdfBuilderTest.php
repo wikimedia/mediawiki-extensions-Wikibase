@@ -112,13 +112,14 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @return RdfBuilder
 	 */
-	private static function newRdfBuilder( $produce ) {
+	private static function newRdfBuilder( $produce, \BagOStuff $dedup = null ) {
 		return new RdfBuilder(
 			self::getSiteList(),
 			self::URI_BASE,
 			self::URI_DATA,
 			self::getMockRepository(),
-			$produce
+			$produce,
+			$dedup
 		);
 	}
 
@@ -266,6 +267,22 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder->addDumpHeader( 1426110695 );
 		$data = $this->getDataFromBuilder( $builder );
 		$this->assertEquals( $this->getSerializedData( 'dumpheader' ),  $data);
+	}
+
+	public function testDeduplication() {
+		$bag = new \HashBagOStuff();
+		$builder = self::newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
+		$builder->addEntity( $this->getEntityData( 'Q7' ) );
+		$data1 = $this->getDataFromBuilder( $builder );
+
+		$builder = self::newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
+		$builder->addEntity( $this->getEntityData( 'Q9' ) );
+		$data2 = $this->getDataFromBuilder( $builder );
+
+		$data = array_merge($data1, $data2);
+		sort($data);
+
+		$this->assertArrayEquals($this->getSerializedData( 'Q7_Q9_dedup' ), $data);
 	}
 
 }
