@@ -446,7 +446,11 @@ class RdfBuilder {
 
 			// XXX: ideally, we'd use https if the target site supports it.
 			$baseUrl = $site->getPageUrl( $siteLink->getPageName() );
-			$url = wfExpandUrl( $baseUrl, PROTO_HTTP );
+			if( !parse_url( $baseUrl, PHP_URL_SCHEME ) ) {
+				$url = "http://".$baseUrl;
+			} else {
+				$url = $baseUrl;
+			}
 
 			$this->sitelinkWriter->about( $url )
 				->a( self::NS_SCHEMA_ORG, 'Article' )
