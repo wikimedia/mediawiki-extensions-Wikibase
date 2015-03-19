@@ -9,6 +9,7 @@ use ValueParsers\CalendarModelParser;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\StringValueParser;
+use ValueParsers\TimeParser as IsoTimestampParser;
 use ValueParsers\ValueParser;
 
 /**
@@ -96,7 +97,7 @@ class PhpDateTimeParser extends StringValueParser {
 			}
 
 			// Pass the reformatted string into a base parser that parses this +/-Y-m-d\TH:i:s\Z format with a precision
-			$valueParser = new \ValueParsers\TimeParser( $calendarModelParser, $options );
+			$valueParser = new IsoTimestampParser( $calendarModelParser, $options );
 			return $valueParser->parse( $timeString );
 		} catch ( Exception $exception ) {
 			throw new ParseException( $exception->getMessage(), $rawValue, self::FORMAT_NAME );

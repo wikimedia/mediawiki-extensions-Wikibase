@@ -7,6 +7,7 @@ use ValueParsers\CalendarModelParser;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\StringValueParser;
+use ValueParsers\TimeParser as IsoTimestampParser;
 
 /**
  * Time Parser
@@ -61,7 +62,7 @@ class TimeParser extends StringValueParser {
 
 		// Year-month parser must be first to not parse "May 2014" as "2014-05-01".
 		$parsers[] = new YearMonthTimeParser( $this->getOptions() );
-		$parsers[] = new \ValueParsers\TimeParser(
+		$parsers[] = new IsoTimestampParser(
 			$calenderModelParser,
 			$this->getOptions()
 		);
