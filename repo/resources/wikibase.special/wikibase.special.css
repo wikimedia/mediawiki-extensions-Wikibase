@@ -9,8 +9,8 @@
 
 /********** Create item/property page **********/
 
-.wb-fieldset {
-	float: left;
+.wb-form {
+	width: 100%;
 }
 
 .wb-label, .wb-input, .wb-button, .wb-select {
