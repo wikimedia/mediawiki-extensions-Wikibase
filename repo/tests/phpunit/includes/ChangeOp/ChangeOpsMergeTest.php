@@ -11,17 +11,10 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpsMerge
@@ -188,9 +181,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$testCases = array();
 
 		$itemWithEnLabel = new Item();
-		$itemWithEnLabel->setFingerprint( new Fingerprint( new TermList(
-			array( new Term( 'en', 'foo' ) )
-		) ) );
+		$itemWithEnLabel->getFingerprint()->setLabel( 'en', 'foo' );
 
 		$testCases['labelMerge'] = array(
 			$itemWithEnLabel->copy(),
@@ -206,16 +197,11 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$itemWithEnBarLabel = new Item();
-		$itemWithEnBarLabel->setFingerprint( new Fingerprint(
-			new TermList( array( new Term( 'en', 'bar' ) ) )
-		)	);
+		$itemWithEnBarLabel->getFingerprint()->setLabel( 'en', 'bar' );
 
 		$itemWithLabelAndAlias = new Item();
-		$itemWithLabelAndAlias->setFingerprint( new Fingerprint(
-			new TermList( array( new Term( 'en', 'bar' ) ) ),
-			null,
-			new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
-		) );
+		$itemWithLabelAndAlias->getFingerprint()->setLabel( 'en', 'bar' );
+		$itemWithLabelAndAlias->getFingerprint()->setAliasGroup( 'en', array( 'foo' ) );
 
 		$testCases['ignoreConflictLabelMerge'] = array(
 			$itemWithEnLabel->copy(),
@@ -226,10 +212,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$itemWithDescription = new Item();
-		$itemWithDescription->setFingerprint( new Fingerprint(
-			null,
-			new TermList( array( new Term( 'en', 'foo' ) ) )
-		) );
+		$itemWithDescription->getFingerprint()->setDescription( 'en', 'foo' );
 
 		$testCases['descriptionMerge'] = array(
 			$itemWithDescription->copy(),
@@ -245,10 +228,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$itemWithBarDescription = new Item();
-		$itemWithBarDescription->setFingerprint( new Fingerprint(
-			null,
-			new TermList( array( new Term( 'en', 'bar' ) ) )
-		) );
+		$itemWithBarDescription->getFingerprint()->setDescription( 'en', 'bar' );
 		$testCases['ignoreConflictDescriptionMerge'] = array(
 			$itemWithDescription->copy(),
 			$itemWithBarDescription->copy(),
@@ -258,11 +238,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$itemWithFooBarAliases = new Item();
-		$itemWithFooBarAliases->setFingerprint( new Fingerprint(
-			null,
-			null,
-			new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar' ) ) ) )
-		) );
+		$itemWithFooBarAliases->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
 
 		$testCases['aliasMerge'] = array(
 			$itemWithFooBarAliases->copy(),
@@ -272,11 +248,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$itemWithFooBarBazAliases = new Item();
-		$itemWithFooBarBazAliases->setFingerprint( new Fingerprint(
-			null,
-			null,
-			new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar', 'baz' ) ) ) )
-		) );
+		$itemWithFooBarBazAliases->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar', 'baz' ) );
 
 		$testCases['duplicateAliasMerge'] = array(
 			$itemWithFooBarAliases->copy(),
@@ -286,9 +258,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$itemWithLink = new Item();
-		$itemWithLink->setSiteLinkList( new SiteLinkList( array(
-			new SiteLink( 'enwiki', 'foo' )
-		) ) );
+		$itemWithLink->getSiteLinkList()->addNewSiteLink( 'enwiki', 'foo' );
 
 		$testCases['linkMerge'] = array(
 			$itemWithLink->copy(),
@@ -298,9 +268,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$itemWithBarLink = new Item();
-		$itemWithBarLink->setSiteLinkList( new SiteLinkList( array(
-			new SiteLink( 'enwiki', 'bar' )
-		) ) );
+		$itemWithLink->getSiteLinkList()->addNewSiteLink( 'enwiki', 'bar' );
 
 		$testCases['ignoreConflictLinkMerge'] = array(
 			$itemWithLink->copy(),
@@ -314,7 +282,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$claim->setGuid( 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556' );
 
 		$itemWithStatement = new Item();
-		$itemWithStatement->setStatements( new StatementList( new Statement( $claim ) ) );
+		$itemWithStatement->getStatements()->addStatement( new Statement( $claim ) );
 		$testCases['claimMerge'] = array(
 			$itemWithStatement->copy(),
 			new Item(),
@@ -329,7 +297,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$qualifiedClaim->setGuid( 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556' );
 
 		$itemWithQualifiedStatement = new Item();
-		$itemWithQualifiedStatement->setStatements( new StatementList( new Statement( $qualifiedClaim ) ) );
+		$itemWithQualifiedStatement->getStatements()->addStatement( new Statement( $qualifiedClaim ) );
 
 		$testCases['claimWithQualifierMerge'] = array(
 			$itemWithQualifiedStatement->copy(),
@@ -345,16 +313,14 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$anotherQualifiedClaim->setGuid( 'Q111$D8404CDA-25E4-4334-AF88-A3290BCD9C0F' );
 
 		$bigItem = new Item();
-		$bigItem->setFingerprint( new Fingerprint(
-			new TermList( array( new Term( 'en', 'foo' ), new Term( 'pt', 'ptfoo' ) ) ),
-			new TermList( array( new Term( 'en', 'foo' ), new Term( 'pl', 'pldesc' ) ) ),
-			new AliasGroupList( array(
-				new AliasGroup( 'en', array( 'foo', 'bar' ) ),
-				new AliasGroup( 'de', array( 'defoo', 'debar' ) )
-			) )
-		) );
-		$bigItem->setSiteLinkList( new SiteLinkList( array( new SiteLink( 'dewiki', 'foo' ) ) ) );
-		$bigItem->setStatements( new StatementList( new Statement( $anotherQualifiedClaim ) ) );
+		$bigItem->getFingerprint()->setLabel( 'en', 'foo' );
+		$bigItem->getFingerprint()->setLabel( 'pt', 'ptfoo' );
+		$bigItem->getFingerprint()->setDescription( 'en', 'foo' );
+		$bigItem->getFingerprint()->setDescription( 'pl', 'pldesc' );
+		$bigItem->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
+		$bigItem->getFingerprint()->setAliasGroup( 'de', array( 'defoo', 'debar' ) );
+		$bigItem->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foo' );
+		$bigItem->getStatements()->addStatement( new Statement( $anotherQualifiedClaim ) );
 
 		$testCases['itemMerge'] = array(
 			$bigItem->copy(),
@@ -363,41 +329,29 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$bigItem->copy(),
 		);
 
-		$bigItem->setSiteLinkList( new SiteLinkList( array(
-			new SiteLink( 'dewiki', 'foo' ),
-			new SiteLink( 'plwiki', 'bar' )
-		) ) );
+		$bigItem->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foo' );
+		$bigItem->getSiteLinkList()->addNewSiteLink( 'plwiki', 'bar' );
 
 
 		$smallerItem = new Item();
-		$smallerItem->setFingerprint( new Fingerprint(
-			new TermList( array( new Term( 'en', 'toLabel' ) ) ),
-			new TermList( array( new Term( 'pl', 'toLabel' ) ) )
-		) );
-		$smallerItem->setSiteLinkList( new SiteLinkList( array(
-			new SiteLink( 'plwiki', 'toLink' )
-		) ) );
+		$smallerItem->getFingerprint()->setLabel( 'en', 'toLabel' );
+		$smallerItem->getFingerprint()->setDescription( 'pl', 'toLabel' ); // FIXME: this is not a label
+		$smallerItem->getSiteLinkList()->addNewSiteLink( 'plwiki', 'toLink' );
 
 		$smallerMergedItem = new Item();
-		$smallerMergedItem->setFingerprint( new Fingerprint(
-			null,
-			new TermList( array( new Term( 'pl', 'pldesc' ) ) )
-		) );
-		$smallerMergedItem->setSiteLinkList( new SiteLinkList( array( new SiteLink( 'plwiki', 'bar' ) ) ) );
+		$smallerMergedItem->getFingerprint()->setDescription( 'pl', 'pldesc' );
+		$smallerMergedItem->getSiteLinkList()->addNewSiteLink( 'plwiki', 'bar' );
 
 		$bigMergedItem = new Item();
-		$bigMergedItem->setFingerprint( new Fingerprint(
-			new TermList( array( new Term( 'en', 'toLabel' ), new Term( 'pt', 'ptfoo' ) ) ),
-			new TermList( array( new Term( 'en', 'foo' ), new Term( 'pl', 'toLabel' ) ) ),
-			new AliasGroupList( array(
-				new AliasGroup( 'en', array( 'foo', 'bar' ) ),
-				new AliasGroup( 'de', array( 'defoo', 'debar' ) )
-			) )
-		) );
-		$bigMergedItem->setSiteLinkList( new SiteLinkList( array(
-			new SiteLink( 'dewiki', 'foo' ),
-			new SiteLink( 'plwiki', 'toLink' )
-		) ) );
+		$bigMergedItem->getFingerprint()->setLabel( 'en', 'toLabel' );
+		$bigMergedItem->getFingerprint()->setLabel( 'pt', 'ptfoo' );
+		$bigMergedItem->getFingerprint()->setDescription( 'en', 'foo' );
+		$bigMergedItem->getFingerprint()->setDescription( 'pl', 'toLabel' );
+		$bigMergedItem->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
+		$bigMergedItem->getFingerprint()->setAliasGroup( 'de', array( 'defoo', 'debar' ) );
+
+		$smallerMergedItem->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foo' );
+		$smallerMergedItem->getSiteLinkList()->addNewSiteLink( 'plwiki', 'toLink' );
 		$bigMergedItem->setStatements( new StatementList( new Statement( $anotherQualifiedClaim ) ) );
 
 		$testCases['ignoreConflictItemMerge'] = array(
