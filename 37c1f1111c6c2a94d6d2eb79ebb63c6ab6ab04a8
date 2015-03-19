@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_78c846aa",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsview.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-19T13:44:48Z",
+      "side": 1,
+      "message": "There is no heading-container any more, can be removed.",
+      "revId": "37c1f1111c6c2a94d6d2eb79ebb63c6ab6ab04a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d8d15a59",
+        "filename": "lib/resources/jquery.wikibase/toolbar/controller/definitions/edittoolbar/entitytermsview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-19T13:44:48Z",
+      "side": 1,
+      "message": "-1, please do not select based on that class name, instead replace children() with find().",
+      "revId": "37c1f1111c6c2a94d6d2eb79ebb63c6ab6ab04a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
