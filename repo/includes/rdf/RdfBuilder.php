@@ -13,9 +13,6 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\StatementListProvider;
@@ -71,10 +68,6 @@ class RdfBuilder {
 	const PROV_URI = 'http://www.w3.org/ns/prov#';
 	// TODO: make the license settable
 	const LICENSE = 'http://creativecommons.org/publicdomain/zero/1.0/';
-
-	// Gregorian calendar link.
-	// I'm not very happy about hardcoding it here but see no better way so far
-	const GREGORIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985727';
 
 	public static $rankMap = array(
 		Statement::RANK_DEPRECATED => 'DeprecatedRank',
@@ -152,6 +145,13 @@ class RdfBuilder {
 	private $dedupBag;
 
 	/**
+	 *
+	 * @var DateTimeValueCleaner
+	 */
+	private $dateCleaner;
+
+	/**
+	 *
 	 * @param SiteList $sites
 	 * @param string $baseUri
 	 * @param string $dataUri
@@ -167,6 +167,9 @@ class RdfBuilder {
 	) {
 		$this->dedupBag = $dedupBag;
 		$this->documentWriter = $writer;
+		// TODO: if data is fixed to be always Gregorian, replace with
+		// DateTimeValueCleaner
+		$this->dateCleaner = new JulianDateTimeValueCleaner();
 
 		$this->sites = $sites;
 		$this->baseUri = $baseUri;
@@ -236,6 +239,14 @@ class RdfBuilder {
 	 */
 	public function getNamespaces() {
 		return $this->namespaces;
+	}
+
+	/**
+	 * Set date cleaner
+	 * @param DateTimeValueCleaner $cleaner
+	 */
+	public function setDateCleaner( DateTimeValueCleaner $cleaner ) {
+		$this->dateCleaner = $cleaner;
 	}
 
 	/**
@@ -759,13 +770,14 @@ class RdfBuilder {
 	 * @param RdfWriter $writer
 	 * @param string $propertyName
 	 * @param string $type
-	 * @param string $value
+	 * @param mixed $value
 	 */
 	private function addValueToNode( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $type, $value ) {
 		if( $type == 'url' ) {
 			$writer->say( $propertyValueNamespace, $propertyValueLName )->is( $value );
-		} elseif( $type == 'dateTime' ) {
-			$writer->say( $propertyValueNamespace, $propertyValueLName )->value( $this->cleanupDateValue( $value ), 'xsd', 'dateTime' );
+		} elseif( $type == 'dateTime' && $value instanceof TimeValue ) {
+			$writer->say( $propertyValueNamespace, $propertyValueLName );
+			$this->sayDateLiteral( $writer, $value );
 		} elseif( $type == 'decimal' ) {
 			// TODO: handle precision here?
 			if ( $value instanceof DecimalValue ) {
@@ -799,58 +811,6 @@ class RdfBuilder {
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->text( $value->getText(), $value->getLanguageCode() );
 	}
 
-	/**
-	 * Clean up Wikidata date value in Gregorian calendar
-	 * - remove + from the start - not all data stores like that
-	 * - validate month and date value
-	 *
-	 * @param string $dateValue
-	 *
-	 * @return string Value compatible with xsd:dateTime type
-	 */
-	private function cleanupDateValue( $dateValue ) {
-		list( $date, $time ) = explode( 'T', $dateValue, 2 );
-		if ( $date[0] === '-' ) {
-			list( $y, $m, $d ) = explode( '-', substr( $date, 1 ), 3 );
-			$y = -(int)$y;
-		} else {
-			list( $y, $m, $d ) = explode( '-', $date, 3 );
-			$y = (int)$y;
-		}
-
-		$m = (int)$m;
-		$d = (int)$d;
-
-		// PHP source docs say PHP gregorian calendar can work down to 4714 BC
-		// for smaller dates, we ignore month/day
-		if ( $y <= -4714 ) {
-			$d = $m = 1;
-		}
-
-		if ( $m <= 0 ) {
-			$m = 1;
-		}
-		if ( $m >= 12 ) {
-			// Why anybody would do something like that? Anyway, better to check.
-			$m = 12;
-		}
-		if ( $d <= 0 ) {
-			$d = 1;
-		}
-		// check if the date "looks safe". If not, we do deeper check
-		if ( !( $d <= 28 || ( $m != 2 && $d <= 30 ) ) ) {
-			$max = cal_days_in_month( CAL_GREGORIAN, $m, $y );
-			// We just put it as the last day in month, won't bother further
-			if ( $d > $max ) {
-				$d = $max;
-			}
-		}
-		// This is a bit weird since xsd:dateTime requires >=4 digit always,
-		// and leading 0 is not allowed for 5 digits
-		// But sprintf counts - as digit
-		// See: http://www.w3.org/TR/xmlschema-2/#dateTime
-		return sprintf( "%s%04d-%02d-%02dT%s", $y < 0 ? '-' : '', abs( $y ), $m, $d, $time );
-	}
 
 	/**
 	 * Produce literal that reperesent the date in RDF
@@ -860,13 +820,12 @@ class RdfBuilder {
 	 * @param TimeValue $value
 	 */
 	private function sayDateLiteral( RdfWriter $writer, TimeValue $value ) {
-		$calendar = $value->getCalendarModel();
-		if ( $calendar == self::GREGORIAN_CALENDAR ) {
-			$writer->value( $this->cleanupDateValue( $value->getTime() ), 'xsd', 'dateTime' );
-			return;
+		$dateValue = $this->dateCleaner->getStandardValue( $value );
+		if ( !is_null( $dateValue ) ) {
+			$writer->value( $dateValue, 'xsd', 'dateTime' );
+		} else {
+			$writer->value( $value->getTime() );
 		}
-		// TODO: add handling for Julian values
-		$writer->value( $value->getTime() );
 	}
 
 	/**
@@ -882,13 +841,12 @@ class RdfBuilder {
 	private function addStatementForTime( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
 			TimeValue $value, $simpleValue = false ) {
 
-		$writer->say( $propertyValueNamespace, $propertyValueLName );
-		$this->sayDateLiteral( $writer, $value );
+		$this->addValueToNode( $writer, $propertyValueNamespace, $propertyValueLName, 'dateTime', $value );
 
 		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) { //FIXME: register separate generators for different output flavors.
 
 			$valueLName = $this->addExpandedValue( $value, "time",
-					array(  'time' => null,
+					array(  'value' => 'dateTime',
 							// TODO: eventually use identifier here
 							'precision' => 'integer',
 							'timezone' => 'integer',
