@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e7c4fa4_ee6a4311",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "on a client\u0027s local ...",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4e59f78e",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "... will be subscribed to be informed of changes to any entities present in that table.",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6e563361",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "Doc please.",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0e4f7fc2",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "subscriberWikiId",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_61948feb",
         "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
         "patchSetId": 6
@@ -89,6 +157,40 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ceebc775",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "Could be a do-while( $count \u003e 0 ) loop. ;-))) No, I hate do-loop.",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6ed5d3b9",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "Remove the \"\u003d array()\" here and below.\n\nOr make it \"array \u0026$continuation \u003d null\".",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_aee68ba9",
         "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
         "patchSetId": 6
@@ -106,6 +208,142 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_4ed817f4",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "Space.",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8ee14f95",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "count",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0ef53f4d",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "Could be null, but doesn\u0027t matter.",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_eebec35f",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "Please move up to where this function is used.",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0e8c5fdb",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "\u003d\u003d?",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2e891bcb",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "Please document why this is not a delete with the same where, order by and limit.",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ceb98779",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "In SQL LIMIT must be after ORDER BY, please stick to that (here and in other queries above).",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8e84efd8",
+        "filename": "client/maintenance/updateSubscriptions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "Wikibase client",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0ede9fdf",
         "filename": "client/tests/phpunit/includes/store/sql/BulkSubscriptionUpdaterTest.php",
         "patchSetId": 6
@@ -117,6 +355,23 @@
       "writtenOn": "2015-03-20T12:01:25Z",
       "side": 1,
       "message": "really?",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_180592c4",
+        "filename": "client/tests/phpunit/includes/store/sql/BulkSubscriptionUpdaterTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "Repo?",
       "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -151,6 +406,23 @@
       "writtenOn": "2015-03-20T11:58:17Z",
       "side": 1,
       "message": "oh really? :)",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0e21bff6",
+        "filename": "client/tests/phpunit/includes/store/sql/BulkSubscriptionUpdaterTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T12:25:17Z",
+      "side": 1,
+      "message": "Repo?",
       "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
