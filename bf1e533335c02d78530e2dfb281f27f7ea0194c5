@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_194eeb3d",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-20T13:48:38Z",
+      "side": 1,
+      "message": "I realize this method does two things (update continuation and return list of entity ids), but slurpSubscriptions couldn\u0027t be more unclear to me.\n\nmaybe \"buildSubscriptionsFromRows\" or \"makeSubscriptionsFromRows\" or \"getSubscriptionsFromRows\" or processEntityUsageRows\" or \"getSubscribedEntities\" would be more clear.",
+      "revId": "bf1e533335c02d78530e2dfb281f27f7ea0194c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
