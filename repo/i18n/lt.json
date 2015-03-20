@@ -3,7 +3,8 @@
 		"authors": [
 			"Eitvys200",
 			"Hugo.arg",
-			"Aswanas"
+			"Aswanas",
+			"Pofka"
 		]
 	},
 	"wikibase-entity-item": "įrašas",
@@ -46,5 +47,8 @@
 	"wikibase-entityselector-more": "daugiau",
 	"wikibase-anonymouseditwarning": "Dėmesio: Jūs neprisijungęs.\nJūsų IP adresas bus įrašytas į šio $1 keitimų istoriją.",
 	"wikibase-itembytitle-summary": "Ypatingas atvejis:ItemByTitle naudojama surasti atitinkamą elementą tam tikrame puslapyje atverstoje svetainėje. <br /> kairiajame laukelyje, \"Site:\", jūs įvedate kalbos ir svetainės kodą. <br /> dešiniajame laukelyje, \"Page:\", jūs turite įvesti tikslų puslapio pavadinimą, kaip jis atrodo atverstoje svetainėje.",
+	"wikibase-itemdisambiguation-lookup-language": "Kalbos kodas:",
+	"wikibase-modifyterm-language": "Kalbos kodas:",
+	"wikibase-entitieswithoutlabel-label-language": "Kalbos kodas:",
 	"wikibase-restoreold": "perkrauti"
 }

@@ -5,7 +5,6 @@
 		]
 	},
 	"wikibase-desc": "Archivije de date strutturate",
-	"specialpages-group-wikibaserepo": "Archivije Uicchibase",
 	"wikibase-entity-item": "vôsce",
 	"wikibase-entity-property": "probbietà",
 	"wikibase-entity-query": "inderrogazione",
@@ -52,7 +51,7 @@
 	"wikibase-itembytitle-lookup-site": "Site:",
 	"wikibase-itembytitle-lookup-page": "Pàgene:",
 	"wikibase-itembytitle-submit": "Cirche",
-	"wikibase-itemdisambiguation-lookup-language": "Lènghe:",
+	"wikibase-itemdisambiguation-lookup-language": "Code d'a lènghe:",
 	"wikibase-itemdisambiguation-lookup-label": "Etichette:",
 	"wikibase-itemdisambiguation-submit": "Cirche",
 	"wikibase-newitem-fieldset": "Ccreje 'na vôscia nove",

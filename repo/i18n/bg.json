@@ -4,7 +4,8 @@
 			"Spiritia",
 			"පසිඳු කාවින්ද",
 			"Borislav",
-			"DCLXVI"
+			"DCLXVI",
+			"StanProg"
 		]
 	},
 	"wikibase-desc": "Хранилище на структурирани данни",
@@ -18,6 +19,7 @@
 	"wikibase-addreference": "добавяне на източник",
 	"wikibase-save-inprogress": "Съхраняване...",
 	"wikibase-remove-inprogress": "Премахване...",
+	"wikibase-label-empty": "Все още не е зададен етикет",
 	"wikibase-description-empty": "Все още не е въведено описание",
 	"wikibase-description-edit-placeholder": "въведете описание",
 	"wikibase-sitelink-site-edit-placeholder": "сайт",
@@ -30,6 +32,7 @@
 	"wikibase-restore-title": "Възстановяване на стара версия на \"$1\"",
 	"wikibase-aliases-label": "Среща се и като:",
 	"wikibase-propertypage-datatype": "Тип на данните",
+	"wikibase-statementview-rank-normal": "Нормален ранг",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|източник|източници}}",
 	"wikibase-snakview-property-input-placeholder": "свойство",
 	"wikibase-snakview-variations-somevalue-label": "неизвестна стойност",

@@ -7,7 +7,8 @@
 			"Whym",
 			"Zolo",
 			"아라",
-			"Los688"
+			"Los688",
+			"朝彦"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -78,6 +79,7 @@
 	"wikibase-propertypage-datatype": "データ型",
 	"wikibase-claimview-snak-tooltip": "「$1」という名前のプロパティに対する値を入力します。プロパティに指定する値がないか指定する値が不明な場合、カスタム値を入力する代わりに、値の入力ボックス横のアイコンをクリックして他の選択肢を選ぶこともできます。",
 	"wikibase-claimview-snak-new-tooltip": "プロパティを指定したら、それに対応する値を入力できます。プロパティに指定する値がないか指定する値が不明な場合、カスタム値を入力する代わりに、値の入力ボックス横のアイコンをクリックして他の選択肢を選ぶこともできます。",
+	"wikibase-statementview-rank-normal": "標準ランク",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "個の{{PLURAL:$1|出典}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|$1個の出典}}がまだ保存されていません",
 	"wikibase-snakview-property-input-placeholder": "プロパティ",
