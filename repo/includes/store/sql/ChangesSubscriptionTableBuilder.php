@@ -122,13 +122,13 @@ class ChangesSubscriptionTableBuilder {
 	private function processSubscriptionBatch( &$continuation = array() ) {
 		$db = $this->loadBalancer->getConnection( DB_MASTER );
 
-		$entityPerPage = $this->getSubscriptionBatch( $db, $continuation );
+		$subscriptionsPerItemBatch = $this->getSubscriptionsPerItemBatch( $db, $continuation );
 
-		if ( empty( $entityPerPage ) ) {
+		if ( empty( $subscriptionsPerItemBatch ) ) {
 			return 0;
 		}
 
-		$count = $this->insertSubscriptionBatch( $db, $entityPerPage );
+		$count = $this->insertSubscriptionBatch( $db, $subscriptionsPerItemBatch );
 
 		$this->loadBalancer->reuseConnection( $db );
 
@@ -170,7 +170,7 @@ class ChangesSubscriptionTableBuilder {
 	 *
 	 * @return array[] An associative array mapping item IDs to lists of site IDs.
 	 */
-	private function getSubscriptionBatch( DatabaseBase $db, &$continuation = array() ) {
+	private function getSubscriptionsPerItemBatch( DatabaseBase $db, &$continuation = array() ) {
 
 		if ( empty( $continuation ) ) {
 			$continuationCondition = '1';
@@ -195,33 +195,33 @@ class ChangesSubscriptionTableBuilder {
 			)
 		);
 
-		return $this->slurpSubscriptions( $res, $continuation );
+		return $this->makeSubscriptionBatchFromRows( $res, $continuation );
 	}
 
 	/**
 	 * @param ResultWrapper $res A result set with the ips_item_id and ips_site_id fields
 	 *        set for each row.
-	 * @param array &$continuation
+	 * @param array &$continuation Single item ID => site ID pair or empty.
 	 *
 	 * @return array[] An associative array mapping item IDs to lists of site IDs.
 	 */
-	private function slurpSubscriptions( ResultWrapper $res, &$continuation = array() ) {
-		$entityPerPage = array();
+	private function makeSubscriptionBatchFromRows( ResultWrapper $res, &$continuation = array() ) {
+		$subscriptionsPerItem = array();
 
 		$currentId = 0;
-		$key = null;
+		$itemId = null;
 
 		foreach ( $res as $row ) {
 			if ( $row->ips_item_id != $currentId ) {
-				$currentId = $row->ips_item_id;
-				$key = ItemId::newFromNumber( $currentId )->getSerialization();
+				$currentItemId = $row->ips_item_id;
+				$itemId = ItemId::newFromNumber( $currentItemId )->getSerialization();
 			}
 
-			$entityPerPage[$key][] = $row->ips_site_id;
-			$continuation = array( $currentId, $row->ips_site_id );
+			$subscriptionsPerItem[$itemId][] = $row->ips_site_id;
+			$continuation = array( $currentItemId, $row->ips_site_id );
 		}
 
-		return $entityPerPage;
+		return $subscriptionsPerItem;
 	}
 
 	/**
