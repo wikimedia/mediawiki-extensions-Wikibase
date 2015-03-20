@@ -86,6 +86,57 @@
       "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8ecaaf1b",
+        "filename": "client/tests/phpunit/includes/store/sql/BulkSubscriptionUpdaterTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-20T11:58:17Z",
+      "side": 1,
+      "message": "i would optimize these. can be done in follow up though.",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_eec9e329",
+        "filename": "client/tests/phpunit/includes/store/sql/BulkSubscriptionUpdaterTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-20T11:58:17Z",
+      "side": 1,
+      "message": "oh really? :)",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2e4cbbca",
+        "filename": "repo/maintenance/populateChangesSubscription.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-20T11:58:17Z",
+      "side": 1,
+      "message": "Wikibase Repo",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
