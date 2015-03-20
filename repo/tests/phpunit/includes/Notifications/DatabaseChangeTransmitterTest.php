@@ -3,7 +3,7 @@
 namespace Wikibase\Tests\Repo;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityChange;
+use Wikibase\Changes\EntityChange;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\WikibaseRepo;
 

@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Notifications;
 use InvalidArgumentException;
 use Revision;
 use User;
-use Wikibase\EntityChange;
+use Wikibase\Changes\EntityChange;
 use Wikibase\EntityContent;
-use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Changes\EntityChangeFactory;
 
 /**
  * Class for generating and submitting change notifications in different situations.

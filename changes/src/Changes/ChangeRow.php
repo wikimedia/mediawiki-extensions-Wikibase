@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Changes;
 
 use IORMTable;
 use MWException;

@@ -159,7 +159,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetEntityChangeFactory() {
 		$factory = $this->getWikibaseRepo()->getEntityChangeFactory();
-		$this->assertInstanceOf( 'Wikibase\Lib\Changes\EntityChangeFactory', $factory );
+		$this->assertInstanceOf( 'Wikibase\Changes\EntityChangeFactory', $factory );
 	}
 
 	public function testNewItemHandler() {

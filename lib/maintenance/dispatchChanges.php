@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Wikibase\Changes\ChangesTable;
 use Wikibase\Lib\Store\SiteLinkTable;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';

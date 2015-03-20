@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Notifications;
 
-use Wikibase\Change;
-use Wikibase\ChangeRow;
+use Wikibase\Changes\Change;
+use Wikibase\Changes\ChangeRow;
 
 /**
  * Notification channel based on a database table.

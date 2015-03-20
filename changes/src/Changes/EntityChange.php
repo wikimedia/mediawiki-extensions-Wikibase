@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Changes;
 
 use MWException;
 use RecentChange;
@@ -10,6 +10,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityContent;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

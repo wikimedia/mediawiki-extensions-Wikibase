@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Wikibase\Changes\ChangesTable;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Changes;
 
-use Wikibase\Change;
+use Wikibase\Changes\Change;
 
 /**
  * Interface for service objects implementing some transformation on a list of Change objects.

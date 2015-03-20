@@ -1,13 +1,11 @@
 <?php
 
-namespace Wikibase\Lib\Changes;
+namespace Wikibase\Changes;
 
 use InvalidArgumentException;
 use MWException;
-use Wikibase\ChangesTable;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
 
 /**

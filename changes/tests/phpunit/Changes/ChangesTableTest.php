@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Changes\Test;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
-use Wikibase\ChangesTable;
+use Wikibase\Changes\ChangesTable;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\ItemId;
@@ -121,7 +121,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 	 */
 	public function testGetClassForType( array $data ) {
 		// todo: test for more entity and change types
-		$this->assertEquals( 'Wikibase\ItemChange', ChangesTable::getClassForType( $data['type'] ) );
+		$this->assertEquals( 'Wikibase\Changes\ItemChange', ChangesTable::getClassForType( $data['type'] ) );
 	}
 
 	/**

@@ -1,9 +1,12 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Changes;
 
 use IORMRow;
 use MWException;
+use ORMTable;
+use Wikibase\ChunkAccess; //FIXME
+use Wikibase\Settings;    //FIXME
 
 /**
  * Class representing the wb_changes table.
@@ -47,7 +50,7 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 	 * @return string
 	 */
 	public function getRowClass() {
-		return 'Wikibase\ChangeRow';
+		return 'Wikibase\Changes\ChangeRow';
 	}
 
 	/**
@@ -79,11 +82,11 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 	 */
 	public static function getClassForType( $type ) {
 		$typeMap = Settings::get( 'changeHandlers' );
-		return array_key_exists( $type, $typeMap ) ? $typeMap[$type] : 'Wikibase\ChangeRow';
+		return array_key_exists( $type, $typeMap ) ? $typeMap[$type] : 'Wikibase\Changes\ChangeRow';
 	}
 
 	/**
-	 * Factory method to construct a new Wikibase\Change instance.
+	 * Factory method to construct a new Wikibase\Changes\Change instance.
 	 *
 	 * @since 0.1
 	 *

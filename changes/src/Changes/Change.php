@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Changes;
 
 /**
  * Interface for objects representing changes.

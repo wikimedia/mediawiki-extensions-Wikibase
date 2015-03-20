@@ -1,9 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Changes;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOp;
+use Wikibase\WikibaseDiffOpFactory;
 
 /**
  * Class for changes that can be represented as a Diff.

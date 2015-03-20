@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Changes\Test;
 
-use Wikibase\Change;
-use Wikibase\ChangeRow;
-use Wikibase\ChangesTable;
+use Wikibase\Changes\Change;
+use Wikibase\Changes\ChangeRow;
+use Wikibase\Changes\ChangesTable;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -15,10 +15,10 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\DiffChange;
-use Wikibase\EntityChange;
+use Wikibase\Changes\DiffChange;
+use Wikibase\Changes\EntityChange;
 use Wikibase\EntityFactory;
-use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Changes\EntityChangeFactory;
 
 /**
  * Test change data for ChangeRowTest
@@ -70,7 +70,7 @@ final class TestChanges {
 		);
 
 		$changeClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
+			Item::ENTITY_TYPE => 'Wikibase\Changes\ItemChange',
 		);
 
 		$factory = new EntityChangeFactory(
@@ -206,7 +206,7 @@ final class TestChanges {
 
 			$rev = 1000;
 
-			/* @var EntityChange $change */
+			/* @var \Wikibase\Changes\EntityChange $change */
 			foreach ( $changes as $key => $change ) {
 				$change->setComment( "$key:1|" );
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Changes\Test;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
@@ -8,8 +8,8 @@ use Exception;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
+use Wikibase\Changes\EntityChange;
+use Wikibase\Changes\ItemChange;
 
 /**
  * @covers Wikibase\ItemChange
@@ -32,7 +32,7 @@ class ItemChangeTest extends EntityChangeTest {
 	 * @return string
 	 */
 	protected function getRowClass() {
-		return 'Wikibase\ItemChange';
+		return 'Wikibase\Changes\ItemChange';
 	}
 
 	public function entityProvider() {

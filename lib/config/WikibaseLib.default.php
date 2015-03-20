@@ -67,25 +67,25 @@ $wgWBLibDefaultSettings = array(
 	'withoutTermWeight' => false,
 
 	'changeHandlers' => array(
-		'wikibase-item~add' => 'Wikibase\ItemChange',
-		'wikibase-property~add' => 'Wikibase\EntityChange',
-		'wikibase-query~add' => 'Wikibase\EntityChange',
+		'wikibase-item~add' => 'Wikibase\Changes\ItemChange',
+		'wikibase-property~add' => 'Wikibase\Changes\EntityChange',
+		'wikibase-query~add' => 'Wikibase\Changes\EntityChange',
 
-		'wikibase-item~update' => 'Wikibase\ItemChange',
-		'wikibase-property~update' => 'Wikibase\EntityChange',
-		'wikibase-query~update' => 'Wikibase\EntityChange',
+		'wikibase-item~update' => 'Wikibase\Changes\ItemChange',
+		'wikibase-property~update' => 'Wikibase\Changes\EntityChange',
+		'wikibase-query~update' => 'Wikibase\Changes\EntityChange',
 
-		'wikibase-item~remove' => 'Wikibase\ItemChange',
-		'wikibase-property~remove' => 'Wikibase\EntityChange',
-		'wikibase-query~remove' => 'Wikibase\EntityChange',
+		'wikibase-item~remove' => 'Wikibase\Changes\ItemChange',
+		'wikibase-property~remove' => 'Wikibase\Changes\EntityChange',
+		'wikibase-query~remove' => 'Wikibase\Changes\EntityChange',
 
-		'wikibase-item~refresh' => 'Wikibase\ItemChange',
-		'wikibase-property~refresh' => 'Wikibase\EntityChange',
-		'wikibase-query~refresh' => 'Wikibase\EntityChange',
+		'wikibase-item~refresh' => 'Wikibase\Changes\ItemChange',
+		'wikibase-property~refresh' => 'Wikibase\Changes\EntityChange',
+		'wikibase-query~refresh' => 'Wikibase\Changes\EntityChange',
 
-		'wikibase-item~restore' => 'Wikibase\ItemChange',
-		'wikibase-property~restore' => 'Wikibase\EntityChange',
-		'wikibase-query~restore' => 'Wikibase\EntityChange',
+		'wikibase-item~restore' => 'Wikibase\Changes\ItemChange',
+		'wikibase-property~restore' => 'Wikibase\Changes\EntityChange',
+		'wikibase-query~restore' => 'Wikibase\Changes\EntityChange',
 	),
 
 	'dataTypes' => array(

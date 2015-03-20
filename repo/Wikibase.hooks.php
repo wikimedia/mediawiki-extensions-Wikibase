@@ -24,6 +24,8 @@ use SkinTemplate;
 use SpecialSearch;
 use Title;
 use User;
+use Wikibase\Changes\ChangesTable;
+use Wikibase\Changes\EntityChange;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\LanguageNameLookup;

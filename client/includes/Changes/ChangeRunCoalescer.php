@@ -4,10 +4,10 @@ namespace Wikibase\Client\Changes;
 
 use Exception;
 use MWException;
-use Wikibase\Change;
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
-use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Changes\Change;
+use Wikibase\Changes\EntityChange;
+use Wikibase\Changes\ItemChange;
+use Wikibase\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**

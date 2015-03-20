@@ -1,17 +1,17 @@
 <?php
 
-namespace Wikibase\Lib\Test\Change;
+namespace Wikibase\Changes\Test;
 
-use Wikibase\ChangesTable;
+use Wikibase\Changes\ChangesTable;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityChange;
+use Wikibase\Changes\EntityChange;
 use Wikibase\EntityFactory;
-use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Changes\EntityChangeFactory;
 
 /**
  * @covers Wikibase\Lib\EntityChangeFactory
@@ -41,7 +41,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$changeClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
+			Item::ENTITY_TYPE => 'Wikibase\Changes\ItemChange',
 		);
 
 		$factory = new EntityChangeFactory(
@@ -55,8 +55,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function newForEntityProvider() {
 		return array(
-			'add item' => array( EntityChange::ADD, new ItemId( 'Q17' ), 'Wikibase\ItemChange' ),
-			'remove property' => array( EntityChange::REMOVE, new PropertyId( 'P17' ), 'Wikibase\EntityChange' ),
+			'add item' => array( EntityChange::ADD, new ItemId( 'Q17' ), 'Wikibase\Changes\ItemChange' ),
+			'remove property' => array( EntityChange::REMOVE, new PropertyId( 'P17' ), 'Wikibase\Changes\EntityChange' ),
 		);
 	}
 

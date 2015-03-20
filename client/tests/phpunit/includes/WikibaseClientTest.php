@@ -198,7 +198,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetEntityChangeFactory() {
 		$factory = $this->getWikibaseClient()->getEntityChangeFactory();
-		$this->assertInstanceOf( 'Wikibase\Lib\Changes\EntityChangeFactory', $factory );
+		$this->assertInstanceOf( 'Wikibase\Changes\EntityChangeFactory', $factory );
 	}
 
 	public function testGetChangeHandler() {

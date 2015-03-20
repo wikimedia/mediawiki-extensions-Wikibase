@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Changes\Test;
 
 use Revision;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityChange;
+use Wikibase\Changes\EntityChange;
 use Wikibase\ItemContent;
 
 /**
@@ -59,7 +59,7 @@ class EntityChangeTest extends DiffChangeTest {
 	 * @return string
 	 */
 	protected function getRowClass() {
-		return 'Wikibase\EntityChange';
+		return 'Wikibase\Changes\EntityChange';
 	}
 
 	/**

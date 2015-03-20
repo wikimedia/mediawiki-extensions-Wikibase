@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Notifications;
 
-use Wikibase\Change;
+use Wikibase\Changes\Change;
 
 /**
  * Dummy notification channel. All notifications are ignored.

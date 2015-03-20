@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangeNotificationJob;
-use Wikibase\ChangesTable;
+use Wikibase\Changes\ChangesTable;
 
 /**
  * @covers Wikibase\ChangeNotificationJob

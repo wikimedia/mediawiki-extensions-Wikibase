@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
 use Title;
-use Wikibase\Change;
+use Wikibase\Changes\Change;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\PageUpdater;
@@ -14,7 +14,7 @@ use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityChange;
+use Wikibase\Changes\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\NamespaceChecker;

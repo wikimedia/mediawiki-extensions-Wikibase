@@ -39,7 +39,7 @@ use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Changes\EntityChangeFactory;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\FormatterLabelLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
@@ -672,7 +672,7 @@ final class WikibaseClient {
 	public function getEntityChangeFactory() {
 		//TODO: take this from a setting or registry.
 		$changeClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
+			Item::ENTITY_TYPE => 'Wikibase\Changes\ItemChange',
 			// Other types of entities will use EntityChange
 		);
 

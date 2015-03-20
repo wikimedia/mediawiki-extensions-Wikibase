@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Changes;
 
 use Diff\DiffOp\Diff\Diff;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;

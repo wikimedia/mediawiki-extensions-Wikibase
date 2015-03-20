@@ -7,12 +7,12 @@ use InvalidArgumentException;
 use IORMRow;
 use MWException;
 use Title;
-use Wikibase\Change;
+use Wikibase\Changes\Change;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
+use Wikibase\Changes\EntityChange;
+use Wikibase\Changes\ItemChange;
 use Wikibase\SiteLinkCommentCreator;
 
 /**

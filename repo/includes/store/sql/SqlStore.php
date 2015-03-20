@@ -9,6 +9,7 @@ use HashBagOStuff;
 use MWException;
 use ObjectCache;
 use Revision;
+use Wikibase\Changes\ChangesTable;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;

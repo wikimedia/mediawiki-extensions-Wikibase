@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Changes\Test;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\MapDiffer;
-use Wikibase\DiffChange;
+use Wikibase\Changes\DiffChange;
 
 /**
  * @covers Wikibase\DiffChange

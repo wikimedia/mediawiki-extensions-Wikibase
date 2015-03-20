@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Changes\Test;
 
-use Wikibase\ChangeRow;
-use Wikibase\ChangesTable;
+use Wikibase\Changes\ChangeRow;
+use Wikibase\Changes\ChangesTable;
 
 /**
  * @covers Wikibase\ChangeRow
@@ -108,7 +108,7 @@ class ChangeRowTest extends \ORMRowTest {
 		$changes = $this->getTestChanges();
 		$cases = array();
 
-		/* @var \Wikibase\EntityChange $change */
+		/* @var \Wikibase\Changes\EntityChange $change */
 		foreach ( $changes as $change ) {
 			$cases[] = array(
 				$change->toArray(),

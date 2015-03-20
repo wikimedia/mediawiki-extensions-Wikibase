@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use HashBagOStuff;
 use ObjectCache;
+use Wikibase\Changes\ChangesTable;
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\Store\TitleFactory;

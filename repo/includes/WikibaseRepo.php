@@ -29,7 +29,7 @@ use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Changes\EntityChangeFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\ContentLanguages;
@@ -258,7 +258,7 @@ class WikibaseRepo {
 	public function getEntityChangeFactory() {
 		//TODO: take this from a setting or registry.
 		$changeClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
+			Item::ENTITY_TYPE => 'Wikibase\Changes\ItemChange',
 			// Other types of entities will use EntityChange
 		);
 

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\ChangesTable;
+use Wikibase\Changes\ChangesTable;
 use Wikibase\Client\Usage\NullSubscriptionManager;
 use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\Client\Usage\SubscriptionManager;
