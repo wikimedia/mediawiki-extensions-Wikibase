@@ -155,8 +155,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		{
 			return array ();
 		}
-		$data = trim( file_get_contents( $filename ) );
-		$data = explode( "\n", $data );
+		$data = file_get_contents( $filename );
+		$data = explode( "\n", trim ( $data ) );
 		sort( $data );
 		return $data;
 	}
