@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f9da0f77",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-20T14:03:59Z",
+      "side": 1,
+      "message": "puring?",
+      "revId": "1ba3fec8d3a20659771b114f60b1fe795fe2f6bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_99519bdb",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-20T14:03:59Z",
+      "side": 1,
+      "message": "wiki or site id? they are usually the same, but still I would say site ids.",
+      "revId": "1ba3fec8d3a20659771b114f60b1fe795fe2f6bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_596f838f",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-20T14:03:59Z",
+      "side": 1,
+      "message": "if any clients already have arbitrary access and usage tracking, then updateSubscriptions.php needs to also be run for each of them at this point.  though since dispatchChanges doesn\u0027t use the table, maybe not horrible but still think the script should be run for consistency purposes.",
+      "revId": "1ba3fec8d3a20659771b114f60b1fe795fe2f6bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_796cbf99",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-20T14:03:59Z",
+      "side": 1,
+      "message": "not :)",
+      "revId": "1ba3fec8d3a20659771b114f60b1fe795fe2f6bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
