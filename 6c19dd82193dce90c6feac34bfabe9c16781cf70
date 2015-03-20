@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_741a861d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T16:34:21Z",
+      "side": 1,
+      "message": "What does \"fix\" mean? Please be more specific. Also try to add a Phabricator ticket number if there is one.",
+      "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b4e33e02",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T16:34:21Z",
+      "side": 1,
+      "message": "Why is this not set if the text is empty?",
+      "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f4dd3648",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T16:34:21Z",
+      "side": 1,
+      "message": "lang before dir would be nice, but that\u0027s not really a problem, obviously.",
+      "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_54ec2af2",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.labelview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T16:34:21Z",
+      "side": 1,
+      "message": "As before.",
+      "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_74e926e0",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.labelview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T16:34:21Z",
+      "side": 1,
+      "message": "As before.",
+      "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_14f232ce",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-20T16:34:21Z",
+      "side": 1,
+      "message": "Why?",
+      "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
