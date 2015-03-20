@@ -169,7 +169,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			return array ();
 		}
 		$data = file_get_contents( $filename );
-		$data = explode( "\n", $data );
+		$data = explode( "\n", trim ( $data ) );
 		sort( $data );
 		return $data;
 	}
@@ -206,7 +206,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$format = EasyRdf_Format::getFormat( "ntriples" );
 		$serialiser = $format->newSerialiser();
 		$data = $serialiser->serialise( $graph, "ntriples" );
-		$dataSplit = explode( "\n", $data );
+		$dataSplit = explode( "\n", trim( $data ) );
 		sort( $dataSplit );
 		return $dataSplit;
 	}
