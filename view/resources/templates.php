@@ -143,14 +143,14 @@ HTML;
 	$templates['wikibase-aliasesview'] =
 <<<HTML
 <div class="wikibase-aliasesview $1">
-	<ul class="wikibase-aliasesview-list">$2</ul>
+	<ul class="wikibase-aliasesview-list" dir="auto">$2</ul>
 	<!-- wikibase-toolbar -->$3
 </div>
 HTML;
 
 	$templates['wikibase-aliasesview-list-item'] =
 <<<HTML
-<li class="wikibase-aliasesview-list-item" dir="auto">$1</li>
+<li class="wikibase-aliasesview-list-item">$1</li>
 HTML;
 
 	$templates['wikibase-entitytermsview'] =
