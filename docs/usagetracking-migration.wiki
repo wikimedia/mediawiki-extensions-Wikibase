@@ -1,0 +1,58 @@
+This document describes the deployment process necessary for migrating from "naive" sitelink
+based dispatching and puring to the full usage tracking needed to support arbitrary access to
+entities from wikitext.
+
+Overview of the tables involved (using "repowiki" and "clientwiki" as the database name and site
+ID for the repo and respective client wiki):
+
+* repowiki.wb_items_per_site:  The sitelinks stored on the repo, mapping entity IDs to page titles on client wikis.
+* repowiki.wb_changes_subscription:  (new) Subscriptions to change notifications, mapping entity IDs to client wiki ids.
+* clientwiki.wbc_entity_usage: (new) Tracks the usage of entities on the client, including the information which page uses which aspect of which entity.
+
+For deferred deployment of schema changes, usage of the new tables can be disabled using the appropriate feature switches:
+* To not use repowiki.wb_changes_subscription, set useLegacyChangesSubscription = true (on both client and repo wikis).
+* To not use clientwiki.wbc_entity_usage, set useLegacyUsageIndex = true on the client wiki.
+
+Deployment of the new usage tracking scheme can be done in three steps:
+
+
+== Create subscription table on the repo ==
+
+To set up the subscription tracking table on the repo:
+* Deploy the schema change and set useLegacyChangesSubscription = false.
+** If useLegacyChangesSubscription is false, update.php will create the table automatically.
+** If useLegacyChangesSubscription is true, apply repo/sql/changes_subscription.sql manually.
+* Run repo/maintenance/populateChangesSubscription.php to initialize the wb_changes_subscription table based on repowiki.wb_items_per_site.
+
+NOTE: the dispatchChanges.php script does not yet use wb_changes_subscription at all. This means
+that if a client wiki uses an entity ''only'' via arbitrary access (i.e. no page on that wiki is
+linked to that entity via a sitelink), changes to the entity will nto cause a change notification
+to the client wiki. This issue is tracked at <https://phabricator.wikimedia.org/T66590>.
+
+
+== Start tracking entity usage on the client wikis ==
+
+To enable usage tracking on a client wiki:
+* Deploy the schema change and set useLegacyUsageIndex = false.
+** If useLegacyUsageIndex is false, update.php will create the table automatically.
+** If useLegacyUsageIndex is true, apply client/sql/entity_usage.sql manually.
+* Run client/maintenance/populateEntityUsage.php to initialize the wbc_entity_usage table based on repowiki.wb_items_per_site.
+* Enable usage tracking by setting useLegacyUsageIndex = false.
+* If desired, enable arbitrary access by setting allowArbitraryDataAccess = true
+** Caveat: as long as useLegacyChangesSubscription on the repo, pages using items that are not connected to any page on the local wiki via a sitelink will not get purged automatically when the item is edited.
+
+
+== Start tracking client subscriptions based on entity usage ==
+To enable subscription tracking based on entity usage:
+* Make sure the client has the wbc_entity_usage table set up, see above.
+* Make sure the repo has the wb_changes_subscription table set up, see above.
+* Run client/maintenance/updateSubscriptions.php to put entries into repowiki.wb_changes_subscription based on the client wiki's wbc_entity_usage table.
+* Enable subscription tracking by setting useLegacyChangesSubscription = false.
+* If desired, enable arbitrary access by setting allowArbitraryDataAccess = true
+** Caveat: as long as useLegacyChangesSubscription on the repo, pages using items that are not connected to any page on the local wiki via a sitelink will not get purged automatically when the item is edited.
+
+
+== Start using subscriptions for dispatching ==
+
+This is not yet implemented, see <https://phabricator.wikimedia.org/T66590>
+and <https://phabricator.wikimedia.org/T90755>.
