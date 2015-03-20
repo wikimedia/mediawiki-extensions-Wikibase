@@ -43,6 +43,13 @@ of the extensions in your LocalSettings.php file:
 define( 'WB_EXPERIMENTAL_FEATURES', true );
 ```
 
+If you are running Wikibase with hhvm, you need to enable [zend compat](http://docs.hhvm.com/manual/en/configuration.zend.compat.php)
+in your php.ini:
+
+```
+hhvm.enable_zend_compat = true
+```
+
 Wikibase depends on various libraries such as [DataValues](https://github.com/DataValues/) components,
 and uses [Composer](http://getcomposer.org/) to make it easy to install and manage those.
 
