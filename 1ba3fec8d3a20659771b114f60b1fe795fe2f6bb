@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_9908bbdd",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-20T14:07:33Z",
+      "side": 1,
+      "message": "site id. must match what\u0027s in items_per_site.",
+      "parentUuid": "6e7c4fa4_99519bdb",
+      "revId": "1ba3fec8d3a20659771b114f60b1fe795fe2f6bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_596f838f",
         "filename": "docs/usagetracking-migration.wiki",
         "patchSetId": 3
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_79f35fe3",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-20T14:07:33Z",
+      "side": 1,
+      "message": "Yes, that\u0027s correct: if some clients already have arbitrary access, you have to perform the steps described in [[#Start tracking client subscriptions based on entity usage]].",
+      "parentUuid": "6e7c4fa4_596f838f",
+      "revId": "1ba3fec8d3a20659771b114f60b1fe795fe2f6bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_796cbf99",
         "filename": "docs/usagetracking-migration.wiki",
         "patchSetId": 3
@@ -64,6 +100,23 @@
       "writtenOn": "2015-03-20T14:03:59Z",
       "side": 1,
       "message": "not :)",
+      "revId": "1ba3fec8d3a20659771b114f60b1fe795fe2f6bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_19fcabb1",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-20T14:07:33Z",
+      "side": 1,
+      "message": "add blank line.",
       "revId": "1ba3fec8d3a20659771b114f60b1fe795fe2f6bb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
