@@ -150,7 +150,7 @@ HTML;
 
 	$templates['wikibase-aliasesview-list-item'] =
 <<<HTML
-<li class="wikibase-aliasesview-list-item" dir="auto">$1</li>
+<li class="wikibase-aliasesview-list-item">$1</li>
 HTML;
 
 	$templates['wikibase-entitytermsview'] =
