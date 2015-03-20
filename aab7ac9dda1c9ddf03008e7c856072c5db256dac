@@ -16,6 +16,24 @@
       "revId": "aab7ac9dda1c9ddf03008e7c856072c5db256dac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9902fb0a",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-20T12:51:58Z",
+      "side": 1,
+      "message": "The table is defined without giving a width here, the resulting width may depend on the DB type and version, I suppose.",
+      "parentUuid": "6e7c4fa4_0e821f98",
+      "revId": "aab7ac9dda1c9ddf03008e7c856072c5db256dac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
