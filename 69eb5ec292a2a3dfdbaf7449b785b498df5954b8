@@ -89,6 +89,23 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_0ede9fdf",
+        "filename": "client/tests/phpunit/includes/store/sql/BulkSubscriptionUpdaterTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-20T12:01:25Z",
+      "side": 1,
+      "message": "really?",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_8ecaaf1b",
         "filename": "client/tests/phpunit/includes/store/sql/BulkSubscriptionUpdaterTest.php",
         "patchSetId": 6
