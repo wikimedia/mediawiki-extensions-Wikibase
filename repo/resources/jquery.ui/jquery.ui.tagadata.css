@@ -49,7 +49,6 @@ ul.tagadata li.tagadata-choice .tagadata-label input {
 	width: inherit;
 	background: transparent;
 	outline: none;
-	direction: ltr; /* to be flipped */
 }
 
 ul.tagadata li.tagadata-choice-empty,
