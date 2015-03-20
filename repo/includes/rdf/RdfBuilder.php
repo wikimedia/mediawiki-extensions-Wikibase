@@ -83,6 +83,7 @@ class RdfBuilder {
 	// Gregorian calendar link.
 	// I'm not very happy about hardcoding it here but see no better way so far
 	const GREGORIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985727';
+	const JULIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985786';
 
 	public static $rankMap = array(
 		Statement::RANK_DEPRECATED => self::WIKIBASE_RANK_DEPRECATED,
@@ -795,6 +796,34 @@ class RdfBuilder {
 	}
 
 	/**
+	 * Get Julian date value and return it as Gregorian date
+	 * @param string $dateValue
+	 * @return string|null Value compatible with xsd:dateTime type, null if we failed to parse
+	 */
+	private function julianDateValue( $dateValue ) {
+		list($date, $time) = explode( "T", $dateValue, 2 );
+		if( $date[0] == "-" ) {
+			list($y, $m, $d) = explode( "-", substr( $date, 1 ), 3 );
+			$y = -(int)$y;
+		} else {
+			list($y, $m, $d) = explode( "-", $date, 3 );
+			$y = (int)$y;
+		}
+		$jd = cal_to_jd( CAL_JULIAN, $m, $d, $y );
+		if( $jd == 0 ) {
+			// that means the date is broken
+			return null;
+		}
+		// PHP API for Julian is kind of awful
+		list($m, $d, $y) = explode( '/', jdtogregorian( $jd ) );
+		// This is a bit weird since xsd:dateTime requires >=4 digit always,
+		// and leading 0 is not allowed for 5 digits
+		// But sprintf counts - as digit
+		// See: http://www.w3.org/TR/xmlschema-2/#dateTime
+		return sprintf( "%s%04d-%02d-%02dT%s", ($y < 0)? "-":"", abs( $y ), $m, $d, $time );
+	}
+
+	/**
 	 * Get literal that reperesent the date in RDF
 	 * If we can convert it to xsd:dateTime, we'll do that.
 	 * Otherwise, we leave it as string
@@ -803,10 +832,15 @@ class RdfBuilder {
 	 */
 	private function getDateLiteral( TimeValue $value ) {
 		$calendar = $value->getCalendarModel();
+		$dateValue = null;
 		if( $calendar == self::GREGORIAN_CALENDAR ) {
-			return new \EasyRdf_Literal_DateTime( $this->cleanupDateValue( $value->getTime() ) );
+			$dateValue = $this->cleanupDateValue( $value->getTime() );
+		} else if( $calendar == self::JULIAN_CALENDAR ) {
+			$dateValue = $this->julianDateValue( $value->getTime() );
 		}
-		// TODO: add handling for Julian values
+		if(	!is_null( $dateValue ) ) {
+			return new \EasyRdf_Literal_DateTime( $dateValue );
+		}
 		return new EasyRdf_Literal( $value->getTime() );
 	}
 
