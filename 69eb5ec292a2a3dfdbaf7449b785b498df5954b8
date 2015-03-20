@@ -89,6 +89,23 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_aee68ba9",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-20T12:03:59Z",
+      "side": 1,
+      "message": "nitpick on the spacing here, if you care to fix.",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0ede9fdf",
         "filename": "client/tests/phpunit/includes/store/sql/BulkSubscriptionUpdaterTest.php",
         "patchSetId": 6
