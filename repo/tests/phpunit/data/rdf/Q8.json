@@ -212,7 +212,71 @@
                 },
                 "type": "statement",
                 "rank": "normal"
+            },
+            {
+                "id": "TEST-Dates-8-11",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "-00000002010-02-29T00:00:00Z",
+                            "timezone": 0,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 9,
+                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985786"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            },
+            {
+                "id": "TEST-Dates-8-12",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "-02000002010-02-29T00:00:00Z",
+                            "timezone": 0,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 9,
+                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985786"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            },
+            {
+                "id": "TEST-Dates-8-13",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "datatype": "time",
+                    "datavalue": {
+                        "value": {
+                            "time": "+00000000000-02-29T00:00:00Z",
+                            "timezone": 0,
+                            "before": 0,
+                            "after": 0,
+                            "precision": 9,
+                            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985786"
+                        },
+                        "type": "time"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
             }
+
         ]
     }
 }
