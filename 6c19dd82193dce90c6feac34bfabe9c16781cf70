@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_94e16295",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-20T17:27:20Z",
+      "side": 1,
+      "message": "Sorry. I was too hurry :-)",
+      "parentUuid": "6e7c4fa4_741a861d",
+      "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b4e33e02",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-20T16:34:21Z",
       "side": 1,
       "message": "Why is this not set if the text is empty?",
+      "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_542aea8f",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-20T17:27:20Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "6e7c4fa4_b4e33e02",
       "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_f4f0d663",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-20T17:27:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_f4dd3648",
+      "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_54ec2af2",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.labelview.js",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2015-03-20T16:34:21Z",
       "side": 1,
       "message": "As before.",
+      "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7427e6c5",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.labelview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-20T17:27:20Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "6e7c4fa4_54ec2af2",
       "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_b4cfbe2b",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.labelview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-20T17:27:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_74e926e0",
+      "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_14f232ce",
         "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2015-03-20T16:34:21Z",
       "side": 1,
       "message": "Why?",
+      "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d4c4ba13",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-20T17:27:20Z",
+      "side": 1,
+      "message": "When content is on opposite direction of user view (RTL content on LTR UI or LTR content on RTL UI), contents will be get to much near to the borders. http://i.imgur.com/1FW4lgz.png",
+      "parentUuid": "6e7c4fa4_14f232ce",
       "revId": "6c19dd82193dce90c6feac34bfabe9c16781cf70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
