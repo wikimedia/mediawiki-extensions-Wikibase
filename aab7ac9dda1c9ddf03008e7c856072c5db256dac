@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0e821f98",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2015-03-20T12:38:39Z",
+      "side": 1,
+      "message": "BIGINT(20)",
+      "revId": "aab7ac9dda1c9ddf03008e7c856072c5db256dac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
