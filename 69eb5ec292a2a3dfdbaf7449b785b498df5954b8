@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_4ec7b74a",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-20T11:03:50Z",
+      "side": 1,
+      "message": "Having a setter without a getter feels odd, and it means you cannot get the \"old\" value, if you want to change the value for now, but restore it later. But treally, this is mostly here because \"write only\" logic seems strange.",
+      "parentUuid": "6e7c4fa4_61948feb",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_81976bee",
         "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
         "patchSetId": 6
@@ -47,6 +65,24 @@
       "writtenOn": "2015-03-04T18:06:14Z",
       "side": 1,
       "message": "EntityId|null",
+      "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6ec4f344",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-20T11:03:50Z",
+      "side": 1,
+      "message": "right.",
+      "parentUuid": "6e7c4fa4_e1873fb8",
       "revId": "69eb5ec292a2a3dfdbaf7449b785b498df5954b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
