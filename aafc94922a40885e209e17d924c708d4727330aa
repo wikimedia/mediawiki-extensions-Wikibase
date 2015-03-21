@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e75b41fb",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-21T00:10:27Z",
+      "side": 1,
+      "message": "BTW we should not be doing array_unique - this prevents testing for ref/value duplicates.",
+      "revId": "aafc94922a40885e209e17d924c708d4727330aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
