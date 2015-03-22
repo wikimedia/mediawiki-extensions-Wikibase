@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d8cf042b",
+        "filename": "repo/resources/jquery.ui/jquery.ui.tagadata.css",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-22T18:08:50Z",
+      "side": 0,
+      "message": "Is not needed on the new UI, now we should can do it per language and not based user language, like what we do on site link editors also.",
+      "revId": "9ca61e3f556369fc201307197ceb73e56904396f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

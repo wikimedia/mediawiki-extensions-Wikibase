@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_387878ed",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.aliasesview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-22T18:08:50Z",
+      "side": 1,
+      "message": "Just normalizing it with other similar ones added on other files.",
+      "revId": "8913fe98837817db5b114d89901ece9d0737afda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_587534f3",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-22T18:08:50Z",
+      "side": 1,
+      "message": "Check if is description empty and a placeholder should be put, apply user UI lang on the row instead language of that particular row..",
+      "revId": "8913fe98837817db5b114d89901ece9d0737afda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_384f18c3",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-22T18:08:50Z",
+      "side": 1,
+      "message": "Ok, not empty. Let apply lang and dir of that language on it.",
+      "revId": "8913fe98837817db5b114d89901ece9d0737afda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_584c54cb",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-22T18:08:50Z",
+      "side": 1,
+      "message": "Not on edit, just add the description and exit.",
+      "revId": "8913fe98837817db5b114d89901ece9d0737afda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_18ca5c1e",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.labelview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-22T18:08:50Z",
+      "side": 1,
+      "message": "Have a look at the comments on .descriptionview.js.",
+      "revId": "8913fe98837817db5b114d89901ece9d0737afda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b8ca481b",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2015-03-22T18:08:50Z",
+      "side": 1,
+      "message": "For example on https://test.wikidata.org/wiki/Q7?uselang\u003dfa the English description \"third planet in...\" is very to table borders. Making padding symmetric would be best for handling bidi contents.",
+      "revId": "8913fe98837817db5b114d89901ece9d0737afda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
