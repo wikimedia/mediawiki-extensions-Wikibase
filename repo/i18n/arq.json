@@ -7,6 +7,8 @@
 	},
 	"wikibase-edit": "تبديله",
 	"wikibase-add": "زيد",
+	"wikibase-label-empty": "حتا وشيمة ما معرّفة حتا لضركا",
+	"wikibase-description-empty": "ما كاين حتا وصيفة مصوّبة حتا لضركا",
 	"wikibase-statements": "تصراحات",
 	"wikibase-sitelinks-special": "سيتات وحدخرين",
 	"wikibase-aliases-empty": "ماكانش آلياس مصوّب",

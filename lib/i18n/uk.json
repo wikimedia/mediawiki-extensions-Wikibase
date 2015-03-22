@@ -13,7 +13,7 @@
 		]
 	},
 	"wikibase-lib-desc": "Загальні функції розширень Wikibase і Wikibase Client",
-	"specialpages-group-wikibase": "Сховище вікібази",
+	"specialpages-group-wikibase": "Вікібаза",
 	"wikibase-deletedentity-item": "Вилучений елемент",
 	"wikibase-deletedentity-property": "Вилучена властивість",
 	"wikibase-deletedentity-query": "Вилучений запит",
@@ -28,6 +28,7 @@
 	"wikibase-error-autocomplete-response": "Сервер відповів: $1",
 	"wikibase-error-ui-no-external-page": "Не вдалося знайти вказану статтю на відповідному сайті.",
 	"wikibase-error-ui-edit-conflict": "Існує конфлікт редагування. Будь ласка, перезавантажтеся і ще раз збережіть.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (транслітеровано)",
 	"wikibase-quantitydetails-amount": "Сума",
 	"wikibase-quantitydetails-upperbound": "Верхня межа",
 	"wikibase-quantitydetails-lowerbound": "Нижня межа",
