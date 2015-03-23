@@ -176,6 +176,15 @@ class MergeItems extends ApiBase {
 	}
 
 	/**
+	 * @see ApiBase::needsToken
+	 *
+	 * @return string
+	 */
+	public function needsToken() {
+		return 'csrf';
+	}
+
+	/**
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
@@ -194,7 +203,6 @@ class MergeItems extends ApiBase {
 			'summary' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			'token' => null,
 			'bot' => false
 		);
 	}
