@@ -24,17 +24,12 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'dataTypes.DataTypeStore',
 				'jquery.wikibase.snakview',
-				'mediawiki.Title',
-				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.Property',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.PropertySomeValueSnak',
 				'wikibase.datamodel.PropertyValueSnak',
-				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermMap',
 				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.SnakSerializer',
-				'wikibase.store.FetchedContent',
 			),
 		),
 
