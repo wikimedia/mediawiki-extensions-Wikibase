@@ -117,6 +117,12 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 			this.$listview = $( '<div/>' ).appendTo( this.element );
 		}
 
+		var entityIdHtmlFormatter = new wb.entityIdFormatter.SimpleEntityIdHtmlFormatter(
+			this.options.entityStore
+		);
+		var entityIdPlainFormatter = new wb.entityIdFormatter.SimpleEntityIdPlainFormatter(
+			this.options.entityStore
+		);
 		this.$listview.listview( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 				listItemWidget: $.wikibase.statementgroupview,
@@ -125,6 +131,8 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 						value: value,
 						claimGuidGenerator: self.options.claimGuidGenerator,
 						dataTypeStore: self.options.dataTypeStore,
+						entityIdHtmlFormatter: entityIdHtmlFormatter,
+						entityIdPlainFormatter: entityIdPlainFormatter,
 						entityStore: self.options.entityStore,
 						valueViewBuilder: self.options.valueViewBuilder,
 						entityChangersFactory: self.options.entityChangersFactory
