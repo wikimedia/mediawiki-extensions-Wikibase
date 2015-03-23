@@ -384,48 +384,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $claim2, $claims->getClaimWithGuid( $claim2UpperGuid ) );
 	}
 
-	public function testGetGuids() {
-		$claims = new Claims( array(
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
-			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ) ),
-		) );
-
-		$guids = $claims->getGuids();
-		$this->assertInternalType( 'array', $guids );
-		$this->assertSameSize( $claims, $guids );
-
-		foreach ( $guids as $guid ) {
-			$this->assertInternalType( 'string', $guid );
-			$this->assertTrue( $claims->hasClaimWithGuid( $guid ) );
-		}
-	}
-
-	public function testGetHashes() {
-		$claims = new Claims( array(
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
-			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ) ),
-		) );
-
-		$hashes = $claims->getHashes();
-		$this->assertInternalType( 'array', $hashes );
-		$this->assertContainsOnly( 'string', $hashes );
-		$this->assertSameSize( $claims, $hashes );
-
-		$hashSet = array_flip( $hashes );
-
-		/**
-		 * @var Claim $claim
-		 */
-		foreach ( $claims as $claim ) {
-			$hash = $claim->getHash();
-			$this->assertArrayHasKey( $hash, $hashSet );
-		}
-	}
-
 	/**
 	 * Attempts to add Claims with no GUID set will fail.
 	 */

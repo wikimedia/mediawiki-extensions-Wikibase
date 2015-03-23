@@ -280,38 +280,6 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	}
 
 	/**
-	 * Get array of Claim guids
-	 *
-	 * @since 0.4
-	 *
-	 * @return string[]
-	 */
-	public function getGuids() {
-		return array_map( function ( Claim $claim ) {
-			return $claim->getGuid();
-		}, iterator_to_array( $this ) );
-	}
-
-	/**
-	 * Returns a map from GUIDs to claim hashes.
-	 *
-	 * @since 0.4
-	 *
-	 * @return string[]
-	 */
-	public function getHashes() {
-		$snaks = array();
-
-		/* @var Claim $claim */
-		foreach ( $this as $claim ) {
-			$guid = $claim->getGuid();
-			$snaks[$guid] = $claim->getHash();
-		}
-
-		return $snaks;
-	}
-
-	/**
 	 * Returns a hash based on the value of the object.
 	 * The hash is based on the hashes of the claims contained,
 	 * with the order of claims considered significant.
