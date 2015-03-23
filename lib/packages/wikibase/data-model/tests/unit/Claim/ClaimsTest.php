@@ -621,54 +621,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $input->getByRanks( $ranks ), $expected );
 	}
 
-	public function testGetBestClaimsEmpty() {
-		$claims = new Claims();
-		$this->assertEquals( $claims->getBestClaims(), new Claims() );
-	}
-
-	public function testGetBestClaimsOnlyOne() {
-		$statement = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
-		$statement->setRank( Statement::RANK_NORMAL );
-
-		$claims = new Claims( array( $statement ) );
-		$this->assertEquals( $claims->getBestClaims(), $claims );
-	}
-
-	public function testGetBestClaimsNoDeprecated() {
-		$statement = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
-		$statement->setRank( Statement::RANK_DEPRECATED );
-
-		$claims = new Claims( array( $statement ) );
-		$this->assertEquals( $claims->getBestClaims(), new Claims() );
-	}
-
-	public function testGetBestClaimsReturnOne() {
-		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
-		$s1->setRank( Statement::RANK_DEPRECATED );
-
-		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) );
-		$s2->setRank( Statement::RANK_NORMAL );
-
-		$claims = new Claims( array( $s1, $s2 ) );
-		$expected = new Claims( array( $s2 ) );
-		$this->assertEquals( $claims->getBestClaims(), $expected );
-	}
-
-	public function testGetBestClaimsReturnTwo() {
-		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
-		$s1->setRank( Statement::RANK_NORMAL );
-
-		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) );
-		$s2->setRank( Statement::RANK_PREFERRED );
-
-		$s3 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P3' ) ) );
-		$s3->setRank( Statement::RANK_PREFERRED );
-
-		$claims = new Claims( array( $s3, $s1, $s2 ) );
-		$expected = new Claims( array( $s2, $s3 ) );
-		$this->assertEquals( $claims->getBestClaims(), $expected );
-	}
-
 	public function testEmptyListEqualsEmptyList() {
 		$list = new Claims( array() );
 		$this->assertTrue( $list->equals( clone $list ) );

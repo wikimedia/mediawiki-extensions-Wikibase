@@ -422,30 +422,6 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	}
 
 	/**
-	 * Returns a new instance only containing the best claims (these are the highest
-	 * ranked claims, but never deprecated ones). This implementation ignores the properties
-	 * so you probably want to call Claims::getClaimsForProperty first or use
-	 * StatementList::getBestStatementPerProperty instead.
-	 *
-	 * @see Claims::getClaimsForProperty
-	 * @see StatementList::getBestStatementPerProperty
-	 *
-	 * @since 0.7
-	 *
-	 * @return Claims
-	 */
-	public function getBestClaims() {
-		$rank = Statement::RANK_PREFERRED;
-
-		do {
-			$claims = $this->getByRank( $rank );
-			$rank--;
-		} while ( $claims->isEmpty() && $rank > Statement::RANK_DEPRECATED );
-
-		return $claims;
-	}
-
-	/**
 	 * @see Comparable::equals
 	 *
 	 * @since 0.7.4

@@ -9,6 +9,7 @@
 	* `Statement::setClaim` and `Statement::getClaim` have been removed
 	* Removed `ClaimList`
 	* Removed `ClaimListAccess`
+* Removed `Claims::getBestClaims` (you can use `StatementList::getBestStatements` instead)
 
 ## Version 2.6.0 (2015-03-08)
 
