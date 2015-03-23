@@ -11,6 +11,8 @@
 	* Removed `ClaimListAccess`
 * Removed `Claims::getBestClaims` (you can use `StatementList::getBestStatements` instead)
 * Removed `Claims::getByRank` and `Claims::getByRanks` (you can use `StatementList::getWithRank` instead)
+* Removed `Claims::getMainSnaks` (you can use `StatementList::getMainSnaks` instead)
+* Removed `Claims::getClaimsForProperty` (you can use `StatementList::getWithPropertyId` instead)
 
 ## Version 2.6.0 (2015-03-08)
 

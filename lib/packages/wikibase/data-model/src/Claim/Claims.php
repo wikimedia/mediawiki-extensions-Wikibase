@@ -293,44 +293,6 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	}
 
 	/**
-	 * Returns the claims for the given property.
-	 *
-	 * @since 0.4
-	 *
-	 * @param PropertyId $propertyId
-	 *
-	 * @return Claims
-	 */
-	public function getClaimsForProperty( PropertyId $propertyId ) {
-		$byPropertyIdGrouper = new ByPropertyIdGrouper( $this );
-
-		if ( !$byPropertyIdGrouper->hasPropertyId( $propertyId ) ) {
-			return new self();
-		}
-
-		return new self( $byPropertyIdGrouper->getByPropertyId( $propertyId ) );
-	}
-
-	/**
-	 * Returns the main Snaks of the claims in this list.
-	 *
-	 * @since 0.4
-	 *
-	 * @return Snak[]
-	 */
-	public function getMainSnaks() {
-		$snaks = array();
-
-		/* @var Claim $claim */
-		foreach ( $this as $claim ) {
-			$guid = $claim->getGuid();
-			$snaks[$guid] = $claim->getMainSnak();
-		}
-
-		return $snaks;
-	}
-
-	/**
 	 * Returns a map from GUIDs to claim hashes.
 	 *
 	 * @since 0.4

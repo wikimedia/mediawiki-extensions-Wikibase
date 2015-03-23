@@ -384,24 +384,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $claim2, $claims->getClaimWithGuid( $claim2UpperGuid ) );
 	}
 
-	public function testGetMainSnaks() {
-		$claims = new Claims( array(
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
-			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ) ),
-		) );
-
-		$snaks = $claims->getMainSnaks();
-		$this->assertInternalType( 'array', $snaks );
-		$this->assertSameSize( $claims, $snaks );
-
-		foreach ( $snaks as $guid => $snak ) {
-			$this->assertInstanceOf( 'Wikibase\DataModel\Snak\Snak', $snak );
-			$this->assertTrue( $claims->hasClaimWithGuid( $guid ) );
-		}
-	}
-
 	public function testGetGuids() {
 		$claims = new Claims( array(
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
@@ -442,26 +424,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 			$hash = $claim->getHash();
 			$this->assertArrayHasKey( $hash, $hashSet );
 		}
-	}
-
-	public function testGetClaimsForProperty() {
-		$claims = new Claims( array(
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) ),
-			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) ),
-			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P23' ) ) ),
-		) );
-
-		$matches = $claims->getClaimsForProperty( new PropertyId( 'P42' ) );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $claims );
-		$this->assertSame( 2, $matches->count() );
-
-		$matches = $claims->getClaimsForProperty( new PropertyId( 'P23' ) );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $claims );
-		$this->assertSame( 1, $matches->count() );
-
-		$matches = $claims->getClaimsForProperty( new PropertyId( 'P9000' ) );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claims', $claims );
-		$this->assertSame( 0, $matches->count() );
 	}
 
 	/**
