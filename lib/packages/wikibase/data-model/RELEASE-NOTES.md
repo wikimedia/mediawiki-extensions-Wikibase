@@ -17,6 +17,7 @@
 * Removed `Claims::getGuids`
 * Removed `Claims::equals` (and `Claims` no longer implements `Comparable`)
 * Removed `Claims::getHash` (and `Claims` no longer implements `Hashable`)
+* Removed `Claims::isEmpty` (you can use `StatementList::isEmpty` instead)
 
 ## Version 2.6.0 (2015-03-08)
 

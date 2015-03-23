@@ -279,11 +279,4 @@ class Claims extends ArrayObject {
 		parent::offsetUnset( $key );
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function isEmpty() {
-		return !$this->getIterator()->valid();
-	}
-
 }

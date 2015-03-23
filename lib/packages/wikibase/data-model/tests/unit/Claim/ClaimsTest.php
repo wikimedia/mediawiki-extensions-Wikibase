@@ -428,17 +428,4 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	public function testIsEmpty() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-
-		$this->assertTrue( $claims->isEmpty() );
-
-		$claims->addClaim( $claim1 );
-		$this->assertFalse( $claims->isEmpty() );
-
-		$claims->removeClaim( $claim1 );
-		$this->assertTrue( $claims->isEmpty() );
-	}
-
 }
