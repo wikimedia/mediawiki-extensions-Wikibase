@@ -36,11 +36,11 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 
 	/**
 	 * @param Statement[]|Traversable|Statement $statements
-	 * @param Statement [$statement2, ...]
+	 * @param Statement [$statement2,...]
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $statements = array() /* Statement, ... */ ) {
+	public function __construct( $statements = array() /*...*/ ) {
 		if ( $statements instanceof Statement ) {
 			$statements = func_get_args();
 		}

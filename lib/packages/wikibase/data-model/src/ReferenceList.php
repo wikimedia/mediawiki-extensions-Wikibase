@@ -6,7 +6,6 @@ use Hashable;
 use InvalidArgumentException;
 use Traversable;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * List of Reference objects.
@@ -72,8 +71,9 @@ class ReferenceList extends HashableObjectStorage {
 
 	/**
 	 * @see SplObjectStorage::attach
+	 *
 	 * @param Reference $reference
-	 * @param mixed $data
+	 * @param mixed $data Unused in the ReferenceList class.
 	 */
 	public function attach( $reference, $data = null ) {
 		if ( !$reference->isEmpty() ) {
@@ -81,18 +81,20 @@ class ReferenceList extends HashableObjectStorage {
 		}
 	}
 
-	// @codingStandardsIgnoreStart
 	/**
 	 * @since 1.1
 	 *
-	 * @param Snak $snak
-	 * @param Snak [$snak2, ...]
+	 * @param Snak[]|Snak $snaks
+	 * @param Snak [$snak2,...]
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addNewReference( Snak $snak /* Snak, ... */ ) {
-		// @codingStandardsIgnoreEnd
-		$this->addReference( new Reference( new SnakList( func_get_args() ) ) );
+	public function addNewReference( $snaks = array() /*...*/ ) {
+		if ( $snaks instanceof Snak ) {
+			$snaks = func_get_args();
+		}
+
+		$this->addReference( new Reference( $snaks ) );
 	}
 
 	/**

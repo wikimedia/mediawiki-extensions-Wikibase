@@ -172,18 +172,20 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 		$this->references = $references;
 	}
 
-	// @codingStandardsIgnoreStart
 	/**
 	 * @since 2.0
 	 *
-	 * @param Snak $snak
-	 * @param Snak [$snak2, ...]
+	 * @param Snak[]|Snak $snaks
+	 * @param Snak [$snak2,...]
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addNewReference( Snak $snak /* Snak, ... */ ) {
-		// @codingStandardsIgnoreEnd
-		$this->references->addReference( new Reference( new SnakList( func_get_args() ) ) );
+	public function addNewReference( $snaks = array() /*...*/ ) {
+		if ( $snaks instanceof Snak ) {
+			$snaks = func_get_args();
+		}
+
+		$this->references->addNewReference( $snaks );
 	}
 
 	/**
