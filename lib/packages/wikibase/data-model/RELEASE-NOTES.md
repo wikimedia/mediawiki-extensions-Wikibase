@@ -15,6 +15,7 @@
 * Removed `Claims::getClaimsForProperty` (you can use `StatementList::getWithPropertyId` instead)
 * Removed `Claims::getHashes`
 * Removed `Claims::getGuids`
+* Removed `Claims::equals` (and `Claims` no longer implements `Comparable`)
 
 ## Version 2.6.0 (2015-03-08)
 

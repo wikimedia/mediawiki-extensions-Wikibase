@@ -22,7 +22,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @author Daniel Kinzler
  * @author H. Snater < mediawiki@snater.com >
  */
-class Claims extends ArrayObject implements Hashable, Comparable {
+class Claims extends ArrayObject implements Hashable {
 
 	/**
 	 * @see GenericArrayObject::__construct
@@ -304,40 +304,6 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	 */
 	public function isEmpty() {
 		return !$this->getIterator()->valid();
-	}
-
-	/**
-	 * @see Comparable::equals
-	 *
-	 * @since 0.7.4
-	 *
-	 * @param mixed $target
-	 *
-	 * @return bool
-	 */
-	public function equals( $target ) {
-		if ( $this === $target ) {
-			return true;
-		}
-
-		if ( !( $target instanceof self )
-			|| $this->count() !== $target->count()
-		) {
-			return false;
-		}
-
-		foreach ( $this as $claim ) {
-			if ( !$target->hasExactClaim( $claim ) ) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	private function hasExactClaim( Claim $claim ) {
-		return $this->hasClaim( $claim )
-			&& $this->getClaimWithGuid( $claim->getGuid() )->equals( $claim );
 	}
 
 }
