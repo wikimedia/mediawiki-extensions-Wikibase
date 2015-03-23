@@ -11,6 +11,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
@@ -56,7 +57,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 			new Statement( new Claim( new PropertyValueSnak( self::$propertyId, new StringValue( 'o_O' ) ) ) ),
 		);
 
-		foreach( $statements as $statement ){
+		foreach ( $statements as $statement ) {
 			$guidGenerator = new ClaimGuidGenerator();
 			$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 			$item->addClaim( $statement );
@@ -97,26 +98,25 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	 * @param Item $item
 	 */
 	public function doTestValidRequestSingle( Item $item ) {
-		$obtainedClaims = null;
+		$statements = $item->getStatements()->toArray();
+		$obtainedStatements = null;
 
-		/**
-		 * @var Claim[] $claims
-		 */
-		$claims = $item->getClaims();
-		while ( $claim = array_shift( $claims ) ) {
-			$this->makeTheRequest( array( $claim->getGuid() ) );
+		while ( $statement = array_shift( $statements ) ) {
+			$this->makeTheRequest( array( $statement->getGuid() ) );
 
-			$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
-			$obtainedClaims = new Claims( $item->getClaims() );
+			/** @var Item $obtainedItem */
+			$obtainedItem = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
+			$obtainedStatements = $obtainedItem->getStatements();
 
-			$this->assertFalse( $obtainedClaims->hasClaimWithGuid( $claim->getGuid() ) );
+			$obtainedClaims = new Claims( $obtainedStatements->toArray() );
+			$this->assertFalse( $obtainedClaims->hasClaimWithGuid( $statement->getGuid() ) );
 
-			$currentClaims = new Claims( $claims );
+			$currentStatements = new StatementList( $statements );
 
-			$this->assertTrue( $obtainedClaims->getHash() === $currentClaims->getHash() );
+			$this->assertTrue( $obtainedStatements->equals( $currentStatements ) );
 		}
 
-		$this->assertTrue( $obtainedClaims === null || $obtainedClaims->isEmpty() );
+		$this->assertTrue( $obtainedStatements === null || $obtainedStatements->isEmpty() );
 	}
 
 	/**
