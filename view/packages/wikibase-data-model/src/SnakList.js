@@ -61,9 +61,13 @@ wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( s
 	/**
 	 * Adds the Snaks of another SnakList to this SnakList.
 	 *
-	 * @param {wikibase.datamodel.SnakList} snakList
+	 * @param {wikibase.datamodel.SnakList|null} [snakList=null]
 	 */
 	merge: function( snakList ) {
+		if( !snakList ) {
+			return;
+		}
+
 		var self = this;
 
 		snakList.each( function( i, snak ) {
