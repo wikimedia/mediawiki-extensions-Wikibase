@@ -201,16 +201,14 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @since 0.5
 	 *
 	 * @param string $prefixedEntityId
-	 * @param bool $legacyStyle Whether to return a legacy style entity
 	 *
 	 * @throws ScribuntoException
 	 * @return array
 	 */
-	public function getEntity( $prefixedEntityId, $legacyStyle ) {
+	public function getEntity( $prefixedEntityId ) {
 		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
-		$this->checkType( 'getEntity', 2, $legacyStyle, 'boolean' );
 		try {
-			$entityArr = $this->getEntityAccessor()->getEntity( $prefixedEntityId, $legacyStyle );
+			$entityArr = $this->getEntityAccessor()->getEntity( $prefixedEntityId );
 			return array( $entityArr );
 		}
 		catch ( EntityIdParsingException $e ) {

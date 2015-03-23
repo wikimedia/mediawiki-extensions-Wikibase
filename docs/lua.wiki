@@ -3,15 +3,18 @@ Wikibase Client provides a Lua [[mw:Scribunto|Scribunto]] interface that, if act
 == mw.wikibase ==
 In <code>mw.wikibase</code> general Lua functionality for working with Wikibase data can be found.
 
-=== mw.wikibase.getEntityObject ===
-<code>wikibase.getEntityObject()</code><br>
-<code>wikibase.getEntityObject( id )</code><br>
+=== mw.wikibase.getEntity ===
+<code>wikibase.getEntity()</code><br>
+<code>wikibase.getEntity( id )</code><br>
 Gets a [[#mw.wikibase.entity|mw.wikibase.entity]] table with data of the Wikibase item requested by id. If no id was given, the item connected to the current page will be returned. Requesting an item by id is only supported if arbitrary access is enabled.
 
 An example call might look like this:
 <source lang="lua">
-mw.wikibase.getEntityObject( 'Q42' ) -- Returns a mw.wikibase.entity table for the Item with the id Q42
+mw.wikibase.getEntity( 'Q42' ) -- Returns a mw.wikibase.entity table for the Item with the id Q42
 </source>
+
+=== mw.wikibase.getEntityObject ===
+Alias for [[#mw.wikibase.getEntity|mw.wikibase.getEntity]].
 
 === mw.wikibase.label ===
 <code>wikibase.label( id )</code><br>
@@ -54,12 +57,6 @@ local snaks = entity['claims']['P342'][1]['qualifiers']
 
 mw.wikibase.renderSnaks( snaks ) -- Returns the given Snaks formatted as wiki text.
 </source>
-
-=== mw.wikibase.getEntity ===
-<code>wikibase.getEntity()</code><br>
-Gets entity data of the Wikidata item connected with the current page. The returned object will have a legacy format, where tables are 0-based rather than 1-based. Also they will hold claims with both upper an lower case property ids (lower key property ids are deprecated).
-
-<strong style="color:red">Deprecated: Please use <code>[[#mw.wikibase.getEntityObject|mw.wikibase.getEntityObject]]</code></strong>
 
 == mw.wikibase.entity ==
 <code>mw.wikibase.entity</code> represents a Wikibase entity in Lua. A <code>mw.wikibase.entity</code> table for the item which is linked with the current page can be obtained with [[#mw.wikibase.getEntityObject|<code>mw.wikibase.getEntityObject</code>]].
