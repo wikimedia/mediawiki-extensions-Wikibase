@@ -3,10 +3,10 @@
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use stdClass;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Serializers\ClaimsSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\DataModel\Serializers\ClaimsSerializer
@@ -17,13 +17,13 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 class ClaimsSerializerTest extends SerializerBaseTest {
 
 	protected function buildSerializer() {
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'test' );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'test' );
 
 		$claimSerializerMock = $this->getMock( '\Serializers\Serializer' );
 		$claimSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->with( $this->equalTo( $claim ) )
+			->with( $this->equalTo( $statement ) )
 			->will( $this->returnValue( array(
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
@@ -37,7 +37,7 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 	}
 
 	public function serializableProvider() {
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
+		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
 		$claim->setGuid( 'test' );
 
 		return array(
@@ -61,14 +61,14 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 				array()
 			),
 			array(
-				new Claim( new PropertyNoValueSnak( 42 ) )
+				new Statement( new PropertyNoValueSnak( 42 ) )
 			),
 		);
 	}
 
 	public function serializationProvider() {
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'test' );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'test' );
 
 		return array(
 			array(
@@ -89,26 +89,26 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 					)
 				),
 				new Claims( array(
-					$claim
+					$statement
 				) )
 			),
 		);
 	}
 
 	public function testClaimsSerializerWithOptionObjectsForMaps() {
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'test' );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'test' );
 		$claimSerializerMock = $this->getMock( '\Serializers\Serializer' );
 		$claimSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->with( $this->equalTo( $claim ) )
+			->with( $this->equalTo( $statement ) )
 			->will( $this->returnValue( array(
 				'mockedsuff' => array(),
 				'type' => 'statement',
 			) ) );
 		$serializer = new ClaimsSerializer( $claimSerializerMock, true );
 
-		$claims = new Claims( array( $claim ) );
+		$claims = new Claims( array( $statement ) );
 
 		$serial = new stdClass();
 		$serial->P42 = array( array(

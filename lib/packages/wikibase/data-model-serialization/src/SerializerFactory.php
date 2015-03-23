@@ -106,6 +106,8 @@ class SerializerFactory {
 	/**
 	 * Returns a Serializer that can serialize Statement objects.
 	 *
+	 * @since 1.4
+	 *
 	 * @return Serializer
 	 */
 	public function newStatementSerializer() {
@@ -113,9 +115,10 @@ class SerializerFactory {
 	}
 
 	/**
-	 * b/c alias of newStatementSerializer
+	 * Returns a Serializer that can serialize claims.
 	 *
-	 * @deprecated since 1.4 - use newStatementSerializer instead
+	 * @deprecated since 1.4, use newStatementSerializer instead
+	 *
 	 * @return Serializer
 	 */
 	public function newClaimSerializer() {
