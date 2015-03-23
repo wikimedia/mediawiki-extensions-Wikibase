@@ -489,15 +489,34 @@ class EntityDataSerializationService {
 	private function getFlavor( $flavorName ) {
 		switch( $flavorName ) {
 			case 'simple':
-				return RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_VERSION_INFO;
+				return RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
+					RdfProducer::PRODUCE_SITELINKS |
+					RdfProducer::PRODUCE_VERSION_INFO |
+					RdfProducer::PRODUCE_LABELS;
 			case 'full':
 				return RdfProducer::PRODUCE_ALL;
-			case 'dump':
-				return RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES | RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES;
 			case 'long':
-				return RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES | RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_VERSION_INFO;
+				return RdfProducer::PRODUCE_ALL_STATEMENTS |
+				 RdfProducer::PRODUCE_QUALIFIERS |
+				 RdfProducer::PRODUCE_REFERENCES |
+				 RdfProducer::PRODUCE_SITELINKS |
+				 RdfProducer::PRODUCE_LABELS |
+				 RdfProducer::PRODUCE_EXTRA_LABELS |
+				 RdfProducer::PRODUCE_FULL_VALUES |
+				 RdfProducer::PRODUCE_VERSION_INFO;
+			case 'dump':
+				return RdfProducer::PRODUCE_ALL_STATEMENTS |
+				 RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
+				 RdfProducer::PRODUCE_QUALIFIERS |
+				 RdfProducer::PRODUCE_REFERENCES |
+				 RdfProducer::PRODUCE_SITELINKS |
+				 RdfProducer::PRODUCE_LABELS |
+				 RdfProducer::PRODUCE_EXTRA_LABELS |
+				 RdfProducer::PRODUCE_FULL_VALUES |
+				 RdfProducer::PRODUCE_VERSION_INFO;
 			case null: // No flavor given
-				return RdfProducer::PRODUCE_SITELINKS;
+				return RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_LABELS |
+				RdfProducer::PRODUCE_EXTRA_LABELS | RdfProducer::PRODUCE_VERSION_INFO;
 		}
 		throw new MWException( "Unsupported flavor: $flavorName" );
 	}

@@ -323,6 +323,10 @@ class RdfBuilder {
 	 * @param string $timestamp in TS_MW format
 	 */
 	public function addEntityRevisionInfo( EntityId $entityId, $revision, $timestamp ) {
+		if( !$this->shouldProduce( RdfProducer::PRODUCE_METADATA ) ) {
+			return;
+		}
+
 		$dataURL = $this->getDataURL( $entityId );
 		$dataResource = $this->graph->resource( $dataURL );
 
@@ -368,16 +372,24 @@ class RdfBuilder {
 	 * @param Entity $entity
 	 */
 	private function addLabels( Entity $entity ) {
+		$meta = $this->shouldProduce( RdfProducer::PRODUCE_METADATA );
+		$extra = $this->shouldProduce( RdfProducer::PRODUCE_EXTRA_LABELS );
+		if( !$meta && !$extra ) {
+			return;
+		}
 		$entityResource = $this->getEntityResource( $entity->getId() );
 
 		foreach ( $entity->getLabels() as $languageCode => $labelText ) {
 			if ( !$this->isLanguageIncluded( $languageCode ) ) {
 				continue;
 			}
-
-			$entityResource->addLiteral( 'rdfs:label', $labelText, $languageCode );
-			$entityResource->addLiteral( self::NS_SKOS . ':prefLabel', $labelText, $languageCode );
-			$entityResource->addLiteral( self::NS_SCHEMA_ORG . ':name', $labelText, $languageCode );
+			if( $meta ) {
+				$entityResource->addLiteral( 'rdfs:label', $labelText, $languageCode );
+			}
+			if( $extra ) {
+				$entityResource->addLiteral( self::NS_SKOS . ':prefLabel', $labelText, $languageCode );
+				$entityResource->addLiteral( self::NS_SCHEMA_ORG . ':name', $labelText, $languageCode );
+			}
 		}
 	}
 
@@ -918,10 +930,14 @@ class RdfBuilder {
 	 * @param Entity $entity the entity to output.
 	 */
 	public function addEntity( Entity $entity ) {
-		$this->addEntityMetaData( $entity );
+		if( $this->shouldProduce( RdfProducer::PRODUCE_METADATA ) ) {
+			$this->addEntityMetaData( $entity );
+		}
 		$this->addLabels( $entity );
-		$this->addDescriptions( $entity );
-		$this->addAliases( $entity );
+		if( $this->shouldProduce( RdfProducer::PRODUCE_EXTRA_LABELS ) ) {
+			$this->addDescriptions( $entity );
+			$this->addAliases( $entity );
+		}
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_SITELINKS ) && $entity instanceof Item ) {
 			$this->addSiteLinks( $entity );
@@ -942,7 +958,9 @@ class RdfBuilder {
 	private function addEntityStub( Entity $entity ) {
 		$this->addEntityMetaData( $entity, false );
 		$this->addLabels( $entity );
-		$this->addDescriptions( $entity );
+		if( $this->shouldProduce( RdfProducer::PRODUCE_EXTRA_LABELS ) ) {
+			$this->addDescriptions( $entity );
+		}
 	}
 
 	/**

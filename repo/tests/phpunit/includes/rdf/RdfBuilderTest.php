@@ -169,7 +169,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			return array ();
 		}
 		$data = file_get_contents( $filename );
-		$data = explode( "\n", $data );
+		$data = explode( "\n", trim ( $data ) );
 		sort( $data );
 		return $data;
 	}
@@ -206,7 +206,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$format = EasyRdf_Format::getFormat( "ntriples" );
 		$serialiser = $format->newSerialiser();
 		$data = $serialiser->serialise( $graph, "ntriples" );
-		$dataSplit = explode( "\n", $data );
+		$dataSplit = explode( "\n", trim ( $data ) );
 		sort( $dataSplit );
 		return $dataSplit;
 	}
@@ -221,6 +221,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 				RdfProducer::PRODUCE_REFERENCES |
 				RdfProducer::PRODUCE_SITELINKS |
 				RdfProducer::PRODUCE_VERSION_INFO |
+				RdfProducer::PRODUCE_METADATA |
+				RdfProducer::PRODUCE_EXTRA_LABELS |
 				RdfProducer::PRODUCE_FULL_VALUES);
 		$builder->addEntity( $entity );
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2014-11-04T03:11:05Z" );
@@ -229,17 +231,18 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 	public function getProduceOptions() {
 		$produceTests = array(
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q4_all_statements' ),
-			array( 'Q4', RdfProducer::PRODUCE_TRUTHY_STATEMENTS, 'Q4_truthy_statements' ),
-			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q6_no_qualifiers' ),
-			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, 'Q6_with_qualifiers' ),
-			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , 'Q7_no_refs' ),
-			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, 'Q7_refs' ),
-			array( 'Q3', RdfProducer::PRODUCE_SITELINKS, 'Q3_sitelinks' ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, 'Q4_props' ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, 'Q4_values' ),
-			array( 'Q1', RdfProducer::PRODUCE_VERSION_INFO, 'Q1_info' ),
-			array( 'Q4', RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES, 'Q4_resolved' ),
+			array( 'Q4', RdfProducer::PRODUCE_METADATA | RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q4_all_statements' ),
+			array( 'Q4', RdfProducer::PRODUCE_METADATA | RdfProducer::PRODUCE_TRUTHY_STATEMENTS, 'Q4_truthy_statements' ),
+			array( 'Q6', RdfProducer::PRODUCE_METADATA | RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q6_no_qualifiers' ),
+			array( 'Q6', RdfProducer::PRODUCE_METADATA | RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, 'Q6_with_qualifiers' ),
+			array( 'Q7', RdfProducer::PRODUCE_METADATA | RdfProducer::PRODUCE_ALL_STATEMENTS , 'Q7_no_refs' ),
+			array( 'Q7', RdfProducer::PRODUCE_METADATA | RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, 'Q7_refs' ),
+			array( 'Q3', RdfProducer::PRODUCE_METADATA | RdfProducer::PRODUCE_SITELINKS, 'Q3_sitelinks' ),
+			array( 'Q4', RdfProducer::PRODUCE_METADATA | RdfProducer::PRODUCE_EXTRA_LABELS | RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, 'Q4_props' ),
+			array( 'Q4', RdfProducer::PRODUCE_METADATA | RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, 'Q4_values' ),
+			array( 'Q1', RdfProducer::PRODUCE_METADATA | RdfProducer::PRODUCE_VERSION_INFO, 'Q1_info' ),
+			array( 'Q4', RdfProducer::PRODUCE_METADATA | RdfProducer::PRODUCE_EXTRA_LABELS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES, 'Q4_resolved' ),
+			array( 'Q1', RdfProducer::PRODUCE_VERSION_INFO, 'Q1_empty' ),
 		);
 
 		$testData = array();

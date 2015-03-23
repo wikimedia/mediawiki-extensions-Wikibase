@@ -57,7 +57,7 @@ class RdfDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return JsonDumpGenerator
 	 */
-	protected function newDumpGenerator( array $entities = array() ) {
+	protected function newDumpGenerator( array $entities = array(), $part = 'all' ) {
 		$out = fopen( 'php://output', 'w' );
 
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
@@ -89,7 +89,9 @@ class RdfDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 				$this->getSiteList(),
 				$entityLookup,
 				$entityRevisionLookup,
-				$propertyLookup);
+				$propertyLookup,
+				RdfDumpGenerator::getDumpPartFlavor( $part )
+				);
 	}
 
 	public function idProvider() {
@@ -145,6 +147,25 @@ class RdfDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$dump = $this->normalizeData($dump);
 		$this->assertEquals($this->getSerializedData($dumpname), $dump);
 
+		$dumper = $this->newDumpGenerator( $entities, 'links' );
+		$dumper->setTimestamp(1000000);
+		$pager = $jsonTest->makeIdPager( $ids );
+
+		ob_start();
+		$dumper->generateDump( $pager );
+		$dump = ob_get_clean();
+		$dump = $this->normalizeData($dump);
+		$this->assertEquals($this->getSerializedData($dumpname."_links"), $dump, "Links");
+
+		$dumper = $this->newDumpGenerator( $entities, 'labels' );
+		$dumper->setTimestamp(1000000);
+		$pager = $jsonTest->makeIdPager( $ids );
+
+		ob_start();
+		$dumper->generateDump( $pager );
+		$dump = ob_get_clean();
+		$dump = $this->normalizeData($dump);
+		$this->assertEquals($this->getSerializedData($dumpname."_labels"), $dump, "Labels");
 	}
 
 	public function loadDataProvider() {
