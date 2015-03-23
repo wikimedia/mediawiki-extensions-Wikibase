@@ -55,7 +55,7 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof QuantityValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an QuantityValue.' );
+			throw new InvalidArgumentException( 'Data value type mismatch. Expected a QuantityValue.' );
 		}
 
 		$html = '';
