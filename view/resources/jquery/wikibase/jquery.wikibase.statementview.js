@@ -37,6 +37,10 @@
  *        Required for dynamically generating GUIDs for new `Statement`s.
  * @param {wikibase.entityChangers.ClaimsChanger} options.claimsChanger
  *        Required to store the view's `Statement`.
+ * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
+ *        Required for dynamically rendering links to `Entity`s.
+ * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
+ *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {wikibase.store.EntityStore} options.entityStore
  *        Required for dynamically gathering `Entity`/`Property` information.
  * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
@@ -102,6 +106,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 		claimsChanger: null,
 		dataTypeStore: null,
 		entityChangersFactory: null,
+		entityIdHtmlFormatter: null,
+		entityIdPlainFormatter: null,
 		predefined: {
 			mainSnak: false
 		},
@@ -224,6 +230,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 			locked: this.options.locked.mainSnak,
 			autoStartEditing: false,
 			dataTypeStore: this.options.dataTypeStore,
+			entityIdHtmlFormatter: this.options.entityIdHtmlFormatter,
+			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
 			entityStore: this.options.entityStore,
 			valueViewBuilder: this.options.valueViewBuilder,
 			encapsulatedBy: ':' + this.widgetFullName.toLowerCase()
@@ -268,6 +276,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 						value: value || undefined,
 						singleProperty: true,
 						dataTypeStore: self.options.dataTypeStore,
+						entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
+						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
 						entityStore: self.options.entityStore,
 						valueViewBuilder: self.options.valueViewBuilder
 					};
@@ -332,6 +342,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 						value: value || null,
 						statementGuid: self.options.value.getClaim().getGuid(),
 						dataTypeStore: self.options.dataTypeStore,
+						entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
+						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
 						entityStore: self.options.entityStore,
 						valueViewBuilder: self.options.valueViewBuilder,
 						referencesChanger: self._referencesChanger
@@ -415,14 +427,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 				: this.options.predefined.mainSnak.property;
 
 			if( property ) {
-				this.options.entityStore.get( property ).done( function( fetchedProperty ) {
-					if( fetchedProperty ) {
-						helpMessage = mw.msg(
-							'wikibase-claimview-snak-tooltip',
-							wb.utilities.ui.buildPrettyEntityLabelText( fetchedProperty.getContent() )
-						);
-					}
-					deferred.resolve( helpMessage );
+				this.options.entityIdPlainFormatter.format( property ).done( function( formattedEntityId ) {
+					deferred.resolve( mw.msg( 'wikibase-claimview-snak-tooltip', formattedEntityId ) );
 				} );
 			} else {
 				deferred.resolve( helpMessage );

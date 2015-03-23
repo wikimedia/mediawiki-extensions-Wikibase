@@ -25,6 +25,10 @@
  *        "add" button to add new `Statements`.
  * @param {wikibase.utilities.ClaimGuidGenerator} options.claimGuidGenerator
  *        Required for dynamically generating GUIDs for new `Statement`s.
+ * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
+ *        Required for dynamically rendering links to `Entity`s.
+ * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
+ *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {string} [entityType=wikibase.datamodel.Item.TYPE]
  *        Type of the entity that the widget refers to.
  * @param {wikibase.store.EntityStore} options.entityStore
@@ -63,6 +67,8 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 		},
 		value: null,
 		claimGuidGenerator: null,
+		entityIdHtmlFormatter: null,
+		entityIdPlainFormatter: null,
 		entityType: wb.datamodel.Item.TYPE,
 		entityStore: null,
 		valueViewBuilder: null,
@@ -84,6 +90,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	_create: function() {
 		if(
 			!this.options.claimGuidGenerator
+			|| !this.options.entityIdHtmlFormatter
 			|| !this.options.entityStore
 			|| !this.options.valueViewBuilder
 			|| !this.options.entityChangersFactory
@@ -128,22 +135,8 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 		var self = this,
 			propertyId = this.options.value.getKey();
 
-		this.options.entityStore.get( propertyId ).done( function( property ) {
-			var $title;
-
-			if( property ) {
-				$title = wb.utilities.ui.buildLinkToEntityPage(
-					property.getContent(),
-					property.getTitle()
-				);
-			} else {
-				$title = wb.utilities.ui.buildMissingEntityInfo(
-					propertyId,
-					wb.datamodel.Property
-				);
-			}
-
-			self.$propertyLabel.append( $title );
+		this.options.entityIdHtmlFormatter.format( propertyId ).done( function( title ) {
+			self.$propertyLabel.append( title );
 		} );
 	},
 
@@ -173,6 +166,8 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 				? this.options.value.getItemContainer()
 				: new wb.datamodel.StatementList(),
 			claimGuidGenerator: self.options.claimGuidGenerator,
+			entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
+			entityIdPlainFormatter: self.options.entityIdPlainFormatter,
 			entityType: self.options.entityType,
 			entityStore: self.options.entityStore,
 			valueViewBuilder: self.options.valueViewBuilder,
