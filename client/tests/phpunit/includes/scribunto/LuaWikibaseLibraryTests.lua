@@ -57,7 +57,7 @@ local tests = {
 	  expect = { 'table' }
 	},
 	{ name = 'mw.wikibase.getEntity (schema version)', func = testGetEntitySchemaVersion,
-	  expect = { 1 }
+	  expect = { 2 }
 	},
 	{ name = 'mw.wikibase.getEntityObject (type)', func = testGetEntityObjectType, type='ToString',
 	  expect = { 'table' }
