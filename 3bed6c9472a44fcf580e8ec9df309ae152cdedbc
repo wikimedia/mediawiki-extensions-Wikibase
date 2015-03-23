@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_10e6a7e3",
+        "filename": "repo/tests/phpunit/includes/store/sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-23T21:47:32Z",
+      "side": 1,
+      "message": "Yay :)",
+      "revId": "3bed6c9472a44fcf580e8ec9df309ae152cdedbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
