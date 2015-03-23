@@ -418,9 +418,9 @@ class DispatchChanges extends \Maintenance {
 			,
 			__METHOD__,
 			array(
-				'ORDER BY chd_seen ASC',
+				'ORDER BY' => 'chd_seen ASC',
 				'FOR UPDATE',
-				'LIMIT ' . (int)$this->randomness
+				'LIMIT' => (int)$this->randomness
 			)
 		);
 
