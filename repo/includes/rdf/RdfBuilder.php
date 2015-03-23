@@ -70,6 +70,7 @@ class RdfBuilder {
 	const WIKIBASE_RANK_NORMAL = 'wikibase:NormalRank';
 	const WIKIBASE_RANK_PREFERRED = 'wikibase:PreferredRank';
 	const WIKIBASE_RANK_DEPRECATED = 'wikibase:DeprecatedRank';
+	const WIKIBASE_RANK_BEST = 'wikibase:BestRank';
 	const WIKIBASE_BADGE_QNAME = 'wikibase:Badge';
 
 	const PROV_QNAME = 'prov:wasDerivedFrom';
@@ -460,15 +461,18 @@ class RdfBuilder {
 
 		if ( $entity instanceof StatementListProvider ) {
 			$statementList = $entity->getStatements();
-			if ( $this->shouldProduce( RdfProducer::PRODUCE_TRUTHY_STATEMENTS ) ) {
-				foreach ( $statementList->getBestStatementPerProperty() as $statement ) {
+			$bestList = array();
+			$produceTruthy = $this->shouldProduce( RdfProducer::PRODUCE_TRUTHY_STATEMENTS ) ;
+			foreach ( $statementList->getBestStatementPerProperty() as $statement ) {
+				$bestList[$statement->getGuid()] = true;
+				if( $produceTruthy ) {
 					$this->addMainSnak( $entityId, $statement, true );
 				}
 			}
 
 			if ( $this->shouldProduce( RdfProducer::PRODUCE_ALL_STATEMENTS ) ) {
 				foreach ( $statementList as $statement ) {
-					$this->addStatement( $entityId, $statement );
+					$this->addStatement( $entityId, $statement, isset( $bestList[$statement->getGuid()] ) );
 				}
 			}
 		}
@@ -497,9 +501,10 @@ class RdfBuilder {
 	 *
 	 * @param EntityId $entityId
 	 * @param Statement $statement
+	 * @param boolean $isBest Is this best ranked statement?
 	 */
-	private function addStatement( EntityId $entityId, Statement $statement ) {
-		$this->addMainSnak( $entityId, $statement, false );
+	private function addStatement( EntityId $entityId, Statement $statement, $isBest = false ) {
+		$this->addMainSnak( $entityId, $statement, false, $isBest );
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_QUALIFIERS ) ) {
 			// this assumes statement was added by addMainSnak
@@ -532,8 +537,9 @@ class RdfBuilder {
 	 * @param EntityId $entityId
 	 * @param Statement $statement
 	 * @param boolean $truthy Is this producing "truthy" or full-form statement?
+	 * @param boolean $isBest Is this best ranked statement?
 	 */
-	private function addMainSnak( EntityId $entityId, Statement $statement, $truthy ) {
+	private function addMainSnak( EntityId $entityId, Statement $statement, $truthy, $isBest = false ) {
 		$snak = $statement->getMainSnak();
 
 		$entityResource = $this->getEntityResource( $entityId );
@@ -556,6 +562,10 @@ class RdfBuilder {
 			} else {
 				wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );
 			}
+			if( $isBest ) {
+				$statementResource->addResource( self::WIKIBASE_RANK_QNAME, self::WIKIBASE_RANK_BEST );
+			}
+
 		}
 	}
 
