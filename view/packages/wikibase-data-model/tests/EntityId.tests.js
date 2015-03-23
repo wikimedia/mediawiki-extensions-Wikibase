@@ -8,8 +8,8 @@
 QUnit.module( 'wikibase.datamodel.EntityId' );
 
 var prefixMap = {
-	'P': 'property',
-	'Q': 'item'
+	P: 'property',
+	Q: 'item'
 };
 
 var testSets = [
