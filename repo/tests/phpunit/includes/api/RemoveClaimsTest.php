@@ -56,7 +56,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 			new Statement( new Claim( new PropertyValueSnak( self::$propertyId, new StringValue( 'o_O' ) ) ) ),
 		);
 
-		foreach( $statements as $statement ){
+		foreach ( $statements as $statement ) {
 			$guidGenerator = new ClaimGuidGenerator();
 			$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 			$item->addClaim( $statement );
@@ -97,23 +97,22 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	 * @param Item $item
 	 */
 	public function doTestValidRequestSingle( Item $item ) {
+		$id = $item->getId();
+		$claims = $item->getStatements()->toArray();
 		$obtainedClaims = null;
 
-		/**
-		 * @var Claim[] $claims
-		 */
-		$claims = $item->getClaims();
 		while ( $claim = array_shift( $claims ) ) {
 			$this->makeTheRequest( array( $claim->getGuid() ) );
 
-			$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
-			$obtainedClaims = new Claims( $item->getClaims() );
+			/** @var Item $item */
+			$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $id );
+			$obtainedClaims = new Claims( $item->getStatements()->toArray() );
 
 			$this->assertFalse( $obtainedClaims->hasClaimWithGuid( $claim->getGuid() ) );
 
 			$currentClaims = new Claims( $claims );
 
-			$this->assertTrue( $obtainedClaims->getHash() === $currentClaims->getHash() );
+			$this->assertEquals( $obtainedClaims->getArrayCopy(), $currentClaims->getArrayCopy() );
 		}
 
 		$this->assertTrue( $obtainedClaims === null || $obtainedClaims->isEmpty() );
