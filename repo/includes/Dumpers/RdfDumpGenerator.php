@@ -136,6 +136,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityLookup $entityLookup
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param PropertyInfoDataTypeLookup $propertyLookup
+	 * @param int $flavor
 	 * @throws \MWException
 	 * @return RdfDumpGenerator
 	 */
@@ -147,7 +148,8 @@ class RdfDumpGenerator extends DumpGenerator {
 			SiteList $sites,
 			EntityLookup $entityLookup,
 			EntityRevisionLookup $entityRevisionLookup,
-			PropertyDataTypeLookup $propertyLookup
+			PropertyDataTypeLookup $propertyLookup,
+			$flavor
 	) {
 		$rdfFormat = RdfSerializer::getFormat( $format );
 		if( !$rdfFormat ) {
@@ -159,9 +161,7 @@ class RdfDumpGenerator extends DumpGenerator {
 				$sites,
 				$propertyLookup,
 				$entityLookup,
-				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
-				RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES |
-				RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES,
+				$flavor,
 				new \HashBagOStuff()
 		);
 		return new RdfDumpGenerator( $output, $entityRevisionLookup, $entitySerializer );

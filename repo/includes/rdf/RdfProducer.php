@@ -57,6 +57,15 @@ interface RdfProducer {
 	const PRODUCE_RESOLVED_ENTITIES = 256;
 
 	/**
+	 * Produce node metadata - basic labels, data node, etc.
+	 */
+	const PRODUCE_METADATA          = 512;
+
+	/**
+	 * Produce secondary labels and descriptions
+	 */
+	const PRODUCE_EXTRA_LABELS      = 1024;
+	/**
 	 * All options turned on.
 	 */
 	const PRODUCE_ALL = 0xFFFF;
