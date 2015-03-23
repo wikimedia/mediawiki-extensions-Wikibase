@@ -12,7 +12,7 @@
  */
 var createItemview = function( options, $node ) {
 	options = $.extend( {
-		entityStore: 'I am an EntityStore',
+		entityStore: new wb.store.EntityStore(),
 		entityChangersFactory: {
 			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
 			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },

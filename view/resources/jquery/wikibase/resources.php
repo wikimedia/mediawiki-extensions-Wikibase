@@ -71,6 +71,8 @@ return call_user_func( function() {
 				'jquery.wikibase.listview',
 				'wikibase.datamodel.Item',
 				'wikibase.datamodel.StatementGroupSet',
+				'wikibase.entityIdFormatter.SimpleEntityIdHtmlFormatter',
+				'wikibase.entityIdFormatter.SimpleEntityIdPlainFormatter',
 			),
 		),
 
@@ -87,7 +89,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Property',
 				'wikibase.datamodel.StatementGroup',
 				'wikibase.datamodel.StatementList',
-				'wikibase.utilities',
+				'wikibase.utilities.ClaimGuidGenerator',
 			),
 		),
 
@@ -356,7 +358,6 @@ return call_user_func( function() {
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase.buildErrorOutput',
 				'wikibase.sites',
-				'wikibase.utilities',
 			),
 		),
 
