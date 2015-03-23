@@ -15,18 +15,18 @@ this.config = ( function() {
 			qunit: 'lib/qunit/qunit',
 			'qunit.parameterize': 'lib/qunit.parameterize/qunit.parameterize',
 
-			'util': 'lib/util',
+			util: 'lib/util',
 
-			'globeCoordinate': 'lib/globeCoordinate',
+			globeCoordinate: 'lib/globeCoordinate',
 
-			'dataValues': 'src',
-			'values': 'src/values',
+			dataValues: 'src',
+			values: 'src/values',
 
-			'valueFormatters': 'src/valueFormatters',
-			'formatters': 'src/valueFormatters/formatters',
+			valueFormatters: 'src/valueFormatters',
+			formatters: 'src/valueFormatters/formatters',
 
-			'valueParsers': 'src/valueParsers',
-			'parsers': 'src/valueParsers/parsers'
+			valueParsers: 'src/valueParsers',
+			parsers: 'src/valueParsers/parsers'
 		},
 		shim: {
 			qunit: {
