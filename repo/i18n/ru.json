@@ -18,7 +18,8 @@
 			"Meshkov.a",
 			"Striking Blue",
 			"Oashnic",
-			"Batumski brodyaga"
+			"Batumski brodyaga",
+			"Чаховіч Уладзіслаў"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -330,6 +331,7 @@
 	"wikibase-property-summary-wbsetaliases-add-remove": "Добавле{{PLURAL:$1|1=но и убрано|ны и убраны}} [$2] доп. назв. ({{PLURAL:$1|синоним|синонимы}})",
 	"wikibase-property-summary-wbsetaliases-add": "{{PLURAL:$1|1=Добавлено|Добавлены}} доп. назв. ({{PLURAL:$1|1=синоним|синонимы}}) [$2]",
 	"wikibase-property-summary-wbsetaliases-remove": "{{PLURAL:$1|1=Удалено|Удалены}} доп. назв. ({{PLURAL:$1|1=синоним|синонимы}}) [$2]",
+	"wikibase-property-summary-wbsetclaim-update": "{{PLURAL:$3|1=Изменено заявление|Изменены заявления}}",
 	"wikibase-property-summary-special-create-property": "Создано свойство [$2] со {{PLURAL:$1|1=значением|значениями}}",
 	"wikibase-listdatatypes-wikibase-item-head": "Элемент",
 	"wikibase-listdatatypes-wikibase-item-body": "Ссылка на другие элементы в проекте. При вводе значения будет производиться поиск похожих записей в пространстве имён «Item».",

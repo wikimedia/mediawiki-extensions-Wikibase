@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Milicevic01"
+			"Milicevic01",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Skladište struktuiranih podataka",
@@ -85,7 +86,7 @@
 	"wikibase-gotolinkedpage-submit": "Idi",
 	"special-itemdisambiguation": "Višeznačna stavka",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Pretraga stavki prema jeziku i nazivu",
-	"wikibase-itemdisambiguation-lookup-language": "Jezik:",
+	"wikibase-itemdisambiguation-lookup-language": "Jezični kod:",
 	"wikibase-itemdisambiguation-lookup-label": "Naziv:",
 	"wikibase-itemdisambiguation-submit": "Pretraga",
 	"wikibase-itemdisambiguation-nothing-found": "Žao nam je, nijedna stavka sa tim naslovom nije pronađena.",
@@ -118,7 +119,7 @@
 	"wikibase-setaliases-submit": "Postavi pseudonim",
 	"wikibase-setaliases-warning-remove": "Da li zaista želite da uklonite sve pseudonime za [[$1]]?",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Jezik:",
+	"wikibase-modifyterm-language": "Jezični kod:",
 	"wikibase-mergeitems-success": "$1 je uspešno spojena u $3.",
 	"special-dispatchstats": "Statistika dnevnika otprema",
 	"wikibase-dispatchstats-no-stats": "Trenutno nema raspoloživih statistika.",
@@ -143,7 +144,7 @@
 	"wikibase-history-title-without-label": "Istorija izmena za ($1)",
 	"special-entitieswithoutlabel": "Subjekti bez naziva",
 	"wikibase-entitieswithoutlabel-legend": "Dobavi spisak subjekata bez naziva",
-	"wikibase-entitieswithoutlabel-label-language": "Jezik:",
+	"wikibase-entitieswithoutlabel-label-language": "Jezični kod:",
 	"wikibase-entitieswithoutlabel-label-type": "Vrsta:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "svi",
 	"wikibase-entitieswithoutlabel-submit": "Pronađi",

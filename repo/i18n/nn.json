@@ -3,7 +3,8 @@
 		"authors": [
 			"Jeblad",
 			"Njardarlogar",
-			"Roarjo"
+			"Roarjo",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Strukturert datalager",
@@ -87,7 +88,7 @@
 	"wikibase-itembytitle-create": "Du kan også [$1 opprette eit element].",
 	"special-itemdisambiguation": "Fleirtyding: Element med same etikett",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Søk etter element etter språk og merkelapp",
-	"wikibase-itemdisambiguation-lookup-language": "Språk:",
+	"wikibase-itemdisambiguation-lookup-language": "Språkkode:",
 	"wikibase-itemdisambiguation-lookup-label": "Merkelapp:",
 	"wikibase-itemdisambiguation-submit": "Søk",
 	"wikibase-itemdisambiguation-nothing-found": "Diverre vart ingen element med den merkelappen funne.",
@@ -135,7 +136,7 @@
 	"wikibase-setsitelink-add-failed": "Nettstadlenkja kunne ikkje lagrast.",
 	"wikibase-setsitelink-remove-failed": "Nettstadlenkja kunne ikkje fjernast.",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Språk:",
+	"wikibase-modifyterm-language": "Språkkode:",
 	"special-dispatchstats": "Statistikk for sending av endringar",
 	"wikibase-dispatchstats-intro": "Denne sida gjev statistikk for sending av endringar til klientane.\nEin klientwiki vert gjord merksam på ei endring på {{SITENAME}} so snart endringa er send til denne wikien og jobbkøen hans har handsama meldinga.\n* {{int:wikibase-dispatchstats-changes}} viser talet og datoen for det eldste og det nyaste elementet som finst i køen no.\n* {{int:wikibase-dispatchstats-stats}} gjev informasjon om dei klientwikiane med mest og minst seinking, og ein median i mellom. For kvar wiki er denne informasjonen gjeven:\n** «{{int:wikibase-dispatchstats-site-id}}» er den interne ID-en til klientwikien\n** «{{int:wikibase-dispatchstats-pos}}» er ID-en til den siste endringa som vart send til denne wikien.\n** «{{int:wikibase-dispatchstats-lag-time}}» er tida mellom endringa som sist vart send til wikien og den siste endringa utført på {{SITENAME}}.\n** «{{int:wikibase-dispatchstats-touched}}» er tida då den siste gruppa av endringar vart send til wikien.",
 	"wikibase-dispatchstats-no-stats": "Nett no er det ingen statistikkar tilgjengelege.",
@@ -163,7 +164,7 @@
 	"wikibase-entitieswithoutdescription-legend": "Få ei liste over eininigar utan skildring",
 	"special-entitieswithoutlabel": "Einingar utan merkelapp",
 	"wikibase-entitieswithoutlabel-legend": "Hent liste over einingar utan merkelapp",
-	"wikibase-entitieswithoutlabel-label-language": "Språk:",
+	"wikibase-entitieswithoutlabel-label-language": "Språkkode:",
 	"wikibase-entitieswithoutlabel-label-type": "Type:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "alle",
 	"wikibase-entitieswithoutlabel-submit": "Finn",

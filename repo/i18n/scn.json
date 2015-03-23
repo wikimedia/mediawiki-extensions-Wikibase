@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Pippinu",
-			"Gmelfi"
+			"Gmelfi",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Dipòsitu di dati strutturati",
@@ -123,7 +124,7 @@
 	"wikibase-gotolinkedpage-summary": "Special:GoToLinkedPage giuva pi' truvari la pàggina dûn suggettu ntôn situ culligatu.<br /> Lu campu a' manu manca, \"Situ:\", è unni si mèttunu li còdici dâ lingua e dû situ.<br />  Ntô campu a' manu dritta, \"ID dû suggettu:\", s'havi a' mèttiri l'ID dû suggettu chi' si voli circari.",
 	"special-itemdisambiguation": "Disambiguazzioni di suggetti",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Cerca suggetti pi' lingua ed etichetta",
-	"wikibase-itemdisambiguation-lookup-language": "Lingua:",
+	"wikibase-itemdisambiguation-lookup-language": "Codici dâ lingua:",
 	"wikibase-itemdisambiguation-lookup-label": "Etichetta:",
 	"wikibase-itemdisambiguation-submit": "Cerca",
 	"wikibase-itemdisambiguation-nothing-found": "Purtroppu nun fu' truvatu nuddu suggettu cu' st'etichetta.",
@@ -187,7 +188,7 @@
 	"wikibase-setsitelink-add-failed": "Nun si potti sarvari lu culligamentu ô situ.",
 	"wikibase-setsitelink-remove-failed": "Nun si potti livari lu culligamentu ô situ.",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Lingua:",
+	"wikibase-modifyterm-language": "Codici dâ lingua:",
 	"special-mergeitems": "Junci du suggetti",
 	"wikibase-mergeitems-intro": "Si' junci du suggetti, tutti l'etichetti, li discrizzioni, l'alias, li culligamenti ê siti e li dichiarazzioni si spòstunu dûn suggettu a' l'autru.",
 	"wikibase-mergeitems-fromid": "L'ID chi' s'havi a' jùnciri",
@@ -232,7 +233,7 @@
 	"wikibase-entitieswithoutdescription-legend": "Duna na lista di l'entità chi' nun hannu discrizzioni",
 	"special-entitieswithoutlabel": "Entità senza etichetta",
 	"wikibase-entitieswithoutlabel-legend": "Duna na lista di l'entità chi' nun hannu etichetta",
-	"wikibase-entitieswithoutlabel-label-language": "Lingua:",
+	"wikibase-entitieswithoutlabel-label-language": "Codici dâ lingua:",
 	"wikibase-entitieswithoutlabel-label-type": "Tipu:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "tutti",
 	"wikibase-entitieswithoutlabel-submit": "Trova",

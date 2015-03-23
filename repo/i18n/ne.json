@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"बिप्लब आनन्द"
+		]
+	},
+	"wikibase-edit": "सम्पादन",
+	"wikibase-add": "जोड्ने",
+	"wikibase-sitelinks-special": "अन्य साइटहरू",
+	"wikibase-statementview-rank-normal": "सामान्य ओहदा",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|reference|सन्दर्भहरू}}"
+}

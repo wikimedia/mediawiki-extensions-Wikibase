@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Xuacu",
-			"Fitoschido"
+			"Fitoschido",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Depósitu de datos estructuraos",
@@ -109,7 +110,7 @@
 	"wikibase-gotolinkedpage-submit": "Dir",
 	"special-itemdisambiguation": "Dixebra d'elementos",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Buscar elementos por llingua y etiqueta",
-	"wikibase-itemdisambiguation-lookup-language": "Llingua:",
+	"wikibase-itemdisambiguation-lookup-language": "Códigu de llingua:",
 	"wikibase-itemdisambiguation-lookup-label": "Etiqueta:",
 	"wikibase-itemdisambiguation-submit": "Guetar",
 	"wikibase-itemdisambiguation-nothing-found": "Sentímoslo, nun s'alcontró nengún elementu con esa etiqueta.",
@@ -164,7 +165,7 @@
 	"wikibase-setsitelink-add-failed": "L'enllaz del sitiu nun pudo guardase.",
 	"wikibase-setsitelink-remove-failed": "L'enllaz del sitiu nun pudo desaniciase.",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Llingua:",
+	"wikibase-modifyterm-language": "Códigu de llingua:",
 	"special-mergeitems": "Fusionar dos elementos",
 	"wikibase-mergeitems-intro": "Si fusiona dos elementos, toles etiquetes, descripciones, alcuños, enllaces web y declaraciones moveránse d'un elementu al otru.",
 	"wikibase-mergeitems-fromid": "La id dende la qu'hai que fusionar",
@@ -197,7 +198,7 @@
 	"wikibase-entitieswithoutdescription-legend": "Ver la llista d'entidaes ensin descripción",
 	"special-entitieswithoutlabel": "Entidaes ensin etiqueta",
 	"wikibase-entitieswithoutlabel-legend": "Ver la llista d'entidaes ensin etiqueta",
-	"wikibase-entitieswithoutlabel-label-language": "Llingua:",
+	"wikibase-entitieswithoutlabel-label-language": "Códigu de llingua:",
 	"wikibase-entitieswithoutlabel-label-type": "Tipu:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "toes",
 	"wikibase-entitieswithoutlabel-submit": "Alcontrar",

@@ -4,7 +4,8 @@
 			"Erdemaslancan",
 			"Gorizon",
 			"Marmase",
-			"Mirzali"
+			"Mirzali",
+			"Macofe"
 		]
 	},
 	"wikibase-entity-item": "unsur",
@@ -45,7 +46,7 @@
 	"wikibase-itembytitle-lookup-page": "Pele:",
 	"wikibase-itembytitle-submit": "Cı geyre",
 	"wikibase-gotolinkedpage-submit": "Şo",
-	"wikibase-itemdisambiguation-lookup-language": "Zıwan:",
+	"wikibase-itemdisambiguation-lookup-language": "Kodê zıwani:",
 	"wikibase-itemdisambiguation-lookup-label": "Etiket:",
 	"wikibase-itemdisambiguation-submit": "Cı geyre",
 	"wikibase-newproperty-datatype": "Babetê melumati:",
@@ -60,7 +61,7 @@
 	"wikibase-setsitelink-badges": "Rozeti:",
 	"wikibase-setsitelink-submit": "Eyarê linka sita",
 	"wikibase-modifyentity-id": "ID",
-	"wikibase-modifyterm-language": "Zıwan:",
+	"wikibase-modifyterm-language": "Kodê zıwani:",
 	"wikibase-dispatchstats-change-id": "ID",
 	"wikibase-dispatchstats-change-timestamp": "İmzay demi",
 	"wikibase-dispatchstats-oldest-change": "Tewr kehan",
@@ -75,7 +76,7 @@
 	"wikibase-dispatchstats-stalest": "Tewr kehani",
 	"wikibase-dispatchstats-median": "Miyanên",
 	"wikibase-dispatchstats-average": "Averac",
-	"wikibase-entitieswithoutlabel-label-language": "Zıwan:",
+	"wikibase-entitieswithoutlabel-label-language": "Kodê zıwani:",
 	"wikibase-entitieswithoutlabel-label-type": "Babet:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "pêro",
 	"wikibase-entitieswithoutlabel-submit": "Bıvin",

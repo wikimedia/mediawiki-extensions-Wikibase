@@ -5,7 +5,8 @@
 			"Manuspanicker",
 			"Praveenp",
 			"Santhosh.thottingal",
-			"Vssun"
+			"Vssun",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "വിന്യസിത ഡേറ്റാ റെപ്പോസിറ്ററി",
@@ -87,7 +88,7 @@
 	"wikibase-itembytitle-submit": "തിരയുക",
 	"wikibase-itembytitle-create": "താങ്കൾക്ക് [$1 ഒരു ഇനം സൃഷ്ടിക്കുകയും] ആവാം.",
 	"special-itemdisambiguation": "ഇനത്തിന്റെ വിവക്ഷകൾ",
-	"wikibase-itemdisambiguation-lookup-language": "ഭാഷ:",
+	"wikibase-itemdisambiguation-lookup-language": "ഭാഷയുടെ കോഡ്:",
 	"wikibase-itemdisambiguation-lookup-label": "തലക്കുറി:",
 	"wikibase-itemdisambiguation-submit": "തിരയുക",
 	"wikibase-itemdisambiguation-nothing-found": "ക്ഷമിക്കുക, ആ തലക്കുറിയുള്ള ഒരിനവും കണ്ടെത്താനായില്ല.",
@@ -105,7 +106,7 @@
 	"wikibase-setdescription-label": "വിവരണം:",
 	"wikibase-setdescription-submit": "വിവരണം സജ്ജീകരിക്കുക",
 	"wikibase-setaliases-label": "അപരനാമങ്ങൾ:",
-	"wikibase-modifyterm-language": "ഭാഷ",
+	"wikibase-modifyterm-language": "ഭാഷയുടെ കോഡ്:",
 	"wikibase-dispatchstats-change-timestamp": "സമയമുദ്ര",
 	"wikibase-dispatchstats-oldest-change": "ഏറ്റവും പഴയവ",
 	"wikibase-dispatchstats-newest-change": "ഏറ്റവും പുതിയവ",
@@ -114,7 +115,7 @@
 	"wikibase-dispatchstats-lag-num": "അവശേഷിക്കുന്നു",
 	"wikibase-dispatchstats-lag-time": "താമസം",
 	"wikibase-dispatchstats-average": "ശരാശരി",
-	"wikibase-entitieswithoutlabel-label-language": "ഭാഷ:",
+	"wikibase-entitieswithoutlabel-label-language": "ഭാഷയുടെ കോഡ്:",
 	"wikibase-entitieswithoutlabel-label-type": "തരം:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "എല്ലാം",
 	"wikibase-entitieswithoutlabel-submit": "കണ്ടെത്തുക",

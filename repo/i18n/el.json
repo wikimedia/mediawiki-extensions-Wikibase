@@ -6,7 +6,8 @@
 			"Protnet",
 			"Xaris333",
 			"Indoril",
-			"Evropi"
+			"Evropi",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Αποθετήριο δομημένων δεδομένων",
@@ -101,7 +102,7 @@
 	"wikibase-itembytitle-create": "Μπορείτε επίσης να [$1να δημιουργήσετε ένα αντικείμενο].",
 	"special-itemdisambiguation": "Αποσαφήνιση αντικειμένου",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Αναζήτηση αντικειμένων ανά γλώσσα και ετικέτα",
-	"wikibase-itemdisambiguation-lookup-language": "Γλώσσα:",
+	"wikibase-itemdisambiguation-lookup-language": "Κωδικός γλώσσας:",
 	"wikibase-itemdisambiguation-lookup-label": "Ετικέτα:",
 	"wikibase-itemdisambiguation-submit": "Αναζήτηση",
 	"wikibase-itemdisambiguation-nothing-found": "Συγνώμη, δεν βρέθηκε κανένα αντικείμενο με αυτή την ετικέτα.",
@@ -128,12 +129,12 @@
 	"wikibase-setdescription-label": "Περιγραφή:",
 	"wikibase-setdescription-submit": "Προσθέστε μια περιγραφή",
 	"wikibase-setdescription-warning-remove": "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε την περιγραφή του [[$1]];",
-	"wikibase-modifyterm-language": "Γλώσσα:",
+	"wikibase-modifyterm-language": "Κωδικός γλώσσας:",
 	"special-mergeitems": "Συγχώνευση δύο αντικειμένων",
 	"wikibase-mergeitems-submit": "Συγχώνευση αντικειμένων",
 	"wikibase-dispatchstats-oldest-change": "Παλαιότερο",
 	"wikibase-dispatchstats-newest-change": "Νεότερο",
-	"wikibase-entitieswithoutlabel-label-language": "Γλώσσα:",
+	"wikibase-entitieswithoutlabel-label-language": "Κωδικός γλώσσας:",
 	"wikibase-entitieswithoutlabel-label-type": "Τύπος:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "όλα",
 	"wikibase-entitieswithoutlabel-submit": "Εύρεση",

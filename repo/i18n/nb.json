@@ -3,7 +3,8 @@
 		"authors": [
 			"Danmichaelo",
 			"Event",
-			"Jeblad"
+			"Jeblad",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Tjenertutvidelse for Wikibase, det strukturerte datalageret",
@@ -115,7 +116,7 @@
 	"wikibase-gotolinkedpage-submit": "Gå",
 	"special-itemdisambiguation": "Flertydig: Element med samme etikett",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Søk etter element med etikett",
-	"wikibase-itemdisambiguation-lookup-language": "Språk:",
+	"wikibase-itemdisambiguation-lookup-language": "Språkkode:",
 	"wikibase-itemdisambiguation-lookup-label": "Etikett:",
 	"wikibase-itemdisambiguation-submit": "Søk",
 	"wikibase-itemdisambiguation-nothing-found": "Beklager, ingen element med den etiketten ble funnet.",
@@ -170,7 +171,7 @@
 	"wikibase-setsitelink-add-failed": "Nettstedlenken kunne ikke lagres.",
 	"wikibase-setsitelink-remove-failed": "Nettstedlenken kunne ikke fjernes.",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Språk:",
+	"wikibase-modifyterm-language": "Språkkode:",
 	"special-mergeitems": "Fletter to elementer",
 	"wikibase-mergeitems-intro": "Hvis du fletter to elementer, vil alle etiketter, beskrivelser, aliaser og utsagn bli flyttet fra det ene elementet over til det andre.",
 	"wikibase-mergeitems-fromid": "Id-en det flettes fra",
@@ -205,7 +206,7 @@
 	"wikibase-entitieswithoutdescription-legend": "Hent liste over elementer uten beskrivelse",
 	"special-entitieswithoutlabel": "Entiteter uten etikett",
 	"wikibase-entitieswithoutlabel-legend": "Hent en liste over entiteter uten etikett",
-	"wikibase-entitieswithoutlabel-label-language": "Språk:",
+	"wikibase-entitieswithoutlabel-label-language": "Språkkode:",
 	"wikibase-entitieswithoutlabel-label-type": "Type:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "alle",
 	"wikibase-entitieswithoutlabel-submit": "Søk",

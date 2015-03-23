@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"ChrisPtDe"
+			"ChrisPtDe",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Dèpôt de donâs structurâyes",
@@ -52,7 +53,7 @@
 	"wikibase-itembytitle-create": "Vos pouede asse-ben [$1 fâre un novél èlèment].",
 	"special-itemdisambiguation": "Homonimia&nbsp;: èlèments avouéc lo mémo lambél",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Rechèrche d’èlèments per lambél",
-	"wikibase-itemdisambiguation-lookup-language": "Lengoua :",
+	"wikibase-itemdisambiguation-lookup-language": "Code lengoua :",
 	"wikibase-itemdisambiguation-lookup-label": "Lambél :",
 	"wikibase-itemdisambiguation-submit": "Rechèrchiér",
 	"wikibase-itemdisambiguation-nothing-found": "Dèconsolâ, nion èlèment avouéc cél lambél est étâ trovâ.",
@@ -72,14 +73,14 @@
 	"wikibase-setlabel-label": "Lambél",
 	"wikibase-setlabel-submit": "Dèfenir lo lambél",
 	"wikibase-modifyentity-id": "Numerô",
-	"wikibase-modifyterm-language": "Lengoua",
+	"wikibase-modifyterm-language": "Code lengoua :",
 	"special-listdatatypes": "Lista de tôs los tipos de donâs disponiblos",
 	"wikibase-listdatatypes-intro": "O est na lista de tôs los tipos de donâs en cors d’usâjo sur cet’enstalacion :",
 	"wikibase-history-title-with-label": "Historico de les vèrsions de « $2 » ($1)",
 	"wikibase-history-title-without-label": "Historico de les vèrsions de ($1)",
 	"special-entitieswithoutlabel": "Lista de les entitâts sen lambél",
 	"wikibase-entitieswithoutlabel-legend": "Avêr la lista de les entitâts sen lambél",
-	"wikibase-entitieswithoutlabel-label-language": "Lengoua :",
+	"wikibase-entitieswithoutlabel-label-language": "Code lengoua :",
 	"wikibase-entitieswithoutlabel-submit": "Trovar",
 	"wikibase-entitieswithoutlabel-invalid-language": "« $1 » est pas un code lengoua valido.",
 	"special-entitydata": "Donâs d’entitât",

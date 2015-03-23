@@ -3,7 +3,8 @@
 		"authors": [
 			"Borichèt",
 			"Dragonòt",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Depòsit ëd dat struturà",
@@ -155,7 +156,7 @@
 	"wikibase-setsitelink-add-failed": "La liura ëd sit a l'ha pa podù esse argistrà.",
 	"wikibase-setsitelink-remove-failed": "La liura ëd sit a l'ha pa podù esse gavà.",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Lenga:",
+	"wikibase-modifyterm-language": "Còdes ëd lenga:",
 	"special-mergeitems": "Fonde doi element",
 	"wikibase-mergeitems-intro": "S'a fond doi element, tute le tichëtte, descrission, sobrichet, liure ëd sit e enonsià a saran tramudà da n'element a l'àutr.",
 	"wikibase-mergeitems-fromid": "L'identificativ da 'ndoa fonde",
@@ -188,7 +189,7 @@
 	"wikibase-entitieswithoutdescription-legend": "Oten-e na lista dj'entità sensa descrission",
 	"special-entitieswithoutlabel": "Entità sensa tichëtta",
 	"wikibase-entitieswithoutlabel-legend": "Arcuperé la lista dj'entità sensa tichëtta",
-	"wikibase-entitieswithoutlabel-label-language": "Lenga:",
+	"wikibase-entitieswithoutlabel-label-language": "Còdes ëd lenga:",
 	"wikibase-entitieswithoutlabel-label-type": "Sòrt:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "tuti",
 	"wikibase-entitieswithoutlabel-submit": "Treuva",

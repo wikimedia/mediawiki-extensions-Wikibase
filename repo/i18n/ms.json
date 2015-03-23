@@ -3,7 +3,8 @@
 		"authors": [
 			"Anakmalaysia",
 			"Aurora",
-			"Shirayuki"
+			"Shirayuki",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Repositori data berstruktur",
@@ -98,7 +99,7 @@
 	"wikibase-itembytitle-create": "Anda juga boleh [$1 mencipta perkara].",
 	"special-itemdisambiguation": "Penyahkekaburan perkara",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Cari perkara mengikut bahasa dan label",
-	"wikibase-itemdisambiguation-lookup-language": "Bahasa:",
+	"wikibase-itemdisambiguation-lookup-language": "Kod bahasa:",
 	"wikibase-itemdisambiguation-lookup-label": "Label",
 	"wikibase-itemdisambiguation-submit": "Cari",
 	"wikibase-itemdisambiguation-nothing-found": "Maaf, tiada perkara dengan label itu dijumpai.",
@@ -150,7 +151,7 @@
 	"wikibase-setsitelink-add-failed": "Pautan laman tidak dapat disimpan.",
 	"wikibase-setsitelink-remove-failed": "Pautan laman tidak dapat digugurkan.",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Bahasa:",
+	"wikibase-modifyterm-language": "Kod bahasa:",
 	"special-mergeitems": "Gabungkan dua perkara",
 	"wikibase-mergeitems-intro": "Jika anda menggabungkan dua perkara, maka semua label, penerangan, alias, pautan dan kenyataan akan dipindahkan dari salah satu perkara itu ke perkara yang satu lagi.",
 	"wikibase-mergeitems-fromid": "ID dari mana hendak digabungkan",
@@ -183,7 +184,7 @@
 	"wikibase-history-title-without-label": "Sejarah semakan ($1)",
 	"special-entitieswithoutlabel": "Entiti tanpa label",
 	"wikibase-entitieswithoutlabel-legend": "Dapatkan senarai entiti tanpa label",
-	"wikibase-entitieswithoutlabel-label-language": "Bahasa:",
+	"wikibase-entitieswithoutlabel-label-language": "Kod bahasa:",
 	"wikibase-entitieswithoutlabel-label-type": "Jenis:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "semua",
 	"wikibase-entitieswithoutlabel-submit": "Cari",

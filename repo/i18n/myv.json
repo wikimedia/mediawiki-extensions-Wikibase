@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Botuzhaleny-sodamo"
+			"Botuzhaleny-sodamo",
+			"Macofe"
 		]
 	},
-	"wikibase-itemdisambiguation-lookup-language": "Келесь:",
-	"wikibase-modifyterm-language": "Келесь:",
-	"wikibase-entitieswithoutlabel-label-language": "Келесь:",
+	"wikibase-itemdisambiguation-lookup-language": "Келень кодось:",
+	"wikibase-modifyterm-language": "Келень кодось:",
+	"wikibase-entitieswithoutlabel-label-language": "Келень кодось:",
 	"wikibase-entitieswithoutlabel-invalid-language": "«$1» аволь стандартонь келень код."
 }

@@ -3,7 +3,8 @@
 		"authors": [
 			"David1010",
 			"Tokoko",
-			"MIKHEIL"
+			"MIKHEIL",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "სტრუქტურირებული მონაცემების საცავი",
@@ -82,7 +83,7 @@
 	"wikibase-itembytitle-create": "თქვენ აგრეთვე შეგიძლიათ [$1 შექმნათ ელემენტი].",
 	"special-itemdisambiguation": "ელემენტის მრავალმნიშვნელობა",
 	"wikibase-itemdisambiguation-lookup-fieldset": "ელემენტების ძიება ენისა და სახელის მიხედვით",
-	"wikibase-itemdisambiguation-lookup-language": "ენა:",
+	"wikibase-itemdisambiguation-lookup-language": "ენის კოდი:",
 	"wikibase-itemdisambiguation-lookup-label": "სახელი:",
 	"wikibase-itemdisambiguation-submit": "ძიება",
 	"wikibase-itemdisambiguation-nothing-found": "სამწუხაროდ, ელემენტი მსგავსი სახელწოდებით ვერ მოიძებნა.",
@@ -120,7 +121,7 @@
 	"wikibase-setaliases-warning-remove": "დარწმუნებული ხართ, რომ გსურთ წაშალოთ ყველა ფსევდონიმი [[$1]]-თვის?",
 	"wikibase-setsitelink-not-item": "id $1 არ ეკუთვნის არცერთ ელემენტს",
 	"wikibase-modifyentity-id": "იდენტიფიკატორი:",
-	"wikibase-modifyterm-language": "ენა:",
+	"wikibase-modifyterm-language": "ენის კოდი:",
 	"special-mergeitems": "ორი ელემენტის შერწყმა",
 	"wikibase-mergeitems-submit": "ელემენტების შერწყმა",
 	"wikibase-dispatchstats-no-stats": "ამჟამად სტატისტიკური მონაცემები არ არის ხელმისაწვდომი.",
@@ -144,7 +145,7 @@
 	"wikibase-listdatatypes-intro": "ეს არის ამ ისტალაციის ყველა ამჟამად გამოყენებადი მონაცემთა ტიპების სია:",
 	"wikibase-history-title-with-label": "ცვლილებების ისტორია „$2“-თვის ($1)",
 	"wikibase-history-title-without-label": "$1 — ცვლილებების ისტორია",
-	"wikibase-entitieswithoutlabel-label-language": "ენა:",
+	"wikibase-entitieswithoutlabel-label-language": "ენის კოდი:",
 	"wikibase-entitieswithoutlabel-label-type": "ტიპი:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "ყველა",
 	"wikibase-entitieswithoutlabel-submit": "ძიება",

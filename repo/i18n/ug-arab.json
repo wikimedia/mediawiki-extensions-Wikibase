@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sahran"
+			"Sahran",
+			"Macofe"
 		]
 	},
+	"wikibase-entity-query": "سۈرۈشتۈر",
 	"wikibase-edit": "تەھرىر",
 	"wikibase-add": "قوش",
 	"wikibase-sitelink-site-edit-placeholder": "site",
@@ -14,7 +16,7 @@
 	"wikibase-itembytitle-lookup-site": "تور بېكەت:",
 	"wikibase-itembytitle-lookup-page": "بەت:",
 	"wikibase-itembytitle-submit": "ئىزدە",
-	"wikibase-itemdisambiguation-lookup-language": "تىل:",
+	"wikibase-itemdisambiguation-lookup-language": ":تىل كودى",
 	"wikibase-itemdisambiguation-lookup-label": "ئەن:",
 	"wikibase-itemdisambiguation-submit": "ئىزدە",
 	"wikibase-newproperty-datatype": "سانلىق-مەلۇمات تىپى:",
@@ -23,8 +25,8 @@
 	"wikibase-newentity-submit": "قۇر",
 	"wikibase-setlabel-label": "ئەن",
 	"wikibase-modifyentity-id": "كىملىكى",
-	"wikibase-modifyterm-language": "تىل",
-	"wikibase-entitieswithoutlabel-label-language": "تىل:",
+	"wikibase-modifyterm-language": ":تىل كودى",
+	"wikibase-entitieswithoutlabel-label-language": ":تىل كودى",
 	"wikibase-entitieswithoutlabel-submit": "ئىزدە:",
 	"wikibase-restoreold": "ئەسلىگە كەلتۈر"
 }

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Iwan Novirion",
-			"Shirayuki"
+			"Shirayuki",
+			"Macofe"
 		]
 	},
 	"wikibase-edit": "suntiang",
@@ -43,7 +44,7 @@
 	"wikibase-itembytitle-submit": "Cari",
 	"special-itemdisambiguation": "Item disambiguasi",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Cari item manuruik bahaso jo label",
-	"wikibase-itemdisambiguation-lookup-language": "Bahaso:",
+	"wikibase-itemdisambiguation-lookup-language": "Kode bahaso:",
 	"wikibase-itemdisambiguation-lookup-label": "Label:",
 	"wikibase-itemdisambiguation-submit": "Cari",
 	"wikibase-itemdisambiguation-nothing-found": "Maaf, item jo label tasabuik indak basuo.",
@@ -67,8 +68,8 @@
 	"wikibase-setaliases-label": "Namo lain:",
 	"wikibase-setaliases-submit": "Buek namo lain",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Bahaso:",
-	"wikibase-entitieswithoutlabel-label-language": "Bahaso:",
+	"wikibase-modifyterm-language": "Kode bahaso:",
+	"wikibase-entitieswithoutlabel-label-language": "Kode bahaso:",
 	"wikibase-entitieswithoutlabel-label-type": "Jenis:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "sadonyo",
 	"wikibase-entitieswithoutlabel-submit": "Cari",

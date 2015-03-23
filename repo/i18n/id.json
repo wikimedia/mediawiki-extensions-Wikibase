@@ -6,7 +6,8 @@
 			"Iwan Novirion",
 			"පසිඳු කාවින්ද",
 			"아라",
-			"Ahdan"
+			"Ahdan",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Penyimpanan data berstruktur",
@@ -96,7 +97,7 @@
 	"wikibase-itembytitle-create": "Anda juga dapat [{{fullurl:Special:CreateItem|site=$1&page=$2}} membuat item baru].",
 	"special-itemdisambiguation": "Item disambiguasi",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Cari item menurut bahasa dan label",
-	"wikibase-itemdisambiguation-lookup-language": "Bahasa:",
+	"wikibase-itemdisambiguation-lookup-language": "Kode bahasa:",
 	"wikibase-itemdisambiguation-lookup-label": "Label:",
 	"wikibase-itemdisambiguation-submit": "Cari",
 	"wikibase-itemdisambiguation-nothing-found": "Maaf, item dengan label tersebut tidak ditemukan.",
@@ -137,7 +138,7 @@
 	"wikibase-setaliases-submit": "Buat nama lain",
 	"wikibase-setaliases-warning-remove": "Apakah Anda ingin menghapus semua nama lain [[$1]]?",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Bahasa:",
+	"wikibase-modifyterm-language": "Kode bahasa:",
 	"special-dispatchstats": "Perubahan pengiriman statistik",
 	"wikibase-dispatchstats-intro": "Halaman ini menyediakan statistik tentang perubahan pengiriman kepada klien.",
 	"wikibase-dispatchstats-no-stats": "Saat ini tidak ada statistik yang tersedia.",
@@ -163,7 +164,7 @@
 	"wikibase-history-title-without-label": "Riwayat revisi ($1)",
 	"special-entitieswithoutlabel": "Entitas tanpa label",
 	"wikibase-entitieswithoutlabel-legend": "Dapatkan daftar entitas tanpa label",
-	"wikibase-entitieswithoutlabel-label-language": "Bahasa:",
+	"wikibase-entitieswithoutlabel-label-language": "Kode bahasa:",
 	"wikibase-entitieswithoutlabel-label-type": "Jenis:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "semua",
 	"wikibase-entitieswithoutlabel-submit": "Temukan",

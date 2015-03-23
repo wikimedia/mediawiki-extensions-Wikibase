@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"VASANTH S.N.",
-			"Omshivaprakash"
+			"Omshivaprakash",
+			"Macofe"
 		]
 	},
 	"wikibase-edit": "ಸಂಪಾದಿಸಿ",
@@ -24,7 +25,7 @@
 	"wikibase-entityselector-more": "ಹೆಚ್ಚು",
 	"wikibase-itembytitle-lookup-page": "ಪುಟ:",
 	"wikibase-itembytitle-submit": "ಹುಡುಕು",
-	"wikibase-itemdisambiguation-lookup-language": "ಭಾಷೆ:",
+	"wikibase-itemdisambiguation-lookup-language": "ಭಾಷಾ ಸಂಕೇತ:",
 	"wikibase-itemdisambiguation-lookup-label": "ಗುರುತು ಪಟ್ಟಿ:",
 	"wikibase-itemdisambiguation-submit": "ಹುಡುಕು",
 	"wikibase-newentity-label": "ಗುರುತು ಪಟ್ಟಿ:",
@@ -32,5 +33,5 @@
 	"wikibase-newentity-submit": "ಸೃಷ್ಟಿಸು",
 	"wikibase-setlabel-label": "ಗುರುತು ಪಟ್ಟಿ:",
 	"wikibase-setdescription-label": "ವಿವರ:",
-	"wikibase-modifyterm-language": "ಭಾಷೆ:"
+	"wikibase-modifyterm-language": "ಭಾಷಾ ಸಂಕೇತ:"
 }

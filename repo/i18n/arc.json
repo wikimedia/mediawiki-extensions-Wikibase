@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Basharh"
+			"Basharh",
+			"Macofe"
 		]
 	},
 	"wikibase-edit": "ܫܚܠܦ",
@@ -11,6 +12,6 @@
 	"wikibase-statements": "ܓܠܝܬ̈ܐ",
 	"wikibase-aliases-label": "ܐܦ ܐܬܝܕܥܬ ܒܫܡ:",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ܡܒܘܥܐ|ܡܒܘܥ̈ܐ}}",
-	"wikibase-itemdisambiguation-lookup-language": "ܠܫܢܐ:",
-	"wikibase-modifyterm-language": "ܠܫܢܐ:"
+	"wikibase-itemdisambiguation-lookup-language": "ܪܡܙܐ ܕܠܫܢܐ:",
+	"wikibase-modifyterm-language": "ܪܡܙܐ ܕܠܫܢܐ:"
 }

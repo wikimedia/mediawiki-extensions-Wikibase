@@ -5,7 +5,8 @@
 			"Anakmalaysia",
 			"ArnoLagrange",
 			"KuboF",
-			"Yekrats"
+			"Yekrats",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Deponejo por strukturitaj datumoj",
@@ -108,7 +109,7 @@
 	"wikibase-gotolinkedpage-submit": "Ek",
 	"special-itemdisambiguation": "Apartigado de eroj",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Serĉu erojn laŭ lingvo kaj etikedo",
-	"wikibase-itemdisambiguation-lookup-language": "Lingvo:",
+	"wikibase-itemdisambiguation-lookup-language": "Lingva kodo:",
 	"wikibase-itemdisambiguation-lookup-label": "Etikedo:",
 	"wikibase-itemdisambiguation-submit": "Serĉu",
 	"wikibase-itemdisambiguation-nothing-found": "Bedaŭrinde neniu ero kun tia etikedo estis trovita.",
@@ -146,7 +147,7 @@
 	"wikibase-setsitelink-add-failed": "La reteja ligilo ne povis esti konservita.",
 	"wikibase-setsitelink-remove-failed": "La reteja ligilo ne povis esti konservita.",
 	"wikibase-modifyentity-id": "Identigilo:",
-	"wikibase-modifyterm-language": "Lingvo:",
+	"wikibase-modifyterm-language": "Lingva kodo:",
 	"special-mergeitems": "Kunigi du erojn",
 	"wikibase-mergeitems-submit": "Kunigi erojn",
 	"wikibase-dispatchstats-change-id": "Identigo",
@@ -167,7 +168,7 @@
 	"wikibase-entitieswithoutdescription-legend": "Listigi entojn sen priskribo",
 	"special-entitieswithoutlabel": "Entoj sen etikedo",
 	"wikibase-entitieswithoutlabel-legend": "Listigi entojn sen etikedo",
-	"wikibase-entitieswithoutlabel-label-language": "Lingvo:",
+	"wikibase-entitieswithoutlabel-label-language": "Lingva kodo:",
 	"wikibase-entitieswithoutlabel-label-type": "Tipo:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "ĉiuj",
 	"wikibase-entitieswithoutlabel-submit": "Trovi",

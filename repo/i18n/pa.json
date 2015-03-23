@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Babanwalia"
+			"Babanwalia",
+			"Macofe"
 		]
 	},
 	"wikibase-edit": "ਸੋਧੋ",
@@ -35,7 +36,7 @@
 	"wikibase-itembytitle-lookup-site": "ਸਾਈਟ:",
 	"wikibase-itembytitle-lookup-page": "ਸਫ਼ਾ:",
 	"wikibase-itembytitle-submit": "ਭਾਲ਼",
-	"wikibase-itemdisambiguation-lookup-language": "ਭਾਸ਼ਾ:",
+	"wikibase-itemdisambiguation-lookup-language": "ਭਾਸ਼ਾ ਕੋਡ:",
 	"wikibase-itemdisambiguation-lookup-label": "ਚੇਪੀ:",
 	"wikibase-itemdisambiguation-submit": "ਭਾਲ਼",
 	"wikibase-itemdisambiguation-nothing-found": "ਅਫ਼ਸੋਸ, ਇਸ ਚੇਪੀ ਵਾਲ਼ੀ ਕੋਈ ਮੱਦ ਨਹੀਂ ਲੱਭੀ।",
@@ -43,7 +44,7 @@
 	"wikibase-newentity-label": "ਚੇਪੀ:",
 	"wikibase-newentity-description": "ਵੇਰਵਾ:",
 	"wikibase-newentity-submit": "ਬਣਾਓ",
-	"wikibase-modifyterm-language": "ਭਾਸ਼ਾ:",
+	"wikibase-modifyterm-language": "ਭਾਸ਼ਾ ਕੋਡ:",
 	"special-mergeitems": "ਦੋ ਮੱਦਾਂ ਰਲ਼ਾਓ",
 	"wikibase-dispatchstats-oldest-change": "ਸਭ ਤੋਂ ਪੁਰਾਣਾ",
 	"wikibase-dispatchstats-newest-change": "ਸਭ ਤੋਂ ਨਵਾਂ",
@@ -53,7 +54,7 @@
 	"wikibase-dispatchstats-stalest": "ਸਭ ਤੋਂ ਬੇਹਾ",
 	"wikibase-dispatchstats-median": "ਦਰਮਿਆਨੀ",
 	"wikibase-dispatchstats-average": "ਔਸਤ",
-	"wikibase-entitieswithoutlabel-label-language": "ਭਾਸ਼ਾ:",
+	"wikibase-entitieswithoutlabel-label-language": "ਭਾਸ਼ਾ ਕੋਡ:",
 	"wikibase-entitieswithoutlabel-label-type": "ਕਿਸਮ:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "ਸਾਰੇ",
 	"wikibase-entitieswithoutlabel-submit": "ਲੱਭੋ",

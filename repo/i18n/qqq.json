@@ -36,10 +36,11 @@
 			"아라",
 			"Cwlin0416",
 			"Robby",
-			"KuboF"
+			"KuboF",
+			"Umherirrender"
 		]
 	},
-	"wikibase-desc": "{{desc|name=Wikibase|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
+	"wikibase-desc": "{{desc|name=Wikibase|url=https://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
 	"wikibase-entity-item": "How we refer to entities of type item. See also Wikidata's glossary on [[d:Wikidata:Glossary#item|item]].\n{{Identical|Item}}",
 	"wikibase-entity-property": "How we refer to entities of type property. See also Wikidatas glossary on [[d:Wikidata:Glossary#entity|entity]].\n{{Identical|Property}}",
 	"wikibase-entity-query": "How we refer to entities of type query. See also Wikidatas glossary on [[d:Wikidata:Glossary#entity|entity]].\n{{Identical|Query}}",

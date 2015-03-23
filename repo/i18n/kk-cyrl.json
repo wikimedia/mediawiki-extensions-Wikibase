@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Arystanbek",
-			"Нұрлан Рахымжанов"
+			"Нұрлан Рахымжанов",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Құрылымданған дерек қоймасы",
@@ -63,7 +64,7 @@
 	"wikibase-itembytitle-lookup-page": "Бет:",
 	"wikibase-itembytitle-submit": "Іздеу",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Тіл және деңгейіне қарай элементерді іздеу",
-	"wikibase-itemdisambiguation-lookup-language": "Тіл:",
+	"wikibase-itemdisambiguation-lookup-language": "Тіл коды:",
 	"wikibase-itemdisambiguation-lookup-label": "Деңгей:",
 	"wikibase-itemdisambiguation-submit": "Іздеу",
 	"wikibase-itemdisambiguation-nothing-found": "Кешіріңіз, бұл деңгейден элемент табылмады.",
@@ -83,7 +84,7 @@
 	"wikibase-setsitelink-add-failed": "Сайт сілтемесі сақталмады.",
 	"wikibase-setsitelink-remove-failed": "Сайт сілтемесі анынып тасталмады.",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Тіл:",
+	"wikibase-modifyterm-language": "Тіл коды:",
 	"wikibase-dispatchstats-changes": "Өзгерту журналы статистикасы",
 	"wikibase-dispatchstats-change-id": "ID",
 	"wikibase-dispatchstats-oldest-change": "Ең ескі",
@@ -92,7 +93,7 @@
 	"wikibase-dispatchstats-pos": "Позиция",
 	"wikibase-dispatchstats-lag-num": "Бітпеуде",
 	"wikibase-dispatchstats-large-lag": "(өте үлкен)",
-	"wikibase-entitieswithoutlabel-label-language": "Тіл:",
+	"wikibase-entitieswithoutlabel-label-language": "Тіл коды:",
 	"wikibase-entitieswithoutlabel-label-type": "Түрі:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "Барлығы",
 	"wikibase-entitieswithoutlabel-submit": "Табу",

@@ -4,7 +4,8 @@
 			"Chaduvari",
 			"Ravichandra",
 			"Veeven",
-			"రహ్మానుద్దీన్"
+			"రహ్మానుద్దీన్",
+			"Macofe"
 		]
 	},
 	"wikibase-entity-item": "అంశం",
@@ -40,7 +41,7 @@
 	"wikibase-entityselector-more": "మరిన్ని",
 	"wikibase-itembytitle-submit": "వెతుకు",
 	"wikibase-gotolinkedpage-submit": "వెళ్ళు",
-	"wikibase-itemdisambiguation-lookup-language": "భాష:",
+	"wikibase-itemdisambiguation-lookup-language": "భాష సంకేతం:",
 	"wikibase-itemdisambiguation-submit": "వెతుకు",
 	"wikibase-newentity-description": "వివరణ:",
 	"wikibase-setlabel-submit": "లేబులు తగిలించు",
@@ -48,11 +49,11 @@
 	"wikibase-setdescription-submit": "వివరణను ఇవ్వండి",
 	"wikibase-setaliases-label": "మారుపేర్లు:",
 	"wikibase-setaliases-submit": "మారుపేర్లు ఇవ్వండి",
-	"wikibase-modifyterm-language": "భాష",
+	"wikibase-modifyterm-language": "భాష సంకేతం:",
 	"special-mergeitems": "రెండు అంశాల విలీనం",
 	"wikibase-mergeitems-submit": "అంశాలను విలీనం చెయ్యి",
 	"wikibase-dispatchstats-average": "సగటు",
-	"wikibase-entitieswithoutlabel-label-language": "భాష:",
+	"wikibase-entitieswithoutlabel-label-language": "భాష సంకేతం:",
 	"wikibase-entitieswithoutlabel-label-type": "రకం:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "అన్నీ",
 	"wikibase-listdatatypes-wikibase-item-head": "అంశం",

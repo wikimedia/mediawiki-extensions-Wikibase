@@ -3,11 +3,11 @@
 		"authors": [
 			"CERminator",
 			"Edinwiki",
-			"Palapa"
+			"Palapa",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Strukturirano skladište podataka",
-	"specialpages-group-wikibaserepo": "Wikibase skladište",
 	"wikibase-entity-item": "stavka",
 	"wikibase-entity-property": "svojstvo",
 	"wikibase-entity-query": "upit",
@@ -56,21 +56,19 @@
 	"wikibase-snakview-property-input-placeholder": "svojstvo",
 	"wikibase-snakview-choosesnaktype": "Izaberite tip vrijednosti.",
 	"wikibase-snakview-variations-somevalue-label": "nepoznata vrijednost",
-	"wikibase-restrictionedit-tooltip-message": "Ova stranica je zaštićena. Izmjene su zabranjene.",
-	"wikibase-blockeduser-tooltip-message": "Vama je uređivanje onemogućeno.",
 	"wikibase-move-error": "Nemožete pomjeriti stranice koje se nalaze u imenskom prostoru podataka niti premjestiti stranice u taj imenski prostor.",
 	"wikibase-validator-label-conflict": "Oznaka \"$1\" je već povezana sa jezičnim kodom $2 kod nekog drugog svojstva ($3).",
 	"wikibase-validator-label-with-description-conflict": "Druga stavka ($3) je već povezana sa oznakom \"$1\" i opisom \"$4\" za jezični kod $2",
 	"wikibase-itembytitle-lookup-site": "Sajt:",
 	"wikibase-itembytitle-lookup-page": "Stranica:",
 	"wikibase-itembytitle-submit": "Traži",
-	"wikibase-itemdisambiguation-lookup-language": "Jezik:",
+	"wikibase-itemdisambiguation-lookup-language": "Kod jezika:",
 	"wikibase-itemdisambiguation-lookup-label": "Oznaka:",
 	"wikibase-itemdisambiguation-submit": "Pretraga",
 	"wikibase-newentity-label": "Oznaka:",
 	"wikibase-setlabel-label": "Oznaka:",
 	"wikibase-modifyentity-id": "ID",
-	"wikibase-modifyterm-language": "Jezik",
+	"wikibase-modifyterm-language": "Kod jezika:",
 	"wikibase-entitieswithoutlabel-submit": "Traži",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" nije važeća jezična oznaka."
 }

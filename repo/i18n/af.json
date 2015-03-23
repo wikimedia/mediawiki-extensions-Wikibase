@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Naudefj"
+			"Naudefj",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Databank vir gestruktureerde data",
@@ -63,7 +64,7 @@
 	"wikibase-itembytitle-submit": "Soek",
 	"wikibase-itembytitle-create": "U kan ook [$1 'n item skep].",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Soek vir items volgens taal en eitiket",
-	"wikibase-itemdisambiguation-lookup-language": "Taal:",
+	"wikibase-itemdisambiguation-lookup-language": "Taalkode:",
 	"wikibase-itemdisambiguation-lookup-label": "Etiket:",
 	"wikibase-itemdisambiguation-submit": "Soek",
 	"wikibase-itemdisambiguation-nothing-found": "Jammer, geen items met die etiket kon gevind word nie.",
@@ -90,7 +91,7 @@
 	"wikibase-setaliases-label": "Aliasse:",
 	"wikibase-setaliases-submit": "Stel aliasse",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Taal:",
+	"wikibase-modifyterm-language": "Taalkode:",
 	"wikibase-dispatchstats-change-id": "ID",
 	"wikibase-dispatchstats-change-timestamp": "Tydstip",
 	"wikibase-dispatchstats-oldest-change": "Oudste",
@@ -108,7 +109,7 @@
 	"special-listdatatypes": "Lys van beskikbare datatipes",
 	"special-entitieswithoutlabel": "Entiteite sonder etiket",
 	"wikibase-entitieswithoutlabel-legend": "Lys van entiteite sonder 'n etiket",
-	"wikibase-entitieswithoutlabel-label-language": "Taal:",
+	"wikibase-entitieswithoutlabel-label-language": "Taalkode:",
 	"wikibase-entitieswithoutlabel-label-type": "Tipe:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "alle",
 	"wikibase-entitieswithoutlabel-submit": "Vind",

@@ -18,7 +18,8 @@
 			"User555",
 			"Wiki13",
 			"아라",
-			"Southparkfan"
+			"Southparkfan",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Repository voor gestructureerde gegevens",
@@ -129,7 +130,7 @@
 	"wikibase-gotolinkedpage-submit": "OK",
 	"special-itemdisambiguation": "Items disambigueren",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Naar items zoeken op taal en label",
-	"wikibase-itemdisambiguation-lookup-language": "Taal:",
+	"wikibase-itemdisambiguation-lookup-language": "Taalcode:",
 	"wikibase-itemdisambiguation-lookup-label": "Label:",
 	"wikibase-itemdisambiguation-submit": "Zoeken",
 	"wikibase-itemdisambiguation-nothing-found": "Er zijn geen items gevonden met dat label.",
@@ -187,7 +188,7 @@
 	"wikibase-setsitelink-add-failed": "De sitekoppeling kon niet worden opgeslagen.",
 	"wikibase-setsitelink-remove-failed": "De sitekoppeling kon niet worden verwijderd.",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Taal:",
+	"wikibase-modifyterm-language": "Taalcode:",
 	"special-mergeitems": "Twee items samenvoegen",
 	"wikibase-mergeitems-intro": "Wanneer u twee items samenvoegt worden alle labels, beschrijvingen, aliassen, sitekoppelingen en verklaringen verplaatst van het ene item naar het andere.",
 	"wikibase-mergeitems-fromid": "Het itemnummer waarvan samen te voegen",
@@ -222,7 +223,7 @@
 	"wikibase-entitieswithoutdescription-legend": "Lijst van entiteiten zonder beschrijving",
 	"special-entitieswithoutlabel": "Entiteiten zonder label",
 	"wikibase-entitieswithoutlabel-legend": "Entiteiten zonder label opvragen",
-	"wikibase-entitieswithoutlabel-label-language": "Taal:",
+	"wikibase-entitieswithoutlabel-label-language": "Taalcode:",
 	"wikibase-entitieswithoutlabel-label-type": "Type:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "alle",
 	"wikibase-entitieswithoutlabel-submit": "Zoeken",

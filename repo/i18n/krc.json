@@ -1,9 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Iltever"
+			"Iltever",
+			"Macofe"
 		]
 	},
-	"wikibase-itemdisambiguation-lookup-language": "Тил:",
-	"wikibase-modifyterm-language": "Тил:"
+	"wikibase-itemdisambiguation-lookup-language": "Тил код:",
+	"wikibase-modifyterm-language": "Тил код:"
 }

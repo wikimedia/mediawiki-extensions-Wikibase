@@ -3,7 +3,8 @@
 		"authors": [
 			"Casual",
 			"CoderSI",
-			"Sociologist"
+			"Sociologist",
+			"Macofe"
 		]
 	},
 	"wikibase-edit": "tahrirlash",
@@ -13,8 +14,8 @@
 	"wikibase-remove": "oʻchirish",
 	"wikibase-itembytitle-lookup-page": "Sahifa:",
 	"wikibase-itembytitle-submit": "Qidiruv",
-	"wikibase-itemdisambiguation-lookup-language": "Til:",
+	"wikibase-itemdisambiguation-lookup-language": "Til kodi:",
 	"wikibase-itemdisambiguation-submit": "Qidiruv",
 	"wikibase-newentity-submit": "Yaratish",
-	"wikibase-modifyterm-language": "Til"
+	"wikibase-modifyterm-language": "Til kodi:"
 }

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Дзяніс Тутэйшы",
-			"Чаховіч Уладзіслаў"
+			"Чаховіч Уладзіслаў",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Сховішча структураваных дадзеных",
@@ -70,7 +71,7 @@
 	"wikibase-itembytitle-create": "Вы таксама можаце [$1 стварыць элемент].",
 	"special-itemdisambiguation": "Неадназначнасць: Элементы з аднолькавай назвай",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Шукаць элементы паводле назвы",
-	"wikibase-itemdisambiguation-lookup-language": "Мова:",
+	"wikibase-itemdisambiguation-lookup-language": "Код мовы:",
 	"wikibase-itemdisambiguation-lookup-label": "Назва:",
 	"wikibase-itemdisambiguation-submit": "Пошук",
 	"wikibase-itemdisambiguation-nothing-found": "Нажаль, элемент з такой назвай не знойдзены.",
@@ -101,7 +102,7 @@
 	"wikibase-setaliases-label": "Псеўданімы (альт. назвы):",
 	"wikibase-setaliases-submit": "Задаць псеўданімы",
 	"wikibase-modifyentity-id": "Ідэнтыфікатар",
-	"wikibase-modifyterm-language": "Мова",
+	"wikibase-modifyterm-language": "Код мовы:",
 	"wikibase-dispatchstats-change-timestamp": "Дата/час",
 	"wikibase-dispatchstats-oldest-change": "Самыя старыя",
 	"special-listdatatypes": "Спіс усіх даступных тыпаў дадзеных",
@@ -110,7 +111,7 @@
 	"wikibase-history-title-without-label": "Гісторыя версій ($1)",
 	"special-entitieswithoutlabel": "Спіс сутнасцяў без назваў",
 	"wikibase-entitieswithoutlabel-legend": "Атрымаць спіс сутнасцяў без назваў",
-	"wikibase-entitieswithoutlabel-label-language": "Мова:",
+	"wikibase-entitieswithoutlabel-label-language": "Код мовы:",
 	"wikibase-entitieswithoutlabel-label-type": "Тып:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "усе",
 	"wikibase-entitieswithoutlabel-submit": "Пошук",
@@ -146,6 +147,7 @@
 	"wikibase-item-summary-wblinktitles-connect": "Дабаўлена моўная спасылка для сувязі старонак",
 	"wikibase-item-summary-special-create-item": "Створаны элемент [$2] са {{PLURAL:$1|значэннем|значэннямі}}",
 	"wikibase-item-summary-wbcreateclaim-create": "Створана заява",
+	"wikibase-item-summary-wbsetclaim-update": "{{PLURAL:$3|1=Зменена заява|Зменены заявы}}",
 	"wikibase-property-summary-wbeditentity-create": "Створана новая ўласцівасць",
 	"wikibase-property-summary-wbeditentity-update": "Абноўлена ўласцівасць",
 	"wikibase-property-summary-wbeditentity-override": "Перакрыта існая ўласцівасць",
@@ -153,6 +155,7 @@
 	"wikibase-property-summary-wbsetlabel-remove": "Выдалена назва [$2]",
 	"wikibase-property-summary-wbsetdescription-set": "Зменена апісанне [$2]",
 	"wikibase-property-summary-wbsetdescription-remove": "Выдалена апісанне [$2]",
+	"wikibase-property-summary-wbsetclaim-update": "{{PLURAL:$3|1=Зменена заява|Зменены заявы}}",
 	"wikibase-property-summary-special-create-property": "Створана ўласцівасць [$2] са {{PLURAL:$1|значэннем|значэннямі}}",
 	"wikibase-listdatatypes-wikibase-item-head": "Элемент",
 	"wikibase-listdatatypes-quantity-head": "Колькасць",

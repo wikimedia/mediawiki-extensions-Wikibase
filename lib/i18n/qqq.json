@@ -11,10 +11,11 @@
 			"Shirayuki",
 			"Siebrand",
 			"Waldir",
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"Umherirrender"
 		]
 	},
-	"wikibase-lib-desc": "{{desc|name=Wikibase Lib|url=http://www.mediawiki.org/wiki/Extension:WikibaseLib}}",
+	"wikibase-lib-desc": "{{desc|name=Wikibase Lib|url=https://www.mediawiki.org/wiki/Extension:WikibaseLib}}",
 	"specialpages-group-wikibase": "{{doc-special-group|that=are related to the Wikibase extension|like=[[Special:NewItem]], [[Special:UnconnectedPages]], [[Special:NewProperty]], [[Special:ItemByTitle]], [[Special:ItemDisambiguation]], [[Special:ItemsWithoutSitelinks]], [[Special:SetLabel]], [[Special:SetDescription]], [[Special:SetAliases]], [[Special:EntitiesWithoutLabel]], [[Special:EntityData]], [[Special:ListDatatypes]], [[Special:DispatchStats]]}}\nSee example: [[d:Special:SpecialPages#mw-specialpagesgroup-wikibase|d:Special:SpecialPages]]\n{{Identical|Wikibase}}",
 	"wikibase-deletedentity-item": "Message displayed instead of an Item's label if the Item has been deleted (see [[d:Wikidata:Glossary]]).\n\nSee also:\n* {{msg-mw|Wikibase-entity-item}}\n* {{msg-mw|Wikibase-deletedentity-property}}\n* {{msg-mw|Wikibase-deletedentity-query}}",
 	"wikibase-deletedentity-property": "Message displayed instead of a Property's label if the Property has been deleted (see [[d:Wikidata:Glossary]]).\n\nSee also:\n* {{msg-mw|Wikibase-entity-property}}\n* {{msg-mw|Wikibase-deletedentity-item}}\n* {{msg-mw|Wikibase-deletedentity-query}}",

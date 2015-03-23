@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kolega2357",
-			"OC Ripper"
+			"OC Ripper",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Strukturirano skladište podataka",
@@ -72,7 +73,7 @@
 	"wikibase-itembytitle-create": "Možete također [$1 stvoriti stavku].",
 	"special-itemdisambiguation": "Razvrstavanje: Stavke sa istom oznakom",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Tražite stavke po oznaci",
-	"wikibase-itemdisambiguation-lookup-language": "Jezik:",
+	"wikibase-itemdisambiguation-lookup-language": "Kod jezika:",
 	"wikibase-itemdisambiguation-lookup-label": "Oznaka:",
 	"wikibase-itemdisambiguation-submit": "Pretraga",
 	"wikibase-itemdisambiguation-nothing-found": "Žalimo, nijedna stavka s tom oznakom nije pronađena.",
@@ -112,14 +113,14 @@
 	"wikibase-setaliases-submit": "Postavite aliase",
 	"wikibase-setaliases-warning-remove": "Da li doista želite ukloniti sve aliase [[$1]]?",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Jezik:",
+	"wikibase-modifyterm-language": "Kod jezika:",
 	"special-listdatatypes": "Popis svih dostupnih tipova podataka",
 	"wikibase-listdatatypes-intro": "Ovo je popis svih tipova podataka trenutno u upotrebi na ovoj instalaciji:",
 	"wikibase-history-title-with-label": "Historija izmjena \"$2\" ($1)",
 	"wikibase-history-title-without-label": "Historija izmjena ($1)",
 	"special-entitieswithoutlabel": "Popis entiteta bez oznake",
 	"wikibase-entitieswithoutlabel-legend": "Pokaži popis entiteta bez oznake",
-	"wikibase-entitieswithoutlabel-label-language": "Jezik:",
+	"wikibase-entitieswithoutlabel-label-language": "Kod jezika:",
 	"wikibase-entitieswithoutlabel-submit": "Pronađite",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" nije valjani jezički kod.",
 	"special-entitydata": "Podaci entiteta",

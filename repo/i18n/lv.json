@@ -3,7 +3,8 @@
 		"authors": [
 			"Admresdeserv.",
 			"Papuass",
-			"Edgars2007"
+			"Edgars2007",
+			"Macofe"
 		]
 	},
 	"wikibase-entity-item": "ieraksts",
@@ -58,13 +59,12 @@
 	"wikibase-snakview-snaktypeselector-value": "pielāgota vērtība",
 	"wikibase-copyrighttooltip-acknowledge": "Es piekrītu šiem noteikumiem saviem nākotnes labojumiem. Turpmāk nerādīt šo ziņojumu.",
 	"wikibase-entityselector-more": "vairāk",
-	"wikibase-restrictionedit-tooltip-message": "Šī lapa ir aizsargāta. Rediģēšana nav atļauta.",
 	"special-itembytitle": "Ieraksts pēc nosaukuma",
 	"wikibase-itembytitle-lookup-fieldset": "Meklēt ierakstus pēc vietnes un nosaukuma",
 	"wikibase-itembytitle-lookup-site": "Vietne:",
 	"wikibase-itembytitle-lookup-page": "Lapa:",
 	"wikibase-itembytitle-submit": "Meklēt",
-	"wikibase-itemdisambiguation-lookup-language": "Valoda:",
+	"wikibase-itemdisambiguation-lookup-language": "Valodas kods:",
 	"wikibase-itemdisambiguation-lookup-label": "Nosaukums:",
 	"wikibase-itemdisambiguation-submit": "Meklēt",
 	"wikibase-newproperty-datatype": "Datu tips:",
@@ -85,7 +85,7 @@
 	"wikibase-setaliases-submit": "Norādīt citus nosaukumus",
 	"wikibase-setaliases-warning-remove": "Vai tiešām vēlaties noņemt visus [[$1]] citus nosaukumus?",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Valoda:",
+	"wikibase-modifyterm-language": "Valodas kods:",
 	"wikibase-dispatchstats-change-id": "ID",
 	"wikibase-dispatchstats-oldest-change": "Vecākais",
 	"wikibase-dispatchstats-newest-change": "Jaunākais",
@@ -97,7 +97,7 @@
 	"wikibase-history-title-without-label": "($1) versiju hronoloģija",
 	"special-entitieswithoutlabel": "Ieraksti bez nosaukuma",
 	"wikibase-entitieswithoutlabel-legend": "Iegūt sarakstu ar ierakstiem bez nosaukuma",
-	"wikibase-entitieswithoutlabel-label-language": "Valoda:",
+	"wikibase-entitieswithoutlabel-label-language": "Valodas kods:",
 	"wikibase-entitieswithoutlabel-label-type": "Tips:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "visi",
 	"wikibase-entitieswithoutlabel-submit": "Atrast",

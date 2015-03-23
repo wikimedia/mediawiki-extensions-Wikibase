@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kening Aldgilles",
-			"Robin0van0der0vliet"
+			"Robin0van0der0vliet",
+			"Macofe"
 		]
 	},
 	"wikibase-edit": "bewurkje",
@@ -15,11 +16,11 @@
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|boarne|boarnen}}",
 	"wikibase-entityselector-more": "mear",
 	"wikibase-itembytitle-submit": "Sykje",
-	"wikibase-itemdisambiguation-lookup-language": "Taal:",
+	"wikibase-itemdisambiguation-lookup-language": "Taalkoade:",
 	"wikibase-itemdisambiguation-submit": "Sykje",
 	"wikibase-newentity-submit": "Oanmeitsje",
-	"wikibase-modifyterm-language": "Taal:",
-	"wikibase-entitieswithoutlabel-label-language": "Taal:",
+	"wikibase-modifyterm-language": "Taalkoade:",
+	"wikibase-entitieswithoutlabel-label-language": "Taalkoade:",
 	"wikibase-entitieswithoutlabel-submit": "Sykje",
 	"wikibase-listdatatypes-wikibase-property-head": "Eigenskip"
 }

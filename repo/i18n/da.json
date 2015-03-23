@@ -8,7 +8,8 @@
 			"Peter Alberti",
 			"Poul G",
 			"Steenth",
-			"아라"
+			"아라",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Struktureret datalager",
@@ -104,7 +105,7 @@
 	"wikibase-itembytitle-create": "Du kan også [$1 oprette et emne].",
 	"special-itemdisambiguation": "Entydiggørelse af emne",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Søg emner efter sprog og etiket",
-	"wikibase-itemdisambiguation-lookup-language": "Sprog:",
+	"wikibase-itemdisambiguation-lookup-language": "Sprogkode:",
 	"wikibase-itemdisambiguation-lookup-label": "Etiket:",
 	"wikibase-itemdisambiguation-submit": "Søg",
 	"wikibase-itemdisambiguation-nothing-found": "Beklager, intet emne med denne etiket blev fundet.",
@@ -159,7 +160,7 @@
 	"wikibase-setsitelink-add-failed": "Site link kunne ikke gemmes.",
 	"wikibase-setsitelink-remove-failed": "Site link kunne ikke fjernes.",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Sprog:",
+	"wikibase-modifyterm-language": "Sprogkode:",
 	"special-mergeitems": "Sammenfletning af to emner",
 	"wikibase-mergeitems-fromid": "Id at flette fra",
 	"wikibase-mergeitems-toid": "Id at flette til",
@@ -191,7 +192,7 @@
 	"wikibase-entitieswithoutdescription-legend": "Få en liste af entiteter uden beskrivelse",
 	"special-entitieswithoutlabel": "Entiteter uden etiket",
 	"wikibase-entitieswithoutlabel-legend": "Få en liste over entiteter uden etiket",
-	"wikibase-entitieswithoutlabel-label-language": "Sprog:",
+	"wikibase-entitieswithoutlabel-label-language": "Sprogkode:",
 	"wikibase-entitieswithoutlabel-label-type": "Type:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "alle",
 	"wikibase-entitieswithoutlabel-submit": "Søg",

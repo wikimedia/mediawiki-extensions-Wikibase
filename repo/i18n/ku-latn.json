@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"George Animal"
+			"George Animal",
+			"Macofe"
 		]
 	},
 	"wikibase-entity-item": "obje",
@@ -23,13 +24,13 @@
 	"wikibase-aliases-label": "Herwiha tê zanîn wek:",
 	"wikibase-itembytitle-lookup-page": "Rûpel:",
 	"wikibase-itembytitle-submit": "Lêgerîn",
-	"wikibase-itemdisambiguation-lookup-language": "Ziman:",
+	"wikibase-itemdisambiguation-lookup-language": "Koda ziman:",
 	"wikibase-itemdisambiguation-submit": "Lêgerîn",
 	"wikibase-newentity-description": "Danasîn:",
 	"wikibase-newentity-submit": "Çêke",
 	"wikibase-setdescription-label": "Danasîn:",
-	"wikibase-modifyterm-language": "Ziman:",
-	"wikibase-entitieswithoutlabel-label-language": "Ziman:",
+	"wikibase-modifyterm-language": "Koda ziman:",
+	"wikibase-entitieswithoutlabel-label-language": "Koda ziman:",
 	"wikibase-entitieswithoutlabel-label-type": "Cure:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "hemû",
 	"wikibase-item-summary-wbsetsitelink-add": "Girêdanê li [$2] zêde bike"

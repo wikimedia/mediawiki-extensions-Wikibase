@@ -9,7 +9,8 @@
 			"Sucsuzz",
 			"Violetanka",
 			"Ozerk",
-			"Aşilleus"
+			"Aşilleus",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Yapılandırılmış veri deposu",
@@ -39,7 +40,7 @@
 	"wikibase-shortcopyrightwarning": "\"$1\" düğmesine tıkladığınızda, [[$2|kullanım şartlarını]] kabul ederek katkınızı, $3 kapsamında geri döndürülemez bir biçimde sağlamış olacaksınız.",
 	"special-itembytitle": "Başlığına göre öge",
 	"wikibase-gotolinkedpage-lookup-site": "Site:",
-	"wikibase-itemdisambiguation-lookup-language": "Dil:",
+	"wikibase-itemdisambiguation-lookup-language": "Dil kodu:",
 	"wikibase-newproperty-invalid-datatype": "Geçersiz veri türü belirtildi.",
 	"special-newitem": "Yeni bir öge oluştur",
 	"wikibase-newitem-summary": "Ögenin [[Special:ItemByTitle|halihazırda var olup olmadığından]] emin olun!<br />Oluşturulan her bir öge için birer [[Help:Label|etiket]] ve [[Help:Description|tanımlama]] da oluşturmanız gerekmektedir.",

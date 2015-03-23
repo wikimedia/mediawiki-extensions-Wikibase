@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"KuboF",
-			"Sudo77(new)"
+			"Sudo77(new)",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Úložisko štruktúrovaných údajov",
@@ -34,11 +35,11 @@
 	"wikibase-itembytitle-lookup-fieldset": "Vyhľadať položky podľa projektu a názvu",
 	"wikibase-itembytitle-submit": "Hľadať",
 	"wikibase-itembytitle-create": "Tiež môžeš [$1 vytvoriť položku].",
-	"wikibase-itemdisambiguation-lookup-language": "Jazyk:",
+	"wikibase-itemdisambiguation-lookup-language": "Kód jazyka:",
 	"wikibase-itemdisambiguation-submit": "Hľadať",
 	"wikibase-itemdisambiguation-description": "Hodnoty použité na vyhľadávanie musia byť kompletné. Identifikátorom je jazyk, napr. „sk“.",
 	"wikibase-newproperty-datatype": "Typ údaju:",
 	"special-newitem": "Vytvoriť novú položku",
-	"wikibase-modifyterm-language": "Jazyk:",
-	"wikibase-entitieswithoutlabel-label-language": "Jazyk:"
+	"wikibase-modifyterm-language": "Kód jazyka:",
+	"wikibase-entitieswithoutlabel-label-language": "Kód jazyka:"
 }

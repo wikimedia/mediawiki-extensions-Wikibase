@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Calak"
+			"Calak",
+			"Macofe"
 		]
 	},
 	"wikibase-entity-item": "بەند",
@@ -51,7 +52,7 @@
 	"wikibase-itembytitle-create": "ھەروەھا دەتوانی [$1 بەندێک دروست بکەی].",
 	"special-itemdisambiguation": "ڕوونکردنەوەی بەند",
 	"wikibase-itemdisambiguation-lookup-fieldset": "گەڕانی بەندەکان بە پێی زمان و سەرناو",
-	"wikibase-itemdisambiguation-lookup-language": "زمان:",
+	"wikibase-itemdisambiguation-lookup-language": "کۆدی زمان:",
 	"wikibase-itemdisambiguation-lookup-label": "سەرناو:",
 	"wikibase-itemdisambiguation-submit": "گەڕان",
 	"wikibase-itemdisambiguation-nothing-found": "ببورە، بەندێک بەم ناوەوە نەدۆزرایەوە.",
@@ -80,14 +81,14 @@
 	"wikibase-setaliases-submit": "نازناوەکان دابنێ",
 	"wikibase-setsitelink-badges": "نیشانەکان:",
 	"wikibase-modifyentity-id": "پێناسە:",
-	"wikibase-modifyterm-language": "زمان:",
+	"wikibase-modifyterm-language": "کۆدی زمان:",
 	"wikibase-dispatchstats-change-id": "پێناسە",
 	"wikibase-dispatchstats-oldest-change": "کۆنترین",
 	"wikibase-dispatchstats-newest-change": "نوێترین",
 	"wikibase-dispatchstats-site-id": "پێگە",
 	"wikibase-history-title-with-label": "مێژووی پێداچوونەوەکانی «$2» ($1)",
 	"wikibase-history-title-without-label": "مێژووی پێداچوونەوەکانی ($1)",
-	"wikibase-entitieswithoutlabel-label-language": "زمان:",
+	"wikibase-entitieswithoutlabel-label-language": "کۆدی زمان:",
 	"wikibase-entitieswithoutlabel-label-type": "جۆر:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "ھەموو",
 	"wikibase-entitieswithoutlabel-invalid-language": "«$1» کۆدێکی زمانی دروست نییە.",

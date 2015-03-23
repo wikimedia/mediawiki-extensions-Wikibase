@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Growingup",
-			"Викиней"
+			"Викиней",
+			"Macofe"
 		]
 	},
 	"wikibase-save": "сактоо",
@@ -13,10 +14,10 @@
 	"wikibase-itembytitle-lookup-site": "Сайт:",
 	"wikibase-itembytitle-lookup-page": "Барак:",
 	"wikibase-itembytitle-submit": "Табуу",
-	"wikibase-itemdisambiguation-lookup-language": "Тил:",
+	"wikibase-itemdisambiguation-lookup-language": "Тилдин коду:",
 	"wikibase-itemdisambiguation-submit": "Табуу",
 	"wikibase-newentity-description": "Баяндама:",
-	"wikibase-modifyterm-language": "Тили:",
-	"wikibase-entitieswithoutlabel-label-language": "Тил:",
+	"wikibase-modifyterm-language": "Тилдин коду:",
+	"wikibase-entitieswithoutlabel-label-language": "Тилдин коду:",
 	"wikibase-entitieswithoutlabel-submit": "Издөө"
 }

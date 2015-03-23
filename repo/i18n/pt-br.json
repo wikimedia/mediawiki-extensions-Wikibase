@@ -11,7 +11,8 @@
 			"He7d3r",
 			"Luckas",
 			"Mordecool",
-			"Fasouzafreitas"
+			"Fasouzafreitas",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -101,7 +102,7 @@
 	"wikibase-itembytitle-create": "Você também pode [$1 criar um item].",
 	"special-itemdisambiguation": "Desambiguação de item",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Pesquisar itens por idioma e rótulo",
-	"wikibase-itemdisambiguation-lookup-language": "Idioma:",
+	"wikibase-itemdisambiguation-lookup-language": "Código do idioma:",
 	"wikibase-itemdisambiguation-lookup-label": "Rótulo:",
 	"wikibase-itemdisambiguation-submit": "Pesquisa",
 	"wikibase-itemdisambiguation-nothing-found": "Desculpe-nos, nenhum item com esse rótulo foi encontrado.",
@@ -133,7 +134,7 @@
 	"wikibase-setaliases-label": "Nomes alternativos:",
 	"wikibase-setaliases-submit": "Adicionar nomes alternativos",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Idioma:",
+	"wikibase-modifyterm-language": "Código do idioma:",
 	"special-dispatchstats": "Estatísticas de envio de alterações",
 	"wikibase-dispatchstats-no-stats": "Neste momento não existem estatísticas disponíveis.",
 	"wikibase-dispatchstats-changes": "Estatísticas do registro de alterações",
@@ -154,7 +155,7 @@
 	"wikibase-history-title-without-label": "Histórico de revisões de ($1)",
 	"special-entitieswithoutlabel": "Entidades sem rótulo",
 	"wikibase-entitieswithoutlabel-legend": "Listar entidades sem rótulo",
-	"wikibase-entitieswithoutlabel-label-language": "Idioma:",
+	"wikibase-entitieswithoutlabel-label-language": "Código do idioma:",
 	"wikibase-entitieswithoutlabel-label-type": "Tipo:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "todos",
 	"wikibase-entitieswithoutlabel-submit": "Buscar",

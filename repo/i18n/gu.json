@@ -4,7 +4,8 @@
 			"Dsvyas",
 			"KartikMistry",
 			"Kondi",
-			"Vyom"
+			"Vyom",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "માળખાગત માહિતીનો સંગ્રહ",
@@ -45,7 +46,7 @@
 	"wikibase-itembytitle-lookup-page": "પાનું:",
 	"wikibase-itembytitle-submit": "શોધો",
 	"wikibase-gotolinkedpage-submit": "જાઓ",
-	"wikibase-itemdisambiguation-lookup-language": "ભાષા:",
+	"wikibase-itemdisambiguation-lookup-language": "ભાષાસંહિતા:",
 	"wikibase-itemdisambiguation-lookup-label": "લેબલ:",
 	"wikibase-itemdisambiguation-submit": "શોધ",
 	"special-newproperty": "નવો ગુણધર્મ બનાવો",
@@ -65,7 +66,7 @@
 	"wikibase-setdescription-submit": "વર્ણન ગોઠવો",
 	"wikibase-setsitelink-label": "સાઇટ કડી:",
 	"wikibase-setsitelink-submit": "સાઇટ કડી ગોઠવો",
-	"wikibase-modifyterm-language": "ભાષા:",
+	"wikibase-modifyterm-language": "ભાષાસંહિતા:",
 	"wikibase-dispatchstats-change-timestamp": "સમયછાપ",
 	"wikibase-dispatchstats-oldest-change": "જુનામાં જુનું",
 	"wikibase-dispatchstats-newest-change": "નવામાં નવું",
@@ -74,7 +75,7 @@
 	"wikibase-dispatchstats-lag-num": "બાકી રહેલ",
 	"wikibase-dispatchstats-median": "મધ્યક",
 	"wikibase-dispatchstats-average": "સરેરાશ",
-	"wikibase-entitieswithoutlabel-label-language": "ભાષા:",
+	"wikibase-entitieswithoutlabel-label-language": "ભાષાસંહિતા:",
 	"wikibase-entitieswithoutlabel-label-type": "પ્રકાર:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "બધા",
 	"wikibase-entitieswithoutlabel-submit": "શોધો",

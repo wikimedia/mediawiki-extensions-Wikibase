@@ -6,7 +6,8 @@
 			"Kwj2772",
 			"Priviet",
 			"아라",
-			"Revi"
+			"Revi",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "구조화한 데이터 저장소",
@@ -107,7 +108,7 @@
 	"wikibase-itembytitle-create": "또한 [$1 항목을 만들] 수 있습니다.",
 	"special-itemdisambiguation": "항목 동음이의어",
 	"wikibase-itemdisambiguation-lookup-fieldset": "언어와 레이블별로 항목 검색",
-	"wikibase-itemdisambiguation-lookup-language": "언어:",
+	"wikibase-itemdisambiguation-lookup-language": "언어 코드:",
 	"wikibase-itemdisambiguation-lookup-label": "레이블:",
 	"wikibase-itemdisambiguation-submit": "검색",
 	"wikibase-itemdisambiguation-nothing-found": "죄송합니다, 해당 레이블이 있는 항목을 찾을 수 없습니다.",
@@ -162,7 +163,7 @@
 	"wikibase-setsitelink-add-failed": "사이트 링크를 저장할 수 없습니다.",
 	"wikibase-setsitelink-remove-failed": "사이트 링크를 제거할 수 없습니다.",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "언어:",
+	"wikibase-modifyterm-language": "언어 코드:",
 	"special-mergeitems": "두 항목을 병합",
 	"wikibase-mergeitems-intro": "두 항목을 병합하면 모든 레이블, 설명, 별명, 사이트링크, 내용이 한 항목에서 다른 항목으로 옮겨집니다.",
 	"wikibase-mergeitems-fromid": "합병되는 문서의 id",
@@ -195,7 +196,7 @@
 	"wikibase-entitieswithoutdescription-legend": "설명이 없는 개체 목록 얻기",
 	"special-entitieswithoutlabel": "레이블이 없는 항목",
 	"wikibase-entitieswithoutlabel-legend": "레이블이 없는 항목 목록 가져오기",
-	"wikibase-entitieswithoutlabel-label-language": "언어:",
+	"wikibase-entitieswithoutlabel-label-language": "언어 코드:",
 	"wikibase-entitieswithoutlabel-label-type": "유형:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "모두",
 	"wikibase-entitieswithoutlabel-submit": "찾기",

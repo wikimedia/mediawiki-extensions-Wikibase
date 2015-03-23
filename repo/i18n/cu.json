@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"ОйЛ"
+			"ОйЛ",
+			"Macofe"
 		]
 	},
 	"wikibase-edit": "исправи",
@@ -19,11 +20,11 @@
 	"wikibase-itembytitle-lookup-site": "мѣсто :",
 	"wikibase-itembytitle-lookup-page": "страница :",
 	"wikibase-itembytitle-submit": "ищи",
-	"wikibase-itemdisambiguation-lookup-language": "ѩꙁꙑкъ :",
+	"wikibase-itemdisambiguation-lookup-language": "ѩꙁꙑчьнъ кодъ :",
 	"wikibase-itemdisambiguation-submit": "ищи",
 	"wikibase-newentity-submit": "сътворѥниѥ",
-	"wikibase-modifyterm-language": "ѩꙁꙑкъ :",
-	"wikibase-entitieswithoutlabel-label-language": "ѩꙁꙑкъ :",
+	"wikibase-modifyterm-language": "ѩꙁꙑчьнъ кодъ :",
+	"wikibase-entitieswithoutlabel-label-language": "ѩꙁꙑчьнъ кодъ :",
 	"wikibase-entitieswithoutlabel-label-type": "тѷпъ :",
 	"wikibase-entitieswithoutlabel-label-alltypes": "вьсꙗ",
 	"wikibase-listdatatypes-time-head": "врѣмѧ"

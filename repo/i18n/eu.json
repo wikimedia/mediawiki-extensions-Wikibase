@@ -5,7 +5,8 @@
 			"Joxemai",
 			"Xabier Armendaritz",
 			"පසිඳු කාවින්ද",
-			"Subi"
+			"Subi",
+			"Macofe"
 		]
 	},
 	"wikibase-edit": "aldatu",
@@ -22,7 +23,7 @@
 	"wikibase-entityselector-more": "gehiago",
 	"wikibase-itembytitle-lookup-page": "Orria:",
 	"wikibase-itembytitle-submit": "Bilatu",
-	"wikibase-itemdisambiguation-lookup-language": "Hizkuntza:",
+	"wikibase-itemdisambiguation-lookup-language": "Hizkuntza kodea:",
 	"wikibase-itemdisambiguation-submit": "Bilatu",
 	"wikibase-newentity-submit": "Sortu",
 	"wikibase-setlabel-label": "Etiketa:",

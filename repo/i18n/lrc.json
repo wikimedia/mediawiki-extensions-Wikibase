@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Bonevarluri",
-			"Mogoeilor"
+			"Mogoeilor",
+			"Macofe"
 		]
 	},
 	"wikibase-entity-item": "قلم",
@@ -39,7 +40,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "مه ای قانونا نه سی ویرایشتیا نهایی م قوول کردم.دواره ای پیغوم نشو نئیه",
 	"wikibase-entityselector-more": "بیشتر",
 	"wikibase-anonymouseditwarning": "زنئار:شما وامین نیومایته.\nنشونه آی پی تو سی ویرگار ویرایشت ای چی ضفظ بوئه.",
-	"wikibase-restrictionedit-tooltip-message": "ای بلگه پر و پیم بیه. صلا ویرایشت کاری دش نئ",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 یه گل واگردونیه.",
 	"special-itembytitle": "قلم وا داسون",
 	"wikibase-itembytitle-lookup-fieldset": "قلمیا نه سی سیلجا و نوم ون مئن جوری کو",
@@ -49,7 +49,7 @@
 	"special-gotolinkedpage": "رئتن د بلگه هوم پیوندار",
 	"wikibase-gotolinkedpage-lookup-site": "دیارگه:",
 	"wikibase-gotolinkedpage-submit": "رؤ",
-	"wikibase-itemdisambiguation-lookup-language": "زون:",
+	"wikibase-itemdisambiguation-lookup-language": "كد زون:",
 	"wikibase-itemdisambiguation-lookup-label": "ریتراز:",
 	"wikibase-itemdisambiguation-submit": "پی جوری",
 	"wikibase-newitem-fieldset": "راس کردن یه گل قلم تازه",
@@ -69,7 +69,7 @@
 	"wikibase-setsitelink-add-failed": "چنو هوم پیوند سیلجایی نبوئه اماییه با",
 	"wikibase-setsitelink-remove-failed": "چنو هوم پیوند سیلجایی نبوئه جا وه جا بوئه.",
 	"wikibase-modifyentity-id": "نوم دیارکن:",
-	"wikibase-modifyterm-language": "زون:",
+	"wikibase-modifyterm-language": "كد زون:",
 	"special-mergeitems": "سریک کردن دو گل قلم",
 	"wikibase-mergeitems-submit": "سریک کردن قلمیا",
 	"wikibase-dispatchstats-changes": "آماریا آلشت دئن پهرستنومه",
@@ -82,7 +82,7 @@
 	"wikibase-dispatchstats-lag-time": "پتی وار",
 	"wikibase-dispatchstats-freshest": "تازه تری",
 	"wikibase-dispatchstats-average": "میانگین",
-	"wikibase-entitieswithoutlabel-label-language": "زون:",
+	"wikibase-entitieswithoutlabel-label-language": "كد زون:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "همه",
 	"wikibase-entitieswithoutlabel-submit": "فهمسن،جسن",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" کد زون معتوری نئ.",

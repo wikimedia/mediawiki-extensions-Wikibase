@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Lam-ang",
-			"아라"
+			"아라",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Nabalabala a pagidulinan ti datos",
@@ -98,7 +99,7 @@
 	"wikibase-itembytitle-create": "Mabalinmo pay ti [$1 agpartuat ti maysa a banag].",
 	"special-itemdisambiguation": "Panagipalpalawag ti banag",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Agbiruk para kadagiti banag babaen ti pagsasao ken etiketa",
-	"wikibase-itemdisambiguation-lookup-language": "Pagsasao:",
+	"wikibase-itemdisambiguation-lookup-language": "Kodigo ti pagsasao:",
 	"wikibase-itemdisambiguation-lookup-label": "Etiketa:",
 	"wikibase-itemdisambiguation-submit": "Biruken",
 	"wikibase-itemdisambiguation-nothing-found": "Pasensia, awan ti banag a nabirukan ti dayta nga etiketa.",
@@ -153,7 +154,7 @@
 	"wikibase-setsitelink-add-failed": "Ti silpo ti sitio ket saan a maidulin.",
 	"wikibase-setsitelink-remove-failed": "Ti silpo ti sitio ket saan a maikkat.",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Pagsasao:",
+	"wikibase-modifyterm-language": "Kodigo ti pagsasao:",
 	"special-mergeitems": "Pagtiponen ti dua a banbanag",
 	"wikibase-mergeitems-intro": "No pagtiponem ti dua a banbanag, amin dagiti etiketa, deskripsion, sabali a nagan, silpo ti sitio ken insasao ket maiyalisto manipud ti maysa a banag iti sabali.",
 	"wikibase-mergeitems-fromid": "Ti id a nakaitiponan",
@@ -186,7 +187,7 @@
 	"wikibase-entitieswithoutdescription-legend": "Agaka kadagiti entidad nga awan ti deskripsion",
 	"special-entitieswithoutlabel": "Dagiti entidad nga awan ti etiketana",
 	"wikibase-entitieswithoutlabel-legend": "Agala kadagiti entidad nga awan ti etiketana",
-	"wikibase-entitieswithoutlabel-label-language": "Pagsasao:",
+	"wikibase-entitieswithoutlabel-label-language": "Kodigo ti pagsasao:",
 	"wikibase-entitieswithoutlabel-label-type": "Kita:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "amin",
 	"wikibase-entitieswithoutlabel-submit": "Biruken",

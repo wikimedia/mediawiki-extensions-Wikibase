@@ -4,7 +4,8 @@
 			"Minisarm",
 			"Rsocol",
 			"Stelistcristi",
-			"Danutz"
+			"Danutz",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Depozit de date structurate",
@@ -103,7 +104,7 @@
 	"wikibase-gotolinkedpage-submit": "Du-te",
 	"special-itemdisambiguation": "Dezambiguizare element",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Căutare elemente după limbă și etichetă",
-	"wikibase-itemdisambiguation-lookup-language": "Limbă:",
+	"wikibase-itemdisambiguation-lookup-language": "Codul limbii:",
 	"wikibase-itemdisambiguation-lookup-label": "Etichetă:",
 	"wikibase-itemdisambiguation-submit": "Caută",
 	"wikibase-itemdisambiguation-nothing-found": "Ne pare rău, nu s-a găsit niciun element cu acea etichetă.",
@@ -145,7 +146,7 @@
 	"wikibase-setaliases-warning-remove": "Sigur doriți să eliminați aliasurile pentru [[$1]]?",
 	"wikibase-setsitelink-site": "ID site:",
 	"wikibase-modifyentity-id": "Identificator:",
-	"wikibase-modifyterm-language": "Limbă:",
+	"wikibase-modifyterm-language": "Codul limbii:",
 	"special-mergeitems": "Contopire două elemente",
 	"wikibase-mergeitems-fromid": "ID-ul din care să se contopească",
 	"wikibase-mergeitems-toid": "ID-ul către care să se contopească",
@@ -175,7 +176,7 @@
 	"wikibase-entitieswithoutdescription-legend": "Obțineți lista entităților fără descriere",
 	"special-entitieswithoutlabel": "Entități fără etichetă",
 	"wikibase-entitieswithoutlabel-legend": "Obțineți lista entităților fără etichetă",
-	"wikibase-entitieswithoutlabel-label-language": "Limbă:",
+	"wikibase-entitieswithoutlabel-label-language": "Codul limbii:",
 	"wikibase-entitieswithoutlabel-label-type": "Tip:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "toate",
 	"wikibase-entitieswithoutlabel-submit": "Găsește",

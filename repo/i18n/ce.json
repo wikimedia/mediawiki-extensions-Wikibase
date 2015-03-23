@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kaganer",
-			"Умар"
+			"Умар",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Хаамаш латтабо меттиг",
@@ -18,8 +19,10 @@
 	"wikibase-save-inprogress": "Ӏалашъяр…",
 	"wikibase-remove-inprogress": "ДӀайоккхуш…",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Масийтта меттахь",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Нисъян",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Кхин евзаш ю",
 	"wikibase-entitytermsforlanguagelistview-description": "Цуьнах лаьцна",
+	"wikibase-entitytermsforlanguagelistview-label": "Билгалдар",
 	"wikibase-entitytermsforlanguagelistview-language": "Мотт",
 	"wikibase-label-empty": "Билгало (цӀе) яц.",
 	"wikibase-label-edit-placeholder": "язъе цӀе",
@@ -84,7 +87,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Сайт:",
 	"wikibase-gotolinkedpage-lookup-item": "Элементан Id:",
 	"wikibase-gotolinkedpage-submit": "Дехьа гӀо",
-	"wikibase-itemdisambiguation-lookup-language": "Мотт:",
+	"wikibase-itemdisambiguation-lookup-language": "Метта код:",
 	"wikibase-itemdisambiguation-lookup-label": "ЦӀе:",
 	"wikibase-itemdisambiguation-submit": "Лахар",
 	"wikibase-newproperty-datatype": "Хаамашан тайп:",
@@ -114,7 +117,7 @@
 	"wikibase-setsitelink-badges": "Беджи:",
 	"wikibase-setsitelink-submit": "Сайтан тӀе хьажорг йилла",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Мотт:",
+	"wikibase-modifyterm-language": "Метта код:",
 	"special-mergeitems": "Цхьаьнатоха шиъ элемент",
 	"wikibase-mergeitems-submit": "Цхьаьнатоха элементаш",
 	"wikibase-itemmerge-cant-load-entity-content": "Элемент чуяккха цаелира.",
@@ -135,7 +138,7 @@
 	"special-listdatatypes": "Массо тӀекхочу хаамийн тайпанийн могӀам",
 	"wikibase-listdatatypes-intro": "ХӀара массо хаамийн тайпанийн могӀам бу инсталляци чохь:",
 	"wikibase-history-title-with-label": "Хийцаман истори «$2» ($1)",
-	"wikibase-entitieswithoutlabel-label-language": "Мотт:",
+	"wikibase-entitieswithoutlabel-label-language": "Метта код:",
 	"wikibase-entitieswithoutlabel-label-type": "Тайп:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "массо",
 	"wikibase-entitieswithoutlabel-submit": "Лахар",
@@ -152,6 +155,7 @@
 	"wikibase-item-summary-wbsetreference": "Хьостан тӀе хьажорг къастина",
 	"wikibase-item-summary-wbsetreference-add": "Дехаран тӀетоьхна хьажорг",
 	"wikibase-item-summary-wbsetreference-set": "Дехаран хьажорг хийцина",
+	"wikibase-item-summary-wbsetlabel-add": "ТӀетоьхна билгало [$2]",
 	"wikibase-item-summary-wbsetlabel-set": "Хийцина цӀе [$2]",
 	"wikibase-item-summary-wbsetlabel-remove": "ДӀаяьккхина цӀе [$2]",
 	"wikibase-item-summary-wbsetdescription-add": "ТӀетоьхна хаамахь лаьцна [$2]",
@@ -168,6 +172,7 @@
 	"wikibase-item-summary-wbsetclaim-create": "{{PLURAL:$3|1=Кхоьллина дехар|Кхоьллина дехарш}}",
 	"wikibase-item-summary-clientsitelink-update": "АгӀо кхечухьа яьккхина (цӀе хийцина) [$3] → [$4]",
 	"wikibase-property-summary-wbeditentity-update": "Билгало хийцина",
+	"wikibase-property-summary-wbsetlabel-add": "ТӀетоьхна билгало [$2]",
 	"wikibase-property-summary-wbsetlabel-set": "Хийцина билгало [$2]",
 	"wikibase-property-summary-wbsetdescription-add": "ТӀетоьхна хаамахь лаьцна [$2]",
 	"wikibase-listdatatypes-wikibase-item-head": "Элемент",

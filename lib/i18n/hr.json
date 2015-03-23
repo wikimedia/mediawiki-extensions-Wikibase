@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"MaGa"
+			"MaGa",
+			"Roberta F."
 		]
 	},
 	"wikibase-error-unexpected": "Greška: $1",
-	"wikibase-replicationnote": "Molimo Vas, vodite računa da može proći nekoliko minuta dok izmjene ne budu vidljive na svim wikijima.",
+	"wikibase-sitelinks-wikipedia": "Wikipedija",
 	"wikibase-sitelinks-sitename-columnheading": "Jezik",
 	"wikibase-sitelinks-link-columnheading": "Povezana stranica"
 }

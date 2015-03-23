@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Candalua"
+			"Candalua",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Archivio de dati struturati",
@@ -85,7 +86,7 @@
 	"wikibase-itembytitle-create": "Te pol anca [$1 crear l'elemento].",
 	"special-itemdisambiguation": "Disanbiguassion elementi",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Serca elementi par lengua e eticheta",
-	"wikibase-itemdisambiguation-lookup-language": "Lengua:",
+	"wikibase-itemdisambiguation-lookup-language": "Còdese lengoa:",
 	"wikibase-itemdisambiguation-lookup-label": "Eticheta:",
 	"wikibase-itemdisambiguation-submit": "Serca",
 	"wikibase-itemdisambiguation-nothing-found": "No go catà nissun elemento co sta eticheta.",
@@ -126,7 +127,7 @@
 	"wikibase-setaliases-submit": "Imposta i alias",
 	"wikibase-setaliases-warning-remove": "Vuto dal bon cavar tuti i alias de [[$1]]?",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Lengua:",
+	"wikibase-modifyterm-language": "Còdese lengoa:",
 	"special-dispatchstats": "Statistiche propagasion modifiche",
 	"wikibase-dispatchstats-intro": "Sta pagina la fornise le statistiche su la propagasion de le modifiche ai client.\nNa wiki client la xe notificà de un canbiamento su {{SITENAME}} apena chel canbiamento el xe stà propagà su chela wiki, e la coa de laoro su chela wiki la gà procesà la notifica.\n* {{int:wikibase-dispatchstats-changes}} mostra el nùmaro e la data par i pi veci e pi novi elementi atualmente in coa.\n* {{int:wikibase-dispatchstats-stats}} fornise informasion su le wiki pi in ritardo e manco in ritardo, e quela de mezo tra lore. Par ogni wiki, vien fornìe ste informasion:\n** \"{{int:wikibase-dispatchstats-site-id}}\" xe l'ID interno de la wiki client.\n** \"{{int:wikibase-dispatchstats-pos}}\" xe l'ID de l'ultimo canbiamento propagà a chela wiki.\n** \"{{int:wikibase-dispatchstats-lag-num}}\" xe el nùmaro de canbiamenti gnancora propagà a chela wiki.\n** \"{{int:wikibase-dispatchstats-lag-time}}\" xe el tenpo tra l'ultimo canbiamento propagà a la wiki, e l'ultima modifica fata su {{SITENAME}}.\n** \"{{int:wikibase-dispatchstats-touched}}\" xe l'ora in cui l'ultimo bloco de canbiamenti el xe stà propagà a la wiki.",
 	"wikibase-dispatchstats-no-stats": "Atualmente no ghe xe statistiche disponibili.",
@@ -152,7 +153,7 @@
 	"wikibase-history-title-without-label": "Cronologia de ($1)",
 	"special-entitieswithoutlabel": "Entità sensa eticheta",
 	"wikibase-entitieswithoutlabel-legend": "Recuperar la lista de le entità sensa eticheta",
-	"wikibase-entitieswithoutlabel-label-language": "Lengua:",
+	"wikibase-entitieswithoutlabel-label-language": "Còdese lengoa:",
 	"wikibase-entitieswithoutlabel-label-type": "Tipo:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "tuti",
 	"wikibase-entitieswithoutlabel-submit": "Serca",
