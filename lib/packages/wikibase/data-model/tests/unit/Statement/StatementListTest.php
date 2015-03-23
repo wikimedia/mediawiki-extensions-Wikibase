@@ -98,8 +98,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 			$this->getStatement( 3, 'five', Statement::RANK_DEPRECATED ),
 			$this->getStatement( 3, 'six', Statement::RANK_NORMAL ),
 
-			$this->getStatement( 4, 'seven', Statement::RANK_PREFERRED ),
-			$this->getStatement( 4, 'eight', Claim::RANK_TRUTH )
+			$this->getStatement( 4, 'seven', Statement::RANK_PREFERRED )
 		);
 
 		$this->assertEquals(
@@ -109,7 +108,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 				$this->getStatement( 3, 'six', Statement::RANK_NORMAL ),
 
-				$this->getStatement( 4, 'eight', Claim::RANK_TRUTH ),
+				$this->getStatement( 4, 'seven', Statement::RANK_PREFERRED ),
 			),
 			$list->getBestStatementPerProperty()->toArray()
 		);
@@ -158,7 +157,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	private function getStatementWithSnak( $propertyId, $stringValue ) {
 		$snak = $this->newSnak( $propertyId, $stringValue );
-		$statement = new Statement( new Claim( $snak ) );
+		$statement = new Statement( $snak );
 		$statement->setGuid( sha1( $snak->getHash() ) );
 		return $statement;
 	}
@@ -173,9 +172,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$list->addNewStatement( $this->newSnak( 42, 'foo' ) );
 
 		$this->assertEquals(
-			new StatementList(
-				new Statement( new Claim( $this->newSnak( 42, 'foo' ) ) )
-			),
+			new StatementList( new Statement( $this->newSnak( 42, 'foo' ) ) ),
 			$list
 		);
 	}
@@ -192,12 +189,12 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(
 			new StatementList(
-				new Statement( new Claim(
+				new Statement(
 					$this->newSnak( 42, 'foo' ),
 					new SnakList( array(
 						$this->newSnak( 1, 'bar' )
 					) )
-				) )
+				)
 			),
 			$list
 		);
@@ -215,12 +212,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertEquals(
-			new StatementList(
-				new Statement( new Claim(
-					$this->newSnak( 42, 'foo' ),
-					$snakList
-				) )
-			),
+			new StatementList( new Statement( $this->newSnak( 42, 'foo' ), $snakList ) ),
 			$list
 		);
 	}
@@ -235,10 +227,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 			'kittens'
 		);
 
-		$statement = new Statement( new Claim(
-			$this->newSnak( 42, 'foo' ),
-			null
-		) );
+		$statement = new Statement( $this->newSnak( 42, 'foo' ) );
 
 		$statement->setGuid( 'kittens' );
 
@@ -262,19 +251,14 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenTraversableWithNonStatements_constructorThrowsException() {
-		$claim = new Claim( new PropertyValueSnak( 42, new StringValue( 'foo' ) ) );
-		$claim->setGuid( 'meh' );
-
-		$claimArray = array(
+		$traversable = new \ArrayObject( array(
 			$this->getStatementWithSnak( 1, 'foo' ),
-			$claim,
+			new \stdClass(),
 			$this->getStatementWithSnak( 2, 'bar' ),
-		);
-
-		$claimsObject = new Claims( $claimArray );
+		) );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new StatementList( $claimsObject );
+		new StatementList( $traversable );
 	}
 
 	public function testGivenNonTraversableOrArgList_constructorThrowsException() {
@@ -283,7 +267,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testCanConstructWithStatement() {
-		$statement = new Statement( new Claim( $this->newSnak( 42, 'foo' ) ) );
+		$statement = new Statement( $this->newSnak( 42, 'foo' ) );
 
 		$this->assertEquals(
 			new StatementList( array( $statement ) ),
@@ -292,9 +276,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testCanConstructWithStatementArgumentList() {
-		$statement0 = new Statement( new Claim( $this->newSnak( 42, 'foo' ) ) );
-		$statement1 = new Statement( new Claim( $this->newSnak( 42, 'bar' ) ) );
-		$statement2 = new Statement( new Claim( $this->newSnak( 42, 'baz' ) ) );
+		$statement0 = new Statement( $this->newSnak( 42, 'foo' ) );
+		$statement1 = new Statement( $this->newSnak( 42, 'bar' ) );
+		$statement2 = new Statement( $this->newSnak( 42, 'baz' ) );
 
 		$this->assertEquals(
 			new StatementList( array( $statement0, $statement1, $statement2 ) ),
@@ -303,9 +287,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenArgumentListWithNonStatement_constructorThrowsException() {
-		$statement0 = new Statement( new Claim( $this->newSnak( 42, 'foo' ) ) );
-		$statement1 = new Statement( new Claim( $this->newSnak( 42, 'bar' ) ) );
-		$statement2 = new Statement( new Claim( $this->newSnak( 42, 'baz' ) ) );
+		$statement0 = new Statement( $this->newSnak( 42, 'foo' ) );
+		$statement1 = new Statement( $this->newSnak( 42, 'bar' ) );
+		$statement2 = new Statement( $this->newSnak( 42, 'baz' ) );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		new StatementList( $statement0, $statement1, array(), $statement2 );
@@ -482,13 +466,13 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenValidRank_getWithRankReturnsOnlyMatchingStatements() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setRank( Statement::RANK_PREFERRED );
 
-		$secondStatement = new Statement( new Claim( new PropertyNoValueSnak( 1337 ) ) );
+		$secondStatement = new Statement( new PropertyNoValueSnak( 1337 ) );
 		$secondStatement->setRank( Statement::RANK_NORMAL );
 
-		$thirdStatement = new Statement( new Claim( new PropertyNoValueSnak( 9001 ) ) );
+		$thirdStatement = new Statement( new PropertyNoValueSnak( 9001 ) );
 		$thirdStatement->setRank( Statement::RANK_DEPRECATED );
 
 		$list = new StatementList( $statement, $secondStatement, $thirdStatement );
@@ -510,10 +494,10 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testWhenOnlyDeprecatedStatements_getBestStatementsReturnsEmptyList() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setRank( Statement::RANK_DEPRECATED );
 
-		$secondStatement = new Statement( new Claim( new PropertyNoValueSnak( 9001 ) ) );
+		$secondStatement = new Statement( new PropertyNoValueSnak( 9001 ) );
 		$secondStatement->setRank( Statement::RANK_DEPRECATED );
 
 		$list = new StatementList( $statement, $secondStatement );
@@ -521,16 +505,16 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testWhenPreferredStatements_getBestStatementsReturnsOnlyThose() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setRank( Statement::RANK_PREFERRED );
 
-		$secondStatement = new Statement( new Claim( new PropertyNoValueSnak( 1337 ) ) );
+		$secondStatement = new Statement( new PropertyNoValueSnak( 1337 ) );
 		$secondStatement->setRank( Statement::RANK_NORMAL );
 
-		$thirdStatement = new Statement( new Claim( new PropertyNoValueSnak( 9001 ) ) );
+		$thirdStatement = new Statement( new PropertyNoValueSnak( 9001 ) );
 		$thirdStatement->setRank( Statement::RANK_DEPRECATED );
 
-		$fourthStatement = new Statement( new Claim( new PropertyNoValueSnak( 23 ) ) );
+		$fourthStatement = new Statement( new PropertyNoValueSnak( 23 ) );
 		$fourthStatement->setRank( Statement::RANK_PREFERRED );
 
 		$list = new StatementList( $statement, $secondStatement, $thirdStatement, $fourthStatement );
@@ -541,13 +525,13 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testWhenNoPreferredStatements_getBestStatementsReturnsOnlyNormalOnes() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setRank( Statement::RANK_NORMAL );
 
-		$secondStatement = new Statement( new Claim( new PropertyNoValueSnak( 1337 ) ) );
+		$secondStatement = new Statement( new PropertyNoValueSnak( 1337 ) );
 		$secondStatement->setRank( Statement::RANK_NORMAL );
 
-		$thirdStatement = new Statement( new Claim( new PropertyNoValueSnak( 9001 ) ) );
+		$thirdStatement = new Statement( new PropertyNoValueSnak( 9001 ) );
 		$thirdStatement->setRank( Statement::RANK_DEPRECATED );
 
 		$list = new StatementList( $statement, $secondStatement, $thirdStatement );

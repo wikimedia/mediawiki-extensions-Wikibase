@@ -15,14 +15,14 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * A claim (identified using it's GUID) can only be added once.
  *
- * @deprecated since 1.0
+ * @deprecated since 1.0, use StatementList and associated classes instead.
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author H. Snater < mediawiki@snater.com >
  */
-class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparable {
+class Claims extends ArrayObject implements Hashable, Comparable {
 
 	/**
 	 * @see GenericArrayObject::__construct
@@ -65,8 +65,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	/**
 	 * @param Claim $claim
 	 *
-	 * @param Claim $claim
-	 *
 	 * @throws InvalidArgumentException
 	 * @return string
 	 */
@@ -82,8 +80,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::addClaim
-	 *
 	 * @since 0.1
 	 *
 	 * @param Claim $claim
@@ -122,8 +118,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::hasClaim
-	 *
 	 * @since 0.1
 	 *
 	 * @param Claim $claim
@@ -142,8 +136,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::indexOf
-	 *
 	 * @since 0.5
 	 *
 	 * @param Claim $claim
@@ -168,8 +160,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::removeClaim
-	 *
 	 * @since 0.1
 	 *
 	 * @param Claim $claim
@@ -189,8 +179,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::hasClaimWithGuid
-	 *
 	 * @since 0.3
 	 *
 	 * @param string $claimGuid
@@ -202,8 +190,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::removeClaimWithGuid
-	 *
 	 * @since 0.3
 	 *
 	 * @param string $claimGuid
@@ -215,8 +201,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @see ClaimListAccess::getClaimWithGuid
-	 *
 	 * @since 0.3
 	 *
 	 * @param string $claimGuid
@@ -441,17 +425,17 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 * Returns a new instance only containing the best claims (these are the highest
 	 * ranked claims, but never deprecated ones). This implementation ignores the properties
 	 * so you probably want to call Claims::getClaimsForProperty first or use
-	 * ClaimList::getBestClaims instead.
+	 * StatementList::getBestStatementPerProperty instead.
 	 *
 	 * @see Claims::getClaimsForProperty
-	 * @see ClaimList::getBestClaimPerProperty
+	 * @see StatementList::getBestStatementPerProperty
 	 *
 	 * @since 0.7
 	 *
 	 * @return Claims
 	 */
 	public function getBestClaims() {
-		$rank = Claim::RANK_TRUTH;
+		$rank = Statement::RANK_PREFERRED;
 
 		do {
 			$claims = $this->getByRank( $rank );

@@ -25,13 +25,6 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class StatementTest extends \PHPUnit_Framework_TestCase {
 
-	public function testConstructorTakesGuidFromClaim() {
-		$claim = new Claim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) );
-		$claim->setGuid( 'meh' );
-		$statement = new Statement( $claim );
-		$this->assertEquals( 'meh', $statement->getGuid() );
-	}
-
 	/**
 	 * @dataProvider instanceProvider
 	 */
@@ -54,7 +47,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 
 	public function testSetAndGetMainSnak() {
 		$mainSnak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
-		$statement = new Statement( new Claim( $mainSnak ) );
+		$statement = new Statement( $mainSnak );
 		$this->assertSame( $mainSnak, $statement->getMainSnak() );
 	}
 
@@ -63,10 +56,10 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 			new PropertyValueSnak( new PropertyId( 'P42' ), new StringValue( 'a' ) )
 		) );
 
-		$statement = new Statement( new Claim(
+		$statement = new Statement(
 			new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
 			$qualifiers
-		) );
+		);
 
 		$this->assertSame( $qualifiers, $statement->getQualifiers() );
 	}
@@ -81,17 +74,17 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGuidDoesNotAffectHash() {
-		$statement0 = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement0 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement0->setGuid( 'statement0' );
 
-		$statement1 = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement1 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement1->setGuid( 'statement1' );
 
 		$this->assertEquals( $statement0->getHash(), $statement1->getHash() );
 	}
 
 	public function testSetInvalidGuidCausesException() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$statement->setGuid( 42 );
@@ -101,7 +94,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$instances = array();
 
 		$propertyId = new PropertyId( 'P42' );
-		$baseInstance = new Statement( new Claim( new PropertyNoValueSnak( $propertyId ) ) );
+		$baseInstance = new Statement( new PropertyNoValueSnak( $propertyId ) );
 
 		$instances[] = $baseInstance;
 
@@ -192,14 +185,6 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$statement->setRank( 9001 );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testSetRankToTruth( Statement $statement ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$statement->setRank( Claim::RANK_TRUTH );
-	}
-
 	public function testStatementRankCompatibility() {
 		$this->assertEquals( Claim::RANK_DEPRECATED, Statement::RANK_DEPRECATED );
 		$this->assertEquals( Claim::RANK_PREFERRED, Statement::RANK_PREFERRED );
@@ -240,7 +225,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenNonStatement_equalsReturnsFalse() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 
 		$this->assertFalse( $statement->equals( null ) );
 		$this->assertFalse( $statement->equals( 42 ) );
@@ -249,12 +234,10 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenSameStatement_equalsReturnsTrue() {
 		$statement = new Statement(
-			new Claim(
-				new PropertyNoValueSnak( 42 ),
-				new SnakList( array(
-					new PropertyNoValueSnak( 1337 ),
-				) )
-			),
+			new PropertyNoValueSnak( 42 ),
+			new SnakList( array(
+				new PropertyNoValueSnak( 1337 ),
+			) ),
 			new ReferenceList( array(
 				new Reference( array( new PropertyNoValueSnak( 1337 ) ) ),
 			) )
@@ -267,37 +250,37 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenStatementWithDifferentProperty_equalsReturnsFalse() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$this->assertFalse( $statement->equals( new Statement( new Claim( new PropertyNoValueSnak( 43 ) ) ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$this->assertFalse( $statement->equals( new Statement( new PropertyNoValueSnak( 43 ) ) ) );
 	}
 
 	public function testGivenStatementWithDifferentSnakType_equalsReturnsFalse() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$this->assertFalse( $statement->equals( new Statement( new Claim( new PropertySomeValueSnak( 42 ) ) ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$this->assertFalse( $statement->equals( new Statement( new PropertySomeValueSnak( 42 ) ) ) );
 	}
 
 	public function testStatementClaimWithDifferentQualifiers_equalsReturnsFalse() {
-		$statement = new Statement( new Claim(
+		$statement = new Statement(
 			new PropertyNoValueSnak( 42 ),
 			new SnakList( array(
 				new PropertyNoValueSnak( 1337 ),
 			) )
-		) );
+		);
 
-		$differentStatement = new Statement( new Claim(
+		$differentStatement = new Statement(
 			new PropertyNoValueSnak( 42 ),
 			new SnakList( array(
 				new PropertyNoValueSnak( 32202 ),
 			) )
-		) );
+		);
 
 		$this->assertFalse( $statement->equals( $differentStatement ) );
 	}
 
 	public function testGivenStatementWithDifferentGuids_equalsReturnsFalse() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 
-		$differentStatement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$differentStatement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$differentStatement->setGuid( 'kittens' );
 
 		$this->assertFalse( $statement->equals( $differentStatement ) );
@@ -305,61 +288,22 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 
 	public function testStatementClaimWithDifferentReferences_equalsReturnsFalse() {
 		$statement = new Statement(
-			new Claim(
-				new PropertyNoValueSnak( 42 ),
-				new SnakList( array() )
-			),
+			new PropertyNoValueSnak( 42 ),
+			new SnakList( array() ),
 			new ReferenceList( array(
 				new Reference( array( new PropertyNoValueSnak( 1337 ) ) ),
 			) )
 		);
 
 		$differentStatement = new Statement(
-			new Claim(
-				new PropertyNoValueSnak( 42 ),
-				new SnakList( array() )
-			),
+			new PropertyNoValueSnak( 42 ),
+			new SnakList( array() ),
 			new ReferenceList( array(
 				new Reference( array( new PropertyNoValueSnak( 32202 ) ) ),
 			) )
 		);
 
 		$this->assertFalse( $statement->equals( $differentStatement ) );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testSetClaim( Statement $statement ) {
-		$mainSnak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
-		$qualifiers = new SnakList( array( new PropertyNoValueSnak( 23 ) ) );
-		$claim = new Claim( $mainSnak, $qualifiers );
-
-		$statement->setClaim( $claim );
-
-		$this->assertEquals( $mainSnak, $statement->getClaim()->getMainSnak() );
-		$this->assertEquals( $mainSnak, $statement->getMainSnak() );
-		$this->assertEquals( $qualifiers, $statement->getClaim()->getQualifiers() );
-		$this->assertEquals( $qualifiers, $statement->getQualifiers() );
-	}
-
-	public function testGetClaim() {
-		$qualifiers = new SnakList( array( new PropertyNoValueSnak( 23 ) ) );
-
-		$statement = new Statement(
-			new Claim( new PropertyNoValueSnak( 42 ), $qualifiers ),
-			new ReferenceList( array(
-				new Reference( array( new PropertyNoValueSnak( 1337 ) ) ),
-			) )
-		);
-		$statement->setGuid( '~=[,,_,,]:3' );
-
-		$claim = $statement->getClaim();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claim', $claim );
-
-		$this->assertEquals( '~=[,,_,,]:3', $claim->getGuid() );
-		$this->assertEquals( new PropertyNoValueSnak( 42 ), $claim->getMainSnak() );
-		$this->assertSame( $qualifiers, $claim->getQualifiers() );
 	}
 
 	public function testEquals() {
@@ -380,7 +324,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$statement = $this->newStatement();
 
 		$statementWithoutQualifiers = $this->newStatement();
-		$statementWithoutQualifiers->getClaim()->setQualifiers( new SnakList() );
+		$statementWithoutQualifiers->setQualifiers( new SnakList() );
 
 		$statementWithoutReferences = $this->newStatement();
 		$statementWithoutReferences->setReferences( new ReferenceList() );
@@ -389,9 +333,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$statementWithPreferredRank->setRank( Statement::RANK_PREFERRED );
 
 		$statementMainSnakNotEqual = $this->newStatement();
-		$statementMainSnakNotEqual->setClaim(
-			new Claim( new PropertyNoValueSnak( 9000 ) )
-		);
+		$statementMainSnakNotEqual->setMainSnak( new PropertyNoValueSnak( 9000 ) );
 
 		return array(
 			array( $statement, $statementWithoutQualifiers, 'qualifiers not equal' ),
@@ -405,7 +347,8 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$qualifiers = new SnakList( array( new PropertyNoValueSnak( 23 ) ) );
 
 		$statement = new Statement(
-			new Claim( new PropertyNoValueSnak( 42 ), $qualifiers ),
+			new PropertyNoValueSnak( 42 ),
+			$qualifiers,
 			new ReferenceList( array(
 				new Reference( array( new PropertyNoValueSnak( 1337 ) ) ),
 			) )

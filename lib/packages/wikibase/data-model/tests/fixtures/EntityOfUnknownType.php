@@ -18,4 +18,7 @@ class EntityOfUnknownType implements EntityDocument {
 		return 'unknown-entity-type';
 	}
 
+	public function setId( $id ) {
+	}
+
 }

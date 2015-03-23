@@ -7,7 +7,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -43,7 +42,7 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getNewStatement( $guid, $hash ) {
-		$statement = new Statement( new Claim( new PropertyValueSnak( 1, new StringValue( $hash ) ) ) );
+		$statement = new Statement( new PropertyValueSnak( 1, new StringValue( $hash ) ) );
 		$statement->setGuid( $guid );
 		return $statement;
 	}

@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Tests\Entity;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -28,13 +27,6 @@ use Wikibase\DataModel\Term\TermList;
  * @author Daniel Kinzler
  */
 abstract class EntityTest extends \PHPUnit_Framework_TestCase {
-
-	/**
-	 * Returns several more or less complex claims
-	 *
-	 * @return Claim[]
-	 */
-	public abstract function makeClaims();
 
 	/**
 	 * @since 0.1

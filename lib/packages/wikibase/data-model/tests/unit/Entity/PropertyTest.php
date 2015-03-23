@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -26,15 +25,6 @@ use Wikibase\DataModel\Term\Fingerprint;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class PropertyTest extends EntityTest {
-
-	/**
-	 * Returns no claims
-	 *
-	 * @return Claim[]
-	 */
-	public function makeClaims() {
-		return array();
-	}
 
 	/**
 	 * @see EntityTest::getNewEmpty
@@ -255,10 +245,10 @@ class PropertyTest extends EntityTest {
 	public function testSetClaims() {
 		$property = Property::newFromType( 'string' );
 
-		$statement0 = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement0 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement0->setGuid( 'TEST$NVS42' );
 
-		$statement1 = new Statement( new Claim( new PropertySomeValueSnak( 42 ) ) );
+		$statement1 = new Statement( new PropertySomeValueSnak( 42 ) );
 		$statement1->setGuid( 'TEST$SVS42' );
 
 		$statements = array( $statement0, $statement1 );

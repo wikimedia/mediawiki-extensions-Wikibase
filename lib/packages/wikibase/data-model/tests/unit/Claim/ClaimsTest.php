@@ -5,13 +5,13 @@ namespace Wikibase\DataModel\Tests\Claim;
 use InvalidArgumentException;
 use ReflectionClass;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\ClaimList;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * @covers Wikibase\DataModel\Claim\Claims
@@ -47,23 +47,23 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 			$guid = 'TEST$statement-' . $this->guidCounter;
 		}
 
-		$claim = new Statement( new Claim( $mainSnak ) );
+		$claim = new Statement( $mainSnak );
 		$claim->setGuid( $guid );
 
 		return $claim;
 	}
 
 	public function testArrayObjectNotConstructedFromObject() {
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( 1 ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( 2 ) );
+		$statement1 = $this->makeStatement( new PropertyNoValueSnak( 1 ) );
+		$statement2 = $this->makeStatement( new PropertyNoValueSnak( 2 ) );
 
-		$claimList = new ClaimList();
-		$claimList->addClaim( $claim1 );
+		$statementList = new StatementList();
+		$statementList->addStatement( $statement1 );
 
-		$claims = new Claims( $claimList );
+		$claims = new Claims( $statementList );
 		// According to the documentation append() "cannot be called when the ArrayObject was
 		// constructed from an object." This test makes sure it was not constructed from an object.
-		$claims->append( $claim2 );
+		$claims->append( $statement2 );
 
 		$this->assertSame( 2, $claims->count() );
 	}
@@ -565,12 +565,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 				Statement::RANK_PREFERRED,
 				new Claims( array( $s2 ) ),
 			),
-			// s2 has RANK_PREFERRED, so doesn't match RANK_TRUTH
-			array(
-				new Claims( array( $s2 ) ),
-				Claim::RANK_TRUTH,
-				new Claims(),
-			),
 			// s2 and s3 have RANK_PREFERRED, so return them
 			array(
 				new Claims( array( $s2, $s1, $s3 ) ),
@@ -672,18 +666,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 		$claims = new Claims( array( $s3, $s1, $s2 ) );
 		$expected = new Claims( array( $s2, $s3 ) );
-		$this->assertEquals( $claims->getBestClaims(), $expected );
-	}
-
-	public function testGetBestClaimsReturnsTruthRanks() {
-		$s1 = new Claim( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
-		$s1->setGuid( 'kittens' );
-
-		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) );
-		$s2->setRank( Statement::RANK_NORMAL );
-
-		$claims = new Claims( array( $s1, $s2 ) );
-		$expected = new Claims( array( $s1 ) );
 		$this->assertEquals( $claims->getBestClaims(), $expected );
 	}
 
