@@ -377,51 +377,6 @@ class Claims extends ArrayObject implements Hashable, Comparable {
 	}
 
 	/**
-	 * Returns a new instance only containing the claims with the given rank.
-	 *
-	 * @since 0.7
-	 *
-	 * @param int $rank
-	 *
-	 * @return Claims
-	 */
-	public function getByRank( $rank ) {
-		$claims = new self();
-
-		/* @var Claim $claim */
-		foreach ( $this as $claim ) {
-			if ( $claim->getRank() === $rank ) {
-				$claims[] = $claim;
-			}
-		}
-
-		return $claims;
-	}
-
-	/**
-	 * Returns a new instance only containing the claims with the given ranks.
-	 *
-	 * @since 0.7.2
-	 *
-	 * @param int[] $ranks
-	 *
-	 * @return Claims
-	 */
-	public function getByRanks( array $ranks ) {
-		$ranks = array_flip( $ranks );
-		$claims = new self();
-
-		/* @var Claim $claim */
-		foreach ( $this as $claim ) {
-			if ( isset( $ranks[$claim->getRank()] ) ) {
-				$claims[] = $claim;
-			}
-		}
-
-		return $claims;
-	}
-
-	/**
 	 * @see Comparable::equals
 	 *
 	 * @since 0.7.4
