@@ -13,6 +13,11 @@
 var createStatementlistview = function( options, $node ) {
 	options = $.extend( {
 		claimGuidGenerator: 'I am a ClaimGuidGenerator',
+		entityIdPlainFormatter: {
+			format: function ( entityId ) {
+				return $.Deferred().resolve( entityId ).promise();
+			}
+		},
 		entityStore: {
 			get: function () {
 				return $.Deferred().resolve().promise();

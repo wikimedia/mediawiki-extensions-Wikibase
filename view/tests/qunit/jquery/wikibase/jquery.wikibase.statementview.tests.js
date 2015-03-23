@@ -43,6 +43,16 @@ var entityStore = {
 var createStatementview = function( options, $node ) {
 	options = $.extend( {
 		entityStore: entityStore,
+		entityIdHtmlFormatter: {
+			format: function( entityId ) {
+				return $.Deferred().resolve( entityId ).promise();
+			}
+		},
+		entityIdPlainFormatter: {
+			format: function( entityId ) {
+				return $.Deferred().resolve( entityId ).promise();
+			}
+		},
 		valueViewBuilder: 'i am a valueview builder',
 		claimsChanger: 'I am a ClaimsChanger',
 		entityChangersFactory: {

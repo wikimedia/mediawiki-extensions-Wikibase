@@ -18,6 +18,10 @@
  * @param {wikibase.datamodel.Reference|null} options.value
  * @param {string} options.statementGuid
  *        The GUID of the `Statement` the `Reference` represented by the widget instance belongs to.
+ * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
+ *        Required for dynamically rendering links to `Entity`s.
+ * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
+ *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {wikibase.store.EntityStore} options.entityStore
  *        Required for dynamically gathering `Entity`/`Property` information.
  * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
@@ -74,6 +78,8 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		},
 		value: null,
 		statementGuid: null,
+		entityIdHtmlFormatter: null,
+		entityIdPlainFormatter: null,
 		entityStore: null,
 		valueViewBuilder: null,
 		referencesChanger: null,
@@ -113,6 +119,8 @@ $.widget( 'wikibase.referenceview', PARENT, {
 						value: value || undefined,
 						singleProperty: true,
 						dataTypeStore: self.options.dataTypeStore,
+						entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
+						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
 						entityStore: self.options.entityStore,
 						valueViewBuilder: self.options.valueViewBuilder
 					};

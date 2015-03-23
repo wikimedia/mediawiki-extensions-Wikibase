@@ -35,6 +35,10 @@
  * @param {boolean} [options.autoStartEditing=true]
  *        Whether the `snakview` should switch to edit mode automatically upon initialization if its
  *        initial value is empty.
+ * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
+ *        Required for dynamically rendering links to `Entity`s.
+ * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
+ *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {wikibase.store.EntityStore} options.entityStore
  *        Required for dynamically gathering `Entity`/`Property` information.
  * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
@@ -90,6 +94,8 @@ $.widget( 'wikibase.snakview', PARENT, {
 			snaktype: false
 		},
 		autoStartEditing: true,
+		entityIdPlainFormatter: null,
+		entityIdHtmlFormatter: null,
 		entityStore: null,
 		valueViewBuilder: null,
 		dataTypeStore: null,
@@ -728,66 +734,56 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 */
 	_getPropertyDOM: function( propertyId ) {
 		var self = this,
-			deferred = $.Deferred();
+			deferred = $.Deferred(),
+			editable = !this.options.locked.property && this.isInEditMode();
 
-		if( propertyId ) {
-			this.options.entityStore.get( propertyId )
-			.done( function( fetchedProperty ) {
-				deferred.resolve( self._createPropertyDOM(
-					fetchedProperty ? fetchedProperty.getContent() : undefined,
-					fetchedProperty ? fetchedProperty.getTitle() : undefined
-				) );
-			} )
-			.fail( deferred.reject );
+		if( !propertyId ) {
+			if( editable ) {
+				deferred.resolve( this._createPropertyDOM( '' ) );
+			} else {
+				deferred.resolve( '' );
+			}
 		} else {
-			deferred.resolve( this._createPropertyDOM() );
+			if( editable ) {
+				this.options.entityIdPlainFormatter.format( propertyId ).done( function( propertyLabel ) {
+					deferred.resolve( self._createPropertyDOM( propertyLabel ) );
+				} );
+			} else {
+				// Property is set already and cannot be changed, display label only:
+				return this.options.entityIdHtmlFormatter.format( propertyId );
+			}
 		}
-
 		return deferred.promise();
 	},
 
 	/**
-	 * Creates the DOM structure specific for a `Property`-`Title` combination, a generic DOM
-	 * structure or an input element if parameters are omitted.
+	 * Creates the DOM structure specific for a `Property`, a generic DOM
+	 * structure or an input element.
 	 * @private
 	 *
-	 * @param {wikibase.datamodel.Property} [property] `Property` object or `Property` id. Returns
-	 *        generic DOM structure if omitted.
-	 * @param {mediawiki.Title} [title]
-	 * @return {jQuery}
+	 * @param {string} propertyLabel Rendered label for the `Property`
+	 * @return {jQuery|null}
 	 */
-	_createPropertyDOM: function( property, title ) {
+	_createPropertyDOM: function( propertyLabel ) {
 		var $propertyDom;
 
-		if( this.options.locked.property || !this.isInEditMode() ) {
-			// Property is set already and cannot be changed, display label only:
-			$propertyDom = property instanceof wb.datamodel.Property
-				? wb.utilities.ui.buildLinkToEntityPage( property, title )
-				// shouldn't usually happen, only in non-edit mode, while no Snak is set:
-				: wb.utilities.ui.buildMissingEntityInfo( property, wb.datamodel.Property );
-		} else {
-			// No Property set for this Snak, serve edit view to specify it:
-			var propertySelector = this._getPropertySelector(),
-				propertyLabel = property instanceof wb.datamodel.Property
-					? wb.utilities.ui.buildPrettyEntityLabelText( property )
-					: property;
+		// No Property set for this Snak, serve edit view to specify it:
+		var propertySelector = this._getPropertySelector();
 
-			// TODO: use selectedEntity() or other command to set selected entity in both cases!
-			if( propertySelector ) {
-				// property selector in DOM already, just replace current value
-				var currentValue = propertySelector.widget().val();
-				// Impose case-insensitivity:
-				if( propertyLabel.toLowerCase() !== currentValue.toLocaleLowerCase() ) {
-					propertySelector.widget().val( propertyLabel );
-				}
-			} else {
-				$propertyDom = this._buildPropertySelector().val( propertyLabel );
-
-				// propagate snakview state:
-				$propertyDom.data( 'entityselector' ).option( 'disabled', this.options.disabled );
+		// TODO: use selectedEntity() or other command to set selected entity in both cases!
+		if( propertySelector ) {
+			// property selector in DOM already, just replace current value
+			var currentValue = propertySelector.widget().val();
+			// Impose case-insensitivity:
+			if( propertyLabel.toLowerCase() !== currentValue.toLocaleLowerCase() ) {
+				propertySelector.widget().val( propertyLabel );
 			}
-		}
+		} else {
+			$propertyDom = this._buildPropertySelector().val( propertyLabel );
 
+			// propagate snakview state:
+			$propertyDom.data( 'entityselector' ).option( 'disabled', this.options.disabled );
+		}
 		return $propertyDom;
 	},
 

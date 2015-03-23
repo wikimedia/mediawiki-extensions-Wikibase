@@ -6,6 +6,11 @@
 ( function( $, wb, QUnit ) {
 'use strict';
 
+var entityStore = new wb.store.EntityStore();
+entityStore.get = function () {
+	return $.Deferred().resolve().promise();
+};
+
 /**
  * @param {Object} [options={}]
  * @param {jQuery} [$node]
@@ -14,11 +19,7 @@
 var createStatementgrouplistview = function( options, $node ) {
 	options = $.extend( {
 		claimGuidGenerator: 'I am a ClaimGuidGenerator',
-		entityStore: {
-			get: function () {
-				return $.Deferred().resolve().promise();
-			}
-		},
+		entityStore: entityStore,
 		valueViewBuilder: 'i am a ValueViewBuilder',
 		entityChangersFactory: {
 			getClaimsChanger: function() {

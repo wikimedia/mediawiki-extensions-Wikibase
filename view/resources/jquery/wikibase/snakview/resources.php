@@ -40,7 +40,6 @@ return call_user_func( function() {
 				'wikibase.datamodel',
 				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.SnakSerializer',
-				'wikibase.utilities',
 			),
 			'messages' => array(
 				'wikibase-snakview-property-input-placeholder',
