@@ -22,7 +22,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @author Daniel Kinzler
  * @author H. Snater < mediawiki@snater.com >
  */
-class Claims extends ArrayObject implements Hashable {
+class Claims extends ArrayObject {
 
 	/**
 	 * @see GenericArrayObject::__construct
@@ -277,33 +277,6 @@ class Claims extends ArrayObject implements Hashable {
 	public function offsetUnset( $guid ) {
 		$key = $this->getGuidKey( $guid );
 		parent::offsetUnset( $key );
-	}
-
-	/**
-	 * Returns a hash based on the value of the object.
-	 * The hash is based on the hashes of the claims contained,
-	 * with the order of claims considered significant.
-	 *
-	 * @since 0.5
-	 *
-	 * @return string
-	 */
-	public function getHash() {
-		$hash = sha1( '' );
-
-		/* @var Claim $claim */
-		foreach ( $this as $claim ) {
-			$hash = sha1( $hash . $claim->getHash() );
-		}
-
-		return $hash;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isEmpty() {
-		return !$this->getIterator()->valid();
 	}
 
 }

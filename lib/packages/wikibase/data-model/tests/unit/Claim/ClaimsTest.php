@@ -414,27 +414,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNull( $list->getClaimWithGuid( $secondClaim->getGuid() ) );
 	}
 
-	public function testGetHash() {
-		$claimsA = new Claims();
-		$claimsB = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
-
-		$this->assertEquals( $claimsA->getHash(), $claimsB->getHash(), 'empty list' );
-
-		$claimsA->addClaim( $claim1 );
-		$claimsB->addClaim( $claim2 );
-		$this->assertNotEquals( $claimsA->getHash(), $claimsB->getHash(), 'different content' );
-
-		$claimsA->addClaim( $claim2 );
-		$claimsB->addClaim( $claim1 );
-		$this->assertNotEquals( $claimsA->getHash(), $claimsB->getHash(), 'different order' );
-
-		$claimsA->removeClaim( $claim1 );
-		$claimsB->removeClaim( $claim1 );
-		$this->assertEquals( $claimsA->getHash(), $claimsB->getHash(), 'same content' );
-	}
-
 	public function testIterator() {
 		$expected = array(
 			'TESTCLAIM1' => $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ), 'testclaim1' ),
@@ -447,19 +426,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$actual = iterator_to_array( $claims->getIterator() );
 
 		$this->assertSame( $expected, $actual );
-	}
-
-	public function testIsEmpty() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-
-		$this->assertTrue( $claims->isEmpty() );
-
-		$claims->addClaim( $claim1 );
-		$this->assertFalse( $claims->isEmpty() );
-
-		$claims->removeClaim( $claim1 );
-		$this->assertTrue( $claims->isEmpty() );
 	}
 
 }
