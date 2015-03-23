@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_edab17d2",
+        "filename": "repo/tests/phpunit/includes/api/RemoveClaimsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-03-23T18:25:23Z",
+      "side": 1,
+      "message": "Looks like you can do\n\n$this-\u003eassertTrue( $item-\u003egetStatements()-\u003eequals( new StatementList( $claims ) ) );",
+      "revId": "8621cd1a0fd728adff2ce2ace984e41b63c701bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
