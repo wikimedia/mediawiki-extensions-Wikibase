@@ -89,7 +89,9 @@ class RdfDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 				$this->getSiteList(),
 				$entityLookup,
 				$entityRevisionLookup,
-				$propertyLookup);
+				$propertyLookup,
+				RdfDumpGenerator::getDumpPartFlavor( 'all' )
+				);
 	}
 
 	public function idProvider() {

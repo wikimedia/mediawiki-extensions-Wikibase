@@ -9,6 +9,7 @@ class DumpRdf extends DumpScript {
 	public function __construct() {
 		parent::__construct();
 		$this->addOption( 'format', "Set the dump format.", false, true );
+		$this->addOption( 'part', "Set the dump part, one of: statements, simple, links, labels, all.", true, true );
 	}
 
 	/**
@@ -17,6 +18,7 @@ class DumpRdf extends DumpScript {
 	 * @return DumpGenerator
 	 */
 	 protected function createDumper( $output ) {
+
 	 	return RdfDumpGenerator::createDumpGenerator(
 	 			$this->getOption( 'format', 'ttl' ),
 	 			$output,
@@ -24,7 +26,9 @@ class DumpRdf extends DumpScript {
 	 			$GLOBALS['wgCanonicalServer']."/Special:EntityData/",
 	 			$this->wikibaseRepo->getSiteStore()->getSites(),
 	 			$this->entityLookup, $this->revisionLookup,
-	 			$this->wikibaseRepo->getPropertyDataTypeLookup());
+	 			$this->wikibaseRepo->getPropertyDataTypeLookup(),
+	 			RdfDumpGenerator::getDumpPartFlavor( $this->getOption( 'part' ) )
+	 		);
 	}
 }
 
