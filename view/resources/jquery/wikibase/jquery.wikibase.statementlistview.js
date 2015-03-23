@@ -28,6 +28,10 @@
  *        with edit mode being started.
  * @param {wikibase.utilities.ClaimGuidGenerator} options.claimGuidGenerator
  *        Required for dynamically generating GUIDs for new `Statement`s.
+ * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
+ *        Required for dynamically rendering links to `Entity`s.
+ * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
+ *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {wikibase.store.EntityStore} options.entityStore
  *        Required for dynamically gathering `Entity`/`Property` information.
  * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
@@ -81,6 +85,8 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 		},
 		value: null,
 		claimGuidGenerator: null,
+		entityIdHtmlFormatter: null,
+		entityIdPlainFormatter: null,
 		entityStore: null,
 		valueViewBuilder: null,
 		entityChangersFactory: null,
@@ -190,6 +196,8 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 							}
 						},
 						dataTypeStore: self.option( 'dataTypeStore' ),
+						entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
+						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
 						entityStore: self.option( 'entityStore' ),
 						valueViewBuilder: self.option( 'valueViewBuilder' ),
 						entityChangersFactory: self.option( 'entityChangersFactory' ),
