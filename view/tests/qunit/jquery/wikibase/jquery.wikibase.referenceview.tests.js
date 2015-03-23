@@ -1,26 +1,9 @@
 /**
  * @licence GNU GPL v2+
- * @author Adrian Lang < adrian.lang@wikimedia.de >
+ * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
-( function( $, mw, wb, vv, vf, QUnit ) {
+( function( $, wb, vv, vf, QUnit ) {
 	'use strict';
-
-	// We need an entity store for the instances of jquery.wikibase.referenceview
-	// and jquery.wikibase.snakview created by jquery.wikibase.referenceview.
-	var entityStore = {
-		get: function() {
-			return $.Deferred().resolve( new wb.store.FetchedContent( {
-				title: new mw.Title( 'Property:P1' ),
-				content: new wb.datamodel.Property(
-					'P1',
-					'string',
-					new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( [
-						new wb.datamodel.Term( 'en', 'P1' )
-					] ) )
-				)
-			} ) );
-		}
-	};
 
 	var valueViewBuilder = new wb.ValueViewBuilder(
 		new vv.ExpertStore(),
@@ -38,7 +21,17 @@
 	function createReferenceview( options ) {
 		options = $.extend( {
 			statementGuid: 'testGuid',
-			entityStore: entityStore,
+			entityIdHtmlFormatter: {
+				format: function() {
+					return $.Deferred().resolve( 'P1' ).promise();
+				}
+			},
+			entityIdPlainFormatter: {
+				format: function() {
+					return $.Deferred().resolve( 'P1' ).promise();
+				}
+			},
+			entityStore: 'I am an EntityStore',
 			valueViewBuilder: valueViewBuilder,
 			referencesChanger: 'I am a ReferencesChanger',
 			dataTypeStore: 'I am a DataTypeStore'
@@ -191,4 +184,4 @@
 		);
 	} );
 
-} )( jQuery, mediaWiki, wikibase, jQuery.valueview, valueFormatters, QUnit );
+} )( jQuery, wikibase, jQuery.valueview, valueFormatters, QUnit );

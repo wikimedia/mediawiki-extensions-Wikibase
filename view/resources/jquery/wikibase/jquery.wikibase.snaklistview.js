@@ -22,6 +22,10 @@
  * @param {boolean} [singleProperty=true]
  *        If `true`, it is assumed that the widget is filled with `Snak`s featuring a single common
  *        property.
+ * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
+ *        Required for dynamically rendering links to `Entity`s.
+ * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
+ *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {wikibase.store.EntityStore} options.entityStore
  *        Required for dynamically gathering `Entity`/`Property` information.
  * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
@@ -74,6 +78,8 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		value: null,
 		singleProperty: false,
 		helpMessage: mw.msg( 'wikibase-claimview-snak-new-tooltip' ),
+		entityIdHtmlFormatter: null,
+		entityIdPlainFormatter: null,
 		entityStore: null,
 		valueViewBuilder: null,
 		dataTypeStore: null
@@ -160,6 +166,8 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 							property: !!value
 						},
 						dataTypeStore: self.option( 'dataTypeStore' ),
+						entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
+						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
 						entityStore: self.option( 'entityStore' ),
 						valueViewBuilder: self.option( 'valueViewBuilder' )
 					};

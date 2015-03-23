@@ -24,6 +24,10 @@
  *        "add" button to add new `Statements`.
  * @param {wikibase.utilities.ClaimGuidGenerator} options.claimGuidGenerator
  *        Required for dynamically generating GUIDs for new `Statement`s.
+ * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
+ *        Required for dynamically rendering links to `Entity`s.
+ * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
+ *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {wikibase.store.EntityStore} options.entityStore
  *        Required for dynamically gathering `Entity`/`Property` information.
  * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
@@ -60,6 +64,8 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 		},
 		value: null,
 		claimGuidGenerator: null,
+		entityIdHtmlFormatter: null,
+		entityIdPlainFormatter: null,
 		entityStore: null,
 		valueViewBuilder: null,
 		entityChangersFactory: null,
@@ -80,6 +86,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	_create: function() {
 		if(
 			!this.options.claimGuidGenerator
+			|| !this.options.entityIdHtmlFormatter
 			|| !this.options.entityStore
 			|| !this.options.valueViewBuilder
 			|| !this.options.entityChangersFactory
@@ -118,22 +125,8 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 		var self = this,
 			propertyId = this.options.value.getKey();
 
-		this.options.entityStore.get( propertyId ).done( function( property ) {
-			var $title;
-
-			if( property ) {
-				$title = wb.utilities.ui.buildLinkToEntityPage(
-					property.getContent(),
-					property.getTitle()
-				);
-			} else {
-				$title = wb.utilities.ui.buildMissingEntityInfo(
-					propertyId,
-					wb.datamodel.Property
-				);
-			}
-
-			self.$propertyLabel.append( $title );
+		this.options.entityIdHtmlFormatter.format( propertyId ).done( function( title ) {
+			self.$propertyLabel.append( title );
 		} );
 	},
 
@@ -155,6 +148,8 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 				? this.options.value.getItemContainer()
 				: new wb.datamodel.StatementList(),
 			claimGuidGenerator: this.options.claimGuidGenerator,
+			entityIdHtmlFormatter: this.options.entityIdHtmlFormatter,
+			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
 			entityStore: this.options.entityStore,
 			valueViewBuilder: this.options.valueViewBuilder,
 			entityChangersFactory: this.options.entityChangersFactory,
