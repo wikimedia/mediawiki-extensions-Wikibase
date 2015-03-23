@@ -50,6 +50,11 @@
 			"globals": {
 				"QUnit": false
 			}
+		},
+		"view/tests/qunit/wikibase/entityIdFormatter/testEntityIdHtmlFormatter.js": {
+			"globals": {
+				"QUnit": false
+			}
 		}
 
 	}
