@@ -123,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_42bd3aad",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-23T17:48:38Z",
+      "side": 1,
+      "message": "I suspect it may be faster because of smaller reallocations required to compose small string than to add a lot small strings repeatedly to a big string, but this is just wild guessing.",
+      "parentUuid": "6e7c4fa4_e2880625",
+      "revId": "a0db931edcdf1aa75647e1ad0a93a60bc5a3d8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_7c625fa4",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 14
