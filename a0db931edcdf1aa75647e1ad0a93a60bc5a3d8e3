@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_028e6233",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-23T17:42:22Z",
+      "side": 1,
+      "message": "Either works. It\u0027s probably compiles the same even. If was just easier to replace comma with dot :)",
+      "parentUuid": "6e7c4fa4_9c6f3b8f",
+      "revId": "a0db931edcdf1aa75647e1ad0a93a60bc5a3d8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_5c6523aa",
         "filename": "repo/includes/rdf/N3RdfWriterBase.php",
         "patchSetId": 14
@@ -81,6 +99,24 @@
       "writtenOn": "2015-03-23T13:11:10Z",
       "side": 1,
       "message": "If I saw this comma form in Java I\u0027d assume it was because $this-\u003ewrite syncs its arguments to the output stream one by one.  In that case the cost of varargs is much lower than building a new string.  Usually, in fact, it\u0027d be written $this-\u003ewrite( \u0027\"\u0027 )-\u003ewrite( $value )-\u003ewrite( \u0027\"\u0027 ); to avoid the varargs overhead too.  Anyway, why go from varags to string building?",
+      "revId": "a0db931edcdf1aa75647e1ad0a93a60bc5a3d8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e2880625",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-23T17:42:22Z",
+      "side": 1,
+      "message": "Turns out it\u0027s faster on benchmarks. Not sure I can coherently explain why :)",
+      "parentUuid": "6e7c4fa4_5c6523aa",
       "revId": "a0db931edcdf1aa75647e1ad0a93a60bc5a3d8e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
