@@ -262,9 +262,6 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	/**
 	 * Get texts from an item with a field specifier.
 	 *
-	 * @since 0.1
-	 * @deprecated
-	 *
 	 * @param string $fieldKey
 	 * @param string[]|null $languageCodes
 	 *

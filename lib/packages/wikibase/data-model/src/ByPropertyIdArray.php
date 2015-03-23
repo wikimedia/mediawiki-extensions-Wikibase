@@ -43,8 +43,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 class ByPropertyIdArray extends \ArrayObject {
 
 	/**
-	 * @since 0.2
-	 *
 	 * @var array[]|null
 	 */
 	private $byId = null;
@@ -79,7 +77,6 @@ class ByPropertyIdArray extends \ArrayObject {
 
 	/**
 	 * Checks whether id indexed array has been generated.
-	 * @since 0.5
 	 *
 	 * @throws RuntimeException
 	 */
@@ -170,12 +167,11 @@ class ByPropertyIdArray extends \ArrayObject {
 
 	/**
 	 * Returns the absolute numeric indices of objects featuring the same property id.
-	 * @since 0.5
 	 *
 	 * @param PropertyId $propertyId
-	 * @return int[]
 	 *
 	 * @throws RuntimeException
+	 * @return int[]
 	 */
 	private function getFlatArrayIndices( PropertyId $propertyId ) {
 		$this->assertIndexIsBuild();
@@ -197,7 +193,6 @@ class ByPropertyIdArray extends \ArrayObject {
 
 	/**
 	 * Moves an object within its "property group".
-	 * @since 0.5
 	 *
 	 * @param object $object
 	 * @param int $toIndex Absolute index within a "property group".
@@ -237,7 +232,6 @@ class ByPropertyIdArray extends \ArrayObject {
 
 	/**
 	 * Moves an object to the end of its "property group".
-	 * @since 0.5
 	 *
 	 * @param object $object
 	 */
@@ -260,7 +254,6 @@ class ByPropertyIdArray extends \ArrayObject {
 
 	/**
 	 * Removes an object from the array structures.
-	 * @since 0.5
 	 *
 	 * @param object $object
 	 */
@@ -273,7 +266,6 @@ class ByPropertyIdArray extends \ArrayObject {
 
 	/**
 	 * Inserts an object at a specific index.
-	 * @since 0.5
 	 *
 	 * @param object $object
 	 * @param int $index Absolute index within the flat list of objects.
@@ -291,8 +283,6 @@ class ByPropertyIdArray extends \ArrayObject {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param PropertyId $propertyId
 	 * @param int $toIndex
 	 */
@@ -350,9 +340,9 @@ class ByPropertyIdArray extends \ArrayObject {
 	/**
 	 * Returns the index of a "property group" (the first object in the flat array that features
 	 * the specified property). Returns false if property id could not be found.
-	 * @since 0.5
 	 *
 	 * @param PropertyId $propertyId
+	 *
 	 * @return bool|int
 	 */
 	private function getPropertyGroupIndex( PropertyId $propertyId ) {
@@ -447,9 +437,8 @@ class ByPropertyIdArray extends \ArrayObject {
 		$this->buildIndex();
 	}
 
-	/*
+	/**
 	 * Adds an object to an existing property group at the specified absolute index.
-	 * @since 0.5
 	 *
 	 * @param object $object
 	 * @param int $index
