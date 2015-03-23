@@ -16,6 +16,7 @@
 * Removed `Claims::getHashes`
 * Removed `Claims::getGuids`
 * Removed `Claims::equals` (and `Claims` no longer implements `Comparable`)
+* Removed `Claims::getHash` (and `Claims` no longer implements `Hashable`)
 
 ## Version 2.6.0 (2015-03-08)
 
