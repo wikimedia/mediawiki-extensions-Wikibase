@@ -96,8 +96,6 @@ class ReferenceList extends HashableObjectStorage {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param Reference $reference
 	 * @param int $index
 	 */
