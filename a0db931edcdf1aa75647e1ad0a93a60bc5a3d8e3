@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7c4b3f2c",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-23T13:11:10Z",
+      "side": 1,
+      "message": "Would it be ok to have if ( !$this-\u003ewriteIfShorthand( $base ) { $this-\u003ewriteQName( $base, $local ); }\n\nI don\u0027t mind the \u0027a\u0027 hardcoding so much - its the one shorthand that I\u0027ve commonly seen.",
+      "revId": "a0db931edcdf1aa75647e1ad0a93a60bc5a3d8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1c5c8bf3",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-23T13:11:10Z",
+      "side": 1,
+      "message": "At this point $this-\u003ewriteQName is the same as this line.  How much overhead does that extra function call add?  I wouldn\u0027t be surprised if it was pretty high with profiling turned on but I imagine its not too bad normally.",
+      "revId": "a0db931edcdf1aa75647e1ad0a93a60bc5a3d8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fc566fd0",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-23T13:11:10Z",
+      "side": 1,
+      "message": "spaces around dots I think.",
+      "revId": "a0db931edcdf1aa75647e1ad0a93a60bc5a3d8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9c6f3b8f",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-23T13:11:10Z",
+      "side": 1,
+      "message": "Why not \"@$language\"?  Not a complaint - I\u0027m curious.  I know some people hate the interpolation but you don\u0027t.",
+      "revId": "a0db931edcdf1aa75647e1ad0a93a60bc5a3d8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5c6523aa",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-23T13:11:10Z",
+      "side": 1,
+      "message": "If I saw this comma form in Java I\u0027d assume it was because $this-\u003ewrite syncs its arguments to the output stream one by one.  In that case the cost of varargs is much lower than building a new string.  Usually, in fact, it\u0027d be written $this-\u003ewrite( \u0027\"\u0027 )-\u003ewrite( $value )-\u003ewrite( \u0027\"\u0027 ); to avoid the varargs overhead too.  Anyway, why go from varags to string building?",
+      "revId": "a0db931edcdf1aa75647e1ad0a93a60bc5a3d8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7c625fa4",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-23T13:11:10Z",
+      "side": 1,
+      "message": "I\u0027d add another comment in the catch block \"// and we default strings to \u0027string\u0027 type if we can\u0027t figure out any better because blah blah blah\".  Not a big deal but it\u0027d be nice to know why can just default after catching the exception.",
+      "revId": "a0db931edcdf1aa75647e1ad0a93a60bc5a3d8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1c032bc3",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 873
+      },
+      "writtenOn": "2015-03-23T13:11:10Z",
+      "side": 1,
+      "message": "+1.  I actually think this is easier to read because the legal transitions are spelled out.",
+      "revId": "a0db931edcdf1aa75647e1ad0a93a60bc5a3d8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
