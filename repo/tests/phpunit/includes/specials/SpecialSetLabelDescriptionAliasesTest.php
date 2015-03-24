@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
-use Wikibase\Repo\Specials\SpecialWikibaseRepoPage;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\UniquenessViolation;
 
@@ -34,7 +33,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 	protected $languageCodes = array( 'en', 'de', 'de-ch', 'ii', 'zh' );
 
-
 	/**
 	 * @see SpecialPageTestBase::newSpecialPage()
 	 *
@@ -43,15 +41,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	protected function newSpecialPage() {
 		$page = new SpecialSetLabelDescriptionAliases();
 
-		$this->setMockServices( $page );
-
-		return $page;
-	}
-
-	/**
-	 * @param SpecialSetLabelDescriptionAliases $page
-	 */
-	protected function setMockServices( SpecialWikibaseRepoPage $page ) {
 		$page->setServices(
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup(),
@@ -62,6 +51,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			$this->getFingerprintChangeOpsFactory(),
 			$this->getContentLanguages()
 		);
+
+		return $page;
 	}
 
 	/**
@@ -69,7 +60,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 */
 	private function getFingerprintChangeOpsFactory() {
 		$maxLength = 32;
-		
+
 		return new FingerprintChangeOpFactory(
 			new TermValidatorFactory(
 				$maxLength,

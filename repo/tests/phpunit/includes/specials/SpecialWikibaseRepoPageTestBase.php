@@ -20,7 +20,6 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\Specials\SpecialWikibaseRepoPage;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\SummaryFormatter;
 
@@ -41,22 +40,6 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 		parent::setUp();
 
 		$this->mockRepository = new MockRepository();
-	}
-
-	/**
-	 * Call $page->setSpecialWikibaseRepoPageServices with the default mock services.
-	 *
-	 * @param SpecialWikibaseRepoPage $page
-	 */
-	protected function setMockServices( SpecialWikibaseRepoPage $page ) {
-		$page->setSpecialWikibaseRepoPageServices(
-			$this->getSummaryFormatter(),
-			$this->getEntityRevisionLookup(),
-			$this->getEntityTitleLookup(),
-			$this->getEntityStore(),
-			$this->getEntityPermissionChecker(),
-			$this->getSiteStore()
-		);
 	}
 
 	protected function getSummaryFormatter() {
@@ -190,4 +173,5 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	protected function getIdParser() {
 		return new BasicEntityIdParser();
 	}
+
 }
