@@ -30,12 +30,21 @@ class YearMonthTimeParser extends StringValueParser {
 	protected $lang;
 
 	/**
+	 * @var ValueParser
+	 */
+	private $isoTimestampParser;
+
+	/**
 	 * @see StringValueParser::__construct
 	 */
 	public function __construct( ParserOptions $options = null ) {
 		parent::__construct( $options );
 
 		$this->lang = Language::factory( $this->getOption( ValueParser::OPT_LANG ) );
+		$this->isoTimestampParser = new IsoTimestampParser(
+			new CalendarModelParser( $this->options ),
+			$this->options
+		);
 	}
 
 	/**
@@ -137,12 +146,7 @@ class YearMonthTimeParser extends StringValueParser {
 	 * @return TimeValue
 	 */
 	private function getTimeFromYearMonth( $year, $month ) {
-		$isoTimestampParser = new IsoTimestampParser(
-			new CalendarModelParser( $this->options ),
-			$this->options
-		);
-
-		return $isoTimestampParser->parse( sprintf( '+%d-%02d-00T00:00:00Z', $year, $month ) );
+		return $this->isoTimestampParser->parse( sprintf( '+%d-%02d-00T00:00:00Z', $year, $month ) );
 	}
 
 	/**
