@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Repo\Test;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\Lib\EntityIdHtmlLinkFormatterFactory;
+use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\Lib\EntityIdHtmlLinkFormatterFactory
+ * @covers Wikibase\Repo\EntityIdHtmlLinkFormatterFactory
  *
  * @group ValueFormatters
  * @group WikibaseLib
