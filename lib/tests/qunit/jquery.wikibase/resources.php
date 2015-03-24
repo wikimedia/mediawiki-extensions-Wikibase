@@ -33,10 +33,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.badgeselector',
-				'mediawiki.Title',
 				'wikibase.datamodel',
-				'wikibase.store.EntityStore',
-				'wikibase.store.FetchedContent',
 			),
 		),
 
