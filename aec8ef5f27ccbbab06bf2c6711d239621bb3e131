@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3de13393",
+        "filename": "repo/includes/rdf/DateValueCleaner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T11:37:33Z",
+      "side": 1,
+      "message": "The converter/normalizer should be a service that can be injected to constructors, for better re-use, testability, etc. Please don\u0027t use static methods if you don\u0027t absolutely have to.",
+      "revId": "aec8ef5f27ccbbab06bf2c6711d239621bb3e131",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3d98531d",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T11:37:33Z",
+      "side": 1,
+      "message": "Please make the DateValueCleaner a member object. \nThe constructor can create and assign an instance directly (static composition), but there should be a setter to override it.",
+      "revId": "aec8ef5f27ccbbab06bf2c6711d239621bb3e131",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
