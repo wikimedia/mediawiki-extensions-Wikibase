@@ -39,22 +39,20 @@ class YearTimeParser extends StringValueParser {
 	private $isoTimestampParser;
 
 	/**
-	 * @param ValueParser $eraParser
-	 * @param ParserOptions $options
+	 * @param ValueParser|null $eraParser
+	 * @param ParserOptions|null $options
 	 */
-	public function __construct( ValueParser $eraParser, ParserOptions $options = null ) {
-		if( is_null( $options ) ) {
-			$options = new ParserOptions();
-		}
+	public function __construct( ValueParser $eraParser = null, ParserOptions $options = null ) {
 		parent::__construct( $options );
-		$this->lang = Language::factory( $this->getOptions()->getOption( ValueParser::OPT_LANG ) );
+
+		$this->lang = Language::factory( $this->getOption( ValueParser::OPT_LANG ) );
 
 		$this->isoTimestampParser = new IsoTimestampParser(
-			new CalendarModelParser(),
-			$this->getOptions()
+			new CalendarModelParser( $this->options ),
+			$this->options
 		);
 
-		$this->eraParser = $eraParser;
+		$this->eraParser = $eraParser ?: new EraParser( $this->options );
 	}
 
 	/**
