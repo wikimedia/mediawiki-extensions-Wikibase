@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_3eacc99b",
+        "filename": "repo/includes/rdf/DateValueCleaner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-24T17:48:54Z",
+      "side": 1,
+      "message": "Do we really need to make a \"Service\" out of a function that cleans up dates? It looks like overdesigning to me. It\u0027s just cleaning dates, what\u0027s the chance you\u0027d ever need to have two of them? For doing what - cleaning dates in two different ways? Why? It\u0027s not a service, it\u0027s just utility function that should be by right private to the builder because nobody else needs it. But you want it as a class, fine. But making it a \"Service\" goes too far. We already have like 10-parameter constructors and it\u0027s impossible to find where things are actually being created. But we definitely not need this for a couple of functions that clean dates.",
+      "parentUuid": "6e7c4fa4_3de13393",
+      "revId": "aec8ef5f27ccbbab06bf2c6711d239621bb3e131",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_3d98531d",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 4
