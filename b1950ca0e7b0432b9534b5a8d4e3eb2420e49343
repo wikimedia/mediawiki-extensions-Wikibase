@@ -33,6 +33,24 @@
       "revId": "b1950ca0e7b0432b9534b5a8d4e3eb2420e49343",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_834a665d",
+        "filename": "lib/tests/phpunit/specials/SpecialPageTestBase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T15:33:51Z",
+      "side": 1,
+      "message": "In theory, no. In practice, sometimes, under strange circumstances, yes.\nIn particular, broken tests may cause the user to be null.\nI think it\u0027s fine to let the test fail if that happens.",
+      "parentUuid": "6e7c4fa4_5b054415",
+      "revId": "b1950ca0e7b0432b9534b5a8d4e3eb2420e49343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
