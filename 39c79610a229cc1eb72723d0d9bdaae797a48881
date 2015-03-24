@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3524e759",
+        "filename": "repo/includes/rdf/UnicodeEscaper.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-24T20:44:45Z",
+      "side": 1,
+      "message": "This contradicts the copyright note below.",
+      "revId": "39c79610a229cc1eb72723d0d9bdaae797a48881",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d51c931a",
+        "filename": "repo/includes/rdf/UnicodeEscaper.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-24T20:44:45Z",
+      "side": 1,
+      "message": "Having different licenses in the same code would be a nightmare if somebody would try to run it outside Wikimedia. Not sure though anybody will.",
+      "revId": "39c79610a229cc1eb72723d0d9bdaae797a48881",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_55d88357",
+        "filename": "repo/tests/phpunit/includes/rdf/UnicodeEscaperTest.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-24T20:44:45Z",
+      "side": 1,
+      "message": "That\u0027s not the correct Russian. Correct one is \"Здравствуй, мир\" :)",
+      "revId": "39c79610a229cc1eb72723d0d9bdaae797a48881",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
