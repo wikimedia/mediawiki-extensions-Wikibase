@@ -77,7 +77,11 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 *
 	 * @return EntityId[]
 	 */
-	public function getLabelWithDescriptionConflicts( $entityType, array $labels, array $descriptions ) {
+	public function getLabelWithDescriptionConflicts(
+		$entityType,
+		array $labels,
+		array $descriptions
+	) {
 		$labels = array_intersect_key( $labels, $descriptions );
 		$descriptions = array_intersect_key( $descriptions, $labels );
 
@@ -192,7 +196,11 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntity( EntityId $entityId, array $termTypes = null, array $languageCodes = null ) {
+	public function getTermsOfEntity(
+		EntityId $entityId,
+		array $termTypes = null,
+		array $languageCodes = null
+	) {
 		$matchingTerms = array();
 
 		if ( is_array( $termTypes ) ) {
@@ -226,7 +234,11 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 *
 	 * @return Term[]
 	 */
-	public function getTermsOfEntities( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
+	public function getTermsOfEntities(
+		array $entityIds,
+		array $termTypes = null,
+		array $languageCodes = null
+	) {
 		$terms = array();
 
 		foreach ( $entityIds as $id ) {
@@ -242,7 +254,12 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	/**
 	 * @throws Exception always
 	 */
-	public function termExists( $termValue, $termType = null, $termLanguage = null, $entityType = null ) {
+	public function termExists(
+		$termValue,
+		$termType = null,
+		$termLanguage = null,
+		$entityType = null
+	) {
 		throw new Exception( 'not implemented by mock class ' );
 	}
 
@@ -260,7 +277,12 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 *
 	 * @return Term[]
 	 */
-	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() ) {
+	public function getMatchingTerms(
+		array $terms,
+		$termType = null,
+		$entityType = null,
+		array $options = array()
+	) {
 		$matchingTerms = array();
 
 		$language = $terms[0]->getLanguage();
