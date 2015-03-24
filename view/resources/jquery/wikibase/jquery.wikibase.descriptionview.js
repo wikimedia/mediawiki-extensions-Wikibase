@@ -21,8 +21,6 @@
  *         Default: mw.msg( 'wikibase-description-input-help-message' )
  *
  * @option {wikibase.entityChangers.DescriptionsChanger} descriptionsChanger
- *
- * @option {wikibase.store.EntityStore} entityStore
  */
 $.widget( 'wikibase.descriptionview', PARENT, {
 	/**
