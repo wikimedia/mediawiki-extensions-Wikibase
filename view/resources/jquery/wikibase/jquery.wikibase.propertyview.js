@@ -17,6 +17,8 @@ var PARENT = $.wikibase.entityview;
  *
  * @constructor
  *
+ * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
+ *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {wikibase.store.EntityStore} options.entityStore
  *        Required by sub-components of the `entityview` to enable those to dynamically query for
  *        `Entity` objects.
@@ -33,6 +35,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @protected
 	 */
 	options: {
+		entityIdPlainFormatter: null,
 		entityStore: null,
 		valueViewBuilder: null,
 		dataTypeStore: null
@@ -105,6 +108,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 			value: this.options.value.getStatements(),
 			claimGuidGenerator: claimGuidGenerator,
 			dataTypeStore: this.option( 'dataTypeStore' ),
+			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
 			entityStore: this.options.entityStore,
 			valueViewBuilder: this.options.valueViewBuilder,
 			entityChangersFactory: this.options.entityChangersFactory
