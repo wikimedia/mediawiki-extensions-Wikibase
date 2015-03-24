@@ -18,38 +18,6 @@ QUnit.module( 'jquery.wikibase.badgeselector', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-var entities =  {
-	Q1: new wb.store.FetchedContent( {
-		title: new mw.Title( 'Item:Q1' ),
-		content: new wb.datamodel.Item( 'Q1',
-			new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( [
-				new wb.datamodel.Term( 'en', 'Q1-label' )
-			] ) )
-		)
-	} ),
-	Q2: new wb.store.FetchedContent( {
-		title: new mw.Title( 'Item:Q2' ),
-		content: new wb.datamodel.Item( 'Q2',
-			new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( [
-				new wb.datamodel.Term( 'en', 'Q2-label' )
-			] ) )
-		)
-	} ),
-	Q3: new wb.store.FetchedContent( {
-		title: new mw.Title( 'Item:Q3' ),
-		content: new wb.datamodel.Item( 'Q3',
-			new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( [
-				new wb.datamodel.Term( 'en', 'Q3-label' )
-			] ) )
-		)
-	} )
-};
-
-var entityStore = new wb.store.EntityStore();
-entityStore.get = function( entityId ) {
-	return $.Deferred().resolve( entities[entityId] );
-};
-
 /**
  * @param {Object} [options]
  * @return {jQuery}
@@ -61,7 +29,9 @@ function createBadgeselector( options ) {
 			Q2: 'additionalCssClass-21 additionalCssClass22',
 			Q3: 'additionalCssClass-3'
 		},
-		entityStore: entityStore,
+		entityIdPlainFormatter: function( entityId ) {
+			return $.Deferred().resolve( entityId ).promise();
+		},
 		languageCode: 'en'
 	}, options || {} );
 
