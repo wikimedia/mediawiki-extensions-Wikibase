@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_a143d542",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T23:21:42Z",
+      "side": 1,
+      "message": "I\u0027d leave the decision for that to the caller, since the calling code has more context knowledge to decide which strings would be used many times. It would the call $writer-\u003enewLiteral( $s ) to get an RdfLiteral, which would be passed here instead of a string. We could do the same for IRIs, but that\u0027s probably not worth it. IRIs that get used many times should just use a prefix.",
+      "parentUuid": "6e7c4fa4_75a57fff",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_5d418f5c",
         "filename": "repo/includes/rdf/N3Quoter.php",
         "patchSetId": 16
@@ -158,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_a12c3591",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T23:21:42Z",
+      "side": 1,
+      "message": "The give it a special datatype, \"unknown\" for instance. most value type ids are not legal data type ids.",
+      "parentUuid": "6e7c4fa4_157d2b6a",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_78d57946",
         "filename": "repo/includes/rdf/RdfWriterBase.php",
         "patchSetId": 16
@@ -187,6 +223,24 @@
       "side": 1,
       "message": "I thought about this, didn\u0027t get to it yet.",
       "parentUuid": "6e7c4fa4_78d57946",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a1b9952b",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T23:21:42Z",
+      "side": 1,
+      "message": "the constructor could even automatically populate the table, based on which functions exist. Oh, and illegal transitions should be marked as false in the table, and would cause an exception, to avoid mingled output if methods get called out of sequence, like about()-\u003eabout()-\u003esay()-\u003esay().",
+      "parentUuid": "6e7c4fa4_d59a53bc",
       "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
