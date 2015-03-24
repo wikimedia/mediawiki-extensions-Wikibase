@@ -12,7 +12,7 @@
 function createSitelinkgroupview( options ) {
 	options = $.extend( {
 		siteLinksChanger: 'i am a SiteLinksChanger',
-		entityStore: new wb.store.EntityStore()
+		entityIdPlainFormatter: 'i am an EntityIdPlainFormatter'
 	}, options );
 
 	var $sitelinkgroupview = $( '<div/>' )
