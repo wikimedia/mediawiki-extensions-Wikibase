@@ -1,0 +1,9 @@
+Verified+2: jenkins-bot
+Code-Review+2: Tobias Gritschacher <tobias.gritschacher@wikimedia.de>
+Code-Review+1: Lydia Pintscher <lydia.pintscher@wikimedia.de>
+Code-Review+1: Thiemo Mättig (WMDE) <thiemo.maettig@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Tue, 24 Mar 2015 13:59:07 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/197924
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
