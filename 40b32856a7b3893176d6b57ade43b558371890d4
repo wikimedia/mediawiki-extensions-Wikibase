@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_23d592ba",
+        "filename": "client/tests/phpunit/includes/Usage/HashUsageAccumulatorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T16:45:32Z",
+      "side": 1,
+      "message": "This looks somewhat incomplete...",
+      "revId": "40b32856a7b3893176d6b57ade43b558371890d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_63cf0a2d",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T16:45:32Z",
+      "side": 1,
+      "message": "I guess i forget. But testing all usage aspects isn\u0027t the point here...",
+      "revId": "40b32856a7b3893176d6b57ade43b558371890d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_03d896f2",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T16:45:32Z",
+      "side": 1,
+      "message": "This should really be in a separate test method.",
+      "revId": "40b32856a7b3893176d6b57ade43b558371890d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
