@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_75a57fff",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-24T20:19:36Z",
+      "side": 1,
+      "message": "Well, adding some memoization here would be nice, but the problem is how to manage this. We can\u0027t keep all or even big portion of the strings in memory, and any smart logic may probably be slower than addcslashes. But we can experiment on it a little I guess.",
+      "parentUuid": "6e7c4fa4_a391a24b",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_5d418f5c",
         "filename": "repo/includes/rdf/N3Quoter.php",
         "patchSetId": 16
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_15a68b0c",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-24T20:19:36Z",
+      "side": 1,
+      "message": "On my benchmarks, it\u0027s faster than the other way. I suspect it may be because of how PHP allocates memory and the fact that reallocating big strings is expensive. But it\u0027s just a theory.",
+      "parentUuid": "6e7c4fa4_5d18af84",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_3802a10c",
         "filename": "repo/includes/rdf/N3RdfWriterBase.php",
         "patchSetId": 16
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_157d2b6a",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-24T20:19:36Z",
+      "side": 1,
+      "message": "It may be temporary glitch in update/sync or just dirty data (e.g. like we have on test machine) - I\u0027d rather keep it as string for now, especially given the fact we may have produced other data about the statement.",
+      "parentUuid": "6e7c4fa4_03c7364b",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_78d57946",
         "filename": "repo/includes/rdf/RdfWriterBase.php",
         "patchSetId": 16
@@ -121,6 +175,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_d59a53bc",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-24T20:19:36Z",
+      "side": 1,
+      "message": "I thought about this, didn\u0027t get to it yet.",
+      "parentUuid": "6e7c4fa4_78d57946",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_38cb81aa",
         "filename": "repo/includes/rdf/TurtleRdfWriter.php",
         "patchSetId": 16
@@ -132,6 +204,24 @@
       "writtenOn": "2015-03-24T16:25:03Z",
       "side": 1,
       "message": "Scary interpolation. is this actually fast?",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_95905b9a",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-24T20:19:36Z",
+      "side": 1,
+      "message": "I didn\u0027t test each individual one. In general, one-arg write seems to be faster than many-arg write, but I didn\u0027t test each single case, I just tested converted ones.",
+      "parentUuid": "6e7c4fa4_38cb81aa",
       "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
