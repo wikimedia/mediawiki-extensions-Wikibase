@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a391a24b",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T16:25:03Z",
+      "side": 1,
+      "message": "If there are literals that get used time and time again, we could have an RdfLiteral class for wrapping those, to avoid escaping the same string over and over. One case I can think of is labels: labels are often the same in many languages, and even if they are not, we output each label three times currently.",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5d418f5c",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T16:25:03Z",
+      "side": 1,
+      "message": "nice. also drop $this-\u003ebadChars and $this-\u003ebadCharEscapes.",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3d13736b",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T16:25:03Z",
+      "side": 1,
+      "message": "Parameter checking is very useful when debugging. This should be moved to a decorator class.",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5d18af84",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T16:25:03Z",
+      "side": 1,
+      "message": "How expensive is interpolation?",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3802a10c",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T16:25:03Z",
+      "side": 1,
+      "message": "How expensive is string concatenation? I made write() take a variable number of params to avoid this.",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_03c7364b",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T16:25:03Z",
+      "side": 1,
+      "message": "We should probably skip the entire statement in this case. A statement about an undefined property has no meaningful interpretation.",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_78d57946",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T16:25:03Z",
+      "side": 1,
+      "message": "We could even have a table for these calls. Entries should be null per default, and we\u0027d just skip the function call if no function has been set.",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_38cb81aa",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T16:25:03Z",
+      "side": 1,
+      "message": "Scary interpolation. is this actually fast?",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_98dad576",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T16:25:03Z",
+      "side": 1,
+      "message": "space",
+      "revId": "81486c7ba87f6a32ddbed0a5a43aa2fd48876f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
