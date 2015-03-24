@@ -12,6 +12,7 @@
  */
 var createItemview = function( options, $node ) {
 	options = $.extend( {
+		entityIdPlainFormatter: 'I am an EntityIdPlainFormatter',
 		entityStore: new wb.store.EntityStore(),
 		entityChangersFactory: {
 			getAliasesChanger: function() { return 'I am an AliasesChanger'; },

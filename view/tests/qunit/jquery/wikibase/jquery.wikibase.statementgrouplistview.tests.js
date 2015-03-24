@@ -19,6 +19,11 @@ entityStore.get = function () {
 var createStatementgrouplistview = function( options, $node ) {
 	options = $.extend( {
 		claimGuidGenerator: 'I am a ClaimGuidGenerator',
+		entityIdPlainFormatter: {
+			format: function( entityId ) {
+				return $.Deferred().resolve( entityId ).promise();
+			}
+		},
 		entityStore: entityStore,
 		valueViewBuilder: 'i am a ValueViewBuilder',
 		entityChangersFactory: {

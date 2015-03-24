@@ -18,7 +18,7 @@
  *
  * @option {wikibase.entityChangers.SiteLinksChanger} siteLinksChanger
  *
- * @option {wikibase.store.EntityStore} entityStore
+ * @option {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
  */
 $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 	options: {
@@ -29,7 +29,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 		templateShortCuts: {},
 		value: null,
 		siteLinksChanger: null,
-		entityStore: null
+		entityIdPlainFormatter: null
 	},
 
 	/**
@@ -46,7 +46,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if( !this.options.value || !this.options.siteLinksChanger || !this.options.entityStore ) {
+		if( !this.options.value || !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -93,7 +93,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 					return {
 						value: value,
 						siteLinksChanger: self.options.siteLinksChanger,
-						entityStore: self.options.entityStore,
+						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
 						eventSingletonManager: this._eventSingletonManager,
 						helpMessage: mw.msg( 'wikibase-sitelinkgroupview-input-help-message' )
 					};

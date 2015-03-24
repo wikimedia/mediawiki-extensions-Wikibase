@@ -20,6 +20,8 @@ return call_user_func( function() {
 				'ViewFactory.tests.js',
 			),
 			'dependencies' => array(
+				'wikibase.store.EntityStore',
+				'wikibase.entityIdFormatter.EntityIdPlainFormatter',
 				'wikibase.view.ViewFactory',
 				'wikibase.ValueViewBuilder'
 			),
@@ -28,4 +30,5 @@ return call_user_func( function() {
 	);
 
 	return $modules;
+
 } );
