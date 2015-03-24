@@ -158,8 +158,8 @@ HTML;
 <div class="wikibase-entitytermsview">
 	<div class="wikibase-entitytermsview-heading">
 		<h1 class="wikibase-entitytermsview-heading-label $1"><!-- wikibase-entitytermsview-label -->$2</h1>
-		<div class="wikibase-entitytermsview-heading-aliases $3"><!-- wikibase-entitytermsview-aliases -->$4</div>
-		<div class="wikibase-entitytermsview-heading-description $5">$6</div>
+		<div class="wikibase-entitytermsview-heading-description $3">$4</div>
+		<div class="wikibase-entitytermsview-heading-aliases $5"><!-- wikibase-entitytermsview-aliases -->$6</div>
 	</div>
 	<!-- ? wikibase-toolbar -->$9
 	<div class="wikibase-entitytermsview-entitytermsforlanguagelistview $8"><!-- wikibase-entitytermsforlanguagelistview -->$7</div>
@@ -188,8 +188,8 @@ HTML;
 		<tr class="wikibase-entitytermsforlanguagelistview-header-row">
 			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-language">$1</td>
 			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-label">$2</td>
-			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-aliases">$3</td>
-			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-description">$4</td>
+			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-description">$3</td>
+			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-aliases">$4</td>
 		</tr>
 	</thead>
 	<tbody class="wikibase-entitytermsforlanguagelistview-listview"><!-- [0,*] wikibase-entitytermsforlanguageview -->$5</tbody>
@@ -201,8 +201,8 @@ HTML;
 <$1 class="wikibase-entitytermsforlanguageview wikibase-entitytermsforlanguageview-$3" >
 	<$2 class="wikibase-entitytermsforlanguageview-language"><!-- wikibase-entitytermsforlanguageview-language -->$4</$2>
 	<$2 class="wikibase-entitytermsforlanguageview-label">$5</$2>
-	<$2 class="wikibase-entitytermsforlanguageview-aliases">$6</$2>
-	<$2 class="wikibase-entitytermsforlanguageview-description">$7</$2>
+	<$2 class="wikibase-entitytermsforlanguageview-description">$6</$2>
+	<$2 class="wikibase-entitytermsforlanguageview-aliases">$7</$2>
 	<!-- ? wikibase-toolbar -->$8
 </$1>
 HTML;
