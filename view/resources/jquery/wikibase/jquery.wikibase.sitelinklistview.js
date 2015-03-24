@@ -29,7 +29,7 @@ function namespaceEventNames( eventNames, namespace ) {
  *
  * @option {wikibase.entityChangers.SiteLinksChanger} siteLinksChanger
  *
- * @option {wikibase.store.EntityStore} entityStore
+ * @option {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
  *
  * @option {jQuery.util.EventSingletonManager} [eventSingletonManager]
  *         Should be set when the widget instance is part of a sitelinkgroupview.
@@ -55,7 +55,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		value: [],
 		allowedSiteIds: [],
 		siteLinksChanger: null,
-		entityStore: null,
+		entityIdPlainFormatter: null,
 		eventSingletonManager: null,
 		$counter: null,
 		autoInput: true
@@ -70,7 +70,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if( !this.options.siteLinksChanger || !this.options.entityStore ) {
+		if( !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -141,7 +141,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 								return wb.sites.getSite( siteId );
 							} );
 						},
-						entityStore: self.options.entityStore
+						entityIdPlainFormatter: self.options.entityIdPlainFormatter
 					};
 				}
 			} ),

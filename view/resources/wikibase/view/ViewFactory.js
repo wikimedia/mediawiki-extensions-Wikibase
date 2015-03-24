@@ -136,6 +136,7 @@
 			{
 				dataTypeStore: this._dataTypeStore,
 				entityChangersFactory: this._entityChangersFactory,
+				entityIdPlainFormatter: new wb.entityIdFormatter.SimpleEntityIdPlainFormatter( this._entityStore ),
 				entityStore: this._entityStore,
 				languages: this._userLanguages,
 				value: entity,

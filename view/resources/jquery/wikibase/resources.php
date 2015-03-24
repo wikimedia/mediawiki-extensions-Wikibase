@@ -72,7 +72,6 @@ return call_user_func( function() {
 				'wikibase.datamodel.Item',
 				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.entityIdFormatter.SimpleEntityIdHtmlFormatter',
-				'wikibase.entityIdFormatter.SimpleEntityIdPlainFormatter',
 			),
 		),
 
