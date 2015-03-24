@@ -27,6 +27,7 @@ return call_user_func( function() {
 				'jquery.wikibase.itemview',
 				'jquery.wikibase.propertyview',
 				'wikibase.view.__namespace',
+				'wikibase.view.entityIdFormatter.SimpleEntityIdPlainFormatter',
 				'wikibase.ValueViewBuilder'
 			)
 		),
