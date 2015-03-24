@@ -45,20 +45,29 @@ class PhpDateTimeParser extends StringValueParser {
 	private $monthUnlocalizer;
 
 	/**
-	 * @var EraParser
+	 * @var ValueParser
 	 */
 	private $eraParser;
 
 	/**
-	 * @param EraParser|null $eraParser
+	 * @var ValueParser
+	 */
+	private $isoTimestampParser;
+
+	/**
+	 * @param ValueParser|null $eraParser
 	 * @param ParserOptions|null $options
 	 */
-	public function __construct( EraParser $eraParser = null, ParserOptions $options = null ) {
+	public function __construct( ValueParser $eraParser = null, ParserOptions $options = null ) {
 		parent::__construct( $options );
 
 		$languageCode = $this->getOption( ValueParser::OPT_LANG );
 		$this->monthUnlocalizer = new MonthNameUnlocalizer( $languageCode );
 		$this->eraParser = $eraParser ?: new EraParser( $this->options );
+		$this->isoTimestampParser = new IsoTimestampParser(
+			new CalendarModelParser( $this->options ),
+			$this->options
+		);
 	}
 
 	/**
@@ -92,17 +101,13 @@ class PhpDateTimeParser extends StringValueParser {
 			}
 
 			if ( $year !== null && strlen( $year ) > 4 ) {
-				$timeString = $sign . $year . $dateTime->format( '-m-d\TH:i:s\Z' );
+				$timestamp = $sign . $year . $dateTime->format( '-m-d\TH:i:s\Z' );
 			} else {
-				$timeString = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
+				$timestamp = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
 			}
 
 			// Pass the reformatted string into a base parser that parses this +/-Y-m-d\TH:i:s\Z format with a precision
-			$valueParser = new IsoTimestampParser(
-				new CalendarModelParser( $this->options ),
-				$this->options
-			);
-			return $valueParser->parse( $timeString );
+			return $this->isoTimestampParser->parse( $timestamp );
 		} catch ( Exception $exception ) {
 			throw new ParseException( $exception->getMessage(), $rawValue, self::FORMAT_NAME );
 		}

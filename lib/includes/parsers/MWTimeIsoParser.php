@@ -71,7 +71,7 @@ class MWTimeIsoParser extends StringValueParser {
 	private $lang;
 
 	/**
-	 * @var IsoTimestampParser
+	 * @var ValueParser
 	 */
 	private $isoTimestampParser;
 
@@ -82,7 +82,6 @@ class MWTimeIsoParser extends StringValueParser {
 		parent::__construct( $options );
 
 		$this->lang = Language::factory( $this->getOption( ValueParser::OPT_LANG ) );
-
 		$this->isoTimestampParser = new IsoTimestampParser(
 			new CalendarModelParser( $this->options ),
 			$this->options

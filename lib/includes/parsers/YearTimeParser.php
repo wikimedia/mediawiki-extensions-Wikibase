@@ -24,7 +24,7 @@ class YearTimeParser extends StringValueParser {
 	const FORMAT_NAME = 'year';
 
 	/**
-	 * @var EraParser
+	 * @var ValueParser
 	 */
 	private $eraParser;
 
@@ -34,7 +34,7 @@ class YearTimeParser extends StringValueParser {
 	private $lang;
 
 	/**
-	 * @var IsoTimestampParser
+	 * @var ValueParser
 	 */
 	private $isoTimestampParser;
 
@@ -46,13 +46,11 @@ class YearTimeParser extends StringValueParser {
 		parent::__construct( $options );
 
 		$this->lang = Language::factory( $this->getOption( ValueParser::OPT_LANG ) );
-
+		$this->eraParser = $eraParser ?: new EraParser( $this->options );
 		$this->isoTimestampParser = new IsoTimestampParser(
 			new CalendarModelParser( $this->options ),
 			$this->options
 		);
-
-		$this->eraParser = $eraParser ?: new EraParser( $this->options );
 	}
 
 	/**
