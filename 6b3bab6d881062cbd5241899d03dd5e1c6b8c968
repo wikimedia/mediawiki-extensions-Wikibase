@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bda2233a",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T11:45:34Z",
+      "side": 1,
+      "message": "$produceTruthy",
+      "revId": "6b3bab6d881062cbd5241899d03dd5e1c6b8c968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fd7bbbba",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T11:45:34Z",
+      "side": 1,
+      "message": "missing space",
+      "revId": "6b3bab6d881062cbd5241899d03dd5e1c6b8c968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
