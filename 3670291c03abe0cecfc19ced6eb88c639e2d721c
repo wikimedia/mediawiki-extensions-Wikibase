@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_be4e99c3",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T18:08:23Z",
+      "side": 1,
+      "message": "will go with strtr as suggested",
+      "parentUuid": "6e7c4fa4_dbb5d479",
+      "revId": "3670291c03abe0cecfc19ced6eb88c639e2d721c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_5b75442b",
         "filename": "repo/includes/rdf/N3Quoter.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-19T16:05:17Z",
       "side": 1,
       "message": "Whats wrong with rawurlencode?",
+      "revId": "3670291c03abe0cecfc19ced6eb88c639e2d721c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5e60a52d",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T18:08:23Z",
+      "side": 1,
+      "message": "if applied to a full uri, it will destroy it by escaping all the slashes.",
+      "parentUuid": "6e7c4fa4_5b75442b",
       "revId": "3670291c03abe0cecfc19ced6eb88c639e2d721c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_3e5b698c",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T18:08:23Z",
+      "side": 1,
+      "message": "left over from an experiment, will remove.",
+      "parentUuid": "6e7c4fa4_bb86d816",
+      "revId": "3670291c03abe0cecfc19ced6eb88c639e2d721c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_fbb8d075",
         "filename": "repo/includes/rdf/N3Quoter.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_de4b55b2",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T18:08:23Z",
+      "side": 1,
+      "message": "thanks, will do!",
+      "parentUuid": "6e7c4fa4_fbb8d075",
+      "revId": "3670291c03abe0cecfc19ced6eb88c639e2d721c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_db98746f",
         "filename": "repo/includes/rdf/N3RdfWriterBase.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2015-03-19T16:05:17Z",
       "side": 1,
       "message": "I find this suspicious. Why is this needed?",
+      "revId": "3670291c03abe0cecfc19ced6eb88c639e2d721c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3eca891d",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-24T18:08:23Z",
+      "side": 1,
+      "message": "To boost speed if we already know that urls don\u0027t contain \"evil\" characters. MediaWiki for instance prevents \u003c \"\u003e in URLs.",
+      "parentUuid": "6e7c4fa4_db98746f",
       "revId": "3670291c03abe0cecfc19ced6eb88c639e2d721c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
