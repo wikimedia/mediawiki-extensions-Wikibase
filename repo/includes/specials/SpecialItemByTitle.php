@@ -154,7 +154,9 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 			// Redirect to the item page if we found its content
 			if ( $itemId !== null ) {
 				$title = $this->titleLookup->getTitleForId( $itemId );
-				$itemUrl = $title->getFullUrl();
+				$query = $request->getValues();
+				unset( $query['title'] );
+				$itemUrl = $title->getFullUrl( $query );
 				$this->getOutput()->redirect( $itemUrl );
 				return;
 			}
