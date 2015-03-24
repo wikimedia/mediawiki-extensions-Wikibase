@@ -27,7 +27,7 @@ var $menu = null;
  *         Structure: {<{string} item id>: <{string} custom badge css classes>}
  *         Default: {}
  *
- * @option {wikibase.store.EntityStore} entityStore
+ * @option {wikibase.entityIdFormatter.entityIdPlainFormatter} entityIdPlainFormatter
  *
  * @option {string} languageCode
  *
@@ -61,7 +61,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		templateShortCuts: {},
 		value: [],
 		badges: {},
-		entityStore: null,
+		entityIdPlainFormatter: null,
 		languageCode: null,
 		isRtl: false,
 		messages: {
@@ -73,7 +73,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 * @see jQuery.Widget._create
 	 */
 	_create: function() {
-		if( !this.options.entityStore || !this.options.languageCode ) {
+		if( !this.options.entityIdPlainFormatter || !this.options.languageCode ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -193,11 +193,11 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 			this._addPlaceholderBadge( this.options.value[i] );
 		}
 
-		this.options.entityStore.getMultiple( this.options.value )
-		.done( function( items ) {
-			for( var i = 0; i < items.length; i++ ) {
-				self._addBadge( items[ i ].getContent() );
-			}
+		$.when.apply( $, $.map( this.options.value, function( badgeId ) {
+			return self.options.entityIdPlainFormatter.format( badgeId ).done( function( badgeLabel ) {
+				self._addBadge( badgeId, badgeLabel );
+			} );
+		} ) ).done( function() {
 			deferred.resolve();
 		} )
 		.fail( function() {
@@ -276,31 +276,27 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 				return itemId;
 			} );
 
-		this.options.entityStore.getMultiple( badgeIds )
-		.done( function( badges ) {
+		$.when.apply( $, $.map( badgeIds, function( badgeId ) {
+			return self.options.entityIdPlainFormatter.format( badgeId );
+		} ) ).done( function( /*…*/ ) {
+			var badgeLabels = arguments;
 			$menu.empty();
 
 			$.each( badgeIds, function( index, itemId ) {
-				var item = badges[index] && badges[index].getContent();
-
-				if( !item ) {
-					return true;
-				}
-
-				var data = self._getBadgeDataForItem( item );
+				var badgeLabel = badgeLabels[ index ];
 				var $item = $( '<a/>' )
 					.on( 'click.' + self.widgetName, function( event ) {
 						event.preventDefault();
 					} )
-					.text( data.label );
+					.text( badgeLabel );
 
 				$( '<li/>' )
 				.addClass( self.widgetFullName + '-menuitem-' + itemId )
 				.data( self.widgetName + '-menuitem-badge', itemId )
 				.append( $item
 					.prepend( mw.wbTemplate( 'wb-badge',
-						data.cssClasses,
-						data.label,
+						itemId + ' ' + self.options.badges[ itemId ],
+						badgeLabel,
 						itemId
 					) )
 				)
@@ -315,21 +311,6 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		} );
 
 		return deferred;
-	},
-
-	/**
-	 * @param {wikibase.datamodel.Item} item
-	 *
-	 * @return {Object} A plain object with values for keys label and cssClasses
-	 */
-	_getBadgeDataForItem: function( item ) {
-		var term = item.getFingerprint().getLabelFor( this.options.languageCode ),
-			itemId = item.getId();
-
-		return {
-			label: term ? term.getText() : itemId,
-			cssClasses: itemId + ' ' + this.options.badges[ itemId ]
-		};
 	},
 
 	/**
@@ -348,8 +329,8 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 
 			this._trigger( 'change' );
 		} else {
-			this.options.entityStore.get( badgeId ).done( function( badgeItem ) {
-				self._addBadge( badgeItem.getContent() );
+			this.options.entityIdPlainFormatter.format( badgeId ).done( function( badgeLabel ) {
+				self._addBadge( badgeId, badgeLabel );
 				self._getEmptyBadge().remove();
 				self._trigger( 'change' );
 			} );
@@ -376,16 +357,15 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	},
 
 	/**
-	 * @param {wikibase.datamodel.Item} badgeItem
+	 * @param {string} badgeId
+	 * @param {string} badgeLabel
 	 */
-	_addBadge: function( badgeItem ) {
-		var badgeId = badgeItem.getId(),
-			badgeData = this._getBadgeDataForItem( badgeItem ),
-			$placeholderBadge = this.element.children( '[data-wb-badge="' + badgeId + '"]' );
+	_addBadge: function( badgeId, badgeLabel ) {
+		var $placeholderBadge = this.element.children( '[data-wb-badge="' + badgeId + '"]' );
 
 		var $badge = mw.wbTemplate( 'wb-badge',
-			badgeData.cssClasses,
-			badgeData.label,
+			badgeId + ' ' + this.options.badges[ badgeId ],
+			badgeLabel,
 			badgeId
 		);
 
@@ -457,11 +437,11 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 
 			// Since the widget might have been initialized on pre-existing DOM, badges need to be
 			// fetched to ensure their data is available for resetting:
-			this.options.entityStore.getMultiple( this.options.value )
-			.done( function( items ) {
-				for( var i = 0; i < items.length; i++ ) {
-					self._addBadge( items[ i ].getContent() );
-				}
+			$.when.apply( $, $.map( this.options.value, function( badgeId ) {
+				return self.options.entityIdPlainFormatter.format( badgeId ).done( function( badgeLabel ) {
+					self._addBadge( badgeId, badgeLabel );
+				} );
+			} ) ).done( function() {
 				self._trigger( 'afterstopediting', null, [dropValue] );
 			} );
 		}

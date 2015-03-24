@@ -98,6 +98,8 @@ function orderSiteLinksByGroup( siteLinkSet ) {
  *
  * @constructor
  *
+ * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
+ *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {wikibase.store.EntityStore} options.entityStore
  *        Required by sub-components of the `entityview` to enable those to dynamically query for
  *        `Entity` objects.
@@ -114,6 +116,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	options: {
+		entityIdPlainFormatter: null,
 		entityStore: null,
 		valueViewBuilder: null,
 		dataTypeStore: null
@@ -167,6 +170,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 			dataTypeStore: this.option( 'dataTypeStore' ),
 			entityType: this.options.value.getType(),
 			entityStore: this.options.entityStore,
+			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
 			valueViewBuilder: this.options.valueViewBuilder,
 			entityChangersFactory: this.options.entityChangersFactory
 		} )
@@ -192,7 +196,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 			value: value,
 			entityId: self.options.value.getId(),
 			siteLinksChanger: self.options.entityChangersFactory.getSiteLinksChanger(),
-			entityStore: self.options.entityStore
+			entityIdPlainFormatter: self.options.entityIdPlainFormatter
 		} );
 	},
 
