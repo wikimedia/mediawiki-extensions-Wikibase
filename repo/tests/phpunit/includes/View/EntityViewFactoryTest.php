@@ -63,12 +63,15 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 	public function testNewEntityView_withInvalidType() {
 		$entityViewFactory = $this->getEntityViewFactory();
 
+		$languageFallback = new LanguageFallbackChain( array() );
+
 		$this->setExpectedException( 'InvalidArgumentException' );
 
 		$entityViewFactory->newEntityView(
 			'kittens',
 			'de',
-			$this->getMock( 'Wikibase\Lib\Store\LabelLookup' )
+			$this->getMock( 'Wikibase\Lib\Store\LabelLookup' ),
+			$languageFallback
 		);
 	}
 
@@ -109,9 +112,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
 
-		$snakFormatterFactory = $this->getMockBuilder( 'Wikibase\Lib\OutputFormatSnakFormatterFactory' )
-			->disableOriginalConstructor()
-			->getMock();
+		$snakFormatterFactory = $this->getMock( 'Wikibase\View\HtmlSnakFormatterFactory' );
 
 		$snakFormatterFactory->expects( $this->any() )
 			->method( 'getSnakFormatter' )
