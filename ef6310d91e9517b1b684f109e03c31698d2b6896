@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3df4d3ec",
+        "filename": "lib/tests/phpunit/SitesModuleWorkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-24T10:03:05Z",
+      "side": 1,
+      "message": "Where is Xml used? It\u0027s not in the use section above.",
+      "revId": "ef6310d91e9517b1b684f109e03c31698d2b6896",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9df3a706",
+        "filename": "lib/tests/phpunit/SitesModuleWorkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-24T10:03:05Z",
+      "side": 1,
+      "message": "Why is this useful?",
+      "revId": "ef6310d91e9517b1b684f109e03c31698d2b6896",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
