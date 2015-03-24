@@ -101,7 +101,7 @@
 	"wikibase-itembytitle-create": "It peule ëdcò [$1 creé n'element].",
 	"special-itemdisambiguation": "Omonimìa d'element",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Sërché dj'element për lenga e tichëtta",
-	"wikibase-itemdisambiguation-lookup-language": "Lenga:",
+	"wikibase-itemdisambiguation-lookup-language": "Còdes ëd lenga:",
 	"wikibase-itemdisambiguation-lookup-label": "Tichëtta:",
 	"wikibase-itemdisambiguation-submit": "Sërca",
 	"wikibase-itemdisambiguation-nothing-found": "An dëspias, gnun element con costa tichëtta a l'é stàit trovà.",

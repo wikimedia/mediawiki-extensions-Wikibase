@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Tulsi Bhagat"
+			"Tulsi Bhagat",
+			"बिप्लब आनन्द"
 		]
 	},
-	"wikibase-edit": "संपादन करू",
+	"wikibase-edit": "संपादन करी",
 	"wikibase-add": "जोडु",
 	"wikibase-label-empty": "नै कुनो लेबल अखन तक परिभाषित",
-	"wikibase-sitelinks-special": "दोसर साइटसभ"
+	"wikibase-description-empty": "कोनो विवरण परिभाषित नै",
+	"wikibase-sitelinks-special": "दोसर साइटसभ",
+	"wikibase-statementview-rank-normal": "सामान्य क्रम"
 }

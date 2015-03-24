@@ -27,5 +27,6 @@
 	"wikibase-watchlist-show-changes-pref": "Викимәгълүматлардагы үзгәртүләрне күзәтү исемлегендә күрсәтү.",
 	"wikibase-unconnectedpages-submit": "Куллану",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" - дөрес булмаган тел коды.",
-	"wikibase-pageinfo-entity-id-none": "Юк"
+	"wikibase-pageinfo-entity-id-none": "Юк",
+	"wikibase-otherprojects": "Башка проектларда"
 }
