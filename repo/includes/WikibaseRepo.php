@@ -88,6 +88,7 @@ use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 use Wikibase\ValuesFinder;
+use Wikibase\View\HtmlSnakFormatterFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -140,9 +141,9 @@ class WikibaseRepo {
 	private $stringNormalizer = null;
 
 	/**
-	 * @var OutputFormatSnakFormatterFactory|null
+	 * @var HtmlSnakFormatterFactory|null
 	 */
-	private $snakFormatterFactory = null;
+	private $htmlSnakFormatterFactory = null;
 
 	/**
 	 * @var OutputFormatValueFormatterFactory|null
@@ -493,17 +494,14 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * Returns a OutputFormatSnakFormatterFactory the provides SnakFormatters
-	 * for different output formats.
-	 *
-	 * @return OutputFormatSnakFormatterFactory
+	 * @return HtmlSnakFormatterFactory
 	 */
-	public function getSnakFormatterFactory() {
-		if ( $this->snakFormatterFactory === null ) {
-			$this->snakFormatterFactory = $this->newSnakFormatterFactory();
+	public function getHtmlSnakFormatterFactory() {
+		if ( $this->htmlSnakFormatterFactory === null ) {
+			$this->htmlSnakFormatterFactory = $this->newHtmlSnakFormatterFactory();
 		}
 
-		return $this->snakFormatterFactory;
+		return $this->htmlSnakFormatterFactory;
 	}
 
 	/**
@@ -553,9 +551,9 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return OutputFormatSnakFormatterFactory
+	 * @return HtmlSnakFormatterFactory
 	 */
-	protected function newSnakFormatterFactory() {
+	protected function newHtmlSnakFormatterFactory() {
 		$builders = new WikibaseSnakFormatterBuilders(
 			$this->getValueFormatterBuilders(),
 			$this->getPropertyDataTypeLookup(),
@@ -564,7 +562,7 @@ class WikibaseRepo {
 
 		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
 
-		return $factory;
+		return new WikibaseHtmlSnakFormatterFactory( $factory );
 	}
 
 	/**
@@ -1014,7 +1012,7 @@ class WikibaseRepo {
 
 		$entityViewFactory = new EntityViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
-			$this->getSnakFormatterFactory(),
+			$this->getHtmlSnakFormatterFactory(),
 			$this->getEntityLookup(),
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
