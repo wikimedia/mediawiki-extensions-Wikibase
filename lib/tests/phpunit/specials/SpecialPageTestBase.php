@@ -4,7 +4,10 @@ namespace Wikibase\Test;
 
 use DerivativeContext;
 use Exception;
+use FauxRequest;
+use FauxResponse;
 use HttpStatus;
+use MediaWikiTestCase;
 use OutputPage;
 use RequestContext;
 use SpecialPage;
@@ -21,9 +24,9 @@ use WebRequest;
  * @author Daniel Kinzler
  * @author Adam Shorland
  */
-abstract class SpecialPageTestBase extends \MediaWikiTestCase {
+abstract class SpecialPageTestBase extends MediaWikiTestCase {
 
-	protected $obLevel;
+	private $obLevel;
 
 	protected function setUp() {
 		parent::setUp();
@@ -58,9 +61,8 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 	 * @param string|null $language The language code which should be used in the context of this special page
 	 * @param User|null $user The user which should be used in the context of this special page
 	 *
-	 * @throws \Exception
-	 * @throws null
-	 * @return array array( String, \WebResponse ) containing the output generated
+	 * @throws Exception
+	 * @return array( string, WebResponse ) A two-elements array containing the output generated
 	 *         by the special page.
 	 */
 	protected function executeSpecialPage(
@@ -70,10 +72,8 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 		User $user = null
 	) {
 		if ( $request === null ) {
-			$request = new \FauxRequest();
+			$request = new FauxRequest();
 		}
-
-		$response = $request->response();
 
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
@@ -86,6 +86,7 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 			$context->setUser( $user );
 		}
 
+		// FIXME: Documentation missing. How do you know "POST vs. GET" means "edit vs. read"?
 		if ( $request->wasPosted() && !$request->getCheck( 'wpEditToken' ) ) {
 			// If we are trying to edit and no token is set, supply one.
 			$request->setVal( 'wpEditToken', $context->getUser()->getEditToken() );
@@ -126,10 +127,14 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 			throw $exception;
 		}
 
-		$code = $response->getStatusCode();
+		$response = $request->response();
 
-		if ( $code > 0 ) {
-			$response->header( "Status: " . $code . ' ' . HttpStatus::getMessage( $code ) );
+		if ( $response instanceof FauxResponse ) {
+			$code = $response->getStatusCode();
+
+			if ( $code > 0 ) {
+				$response->header( 'Status: ' . $code . ' ' . HttpStatus::getMessage( $code ) );
+			}
 		}
 
 		return array( $text, $response );

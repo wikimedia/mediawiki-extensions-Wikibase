@@ -3,9 +3,9 @@
 namespace Wikibase\Test;
 
 use FauxRequest;
-use FauxResponse;
 use ValueValidators\Result;
 use WebRequest;
+use WebResponse;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -84,7 +84,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			->disableOriginalConstructor()
 			->getMock();
 
-		$self = $this; // yay PHP 5.3
+		$self = $this;
 		$detector->expects( $this->any() )
 			->method( 'detectTermConflicts' )
 			->will( $this->returnCallback( function(
@@ -145,7 +145,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			->method( 'getLanguages' )
 			->will( $this->returnValue( $this->languageCodes ) );
 
-		$languageCodes = $this->languageCodes; // for PHP 5.3
+		$languageCodes = $this->languageCodes;
 		$languages->expects( $this->any() )
 			->method( 'hasLanguage' )
 			->will( $this->returnCallback( function( $code ) use ( $languageCodes ) {
@@ -162,7 +162,11 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 *
 	 * @return Fingerprint
 	 */
-	private function makeFingerprint( array $labels, array $descriptions, array $aliases ) {
+	private function makeFingerprint(
+		array $labels = array(),
+		array $descriptions = array(),
+		array $aliases = array()
+	) {
 		$fingerprint = new Fingerprint();
 
 		foreach ( $labels as $lang => $text ) {
@@ -249,9 +253,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$withLanguageMatchers['label']['attributes']['value'] = 'foo';
 
 		$fooFingerprint = $this->makeFingerprint(
-			array( 'de' => 'foo' ),
-			array(),
-			array()
+			array( 'de' => 'foo' )
 		);
 
 		return array(
@@ -293,9 +295,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				new FauxRequest( array( 'language' => 'en', 'label' => 'FOO' ), true ),
 				array(),
 				$this->makeFingerprint(
-					array( 'de' => 'foo', 'en' => 'FOO' ),
-					array(),
-					array()
+					array( 'de' => 'foo', 'en' => 'FOO' )
 				),
 			),
 
@@ -305,9 +305,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				new FauxRequest( array( 'language' => 'de', 'label' => 'FOO' ), true ),
 				array(),
 				$this->makeFingerprint(
-					array( 'de' => 'FOO' ),
-					array(),
-					array()
+					array( 'de' => 'FOO' )
 				),
 			),
 
@@ -318,8 +316,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				array(),
 				$this->makeFingerprint(
 					array( 'de' => 'foo' ),
-					array( 'de' => 'Lorem Ipsum' ),
-					array()
+					array( 'de' => 'Lorem Ipsum' )
 				),
 			),
 
@@ -361,16 +358,17 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$subpage = str_replace( '$id', $id->getSerialization(), $subpage );
 		list( $output, $response ) = $this->executeSpecialPage( $subpage, $request );
 
-		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
+		$redirect = $response instanceof WebResponse ? $response->getHeader( 'Location' ) : null;
 
 		foreach ( $tagMatchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to assert output: $key" );
 		}
 
-		if ( $expectedFingerprint ) {
+		if ( $expectedFingerprint !== null ) {
 			// TODO: Look for an error message in $output.
 			$this->assertNotEmpty( $redirect, 'expected redirect after successful edit' );
 
+			/** @var Item $actualEntity */
 			$actualEntity = $this->mockRepository->getEntity( $id );
 			$actualFingerprint = $actualEntity->getFingerprint();
 
