@@ -11,9 +11,9 @@
  */
 function createSitelinklistview( options ) {
 	options = $.extend( {
-		siteLinksChanger: 'i am a SiteLinksChanger',
-		entityStore: new wb.store.EntityStore(),
-		allowedSiteIds: ['aawiki', 'enwiki']
+		allowedSiteIds: ['aawiki', 'enwiki'],
+		entityIdPlainFormatter: 'I am an EntityIdPlainFormatter',
+		siteLinksChanger: 'i am a SiteLinksChanger'
 	}, options );
 
 	var $sitelinklistview = $( '<table/>' )
