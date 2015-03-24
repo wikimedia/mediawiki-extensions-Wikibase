@@ -28,9 +28,9 @@ function getSiteIdsOfGroup( group ) {
  *         Object representing the widget's value.
  *         Structure: { group: <{string}>, siteLinks: <{wikibase.datamodel.SiteLink[]}> }
  *
- * @option {wikibase.entityChangers:SiteLinksChanger} siteLinksChanger
+ * @option {wikibase.entityChangers.SiteLinksChanger} siteLinksChanger
  *
- * @option {wikibase.store.EntityStore} entityStore
+ * @option {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
  *
  * @option {jQuery.util.EventSingletonManager} [eventSingletonManager]
  *         Should be set when the widget instance is part of a jQuery.wikibase.sitelinkgrouplistview.
@@ -62,7 +62,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 			$counter: '.wikibase-sitelinkgroupview-counter'
 		},
 		value: null,
-		entityStore: null,
+		entityIdPlainFormatter: null,
 		siteLinksChanger: null,
 		eventSingletonManager: null,
 		helpMessage: 'Add a site link by specifying a site and a page of that site, edit or remove '
@@ -83,7 +83,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if( !this.options.siteLinksChanger || !this.options.entityStore ) {
+		if( !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
 			throw new Error( 'Required parameter(s) missing' );
 		}
 
@@ -179,7 +179,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 			allowedSiteIds: this.options.value
 				? getSiteIdsOfGroup( this.options.value.group )
 				: [],
-			entityStore: this.options.entityStore,
+			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
 			siteLinksChanger: this.options.siteLinksChanger,
 			eventSingleton: this._eventSingleton,
 			$counter: this.$counter,

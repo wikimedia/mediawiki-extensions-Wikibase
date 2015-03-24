@@ -19,7 +19,7 @@
  *         Function returning an array of wikibase.Site objects.
  *         Default: function() { return []; }
  *
- * @option {wikibase.store.EntityStore} entityStore
+ * @option {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
  *
  * @option {string} [helpMessage]
  *         Default: mw.msg( 'wikibase-sitelinks-input-help-message' )
@@ -76,7 +76,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 		},
 		value: null,
 		getAllowedSites: function() { return []; },
-		entityStore: null,
+		entityIdPlainFormatter: null,
 		helpMessage: mw.msg( 'wikibase-sitelinks-input-help-message' )
 	},
 
@@ -94,7 +94,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if( !this.options.entityStore || !this.options.helpMessage ) {
+		if( !this.options.entityIdPlainFormatter || !this.options.helpMessage ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -145,7 +145,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 		.badgeselector( {
 			value: this.options.value ? this.options.value.getBadges() : [],
 			badges: badges,
-			entityStore: this.options.entityStore,
+			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
 			languageCode: mw.config.get( 'wgUserLanguage' ),
 			emptyBadgeTitle: mw.msg( 'wikibase-add-badges' ),
 			isRtl: $( 'body' ).hasClass( 'rtl' ),

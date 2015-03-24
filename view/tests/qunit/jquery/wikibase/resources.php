@@ -33,10 +33,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.badgeselector',
-				'mediawiki.Title',
 				'wikibase.datamodel',
-				'wikibase.store.EntityStore',
-				'wikibase.store.FetchedContent',
 			),
 		),
 
@@ -234,7 +231,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.sitelinkgroupview',
 				'wikibase.datamodel',
-				'wikibase.store.EntityStore',
 				'wikibase.tests.qunit.testrunner',
 			),
 		),
@@ -246,7 +242,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.sitelinklistview',
 				'wikibase.datamodel',
-				'wikibase.store.EntityStore',
 				'wikibase.tests.qunit.testrunner',
 			),
 		),
@@ -258,7 +253,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.sitelinkview',
 				'wikibase.datamodel',
-				'wikibase.store.EntityStore',
 				'wikibase.tests.qunit.testrunner',
 			),
 		),
