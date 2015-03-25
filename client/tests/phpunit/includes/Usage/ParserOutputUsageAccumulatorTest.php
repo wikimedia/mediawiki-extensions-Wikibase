@@ -22,7 +22,7 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit_Framework_TestCase {
 		$acc =  new ParserOutputUsageAccumulator( $parserOutput );
 		$tester = new UsageAccumulatorContractTester( $acc );
 
-		$tester->testAddGetUsage();
+		$tester->testAddAndGetUsages();
 
 		$this->assertNotNull( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
 	}
