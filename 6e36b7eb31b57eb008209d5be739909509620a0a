@@ -16,6 +16,24 @@
       "revId": "6e36b7eb31b57eb008209d5be739909509620a0a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c00286bd",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-25T18:31:53Z",
+      "side": 1,
+      "message": "Oh, true... doh",
+      "parentUuid": "6e7c4fa4_c0ee061f",
+      "revId": "6e36b7eb31b57eb008209d5be739909509620a0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
