@@ -2,11 +2,12 @@
 
 namespace Wikibase\Test;
 
-use FauxResponse;
 use Site;
 use SiteStore;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
+use Wikibase\Repo\Store\EntityPerPage;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialGoToLinkedPage
@@ -64,6 +65,24 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	}
 
 	/**
+	 * @return EntityPerPage
+	 */
+	private function getEntityPerPage() {
+		$mock = $this->getMock( 'Wikibase\Repo\Store\EntityPerPage' );
+		$mock->expects( $this->any() )
+			->method( 'getRedirectForEntityId' )
+			->will( $this->returnCallback( function( ItemId $itemId ) {
+				if ( $itemId->getSerialization() === 'Q24' ) {
+					return new ItemId( 'Q23' );
+				} else {
+					return null;
+				}
+			} ) );
+
+		return $mock;
+	}
+
+	/**
 	 * @return SpecialGoToLinkedPage
 	 */
 	protected function newSpecialPage() {
@@ -71,7 +90,8 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 
 		$page->initServices(
 			$this->getMockSiteStore(),
-			$this->getMockSiteLinkLookup()
+			$this->getMockSiteLinkLookup(),
+			$this->getEntityPerPage()
 		);
 
 		return $page;
@@ -126,6 +146,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	public function requestWithRedirectProvider() {
 		$cases = array();
 		$cases['found'] = array( 'dewiki/Q23', 'http://dewiki.com/TestPageName' );
+		$cases['foundEntityRedirect'] = array( 'dewiki/Q24', 'http://dewiki.com/TestPageName' );
 		$cases['foundWithSiteIdHack'] = array( 'de/Q23', 'http://dewiki.com/TestPageName' );
 		return $cases;
 	}
