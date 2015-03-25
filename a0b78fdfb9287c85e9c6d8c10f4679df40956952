@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ba921bfe",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-25T15:45:27Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this rather have a more generic name like \"runTests\" or \"testUsageAccumulator\"? I found this rather weird in the test cases...",
+      "revId": "a0b78fdfb9287c85e9c6d8c10f4679df40956952",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3a860bbf",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-25T15:45:27Z",
+      "side": 1,
+      "message": "Maybe also test with some other kind of Snak that doesn\u0027t need to be usage tracked?",
+      "revId": "a0b78fdfb9287c85e9c6d8c10f4679df40956952",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
