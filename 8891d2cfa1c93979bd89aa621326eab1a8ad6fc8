@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_773c9ede",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "Newline missing.\n\nTry to avoid using the generic Wikibase namespace, please be more specific.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d73b32e6",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "Don\u0027t you want to add your @author\u0027ship?",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f72f4e9b",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "Newline missing.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b71d567a",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "That\u0027s perfectly fine, please remove the comment.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_baa0dbf1",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "Spaces missing. Same for other list() calls below.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bafc5b09",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "Please use \u003d\u003d\u003d. Same for other comparisons below.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1a130f5e",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "Please never cast the year to integer. This fails on 32-bit systems for years that exceed the UINT32 limit. Use ltrim( ..., \u00270\u0027 ) or preg_replace( \u0027/\\b0+(?\u003d\\d{4})/\u0027, ... ) instead.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1a2a2f74",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "I find this very scary. Setting the day to January 1st for all TimeValues before 4713 BC is not a \"cleanup\". Why is this needed? And why in this class, why in this method?",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ba4a1b5d",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "Can\u0027t hurt, fine for me.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_da4fd76c",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "Fine for me.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5a3bc7c3",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "Why is this dropping the + sign?\n\nAgain, the %04d formatting casts this to integer, which fails on 32-bit systems. Please replace with %04s.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7a67a3e8",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3a65abdd",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f7066e23",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "It\u0027s not static, please call it with $this-\u003e... Same below.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_570e423f",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "Please either use elseif or switch.\n\nPlease add spaces in \"if ( ... )\" and so on according to our coding styles.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_172d2aa3",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:26:34Z",
+      "side": 1,
+      "message": "Newline missing.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
