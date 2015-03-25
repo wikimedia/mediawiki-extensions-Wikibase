@@ -97,7 +97,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			$dedup = new \HashBagOStuff();
 		}
 		$emitter = new NTriplesRdfWriter();
-		return new RdfBuilder(
+		$builder = new RdfBuilder(
 			self::getSiteList(),
 			self::URI_BASE,
 			self::URI_DATA,
@@ -106,6 +106,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			$emitter,
 			$dedup
 		);
+		$builder->startDocument();
+		return $builder;
 	}
 
 	/**
