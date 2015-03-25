@@ -20,10 +20,6 @@ class NTriplesRdfWriter extends N3RdfWriterBase {
 		$this->quoter->setEscapeUnicode( true );
 	}
 
-	protected function writePrefix( $prefix, $uri ) {
-		// noop
-	}
-
 	protected function expandSubject( &$base, &$local ) {
 		$this->expandQName( $base, $local );
 	}

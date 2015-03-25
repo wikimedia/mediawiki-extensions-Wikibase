@@ -41,12 +41,12 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @var string[] a map of shorthand names to array( $base, $local ) pairs.
 	 * @todo handle "a" as a special case directly. Use for custom "variables" like %currentValue instead.
 	 */
-	private $shorthands = array();
+	protected $shorthands = array();
 
 	/**
 	 * @var string[] a map of prefixes to base IRIs
 	 */
-	private $prefixes = array();
+	protected $prefixes = array();
 
 	/**
 	 * @var array pair to store the current subject.
@@ -132,7 +132,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @param string $prefix
 	 * @param string $iri The base IRI
 	 */
-	protected function registerPrefix( $prefix, $iri ) {
+	public function registerPrefix( $prefix, $iri ) {
 		$this->prefixes[$prefix] = $iri;
 	}
 
@@ -307,19 +307,6 @@ abstract class RdfWriterBase implements RdfWriter {
 				$b = $b->drain();
 			}
 		}
-	}
-
-	/**
-	 * @see RdfWriter::prefix()
-	 *
-	 * @param string $prefix
-	 * @param string $uri
-	 */
-	final public function prefix( $prefix, $uri ) {
-		$this->state( self::STATE_DOCUMENT );
-
-		$this->registerPrefix( $prefix, $uri );
-		$this->writePrefix( $prefix, $uri );
 	}
 
 	/**
@@ -517,14 +504,11 @@ abstract class RdfWriterBase implements RdfWriter {
 	}
 
 	/**
-	 * Must be implemented to generate output for a prefix declaration.
-	 * If the output format does not support or require such declarations (like NTriples doesn't),
-	 * the implementation can be empty.
-	 *
-	 * @param $prefix
-	 * @param $uri
+	 * This method will write prefix definitions to the output.
+	 * Formats that support prefix definitions should override it.
 	 */
-	protected abstract function writePrefix( $prefix, $uri );
+	public function writePrefixes( ) {
+	}
 
 	/**
 	 * Must be implemented to generate output that starts a statement (or set of statements)

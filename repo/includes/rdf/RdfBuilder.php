@@ -198,9 +198,8 @@ class RdfBuilder {
 				self::NS_PROV => self::PROV_URI
 		);
 
-		// XXX: Ugh, static. Should go into $this->graph.
 		foreach ( $this->getNamespaces() as $gname => $uri ) {
-			$this->documentWriter->prefix( $gname, $uri );
+			$this->documentWriter->registerPrefix( $gname, $uri );
 		}
 
 		$this->headerWriter = $this->documentWriter->sub();
@@ -209,6 +208,13 @@ class RdfBuilder {
 		$this->statementWriter = $this->documentWriter->sub();
 		$this->referenceWriter = $this->documentWriter->sub();
 		$this->valueWriter = $this->documentWriter->sub();
+	}
+
+	/**
+	 * Write prefixes
+	 */
+	public function writePrefixes() {
+		$this->documentWriter->writePrefixes();
 	}
 
 	/**

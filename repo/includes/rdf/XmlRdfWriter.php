@@ -69,7 +69,7 @@ class XmlRdfWriter extends RdfWriterBase {
 	 * Generates an attribute list, containing the attribute given by $name, or rdf:nodeID
 	 * if $target is a blank node id (starting with "_:"). If $target is a qname, an attempt
 	 * is made to resolve it into a full IRI based on the namespaces registered by calling
-	 * prefix().
+	 * registerPrefix().
 	 *
 	 * @param string $name the attribute name (without the 'rdf:' prefix)
 	 * @param string|null $base
@@ -121,10 +121,6 @@ class XmlRdfWriter extends RdfWriterBase {
 
 		$this->tag( 'rdf', 'RDF', array( $namespaceAttrCallback ) );
 		$this->write( "\n" );
-	}
-
-	protected function writePrefix( $prefix, $uri ) {
-		// noop
 	}
 
 	protected function writeSubject( $base, $local = null ) {
