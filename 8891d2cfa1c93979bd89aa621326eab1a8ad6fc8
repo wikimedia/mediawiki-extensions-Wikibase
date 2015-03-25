@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_fd816d93",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-25T18:08:13Z",
+      "side": 1,
+      "message": "Doesn\u0027t git already do that?",
+      "parentUuid": "6e7c4fa4_d73b32e6",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_f72f4e9b",
         "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
         "patchSetId": 8
@@ -64,6 +82,24 @@
       "writtenOn": "2015-03-25T14:26:34Z",
       "side": 1,
       "message": "That\u0027s perfectly fine, please remove the comment.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1d7f89a7",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-25T18:08:13Z",
+      "side": 1,
+      "message": "I want it to be there to remind us it\u0027s not optimal solution.",
+      "parentUuid": "6e7c4fa4_b71d567a",
       "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_bd4f7596",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-25T18:08:13Z",
+      "side": 1,
+      "message": "What\u0027s the difference? It\u0027s not like $date[0] can suddenly turn to be anything but string.",
+      "parentUuid": "6e7c4fa4_bafc5b09",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_1a130f5e",
         "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
         "patchSetId": 8
@@ -132,6 +186,24 @@
       "writtenOn": "2015-03-25T14:26:34Z",
       "side": 1,
       "message": "I find this very scary. Setting the day to January 1st for all TimeValues before 4713 BC is not a \"cleanup\". Why is this needed? And why in this class, why in this method?",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5d60a1fb",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-25T18:08:13Z",
+      "side": 1,
+      "message": "Because xsd:dateTime requires valid values in Gregorian calendar (or something that looks like it). And PHP can not calculate months before -4714. In fact, calculating months on any BCE date is a sham since they make no sense, but we\u0027re prepared to go a little bit and humor whoever entered that date. But beyond -4714 we can\u0027t do anything, month and day mean nothing there.",
+      "parentUuid": "6e7c4fa4_1a2a2f74",
       "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +261,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_dd3b51e6",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-25T18:08:13Z",
+      "side": 1,
+      "message": "Because xsd:dateTime does not have + sign on dates. I\u0027ll check the 32-bit issue.",
+      "parentUuid": "6e7c4fa4_5a3bc7c3",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_7a67a3e8",
         "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
         "patchSetId": 8
@@ -200,6 +290,24 @@
       "writtenOn": "2015-03-25T14:26:34Z",
       "side": 1,
       "message": "As above.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7d3c7dde",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-25T18:08:13Z",
+      "side": 1,
+      "message": "How you can have Julian calendar date that doesn\u0027t fit 32 bits?",
+      "parentUuid": "6e7c4fa4_7a67a3e8",
       "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
