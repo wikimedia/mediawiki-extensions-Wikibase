@@ -136,30 +136,6 @@ class Claims extends ArrayObject {
 	}
 
 	/**
-	 * @since 0.5
-	 *
-	 * @param Claim $claim
-	 *
-	 * @return int|bool
-	 */
-	public function indexOf( Claim $claim ) {
-		$guid = $claim->getGuid();
-		$index = 0;
-
-		/**
-		 * @var Claim $claimObject
-		 */
-		foreach ( $this as $claimObject ) {
-			if ( $claimObject->getGuid() === $guid ) {
-				return $index;
-			}
-			$index++;
-		}
-
-		return false;
-	}
-
-	/**
 	 * @since 0.1
 	 *
 	 * @param Claim $claim
