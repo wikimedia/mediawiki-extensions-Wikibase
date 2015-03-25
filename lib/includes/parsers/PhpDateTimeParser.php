@@ -182,7 +182,7 @@ class PhpDateTimeParser extends StringValueParser {
 			}
 		}
 
-		if ( !isset( $matches ) ) {
+		if ( !isset( $matches[1] ) ) {
 			return null;
 		}
 
