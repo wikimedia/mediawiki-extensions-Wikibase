@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1a622fa3",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:44:18Z",
+      "side": 1,
+      "message": "+2. This is a candidate for a separate patch.",
+      "revId": "9f88ef43395cb3342830a77a43b1ee8accd82a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bad53b49",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:44:18Z",
+      "side": 1,
+      "message": "Where does the \"a\" come from? I don\u0027t think this should be in a multi-purpose \"base\" class.",
+      "revId": "9f88ef43395cb3342830a77a43b1ee8accd82a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7a0803dc",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:44:18Z",
+      "side": 1,
+      "message": "?",
+      "revId": "9f88ef43395cb3342830a77a43b1ee8accd82a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9a0ddfed",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:44:18Z",
+      "side": 1,
+      "message": "?",
+      "revId": "9f88ef43395cb3342830a77a43b1ee8accd82a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ba345ba8",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:44:18Z",
+      "side": 1,
+      "message": "+2",
+      "revId": "9f88ef43395cb3342830a77a43b1ee8accd82a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5a450717",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:44:18Z",
+      "side": 1,
+      "message": "+2 for this change. Would be good to have this in a separate patch for review-",
+      "revId": "9f88ef43395cb3342830a77a43b1ee8accd82a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_da6037a2",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:44:18Z",
+      "side": 1,
+      "message": "This is scary. This executes a string as code. I don#t think this increases performance, I expect the opposite.",
+      "revId": "9f88ef43395cb3342830a77a43b1ee8accd82a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3af60bd5",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:44:18Z",
+      "side": 1,
+      "message": "Where did all the code go?",
+      "revId": "9f88ef43395cb3342830a77a43b1ee8accd82a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5af3c7e2",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:44:18Z",
+      "side": 1,
+      "message": "As before, the hard coded \"a\" doesn\u0027t belong here in my opinion.",
+      "revId": "9f88ef43395cb3342830a77a43b1ee8accd82a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5a6c2799",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:44:18Z",
+      "side": 1,
+      "message": "?",
+      "revId": "9f88ef43395cb3342830a77a43b1ee8accd82a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fa6413b1",
+        "filename": "repo/includes/rdf/XmlRdfWriter.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:44:18Z",
+      "side": 1,
+      "message": "Please don\u0027t hide code in strings.",
+      "revId": "9f88ef43395cb3342830a77a43b1ee8accd82a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
