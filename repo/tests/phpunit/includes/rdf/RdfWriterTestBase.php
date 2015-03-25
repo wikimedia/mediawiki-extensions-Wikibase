@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\RDF\RdfWriter;
+use Wikibase\RDF\RdfWriterBase;
 
 /**
  * Base class for tests for RdfWriter implementations.
@@ -58,7 +59,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	protected abstract function newWriter();
 
 	public function testTriples() {
-		$writer = $this->newWriter();
+		$writer = $this->newWriter( RdfWriterBase::SUBDOCUMENT_ROLE );
 
 		$writer->start();
 		$writer->prefix( 'acme', 'http://acme.test/' );
@@ -81,8 +82,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	}
 
 	public function testPredicates() {
-		$writer = $this->newWriter();
-
+		$writer = $this->newWriter( RdfWriterBase::SUBDOCUMENT_ROLE );
 		$writer->start();
 		$writer->prefix( '', 'http://acme.test/' ); // empty prefix
 		$writer->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
@@ -169,7 +169,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	}
 
 	public function testNumbers() {
-		$writer = $this->newWriter();
+		$writer = $this->newWriter( RdfWriterBase::SUBDOCUMENT_ROLE );
 
 		$writer->start();
 		$writer->prefix( 'acme', 'http://acme.test/' );
@@ -207,7 +207,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	public function testLabeledBlankNode() {
 		// exampel taken from http://www.w3.org/2007/02/turtle/primer/
 
-		$writer = $this->newWriter();
+		$writer = $this->newWriter( RdfWriterBase::SUBDOCUMENT_ROLE );
 
 		$writer->start();
 		$writer->prefix( 'exterms', 'http://www.example.org/terms/' );
@@ -228,7 +228,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	public function testNumberedBlankNodes() {
 		// exampel taken from http://www.w3.org/2007/02/turtle/primer/
 
-		$writer = $this->newWriter();
+		$writer = $this->newWriter( RdfWriterBase::SUBDOCUMENT_ROLE );
 
 		$writer->start();
 		$writer->prefix( 'exterms', 'http://www.example.org/terms/' );

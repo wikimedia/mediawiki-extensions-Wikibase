@@ -25,7 +25,7 @@ class NTriplesRdfWriterTest extends RdfWriterTestBase {
 	/**
 	 * @return RdfWriter
 	 */
-	protected function newWriter() {
-		return new NTriplesRdfWriter();
+	protected function newWriter( $role = NTriplesRdfWriter::DOCUMENT_ROLE ) {
+		return new NTriplesRdfWriter( $role );
 	}
 }

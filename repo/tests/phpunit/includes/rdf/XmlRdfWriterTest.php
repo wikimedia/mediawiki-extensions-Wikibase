@@ -25,7 +25,7 @@ class XmlRdfWriterTest extends RdfWriterTestBase {
 	/**
 	 * @return RdfWriter
 	 */
-	protected function newWriter() {
-		return new XmlRdfWriter();
+	protected function newWriter( $role = XmlRdfWriter::DOCUMENT_ROLE ) {
+		return new XmlRdfWriter( $role );
 	}
 }

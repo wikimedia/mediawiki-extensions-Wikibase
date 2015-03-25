@@ -69,6 +69,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * Role ID for writers that will generate a full RDF document.
 	 */
 	const DOCUMENT_ROLE = 'document';
+	const SUBDOCUMENT_ROLE = 'sub';
 
 	/**
 	 * Role ID for writers that will generate a single inline blank node.
@@ -83,7 +84,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	/**
 	 * @var string The writer's role, see the XXX_ROLE constants.
 	 */
-	private $role;
+	protected $role;
 
 	/**
 	 * @param string $role The writer's role, use the XXX_ROLE constants.
@@ -175,7 +176,7 @@ abstract class RdfWriterBase implements RdfWriter {
 		// later, on the next transtion to subject|document|drain
 		$this->state( self::STATE_DOCUMENT );
 
-		$writer = $this->newSubWriter( self::DOCUMENT_ROLE, $this->labeler );
+		$writer = $this->newSubWriter( self::SUBDOCUMENT_ROLE, $this->labeler );
 		$writer->state = self::STATE_DOCUMENT;
 
 		// share registered prefixes
@@ -530,7 +531,7 @@ abstract class RdfWriterBase implements RdfWriter {
 				break;
 
 			case self::STATE_OBJECT:
-				if ( $this->role !== self::DOCUMENT_ROLE ) {
+				if ( $this->role !== self::SUBDOCUMENT_ROLE ) {
 					throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_SUBJECT );
 				}
 
