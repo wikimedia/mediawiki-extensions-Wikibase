@@ -198,7 +198,6 @@ class RdfBuilder {
 				self::NS_PROV => self::PROV_URI
 		);
 
-		// XXX: Ugh, static. Should go into $this->graph.
 		foreach ( $this->getNamespaces() as $gname => $uri ) {
 			$this->documentWriter->prefix( $gname, $uri );
 		}
@@ -209,6 +208,13 @@ class RdfBuilder {
 		$this->statementWriter = $this->documentWriter->sub();
 		$this->referenceWriter = $this->documentWriter->sub();
 		$this->valueWriter = $this->documentWriter->sub();
+	}
+
+	/**
+	 * Write prefixes
+	 */
+	private function writePrefixes() {
+		$this->headerWriter->writePrefixes();
 	}
 
 	/**
@@ -975,8 +981,12 @@ class RdfBuilder {
 	 * of the entity.
 	 *
 	 * @param Entity $entity the entity to output.
+	 * @param bool $addPrefixes Should we write prefixes too?
 	 */
-	public function addEntity( Entity $entity ) {
+	public function addEntity( Entity $entity, $addPrefixes = true ) {
+		if( $addPrefixes ) {
+			$this->writePrefixes();
+		}
 		$this->addEntityMetaData( $entity );
 		$this->addLabels( $entity );
 		$this->addDescriptions( $entity );
@@ -1010,6 +1020,7 @@ class RdfBuilder {
 	 * @param int $timestamp Timestamp (for testing)
 	 */
 	public function addDumpHeader( $timestamp = 0 ) {
+		$this->writePrefixes();
 		// TODO: this should point to "this document"
 		$this->documentWriter->about( self::NS_ONTOLOGY, 'Dump' )
 			->a( self::NS_SCHEMA_ORG, "Dataset" )

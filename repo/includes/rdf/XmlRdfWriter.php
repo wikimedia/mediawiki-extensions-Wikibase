@@ -144,10 +144,6 @@ class XmlRdfWriter extends RdfWriterBase {
 		$this->write( "\n" );
 	}
 
-	protected function writePrefix( $prefix, $uri ) {
-		// noop
-	}
-
 	protected function writeSubject( $base, $local = null ) {
 		$attr = $this->getTargetAttributes( 'about', $base, $local );
 

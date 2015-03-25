@@ -62,12 +62,10 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$writer->start();
 		$writer->prefix( 'acme', 'http://acme.test/' );
+		$writer->writePrefixes();
 
 		$writer->about( 'http://foobar.test/Bananas' )
 			->say( 'a' )->is( 'http://foobar.test/Fruit' ); // shorthand name "a"
-
-		// interspersed prefix definition
-		$writer->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
 
 		$writer->about( 'acme', 'Nuts' )
 			->say( 'acme', 'weight' )->value( '5.5', 'xsd', 'decimal' );
@@ -85,7 +83,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$writer->start();
 		$writer->prefix( '', 'http://acme.test/' ); // empty prefix
-		$writer->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
+		$writer->writePrefixes();
 
 		$writer->about( 'http://foobar.test/Bananas' )
 			->a( 'http://foobar.test/Fruit' ) // shorthand function a()
@@ -107,6 +105,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$writer->start();
 		$writer->prefix( 'acme', 'http://acme.test/' );
+		$writer->writePrefixes();
 
 		$writer->about( 'http://foobar.test/Bananas' )
 			->say( 'acme', 'multi' )
@@ -142,6 +141,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$writer->start();
 		$writer->prefix( 'acme', 'http://acme.test/' );
+		$writer->writePrefixes();
 
 		$writer->about( 'acme', 'Bongos' )
 			->say( 'acme', 'sounds' )
@@ -158,6 +158,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$writer->start();
 		$writer->prefix( 'acme', 'http://acme.test/' );
+		$writer->writePrefixes();
 
 		$writer->about( 'acme', 'Bongos' )
 			->say( 'acme', 'sounds' )
@@ -173,7 +174,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$writer->start();
 		$writer->prefix( 'acme', 'http://acme.test/' );
-		$writer->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
+		$writer->writePrefixes();
 
 		$writer->about( 'acme', 'Bongos' )
 			->say( 'acme', 'stock' )->value( 5, 'xsd', 'integer' )
@@ -191,8 +192,8 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 		$writer = $this->newWriter();
 
 		$writer->start();
-		$writer->prefix( 'rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' );
 		$writer->prefix( 'contact', 'http://www.w3.org/2000/10/swap/pim/contact#' );
+		$writer->writePrefixes();
 
 		$writer->about( 'http://www.w3.org/People/EM/contact#me' )
 			->say( 'rdf', 'type' )->is( 'contact', 'Person' )
@@ -212,6 +213,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 		$writer->start();
 		$writer->prefix( 'exterms', 'http://www.example.org/terms/' );
 		$writer->prefix( 'exstaff', 'http://www.example.org/staffid/' );
+		$writer->writePrefixes();
 
 		$writer->about( 'exstaff', '85740' )
 			->say( 'exterms', 'address' )->is( '_', $label = $writer->blank( 'johnaddress' ) )
@@ -234,6 +236,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 		$writer->prefix( 'exterms', 'http://www.example.org/terms/' );
 		$writer->prefix( 'exstaff', 'http://www.example.org/staffid/' );
 		$writer->prefix( 'ex', 'http://example.org/packages/vocab#' );
+		$writer->writePrefixes();
 
 		$writer->about( 'exstaff', 'Sue' )
 			->say( 'exterms', 'publication' )->is( '_', $label1 = $writer->blank() );

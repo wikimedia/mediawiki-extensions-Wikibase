@@ -62,16 +62,17 @@ interface RdfWriter {
 	public function drain();
 
 	/**
-	 * Write a prefix declaration. May remember the prefix and IRI for later use.
-	 * May fail if called if the writer's state doesn't allow a prefix in the
-	 * current syntactical construct.
-	 *
-	 * @note Depending on implementation, re-definitions of prefixes may fail silently.
+	 * Declare a prefix for later use. Prefixes should be declared before being used.
 	 *
 	 * @param string $prefix
 	 * @param string $iri a IRI
 	 */
 	public function prefix( $prefix, $iri );
+
+	/**
+	 * Write prefixes to the output. Depending on the format, it may be a no-op.
+	 */
+	public function writePrefixes();
 
 	/**
 	 * Start an "about" (subject) clause, given a subject.

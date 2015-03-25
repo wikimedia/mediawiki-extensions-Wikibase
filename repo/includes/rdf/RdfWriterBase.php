@@ -103,8 +103,8 @@ abstract class RdfWriterBase implements RdfWriter {
 
 		$this->registerShorthand( 'a', 'rdf', 'type' );
 
-		$this->registerPrefix( 'rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' );
-		$this->registerPrefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
+		$this->prefix( 'rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' );
+		$this->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
 	}
 
 	/**
@@ -133,7 +133,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @param string $prefix
 	 * @param string $iri The base IRI
 	 */
-	protected function registerPrefix( $prefix, $iri ) {
+	public function prefix( $prefix, $iri ) {
 		$this->prefixes[$prefix] = $iri;
 	}
 
@@ -290,8 +290,8 @@ abstract class RdfWriterBase implements RdfWriter {
 		$this->currentPredicate = array( null, null );
 
 		$this->prefixes = array();
-		$this->registerPrefix( 'rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' );
-		$this->registerPrefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
+		$this->prefix( 'rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' );
+		$this->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
 	}
 
 	/**
@@ -308,19 +308,6 @@ abstract class RdfWriterBase implements RdfWriter {
 				$b = $b->drain();
 			}
 		}
-	}
-
-	/**
-	 * @see RdfWriter::prefix()
-	 *
-	 * @param string $prefix
-	 * @param string $uri
-	 */
-	final public function prefix( $prefix, $uri ) {
-		$this->state( self::STATE_DOCUMENT );
-
-		$this->registerPrefix( $prefix, $uri );
-		$this->writePrefix( $prefix, $uri );
 	}
 
 	/**
@@ -514,14 +501,35 @@ abstract class RdfWriterBase implements RdfWriter {
 	}
 
 	/**
-	 * Must be implemented to generate output for a prefix declaration.
-	 * If the output format does not support or require such declarations (like NTriples doesn't),
-	 * the implementation can be empty.
-	 *
-	 * @param $prefix
-	 * @param $uri
+	 * This method will write prefix definitions to the output.
+	 * We need it to be able to access internal data, due to callback scope issues in 5.3
+	 * Also needs to be public
 	 */
-	protected abstract function writePrefix( $prefix, $uri );
+	public function writePrefixesImpl( ) {
+		foreach( $this->prefixes as $prefix => $uri) {
+			$this->writePrefix( $prefix, $uri );
+		}
+	}
+
+	/**
+	 * Write prefixes
+	 */
+	public function writePrefixes( ) {
+		$self = $this;
+		$this->write(function() use($self) {
+			$self->writePrefixesImpl();
+		});
+	}
+
+
+	/**
+	 * Write prefix to the output.
+	 * Concrete classes can override that to generate prefixes list
+	 * @param string $prefix
+	 * @param string $uri
+	 */
+	protected function writePrefix( $prefix, $uri ) {
+	}
 
 	/**
 	 * Must be implemented to generate output that starts a statement (or set of statements)

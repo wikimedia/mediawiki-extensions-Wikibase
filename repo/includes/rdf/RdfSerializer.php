@@ -148,10 +148,11 @@ class RdfSerializer implements RdfProducer {
 	 * Generates an RDF representing the given entity
 	 *
 	 * @param EntityRevision $entityRevision the entity to output.
+	 * @param boolean $addPrefixes Should we add prefixes to the data?
 	 *
 	 * @return string rdf
 	 */
-	private function buildGraphForEntityRevision( EntityRevision $entityRevision ) {
+	private function buildGraphForEntityRevision( EntityRevision $entityRevision, $addPrefixes ) {
 		$builder = $this->newRdfBuilder();
 
 		$builder->addEntityRevisionInfo(
@@ -160,7 +161,7 @@ class RdfSerializer implements RdfProducer {
 			$entityRevision->getTimestamp()
 		);
 
-		$builder->addEntity( $entityRevision->getEntity() );
+		$builder->addEntity( $entityRevision->getEntity(), $addPrefixes );
 
 		$builder->resolveMentionedEntities( $this->entityLookup ); //TODO: optional
 
@@ -186,11 +187,12 @@ class RdfSerializer implements RdfProducer {
 	 * Shorthand for $this->serializeRdf( $this->buildGraphForEntity( $entity ) ).
 	 *
 	 * @param EntityRevision $entityRevision   the entity to serialize
+	 * @param boolean $addPrefixes Should we add prefixes to the data?
 	 *
 	 * @return string
 	 */
-	public function serializeEntityRevision( EntityRevision $entityRevision ) {
-		return $this->buildGraphForEntityRevision( $entityRevision );
+	public function serializeEntityRevision( EntityRevision $entityRevision, $addPrefixes = true ) {
+		return $this->buildGraphForEntityRevision( $entityRevision, $addPrefixes );
 	}
 
 	/**
