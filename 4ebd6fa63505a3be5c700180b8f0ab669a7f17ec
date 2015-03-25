@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_57fc023b",
+        "filename": "client/includes/UpdateRepo/UpdateRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T13:46:34Z",
+      "side": 1,
+      "message": "Function call in a string, ouch. :-(",
+      "revId": "4ebd6fa63505a3be5c700180b8f0ab669a7f17ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
