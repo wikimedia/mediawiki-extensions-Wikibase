@@ -541,4 +541,50 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGivenNotPresentStatement_getIndexByGuidReturnsFalse() {
+		$statements = new StatementList();
+
+		$this->assertFalse( $statements->getIndexByGuid( $this->getStatement( 1, 'kittens' ) ) );
+	}
+
+	public function testGivenPresentStatement_getIndexByGuidReturnsItsIndex() {
+		$statements = new StatementList( array(
+			$this->getStatement( 43, 'kittens43' ),
+			$this->getStatement( 42, 'kittens42' ),
+			$this->getStatement( 41, 'kittens41' ),
+		) );
+
+		$this->assertSame(
+			1,
+			$statements->getIndexByGuid( $this->getStatement( 42, 'kittens42' ) )
+		);
+	}
+
+	public function testGivenDoublyPresentStatement_getIndexByGuidReturnsTheFirstIndex() {
+		$statements = new StatementList( array(
+			$this->getStatement( 43, 'kittens43' ),
+			$this->getStatement( 42, 'kittens42' ),
+			$this->getStatement( 41, 'kittens41' ),
+			$this->getStatement( 42, 'kittens42' ),
+		) );
+
+		$this->assertSame(
+			1,
+			$statements->getIndexByGuid( $this->getStatement( 42, 'kittens42' ) )
+		);
+	}
+
+	public function testGivenDifferentStatementWithSameGuid_getIndexByGuidReturnsItsIndex() {
+		$statements = new StatementList( array(
+			$this->getStatement( 1, 'kittens43' ),
+			$this->getStatement( 2, 'kittens42' ),
+			$this->getStatement( 3, 'kittens41' ),
+		) );
+
+		$this->assertSame(
+			2,
+			$statements->getIndexByGuid( $this->getStatement( 42, 'kittens41' ) )
+		);
+	}
+
 }
