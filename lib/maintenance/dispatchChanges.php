@@ -98,7 +98,7 @@ class DispatchChanges extends \Maintenance {
 	 *           causes a completely random selection of the target, regardless of when it
 	 *           was last selected for dispatch.
 	 */
-	protected $randomness = 5;
+	protected $randomness = 10;
 
 	/**
 	 * @var bool: whether output should be version.
@@ -119,7 +119,7 @@ class DispatchChanges extends \Maintenance {
 		$this->addOption( 'lock-grace-interval', "Seconds after wich to probe for orphaned locks. "
 					. "Default: 60", false, true );
 		$this->addOption( 'randomness', "Number of least current target wikis to pick from at random. "
-					. "Default: 5.", false, true );
+					. "Default: 10.", false, true );
 		$this->addOption( 'max-passes', "The number of passes to perform. "
 					. "Default: 1 if --max-time is not set, infinite if it is.", false, true );
 		$this->addOption( 'max-time', "The number of seconds to run before exiting, "
@@ -146,6 +146,7 @@ class DispatchChanges extends \Maintenance {
 		$this->delay = intval( $this->getOption( 'idle-delay', 10 ) );
 		$this->dispatchInterval = intval( $this->getOption( 'dispatch-interval', 60 ) );
 		$this->lockGraceInterval = intval( $this->getOption( 'lock-grace-interval', 60 ) );
+		$this->randomness = intval( $this->getOption( 'randomness', $this->randomness ) );
 
 		$this->verbose = $this->getOption( 'verbose', false );
 
@@ -418,9 +419,8 @@ class DispatchChanges extends \Maintenance {
 			,
 			__METHOD__,
 			array(
-				'ORDER BY chd_seen ASC',
-				'FOR UPDATE',
-				'LIMIT ' . (int)$this->randomness
+				'ORDER BY' => 'chd_seen ASC',
+				'LIMIT' => (int)$this->randomness
 			)
 		);
 
