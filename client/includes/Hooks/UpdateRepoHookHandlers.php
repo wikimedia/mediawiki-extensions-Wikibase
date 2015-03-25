@@ -230,6 +230,7 @@ class UpdateRepoHookHandlers {
 			// show a message to the user that the Wikibase item needs to be
 			// manually updated.
 			wfLogWarning( $e->getMessage() );
+			wfDebugLog( 'UpdateRepo', "OnDelete: Failed to inject job: " . $e->getMessage() );
 		}
 
 		return true;
@@ -274,6 +275,7 @@ class UpdateRepoHookHandlers {
 			// show a message to the user that the Wikibase item needs to be
 			// manually updated.
 			wfLogWarning( $e->getMessage() );
+			wfDebugLog( 'UpdateRepo', "OnMove: Failed to inject job: " . $e->getMessage() );
 		}
 
 		return true;
