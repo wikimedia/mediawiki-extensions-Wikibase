@@ -245,6 +245,14 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		// Insert claim with an index out of bounds:
 		$claim5 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P19' ) ) );
 		$claims->addClaim( $claim5, 99999 );
+
+		$this->assertSame( array(
+			'TEST$CLAIM-3' => $claim3,
+			'TEST$CLAIM-4' => $claim4,
+			'TEST$CLAIM-1' => $claim1,
+			'TEST$CLAIM-2' => $claim2,
+			'TEST$CLAIM-5' => $claim5,
+		), $claims->getArrayCopy() );
 	}
 
 	public function testAppend() {
