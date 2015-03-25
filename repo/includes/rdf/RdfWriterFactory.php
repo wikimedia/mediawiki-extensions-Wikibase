@@ -21,7 +21,7 @@ class RdfWriterFactory {
 	 * @return string[]
 	 */
 	public function getSupportedFormats() {
-		return array( 'n3', 'turtle', 'n-triples', 'rdfxml' );
+		return array( 'n3', 'turtle', 'ntriples', 'rdfxml' );
 	}
 
 	/**
@@ -45,7 +45,7 @@ class RdfWriterFactory {
 			case 'turtle':
 				return array( 'text/turtle', 'application/x-turtle' );
 
-			case 'n-triples':
+			case 'ntriples':
 				return array( 'application/n-triples', 'text/n-triples', 'text/plain' );
 
 			case 'rdfxml':
@@ -72,7 +72,7 @@ class RdfWriterFactory {
 			case 'turtle':
 				return 'ttl';
 
-			case 'n-triples':
+			case 'ntriples':
 				return 'nt';
 
 			case 'rdfxml':
@@ -99,7 +99,7 @@ class RdfWriterFactory {
 			case 'turtle':
 				return new TurtleRdfWriter();
 
-			case 'n-triples':
+			case 'ntriples':
 				return new NTriplesRdfWriter();
 
 			case 'rdfxml':
@@ -140,7 +140,7 @@ class RdfWriterFactory {
 			case 'text/n-triples':
 			case 'application/ntriples':
 			case 'application/n-triples':
-				return 'n-triples';
+				return 'ntriples';
 
 			case 'xml':
 			case 'rdf':
