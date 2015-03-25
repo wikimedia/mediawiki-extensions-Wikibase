@@ -761,7 +761,7 @@ class WikibaseRepo {
 
 		return new MessageParameterFormatter(
 			new DispatchingValueFormatter( $valueFormatters ),
-			new EntityIdLinkFormatter( $this->getEntityTitleLookup() ),
+			$this->getEntityTitleLookup(),
 			$this->getSiteStore(),
 			$wgLang
 		);
