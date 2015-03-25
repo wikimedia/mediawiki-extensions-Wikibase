@@ -137,6 +137,8 @@ class PhpDateTimeParserTest extends StringValueParserTest {
 				array( '+0000000000000111-07-04T00:00:00Z' ),
 			'4th July 1' =>
 				array( '+0000000000000001-07-04T00:00:00Z' ),
+			'12.Jun.10x' =>
+				array( '+0000000000000010-06-12T00:00:00Z' ),
 
 			// More than 4 digit years
 			'4th July 10000' =>
@@ -265,6 +267,7 @@ class PhpDateTimeParserTest extends StringValueParserTest {
 			'1980+3',
 			'1980+x',
 			'x',
+			'x x x',
 			'zz',
 			'America/New_York'
 		);
