@@ -128,9 +128,6 @@ class RdfSerializer implements RdfProducer {
 	public function newRdfBuilder() {
 		//TODO: language filter
 
-		// reset the emitter's output buffer
-		$this->emitter->reset();
-
 		$builder = new RdfBuilder(
 			$this->sites,
 			$this->baseUri,
@@ -144,6 +141,8 @@ class RdfSerializer implements RdfProducer {
 		return $builder;
 	}
 
+
+
 	/**
 	 * Generates an RDF representing the given entity
 	 *
@@ -152,6 +151,9 @@ class RdfSerializer implements RdfProducer {
 	 * @return string rdf
 	 */
 	private function buildGraphForEntityRevision( EntityRevision $entityRevision ) {
+		// reset the emitter's output buffer
+		$this->emitter->reset();
+
 		$builder = $this->newRdfBuilder();
 
 		$builder->addEntityRevisionInfo(
@@ -169,15 +171,36 @@ class RdfSerializer implements RdfProducer {
 	}
 
 	/**
-	 * Create dump header for RDF dump
+	 * Start RDF document
 	 * @param int $ts Timestamp (for testing)
 	 * @return string RDF
 	 */
-	public function dumpHeader( $ts = 0) {
+	public function startDocument( ) {
 		$builder = $this->newRdfBuilder();
+		$builder->startDocument();
+		return $builder->getRDF();
+	}
 
+	/**
+	 * Start RDF dump
+	 * @param int $ts Timestamp (for testing)
+	 * @return string RDF
+	 */
+	public function startDump( $ts = 0 ) {
+		$builder = $this->newRdfBuilder();
+		$builder->startDocument();
 		$builder->addDumpHeader( $ts );
+		return $builder->getRDF();
+	}
 
+	/**
+	 * Finish RDF document
+	 * @param int $ts Timestamp (for testing)
+	 * @return string RDF
+	 */
+	public function finishDocument( ) {
+		$builder = $this->newRdfBuilder();
+		$builder->finishDocument();
 		return $builder->getRDF();
 	}
 

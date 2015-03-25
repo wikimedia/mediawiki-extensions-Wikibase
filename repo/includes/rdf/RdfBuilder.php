@@ -123,11 +123,6 @@ class RdfBuilder {
 	/**
 	 * @var RdfWriter
 	 */
-	private $headerWriter;
-
-	/**
-	 * @var RdfWriter
-	 */
 	private $entityWriter;
 
 	/**
@@ -198,17 +193,31 @@ class RdfBuilder {
 				self::NS_PROV => self::PROV_URI
 		);
 
-		// XXX: Ugh, static. Should go into $this->graph.
-		foreach ( $this->getNamespaces() as $gname => $uri ) {
-			$this->documentWriter->prefix( $gname, $uri );
-		}
-
-		$this->headerWriter = $this->documentWriter->sub();
 		$this->entityWriter = $this->documentWriter->sub();
 		$this->sitelinkWriter = $this->documentWriter->sub();
 		$this->statementWriter = $this->documentWriter->sub();
 		$this->referenceWriter = $this->documentWriter->sub();
 		$this->valueWriter = $this->documentWriter->sub();
+	}
+
+	/**
+	 * Start writing RDF document
+	 * Note that this builder does not have to finish it, it may be finished later.
+	 */
+	public function startDocument() {
+		foreach ( $this->getNamespaces() as $gname => $uri ) {
+			$this->documentWriter->prefix( $gname, $uri );
+		}
+
+		$this->documentWriter->start();
+	}
+
+	/**
+	 * Finish writing the document
+	 * After that, nothing should ever be written into the document.
+	 */
+	public function finishDocument() {
+		$this->documentWriter->finish();
 	}
 
 	/**
