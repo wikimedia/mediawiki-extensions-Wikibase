@@ -157,4 +157,5 @@ class JsonDumpGenerator extends DumpGenerator {
 	public function getJsonFlags() {
 		return $this->jsonFlags;
 	}
+
 }

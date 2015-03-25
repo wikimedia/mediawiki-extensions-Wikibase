@@ -31,7 +31,7 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 		$this->writeRef( $base, $local );
 	}
 
-	protected function writeValue( $value, $typeBase = null, $typeLocal = null  ) {
+	protected function writeValue( $value, $typeBase = null, $typeLocal = null ) {
 		//TODO: shorthand form for xsd:integer|decimal|double|boolean
 		parent::writeValue( $value, $typeBase, $typeLocal );
 	}
@@ -86,4 +86,5 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 	public function getMimeType() {
 		return 'text/turtle; charset=UTF-8';
 	}
+
 }

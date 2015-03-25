@@ -28,6 +28,8 @@ class BNodeLabeler {
 	/**
 	 * @param string $prefix
 	 * @param int $start
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $prefix = 'genid', $start = 1 ) {
 		if ( !is_string( $prefix ) ) {

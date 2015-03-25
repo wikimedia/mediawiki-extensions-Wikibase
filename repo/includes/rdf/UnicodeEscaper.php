@@ -45,13 +45,12 @@ class UnicodeEscaper {
 	/**
 	 * @ignore
 	 */
-	public function escapeString($str)
-	{
+	public function escapeString( $str ) {
 		$result = '';
-		$strLen = mb_strlen($str, "UTF-8");
-		for ($i = 0; $i < $strLen; $i++) {
-			$c = mb_substr($str, $i, 1, "UTF-8");
-			if (!isset($this->escChars[$c])) {
+		$strLen = mb_strlen( $str, 'UTF-8' );
+		for ( $i = 0; $i < $strLen; $i++ ) {
+			$c = mb_substr( $str, $i, 1, 'UTF-8' );
+			if ( !isset( $this->escChars[$c] ) ) {
 				$this->escChars[$c] = $this->escapedChar($c);
 			}
 			$result .= $this->escChars[$c];
@@ -62,28 +61,27 @@ class UnicodeEscaper {
 	/**
 	 * @ignore
 	 */
-	protected function unicodeCharNo($cUtf)
-	{
-		$bl = strlen($cUtf); /* binary length */
+	protected function unicodeCharNo( $cUtf ) {
+		$bl = strlen( $cUtf ); /* binary length */
 		$r = 0;
-		switch ($bl) {
+		switch ( $bl ) {
 			case 1: /* 0####### (0-127) */
-				$r = ord($cUtf);
+				$r = ord( $cUtf );
 				break;
 			case 2: /* 110##### 10###### = 192+x 128+x */
-				$r = ((ord($cUtf[0]) - 192) * 64) +
-					(ord($cUtf[1]) - 128);
+				$r = ( ( ord( $cUtf[0] ) - 192 ) * 64 ) +
+					( ord( $cUtf[1] ) - 128 );
 				break;
 			case 3: /* 1110#### 10###### 10###### = 224+x 128+x 128+x */
-				$r = ((ord($cUtf[0]) - 224) * 4096) +
-					((ord($cUtf[1]) - 128) * 64) +
-					(ord($cUtf[2]) - 128);
+				$r = ( ( ord( $cUtf[0] ) - 224 ) * 4096 ) +
+					( ( ord( $cUtf[1] ) - 128 ) * 64 ) +
+					( ord( $cUtf[2] ) - 128 );
 				break;
 			case 4: /* 1111#### 10###### 10###### 10###### = 240+x 128+x 128+x 128+x */
-				$r = ((ord($cUtf[0]) - 240) * 262144) +
-					((ord($cUtf[1]) - 128) * 4096) +
-					((ord($cUtf[2]) - 128) * 64) +
-					(ord($cUtf[3]) - 128);
+				$r = ( ( ord( $cUtf[0] ) - 240 ) * 262144 ) +
+					( ( ord( $cUtf[1] ) - 128 ) * 4096 ) +
+					( ( ord( $cUtf[2] ) - 128 ) * 64 ) +
+					( ord( $cUtf[3] ) - 128 );
 				break;
 		}
 		return $r;
@@ -92,38 +90,38 @@ class UnicodeEscaper {
 	/**
 	 * @ignore
 	 */
-	protected function escapedChar($c)
-	{
-		$no = $this->unicodeCharNo($c);
+	protected function escapedChar( $c ) {
+		$no = $this->unicodeCharNo( $c );
 		/* see http://www.w3.org/TR/rdf-testcases/#ntrip_strings */
-		if ($no < 9) {
-			return "\\u" . sprintf('%04X', $no); /* #x0-#x8 (0-8) */
-		} elseif ($no == 9) {
+		if ( $no < 9 ) {
+			return "\\u" . sprintf( '%04X', $no ); /* #x0-#x8 (0-8) */
+		} elseif ( $no == 9 ) {
 			return '\t'; /* #x9 (9) */
-		} elseif ($no == 10) {
+		} elseif ( $no == 10 ) {
 			return '\n'; /* #xA (10) */
-		} elseif ($no < 13) {
-			return "\\u" . sprintf('%04X', $no); /* #xB-#xC (11-12) */
-		} elseif ($no == 13) {
+		} elseif ( $no < 13 ) {
+			return "\\u" . sprintf( '%04X', $no ); /* #xB-#xC (11-12) */
+		} elseif ( $no == 13 ) {
 			return '\r'; /* #xD (13) */
-		} elseif ($no < 32) {
-			return "\\u" . sprintf('%04X', $no); /* #xE-#x1F (14-31) */
-		} elseif ($no < 34) {
+		} elseif ( $no < 32 ) {
+			return "\\u" . sprintf( '%04X', $no ); /* #xE-#x1F (14-31) */
+		} elseif ( $no < 34 ) {
 			return $c; /* #x20-#x21 (32-33) */
-		} elseif ($no == 34) {
+		} elseif ( $no == 34 ) {
 			return '\"'; /* #x22 (34) */
-		} elseif ($no < 92) {
+		} elseif ( $no < 92 ) {
 			return $c; /* #x23-#x5B (35-91) */
-		} elseif ($no == 92) {
+		} elseif ( $no == 92 ) {
 			return '\\'; /* #x5C (92) */
-		} elseif ($no < 127) {
+		} elseif ( $no < 127 ) {
 			return $c; /* #x5D-#x7E (93-126) */
-		} elseif ($no < 65536) {
-			return "\\u" . sprintf('%04X', $no); /* #x7F-#xFFFF (128-65535) */
-		} elseif ($no < 1114112) {
-			return "\\U" . sprintf('%08X', $no); /* #x10000-#x10FFFF (65536-1114111) */
+		} elseif ( $no < 65536 ) {
+			return "\\u" . sprintf( '%04X', $no ); /* #x7F-#xFFFF (128-65535) */
+		} elseif ( $no < 1114112 ) {
+			return "\\U" . sprintf( '%08X', $no ); /* #x10000-#x10FFFF (65536-1114111) */
 		} else {
 			return ''; /* not defined => ignore */
 		}
 	}
+
 }

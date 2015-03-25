@@ -73,9 +73,10 @@ class XmlRdfWriter extends RdfWriterBase {
 	 * prefix().
 	 *
 	 * @param string $name the attribute name (without the 'rdf:' prefix)
-	 * @param string $base
-	 * @param string $local
+	 * @param string|null $base
+	 * @param string|null $local
 	 *
+	 * @throws InvalidArgumentException
 	 * @return string[]
 	 */
 	private function getTargetAttributes( $name, $base, $local ) {

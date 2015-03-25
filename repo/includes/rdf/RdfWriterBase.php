@@ -2,6 +2,7 @@
 
 namespace Wikibase\RDF;
 
+use Closure;
 use InvalidArgumentException;
 use LogicException;
 
@@ -43,7 +44,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	private $shorthands = array();
 
 	/**
-	 * @var array[] a map of prefixes to base IRIs
+	 * @var string[] a map of prefixes to base IRIs
 	 */
 	private $prefixes = array();
 
@@ -87,6 +88,8 @@ abstract class RdfWriterBase implements RdfWriter {
 	/**
 	 * @param string $role The writer's role, use the XXX_ROLE constants.
 	 * @param BNodeLabeler $labeler
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	function __construct( $role, BNodeLabeler $labeler = null ) {
 		if ( !is_string( $role ) ) {
@@ -137,6 +140,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * Determines whether $shorthand can be used as a shorthand.
 	 *
 	 * @param string $shorthand
+	 *
 	 * @return bool
 	 */
 	protected function isShorthand( $shorthand ) {
@@ -147,6 +151,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * Determines whether $shorthand can legally be used as a prefix.
 	 *
 	 * @param string $prefix
+	 *
 	 * @return bool
 	 */
 	protected function isPrefix( $prefix ) {
@@ -156,7 +161,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	/**
 	 * Returns the prefix map.
 	 *
-	 * @return array An associative array mapping prefixes to base IRIs.
+	 * @return string[] An associative array mapping prefixes to base IRIs.
 	 */
 	public function getPrefixes() {
 		return $this->prefixes;
@@ -195,7 +200,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	/**
 	 * Appends any parameters to the output buffer.
 	 *
-	 * @param string $s...
+	 * @param string [$text,...]
 	 */
 	final protected function write() {
 		foreach ( func_get_args() as $arg ) {
@@ -226,6 +231,8 @@ abstract class RdfWriterBase implements RdfWriter {
 	 *
 	 * @param string &$base
 	 * @param string|null &$local
+	 *
+	 * @throws LogicException
 	 */
 	protected function expandQName( &$base, &$local ) {
 		if ( $local !== null && $base !== '_' ) {
@@ -296,7 +303,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 */
 	private function flattenBuffer() {
 		foreach ( $this->buffer as &$b ) {
-			if ( $b instanceof \Closure ) {
+			if ( $b instanceof Closure ) {
 				$b = $b();
 			}
 			if ( $b instanceof RdfWriter ) {
@@ -464,6 +471,8 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * parser.
 	 *
 	 * @param $newState
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	final protected function state( $newState ) {
 		switch ( $newState ) {
@@ -488,7 +497,7 @@ abstract class RdfWriterBase implements RdfWriter {
 				break;
 
 			default:
-				throw new \InvalidArgumentException( 'invalid $newState: ' . $newState );
+				throw new InvalidArgumentException( 'invalid $newState: ' . $newState );
 		}
 
 		$this->state = $newState;
@@ -510,7 +519,7 @@ abstract class RdfWriterBase implements RdfWriter {
 				break;
 
 			default:
-				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_DOCUMENT  );
+				throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . self::STATE_DOCUMENT );
 		}
 	}
 
