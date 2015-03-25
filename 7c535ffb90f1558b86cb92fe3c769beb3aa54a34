@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_baa69bbc",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:56:38Z",
+      "side": 1,
+      "message": "Why is this check needed? If prefixes are written or not should depend on the format (writePrefixes can be an empty implementation), shouldn\u0027t it?",
+      "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5a97474b",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:56:38Z",
+      "side": 1,
+      "message": "I find this suspicios in a method called \"dump header\". Are you sure this belongs here?",
+      "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7ab563e8",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:56:38Z",
+      "side": 1,
+      "message": "You could make $this-\u003eprefixes protected. This avoids calling a trivial getter, possibly increasing performance.",
+      "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9ae39f02",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T14:56:38Z",
+      "side": 1,
+      "message": "Please don\u0027t hide code in strings.",
+      "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
