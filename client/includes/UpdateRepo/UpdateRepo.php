@@ -91,6 +91,13 @@ abstract class UpdateRepo {
 					$this->title->getFullText()
 				)
 			);
+
+			if ( $this->entityId === null ) {
+				wfDebugLog(
+					'UpdateRepo',
+					"Couldn't find an item for {$this->title->getFullText()}"
+				);
+			}
 		}
 
 		return $this->entityId;
@@ -106,18 +113,33 @@ abstract class UpdateRepo {
 		if ( !class_exists( 'CentralAuthUser' ) ) {
 			// We can't do anything without CentralAuth as there's no way to verify that
 			// the local user equals the repo one with the same name
+			wfDebugLog(
+				'UpdateRepo',
+				"Can't validate user " . $this->user->getName() . ": class CentralAuthUser doesn't exist"
+			);
+
 			return false;
 		}
 
 		$caUser = CentralAuthUser::getInstance( $this->user );
 		if ( !$caUser || !$caUser->exists() ) {
 			// The current user doesn't have a central account
+			wfDebugLog(
+				'UpdateRepo',
+				"Can't validate user " . $this->user->getName() . ": User doesn't have a global account"
+			);
+
 			return false;
 		}
 
 		if ( !$caUser->isAttached() || !$caUser->attachedOn( $this->repoDB ) ) {
 			// Either the user account on this wiki or the one on the repo do not exist
 			// or they aren't connected
+			wfDebugLog(
+				'UpdateRepo',
+				"Can't validate user " . $this->user->getName() . ": User is not attached locally or on {$this->repoDB}"
+			);
+
 			return false;
 		}
 
