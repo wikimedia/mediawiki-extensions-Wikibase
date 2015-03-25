@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dd011109",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsview.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T16:11:32Z",
+      "side": 1,
+      "message": "I suggest to use a \u003e selector, see PS6.",
+      "revId": "7a91dfc44282af4a79cf1c50e75eadfd44dadd0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3d104552",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsview.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T16:11:32Z",
+      "side": 1,
+      "message": "Please remove this too, the selector doesn\u0027t exist any more in our HTML.",
+      "revId": "7a91dfc44282af4a79cf1c50e75eadfd44dadd0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5d0d0138",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsview.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T16:11:32Z",
+      "side": 1,
+      "message": "This is not needed with a \u003e selector above.",
+      "revId": "7a91dfc44282af4a79cf1c50e75eadfd44dadd0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fd15ed41",
+        "filename": "lib/resources/jquery.wikibase/themes/default/jquery.wikibase.entitytermsview.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T16:11:32Z",
+      "side": 1,
+      "message": "These !important tags should not be here. Usually it\u0027s better to use a more specific selector.",
+      "revId": "7a91dfc44282af4a79cf1c50e75eadfd44dadd0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
