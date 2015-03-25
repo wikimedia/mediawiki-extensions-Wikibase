@@ -2,7 +2,8 @@
 
 ## Version 3.0.0 (dev)
 
-* `ReferenceList::addNewReference` and `Statement::addNewReference` support an array of Snaks now
+#### Breaking changes
+
 * The concept of `Claim` is no longer modelled
 	* The `Claim` class itself has been removed, though `Claim` is now a temporary alias for `Statement`
 	* `Claim::RANK_TRUTH` have been removed
@@ -19,7 +20,12 @@
 * Removed `Claims::equals` (and `Claims` no longer implements `Comparable`)
 * Removed `Claims::getHash` (and `Claims` no longer implements `Hashable`)
 * Removed `Claims::isEmpty` (you can use `StatementList::isEmpty` instead)
-* Removed `Claims::indexOf` and added `StatementList::getIndexByGuid`
+* Removed `Claims::indexOf` (you can use `StatementList::getIndexByGuid` instead)
+
+#### Additions
+
+* Added `StatementList::getIndexByGuid`
+* `ReferenceList::addNewReference` and `Statement::addNewReference` support an array of Snaks now
 
 ## Version 2.6.0 (2015-03-08)
 
