@@ -24,7 +24,7 @@ class EntityIdLinkFormatter extends EntityIdTitleFormatter {
 	public function formatEntityId( EntityId $entityId ) {
 		$title = parent::formatEntityId( $entityId );
 
-		return "[[$title|" . wfEscapeWikiText( $entityId->getSerialization() ) . "]]";
+		return "[[$title]]";
 	}
 
 }
