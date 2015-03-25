@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_5d28a1dc",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-25T17:40:26Z",
+      "side": 1,
+      "message": "No. It depends on the context - are you writing single entity (needs prefixes) or many entities, aka dump (prefixes already written for you).",
+      "parentUuid": "6e7c4fa4_baa69bbc",
+      "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_5a97474b",
         "filename": "repo/includes/rdf/RdfSerializer.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-25T14:56:38Z",
       "side": 1,
       "message": "I find this suspicios in a method called \"dump header\". Are you sure this belongs here?",
+      "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3d2b65dc",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-25T17:40:26Z",
+      "side": 1,
+      "message": "yes. That\u0027s what you do at the beginning of the dump - write headers.",
+      "parentUuid": "6e7c4fa4_5a97474b",
       "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_1d1ea9be",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-25T17:40:26Z",
+      "side": 1,
+      "message": "Possibly. Not likely to affect it much, but every little bit helps.",
+      "parentUuid": "6e7c4fa4_7ab563e8",
+      "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_9ae39f02",
         "filename": "repo/includes/rdf/TurtleRdfWriter.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2015-03-25T14:56:38Z",
       "side": 1,
       "message": "Please don\u0027t hide code in strings.",
+      "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fd208df4",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-25T17:40:26Z",
+      "side": 1,
+      "message": "It\u0027s not hidden, it\u0027s right there in plain view.",
+      "parentUuid": "6e7c4fa4_9ae39f02",
       "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
