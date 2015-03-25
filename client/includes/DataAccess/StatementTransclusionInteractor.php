@@ -4,11 +4,7 @@ namespace Wikibase\DataAccess;
 
 use Language;
 use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataAccess\PropertyIdResolver;
-use Wikibase\DataAccess\SnaksFinder;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
@@ -81,7 +77,12 @@ class StatementTransclusionInteractor {
 	 * @throws PropertyLabelNotResolvedException
 	 * @return string
 	 */
-	public function render( EntityId $entityId, UsageAccumulator $usageAccumulator, $propertyLabelOrId, $acceptableRanks = null ) {
+	public function render(
+		EntityId $entityId,
+		UsageAccumulator $usageAccumulator,
+		$propertyLabelOrId,
+		$acceptableRanks = null
+	) {
 		$entity = $this->entityLookup->getEntity( $entityId );
 
 		if ( !$entity instanceof StatementListProvider ) {
@@ -98,7 +99,8 @@ class StatementTransclusionInteractor {
 			$propertyId,
 			$acceptableRanks
 		);
-		$this->trackUsage( $snaks, $usageAccumulator );
+
+		$usageAccumulator->addLabelUsageForSnaks( $snaks );
 
 		return $this->formatSnaks( $snaks );
 	}
@@ -116,28 +118,6 @@ class StatementTransclusionInteractor {
 		}
 
 		return $this->language->commaList( $formattedValues );
-	}
-
-	/**
-	 * @param Snak[] $snaks
-	 * @param UsageAccumulator $usageAccumulator
-	 */
-	private function trackUsage( array $snaks, UsageAccumulator $usageAccumulator ) {
-		// Note: we track any EntityIdValue as a label usage.
-		// This is making assumptions about what the respective formatter actually does.
-		// Ideally, the formatter itself would perform the tracking, but that seems nasty to model.
-
-		foreach ( $snaks as $snak ) {
-			if ( !( $snak instanceof PropertyValueSnak) ) {
-				continue;
-			}
-
-			$value = $snak->getDataValue();
-
-			if ( $value instanceof EntityIdValue ) {
-				$usageAccumulator->addLabelUsage( $value->getEntityId() );
-			}
-		}
 	}
 
 }

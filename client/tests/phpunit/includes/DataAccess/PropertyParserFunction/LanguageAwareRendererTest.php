@@ -5,12 +5,12 @@ namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 use DataValues\StringValue;
 use Language;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\DataAccess\SnaksFinder;
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -34,41 +34,19 @@ use Wikibase\Lib\SnakFormatter;
 class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @param array $usages
-	 *
-	 * @return UsageAccumulator
-	 */
-	private function getUsageAccumulator( array &$usages ) {
-		$mock = $this->getMockBuilder( 'Wikibase\Client\Usage\UsageAccumulator' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$mock->expects( $this->any() )
-			->method( 'addLabelUsage' )
-			->will( $this->returnCallback(
-				function ( EntityId $id ) use ( &$usages ) {
-					$usages[] = new EntityUsage( $id, EntityUsage::LABEL_USAGE );
-				}
-			) );
-
-		$mock->expects( $this->never() )
-			->method( 'addAllUsage' );
-
-		$mock->expects( $this->never() )
-			->method( 'addSiteLinksUsage' );
-
-		return $mock;
-	}
-
-	/**
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param string $languageCode
-	 * @param array &$usages
+	 * @param UsageAccumulator|null $usageAccumulator
 	 *
 	 * @return LanguageAwareRenderer
 	 */
-	private function getRenderer( PropertyIdResolver $propertyIdResolver, SnaksFinder $snaksFinder, $languageCode, array &$usages = array() ) {
+	private function getRenderer(
+		PropertyIdResolver $propertyIdResolver,
+		SnaksFinder $snaksFinder,
+		$languageCode,
+		UsageAccumulator $usageAccumulator = null
+	) {
 		$targetLanguage = Language::factory( $languageCode );
 
 		$entityStatementsRenderer = new StatementTransclusionInteractor(
@@ -82,7 +60,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		return new LanguageAwareRenderer(
 			$targetLanguage,
 			$entityStatementsRenderer,
-			$this->getUsageAccumulator( $usages )
+			$usageAccumulator ?: new HashUsageAccumulator()
 		);
 	}
 
@@ -93,8 +71,11 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			'Q42$2' => new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
 		);
 
-		$usages = array();
-		$renderer = $this->getRenderer( $this->getPropertyIdResolver(), $this->getSnaksFinder( $snaks ), 'en', $usages );
+		$renderer = $this->getRenderer(
+			$this->getPropertyIdResolver(),
+			$this->getSnaksFinder( $snaks ),
+			'en'
+		);
 
 		$q42 = new ItemId( 'Q42' );
 		$result = $renderer->render( $q42, 'p1337' );
@@ -112,8 +93,13 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			'Q42$23' => new PropertyValueSnak( $propertyId, new EntityIdValue( $q23 ) )
 		);
 
-		$usages = array();
-		$renderer = $this->getRenderer( $this->getPropertyIdResolver(), $this->getSnaksFinder( $snaks ), 'en', $usages );
+		$accumulator = new HashUsageAccumulator();
+		$renderer = $this->getRenderer(
+			$this->getPropertyIdResolver(),
+			$this->getSnaksFinder( $snaks ),
+			'en',
+			$accumulator
+		);
 
 		$q42 = new ItemId( 'Q42' );
 		$renderer->render( $q42, 'p1337' );
@@ -123,7 +109,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			new EntityUsage( $q23, EntityUsage::LABEL_USAGE ),
 		);
 
-		$this->assertSameUsages( $expectedUsage, $usages );
+		$this->assertSameUsages( $expectedUsage, $accumulator->getUsages() );
 	}
 
 	/**
@@ -188,7 +174,8 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		$renderer = $this->getRenderer(
 			$this->getPropertyIdResolverForPropertyNotFound(),
 			$this->getSnaksFinder( array() ),
-			'qqx' );
+			'qqx'
+		);
 		$result = $renderer->render( new ItemId( 'Q4' ), 'invalidLabel' );
 
 		$this->assertRegExp(
