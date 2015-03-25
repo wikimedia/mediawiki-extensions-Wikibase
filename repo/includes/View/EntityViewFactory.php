@@ -10,13 +10,13 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\EntityIdFormatterFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Template\TemplateFactory;
+use Wikibase\View\EntityIdFormatterFactory;
 
 /**
  * @since 0.5

@@ -1,9 +1,13 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Repo;
 
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
+use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\View\EntityIdFormatterFactory;
 
 /**
  * A factory for generating EntityIdHtmlLinkFormatters.

@@ -1,6 +1,7 @@
 <?php
-namespace Wikibase\Lib;
+namespace Wikibase\View;
 
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Store\LabelLookup;
 
 /**
