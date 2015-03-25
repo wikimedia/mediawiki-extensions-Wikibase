@@ -29,6 +29,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	const STATE_PREDICATE = 11;
 	const STATE_OBJECT = 12;
 	const STATE_DRAIN = 100;
+	const STATE_FINISH = 666;
 
 	/**
 	 * @var string the current state
@@ -87,6 +88,12 @@ abstract class RdfWriterBase implements RdfWriter {
 	protected $role;
 
 	/**
+	 * Are prefixed locked against modification?
+	 * @var bool
+	 */
+	private $prefixesLocked = false;
+
+	/**
 	 * @param string $role The writer's role, use the XXX_ROLE constants.
 	 * @param BNodeLabeler $labeler
 	 *
@@ -103,8 +110,8 @@ abstract class RdfWriterBase implements RdfWriter {
 
 		$this->registerShorthand( 'a', 'rdf', 'type' );
 
-		$this->registerPrefix( 'rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' );
-		$this->registerPrefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
+		$this->prefix( 'rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' );
+		$this->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
 	}
 
 	/**
@@ -133,7 +140,10 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @param string $prefix
 	 * @param string $iri The base IRI
 	 */
-	protected function registerPrefix( $prefix, $iri ) {
+	public function prefix( $prefix, $iri ) {
+		if( $this->prefixesLocked ) {
+			throw new \LogicException("Prefixes can not be added after start()");
+		}
 		$this->prefixes[$prefix] = $iri;
 	}
 
@@ -174,8 +184,6 @@ abstract class RdfWriterBase implements RdfWriter {
 	final public function sub() {
 		//FIXME: don't mess with the state, enqueue the writer to be placed in the buffer
 		// later, on the next transtion to subject|document|drain
-		$this->state( self::STATE_DOCUMENT );
-
 		$writer = $this->newSubWriter( self::SUBDOCUMENT_ROLE, $this->labeler );
 		$writer->state = self::STATE_DOCUMENT;
 
@@ -259,6 +267,17 @@ abstract class RdfWriterBase implements RdfWriter {
 	 */
 	final public function start() {
 		$this->state( self::STATE_DOCUMENT );
+		$this->prefixesLocked = true;
+	}
+
+	/**
+	 * @see RdfWriter::start()
+	 */
+	final public function finish() {
+		// close all unclosed states
+		$this->state( self::STATE_DRAIN );
+		// and then finalize
+		$this->state( self::STATE_FINISH );
 	}
 
 	/**
@@ -267,8 +286,10 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @return string RDF
 	 */
 	final public function drain() {
-		$this->state( self::STATE_DRAIN );
-
+		// we can drain after finish, but finish state is sticky
+		if( $this->state != self::STATE_FINISH ) {
+			$this->state( self::STATE_DRAIN );
+		}
 		$this->flattenBuffer();
 
 		$rdf = join( '', $this->buffer );
@@ -284,14 +305,14 @@ abstract class RdfWriterBase implements RdfWriter {
 	 */
 	public function reset() {
 		$this->buffer = array();
-		$this->state = self::STATE_START; //TODO: may depend on role
+		$this->state = self::STATE_DOCUMENT; //TODO: may depend on role
 
 		$this->currentSubject = array( null, null );
 		$this->currentPredicate = array( null, null );
 
-		$this->prefixes = array();
-		$this->registerPrefix( 'rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' );
-		$this->registerPrefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
+// 		$this->prefixes = array();
+// 		$this->prefix( 'rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' );
+// 		$this->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
 	}
 
 	/**
@@ -308,19 +329,6 @@ abstract class RdfWriterBase implements RdfWriter {
 				$b = $b->drain();
 			}
 		}
-	}
-
-	/**
-	 * @see RdfWriter::prefix()
-	 *
-	 * @param string $prefix
-	 * @param string $uri
-	 */
-	final public function prefix( $prefix, $uri ) {
-		$this->state( self::STATE_DOCUMENT );
-
-		$this->registerPrefix( $prefix, $uri );
-		$this->writePrefix( $prefix, $uri );
 	}
 
 	/**
@@ -462,6 +470,11 @@ abstract class RdfWriterBase implements RdfWriter {
 		return $this;
 	}
 
+	/**
+	 * State transition table
+	 * First state is "from", second is "to"
+	 * @var array
+	 */
 	protected $transitionTable = array(
 			self::STATE_START => array(
 					self::STATE_DOCUMENT => true,
@@ -484,6 +497,10 @@ abstract class RdfWriterBase implements RdfWriter {
 					self::STATE_PREDICATE => true,
 					self::STATE_OBJECT => true,
 					self::STATE_DRAIN => true,
+			),
+			self::STATE_DRAIN => array(
+					self::STATE_DRAIN => true,
+					self::STATE_FINISH => true,
 			),
 	);
 
@@ -512,16 +529,6 @@ abstract class RdfWriterBase implements RdfWriter {
 
 		$this->state = $newState;
 	}
-
-	/**
-	 * Must be implemented to generate output for a prefix declaration.
-	 * If the output format does not support or require such declarations (like NTriples doesn't),
-	 * the implementation can be empty.
-	 *
-	 * @param $prefix
-	 * @param $uri
-	 */
-	protected abstract function writePrefix( $prefix, $uri );
 
 	/**
 	 * Must be implemented to generate output that starts a statement (or set of statements)

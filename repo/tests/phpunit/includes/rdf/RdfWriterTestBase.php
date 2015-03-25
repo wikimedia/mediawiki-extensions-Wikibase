@@ -60,14 +60,11 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	public function testTriples() {
 		$writer = $this->newWriter();
 
-		$writer->start();
 		$writer->prefix( 'acme', 'http://acme.test/' );
+		$writer->start();
 
 		$writer->about( 'http://foobar.test/Bananas' )
 			->say( 'a' )->is( 'http://foobar.test/Fruit' ); // shorthand name "a"
-
-		// interspersed prefix definition
-		$writer->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
 
 		$writer->about( 'acme', 'Nuts' )
 			->say( 'acme', 'weight' )->value( '5.5', 'xsd', 'decimal' );
@@ -75,6 +72,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 		// redundant about( 'acme', 'Nuts' )
 		$writer->about( 'acme', 'Nuts' )
 			->say( 'acme', 'color' )->value( 'brown' );
+		$writer->finish();
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'Triples', $rdf );
@@ -83,9 +81,8 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	public function testPredicates() {
 		$writer = $this->newWriter();
 
-		$writer->start();
 		$writer->prefix( '', 'http://acme.test/' ); // empty prefix
-		$writer->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
+		$writer->start();
 
 		$writer->about( 'http://foobar.test/Bananas' )
 			->a( 'http://foobar.test/Fruit' ) // shorthand function a()
@@ -97,6 +94,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 		$writer->about( 'http://foobar.test/Apples' )
 			->say( '', 'name' ) // subsequent call to say( '', 'name' ) for a different subject
 				->text( 'Apple' );
+		$writer->finish();
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'Predicates', $rdf );
@@ -105,8 +103,8 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	public function testValues() {
 		$writer = $this->newWriter();
 
-		$writer->start();
 		$writer->prefix( 'acme', 'http://acme.test/' );
+		$writer->start();
 
 		$writer->about( 'http://foobar.test/Bananas' )
 			->say( 'acme', 'multi' )
@@ -132,6 +130,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 				->value( false, 'xsd', 'string' )
 			->say( 'acme', 'shorthand' )->value( 'foo' )
 			->say( 'acme', 'typed-shorthand' )->value( 'foo', 'acme', 'thing' );
+		$writer->finish();
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'Values', $rdf );
@@ -140,13 +139,14 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	public function testResources() {
 		$writer = $this->newWriter();
 
-		$writer->start();
 		$writer->prefix( 'acme', 'http://acme.test/' );
+		$writer->start();
 
 		$writer->about( 'acme', 'Bongos' )
 			->say( 'acme', 'sounds' )
 				->is( 'acme', 'Bing' )
 				->is( 'http://foobar.test/sound/Bang' );
+		$writer->finish();
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'Resources', $rdf );
@@ -156,13 +156,14 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	public function testTexts() {
 		$writer = $this->newWriter();
 
-		$writer->start();
 		$writer->prefix( 'acme', 'http://acme.test/' );
+		$writer->start();
 
 		$writer->about( 'acme', 'Bongos' )
 			->say( 'acme', 'sounds' )
 				->text( 'Bom', 'de' )
 				->text( 'Bam', 'en' );
+		$writer->finish();
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'Texts', $rdf );
@@ -171,15 +172,15 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	public function testNumbers() {
 		$writer = $this->newWriter();
 
-		$writer->start();
 		$writer->prefix( 'acme', 'http://acme.test/' );
-		$writer->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
+		$writer->start();
 
 		$writer->about( 'acme', 'Bongos' )
 			->say( 'acme', 'stock' )->value( 5, 'xsd', 'integer' )
 				->value( 7 )
 		->about( 'acme', 'Tablas' )
 			->say( 'acme', 'stock' )->value( 6 );
+		$writer->finish();
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'Numbers', $rdf );
@@ -190,15 +191,15 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$writer = $this->newWriter();
 
-		$writer->start();
-		$writer->prefix( 'rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' );
 		$writer->prefix( 'contact', 'http://www.w3.org/2000/10/swap/pim/contact#' );
+		$writer->start();
 
 		$writer->about( 'http://www.w3.org/People/EM/contact#me' )
 			->say( 'rdf', 'type' )->is( 'contact', 'Person' )
 			->say( 'contact', 'fullName' )->text( 'Eric Miller' )
 			->say( 'contact', 'mailbox' )->is( 'mailto:em@w3.org' )
 			->say( 'contact', 'personalTitle' )->text( 'Dr.' );
+		$writer->finish();
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'EricMiller', $rdf );
@@ -209,9 +210,9 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$writer = $this->newWriter();
 
-		$writer->start();
 		$writer->prefix( 'exterms', 'http://www.example.org/terms/' );
 		$writer->prefix( 'exstaff', 'http://www.example.org/staffid/' );
+		$writer->start();
 
 		$writer->about( 'exstaff', '85740' )
 			->say( 'exterms', 'address' )->is( '_', $label = $writer->blank( 'johnaddress' ) )
@@ -220,6 +221,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 			->say( 'exterms', 'city' )->text( "Bedfort" )
 			->say( 'exterms', 'state' )->text( "Massachusetts" )
 			->say( 'exterms', 'postalCode' )->text( "01730" );
+		$writer->finish();
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'LabeledBlankNode', $rdf );
@@ -230,10 +232,10 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$writer = $this->newWriter();
 
-		$writer->start();
 		$writer->prefix( 'exterms', 'http://www.example.org/terms/' );
 		$writer->prefix( 'exstaff', 'http://www.example.org/staffid/' );
 		$writer->prefix( 'ex', 'http://example.org/packages/vocab#' );
+		$writer->start();
 
 		$writer->about( 'exstaff', 'Sue' )
 			->say( 'exterms', 'publication' )->is( '_', $label1 = $writer->blank() );
@@ -244,6 +246,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 			->say( 'exterms', 'publication' )->is( '_', $label2 = $writer->blank() );
 		$writer->about( '_', $label2 )
 			->say( 'exterms', 'title' )->text( 'Anthony of Time' );
+		$writer->finish();
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'NumberedBlankNode', $rdf );

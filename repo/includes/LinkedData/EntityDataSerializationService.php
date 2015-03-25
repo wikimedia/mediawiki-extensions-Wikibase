@@ -390,7 +390,9 @@ class EntityDataSerializationService {
 			$data = $this->apiSerialize( $entityRevision, $serializer );
 			$contentType = $serializer->getIsHtml() ? 'text/html' : $serializer->getMimeType();
 		} else {
-			$data = $serializer->serializeEntityRevision( $entityRevision );
+			$data = $serializer->startDocument() .
+				$serializer->serializeEntityRevision( $entityRevision ) .
+				$serializer->finishDocument();
 			$contentType = $serializer->getDefaultMimeType();
 		}
 

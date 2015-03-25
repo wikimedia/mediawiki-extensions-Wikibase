@@ -28,10 +28,6 @@ class NTriplesRdfWriter extends N3RdfWriterBase {
 		);
 	}
 
-	protected function writePrefix( $prefix, $uri ) {
-		// noop
-	}
-
 	protected function expandSubject( &$base, &$local ) {
 		$this->expandQName( $base, $local );
 	}
