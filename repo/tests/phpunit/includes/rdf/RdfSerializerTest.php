@@ -148,7 +148,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			$mockRepo->putEntity( $entity );
 		}
 
-		return new RdfSerializer(
+		$serializer = new RdfSerializer(
 			$emitter,
 			RdfBuilderTest::URI_BASE,
 			RdfBuilderTest::URI_DATA,
@@ -156,6 +156,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			$mockRepo, $mockRepo,
 			RdfSerializer::PRODUCE_ALL
 		);
+		return $serializer;
 	}
 
 	public function provideGetFormat() {
@@ -203,6 +204,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	 */
 	public function testSerializeEntityRevision( EntityRevision $entityRevision, $format, $regexes ) {
 		$serializer = $this->newRdfSerializer( $format );
+		$serializer->startDocument();
 
 		$data = $serializer->serializeEntityRevision( $entityRevision );
 

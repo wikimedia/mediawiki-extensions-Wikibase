@@ -67,30 +67,21 @@ class RdfDumpGenerator extends DumpGenerator {
 	}
 
 	/**
-	 * Cleanup prefixes in the dump to avoid repetitions
-	 *
-	 * @param string $data
-	 *
-	 * @return string
-	 */
-	protected function cleanupPrefixes( $data ) {
-		$thisVar = $this; /* hack because php 5.3 closures don't support $this */
-		return preg_replace_callback( '/@prefix .+?\n/', function ( $matches ) use ($thisVar) {
-			if ( !empty( $thisVar->prefixes[$matches[0]] ) ) {
-				return '';
-			}
-			$thisVar->prefixes[$matches[0]] = true;
-			return $matches[0];
-		}, $data );
-	}
-
-	/**
 	 * Do something before dumping data
 	 */
 	protected function preDump() {
-		$header = $this->entitySerializer->dumpHeader( $this->timestamp );
+		$header = $this->entitySerializer->startDump( $this->timestamp );
 
-		$this->writeToDump( $this->cleanupPrefixes( $header ) );
+		$this->writeToDump( $header );
+	}
+
+	/**
+	 * Do something after dumping data
+	 */
+	protected function postDump() {
+		$footer = $this->entitySerializer->finishDocument();
+
+		$this->writeToDump( $footer );
 	}
 
 	/**
@@ -114,8 +105,7 @@ class RdfDumpGenerator extends DumpGenerator {
 			return null;
 		}
 
-		$data = $this->entitySerializer->serializeEntityRevision( $entityRevision );
-		return $this->cleanupPrefixes( $data );
+		return $this->entitySerializer->serializeEntityRevision( $entityRevision );
 	}
 
 	/**
