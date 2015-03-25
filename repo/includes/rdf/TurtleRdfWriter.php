@@ -14,8 +14,12 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 		parent::__construct( $role, $labeler, $quoter );
 	}
 
-	protected function writePrefix( $prefix, $uri ) {
-		$this->write( "@prefix $prefix: <{$this->quoter->escapeIRI( $uri )}> .\n" );
+	public function writePrefixes( ) {
+		$this->state( 'document' );
+
+		foreach( $this->getPrefixes() as $prefix => $uri ) {
+			$this->write( "@prefix $prefix: <{$this->quoter->escapeIRI( $uri )}> .\n" );
+		}
 	}
 
 	protected function writeSubject( $base, $local = null ) {
