@@ -69,7 +69,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				'rdfxml',
 				'n3',
 				'turtle',
-				'n-triples',
+				'ntriples',
 			)
 		);
 
@@ -137,7 +137,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 		'rdfxml',
 		'n3',
 		'turtle',
-		'n-triples'
+		'ntriples'
 	);
 
 	private static $badMimeTypes = array(
@@ -164,8 +164,8 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 		'text/xml' => 'xml', // should be api xml, not rdfxml
 		'application/xml' => 'xml', // should be api xml, not rdfxml
 		'application/rdf+xml' => 'rdfxml', // should be rdfxml
-		'text/n-triples' => 'n-triples', // should be n-triples
-		'text/plain' => 'n-triples', // should be n-triples
+		'text/n-triples' => 'ntriples', // should be ntriples
+		'text/plain' => 'ntriples', // should be ntriples
 		'ttl' => 'turtle', // should be turtle
 	);
 

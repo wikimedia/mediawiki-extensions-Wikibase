@@ -25,7 +25,7 @@ class TurtleRdfWriterTest extends RdfWriterTestBase {
 	/**
 	 * @return RdfWriter
 	 */
-	protected function newWriter() {
-		return new TurtleRdfWriter();
+	protected function newWriter( $role = TurtleRdfWriter::DOCUMENT_ROLE ) {
+		return new TurtleRdfWriter( $role );
 	}
 }
