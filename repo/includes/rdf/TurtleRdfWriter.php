@@ -22,10 +22,19 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 		$this->transitionTable[self::STATE_DOCUMENT][self::STATE_SUBJECT] = "\n";
 		$this->transitionTable[self::STATE_SUBJECT][self::STATE_PREDICATE] = " ";
 		$this->transitionTable[self::STATE_PREDICATE][self::STATE_OBJECT] = " ";
+		$self = $this;
+		$this->transitionTable[self::STATE_START][self::STATE_DOCUMENT] = function() use($self) {
+			$self->beginDocument();
+		};
 	}
 
-	protected function writePrefix( $prefix, $uri ) {
-		$this->write( "@prefix $prefix: <" . $this->quoter->escapeIRI( $uri ) . "> .\n" );
+	/**
+	 * Write prefixes
+	 */
+	public function beginDocument( ) {
+		foreach( $this->getPrefixes() as $prefix => $uri ) {
+			$this->write( "@prefix $prefix: <" . $this->quoter->escapeIRI( $uri ) . "> .\n" );
+		}
 	}
 
 	protected function writeSubject( $base, $local = null ) {
