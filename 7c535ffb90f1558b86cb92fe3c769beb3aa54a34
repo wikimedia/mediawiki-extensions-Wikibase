@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_5dfc213b",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T17:51:03Z",
+      "side": 1,
+      "message": "Ok.",
+      "parentUuid": "6e7c4fa4_5d28a1dc",
+      "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_5a97474b",
         "filename": "repo/includes/rdf/RdfSerializer.php",
         "patchSetId": 3
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "It\u0027s not hidden, it\u0027s right there in plain view.",
       "parentUuid": "6e7c4fa4_9ae39f02",
+      "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3dffe532",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-25T17:51:03Z",
+      "side": 1,
+      "message": "Just don\u0027t call methods in strings. Gerrit\u0027s syntax highlighting for example does not highlight this, It looks like a string but isn\u0027t.",
+      "parentUuid": "6e7c4fa4_fd208df4",
       "revId": "7c535ffb90f1558b86cb92fe3c769beb3aa54a34",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
