@@ -92,11 +92,13 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		}
 
 		if ( $entityRevision !== null && !$entityRevision->getEntity()->getId()->equals( $entityId ) ) {
-			// This can happen when giving a revision ID that doesn't belong to the given entity
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': Loaded wrong entity: Expected ' . $entityId
-				. ', got ' . $entityRevision->getEntity()->getId() );
+			// This can happen when giving a revision ID that doesn't belong to the given entity,
+			// or some meta data is incorrect.
+			$actualEntityId = $entityRevision->getEntity()->getId()->getSerialization();
 
-			throw new BadRevisionException( "Revision $revisionId does not belong to entity $entityId" );
+			// Get the revision id we actually loaded, if none was passed explicitly
+			$revisionId = is_int( $revisionId ) ? $revisionId : $entityRevision->getRevisionId();
+			throw new BadRevisionException( "Revision $revisionId belongs to $actualEntityId instead of expected $entityId" );
 		}
 
 		if ( is_int( $revisionId ) && $entityRevision === null ) {
