@@ -28,14 +28,14 @@ abstract class N3RdfWriterBase extends RdfWriterBase {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getTrustIRIs() {
 		return $this->trustIRIs;
 	}
 
 	/**
-	 * @param boolean $trustIRIs
+	 * @param bool $trustIRIs
 	 */
 	public function setTrustIRIs( $trustIRIs ) {
 		$this->trustIRIs = $trustIRIs;
@@ -43,7 +43,7 @@ abstract class N3RdfWriterBase extends RdfWriterBase {
 
 	protected function writeRef( $base, $local = null ) {
 		if ( $local === null ) {
-			if( $this->isShorthand( $base) ) {
+			if ( $this->isShorthand( $base ) ) {
 				$this->writeShorthand( $base );
 			} else {
 				$this->writeIRI( $base );
@@ -99,7 +99,7 @@ abstract class N3RdfWriterBase extends RdfWriterBase {
 		}
 	}
 
-	protected function writeValue( $value, $typeBase = null, $typeLocal = null  ) {
+	protected function writeValue( $value, $typeBase = null, $typeLocal = null ) {
 		$value = $this->quoter->escapeLiteral( $value );
 		$this->write( '"', $value, '"' );
 

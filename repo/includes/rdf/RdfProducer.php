@@ -42,7 +42,6 @@ interface RdfProducer {
 	/**
 	 * Produce full expanded values as nodes.
 	 * Should be used together with PRODUCE_ALL_STATEMENTS.
-	 * @var unknown
 	 */
 	const PRODUCE_FULL_VALUES       = 64;
 

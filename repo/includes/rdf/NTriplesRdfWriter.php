@@ -69,7 +69,7 @@ class NTriplesRdfWriter extends N3RdfWriterBase {
 		parent::writeText( $text, $language );
 	}
 
-	protected function writeValue( $value, $typeBase = null, $typeLocal = null  ) {
+	protected function writeValue( $value, $typeBase = null, $typeLocal = null ) {
 		$this->writeSubjectAndObject();
 		$this->write( ' ' );
 

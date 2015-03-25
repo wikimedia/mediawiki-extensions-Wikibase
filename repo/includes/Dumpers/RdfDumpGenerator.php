@@ -2,20 +2,20 @@
 
 namespace Wikibase\Dumpers;
 
+use HashBagOStuff;
 use InvalidArgumentException;
 use MWContentSerializationException;
 use MWException;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Serializers\Serializer;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\RdfSerializer;
 use Wikibase\RdfProducer;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\RdfSerializer;
 
 /**
  * RdfDumpGenerator generates an RDF dump of a given set of entities, excluding
@@ -30,34 +30,29 @@ use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 class RdfDumpGenerator extends DumpGenerator {
 
 	/**
-	 *
 	 * @var RdfSerializer
 	 */
 	private $entitySerializer;
 
 	/**
-	 *
 	 * @var EntityRevisionLookup
 	 */
 	private $entityRevisionLookup;
 
 	/**
-	 * List of the prefixes we've seen in the dump
-	 * @var array
+	 * @var bool[] List of the prefixes we've seen in the dump.
 	 */
 	private $prefixes;
 
 	/**
-	 * Fixed timestamp for tests
-	 * @var int
+	 * @var int Fixed timestamp for tests.
 	 */
 	private $timestamp;
 
 	/**
-	 *
 	 * @param resource $out
-	 * @param EntityLookup $lookup Must not resolve redirects
-	 * @param Serializer $entitySerializer
+	 * @param EntityRevisionLookup $lookup Must not resolve redirects
+	 * @param RdfSerializer $entitySerializer
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -75,6 +70,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * Cleanup prefixes in the dump to avoid repetitions
 	 *
 	 * @param string $data
+	 *
 	 * @return string
 	 */
 	protected function cleanupPrefixes( $data ) {
@@ -99,10 +95,10 @@ class RdfDumpGenerator extends DumpGenerator {
 
 	/**
 	 * Produces RDF dump of the entity
+	 *
 	 * @param EntityId $entityId
 	 *
 	 * @throws StorageException
-	 *
 	 * @return string|null
 	 */
 	protected function generateDumpForEntityId( EntityId $entityId ) {
@@ -122,21 +118,24 @@ class RdfDumpGenerator extends DumpGenerator {
 		return $this->cleanupPrefixes( $data );
 	}
 
-	public function setTimestamp( $ts ) {
-		$this->timestamp = (int)$ts;
+	/**
+	 * @param int $timestamp
+	 */
+	public function setTimestamp( $timestamp ) {
+		$this->timestamp = (int)$timestamp;
 	}
 
 	/**
-	 * Create dump generator
 	 * @param string $format
-	 * @param string $output
+	 * @param resource $output
 	 * @param string $baseUri
 	 * @param string $dataUri
 	 * @param SiteList $sites
 	 * @param EntityLookup $entityLookup
 	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param PropertyInfoDataTypeLookup $propertyLookup
-	 * @throws \MWException
+	 * @param PropertyDataTypeLookup $propertyLookup
+	 *
+	 * @throws MWException
 	 * @return RdfDumpGenerator
 	 */
 	public static function createDumpGenerator(
@@ -150,8 +149,8 @@ class RdfDumpGenerator extends DumpGenerator {
 			PropertyDataTypeLookup $propertyLookup
 	) {
 		$rdfFormat = RdfSerializer::getFormat( $format );
-		if( !$rdfFormat ) {
-			throw new \MWException( "Unknown format: $format" );
+		if ( !$rdfFormat ) {
+			throw new MWException( "Unknown format: $format" );
 		}
 		$entitySerializer = new RdfSerializer( $rdfFormat,
 				$baseUri,
@@ -162,8 +161,9 @@ class RdfDumpGenerator extends DumpGenerator {
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
 				RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES |
 				RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES,
-				new \HashBagOStuff()
+				new HashBagOStuff()
 		);
 		return new RdfDumpGenerator( $output, $entityRevisionLookup, $entitySerializer );
 	}
+
 }

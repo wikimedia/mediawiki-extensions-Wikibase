@@ -2,12 +2,13 @@
 
 namespace Wikibase;
 
+use BagOStuff;
 use EasyRdf_Exception;
 use EasyRdf_Format;
 use EasyRdf_Graph;
 use SiteList;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * RDF serialization for wikibase data model.
@@ -69,7 +70,8 @@ class RdfSerializer implements RdfProducer {
 	 * @param SiteList $sites;
 	 * @param EntityLookup $entityLookup
 	 * @param PropertyDataTypeLookup $propertyLookup
-	 * @param integer flavor
+	 * @param int $flavor
+	 * @param BagOStuff|null $dedupBag
 	 */
 	public function __construct(
 		EasyRdf_Format $format,
@@ -79,7 +81,7 @@ class RdfSerializer implements RdfProducer {
 		PropertyDataTypeLookup $propertyLookup,
 		EntityLookup $entityLookup,
 		$flavor,
-		\BagOStuff $dedupBag = null
+		BagOStuff $dedupBag = null
 	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;

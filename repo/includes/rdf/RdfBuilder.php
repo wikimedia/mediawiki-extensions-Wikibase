@@ -2,31 +2,35 @@
 
 namespace Wikibase;
 
+use BagOStuff;
 use DataValues\DataValue;
+use DataValues\DecimalValue;
+use DataValues\GlobeCoordinateValue;
+use DataValues\MonolingualTextValue;
+use DataValues\QuantityValue;
+use DataValues\StringValue;
+use DataValues\TimeValue;
 use EasyRdf_Graph;
 use EasyRdf_Literal;
+use EasyRdf_Literal_DateTime;
 use EasyRdf_Namespace;
 use EasyRdf_Resource;
 use SiteList;
-use BagOStuff;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use DataValues\TimeValue;
-use DataValues\QuantityValue;
-use DataValues\StringValue;
-use DataValues\MonolingualTextValue;
-use DataValues\GlobeCoordinateValue;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
-use DataValues\DecimalValue;
 
 /**
  * RDF mapping for wikibase data model.
@@ -40,6 +44,7 @@ use DataValues\DecimalValue;
  * @author Stas Malyshev
  */
 class RdfBuilder {
+
 	// Change this when changing data format!
 	const FORMAT_VERSION = '0.0.1';
 
@@ -92,7 +97,6 @@ class RdfBuilder {
 	);
 
 	/**
-	 *
 	 * @var SiteList
 	 */
 	private $sites;
@@ -115,7 +119,6 @@ class RdfBuilder {
 	private $entitiesResolved = array ();
 
 	/**
-	 *
 	 * @var PropertyDataTypeLookup
 	 */
 	private $propertyLookup;
@@ -133,7 +136,6 @@ class RdfBuilder {
 	private $dedupBag;
 
 	/**
-	 *
 	 * @param SiteList $sites
 	 * @param string $baseUri
 	 * @param string $dataUri
@@ -249,11 +251,12 @@ class RdfBuilder {
 	/**
 	 * Should we produce this aspect?
 	 *
-	 * @param integer $what
-	 * @return boolean
+	 * @param int $what
+	 *
+	 * @return bool
 	 */
 	private function shouldProduce( $what ) {
-		return ( $this->produceWhat & $what ) != 0;
+		return ( $this->produceWhat & $what ) !== 0;
 	}
 
 	/**
@@ -339,19 +342,19 @@ class RdfBuilder {
 	 * Adds meta-information about an entity (such as the ID and type) to the RDF graph.
 	 *
 	 * @param Entity $entity
-	 * @param boolean $produceData Should we also produce Dataset node?
+	 * @param bool $produceData Should we also produce Dataset node?
 	 */
 	private function addEntityMetaData( Entity $entity, $produceData = true ) {
 		$entityResource = $this->getEntityResource( $entity->getId() );
 		$entityResource->addResource( 'rdf:type', $this->getEntityTypeQName( $entity->getType() ) );
 		$dataURL = $this->getDataURL( $entity->getId() );
 
-		if( $produceData ) {
+		if ( $produceData ) {
 			$dataResource = $this->graph->resource( $dataURL );
 			$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
 			$dataResource->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
 
-			if( $this->shouldProduce( RdfProducer::PRODUCE_VERSION_INFO ) ) {
+			if ( $this->shouldProduce( RdfProducer::PRODUCE_VERSION_INFO ) ) {
 				// Dumps don't need version/license info for each entity, since it is included in the dump header
 				$dataResource->addResource( self::NS_CC . ':license', self::LICENSE );
 				$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
@@ -426,6 +429,7 @@ class RdfBuilder {
 	private function addSiteLinks( Item $item ) {
 		$entityResource = $this->getEntityResource( $item->getId() );
 
+		/** @var SiteLink $siteLink */
 		foreach ( $item->getSiteLinkList() as $siteLink ) {
 			$site = $this->sites->getSite( $siteLink->getSiteId() );
 
@@ -465,7 +469,7 @@ class RdfBuilder {
 			$produceTruthy = $this->shouldProduce( RdfProducer::PRODUCE_TRUTHY_STATEMENTS ) ;
 			foreach ( $statementList->getBestStatementPerProperty() as $statement ) {
 				$bestList[$statement->getGuid()] = true;
-				if( $produceTruthy ) {
+				if ( $produceTruthy ) {
 					$this->addMainSnak( $entityId, $statement, true );
 				}
 			}
@@ -480,16 +484,18 @@ class RdfBuilder {
 
 	/**
 	 * Did we already see this value? If yes, we may need to skip it
+	 *
 	 * @param string $hash hash value to check
 	 * @param string $namespace
-	 * @return boolean
+	 *
+	 * @return bool
 	 */
 	private function alreadySeen( $hash, $namespace ) {
-		if( !$this->dedupBag ) {
+		if ( !$this->dedupBag ) {
 			return false;
 		}
 		$key = $namespace . substr($hash, 0, 5);
-		if( $this->dedupBag->get( $key ) !== $hash ) {
+		if ( $this->dedupBag->get( $key ) !== $hash ) {
 			$this->dedupBag->set( $key, $hash );
 			return false;
 		}
@@ -501,7 +507,7 @@ class RdfBuilder {
 	 *
 	 * @param EntityId $entityId
 	 * @param Statement $statement
-	 * @param boolean $isBest Is this best ranked statement?
+	 * @param bool $isBest Is this best ranked statement?
 	 */
 	private function addStatement( EntityId $entityId, Statement $statement, $isBest = false ) {
 		$this->addMainSnak( $entityId, $statement, false, $isBest );
@@ -516,15 +522,16 @@ class RdfBuilder {
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_REFERENCES ) ) {
 			$statementResource = $this->getStatementResource( $statement );
-			foreach ( $statement->getReferences() as $ref ) { //FIXME: split body into separate method
-				$hash = $ref->getHash();
+			/** @var Reference $reference  */
+			foreach ( $statement->getReferences() as $reference ) { //FIXME: split body into separate method
+				$hash = $reference->getHash();
 				$refQName = self::NS_REFERENCE . ':' . $hash;
 				$statementResource->addResource( self::PROV_QNAME, $refQName );
-				if( $this->alreadySeen( $hash, 'R' ) ) {
+				if ( $this->alreadySeen( $hash, 'R' ) ) {
 					continue;
 				}
 				$refResource = $this->graph->resource( $refQName, array ( self::WIKIBASE_REFERENCE_QNAME ) );
-				foreach ( $ref->getSnaks() as $refSnak ) {
+				foreach ( $reference->getSnaks() as $refSnak ) {
 					$this->addSnak( $refResource, $refSnak, self::NS_VALUE );
 				}
 			}
@@ -536,8 +543,8 @@ class RdfBuilder {
 	 *
 	 * @param EntityId $entityId
 	 * @param Statement $statement
-	 * @param boolean $truthy Is this producing "truthy" or full-form statement?
-	 * @param boolean $isBest Is this best ranked statement?
+	 * @param bool $truthy Is this producing "truthy" or full-form statement?
+	 * @param bool $isBest Is this best ranked statement?
 	 */
 	private function addMainSnak( EntityId $entityId, Statement $statement, $truthy, $isBest = false ) {
 		$snak = $statement->getMainSnak();
@@ -552,17 +559,17 @@ class RdfBuilder {
 			$entityResource->addResource( $propertyQName, $statementResource );
 			$this->addSnak( $statementResource, $snak, self::NS_VALUE );
 
-			if( $this->shouldProduce( RdfProducer::PRODUCE_PROPERTIES) ) {
+			if ( $this->shouldProduce( RdfProducer::PRODUCE_PROPERTIES) ) {
 				$this->entityMentioned( $snak->getPropertyId() );
 			}
 
 			$rank = $statement->getRank();
-			if( isset( self::$rankMap[$rank] ) ) {
+			if ( isset( self::$rankMap[$rank] ) ) {
 				$statementResource->addResource( self::WIKIBASE_RANK_QNAME, self::$rankMap[$rank] );
 			} else {
 				wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );
 			}
-			if( $isBest ) {
+			if ( $isBest ) {
 				$statementResource->addResource( self::WIKIBASE_RANK_QNAME, self::WIKIBASE_RANK_BEST );
 			}
 
@@ -594,14 +601,15 @@ class RdfBuilder {
 	private function addSnak( EasyRdf_Resource $target, Snak $snak, $propertyNamespace, $simpleValue = false ) {
 		$propertyId = $snak->getPropertyId();
 		switch ( $snak->getType() ) {
-			case 'value' :
+			case 'value':
+				/** @var PropertyValueSnak $snak */
 				$this->addStatementValue( $target, $propertyId, $snak->getDataValue(), $propertyNamespace, $simpleValue );
 				break;
-			case 'somevalue' :
+			case 'somevalue':
 				$propertyValueQName = $this->getEntityQName( $propertyNamespace, $propertyId );
 				$target->addResource( $propertyValueQName, self::WIKIBASE_SOMEVALUE_QNAME );
 				break;
-			case 'novalue' :
+			case 'novalue':
 				$propertyValueQName = $this->getEntityQName( $propertyNamespace, $propertyId );
 				$target->addResource( $propertyValueQName, self::WIKIBASE_NOVALUE_QNAME );
 				break;
@@ -610,23 +618,29 @@ class RdfBuilder {
 
 	/**
 	 * Created full data value
+	 *
 	 * @param EasyRdf_Resource $target Place to attach the value
 	 * @param string $propertyValueQName Relationship name
 	 * @param DataValue $value
 	 * @param array $props List of properties
 	 */
-	private function addExpandedValue( EasyRdf_Resource $target, $propertyValueQName, DataValue $value, array $props) {
+	private function addExpandedValue(
+		EasyRdf_Resource $target,
+		$propertyValueQName,
+		DataValue $value,
+		array $props
+	) {
 		$hash = $value->getHash();
-		$vname = self::NS_VALUE . ":" . $hash;
-		$target->addResource( $propertyValueQName."-value", $vname );
-		if( $this->alreadySeen( $hash, 'V' ) ) {
+		$vname = self::NS_VALUE . ':' . $hash;
+		$target->addResource( $propertyValueQName . '-value', $vname );
+		if ( $this->alreadySeen( $hash, 'V' ) ) {
 			return;
 		}
 		$node = $this->graph->resource( $vname, self::WIKIBASE_VALUE_QNAME );
-		foreach( $props as $prop => $type ) {
-			$getter = "get" . ucfirst( $prop );
+		foreach ( $props as $prop => $type ) {
+			$getter = 'get' . ucfirst( $prop );
 			$data = $value->$getter();
-			if( !is_null( $data ) ) {
+			if ( !is_null( $data ) ) {
 				$this->addValueToNode( $node, $this->getEntityTypeQName( $prop ), $type, $data );
 			}
 		}
@@ -636,17 +650,22 @@ class RdfBuilder {
 	 * Adds the value of the given property to the RDF graph.
 	 *
 	 * @param EasyRdf_Resource $target
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 * @param DataValue $value
 	 * @param string $propertyNamespace The property namespace for this snak
 	 * @param bool $simpleValue
 	 */
-	private function addStatementValue( EasyRdf_Resource $target, EntityId $propertyId,
-			DataValue $value, $propertyNamespace, $simpleValue = false ) {
+	private function addStatementValue(
+		EasyRdf_Resource $target,
+		PropertyId $propertyId,
+		DataValue $value,
+		$propertyNamespace,
+		$simpleValue = false
+	) {
 		$propertyValueQName = $this->getEntityQName( $propertyNamespace, $propertyId );
 
 		$typeId = $value->getType();
-		if( $typeId == 'string' ) {
+		if ( $typeId === 'string' ) {
 			// Only strings have different types now, so we can save time but not asking
 			// for any other types
 			$dataType = $this->propertyLookup->getDataTypeIdForProperty( $propertyId );
@@ -655,9 +674,9 @@ class RdfBuilder {
 		}
 
 		//FIXME: use a proper registry / dispatching builder
-		$typeFunc = "addStatementFor".preg_replace( '/[^\w]/', '', ucwords( $typeId ) );
+		$typeFunc = 'addStatementFor' . preg_replace( '/[^\w]/', '', ucwords( $typeId ) );
 
-		if( !is_callable( array( $this, $typeFunc ) ) ) {
+		if ( !is_callable( array( $this, $typeFunc ) ) ) {
 			wfLogWarning( __METHOD__ . ": Unsupported data type: $typeId" );
 		} else {
 			$this->$typeFunc( $target, $propertyValueQName, $dataType, $value, $simpleValue );
@@ -667,39 +686,45 @@ class RdfBuilder {
 	}
 
 	/**
-	 * Adds specific value
-	 *
 	 * @param EasyRdf_Resource $target
 	 * @param string $propertyValueQName Property name
 	 * @param string $dataType Property data type
 	 * @param EntityIdValue $value
 	 * @param bool $simpleValue
 	 */
-	private function addStatementForWikibaseEntityid( EasyRdf_Resource $target, $propertyValueQName, $dataType,
-			EntityIdValue $value, $simpleValue = false ) {
+	private function addStatementForWikibaseEntityid(
+		EasyRdf_Resource $target,
+		$propertyValueQName,
+		$dataType,
+		EntityIdValue $value,
+		$simpleValue = false
+	) {
 		$entityId = $value->getValue()->getEntityId();
 		$entityQName = $this->getEntityQName( self::NS_ENTITY, $entityId );
 		$entityResource = $this->graph->resource( $entityQName );
 		$target->addResource( $propertyValueQName, $entityResource );
-		if( $this->shouldProduce( RdfProducer::PRODUCE_RESOLVED_ENTITIES ) ) {
+		if ( $this->shouldProduce( RdfProducer::PRODUCE_RESOLVED_ENTITIES ) ) {
 			$this->entityMentioned( $entityId );
 		}
 	}
 
 	/**
-	 * Adds specific value
-	 *
 	 * @param EasyRdf_Resource $target
 	 * @param string $propertyValueQName Property name
 	 * @param string $dataType Property data type
 	 * @param StringValue $value
 	 * @param bool $simpleValue
 	 */
-	private function addStatementForString( EasyRdf_Resource $target, $propertyValueQName, $dataType,
-			StringValue $value, $simpleValue = false ) {
-		if ( $dataType == 'commonsMedia' ) {
+	private function addStatementForString(
+		EasyRdf_Resource $target,
+		$propertyValueQName,
+		$dataType,
+		StringValue $value,
+		$simpleValue = false
+	) {
+		if ( $dataType === 'commonsMedia' ) {
 			$this->addValueToNode( $target, $propertyValueQName, 'url', $this->getCommonsURI( $value->getValue() ) );
-		} elseif ( $dataType == 'url' ) {
+		} elseif ( $dataType === 'url' ) {
 			$this->addValueToNode( $target, $propertyValueQName, 'url', $value->getValue() );
 		} else {
 			$target->addLiteral( $propertyValueQName, new EasyRdf_Literal( $value->getValue() ) );
@@ -716,19 +741,19 @@ class RdfBuilder {
 	 * @param string $value
 	 */
 	private function addValueToNode( EasyRdf_Resource $target, $propertyName, $type, $value ) {
-		if( $type == 'url' ) {
+		if ( $type === 'url' ) {
 			$target->addResource( $propertyName, $value );
-		} elseif( $type == 'xsd:dateTime' ) {
+		} elseif ( $type === 'xsd:dateTime' ) {
 			$target->addLiteral( $propertyName,
 					new \EasyRdf_Literal_DateTime( $this->cleanupDateValue( $value ) ) );
-		} elseif( $type == 'xsd:decimal' ) {
+		} elseif ( $type === 'xsd:decimal' ) {
 			// TODO: handle precision here?
-			if( $value instanceof DecimalValue ) {
+			if ( $value instanceof DecimalValue ) {
 				$value = $value->getValue();
 			}
 			$target->addLiteral( $propertyName, new \EasyRdf_Literal_Decimal( $value ) );
 		} else {
-			if( !is_scalar( $value ) ) {
+			if ( !is_scalar( $value ) ) {
 				// somehow we got a weird value, better not risk it and bail
 				$vtype = gettype( $value );
 				wfLogWarning( "Bad value passed to addValueToNode for {$target->getUri()}:$propertyName: $vtype" );
@@ -738,18 +763,20 @@ class RdfBuilder {
 		}
 	}
 
-
 	/**
-	 * Adds specific value
-	 *
 	 * @param EasyRdf_Resource $target
 	 * @param string $propertyValueQName Property name
 	 * @param string $dataType Property data type
 	 * @param MonolingualTextValue $value
 	 * @param bool $simpleValue
 	 */
-	private function addStatementForMonolingualtext( EasyRdf_Resource $target, $propertyValueQName, $dataType,
-			MonolingualTextValue $value, $simpleValue = false ) {
+	private function addStatementForMonolingualtext(
+		EasyRdf_Resource $target,
+		$propertyValueQName,
+		$dataType,
+		MonolingualTextValue $value,
+		$simpleValue = false
+	) {
 		$target->addLiteral( $propertyValueQName, $value->getText(), $value->getLanguageCode() );
 	}
 
@@ -757,16 +784,18 @@ class RdfBuilder {
 	 * Clean up Wikidata date value in Gregorian calendar
 	 * - remove + from the start - not all data stores like that
 	 * - validate month and date value
+	 *
 	 * @param string $dateValue
+	 *
 	 * @return string Value compatible with xsd:dateTime type
 	 */
 	private function cleanupDateValue( $dateValue ) {
-		list($date, $time) = explode( "T", $dateValue, 2 );
-		if( $date[0] == "-" ) {
-			list($y, $m, $d) = explode( "-", substr( $date, 1 ), 3 );
+		list( $date, $time ) = explode( 'T', $dateValue, 2 );
+		if ( $date[0] === '-' ) {
+			list( $y, $m, $d ) = explode( '-', substr( $date, 1 ), 3 );
 			$y = -(int)$y;
 		} else {
-			list($y, $m, $d) = explode( "-", $date, 3 );
+			list( $y, $m, $d ) = explode( '-', $date, 3 );
 			$y = (int)$y;
 		}
 
@@ -775,25 +804,25 @@ class RdfBuilder {
 
 		// PHP source docs say PHP gregorian calendar can work down to 4714 BC
 		// for smaller dates, we ignore month/day
-		if( $y <= -4714 ) {
+		if ( $y <= -4714 ) {
 			$d = $m = 1;
 		}
 
-		if( $m <= 0 ) {
+		if ( $m <= 0 ) {
 			$m = 1;
 		}
-		if( $m >= 12 ) {
+		if ( $m >= 12 ) {
 			// Why anybody would do something like that? Anyway, better to check.
 			$m = 12;
 		}
-		if( $d <= 0 ) {
+		if ( $d <= 0 ) {
 			$d = 1;
 		}
 		// check if the date "looks safe". If not, we do deeper check
-		if( !( $d <= 28 || ( $m != 2 && $d <= 30 ) ) ) {
+		if ( !( $d <= 28 || ( $m != 2 && $d <= 30 ) ) ) {
 			$max = cal_days_in_month( CAL_GREGORIAN, $m, $y );
 			// We just put it as the last day in month, won't bother further
-			if( $d > $max ) {
+			if ( $d > $max ) {
 				$d = $max;
 			}
 		}
@@ -801,7 +830,7 @@ class RdfBuilder {
 		// and leading 0 is not allowed for 5 digits
 		// But sprintf counts - as digit
 		// See: http://www.w3.org/TR/xmlschema-2/#dateTime
-		return sprintf( "%s%04d-%02d-%02dT%s", ($y < 0)? "-":"", abs( $y ), $m, $d, $time );
+		return sprintf( "%s%04d-%02d-%02dT%s", $y < 0 ? '-' : '', abs( $y ), $m, $d, $time );
 	}
 
 	/**
@@ -813,16 +842,14 @@ class RdfBuilder {
 	 */
 	private function getDateLiteral( TimeValue $value ) {
 		$calendar = $value->getCalendarModel();
-		if( $calendar == self::GREGORIAN_CALENDAR ) {
-			return new \EasyRdf_Literal_DateTime( $this->cleanupDateValue( $value->getTime() ) );
+		if ( $calendar === self::GREGORIAN_CALENDAR ) {
+			return new EasyRdf_Literal_DateTime( $this->cleanupDateValue( $value->getTime() ) );
 		}
 		// TODO: add handling for Julian values
 		return new EasyRdf_Literal( $value->getTime() );
 	}
 
 	/**
-	 * Adds specific value
-	 *
 	 * @param EasyRdf_Resource $target
 	 * @param string $propertyValueQName Property name
 	 * @param string $dataType Property data type
@@ -850,8 +877,6 @@ class RdfBuilder {
 	}
 
 	/**
-	 * Adds specific value
-	 *
 	 * @param EasyRdf_Resource $target
 	 * @param string $propertyValueQName Property name
 	 * @param string $dataType Property data type
@@ -873,8 +898,6 @@ class RdfBuilder {
 	}
 
 	/**
-	 * Adds specific value
-	 *
 	 * @param EasyRdf_Resource $target
 	 * @param string $propertyValueQName Property name
 	 * @param string $dataType Property data type
@@ -957,15 +980,17 @@ class RdfBuilder {
 
 	/**
 	 * Create header structure for the dump
-	 * @param int $ts Timestamp (for testing)
+	 *
+	 * @param int $timestamp Timestamp (for testing)
 	 */
-	public function addDumpHeader( $ts = 0 ) {
+	public function addDumpHeader( $timestamp = 0 ) {
 		// TODO: this should point to "this document"
 		$dataResource = $this->graph->resource( $this->getEntityTypeQName( 'Dump' ) );
 		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
 		$dataResource->addResource( self::NS_CC . ':license', self::LICENSE );
 		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':softwareVersion', self::FORMAT_VERSION );
 		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified',
-				new EasyRdf_Literal( wfTimestamp( TS_ISO_8601, $ts ), null, 'xsd:dateTime' ) );
+				new EasyRdf_Literal( wfTimestamp( TS_ISO_8601, $timestamp ), null, 'xsd:dateTime' ) );
 	}
+
 }

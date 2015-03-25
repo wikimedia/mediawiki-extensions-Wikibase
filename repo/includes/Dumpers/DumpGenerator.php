@@ -3,8 +3,6 @@
 namespace Wikibase\Dumpers;
 
 use InvalidArgumentException;
-use MWContentSerializationException;
-use MWException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
@@ -61,6 +59,7 @@ abstract class DumpGenerator {
 
 	/**
 	 * Entity count limit - dump will generate this many
+	 *
 	 * @var int
 	 */
 	protected $limit = 0;
@@ -83,6 +82,7 @@ abstract class DumpGenerator {
 
 	/**
 	 * Set maximum number of entities produced
+	 *
 	 * @param int $limit
 	 */
 	public function setLimit( $limit ) {
@@ -174,14 +174,17 @@ abstract class DumpGenerator {
 	 * Set the entity type to be included in the output.
 	 *
 	 * @param string|null $type The desired type (use null for any type).
+	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function setEntityTypeFilter( $type ) {
 		$this->entityType = $type;
 	}
+
 	private function idMatchesFilters( EntityId $entityId ) {
 		return $this->idMatchesShard( $entityId ) && $this->idMatchesType( $entityId );
 	}
+
 	private function idMatchesShard( EntityId $entityId ) {
 		// Shorten out
 		if ( $this->shardingFactor === 1 ) {
@@ -258,7 +261,7 @@ abstract class DumpGenerator {
 
 			$this->progressReporter->reportMessage( 'Processed ' . $dumpCount . ' entities.' );
 
-			if( $this->limit && $dumpCount >= $this->limit ) {
+			if ( $this->limit && $dumpCount >= $this->limit ) {
 				break;
 			}
 		}
@@ -268,6 +271,7 @@ abstract class DumpGenerator {
 
 	/**
 	 * Dump list of entities
+	 *
 	 * @param EntityId[] $entityIds
 	 * @param int &$dumpCount The number of entities already dumped (will be updated).
 	 */
@@ -288,7 +292,7 @@ abstract class DumpGenerator {
 				$this->postEntityDump( $dumpCount );
 
 				$dumpCount ++;
-				if( $this->limit && $dumpCount >= $this->limit ) {
+				if ( $this->limit && $dumpCount >= $this->limit ) {
 					break;
 				}
 			} catch ( StorageException $ex ) {
@@ -303,8 +307,8 @@ abstract class DumpGenerator {
 	 * @param EntityId $entityId
 	 *
 	 * @throws StorageException
-	 *
 	 * @return string|null
 	 */
 	abstract protected function generateDumpForEntityId( EntityId $entityId );
+
 }
