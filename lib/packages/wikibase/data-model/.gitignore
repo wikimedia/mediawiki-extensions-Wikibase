@@ -9,6 +9,3 @@ composer.lock
 
 vendor/
 build/
-
-.floo
-.flooignore
