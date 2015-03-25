@@ -20,7 +20,7 @@ class HashUsageAccumulatorTest extends \PHPUnit_Framework_TestCase {
 		$acc =  new HashUsageAccumulator();
 		$tester = new UsageAccumulatorContractTester( $acc );
 
-		$tester->testAddGetUsage();
+		$tester->runTests();
 	}
 
 }
