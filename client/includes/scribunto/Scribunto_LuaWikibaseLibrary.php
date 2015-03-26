@@ -188,6 +188,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getEntityId' => array( $this, 'getEntityId' ),
 			'getUserLang' => array( $this, 'getUserLang' ),
 			'getSiteLinkPageName' => array( $this, 'getSiteLinkPageName' ),
+			'incrementExpensiveFunctionCount' => array( $this, 'incrementExpensiveFunctionCount' ),
 		);
 
 		return $this->getEngine()->registerInterface(

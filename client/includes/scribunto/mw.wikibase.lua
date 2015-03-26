@@ -20,10 +20,24 @@ function wikibase.setupInterface()
 	-- Caching variable for the entity id string belonging to the current page (nil if page is not linked to an entity)
 	local pageEntityId = false
 
+	-- Get the entity id for the current page. Cached
+	local getEntityIdForCurrentPage = function()
+		if pageEntityId == false then
+			pageEntityId = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
+		end
+
+		return pageEntityId
+	end
+
 	-- Get the mw.wikibase.entity object for a given id. Cached.
 	local getEntityObject = function( id )
 		if entities[ id ] == nil then
 			local entity = php.getEntity( id )
+
+			if id ~= getEntityIdForCurrentPage() then
+				-- Accessing an arbitrary item is supposed to increment the expensive function count
+				php.incrementExpensiveFunctionCount()
+			end
 
 			if type( entity ) ~= 'table' then
 				entities[ id ] = false
@@ -40,15 +54,6 @@ function wikibase.setupInterface()
 		else
 			return nil
 		end
-	end
-
-	-- Get the entity id for the current page. Cached
-	local getEntityIdForCurrentPage = function()
-		if pageEntityId == false then
-			pageEntityId = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
-		end
-
-		return pageEntityId
 	end
 
 	-- Get the mw.wikibase.entity object for the current page
