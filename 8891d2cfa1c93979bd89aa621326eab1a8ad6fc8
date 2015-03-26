@@ -300,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_73a26094",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T21:56:53Z",
+      "side": 1,
+      "message": "Gregorian is well defined BC.",
+      "parentUuid": "6e7c4fa4_aa92bc54",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ba4a1b5d",
         "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
         "patchSetId": 8
@@ -434,6 +452,24 @@
       "side": 1,
       "message": "In this case there won\u0027t be data loss since -2147483648 is not a valid Julian date which will return null and thus not convert it to xsd:dateTime.",
       "parentUuid": "6e7c4fa4_59518cd7",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_13b52ccb",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T21:56:53Z",
+      "side": 1,
+      "message": "How is that not a valid Julian date? Which specification says that?",
+      "parentUuid": "6e7c4fa4_0a8170fc",
       "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
