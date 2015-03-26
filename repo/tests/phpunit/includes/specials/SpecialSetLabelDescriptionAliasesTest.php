@@ -155,6 +155,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	}
 
 	public function executeProvider() {
+		global $wgLang;
+
 		$formMatchers['id'] = array(
 			'tag' => 'input',
 			'attributes' => array(
@@ -215,7 +217,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$withIdMatchers['language']['attributes'] = array(
 			'type' => 'hidden',
 			'name' => 'language',
-			'value' => 'en',
+			'value' => $wgLang->getCode(), // Default user language
 		);
 
 		$withLanguageMatchers = $withIdMatchers;
