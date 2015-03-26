@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use FauxRequest;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -250,16 +251,11 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 
 	/**
 	 * @dataProvider requestProvider
-	 *
-	 * @param $sub
-	 * @param $request
-	 * @param $userLanguage
-	 * @param $matchers
 	 */
-	public function testExecute( $sub, $request, $userLanguage, $matchers ) {
-		$request = new \FauxRequest( $request );
+	public function testExecute( $sub, array $data, $languageCode, array $matchers ) {
+		$request = new FauxRequest( $data );
 
-		list( $output, ) = $this->executeSpecialPage( $sub, $request, $userLanguage );
+		list( $output, ) = $this->executeSpecialPage( $sub, $request, $languageCode );
 		foreach( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
