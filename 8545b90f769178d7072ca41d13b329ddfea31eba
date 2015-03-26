@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8f5b52fc",
+        "filename": "lib/includes/parsers/DispatchingValueParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:59:39Z",
+      "side": 1,
+      "message": "\"Dispatching\" is a bit misleading. Dispatch logic would route calls based on some property of the value, e.g. the value type.\n\nThe logic implemented here is really a fallback: Try each, in order of preference, until one is found that works.",
+      "revId": "8545b90f769178d7072ca41d13b329ddfea31eba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8f0272bc",
+        "filename": "lib/includes/parsers/TimeParserFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:59:39Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment. Does it mean: Year-month parser must be first,  otherwise we would parse \"May 2014\" as \"2014-05-01\"? But that would be correct, no?",
+      "revId": "8545b90f769178d7072ca41d13b329ddfea31eba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0ff662d4",
+        "filename": "lib/tests/phpunit/parsers/PhpDateTimeParserTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:59:39Z",
+      "side": 1,
+      "message": "Which component, in which version? We have to know when the optional args and this comment can be removed.",
+      "revId": "8545b90f769178d7072ca41d13b329ddfea31eba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
