@@ -16,6 +16,24 @@
       "revId": "12735c3b594bea7eb2b97611dc5e0827086a5604",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6fe35603",
+        "filename": "lib/tests/phpunit/specials/SpecialPageTestBase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T15:10:03Z",
+      "side": 1,
+      "message": "I will drop this file from this patch. I added a much more descriptive comment in Ic708ed8.",
+      "parentUuid": "6e7c4fa4_8f291238",
+      "revId": "12735c3b594bea7eb2b97611dc5e0827086a5604",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
