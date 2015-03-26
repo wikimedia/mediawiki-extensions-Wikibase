@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8f291238",
+        "filename": "lib/tests/phpunit/specials/SpecialPageTestBase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T15:02:41Z",
+      "side": 1,
+      "message": "We don\u0027t, really. But requests that change data must be posted and contain a valid token.  For other requests, the token doesn\u0027t matter.\n\nSo if we are in POST mode, it makes sense to add a token per default. But we could also just always do that.",
+      "revId": "12735c3b594bea7eb2b97611dc5e0827086a5604",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
