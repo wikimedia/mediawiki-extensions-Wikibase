@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b41c67cc",
+        "filename": "repo/includes/rdf/RdfWriterFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:14:28Z",
+      "side": 1,
+      "message": "why does the internal name matetr it all? it should be possibble to use \"fluddelbutt\" as the internal name, and it should still work the same... is the internal name exposed somewhere? that would be a bug.",
+      "revId": "85fdac5cf7fab5c2868ba575b3ee7a9f90e7b3fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
