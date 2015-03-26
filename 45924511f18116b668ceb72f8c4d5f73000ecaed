@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_cabcd8b4",
+        "filename": "repo/includes/rdf/RdfWriter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T17:21:20Z",
+      "side": 1,
+      "message": "I\u0027m not sure what is \"transparent internal buffering\" but I don\u0027t see what is the problem with specifying at which point you want to add prefixes. If you have better idea please add the patch, but this provides significant performance improvement against scanning output for prefixes.",
+      "parentUuid": "6e7c4fa4_d4a2433b",
+      "revId": "45924511f18116b668ceb72f8c4d5f73000ecaed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_f49f3ff8",
         "filename": "repo/includes/rdf/RdfWriterBase.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-26T14:25:53Z",
       "side": 1,
       "message": "Unhappy about that. Protected things are part of the interface, and cannot be changed without breaking compat. I\u0027d like to keep the interface small.",
+      "revId": "45924511f18116b668ceb72f8c4d5f73000ecaed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6ae584d5",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T17:21:20Z",
+      "side": 1,
+      "message": "shorthands needs to be gone anyway, but I don\u0027t see any problem with writers knowing they have prefixes. They do it anyway since you have getPrefixes(), which is the same thing only slower. I do not anticipate we will evert have getPrefixes() return something that is not $this-\u003eprefixes, so I\u0027d prefer not to complicate and slow down things in anticipation of some abstract change that will never happen.",
+      "parentUuid": "6e7c4fa4_f49f3ff8",
       "revId": "45924511f18116b668ceb72f8c4d5f73000ecaed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
