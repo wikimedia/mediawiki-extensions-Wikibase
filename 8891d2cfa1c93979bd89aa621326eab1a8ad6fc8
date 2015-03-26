@@ -336,6 +336,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_13ed2c8a",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T22:14:24Z",
+      "side": 1,
+      "message": "Again, this is an RDF export, not something that\u0027s specific to PHP.\n\nAnd how is \"1 January 4714 BC (Gregorian)\" useless? It specifies a time in the past. I can even calculate the number of seconds between this and today.",
+      "parentUuid": "6e7c4fa4_13320c5c",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ba4a1b5d",
         "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
         "patchSetId": 8
@@ -506,6 +524,24 @@
       "side": 1,
       "message": "Because Julian calendar is not defined in that year. It didn\u0027t exist and no valid Julian dates exist for this year. Additionally, PHP date conversion functions also do not work for such years.",
       "parentUuid": "6e7c4fa4_13b52ccb",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d346d47f",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T22:14:24Z",
+      "side": 1,
+      "message": "Gregorian was also not defined. Which means we are not allowed to talk about dates in the past? Sorry. Just interpolate.\n\nBut this is missing the point. We do *have* dates in the database with years smaller than INT32. Code that casts the year fraction of a dateTime value to INT32 causes data-loss. I already fixed several places in the Wikibase code base that accidentally did this.",
+      "parentUuid": "6e7c4fa4_3335c842",
       "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
