@@ -6,6 +6,7 @@ use Html;
 use InvalidArgumentException;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -29,14 +30,22 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	private $siteLinkLookup;
 
 	/**
+	 * @var EntityPerPage
+	 */
+	private $entityPerPage;
+
+	/**
 	 * @see SpecialWikibasePage::__construct
 	 */
 	public function __construct() {
 		parent::__construct( 'GoToLinkedPage', '', true );
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
 		$this->initServices(
-			WikibaseRepo::getDefaultInstance()->getSiteStore(),
-			WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache()
+			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getStore()->newSiteLinkCache(),
+			$wikibaseRepo->getStore()->newEntityPerPage()
 		);
 	}
 
@@ -46,13 +55,16 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 *
 	 * @param SiteStore $siteStore
 	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param EntityPerPage $entityPerPage
 	 */
 	public function initServices(
 		SiteStore $siteStore,
-		SiteLinkLookup $siteLinkLookup
+		SiteLinkLookup $siteLinkLookup,
+		EntityPerPage $entityPerPage
 	) {
 		$this->siteStore = $siteStore;
 		$this->siteLinkLookup = $siteLinkLookup;
+		$this->entityPerPage = $entityPerPage;
 	}
 
 	/**
@@ -77,10 +89,10 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 
 	/**
 	 * @param string $site
-	 * @param ItemId $itemId
+	 * @param ItemId|null $itemId
 	 * @return string|null the URL to redirect to or null if the sitelink does not exist
 	 */
-	protected function getTargetUrl( $site, $itemId ) {
+	protected function getTargetUrl( $site, ItemId $itemId = null ) {
 		if ( $site === '' || $itemId === null ) {
 			return null;
 		}
@@ -96,7 +108,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 			$site .= 'wiki';
 		}
 
-		$links = $this->siteLinkLookup->getLinks( array( $itemId->getNumericId() ), array( $site ) );
+		$links = $this->loadLinks( $site, $itemId );
 
 		if ( isset( $links[0] ) ) {
 			list( , $pageName, ) = $links[0];
@@ -105,6 +117,31 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 			return $url;
 		}
 		return null;
+	}
+
+	/**
+	 * Load the sitelink using a SiteLinkLookup. Resolves item redirects, if needed.
+	 *
+	 * @param string $site
+	 * @param ItemId $itemId
+	 *
+	 * @return array[]
+	 */
+	private function loadLinks( $site, ItemId $itemId ) {
+		$links = $this->siteLinkLookup->getLinks( array( $itemId->getNumericId() ), array( $site ) );
+		if ( isset( $links[0] ) ) {
+			return $links;
+		}
+
+		// Maybe the item is a redirect: Try to resolve the redirect and load
+		// the links from there.
+		$redirectTarget = $this->entityPerPage->getRedirectForEntityId( $itemId );
+
+		if ( $redirectTarget instanceof ItemId ) {
+			return $this->siteLinkLookup->getLinks( array( $redirectTarget->getNumericId() ), array( $site ) );
+		}
+
+		return array();
 	}
 
 	/**
