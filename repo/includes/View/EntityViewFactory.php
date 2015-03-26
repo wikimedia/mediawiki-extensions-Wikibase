@@ -6,17 +6,15 @@ use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use Language;
 use SiteStore;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\View\EntityIdFormatterFactory;
+use Wikibase\View\HtmlSnakFormatterFactory;
 
 /**
  * @since 0.5
@@ -27,9 +25,9 @@ use Wikibase\View\EntityIdFormatterFactory;
 class EntityViewFactory {
 
 	/**
-	 * @var OutputFormatSnakFormatterFactory
+	 * @var HtmlSnakFormatterFactory
 	 */
-	private $snakFormatterFactory;
+	private $htmlSnakFormatterFactory;
 
 	/**
 	 * @var EntityIdFormatterFactory
@@ -78,7 +76,7 @@ class EntityViewFactory {
 
 	/**
 	 * @param EntityIdFormatterFactory $idFormatterFactory
-	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
+	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
 	 * @param EntityLookup $entityLookup
 	 * @param SiteStore $siteStore
 	 * @param DataTypeFactory $dataTypeFactory
@@ -90,7 +88,7 @@ class EntityViewFactory {
 	 */
 	public function __construct(
 		EntityIdFormatterFactory $idFormatterFactory,
-		OutputFormatSnakFormatterFactory $snakFormatterFactory,
+		HtmlSnakFormatterFactory $htmlSnakFormatterFactory,
 		EntityLookup $entityLookup,
 		SiteStore $siteStore,
 		DataTypeFactory $dataTypeFactory,
@@ -103,7 +101,7 @@ class EntityViewFactory {
 		$this->checkOutputFormat( $idFormatterFactory->getOutputFormat() );
 
 		$this->idFormatterFactory = $idFormatterFactory;
-		$this->snakFormatterFactory = $snakFormatterFactory;
+		$this->htmlSnakFormatterFactory = $htmlSnakFormatterFactory;
 		$this->entityLookup = $entityLookup;
 		$this->siteStore = $siteStore;
 		$this->dataTypeFactory = $dataTypeFactory;
@@ -134,7 +132,7 @@ class EntityViewFactory {
 	 * @param string $entityType
 	 * @param string $languageCode
 	 * @param LabelLookup $labelLookup
-	 * @param LanguageFallbackChain|null $fallbackChain
+	 * @param LanguageFallbackChain $fallbackChain
 	 * @param bool $editable
 	 *
 	 * @throws InvalidArgumentException
@@ -144,7 +142,7 @@ class EntityViewFactory {
 		$entityType,
 		$languageCode,
 		LabelLookup $labelLookup,
-		LanguageFallbackChain $fallbackChain = null,
+		LanguageFallbackChain $fallbackChain,
 		$editable = true
 	 ) {
 		$editSectionGenerator = $editable ? new ToolbarEditSectionGenerator(
@@ -199,7 +197,7 @@ class EntityViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain|null $fallbackChain
+	 * @param LanguageFallbackChain $fallbackChain
 	 * @param LabelLookup $labelLookup
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
@@ -207,7 +205,7 @@ class EntityViewFactory {
 	 */
 	private function newStatementGroupListView(
 		$languageCode,
-		LanguageFallbackChain $fallbackChain = null,
+		LanguageFallbackChain $fallbackChain,
 		LabelLookup $labelLookup,
 		EditSectionGenerator $editSectionGenerator
 	) {
@@ -215,7 +213,7 @@ class EntityViewFactory {
 
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->templateFactory,
-			$this->getSnakFormatter( $languageCode, $fallbackChain, $labelLookup ),
+			$this->htmlSnakFormatterFactory->getSnakFormatter( $languageCode, $fallbackChain, $labelLookup ),
 			$propertyIdFormatter
 		);
 
@@ -244,52 +242,6 @@ class EntityViewFactory {
 			$editSectionGenerator,
 			$this->languageNameLookup,
 			$languageCode
-		);
-	}
-
-	/**
-	 * @param $languageCode
-	 * @param LanguageFallbackChain $languageFallbackChain
-	 * @param LabelLookup $labelLookup
-	 *
-	 * @return FormatterOptions
-	 */
-	private function getFormatterOptions(
-		$languageCode,
-		LanguageFallbackChain $languageFallbackChain = null,
-		LabelLookup $labelLookup = null
-	) {
-		$formatterOptions = new FormatterOptions();
-		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $languageCode );
-
-		if ( $languageFallbackChain ) {
-			$formatterOptions->setOption( 'languages', $languageFallbackChain );
-		}
-
-		if ( $labelLookup ) {
-			$formatterOptions->setOption( 'LabelLookup', $labelLookup );
-		}
-
-		return $formatterOptions;
-	}
-
-	/**
-	 * @param string $languageCode
-	 * @param LanguageFallbackChain|null $languageFallbackChain
-	 * @param LabelLookup|null $labelLookup
-	 *
-	 * @return SnakFormatter
-	 */
-	private function getSnakFormatter(
-		$languageCode,
-		LanguageFallbackChain $languageFallbackChain = null,
-		LabelLookup $labelLookup = null
-	) {
-		$formatterOptions = $this->getFormatterOptions( $languageCode, $languageFallbackChain, $labelLookup );
-
-		return $this->snakFormatterFactory->getSnakFormatter(
-			SnakFormatter::FORMAT_HTML_WIDGET,
-			$formatterOptions
 		);
 	}
 

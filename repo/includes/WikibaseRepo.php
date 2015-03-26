@@ -1014,7 +1014,7 @@ class WikibaseRepo {
 
 		$entityViewFactory = new EntityViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
-			$this->getSnakFormatterFactory(),
+			$this->getHtmlSnakFormatterFactory(),
 			$this->getEntityLookup(),
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
@@ -1062,6 +1062,10 @@ class WikibaseRepo {
 	 */
 	public function getTermsLanguages() {
 		return new WikibaseContentLanguages();
+	}
+
+	private function getHtmlSnakFormatterFactory() {
+		return new WikibaseHtmlSnakFormatterFactory( $this->getSnakFormatterFactory() );
 	}
 
 }
