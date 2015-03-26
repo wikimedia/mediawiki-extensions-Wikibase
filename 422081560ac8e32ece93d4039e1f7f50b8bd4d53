@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6f07d61b",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:34:10Z",
+      "side": 1,
+      "message": "This is wrong, NEVER mix data type and value type. If the lookup fails, either skip the statement, or use a dedicated \"unknown\" data type id.",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_14119b5e",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:34:10Z",
+      "side": 1,
+      "message": "This is wrong, data types and value types are two distinct set of identifiers. There is some overlap in the values, but it must not be relied upon, and it has no defiend meaning. The only releationship between data type ids and value types is the one defiend by the DataType object.",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
