@@ -390,6 +390,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_131f6c72",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T22:21:51Z",
+      "side": 1,
+      "message": "It is useless because there was no January in 4714 BC. No event in 4714 BC happened in \"January\" because \"January\" was invented much later. You can calculate anything, but it would be just useless shuffling of numbers.\n\nMore importantly, we have no way to validate dates before 4714 BC without implementing our own date validation from scratch, which would be very slow, error prone and totally wasted effort because of see above.",
+      "parentUuid": "6e7c4fa4_13ed2c8a",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ba4a1b5d",
         "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
         "patchSetId": 8
@@ -578,6 +596,24 @@
       "side": 1,
       "message": "Gregorian was also not defined. Which means we are not allowed to talk about dates in the past? Sorry. Just interpolate.\n\nBut this is missing the point. We do *have* dates in the database with years smaller than INT32. Code that casts the year fraction of a dateTime value to INT32 causes data-loss. I already fixed several places in the Wikibase code base that accidentally did this.",
       "parentUuid": "6e7c4fa4_3335c842",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f6065e1e",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T22:21:51Z",
+      "side": 1,
+      "message": "We are allowed to talk, but this talk would be meaningless. Date in Julian in 4714 BC is a data error. We should not waste time trying to accurately represent data errors. In any case, no data loss will happen, it would just not be converted to Gregorian.\n\nIf we have Julian dates in the DB that do not fit INT32, it is also a data error and should be fixed.",
+      "parentUuid": "6e7c4fa4_d346d47f",
       "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
