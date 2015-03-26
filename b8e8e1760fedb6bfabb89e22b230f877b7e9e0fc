@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2fc6be9d",
+        "filename": "client/tests/phpunit/includes/Usage/HashUsageAccumulatorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:47:00Z",
+      "side": 1,
+      "message": "this doesn\u0027t make sense to me. Why should the test function for addGetUsage trigger *all* tests implemented by the tester?",
+      "revId": "b8e8e1760fedb6bfabb89e22b230f877b7e9e0fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_efbbe607",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:47:00Z",
+      "side": 1,
+      "message": "Please keep the old name. Otherwise things get confusing in case the interface gets more methods to test.",
+      "revId": "b8e8e1760fedb6bfabb89e22b230f877b7e9e0fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
