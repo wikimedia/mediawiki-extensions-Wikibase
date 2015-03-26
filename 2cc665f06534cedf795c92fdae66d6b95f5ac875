@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_906612e9",
+        "filename": "lib/resources/jquery.wikibase/toolbar/controller/definitions/addtoolbar/statementview-snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T20:33:35Z",
+      "side": 1,
+      "message": "I think the variable name lia (listview item adapter) is not correct, but don\u0027t see how it should be called instead.",
+      "revId": "2cc665f06534cedf795c92fdae66d6b95f5ac875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
