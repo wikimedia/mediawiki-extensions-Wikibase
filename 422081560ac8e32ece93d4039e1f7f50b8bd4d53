@@ -104,6 +104,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_8a302054",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T17:32:22Z",
+      "side": 1,
+      "message": "That\u0027s what the preivous code was using. It\u0027s slow.",
+      "parentUuid": "6e7c4fa4_2f623ed5",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_8f87d265",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 23
@@ -115,6 +133,24 @@
       "writtenOn": "2015-03-26T14:43:37Z",
       "side": 1,
       "message": "This is rather expensive, isn\u0027t it? Can\u0027t we chus check $u[0] \u003d\u003d \u0027/\u0027 \u0026\u0026 $u[1] \u003d\u003d\u0027/\u0027?",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6a3b4436",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T17:32:22Z",
+      "side": 1,
+      "message": "We could, if we knew that\u0027s always the case - I\u0027m not sure it is, I\u0027m not familiar enough with what getPageName produces in which cases.",
+      "parentUuid": "6e7c4fa4_8f87d265",
       "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +174,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_8a17c0a7",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T17:32:22Z",
+      "side": 1,
+      "message": "We mix data type and value type on all types except string anyway. And string is a valid type. We also can not parse \u0027unknown\u0027.",
+      "parentUuid": "6e7c4fa4_6f07d61b",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_14119b5e",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 23
@@ -155,6 +209,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6a1264b6",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T17:32:22Z",
+      "side": 1,
+      "message": "It would be colossal waste of time to ask the lookup each time we get TiveValue \"which type it is\" when we know for sure it\u0027s TimeValue. The only ambiguity is in strings.",
+      "parentUuid": "6e7c4fa4_14119b5e",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_2f98fec1",
         "filename": "repo/includes/rdf/RdfWriterBase.php",
         "patchSetId": 23
@@ -166,6 +238,24 @@
       "writtenOn": "2015-03-26T14:43:37Z",
       "side": 1,
       "message": "I still think we should use a call table. For that, ints would be better. Want to change it around one more time?",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2a6f8c27",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T17:32:22Z",
+      "side": 1,
+      "message": "I can try it and see if it\u0027s be faster.",
+      "parentUuid": "6e7c4fa4_2f98fec1",
       "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -200,6 +290,24 @@
       "writtenOn": "2015-03-26T14:43:37Z",
       "side": 1,
       "message": "interpolated function calls really creep me out. is this faster than just concatenating strings?",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_aac95c2a",
+        "filename": "repo/includes/rdf/XmlRdfWriter.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T17:32:22Z",
+      "side": 1,
+      "message": "no, it\u0027s exactly the same, does the same thing as concatenation.",
+      "parentUuid": "6e7c4fa4_6ff916e4",
       "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
