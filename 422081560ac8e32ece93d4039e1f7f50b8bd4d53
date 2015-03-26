@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_41018a06",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T23:41:13Z",
+      "side": 1,
+      "message": "Because ootherwise we get this in dump: \nentity:Q1 a wikibase:Item;\n\ndata:Q1 .... data stuff\n\nentity:Q1 .... other stuff\n\nWhich means two extra state transitions and dump looking worse. This way we keep all entity:Q1 stuff in one place.",
+      "parentUuid": "6e7c4fa4_0f6502dd",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_2f623ed5",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 23
