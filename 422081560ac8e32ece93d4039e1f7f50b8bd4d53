@@ -192,6 +192,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_b6f226dd",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T22:45:38Z",
+      "side": 1,
+      "message": "Also, this is not new - we have been doing it since the beginning. The only change in this patch is catching the exception, and that\u0027s since if the data is not in sync (as on test machine) we get the whole dump crashing.",
+      "parentUuid": "6e7c4fa4_8a17c0a7",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_14119b5e",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 23
