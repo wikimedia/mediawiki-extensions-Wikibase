@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_36f29f97",
+        "filename": "repo/includes/WikibaseHtmlSnakFormatterFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-26T07:21:29Z",
+      "side": 1,
+      "message": "?",
+      "parentUuid": "6e7c4fa4_e0a54201",
+      "revId": "0a9a4ecca52be1eaff7cbd73497431176b5471a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_a0abcad2",
         "filename": "repo/includes/WikibaseHtmlSnakFormatterFactory.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_56363b4f",
+        "filename": "repo/includes/WikibaseHtmlSnakFormatterFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-26T07:21:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_a0abcad2",
+      "revId": "0a9a4ecca52be1eaff7cbd73497431176b5471a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_208eda7c",
         "filename": "repo/tests/phpunit/includes/WikibaseHtmlSnakFormatterFactoryTest.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2015-03-25T18:30:07Z",
       "side": 1,
       "message": "missing space after $snakFormatter",
+      "revId": "0a9a4ecca52be1eaff7cbd73497431176b5471a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_36413fac",
+        "filename": "repo/tests/phpunit/includes/WikibaseHtmlSnakFormatterFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-26T07:21:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_208eda7c",
       "revId": "0a9a4ecca52be1eaff7cbd73497431176b5471a8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
