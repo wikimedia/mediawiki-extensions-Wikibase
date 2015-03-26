@@ -318,6 +318,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_13320c5c",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T22:03:05Z",
+      "side": 1,
+      "message": "PHP functions can not calculate gregorian months before 4714, and they make no sense anyway because gregorian months did not exist in these dates, so that date would be completely useless in describing actual events.",
+      "parentUuid": "6e7c4fa4_73a26094",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ba4a1b5d",
         "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
         "patchSetId": 8
@@ -470,6 +488,24 @@
       "side": 1,
       "message": "How is that not a valid Julian date? Which specification says that?",
       "parentUuid": "6e7c4fa4_0a8170fc",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3335c842",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T22:03:05Z",
+      "side": 1,
+      "message": "Because Julian calendar is not defined in that year. It didn\u0027t exist and no valid Julian dates exist for this year. Additionally, PHP date conversion functions also do not work for such years.",
+      "parentUuid": "6e7c4fa4_13b52ccb",
       "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
