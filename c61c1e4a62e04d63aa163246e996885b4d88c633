@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_54cb93a8",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T13:39:30Z",
+      "side": 1,
+      "message": "Yes, it has been merged for several weeks now. \nYou are right about \"Legacy\". Will do better next time.",
+      "parentUuid": "6e7c4fa4_5450730c",
+      "revId": "c61c1e4a62e04d63aa163246e996885b4d88c633",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_143e7bb5",
         "filename": "docs/usagetracking-migration.wiki",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-26T13:26:39Z",
       "side": 1,
       "message": "tracking",
+      "revId": "c61c1e4a62e04d63aa163246e996885b4d88c633",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d4bec3fa",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T13:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_143e7bb5",
       "revId": "c61c1e4a62e04d63aa163246e996885b4d88c633",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_1448bb30",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T13:39:30Z",
+      "side": 1,
+      "message": "\"Transfer\" by copying data from one database to another. If I try to be more süpecific, I\u0027ll end up saying \"updates repowiki.wb_changes_subscription based on the client wiki\u0027s wbc_entity_usage table\" again.\n\nAnd yes, the order in which these scripts are used is relevant, and it is mentioned below, but I\u0027ll try to make it more explicit.",
+      "parentUuid": "6e7c4fa4_546713e8",
+      "revId": "c61c1e4a62e04d63aa163246e996885b4d88c633",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d45a4322",
         "filename": "docs/usagetracking-migration.wiki",
         "patchSetId": 5
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_f44adf26",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T13:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_d45a4322",
+      "revId": "c61c1e4a62e04d63aa163246e996885b4d88c633",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b4f30706",
         "filename": "docs/usagetracking-migration.wiki",
         "patchSetId": 5
@@ -81,6 +153,24 @@
       "writtenOn": "2015-03-26T13:26:39Z",
       "side": 1,
       "message": "Why do \"client subscriptions\" need to be tracked?",
+      "revId": "c61c1e4a62e04d63aa163246e996885b4d88c633",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_945b6bfc",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T13:39:30Z",
+      "side": 1,
+      "message": "So we know which client should be notified about changes to which entity. Subscriptions should be updated automatically based on item usage.",
+      "parentUuid": "6e7c4fa4_b4f30706",
       "revId": "c61c1e4a62e04d63aa163246e996885b4d88c633",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
