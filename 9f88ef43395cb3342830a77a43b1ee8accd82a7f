@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_9d8959f1",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T17:32:56Z",
+      "side": 1,
+      "message": "we already have one like this from Daniel, but I also need integrated one to test it.",
+      "parentUuid": "6e7c4fa4_1a622fa3",
+      "revId": "9f88ef43395cb3342830a77a43b1ee8accd82a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_bad53b49",
         "filename": "repo/includes/rdf/N3RdfWriterBase.php",
         "patchSetId": 17
