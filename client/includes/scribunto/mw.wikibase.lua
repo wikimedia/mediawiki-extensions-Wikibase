@@ -23,7 +23,7 @@ function wikibase.setupInterface()
 	-- Get the mw.wikibase.entity object for a given id. Cached.
 	local getEntityObject = function( id )
 		if entities[ id ] == nil then
-			local entity = php.getEntity( id, false )
+			local entity = php.getEntity( id )
 
 			if type( entity ) ~= 'table' then
 				entities[ id ] = false
@@ -51,19 +51,8 @@ function wikibase.setupInterface()
 		return pageEntityId
 	end
 
-	-- @DEPRECATED, uses a legacy plain Lua table holding the entity
-	wikibase.getEntity = function()
-		local id = getEntityIdForCurrentPage()
-
-		if id == nil then
-			return nil
-		end
-
-		return php.getEntity( id, true )
-	end
-
 	-- Get the mw.wikibase.entity object for the current page
-	wikibase.getEntityObject = function( id )
+	wikibase.getEntity = function( id )
 		if id ~= nil and type( id ) ~= 'string' then
 			error( 'id must be either of type string or nil, ' .. type( id ) .. ' given', 2 )
 		end
@@ -82,6 +71,9 @@ function wikibase.setupInterface()
 			return getEntityObject( id )
 		end
 	end
+
+	-- getEntityObject is an alias for getEntity as these used to be different.
+	wikibase.getEntityObject = wikibase.getEntity
 
 	-- Get the label for the given entity id (in content language)
 	--

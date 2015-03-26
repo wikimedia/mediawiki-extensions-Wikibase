@@ -117,11 +117,10 @@ class EntityAccessor {
 	 * @since 0.5
 	 *
 	 * @param string $prefixedEntityId
-	 * @param bool $legacyStyle Whether to return a legacy style entity
 	 *
 	 * @return array
 	 */
-	public function getEntity( $prefixedEntityId, $legacyStyle = false ) {
+	public function getEntity( $prefixedEntityId ) {
 		$prefixedEntityId = trim( $prefixedEntityId );
 
 		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
@@ -132,18 +131,13 @@ class EntityAccessor {
 			return null;
 		}
 
-		$serializer = $this->getEntitySerializer( $entityObject, $legacyStyle );
+		$serializer = $this->getEntitySerializer( $entityObject );
 
 		$entityArr = $serializer->getSerialized( $entityObject );
 
-		if ( $legacyStyle ) {
-			// Mark the output as Legacy so that we can easily distinguish the styles in Lua
-			$entityArr['schemaVersion'] = 1;
-		} else {
-			// Renumber the entity as Lua uses 1-based array indexing
-			$this->renumber( $entityArr );
-			$entityArr['schemaVersion'] = 2;
-		}
+		// Renumber the entity as Lua uses 1-based array indexing
+		$this->renumber( $entityArr );
+		$entityArr['schemaVersion'] = 2;
 
 		$this->usageAccumulator->addAllUsage( $entityId );
 		return $entityArr;
@@ -151,35 +145,22 @@ class EntityAccessor {
 
 	/**
 	 * @param EntityDocument $entityObject
-	 * @param bool $lowerCaseIds Whether to also use lower case ids
 	 *
 	 * @return Serializer
 	 */
-	private function getEntitySerializer( EntityDocument $entityObject, $lowerCaseIds ) {
-		$options = $this->getSerializationOptions( $lowerCaseIds );
+	private function getEntitySerializer( EntityDocument $entityObject ) {
+		$options = $this->getSerializationOptions();
 		$serializerFactory = new SerializerFactory( $options, $this->dataTypeLookup );
 
 		return $serializerFactory->newSerializerForObject( $entityObject, $options );
 	}
 
 	/**
-	 * @param bool $lowerCaseIds
-	 *
 	 * @return SerializationOptions
 	 */
-	private function getSerializationOptions( $lowerCaseIds ) {
+	private function getSerializationOptions() {
 		if ( $this->serializationOptions === null ) {
 			$this->serializationOptions = $this->newSerializationOptions();
-		}
-
-		// Using "ID_KEYS_BOTH" here means that all lists of Snaks or Claims will be listed
-		// twice, once with a lower case key and once with an upper case key.
-		// This is a B/C hack to allow existing lua code to use hardcoded IDs
-		// in both lower (legacy) and upper case.
-		if ( $lowerCaseIds ) {
-			$this->serializationOptions->setIdKeyMode( SerializationOptions::ID_KEYS_BOTH );
-		} else {
-			$this->serializationOptions->setIdKeyMode( SerializationOptions::ID_KEYS_UPPER );
 		}
 
 		return $this->serializationOptions;
@@ -199,6 +180,8 @@ class EntityAccessor {
 
 		// SerializationOptions accepts mixed types of keys happily.
 		$options->setLanguages( $languages );
+
+		$options->setIdKeyMode( SerializationOptions::ID_KEYS_UPPER );
 
 		return $options;
 	}
