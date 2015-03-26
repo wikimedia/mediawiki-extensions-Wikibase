@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_85d57349",
+        "filename": "client/tests/phpunit/includes/Usage/HashUsageAccumulatorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T18:06:15Z",
+      "side": 1,
+      "message": "Sorry, whut? I have not changed that. I don\u0027t like it and agree to Hoo that this would make sooo much more sense if it\u0027s an abstract base class. But it\u0027s what it is. You wrote it.",
+      "parentUuid": "6e7c4fa4_2fc6be9d",
+      "revId": "b8e8e1760fedb6bfabb89e22b230f877b7e9e0fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_efbbe607",
         "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-26T14:47:00Z",
       "side": 1,
       "message": "Please keep the old name. Otherwise things get confusing in case the interface gets more methods to test.",
+      "revId": "b8e8e1760fedb6bfabb89e22b230f877b7e9e0fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_855b33fc",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T18:06:15Z",
+      "side": 1,
+      "message": "Gnah. I don\u0027t like it but I will revert to the old name to not make this review more complicated.",
+      "parentUuid": "6e7c4fa4_efbbe607",
       "revId": "b8e8e1760fedb6bfabb89e22b230f877b7e9e0fc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
