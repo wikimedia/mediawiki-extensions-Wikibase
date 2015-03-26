@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d4a2433b",
+        "filename": "repo/includes/rdf/RdfWriter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:25:53Z",
+      "side": 1,
+      "message": "I don\u0027t really like this approach. It implies something is buffered internally, and needs to be explicitly triggered for output. That goes against the idea behind this interface.\n\nThe same thing can be achieved using transparent internal buffering though, as is already implemented for RDF/XML. I\u0027d much prefer this approach.",
+      "revId": "45924511f18116b668ceb72f8c4d5f73000ecaed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f49f3ff8",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:25:53Z",
+      "side": 1,
+      "message": "Unhappy about that. Protected things are part of the interface, and cannot be changed without breaking compat. I\u0027d like to keep the interface small.",
+      "revId": "45924511f18116b668ceb72f8c4d5f73000ecaed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
