@@ -212,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_731d80c0",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T22:16:23Z",
+      "side": 1,
+      "message": "a) it is not (it only would be faster if type conversion happened on \u003d\u003d, which does not) and b) it\u0027s not really the optimization we need, at least unless we have profile data that suggests it is a hotspot.",
+      "parentUuid": "6e7c4fa4_3945b018",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_1a130f5e",
         "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
         "patchSetId": 8
@@ -223,6 +241,24 @@
       "writtenOn": "2015-03-25T14:26:34Z",
       "side": 1,
       "message": "Please never cast the year to integer. This fails on 32-bit systems for years that exceed the UINT32 limit. Use ltrim( ..., \u00270\u0027 ) or preg_replace( \u0027/\\b0+(?\u003d\\d{4})/\u0027, ... ) instead.",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_338388d2",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T22:16:23Z",
+      "side": 1,
+      "message": "fixed in next patch for this code",
+      "parentUuid": "6e7c4fa4_1a130f5e",
       "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
