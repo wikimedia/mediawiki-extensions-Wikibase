@@ -455,7 +455,7 @@ class RdfBuilder {
 
 			foreach ( $siteLink->getBadges() as $badge ) {
 				$this->sitelinkWriter
-					->say( self::NS_ONTOLOGY, 'Badge' )
+					->say( self::NS_ONTOLOGY, 'badge' )
 						->is( self::NS_ENTITY, $this->getEntityLName( $badge ) );
 			}
 		}
@@ -583,9 +583,9 @@ class RdfBuilder {
 			$rank = $statement->getRank();
 			if ( isset( self::$rankMap[$rank] ) ) {
 				$this->statementWriter->about( self::NS_STATEMENT, $statementLName )
-					->say( self::NS_ONTOLOGY, 'Rank' )->is( self::NS_ONTOLOGY, self::$rankMap[$rank] );
+					->say( self::NS_ONTOLOGY, 'rank' )->is( self::NS_ONTOLOGY, self::$rankMap[$rank] );
 				if( $isBest ) {
-					$this->statementWriter->say( self::NS_ONTOLOGY, 'Rank' )->is( self::NS_ONTOLOGY, self::WIKIBASE_RANK_BEST );
+					$this->statementWriter->say( self::NS_ONTOLOGY, 'rank' )->is( self::NS_ONTOLOGY, self::WIKIBASE_RANK_BEST );
 				}
 			} else {
 				wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );
@@ -628,11 +628,12 @@ class RdfBuilder {
 	 * Created full data value
 	 *
 	 * @param DataValue $value
+	 * @param string $prefix Prefix to use for predicate values
 	 * @param array $props List of properties
 	 *
 	 * @return string the id of the value node, for use with the self::NS_VALUE namespace.
 	 */
-	private function addExpandedValue( DataValue $value, array $props ) {
+	private function addExpandedValue( DataValue $value, $prefix, array $props ) {
 		$valueLName = $value->getHash();
 		if ( $this->alreadySeen( $valueLName, 'V' ) ) {
 			return $valueLName;
@@ -640,8 +641,8 @@ class RdfBuilder {
 		$this->valueWriter->about( self::NS_VALUE, $valueLName )->a( self::NS_ONTOLOGY, 'Value' );
 
 		foreach ( $props as $prop => $type ) {
-			$propLName = ucfirst( $prop );
-			$getter = "get" . ucfirst( $prop );
+			$propLName = $prefix . ucfirst( $prop );
+			$getter = "get" . $prop;
 			$data = $value->$getter();
 			if ( !is_null( $data ) ) {
 				$this->addValueToNode( $this->valueWriter, self::NS_ONTOLOGY, $propLName, $type, $data );
@@ -864,15 +865,12 @@ class RdfBuilder {
 
 		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) { //FIXME: register separate generators for different output flavors.
 
-			$valueLName = $this->addExpandedValue( $value,
+			$valueLName = $this->addExpandedValue( $value, "time",
 					array(  'time' => null,
 							// TODO: eventually use identifier here
 							'precision' => 'integer',
 							'timezone' => 'integer',
 							'calendarModel' => 'url',
-// TODO: not used currently
-//							'before' => 'dateTime',
-// 							'after'=> 'dateTime',
 					)
 			);
 
@@ -895,7 +893,7 @@ class RdfBuilder {
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->value( $value->getAmount(), 'xsd', 'decimal' );
 
 		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) {
-			$valueLName = $this->addExpandedValue( $value,
+			$valueLName = $this->addExpandedValue( $value, "quantity",
 					array(  'amount' => 'decimal',
 							'upperBound' => 'decimal',
 							'lowerBound' => 'decimal',
@@ -924,7 +922,7 @@ class RdfBuilder {
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->value( $point, self::NS_GEO, "wktLiteral" );
 
 		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) {
-			$valueLName = $this->addExpandedValue( $value,
+			$valueLName = $this->addExpandedValue( $value, "geo",
 					array(  'latitude' => 'decimal',
 							'longitude' => 'decimal',
 							'precision' => 'decimal',
