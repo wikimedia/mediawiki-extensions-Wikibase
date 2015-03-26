@@ -2,6 +2,125 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e7c4fa4_af4f2e6d",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:43:37Z",
+      "side": 1,
+      "message": "Good call. Are \\uABCD escapes legal in IRIs in n3? Or would be %-encode the utf-8?",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4f50da0c",
+        "filename": "repo/includes/rdf/N3Quoter.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:43:37Z",
+      "side": 1,
+      "message": "yea!",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6f5596fb",
+        "filename": "repo/includes/rdf/N3RdfWriterBase.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:43:37Z",
+      "side": 1,
+      "message": "+2 for this file",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cf438a42",
+        "filename": "repo/includes/rdf/NTriplesRdfWriter.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:43:37Z",
+      "side": 1,
+      "message": "+2 for this file",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0f6502dd",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:43:37Z",
+      "side": 1,
+      "message": "why was this moved?",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2f623ed5",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:43:37Z",
+      "side": 1,
+      "message": "missing spaces; Also, use $site-\u003egetPageUrl( $name )",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8f87d265",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:43:37Z",
+      "side": 1,
+      "message": "This is rather expensive, isn\u0027t it? Can\u0027t we chus check $u[0] \u003d\u003d \u0027/\u0027 \u0026\u0026 $u[1] \u003d\u003d\u0027/\u0027?",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_6f07d61b",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 23
@@ -30,6 +149,57 @@
       "writtenOn": "2015-03-26T14:34:10Z",
       "side": 1,
       "message": "This is wrong, data types and value types are two distinct set of identifiers. There is some overlap in the values, but it must not be relied upon, and it has no defiend meaning. The only releationship between data type ids and value types is the one defiend by the DataType object.",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2f98fec1",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:43:37Z",
+      "side": 1,
+      "message": "I still think we should use a call table. For that, ints would be better. Want to change it around one more time?",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4ff45aed",
+        "filename": "repo/includes/rdf/TurtleRdfWriter.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:43:37Z",
+      "side": 1,
+      "message": "+1 here; didn\u0027t check closely, relying on tests to make sure it still does what it should.",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6ff916e4",
+        "filename": "repo/includes/rdf/XmlRdfWriter.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-26T14:43:37Z",
+      "side": 1,
+      "message": "interpolated function calls really creep me out. is this faster than just concatenating strings?",
       "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
