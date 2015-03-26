@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5450730c",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T13:26:39Z",
+      "side": 1,
+      "message": "Is the code using these switches already merged? Otherwise I would suggest renaming them. Calling things \"legacy\" is not far from calling things \"old\", \"older\", \"old2\" and so on. Suggestion: useSiteLinkBasedChangesSubscription and useSiteLinksBasedEntityUsage.",
+      "revId": "c61c1e4a62e04d63aa163246e996885b4d88c633",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_143e7bb5",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T13:26:39Z",
+      "side": 1,
+      "message": "tracking",
+      "revId": "c61c1e4a62e04d63aa163246e996885b4d88c633",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_546713e8",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T13:26:39Z",
+      "side": 1,
+      "message": "\"Transfered\" how?\n\nIf I remember correctly there is an order these scripts must be executed, because one uses the result of the other. Is this the case? If yes, please add this to the description. Or is this already done below?",
+      "revId": "c61c1e4a62e04d63aa163246e996885b4d88c633",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d45a4322",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T13:26:39Z",
+      "side": 1,
+      "message": "Wiki formatting is [https://phabricator.wikimedia.org/?66590 ?66590] (question marks because of Gerrit bug).",
+      "revId": "c61c1e4a62e04d63aa163246e996885b4d88c633",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b4f30706",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T13:26:39Z",
+      "side": 1,
+      "message": "Why do \"client subscriptions\" need to be tracked?",
+      "revId": "c61c1e4a62e04d63aa163246e996885b4d88c633",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
