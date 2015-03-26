@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_39c6109e",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T10:38:54Z",
+      "side": 1,
+      "message": "Sure, it\u0027s totally optional but something we tend to do across the Wikibase code base.",
+      "parentUuid": "6e7c4fa4_fd816d93",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_f72f4e9b",
         "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
         "patchSetId": 8
@@ -100,6 +118,24 @@
       "side": 1,
       "message": "I want it to be there to remind us it\u0027s not optimal solution.",
       "parentUuid": "6e7c4fa4_b71d567a",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_593aec93",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T10:38:54Z",
+      "side": 1,
+      "message": "There is nothing wrong with having a named constant for an URI. There is nothing wrong with having the same URI repeated in different components. That\u0027s what identifiers are for, after all.\n\nI\u0027m planning to move the constants from TimeFormatter and TimeParser to TimeValue. You can add a \"FIXME: Use TimeValue constants when released.\" if you want.",
+      "parentUuid": "6e7c4fa4_1d7f89a7",
       "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -158,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_3945b018",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T10:38:54Z",
+      "side": 1,
+      "message": "You are right, semantically it doesn\u0027t matter in this case, but it\u0027s faster.",
+      "parentUuid": "6e7c4fa4_bd4f7596",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_1a130f5e",
         "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
         "patchSetId": 8
@@ -204,6 +258,24 @@
       "side": 1,
       "message": "Because xsd:dateTime requires valid values in Gregorian calendar (or something that looks like it). And PHP can not calculate months before -4714. In fact, calculating months on any BCE date is a sham since they make no sense, but we\u0027re prepared to go a little bit and humor whoever entered that date. But beyond -4714 we can\u0027t do anything, month and day mean nothing there.",
       "parentUuid": "6e7c4fa4_1a2a2f74",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d94d9c41",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T10:38:54Z",
+      "side": 1,
+      "message": "It\u0027s not our job to decide at which arbitrary year certain precisions stop making sense. For example, it totally makes sense to store the time of a solar eclipse 5000 BC with a precision of a minute.\n\nNot having support in PHP does not mean it\u0027s ok to drop existing information. If the code below can\u0027t check if dates like \"-5000-02-29\" are valid, then just keep it as it is.",
+      "parentUuid": "6e7c4fa4_5d60a1fb",
       "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -308,6 +380,24 @@
       "side": 1,
       "message": "How you can have Julian calendar date that doesn\u0027t fit 32 bits?",
       "parentUuid": "6e7c4fa4_7a67a3e8",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_59518cd7",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-26T10:38:54Z",
+      "side": 1,
+      "message": "This is unrelated to the calendar model. On a 32 bit machine PHP magically turns the year -2147483649 into -2147483648, which means data-loss.",
+      "parentUuid": "6e7c4fa4_7d3c7dde",
       "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
