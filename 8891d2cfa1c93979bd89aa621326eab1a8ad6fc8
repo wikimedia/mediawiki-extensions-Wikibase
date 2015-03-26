@@ -282,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_aa92bc54",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T17:17:10Z",
+      "side": 1,
+      "message": "No, it doesn\u0027t make sense since in 5000BC there was no Gregogian calendar and we don\u0027t have any idea and any means how to calculate it.",
+      "parentUuid": "6e7c4fa4_d94d9c41",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ba4a1b5d",
         "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
         "patchSetId": 8
@@ -398,6 +416,24 @@
       "side": 1,
       "message": "This is unrelated to the calendar model. On a 32 bit machine PHP magically turns the year -2147483649 into -2147483648, which means data-loss.",
       "parentUuid": "6e7c4fa4_7d3c7dde",
+      "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0a8170fc",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-26T17:17:10Z",
+      "side": 1,
+      "message": "In this case there won\u0027t be data loss since -2147483648 is not a valid Julian date which will return null and thus not convert it to xsd:dateTime.",
+      "parentUuid": "6e7c4fa4_59518cd7",
       "revId": "8891d2cfa1c93979bd89aa621326eab1a8ad6fc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
