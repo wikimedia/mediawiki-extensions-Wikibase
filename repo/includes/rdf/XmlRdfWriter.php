@@ -147,6 +147,9 @@ class XmlRdfWriter extends RdfWriterBase {
 
 	protected function finishDocument() {
 		// close document element
+		if( $this->role != self::DOCUMENT_ROLE ) {
+			return;
+		}
 		$this->close( 'rdf', 'RDF' );
 		$this->write( "\n" );
 	}
