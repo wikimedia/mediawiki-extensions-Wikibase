@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0db509cb",
+        "filename": "lib/resources/jquery.wikibase/snakview/snakview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-26T19:32:33Z",
+      "side": 1,
+      "message": "ReferenceError: event is not defined snakview.js:268:0",
+      "revId": "282c47dae30d7cbcf0909cb8b0413d0c0a130bc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
