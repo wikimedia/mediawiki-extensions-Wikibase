@@ -1,0 +1,164 @@
+<?php
+
+namespace Wikibase\Repo\Tests\Store\Sql;
+
+use MediaWikiTestCase;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\Store\WikiPageEntityMetaDataLookup;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StringNormalizer;
+use Wikibase\Term;
+use Wikibase\TermSqlIndex;
+
+/**
+ * This test needs to be in repo, although the class is in lib as we can't alter
+ * the data without repo functionality.
+ *
+ * @covers Wikibase\Lib\Store\WikiPageEntityMetaDataLookup
+ *
+ * @group Wikibase
+ * @group WikibaseRepo
+ * @group WikibaseStore
+ * @group Database
+ *
+ * @license GNU GPL v2+
+ * @author Marius Hoch < hoo@online.de >
+ */
+class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
+
+	/**
+	 * @var EntityRevision[]
+	 */
+	private $data = array();
+
+	protected function setUp() {
+		parent::setUp();
+
+		if ( !$this->data ) {
+			global $wgUser;
+
+			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			for ( $i = 0; $i < 3; $i++ ) {
+				$this->data[] = $store->saveEntity( new Item(), 'WikiPageEntityMetaDataLookupTest', $wgUser, EDIT_NEW );
+			}
+
+			$entity = $this->data[2]->getEntity();
+			$entity->getFingerprint()->setLabel( 'en', 'Updated' );
+			$this->data[2] = $store->saveEntity( $entity, 'WikiPageEntityMetaDataLookupTest', $wgUser );
+		}
+	}
+
+	/**
+	 * @return WikiPageEntityMetaDataLookup
+	 */
+	private function getWikiPageEntityMetaDataLookup() {
+		return new WikiPageEntityMetaDataLookup( new BasicEntityIdParser() );
+	}
+
+	public function testLoadRevisionInformationById_latest() {
+		$entityRevision = $this->data[0];
+
+		$result = $this->getWikiPageEntityMetaDataLookup()
+			->loadRevisionInformationByRevisionId( $entityRevision->getEntity()->getId(), $entityRevision ->getRevisionId() );
+
+		$this->assertEquals( $entityRevision->getRevisionId(), $result->rev_id );
+		$this->assertEquals( $entityRevision->getRevisionId(), $result->page_latest );
+	}
+
+	public function testLoadRevisionInformationById_old() {
+		$entityRevision = $this->data[2];
+
+		$result = $this->getWikiPageEntityMetaDataLookup()
+			->loadRevisionInformationByRevisionId(
+				$entityRevision->getEntity()->getId(),
+				$entityRevision ->getRevisionId() - 1 // There were two edits to this item in sequence
+			);
+
+		$this->assertEquals( $entityRevision->getRevisionId() - 1, $result->rev_id );
+		// Page latest should reflect that this is not the latest revision
+		$this->assertEquals( $entityRevision->getRevisionId(), $result->page_latest );
+	}
+
+	public function testLoadRevisionInformationById_wrongRevision() {
+		$entityRevision = $this->data[2];
+
+		$result = $this->getWikiPageEntityMetaDataLookup()
+			->loadRevisionInformationByRevisionId(
+				$entityRevision->getEntity()->getId(),
+				$entityRevision ->getRevisionId() * 2 // Doesn't exist
+			);
+
+		$this->assertSame( false, $result );
+	}
+
+	public function testLoadRevisionInformationById_notFound() {
+		$result = $this->getWikiPageEntityMetaDataLookup()
+			->loadRevisionInformationByRevisionId(
+				new ItemId( 'Q823487354' ),
+				823487354
+			);
+
+		$this->assertSame( false, $result );
+	}
+
+	public function testLoadRevisionInformationByEntityId_found() {
+		$result = $this->getWikiPageEntityMetaDataLookup()
+			->loadRevisionInformationByEntityId(
+				$this->data[0]->getEntity()->getId(),
+				'master'
+			);
+
+		$this->assertEquals( $this->data[0]->getRevisionId(), $result->rev_id );
+	}
+
+	public function testLoadRevisionInformationByEntityId_notFound() {
+		$result = $this->getWikiPageEntityMetaDataLookup()
+			->loadRevisionInformationByEntityId(
+				new ItemId( 'Q823487354' ),
+				'master'
+			);
+
+		$this->assertSame( false, $result );
+	}
+
+	public function testLoadRevisionInformation() {
+		$entityIds = array(
+			$this->data[0]->getEntity()->getId(),
+			$this->data[1]->getEntity()->getId(),
+			new ItemId( 'Q823487354' ), // Doesn't exist
+			$this->data[2]->getEntity()->getId()
+		);
+
+		$result = $this->getWikiPageEntityMetaDataLookup()
+			->loadRevisionInformation( $entityIds, DB_SLAVE );
+
+		$serializedEntityIds = array();
+		foreach( $entityIds as $entityId ) {
+			$serializedEntityIds[] = $entityId->getSerialization();
+		}
+
+		// Verify that all requested entity ids are part of the result
+		$this->assertEquals( $serializedEntityIds, array_keys( $result ) );
+
+		// Verify revision ids
+		$this->assertEquals(
+			$result[$serializedEntityIds[0]]->rev_id, $this->data[0]->getRevisionId()
+		);
+		$this->assertEquals(
+			$result[$serializedEntityIds[1]]->rev_id, $this->data[1]->getRevisionId()
+		);
+		$this->assertEquals(
+			$result[$serializedEntityIds[3]]->rev_id, $this->data[2]->getRevisionId()
+		);
+
+		// Verify that Q823487354 (doesn't exist) is not part of the result
+		$this->assertFalse( $result['Q823487354'] );
+	}
+}
