@@ -124,7 +124,11 @@ call_user_func( function() {
 		return new \ValueParsers\QuantityParser( $options, $unlocalizer );
 	};
 
-	$wgValueParsers['time'] = 'Wikibase\Lib\Parsers\TimeParser';
+	$wgValueParsers['time'] = function( ValueParsers\ParserOptions $options ) {
+		$factory = new Wikibase\Lib\Parsers\TimeParserFactory( $options );
+		return $factory->getTimeParser();
+	};
+
 	$wgValueParsers['globecoordinate'] = 'DataValues\Geo\Parsers\GlobeCoordinateParser';
 	$wgValueParsers['null'] = 'ValueParsers\NullParser';
 	$wgValueParsers['monolingualtext'] = 'Wikibase\Parsers\MonolingualTextParser';
