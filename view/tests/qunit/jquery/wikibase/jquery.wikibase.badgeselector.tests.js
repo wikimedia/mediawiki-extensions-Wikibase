@@ -40,12 +40,6 @@ function createBadgeselector( options ) {
 		.appendTo( 'body' )
 		.badgeselector( options );
 
-	var badgeselector = $badgeselector.data( 'badgeselector' );
-
-	badgeselector._fetchItems = function() {
-		return ( $.Deferred() ).resolve().promise();
-	};
-
 	return $badgeselector;
 }
 
@@ -107,6 +101,28 @@ QUnit.test( 'value()', function( assert ) {
 		[],
 		'Returning empty value in edit mode regardless of placeholder badge.'
 	);
+} );
+
+QUnit.test( 'startEditing and stopEditing add and remove an empty badge', function( assert ) {
+	var $badgeselector = createBadgeselector(),
+		badgeselector = $badgeselector.data( 'badgeselector' );
+
+	badgeselector.startEditing();
+
+	assert.equal( $badgeselector.find( '[data-wb-badge=""]' ).length, 1 );
+
+	badgeselector.stopEditing( true );
+
+	assert.equal( $badgeselector.find( '[data-wb-badge=""]' ).length, 0 );
+
+	badgeselector.startEditing();
+
+	assert.equal( $badgeselector.find( '[data-wb-badge=""]' ).length, 1 );
+
+	badgeselector.stopEditing();
+
+	assert.equal( $badgeselector.find( '[data-wb-badge=""]' ).length, 0 );
+
 } );
 
 } )( jQuery, wikibase, mediaWiki, QUnit );
