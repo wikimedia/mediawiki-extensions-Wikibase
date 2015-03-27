@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_acedeeef",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-27T19:05:22Z",
+      "side": 1,
+      "message": "Exactly, that\u0027s only supported for getting individual entities",
+      "parentUuid": "6e7c4fa4_ec09a6e0",
+      "revId": "1c557f53d6f3494fb0f60e498da1d2ea1432a077",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_8cf832be",
         "filename": "lib/includes/store/sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6cf356d2",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-27T19:05:22Z",
+      "side": 1,
+      "message": "Yeah... later on we should adopt what Aaron is doing in core right now, but this is just doing what the old code did.",
+      "parentUuid": "6e7c4fa4_8cf832be",
+      "revId": "1c557f53d6f3494fb0f60e498da1d2ea1432a077",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_4c2e9a3f",
         "filename": "lib/includes/store/sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2015-03-27T19:00:16Z",
       "side": 1,
       "message": "Would it be useful to allow multiple revision ids here?",
+      "revId": "1c557f53d6f3494fb0f60e498da1d2ea1432a077",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2cc1de58",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-27T19:05:22Z",
+      "side": 1,
+      "message": "I don\u0027t think so... do you have a use case?",
+      "parentUuid": "6e7c4fa4_4c2e9a3f",
       "revId": "1c557f53d6f3494fb0f60e498da1d2ea1432a077",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
