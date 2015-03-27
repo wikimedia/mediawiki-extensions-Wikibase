@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\Scribunto;
+namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Language;
 use Parser;

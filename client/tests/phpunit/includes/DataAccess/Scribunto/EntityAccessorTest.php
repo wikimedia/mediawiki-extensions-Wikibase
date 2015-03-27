@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Client\Tests\Scribunto;
+namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Language;
 use ReflectionMethod;
-use Wikibase\Client\Scribunto\EntityAccessor;
+use Wikibase\Client\DataAccess\Scribunto\EntityAccessor;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\Client\Scribunto\EntityAccessor
+ * @covers Wikibase\Client\DataAccess\Scribunto\EntityAccessor
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -33,7 +33,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$entityAccessor = $this->getEntityAccessor();
 
 		$this->assertInstanceOf(
-			'Wikibase\Client\Scribunto\EntityAccessor',
+			'Wikibase\Client\DataAccess\Scribunto\EntityAccessor',
 			$entityAccessor
 		);
 	}
@@ -133,7 +133,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideZeroIndexedArray
 	 */
 	public function testZeroIndexArray ( array $array, array $expected ) {
-		$renumber = new ReflectionMethod( 'Wikibase\Client\Scribunto\EntityAccessor', 'renumber' );
+		$renumber = new ReflectionMethod( 'Wikibase\Client\DataAccess\Scribunto\EntityAccessor', 'renumber' );
 		$renumber->setAccessible( true );
 		$renumber->invokeArgs( $this->getEntityAccessor(), array( &$array ) );
 

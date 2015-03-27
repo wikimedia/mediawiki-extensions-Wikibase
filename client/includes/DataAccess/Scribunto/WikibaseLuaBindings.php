@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Scribunto;
+namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
 use OutOfBoundsException;

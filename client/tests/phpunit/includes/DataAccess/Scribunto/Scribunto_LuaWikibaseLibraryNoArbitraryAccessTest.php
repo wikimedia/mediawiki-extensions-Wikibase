@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\Scribunto;
+namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 /**
  * Verifies that arbitrary data access doesn't work, if it's disabled.

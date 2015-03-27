@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\Scribunto;
+namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
 	abstract class Scribunto_LuaWikibaseLibraryTestCase extends \MediaWikiTestCase {
