@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_25ab31d5",
+        "filename": "repo/tests/phpunit/includes/rdf/NTriplesRdfWriterTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-27T23:42:10Z",
+      "side": 0,
+      "message": "This test seems to be just deleted instead of moved, is it intentional?",
+      "revId": "9c094bad904d805171470fda1b050b7196a188dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
