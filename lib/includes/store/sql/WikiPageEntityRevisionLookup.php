@@ -3,11 +3,10 @@
 namespace Wikibase\Lib\Store;
 
 use DBAccessBase;
-use DBQueryError;
 use MWContentSerializationException;
 use Revision;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\Store\WikiPageEntityMetaDataLookup;
 use Wikibase\EntityRevision;
 
 /**
@@ -23,31 +22,30 @@ use Wikibase\EntityRevision;
 class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisionLookup {
 
 	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser;
-
-	/**
 	 * @var EntityContentDataCodec
 	 */
 	private $contentCodec;
 
 	/**
+	 * @var WikiPageEntityMetaDataLookup
+	 */
+	private $entityMetaDataLookup;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param EntityIdParser $entityIdParser
+	 * @param WikiPageEntityMetaDataLookup $entityMetaDataLookup
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
-		EntityIdParser $entityIdParser,
+		WikiPageEntityMetaDataLookup $entityMetaDataLookup,
 		$wiki = false
 	) {
 		parent::__construct( $wiki );
 
 		$this->contentCodec = $contentCodec;
 
-		// TODO: migrate table away from using a numeric field so we no longer need this!
-		$this->entityIdParser = $entityIdParser;
+		$this->entityMetaDataLookup = $entityMetaDataLookup;
 	}
 
 	/**
@@ -74,7 +72,11 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		/** @var EntityRevision $entityRevision */
 		$entityRevision = null;
 
-		$row = $this->loadRevisionRow( $entityId, $revisionId );
+		if ( is_int( $revisionId ) ) {
+			$row = $this->entityMetaDataLookup->loadRevisionInformationByRevisionId( $entityId, $revisionId );
+		} else {
+			$row = $this->entityMetaDataLookup->loadRevisionInformationByEntityId( $entityId, $revisionId );
+		}
 
 		if ( $row ) {
 			/** @var EntityRedirect $redirect */
@@ -120,188 +122,14 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
-		$row = null;
+		$rows = $this->entityMetaDataLookup->loadRevisionInformation( array( $entityId ), $mode );
+		$row = $rows[$entityId->getSerialization()];
 
-		if ( $mode !== self::LATEST_FROM_MASTER ) {
-			$row = $this->selectPageLatest( $entityId, DB_SLAVE );
-		}
-
-		if ( !$row ) {
-			$row = $this->selectPageLatest( $entityId, DB_MASTER );
-		}
-
-		if ( $row ) {
+		if ( $row && $row->page_latest ) {
 			return (int)$row->page_latest;
 		}
 
 		return false;
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 * @param int|string $revisionId
-	 *
-	 * @throws DBQueryError
-	 * @return object|null
-	 */
-	private function loadRevisionRow( EntityId $entityId, $revisionId ) {
-		$row = null;
-
-		if ( $revisionId !== self::LATEST_FROM_MASTER ) {
-			$row = $this->selectRevisionRow( $entityId, $revisionId, DB_SLAVE );
-		}
-
-		if ( !$row ) {
-			// try loading from master
-			wfDebugLog(  __CLASS__, __FUNCTION__ . ': try to load ' . $entityId
-				. " with $revisionId from DB_MASTER." );
-
-			$row = $this->selectRevisionRow( $entityId, $revisionId, DB_MASTER );
-		}
-
-		return $row;
-	}
-
-	/**
-	 * Fields we need to select to load a revision
-	 *
-	 * @return string[]
-	 */
-	private function selectFields() {
-		return array(
-			'rev_id',
-			'rev_content_format',
-			'rev_timestamp',
-			'old_id',
-			'old_text',
-			'old_flags'
-		);
-	}
-
-	/**
-	 * Selects revision information from the page, revision, and text tables.
-	 *
-	 * @param EntityId $entityId The entity to query the DB for.
-	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
-	 * @param int $connType DB_SLAVE or DB_MASTER
-	 *
-	 * @throws DBQueryError If the query fails.
-	 * @return object|null a raw database row object, or null if no such entity revision exists.
-	 */
-	private function selectRevisionRow( EntityId $entityId, $revisionId, $connType ) {
-		$db = $this->getConnection( $connType );
-
-		$where = array();
-		$join = array();
-
-		if ( is_int( $revisionId ) ) {
-			$tables = array( 'revision', 'text' );
-
-			// pick revision by id
-			$where['rev_id'] = $revisionId;
-
-			// pick text via rev_text_id
-			$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
-
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up revision $revisionId of " . $entityId );
-		} else {
-			$tables = array( 'page', 'revision', 'text', 'wb_entity_per_page' );
-
-			$entityId = $this->getProperEntityId( $entityId );
-
-			// pick entity by id
-			$where['epp_entity_id'] = $entityId->getNumericId();
-			$where['epp_entity_type'] = $entityId->getEntityType();
-
-			// pick page via epp_page_id
-			$join['page'] = array( 'INNER JOIN', 'epp_page_id=page_id' );
-
-			// pick latest revision via page_latest
-			$join['revision'] = array( 'INNER JOIN', 'page_latest=rev_id' );
-
-			// pick text via rev_text_id
-			$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
-
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up latest revision of ' . $entityId );
-		}
-
-		$res = $db->select( $tables, $this->selectFields(), $where, __METHOD__, array(), $join );
-
-		if ( !$res ) {
-			// this can only happen if the DB is set to ignore errors, which shouldn't be the case...
-			$error = $db->lastError();
-			$errno = $db->lastErrno();
-
-			throw new DBQueryError( $db, $error, $errno, '', __METHOD__ );
-		}
-
-		$this->releaseConnection( $db );
-
-		if ( !( $row = $res->fetchObject() ) ) {
-			$row = null;
-		}
-
-		return $row;
-	}
-
-	/**
-	 * Selects page information from the page table.
-	 *
-	 * @since 0.4
-	 *
-	 * @param EntityId $entityId The entity to query the DB for.
-	 * @param int $connType DB_SLAVE or DB_MASTER
-	 *
-	 * @throws DBQueryError If the query fails.
-	 * @return object|null a raw database row object, or null if no such entity revision exists.
-	 */
-	protected function selectPageLatest( EntityId $entityId, $connType = DB_SLAVE ) {
-		$db = $this->getConnection( $connType );
-
-		$tables = array(
-			'page',
-			'wb_entity_per_page',
-		);
-
-		$where = array();
-		$join = array();
-
-		$entityId = $this->getProperEntityId( $entityId );
-
-		// pick entity by id
-		$where['epp_entity_id'] = $entityId->getNumericId();
-		$where['epp_entity_type'] = $entityId->getEntityType();
-
-		// pick page via epp_page_id
-		$join['page'] = array( 'INNER JOIN', 'epp_page_id=page_id' );
-
-		$res = $db->select( $tables, 'page_latest', $where, __METHOD__, array(), $join );
-
-		if ( !$res ) {
-			// this can only happen if the DB is set to ignore errors, which shouldn't be the case...
-			$error = $db->lastError();
-			$errno = $db->lastErrno();
-			throw new DBQueryError( $db, $error, $errno, '', __METHOD__ );
-		}
-
-		$this->releaseConnection( $db );
-
-		if ( !( $row = $res->fetchObject() ) ) {
-			$row = null;
-		}
-
-		return $row;
-	}
-
-	/**
-	 * @todo: migrate table away from using a numeric field & get rid of this function
-	 *
-	 * @param EntityId $id
-	 *
-	 * @return mixed
-	 */
-	protected function getProperEntityId( EntityId $id ) {
-		return $this->entityIdParser->parse( $id->getSerialization() );
 	}
 
 	/**
