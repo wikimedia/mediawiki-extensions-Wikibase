@@ -24,6 +24,7 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
+use Wikibase\Lib\Store\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\EntityPerPage;
@@ -579,7 +580,7 @@ class SqlStore implements Store {
 
 		$rawLookup = new WikiPageEntityRevisionLookup(
 			$this->contentCodec,
-			$this->entityIdParser,
+			new WikiPageEntityMetaDataLookup( $this->entityIdParser ),
 			false
 		);
 

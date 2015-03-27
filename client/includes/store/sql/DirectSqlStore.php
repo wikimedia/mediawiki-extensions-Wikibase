@@ -25,6 +25,7 @@ use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\Lib\Store\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Store\EntityIdLookup;
 
@@ -311,7 +312,7 @@ class DirectSqlStore implements ClientStore {
 
 		$rawLookup = new WikiPageEntityRevisionLookup(
 			$this->contentCodec,
-			$this->entityIdParser,
+			new WikiPageEntityMetaDataLookup( $this->entityIdParser, $this->repoWiki ),
 			$this->repoWiki
 		);
 
