@@ -298,6 +298,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e1cc56c2",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-27T00:02:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_2a6f8c27",
+      "revId": "422081560ac8e32ece93d4039e1f7f50b8bd4d53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_4ff45aed",
         "filename": "repo/includes/rdf/TurtleRdfWriter.php",
         "patchSetId": 23
