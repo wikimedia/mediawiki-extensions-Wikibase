@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1907861c",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-27T17:28:52Z",
+      "side": 0,
+      "message": "wouldn\u0027t this break existing custom configs?",
+      "revId": "5731606d2c97636750a8f68cd5529a4c1ba2bdbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
