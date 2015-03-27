@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Client\Tests\Scribunto;
+namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Language;
 use PHPUnit_Framework_TestCase;
 use DataValues\StringValue;
 use DataValues\DataValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\Client\Scribunto\SnakSerializationRenderer;
+use Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Serializers\SnakSerializer;
 
 /**
- * @covers Wikibase\Client\Scribunto\SnakSerializationRenderer
+ * @covers Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer
  *
  * @group Wikibase
  * @group WikibaseClient

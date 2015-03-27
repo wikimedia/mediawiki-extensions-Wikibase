@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Client\Tests\Scribunto;
+namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Language;
 use ParserOptions;
-use Wikibase\Client\Scribunto\WikibaseLuaBindings;
+use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaBindings;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -18,7 +18,7 @@ use Wikibase\SettingsArray;
 use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\Client\Scribunto\WikibaseLuaBindings
+ * @covers Wikibase\Client\DataAccess\Scribunto\WikibaseLuaBindings
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -35,7 +35,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$wikibaseLuaBindings = $this->getWikibaseLuaBindings();
 
 		$this->assertInstanceOf(
-			'Wikibase\Client\Scribunto\WikibaseLuaBindings',
+			'Wikibase\Client\DataAccess\Scribunto\WikibaseLuaBindings',
 			$wikibaseLuaBindings
 		);
 	}
