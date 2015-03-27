@@ -462,7 +462,7 @@ class RdfBuilder {
 
 			foreach ( $siteLink->getBadges() as $badge ) {
 				$this->sitelinkWriter
-					->say( self::NS_ONTOLOGY, 'Badge' )
+					->say( self::NS_ONTOLOGY, 'badge' )
 						->is( self::NS_ENTITY, $this->getEntityLName( $badge ) );
 			}
 		}
@@ -590,9 +590,9 @@ class RdfBuilder {
 			$rank = $statement->getRank();
 			if ( isset( self::$rankMap[$rank] ) ) {
 				$this->statementWriter->about( self::NS_STATEMENT, $statementLName )
-					->say( self::NS_ONTOLOGY, 'Rank' )->is( self::NS_ONTOLOGY, self::$rankMap[$rank] );
+					->say( self::NS_ONTOLOGY, 'rank' )->is( self::NS_ONTOLOGY, self::$rankMap[$rank] );
 				if( $isBest ) {
-					$this->statementWriter->say( self::NS_ONTOLOGY, 'Rank' )->is( self::NS_ONTOLOGY, self::WIKIBASE_RANK_BEST );
+					$this->statementWriter->say( self::NS_ONTOLOGY, 'rank' )->is( self::NS_ONTOLOGY, self::WIKIBASE_RANK_BEST );
 				}
 			} else {
 				wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );
@@ -648,7 +648,7 @@ class RdfBuilder {
 
 		foreach ( $props as $prop => $type ) {
 			$propLName = ucfirst( $prop );
-			$getter = "get" . ucfirst( $prop );
+			$getter = "get" . $prop;
 			$data = $value->$getter();
 			if ( !is_null( $data ) ) {
 				$this->addValueToNode( $this->valueWriter, self::NS_ONTOLOGY, $propLName, $type, $data );
@@ -881,9 +881,6 @@ class RdfBuilder {
 							'precision' => 'integer',
 							'timezone' => 'integer',
 							'calendarModel' => 'url',
-// TODO: not used currently
-//							'before' => 'dateTime',
-// 							'after'=> 'dateTime',
 					)
 			);
 
