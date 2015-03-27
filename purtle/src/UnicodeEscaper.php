@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\RDF;
+namespace Wikimedia\Purtle;
 
 /**
  * Helper class for turning non-ascii characters into Python-style unicode escape sequences.
