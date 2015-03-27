@@ -197,30 +197,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				'value' => $wgLang->getCode(), // Default user language
 			),
 		);
-		$formMatchers['label'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'id' => 'wikibase-setlabeldescriptionaliases-label',
-				'class' => 'wb-input',
-				'name' => 'label',
-			),
-		);
-		$formMatchers['description'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'id' => 'wikibase-setlabeldescriptionaliases-description',
-				'class' => 'wb-input',
-				'name' => 'description',
-			),
-		);
-		$formMatchers['aliases'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'id' => 'wikibase-setlabeldescriptionaliases-aliases',
-				'class' => 'wb-input',
-				'name' => 'aliases',
-			),
-		);
 		$formMatchers['submit'] = array(
 			'tag' => 'input',
 			'attributes' => array(
@@ -241,6 +217,30 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			'type' => 'hidden',
 			'name' => 'language',
 			'value' => $wgLang->getCode(), // Default user language
+		);
+		$withIdMatchers['label'] = array(
+			'tag' => 'input',
+			'attributes' => array(
+				'id' => 'wikibase-setlabeldescriptionaliases-label',
+				'class' => 'wb-input',
+				'name' => 'label',
+			),
+		);
+		$withIdMatchers['description'] = array(
+			'tag' => 'input',
+			'attributes' => array(
+				'id' => 'wikibase-setlabeldescriptionaliases-description',
+				'class' => 'wb-input',
+				'name' => 'description',
+			),
+		);
+		$withIdMatchers['aliases'] = array(
+			'tag' => 'input',
+			'attributes' => array(
+				'id' => 'wikibase-setlabeldescriptionaliases-aliases',
+				'class' => 'wb-input',
+				'name' => 'aliases',
+			),
 		);
 
 		$withLanguageMatchers = $withIdMatchers;
