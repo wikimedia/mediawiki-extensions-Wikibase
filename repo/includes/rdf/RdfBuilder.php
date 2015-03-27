@@ -672,16 +672,16 @@ class RdfBuilder {
 		$propertyValueLName = $this->getEntityLName( $propertyId );
 
 		$typeId = $value->getType();
+		$dataType = null;
+
 		if ( $typeId === 'string' ) {
-			// Only strings have different types now, so we can save time but not asking
+			// We only care about the actual data type of strings, so we can save time but not asking
 			// for any other types
 			try {
 				$dataType = $this->propertyLookup->getDataTypeIdForProperty( $propertyId );
 			} catch( PropertyNotFoundException $e ) {
-				$dataType = $typeId;
+				// keep "unknown"
 			}
-		} else {
-			$dataType = $typeId;
 		}
 
 		//FIXME: use a proper registry / dispatching builder
