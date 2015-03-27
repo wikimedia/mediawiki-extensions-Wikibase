@@ -30,11 +30,13 @@ To set up the subscription tracking table on the repo:
 ** If useLegacyChangesSubscription is true, apply repo/sql/changes_subscription.sql manually.
 * Run repo/maintenance/populateChangesSubscription.php to initialize the wb_changes_subscription table based on repowiki.wb_items_per_site.
 
-NOTE: client wikis should be configured to keep track of their subscriptions in the wb_changes_subscription.
+NOTE: If any clients already have usage tracking enabled, then updateSubscriptions.php can also be run and subscription tracking enabled for each of them at this point.
+
+NOTE: Client wikis should be configured to keep track of their subscriptions in the wb_changes_subscription.
 This can be done right away or at any later point, using the instructions in section ''Start tracking
 client subscriptions based on entity usage'' below.
 
-NOTE: the dispatchChanges.php script does not yet use wb_changes_subscription at all. This means
+NOTE: The dispatchChanges.php script does not yet use wb_changes_subscription at all. This means
 that if a client wiki uses an entity ''only'' via arbitrary access (i.e. no page on that wiki is
 linked to that entity via a sitelink), changes to the entity will not cause a change notification
 to the client wiki. This issue is tracked on phabricator as ticket [https://phabricator.wikimedia.org/T66590 T66590].
