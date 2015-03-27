@@ -363,7 +363,9 @@ class RdfBuilder {
 		$this->entityWriter->about( self::NS_ENTITY, $entityLName )
 			->a( self::NS_ONTOLOGY, $this->getEntityTypeName( $entity->getType() ) );
 
-		// TODO: add support for property data types to RDF output
+		if( $entity instanceof Property ) {
+			$this->entityWriter->say( self::NS_ONTOLOGY, 'propertyType' )->value( $entity->getDataTypeId() );
+		}
 
 		$this->entityResolved( $entity->getId() );
 	}
