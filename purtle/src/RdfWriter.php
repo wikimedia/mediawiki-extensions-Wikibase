@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\RDF;
+namespace Wikimedia\Purtle;
 
 /**
  * Writer interface for RDF output. RdfWriter instances are generally stateful,
@@ -103,7 +103,7 @@ interface RdfWriter {
 	 *
 	 * @return RdfWriter $this
 	 */
-	public function say( $base, $local );
+	public function say( $base, $local = null );
 
 	/**
 	 * Produce a resource as the object of a statement.

@@ -67,7 +67,9 @@
 		],
 		"psr-4": {
 			"Wikibase\\Repo\\View\\": "repo/includes/View",
-			"Wikibase\\View\\": "view/src"
+			"Wikibase\\View\\": "view/src",
+		  	"Wikimedia\\Purtle\\": "purtle/src",
+		  	"Wikimedia\\Purtle\\Tests\\": "purtle/tests/phpunit"
 		}
 	}
 }

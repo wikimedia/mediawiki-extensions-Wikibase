@@ -1,6 +1,7 @@
 <?php
 
-namespace Wikibase\RDF;
+namespace Wikimedia\Purtle;
+
 use InvalidArgumentException;
 
 /**

@@ -1,15 +1,13 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikimedia\Purtle\Tests;
 
-use Wikibase\RDF\RdfWriterFactory;
+use Wikimedia\Purtle\RdfWriterFactory;
 
 /**
- * @covers Wikibase\RDF\RdfWriterFactory
+ * @covers Wikimedia\Purtle\RdfWriterFactory
  *
- * @group Wikibase
- * @group WikibaseRepo
- * @group WikibaseRdf
+ * @group Purtle
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -31,7 +29,7 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 		foreach ( $factory->getSupportedFormats() as $format ) {
 			$writer = $factory->getWriter( $format );
 
-			$this->assertInstanceOf( 'Wikibase\RDF\RdfWriter', $writer );
+			$this->assertInstanceOf( 'Wikimedia\Purtle\RdfWriter', $writer );
 		}
 	}
 
@@ -86,7 +84,7 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 		$this->assertContains( $expectedMimeType, $factory->getMimeTypes( $canonicalName ) );
 
 		$writer = $factory->getWriter( $canonicalName );
-		$this->assertInstanceOf( 'Wikibase\RDF\RdfWriter', $writer );
+		$this->assertInstanceOf( 'Wikimedia\Purtle\RdfWriter', $writer );
 	}
 
 	public function testGetMimeTypes() {
