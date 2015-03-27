@@ -68,7 +68,7 @@ class BeforePageDisplayHandler {
 	private function hasEditOrAddLinks( OutputPage $out, Title $title, $actionName ) {
 		if (
 			$out->getProperty( 'noexternallanglinks' ) ||
-			$actionName !== 'view' ||
+			!in_array( $actionName, array( 'view', 'submit' ) ) ||
 			!$title->exists()
 		) {
 			return false;
