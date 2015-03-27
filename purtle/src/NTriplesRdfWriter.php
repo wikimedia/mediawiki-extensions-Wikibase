@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\RDF;
+namespace Wikimedia\Purtle;
 
 /**
  * NTriplesRdfWriter

@@ -1,16 +1,14 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikimedia\Purtle\Tests;
 
-use Wikibase\RDF\RdfWriter;
-use Wikibase\RDF\TurtleRdfWriter;
+use Wikimedia\Purtle\RdfWriter;
+use Wikimedia\Purtle\TurtleRdfWriter;
 
 /**
- * @covers Wikibase\RDF\TurtleRdfWriter
+ * @covers Wikimedia\Purtle\TurtleRdfWriter
  *
- * @group Wikibase
- * @group WikibaseRepo
- * @group WikibaseRdf
+ * @group Purtle
  * @group RdfWriter
  *
  * @licence GNU GPL v2+

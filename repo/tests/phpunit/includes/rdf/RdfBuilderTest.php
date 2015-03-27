@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use SiteList;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\RDF\NTriplesRdfWriter;
+use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\RdfBuilder;
 use Wikibase\RdfProducer;
 use Wikibase\DataModel\Entity\PropertyId;

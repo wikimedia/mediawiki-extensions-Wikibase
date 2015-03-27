@@ -27,7 +27,7 @@ use DataValues\MonolingualTextValue;
 use DataValues\GlobeCoordinateValue;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use DataValues\DecimalValue;
-use Wikibase\RDF\RdfWriter;
+use Wikimedia\Purtle\RdfWriter;
 use Wikibase\DataModel\Entity\PropertyNotFoundException;
 
 /**
