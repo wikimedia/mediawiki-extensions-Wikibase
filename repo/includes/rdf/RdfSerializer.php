@@ -6,8 +6,8 @@ use BagOStuff;
 use SiteList;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\RDF\RdfWriter;
-use Wikibase\RDF\RdfWriterFactory;
+use Wikimedia\Purtle\RdfWriter;
+use Wikimedia\Purtle\RdfWriterFactory;
 
 /**
  * RDF serialization for wikibase data model.

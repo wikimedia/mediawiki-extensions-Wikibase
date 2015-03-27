@@ -17,7 +17,7 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\RDF\RdfWriterFactory;
+use Wikimedia\Purtle\RdfWriterFactory;
 use Wikibase\RdfSerializer;
 use Wikibase\RdfProducer;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;

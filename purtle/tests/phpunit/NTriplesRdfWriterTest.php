@@ -1,17 +1,14 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikimedia\Purtle\Tests;
 
-use Wikibase\RDF\NTriplesRdfWriter;
-use Wikibase\RDF\RdfWriter;
+use Wikimedia\Purtle\NTriplesRdfWriter;
+use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\RDF\NTriplesRdfWriter
+ * @covers Wikimedia\Purtle\NTriplesRdfWriter
  *
- * @group Wikibase
- * @group WikibaseRepo
- * @group WikibaseRdf
- * @group RdfWriter
+ * @group Purtle
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

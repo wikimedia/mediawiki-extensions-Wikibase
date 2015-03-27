@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\RDF;
+namespace Wikimedia\Purtle;
 
 /**
  * Helper class for quoting literals and URIs in N3 output.
