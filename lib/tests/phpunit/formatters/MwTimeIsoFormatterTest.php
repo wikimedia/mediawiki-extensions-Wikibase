@@ -11,7 +11,7 @@ use ValueParsers\ParserOptions;
 use ValueParsers\TimeParser as IsoTimestampParser;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
-use Wikibase\Lib\Parsers\TimeParser;
+use Wikibase\Lib\Parsers\TimeParserFactory;
 
 /**
  * @covers Wikibase\Lib\MwTimeIsoFormatter
@@ -482,7 +482,7 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 
 			// Stuff we do not want to format so must return it :<
 			array(
-				'+00000002013-07-00T00:00:00Z', TimeValue::PRECISION_DAY,
+				'+2013-07-00T00:00:00Z', TimeValue::PRECISION_DAY,
 			),
 			array(
 				'+10000000000-00-00T00:00:00Z', TimeValue::PRECISION_DAY,
@@ -565,7 +565,8 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			IsoTimestampParser::OPT_CALENDAR => $timeValue->getCalendarModel(),
 		) );
 
-		$timeParser = new TimeParser( $options );
+		$factory = new TimeParserFactory( $options );
+		$timeParser = $factory->getTimeParser();
 		$parsedTimeValue = $timeParser->parse( $formattedTime );
 
 		/**

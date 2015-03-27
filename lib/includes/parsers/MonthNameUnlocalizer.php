@@ -2,10 +2,8 @@
 
 namespace Wikibase\Lib\Parsers;
 
-use Language;
-
 /**
- * Class to unlocalize a month name in a date string using MediaWiki's Language object.
+ * Base class to unlocalize a month name in a date string.
  *
  * @since 0.5
  *
@@ -17,29 +15,27 @@ use Language;
  */
 class MonthNameUnlocalizer {
 
-	const BASE_LANGUAGE_CODE = 'en';
+	/**
+	 * @var string[] An array mapping localized to canonical month names.
+	 */
+	private $replacements = array();
 
 	/**
-	 * @var string|null Language code of the source strings or null if it's the base language.
+	 * @param string[] $replacements An array mapping localized month names (possibly including full
+	 * month names, genitive names and abbreviations) to canonical month names.
 	 */
-	private $languageCode = null;
+	public function __construct( array $replacements ) {
+		$this->replacements = $replacements;
 
-	private $baseLanguage = null;
-	private $language = null;
-
-	/**
-	 * @param string $languageCode
-	 */
-	public function __construct( $languageCode ) {
-		if ( $languageCode !== self::BASE_LANGUAGE_CODE ) {
-			$this->languageCode = $languageCode;
-		}
+		// Order search strings from longest to shortest
+		uksort( $this->replacements, function( $a, $b ) {
+			return strlen( $b ) - strlen( $a );
+		} );
 	}
 
 	/**
 	 * Unlocalizes the longest month name in a date string that could be found first.
 	 * Tries to avoid doing multiple replacements and returns the localized original if in doubt.
-	 * Takes full month names, genitive names and abbreviations into account.
 	 *
 	 * @see NumberUnlocalizer::unlocalizeNumber
 	 *
@@ -48,7 +44,7 @@ class MonthNameUnlocalizer {
 	 * @return string Unlocalized date string.
 	 */
 	public function unlocalize( $date ) {
-		foreach ( $this->getReplacements() as $search => $replace ) {
+		foreach ( $this->replacements as $search => $replace ) {
 			$unlocalized = str_replace( $search, $replace, $date, $count );
 
 			// Nothing happened, try the next.
@@ -71,49 +67,6 @@ class MonthNameUnlocalizer {
 		}
 
 		return $date;
-	}
-
-	private function getReplacements() {
-		$replacements = array();
-		$language = $this->getLanguage();
-
-		if ( $language !== null ) {
-			$baseLanguage = $this->getBaseLanguage();
-
-			for ( $i = 1; $i <= 12; $i++ ) {
-				$replace = $baseLanguage->getMonthName( $i );
-
-				$replacements[$language->getMonthName( $i )] = $replace;
-				$replacements[$language->getMonthNameGen( $i )] = $replace;
-				$replacements[$language->getMonthAbbreviation( $i )] = $replace;
-			}
-
-			// Order search strings from longest to shortest
-			uksort( $replacements, function( $a, $b ) {
-				return strlen( $b ) - strlen( $a );
-			} );
-		}
-
-		return $replacements;
-	}
-
-	private function getBaseLanguage() {
-		if ( $this->baseLanguage === null ) {
-			$this->baseLanguage = Language::factory( self::BASE_LANGUAGE_CODE );
-		}
-
-		return $this->baseLanguage;
-	}
-
-	/**
-	 * @return Language|null
-	 */
-	private function getLanguage() {
-		if ( $this->language === null && $this->languageCode !== null ) {
-			$this->language = Language::factory( $this->languageCode );
-		}
-
-		return $this->language;
 	}
 
 }
