@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_4fda0c79",
+        "filename": "lib/includes/parsers/DispatchingValueParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-27T20:34:58Z",
+      "side": 1,
+      "message": "\"Try until you hit one that works\" is generally called \"fallback\".\n\"Dispatching\" is done based on routing info such as name or type.",
+      "parentUuid": "6e7c4fa4_650db7ea",
+      "revId": "8545b90f769178d7072ca41d13b329ddfea31eba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_8f0272bc",
         "filename": "lib/includes/parsers/TimeParserFactory.php",
         "patchSetId": 7
