@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ec09a6e0",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-27T19:00:16Z",
+      "side": 1,
+      "message": "Never a specific revision id?",
+      "revId": "1c557f53d6f3494fb0f60e498da1d2ea1432a077",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8cf832be",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-27T19:00:16Z",
+      "side": 1,
+      "message": "So we *always* fall back to checking master if the revision wasn\u0027t found on the slave?",
+      "revId": "1c557f53d6f3494fb0f60e498da1d2ea1432a077",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4c2e9a3f",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-27T19:00:16Z",
+      "side": 1,
+      "message": "Would it be useful to allow multiple revision ids here?",
+      "revId": "1c557f53d6f3494fb0f60e498da1d2ea1432a077",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
