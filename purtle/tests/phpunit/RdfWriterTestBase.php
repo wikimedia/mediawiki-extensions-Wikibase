@@ -1,8 +1,8 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikimedia\Purtle\Tests;
 
-use Wikibase\RDF\RdfWriter;
+use Wikimedia\Purtle\RdfWriter;
 
 /**
  * Base class for tests for RdfWriter implementations.
@@ -16,7 +16,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	abstract protected function getFileSuffix();
 
 	protected function getExpectedOutputFile( $datasetName ) {
-		$path = __DIR__ . '/../../data/rdf/' . $datasetName . '.' . $this->getFileSuffix();
+		$path = __DIR__ . '/../data/' . $datasetName . '.' . $this->getFileSuffix();
 		return $path;
 	}
 
@@ -40,9 +40,9 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 		$path = $this->getExpectedOutputFile( $datasetName );
 
 		// Create test data file if it doesn't exist.
-		if ( !file_exists( $path ) ) {
-			file_put_contents( $path . '.actual', join( "\n", $actual ) );
-		}
+		//if ( !file_exists( $path ) ) {
+		//	file_put_contents( $path . '.actual', join( "\n", $actual ) );
+		//}
 
 		$expected = file( $path );
 

@@ -1,16 +1,13 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikimedia\Purtle\Tests;
 
-use Wikibase\RDF\N3Quoter;
+use Wikimedia\Purtle\N3Quoter;
 
 /**
- * @covers Wikibase\RDF\N3Quoter
+ * @covers Wikimedia\Purtle\N3Quoter
  *
- * @group Wikibase
- * @group WikibaseRepo
- * @group WikibaseRdf
- * @group RdfWriter
+ * @group Purtle
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

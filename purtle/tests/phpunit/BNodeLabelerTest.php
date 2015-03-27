@@ -1,16 +1,13 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikimedia\Purtle\Tests;
 
-use Wikibase\RDF\BNodeLabeler;
+use Wikimedia\Purtle\BNodeLabeler;
 
 /**
- * @covers Wikibase\RDF\BNodeLabeler
+ * @covers Wikimedia\Purtle\BNodeLabeler
  *
- * @group Wikibase
- * @group WikibaseRepo
- * @group WikibaseRdf
- * @group RdfWriter
+ * @group Purtle
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

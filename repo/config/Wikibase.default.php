@@ -65,7 +65,7 @@ return call_user_func( function() {
 			'rdfxml',
 			'n3',
 			'turtle',
-			'ntriples',
+			'n-triples',
 
 			// hardcoded internal handling
 			'html',
