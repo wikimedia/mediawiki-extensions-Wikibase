@@ -35,7 +35,7 @@ use Wikibase\Validators\UniquenessViolation;
  */
 class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestBase {
 
-	protected $languageCodes = array( 'en', 'de', 'de-ch', 'ii', 'zh' );
+	private static $languageCodes = array( 'en', 'de', 'de-ch', 'ii', 'zh' );
 
 	/**
 	 * @see SpecialPageTestBase::newSpecialPage()
@@ -68,7 +68,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		return new FingerprintChangeOpFactory(
 			new TermValidatorFactory(
 				$maxLength,
-				$this->languageCodes,
+				self::$languageCodes,
 				$this->getIdParser(),
 				$this->getLabelDescriptionDuplicateDetector(),
 				$this->mockRepository
@@ -84,7 +84,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			->disableOriginalConstructor()
 			->getMock();
 
-		$self = $this; // yay PHP 5.3
+		$self = $this;
 		$detector->expects( $this->any() )
 			->method( 'detectTermConflicts' )
 			->will( $this->returnCallback( function(
@@ -139,20 +139,13 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 * @return ContentLanguages
 	 */
 	private function getContentLanguages() {
-		$languages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
+		$fake = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
 
-		$languages->expects( $this->any() )
-			->method( 'getLanguages' )
-			->will( $this->returnValue( $this->languageCodes ) );
-
-		$languageCodes = $this->languageCodes; // for PHP 5.3
-		$languages->expects( $this->any() )
+		$fake->expects( $this->any() )
 			->method( 'hasLanguage' )
-			->will( $this->returnCallback( function( $code ) use ( $languageCodes ) {
-				return in_array( $code, $languageCodes );
-			} ) );
+			->will( $this->returnValue( true ) );
 
-		return $languages;
+		return $fake;
 	}
 
 	/**
@@ -162,7 +155,11 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 *
 	 * @return Fingerprint
 	 */
-	private function makeFingerprint( array $labels, array $descriptions, array $aliases ) {
+	private function makeFingerprint(
+		array $labels = array(),
+		array $descriptions = array(),
+		array $aliases = array()
+	) {
 		$fingerprint = new Fingerprint();
 
 		foreach ( $labels as $lang => $text ) {
@@ -251,9 +248,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$withLanguageMatchers['label']['attributes']['value'] = 'foo';
 
 		$fooFingerprint = $this->makeFingerprint(
-			array( 'de' => 'foo' ),
-			array(),
-			array()
+			array( 'de' => 'foo' )
 		);
 
 		return array(
@@ -295,9 +290,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				new FauxRequest( array( 'language' => 'en', 'label' => 'FOO' ), true ),
 				array(),
 				$this->makeFingerprint(
-					array( 'de' => 'foo', 'en' => 'FOO' ),
-					array(),
-					array()
+					array( 'de' => 'foo', 'en' => 'FOO' )
 				),
 			),
 
@@ -307,9 +300,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				new FauxRequest( array( 'language' => 'de', 'label' => 'FOO' ), true ),
 				array(),
 				$this->makeFingerprint(
-					array( 'de' => 'FOO' ),
-					array(),
-					array()
+					array( 'de' => 'FOO' )
 				),
 			),
 
@@ -320,8 +311,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				array(),
 				$this->makeFingerprint(
 					array( 'de' => 'foo' ),
-					array( 'de' => 'Lorem Ipsum' ),
-					array()
+					array( 'de' => 'Lorem Ipsum' )
 				),
 			),
 
@@ -345,7 +335,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 */
 	public function testExecute(
 		Fingerprint $inputFingerprint,
-		$subPage,
+		$subpage,
 		WebRequest $request = null,
 		array $tagMatchers,
 		Fingerprint $expectedFingerprint = null
@@ -358,8 +348,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		$this->newSpecialPage();
 
-		$subPage = str_replace( '$id', $id->getSerialization(), $subPage );
-		list( $output, $response ) = $this->executeSpecialPage( $subPage, $request );
+		$subpage = str_replace( '$id', $id->getSerialization(), $subpage );
+		list( $output, $response ) = $this->executeSpecialPage( $subpage, $request );
 
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
 
