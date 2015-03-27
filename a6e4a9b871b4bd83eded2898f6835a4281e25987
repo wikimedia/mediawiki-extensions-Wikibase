@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e7c4fa4_aab62e37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-27T22:04:27Z",
+      "side": 1,
+      "message": "column :)",
+      "revId": "a6e4a9b871b4bd83eded2898f6835a4281e25987",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_6a4fb66e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 7
@@ -13,6 +30,23 @@
       "writtenOn": "2015-03-27T21:48:52Z",
       "side": 1,
       "message": "That is not true.",
+      "revId": "a6e4a9b871b4bd83eded2898f6835a4281e25987",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6a8c9689",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-27T22:04:27Z",
+      "side": 1,
+      "message": "Keeping and column",
       "revId": "a6e4a9b871b4bd83eded2898f6835a4281e25987",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
