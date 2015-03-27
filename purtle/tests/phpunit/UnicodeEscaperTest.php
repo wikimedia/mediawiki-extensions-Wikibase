@@ -1,15 +1,13 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikimedia\Purtle\Tests;
 
-use Wikibase\RDF\UnicodeEscaper;
+use Wikimedia\Purtle\UnicodeEscaper;
 
 /**
- * @covers Wikibase\RDF\UnicodeEscaper
+ * @covers Wikimedia\Purtle\UnicodeEscaper
  *
- * @group Wikibase
- * @group WikibaseRepo
- * @group WikibaseRdf
+ * @group Purtle
  * @group RdfWriter
  *
  * @licence GNU GPL v2+

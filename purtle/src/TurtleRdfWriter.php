@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\RDF;
+namespace Wikimedia\Purtle;
 
 /**
  * RdfWriter implementation for generating Turtle output.
