@@ -104,6 +104,8 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			//time
 			array( 'time', 'Foo', false, 'TimeValue expected, string supplied' ),
 			array( 'time', new NumberValue( 7 ), false, 'TimeValue expected' ),
+			array( 'time', new TimeValue( '+23-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://acme.com/calendar' ), false, 'calendar: year too short' ),
+			array( 'time', new TimeValue( '+0023-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://acme.com/calendar' ), true, 'calendar: four digit year with leading zeros is ok' ),
 
 			//time['calendar-model']
 			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, '' ), false, 'calendar: empty string should be invalid' ),
