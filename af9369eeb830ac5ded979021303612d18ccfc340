@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ecdf663d",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-27T19:03:45Z",
+      "side": 1,
+      "message": "That\u0027s not correct. You don\u0027t have to do this, usage tracking by itself doesn\u0027t affect subscriptions until you enable subscription tracking.\n\nYou only need updateSubscriptions.php  when enabling subscription tracking on the clients, which you can only do after subscriptions have been enabled on the repo, and usage tracking on the client. But you don\u0027t *need* to do it.",
+      "revId": "af9369eeb830ac5ded979021303612d18ccfc340",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
