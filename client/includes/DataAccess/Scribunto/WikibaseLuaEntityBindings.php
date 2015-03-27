@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Scribunto;
+namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataAccess\StatementTransclusionInteractor;
