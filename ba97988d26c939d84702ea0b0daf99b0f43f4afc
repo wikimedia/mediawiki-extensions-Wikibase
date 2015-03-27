@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_228fac30",
+        "filename": "lib/resources/jquery.wikibase/toolbar/controller/definitions/addtoolbar/statementview-snakview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-27T14:26:32Z",
+      "side": 1,
+      "message": "I think this is a snaklistview, isn\u0027t it? I don\u0027t think it is a listitemadapter.",
+      "revId": "ba97988d26c939d84702ea0b0daf99b0f43f4afc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
