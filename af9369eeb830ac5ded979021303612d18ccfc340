@@ -16,6 +16,24 @@
       "revId": "af9369eeb830ac5ded979021303612d18ccfc340",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ef519811",
+        "filename": "docs/usagetracking-migration.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-27T20:13:33Z",
+      "side": 1,
+      "message": "it is important to be aware that this *should* (imho) be done + enable subscription tracking at this point if clients already have usage tracking.",
+      "parentUuid": "6e7c4fa4_ecdf663d",
+      "revId": "af9369eeb830ac5ded979021303612d18ccfc340",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
