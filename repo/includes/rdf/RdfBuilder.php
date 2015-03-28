@@ -181,7 +181,7 @@ class RdfBuilder {
 				'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
 				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 				'xsd' => 'http://www.w3.org/2001/XMLSchema#',
-				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-" . self::FORMAT_VERSION . "#",
+				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-beta#" ,
 				self::NS_DIRECT_CLAIM => $this->baseUri . 'assert/',
 				self::NS_VALUE => $this->baseUri . 'value/',
 				self::NS_QUALIFIER => $this->baseUri . 'qualifier/',
