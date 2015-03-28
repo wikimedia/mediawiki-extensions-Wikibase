@@ -16,6 +16,24 @@
       "revId": "9c094bad904d805171470fda1b050b7196a188dd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1b6c56ca",
+        "filename": "repo/tests/phpunit/includes/rdf/NTriplesRdfWriterTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-28T21:12:53Z",
+      "side": 0,
+      "message": "It was moved to purtle/tests/phpunit/NTriplesRdfWriterTest.php.\ngit detects \"moved\" my finding \"similar\" files with a different path/name. I guess this file wasn\u0027t \"similar\" enough for git (or gerrit) to be considered \"moved\".",
+      "parentUuid": "6e7c4fa4_25ab31d5",
+      "revId": "9c094bad904d805171470fda1b050b7196a188dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
