@@ -16,6 +16,24 @@
       "revId": "5731606d2c97636750a8f68cd5529a4c1ba2bdbe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ccb06a40",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-28T21:15:21Z",
+      "side": 0,
+      "message": "In theory yes, in practice I find it very unlikely that any of the few third party installations has custom settings for this.\n\nBut in any case, I did not intend to change this in this patch.",
+      "parentUuid": "6e7c4fa4_1907861c",
+      "revId": "5731606d2c97636750a8f68cd5529a4c1ba2bdbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
