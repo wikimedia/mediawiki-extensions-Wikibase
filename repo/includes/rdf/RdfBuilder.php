@@ -47,7 +47,7 @@ class RdfBuilder {
 	const FORMAT_VERSION = '0.0.1';
 
 	//FIXME: this is the wikibase ontology, NOT the wikidata ontology!
-	const ONTOLOGY_BASE_URI = 'http://www.wikidata.org/ontology';
+	const ONTOLOGY_BASE_URI = 'http://www.wikidata.org/ontology#';
 	const NS_ONTOLOGY = 'wikibase'; // wikibase ontology (shared)
 	const NS_ENTITY = 'entity'; // concept uris
 	const NS_DATA = 'data'; // document uris
@@ -183,7 +183,7 @@ class RdfBuilder {
 				'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
 				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 				'xsd' => 'http://www.w3.org/2001/XMLSchema#',
-				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-" . self::FORMAT_VERSION . "#",
+				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI ,
 				self::NS_DIRECT_CLAIM => $this->baseUri . 'assert/',
 				self::NS_VALUE => $this->baseUri . 'value/',
 				self::NS_QUALIFIER => $this->baseUri . 'qualifier/',
