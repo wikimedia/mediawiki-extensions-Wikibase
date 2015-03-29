@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3e9fbffb",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-29T16:22:30Z",
+      "side": 1,
+      "message": "I don\u0027t see why we\u0027d still need the DRAIN state. can\u0027t we just rename/repurpose it?",
+      "revId": "6cffdee950dabffeb9d3a44ffe582f818c0cb941",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5e7ddbae",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-29T16:22:30Z",
+      "side": 1,
+      "message": "This is a bit strange if we are going to call drain() on the sub-writer. It would be nice to have a way to explicitly distinugish between getting an attached (automatically drained) sub-writer, and a detached one that only shared prefixes.",
+      "revId": "6cffdee950dabffeb9d3a44ffe582f818c0cb941",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_de69ebf6",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-29T16:22:30Z",
+      "side": 1,
+      "message": "could use STATE_DOCUMENT",
+      "revId": "6cffdee950dabffeb9d3a44ffe582f818c0cb941",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fe6ce706",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-29T16:22:30Z",
+      "side": 1,
+      "message": "could use STATE_DOCUMENT",
+      "revId": "6cffdee950dabffeb9d3a44ffe582f818c0cb941",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
