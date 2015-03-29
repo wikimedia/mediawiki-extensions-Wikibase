@@ -5,6 +5,14 @@
 			"Macofe"
 		]
 	},
+	"wikibase-edit": "тюрлендир",
+	"wikibase-add": "къош",
+	"wikibase-label-empty": "Эн (ат) джокъду",
+	"wikibase-statements": "Бегитиуле",
+	"wikibase-sitelinks-special": "Башха сайтла",
+	"wikibase-aliases-empty": "Альтернатив атла (синонимле) табылмалла",
+	"wikibase-statementview-rank-normal": "Нормалы ранг",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|къайнакъ}}",
 	"wikibase-itemdisambiguation-lookup-language": "Тил код:",
 	"wikibase-modifyterm-language": "Тил код:"
 }

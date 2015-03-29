@@ -28,6 +28,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}-kohde",
 	"wikibase-editlinks": "Muokkaa linkkejä",
 	"wikibase-editlinkstitle": "Muokkaa kieltenvälisiä linkkejä",
+	"wikibase-addlinkstitle": "Lisää kieltenvälisiä linkkejä",
 	"wikibase-linkitem-addlinks": "Lisää linkkejä",
 	"wikibase-linkitem-alreadylinked": "Sivu, johon halusit linkittää, on jo liitetty keskustietovaraston [$1 kohteeseen], joka on linkitetty tämän sivuston sivuun $2. Kohteisiin voidaan liittää vain yksi sivu kustakin sivustosta. Linkitä johonkin muuhun sivuun.",
 	"wikibase-linkitem-close": "Sulje ikkuna ja lataa sivu uudelleen",

@@ -4,5 +4,6 @@
 			"Derslek"
 		]
 	},
-	"wikibase-label-empty": "Исем (лейбл) әле куелмаган"
+	"wikibase-label-empty": "Исем (лейбл) әле куелмаган",
+	"wikibase-statementview-rank-normal": "Нормаль ранг"
 }

@@ -5,5 +5,10 @@
 		]
 	},
 	"wikibase-edit": "ಸಂಪಾದನೆ ಮಲ್ಪುಲೆ",
-	"wikibase-add": "ಸೇರಿಸಾಲೆ"
+	"wikibase-add": "ಸೇರಿಸಾಲೆ",
+	"wikibase-description-empty": "ನನಲಾ ಒವ್ವೇ ವಿವರಣೆದ ವ್ಯಾಖ್ಯಾನ ಮಲ್ತ್‍ದಿಜ್ಜಿ",
+	"wikibase-statements": "ಹೇಳಿಕೆಲು",
+	"wikibase-sitelinks-special": "ಬೇತೆ ತಾಣೊಲು",
+	"wikibase-statementview-rank-normal": "ಸಾಧಾರಣ ಶ್ರೇಣಿ",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ಉಲ್ಲೇಖ|ಉಲ್ಲೇಖಲು}}"
 }

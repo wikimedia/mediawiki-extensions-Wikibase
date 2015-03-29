@@ -1,13 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gitartha.bordoloi"
+			"Gitartha.bordoloi",
+			"IKHazarika"
 		]
 	},
 	"tooltip-t-wikibase": "সংযোজিত তথ্যভঁৰালৰ আইটেমলৈ লিংক",
 	"wikibase-after-page-move-queued": "এই পৃষ্ঠাৰ লগত সংযুক্ত [$1 ৱিকিডে'টা ভুক্তি] সোনকালেই স্বয়ংক্ৰিয়ভাৱে নবীকৰণ কৰা হ'ব।",
+	"wikibase-comment-update": "{{WBREPONAME}} বস্তু সলনি হ'ল",
 	"wikibase-dataitem": "{{WBREPONAME}} আইটেম",
 	"wikibase-editlinks": "আন্তঃৱিকি লিংক সম্পাদনা কৰক",
+	"wikibase-editlinkstitle": "আন্তৰ্ৱিকি লিংক সম্পাদনা কৰক",
 	"wikibase-linkitem-title": "পৃষ্ঠাৰ লগত সংযোগ",
 	"wikibase-linkitem-linkpage": "পৃষ্ঠাৰ লগত সংযোগ কৰক",
 	"wikibase-linkitem-selectlink": "অনুগ্ৰহ কৰি এই পৃষ্ঠাৰ লগত সংযোগ কৰিবলৈ এটা ছাইট আৰু নিৰ্দিষ্ট পৃষ্ঠা বাছনি কৰক।",
@@ -23,5 +26,6 @@
 	"wikibase-rc-wikibase-edit-letter": "ড",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} সম্পাদনা",
 	"wikibase-unconnectedpages-submit": "যাওক",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\" কোনো বৈধ ভাষা ক'ড নহয়।"
+	"wikibase-unconnectedpages-invalid-language": "\"$1\" কোনো বৈধ ভাষা ক'ড নহয়।",
+	"wikibase-otherprojects": "আন প্ৰকল্পসমূহ"
 }

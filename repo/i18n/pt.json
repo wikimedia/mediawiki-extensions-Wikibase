@@ -263,6 +263,7 @@
 	"wikibase-item-summary-wbsetaliases-add-remove": "Adicionou ou removeu {{PLURAL:$1|nome alternativo|nomes alternativos}} [$2]",
 	"wikibase-item-summary-wbsetaliases-add": "Adicionou {{PLURAL:$1|nome alternativo|nomes alternativos}} [$2]",
 	"wikibase-item-summary-wbsetaliases-remove": "Removeu {{PLURAL:$1|nome alternativo|nomes alternativos}} [$2]",
+	"wikibase-item-summary-wbsetlabeldescriptionaliases": "Alterou o rótulo, descrição e nomes alternativos para [$2]",
 	"wikibase-item-summary-wbsetsitelink-add": "Adicionou ligação para [$2]",
 	"wikibase-item-summary-wbsetsitelink-add-both": "Adicionou ligação com emblema para [$2]",
 	"wikibase-item-summary-wbsetsitelink-set": "Ligação alterada para [$2]",

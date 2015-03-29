@@ -1,12 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"VASANTH S.N."
+			"VASANTH S.N.",
+			"Vishwanatha Badikana"
 		]
 	},
+	"tooltip-t-wikibase": "ಕೊಂಡಿದ ಮೂಲಕ ಸಂಗ್ರಹಿಸಯಿನ ವಸ್ತುಲೆನ ಸಂಪರ್ಕ ಮಾಹಿತಿ",
 	"wikibase-dataitem": "{{WBREPONAME}} ವಸ್ತು",
 	"wikibase-editlinks": "ಕೊಂಡಿಲೆನ್ ಸಂಪಾದನೆ ಮಲ್ಪುಲೆ",
+	"wikibase-editlinkstitle": "ಅಂತರ್ ಭಾಷಾ ಕೊಂಡಿಲೆನ್ ಸಂಪಾದಿಸಲೆ",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "ದೆಂಗಾಲೆ",
 	"wikibase-rc-hide-wikidata-show": "ತೊಜಾವು",
-	"wikibase-rc-wikibase-edit-letter": "ಡಿ"
+	"wikibase-rc-wikibase-edit-letter": "ಡಿ",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ಸಂಪಾದನೆ",
+	"wikibase-otherprojects": "ಬೇತೆ ಯೋಜನೆಲು"
 }

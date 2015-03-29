@@ -4,8 +4,8 @@
 			"Cedric31"
 		]
 	},
-	"specialpages-group-wikibase": "Referencial Wikibase",
-	"wikibase-error-unexpected": "Una error imprevista s'es producha : $1",
+	"specialpages-group-wikibase": "Wikibase",
+	"wikibase-error-unexpected": "Error : $1",
 	"wikibase-sitelinks-wikipedia": "Wikipèdia",
 	"wikibase-snakview-snaktypeselector-somevalue": "valor desconeguda",
 	"wikibase-snakview-snaktypeselector-novalue": "pas cap de valor",

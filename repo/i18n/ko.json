@@ -7,7 +7,8 @@
 			"Priviet",
 			"아라",
 			"Revi",
-			"Macofe"
+			"Macofe",
+			"SeoJeongHo"
 		]
 	},
 	"wikibase-desc": "구조화한 데이터 저장소",
@@ -243,6 +244,7 @@
 	"wikibase-item-summary-wbsetaliases-add-remove": "[$2] {{PLURAL:$1|별칭}}을 추가하고 제거함",
 	"wikibase-item-summary-wbsetaliases-add": "[$2] {{PLURAL:$1|별칭}}을 추가함",
 	"wikibase-item-summary-wbsetaliases-remove": "[$2] {{PLURAL:$1|별칭}}을 제거함",
+	"wikibase-item-summary-wbsetlabeldescriptionaliases": "[$2] 레이블, 설명 과 별칭 변경",
 	"wikibase-item-summary-wbsetsitelink-add": "[$2]에 링크를 추가함",
 	"wikibase-item-summary-wbsetsitelink-add-both": "[$2]에 배지로 추가된 링크",
 	"wikibase-item-summary-wbsetsitelink-set": "[$2]로 링크를 바꿈",
@@ -286,6 +288,7 @@
 	"wikibase-property-summary-wbsetaliases-add-remove": "[$2] {{PLURAL:$1|별칭}}을 추가하고 제거함",
 	"wikibase-property-summary-wbsetaliases-add": "[$2] {{PLURAL:$1|별칭}}을 추가함",
 	"wikibase-property-summary-wbsetaliases-remove": "[$2] {{PLURAL:$1|별칭}}을 제거함",
+	"wikibase-property-summary-wbsetlabeldescriptionaliases": "[$2] 레이블, 설명 과 별칭 변경",
 	"wikibase-property-summary-special-create-property": "{{PLURAL:$1|값}}으로 [$2] 속성을 만듦",
 	"wikibase-listdatatypes-wikibase-item-head": "항목",
 	"wikibase-listdatatypes-wikibase-item-body": "프로젝트에서 다른 항목의 링크입니다. 입력할 때 위키데이터의 \"항목\" 이름공간과 일치하는 항목을 검색합니다. 하나의 텍스트 입력 상자로 구성됩니다.",
