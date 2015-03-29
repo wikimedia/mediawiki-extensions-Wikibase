@@ -18,6 +18,7 @@ use Wikibase\Test\RdfBuilderTest;
  *
  * @group Wikibase
  * @group WikibaseRepo
+ * @group WikibaseRdf
  * @group RdfDump
  *
  * @license GPL 2+
