@@ -16,7 +16,8 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\RdfBuilder;
+use Wikibase\Rdf\RdfBuilder;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriterFactory;
 use Wikibase\RdfProducer;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
@@ -561,8 +562,7 @@ class EntityDataSerializationService {
 
 		$rdfBuilder = new RdfBuilder(
 			$this->sites,
-			$this->rdfBaseURI,
-			$this->rdfDataURI,
+			new RdfVocabulary( $this->rdfBaseURI, $this->rdfDataURI ),
 			$this->propertyLookup,
 			$this->getFlavor( $flavorName ),
 			$rdfWriter,
