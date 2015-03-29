@@ -10,6 +10,7 @@ use Wikibase\RdfBuilder;
 use Wikibase\RdfProducer;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\RdfVocabulary;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -99,8 +100,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$emitter = new NTriplesRdfWriter();
 		return new RdfBuilder(
 			self::getSiteList(),
-			self::URI_BASE,
-			self::URI_DATA,
+			new RdfVocabulary( self::URI_BASE, self::URI_DATA ),
 			self::getMockRepository(),
 			$produce,
 			$emitter,
@@ -171,14 +171,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 				array('Q8', 'Q8_baddates'),
 		);
 
-		$testData = array();
-		foreach ( $rdfTests as $test ) {
-			$testData[$test[1]] = array (
-					$this->getEntityData( $test[0] ),
-					$this->getSerializedData( $test[1] )
-			);
-		}
-		return $testData;
+		return $rdfTests;
 	}
 
 	/**
@@ -196,7 +189,10 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getRdfTests
 	 */
-	public function testRdfBuild( Entity $entity, array $correctData ) {
+	public function testRdfBuild( $entityName, $dataSetName ) {
+		$entity = $this->getEntityData( $entityName );
+		$correctData = $this->getSerializedData( $dataSetName );
+
 		$builder = self::newRdfBuilder( RdfProducer::PRODUCE_ALL_STATEMENTS |
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
 				RdfProducer::PRODUCE_QUALIFIERS |
@@ -224,18 +220,16 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			array( 'Q4', RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES, 'Q4_resolved' ),
 		);
 
-		$testData = array();
-		foreach($produceTests as $test) {
-			$testData[$test[2]] = array( $this->getEntityData($test[0]), $test[1], $this->getSerializedData($test[2]) );
-		}
-		return $testData;
-
+		return $produceTests;
 	}
 
 	/**
 	 * @dataProvider getProduceOptions
 	 */
-	public function testRdfOptions( Entity $entity, $produceOption, array $correctData ) {
+	public function testRdfOptions( $entityName, $produceOption, $dataSetName ) {
+		$entity = $this->getEntityData( $entityName );
+		$correctData = $this->getSerializedData( $dataSetName );
+
 		$builder = self::newRdfBuilder( $produceOption );
 		$builder->addEntity( $entity );
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2013-10-04T03:31:05Z" );
