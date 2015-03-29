@@ -635,11 +635,12 @@ class RdfBuilder {
 	 * Created full data value
 	 *
 	 * @param DataValue $value
+	 * @param string $prefix Prefix to use for predicate values
 	 * @param array $props List of properties
 	 *
 	 * @return string the id of the value node, for use with the self::NS_VALUE namespace.
 	 */
-	private function addExpandedValue( DataValue $value, array $props ) {
+	private function addExpandedValue( DataValue $value, $prefix, array $props ) {
 		$valueLName = $value->getHash();
 		if ( $this->alreadySeen( $valueLName, 'V' ) ) {
 			return $valueLName;
@@ -647,7 +648,7 @@ class RdfBuilder {
 		$this->valueWriter->about( self::NS_VALUE, $valueLName )->a( self::NS_ONTOLOGY, 'Value' );
 
 		foreach ( $props as $prop => $type ) {
-			$propLName = ucfirst( $prop );
+			$propLName = $prefix . ucfirst( $prop );
 			$getter = "get" . $prop;
 			$data = $value->$getter();
 			if ( !is_null( $data ) ) {
@@ -875,7 +876,7 @@ class RdfBuilder {
 
 		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) { //FIXME: register separate generators for different output flavors.
 
-			$valueLName = $this->addExpandedValue( $value,
+			$valueLName = $this->addExpandedValue( $value, "time",
 					array(  'time' => null,
 							// TODO: eventually use identifier here
 							'precision' => 'integer',
@@ -903,7 +904,7 @@ class RdfBuilder {
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->value( $value->getAmount(), 'xsd', 'decimal' );
 
 		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) {
-			$valueLName = $this->addExpandedValue( $value,
+			$valueLName = $this->addExpandedValue( $value, "quantity",
 					array(  'amount' => 'decimal',
 							'upperBound' => 'decimal',
 							'lowerBound' => 'decimal',
@@ -932,7 +933,7 @@ class RdfBuilder {
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->value( $point, self::NS_GEO, "wktLiteral" );
 
 		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) {
-			$valueLName = $this->addExpandedValue( $value,
+			$valueLName = $this->addExpandedValue( $value, "geo",
 					array(  'latitude' => 'decimal',
 							'longitude' => 'decimal',
 							'precision' => 'decimal',
