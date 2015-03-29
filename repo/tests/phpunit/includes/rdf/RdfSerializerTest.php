@@ -1,9 +1,10 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Test\Rdf;
 
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
+use Wikibase\Rdf\Test\RdfBuilderTestData;
 use Wikibase\RdfSerializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -138,7 +139,9 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 
 	private function newRdfSerializer( $formatName ) {
 		$emitter = RdfSerializer::getRdfWriter( $formatName );
-		$mockRepository = RdfBuilderTest::getMockRepository();
+
+		$testData = new RdfBuilderTestData(__DIR__ . "/../../data/rdf", __DIR__ . "/../../data/rdf" );
+		$mockRepository = $testData->getMockRepository();
 
 		foreach ( $this->getTestEntities() as $entity ) {
 			$mockRepository->putEntity( $entity );
@@ -146,9 +149,9 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 
 		$serializer = new RdfSerializer(
 			$emitter,
-			RdfBuilderTest::URI_BASE,
-			RdfBuilderTest::URI_DATA,
-			RdfBuilderTest::getSiteList(),
+			RdfBuilderTestData::URI_BASE,
+			RdfBuilderTestData::URI_DATA,
+			$testData->getSiteList(),
 			$mockRepository,
 			$mockRepository,
 			RdfSerializer::PRODUCE_ALL

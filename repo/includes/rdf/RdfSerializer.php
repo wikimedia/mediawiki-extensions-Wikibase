@@ -6,6 +6,8 @@ use BagOStuff;
 use SiteList;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Rdf\RdfBuilder;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriter;
 use Wikimedia\Purtle\RdfWriterFactory;
 
@@ -130,8 +132,7 @@ class RdfSerializer implements RdfProducer {
 
 		$builder = new RdfBuilder(
 			$this->sites,
-			$this->baseUri,
-			$this->dataUri,
+			new RdfVocabulary( $this->baseUri, $this->dataUri ),
 			$this->propertyLookup,
 			$this->flavor,
 			$this->emitter,
