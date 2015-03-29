@@ -12,13 +12,14 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
-use Wikibase\Test\RdfBuilderTest;
+use Wikibase\Test\Rdf\RdfBuilderTest;
 
 /**
  * @covers Wikibase\Dumpers\RdfDumpGenerator
  *
  * @group Wikibase
  * @group WikibaseRepo
+ * @group WikibaseRdf
  * @group RdfDump
  *
  * @license GPL 2+
