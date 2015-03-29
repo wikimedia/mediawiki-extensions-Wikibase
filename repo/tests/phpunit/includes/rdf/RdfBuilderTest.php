@@ -2,17 +2,11 @@
 
 namespace Wikibase\Test;
 
-use SiteList;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikimedia\Purtle\NTriplesRdfWriter;
+use Wikibase\Rdf\Test\RdfBuilderTestData;
 use Wikibase\RdfBuilder;
 use Wikibase\RdfProducer;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers Wikibase\RdfBuilder
@@ -23,85 +17,38 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Stas Malyshev
  */
 class RdfBuilderTest extends \MediaWikiTestCase {
 
-	const URI_BASE = 'http://acme.test/';
-	const URI_DATA = 'http://data.acme.test/';
-
-	private $codec;
+	private $testData;
 
 	/**
 	 * Initialize repository data
+	 *
+	 * @return RdfBuilderTestData
 	 */
-	private function getCodec()
+	private function getTestData()
 	{
-		if( empty($this->codec) ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-	        $wikibaseRepo->getSettings()->setSetting( 'internalEntitySerializerClass', null );
-	        $wikibaseRepo->getSettings()->setSetting( 'useRedirectTargetColumn', true );
-	        $this->codec = $wikibaseRepo->getEntityContentDataCodec();
-		}
-		return $this->codec;
-	}
-
-	/**
-	 * Define a set of fake properties
-	 * @return array
-	 */
-	private static function getTestProperties() {
-		return array(
-				array(2, 'wikibase-entityid'),
-				array(3, 'commonsMedia'),
-				array(4, 'globecoordinate'),
-				array(5, 'monolingualtext'),
-				array(6, 'quantity'),
-				array(7, 'string'),
-				array(8, 'time'),
-				array(9, 'url'),
-		);
-	}
-
-	/**
-	 * Construct mock repository
-	 * @return \Wikibase\Test\MockRepository
-	 */
-	public static function getMockRepository() {
-		static $repo;
-
-		if ( !empty($repo) ) {
-			return $repo;
+		if( empty( $this->testData ) ) {
+			$this->testData = new RdfBuilderTestData( __DIR__ . "/../../data/rdf", __DIR__ . "/../../data/rdf" );
 		}
 
-		$repo = new MockRepository();
-
-		foreach( self::getTestProperties() as $prop ) {
-			list($id, $type) = $prop;
-			$fingerprint = Fingerprint::newEmpty();
-			$fingerprint->setLabel( 'en', "Property$id" );
-			$entity = new Property( PropertyId::newFromNumber($id), $fingerprint, $type );
-			$repo->putEntity( $entity );
-		}
-		$fingerprint = Fingerprint::newEmpty();
-		$fingerprint->setLabel( 'en', "Item42" );
-		$entity = new Item( ItemId::newFromNumber(42), $fingerprint );
-		$repo->putEntity( $entity );
-		return $repo;
+		return $this->testData;
 	}
 
 	/**
 	 * @return RdfBuilder
 	 */
-	private static function newRdfBuilder( $produce, \BagOStuff $dedup = null ) {
+	private function newRdfBuilder( $produce, \BagOStuff $dedup = null ) {
 		if( !$dedup ) {
 			$dedup = new \HashBagOStuff();
 		}
 		$emitter = new NTriplesRdfWriter();
 		$builder = new RdfBuilder(
-			self::getSiteList(),
-			self::URI_BASE,
-			self::URI_DATA,
-			self::getMockRepository(),
+			$this->getTestData()->getSiteList(),
+			$this->getTestData()->getVocabulary(),
+			$this->getTestData()->getMockRepository(),
 			$produce,
 			$emitter,
 			$dedup
@@ -110,27 +57,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		return $builder;
 	}
 
-	/**
-	 * Get site list
-	 * @return \SiteList
-	 */
-	public static function getSiteList() {
-		$list = new SiteList();
-
-		$wiki = new \Site();
-		$wiki->setGlobalId( 'enwiki' );
-		$wiki->setLanguageCode( 'en' );
-		$wiki->setLinkPath( 'http://enwiki.acme.test/$1' );
-		$list['enwiki'] = $wiki;
-
-		$wiki = new \Site();
-		$wiki->setGlobalId( 'ruwiki' );
-		$wiki->setLanguageCode( 'ru' );
-		$wiki->setLinkPath( 'http://ruwiki.acme.test/$1' );
-		$list['ruwiki'] = $wiki;
-
-		return $list;
-	}
 
 	/**
 	 * Load entity from JSON
@@ -139,8 +65,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	public function getEntityData( $entityId )
 	{
-		return $this->getCodec()->decodeEntity(
-			file_get_contents(__DIR__ . "/../../data/rdf/$entityId.json"), CONTENT_FORMAT_JSON );
+		return $this->getTestData()->getEntity( $entityId );
 	}
 
 	/**
@@ -150,15 +75,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	public function getSerializedData( $testName )
 	{
-		$filename = __DIR__ . "/../../data/rdf/$testName.nt";
-		if ( !file_exists( $filename ) )
-		{
-			return array ();
-		}
-		$data = trim( file_get_contents( $filename ) );
-		$data = explode( "\n", $data );
-		sort( $data );
-		return $data;
+		return $this->getTestData()->getNTriples( $testName );
 	}
 
 	public function getRdfTests() {
@@ -173,14 +90,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 				array('Q8', 'Q8_baddates'),
 		);
 
-		$testData = array();
-		foreach ( $rdfTests as $test ) {
-			$testData[$test[1]] = array (
-					$this->getEntityData( $test[0] ),
-					$this->getSerializedData( $test[1] )
-			);
-		}
-		return $testData;
+		return $rdfTests;
 	}
 
 	/**
@@ -198,8 +108,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getRdfTests
 	 */
-	public function testRdfBuild( Entity $entity, array $correctData ) {
-		$builder = self::newRdfBuilder( RdfProducer::PRODUCE_ALL_STATEMENTS |
+	public function testRdfBuild( $entityName, $dataSetName ) {
+		$entity = $this->getEntityData( $entityName );
+		$correctData = $this->getSerializedData( $dataSetName );
+
+		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL_STATEMENTS |
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
 				RdfProducer::PRODUCE_QUALIFIERS |
 				RdfProducer::PRODUCE_REFERENCES |
@@ -226,28 +139,26 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			array( 'Q4', RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES, 'Q4_resolved' ),
 		);
 
-		$testData = array();
-		foreach($produceTests as $test) {
-			$testData[$test[2]] = array( $this->getEntityData($test[0]), $test[1], $this->getSerializedData($test[2]) );
-		}
-		return $testData;
-
+		return $produceTests;
 	}
 
 	/**
 	 * @dataProvider getProduceOptions
 	 */
-	public function testRdfOptions( Entity $entity, $produceOption, array $correctData ) {
-		$builder = self::newRdfBuilder( $produceOption );
+	public function testRdfOptions( $entityName, $produceOption, $dataSetName ) {
+		$entity = $this->getEntityData( $entityName );
+		$correctData = $this->getSerializedData( $dataSetName );
+
+		$builder = $this->newRdfBuilder( $produceOption );
 		$builder->addEntity( $entity );
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2013-10-04T03:31:05Z" );
-		$builder->resolveMentionedEntities( self::getMockRepository() );
+		$builder->resolveMentionedEntities( $this->getTestData()->getMockRepository() );
 		$data = $this->getDataFromBuilder( $builder );
 		$this->assertEquals( $correctData, $data);
 	}
 
 	public function testDumpHeader() {
-		$builder = self::newRdfBuilder( RdfProducer::PRODUCE_VERSION_INFO );
+		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_VERSION_INFO );
 		$builder->addDumpHeader( 1426110695 );
 		$data = $this->getDataFromBuilder( $builder );
 		$this->assertEquals( $this->getSerializedData( 'dumpheader' ),  $data);
@@ -255,11 +166,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 	public function testDeduplication() {
 		$bag = new \HashBagOStuff();
-		$builder = self::newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
+		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
 		$builder->addEntity( $this->getEntityData( 'Q7' ) );
 		$data1 = $this->getDataFromBuilder( $builder );
 
-		$builder = self::newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
+		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
 		$builder->addEntity( $this->getEntityData( 'Q9' ) );
 		$data2 = $this->getDataFromBuilder( $builder );
 
