@@ -7,14 +7,13 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityRevision;
-use Wikibase\Repo\View\EntityView;
+use Wikibase\View\EntityView;
 
 /**
- * @covers Wikibase\Repo\View\EntityView
+ * @covers Wikibase\View\EntityView
  *
  * @group Wikibase
- * @group WikibaseRepo
- * @group EntityView
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >

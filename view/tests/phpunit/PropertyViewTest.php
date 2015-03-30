@@ -9,27 +9,24 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\View\PropertyView;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\PropertyView;
 
 /**
- * @covers Wikibase\Repo\View\PropertyView
- * @covers Wikibase\Repo\View\EntityView
+ * @covers Wikibase\View\EntityView
+ * @covers Wikibase\View\PropertyView
  *
- * @uses Wikibase\Repo\View\TextInjector
  * @uses Wikibase\Template\Template
  * @uses Wikibase\Template\TemplateFactory
  * @uses Wikibase\Template\TemplateRegistry
+ * @uses Wikibase\View\TextInjector
  *
  * @group Wikibase
- * @group WikibasePropertyView
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
- * @group Database
- * @group medium
  */
 class PropertyViewTest extends EntityViewTest {
 
@@ -85,10 +82,10 @@ class PropertyViewTest extends EntityViewTest {
 	public function provideTestGetHtml() {
 		$propertyView = new PropertyView(
 			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
-			$this->getMockBuilder( 'Wikibase\Repo\View\EntityTermsView' )
+			$this->getMockBuilder( 'Wikibase\View\EntityTermsView' )
 				->disableOriginalConstructor()
 				->getMock(),
-			$this->getMockBuilder( 'Wikibase\Repo\View\StatementGroupListView' )
+			$this->getMockBuilder( 'Wikibase\View\StatementGroupListView' )
 				->disableOriginalConstructor()
 				->getMock(),
 			$this->getDataTypeFactory(),

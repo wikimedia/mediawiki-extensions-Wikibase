@@ -70,7 +70,6 @@ use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\DummyChangeTransmitter;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
@@ -88,6 +87,7 @@ use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 use Wikibase\ValuesFinder;
+use Wikibase\View\EntityViewFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.

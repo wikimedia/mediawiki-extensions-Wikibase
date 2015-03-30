@@ -1,9 +1,8 @@
 <?php
 
-namespace Wikibase\Repo\View;
+namespace Wikibase\View;
 
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Template\TemplateFactory;

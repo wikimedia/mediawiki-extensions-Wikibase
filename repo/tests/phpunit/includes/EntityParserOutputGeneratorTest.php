@@ -160,11 +160,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	private function getEntityViewFactory() {
-		$entityViewFactory = $this->getMockBuilder( 'Wikibase\Repo\View\EntityViewFactory' )
+		$entityViewFactory = $this->getMockBuilder( 'Wikibase\View\EntityViewFactory' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$entityView = $this->getMockBuilder( 'Wikibase\Repo\View\EntityView' )
+		$entityView = $this->getMockBuilder( 'Wikibase\View\EntityView' )
 			->disableOriginalConstructor()
 			->getMock();
 

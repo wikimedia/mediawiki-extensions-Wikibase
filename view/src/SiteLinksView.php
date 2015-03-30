@@ -1,17 +1,16 @@
 <?php
 
-namespace Wikibase\Repo\View;
+namespace Wikibase\View;
 
 use InvalidArgumentException;
-use Message;
 use Sanitizer;
 use Site;
 use SiteList;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Template\TemplateFactory;
 
 /**

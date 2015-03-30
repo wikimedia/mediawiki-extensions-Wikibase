@@ -14,18 +14,18 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Repo\View\ClaimHtmlGenerator;
-use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\ClaimHtmlGenerator;
+use Wikibase\View\SnakHtmlGenerator;
 
 /**
- * @covers Wikibase\Repo\View\ClaimHtmlGenerator
+ * @covers Wikibase\View\ClaimHtmlGenerator
  *
  * @todo more specific tests for all parts of claim html formatting
  *
  * @group Wikibase
- * @group WikibaseRepo
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -38,7 +38,7 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	 * @return SnakHtmlGenerator
 	 */
 	protected function getSnakHtmlGeneratorMock() {
-		$snakHtmlGenerator = $this->getMockBuilder( 'Wikibase\Repo\View\SnakHtmlGenerator' )
+		$snakHtmlGenerator = $this->getMockBuilder( 'Wikibase\View\SnakHtmlGenerator' )
 			->disableOriginalConstructor()
 			->getMock();
 

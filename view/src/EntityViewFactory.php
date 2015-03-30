@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\View;
+namespace Wikibase\View;
 
 use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
@@ -13,8 +13,6 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\Template\TemplateFactory;
-use Wikibase\View\EntityIdFormatterFactory;
-use Wikibase\View\HtmlSnakFormatterFactory;
 
 /**
  * @since 0.5
