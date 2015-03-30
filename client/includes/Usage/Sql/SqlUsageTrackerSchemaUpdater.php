@@ -66,6 +66,9 @@ class SqlUsageTrackerSchemaUpdater {
 		} else {
 			$script = $this->getUpdateScriptPath( 'entity_usage-alter-aspect-varbinary-37', $db->getType() );
 			$this->dbUpdater->modifyExtensionField( $table, 'eu_aspect', $script );
+
+			$script = $this->getUpdateScriptPath( 'entity_usage-add-touched', $db->getType() );
+			$this->dbUpdater->addExtensionField( $table, 'eu_touched', $script );
 		}
 	}
 
