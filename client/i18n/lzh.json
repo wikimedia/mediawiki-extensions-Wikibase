@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"StephDC"
+			"StephDC",
+			"Davidzdh"
 		]
 	},
 	"wikibase-editlinkstitle": "修跨語鏈",
-	"wikibase-rc-hide-wikidata-hide": "藏",
+	"wikibase-rc-hide-wikidata-hide": "隱",
 	"wikibase-rc-hide-wikidata-show": "示",
 	"wikibase-rc-wikibase-edit-letter": "數",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} 編輯",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}纂",
 	"wikibase-otherprojects": "他案"
 }

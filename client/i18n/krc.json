@@ -6,6 +6,7 @@
 	},
 	"wikibase-client-desc": "Wikibase'ни кенгертирге клиент",
 	"tooltip-t-wikibase": "Билгилени репозиторийини байламлы элементине джибериу",
+	"apihelp-query+pageterms-example-label-en": "«London» деген ингилиз бет бла байламлы энле эмда синонимле ал.",
 	"wikibase-after-page-move": "Аты тюрленнген бетдеги тил джибериулени тюзетир ючюн Викибилгилени байламлы элементин [$1 джангыртыргъа] да боллукъсуз.",
 	"wikibase-after-page-move-queued": "Бу бет бла байламлы [{{WBREPONAME}} $1 элементи] къысха заманны ичинде автомат халда джангыртыллыкъды.",
 	"wikibase-comment-remove": "Викибилгилени байламлы элементин кетерилди. Тил джибериуле къоратылдыла.",
@@ -41,8 +42,13 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} бла байламлы тюрлениу",
 	"wikibase-replicationnote": "Эс бёлюгюз, тюрлениуле бютеу вики-проектледе да кёрюннгюнчю талай минут ётерге боллукъду",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}'деги тюрлениулени кёздеги тизмеде кёргюз",
+	"wikibase-unconnectedpages-page": "Результатланы тизмесин бу бетден башлат:",
 	"wikibase-unconnectedpages-submit": "Хайыр­ландыр",
+	"wikibase-unconnectedpages-invalid-language": "«$1» — джюрюген тил код тюлдю.",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}'де элементни идентификатору",
 	"wikibase-pageinfo-entity-id-none": "джокъду",
-	"wikibase-otherprojects": "Башха проектледе"
+	"wikibase-property-render-error": "«$1» шартны ачылыууну халаты: $2",
+	"wikibase-otherprojects": "Башха проектледе",
+	"wikibase-otherprojects-beta-message": "Башха проектлени къабыргъа панели",
+	"wikibase-otherprojects-beta-description": "Къабыргъа панелге «{{int:wikibase-otherprojects}}» бёлюмню къошады, ол а {{WBREPONAME}}ге кёре Викимедиа фондну башха проектлерине джибериуле кёргюзтеди."
 }

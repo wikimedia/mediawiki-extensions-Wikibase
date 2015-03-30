@@ -13,7 +13,8 @@
 			"Zolo",
 			"Ата",
 			"Ypryima",
-			"Piramidion"
+			"Piramidion",
+			"Капитан Джон Шепард"
 		]
 	},
 	"wikibase-desc": "Сховище структурованих даних",
@@ -168,7 +169,7 @@
 	"wikibase-setaliases-warning-remove": "Ви справді хочете вилучити всі додаткові назви [[$1]]?",
 	"special-setlabeldescriptionaliases": "Задати назву, опис та додаткові назви",
 	"wikibase-setlabeldescriptionaliases-introfull": "Ви задаєте назву, опис та додаткові назви мовою $2 для [[$1]]. Кілька додаткових назв відокремлюються вертикальною рискою (<code>|</code>).",
-	"wikibase-setlabeldescriptionaliases-intro": "Ця форма дозволяє задати назву, опис та додаткові назви сутності. Потрібно вказати ID сутності (напр., Q23), код мови (напр., «uk»), після чого задати назву, опис та додаткові назви. Декілька додаткових назв відокремлюються вертикальною рискою (<code>|</code>).",
+	"wikibase-setlabeldescriptionaliases-intro": "Ця форма дозволяє встановити мітки, опис і псевдоніми учасників. Вам потрібно спочатку отримати ідентифікатор об'єкта (наприклад, Q23) і код мови (наприклад, \"uk»\").",
 	"wikibase-setlabeldescriptionaliases-label-label": "Назва:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Опис:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Додаткові назви:",

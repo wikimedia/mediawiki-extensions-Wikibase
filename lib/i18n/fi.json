@@ -12,7 +12,7 @@
 		]
 	},
 	"wikibase-lib-desc": "Sisältää Wikibase- ja Wikibase Client -laajennuksille yhteistä toiminnallisuutta",
-	"specialpages-group-wikibase": "Wikibase-säilö",
+	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Kohde poistettu",
 	"wikibase-deletedentity-property": "Ominaisuus poistettu",
 	"wikibase-deletedentity-query": "Kysely poistettu",

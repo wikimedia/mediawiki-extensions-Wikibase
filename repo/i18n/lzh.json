@@ -3,12 +3,13 @@
 		"authors": [
 			"Jason924tw",
 			"StephDC",
-			"Macofe"
+			"Macofe",
+			"Davidzdh"
 		]
 	},
 	"wikibase-edit": "纂",
 	"wikibase-sitelinks-special": "他站",
-	"wikibase-itemdisambiguation-lookup-language": "語之碼：",
-	"wikibase-modifyterm-language": "語之碼：",
-	"wikibase-entitieswithoutlabel-label-language": "語之碼："
+	"wikibase-itemdisambiguation-lookup-language": "語言之碼：",
+	"wikibase-modifyterm-language": "語言之碼：",
+	"wikibase-entitieswithoutlabel-label-language": "語言之碼："
 }
