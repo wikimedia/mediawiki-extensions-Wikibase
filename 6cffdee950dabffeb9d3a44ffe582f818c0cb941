@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_f09650f2",
+        "filename": "repo/includes/rdf/RdfWriterBase.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-30T17:31:19Z",
+      "side": 1,
+      "message": "We don\u0027t have detached one right now. We use one writer (emitter) for everything.",
+      "parentUuid": "6e7c4fa4_5e7ddbae",
+      "revId": "6cffdee950dabffeb9d3a44ffe582f818c0cb941",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_de69ebf6",
         "filename": "repo/includes/rdf/RdfWriterBase.php",
         "patchSetId": 10
