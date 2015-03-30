@@ -860,7 +860,7 @@ class DispatchChanges extends \Maintenance {
 				// The change is relevant if it alters any sitelinks referring to $siteID,
 				// or the item currently links to $siteID.
 				if ( isset( $linkedItems[$itemId] )
-					|| $this->isRelevantChange( $change, $siteID ) !== null ) {
+					|| $this->isRelevantChange( $change, $siteID ) ) {
 
 					$filteredChanges[] = $change;
 					$numberOfChangesFound++;
