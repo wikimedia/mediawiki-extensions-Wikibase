@@ -20,11 +20,11 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
-use Wikibase\Repo\View\EmptyEditSectionGenerator;
-use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
-use Wikibase\Repo\View\ToolbarEditSectionGenerator;
 use Wikibase\Template\TemplateFactory;
+use Wikibase\View\EmptyEditSectionGenerator;
+use Wikibase\View\EntityViewFactory;
+use Wikibase\View\ToolbarEditSectionGenerator;
 
 /**
  * Creates the parser output for an entity.

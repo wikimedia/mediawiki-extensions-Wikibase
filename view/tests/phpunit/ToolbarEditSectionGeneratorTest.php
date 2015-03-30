@@ -9,20 +9,19 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\View\ToolbarEditSectionGenerator;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\ToolbarEditSectionGenerator;
 
 /**
- * @covers Wikibase\Repo\View\ToolbarEditSectionGeneratorTest
+ * @covers Wikibase\View\ToolbarEditSectionGenerator
  *
  * @uses Wikibase\Template\Template
  * @uses Wikibase\Template\TemplateFactory
  * @uses Wikibase\Template\TemplateRegistry
  *
  * @group Wikibase
- * @group WikibaseRepo
- * @group EntityView
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

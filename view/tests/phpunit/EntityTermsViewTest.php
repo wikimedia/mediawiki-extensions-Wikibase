@@ -6,22 +6,21 @@ use MediaWikiLangTestCase;
 use MessageCache;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Repo\View\EntityTermsView;
-use Wikibase\Repo\View\TextInjector;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\EntityTermsView;
+use Wikibase\View\TextInjector;
 
 /**
- * @covers Wikibase\Repo\View\EntityTermsView
+ * @covers Wikibase\View\EntityTermsView
  *
- * @uses Wikibase\Repo\View\TextInjector
  * @uses Wikibase\Template\Template
  * @uses Wikibase\Template\TemplateFactory
  * @uses Wikibase\Template\TemplateRegistry
+ * @uses Wikibase\View\TextInjector
  *
  * @group Wikibase
- * @group WikibaseRepo
- * @group Database
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -55,7 +54,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 			$called = $this->any();
 		}
 
-		$editSectionGenerator = $this->getMock( 'Wikibase\Repo\View\EditSectionGenerator' );
+		$editSectionGenerator = $this->getMock( 'Wikibase\View\EditSectionGenerator' );
 
 		$editSectionGenerator->expects( $called )
 			->method( 'getLabelDescriptionAliasesEditSection' )

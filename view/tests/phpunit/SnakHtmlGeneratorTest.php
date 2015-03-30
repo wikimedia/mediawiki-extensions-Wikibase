@@ -11,19 +11,19 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\SnakHtmlGenerator;
 
 /**
- * @covers Wikibase\Repo\View\SnakHtmlGenerator
+ * @covers Wikibase\View\SnakHtmlGenerator
  *
  * @uses Wikibase\Template\Template
  * @uses Wikibase\Template\TemplateFactory
  * @uses Wikibase\Template\TemplateRegistry
  *
  * @group Wikibase
- * @group WikibaseRepo
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
