@@ -8,7 +8,7 @@
 
 	QUnit.module( 'jquery.valueview.ExpertExtender' );
 
-	if( QUnit.urlParams.completenesstest ) {
+	if( QUnit.urlParams.completenesstest && CompletenessTest ) {
 		new CompletenessTest( ExpertExtender.prototype, function( cur, tester, path ) {
 			return false;
 		} );
@@ -75,4 +75,10 @@
 		}, 0 );
 	} );
 
-} )( jQuery, jQuery.valueview.ExpertExtender, sinon, QUnit, CompletenessTest );
+} )(
+	jQuery,
+	jQuery.valueview.ExpertExtender,
+	sinon,
+	QUnit,
+	typeof CompletenessTest !== 'undefined' ? CompletenessTest : null
+);

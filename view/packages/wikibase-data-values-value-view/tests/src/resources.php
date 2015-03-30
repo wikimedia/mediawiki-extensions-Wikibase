@@ -36,7 +36,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.values',
-				'jquery.qunit.completenessTest',
 				'jquery.valueview.valueview',
 				'test.sinonjs',
 				'valueFormatters.formatters',

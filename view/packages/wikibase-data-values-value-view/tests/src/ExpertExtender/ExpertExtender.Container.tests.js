@@ -8,7 +8,7 @@
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.Container' );
 
-	if( QUnit.urlParams.completenesstest ) {
+	if( QUnit.urlParams.completenesstest && CompletenessTest ) {
 		new CompletenessTest( ExpertExtender.Container.prototype, function( cur, tester, path ) {
 			return false;
 		} );
@@ -40,5 +40,5 @@
 	jQuery.valueview.tests.testExpertExtenderExtension,
 	sinon,
 	QUnit,
-	CompletenessTest
+	typeof CompletenessTest !== 'undefined' ? CompletenessTest : null
 );
