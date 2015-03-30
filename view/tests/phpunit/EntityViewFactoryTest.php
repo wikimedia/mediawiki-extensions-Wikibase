@@ -6,29 +6,29 @@ use PHPUnit_Framework_TestCase;
 use SiteList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\EntityViewFactory;
 
 /**
- * @covers \Wikibase\Repo\View\EntityViewFactory
+ * @covers Wikibase\View\EntityViewFactory
  *
- * @uses Wikibase\Repo\View\ClaimHtmlGenerator
- * @uses Wikibase\Repo\View\EntityTermsView
- * @uses Wikibase\Repo\View\EntityView
- * @uses Wikibase\Repo\View\ItemView
- * @uses Wikibase\Repo\View\PropertyView
- * @uses Wikibase\Repo\View\SectionEditLinkGenerator
- * @uses Wikibase\Repo\View\SiteLinksView
- * @uses Wikibase\Repo\View\StatementGroupListView
- * @uses Wikibase\Repo\View\SnakHtmlGenerator
- * @uses Wikibase\Repo\View\TextInjector
  * @uses Wikibase\Template\Template
  * @uses Wikibase\Template\TemplateFactory
  * @uses Wikibase\Template\TemplateRegistry
+ * @uses Wikibase\View\ClaimHtmlGenerator
+ * @uses Wikibase\View\EditSectionGenerator
+ * @uses Wikibase\View\EntityTermsView
+ * @uses Wikibase\View\EntityView
+ * @uses Wikibase\View\ItemView
+ * @uses Wikibase\View\PropertyView
+ * @uses Wikibase\View\SiteLinksView
+ * @uses Wikibase\View\StatementGroupListView
+ * @uses Wikibase\View\SnakHtmlGenerator
+ * @uses Wikibase\View\TextInjector
  *
  * @group Wikibase
- * @group WikibaseRepo
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -48,7 +48,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			'de',
 			$this->getMock( 'Wikibase\Lib\Store\LabelLookup' ),
 			$languageFallback,
-			$this->getMock( 'Wikibase\Repo\View\EditSectionGenerator' )
+			$this->getMock( 'Wikibase\View\EditSectionGenerator' )
 		);
 
 		$this->assertInstanceOf( $expectedClass, $entityView );
@@ -56,8 +56,8 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function newEntityViewProvider() {
 		return array(
-			array( 'Wikibase\Repo\View\ItemView', 'item' ),
-			array( 'Wikibase\Repo\View\PropertyView', 'property' )
+			array( 'Wikibase\View\ItemView', 'item' ),
+			array( 'Wikibase\View\PropertyView', 'property' )
 		);
 	}
 
@@ -73,7 +73,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			'de',
 			$this->getMock( 'Wikibase\Lib\Store\LabelLookup' ),
 			$languageFallback,
-			$this->getMock( 'Wikibase\Repo\View\EditSectionGenerator' )
+			$this->getMock( 'Wikibase\View\EditSectionGenerator' )
 		);
 	}
 

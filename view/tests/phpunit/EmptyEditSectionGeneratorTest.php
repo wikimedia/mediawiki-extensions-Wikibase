@@ -7,14 +7,13 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\View\EmptyEditSectionGenerator;
+use Wikibase\View\EmptyEditSectionGenerator;
 
 /**
- * @covers Wikibase\Repo\View\EmptyEditSectionGeneratorTest
+ * @covers Wikibase\View\EmptyEditSectionGenerator
  *
  * @group Wikibase
- * @group WikibaseRepo
- * @group EntityView
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author Adrian Heine < adrian.heine@wikimedia.de >

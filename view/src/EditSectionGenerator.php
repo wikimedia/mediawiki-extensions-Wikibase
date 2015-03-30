@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\View;
+namespace Wikibase\View;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;

@@ -2,14 +2,13 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Repo\View\TextInjector;
+use Wikibase\View\TextInjector;
 
 /**
- * @covers Wikibase\Repo\View\TextInjector
+ * @covers Wikibase\View\TextInjector
  *
  * @group Wikibase
- * @group WikibaseRepo
- * @group EntityView
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

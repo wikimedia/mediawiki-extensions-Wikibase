@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\View;
+namespace Wikibase\View;
 
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;

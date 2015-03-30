@@ -15,16 +15,16 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Repo\View\ClaimHtmlGenerator;
-use Wikibase\Repo\View\StatementGroupListView;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\ClaimHtmlGenerator;
+use Wikibase\View\StatementGroupListView;
 
 /**
- * @covers Wikibase\Repo\View\StatementGroupListView
+ * @covers Wikibase\View\StatementGroupListView
  *
  * @group Wikibase
- * @group WikibaseRepo
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -41,10 +41,10 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	}
 
 	/**
-	 * @uses Wikibase\Repo\View\SectionEditLinkGenerator
 	 * @uses Wikibase\Template\Template
 	 * @uses Wikibase\Template\TemplateFactory
 	 * @uses Wikibase\Template\TemplateRegistry
+	 * @uses Wikibase\View\EditSectionGenerator
 	 */
 	public function testGetHtml() {
 		$propertyId = new PropertyId( 'P77' );
@@ -127,7 +127,7 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 		return new StatementGroupListView(
 			$templateFactory,
 			$propertyIdFormatter,
-			$this->getMock( 'Wikibase\Repo\View\EditSectionGenerator' ),
+			$this->getMock( 'Wikibase\View\EditSectionGenerator' ),
 			$this->getClaimHtmlGenerator()
 		);
 	}
@@ -136,7 +136,7 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	 * @return ClaimHtmlGenerator
 	 */
 	private function getClaimHtmlGenerator() {
-		$claimHtmlGenerator = $this->getMockBuilder( 'Wikibase\Repo\View\ClaimHtmlGenerator' )
+		$claimHtmlGenerator = $this->getMockBuilder( 'Wikibase\View\ClaimHtmlGenerator' )
 			->disableOriginalConstructor()
 			->getMock();
 

@@ -8,8 +8,8 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\View\EntityViewFactory;
 use Wikibase\Template\TemplateFactory;
+use Wikibase\View\EntityViewFactory;
 
 /**
  * @since 0.5

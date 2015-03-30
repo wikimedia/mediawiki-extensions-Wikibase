@@ -12,22 +12,20 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\Repo\View\EntityViewPlaceholderExpander;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\EntityViewPlaceholderExpander;
 
 /**
- * @covers Wikibase\Repo\View\EntityViewPlaceholderExpander
+ * @covers Wikibase\View\EntityViewPlaceholderExpander
  *
- * @uses Wikibase\Repo\View\EntityTermsView
  * @uses Wikibase\Template\Template
  * @uses Wikibase\Template\TemplateFactory
  * @uses Wikibase\Template\TemplateRegistry
+ * @uses Wikibase\View\EntityTermsView
  *
  * @group Wikibase
- * @group WikibaseRepo
- * @group EntityView
- * @group Database
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
