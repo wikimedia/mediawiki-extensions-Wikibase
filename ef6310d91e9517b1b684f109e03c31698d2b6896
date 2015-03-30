@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_2479eef1",
+        "filename": "lib/tests/phpunit/SitesModuleWorkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-30T08:24:55Z",
+      "side": 1,
+      "message": "SitesModuleWorker uses Xml.",
+      "parentUuid": "6e7c4fa4_3df4d3ec",
+      "revId": "ef6310d91e9517b1b684f109e03c31698d2b6896",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_9df3a706",
         "filename": "lib/tests/phpunit/SitesModuleWorkerTest.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-24T10:03:05Z",
       "side": 1,
       "message": "Why is this useful?",
+      "revId": "ef6310d91e9517b1b684f109e03c31698d2b6896",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_44742af8",
+        "filename": "lib/tests/phpunit/SitesModuleWorkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-30T08:24:55Z",
+      "side": 1,
+      "message": "It\u0027s what the test method uses, so it has to declare that usage in strict coverage mode. That\u0027s what this change is about.",
+      "parentUuid": "6e7c4fa4_9df3a706",
       "revId": "ef6310d91e9517b1b684f109e03c31698d2b6896",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
