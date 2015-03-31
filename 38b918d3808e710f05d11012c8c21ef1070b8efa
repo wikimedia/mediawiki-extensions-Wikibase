@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_94234652",
+        "filename": "repo/tests/phpunit/includes/store/sql/SqlChangeDispatchCoordinatorTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-03-31T17:17:41Z",
+      "side": 1,
+      "message": "Either add some kind of order here, or make the various asserts below ignore sort order to fix the tests.",
+      "revId": "38b918d3808e710f05d11012c8c21ef1070b8efa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
