@@ -10,7 +10,6 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\LabelLookup;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -30,12 +29,12 @@ class EntityViewFactory {
 	/**
 	 * @var EntityIdFormatterFactory
 	 */
-	private $idFormatterFactory;
+	private $htmlIdFormatterFactory;
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityIdFormatterFactory
 	 */
-	private $entityLookup;
+	private $plaintextIdFormatterFactory;
 
 	/**
 	 * @var SiteStore
@@ -73,9 +72,9 @@ class EntityViewFactory {
 	private $languageNameLookup;
 
 	/**
-	 * @param EntityIdFormatterFactory $idFormatterFactory
+	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
+	 * @param EntityIdFormatterFactory $plaintextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
-	 * @param EntityLookup $entityLookup
 	 * @param SiteStore $siteStore
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory
@@ -85,9 +84,9 @@ class EntityViewFactory {
 	 * @param string[] $badgeItems
 	 */
 	public function __construct(
-		EntityIdFormatterFactory $idFormatterFactory,
+		EntityIdFormatterFactory $htmlIdFormatterFactory,
+		EntityIdFormatterFactory $plaintextIdFormatterFactory,
 		HtmlSnakFormatterFactory $htmlSnakFormatterFactory,
-		EntityLookup $entityLookup,
 		SiteStore $siteStore,
 		DataTypeFactory $dataTypeFactory,
 		TemplateFactory $templateFactory,
@@ -96,11 +95,12 @@ class EntityViewFactory {
 		array $specialSiteLinkGroups,
 		array $badgeItems
 	) {
-		$this->checkOutputFormat( $idFormatterFactory->getOutputFormat() );
+		$this->checkOutputFormat( $htmlIdFormatterFactory->getOutputFormat(), 'HTML' );
+		$this->checkOutputFormat( $plaintextIdFormatterFactory->getOutputFormat(), 'Plain' );
 
-		$this->idFormatterFactory = $idFormatterFactory;
+		$this->htmlIdFormatterFactory = $htmlIdFormatterFactory;
+		$this->plaintextIdFormatterFactory = $plaintextIdFormatterFactory;
 		$this->htmlSnakFormatterFactory = $htmlSnakFormatterFactory;
-		$this->entityLookup = $entityLookup;
 		$this->siteStore = $siteStore;
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->siteLinkGroups = $siteLinkGroups;
@@ -112,15 +112,17 @@ class EntityViewFactory {
 
 	/**
 	 * @param string $format
+	 * @param string $expected 'HTML' or 'Plain'
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	private function checkOutputFormat( $format ) {
-		if ( $format !== SnakFormatter::FORMAT_HTML
-			&& $format !== SnakFormatter::FORMAT_HTML_DIFF
-			&& $format !== SnakFormatter::FORMAT_HTML_WIDGET
+	private function checkOutputFormat( $format, $expected ) {
+		if ( ( $expected === 'HTML' && $format !== SnakFormatter::FORMAT_HTML
+				&& $format !== SnakFormatter::FORMAT_HTML_DIFF
+				&& $format !== SnakFormatter::FORMAT_HTML_WIDGET
+			) || ($expected === 'Plain' && $format !== SnakFormatter::FORMAT_PLAIN )
 		) {
-			throw new InvalidArgumentException( 'HTML format expected, got ' . $format );
+			throw new InvalidArgumentException( $expected . ' format expected, got ' . $format );
 		}
 	}
 
@@ -162,11 +164,10 @@ class EntityViewFactory {
 					$this->templateFactory,
 					$this->siteStore->getSites(),
 					$editSectionGenerator,
-					$this->entityLookup,
+					$this->plaintextIdFormatterFactory->getEntityIdFormater( $labelLookup ),
 					$this->languageNameLookup,
 					$this->badgeItems,
-					$this->specialSiteLinkGroups,
-					$language->getCode()
+					$this->specialSiteLinkGroups
 				);
 
 				return new ItemView(
@@ -204,7 +205,7 @@ class EntityViewFactory {
 		LabelLookup $labelLookup,
 		EditSectionGenerator $editSectionGenerator
 	) {
-		$propertyIdFormatter = $this->getPropertyIdFormatter( $labelLookup );
+		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormater( $labelLookup );
 
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->templateFactory,
@@ -238,15 +239,6 @@ class EntityViewFactory {
 			$this->languageNameLookup,
 			$languageCode
 		);
-	}
-
-	/**
-	 * @param LabelLookup $labelLookup
-	 *
-	 * @return EntityIdFormatter
-	 */
-	private function getPropertyIdFormatter( LabelLookup $labelLookup ) {
-		return $this->idFormatterFactory->getEntityIdFormater( $labelLookup );
 	}
 
 }

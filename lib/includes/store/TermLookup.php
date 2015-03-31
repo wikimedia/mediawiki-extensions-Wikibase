@@ -31,8 +31,7 @@ interface TermLookup {
 	/**
 	 * Gets all labels of an Entity with the specified EntityId.
 	 *
-	 * If $languages is given, the result will contain the entries for the
-	 * requested languages, if they exist.
+	 * The result will contain the entries for the requested languages, if they exist.
 	 *
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes The list of languages to fetch
