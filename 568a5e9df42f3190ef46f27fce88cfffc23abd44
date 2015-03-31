@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e9dbc222",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-31T13:09:05Z",
+      "side": 1,
+      "message": "I\u0027d want them injected instead of referring global scope.",
+      "revId": "568a5e9df42f3190ef46f27fce88cfffc23abd44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_09df1e11",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.labelview.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-31T13:09:05Z",
+      "side": 1,
+      "message": "Inject.",
+      "revId": "568a5e9df42f3190ef46f27fce88cfffc23abd44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
