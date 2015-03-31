@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_4ec51c5d",
+        "filename": "client/includes/Hooks/OtherProjectsSidebarGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-31T08:06:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_2efd40ae",
+      "revId": "f727fc3bafb7282373bccd196a66ec7de5ac7ae3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_4ef8bcbc",
         "filename": "client/includes/Hooks/OtherProjectsSidebarGenerator.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_eea748b8",
+        "filename": "client/includes/Hooks/OtherProjectsSidebarGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-31T08:06:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_4ef8bcbc",
+      "revId": "f727fc3bafb7282373bccd196a66ec7de5ac7ae3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ee2ae829",
         "filename": "client/includes/Hooks/OtherProjectsSidebarGenerator.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2015-03-31T07:55:35Z",
       "side": 1,
       "message": "of of?",
+      "revId": "f727fc3bafb7282373bccd196a66ec7de5ac7ae3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0eaba486",
+        "filename": "client/includes/Hooks/OtherProjectsSidebarGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-03-31T08:06:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_ee2ae829",
       "revId": "f727fc3bafb7282373bccd196a66ec7de5ac7ae3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
