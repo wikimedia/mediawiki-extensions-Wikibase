@@ -125,12 +125,15 @@
 
 		return new wb.store.CombiningEntityStore( [
 			new wb.store.MwConfigEntityStore( fetchedEntityDeserializer ),
-			new wb.store.ApiEntityStore(
-				repoApi,
-				fetchedEntityDeserializer,
-				[ languageCode ]
+			new wb.store.CachingEntityStore(
+				new wb.store.ApiEntityStore(
+					repoApi,
+					fetchedEntityDeserializer,
+					[ languageCode ]
+				)
 			)
 		] );
+
 	}
 
 	/**

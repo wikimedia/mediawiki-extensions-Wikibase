@@ -26,6 +26,17 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.store.CachingEntityStore' => $moduleTemplate + array(
+			'scripts' => array(
+				'store.CachingEntityStore.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.store',
+				'wikibase.store.EntityStore',
+			),
+		),
+
 		'wikibase.store.CombiningEntityStore' => $moduleTemplate + array(
 			'scripts' => array(
 				'store.CombiningEntityStore.js',

@@ -1,6 +1,6 @@
 /**
  * @licence GNU GPL v2+
- * @author Adrian Lang < adrian.lang@wikimedia.de >
+ * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 ( function( wb, $ ) {
 	'use strict';
@@ -17,22 +17,15 @@
 	 * @param {wikibase.store.FetchedContentUnserializer} fetchedEntityUnserializer;
 	 * @param {string[]} languages
 	 */
-	var SELF = MODULE.ApiEntityStore = util.inherit(
+	MODULE.ApiEntityStore = util.inherit(
 		'WbApiEntityStore',
 		MODULE.EntityStore,
 		function( repoApi, fetchedEntityUnserializer, languages ) {
-			this._entities = {};
 			this._fetchedEntityUnserializer = fetchedEntityUnserializer;
 			this._languages = languages;
 			this._repoApi = repoApi;
-		}
-	);
-
-	$.extend( SELF.prototype, {
-		/**
-		 * @type {Object}
-		 */
-		_entities: null,
+		},
+	{
 
 		/**
 		 * @type {wikibase.store.FetchedContentUnserializer}
@@ -55,44 +48,32 @@
 		getMultipleRaw: function( entityIds ) {
 			var deferreds = $.map( entityIds, function() { return $.Deferred(); } ),
 				self = this,
-				entityIdsToFetch = [],
 				entityIdToIndex = {};
 
 			$.each( entityIds, function( i, entityId ) {
-				if( self._entities.hasOwnProperty( entityId ) ) {
-					deferreds[i].resolve( self._entities[ entityId ] );
-				} else {
-					entityIdsToFetch.push( entityId );
-					entityIdToIndex[ entityId ] = i;
-				}
+				entityIdToIndex[ entityId ] = i;
 			} );
 
-			if( entityIdsToFetch.length > 0 ) {
-				this._repoApi.getEntities( entityIdsToFetch, null, this._languages )
-				.done( function( result ) {
-					$.each( result.entities, function( id, entityData ) {
-						if( entityData.missing === '' ) {
-							return; // missing entity
-						}
+			this._repoApi.getEntities( entityIds, null, this._languages )
+			.done( function( result ) {
+				$.each( result.entities, function( id, entityData ) {
+					if( entityData.missing === '' ) {
+						return; // missing entity
+					}
 
-						var entity = self._fetchedEntityUnserializer.deserialize( {
-							title: entityData.title,
-							content: entityData
-						} );
-						self._entities[ entity.getContent().getId() ] = entity;
+					var entity = self._fetchedEntityUnserializer.deserialize( {
+						title: entityData.title,
+						content: entityData
 					} );
-
-					$.each( entityIdsToFetch, function( i, entityId ) {
-						deferreds[ entityIdToIndex[ entityId ] ].resolve( self._entities[ entityId ] );
-					} );
-				} )
-				// FIXME: Evaluate failing promise
-				.fail( function() {
-					$.each( entityIdsToFetch, function( i, entityId ) {
-						deferreds[ entityIdToIndex[ entityId ] ].reject();
-					} );
+					deferreds[ entityIdToIndex[ entity.getContent().getId() ] ].resolve( entity );
 				} );
-			}
+			} )
+			// FIXME: Evaluate failing promise
+			.fail( function() {
+				$.each( entityIds, function( i, entityId ) {
+					deferreds[ entityIdToIndex[ entityId ] ].reject();
+				} );
+			} );
 
 			return $.map( deferreds, function( deferred ) {
 				return deferred.promise();
