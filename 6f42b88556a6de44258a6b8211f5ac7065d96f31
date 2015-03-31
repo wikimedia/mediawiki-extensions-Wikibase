@@ -1,0 +1,412 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_77e1ccc9",
+        "filename": "repo/includes/rdf/ComplexValueRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "I don\u0027t like the big switch. Especially when it looks like static data. Can\u0027t we just make it a static array? Also, we have a potential pitfall here - what if we\u0027d want some extended data for commonsMedia?",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f75b9c24",
+        "filename": "repo/includes/rdf/ComplexValueRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "I don\u0027t like having callback for such a simple operation. It would slow things down needlessly.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_177418f7",
+        "filename": "repo/includes/rdf/EntityRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "Why not entity? We won\u0027t know what to do with anything else anyway.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_37491436",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "Why we need external callback here?",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b73524a5",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "These are too many booleans. If you have a set of orthogonal options, which are usually set together, I\u0027d much prefer having a bitmask than a myriad of options that each has to be set separately. It\u0027s too easy to miss one when you do it one by one.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_37e35433",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "Why you need SnakValue one as parameter? It\u0027s not likely you would want to replace it with something else.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b7ef641a",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "I don\u0027t understand this. You use vocabulary many times statically here, but you also pass it dynamically. How this is supposed to work?",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_77f54ce8",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "If you have referenceWriter, this name should be more specific - what\u0027s the diff between this writer and reference writer?",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_17bbb80a",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "Again, I don\u0027t like the callback here. We know it would just check the map, so why not just pass the map? That would also provide additional benefit of not spreading information about namespacing, etc. outside of the class.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_77df8c3f",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "Why this one is public? Shouldn\u0027t the public API be addEntity? Mayeb I miss something in this API.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5744d01b",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be in the vocabulary?",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d75f80e6",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "Now instead of one simple array assignment we get two nested function calls here. I don\u0027t like it.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_77522cdf",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "Same here - two additional function calls which do not contribute anything.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_970ca8f0",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "If entity is not statement list provider, no need to get its Id, should be inside if() then.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_975fc875",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "This needs docs - what is termsBuilder?",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d7aa2081",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "I don\u0027t get how this works, since builder uses the vocabulary statically. I don\u0027t think this injection is useful for anything in this situation. I think if the builder needs an object, it should construct it.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1773b849",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "Given that we have getNamespaces(), do we need this function and creating dependency on writer? Can\u0027t the class client just call the getNamespaces() method and get the look by themselves? I think this one violates the concern separation.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_579cd05e",
+        "filename": "repo/includes/rdf/SimpleValueRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "I really don\u0027t like these callbacks passed around. It\u0027s too easy to set callback for one and forget it for another and get an unholy mess out of it.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d7c8e026",
+        "filename": "repo/includes/rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "Are we actually using this site list anywhere? What for?",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_174bb8b4",
+        "filename": "repo/includes/rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "ws",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_57d4d0bd",
+        "filename": "repo/includes/rdf/SnakValueRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "Not sure why we need this interface.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b793e402",
+        "filename": "repo/includes/rdf/TermsRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "Why all these functions are public?",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_776f8cf9",
+        "filename": "repo/includes/rdf/TruthyStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "It looks like we\u0027re doing best statements twice - once for Simple and once for Full. It is not good - it\u0027s pretty expensive operation and has to be done only once.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f7a39c3d",
+        "filename": "repo/includes/rdf/TruthyStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:10:00Z",
+      "side": 1,
+      "message": "This looks like the same code as in FullStatementRdfBuilder. Shouldn\u0027t they be unified?",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
