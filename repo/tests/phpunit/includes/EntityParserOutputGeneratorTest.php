@@ -3,8 +3,9 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use ParserOptions;
 use Language;
+use MediaWikiTestCase;
+use ParserOptions;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\InMemoryDataTypeLookup;
@@ -15,6 +16,8 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
+use Wikibase\Template\TemplateFactory;
+use Wikibase\Template\TemplateRegistry;
 use Wikibase\ValuesFinder;
 
 /**
@@ -27,7 +30,7 @@ use Wikibase\ValuesFinder;
  * @license GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntityParserOutputGeneratorTest extends \MediaWikiTestCase {
+class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 	private static $html = '<html>Nyan data!!!</html>';
 	private static $placeholders = array( 'key' => 'value' );
@@ -113,7 +116,8 @@ class EntityParserOutputGeneratorTest extends \MediaWikiTestCase {
 			$this->getValuesFinder(),
 			new SqlEntityInfoBuilderFactory(),
 			$this->newLanguageFallbackChain(),
-			'en'
+			'en',
+			new TemplateFactory( TemplateRegistry::getDefaultInstance() )
 		);
 	}
 

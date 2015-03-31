@@ -3,13 +3,13 @@
 namespace Wikibase;
 
 use ParserOptions;
-use RequestContext;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\EntityViewFactory;
+use Wikibase\Template\TemplateFactory;
 
 /**
  * @since 0.5
@@ -18,6 +18,11 @@ use Wikibase\Repo\View\EntityViewFactory;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityParserOutputGeneratorFactory {
+
+	/**
+	 * @var TemplateFactory
+	 */
+	private $templateFactory;
 
 	/**
 	 * @var EntityViewFactory
@@ -55,7 +60,8 @@ class EntityParserOutputGeneratorFactory {
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $entityIdParser,
 		ValuesFinder $valuesFinder,
-		LanguageFallbackChainFactory $languageFallbackChainFactory
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		TemplateFactory $templateFactory
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
@@ -63,6 +69,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->entityIdParser = $entityIdParser;
 		$this->valuesFinder = $valuesFinder;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -82,7 +89,8 @@ class EntityParserOutputGeneratorFactory {
 			$this->valuesFinder,
 			$this->entityInfoBuilderFactory,
 			$this->getLanguageFallbackChain( $languageCode ),
-			$languageCode
+			$languageCode,
+			$this->templateFactory
 		);
 	}
 

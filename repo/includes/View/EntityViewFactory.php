@@ -133,7 +133,7 @@ class EntityViewFactory {
 	 * @param string $languageCode
 	 * @param LabelLookup $labelLookup
 	 * @param LanguageFallbackChain $fallbackChain
-	 * @param bool $editable
+	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @throws InvalidArgumentException
 	 * @return EntityView
@@ -143,12 +143,9 @@ class EntityViewFactory {
 		$languageCode,
 		LabelLookup $labelLookup,
 		LanguageFallbackChain $fallbackChain,
-		$editable = true
+		EditSectionGenerator $editSectionGenerator
 	 ) {
-		$editSectionGenerator = $editable ? new ToolbarEditSectionGenerator(
-			new RepoSpecialPageLinker(),
-			$this->templateFactory
-		) : new EmptyEditSectionGenerator();
+
 		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
 		$statementGroupListView = $this->newStatementGroupListView(
 			$languageCode,
