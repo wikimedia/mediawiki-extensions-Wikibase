@@ -126,4 +126,19 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $statementMap->hasStatementWithGuid( 'some guid' ) );
 	}
 
+	public function testWhenMapIsEmpty_countReturnsZero() {
+		$statements = new StatementByGuidMap();
+
+		$this->assertSame( 0, $statements->count() );
+	}
+
+	public function testMapCanBePassedToCount() {
+		$statements = new StatementByGuidMap( array(
+			$this->newStatement( 1, 'some guid' ),
+			$this->newStatement( 2, 'other guid' )
+		) );
+
+		$this->assertSame( 2, count( $statements ) );
+	}
+
 }

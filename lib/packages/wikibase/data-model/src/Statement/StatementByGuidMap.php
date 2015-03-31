@@ -14,7 +14,7 @@ use InvalidArgumentException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Kai Nissen < kai.nissen@wikimedia.de >
  */
-class StatementByGuidMap {
+class StatementByGuidMap implements \Countable {
 
 	private $statements = array();
 
@@ -76,6 +76,14 @@ class StatementByGuidMap {
 	public function removeStatementWithGuid( $statementGuid ) {
 		$this->assertIsStatementGuid( $statementGuid );
 		unset( $this->statements[$statementGuid] );
+	}
+
+	/**
+	 * @see Countable::count
+	 * @return int
+	 */
+	public function count() {
+		return count( $this->statements );
 	}
 
 }
