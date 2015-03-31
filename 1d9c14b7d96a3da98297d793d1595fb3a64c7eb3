@@ -16,6 +16,24 @@
       "revId": "1d9c14b7d96a3da98297d793d1595fb3a64c7eb3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2905a3c4",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-31T07:31:48Z",
+      "side": 1,
+      "message": "Probably nothing without https://phpunit.de/manual/current/en/strict-mode.html#strict-mode.output-during-test-execution.",
+      "parentUuid": "6e7c4fa4_c7f42e86",
+      "revId": "1d9c14b7d96a3da98297d793d1595fb3a64c7eb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
