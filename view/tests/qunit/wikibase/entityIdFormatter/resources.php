@@ -50,6 +50,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.entityIdFormatter.ApiEntityIdPlainFormatter.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'ApiEntityIdPlainFormatter.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.api.RepoApi',
+				'wikibase.entityIdFormatter.ApiEntityIdPlainFormatter',
+			),
+		),
+
 	);
 
 	return $modules;
