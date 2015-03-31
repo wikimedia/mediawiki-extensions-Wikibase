@@ -21,7 +21,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\EntityIdLinkFormatter;
+use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
@@ -232,7 +232,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	protected function getEntityIdFormatter() {
 		if ( !$this->entityIdFormatter ) {
 			$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-			$this->entityIdFormatter = new EntityIdLinkFormatter( $titleLookup );
+			$this->entityIdFormatter = new EntityIdPlainLinkFormatter( $titleLookup );
 		}
 
 		return $this->entityIdFormatter;
