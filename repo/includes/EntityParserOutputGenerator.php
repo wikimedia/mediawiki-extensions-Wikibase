@@ -150,6 +150,14 @@ class EntityParserOutputGenerator {
 		$editable = $options->getEditSection();
 
 		$usedEntityIds = $this->referencedEntitiesFinder->findSnakLinks( $snaks );
+
+		// FIXME: Bad
+		if( $entity instanceof Item ) {
+			foreach( $entity->getSiteLinkList()->getIterator() as $sitelink ) {
+				$usedEntityIds += $sitelink->getBadges();
+			}
+		}
+
 		$entityInfo = $this->getEntityInfo( $usedEntityIds );
 
 		$configVars = $this->configBuilder->build( $entity, $entityInfo );
