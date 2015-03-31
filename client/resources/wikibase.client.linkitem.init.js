@@ -33,8 +33,7 @@
 				.linkitem( {
 					mwApiForRepo: wikibase.client.getMwApiForRepo(),
 					pageTitle: ( new mw.Title(
-						mw.config.get( 'wgTitle' ),
-						mw.config.get( 'wgNamespaceNumber' )
+						mw.config.get( 'wgPageName' )
 					) ).getPrefixedText(),
 					globalSiteId: mw.config.get( 'wbCurrentSite' ).globalSiteId,
 					namespaceNumber: mw.config.get( 'wgNamespaceNumber' ),
