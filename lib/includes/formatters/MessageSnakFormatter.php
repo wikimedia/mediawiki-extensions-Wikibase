@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib;
 
+use Html;
 use InvalidArgumentException;
 use Message;
 use RuntimeException;
@@ -14,8 +15,17 @@ use Wikibase\DataModel\Snak\Snak;
  *
  * @license GPL 2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class MessageSnakFormatter implements SnakFormatter {
+
+	/**
+	 * @var string[]
+	 */
+	private static $snakTypeCssClasses = array(
+		'somevalue' => 'wikibase-snakview-variation-somevaluesnak',
+		'novalue' => 'wikibase-snakview-variation-novaluesnak',
+	);
 
 	/**
 	 * @var string One of the SnakFormatter::FORMAT_... constants.
@@ -83,6 +93,15 @@ class MessageSnakFormatter implements SnakFormatter {
 			return $this->message->text();
 		} elseif ( strpos( $this->format, SnakFormatter::FORMAT_HTML ) === 0 ) {
 			$html = $this->message->parse();
+
+			if ( array_key_exists( $this->snakType, self::$snakTypeCssClasses ) ) {
+				$html = Html::rawElement(
+					'span',
+					array( 'class' => self::$snakTypeCssClasses[$this->snakType] ),
+					$html
+				);
+			}
+
 			return $html;
 		}
 
