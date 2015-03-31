@@ -269,7 +269,20 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 		}
 		this._$notification.data( 'closeable' ).setContent( $content, additionalCssClasses );
 		return this._$notification;
+	},
+
+	/**
+	 * Get a help message related to editing
+	 *
+	 * @return {Object} jQuery promise
+	 *         Resolved parameters:
+	 *         - {string}
+	 *         No rejected parameters.
+	 */
+	getHelpMessage: function() {
+		return $.Deferred().resolve( this.options.helpMessage ).promise();
 	}
+
 } );
 
 }( jQuery ) );
