@@ -52,6 +52,11 @@ interface RdfWriter {
 	public function start();
 
 	/**
+	 * Finish the document. May generate a footer.
+	 */
+	public function finish();
+
+	/**
 	 * Generates an RDF string from the current buffers state and returns it.
 	 * The buffer is reset to the empty state.
 	 * Before the result string is generated, implementations should close any
@@ -62,11 +67,8 @@ interface RdfWriter {
 	public function drain();
 
 	/**
-	 * Write a prefix declaration. May remember the prefix and IRI for later use.
-	 * May fail if called if the writer's state doesn't allow a prefix in the
-	 * current syntactical construct.
-	 *
-	 * @note Depending on implementation, re-definitions of prefixes may fail silently.
+	 * Declare a prefix for later use. Prefixes should be declared before being used.
+	 * Should not be called after start().
 	 *
 	 * @param string $prefix
 	 * @param string $iri a IRI

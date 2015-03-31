@@ -24,12 +24,7 @@ class NTriplesRdfWriter extends N3RdfWriterBase {
 				self::STATE_SUBJECT => " .\n",
 				self::STATE_PREDICATE => " .\n",
 				self::STATE_OBJECT => " .\n",
-				self::STATE_DRAIN => " .\n",
 		);
-	}
-
-	protected function writePrefix( $prefix, $uri ) {
-		// noop
 	}
 
 	protected function expandSubject( &$base, &$local ) {

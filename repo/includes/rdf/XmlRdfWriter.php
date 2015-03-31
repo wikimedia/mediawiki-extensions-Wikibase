@@ -22,11 +22,7 @@ class XmlRdfWriter extends RdfWriterBase {
 			$self->beginDocument();
 		};
 		array($this, 'beginDocument');
-		$this->transitionTable[self::STATE_DOCUMENT][self::STATE_DRAIN] = function() use($self) {
-			$self->finishDocument();
-		};
-		$this->transitionTable[self::STATE_OBJECT][self::STATE_DRAIN] = function() use($self) {
-			$self->finishSubject();
+		$this->transitionTable[self::STATE_DOCUMENT][self::STATE_FINISH] = function() use($self) {
 			$self->finishDocument();
 		};
 		$this->transitionTable[self::STATE_OBJECT][self::STATE_DOCUMENT] = function() use($self) {
@@ -144,10 +140,6 @@ class XmlRdfWriter extends RdfWriterBase {
 		$this->write( "\n" );
 	}
 
-	protected function writePrefix( $prefix, $uri ) {
-		// noop
-	}
-
 	protected function writeSubject( $base, $local = null ) {
 		$attr = $this->getTargetAttributes( 'about', $base, $local );
 
@@ -170,9 +162,6 @@ class XmlRdfWriter extends RdfWriterBase {
 	 */
 	public function finishDocument() {
 		// close document element
-		if( $this->role != self::DOCUMENT_ROLE ) {
-			return;
-		}
 		$this->close( 'rdf', 'RDF' );
 		$this->write( "\n" );
 	}
