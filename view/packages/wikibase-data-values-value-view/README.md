@@ -105,6 +105,12 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
+### 0.14.2 (2015-03-31)
+
+### Bugfixes
+
+* Remove qunit dependency to make QUnit tests work in Karma
+
 ### 0.14.1 (2015-03-16)
 
 ### Bugfixes
