@@ -23,6 +23,8 @@
  *        The `Statements` to be displayed by this view.
  * @param {wikibase.utilities.ClaimGuidGenerator} options.claimGuidGenerator
  *        Required for dynamically generating GUIDs for new `Statement`s.
+ * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
+ *        Required for dynamically rendering links to `Entity`s.
  * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
  *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {wikibase.store.EntityStore} options.entityStore
@@ -50,6 +52,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 		templateShortCuts: {},
 		value: null,
 		claimGuidGenerator: null,
+		entityIdHtmlFormatter: null,
 		entityIdPlainFormatter: null,
 		entityStore: null,
 		valueViewBuilder: null,
@@ -118,9 +121,6 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 			$listview = $( '<div/>' ).appendTo( this.element );
 		}
 
-		var entityIdHtmlFormatter = new wb.entityIdFormatter.SimpleEntityIdHtmlFormatter(
-			this.options.entityStore
-		);
 		$listview.listview( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 				listItemWidget: $.wikibase.statementgroupview,
@@ -129,7 +129,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 						value: value,
 						claimGuidGenerator: self.options.claimGuidGenerator,
 						dataTypeStore: self.options.dataTypeStore,
-						entityIdHtmlFormatter: entityIdHtmlFormatter,
+						entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
 						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
 						entityStore: self.options.entityStore,
 						valueViewBuilder: self.options.valueViewBuilder,

@@ -71,7 +71,6 @@ return call_user_func( function() {
 				'jquery.wikibase.listview',
 				'wikibase.datamodel.Item',
 				'wikibase.datamodel.StatementGroupSet',
-				'wikibase.entityIdFormatter.SimpleEntityIdHtmlFormatter',
 			),
 		),
 

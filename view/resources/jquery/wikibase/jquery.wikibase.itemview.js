@@ -98,6 +98,8 @@ function orderSiteLinksByGroup( siteLinkSet ) {
  *
  * @constructor
  *
+ * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
+ *        Required for dynamically rendering links to `Entity`s.
  * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
  *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {wikibase.store.EntityStore} options.entityStore
@@ -116,6 +118,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	options: {
+		entityIdHtmlFormatter: null,
 		entityIdPlainFormatter: null,
 		entityStore: null,
 		valueViewBuilder: null,
@@ -169,6 +172,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 			claimGuidGenerator: claimGuidGenerator,
 			dataTypeStore: this.option( 'dataTypeStore' ),
 			entityStore: this.options.entityStore,
+			entityIdHtmlFormatter: this.options.entityIdHtmlFormatter,
 			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
 			valueViewBuilder: this.options.valueViewBuilder,
 			entityChangersFactory: this.options.entityChangersFactory
