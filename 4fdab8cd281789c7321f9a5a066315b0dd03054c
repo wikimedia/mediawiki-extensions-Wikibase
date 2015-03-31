@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4ef19c5e",
+        "filename": "lib/tests/phpunit/formatters/HtmlTimeFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-31T09:13:48Z",
+      "side": 1,
+      "message": "Since this is an interface, just use getMock().",
+      "revId": "4fdab8cd281789c7321f9a5a066315b0dd03054c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ee93c801",
+        "filename": "lib/tests/phpunit/formatters/HtmlTimeFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-03-31T09:13:48Z",
+      "side": 1,
+      "message": "Since this is a data object, you can and should just instantiate one.",
+      "revId": "4fdab8cd281789c7321f9a5a066315b0dd03054c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
