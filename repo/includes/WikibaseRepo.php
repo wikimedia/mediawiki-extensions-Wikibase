@@ -35,6 +35,7 @@ use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DispatchingValueFormatter;
 use Wikibase\Lib\EntityIdLinkFormatter;
+use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\FormatterLabelLookupFactory;
@@ -639,7 +640,10 @@ class WikibaseRepo {
 	protected function newSummaryFormatter() {
 		global $wgContLang;
 
-		$idFormatter = new EntityIdLinkFormatter( $this->getEntityContentFactory() );
+		// This needs to use an EntityIdPlainLinkFormatter as we want to mangle
+		// the links created in LinkBeginHookHandler afterwards (the links must not
+		// contain a display text: [[Item:Q1]] is fine but [[Item:Q1|Q1]] isn't).
+		$idFormatter = new EntityIdPlainLinkFormatter( $this->getEntityContentFactory() );
 
 		$valueFormatterBuilders = $this->getValueFormatterBuilders();
 
