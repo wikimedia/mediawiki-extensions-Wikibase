@@ -17,7 +17,7 @@
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.CalendarHint' );
 
-	if( QUnit.urlParams.completenesstest ) {
+	if( QUnit.urlParams.completenesstest && CompletenessTest ) {
 		new CompletenessTest( ExpertExtender.CalendarHint.prototype, function( cur, tester, path ) {
 			return false;
 		} );
@@ -150,5 +150,5 @@
 	util.HashMessageProvider,
 	sinon,
 	QUnit,
-	CompletenessTest
+	typeof CompletenessTest !== 'undefined' ? CompletenessTest : null
 );

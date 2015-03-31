@@ -8,7 +8,7 @@
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.Toggler' );
 
-	if( QUnit.urlParams.completenesstest ) {
+	if( QUnit.urlParams.completenesstest && CompletenessTest ) {
 		new CompletenessTest( ExpertExtender.Toggler.prototype, function( cur, tester, path ) {
 			return false;
 		} );
@@ -28,5 +28,5 @@
 	util,
 	sinon,
 	QUnit,
-	CompletenessTest
+	typeof CompletenessTest !== 'undefined' ? CompletenessTest : null
 );

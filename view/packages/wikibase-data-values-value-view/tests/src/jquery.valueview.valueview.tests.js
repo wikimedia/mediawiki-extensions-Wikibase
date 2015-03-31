@@ -12,7 +12,7 @@
 
 	QUnit.module( 'jquery.valueview.valueview' );
 
-	if( QUnit.urlParams.completenesstest ) {
+	if( QUnit.urlParams.completenesstest && CompletenessTest ) {
 		new CompletenessTest( vv.prototype, function( cur, tester, path ) {
 			// Don't check code coverage for options
 			return path[path.length - 1] === 'options';
@@ -206,4 +206,13 @@
 		assert.ok( !vvInst.option( 'disabled' ) );
 	} );
 
-} )( jQuery, jQuery.valueview, dataValues, valueFormatters, valueParsers, sinon, QUnit, CompletenessTest );
+} )(
+	jQuery,
+	jQuery.valueview,
+	dataValues,
+	valueFormatters,
+	valueParsers,
+	sinon,
+	QUnit,
+	typeof CompletenessTest !== 'undefined' ? CompletenessTest : null
+);
