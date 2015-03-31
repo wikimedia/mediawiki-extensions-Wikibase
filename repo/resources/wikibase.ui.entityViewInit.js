@@ -103,19 +103,25 @@
 				entity
 			),
 			contentLanguages = new wikibase.WikibaseContentLanguages(),
+			formatterStore = getFormatterStore( repoApi, dataTypeStore ),
+			parserStore = getParserStore( repoApi ),
+			entityIdFormatter = new ( formatterStore.getFormatter( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[0] } ),
+			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[0] } ),
 			viewFactory = new wikibase.view.ViewFactory(
 				contentLanguages,
 				dataTypeStore,
 				entityChangersFactory,
+				new wb.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter( entityIdParser, entityIdFormatter ),
+				new wb.entityIdFormatter.DataValueBasedEntityIdPlainFormatter( entityIdParser, entityIdFormatter ),
 				entityStore,
 				getExpertsStore( dataTypeStore ),
-				getFormatterStore( repoApi, dataTypeStore ),
+				formatterStore,
 				{
 					getMessage: function( key, params ) {
 						return mw.msg.apply( mw, [ key ].concat( params ) );
 					}
 				},
-				getParserStore( repoApi ),
+				parserStore,
 				userLanguages,
 				repoApiUrl
 			);

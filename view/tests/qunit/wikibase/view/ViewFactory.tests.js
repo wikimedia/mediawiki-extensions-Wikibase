@@ -17,7 +17,7 @@
 
 	QUnit.test( 'getEntityView constructs correct views', function( assert ) {
 		var entityStore = new wb.store.EntityStore(),
-			viewFactory = new ViewFactory( null, null, null, entityStore ),
+			viewFactory = new ViewFactory( null, null, null, null, null, entityStore ),
 			fooView = {},
 			$dom = $( '<div/>' ),
 			FooView = $dom.fooview = $.wikibase.fooview = sinon.spy();
@@ -31,7 +31,7 @@
 
 	QUnit.test( 'getEntityView throws on incorrect views', function( assert ) {
 		var entityStore = new wb.store.EntityStore(),
-			viewFactory = new ViewFactory( null, null, null, entityStore );
+			viewFactory = new ViewFactory( null, null, null, null, null, entityStore );
 
 		assert.throws(
 			function() {
@@ -46,6 +46,8 @@
 			dataTypeStore = {},
 			entity = getEntityStub( 'foo' ),
 			entityChangersFactory = {},
+			entityIdHtmlFormatter = {},
+			entityIdPlainFormatter = {},
 			entityStore = new wb.store.EntityStore(),
 			expertStore = {},
 			formatterStore = {},
@@ -56,6 +58,8 @@
 				contentLanguages,
 				dataTypeStore,
 				entityChangersFactory,
+				entityIdHtmlFormatter,
+				entityIdPlainFormatter,
 				entityStore,
 				expertStore,
 				formatterStore,
@@ -82,7 +86,8 @@
 		sinon.assert.calledWith( FooView, sinon.match( {
 			dataTypeStore: dataTypeStore,
 			entityChangersFactory: entityChangersFactory,
-			entityIdPlainFormatter: sinon.match.instanceOf( wb.entityIdFormatter.EntityIdPlainFormatter ),
+			entityIdHtmlFormatter: entityIdHtmlFormatter,
+			entityIdPlainFormatter: entityIdPlainFormatter,
 			entityStore: entityStore,
 			languages: userLanguages,
 			value: entity,

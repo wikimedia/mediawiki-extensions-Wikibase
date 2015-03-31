@@ -22,6 +22,26 @@ return call_user_func( function() {
 				'wikibase.view.__namespace',
 			)
 		),
+		'wikibase.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter' => $moduleTemplate + array(
+			'scripts' => array(
+				'DataValueBasedEntityIdHtmlFormatter.js'
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.entityIdFormatter.__namespace',
+				'wikibase.entityIdFormatter.EntityIdHtmlFormatter',
+			)
+		),
+		'wikibase.entityIdFormatter.DataValueBasedEntityIdPlainFormatter' => $moduleTemplate + array(
+			'scripts' => array(
+				'DataValueBasedEntityIdPlainFormatter.js'
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.entityIdFormatter.__namespace',
+				'wikibase.entityIdFormatter.EntityIdPlainFormatter',
+			)
+		),
 		'wikibase.entityIdFormatter.EntityIdHtmlFormatter' => $moduleTemplate + array(
 			'scripts' => array(
 				'EntityIdHtmlFormatter.js'
@@ -38,30 +58,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'util.inherit',
 				'wikibase.entityIdFormatter.__namespace',
-			)
-		),
-		'wikibase.entityIdFormatter.SimpleEntityIdHtmlFormatter' => $moduleTemplate + array(
-			'scripts' => array(
-				'SimpleEntityIdHtmlFormatter.js'
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.store.EntityStore',
-				'wikibase.utilities',
-				'wikibase.entityIdFormatter.__namespace',
-				'wikibase.entityIdFormatter.EntityIdHtmlFormatter',
-			)
-		),
-		'wikibase.entityIdFormatter.SimpleEntityIdPlainFormatter' => $moduleTemplate + array(
-			'scripts' => array(
-				'SimpleEntityIdPlainFormatter.js'
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.store.EntityStore',
-				'wikibase.utilities',
-				'wikibase.entityIdFormatter.__namespace',
-				'wikibase.entityIdFormatter.EntityIdPlainFormatter',
 			)
 		),
 	);
