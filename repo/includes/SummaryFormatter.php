@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -35,7 +35,7 @@ class SummaryFormatter {
 	private $language;
 
 	/**
-	 * @var EntityIdFormatter
+	 * @var EntityIdPlainLinkFormatter
 	 */
 	private $idFormatter;
 
@@ -55,7 +55,8 @@ class SummaryFormatter {
 	private $idParser;
 
 	/**
-	 * @param EntityIdFormatter $idFormatter
+	 * @param EntityIdPlainLinkFormatter $idFormatter Formatter that returns links without display text!!
+	 *     For example [[Item:Q1]], but not [[Item:Q1|Display text]]. T93804
 	 * @param ValueFormatter $valueFormatter
 	 * @param SnakFormatter $snakFormatter
 	 * @param Language $language
@@ -63,7 +64,7 @@ class SummaryFormatter {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdFormatter $idFormatter, ValueFormatter $valueFormatter,
+	public function __construct( EntityIdPlainLinkFormatter $idFormatter, ValueFormatter $valueFormatter,
 		SnakFormatter $snakFormatter, Language $language, EntityIdParser $idParser
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_PLAIN ) {
