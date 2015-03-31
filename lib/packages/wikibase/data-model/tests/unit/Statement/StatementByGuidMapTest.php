@@ -141,4 +141,24 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( 2, count( $statements ) );
 	}
 
+	public function testMapCanBeIteratedOver() {
+		$statement1 = $this->newStatement( 1, 'some guid' );
+		$statement2 = $this->newStatement( 2, 'other guid' );
+
+		$statementMap = new StatementByGuidMap( array( $statement1, $statement2 ) );
+
+		$iteratedStatements = array();
+
+		foreach ( $statementMap as $guid => $statement ) {
+			$iteratedStatements[$guid] = $statement;
+		}
+
+		$expectedStatements = array(
+			'some guid' => $statement1,
+			'other guid' => $statement2
+		);
+
+		$this->assertEquals( $expectedStatements, $iteratedStatements );
+	}
+
 }

@@ -2,7 +2,11 @@
 
 namespace Wikibase\DataModel\Statement;
 
+use ArrayIterator;
+use Countable;
 use InvalidArgumentException;
+use IteratorAggregate;
+use Traversable;
 
 /**
  * Ordered and unique collection of Statement objects.
@@ -14,7 +18,7 @@ use InvalidArgumentException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Kai Nissen < kai.nissen@wikimedia.de >
  */
-class StatementByGuidMap implements \Countable {
+class StatementByGuidMap implements IteratorAggregate, Countable {
 
 	private $statements = array();
 
@@ -84,6 +88,14 @@ class StatementByGuidMap implements \Countable {
 	 */
 	public function count() {
 		return count( $this->statements );
+	}
+
+	/**
+	 * @see IteratorAggregate::getIterator
+	 * @return Traversable
+	 */
+	public function getIterator() {
+		return new ArrayIterator( $this->statements );
 	}
 
 }
