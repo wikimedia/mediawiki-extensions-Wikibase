@@ -14,10 +14,10 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 use Wikibase\View\ClaimHtmlGenerator;
 use Wikibase\View\SnakHtmlGenerator;
+use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\ClaimHtmlGenerator
@@ -67,9 +67,9 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @uses Wikibase\Template\Template
-	 * @uses Wikibase\Template\TemplateFactory
-	 * @uses Wikibase\Template\TemplateRegistry
+	 * @uses Wikibase\View\Template\Template
+	 * @uses Wikibase\View\Template\TemplateFactory
+	 * @uses Wikibase\View\Template\TemplateRegistry
 	 * @dataProvider getHtmlForClaimProvider
 	 */
 	public function testGetHtmlForClaim(

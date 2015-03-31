@@ -16,9 +16,9 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 use Wikibase\ValuesFinder;
+use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\EntityParserOutputGenerator
