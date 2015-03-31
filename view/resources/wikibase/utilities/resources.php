@@ -52,12 +52,6 @@ return call_user_func( function() {
 				'wikibase-ui-pendingquantitycounter-nonpending',
 				'wikibase-ui-pendingquantitycounter-pending',
 				'wikibase-ui-pendingquantitycounter-pending-pendingsubpart',
-				'wikibase-label-empty',
-				'wikibase-deletedentity-item',
-				'wikibase-deletedentity-property',
-				'wikibase-deletedentity-query',
-				'word-separator',
-				'parentheses',
 			),
 		),
 
