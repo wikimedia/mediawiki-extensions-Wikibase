@@ -10,7 +10,10 @@ use Traversable;
 
 /**
  * Ordered and unique collection of Statement objects.
- * Provides indexed access by Statement GUID. Can only contain Statements that have a non-null GUID.
+ * Can only contain Statements that have a non-null GUID.
+ *
+ * Provides indexed access by Statement GUID.
+ * Does not provide complex modification functionality.
  *
  * @since 3.0
  *
@@ -31,7 +34,13 @@ class StatementByGuidMap implements IteratorAggregate, Countable {
 		}
 	}
 
-	private function addStatement( Statement $statement ) {
+	/**
+	 * If the provided statement has a GUID not yet in the map, it will be appended to the map.
+	 * If the GUID is already in the map, the statement with this guid will be replaced.
+	 *
+	 * @param Statement $statement
+	 */
+	public function addStatement( Statement $statement ) {
 		if ( $statement->getGuid() === null ) {
 			throw new InvalidArgumentException( 'Can only add statements that have a non-null GUID' );
 		}
@@ -91,6 +100,8 @@ class StatementByGuidMap implements IteratorAggregate, Countable {
 	}
 
 	/**
+	 * The iterator has the GUIDs of the statements as keys.
+	 *
 	 * @see IteratorAggregate::getIterator
 	 * @return Traversable
 	 */

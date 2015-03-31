@@ -161,4 +161,23 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedStatements, $iteratedStatements );
 	}
 
+	public function testGivenNotPresentStatement_addStatementAddsIt() {
+		$statements = new StatementByGuidMap();
+
+		$statements->addStatement( $this->newStatement( 1, 'some guid' ) );
+
+		$this->assertTrue( $statements->hasStatementWithGuid( 'some guid' ) );
+	}
+
+	public function testGivenStatementWithPresentGuid_addStatementReplacesThePresentStatement() {
+		$statement1 = $this->newStatement( 1, 'some guid' );
+		$statement2 = $this->newStatement( 2, 'some guid' );
+
+		$statements = new StatementByGuidMap( array( $statement1 ) );
+
+		$statements->addStatement( $statement2 );
+
+		$this->assertEquals( $statement2, $statements->getStatementByGuid( 'some guid' ) );
+	}
+
 }
