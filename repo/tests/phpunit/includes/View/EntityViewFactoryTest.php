@@ -47,7 +47,8 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$entityType,
 			'de',
 			$this->getMock( 'Wikibase\Lib\Store\LabelLookup' ),
-			$languageFallback
+			$languageFallback,
+			$this->getMock( 'Wikibase\Repo\View\EditSectionGenerator' )
 		);
 
 		$this->assertInstanceOf( $expectedClass, $entityView );
@@ -71,7 +72,8 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			'kittens',
 			'de',
 			$this->getMock( 'Wikibase\Lib\Store\LabelLookup' ),
-			$languageFallback
+			$languageFallback,
+			$this->getMock( 'Wikibase\Repo\View\EditSectionGenerator' )
 		);
 	}
 

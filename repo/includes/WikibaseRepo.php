@@ -1011,6 +1011,7 @@ class WikibaseRepo {
 	 * @return EntityParserOutputGeneratorFactory
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
+		$templateFactory = new TemplateFactory( TemplateRegistry::getDefaultInstance() );
 
 		$entityViewFactory = new EntityViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
@@ -1018,7 +1019,7 @@ class WikibaseRepo {
 			$this->getEntityLookup(),
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			new LanguageNameLookup(),
 			$this->getSettings()->getSetting( 'siteLinkGroups' ),
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' ),
@@ -1031,7 +1032,8 @@ class WikibaseRepo {
 			$this->getEntityContentFactory(),
 			$this->getEntityIdParser(),
 			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
-			$this->getLanguageFallbackChainFactory()
+			$this->getLanguageFallbackChainFactory(),
+			$templateFactory
 		);
 	}
 
