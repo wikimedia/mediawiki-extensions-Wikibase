@@ -19,6 +19,10 @@
 	 * @param {dataTypes.DataTypeStore} dataTypeStore
 	 *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
 	 *        object when interacting on a "value" `Variation`.
+	 * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} entityIdHtmlFormatter
+	 *        Required by several views for rendering links to entities.
+	 * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
+	 *        Required by several views for rendering plain text references to entities.
 	 * @param {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
 	 *        Required to store changed data.
 	 * @param {wikibase.store.EntityStore} entityStore
@@ -40,6 +44,8 @@
 		contentLanguages,
 		dataTypeStore,
 		entityChangersFactory,
+		entityIdHtmlFormatter,
+		entityIdPlainFormatter,
 		entityStore,
 		expertStore,
 		formatterStore,
@@ -51,6 +57,8 @@
 		this._contentLanguages = contentLanguages;
 		this._dataTypeStore = dataTypeStore;
 		this._entityChangersFactory = entityChangersFactory;
+		this._entityIdHtmlFormatter = entityIdHtmlFormatter;
+		this._entityIdPlainFormatter = entityIdPlainFormatter;
 		this._entityStore = entityStore;
 		this._expertStore = expertStore;
 		this._formatterStore = formatterStore;
@@ -78,6 +86,18 @@
 	 * @private
 	 **/
 	SELF.prototype._entityChangersFactory = null;
+
+	/**
+	 * @property {wikibase.entityIdFormatter.EntityIdHtmlFormatter}
+	 * @private
+	 **/
+	SELF.prototype._entityIdHtmlFormatter = null;
+
+	/**
+	 * @property {wikibase.entityIdFormatter.EntityIdPlainFormatter}
+	 * @private
+	 **/
+	SELF.prototype._entityIdPlainFormatter = null;
 
 	/**
 	 * @property {wikibase.store.EntityStore}
@@ -136,7 +156,8 @@
 			{
 				dataTypeStore: this._dataTypeStore,
 				entityChangersFactory: this._entityChangersFactory,
-				entityIdPlainFormatter: new wb.entityIdFormatter.SimpleEntityIdPlainFormatter( this._entityStore ),
+				entityIdHtmlFormatter: this._entityIdHtmlFormatter,
+				entityIdPlainFormatter: this._entityIdPlainFormatter,
 				entityStore: this._entityStore,
 				languages: this._userLanguages,
 				value: entity,

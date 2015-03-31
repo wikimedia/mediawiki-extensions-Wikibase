@@ -7,12 +7,6 @@
 	'use strict';
 
 	/**
-	 * Just a space in the user's language.
-	 * @type string
-	 */
-	var SPACE = mw.msg( 'word-separator' );
-
-	/**
 	 * Whether page has rtl context.
 	 * @type {boolean}
 	 */
@@ -28,98 +22,6 @@
 	 * @type {Object}
 	 */
 	wb.utilities.ui = {};
-
-	/**
-	 * Creates a pretty link to an entity's page. If the label is not yet set, then the link will
-	 * show the entity's ID and some explanatory text describing that the label hast not been set
-	 * yet. Requires a Title object.
-	 *
-	 * @since 0.4
-	 *
-	 * @param {wb.datamodel.Entity} entity
-	 * @param {Title} title
-	 * @return {jQuery} An 'a' element
-	 */
-	wb.utilities.ui.buildLinkToEntityPage = function( entity, title ) {
-		return $( '<a>' )
-			.attr( 'href', title.getUrl() )
-			.attr( 'title', title.getPrefixedText() )
-			.append( wb.utilities.ui.buildPrettyEntityLabel( entity ) );
-	};
-
-	/**
-	 * @param {wikibase.datamodel.Entity} entity
-	 * @return {string|null}
-	 */
-	function getEntityLabelForUserLang( entity ) {
-		var term = entity.getFingerprint().getLabelFor( mw.config.get( 'wgUserLanguage' ) );
-		return term && term.getText();
-	}
-
-	/**
-	 * Creates a pretty label for an Entity. This means if the Entity doesn't actually have a label,
-	 * some alternative information will be shown (the ID + some information that the label is not
-	 * set).
-	 *
-	 * @since 0.4
-	 *
-	 * @param {wb.datamodel.Entity} entity
-	 * @return {jQuery} Construct of one or many HTML elements
-	 */
-	wb.utilities.ui.buildPrettyEntityLabel = function( entity ) {
-		var label = getEntityLabelForUserLang( entity ),
-			text = wb.utilities.ui.buildPrettyEntityLabelText( entity ),
-			$label = $( document.createTextNode( text ) );
-
-		if( !label ) {
-			if( text ) { // empty if entity without ID
-				$label[0].nodeValue += SPACE;
-			}
-			var $undefinedInfo = $( '<span/>', {
-				'class': 'wb-entity-undefinedinfo',
-				dir: IS_RTL ? 'rtl' : 'ltr',
-				text: mw.msg( 'parentheses', mw.msg( 'wikibase-label-empty' ) )
-			} );
-			$label = $label.add( $undefinedInfo );
-		}
-
-		return $label;
-	};
-
-	/**
-	 * Creates a pretty label text for an Entity that either shows the actual label or the ID.
-	 *
-	 * @since 0.5
-	 *
-	 * @param {wb.datamodel.Entity} [entity]
-	 * @return {string} Either the label, ID or empty string
-	 */
-	wb.utilities.ui.buildPrettyEntityLabelText = function( entity ) {
-		return entity && ( getEntityLabelForUserLang( entity ) || entity.getId() ) || '';
-	};
-
-	/**
-	 * Builds a span containing text and some markup for nicely expressing that an Entity is not
-	 * in the system even though it is expected to be.
-	 *
-	 * @since 0.4
-	 *
-	 * @param {string} entityId ID of the missing Entity
-	 * @param {string|Function} entityType Can be a wb.datamodel.Entity constructor or the type of the Entity
-	 *        as string.
-	 * @return jQuery
-	 */
-	wb.utilities.ui.buildMissingEntityInfo = function( entityId, entityType ) {
-		entityType = typeof entityType === 'string' ? entityType : entityType.TYPE;
-
-		return $( '<span/>' ).text( entityId + SPACE ).append(
-			$( '<span>', {
-				'class': 'wb-entity-undefinedinfo',
-				dir: IS_RTL ? 'rtl' : 'ltr',
-				text: mw.msg( 'parentheses', mw.msg( 'wikibase-deletedentity-' + entityType ) )
-			} )
-		);
-	};
 
 	/**
 	 * Creates a counter suited for displaying a number of a fixed quantity plus a number of a
