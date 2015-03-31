@@ -66,8 +66,7 @@
 			"repo/Wikibase.hooks.php"
 		],
 		"psr-4": {
-			"Wikibase\\View\\": "view/src",
-			"Wikibase\\Template\\": "view/src/Template"
+			"Wikibase\\View\\": "view/src"
 		}
 	}
 }

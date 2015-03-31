@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Template;
+namespace Wikibase\View\Template;
 
 /**
  * @license GNU GPL v2+

@@ -5,7 +5,7 @@ namespace Wikibase;
 use FormatJson;
 use ResourceLoaderContext;
 use ResourceLoaderFileModule;
-use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * Injects templates into JavaScript.

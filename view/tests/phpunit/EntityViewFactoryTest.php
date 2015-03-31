@@ -6,16 +6,13 @@ use PHPUnit_Framework_TestCase;
 use SiteList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 use Wikibase\View\EntityViewFactory;
+use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\EntityViewFactory
  *
- * @uses Wikibase\Template\Template
- * @uses Wikibase\Template\TemplateFactory
- * @uses Wikibase\Template\TemplateRegistry
  * @uses Wikibase\View\ClaimHtmlGenerator
  * @uses Wikibase\View\EditSectionGenerator
  * @uses Wikibase\View\EntityTermsView
@@ -25,6 +22,9 @@ use Wikibase\View\EntityViewFactory;
  * @uses Wikibase\View\SiteLinksView
  * @uses Wikibase\View\StatementGroupListView
  * @uses Wikibase\View\SnakHtmlGenerator
+ * @uses Wikibase\View\Template\Template
+ * @uses Wikibase\View\Template\TemplateFactory
+ * @uses Wikibase\View\Template\TemplateRegistry
  * @uses Wikibase\View\TextInjector
  *
  * @group Wikibase

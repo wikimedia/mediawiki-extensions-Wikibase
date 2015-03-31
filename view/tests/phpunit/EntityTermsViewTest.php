@@ -6,17 +6,17 @@ use MediaWikiLangTestCase;
 use MessageCache;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 use Wikibase\View\EntityTermsView;
+use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 use Wikibase\View\TextInjector;
 
 /**
  * @covers Wikibase\View\EntityTermsView
  *
- * @uses Wikibase\Template\Template
- * @uses Wikibase\Template\TemplateFactory
- * @uses Wikibase\Template\TemplateRegistry
+ * @uses Wikibase\View\Template\Template
+ * @uses Wikibase\View\Template\TemplateFactory
+ * @uses Wikibase\View\Template\TemplateRegistry
  * @uses Wikibase\View\TextInjector
  *
  * @group Wikibase

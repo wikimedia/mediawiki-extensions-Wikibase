@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Template;
+namespace Wikibase\View\Template;
 
 /**
  * Allows storing and accessing of templates (e.g. snippets commonly used in server-side HTML

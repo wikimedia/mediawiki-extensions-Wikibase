@@ -12,17 +12,17 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 use Wikibase\View\EntityViewPlaceholderExpander;
+use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\EntityViewPlaceholderExpander
  *
- * @uses Wikibase\Template\Template
- * @uses Wikibase\Template\TemplateFactory
- * @uses Wikibase\Template\TemplateRegistry
  * @uses Wikibase\View\EntityTermsView
+ * @uses Wikibase\View\Template\Template
+ * @uses Wikibase\View\Template\TemplateFactory
+ * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView

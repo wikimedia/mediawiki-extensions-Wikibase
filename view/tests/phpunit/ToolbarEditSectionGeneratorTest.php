@@ -9,16 +9,16 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
 /**
  * @covers Wikibase\View\ToolbarEditSectionGenerator
  *
- * @uses Wikibase\Template\Template
- * @uses Wikibase\Template\TemplateFactory
- * @uses Wikibase\Template\TemplateRegistry
+ * @uses Wikibase\View\Template\Template
+ * @uses Wikibase\View\Template\TemplateFactory
+ * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView
