@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityRevision;
-use Wikibase\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * Class for creating views for Item instances.

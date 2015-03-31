@@ -5,7 +5,7 @@ namespace Wikibase\View;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * Generates HTML to display claims.

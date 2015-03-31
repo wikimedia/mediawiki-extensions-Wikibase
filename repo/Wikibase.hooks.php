@@ -31,9 +31,9 @@ use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 use Wikibase\View\EntityViewPlaceholderExpander;
+use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 use Wikibase\View\TextInjector;
 use WikiPage;
 

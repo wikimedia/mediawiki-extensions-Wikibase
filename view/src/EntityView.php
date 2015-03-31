@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
-use Wikibase\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.

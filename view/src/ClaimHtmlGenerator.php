@@ -10,7 +10,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\Snaks;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
-use Wikibase\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * Base class for generating the HTML for a Claim in Entity View.
