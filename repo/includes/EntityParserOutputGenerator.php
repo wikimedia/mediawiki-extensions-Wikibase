@@ -152,7 +152,7 @@ class EntityParserOutputGenerator {
 		$usedEntityIds = $this->referencedEntitiesFinder->findSnakLinks( $snaks );
 		$entityInfo = $this->getEntityInfo( $usedEntityIds );
 
-		$configVars = $this->configBuilder->build( $entity, $entityInfo );
+		$configVars = $this->configBuilder->build( $entity );
 		$parserOutput->addJsConfigVars( $configVars );
 
 		$this->addLinksToParserOutput( $parserOutput, $usedEntityIds, $snaks );

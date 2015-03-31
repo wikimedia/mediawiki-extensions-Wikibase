@@ -179,7 +179,6 @@ return call_user_func( function() {
 				'wikibase.store.CachingEntityStore',
 				'wikibase.store.CombiningEntityStore',
 				'wikibase.store.FetchedContentUnserializer',
-				'wikibase.store.MwConfigEntityStore',
 				'wikibase.view.ViewFactory',
 				'wikibase.WikibaseContentLanguages'
 			),

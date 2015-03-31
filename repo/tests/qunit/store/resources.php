@@ -37,15 +37,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.store.MwConfigEntityStore.tests' => $moduleBase + array(
-			'scripts' => array(
-				'store.MwConfigEntityStore.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.store.MwConfigEntityStore',
-			),
-		),
-
 	);
 
 	return $modules;
