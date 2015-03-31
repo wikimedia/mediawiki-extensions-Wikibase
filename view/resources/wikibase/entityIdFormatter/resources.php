@@ -22,6 +22,17 @@ return call_user_func( function() {
 				'wikibase.view.__namespace',
 			)
 		),
+		'wikibase.entityIdFormatter.ApiEntityIdPlainFormatter' => $moduleTemplate + array(
+			'scripts' => array(
+				'ApiEntityIdPlainFormatter.js'
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.api.RepoApi',
+				'wikibase.entityIdFormatter.__namespace',
+				'wikibase.entityIdFormatter.EntityIdPlainFormatter',
+			)
+		),
 		'wikibase.entityIdFormatter.EntityIdHtmlFormatter' => $moduleTemplate + array(
 			'scripts' => array(
 				'EntityIdHtmlFormatter.js'

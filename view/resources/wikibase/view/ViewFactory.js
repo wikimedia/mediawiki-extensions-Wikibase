@@ -1,4 +1,4 @@
-( function( $, wb ) {
+( function( $, wb, mw ) {
 	'use strict';
 
 	var MODULE = wb.view;
@@ -136,7 +136,7 @@
 			{
 				dataTypeStore: this._dataTypeStore,
 				entityChangersFactory: this._entityChangersFactory,
-				entityIdPlainFormatter: new wb.entityIdFormatter.SimpleEntityIdPlainFormatter( this._entityStore ),
+				entityIdPlainFormatter: new wb.entityIdFormatter.ApiEntityIdPlainFormatter( new wb.api.RepoApi( new mw.Api() ) ),
 				entityStore: this._entityStore,
 				languages: this._userLanguages,
 				value: entity,
@@ -176,4 +176,4 @@
 		return $dom.data( viewName );
 	};
 
-}( jQuery, wikibase ) );
+}( jQuery, wikibase, mediaWiki ) );
