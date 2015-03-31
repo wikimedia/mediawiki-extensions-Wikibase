@@ -257,6 +257,23 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_f7307cfe",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-03-31T19:15:09Z",
+      "side": 1,
+      "message": "I don\u0027t like the \"wall of setters\" arrangement here. Too easy to miss something.",
+      "revId": "6f42b88556a6de44258a6b8211f5ac7065d96f31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d7aa2081",
         "filename": "repo/includes/rdf/RdfSerializer.php",
         "patchSetId": 3
