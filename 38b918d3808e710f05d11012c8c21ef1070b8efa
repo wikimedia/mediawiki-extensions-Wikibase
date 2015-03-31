@@ -16,6 +16,24 @@
       "revId": "38b918d3808e710f05d11012c8c21ef1070b8efa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c0025475",
+        "filename": "repo/tests/phpunit/includes/store/sql/SqlChangeDispatchCoordinatorTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-03-31T21:28:40Z",
+      "side": 1,
+      "message": "oops :)",
+      "parentUuid": "6e7c4fa4_94234652",
+      "revId": "38b918d3808e710f05d11012c8c21ef1070b8efa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
