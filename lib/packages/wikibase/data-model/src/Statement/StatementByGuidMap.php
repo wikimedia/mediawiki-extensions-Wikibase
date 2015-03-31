@@ -21,7 +21,7 @@ class StatementByGuidMap {
 	/**
 	 * @param Statement[] $statements
 	 */
-	public function __construct( array $statements = array() ) {
+	public function __construct( $statements = array() ) {
 		foreach ( $statements as $statement ) {
 			$this->addStatement( $statement );
 		}

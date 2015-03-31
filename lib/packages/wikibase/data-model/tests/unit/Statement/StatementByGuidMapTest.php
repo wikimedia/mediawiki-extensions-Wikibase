@@ -116,4 +116,14 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 		) );
 	}
 
+	public function testCanConstructWithStatementIterable() {
+		$statementList = new \ArrayObject( array(
+			$this->newStatement( 1, 'some guid' )
+		) );
+
+		$statementMap = new StatementByGuidMap( $statementList );
+
+		$this->assertTrue( $statementMap->hasStatementWithGuid( 'some guid' ) );
+	}
+
 }
