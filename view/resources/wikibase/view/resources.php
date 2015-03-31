@@ -29,7 +29,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.itemview',
 				'jquery.wikibase.propertyview',
-				'wikibase.entityIdFormatter.SimpleEntityIdPlainFormatter',
 				'wikibase.view.__namespace',
 				'wikibase.ValueViewBuilder'
 			)
