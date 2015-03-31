@@ -180,4 +180,18 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $statement2, $statements->getStatementByGuid( 'some guid' ) );
 	}
 
+	public function testToArray() {
+		$statement1 = $this->newStatement( 1, 'some guid' );
+		$statement2 = $this->newStatement( 2, 'other guid' );
+
+		$statementMap = new StatementByGuidMap( array( $statement1, $statement2 ) );
+
+		$expectedStatements = array(
+			'some guid' => $statement1,
+			'other guid' => $statement2
+		);
+
+		$this->assertEquals( $expectedStatements, $statementMap->toArray() );
+	}
+
 }

@@ -109,4 +109,13 @@ class StatementByGuidMap implements IteratorAggregate, Countable {
 		return new ArrayIterator( $this->statements );
 	}
 
+	/**
+	 * Returns the map in array form. The array keys are the GUIDs of their associated statement.
+	 *
+	 * @return Statement[]
+	 */
+	public function toArray() {
+		return $this->statements;
+	}
+
 }
