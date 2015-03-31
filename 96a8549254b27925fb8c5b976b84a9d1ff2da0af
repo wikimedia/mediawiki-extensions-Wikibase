@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9154b801",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-03-31T14:25:49Z",
+      "side": 1,
+      "message": "you might want to note that this change also applies to aliases and labels.",
+      "revId": "96a8549254b27925fb8c5b976b84a9d1ff2da0af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
