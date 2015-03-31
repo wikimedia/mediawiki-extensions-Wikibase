@@ -214,7 +214,6 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 			$aspect = 'X';
 
 			$db->insert( 'wbc_entity_usage', array(
-				'eu_entity_type' => $entityType,
 				'eu_entity_id' => $entityId,
 				'eu_aspect' => $aspect,
 				'eu_page_id' => (int)$pageId,
