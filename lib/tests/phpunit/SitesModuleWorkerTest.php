@@ -12,6 +12,11 @@ use Wikibase\SettingsArray;
 /**
  * @covers Wikibase\Lib\SitesModuleWorker
  *
+ * @uses Xml
+ * @uses SiteList
+ * @uses Wikibase\SettingsArray
+ * @uses Wikibase\Lib\LanguageNameLookup
+ *
  * @group Wikibase
  *
  * @author Adrian Heine < adrian.heine@wikimedia.de >
@@ -40,6 +45,8 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @uses Wikibase\Test\SitesModuleWorkerTest::newSitesModuleWorker
+	 *
 	 * @dataProvider getScriptProvider
 	 */
 	public function testGetScript( $sites, $groups, $specialGroups, $expected ) {
