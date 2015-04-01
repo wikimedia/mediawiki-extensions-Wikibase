@@ -5,10 +5,10 @@
 		]
 	},
 	"wikibase-client-desc": "Wikibase шорян клиент",
-	"specialpages-group-wikibaseclient": "{{grammar:genitive|{{WBREPONAME}}}} клиент",
 	"tooltip-t-wikibase": "Йихкина элементан хьажорг хаамийн репозитори",
 	"wikibase-after-page-move": "Викихаамашчохь [$1 карлаяккха] хьой цӀе хийцина агӀона хьажорг.",
 	"wikibase-after-page-move-queued": "ХӀара агӀо чохь йолу [$1 {{grammar:genitive|{{WBREPONAME}}}} чура элемент] ша карлаяьккина хила мега.",
+	"wikibase-after-page-delete-queued": "ХӀокхунца йолу [$1 {{grammar:genitive|{{WBREPONAME}}}} элемент] ша карлаяьккина хила мега.",
 	"wikibase-comment-add": "{{grammar:genitive|{{WBREPONAME}}}} элемент кхоьллина.",
 	"wikibase-comment-remove": "ХӀара чохь йолу элемент {{grammar:genitive|{{WBREPONAME}}}} дӀаяьккхина. Меттанийн хьажоргаш хӀаллакйина.",
 	"wikibase-comment-linked": "Элемент {{grammar:genitive|{{WBREPONAME}}}} хӀокху агӀонах тесна.",

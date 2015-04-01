@@ -132,9 +132,9 @@ $specialPageAliases['de'] = array(
 /** Zazaki (Zazaki) */
 $specialPageAliases['diq'] = array(
 	'NewItem' => array( 'LeteVırazên' ),
-	'NewProperty' => array( 'XısusiyetêNewey' ),
-	'ItemByTitle' => array( 'SernuşteyêLetey' ),
-	'ItemDisambiguation' => array( 'EtiketêLetey' ),
+	'NewProperty' => array( 'XısusiyetêNeweyi' ),
+	'ItemByTitle' => array( 'SernuşteyêLeteyi' ),
+	'ItemDisambiguation' => array( 'EtiketêLeteyi' ),
 	'ListDatatypes' => array( 'ListaBabetanêMelumati' ),
 	'SetLabel' => array( 'SazêEtiketan' ),
 );

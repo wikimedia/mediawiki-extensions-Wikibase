@@ -5,11 +5,13 @@
 			"Fulup",
 			"VIGNERON",
 			"Y-M D",
-			"Pymouss"
+			"Pymouss",
+			"Gwenn-Ael"
 		]
 	},
+	"wikibase-comment-update": "Elfenn {{WBREPONAME}} kemmet",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|kemm|kemm}}",
-	"wikibase-dataitem": "Elfenn roadenn",
+	"wikibase-dataitem": "Elfenn {{WBREPONAME}}",
 	"wikibase-editlinks": "Kemmañ al liammoù",
 	"wikibase-editlinkstitle": "Kemmañ al liammoù etreyezhel",
 	"wikibase-linkitem-addlinks": "Ouzhpennañ liammoù",
@@ -21,7 +23,7 @@
 	"wikibase-rc-hide-wikidata-show": "Diskouez",
 	"wikibase-rc-show-wikidata-pref": "Diskouez kemmoù {{WBREPONAME}} er c'hemmoù ziwezhañ",
 	"wikibase-rc-wikibase-edit-letter": "R",
-	"wikibase-rc-wikibase-edit-title": "Ur c'hemm eus Wikiroadennoù",
+	"wikibase-rc-wikibase-edit-title": "Kemmañ {{WBREPONAME}}.",
 	"special-unconnectedpages": "Pajennoù n’int ket liammet gant elfennoù",
 	"wikibase-otherprojects": "Raktresoù all"
 }
