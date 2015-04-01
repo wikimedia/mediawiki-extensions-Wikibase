@@ -33,6 +33,24 @@
       "revId": "61b1d0c2490997adf2b67190b72a95257a22e478",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d0fc61b4",
+        "filename": "view/src/EntityViewFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-04-01T10:43:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_b04e8570",
+      "revId": "61b1d0c2490997adf2b67190b72a95257a22e478",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
