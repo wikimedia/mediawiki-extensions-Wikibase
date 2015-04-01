@@ -31,7 +31,7 @@ abstract class SnakObject implements Snak {
 	 *
 	 * @since 0.1
 	 *
-	 * @param PropertyId|EntityId|integer $propertyId
+	 * @param PropertyId|EntityId|int $propertyId
 	 *
 	 * @throws InvalidArgumentException
 	 */
