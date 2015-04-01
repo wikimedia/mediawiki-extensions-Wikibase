@@ -118,7 +118,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 			foreach ( $usages as $aspect => $entityIds ) {
 				foreach ( $entityIds as $id ) {
-					$acc->addUsage( $id, $aspect );
+					$acc->addUsage( new EntityUsage( $id, $aspect ) );
 				}
 			}
 		}
