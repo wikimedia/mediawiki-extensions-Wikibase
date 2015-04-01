@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b3d9af84",
+        "filename": "view/resources/wikibase/resources.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-01T12:40:15Z",
+      "side": 1,
+      "message": "Weird to have them in ../jquery, but I can see why that needs to be like this (for now).",
+      "revId": "8a988708d83241c3dcec869cc7ba50a7966e15c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
