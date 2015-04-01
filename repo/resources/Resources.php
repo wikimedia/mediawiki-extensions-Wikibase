@@ -82,16 +82,6 @@ return call_user_func( function() {
 			'scripts' => 'templates.js',
 		),
 
-		'wikibase.ValueViewBuilder' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.ValueViewBuilder.js',
-			),
-			'dependencies' => array(
-				'wikibase',
-				'jquery.valueview',
-			),
-		),
-
 		'wikibase.ui.entityViewInit' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.ui.entityViewInit.js' // should probably be adjusted for more modularity
