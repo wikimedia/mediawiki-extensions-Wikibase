@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dd30fafe",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-01T10:08:23Z",
+      "side": 1,
+      "message": "I don\u0027t think that should be required here. It should be fine to pass in any EntityIdFormatter that generates wikitext.\n\nThere could be a note here explaining about the magic injection of labels. But it\u0027S application level knowledge, the SummaryFormatter shouldn\u0027t really know or care.",
+      "revId": "efa46cf2066a05d9b0f8ddf062b045acc0dd108e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
