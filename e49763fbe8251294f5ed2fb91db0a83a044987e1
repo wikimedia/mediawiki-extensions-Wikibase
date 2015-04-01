@@ -16,6 +16,24 @@
       "revId": "e49763fbe8251294f5ed2fb91db0a83a044987e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f0a15d8e",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-01T11:02:54Z",
+      "side": 1,
+      "message": "I think mw.msg/mw.message *should* (but right now it\u0027s not) be able to tell us what language it\u0027s using as that matters here (eg. if an rtl language were to fallback on en, this should be lang\u003d\"en\").",
+      "parentUuid": "6e7c4fa4_902a6929",
+      "revId": "e49763fbe8251294f5ed2fb91db0a83a044987e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
