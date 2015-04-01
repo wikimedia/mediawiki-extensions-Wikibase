@@ -16,6 +16,15 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'wikibase.RevisionStore' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.RevisionStore.js',
+			),
+			'dependencies' => array(
+				'wikibase'
+			)
+		),
+
 		'wikibase.ValueViewBuilder' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.ValueViewBuilder.js',
