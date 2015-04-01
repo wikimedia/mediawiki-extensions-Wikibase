@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -15,7 +16,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyIdTest extends \PHPUnit_Framework_TestCase {
+class PropertyIdTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider idSerializationProvider
@@ -68,6 +69,27 @@ class PropertyIdTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGetNumericId() {
+		$id = new PropertyId( 'P1' );
+		$this->assertSame( 1, $id->getNumericId() );
+	}
+
+	public function testGetEntityType() {
+		$id = new PropertyId( 'P1' );
+		$this->assertSame( 'property', $id->getEntityType() );
+	}
+
+	public function testSerialize() {
+		$id = new PropertyId( 'P1' );
+		$this->assertSame( '["property","P1"]', $id->serialize() );
+	}
+
+	public function testUnserialize() {
+		$id = new PropertyId( 'P1' );
+		$id->unserialize( '["property","P2"]' );
+		$this->assertSame( 'P2', $id->getSerialization() );
+	}
+
 	/**
 	 * @dataProvider numericIdProvider
 	 */
@@ -97,6 +119,7 @@ class PropertyIdTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidNumericIdProvider() {
 		return array(
+			array( 'P1' ),
 			array( '42.1' ),
 			array( 42.1 ),
 			array( 2147483648.1 ),
