@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_902a6929",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-01T10:44:59Z",
+      "side": 1,
+      "message": "would be nice if this was not obtained from global scope here, though perhaps can be fixed in a follow up patch",
+      "revId": "e49763fbe8251294f5ed2fb91db0a83a044987e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
