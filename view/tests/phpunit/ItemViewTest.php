@@ -5,27 +5,24 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\View\ItemView;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\ItemView;
 
 /**
- * @covers Wikibase\Repo\View\ItemView
- * @covers Wikibase\Repo\View\EntityView
+ * @covers Wikibase\View\ItemView
+ * @covers Wikibase\View\EntityView
  *
- * @uses Wikibase\Repo\View\TextInjector
  * @uses Wikibase\Template\Template
  * @uses Wikibase\Template\TemplateFactory
  * @uses Wikibase\Template\TemplateRegistry
+ * @uses Wikibase\View\TextInjector
  *
  * @group Wikibase
- * @group WikibaseItemView
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
- * @group Database
- * @group medium
  */
 class ItemViewTest extends EntityViewTest {
 
@@ -55,14 +52,14 @@ class ItemViewTest extends EntityViewTest {
 	public function provideTestGetHtml() {
 		$itemView = new ItemView(
 			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
-			$this->getMockBuilder( 'Wikibase\Repo\View\EntityTermsView' )
+			$this->getMockBuilder( 'Wikibase\View\EntityTermsView' )
 				->disableOriginalConstructor()
 				->getMock(),
-			$this->getMockBuilder( 'Wikibase\Repo\View\StatementGroupListView' )
+			$this->getMockBuilder( 'Wikibase\View\StatementGroupListView' )
 				->disableOriginalConstructor()
 				->getMock(),
 			$this->getMock( 'Language' ),
-			$this->getMockBuilder( 'Wikibase\Repo\View\SiteLinksView' )
+			$this->getMockBuilder( 'Wikibase\View\SiteLinksView' )
 				->disableOriginalConstructor()
 				->getMock(),
 			array()

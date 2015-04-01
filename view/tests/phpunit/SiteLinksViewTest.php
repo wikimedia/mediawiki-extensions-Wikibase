@@ -11,24 +11,23 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Repo\View\EditSectionGenerator;
-use Wikibase\Repo\View\SiteLinksView;
 use Wikibase\Template\TemplateFactory;
 use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\SiteLinksView;
 
 /**
- * @covers Wikibase\Repo\View\SiteLinksView
+ * @covers Wikibase\View\SiteLinksView
  *
  * @uses Wikibase\Template\Template
  * @uses Wikibase\Template\TemplateFactory
  * @uses Wikibase\Template\TemplateRegistry
  *
  * @group Wikibase
- * @group WikibaseRepo
- * @group Database
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class SiteLinksViewTest extends \MediaWikiTestCase {
@@ -181,7 +180,7 @@ class SiteLinksViewTest extends \MediaWikiTestCase {
 	 * @return EditSectionGenerator
 	 */
 	private function getEditSectionGeneratorMock() {
-		$editSectionGenerator = $this->getMock( 'Wikibase\Repo\View\EditSectionGenerator' );
+		$editSectionGenerator = $this->getMock( 'Wikibase\View\EditSectionGenerator' );
 
 		return $editSectionGenerator;
 	}

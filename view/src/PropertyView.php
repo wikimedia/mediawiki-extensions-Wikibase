@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\View;
+namespace Wikibase\View;
 
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
